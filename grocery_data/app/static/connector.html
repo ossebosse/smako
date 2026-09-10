@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Connector | Grocery Data</title>
+    <link rel="stylesheet" href="/static/status.css">
+    <script src="/static/connector.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <a href="/" class="back">← Alla connectors</a>
+      <header>
+        <p class="eyebrow">CONNECTOR</p>
+        <h1 id="title">Laddar…</h1>
+        <p id="status" class="muted" aria-live="polite"></p>
+      </header>
+      <section id="metrics" class="metric-grid" aria-label="Mätvärden"></section>
+      <section>
+        <h2>Source strategy</h2>
+        <dl id="source-strategy"></dl>
+      </section>
+      <section>
+        <h2>Varningar</h2>
+        <ul id="warnings"></ul>
+      </section>
+      <section>
+        <h2>Schema</h2>
+        <p id="schema-fingerprint" class="muted"></p>
+        <pre id="schema-diff" class="schema-diff" hidden></pre>
+      </section>
+      <section>
+        <h2>Senaste körningar</h2>
+        <div class="table-wrap"><table id="runs"></table></div>
+      </section>
+      <section>
+        <h2>Parserfel</h2>
+        <div class="table-wrap"><table id="errors"></table></div>
+      </section>
+      <p id="error-message" class="error" role="alert" hidden></p>
+    </main>
+  </body>
+</html>

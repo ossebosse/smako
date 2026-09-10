@@ -1,0 +1,32 @@
+{
+  "profile": "coop-online-context-evidence-v1",
+  "captured_at": "2026-08-25T10:00:00+02:00",
+  "contexts": [
+    {
+      "external_context_id": "730400",
+      "display_name": "Coop Online Syd",
+      "geographic_scope": "Coop Syd online assortment and price context",
+      "context_type": "online_fulfillment",
+      "price_semantics": "online_price",
+      "evidence_reference": "ordinary public Coop shopping flow store parameter"
+    },
+    {
+      "external_context_id": "256600",
+      "display_name": "Coop Online Stockholm",
+      "geographic_scope": "Stockholm control context",
+      "context_type": "online_fulfillment",
+      "price_semantics": "online_price",
+      "evidence_reference": "ordinary public Coop shopping flow Stockholm control"
+    }
+  ],
+  "pickup_relations": [
+    {
+      "physical_store_external_id": "2696",
+      "physical_store_name": "Stora Coop Lund",
+      "pickup_point_external_id": "257611",
+      "online_context_external_id": "730400",
+      "evidence_kind": "public_fulfillment_response",
+      "evidence_reference": "GET /ecommerce/coop/pointofservice/257611: name=257611, displayName=Stora Coop Lund, storeId=730400"
+    }
+  ]
+}

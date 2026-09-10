@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#173e35" />
+    <title>Integritet · Billigaste veckomenyn</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body class="policy-page">
+    <header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">B</span><span>Billigaste veckomenyn</span></a></div></header>
+    <main class="policy-content">
+      <p class="eyebrow">Publik beta i Lund</p>
+      <h1>Integritet</h1>
+      <p>Det här beskriver vad den nuvarande betaversionen faktiskt lagrar. Texten behöver granskas juridiskt före en större lansering.</p>
+
+      <h2>Det vi lagrar</h2>
+      <ul>
+        <li>En slumpmässig anonym sessionsidentifierare för idempotens, missbruksskydd och aggregerad betastatistik.</li>
+        <li>Genererade planer och deras prisunderlag när en plan sparas på servern.</li>
+        <li>Communityrapporter om pris, sortiment, kampanj eller produktidentitet.</li>
+        <li>Allmän feedback, samt e-post endast när du frivilligt anger den för att få svar.</li>
+        <li>Minimala produktmätvärden, svarstid, felkod, appversion och PriceUniverse-ID.</li>
+      </ul>
+
+      <h2>Det som ligger på din enhet</h2>
+      <p>Postnummer, portionsval, antal middagar, kost, mål, max antal inköpsställen, medlemskap, anonymt sessions-ID och senaste plan-ID sparas lokalt i webbläsaren. Knappen för att rensa inställningar tar bort samtliga dessa lokala värden.</p>
+      <p>En sparad planlänk lägger plan-ID efter <code>#</code> i adressen. Fragmentet skickas inte med den vanliga sidförfrågan till servern. Äldre länkar med <code>?plan=</code> läses för bakåtkompatibilitet och flyttas omedelbart till fragmentformatet.</p>
+
+      <h2>Lagringstid</h2>
+      <p>Den separata, pseudonyma sessionscookien kan finnas kvar i högst 180 dagar. Sparade planer, strukturerad communityevidens och feedback behålls under den begränsade betaperioden för reproducerbarhet, moderering och felsökning. Någon automatisk slutfrist för dessa poster är ännu inte fastställd; detta är en uttrycklig policyfråga som ska beslutas före en bredare lansering. Rå kvittobild och rå kvittotext har som standard lagringstid 0 timmar efter bearbetning.</p>
+
+      <h2>Det vi inte samlar in automatiskt</h2>
+      <ul>
+        <li>Inga retailer-lösenord, personliga butikskonton eller aktiverade kuponger.</li>
+        <li>Ingen exakt plats, kontaktlista eller aggressiv enhetsfingerprinting.</li>
+        <li>Inga annonseringspixlar eller tredjepartsprofilering.</li>
+        <li>Inga cookies, tokens, känsliga headers eller råa kvitton i felrapporter.</li>
+        <li>Inga IP-adresser eller frågesträngar lagras i ingressens accessloggar; rå accessloggning är avstängd. Applikationens strukturerade driftlogg använder endast uttryckligen tillåtna fält.</li>
+      </ul>
+
+      <h2>Kvitton i beta</h2>
+      <p>Strukturerade kvittouppgifter kan användas som evidens. Standardinställningen behåller inte rå kvittotext eller bild efter bearbetning. Foto-OCR är ännu inte en färdig konsumentfunktion.</p>
+
+      <h2>Communitydata</h2>
+      <p>Rapporter kan användas för att förbättra pris- och sortimentsbedömningar. De ändrar inte auktoritativa prisdata automatiskt och en rapportörs identitet visas inte för andra användare.</p>
+
+      <h2>Radering och kontakt</h2>
+      <p>Du kan själv radera betauppgifter som hör till den här webbläsarens nuvarande anonyma session. Sparade planer, feedback (inklusive frivillig e-post), produktmätningar och frontendfel tas bort. Community- och kvittoevidens behålls som fakta för spårbarhet, men kopplingen till den gamla anonyma sessionen ersätts av en unik, icke återkopplingsbar radmarkör. Priskällor och PriceUniverse ändras aldrig av raderingen.</p>
+      <p>Efter en lyckad radering tas även appens lokala webbläsardata bort och den anonyma sessionscookien löper ut. Åtgärden kan inte ångras i den aktiva tjänsten.</p>
+
+      <form id="privacy-erasure-form" class="privacy-erasure-card">
+        <h3>Radera mina betauppgifter</h3>
+        <p>Detta gäller bara den anonyma session som finns i den här webbläsaren.</p>
+        <label class="privacy-erasure-confirmation" for="privacy-erasure-confirm">
+          <input id="privacy-erasure-confirm" type="checkbox" required />
+          <span>Jag förstår att mina sparade planer och min feedback tas bort.</span>
+        </label>
+        <button id="privacy-erasure-submit" class="secondary-button" type="submit">Radera mina uppgifter</button>
+        <p id="privacy-erasure-status" class="dialog-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <h2>Säkerhetskopior</h2>
+      <p>Raderade poster kan finnas kvar i roterande säkerhetskopior i högst 14 dagar. Produktionsrutinen kräver en krypterad kopia utanför servern. Raderingen skapar en separat, icke identifierande undertryckningspost med opaka post-ID:n, men automatisk återspelning vid restore är ännu inte implementerad. Före tjänsten återöppnas efter en återställning måste operatören därför bevara och tillämpa dessa undertryckningsposter, eller rensa berörda säkerhetskopior. Detta är ett obligatoriskt manuellt restore-steg.</p>
+      <p><strong>Policy-TODO före en bredare lansering:</strong> juridiskt granska texten och publicera namn och direkt kontaktväg till ansvarig operatör. Ingen sådan identitet eller adress hittas på i denna beta.</p>
+      <p><a class="secondary-button policy-back" href="/">Tillbaka till veckomenyn</a></p>
+    </main>
+    <script src="/static/privacy.js" defer></script>
+  </body>
+</html>

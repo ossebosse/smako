@@ -1,0 +1,305 @@
+{
+  "schema": "official-store-discovery-v1",
+  "captured_at": "2026-08-23T12:00:00Z",
+  "scope": "Strict official address locality Lund; nearby municipality localities are not relabelled.",
+  "chains": {
+    "willys": {
+      "city": "Lund",
+      "official_source": "https://www.willys.se/axfood/rest/v1/store",
+      "endpoint_method": "GET",
+      "identity_field": "storeId",
+      "response_shape": "array[name,storeId,onlineStore,address,geoPoint]",
+      "source_scope_total": 3,
+      "outside_city_count": 0,
+      "stores": [
+        {
+          "external_store_id": "2863",
+          "name": "Willys Hemma Lund Stortorget",
+          "address": "Stortorget 6",
+          "postal_code": "22223",
+          "city": "Lund",
+          "latitude": "55.7025",
+          "longitude": "13.1924",
+          "online_shopping": false
+        },
+        {
+          "external_store_id": "2176",
+          "name": "Willys Lund",
+          "address": "Magistratsvägen 22",
+          "postal_code": "22643",
+          "city": "Lund",
+          "latitude": "55.72",
+          "longitude": "13.2214",
+          "online_shopping": true
+        },
+        {
+          "external_store_id": "2354",
+          "name": "Willys Lund Nova",
+          "address": "Företagsvägen 10",
+          "postal_code": "22761",
+          "city": "Lund",
+          "latitude": "55.7138",
+          "longitude": "13.1602",
+          "online_shopping": true
+        }
+      ]
+    },
+    "hemkop": {
+      "city": "Lund",
+      "official_source": "https://www.hemkop.se/axfood/rest/store?online=false",
+      "endpoint_method": "GET",
+      "identity_field": "storeId",
+      "response_shape": "array[storeId,name,open,external,onlineStore,clickAndCollect,address,geoPoint]",
+      "source_scope_total": 2,
+      "outside_city_count": 0,
+      "stores": [
+        {
+          "external_store_id": "4224",
+          "name": "Hemköp Lund Brunnshög",
+          "address": "Solbjersvägen 32",
+          "postal_code": "22481",
+          "city": "Lund",
+          "latitude": "55.7187",
+          "longitude": "13.2322",
+          "online_shopping": true,
+          "click_and_collect": true
+        },
+        {
+          "external_store_id": "4123",
+          "name": "Hemköp Lund Karhögstorg",
+          "address": "Karhögstorg 2a",
+          "postal_code": "22358",
+          "city": "Lund",
+          "latitude": "55.6945",
+          "longitude": "13.1915",
+          "online_shopping": true,
+          "click_and_collect": true
+        }
+      ]
+    },
+    "ica": {
+      "city": "Lund",
+      "official_source": "https://www.ica.se/butiker/oppettider/lund/",
+      "endpoint_method": "GET",
+      "identity_field": "accountNumber",
+      "secondary_identity_field": "storeId",
+      "response_shape": "HTML window.__INITIAL_DATA__.resultStore.storeCards[]",
+      "source_scope_total": 12,
+      "outside_city_count": 3,
+      "outside_city_localities": ["Södra Sandby", "Genarp", "Veberöd"],
+      "stores": [
+        {
+          "external_store_id": "1086002",
+          "secondary_external_store_id": "17864",
+          "name": "ICA Kvantum Brunnshög",
+          "address": "Brunnshögstorget 1",
+          "postal_code": "22482",
+          "city": "Lund",
+          "latitude": "55.71967",
+          "longitude": "13.23229"
+        },
+        {
+          "external_store_id": "1004409",
+          "secondary_external_store_id": "2771",
+          "name": "ICA Kvantum Malmborgs Clemenstorget",
+          "address": "Clemenstorget 5",
+          "postal_code": "22221",
+          "city": "Lund",
+          "latitude": "55.70649",
+          "longitude": "13.18801"
+        },
+        {
+          "external_store_id": "1003391",
+          "secondary_external_store_id": "2780",
+          "name": "ICA Kvantum Malmborgs Tuna",
+          "address": "Tunavägen 39",
+          "postal_code": "22363",
+          "city": "Lund",
+          "latitude": "55.70961",
+          "longitude": "13.21653"
+        },
+        {
+          "external_store_id": "1004475",
+          "secondary_external_store_id": "2775",
+          "name": "ICA Nära Jägaren, Lund",
+          "address": "Nöbbelövs torg 9",
+          "postal_code": "22638",
+          "city": "Lund",
+          "latitude": "55.72799",
+          "longitude": "13.17527"
+        },
+        {
+          "external_store_id": "1003508",
+          "secondary_external_store_id": "2773",
+          "name": "ICA Nära Satelliten",
+          "address": "Råbyvägen 15",
+          "postal_code": "22457",
+          "city": "Lund",
+          "latitude": "55.6961",
+          "longitude": "13.2037"
+        },
+        {
+          "external_store_id": "1004339",
+          "secondary_external_store_id": "2774",
+          "name": "ICA Nära Söderlivs, Lund",
+          "address": "Stora Södergatan 57",
+          "postal_code": "22223",
+          "city": "Lund",
+          "latitude": "55.69795",
+          "longitude": "13.19035"
+        },
+        {
+          "external_store_id": "1004223",
+          "secondary_external_store_id": "2781",
+          "name": "ICA Supermarket Fäladstorget",
+          "address": "Fäladstorget 14",
+          "postal_code": "22647",
+          "city": "Lund",
+          "latitude": "55.72373",
+          "longitude": "13.20502"
+        },
+        {
+          "external_store_id": "1004598",
+          "secondary_external_store_id": "15172",
+          "name": "ICA Supermarket Linero Torg",
+          "address": "Emblas gata 23",
+          "postal_code": "22476",
+          "city": "Lund",
+          "latitude": "55.69464",
+          "longitude": "13.24227"
+        },
+        {
+          "external_store_id": "1088004",
+          "secondary_external_store_id": "17883",
+          "name": "Maxi ICA Stormarknad Gunnesbo, Lund",
+          "address": "Traktorvägen 1-3",
+          "postal_code": "22660",
+          "city": "Lund",
+          "latitude": "55.71647",
+          "longitude": "13.16357"
+        }
+      ]
+    },
+    "coop": {
+      "city": "Lund",
+      "official_source": "https://www.coop.se/butiker-erbjudanden/",
+      "endpoint_method": "normal Chromium rendered locator plus GET detail pages",
+      "identity_field": "StorePageType.storeID",
+      "secondary_identity_field": "ledgerAccountNumber",
+      "response_shape": "closed visible card envelope joined to public detail-page StorePageType",
+      "source_scope_total": 7,
+      "outside_city_count": 0,
+      "stores": [
+        {
+          "external_store_id": "3659",
+          "secondary_external_store_id": "216526",
+          "name": "Coop Värpinge Lund",
+          "address": "Hildur Sandbergs gata 22",
+          "postal_code": "22762",
+          "city": "Lund",
+          "latitude": null,
+          "longitude": null
+        },
+        {
+          "external_store_id": "2696",
+          "secondary_external_store_id": "105760",
+          "name": "Stora Coop Lund",
+          "address": "Traktorvägen 2",
+          "postal_code": "22660",
+          "city": "Lund",
+          "latitude": null,
+          "longitude": null
+        },
+        {
+          "external_store_id": "3837",
+          "secondary_external_store_id": "106444",
+          "name": "Coop Trollebergsvägen",
+          "address": "Trollebergsvägen 14",
+          "postal_code": "22230",
+          "city": "Lund",
+          "latitude": null,
+          "longitude": null
+        },
+        {
+          "external_store_id": "3839",
+          "secondary_external_store_id": "106445",
+          "name": "Coop Flöjtvägen",
+          "address": "Flöjtvägen 44",
+          "postal_code": "22468",
+          "city": "Lund",
+          "latitude": null,
+          "longitude": null
+        },
+        {
+          "external_store_id": "3820",
+          "secondary_external_store_id": "106435",
+          "name": "Coop Klostergården",
+          "address": "Nordanvägen 7-9",
+          "postal_code": "22228",
+          "city": "Lund",
+          "latitude": null,
+          "longitude": null
+        },
+        {
+          "external_store_id": "3813",
+          "secondary_external_store_id": "106430",
+          "name": "Coop Mårtenstorget",
+          "address": "Mårtenstorget 11",
+          "postal_code": "22351",
+          "city": "Lund",
+          "latitude": null,
+          "longitude": null
+        },
+        {
+          "external_store_id": "3656",
+          "secondary_external_store_id": "216523",
+          "name": "Coop Vildgåsen Lund",
+          "address": "Vildgåsvägen 27",
+          "postal_code": "22735",
+          "city": "Lund",
+          "latitude": null,
+          "longitude": null
+        }
+      ]
+    },
+    "lidl": {
+      "city": "Lund",
+      "official_source": "https://www.lidl.se/s/sv-SE/butiker/lund/",
+      "endpoint_method": "GET locator HTML and bounded public detail pages",
+      "identity_field": "public_feedback_tnc numeric value (stability inferred)",
+      "response_shape": "HTML store cards/details with JSON-LD address and geo",
+      "source_scope_total": 2,
+      "outside_city_count": 0,
+      "stores": [
+        {
+          "external_store_id": "0163",
+          "name": "Lidl Magistratsvägen 6",
+          "address": "Magistratsvägen 6",
+          "postal_code": "22643",
+          "city": "Lund",
+          "latitude": "55.72050",
+          "longitude": "13.20542"
+        },
+        {
+          "external_store_id": "0303",
+          "name": "Lidl Åkerlund och Rausings väg 1",
+          "address": "Åkerlund och Rausings väg 1",
+          "postal_code": "22730",
+          "city": "Lund",
+          "latitude": "55.69938",
+          "longitude": "13.17783"
+        }
+      ]
+    },
+    "citygross": {
+      "city": "Lund",
+      "official_source": "https://www.citygross.se/api/v1/PageData/stores",
+      "endpoint_method": "GET",
+      "identity_field": "data.siteId (physical), joined to /api/v1/sites storeNumber for price contexts",
+      "response_shape": "array[data.siteId,storeName,address,location,url]",
+      "source_scope_total": 0,
+      "outside_city_count": 0,
+      "stores": []
+    }
+  }
+}

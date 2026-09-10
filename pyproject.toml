@@ -1,0 +1,12 @@
+[tool.pytest.ini_options]
+testpaths = ["backend/tests", "grocery_data/tests"]
+pythonpath = ["backend", "."]
+asyncio_mode = "auto"
+addopts = "-q"
+markers = [
+    "live: opt-in connector canaries that make small public network requests",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100

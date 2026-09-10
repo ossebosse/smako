@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Grocery Data Status</title>
+    <link rel="stylesheet" href="/static/status.css">
+    <script src="/static/status.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">GROCERY DATA</p>
+        <h1>Connectorstatus</h1>
+        <p id="summary" class="muted" aria-live="polite">Hämtar status…</p>
+      </header>
+      <section id="connectors" class="connector-grid" aria-label="Connectors"></section>
+      <section class="status-section" aria-labelledby="daily-refresh-title">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">DAILY SOURCE HEALTH</p>
+            <h2 id="daily-refresh-title">Lund · freshness</h2>
+          </div>
+          <a href="/operations/daily-refresh/status?city=Lund">JSON</a>
+        </div>
+        <p id="daily-refresh-summary" class="muted" aria-live="polite">
+          Hämtar daglig driftstatus…
+        </p>
+        <div id="daily-refresh" class="coverage-grid"></div>
+      </section>
+      <section class="status-section" aria-labelledby="price-universe-title">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">PRICE UNIVERSE</p>
+            <h2 id="price-universe-title">Aktivt Lund-universum</h2>
+          </div>
+          <a href="/price-universe/status?city=Lund">JSON</a>
+        </div>
+        <p id="price-universe-summary" class="muted" aria-live="polite">
+          Hämtar universe-status…
+        </p>
+      </section>
+      <section class="status-section" aria-labelledby="store-coverage-title">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">STORE COVERAGE</p>
+            <h2 id="store-coverage-title">Lund</h2>
+          </div>
+          <a href="/stores/coverage?city=Lund">JSON</a>
+        </div>
+        <p id="store-coverage-summary" class="muted" aria-live="polite">
+          Hämtar fysisk butikstäckning…
+        </p>
+        <div id="store-coverage" class="coverage-grid"></div>
+      </section>
+      <section class="status-section" aria-labelledby="price-context-title">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">PRICE CONTEXTS</p>
+            <h2 id="price-context-title">Lund · per fysisk butik</h2>
+          </div>
+          <a href="/stores/price-contexts?city=Lund">JSON</a>
+        </div>
+        <p id="price-context-summary" class="muted" aria-live="polite">
+          Hämtar pris-contexts…
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Butik</th>
+                <th>Fysisk</th>
+                <th>Tillstånd</th>
+                <th>Källa / context</th>
+                <th>Coverage</th>
+                <th>Färskhet</th>
+                <th>Basket</th>
+                <th>Förklaring</th>
+              </tr>
+            </thead>
+            <tbody id="price-contexts"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="status-section" aria-labelledby="physical-validation-title">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">PHYSICAL VALIDATION</p>
+            <h2 id="physical-validation-title">Frivilliga stickprov</h2>
+          </div>
+          <a href="/physical-check">Registrera pris</a>
+        </div>
+        <p class="muted">
+          Stickprov ger extra confidence men blockerar aldrig normal användning.
+        </p>
+        <div id="physical-validation" class="coverage-grid"></div>
+      </section>
+      <p id="error" class="error" role="alert" hidden></p>
+    </main>
+  </body>
+</html>

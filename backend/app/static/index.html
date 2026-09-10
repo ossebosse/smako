@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Skapa en prisoptimerad svensk veckomeny utifrån aktuella matpriser nära dig." />
+    <meta name="theme-color" content="#173e35" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Veckomenyn" />
+    <title>Billigaste veckomenyn</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/static/icons/app-icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
+    <script src="/static/frontend-bootstrap.js?v=loading-hotfix-20260909" defer></script>
+    <script src="/static/app.js?v=product-search-20260909" defer></script>
+    <script src="/static/product-search.js?v=ica-quality-20260909" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Hoppa till innehållet</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="Billigaste veckomenyn, startsida">
+          <span class="brand-mark" aria-hidden="true">B</span>
+          <span>Billigaste veckomenyn</span>
+        </a>
+        <div class="header-actions">
+          <span class="header-note">Billigare middagar nära dig</span>
+          <button id="scan-entry-button" class="header-action" type="button">Skanna vara</button>
+        </div>
+      </div>
+    </header>
+
+    <aside class="beta-coverage" aria-label="Betans geografiska täckning">
+      <strong>Publik beta i Lund</strong>
+      <span>Betan jämför just nu verifierade priskällor kring Lund. Fler områden kommer senare.</span>
+    </aside>
+
+    <main id="main-content">
+      <section id="product-search" class="product-search" aria-labelledby="product-search-title">
+        <h2 id="product-search-title">Sök produkt eller vara</h2>
+        <form id="product-search-form" role="search">
+          <label class="sr-only" for="product-query">Produktnamn, vara eller streckkod</label>
+          <div class="product-search-inputs">
+            <input id="product-query" type="search" placeholder="Till exempel kaffe, mjölk eller Bregott" maxlength="120" required />
+            <button class="primary-button" type="submit">Sök</button>
+          </div>
+          <div class="product-search-options">
+            <label>Visa <select id="product-search-view">
+              <option value="relevance">Relevanta produkter</option>
+              <option value="cheapest">Billigast relevant</option>
+              <option value="campaigns">Kampanjer</option>
+              <option value="multiple">Samma produkt hos flera butiker</option>
+              <option value="unit:kg">Jämförpris · kr/kg</option>
+              <option value="unit:l">Jämförpris · kr/l</option>
+              <option value="unit:st">Jämförpris · kr/st</option>
+            </select></label>
+            <a href="#plan-form" id="product-search-area">Postnummer och medlemskap</a>
+          </div>
+        </form>
+        <p id="product-search-status" role="status" aria-live="polite">Jämför produkter i ditt valda prisområde.</p>
+        <div id="product-search-coverage" aria-label="Kedjor i jämförelsen" hidden></div>
+        <div id="product-search-results"></div>
+        <button id="product-search-more" class="secondary-button" type="button" hidden>Visa fler produkter</button>
+      </section>
+      <aside
+        id="service-availability-banner"
+        class="service-availability-banner"
+        role="alert"
+        aria-live="assertive"
+        hidden
+      >
+        <div>
+          <strong id="service-availability-title">Planeringen är tillfälligt pausad</strong>
+          <span id="service-availability-message">Prisunderlaget kontrolleras. Försök igen om en liten stund.</span>
+        </div>
+        <button id="service-retry-button" class="secondary-button compact-button" type="button">Kontrollera igen</button>
+      </aside>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Billigare vardagsmat med aktuella prisdata</p>
+          <h1 id="page-title">Vad ska vi äta den här veckan?</h1>
+          <p class="lead">
+            Välj hur många ni är och hur många butiker som känns rimligt. Vi bygger kompletta
+            middagar och räknar på de förpackningar du faktiskt behöver köpa.
+          </p>
+          <ul class="benefits" aria-label="Så fungerar tjänsten">
+            <li><span aria-hidden="true">01</span> Lokala produkter och kampanjer</li>
+            <li><span aria-hidden="true">02</span> Prisberäknade recept för dina val</li>
+            <li><span aria-hidden="true">03</span> Optimerad handel via flera inköpsställen</li>
+          </ul>
+        </div>
+
+        <div class="planner-card">
+          <form id="plan-form" novalidate>
+            <div class="form-heading">
+              <div>
+                <p class="eyebrow">Planera veckan</p>
+                <h2>Skapa din meny</h2>
+              </div>
+              <span class="form-chip">20 portioner med standardvalen</span>
+            </div>
+
+            <div class="field field-wide">
+              <label for="postal-code">Postnummer</label>
+              <input
+                id="postal-code"
+                name="postal_code"
+                type="text"
+                value="22350"
+                inputmode="numeric"
+                autocomplete="postal-code"
+                pattern="[0-9 ]{5,6}"
+                maxlength="6"
+                aria-describedby="postal-hint postal-error"
+                required
+              />
+              <span id="postal-hint" class="field-hint">Fem siffror, med eller utan mellanslag.</span>
+              <span id="postal-error" class="field-error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="recipes">Middagar</label>
+                <select id="recipes" name="recipes" data-min="3" data-max="7" required>
+                  <option value="3">3 middagar</option>
+                  <option value="4">4 middagar</option>
+                  <option value="5" selected>5 middagar</option>
+                  <option value="6">6 middagar</option>
+                  <option value="7">7 middagar</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="servings">Portioner</label>
+                <input id="servings" name="servings" type="number" value="4" min="1" max="8" step="1" required />
+              </div>
+              <div class="field field-wide">
+                <label for="max-stores">Max antal inköpsställen</label>
+                <select id="max-stores" name="max_stores">
+                  <option value="1">1 inköpsställe</option>
+                  <option value="2" selected>2 inköpsställen</option>
+                  <option value="3">3 inköpsställen</option>
+                </select>
+                <span class="field-hint">Ett inköpsställe kan vara en butikskopplad eller onlinebaserad priskontext. Fler stopp kan ge lägre pris.</span>
+              </div>
+
+              <div class="field field-wide">
+                <label for="diet-preference">Kost</label>
+                <select id="diet-preference" name="diet_preference">
+                  <option value="mixed" selected>Blandat</option>
+                  <option value="meat_allowed">Kött &amp; blandat</option>
+                  <option value="vegetarian">Vegetariskt</option>
+                  <option value="vegan">Veganskt</option>
+                </select>
+              </div>
+            </div>
+
+            <fieldset class="variation-field" aria-describedby="variation-hint">
+              <legend>Mål</legend>
+              <div class="variation-options">
+                <label class="variation-option" for="diversity-cheapest">
+                  <input
+                    id="diversity-cheapest"
+                    name="diversity_mode"
+                    type="radio"
+                    value="cheapest"
+                  />
+                  <span>
+                    <strong>Billigast</strong>
+                    <small>Lägsta pris prioriteras, med grundkrav på fullvärdiga middagar.</small>
+                  </span>
+                </label>
+                <label class="variation-option" for="diversity-balanced">
+                  <input
+                    id="diversity-balanced"
+                    name="diversity_mode"
+                    type="radio"
+                    value="balanced"
+                    checked
+                  />
+                  <span>
+                    <strong>Balanserad</strong>
+                    <small>Rekommenderad balans mellan låg kostnad och omväxling.</small>
+                  </span>
+                </label>
+                <label class="variation-option" for="diversity-varied">
+                  <input
+                    id="diversity-varied"
+                    name="diversity_mode"
+                    type="radio"
+                    value="varied"
+                  />
+                  <span>
+                    <strong>Varierad</strong>
+                    <small>Tydligt olika rätter, högst 25 % över Balanserad som standard.</small>
+                  </span>
+                </label>
+              </div>
+              <span id="variation-hint" class="field-hint">
+                Du kan växla mellan returnerade alternativ direkt i resultatet utan en ny sökning.
+              </span>
+            </fieldset>
+
+            <details class="advanced-options">
+              <summary>Fler val</summary>
+              <div class="advanced-options-content">
+                <label for="varied-budget">Kostnadstak för Varierad över Balanserad (%)</label>
+                <input id="varied-budget" name="varied_budget_percent" type="number" min="0" max="100" step="1" value="25" required />
+                <p class="field-hint">Ett tak, inte ett mål att spendera. Samma priser, medlemskap och butiksgräns används.</p>
+                <fieldset class="membership-fieldset">
+                  <legend>Mina medlemskap</legend>
+                  <p class="field-hint">Verifierade medlemspriser används endast för program du markerar och när de finns i aktuellt prisunderlag. Valet räknar om planen men kräver ingen prisuppdatering.</p>
+                  <div class="membership-grid">
+                    <label><input type="checkbox" name="membership" value="ICA_STAMMIS" /> ICA Stammis</label>
+                    <label><input type="checkbox" name="membership" value="COOP_MEMBER" /> Coop medlem</label>
+                    <label><input type="checkbox" name="membership" value="HEMKOP_MEMBER" /> Klubb Hemköp</label>
+                    <label><input type="checkbox" name="membership" value="LIDL_PLUS" /> Lidl Plus</label>
+                    <label><input type="checkbox" name="membership" value="WILLYS_PLUS" /> Willys Plus</label>
+                    <label><input type="checkbox" name="membership" value="CITY_GROSS_PRIO" /> City Gross Prio</label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="availability-fieldset">
+                  <legend>Sortimentssäkerhet</legend>
+                  <label class="inline-choice">
+                    <input type="radio" name="availability_mode" value="normal" checked />
+                    <span><strong>Normal</strong><small>Använd källornas sortiment och visa fysisk osäkerhet.</small></span>
+                  </label>
+                  <label class="inline-choice">
+                    <input type="radio" name="availability_mode" value="strict" />
+                    <span><strong>Strikt (beta)</strong><small>Rådgivande i denna version: visar sortimentsosäkerhet men styr ännu inte produktvalet.</small></span>
+                  </label>
+                </fieldset>
+
+                <div class="field">
+                  <label for="excluded-ingredients">Undvik ingredienser</label>
+                  <input id="excluded-ingredients" name="excluded_ingredients" type="text" placeholder="Till exempel svamp, jordnöt" />
+                  <span class="field-hint">Detta är en preferens, inte en garanti om allergisäkerhet.</span>
+                </div>
+                <button id="clear-preferences-button" class="text-button clear-preferences-button" type="button">
+                  Rensa sparade inställningar
+                </button>
+                <span id="preferences-status" class="field-hint" role="status" aria-live="polite"></span>
+              </div>
+            </details>
+
+            <button id="submit-button" class="primary-button" type="submit" disabled>
+              <span class="button-label">Skapa veckomeny</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section id="status-region" class="status-wrap" aria-live="polite" aria-atomic="true" hidden>
+        <div
+          id="loading-state"
+          class="status-card loading-card"
+          role="status"
+          aria-labelledby="loading-title"
+          aria-describedby="loading-message"
+          hidden
+        >
+          <div class="spinner" aria-hidden="true"></div>
+          <div>
+            <h2 id="loading-title">Vi bygger din veckomeny</h2>
+            <p id="loading-message">Vi söker vidare tills en komplett, prisberäknad plan är klar. Det kan ta några sekunder.</p>
+          </div>
+        </div>
+        <div id="error-state" class="status-card error-card" role="alert" hidden>
+          <span class="status-icon" aria-hidden="true">!</span>
+          <div>
+            <h2>Menyn kunde inte skapas</h2>
+            <p id="error-message">Försök igen om en liten stund.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="results" aria-labelledby="results-title" hidden>
+        <div class="results-intro">
+          <div>
+            <p id="result-location" class="eyebrow"></p>
+            <h2 id="results-title" tabindex="-1">Billigaste veckomenyn vi hittade</h2>
+            <div class="result-meta" aria-live="polite">
+              <span id="price-freshness" class="freshness-pill is-unknown">Prisdata: status saknas</span>
+              <span id="plan-persistence-status">Planen visas i den här fliken.</span>
+              <button id="copy-plan-link" class="text-button copy-plan-link" type="button" hidden>Kopiera planlänk</button>
+            </div>
+          </div>
+          <button id="new-plan-button" class="secondary-button" type="button">Ändra plan</button>
+        </div>
+
+        <aside id="new-prices-banner" class="new-prices-banner" aria-live="polite" hidden>
+          <div>
+            <strong id="new-prices-title">Nya priser finns</strong>
+            <span id="new-prices-message">Din sparade plan visas fortfarande med sitt ursprungliga prisunderlag.</span>
+          </div>
+          <button id="recalculate-plan-button" class="secondary-button compact-button" type="button">
+            Uppdatera planen
+          </button>
+        </aside>
+
+        <nav class="result-jump-nav" aria-label="Hoppa i veckoplanen">
+          <a href="#menu-section">Recept</a>
+          <a href="#shopping-section">Inköpslista</a>
+          <a href="#source-panel">Prisdata</a>
+        </nav>
+
+        <details class="online-price-explanation">
+          <summary>Vad betyder onlinepris?</summary>
+          <p>
+            Ett onlinepris gäller den angivna beställnings- eller priskontexten. Det är inte ett
+            bekräftat hyllpris eller en garanti att varan finns i varje fysisk butik.
+          </p>
+        </details>
+
+        <aside id="debug-notice" class="debug-notice" data-debug-only hidden>
+          Utvecklarläge är aktivt. Tekniska sök- och optimeringsvärden visas längre ned.
+        </aside>
+
+        <div id="consumer-plan-summary" class="consumer-plan-summary" aria-label="Plansammanfattning">
+          <div><strong id="summary-meals">—</strong><span>middagar</span></div>
+          <div><strong id="summary-servings">—</strong><span>portioner per middag</span></div>
+          <div><strong id="summary-stores">—</strong><span>inköpsställen</span></div>
+          <div class="summary-total"><strong id="summary-total">—</strong><span>totalt</span></div>
+          <div><strong id="summary-per-serving">—</strong><span>per portion</span></div>
+        </div>
+        <p id="membership-plan-summary" class="membership-plan-summary" hidden></p>
+
+        <section
+          id="plan-options-panel"
+          class="result-section plan-options-section"
+          aria-labelledby="plan-options-title"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="section-number">VÄLJ PLAN</p>
+              <h2 id="plan-options-title">Pris eller mer variation?</h2>
+            </div>
+            <p>Alla alternativ är redan beräknade mot samma prisdata. Byte här gör inget nytt API-anrop.</p>
+          </div>
+          <div
+            id="plan-options-list"
+            class="plan-options-grid"
+            role="radiogroup"
+            aria-label="Välj planalternativ"
+          ></div>
+          <div id="active-plan-summary" class="active-plan-summary" aria-live="polite"></div>
+          <p id="primary-plan-note" class="primary-plan-note" hidden>
+            Inköpsscenarier och jämförelsen mot en priskontext hör till den ursprungligen valda planen och
+            döljs för detta lokalt valda alternativ.
+          </p>
+        </section>
+
+        <section id="menu-section" class="result-section" aria-labelledby="menu-title">
+          <div class="section-heading">
+            <div>
+              <p class="section-number">01</p>
+              <h2 id="menu-title">Veckans meny</h2>
+            </div>
+            <p>Öppna ett recept för mängder och tillagning.</p>
+          </div>
+          <div id="recipes-list" class="recipe-list"></div>
+        </section>
+
+        <section class="result-section" aria-labelledby="ingredients-title">
+          <div class="section-heading">
+            <div>
+              <p class="section-number">02</p>
+              <h2 id="ingredients-title">Sammanställda ingredienser</h2>
+            </div>
+            <p>Mängderna är summerade och normaliserade från alla recept.</p>
+          </div>
+          <div id="ingredients-list" class="ingredient-grid"></div>
+        </section>
+
+        <section id="shopping-section" class="result-section shopping-section" aria-labelledby="shopping-title">
+          <div class="section-heading">
+            <div>
+              <p class="section-number">03</p>
+              <h2 id="shopping-title">Optimerad inköpslista</h2>
+            </div>
+            <p>Antalet förpackningar tar hänsyn till mängden som faktiskt behöver köpas.</p>
+          </div>
+          <div
+            id="basket-verification"
+            class="basket-verification"
+            role="status"
+            aria-live="polite"
+          >
+            <span id="basket-verification-icon" class="basket-verification-icon" aria-hidden="true">?</span>
+            <div>
+              <strong id="basket-verification-title">Matkassens verifiering saknas</strong>
+              <p id="basket-verification-description">
+                Priset ska betraktas som osäkert tills produkt- och mängdunderlaget har verifierats.
+              </p>
+              <ul id="basket-verification-warnings" class="basket-verification-warnings"></ul>
+            </div>
+          </div>
+          <div id="store-groups" class="store-groups"></div>
+
+          <div id="basket-summary" class="basket-summary">
+            <div class="total-block">
+              <span id="basket-total-label">Totalt</span>
+              <strong id="basket-total">—</strong>
+            </div>
+            <dl class="summary-metrics">
+              <div id="portions-metric" hidden>
+                <dt>Totalt antal portioner</dt>
+                <dd id="total-portions"></dd>
+              </div>
+              <div id="portion-price-metric" hidden>
+                <dt>Pris per portion</dt>
+                <dd id="price-per-portion"></dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
+        <section
+          id="comparison-panel"
+          class="result-section comparison-section"
+          aria-labelledby="comparison-title"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="section-number">04</p>
+              <h2 id="comparison-title">Jämför alternativen</h2>
+            </div>
+            <p>Se vad samma meny kostar på ett enda inköpsställe jämfört med din plan.</p>
+          </div>
+          <div id="comparison-cards" class="comparison-grid"></div>
+        </section>
+
+        <section
+          id="scenarios-panel"
+          class="result-section scenarios-section"
+          aria-labelledby="scenarios-title"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="section-number">05</p>
+              <h2 id="scenarios-title">Alla inköpsscenarier</h2>
+            </div>
+            <p>Samma inköpsbehov har räknats om med en, två eller tre tillåtna inköpsställen.</p>
+          </div>
+          <div
+            id="optimization-scenarios"
+            class="scenario-grid"
+            role="list"
+            aria-label="Prisoptimering för olika antal inköpsställen"
+          ></div>
+        </section>
+
+        <section
+          id="optimization-settings-panel"
+          class="result-section optimization-settings-section"
+          aria-labelledby="optimization-settings-title"
+          data-debug-only
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="section-number">06</p>
+              <h2 id="optimization-settings-title">Optimeringsinställningar</h2>
+            </div>
+            <p>Så mycket data och sökning användes för att hitta veckomenyn.</p>
+          </div>
+          <dl id="optimization-settings-metrics" class="optimization-metrics"></dl>
+        </section>
+
+        <section
+          id="quality-panel"
+          class="result-section quality-section"
+          aria-labelledby="quality-title"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="section-number">07</p>
+              <h2 id="quality-title">Kvalitetskontroll</h2>
+            </div>
+            <p>Vi kontrollerar att inköpslistan täcker recepten och att menyn följer dina val.</p>
+          </div>
+
+          <div id="quality-overview" class="quality-overview"></div>
+
+          <section
+            id="nutrition-quality-section"
+            class="quality-detail-block"
+            aria-labelledby="nutrition-quality-title"
+            hidden
+          >
+            <div class="quality-detail-heading">
+              <div>
+                <h3 id="nutrition-quality-title">Ungefärligt per recept</h3>
+                <p>Värdena är försiktiga receptuppskattningar och ersätter inte produktens näringsdeklaration.</p>
+              </div>
+            </div>
+            <div id="nutrition-quality-list" class="nutrition-quality-grid"></div>
+          </section>
+
+          <details
+            id="diversity-quality-section"
+            class="quality-detail-block"
+            aria-labelledby="diversity-quality-title"
+            hidden
+          >
+            <summary>Tekniska detaljer om receptlikhet</summary>
+            <div class="quality-detail-heading">
+              <div>
+                <h3 id="diversity-quality-title">Receptvariation</h3>
+                <p>
+                  Likheten räknas deterministiskt på ingredienser, receptfamilj,
+                  tillagningssätt, rättform, kolhydrat, protein och såsbas.
+                </p>
+              </div>
+            </div>
+            <div id="diversity-quality-metrics" class="quality-overview"></div>
+          </details>
+        </section>
+
+        <section
+          id="surplus-panel"
+          class="result-section surplus-section"
+          aria-labelledby="surplus-title"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="section-number">08</p>
+              <h2 id="surplus-title">Överskott efter veckan</h2>
+            </div>
+            <p>Skillnaden mellan receptens behov och den användbara mängd som måste köpas.</p>
+          </div>
+          <div id="surplus-summary" class="surplus-summary"></div>
+          <div id="surplus-items" class="audit-table-wrap"></div>
+        </section>
+
+        <section
+          id="store-tradeoff-panel"
+          class="result-section tradeoff-section"
+          aria-labelledby="store-tradeoff-title"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="section-number">09</p>
+              <h2 id="store-tradeoff-title">Pris mot extra inköpsställen</h2>
+            </div>
+            <p>Jämförelsen räknar samma meny i en enda giltig priskontext och jämför med korgen över flera inköpsställen. Det innebär inte verifierat fysiskt hyllsortiment.</p>
+          </div>
+          <div id="store-tradeoff-cards" class="tradeoff-grid"></div>
+        </section>
+
+        <section class="community-callout" aria-labelledby="community-callout-title">
+          <div>
+            <p class="eyebrow">Hjälp oss förbättra butikskartan</p>
+            <h2 id="community-callout-title">Stämmer inte priset eller sortimentet?</h2>
+            <p>
+              Rapportera från en rad i inköpslistan, eller skanna en streckkod. Din observation
+              sparas separat och ersätter aldrig prisdata automatiskt.
+            </p>
+          </div>
+          <button id="scan-result-button" class="secondary-button" type="button">Skanna och rapportera</button>
+        </section>
+
+        <aside id="source-panel" class="source-panel" aria-labelledby="source-title">
+          <div>
+            <p class="eyebrow">Transparens</p>
+            <h2 id="source-title">Prisdata och begränsningar</h2>
+          </div>
+          <div>
+            <p id="source-description"></p>
+            <section id="compared-sources" class="source-coverage" aria-labelledby="compared-sources-title" hidden>
+              <h3 id="compared-sources-title">Jämförda priskällor</h3>
+              <ul id="compared-sources-list"></ul>
+            </section>
+            <section id="unavailable-sources" class="source-coverage source-coverage-warning" aria-labelledby="unavailable-sources-title" hidden>
+              <h3 id="unavailable-sources-title">Priskällor som inte kunde jämföras</h3>
+              <ul id="unavailable-sources-list"></ul>
+            </section>
+            <ul id="warnings-list" class="warnings-list"></ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <button id="feedback-entry-button" class="feedback-tab" type="button">Skicka feedback</button>
+
+    <dialog id="onboarding-dialog" class="consumer-dialog onboarding-dialog" aria-labelledby="onboarding-title">
+      <div class="dialog-card">
+        <p class="eyebrow">Välkommen till Lund-betan</p>
+        <h2 id="onboarding-title">Billigare middagar, från pris till inköpslista</h2>
+        <ol class="onboarding-steps">
+          <li><span>1</span><strong>Vi jämför matpriser.</strong></li>
+          <li><span>2</span><strong>Vi bygger recept utifrån vad som är billigt.</strong></li>
+          <li><span>3</span><strong>Du får en färdig inköpslista.</strong></li>
+        </ol>
+        <p class="coverage-note">Betan jämför just nu priskällor kring Lund.</p>
+        <button id="onboarding-cta" class="primary-button" type="button">Skapa min veckomeny</button>
+      </div>
+    </dialog>
+
+    <dialog id="feedback-dialog" class="consumer-dialog" aria-labelledby="feedback-dialog-title">
+      <form id="feedback-form" method="dialog" class="dialog-card">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Lund-betan</p>
+            <h2 id="feedback-dialog-title">Skicka feedback</h2>
+          </div>
+          <button class="dialog-close" type="button" data-close-feedback aria-label="Stäng">×</button>
+        </div>
+        <p>Berätta kort vad som fungerade eller vad vi behöver förbättra. Du behöver inte ange e-post.</p>
+        <div class="field">
+          <label for="feedback-category">Kategori</label>
+          <select id="feedback-category" required>
+            <option value="something_broken">Något fungerade inte</option>
+            <option value="wrong_price">Fel pris</option>
+            <option value="wrong_recipe">Fel recept</option>
+            <option value="missing_store">Saknad butik</option>
+            <option value="suggestion">Förslag</option>
+            <option value="other">Annat</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="feedback-message">Meddelande</label>
+          <textarea id="feedback-message" rows="5" maxlength="2000" required placeholder="Vad hände, eller vad skulle göra tjänsten bättre?"></textarea>
+        </div>
+        <div class="field">
+          <label for="feedback-email">E-post om du vill ha svar (valfritt)</label>
+          <input id="feedback-email" type="email" maxlength="254" autocomplete="email" />
+        </div>
+        <p id="feedback-status" class="dialog-status" role="status" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button type="button" class="secondary-button" data-close-feedback>Avbryt</button>
+          <button id="feedback-submit" type="submit" class="primary-button">Skicka feedback</button>
+        </div>
+        <p class="privacy-note">Plan-ID, appversion, prisunderlag och aktuell sida bifogas automatiskt. Cookies, tokens och råa kvitton bifogas inte.</p>
+      </form>
+    </dialog>
+
+    <dialog id="report-dialog" class="consumer-dialog" aria-labelledby="report-dialog-title">
+      <form id="report-form" method="dialog" class="dialog-card">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Hjälp oss bli bättre</p>
+            <h2 id="report-dialog-title">Rapportera vara</h2>
+          </div>
+          <button class="dialog-close" type="button" data-close-dialog aria-label="Stäng">×</button>
+        </div>
+        <p id="report-product-summary" class="report-product-summary"></p>
+        <p id="report-store-requirement" class="store-requirement" hidden>
+          Den här prisraden är ett onlinekontext och kan inte automatiskt kallas en fysisk butik.
+          Välj den exakta fysiska butiken där du gjorde observationen.
+        </p>
+        <div class="field">
+          <label for="report-physical-store">Fysisk butik</label>
+          <select id="report-physical-store" name="physical_store_id">
+            <option value="">Välj exakt fysisk butik</option>
+          </select>
+          <p class="field-help">Online- och regionkontext räknas inte automatiskt som en fysisk butik.</p>
+        </div>
+        <div class="field">
+          <label for="report-type">Vad stämmer inte?</label>
+          <select id="report-type" name="evidence_type" required>
+            <option value="PRODUCT_NOT_FOUND">Varan finns inte i butiken</option>
+            <option value="PRICE_DIFFERENCE">Fel pris</option>
+            <option value="PROMOTION_MISSING_FROM_APP">Saknad kampanj</option>
+            <option value="PRODUCT_IDENTITY_CORRECTION">Fel vara</option>
+            <option value="PRODUCT_FOUND">Jag hittade varan i butiken</option>
+          </select>
+        </div>
+        <div id="report-price-fields" class="report-conditional" hidden>
+          <div class="field">
+            <label for="reported-price">Pris i butik, kr</label>
+            <input id="reported-price" name="shelf_price" type="text" inputmode="decimal" placeholder="29,95" />
+          </div>
+          <div class="field">
+            <label for="reported-price-unit">Prisets enhet</label>
+            <select id="reported-price-unit" name="price_unit">
+              <option value="SEK/package">kr/förpackning</option>
+              <option value="SEK/kg">kr/kg</option>
+              <option value="SEK/l">kr/l</option>
+              <option value="SEK/piece">kr/st</option>
+            </select>
+          </div>
+        </div>
+        <div id="report-promotion-fields" class="report-conditional" hidden>
+          <div class="membership-grid">
+            <label><input id="promotion-member" type="checkbox" /> Kräver medlemskap</label>
+            <label><input id="promotion-multibuy" type="checkbox" /> Flerköp</label>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label for="promotion-regular-price">Ordinarie pris, kr (valfritt)</label><input id="promotion-regular-price" type="text" inputmode="decimal" /></div>
+            <div class="field"><label for="promotion-quantity">Antal</label><input id="promotion-quantity" type="number" min="2" max="99" /></div>
+            <div class="field"><label for="promotion-total">Totalpris, kr</label><input id="promotion-total" type="text" inputmode="decimal" /></div>
+          </div>
+        </div>
+        <p id="report-status" class="dialog-status" role="status" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button type="button" class="secondary-button" data-close-dialog>Avbryt</button>
+          <button id="report-submit" type="submit" class="primary-button">Skicka rapport</button>
+        </div>
+        <p class="privacy-note">Rapporten sparas som separat community-evidens och ändrar aldrig prisdatakällan direkt.</p>
+      </form>
+    </dialog>
+
+    <dialog id="scanner-dialog" class="consumer-dialog scanner-dialog" aria-labelledby="scanner-dialog-title">
+      <div class="dialog-card scanner-dialog-card">
+        <div class="dialog-heading">
+          <div><p class="eyebrow">Rapportera eller slå upp</p><h2 id="scanner-dialog-title">Skanna vara</h2></div>
+          <button class="dialog-close" type="button" data-close-scanner aria-label="Stäng">×</button>
+        </div>
+        <div id="scanner-camera" class="scanner-camera" hidden>
+          <video id="scanner-video" muted playsinline></video>
+          <div class="scanner-guide" aria-hidden="true"><span></span></div>
+        </div>
+        <p class="scanner-explanation">Streckkoden identifierar varan. Pris och butik bekräftas separat innan en rapport sparas.</p>
+        <p id="scanner-status" class="dialog-status" role="status" aria-live="polite">Kameran startar först när du trycker på knappen.</p>
+        <div class="dialog-actions">
+          <button id="scanner-start" class="primary-button" type="button">Starta kameran</button>
+          <button id="scanner-cancel" class="secondary-button" type="button" hidden>Avbryt skanning</button>
+        </div>
+        <div class="manual-gtin-row">
+          <div class="field"><label for="manual-gtin">Eller skriv GTIN</label><input id="manual-gtin" inputmode="numeric" autocomplete="off" placeholder="731…" /></div>
+          <button id="manual-gtin-submit" class="secondary-button" type="button">Slå upp</button>
+        </div>
+        <div id="scanner-result" class="scanner-result" hidden></div>
+        <button type="button" class="text-button" data-close-scanner>Stäng</button>
+      </div>
+    </dialog>
+
+    <dialog id="product-alternatives-dialog" class="consumer-dialog" aria-labelledby="product-alternatives-title">
+      <div class="dialog-card">
+        <div class="dialog-heading">
+          <div><p class="eyebrow">Matkassen räknas om</p><h2 id="product-alternatives-title">Byt vara</h2></div>
+          <button class="dialog-close" type="button" data-close-alternatives aria-label="Stäng">×</button>
+        </div>
+        <p id="product-alternatives-summary"></p>
+        <div id="product-alternatives-list" class="product-alternatives-list"></div>
+        <p id="product-alternatives-status" class="dialog-status" role="status" aria-live="polite"></p>
+        <button type="button" class="text-button" data-close-alternatives>Avbryt</button>
+      </div>
+    </dialog>
+
+    <footer class="site-footer">
+      <div>
+        <p>Billigaste veckomenyn · Publik beta i Lund.</p>
+        <p id="footer-source">Produktpriser visas endast när de kommer från tjänstens prisdata.</p>
+      </div>
+      <nav class="footer-links" aria-label="Om tjänsten">
+        <button id="footer-feedback-button" class="text-button" type="button">Skicka feedback</button>
+        <a href="/static/privacy.html">Integritet</a>
+        <a href="/static/beta-terms.html">Betavillkor</a>
+        <span id="app-version">Beta · version laddas…</span>
+      </nav>
+    </footer>
+
+    <noscript>
+      <div class="noscript-message">JavaScript behöver vara aktiverat för att skapa en veckomeny.</div>
+    </noscript>
+  </body>
+</html>

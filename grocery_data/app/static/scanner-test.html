@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f4f7f2">
+    <title>Testa streckkodsläsaren</title>
+    <link rel="stylesheet" href="/static/physical-check.css?v=20260829-identifiers2">
+    <link rel="stylesheet" href="/physical-check/scanner-test.css?v=20260829-identifier-v2">
+    <script src="/static/physical-barcode-scanner.js?v=20260829-identifier-v2" defer></script>
+    <script src="/physical-check/scanner-test.js?v=20260829-identifier-v2" defer></script>
+  </head>
+  <body>
+    <main>
+      <header class="page-header">
+        <p class="eyebrow">SKRIVFRITT DIAGNOSTIKLÄGE</p>
+        <h1>Testa streckkodsläsaren</h1>
+        <p class="lede">
+          Kameran startar först när du trycker på knappen. Video och bilder lämnar aldrig
+          telefonen, och testet skapar inga prisobservationer.
+        </p>
+      </header>
+
+      <section class="card scanner-mode-card" aria-labelledby="scanner-mode-heading">
+        <p class="eyebrow">VÄLJ VAD DU SKANNAR</p>
+        <h2 id="scanner-mode-heading">Skanningsläge</h2>
+        <fieldset class="scanner-mode-switch">
+          <legend class="sr-only">Skanningsläge</legend>
+          <label>
+            <input type="radio" name="scanner-mode" value="product" checked>
+            <span>Produktstreckkod</span>
+          </label>
+          <label>
+            <input type="radio" name="scanner-mode" value="shelf">
+            <span>Hyllkod</span>
+          </label>
+        </fieldset>
+        <p id="scanner-mode-description" class="hint">
+          Produktläget läser EAN/UPC och validerar GTIN-kontrollsumman.
+        </p>
+      </section>
+
+      <section class="card scanner-test-card" aria-labelledby="scanner-heading">
+        <div class="scanner-test-heading">
+          <div>
+            <p class="eyebrow">IPHONE · SAFARI · HTTPS</p>
+            <h2 id="scanner-heading">Testa produktstreckkod</h2>
+          </div>
+          <span id="scanner-state" class="scanner-state" aria-live="polite">REDO</span>
+        </div>
+
+        <div id="camera-panel" class="camera-panel" hidden>
+          <video id="scanner-test-video" playsinline muted></video>
+          <div class="scan-guide" aria-hidden="true"><span></span></div>
+          <p class="scan-instruction">Håll streckkoden inom ramen</p>
+        </div>
+
+        <p id="scanner-message" class="scanner-message" role="status" aria-live="polite">
+          Tryck på ”Starta kameran” och godkänn kamerabehörigheten.
+        </p>
+        <p id="scanner-error" class="error" role="alert" hidden></p>
+
+        <div class="scanner-actions">
+          <button id="start-scanner" class="primary" type="button">Starta kameran</button>
+          <button id="cancel-scanner" class="secondary" type="button" hidden>Avbryt</button>
+        </div>
+      </section>
+
+      <section id="product-result-card" class="card scanner-result-card" aria-labelledby="result-heading">
+        <p class="eyebrow">SENASTE RESULTAT</p>
+        <h2 id="result-heading">Avkodad streckkod</h2>
+        <dl class="diagnostic-grid">
+          <div><dt>Leverantör</dt><dd id="scanner-provider">–</dd></div>
+          <div><dt>Kamera</dt><dd id="camera-selected">–</dd></div>
+          <div><dt>Upplösning</dt><dd id="camera-resolution">–</dd></div>
+          <div><dt>Format</dt><dd id="barcode-format">–</dd></div>
+          <div><dt>Rått värde</dt><dd id="barcode-raw">–</dd></div>
+          <div><dt>Normaliserat GTIN</dt><dd id="barcode-normalized">–</dd></div>
+          <div><dt>Avläsningstid</dt><dd id="scan-duration">–</dd></div>
+          <div><dt>Webbläsarmiljö</dt><dd id="browser-environment">–</dd></div>
+        </dl>
+      </section>
+
+      <section id="shelf-result-card" class="card scanner-result-card" aria-labelledby="shelf-result-heading" hidden>
+        <p class="eyebrow">SENASTE HYLLKOD</p>
+        <h2 id="shelf-result-heading">Rå diagnostik</h2>
+        <p class="hint">
+          Koden visas utan GTIN-tolkning. Den kopplas inte automatiskt till en produkt.
+        </p>
+        <dl class="diagnostic-grid shelf-result-grid">
+          <div><dt>Rått värde</dt><dd id="shelf-barcode-raw">–</dd></div>
+          <div><dt>Format</dt><dd id="shelf-barcode-format">–</dd></div>
+          <div><dt>Längd</dt><dd id="shelf-barcode-length">–</dd></div>
+        </dl>
+      </section>
+
+      <section id="manual-gtin-card" class="card scanner-manual-card" aria-labelledby="manual-heading">
+        <p class="eyebrow">FALLBACK UTAN KAMERA</p>
+        <h2 id="manual-heading">Testa ett manuellt GTIN</h2>
+        <label for="manual-gtin">EAN/UPC</label>
+        <input
+          id="manual-gtin"
+          inputmode="numeric"
+          autocomplete="off"
+          pattern="[0-9 -]{6,20}"
+          placeholder="731…"
+        >
+        <button id="validate-manual" class="secondary full-width" type="button">
+          Kontrollera kod
+        </button>
+        <p id="manual-result" class="hint" role="status" aria-live="polite">
+          Manuell inmatning använder samma normalisering och kontrollsumma som kameran.
+        </p>
+      </section>
+
+      <p class="scanner-test-footer">
+        <a class="button-link secondary" href="/physical-check">Tillbaka till fältkontrollen</a>
+      </p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f4f7f2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Fysiskt prisstickprov</title>
+    <link rel="stylesheet" href="/static/physical-check.css?v=20260830-physical3">
+    <script src="/static/physical-check-api-errors.js?v=20260829-identifiers2" defer></script>
+    <script src="/static/physical-barcode-scanner.js?v=20260829-identifiers2" defer></script>
+    <script src="/static/physical-check.js?v=20260830-physical3" defer></script>
+  </head>
+  <body>
+    <main>
+      <header class="page-header">
+        <p class="eyebrow">FRIVILLIGT FÄLTPASS</p>
+        <h1>Kontrollera hyllpriser</h1>
+        <p class="lede">
+          Ta ett litet, jämnt fördelat stickprov medan du ändå handlar. Det påverkar aldrig
+          butikens digitala katalogpris eller om butiken får användas i en varukorg.
+        </p>
+      </header>
+
+      <section id="session-setup" class="card setup-card" aria-labelledby="setup-heading">
+        <div class="step-heading">
+          <span class="step-number" aria-hidden="true">1</span>
+          <div>
+            <p class="eyebrow">STARTA PASS</p>
+            <h2 id="setup-heading">Vilken butik är du i?</h2>
+          </div>
+        </div>
+
+        <label for="store">Butik i Lund</label>
+        <select id="store" name="physical_store_id" required>
+          <option value="">Laddar Lund-butiker…</option>
+        </select>
+        <p id="store-details" class="store-details muted" aria-live="polite"></p>
+
+        <label class="switch-row" for="blind-capture">
+          <span>
+            <strong>Blind insamling</strong>
+            <small>Digitala priser döljs tills hyllpriset har sparats.</small>
+          </span>
+          <span class="switch-control">
+            <input id="blind-capture" type="checkbox" checked>
+            <span aria-hidden="true"></span>
+          </span>
+        </label>
+
+        <p class="privacy-note">
+          Inget konto, ingen platsdata och ingen kamerabild sparas. Butiks-ID räcker.
+        </p>
+        <button id="start-session" class="primary" type="button" disabled>
+          Starta stickprov med 25 varor
+        </button>
+      </section>
+
+      <section id="session-workspace" class="session-workspace" aria-labelledby="capture-heading" hidden>
+        <div class="session-toolbar">
+          <div>
+            <span id="blind-status" class="status-chip">BLIND INSAMLING</span>
+            <strong id="active-store-name"></strong>
+          </div>
+          <button id="complete-session-top" class="text-button" type="button">Avsluta</button>
+        </div>
+
+        <div class="progress-card" aria-labelledby="progress-label">
+          <div class="progress-copy">
+            <strong id="progress-label">Ditt frivilliga stickprov</strong>
+            <span id="progress-text">0 av 25</span>
+          </div>
+          <progress id="session-progress" value="0" max="25">0 av 25</progress>
+          <p id="progress-hint" class="hint">Några varor är bättre än inga. Du kan avsluta när du vill.</p>
+        </div>
+
+        <section id="identifier-preparation" class="identifier-preparation" aria-live="polite">
+          <div>
+            <strong id="identifier-preparation-title">Produktidentiteter förbereds</strong>
+            <span id="identifier-preparation-status" class="muted">Kontrollerar lokala GTIN-bevis…</span>
+          </div>
+          <div id="identifier-preparation-counts" class="preparation-counts"></div>
+          <button id="prepare-identifiers" class="secondary compact" type="button">
+            Berika återstående GTIN
+          </button>
+        </section>
+
+        <section class="card capture-card" aria-labelledby="capture-heading">
+          <div class="step-heading">
+            <span class="step-number" aria-hidden="true">2</span>
+            <div>
+              <p class="eyebrow">HYLLKANTEN</p>
+              <h2 id="capture-heading">Registrera nästa vara</h2>
+            </div>
+          </div>
+
+          <div id="current-target" class="current-target" aria-live="polite">
+            <div class="target-heading-row">
+              <span class="target-kicker">VALD VARA</span>
+              <span id="target-kind-badge" class="target-kind-badge">FÖRPACKAD VARA</span>
+            </div>
+            <strong id="current-target-name">Väntar på förslagen…</strong>
+            <span id="current-target-meta" class="muted"></span>
+          </div>
+
+          <form id="physical-price-form" novalidate>
+            <input id="session-item-id" name="session_item_id" type="hidden">
+
+            <fieldset class="semantics-fieldset">
+              <legend>Vad prissätts?</legend>
+              <div class="semantics-grid price-basis-grid">
+                <label class="choice-tile">
+                  <input name="price_basis" type="radio" value="package" checked>
+                  <span><b>Paket / styck</b><small>SEK/PACKAGE</small></span>
+                </label>
+                <label class="choice-tile">
+                  <input name="price_basis" type="radio" value="weight">
+                  <span><b>Viktpris</b><small>SEK/KG</small></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="promotion-fieldset">
+              <legend>Villkor på hyllkanten</legend>
+              <p class="hint">Lämna alla omarkerade för ett vanligt ordinarie pris.</p>
+              <div class="promotion-options">
+                <label class="condition-check" for="promotion-sale">
+                  <input id="promotion-sale" type="checkbox">
+                  <span><b>Kampanjpris</b><small>SALE</small></span>
+                </label>
+                <label class="condition-check" for="promotion-member">
+                  <input id="promotion-member" type="checkbox">
+                  <span><b>Kräver medlemskap</b><small>MEMBER</small></span>
+                </label>
+                <label class="condition-check" for="promotion-multibuy">
+                  <input id="promotion-multibuy" type="checkbox">
+                  <span><b>Flerköpsvillkor</b><small>MULTIBUY</small></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <section id="product-barcode-section" class="product-barcode-section" aria-labelledby="product-barcode-heading">
+              <h3 id="product-barcode-heading">Identifiera förpackad vara</h3>
+              <label for="gtin">Produktstreckkod / exakt GTIN</label>
+              <div class="inline-field">
+                <input
+                  id="gtin"
+                  name="gtin"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  pattern="[0-9 -]{8,20}"
+                  enterkeyhint="next"
+                  placeholder="731…"
+                >
+                <button id="scan-button" class="secondary scan-button" type="button" hidden>
+                  Skanna produktkod
+                </button>
+              </div>
+              <p id="gtin-hint" class="hint">Manuell GTIN-inmatning fungerar alltid.</p>
+              <p id="identity-status" class="identity-status hint" aria-live="polite">
+                Välj en exakt föreslagen vara eller verifiera dess GTIN.
+              </p>
+              <div id="identifier-actions" class="identifier-actions" hidden>
+                <button id="enrich-identifier" class="secondary compact" type="button">
+                  Hämta produktdetaljer
+                </button>
+                <button id="confirm-manual-identity" class="secondary compact" type="button">
+                  Bekräfta vald vara manuellt
+                </button>
+              </div>
+            </section>
+
+            <section id="weight-identity-section" class="weight-identity-section" hidden>
+              <span class="weight-mark">VIKTVARA</span>
+              <strong>Ingen produktstreckkod behövs</strong>
+              <p>Den valda källprodukten verifieras som lösvikt. Ange priset från hyllkanten i kr/kg.</p>
+            </section>
+
+            <div class="shelf-code-path">
+              <span>Hemköps ”Självscanna”-kod är en separat hyllkod, inte automatiskt GTIN.</span>
+              <div class="shelf-code-actions">
+                <button id="scan-shelf-code" class="text-button" type="button">Skanna hyllkod för vald vara</button>
+                <a class="text-button" href="/physical-check/scanner-test?mode=shelf">Öppna fristående test</a>
+              </div>
+              <span id="shelf-code-status" aria-live="polite"></span>
+            </div>
+            <details class="identity-fallback">
+              <summary>Varan saknar läsbar streckkod</summary>
+              <div class="details-content">
+                <label for="manual-product-search">Sök bland passets exakta produktförslag</label>
+                <input
+                  id="manual-product-search"
+                  type="search"
+                  autocomplete="off"
+                  placeholder="Skriv produktnamn"
+                >
+                <input id="product-name" name="product_name" type="hidden">
+                <p class="hint">Välj själv en exakt produkt. Sökresultat accepteras aldrig automatiskt.</p>
+                <div id="manual-product-results" class="manual-product-results" role="listbox"></div>
+              </div>
+            </details>
+
+            <label class="no-match-row" for="identity-no-match">
+              <input id="identity-no-match" type="checkbox">
+              <span>
+                <strong>FEL VARA / NO_MATCH</strong>
+                <small>Markera endast när du inte säkert kan koppla varan till den valda källprodukten. Okänd GTIN är inte i sig NO_MATCH.</small>
+              </span>
+            </label>
+
+            <div id="shelf-price-block">
+              <label id="shelf-price-label" for="shelf-price">Hyllpris, kr</label>
+              <div class="price-field">
+                <input
+                  id="shelf-price"
+                  name="shelf_price"
+                  type="text"
+                  inputmode="decimal"
+                  enterkeyhint="done"
+                  placeholder="29,90"
+                  required
+                >
+                <span id="shelf-price-suffix" aria-hidden="true">kr</span>
+              </div>
+            </div>
+            <p id="price-semantics-help" class="hint">Ange det ordinarie priset på hyllkanten.</p>
+
+            <div id="multibuy-fields" class="conditional-fields" hidden>
+              <div>
+                <label for="multibuy-quantity">Antal</label>
+                <input id="multibuy-quantity" name="multibuy_quantity" type="number" min="2" inputmode="numeric">
+              </div>
+              <div>
+                <label for="multibuy-total-price">Totalpris, kr</label>
+                <input id="multibuy-total-price" name="multibuy_total_price" inputmode="decimal" placeholder="40,00">
+              </div>
+            </div>
+
+            <div id="weight-fields" class="conditional-fields" hidden>
+              <div>
+                <label for="comparison-unit">Viktprisets enhet</label>
+                <select id="comparison-unit" name="comparison_unit">
+                  <option value="SEK/kg">kr/kg</option>
+                </select>
+              </div>
+              <input id="weight-price-type" name="weight_price_type" type="hidden" value="regular">
+              <div>
+                <label for="weight-regular-price">Ordinarie pris, kr/kg (valfritt)</label>
+                <input id="weight-regular-price" inputmode="decimal" placeholder="46,95">
+              </div>
+            </div>
+
+            <div id="promotion-text-fields" hidden>
+              <label for="promotion-text">Kampanjvillkor (valfritt)</label>
+              <input id="promotion-text" name="promotion_text" placeholder="Exempel: medlem · 2 för 30 kr">
+            </div>
+
+            <details class="more-fields">
+              <summary>Anteckning eller jämförpris</summary>
+              <div class="details-content">
+                <div id="optional-comparison-fields" class="conditional-fields">
+                  <div>
+                    <label for="optional-comparison-price">Jämförpris</label>
+                    <input id="optional-comparison-price" inputmode="decimal">
+                  </div>
+                  <div>
+                    <label for="optional-comparison-unit">Enhet</label>
+                    <input id="optional-comparison-unit" placeholder="kg, l, st">
+                  </div>
+                </div>
+                <label for="notes">Anteckning</label>
+                <textarea id="notes" name="notes" rows="2" maxlength="2000"></textarea>
+              </div>
+            </details>
+
+            <p id="capture-validation" class="inline-error" role="alert" hidden></p>
+            <div class="sticky-save">
+              <button id="save-button" class="primary" type="submit">Spara hyllpris</button>
+            </div>
+          </form>
+        </section>
+
+        <p id="result" class="result" role="status" aria-live="polite"></p>
+        <p id="error" class="error" role="alert" hidden></p>
+
+        <section id="digital-preview" class="card digital-preview" aria-labelledby="digital-heading" hidden>
+          <div class="reveal-heading">
+            <div>
+              <p class="eyebrow">EFTER SPARAT HYLLPRIS</p>
+              <h2 id="digital-heading">Digital jämförelse</h2>
+            </div>
+            <span class="lock-chip">UPPLÅST</span>
+          </div>
+          <p id="digital-preview-status" class="muted"></p>
+          <ul id="digital-preview-items"></ul>
+          <p class="hint">
+            Hyllprisfältet fylls aldrig automatiskt. Digitala rader kommer från lagrade
+            snapshots; inga liveanrop till kedjan görs här.
+          </p>
+          <button id="next-product" class="primary full-width" type="button">
+            Nästa produkt
+          </button>
+        </section>
+
+        <section class="card suggestions-card" aria-labelledby="suggestions-heading">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">25 VAROR · STRATIFIERAT</p>
+              <h2 id="suggestions-heading">Stickprovslista</h2>
+            </div>
+            <button id="load-suggestions" class="secondary compact" type="button">
+              Uppdatera
+            </button>
+          </div>
+          <p class="muted">
+            Förslagen är fördelade mellan REGULAR, SALE, MEMBER, MULTIBUY och WEIGHT.
+            Viktvaror visas som kr/kg och kräver ingen streckkod. Digitala priser visas inte i blindläget.
+          </p>
+          <div id="suggestion-summary" class="strata-summary" aria-live="polite"></div>
+          <ol id="suggestions" class="suggestions"></ol>
+        </section>
+
+        <section class="card finish-card" aria-labelledby="finish-heading">
+          <p class="eyebrow">NÄR DU ÄR KLAR</p>
+          <h2 id="finish-heading">Avsluta fältpasset</h2>
+          <p class="muted">Du kan avsluta före 25 varor. Stickprovet markeras fortfarande som frivilligt.</p>
+          <button id="complete-session" class="secondary full-width" type="button">
+            Avsluta och visa sammanfattning
+          </button>
+        </section>
+      </section>
+
+      <section id="session-complete" class="card completion-card" aria-labelledby="complete-heading" hidden>
+        <span class="completion-mark" aria-hidden="true">✓</span>
+        <p class="eyebrow">FÄLTPASS SPARAT</p>
+        <h2 id="complete-heading">Tack för stickprovet</h2>
+        <p id="complete-summary"></p>
+        <div class="completion-actions">
+          <a id="export-json" class="secondary button-link" href="#">Exportera JSON</a>
+          <a id="export-csv" class="secondary button-link" href="#">Exportera CSV</a>
+          <button id="new-session" class="primary" type="button">Starta ett nytt pass</button>
+        </div>
+      </section>
+
+      <p id="page-error" class="error page-error" role="alert" hidden></p>
+
+      <p class="scanner-diagnostic-link">
+        <a href="/physical-check/scanner-test">Testa kameran utan att spara prisdata</a>
+      </p>
+    </main>
+
+    <div id="scanner-overlay" class="scanner-overlay" hidden>
+      <section
+        class="scanner-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="scanner-modal-heading"
+        aria-describedby="scanner-live-status"
+      >
+        <header class="scanner-modal-header">
+          <div>
+            <p class="eyebrow">LOKAL KAMERALÄSNING</p>
+            <h2 id="scanner-modal-heading">Skanna produktstreckkod</h2>
+          </div>
+          <span id="scanner-provider-status" class="scanner-provider-chip">STARTAR</span>
+        </header>
+
+        <div class="scanner-stage">
+          <video id="scanner-video" playsinline muted></video>
+          <div class="retail-scan-guide" aria-hidden="true"><span></span></div>
+        </div>
+
+        <p class="scanner-instruction">Håll streckkoden inom ramen</p>
+        <p id="scanner-live-status" class="scanner-live-status" role="status" aria-live="polite">
+          Kameran startar först efter ditt knapptryck. Inga bilder sparas eller skickas.
+        </p>
+        <button id="stop-scan-button" class="scanner-cancel-button" type="button">
+          Avbryt
+        </button>
+      </section>
+    </div>
+  </body>
+</html>

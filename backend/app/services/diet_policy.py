@@ -1,0 +1,176 @@
+"""Deterministic dietary filtering before recipe candidate generation.
+
+Prices and products stay source-owned.  This module only narrows the canonical
+economic ingredient universe and validates the resulting recipes; it never
+asks a provider for alternate products and never infers prices.
+"""
+
+from __future__ import annotations
+
+from collections.abc import Iterable
+
+from app.models.plan import DietPreference
+from app.models.recipe import Recipe
+from app.services.economic_ingredient_selector import EconomicIngredientPool
+from app.services.ingredient_normalizer import canonicalize_ingredient_name
+from app.services.product_semantics import semantic_requirement
+
+_MEAT_OR_FISH = frozenset(
+    {
+        "kyckling",
+        "kycklingfilé",
+        "kycklinglever",
+        "fläskkött",
+        "fläskfärs",
+        "fläskkotlett",
+        "falukorv",
+        "korv",
+        "nötfärs",
+        "nötkött",
+        "oxkött",
+        "blandfärs",
+        "lamm",
+        "kalkon",
+        "bacon",
+        "skinka",
+        "fisk",
+        "lax",
+        "torsk",
+        "tonfisk",
+        "sej",
+        "räkor",
+        "skaldjur",
+    }
+)
+_MEAT_OR_FISH_FAMILIES = frozenset(
+    {"meat", "poultry", "fish", "seafood", "shellfish", "organ"}
+)
+_OTHER_ANIMAL = frozenset(
+    {
+        "ägg",
+        "mjölk",
+        "grädde",
+        "crème fraiche",
+        "ost",
+        "smör",
+        "yoghurt",
+        "kvarg",
+        "fetaost",
+        "halloumi",
+        "grillost",
+        "mozzarella",
+        "honung",
+    }
+)
+_OTHER_ANIMAL_FAMILIES = frozenset({"dairy", "egg"})
+
+
+def _excluded_by_diet(name: str, preference: DietPreference) -> bool:
+    canonical = canonicalize_ingredient_name(name)
+    family = semantic_requirement(canonical).food_family
+    if preference is DietPreference.VEGETARIAN:
+        return canonical in _MEAT_OR_FISH or family in _MEAT_OR_FISH_FAMILIES
+    if preference is DietPreference.VEGAN:
+        return (
+            canonical in _MEAT_OR_FISH
+            or canonical in _OTHER_ANIMAL
+            or family in _MEAT_OR_FISH_FAMILIES
+            or family in _OTHER_ANIMAL_FAMILIES
+        )
+    return False
+
+
+def excluded_ingredients(
+    preference: DietPreference | str,
+    avoid_ingredients: Iterable[str] = (),
+) -> frozenset[str]:
+    """Return canonical ingredients excluded by one consumer request."""
+
+    preference = DietPreference(preference)
+    excluded = {
+        canonicalize_ingredient_name(value)
+        for value in avoid_ingredients
+        if str(value).strip()
+    }
+    if preference is DietPreference.VEGETARIAN:
+        excluded.update(_MEAT_OR_FISH)
+    elif preference is DietPreference.VEGAN:
+        excluded.update(_MEAT_OR_FISH)
+        excluded.update(_OTHER_ANIMAL)
+    return frozenset(excluded)
+
+
+def filter_economic_pool(
+    pool: EconomicIngredientPool,
+    *,
+    preference: DietPreference | str,
+    avoid_ingredients: Iterable[str] = (),
+) -> EconomicIngredientPool:
+    """Narrow an already local pool without any source/provider request."""
+
+    preference = DietPreference(preference)
+    explicitly_excluded = {
+        canonicalize_ingredient_name(value)
+        for value in avoid_ingredients
+        if str(value).strip()
+    }
+    if preference is DietPreference.MIXED and not explicitly_excluded:
+        return pool
+
+    def allowed(name: str) -> bool:
+        canonical = canonicalize_ingredient_name(name)
+        return canonical not in explicitly_excluded and not _excluded_by_diet(
+            canonical, preference
+        )
+
+    def candidates(rows: dict[str, list]) -> dict[str, list]:
+        return {
+            name: values
+            for name, values in rows.items()
+            if allowed(name)
+        }
+
+    return EconomicIngredientPool(
+        ingredients=[
+            signal
+            for signal in pool.ingredients
+            if allowed(signal.canonical)
+        ],
+        candidates_by_name=candidates(pool.candidates_by_name),
+        semantic_candidates_by_name=candidates(pool.semantic_candidates_by_name),
+        matched_candidates_by_name=candidates(pool.matched_candidates_by_name),
+        search_queries_executed=pool.search_queries_executed,
+        products_considered=pool.products_considered,
+    )
+
+
+def recipe_respects_diet(
+    recipe: Recipe,
+    *,
+    preference: DietPreference | str,
+    avoid_ingredients: Iterable[str] = (),
+) -> bool:
+    preference = DietPreference(preference)
+    excluded = {
+        canonicalize_ingredient_name(value)
+        for value in avoid_ingredients
+        if str(value).strip()
+    }
+    return not any(
+        (
+            canonicalize_ingredient_name(ingredient.canonical_name or ingredient.name)
+            in excluded
+            or _excluded_by_diet(
+                ingredient.canonical_name or ingredient.name,
+                preference,
+            )
+        )
+        for ingredient in recipe.ingredients
+    )
+
+
+__all__ = [
+    "excluded_ingredients",
+    "filter_economic_pool",
+    "recipe_respects_diet",
+]
