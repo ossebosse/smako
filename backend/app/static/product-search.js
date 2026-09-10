@@ -92,6 +92,7 @@
       details.append(alternatives);
     }
     article.append(details);
+    if (window.SmakoPersonal) article.append(window.SmakoPersonal.productActions(product));
     return article;
   }
   async function search(append = false) {

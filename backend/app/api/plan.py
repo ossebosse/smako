@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 from decimal import Decimal
@@ -19,6 +20,8 @@ from app.models import (
 )
 from app.services.beta_observability import pseudonymous_actor
 from app.services.meal_plan_optimizer import MealPlanService
+from app.services.personal_policy import PolicyConflict
+from app.services.personal_store import PersonalConflict
 from app.services.plan_mutation import (
     product_alternatives,
     replace_product,
@@ -83,6 +86,11 @@ def _store(http_request: Request | None = None) -> PlanStore:
 def _plan_actor_hash(http_request: Request, settings: Settings) -> str:
     """Return only the keyed capability derived by the request middleware."""
 
+    from app.api.account import verified_owner
+
+    account = verified_owner(http_request)
+    if account:
+        return account
     owner_actor_hash = pseudonymous_actor(
         getattr(http_request.state, "anonymous_session_id", None),
         settings,
@@ -107,9 +115,7 @@ def _plan_write_forbidden(
         )
     return HTTPException(
         status_code=403,
-        detail=(
-            "Planen kan bara ändras från den anonyma webbläsarsession som skapade den."
-        ),
+        detail=("Planen kan bara ändras från den anonyma webbläsarsession som skapade den."),
         headers={"X-Error-Code": "saved_plan_owner_required"},
     )
 
@@ -128,9 +134,7 @@ def _plan_read_forbidden(
         )
     return HTTPException(
         status_code=403,
-        detail=(
-            "Planen kan bara öppnas från den anonyma webbläsarsession som skapade den."
-        ),
+        detail=("Planen kan bara öppnas från den anonyma webbläsarsession som skapade den."),
         headers={"X-Error-Code": "saved_plan_owner_required"},
     )
 
@@ -180,9 +184,7 @@ def _planner_admission_key(request: PlanRequest, settings: Settings) -> str:
     )
     payload = {
         "request": request.model_dump(mode="json"),
-        "price_universe_id": (
-            prepared.universe.universe_id if prepared is not None else None
-        ),
+        "price_universe_id": (prepared.universe.universe_id if prepared is not None else None),
         "price_context_freshness_identity": freshness_identity,
         "pricing_date": current_pricing_date().isoformat(),
         # These process settings can change deterministic search semantics but
@@ -190,9 +192,7 @@ def _planner_admission_key(request: PlanRequest, settings: Settings) -> str:
         "planner": {
             "price_provider": settings.price_provider,
             "meal_plan_strategy": settings.meal_plan_strategy,
-            "stable_candidate_search_enabled": (
-                settings.stable_candidate_search_enabled
-            ),
+            "stable_candidate_search_enabled": (settings.stable_candidate_search_enabled),
             "stable_candidate_base_count": settings.stable_candidate_base_count,
             "stable_candidate_search_limit": settings.stable_candidate_search_limit,
             "allow_medium_semantic_matches": settings.allow_medium_semantic_matches,
@@ -217,6 +217,24 @@ async def _run_admitted_plan(
 ) -> PlanResponse:
     controller = _planner_admission(http_request, settings)
     key = _planner_admission_key(request, settings)
+    if request.personal is not None:
+        from app.services.personal_planner import PersonalPlanner
+        from app.services.personal_store import PersonalStore
+
+        owner = _plan_actor_hash(http_request, settings)
+        state = PersonalStore(_store(http_request)).read(owner)
+        prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(request.postal_code, {})
+        if prepared is None:
+            raise HTTPException(503, "Lokalt prisunderlag saknas.")
+        planner = PersonalPlanner(request, settings, prepared, state)
+        # Isolate admission/coalescing even when two owners choose equal fields.
+        return await _run_personal_work(
+            request,
+            http_request,
+            settings,
+            state["revision"],
+            lambda: asyncio.to_thread(planner.create),
+        )
     try:
         return await controller.run(
             key,
@@ -225,14 +243,27 @@ async def _run_admitted_plan(
     except PlannerAdmissionOverloaded as exc:
         raise HTTPException(
             status_code=503,
-            detail=(
-                "Det är många som skapar menyer just nu. "
-                "Försök igen om några sekunder."
-            ),
+            detail=("Det är många som skapar menyer just nu. Försök igen om några sekunder."),
             headers={
                 "Retry-After": "10",
                 "X-Error-Code": "planner_admission_full",
             },
+        ) from exc
+
+
+async def _run_personal_work(
+    request, http_request, settings, revision, work, *, operation="create"
+):
+    key = _planner_admission_key(request, settings)
+    owner = _plan_actor_hash(http_request, settings)
+    key = hashlib.sha256(f"{key}:{owner}:{revision}:{operation}".encode()).hexdigest()
+    try:
+        return await _planner_admission(http_request, settings).run(key, work)
+    except PlannerAdmissionOverloaded as exc:
+        raise HTTPException(
+            503,
+            "Det är många som beräknar korgar. Försök igen om några sekunder.",
+            headers={"Retry-After": "10"},
         ) from exc
 
 
@@ -245,6 +276,16 @@ def _with_release(plan: PlanResponse, settings: Settings) -> PlanResponse:
 
 
 def _consumer_request(request: PlanRequest) -> PlanRequest:
+    if request.personal is not None:
+        if request.max_stores > 3:
+            raise HTTPException(422, "Butikstaket gäller hela korgen och ska vara 1, 2 eller 3.")
+        if request.strategy == "legacy":
+            raise HTTPException(422, "Personlig planering använder den gemensamma optimeraren.")
+        if request.diet_preference.value not in {"mixed", "meat_allowed"} and any(
+            m.diet != request.diet_preference.value for m in request.personal.meals
+        ):
+            raise HTTPException(422, "Måltidernas kostval strider mot planens kostval.")
+        return request.model_copy(update={"strategy": "optimized", "debug": False})
     if request.recipes < 3:
         raise HTTPException(status_code=422, detail="consumer plans require 3-7 meals")
     if request.servings > 8:
@@ -264,6 +305,8 @@ def _production_consumer_request(
 
     if settings.app_env != "production":
         return request
+    if request.personal is not None:
+        return _consumer_request(request)
     exceeds_budget = (
         request.recipes < 3
         or request.servings > 8
@@ -271,10 +314,7 @@ def _production_consumer_request(
         or request.strategy == "legacy"
         or request.optimization_iterations > 1
         or request.candidate_recipe_count > 80
-        or (
-            request.candidate_search_limit is not None
-            and request.candidate_search_limit > 160
-        )
+        or (request.candidate_search_limit is not None and request.candidate_search_limit > 160)
         or request.beam_width > 30
         or request.debug
     )
@@ -372,12 +412,8 @@ def _annotate_freshness(saved: SavedPlan) -> SavedPlan:
     if not changed and callable(request_view):
         current_view = request_view(stale_age_hours=settings.max_price_age_hours)
         current_context_ids = frozenset(current_view.usable_context_ids)
-        saved_context_ids = {
-            group.store_id for group in saved.plan.optimized_basket.stores
-        }
-        unavailable_saved_context_ids = tuple(
-            sorted(saved_context_ids - current_context_ids)
-        )
+        saved_context_ids = {group.store_id for group in saved.plan.optimized_basket.stores}
+        unavailable_saved_context_ids = tuple(sorted(saved_context_ids - current_context_ids))
     coverage_changed = bool(unavailable_saved_context_ids)
     if changed:
         price_version_status = "newer_available"
@@ -429,9 +465,7 @@ def _plan_product_submission(
     group, item = matches[0]
     provenance = item.source_provenance
     price_snapshot_id = (
-        provenance.source_snapshot_id
-        if provenance is not None
-        else saved.price_universe_id
+        provenance.source_snapshot_id if provenance is not None else saved.price_universe_id
     )
     try:
         return CommunityEvidenceSubmission(
@@ -491,6 +525,8 @@ async def create_plan(
         if settings.price_universe_required:
             _assert_offline_plan(plan)
         return plan
+    except (PolicyConflict, PersonalConflict):
+        raise
     except IncompleteBasketError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except PriceProviderError as exc:
@@ -520,6 +556,8 @@ async def create_saved_plan(request: PlanRequest, http_request: Request) -> Save
                 owner_actor_hash=_plan_actor_hash(http_request, settings),
             )
         )
+    except (PolicyConflict, PersonalConflict):
+        raise
     except IncompleteBasketError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except PriceProviderError as exc:
@@ -584,6 +622,10 @@ async def replace_saved_product(
     owner_actor_hash = _plan_actor_hash(http_request, settings)
     try:
         saved = store.get_owned(plan_id, owner_actor_hash=owner_actor_hash)
+        if saved.plan.personal is not None:
+            raise ValueError(
+                "Använd planens personliga redigeringsflöde för en gemensam omberäkning."
+            )
         plan = replace_product(
             saved.plan,
             saved.request,
@@ -620,6 +662,10 @@ async def replace_saved_recipe(
     owner_actor_hash = _plan_actor_hash(http_request, settings)
     try:
         saved = store.get_owned(plan_id, owner_actor_hash=owner_actor_hash)
+        if saved.plan.personal is not None:
+            raise ValueError(
+                "Använd planens personliga redigeringsflöde för en gemensam omberäkning."
+            )
         plan = await replace_recipe(
             saved.plan,
             saved.request,

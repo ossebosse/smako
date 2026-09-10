@@ -1,0 +1,40 @@
+.personal-app {background: #f7f5ee; color: #173e35;}
+.personal-header,.personal-nav,.personal-app main,.personal-footer {max-width: 1060px; margin: auto; padding: 20px;}
+.personal-header {display:flex; justify-content:space-between; align-items:center; gap:16px;}
+.personal-header>span {font-size:.8rem; text-align:right;}
+.personal-nav {display:flex; flex-wrap:wrap; gap:6px; padding-top:0;}
+.personal-nav button {flex:1 1 120px; background:white; border:1px solid #d7ddd4; border-radius:12px; padding:12px 8px; color:#173e35; font-weight:700; cursor:pointer; min-height:48px;}
+.personal-nav button[aria-current] {color:white; background:#173e35;}
+.personal-app [hidden] {display:none!important;}
+.personal-app h1 {font-size:clamp(2rem,5vw,3.5rem); line-height:1.12; margin:16px 0;}
+.personal-app h2 {font-size:1.5rem; margin:24px 0 12px;}
+.personal-app p {line-height:1.55; margin:12px 0;}
+.personal-intro {padding:20px 0 32px; max-width:660px;}
+.personal-app fieldset,.personal-card {background:white; border:1px solid #d9dfd6; border-radius:18px; padding:20px; margin:18px 0; min-width:0;}
+.personal-app legend {font-weight:750; padding:0 8px;}
+.personal-app label {display:block; font-size:.9rem; font-weight:650; margin:12px 0;}
+.personal-app input:not([type=checkbox]),.personal-app textarea,.personal-app select {display:block; width:100%; max-width:100%; margin-top:6px; padding:12px; min-height:48px; border:1px solid #aebeb0; background:white; border-radius:8px; color:#173e35; font:inherit; box-sizing:border-box;}
+.personal-app textarea {min-height:82px; resize:vertical;}
+.personal-grid {display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 18px;}
+.personal-checks {display:flex; flex-wrap:wrap; gap:4px 18px;}
+.personal-app .check-label {display:flex; gap:10px; align-items:center;}
+.personal-app input[type=checkbox] {width:22px;height:22px;flex:none;}
+.personal-app .data-note {font-size:.85rem; background:#fff2d6; padding:12px; border-radius:8px; color:#694f16;}
+.personal-app button {white-space:normal; height:auto; min-height:44px; margin:4px 2px 4px 0;}
+.personal-actions {display:flex; flex-wrap:wrap; gap:6px;}
+.personal-total {font-size:2.3rem; font-weight:800; line-height:1.2;}
+.personal-app #shopping-content>.personal-total {font-size:1.8rem;}
+.personal-app details {margin:14px 0; padding:10px 0; border-top:1px solid #e1e5df;}
+.personal-app summary {cursor:pointer; font-weight:650; min-height:32px;}
+.personal-app .product-search {max-width:none; padding:0; margin:0;}
+.personal-app .product-result {min-width:0;}
+.personal-footer {display:flex; gap:18px; flex-wrap:wrap; padding-bottom:calc(30px + env(safe-area-inset-bottom, 0px)); font-size:.8rem;}
+#personal-status {border-radius:10px; padding:0; overflow-wrap:anywhere;}
+#personal-status:not(:empty) {padding:14px; background:#fff2d6; color:#603d13;}
+.personal-app dialog {color:#173e35; width:min(720px,calc(100% - 24px)); max-height:calc(100dvh - 24px); padding:20px; border:0; border-radius:18px; overflow:auto; box-sizing:border-box;}
+.personal-app dialog::backdrop {background:#153e3580;}
+.ingredient-edit {display:grid; grid-template-columns:minmax(100px,2fr) 1fr 1fr 44px; gap:6px; align-items:center;}
+.personal-app .ingredient-edit input {padding:8px;}
+.personal-app video {width:100%; max-height:50dvh; object-fit:cover;}
+.personal-app .small {font-size:.8rem; color:#55685b;}
+@media(max-width:560px) {.personal-header,.personal-nav,.personal-app main,.personal-footer {padding-left:14px;padding-right:14px;} .personal-grid{grid-template-columns:1fr;} .personal-app fieldset,.personal-card{padding:15px;} .personal-nav button{flex-basis:28%; font-size:.85rem;} .personal-app h1 {font-size:2.1rem;} .ingredient-edit{grid-template-columns:minmax(80px,2fr) 70px 65px 36px;} }

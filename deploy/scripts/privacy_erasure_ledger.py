@@ -36,7 +36,7 @@ _UNLINK_TARGETS = {
     "receipt_ingestion": "community_receipt_ingestions",
 }
 _SAVED_PLAN_TARGET = "saved_plan"
-_ALLOWED_TARGET_KINDS = frozenset((*_HARD_DELETE_TARGETS, *_UNLINK_TARGETS, _SAVED_PLAN_TARGET))
+_ALLOWED_TARGET_KINDS = frozenset((*_HARD_DELETE_TARGETS, *_UNLINK_TARGETS, _SAVED_PLAN_TARGET, "private_state"))
 _LEDGER_COLUMNS = {
     "id",
     "created_at",
@@ -411,6 +411,10 @@ def _apply_plan_directives(
         connection.execute("PRAGMA foreign_keys=ON")
         _database_integrity(connection, label="staged plan database before suppression")
         connection.execute("BEGIN IMMEDIATE")
+        if _table_exists(connection, "personal_private_state"):
+            for entry in entries:
+                if entry.target_kind == "private_state":
+                    connection.execute("DELETE FROM personal_private_state WHERE id = ?", (entry.target_record_id,))
         if _table_exists(connection, "consumer_plan_revisions"):
             for entry in entries:
                 if entry.target_kind == _SAVED_PLAN_TARGET:
@@ -503,6 +507,12 @@ def verify_deletion_ledger(
     )
     try:
         _database_integrity(connection, label="suppressed plan database")
+        if _table_exists(connection, "personal_private_state"):
+            for entry in validated:
+                if entry.target_kind == "private_state":
+                    if connection.execute("SELECT 1 FROM personal_private_state WHERE id = ?", (entry.target_record_id,)).fetchone():
+                        raise DeletionLedgerError("deleted private state reappeared")
+                    plan_checks += 1
         if _table_exists(connection, "consumer_plan_revisions"):
             for entry in validated:
                 if entry.target_kind != _SAVED_PLAN_TARGET:

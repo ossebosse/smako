@@ -1,0 +1,273 @@
+"""Owned guest workspace, bound to the existing HttpOnly capability."""
+
+from __future__ import annotations
+
+import asyncio
+
+from app.api.beta_ops import _require_same_origin
+from app.api.plan import _plan_actor_hash, _run_personal_work, _store, _with_release
+from app.config import get_settings
+from app.models.personal import (
+    PantryWrite,
+    PersonalMutation,
+    PersonalPlanning,
+    ProfileWrite,
+    TasteProfile,
+)
+from app.services.personal_planner import PersonalPlanner
+from app.services.personal_policy import (
+    PolicyConflict,
+    interpret_profile,
+    interpretation,
+    pantry_checks,
+)
+from app.services.personal_store import PersonalConflict, PersonalStore, available_items
+from app.services.plan_store import PlanNotFoundError, PlanOwnerMismatchError, PlanReadOnlyError
+from app.services.price_universe_runtime import GLOBAL_PREPARED_PRICE_UNIVERSES
+from fastapi import APIRouter, HTTPException, Request, Response
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
+
+router = APIRouter(prefix="/api/personal", tags=["private planning"])
+
+
+class TextInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    text: str = Field(max_length=2000)
+
+
+def context(request, response):
+    settings = get_settings()
+    _require_same_origin(request, settings)
+    response.headers["Cache-Control"] = "private, no-store"
+    store = _store(request)
+    return settings, store, _plan_actor_hash(request, settings)
+
+
+def public_state(state, request=None, profile=None):
+    from app.api.account import status
+
+    return {
+        "revision": state["revision"],
+        "profile": state["profile"],
+        "items": available_items(state),
+        "reservations": state["reservations"],
+        "events": state["events"],
+        "account": status(request),
+        "pantry_checks": pantry_checks(
+            state["items"], profile or TasteProfile.model_validate(state["profile"] or {})
+        ),
+    }
+
+
+@router.get("/state")
+def state(request: Request, response: Response):
+    _settings, plans, owner = context(request, response)
+    return public_state(PersonalStore(plans).read(owner), request)
+
+
+@router.post("/interpret-profile")
+def profile_interpret(payload: TextInput, request: Request, response: Response):
+    context(request, response)
+    return interpret_profile(payload.text)
+
+
+@router.post("/interpret-extra")
+def extra_interpret(payload: TextInput, request: Request, response: Response):
+    context(request, response)
+    return {
+        "query": payload.text.strip(),
+        "properties": interpretation(payload.text),
+        "confirmed": False,
+    }
+
+
+@router.put("/pantry")
+def pantry_update(payload: PantryWrite, request: Request, response: Response):
+    _settings, plans, owner = context(request, response)
+    if any(item.product_key for item in payload.items):
+        prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request("22350", {})
+        if prepared is None:
+            raise PolicyConflict(
+                "Exakta skafferivaror kräver lokalt produktunderlag.", code="DATA_BLOCKED"
+            )
+        for item in payload.items:
+            if not item.product_key:
+                continue
+            positions = prepared.product_search_index.groups.get(item.product_key, ())
+            if not positions:
+                raise PolicyConflict(
+                    "Den exakta skafferiprodukten saknas i underlaget. Behåll tidigare lager eller lägg till en generisk vara uttryckligen.",
+                    code="DATA_BLOCKED",
+                )
+            product = prepared.universe.products[positions[0]]
+            if product.usable_unit and item.unit != product.usable_unit:
+                raise PolicyConflict(
+                    f"{product.name}: verifierad lagerenhet är {product.usable_unit}; ingen omräkning till {item.unit} finns."
+                )
+            item.name = product.name
+    return public_state(
+        PersonalStore(plans).update_pantry(owner, payload.revision, payload.items),
+        request,
+        payload.profile,
+    )
+
+
+@router.put("/profile")
+def profile_update(payload: ProfileWrite, request: Request, response: Response):
+    _settings, plans, owner = context(request, response)
+    return public_state(
+        PersonalStore(plans).update_profile(owner, payload.revision, payload.profile), request
+    )
+
+
+@router.post("/plans/{plan_id}/change")
+async def change_plan(
+    plan_id: str, payload: PersonalMutation, request: Request, response: Response
+):
+    settings, plans, owner = context(request, response)
+    private = PersonalStore(plans)
+    try:
+        saved = plans.get_owned(plan_id, owner_actor_hash=owner)
+    except (PlanNotFoundError, PlanOwnerMismatchError, PlanReadOnlyError) as exc:
+        raise HTTPException(404, "Planen finns inte i din session.") from exc
+    if saved.plan.personal is None:
+        raise HTTPException(422, "Öppna den äldre planen i dess befintliga redigeringsflöde.")
+    state = private.read(owner)
+    if payload.action in {"purchase", "consume", "release"}:
+        if saved.revision != payload.revision and not state["events"].get(plan_id, {}).get(
+            payload.action
+        ):
+            raise PersonalConflict("Planrevisionen har ändrats. Läs om innan bokföring.")
+        state = private.inventory_action(owner, saved, payload.action, payload.pantry_revision)
+        return {"saved": saved, "state": public_state(state, request)}
+    if saved.revision != payload.revision:
+        raise PersonalConflict("Planen ändrades. Senaste fungerande resultat är bevarat.")
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(saved.request.postal_code, {})
+    if prepared is None:
+        raise HTTPException(503, "Lokalt prisunderlag saknas.")
+    spec = saved.request.personal.model_copy(deep=True)
+    spec.slots = [s.model_copy(deep=True) for s in saved.plan.personal.slots]
+    spec.pantry_revision = payload.pantry_revision
+    replace_slot = None
+    if payload.action in {"edit", "replace", "remove"}:
+        slot = next((s for s in spec.slots if s.id == payload.slot_id), None)
+        if slot is None:
+            raise HTTPException(422, "Måltidstillfället saknas.")
+        if payload.action == "edit":
+            if payload.recipe is None:
+                raise HTTPException(422, "Ett strukturerat recept krävs.")
+            slot.recipe = payload.recipe
+        elif payload.action == "remove":
+            slot.recipe = None
+        else:
+            replace_slot = slot.id
+    elif payload.action == "product":
+        if not payload.product_key or not payload.ingredient:
+            raise HTTPException(422, "Välj en identifierad produkt och inköpsrad.")
+        if payload.ingredient not in {n["key"] for n in saved.plan.personal.needs}:
+            raise HTTPException(422, "Inköpsraden finns inte i planen.")
+        spec.product_locks[payload.ingredient] = payload.product_key
+    elif payload.action == "extras":
+        if payload.extras is None:
+            raise HTTPException(422, "Extravaror saknas.")
+        spec.extras = payload.extras
+    elif payload.action == "add_recipe":
+        from uuid import uuid4
+
+        from app.models.personal import MealSettings, MealSlot
+
+        if payload.recipe is None:
+            raise HTTPException(422, "Välj ett recept till det nya tillfället.")
+        meal = next((m for m in spec.meals if m.meal_type == "dinner"), None)
+        if meal is None:
+            meal = MealSettings(count=0, servings=payload.recipe.servings)
+            spec.meals.append(meal)
+        if meal.count >= 7:
+            raise HTTPException(
+                422, "Planen har redan sju middagstillfällen. Byt ett befintligt recept."
+            )
+        meal.count += 1
+        spec.slots.append(
+            MealSlot(id=uuid4().hex, day=meal.count, meal_type="dinner", recipe=payload.recipe)
+        )
+    try:
+        spec = PersonalPlanning.model_validate(spec.model_dump())
+    except ValidationError as exc:
+        raise HTTPException(
+            422, "Ändringen strider mot antalet tillfällen eller vald fördelning."
+        ) from exc
+    plan_request = saved.request.model_copy(update={"personal": spec})
+    planner = PersonalPlanner(plan_request, settings, prepared, state, plan_id=plan_id)
+    plan = _with_release(
+        await _run_personal_work(
+            plan_request,
+            request,
+            settings,
+            state["revision"],
+            lambda: asyncio.to_thread(planner.create, replace_slot=replace_slot),
+            operation=f"{plan_id}:{saved.revision}:{payload.action}:{replace_slot}",
+        ),
+        settings,
+    )
+    saved = plans.append(
+        plan_id=plan_id,
+        request=plan_request,
+        response=plan,
+        operation="product_replaced" if payload.action == "product" else "recipe_replaced",
+        expected_parent=payload.revision,
+        owner_actor_hash=owner,
+    )
+    return {"saved": saved, "state": public_state(private.read(owner), request)}
+
+
+@router.get("/plans/{plan_id}/surplus-suggestions")
+async def surplus_suggestions(plan_id: str, request: Request, response: Response):
+    settings, plans, owner = context(request, response)
+    try:
+        saved = plans.get_owned(plan_id, owner_actor_hash=owner)
+    except (PlanNotFoundError, PlanOwnerMismatchError, PlanReadOnlyError) as exc:
+        raise HTTPException(404, "Planen finns inte i din session.") from exc
+    if not saved.plan.personal:
+        raise HTTPException(422, "Planen saknar personligt skafferiunderlag.")
+    state = PersonalStore(plans).read(owner)
+    spec = saved.request.personal.model_copy(update={"pantry_revision": state["revision"]})
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(saved.request.postal_code, {})
+    if prepared is None:
+        raise HTTPException(503, "Lokalt prisunderlag saknas.")
+    planner = PersonalPlanner(
+        saved.request.model_copy(update={"personal": spec}),
+        settings,
+        prepared,
+        state,
+        plan_id=plan_id,
+    )
+    return {
+        "suggestions": await _run_personal_work(
+            planner.request,
+            request,
+            settings,
+            state["revision"],
+            lambda: asyncio.to_thread(planner.surplus_suggestions, saved.plan),
+            operation=f"suggestions:{plan_id}:{saved.revision}",
+        )
+    }
+
+
+def install_handlers(app):
+    from fastapi.responses import JSONResponse
+
+    @app.exception_handler(PersonalConflict)
+    async def stale_personal(_request, exc):
+        return JSONResponse(
+            status_code=409,
+            content={"detail": str(exc), "code": "REVISION_CONFLICT"},
+            headers={"Cache-Control": "private, no-store"},
+        )
+
+    @app.exception_handler(PolicyConflict)
+    async def blocked_personal(_request, exc):
+        return JSONResponse(
+            status_code=422,
+            content={"detail": str(exc), "code": exc.code, "conflicts": exc.conflicts},
+            headers={"Cache-Control": "private, no-store"},
+        )

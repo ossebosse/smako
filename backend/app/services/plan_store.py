@@ -15,6 +15,8 @@ from pathlib import Path
 from uuid import uuid4
 
 from app.models import PlanRequest, PlanResponse, SavedPlan
+from app.services.personal_store import SCHEMA as PERSONAL_SCHEMA
+from app.services.personal_store import reserve_plan
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS consumer_plan_revisions (
@@ -77,6 +79,7 @@ class PlanStore:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self._connect() as connection:
             connection.executescript(_SCHEMA)
+            connection.executescript(PERSONAL_SCHEMA)
             existing = {
                 row["name"]
                 for row in connection.execute(
@@ -235,6 +238,10 @@ class PlanStore:
                 revision = current + 1
                 parent_revision = current
                 persisted_owner_actor_hash = row["owner_actor_hash"]
+            if response.personal is not None:
+                if not persisted_owner_actor_hash:
+                    raise PlanOwnerMismatchError("private planning requires an owner")
+                reserve_plan(connection, persisted_owner_actor_hash, plan_id, response.personal)
             connection.execute(
                 """
                 INSERT INTO consumer_plan_revisions (
@@ -390,6 +397,9 @@ class PlanStore:
                 WHERE owner_actor_hash = ?
                 """,
                 (owner_actor_hash,),
+            )
+            connection.execute(
+                "DELETE FROM personal_private_state WHERE owner_actor_hash = ?", (owner_actor_hash,)
             )
         return result
 

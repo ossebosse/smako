@@ -417,6 +417,8 @@ class ProductSearchIndex:
                 "name": product.name,
                 "brand": product.brand,
                 "package": _package_description(product),
+                "package_quantity": product.package_quantity,
+                "package_unit": product.package_unit,
                 "gtin": product.gtin if verified else None,
                 "identity_basis": "verified_gtin" if verified else "context_product",
                 "comparison_semantics": "same_product" if verified else "single_context_product",

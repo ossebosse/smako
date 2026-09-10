@@ -178,6 +178,7 @@ class BasketAuditor:
         basket: OptimizedBasket | StoreBasket | Sequence[BasketItem],
         *,
         user_pricing_context: UserPricingContext | None = None,
+        strategic_extras_allowed: bool = False,
     ) -> BasketAuditResult:
         concrete_items = _basket_items(basket)
         totals_reconciled, calculated_total, reported_total, total_errors = (
@@ -225,7 +226,8 @@ class BasketAuditor:
             row = purchased.setdefault(key, _Purchased())
             resolution = self.resolver.resolve(
                 self._semantics(item),
-                required_quantity=item.required_quantity,
+                required_quantity=item.required_quantity + (
+                    item.strategic_extra_quantity if strategic_extras_allowed else 0),
                 required_unit=item.unit,
             )
             reconciliation_error: str | None = None

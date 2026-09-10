@@ -113,7 +113,11 @@ services:
 
   app:
     <<: *app-image
-    environment: *app-environment
+    environment:
+      <<: *app-environment
+      SMAKO_OIDC_ISSUER_URL: ${SMAKO_OIDC_ISSUER_URL:-}
+      SMAKO_OIDC_CLIENT_ID: ${SMAKO_OIDC_CLIENT_ID:-}
+      SMAKO_OIDC_CLIENT_SECRET: ${SMAKO_OIDC_CLIENT_SECRET:-}
     depends_on:
       migrate:
         condition: service_completed_successfully

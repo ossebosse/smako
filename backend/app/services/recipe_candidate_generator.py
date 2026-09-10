@@ -443,6 +443,37 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
     def __init__(self) -> None:
         self._batch_statistics: dict[str, int] = {}
 
+    def generate_for_meal_type(self, economic_ingredients, meal_type, *, count=80, servings=4):
+        """Extend the existing generator with actual breakfast/snack preparations."""
+        if meal_type == "dinner":
+            return self.generate_candidates(economic_ingredients, count=count, servings=servings)
+        from app.models.recipe import RecipeIngredient
+
+        templates = {
+            "breakfast": [
+                ("Äggsmörgås med tomat", [("bröd", 80, "g"), ("ägg", 2, "st"), ("tomat", 100, "g")],
+                 ["Koka äggen, kyl dem och skala.", "Skiva ägg och tomat och lägg på brödet."]),
+                ("Ostsmörgås och mjölk", [("bröd", 80, "g"), ("ost", 30, "g"), ("mjölk", 200, "ml")],
+                 ["Skiva osten och lägg på brödet.", "Servera med mjölken."]),
+                ("Tofumacka med tomat", [("bröd", 80, "g"), ("tofu", 100, "g"), ("tomat", 100, "g")],
+                 ["Skiva tofun och stek den i en belagd panna.", "Lägg tofu och skivad tomat på brödet."]),
+            ],
+            "snack": [
+                ("Morotsstavar med ost", [("morot", 100, "g"), ("ost", 25, "g")],
+                 ["Skölj och skär moroten i stavar.", "Skär osten i bitar och servera till."]),
+                ("Ägg och tomat", [("ägg", 1, "st"), ("tomat", 80, "g")],
+                 ["Koka ägget, kyl och skala det.", "Dela tomaten och servera med ägget."]),
+                ("Kikärtsröra på bröd", [("kikärtor", 60, "g"), ("bröd", 40, "g"), ("tomat", 60, "g")],
+                 ["Mosa de kokta, avrunna kikärtorna.", "Bred på brödet och toppa med hackad tomat."]),
+            ],
+        }
+        if meal_type not in templates:
+            raise ValueError("Okänd måltidstyp.")
+        return [Recipe(name=name, servings=servings, ingredients=[
+            RecipeIngredient(name=n, quantity=q * servings, unit=u)
+            for n, q, u in ingredients
+        ], instructions=steps) for name, ingredients, steps in templates[meal_type]]
+
     @property
     def batch_statistics(self) -> dict[str, int]:
         return dict(self._batch_statistics)

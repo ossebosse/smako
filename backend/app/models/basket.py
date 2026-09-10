@@ -64,7 +64,7 @@ def worst_verification_status(
 class BasketItem(BaseModel):
     """The concrete packages bought for one aggregated ingredient."""
 
-    model_config = ConfigDict(frozen=True)
+    model_config = ConfigDict(frozen=True, allow_inf_nan=False)
 
     ingredient: str = Field(min_length=1)
     product_id: str = Field(min_length=1)
@@ -76,6 +76,7 @@ class BasketItem(BaseModel):
     store_id: str = Field(min_length=1)
     store_name: str = Field(min_length=1)
     required_quantity: float = Field(gt=0)
+    strategic_extra_quantity: float = Field(default=0, ge=0)
     unit: CanonicalUnit
     canonical_food: str | None = None
     food_family: str | None = None

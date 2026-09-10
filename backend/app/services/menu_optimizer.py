@@ -826,6 +826,52 @@ class MenuOptimizer:
             )
         ), RecipeProfileBuilder._structure(recipe))
 
+    def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12):
+        """Use the same complete-basket search discipline for typed meal slots.
+
+        ``evaluate`` aggregates ALL meal types, explicit extras and allocated stock
+        through BasketOptimizer. Nothing is priced as separate meal baskets. The
+        cache is request-local because stock, profile and locks are private inputs.
+        """
+        states = [([], None)]
+        cache = {}
+        errors = []
+        for index, options in enumerate(candidates_by_slot):
+            expanded = []
+            for chosen, _result in states:
+                for slot in options:
+                    slots = [*chosen, slot]
+                    final = index == len(candidates_by_slot) - 1
+                    if not accepts(slots, final=final):
+                        continue
+                    key = tuple((s.id, recipe_id(s.recipe) if s.recipe else None) for s in slots)
+                    try:
+                        if key not in cache:
+                            cache[key] = evaluate(slots, final=final)
+                        result = cache[key]
+                        expanded.append((slots, result))
+                    except (IncompleteBasketError, ValueError) as exc:
+                        if len(errors) < 12:
+                            errors.append(exc)
+            if not expanded:
+                if errors:
+                    raise errors[-1]
+                raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")
+            expanded.sort(key=lambda state: score(*state))
+            states = expanded[:beam_width]
+        if not candidates_by_slot:
+            return [], evaluate([], final=True)
+        return min(states, key=lambda state: score(*state))
+
+    def accepts_recipes(self, recipes, constraints):
+        classified = []
+        for recipe in recipes:
+            family, primary, carb, method, form = self._classify(recipe, constraints)
+            classified.append(_Candidate(recipe=recipe, profile=self._profile(recipe),
+                verification_rank=0, individual_total=Decimal(0), family=family,
+                primary_ingredient=primary, carbohydrate=carb, cooking_method=method, dish_form=form))
+        return self._satisfies_diversity(classified, constraints)
+
     def _mapping_value(self, mapping: Mapping[str, str], recipe: Recipe) -> str | None:
         direct = mapping.get(recipe.name)
         if direct:

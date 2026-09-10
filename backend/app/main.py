@@ -4,7 +4,10 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+from app.api.account import install_account
 from app.api.beta_ops import router as beta_ops_router
+from app.api.personal import install_handlers
+from app.api.personal import router as personal_router
 from app.api.plan import router as plan_router
 from app.api.product_search import router as product_search_router
 from app.config import Settings, get_settings
@@ -115,6 +118,9 @@ app = FastAPI(
 app.add_middleware(BetaRequestMiddleware, settings_factory=get_settings)
 app.include_router(plan_router)
 app.include_router(product_search_router)
+app.include_router(personal_router)
+install_handlers(app)
+install_account(app)
 app.include_router(beta_ops_router)
 install_community_evidence_api(
     app,
@@ -129,6 +135,11 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 @app.get("/", include_in_schema=False)
 async def index() -> FileResponse:
     return FileResponse(STATIC_DIR / "index.html")
+
+
+@app.get("/personal", include_in_schema=False)
+async def personal_planning_page() -> FileResponse:
+    return FileResponse(STATIC_DIR / "personal.html", headers={"Cache-Control": "no-cache"})
 
 
 @app.get("/manifest.webmanifest", include_in_schema=False)

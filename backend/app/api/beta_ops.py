@@ -532,10 +532,8 @@ def erase_anonymous_beta_data(
     local_session_id = validated.anonymous_session_id
     beta_actor_hash = pseudonymous_actor(local_session_id, settings)
     community_actor_hash = pseudonymous_actor_hash(local_session_id)
-    owner_actor_hash = pseudonymous_actor(
-        getattr(request.state, "anonymous_session_id", None),
-        settings,
-    )
+    from app.api.plan import _plan_actor_hash
+    owner_actor_hash = _plan_actor_hash(request, settings)
     if beta_actor_hash is None or owner_actor_hash is None:
         raise HTTPException(
             status_code=503,
@@ -619,6 +617,12 @@ def erase_anonymous_beta_data(
             )
         )
 
+    from app.services.personal_store import PersonalStore
+    private_state_id = PersonalStore(store).read(owner_actor_hash)["id"]
+    if private_state_id:
+        suppression_events_added += int(_add_suppression(
+            session, target_kind="private_state", target_record_id=private_state_id))
+
     for row in community_rows:
         # Evidence facts remain append-only. This narrowly scoped Core update
         # changes only the identity link and deliberately bypasses the ORM's
@@ -681,6 +685,8 @@ def erase_anonymous_beta_data(
         session.commit()
 
     request.state.suppress_beta_session_cookie = True
+    if "session" in request.scope:
+        request.session.clear()
     response.delete_cookie(
         "beta_session",
         path="/",

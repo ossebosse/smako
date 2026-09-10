@@ -11,6 +11,7 @@ from grocery_data.app.domain.promotion_pricing import MembershipProgram
 from .basket import OptimizedBasket, StoreBasket
 from .diversity import DiversityMode
 from .ingredient import NormalizedIngredient
+from .personal import PersonalPlanning, PersonalResult
 from .product import CheapIngredient
 from .quality import (
     DiversityRepetitionSummary,
@@ -43,8 +44,10 @@ class AvailabilityMode(StrEnum):
 
 
 class PlanRequest(BaseModel):
+    model_config = ConfigDict(allow_inf_nan=False)
     postal_code: str = "22350"
-    recipes: int = Field(default=5, ge=1, le=7)
+    recipes: int = Field(default=5, ge=0, le=7)
+    personal: PersonalPlanning | None = None
     servings: int = Field(default=4, ge=1, le=12)
     max_stores: int = Field(default=2, ge=1, le=4)
     use_member_prices: bool = False
@@ -346,6 +349,8 @@ class MembershipSavings(BaseModel):
 class PlanResponse(BaseModel):
     model_config = ConfigDict(frozen=True)
 
+    personal: PersonalResult | None = None
+
     app_version: str = Field(default="0.1.0", min_length=1, max_length=64)
     build_id: str = Field(default="local", min_length=1, max_length=128)
     location: str
@@ -362,7 +367,7 @@ class PlanResponse(BaseModel):
     single_store_options: list[StoreBasket]
     optimized_basket: OptimizedBasket
     optimization_scenarios: list[OptimizationScenario] = Field(default_factory=list)
-    portions: int = Field(gt=0)
+    portions: int = Field(ge=0)
     price_per_portion: float = Field(ge=0)
     data_source: str
     data: PlanPriceData | None = None

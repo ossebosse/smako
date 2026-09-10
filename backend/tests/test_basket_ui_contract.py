@@ -94,7 +94,9 @@ def test_diversity_premiums_use_the_worst_status_of_both_compared_plans() -> Non
     option_card = option_card[: option_card.index("function renderPlanOptions")]
     assert "diversityPremiumVerification(option, plans)" in option_card
     assert "appendVariationExplanation(button, option, mode, premiumVerification)" in option_card
-    assert 'displayBasketMoney(first(option, ["premium_vs_balanced"], 0)' in javascript
+    # The existing signed-delta presentation formats its magnitude separately.
+    assert 'const delta = first(option, ["premium_vs_balanced"], 0)' in javascript
+    assert 'displayBasketMoney(Math.abs(delta), verification)' in javascript
     assert "premiumVerification" in option_card
     assert 'formatMoney(first(option, ["premium_vs_cheapest"]' not in option_card
 
