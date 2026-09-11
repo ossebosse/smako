@@ -1,0 +1,942 @@
+{
+  "E": {
+    "settings": {
+      "postal_code": "22350",
+      "recipes": 0,
+      "personal": {
+        "profile": {
+          "likes": [],
+          "dislikes": [],
+          "exclusions": [],
+          "allergies": []
+        },
+        "meals": [
+          {
+            "meal_type": "breakfast",
+            "count": 1,
+            "servings": 2,
+            "diet": "mixed",
+            "profile": {
+              "likes": [],
+              "dislikes": [],
+              "exclusions": [],
+              "allergies": []
+            },
+            "distribution": {},
+            "limits": {
+              "min_weight_g": null,
+              "max_weight_g": null,
+              "min_protein_g": 15.0,
+              "max_protein_g": null,
+              "min_carbs_g": 30.0,
+              "max_carbs_g": 90.0,
+              "min_fat_g": 5.0,
+              "max_fat_g": 30.0,
+              "max_kcal": 600.0
+            },
+            "organic_animals": false
+          }
+        ],
+        "extras": [],
+        "slots": null,
+        "pantry_revision": 0,
+        "organic_percent": 30.0,
+        "organic_animals": false,
+        "surplus_mode": "minimize",
+        "product_locks": {}
+      },
+      "servings": 4,
+      "max_stores": 2,
+      "use_member_prices": false,
+      "memberships": {},
+      "membership_programs": [],
+      "optimization_iterations": 1,
+      "strategy": null,
+      "candidate_recipe_count": 80,
+      "candidate_search_limit": null,
+      "beam_width": 30,
+      "varied_budget_percent": 25.0,
+      "diversity_mode": "cheapest",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "max_same_primary_ingredient_meals": 2,
+      "max_same_recipe_family": 2,
+      "max_same_carbohydrate_meals": 3,
+      "max_pairwise_recipe_similarity": 0.7,
+      "max_same_cooking_method_meals": null,
+      "max_same_dish_form_meals": null,
+      "max_pairwise_culinary_similarity": null,
+      "min_kcal_per_serving": 450.0,
+      "max_kcal_per_serving": 900.0,
+      "min_protein_g_per_serving": 18.0,
+      "min_vegetable_g_per_serving": 100.0,
+      "debug": false
+    },
+    "plan": {
+      "personal": {
+        "version": "personal-v2-2",
+        "slots": [
+          {
+            "id": "breakfast-1",
+            "day": 1,
+            "meal_type": "breakfast",
+            "recipe": {
+              "name": "Ostsmörgås och mjölk",
+              "servings": 2,
+              "ingredients": [
+                {
+                  "name": "bröd",
+                  "quantity": 160.0,
+                  "unit": "g",
+                  "canonical_name": "bröd"
+                },
+                {
+                  "name": "ost",
+                  "quantity": 60.0,
+                  "unit": "g",
+                  "canonical_name": "ost"
+                },
+                {
+                  "name": "mjölk",
+                  "quantity": 400.0,
+                  "unit": "ml",
+                  "canonical_name": "mjölk"
+                }
+              ],
+              "instructions": [
+                "Skiva osten och lägg på brödet.",
+                "Servera med mjölken."
+              ]
+            }
+          }
+        ],
+        "pantry_revision": 0,
+        "allocations": [],
+        "future_surplus": [
+          {
+            "name": "bröd",
+            "product_name": "Liba Bröd Grov",
+            "product_key": "af822dddd6e46e24287ae68d5b284ce1",
+            "quantity": 180.0,
+            "unit": "g"
+          },
+          {
+            "name": "mjölk",
+            "product_name": "Getmjölk",
+            "product_key": "546442f2f06eb21b3bca667a6bcf6705",
+            "quantity": 600.0,
+            "unit": "ml"
+          },
+          {
+            "name": "ost",
+            "product_name": "Blåmögelost Organic blue Eko",
+            "product_key": "f0e33a0d0978b69cbb07850183c65be9",
+            "quantity": 90.0,
+            "unit": "g"
+          }
+        ],
+        "needs": [
+          {
+            "name": "bröd",
+            "quantity": 160.0,
+            "unit": "g",
+            "food": true,
+            "sources": [
+              "breakfast-1"
+            ],
+            "demand_keys": [
+              "e5f98e012dfe7b6b6e9f6426dde4fbe2cf6381471431f9644a0d33ee05018435"
+            ],
+            "key": "bröd [1]",
+            "selected_product_key": "af822dddd6e46e24287ae68d5b284ce1",
+            "unused_source_offers": []
+          },
+          {
+            "name": "ost",
+            "quantity": 60.0,
+            "unit": "g",
+            "food": true,
+            "sources": [
+              "breakfast-1"
+            ],
+            "demand_keys": [
+              "ca4778a629b0450d56cff41025f41b81927fce10fdbf10dae9352fff0dca0264"
+            ],
+            "key": "ost [2]",
+            "selected_product_key": "f0e33a0d0978b69cbb07850183c65be9",
+            "unused_source_offers": [
+              {
+                "kind": "multipack",
+                "description": "Dessertost 2 för 45kr-2 för 45:-",
+                "price": 45.0,
+                "required_packages": 2,
+                "max_quantity": null,
+                "price_contract_id": null,
+                "eligibility": "public",
+                "mechanism": "multibuy",
+                "membership_program": null,
+                "member_program": null,
+                "percent_discount": null,
+                "currency": "SEK",
+                "source_confidence": null,
+                "semantic_confidence": null,
+                "quantity_confidence": null,
+                "valid_from": "2026-09-06",
+                "valid_to": "2026-09-13"
+              }
+            ]
+          },
+          {
+            "name": "mjölk",
+            "quantity": 400.0,
+            "unit": "ml",
+            "food": true,
+            "sources": [
+              "breakfast-1"
+            ],
+            "demand_keys": [
+              "798e7c293c22fe6041c6bf9f0e7794a809fd79b943681c5b861e696f1d941279"
+            ],
+            "key": "mjölk [3]",
+            "selected_product_key": "546442f2f06eb21b3bca667a6bcf6705",
+            "unused_source_offers": []
+          }
+        ],
+        "checks": {
+          "purchase": "VERIFIED",
+          "allergy": "NOT_REQUESTED",
+          "nutrition": [
+            {
+              "slot_id": "breakfast-1",
+              "status": "VERIFIED",
+              "values": {
+                "protein_g": 18.54,
+                "carbs_g": 51.35,
+                "fat_g": 16.959999999999997,
+                "kcal": 445.7
+              },
+              "sources": [
+                {
+                  "source": "coop:raw:cf14e7b76b4a482eaa141c2763f1ad6d#results.items[6]:363c0877122057e803ebf492491b1bd4abdec8524e374201b2a51d72b34e5c4c",
+                  "product_id": "dd144109147842e693defe7f0a57496a",
+                  "unit": "g",
+                  "basis": "Produktdeklaration per 100 g; omräknad till 100 g",
+                  "quantity": 160.0,
+                  "origin": "purchase",
+                  "field_sources": {
+                    "nutrition.kcal": [
+                      {
+                        "source": "coop:raw:cf14e7b76b4a482eaa141c2763f1ad6d#results.items[6]:363c0877122057e803ebf492491b1bd4abdec8524e374201b2a51d72b34e5c4c",
+                        "product_id": "dd144109147842e693defe7f0a57496a",
+                        "source_product_id": "7393145093659",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:32:22.625763+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.fat_g": [
+                      {
+                        "source": "coop:raw:cf14e7b76b4a482eaa141c2763f1ad6d#results.items[6]:363c0877122057e803ebf492491b1bd4abdec8524e374201b2a51d72b34e5c4c",
+                        "product_id": "dd144109147842e693defe7f0a57496a",
+                        "source_product_id": "7393145093659",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:32:22.625763+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.carbs_g": [
+                      {
+                        "source": "coop:raw:cf14e7b76b4a482eaa141c2763f1ad6d#results.items[6]:363c0877122057e803ebf492491b1bd4abdec8524e374201b2a51d72b34e5c4c",
+                        "product_id": "dd144109147842e693defe7f0a57496a",
+                        "source_product_id": "7393145093659",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:32:22.625763+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.protein_g": [
+                      {
+                        "source": "coop:raw:cf14e7b76b4a482eaa141c2763f1ad6d#results.items[6]:363c0877122057e803ebf492491b1bd4abdec8524e374201b2a51d72b34e5c4c",
+                        "product_id": "dd144109147842e693defe7f0a57496a",
+                        "source_product_id": "7393145093659",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:32:22.625763+00:00",
+                        "market": "SE"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "source": "coop:raw:e3dade0935454addba3676a626d09f0f#results.items[2]:c0f7d4233214d2460077aec1f76f8bb26d82fed724d4786339a1f7c82931cfb6",
+                  "product_id": "3fbcac23cb0c4aa48f5d545419280d3e",
+                  "unit": "g",
+                  "basis": "Produktdeklaration per 100 g; omräknad till 100 g",
+                  "quantity": 60.0,
+                  "origin": "purchase",
+                  "field_sources": {
+                    "nutrition.kcal": [
+                      {
+                        "source": "coop:raw:e3dade0935454addba3676a626d09f0f#results.items[2]:c0f7d4233214d2460077aec1f76f8bb26d82fed724d4786339a1f7c82931cfb6",
+                        "product_id": "3fbcac23cb0c4aa48f5d545419280d3e",
+                        "source_product_id": "5740200001074",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:23:17.738944+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.fat_g": [
+                      {
+                        "source": "coop:raw:e3dade0935454addba3676a626d09f0f#results.items[2]:c0f7d4233214d2460077aec1f76f8bb26d82fed724d4786339a1f7c82931cfb6",
+                        "product_id": "3fbcac23cb0c4aa48f5d545419280d3e",
+                        "source_product_id": "5740200001074",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:23:17.738944+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.carbs_g": [
+                      {
+                        "source": "coop:raw:e3dade0935454addba3676a626d09f0f#results.items[2]:c0f7d4233214d2460077aec1f76f8bb26d82fed724d4786339a1f7c82931cfb6",
+                        "product_id": "3fbcac23cb0c4aa48f5d545419280d3e",
+                        "source_product_id": "5740200001074",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:23:17.738944+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.protein_g": [
+                      {
+                        "source": "coop:raw:e3dade0935454addba3676a626d09f0f#results.items[2]:c0f7d4233214d2460077aec1f76f8bb26d82fed724d4786339a1f7c82931cfb6",
+                        "product_id": "3fbcac23cb0c4aa48f5d545419280d3e",
+                        "source_product_id": "5740200001074",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:23:17.738944+00:00",
+                        "market": "SE"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "source": "coop:raw:15dd60fd200a4456935d85498b656e5a#results.items[3]:fabe81500d860e90c1777aa745b1f655f0bd4fd6f9885a662344cf042ee0421d",
+                  "product_id": "798b209193344898a4441680a1e78fc7",
+                  "unit": "ml",
+                  "basis": "Produktdeklaration per 100 ml; omräknad till 100 ml",
+                  "quantity": 400.0,
+                  "origin": "purchase",
+                  "field_sources": {
+                    "nutrition.kcal": [
+                      {
+                        "source": "coop:raw:15dd60fd200a4456935d85498b656e5a#results.items[3]:fabe81500d860e90c1777aa745b1f655f0bd4fd6f9885a662344cf042ee0421d",
+                        "product_id": "798b209193344898a4441680a1e78fc7",
+                        "source_product_id": "5202178083570",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:22:17.629754+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.fat_g": [
+                      {
+                        "source": "coop:raw:15dd60fd200a4456935d85498b656e5a#results.items[3]:fabe81500d860e90c1777aa745b1f655f0bd4fd6f9885a662344cf042ee0421d",
+                        "product_id": "798b209193344898a4441680a1e78fc7",
+                        "source_product_id": "5202178083570",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:22:17.629754+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.carbs_g": [
+                      {
+                        "source": "coop:raw:15dd60fd200a4456935d85498b656e5a#results.items[3]:fabe81500d860e90c1777aa745b1f655f0bd4fd6f9885a662344cf042ee0421d",
+                        "product_id": "798b209193344898a4441680a1e78fc7",
+                        "source_product_id": "5202178083570",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:22:17.629754+00:00",
+                        "market": "SE"
+                      }
+                    ],
+                    "nutrition.protein_g": [
+                      {
+                        "source": "coop:raw:15dd60fd200a4456935d85498b656e5a#results.items[3]:fabe81500d860e90c1777aa745b1f655f0bd4fd6f9885a662344cf042ee0421d",
+                        "product_id": "798b209193344898a4441680a1e78fc7",
+                        "source_product_id": "5202178083570",
+                        "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                        "observed_at": "2026-09-11T04:22:17.629754+00:00",
+                        "market": "SE"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "calculation_basis": {
+                "version": "cold-edible-assembly-v1",
+                "description": "Uppskattning från produktdeklarationer för uppmätta ätbara ingredienser, serverade utan värmning eller avrinning. Ingen tillagad vikt eller hållbarhet är verifierad.",
+                "method": "sum_declared_edible_as_sold",
+                "retention_factors": "not_needed_cold_assembly"
+              }
+            }
+          ],
+          "facts_version": "retained-catalog-facts-v2:a4283c8ba8ae5590d365808377efa00e2c6b2e2ae48d52f46d78fbddac756622",
+          "organic_cost_percent": 43.42362127867252,
+          "organic_evidence": {
+            "status": "CALCULATED",
+            "requested_percent": 30.0,
+            "lines": [
+              {
+                "product_id": "dd144109147842e693defe7f0a57496a",
+                "name": "Liba Bröd Grov",
+                "cost": 10.88,
+                "organic": null,
+                "sources": []
+              },
+              {
+                "product_id": "798b209193344898a4441680a1e78fc7",
+                "name": "Getmjölk",
+                "cost": 35.49,
+                "organic": null,
+                "sources": []
+              },
+              {
+                "product_id": "3fbcac23cb0c4aa48f5d545419280d3e",
+                "name": "Blåmögelost Organic blue Eko",
+                "cost": 35.59,
+                "organic": true,
+                "sources": [
+                  {
+                    "source": "coop:raw:e3dade0935454addba3676a626d09f0f#results.items[2]:c0f7d4233214d2460077aec1f76f8bb26d82fed724d4786339a1f7c82931cfb6",
+                    "product_id": "3fbcac23cb0c4aa48f5d545419280d3e",
+                    "source_product_id": "5740200001074",
+                    "snapshot_id": "5212155678224700951d40a63cc5b93e",
+                    "observed_at": "2026-09-11T04:23:17.738944+00:00",
+                    "market": "SE"
+                  }
+                ]
+              }
+            ],
+            "food_cost": 81.96,
+            "organic_food_cost": 35.59
+          },
+          "organic_animals": "NOT_REQUESTED",
+          "organic_definition": "Minst X % av matinköpets varukostnad ska vara verifierat ekologisk.",
+          "distribution": [
+            {
+              "meal_type": "breakfast",
+              "slot_id": "breakfast-1",
+              "protein": "vegetarian"
+            }
+          ],
+          "same_menu_comparisons": [
+            {
+              "max_stores": 1,
+              "status": "FEASIBLE",
+              "total": 81.96,
+              "stores": [
+                {
+                  "name": "Coop Online Syd",
+                  "total": 81.96
+                }
+              ]
+            }
+          ]
+        },
+        "cache_identity": "01ab6209f12185b3f416c8ce4e1f10a703f44fa308b6c66875608a5f6e64e69a",
+        "purchase_confirmed": false,
+        "consumption_confirmed": false,
+        "larger_purchase_cost": 0.0,
+        "empty_slots": 0,
+        "remaining_demands": [
+          {
+            "name": "bröd",
+            "quantity": 160.0,
+            "unit": "g",
+            "source": "breakfast-1",
+            "food": true,
+            "use_pantry": true,
+            "product_key": null,
+            "properties": [],
+            "demand_key": "e5f98e012dfe7b6b6e9f6426dde4fbe2cf6381471431f9644a0d33ee05018435",
+            "original_quantity": 160.0,
+            "purchase_key": "bröd [1]"
+          },
+          {
+            "name": "ost",
+            "quantity": 60.0,
+            "unit": "g",
+            "source": "breakfast-1",
+            "food": true,
+            "use_pantry": true,
+            "product_key": null,
+            "properties": [],
+            "demand_key": "ca4778a629b0450d56cff41025f41b81927fce10fdbf10dae9352fff0dca0264",
+            "original_quantity": 60.0,
+            "purchase_key": "ost [2]"
+          },
+          {
+            "name": "mjölk",
+            "quantity": 400.0,
+            "unit": "ml",
+            "source": "breakfast-1",
+            "food": true,
+            "use_pantry": true,
+            "product_key": null,
+            "properties": [],
+            "demand_key": "798e7c293c22fe6041c6bf9f0e7794a809fd79b943681c5b861e696f1d941279",
+            "original_quantity": 400.0,
+            "purchase_key": "mjölk [3]"
+          }
+        ],
+        "consumed_demands": [],
+        "available_surplus": []
+      },
+      "app_version": "0.1.0-smako-personal-v2-qualified-20260911b",
+      "build_id": "personal-v2-qualified-20260911b",
+      "location": "Lund",
+      "postal_code": "22350",
+      "strategy": "optimized",
+      "diversity_mode": "cheapest",
+      "membership_programs_used": [],
+      "membership_coverage": [],
+      "membership_savings": null,
+      "recipes": [
+        {
+          "name": "Ostsmörgås och mjölk",
+          "servings": 2,
+          "ingredients": [
+            {
+              "name": "bröd",
+              "quantity": 160.0,
+              "unit": "g",
+              "canonical_name": "bröd"
+            },
+            {
+              "name": "ost",
+              "quantity": 60.0,
+              "unit": "g",
+              "canonical_name": "ost"
+            },
+            {
+              "name": "mjölk",
+              "quantity": 400.0,
+              "unit": "ml",
+              "canonical_name": "mjölk"
+            }
+          ],
+          "instructions": [
+            "Skiva osten och lägg på brödet.",
+            "Servera med mjölken."
+          ]
+        }
+      ],
+      "recipe_costs": [],
+      "ingredients": [
+        {
+          "canonical_name": "bröd [1]",
+          "required_quantity": 160.0,
+          "unit": "g",
+          "display_name": "bröd [1]",
+          "source_recipes": [
+            "breakfast-1"
+          ]
+        },
+        {
+          "canonical_name": "ost [2]",
+          "required_quantity": 60.0,
+          "unit": "g",
+          "display_name": "ost [2]",
+          "source_recipes": [
+            "breakfast-1"
+          ]
+        },
+        {
+          "canonical_name": "mjölk [3]",
+          "required_quantity": 400.0,
+          "unit": "ml",
+          "display_name": "mjölk [3]",
+          "source_recipes": [
+            "breakfast-1"
+          ]
+        }
+      ],
+      "cheap_ingredients": [],
+      "single_store_options": [],
+      "optimized_basket": {
+        "total": 81.96,
+        "stores": [
+          {
+            "store_id": "context:coop:23eaae11c9661e68",
+            "store_name": "Coop Online Syd",
+            "items": [
+              {
+                "ingredient": "bröd [1]",
+                "product_id": "dd144109147842e693defe7f0a57496a",
+                "product_name": "Liba Bröd Grov",
+                "gtin": "7393145093659",
+                "chain": "coop",
+                "price_context_type": "online_fulfillment",
+                "coverage": "full_online_catalog",
+                "store_id": "context:coop:23eaae11c9661e68",
+                "store_name": "Coop Online Syd",
+                "required_quantity": 160.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "brod",
+                "food_family": null,
+                "product_role": null,
+                "product_form": null,
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 10.88,
+                "sale_unit": "st",
+                "comparison_price": 32.97,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 340.0,
+                "package_unit": "g",
+                "usable_quantity": 340.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 340.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 340.0,
+                "waste_quantity": 180.0,
+                "unit_price": 10.88,
+                "regular_unit_price": 10.88,
+                "price_contract_id": "price-contract:cc9e1215bc840f460232bd91",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 10.88,
+                "total_price": 10.88,
+                "regular_total_price": 10.88,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "5212155678224700951d40a63cc5b93e",
+                  "source_observed_at": "2026-09-11T04:32:22.625763Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "coop",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "provider_store_id": "730400",
+                  "price_context": "online_fulfillment",
+                  "coverage": "full_online_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact"
+                },
+                "membership_required": false,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "mjölk [3]",
+                "product_id": "798b209193344898a4441680a1e78fc7",
+                "product_name": "Getmjölk",
+                "gtin": "5202178083570",
+                "chain": "coop",
+                "price_context_type": "online_fulfillment",
+                "coverage": "full_online_catalog",
+                "store_id": "context:coop:23eaae11c9661e68",
+                "store_name": "Coop Online Syd",
+                "required_quantity": 400.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "ml",
+                "canonical_food": "milk",
+                "food_family": null,
+                "product_role": null,
+                "product_form": null,
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 35.49,
+                "sale_unit": "st",
+                "comparison_price": 35.49,
+                "comparison_unit": "l",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 1000.0,
+                "package_unit": "ml",
+                "usable_quantity": 1000.0,
+                "usable_unit": "ml",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 1000.0,
+                "purchased_unit": "ml",
+                "purchased_usable_quantity": 1000.0,
+                "waste_quantity": 600.0,
+                "unit_price": 35.49,
+                "regular_unit_price": 35.49,
+                "price_contract_id": "price-contract:84fad193b0f13b480c35965f",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 35.49,
+                "total_price": 35.49,
+                "regular_total_price": 35.49,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "5212155678224700951d40a63cc5b93e",
+                  "source_observed_at": "2026-09-11T04:22:17.629754Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "coop",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "provider_store_id": "730400",
+                  "price_context": "online_fulfillment",
+                  "coverage": "full_online_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact"
+                },
+                "membership_required": false,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "ost [2]",
+                "product_id": "3fbcac23cb0c4aa48f5d545419280d3e",
+                "product_name": "Blåmögelost Organic blue Eko",
+                "gtin": "5740200001074",
+                "chain": "coop",
+                "price_context_type": "online_fulfillment",
+                "coverage": "full_online_catalog",
+                "store_id": "context:coop:23eaae11c9661e68",
+                "store_name": "Coop Online Syd",
+                "required_quantity": 60.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "cheese",
+                "food_family": "dairy",
+                "product_role": "hard_cheese",
+                "product_form": "cheese",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_food:cheese",
+                  "visible_role:hard_cheese",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 35.59,
+                "sale_unit": "st",
+                "comparison_price": 237.27,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 150.0,
+                "package_unit": "g",
+                "usable_quantity": 150.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 150.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 150.0,
+                "waste_quantity": 90.0,
+                "unit_price": 35.59,
+                "regular_unit_price": 35.59,
+                "price_contract_id": "price-contract:3c8c9f08722ff7363de9c3ca",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 35.59,
+                "total_price": 35.59,
+                "regular_total_price": 35.59,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "5212155678224700951d40a63cc5b93e",
+                  "source_observed_at": "2026-09-11T04:23:17.738944Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "coop",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "provider_store_id": "730400",
+                  "price_context": "online_fulfillment",
+                  "coverage": "full_online_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact"
+                },
+                "membership_required": false,
+                "verification_status": "VERIFIED"
+              }
+            ],
+            "subtotal": 81.96,
+            "subtotal_reconciled": true
+          }
+        ],
+        "max_stores": 2,
+        "savings_vs_single_store": 0.0,
+        "verification_status": "VERIFIED",
+        "verification_warnings": [],
+        "total_reconciled": true,
+        "store_count": 1
+      },
+      "optimization_scenarios": [],
+      "portions": 2,
+      "price_per_portion": 40.98,
+      "data_source": "price-universe-offline",
+      "data": {
+        "price_universe_id": "price-universe:9ab6c58a4934c0a253e037c724d58fdcc8c84b484d26a87d2027be087e17b929",
+        "built_at": "2026-09-11T07:15:56.668911Z",
+        "pricing_timestamp": "2026-09-11T14:11:54.955406Z",
+        "snapshot_ids": [
+          "5212155678224700951d40a63cc5b93e",
+          "92040a7a47b043bfa02f8f696275decc",
+          "a8aebbc8d5a143f38d7897f69f280761",
+          "primat-request-d890a2f116254231ab9ce8f0884b5a66"
+        ],
+        "product_count": 2093,
+        "canonical_index_count": 56,
+        "oldest_price_age_hours": 12.271,
+        "status": "fresh",
+        "oldest_usable_price_age_hours": 12.271,
+        "usable_context_count": 6,
+        "excluded_stale_context_count": 0,
+        "excluded_stale_context_ids": [],
+        "compared_price_contexts": [
+          {
+            "context_id": "context:coop:23eaae11c9661e68",
+            "display_name": "Coop Online Syd",
+            "chain": "coop",
+            "price_context_type": "online_fulfillment",
+            "price_semantics": "online_price",
+            "price_scope_label": "Coop onlinepris",
+            "snapshot_ids": [
+              "5212155678224700951d40a63cc5b93e"
+            ],
+            "status": "compared"
+          },
+          {
+            "context_id": "context:hemkop:3288e04edd97e349",
+            "display_name": "Hemköp Lund Brunnshög",
+            "chain": "hemkop",
+            "price_context_type": "online_store",
+            "price_semantics": "online_price",
+            "price_scope_label": "Onlinepris",
+            "snapshot_ids": [
+              "92040a7a47b043bfa02f8f696275decc"
+            ],
+            "status": "compared"
+          },
+          {
+            "context_id": "context:ica:979e70ce1f577bc4",
+            "display_name": "ICA Kvantum Malmborgs Clemenstorget",
+            "chain": "ica",
+            "price_context_type": "physical_store",
+            "price_semantics": null,
+            "price_scope_label": "butikskopplad prisdata",
+            "snapshot_ids": [
+              "primat-request-d890a2f116254231ab9ce8f0884b5a66"
+            ],
+            "status": "compared"
+          },
+          {
+            "context_id": "context:ica:46850f1523580803",
+            "display_name": "Maxi ICA Stormarknad Gunnesbo, Lund",
+            "chain": "ica",
+            "price_context_type": "physical_store",
+            "price_semantics": null,
+            "price_scope_label": "butikskopplad prisdata",
+            "snapshot_ids": [
+              "primat-request-d890a2f116254231ab9ce8f0884b5a66"
+            ],
+            "status": "compared"
+          },
+          {
+            "context_id": "context:willys:383650ec6ff5a636",
+            "display_name": "Willys Lund",
+            "chain": "willys",
+            "price_context_type": "online_store",
+            "price_semantics": "online_price",
+            "price_scope_label": "Onlinepris",
+            "snapshot_ids": [
+              "a8aebbc8d5a143f38d7897f69f280761"
+            ],
+            "status": "compared"
+          },
+          {
+            "context_id": "context:willys:4a671428fc484e43",
+            "display_name": "Willys Lund Nova",
+            "chain": "willys",
+            "price_context_type": "online_store",
+            "price_semantics": "online_price",
+            "price_scope_label": "Onlinepris",
+            "snapshot_ids": [
+              "a8aebbc8d5a143f38d7897f69f280761"
+            ],
+            "status": "compared"
+          }
+        ],
+        "excluded_price_contexts": [],
+        "cache_state": null,
+        "live_chain_requests": 0
+      },
+      "source_diagnostics": [],
+      "recipe_source": "deterministic-candidates+personal-planning",
+      "warnings": [
+        "Köpkostnaden avser hela förpackningar. Näring, allergener och eko är separata kontroller.",
+        "Kontosynk kräver verifierad inloggning. Gästläget är privat för denna webbläsarsession.",
+        "Kampanjgrupper används bara när källa och deltagande produktidentiteter är uttryckliga."
+      ],
+      "attribution_text": null,
+      "attribution_url": null,
+      "optimization_iterations_attempted": 0,
+      "optimization_iterations_accepted": 0,
+      "optimization": null,
+      "legacy_comparison": null,
+      "quality": null,
+      "surplus": null,
+      "store_tradeoff": null,
+      "plans": {},
+      "diversity_plan_errors": {},
+      "debug_info": null
+    }
+  },
+  "D": {
+    "detail": "Tofumacka med tomat: verifierat tillagningsutbyte/ätbar tillagad vikt saknas.",
+    "code": "DATA_BLOCKED",
+    "conflicts": [
+      "Tofumacka med tomat: verifierat tillagningsutbyte/ätbar tillagad vikt saknas."
+    ]
+  }
+}
