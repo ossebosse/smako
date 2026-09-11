@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
+import json
 
 from app.api.beta_ops import _require_same_origin
 from app.api.plan import _plan_actor_hash, _run_personal_work, _store, _with_release
@@ -52,6 +54,7 @@ def public_state(state, request=None, profile=None):
         "items": available_items(state),
         "reservations": state["reservations"],
         "events": state["events"],
+        "ledger": state.get("ledger", []),
         "account": status(request),
         "pantry_checks": pantry_checks(
             state["items"], profile or TasteProfile.model_validate(state["profile"] or {})
@@ -133,21 +136,40 @@ async def change_plan(
     if saved.plan.personal is None:
         raise HTTPException(422, "Öppna den äldre planen i dess befintliga redigeringsflöde.")
     state = private.read(owner)
+    mutation_key = hashlib.sha256(
+        json.dumps([plan_id, payload.model_dump(mode="json")], sort_keys=True).encode()
+    ).hexdigest()
+    prior = state.get("mutations", {}).get(mutation_key)
+    if prior:
+        return {
+            "saved": plans.get_owned(plan_id, owner_actor_hash=owner, revision=prior),
+            "state": public_state(state, request),
+        }
     if payload.action in {"purchase", "consume", "release"}:
-        if saved.revision != payload.revision and not state["events"].get(plan_id, {}).get(
-            payload.action
-        ):
-            raise PersonalConflict("Planrevisionen har ändrats. Läs om innan bokföring.")
-        state = private.inventory_action(owner, saved, payload.action, payload.pantry_revision)
+        try:
+            target = plans.get_owned(plan_id, owner_actor_hash=owner, revision=payload.revision)
+        except PlanNotFoundError as exc:
+            raise PersonalConflict("Planrevisionen finns inte. Läs om planen.") from exc
+        state = private.inventory_action(
+            owner,
+            target,
+            payload.action,
+            payload.pantry_revision,
+            operation_id=payload.operation_id,
+            consume_fraction=payload.consume_fraction,
+        )
         return {"saved": saved, "state": public_state(state, request)}
     if saved.revision != payload.revision:
         raise PersonalConflict("Planen ändrades. Senaste fungerande resultat är bevarat.")
+    if payload.pantry_revision != state["revision"]:
+        raise PersonalConflict("Skafferiet ändrades. Läs om innan ändring.")
+    state = private.prepare_revision(owner, saved)
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(saved.request.postal_code, {})
     if prepared is None:
         raise HTTPException(503, "Lokalt prisunderlag saknas.")
     spec = saved.request.personal.model_copy(deep=True)
     spec.slots = [s.model_copy(deep=True) for s in saved.plan.personal.slots]
-    spec.pantry_revision = payload.pantry_revision
+    spec.pantry_revision = state["revision"]
     replace_slot = None
     if payload.action in {"edit", "replace", "remove"}:
         slot = next((s for s in spec.slots if s.id == payload.slot_id), None)
@@ -161,6 +183,17 @@ async def change_plan(
             slot.recipe = None
         else:
             replace_slot = slot.id
+    elif payload.action == "restore_revision":
+        if payload.restore_revision is None:
+            raise HTTPException(422, "Välj en historisk planrevision.")
+        try:
+            historic = plans.get_owned(plan_id, owner_actor_hash=owner, revision=payload.restore_revision)
+        except PlanNotFoundError as exc:
+            raise PersonalConflict("Den historiska revisionen finns inte.") from exc
+        if historic.plan.personal is None:
+            raise HTTPException(422, "Revisionen saknar personligt planunderlag.")
+        # Restore recipe content only; current confirmed policies/extras remain binding.
+        spec.slots = [s.model_copy(deep=True) for s in historic.plan.personal.slots]
     elif payload.action == "product":
         if not payload.product_key or not payload.ingredient:
             raise HTTPException(422, "Välj en identifierad produkt och inköpsrad.")
@@ -216,6 +249,7 @@ async def change_plan(
         operation="product_replaced" if payload.action == "product" else "recipe_replaced",
         expected_parent=payload.revision,
         owner_actor_hash=owner,
+        mutation_key=mutation_key,
     )
     return {"saved": saved, "state": public_state(private.read(owner), request)}
 
@@ -254,7 +288,16 @@ async def surplus_suggestions(plan_id: str, request: Request, response: Response
 
 
 def install_handlers(app):
+    from app.services.basket_calculator import GroupPricingError
     from fastapi.responses import JSONResponse
+
+    @app.exception_handler(GroupPricingError)
+    async def blocked_group(_request, _exc):
+        return JSONResponse(
+            status_code=422,
+            content={"detail": "Kampanjgruppens underlag eller kombination kan inte verifieras. Senaste fungerande plan är bevarad. Välj andra varor eller gå tillbaka.", "code": "DATA_BLOCKED"},
+            headers={"Cache-Control": "private, no-store"},
+        )
 
     @app.exception_handler(PersonalConflict)
     async def stale_personal(_request, exc):

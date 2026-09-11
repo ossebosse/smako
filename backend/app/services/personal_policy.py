@@ -1,7 +1,7 @@
 """Deterministic personal constraints, with explicit evidence gaps.
 
-The production catalog currently carries none of the facts below. Test fixtures
-may supply source-backed facts; caller-supplied recipes can never supply them.
+Retained catalog evidence supplies a subset of these facts. Missing evidence
+remains unknown; caller-supplied recipes can never certify product facts.
 No generated narrative, product name or brand is ecological/nutrition evidence.
 """
 
@@ -168,6 +168,12 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
         if _contains(term, (product.name, product.canonical_name)):
             raise PolicyConflict(f"{product.name} strider mot ditt hårda val: {term}.")
     if hard:
+        if facts and facts.ingredients:
+            for term in hard:
+                if _contains(term, facts.ingredients):
+                    raise PolicyConflict(
+                        f"{product.name}: produktdeklarationen anger {term}, som strider mot ditt hårda val."
+                    )
         unknown = [a for a in profile.allergies if a not in ALLERGENS]
         if unknown:
             raise PolicyConflict(

@@ -62,6 +62,35 @@ class OfferKind(StrEnum):
     MULTIPACK = "multipack"
 
 
+class PromotionGroup(BaseModel):
+    """Explicit source group. No name/category-derived eligibility is permitted."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid", allow_inf_nan=False)
+    group_id: str = Field(min_length=1, max_length=255)
+    chain: str = Field(min_length=1)
+    store_id: str = Field(min_length=1)
+    eligible_product_ids: tuple[str, ...] = Field(min_length=1, max_length=500)
+    required_packages: int = Field(ge=2, le=100)
+    pricing_rule: Literal["fixed_total", "group_discount"]
+    amount: float = Field(gt=0)
+    valid_from: date
+    valid_to: date
+    membership_program: MembershipProgram | None = None
+    max_groups: int | None = Field(default=None, ge=1)
+    source: str = Field(min_length=1)
+    source_snapshot_id: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def valid_group(self):
+        if self.valid_from > self.valid_to:
+            raise ValueError("Invalid group validity window")
+        if len(set(self.eligible_product_ids)) != len(self.eligible_product_ids):
+            raise ValueError("Duplicate eligible product identity")
+        if self.membership_program and self.membership_program.chain != self.chain:
+            raise ValueError("Group membership and retailer differ")
+        return self
+
+
 class OfferMetadata(BaseModel):
     """A compact normalized price contract stored inside PriceUniverse.
 
@@ -110,9 +139,7 @@ class OfferMetadata(BaseModel):
         explicit_program = data.get("membership_program")
         if explicit_program is None and member_label:
             try:
-                data["membership_program"] = MembershipProgram.from_value(
-                    str(member_label)
-                )
+                data["membership_program"] = MembershipProgram.from_value(str(member_label))
             except ValueError:
                 # Preserve unknown source wording as provenance, but never turn
                 # it into request-time eligibility.
@@ -290,6 +317,7 @@ class Product(ProductSemantics):
     )
     member_price: float | None = Field(default=None, gt=0)
     offers: list[OfferMetadata] = Field(default_factory=list)
+    promotion_groups: tuple[PromotionGroup, ...] = Field(default=(), exclude_if=lambda v: not v)
     brand: str | None = None
     chain: str | None = Field(default=None, min_length=1)
     gtin: str | None = Field(default=None, pattern=r"^\d{8,14}$")
@@ -395,6 +423,7 @@ class ProductCandidate(ProductSemantics):
     selected_membership_program: MembershipProgram | None = None
     match_score: float = Field(ge=0, le=1)
     offers: list[OfferMetadata] = Field(default_factory=list)
+    promotion_groups: tuple[PromotionGroup, ...] = Field(default=(), exclude_if=lambda v: not v)
     category: str | None = None
     chain: str | None = Field(default=None, min_length=1)
     gtin: str | None = Field(default=None, pattern=r"^\d{8,14}$")
@@ -433,6 +462,7 @@ class ProductCandidate(ProductSemantics):
             ),
             match_score=match_score,
             offers=product.offers,
+            promotion_groups=product.promotion_groups,
             category=product.category,
             chain=product.chain,
             gtin=product.gtin,

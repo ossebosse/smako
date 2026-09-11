@@ -16,7 +16,7 @@ from uuid import uuid4
 
 from app.models import PlanRequest, PlanResponse, SavedPlan
 from app.services.personal_store import SCHEMA as PERSONAL_SCHEMA
-from app.services.personal_store import reserve_plan
+from app.services.personal_store import PersonalConflict, read_state, reserve_plan, write_state
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS consumer_plan_revisions (
@@ -186,6 +186,7 @@ class PlanStore:
         operation: str,
         expected_parent: int,
         owner_actor_hash: str | None,
+        mutation_key: str | None = None,
     ) -> SavedPlan:
         return self._append(
             plan_id=plan_id,
@@ -194,6 +195,7 @@ class PlanStore:
             operation=operation,
             expected_parent=expected_parent,
             owner_actor_hash=owner_actor_hash,
+            mutation_key=mutation_key,
         )
 
     def _append(
@@ -205,6 +207,7 @@ class PlanStore:
         operation: str,
         expected_parent: int | None,
         owner_actor_hash: str | None,
+        mutation_key: str | None = None,
     ) -> SavedPlan:
         self._validate_owner_actor_hash(owner_actor_hash)
         response = self._consumer_safe_response(response)
@@ -212,6 +215,13 @@ class PlanStore:
         price_universe_id = response.data.price_universe_id if response.data else None
         with self._connect() as connection:
             connection.execute("BEGIN IMMEDIATE")
+            if mutation_key and owner_actor_hash:
+                state = read_state(connection, owner_actor_hash)
+                prior = state.get("mutations", {}).get(mutation_key)
+                if prior:
+                    return self.get_owned(
+                        plan_id, owner_actor_hash=owner_actor_hash, revision=prior
+                    )
             row = connection.execute(
                 """
                 SELECT revision, owner_actor_hash
@@ -234,6 +244,8 @@ class PlanStore:
                     raise PlanNotFoundError(plan_id)
                 self._assert_owner(row["owner_actor_hash"], owner_actor_hash)
                 if current != expected_parent:
+                    if response.personal:
+                        raise PersonalConflict("Planrevisionen har ändrats. Läs om innan ändring.")
                     raise ValueError("plan revision changed; reload before updating")
                 revision = current + 1
                 parent_revision = current
@@ -242,6 +254,10 @@ class PlanStore:
                 if not persisted_owner_actor_hash:
                     raise PlanOwnerMismatchError("private planning requires an owner")
                 reserve_plan(connection, persisted_owner_actor_hash, plan_id, response.personal)
+                if mutation_key:
+                    state = read_state(connection, persisted_owner_actor_hash)
+                    state.setdefault("mutations", {})[mutation_key] = revision
+                    write_state(connection, persisted_owner_actor_hash, state, state["revision"])
             connection.execute(
                 """
                 INSERT INTO consumer_plan_revisions (

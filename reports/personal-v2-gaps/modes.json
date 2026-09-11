@@ -1,0 +1,363 @@
+[
+  {
+    "mode": "cheapest",
+    "status": "PASS",
+    "seconds": 21.675,
+    "total": 139.04,
+    "recipes": [
+      "Stekt ris med falukorv och morot",
+      "Stekt ris med kyckling och morot",
+      "Stekt ris med tofu och morot"
+    ]
+  },
+  {
+    "mode": "balanced",
+    "status": "PASS",
+    "seconds": 16.726,
+    "total": 163.92,
+    "recipes": [
+      "Gryta med korv, nudlar och morot",
+      "Nudlar med korv och r\u00f6dl\u00f6k",
+      "Stekt ris med tofu och morot"
+    ]
+  },
+  {
+    "mode": "varied",
+    "status": "PASS",
+    "seconds": 29.247,
+    "total": 167.9,
+    "recipes": [
+      "Stekt ris med tofu och morot",
+      "Stekt korv med potatis och morot",
+      "Ugnspl\u00e5t med korv, potatis och gul l\u00f6k"
+    ]
+  },
+  {
+    "comparison": {
+      "policy_version": "balanced-conditioned-v1",
+      "balanced_reference_identity": [
+        "074b3018fe856ce0def9",
+        "593daac1520908e56da9",
+        "a422d74815c87e9bb576"
+      ],
+      "required_changes": 2,
+      "dinner_count": 3,
+      "exact_overlap_count": 1,
+      "structurally_different_dinners": 2,
+      "target_met": true,
+      "near_duplicate_threshold": 0.85,
+      "dinners": [
+        {
+          "recipe": "Stekt ris med tofu och morot",
+          "exact_overlap": true,
+          "structurally_changed": false,
+          "nearest_balanced_recipe": "Stekt ris med tofu och morot",
+          "distance_from_nearest": 0.0,
+          "profile": {
+            "recipe_name": "Stekt ris med tofu och morot",
+            "recipe_family": "panna",
+            "cooking_method": "pan_cook",
+            "dish_form": "one_pan_hash",
+            "primary_protein": "tofu",
+            "primary_carb": "ris",
+            "sauce_base": null,
+            "vegetables": [
+              "gul l\u00f6k",
+              "morot"
+            ],
+            "major_ingredients": [
+              "gul l\u00f6k",
+              "morot",
+              "ris",
+              "tofu"
+            ],
+            "ingredient_weights": [
+              [
+                "gul l\u00f6k",
+                2.0
+              ],
+              [
+                "morot",
+                2.0
+              ],
+              [
+                "ris",
+                4.0
+              ],
+              [
+                "tofu",
+                4.0
+              ]
+            ]
+          },
+          "comparisons": [
+            {
+              "left_recipe": "Stekt ris med tofu och morot",
+              "right_recipe": "Gryta med korv, nudlar och morot",
+              "score": 0.05217391304347826,
+              "is_high_similarity": false,
+              "components": {
+                "ingredient": 0.17391304347826086,
+                "family": 0.0,
+                "cooking": 0.0,
+                "dish": 0.0,
+                "carb": 0.0,
+                "protein": 0.0,
+                "sauce": 0.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k",
+                "morot"
+              ]
+            },
+            {
+              "left_recipe": "Stekt ris med tofu och morot",
+              "right_recipe": "Nudlar med korv och r\u00f6dl\u00f6k",
+              "score": 0.5272727272727273,
+              "is_high_similarity": false,
+              "components": {
+                "ingredient": 0.09090909090909091,
+                "family": 1.0,
+                "cooking": 1.0,
+                "dish": 1.0,
+                "carb": 0.0,
+                "protein": 0.0,
+                "sauce": 1.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k"
+              ]
+            },
+            {
+              "left_recipe": "Stekt ris med tofu och morot",
+              "right_recipe": "Stekt ris med tofu och morot",
+              "score": 1.0,
+              "is_high_similarity": true,
+              "components": {
+                "ingredient": 1.0,
+                "family": 1.0,
+                "cooking": 1.0,
+                "dish": 1.0,
+                "carb": 1.0,
+                "protein": 1.0,
+                "sauce": 1.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k",
+                "morot",
+                "ris",
+                "tofu"
+              ]
+            }
+          ]
+        },
+        {
+          "recipe": "Stekt korv med potatis och morot",
+          "exact_overlap": false,
+          "structurally_changed": true,
+          "nearest_balanced_recipe": "Nudlar med korv och r\u00f6dl\u00f6k",
+          "distance_from_nearest": 0.6499999999999999,
+          "profile": {
+            "recipe_name": "Stekt korv med potatis och morot",
+            "recipe_family": "potatisr\u00e4tt",
+            "cooking_method": "pan_cook",
+            "dish_form": "potato_plate",
+            "primary_protein": "korv",
+            "primary_carb": "potatis",
+            "sauce_base": null,
+            "vegetables": [
+              "gul l\u00f6k",
+              "morot"
+            ],
+            "major_ingredients": [
+              "gul l\u00f6k",
+              "korv",
+              "morot",
+              "potatis"
+            ],
+            "ingredient_weights": [
+              [
+                "gul l\u00f6k",
+                2.0
+              ],
+              [
+                "korv",
+                4.0
+              ],
+              [
+                "morot",
+                2.0
+              ],
+              [
+                "potatis",
+                4.0
+              ]
+            ]
+          },
+          "comparisons": [
+            {
+              "left_recipe": "Stekt korv med potatis och morot",
+              "right_recipe": "Gryta med korv, nudlar och morot",
+              "score": 0.2263157894736842,
+              "is_high_similarity": false,
+              "components": {
+                "ingredient": 0.42105263157894735,
+                "family": 0.0,
+                "cooking": 0.0,
+                "dish": 0.0,
+                "carb": 0.0,
+                "protein": 1.0,
+                "sauce": 0.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k",
+                "korv",
+                "morot"
+              ]
+            },
+            {
+              "left_recipe": "Stekt korv med potatis och morot",
+              "right_recipe": "Nudlar med korv och r\u00f6dl\u00f6k",
+              "score": 0.35000000000000003,
+              "is_high_similarity": false,
+              "components": {
+                "ingredient": 0.3333333333333333,
+                "family": 0.0,
+                "cooking": 1.0,
+                "dish": 0.0,
+                "carb": 0.0,
+                "protein": 1.0,
+                "sauce": 1.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k",
+                "korv"
+              ]
+            },
+            {
+              "left_recipe": "Stekt korv med potatis och morot",
+              "right_recipe": "Stekt ris med tofu och morot",
+              "score": 0.21000000000000002,
+              "is_high_similarity": false,
+              "components": {
+                "ingredient": 0.2,
+                "family": 0.0,
+                "cooking": 1.0,
+                "dish": 0.0,
+                "carb": 0.0,
+                "protein": 0.0,
+                "sauce": 1.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k",
+                "morot"
+              ]
+            }
+          ]
+        },
+        {
+          "recipe": "Ugnspl\u00e5t med korv, potatis och gul l\u00f6k",
+          "exact_overlap": false,
+          "structurally_changed": true,
+          "nearest_balanced_recipe": "Nudlar med korv och r\u00f6dl\u00f6k",
+          "distance_from_nearest": 0.75,
+          "profile": {
+            "recipe_name": "Ugnspl\u00e5t med korv, potatis och gul l\u00f6k",
+            "recipe_family": "ugn",
+            "cooking_method": "oven",
+            "dish_form": "oven_tray",
+            "primary_protein": "korv",
+            "primary_carb": "potatis",
+            "sauce_base": null,
+            "vegetables": [
+              "gul l\u00f6k",
+              "tomat"
+            ],
+            "major_ingredients": [
+              "gul l\u00f6k",
+              "korv",
+              "potatis",
+              "tomat"
+            ],
+            "ingredient_weights": [
+              [
+                "gul l\u00f6k",
+                2.0
+              ],
+              [
+                "korv",
+                4.0
+              ],
+              [
+                "potatis",
+                4.0
+              ],
+              [
+                "tomat",
+                2.0
+              ]
+            ]
+          },
+          "comparisons": [
+            {
+              "left_recipe": "Ugnspl\u00e5t med korv, potatis och gul l\u00f6k",
+              "right_recipe": "Gryta med korv, nudlar och morot",
+              "score": 0.18571428571428572,
+              "is_high_similarity": false,
+              "components": {
+                "ingredient": 0.2857142857142857,
+                "family": 0.0,
+                "cooking": 0.0,
+                "dish": 0.0,
+                "carb": 0.0,
+                "protein": 1.0,
+                "sauce": 0.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k",
+                "korv"
+              ]
+            },
+            {
+              "left_recipe": "Ugnspl\u00e5t med korv, potatis och gul l\u00f6k",
+              "right_recipe": "Nudlar med korv och r\u00f6dl\u00f6k",
+              "score": 0.25,
+              "is_high_similarity": false,
+              "components": {
+                "ingredient": 0.3333333333333333,
+                "family": 0.0,
+                "cooking": 0.0,
+                "dish": 0.0,
+                "carb": 0.0,
+                "protein": 1.0,
+                "sauce": 1.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k",
+                "korv"
+              ]
+            },
+            {
+              "left_recipe": "Ugnspl\u00e5t med korv, potatis och gul l\u00f6k",
+              "right_recipe": "Stekt ris med tofu och morot",
+              "score": 0.07727272727272727,
+              "is_high_similarity": false,
+              "components": {
+                "ingredient": 0.09090909090909091,
+                "family": 0.0,
+                "cooking": 0.0,
+                "dish": 0.0,
+                "carb": 0.0,
+                "protein": 0.0,
+                "sauce": 1.0
+              },
+              "shared_major_ingredients": [
+                "gul l\u00f6k"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

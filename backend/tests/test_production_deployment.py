@@ -134,7 +134,9 @@ def test_production_compose_has_tls_readiness_and_durable_mounts() -> None:
     assert "${RUNTIME_ROOT:-./runtime}/plans:/srv/app/var/plans" in compose
     assert ("${RUNTIME_ROOT:-./runtime}/price_universes:/srv/app/var/price_universes") in compose
     assert "${RUNTIME_ROOT:-./runtime}/raw_snapshots:/srv/app/var/raw_snapshots" in compose
-    assert compose.count("${RUNTIME_ROOT:-./runtime}/") == 10
+    assert compose.count("${RUNTIME_ROOT:-./runtime}/") == 11
+    app_section = compose.split("  app:\n", 1)[1].split("  scheduler:\n", 1)[0]
+    assert "raw_snapshots:/srv/app/var/raw_snapshots:ro" in app_section
     assert "deploy/scripts/start_cron.py" in compose
     assert "response_header_timeout 60s" in caddy
     assert "max_size 2MB" in caddy

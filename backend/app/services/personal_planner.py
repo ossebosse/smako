@@ -46,7 +46,7 @@ from app.services.personal_policy import (
     properties_match,
     protein_category,
 )
-from app.services.personal_store import available_items
+from app.services.personal_store import available_items, consumed_demands, demand_key
 from app.services.product_search import ProductSearchRequest
 from app.services.recipe_candidate_generator import DeterministicRecipeCandidateGenerator
 from app.services.recipe_candidate_validator import recipe_id
@@ -80,7 +80,21 @@ class PersonalPlanner:
             self.spec.profile, TasteProfile(exclusions=request.avoid_ingredients)
         )
         self.plan_id = plan_id
-        self.facts = facts or {}
+        from app.services.personal_source_facts import load_retained_facts
+
+        needs_facts = (
+            self.spec.organic_percent
+            or self.spec.organic_animals
+            or self.spec.profile.allergies
+            or self.spec.profile.exclusions
+            or any(
+                m.organic_animals or m.limits.active or m.profile.allergies or m.profile.exclusions
+                for m in self.spec.meals
+            )
+        )
+        self.facts = (
+            load_retained_facts(prepared) if facts is None and needs_facts else facts
+        ) or {}
         self.cooked_weights = cooked_weights or {}
         self.now = now or datetime.now(UTC)
         self.pricing_date = self.now.astimezone(ZoneInfo("Europe/Stockholm")).date()
@@ -115,15 +129,6 @@ class PersonalPlanner:
         if self.spec.pantry_revision != state["revision"]:
             raise PolicyConflict(
                 "Skafferiet har ändrats. Läs om och beräkna igen.", code="REVISION_CONFLICT"
-            )
-        if not self.facts and (
-            self.spec.organic_percent
-            or self.spec.organic_animals
-            or any(m.organic_animals or m.limits.active for m in self.spec.meals)
-        ):
-            raise PolicyConflict(
-                "Prisunderlaget saknar verifierad ekologisk produktstatus, produktnäring och tillagningsutbyte. Dina valda eko-/näringsgränser kan därför inte verifieras. Kraven har inte sänkts.",
-                code="DATA_BLOCKED",
             )
 
     def source_facts(self, product):
@@ -175,7 +180,7 @@ class PersonalPlanner:
                 position = self.by_identity.get((candidate.store_id, candidate.product_id))
                 if position is not None:
                     positions.add(position)
-            if not positions or properties:
+            if not positions or properties or self.facts:
                 key = name
                 if key not in self.queries:
                     matches, _, _ = self.index.retrieve(ProductSearchRequest(query=name))
@@ -320,15 +325,29 @@ class PersonalPlanner:
             )
             if not extra.food and not is_nonfood(extra.query):
                 raise PolicyConflict(f"{extra.query} kan inte undantas från matinköpets krav.")
+        consumed = defaultdict(float)
+        for booked in consumed_demands(self.state, self.plan_id):
+            consumed[booked["demand_key"]] += booked["quantity"]
+        for row in rows:
+            row["demand_key"] = demand_key(row)
+            row["original_quantity"] = row["quantity"]
+            row["quantity"] = max(0, row["quantity"] - consumed[row["demand_key"]])
         return rows
 
     def _allocate(self, row, resolved, available):
         remaining = row["quantity"]
         allocations = []
         keys = {self.product_keys[i] for i, _ in resolved}
-        if not row["use_pantry"]:
-            return remaining, allocations
+        purchased_ids = {
+            r.get("item_id")
+            for e in self.state.get("ledger", [])
+            if e["plan_id"] == self.plan_id and e["action"] == "purchase"
+            for r in e["rows"]
+        }
+        purchased_ids.update(self.state.get("legacy_purchase_lots", {}).get(self.plan_id, []))
         for item in self.items:
+            if not row["use_pantry"] and item["id"] not in purchased_ids:
+                continue
             if item["unusable"] or item["unit"] != row["unit"] or available[item["id"]] <= 0:
                 continue
             if item["product_key"]:
@@ -352,6 +371,7 @@ class PersonalPlanner:
                     "unit": item["unit"],
                     "name": item["name"],
                     "source": row["source"],
+                    "demand_key": row["demand_key"],
                 }
             )
             remaining -= used
@@ -364,10 +384,14 @@ class PersonalPlanner:
         available = {i["id"]: i["available"] for i in self.items}
         rows = self._need_rows(slots)
         allocations, groups = [], []
+        missing_nutrition = set()
+        nutrition_needs = set()
         # Constrained explicit rows first: a compatible recipe can share their
         # packages, but two different exact variants never become interchangeable.
         rows.sort(key=lambda r: (not bool(r["product_key"]), not bool(r["properties"])))
         for row in rows:
+            if row["quantity"] <= 0:
+                continue
             resolved = self.resolve(
                 row["name"],
                 row["quantity"],
@@ -378,6 +402,34 @@ class PersonalPlanner:
                 organic_animals=row["organic_animals"],
                 food=row["food"],
             )
+            meal = next((self.meals[s.meal_type] for s in slots if s.id == row["source"]), None)
+            requested = (
+                (
+                    {
+                        k.removeprefix("min_").removeprefix("max_")
+                        for k, v in meal.limits.model_dump().items()
+                        if v is not None
+                    }
+                    - {"weight_g"}
+                )
+                if meal
+                else set()
+            )
+            if requested:
+                nutrition_needs.add(row["name"])
+                verified = [
+                    (i, c)
+                    for i, c in resolved
+                    if (fact := self.source_facts(self.prepared.universe.products[i]))
+                    and fact.nutrition_unit == row["unit"]
+                    and fact.nutrition_basis
+                    and requested <= fact.nutrition.keys()
+                    and all(math.isfinite(v) and v >= 0 for v in fact.nutrition.values())
+                ]
+                if not verified:
+                    missing_nutrition.add(row["name"])
+                else:
+                    resolved = verified
             quantity, allocation = self._allocate(row, resolved, available)
             allocations.extend(allocation)
             if quantity <= 0:
@@ -397,6 +449,7 @@ class PersonalPlanner:
                 group["quantity"] += quantity
                 group["positions"] &= identities
                 group["sources"].append(row["source"])
+                group["demand_keys"].append(row["demand_key"])
             else:
                 groups.append(
                     {
@@ -405,14 +458,23 @@ class PersonalPlanner:
                         "unit": row["unit"],
                         "food": row["food"],
                         "sources": [row["source"]],
+                        "demand_keys": [row["demand_key"]],
                         "positions": identities,
                         "candidates": dict(resolved),
                     }
                 )
+        if missing_nutrition:
+            raise PolicyConflict(
+                f"Smako saknar verifierad näringsdata med rätt enhet för {len(missing_nutrition)} av {len(nutrition_needs)} ingrediensbehov: {', '.join(sorted(missing_nutrition))}. Välj ett recept/produkt med tillräckligt underlag, ändra den valda gränsen uttryckligen i Mina val eller gå tillbaka. Underlaget har saknade eller konfliktfyllda värden. Kraven har inte sänkts.",
+                code="DATA_BLOCKED",
+            )
         ingredients, candidate_map = [], {}
         for n, group in enumerate(groups):
             key = f"{group['name']} [{n + 1}]"
             group["key"] = key
+            for row in rows:
+                if row["demand_key"] in group["demand_keys"]:
+                    row["purchase_key"] = key
             candidates = [group["candidates"][i] for i in group["positions"]]
             lock = self.spec.product_locks.get(key)
             if lock:
@@ -475,12 +537,32 @@ class PersonalPlanner:
                     or (item.price_mechanism == "regular" and item.applied_offer is None)
                 )
             ]
+        for group in groups:
+            item = next(i for store in basket.stores for i in store.items if i.ingredient == group["key"])
+            if item.group_applications:
+                product = self.prepared.universe.products[self.by_identity[(item.store_id, item.product_id)]]
+                group["unused_source_offers"] = [offer.model_dump(mode="json") for offer in product.offers
+                                                if item.applied_offer is None or offer != item.applied_offer]
         checks = self._check_final(slots, basket, groups, rows, allocations) if final else {}
         return {
             "basket": basket,
             "ingredients": ingredients,
             "groups": groups,
             "allocations": allocations,
+            "remaining_demands": [
+                {k: v for k, v in r.items() if k not in {"profile", "organic_animals"}}
+                for r in rows
+            ],
+            "available_surplus": [
+                {
+                    "item_id": i["id"],
+                    "name": i["name"],
+                    "quantity": available[i["id"]],
+                    "unit": i["unit"],
+                }
+                for i in self.items
+                if available[i["id"]] > 1e-8
+            ],
             "checks": checks,
             "audit": audit,
             "larger_purchase_cost": max(0, float(money(basket.total - ordinary_total)))
@@ -575,6 +657,11 @@ class PersonalPlanner:
 
     def _ecological_basket(self, ingredients, candidates, groups, baseline):
         percent = self._eco_percent(baseline, groups)
+        if percent is None and any(g["food"] for g in groups):
+            raise PolicyConflict(
+                "Matinköpets nettokostnad är noll. Den valda ekologiska kostnadsandelen kan därför inte beräknas. Ändra kravet uttryckligen i Mina val eller välj andra varor.",
+                code="DATA_BLOCKED",
+            )
         if percent is None or percent + 1e-8 >= self.spec.organic_percent:
             return baseline
         organic_candidates = {}
@@ -596,7 +683,7 @@ class PersonalPlanner:
         eligible = [g["key"] for g in groups if g["food"] and organic_candidates[g["key"]]]
         if not eligible:
             raise PolicyConflict(
-                "Ingen inköpsrad har källstödd ekologisk status. Vald kostnadsandel kan inte verifieras.",
+                f"Ingen av {sum(g['food'] for g in groups)} matinköpsrader har ett verifierat ekologiskt alternativ i sökningen. Vald kostnadsandel kan inte verifieras. Ändra kravet uttryckligen i Mina val, välj andra varor eller gå tillbaka.",
                 code="DATA_BLOCKED",
             )
         winners = []
@@ -948,6 +1035,7 @@ class PersonalPlanner:
             "policy": POLICY_VERSION,
             "request": self.request.model_dump(mode="json"),
             "pantry_revision": self.state["revision"],
+            "facts_policy_version": "retained-catalog-facts-v1",
             "state": self.state,
             "recipes": [r.model_dump() for r in recipes],
             "prices": self.prepared.universe.universe_id,
@@ -1010,7 +1098,7 @@ class PersonalPlanner:
             warnings=[
                 "Köpkostnaden avser hela förpackningar. Näring, allergener och eko är separata kontroller.",
                 "Kontosynk kräver verifierad inloggning. Gästläget är privat för denna webbläsarsession.",
-                "Mix-and-match saknar källstödda grupper och tillämpas inte.",
+                "Kampanjgrupper används bara när källa och deltagande produktidentiteter är uttryckliga.",
             ],
             personal=PersonalResult(
                 slots=chosen,
@@ -1022,6 +1110,9 @@ class PersonalPlanner:
                 larger_purchase_cost=result["larger_purchase_cost"],
                 cache_identity=digest,
                 empty_slots=sum(s.recipe is None for s in chosen),
+                remaining_demands=result["remaining_demands"],
+                consumed_demands=consumed_demands(self.state, self.plan_id),
+                available_surplus=result["available_surplus"],
             ),
         )
 

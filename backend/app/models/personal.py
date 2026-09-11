@@ -163,7 +163,7 @@ class PersonalPlanning(PrivateModel):
 
 
 class PersonalResult(PrivateModel):
-    version: str = "personal-v2-1"
+    version: str = "personal-v2-2"
     slots: list[MealSlot]
     pantry_revision: int
     allocations: list[dict] = Field(default_factory=list)
@@ -175,6 +175,9 @@ class PersonalResult(PrivateModel):
     consumption_confirmed: bool = False
     larger_purchase_cost: float = 0
     empty_slots: int = 0
+    remaining_demands: list[dict] = Field(default_factory=list)
+    consumed_demands: list[dict] = Field(default_factory=list)
+    available_surplus: list[dict] = Field(default_factory=list)
 
 
 class PantryWrite(PrivateModel):
@@ -203,9 +206,19 @@ class PersonalMutation(PrivateModel):
         "product",
         "extras",
         "add_recipe",
+        "restore_revision",
     ]
     slot_id: str | None = Field(default=None, max_length=64)
     recipe: Recipe | None = None
     extras: list[ExtraNeed] | None = Field(default=None, max_length=60)
     ingredient: str | None = Field(default=None, max_length=120)
     product_key: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
+    restore_revision: int | None = Field(default=None, ge=1)
+    consume_fraction: float = Field(default=1, gt=0, le=1)
+    operation_id: str | None = Field(default=None, pattern=r"^[a-zA-Z0-9-]{8,64}$")
+
+    @model_validator(mode="after")
+    def partial_event_identity(self):
+        if self.consume_fraction != 1 and (self.action != "consume" or not self.operation_id):
+            raise ValueError("Delvis förbrukning kräver ett unikt åtgärds-ID.")
+        return self

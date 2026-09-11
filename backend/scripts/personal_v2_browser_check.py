@@ -38,9 +38,11 @@ def main():
             GROCERY_DATABASE_URL=f"sqlite+pysqlite:///{root.as_posix()}/grocery.sqlite3",
         )
         from app.main import app
+        from app.models.product import OfferMetadata
         from app.services.plan_store import PlanStore
         from app.services.price_universe_runtime import GLOBAL_PREPARED_PRICE_UNIVERSES
 
+        from backend.scripts.personal_v2_integrated_check import check_integrated
         from backend.tests.test_personal_planning_v2 import prepared, product
         from grocery_data.app.storage import (
             create_database_engine,
@@ -53,7 +55,8 @@ def main():
         app.state.community_session_factory = create_session_factory(engine)
         app.state.plan_store = PlanStore(root / "plans.sqlite3")
         p = prepared(
-            product("mjölk 1,5 %", 1000, "ml", 20),
+            product("mjölk 1,5 %", 1000, "ml", 20, offers=[OfferMetadata(kind="member", description="Fryst medlemspris", price=16, membership_program="COOP_MEMBER")]),
+            product("ris", 500, "g", 15),
             product("bröd", 500, "g", 25),
             product("ost", 500, "g", 40),
             product("tomat", 500, "g", 20),
@@ -61,7 +64,7 @@ def main():
             product("morot", 1000, "g", 10),
             product("tofu", 400, "g", 30),
             product("kikärtor", 380, "g", 12),
-            product("servetter", 50, "st", 15),
+            product("servetter", 50, "st", 15, store="ica"),
         )
         GLOBAL_PREPARED_PRICE_UNIVERSES.activate(p)
         with socket.socket() as probe:
@@ -176,6 +179,7 @@ def main():
                     results.append(
                         {"engine": name, "checks": 18, "status": "PASS", "page_errors": errors}
                     )
+                    results[-1]["integrated_booked_edit"] = check_integrated(browser, base, p, args.output, name)
                     browser.close()
         finally:
             server.should_exit = True

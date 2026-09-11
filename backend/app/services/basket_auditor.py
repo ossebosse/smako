@@ -189,15 +189,35 @@ class BasketAuditor:
         # never "skip authorization". This keeps the auditor fail-closed for
         # direct/new callers as well as for the normal consumer pipeline.
         pricing_context = user_pricing_context or UserPricingContext()
+        group_reconciled = {}
+        if any(i.promotion_groups or i.group_applications for i in concrete_items):
+            from app.services.basket_calculator import BasketCalculator
+
+            try:
+                priced = BasketCalculator.quote_group_basket(concrete_items)
+                for actual, expected in zip(concrete_items, priced, strict=True):
+                    group_reconciled[(actual.store_id, actual.ingredient)] = (
+                        _money(_decimal(actual.total_price))
+                        == _money(_decimal(expected.total_price))
+                        and _money(_decimal(actual.unit_price))
+                        == _money(_decimal(expected.unit_price))
+                        and actual.group_applications == expected.group_applications
+                    )
+                    for application in expected.group_applications:
+                        program = application["group"]["membership_program"]
+                        if program and not pricing_context.has_membership(program):
+                            authorization_errors.append("unauthorized promotion-group membership")
+            except (ValueError, TypeError, KeyError):
+                authorization_errors.append(
+                    "promotion-group source or allocation cannot be verified"
+                )
         for item in concrete_items:
             if item.eligibility is PromotionEligibility.MEMBER:
-                if (
-                    item.membership_program is None
-                    or not pricing_context.has_membership(item.membership_program)
+                if item.membership_program is None or not pricing_context.has_membership(
+                    item.membership_program
                 ):
                     authorization_errors.append(
-                        "unauthorized member price: "
-                        f"{item.store_id}/{item.product_id}"
+                        f"unauthorized member price: {item.store_id}/{item.product_id}"
                     )
             elif item.eligibility is PromotionEligibility.USER_SPECIFIC:
                 authorization_errors.append(
@@ -226,8 +246,8 @@ class BasketAuditor:
             row = purchased.setdefault(key, _Purchased())
             resolution = self.resolver.resolve(
                 self._semantics(item),
-                required_quantity=item.required_quantity + (
-                    item.strategic_extra_quantity if strategic_extras_allowed else 0),
+                required_quantity=item.required_quantity
+                + (item.strategic_extra_quantity if strategic_extras_allowed else 0),
                 required_unit=item.unit,
             )
             reconciliation_error: str | None = None
@@ -268,9 +288,7 @@ class BasketAuditor:
                                 package_count=item.packages_needed,
                                 base_unit_price=base_price,
                                 regular_unit_price=(
-                                    item.regular_unit_price
-                                    or item.sale_price
-                                    or base_price
+                                    item.regular_unit_price or item.sale_price or base_price
                                 ),
                                 offers=(item.applied_offer,)
                                 if item.applied_offer is not None
@@ -286,6 +304,13 @@ class BasketAuditor:
                             reconciliation_error = (
                                 "basket fixed checkout differs from persisted checkout evidence"
                             )
+                    if item.promotion_groups or item.ungrouped_total_price is not None:
+                        cost_reconciled = group_reconciled.get(
+                            (item.store_id, item.ingredient), False
+                        )
+                        reconciliation_error = (
+                            None if cost_reconciled else "promotion-group checkout mismatch"
+                        )
                 else:
                     assert resolution.total_price is not None
                     cost_reconciled = _money(resolution.total_price) == _money(

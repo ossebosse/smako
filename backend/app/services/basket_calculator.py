@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import functools
+import json
 from collections.abc import Iterable
 from dataclasses import dataclass
 from decimal import ROUND_CEILING, Decimal
@@ -34,6 +36,10 @@ from grocery_data.app.services.fixed_checkout_price import (
 from grocery_data.app.services.fixed_checkout_price import (
     resolve_fixed_package_checkout,
 )
+
+
+class GroupPricingError(ValueError):
+    """An explicit group contract cannot be priced and verified safely."""
 
 
 def money(value: float | Decimal) -> Decimal:
@@ -375,6 +381,206 @@ class BasketCalculator:
     def __init__(self, resolver: PurchaseQuantityResolver | None = None) -> None:
         self.resolver = resolver or PurchaseQuantityResolver()
 
+    @staticmethod
+    def quote_group_basket(items):
+        """Exact disjoint allocation of source-defined groups over NEW packages.
+
+        Residual packages use the existing checkout resolver. A group consumes
+        its units before any single-product promotion is evaluated. This avoids
+        stacking or counting pantry/history. No speculative extra packages.
+        """
+
+        groups = {}
+        for item in items:
+            for group in item.promotion_groups:
+                provenance = item.source_provenance
+                if (
+                    group.store_id != item.store_id
+                    or group.chain != item.chain
+                    or item.product_id not in group.eligible_product_ids
+                    or not provenance
+                    or group.source_snapshot_id != provenance.source_snapshot_id
+                    or group.source != provenance.source_provider
+                ):
+                    raise GroupPricingError("Promotion group lacks exact product/context/source evidence")
+                key = (group.store_id, group.group_id)
+                if key in groups and groups[key] != group:
+                    raise GroupPricingError("Conflicting source promotion group definitions")
+                groups[key] = group
+        contracts = tuple(groups[k] for k in sorted(groups))
+        if not contracts:
+            return list(items)
+        counts = tuple(i.packages_needed for i in items)
+        # Bound recursion as well as the number of searched states. Large
+        # explicit baskets must fail with the same safe policy response.
+        if sum(counts) > 500:
+            raise GroupPricingError("Kampanjgrupper kan verifieras för högst 500 köpta förpackningar per korg.")
+        base = tuple(
+            Decimal(str(i.regular_unit_price or i.base_checkout_unit_price)) for i in items
+        )
+
+        @functools.cache
+        def residual_quote(index, count):
+            item = items[index]
+            return resolve_fixed_checkout_price(
+                package_count=count,
+                base_unit_price=item.base_checkout_unit_price,
+                regular_unit_price=item.regular_unit_price or item.base_checkout_unit_price,
+                offers=item.checkout_offers,
+            )
+
+        def residual(index, count):
+            return money(residual_quote(index, count)[0]) if count else Decimal(0)
+
+        same_products = {}
+        for i, item in enumerate(items):
+            identity = (item.store_id, item.product_id)
+            same_products.setdefault(identity, []).append(i)
+        for indices in same_products.values():
+            first = items[indices[0]]
+            if any((items[i].checkout_offers, items[i].regular_unit_price,
+                    items[i].base_checkout_unit_price) !=
+                   (first.checkout_offers, first.regular_unit_price, first.base_checkout_unit_price)
+                   for i in indices):
+                raise GroupPricingError("Conflicting checkout evidence for identical product")
+
+        @functools.cache
+        def residual_rows(remaining):
+            costs = [Decimal(0)] * len(items)
+            for indices in same_products.values():
+                count = sum(remaining[i] for i in indices)
+                if not count:
+                    continue
+                total = residual(indices[0], count)
+                assigned = Decimal(0)
+                active = [i for i in indices if remaining[i]]
+                for offset, i in enumerate(active):
+                    cost = total - assigned if offset == len(active) - 1 else min(
+                        total - assigned, money(total * remaining[i] / count))
+                    costs[i] = cost
+                    assigned += cost
+            return tuple(costs)
+
+        def allocations(remaining, indices, needed, offset=0, prefix=()):
+            if offset == len(indices):
+                if needed == 0:
+                    vector = [0] * len(items)
+                    for index, amount in zip(indices, prefix, strict=True):
+                        vector[index] = amount
+                    yield tuple(vector)
+                return
+            index = indices[offset]
+            for amount in range(min(needed, remaining[index]) + 1):
+                yield from allocations(
+                    remaining, indices, needed - amount, offset + 1, (*prefix, amount)
+                )
+
+        states = 0
+
+        @functools.cache
+        def solve(remaining, used):
+            nonlocal states
+            states += 1
+            if states > 100000:
+                raise GroupPricingError("Kampanjkombinationen är för stor för verifierad exakt beräkning.")
+            best = (sum(residual_rows(remaining), Decimal(0)), ())
+            for index, group in enumerate(contracts):
+                if group.max_groups is not None and used[index] >= group.max_groups:
+                    continue
+                eligible = [
+                    i
+                    for i, item in enumerate(items)
+                    if remaining[i]
+                    and item.store_id == group.store_id
+                    and item.product_id in group.eligible_product_ids
+                ]
+                if sum(remaining[i] for i in eligible) < group.required_packages:
+                    continue
+                for vector in allocations(remaining, eligible, group.required_packages):
+                    ordinary = sum((base[i] * n for i, n in enumerate(vector)), Decimal(0))
+                    cost = (
+                        money(group.amount)
+                        if group.pricing_rule == "fixed_total"
+                        else money(max(Decimal(0), ordinary - Decimal(str(group.amount))))
+                    )
+                    next_used = tuple(v + (i == index) for i, v in enumerate(used))
+                    rest_cost, rest_path = solve(
+                        tuple(a - b for a, b in zip(remaining, vector, strict=True)), next_used
+                    )
+                    candidate = (cost + rest_cost, ((index, vector, cost), *rest_path))
+                    if candidate[0] < best[0]:
+                        best = candidate
+            return best
+
+        total, path = solve(counts, (0,) * len(contracts))
+        remaining = list(counts)
+        charges = [Decimal(0)] * len(items)
+        audits = [[] for _ in items]
+        for sequence, (index, vector, cost) in enumerate(path):
+            group = contracts[index]
+            ordinary = sum((base[i] * n for i, n in enumerate(vector)), Decimal(0))
+            contributors = [i for i, n in enumerate(vector) if n]
+            assigned = Decimal(0)
+            contribution_rows = []
+            for offset, i in enumerate(contributors):
+                charge = (
+                    cost - assigned
+                    if offset == len(contributors) - 1
+                    else min(cost - assigned, money(cost * base[i] * vector[i] / ordinary))
+                )
+                assigned += charge
+                charges[i] += charge
+                remaining[i] -= vector[i]
+                contribution_rows.append(
+                    {
+                        "ingredient": items[i].ingredient,
+                        "product_id": items[i].product_id,
+                        "product_name": items[i].product_name,
+                        "packages": vector[i],
+                        "charge": float(charge),
+                    }
+                )
+            audit = {
+                "application": sequence + 1,
+                "group": group.model_dump(mode="json"),
+                "total": float(cost),
+                "contributors": contribution_rows,
+            }
+            for i in contributors:
+                audits[i].append(audit)
+        result = []
+        residual_costs = residual_rows(tuple(remaining))
+        for i, item in enumerate(items):
+            charged = money(charges[i] + residual_costs[i])
+            identical = same_products[(item.store_id, item.product_id)]
+            residual_count = sum(remaining[j] for j in identical)
+            offer = residual_quote(identical[0], residual_count)[2] if remaining[i] else None
+            program = next((contracts[index].membership_program for index, vector, _ in path
+                            if vector[i] and contracts[index].membership_program), None)
+            program = program or (offer.membership_program if offer else None)
+            result.append(
+                item.model_copy(
+                    update={
+                        "total_price": float(charged),
+                        "unit_price": float(money(charged / item.packages_needed)),
+                        "group_applications": audits[i],
+                        "group_residual_packages": remaining[i],
+                        "group_residual_total": float(residual_costs[i]),
+                        "applied_offer": offer,
+                        "price_contract_id": ("group-checkout:" + sha256(json.dumps(audits[i], sort_keys=True).encode()).hexdigest()) if audits[i] else offer.price_contract_id if offer else None,
+                        "membership_program": program,
+                        "eligibility": PromotionEligibility.MEMBER if program else PromotionEligibility.PUBLIC,
+                        "price_mechanism": PromotionMechanism.MULTIBUY if audits[i] else
+                        offer.mechanism if offer else PromotionMechanism.REGULAR,
+                        "ungrouped_total_price": item.ungrouped_total_price
+                        if item.ungrouped_total_price is not None
+                        else item.total_price,
+                    }
+                )
+            )
+        assert money(sum(Decimal(str(i.total_price)) for i in result)) == money(total)
+        return result
+
     def quote_item(
         self,
         ingredient: NormalizedIngredient,
@@ -482,9 +688,7 @@ class BasketCalculator:
                 checkout_candidate,
                 applied_offer,
             )
-            selected_eligibility = (
-                applied_offer.eligibility or PromotionEligibility.PUBLIC
-            )
+            selected_eligibility = applied_offer.eligibility or PromotionEligibility.PUBLIC
             selected_mechanism = applied_offer.mechanism or (
                 PromotionMechanism.MULTIBUY
                 if applied_offer.kind is OfferKind.MULTIPACK

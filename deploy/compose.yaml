@@ -118,6 +118,7 @@ services:
       SMAKO_OIDC_ISSUER_URL: ${SMAKO_OIDC_ISSUER_URL:-}
       SMAKO_OIDC_CLIENT_ID: ${SMAKO_OIDC_CLIENT_ID:-}
       SMAKO_OIDC_CLIENT_SECRET: ${SMAKO_OIDC_CLIENT_SECRET:-}
+      GROCERY_RAW_SNAPSHOT_ROOT: /srv/app/var/raw_snapshots
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -144,6 +145,7 @@ services:
       - ${RUNTIME_ROOT:-./runtime}/grocery:/srv/app/var/grocery
       - ${RUNTIME_ROOT:-./runtime}/plans:/srv/app/var/plans
       - ${RUNTIME_ROOT:-./runtime}/price_universes:/srv/app/var/price_universes:ro
+      - ${RUNTIME_ROOT:-./runtime}/raw_snapshots:/srv/app/var/raw_snapshots:ro
       - ${RUNTIME_ROOT:-./runtime}/reports:/srv/app/var/reports
     read_only: true
     tmpfs:

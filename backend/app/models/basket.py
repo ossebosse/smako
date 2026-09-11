@@ -15,6 +15,7 @@ from .ingredient import NormalizedIngredient
 from .product import (
     CanonicalUnit,
     OfferMetadata,
+    PromotionGroup,
     QuantityConfidence,
     SaleModel,
     SemanticConfidence,
@@ -110,7 +111,7 @@ class BasketItem(BaseModel):
     purchased_unit: CanonicalUnit | None = None
     purchased_usable_quantity: float | None = Field(default=None, gt=0)
     waste_quantity: float = Field(ge=0)
-    unit_price: float = Field(gt=0, description="Applied per-package price in SEK")
+    unit_price: float = Field(ge=0, description="Applied per-package price in SEK")
     regular_unit_price: float | None = Field(default=None, gt=0)
     price_contract_id: str | None = Field(default=None, min_length=1, max_length=255)
     eligibility: PromotionEligibility = PromotionEligibility.PUBLIC
@@ -121,11 +122,17 @@ class BasketItem(BaseModel):
         gt=0,
         description=("Eligible one-package checkout price before a conditional multipack offer"),
     )
-    total_price: float = Field(gt=0)
+    total_price: float = Field(ge=0)
     regular_total_price: float | None = Field(default=None, gt=0)
     purchase_warning: str | None = None
     offer_description: str | None = None
     applied_offer: OfferMetadata | None = None
+    promotion_groups: tuple[PromotionGroup, ...] = ()
+    checkout_offers: tuple[OfferMetadata, ...] = ()
+    group_applications: list[dict] = Field(default_factory=list)
+    group_residual_packages: int | None = Field(default=None, ge=0)
+    group_residual_total: float | None = Field(default=None, ge=0)
+    ungrouped_total_price: float | None = Field(default=None, ge=0)
     source_provenance: SourceProvenance | None = None
 
     @computed_field
@@ -374,7 +381,7 @@ class BasketAuditSelectedProduct(BaseModel):
     quantity_reconciled: bool = True
     cost_reconciled: bool = True
     reconciliation_error: str | None = None
-    total_price: float = Field(gt=0)
+    total_price: float = Field(ge=0)
 
 
 class BasketAuditItem(BaseModel):

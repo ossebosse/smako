@@ -28,7 +28,12 @@ from app.models.product import (
     SemanticConfidence,
 )
 from app.models.store import Store
-from app.services.basket_calculator import BasketCalculator, BasketItemQuote, money
+from app.services.basket_calculator import (
+    BasketCalculator,
+    BasketItemQuote,
+    GroupPricingError,
+    money,
+)
 from app.services.ingredient_normalizer import (
     canonicalize_ingredient_name,
 )
@@ -470,6 +475,7 @@ class BasketOptimizer:
             candidate.selected_membership_program,
             candidate.match_score,
             offers,
+            tuple(g.model_dump_json() for g in candidate.promotion_groups),
             candidate.category,
             tuple(provenance.model_dump(mode="python").items()) if provenance is not None else None,
         )
@@ -925,6 +931,10 @@ class BasketOptimizer:
             )
             total += min(money(quote.total_price) for quote in eligible)
         increment_performance_counter("optimistic_basket_bounds")
+        # Independent line totals can overestimate a future group discount.
+        # Zero is conservative even when multiple promotions compete.
+        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+            total = Decimal(0)
         return verification_rank, money(total)
 
     def same_depth_nested_store_limited_keys(
@@ -947,6 +957,22 @@ class BasketOptimizer:
         or bounds across future recipe additions.
         """
 
+        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+            limit = len(stores) if not max_stores or max_stores < 0 else min(max_stores, len(stores))
+            result = []
+            for cap in range(1, limit + 1):
+                try:
+                    basket = self._optimize_promotion_groups(
+                        ingredients, candidates_by_name, stores, cap, calculate_savings=False
+                    )
+                    rank = max(
+                        (_VERIFICATION_RANK[i.verification_status] for g in basket.stores for i in g.items),
+                        default=0,
+                    )
+                    result.append((rank, money(basket.total), len(basket.stores)))
+                except IncompleteBasketError:
+                    result.append(None)
+            return tuple(result)
         quoted_requirements = tuple(
             self._candidate_quotes_with_key(
                 ingredient,
@@ -978,9 +1004,12 @@ class BasketOptimizer:
         membership and tie-breaking semantics remain shared with checkout.
         """
 
-        quoted_requirements: list[
-            tuple[tuple[BasketItemQuote, ...], _QuoteSetKey | None]
-        ] = []
+        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+            return self.same_depth_nested_store_limited_keys(
+                [NormalizedIngredient(canonical_name=str(r[0]), required_quantity=float(r[1]), unit=str(r[2])) for r in requirements],
+                candidates_by_name, stores, max_stores=max_stores,
+            )
+        quoted_requirements: list[tuple[tuple[BasketItemQuote, ...], _QuoteSetKey | None]] = []
         for raw in requirements:
             if len(raw) != 3:
                 raise ValueError("canonical requirement keys must have three fields")
@@ -1103,9 +1132,7 @@ class BasketOptimizer:
             session = self._quote_cache_context.get()
             if session is not None:
                 session.stats.optimistic_store_subset_evaluations += len(store_ids)
-                session.stats.optimistic_store_subsets_infeasible += (
-                    infeasible_subsets
-                )
+                session.stats.optimistic_store_subsets_infeasible += infeasible_subsets
                 session.stats.same_depth_keys += 1
             else:
                 increment_performance_counter(
@@ -1244,6 +1271,21 @@ class BasketOptimizer:
         candidates_by_name: Mapping[str, Sequence[ProductCandidate]],
         stores: Sequence[Store],
     ) -> list[StoreBasket]:
+        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+            options = []
+            for store in stores:
+                try:
+                    basket = self._optimize_promotion_groups(
+                        ingredients, candidates_by_name, [store], 1, calculate_savings=False
+                    )
+                    options.append(StoreBasket(store_id=store.store_id, store_name=store.name,
+                                               total=basket.total,
+                                               items=[i for g in basket.stores for i in g.items]))
+                except IncompleteBasketError:
+                    options.append(StoreBasket(store_id=store.store_id, store_name=store.name,
+                                               total=0, items=[], is_complete=False,
+                                               missing_ingredients=[i.canonical_name for i in ingredients]))
+            return sorted(options, key=lambda o: (not o.is_complete, o.total, o.store_id))
         started = perf_counter()
         increment_performance_counter("basket_calculations")
         quoted_ingredients = [
@@ -1312,6 +1354,14 @@ class BasketOptimizer:
         *,
         calculate_savings: bool = True,
     ) -> OptimizedBasket:
+        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+            return self._optimize_promotion_groups(
+                ingredients,
+                candidates_by_name,
+                stores,
+                max_stores,
+                calculate_savings=calculate_savings,
+            )
         started = perf_counter()
         increment_performance_counter("basket_calculations")
         if not ingredients:
@@ -1479,6 +1529,114 @@ class BasketOptimizer:
         )
         record_performance_seconds("basket_optimization", perf_counter() - started)
         return result
+
+    def _optimize_promotion_groups(
+        self, ingredients, candidates_by_name, stores, max_stores, *, calculate_savings=True
+    ):
+        """Group interactions require joint product selection within each store cap.
+
+        Keep the existing fast path byte-for-byte for baskets without groups.
+        Enumerate only independent ungrouped winners plus all group candidates;
+        never silently approximate an oversized interacting promotion problem.
+        """
+        from itertools import product
+
+        source_stores = {s.store_id: s for s in stores}
+        source_groups = {}
+        for rows in candidates_by_name.values():
+            for candidate in rows:
+                for group in candidate.promotion_groups:
+                    key = (group.store_id, group.group_id)
+                    if key in source_groups and source_groups[key] != group:
+                        raise GroupPricingError("Conflicting source promotion group definitions")
+                    provenance = candidate.source_provenance
+                    if (group.store_id != candidate.store_id or group.chain != candidate.chain
+                            or candidate.product_id not in group.eligible_product_ids
+                            or not provenance or group.source_snapshot_id != provenance.source_snapshot_id
+                            or group.source != provenance.source_provider):
+                        raise GroupPricingError("Promotion group lacks exact product/context/source evidence")
+                    source_groups[key] = group
+        choices = []
+        for ingredient in ingredients:
+            group_quotes, plain = [], {}
+            for candidate in self._ingredient_candidates(ingredient, candidates_by_name):
+                if candidate.store_id not in source_stores:
+                    continue
+                groups = tuple(g for g in source_groups.values()
+                               if g.store_id == candidate.store_id
+                               and candidate.product_id in g.eligible_product_ids
+                               and candidate.source_provenance
+                               and g.source_snapshot_id == candidate.source_provenance.source_snapshot_id)
+                if groups:
+                    candidate = candidate.model_copy(update={"promotion_groups": groups})
+                quotes = self._candidate_quotes(ingredient, [candidate])
+                if not quotes:
+                    continue
+                quote = quotes[0]
+                if candidate.promotion_groups:
+                    if candidate.sale_model != SaleModel.FIXED_PACKAGE:
+                        raise GroupPricingError("Kampanjgrupper kräver verifierade fasta förpackningar.")
+                    group_quotes.append((quote, candidate))
+                elif candidate.store_id not in plain or self._quote_sort_key(
+                    quote
+                ) < self._quote_sort_key(plain[candidate.store_id][0]):
+                    plain[candidate.store_id] = (quote, candidate)
+            choices.append([*group_quotes, *plain.values()])
+        if any(not c for c in choices):
+            raise IncompleteBasketError("No complete basket can be built with the selected stores.")
+        best, best_items, single = None, None, None
+        visited = 0
+        for combination in product(*choices):
+            visited += 1
+            if visited > 200000:
+                raise GroupPricingError("Kampanjkombinationen är för stor för verifierad exakt beräkning.")
+            used_stores = {q.store_id for q, _ in combination}
+            if max_stores and len(used_stores) > max_stores:
+                continue
+            items = [
+                q.to_basket_item().model_copy(
+                    update={
+                        "promotion_groups": c.promotion_groups,
+                        "checkout_offers": tuple(c.offers),
+                    }
+                )
+                for q, c in combination
+            ]
+            priced = self.calculator.quote_group_basket(items)
+            total = _sum_items(priced)
+            rank = self._quotes_verification_rank(q for q, _ in combination)
+            key = (
+                rank,
+                total,
+                len(used_stores),
+                tuple(sorted(used_stores)),
+                tuple((i.product_id, i.packages_needed) for i in priced),
+            )
+            if best is None or key < best:
+                best, best_items = key, priced
+            if len(used_stores) == 1 and (single is None or (rank, total) < single):
+                single = (rank, total)
+        if best is None:
+            raise IncompleteBasketError("No complete basket can be built with the selected stores.")
+        grouped = []
+        for store_id in sorted({i.store_id for i in best_items}):
+            rows = [i for i in best_items if i.store_id == store_id]
+            grouped.append(
+                OptimizedStoreGroup(
+                    store_id=store_id,
+                    store_name=source_stores[store_id].name,
+                    items=rows,
+                    subtotal=float(_sum_items(rows)),
+                )
+            )
+        return OptimizedBasket(
+            total=float(best[1]),
+            stores=grouped,
+            max_stores=max_stores,
+            savings_vs_single_store=float(max(0, single[1] - best[1]))
+            if calculate_savings and single
+            else None,
+        )
 
 
 def single_store_options(

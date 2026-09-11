@@ -425,6 +425,12 @@ def price_candidate_for_context(
         "effective_price": effective,
         "sale_price": effective,
         "offers": eligible_offers,
+        "promotion_groups": tuple(
+            g
+            for g in candidate.promotion_groups
+            if g.valid_from <= target_date <= g.valid_to
+            and (g.membership_program is None or g.membership_program in context.memberships)
+        ),
         "selected_price_contract_id": (
             selected.reference
             if selected is not None
@@ -470,7 +476,8 @@ def _project_rows(
             and program in context.memberships
         )
         if (
-            member_offers
+            candidate.promotion_groups
+            or member_offers
             or selected_member_price
             or candidate.effective_price < candidate.price
             or candidate.selected_price_contract_id is not None
@@ -597,11 +604,9 @@ def _store_shortlist_with_support(
     selected: list[ProductCandidate] = []
     support: list[ProductCandidate] = []
     for store_id in sorted(by_store):
-        store_selected, store_support = (
-            selector._select_store_candidates_with_support(
-                entry,
-                by_store[store_id],
-            )
+        store_selected, store_support = selector._select_store_candidates_with_support(
+            entry,
+            by_store[store_id],
         )
         selected.extend(store_selected)
         support.extend(store_support)
@@ -671,9 +676,7 @@ def project_economic_pool(
     """
 
     taxonomy = {entry.canonical: entry for entry in selector.taxonomy}
-    semantics_prepared = (
-        pool.projection_semantics_identity == selector.cache_identity
-    )
+    semantics_prepared = pool.projection_semantics_identity == selector.cache_identity
     projected_candidates: dict[str, list[ProductCandidate]] = {}
     projected_semantic: dict[str, list[ProductCandidate]] = {}
     projected_matched: dict[str, list[ProductCandidate]] = {}
