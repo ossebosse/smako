@@ -1,0 +1,1354 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "SLV.Mikro.LivsmedelData.API",
+    "description": "Med detta API kan du få data från Livsmedelsdatabasen som innehåller drygt 2400 livsmedel och maträtter. För varje livsmedel ges värden för över 50 näringsämnen och ytterligare information så som FoodEx2, Langual och råvaror. Livsmedelsdatabasen speglar det svenska livsmedelsutbudet.",
+    "contact": {
+      "name": "Livsmedelsdatabasen",
+      "email": "livsmedelsdatabasen@slv.se"
+    },
+    "license": {
+      "name": "Tillhandahålls enligt CC BY",
+      "url": "https://creativecommons.org/licenses/by/4.0/deed.sv"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "/livsmedel"
+    }
+  ],
+  "paths": {
+    "/api/v{version}/api-info": {
+      "get": {
+        "tags": [
+          "ApiInfo"
+        ],
+        "summary": "Api-information såsom namn, version, releasedatum, dokumentation och status.",
+        "description": "API information such as name, version, release date, documentation and status.",
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/api-info"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api-info"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api-info"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/livsmedel": {
+      "get": {
+        "tags": [
+          "Livsmedel"
+        ],
+        "summary": "Hämtar en lista med livsmedel. Parametrarna \"offset\" och \"limit\" används för att styra urvalet.",
+        "description": "Retrieves a list of food items. To control the selection parameters \"offstet\" and \"limit\" are used.",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset är startposition i träfflistan som konsument vill börja hämta ifrån. Defaultvärdet är '0' och ```offset``` ska vara större än eller lika med '0'.\r\n<br />\r\nThe starting position in the list of search result, that the consumer wants to start downloadning from, is ```offset```. Default value is '0' and offset must be greater than or equal to '0'.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Antal sökträffar per sida som konsumenten vill erhålla. Defaultvärdet är '1' och ```limit``` ska vara större än eller lika med '1'.\r\n<br />\r\nNumber of search results that the consumer wants to obtain per page. Default value is '1' and ```limit``` should be greater than or equal to '1'.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "sprak",
+            "in": "query",
+            "description": "Det språk man vill ha resultatet på. 1=Svenska och 2=Engelska\r\n<br />\r\nThe results are presented in Swedish or English. 1=Swedish and 2=English",
+            "schema": {
+              "$ref": "#/components/schemas/Sprak"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livsmedelsida"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livsmedelsida"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livsmedelsida"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/livsmedel/{nummer}": {
+      "get": {
+        "tags": [
+          "Livsmedel"
+        ],
+        "summary": "Hämtar ett livsmedel med ett specifikt nummer.",
+        "description": "Retrieves a food item by its food id.",
+        "parameters": [
+          {
+            "name": "nummer",
+            "in": "path",
+            "description": "Livsmedelsnummer\r\n<br />\r\nFood id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sprak",
+            "in": "query",
+            "description": "Det språk man vill ha resultatet på. 1=Svenska och 2=Engelska\r\n<br />\r\nThe results are presented in Swedish or English. 1=Swedish and 2=English",
+            "schema": {
+              "$ref": "#/components/schemas/Sprak"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livsmedel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livsmedel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livsmedel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/livsmedel/{nummer}/naringsvarden": {
+      "get": {
+        "tags": [
+          "Livsmedel"
+        ],
+        "summary": "Hämtar alla näringsvärden för ett specifikt livsmedel.",
+        "description": "Retrieves all nutritional values ​​for a specific food item.",
+        "parameters": [
+          {
+            "name": "nummer",
+            "in": "path",
+            "description": "Livsmedelsnummer\r\n<br />\r\nFood id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sprak",
+            "in": "query",
+            "description": "Det språk man vill ha resultatet på. 1=Svenska och 2=Engelska\r\n<br />\r\nThe results are presented in Swedish or English. 1=Swedish and 2=English",
+            "schema": {
+              "$ref": "#/components/schemas/Sprak"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Naringsvarde"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Naringsvarde"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Naringsvarde"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/livsmedel/{nummer}/klassificeringar": {
+      "get": {
+        "tags": [
+          "Livsmedel"
+        ],
+        "summary": "Hämtar alla klassificeringar för ett specifikt livsmedel",
+        "description": "Retrieves all classifications for a specific food item.",
+        "parameters": [
+          {
+            "name": "nummer",
+            "in": "path",
+            "description": "Livsmedelsnummer\r\n<br />\r\nFood id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sprak",
+            "in": "query",
+            "description": "Det språk man vill ha resultatet på. 1=Svenska och 2=Engelska\r\n<br />\r\nThe results are presented in Swedish or English. 1=Swedish and 2=English",
+            "schema": {
+              "$ref": "#/components/schemas/Sprak"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Klassificering"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Klassificering"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Klassificering"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/livsmedel/{nummer}/ravaror": {
+      "get": {
+        "tags": [
+          "Livsmedel"
+        ],
+        "summary": "Hämtar alla råvaror för ett specifikt livsmedel.",
+        "description": "Retrieves all raw agricultural commodities for a specific food item.",
+        "parameters": [
+          {
+            "name": "nummer",
+            "in": "path",
+            "description": "Livsmedelsnummer\r\n<br />\r\nFood id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sprak",
+            "in": "query",
+            "description": "Det språk man vill ha resultatet på. 1=Svenska och 2=Engelska\r\n<br />\r\nThe results are presented in Swedish or English. 1=Swedish and 2=English",
+            "schema": {
+              "$ref": "#/components/schemas/Sprak"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ravara"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ravara"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ravara"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/livsmedel/{nummer}/ingredienser": {
+      "get": {
+        "tags": [
+          "Livsmedel"
+        ],
+        "summary": "Hämtar alla ingredienser för ett specifikt livsmedel.",
+        "description": "Retrieves all ingredients for a specific food item.",
+        "parameters": [
+          {
+            "name": "nummer",
+            "in": "path",
+            "description": "Livsmedelsnummer\r\n<br />\r\nFood id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sprak",
+            "in": "query",
+            "description": "Det språk man vill ha resultatet på. 1=Svenska och 2=Engelska\r\n<br />\r\nThe results are presented in Swedish or English. 1=Swedish and 2=English",
+            "schema": {
+              "$ref": "#/components/schemas/Sprak"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ingrediens"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ingrediens"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ingrediens"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Ingrediens": {
+        "type": "object",
+        "properties": {
+          "nummer": {
+            "type": "integer",
+            "description": "Unikt id på ingående ingrediens",
+            "format": "int32",
+            "example": 827
+          },
+          "namn": {
+            "type": "string",
+            "description": "Namn på ingående ingrediens",
+            "nullable": true,
+            "example": "Hirs hela el. krossade korn fullkorn"
+          },
+          "vattenFaktor": {
+            "type": "number",
+            "description": "Viktförändringsfaktor för vatten",
+            "format": "double",
+            "nullable": true,
+            "example": 19.6
+          },
+          "fettFaktor": {
+            "type": "number",
+            "description": "Viktförändringsfaktor för fett",
+            "format": "double",
+            "nullable": true,
+            "example": 1
+          },
+          "viktForeTillagning": {
+            "type": "number",
+            "description": "Vikt på ingrediens före tillagning",
+            "format": "double",
+            "nullable": true,
+            "example": 160
+          },
+          "viktEfterTillagning": {
+            "type": "number",
+            "description": "Vikt på ingrediens efter tillagning",
+            "format": "double",
+            "nullable": true,
+            "example": 577
+          },
+          "tillagningsfaktor": {
+            "type": "string",
+            "description": "Den tillagningsfaktor som tillämpats",
+            "nullable": true,
+            "example": "Hirs, kokt"
+          },
+          "retentionsFaktorer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RetentionsFaktor"
+            },
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Klassificering": {
+        "type": "object",
+        "properties": {
+          "typ": {
+            "type": "string",
+            "description": "Typ av klassificering",
+            "nullable": true,
+            "example": "Langual; FoodEx2"
+          },
+          "fasett": {
+            "type": "string",
+            "description": "Typ av fasett enligt LanguaL™",
+            "nullable": true,
+            "example": "Z Utmärkande drag"
+          },
+          "fasettkod": {
+            "type": "string",
+            "description": "Fasettens kod enligt LanguaL™",
+            "nullable": true,
+            "example": "Z0005"
+          },
+          "kod": {
+            "type": "string",
+            "description": "FoodEx2-koden",
+            "nullable": true,
+            "example": "A035J"
+          },
+          "namn": {
+            "type": "string",
+            "description": "Undergrupp till fasetten enligt LanguaL™",
+            "nullable": true,
+            "example": "Livsmedelsindustritillverkat"
+          },
+          "langualId": {
+            "type": "string",
+            "description": "Undergruppens kod enligt LanguaL™",
+            "nullable": true,
+            "example": "Z0112"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "nullable": true
+          },
+          "rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "method": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Livsmedel": {
+        "type": "object",
+        "properties": {
+          "livsmedelsTypId": {
+            "$ref": "#/components/schemas/LivsmedelsTyp"
+          },
+          "livsmedelsTyp": {
+            "type": "string",
+            "description": "Visar om livsmedlet är analyserat eller beräknat",
+            "nullable": true,
+            "example": "analyserat; beräknat"
+          },
+          "nummer": {
+            "type": "integer",
+            "description": "Unikt id på livsmedlet",
+            "format": "int32",
+            "example": 7006
+          },
+          "version": {
+            "type": "string",
+            "description": "Datum och tid då datamängden senast uppdaterades",
+            "format": "date-time",
+            "example": "2022-12-12T10:26:38.557"
+          },
+          "namn": {
+            "type": "string",
+            "description": "Namn på livsmedlet",
+            "nullable": true,
+            "example": "Hirs kokt m. salt"
+          },
+          "vetenskapligtNamn": {
+            "type": "string",
+            "description": "Livsmedlets vetenskapliga namn i det fall livsmedlet är en råvara",
+            "nullable": true,
+            "example": "Panicum miliaceum (L.)."
+          },
+          "projekt": {
+            "type": "string",
+            "description": "Namn på det projekt som livsmedlet senast har ingått i",
+            "nullable": true,
+            "example": "2022 Snacks, sötsaker och dryck"
+          },
+          "analys": {
+            "type": "string",
+            "description": "Information om vilka produkter som ingår i analysen av livsmedlet samt i vilka proportioner",
+            "nullable": true,
+            "example": "I det analyserade provet från 2022 ingår: Saltå Kvarn Hirs (34%), Go Green Skalad hirs (33%), Kung Markatta Hirs (33%)."
+          },
+          "tillagningsmetod": {
+            "type": "string",
+            "description": "Den tillagningsmetod som tillämpats i de fall livsmedlet är beräknat",
+            "nullable": true,
+            "example": "kokt"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LivsmedelsTyp": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "description": "Identifikationsnummer för livsmedelstyp",
+        "format": "int32",
+        "example": "Analyserat=1, Beraknat=2"
+      },
+      "Livsmedelsida": {
+        "type": "object",
+        "properties": {
+          "_meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "_links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          },
+          "livsmedel": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Livsmedel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "totalRecords": {
+            "type": "integer",
+            "description": "Totalt antal träffar på aktuella sökparametrar, oaktat sida och antal",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Startposition i träfflistan",
+            "format": "int32"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Begärd antal resultat per sida",
+            "format": "int32"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Antal resultat på aktuell sida",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Naringsvarde": {
+        "type": "object",
+        "properties": {
+          "namn": {
+            "type": "string",
+            "description": "Namn på näringsämne eller komponent",
+            "nullable": true,
+            "example": "Energi (kcal)"
+          },
+          "euroFIRkod": {
+            "type": "string",
+            "description": "Koden på näringsämne eller komponent enligt EuroFIRs thesauri",
+            "nullable": true,
+            "example": "ENERC"
+          },
+          "forkortning": {
+            "type": "string",
+            "description": "Förkortning på näringsämne eller komponent",
+            "nullable": true,
+            "example": "Ener"
+          },
+          "varde": {
+            "type": "number",
+            "description": "Värde",
+            "format": "double",
+            "example": 188
+          },
+          "enhet": {
+            "type": "string",
+            "description": "Enhet för värdet",
+            "nullable": true,
+            "example": "Kcal; g"
+          },
+          "viktGram": {
+            "type": "integer",
+            "description": "Vikt som energi- och näringsinnehåll baseras på. Alltid 100 gram.",
+            "format": "int32",
+            "readOnly": true,
+            "example": 100
+          },
+          "matrisenhet": {
+            "type": "string",
+            "description": "Matrisenhet",
+            "nullable": true,
+            "example": "100 g fettsyror"
+          },
+          "matrisenhetkod": {
+            "type": "string",
+            "description": "Matrisenhetskod",
+            "nullable": true,
+            "example": "W"
+          },
+          "berakning": {
+            "type": "string",
+            "description": "Den beräkning som gjorts för att räkna fram värdet",
+            "nullable": true,
+            "example": "443,15*0,239"
+          },
+          "vardetyp": {
+            "type": "string",
+            "description": "Typ av värde",
+            "nullable": true,
+            "example": "Ett analysvärde av ett sammansatt prov; Inget fynd"
+          },
+          "vardetypkod": {
+            "type": "string",
+            "description": "Koden för värdetypen enligt EuroFIRs thesaurus",
+            "nullable": true,
+            "example": "AV; BL"
+          },
+          "ursprung": {
+            "type": "string",
+            "description": "Ursprung för värdet",
+            "nullable": true,
+            "example": "Analys, SLV; Produktinformation"
+          },
+          "ursprungkod": {
+            "type": "string",
+            "description": "Koden för ursprunget enligt EuroFIRs theasuri",
+            "nullable": true,
+            "example": "O; L"
+          },
+          "publikation": {
+            "type": "string",
+            "description": "Namn på den publikation där värdet är hämtat ifrån",
+            "nullable": true,
+            "example": "Analysprotokoll Dnr 2018/00799"
+          },
+          "metodtyp": {
+            "type": "string",
+            "description": "Anger om värdet är analyserat, beräknat eller överfört från liknande livsmedel.",
+            "nullable": true,
+            "example": "Analysresultat"
+          },
+          "metodtypkod": {
+            "type": "string",
+            "description": "Koden för metodtypen enligt EuroFIRs theasuri",
+            "nullable": true,
+            "example": "A"
+          },
+          "metodindikator": {
+            "type": "string",
+            "description": "Den analys- eller framtagningsmetod som använts",
+            "nullable": true,
+            "example": "Kromatografi; beräknat från ingredienser"
+          },
+          "metodindikatorkod": {
+            "type": "string",
+            "description": "Koden för metodindikatorn enligt EuroFIRs thesauri",
+            "nullable": true,
+            "example": "MI1144; MI0004"
+          },
+          "referenstyp": {
+            "type": "string",
+            "description": "Anger i vilket format som referensen till värdet finns.",
+            "nullable": true,
+            "example": "Rapport; bok"
+          },
+          "referenstypkod": {
+            "type": "string",
+            "description": "Koden för referenstypen enligt EuroFIRs theasuri",
+            "nullable": true,
+            "example": "R; B "
+          },
+          "kommentar": {
+            "type": "string",
+            "description": "Eventuell kommentar till värdet står här",
+            "nullable": true,
+            "example": "Produktinformation hämtad 20231110. "
+          }
+        },
+        "additionalProperties": false
+      },
+      "NotFoundResult": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "Ravara": {
+        "type": "object",
+        "properties": {
+          "namn": {
+            "type": "string",
+            "description": "Namn på råvara",
+            "nullable": true,
+            "example": "Aprikos"
+          },
+          "foodEx2": {
+            "type": "string",
+            "description": "FoodEx2-koden",
+            "nullable": true,
+            "example": "A035J"
+          },
+          "tillagning": {
+            "type": "string",
+            "description": "Den bearbetningsmetod som tillämpats på råvaran",
+            "nullable": true,
+            "example": "Torkad"
+          },
+          "andel": {
+            "type": "number",
+            "description": "Mängd av den bearbetade råvaran",
+            "format": "double",
+            "example": 100
+          },
+          "faktor": {
+            "type": "number",
+            "description": "Den faktor som använts för att räkna om till obearbetad råvara",
+            "format": "double",
+            "example": 3.5
+          },
+          "omraknadTillRa": {
+            "type": "number",
+            "description": "Mängd råvara i obearbetat tillstånd",
+            "format": "double",
+            "example": 350
+          }
+        },
+        "additionalProperties": false
+      },
+      "RetentionsFaktor": {
+        "type": "object",
+        "properties": {
+          "naringsamnesNamn": {
+            "type": "string",
+            "description": "Näringsämnets namn",
+            "nullable": true,
+            "example": "Kalium, K"
+          },
+          "faktor": {
+            "type": "number",
+            "description": "Faktor",
+            "format": "double",
+            "example": "Faktor"
+          },
+          "euroFIRkod": {
+            "type": "string",
+            "description": "Näringsämnets EuroFIRkod",
+            "nullable": true,
+            "example": "Näringsämnets EuroFIRkod"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sprak": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "description": "Språk på resultatet",
+        "format": "int32",
+        "example": "1=Svenska, 2=Engelska"
+      },
+      "api-info": {
+        "type": "object",
+        "properties": {
+          "apiName": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiReleased": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiDocumentation": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiStatus": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Läs mer om vilken data som kan du få från Livsmedelsdatabasen",
+    "url": "https://www.livsmedelsverket.se/om-oss/psidata/livsmedelsdatabasen"
+  }
+}

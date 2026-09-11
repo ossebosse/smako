@@ -1,0 +1,125 @@
+{
+  "declared_before_search": true,
+  "A": {
+    "mode": "cheapest",
+    "max_stores": 2,
+    "dinners": 0,
+    "breakfasts": 1,
+    "servings": 2,
+    "min_protein_g": 15,
+    "max_kcal": 600,
+    "allow_nutrition_estimates": false
+  },
+  "B": {
+    "mode": "balanced",
+    "max_stores": 2,
+    "dinners": 5,
+    "servings": 4,
+    "min_protein_g": 20,
+    "max_kcal": 800,
+    "allow_nutrition_estimates": true
+  },
+  "C": {
+    "extends": "B",
+    "pantry": {
+      "name": "ris",
+      "quantity": 500,
+      "unit": "g",
+      "preparation": "dry",
+      "reference_confirmation": true
+    }
+  },
+  "D": {
+    "mode": "cheapest",
+    "max_stores": 2,
+    "dinners": 1,
+    "servings": 2,
+    "organic_percent": 25,
+    "allow_nutrition_estimates": false
+  },
+  "E": {
+    "extends": "B",
+    "organic_percent": 25
+  },
+  "B4": {
+    "mode": "balanced",
+    "max_stores": 2,
+    "dinners": 4,
+    "servings": 4,
+    "min_protein_g": 20,
+    "max_kcal": 800,
+    "allow_nutrition_estimates": true
+  },
+  "B3": {
+    "mode": "balanced",
+    "max_stores": 2,
+    "dinners": 3,
+    "servings": 4,
+    "min_protein_g": 20,
+    "max_kcal": 800,
+    "allow_nutrition_estimates": true
+  },
+  "C4": {
+    "mode": "balanced",
+    "max_stores": 2,
+    "dinners": 4,
+    "servings": 4,
+    "min_protein_g": 20,
+    "max_kcal": 800,
+    "allow_nutrition_estimates": true,
+    "pantry": {
+      "name": "ris",
+      "quantity": 500,
+      "unit": "g",
+      "preparation": "dry",
+      "reference_confirmation": true
+    }
+  },
+  "E4": {
+    "mode": "balanced",
+    "max_stores": 2,
+    "dinners": 4,
+    "servings": 4,
+    "min_protein_g": 20,
+    "max_kcal": 800,
+    "allow_nutrition_estimates": true,
+    "organic_percent": 25
+  },
+  "A2": {
+    "mode": "cheapest",
+    "max_stores": 2,
+    "dinners": 0,
+    "breakfasts": 1,
+    "servings": 2,
+    "min_protein_g": 15,
+    "max_kcal": 600,
+    "allow_nutrition_estimates": false,
+    "manual_recipe": "Ostsmörgås: 80 g bröd och 60 g ost per portion; Servera tillsammans."
+  },
+  "C3": {
+    "mode": "balanced",
+    "max_stores": 2,
+    "dinners": 3,
+    "servings": 4,
+    "min_protein_g": 20,
+    "max_kcal": 800,
+    "allow_nutrition_estimates": true,
+    "pantry": {
+      "name": "ris",
+      "quantity": 500,
+      "unit": "g",
+      "preparation": "dry",
+      "reference_confirmation": true
+    }
+  },
+  "E3": {
+    "mode": "balanced",
+    "max_stores": 2,
+    "dinners": 3,
+    "servings": 4,
+    "min_protein_g": 20,
+    "max_kcal": 800,
+    "allow_nutrition_estimates": true,
+    "organic_percent": 25
+  }
+}
