@@ -35,6 +35,7 @@ from app.services.diet_policy import recipe_respects_diet
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 from app.services.inter_plan_distance import compare_plans, required_changes
 from app.services.meal_plan_optimizer import MealPlanService, _consumer_price_context_coverage
+from app.services.personal_nutrition import calculation_basis, requested_nutrients
 from app.services.personal_policy import (
     PolicyConflict,
     check_product,
@@ -54,7 +55,7 @@ from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
-POLICY_VERSION = "personal-policy-v2-1"
+POLICY_VERSION = "personal-policy-v2-2"
 
 
 class PersonalPlanner:
@@ -95,6 +96,9 @@ class PersonalPlanner:
         self.facts = (
             load_retained_facts(prepared) if facts is None and needs_facts else facts
         ) or {}
+        from app.services.personal_source_facts import facts_version
+
+        self.facts_version = getattr(self.facts, "version", None) or facts_version(self.facts)
         self.cooked_weights = cooked_weights or {}
         self.now = now or datetime.now(UTC)
         self.pricing_date = self.now.astimezone(ZoneInfo("Europe/Stockholm")).date()
@@ -180,6 +184,18 @@ class PersonalPlanner:
                 position = self.by_identity.get((candidate.store_id, candidate.product_id))
                 if position is not None:
                     positions.add(position)
+            if self.facts:
+                # Reuse the wider frozen semantic index before any cheap-pool
+                # pruning. Search text alone misses e.g. compound bread names.
+                for candidate in self.view.economic_pool.matched_candidates_by_name.get(
+                    canonical, ()
+                ):
+                    position = self.by_identity.get((candidate.store_id, candidate.product_id))
+                    if position is not None:
+                        positions.add(position)
+                for entry in self.prepared.universe.indexes.canonical:
+                    if entry.key == canonical:
+                        positions.update(entry.product_indexes)
             if not positions or properties or self.facts:
                 key = name
                 if key not in self.queries:
@@ -200,6 +216,8 @@ class PersonalPlanner:
                 )
                 continue
             if product.product_role == "non_human_food":
+                continue
+            if self.facts and product.semantic_confidence not in {"high", "exact"}:
                 continue
             try:
                 check_product(
@@ -363,6 +381,18 @@ class PersonalPlanner:
                 if row["profile"].allergies or row["profile"].exclusions:
                     # A generic pantry entry has no complete source declaration.
                     continue
+            # Exact pantry lots use the same qualified facts as purchases. A
+            # generic lot has no declared nutrition and cannot borrow a label.
+            if row.get("nutrients") and not item["product_key"]:
+                raise PolicyConflict(
+                    f"{item['name']}: skafferivarans exakta produkt och näringsdeklaration saknas.",
+                    code="DATA_BLOCKED",
+                )
+            if row["organic_animals"] and not item["product_key"]:
+                raise PolicyConflict(
+                    f"{item['name']}: skafferivarans animaliska innehåll/ekostatus saknar produktunderlag.",
+                    code="DATA_BLOCKED",
+                )
             used = min(remaining, available[item["id"]])
             allocations.append(
                 {
@@ -372,6 +402,7 @@ class PersonalPlanner:
                     "name": item["name"],
                     "source": row["source"],
                     "demand_key": row["demand_key"],
+                    "product_key": item["product_key"],
                 }
             )
             remaining -= used
@@ -403,18 +434,8 @@ class PersonalPlanner:
                 food=row["food"],
             )
             meal = next((self.meals[s.meal_type] for s in slots if s.id == row["source"]), None)
-            requested = (
-                (
-                    {
-                        k.removeprefix("min_").removeprefix("max_")
-                        for k, v in meal.limits.model_dump().items()
-                        if v is not None
-                    }
-                    - {"weight_g"}
-                )
-                if meal
-                else set()
-            )
+            requested = requested_nutrients(meal.limits) if meal else set()
+            row["nutrients"] = sorted(requested)
             if requested:
                 nutrition_needs.add(row["name"])
                 verified = [
@@ -423,8 +444,12 @@ class PersonalPlanner:
                     if (fact := self.source_facts(self.prepared.universe.products[i]))
                     and fact.nutrition_unit == row["unit"]
                     and fact.nutrition_basis
+                    and fact.nutrition_preparation == "as_sold"
                     and requested <= fact.nutrition.keys()
-                    and all(math.isfinite(v) and v >= 0 for v in fact.nutrition.values())
+                    and all(
+                        math.isfinite(fact.nutrition[k]) and fact.nutrition[k] >= 0
+                        for k in requested
+                    )
                 ]
                 if not verified:
                     missing_nutrition.add(row["name"])
@@ -501,8 +526,26 @@ class PersonalPlanner:
             ordinary_total = basket.total
             if self.spec.surplus_mode == "allow_larger":
                 basket = self._larger_packages(basket, ingredients, candidate_map)
-            if self.spec.organic_percent and final:
-                basket = self._ecological_basket(ingredients, candidate_map, groups, basket)
+            if self.spec.organic_percent:
+                try:
+                    basket = self._ecological_basket(ingredients, candidate_map, groups, basket)
+                except PolicyConflict:
+                    if final:
+                        raise
+                    # A later meal can still raise the global cost share. Do not
+                    # declare a partial menu infeasible, but price qualified
+                    # alternatives before beam pruning whenever available.
+            if any(self.meals[s.meal_type].limits.active for s in slots if s.recipe):
+                basket = self._qualified_nutrition_basket(
+                    slots,
+                    basket,
+                    ingredients,
+                    candidate_map,
+                    groups,
+                    rows,
+                    allocations,
+                    final=final,
+                )
         audit = self.auditor.audit(
             ingredients,
             basket,
@@ -538,11 +581,18 @@ class PersonalPlanner:
                 )
             ]
         for group in groups:
-            item = next(i for store in basket.stores for i in store.items if i.ingredient == group["key"])
+            item = next(
+                i for store in basket.stores for i in store.items if i.ingredient == group["key"]
+            )
             if item.group_applications:
-                product = self.prepared.universe.products[self.by_identity[(item.store_id, item.product_id)]]
-                group["unused_source_offers"] = [offer.model_dump(mode="json") for offer in product.offers
-                                                if item.applied_offer is None or offer != item.applied_offer]
+                product = self.prepared.universe.products[
+                    self.by_identity[(item.store_id, item.product_id)]
+                ]
+                group["unused_source_offers"] = [
+                    offer.model_dump(mode="json")
+                    for offer in product.offers
+                    if item.applied_offer is None or offer != item.applied_offer
+                ]
         checks = self._check_final(slots, basket, groups, rows, allocations) if final else {}
         return {
             "basket": basket,
@@ -550,7 +600,7 @@ class PersonalPlanner:
             "groups": groups,
             "allocations": allocations,
             "remaining_demands": [
-                {k: v for k, v in r.items() if k not in {"profile", "organic_animals"}}
+                {k: v for k, v in r.items() if k not in {"profile", "organic_animals", "nutrients"}}
                 for r in rows
             ],
             "available_surplus": [
@@ -655,6 +705,147 @@ class PersonalPlanner:
                     organic += money(item.total_price)
         return float(organic * 100 / denominator) if denominator else None
 
+    def _eco_evidence(self, basket, groups):
+        food = {g["key"] for g in groups if g["food"]}
+        lines = []
+        for store in basket.stores:
+            for item in store.items:
+                if item.ingredient not in food:
+                    continue
+                fact = self.source_facts(
+                    self.prepared.universe.products[
+                        self.by_identity[(item.store_id, item.product_id)]
+                    ]
+                )
+                lines.append(
+                    {
+                        "product_id": item.product_id,
+                        "name": item.product_name,
+                        "cost": item.total_price,
+                        "organic": fact.organic if fact else None,
+                        "sources": list(fact.field_sources.get("organic", ())) if fact else [],
+                    }
+                )
+        return {
+            "status": "NO_NEW_FOOD_PURCHASES" if not lines else "CALCULATED",
+            "requested_percent": self.spec.organic_percent,
+            "lines": lines,
+            "food_cost": float(sum((money(r["cost"]) for r in lines), Decimal(0))),
+            "organic_food_cost": float(
+                sum((money(r["cost"]) for r in lines if r["organic"] is True), Decimal(0))
+            ),
+        }
+
+    def _qualified_nutrition_basket(
+        self, slots, baseline, ingredients, candidates, groups, rows, allocations, *, final
+    ):
+        """Bounded product search, repriced by the existing whole-basket engine.
+
+        Run before meal beam pruning too: a cheap nutritionally unsuitable meal
+        must not crowd out complete alternatives. Final validation repeats it.
+        """
+        try:
+            self._check_final(slots, baseline, groups, rows, allocations)
+            return baseline
+        except PolicyConflict as initial:
+            if initial.code == "DATA_BLOCKED":
+                raise  # All candidates already require the selected data fields.
+            conflict = initial
+        import heapq
+
+        keys = [
+            k
+            for k in candidates
+            if any(r.get("purchase_key") == k and r.get("nutrients") for r in rows)
+        ]
+        choices = []
+        requested = set().union(
+            *(requested_nutrients(self.meals[s.meal_type].limits) for s in slots)
+        )
+        if not requested:
+            raise conflict
+        for key in keys:
+            current = next(
+                i for store in baseline.stores for i in store.items if i.ingredient == key
+            )
+            ordered = sorted(
+                candidates[key],
+                key=lambda c: (
+                    c.product_id != current.product_id or c.store_id != current.store_id,
+                    c.effective_price,
+                    c.product_id,
+                ),
+            )
+            # Retain nutritional extrema before the bounded combination search,
+            # plus cheapest and verified organic alternatives. Unknown is absent.
+            important = ordered[:1]
+            for nutrient in sorted(requested):
+                known = [
+                    c
+                    for c in ordered
+                    if (
+                        f := self.source_facts(
+                            self.prepared.universe.products[
+                                self.by_identity[(c.store_id, c.product_id)]
+                            ]
+                        )
+                    )
+                    and nutrient in f.nutrition
+                ]
+                if known:
+                    known.sort(
+                        key=lambda c: self.source_facts(
+                            self.prepared.universe.products[
+                                self.by_identity[(c.store_id, c.product_id)]
+                            ]
+                        ).nutrition[nutrient]
+                    )
+                    important.extend([known[0], known[-1]])
+            important.extend(ordered)
+            choices.append(
+                list({(c.store_id, c.product_id): c for c in reversed(important)}.values())[::-1]
+            )
+        searched = 0
+        best = None
+        # Explore nearby alternatives across ALL relevant ingredients first.
+        # A large final dimension (or unrelated extras) cannot consume the whole
+        # search budget before an earlier ingredient gets its second candidate.
+        origin = (0,) * len(keys)
+        queue, seen = [(0, origin)], {origin}
+        while queue and searched < 256:
+            _, indices = heapq.heappop(queue)
+            for dimension, index in enumerate(indices):
+                if index + 1 < len(choices[dimension]):
+                    neighbor = tuple(
+                        index + 1 if n == dimension else v for n, v in enumerate(indices)
+                    )
+                    if neighbor not in seen:
+                        seen.add(neighbor)
+                        heapq.heappush(queue, (sum(neighbor), neighbor))
+            combination = [choices[n][i] for n, i in enumerate(indices)]
+            searched += 1
+            narrowed = {**candidates, **{k: [c] for k, c in zip(keys, combination, strict=True)}}
+            try:
+                option = self.optimizer.optimize(
+                    ingredients, narrowed, self.view.stores, max_stores=self.request.max_stores
+                )
+                if (
+                    final
+                    and self.spec.organic_percent
+                    and (self._eco_percent(option, groups) or 0) + 1e-8 < self.spec.organic_percent
+                ):
+                    continue
+                self._check_final(slots, option, groups, rows, allocations)
+                if best is None or option.total < best.total:
+                    best = option
+            except (PolicyConflict, IncompleteBasketError):
+                continue
+        if best is None:
+            raise PolicyConflict(
+                f"Ingen komplett kombination hittades i näringssökningen ({min(searched, 256)} kombinationer). {conflict} Kraven är oförändrade; sökningen bevisar inte omöjlighet."
+            )
+        return best
+
     def _ecological_basket(self, ingredients, candidates, groups, baseline):
         percent = self._eco_percent(baseline, groups)
         if percent is None and any(g["food"] for g in groups):
@@ -727,91 +918,102 @@ class PersonalPlanner:
             row = {"slot_id": slot.id, "status": "NOT_REQUESTED", "values": {}, "sources": []}
             if limits.active:
                 totals = defaultdict(float)
-                for ingredient in self.service.normalizer.normalize_and_aggregate([slot.recipe]):
-                    sources = [
-                        g
-                        for g in groups
-                        if slot.id in g["sources"]
-                        and any(
-                            canonicalize_ingredient_name(r["name"]) == ingredient.canonical_name
-                            and r["source"] == slot.id
-                            and r["unit"] == ingredient.unit
-                            and g["positions"]
-                            & {
-                                i
-                                for i, _ in self.resolve(
-                                    r["name"],
-                                    r["quantity"],
-                                    r["unit"],
-                                    profile=r["profile"],
-                                    organic_animals=r["organic_animals"],
-                                )
+                requested = requested_nutrients(limits)
+                if requested:
+                    row["calculation_basis"] = calculation_basis(slot.recipe)
+                    for need in (r for r in rows if r["source"] == slot.id):
+                        contributions = []
+                        pantry = [a for a in allocations if a["demand_key"] == need["demand_key"]]
+                        for allocation in pantry:
+                            positions = self.index.groups.get(allocation.get("product_key"), ())
+                            evidence = [
+                                self.source_facts(self.prepared.universe.products[i])
+                                for i in positions
+                            ]
+                            evidence = [
+                                f
+                                for f in evidence
+                                if f
+                                and f.nutrition_unit == need["unit"]
+                                and f.nutrition_basis
+                                and f.nutrition_preparation == "as_sold"
+                                and requested <= f.nutrition.keys()
+                            ]
+                            values = {
+                                tuple((k, f.nutrition[k]) for k in sorted(requested))
+                                for f in evidence
                             }
-                            for r in rows
-                        )
-                    ]
-                    if any(
-                        a.get("source") == slot.id
-                        and canonicalize_ingredient_name(a["name"]) == ingredient.canonical_name
-                        for a in allocations
-                    ):
-                        raise PolicyConflict(
-                            f"{slot.recipe.name}: skafferiets näringsdeklaration saknas.",
-                            code="DATA_BLOCKED",
-                        )
-                    if len(sources) != 1:
-                        raise PolicyConflict(
-                            f"{slot.recipe.name}: näringsunderlaget är ofullständigt.",
-                            code="DATA_BLOCKED",
-                        )
-                    selected = next(
-                        i
-                        for group in basket.stores
-                        for i in group.items
-                        if i.ingredient == sources[0]["key"]
-                    )
-                    product = self.prepared.universe.products[
-                        self.by_identity[(selected.store_id, selected.product_id)]
-                    ]
-                    fact = self.source_facts(product)
-                    if (
-                        fact is None
-                        or fact.nutrition_unit != ingredient.unit
-                        or not fact.nutrition_basis
-                    ):
-                        raise PolicyConflict(
-                            f"{ingredient.canonical_name}: produktnäring med källa, enhet och beräkningsgrund saknas.",
-                            code="DATA_BLOCKED",
-                        )
-                    requested = {
-                        k.removeprefix("min_").removeprefix("max_")
-                        for k, v in limits.model_dump().items()
-                        if v is not None
-                    } - {"weight_g"}
-                    if not requested <= fact.nutrition.keys():
-                        raise PolicyConflict(
-                            f"{ingredient.canonical_name}: valda näringsvärden saknas i källan.",
-                            code="DATA_BLOCKED",
-                        )
-                    if any(not math.isfinite(v) or v < 0 for v in fact.nutrition.values()):
-                        raise PolicyConflict(
-                            "Näringskällan innehåller konfliktfyllda värden.", code="DATA_BLOCKED"
-                        )
-                    for k in requested:
-                        totals[k] += (
-                            fact.nutrition[k]
-                            * ingredient.required_quantity
-                            / 100
-                            / slot.recipe.servings
-                        )
-                    row["sources"].append(
-                        {
-                            "source": fact.source,
-                            "unit": fact.nutrition_unit,
-                            "basis": fact.nutrition_basis,
-                            "product_id": fact.source_product_id,
-                        }
-                    )
+                            if len(values) != 1:
+                                raise PolicyConflict(
+                                    f"{need['name']}: skafferiets exakta näringsunderlag saknas eller är motstridigt.",
+                                    code="DATA_BLOCKED",
+                                )
+                            contributions.append((allocation["quantity"], evidence[0], "pantry"))
+                        quantity = need["quantity"] - sum(a["quantity"] for a in pantry)
+                        if need["original_quantity"] > need["quantity"] + 1e-8:
+                            raise PolicyConflict(
+                                f"{need['name']}: redan förbrukade ingrediensers näringsgrund måste verifieras från den historiska revisionen.",
+                                code="DATA_BLOCKED",
+                            )
+                        if quantity > 1e-8:
+                            selected = next(
+                                (
+                                    item
+                                    for store in basket.stores
+                                    for item in store.items
+                                    if item.ingredient == need.get("purchase_key")
+                                ),
+                                None,
+                            )
+                            fact = (
+                                self.source_facts(
+                                    self.prepared.universe.products[
+                                        self.by_identity[(selected.store_id, selected.product_id)]
+                                    ]
+                                )
+                                if selected
+                                else None
+                            )
+                            contributions.append((quantity, fact, "purchase"))
+                        for quantity, fact, origin in contributions:
+                            if (
+                                not fact
+                                or fact.nutrition_unit != need["unit"]
+                                or not fact.nutrition_basis
+                                or fact.nutrition_preparation != "as_sold"
+                                or not requested <= fact.nutrition.keys()
+                            ):
+                                raise PolicyConflict(
+                                    f"{need['name']}: valda näringsvärden med rätt enhet och grund saknas.",
+                                    code="DATA_BLOCKED",
+                                )
+                            if any(
+                                not math.isfinite(fact.nutrition[k]) or fact.nutrition[k] < 0
+                                for k in requested
+                            ):
+                                raise PolicyConflict(
+                                    f"{need['name']}: konfliktfyllda näringsvärden.",
+                                    code="DATA_BLOCKED",
+                                )
+                            for k in requested:
+                                totals[k] += (
+                                    fact.nutrition[k] * quantity / 100 / slot.recipe.servings
+                                )
+                            row["sources"].append(
+                                {
+                                    "source": fact.source,
+                                    "product_id": fact.source_product_id,
+                                    "unit": fact.nutrition_unit,
+                                    "basis": fact.nutrition_basis,
+                                    "quantity": quantity,
+                                    "origin": origin,
+                                    "field_sources": {
+                                        k: list(v)
+                                        for k, v in fact.field_sources.items()
+                                        if k.startswith("nutrition.")
+                                    },
+                                }
+                            )
                 if limits.min_weight_g is not None or limits.max_weight_g is not None:
                     weight = self.cooked_weights.get(recipe_id(slot.recipe))
                     if (
@@ -847,7 +1049,12 @@ class PersonalPlanner:
             "purchase": "VERIFIED",
             "allergy": "VERIFIED" if has_allergies else "NOT_REQUESTED",
             "nutrition": nutrition,
+            "facts_version": self.facts_version,
             "organic_cost_percent": self._eco_percent(basket, groups),
+            "organic_evidence": self._eco_evidence(basket, groups),
+            "organic_animals": "VERIFIED"
+            if self.spec.organic_animals or any(m.organic_animals for m in self.spec.meals)
+            else "NOT_REQUESTED",
             "organic_definition": "Minst X % av matinköpets varukostnad ska vara verifierat ekologisk.",
             "distribution": [
                 {"meal_type": s.meal_type, "slot_id": s.id, "protein": protein_category(s.recipe)}
@@ -1035,7 +1242,8 @@ class PersonalPlanner:
             "policy": POLICY_VERSION,
             "request": self.request.model_dump(mode="json"),
             "pantry_revision": self.state["revision"],
-            "facts_policy_version": "retained-catalog-facts-v1",
+            "facts_policy_version": self.facts_version,
+            "cooked_weight_evidence": self.cooked_weights,
             "state": self.state,
             "recipes": [r.model_dump() for r in recipes],
             "prices": self.prepared.universe.universe_id,

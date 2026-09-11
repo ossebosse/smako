@@ -40,7 +40,11 @@ class ProductFacts:
     # Per 100 g/ml of the actual purchased ingredient, NOT cooked recipe weight.
     nutrition_unit: str | None = None
     nutrition_basis: str | None = None
+    nutrition_preparation: str = "as_sold"
     nutrition: dict[str, float] = field(default_factory=dict)
+    observed_at: str | None = None
+    field_sources: dict[str, tuple[dict, ...]] = field(default_factory=dict)
+    conflicts: tuple[str, ...] = ()
 
 
 ALLERGENS = {
@@ -196,6 +200,10 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
                     f"{product.name}: {allergen} är inte verifierat i källan.", code="DATA_BLOCKED"
                 )
     if organic_animals:
+        # (animal -> organic) is satisfied by verified organic status even
+        # when animal classification is unknown. No animal absence is claimed.
+        if facts and facts.organic is True:
+            return
         if facts is None or facts.animal is None:
             raise PolicyConflict(
                 f"{product.name}: animaliskt innehåll/ekostatus kan inte verifieras.",

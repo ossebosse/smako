@@ -58,7 +58,7 @@ def test_declarations_map_without_certifying_allergen_absence_or_cooked_yield():
         "carbs_g": 4.8,
     }
     assert f.nutrition_unit == "ml" and "Produktdeklaration" in f.nutrition_basis
-    assert not f.ingredients_complete and not f.allergens_checked and f.animal is None
+    assert not f.ingredients_complete and not f.allergens_checked and f.animal is True
     assert fact({"accreditedTags": [{"code": "EU_ECO_LABEL"}]}).organic is None
     assert fact({"labels": ["eu_ecological"], "nonEkoProduct": False}, "willys").organic is True
     assert fact({"labels": ["eu_ecological"], "nonEkoProduct": True}, "willys").organic is None
@@ -147,7 +147,13 @@ def test_hash_snapshot_context_and_exact_product_join(tmp_path, monkeypatch, dri
     facts = load_retained_facts(p, database=str(db_path), raw_root=raw)
     assert facts[("coop", "mjölk")].organic is True
     from sqlalchemy.engine import URL
-    monkeypatch.setenv("GROCERY_DATABASE_URL", URL.create(driver, database=str(db_path), query={"check_same_thread": "false"}).render_as_string())
+
+    monkeypatch.setenv(
+        "GROCERY_DATABASE_URL",
+        URL.create(
+            driver, database=str(db_path), query={"check_same_thread": "false"}
+        ).render_as_string(),
+    )
     assert load_retained_facts(p, raw_root=raw)[("coop", "mjölk")].organic is True
     other = tmp_path / "other"
     other.mkdir()
@@ -187,3 +193,28 @@ def test_retained_ingredient_text_blocks_positive_compound_conflict():
     f = fact(label(listOfIngredients="Vete, jordnötter, vatten"), identity="bröd")
     with pytest.raises(PolicyConflict, match="produktdeklarationen anger jordnötter"):
         run(p, req, facts={("coop", "bröd"): f})
+
+
+def test_vegan_claim_is_animal_evidence_but_never_allergy_absence():
+    f = fact(
+        label(
+            accreditedTags=[{"code": "EUROPEAN_V_LABEL_VEGAN"}],
+            listOfIngredients="Soja, vatten. Kan innehålla spår av MJÖLK.",
+        )
+    )
+    assert f.animal is False and not f.allergens_checked and not f.ingredients_complete
+    conflicting = fact(label(accreditedTags=[{"code": "EUROPEAN_V_LABEL_VEGAN"}]))
+    assert conflicting.animal is None and "animal" in conflicting.conflicts
+
+
+def test_ambiguous_drained_basis_is_retained_but_not_eligible_as_sold():
+    f = fact(label(name="Mozzarella", listOfIngredients="MJÖLK, vatten, salt"))
+    assert f.nutrition and f.nutrition_preparation == "draining_unknown"
+
+
+def test_conflicting_duplicate_values_are_marked_not_selected():
+    raw = label()
+    raw["nutrientLinks"].append({"description": "Protein", "unit": "Gram", "amount": ["8"]})
+    f = fact(raw)
+    assert "protein_g" not in f.nutrition and "nutrition.protein_g" in f.conflicts
+    assert f.nutrition["kcal"] == 45
