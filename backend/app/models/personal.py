@@ -125,6 +125,17 @@ class PantryItem(PrivateModel):
     product_key: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
     unusable: bool = False
     food: bool = True
+    nutrition_reference: str | None = Field(default=None, max_length=60)
+
+    @model_validator(mode="after")
+    def reference_identity(self):
+        if self.nutrition_reference:
+            from app.services.nutrition_reference import validate_pantry_reference
+
+            validate_pantry_reference(self.name, self.unit, self.nutrition_reference)
+            if self.product_key:
+                raise ValueError("En exakt skafferiprodukt använder sitt produktunderlag.")
+        return self
 
 
 class MealSlot(PrivateModel):
@@ -142,6 +153,7 @@ class PersonalPlanning(PrivateModel):
     pantry_revision: int = Field(default=0, ge=0)
     organic_percent: float = Field(default=0, ge=0, le=100)
     organic_animals: bool = False
+    allow_nutrition_estimates: bool = False
     surplus_mode: Literal["minimize", "allow_larger"] = "minimize"
     product_locks: dict[str, str] = Field(default_factory=dict, max_length=80)
 
@@ -163,7 +175,7 @@ class PersonalPlanning(PrivateModel):
 
 
 class PersonalResult(PrivateModel):
-    version: str = "personal-v2-2"
+    version: str = "personal-v2-3"
     slots: list[MealSlot]
     pantry_revision: int
     allocations: list[dict] = Field(default_factory=list)

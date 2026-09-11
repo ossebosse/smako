@@ -443,6 +443,31 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
     def __init__(self) -> None:
         self._batch_statistics: dict[str, int] = {}
 
+    def generate_reference_candidates(self, *, servings=4):
+        """Reviewed cooked weekday recipes for explicit SLV estimates.
+
+        Same Recipe model/optimizer and unrestricted normal product selection.
+        The cooking basis checks these exact instructions on edits too.
+        """
+        from app.services.personal_nutrition import reference_instructions
+
+        templates = [
+            ("Kokt kyckling med ris och morötter", "plate", "kyckling", "ris", "morot"),
+            ("Torsk- och kålsoppa med äggnudlar", "soup", "fisk", "nudlar", "vitkål"),
+            ("Pocherad lax med ris och morötter", "plate", "lax", "ris", "morot"),
+            ("Kycklingsoppa med äggnudlar och vitkål", "soup", "kyckling", "nudlar", "vitkål"),
+            ("Torskgryta med ris och morot", "stew", "fisk", "ris", "morot"),
+            ("Lax- och kålsoppa med ris", "soup", "lax", "ris", "vitkål"),
+            ("Stekt lax med ris och morötter", "fried_plate", "lax", "ris", "morot"),
+            ("Nudelpanna med stekt lax och vitkål", "salmon_pan", "lax", "nudlar", "vitkål"),
+        ]
+        return [Recipe(name=name, servings=servings, ingredients=[
+            RecipeIngredient(name=protein, quantity=150 * servings, unit="g"),
+            RecipeIngredient(name=carb, quantity=80 * servings, unit="g"),
+            RecipeIngredient(name=veg, quantity=150 * servings, unit="g"),
+        ], instructions=reference_instructions(form))
+            for name, form, protein, carb, veg in templates]
+
     def generate_for_meal_type(self, economic_ingredients, meal_type, *, count=80, servings=4):
         """Extend the existing generator with actual breakfast/snack preparations."""
         if meal_type == "dinner":

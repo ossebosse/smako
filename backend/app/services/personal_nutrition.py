@@ -20,7 +20,55 @@ def requested_nutrients(limits):
     } - {"weight_g"}
 
 
-def calculation_basis(recipe):
+def reference_instructions(form):
+    common = [
+        "Väg de listade mängderna: benfri fiskfilé utan skinn eller kycklingbröstfilé utan skinn, torra äggnudlar eller långkornigt vitt ris och tvättade grönsaker. Moroten används oskalad; vitkålens ätbara delar, även fint skuren stock, används. Kasserade eller oätliga delar ingår inte i den vägda mängden.",
+        "Koka ris eller äggnudlar separat enligt förpackningen. Koka morot eller vitkål mjuk i vatten. Använd inget extra fett, salt, kryddor eller andra olistade ingredienser i denna beräknade version.",
+        "Sjud fisk eller kyckling varsamt i vatten tills genomlagad. Ta upp råvarorna; kokvattnet används inte som näringskälla. Dela alla angivna råvaror jämnt mellan portionerna.",
+    ]
+    finish = {
+        "plate": "Servera filén hel på tallrik med riset och grönsakerna vid sidan.",
+        "soup": "Skär den tillagade filén och grönsakerna i munsbitar. Lägg i portionsskålar med ris eller nudlar, tillsätt hett dricksvatten till en skedbar soppa och servera.",
+        "stew": "Dela den tillagade fisken i stora bitar. Mosa hälften av den kokta moroten med lite hett dricksvatten till en tjock bas. Vänd försiktigt ned fisk och resterande morot, värm igenom och servera grytan med riset separat.",
+        "fried_plate": "Stek laxfilén på båda sidor i en belagd panna utan extra fett tills genomlagad. Lägg upp filén utan kvarvarande steksky. Servera med kokt ris och morötter vid sidan.",
+        "salmon_pan": "Stek laxfilén på båda sidor i en belagd panna utan extra fett tills genomlagad. Lägg upp fisken utan kvarvarande steksky och dela i stora flagor. Vänd ihop med kokta äggnudlar och finstrimlad kokt vitkål; servera som nudelpanna.",
+    }
+    if form in {"fried_plate", "salmon_pan"}:
+        common[2] = (
+            "Fördela samtliga angivna råvaror jämnt mellan portionerna. Laxen steks i nästa steg. Den ska inte kokas först; tillsätt inga olistade ingredienser."
+        )
+    return common + [finish[form]]
+
+
+def is_reference_preparation(recipe):
+    names = {canonicalize_ingredient_name(i.name) for i in recipe.ingredients}
+    return (
+        len(names) == len(recipe.ingredients) == 3
+        and len(names & {"kyckling", "lax", "fisk"}) == 1
+        and len(names & {"ris", "nudlar"}) == 1
+        and len(names & {"morot", "vitkål"}) == 1
+        and all(i.unit == "g" for i in recipe.ingredients)
+        and any(
+            recipe.instructions == reference_instructions(form)
+            for form in (
+                ("plate", "soup", "stew", "fried_plate", "salmon_pan")
+                if "lax" in names
+                else ("plate", "soup", "stew")
+            )
+        )
+    )
+
+
+def calculation_basis(recipe, *, allow_estimates=False):
+    if allow_estimates and is_reference_preparation(recipe):
+        from app.services.nutrition_reference import reference_data
+
+        return {
+            "version": reference_data()["content_version"],
+            "method": "documented_cooked_component_per_raw_input",
+            "description": "Gränser uppfyllda enligt beräkningen med livsmedelsspecifika referenser för kokning eller stekning av lax. Produktdeklaration används där den är kvalificerad, annars tydligt mappat generiskt värde. Faktisk förlust och slutvikt kan avvika; detta garanterar inte färdiglagad mats exakta innehåll. Inget extra stekfett ingår i dessa recept.",
+            "cooked_weight": "NOT_VERIFIED",
+        }
     names = {canonicalize_ingredient_name(i.name) for i in recipe.ingredients}
     units = {canonicalize_ingredient_name(i.name): i.unit for i in recipe.ingredients}
     steps = tuple(recipe.instructions)
@@ -46,3 +94,11 @@ def calculation_basis(recipe):
         "method": "sum_declared_edible_as_sold",
         "retention_factors": "not_needed_cold_assembly",
     }
+
+
+def reference_method(recipe, name):
+    if canonicalize_ingredient_name(name) == "lax" and any(
+        recipe.instructions == reference_instructions(f) for f in ("fried_plate", "salmon_pan")
+    ):
+        return "fry"
+    return "boil"

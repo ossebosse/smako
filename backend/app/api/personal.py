@@ -32,6 +32,19 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 router = APIRouter(prefix="/api/personal", tags=["private planning"])
 
 
+@router.get("/nutrition-references")
+def nutrition_references():
+    from app.services.nutrition_reference import reference_data, reference_options
+
+    data = reference_data()
+    return {
+        "version": data["content_version"],
+        "options": reference_options(),
+        "source": data["source"],
+        "license": data["license"],
+    }
+
+
 class TextInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     text: str = Field(max_length=2000)
@@ -187,7 +200,9 @@ async def change_plan(
         if payload.restore_revision is None:
             raise HTTPException(422, "Välj en historisk planrevision.")
         try:
-            historic = plans.get_owned(plan_id, owner_actor_hash=owner, revision=payload.restore_revision)
+            historic = plans.get_owned(
+                plan_id, owner_actor_hash=owner, revision=payload.restore_revision
+            )
         except PlanNotFoundError as exc:
             raise PersonalConflict("Den historiska revisionen finns inte.") from exc
         if historic.plan.personal is None:
@@ -295,7 +310,10 @@ def install_handlers(app):
     async def blocked_group(_request, _exc):
         return JSONResponse(
             status_code=422,
-            content={"detail": "Kampanjgruppens underlag eller kombination kan inte verifieras. Senaste fungerande plan är bevarad. Välj andra varor eller gå tillbaka.", "code": "DATA_BLOCKED"},
+            content={
+                "detail": "Kampanjgruppens underlag eller kombination kan inte verifieras. Senaste fungerande plan är bevarad. Välj andra varor eller gå tillbaka.",
+                "code": "DATA_BLOCKED",
+            },
             headers={"Cache-Control": "private, no-store"},
         )
 

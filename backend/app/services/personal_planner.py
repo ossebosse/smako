@@ -55,7 +55,22 @@ from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
-POLICY_VERSION = "personal-policy-v2-2"
+POLICY_VERSION = "personal-policy-v2-3"
+
+
+def personal_policy_request(request, dinner_count):
+    result = request.model_copy(update={"recipes": dinner_count})
+    # Personal forms use the named preset. Serialized absent optional overrides
+    # become null on reload; null must not silently disable that preset on edits.
+    # Explicit numeric overrides survive. The legacy non-personal API is untouched.
+    for key in (
+        "max_same_cooking_method_meals",
+        "max_same_dish_form_meals",
+        "max_pairwise_culinary_similarity",
+    ):
+        if getattr(result, key) is None:
+            result.model_fields_set.discard(key)
+    return result
 
 
 class PersonalPlanner:
@@ -99,6 +114,11 @@ class PersonalPlanner:
         from app.services.personal_source_facts import facts_version
 
         self.facts_version = getattr(self.facts, "version", None) or facts_version(self.facts)
+        self.reference_version = None
+        if self.spec.allow_nutrition_estimates:
+            from app.services.nutrition_reference import reference_data
+
+            self.reference_version = reference_data()["content_version"]
         self.cooked_weights = cooked_weights or {}
         self.now = now or datetime.now(UTC)
         self.pricing_date = self.now.astimezone(ZoneInfo("Europe/Stockholm")).date()
@@ -146,6 +166,47 @@ class PersonalPlanner:
         ):
             return facts
         return None
+
+    def nutrition_evidence(self, product, name, unit, requested, recipe):
+        fact = self.source_facts(product)
+        qualified = bool(
+            fact
+            and fact.nutrition_unit == unit
+            and fact.nutrition_basis
+            and fact.nutrition_preparation == "as_sold"
+            and requested <= fact.nutrition.keys()
+            and all(math.isfinite(fact.nutrition[k]) and fact.nutrition[k] >= 0 for k in requested)
+        )
+        if not self.spec.allow_nutrition_estimates:
+            return fact if qualified else None
+        from app.services.nutrition_reference import product_reference, reference_evidence
+        from app.services.personal_nutrition import is_reference_preparation, reference_method
+
+        cooked = bool(recipe and is_reference_preparation(recipe))
+        if qualified and not cooked:
+            return fact
+        if unit != "g" or (
+            fact
+            and (
+                fact.conflicts
+                or (
+                    fact.nutrition
+                    and (fact.nutrition_unit != unit or fact.nutrition_preparation != "as_sold")
+                )
+            )
+        ):
+            return None
+        identity = product_reference(product, name, fact)
+        if identity is None:
+            return None
+        if cooked and fact and fact.nutrition and not qualified:
+            return None  # Do not overwrite an incomplete declaration with easier generic values.
+        return reference_evidence(
+            identity,
+            cooked=cooked,
+            declaration=fact if qualified else None,
+            method=reference_method(recipe, name) if recipe else "boil",
+        )
 
     def resolve(
         self,
@@ -383,9 +444,13 @@ class PersonalPlanner:
                     continue
             # Exact pantry lots use the same qualified facts as purchases. A
             # generic lot has no declared nutrition and cannot borrow a label.
-            if row.get("nutrients") and not item["product_key"]:
+            if (
+                row.get("nutrients")
+                and not item["product_key"]
+                and (not self.spec.allow_nutrition_estimates or not item.get("nutrition_reference"))
+            ):
                 raise PolicyConflict(
-                    f"{item['name']}: skafferivarans exakta produkt och näringsdeklaration saknas.",
+                    f"{item['name']}: skafferivarans exakta produkt och näringsdeklaration saknas. För generiskt underlag krävs uppskattningsläge och bekräftat livsmedel/beredningsstatus i Skafferi.",
                     code="DATA_BLOCKED",
                 )
             if row["organic_animals"] and not item["product_key"]:
@@ -403,6 +468,7 @@ class PersonalPlanner:
                     "source": row["source"],
                     "demand_key": row["demand_key"],
                     "product_key": item["product_key"],
+                    "nutrition_reference": item.get("nutrition_reference"),
                 }
             )
             remaining -= used
@@ -435,13 +501,22 @@ class PersonalPlanner:
             )
             meal = next((self.meals[s.meal_type] for s in slots if s.id == row["source"]), None)
             requested = requested_nutrients(meal.limits) if meal else set()
+            recipe = next((s.recipe for s in slots if s.id == row["source"]), None)
             row["nutrients"] = sorted(requested)
             if requested:
                 nutrition_needs.add(row["name"])
                 verified = [
                     (i, c)
                     for i, c in resolved
-                    if (fact := self.source_facts(self.prepared.universe.products[i]))
+                    if (
+                        fact := self.nutrition_evidence(
+                            self.prepared.universe.products[i],
+                            row["name"],
+                            row["unit"],
+                            requested,
+                            recipe,
+                        )
+                    )
                     and fact.nutrition_unit == row["unit"]
                     and fact.nutrition_basis
                     and fact.nutrition_preparation == "as_sold"
@@ -920,14 +995,47 @@ class PersonalPlanner:
                 totals = defaultdict(float)
                 requested = requested_nutrients(limits)
                 if requested:
-                    row["calculation_basis"] = calculation_basis(slot.recipe)
+                    row["calculation_basis"] = calculation_basis(
+                        slot.recipe, allow_estimates=self.spec.allow_nutrition_estimates
+                    )
                     for need in (r for r in rows if r["source"] == slot.id):
                         contributions = []
                         pantry = [a for a in allocations if a["demand_key"] == need["demand_key"]]
                         for allocation in pantry:
+                            if (
+                                not allocation.get("product_key")
+                                and self.spec.allow_nutrition_estimates
+                            ):
+                                from app.services.nutrition_reference import (
+                                    reference_evidence,
+                                    validate_pantry_reference,
+                                )
+                                from app.services.personal_nutrition import (
+                                    is_reference_preparation,
+                                    reference_method,
+                                )
+
+                                identity = validate_pantry_reference(
+                                    allocation["name"],
+                                    need["unit"],
+                                    allocation.get("nutrition_reference"),
+                                )
+                                evidence = reference_evidence(
+                                    identity,
+                                    cooked=is_reference_preparation(slot.recipe),
+                                    method=reference_method(slot.recipe, need["name"]),
+                                )
+                                contributions.append((allocation["quantity"], evidence, "pantry"))
+                                continue
                             positions = self.index.groups.get(allocation.get("product_key"), ())
                             evidence = [
-                                self.source_facts(self.prepared.universe.products[i])
+                                self.nutrition_evidence(
+                                    self.prepared.universe.products[i],
+                                    need["name"],
+                                    need["unit"],
+                                    requested,
+                                    slot.recipe,
+                                )
                                 for i in positions
                             ]
                             evidence = [
@@ -966,10 +1074,14 @@ class PersonalPlanner:
                                 None,
                             )
                             fact = (
-                                self.source_facts(
+                                self.nutrition_evidence(
                                     self.prepared.universe.products[
                                         self.by_identity[(selected.store_id, selected.product_id)]
-                                    ]
+                                    ],
+                                    need["name"],
+                                    need["unit"],
+                                    requested,
+                                    slot.recipe,
                                 )
                                 if selected
                                 else None
@@ -1007,6 +1119,10 @@ class PersonalPlanner:
                                     "basis": fact.nutrition_basis,
                                     "quantity": quantity,
                                     "origin": origin,
+                                    "ingredient": need["name"],
+                                    "evidence_kind": getattr(
+                                        fact, "evidence_kind", "qualified_product_declaration"
+                                    ),
                                     "field_sources": {
                                         k: list(v)
                                         for k, v in fact.field_sources.items()
@@ -1040,7 +1156,11 @@ class PersonalPlanner:
                         raise PolicyConflict(
                             f"{slot.recipe.name}: {metric} {totals[metric]:.1f} per portion bryter mot {key} {value:g}."
                         )
-                row.update(status="VERIFIED", values=dict(totals))
+                estimated = any(
+                    s.get("evidence_kind") not in {None, "qualified_product_declaration"}
+                    for s in row["sources"]
+                )
+                row.update(status="ESTIMATED" if estimated else "VERIFIED", values=dict(totals))
             nutrition.append(row)
         has_allergies = bool(
             self.spec.profile.allergies or any(m.profile.allergies for m in self.spec.meals)
@@ -1050,6 +1170,7 @@ class PersonalPlanner:
             "allergy": "VERIFIED" if has_allergies else "NOT_REQUESTED",
             "nutrition": nutrition,
             "facts_version": self.facts_version,
+            "nutrition_reference_version": self.reference_version,
             "organic_cost_percent": self._eco_percent(basket, groups),
             "organic_evidence": self._eco_evidence(basket, groups),
             "organic_animals": "VERIFIED"
@@ -1068,9 +1189,21 @@ class PersonalPlanner:
         candidates = generator.generate_for_meal_type(
             self.view.economic_pool, meal.meal_type, count=80, servings=meal.servings
         )
+        if (
+            self.spec.allow_nutrition_estimates
+            and meal.meal_type == "dinner"
+            and requested_nutrients(meal.limits)
+        ):
+            candidates.extend(
+                DeterministicRecipeCandidateGenerator().generate_reference_candidates(
+                    servings=meal.servings
+                )
+            )
         valid = []
         for recipe in candidates:
             try:
+                if self.spec.allow_nutrition_estimates and requested_nutrients(meal.limits):
+                    calculation_basis(recipe, allow_estimates=True)
                 recipe = self.clean_recipe(recipe, meal)
                 # Existing dinner safeguards remain approximate structural checks.
                 if (
@@ -1141,7 +1274,7 @@ class PersonalPlanner:
             for s in slots
             if s.meal_type == "dinner" and (generating or s.recipe or s.id == replace_slot)
         )
-        policy_request = self.request.model_copy(update={"recipes": dinner_count})
+        policy_request = personal_policy_request(self.request, dinner_count)
         policy = self.service._diversity_policy_for(policy_request, self.request.diversity_mode)
         if dinner_count < 2:
             policy = policy.model_copy(update={"min_cooking_methods": 0})
@@ -1201,9 +1334,21 @@ class PersonalPlanner:
                 )
             return result
 
-        chosen, result = self.service.menu_optimizer.optimize_slots(
-            options, evaluate=evaluate, accepts=accepts, score=score, beam_width=8
-        )
+        try:
+            chosen, result = self.service.menu_optimizer.optimize_slots(
+                options, evaluate=evaluate, accepts=accepts, score=score, beam_width=8
+            )
+        except IncompleteBasketError as exc:
+            if self.spec.allow_nutrition_estimates:
+                raise PolicyConflict(
+                    f"Sökningen hittade ingen komplett meny för {dinner_count} middagar med dina krav. "
+                    "Det granskade tillagningsunderlaget omfattar nu kokning av kyckling/torsk/lax, ris/äggnudlar, morot/vitkål och stekning av lax. "
+                    "Fler kolhydratbaser och tillagningssätt behöver kvalificeras för bredare variation. "
+                    "Tre middagar fungerar i det verifierade exempelurvalet; ändra antal uttryckligen om du vill prova. "
+                    "Detta är en begränsning i underlag/sökning, inte ett bevis på att dina krav är omöjliga. Inga krav har sänkts.",
+                    code="SEARCH_BLOCKED",
+                ) from exc
+            raise
         # Recheck every final constraint even if the cache supplied a beam result.
         result = self.basket(chosen, final=True)
         if not accepts(chosen, final=True):
@@ -1243,6 +1388,7 @@ class PersonalPlanner:
             "request": self.request.model_dump(mode="json"),
             "pantry_revision": self.state["revision"],
             "facts_policy_version": self.facts_version,
+            "nutrition_reference_version": self.reference_version,
             "cooked_weight_evidence": self.cooked_weights,
             "state": self.state,
             "recipes": [r.model_dump() for r in recipes],

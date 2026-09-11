@@ -1959,6 +1959,21 @@ def evaluate_product_semantics(
         prepared_form = "pasta_dish"
     evidence: list[str] = []
 
+    # Whole-word exclusions miss Swedish compounds. These are distinct foods,
+    # not interchangeable defaults for an ordinary milk/cheese requirement.
+    special_dairy = (
+        requirement.canonical_name == "mjölk"
+        and any(word in name_text for word in ("getmjolk", "farmjolk", "goat milk", "sheep milk"))
+    ) or (
+        requirement.canonical_name == "ost"
+        and any(word in name_text for word in ("mogelost", "blue cheese", "organic blue", "brie", "camembert", "chevre"))
+    )
+    if special_dairy:
+        return SemanticMatchResult(
+            compatible=False, confidence=SemanticConfidence.REJECTED,
+            evidence=["distinct_dairy_variant_requires_explicit_identity"],
+        )
+
     if is_non_human_food(name, str(_value(product, "category", "") or "")):
         return SemanticMatchResult(
             compatible=False,
