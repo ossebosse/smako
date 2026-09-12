@@ -1,6 +1,25 @@
 # Smako – aktuell status 12 september 2026
 
-Live: https://beta.smako.nu/personal, build `personal-v2-five-dinners-20260912c`.
+Live: https://beta.smako.nu/personal, build `personal-v2-cost-fish-20260912`, appkod `e5a3787`.
+[Kostnadsanalys och nya acceptansfall](../reports/smako-affordable-five-dinners-20260912.md).
+
+- Tidigare femmiddagsmilstolpe förblir PASS. Exakt samma meny: **677,43 → 677,43 kr**.
+  Tio rader/21 paket avstämda; torsk+lax 382,01 kr. Ingen kostnadsbugg belagd.
+- Frysta fria val: Balanserad 677,43 kr, Billigast annan meny 563,96 kr.
+  Alla 252 femkombinationer i kvalificerad tiopool kontrollerade; båda når poolens minimum.
+- ”Ingen fisk” DATA_BLOCKED: 0 kompletta ingrediensunderlag för hårda uteslutningar,
+  endast tre granskade fiskfria recept. Inga nya recept/mappningar utan användbar kedja.
+  Bekräftad bugg rättad: explicit fisk omfattar även lax/tonfisk och produktens fiskklassning.
+- [Slutlig fryst acceptans](../reports/affordable-five-20260912/final.json) och
+  [HTTPS](../reports/affordable-five-20260912/https.json): original, samma meny, Billigast,
+  skafferi och strikt PASS; ingen fisk korrekt 422/DATA_BLOCKED. Noll externa konsumentanrop.
+- Backup 20260912T145001Z; 140 äldre revisioner bevarade vid appbyte. Tre appfiler,
+  oförändrad scheduler/prisdata, verifierad läskompatibel rollback utan databasrestore.
+  367 regressionstester PASS. AGING (~36,8 h) redovisat; inga ändrade freshnessgränser eller insamlingar.
+
+## Bevarad tidigare femmiddagsmilstolpe
+
+Tidigare release: `personal-v2-five-dinners-20260912c`.
 Appkod `e626ac0`. [R1–R9-matris](product/personal-planning-v2.md) ·
 [Full rapport: fem middagar, blockeringsfördelning, acceptans och drift](../reports/smako-five-dinners-20260912.md).
 
