@@ -16,8 +16,9 @@ from pathlib import Path
 
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 
-POLICY_VERSION = "slv-component-input-v1"
+POLICY_VERSION = "slv-component-input-v2"
 PATH = Path(__file__).parents[1] / "data/nutrition/slv-20260911.json"
+ASSEMBLY_PATH = PATH.with_name("couscous-assembly-20260912.json")
 # Explicit reviewed identity + purchased/used preparation. Missing mappings stay missing.
 # IDs identify foods, not a retailer product. No prices, organic or allergens here.
 MAPPINGS = {
@@ -53,6 +54,7 @@ MAPPINGS = {
     1975: ("salt", "ready"),
 }
 COOKED = {2481: 2515, 870: 2079, 289: 305, 344: 448, 370: 465, 1173: 3594, 1255: 1317, 1246: 1335}
+FRIED = {1255: 1316, 1246: 1337}
 MACROS = {
     "Energi (kcal)": ("kcal", "kcal"),
     "Protein": ("protein_g", "g"),
@@ -93,7 +95,8 @@ def reference_data():
         entry = data["foods"][str(identity)]
         assert entry["food"]["nummer"] == identity
         macro_values(entry["nutrients"])
-    mapping = json.dumps([MAPPINGS, COOKED, MACROS], sort_keys=True).encode()
+    mapping = json.dumps([MAPPINGS, COOKED, FRIED, MACROS], sort_keys=True).encode()
+    data["assembly_review"] = json.loads(ASSEMBLY_PATH.read_bytes())
     canonical = json.dumps(data, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()
     data["content_version"] = POLICY_VERSION + ":" + hashlib.sha256(canonical + mapping).hexdigest()
     return data
@@ -166,11 +169,11 @@ def reference_evidence(identity, *, cooked=False, declaration=None, method="boil
     values = raw_values
     history = []
     if cooked:
-        if method not in {"boil", "fry"} or (method == "fry" and identity != 1255):
+        if method not in {"boil", "fry"} or (method == "fry" and identity not in FRIED):
             return None
         if identity not in COOKED:
             return None
-        prepared_id = 1316 if identity == 1255 and method == "fry" else COOKED[identity]
+        prepared_id = FRIED[identity] if method == "fry" else COOKED[identity]
         prepared = data["preparations"][str(prepared_id)]
         ingredients = prepared["ingredients"]
         main = [i for i in ingredients if i["nummer"] == identity]
@@ -202,6 +205,8 @@ def reference_evidence(identity, *, cooked=False, declaration=None, method="boil
                 "documented_final_batch_g": total_after,
                 "operation": "cooked_per100g * final_batch_g / raw_input_g",
                 "source_url": prepared["source_url"],
+                "data_version": prepared["food"]["version"],
+                "retrieved_at": prepared.get("retrieved_at", data["retrieved_at"]),
                 "other_reference_ingredients_subtracted": [
                     i for i in ingredients if i["nummer"] not in {identity, 1975}
                 ],
@@ -252,7 +257,7 @@ def reference_evidence(identity, *, cooked=False, declaration=None, method="boil
                     "food_id": identity,
                     "description": description,
                     "data_version": version,
-                    "retrieved_at": data["retrieved_at"],
+                    "retrieved_at": entry.get("retrieved_at", data["retrieved_at"]),
                     "source_url": entry["source_url"],
                     "license": data["license"],
                     "transformations": history,
@@ -299,8 +304,24 @@ def product_reference(product, name, facts):
             t in " ".join(facts.ingredients).casefold()
             for t in ("saltlake", "marinad", "stabiliseringsmedel", "vatten")
         )
-    ):
+    ) and canonical != "tofu":
         return None
+    if canonical == "couscous":
+        return 831 if re.fullmatch(r"couscous(?: eko| ekologisk)?", text.strip()) else None
+    if canonical == "tofu":
+        return 905 if ("tofu" in text and "naturell" in text and "fast" in text
+                       and not any(t in text for t in ("silke", "mjuk", "lag", "rök", "ferment"))) else None
+    if canonical == "tomat":
+        plain = re.fullmatch(
+            r"(?:tomat|tomater|körsbärstomater|kvisttomater|plommontomater|cocktailtomater|pärltomater)(?: eko| ekologiska)?",
+            text.strip(),
+        )
+        fresh = plain or ("tomat" in text and any(t in text for t in ("klass 1", "i ask", "lösvikt")))
+        ingredients = " ".join(facts.ingredients).casefold() if facts else ""
+        return 364 if (fresh and not any(t in text + " " + ingredients for t in (
+            "skalad", "kross", "puré", "pure", "passer", "tork", "grill", "juice",
+            "soppa", "lag", "ketchup", "frys", "pasta", "inlag", "pelat", "hela", "citronsyra",
+        ))) else None
     if canonical == "ris":
         if any(
             t in text
@@ -352,4 +373,40 @@ def product_reference(product, name, facts):
         )
     return {"morot": 289, "gul lök": 344, "vitkål": 370, "tomat": 364, "broccoli": 325}.get(
         canonical
+    )
+
+
+def assembly_evidence(identity, declaration=None):
+    """Only the reviewed no-discard couscous/tofu/tomato assembly, after opt-in."""
+    if identity not in {831, 905, 364}:
+        return None
+    reference = reference_evidence(identity)
+    review = reference_data()["assembly_review"]
+    values = declaration.nutrition if declaration else reference.nutrition
+    source = declaration.source if declaration else reference.source
+    field_sources = declaration.field_sources if declaration else reference.field_sources
+    return NutritionEvidence(
+        source=source,
+        source_product_id=declaration.source_product_id if declaration else reference.source_product_id,
+        nutrition=values,
+        nutrition_basis=(
+            "Per 100 g använd ätbar ingrediens som såld; "
+            + ("produktdeklaration. " if declaration else "generisk SLV-referens. ")
+            + "Couscous sväller i vatten utan avrinning; tofu och tomat serveras utan värmning. "
+            "Uppskattning från använd mängd, inte uppmätt näringsretention eller tillagad vikt."
+        ),
+        evidence_kind="reviewed_assembly_estimate",
+        ingredient=MAPPINGS[identity][0],
+        field_sources={
+            f"nutrition.{k}": tuple(field_sources.get(f"nutrition.{k}", ())) + ({
+                "kind": "reviewed_assembly_estimate",
+                "food_id": identity,
+                "review": review,
+                "operation": "as_sold_macros * used_edible_input_g / 100",
+                "cooked_quantity_g": None,
+                "discarded_food_g": 0,
+                "package_surplus_included": False,
+            },)
+            for k in values
+        },
     )

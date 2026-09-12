@@ -80,6 +80,9 @@ class RecipeProfileBuilder:
         # Names are display text. Only actual instructions establish technique
         # and serving structure; unsupported labels earn no diversity credit.
         text = _plain_text(" ".join(recipe.instructions))
+        if ("couscous" in text and "lat svalla" in text
+                and "vand ihop" in text and "sallad" in text):
+            return "grynsallad", "rehydrate_and_assemble"
         if "gratinera" in text or "gratinering" in text:
             return "gratäng", "oven"
         if "ugn" in text and any(x in text for x in ("rosta", "225", "200", "baka")):
@@ -107,6 +110,7 @@ class RecipeProfileBuilder:
     def _dish_form(family: str) -> str:
         return {
             "wrap": "wrap",
+            "grynsallad": "grain_salad",
             "soppa": "soup",
             "gryta": "stew",
             "curry": "curry",

@@ -1,0 +1,116 @@
+"""Audited source overlay and read-compatible emergency rollback (no data restore)."""
+
+import hashlib
+import io
+import json
+import shutil
+import subprocess
+import sys
+import tarfile
+from pathlib import Path
+
+BUILD = "personal-v2-five-dinners-20260912c"
+BASELINE = "7b15c05"
+BASE_IMAGE = "billigaste-veckomenyn:0.1.0-smako-personal-v2-dinners-20260911c"
+
+
+def digest(data):
+    return hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest()
+
+
+def package():
+    paths = set(
+        subprocess.check_output(["git", "diff", BASELINE, "--name-only"], text=True).splitlines()
+    )
+    paths.update(
+        subprocess.check_output(
+            ["git", "ls-files", "--others", "--exclude-standard"], text=True
+        ).splitlines()
+    )
+    paths = sorted(p for p in paths if p.startswith("backend/app/"))
+    target = Path(f"reports/private/{BUILD}.tar.gz")
+    manifest = []
+    with tarfile.open(target, "w:gz") as archive:
+        for name in paths:
+            old = subprocess.run(
+                ["git", "show", f"{BASELINE}:{name}"], capture_output=True, check=False
+            )
+            baseline = old.stdout.replace(b"\r\n", b"\n")
+            data = Path(name).read_bytes().replace(b"\r\n", b"\n")
+            manifest.append(
+                {
+                    "path": name,
+                    "baseline": digest(baseline) if old.returncode == 0 else None,
+                    "sha256": digest(data),
+                }
+            )
+            info = tarfile.TarInfo(name)
+            info.size, info.mode = len(data), 0o644
+            archive.addfile(info, io.BytesIO(data))
+        data = json.dumps(manifest, indent=2).encode()
+        info = tarfile.TarInfo("overlay-manifest.json")
+        info.size = len(data)
+        archive.addfile(info, io.BytesIO(data))
+    print(
+        json.dumps(
+            {
+                "files": len(manifest),
+                "archive": target.name,
+                "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
+            }
+        )
+    )
+
+
+def stage():
+    root = Path("/opt/smako")
+    current = (root / "current").resolve(strict=True)
+    assert current == root / "releases/personal-v2-dinners-20260911c"
+    target = root / "releases" / BUILD
+    assert not target.exists()
+    with tarfile.open(root / "evidence" / f"{BUILD}.tar.gz") as archive:
+        manifest = json.load(archive.extractfile("overlay-manifest.json"))
+        for item in manifest:
+            path = current / item["path"]
+            assert path.resolve().is_relative_to(current)
+            assert (digest(path.read_bytes()) if path.exists() else None) == item["baseline"], item[
+                "path"
+            ]
+            assert digest(archive.extractfile(item["path"]).read()) == item["sha256"]
+        ignore = shutil.ignore_patterns(
+            "__pycache__", ".env*", "reports", ".pytest_cache", ".ruff_cache"
+        )
+        shutil.copytree(current, target, ignore=ignore)
+        for item in manifest:
+            path = target / item["path"]
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(archive.extractfile(item["path"]).read())
+        (target / "overlay-manifest.json").write_text(json.dumps(manifest, indent=2))
+    for directory, build in ((target, BUILD),):
+        # Reuse the already deployed immutable dependency layer. No install,
+        # provider collection, source mutation or runtime upload is needed.
+        dockerfile = directory / "Dockerfile.gaps"
+        dockerfile.write_text(
+            f"FROM {BASE_IMAGE}\nENV APP_VERSION=0.1.0-smako-{build} BUILD_ID={build}\nCOPY --chown=app:app backend/app /srv/app/backend/app\n"
+        )
+        subprocess.run(
+            [
+                "docker",
+                "build",
+                "-f",
+                str(dockerfile),
+                "-t",
+                f"billigaste-veckomenyn:0.1.0-smako-{build}",
+                str(directory),
+            ],
+            check=True,
+        )
+    print(
+        json.dumps(
+            {"status": "STAGED", "files": len(manifest), "build": BUILD, "rollback": "personal-v2-dinners-20260911c-rollback"}
+        )
+    )
+
+
+if __name__ == "__main__":
+    {"package": package, "stage": stage}[sys.argv[1]]()

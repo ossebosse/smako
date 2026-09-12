@@ -12,6 +12,24 @@ from app.services.personal_policy import PolicyConflict
 VERSION = "cold-edible-assembly-v1"
 
 
+def couscous_instructions():
+    return [
+        "Väg upp torr vanlig couscous av durumvete, naturell fast tofu som såld utan lag och tvättade råa tomater enligt ingredienslistan. Använd inte pärlcouscous, smaksatta gryn eller silkestofu. Ingen pressning eller avrinning av tofun ingår.",
+        "Lägg couscous i en skål. Tillsätt kokhett dricksvatten enligt förpackningens anvisning för svällning, täck och låt svälla tills grynen är mjuka. Allt tillsatt vatten ska absorberas; häll inte av eller skölj grynen. Lufta med gaffel.",
+        "Tärna tofun och tomaterna. Vänd ihop med den svällda couscousen till en ljummen sallad. Behåll tomatsaften i salladen. Servera hela den använda mängden fördelad jämnt mellan portionerna, utan tillsatt olja eller andra olistade ingredienser.",
+    ]
+
+
+def is_couscous_preparation(recipe):
+    return (
+        len(recipe.ingredients) == 3
+        and {canonicalize_ingredient_name(i.name) for i in recipe.ingredients}
+        == {"tofu", "couscous", "tomat"}
+        and all(i.unit == "g" for i in recipe.ingredients)
+        and recipe.instructions == couscous_instructions()
+    )
+
+
 def requested_nutrients(limits):
     return {
         k.removeprefix("min_").removeprefix("max_")
@@ -32,11 +50,14 @@ def reference_instructions(form):
         "stew": "Dela den tillagade fisken i stora bitar. Mosa hälften av den kokta moroten med lite hett dricksvatten till en tjock bas. Vänd försiktigt ned fisk och resterande morot, värm igenom och servera grytan med riset separat.",
         "fried_plate": "Stek laxfilén på båda sidor i en belagd panna utan extra fett tills genomlagad. Lägg upp filén utan kvarvarande steksky. Servera med kokt ris och morötter vid sidan.",
         "salmon_pan": "Stek laxfilén på båda sidor i en belagd panna utan extra fett tills genomlagad. Lägg upp fisken utan kvarvarande steksky och dela i stora flagor. Vänd ihop med kokta äggnudlar och finstrimlad kokt vitkål; servera som nudelpanna.",
+        "cod_pan": "Stek den skinnfria torskfilén varsamt på båda sidor i en belagd panna utan extra fett tills genomlagad. Ta upp fisken utan kvarvarande steksky. Servera med de kokta äggnudlarna och vitkålen.",
     }
-    if form in {"fried_plate", "salmon_pan"}:
+    if form in {"fried_plate", "salmon_pan", "cod_pan"}:
         common[2] = (
             "Fördela samtliga angivna råvaror jämnt mellan portionerna. Laxen steks i nästa steg. Den ska inte kokas först; tillsätt inga olistade ingredienser."
         )
+        if form == "cod_pan":
+            common[2] = common[2].replace("Laxen", "Torsken")
     return common + [finish[form]]
 
 
@@ -53,20 +74,29 @@ def is_reference_preparation(recipe):
             for form in (
                 ("plate", "soup", "stew", "fried_plate", "salmon_pan")
                 if "lax" in names
-                else ("plate", "soup", "stew")
+                else (("plate", "soup", "stew", "cod_pan") if "fisk" in names else ("plate", "soup", "stew"))
             )
         )
     )
 
 
 def calculation_basis(recipe, *, allow_estimates=False):
+    if allow_estimates and is_couscous_preparation(recipe):
+        from app.services.nutrition_reference import reference_data
+
+        return {
+            "version": reference_data()["content_version"],
+            "method": "reviewed_rehydration_and_edible_assembly",
+            "description": "Uppskattning från använd torr couscous, naturell fast tofu och rå tomat. Redan ångbehandlade gryn sväller i vatten; ingen vätska, tofu eller tomatsaft hälls bort. Makron summeras från använd mängd med produktdeklaration där den är kvalificerad. Vattnet tillför ingen energi. Ingen exakt näringsretention eller tillagad vikt är verifierad.",
+            "cooked_weight": "NOT_VERIFIED",
+        }
     if allow_estimates and is_reference_preparation(recipe):
         from app.services.nutrition_reference import reference_data
 
         return {
             "version": reference_data()["content_version"],
             "method": "documented_cooked_component_per_raw_input",
-            "description": "Gränser uppfyllda enligt beräkningen med livsmedelsspecifika referenser för kokning eller stekning av lax. Produktdeklaration används där den är kvalificerad, annars tydligt mappat generiskt värde. Faktisk förlust och slutvikt kan avvika; detta garanterar inte färdiglagad mats exakta innehåll. Inget extra stekfett ingår i dessa recept.",
+            "description": "Gränser uppfyllda enligt beräkningen med livsmedelsspecifika referenser för kokning eller stekning av lax/torsk. Produktdeklaration används där den är kvalificerad, annars tydligt mappat generiskt värde. Faktisk förlust och slutvikt kan avvika; detta garanterar inte färdiglagad mats exakta innehåll. Inget extra stekfett ingår i dessa recept.",
             "cooked_weight": "NOT_VERIFIED",
         }
     names = {canonicalize_ingredient_name(i.name) for i in recipe.ingredients}
@@ -87,6 +117,7 @@ def calculation_basis(recipe, *, allow_estimates=False):
         raise PolicyConflict(
             f"{recipe.name}: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits.",
             code="DATA_BLOCKED",
+            stage="preparation",
         )
     return {
         "version": VERSION,
@@ -97,6 +128,9 @@ def calculation_basis(recipe, *, allow_estimates=False):
 
 
 def reference_method(recipe, name):
+    if (canonicalize_ingredient_name(name) == "fisk"
+            and recipe.instructions == reference_instructions("cod_pan")):
+        return "fry"
     if canonicalize_ingredient_name(name) == "lax" and any(
         recipe.instructions == reference_instructions(f) for f in ("fried_plate", "salmon_pan")
     ):

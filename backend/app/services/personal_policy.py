@@ -19,10 +19,12 @@ from app.services.recipe_profile import primary_ingredient
 
 
 class PolicyConflict(ValueError):
-    def __init__(self, message, *, code="CONFLICT", conflicts=None):
+    def __init__(self, message, *, code="CONFLICT", conflicts=None, stage=None, diagnostics=None):
         super().__init__(message)
         self.code = code
         self.conflicts = conflicts or [message]
+        self.stage = stage
+        self.diagnostics = diagnostics
 
 
 @dataclass(frozen=True)
@@ -181,12 +183,12 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
         unknown = [a for a in profile.allergies if a not in ALLERGENS]
         if unknown:
             raise PolicyConflict(
-                "Allergin kan inte verifieras: " + ", ".join(unknown), code="DATA_BLOCKED"
+                "Allergin kan inte verifieras: " + ", ".join(unknown), stage="policy_taste", code="DATA_BLOCKED"
             )
         if facts is None or not facts.ingredients_complete:
             raise PolicyConflict(
                 f"{product.name}: fullständig spårbar ingrediens-/allergeninformation saknas.",
-                code="DATA_BLOCKED",
+                stage="policy_taste", code="DATA_BLOCKED",
             )
         for term in profile.exclusions:
             if _contains(term, facts.ingredients):
@@ -197,7 +199,7 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
                 raise PolicyConflict(f"{product.name}: deklarerad förekomst/spår av {allergen}.")
             if allergen not in facts.allergens_checked:
                 raise PolicyConflict(
-                    f"{product.name}: {allergen} är inte verifierat i källan.", code="DATA_BLOCKED"
+                    f"{product.name}: {allergen} är inte verifierat i källan.", stage="policy_taste", code="DATA_BLOCKED"
                 )
     if organic_animals:
         # (animal -> organic) is satisfied by verified organic status even
@@ -207,12 +209,12 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
         if facts is None or facts.animal is None:
             raise PolicyConflict(
                 f"{product.name}: animaliskt innehåll/ekostatus kan inte verifieras.",
-                code="DATA_BLOCKED",
+                stage="organic", code="DATA_BLOCKED",
             )
         if facts.animal and facts.organic is not True:
             raise PolicyConflict(
                 f"{product.name} saknar verifierad ekologisk status för animalier.",
-                code="DATA_BLOCKED" if facts.organic is None else "CONFLICT",
+                stage="organic", code="DATA_BLOCKED" if facts.organic is None else "CONFLICT",
             )
 
 

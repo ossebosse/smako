@@ -826,7 +826,8 @@ class MenuOptimizer:
             )
         ), RecipeProfileBuilder._structure(recipe))
 
-    def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12):
+    def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
+                       search_trace=None):
         """Use the same complete-basket search discipline for typed meal slots.
 
         ``evaluate`` aggregates ALL meal types, explicit extras and allocated stock
@@ -835,14 +836,20 @@ class MenuOptimizer:
         """
         states = [([], None)]
         cache = {}
-        errors = []
         for index, options in enumerate(candidates_by_slot):
+            errors = []
+            trace = {"depth": index + 1, "proposals": 0, "constraints_rejected": 0,
+                     "evaluation_rejected": 0, "priced": 0, "retained": 0, "beam_pruned": 0}
+            if search_trace is not None:
+                search_trace.append(trace)
             expanded = []
             for chosen, _result in states:
                 for slot in options:
                     slots = [*chosen, slot]
                     final = index == len(candidates_by_slot) - 1
+                    trace["proposals"] += 1
                     if not accepts(slots, final=final):
+                        trace["constraints_rejected"] += 1
                         continue
                     key = tuple((s.id, recipe_id(s.recipe) if s.recipe else None) for s in slots)
                     try:
@@ -850,7 +857,9 @@ class MenuOptimizer:
                             cache[key] = evaluate(slots, final=final)
                         result = cache[key]
                         expanded.append((slots, result))
+                        trace["priced"] += 1
                     except (IncompleteBasketError, ValueError) as exc:
+                        trace["evaluation_rejected"] += 1
                         if len(errors) < 12:
                             errors.append(exc)
             if not expanded:
@@ -859,6 +868,8 @@ class MenuOptimizer:
                 raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")
             expanded.sort(key=lambda state: score(*state))
             states = expanded[:beam_width]
+            trace["retained"] = len(states)
+            trace["beam_pruned"] = len(expanded) - len(states)
         if not candidates_by_slot:
             return [], evaluate([], final=True)
         return min(states, key=lambda state: score(*state))

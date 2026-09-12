@@ -329,6 +329,7 @@ def install_handlers(app):
     async def blocked_personal(_request, exc):
         return JSONResponse(
             status_code=422,
-            content={"detail": str(exc), "code": exc.code, "conflicts": exc.conflicts},
+            content={"detail": str(exc), "code": exc.code, "conflicts": exc.conflicts,
+                     "planning_diagnostics": exc.diagnostics},
             headers={"Cache-Control": "private, no-store"},
         )

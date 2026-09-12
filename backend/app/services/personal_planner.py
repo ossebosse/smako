@@ -55,7 +55,7 @@ from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
-POLICY_VERSION = "personal-policy-v2-3"
+POLICY_VERSION = "personal-policy-v2-4"
 
 
 def personal_policy_request(request, dinner_count):
@@ -150,6 +150,9 @@ class PersonalPlanner:
         self.lookup_cache = {}
         self.queries = {}
         self.last_conflicts = []
+        from app.services.planning_diagnostics import PlanningDiagnostics
+
+        self.diagnostics = PlanningDiagnostics()
         if self.spec.pantry_revision != state["revision"]:
             raise PolicyConflict(
                 "Skafferiet har ändrats. Läs om och beräkna igen.", code="REVISION_CONFLICT"
@@ -180,10 +183,15 @@ class PersonalPlanner:
         if not self.spec.allow_nutrition_estimates:
             return fact if qualified else None
         from app.services.nutrition_reference import product_reference, reference_evidence
-        from app.services.personal_nutrition import is_reference_preparation, reference_method
+        from app.services.personal_nutrition import (
+            is_couscous_preparation,
+            is_reference_preparation,
+            reference_method,
+        )
 
         cooked = bool(recipe and is_reference_preparation(recipe))
-        if qualified and not cooked:
+        assembly = bool(recipe and is_couscous_preparation(recipe))
+        if qualified and not cooked and not assembly:
             return fact
         if unit != "g" or (
             fact
@@ -199,8 +207,12 @@ class PersonalPlanner:
         identity = product_reference(product, name, fact)
         if identity is None:
             return None
-        if cooked and fact and fact.nutrition and not qualified:
+        if (cooked or assembly) and fact and fact.nutrition and not qualified:
             return None  # Do not overwrite an incomplete declaration with easier generic values.
+        if assembly:
+            from app.services.nutrition_reference import assembly_evidence
+
+            return assembly_evidence(identity, fact if qualified else None)
         return reference_evidence(
             identity,
             cooked=cooked,
@@ -285,6 +297,8 @@ class PersonalPlanner:
                     product, profile, self.source_facts(product), organic_animals=organic_animals
                 )
             except PolicyConflict as exc:
+                if exc.stage is None:
+                    exc.stage = "policy_taste"
                 conflicts.append(exc)
                 continue
             if product_key:
@@ -348,7 +362,7 @@ class PersonalPlanner:
             + profile.allergies
             + self.request.avoid_ingredients,
         ):
-            raise PolicyConflict(f"{recipe.name} strider mot kostval eller hård uteslutning.")
+            raise PolicyConflict(f"{recipe.name} strider mot kostval eller hård uteslutning.", stage="policy_taste")
         for ingredient in self.service.normalizer.normalize_and_aggregate([recipe]):
             self.resolve(
                 ingredient.canonical_name,
@@ -567,6 +581,7 @@ class PersonalPlanner:
             raise PolicyConflict(
                 f"Smako saknar verifierad näringsdata med rätt enhet för {len(missing_nutrition)} av {len(nutrition_needs)} ingrediensbehov: {', '.join(sorted(missing_nutrition))}. Välj ett recept/produkt med tillräckligt underlag, ändra den valda gränsen uttryckligen i Mina val eller gå tillbaka. Underlaget har saknade eller konfliktfyllda värden. Kraven har inte sänkts.",
                 code="DATA_BLOCKED",
+                stage="product_qualification",
             )
         ingredients, candidate_map = [], {}
         for n, group in enumerate(groups):
@@ -595,16 +610,26 @@ class PersonalPlanner:
                 )
             )
         with self.optimizer.quote_cache():
-            basket = self.optimizer.optimize(
-                ingredients, candidate_map, self.view.stores, max_stores=self.request.max_stores
-            )
+            try:
+                basket = self.optimizer.optimize(
+                    ingredients, candidate_map, self.view.stores, max_stores=self.request.max_stores
+                )
+            except IncompleteBasketError as exc:
+                stores = sorted({c.store_id for cs in candidate_map.values() for c in cs})
+                covers = any(
+                    all(any(c.store_id in subset for c in cs) for cs in candidate_map.values())
+                    for n in range(1, min(len(stores), self.request.max_stores) + 1)
+                    for subset in combinations(stores, n)
+                )
+                raise PolicyConflict(str(exc), stage="price_basket" if covers else "store_cap") from exc
             ordinary_total = basket.total
             if self.spec.surplus_mode == "allow_larger":
                 basket = self._larger_packages(basket, ingredients, candidate_map)
             if self.spec.organic_percent:
                 try:
                     basket = self._ecological_basket(ingredients, candidate_map, groups, basket)
-                except PolicyConflict:
+                except PolicyConflict as exc:
+                    exc.stage = "organic"
                     if final:
                         raise
                     # A later meal can still raise the global cost share. Do not
@@ -1007,10 +1032,12 @@ class PersonalPlanner:
                                 and self.spec.allow_nutrition_estimates
                             ):
                                 from app.services.nutrition_reference import (
+                                    assembly_evidence,
                                     reference_evidence,
                                     validate_pantry_reference,
                                 )
                                 from app.services.personal_nutrition import (
+                                    is_couscous_preparation,
                                     is_reference_preparation,
                                     reference_method,
                                 )
@@ -1025,6 +1052,8 @@ class PersonalPlanner:
                                     cooked=is_reference_preparation(slot.recipe),
                                     method=reference_method(slot.recipe, need["name"]),
                                 )
+                                if is_couscous_preparation(slot.recipe):
+                                    evidence = assembly_evidence(identity)
                                 contributions.append((allocation["quantity"], evidence, "pantry"))
                                 continue
                             positions = self.index.groups.get(allocation.get("product_key"), ())
@@ -1118,6 +1147,8 @@ class PersonalPlanner:
                                     "unit": fact.nutrition_unit,
                                     "basis": fact.nutrition_basis,
                                     "quantity": quantity,
+                                    "used_edible_quantity": quantity,
+                                    "cooked_quantity_g": None,
                                     "origin": origin,
                                     "ingredient": need["name"],
                                     "evidence_kind": getattr(
@@ -1143,6 +1174,7 @@ class PersonalPlanner:
                         raise PolicyConflict(
                             f"{slot.recipe.name}: verifierat tillagningsutbyte/ätbar tillagad vikt saknas.",
                             code="DATA_BLOCKED",
+                            stage="preparation",
                         )
                     totals["weight_g"] = weight["total_g"] / slot.recipe.servings
                     row["sources"].append(weight)
@@ -1154,7 +1186,8 @@ class PersonalPlanner:
                         key.startswith("max_") and totals[metric] > value
                     ):
                         raise PolicyConflict(
-                            f"{slot.recipe.name}: {metric} {totals[metric]:.1f} per portion bryter mot {key} {value:g}."
+                            f"{slot.recipe.name}: {metric} {totals[metric]:.1f} per portion bryter mot {key} {value:g}.",
+                            stage="nutrition",
                         )
                 estimated = any(
                     s.get("evidence_kind") not in {None, "qualified_product_declaration"}
@@ -1200,10 +1233,18 @@ class PersonalPlanner:
                 )
             )
         valid = []
+        self.diagnostics.pools.append({"meal_type": meal.meal_type, "raw": len(candidates)})
         for recipe in candidates:
+            stage = "policy_taste"
             try:
+                profile = merged_profile(self.spec.profile, meal.profile)
+                if not recipe_respects_diet(recipe, preference=meal.diet,
+                                            avoid_ingredients=profile.exclusions + profile.allergies):
+                    raise PolicyConflict("Strider mot kostval eller hård uteslutning.")
+                stage = "preparation"
                 if self.spec.allow_nutrition_estimates and requested_nutrients(meal.limits):
                     calculation_basis(recipe, allow_estimates=True)
+                stage = "product_qualification"
                 recipe = self.clean_recipe(recipe, meal)
                 # Existing dinner safeguards remain approximate structural checks.
                 if (
@@ -1212,9 +1253,11 @@ class PersonalPlanner:
                     .validate_recipes([recipe])
                     .is_valid
                 ):
+                    self.diagnostics.reject("nutrition", recipe, "Befintlig strukturell måltidskontroll.")
                     continue
                 valid.append(recipe)
             except (PolicyConflict, ValueError) as exc:
+                self.diagnostics.reject(getattr(exc, "stage", None) or stage, recipe, str(exc))
                 if len(self.last_conflicts) < 10:
                     self.last_conflicts.append(exc)
         if not valid:
@@ -1224,6 +1267,20 @@ class PersonalPlanner:
         return valid
 
     def create(self, *, replace_slot=None, balanced_reference=None):
+        try:
+            result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
+            result.personal.checks["planning_diagnostics"] = self.diagnostics.snapshot()
+            return result
+        except (ValueError, IncompleteBasketError) as exc:
+            message = str(exc)
+            code = getattr(exc, "code", "SEARCH_BLOCKED")
+            if isinstance(exc, IncompleteBasketError):
+                message = "Sökningen hittade ingen komplett meny med dina krav. Se blockeringsfördelningen. Inga krav har sänkts."
+            raise PolicyConflict(message, code=code,
+                                 conflicts=getattr(exc, "conflicts", None),
+                                 diagnostics=self.diagnostics.snapshot()) from exc
+
+    def _create(self, *, replace_slot=None, balanced_reference=None):
         slots = self.spec.slots
         if slots is None:
             slots = [
@@ -1305,13 +1362,18 @@ class PersonalPlanner:
 
         def accepts(chosen, *, final):
             if not distribution_ok(chosen, self.spec.meals, partial=not final or draft):
+                self.diagnostics.branch(len(chosen), "policy_taste")
                 return False
             dinners = [s.recipe for s in chosen if s.meal_type == "dinner" and s.recipe]
             if len({recipe_id(r) for r in dinners}) != len(dinners):
+                self.diagnostics.branch(len(chosen), "variation")
                 return False
             # Repeated breakfasts/snacks are permitted. Dinner variation follows
             # the existing actual ingredient/preparation constraints.
-            return self.service.menu_optimizer.accepts_recipes(dinners, constraints)
+            accepted = self.service.menu_optimizer.accepts_recipes(dinners, constraints)
+            if not accepted:
+                self.diagnostics.branch(len(chosen), "variation")
+            return accepted
 
         def score(chosen, result):
             tastes = preference_score([s.recipe for s in chosen if s.recipe], self.spec.profile)
@@ -1327,28 +1389,28 @@ class PersonalPlanner:
             )
 
         def evaluate(chosen, *, final):
-            result = self.basket(chosen, final=final)
+            try:
+                result = self.basket(chosen, final=final)
+            except (ValueError, IncompleteBasketError) as exc:
+                stage = getattr(exc, "stage", None) or (
+                    "product_qualification" if getattr(exc, "code", None) == "DATA_BLOCKED" else "price_basket"
+                )
+                self.diagnostics.branch(len(chosen), stage)
+                if len(chosen) == 1 and generating and chosen[0].recipe:
+                    self.diagnostics.reject(stage, chosen[0].recipe, str(exc))
+                raise
+            if len(chosen) == 1 and generating:
+                self.diagnostics.singleton_passed += 1
             if final and ceiling is not None and result["basket"].total > ceiling:
                 raise PolicyConflict(
                     f"Varierad överskrider vald kostnadsgräns {ceiling:.2f} kr för hela korgen. Balanserad kostar {balanced_reference.optimized_basket.total:.2f} kr."
                 )
             return result
 
-        try:
-            chosen, result = self.service.menu_optimizer.optimize_slots(
-                options, evaluate=evaluate, accepts=accepts, score=score, beam_width=8
-            )
-        except IncompleteBasketError as exc:
-            if self.spec.allow_nutrition_estimates:
-                raise PolicyConflict(
-                    f"Sökningen hittade ingen komplett meny för {dinner_count} middagar med dina krav. "
-                    "Det granskade tillagningsunderlaget omfattar nu kokning av kyckling/torsk/lax, ris/äggnudlar, morot/vitkål och stekning av lax. "
-                    "Fler kolhydratbaser och tillagningssätt behöver kvalificeras för bredare variation. "
-                    "Tre middagar fungerar i det verifierade exempelurvalet; ändra antal uttryckligen om du vill prova. "
-                    "Detta är en begränsning i underlag/sökning, inte ett bevis på att dina krav är omöjliga. Inga krav har sänkts.",
-                    code="SEARCH_BLOCKED",
-                ) from exc
-            raise
+        chosen, result = self.service.menu_optimizer.optimize_slots(
+            options, evaluate=evaluate, accepts=accepts, score=score, beam_width=8,
+            search_trace=self.diagnostics.search,
+        )
         # Recheck every final constraint even if the cache supplied a beam result.
         result = self.basket(chosen, final=True)
         if not accepts(chosen, final=True):
