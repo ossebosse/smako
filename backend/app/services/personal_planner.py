@@ -55,7 +55,7 @@ from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
-POLICY_VERSION = "personal-policy-v2-4"
+POLICY_VERSION = "personal-policy-v2-5"
 
 
 def personal_policy_request(request, dinner_count):

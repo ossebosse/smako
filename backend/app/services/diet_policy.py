@@ -80,6 +80,17 @@ def _excluded_by_diet(name: str, preference: DietPreference) -> bool:
     return False
 
 
+def ingredient_is_excluded(name: str, exclusions: Iterable[str]) -> bool:
+    """Explicit fish excludes the existing fish family, not only the generic name."""
+    canonical = canonicalize_ingredient_name(name)
+    exclusions = tuple(exclusions)
+    excluded = {canonicalize_ingredient_name(v) for v in exclusions if str(v).strip()}
+    return canonical in excluded or (
+        any(v.casefold().strip() == "fisk" for v in exclusions)
+        and semantic_requirement(canonical).food_family == "fish"
+    )
+
+
 def excluded_ingredients(
     preference: DietPreference | str,
     avoid_ingredients: Iterable[str] = (),
@@ -109,6 +120,7 @@ def filter_economic_pool(
     """Narrow an already local pool without any source/provider request."""
 
     preference = DietPreference(preference)
+    avoid_ingredients = tuple(avoid_ingredients)
     explicitly_excluded = {
         canonicalize_ingredient_name(value)
         for value in avoid_ingredients
@@ -119,7 +131,7 @@ def filter_economic_pool(
 
     def allowed(name: str) -> bool:
         canonical = canonicalize_ingredient_name(name)
-        return canonical not in explicitly_excluded and not _excluded_by_diet(
+        return not ingredient_is_excluded(canonical, avoid_ingredients) and not _excluded_by_diet(
             canonical, preference
         )
 
@@ -151,15 +163,10 @@ def recipe_respects_diet(
     avoid_ingredients: Iterable[str] = (),
 ) -> bool:
     preference = DietPreference(preference)
-    excluded = {
-        canonicalize_ingredient_name(value)
-        for value in avoid_ingredients
-        if str(value).strip()
-    }
+    avoid_ingredients = tuple(avoid_ingredients)
     return not any(
         (
-            canonicalize_ingredient_name(ingredient.canonical_name or ingredient.name)
-            in excluded
+            ingredient_is_excluded(ingredient.canonical_name or ingredient.name, avoid_ingredients)
             or _excluded_by_diet(
                 ingredient.canonical_name or ingredient.name,
                 preference,

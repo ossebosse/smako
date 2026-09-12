@@ -12,7 +12,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 
 from app.models.personal import TasteProfile
-from app.services.diet_policy import recipe_respects_diet
+from app.services.diet_policy import ingredient_is_excluded, recipe_respects_diet
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 from app.services.product_search import search_text
 from app.services.recipe_profile import primary_ingredient
@@ -162,7 +162,13 @@ def is_nonfood(name):
 
 def _contains(term, names):
     token = search_text(term)
-    return any(token == search_text(n) or token in search_text(n).split() for n in names)
+    for name in names:
+        words = search_text(name).split()
+        if token == search_text(name) or token in words:
+            return True
+        if token == "fisk" and any(ingredient_is_excluded(n, ["fisk"]) for n in [name, *words]):
+            return True
+    return False
 
 
 def check_product(product, profile, facts=None, *, organic_animals=False):
@@ -171,7 +177,10 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
     hard = profile.exclusions + profile.allergies
     # A positive conflict needs no claim about the completeness of other data.
     for term in hard:
-        if _contains(term, (product.name, product.canonical_name)):
+        if _contains(term, (product.name, product.canonical_name)) or (
+            search_text(term) == "fisk"
+            and getattr(product, "food_family", None) == "fish"
+        ):
             raise PolicyConflict(f"{product.name} strider mot ditt hårda val: {term}.")
     if hard:
         if facts and facts.ingredients:
