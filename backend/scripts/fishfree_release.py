@@ -9,9 +9,9 @@ import sys
 import tarfile
 from pathlib import Path
 
-BUILD = "personal-v2-fishfree-20260913"
-BASELINE = "e5a3787"
-BASE_IMAGE = "billigaste-veckomenyn:0.1.0-smako-personal-v2-cost-fish-20260912"
+BUILD = "personal-v2-fishfree-20260913b"
+BASELINE = "77be295"
+BASE_IMAGE = "billigaste-veckomenyn:0.1.0-smako-personal-v2-fishfree-20260913"
 
 
 def digest(data):
@@ -65,7 +65,7 @@ def package():
 def stage():
     root = Path("/opt/smako")
     current = (root / "current").resolve(strict=True)
-    assert current == root / "releases/personal-v2-cost-fish-20260912"
+    assert current == root / "releases/personal-v2-fishfree-20260913"
     target = root / "releases" / BUILD
     assert not target.exists()
     with tarfile.open(root / "evidence" / f"{BUILD}.tar.gz") as archive:

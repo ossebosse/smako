@@ -26,6 +26,7 @@ def fact(**changes):
         "sardellpasta",
         "bonitoflingor",
         "ANSJOVIS",
+        "ANSJOVISextrakt",
         "laxextrakt",
         "tonfisk",
     ],

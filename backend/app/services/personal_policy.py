@@ -172,7 +172,7 @@ def _contains(term, names):
             return True
         if token == "fisk" and re.search(
             r"\b(?:fisk(?:sås|sas|buljong|fond|extrakt|gelatin|olja|protein)?|fish(?:\s+sauce)?|"
-            r"ansjovis|anchov\w*|sardell\w*|sardin\w*|bonito\w*|katsuobushi|surimi|lax\w*|tonfisk\w*)\b",
+            r"ansjovis\w*|anchov\w*|sardell\w*|sardin\w*|bonito\w*|katsuobushi|surimi|lax\w*|tonfisk\w*)\b",
             search_text(name),
         ):
             return True

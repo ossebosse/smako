@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path("/opt/smako")
-BUILD = "personal-v2-fishfree-20260913"
+BUILD = "personal-v2-fishfree-20260913b"
 
 ROLLBACK = "personal-v2-dinners-20260911c-rollback"
 STATE = ROOT / "evidence" / f"{BUILD}-rollback-private.json"

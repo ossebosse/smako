@@ -1,4 +1,4 @@
-"""Explicit opt-in estimates for three normal, no-discard weekday preparations.
+"""Explicit opt-in estimates for four normal, no-discard weekday preparations.
 
 All measured edible food is served. Water changes concentration, not the sum
 of input macros. This is an input-based estimate of the meal, never measured
