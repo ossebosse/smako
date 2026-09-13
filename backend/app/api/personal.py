@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
-import asyncio
 import hashlib
 import json
 
 from app.api.beta_ops import _require_same_origin
-from app.api.plan import _plan_actor_hash, _run_personal_work, _store, _with_release
+from app.api.plan import (
+    _plan_actor_hash,
+    _run_personal_thread,
+    _run_personal_work,
+    _store,
+    _with_release,
+)
 from app.config import get_settings
 from app.models.personal import (
     PantryWrite,
@@ -245,14 +250,17 @@ async def change_plan(
             422, "Ändringen strider mot antalet tillfällen eller vald fördelning."
         ) from exc
     plan_request = saved.request.model_copy(update={"personal": spec})
-    planner = PersonalPlanner(plan_request, settings, prepared, state, plan_id=plan_id)
     plan = _with_release(
         await _run_personal_work(
             plan_request,
             request,
             settings,
             state["revision"],
-            lambda: asyncio.to_thread(planner.create, replace_slot=replace_slot),
+            lambda: _run_personal_thread(
+                lambda: PersonalPlanner(
+                    plan_request, settings, prepared, state, plan_id=plan_id
+                ).create(replace_slot=replace_slot)
+            ),
             operation=f"{plan_id}:{saved.revision}:{payload.action}:{replace_slot}",
         ),
         settings,
@@ -283,20 +291,18 @@ async def surplus_suggestions(plan_id: str, request: Request, response: Response
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(saved.request.postal_code, {})
     if prepared is None:
         raise HTTPException(503, "Lokalt prisunderlag saknas.")
-    planner = PersonalPlanner(
-        saved.request.model_copy(update={"personal": spec}),
-        settings,
-        prepared,
-        state,
-        plan_id=plan_id,
-    )
+    plan_request = saved.request.model_copy(update={"personal": spec})
     return {
         "suggestions": await _run_personal_work(
-            planner.request,
+            plan_request,
             request,
             settings,
             state["revision"],
-            lambda: asyncio.to_thread(planner.surplus_suggestions, saved.plan),
+            lambda: _run_personal_thread(
+                lambda: PersonalPlanner(
+                    plan_request, settings, prepared, state, plan_id=plan_id
+                ).surplus_suggestions(saved.plan)
+            ),
             operation=f"suggestions:{plan_id}:{saved.revision}",
         )
     }
@@ -329,7 +335,11 @@ def install_handlers(app):
     async def blocked_personal(_request, exc):
         return JSONResponse(
             status_code=422,
-            content={"detail": str(exc), "code": exc.code, "conflicts": exc.conflicts,
-                     "planning_diagnostics": exc.diagnostics},
+            content={
+                "detail": str(exc),
+                "code": exc.code,
+                "conflicts": exc.conflicts,
+                "planning_diagnostics": exc.diagnostics,
+            },
             headers={"Cache-Control": "private, no-store"},
         )

@@ -58,6 +58,14 @@ from grocery_data.app.domain.promotion_pricing import UserPricingContext
 POLICY_VERSION = "personal-policy-v2-7"
 
 
+# Exact recipe value, including preparation and unrounded ingredient quantities.
+# Recipe's nested lists are mutable, so object ID/name alone is not a safe key.
+def _recipe_value(recipe):
+    if recipe is None:
+        return None
+    return (recipe.name, recipe.servings, tuple(recipe.ingredients), tuple(recipe.instructions))
+
+
 def personal_policy_request(request, dinner_count):
     result = request.model_copy(update={"recipes": dinner_count})
     # Personal forms use the named preset. Serialized absent optional overrides
@@ -154,6 +162,11 @@ class PersonalPlanner:
         self.items = available_items(state, plan_id=plan_id)
         self.meals = {m.meal_type: m for m in self.spec.meals}
         self.lookup_cache = {}
+        # Only this planner owns these immutable-by-convention facts and this
+        # request's estimate policy. Nothing survives into another request or
+        # account. Bound the cache even for unusually large edit inputs.
+        self.nutrition_cache = {}
+        self.slot_nutrition_cache = {}
         self.queries = {}
         from app.services.planning_diagnostics import PlanningDiagnostics
 
@@ -176,6 +189,23 @@ class PersonalPlanner:
         return None
 
     def nutrition_evidence(self, product, name, unit, requested, recipe):
+        key = (
+            product.store_id,
+            product.product_id,
+            name,
+            unit,
+            frozenset(requested),
+            _recipe_value(recipe),
+            self.spec.allow_nutrition_estimates,
+        )
+        if key not in self.nutrition_cache:
+            result = self._nutrition_evidence(product, name, unit, requested, recipe)
+            if len(self.nutrition_cache) >= 16384:
+                self.nutrition_cache.clear()
+            self.nutrition_cache[key] = result
+        return self.nutrition_cache[key]
+
+    def _nutrition_evidence(self, product, name, unit, requested, recipe):
         fact = self.source_facts(product)
         qualified = bool(
             fact
@@ -1205,6 +1235,71 @@ class PersonalPlanner:
         }
 
     def _check_nutrition(self, slots, selected_products, rows, allocations):
+        """Reuse the same per-portion calculation, never an approximate price.
+
+        The selected package contributes nutrition only for the exact edible
+        demand, after stock allocation. Neither package surplus nor the other
+        slots' purchases can change that sum. Pricing/stock allocation remain
+        joint and run before this function. No float rounding is used in keys.
+        """
+        results = []
+        for slot in slots:
+            if not slot.recipe:
+                continue
+            needs = [r for r in rows if r["source"] == slot.id]
+            limits = self.meals[slot.meal_type].limits
+            demand_values = []
+            for need in needs:
+                selected = selected_products.get(need.get("purchase_key"))
+                pantry = tuple(
+                    (a["name"], a["quantity"], a.get("product_key"), a.get("nutrition_reference"))
+                    for a in allocations
+                    if a["demand_key"] == need["demand_key"]
+                )
+                demand_values.append(
+                    (
+                        need["name"],
+                        need["unit"],
+                        need["quantity"],
+                        need["original_quantity"],
+                        (selected.store_id, selected.product_id) if selected else None,
+                        pantry,
+                    )
+                )
+            weight = (
+                self.cooked_weights.get(recipe_id(slot.recipe))
+                if limits.min_weight_g is not None or limits.max_weight_g is not None
+                else None
+            )
+            key = (
+                _recipe_value(slot.recipe),
+                slot.meal_type,
+                limits.model_dump_json(),
+                self.spec.allow_nutrition_estimates,
+                tuple(demand_values),
+                json.dumps(weight, sort_keys=True) if weight else None,
+            )
+            cached = self.slot_nutrition_cache.get(key)
+            if cached is None:
+                try:
+                    value = self._check_nutrition_uncached(
+                        [slot], selected_products, needs, allocations
+                    )[0]
+                    cached = (value, None)
+                except PolicyConflict as exc:
+                    # Store values, not exceptions retaining whole search stacks.
+                    cached = (None, (str(exc), exc.code, exc.stage))
+                if len(self.slot_nutrition_cache) >= 2048:
+                    self.slot_nutrition_cache.clear()
+                self.slot_nutrition_cache[key] = cached
+            value, error = cached
+            if error:
+                raise PolicyConflict(error[0], code=error[1], stage=error[2])
+            # Slot identity is output context, not part of the food calculation.
+            results.append({**value, "slot_id": slot.id})
+        return results
+
+    def _check_nutrition_uncached(self, slots, selected_products, rows, allocations):
         nutrition = []
         for slot in slots:
             if not slot.recipe:

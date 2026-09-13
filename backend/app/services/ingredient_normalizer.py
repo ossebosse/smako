@@ -7,6 +7,7 @@ import unicodedata
 from collections import OrderedDict
 from collections.abc import Iterable
 from decimal import Decimal
+from functools import lru_cache
 
 from app.models.ingredient import NormalizedIngredient
 from app.models.recipe import Recipe
@@ -175,6 +176,20 @@ CANONICAL_ALIASES: dict[str, tuple[str, ...]] = {
 
 def _search_text(value: str) -> str:
     """Return a comparison form without accents or punctuation."""
+
+    # Pure Unicode/text operation, independent of products, prices, policy and
+    # user state. Exact input keys; bounded entry count AND retained string size.
+    if len(value) <= 4096:
+        return _cached_search_text(value)
+    return _uncached_search_text(value)
+
+
+@lru_cache(maxsize=8192)
+def _cached_search_text(value: str) -> str:
+    return _uncached_search_text(value)
+
+
+def _uncached_search_text(value: str) -> str:
 
     decomposed = unicodedata.normalize("NFKD", value.casefold())
     unaccented = "".join(char for char in decomposed if not unicodedata.combining(char))

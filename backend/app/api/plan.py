@@ -215,8 +215,6 @@ async def _run_admitted_plan(
     http_request: Request,
     settings: Settings,
 ) -> PlanResponse:
-    controller = _planner_admission(http_request, settings)
-    key = _planner_admission_key(request, settings)
     if request.personal is not None:
         from app.services.personal_planner import PersonalPlanner
         from app.services.personal_store import PersonalStore
@@ -226,15 +224,20 @@ async def _run_admitted_plan(
         prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(request.postal_code, {})
         if prepared is None:
             raise HTTPException(503, "Lokalt prisunderlag saknas.")
-        planner = PersonalPlanner(request, settings, prepared, state)
         # Isolate admission/coalescing even when two owners choose equal fields.
+        # Catalog/fact initialization belongs inside the admitted worker too:
+        # it must neither block the event loop nor precede a long queue wait.
         return await _run_personal_work(
             request,
             http_request,
             settings,
             state["revision"],
-            lambda: asyncio.to_thread(planner.create),
+            lambda: _run_personal_thread(
+                lambda: PersonalPlanner(request, settings, prepared, state).create()
+            ),
         )
+    controller = _planner_admission(http_request, settings)
+    key = _planner_admission_key(request, settings)
     try:
         return await controller.run(
             key,
@@ -249,6 +252,30 @@ async def _run_admitted_plan(
                 "X-Error-Code": "planner_admission_full",
             },
         ) from exc
+
+
+async def _run_personal_thread(work):
+    """Retain admission until a non-cancellable Python worker actually exits.
+
+    Cancelling asyncio.to_thread only abandons its await, not the running
+    calculation. Shield and join it before propagating cancellation so a
+    disconnect/shutdown cannot admit uncontrolled overlapping workers.
+    """
+    worker = asyncio.create_task(asyncio.to_thread(work))
+    cancelled = None
+    while not worker.done():
+        try:
+            await asyncio.shield(worker)
+        except asyncio.CancelledError as exc:
+            cancelled = exc
+        except Exception:
+            if cancelled is not None:
+                raise cancelled
+            raise
+    if cancelled is not None:
+        worker.exception()  # Consume any error before discarding the result.
+        raise cancelled
+    return worker.result()
 
 
 async def _run_personal_work(
