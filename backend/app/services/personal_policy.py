@@ -32,7 +32,9 @@ class ProductFacts:
     source: str
     source_product_id: str
     source_snapshot_id: str
+    retailer_product_id: str | None = None
     ingredients_complete: bool = False
+    ingredient_evidence_kind: str | None = None
     ingredients: tuple[str, ...] = ()
     allergens_checked: tuple[str, ...] = ()
     allergens_present: tuple[str, ...] = ()
@@ -168,7 +170,21 @@ def _contains(term, names):
             return True
         if token == "fisk" and any(ingredient_is_excluded(n, ["fisk"]) for n in [name, *words]):
             return True
+        if token == "fisk" and re.search(
+            r"\b(?:fisk(?:sås|sas|buljong|fond|extrakt|gelatin|olja|protein)?|fish(?:\s+sauce)?|"
+            r"ansjovis|anchov\w*|sardell\w*|sardin\w*|bonito\w*|katsuobushi|surimi|lax\w*|tonfisk\w*)\b",
+            search_text(name),
+        ):
+            return True
     return False
+
+
+def ingredient_composition(declarations):
+    """A precautionary trace statement is distinct from ingredient occurrence."""
+    return tuple(
+        re.split(r"kan innehålla|spår av|may contain", value, maxsplit=1, flags=re.IGNORECASE)[0]
+        for value in declarations
+    )
 
 
 def check_product(product, profile, facts=None, *, organic_animals=False):
@@ -178,29 +194,45 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
     # A positive conflict needs no claim about the completeness of other data.
     for term in hard:
         if _contains(term, (product.name, product.canonical_name)) or (
-            search_text(term) == "fisk"
-            and getattr(product, "food_family", None) == "fish"
+            search_text(term) == "fisk" and getattr(product, "food_family", None) == "fish"
         ):
             raise PolicyConflict(f"{product.name} strider mot ditt hårda val: {term}.")
     if hard:
         if facts and facts.ingredients:
             for term in hard:
-                if _contains(term, facts.ingredients):
+                names = (
+                    facts.ingredients
+                    if term in profile.allergies
+                    else ingredient_composition(facts.ingredients)
+                )
+                if _contains(term, names):
                     raise PolicyConflict(
                         f"{product.name}: produktdeklarationen anger {term}, som strider mot ditt hårda val."
                     )
         unknown = [a for a in profile.allergies if a not in ALLERGENS]
         if unknown:
             raise PolicyConflict(
-                "Allergin kan inte verifieras: " + ", ".join(unknown), stage="policy_taste", code="DATA_BLOCKED"
+                "Allergin kan inte verifieras: " + ", ".join(unknown),
+                stage="policy_taste",
+                code="DATA_BLOCKED",
             )
-        if facts is None or not facts.ingredients_complete:
+        if (
+            facts is None
+            or not facts.ingredients_complete
+            or set(facts.conflicts) & {"ingredients", "identity_variant"}
+        ):
+            missing = (
+                "fullständig spårbar ingrediens-/allergeninformation"
+                if profile.allergies
+                else "tillräckligt spårbart ingrediensunderlag"
+            )
             raise PolicyConflict(
-                f"{product.name}: fullständig spårbar ingrediens-/allergeninformation saknas.",
-                stage="policy_taste", code="DATA_BLOCKED",
+                f"{product.name}: {missing} saknas.",
+                stage="policy_taste",
+                code="DATA_BLOCKED",
             )
         for term in profile.exclusions:
-            if _contains(term, facts.ingredients):
+            if _contains(term, ingredient_composition(facts.ingredients)):
                 raise PolicyConflict(f"{product.name} innehåller utesluten ingrediens: {term}.")
         for term in profile.allergies:
             allergen = ALLERGENS[term]
@@ -208,7 +240,9 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
                 raise PolicyConflict(f"{product.name}: deklarerad förekomst/spår av {allergen}.")
             if allergen not in facts.allergens_checked:
                 raise PolicyConflict(
-                    f"{product.name}: {allergen} är inte verifierat i källan.", stage="policy_taste", code="DATA_BLOCKED"
+                    f"{product.name}: {allergen} är inte verifierat i källan.",
+                    stage="policy_taste",
+                    code="DATA_BLOCKED",
                 )
     if organic_animals:
         # (animal -> organic) is satisfied by verified organic status even
@@ -218,12 +252,14 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
         if facts is None or facts.animal is None:
             raise PolicyConflict(
                 f"{product.name}: animaliskt innehåll/ekostatus kan inte verifieras.",
-                stage="organic", code="DATA_BLOCKED",
+                stage="organic",
+                code="DATA_BLOCKED",
             )
         if facts.animal and facts.organic is not True:
             raise PolicyConflict(
                 f"{product.name} saknar verifierad ekologisk status för animalier.",
-                stage="organic", code="DATA_BLOCKED" if facts.organic is None else "CONFLICT",
+                stage="organic",
+                code="DATA_BLOCKED" if facts.organic is None else "CONFLICT",
             )
 
 

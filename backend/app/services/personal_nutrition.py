@@ -74,13 +74,21 @@ def is_reference_preparation(recipe):
             for form in (
                 ("plate", "soup", "stew", "fried_plate", "salmon_pan")
                 if "lax" in names
-                else (("plate", "soup", "stew", "cod_pan") if "fisk" in names else ("plate", "soup", "stew"))
+                else (
+                    ("plate", "soup", "stew", "cod_pan")
+                    if "fisk" in names
+                    else ("plate", "soup", "stew")
+                )
             )
         )
     )
 
 
 def calculation_basis(recipe, *, allow_estimates=False):
+    from app.services.reviewed_warm_meals import basis, preparation
+
+    if allow_estimates and preparation(recipe):
+        return basis(recipe)
     if allow_estimates and is_couscous_preparation(recipe):
         from app.services.nutrition_reference import reference_data
 
@@ -128,8 +136,9 @@ def calculation_basis(recipe, *, allow_estimates=False):
 
 
 def reference_method(recipe, name):
-    if (canonicalize_ingredient_name(name) == "fisk"
-            and recipe.instructions == reference_instructions("cod_pan")):
+    if canonicalize_ingredient_name(
+        name
+    ) == "fisk" and recipe.instructions == reference_instructions("cod_pan"):
         return "fry"
     if canonicalize_ingredient_name(name) == "lax" and any(
         recipe.instructions == reference_instructions(f) for f in ("fried_plate", "salmon_pan")

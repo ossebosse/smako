@@ -19,7 +19,7 @@ from threading import RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v2"
+FACTS_VERSION = "retained-catalog-facts-v3"
 _CACHE = {}
 _LOCK = RLock()
 
@@ -128,6 +128,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         source=source_reference,
         source_product_id=product_id,
         source_snapshot_id=snapshot_id,
+        retailer_product_id=str(raw.get("id") if chain == "coop" else raw.get("code") or ""),
         ingredients_complete=False,
         ingredients=(ingredients,) if isinstance(ingredients, str) and ingredients.strip() else (),
         organic=organic,
@@ -344,7 +345,9 @@ def complete_identity_facts(prepared, original):
                 field_sources={**current.field_sources, **sources},
                 conflicts=tuple(sorted(conflicts)),
             )
-    return FactsCollection(result)
+    from app.services.reviewed_ingredients import enrich_ingredients
+
+    return FactsCollection(enrich_ingredients(prepared, result))
 
 
 def raw_product(document, reference):

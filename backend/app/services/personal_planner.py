@@ -55,7 +55,7 @@ from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
-POLICY_VERSION = "personal-policy-v2-5"
+POLICY_VERSION = "personal-policy-v2-6"
 
 
 def personal_policy_request(request, dinner_count):
@@ -191,7 +191,16 @@ class PersonalPlanner:
 
         cooked = bool(recipe and is_reference_preparation(recipe))
         assembly = bool(recipe and is_couscous_preparation(recipe))
-        if qualified and not cooked and not assembly:
+        if cooked and "strimlad" in product.name.casefold():
+            from app.services.personal_nutrition import reference_instructions
+
+            if recipe.instructions == reference_instructions("plate"):
+                return None  # The existing plate explicitly serves a whole fillet.
+        from app.services.reviewed_warm_meals import evidence as warm_evidence
+        from app.services.reviewed_warm_meals import preparation
+
+        warm = bool(preparation(recipe))
+        if qualified and not cooked and not assembly and not warm:
             return fact
         if unit != "g" or (
             fact
@@ -207,8 +216,10 @@ class PersonalPlanner:
         identity = product_reference(product, name, fact)
         if identity is None:
             return None
-        if (cooked or assembly) and fact and fact.nutrition and not qualified:
+        if (cooked or assembly or warm) and fact and fact.nutrition and not qualified:
             return None  # Do not overwrite an incomplete declaration with easier generic values.
+        if warm:
+            return warm_evidence(identity, recipe, fact if qualified else None)
         if assembly:
             from app.services.nutrition_reference import assembly_evidence
 
@@ -362,7 +373,9 @@ class PersonalPlanner:
             + profile.allergies
             + self.request.avoid_ingredients,
         ):
-            raise PolicyConflict(f"{recipe.name} strider mot kostval eller hård uteslutning.", stage="policy_taste")
+            raise PolicyConflict(
+                f"{recipe.name} strider mot kostval eller hård uteslutning.", stage="policy_taste"
+            )
         for ingredient in self.service.normalizer.normalize_and_aggregate([recipe]):
             self.resolve(
                 ingredient.canonical_name,
@@ -621,7 +634,9 @@ class PersonalPlanner:
                     for n in range(1, min(len(stores), self.request.max_stores) + 1)
                     for subset in combinations(stores, n)
                 )
-                raise PolicyConflict(str(exc), stage="price_basket" if covers else "store_cap") from exc
+                raise PolicyConflict(
+                    str(exc), stage="price_basket" if covers else "store_cap"
+                ) from exc
             ordinary_total = basket.total
             if self.spec.surplus_mode == "allow_larger":
                 basket = self._larger_packages(basket, ingredients, candidate_map)
@@ -1009,6 +1024,42 @@ class PersonalPlanner:
         return min(winners, key=lambda b: b.total)
 
     def _check_final(self, slots, basket, groups, rows, allocations):
+        ingredient_checks = []
+        purchased = {i.ingredient: i for s in basket.stores for i in s.items}
+        for need in rows:
+            profile = need["profile"]
+            if not (profile.exclusions or profile.allergies):
+                continue
+            positions = set()
+            item = purchased.get(need.get("purchase_key"))
+            if item:
+                positions.add(self.by_identity[(item.store_id, item.product_id)])
+            for allocation in allocations:
+                if allocation["demand_key"] == need["demand_key"]:
+                    positions.update(self.index.groups.get(allocation.get("product_key"), ()))
+            for position in sorted(positions):
+                p = self.prepared.universe.products[position]
+                fact = self.source_facts(p)
+                check_product(p, profile, fact, organic_animals=need["organic_animals"])
+                ingredient_checks.append(
+                    {
+                        "source": need["source"],
+                        "ingredient": need["name"],
+                        "product_id": p.product_id,
+                        "store_id": p.store_id,
+                        "name": p.name,
+                        "exclusions": profile.exclusions,
+                        "status": "CHECKED_INGREDIENT_CHOICE",
+                        "ingredients": list(fact.ingredients) if fact else [],
+                        "evidence_kind": fact.ingredient_evidence_kind if fact else None,
+                        "field_sources": list(fact.field_sources.get("ingredients", ()))
+                        if fact
+                        else [],
+                        "allergy_status": "REQUESTED_SEPARATELY"
+                        if profile.allergies
+                        else "NOT_REQUESTED",
+                    }
+                )
         nutrition = []
         for slot in slots:
             if not slot.recipe:
@@ -1054,6 +1105,15 @@ class PersonalPlanner:
                                 )
                                 if is_couscous_preparation(slot.recipe):
                                     evidence = assembly_evidence(identity)
+                                from app.services.reviewed_warm_meals import (
+                                    evidence as warm_evidence,
+                                )
+                                from app.services.reviewed_warm_meals import (
+                                    preparation,
+                                )
+
+                                if preparation(slot.recipe):
+                                    evidence = warm_evidence(identity, slot.recipe)
                                 contributions.append((allocation["quantity"], evidence, "pantry"))
                                 continue
                             positions = self.index.groups.get(allocation.get("product_key"), ())
@@ -1201,6 +1261,7 @@ class PersonalPlanner:
         return {
             "purchase": "VERIFIED",
             "allergy": "VERIFIED" if has_allergies else "NOT_REQUESTED",
+            "ingredient_exclusions": ingredient_checks,
             "nutrition": nutrition,
             "facts_version": self.facts_version,
             "nutrition_reference_version": self.reference_version,
@@ -1238,8 +1299,11 @@ class PersonalPlanner:
             stage = "policy_taste"
             try:
                 profile = merged_profile(self.spec.profile, meal.profile)
-                if not recipe_respects_diet(recipe, preference=meal.diet,
-                                            avoid_ingredients=profile.exclusions + profile.allergies):
+                if not recipe_respects_diet(
+                    recipe,
+                    preference=meal.diet,
+                    avoid_ingredients=profile.exclusions + profile.allergies,
+                ):
                     raise PolicyConflict("Strider mot kostval eller hård uteslutning.")
                 stage = "preparation"
                 if self.spec.allow_nutrition_estimates and requested_nutrients(meal.limits):
@@ -1253,7 +1317,9 @@ class PersonalPlanner:
                     .validate_recipes([recipe])
                     .is_valid
                 ):
-                    self.diagnostics.reject("nutrition", recipe, "Befintlig strukturell måltidskontroll.")
+                    self.diagnostics.reject(
+                        "nutrition", recipe, "Befintlig strukturell måltidskontroll."
+                    )
                     continue
                 valid.append(recipe)
             except (PolicyConflict, ValueError) as exc:
@@ -1276,9 +1342,12 @@ class PersonalPlanner:
             code = getattr(exc, "code", "SEARCH_BLOCKED")
             if isinstance(exc, IncompleteBasketError):
                 message = "Sökningen hittade ingen komplett meny med dina krav. Se blockeringsfördelningen. Inga krav har sänkts."
-            raise PolicyConflict(message, code=code,
-                                 conflicts=getattr(exc, "conflicts", None),
-                                 diagnostics=self.diagnostics.snapshot()) from exc
+            raise PolicyConflict(
+                message,
+                code=code,
+                conflicts=getattr(exc, "conflicts", None),
+                diagnostics=self.diagnostics.snapshot(),
+            ) from exc
 
     def _create(self, *, replace_slot=None, balanced_reference=None):
         slots = self.spec.slots
@@ -1393,7 +1462,9 @@ class PersonalPlanner:
                 result = self.basket(chosen, final=final)
             except (ValueError, IncompleteBasketError) as exc:
                 stage = getattr(exc, "stage", None) or (
-                    "product_qualification" if getattr(exc, "code", None) == "DATA_BLOCKED" else "price_basket"
+                    "product_qualification"
+                    if getattr(exc, "code", None) == "DATA_BLOCKED"
+                    else "price_basket"
                 )
                 self.diagnostics.branch(len(chosen), stage)
                 if len(chosen) == 1 and generating and chosen[0].recipe:
@@ -1408,7 +1479,11 @@ class PersonalPlanner:
             return result
 
         chosen, result = self.service.menu_optimizer.optimize_slots(
-            options, evaluate=evaluate, accepts=accepts, score=score, beam_width=8,
+            options,
+            evaluate=evaluate,
+            accepts=accepts,
+            score=score,
+            beam_width=8,
             search_trace=self.diagnostics.search,
         )
         # Recheck every final constraint even if the cache supplied a beam result.

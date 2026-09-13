@@ -128,11 +128,7 @@ def _allocate_candidate_batches(
     )
     for index in order[:remainder]:
         allocated[index] += 1
-    return [
-        (batch, target)
-        for batch, target in zip(batches, allocated, strict=True)
-        if target > 0
-    ]
+    return [(batch, target) for batch, target in zip(batches, allocated, strict=True) if target > 0]
 
 
 @dataclass(frozen=True, slots=True)
@@ -380,9 +376,11 @@ def _instructions(spec: _CandidateSpec, servings: int) -> list[str]:
         "och neutral matolja; inga andra olistade ingredienser behövs."
     )
     if spec.primary.entry.category == IngredientCategory.LEGUME:
-        protein = (f"Förbered {primary}. Väg den listade mängden i produktens inköpsform. "
-                   "Torra baljväxter blötläggs vid behov och kokas helt mjuka enligt "
-                   "förpackningen; redan kokta sköljs och får rinna av.")
+        protein = (
+            f"Förbered {primary}. Väg den listade mängden i produktens inköpsform. "
+            "Torra baljväxter blötläggs vid behov och kokas helt mjuka enligt "
+            "förpackningen; redan kokta sköljs och får rinna av."
+        )
     elif spec.primary.canonical == "ägg":
         protein = "Knäck de listade äggen i en skål och vispa ihop."
     else:
@@ -462,21 +460,34 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
             ("Nudelpanna med stekt lax och vitkål", "salmon_pan", "lax", "nudlar", "vitkål"),
             ("Stekt torsk med äggnudlar och vitkål", "cod_pan", "fisk", "nudlar", "vitkål"),
         ]
-        recipes = [Recipe(name=name, servings=servings, ingredients=[
-            RecipeIngredient(name=protein, quantity=150 * servings, unit="g"),
-            RecipeIngredient(name=carb, quantity=80 * servings, unit="g"),
-            RecipeIngredient(name=veg, quantity=150 * servings, unit="g"),
-        ], instructions=reference_instructions(form))
-            for name, form, protein, carb, veg in templates]
-        recipes.append(Recipe(
-            name="Couscoussallad med tofu och tomat", servings=servings,
-            ingredients=[
-                RecipeIngredient(name="tofu", quantity=150 * servings, unit="g"),
-                RecipeIngredient(name="couscous", quantity=80 * servings, unit="g"),
-                RecipeIngredient(name="tomat", quantity=150 * servings, unit="g"),
-            ], instructions=couscous_instructions(),
-        ))
-        return recipes
+        recipes = [
+            Recipe(
+                name=name,
+                servings=servings,
+                ingredients=[
+                    RecipeIngredient(name=protein, quantity=150 * servings, unit="g"),
+                    RecipeIngredient(name=carb, quantity=80 * servings, unit="g"),
+                    RecipeIngredient(name=veg, quantity=150 * servings, unit="g"),
+                ],
+                instructions=reference_instructions(form),
+            )
+            for name, form, protein, carb, veg in templates
+        ]
+        recipes.append(
+            Recipe(
+                name="Couscoussallad med tofu och tomat",
+                servings=servings,
+                ingredients=[
+                    RecipeIngredient(name="tofu", quantity=150 * servings, unit="g"),
+                    RecipeIngredient(name="couscous", quantity=80 * servings, unit="g"),
+                    RecipeIngredient(name="tomat", quantity=150 * servings, unit="g"),
+                ],
+                instructions=couscous_instructions(),
+            )
+        )
+        from app.services.reviewed_warm_meals import candidates
+
+        return recipes + candidates(servings)
 
     def generate_for_meal_type(self, economic_ingredients, meal_type, *, count=80, servings=4):
         """Extend the existing generator with actual breakfast/snack preparations."""
@@ -486,28 +497,60 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
 
         templates = {
             "breakfast": [
-                ("Äggsmörgås med tomat", [("bröd", 80, "g"), ("ägg", 2, "st"), ("tomat", 100, "g")],
-                 ["Koka äggen, kyl dem och skala.", "Skiva ägg och tomat och lägg på brödet."]),
-                ("Ostsmörgås och mjölk", [("bröd", 80, "g"), ("ost", 30, "g"), ("mjölk", 200, "ml")],
-                 ["Skiva osten och lägg på brödet.", "Servera med mjölken."]),
-                ("Tofumacka med tomat", [("bröd", 80, "g"), ("tofu", 100, "g"), ("tomat", 100, "g")],
-                 ["Skiva tofun och stek den i en belagd panna.", "Lägg tofu och skivad tomat på brödet."]),
+                (
+                    "Äggsmörgås med tomat",
+                    [("bröd", 80, "g"), ("ägg", 2, "st"), ("tomat", 100, "g")],
+                    ["Koka äggen, kyl dem och skala.", "Skiva ägg och tomat och lägg på brödet."],
+                ),
+                (
+                    "Ostsmörgås och mjölk",
+                    [("bröd", 80, "g"), ("ost", 30, "g"), ("mjölk", 200, "ml")],
+                    ["Skiva osten och lägg på brödet.", "Servera med mjölken."],
+                ),
+                (
+                    "Tofumacka med tomat",
+                    [("bröd", 80, "g"), ("tofu", 100, "g"), ("tomat", 100, "g")],
+                    [
+                        "Skiva tofun och stek den i en belagd panna.",
+                        "Lägg tofu och skivad tomat på brödet.",
+                    ],
+                ),
             ],
             "snack": [
-                ("Morotsstavar med ost", [("morot", 100, "g"), ("ost", 25, "g")],
-                 ["Skölj och skär moroten i stavar.", "Skär osten i bitar och servera till."]),
-                ("Ägg och tomat", [("ägg", 1, "st"), ("tomat", 80, "g")],
-                 ["Koka ägget, kyl och skala det.", "Dela tomaten och servera med ägget."]),
-                ("Kikärtsröra på bröd", [("kikärtor", 60, "g"), ("bröd", 40, "g"), ("tomat", 60, "g")],
-                 ["Mosa de kokta, avrunna kikärtorna.", "Bred på brödet och toppa med hackad tomat."]),
+                (
+                    "Morotsstavar med ost",
+                    [("morot", 100, "g"), ("ost", 25, "g")],
+                    ["Skölj och skär moroten i stavar.", "Skär osten i bitar och servera till."],
+                ),
+                (
+                    "Ägg och tomat",
+                    [("ägg", 1, "st"), ("tomat", 80, "g")],
+                    ["Koka ägget, kyl och skala det.", "Dela tomaten och servera med ägget."],
+                ),
+                (
+                    "Kikärtsröra på bröd",
+                    [("kikärtor", 60, "g"), ("bröd", 40, "g"), ("tomat", 60, "g")],
+                    [
+                        "Mosa de kokta, avrunna kikärtorna.",
+                        "Bred på brödet och toppa med hackad tomat.",
+                    ],
+                ),
             ],
         }
         if meal_type not in templates:
             raise ValueError("Okänd måltidstyp.")
-        return [Recipe(name=name, servings=servings, ingredients=[
-            RecipeIngredient(name=n, quantity=q * servings, unit=u)
-            for n, q, u in ingredients
-        ], instructions=steps) for name, ingredients, steps in templates[meal_type]]
+        return [
+            Recipe(
+                name=name,
+                servings=servings,
+                ingredients=[
+                    RecipeIngredient(name=n, quantity=q * servings, unit=u)
+                    for n, q, u in ingredients
+                ],
+                instructions=steps,
+            )
+            for name, ingredients, steps in templates[meal_type]
+        ]
 
     @property
     def batch_statistics(self) -> dict[str, int]:
@@ -547,9 +590,7 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
         for primary in primaries:
             for carb_index, carbohydrate in enumerate(carbohydrates):
                 for vegetable_index, vegetable in enumerate(vegetables):
-                    for family_index, family in enumerate(
-                        _families_for(primary, carbohydrate)
-                    ):
+                    for family_index, family in enumerate(_families_for(primary, carbohydrate)):
                         extras = _choose_extras(
                             family,
                             rows_by_category,
@@ -634,9 +675,7 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
                         Recipe(
                             name=name,
                             servings=servings,
-                            ingredients=[
-                                _make_ingredient(row, servings) for row in unique_rows
-                            ],
+                            ingredients=[_make_ingredient(row, servings) for row in unique_rows],
                             instructions=_instructions(spec, servings),
                         )
                     )
@@ -775,9 +814,7 @@ class OpenAIRecipeCandidateGenerator(RecipeCandidateGenerator):
         if result is None:
             raise ValueError("OpenAI returned no structured recipe candidates")
         if len(result.recipes) != count:
-            raise ValueError(
-                f"OpenAI returned {len(result.recipes)} candidates; expected {count}"
-            )
+            raise ValueError(f"OpenAI returned {len(result.recipes)} candidates; expected {count}")
         if any(recipe.servings != servings for recipe in result.recipes):
             raise ValueError("OpenAI returned a candidate with the wrong servings")
         return result.recipes
@@ -799,9 +836,7 @@ class OpenAIRecipeCandidateGenerator(RecipeCandidateGenerator):
         recipes: list[Recipe] = []
         seen_names: set[str] = set()
         self._batch_statistics = {}
-        for batch_config, target in _allocate_candidate_batches(
-            count, self._candidate_batches
-        ):
+        for batch_config, target in _allocate_candidate_batches(count, self._candidate_batches):
             accepted_for_batch = 0
             normal_calls = (target + self._batch_size - 1) // self._batch_size
             attempts_left = normal_calls + self._duplicate_retry_batches
@@ -883,10 +918,7 @@ class OpenAIRecipeCandidateGenerator(RecipeCandidateGenerator):
                         "avgör detta efter faktisk omräkning.\n"
                         "Nuvarande recept:\n"
                         + json.dumps(
-                            [
-                                recipe.model_dump(mode="json")
-                                for recipe in current_recipes
-                            ],
+                            [recipe.model_dump(mode="json") for recipe in current_recipes],
                             ensure_ascii=False,
                             separators=(",", ":"),
                         )
