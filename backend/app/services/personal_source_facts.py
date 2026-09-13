@@ -392,6 +392,7 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
                 return {}
             db.execute("BEGIN")
             source_rows = []
+            resolved_paths = {}
             for snapshot in sorted(snapshots):
                 rows = db.execute(
                     """SELECT p.id, p.chain, p.external_product_id,
@@ -409,8 +410,14 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
                         or product.source_provenance.provider_store_id != row["store_external_id"]
                     ):
                         continue
-                    path = (raw_root / row["payload_location"]).resolve()
-                    if not path.is_relative_to(raw_root):
+                    location = row["payload_location"]
+                    if location not in resolved_paths:
+                        candidate = (raw_root / location).resolve()
+                        resolved_paths[location] = (
+                            candidate if candidate.is_relative_to(raw_root) else None
+                        )
+                    path = resolved_paths[location]
+                    if path is None:
                         continue
                     source_rows.append((snapshot, row, product, path))
 
