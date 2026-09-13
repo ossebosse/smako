@@ -1,0 +1,206 @@
+{
+  "case": "B",
+  "estimates": false,
+  "http_status": 422,
+  "request": {
+    "postal_code": "22350",
+    "recipes": 0,
+    "servings": 2,
+    "max_stores": 2,
+    "memberships": [],
+    "diversity_mode": "balanced",
+    "varied_budget_percent": 25,
+    "strategy": "optimized",
+    "personal": {
+      "profile": {
+        "likes": [],
+        "dislikes": [],
+        "exclusions": [],
+        "allergies": []
+      },
+      "meals": [
+        {
+          "meal_type": "dinner",
+          "count": 0,
+          "servings": 2,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": null,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        },
+        {
+          "meal_type": "breakfast",
+          "count": 5,
+          "servings": 1,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 30,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        },
+        {
+          "meal_type": "snack",
+          "count": 0,
+          "servings": 1,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": null,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        }
+      ],
+      "extras": [],
+      "pantry_revision": 0,
+      "allow_nutrition_estimates": false,
+      "organic_percent": 0,
+      "organic_animals": false,
+      "surplus_mode": "minimize"
+    }
+  },
+  "error": {
+    "detail": "Tofumacka med tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits.",
+    "code": "DATA_BLOCKED",
+    "conflicts": [
+      "Tofumacka med tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+    ],
+    "planning_diagnostics": {
+      "version": "candidate-and-branch-counts-v1",
+      "raw_recipe_pool": 3,
+      "pools": [
+        {
+          "meal_type": "breakfast",
+          "raw": 3
+        }
+      ],
+      "candidate_rejections": [
+        {
+          "stage": "policy_taste",
+          "label": "Policy/smak",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition",
+          "label": "Näringskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "organic",
+          "label": "Eko",
+          "rejected": 0
+        },
+        {
+          "stage": "store_cap",
+          "label": "Butikstak",
+          "rejected": 0
+        },
+        {
+          "stage": "variation",
+          "label": "Variationskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "preparation",
+          "label": "Tillagning/beredning",
+          "rejected": 1
+        },
+        {
+          "stage": "product_qualification",
+          "label": "Produktkvalificering",
+          "rejected": 2
+        },
+        {
+          "stage": "price_basket",
+          "label": "Pris/korg",
+          "rejected": 0
+        }
+      ],
+      "singleton_passed": 0,
+      "not_singleton_evaluated": 0,
+      "search": [
+        {
+          "depth": 1,
+          "proposals": 3,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 3,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 0,
+            "preparation": 1,
+            "product_qualification": 2,
+            "price_basket": 0
+          }
+        }
+      ],
+      "candidate_details": [
+        {
+          "stage": "product_qualification",
+          "recipe": "Äggsmörgås med tomat",
+          "reason": "Smako saknar verifierad näringsdata med rätt enhet för 1 av 3 ingrediensbehov: ägg. Välj ett recept/produkt med tillräckligt underlag, ändra den valda gränsen uttryckligen i Mina val eller gå tillbaka. Underlaget har saknade eller konfliktfyllda värden. Kraven har inte sänkts."
+        },
+        {
+          "stage": "product_qualification",
+          "recipe": "Ostsmörgås och mjölk",
+          "reason": "Smako saknar verifierad näringsdata med rätt enhet för 1 av 3 ingrediensbehov: mjölk. Välj ett recept/produkt med tillräckligt underlag, ändra den valda gränsen uttryckligen i Mina val eller gå tillbaka. Underlaget har saknade eller konfliktfyllda värden. Kraven har inte sänkts."
+        },
+        {
+          "stage": "preparation",
+          "recipe": "Tofumacka med tomat",
+          "reason": "Tofumacka med tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+        }
+      ],
+      "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet."
+    }
+  }
+}

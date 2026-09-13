@@ -21,6 +21,15 @@
 
 	# Deliberately no `log` directive: Caddy access logging is disabled. The
 	# application emits its own allowlisted structured operational events.
+	# Personal multi-meal planning and edits may need several minutes. Other
+	# routes, including the existing relay, retain their original timeout.
+	@planning path /api/plans /api/personal/plans/*/change
+	reverse_proxy @planning app:8000 {
+		transport http {
+			dial_timeout 5s
+			response_header_timeout 540s
+		}
+	}
 	reverse_proxy app:8000 {
 		transport http {
 			dial_timeout 5s

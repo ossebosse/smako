@@ -85,6 +85,16 @@ def is_reference_preparation(recipe):
 
 
 def calculation_basis(recipe, *, allow_estimates=False):
+    from app.services.reviewed_cold_meals import VERSION as cold_version
+    from app.services.reviewed_cold_meals import preparation as cold_preparation
+
+    if cold_preparation(recipe):
+        return {
+            "version": cold_version,
+            "method": "sum_declared_edible_as_sold",
+            "description": "Produktdeklarationer för uppmätt kvarg, bröd och ost som serveras kalla utan avrinning. Ingen densitet, tillagad slutvikt eller förlustfaktor antas.",
+            "retention_factors": "not_needed_cold_assembly",
+        }
     from app.services.reviewed_warm_meals import basis, preparation
 
     if allow_estimates and preparation(recipe):

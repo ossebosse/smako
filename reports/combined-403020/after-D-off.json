@@ -1,0 +1,710 @@
+{
+  "case": "D",
+  "estimates": false,
+  "interpreted": {
+    "postal_code": "22350",
+    "recipes": 5,
+    "personal": {
+      "profile": {
+        "likes": [],
+        "dislikes": [],
+        "exclusions": [],
+        "allergies": []
+      },
+      "meals": [
+        {
+          "meal_type": "dinner",
+          "count": 5,
+          "servings": 2,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 40.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        },
+        {
+          "meal_type": "breakfast",
+          "count": 5,
+          "servings": 1,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 30.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        },
+        {
+          "meal_type": "snack",
+          "count": 5,
+          "servings": 1,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 20.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        }
+      ],
+      "extras": [],
+      "slots": null,
+      "pantry_revision": 0,
+      "organic_percent": 0.0,
+      "organic_animals": false,
+      "allow_nutrition_estimates": false,
+      "surplus_mode": "minimize",
+      "product_locks": {}
+    },
+    "servings": 2,
+    "max_stores": 2,
+    "use_member_prices": false,
+    "memberships": {},
+    "membership_programs": [],
+    "optimization_iterations": 1,
+    "strategy": "optimized",
+    "candidate_recipe_count": 80,
+    "candidate_search_limit": null,
+    "beam_width": 30,
+    "varied_budget_percent": 25.0,
+    "diversity_mode": "balanced",
+    "diet_preference": "mixed",
+    "availability_mode": "normal",
+    "avoid_ingredients": [],
+    "max_same_primary_ingredient_meals": 2,
+    "max_same_recipe_family": 2,
+    "max_same_carbohydrate_meals": 3,
+    "max_pairwise_recipe_similarity": 0.7,
+    "max_same_cooking_method_meals": null,
+    "max_same_dish_form_meals": null,
+    "max_pairwise_culinary_similarity": null,
+    "min_kcal_per_serving": 450.0,
+    "max_kcal_per_serving": 900.0,
+    "min_protein_g_per_serving": 18.0,
+    "min_vegetable_g_per_serving": 100.0,
+    "debug": false
+  },
+  "price_version": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46",
+  "facts_version": "retained-catalog-facts-v3:c3f5ec2b567aa5f3f8ebc67be17106f48ed624f157348caf9abcd16378096b9a",
+  "now": "2026-09-13T14:31:48.064160+00:00",
+  "status": "DATA_BLOCKED",
+  "reason": "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. Ugnsplåt med korv, potatis och gul lök: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde.",
+  "diagnostics": {
+    "version": "candidate-and-branch-counts-v1",
+    "raw_recipe_pool": 90,
+    "pools": [
+      {
+        "meal_type": "dinner",
+        "raw": 80
+      },
+      {
+        "meal_type": "breakfast",
+        "raw": 5
+      },
+      {
+        "meal_type": "snack",
+        "raw": 5
+      }
+    ],
+    "candidate_rejections": [
+      {
+        "stage": "policy_taste",
+        "label": "Policy/smak",
+        "rejected": 0
+      },
+      {
+        "stage": "nutrition",
+        "label": "Näringskrav",
+        "rejected": 12
+      },
+      {
+        "stage": "organic",
+        "label": "Eko",
+        "rejected": 0
+      },
+      {
+        "stage": "store_cap",
+        "label": "Butikstak",
+        "rejected": 0
+      },
+      {
+        "stage": "variation",
+        "label": "Variationskrav",
+        "rejected": 0
+      },
+      {
+        "stage": "preparation",
+        "label": "Tillagning/beredning",
+        "rejected": 0
+      },
+      {
+        "stage": "product_qualification",
+        "label": "Produktkvalificering",
+        "rejected": 68
+      },
+      {
+        "stage": "price_basket",
+        "label": "Pris/korg",
+        "rejected": 0
+      }
+    ],
+    "singleton_passed": 0,
+    "not_singleton_evaluated": 10,
+    "search": [
+      {
+        "depth": 1,
+        "proposals": 42,
+        "constraints_rejected": 0,
+        "evaluation_rejected": 42,
+        "priced": 0,
+        "retained": 0,
+        "beam_pruned": 0,
+        "rejections": {
+          "policy_taste": 0,
+          "nutrition": 0,
+          "organic": 0,
+          "store_cap": 0,
+          "variation": 0,
+          "preparation": 0,
+          "product_qualification": 42,
+          "price_basket": 0
+        }
+      }
+    ],
+    "candidate_details": [
+      {
+        "stage": "product_qualification",
+        "recipe": "Mustig gryta på falukorv med potatis och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Wok med ägg, ris och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatgryta på svarta bönor med tortillas och gul lök",
+        "reason": "Ingen verifierad köpbar vara för svarta bönor, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Nudlar med falukorv och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt ägg med potatis och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Mustig gryta på kyckling med potatis och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Wok med falukorv, ris och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Falukorvpanna med couscous och gul lök",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Falukorvpanna med couscous och gul lök', 'is_valid': False, 'violations': ('vegetable_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 1362.3, 'kcal_per_portion': 681.2, 'total_protein_g': 51.1, 'protein_g_per_portion': 25.6, 'total_vegetable_g': 150.0, 'vegetable_g_per_portion': 75.0, 'confidence_score': 0.9, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('couscous', 'falukorv', 'gul lök', 'vitlök'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Potatisgratäng med falukorv och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Bowl med falukorv, nudlar och gul lök",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Bowl med falukorv, nudlar och gul lök', 'is_valid': False, 'violations': ('vegetable_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 1510.0, 'kcal_per_portion': 755.0, 'total_protein_g': 50.4, 'protein_g_per_portion': 25.2, 'total_vegetable_g': 150.0, 'vegetable_g_per_portion': 75.0, 'confidence_score': 0.8921, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('crème fraiche', 'falukorv', 'gul lök', 'nudlar'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Nudlar med kyckling och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Stekt potatis med tofu och tomat",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Stekt potatis med tofu och tomat', 'is_valid': False, 'violations': ('kcal_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 820.4, 'kcal_per_portion': 410.2, 'total_protein_g': 42.4, 'protein_g_per_portion': 21.2, 'total_vegetable_g': 350.0, 'vegetable_g_per_portion': 175.0, 'confidence_score': 0.9, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('gul lök', 'potatis', 'tofu', 'tomat', 'vitlök'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Mustig gryta på korv med potatis och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Wok med kyckling, ris och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Kycklingpanna med couscous och gul lök",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Kycklingpanna med couscous och gul lök', 'is_valid': False, 'violations': ('vegetable_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 1207.3, 'kcal_per_portion': 603.7, 'total_protein_g': 116.6, 'protein_g_per_portion': 58.3, 'total_vegetable_g': 150.0, 'vegetable_g_per_portion': 75.0, 'confidence_score': 0.9, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('couscous', 'gul lök', 'kyckling', 'vitlök'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Potatisgratäng med kyckling och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Bowl med kyckling, nudlar och gul lök",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Bowl med kyckling, nudlar och gul lök', 'is_valid': False, 'violations': ('vegetable_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 1355.0, 'kcal_per_portion': 677.5, 'total_protein_g': 115.9, 'protein_g_per_portion': 58.0, 'total_vegetable_g': 150.0, 'vegetable_g_per_portion': 75.0, 'confidence_score': 0.8921, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('crème fraiche', 'gul lök', 'kyckling', 'nudlar'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Nudlar med korv och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Stekt potatis med fisk och tomat",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Stekt potatis med fisk och tomat', 'is_valid': False, 'violations': ('kcal_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 805.4, 'kcal_per_portion': 402.7, 'total_protein_g': 66.4, 'protein_g_per_portion': 33.2, 'total_vegetable_g': 350.0, 'vegetable_g_per_portion': 175.0, 'confidence_score': 0.9, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('fisk', 'gul lök', 'potatis', 'tomat', 'vitlök'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Mustig gryta på tofu med potatis och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Wok med korv, ris och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Korvpanna med couscous och gul lök",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Korvpanna med couscous och gul lök', 'is_valid': False, 'violations': ('vegetable_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 1337.3, 'kcal_per_portion': 668.7, 'total_protein_g': 51.1, 'protein_g_per_portion': 25.6, 'total_vegetable_g': 150.0, 'vegetable_g_per_portion': 75.0, 'confidence_score': 0.9, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('couscous', 'gul lök', 'korv', 'vitlök'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Potatisgratäng med korv och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Matig soppa med tofu, potatis och vitkål",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Matig soppa med tofu, potatis och vitkål', 'is_valid': False, 'violations': ('kcal_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 899.5, 'kcal_per_portion': 449.8, 'total_protein_g': 46.5, 'protein_g_per_portion': 23.2, 'total_vegetable_g': 400.0, 'vegetable_g_per_portion': 200.0, 'confidence_score': 0.9, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('gul lök', 'krossade tomater', 'potatis', 'tofu', 'vitkål'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Bowl med korv, nudlar och gul lök",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Bowl med korv, nudlar och gul lök', 'is_valid': False, 'violations': ('vegetable_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 1485.0, 'kcal_per_portion': 742.5, 'total_protein_g': 50.4, 'protein_g_per_portion': 25.2, 'total_vegetable_g': 150.0, 'vegetable_g_per_portion': 75.0, 'confidence_score': 0.8921, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('crème fraiche', 'gul lök', 'korv', 'nudlar'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Nudlar med tofu och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Mustig gryta på lax med potatis och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Wok med tofu, ris och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatgryta på bönor med tortillas och gul lök",
+        "reason": "Ingen verifierad köpbar vara för bönor, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Tofupanna med couscous och gul lök",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Tofupanna med couscous och gul lök', 'is_valid': False, 'violations': ('vegetable_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 952.4, 'kcal_per_portion': 476.2, 'total_protein_g': 49.6, 'protein_g_per_portion': 24.8, 'total_vegetable_g': 150.0, 'vegetable_g_per_portion': 75.0, 'confidence_score': 0.9, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('couscous', 'gul lök', 'tofu', 'vitlök'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Potatisgratäng med tofu och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Bowl med tofu, nudlar och gul lök",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Bowl med tofu, nudlar och gul lök', 'is_valid': False, 'violations': ('vegetable_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 1100.0, 'kcal_per_portion': 550.0, 'total_protein_g': 48.9, 'protein_g_per_portion': 24.4, 'total_vegetable_g': 150.0, 'vegetable_g_per_portion': 75.0, 'confidence_score': 0.8921, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('crème fraiche', 'gul lök', 'nudlar', 'tofu'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Nudlar med lax och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt potatis med svarta bönor och vitkål",
+        "reason": "Ingen verifierad köpbar vara för svarta bönor, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "nutrition",
+        "recipe": "Stekt tofu med potatis och morot",
+        "reason": "Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {'recipe_name': 'Stekt tofu med potatis och morot', 'is_valid': False, 'violations': ('kcal_per_portion_below_minimum',), 'estimate': {'is_estimate': True, 'total_kcal': 886.9, 'kcal_per_portion': 443.4, 'total_protein_g': 42.9, 'protein_g_per_portion': 21.4, 'total_vegetable_g': 400.0, 'vegetable_g_per_portion': 200.0, 'confidence_score': 0.9, 'confidence': <EstimateConfidence.HIGH: 'high'>, 'estimated_ingredients': ('gul lök', 'morot', 'potatis', 'tofu', 'vitlök'), 'unestimated_ingredients': (), 'piece_weight_assumptions': ()}}"
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Mustig gryta på fisk med potatis och rödlök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Wok med lax, ris och gul lök",
+        "reason": "Ingen verifierad köpbar vara för rödlök, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatgryta på svarta bönor med tortillas och morot",
+        "reason": "Ingen verifierad köpbar vara för svarta bönor, g. Kontrollera mängden, egenskaperna eller exakt produkt."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatpasta med ägg och gul lök",
+        "reason": "Tomatpasta med ägg och gul lök: näringsunderlag med rätt enhet saknas för gul lök, vitkål, ägg (3 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Ugnsplåt med falukorv, potatis och gul lök",
+        "reason": "Ugnsplåt med falukorv, potatis och gul lök: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Gryta med falukorv, nudlar och morot",
+        "reason": "Gryta med falukorv, nudlar och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tortillapanna med ägg och gul lök",
+        "reason": "Tortillapanna med ägg och gul lök: näringsunderlag med rätt enhet saknas för gul lök, tortillas, ägg (3 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Potatisgratäng med ägg och gul lök",
+        "reason": "Potatisgratäng med ägg och gul lök: näringsunderlag med rätt enhet saknas för gul lök, vitkål, ägg (3 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Matig soppa med falukorv, potatis och vitkål",
+        "reason": "Matig soppa med falukorv, potatis och vitkål: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Bowl med ägg, bröd och tomat",
+        "reason": "Bowl med ägg, bröd och tomat: näringsunderlag med rätt enhet saknas för crème fraiche, gul lök, ägg (3 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tacos med ägg och gul lök",
+        "reason": "Tacos med ägg och gul lök: näringsunderlag med rätt enhet saknas för crème fraiche, gul lök, tortillas, ägg (4 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt ris med falukorv och morot",
+        "reason": "Stekt ris med falukorv och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt potatis med kyckling och tomat",
+        "reason": "Stekt potatis med kyckling och tomat: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatpasta med falukorv och gul lök",
+        "reason": "Tomatpasta med falukorv och gul lök: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Ugnsplåt med korv, potatis och gul lök",
+        "reason": "Ugnsplåt med korv, potatis och gul lök: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatgryta på kidneybönor med tortillas och gul lök",
+        "reason": "Tomatgryta på kidneybönor med tortillas och gul lök: näringsunderlag med rätt enhet saknas för gul lök, tortillas (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Gryta med kyckling, nudlar och morot",
+        "reason": "Gryta med kyckling, nudlar och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Matig soppa med kyckling, potatis och vitkål",
+        "reason": "Matig soppa med kyckling, potatis och vitkål: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tacos med falukorv och gul lök",
+        "reason": "Tacos med falukorv och gul lök: näringsunderlag med rätt enhet saknas för crème fraiche, gul lök, tortillas (3 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt ris med kyckling och morot",
+        "reason": "Stekt ris med kyckling och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt falukorv med potatis och morot",
+        "reason": "Stekt falukorv med potatis och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatpasta med kyckling och gul lök",
+        "reason": "Tomatpasta med kyckling och gul lök: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Ugnsplåt med lax, potatis och gul lök",
+        "reason": "Ugnsplåt med lax, potatis och gul lök: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatgryta på kikärtor med tortillas och gul lök",
+        "reason": "Tomatgryta på kikärtor med tortillas och gul lök: näringsunderlag med rätt enhet saknas för gul lök, tortillas (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Gryta med korv, nudlar och morot",
+        "reason": "Gryta med korv, nudlar och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Matig soppa med korv, potatis och vitkål",
+        "reason": "Matig soppa med korv, potatis och vitkål: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tacos med kyckling och gul lök",
+        "reason": "Tacos med kyckling och gul lök: näringsunderlag med rätt enhet saknas för crème fraiche, gul lök, tortillas (3 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt ris med korv och morot",
+        "reason": "Stekt ris med korv och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt kyckling med potatis och morot",
+        "reason": "Stekt kyckling med potatis och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatpasta med korv och gul lök",
+        "reason": "Tomatpasta med korv och gul lök: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Ugnsplåt med fläskkött, potatis och gul lök",
+        "reason": "Ugnsplåt med fläskkött, potatis och gul lök: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatgryta på linser med tortillas och gul lök",
+        "reason": "Tomatgryta på linser med tortillas och gul lök: näringsunderlag med rätt enhet saknas för gul lök, tortillas (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Gryta med tofu, nudlar och morot",
+        "reason": "Gryta med tofu, nudlar och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tacos med korv och gul lök",
+        "reason": "Tacos med korv och gul lök: näringsunderlag med rätt enhet saknas för crème fraiche, gul lök, tortillas (3 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt ris med tofu och morot",
+        "reason": "Stekt ris med tofu och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt potatis med blandfärs och tomat",
+        "reason": "Stekt potatis med blandfärs och tomat: näringsunderlag med rätt enhet saknas för blandfärs, gul lök (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt korv med potatis och morot",
+        "reason": "Stekt korv med potatis och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatpasta med tofu och gul lök",
+        "reason": "Tomatpasta med tofu och gul lök: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Ugnsplåt med nötfärs, potatis och gul lök",
+        "reason": "Ugnsplåt med nötfärs, potatis och gul lök: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Gryta med lax, nudlar och morot",
+        "reason": "Gryta med lax, nudlar och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Matig soppa med lax, potatis och vitkål",
+        "reason": "Matig soppa med lax, potatis och vitkål: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tacos med tofu och gul lök",
+        "reason": "Tacos med tofu och gul lök: näringsunderlag med rätt enhet saknas för crème fraiche, gul lök, tortillas (3 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Stekt ris med lax och morot",
+        "reason": "Stekt ris med lax och morot: näringsunderlag med rätt enhet saknas för gul lök (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Tomatpasta med lax och gul lök",
+        "reason": "Tomatpasta med lax och gul lök: näringsunderlag med rätt enhet saknas för gul lök, vitkål (2 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      },
+      {
+        "stage": "product_qualification",
+        "recipe": "Ugnsplåt med falukorv, potatis och morot",
+        "reason": "Ugnsplåt med falukorv, potatis och morot: näringsunderlag med rätt enhet saknas för vitkål (1 av 5 ingrediensbehov). Detta är ett datahinder, inte ett beräknat för lågt proteinvärde."
+      }
+    ],
+    "missing_needs": [
+      {
+        "slot_id": "dinner-1",
+        "meal_type": "dinner",
+        "recipe": "Tacos med ägg och gul lök",
+        "ingredient": "ägg",
+        "quantity": 4.0,
+        "unit": "st",
+        "requested_nutrients": [
+          "protein_g"
+        ],
+        "reason_code": "NUTRITION_EVIDENCE_UNQUALIFIED",
+        "reason": "Kvalificerad deklaration eller tillåten referens med rätt enhet/beredning saknas."
+      },
+      {
+        "slot_id": "dinner-1",
+        "meal_type": "dinner",
+        "recipe": "Tomatpasta med lax och gul lök",
+        "ingredient": "gul lök",
+        "quantity": 150.0,
+        "unit": "g",
+        "requested_nutrients": [
+          "protein_g"
+        ],
+        "reason_code": "NUTRITION_EVIDENCE_UNQUALIFIED",
+        "reason": "Kvalificerad deklaration eller tillåten referens med rätt enhet/beredning saknas."
+      },
+      {
+        "slot_id": "dinner-1",
+        "meal_type": "dinner",
+        "recipe": "Ugnsplåt med falukorv, potatis och morot",
+        "ingredient": "vitkål",
+        "quantity": 250.0,
+        "unit": "g",
+        "requested_nutrients": [
+          "protein_g"
+        ],
+        "reason_code": "NUTRITION_EVIDENCE_UNQUALIFIED",
+        "reason": "Kvalificerad deklaration eller tillåten referens med rätt enhet/beredning saknas."
+      },
+      {
+        "slot_id": "dinner-1",
+        "meal_type": "dinner",
+        "recipe": "Tacos med tofu och gul lök",
+        "ingredient": "tortillas",
+        "quantity": 4.0,
+        "unit": "st",
+        "requested_nutrients": [
+          "protein_g"
+        ],
+        "reason_code": "NUTRITION_EVIDENCE_UNQUALIFIED",
+        "reason": "Kvalificerad deklaration eller tillåten referens med rätt enhet/beredning saknas."
+      },
+      {
+        "slot_id": "dinner-1",
+        "meal_type": "dinner",
+        "recipe": "Tacos med tofu och gul lök",
+        "ingredient": "crème fraiche",
+        "quantity": 125.0,
+        "unit": "ml",
+        "requested_nutrients": [
+          "protein_g"
+        ],
+        "reason_code": "NUTRITION_EVIDENCE_UNQUALIFIED",
+        "reason": "Kvalificerad deklaration eller tillåten referens med rätt enhet/beredning saknas."
+      },
+      {
+        "slot_id": "dinner-1",
+        "meal_type": "dinner",
+        "recipe": "Stekt potatis med blandfärs och tomat",
+        "ingredient": "blandfärs",
+        "quantity": 250.0,
+        "unit": "g",
+        "requested_nutrients": [
+          "protein_g"
+        ],
+        "reason_code": "NUTRITION_EVIDENCE_UNQUALIFIED",
+        "reason": "Kvalificerad deklaration eller tillåten referens med rätt enhet/beredning saknas."
+      }
+    ],
+    "estimate_alternatives": [
+      {
+        "meal_type": "dinner",
+        "recipe": "Kokt kyckling med ris och morötter",
+        "values": {
+          "protein_g": 41.64497378280543
+        },
+        "scope": "one_meal_only"
+      }
+    ],
+    "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet."
+  },
+  "external_calls": 0
+}

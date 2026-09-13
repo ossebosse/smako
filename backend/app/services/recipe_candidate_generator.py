@@ -539,6 +539,8 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
         }
         if meal_type not in templates:
             raise ValueError("Okänd måltidstyp.")
+        from app.services.reviewed_cold_meals import candidates as cold_candidates
+
         return [
             Recipe(
                 name=name,
@@ -550,7 +552,7 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
                 instructions=steps,
             )
             for name, ingredients, steps in templates[meal_type]
-        ]
+        ] + cold_candidates(meal_type, servings)
 
     @property
     def batch_statistics(self) -> dict[str, int]:

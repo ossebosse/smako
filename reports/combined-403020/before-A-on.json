@@ -1,0 +1,713 @@
+{
+  "case": "A",
+  "estimates": true,
+  "interpreted": {
+    "postal_code": "22350",
+    "recipes": 5,
+    "personal": {
+      "profile": {
+        "likes": [],
+        "dislikes": [],
+        "exclusions": [],
+        "allergies": []
+      },
+      "meals": [
+        {
+          "meal_type": "dinner",
+          "count": 5,
+          "servings": 2,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 40.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        },
+        {
+          "meal_type": "breakfast",
+          "count": 0,
+          "servings": 1,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 30.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        },
+        {
+          "meal_type": "snack",
+          "count": 0,
+          "servings": 1,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 20.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        }
+      ],
+      "extras": [],
+      "slots": null,
+      "pantry_revision": 0,
+      "organic_percent": 0.0,
+      "organic_animals": false,
+      "allow_nutrition_estimates": true,
+      "surplus_mode": "minimize",
+      "product_locks": {}
+    },
+    "servings": 2,
+    "max_stores": 2,
+    "use_member_prices": false,
+    "memberships": {},
+    "membership_programs": [],
+    "optimization_iterations": 1,
+    "strategy": "optimized",
+    "candidate_recipe_count": 80,
+    "candidate_search_limit": null,
+    "beam_width": 30,
+    "varied_budget_percent": 25.0,
+    "diversity_mode": "balanced",
+    "diet_preference": "mixed",
+    "availability_mode": "normal",
+    "avoid_ingredients": [],
+    "max_same_primary_ingredient_meals": 2,
+    "max_same_recipe_family": 2,
+    "max_same_carbohydrate_meals": 3,
+    "max_pairwise_recipe_similarity": 0.7,
+    "max_same_cooking_method_meals": null,
+    "max_same_dish_form_meals": null,
+    "max_pairwise_culinary_similarity": null,
+    "min_kcal_per_serving": 450.0,
+    "max_kcal_per_serving": 900.0,
+    "min_protein_g_per_serving": 18.0,
+    "min_vegetable_g_per_serving": 100.0,
+    "debug": false
+  },
+  "price_version": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46",
+  "facts_version": "retained-catalog-facts-v3:c3f5ec2b567aa5f3f8ebc67be17106f48ed624f157348caf9abcd16378096b9a",
+  "now": "2026-09-13T14:31:48.064160+00:00",
+  "status": "CONFLICT",
+  "reason": "Ingen komplett kombination hittades i näringssökningen (256 kombinationer). Torsk- och kålsoppa med äggnudlar: protein_g 40.0 per portion bryter mot min_protein_g 40. Kraven är oförändrade; sökningen bevisar inte omöjlighet.",
+  "diagnostics": {
+    "version": "candidate-and-branch-counts-v1",
+    "raw_recipe_pool": 94,
+    "pools": [
+      {
+        "meal_type": "dinner",
+        "raw": 94
+      }
+    ],
+    "candidate_rejections": [
+      {
+        "stage": "policy_taste",
+        "label": "Policy/smak",
+        "rejected": 0
+      },
+      {
+        "stage": "nutrition",
+        "label": "Näringskrav",
+        "rejected": 0
+      },
+      {
+        "stage": "organic",
+        "label": "Eko",
+        "rejected": 0
+      },
+      {
+        "stage": "store_cap",
+        "label": "Butikstak",
+        "rejected": 0
+      },
+      {
+        "stage": "variation",
+        "label": "Variationskrav",
+        "rejected": 0
+      },
+      {
+        "stage": "preparation",
+        "label": "Tillagning/beredning",
+        "rejected": 80
+      },
+      {
+        "stage": "product_qualification",
+        "label": "Produktkvalificering",
+        "rejected": 0
+      },
+      {
+        "stage": "price_basket",
+        "label": "Pris/korg",
+        "rejected": 5
+      }
+    ],
+    "singleton_passed": 9,
+    "not_singleton_evaluated": 0,
+    "search": [
+      {
+        "depth": 1,
+        "proposals": 14,
+        "constraints_rejected": 0,
+        "evaluation_rejected": 5,
+        "priced": 9,
+        "retained": 8,
+        "beam_pruned": 1,
+        "rejections": {
+          "policy_taste": 0,
+          "nutrition": 0,
+          "organic": 0,
+          "store_cap": 0,
+          "variation": 0,
+          "preparation": 0,
+          "product_qualification": 0,
+          "price_basket": 5
+        }
+      },
+      {
+        "depth": 2,
+        "proposals": 112,
+        "constraints_rejected": 23,
+        "evaluation_rejected": 34,
+        "priced": 55,
+        "retained": 8,
+        "beam_pruned": 47,
+        "rejections": {
+          "policy_taste": 0,
+          "nutrition": 0,
+          "organic": 0,
+          "store_cap": 0,
+          "variation": 23,
+          "preparation": 0,
+          "product_qualification": 0,
+          "price_basket": 34
+        }
+      },
+      {
+        "depth": 3,
+        "proposals": 112,
+        "constraints_rejected": 50,
+        "evaluation_rejected": 32,
+        "priced": 30,
+        "retained": 8,
+        "beam_pruned": 22,
+        "rejections": {
+          "policy_taste": 0,
+          "nutrition": 0,
+          "organic": 0,
+          "store_cap": 0,
+          "variation": 50,
+          "preparation": 0,
+          "product_qualification": 0,
+          "price_basket": 32
+        }
+      },
+      {
+        "depth": 4,
+        "proposals": 112,
+        "constraints_rejected": 84,
+        "evaluation_rejected": 18,
+        "priced": 10,
+        "retained": 8,
+        "beam_pruned": 2,
+        "rejections": {
+          "policy_taste": 0,
+          "nutrition": 0,
+          "organic": 0,
+          "store_cap": 0,
+          "variation": 84,
+          "preparation": 0,
+          "product_qualification": 0,
+          "price_basket": 18
+        }
+      },
+      {
+        "depth": 5,
+        "proposals": 112,
+        "constraints_rejected": 96,
+        "evaluation_rejected": 16,
+        "priced": 0,
+        "retained": 0,
+        "beam_pruned": 0,
+        "rejections": {
+          "policy_taste": 0,
+          "nutrition": 0,
+          "organic": 0,
+          "store_cap": 0,
+          "variation": 96,
+          "preparation": 0,
+          "product_qualification": 0,
+          "price_basket": 16
+        }
+      }
+    ],
+    "candidate_details": [
+      {
+        "stage": "preparation",
+        "recipe": "Mustig gryta på falukorv med potatis och rödlök",
+        "reason": "Mustig gryta på falukorv med potatis och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatpasta med ägg och gul lök",
+        "reason": "Tomatpasta med ägg och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Ugnsplåt med falukorv, potatis och gul lök",
+        "reason": "Ugnsplåt med falukorv, potatis och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Wok med ägg, ris och gul lök",
+        "reason": "Wok med ägg, ris och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatgryta på svarta bönor med tortillas och gul lök",
+        "reason": "Tomatgryta på svarta bönor med tortillas och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Gryta med falukorv, nudlar och morot",
+        "reason": "Gryta med falukorv, nudlar och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tortillapanna med ägg och gul lök",
+        "reason": "Tortillapanna med ägg och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Potatisgratäng med ägg och gul lök",
+        "reason": "Potatisgratäng med ägg och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Matig soppa med falukorv, potatis och vitkål",
+        "reason": "Matig soppa med falukorv, potatis och vitkål: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Bowl med ägg, bröd och tomat",
+        "reason": "Bowl med ägg, bröd och tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tacos med ägg och gul lök",
+        "reason": "Tacos med ägg och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt ris med falukorv och morot",
+        "reason": "Stekt ris med falukorv och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Nudlar med falukorv och rödlök",
+        "reason": "Nudlar med falukorv och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt potatis med kyckling och tomat",
+        "reason": "Stekt potatis med kyckling och tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt ägg med potatis och gul lök",
+        "reason": "Stekt ägg med potatis och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Mustig gryta på kyckling med potatis och rödlök",
+        "reason": "Mustig gryta på kyckling med potatis och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatpasta med falukorv och gul lök",
+        "reason": "Tomatpasta med falukorv och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Ugnsplåt med korv, potatis och gul lök",
+        "reason": "Ugnsplåt med korv, potatis och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Wok med falukorv, ris och gul lök",
+        "reason": "Wok med falukorv, ris och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatgryta på kidneybönor med tortillas och gul lök",
+        "reason": "Tomatgryta på kidneybönor med tortillas och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Gryta med kyckling, nudlar och morot",
+        "reason": "Gryta med kyckling, nudlar och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Falukorvpanna med couscous och gul lök",
+        "reason": "Falukorvpanna med couscous och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Potatisgratäng med falukorv och gul lök",
+        "reason": "Potatisgratäng med falukorv och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Matig soppa med kyckling, potatis och vitkål",
+        "reason": "Matig soppa med kyckling, potatis och vitkål: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Bowl med falukorv, nudlar och gul lök",
+        "reason": "Bowl med falukorv, nudlar och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tacos med falukorv och gul lök",
+        "reason": "Tacos med falukorv och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt ris med kyckling och morot",
+        "reason": "Stekt ris med kyckling och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Nudlar med kyckling och rödlök",
+        "reason": "Nudlar med kyckling och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt potatis med tofu och tomat",
+        "reason": "Stekt potatis med tofu och tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt falukorv med potatis och morot",
+        "reason": "Stekt falukorv med potatis och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Mustig gryta på korv med potatis och rödlök",
+        "reason": "Mustig gryta på korv med potatis och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatpasta med kyckling och gul lök",
+        "reason": "Tomatpasta med kyckling och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Ugnsplåt med lax, potatis och gul lök",
+        "reason": "Ugnsplåt med lax, potatis och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Wok med kyckling, ris och gul lök",
+        "reason": "Wok med kyckling, ris och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatgryta på kikärtor med tortillas och gul lök",
+        "reason": "Tomatgryta på kikärtor med tortillas och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Gryta med korv, nudlar och morot",
+        "reason": "Gryta med korv, nudlar och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Kycklingpanna med couscous och gul lök",
+        "reason": "Kycklingpanna med couscous och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Potatisgratäng med kyckling och gul lök",
+        "reason": "Potatisgratäng med kyckling och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Matig soppa med korv, potatis och vitkål",
+        "reason": "Matig soppa med korv, potatis och vitkål: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Bowl med kyckling, nudlar och gul lök",
+        "reason": "Bowl med kyckling, nudlar och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tacos med kyckling och gul lök",
+        "reason": "Tacos med kyckling och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt ris med korv och morot",
+        "reason": "Stekt ris med korv och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Nudlar med korv och rödlök",
+        "reason": "Nudlar med korv och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt potatis med fisk och tomat",
+        "reason": "Stekt potatis med fisk och tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt kyckling med potatis och morot",
+        "reason": "Stekt kyckling med potatis och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Mustig gryta på tofu med potatis och rödlök",
+        "reason": "Mustig gryta på tofu med potatis och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatpasta med korv och gul lök",
+        "reason": "Tomatpasta med korv och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Ugnsplåt med fläskkött, potatis och gul lök",
+        "reason": "Ugnsplåt med fläskkött, potatis och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Wok med korv, ris och gul lök",
+        "reason": "Wok med korv, ris och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatgryta på linser med tortillas och gul lök",
+        "reason": "Tomatgryta på linser med tortillas och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Gryta med tofu, nudlar och morot",
+        "reason": "Gryta med tofu, nudlar och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Korvpanna med couscous och gul lök",
+        "reason": "Korvpanna med couscous och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Potatisgratäng med korv och gul lök",
+        "reason": "Potatisgratäng med korv och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Matig soppa med tofu, potatis och vitkål",
+        "reason": "Matig soppa med tofu, potatis och vitkål: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Bowl med korv, nudlar och gul lök",
+        "reason": "Bowl med korv, nudlar och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tacos med korv och gul lök",
+        "reason": "Tacos med korv och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt ris med tofu och morot",
+        "reason": "Stekt ris med tofu och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Nudlar med tofu och rödlök",
+        "reason": "Nudlar med tofu och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt potatis med blandfärs och tomat",
+        "reason": "Stekt potatis med blandfärs och tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt korv med potatis och morot",
+        "reason": "Stekt korv med potatis och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Mustig gryta på lax med potatis och rödlök",
+        "reason": "Mustig gryta på lax med potatis och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatpasta med tofu och gul lök",
+        "reason": "Tomatpasta med tofu och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Ugnsplåt med nötfärs, potatis och gul lök",
+        "reason": "Ugnsplåt med nötfärs, potatis och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Wok med tofu, ris och gul lök",
+        "reason": "Wok med tofu, ris och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatgryta på bönor med tortillas och gul lök",
+        "reason": "Tomatgryta på bönor med tortillas och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Gryta med lax, nudlar och morot",
+        "reason": "Gryta med lax, nudlar och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tofupanna med couscous och gul lök",
+        "reason": "Tofupanna med couscous och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Potatisgratäng med tofu och gul lök",
+        "reason": "Potatisgratäng med tofu och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Matig soppa med lax, potatis och vitkål",
+        "reason": "Matig soppa med lax, potatis och vitkål: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Bowl med tofu, nudlar och gul lök",
+        "reason": "Bowl med tofu, nudlar och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tacos med tofu och gul lök",
+        "reason": "Tacos med tofu och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt ris med lax och morot",
+        "reason": "Stekt ris med lax och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Nudlar med lax och rödlök",
+        "reason": "Nudlar med lax och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt potatis med svarta bönor och vitkål",
+        "reason": "Stekt potatis med svarta bönor och vitkål: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Stekt tofu med potatis och morot",
+        "reason": "Stekt tofu med potatis och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Mustig gryta på fisk med potatis och rödlök",
+        "reason": "Mustig gryta på fisk med potatis och rödlök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatpasta med lax och gul lök",
+        "reason": "Tomatpasta med lax och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Ugnsplåt med falukorv, potatis och morot",
+        "reason": "Ugnsplåt med falukorv, potatis och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Wok med lax, ris och gul lök",
+        "reason": "Wok med lax, ris och gul lök: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Tomatgryta på svarta bönor med tortillas och morot",
+        "reason": "Tomatgryta på svarta bönor med tortillas och morot: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "price_basket",
+        "recipe": "Torskgryta med ris och morot",
+        "reason": "Ingen komplett kombination hittades i näringssökningen (256 kombinationer). Torskgryta med ris och morot: protein_g 34.0 per portion bryter mot min_protein_g 40. Kraven är oförändrade; sökningen bevisar inte omöjlighet."
+      },
+      {
+        "stage": "price_basket",
+        "recipe": "Couscoussallad med tofu och tomat",
+        "reason": "Ingen komplett kombination hittades i näringssökningen (72 kombinationer). Couscoussallad med tofu och tomat: protein_g 22.3 per portion bryter mot min_protein_g 40. Kraven är oförändrade; sökningen bevisar inte omöjlighet."
+      },
+      {
+        "stage": "price_basket",
+        "recipe": "Pasta med röd linssås och tomat",
+        "reason": "Ingen komplett kombination hittades i näringssökningen (240 kombinationer). Pasta med röd linssås och tomat: protein_g 31.2 per portion bryter mot min_protein_g 40. Kraven är oförändrade; sökningen bevisar inte omöjlighet."
+      },
+      {
+        "stage": "price_basket",
+        "recipe": "Tofupanna med äggnudlar och vitkål",
+        "reason": "Ingen komplett kombination hittades i näringssökningen (30 kombinationer). Tofupanna med äggnudlar och vitkål: protein_g 22.9 per portion bryter mot min_protein_g 40. Kraven är oförändrade; sökningen bevisar inte omöjlighet."
+      },
+      {
+        "stage": "price_basket",
+        "recipe": "Röd linsgryta med tomat och ris",
+        "reason": "Ingen komplett kombination hittades i näringssökningen (256 kombinationer). Röd linsgryta med tomat och ris: protein_g 28.4 per portion bryter mot min_protein_g 40. Kraven är oförändrade; sökningen bevisar inte omöjlighet."
+      }
+    ],
+    "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet."
+  },
+  "external_calls": 0
+}

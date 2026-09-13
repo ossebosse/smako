@@ -10,7 +10,7 @@ from dataclasses import replace
 from app.models.recipe import Recipe, RecipeIngredient
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 
-VERSION = "warm-edible-input-review-20260913"
+VERSION = "warm-edible-input-review-20260913b"
 SOURCES = [
     {
         "url": "https://www.livsmedelsverket.se/livsmedel-och-innehall/tillagning-forvaring-hallbarhet/tillagning/hur-paverkas-maten-vid-tillagning/",
@@ -66,6 +66,17 @@ TEMPLATES = {
     ),
 }
 
+# A normal cheese-topped variant, with real extra food and a full recalculation.
+# Keep the original recipe available; changing servings alone changes no ratio.
+TEMPLATES["lentil_pasta_cheese"] = (
+    "Pasta med röd linssås, tomat och riven ost",
+    [*TEMPLATES["lentil_pasta"][1], ("ost", 40)],
+    [
+        *TEMPLATES["lentil_pasta"][2][:-1],
+        "Väg upp vanlig hårdost enligt listan och riv den. Använd inte ost i lag, färskost, ostsås eller smaksatta ostsnacks. Servera all pasta med linssås och den rivna osten ovanpå, jämnt fördelat mellan portionerna. Inget extra fett eller andra olistade ingredienser ingår.",
+    ],
+)
+
 
 def candidates(servings=4):
     return [
@@ -112,6 +123,7 @@ def evidence(identity, recipe, declaration=None):
 
     allowed = {
         "lentil_pasta": {884, 845, 422, 289},
+        "lentil_pasta_cheese": {884, 845, 422, 289},
         "tofu_noodle_pan": {905, 870, 370},
         "lentil_rice_stew": {884, 2481, 422, 289},
         "chicken_oven": {1173, 2481, 289},

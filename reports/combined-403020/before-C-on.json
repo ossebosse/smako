@@ -1,0 +1,227 @@
+{
+  "case": "C",
+  "estimates": true,
+  "interpreted": {
+    "postal_code": "22350",
+    "recipes": 0,
+    "personal": {
+      "profile": {
+        "likes": [],
+        "dislikes": [],
+        "exclusions": [],
+        "allergies": []
+      },
+      "meals": [
+        {
+          "meal_type": "dinner",
+          "count": 0,
+          "servings": 2,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 40.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        },
+        {
+          "meal_type": "breakfast",
+          "count": 0,
+          "servings": 1,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 30.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        },
+        {
+          "meal_type": "snack",
+          "count": 5,
+          "servings": 1,
+          "diet": "mixed",
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "distribution": {},
+          "limits": {
+            "min_weight_g": null,
+            "max_weight_g": null,
+            "min_protein_g": 20.0,
+            "max_protein_g": null,
+            "min_carbs_g": null,
+            "max_carbs_g": null,
+            "min_fat_g": null,
+            "max_fat_g": null,
+            "max_kcal": null
+          },
+          "organic_animals": false
+        }
+      ],
+      "extras": [],
+      "slots": null,
+      "pantry_revision": 0,
+      "organic_percent": 0.0,
+      "organic_animals": false,
+      "allow_nutrition_estimates": true,
+      "surplus_mode": "minimize",
+      "product_locks": {}
+    },
+    "servings": 2,
+    "max_stores": 2,
+    "use_member_prices": false,
+    "memberships": {},
+    "membership_programs": [],
+    "optimization_iterations": 1,
+    "strategy": "optimized",
+    "candidate_recipe_count": 80,
+    "candidate_search_limit": null,
+    "beam_width": 30,
+    "varied_budget_percent": 25.0,
+    "diversity_mode": "balanced",
+    "diet_preference": "mixed",
+    "availability_mode": "normal",
+    "avoid_ingredients": [],
+    "max_same_primary_ingredient_meals": 2,
+    "max_same_recipe_family": 2,
+    "max_same_carbohydrate_meals": 3,
+    "max_pairwise_recipe_similarity": 0.7,
+    "max_same_cooking_method_meals": null,
+    "max_same_dish_form_meals": null,
+    "max_pairwise_culinary_similarity": null,
+    "min_kcal_per_serving": 450.0,
+    "max_kcal_per_serving": 900.0,
+    "min_protein_g_per_serving": 18.0,
+    "min_vegetable_g_per_serving": 100.0,
+    "debug": false
+  },
+  "price_version": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46",
+  "facts_version": "retained-catalog-facts-v3:c3f5ec2b567aa5f3f8ebc67be17106f48ed624f157348caf9abcd16378096b9a",
+  "now": "2026-09-13T14:31:48.064160+00:00",
+  "status": "CONFLICT",
+  "reason": "Ingen komplett kombination hittades i näringssökningen (256 kombinationer). Morotsstavar med ost: protein_g 6.7 per portion bryter mot min_protein_g 20. Kraven är oförändrade; sökningen bevisar inte omöjlighet.",
+  "diagnostics": {
+    "version": "candidate-and-branch-counts-v1",
+    "raw_recipe_pool": 3,
+    "pools": [
+      {
+        "meal_type": "snack",
+        "raw": 3
+      }
+    ],
+    "candidate_rejections": [
+      {
+        "stage": "policy_taste",
+        "label": "Policy/smak",
+        "rejected": 0
+      },
+      {
+        "stage": "nutrition",
+        "label": "Näringskrav",
+        "rejected": 0
+      },
+      {
+        "stage": "organic",
+        "label": "Eko",
+        "rejected": 0
+      },
+      {
+        "stage": "store_cap",
+        "label": "Butikstak",
+        "rejected": 0
+      },
+      {
+        "stage": "variation",
+        "label": "Variationskrav",
+        "rejected": 0
+      },
+      {
+        "stage": "preparation",
+        "label": "Tillagning/beredning",
+        "rejected": 2
+      },
+      {
+        "stage": "product_qualification",
+        "label": "Produktkvalificering",
+        "rejected": 0
+      },
+      {
+        "stage": "price_basket",
+        "label": "Pris/korg",
+        "rejected": 1
+      }
+    ],
+    "singleton_passed": 0,
+    "not_singleton_evaluated": 0,
+    "search": [
+      {
+        "depth": 1,
+        "proposals": 1,
+        "constraints_rejected": 0,
+        "evaluation_rejected": 1,
+        "priced": 0,
+        "retained": 0,
+        "beam_pruned": 0,
+        "rejections": {
+          "policy_taste": 0,
+          "nutrition": 0,
+          "organic": 0,
+          "store_cap": 0,
+          "variation": 0,
+          "preparation": 0,
+          "product_qualification": 0,
+          "price_basket": 1
+        }
+      }
+    ],
+    "candidate_details": [
+      {
+        "stage": "preparation",
+        "recipe": "Ägg och tomat",
+        "reason": "Ägg och tomat: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "preparation",
+        "recipe": "Kikärtsröra på bröd",
+        "reason": "Kikärtsröra på bröd: näringsberäkning saknar granskad beredningsgrund för värme, avrinning eller ätbar mängd. Produktdeklarationer räcker inte ensamma; inga förlustfaktorer har antagits."
+      },
+      {
+        "stage": "price_basket",
+        "recipe": "Morotsstavar med ost",
+        "reason": "Ingen komplett kombination hittades i näringssökningen (256 kombinationer). Morotsstavar med ost: protein_g 6.7 per portion bryter mot min_protein_g 20. Kraven är oförändrade; sökningen bevisar inte omöjlighet."
+      }
+    ],
+    "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet."
+  },
+  "external_calls": 0
+}
