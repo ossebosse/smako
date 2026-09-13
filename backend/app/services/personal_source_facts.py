@@ -374,14 +374,7 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
     raw_root = Path(raw_root or settings.raw_snapshot_root).resolve()
     if not Path(database).is_file():
         return {}
-    paths = (Path(database), Path(str(database) + "-wal"))
-    revision = tuple(
-        (p.stat().st_mtime_ns, p.stat().st_size) if p.exists() else None for p in paths
-    )
-    key = (str(database), str(raw_root), prepared.universe.universe_id, FACTS_VERSION, revision)
     with _LOCK:
-        if key in _CACHE:
-            return _CACHE[key]
         targets = {
             p.product_id: p
             for p in prepared.universe.products
@@ -398,7 +391,7 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
             if not db.execute("SELECT 1 FROM sqlite_master WHERE name='products'").fetchone():
                 return {}
             db.execute("BEGIN")
-            last_path, document = None, None
+            source_rows = []
             for snapshot in sorted(snapshots):
                 rows = db.execute(
                     """SELECT p.id, p.chain, p.external_product_id,
@@ -419,28 +412,69 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
                     path = (raw_root / row["payload_location"]).resolve()
                     if not path.is_relative_to(raw_root):
                         continue
-                    try:
-                        if path != last_path:
-                            data = path.read_bytes()
-                            if hashlib.sha256(data).hexdigest() != row["payload_hash"]:
-                                continue
-                            document = json.loads(data)
-                            last_path = path
-                        raw = raw_product(document, row["raw_reference"])
-                        identity = raw.get("id") if row["chain"] == "coop" else raw.get("code")
-                        if str(identity) != row["external_product_id"]:
-                            continue
-                        result[(product.store_id, product.product_id)] = project_raw_facts(
-                            raw,
-                            chain=row["chain"],
-                            product_id=product.product_id,
-                            snapshot_id=snapshot,
-                            source_reference=f"{row['chain']}:{row['raw_reference']}:{row['payload_hash']}",
-                            observed_at=product.source_provenance.source_observed_at.isoformat(),
-                        )
-                    except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
-                        continue  # Missing or conflicting evidence remains unknown.
-        if len(_CACHE) >= 4:
-            _CACHE.pop(next(iter(_CACHE)))
-        _CACHE[key] = complete_identity_facts(prepared, result)
-        return _CACHE[key]
+                    source_rows.append((snapshot, row, product, path))
+
+        # A telemetry/profile write in this same SQLite database changes its
+        # mtime, but cannot change these public source facts. Key the actual
+        # relevant join rows, not the entire database's write activity.
+        revision = hashlib.sha256(
+            json.dumps(
+                [(snapshot, tuple(row)) for snapshot, row, _, _ in source_rows],
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ).encode()
+        ).hexdigest()
+        key = (
+            str(Path(database).resolve()),
+            str(raw_root),
+            prepared.universe.universe_id,
+            FACTS_VERSION,
+            revision,
+        )
+        # Validate every distinct source payload even on a cache hit. Neither
+        # unchanged snapshot identity nor preserved file timestamps can bless
+        # a missing/corrupt/replaced source. Streaming keeps scratch memory small.
+        hashes = {}
+        for _, _, _, path in source_rows:
+            if path not in hashes:
+                try:
+                    with path.open("rb") as stream:
+                        hashes[path] = hashlib.file_digest(stream, "sha256").hexdigest()
+                except OSError:
+                    hashes[path] = None
+        cacheable = all(hashes[path] == row["payload_hash"] for _, row, _, path in source_rows)
+        if cacheable and key in _CACHE:
+            return _CACHE[key]
+        last_path, document = None, None
+        for snapshot, row, product, path in source_rows:
+            if hashes[path] != row["payload_hash"]:
+                continue
+            try:
+                if path != last_path:
+                    data = path.read_bytes()
+                    if hashlib.sha256(data).hexdigest() != row["payload_hash"]:
+                        cacheable = False
+                        continue
+                    document = json.loads(data)
+                    last_path = path
+                raw = raw_product(document, row["raw_reference"])
+                identity = raw.get("id") if row["chain"] == "coop" else raw.get("code")
+                if str(identity) != row["external_product_id"]:
+                    continue
+                result[(product.store_id, product.product_id)] = project_raw_facts(
+                    raw,
+                    chain=row["chain"],
+                    product_id=product.product_id,
+                    snapshot_id=snapshot,
+                    source_reference=f"{row['chain']}:{row['raw_reference']}:{row['payload_hash']}",
+                    observed_at=product.source_provenance.source_observed_at.isoformat(),
+                )
+            except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
+                cacheable = False
+                continue  # Missing or conflicting evidence remains unknown.
+        projected = complete_identity_facts(prepared, result)
+        if cacheable:
+            if len(_CACHE) >= 4:
+                _CACHE.pop(next(iter(_CACHE)))
+            _CACHE[key] = projected
+        return projected

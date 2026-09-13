@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 import sqlite3
 
 import pytest
@@ -146,6 +147,17 @@ def test_hash_snapshot_context_and_exact_product_join(tmp_path, monkeypatch, dri
     )
     facts = load_retained_facts(p, database=str(db_path), raw_root=raw)
     assert facts[("coop", "mjölk")].organic is True
+    with sqlite3.connect(db_path) as db:
+        db.executescript("CREATE TABLE telemetry(value); INSERT INTO telemetry VALUES (1);")
+    # Unrelated activity must not reparse/project unchanged public source data.
+    assert load_retained_facts(p, database=str(db_path), raw_root=raw) is facts
+    metadata = (raw / "page.json").stat()
+    (raw / "page.json").write_bytes(content.replace(b"source-milk", b"wrong--milk"))
+    os.utime(raw / "page.json", ns=(metadata.st_atime_ns, metadata.st_mtime_ns))
+    # Even preserved size/timestamps cannot hide corrupted source content.
+    assert load_retained_facts(p, database=str(db_path), raw_root=raw) == {}
+    (raw / "page.json").write_bytes(content)
+    assert load_retained_facts(p, database=str(db_path), raw_root=raw) is facts
     from sqlalchemy.engine import URL
 
     monkeypatch.setenv(
@@ -159,6 +171,9 @@ def test_hash_snapshot_context_and_exact_product_join(tmp_path, monkeypatch, dri
     other.mkdir()
     (other / "page.json").write_text("{}")
     assert load_retained_facts(p, database=str(db_path), raw_root=other) == {}
+    with sqlite3.connect(db_path) as db:
+        db.execute("UPDATE products SET external_product_id='wrong-product'")
+    assert load_retained_facts(p, database=str(db_path), raw_root=raw) == {}
 
 
 def test_organic_mapping_changes_real_basket_and_unknown_stays_unknown():
