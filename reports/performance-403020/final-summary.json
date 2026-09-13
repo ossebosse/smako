@@ -1,0 +1,129 @@
+{
+  "release": "personal-v2-fast-403020-20260913c",
+  "app_code_commit": "98381e5",
+  "request_cold_goal_seconds": 30,
+  "baseline_count": 1,
+  "baseline_seconds": 357.6704077030299,
+  "core_after_seconds": [
+    26.480124289984815,
+    26.272605459031183,
+    26.66172735998407
+  ],
+  "http_request_cold_seconds": [
+    27.04723956802627,
+    27.461862098018173,
+    28.00726385699818
+  ],
+  "http_request_cold_median_seconds": 27.461862098018173,
+  "goal_met": true,
+  "quality_exact_equality": {
+    "final-1-plan.json": {
+      "recipes": true,
+      "ingredients": true,
+      "optimized_basket": true,
+      "portions": true,
+      "personal_except_freshness_cache_identity": true
+    },
+    "final-2-plan.json": {
+      "recipes": true,
+      "ingredients": true,
+      "optimized_basket": true,
+      "portions": true,
+      "personal_except_freshness_cache_identity": true
+    },
+    "final-3-plan.json": {
+      "recipes": true,
+      "ingredients": true,
+      "optimized_basket": true,
+      "portions": true,
+      "personal_except_freshness_cache_identity": true
+    },
+    "mobile-c-first/acceptance.json": {
+      "recipes": true,
+      "ingredients": true,
+      "optimized_basket": true,
+      "portions": true,
+      "personal_except_freshness_cache_identity": true
+    },
+    "mobile-final/acceptance.json": {
+      "recipes": true,
+      "ingredients": true,
+      "optimized_basket": true,
+      "portions": true,
+      "personal_except_freshness_cache_identity": true
+    }
+  },
+  "cost": 574.92,
+  "candidate_pools_and_policy": "unchanged",
+  "backup_bundle": "20260913T194832Z",
+  "unique_regressions_passed": 477,
+  "mobile": {
+    "mobile-c-first": {
+      "https": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "status": 201,
+      "response_seconds": 32.96838089998346,
+      "click_to_usable_seconds": 33.22394699999131,
+      "submission_count_after_double_click": 1,
+      "swap_response_seconds": 4.581947800004855,
+      "swap_click_to_usable_seconds": 4.611017299990635,
+      "swap_status": 200,
+      "reload_preserved_requirements": true,
+      "leave_and_return": {
+        "automatic_retries": 0,
+        "last_received_plan_retained": true,
+        "probe": "request held before server dispatch"
+      },
+      "timeout_probe": {
+        "configured_ms": 600000,
+        "test_clock_ms": 100,
+        "automatic_retries": 0,
+        "server_work_started": false
+      },
+      "page_errors": [],
+      "already_closed_probe_routes": 0
+    },
+    "mobile-final": {
+      "https": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "status": 201,
+      "response_seconds": 28.599074300029315,
+      "click_to_usable_seconds": 28.760229000006802,
+      "submission_count_after_double_click": 1,
+      "swap_response_seconds": 4.534811199991964,
+      "swap_click_to_usable_seconds": 4.562135500018485,
+      "swap_status": 200,
+      "reload_preserved_requirements": true,
+      "leave_and_return": {
+        "automatic_retries": 0,
+        "last_received_plan_retained": true,
+        "probe": "request held before server dispatch"
+      },
+      "timeout_probe": {
+        "configured_ms": 600000,
+        "test_clock_ms": 100,
+        "automatic_retries": 0,
+        "server_work_started": false
+      },
+      "page_errors": [],
+      "already_closed_probe_routes": 0
+    }
+  },
+  "deployment": {
+    "status": "VERIFIED",
+    "source": "/opt/smako/releases/personal-v2-fast-403020-20260913c",
+    "image": "sha256:9669be2e3b411588778b95e816adc5e3f3d12fd164a47ade81df2e6b425d6235",
+    "prior_plan_revisions_preserved": 164,
+    "current_plan_revisions": 168,
+    "shared_operation_lock": true,
+    "scheduler_unchanged": true,
+    "price_manifests_unchanged_during_operation": true,
+    "database_integrity": "ok"
+  }
+}

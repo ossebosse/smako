@@ -1,0 +1,135 @@
+{
+  "startup_seconds": 16.559511797036976,
+  "plan_prewarm": false,
+  "network": "none",
+  "process_cold_to_http_result_seconds": 52.4002213270287,
+  "first_http": {
+    "seconds": 35.6631098590442,
+    "status": 201,
+    "cost": 574.92,
+    "price_version": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46"
+  },
+  "warm_http": {
+    "seconds": 31.07903186196927,
+    "status": 201,
+    "cost": 574.92,
+    "price_version": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46"
+  },
+  "warm_has_new_owned_plan_id": true,
+  "concurrency": {
+    "plans": [
+      {
+        "seconds": 30.801226892974228,
+        "status": 201,
+        "cost": 574.92,
+        "price_version": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46"
+      },
+      {
+        "seconds": 61.603860408009496,
+        "status": 201,
+        "cost": 574.92,
+        "price_version": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46"
+      }
+    ],
+    "wave_seconds": 61.631781101983506,
+    "health": [
+      {
+        "path": "/health",
+        "seconds": 0.018832380010280758,
+        "status": 200
+      },
+      {
+        "path": "/ready",
+        "seconds": 0.00947557296603918,
+        "status": 200
+      },
+      {
+        "path": "/health",
+        "seconds": 0.05132033897098154,
+        "status": 200
+      },
+      {
+        "path": "/ready",
+        "seconds": 0.10549792798701674,
+        "status": 200
+      },
+      {
+        "path": "/health",
+        "seconds": 0.12373826699331403,
+        "status": 200
+      },
+      {
+        "path": "/ready",
+        "seconds": 0.10414440603926778,
+        "status": 200
+      }
+    ],
+    "search": [
+      {
+        "seconds": 0.028216918988619,
+        "status": 200
+      },
+      {
+        "seconds": 0.0793373979977332,
+        "status": 200
+      },
+      {
+        "seconds": 0.05508037802064791,
+        "status": 200
+      }
+    ],
+    "owner_isolation": true
+  },
+  "admission": {
+    "peak_active": 1,
+    "peak_queued": 1,
+    "remaining_in_flight": 0
+  },
+  "exclusive_http_stages": [
+    {
+      "storage_read": 0.0005249499808996916,
+      "admission_lock": 1.694203820079565e-05,
+      "admission_queue": 9.267998393625021e-06,
+      "public_fact_load": 9.001283829973545,
+      "request_init_and_data": 0.12376518012024462,
+      "planner_create": 26.490391980973072,
+      "storage_create": 0.01903136703185737,
+      "response_serialization": 0.0010087229893542826,
+      "http_and_response_other": 0.021273002843372524
+    },
+    {
+      "storage_read": 0.0004122259560972452,
+      "admission_lock": 1.111003803089261e-05,
+      "admission_queue": 2.4366017896682024e-05,
+      "public_fact_load": 4.499566706013866,
+      "request_init_and_data": 0.08033388602780178,
+      "planner_create": 26.462158198992256,
+      "storage_create": 0.014349903969559819,
+      "response_serialization": 0.0011366569669917226,
+      "http_and_response_other": 0.017666299012489617
+    },
+    {
+      "storage_read": 0.0005430749733932316,
+      "admission_lock": 4.5316002797335386e-05,
+      "admission_queue": 4.257948603481054e-06,
+      "public_fact_load": 3.879954361007549,
+      "request_init_and_data": 0.08076461893506348,
+      "planner_create": 26.795614335045684,
+      "storage_create": 0.012107078975532204,
+      "response_serialization": 0.0012897580163553357,
+      "http_and_response_other": 0.02095022809226066
+    },
+    {
+      "storage_read": 0.04221817903453484,
+      "admission_lock": 1.2842996511608362e-05,
+      "admission_queue": 30.716459003975615,
+      "public_fact_load": 4.575039555958938,
+      "request_init_and_data": 0.07991128304274753,
+      "planner_create": 26.12656642193906,
+      "storage_create": 0.015318730962462723,
+      "response_serialization": 0.001175742014311254,
+      "http_and_response_other": 0.03818958008196205
+    }
+  ],
+  "peak_rss_mib": 1063.56640625
+}
