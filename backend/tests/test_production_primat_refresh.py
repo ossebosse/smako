@@ -97,8 +97,7 @@ def _resolution(*, drift_ica: bool = False) -> PrimatStoreResolution:
 
 def _database(path: Path) -> Path:
     discovery = {
-        row.provider_context_id: row
-        for row in primat_store_discovery_bundle(_resolution()).items
+        row.provider_context_id: row for row in primat_store_discovery_bundle(_resolution()).items
     }
     engine = create_database_engine(f"sqlite+pysqlite:///{path.as_posix()}")
     create_schema(engine)
@@ -254,9 +253,7 @@ def test_dry_plan_lists_only_verified_primat_primary_contexts_without_network(
     assert plan["status"] == "planned"
     assert plan["provider_requests_planned"] == 49
     assert plan["credentials_included"] is False
-    assert [row["context_id"] for row in plan["contexts"]] == [
-        "primat:ica:1088004"
-    ]
+    assert [row["context_id"] for row in plan["contexts"]] == ["primat:ica:1088004"]
 
 
 @pytest.mark.asyncio
@@ -266,12 +263,15 @@ async def test_refresh_uses_stale_identity_seed_revalidates_and_replaces_atomica
 ) -> None:
     database = _database(tmp_path / "registry.sqlite")
     # Default consumers continue to exclude stale data.
-    assert load_eligible_primat_contexts(
-        database,
-        city="Lund",
-        now=NOW,
-        chains=frozenset({Chain.ICA}),
-    ) == ()
+    assert (
+        load_eligible_primat_contexts(
+            database,
+            city="Lund",
+            now=NOW,
+            chains=frozenset({Chain.ICA}),
+        )
+        == ()
+    )
     # The explicit refresh seam may use it solely as an identity seed.
     seeded = load_eligible_primat_contexts(
         database,
@@ -317,9 +317,11 @@ async def test_refresh_uses_stale_identity_seed_revalidates_and_replaces_atomica
     # than six minutes. Verify age against the actual call's clock bounds;
     # neither rewrite the observation nor widen a freshness tolerance.
     observed_at = NOW - timedelta(hours=72)
-    assert (before_refresh - observed_at).total_seconds() / 3600 <= (
-        context_report["identity_seed_age_hours"]
-    ) <= (after_refresh - observed_at).total_seconds() / 3600
+    assert (
+        (before_refresh - observed_at).total_seconds() / 3600
+        <= (context_report["identity_seed_age_hours"])
+        <= (after_refresh - observed_at).total_seconds() / 3600
+    )
     assert len(provider.requested_store_ids) == 48
     assert set(provider.requested_store_ids) == {("ica:1088004",)}
     assert provider.max_active_searches == 1
@@ -452,9 +454,7 @@ async def test_one_drifted_context_uses_its_fresh_lkg_while_other_context_refres
     assert report["status"] == "PASS"
     assert report["context_failures"] == 1
     assert report["context_lkg_used"] == 1
-    assert {row["status"] for row in report["contexts"] if "status" in row} == {
-        "lkg_retained"
-    }
+    assert {row["status"] for row in report["contexts"] if "status" in row} == {"lkg_retained"}
     payload = FrozenExternalCacheBundle.model_validate_json(output.read_bytes())
     assert {store.store_id for store in payload.stores} == {
         "ica:1088004",
@@ -465,3 +465,31 @@ async def test_one_drifted_context_uses_its_fresh_lkg_while_other_context_refres
         "coop:730400",
     }
     assert set(provider.requested_store_ids) == {("coop:730400",)}
+
+
+@pytest.mark.asyncio
+async def test_product_parse_failure_retains_stage_context_and_closes_provider(
+    tmp_path, monkeypatch
+):
+    database = _database(tmp_path / "registry.sqlite")
+    provider = _FakeProvider(_resolution())
+
+    async def failing(query, stores):
+        raise ValueError("invalid product field") from TypeError("private underlying " + str(database))
+
+    provider.search_products = failing
+    monkeypatch.setattr(
+        "app.services.production_primat_refresh._BoundedPrimatProvider.load", lambda **k: provider
+    )
+    output = tmp_path / "candidate.json"
+    output.write_text("previous")
+    with pytest.raises(ValueError, match="invalid product field") as caught:
+        await collect_city_primat_cache(database, "Lund", "22350", output, 48)
+    diagnostic = caught.value.refresh_diagnostic
+    assert diagnostic["stage"] == "product_fetch_and_parse"
+    assert diagnostic["store_ids"] == ["ica:1088004"]
+    assert diagnostic["cause_type"] == "TypeError"
+    assert diagnostic["provider_requests"] == 1
+    assert "private underlying input" not in json.dumps(diagnostic)
+    assert output.read_text() == "previous"
+    assert provider.closed

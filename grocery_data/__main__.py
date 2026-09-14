@@ -2431,6 +2431,8 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
                 f"primat-{city_slug}-{started_at.strftime('%Y%m%dT%H%M%SZ')}-{uuid4().hex}.json"
             )
             source_status = "not_selected"
+            source_stage = "resolve_previous_cache"
+            source_diagnostic = None
             source_error: str | None = None
             source_requests = 0
             source_contexts = 0
@@ -2467,6 +2469,7 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
                     )
                     source_status = "provided_cache_activated"
                 elif live_external_enabled:
+                    source_stage = "collect_parse_validate_export"
                     collected = await _collect_production_primat_cache(
                         database=database,
                         city=city,
@@ -2491,6 +2494,7 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
                     if isinstance(output, dict):
                         source_products = int(output.get("products") or 0)
                     if source_status == "pass":
+                        source_stage = "validate_and_activate_cache"
                         _manifest, context_validation = external_store.activate_validated(
                             candidate,
                             city=city,
@@ -2519,6 +2523,7 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
                 )
                 if resolved is not None and resolved[1].usable:
                     activated_path, cache_status, _manifest = resolved
+                    source_stage = "activate_context_links"
                     context_activation = _activate_external_context_links(
                         settings,
                         activated_path,
@@ -2548,7 +2553,14 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
                 elif source_status == "active_cache_reuse_requested":
                     source_status = "active_cache_unavailable"
             except Exception as exc:  # noqa: BLE001 - external city failures are isolated
+                from grocery_data.app.services.refresh_diagnostics import source_failure_diagnostic
+
                 source_error = type(exc).__name__
+                source_diagnostic = getattr(
+                    exc, "refresh_diagnostic", None
+                ) or source_failure_diagnostic(exc)
+                source_diagnostic = {"stage": source_stage, **source_diagnostic}
+                source_requests = int(source_diagnostic.get("provider_requests", source_requests))
                 try:
                     if external_manifest_changed:
                         external_store.restore_active_manifest(
@@ -2611,6 +2623,7 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
                     ),
                     "lkg_used": used_lkg,
                     "error_type": source_error,
+                    "failure_diagnostic": source_diagnostic,
                     "context_validation": context_validation,
                     "context_activation": context_activation,
                     "cache_file": activated_path.name if activated_path is not None else None,
@@ -2677,7 +2690,12 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
                     activation = universe_store.activate(
                         candidate,
                         city=city,
-                        validator=validate_backend_prepared_universe_artifact,
+                        validator=lambda payload, city: validate_backend_prepared_universe_artifact(
+                            payload,
+                            city,
+                            required_context_ids=settings.price_universe_required_context_ids,
+                            max_price_age_hours=settings.max_price_age_hours,
+                        ),
                         expected_snapshot_ids=expected,
                         freshness_policy=policy,
                     )

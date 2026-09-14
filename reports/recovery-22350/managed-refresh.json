@@ -1,0 +1,690 @@
+{
+  "cities": [
+    "Lund"
+  ],
+  "completed_at": "2026-09-14T12:55:08.121308Z",
+  "discovery_requests": 0,
+  "external_provider": [
+    {
+      "age_hours": 0.4762224497222222,
+      "cache_file": "ed69973c3b514ef60c69d13c2476b10ff00ffeef0c8ae81c437b800ee8f3c156.json",
+      "city": "Lund",
+      "context_activation": {
+        "activated": 2,
+        "cache_stores": 2,
+        "items": [
+          {
+            "grocery_context_id": "primat:ica:1004409",
+            "observed_at": "2026-09-14T12:23:06.684277Z",
+            "physical_store_id": "physical:ica:1004409",
+            "provider_store_id": "1004409",
+            "reason": null,
+            "snapshot_id": "primat-request-cd623964cbf143d9a4b162542db84e3a",
+            "status": "activated"
+          },
+          {
+            "grocery_context_id": "primat:ica:1088004",
+            "observed_at": "2026-09-14T12:23:06.684277Z",
+            "physical_store_id": "physical:ica:1088004",
+            "provider_store_id": "1088004",
+            "reason": null,
+            "snapshot_id": "primat-request-cd623964cbf143d9a4b162542db84e3a",
+            "status": "activated"
+          }
+        ],
+        "mappings_created": 0,
+        "provider_requests": 0,
+        "rejected": 0,
+        "snapshot_ids": [
+          "primat-request-cd623964cbf143d9a4b162542db84e3a"
+        ],
+        "status": "activated"
+      },
+      "context_failures": 0,
+      "context_lkg_used": 0,
+      "context_validation": {
+        "activated": 2,
+        "cache_stores": 2,
+        "items": [
+          {
+            "grocery_context_id": "primat:ica:1004409",
+            "observed_at": "2026-09-14T12:23:06.684277Z",
+            "physical_store_id": "physical:ica:1004409",
+            "provider_store_id": "1004409",
+            "reason": null,
+            "snapshot_id": "primat-request-cd623964cbf143d9a4b162542db84e3a",
+            "status": "activated"
+          },
+          {
+            "grocery_context_id": "primat:ica:1088004",
+            "observed_at": "2026-09-14T12:23:06.684277Z",
+            "physical_store_id": "physical:ica:1088004",
+            "provider_store_id": "1088004",
+            "reason": null,
+            "snapshot_id": "primat-request-cd623964cbf143d9a4b162542db84e3a",
+            "status": "activated"
+          }
+        ],
+        "mappings_created": 0,
+        "provider_requests": 0,
+        "rejected": 0,
+        "snapshot_ids": [
+          "primat-request-cd623964cbf143d9a4b162542db84e3a"
+        ],
+        "status": "activated"
+      },
+      "contexts": 2,
+      "credentials_included": "[REDACTED]",
+      "error_type": null,
+      "failure_diagnostic": null,
+      "freshness": "fresh",
+      "hours_until_stale": 47.52377755027778,
+      "lkg_used": false,
+      "next_expected_source_refresh": "2026-09-15T01:17:00Z",
+      "postal_code": "22350",
+      "products": 1888,
+      "provider": "primat",
+      "provider_requests": 0,
+      "retry_required": false,
+      "roles": [
+        "basket"
+      ],
+      "runtime_seconds": 2.8,
+      "snapshot_age_hours": 0.4762224497222222,
+      "snapshot_ids": [
+        "primat-request-cd623964cbf143d9a4b162542db84e3a"
+      ],
+      "source_will_expire_before_next_refresh": false,
+      "stale_at": "2026-09-16T12:23:06.885148Z",
+      "status": "provided_cache_activated"
+    }
+  ],
+  "meal_generation_live_provider_requests": 0,
+  "own_collection": {
+    "cities": [
+      "Lund"
+    ],
+    "results": [
+      {
+        "chain": "citygross",
+        "city": "Lund",
+        "freshness": "broken",
+        "hours_until_stale": null,
+        "lkg_used": false,
+        "next_expected_source_refresh": "2026-09-15T01:17:00Z",
+        "operational_warnings": [
+          "basket_critical_source_retry_required"
+        ],
+        "reason": "no verified OWN source context for this geography",
+        "retry_required": true,
+        "roles": [
+          "basket",
+          "offers"
+        ],
+        "snapshot_age_hours": null,
+        "source_will_expire_before_next_refresh": false,
+        "stale_at": null,
+        "status": "not_applicable"
+      }
+    ],
+    "run_type": "daily_own_collection",
+    "summary": {
+      "completed": 0,
+      "external_provider_requests": 0,
+      "failed": 0,
+      "fallbacks_used": 0,
+      "skipped": 0,
+      "targets": 0
+    }
+  },
+  "postal_codes": {
+    "Lund": "22350"
+  },
+  "price_universes": [
+    {
+      "activated_at": "2026-09-14T12:54:39.142607Z",
+      "activation_status": "active_from_prebuilt_artifact",
+      "active": true,
+      "active_unchanged": false,
+      "artifact_bytes": 70212322,
+      "artifact_file": "4e5877e491fedef8a8d06864af039d434d63d5cfa7bc0f4aabb3ceeac6a3f7bb.json",
+      "artifact_mb": 66.96,
+      "build": {
+        "artifact": {
+          "bytes": 70212322,
+          "file": "price-universe-lund-20260914T125138Z-28e28fa88ad34d428ad007116f15de7e.json",
+          "schema_version": "prepared-price-universe-v1",
+          "validated": true
+        },
+        "build": "production_price_universe",
+        "built_at": "2026-09-14T12:51:53.678870Z",
+        "canonical_mappings": 2094,
+        "city": "Lund",
+        "database_read_only": true,
+        "database_unchanged": true,
+        "eligible_products": 6361,
+        "exact_menu_candidates": 685,
+        "external_cache_unchanged": true,
+        "legacy_compatibility_view": false,
+        "mode": "federated",
+        "network_attempts": 0,
+        "oldest_price_age_hours": 13.345,
+        "operation_counters": {
+          "cache_misses": 1,
+          "canonical_ingredients_considered": 42,
+          "canonical_mappings": 41,
+          "eligible_products": 685,
+          "package_calculations": 25869,
+          "precomputed_canonical_candidates": 1306,
+          "precomputed_canonical_products": 26192,
+          "precomputed_canonical_queries": 13,
+          "price_universe_builds": 1,
+          "price_universe_cache_misses": 1,
+          "price_universe_canonical_mappings": 2094,
+          "price_universe_eligible_products": 6361,
+          "price_universe_pool_build_ms": 124908,
+          "price_universe_products_post_pruning": 2094,
+          "price_universe_products_pruned": 4267,
+          "price_universe_raw_products": 36762,
+          "price_universe_semantic_candidates": 685,
+          "product_match_calculations": 109312,
+          "products_loaded": 83120,
+          "semantic_candidates_returned": 4329,
+          "semantic_comparisons": 109312
+        },
+        "persistent_activation": false,
+        "post_pruning_products": 2094,
+        "postal_code": "22350",
+        "price_universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+        "provider_metrics": {
+          "exact_identity_bridge": {
+            "attached_contracts": 1,
+            "fuzzy_matches": 0,
+            "identity_link_policy": {
+              "confidence": "exact",
+              "fuzzy_authoritative_join": false,
+              "identity": "exact_gtin_retailer_id_or_verified_registry_only",
+              "scope": "exact_context_id"
+            },
+            "identity_links": [
+              {
+                "chain": "ica",
+                "confidence": "exact",
+                "evidence": [
+                  "gtin"
+                ],
+                "gtin": "7300206787006",
+                "retailer_id_namespace": "own:ica",
+                "retailer_product_id": "5004009045",
+                "scope_compatible": true,
+                "scope_evidence": "exact_context_id",
+                "source_context_id": "1088004",
+                "source_provider": "own",
+                "source_record_id": "5bc7e2beeef94ddfb616ba3a15e94b48",
+                "target_context_id": "1088004",
+                "target_provider": "primat",
+                "target_record_id": "external:ica:1088004:1024181",
+                "verified_at": "2026-09-14T14:51:55.761222+02:00"
+              }
+            ],
+            "member_offer_reconciliation": {
+              "ica": {
+                "accepted": 1,
+                "accepted_active": 1,
+                "active": 20,
+                "active_member_multibuy": 11,
+                "ambiguous": 0,
+                "discovered": 20,
+                "exact_product_mapped": 1,
+                "expired": 0,
+                "future": 0,
+                "member_multibuy": 11,
+                "rejection_reasons": {
+                  "exact_gtin": 1,
+                  "exact_identifier_not_found": 17,
+                  "exact_identity_scope_incompatible": 2
+                },
+                "retained_active": 1,
+                "retained_active_member_multibuy": 1,
+                "scope_compatible": 1,
+                "scope_mismatch": 2,
+                "semantically_accepted": 20,
+                "semantically_accepted_active": 20,
+                "semantically_accepted_expired": 0,
+                "semantically_accepted_future": 0,
+                "source_contexts": [
+                  "1003452",
+                  "1088004"
+                ],
+                "target_contexts": [
+                  "1004409",
+                  "1088004"
+                ],
+                "unknown_scope_excluded": 0,
+                "unmapped": 17,
+                "unmapped_identity": 17,
+                "user_specific_excluded": 0,
+                "user_specific_or_unknown_excluded": 0,
+                "with_gtin": 7,
+                "with_retailer_product_id": 20
+              },
+              "lidl": {
+                "accepted": 0,
+                "accepted_active": 0,
+                "active": 31,
+                "active_member_multibuy": 4,
+                "ambiguous": 0,
+                "discovered": 59,
+                "exact_product_mapped": 0,
+                "expired": 28,
+                "future": 0,
+                "member_multibuy": 8,
+                "rejection_reasons": {
+                  "exact_identifier_not_found": 52,
+                  "unknown_eligibility": 7
+                },
+                "retained_active": 0,
+                "retained_active_member_multibuy": 0,
+                "scope_compatible": 0,
+                "scope_mismatch": 0,
+                "semantically_accepted": 52,
+                "semantically_accepted_active": 28,
+                "semantically_accepted_expired": 24,
+                "semantically_accepted_future": 0,
+                "source_contexts": [
+                  "public-default-region"
+                ],
+                "target_contexts": [],
+                "unknown_scope_excluded": 7,
+                "unmapped": 52,
+                "unmapped_identity": 52,
+                "user_specific_excluded": 0,
+                "user_specific_or_unknown_excluded": 7,
+                "with_gtin": 42,
+                "with_retailer_product_id": 59
+              }
+            },
+            "registry_gtins_applied": 0,
+            "registry_gtins_available": 0,
+            "targets": 43155
+          },
+          "external_cache": {
+            "calls": {
+              "find_stores": 1,
+              "get_store_products": 2,
+              "search_products": 55
+            },
+            "network_requests": 0,
+            "products": 1888,
+            "stores": 2
+          },
+          "own_asgi": {
+            "methods": {
+              "GET": 92
+            },
+            "network_requests": 0,
+            "requests": 92,
+            "statuses": {
+              "200": 92
+            }
+          },
+          "source_resolution": [
+            {
+              "accepted_stores": 0,
+              "basket_eligible": false,
+              "chain": "citygross",
+              "considered_stores": 0,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {},
+              "products_returned": 0,
+              "provider_errors": [],
+              "reason": "provider returned no contexts for this chain",
+              "rejected_stores": 0,
+              "requested_provider": "own",
+              "rows_rejected": 0,
+              "selected_channel": null,
+              "selected_provider": null,
+              "selected_role": null,
+              "selected_snapshot_id": null,
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 1,
+              "basket_eligible": true,
+              "chain": "coop",
+              "considered_stores": 1,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {
+                "own": 13073
+              },
+              "products_returned": 13073,
+              "provider_errors": [],
+              "reason": "configured primary is healthy, fresh and basket-compatible",
+              "rejected_stores": 0,
+              "requested_provider": "own",
+              "rows_rejected": 0,
+              "selected_channel": "catalog",
+              "selected_provider": "own",
+              "selected_role": "basket",
+              "selected_snapshot_id": "7221700ddab04bfbb875b7387d00c514",
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 1,
+              "basket_eligible": true,
+              "chain": "hemkop",
+              "considered_stores": 1,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {
+                "own": 6010
+              },
+              "products_returned": 6010,
+              "provider_errors": [],
+              "reason": "configured primary is healthy, fresh and basket-compatible",
+              "rejected_stores": 0,
+              "requested_provider": "own",
+              "rows_rejected": 0,
+              "selected_channel": "catalog",
+              "selected_provider": "own",
+              "selected_role": "basket",
+              "selected_snapshot_id": "46e0819012be4eb0ab2034e26fbd50ac",
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 2,
+              "basket_eligible": true,
+              "chain": "ica",
+              "considered_stores": 2,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {
+                "primat": 105728
+              },
+              "products_returned": 105728,
+              "provider_errors": [],
+              "reason": "configured primary is healthy, fresh and basket-compatible",
+              "rejected_stores": 0,
+              "requested_provider": "primat",
+              "rows_rejected": 0,
+              "selected_channel": "catalog",
+              "selected_provider": "primat",
+              "selected_role": "basket",
+              "selected_snapshot_id": "primat-request-cd623964cbf143d9a4b162542db84e3a",
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 0,
+              "basket_eligible": false,
+              "chain": "lidl",
+              "considered_stores": 0,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {},
+              "products_returned": 0,
+              "provider_errors": [],
+              "reason": "primary unavailable",
+              "rejected_stores": 0,
+              "requested_provider": "primat",
+              "rows_rejected": 0,
+              "selected_channel": null,
+              "selected_provider": null,
+              "selected_role": null,
+              "selected_snapshot_id": null,
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 2,
+              "basket_eligible": true,
+              "chain": "willys",
+              "considered_stores": 2,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {
+                "own": 21263
+              },
+              "products_returned": 21263,
+              "provider_errors": [],
+              "reason": "configured primary is healthy, fresh and basket-compatible",
+              "rejected_stores": 0,
+              "requested_provider": "own",
+              "rows_rejected": 0,
+              "selected_channel": "catalog",
+              "selected_provider": "own",
+              "selected_role": "basket",
+              "selected_snapshot_id": "cc6a4a8cb1554b3d93fe6fdd80acb9ee",
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 0,
+              "basket_eligible": false,
+              "chain": "citygross",
+              "considered_stores": 0,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {},
+              "products_returned": 0,
+              "provider_errors": [],
+              "reason": "provider returned no contexts for this chain",
+              "rejected_stores": 0,
+              "requested_provider": "own",
+              "rows_rejected": 0,
+              "selected_channel": null,
+              "selected_provider": null,
+              "selected_role": null,
+              "selected_snapshot_id": null,
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 1,
+              "basket_eligible": true,
+              "chain": "coop",
+              "considered_stores": 1,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {},
+              "products_returned": 0,
+              "provider_errors": [],
+              "reason": "configured primary is healthy, fresh and basket-compatible",
+              "rejected_stores": 0,
+              "requested_provider": "own",
+              "rows_rejected": 0,
+              "selected_channel": "catalog",
+              "selected_provider": "own",
+              "selected_role": "basket",
+              "selected_snapshot_id": "7221700ddab04bfbb875b7387d00c514",
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 1,
+              "basket_eligible": true,
+              "chain": "hemkop",
+              "considered_stores": 1,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {},
+              "products_returned": 0,
+              "provider_errors": [],
+              "reason": "configured primary is healthy, fresh and basket-compatible",
+              "rejected_stores": 0,
+              "requested_provider": "own",
+              "rows_rejected": 0,
+              "selected_channel": "catalog",
+              "selected_provider": "own",
+              "selected_role": "basket",
+              "selected_snapshot_id": "46e0819012be4eb0ab2034e26fbd50ac",
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 2,
+              "basket_eligible": true,
+              "chain": "ica",
+              "considered_stores": 2,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {},
+              "products_returned": 0,
+              "provider_errors": [],
+              "reason": "configured primary is healthy, fresh and basket-compatible",
+              "rejected_stores": 0,
+              "requested_provider": "primat",
+              "rows_rejected": 0,
+              "selected_channel": "catalog",
+              "selected_provider": "primat",
+              "selected_role": "basket",
+              "selected_snapshot_id": "primat-request-cd623964cbf143d9a4b162542db84e3a",
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 0,
+              "basket_eligible": false,
+              "chain": "lidl",
+              "considered_stores": 0,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {},
+              "products_returned": 0,
+              "provider_errors": [],
+              "reason": "primary unavailable",
+              "rejected_stores": 0,
+              "requested_provider": "primat",
+              "rows_rejected": 0,
+              "selected_channel": null,
+              "selected_provider": null,
+              "selected_role": null,
+              "selected_snapshot_id": null,
+              "stale_rows": 0,
+              "stale_stores": 0
+            },
+            {
+              "accepted_stores": 2,
+              "basket_eligible": true,
+              "chain": "willys",
+              "considered_stores": 2,
+              "context_id": null,
+              "fallback_available": false,
+              "fallback_used": false,
+              "products_considered": {},
+              "products_returned": 0,
+              "provider_errors": [],
+              "reason": "configured primary is healthy, fresh and basket-compatible",
+              "rejected_stores": 0,
+              "requested_provider": "own",
+              "rows_rejected": 0,
+              "selected_channel": "catalog",
+              "selected_provider": "own",
+              "selected_role": "basket",
+              "selected_snapshot_id": "cc6a4a8cb1554b3d93fe6fdd80acb9ee",
+              "stale_rows": 0,
+              "stale_stores": 0
+            }
+          ]
+        },
+        "raw_products": 36762,
+        "snapshot_ids": [
+          "46e0819012be4eb0ab2034e26fbd50ac",
+          "7221700ddab04bfbb875b7387d00c514",
+          "cc6a4a8cb1554b3d93fe6fdd80acb9ee",
+          "primat-request-cd623964cbf143d9a4b162542db84e3a"
+        ],
+        "status": "PASS",
+        "stores": 6,
+        "timing_ms": {
+          "build": 125149.42,
+          "build_price_universe": 5529.531,
+          "canonical_matching": 27674.758,
+          "economic_ingredient_pool": 57849.511,
+          "load_promoted_products": 37370.94,
+          "load_promoted_snapshots": 239.618,
+          "precompute_canonical_matching": 8729.736,
+          "precompute_canonical_search": 7128.744,
+          "precompute_economic_ingredient_pool": 57849.618,
+          "serialization": 8547.405,
+          "setup": 3100.26,
+          "source_reconciliation": 27589.334,
+          "total": 148725.467,
+          "validation_load": 11926.014
+        }
+      },
+      "build_error": null,
+      "build_skipped_reason": null,
+      "build_time_seconds": 148.725,
+      "built_at": "2026-09-14T12:51:53.678870Z",
+      "canonical_index_count": 56,
+      "city": "Lund",
+      "hash_verified": true,
+      "hours_until_stale": 34.60456724416667,
+      "meal_request_provider_calls": 0,
+      "next_expected_source_refresh": "2026-09-15T01:17:00Z",
+      "oldest_observed_at": "2026-09-13T23:31:11.110177Z",
+      "oldest_price_age_hours": 13.395432755833333,
+      "product_count": 2094,
+      "representative_basket_smoke": {
+        "complete": true,
+        "live_provider_requests": 0,
+        "priced_items": 13,
+        "requested_items": 13,
+        "runtime_ms": 171.1017859634012,
+        "selected_context_ids": [
+          "context:coop:23eaae11c9661e68",
+          "context:hemkop:3288e04edd97e349",
+          "context:willys:383650ec6ff5a636"
+        ],
+        "total": 300.46
+      },
+      "snapshot_ids": [
+        "46e0819012be4eb0ab2034e26fbd50ac",
+        "7221700ddab04bfbb875b7387d00c514",
+        "cc6a4a8cb1554b3d93fe6fdd80acb9ee",
+        "primat-request-cd623964cbf143d9a4b162542db84e3a"
+      ],
+      "source_will_expire_before_next_refresh": false,
+      "stale_at": "2026-09-15T23:31:11.110177Z",
+      "startup_load_ms": 13225.711,
+      "status": "fresh",
+      "universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+      "usable": true
+    }
+  ],
+  "run_type": "daily_refresh",
+  "schedule": "manual_or_once_daily",
+  "started_at": "2026-09-14T12:51:38.479432Z",
+  "summary": {
+    "active_universes": 1,
+    "exit_code": 0,
+    "fresh_universes": 1,
+    "lkg_contexts": 0,
+    "status": "complete",
+    "universe_builds": 1,
+    "universe_builds_per_city_max": 1
+  },
+  "timing_seconds": {
+    "collection": 0.004,
+    "external_provider": 2.8,
+    "price_universe": 206.835,
+    "total": 209.642
+  }
+}

@@ -137,6 +137,8 @@ def test_remote_activation_command_and_safe_result(monkeypatch):
     def execute(command, **kwargs):
         assert command[-1].endswith("/" + "a" * 64 + ".smako-source")
         assert "-oBatchMode=yes" in command and "10001:10001" in command
+        assert "docker" in command and "smako-scheduler-1" in command
+        assert "/opt/smako/compose" not in command
         assert kwargs["capture_output"] and kwargs["timeout"] == 1800
         return subprocess.CompletedProcess(
             command, 0, 'other output\n{"activation":"already_active","secret":"not returned"}'
@@ -144,6 +146,35 @@ def test_remote_activation_command_and_safe_result(monkeypatch):
 
     monkeypatch.setattr(relay.subprocess, "run", execute)
     assert relay.remote_activate("a" * 64) == {"activation": "already_active"}
+
+
+def test_upload_uses_running_container_without_reading_protected_compose_env(tmp_path, monkeypatch):
+    artifact = pending(tmp_path)
+
+    def execute(command, **kwargs):
+        assert "/opt/smako/compose" not in command
+        assert command[-8:] == [
+            "docker",
+            "exec",
+            "-i",
+            "--user",
+            "10001:10001",
+            "smako-scheduler-1",
+            "python",
+            "-",
+        ]
+        assert kwargs["check"] and kwargs["capture_output"]
+        assert "transport hash mismatch" in kwargs["input"]
+        assert "inbox artifact cannot be a symlink" in kwargs["input"]
+        return subprocess.CompletedProcess(command, 0, "uploaded_to_inbox_only\n")
+
+    monkeypatch.setattr(relay.source_cli.subprocess, "run", execute)
+    from types import SimpleNamespace
+
+    assert (
+        relay.source_cli.push(SimpleNamespace(artifact=artifact, host="smako"))["status"]
+        == "uploaded"
+    )
 
 
 def test_task_script_has_correct_limited_wake_and_manual_password_boundary():

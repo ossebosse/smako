@@ -28,6 +28,7 @@ from scripts.benchmark_lund_phase_c import _BoundedPrimatProvider
 
 from grocery_data.app.domain import Chain
 from grocery_data.app.domain.source_strategy import SourceProvider, source_strategy_for
+from grocery_data.app.services.refresh_diagnostics import source_failure_diagnostic
 
 _EXPECTED_REQUESTS = 49
 _MAX_CONTEXTS_PER_PRODUCT_REQUEST = 15
@@ -162,13 +163,8 @@ def _merge_context_lkg(
     if lkg.postal_code != refreshed.postal_code:
         raise ValueError("Primat context LKG has the wrong postal scope")
 
-    required = {
-        (context.chain.value, context.provider_store_id)
-        for context in failed_contexts
-    }
-    selected_stores = tuple(
-        store for store in lkg.stores if _store_context_key(store) in required
-    )
+    required = {(context.chain.value, context.provider_store_id) for context in failed_contexts}
+    selected_stores = tuple(store for store in lkg.stores if _store_context_key(store) in required)
     if {_store_context_key(store) for store in selected_stores} != required:
         raise ValueError("Primat context LKG does not cover every failed exact context")
     now = datetime.now(tz=UTC)
@@ -253,9 +249,7 @@ async def collect_city_primat_cache(
             "raw_http_included": False,
         }
     if len(eligible) > _MAX_CONTEXTS_PER_PRODUCT_REQUEST:
-        raise ValueError(
-            "verified Primat context scope exceeds one bounded product request"
-        )
+        raise ValueError("verified Primat context scope exceeds one bounded product request")
 
     surface = canonical_ingredient_query_surface()
     exact_contexts = frozenset(
@@ -266,8 +260,12 @@ async def collect_city_primat_cache(
         max_requests=_EXPECTED_REQUESTS,
         context_bootstrap=False,
     )
+    stage = "store_resolution"
+    query = None
+    native_store_ids = []
     try:
         resolution = await provider.resolve_store_candidates(normalized_postal)
+        stage = "exact_context_revalidation"
         contexts = []
         failed_contexts = []
         for persisted in eligible:
@@ -290,6 +288,8 @@ async def collect_city_primat_cache(
         collected = []
         zero_result_queries = 0
         for item in surface.items:
+            stage = "product_fetch_and_parse"
+            query = item.query
             requests_before = int(provider.transport_report.get("requests", -1))
             rows = await provider.search_products(item.query, native_store_ids)
             requests_after = int(provider.transport_report.get("requests", -1))
@@ -299,16 +299,27 @@ async def collect_city_primat_cache(
             zero_result_queries += not rows
 
         transport = _safe_transport_report(provider.transport_report)
+        stage = "closed_product_validation"
         bundle = build_frozen_external_cache(resolution, contexts, collected)
         if failed_contexts:
             if lkg_cache is None:
                 raise ValueError("failed Primat contexts require a fresh per-context LKG")
+            stage = "context_lkg_validation"
             bundle = _merge_context_lkg(
                 bundle,
                 lkg_cache=lkg_cache,
                 failed_contexts=failed_contexts,
                 max_age_hours=max_age_hours,
             )
+    except Exception as exc:
+        exc.refresh_diagnostic = {
+            **source_failure_diagnostic(exc),
+            "stage": stage,
+            "query": query,
+            "store_ids": native_store_ids,
+            "provider_requests": int(provider.transport_report.get("requests", 0)),
+        }
+        raise
     finally:
         await provider.aclose()
 
@@ -334,9 +345,7 @@ async def collect_city_primat_cache(
                 "coverage": context.eligible.coverage.value,
                 "mapping_confidence": context.eligible.confidence.value,
                 "identity_seed_age_hours": float(context.eligible.data_age_hours),
-                "stale_identity_seed": (
-                    float(context.eligible.data_age_hours) > max_age_hours
-                ),
+                "stale_identity_seed": (float(context.eligible.data_age_hours) > max_age_hours),
                 "products": products_by_store[context.store.store_id],
             }
             for context in contexts

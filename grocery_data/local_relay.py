@@ -31,12 +31,11 @@ def remote_activate(digest: str):
             "-oServerAliveInterval=30",
             "-oServerAliveCountMax=3",
             "smako",
-            "/opt/smako/compose",
+            "docker",
             "exec",
-            "-T",
-            "-u",
+            "--user",
             "10001:10001",
-            "scheduler",
+            "smako-scheduler-1",
             "python",
             "-m",
             "grocery_data.source_cli",
@@ -64,6 +63,9 @@ def transient_retry(action, log, *, delay=sleep):
                 "transport_failure",
                 attempt=attempt + 1,
                 error_type=type(exc).__name__,
+                exit_code=exc.returncode
+                if isinstance(exc, subprocess.CalledProcessError)
+                else None,
                 transient=transient,
             )
             if not transient or attempt == 2:

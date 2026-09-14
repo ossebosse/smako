@@ -107,6 +107,7 @@ def _settings(tmp_path: Path) -> SimpleNamespace:
         database_url=f"sqlite:///{tmp_path / 'refresh.sqlite'}",
         price_age_warning_hours=36.0,
         max_price_age_hours=48.0,
+        price_universe_required_context_ids=(),
         price_universe_cache_root=tmp_path / "universe-cache",
     )
 
@@ -316,9 +317,7 @@ async def test_managed_dry_run_lund_malmo_never_collects_or_builds(
         lambda report, **_kwargs: emitted.append(report),
     )
 
-    exit_code = await grocery_cli._daily_refresh(
-        _args(tmp_path, ["Lund", "Malmö"], dry_run=True)
-    )
+    exit_code = await grocery_cli._daily_refresh(_args(tmp_path, ["Lund", "Malmö"], dry_run=True))
 
     assert exit_code == 0
     assert emitted[0]["network_requests"] == 0
@@ -422,9 +421,7 @@ async def test_long_managed_refresh_annotates_later_source_at_stage_completion(
             return value if tz is None else value.astimezone(tz)  # type: ignore[arg-type]
 
     collection, collection_exit = _collection(["Lund"])
-    collection["results"][0]["active_snapshot_observed_at"] = (
-        source_observed_at.isoformat()
-    )
+    collection["results"][0]["active_snapshot_observed_at"] = source_observed_at.isoformat()
     store = _UniverseStore()
     emitted = _patch_managed_runtime(
         monkeypatch,
@@ -494,9 +491,7 @@ async def test_managed_refresh_accepts_only_live_parent_lock_handoff(
     )
     args = _args(tmp_path, ["Lund"])
     database = tmp_path / "db"
-    parent = RefreshRunLock(
-        production_refresh_lock_path(database, args.price_universe_cache_root)
-    )
+    parent = RefreshRunLock(production_refresh_lock_path(database, args.price_universe_cache_root))
     info = parent.acquire()
     monkeypatch.setenv(REFRESH_PARENT_LOCK_NONCE_ENV, info.owner_nonce)
     monkeypatch.setattr(grocery_cli.os, "getppid", os.getpid)
@@ -624,10 +619,7 @@ async def test_ineligible_exact_context_skips_external_and_universe_work(
                     "context_store_id": "4123",
                     "roles": ("basket", "offers"),
                     "status": "skipped",
-                    "reason": (
-                        "REVIEW source requires "
-                        "HEMKOP_ALLOW_FULL_CRAWL=true"
-                    ),
+                    "reason": ("REVIEW source requires HEMKOP_ALLOW_FULL_CRAWL=true"),
                 }
             ],
             "summary": {"targets": 0, "skipped": 1},
@@ -665,9 +657,7 @@ async def test_ineligible_exact_context_skips_external_and_universe_work(
     assert external["provider_requests"] == 0
     [universe] = emitted[0]["price_universes"]  # type: ignore[index]
     assert universe["active_unchanged"] is True
-    assert universe["build_skipped_reason"] == (
-        "requested_own_context_not_eligible"
-    )
+    assert universe["build_skipped_reason"] == ("requested_own_context_not_eligible")
     assert emitted[0]["summary"]["universe_builds"] == 0  # type: ignore[index]
 
 
@@ -994,9 +984,7 @@ async def test_managed_refresh_refuses_second_live_lock_without_collecting(
 
     monkeypatch.setattr(grocery_cli, "_run_collect_all", forbidden)
     args = _args(tmp_path, ["Lund"])
-    lock = RefreshRunLock(
-        production_refresh_lock_path(database, args.price_universe_cache_root)
-    )
+    lock = RefreshRunLock(production_refresh_lock_path(database, args.price_universe_cache_root))
     lock.acquire()
     try:
         exit_code = await grocery_cli._daily_refresh(args)
@@ -1035,9 +1023,7 @@ async def test_managed_refresh_lock_returns_degraded_when_active_lkg_is_usable(
         lambda report, **_kwargs: emitted.append(report),
     )
     args = _args(tmp_path, ["Lund"])
-    lock = RefreshRunLock(
-        production_refresh_lock_path(database, args.price_universe_cache_root)
-    )
+    lock = RefreshRunLock(production_refresh_lock_path(database, args.price_universe_cache_root))
     lock.acquire()
     try:
         exit_code = await grocery_cli._daily_refresh(args)
@@ -1164,7 +1150,9 @@ def test_status_reads_active_universe_without_provider_calls(
         staticmethod(lambda: _settings(tmp_path)),
     )
     monkeypatch.setattr(grocery_cli, "PreparedUniverseArtifactStore", lambda _root: object())
-    monkeypatch.setattr(grocery_cli, "ClosedProviderCacheArtifactStore", lambda _root: _ExternalStore())
+    monkeypatch.setattr(
+        grocery_cli, "ClosedProviderCacheArtifactStore", lambda _root: _ExternalStore()
+    )
     monkeypatch.setattr(grocery_cli, "create_database_engine", lambda _url: _Engine())
     monkeypatch.setattr(grocery_cli, "create_session_factory", lambda _engine: object())
 
@@ -1209,3 +1197,41 @@ def test_status_reads_active_universe_without_provider_calls(
     assert output[0]["status"] == "fresh"
     assert output[0]["cities"][0]["price_universe"]["universe_id"] == "universe-active"  # type: ignore[index]
     assert output[0]["live_provider_requests"] == 0
+
+
+@pytest.mark.asyncio
+async def test_failed_primat_with_expired_lkg_blocks_rebuild_and_reports_failure(
+    monkeypatch, tmp_path
+):
+    old = b'{"universe_id":"expired-six-context-universe"}'
+    store = _UniverseStore(initial={"lund": old})
+    builds = []
+    emitted = _patch_managed_runtime(
+        monkeypatch, tmp_path, store=store, collection=_collection(["Lund"]), build_calls=builds
+    )
+    stale = SimpleNamespace(usable=False, age_hours=49, snapshot_ids=("old-primat",))
+    external = _ExternalStore()
+    monkeypatch.setattr(
+        external, "resolve_active", lambda *a, **k: (tmp_path / "old.json", stale, object())
+    )
+    monkeypatch.setattr(grocery_cli, "ClosedProviderCacheArtifactStore", lambda root: external)
+
+    async def failing(**kwargs):
+        assert kwargs["lkg_cache"] is None
+        raise ValueError("Primat context LKG is stale")
+
+    monkeypatch.setattr(grocery_cli, "_collect_production_primat_cache", failing)
+    monkeypatch.setattr(
+        grocery_cli,
+        "_active_universe_status",
+        lambda *a, **k: {"city": "Lund", "active": True, "usable": False, "status": "stale"},
+    )
+    code = await grocery_cli._daily_refresh(_args(tmp_path, ["Lund"]))
+    assert code == 1
+    assert not builds and not store.activations
+    assert store.active_manifest_bytes("Lund") == old
+    row = emitted[0]["external_provider"][0]
+    assert row["status"] == "failed_no_lkg"
+    assert row["failure_diagnostic"]["message"] == "Primat context LKG is stale"
+    assert row["failure_diagnostic"]["stack"][-1]["function"] == "failing"
+    assert emitted[0]["price_universes"][0]["build_error"] == "required_external_cache_unavailable"

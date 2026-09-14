@@ -1,0 +1,347 @@
+{
+  "verified_at": "2026-09-14T12:58:42.797457+00:00",
+  "disk_manifest": {
+    "activated_at": "2026-09-14T12:54:39.142607Z",
+    "artifact_bytes": 70212322,
+    "artifact_file": "artifacts/4e5877e491fedef8a8d06864af039d434d63d5cfa7bc0f4aabb3ceeac6a3f7bb.json",
+    "artifact_sha256": "4e5877e491fedef8a8d06864af039d434d63d5cfa7bc0f4aabb3ceeac6a3f7bb",
+    "built_at": "2026-09-14T12:51:53.678870Z",
+    "canonical_index_count": 56,
+    "city": "lund",
+    "oldest_observed_at": "2026-09-13T23:31:11.110177Z",
+    "product_count": 2094,
+    "provider_requests": 0,
+    "schema_version": "active-prepared-price-universe-v1",
+    "scope_id": "city:lund",
+    "snapshot_ids": [
+      "46e0819012be4eb0ab2034e26fbd50ac",
+      "7221700ddab04bfbb875b7387d00c514",
+      "cc6a4a8cb1554b3d93fe6fdd80acb9ee",
+      "primat-request-cd623964cbf143d9a4b162542db84e3a"
+    ],
+    "universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2"
+  },
+  "contexts": [
+    {
+      "context_id": "context:coop:23eaae11c9661e68",
+      "name": "Coop Online Syd",
+      "price_context_type": "online_fulfillment",
+      "coverage": "full_online_catalog",
+      "source_context_id": "own:coop:730400",
+      "price_semantics": "online_price",
+      "source_snapshot_ids": [
+        "7221700ddab04bfbb875b7387d00c514"
+      ],
+      "observed_from": "2026-09-14T04:17:11.163055+00:00",
+      "observed_to": "2026-09-14T04:44:31.399628+00:00",
+      "age_hours": 8.692120667222222,
+      "products": 11406,
+      "usable": true
+    },
+    {
+      "context_id": "context:hemkop:3288e04edd97e349",
+      "name": "Hemköp Lund Brunnshög",
+      "price_context_type": "online_store",
+      "coverage": "full_online_catalog",
+      "source_context_id": "own:hemkop:4224",
+      "price_semantics": "online_price",
+      "source_snapshot_ids": [
+        "46e0819012be4eb0ab2034e26fbd50ac"
+      ],
+      "observed_from": "2026-09-14T01:55:51.779522+00:00",
+      "observed_to": "2026-09-14T02:06:52.361539+00:00",
+      "age_hours": 11.047504981944446,
+      "products": 5040,
+      "usable": true
+    },
+    {
+      "context_id": "context:ica:46850f1523580803",
+      "name": "Maxi ICA Stormarknad Gunnesbo, Lund",
+      "price_context_type": "physical_store",
+      "coverage": "full_catalog",
+      "source_context_id": "primat:ica:1088004",
+      "price_semantics": null,
+      "source_snapshot_ids": [
+        "primat-request-cd623964cbf143d9a4b162542db84e3a"
+      ],
+      "observed_from": "2026-09-14T12:23:06.684277+00:00",
+      "observed_to": "2026-09-14T12:23:06.684277+00:00",
+      "age_hours": 0.5933647722222222,
+      "products": 1864,
+      "usable": true
+    },
+    {
+      "context_id": "context:ica:979e70ce1f577bc4",
+      "name": "ICA Kvantum Malmborgs Clemenstorget",
+      "price_context_type": "physical_store",
+      "coverage": "full_catalog",
+      "source_context_id": "primat:ica:1004409",
+      "price_semantics": null,
+      "source_snapshot_ids": [
+        "primat-request-cd623964cbf143d9a4b162542db84e3a"
+      ],
+      "observed_from": "2026-09-14T12:23:06.684277+00:00",
+      "observed_to": "2026-09-14T12:23:06.684277+00:00",
+      "age_hours": 0.5933647722222222,
+      "products": 24,
+      "usable": true
+    },
+    {
+      "context_id": "context:willys:383650ec6ff5a636",
+      "name": "Willys Lund",
+      "price_context_type": "online_store",
+      "coverage": "full_catalog",
+      "source_context_id": "own:willys:2176",
+      "price_semantics": "online_price",
+      "source_snapshot_ids": [
+        "cc6a4a8cb1554b3d93fe6fdd80acb9ee"
+      ],
+      "observed_from": "2026-09-13T23:31:11.110177+00:00",
+      "observed_to": "2026-09-13T23:42:09.859298+00:00",
+      "age_hours": 13.45880202222222,
+      "products": 10046,
+      "usable": true
+    },
+    {
+      "context_id": "context:willys:4a671428fc484e43",
+      "name": "Willys Lund Nova",
+      "price_context_type": "online_store",
+      "coverage": "full_catalog",
+      "source_context_id": "own:willys:2354",
+      "price_semantics": "online_price",
+      "source_snapshot_ids": [
+        "cc6a4a8cb1554b3d93fe6fdd80acb9ee"
+      ],
+      "observed_from": "2026-09-13T23:49:32.022125+00:00",
+      "observed_to": "2026-09-13T23:59:20.212299+00:00",
+      "age_hours": 13.152993147777778,
+      "products": 8382,
+      "usable": true
+    }
+  ],
+  "https": {
+    "/health": {
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+        "build_id": "price-recovery-lund-20260914a"
+      }
+    },
+    "/ready": {
+      "status": 200,
+      "body": {
+        "status": "ready",
+        "database": "ok",
+        "plan_store": "ok",
+        "price_universe": {
+          "active": true,
+          "required_contexts_usable": true,
+          "missing_required_context_ids": [],
+          "usable_context_ids": [
+            "context:coop:23eaae11c9661e68",
+            "context:hemkop:3288e04edd97e349",
+            "context:ica:46850f1523580803",
+            "context:ica:979e70ce1f577bc4",
+            "context:willys:383650ec6ff5a636",
+            "context:willys:4a671428fc484e43"
+          ],
+          "requires_attention": false,
+          "warning_age_hours": 36.0,
+          "stale_age_hours": 48.0,
+          "status": "fresh",
+          "price_universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+          "built_at": "2026-09-14 12:51:53.678870+00:00",
+          "oldest_price_age_hours": 13.459,
+          "oldest_usable_price_age_hours": 13.459,
+          "hours_until_oldest_usable_stale": 34.541,
+          "usable_context_count": 6,
+          "excluded_stale_context_count": 0,
+          "excluded_stale_context_ids": [],
+          "product_count": 2094
+        },
+        "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+        "build_id": "price-recovery-lund-20260914a"
+      }
+    },
+    "/api/admin/status": {
+      "status": 200,
+      "body": {
+        "refresh": {
+          "available": true,
+          "completed_at": "2026-09-14T12:55:08.121308Z",
+          "duration_seconds": 209.642,
+          "status": "complete",
+          "exit_code": 0,
+          "sources": [
+            {
+              "provider": "own",
+              "chain": "citygross",
+              "context": "Lund",
+              "status": "not_applicable",
+              "age_hours": null,
+              "lkg_used": false,
+              "warnings": [],
+              "operational_warnings": [
+                "basket_critical_source_retry_required"
+              ],
+              "freshness": "broken",
+              "hours_until_stale": null,
+              "stale_at": null,
+              "next_expected_source_refresh": "2026-09-15T01:17:00Z",
+              "source_will_expire_before_next_refresh": false,
+              "retry_required": true,
+              "diagnostic_code": null
+            },
+            {
+              "provider": "primat",
+              "chain": null,
+              "context": "Lund",
+              "status": "provided_cache_activated",
+              "age_hours": 0.4762224497222222,
+              "lkg_used": false,
+              "warnings": [],
+              "operational_warnings": [],
+              "freshness": "fresh",
+              "hours_until_stale": 47.52377755027778,
+              "stale_at": "2026-09-16T12:23:06.885148Z",
+              "next_expected_source_refresh": "2026-09-15T01:17:00Z",
+              "source_will_expire_before_next_refresh": false,
+              "retry_required": false,
+              "diagnostic_code": null
+            }
+          ],
+          "planning_readiness": {
+            "active": true,
+            "required_contexts_usable": true,
+            "missing_required_context_ids": [],
+            "usable_context_ids": [
+              "context:coop:23eaae11c9661e68",
+              "context:hemkop:3288e04edd97e349",
+              "context:ica:46850f1523580803",
+              "context:ica:979e70ce1f577bc4",
+              "context:willys:383650ec6ff5a636",
+              "context:willys:4a671428fc484e43"
+            ],
+            "requires_attention": false,
+            "warning_age_hours": 36.0,
+            "stale_age_hours": 48.0,
+            "status": "fresh",
+            "price_universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+            "built_at": "2026-09-14T12:51:53.678870Z",
+            "oldest_price_age_hours": 13.459,
+            "oldest_usable_price_age_hours": 13.459,
+            "hours_until_oldest_usable_stale": 34.541,
+            "usable_context_count": 6,
+            "excluded_stale_context_count": 0,
+            "excluded_stale_context_ids": [],
+            "product_count": 2094
+          },
+          "price_universes": [
+            {
+              "city": "Lund",
+              "status": "fresh",
+              "usable": true,
+              "universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+              "activation_status": "active_from_prebuilt_artifact",
+              "build_error": null,
+              "build_skipped_reason": null,
+              "active_unchanged": false
+            }
+          ],
+          "schedule": "03:17 Europe/Stockholm",
+          "next_scheduled_at": "2026-09-15T03:17:00+02:00",
+          "next_scheduled_at_utc": "2026-09-15T01:17:00+00:00",
+          "runner": {
+            "available": true,
+            "status": "complete",
+            "started_at": "2026-09-14T12:48:07.053489+00:00",
+            "completed_at": "2026-09-14T12:55:25.911229+00:00",
+            "city": "Lund",
+            "refresh_exit_code": 0,
+            "exit_code": 0,
+            "error_type": null,
+            "runtime_reload": {
+              "status": "succeeded",
+              "old_price_universe_id": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46",
+              "new_price_universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+              "disk_price_universe_id": null,
+              "changed": true,
+              "pricing_projection": "miss_filled",
+              "plan_prewarm": "disabled",
+              "error_type": null,
+              "reason": null
+            },
+            "disk_manifest_rollback": {
+              "status": null,
+              "candidate_artifact_retained": null,
+              "error_type": null,
+              "reason": null
+            },
+            "runtime_activated_at_attempt": true,
+            "lkg_retained": false,
+            "lkg_or_runtime_not_activated": false,
+            "operator_action": null,
+            "runtime_identity": {
+              "active_runtime_price_universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+              "runner_old_price_universe_id": "price-universe:11e58c7ce1ae5efaf8da60d87c3f67e29adc43bde8b1fb321f7351d450715a46",
+              "runner_new_price_universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+              "disk_price_universe_id": null,
+              "active_matches_expected_disk_or_new": true,
+              "runtime_disk_id_mismatch": false
+            }
+          },
+          "source_retry": {
+            "available": false,
+            "status": "not_run",
+            "schedule": "06:17 Europe/Stockholm",
+            "next_scheduled_at": "2026-09-15T06:17:00+02:00",
+            "next_scheduled_at_utc": "2026-09-15T04:17:00+00:00"
+          },
+          "requires_attention": true,
+          "last_successful": {
+            "completed_at": "2026-09-14T12:55:08.121308Z",
+            "duration_seconds": 209.642,
+            "status": "complete",
+            "exit_code": 0,
+            "source_summary": {
+              "total": 2,
+              "healthy": 0,
+              "requiring_attention": 2,
+              "lkg_used": 0
+            }
+          }
+        },
+        "price_universe": {
+          "active": true,
+          "required_contexts_usable": true,
+          "missing_required_context_ids": [],
+          "usable_context_ids": [
+            "context:coop:23eaae11c9661e68",
+            "context:hemkop:3288e04edd97e349",
+            "context:ica:46850f1523580803",
+            "context:ica:979e70ce1f577bc4",
+            "context:willys:383650ec6ff5a636",
+            "context:willys:4a671428fc484e43"
+          ],
+          "requires_attention": false,
+          "warning_age_hours": 36.0,
+          "stale_age_hours": 48.0,
+          "status": "fresh",
+          "price_universe_id": "price-universe:927c331cabf6d188472a6e8658f7e38eacc4b71553a4455ab5a2b85e0f34f9e2",
+          "built_at": "2026-09-14T12:51:53.678870Z",
+          "oldest_price_age_hours": 13.459,
+          "oldest_usable_price_age_hours": 13.459,
+          "hours_until_oldest_usable_stale": 34.541,
+          "usable_context_count": 6,
+          "excluded_stale_context_count": 0,
+          "excluded_stale_context_ids": [],
+          "product_count": 2094
+        },
+        "build_id": "price-recovery-lund-20260914a"
+      }
+    }
+  },
+  "all_six_usable": true,
+  "artifact_hash_verified": true
+}

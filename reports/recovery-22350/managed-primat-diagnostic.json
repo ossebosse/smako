@@ -1,0 +1,123 @@
+{
+  "events": [
+    {
+      "stage": "collect_parse_validate_export",
+      "status": "PASS",
+      "transport": {
+        "mode": "bounded_primat_live",
+        "request_limit": 49,
+        "requests": 49,
+        "endpoints": {
+          "/products": 48,
+          "/stores/resolve": 1
+        },
+        "statuses": {
+          "200": 49
+        },
+        "denied_requests": 0,
+        "max_concurrency": 1
+      }
+    },
+    {
+      "stage": "rebuild_reached",
+      "complete_external_pipeline": true
+    }
+  ],
+  "external_provider": [
+    {
+      "age_hours": 0.0023255783333333336,
+      "cache_file": "5b3ded3c09d2d96624a149e2dfb2ca850f66a087a36d2515addc7e93559558b9.json",
+      "city": "Lund",
+      "context_activation": {
+        "activated": 2,
+        "cache_stores": 2,
+        "items": [
+          {
+            "grocery_context_id": "primat:ica:1004409",
+            "observed_at": "2026-09-14T12:35:04.390038Z",
+            "physical_store_id": "physical:ica:1004409",
+            "provider_store_id": "1004409",
+            "reason": null,
+            "snapshot_id": "primat-request-8986f8ece08a44b693d9599d919ea647",
+            "status": "activated"
+          },
+          {
+            "grocery_context_id": "primat:ica:1088004",
+            "observed_at": "2026-09-14T12:35:04.390038Z",
+            "physical_store_id": "physical:ica:1088004",
+            "provider_store_id": "1088004",
+            "reason": null,
+            "snapshot_id": "primat-request-8986f8ece08a44b693d9599d919ea647",
+            "status": "activated"
+          }
+        ],
+        "mappings_created": 0,
+        "provider_requests": 0,
+        "rejected": 0,
+        "snapshot_ids": [
+          "primat-request-8986f8ece08a44b693d9599d919ea647"
+        ],
+        "status": "activated"
+      },
+      "context_failures": 0,
+      "context_lkg_used": 0,
+      "context_validation": {
+        "activated": 2,
+        "cache_stores": 2,
+        "items": [
+          {
+            "grocery_context_id": "primat:ica:1004409",
+            "observed_at": "2026-09-14T12:35:04.390038Z",
+            "physical_store_id": "physical:ica:1004409",
+            "provider_store_id": "1004409",
+            "reason": null,
+            "snapshot_id": "primat-request-8986f8ece08a44b693d9599d919ea647",
+            "status": "activated"
+          },
+          {
+            "grocery_context_id": "primat:ica:1088004",
+            "observed_at": "2026-09-14T12:35:04.390038Z",
+            "physical_store_id": "physical:ica:1088004",
+            "provider_store_id": "1088004",
+            "reason": null,
+            "snapshot_id": "primat-request-8986f8ece08a44b693d9599d919ea647",
+            "status": "activated"
+          }
+        ],
+        "mappings_created": 0,
+        "provider_requests": 0,
+        "rejected": 0,
+        "snapshot_ids": [
+          "primat-request-8986f8ece08a44b693d9599d919ea647"
+        ],
+        "status": "activated"
+      },
+      "contexts": 2,
+      "credentials_included": "[REDACTED]",
+      "error_type": null,
+      "freshness": "fresh",
+      "hours_until_stale": 47.997674421666666,
+      "lkg_used": false,
+      "next_expected_source_refresh": "2026-09-15T01:17:00Z",
+      "postal_code": "22350",
+      "products": 1888,
+      "provider": "primat",
+      "provider_requests": 49,
+      "retry_required": false,
+      "roles": [
+        "basket"
+      ],
+      "runtime_seconds": 9.209,
+      "snapshot_age_hours": 0.0023255783333333336,
+      "snapshot_ids": [
+        "primat-request-8986f8ece08a44b693d9599d919ea647"
+      ],
+      "source_will_expire_before_next_refresh": false,
+      "stale_at": "2026-09-16T12:35:04.600433Z",
+      "status": "refreshed"
+    }
+  ],
+  "isolation": true,
+  "production_activation": false,
+  "diagnostic_exit_code": 1
+}

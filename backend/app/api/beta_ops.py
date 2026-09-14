@@ -392,7 +392,9 @@ def ready(request: Request) -> JSONResponse:
     plans_ok, plan_status = plan_store_ready(settings.plan_store_path)
     prices = active_price_status(settings)
     prices_ok = (not settings.price_universe_required) or (
-        bool(prices.get("active")) and prices.get("status") not in {"stale", "broken"}
+        bool(prices.get("active"))
+        and prices.get("status") not in {"stale", "broken"}
+        and prices.get("required_contexts_usable", True)
     )
     is_ready = db_ok and plans_ok and prices_ok
     return JSONResponse(
@@ -421,9 +423,7 @@ def create_feedback(
 ) -> FeedbackResponse:
     settings = _settings(request)
     row = BetaFeedbackModel(
-        actor_hash=pseudonymous_actor(
-            _session_id(request, payload.anonymous_session_id), settings
-        ),
+        actor_hash=pseudonymous_actor(_session_id(request, payload.anonymous_session_id), settings),
         category=payload.category,
         message=payload.message,
         page_context=payload.page_context,
@@ -533,6 +533,7 @@ def erase_anonymous_beta_data(
     beta_actor_hash = pseudonymous_actor(local_session_id, settings)
     community_actor_hash = pseudonymous_actor_hash(local_session_id)
     from app.api.plan import _plan_actor_hash
+
     owner_actor_hash = _plan_actor_hash(request, settings)
     if beta_actor_hash is None or owner_actor_hash is None:
         raise HTTPException(
@@ -546,9 +547,7 @@ def erase_anonymous_beta_data(
 
     feedback_rows = list(
         session.scalars(
-            select(BetaFeedbackModel).where(
-                BetaFeedbackModel.actor_hash == beta_actor_hash
-            )
+            select(BetaFeedbackModel).where(BetaFeedbackModel.actor_hash == beta_actor_hash)
         )
     )
     analytics_rows = list(
@@ -560,9 +559,7 @@ def erase_anonymous_beta_data(
     )
     frontend_rows = list(
         session.scalars(
-            select(FrontendErrorModel).where(
-                FrontendErrorModel.actor_hash == beta_actor_hash
-            )
+            select(FrontendErrorModel).where(FrontendErrorModel.actor_hash == beta_actor_hash)
         )
     )
     metric_rows = (
@@ -618,10 +615,14 @@ def erase_anonymous_beta_data(
         )
 
     from app.services.personal_store import PersonalStore
+
     private_state_id = PersonalStore(store).read(owner_actor_hash)["id"]
     if private_state_id:
-        suppression_events_added += int(_add_suppression(
-            session, target_kind="private_state", target_record_id=private_state_id))
+        suppression_events_added += int(
+            _add_suppression(
+                session, target_kind="private_state", target_record_id=private_state_id
+            )
+        )
 
     for row in community_rows:
         # Evidence facts remain append-only. This narrowly scoped Core update
@@ -643,9 +644,7 @@ def erase_anonymous_beta_data(
         session.execute(
             update(CommunityReceiptIngestionModel)
             .where(CommunityReceiptIngestionModel.id == row.id)
-            .values(
-                actor_hash=_row_tombstone(settings, "receipt_ingestion", row.id)
-            )
+            .values(actor_hash=_row_tombstone(settings, "receipt_ingestion", row.id))
             .execution_options(synchronize_session=False)
         )
     for rows in (feedback_rows, analytics_rows, frontend_rows, metric_rows):

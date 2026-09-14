@@ -66,26 +66,38 @@ def _scope_id(settings: Settings) -> str:
     return f"city:{city}"
 
 
-def active_price_status(settings: Settings) -> dict[str, Any]:
+def active_price_status(settings: Settings, *, now: datetime | None = None) -> dict[str, Any]:
     """Return sanitized in-memory universe status without provider work."""
 
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_active(_scope_id(settings))
     if prepared is None:
         return {"active": False, "status": "unavailable"}
+    evaluated_at = now or datetime.now(UTC)
+    usable, _stale, ages = prepared._context_partition(
+        now=evaluated_at, stale_age_hours=settings.max_price_age_hours
+    )
+    missing = sorted(set(settings.price_universe_required_context_ids) - set(usable))
     status = prepared.status(
+        now=evaluated_at,
         warning_age_hours=settings.price_age_warning_hours,
         stale_age_hours=settings.max_price_age_hours,
     )
     return {
         "active": True,
+        "required_contexts_usable": not missing,
+        "missing_required_context_ids": missing,
+        "usable_context_ids": usable,
+        "requires_attention": bool(missing)
+        or status.status in {"stale", "broken"}
+        or any(age >= settings.price_age_warning_hours for age in ages.values()),
+        "warning_age_hours": settings.price_age_warning_hours,
+        "stale_age_hours": settings.max_price_age_hours,
         "status": status.status,
         "price_universe_id": status.price_universe_id,
         "built_at": status.built_at,
         "oldest_price_age_hours": status.oldest_price_age_hours,
         "oldest_usable_price_age_hours": status.oldest_usable_price_age_hours,
-        "hours_until_oldest_usable_stale": (
-            status.hours_until_oldest_usable_stale
-        ),
+        "hours_until_oldest_usable_stale": (status.hours_until_oldest_usable_stale),
         "usable_context_count": status.usable_context_count,
         "excluded_stale_context_count": status.excluded_stale_context_count,
         "excluded_stale_context_ids": status.excluded_stale_context_ids,
@@ -154,9 +166,7 @@ class SlidingWindowRateLimiter:
         self._max_keys = max_keys
         self._sweep_every = sweep_every
         self._operations = 0
-        self._events: OrderedDict[
-            tuple[str, str], tuple[deque[float], int]
-        ] = OrderedDict()
+        self._events: OrderedDict[tuple[str, str], tuple[deque[float], int]] = OrderedDict()
 
     @property
     def key_count(self) -> int:
@@ -356,9 +366,7 @@ class BetaRequestMiddleware(BaseHTTPMiddleware):
     def __init__(self, app: Any, *, settings_factory: Callable[[], Settings]) -> None:
         super().__init__(app)
         self.settings_factory = settings_factory
-        self.limiter = SlidingWindowRateLimiter(
-            max_keys=settings_factory().rate_limit_max_keys
-        )
+        self.limiter = SlidingWindowRateLimiter(max_keys=settings_factory().rate_limit_max_keys)
 
     async def dispatch(
         self,
@@ -368,9 +376,7 @@ class BetaRequestMiddleware(BaseHTTPMiddleware):
         settings = self.settings_factory()
         supplied_request_id = request.headers.get("X-Request-ID", "")
         request_id = (
-            supplied_request_id
-            if _REQUEST_ID.fullmatch(supplied_request_id)
-            else uuid4().hex
+            supplied_request_id if _REQUEST_ID.fullmatch(supplied_request_id) else uuid4().hex
         )
         supplied_session = request.headers.get("X-Anonymous-Session-ID", "")
         cookie_session = request.cookies.get("beta_session", "")
@@ -573,20 +579,12 @@ def _refresh_runner_status(path: Path) -> dict[str, Any]:
         runtime_status = "succeeded"
     runtime_allowlist = {
         "status": runtime_status or "unknown",
-        "old_price_universe_id": _safe_status_string(
-            runtime.get("old_price_universe_id")
-        ),
+        "old_price_universe_id": _safe_status_string(runtime.get("old_price_universe_id")),
         "new_price_universe_id": new_id,
         "disk_price_universe_id": disk_id,
-        "changed": runtime.get("changed")
-        if isinstance(runtime.get("changed"), bool)
-        else None,
-        "pricing_projection": _safe_status_string(
-            runtime.get("pricing_projection"), max_length=64
-        ),
-        "plan_prewarm": _safe_status_string(
-            runtime.get("plan_prewarm"), max_length=64
-        ),
+        "changed": runtime.get("changed") if isinstance(runtime.get("changed"), bool) else None,
+        "pricing_projection": _safe_status_string(runtime.get("pricing_projection"), max_length=64),
+        "plan_prewarm": _safe_status_string(runtime.get("plan_prewarm"), max_length=64),
         "error_type": _safe_status_string(runtime.get("error_type"), max_length=64),
         "reason": _safe_status_string(runtime.get("reason"), max_length=64),
     }
@@ -597,16 +595,12 @@ def _refresh_runner_status(path: Path) -> dict[str, Any]:
         "candidate_artifact_retained": rollback.get("candidate_artifact_retained")
         if isinstance(rollback.get("candidate_artifact_retained"), bool)
         else None,
-        "error_type": _safe_status_string(
-            rollback.get("error_type"), max_length=64
-        ),
+        "error_type": _safe_status_string(rollback.get("error_type"), max_length=64),
         "reason": _safe_status_string(rollback.get("reason"), max_length=64),
     }
     exit_code = payload.get("exit_code")
     exit_code = (
-        exit_code
-        if isinstance(exit_code, int) and not isinstance(exit_code, bool)
-        else None
+        exit_code if isinstance(exit_code, int) and not isinstance(exit_code, bool) else None
     )
     refresh_exit = payload.get("refresh_exit_code")
     refresh_exit = (
@@ -648,9 +642,7 @@ def _source_retry_status(path: Path) -> dict[str, Any]:
         return {"available": False, "status": "not_run"}
     except (OSError, json.JSONDecodeError):
         return {"available": False, "status": "invalid_status"}
-    if not isinstance(payload, dict) or payload.get("schema_version") != (
-        "source-retry-runner-v1"
-    ):
+    if not isinstance(payload, dict) or payload.get("schema_version") != ("source-retry-runner-v1"):
         return {"available": False, "status": "invalid_status"}
     status = _safe_status_string(payload.get("status"), max_length=64)
     exit_code = payload.get("exit_code")
@@ -658,18 +650,12 @@ def _source_retry_status(path: Path) -> dict[str, Any]:
         "available": True,
         "status": status or "unknown",
         "started_at": _safe_status_string(payload.get("started_at"), max_length=64),
-        "completed_at": _safe_status_string(
-            payload.get("completed_at"), max_length=64
-        ),
+        "completed_at": _safe_status_string(payload.get("completed_at"), max_length=64),
         "exit_code": (
-            exit_code
-            if isinstance(exit_code, int) and not isinstance(exit_code, bool)
-            else None
+            exit_code if isinstance(exit_code, int) and not isinstance(exit_code, bool) else None
         ),
         "reason": _safe_status_string(payload.get("reason"), max_length=96),
-        "error_type": _safe_status_string(
-            payload.get("error_type"), max_length=64
-        ),
+        "error_type": _safe_status_string(payload.get("error_type"), max_length=64),
     }
 
 
@@ -679,9 +665,7 @@ def _runner_runtime_identity(
 ) -> dict[str, Any]:
     runtime = runner.get("runtime_reload")
     runtime = runtime if isinstance(runtime, dict) else {}
-    expected = runtime.get("disk_price_universe_id") or runtime.get(
-        "new_price_universe_id"
-    )
+    expected = runtime.get("disk_price_universe_id") or runtime.get("new_price_universe_id")
     active = active_price_status(settings)
     active_id = active.get("price_universe_id") if active.get("active") else None
     comparable = isinstance(expected, str) and isinstance(active_id, str)
@@ -690,9 +674,7 @@ def _runner_runtime_identity(
         "runner_old_price_universe_id": runtime.get("old_price_universe_id"),
         "runner_new_price_universe_id": runtime.get("new_price_universe_id"),
         "disk_price_universe_id": runtime.get("disk_price_universe_id"),
-        "active_matches_expected_disk_or_new": (active_id == expected)
-        if comparable
-        else None,
+        "active_matches_expected_disk_or_new": (active_id == expected) if comparable else None,
         "runtime_disk_id_mismatch": (active_id != expected) if comparable else None,
     }
 
@@ -711,18 +693,14 @@ def _refresh_report_summary(payload: dict[str, Any]) -> dict[str, Any]:
     status = _safe_status_string(summary.get("status"), max_length=64)
     exit_code = summary.get("exit_code")
     exit_code = (
-        exit_code
-        if isinstance(exit_code, int) and not isinstance(exit_code, bool)
-        else None
+        exit_code if isinstance(exit_code, int) and not isinstance(exit_code, bool) else None
     )
     timing = payload.get("timing_seconds")
     timing = timing if isinstance(timing, dict) else {}
     duration = timing.get("total")
     duration = (
         float(duration)
-        if isinstance(duration, (int, float))
-        and not isinstance(duration, bool)
-        and duration >= 0
+        if isinstance(duration, (int, float)) and not isinstance(duration, bool) and duration >= 0
         else None
     )
     own = payload.get("own_collection")
@@ -734,13 +712,10 @@ def _refresh_report_summary(payload: dict[str, Any]) -> dict[str, Any]:
     rows = [row for row in [*own_rows, *external_rows] if isinstance(row, dict)]
     healthy_statuses = {"complete", "fresh", "healthy", "success", "succeeded"}
     healthy = sum(
-        _safe_status_string(row.get("status"), max_length=64) in healthy_statuses
-        for row in rows
+        _safe_status_string(row.get("status"), max_length=64) in healthy_statuses for row in rows
     )
     return {
-        "completed_at": _safe_status_string(
-            payload.get("completed_at"), max_length=64
-        ),
+        "completed_at": _safe_status_string(payload.get("completed_at"), max_length=64),
         "duration_seconds": duration,
         "status": status,
         "exit_code": exit_code,
@@ -748,10 +723,7 @@ def _refresh_report_summary(payload: dict[str, Any]) -> dict[str, Any]:
             "total": len(rows),
             "healthy": healthy,
             "requiring_attention": len(rows) - healthy,
-            "lkg_used": sum(
-                bool(row.get("lkg_used") or row.get("fallback_used"))
-                for row in rows
-            ),
+            "lkg_used": sum(bool(row.get("lkg_used") or row.get("fallback_used")) for row in rows),
         },
     }
 
@@ -782,6 +754,10 @@ def latest_refresh_status(
     next_local, next_utc = _next_daily_schedule(
         settings.daily_refresh_schedule,
         now=evaluated_at,
+    )
+    prices = active_price_status(settings, now=evaluated_at)
+    price_attention = settings.price_universe_required and (
+        not prices.get("active") or prices.get("requires_attention", False)
     )
     runner = _refresh_runner_status(settings.refresh_runner_status_path)
     runner["runtime_identity"] = _runner_runtime_identity(runner, settings)
@@ -817,8 +793,9 @@ def latest_refresh_status(
             "runner": runner,
             "source_retry": source_retry,
             "requires_attention": (
-                runner_requires_attention or source_retry_requires_attention
+                runner_requires_attention or source_retry_requires_attention or price_attention
             ),
+            "planning_readiness": prices,
             "last_successful": None,
         }
     path = candidates[0]
@@ -850,16 +827,12 @@ def latest_refresh_status(
             "freshness": row.get("freshness"),
             "hours_until_stale": row.get("hours_until_stale"),
             "stale_at": row.get("stale_at"),
-            "next_expected_source_refresh": row.get(
-                "next_expected_source_refresh"
-            ),
+            "next_expected_source_refresh": row.get("next_expected_source_refresh"),
             "source_will_expire_before_next_refresh": bool(
                 row.get("source_will_expire_before_next_refresh")
             ),
             "retry_required": bool(row.get("retry_required")),
-            "diagnostic_code": _safe_status_string(
-                row.get("diagnostic_code"), max_length=96
-            ),
+            "diagnostic_code": _safe_status_string(row.get("diagnostic_code"), max_length=96),
         }
         for row in [*own_rows, *external_rows]
         if isinstance(row, dict)
@@ -874,6 +847,24 @@ def latest_refresh_status(
         "status": summary["status"],
         "exit_code": summary["exit_code"],
         "sources": sources,
+        "planning_readiness": prices,
+        "price_universes": [
+            {
+                key: row.get(key)
+                for key in (
+                    "city",
+                    "status",
+                    "usable",
+                    "universe_id",
+                    "activation_status",
+                    "build_error",
+                    "build_skipped_reason",
+                    "active_unchanged",
+                )
+            }
+            for row in payload.get("price_universes", [])
+            if isinstance(row, dict)
+        ],
         "schedule": settings.daily_refresh_schedule,
         "next_scheduled_at": next_local,
         "next_scheduled_at_utc": next_utc,
@@ -882,6 +873,12 @@ def latest_refresh_status(
         "requires_attention": (
             runner_requires_attention
             or source_retry_requires_attention
+            or price_attention
+            or any(
+                row.get("build_error")
+                for row in payload.get("price_universes", [])
+                if isinstance(row, dict)
+            )
             or source_failed
             or source_requires_retry
         ),
@@ -903,9 +900,7 @@ def admin_aggregates(session: Session, settings: Settings) -> dict[str, Any]:
     since = datetime.now(tz=UTC) - timedelta(hours=24)
     metrics = list(
         session.scalars(
-            select(BetaRequestMetricModel).where(
-                BetaRequestMetricModel.created_at >= since
-            )
+            select(BetaRequestMetricModel).where(BetaRequestMetricModel.created_at >= since)
         )
     )
     planner = [
@@ -918,17 +913,15 @@ def admin_aggregates(session: Session, settings: Settings) -> dict[str, Any]:
     failures = len(planner) - successes
     analytics = list(
         session.scalars(
-            select(ProductAnalyticsEventModel).where(
-                ProductAnalyticsEventModel.created_at >= since
-            )
+            select(ProductAnalyticsEventModel).where(ProductAnalyticsEventModel.created_at >= since)
         )
     )
     unique_sessions = len({row.actor_hash for row in analytics if row.actor_hash})
     feedback_count = int(
         session.scalar(
-            select(func.count()).select_from(BetaFeedbackModel).where(
-                BetaFeedbackModel.created_at >= since
-            )
+            select(func.count())
+            .select_from(BetaFeedbackModel)
+            .where(BetaFeedbackModel.created_at >= since)
         )
         or 0
     )
@@ -953,9 +946,9 @@ def admin_aggregates(session: Session, settings: Settings) -> dict[str, Any]:
     ]
     community_count = int(
         session.scalar(
-            select(func.count()).select_from(CommunityEvidenceObservationModel).where(
-                CommunityEvidenceObservationModel.created_at >= since
-            )
+            select(func.count())
+            .select_from(CommunityEvidenceObservationModel)
+            .where(CommunityEvidenceObservationModel.created_at >= since)
         )
         or 0
     )
@@ -967,9 +960,7 @@ def admin_aggregates(session: Session, settings: Settings) -> dict[str, Any]:
             "plan_id": row.plan_id,
         }
         for row in session.scalars(
-            select(FrontendErrorModel)
-            .order_by(FrontendErrorModel.created_at.desc())
-            .limit(20)
+            select(FrontendErrorModel).order_by(FrontendErrorModel.created_at.desc()).limit(20)
         )
     ]
     source_health = [
@@ -982,7 +973,9 @@ def admin_aggregates(session: Session, settings: Settings) -> dict[str, Any]:
             "active_snapshot_id": row.active_snapshot_id,
             "warnings": row.warnings,
         }
-        for row in session.scalars(select(ConnectorHealthModel).order_by(ConnectorHealthModel.chain))
+        for row in session.scalars(
+            select(ConnectorHealthModel).order_by(ConnectorHealthModel.chain)
+        )
     ]
     recent_request_errors = [
         {
@@ -1029,9 +1022,7 @@ def admin_aggregates(session: Session, settings: Settings) -> dict[str, Any]:
             "failure_rate": round(failures / len(planner), 4) if planner else None,
             "median_latency_ms": round(median(latencies), 3) if latencies else None,
             "p95_latency_ms": _percentile(latencies, 0.95),
-            "average_total": round(sum(plan_totals) / len(plan_totals), 2)
-            if plan_totals
-            else None,
+            "average_total": round(sum(plan_totals) / len(plan_totals), 2) if plan_totals else None,
             "average_price_per_portion": round(sum(portions) / len(portions), 2)
             if portions
             else None,
@@ -1040,9 +1031,7 @@ def admin_aggregates(session: Session, settings: Settings) -> dict[str, Any]:
         "community_reports": community_count,
         "feedback": feedback_count,
         "recent_feedback": recent_feedback,
-        "report_rate_per_plan": round(community_count / successes, 4)
-        if successes
-        else None,
+        "report_rate_per_plan": round(community_count / successes, 4) if successes else None,
         "recent_frontend_errors": recent_errors,
         "recent_request_errors": recent_request_errors,
         "source_health": source_health,
@@ -1108,9 +1097,9 @@ async def reload_active_price_universe(
     staging_manager_factory = staging_manager_factory or PreparedPriceUniverseManager
     projection_builder = projection_builder or precompute_pricing_semantics
     prewarm_runner = prewarm_runner or prewarm_active_price_universe
-    artifact = artifact_store_factory(
-        settings.price_universe_cache_root
-    ).resolve_active_artifact(settings.price_universe_city)
+    artifact = artifact_store_factory(settings.price_universe_cache_root).resolve_active_artifact(
+        settings.price_universe_city
+    )
     if artifact is None:
         raise RuntimeError("active PriceUniverse artifact is unavailable")
     staging_manager = staging_manager_factory()

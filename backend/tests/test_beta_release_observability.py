@@ -42,9 +42,7 @@ from grocery_data.app.storage.models import (
 
 def _application(tmp_path: Path, **updates: Any) -> tuple[FastAPI, Any, Settings]:
     database = tmp_path / "beta.sqlite"
-    engine = create_database_engine(
-        f"sqlite+pysqlite:///{database.resolve().as_posix()}"
-    )
+    engine = create_database_engine(f"sqlite+pysqlite:///{database.resolve().as_posix()}")
     create_schema(engine)
     factory = create_session_factory(engine)
     values: dict[str, Any] = {
@@ -109,7 +107,7 @@ def test_ready_keeps_fresh_contexts_available_when_one_source_is_excluded(
     monkeypatch.setattr(
         beta_ops_module,
         "active_price_status",
-        lambda _settings: {
+        lambda _settings, **_kwargs: {
             "active": True,
             "status": "degraded",
             "price_universe_id": "pu-partial-freshness",
@@ -270,8 +268,7 @@ def test_frontend_error_redacts_credentials_and_url_queries(tmp_path: Path) -> N
             "route": "/plans/result",
             "error_code": "render_failed",
             "message": (
-                "Failed https://example.test/path?token=abc "
-                "Authorization: Bearer super-secret"
+                "Failed https://example.test/path?token=abc Authorization: Bearer super-secret"
             ),
         },
     )
@@ -610,9 +607,7 @@ def test_admin_status_is_protected_and_aggregated(tmp_path: Path) -> None:
     assert payload["refresh"]["status"] == "complete"
     assert payload["refresh"]["sources"][0]["context"] == "own:hemkop:4123"
     assert payload["refresh"]["runner"]["status"] == "failed"
-    assert payload["refresh"]["runner"]["runtime_reload"]["error_type"] == (
-        "RuntimeError"
-    )
+    assert payload["refresh"]["runner"]["runtime_reload"]["error_type"] == ("RuntimeError")
     assert payload["refresh"]["runner"]["lkg_retained"] is True
     assert payload["refresh"]["runner"]["disk_manifest_rollback"] == {
         "status": "restored_previous",
@@ -739,7 +734,7 @@ def test_deferred_runtime_reload_is_degraded_and_exposes_safe_id_mismatch(
     monkeypatch.setattr(
         beta_observability_module,
         "active_price_status",
-        lambda _settings: {
+        lambda _settings, **_kwargs: {
             "active": True,
             "status": "fresh",
             "price_universe_id": "price-universe:old",
@@ -762,15 +757,9 @@ def test_deferred_runtime_reload_is_degraded_and_exposes_safe_id_mismatch(
     assert parsed["lkg_or_runtime_not_activated"] is True
     assert parsed["operator_action"] == "restart_or_retry_runtime_reload"
     assert parsed["runtime_reload"]["reason"] == "app_unavailable"
-    assert parsed["disk_manifest_rollback"]["reason"] == (
-        "candidate_retained_for_restart"
-    )
-    assert parsed["runtime_identity"]["active_runtime_price_universe_id"] == (
-        "price-universe:old"
-    )
-    assert parsed["runtime_identity"]["disk_price_universe_id"] == (
-        "price-universe:new"
-    )
+    assert parsed["disk_manifest_rollback"]["reason"] == ("candidate_retained_for_restart")
+    assert parsed["runtime_identity"]["active_runtime_price_universe_id"] == ("price-universe:old")
+    assert parsed["runtime_identity"]["disk_price_universe_id"] == ("price-universe:new")
     assert parsed["runtime_identity"]["runtime_disk_id_mismatch"] is True
     assert "must-not-leak" not in json.dumps(status)
 
@@ -1053,3 +1042,24 @@ def test_production_disables_interactive_api_documentation() -> None:
         "redoc_url": "/redoc",
         "openapi_url": "/openapi.json",
     }
+
+
+def test_ready_rejects_partial_universe_when_missing_context_is_required(tmp_path, monkeypatch):
+    application, _, _ = _application(tmp_path, price_universe_required=True,
+        price_universe_required_context_ids=("required",))
+    monkeypatch.setattr(beta_ops_module, "active_price_status", lambda settings: {
+        "active": True, "status": "degraded", "required_contexts_usable": False,
+        "missing_required_context_ids": ["required"]})
+    client = TestClient(application)
+    assert client.get("/health").status_code == 200
+    assert client.get("/ready").status_code == 503
+
+
+def test_refresh_monitor_surfaces_current_aging_without_another_refresh(tmp_path, monkeypatch):
+    settings = Settings(price_universe_required=True, refresh_report_dir=tmp_path)
+    monkeypatch.setattr(beta_observability_module, "active_price_status", lambda *a, **k: {
+        "active": True, "status": "aging", "requires_attention": True,
+        "required_contexts_usable": True})
+    result = latest_refresh_status(settings)
+    assert result["requires_attention"]
+    assert result["planning_readiness"]["status"] == "aging"

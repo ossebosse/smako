@@ -143,9 +143,10 @@ class ActivePreparedUniverseManifest(BaseModel):
             raise ValueError("manifest city and scope disagree")
         if tuple(self.snapshot_ids) != tuple(sorted(set(self.snapshot_ids))):
             raise ValueError("manifest snapshot lineage must be unique and sorted")
-        if PurePosixPath(self.artifact_file).is_absolute() or ".." in PurePosixPath(
-            self.artifact_file
-        ).parts:
+        if (
+            PurePosixPath(self.artifact_file).is_absolute()
+            or ".." in PurePosixPath(self.artifact_file).parts
+        ):
             raise ValueError("manifest artifact path must stay within its cache root")
         return self
 
@@ -416,6 +417,9 @@ class PreparedUniverseArtifactRefreshHook:
 def validate_backend_prepared_universe_artifact(
     payload: Mapping[str, Any],
     city: str,
+    *,
+    required_context_ids: tuple[str, ...] = (),
+    max_price_age_hours: float = 48.0,
 ) -> PreparedUniverseArtifactMetadata:
     """Validate with the authoritative backend model, imported only on demand.
 
@@ -431,6 +435,15 @@ def validate_backend_prepared_universe_artifact(
 
     artifact = PreparedPriceUniverseArtifact.model_validate(payload)
     prepared = artifact.restore()
+    if required_context_ids:
+        usable, _stale, _ages = prepared._context_partition(
+            now=datetime.now(UTC), stale_age_hours=max_price_age_hours
+        )
+        missing = set(required_context_ids) - set(usable)
+        if missing:
+            raise ValueError(
+                "prepared universe lacks required usable contexts: " + ",".join(sorted(missing))
+            )
     basket = BasketOptimizer(memoize_store_subsets=True).optimize(
         PRECOMPUTED_CANONICAL_REQUIREMENTS,
         prepared.economic_pool.matched_candidates_by_name,
@@ -438,9 +451,7 @@ def validate_backend_prepared_universe_artifact(
         max_stores=3,
         calculate_savings=False,
     )
-    if sum(len(store.items) for store in basket.stores) != len(
-        PRECOMPUTED_CANONICAL_REQUIREMENTS
-    ):
+    if sum(len(store.items) for store in basket.stores) != len(PRECOMPUTED_CANONICAL_REQUIREMENTS):
         raise ValueError("prepared universe representative basket is incomplete")
     universe = artifact.universe
     expected_scope = _scope_id(city)

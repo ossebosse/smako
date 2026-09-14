@@ -56,12 +56,8 @@ class Settings:
     secret_key: str | None = field(default=None, repr=False)
     beta_admin_token: str | None = field(default=None, repr=False)
     refresh_report_dir: Path = Path("reports/refresh")
-    refresh_runner_status_path: Path = Path(
-        "reports/operations/refresh-runner-status.json"
-    )
-    source_retry_status_path: Path = Path(
-        "reports/operations/source-retry-status.json"
-    )
+    refresh_runner_status_path: Path = Path("reports/operations/refresh-runner-status.json")
+    source_retry_status_path: Path = Path("reports/operations/source-retry-status.json")
     daily_refresh_schedule: str | None = None
     coop_retry_schedule: str | None = None
     planner_rate_limit_requests: int = 8
@@ -98,6 +94,7 @@ class Settings:
     own_grocery_base_url: str | None = None
     own_grocery_max_age_hours: float = 48.0
     own_grocery_include_offers_only: bool = False
+    price_universe_required_context_ids: tuple[str, ...] = ()
     max_price_age_hours: float = 48.0
     price_age_warning_hours: float = 36.0
     price_universe_required: bool = False
@@ -261,15 +258,11 @@ class Settings:
             if (
                 self.beta_admin_token is None
                 or len(self.beta_admin_token.encode("utf-8")) < 32
-                or self.beta_admin_token.casefold().startswith(
-                    ("replace-with", "change-me")
-                )
+                or self.beta_admin_token.casefold().startswith(("replace-with", "change-me"))
             ):
                 raise ValueError("BETA_ADMIN_TOKEN must contain at least 32 bytes in production")
             if hmac.compare_digest(self.secret_key, self.beta_admin_token):
-                raise ValueError(
-                    "SECRET_KEY and BETA_ADMIN_TOKEN must be different in production"
-                )
+                raise ValueError("SECRET_KEY and BETA_ADMIN_TOKEN must be different in production")
             if not re.fullmatch(
                 r"\d+\.\d+\.\d+(?:-[0-9A-Za-z][0-9A-Za-z.-]*)?"
                 r"(?:\+[0-9A-Za-z][0-9A-Za-z.-]*)?",
@@ -279,7 +272,8 @@ class Settings:
             normalized_build = self.build_id.strip()
             if (
                 not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{5,127}", normalized_build)
-                or normalized_build.casefold() in {
+                or normalized_build.casefold()
+                in {
                     "local",
                     "unknown",
                     "default",
@@ -298,9 +292,7 @@ class Settings:
             public_base_url=(os.getenv("PUBLIC_BASE_URL", "").strip() or None),
             secret_key=(os.getenv("SECRET_KEY", "").strip() or None),
             beta_admin_token=(os.getenv("BETA_ADMIN_TOKEN", "").strip() or None),
-            refresh_report_dir=Path(
-                os.getenv("REFRESH_REPORT_DIR", "reports/refresh")
-            ),
+            refresh_report_dir=Path(os.getenv("REFRESH_REPORT_DIR", "reports/refresh")),
             refresh_runner_status_path=Path(
                 os.getenv(
                     "REFRESH_RUNNER_STATUS_PATH",
@@ -313,27 +305,15 @@ class Settings:
                     "reports/operations/source-retry-status.json",
                 )
             ),
-            daily_refresh_schedule=(
-                os.getenv("DAILY_REFRESH_SCHEDULE", "").strip() or None
-            ),
-            coop_retry_schedule=(
-                os.getenv("COOP_RETRY_SCHEDULE", "").strip() or None
-            ),
-            planner_rate_limit_requests=int(
-                os.getenv("PLANNER_RATE_LIMIT_REQUESTS", "8")
-            ),
+            daily_refresh_schedule=(os.getenv("DAILY_REFRESH_SCHEDULE", "").strip() or None),
+            coop_retry_schedule=(os.getenv("COOP_RETRY_SCHEDULE", "").strip() or None),
+            planner_rate_limit_requests=int(os.getenv("PLANNER_RATE_LIMIT_REQUESTS", "8")),
             planner_rate_limit_window_seconds=int(
                 os.getenv("PLANNER_RATE_LIMIT_WINDOW_SECONDS", "60")
             ),
-            planner_max_concurrent_requests=int(
-                os.getenv("PLANNER_MAX_CONCURRENT_REQUESTS", "1")
-            ),
-            planner_max_queued_requests=int(
-                os.getenv("PLANNER_MAX_QUEUED_REQUESTS", "4")
-            ),
-            feedback_rate_limit_requests=int(
-                os.getenv("FEEDBACK_RATE_LIMIT_REQUESTS", "10")
-            ),
+            planner_max_concurrent_requests=int(os.getenv("PLANNER_MAX_CONCURRENT_REQUESTS", "1")),
+            planner_max_queued_requests=int(os.getenv("PLANNER_MAX_QUEUED_REQUESTS", "4")),
+            feedback_rate_limit_requests=int(os.getenv("FEEDBACK_RATE_LIMIT_REQUESTS", "10")),
             feedback_rate_limit_window_seconds=int(
                 os.getenv("FEEDBACK_RATE_LIMIT_WINDOW_SECONDS", "3600")
             ),
@@ -343,21 +323,15 @@ class Settings:
             frontend_error_rate_limit_window_seconds=int(
                 os.getenv("FRONTEND_ERROR_RATE_LIMIT_WINDOW_SECONDS", "3600")
             ),
-            analytics_rate_limit_requests=int(
-                os.getenv("ANALYTICS_RATE_LIMIT_REQUESTS", "180")
-            ),
+            analytics_rate_limit_requests=int(os.getenv("ANALYTICS_RATE_LIMIT_REQUESTS", "180")),
             analytics_rate_limit_window_seconds=int(
                 os.getenv("ANALYTICS_RATE_LIMIT_WINDOW_SECONDS", "3600")
             ),
-            community_rate_limit_requests=int(
-                os.getenv("COMMUNITY_RATE_LIMIT_REQUESTS", "30")
-            ),
+            community_rate_limit_requests=int(os.getenv("COMMUNITY_RATE_LIMIT_REQUESTS", "30")),
             community_rate_limit_window_seconds=int(
                 os.getenv("COMMUNITY_RATE_LIMIT_WINDOW_SECONDS", "3600")
             ),
-            receipt_rate_limit_requests=int(
-                os.getenv("RECEIPT_RATE_LIMIT_REQUESTS", "8")
-            ),
+            receipt_rate_limit_requests=int(os.getenv("RECEIPT_RATE_LIMIT_REQUESTS", "8")),
             receipt_rate_limit_window_seconds=int(
                 os.getenv("RECEIPT_RATE_LIMIT_WINDOW_SECONDS", "3600")
             ),
@@ -398,6 +372,11 @@ class Settings:
             own_grocery_include_offers_only=_as_bool(
                 os.getenv("OWN_GROCERY_INCLUDE_OFFERS_ONLY"), False
             ),
+            price_universe_required_context_ids=tuple(
+                value.strip()
+                for value in os.getenv("PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS", "").split(",")
+                if value.strip()
+            ),
             max_price_age_hours=float(os.getenv("MAX_PRICE_AGE_HOURS", "48")),
             price_age_warning_hours=float(os.getenv("PRICE_AGE_WARNING_HOURS", "36")),
             price_universe_required=_as_bool(
@@ -408,9 +387,7 @@ class Settings:
                 os.getenv("PRICE_UNIVERSE_CACHE_ROOT", "price_universes")
             ),
             price_universe_city=os.getenv("PRICE_UNIVERSE_CITY", "Lund").strip() or "Lund",
-            plan_store_path=Path(
-                os.getenv("PLAN_STORE_PATH", "data/consumer_plans.sqlite3")
-            ),
+            plan_store_path=Path(os.getenv("PLAN_STORE_PATH", "data/consumer_plans.sqlite3")),
             price_universe_prewarm_enabled=_as_bool(
                 os.getenv("PRICE_UNIVERSE_PREWARM_ENABLED"),
                 False,
@@ -427,12 +404,8 @@ class Settings:
                 os.getenv("PRICE_UNIVERSE_PREWARM_MAX_STORES"),
                 "1,2",
             ),
-            price_universe_prewarm_recipes=int(
-                os.getenv("PRICE_UNIVERSE_PREWARM_RECIPES", "5")
-            ),
-            price_universe_prewarm_servings=int(
-                os.getenv("PRICE_UNIVERSE_PREWARM_SERVINGS", "4")
-            ),
+            price_universe_prewarm_recipes=int(os.getenv("PRICE_UNIVERSE_PREWARM_RECIPES", "5")),
+            price_universe_prewarm_servings=int(os.getenv("PRICE_UNIVERSE_PREWARM_SERVINGS", "4")),
             price_universe_prewarm_candidate_count=int(
                 os.getenv("PRICE_UNIVERSE_PREWARM_CANDIDATE_COUNT", "80")
             ),
@@ -446,12 +419,8 @@ class Settings:
                 os.getenv("STABLE_CANDIDATE_SEARCH_ENABLED"),
                 False,
             ),
-            stable_candidate_base_count=int(
-                os.getenv("STABLE_CANDIDATE_BASE_COUNT", "120")
-            ),
-            stable_candidate_search_limit=int(
-                os.getenv("STABLE_CANDIDATE_SEARCH_LIMIT", "160")
-            ),
+            stable_candidate_base_count=int(os.getenv("STABLE_CANDIDATE_BASE_COUNT", "120")),
+            stable_candidate_search_limit=int(os.getenv("STABLE_CANDIDATE_SEARCH_LIMIT", "160")),
             allow_provider_fallback=_as_bool(
                 os.getenv("ALLOW_PROVIDER_FALLBACK"),
                 False,

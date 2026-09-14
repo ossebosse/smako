@@ -425,9 +425,7 @@ async def test_concurrent_readers_observe_only_complete_prepared_runtime_swaps()
         for _ in range(2_000):
             current = manager.get_active(active.universe.key.scope_id)
             observations.append(
-                None
-                if current is None
-                else (current.source_name, current.stores[0].name)
+                None if current is None else (current.source_name, current.stores[0].name)
             )
 
     readers = [Thread(target=read_active) for _ in range(3)]
@@ -1057,3 +1055,43 @@ async def test_menu_search_cache_is_shared_by_modes_but_isolates_real_policy_ove
         assert all(item.source_provenance is not None for item in selected)
         assert {item.source_provenance.source_snapshot_id for item in selected} == {SNAPSHOT_ID}
         assert {item.source_provenance.source_provider for item in selected} == {"own"}
+
+
+@pytest.mark.asyncio
+async def test_activation_requires_every_configured_fresh_context(tmp_path):
+    from grocery_data.app.services.prepared_universe_activation import (
+        validate_backend_prepared_universe_artifact,
+    )
+
+    _manager, prepared, _provider, _selector = await _build_prepared()
+    output = tmp_path / "candidate.json"
+    PreparedPriceUniverseManager.write_artifact(prepared, output)
+    payload = json.loads(output.read_bytes())
+    with pytest.raises(ValueError, match="lacks required usable contexts.*missing-store"):
+        validate_backend_prepared_universe_artifact(
+            payload, "Lund", required_context_ids=("missing-store",), max_price_age_hours=1_000_000
+        )
+    context = prepared._context_oldest_observed_at[0][0]
+    with pytest.raises(ValueError, match="lacks required usable contexts"):
+        validate_backend_prepared_universe_artifact(
+            payload, "Lund", required_context_ids=(context,)
+        )
+
+
+@pytest.mark.asyncio
+async def test_runtime_readiness_warns_at_36_and_requires_all_contexts_at_48(monkeypatch):
+    from app.services import beta_observability as ops
+
+    _manager, prepared, _provider, _selector = await _build_prepared()
+    context = prepared._context_oldest_observed_at[0][0]
+    settings = Settings(
+        price_universe_required=True, price_universe_required_context_ids=(context,)
+    )
+    monkeypatch.setattr(ops.GLOBAL_PREPARED_PRICE_UNIVERSES, "get_active", lambda scope: prepared)
+    fresh = ops.active_price_status(settings, now=OBSERVED_AT + timedelta(hours=35.99))
+    aging = ops.active_price_status(settings, now=OBSERVED_AT + timedelta(hours=36))
+    stale = ops.active_price_status(settings, now=OBSERVED_AT + timedelta(hours=48))
+    assert fresh["required_contexts_usable"] and not fresh["requires_attention"]
+    assert aging["required_contexts_usable"] and aging["requires_attention"]
+    assert not stale["required_contexts_usable"] and stale["requires_attention"]
+    assert stale["missing_required_context_ids"] == [context]

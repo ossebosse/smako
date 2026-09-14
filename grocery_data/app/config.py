@@ -23,9 +23,7 @@ def _environment_flag(name: str, *, default: bool = False) -> bool:
 
 def _environment_csv(name: str, *, default: str) -> tuple[str, ...]:
     values = tuple(
-        value.strip().casefold()
-        for value in os.getenv(name, default).split(",")
-        if value.strip()
+        value.strip().casefold() for value in os.getenv(name, default).split(",") if value.strip()
     )
     if not values:
         raise ValueError(f"{name} must contain at least one value")
@@ -45,11 +43,7 @@ def _environment_optional_int(name: str) -> int | None:
 
 
 def _environment_optional_csv(name: str) -> tuple[str, ...]:
-    return tuple(
-        value.strip()
-        for value in os.getenv(name, "").split(",")
-        if value.strip()
-    )
+    return tuple(value.strip() for value in os.getenv(name, "").split(",") if value.strip())
 
 
 def load_repository_dotenv(dotenv_path: Path | None = None) -> bool:
@@ -74,6 +68,7 @@ class GroceryDataSettings:
     ica_recipe_price_max_age_days: int = 7
     ica_max_page_navigations_per_run: int = 10
     ica_max_product_detail_pages_per_run: int = 5
+    price_universe_required_context_ids: tuple[str, ...] = ()
     max_price_age_hours: float = 48.0
     price_age_warning_hours: float = 36.0
     min_sample_for_accuracy_score: int = 20
@@ -119,32 +114,23 @@ class GroceryDataSettings:
         if self.min_sample_for_accuracy_score <= 0:
             raise ValueError("MIN_SAMPLE_FOR_ACCURACY_SCORE must be greater than zero")
         if self.field_validation_max_price_age_hours <= 0:
-            raise ValueError(
-                "FIELD_VALIDATION_MAX_PRICE_AGE_HOURS must be greater than zero"
-            )
+            raise ValueError("FIELD_VALIDATION_MAX_PRICE_AGE_HOURS must be greater than zero")
         if self.current_offers_max_age_hours <= 0:
             raise ValueError("CURRENT_OFFERS_MAX_AGE_HOURS must be greater than zero")
         if not 1 <= self.community_evidence_max_reports_per_hour <= 1000:
-            raise ValueError(
-                "COMMUNITY_EVIDENCE_MAX_REPORTS_PER_HOUR must be between 1 and 1000"
-            )
+            raise ValueError("COMMUNITY_EVIDENCE_MAX_REPORTS_PER_HOUR must be between 1 and 1000")
         if self.community_evidence_duplicate_window_hours <= 0:
-            raise ValueError(
-                "COMMUNITY_EVIDENCE_DUPLICATE_WINDOW_HOURS must be greater than zero"
-            )
+            raise ValueError("COMMUNITY_EVIDENCE_DUPLICATE_WINDOW_HOURS must be greater than zero")
         if self.community_availability_half_life_hours <= 0:
-            raise ValueError(
-                "COMMUNITY_AVAILABILITY_HALF_LIFE_HOURS must be greater than zero"
-            )
+            raise ValueError("COMMUNITY_AVAILABILITY_HALF_LIFE_HOURS must be greater than zero")
         if self.community_evidence_recent_hours <= 0:
             raise ValueError("COMMUNITY_EVIDENCE_RECENT_HOURS must be greater than zero")
         if not 0 <= self.community_receipt_raw_retention_hours <= 24:
-            raise ValueError(
-                "COMMUNITY_RECEIPT_RAW_RETENTION_HOURS must be between 0 and 24"
-            )
-        if self.community_admin_token is not None and len(
-            self.community_admin_token.encode("utf-8")
-        ) < 32:
+            raise ValueError("COMMUNITY_RECEIPT_RAW_RETENTION_HOURS must be between 0 and 24")
+        if (
+            self.community_admin_token is not None
+            and len(self.community_admin_token.encode("utf-8")) < 32
+        ):
             raise ValueError("COMMUNITY_ADMIN_TOKEN must contain at least 32 bytes")
         if self.field_mode_enabled:
             token = self.physical_check_access_token or ""
@@ -210,17 +196,18 @@ class GroceryDataSettings:
             ica_max_product_detail_pages_per_run=int(
                 os.getenv("ICA_MAX_PRODUCT_DETAIL_PAGES_PER_RUN", "5")
             ),
+            price_universe_required_context_ids=tuple(
+                value.strip()
+                for value in os.getenv("PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS", "").split(",")
+                if value.strip()
+            ),
             max_price_age_hours=float(os.getenv("MAX_PRICE_AGE_HOURS", "48")),
             price_age_warning_hours=float(os.getenv("PRICE_AGE_WARNING_HOURS", "36")),
-            min_sample_for_accuracy_score=int(
-                os.getenv("MIN_SAMPLE_FOR_ACCURACY_SCORE", "20")
-            ),
+            min_sample_for_accuracy_score=int(os.getenv("MIN_SAMPLE_FOR_ACCURACY_SCORE", "20")),
             field_validation_max_price_age_hours=float(
                 os.getenv("FIELD_VALIDATION_MAX_PRICE_AGE_HOURS", "2")
             ),
-            current_offers_max_age_hours=float(
-                os.getenv("CURRENT_OFFERS_MAX_AGE_HOURS", "24")
-            ),
+            current_offers_max_age_hours=float(os.getenv("CURRENT_OFFERS_MAX_AGE_HOURS", "24")),
             community_evidence_max_reports_per_hour=int(
                 os.getenv("COMMUNITY_EVIDENCE_MAX_REPORTS_PER_HOUR", "60")
             ),
@@ -256,12 +243,8 @@ class GroceryDataSettings:
                 "PRICE_UNIVERSE_PREWARM_MAX_STORES",
                 default="1,2",
             ),
-            price_universe_prewarm_recipes=int(
-                os.getenv("PRICE_UNIVERSE_PREWARM_RECIPES", "5")
-            ),
-            price_universe_prewarm_servings=int(
-                os.getenv("PRICE_UNIVERSE_PREWARM_SERVINGS", "4")
-            ),
+            price_universe_prewarm_recipes=int(os.getenv("PRICE_UNIVERSE_PREWARM_RECIPES", "5")),
+            price_universe_prewarm_servings=int(os.getenv("PRICE_UNIVERSE_PREWARM_SERVINGS", "4")),
             price_universe_prewarm_candidate_count=int(
                 os.getenv("PRICE_UNIVERSE_PREWARM_CANDIDATE_COUNT", "80")
             ),
@@ -280,19 +263,9 @@ class GroceryDataSettings:
             physical_check_access_token=(
                 os.getenv("PHYSICAL_CHECK_ACCESS_TOKEN", "").strip() or None
             ),
-            field_session_ttl_seconds=int(
-                os.getenv("FIELD_SESSION_TTL_SECONDS", "3600")
-            ),
-            field_login_attempts_per_minute=int(
-                os.getenv("FIELD_LOGIN_ATTEMPTS_PER_MINUTE", "5")
-            ),
-            field_write_requests_per_minute=int(
-                os.getenv("FIELD_WRITE_REQUESTS_PER_MINUTE", "60")
-            ),
-            field_public_origin=(
-                os.getenv("FIELD_PUBLIC_ORIGIN", "").strip() or None
-            ),
-            field_trusted_proxy_cidrs=_environment_optional_csv(
-                "FIELD_TRUSTED_PROXY_CIDRS"
-            ),
+            field_session_ttl_seconds=int(os.getenv("FIELD_SESSION_TTL_SECONDS", "3600")),
+            field_login_attempts_per_minute=int(os.getenv("FIELD_LOGIN_ATTEMPTS_PER_MINUTE", "5")),
+            field_write_requests_per_minute=int(os.getenv("FIELD_WRITE_REQUESTS_PER_MINUTE", "60")),
+            field_public_origin=(os.getenv("FIELD_PUBLIC_ORIGIN", "").strip() or None),
+            field_trusted_proxy_cidrs=_environment_optional_csv("FIELD_TRUSTED_PROXY_CIDRS"),
         )

@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Annotated
 
@@ -392,7 +393,12 @@ def _assert_offline_ready(request: PlanRequest, settings: Settings) -> None:
         warning_age_hours=settings.price_age_warning_hours,
         stale_age_hours=settings.max_price_age_hours,
     )
-    if status.status in {"stale", "broken"}:
+    usable, _stale, _ages = prepared._context_partition(
+        now=datetime.now(UTC), stale_age_hours=settings.max_price_age_hours
+    )
+    if status.status in {"stale", "broken"} or (
+        set(settings.price_universe_required_context_ids) - set(usable)
+    ):
         raise HTTPException(
             status_code=503,
             detail="active local PriceUniverse is not usable for consumer planning",

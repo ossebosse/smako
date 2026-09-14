@@ -1,3 +1,17 @@
+# Smako – 14 september 2026
+
+Live: `price-recovery-lund-20260914a` (app och scheduler).
+[Återställningsrapport](../reports/smako-lund-price-recovery-20260914.md).
+
+- Planering 22350 återställd: alla sex Lund-kontexter färska, samma universum på disk/i process `927c331c…f34f9e2`, health/ready 200. Gränser 36/48 h oförändrade.
+- Exakt kvalificerad basrequest: 15 tillfällen/20 portioner, 40/30/20, max två butiker. HTTPS mobilvy 201/40,781 s efter omstart, 560,33 kr VERIFIED; byte 200/7,092 s. Noll externa källanrop. Ingen ny treprovs-prestandaacceptans.
+- Willys-transportens fel rättat via befintlig driftcontainer/UID. Båda kontexter importerade med äkta observationer. Verkliga Windows-tasken återtestad: resultat 0; schema 01:30 oförändrat.
+- Primats historiska ValueError är fortfarande oförklarat. Två isolerade kompletta 49-anropskörningar passerade även parsning/export/validering/context activation. Godkänd färsk export användes. Ny steg-/stack-/orsaksdiagnostik bevarar nästa fel; ingen specifik historisk Primat-fix hävdas.
+- Obligatoriska kontexter kontrolleras vid aktivering, planering och ready. Driftstatus varnar vid 36 h och visar rebuild-/aktiveringsfel. Separata Coop-erbjudanden, Karhögstorg och Lidl-fel kvar enligt rapport.
+- 139 tester PASS, Ruff/compileall PASS. Backup `20260914T123547Z`; samma VPS, Caddy och miljöfilens rättigheter bevarade. Föregående app är läskompatibel rollback; föregående schedulerbild sparad.
+
+---
+
 # Smako – 13 september 2026
 
 Live: https://beta.smako.nu/personal · `personal-v2-fast-403020-20260913c` · appkod `98381e5`.
