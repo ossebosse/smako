@@ -1,5 +1,28 @@
 # Project rules
 
+## Permanent repository and working discipline
+
+- The permanent local development root is `D:\Projects\Smako`. This repository,
+  with its own `.git` directory and intended main branch `master`, is authoritative
+  for new development. Historical dated copies are preserved evidence, not new
+  development workspaces. Do not create more standalone dated project copies.
+- Before editing, inspect the working directory, `git rev-parse --show-toplevel`,
+  the current branch and `git status --short`. Preserve existing user changes.
+- Work on bounded branches and make small, traceable commits. Never force-push,
+  rewrite history, reset or clean another task's work as routine preparation.
+- One controlled writer owns each working copy. If concurrent work is needed,
+  use explicitly created Git-worktrees of this same repository and integrate
+  their branches deliberately. Check for other writers before backups/merges.
+- Keep local data, secrets and environments outside the Git index. Follow
+  `docs/DEVELOPMENT.md` for data restoration; ignored files are not automatically
+  backed up. Review staged content, tracked sensitive paths and file sizes.
+- Development, tests and local consolidation never authorize production
+  activation, scheduler/Windows-task changes, live collection or profile changes.
+- Read the current `docs/HANDOFF.md` and `docs/CONSOLIDATION.md` before continuing.
+  Historical chats keep their old working directories; do not edit Codex databases.
+
+## Application rules retained from the source projects
+
 - Preserve the existing snapshot, source-strategy, promotion, PriceUniverse,
   GroceryContext, PhysicalStore, provider and CLI architecture. Do not create
   parallel pricing, promotion, assortment or refresh systems.

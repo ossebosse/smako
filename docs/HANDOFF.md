@@ -1,3 +1,35 @@
+# Aktuell arbetsrot: lokal konsolidering 2026-09-29
+
+Permanent rot: **D:\Projects\Smako**. Arbetsgren: chore/consolidate-smako;
+avsedd huvudgren: master. Denna mellanliggande handoff förbereder verifiering
+av en ren klon; slutresultat dokumenteras innan lokal konsolideringstagg skapas.
+
+Den samlade koden är arbetskopians smako-legacy-purchase-terms:20260929-v5,
+inklusive dess tidigare ocommittade kommunflöden, PurchaseTerms, exakta/uppskattade/
+villkorade köp, närings-/beredningskontroller, sökoptimering och planlagring.
+Äldre autentiska Lidl-fixturer samt streckkodsläsarens byggkällor är återställda.
+Historiska appalternativ bevaras, men ersätter inte rättad kod.
+
+Ingen produktion har aktiverats eller undersökts på servern. Kandidatens tidigare
+handoff redovisar isolerad verifiering, inte produktionsaktivering. Windows-jobb,
+scheman och användarprofiler är oförändrade. Priserna behåller observationstiderna.
+
+Start, test, bygg och återställning: [DEVELOPMENT.md](DEVELOPMENT.md).
+Ursprung, backup och externa gamla sökvägar: [CONSOLIDATION.md](CONSOLIDATION.md).
+Aktuella testresultat och basfel: [verifiering](consolidation/VERIFICATION.md).
+Backup: D:\Smako-backups\consolidation-20260929. Stora testdata återställs med
+hashmanifest; hemligheter och privata drift-/användardata tillförs separat vid
+ett uttryckligt behov. Använd mockmiljön för lokal start.
+
+Kvarvarande produktfrågor från tidigare handoff gäller bland annat okända
+kampanjvillkor/källfakta, Malmös fullständiga publicering, originalpolicy/Primat,
+ICA:s okända kommunträffar och Lidl/Willys-täckning. Den tidigare saknade
+historiska Lidl-fixturen är nu återfunnen; testutfallet redovisas i verifieringen.
+
+---
+
+## Historiska handoff-anteckningar, bevarade nedan
+
 # Smako – 29 september 2026: äldre importer anslutna till PurchaseTerms
 
 [Resultat och före/efter](../reports/legacy-purchase-terms-20260929/RESULTS.md), [acceptans](../reports/legacy-purchase-terms-20260929/ACCEPTANCE.json), [hela nämnaren](../reports/legacy-purchase-terms-20260929/comparison.json).
