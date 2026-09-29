@@ -281,7 +281,10 @@ async def _run(args: argparse.Namespace) -> dict[str, Any]:
             raise RuntimeError("Economic ingredient pool is empty")
 
         maximum_count = max(args.counts)
-        generator = DeterministicRecipeCandidateGenerator()
+        # This benchmark measures the legacy taxonomy/quantity model below.
+        # Edible-input recipes require the product-bound personal planner's
+        # preparation checks, not NutritionValidator's generic piece estimates.
+        generator = DeterministicRecipeCandidateGenerator(recipe_version="legacy")
         generation_started = perf_counter()
         generated = await asyncio.to_thread(
             generator.generate_candidates,
@@ -418,6 +421,7 @@ async def _run(args: argparse.Namespace) -> dict[str, Any]:
 
         return {
             "provider": args.provider,
+            "recipe_version": "legacy",
             "postal_code": "".join(
                 character for character in args.postal_code if character.isdigit()
             ),

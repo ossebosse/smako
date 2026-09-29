@@ -31,7 +31,7 @@ class ReplayClock(datetime):
         return value.astimezone(tz) if tz else value.replace(tzinfo=None)
 
 
-@pytest.mark.parametrize("account,accepted", [("3839",44),("3815",77)])
+@pytest.mark.parametrize("account,accepted", [("3839",93),("3815",246)], ids=["3839-44", "3815-77"])
 async def test_real_own_universe_checkout_and_audit(tmp_path,monkeypatch,account,accepted):
     for name in ["grocery_data.app.api.common", "grocery_data.app.api.catalog", "grocery_data.app.services.freshness",
                  "app.providers.own", "app.models.product", "grocery_data.app.domain.promotion_pricing",
@@ -99,5 +99,11 @@ async def test_real_own_universe_checkout_and_audit(tmp_path,monkeypatch,account
         assert item.total_price==26 and item.packages_needed==2
         assert item.regular_total_price is None
         assert auditor.audit([need],[item],user_pricing_context=public).passed
-        with pytest.raises(ValueError):BasketCalculator().calculate_item(need.model_copy(update={'required_quantity':2000}),candidate)
+        # v5 buys the whole two-pack promotion for a one-pack need. It must
+        # neither invent a single-pack price nor charge only half the group.
+        smaller_need=need.model_copy(update={'required_quantity':2000})
+        whole_group=BasketCalculator().calculate_item(smaller_need,candidate)
+        assert whole_group.total_price==26 and whole_group.packages_needed==2
+        assert whole_group.regular_total_price is None
+        assert auditor.audit([smaller_need],[whole_group],user_pricing_context=public).passed
     engine.dispose()

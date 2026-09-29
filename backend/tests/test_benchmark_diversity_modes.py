@@ -145,6 +145,7 @@ def test_mock_diversity_benchmark_uses_one_snapshot_for_all_modes() -> None:
     )
 
     assert output["provider"] == "mock"
+    assert output["recipe_version"] == "legacy"
     assert output["snapshot"]["candidates_generated_once"] == 30
     assert output["snapshot"]["candidates_structurally_valid_once"] >= 5
     assert output["snapshot"]["candidates_nutrition_valid_once"] >= 5

@@ -60,7 +60,10 @@ def test_actual_second_municipality_pdf_bound_to_store_not_shared_prices():
     parsed, report = xtra_pdf.parse_pdf(doc, store, "saved-source-regression")
     accepted, evidence = qualify_rows(parsed, store=store, observed_at=doc.fetched_at)
     assert len(report["pages"]) == 8 and len(parsed.products) == 57
-    assert len(accepted.products) == 10 and not evidence["shared_blockers"]
+    assert len(accepted.products) == 18 and not evidence["shared_blockers"]
+    assert len(accepted.failures) == 39
+    from grocery_data.app.services.source_purchase_terms import bound_purchase_terms
+    assert all(bound_purchase_terms(p) is not None for p in accepted.products)
     assert all(p.fetched_at == doc.fetched_at for p in accepted.products)
     wrong = store.model_copy(update={"external_id": "3658", "name": "X:-Tra Skansvägen"})
     parsed, report = xtra_pdf.parse_pdf(doc, wrong, "cross-store-adversarial")

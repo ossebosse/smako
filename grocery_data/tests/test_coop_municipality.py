@@ -120,7 +120,13 @@ def test_real_stora_age_conditions_stay_in_quarantine_not_global_failure():
     parsed=CoopParser().parse_catalog(batch,['real-stora-fixture'],store)
     assert not parsed.failures and len(parsed.products)==540
     accepted, evidence=qualify_rows(parsed,store=store,observed_at=batch.documents[0].fetched_at)
-    assert len(accepted.products)==77
+    # v5 qualifies source-bound multibuy/weight contracts; age-gated rows
+    # remain quarantined independently of those newly supported purchases.
+    assert len(accepted.products)==384
+    assert len(accepted.failures)==156
+    assert not evidence['shared_blockers']
+    from grocery_data.app.services.source_purchase_terms import bound_purchase_terms
+    assert all(bound_purchase_terms(p) is not None for p in accepted.products)
     blocked=[r for r in evidence['decisions'] if 'age_restriction_eligibility_unverified' in r['blockers']]
     assert len(blocked)==23
     assert evidence['full_parse']['denominator']==540
