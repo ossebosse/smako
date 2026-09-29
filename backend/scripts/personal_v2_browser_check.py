@@ -24,7 +24,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
         "--webkit",
-        default="D:/codex-smako-loading-hotfix-20260909/browsers/webkit-2336/Playwright.exe",
+        default=None,
     )
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)

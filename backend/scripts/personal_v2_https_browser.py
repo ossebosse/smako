@@ -11,7 +11,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 results = []
 with sync_playwright() as pw:
     for name in ("chromium", "webkit"):
-        browser = getattr(pw, name).launch(**({"executable_path": "D:/codex-smako-loading-hotfix-20260909/browsers/webkit-2336/Playwright.exe"} if name == "webkit" else {}))
+        browser = getattr(pw, name).launch(**({"executable_path": None} if name == "webkit" else {}))
         ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True, has_touch=True)
         page = ctx.new_page()
         page.set_default_timeout(15000)

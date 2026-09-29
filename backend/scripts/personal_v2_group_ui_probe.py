@@ -19,7 +19,7 @@ with tempfile.TemporaryDirectory(prefix="smako-group-ui-") as directory:
     saved = PlanStore(Path(directory)/"plans.sqlite").create(req, plan, owner_actor_hash="f"*64)
     with sync_playwright() as pw:
         for engine in ("chromium", "webkit"):
-            browser = getattr(pw, engine).launch(**({"executable_path": "D:/codex-smako-loading-hotfix-20260909/browsers/webkit-2336/Playwright.exe"} if engine == "webkit" else {}))
+            browser = getattr(pw, engine).launch(**({"executable_path": None} if engine == "webkit" else {}))
             ctx = browser.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True)
             ctx.route("**/api/plans/"+saved.plan_id, lambda route: route.fulfill(json=saved.model_dump(mode="json")))
             page = ctx.new_page()

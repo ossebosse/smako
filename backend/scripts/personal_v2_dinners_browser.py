@@ -17,7 +17,7 @@ def check(base, output):
             browser = getattr(pw, engine).launch(
                 **(
                     {
-                        "executable_path": "D:/codex-smako-loading-hotfix-20260909/browsers/webkit-2336/Playwright.exe"
+                        "executable_path": None
                     }
                     if engine == "webkit"
                     else {}
