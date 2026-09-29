@@ -13,6 +13,7 @@ import socket
 import tempfile
 import threading
 import time
+from datetime import UTC, datetime
 from pathlib import Path
 
 import uvicorn
@@ -43,7 +44,12 @@ def main():
         from app.services.price_universe_runtime import GLOBAL_PREPARED_PRICE_UNIVERSES
 
         from backend.scripts.personal_v2_integrated_check import check_integrated
-        from backend.tests.test_personal_planning_v2 import prepared, product
+        from backend.tests import test_personal_planning_v2 as synthetic
+        # These are handcrafted synthetic UI products, not retained retailer
+        # observations. Generate them at this test's time; the unit fixture's
+        # historical clock must not make every UI purchase stale weeks later.
+        synthetic.NOW = datetime.now(UTC)
+        prepared, product = synthetic.prepared, synthetic.product
         from grocery_data.app.storage import (
             create_database_engine,
             create_schema,
