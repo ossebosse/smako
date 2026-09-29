@@ -19,7 +19,7 @@ from app.services.user_pricing import price_candidate_for_context
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
 
-def test_real_lidl_arla_pack_price_and_declared_used_grams_remain_independent():
+def test_real_lidl_arla_pack_price_and_declared_used_grams_remain_independent(tmp_path):
     root = Path(__file__).parents[2] / "reports/purchase-planning-20260925/final"
     prepared = PreparedPriceUniverseArtifact.model_validate_json(
         (root / "prepared-1281-second.json").read_bytes()
@@ -73,7 +73,7 @@ def test_real_lidl_arla_pack_price_and_declared_used_grams_remain_independent():
     assert (
         PersonalPlanner._nutrition_evidence(planner, p, "ost", "ml", {"protein_g"}, recipe) is None
     )
-    (root.parent / "arla-purchase-and-nutrition.json").write_text(
+    (tmp_path / "arla-purchase-and-nutrition.json").write_text(
         json.dumps(
             {
                 "retrospective_price_replay_date": "2026-09-24",
