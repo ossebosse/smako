@@ -8,6 +8,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1 \
+    PLAYWRIGHT_BROWSERS_PATH=/opt/smako-browsers \
     PYTHONPATH=/srv/app/backend:/srv/app \
     APP_VERSION=${APP_VERSION} \
     BUILD_ID=${BUILD_ID}
@@ -26,6 +27,8 @@ COPY deploy/requirements.txt /tmp/requirements.txt
 COPY requirements-dev.lock /tmp/requirements.lock
 COPY deploy/requirements-linux.lock /tmp/requirements-linux.lock
 RUN python -m pip install -r /tmp/requirements.txt -c /tmp/requirements.lock -c /tmp/requirements-linux.lock
+RUN python -m playwright install --with-deps chromium \
+    && chmod -R a+rX /opt/smako-browsers
 
 COPY --chown=app:app backend /srv/app/backend
 COPY --chown=app:app grocery_data /srv/app/grocery_data
