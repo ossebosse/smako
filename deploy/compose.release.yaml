@@ -1,0 +1,12 @@
+# Apply after compose.yaml. Both serving and all scheduler collection/rebuild
+# commands use the verified content-addressed image, without rebuilding on host.
+services:
+  migrate:
+    image: ${SMAKO_RELEASE_IMAGE:?set verified sha256 image ID}
+    build: !reset null
+  app:
+    image: ${SMAKO_RELEASE_IMAGE:?set verified sha256 image ID}
+    build: !reset null
+  scheduler:
+    image: ${SMAKO_RELEASE_IMAGE:?set verified sha256 image ID}
+    build: !reset null

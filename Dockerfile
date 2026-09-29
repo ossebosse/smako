@@ -2,6 +2,7 @@ FROM python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e2631
 
 ARG APP_VERSION=0.1.0-beta
 ARG BUILD_ID=local
+LABEL org.opencontainers.image.revision=${BUILD_ID}
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -22,7 +23,9 @@ RUN apt-get update \
     && useradd --uid 10001 --gid app --create-home --home-dir /home/app app
 
 COPY deploy/requirements.txt /tmp/requirements.txt
-RUN python -m pip install -r /tmp/requirements.txt
+COPY requirements-dev.lock /tmp/requirements.lock
+COPY deploy/requirements-linux.lock /tmp/requirements-linux.lock
+RUN python -m pip install -r /tmp/requirements.txt -c /tmp/requirements.lock -c /tmp/requirements-linux.lock
 
 COPY --chown=app:app backend /srv/app/backend
 COPY --chown=app:app grocery_data /srv/app/grocery_data
