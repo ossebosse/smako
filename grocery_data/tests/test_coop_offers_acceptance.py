@@ -347,7 +347,10 @@ async def test_coop_offers_db_lkg_replay_api_provider_and_acceptance(
         with pytest.raises(PriceProviderError, match="inga användbara butiker"):
             await provider.find_stores("22660")
         stores = await provider.find_offer_stores("22660")
-        products = await provider.search_products("Smör", [store_id])
+        # Historical aria-only fixtures lack bounded dates and exact variant
+        # evidence. Extraction/OWN diagnostics remain, purchase projection stops.
+        with pytest.raises(PriceProviderError, match="säker prisdata"):
+            await provider.search_products("Smör", [store_id])
         offers = await provider.get_offers(store_id)
 
         with pytest.raises(PriceProviderError, match="saknar verifierad katalog"):
@@ -357,11 +360,7 @@ async def test_coop_offers_db_lkg_replay_api_provider_and_acceptance(
         assert stores[0].tier == "offers_only"
         assert stores[0].source_provenance is not None
         assert stores[0].source_provenance.source_channel == "offers"
-        assert products == []
-        assert len(offers) == 1
-        assert offers[0].source_provenance is not None
-        assert offers[0].source_provenance.source_channel == "offers"
-        assert offers[0].offers[0].max_quantity == 2
+        assert offers == []
 
     repaired_connector = _FixtureCoopOffersConnector(
         "schema_changed.html",
@@ -409,7 +408,8 @@ async def test_coop_offers_db_lkg_replay_api_provider_and_acceptance(
             source is not None and source.member_price != source.regular_price
         ),
     }
-    assert all(evidence.values())
+    assert all(value for check,value in evidence.items() if check != AcceptanceCheck.OWN_PROVIDER)
+    assert not evidence[AcceptanceCheck.OWN_PROVIDER]
     contract = ConnectorAcceptanceContract(
         chain=Chain.COOP,
         declared_coverage=CoverageLevel.OFFERS_ONLY,
@@ -420,8 +420,7 @@ async def test_coop_offers_db_lkg_replay_api_provider_and_acceptance(
         {check for check, proven in evidence.items() if proven},
         parser_health=parser_health,
     )
-    assert acceptance.contract_passed is True
-    assert acceptance.implementation_eligible is True
-    assert acceptance.missing_required == ()
+    assert acceptance.contract_passed is False
+    assert AcceptanceCheck.OWN_PROVIDER in acceptance.missing_required
 
     engine.dispose()

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import unicodedata
 from datetime import UTC, datetime
@@ -353,7 +354,7 @@ def _promotion_from_parts(parts: list[str]) -> SourceOffer | None:
 class CoopParser:
     """Offline parser for Coop source shapes independently verified as public."""
 
-    parser_version = "coop-parser-v2"
+    parser_version = "coop-parser-v5"
 
     @staticmethod
     def sitemap_product_urls(payload: bytes) -> tuple[str, ...]:
@@ -408,6 +409,8 @@ class CoopParser:
                     longitude=_decimal(geo.get("longitude")),
                     online_shopping=None,
                     coverage=CoverageLevel.OFFERS_ONLY,
+                    price_context_type="physical_store",
+                    physical_store_external_id=external_id,
                     raw_reference=f"{reference}#storeID={external_id}",
                     source_fields={
                         "ledger_account_number": row.get("ledgerAccountNumber"),
@@ -525,6 +528,19 @@ class CoopParser:
                         )
                     )
                     continue
+                if document.payload.lstrip().startswith(b"{"):
+                    envelope = json.loads(document.payload)
+                    if "structured_offers" in envelope:
+                        from .structured_offers import parse_structured
+                        result = parse_structured(envelope, store=store,
+                                                  document=document, reference=reference)
+                        products.update({p.external_product_id: p for p in result.products})
+                        failures.extend(result.failures)
+                        continue
+                    if not page.cards:
+                        failures.append(self._failure(reference, ParserErrorCode.SCHEMA_CHANGED,
+                            CoopSchemaError("empty rendered page lacks verified structured response")))
+                        continue
                 for position, card in enumerate(page.cards):
                     card_reference = f"{reference}#article[{position}]"
                     try:
@@ -533,6 +549,7 @@ class CoopParser:
                             store=store,
                             reference=card_reference,
                             fetched_at=document.fetched_at,
+                            physical_offer=document.kind == "rendered_offers_page",
                         )
                     except (CoopSchemaError, ValidationError, ValueError) as exc:
                         failures.append(self._failure(card_reference, ParserErrorCode.UNKNOWN, exc))
@@ -573,6 +590,7 @@ class CoopParser:
         store: SourceStore,
         reference: str,
         fetched_at: datetime,
+        physical_offer: bool = False,
     ) -> SourceProduct:
         source_id = source_id_from_product_url(card.href or "")
         name, brand, package_text, parts, group_count = _split_card_label(card)
@@ -622,6 +640,25 @@ class CoopParser:
             # total, is the source price consumed by PurchaseQuantityResolver.
             sale_price = comparison_price
             sale_unit = comparison_unit
+        extra_fields = {}
+        if physical_offer:
+            # A price on an offers page is not proof of an ordinary rest price.
+            # Preserve the printed ordinary/comparison labels as references only.
+            if promotion is None and public:
+                promotion = _promotion_from_parts(["erbjudande " + public, *parts])
+            if promotion is not None:
+                promotion = promotion.model_copy(update={
+                    "description": "; ".join(filter(None, [promotion.description, card.visible_text])),
+                    "source_payload": {**promotion.source_payload,
+                        "visible_text": card.visible_text, "aria_label": card.aria_label,
+                        "ordinary_reference_text": regular, "comparison_reference_text": comparison}})
+                sale_unit = promotion.source_payload.get("sale_unit") or (
+                    "st" if promotion.type == PromotionType.MULTIBUY else sale_unit)
+            sale_price = None
+            extra_fields = {"coop_physical_policy": "coop-physical-structured-v1",
+                            "regular_price_current_verified": False,
+                            "purchase_blockers": ["structured_campaign_variant_evidence_missing"],
+                            "visible_text": card.visible_text}
         return SourceProduct(
             chain=Chain.COOP,
             store_external_id=store.external_id,
@@ -647,12 +684,13 @@ class CoopParser:
                 "ST"
                 if average_weight_kg is not None
                 else "VIKT"
-                if sale_unit in {"kg", "l"} and package_quantity is None
+                if sale_unit in {"kg", "l"} and package_quantity is None and not package_text
                 else "ST"
             ),
             raw_reference=reference,
             fetched_at=fetched_at,
             source_fields={
+                **extra_fields,
                 "rendered_product_url": card.href,
                 "package_approximate": approximate,
                 "offer_group_count": group_count,

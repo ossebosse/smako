@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import re
 import unicodedata
 from datetime import date
@@ -16,6 +18,7 @@ from grocery_data.app.domain import (
     GeographicArea,
     ParseFailure,
     ParserErrorCode,
+    PriceContextType,
     ProductParseResult,
     PromotionType,
     RawBatch,
@@ -23,6 +26,7 @@ from grocery_data.app.domain import (
     SourceProduct,
     SourceStore,
 )
+from grocery_data.app.domain.purchase_terms import PurchaseTerms
 
 _NUMBER = re.compile(r"\d+(?:[.,]\d+)?")
 _EXACT_AMOUNT = re.compile(
@@ -162,29 +166,62 @@ def _promotion(row: dict[str, Any]) -> SourceOffer:
     trait_text = " ".join(
         str(item.get("name") if isinstance(item, dict) else item) for item in traits
     ).casefold()
-    valid_to = None
-    try:
-        if row.get("validTo"):
-            valid_to = date.fromisoformat(str(row["validTo"])[:10])
-    except ValueError:
-        valid_to = None
+    valid_from = date.fromisoformat(str(row["validFrom"])[:10]) if row.get("validFrom") else None
+    valid_to = date.fromisoformat(str(row["validTo"])[:10]) if row.get("validTo") else None
+    restriction = str(row.get("restriction") or "").strip()
+    condition = str(row.get("condition") or "").strip()
+    additional = " ".join(str(details.get(key) or "") for key in
+                          ("customerInformation", "disclaimer"))
+    conditions = f"{restriction} {condition} {additional}".strip()
+    safety_text = " ".join((conditions, trait_text, str(mechanics.get("value4") or "")))
+    # A narrower day/activation/deposit condition must never become a week-wide
+    # global price. Preserve the raw source and quarantine until it is understood.
+    deposit_text = " ".join((safety_text, str(row.get("comparisonPrice") or ""),
+                             str(details.get("mechanicInfo") or "")))
+    deposit = row.get('reviewedDeposit')
+    if deposit is not None:
+        from grocery_data.app.domain.promotion_pricing import DepositContract
+        parsed_deposit = DepositContract.model_validate(deposit)
+        if _exact_gtin(row.get('eans')) != parsed_deposit.gtin:
+            raise IcaSchemaError('deposit_amount_unverified: exact deposit product variant mismatch')
+    if re.search(r"pant", deposit_text, re.IGNORECASE) and deposit is None:
+        raise IcaSchemaError("deposit_amount_unverified: source advertises pant; "
+                             "no verified variant-specific checkout deposit")
+    if re.search(r"personlig|kupong|aktivera|måndag|tisdag|onsdag|torsdag|fredag|"
+                 r"lördag|söndag|helg|\d{1,2}/\d{1,2}", safety_text, re.IGNORECASE):
+        raise IcaSchemaError("ICA offer requires review of date, audience or deposit condition")
+    cap = re.fullmatch(r"Max\s+(\d+)\s+(köp|förp\.?|st)\s*/\s*(hushåll|kund)\.?",
+                       restriction, re.IGNORECASE) if restriction else None
+    if restriction and cap is None:
+        raise IcaSchemaError("ICA unrecognized purchase restriction")
+    if condition:
+        raise IcaSchemaError("ICA additional eligibility condition requires review")
+    max_quantity = int(cap.group(1)) if cap else None
+    if cap and cap.group(2).casefold() != "köp" and quantity and quantity > 1:
+        if max_quantity % quantity:
+            raise IcaSchemaError("ICA package cap is not a whole promotion group")
+        max_quantity //= quantity
     return SourceOffer(
         external_id=str(row.get("id") or "").strip() or None,
         type=PromotionType.MEMBER_PRICE
         if "stammis" in trait_text and promotion_type == PromotionType.SALE_PRICE
         else promotion_type,
+        valid_from=valid_from,
         valid_to=valid_to,
         price=amount,
         quantity=quantity if promotion_type == PromotionType.MULTIBUY else None,
         member_only="stammis" in trait_text,
-        description=str(details.get("mechanicInfo") or row.get("restriction") or "").strip()
+        max_quantity=max_quantity,
+        description="; ".join(filter(None, (str(details.get("mechanicInfo") or ""), conditions)))
         or None,
-        source_payload={"benefit_type": kind, "unit_sign": mechanics.get("unitSign")},
+        source_payload={"benefit_type": kind, "unit_sign": mechanics.get("unitSign"),
+                        "restriction": restriction, "condition": condition,
+                        **({'reviewedDeposit': parsed_deposit.model_dump(mode='json')} if deposit is not None else {})},
     )
 
 
 class IcaParser:
-    parser_version = "ica-parser-v3"
+    parser_version = "ica-parser-v8"
 
     def weekly_offer_rows(self, data: dict[str, Any]) -> list[object]:
         """Return the connector-local offer collection or fail on schema drift."""
@@ -267,12 +304,23 @@ class IcaParser:
                         "profile": card.get("profile"),
                         "source_locality": address.get("city"),
                         "municipality": address.get("municipality"),
+                        "address_municipality_evidence": {
+                            "basis": "official_address_administrative_field",
+                            "chain": Chain.ICA.value, "store_id": external_id,
+                            "address": str(address.get("street") or address.get("address") or "").strip(),
+                            "municipality_name": address.get("municipality"),
+                            "source_url": document.url,
+                            "source_sha256": hashlib.sha256(document.payload).hexdigest(),
+                            "observed_at": document.fetched_at.isoformat(),
+                            "field_path": f"resultStore.storeCards[accountNumber={external_id}].address.municipality",
+                        },
                     },
                 )
         return sorted(stores.values(), key=lambda store: store.name.casefold())
 
     def parse_physical_stores(
-        self, raw: RawBatch, references: list[str], area: GeographicArea
+        self, raw: RawBatch, references: list[str], area: GeographicArea,
+        *, include_outside: bool = False,
     ) -> list[SourceStore]:
         """Parse the full locator while retaining the source locality exactly.
 
@@ -297,14 +345,14 @@ class IcaParser:
                 or result.get("totalNumberOfStores")
                 or result.get("total")
             )
-            if isinstance(declared, int) and declared != len(cards):
+            if not include_outside and isinstance(declared, int) and declared != len(cards):
                 raise IcaSchemaError("ICA physical locator SSR page is incomplete")
             for card in cards:
                 if not isinstance(card, dict):
                     continue
                 address = _first_dict(card.get("address"))
                 source_locality = str(address.get("city") or "").strip()
-                if _location_key(source_locality) != requested_city:
+                if not include_outside and _location_key(source_locality) != requested_city:
                     continue
                 external_id = str(card.get("accountNumber") or "").strip()
                 name = str(card.get("storeName") or card.get("name") or "").strip()
@@ -336,10 +384,13 @@ class IcaParser:
                     ),
                     online_shopping=bool(online_url),
                     coverage=CoverageLevel.OFFERS_ONLY,
+                    price_context_type=PriceContextType.PHYSICAL_STORE,
+                    physical_store_external_id=external_id,
                     raw_reference=f"{reference}#accountNumber={external_id}",
                     source_fields={
                         "store_id": card.get("storeId"),
                         "account_number": external_id,
+                        "official_store_url": card.get("bhsUrl"),
                         "offers_url": (
                             urljoin("https://www.ica.se", str(offers_value).strip())
                             if offers_value
@@ -349,6 +400,16 @@ class IcaParser:
                         "profile": card.get("profile"),
                         "source_locality": source_locality,
                         "municipality": address.get("municipality"),
+                        "address_municipality_evidence": {
+                            "basis": "official_address_administrative_field",
+                            "chain": Chain.ICA.value, "store_id": external_id,
+                            "address": str(address.get("street") or address.get("address") or "").strip(),
+                            "municipality_name": address.get("municipality"),
+                            "source_url": document.url,
+                            "source_sha256": hashlib.sha256(document.payload).hexdigest(),
+                            "observed_at": document.fetched_at.isoformat(),
+                            "field_path": f"resultStore.storeCards[accountNumber={external_id}].address.municipality",
+                        },
                         "official_physical_locator": True,
                     },
                 )
@@ -359,6 +420,8 @@ class IcaParser:
     ) -> ProductParseResult:
         products: list[SourceProduct] = []
         failures: list[ParseFailure] = []
+        seen: dict[str, tuple[str, SourceProduct]] = {}
+        conflicts: set[str] = set()
         for document, reference in raw.with_references(references):
             if document.kind != "offers_page" or document.http_status != 200:
                 continue
@@ -378,9 +441,31 @@ class IcaParser:
             for position, row in enumerate(rows):
                 record_reference = f"{reference}#weeklyOffers/{position}"
                 try:
-                    products.append(
-                        self._parse_offer(row, store, record_reference, document.fetched_at)
-                    )
+                    product = self._parse_offer(row, store, record_reference, document.fetched_at)
+                    identity = product.external_product_id
+                    fingerprint = json.dumps(row, sort_keys=True, ensure_ascii=False)
+                    if identity in conflicts:
+                        raise IcaSchemaError("ICA conflicting campaign evidence")
+                    if identity in seen:
+                        earlier_fingerprint, earlier = seen[identity]
+                        if earlier_fingerprint != fingerprint:
+                            products.remove(earlier)
+                            conflicts.add(identity)
+                            failures.append(ParseFailure(
+                                raw_record_reference=earlier.raw_reference,
+                                error_code=ParserErrorCode.UNKNOWN,
+                                error_message="ICA conflicting campaign evidence",
+                                parser_version=self.parser_version))
+                            raise IcaSchemaError("ICA conflicting campaign evidence")
+                        references = [*earlier.source_fields.get("source_evidence", [earlier.raw_reference]),
+                                      record_reference]
+                        revised = earlier.model_copy(update={"source_fields": {
+                            **earlier.source_fields, "source_evidence": references}})
+                        products[products.index(earlier)] = revised
+                        seen[identity] = (fingerprint, revised)
+                        continue
+                    products.append(product)
+                    seen[identity] = (fingerprint, product)
                 except (IcaSchemaError, ValidationError, ValueError) as exc:
                     failures.append(
                         ParseFailure(
@@ -419,9 +504,16 @@ class IcaParser:
                 and str(item.get("BMSStoreId") or item.get("accountNumber") or "")
                 in {store.external_id, str(store.source_fields.get("store_id") or "")}
             ),
-            _first_dict(source_stores),
+            {},
         )
-        regular_price = _decimal(price_row.get("regularPrice"))
+        if source_stores and not price_row:
+            raise IcaSchemaError("ICA offer has no matching official store identity")
+        if price_row.get("storeInd") is False:
+            raise IcaSchemaError("ICA offer is not valid in the physical store")
+        reference_regular_price = _decimal(price_row.get("regularPrice"))
+        # On the offer surface this is a campaign reference, not proof that a
+        # different quantity or a post-campaign purchase has this checkout price.
+        regular_price = None
         comparison_price, comparison_unit = parse_comparison(
             row.get("comparisonPrice") or price_row.get("referencePriceText")
         )
@@ -432,6 +524,35 @@ class IcaParser:
         mechanics = _first_dict(row.get("parsedMechanics"))
         price_suffix = str(mechanics.get("value4") or "").strip().casefold()
         sold_by_weight = price_suffix in {"/kg", "kr/kg"}
+        gtin = _exact_gtin(row.get('eans'))
+        variant_ids = [str(e.get('id') or '') for e in row.get('eans', []) if isinstance(e, dict)]
+        open_group = len(variant_ids) > 1 and len(set(variant_ids)) == len(variant_ids) and not sold_by_weight
+        approximate = bool(package_text and re.match(r'^ca\s*\d', package_text, re.IGNORECASE))
+        terms = None
+        if open_group:
+            terms = PurchaseTerms(source_reference=reference, purchase_form='fixed_package',
+                identity_scope='campaign_group', variant_selection='required',
+                eligible_variant_ids=tuple(variant_ids), complete_group_size=offer.quantity or 1)
+            package_quantity, package_unit, gtin = None, None, None
+        elif gtin and sold_by_weight and approximate and package_quantity and package_unit == 'g':
+            terms = PurchaseTerms(source_reference=reference, purchase_form='variable_package',
+                approximate_package_g=float(package_quantity), quantity_basis='source_approximation')
+        elif (gtin and sold_by_weight and not package_text and not offer.max_quantity
+              and re.search(r'\blösvikt\b', ' '.join(str(details.get(k) or '') for k in
+                  ['name', 'packageInformation', 'customerInformation', 'disclaimer']), re.IGNORECASE)):
+            terms = PurchaseTerms(source_reference=reference, purchase_form='loose_weight', quantity_basis='requirement')
+        elif gtin and not sold_by_weight and package_quantity and not approximate:
+            terms = PurchaseTerms(source_reference=reference,
+                purchase_form='piece' if package_unit=='st' and package_quantity==1 else 'fixed_package',
+                quantity_basis='source_exact', complete_group_size=offer.quantity or 1)
+        if terms and offer.max_quantity:
+            terms = terms.model_copy(update={'limit_scope':'household_campaign'})
+        terms_data = terms.model_dump(mode='json') if terms else None
+        if terms:
+            offer = offer.model_copy(update={'source_payload':{**offer.source_payload,
+                'purchase_terms':terms_data, 'price_basis_unit':'kg' if sold_by_weight else 'package',
+                'source_record':row,
+                **({'price_contract_id':f'ica:household:{external_id}:{offer.valid_from}:{offer.valid_to}'} if offer.max_quantity else {})}})
         member_price = (
             offer.price if offer.member_only and offer.type == PromotionType.MEMBER_PRICE else None
         )
@@ -444,7 +565,7 @@ class IcaParser:
             chain=Chain.ICA,
             store_external_id=store.external_id,
             external_product_id=external_id,
-            gtin=_exact_gtin(row.get("eans")),
+            gtin=gtin,
             name=name,
             brand=str(details.get("brand") or "").strip() or None,
             category_path=(str(category.get("articleGroupName")).strip(),)
@@ -458,14 +579,30 @@ class IcaParser:
             package_text=package_text,
             package_quantity=package_quantity,
             package_unit=package_unit,
-            sale_unit="kg" if sold_by_weight else "st" if regular_price else None,
+            # An explicit fixed package is a sales unit even when only the
+            # conditional price is observed; no ordinary price is implied.
+            sale_unit="kg" if sold_by_weight else "st" if open_group or regular_price or package_quantity else None,
             offers=(offer,),
             availability=None,
-            basket_type="VIKT" if sold_by_weight else None,
+            basket_type="ST" if terms and terms.purchase_form=='variable_package' else "VIKT" if sold_by_weight else None,
+            average_weight_kg=package_quantity / 1000 if terms and terms.purchase_form=='variable_package' else None,
             raw_reference=reference,
             fetched_at=fetched_at,
             source_fields={
                 "coverage": CoverageLevel.OFFERS_ONLY.value,
+                **({"purchase_blockers": ["weight_purchase_form_unproven"]} if sold_by_weight and not terms else {}),
+                **({'purchase_terms':terms_data} if terms else {}),
                 "variant_count": len(row.get("eans")) if isinstance(row.get("eans"), list) else 0,
+                "verified_store_scope": bool(price_row) and price_row.get("storeInd") is True,
+                "price_evidence": {
+                    "advertised": str(offer.price) if offer.price is not None else None,
+                    "reference_regular": str(reference_regular_price) if reference_regular_price is not None else None,
+                    "reference_label": "stores.regularPrice",
+                    "reference_is_current_checkout": False,
+                    "comparison_text": row.get("comparisonPrice") or price_row.get("referencePriceText"),
+                    "mechanic_text": details.get("mechanicInfo"),
+                    "restrictions": row.get("restriction"), "conditions": row.get("condition"),
+                    "variant_ids": [str(e.get("id")) for e in row.get("eans", []) if isinstance(e, dict)],
+                },
             },
         )

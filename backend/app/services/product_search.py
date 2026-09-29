@@ -275,9 +275,32 @@ class ProductSearchIndex:
         product = self.prepared.universe.products[position]
         store = self.stores[product.store_id]
         contracts = self.contracts[position]
-        resolution = resolve_effective_price(contracts, 1, user, on_date=target_date)
-        public = resolve_effective_price(contracts, 1, UserPricingContext(), on_date=target_date)
-        effective = float(resolution.displayed_unit_price)
+        if product.purchase_terms and any(o.price_basis_unit == 'kg' for o in product.offers):
+            from app.services.user_pricing import _offer_contract
+            contracts = tuple(_offer_contract(ProductCandidate.from_product(product, 1), o,
+                index=i, rate_contract=True) for i, o in enumerate(product.offers))
+        quantity = 1
+        eligible = True
+        try:
+            resolution = resolve_effective_price(contracts, 1, user, on_date=target_date)
+            applied = resolution.applied_promotion
+            effective = float(resolution.checkout_total)
+        except ValueError:
+            active = [c for c in contracts if c.is_active(target_date) and c.price is not None
+                      and c.mechanism in {PromotionMechanism.SALE_PRICE, PromotionMechanism.MULTIBUY}]
+            permitted = [c for c in active if user.allows(c)]
+            if not active:
+                raise
+            # Display the complete quoted purchase, never an invented residual unit price.
+            applied = min(permitted or active, key=lambda c: (c.required_packages, c.price, c.reference))
+            eligible = bool(permitted)
+            quantity = applied.required_packages
+            effective = float(applied.price)
+        try:
+            public = resolve_effective_price(contracts, quantity, UserPricingContext(), on_date=target_date)
+            public_price = float(public.checkout_total)
+        except ValueError:
+            public_price = None
         promotions = []
         for contract in contracts:
             if not contract.is_active(target_date) or contract.mechanism in {
@@ -285,7 +308,7 @@ class ProductSearchIndex:
                 PromotionMechanism.OTHER,
             }:
                 continue
-            price = contract.resolved_price(Decimal(str(product.price)))
+            price = contract.resolved_price(Decimal(str(product.price)) if product.price is not None else None)
             if price is None:
                 continue
             promotions.append(
@@ -306,6 +329,8 @@ class ProductSearchIndex:
                 }
             )
         fixed = product.sale_model in {SaleModel.FIXED_PACKAGE, SaleModel.SOLD_BY_PIECE}
+        if product.purchase_terms and product.purchase_terms.usage != "exact":
+            fixed = False
         unit_price = unit = None
         if (
             fixed
@@ -316,7 +341,7 @@ class ProductSearchIndex:
         ):
             unit = {"g": "kg", "ml": "l", "st": "st"}[product.package_unit]
             unit_price = round(
-                effective * (1 if unit == "st" else 1000) / product.package_quantity, 2
+                effective * (1 if unit == "st" else 1000) / (quantity * product.package_quantity), 2
             )
         online = store.price_semantics == "online_price" or (
             store.price_context_type or ""
@@ -326,9 +351,14 @@ class ProductSearchIndex:
             "physical-store",
             "store_linked",
         }
-        applied = resolution.applied_promotion
         source = product.source_provenance
         return {
+            "purchase_terms": product.purchase_terms.model_dump(mode='json') if product.purchase_terms else None,
+            "purchase_usage": product.purchase_terms.usage if product.purchase_terms else 'legacy',
+            "quoted_price": effective,
+            "quoted_quantity": quantity,
+            "purchase_eligible": eligible,
+            "quoted_price_unit": 'kg' if any(o.price_basis_unit == 'kg' for o in product.offers) else 'package',
             "chain": store.chain,
             "store_name": store.name,
             "context_type": store.price_context_type,
@@ -337,8 +367,8 @@ class ProductSearchIndex:
             else ("Butikskopplat pris" if linked else "Annat prisunderlag"),
             "availability_label": "Källrapporterat sortiment; inte lagerbesked eller garanterat hyllpris.",
             "regular_price": product.price,
-            "current_public_price": float(public.displayed_unit_price),
-            "effective_price": effective if fixed else None,
+            "current_public_price": public_price,
+            "effective_price": effective if fixed and quantity == 1 and eligible else None,
             "price_basis": "package" if fixed else "not_compared",
             "comparison_reason": (
                 "package_semantics_unproven"
@@ -348,7 +378,13 @@ class ProductSearchIndex:
                 else None
             ),
             "comparison_label": (
-                "Relevant produkt, men förpackningens pris eller mängd kan inte jämföras säkert."
+                "Varupris bevarat; komplett köpberäkning kräver komplettering: " + "; ".join(product.purchase_terms.critical_blockers or ("pant/mängdunderlag saknas",))
+                if product.purchase_terms and product.purchase_terms.usage == "blocked" else
+                ("Välj en kampanjmärkt variant; variantens innehåll och näring är inte verifierade."
+                 if product.purchase_terms and product.purchase_terms.variant_selection == 'required'
+                 else "Belagt kilopris; vikt och slutbelopp kräver uppskattningsläge/uppvägning."
+                 if product.purchase_terms and product.purchase_terms.usage == 'estimated'
+                 else "Relevant produkt, men förpackningens pris eller mängd kan inte jämföras säkert.")
                 if not fixed
                 else "Aktuellt förpackningspris. Jämförpris saknas eftersom mängden är osäker."
                 if unit_price is None
@@ -401,7 +437,17 @@ class ProductSearchIndex:
                     )
                 }.values()
             )
-            prices = [self._price(i, states, target_date, user) for i in positions]
+            prices = []
+            for i in positions:
+                try:
+                    prices.append(self._price(i, states, target_date, user))
+                except ValueError:
+                    if self.prepared.universe.products[i].price is not None:
+                        raise
+                    # An optional offer outside its period supplies no price.
+                    continue
+            if not prices:
+                continue
             matching_chains.update(p["chain"] for p in prices)
             prices.sort(
                 key=lambda p: (

@@ -750,6 +750,12 @@ def test_reload_rejection_restores_previous_restart_manifest(
     tmp_path: Path,
 ) -> None:
     store = _FakeArtifactStore()
+    from grocery_data.app.services.prepared_universe_activation import ActivePreparedUniverseManifest
+    previous = ActivePreparedUniverseManifest(city='Lund',scope_id='city:lund',universe_id='previous',
+        built_at=datetime.now(UTC),activated_at=datetime.now(UTC),oldest_observed_at=datetime.now(UTC),
+        snapshot_ids=('source',),product_count=1,canonical_index_count=1,
+        artifact_file='artifacts/'+'a'*64+'.json',artifact_sha256='a'*64,artifact_bytes=100).model_dump_json().encode()
+    store.active = previous
     statuses = _configure_refresh_runner(monkeypatch, store, tmp_path)
 
     def reject() -> dict[str, object]:
@@ -758,8 +764,8 @@ def test_reload_rejection_restores_previous_restart_manifest(
     monkeypatch.setattr(refresh_runner, "_reload_runtime", reject)
 
     assert refresh_runner.main() == 1
-    assert store.active == b"old-manifest"
-    assert store.rollback_calls == [(b"old-manifest", b"promoted-manifest")]
+    assert store.active == previous
+    assert store.rollback_calls == [(previous, b"promoted-manifest")]
     assert statuses[0]["disk_manifest_rollback"] == {
         "status": "restored_previous",
         "candidate_artifact_retained": True,

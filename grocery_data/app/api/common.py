@@ -255,6 +255,9 @@ def _freshness(
     channel = "offers" if coverage == CoverageLevel.OFFERS_ONLY.value else "catalog"
     return {
         "chain": chain_value,
+        "acceptance_status": (snapshot.metrics or {}).get("acceptance_status", "full_snapshot") if snapshot else None,
+        "full_snapshot_health": (snapshot.metrics or {}).get("full_snapshot_health") if snapshot else None,
+        "offer_coverage_complete": False if snapshot and (snapshot.metrics or {}).get("row_acceptance") else None,
         "snapshot_id": snapshot.id if snapshot is not None else None,
         "scope_key": snapshot.scope_key if snapshot is not None else None,
         "observed_at": observed_at,

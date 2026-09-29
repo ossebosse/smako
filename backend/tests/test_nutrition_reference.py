@@ -46,10 +46,10 @@ def products():
     )
 
 
-def test_all_thirty_references_have_sourced_units_and_not_product_identities():
+def test_all_reviewed_references_have_sourced_units_and_not_product_identities():
     with patch("socket.socket.connect", side_effect=AssertionError("offline")):
         data = reference_data()
-        assert len(MAPPINGS) == 30
+        assert len(MAPPINGS) == 46  # Includes the previously verified mango reference (574).
         for identity in MAPPINGS:
             f = reference_evidence(identity)
             assert set(f.nutrition) == {"kcal", "protein_g", "fat_g", "carbs_g"}
@@ -217,6 +217,8 @@ def test_reference_version_is_independent_of_json_line_endings(tmp_path, monkeyp
     first = reference_data()["content_version"]
     path = tmp_path / "reference.json"
     path.write_bytes(module.PATH.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n"))
+    (tmp_path / "slv-20260925.json").write_bytes(module.PATH.with_name("slv-20260925.json").read_bytes())
+    (tmp_path / "slv-20260926.json").write_bytes(module.PATH.with_name("slv-20260926.json").read_bytes())
     monkeypatch.setattr(module, "PATH", path)
     reference_data.cache_clear()
     try:

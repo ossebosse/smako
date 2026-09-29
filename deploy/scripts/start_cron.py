@@ -72,6 +72,8 @@ def _validate_display_schedule(
 def scheduled_jobs() -> tuple[tuple[str, str], ...]:
     """Backups remain scheduled even when source collection is blocked."""
     jobs = [("DAILY_BACKUP_CRON", "backup_sqlite.py")]
+    if os.getenv("DEMAND_REFRESH_ENABLED", "false").casefold() == "true":
+        return tuple(jobs + [("DEMAND_REFRESH_CRON", "run_daily_refresh.py")])
     for setting, schedule, script in (
         ("DAILY_REFRESH_ENABLED", "DAILY_REFRESH_CRON", "run_daily_refresh.py"),
         ("COOP_RETRY_ENABLED", "COOP_RETRY_CRON", "run_source_retry.py"),
@@ -131,7 +133,8 @@ def main() -> None:
         ". /run/grocery-beta-environment && cd /srv/app && "
     )
     schedules = {"DAILY_REFRESH_CRON": refresh, "COOP_RETRY_CRON": coop_retry,
-                 "DAILY_BACKUP_CRON": backup}
+                 "DAILY_BACKUP_CRON": backup,
+                 "DEMAND_REFRESH_CRON": _schedule("DEMAND_REFRESH_CRON", "*/15 * * * *")}
     cron_file.write_text(
         "SHELL=/bin/sh\n"
         "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n"

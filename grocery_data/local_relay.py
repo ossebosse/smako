@@ -101,12 +101,18 @@ def run(
 
     log(
         "task_start",
-        expected_daily_time="01:30",
+        expected_daily_time=None if ((workspace / "demand-refresh-enabled").exists() or (workspace / "source-scope.json").exists()) else "01:30",
+        schedule_policy="base_35h" if ((workspace / "demand-refresh-enabled").exists() or (workspace / "source-scope.json").exists()) else "daily",
         schedule_timezone="Europe/Stockholm",
         invocation_kind="scheduled_or_manual_not_inferred",
     )
     try:
         with RefreshRunLock(workspace / "local-workflow.lock"):
+            from grocery_data.app.services.willys_municipal_scope import (
+                matches_relay_scope,
+                relay_municipality,
+            )
+            municipality = relay_municipality(workspace)
             for old in sorted(logs.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)[
                 29:
             ]:
@@ -115,7 +121,17 @@ def run(
             receipt_path = workspace / "last-success.json"
             receipt = json.loads(receipt_path.read_bytes()) if receipt_path.exists() else {}
             day = now.astimezone(ZoneInfo("Europe/Stockholm")).date().isoformat()
-            if receipt.get("collection_day") == day:
+            demand_policy = workspace / "demand-refresh-enabled"
+            if receipt.get("municipality_code") != municipality:
+                receipt = {}  # Never reuse another scope's success/timer.
+            demand_enabled = demand_policy.exists() or municipality is not None
+            if demand_enabled and receipt.get("observed_from"):
+                observed = datetime.fromisoformat(receipt["observed_from"])
+                if now < observed + timedelta(hours=35):
+                    log("not_due", next_fetch_at=(observed + timedelta(hours=35)).isoformat(),
+                        external_price_requests=0)
+                    return 0
+            if not demand_enabled and receipt.get("collection_day") == day:
                 log("already_delivered", sha256_prefix=receipt["sha256"][:12])
                 return 0
             candidate = None
@@ -130,6 +146,8 @@ def run(
                 except (ValueError, OSError):
                     log("pending_validation_rejected", artifact_file=path.name)
                     continue
+                if not matches_relay_scope(verified.manifest, municipality):
+                    continue
                 observed = verified.manifest.observed_from
                 if verified.artifact_sha256 != receipt.get("sha256") and now - observed < timedelta(
                     hours=24
@@ -138,7 +156,7 @@ def run(
                     break
             if candidate is None:
                 log("collection_start")
-                result = asyncio.run(collect(SimpleNamespace(workspace=workspace)))
+                result = asyncio.run(collect(SimpleNamespace(workspace=workspace, municipality=municipality)))
                 if result["status"] != "complete":
                     raise ValueError("collection did not complete")
                 candidate = Path(result["artifact"])
@@ -149,7 +167,13 @@ def run(
                     runtime_seconds=result.get("runtime_seconds"),
                 )
             verified = verify_source_artifact(candidate)
+            if not matches_relay_scope(verified.manifest, municipality):
+                raise ValueError("collected artifact has wrong municipality")
             digest = verified.artifact_sha256
+            atomic_write_bytes(workspace / "last-qualified-source.json", json.dumps({
+                "sha256": digest, "artifact": str(candidate), "municipality_code": municipality,
+                "observed_from": verified.manifest.observed_from.isoformat(),
+                "qualified_at": datetime.now(UTC).isoformat(), "publication": "see_last_success_receipt"}).encode())
             log(
                 "validation_pass",
                 sha256_prefix=digest[:12],
@@ -169,6 +193,8 @@ def run(
             observed = verified.manifest.observed_from
             receipt = {
                 "sha256": digest,
+                "municipality_code": municipality,
+                "next_fetch_at": (observed + timedelta(hours=35)).isoformat(),
                 "artifact": str(candidate),
                 "collection_day": observed.astimezone(ZoneInfo("Europe/Stockholm"))
                 .date()

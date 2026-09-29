@@ -184,6 +184,15 @@ def _restore_restart_lkg(
 ) -> dict[str, Any]:
     """Restore the pre-refresh restart pointer, leaving candidate bytes intact."""
 
+    if previous is not None:
+        from grocery_data.app.services.prepared_universe_activation import (
+            ActivePreparedUniverseManifest,
+        )
+        old = ActivePreparedUniverseManifest.model_validate_json(previous)
+        observed = old.oldest_base_observed_at or old.oldest_observed_at
+        if (datetime.now(UTC) - observed).total_seconds() >= 48 * 3600:
+            return {"status": "not_restored", "reason": "previous_base_prices_expired",
+                    "candidate_artifact_retained": True}
     store.restore_active_manifest(
         city,
         previous,
@@ -334,8 +343,212 @@ def _run_locked(
     status["completed_at"] = datetime.now(UTC).isoformat()
     status["exit_code"] = exit_code
     status["status"] = "complete" if exit_code == 0 else "degraded" if exit_code == 2 else "failed"
+    from grocery_data.app.services.coop_offer_job import record_publication
+    try:
+        record_publication(status=status, disk_universe_id=_active_disk_universe_id(artifact_store, city=city))
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        status["coop_publication_state_error"] = type(exc).__name__
+        if exit_code == 0:
+            exit_code = 2
+            status.update(exit_code=2, status="degraded")
+    from grocery_data.app.services.citygross_municipal_job import (
+        record_publication as record_citygross,
+    )
+    try:
+        record_citygross(status=status, disk_universe_id=_active_disk_universe_id(artifact_store, city=city))
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        status["citygross_publication_state_error"] = type(exc).__name__
+        if exit_code == 0:
+            exit_code = 2
+            status.update(exit_code=2, status="degraded")
+    from grocery_data.app.services.lidl_municipal_job import (
+        record_publication as record_lidl,
+    )
+    try:
+        record_lidl(status=status, disk_universe_id=_active_disk_universe_id(artifact_store, city=city))
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        status["lidl_publication_state_error"] = type(exc).__name__
+    from grocery_data.app.services.willys_flyer_job import record_publication as record_willys_flyer
+    try:
+        record_willys_flyer(status=status, disk_universe_id=_active_disk_universe_id(artifact_store, city=city))
+    except (OSError, ValueError, KeyError) as exc:
+        status["willys_flyer_publication_state_error"] = type(exc).__name__
+        if exit_code == 0:
+            exit_code = 2
+            status.update(exit_code=2, status="degraded")
     (status_writer or _write_status)(status)
     return exit_code
+
+
+def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
+    """Local due-time inspection only; durable state is shared with this runner.
+
+    Base scope is derived from the serving artifact's required contexts, never
+    from a second hand-maintained retailer list. No retailer calls happen here.
+    """
+    import hashlib
+    import sqlite3
+    from datetime import timedelta
+
+    from grocery_data.app.services.campaign_refresh_policy import base_fetch_due
+
+    env = os.environ if environment is None else environment
+    city = env.get("REFRESH_CITY", "Lund")
+    root = Path(env["PRICE_UNIVERSE_CACHE_ROOT"])
+    database = Path(make_url(env["GROCERY_DATABASE_URL"]).database)
+    state_path = Path(env.get("DEMAND_REFRESH_STATE_PATH", str(root.parent / "reports/operations/demand-refresh.json")))
+    state = json.loads(state_path.read_bytes()) if state_path.exists() else {}
+    store = PreparedUniverseArtifactStore(root)
+    manifest = store.read_active(city)
+    required = set(filter(None, env.get("PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS", "").split(",")))
+    if not state.get("base_scope") or state.get("scope_universe_id") != manifest.universe_id:
+        artifact = json.loads(store.resolve_active_artifact(city, verify_hash=True).read_bytes())
+        state["base_scope"] = [s for s in artifact["stores"]
+            if (not required or s['store_id'] in required)
+            and s.get('source_provenance', {}).get('source_channel') == 'catalog']
+        if not state["base_scope"]:
+            raise ValueError('no verified base scope for demand refresh')
+        state["scope_universe_id"] = manifest.universe_id
+    offer_root = Path(env.get('ICA_STRUCTURED_OFFERS_ROOT', str(database.parent / 'ica-structured-offers')))
+    from grocery_data.app.services.ica_offer_job import source_location
+    _area, offer_location = source_location(city, offer_root, environment=env)
+    pointer = offer_location / 'structured-source.json'
+    offers = json.loads(pointer.read_bytes()) if pointer.exists() else {}
+    from grocery_data.app.services.hemkop_municipal_job import source_plan as hemkop_source_plan
+    hemkop_plan = hemkop_source_plan(city=city, environment=env, now=now)
+    offer_enabled = env.get('ICA_STRUCTURED_OFFERS_ENABLED', 'false').casefold() == 'true'
+    campaign_times = [datetime.fromisoformat(v['next_fetch_at']) for v in offers.get('store_schedule', {}).values()]
+    from grocery_data.app.services.coop_offer_job import source_plan
+    coop_plan = source_plan(environment=env, now=now)
+    from grocery_data.app.services.citygross_municipal_job import (
+        source_plan as citygross_source_plan,
+    )
+    citygross_plan = citygross_source_plan(environment=env, now=now)
+    from grocery_data.app.services.lidl_municipal_job import source_plan as lidl_source_plan
+    lidl_plan = lidl_source_plan(environment=env, now=now)
+    from grocery_data.app.services.willys_flyer_job import source_plan as willys_flyer_source_plan
+    willys_flyer_plan = willys_flyer_source_plan(environment=env, now=now)
+    willys_flyer_times = [datetime.fromisoformat(r["next_fetch_at"]) for r in willys_flyer_plan["stores"] if r.get("next_fetch_at")]
+    lidl_times = [datetime.fromisoformat(r["next_fetch_at"]) for r in lidl_plan["stores"] if r.get("next_fetch_at")]
+    coop_times = [datetime.fromisoformat(r["next_fetch_at"]) for r in coop_plan["stores"] if r.get("next_fetch_at")]
+    citygross_times = [datetime.fromisoformat(r["next_fetch_at"]) for r in citygross_plan["stores"] if r.get("next_fetch_at")]
+    hemkop_times = [datetime.fromisoformat(r['next_fetch_at']) for r in hemkop_plan['store_schedule'].values()]
+    campaign_at = min([*(campaign_times if offer_enabled else []), *coop_times, *citygross_times, *lidl_times, *willys_flyer_times, *hemkop_times], default=None)
+    sources = {}
+    with sqlite3.connect(f'file:{database.as_posix()}?mode=ro', uri=True) as db:
+        for physical in state['base_scope']:
+            prov = physical['source_provenance']
+            if (physical['chain'] == 'citygross' and citygross_plan['enabled']) or (physical['chain'] == 'lidl' and lidl_plan['enabled']):
+                continue
+            if prov['source_provider'] != 'own':
+                continue
+            row = db.execute("""SELECT cs.id, min(sp.fetched_at) FROM source_products sp
+                JOIN catalog_snapshots cs ON cs.id=sp.catalog_snapshot_id
+                WHERE cs.is_active=1 AND cs.state='promoted' AND cs.coverage != 'offers_only'
+                  AND sp.chain=? AND sp.store_external_id=?
+                GROUP BY cs.id ORDER BY cs.promoted_at DESC LIMIT 1""",
+                (physical['chain'], prov['provider_store_id'])).fetchone()
+            key = physical['chain']
+            item = sources.setdefault(key, {'observations': [], 'snapshots': []})
+            if row and row[1]:
+                item['observations'].append(row[1]); item['snapshots'].append(row[0])
+            else:
+                item['missing'] = True
+    if any(s['source_provenance']['source_provider'] == 'primat' for s in state['base_scope']):
+        from grocery_data.app.services.closed_provider_cache_store import (
+            ClosedProviderCacheArtifactStore,
+        )
+        from grocery_data.app.services.freshness import FreshnessPolicy
+        resolved = ClosedProviderCacheArtifactStore(root / 'external-provider-cache').resolve_active(city, policy=FreshnessPolicy())
+        if resolved:
+            # Manifest captured_at is the verified conservative original source observation.
+            ext_manifest = json.loads((root / 'external-provider-cache/active' / ('city-' + city.casefold() + '.json')).read_bytes())
+            sources['primat'] = {'observations': [ext_manifest['captured_at']], 'snapshots': ext_manifest['snapshot_ids']}
+        else:
+            sources['primat'] = {'observations': [], 'snapshots': [], 'missing': True}
+    due_sources = []
+    for key, source in sources.items():
+        observed = min((datetime.fromisoformat(x) for x in source['observations']), default=None)
+        # The local relay owns its independent durable 35-hour timer. A VPS
+        # campaign tick cannot advance it; do not advertise an earlier fetch.
+        relay_source = key == 'willys' and env.get('WILLYS_COLLECTION_LOCATION') == 'LOCAL_RELAY'
+        due = now if observed is None or source.get('missing') else base_fetch_due(
+            observed, now=now, campaign_at=None if relay_source else campaign_at)
+        retry = state.get('source_retries', {}).get(key)
+        if retry and retry['snapshots'] == source['snapshots']:
+            due = max(due, datetime.fromisoformat(retry['retry_at']))
+        source.update(next_fetch_at=due.isoformat(), reason='local_relay_35h_deadline' if relay_source else 'base_35h_deadline_or_campaign_coalescing',
+                      observed_at=observed.isoformat() if observed else None,
+                      hard_stop_at=(observed + timedelta(hours=48)).isoformat() if observed else None)
+        if due <= now:
+            due_sources.append(key)
+    transitions = [datetime.fromisoformat(v['next_transition_at']) for v in offers.get('store_schedule', {}).values() if v.get('next_transition_at')]
+    last = datetime.fromisoformat(state.get('last_success_at', '1970-01-01T00:00:00+00:00'))
+    local_transition = any(last < t <= now for t in transitions)
+    offer_due = offer_enabled and (not offers or any(t <= now for t in campaign_times)
+        or datetime.fromisoformat(offers['next_inventory_at']) <= now)
+    fingerprint = hashlib.sha256(json.dumps({'base': {k:v['snapshots'] for k,v in sources.items()},
+        'offers': offers.get('database') if offer_enabled else None, 'hemkop_municipal': hemkop_plan['fingerprint'], 'coop': coop_plan['fingerprint'], 'citygross': citygross_plan['fingerprint'], 'lidl': lidl_plan['fingerprint'], 'willys_flyer': willys_flyer_plan['fingerprint']}, sort_keys=True).encode()).hexdigest()
+    changed = fingerprint != state.get('published_sources')
+    reasons = (["source_promotion_pending_publication"] if changed else []) + (["campaign_transition"] if local_transition else []) + (["ica_source_due"] if offer_due else [])
+    if coop_plan["work_due"]:
+        reasons.append("coop_municipal_work_due")
+    if hemkop_plan['work_due']:
+        reasons.append('hemkop_municipal_work_due')
+    if willys_flyer_plan["work_due"]:
+        reasons.append("willys_flyer_work_due")
+    if lidl_plan["work_due"]:
+        reasons.append("lidl_municipal_work_due")
+    if citygross_plan["work_due"]:
+        reasons.append("citygross_municipal_work_due")
+    remote_due = [k for k in due_sources if k != 'willys' or env.get('WILLYS_COLLECTION_LOCATION') != 'LOCAL_RELAY']
+    work = bool(remote_due or reasons)
+    if state.get('retry_at') and datetime.fromisoformat(state['retry_at']) > now:
+        work = False
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    return {'work_due': work, 'reasons': reasons, 'sources': sources, 'due_sources': remote_due,
+        'hemkop_municipal': hemkop_plan, 'coop_municipal': coop_plan, 'citygross_municipal': citygross_plan, 'lidl_municipal': lidl_plan, 'willys_flyer': willys_flyer_plan, 'relay_due': 'willys' in due_sources, 'ica_store_schedule': offers.get('store_schedule', {}),
+        'source_fingerprint': fingerprint, 'state': state, 'state_path': str(state_path),
+        'checked_at': now.isoformat(), 'external_price_requests': 0}
+
+
+def _run_demand_locked(lock, *, started_at):
+    from datetime import timedelta
+    plan = demand_refresh_plan(now=started_at)
+    state, path = plan.pop('state'), Path(plan.pop('state_path'))
+    if not plan['work_due']:
+        state['last_check'] = plan
+        atomic_write_bytes(path, json.dumps(state, ensure_ascii=False).encode())
+        _write_status({'status': 'not_due', **plan})
+        return 0
+    command = build_refresh_command()
+    chains = [k for k in plan['due_sources'] if k != 'primat']
+    for chain in chains or ['citygross']:  # existing local-only rebuild path
+        command.extend(['--chain', chain])
+    if 'primat' not in plan['due_sources']:
+        command.append('--no-external-refresh')
+    code = _run_locked(lock, started_at=started_at, command=command)
+    ended = datetime.now(UTC)
+    after = demand_refresh_plan(now=ended)
+    state.update(after['state'])
+    state['last_check'] = {k:v for k,v in after.items() if k not in {'state', 'state_path'}}
+    retries = state.setdefault('source_retries', {})
+    for key in plan['due_sources']:
+        old, new = plan['sources'][key], after['sources'][key]
+        if old['snapshots'] == new['snapshots']:
+            failures = retries.get(key, {}).get('failures', 0) + 1
+            retries[key] = {'snapshots': new['snapshots'], 'failures': failures,
+                'retry_at': (ended + timedelta(minutes=min(360, 15 * 2 ** min(failures-1,5)))).isoformat()}
+        else:
+            retries.pop(key, None)
+    if code in {0, 2}:
+        state.update(last_success_at=ended.isoformat(), published_sources=after['source_fingerprint'], failures=0)
+        state.pop('retry_at', None)
+    else:
+        failures = state.get('failures', 0) + 1
+        state.update(failures=failures, retry_at=(ended + timedelta(minutes=min(360, 15 * 2 ** min(failures-1,5)))).isoformat())
+    atomic_write_bytes(path, json.dumps(state, ensure_ascii=False).encode())
+    return code
 
 
 def main() -> int:
@@ -363,6 +576,8 @@ def main() -> int:
         )
         return 2
     try:
+        if os.getenv("DEMAND_REFRESH_ENABLED", "false").casefold() == "true":
+            return _run_demand_locked(operations_lock, started_at=started_at)
         return _run_locked(operations_lock, started_at=started_at)
     finally:
         operations_lock.release()

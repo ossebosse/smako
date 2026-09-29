@@ -69,6 +69,7 @@ async def collect(args):
         raw = FilesystemRawSnapshotStore(run / "raw")
         client = WillysClient(requests_per_second=1)
         count = 0
+        request_budget = 1500
         statuses = Counter()
         challenges = 0
         started_at = datetime.now(UTC)
@@ -76,9 +77,12 @@ async def collect(args):
 
         async def bound(request):
             nonlocal count
-            if count >= 1500 or monotonic() - started > 7200:
+            if count >= request_budget or monotonic() - started > 7200:
                 raise SourceArtifactError("bounded local collection stopped")
             count += 1
+            if count % 100 == 0:
+                atomic_write_bytes(run / "progress.json", json.dumps({"requests": count, "request_budget": request_budget,
+                    "runtime_seconds": round(monotonic()-started, 3), "status": "collecting"}).encode())
 
         client._client.event_hooks["request"].append(bound)
 
@@ -91,15 +95,33 @@ async def collect(args):
                 challenges += any(x in body for x in ("request blocked", "captcha", "challenge"))
 
         client._client.event_hooks["response"].append(record_response)
+        from grocery_data.app.services.willys_municipal_scope import relay_municipality
+        municipality = relay_municipality(root, getattr(args, "municipality", None))
+        area = GeographicArea(city="Lund")
         connector = WillysConnector(client=client, allowed_store_ids=APPROVED_WILLYS_CONTEXTS)
+        if municipality:
+            from grocery_data.app.domain.municipality import municipality_name
+            area = GeographicArea(city=municipality_name(municipality), mode="municipality", municipality_code=municipality)
+            connector = WillysConnector(client=client)
+            discovery = await connector.fetch_stores(area)
+            selected = connector.parse_stores(discovery, ["live:registry"] * len(discovery.documents), area)
+            connector.allowed_store_ids = frozenset(s.external_id for s in selected)
+            request_budget = min(5900, 1000 * len(selected) + 100)
+            atomic_write_bytes(run / "municipality-inventory.json", json.dumps(connector.municipality_inventory, ensure_ascii=False).encode())
+            if not selected:
+                await connector.aclose()
+                engine.dispose()
+                raise SourceArtifactError("no verified municipal online contexts")
         status = "failed"
         try:
             result = await GroceryCollector(factory, raw).collect_area(
-                connector, GeographicArea(city="Lund"), auto_promote=False
+                connector, area, auto_promote=False,
+                scope_key=area.city.casefold() if municipality else None
             )
             destination = root / "completed" / f"{result.snapshot_id}.smako-source"
             export_source_artifact(
-                factory, raw, result.snapshot_id, destination, original_request_count=count
+                factory, raw, result.snapshot_id, destination, original_request_count=count,
+                municipality_boundary=connector.municipality_boundary
             )
             verified = verify_source_artifact(destination)
             status = "complete"
@@ -234,10 +256,14 @@ async def import_and_activate(args):
         snapshot = manager.get(result["snapshot_id"])
         if snapshot.state == "promoted" and not snapshot.is_active:
             return {**result, "activation": "already_imported_superseded"}
+        verified = verify_source_artifact(args.artifact)
+        city = verified.manifest.source_scope.geographic_area.city
+        if os.getenv("REFRESH_CITY", "Lund").casefold() != city.casefold():
+            raise SourceArtifactError("source municipality differs from configured ordinary refresh city")
         active_store = PreparedUniverseArtifactStore(settings.price_universe_cache_root)
-        active = active_store.read_active("Lund")
+        active = active_store.read_active(city)
         if snapshot.is_active and active and snapshot.id in active.snapshot_ids:
-            active_store.resolve_active_artifact("Lund", verify_hash=True)
+            active_store.resolve_active_artifact(city, verify_hash=True)
             return {**result, "activation": "already_active", "active_universe_unchanged": True}
         if snapshot.state != "promoted":
             manager.promote(snapshot.id)
@@ -249,10 +275,10 @@ async def import_and_activate(args):
         )
         if code not in (0, 2):
             raise SourceArtifactError("normal PriceUniverse activation did not complete")
-        activated = active_store.read_active("Lund")
+        activated = active_store.read_active(city)
         if activated is None or snapshot.id not in activated.snapshot_ids:
             raise SourceArtifactError("qualified source was not activated; existing LKG retained")
-        active_store.resolve_active_artifact("Lund", verify_hash=True)
+        active_store.resolve_active_artifact(city, verify_hash=True)
         return {
             **result,
             "universe_id": activated.universe_id,
@@ -273,6 +299,7 @@ def parser():
     c = sub.add_parser("collect")
     c.add_argument("source", choices=["willys"])
     c.add_argument("--workspace", type=Path, required=True)
+    c.add_argument("--municipality", help="Official municipality code; opt-in store-bound online catalogs")
     v = sub.add_parser("verify")
     v.add_argument("artifact", type=Path)
     s = sub.add_parser("push")

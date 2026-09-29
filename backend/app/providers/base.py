@@ -58,7 +58,7 @@ class GroceryPriceProvider(ABC):
         for product in products:
             non_fixed = product.sale_model in _NON_FIXED_SALE_MODELS
             active_offers = product.active_offers(on_date)
-            eligible_prices = [product.price]
+            eligible_prices = [product.price] if product.price is not None else []
             for offer in active_offers:
                 if offer.required_packages != 1:
                     continue
@@ -83,6 +83,8 @@ class GroceryPriceProvider(ABC):
                 )
                 if not capped_member_price:
                     eligible_prices.append(product.member_price)
+            if not eligible_prices:
+                continue
             effective_price = min(eligible_prices)
             result.append(
                 product.model_copy(update={"effective_price": effective_price}, deep=True)

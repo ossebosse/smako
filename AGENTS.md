@@ -26,3 +26,13 @@
 - Use Python 3.12. After relevant changes, run focused tests, Ruff and
   compileall; reuse unchanged, hash-stable verification instead of needlessly
   repeating expensive live collections.
+
+- Permanent municipal acceptance: Coop, Stora Coop and X:-tra must use the same
+  official municipality parameter through discovery, store-bound collection,
+  validation, OWN, PriceUniverse and refresh selection. Verify Lund and another
+  municipality with the same code; distinguish live network evidence from
+  retained-data tests. X:-tra publications must come from each official store's
+  current source links, never a fixed Skansvägen URL or saved Lund flyer.
+  Preserve every discovered/unknown/failed store in coverage and report unknown
+  PDF layouts explicitly. This never expands existing user area/store choices
+  or authorizes production activation or changes to the pending ICA release.

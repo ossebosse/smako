@@ -33,6 +33,7 @@ class ProductFacts:
     source_product_id: str
     source_snapshot_id: str
     retailer_product_id: str | None = None
+    product_classification: tuple[str, ...] = ()
     ingredients_complete: bool = False
     ingredient_evidence_kind: str | None = None
     ingredients: tuple[str, ...] = ()

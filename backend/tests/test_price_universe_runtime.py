@@ -1095,3 +1095,34 @@ async def test_runtime_readiness_warns_at_36_and_requires_all_contexts_at_48(mon
     assert aging["required_contexts_usable"] and aging["requires_attention"]
     assert not stale["required_contexts_usable"] and stale["requires_attention"]
     assert stale["missing_required_context_ids"] == [context]
+
+
+def test_campaign_survives_48h_but_expires_locally_without_rebuild():
+    from datetime import date
+    from grocery_data.app.domain.campaign_validity import CampaignEvidence
+    observed = datetime(2026,9,14,8,tzinfo=UTC)
+    p = _product("campaign-rice", "ris", price=20, quantity=1000, observed_at=observed)
+    proof = CampaignEvidence(store_external_id='official', offer_id='campaign-rice',
+        source_reference='raw:retained', observed_current_at=observed, checked_at=observed)
+    p = p.model_copy(update={'chain':'ica','price':None,'coverage':'offers_only',
+        'offers':[OfferMetadata(kind=OfferKind.CAMPAIGN,description="fixture public campaign",price=20,valid_to=date(2026,9,20),campaign_evidence=proof)],
+        'source_provenance':p.source_provenance.model_copy(update={'chain':'ica',
+            'source_channel':'offers','provider_store_id':'official','coverage':'offers_only'})})
+    key = PriceUniverseKey.create(city='Lund',postal_codes=[POSTAL_CODE],snapshot_ids=[SNAPSHOT_ID],
+        memberships=normalized_memberships({}), source_strategy_version='fixture',
+        normalizer_version='fixture',taxonomy_version='fixture')
+    universe=PriceUniverseBuilder().build(key,[p],built_at=observed)
+    prepared=PreparedPriceUniverse(universe=universe,stores=(_store(observed_at=observed),),
+        economic_pool=_pool([p]),source_name='fixture',oldest_observed_at=observed)
+    before=datetime(2026,9,20,21,59,tzinfo=UTC)
+    after=datetime(2026,9,20,22,0,tzinfo=UTC)
+    assert prepared.request_view(now=before).usable_context_ids == (STORE_ID,)
+    assert prepared.request_view(now=after).usable_context_ids == ()
+    assert not p.offers[0].is_active(date(2026,9,13))
+    assert p.offers[0].valid_from is None
+    assert p.source_provenance.source_observed_at == observed
+    # A wrong-store proof does not get the age exemption.
+    bad=p.model_copy(update={'source_provenance':p.source_provenance.model_copy(update={'provider_store_id':'other'})})
+    broken=PreparedPriceUniverse(universe=PriceUniverseBuilder().build(key,[bad],built_at=observed),
+        stores=(_store(observed_at=observed),),economic_pool=_pool([bad]),source_name='fixture',oldest_observed_at=observed)
+    assert not broken.request_view(now=before).usable_context_ids

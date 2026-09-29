@@ -12,6 +12,7 @@ import json
 import math
 import re
 import sqlite3
+import unicodedata
 from collections import defaultdict
 from dataclasses import asdict, replace
 from pathlib import Path
@@ -19,7 +20,7 @@ from threading import RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v3"
+FACTS_VERSION = "retained-catalog-facts-v6-official-declarations"
 _CACHE = {}
 _LOCK = RLock()
 
@@ -42,6 +43,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         )
     nutrition, unit, basis = {}, None, None
     conflicts = []
+    limits = []
     if chain == "coop":
         declarations = raw.get("nutrientInformation", [])
         if len(declarations) == 1:
@@ -68,6 +70,12 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
                 for nutrient in raw.get("nutrientLinks", []):
                     key = fields.get((nutrient.get("description"), nutrient.get("unit")))
                     raw_values = nutrient.get("amount", [])
+                    accuracy = nutrient.get("amountAccuracy", {}).get("code")
+                    if key and accuracy not in {None, "EXACT"}:
+                        limits.append({"field": key, "amount": raw_values,
+                                       "accuracy": accuracy, "basis_quantity": amount,
+                                       "basis_unit": unit})
+                        continue  # A threshold is not an exact declared value.
                     if key and len(raw_values) != 1:
                         conflicts.append("nutrition." + key)
                     if key and len(raw_values) == 1:
@@ -165,7 +173,9 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         **{f"nutrition.{k}": v for k, v in nutrition.items()},
     }
     return replace(
-        fact, field_sources={k: (dict(evidence),) for k, v in fields.items() if v is not None}
+        fact, field_sources={**{k: (dict(evidence),) for k, v in fields.items() if v is not None},
+                            **({"nutrition_limits": tuple({**evidence, **r} for r in limits)}
+                               if limits else {})}
     )
 
 
@@ -182,6 +192,39 @@ def facts_version(facts):
             ).encode()
         ).hexdigest()
     )
+
+
+def identity_variant_conflicts(products):
+    """Veto fact propagation, never invalidate independently observed facts.
+
+    A canonical value equal to the displayed name is a fallback label, not an
+    independently established food classification. GTIN and exact package are
+    checked by the caller. Names never establish identity or transfer prices.
+    """
+    def text(value):
+        return " ".join(unicodedata.normalize("NFKC", value or "").casefold().split())
+
+    reasons = []
+    for field in ("product_form", "canonical_food", "brand"):
+        values = set()
+        for product in products:
+            value = text(getattr(product, field))
+            if field == "canonical_food" and value == text(product.name):
+                continue
+            if value:
+                values.add(value)
+        if len(values) > 1:
+            reasons.append(field)
+    percentages = {
+        tuple(sorted(float(x.replace(",", "."))
+                     for x in re.findall(r"(\d+(?:[.,]\d+)?)\s*%", p.name)))
+        for p in products
+    } - {()}
+    if len(percentages) > 1:
+        reasons.append("percentage_variant")
+    if len({(p.package_quantity, p.package_unit) for p in products}) > 1:
+        reasons.append("package")
+    return tuple(reasons)
 
 
 class FactsCollection(dict):
@@ -214,34 +257,15 @@ def complete_identity_facts(prepared, original):
         except InvalidGtinError:
             continue
 
-        # GTIN establishes identity; these checks veto contradictory variants.
-        def variants(p):
-            return tuple(
-                sorted(
-                    float(x.replace(",", ".")) for x in re.findall(r"(\d+(?:[.,]\d+)?)\s*%", p.name)
-                )
-            )
-
         observed = [p.source_provenance.source_observed_at for p in products if p.source_provenance]
         if (
             len(observed) != len(products)
             or (max(observed) - min(observed)).total_seconds() > 7 * 86400
         ):
             continue
-        if (
-            any(
-                len({getattr(p, field) for p in products if getattr(p, field)}) > 1
-                for field in ("product_form", "canonical_food", "brand")
-            )
-            or len({variants(p) for p in products if variants(p)}) > 1
-        ):
-            for p in products:
-                key = (p.store_id, p.product_id)
-                if key in result:
-                    result[key] = replace(
-                        result[key],
-                        conflicts=tuple(sorted(set(result[key].conflicts) | {"identity_variant"})),
-                    )
+        if identity_variant_conflicts(products):
+            # Quarantine this cross-source join. An optional ambiguous listing
+            # cannot taint the original store's independently retained facts.
             continue
         entries = [
             original[(p.store_id, p.product_id)]
@@ -347,7 +371,85 @@ def complete_identity_facts(prepared, original):
             )
     from app.services.reviewed_ingredients import enrich_ingredients
 
-    return FactsCollection(enrich_ingredients(prepared, result))
+    return FactsCollection(enrich_ingredients(prepared, complete_coop_retailer_facts(prepared, result)))
+
+
+
+def complete_coop_retailer_facts(prepared, original):
+    """Reuse verified catalog facts, never catalog prices, via opaque retailer ID.
+
+    A DKE externalId is NOT declared to be a GTIN. It must match an existing
+    Coop catalog id with explicit EAN, exact display variant/brand/package and
+    concurrent source observations. Unknown or conflicting matches stay unknown.
+    """
+    from grocery_data.app.domain.identifiers import InvalidGtinError, normalize_gtin
+
+    def label(value):
+        return " ".join(unicodedata.normalize("NFKC", value or "").casefold()
+                        .replace("®", "").replace("™", "").split())
+
+    donors = defaultdict(list)
+    for p in prepared.universe.products:
+        provenance = p.source_provenance
+        fact = original.get((p.store_id, p.product_id))
+        if not (p.chain == "coop" and provenance and provenance.source_provider == "own"
+                and provenance.source_channel == "catalog" and p.gtin and fact
+                and fact.source_product_id == p.product_id
+                and fact.source_snapshot_id == provenance.source_snapshot_id
+                and fact.retailer_product_id == p.gtin and not fact.conflicts):
+            continue
+        try:
+            normalize_gtin(p.gtin)
+        except InvalidGtinError:
+            continue
+        donors[fact.retailer_product_id].append((p, fact))
+    result = dict(original)
+    for p in prepared.universe.products:
+        provenance = p.source_provenance
+        key = (p.store_id, p.product_id)
+        if (key in original or p.chain != "coop" or not provenance
+                or provenance.source_provider != "own" or provenance.source_channel != "offers"
+                or p.price_context_type != "physical_store" or p.coverage != "offers_only"
+                or provenance.retailer_id_namespace != "coop:public-product"
+                or not provenance.retailer_identity_source_sha256
+                or not provenance.retailer_product_id or not p.brand or not p.package_quantity):
+            continue
+        matches = donors.get(provenance.retailer_product_id, [])
+        if not matches:
+            continue
+        def compatible(donor, p=p, provenance=provenance):
+            dp = donor.source_provenance
+            return (label(p.name) == label(donor.name)
+                    and label(p.brand) == label(donor.brand)
+                    and p.package_quantity == donor.package_quantity
+                    and p.package_unit == donor.package_unit
+                    and p.sale_model == donor.sale_model
+                    and p.usable_quantity == donor.usable_quantity
+                    and p.usable_unit == donor.usable_unit
+                    and abs((provenance.source_observed_at - dp.source_observed_at).total_seconds()) <= 7 * 86400)
+        if not all(compatible(donor) for donor, _ in matches):
+            continue  # A collision cannot be settled by picking the first row.
+        fields = ('nutrition', 'nutrition_unit', 'nutrition_basis', 'nutrition_preparation',
+                  'ingredients', 'organic', 'animal', 'conflicts')
+        signatures = {json.dumps({**{k: getattr(f, k) for k in fields},
+            'limits': [{k: e.get(k) for k in ('field', 'amount', 'accuracy', 'basis_quantity', 'basis_unit')}
+                       for e in f.field_sources.get('nutrition_limits', ())]}, sort_keys=True)
+                      for _, f in matches}
+        if len(signatures) != 1:
+            continue
+        fact = matches[0][1]  # All relevant values explicitly agreed above.
+        evidence = {'namespace': 'coop:public-product',
+                    'retailer_product_id': provenance.retailer_product_id,
+                    'offer_source_sha256': provenance.retailer_identity_source_sha256,
+                    'offer_snapshot_id': provenance.source_snapshot_id,
+                    'catalog_ean': matches[0][0].gtin,
+                    'method': 'exact_retailer_id_name_brand_package_concurrent_catalog',
+                    'catalog_sources': [dict(source) for _, f in matches
+                        for sources in f.field_sources.values() for source in sources]}
+        result[key] = replace(fact, source='verified-coop-retailer-facts',
+            source_product_id=p.product_id, source_snapshot_id=provenance.source_snapshot_id,
+            field_sources={**fact.field_sources, 'retailer_identity': (evidence,)})
+    return result
 
 
 def raw_product(document, reference):
@@ -360,7 +462,7 @@ def raw_product(document, reference):
     return value
 
 
-def load_retained_facts(prepared, *, database=None, raw_root=None):
+def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
     from sqlalchemy.engine import make_url
 
     from grocery_data.app.config import GroceryDataSettings as GrocerySettings
@@ -426,7 +528,13 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
         # relevant join rows, not the entire database's write activity.
         revision = hashlib.sha256(
             json.dumps(
-                [(snapshot, tuple(row)) for snapshot, row, _, _ in source_rows],
+                {"source_rows": [(snapshot, tuple(row)) for snapshot, row, _, _ in source_rows],
+                 "fact_targets": [
+                     (p.store_id, p.product_id, p.name, p.brand, p.gtin, p.chain,
+                      p.package_quantity, p.package_unit, p.usable_quantity, p.usable_unit,
+                      str(p.sale_model), p.coverage, p.price_context_type,
+                      p.source_provenance.model_dump(mode="json"))
+                     for p in targets.values()]},
                 ensure_ascii=False,
                 separators=(",", ":"),
             ).encode()
@@ -485,3 +593,48 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
                 _CACHE.pop(next(iter(_CACHE)))
             _CACHE[key] = projected
         return projected
+
+
+def load_retained_facts(prepared, *, database=None, raw_root=None):
+    from app.services.lidl_product_facts import reviewed_facts
+    from app.services.offer_catalog_facts import complete, eligible
+    from app.services.official_product_facts import declared_facts
+
+    def merge_fact(prior, fact):
+        # Missing fields are not contradictory values; differing overlapping
+        # authoritative values/units must never disappear behind precedence.
+        if prior and prior.nutrition and fact.nutrition and (
+            prior.nutrition_unit != fact.nutrition_unit
+            or any(prior.nutrition[k] != fact.nutrition[k]
+                   for k in prior.nutrition.keys() & fact.nutrition.keys())
+            or prior.conflicts
+        ):
+            from dataclasses import replace
+
+            return replace(fact, conflicts=(*fact.conflicts, 'official_declaration_conflict'))
+        return fact
+
+    catalog = _load_retained_catalog_facts(prepared, database=database, raw_root=raw_root)
+    if any(eligible(p) for p in prepared.universe.products):
+        from sqlalchemy.engine import make_url
+
+        from grocery_data.app.config import GroceryDataSettings
+
+        settings = GroceryDataSettings.from_env()
+        url = make_url(settings.database_url)
+        retained_db = database or (url.database if url.get_backend_name() == 'sqlite' else None)
+        if retained_db:
+            for key, fact in complete(prepared.universe.products, retained_db,
+                                      raw_root or settings.raw_snapshot_root).items():
+                catalog[key] = merge_fact(catalog.get(key), fact)
+    reviewed = {key: merge_fact(catalog.get(key), fact)
+                for key, fact in reviewed_facts(prepared.universe.products).items()}
+    for key, fact in declared_facts(prepared.universe.products).items():
+        reviewed[key] = merge_fact(reviewed.get(key) or catalog.get(key), fact)
+    result = dict(catalog)
+    result.update(reviewed)
+    from app.services.official_product_facts import supplement_catalog_facts
+    supplemented = supplement_catalog_facts(prepared.universe.products, result)
+    if not reviewed and supplemented == catalog:
+        return catalog  # Preserve the hash-verified retained-source cache.
+    return FactsCollection(supplemented)

@@ -827,7 +827,43 @@ class MenuOptimizer:
         ), RecipeProfileBuilder._structure(recipe))
 
     def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
-                       search_trace=None):
+                       search_trace=None, state_identity=None, fallback_beam_width=None, decision_observer=None):
+        """Try the ordinary beam, then one explicitly bounded safe retry.
+
+        A retry requires actual exhaustion AND earlier removal of different
+        states. Duplicate schedules alone are not evidence of a lost solution.
+        The caller's order-independent identity establishes safe generated
+        planning; edited/private allocation paths never implicitly retry.
+        """
+        if fallback_beam_width is not None and not 1 <= fallback_beam_width <= 64:
+            raise ValueError("fallback beam must be bounded at 64")
+        trace = search_trace if search_trace is not None else []
+        start = len(trace)
+        exhausted = {}
+        evaluation_cache = {}
+        try:
+            return self._optimize_slots(
+                candidates_by_slot, evaluate=evaluate, accepts=accepts, score=score,
+                beam_width=beam_width, search_trace=trace, state_identity=state_identity,
+                _exhaustion=exhausted, _attempt_number=1, _evaluation_cache=evaluation_cache, decision_observer=decision_observer,
+            )
+        except (IncompleteBasketError, ValueError):
+            pruned_different_states = any(
+                row["beam_pruned"] > row.get("equivalent_pruned", 0) for row in trace[start:]
+            )
+            if not (exhausted and state_identity is not None and fallback_beam_width
+                    and fallback_beam_width > beam_width and pruned_different_states):
+                raise
+            trace[-1]["retry_reason"] = "beam_exhausted_after_distinct_prefix_pruning"
+            return self._optimize_slots(
+                candidates_by_slot, evaluate=evaluate, accepts=accepts, score=score,
+                beam_width=fallback_beam_width, search_trace=trace, state_identity=state_identity,
+                _exhaustion={}, _attempt_number=2, _evaluation_cache=evaluation_cache, decision_observer=decision_observer,
+            )
+
+    def _optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
+                        search_trace=None, state_identity=None, _exhaustion=None, _attempt_number=1,
+                        _evaluation_cache=None, decision_observer=None):
         """Use the same complete-basket search discipline for typed meal slots.
 
         ``evaluate`` aggregates ALL meal types, explicit extras and allocated stock
@@ -835,11 +871,13 @@ class MenuOptimizer:
         cache is request-local because stock, profile and locks are private inputs.
         """
         states = [([], None)]
-        cache = {}
+        cache = _evaluation_cache if _evaluation_cache is not None else {}
         for index, options in enumerate(candidates_by_slot):
             errors = []
-            trace = {"depth": index + 1, "proposals": 0, "constraints_rejected": 0,
-                     "evaluation_rejected": 0, "priced": 0, "retained": 0, "beam_pruned": 0}
+            trace = {"depth": index + 1, "attempt": _attempt_number, "beam_width": beam_width,
+                     "proposals": 0, "constraints_rejected": 0,
+                     "evaluation_rejected": 0, "priced": 0, "retained": 0, "beam_pruned": 0,
+                     "evaluations_executed": 0, "evaluation_cache_hits": 0}
             if search_trace is not None:
                 search_trace.append(trace)
             expanded = []
@@ -850,26 +888,53 @@ class MenuOptimizer:
                     trace["proposals"] += 1
                     if not accepts(slots, final=final):
                         trace["constraints_rejected"] += 1
+                        if decision_observer:
+                            decision_observer(slots, "constraints_rejected", depth=index+1)
                         continue
                     key = tuple((s.id, recipe_id(s.recipe) if s.recipe else None) for s in slots)
                     try:
                         if key not in cache:
+                            trace["evaluations_executed"] += 1
                             cache[key] = evaluate(slots, final=final)
+                        else:
+                            trace["evaluation_cache_hits"] += 1
                         result = cache[key]
                         expanded.append((slots, result))
                         trace["priced"] += 1
+                        if decision_observer:
+                            decision_observer(slots, "priced", result=result, depth=index+1)
                     except (IncompleteBasketError, ValueError) as exc:
                         trace["evaluation_rejected"] += 1
+                        if decision_observer:
+                            decision_observer(slots, "evaluation_rejected", reason=str(exc), depth=index+1)
                         if len(errors) < 12:
                             errors.append(exc)
             if not expanded:
+                trace["exhausted"] = True
+                if _exhaustion is not None:
+                    _exhaustion["depth"] = index + 1
                 if errors:
                     raise errors[-1]
                 raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")
             expanded.sort(key=lambda state: score(*state))
+            priced_count = len(expanded)
+            if state_identity is not None:
+                # The caller must establish order independence. Keep the
+                # actual slots/result pair, never reuse slot-bound output for
+                # another permutation. Equivalent schedules must not occupy
+                # the whole beam and suppress different meal combinations.
+                distinct = {}
+                for state in expanded:
+                    distinct.setdefault(state_identity(state[0]), state)
+                expanded = list(distinct.values())
+                trace["equivalent_pruned"] = priced_count - len(expanded)
             states = expanded[:beam_width]
+            if decision_observer:
+                for chosen, result in expanded:
+                    decision_observer(chosen, "retained" if any(chosen is state[0] for state in states) else "beam_pruned",
+                                      result=result, depth=index+1)
             trace["retained"] = len(states)
-            trace["beam_pruned"] = len(expanded) - len(states)
+            trace["beam_pruned"] = priced_count - len(states)
         if not candidates_by_slot:
             return [], evaluate([], final=True)
         return min(states, key=lambda state: score(*state))

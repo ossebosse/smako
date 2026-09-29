@@ -34,6 +34,7 @@ from grocery_data.app.domain.enums import (
     StoreIdentityMatchConfidence,
     is_complete_catalog_coverage,
 )
+from grocery_data.app.domain.price_context_evidence import PriceContextEvidence
 from grocery_data.app.domain.source_strategy import SourceChannel, SourceProvider
 from grocery_data.app.domain.store import ProviderStoreIdentityMapping, StoreContextLink
 from grocery_data.app.storage.models import PhysicalStoreModel
@@ -145,6 +146,9 @@ class PrimatStoreCandidate(BaseModel):
     tier: str | None = Field(default=None, max_length=100)
     coverage: CoverageLevel | None = None
     price_context_type: PriceContextType = PriceContextType.PHYSICAL_STORE
+    price_context_evidence: PriceContextEvidence | None = Field(
+        default=None, exclude_if=lambda value: value is None
+    )
     selected: bool = False
     customer_facing: bool = True
     source_snapshot_id: str = Field(min_length=1, max_length=255)

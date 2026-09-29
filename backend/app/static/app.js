@@ -679,6 +679,7 @@
   }
 
   function regularUnitPrice(item) {
+    if (item.ordinary_price_known === false) return null;
     const explicit = numeric(first(item, [
       "regular_unit_price",
       "price_contract.regular_price",
@@ -1317,6 +1318,14 @@
       if (debugMode && quantityConfidence) productMeta.push(`mängd: ${confidenceLabel(quantityConfidence)}`);
       const offerDescription = first(item, ["offer_description", "applied_offer.description"]);
       if (offerDescription) productMeta.push(String(offerDescription));
+      if (item.ordinary_price_known === false) productMeta.push("Ordinarie pris saknas");
+      const offerFrom = first(item, ["applied_offer.valid_from"]);
+      const offerTo = first(item, ["applied_offer.valid_to"]);
+      if (offerFrom || offerTo) productMeta.push(`Gäller ${offerFrom || "?"}–${offerTo || "?"}`);
+      const offerMax = numeric(first(item, ["applied_offer.max_quantity"]));
+      const offerGroupSize = numeric(first(item, ["applied_offer.required_packages"], 1));
+      if (offerMax !== null) productMeta.push(`Max ${offerMax * offerGroupSize} förpackningar i hela köpet`);
+      if (item.purchase_date) productMeta.push(`Inköpsdag ${item.purchase_date}`);
       appendMembershipPriceMeta(item, productMeta);
       const availability = first(item, [
         "assortment_confidence",

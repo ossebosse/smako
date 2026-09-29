@@ -151,6 +151,64 @@ class CoopBrowserStoreLocatorTransport:
     def __init__(self, *, navigation_timeout_ms: int = 30_000) -> None:
         self.navigation_timeout_ms = navigation_timeout_ms
 
+    async def fetch_national(self, query: str) -> RawFetch:
+        """Observe the public all-store map response in the ordinary locator.
+
+        Query opens the UI; membership never comes from that query/locality.
+        No copied headers, credentials, online context or new API transport.
+        """
+        import asyncio
+
+        from playwright.async_api import async_playwright
+
+        source = "https://proxy.api.coop.se/external/store/stores/map"
+        fields = ("storeId", "ledgerAccountNumber", "name", "address", "city", "postalCode",
+                  "latitude", "longitude", "url")
+        captures, tasks = [], []
+        ready = asyncio.Event()
+
+        async def capture(response):
+            url = urlsplit(response.url)
+            if f"{url.scheme}://{url.netloc}{url.path}" != source:
+                return
+            if response.status != 200:
+                return
+            data = await response.json()
+            if not isinstance(data, list) or not data:
+                return
+            safe = [{k: row.get(k) for k in fields} for row in data]
+            if any(not r["storeId"] or not r["ledgerAccountNumber"] or not r["url"] for r in safe):
+                return
+            captures.append(safe)
+            ready.set()
+
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True)
+            try:
+                page = await browser.new_page()
+                def listener(response):
+                    tasks.append(asyncio.create_task(capture(response)))
+                page.on("response", listener)
+                await page.goto("https://www.coop.se/butiker-erbjudanden/", wait_until="domcontentloaded",
+                                timeout=self.navigation_timeout_ms)
+                cookie = page.get_by_role("button", name="Endast nödvändiga cookies", exact=True)
+                if await cookie.count() and await cookie.is_visible():
+                    await cookie.click(timeout=5000)
+                await page.get_by_placeholder("Sök butik", exact=True).fill(query)
+                await asyncio.wait_for(ready.wait(), timeout=25)
+                page.remove_listener("response", listener)
+                await asyncio.gather(*tasks)
+            finally:
+                await browser.close()
+        if not captures or any(rows != captures[0] for rows in captures):
+            raise CoopStoreLocatorError("missing or conflicting national map responses")
+        return RawFetch(chain=Chain.COOP, kind="national_store_map", method="GET", url=source,
+                        fetched_at=datetime.now(UTC), http_status=200, content_type="application/json",
+                        connector_version="coop-browser-national-locator-v1",
+                        payload=json.dumps({"stores": captures[0], "captured_total": len(captures[0]),
+                                            "declared_total": None, "pagination": "unpaginated map array"},
+                                           ensure_ascii=False).encode())
+
     async def fetch(self, area: GeographicArea) -> RawFetch:
         from playwright.async_api import TimeoutError as PlaywrightTimeoutError
         from playwright.async_api import async_playwright

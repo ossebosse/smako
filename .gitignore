@@ -8,3 +8,25 @@ var/
 node_modules/
 reports/private/
 .env*
+
+# Local consolidation state, environments and restored historical evidence
+.local/
+*.sqlite3*
+*.db
+*.log
+!*.env.example
+!*.env.template
+# Report tree inventoried in docs/consolidation/local-evidence.jsonl.
+# Preserve executable report code and narrative evidence; large/private payloads
+# are restored by hash from the protected backup, never staged wholesale.
+/reports/**/*
+!/reports/**/
+!/reports/**/*.py
+!/reports/**/*.md
+/reports/**/__pycache__/
+/reports/**/private/
+/reports/**/before/
+/reports/**/baseline-code/
+/reports/**/after-code/
+/reports/**/package-code/
+/reports/**/backups/

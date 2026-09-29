@@ -1,6 +1,39 @@
+## Områdeserbjudanden 16 september 2026 – inaktiv utvärdering
+
+[Inventering, nätbevis, täckning och blockerare](../../reports/ica-area-20260916/README.md). Ny manuell CLI `python -m grocery_data.scripts.collect_ica_area_offers --city Lund --output <ny-katalog>` återanvänder officiell discovery, connector och collector med separat offers_only-scope per butik. Befintlig adressortsgräns används utan postnummerlikhet. Malmö fungerar med samma områdesparameter. Parser v6 bevarar kampanjvillkor, karantänsätter oklar pant/dagsgiltighet och behåller paket även utan ordinarie pris. Opt-in ICA-provider kräver samma parser, exakt ensam variant och paket; Primat/defaultkällor ändras inte. Reklambladens sidor finns bevarade men bildbaserad kampanjextraktion är ännu ofullständig. Se [releaseförslaget](../../reports/ica-area-20260916/RELEASE.md) före eventuell aktivering. Ingen baspriskatalogretry eller produktionsaktivering gjordes.
+
+## Uppföljning 15 september 2026
+
+[Gunnesbos aktuella browserprisbevis, Primat-jämförelse och Clemenstorgets källbegränsning](../../reports/ica-gunnesbo-clemenstorget-20260915.md). 50 publika SSR-köppriser återverifierade via normal anonym Gunnesbo-webbläsare; 232 sök-ID:n betyder inte 232 hämtade prisposter. Den isolerade projektionen återanvänder onlineparsern och är inte registrerad för drift. Vanlig HTTP nekas på sökdokumentet, medan normalt browserflöde fungerar. Ingen automatiserad prisinsamling eller flerdagarsacceptans är ännu belagd. Primat och aktiva källor är oförändrade. Clemenstorget saknar verifierad egen baspriskatalog via de angivna officiella vägarna; Caroli/Mobilia ersätter den inte.
+
 # ICA source discovery
 
-Last verified: **2026-08-26**
+Last verified: **2026-09-14**
+
+## Direct-source replacement evaluation (2026-09-14)
+
+[Current evaluation](../../reports/ica-direct-evaluation-20260914.md) keeps Primat
+active and the six existing beta contexts unchanged. Public store offers worked
+both locally and in the actual scheduler user/environment: Gunnesbo 138 groups,
+Clemenstorget 73, zero parser failures. These are offer groups, not complete
+catalogues or automatically qualified baseline prices.
+
+The official full Lund locator confirms Gunnesbo BMS/web ID `17883`, account
+`1088004`, with exact online URL `/stores/1088004`; Clemenstorget BMS/web ID `2771`,
+account `1004409`, has no online URL. Clemenstorget's online region mapping remains
+unverified. Repeated historical `/stores/1004409/api/...` attempts returning 403 do
+not verify that mapping. The isolated diagnostic now requires the exact official
+online URL before an API probe and skips Clemenstorget without it.
+
+Gunnesbo's verified historical v6 search route returned 403/HTML from local Windows
+and the actual scheduler runtime. No retry, continuation or decoration followed.
+No browser was available through the current CUA environment for new passive
+capture. The historical Fäladstorget `collect` reference had no retained request or
+response body in the reviewed material and remains unclassified.
+
+There are zero qualified complete direct-catalogue runs across multiple scheduled
+calendar days. No candidate, source strategy or PriceUniverse was activated.
+The older observations below remain historical evidence and do not refresh prices.
 
 ## Current authoritative contract (2026-08-26)
 

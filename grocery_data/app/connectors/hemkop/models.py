@@ -106,6 +106,7 @@ def validated_catalog_page(
     requested_page: int | None = None,
     requested_size: int | None = None,
     expected_store_id: str | None = None,
+    require_product_identity: bool = True,
 ) -> HemkopCatalogPage:
     """Fail closed unless one category page reconciles all pagination facts.
 
@@ -189,7 +190,7 @@ def validated_catalog_page(
     for index, row in enumerate(raw_results):
         if not isinstance(row, dict):
             raise HemkopSchemaError(f"Hemköp result {index} must be an object")
-        if not str(row.get("code") or "").strip():
+        if require_product_identity and not str(row.get("code") or "").strip():
             raise HemkopSchemaError(f"Hemköp result {index} lacks product identity")
         results.append(row)
     return HemkopCatalogPage(

@@ -6,6 +6,7 @@ import functools
 import json
 from collections.abc import Iterable
 from dataclasses import dataclass
+from datetime import date
 from decimal import ROUND_CEILING, Decimal
 from hashlib import sha256
 
@@ -24,6 +25,7 @@ from app.models.provenance import SourceProvenance
 from app.services.ingredient_normalizer import normalize_quantity
 from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
 
+from grocery_data.app.domain.counted_offer_checkout import uses_counted_offer_checkout
 from grocery_data.app.domain.promotion_pricing import (
     CheckoutPromotion,
     MembershipProgram,
@@ -52,7 +54,8 @@ def resolve_fixed_checkout_price(
     *,
     package_count: int,
     base_unit_price: float | Decimal,
-    regular_unit_price: float | Decimal,
+    regular_unit_price: float | Decimal | None,
+    on_date: date | None = None,
     offers: Iterable[OfferMetadata] = (),
 ) -> tuple[Decimal, Decimal, OfferMetadata | None, str | None]:
     """Pure fixed-package checkout calculation shared by calculator and audit.
@@ -92,6 +95,8 @@ def resolve_fixed_checkout_price(
                 member_program=offer.member_program,
                 valid_from=offer.valid_from,
                 valid_to=offer.valid_to,
+                deposit=offer.deposit,
+                campaign_evidence=offer.campaign_evidence,
             )
         )
     resolution = resolve_fixed_package_checkout(
@@ -99,6 +104,7 @@ def resolve_fixed_checkout_price(
         base_unit_price=base_unit_price,
         regular_unit_price=regular_unit_price,
         promotions=tuple(normalized),
+        on_date=on_date,
     )
     applied = (
         references.get(resolution.applied_promotion.reference)
@@ -110,7 +116,7 @@ def resolve_fixed_checkout_price(
         if applied is not None
         else (
             "Kampanjpris"
-            if money(base_unit_price) < money(regular_unit_price)
+            if regular_unit_price is not None and money(base_unit_price) < money(regular_unit_price)
             else None
         )
     )
@@ -127,6 +133,7 @@ def _best_checkout_price(
         base_unit_price=candidate.effective_price,
         regular_unit_price=candidate.price,
         offers=candidate.offers,
+        on_date=candidate.purchase_date,
     )
 
 
@@ -162,7 +169,11 @@ def _fail_closed_non_fixed_price(
     quote the independently observed ordinary price instead.
     """
 
-    if candidate.sale_model == SaleModel.FIXED_PACKAGE:
+    if candidate.purchase_terms and candidate.purchase_terms.usage == 'estimated':
+        if candidate.selected_price_contract_id is None or len(candidate.offers) != 1:
+            raise ValueError('Weight campaign must pass request-time eligibility first')
+        return candidate, None
+    if uses_counted_offer_checkout(candidate):
         return candidate, None
 
     checkout_prices = {
@@ -304,8 +315,9 @@ class BasketItemQuote:
     unit_price: Decimal
     base_checkout_unit_price: Decimal | None
     total_price: Decimal
-    regular_total_price: Decimal
-    regular_unit_price: Decimal
+    regular_total_price: Decimal | None
+    regular_unit_price: Decimal | None
+    purchase_date: date | None
     price_contract_id: str | None
     eligibility: PromotionEligibility
     price_mechanism: PromotionMechanism
@@ -314,6 +326,9 @@ class BasketItemQuote:
     applied_offer: OfferMetadata | None
     resolution_warning: str | None
     source_provenance: SourceProvenance | None
+    purchase_terms: object = None
+    pending_group_checkout: bool = False
+    conditional_variant_choice: bool = False
 
     def to_basket_item(self) -> BasketItem:
         """Build the public, fully validated model for a selected quote."""
@@ -337,6 +352,9 @@ class BasketItemQuote:
             semantic_confidence=self.semantic_confidence,
             semantic_evidence=list(self.semantic_evidence),
             sale_model=self.sale_model,
+            purchase_terms=self.purchase_terms,
+            conditional_variant_choice=self.conditional_variant_choice,
+            pending_group_checkout=self.pending_group_checkout,
             sale_price=self.sale_price,
             sale_unit=self.sale_unit,
             comparison_price=self.comparison_price,
@@ -356,7 +374,9 @@ class BasketItemQuote:
             purchased_usable_quantity=self.purchased_usable_quantity,
             waste_quantity=self.waste_quantity,
             unit_price=float(self.unit_price),
-            regular_unit_price=float(self.regular_unit_price),
+            regular_unit_price=float(self.regular_unit_price) if self.regular_unit_price is not None else None,
+            ordinary_price_known=self.regular_unit_price is not None,
+            purchase_date=self.purchase_date,
             price_contract_id=self.price_contract_id,
             eligibility=self.eligibility,
             price_mechanism=self.price_mechanism,
@@ -367,12 +387,37 @@ class BasketItemQuote:
                 else None
             ),
             total_price=float(self.total_price),
-            regular_total_price=float(self.regular_total_price),
+            regular_total_price=float(self.regular_total_price) if self.regular_total_price is not None else None,
             purchase_warning=self.resolution_warning,
             offer_description=self.offer_description,
             applied_offer=self.applied_offer,
+            checkout_offers=(self.applied_offer,) if self.applied_offer and self.regular_unit_price is None else (),
             source_provenance=self.source_provenance,
         )
+
+
+def validate_purchase_unit_limit(item, package_count: int) -> None:
+    """Validate a source sales-unit cap separately from discount calculations."""
+    provenance = item.source_provenance
+    limit = provenance.maximum_purchase_units if provenance is not None else None
+    if limit is None:
+        return
+    if item.sale_model not in {
+        SaleModel.FIXED_PACKAGE, SaleModel.SOLD_BY_PIECE, SaleModel.VARIABLE_WEIGHT_PACKAGE,
+    }:
+        raise ValueError("source purchase-unit limit requires a verified count of sales units")
+    if package_count > limit:
+        raise ValueError(f"source purchase-unit limit exceeded: {package_count} > {limit}")
+
+
+def validate_basket_purchase_limits(items) -> None:
+    """A repeated exact product consumes the same cart limit across aliases."""
+    quantities = {}
+    for item in items:
+        key = (item.store_id, item.product_id)
+        quantities[key] = quantities.get(key, 0) + item.packages_needed
+    for item in items:
+        validate_purchase_unit_limit(item, quantities[(item.store_id, item.product_id)])
 
 
 class BasketCalculator:
@@ -387,9 +432,36 @@ class BasketCalculator:
 
         Residual packages use the existing checkout resolver. A group consumes
         its units before any single-product promotion is evaluated. This avoids
-        stacking or counting pantry/history. No speculative extra packages.
+        stacking or counting pantry/history. Single-group completion can add
+        explicit whole packages of an already selected variant.
         """
 
+        validate_basket_purchase_limits(items)
+        household_caps = {}
+        for item in items:
+            offer = item.applied_offer
+            if (offer and offer.price_contract_id and (offer.price_contract_id.startswith(("coop:household:", "lidl:household:", "willys:household:")) or (offer.purchase_terms and offer.purchase_terms.limit_scope == "household_campaign"))
+                    and offer.max_quantity is not None):
+                used, cap = household_caps.get(offer.price_contract_id, (0, offer.max_quantity))
+                # Source cap counts complete purchase groups; single-price
+                # contracts have required_packages=1. Different local prices
+                # stay on their own items. The stricter observed cap wins.
+                used += (item.packages_needed + offer.required_packages - 1) // offer.required_packages
+                cap = min(cap, offer.max_quantity)
+                household_caps[offer.price_contract_id] = used, cap
+                if used > cap:
+                    raise GroupPricingError("Coop household campaign limit exceeded across physical stores/aliases")
+        # Weight/piece lines have already been quoted by their own purchase
+        # resolver. An offers-only package elsewhere in the basket must not
+        # send those lines through fixed-package residual pricing.
+        fixed = [item for item in items if uses_counted_offer_checkout(item)]
+        if len(fixed) != len(items):
+            if any(item.promotion_groups for item in items if not uses_counted_offer_checkout(item)):
+                raise GroupPricingError("Promotion groups require fixed-package purchase evidence")
+            if not fixed:
+                return list(items)
+            quoted = iter(BasketCalculator.quote_group_basket(fixed))
+            return [next(quoted) if uses_counted_offer_checkout(item) else item for item in items]
         groups = {}
         for item in items:
             for group in item.promotion_groups:
@@ -403,20 +475,30 @@ class BasketCalculator:
                     or group.source != provenance.source_provider
                 ):
                     raise GroupPricingError("Promotion group lacks exact product/context/source evidence")
+                if item.purchase_date and not group.valid_from <= item.purchase_date <= group.valid_to:
+                    raise GroupPricingError("Promotion group is outside its verified campaign dates")
                 key = (group.store_id, group.group_id)
                 if key in groups and groups[key] != group:
                     raise GroupPricingError("Conflicting source promotion group definitions")
                 groups[key] = group
         contracts = tuple(groups[k] for k in sorted(groups))
-        if not contracts:
+        if contracts and any(o.deposit for item in items for o in item.checkout_offers
+                             if any(g.store_id == item.store_id and item.product_id in g.eligible_product_ids for g in contracts)):
+            raise GroupPricingError("Kampanjgruppens pantinkludering saknar belägg; varupriserna bevaras.")
+        if not contracts and all(i.ordinary_price_known for i in items):
             return list(items)
+        if any(g.pricing_rule != "fixed_total" and any(
+            not i.ordinary_price_known for i in items
+            if i.store_id == g.store_id and i.product_id in g.eligible_product_ids
+        ) for g in contracts):
+            raise GroupPricingError("group discounts require independent ordinary price evidence")
         counts = tuple(i.packages_needed for i in items)
         # Bound recursion as well as the number of searched states. Large
         # explicit baskets must fail with the same safe policy response.
         if sum(counts) > 500:
             raise GroupPricingError("Kampanjgrupper kan verifieras för högst 500 köpta förpackningar per korg.")
         base = tuple(
-            Decimal(str(i.regular_unit_price or i.base_checkout_unit_price)) for i in items
+            Decimal(str(i.regular_unit_price or i.base_checkout_unit_price or 1)) for i in items
         )
 
         @functools.cache
@@ -425,7 +507,8 @@ class BasketCalculator:
             return resolve_fixed_checkout_price(
                 package_count=count,
                 base_unit_price=item.base_checkout_unit_price,
-                regular_unit_price=item.regular_unit_price or item.base_checkout_unit_price,
+                regular_unit_price=item.regular_unit_price,
+                on_date=item.purchase_date,
                 offers=item.checkout_offers,
             )
 
@@ -476,6 +559,12 @@ class BasketCalculator:
                 )
 
         states = 0
+        limit_keys = tuple((g.chain, g.limit_key) if g.limit_scope == 'household_campaign'
+                           else (g.store_id, g.group_id) for g in contracts)
+        shared_caps = {key: min(g.max_groups for g, k in zip(contracts, limit_keys, strict=True)
+                               if k == key and g.max_groups is not None)
+                       for key in set(limit_keys)
+                       if any(k == key and g.max_groups is not None for g, k in zip(contracts, limit_keys, strict=True))}
 
         @functools.cache
         def solve(remaining, used):
@@ -483,9 +572,13 @@ class BasketCalculator:
             states += 1
             if states > 100000:
                 raise GroupPricingError("Kampanjkombinationen är för stor för verifierad exakt beräkning.")
-            best = (sum(residual_rows(remaining), Decimal(0)), ())
+            try:
+                best = (sum(residual_rows(remaining), Decimal(0)), ())
+            except ValueError:
+                best = (Decimal('Infinity'), ())  # No separately evidenced residual purchase.
             for index, group in enumerate(contracts):
-                if group.max_groups is not None and used[index] >= group.max_groups:
+                cap = shared_caps.get(limit_keys[index])
+                if cap is not None and sum(v for v, k in zip(used, limit_keys, strict=True) if k == limit_keys[index]) >= cap:
                     continue
                 eligible = [
                     i
@@ -513,6 +606,26 @@ class BasketCalculator:
             return best
 
         total, path = solve(counts, (0,) * len(contracts))
+        if not total.is_finite():
+            # Complete a single evidenced mix with whole packages of an
+            # already selected variant. No residual price or new identity.
+            if len(contracts) == 1:
+                group = contracts[0]
+                if (group.pricing_rule == 'fixed_total'
+                        and all(i.store_id == group.store_id and i.product_id in group.eligible_product_ids for i in items)):
+                    missing = (-sum(counts)) % group.required_packages
+                    complete_count = (sum(counts) + missing) // group.required_packages
+                    if missing and (group.max_groups is None or complete_count <= group.max_groups):
+                        current = items[0]  # stable, explicitly selected variant
+                        count = current.packages_needed + missing
+                        gross = current.package_quantity * count
+                        usable = current.usable_quantity * count
+                        completed = current.model_copy(update={
+                            'packages_needed': count, 'purchased_quantity': gross,
+                            'purchased_usable_quantity': usable, 'waste_quantity': usable-current.required_quantity,
+                            'purchase_warning': 'Helt flerköp: extra hela förpackningar av denna identifierade variant ingår; separat restpris saknas.'})
+                        return BasketCalculator.quote_group_basket([completed, *items[1:]])
+            raise GroupPricingError("Hela kampanjgrupper krävs; separat restpris saknas.")
         remaining = list(counts)
         charges = [Decimal(0)] * len(items)
         audits = [[] for _ in items]
@@ -561,6 +674,7 @@ class BasketCalculator:
             result.append(
                 item.model_copy(
                     update={
+                        "pending_group_checkout": False,
                         "total_price": float(charged),
                         "unit_price": float(money(charged / item.packages_needed)),
                         "group_applications": audits[i],
@@ -585,15 +699,36 @@ class BasketCalculator:
         self,
         ingredient: NormalizedIngredient,
         candidate: ProductCandidate,
+        *, defer_group_checkout: bool = False,
     ) -> BasketItemQuote:
         """Calculate an exact checkout quote without Pydantic materialisation."""
 
         required_quantity, required_unit = normalize_quantity(
             ingredient.required_quantity, ingredient.unit
         )
+        if candidate.purchase_terms and (candidate.purchase_terms.usage == 'blocked' or (candidate.purchase_terms.usage == 'variant_selection_required' and not candidate.conditional_variant_choice)):
+            raise ValueError('Unresolved purchase evidence: ' + candidate.purchase_terms.usage)
         checkout_candidate, capped_offer_warning = _fail_closed_non_fixed_price(candidate)
+        quantity_candidate = checkout_candidate
+        if (uses_counted_offer_checkout(checkout_candidate)
+                and checkout_candidate.sale_price is None and checkout_candidate.price is None
+                and checkout_candidate.offers):
+            # Quantity resolution still takes a numerical cost signal. Keep it
+            # local: the authoritative fixed checkout below must cover the
+            # actual package count and the public item retains sale_price=None.
+            quantity_candidate = checkout_candidate.model_copy(update={
+                "sale_price": checkout_candidate.effective_price,
+                "piece_price": checkout_candidate.effective_price if checkout_candidate.sale_model == SaleModel.SOLD_BY_PIECE else checkout_candidate.piece_price})
+        if defer_group_checkout:
+            if not checkout_candidate.promotion_groups or checkout_candidate.sale_model != SaleModel.FIXED_PACKAGE:
+                raise ValueError('Deferred checkout requires a source-bound fixed-package campaign group')
+            # Quantity only: the whole-basket group solver must authorize cost.
+            # This request-local projection never changes the source offer.
+            if quantity_candidate.purchase_terms:
+                quantity_candidate = quantity_candidate.model_copy(update={
+                    'purchase_terms': quantity_candidate.purchase_terms.model_copy(update={'complete_group_size':1})})
         resolution = self.resolver.resolve(
-            checkout_candidate,
+            quantity_candidate,
             required_quantity=required_quantity,
             required_unit=required_unit,
         )
@@ -632,16 +767,20 @@ class BasketCalculator:
         assert purchased is not None and purchased_unit is not None
         assert purchased_usable is not None and usable_unit is not None
         assert waste is not None
+        validate_purchase_unit_limit(checkout_candidate, package_count)
 
         applied_offer: OfferMetadata | None = None
         offer_description: str | None = None
         base_checkout_unit_price: Decimal | None = None
-        if checkout_candidate.sale_model == SaleModel.FIXED_PACKAGE:
+        if uses_counted_offer_checkout(checkout_candidate):
             base_checkout_unit_price = money(checkout_candidate.effective_price)
-            total, unit_price, applied_offer, offer_description = _best_checkout_price(
-                checkout_candidate, package_count
-            )
-            regular_total = money(money(checkout_candidate.price) * package_count)
+            if defer_group_checkout:
+                total, unit_price = resolution.total_price, resolution.unit_price
+            else:
+                total, unit_price, applied_offer, offer_description = _best_checkout_price(
+                    checkout_candidate, package_count
+                )
+            regular_total = money(money(checkout_candidate.price) * package_count) if checkout_candidate.price is not None else None
         else:
             # The resolver is the source of truth for piece, weight and
             # variable-package prices. In particular, a piece product may
@@ -658,7 +797,16 @@ class BasketCalculator:
                 else total
             )
 
-        resolution_warning = resolution.warning
+        if checkout_candidate.purchase_terms and checkout_candidate.purchase_terms.usage == 'estimated':
+            applied_offer = checkout_candidate.offers[0]
+            if not applied_offer.is_active(checkout_candidate.purchase_date):
+                raise ValueError('Expired weight offer')
+            if applied_offer.max_quantity is not None and package_count > applied_offer.max_quantity:
+                raise ValueError('Weight-package campaign purchase limit exceeded')
+            offer_description = applied_offer.description
+            regular_total = None if checkout_candidate.price is None else regular_total
+
+        resolution_warning = ("Villkorat kampanjval: välj en kampanjmärkt variant. Innehåll, allergener och näring är inte verifierade. " + "; ".join(checkout_candidate.purchase_terms.exclusions)) if checkout_candidate.conditional_variant_choice else resolution.warning
         if capped_offer_warning is not None:
             resolution_warning = (
                 f"{resolution_warning}; {capped_offer_warning}"
@@ -679,7 +827,7 @@ class BasketCalculator:
             basket_usable_quantity = float(purchased_usable / package_count)
             basket_usable_unit = usable_unit
 
-        selected_contract_id = checkout_candidate.selected_price_contract_id
+        selected_contract_id = ("pending-group:" + ":".join(g.group_id for g in checkout_candidate.promotion_groups)) if defer_group_checkout else checkout_candidate.selected_price_contract_id
         selected_eligibility = checkout_candidate.selected_price_eligibility
         selected_mechanism = checkout_candidate.selected_price_mechanism
         selected_membership = checkout_candidate.selected_membership_program
@@ -716,6 +864,9 @@ class BasketCalculator:
             semantic_confidence=candidate.semantic_confidence,
             semantic_evidence=tuple(candidate.semantic_evidence),
             sale_model=checkout_candidate.sale_model,
+            purchase_terms=checkout_candidate.purchase_terms,
+            conditional_variant_choice=checkout_candidate.conditional_variant_choice,
+            pending_group_checkout=defer_group_checkout,
             sale_price=checkout_candidate.sale_price,
             sale_unit=checkout_candidate.sale_unit,
             comparison_price=checkout_candidate.comparison_price,
@@ -738,7 +889,8 @@ class BasketCalculator:
             base_checkout_unit_price=base_checkout_unit_price,
             total_price=total,
             regular_total_price=regular_total,
-            regular_unit_price=money(checkout_candidate.price),
+            regular_unit_price=money(checkout_candidate.price) if checkout_candidate.price is not None else None,
+            purchase_date=checkout_candidate.purchase_date,
             price_contract_id=selected_contract_id,
             eligibility=selected_eligibility,
             price_mechanism=selected_mechanism,

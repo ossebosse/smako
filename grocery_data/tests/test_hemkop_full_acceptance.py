@@ -650,6 +650,8 @@ async def test_hemkop_staged_replay_rejections_lkg_and_parser_local_repair(
                     "scope_key": "lund",
                     "geographic_area": {
                         "city": "Lund",
+                        "mode": "locality",
+                        "municipality_code": None,
                         "postal_codes": [],
                         "latitude": None,
                         "longitude": None,

@@ -12,6 +12,24 @@ from app.services.personal_policy import PolicyConflict
 VERSION = "cold-edible-assembly-v1"
 
 
+def raw_salad_instructions():
+    return [
+        "Skölj grönsaker och färska korianderblad. Skala vitlöken om den ingår. Avlägsna oätliga delar före vägning; använd inte torkade kryddor, inlagda grönsaker eller färdiga såser.",
+        "Väg endast de ätbara mängderna i ingredienslistan i gram. Hacka och blanda råa; behåll all saft. Ingen värmning, avrinning, olja eller olistad ingrediens ingår.",
+        "Servera hela den uppmätta blandningen jämnt fördelad mellan portionerna. Förpackningsrester och borttagna delar ingår inte i näringsberäkningen.",
+    ]
+
+
+def is_raw_salad_preparation(recipe):
+    if recipe is None:
+        return False
+    names = {canonicalize_ingredient_name(i.name) for i in recipe.ingredients}
+    return bool(names and names <= {'tomat', 'gurka', 'koriander', 'vitlök'}
+                and len(names) == len(recipe.ingredients)
+                and all(i.unit == 'g' for i in recipe.ingredients)
+                and recipe.instructions == raw_salad_instructions())
+
+
 def couscous_instructions():
     return [
         "Väg upp torr vanlig couscous av durumvete, naturell fast tofu som såld utan lag och tvättade råa tomater enligt ingredienslistan. Använd inte pärlcouscous, smaksatta gryn eller silkestofu. Ingen pressning eller avrinning av tofun ingår.",
@@ -85,6 +103,22 @@ def is_reference_preparation(recipe):
 
 
 def calculation_basis(recipe, *, allow_estimates=False):
+    if recipe.preparation is not None:
+        from app.services.recipe_preparation import basis
+        if not allow_estimates:
+            raise PolicyConflict("Receptets insatsbaserade beredning kräver opt-in för näringsuppskattning.", code="DATA_BLOCKED", stage="preparation")
+        try:
+            return basis(recipe)
+        except ValueError as exc:
+            raise PolicyConflict(str(exc), code="DATA_BLOCKED", stage="preparation") from exc
+    if allow_estimates and is_raw_salad_preparation(recipe):
+        from app.services.nutrition_reference import reference_data
+        return {
+            'version': reference_data()['content_version'],
+            'method': 'sum_measured_raw_edible_input',
+            'description': 'Generiska SLV-referenser för uppmätta ätbara råa grönsaker och färska blad, med produktdeklaration där sådan är kvalificerad. Ingen värmning, avrinning, densitet eller ätbar andel av inköpt hel vara antas.',
+            'retention_factors': 'not_needed_cold_assembly',
+        }
     from app.services.reviewed_cold_meals import VERSION as cold_version
     from app.services.reviewed_cold_meals import preparation as cold_preparation
 

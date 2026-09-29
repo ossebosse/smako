@@ -408,6 +408,42 @@ async def test_identity_drift_keeps_existing_cache_unchanged(
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize("failure", ["identity", "coverage"])
+async def test_partial_context_drift_without_lkg_stops_before_product_requests(tmp_path, monkeypatch, failure):
+    database = _database(tmp_path / "registry.sqlite")
+    eligible = load_eligible_primat_contexts(
+        database, city="Lund", now=NOW,
+        chains=frozenset({Chain.ICA, Chain.COOP}), allow_stale_identity_seed=True,
+    )
+    monkeypatch.setattr("app.services.production_primat_refresh._primat_primary_contexts",
+                        lambda *args, **kwargs: eligible)
+    resolution = _resolution(drift_ica=failure == "identity")
+    if failure == "coverage":
+        from dataclasses import replace
+        resolution = replace(resolution, stores=tuple(
+            store.model_copy(update={"coverage": "offers_only", "tier": "offers_only"})
+            if store.chain == "ica" else store for store in resolution.stores))
+    provider = _FakeProvider(resolution)
+    monkeypatch.setattr("app.services.production_primat_refresh._BoundedPrimatProvider.load",
+                        lambda **kwargs: provider)
+    output = tmp_path / "candidate.json"
+    output.write_bytes(b"previous")
+    with pytest.raises(ValueError, match="fresh per-context LKG") as caught:
+        await collect_city_primat_cache(database, "Lund", "22350", output, 48)
+    diagnostic = caught.value.refresh_diagnostic
+    assert diagnostic["stage"] == "exact_context_revalidation"
+    assert diagnostic["query"] is None
+    assert diagnostic["provider_requests"] == 1
+    assert diagnostic["context_failures"][0]["context_id"] == "primat:ica:1088004"
+    assert diagnostic["context_failures"][0]["diagnostic"]["message"] == (
+        "eligible Primat context drifted or lost full coverage")
+    assert not provider.requested_store_ids
+    assert provider.closed
+    assert output.read_bytes() == b"previous"
+    assert "must-not-be-copied" not in json.dumps(diagnostic)
+
+
+@pytest.mark.asyncio
 async def test_one_drifted_context_uses_its_fresh_lkg_while_other_context_refreshes(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

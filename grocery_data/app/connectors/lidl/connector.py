@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from grocery_data.app.connectors.lidl.client import LidlClient
+from grocery_data.app.connectors.lidl.models import reviewed_lidl_schema_diff
 from grocery_data.app.connectors.lidl.parser import LidlParser
 from grocery_data.app.domain import (
     Chain,
@@ -13,6 +14,7 @@ from grocery_data.app.domain import (
     SourceStore,
     SourceTechnicalCapability,
 )
+from grocery_data.app.monitoring.schema_fingerprint import SchemaDiff
 
 
 class LidlConnector:
@@ -23,7 +25,11 @@ class LidlConnector:
     source_policy = SourcePolicy.ALLOW
     technical_capability = SourceTechnicalCapability.OFFERS_ONLY
     connector_version = "lidl-v1"
-    parser_version = "lidl-parser-v2"
+    parser_version = "lidl-parser-v4"
+
+    @staticmethod
+    def review_schema_diff(diff: SchemaDiff) -> SchemaDiff:
+        return reviewed_lidl_schema_diff(diff)
 
     def __init__(
         self,

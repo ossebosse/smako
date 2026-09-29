@@ -56,6 +56,7 @@ from app.services.price_universe import (
 )
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from grocery_data.app.domain.campaign_validity import STOCKHOLM, is_campaign_only
 from grocery_data.app.services.durable_files import atomic_write_bytes
 
 SOURCE_STRATEGY_VERSION = (
@@ -64,7 +65,7 @@ SOURCE_STRATEGY_VERSION = (
 NORMALIZER_VERSION = "ingredient-normalizer-v2-opaque-comparison-units"
 TAXONOMY_VERSION = "economic-taxonomy-v2"
 MATCHER_VERSION = "product-matcher-v1"
-PACKAGE_CALCULATOR_VERSION = "basket-calculator-v2"
+PACKAGE_CALCULATOR_VERSION = "basket-calculator-v3-purchase-planning"
 BASKET_OPTIMIZER_VERSION = "basket-optimizer-v1"
 MENU_SEARCH_VERSION = "menu-beam-search-conditioned-v1"
 
@@ -405,6 +406,8 @@ class PreparedPriceUniverse:
         init=False,
         repr=False,
     )
+    _campaign_products: tuple[Product, ...] = field(init=False, repr=False)
+    _base_context_ids: frozenset[str] = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
         """Freeze per-context freshness once; health checks stay O(contexts)."""
@@ -415,9 +418,16 @@ class PreparedPriceUniverse:
 
         store_ids = {store.store_id for store in self.stores}
         observed_by_context: dict[str, list[datetime]] = defaultdict(list)
+        campaigns = tuple(p for p in self.universe.products if is_campaign_only(p))
+        object.__setattr__(self, '_campaign_products', campaigns)
+        object.__setattr__(self, '_base_context_ids', frozenset(
+            p.store_id for p in self.universe.products if not is_campaign_only(p)))
         contexts_with_unknown_observation: set[str] = set()
         for product in self.universe.products:
             if product.store_id not in store_ids:
+                continue
+            if is_campaign_only(product) and product.store_id in self._base_context_ids:
+                # An old but date-valid optional campaign cannot age its base.
                 continue
             provenance = product.source_provenance
             if provenance is None:
@@ -465,15 +475,19 @@ class PreparedPriceUniverse:
             )
             for context_id, observed_at in self._context_oldest_observed_at
         }
+        campaign_contexts = {p.store_id for p in self._campaign_products
+            if p.store_id not in self._base_context_ids
+            and any(o.is_active(now.astimezone(STOCKHOLM).date()) for o in p.offers)}
         usable = tuple(
             context_id
             for context_id in sorted(ages)
-            if ages[context_id] < stale_age_hours
+            if (context_id in self._base_context_ids and ages[context_id] < stale_age_hours)
+            or context_id in campaign_contexts
         )
         stale = tuple(
             context_id
             for context_id in sorted(ages)
-            if ages[context_id] >= stale_age_hours
+            if context_id not in usable
         )
         return usable, stale, ages
 
@@ -481,6 +495,7 @@ class PreparedPriceUniverse:
     def _filter_candidates(
         rows: Mapping[str, Sequence[ProductCandidate]],
         usable_context_ids: frozenset[str],
+        now: datetime | None = None,
     ) -> dict[str, list[ProductCandidate]]:
         return {
             canonical: selected
@@ -490,6 +505,8 @@ class PreparedPriceUniverse:
                     candidate
                     for candidate in candidates
                     if candidate.store_id in usable_context_ids
+                    and (not is_campaign_only(candidate) or any(o.is_active(
+                        (now or datetime.now(UTC)).astimezone(STOCKHOLM).date()) for o in candidate.offers))
                 ]
             )
         }
@@ -521,7 +538,9 @@ class PreparedPriceUniverse:
             now=now or datetime.now(tz=UTC),
             stale_age_hours=stale_age_hours,
         )
-        return self._freshness_cache_identity(usable, stale)
+        identity = self._freshness_cache_identity(usable, stale)
+        return identity + (":" + (now or datetime.now(UTC)).astimezone(STOCKHOLM).date().isoformat()
+                           if self._campaign_products else "")
 
     def request_view(
         self,
@@ -541,18 +560,22 @@ class PreparedPriceUniverse:
             "candidates_by_name": self._filter_candidates(
                 self.economic_pool.candidates_by_name,
                 allowed,
+                evaluated_at,
             ),
             "semantic_candidates_by_name": self._filter_candidates(
                 self.economic_pool.semantic_candidates_by_name,
                 allowed,
+                evaluated_at,
             ),
             "matched_candidates_by_name": self._filter_candidates(
                 self.economic_pool.matched_candidates_by_name,
                 allowed,
+                evaluated_at,
             ),
             "projection_shortlist_support_by_name": self._filter_candidates(
                 self.economic_pool.projection_shortlist_support_by_name,
                 allowed,
+                evaluated_at,
             ),
         }
         retained_canonicals = set().union(*(rows.keys() for rows in filtered_maps.values()))
@@ -571,7 +594,7 @@ class PreparedPriceUniverse:
             economic_pool=pool,
             usable_context_ids=usable,
             excluded_stale_context_ids=stale,
-            cache_identity=self._freshness_cache_identity(usable, stale),
+            cache_identity=self.request_freshness_identity(now=evaluated_at, stale_age_hours=stale_age_hours),
         )
 
     def to_artifact(self) -> PreparedPriceUniverseArtifact:
@@ -632,7 +655,8 @@ class PreparedPriceUniverse:
             now=evaluated_at,
             stale_age_hours=stale_age_hours,
         )
-        usable_ages = [context_ages[context_id] for context_id in usable_contexts]
+        usable_ages = [context_ages[context_id] for context_id in usable_contexts
+                       if context_id in self._base_context_ids]
         oldest_usable_age = max(usable_ages) if usable_ages else None
         if not usable_contexts:
             status = "stale"

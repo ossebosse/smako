@@ -45,6 +45,12 @@ class AvailabilityMode(StrEnum):
 
 class PlanRequest(BaseModel):
     model_config = ConfigDict(allow_inf_nan=False)
+    purchase_planning_mode: Literal["exact", "estimated"] = "exact"
+    allowed_store_ids: tuple[str, ...] = Field(
+        default=(), max_length=40,
+        description="Optional explicit price-context selection for this plan only. Empty preserves the existing area.",
+        exclude_if=lambda value: not value,
+    )
     postal_code: str = "22350"
     recipes: int = Field(default=5, ge=0, le=7)
     personal: PersonalPlanning | None = None
@@ -100,6 +106,21 @@ class PlanRequest(BaseModel):
     min_protein_g_per_serving: float = Field(default=18, ge=0, le=200)
     min_vegetable_g_per_serving: float = Field(default=100, ge=0, le=1000)
     debug: bool = False
+
+    @field_validator("allowed_store_ids")
+    @classmethod
+    def validate_allowed_stores(cls, values):
+        if any(not v.strip() or v != v.strip() for v in values):
+            raise ValueError("Butiks-ID får inte vara tomt eller ha omgivande blanksteg.")
+        if len(set(values)) != len(values):
+            raise ValueError("Butiks-ID måste vara unika.")
+        return values
+
+    @model_validator(mode="after")
+    def explicit_store_selection_requires_personal(self):
+        if self.allowed_store_ids and self.personal is None:
+            raise ValueError("Uttryckligt butiksval stöds i personlig planering.")
+        return self
 
     @model_validator(mode="before")
     @classmethod

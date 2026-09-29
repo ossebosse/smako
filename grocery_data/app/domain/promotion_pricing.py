@@ -17,6 +17,8 @@ from pydantic import (
     model_validator,
 )
 
+from grocery_data.app.domain.campaign_validity import CampaignEvidence
+
 
 def _normalize_binary_decimal_noise(
     value: Any,
@@ -154,6 +156,26 @@ class ComparablePriceBasis(StrEnum):
     UNIT_RATE = "unit_rate"
 
 
+class DepositContract(BaseModel):
+    """Exact deposit for one purchased package; never a material/volume default."""
+    model_config = ConfigDict(frozen=True, allow_inf_nan=False, extra="forbid")
+    gtin: str = Field(min_length=8, max_length=14)
+    per_container: Decimal = Field(gt=0, max_digits=8, decimal_places=2)
+    containers_per_package: int = Field(ge=1, le=1000)
+    inclusion: Literal["included", "additional"]
+    evidence: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def exact_identity(self):
+        from grocery_data.app.domain.identifiers import normalize_gtin
+        normalize_gtin(self.gtin)
+        return self
+
+    def additional_total(self, package_count: int) -> Decimal:
+        return (self.per_container * self.containers_per_package * package_count
+                if self.inclusion == "additional" else Decimal(0))
+
+
 class PriceContract(BaseModel):
     """A verified, provider-neutral price contract.
 
@@ -207,6 +229,8 @@ class PriceContract(BaseModel):
     quantity_confidence: str | None = Field(default=None, min_length=1, max_length=64)
     valid_from: date | None = None
     valid_to: date | None = None
+    campaign_evidence: CampaignEvidence | None = Field(default=None, exclude_if=lambda value: value is None)
+    deposit: DepositContract | None = Field(default=None, exclude_if=lambda value: value is None)
 
     @field_validator("price", mode="before")
     @classmethod
@@ -287,19 +311,21 @@ class PriceContract(BaseModel):
         return self.reference
 
     def is_active(self, on_date: date) -> bool:
+        if self.campaign_evidence is not None:
+            return self.campaign_evidence.applies(on_date, self.valid_from, self.valid_to)
         return not (
             (self.valid_from is not None and on_date < self.valid_from)
             or (self.valid_to is not None and on_date > self.valid_to)
         )
 
-    def resolved_price(self, regular_unit_price: Decimal) -> Decimal | None:
+    def resolved_price(self, regular_unit_price: Decimal | None) -> Decimal | None:
         if self.price is not None:
             return self.price
         if (
             self.mechanism is PromotionMechanism.PERCENT_DISCOUNT
             and self.percent_discount is not None
         ):
-            return regular_unit_price * (Decimal(100) - self.percent_discount) / Decimal(100)
+            return regular_unit_price * (Decimal(100) - self.percent_discount) / Decimal(100) if regular_unit_price is not None else None
         return None
 
 
@@ -440,7 +466,7 @@ class EffectivePriceResolution(BaseModel):
     model_config = ConfigDict(frozen=True, allow_inf_nan=False, extra="forbid")
 
     package_count: int = Field(ge=1)
-    regular_unit_price: Decimal = Field(gt=0, max_digits=18, decimal_places=2)
+    regular_unit_price: Decimal | None = Field(default=None, gt=0, max_digits=18, decimal_places=2)
     eligible_base_unit_price: Decimal = Field(gt=0, max_digits=18, decimal_places=2)
     checkout_total: Decimal = Field(gt=0, max_digits=18, decimal_places=2)
     displayed_unit_price: Decimal = Field(gt=0, max_digits=18, decimal_places=2)

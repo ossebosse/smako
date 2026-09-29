@@ -780,7 +780,7 @@ class FederatedGroceryPriceProvider(GroceryPriceProvider):
             )
             return matches_cap and not has_uncapped_equivalent
 
-        eligible_prices = [rewritten.price]
+        eligible_prices = [rewritten.price] if rewritten.price is not None else []
         # Some adapters expose a current public price without a separate
         # promotion row. Preserve that observation unless it is the member
         # price selected by a member-enabled underlying adapter or a capped
@@ -835,7 +835,7 @@ class FederatedGroceryPriceProvider(GroceryPriceProvider):
             # when any chain membership is enabled. Keep even fixed-package
             # checkout metadata from exposing another chain's member-derived
             # sale/piece fields; the fixed checkout itself uses effective_price.
-            public_checkout_prices = [rewritten.price]
+            public_checkout_prices = [rewritten.price] if rewritten.price is not None else []
             public_checkout_prices.extend(
                 offer.price
                 for offer in rewritten.active_offers()

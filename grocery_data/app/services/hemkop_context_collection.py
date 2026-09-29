@@ -117,17 +117,33 @@ class HemkopMultiContextCollectionPlanner:
         effective_policy = policy or HemkopOperatorCrawlPolicy.from_environment()
         physical_repository = PhysicalStoreRepository(self.session)
         link_repository = StoreContextLinkRepository(self.session)
+        from grocery_data.app.services.hemkop_municipal_job import configuration, read
+        area, municipal_root, municipal_enabled = configuration(city_name)
+        municipal = None
+        if municipal_enabled:
+            from grocery_data.app.services.area_membership import approved_municipal_stores
+            state = read(municipal_root / 'source-state.json')
+            if state.get('inventory', {}).get('area') != area.model_dump(mode='json'):
+                raise ValueError('current Hemkop municipal inventory required before catalog selection')
+            municipal = approved_municipal_stores(state['inventory'])
+        localities = {s.city for s in municipal.values() if s.city} if municipal is not None else {city_name}
         physical_rows = physical_repository.list_for_city(
             city_name,
             chain=Chain.HEMKOP,
             active_only=True,
         )
+        if municipal is not None:
+            physical_rows = [r for locality in sorted(localities)
+                for r in physical_repository.list_for_city(locality, chain=Chain.HEMKOP, active_only=True)
+                if r.external_store_id in municipal
+                and r.address == municipal[r.external_store_id].address
+                and r.postal_code == ''.join((municipal[r.external_store_id].postal_code or '').split())]
         physical_by_id = {row.id: row for row in physical_rows}
         proven: list[HemkopContextCollectionTarget] = []
         rejected: list[HemkopContextCollectionSkip] = []
         by_external_id: dict[str, list[HemkopContextCollectionTarget]] = defaultdict(list)
 
-        for link in link_repository.list_for_city(city_name, active_only=True):
+        for link in [link for locality in sorted(localities) for link in link_repository.list_for_city(locality, active_only=True)]:
             physical = physical_by_id.get(link.physical_store_id)
             if physical is None or physical.chain != Chain.HEMKOP.value:
                 continue
@@ -153,9 +169,9 @@ class HemkopMultiContextCollectionPlanner:
                 physical_store_id=physical.id,
                 store_external_id=external_id,
                 store_name=physical.name,
-                city=city_name,
+                city=physical.city if municipal is not None else city_name,
                 grocery_context_id=link.grocery_context_id,
-                scope_key=self.scope_key(city_name, external_id),
+                scope_key=self.scope_key(physical.city if municipal is not None else city_name, external_id),
                 evidence=str(link.evidence),
             )
             by_external_id[external_id].append(target)

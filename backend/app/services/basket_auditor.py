@@ -24,13 +24,16 @@ from app.models.product import (
     CanonicalUnit,
     ProductSemantics,
     QuantityConfidence,
-    SaleModel,
     SemanticConfidence,
 )
-from app.services.basket_calculator import resolve_fixed_checkout_price
+from app.services.basket_calculator import (
+    resolve_fixed_checkout_price,
+    validate_basket_purchase_limits,
+)
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
 
+from grocery_data.app.domain.counted_offer_checkout import uses_counted_offer_checkout
 from grocery_data.app.domain.promotion_pricing import (
     PromotionEligibility,
     UserPricingContext,
@@ -146,6 +149,8 @@ class BasketAuditor:
             product_role=item.product_role,
             product_form=item.product_form,
             sale_model=item.sale_model,
+            purchase_terms=item.purchase_terms,
+            conditional_variant_choice=item.conditional_variant_choice,
             package_quantity=item.package_quantity,
             package_unit=item.package_unit,
             usable_quantity=item.usable_quantity,
@@ -185,12 +190,16 @@ class BasketAuditor:
             _reconcile_basket_totals(basket, concrete_items)
         )
         authorization_errors: list[str] = []
+        try:
+            validate_basket_purchase_limits(concrete_items)
+        except ValueError as exc:
+            authorization_errors.append(str(exc))
         # Omitted request eligibility means no memberships or personal offers,
         # never "skip authorization". This keeps the auditor fail-closed for
         # direct/new callers as well as for the normal consumer pipeline.
         pricing_context = user_pricing_context or UserPricingContext()
         group_reconciled = {}
-        if any(i.promotion_groups or i.group_applications for i in concrete_items):
+        if any(i.promotion_groups or i.group_applications or not i.ordinary_price_known for i in concrete_items):
             from app.services.basket_calculator import BasketCalculator
 
             try:
@@ -212,6 +221,13 @@ class BasketAuditor:
                     "promotion-group source or allocation cannot be verified"
                 )
         for item in concrete_items:
+            if item.applied_offer and item.applied_offer.price_basis_unit == 'kg':
+                offer = item.applied_offer
+                if (not item.purchase_terms or item.purchase_terms != offer.purchase_terms
+                        or item.sale_unit != 'kg' or item.sale_price != offer.price
+                        or not item.purchase_date or not offer.is_active(item.purchase_date)
+                        or item.price_contract_id != offer.price_contract_id):
+                    authorization_errors.append('weight-rate checkout differs from its source contract')
             if item.eligibility is PromotionEligibility.MEMBER:
                 if item.membership_program is None or not pricing_context.has_membership(
                     item.membership_program
@@ -244,10 +260,21 @@ class BasketAuditor:
                 continue
             key = (canonical, item.unit)
             row = purchased.setdefault(key, _Purchased())
+            semantics = self._semantics(item)
+            if (item.group_applications and group_reconciled.get((item.store_id, item.ingredient))
+                    and semantics.purchase_terms):
+                # Reconciled mixed variants meet the count jointly, not once
+                # per variant. This does not authorize a standalone remainder.
+                semantics = semantics.model_copy(update={'purchase_terms': semantics.purchase_terms.model_copy(
+                    update={'complete_group_size':1})})
+            quantity_for_resolution = item.required_quantity + (item.strategic_extra_quantity if strategic_extras_allowed else 0)
+            if item.group_applications and group_reconciled.get((item.store_id, item.ingredient)):
+                # Recompute purchased mass from the source pack size. Group
+                # replay independently verifies the paid complete allocation.
+                quantity_for_resolution = max(quantity_for_resolution, item.usable_quantity * item.packages_needed)
             resolution = self.resolver.resolve(
-                self._semantics(item),
-                required_quantity=item.required_quantity
-                + (item.strategic_extra_quantity if strategic_extras_allowed else 0),
+                semantics,
+                required_quantity=quantity_for_resolution,
                 required_unit=item.unit,
             )
             reconciliation_error: str | None = None
@@ -277,19 +304,24 @@ class BasketAuditor:
                 )
                 if not reconciled:
                     reconciliation_error = "basket quantities differ from PurchaseQuantityResolver"
-                if item.sale_model == SaleModel.FIXED_PACKAGE:
+                if uses_counted_offer_checkout(item):
                     base_price = item.base_checkout_unit_price
                     if base_price is None:
                         cost_reconciled = False
                         reconciliation_error = "fixed checkout base price is missing"
+                    elif item.promotion_groups or item.ungrouped_total_price is not None:
+                        # Whole-basket replay above is authoritative. A group
+                        # allocation is not an independently offered unit price.
+                        cost_reconciled = group_reconciled.get((item.store_id, item.ingredient), False)
                     else:
                         expected_total, expected_unit_price, expected_offer, _ = (
                             resolve_fixed_checkout_price(
                                 package_count=item.packages_needed,
                                 base_unit_price=base_price,
                                 regular_unit_price=(
-                                    item.regular_unit_price or item.sale_price or base_price
+                                    item.regular_unit_price if not item.ordinary_price_known else (item.regular_unit_price or item.sale_price or base_price)
                                 ),
+                                on_date=item.purchase_date,
                                 offers=(item.applied_offer,)
                                 if item.applied_offer is not None
                                 else (),
@@ -355,6 +387,8 @@ class BasketAuditor:
                     quantity_confidence=confidence,
                     semantic_confidence=item.semantic_confidence,
                     sale_model=item.sale_model,
+            purchase_terms=item.purchase_terms,
+            conditional_variant_choice=item.conditional_variant_choice,
                     quantity_reconciled=reconciled,
                     cost_reconciled=cost_reconciled,
                     reconciliation_error=reconciliation_error,

@@ -79,6 +79,8 @@ def recipe_id(recipe: Recipe) -> str:
         "instructions": [_plain_text(step) for step in recipe.instructions],
         "ingredients": sorted(ingredients),
     }
+    if recipe.preparation is not None:
+        payload["preparation"] = recipe.preparation.model_dump(mode="json")
     digest = hashlib.sha256(
         json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode()
     ).hexdigest()

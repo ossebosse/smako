@@ -1,0 +1,31 @@
+# Prepared only; never applied by this task. Use the recorded prebuilt image
+# with --no-build, together with the existing compose.yaml and approved env.
+x-coop-release: &coop-release
+  image: ${COOP_RELEASE_IMAGE:?set the verified prebuilt Coop release image}
+  entrypoint: []
+
+x-coop-environment: &coop-environment
+  COOP_MUNICIPAL_OFFERS_ENABLED: ${COOP_MUNICIPAL_OFFERS_ENABLED:-false}
+  COOP_MUNICIPALITY_CODE: ${COOP_MUNICIPALITY_CODE:?set the official municipality code}
+  COOP_MUNICIPAL_BUILD_CITY: ${COOP_MUNICIPAL_BUILD_CITY:-}
+  COOP_MUNICIPAL_OFFERS_ROOT: ${COOP_MUNICIPAL_OFFERS_ROOT:-/srv/app/var/grocery/coop-municipal-offers}
+  COOP_XTRA_OFFERS_ENABLED: ${COOP_XTRA_OFFERS_ENABLED:-false}
+
+services:
+  app:
+    <<: *coop-release
+    environment: *coop-environment
+  scheduler:
+    <<: *coop-release
+    environment: *coop-environment
+    tmpfs:
+      - /tmp:size=512m,mode=1777
+    cpus: 2
+    mem_limit: 5g
+  refresh-once:
+    <<: *coop-release
+    environment: *coop-environment
+    tmpfs:
+      - /tmp:size=512m,mode=1777
+    cpus: 2
+    mem_limit: 5g

@@ -73,14 +73,15 @@ def _sanitized_store_card(value: object) -> dict[str, object] | None:
         return None
     result = _fields(
         value,
-        ("accountNumber", "storeId", "storeName", "name", "onlineUrl", "profile"),
+        ("accountNumber", "storeId", "storeName", "name", "onlineUrl", "profile", "bhsUrl"),
     )
     address = _first_dict(value.get("address"))
     clean_address = _fields(
         address,
         ("street", "address", "postalCode", "city", "municipality"),
     )
-    coordinates = _first_dict(address.get("coordinates") or value.get("coordinates"))
+    coordinates = _first_dict(address.get("coordinates") or value.get("coordinates")
+                              or value.get("geoPosition"))
     clean_coordinates = _fields(
         coordinates,
         ("latitude", "longitude", "lat", "lng", "coordinateX", "coordinateY"),
@@ -105,10 +106,11 @@ def _sanitized_offer(value: object) -> dict[str, object] | None:
         return None
     result = _fields(
         value,
-        ("id", "validTo", "comparisonPrice", "restriction"),
+        ("id", "validFrom", "validTo", "comparisonPrice", "restriction", "condition"),
     )
     nested_fields = {
-        "details": ("name", "brand", "packageInformation", "mechanicInfo"),
+        "details": ("name", "brand", "packageInformation", "mechanicInfo",
+                    "customerInformation", "disclaimer"),
         "parsedMechanics": (
             "benefitType",
             "type",
@@ -132,7 +134,8 @@ def _sanitized_offer(value: object) -> dict[str, object] | None:
             stores.append(
                 _fields(
                     store,
-                    ("BMSStoreId", "accountNumber", "regularPrice", "referencePriceText"),
+                    ("BMSStoreId", "accountNumber", "regularPrice", "referencePriceText",
+                     "storeInd", "onlineInd", "ecomDisclaimer"),
                 )
             )
     result["stores"] = stores
@@ -159,6 +162,10 @@ def sanitized_initial_data_payload(payload: bytes, *, kind: str) -> bytes:
     excluded structurally before a :class:`RawFetch` can exist.
     """
 
+    from .public_material import public_links
+
+    if kind == "public_page":
+        return json.dumps(public_links(payload), ensure_ascii=False).encode()
     data = initial_data_from_html(payload)
     if kind == "stores_page":
         source = _first_dict(data.get("resultStore"))
@@ -172,6 +179,20 @@ def sanitized_initial_data_payload(payload: bytes, *, kind: str) -> bytes:
         result["storeCards"] = [
             card for value in cards if (card := _sanitized_store_card(value)) is not None
         ]
+        # ICA publishes the whole current result in its map projection even
+        # when the rendered list is paginated (20/69 in the Malmö verification).
+        # Join by official account ID, never by ordering or display name.
+        slim = _first_dict(data.get("SlimStores")).get("slimStores")
+        if isinstance(slim, list):
+            merged = {str(c.get("accountNumber")): c for v in slim
+                      if (c := _sanitized_store_card(v)) and c.get("accountNumber")}
+            for card in result["storeCards"]:
+                key = str(card.get("accountNumber"))
+                merged[key] = {**merged.get(key, {}), **card}
+            if len(merged) > len(result["storeCards"]):
+                result["renderedCardCount"] = len(cards)
+                result["inventoryProjection"] = "official_slim_store_map_plus_visible_cards"
+                result["storeCards"] = list(merged.values())
         sanitized: dict[str, object] = {
             "schema": "ica-public-ssr-v1",
             "resultStore": result,
@@ -200,6 +221,9 @@ def sanitized_initial_data_payload(payload: bytes, *, kind: str) -> bytes:
         }
     else:
         raise IcaSchemaError(f"ICA raw kind is not sanitizable: {kind}")
+    links = (data.get("public_links", {}) if payload.lstrip().startswith(b"{")
+             else public_links(payload))
+    sanitized["public_links"] = links
     return json.dumps(sanitized, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode()
 
 

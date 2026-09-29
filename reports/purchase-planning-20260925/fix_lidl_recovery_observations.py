@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('reports/purchase-planning-20260925/verify_lidl_recovery.py');s=p.read_text().replace("root=R/'lidl-recovery'","root=R/'lidl-recovery-final'").replace("    assert all(ref['observed_at'].startswith('2026-09-24T15:56:') for refs in final['approved'].values() for ref in refs)","    expected={datetime.fromisoformat(row['observed_at']) for row in json.loads((before/'coverage.json').read_bytes())['stores']}\n    assert {datetime.fromisoformat(ref['observed_at']) for refs in final['approved'].values() for ref in refs} == expected");p.write_text(s)

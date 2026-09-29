@@ -21,7 +21,11 @@ from app.services.ingredient_normalizer import (
     canonicalize_ingredient_name,
 )
 from app.services.performance_trace import increment_performance_counter
-from app.services.product_semantics import SemanticMatchResult, evaluate_product_semantics
+from app.services.product_semantics import (
+    SemanticMatchResult,
+    evaluate_product_semantics,
+    is_non_human_food,
+)
 from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
 
 _CONFIDENCE_RANK: dict[SemanticConfidence, int] = {
@@ -35,6 +39,31 @@ _CONFIDENCE_RANK: dict[SemanticConfidence, int] = {
 
 def _contains_phrase(text: str, phrase: str) -> bool:
     return f" {_search_text(phrase)} " in f" {text} "
+
+
+def _explicit_offer_product(ingredient, product, semantic):
+    """An exact requested whole product is not a request for its ingredients.
+
+    Restricted to the existing qualified physical offer sources. No fuzzy name,
+    GTIN, nutritional declaration, generic recipe substitution or price binding
+    is inferred here; all source and checkout gates remain authoritative.
+    """
+    if semantic.compatible:
+        return semantic
+    prov = product.source_provenance
+    literal = lambda value: re.sub(r'\s+', ' ', value).strip().casefold()
+    if (not prov or prov.source_role != 'offers' or product.price_context_type != 'physical_store'
+            or prov.retailer_id_namespace not in {'willys:flyer-document-ad', 'lidl:public-product'}
+            or not product.offers or not all(o.campaign_evidence for o in product.offers)
+            or literal(ingredient.canonical_name) in CANONICAL_ALIASES
+            or literal(ingredient.canonical_name) != literal(product.name)
+            or is_non_human_food(product.name, product.category or '')):
+        return semantic
+    return SemanticMatchResult(compatible=True, confidence=SemanticConfidence.EXACT,
+        canonical_food='explicit_product:' + literal(product.name),
+        product_role='explicit_whole_product', product_form='as_sold',
+        evidence=['exact_requested_complete_product_name', 'qualified_physical_offer',
+                  'not_generic_recipe_substitution', *semantic.evidence])
 
 
 def _piece_count_from_name(target: str, name: str) -> float | None:
@@ -137,7 +166,8 @@ class ProductMatcher:
         # ``evaluate_product_semantics`` resolves the shared matcher canonical
         # itself, while still being able to enforce a narrower source identity
         # such as ``red_lentils`` before it is collapsed to generic ``linser``.
-        return evaluate_product_semantics(ingredient.canonical_name, product)
+        return _explicit_offer_product(ingredient, product,
+            evaluate_product_semantics(ingredient.canonical_name, product))
 
     def match(
         self,
@@ -150,13 +180,15 @@ class ProductMatcher:
         candidates: list[ProductCandidate] = []
 
         for product in products:
+            if product.purchase_terms and product.purchase_terms.usage in {"variant_selection_required", "blocked"}:
+                continue
             if allowed_stores is not None and product.store_id not in allowed_stores:
                 continue
 
             increment_performance_counter("semantic_comparisons")
             increment_performance_counter("product_match_calculations")
 
-            semantic = evaluate_product_semantics(ingredient.canonical_name, product)
+            semantic = self.evaluate_semantics(ingredient, product)
             if not semantic.compatible:
                 continue
             if (
@@ -169,7 +201,9 @@ class ProductMatcher:
             if score < self.minimum_score:
                 continue
 
-            interpreted = product
+            from app.services.purchase_quantity_resolver import project_purchase_shape
+
+            interpreted = project_purchase_shape(product)
             resolution = self.quantity_resolver.resolve(
                 interpreted,
                 required_quantity=ingredient.required_quantity,
@@ -205,12 +239,11 @@ class ProductMatcher:
                     continue
 
             effective_price = float(product.effective_price)
-            regular_price = float(product.price)
+            regular_price = float(product.price) if product.price is not None else None
             if (
                 not math.isfinite(effective_price)
                 or effective_price <= 0
-                or not math.isfinite(regular_price)
-                or regular_price <= 0
+                or (regular_price is not None and (not math.isfinite(regular_price) or regular_price <= 0))
             ):
                 continue
 

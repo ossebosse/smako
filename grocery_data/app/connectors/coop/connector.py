@@ -19,7 +19,7 @@ class CoopConnector:
     chain = Chain.COOP
     coverage = CoverageLevel.OFFERS_ONLY
     connector_version = "coop-v1"
-    parser_version = "coop-parser-v2"
+    parser_version = "coop-parser-v5"
     source_policy = SourcePolicy.ALLOW
 
     def __init__(
@@ -77,3 +77,35 @@ class CoopConnector:
 
     async def aclose(self) -> None:
         await self.client.aclose()
+
+
+class CoopRowApprovedOfferConnector(CoopConnector):
+    """Explicit single-store partial contract over retained, actual raw fetches.
+
+    Uses the normal collector/OWN repository; never an online price context.
+    No networking during replay, no observation-time rewriting.
+    """
+    def __init__(self, *, store, locator, offers):
+        self.parser = CoopParser()
+        self.parser_version = self.parser.parser_version
+        self.store, self.locator, self.offers = store, locator, offers
+        self.row_acceptance = None
+
+    async def fetch_stores(self, area):
+        return self.locator
+
+    def parse_stores(self, raw, references, area):
+        return [self.store]
+
+    async def fetch_catalog(self, store):
+        return self.offers
+
+    def parse_catalog(self, raw, references, store):
+        from grocery_data.app.services.offer_rows import qualify_rows
+        self.extracted = self.parser.parse_catalog(raw, references, store)
+        result, self.row_acceptance = qualify_rows(self.extracted, store=store,
+            observed_at=max(d.fetched_at for d in raw.documents))
+        return result
+
+    async def aclose(self):
+        pass

@@ -438,7 +438,10 @@ def _instructions(spec: _CandidateSpec, servings: int) -> list[str]:
 class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
     """Build normal Swedish weekday candidates without an external LLM."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, recipe_version="edible-input-v1") -> None:
+        if recipe_version not in {"legacy", "edible-input-v1"}:
+            raise ValueError("Unknown recipe definition version")
+        self.recipe_version = recipe_version
         self._batch_statistics: dict[str, int] = {}
 
     def generate_reference_candidates(self, *, servings=4):
@@ -541,7 +544,7 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
             raise ValueError("Okänd måltidstyp.")
         from app.services.reviewed_cold_meals import candidates as cold_candidates
 
-        return [
+        recipes = [
             Recipe(
                 name=name,
                 servings=servings,
@@ -552,7 +555,13 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
                 instructions=steps,
             )
             for name, ingredients, steps in templates[meal_type]
-        ] + cold_candidates(meal_type, servings)
+        ]
+        if self.recipe_version != "legacy":
+            from app.services.recipe_preparation import adapt
+            families = {"breakfast": ("egg_toast", None, "tofu_toast"),
+                        "snack": (None, "egg_tomato", "chickpea_toast")}
+            recipes = [adapt(r, f) if f else r for r, f in zip(recipes, families[meal_type], strict=True)]
+        return recipes + cold_candidates(meal_type, servings)
 
     @property
     def batch_statistics(self) -> dict[str, int]:
@@ -681,6 +690,9 @@ class DeterministicRecipeCandidateGenerator(RecipeCandidateGenerator):
                             instructions=_instructions(spec, servings),
                         )
                     )
+                    if self.recipe_version != "legacy":
+                        from app.services.recipe_preparation import adapt
+                        recipes[-1] = adapt(recipes[-1], spec.family)
                     self._batch_statistics[spec.family] = (
                         self._batch_statistics.get(spec.family, 0) + 1
                     )
@@ -796,8 +808,8 @@ class OpenAIRecipeCandidateGenerator(RecipeCandidateGenerator):
                         "grönsaker per portion. Använd bara realistiska "
                         "mängder som kan uttryckas i g, ml eller st. Sätt canonical_name "
                         "på varje ingrediens till ett av de tillåtna canonical-ID:na. "
-                        "Anta endast salt, peppar, vatten och neutral matolja hemma; dessa "
-                        "ska inte tas med i ingredienslistan. Gör inga prisberäkningar.\n"
+                        "Lista även all matolja med uttrycklig mängd och enhet; anta endast vatten hemma. "
+                        "Vatten behöver inte tas med i ingredienslistan. Gör inga prisberäkningar.\n"
                         f"Sökbias för denna batch ({batch.name}): {batch.instruction}\n"
                         "Rättformsbias: fördela kandidaterna så jämnt som möjligt mellan "
                         f"{json.dumps(batch.dish_forms, ensure_ascii=False)}. Använd "
@@ -915,7 +927,7 @@ class OpenAIRecipeCandidateGenerator(RecipeCandidateGenerator):
                         "g, ml eller st. Varje middag ska ungefär ge 450–900 kcal, minst "
                         "18 g protein och minst 100 g grönsaker per portion. Sätt "
                         "canonical_name till ett tillåtet ID. Anta "
-                        "bara salt, peppar, vatten och neutral matolja hemma. Returnera "
+                        "bara vatten hemma; lista även matolja med uttrycklig mängd och enhet. Returnera "
                         "inga priser och påstå inte att något är billigare; backend "
                         "avgör detta efter faktisk omräkning.\n"
                         "Nuvarande recept:\n"

@@ -101,7 +101,7 @@ def resolve_fixed_package_checkout(
     *,
     package_count: int,
     base_unit_price: Decimal | float | str,
-    regular_unit_price: Decimal | float | str,
+    regular_unit_price: Decimal | float | str | None,
     promotions: tuple[CheckoutPromotion, ...] = (),
     on_date: date | None = None,
     ignored_promotion_references: tuple[str, ...] = (),
@@ -117,8 +117,8 @@ def resolve_fixed_package_checkout(
     if package_count < 1:
         raise ValueError("package_count must be at least one")
     base_price = money(base_unit_price)
-    regular_price = money(regular_unit_price)
-    if base_price <= 0 or regular_price <= 0:
+    regular_price = money(regular_unit_price) if regular_unit_price is not None else None
+    if base_price <= 0 or (regular_price is not None and regular_price <= 0):
         raise ValueError("checkout prices must be positive")
     target_date = on_date or datetime.now(tz=_STOCKHOLM).date()
     offer_rows = _normalized_promotions(
@@ -126,6 +126,40 @@ def resolve_fixed_package_checkout(
         regular_unit_price=regular_price,
         on_date=target_date,
     )
+    if regular_price is not None and any(o.deposit is not None for o in offer_rows):
+        raise ValueError("deposit support requires independently bounded offers-only purchases; base deposit scope unknown")
+    if regular_price is None:
+        # No ordinary remainder can be manufactured. A single source contract
+        # must cover every purchased package, including its cap and dates.
+        complete = []
+        for offer in offer_rows:
+            groups, remainder = divmod(package_count, offer.required_packages)
+            if (remainder or not groups or offer.price is None
+                    or (offer.max_quantity is not None and groups > offer.max_quantity)):
+                continue
+            extra = offer.deposit.additional_total(package_count) if offer.deposit else Decimal(0)
+            if offer.deposit and offer.deposit.inclusion == 'included' and (
+                    groups * offer.price < offer.deposit.per_container * offer.deposit.containers_per_package * package_count):
+                raise ValueError("included deposit exceeds the advertised purchase total")
+            complete.append((money(groups * offer.price + extra), offer.reference, offer, groups))
+        if not complete:
+            raise ValueError("no active price contract covers the complete purchase; ordinary price unknown")
+        total, _, applied, groups = min(complete, key=lambda row: row[:2])
+        displayed = money(total / package_count)
+        return EffectivePriceResolution(
+            package_count=package_count, regular_unit_price=None,
+            eligible_base_unit_price=base_price, checkout_total=total,
+            displayed_unit_price=displayed, applied_promotion=applied,
+            applied_groups_or_packages=groups, condition_remainder_packages=0,
+            comparable=ComparableCheckoutPrice(
+                basis=ComparablePriceBasis.CHECKOUT_TOTAL if package_count > 1 else ComparablePriceBasis.PACKAGE_PRICE,
+                eligibility=applied.eligibility, mechanism=applied.mechanism,
+                package_count=package_count, checkout_total=total, displayed_unit_price=displayed,
+                condition_required_packages=applied.required_packages,
+                condition_total_price=applied.price, member_program=applied.member_program,
+                membership_program=applied.membership_program,
+            ), ignored_promotion_references=ignored_promotion_references,
+        )
     applied = _matching_single_promotion(
         offer_rows,
         base_unit_price=base_price,
@@ -248,14 +282,11 @@ def resolve_effective_price(
         and contract.is_active(target_date)
         and user_pricing_context.allows(contract)
     )
-    if not active_regular:
-        raise ValueError("at least one active public regular price contract is required")
     regular_contract = min(
         active_regular,
         key=lambda contract: (money(contract.price or Decimal(0)), contract.reference),
-    )
-    assert regular_contract.price is not None
-    regular = money(regular_contract.price)
+    ) if active_regular else None
+    regular = money(regular_contract.price) if regular_contract is not None else None
 
     eligible: list[PriceContract] = []
     ignored: list[str] = []
@@ -271,7 +302,7 @@ def resolve_effective_price(
             continue
         eligible.append(contract)
 
-    single_prices = [regular]
+    single_prices = [regular] if regular is not None else []
     for contract in eligible:
         if contract.mechanism not in {
             PromotionMechanism.SALE_PRICE,
@@ -281,6 +312,18 @@ def resolve_effective_price(
         resolved = contract.resolved_price(regular)
         if resolved is not None:
             single_prices.append(money(resolved))
+    if not single_prices:
+        # A complete multibuy is independently priceable without an ordinary
+        # single-pack price. The unit signal is internal only: the resolver's
+        # no-ordinary branch still requires every package to be covered by one
+        # verified contract, with no remainder and within its purchase cap.
+        group_signals = [money(contract.price / contract.required_packages)
+                         for contract in eligible
+                         if contract.mechanism is PromotionMechanism.MULTIBUY
+                         and contract.price is not None and contract.required_packages > 1]
+        if not group_signals:
+            raise ValueError("no active eligible one-package price contract")
+        single_prices = group_signals
     base = min(single_prices)
     return resolve_fixed_package_checkout(
         package_count=purchase_quantity,

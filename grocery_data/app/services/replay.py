@@ -29,6 +29,7 @@ from grocery_data.app.services.collector import (
     _catalog_completion_payload,
     _eligible_catalog_stores,
     _merge_schema_diff,
+    _review_schema_diff,
     _schema_fingerprints,
     _sum_metrics,
 )
@@ -471,10 +472,13 @@ class DatabaseReplayService:
                     if isinstance(value, SchemaFingerprint)
                 }
                 schema_diff = _merge_schema_diff(baseline_schemas, typed_schemas)
+                effective_schema_diff = _review_schema_diff(
+                    connector.chain, connector.parser_version, schema_diff,
+                )
                 assessment = assess_run_health(
                     aggregate,
                     baseline=baseline_metrics,
-                    schema_diff=None if accept_schema_change else schema_diff,
+                    schema_diff=None if accept_schema_change else effective_schema_diff,
                 )
                 if aggregate.products_parsed == 0 or completion_failures:
                     assessment = assessment.model_copy(update={"status": ConnectorStatus.BROKEN})
@@ -488,6 +492,10 @@ class DatabaseReplayService:
                         for kind, fingerprint in typed_schemas.items()
                     },
                     "schema_diff": schema_diff.model_dump(mode="json") if schema_diff else None,
+                    "effective_schema_diff": (
+                        effective_schema_diff.model_dump(mode="json")
+                        if effective_schema_diff else None
+                    ),
                     "replayed_from": snapshot_id,
                     "network_requests": 0,
                     "schema_change_accepted": accept_schema_change,

@@ -58,6 +58,30 @@ _VERIFICATION_RANK: dict[BasketVerificationStatus, int] = {
 }
 
 
+_MAX_GROUP_COMBINATIONS = 200000
+
+def _has_coupled_checkout(candidates_by_name):
+    """Use joint search only where separate lines share a source constraint.
+
+    A single normalized ingredient already aggregates all recipe quantities;
+    its ordinary quote enforces an offer-only cap. Enumerating every store
+    product combination merely because one such offer exists would destroy
+    the bounded store-subset path without adding correctness.
+    """
+    constrained = set()
+    for rows in candidates_by_name.values():
+        identities = set()
+        for candidate in rows:
+            if candidate.promotion_groups:
+                return True
+            if candidate.price is None and any(o.max_quantity is not None for o in candidate.offers):
+                identities.add((candidate.store_id, candidate.product_id))
+        if constrained & identities:
+            return True
+        constrained.update(identities)
+    return False
+
+
 @dataclass(frozen=True, slots=True)
 class BasketVerificationPolicy:
     """Eligibility policy applied before any price comparison.
@@ -127,6 +151,8 @@ class BasketVerificationPolicy:
             quote.sale_model == SaleModel.UNKNOWN
             or quote.quantity_confidence == QuantityConfidence.UNKNOWN
         ):
+            return BasketVerificationStatus.UNVERIFIED
+        if quote.conditional_variant_choice:
             return BasketVerificationStatus.UNVERIFIED
         if quote.quantity_confidence == QuantityConfidence.ESTIMATED:
             return BasketVerificationStatus.VERIFIED_WITH_ESTIMATES
@@ -235,7 +261,7 @@ class _QuoteCacheSession:
     stats: QuoteCacheStats = field(default_factory=QuoteCacheStats)
     price_universe: PriceUniverse | None = None
     persistent_cache: PackageCostCache | None = None
-    calculator_version: str = "basket-calculator-v2"
+    calculator_version: str = "basket-calculator-v3-purchase-planning"
 
 
 def _value(obj: Any, name: str, default: Any = None) -> Any:
@@ -329,7 +355,8 @@ class BasketOptimizer:
         *,
         price_universe: PriceUniverse | None = None,
         persistent_cache: PackageCostCache | None = None,
-        calculator_version: str = "basket-calculator-v2",
+        calculator_version: str = "basket-calculator-v3-purchase-planning",
+        reuse_existing: bool = False,
     ) -> Iterator[QuoteCacheStats]:
         """Bound reusable quotes to the current menu-search/request context.
 
@@ -340,6 +367,22 @@ class BasketOptimizer:
 
         if (price_universe is None) != (persistent_cache is None):
             raise ValueError("price_universe and persistent_cache must be supplied together")
+        existing = self._quote_cache_context.get()
+        if (reuse_existing and existing is not None
+                and existing.price_universe is price_universe
+                and existing.persistent_cache is persistent_cache
+                and existing.calculator_version == calculator_version):
+            # Reuse only within the enclosing request. Bound retained search
+            # intermediates between baskets; eviction never alters an answer.
+            maps = (existing.quotes, existing.candidate_fingerprints,
+                    existing.quote_sets, existing.selections,
+                    existing.per_store_selections, existing.per_store_compact,
+                    existing.subset_vectors, existing.store_orders)
+            if sum(map(len, maps)) > 32768:
+                for mapping in maps:
+                    mapping.clear()
+            yield existing.stats
+            return
         session = _QuoteCacheSession(
             price_universe=price_universe,
             persistent_cache=persistent_cache,
@@ -468,6 +511,7 @@ class BasketOptimizer:
             candidate.quantity_confidence,
             candidate.variable_weight,
             candidate.price,
+            candidate.purchase_date,
             candidate.effective_price,
             candidate.selected_price_contract_id,
             candidate.selected_price_eligibility,
@@ -585,7 +629,7 @@ class BasketOptimizer:
         ):
             item = self.calculator.calculate_item(ingredient, candidate)
             regular_total = item.regular_total_price
-            if regular_total is None:
+            if regular_total is None and candidate.price is not None:
                 regular_total = float(money(money(candidate.price) * item.packages_needed))
             return BasketItemQuote(
                 ingredient=item.ingredient,
@@ -634,12 +678,13 @@ class BasketOptimizer:
                     else None
                 ),
                 total_price=money(item.total_price),
-                regular_total_price=money(regular_total),
+                regular_total_price=money(regular_total) if regular_total is not None else None,
+                purchase_date=candidate.purchase_date,
                 regular_unit_price=money(
                     item.regular_unit_price
                     if item.regular_unit_price is not None
                     else candidate.price
-                ),
+                ) if candidate.price is not None else None,
                 price_contract_id=item.price_contract_id,
                 eligibility=item.eligibility,
                 price_mechanism=item.price_mechanism,
@@ -933,7 +978,7 @@ class BasketOptimizer:
         increment_performance_counter("optimistic_basket_bounds")
         # Independent line totals can overestimate a future group discount.
         # Zero is conservative even when multiple promotions compete.
-        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+        if _has_coupled_checkout(candidates_by_name):
             total = Decimal(0)
         return verification_rank, money(total)
 
@@ -957,7 +1002,7 @@ class BasketOptimizer:
         or bounds across future recipe additions.
         """
 
-        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+        if _has_coupled_checkout(candidates_by_name):
             limit = len(stores) if not max_stores or max_stores < 0 else min(max_stores, len(stores))
             result = []
             for cap in range(1, limit + 1):
@@ -1004,7 +1049,7 @@ class BasketOptimizer:
         membership and tie-breaking semantics remain shared with checkout.
         """
 
-        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+        if _has_coupled_checkout(candidates_by_name):
             return self.same_depth_nested_store_limited_keys(
                 [NormalizedIngredient(canonical_name=str(r[0]), required_quantity=float(r[1]), unit=str(r[2])) for r in requirements],
                 candidates_by_name, stores, max_stores=max_stores,
@@ -1271,7 +1316,7 @@ class BasketOptimizer:
         candidates_by_name: Mapping[str, Sequence[ProductCandidate]],
         stores: Sequence[Store],
     ) -> list[StoreBasket]:
-        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+        if _has_coupled_checkout(candidates_by_name):
             options = []
             for store in stores:
                 try:
@@ -1354,7 +1399,7 @@ class BasketOptimizer:
         *,
         calculate_savings: bool = True,
     ) -> OptimizedBasket:
-        if any(c.promotion_groups for rows in candidates_by_name.values() for c in rows):
+        if _has_coupled_checkout(candidates_by_name):
             return self._optimize_promotion_groups(
                 ingredients,
                 candidates_by_name,
@@ -1540,6 +1585,7 @@ class BasketOptimizer:
         never silently approximate an oversized interacting promotion problem.
         """
         from itertools import product
+        from math import prod
 
         source_stores = {s.store_id: s for s in stores}
         source_groups = {}
@@ -1569,11 +1615,19 @@ class BasketOptimizer:
                                and g.source_snapshot_id == candidate.source_provenance.source_snapshot_id)
                 if groups:
                     candidate = candidate.model_copy(update={"promotion_groups": groups})
-                quotes = self._candidate_quotes(ingredient, [candidate])
-                if not quotes:
-                    continue
-                quote = quotes[0]
-                if candidate.promotion_groups:
+                if groups and type(self.calculator) is BasketCalculator:
+                    try:
+                        quote = self.calculator.quote_item(ingredient, candidate, defer_group_checkout=True)
+                    except ValueError:
+                        continue
+                    if not self.verification_policy.allows_quote(quote):
+                        continue
+                else:
+                    quotes = self._candidate_quotes(ingredient, [candidate])
+                    if not quotes:
+                        continue
+                    quote = quotes[0]
+                if candidate.promotion_groups or candidate.price is None:
                     if candidate.sale_model != SaleModel.FIXED_PACKAGE:
                         raise GroupPricingError("Kampanjgrupper kräver verifierade fasta förpackningar.")
                     group_quotes.append((quote, candidate))
@@ -1584,12 +1638,25 @@ class BasketOptimizer:
             choices.append([*group_quotes, *plain.values()])
         if any(not c for c in choices):
             raise IncompleteBasketError("No complete basket can be built with the selected stores.")
+        # The exact search counts every Cartesian choice, including store-cap
+        # exclusions. Its size is known before pricing: do not burn the entire
+        # budget on a search that provably cannot finish within that budget.
+        if prod(len(c) for c in choices) > _MAX_GROUP_COMBINATIONS:
+            # Optional offers must not make an independently valid base
+            # basket unavailable. Keep the exact-search limit unchanged;
+            # never approximate campaign groups or relax purchase caps.
+            base_candidates = {name: [c for c in rows if c.coverage != "offers_only"]
+                               for name, rows in candidates_by_name.items()}
+            if any(len(base_candidates[name]) != len(rows)
+                   for name, rows in candidates_by_name.items()):
+                basket = self.optimize(ingredients, base_candidates, stores, max_stores,
+                                       calculate_savings=False)
+                return basket.model_copy(update={"savings_vs_single_store": None,
+                    "verification_warnings": [*basket.verification_warnings,
+                        "Erbjudandesökningen nådde beräkningsgränsen. Korgen använder verifierade baspriser; erbjudandetilläggen har utelämnats."]})
+            raise GroupPricingError("Kampanjkombinationen är för stor för verifierad exakt beräkning.")
         best, best_items, single = None, None, None
-        visited = 0
         for combination in product(*choices):
-            visited += 1
-            if visited > 200000:
-                raise GroupPricingError("Kampanjkombinationen är för stor för verifierad exakt beräkning.")
             used_stores = {q.store_id for q, _ in combination}
             if max_stores and len(used_stores) > max_stores:
                 continue
@@ -1602,7 +1669,12 @@ class BasketOptimizer:
                 )
                 for q, c in combination
             ]
-            priced = self.calculator.quote_group_basket(items)
+            try:
+                priced = self.calculator.quote_group_basket(items)
+            except ValueError:
+                # This product combination exceeds a source contract; other
+                # verified choices within the same store cap remain eligible.
+                continue
             total = _sum_items(priced)
             rank = self._quotes_verification_rank(q for q, _ in combination)
             key = (

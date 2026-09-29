@@ -16,8 +16,9 @@ from pathlib import Path
 
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 
-POLICY_VERSION = "slv-component-input-v3"
+POLICY_VERSION = "slv-component-input-v4"
 PATH = Path(__file__).parents[1] / "data/nutrition/slv-20260911.json"
+SUPPLEMENT_PATH = PATH.with_name('slv-20260924.json')
 ASSEMBLY_PATH = PATH.with_name("couscous-assembly-20260912.json")
 # Explicit reviewed identity + purchased/used preparation. Missing mappings stay missing.
 # IDs identify foods, not a retailer product. No prices, organic or allergens here.
@@ -45,6 +46,10 @@ MAPPINGS = {
     881: ("kikärtor", "dry"),
     884: ("linser", "dry"),
     3815: ("kikärtor", "drained"),
+    3816: ("kidneybönor", "drained"),
+    3817: ("svarta bönor", "drained"),
+    3761: ("stora vita bönor", "drained"),
+    1225: ("ägg", "raw"),
     909: ("sojasås", "ready"),
     2189: ("rapsolja", "ready"),
     7266: ("kokosmjölk 18 %", "ready"),
@@ -52,6 +57,18 @@ MAPPINGS = {
     97: ("hårdost 31 %", "ready"),
     123: ("mjölk 3 %", "ready"),
     1975: ("salt", "ready"),
+    1162: ("kalkonbröstfilé", "raw"),
+    371: ("vitlök", "raw"),
+    7193: ("koriander", "raw"),
+    7194: ("grönmynta", "raw"),
+    339: ("gurka", "raw"),
+    4659: ("extra jungfruolivolja", "ready"),
+    7137: ("crème fraiche 32 %", "ready"),
+    2269: ("ingefära", "raw"),
+    980: ("fläskfärs 20 %", "raw"),
+    374: ("ärtor", "frozen"),
+    574: ("mango", "raw"),
+    580: ("persika", "raw"),
 }
 COOKED = {2481: 2515, 870: 2079, 289: 305, 344: 448, 370: 465, 1173: 3594, 1255: 1317, 1246: 1335}
 FRIED = {1255: 1316, 1246: 1337}
@@ -91,6 +108,12 @@ def macro_values(rows):
 def reference_data():
     raw = PATH.read_bytes()
     data = json.loads(raw)
+    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json')):
+        supplement = json.loads(path.read_bytes())
+        if data['foods'].keys() & supplement['foods'].keys():
+            raise ValueError('SLV supplement must not silently replace retained references')
+        data['foods'].update(supplement['foods'])
+        data.setdefault('supplements', {})[path.name] = {k: v for k, v in supplement.items() if k != 'foods'}
     for identity in MAPPINGS:
         entry = data["foods"][str(identity)]
         assert entry["food"]["nummer"] == identity
@@ -123,6 +146,7 @@ def reference_options():
                 "raw_skinless_breast": "rå bröstfilé utan skinn",
                 "raw_farmed": "rå odlad lax",
                 "raw_cod": "rå torsk",
+                "frozen": "fryst som såld, före eventuell tillagning",
             }[state],
         }
         for n, (name, state) in MAPPINGS.items()
@@ -280,7 +304,66 @@ def product_reference(product, name, facts):
         return None
     text = product.name.casefold()
     canonical = canonicalize_ingredient_name(name)
+    if canonical in {'kycklingbröstfilé', 'kycklingfilé'}:
+        canonical = 'kyckling'
     composition = " ".join(facts.ingredients).casefold() if facts else ""
+    if canonical in {"potatis", "vitlök"}:
+        # Ingredient form is independent of having a complete declaration.
+        # Ready dishes, spice jars and oil mixtures do not establish raw input.
+        category = (product.category or "").casefold()
+        if re.search(r"krydd|pulver|tork|granulat|salt|peppar|kroket|puré|pure|sallad|gratäng|stekt|kokt|rostad|olja|smör|pinsa|bearnaise|vitost", text + " " + category):
+            return None
+        words = set(re.findall(r"[a-zåäö]+", composition))
+        food_words = {canonical, "ingredienser", "ekologisk", "ekologiska"}
+        if composition and not words <= food_words:
+            return None
+        source_text = " ".join(o.description or "" for o in product.offers)
+        fresh = (any(t in category for t in ("frukt", "grönsak", "potatis", "lök"))
+                 or bool(re.search(r"\bKlass\s+1\b", source_text, re.IGNORECASE)))
+        if canonical == "potatis":
+            if fresh and re.fullmatch(r"(?:ekologisk |svensk )?(?:färskpotatis|delikatesspotatis|mandelpotatis|minipotatis|potatis)(?: (?:fast|mjölig|tvättad|eko|ekologisk|ekologiska|klass 1|sverige|svensk|i påse|[\d,.]+\s*(?:g|kg)))*", text):
+                return 4457
+            return None
+        if fresh and re.fullmatch(r"(?:ekologisk |färsk )?vitlök(?: (?:hackad|krossad|finhackad|skalad|eko|ekologisk|i kapsel|[\d,.]+\s*g))*", text):
+            return 371
+        return None
+    if canonical == 'ägg' and re.match(r'^(?:ägg|skåneägg|bruna ägg)\b', text):
+        words = set(re.findall(r'[a-zåäö]+', composition))
+        return 1225 if words and words <= {'ingredienser', 'krav', 'ekologiska', 'ägg'} else None
+    if canonical == "rödlök":
+        # A distinct plain fresh food, never yellow onion or a pickled/flavoured
+        # product. The existing SLV record was retained but never mapped here.
+        return 4947 if re.fullmatch(r"(?:rödlök|röd lök)(?: eko| ekologisk| ekologiska)?", text.strip()) and not composition else None
+    # Edition/retailer-independent identities of plain foods. These are generic
+    # measured edible-input references, never product declarations or density
+    # estimates. Unknown mint species, oil blends, seasoning and cooked forms
+    # deliberately have no mapping.
+    plain = re.sub(r'\s+', ' ', text).strip()
+    plain = re.sub(r'\s+\d+(?:[,.]\d+)?\s*g$', '', plain)
+    if not composition:
+        # A plain fresh fruit identity only; no piece-to-edible-gram conversion.
+        if plain == 'mango' and canonical == 'mango' and 'Frukt & grönsaker' in (product.category or '').split(' > '):
+            return 574
+        rules = (
+            (371, {'vitlök'}, r'(?:ekologisk )?vitlök(?: i kapsel)?'),
+            (7193, {'koriander'}, r'(?:färsk )?koriander(?: blad)?'),
+            (7194, {'grönmynta'}, r'(?:färsk )?grönmynta(?: blad)?'),
+            (339, {'gurka'}, r'(?:ekologisk )?gurka(?: ej ekologisk)?'),
+            (1162, {'kalkonbröstfilé', 'kalkonfilé'}, r'(?:färsk )?kalkonbröstfilé'),
+            (4659, {'olivolja', 'extra jungfruolivolja', canonicalize_ingredient_name(plain)},
+             r'(?:ekologisk |spansk )?(?:extra jungfruolivolja|olivolja italiensk extra virgin)'),
+            (7137, {'crème fraiche'}, r'crème fraiche 32\s*%'),
+            (2269, {'ingefära'}, r'(?:ekologisk |färsk )?ingefära'),
+            (980, {'fläskfärs', 'fläskfärs 20%'}, r'fläskfärs 20\s*%'),
+            (374, {'ärtor'}, r'(?:nordiska |gröna )?ärtor djupfrysta'),
+        )
+        for identity, names, pattern in rules:
+            if (canonical in names or name.strip().casefold() == product.name.strip().casefold()) and re.fullmatch(pattern, plain):
+                if identity in {371, 7193, 7194, 339, 2269}:
+                    source_text = ' '.join(o.description or '' for o in product.offers)
+                    if not ('färsk' in plain or re.search(r'\bKlass\s+1\b', source_text, re.IGNORECASE)):
+                        return None  # A bare herb name does not prove fresh leaf versus dried spice.
+                return identity
     if canonical == "linser":
         return (
             884
@@ -357,7 +440,7 @@ def product_reference(product, name, facts):
         )
     if canonical == "tomat":
         plain = re.fullmatch(
-            r"(?:tomat|tomater|körsbärstomater|kvisttomater|plommontomater|cocktailtomater|pärltomater)(?: eko| ekologiska)?",
+            r"(?:tomat|tomater|körsbärstomater|kvisttomater|plommontomat|plommontomater|tomater plommon|cocktailtomater|pärltomater)(?: eko| ekologiska)?",
             text.strip(),
         )
         fresh = plain or (
@@ -420,7 +503,7 @@ def product_reference(product, name, facts):
     if canonical == "kyckling":
         return (
             1173
-            if ("bröstfil" in text or "kycklingfil" in text)
+            if "kyckling" in text and ("bröstfil" in text or "kycklingfil" in text)
             and not any(t in text for t in ("lår", "skinn", "innerfil"))
             else None
         )

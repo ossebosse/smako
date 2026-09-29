@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 from decimal import Decimal
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -23,6 +23,8 @@ class GeographicArea(BaseModel):
     model_config = ConfigDict(frozen=True, allow_inf_nan=False)
 
     city: str = Field(min_length=1)
+    mode: Literal["locality", "municipality"] = "locality"
+    municipality_code: str | None = Field(default=None, pattern=r"^\d{4}$")
     postal_codes: tuple[str, ...] = ()
     latitude: Decimal | None = None
     longitude: Decimal | None = None
@@ -31,6 +33,24 @@ class GeographicArea(BaseModel):
     @classmethod
     def normalize_city(cls, value: str) -> str:
         return value.strip()
+
+
+    @model_validator(mode="after")
+    def validate_municipality(self) -> GeographicArea:
+        if self.mode == "municipality":
+            from grocery_data.app.domain.municipality import municipality_name
+
+            if not self.municipality_code:
+                raise ValueError("municipality mode requires an official municipality code")
+            if municipality_name(self.municipality_code).casefold() != self.city.casefold():
+                raise ValueError("city must be the municipality's official name in municipality mode")
+        elif self.municipality_code is not None:
+            raise ValueError("municipality code requires explicit municipality mode")
+        return self
+
+    @property
+    def area_key(self) -> str:
+        return f"municipality:SE:{self.municipality_code}" if self.mode == "municipality" else self.city
 
 
 class SourceScopeDescriptor(BaseModel):

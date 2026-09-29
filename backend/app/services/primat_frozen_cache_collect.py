@@ -419,6 +419,8 @@ def _normalized_store(
         update={
             "coverage": persisted.coverage.value,
             "price_context": persisted.price_context_type.value,
+            "price_context_evidence": provenance.price_context_evidence.assigned(
+                "persisted_grocery_context") if provenance.price_context_evidence else None,
             "store_id": store.store_id,
         }
     )
@@ -458,6 +460,8 @@ def _normalized_product(
         update={
             "coverage": persisted.coverage.value,
             "price_context": persisted.price_context_type.value,
+            "price_context_evidence": provenance.price_context_evidence.assigned(
+                "persisted_grocery_context") if provenance.price_context_evidence else None,
         }
     )
     return product.model_copy(

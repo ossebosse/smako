@@ -192,7 +192,7 @@ async def test_physical_locator_uses_municipality_page_and_preserves_strict_loca
             GeographicArea(city="Lund"),
         )
 
-    assert requested_paths == ["/butiker/oppettider/lund/"]
+    assert requested_paths == ["/butiker/lund/"]
     assert len(stores) == 1
     assert stores[0].external_id == "1088004"
     assert stores[0].source_fields["store_id"] == "17883"
@@ -220,7 +220,9 @@ def test_offers_fixture_preserves_multibuy_member_and_identity_uncertainty() -> 
     assert len(result.products) == 3
     tomato = result.products[0]
     assert tomato.gtin == "7318690123456"
-    assert tomato.regular_price == Decimal("18.80")
+    assert tomato.regular_price is None
+    assert tomato.source_fields["price_evidence"]["reference_regular"] == "18.80"
+    assert tomato.source_fields["price_evidence"]["reference_is_current_checkout"] is False
     assert tomato.package_quantity == Decimal(200)
     assert tomato.comparison_price == Decimal("62.50")
     assert tomato.offers[0].type == PromotionType.MULTIBUY
@@ -359,7 +361,10 @@ async def test_ica_raw_collection_replays_without_network(tmp_path: Path) -> Non
         fixture = "stores_lund.html" if "oppettider" in request.url.path else "offers.html"
         return httpx.Response(
             200,
-            content=_with_runtime_material((FIXTURES / fixture).read_bytes()),
+            # Transport/LKG fixture needs payable offers, not an unsupported
+            # percentage whose only price basis is a campaign reference.
+            content=_with_runtime_material((FIXTURES / fixture).read_bytes().replace(
+                b'"benefitType":"PERCOFF"', b'"benefitType":"FIXED"')),
             request=request,
         )
 
@@ -429,6 +434,8 @@ async def test_ica_schema_break_keeps_lkg_and_repairs_by_offline_replay(tmp_path
             body = (FIXTURES / "stores_lund.html").read_bytes()
         else:
             body = (FIXTURES / "offers.html").read_bytes()
+            # Explicit synthetic payable amount for this LKG transport test.
+            body = body.replace(b'"benefitType":"PERCOFF"', b'"benefitType":"FIXED"')
             if broken:
                 body = body.replace(b'"weeklyOffers"', b'"weeklyDeals"')
         return httpx.Response(200, content=body, request=request)

@@ -13,6 +13,7 @@ from datetime import UTC, date, datetime
 from math import isfinite
 from typing import Any, Self
 from urllib.parse import quote
+from zoneinfo import ZoneInfo
 
 import httpx
 from app.errors import (
@@ -140,7 +141,9 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         *,
         max_age_hours: float = 48.0,
         include_offers_only: bool = False,
+        include_conditional_offer_products: bool = False,
         client: httpx.AsyncClient | None = None,
+        municipal_willys_stores: dict | None = None,
     ) -> None:
         if not base_url.strip():
             raise ValueError("OWN_GROCERY_BASE_URL must not be empty")
@@ -154,6 +157,7 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         # must never turn an offers-only feed into a catalogue that the meal
         # optimizer may treat as complete.
         self._include_offers_only = include_offers_only
+        self._include_conditional_offer_products = include_offers_only and include_conditional_offer_products
         self._owns_client = client is None
         self._client = client or httpx.AsyncClient(
             base_url=base_url.rstrip("/") + "/",
@@ -162,8 +166,13 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         self._client.headers["Accept"] = "application/json"
         self._client.headers["User-Agent"] = "billigaste-veckomenyn-own-provider/1.0"
         self._stores: dict[str, Store] = {}
+        self._municipal_willys_stores = municipal_willys_stores
         self._store_freshness: dict[str, dict[str, Any]] = {}
+        # Set only by the explicit ICA row-contract provider after reading
+        # promoted OWN snapshot identity. Never affects ordinary catalogues.
+        self.campaign_snapshot_ids: frozenset[str] = frozenset()
         self._catalog_cache: dict[str, tuple[Product, ...]] = {}
+        self.offer_projection_diagnostics: dict[str, dict[str, int]] = {}
         self._product_search_cache: dict[tuple[str, tuple[str, ...]], tuple[Product, ...]] = {}
 
     async def aclose(self) -> None:
@@ -303,6 +312,9 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             provider_store_id=_text(
                 row.get("external_store_id") or row.get("external_id") or row.get("store_id")
             ),
+            retailer_id_namespace=("willys:flyer-document-ad"
+                if row.get("willys_document_count_contract") is True else
+                'lidl:public-product' if row.get('lidl_document_count_contract') is True else None),
             price_context=_text(row.get("price_context_type")),
             coverage=_text(row.get("coverage") or row.get("store_coverage")),
             semantic_confidence=_text(row.get("semantic_confidence")),
@@ -326,6 +338,14 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
 
         now = datetime.now(tz=UTC)
         for row in rows:
+            snapshot = _text(row.get("snapshot_id") or row.get("active_snapshot_id"))
+            if snapshot in self.campaign_snapshot_ids:
+                observed = _parse_datetime(row.get("observed_at"))
+                if observed is None or observed > now:
+                    raise PriceProviderError("Campaign source observation is unverified")
+                # Each returned contract must still pass its own source-bound
+                # date/identity checks in IcaAreaOfferProvider and checkout.
+                continue
             status = str(row.get("connector_status") or row.get("status") or "unknown").lower()
             if status not in _HEALTHY_STATUSES:
                 if status in _REJECTED_STATUSES:
@@ -420,13 +440,14 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         *,
         accepted_coverage: set[str],
         empty_message: str,
+        source_locality: str | None = None,
     ) -> list[Store]:
         digits = "".join(character for character in postal_code if character.isdigit())
-        if len(digits) != 5:
+        if source_locality is None and len(digits) != 5:
             raise ValueError("postal_code must contain exactly five digits")
         payload = await self._request(
             "/stores",
-            params={"postal_code": digits, "limit": 500, "offset": 0},
+            params={**({"city": source_locality} if source_locality is not None else {"postal_code": digits}), "limit": 500, "offset": 0},
         )
         stores: list[Store] = []
         for row in self._records(payload, "stores", "items"):
@@ -527,11 +548,36 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
     async def find_stores(self, postal_code: str) -> list[Store]:
         """Return stores eligible for ordinary catalogue/basket operations."""
 
-        return await self._find_stores_for_coverage(
-            postal_code,
-            accepted_coverage=self._usable_coverage,
-            empty_message="Egen prisdatatjänst hittade inga användbara butiker för",
-        )
+        try:
+            stores = await self._find_stores_for_coverage(
+                postal_code,
+                accepted_coverage=self._usable_coverage,
+                empty_message="Egen prisdatatjänst hittade inga användbara butiker för",
+            )
+        except PriceProviderError:
+            if self._municipal_willys_stores is None:
+                raise
+            stores = []
+        if self._municipal_willys_stores is None:
+            return stores
+        municipal = self._municipal_willys_stores
+        result = {s.store_id: s for s in stores if s.chain.casefold() != "willys"}
+        for locality in sorted({s.city for s in municipal.values() if s.city}):
+            try:
+                candidates = await self._find_stores_for_coverage(
+                    postal_code, accepted_coverage=self._usable_coverage,
+                    empty_message="Ingen godkänd kommunal katalog", source_locality=locality)
+            except PriceProviderError:
+                continue  # Remains absent/unusable; never substitutes another store.
+            for candidate in candidates:
+                evidence = municipal.get(candidate.source_store_id)
+                if (candidate.chain.casefold() == "willys" and evidence is not None
+                        and candidate.price_context_type == "online_store"
+                        and candidate.physical_store_external_id == evidence.external_id
+                        and candidate.address == evidence.address
+                        and candidate.postal_code == "".join((evidence.postal_code or "").split())):
+                    result[candidate.store_id] = candidate
+        return list(result.values())
 
     async def find_offer_stores(self, postal_code: str) -> list[Store]:
         """Discover offers-only stores for explicit diagnostics/enrichment.
@@ -549,6 +595,19 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             postal_code,
             accepted_coverage={"offers_only"},
             empty_message="Egen prisdatatjänst hittade inga offer-only-butiker för",
+        )
+
+    async def find_offer_stores_in_locality(self, locality: str) -> list[Store]:
+        """Opt-in discovery by verified address locality, before exact inventory filtering.
+
+        Locality is an API lookup key, never evidence of municipal membership.
+        Existing postal discovery and user store selection remain unchanged.
+        """
+        if not self._include_offers_only or not locality.strip():
+            raise PriceProviderError("Explicit offers-only locality discovery required")
+        return await self._find_stores_for_coverage(
+            "", accepted_coverage={"offers_only"}, source_locality=locality.strip(),
+            empty_message="No qualified offers-only source in locality",
         )
 
     async def search_products(self, query: str, store_ids: list[str]) -> list[Product]:
@@ -666,7 +725,7 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         offer_rows = await self._paginated(
             "/offers",
             record_keys=("offers", "items"),
-            params=(("store_id", store_id), ("active_only", "true")),
+            params=(("store_id", store_id), ("active_only", "false" if self.campaign_snapshot_ids else "true")),
             page_size=1000,
             fallback_store_ids=(store_id,),
         )
@@ -675,8 +734,15 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
 
         offers_by_product: dict[str, list[OfferMetadata]] = {}
         embedded_products: dict[str, Product] = {}
+        projection = {"source_offers": len(offer_rows), "invalid_or_incomplete_product": 0,
+                      "missing_embedded_product": 0, "projected_products": 0}
+        self.offer_projection_diagnostics[store_id] = projection
         offers_only_payload = False
         for row in offer_rows:
+            if self._include_conditional_offer_products and not row.get("valid_from") and not row.get("campaign_evidence"):
+                observed = _parse_datetime(row.get("source_observed_at"))
+                if observed is not None:
+                    row = {**row, "valid_from": observed.astimezone(ZoneInfo("Europe/Stockholm")).date().isoformat()}
             if str(row.get("store_coverage") or "").casefold() == "offers_only":
                 offers_only_payload = True
             product_key = _text(row.get("product_id") or row.get("external_product_id"))
@@ -686,14 +752,23 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
 
             product_row = row.get("product")
             if not isinstance(product_row, Mapping):
+                projection["missing_embedded_product"] += 1
                 continue
             if str(product_row.get("source_channel") or "").casefold() == "offers":
                 offers_only_payload = True
+            if self._include_conditional_offer_products and offer is not None:
+                # /offers embeds product identity separately from the contract.
+                # Supply that observed contract without recursively copying product.
+                product_row = {**product_row, "coverage": row.get("store_coverage") or product_row.get("coverage"), "promotions": [
+                    *self._promotion_rows(product_row),
+                    {key: value for key, value in row.items() if key != "product"},
+                ]}
             try:
                 product = self._product_from_row(product_row)
             except (TypeError, ValueError):
                 product = None
             if product is None:
+                projection["invalid_or_incomplete_product"] += 1
                 continue
             if (
                 product.source_provenance is not None
@@ -738,8 +813,15 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             enriched = Product.model_validate(
                 product.model_copy(update={"offers": deduplicated}).model_dump()
             )
-            result.extend(self.apply_price_policy([enriched]))
-        return result
+            if self._include_conditional_offer_products:
+                # Shared source material keeps contracts; personal membership,
+                # purchase date and multibuy quantity are resolved at checkout.
+                result.append(enriched)
+            else:
+                result.extend(self.apply_price_policy([enriched]))
+        projection["projected_products"] = len(result)
+        from app.services.source_promotion_groups import attach_source_groups
+        return attach_source_groups(result, offer_rows)
 
     def _parse_products(self, rows: Sequence[Mapping[str, Any]]) -> list[Product]:
         products: list[Product] = []
@@ -754,7 +836,8 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             raise PriceProviderError(
                 "Egen prisdatatjänst returnerade produkter men ingen hade säker prisdata"
             )
-        return products
+        from app.services.source_promotion_groups import attach_source_groups
+        return attach_source_groups(products, rows)
 
     def _product_from_row(self, row: Mapping[str, Any]) -> Product | None:
         availability = row.get("availability")
@@ -780,7 +863,16 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         store_name = _text(row.get("store_name")) or (store.name if store else store_id)
         chain = _text(row.get("chain")) or (store.chain if store else None)
 
+        if row.get("physical_offer_qualified") is False:
+            return None
         current_price = _positive_float(row.get("sale_price"))
+        if current_price is None and self._include_conditional_offer_products:
+            # Conditional amount is a ranking signal only. The offer contract
+            # below retains its quantity; ordinary_price remains unknown.
+            contract_prices = [o.price / o.required_packages
+                               for r in self._promotion_rows(row)
+                               if (o := self._offer_from_row(r, chain=chain)) is not None]
+            current_price = min(contract_prices, default=None)
         comparison_price = _positive_float(row.get("comparison_price"))
         raw_sale_model = str(row.get("sale_model") or "unknown").casefold()
         try:
@@ -803,9 +895,15 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             return None
 
         regular_price = _positive_float(row.get("regular_price"))
-        ordinary_price = max(current_price, regular_price or current_price)
+        source_fields = row.get("source_fields") or {}
+        offer_only = ((store.coverage if store else row.get("coverage")) == "offers_only"
+                      or row.get("source_channel") == "offers"
+                      or source_fields.get("regular_price_current_verified") is False)
+        ordinary_price = (None if source_fields.get("regular_price_current_verified") is False
+                          else regular_price if offer_only
+                          else max(current_price, regular_price or current_price))
         member_price = _positive_float(row.get("member_price"))
-        if member_price is not None and member_price > ordinary_price:
+        if member_price is not None and ordinary_price is not None and member_price > ordinary_price:
             member_price = None
 
         package = self._canonical_quantity(row.get("package_quantity"), row.get("package_unit"))
@@ -875,7 +973,7 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             for source_offer in self._promotion_rows(row)
             if (offer := self._offer_from_row(source_offer, chain=chain)) is not None
         ]
-        if current_price < ordinary_price and not any(
+        if ordinary_price is not None and current_price < ordinary_price and not any(
             offer.required_packages == 1
             and offer.kind == OfferKind.CAMPAIGN
             and abs(offer.price - current_price) < 0.005
@@ -908,6 +1006,11 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         purchase_sale_price = (
             current_price if sale_model == SaleModel.FIXED_PACKAGE else effective_price
         )
+        if ordinary_price is None and sale_model == SaleModel.SOLD_BY_PIECE:
+            # A multibuy quotient is only a ranking signal; no residual piece price.
+            single_prices = [o.price for o in offers if o.required_packages == 1
+                             and o.is_active() and (o.kind != OfferKind.MEMBER or self.use_member_prices)]
+            purchase_sale_price = min(single_prices) if single_prices else None
         estimated_piece_weight = None
         average_weight_kg = _positive_float(row.get("average_weight_kg"))
         if average_weight_kg is not None:
@@ -921,6 +1024,10 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             "store_id": store_id,
             "store_name": store_name,
             "price": ordinary_price,
+            "conditional_price_signal": bool(ordinary_price is None and (
+                row.get("physical_offer_qualified") is True
+                or offer_only and self._include_conditional_offer_products
+                and any(o.purchase_terms is not None for o in offers))),
             "effective_price": effective_price,
             "member_price": member_price,
             "offers": offers,
@@ -957,7 +1064,7 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         if usable is not None:
             fields["usable_quantity"], fields["usable_unit"] = usable
         if sale_model == SaleModel.SOLD_BY_PIECE:
-            fields["piece_price"] = effective_price
+            fields["piece_price"] = purchase_sale_price
             if estimated_piece_weight is not None:
                 fields["estimated_piece_weight"] = estimated_piece_weight
                 fields["estimated_piece_weight_unit"] = "g"
@@ -977,6 +1084,9 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         chain: str | None,
     ) -> OfferMetadata | None:
         kind = str(row.get("type") or row.get("kind") or "").casefold()
+        # Membership does not make an unsupported source condition executable.
+        if kind not in {"multibuy", "multipack", "member_price", "member", "sale_price", "campaign", "percent_discount"}:
+            return None
         price = _positive_float(row.get("price"))
         if price is None:
             return None
@@ -1033,7 +1143,10 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             kind=offer_kind,
             description=description,
             price=price,
+            price_basis_unit=row.get('price_basis_unit', 'package'),
+            purchase_terms=row.get('purchase_terms'),
             required_packages=quantity,
+            deposit=row.get("deposit"),
             max_quantity=max_quantity,
             eligibility=(
                 PromotionEligibility.MEMBER if member_only else PromotionEligibility.PUBLIC
@@ -1054,6 +1167,8 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             member_program=(f"{chain} medlem" if member_only and chain else None),
             valid_from=_parse_date(row.get("valid_from")),
             valid_to=_parse_date(row.get("valid_to")),
+            campaign_evidence=row.get("campaign_evidence"),
+            price_contract_id=_text(row.get("price_contract_id")),
         )
 
     @staticmethod
@@ -1064,10 +1179,16 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             key = (
                 offer.kind,
                 round(offer.price, 4),
+                offer.price_basis_unit,
                 offer.required_packages,
+                offer.max_quantity,
+                offer.eligibility,
+                offer.membership_program,
+                offer.price_contract_id,
                 offer.member_program,
                 offer.valid_from,
                 offer.valid_to,
+                offer.deposit.model_dump_json() if offer.deposit else None,
             )
             if key not in seen:
                 seen.add(key)

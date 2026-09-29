@@ -29,7 +29,7 @@ class CityGrossConnector:
     technical_capability = SourceTechnicalCapability.LIKELY_FULL_ONLINE_CATALOG
     source_policy = SourcePolicy.REVIEW
     connector_version = "citygross-v1"
-    parser_version = "citygross-parser-v2"
+    parser_version = "citygross-parser-v4"
     minimum_full_catalog_products = 10_000
 
     def __init__(

@@ -10,7 +10,7 @@ from dataclasses import replace
 from app.models.recipe import Recipe, RecipeIngredient
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 
-VERSION = "warm-edible-input-review-20260913b"
+VERSION = "warm-edible-input-review-20260915-thigh"
 SOURCES = [
     {
         "url": "https://www.livsmedelsverket.se/livsmedel-och-innehall/tillagning-forvaring-hallbarhet/tillagning/hur-paverkas-maten-vid-tillagning/",
@@ -78,6 +78,18 @@ TEMPLATES["lentil_pasta_cheese"] = (
 )
 
 
+# Same existing no-discard method, separately identified cut. Never borrow the
+# breast reference or imply a measured cooked yield for the thigh declaration.
+TEMPLATES["chicken_thigh_oven"] = (
+    "Ugnsbakad kycklinglårfilé med morötter och ris",
+    [("kyckling", 200), ("ris", 80), ("morot", 150)],
+    [
+        TEMPLATES["chicken_oven"][2][0].replace("kycklingbröstfilé", "kycklinglårfilé"),
+        *TEMPLATES["chicken_oven"][2][1:],
+    ],
+)
+
+
 def candidates(servings=4):
     return [
         Recipe(
@@ -127,6 +139,7 @@ def evidence(identity, recipe, declaration=None):
         "tofu_noodle_pan": {905, 870, 370},
         "lentil_rice_stew": {884, 2481, 422, 289},
         "chicken_oven": {1173, 2481, 289},
+        "chicken_thigh_oven": {2481, 289},
     }
     key = preparation(recipe)
     if identity not in allowed.get(key, set()):
@@ -158,5 +171,41 @@ def evidence(identity, recipe, declaration=None):
                 },
             )
             for k in values
+        },
+    )
+
+
+def thigh_declaration_evidence(recipe, declaration):
+    from app.services.nutrition_reference import NutritionEvidence
+    from app.services.reviewed_product_nutrition import is_reviewed_raw_thigh
+
+    if (
+        preparation(recipe) != "chicken_thigh_oven"
+        or not is_reviewed_raw_thigh(declaration)
+        or declaration.conflicts
+        or declaration.nutrition_unit != "g"
+        or declaration.nutrition_preparation != "as_sold"
+    ):
+        return None
+    return NutritionEvidence(
+        source=declaration.source,
+        source_product_id=declaration.source_product_id,
+        nutrition=declaration.nutrition,
+        nutrition_basis=declaration.nutrition_basis + " " + basis(recipe)["description"],
+        evidence_kind="reviewed_warm_input_estimate",
+        field_sources={
+            f"nutrition.{key}": declaration.field_sources[f"nutrition.{key}"]
+            + (
+                {
+                    "kind": "reviewed_warm_input_estimate",
+                    "review": VERSION,
+                    "recipe_review": "chicken_thigh_oven",
+                    "operation": "as_sold_macros * used_edible_input_g / 100",
+                    "discarded_food_g": 0,
+                    "cooked_quantity_g": None,
+                    "package_surplus_included": False,
+                },
+            )
+            for key in declaration.nutrition
         },
     )

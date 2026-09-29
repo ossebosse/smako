@@ -301,7 +301,7 @@ def replace_product(
 
 
 def _candidate_from_item(item: BasketItem) -> ProductCandidate:
-    regular_unit = (
+    regular_unit = None if not item.ordinary_price_known else (
         item.regular_total_price / item.packages_needed
         if item.regular_total_price is not None
         else item.base_checkout_unit_price or item.unit_price
@@ -314,6 +314,7 @@ def _candidate_from_item(item: BasketItem) -> ProductCandidate:
         store_id=item.store_id,
         store_name=item.store_name,
         price=regular_unit,
+        purchase_date=item.purchase_date,
         effective_price=effective,
         match_score=1.0,
         canonical_food=item.canonical_food,

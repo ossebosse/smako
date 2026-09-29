@@ -26,6 +26,7 @@ from app.services.economic_ingredient_selector import (
 )
 from app.services.ingredient_taxonomy import IngredientCategory, IngredientTaxonomyEntry
 
+from grocery_data.app.domain.counted_offer_checkout import uses_counted_offer_checkout
 from grocery_data.app.domain.promotion_pricing import (
     MembershipProgram,
     PriceContract,
@@ -77,7 +78,12 @@ def _offer_contract(
     offer: OfferMetadata,
     *,
     index: int,
+    rate_contract: bool = False,
 ) -> PriceContract:
+    if offer.price_basis_unit != 'package' and not rate_contract:
+        raise ValueError('Quoted weight rate requires measured purchase weight; not a package price')
+    if offer.deposit and offer.deposit.gtin != candidate.gtin:
+        raise ValueError("deposit contract belongs to another product variant")
     eligibility = offer.eligibility or (
         PromotionEligibility.MEMBER
         if offer.kind is OfferKind.MEMBER or offer.member_program
@@ -153,6 +159,8 @@ def _offer_contract(
         ),
         valid_from=offer.valid_from,
         valid_to=offer.valid_to,
+        campaign_evidence=offer.campaign_evidence,
+        deposit=offer.deposit,
     )
 
 
@@ -181,11 +189,12 @@ def price_contracts_for_candidate(
         quantity_confidence=(
             provenance.quantity_confidence if provenance is not None else None
         ),
-    )
-    contracts = [regular]
+    ) if candidate.price is not None else None
+    contracts = [regular] if regular is not None else []
     offer_contracts = [
         _offer_contract(candidate, offer, index=index)
         for index, offer in enumerate(candidate.offers)
+        if offer.price_basis_unit == 'package'
     ]
     contracts.extend(offer_contracts)
 
@@ -207,7 +216,8 @@ def price_contracts_for_candidate(
         for contract in offer_contracts
     )
     if (
-        effective_price < Decimal(str(candidate.price))
+        candidate.price is not None
+        and effective_price < Decimal(str(candidate.price))
         and not has_same_public_single
         and all(
             member_price is None
@@ -382,7 +392,61 @@ def _synthetic_member_offer(
         quantity_confidence=contract.quantity_confidence,
         valid_from=contract.valid_from,
         valid_to=contract.valid_to,
+        deposit=contract.deposit,
+        campaign_evidence=contract.campaign_evidence,
     )
+
+
+def _price_weight_candidate(candidate, context, target_date):
+    """Select a verified rate using the existing eligibility/price resolver.
+
+    One rate unit is resolved here; physical quantities and package caps are
+    calculated separately by PurchaseQuantityResolver and basket checkout.
+    """
+    terms = candidate.purchase_terms
+    contracts = [_offer_contract(candidate, o, index=i, rate_contract=True)
+                 for i, o in enumerate(candidate.offers)
+                 if o.price_basis_unit == 'kg' and o.required_packages == 1
+                 and o.deposit is None]
+    def unavailable():
+        # Explain the resolver's own contract gates; this does not implement
+        # another eligibility policy or manufacture a fallback price.
+        active = [c for c in contracts if c.is_active(target_date)]
+        if not contracts:
+            return "No verified kg rate contract without unresolved deposit"
+        if not active:
+            return f"No weight-price contract active on {target_date}"
+        if not any(context.allows(c) for c in active):
+            programs = sorted({str(c.membership_program) for c in active if c.membership_program})
+            return "Active weight-price contract requires membership/activation eligibility: " + ", ".join(programs)
+        return "No verified applicable weight-price contract"
+
+    try:
+        resolution = resolve_effective_price(contracts, 1, context, on_date=target_date)
+    except ValueError as exc:
+        raise ValueError(unavailable()) from exc
+    selected = resolution.applied_promotion
+    if selected is None:
+        raise ValueError(unavailable())
+    offer = next(o for i, o in enumerate(candidate.offers)
+                 if _offer_contract(candidate, o, index=i, rate_contract=True).reference == selected.reference)
+    if terms.purchase_form == 'loose_weight' and offer.max_quantity is not None:
+        raise ValueError('Loose weight needs an explicit weight purchase-limit unit')
+    quantity = terms.approximate_package_g or terms.minimum_package_g
+    if terms.purchase_form == 'variable_package' and quantity is None:
+        raise ValueError('No source package-weight estimate or verified minimum')
+    from app.services.purchase_quantity_resolver import project_purchase_shape
+
+    candidate = project_purchase_shape(candidate)
+    rate = float(resolution.checkout_total)
+    return candidate.model_copy(update={
+        'sale_price': rate, 'sale_unit': 'kg', 'effective_price': rate,
+        'comparison_price': rate, 'comparison_unit': 'kg', 'offers': [offer],
+        'purchase_date': target_date, 'selected_price_contract_id': selected.reference,
+        'selected_price_eligibility': selected.eligibility,
+        'selected_price_mechanism': selected.mechanism,
+        'selected_membership_program': selected.membership_program,
+    })
 
 
 def price_candidate_for_context(
@@ -390,12 +454,62 @@ def price_candidate_for_context(
     context: UserPricingContext,
     *,
     on_date: date | None = None,
+    planning_mode: str = "exact",
+    allow_campaign_choice: bool = False,
 ) -> ProductCandidate:
     """Return one request-local candidate; the input artifact row is untouched."""
 
-    contracts = price_contracts_for_candidate(candidate)
+    terms = candidate.purchase_terms
+    if terms and terms.usage == 'variant_selection_required' and allow_campaign_choice:
+        if terms.purchase_form not in {'piece', 'fixed_package'} or any(o.price_basis_unit != 'package' for o in candidate.offers):
+            raise ValueError('Conditional campaign needs a verified count purchase')
+        candidate = candidate.model_copy(update={
+            'conditional_variant_choice': True, 'sale_model': SaleModel.SOLD_BY_PIECE,
+            'package_quantity': 1, 'package_unit': 'st', 'usable_quantity': 1, 'usable_unit': 'st',
+            'quantity_confidence': 'exact', 'estimated_piece_weight': None,
+            'variable_weight': False, 'piece_price': candidate.effective_price,
+            'semantic_confidence': 'high',
+            'semantic_evidence': ['user-confirmed campaign sales unit; actual variant unresolved'],
+        })
+    elif terms and terms.usage in {'blocked', 'variant_selection_required'}:
+        raise ValueError('Purchase requires completion: ' + terms.usage)
+    if terms and terms.usage == 'estimated':
+        if planning_mode != 'estimated':
+            raise ValueError('Weight-dependent checkout requires estimated planning mode')
+        return _price_weight_candidate(candidate, context, on_date or current_pricing_date())
+    if candidate.sale_model in {SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE}:
+        if planning_mode != 'estimated':
+            raise ValueError('Weight-dependent checkout requires estimated planning mode')
+        candidate = candidate.model_copy(update={'quantity_confidence': 'estimated'})
     target_date = on_date or current_pricing_date()
-    resolution = resolve_effective_price(contracts, 1, context, on_date=target_date)
+    candidate = candidate.model_copy(update={"promotion_groups": tuple(
+        g for g in candidate.promotion_groups
+        if g.valid_from <= target_date <= g.valid_to
+        and (g.membership_program is None or g.membership_program in context.memberships)
+    )}) if candidate.promotion_groups else candidate
+    contracts = price_contracts_for_candidate(candidate)
+    try:
+        resolution = resolve_effective_price(contracts, 1, context, on_date=target_date)
+    except ValueError:
+        # Retain eligible offers-only multibuys until the actual package count
+        # is known. This is a ranking signal, never a one-package sale price.
+        grouped = [c for c in contracts if c.mechanism is PromotionMechanism.MULTIBUY
+                   and c.required_packages > 1 and c.price is not None
+                   and c.is_active(target_date) and context.allows(c)]
+        if candidate.price is not None or not uses_counted_offer_checkout(candidate) or not grouped:
+            raise
+        # Reuse the same checkout resolver to validate the complete group.
+        signals = [float(resolve_effective_price(contracts, c.required_packages, context,
+                         on_date=target_date).checkout_total) / c.required_packages for c in grouped]
+        eligible_offers = [o for i, o in enumerate(candidate.offers)
+                           if (c := _offer_contract(candidate, o, index=i)).is_active(target_date)
+                           and context.allows(c)]
+        return candidate.model_copy(update={
+            "purchase_date": target_date, "effective_price": min(signals),
+            "sale_price": None, "piece_price": None, "offers": eligible_offers,
+            "selected_price_contract_id": None,
+            "selected_price_mechanism": PromotionMechanism.MULTIBUY,
+        })
     eligible_offers: list[OfferMetadata] = []
     present_references: set[str] = set()
     for index, offer in enumerate(candidate.offers):
@@ -422,6 +536,7 @@ def price_candidate_for_context(
 
     effective = float(resolution.checkout_total)
     updates: dict[str, object] = {
+        "purchase_date": target_date,
         "effective_price": effective,
         "sale_price": effective,
         "offers": eligible_offers,
@@ -460,6 +575,7 @@ def _project_rows(
     context: UserPricingContext,
     *,
     on_date: date,
+    planning_mode: str = "exact",
 ) -> list[ProductCandidate]:
     projected: list[ProductCandidate] = []
     for candidate in rows:
@@ -476,7 +592,9 @@ def _project_rows(
             and program in context.memberships
         )
         if (
-            candidate.promotion_groups
+            candidate.price is None
+            or candidate.sale_model in {SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE}
+            or candidate.promotion_groups
             or member_offers
             or selected_member_price
             or candidate.effective_price < candidate.price
@@ -486,9 +604,13 @@ def _project_rows(
             or candidate.selected_price_mechanism is not PromotionMechanism.REGULAR
             or candidate.selected_membership_program is not None
         ):
-            projected.append(
-                price_candidate_for_context(candidate, context, on_date=on_date)
-            )
+            try:
+                projected.append(price_candidate_for_context(candidate, context, on_date=on_date, planning_mode=planning_mode))
+            except ValueError:
+                if candidate.price is not None and candidate.sale_model not in {SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE}:
+                    raise
+                # Optional offers outside their verified validity are unavailable.
+                continue
         else:
             # Most catalog rows are ordinary public prices. Reuse the frozen
             # artifact model instead of cloning and revalidating an identical
@@ -814,7 +936,8 @@ def project_economic_pool(
                 public_support_by_name[canonical]
             )
         else:
-            matched = _project_rows(source_rows, context, on_date=target_date)
+            matched = _project_rows(source_rows, context, on_date=target_date,
+                planning_mode="estimated" if selector.verification_policy.allow_estimated_quantities else "exact")
             semantic = (
                 matched
                 if semantics_prepared
@@ -851,6 +974,7 @@ def project_economic_pool(
                 source_rows,
                 public_context,
                 on_date=target_date,
+                planning_mode="estimated" if selector.verification_policy.allow_estimated_quantities else "exact",
             )
             public_semantic = (
                 public_matched

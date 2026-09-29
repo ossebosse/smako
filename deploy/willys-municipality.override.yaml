@@ -1,0 +1,12 @@
+# Prepared only. Does not select an image, change schedules or enable other sources.
+# Apply only with a separately approved compatible image and persistent source file.
+x-willys-municipal-environment: &willys-municipal-environment
+  WILLYS_MUNICIPAL_CONFIG: ${WILLYS_MUNICIPAL_CONFIG:?set the persistent municipal build configuration path}
+
+services:
+  app:
+    environment: *willys-municipal-environment
+  scheduler:
+    environment: *willys-municipal-environment
+  refresh-once:
+    environment: *willys-municipal-environment

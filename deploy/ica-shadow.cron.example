@@ -1,0 +1,19 @@
+# PROPOSAL ONLY. This file is not installed and contains no active cron entry.
+# Preconditions for a separate decision:
+# - The real 15-occasion / 20-portion request is verified with unchanged rules.
+# - The anonymous scheduler product request is permitted and no longer returns 403.
+# - A complete milk search (dynamic total + all actual frontend batches) succeeds.
+# - A durable read-only code mount and the diagnostic browser image are provisioned.
+# - The runner location is explicitly chosen; /tmp staging is for diagnostics only.
+#
+# Proposed frequency: once per day; one attempt, no challenge retry.
+# The collector takes the EXISTING production refresh flock and exits if busy.
+# Choose a time after the existing refresh/backup jobs, retaining the lock.
+#
+# Example command after those prerequisites and a separate scheduling decision:
+# python3 /approved/path/run_ica_shadow_on_host.py \
+#   --output-name "ica-unattended-$(date -u +\%Y\%m\%d-\%H\%M\%S).json"
+#
+# Nonzero exit is an isolated shadow failure. Do not chain this command with
+# active refresh success, source promotion or required-context readiness.
+# No source switch, channel rewrite, Primat removal or multi-day stability claim.

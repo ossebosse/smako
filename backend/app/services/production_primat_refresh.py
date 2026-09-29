@@ -263,6 +263,7 @@ async def collect_city_primat_cache(
     stage = "store_resolution"
     query = None
     native_store_ids = []
+    context_diagnostics = []
     try:
         resolution = await provider.resolve_store_candidates(normalized_postal)
         stage = "exact_context_revalidation"
@@ -275,8 +276,13 @@ async def collect_city_primat_cache(
                     (persisted,),
                     city=normalized_city,
                 )
-            except ValueError:
+            except ValueError as exc:
                 failed_contexts.append(persisted)
+                context_diagnostics.append({
+                    "context_id": persisted.provider_context_id,
+                    "required_coverage": persisted.coverage.value,
+                    "diagnostic": source_failure_diagnostic(exc),
+                })
                 continue
             contexts.append(current)
         contexts = tuple(contexts)
@@ -284,6 +290,11 @@ async def collect_city_primat_cache(
         if not contexts:
             raise ValueError("current Primat resolution revalidated no exact contexts")
         native_store_ids = sorted(context.store.store_id for context in contexts)
+        if failed_contexts and lkg_cache is None:
+            # No complete replacement can be built. Do not spend 48 product
+            # requests only to misattribute this identity/coverage failure to
+            # the last product query at closed-cache validation.
+            raise ValueError("failed Primat contexts require a fresh per-context LKG")
 
         collected = []
         zero_result_queries = 0
@@ -318,6 +329,7 @@ async def collect_city_primat_cache(
             "query": query,
             "store_ids": native_store_ids,
             "provider_requests": int(provider.transport_report.get("requests", 0)),
+            "context_failures": context_diagnostics,
         }
         raise
     finally:

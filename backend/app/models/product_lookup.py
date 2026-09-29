@@ -29,7 +29,7 @@ class ProductLookupPrice(BaseModel):
     physical_store_id: str | None = None
     store_display_name: str
     chain: str | None = None
-    regular_price: float = Field(gt=0)
+    regular_price: float | None = Field(default=None, gt=0)
     effective_price: float = Field(gt=0)
     current_public_price: float | None = Field(default=None, gt=0)
     member_price: float | None = Field(default=None, gt=0)

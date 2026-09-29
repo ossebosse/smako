@@ -591,6 +591,36 @@ def _collect_all_plan(
             continue
         descriptor = descriptors[chain]
         roles = _own_collection_roles(chain)
+        if chain is Chain.CITY_GROSS:
+            from grocery_data.app.services.citygross_municipal_job import configuration
+            try:
+                _root, municipal = configuration()
+            except (OSError, ValueError, KeyError, TypeError):
+                municipal = {"enabled": False}
+            if municipal["enabled"]:
+                selected_cities = [city for city in unique_cities
+                                   if city.casefold() == municipal["city"].casefold()]
+                skipped.extend({"chain": chain.value, "city": city, "status": "not_applicable",
+                                "reason": "municipal City Gross job owns exact source selection",
+                                "source_management": "citygross_municipal",
+                                "roles": roles} for city in selected_cities)
+                if len(selected_cities) == len(unique_cities):
+                    continue
+        if chain is Chain.LIDL:
+            from grocery_data.app.services.lidl_municipal_job import configuration
+            try:
+                _root, municipal = configuration()
+            except (OSError, ValueError, KeyError, TypeError):
+                municipal = {"enabled": False}
+            if municipal["enabled"]:
+                selected_cities = [city for city in unique_cities
+                                   if city.casefold() == municipal["city"].casefold()]
+                skipped.extend({"chain": chain.value, "city": city, "status": "not_applicable",
+                                "reason": "municipal Lidl job owns exact source selection",
+                                "source_management": "lidl_municipal",
+                                "roles": roles} for city in selected_cities)
+                if len(selected_cities) == len(unique_cities):
+                    continue
         if chain is Chain.WILLYS:
             from grocery_data.app.services.source_artifact import willys_collection_location
 
@@ -662,6 +692,8 @@ def _collect_all_plan(
             targets.append((chain, global_scope, roles))
             continue
         for city in unique_cities:
+            if chain is Chain.CITY_GROSS and municipal["enabled"] and city in selected_cities:
+                continue
             if (chain, city.casefold().strip()) in _UNVERIFIED_OWN_COLLECTION_CONTEXTS:
                 skipped.append(
                     {
@@ -925,9 +957,19 @@ async def _run_collect_all(args: argparse.Namespace) -> tuple[dict[str, object],
         )
     else:
         targets, skipped = _collect_all_plan(args.city)
+    municipal_preparation_diagnostics = []
     if selected_chains and Chain.HEMKOP not in selected_chains:
         hemkop_contexts, context_diagnostics, planning_failures = [], [], 0
     else:
+        from grocery_data.app.services.hemkop_municipal_job import (
+            run_source_job as prepare_hemkop_municipality,
+        )
+        for city in args.city:
+            try:
+                await prepare_hemkop_municipality(city=city)
+            except Exception as exc:  # noqa: BLE001 - optional offers cannot erase a verified mandatory base
+                municipal_preparation_diagnostics.append({'chain': 'hemkop', 'city': city,
+                    'status': 'failed_optional_municipal_source', 'error_type': type(exc).__name__})
         hemkop_contexts, context_diagnostics, planning_failures = _hemkop_collect_all_contexts(
             factory, args.city
         )
@@ -1013,7 +1055,7 @@ async def _run_collect_all(args: argparse.Namespace) -> tuple[dict[str, object],
             and str(item.get("city") or "").casefold().strip() in hemkop_context_cities
         )
     ]
-    results: list[dict[str, object]] = [*skipped, *context_diagnostics]
+    results: list[dict[str, object]] = [*skipped, *context_diagnostics, *municipal_preparation_diagnostics]
     failures = planning_failures
     try:
         for chain, city, roles in targets:
@@ -1785,18 +1827,51 @@ async def _build_production_price_universe(
 
     from deploy.scripts.backup_sqlite import _backup_database
 
+    offer_options = {}
+    if os.getenv("ICA_STRUCTURED_OFFERS_ENABLED", "false").casefold() == "true":
+        from grocery_data.app.services.ica_offer_job import structured_source_inputs
+        offer_options = structured_source_inputs(city=city, root=Path(os.getenv(
+            "ICA_STRUCTURED_OFFERS_ROOT", str(database.parent / "ica-structured-offers"))))
+    from grocery_data.app.services.coop_offer_job import record_build, source_inputs
+    offer_options.update(source_inputs(city=city))
+    from grocery_data.app.services import citygross_municipal_job
+    offer_options.update(citygross_municipal_job.source_inputs(city=city))
+    from grocery_data.app.services import lidl_municipal_job
+    offer_options.update(lidl_municipal_job.source_inputs(city=city))
+    from grocery_data.app.services import willys_flyer_job
+    offer_options.update(willys_flyer_job.source_inputs(city=city))
+    from grocery_data.app.services import hemkop_municipal_job
+    offer_options.update(hemkop_municipal_job.source_inputs(city=city))
     output.parent.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(prefix=".price-universe-source-", dir=output.parent) as temporary:
         closed_database = Path(temporary) / "source.sqlite3"
         _backup_database(database, closed_database)
-        return await build_city_price_universe(
+        result = await build_city_price_universe(
             closed_database,
             city,
             postal_code,
             external_cache,
             output,
             max_price_age_hours,
+            **offer_options,
         )
+        try:
+            record_build(city=city, result=result)
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            result["coop_build_receipt_error"] = type(exc).__name__
+        try:
+            citygross_municipal_job.record_build(city=city, result=result)
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            result["citygross_build_receipt_error"] = type(exc).__name__
+        try:
+            lidl_municipal_job.record_build(city=city, result=result)
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            result["lidl_build_receipt_error"] = type(exc).__name__
+        try:
+            willys_flyer_job.record_build(city=city, result=result)
+        except (OSError, ValueError, KeyError) as exc:
+            result["willys_flyer_build_receipt_error"] = type(exc).__name__
+        return result
 
 
 def _activate_external_context_links(
@@ -1917,12 +1992,12 @@ def _active_universe_status(
             raise ValueError("active manifest did not resolve an artifact")
         evaluated_at = now or datetime.now(tz=UTC)
         freshness = assess_freshness(
-            manifest.oldest_observed_at,
+            manifest.oldest_base_observed_at or manifest.oldest_observed_at,
             now=evaluated_at,
             policy=policy,
         )
         projection = project_source_freshness(
-            manifest.oldest_observed_at,
+            manifest.oldest_base_observed_at or manifest.oldest_observed_at,
             now=evaluated_at,
             policy=policy,
             next_expected_source_refresh=next_expected_refresh,
@@ -2173,6 +2248,11 @@ def _annotate_source_freshness(
 ) -> dict[str, object]:
     """Attach policy/projection facts without changing source evidence."""
 
+    if row.get("status") == "not_applicable" and row.get("source_management") in {"citygross_municipal", "lidl_municipal"}:
+        # This is an ownership handoff, not a missing or stale catalog. Actual
+        # per-store freshness is recorded by the municipal job and OWN.
+        row.update(retry_required=False, source_will_expire_before_next_refresh=False)
+        return row
     observed_at = _source_observed_at(row, now=now)
     roles = {str(role).casefold() for role in row.get("roles") or ()}
     basket_critical = "basket" in roles
@@ -2377,7 +2457,10 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
         if getattr(args, "price_universe_candidate", None) is not None and len(cities) != 1:
             raise ValueError("one explicit PriceUniverse candidate supports exactly one city")
 
-        external_required_for_universe = any(
+        # Respect the existing explicit OWN-only runtime mode. The default
+        # federated mode still requires the complete current external cache;
+        # absence of context mappings never selects OWN-only implicitly.
+        external_required_for_universe = not getattr(settings, "own_sources_only", False) and any(
             source_strategy_for(chain).primary_source.provider is SourceProvider.PRIMAT
             for chain in Chain
         )
@@ -2395,6 +2478,17 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
         external_started = perf_counter()
         for city, postal_code in postal_codes.items():
             city_external_started = perf_counter()
+            if getattr(settings, "own_sources_only", False):
+                if city in explicit_caches:
+                    raise ValueError("OWN-only runtime cannot import an external price cache")
+                external_paths[city], external_snapshot_ids[city] = None, ()
+                external_build_allowed[city] = True
+                external_reports.append({"city": city, "postal_code": postal_code,
+                    "provider": SourceProvider.PRIMAT.value, "status": "not_selected",
+                    "reason": "explicit_own_sources_only", "provider_requests": 0,
+                    "contexts": 0, "products": 0, "snapshot_ids": [],
+                    "lkg_used": False, "credentials_included": False})
+                continue
             if targeted_collection_not_eligible:
                 external_paths[city] = None
                 external_snapshot_ids[city] = ()
@@ -2639,6 +2733,51 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
         external_seconds = perf_counter() - external_started
         report["external_provider"] = external_reports
 
+        if os.getenv("ICA_STRUCTURED_OFFERS_ENABLED", "false").casefold() == "true":
+            from grocery_data.app.services.ica_offer_job import run_structured_offer_job
+            report["ica_structured_offers"] = []
+            for city in cities:
+                try:
+                    offer_result = await run_structured_offer_job(city=city, root=Path(os.getenv(
+                        "ICA_STRUCTURED_OFFERS_ROOT", str(database.parent / "ica-structured-offers"))))
+                    report["ica_structured_offers"].append({k: v for k, v in offer_result.items()
+                        if k not in {"coverage"}})
+                except Exception as exc:  # noqa: BLE001 - optional source keeps valid base
+                    report["ica_structured_offers"].append({"city": city,
+                        "status": "failed_optional_source_lkg_retained", "error": type(exc).__name__})
+
+        if not bool(getattr(args, "no_promote", False)):
+            from grocery_data.app.services import hemkop_municipal_job
+            report['hemkop_municipal'] = []
+            for city in cities:
+                try:
+                    result = await hemkop_municipal_job.run_source_job(city=city)
+                    report['hemkop_municipal'].append({k: v for k, v in result.items() if k != 'inventory'})
+                except Exception as exc:  # noqa: BLE001 - optional source preserves mandatory base
+                    report['hemkop_municipal'].append({'city': city, 'status': 'failed_optional_source', 'error_type': type(exc).__name__})
+            from grocery_data.app.services.coop_offer_job import run_offer_job
+            try:
+                report["coop_municipal_offers"] = await run_offer_job()
+            except Exception as exc:  # noqa: BLE001 - optional source cannot break valid base
+                report["coop_municipal_offers"] = {"status": "failed_optional_source", "error_type": type(exc).__name__}
+            from grocery_data.app.services.citygross_municipal_job import run_source_job
+            try:
+                report["citygross_municipal"] = await run_source_job()
+            except Exception as exc:  # noqa: BLE001 - optional source cannot break valid base
+                report["citygross_municipal"] = {"status": "failed_optional_source", "error_type": type(exc).__name__}
+            from grocery_data.app.services.lidl_municipal_job import run_source_job as run_lidl_job
+            try:
+                report["lidl_municipal"] = await run_lidl_job()
+            except Exception as exc:  # noqa: BLE001 - optional source
+                report["lidl_municipal"] = {"status": "failed_optional_source", "error_type": type(exc).__name__}
+            from grocery_data.app.services.willys_flyer_job import (
+                run_source_job as run_willys_flyer_job,
+            )
+            try:
+                report["willys_flyer"] = await run_willys_flyer_job()
+            except Exception as exc:  # noqa: BLE001 - optional source cannot stop the base
+                report["willys_flyer"] = {"status": "failed_optional_source", "error_type": type(exc).__name__}
+
         universe_reports: list[dict[str, object]] = []
         build_failed = False
         universe_started = perf_counter()
@@ -2777,6 +2916,22 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
             "universe_builds": sum(item.get("build") is not None for item in universe_reports),
             "universe_builds_per_city_max": 1,
         }
+        # Optional isolated offer candidates share the operation lock but do
+        # not change base readiness, source settings, or active price pointers.
+        if os.getenv("ICA_AREA_OFFER_CANDIDATES_ENABLED", "false").casefold() == "true":
+            from grocery_data.app.services.ica_offer_job import run_optional_candidate_job
+
+            try:
+                report["ica_offer_candidates"] = [
+                    await run_optional_candidate_job(enabled=True, city=city,
+                        root=report_dir / "ica-offer-candidates",
+                        visual_command=json.loads(os.getenv("ICA_FLYER_VISUAL_COMMAND_JSON", "null"))) for city in cities
+                ]
+            except Exception as exc:  # noqa: BLE001 - optional configuration cannot stop the base
+                report['ica_offer_candidates'] = [{'status':'failed_optional_configuration',
+                    'error':type(exc).__name__, 'production_activation':False}]
+            report["completed_at"] = datetime.now(tz=UTC)
+            report["timing_seconds"]["total"] = round(perf_counter() - started, 3)
         path = write_refresh_report(report, report_dir, prefix="refresh-report")
         _emit_refresh_result(report, output_format=output_format, report_path=path)
         return exit_code

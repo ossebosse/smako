@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 from enum import StrEnum
 
@@ -10,6 +11,7 @@ from grocery_data.app.domain.promotion_pricing import (
     PromotionEligibility,
     PromotionMechanism,
 )
+from grocery_data.app.domain.purchase_terms import PurchaseTerms
 
 from .ingredient import NormalizedIngredient
 from .product import (
@@ -65,6 +67,8 @@ def worst_verification_status(
 class BasketItem(BaseModel):
     """The concrete packages bought for one aggregated ingredient."""
 
+    pending_group_checkout: bool = Field(default=False, exclude_if=lambda v: not v)
+
     model_config = ConfigDict(frozen=True, allow_inf_nan=False)
 
     ingredient: str = Field(min_length=1)
@@ -85,6 +89,8 @@ class BasketItem(BaseModel):
     product_form: str | None = None
     semantic_confidence: SemanticConfidence = SemanticConfidence.LOW
     semantic_evidence: list[str] = Field(default_factory=list)
+    purchase_terms: PurchaseTerms | None = Field(default=None, exclude_if=lambda v: v is None)
+    conditional_variant_choice: bool = Field(default=False, exclude_if=lambda v: not v)
     sale_model: SaleModel = SaleModel.UNKNOWN
     sale_price: float | None = Field(default=None, gt=0)
     sale_unit: str | None = None
@@ -113,6 +119,8 @@ class BasketItem(BaseModel):
     waste_quantity: float = Field(ge=0)
     unit_price: float = Field(ge=0, description="Applied per-package price in SEK")
     regular_unit_price: float | None = Field(default=None, gt=0)
+    ordinary_price_known: bool = True
+    purchase_date: date | None = None
     price_contract_id: str | None = Field(default=None, min_length=1, max_length=255)
     eligibility: PromotionEligibility = PromotionEligibility.PUBLIC
     price_mechanism: PromotionMechanism = PromotionMechanism.REGULAR
@@ -156,9 +164,13 @@ class BasketItem(BaseModel):
 
     @model_validator(mode="after")
     def validate_quantities(self) -> BasketItem:
-        if self.sale_price is None:
+        # An offers-only group quotient is not a purchasable residual unit.
+        if self.sale_price is None and not (not self.ordinary_price_known
+                and self.checkout_offers and all(o.required_packages > 1 for o in self.checkout_offers)):
             object.__setattr__(self, "sale_price", self.unit_price)
-        if self.regular_unit_price is None:
+        if not self.ordinary_price_known and (self.regular_unit_price is not None or self.regular_total_price is not None):
+            raise ValueError("unknown ordinary price cannot have ordinary totals")
+        if self.regular_unit_price is None and self.ordinary_price_known:
             object.__setattr__(
                 self,
                 "regular_unit_price",
@@ -244,12 +256,27 @@ class BasketItem(BaseModel):
 
     @computed_field
     @property
+    def deposit_total(self) -> float | None:
+        if self.purchase_terms and self.purchase_terms.deposit_status == 'unknown':
+            return None
+        deposit = self.applied_offer.deposit if self.applied_offer else None
+        return float(_money(deposit.per_container * deposit.containers_per_package * self.packages_needed)) if deposit else 0.0
+
+    @computed_field
+    @property
+    def merchandise_total(self) -> float | None:
+        return float(_money(Decimal(str(self.total_price)) - Decimal(str(self.deposit_total)))) if self.deposit_total is not None else None
+
+    @computed_field
+    @property
     def verification_status(self) -> BasketVerificationStatus:
         if self.semantic_confidence in {
             SemanticConfidence.LOW,
             SemanticConfidence.REJECTED,
         }:
             return BasketVerificationStatus.INVALID
+        if self.pending_group_checkout or self.conditional_variant_choice:
+            return BasketVerificationStatus.UNVERIFIED
         if self.sale_model == SaleModel.UNKNOWN:
             return BasketVerificationStatus.UNVERIFIED
         if self.quantity_confidence == QuantityConfidence.UNKNOWN:
@@ -377,6 +404,8 @@ class BasketAuditSelectedProduct(BaseModel):
     purchased_usable_quantity: float = Field(gt=0)
     quantity_confidence: QuantityConfidence
     semantic_confidence: SemanticConfidence = SemanticConfidence.LOW
+    purchase_terms: PurchaseTerms | None = Field(default=None, exclude_if=lambda v: v is None)
+    conditional_variant_choice: bool = Field(default=False, exclude_if=lambda v: not v)
     sale_model: SaleModel = SaleModel.UNKNOWN
     quantity_reconciled: bool = True
     cost_reconciled: bool = True

@@ -203,6 +203,49 @@ def _merge_schema_diff(
     return result if result.has_changes else None
 
 
+def _review_schema_diff(
+    chain: Chain, parser_version: str | None, diff: SchemaDiff | None,
+) -> SchemaDiff | None:
+    """Apply a versioned source contract review, retaining raw diff evidence.
+
+    This is deliberately source-local: unrelated connectors keep exact schema
+    gates. Persisted flags/effective diffs never authorize a schema change.
+    """
+    if diff is None:
+        return diff
+    required_type_changes = diff.type_changed
+    if chain == Chain.LIDL:
+        from grocery_data.app.connectors.lidl.models import reviewed_lidl_schema_diff
+        from grocery_data.app.connectors.lidl.parser import LidlParser
+
+        if parser_version != LidlParser.parser_version:
+            return diff
+        reviewed = reviewed_lidl_schema_diff(diff)
+    elif chain == Chain.COOP and parser_version == "coop-online-catalog-parser-v1":
+        from grocery_data.app.connectors.coop.schema_review import reviewed_coop_online_schema_diff
+
+        reviewed = reviewed_coop_online_schema_diff(diff)
+    elif chain == Chain.HEMKOP and parser_version == "hemkop-parser-v1":
+        from grocery_data.app.connectors.hemkop.schema_review import (
+            reviewed_hemkop_schema_diff,
+            reviewed_hemkop_type_change,
+        )
+
+        reviewed = reviewed_hemkop_schema_diff(diff)
+        required_type_changes = tuple(
+            change for change in diff.type_changed if not reviewed_hemkop_type_change(change)
+        )
+    else:
+        return diff
+    if not isinstance(reviewed, SchemaDiff):
+        raise TypeError("source schema review must return a SchemaDiff")
+    if (not set(reviewed.added).issubset(diff.added)
+            or not set(reviewed.removed).issubset(diff.removed)
+            or reviewed.type_changed != required_type_changes):
+        raise ValueError("source schema review altered unreviewable evidence")
+    return reviewed if reviewed.has_changes else None
+
+
 def _eligible_catalog_stores(
     connector: GroceryConnector,
     stores: list[SourceStore],
@@ -670,10 +713,13 @@ class GroceryCollector:
                     )
                     baseline_schemas = baseline_payload.get("schemas", {})
                 schema_diff = _merge_schema_diff(baseline_schemas, all_schemas)
+                effective_schema_diff = _review_schema_diff(
+                    connector.chain, connector.parser_version, schema_diff,
+                )
                 assessment = assess_run_health(
                     aggregate,
                     baseline=baseline_metrics,
-                    schema_diff=schema_diff,
+                    schema_diff=effective_schema_diff,
                 )
                 if not stores or aggregate.products_parsed == 0:
                     assessment = assessment.model_copy(update={"status": ConnectorStatus.BROKEN})
@@ -689,6 +735,10 @@ class GroceryCollector:
                         for kind, fingerprint in sorted(all_schemas.items())
                     },
                     "schema_diff": schema_diff.model_dump(mode="json") if schema_diff else None,
+                    "effective_schema_diff": (
+                        effective_schema_diff.model_dump(mode="json")
+                        if effective_schema_diff else None
+                    ),
                     "catalog_completion": {
                         store_id: _catalog_completion_payload(evidence)
                         for store_id, evidence in sorted(completion_by_store.items())
@@ -703,7 +753,22 @@ class GroceryCollector:
                 snapshots.transition(snapshot_id, SnapshotState.VALIDATED)
                 snapshots.transition(snapshot_id, SnapshotState.HEALTH_CHECKED)
                 healthy_candidate = assessment.status == ConnectorStatus.HEALTHY
-                promoted = auto_promote and healthy_candidate
+                row_acceptance = getattr(connector, "row_acceptance", None)
+                row_candidate = False
+                if row_acceptance is not None:
+                    from grocery_data.app.services.offer_rows import contract_allows_publication
+
+                    row_candidate = contract_allows_publication(
+                        row_acceptance, metrics=aggregate, scope_key=scope_key,
+                        chain=connector.chain.value, coverage=connector.coverage.value)
+                    # Schema change is shared evidence. Row isolation cannot
+                    # bless a changed parser contract or a transport failure.
+                    if effective_schema_diff and effective_schema_diff.has_changes:
+                        row_candidate = False
+                    snapshot.metrics = {**snapshot.metrics, "row_acceptance": row_acceptance,
+                        "full_snapshot_health": getattr(connector, "original_full_health", assessment.status.value),
+                        "acceptance_status": "partial_row_approved" if row_candidate else "row_candidate_blocked"}
+                promoted = auto_promote and (row_candidate if row_acceptance is not None else healthy_candidate)
                 if promoted:
                     promoted_snapshot = snapshots.promote(snapshot_id)
                     StoreRepository(session).reconcile_scope(
@@ -718,7 +783,7 @@ class GroceryCollector:
                     activate_promoted_coop_online_context(session, promoted_snapshot)
                     activate_promoted_hemkop_online_context(session, promoted_snapshot)
                     active_snapshot_id = snapshot_id
-                elif not healthy_candidate:
+                elif not (row_candidate if row_acceptance is not None else healthy_candidate):
                     snapshots.reject(
                         snapshot_id,
                         reason="; ".join((*assessment.warnings, *warnings))[:2000]
@@ -751,11 +816,15 @@ class GroceryCollector:
                 if promoted or not healthy_candidate:
                     ConnectorHealthRepository(session).upsert(health)
                 run_metrics = aggregate.model_dump(mode="json")
+                if row_acceptance is not None:
+                    run_metrics.update(acceptance_contract=row_acceptance["contract"],
+                                       partial_rows_published=promoted,
+                                       full_fetch_quality=row_acceptance["full_parse"])
                 if policy_payload is not None:
                     run_metrics.update(policy_payload)
                 CollectorRunRepository(session).finish(
                     run_id,
-                    successful=healthy_candidate,
+                    successful=healthy_candidate or row_candidate,
                     metrics=run_metrics,
                     error_summary=(
                         None if healthy_candidate else "; ".join(health.warnings)[:2000]

@@ -9,6 +9,7 @@ from lexical similarity and price.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Any
 
@@ -294,6 +295,9 @@ _RULES: dict[str, IngredientSemanticRule] = {
         allowed_roles=frozenset(
             {"generic_meat", "breast", "thigh", "drumstick", "wing", "whole_meat"}
         ),
+        # Generic recipe grams are edible meat. Bone-in package mass has no
+        # verified edible yield; exact requested wings remain a whole-product buy.
+        excluded_forms=frozenset({'bone_in'}),
         excluded_roles=frozenset(
             {
                 "heart",
@@ -735,6 +739,7 @@ _FAMILY_BY_CANONICAL: dict[str, str] = {
 _NON_HUMAN_FOOD_TERMS = (
     "torrfoder",
     "våtfoder",
+    "blötmat",
     "hundmat",
     "kattmat",
     "hundfoder",
@@ -842,6 +847,8 @@ _PREPARED_FORM_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
             "gratang",
             "nuggets",
             "fiskpinnar",
+            "burek",
+            "börek",
         ),
     ),
     ("pizza", ("pizza",)),
@@ -852,9 +859,10 @@ _PREPARED_FORM_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("wok_dish", ("wok",)),
     ("chili_dish", ("chili",)),
     ("snack", ("chips", "snack", "snacks")),
-    ("cracker", ("kex", "cracker", "crackers")),
+    ("cracker", ("kex", "ostkex", "smörgåskex", "cracker", "crackers")),
     ("deli_product", ("pålägg", "palagg", "deli meat")),
     ("smoked", ("rökt", "rokt", "smoked")),
+    ("cured", ("gravad", "gravade", "gravlax", "rimmad", "rimmade", "cured")),
     (
         "fermented",
         ("surkål", "surkal", "sauerkraut", "kimchi", "fermenterad", "fermented"),
@@ -865,7 +873,7 @@ _PREPARED_FORM_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
         ("i solrosolja", "i olivolja", "i olja", "in sunflower oil", "in olive oil", "in oil"),
     ),
     ("canned", ("i vatten", "in water", "konserv", "canned")),
-    ("mixture", ("mix", "blandning", "mixture")),
+    ("mixture", ("mix", "blandning", "mixture", "soppgrönsaker")),
     ("stuffed", ("fylld", "fyllda", "stuffed")),
     ("marinated", ("marinerad", "marinerade", "marinated")),
     ("gyros", ("gyros",)),
@@ -919,6 +927,7 @@ _PREPARED_ROLE_BY_FORM: dict[str, str] = {
     "cracker": "cracker",
     "deli_product": "processed_deli_meat",
     "smoked": "smoked_product",
+    "cured": "cured_product",
     "pasta_dish": "prepared_dish",
     "pickled": "pickled_vegetable_mixture",
     "preserved_in_oil": "preserved_in_oil",
@@ -1204,6 +1213,14 @@ _PRIMARY_PRODUCT_IDENTITIES: tuple[PrimaryProductIdentityRule, ...] = (
         ),
     ),
     PrimaryProductIdentityRule(
+        canonical_food="cheese",
+        food_family="dairy",
+        product_role="salad_cheese",
+        product_form="cheese",
+        name_terms=("vitost", "fetaost", "salladsost"),
+        category_terms=("fetaost", "salladsost"),
+    ),
+    PrimaryProductIdentityRule(
         canonical_food="whey_cheese",
         food_family="dairy",
         product_role="whey_cheese",
@@ -1264,6 +1281,13 @@ def _infer_primary_product_identity(
     such as ``Livsmedel`` or ``Mat``.
     """
 
+    # A complete Swedish bread-loaf noun, including branded compounds. A loaf
+    # shape alone is not food identity: meat/fish/vegetable loaves and cake/mix
+    # names must not become bread. Nutrition still needs its own declaration.
+    if (re.fullmatch(r"[a-z]+limpan?(?: \d+(?: \d+)? (?:g|kg))?", name_text)
+            and not any(t in name_text for t in
+                        ("fars", "kott", "fisk", "kyckling", "lax", "lins", "bon", "banan", "kaka", "mix"))):
+        return "brod", "grain", "bread", "ready"
     for rule in _PRIMARY_PRODUCT_IDENTITIES:
         if any(_identity_term_visible(name_text, term) for term in rule.name_terms):
             return (
@@ -1376,6 +1400,11 @@ def _component_position(
     if any(cue_end < first_target for _, cue_end in cue_ranges):
         return "secondary"
     return None
+
+
+def has_semantic_rule(canonical_name: str) -> bool:
+    """Whether a generic query has an authoritative shared identity/form rule."""
+    return canonicalize_ingredient_name(canonical_name) in _RULES
 
 
 def semantic_requirement(canonical_name: str) -> SemanticRequirement:
@@ -1697,7 +1726,9 @@ def _infer_special_identity(
         if _contains_any(text, ("kokt", "kokta", "färdigkokt", "cooked")):
             return "chickpeas", "legume", "cooked_staple", "cooked"
         return "chickpeas", "legume", "dry_staple", "dry"
-    if _contains_any(text, ("gula ärter", "gul ärta", "yellow peas")):
+    if _contains_any(text, ("gula ärter", "gul ärta", "yellow peas")) or (
+        set(text.split()) & {"gul", "gula"} and set(text.split()) & {"arta", "artor", "arter"}
+    ):
         return "yellow_pea", "legume", "dry_staple", None
     if _contains_any(text, ("gröna ärtor", "grön ärta", "green peas")) or any(
         token in {"artor", "arter"} for token in text.split()
@@ -1947,8 +1978,11 @@ def evaluate_product_semantics(
     name = str(_value(product, "name", _value(product, "product_name", "")))
     name_text = _search_text(name)
     category_text = _search_text(str(_value(product, "category", "") or ""))
-    visible_text = f"{name_text} {category_text}".strip()
     prepared_form = _classify_prepared_form(name_text)
+    # A specific compound product-class label is stronger than a flavour in
+    # a short name. Broad navigation such as "Ost & kex" is not such proof.
+    if prepared_form is None and _contains_any(category_text, ("ostkex", "smörgåskex")):
+        prepared_form = _classify_prepared_form(category_text)
     if prepared_form is None and requirement.canonical_name in _FRESH_PRODUCE_CANONICALS:
         prepared_form = _classify_produce_category_form(category_text)
     if (
@@ -1958,6 +1992,16 @@ def evaluate_product_semantics(
     ):
         prepared_form = "pasta_dish"
     evidence: list[str] = []
+
+    # Narrow, source-proven synonym only. Broad alias matching must not turn
+    # specialty flour, mixes, or flour as a component into plain wheat flour.
+    if requirement.canonical_name == "vetemjöl" and not re.fullmatch(
+        r"(?:karnvetemjol|vetemjol)(?: \d+(?: \d+)? (?:g|kg))?", name_text
+    ):
+        return SemanticMatchResult(
+            compatible=False, confidence=SemanticConfidence.REJECTED,
+            evidence=["plain_wheat_flour_identity_unverified"],
+        )
 
     # Whole-word exclusions miss Swedish compounds. These are distinct foods,
     # not interchangeable defaults for an ordinary milk/cheese requirement.
@@ -2191,11 +2235,20 @@ def evaluate_product_semantics(
             evidence=[*evidence, f"excluded_form:{product_form}"],
         )
 
+    visible_text = f"{name_text} {category_text}".strip()
     excluded_phrase = next(
         (
             phrase
             for phrase in STRICT_EXCLUSIONS.get(requirement.canonical_name, ())
-            if _contains_phrase(visible_text, phrase)
+            # A different food in broad navigation is not this product's
+            # identity. Preserve category exclusions for preparation/mixtures;
+            # only explicit alternative food identities defer to the name.
+            if _contains_phrase(
+                name_text if visible_identity
+                and _infer_special_identity(_search_text(phrase)) is not None
+                and _classify_prepared_form(_search_text(phrase)) is None
+                else visible_text, phrase
+            )
         ),
         None,
     )
@@ -2254,6 +2307,7 @@ __all__ = [
     "SemanticMatchResult",
     "SemanticRequirement",
     "evaluate_product_semantics",
+    "has_semantic_rule",
     "is_non_human_food",
     "semantic_requirement",
 ]

@@ -38,7 +38,7 @@ def _membership_program(product: Product) -> MembershipProgram | None:
         return None
 
 
-def _current_public_price(product: Product) -> float:
+def _current_public_price(product: Product) -> float | None:
     """Resolve the best unconditional public one-package display price.
 
     A legacy membership-profiled artifact may have flattened a member price
@@ -47,13 +47,13 @@ def _current_public_price(product: Product) -> float:
     restricted amount from being mislabeled as a public campaign.
     """
 
-    candidates = [product.price]
+    candidates = [product.price] if product.price is not None else []
     candidates.extend(
         offer.price
         for offer in product.active_offers()
         if offer.member_program is None and offer.required_packages == 1
     )
-    return min(candidates)
+    return min(candidates) if candidates else None
 
 
 def lookup_gtin(
@@ -100,6 +100,8 @@ def lookup_gtin(
     for product in products:
         provenance = product.source_provenance
         current_public_price = _current_public_price(product)
+        if current_public_price is None:
+            continue
         prices.append(
             ProductLookupPrice(
                 product_id=product.product_id,

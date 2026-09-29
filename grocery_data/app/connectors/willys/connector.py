@@ -30,10 +30,13 @@ class WillysConnector:
         client: WillysClient | None = None,
         parser: WillysParser | None = None,
         allowed_store_ids: Iterable[str] | None = None,
+        municipality_boundary: dict | None = None,
     ) -> None:
         self.client = client or WillysClient()
         self.parser = parser or WillysParser()
         self.parser_version = self.parser.parser_version
+        self.municipality_boundary = municipality_boundary
+        self.municipality_inventory = None
         if allowed_store_ids is None:
             configured = frozenset(
                 value.strip()
@@ -61,7 +64,10 @@ class WillysConnector:
         )
 
     async def fetch_stores(self, area: GeographicArea) -> RawBatch:
-        del area
+        if area.mode == "municipality" and self.municipality_boundary is None:
+            from grocery_data.app.services.municipality_geometry import fetch_boundary
+
+            self.municipality_boundary = await fetch_boundary(area.municipality_code)
         return await self.client.fetch_stores()
 
     def parse_stores(
@@ -70,7 +76,16 @@ class WillysConnector:
         references: list[str],
         area: GeographicArea,
     ) -> list[SourceStore]:
-        stores = self.parser.parse_stores(raw, references, area)
+        if area.mode == "municipality":
+            from grocery_data.app.connectors.willys.municipality_inventory import build_inventory
+
+            if self.municipality_boundary is None:
+                raise ValueError("municipal collection requires verified boundary evidence")
+            self.municipality_inventory = build_inventory(area, raw, references, self.municipality_boundary)
+            stores = [SourceStore.model_validate(row["store"]) for row in self.municipality_inventory["stores"]
+                      if row["collection_selected"]]
+        else:
+            stores = self.parser.parse_stores(raw, references, area)
         if self.allowed_store_ids is None:
             return stores
         # A targeted collection must persist/reconcile only its explicitly

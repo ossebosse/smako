@@ -28,6 +28,15 @@ x-app-environment: &app-environment
   REFRESH_REPORT_DIR: ${REFRESH_REPORT_DIR:-/srv/app/var/reports/refresh}
   REFRESH_RUNNER_STATUS_PATH: ${REFRESH_RUNNER_STATUS_PATH:-/srv/app/var/reports/operations/refresh-runner-status.json}
   DAILY_REFRESH_SCHEDULE: ${DAILY_REFRESH_SCHEDULE:-03:17 Europe/Stockholm}
+  # Explicit structured-only release. Disabled preserves the existing schedule.
+  ICA_STRUCTURED_OFFERS_ENABLED: ${ICA_STRUCTURED_OFFERS_ENABLED:-false}
+  ICA_STRUCTURED_OFFERS_ROOT: ${ICA_STRUCTURED_OFFERS_ROOT:-/srv/app/var/grocery/ica-structured-offers}
+  ICA_AREA_OFFER_CANDIDATES_ENABLED: "false"
+  ICA_FLYER_PAID_ENABLED: "false"
+  ICA_FLYER_VISUAL_COMMAND_JSON: "null"
+  DEMAND_REFRESH_ENABLED: ${DEMAND_REFRESH_ENABLED:-false}
+  DEMAND_REFRESH_CRON: ${DEMAND_REFRESH_CRON:-*/15 * * * *}
+  DEMAND_REFRESH_STATE_PATH: ${DEMAND_REFRESH_STATE_PATH:-/srv/app/var/reports/operations/demand-refresh.json}
   COOP_RETRY_SCHEDULE: ${COOP_RETRY_SCHEDULE:-06:17 Europe/Stockholm}
   PLANNER_RATE_LIMIT_REQUESTS: ${PLANNER_RATE_LIMIT_REQUESTS:-8}
   PLANNER_RATE_LIMIT_WINDOW_SECONDS: ${PLANNER_RATE_LIMIT_WINDOW_SECONDS:-60}

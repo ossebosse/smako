@@ -1136,12 +1136,13 @@ def _dominance_signature(product: Product, canonical: str) -> tuple[object, ...]
         provenance.source_channel if provenance else None,
         provenance.fallback_used if provenance else None,
         _offer_structure(product),
-    )
+    ) + (("maximum_purchase_units", provenance.maximum_purchase_units)
+         if provenance and provenance.maximum_purchase_units is not None else ())
 
 
 def _price_vector(product: Product) -> tuple[Decimal | None, ...]:
     return (
-        Decimal(str(product.price)),
+        Decimal(str(product.price)) if product.price is not None else None,
         Decimal(str(product.effective_price)),
         Decimal(str(product.sale_price)),
         Decimal(str(product.comparison_price)) if product.comparison_price is not None else None,
@@ -1259,6 +1260,10 @@ def _stratified_top_k(
 def _uses_disabled_member_price(key: PriceUniverseKey, product: Product) -> bool:
     if key.membership_enabled(product.chain):
         return False
+    if product.price is None and (product.sale_price is None or product.conditional_price_signal):
+        # An offers-only ranking signal is not a public one-package checkout
+        # price. The request's existing contract resolver checks eligibility.
+        return False
     active_member_prices = {
         Decimal(str(offer.price))
         for offer in product.offers
@@ -1275,9 +1280,14 @@ def _uses_disabled_member_price(key: PriceUniverseKey, product: Product) -> bool
         and offer.required_packages == 1
         and offer.is_active()
     }
+    if product.price is not None:
+        # A separately observed ordinary price can equal a member campaign.
+        # Equality alone is not proof of a membership leak. ICA flyer reference
+        # labels never populate Product.price, so cannot take this path.
+        active_public_prices.add(Decimal(str(product.price)))
     checkout_prices = {
-        Decimal(str(product.effective_price)),
-        Decimal(str(product.sale_price)),
+        Decimal(str(value)) for value in (product.effective_price, product.sale_price)
+        if value is not None
     }
     if product.sale_model == SaleModel.SOLD_BY_PIECE and product.piece_price is not None:
         checkout_prices.add(Decimal(str(product.piece_price)))

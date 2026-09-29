@@ -366,6 +366,7 @@ def load_exact_identity_bridge(
     *,
     external_products: Sequence[Product] = (),
     on_date: date | None = None,
+    exclude_offer_chains: frozenset[Chain] = frozenset(),
 ) -> ExactIdentityBridgeProvider:
     """Load only promoted local evidence through immutable SQLite access."""
 
@@ -378,7 +379,8 @@ def load_exact_identity_bridge(
     try:
         connection.execute("PRAGMA query_only=ON")
         targets = [*_database_targets(connection), *_external_targets(external_products)]
-        offers = _database_member_offers(connection)
+        offers = [row for row in _database_member_offers(connection)
+                  if row.identity.chain not in exclude_offer_chains]
     finally:
         connection.close()
     return ExactIdentityBridgeProvider.from_evidence(

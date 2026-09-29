@@ -79,6 +79,7 @@ class PreparedUniverseArtifactMetadata(BaseModel):
     product_count: int = Field(gt=0)
     canonical_index_count: int = Field(gt=0)
     oldest_observed_at: datetime
+    oldest_base_observed_at: datetime | None = Field(default=None, exclude_if=lambda value: value is None)
 
     @field_validator("snapshot_ids")
     @classmethod
@@ -94,6 +95,13 @@ class PreparedUniverseArtifactMetadata(BaseModel):
         if value.tzinfo is None or value.utcoffset() is None:
             raise ValueError("artifact timestamps must be timezone-aware")
         return value.astimezone(UTC)
+
+    @field_validator("oldest_base_observed_at")
+    @classmethod
+    def require_aware_base_datetime(cls, value: datetime | None) -> datetime | None:
+        if value is not None and (value.tzinfo is None or value.utcoffset() is None):
+            raise ValueError("base observation must be timezone-aware")
+        return value.astimezone(UTC) if value is not None else None
 
     @model_validator(mode="after")
     def validate_scope(self) -> PreparedUniverseArtifactMetadata:
@@ -125,6 +133,7 @@ class ActivePreparedUniverseManifest(BaseModel):
     product_count: int = Field(gt=0)
     canonical_index_count: int = Field(gt=0)
     oldest_observed_at: datetime
+    oldest_base_observed_at: datetime | None = Field(default=None, exclude_if=lambda value: value is None)
     artifact_file: str = Field(pattern=r"^artifacts/[0-9a-f]{64}\.json$")
     artifact_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     artifact_bytes: int = Field(gt=0)
@@ -136,6 +145,13 @@ class ActivePreparedUniverseManifest(BaseModel):
         if value.tzinfo is None or value.utcoffset() is None:
             raise ValueError("manifest timestamps must be timezone-aware")
         return value.astimezone(UTC)
+
+    @field_validator("oldest_base_observed_at")
+    @classmethod
+    def require_aware_base_datetime(cls, value: datetime | None) -> datetime | None:
+        if value is not None and (value.tzinfo is None or value.utcoffset() is None):
+            raise ValueError("base observation must be timezone-aware")
+        return value.astimezone(UTC) if value is not None else None
 
     @model_validator(mode="after")
     def validate_identity(self) -> ActivePreparedUniverseManifest:
@@ -310,7 +326,7 @@ class PreparedUniverseArtifactStore:
             timestamp = timestamp.astimezone(UTC)
             if freshness_policy is not None:
                 freshness = assess_freshness(
-                    metadata.oldest_observed_at,
+                    metadata.oldest_base_observed_at or metadata.oldest_observed_at,
                     policy=freshness_policy,
                     now=timestamp,
                 )
@@ -356,6 +372,7 @@ class PreparedUniverseArtifactStore:
                 product_count=metadata.product_count,
                 canonical_index_count=metadata.canonical_index_count,
                 oldest_observed_at=metadata.oldest_observed_at,
+                oldest_base_observed_at=metadata.oldest_base_observed_at,
                 artifact_file=artifact_relative.as_posix(),
                 artifact_sha256=digest,
                 artifact_bytes=len(candidate_bytes),
@@ -457,6 +474,9 @@ def validate_backend_prepared_universe_artifact(
     expected_scope = _scope_id(city)
     if universe.key.scope_id != expected_scope:
         raise ValueError("prepared universe artifact city does not match requested city")
+    from grocery_data.app.domain.campaign_validity import is_campaign_only
+    base_observations = [p.source_provenance.source_observed_at for p in artifact.universe.products
+        if p.source_provenance is not None and not is_campaign_only(p)]
     return PreparedUniverseArtifactMetadata(
         city=universe.key.city,
         scope_id=universe.key.scope_id,
@@ -466,6 +486,7 @@ def validate_backend_prepared_universe_artifact(
         product_count=universe.stats.post_pruning_products,
         canonical_index_count=universe.stats.canonical_index_count,
         oldest_observed_at=artifact.oldest_observed_at,
+        oldest_base_observed_at=min(base_observations) if base_observations else None,
     )
 
 

@@ -30,6 +30,12 @@ class SourceOffer(BaseModel):
 
     @model_validator(mode="after")
     def validate_dates(self) -> "SourceOffer":
+        if self.source_payload.get('purchase_terms'):
+            from grocery_data.app.domain.purchase_terms import PurchaseTerms
+            terms = PurchaseTerms.model_validate(self.source_payload['purchase_terms'])
+            if terms.mixing_allowed and (terms.complete_group_size != self.quantity
+                                         or self.price is None or self.valid_from is None or self.valid_to is None):
+                raise ValueError('Mixed source campaign requires complete price, quantity and dates')
         if self.valid_from and self.valid_to and self.valid_from > self.valid_to:
             raise ValueError("valid_from must not be after valid_to")
         return self

@@ -24,6 +24,12 @@
     block.append(node("p", `${price.context_label}${price.membership_required ? ` · Medlemspris · ${price.membership_label}` : ""}`));
     if (price.unit_price != null) block.append(node("p", `${money(price.unit_price)}/${price.unit}`));
     if (price.comparison_reason) block.append(node("p", price.comparison_label));
+    if (price.purchase_terms) {
+      block.append(node("p", `Belagt varupris: ${money(price.quoted_price)}${price.quoted_price_unit === "kg" ? "/kg" : ` för ${price.quoted_quantity || 1} förpackning(ar)/styck`}.`));
+      if (price.purchase_terms.variant_selection === "required") block.append(node("p", "Välj en kampanjmärkt variant i butiken. Inte närings- eller allergigodkänd som specifik produkt."));
+      if (price.purchase_terms.deposit_status === "unknown") block.append(node("p", "Pant är inte fastställd. Ingen komplett köptotal visas."));
+      if (price.purchase_terms.exclusions.length) block.append(node("p", `Undantag: ${price.purchase_terms.exclusions.join("; ")}`));
+    }
     block.append(node("p", `Rapporterat grundpris (kan inkludera kampanj): ${money(price.regular_price)}`));
     for (const offer of price.promotions) {
       const label = offer.membership_required ? `Medlemskampanj · ${offer.membership_label}` : "Kampanj";

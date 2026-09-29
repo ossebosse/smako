@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
-from datetime import UTC, datetime
+from datetime import datetime
 from typing import Annotated, Any
+from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -399,6 +400,32 @@ def _product_item(
             "observed_at": observed_at,
         },
         "promotions": [],
+        # A narrow validated contract flag, never raw document/source fields.
+        "lidl_document_count_contract": bool(
+            (source.source_fields or {}).get('lidl_offer_policy') == 'lidl-national-qualified-document-text-v2'
+            and source.source_fields.get('lidl_purchase_qualified') is True
+            and (source.source_fields.get('document_product_binding') or {}).get('explicit_piece_purchase') is True
+            and not source.source_fields.get('purchase_blockers')
+            and store and source.store_external_id == store.external_id
+            and channel == 'offers' and coverage == 'offers_only'
+            and product.package_quantity == product.usable_quantity == 1
+            and product.package_unit == product.usable_unit == 'st'
+        ),
+        "willys_document_count_contract": bool(
+            (source.source_fields or {}).get("willys_flyer_policy") == "willys-flyer-validated-text-v2"
+            and source.source_fields.get("willys_flyer_purchase_qualified") is True
+            and source.source_fields.get("document_product_binding")
+            and not source.source_fields.get("purchase_blockers")
+            and product.parser_version == "willys-flyer-text-v2"
+            and store and source.store_external_id == store.external_id
+            and channel == "offers" and coverage == "offers_only"
+            and product.package_quantity == 1 and product.package_unit == "st"
+            and product.usable_quantity == 1 and product.usable_unit == "st"
+        ),
+        **({"physical_offer_qualified": source.source_fields.get("coop_purchase_qualified") is True,
+            "external_store_id": store.external_id if store else None,
+            "price_context_type": price_context}
+           if (source.source_fields or {}).get("coop_physical_policy") else {}),
     }
 
 
@@ -455,6 +482,26 @@ def _promotion_item(
         # diagnostics. Consumers must not fetch /catalog for an OFFERS_ONLY
         # store merely to attach package/price semantics to this promotion.
         item["product"] = _product_item(product, source, None, store)
+    deposit = (promotion.source_payload or {}).get("reviewedDeposit")
+    if (promotion.source_payload or {}).get("policy") in {"coop-physical-structured-v1", "coop-xtra-pdf-text-v1", "lidl-national-reviewed-document-text-v1", "lidl-national-qualified-document-text-v2", "willys-flyer-reviewed-text-v1", "willys-flyer-validated-text-v2"}:
+        # Safe opaque contract identity; preserve caps across concrete variants.
+        item["price_contract_id"] = promotion.source_payload.get("price_contract_id")
+        if promotion.source_payload.get('price_basis_unit') == 'kg':
+            item['price_basis_unit'] = 'kg'
+    if (promotion.source_payload or {}).get("purchase_terms"):
+        from grocery_data.app.domain.purchase_terms import PurchaseTerms
+        item["purchase_terms"] = PurchaseTerms.model_validate(promotion.source_payload["purchase_terms"]).model_dump(mode="json")
+        if promotion.source_payload.get('price_basis_unit') == 'kg':
+            item['price_basis_unit'] = 'kg'
+        if promotion.source_payload.get('price_contract_id'):
+            item['price_contract_id'] = promotion.source_payload['price_contract_id']
+    campaign = (promotion.source_payload or {}).get("campaign_evidence")
+    if campaign is not None:
+        from grocery_data.app.domain.campaign_validity import CampaignEvidence
+        item["campaign_evidence"] = CampaignEvidence.model_validate(campaign).model_dump(mode="json")
+    if deposit is not None:
+        from grocery_data.app.domain.promotion_pricing import DepositContract
+        item["deposit"] = DepositContract.model_validate(deposit).model_dump(mode="json")
     return item
 
 
@@ -964,7 +1011,7 @@ def offers(
     if chain is not None:
         statement = statement.where(StoreModel.chain == chain.value)
     if active_only:
-        today = datetime.now(tz=UTC).date()
+        today = datetime.now(tz=ZoneInfo("Europe/Stockholm")).date()
         statement = statement.where(
             or_(PromotionModel.valid_from.is_(None), PromotionModel.valid_from <= today),
             or_(PromotionModel.valid_to.is_(None), PromotionModel.valid_to >= today),

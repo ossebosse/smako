@@ -188,7 +188,7 @@ class PersonalStore:
             return write_state(connection, owner, state, revision)
 
     def inventory_action(
-        self, owner, saved, action, pantry_revision, *, operation_id=None, consume_fraction=1
+        self, owner, saved, action, pantry_revision, *, operation_id=None, consume_fraction=1, measured_purchase_quantities=None
     ):
         with self.plans._connect() as connection:
             connection.execute("BEGIN IMMEDIATE")
@@ -237,7 +237,13 @@ class PersonalStore:
                             n for n in saved.plan.personal.needs if n["key"] == item.ingredient
                         )
                         item_key = need.get("selected_product_key")
+                        if item.conditional_variant_choice:
+                            raise PersonalConflict('Välj den faktiskt köpta produktvarianten före bokföring i skafferiet.')
                         quantity = item.purchased_usable_quantity
+                        if item.quantity_confidence == 'estimated':
+                            quantity = (measured_purchase_quantities or {}).get(item.store_id + '|' + item.product_id + '|' + item.ingredient)
+                            if quantity is None or quantity < item.required_quantity:
+                                raise PersonalConflict('Ange verklig användbar inköpsmängd som täcker behovet; annars räkna om planen.')
                         if quantity is None or item.unit != item.purchased_unit:
                             raise PersonalConflict(
                                 "Verklig inköpt mängd behöver verifieras före bokföring."

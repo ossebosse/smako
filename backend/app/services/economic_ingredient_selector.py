@@ -64,7 +64,7 @@ class EconomicProductExample(BaseModel):
     usable_quantity: float | None = Field(default=None, gt=0)
     usable_unit: CanonicalUnit | None = None
     quantity_confidence: QuantityConfidence
-    price: float = Field(gt=0)
+    price: float | None = Field(default=None, gt=0)
     effective_price: float = Field(gt=0)
     normalized_unit_price: float = Field(gt=0)
     normalized_unit: NormalizedPriceUnit
@@ -264,7 +264,7 @@ def _economic_score(
     package_adjustment = 1 + min(surplus_ratio, 2.0) * 0.10
     eligible_deal_adjustment = (
         0.94
-        if candidate.effective_price < candidate.price
+        if candidate.price is None or candidate.effective_price < candidate.price
         or member_offer_applied
         else 1.0
     )
@@ -679,7 +679,7 @@ class EconomicIngredientSelector:
             normalized_unit=_normalized_unit(candidate),
             match_score=candidate.match_score,
             economic_score=round(_economic_score(entry, candidate), 4),
-            is_offer=(candidate.effective_price < candidate.price or _has_active_offer(candidate)),
+            is_offer=(candidate.price is None or candidate.effective_price < candidate.price or _has_active_offer(candidate)),
         )
 
 

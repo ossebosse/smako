@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import unicodedata
 from datetime import UTC, datetime
 from urllib.parse import urlparse
 
@@ -181,14 +183,24 @@ class IcaClient:
         """
 
         before = (self._request_count, self._http_error_count, self._rate_limit_count)
-        slug = area.city.strip().casefold()
-        if slug not in {"lund", "malmö", "malmo"}:
-            raise ValueError("ICA physical discovery is limited to Lund and Malmö")
-        slug = "malmo" if slug in {"malmö", "malmo"} else "lund"
+        slug = "".join(c for c in unicodedata.normalize("NFKD", area.city.casefold())
+                       if not unicodedata.combining(c)).strip().replace(" ", "-")
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+            raise ValueError("city has no supported ICA locator slug")
+        documents = []
+        pending = [f"https://www.ica.se/butiker/{slug}/"]
+        visited = set()
         try:
-            raw = await self._get(f"/butiker/oppettider/{slug}/", kind="stores_page")
+            while pending:
+                url = pending.pop(0)
+                if url in visited or len(visited) >= 50:
+                    raise ValueError("ICA pagination cycle or page budget exceeded")
+                visited.add(url)
+                raw = await self._get(url, kind="stores_page")
+                documents.append(raw)
+                pending.extend(json.loads(raw.payload).get("public_links", {}).get("next_pages", []))
         except Exception as exc:
-            docs = (exc.raw,) if isinstance(exc, IcaHttpError) else ()
+            docs = (*documents, exc.raw) if isinstance(exc, IcaHttpError) else tuple(documents)
             raise ConnectorFetchError(
                 "ICA physical-store discovery failed; partial sanitized evidence is attached",
                 partial_batch=RawBatch(
@@ -197,7 +209,14 @@ class IcaClient:
                     transport=self._metrics(before),
                 ),
             ) from exc
-        return RawBatch(chain=Chain.ICA, documents=(raw,), transport=self._metrics(before))
+        return RawBatch(chain=Chain.ICA, documents=tuple(documents), transport=self._metrics(before))
+
+    async def fetch_public_page(self, url: str, *, store_id: str) -> RawFetch:
+        parsed = urlparse(url)
+        if (parsed.scheme != "https" or parsed.netloc != "www.ica.se"
+                or not parsed.path.startswith(("/butiker/", "/erbjudanden/"))):
+            raise ValueError("unverified official store document URL")
+        return await self._get(url, kind="public_page", store_id=store_id)
 
     async def fetch_catalog(self, store: SourceStore) -> RawBatch:
         before = (self._request_count, self._http_error_count, self._rate_limit_count)

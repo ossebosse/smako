@@ -9,11 +9,15 @@ from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel, ConfigDict, Field, computed_field, model_validator
 
+from grocery_data.app.domain.campaign_validity import CampaignEvidence
+from grocery_data.app.domain.counted_offer_checkout import uses_counted_offer_checkout
 from grocery_data.app.domain.promotion_pricing import (
+    DepositContract,
     MembershipProgram,
     PromotionEligibility,
     PromotionMechanism,
 )
+from grocery_data.app.domain.purchase_terms import PurchaseTerms
 
 _STOCKHOLM = ZoneInfo("Europe/Stockholm")
 
@@ -77,11 +81,15 @@ class PromotionGroup(BaseModel):
     valid_to: date
     membership_program: MembershipProgram | None = None
     max_groups: int | None = Field(default=None, ge=1)
+    limit_scope: Literal["store", "household_campaign"] = Field(default="store", exclude_if=lambda v: v == "store")
+    limit_key: str | None = Field(default=None, min_length=1, exclude_if=lambda v: v is None)
     source: str = Field(min_length=1)
     source_snapshot_id: str = Field(min_length=1)
 
     @model_validator(mode="after")
     def valid_group(self):
+        if self.limit_scope == "household_campaign" and (not self.limit_key or self.max_groups is None):
+            raise ValueError("Household group limit requires an explicit shared source key and cap")
         if self.valid_from > self.valid_to:
             raise ValueError("Invalid group validity window")
         if len(set(self.eligible_product_ids)) != len(self.eligible_product_ids):
@@ -103,9 +111,12 @@ class OfferMetadata(BaseModel):
 
     model_config = ConfigDict(frozen=True, allow_inf_nan=False)
 
+    purchase_terms: PurchaseTerms | None = Field(default=None, exclude_if=lambda v: v is None)
     kind: OfferKind
     description: str = Field(min_length=1)
     price: float = Field(gt=0)
+    price_basis_unit: Literal['package', 'kg'] = Field(default='package',
+        exclude_if=lambda value: value == 'package')
     required_packages: int = Field(default=1, ge=1)
     max_quantity: int | None = Field(
         default=None,
@@ -127,6 +138,8 @@ class OfferMetadata(BaseModel):
     quantity_confidence: str | None = Field(default=None, min_length=1, max_length=64)
     valid_from: date | None = None
     valid_to: date | None = None
+    campaign_evidence: CampaignEvidence | None = Field(default=None, exclude_if=lambda value: value is None)
+    deposit: DepositContract | None = Field(default=None, exclude_if=lambda value: value is None)
 
     @model_validator(mode="before")
     @classmethod
@@ -163,6 +176,8 @@ class OfferMetadata(BaseModel):
 
     @model_validator(mode="after")
     def validate_offer(self) -> OfferMetadata:
+        if self.purchase_terms and self.purchase_terms.complete_group_size != self.required_packages:
+            raise ValueError('physical purchase group and price group differ')
         if self.eligibility is PromotionEligibility.USER_SPECIFIC:
             raise ValueError("user-specific contracts cannot enter shared product offers")
         if self.eligibility is PromotionEligibility.MEMBER and not (
@@ -185,6 +200,8 @@ class OfferMetadata(BaseModel):
 
     def is_active(self, on_date: date | None = None) -> bool:
         target = on_date or datetime.now(tz=_STOCKHOLM).date()
+        if self.campaign_evidence is not None:
+            return self.campaign_evidence.applies(target, self.valid_from, self.valid_to)
         return not (
             (self.valid_from is not None and target < self.valid_from)
             or (self.valid_to is not None and target > self.valid_to)
@@ -220,7 +237,9 @@ class ProductSemantics(BaseModel):
         description="Usable recipe quantity per package or priced reference unit",
     )
     usable_unit: CanonicalUnit | None = None
-    sale_price: float = Field(gt=0)
+    sale_price: float | None = Field(default=None, gt=0)
+    conditional_price_signal: bool = Field(default=False, exclude_if=lambda value: not value,
+        description='Ranking/quantity signal only; checkout requires the explicit eligible offer group')
     sale_unit: str | None = None
     comparison_price: float | None = Field(default=None, gt=0)
     comparison_unit: str | None = None
@@ -230,6 +249,8 @@ class ProductSemantics(BaseModel):
     semantic_confidence: SemanticConfidence = SemanticConfidence.LOW
     quantity_confidence: QuantityConfidence = QuantityConfidence.UNKNOWN
     variable_weight: bool = False
+    purchase_terms: PurchaseTerms | None = Field(default=None, exclude_if=lambda v: v is None)
+    conditional_variant_choice: bool = Field(default=False, exclude_if=lambda v: not v)
 
     @model_validator(mode="before")
     @classmethod
@@ -239,6 +260,16 @@ class ProductSemantics(BaseModel):
         if not isinstance(value, Mapping):
             return value
         data = dict(value)
+
+        terms = [o.get("purchase_terms") if isinstance(o, Mapping) else o.purchase_terms
+                 for o in data.get("offers", ())]
+        terms = [PurchaseTerms.model_validate(t) for t in terms if t is not None]
+        if terms:
+            if any(t != terms[0] for t in terms):
+                raise ValueError("conflicting purchase evidence across offers")
+            if data.get("purchase_terms") is not None and PurchaseTerms.model_validate(data["purchase_terms"]) != terms[0]:
+                raise ValueError("product and offer purchase evidence differ")
+            data["purchase_terms"] = terms[0]
 
         # Product and ProductCandidate historically called this field ``price``.
         # It remains available on both subclasses; sale_price is the common
@@ -268,6 +299,10 @@ class ProductSemantics(BaseModel):
 
     @model_validator(mode="after")
     def validate_purchase_semantics(self) -> ProductSemantics:
+        if self.sale_price is None and not (
+            getattr(self, "offers", None) and uses_counted_offer_checkout(self)
+        ):
+            raise ValueError("missing purchase price without an explicit counted offer contract")
         if (self.package_quantity is None) != (self.package_unit is None):
             raise ValueError("package_quantity and package_unit must be provided together")
         if (self.usable_quantity is None) != (self.usable_unit is None):
@@ -309,7 +344,7 @@ class Product(ProductSemantics):
     category: str = Field(min_length=1)
     store_id: str = Field(min_length=1)
     store_name: str = Field(min_length=1)
-    price: float = Field(gt=0, description="Ordinary package price in SEK")
+    price: float | None = Field(default=None, gt=0, description="Independently observed ordinary package price in SEK; unknown stays null")
     effective_price: float | None = Field(
         default=None,
         gt=0,
@@ -333,6 +368,22 @@ class Product(ProductSemantics):
 
     @model_validator(mode="after")
     def fill_and_validate_prices(self) -> Product:
+        if self.conditional_variant_choice:
+            raise ValueError("Conditional variant choice belongs to a private request, not source product identity")
+        if self.price is None:
+            unmeasured_rate = (self.sale_model in {SaleModel.UNKNOWN, SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE}
+                and (self.purchase_terms is not None or (self.package_quantity is None and self.usable_quantity is None))
+                and self.coverage == 'offers_only' and self.offers
+                and all(o.price_basis_unit == 'kg' and o.campaign_evidence for o in self.offers))
+            retained_group = self.purchase_terms and self.purchase_terms.identity_scope == "campaign_group"
+            if (not uses_counted_offer_checkout(self) and not unmeasured_rate and not retained_group) or not self.offers:
+                raise ValueError("offer-only products require fixed packages or verified sales-unit contracts")
+            if any(o.valid_to is None or (o.valid_from is None and o.campaign_evidence is None)
+                   for o in self.offers):
+                raise ValueError("offer-only contracts require bounded validity")
+            if self.effective_price is None:
+                object.__setattr__(self, "effective_price", min(o.price / o.required_packages for o in self.offers))
+            return self
         effective = self.price if self.effective_price is None else self.effective_price
         if not isfinite(effective):
             raise ValueError("effective_price must be finite")
@@ -410,7 +461,8 @@ class ProductCandidate(ProductSemantics):
     canonical_name: str = Field(min_length=1)
     store_id: str = Field(min_length=1)
     store_name: str = Field(min_length=1)
-    price: float = Field(gt=0)
+    price: float | None = Field(default=None, gt=0)
+    purchase_date: date | None = None
     effective_price: float = Field(gt=0)
     member_price: float | None = Field(default=None, gt=0)
     selected_price_contract_id: str | None = Field(
@@ -457,7 +509,7 @@ class ProductCandidate(ProductSemantics):
             selected_price_eligibility=PromotionEligibility.PUBLIC,
             selected_price_mechanism=(
                 PromotionMechanism.SALE_PRICE
-                if float(product.effective_price) < product.price
+                if product.price is None or float(product.effective_price) < product.price
                 else PromotionMechanism.REGULAR
             ),
             match_score=match_score,
@@ -474,6 +526,8 @@ class ProductCandidate(ProductSemantics):
             product_form=product.product_form,
             sale_model=product.sale_model,
             sale_price=product.sale_price,
+            conditional_price_signal=product.conditional_price_signal,
+            purchase_terms=product.purchase_terms,
             sale_unit=product.sale_unit,
             comparison_price=product.comparison_price,
             comparison_unit=product.comparison_unit,

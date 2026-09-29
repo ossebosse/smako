@@ -79,6 +79,12 @@ def primat_store_discovery_bundle(
                 tier=store.tier,
                 coverage=_coverage(store.coverage or store.tier),
                 price_context_type=context_type,
+                price_context_evidence=(
+                    provenance.price_context_evidence.assigned(
+                        "source_field" if store.price_context_type
+                        else "legacy_physical_store_default")
+                    if provenance.price_context_evidence else None
+                ),
                 selected=store.store_id in resolution.selected_context_ids,
                 customer_facing=True,
                 source_snapshot_id=resolution.source_snapshot_id,

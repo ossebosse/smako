@@ -175,6 +175,7 @@ async def change_plan(
             payload.pantry_revision,
             operation_id=payload.operation_id,
             consume_fraction=payload.consume_fraction,
+            measured_purchase_quantities=payload.measured_purchase_quantities,
         )
         return {"saved": saved, "state": public_state(state, request)}
     if saved.revision != payload.revision:

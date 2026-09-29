@@ -91,6 +91,26 @@ def _to_base(quantity: Decimal, unit: str) -> tuple[Decimal, _CanonicalDimension
     return quantity * factor, dimension
 
 
+def project_purchase_shape(product):
+    """Interpret source weight evidence without granting price eligibility.
+
+    The shared matcher needs the physical form before request-specific price
+    selection. This local projection never changes the retained source row.
+    """
+    terms = product.purchase_terms
+    if not terms or terms.usage != 'estimated':
+        return product
+    quantity = terms.approximate_package_g or terms.minimum_package_g
+    return product.model_copy(update={
+        'sale_model': SaleModel.VARIABLE_WEIGHT_PACKAGE if terms.purchase_form == 'variable_package' else SaleModel.SOLD_BY_WEIGHT,
+        'package_quantity': quantity, 'package_unit': 'g' if quantity else None,
+        'usable_quantity': quantity, 'usable_unit': 'g' if quantity else None,
+        'quantity_confidence': QuantityConfidence.ESTIMATED,
+        'variable_weight': terms.purchase_form == 'loose_weight',
+        'sale_unit': 'kg',
+    })
+
+
 class PurchaseQuantityResolver:
     """Resolve all supported sale models without comparison-price inference.
 
@@ -106,7 +126,10 @@ class PurchaseQuantityResolver:
         required_quantity: float | Decimal,
         required_unit: CanonicalUnit,
     ) -> PurchaseResolution:
+        product = project_purchase_shape(product)
         required = _decimal(required_quantity)
+        if product.purchase_terms and (product.purchase_terms.usage == 'blocked' or (product.purchase_terms.usage == 'variant_selection_required' and not product.conditional_variant_choice)):
+            return self._unresolved(product, required, required_unit, 'unresolved purchase evidence')
         required_base = _to_base(required, required_unit)
         if required_base is None:  # pragma: no cover - CanonicalUnit prevents this
             raise ValueError(f"unsupported required unit: {required_unit}")
@@ -160,9 +183,18 @@ class PurchaseQuantityResolver:
             )
 
         package_count = _ceil(required_base[0] / usable[0])
+        if product.purchase_terms and product.purchase_terms.complete_group_size > 1:
+            multiple = product.purchase_terms.complete_group_size
+            package_count = _ceil(Decimal(package_count) / multiple) * multiple
         purchased_usable = usable[0] * package_count
         purchased = package[0] * package_count
-        total = _money(_decimal(product.sale_price) * package_count)
+        # Offers-only multibuys can lack an independently purchasable unit.
+        # The quantity stage may use the retained ranking signal; the checkout
+        # resolver still has to cover the actual complete package count.
+        cost_signal = product.sale_price if product.sale_price is not None else getattr(product, 'effective_price', None)
+        if cost_signal is None:
+            return self._unresolved(product, required, required_unit, 'missing checkout ranking evidence')
+        total = _money(_decimal(cost_signal) * package_count)
         return PurchaseResolution(
             sale_model=product.sale_model,
             resolved=True,
@@ -174,7 +206,7 @@ class PurchaseQuantityResolver:
             purchased_usable_quantity=purchased_usable,
             usable_unit=usable[1],
             waste_quantity=purchased_usable - required_base[0],
-            unit_price=_money(_decimal(product.sale_price)),
+            unit_price=_money(_decimal(cost_signal)),
             total_price=total,
             quantity_confidence=product.quantity_confidence,
         )
@@ -207,6 +239,8 @@ class PurchaseQuantityResolver:
         # supposedly resolved result whose unit_price is invalid zero.
         total = max(_CENT, _money(required_base[0] * rate_price / rate_factor))
         confidence = product.quantity_confidence
+        if product.purchase_terms:
+            confidence = QuantityConfidence.ESTIMATED
         if confidence in {QuantityConfidence.EXACT, QuantityConfidence.DERIVED}:
             confidence = QuantityConfidence.DERIVED
         return PurchaseResolution(
@@ -248,6 +282,9 @@ class PurchaseQuantityResolver:
         assert required_base is not None
         if required_base[1] == "st":
             pieces = _ceil(required_base[0])
+            if product.purchase_terms:
+                multiple = product.purchase_terms.complete_group_size
+                pieces = _ceil(Decimal(pieces) / multiple) * multiple
             purchased_usable = Decimal(pieces)
             usable_unit: CanonicalUnit = "st"
             confidence = (
@@ -359,7 +396,9 @@ class PurchaseQuantityResolver:
             unit_price=_money(total / package_count),
             total_price=total,
             quantity_confidence=QuantityConfidence.ESTIMATED,
-            warning="variable package weight and total are estimates",
+            warning=(f"Cirka-vikt och beräknad kostnad för {package_count} hela paket; "
+                     f"välj sammanlagt minst {required_base[0]} {required_base[1]} användbar mängd. "
+                     "Slutbelopp och överskott beror på faktisk paketvikt.") if product.purchase_terms else "variable package weight and total are estimates",
         )
 
     @staticmethod

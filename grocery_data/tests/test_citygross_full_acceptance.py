@@ -407,6 +407,8 @@ async def test_citygross_full_online_staged_replay_failures_and_local_repair(
                         "postal_codes": [],
                         "latitude": None,
                         "longitude": None,
+                        "mode": "locality",
+                        "municipality_code": None,
                     },
                 },
                 **expected_audit,
@@ -523,12 +525,14 @@ async def test_citygross_full_online_staged_replay_failures_and_local_repair(
                     "scope_key": "malmö",
                     "source_scope": {
                         "scope_key": "malmö",
-                        "geographic_area": {
-                            "city": "Malmö",
-                            "postal_codes": [],
-                            "latitude": None,
-                            "longitude": None,
-                        },
+                    "geographic_area": {
+                        "city": "Malmö",
+                        "postal_codes": [],
+                        "latitude": None,
+                        "longitude": None,
+                        "mode": "locality",
+                        "municipality_code": None,
+                    },
                     },
                     **expected_audit,
                 }

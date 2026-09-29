@@ -67,6 +67,8 @@ class HemkopParser:
         raw: RawBatch,
         references: list[str],
         area: GeographicArea,
+        *,
+        filter_locality: bool = True,
     ) -> list[SourceStore]:
         if len(raw.documents) != len(references):
             raise ValueError("raw references must align with documents")
@@ -92,9 +94,9 @@ class HemkopParser:
                     rf"(?<!\w){re.escape(city)}(?!\w)",
                     name.casefold(),
                 )
-                if (town_key and town_key != city) or (
+                if filter_locality and ((town_key and town_key != city) or (
                     not town_key and not name_has_city
-                ):
+                )):
                     continue
                 external_id = str(row.get("storeId") or "").strip()
                 if not external_id or not name:
@@ -133,6 +135,10 @@ class HemkopParser:
                     ),
                     raw_reference=f"{reference}#storeId={external_id}",
                     source_fields={
+                        "coordinate_source": {"url": document.url,
+                            "sha256": document.payload_hash,
+                            "observed_at": document.fetched_at.isoformat()},
+                        "flyer_url": row.get("flyerURL"),
                         "external": row.get("external"),
                         "clickAndCollect": row.get("clickAndCollect"),
                         "price_context": "activated_online_store"

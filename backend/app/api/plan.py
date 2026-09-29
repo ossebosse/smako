@@ -59,9 +59,12 @@ from grocery_data.app.domain.identifiers import InvalidGtinError
 router = APIRouter(prefix="/api", tags=["meal plan"])
 
 
-def _service() -> MealPlanService:
+def _service(request: PlanRequest | None = None) -> MealPlanService:
+    settings = get_settings()
+    if request is not None:
+        settings = settings.model_copy(update={"allow_estimated_quantities": request.purchase_planning_mode == "estimated"})
     return MealPlanService(
-        get_settings(),
+        settings,
         price_universe_manager=GLOBAL_PREPARED_PRICE_UNIVERSES,
     )
 
@@ -242,7 +245,7 @@ async def _run_admitted_plan(
     try:
         return await controller.run(
             key,
-            lambda: _service().create_plan(request),
+            lambda: _service(request).create_plan(request),
         )
     except PlannerAdmissionOverloaded as exc:
         raise HTTPException(

@@ -423,6 +423,28 @@ def test_quote_cache_hits_and_misses_are_request_local() -> None:
     assert second.selection_hits == 0
 
 
+def test_explicit_nested_request_reuse_and_version_isolation() -> None:
+    ingredient = NormalizedIngredient(canonical_name="potatis", required_quantity=600, unit="g")
+    candidates = {"potatis": (product("potatis", "same", "s1", 500, 10),)}
+    optimizer = BasketOptimizer()
+    with optimizer.quote_cache() as outer:
+        with optimizer.quote_cache(reuse_existing=True) as nested:
+            assert nested is outer
+            first = optimizer.optimize([ingredient], candidates, [store("s1")], 1)
+        with optimizer.quote_cache(reuse_existing=True) as nested:
+            second = optimizer.optimize([ingredient], candidates, [store("s1")], 1)
+        assert first == second
+        with optimizer.quote_cache(reuse_existing=True, calculator_version="another") as isolated:
+            assert isolated is not outer
+            optimizer.optimize([ingredient], candidates, [store("s1")], 1)
+            assert isolated.calculations > 0
+        assert outer.quote_set_hits > 0
+    with optimizer.quote_cache(reuse_existing=True) as next_request:
+        assert next_request is not outer
+        optimizer.optimize([ingredient], candidates, [store("s1")], 1)
+        assert next_request.calculations > 0
+
+
 def test_mutable_candidate_sequence_never_reuses_a_stale_quote_set() -> None:
     ingredient = NormalizedIngredient(
         canonical_name="potatis",

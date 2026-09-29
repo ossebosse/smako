@@ -214,6 +214,7 @@ def source_id_from_product_url(url: str) -> str | None:
 class RenderedProductCard:
     href: str | None
     aria_label: str
+    visible_text: str = ""
 
 
 class _RenderedCatalogCollector(HTMLParser):
@@ -292,8 +293,12 @@ def rendered_catalog_page(payload: bytes) -> RenderedCatalogPage:
                 raise CoopSchemaError("Coop rendered-card envelope contains an invalid href")
             if not isinstance(aria_label, str) or not aria_label.strip():
                 raise CoopSchemaError("Coop rendered-card envelope contains an invalid label")
-            cards.append(RenderedProductCard(href=href, aria_label=aria_label.strip()))
-        if not cards:
+            visible_text = item.get("visible_text", "")
+            if not isinstance(visible_text, str):
+                raise CoopSchemaError("Coop rendered-card visible text is invalid")
+            cards.append(RenderedProductCard(href=href, aria_label=aria_label.strip(),
+                                             visible_text=visible_text))
+        if not cards and "structured_offers" not in envelope:
             raise CoopSchemaError("Coop rendered-card envelope contains no cards")
         declared_total = envelope.get("declared_total")
         if declared_total is not None and (

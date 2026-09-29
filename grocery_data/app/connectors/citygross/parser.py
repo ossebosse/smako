@@ -54,6 +54,10 @@ _MIXED_KG_GROSS_DRAINED = re.compile(
 _PRICE_UNITS = {"PCE": "st", "KGM": "kg", "LTR": "l"}
 _COMPARISON_UNITS = {"PCE": "st", "KGM": "kg", "LTR": "l"}
 _SELLING_UNITS = {1: "ST", 2: "VIKT"}
+# Public storefront quantity selector forwards maximumQuantity to its unit
+# counter and cart writes use unit="Piece". This is a sales-unit/cart limit,
+# independent of maxAppliedPerReceipt's discounted group/package count.
+_QUANTITY_LIMIT_SOURCE = "https://www.citygross.se/static/js/main.07a64bf6.js"
 _VERIFIED_CATALOG_CONTEXTS = {
     "3203": "59",  # Malmö Stora Bernstorp
     "3211": "169",  # Malmö Hyllie
@@ -194,7 +198,7 @@ def _category_path(row: dict[str, Any]) -> tuple[str, ...]:
 
 
 class CityGrossParser:
-    parser_version = "citygross-parser-v2"
+    parser_version = "citygross-parser-v4"
 
     def parse_stores(
         self,
@@ -339,9 +343,11 @@ class CityGrossParser:
                 raw_type == "1"
                 and effect_type == "ItemsTotal"
                 and quantity is not None
-                and quantity > 1
+                and quantity >= 1
             ):
-                promotion_type = PromotionType.MULTIBUY
+                promotion_type = (PromotionType.MULTIBUY if quantity > 1 else
+                                  PromotionType.MEMBER_PRICE if member_only else
+                                  PromotionType.SALE_PRICE)
                 price = _decimal(raw_promotion.get("value"))
             elif raw_type == "5" and effect_type == "PriceChangeAll":
                 promotion_type = (
@@ -368,6 +374,26 @@ class CityGrossParser:
                 and max_applied_raw > 0
                 else None
             )
+            blockers = []
+            if not isinstance(raw_promotion.get("membersOnly"), bool):
+                blockers.append("promotion_audience_unverified")
+            if raw_type == "5" and effect_type == "PriceChangeAll" and quantity != 1:
+                blockers.append("promotion_quantity_unverified")
+            if raw_promotion.get("couponId") not in (None, ""):
+                blockers.append("coupon_eligibility_unsupported")
+            if raw_promotion.get("minAmount") not in (None, 0, "0"):
+                blockers.append("minimum_spend_unsupported")
+            if max_applied_raw not in (None, 0) and max_applied is None:
+                blockers.append("purchase_limit_unverified")
+            if promotion_type != PromotionType.OTHER and (
+                _date(raw_promotion.get("from")) is None
+                or _date(raw_promotion.get("to")) is None
+            ):
+                blockers.append("promotion_period_unverified")
+            if blockers:
+                # Preserve the unsupported source contract, but never turn a
+                # conditional/unknown discount into an ordinary purchase price.
+                promotion_type = PromotionType.OTHER
             try:
                 offers.append(
                     SourceOffer(
@@ -388,6 +414,8 @@ class CityGrossParser:
                             or "City Gross promotion"
                         ),
                         source_payload={
+                            "raw_promotion": raw_promotion,
+                            "purchase_blockers": blockers,
                             "type": raw_promotion.get("type"),
                             "campaignTypeId": raw_promotion.get("campaignTypeId"),
                             "effectType": raw_promotion.get("effectType"),
@@ -477,8 +505,33 @@ class CityGrossParser:
             else None
         )
         stock_status = store_details.get("stockStatus")
+        maximum_units = row.get("maximumQuantity")
+        if maximum_units is not None and (
+            isinstance(maximum_units, bool) or not isinstance(maximum_units, int)
+            or maximum_units < 1
+        ):
+            raise CityGrossSchemaError("City Gross maximumQuantity sales-unit limit is invalid")
         raw_gtin = str(row.get("gtin") or "").strip() or None
         offers = self._promotions(prices, reference=reference, failures=failures)
+        active_unsupported = any(
+            offer.source_payload.get("active") is True
+            and offer.type == PromotionType.OTHER
+            for offer in offers
+        )
+        if active_unsupported and sale_price != regular_price:
+            raise CityGrossSchemaError(
+                "unsupported active promotion cannot establish an unconditional current price"
+            )
+        if any(o.type == PromotionType.OTHER and o.member_only for o in offers):
+            member_price = None
+        offers = tuple(offer.model_copy(update={"source_payload": {
+            **offer.source_payload,
+            "store_external_id": store.external_id,
+            "source_variant_id": external_id,
+            "source_channel": "online_price",
+            "official_product_url": row.get("url"),
+            "maximumQuantity": row.get("maximumQuantity"),
+        }}) for offer in offers)
         public_single = next(
             (
                 offer
@@ -584,6 +637,15 @@ class CityGrossParser:
             raw_reference=reference,
             fetched_at=fetched_at,
             source_fields={
+                "official_product_url": row.get("url"),
+                "maximumQuantity": row.get("maximumQuantity"),
+                "maximum_purchase_units": maximum_units,
+                "quantity_limit_source_url": _QUANTITY_LIMIT_SOURCE if maximum_units else None,
+                "returnablePackageDepositInformation": row.get("returnablePackageDepositInformation"),
+                "raw_prices": prices,
+                "source_variant_id": external_id,
+                "variant_count": 1,
+                "source_channel": "online_price",
                 "sellingUnitOfMeasure": selling_unit_raw,
                 "sellable": row.get("sellable"),
                 "stockStatus": stock_status,

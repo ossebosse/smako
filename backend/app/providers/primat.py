@@ -30,6 +30,7 @@ from app.models.product import QuantityConfidence, SaleModel
 from app.services.ingredient_normalizer import _search_text, canonicalize_ingredient_name
 
 from grocery_data.app.domain.identifiers import InvalidGtinError, normalize_gtin
+from grocery_data.app.domain.price_context_evidence import observed_store_channel
 from grocery_data.app.domain.promotion_pricing import (
     MembershipProgram,
     PromotionEligibility,
@@ -318,6 +319,7 @@ class PrimatPriceProvider(GroceryPriceProvider):
                         if row.get("price_context_type")
                         else None
                     ),
+                    price_context_evidence=observed_store_channel(row.get("price_context_type")),
                     coverage=(
                         str(row.get("coverage")).strip() or None if row.get("coverage") else None
                     ),
@@ -1580,6 +1582,11 @@ class PrimatPriceProvider(GroceryPriceProvider):
             store_name=store.name if store else store_id,
             provider_store_id=native_store_id,
             price_context=store.price_context_type if store else None,
+            price_context_evidence=(
+                store.source_provenance.price_context_evidence.assigned("store_metadata")
+                if store and store.source_provenance
+                and store.source_provenance.price_context_evidence else None
+            ),
             coverage=store.coverage or store.tier if store else None,
             semantic_confidence=str(purchase.get("semantic_confidence") or "").casefold() or None,
             quantity_confidence=str(purchase.get("quantity_confidence") or "").casefold() or None,

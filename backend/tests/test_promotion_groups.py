@@ -219,3 +219,61 @@ def test_other_context_and_existing_pantry_do_not_qualify_for_group():
         product("ris", 1000, "g", 10, store="ica"),
     )
     assert run(p, request(extras=extras())).optimized_basket.total == 70
+
+
+def test_fixed_group_works_with_campaign_prices_without_inventing_ordinary_price():
+    # Exact identified variants can mix using explicit group membership even
+    # when their independent current purchases are campaigns, not base prices.
+    rows=[]
+    for name,unit in [('mjölk','ml'),('bröd','g'),('ris','g')]:
+        rows.append(product(name,1000,unit,None,sale_price=30,effective_price=30,
+            promotion_groups=(group(),),offers=[OfferMetadata(kind='campaign',description='Aktuellt kampanjköp',price=30,
+                valid_from=date(2026,9,1),valid_to=date(2026,10,1))]))
+    result=run(prepared(*rows),request(extras=extras()))
+    assert result.optimized_basket.total==75
+    assert all(i.regular_unit_price is None for g in result.optimized_basket.stores for i in g.items)
+    assert BasketAuditor(pantry_items=frozenset()).audit(result.ingredients,result.optimized_basket).passed
+    # A discount off an unknown base may not masquerade as a fixed total.
+    bad=group(pricing_rule='group_discount',amount=15)
+    with pytest.raises(ValueError,match='No complete basket'):
+        run(prepared(*[p.model_copy(update={'promotion_groups':(bad,)}) for p in rows]),request(extras=extras()))
+
+
+def test_mixed_variants_share_whole_campaign_when_no_single_purchase_is_evidenced():
+    from grocery_data.app.domain.purchase_terms import PurchaseTerms
+    rows=[]
+    for name,unit in [('mjölk','ml'),('bröd','g'),('ris','g')]:
+        terms=PurchaseTerms(source_reference='synthetic:verified-membership',purchase_form='fixed_package',complete_group_size=3)
+        rows.append(product(name,1000,unit,None,sale_price=None,effective_price=25,
+            promotion_groups=(group(),),offers=[OfferMetadata(kind='multipack',description='Tre valfria verifierade varianter',price=75,required_packages=3,
+                purchase_terms=terms,valid_from=date(2026,9,1),valid_to=date(2026,10,1))]))
+    result=run(prepared(*rows),request(extras=extras()))
+    basket=result.optimized_basket
+    assert basket.total==75 and sum(i.packages_needed for g in basket.stores for i in g.items)==3
+    assert all(i.regular_unit_price is None and not i.pending_group_checkout for g in basket.stores for i in g.items)
+    assert BasketAuditor(pantry_items=frozenset()).audit(result.ingredients,basket).passed
+    completed=run(prepared(*rows),request(extras=extras()[:2]))
+    assert completed.optimized_basket.total==75
+    assert sum(i.packages_needed for g in completed.optimized_basket.stores for i in g.items)==3
+    assert BasketAuditor(pantry_items=frozenset()).audit(completed.ingredients,completed.optimized_basket).passed
+    # Dates/membership still restrict the group even on the offers-only early path.
+    for bad in (group(valid_to=date(2026,9,2)),group(membership_program='COOP_MEMBER')):
+        result=run(prepared(*[p.model_copy(update={'promotion_groups':(bad,)}) for p in rows]),request(extras=extras()))
+        assert result.optimized_basket.total==225  # three complete independent groups
+
+
+def test_shared_household_group_cap_is_aggregated_across_stores_and_survives_audit():
+    from app.services.basket_calculator import BasketCalculator
+    g=group(max_groups=1,limit_scope='household_campaign',limit_key='official-campaign-household')
+    result=run(catalog(g),request(extras=extras()))
+    first=result.optimized_basket.stores[0].items
+    second=[i.model_copy(update={'store_id':'coop-2','ingredient':i.ingredient+' second store',
+        'promotion_groups':(g.model_copy(update={'store_id':'coop-2'}),),'group_applications':[]}) for i in first]
+    rows=BasketCalculator.quote_group_basket([*first,*second])
+    assert sum(i.total_price for i in rows)==165  # one 75 group, remaining three ordinary at 30
+    applications={a['application'] for i in rows for a in i.group_applications}
+    assert len(applications)==1
+    assert all(i.promotion_groups[0].limit_key=='official-campaign-household' for i in rows)
+    bad=g.model_copy(update={'valid_to':date(2026,9,2)})
+    with pytest.raises(ValueError,match='campaign dates'):
+        BasketCalculator.quote_group_basket([i.model_copy(update={'promotion_groups':(bad,)}) for i in first])

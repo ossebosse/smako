@@ -514,6 +514,24 @@ async def build_city_price_universe(
     external_cache: Path | None,
     output: Path,
     max_price_age_hours: float,
+    ica_offer_store_ids: frozenset[str] = frozenset(),
+    ica_offer_database: Path | None = None,
+    ica_municipal_stores: dict | None = None,
+    hemkop_offer_database: Path | None = None,
+    hemkop_municipal_stores: dict | None = None,
+    coop_offer_database: Path | None = None,
+    coop_municipality_inventory: dict | None = None,
+    coop_offer_sources: tuple | list = (),
+    coop_offer_source_errors: tuple | list = (),
+    lidl_municipal_enabled: bool = False,
+    lidl_sources: tuple | list = (),
+    lidl_source_errors: tuple | list = (),
+    willys_flyer_enabled: bool = False,
+    willys_flyer_sources: tuple | list = (),
+    willys_flyer_source_errors: tuple | list = (),
+    citygross_municipal_enabled: bool = False,
+    citygross_sources: tuple | list = (),
+    citygross_source_errors: tuple | list = (),
 ) -> dict[str, object]:
     """Build and atomically write one validated, inactive candidate artifact.
 
@@ -561,12 +579,17 @@ async def build_city_price_universe(
         base_url="http://immutable-grocery-data.local/",
         timeout=60.0,
     )
+    from grocery_data.app.services.willys_municipal_scope import approved_snapshot_stores
+
+    municipal_willys_stores = approved_snapshot_stores(database, normalized_postal)
     own = OwnGroceryPriceProvider(
         base_url="http://immutable-grocery-data.local",
         max_age_hours=max_price_age_hours,
-        include_offers_only=False,
+        include_offers_only=bool(ica_offer_store_ids),
+        include_conditional_offer_products=bool(ica_offer_store_ids),
         use_member_prices=False,
         client=client,
+        municipal_willys_stores=municipal_willys_stores,
     )
     bindings: list[ProviderBinding] = []
     own_chains = frozenset(
@@ -603,8 +626,128 @@ async def build_city_price_universe(
     identity_bridge = load_exact_identity_bridge(
         database,
         external_products=(frozen.identity_products if frozen is not None else ()),
+        # The source-bound row-approved channel replaces legacy ICA imports.
+        # Never attach an older copy of the same campaign with a different cap ID.
+        exclude_offer_chains=frozenset({Chain.ICA}) if ica_offer_store_ids else frozenset(),
     )
     provider = identity_bridge.bind(federated_provider)
+    offer_engine = offer_client = None
+    if ica_offer_store_ids:
+        from app.providers.ica_area_offers import IcaAreaOfferProvider
+        offer_database = ica_offer_database or database
+        offer_own = own
+        offer_setup_error = None
+        if ica_offer_database is not None and ica_offer_database.is_file():
+            try:
+                offer_engine, offer_sessions, _ = _read_only_engine(ica_offer_database)
+                offer_client = httpx.AsyncClient(transport=_CountingASGITransport(_read_only_app(offer_sessions)),
+                                                base_url="http://optional-ica-offers.local/")
+                offer_own = OwnGroceryPriceProvider("http://optional-ica-offers.local", client=offer_client,
+                                                   include_offers_only=True, include_conditional_offer_products=True,
+                                                   max_age_hours=max_price_age_hours)
+            except (OSError, ValueError, sqlite3.Error) as exc:
+                offer_setup_error = type(exc).__name__
+        provider = IcaAreaOfferProvider(provider, offer_own, database=offer_database,
+                                       city=normalized_city, account_ids=ica_offer_store_ids,
+                                       municipal_stores=ica_municipal_stores)
+        if offer_setup_error:
+            provider.evidence = {}
+            provider.diagnostics["setup"] = {"status": "error", "error": offer_setup_error}
+    coop_resources = []
+    if hemkop_offer_database and hemkop_municipal_stores:
+        from app.providers.hemkop_municipality_offers import HemkopMunicipalityOfferProvider
+        hemkop_own, hemkop_setup_error = own, None
+        try:
+            hemkop_engine, hemkop_sessions, _ = _read_only_engine(hemkop_offer_database)
+            hemkop_client = httpx.AsyncClient(transport=_CountingASGITransport(_read_only_app(hemkop_sessions)),
+                                            base_url='http://optional-hemkop-offers.local/')
+            hemkop_own = OwnGroceryPriceProvider('http://optional-hemkop-offers.local', client=hemkop_client,
+                include_offers_only=True, include_conditional_offer_products=True, max_age_hours=max_price_age_hours)
+            coop_resources.append((hemkop_client, hemkop_engine))
+        except (OSError, ValueError, sqlite3.Error) as exc:
+            hemkop_setup_error = type(exc).__name__
+        provider = HemkopMunicipalityOfferProvider(provider, hemkop_own, database=hemkop_offer_database,
+            city=normalized_city, account_ids=frozenset(hemkop_municipal_stores), municipal_stores=hemkop_municipal_stores)
+        if hemkop_setup_error:
+            provider.evidence = {}
+            provider.diagnostics['setup'] = {'status': 'error', 'error': hemkop_setup_error}
+    coop_sources = list(coop_offer_sources)
+    if coop_municipality_inventory is not None:
+        coop_sources.append({"database": coop_offer_database, "inventory": coop_municipality_inventory})
+    for source in coop_sources:
+        from app.providers.coop_municipality_offers import CoopMunicipalityOfferProvider
+
+        try:
+            if source["database"] is None:
+                raise ValueError("explicit approved Coop offers database required")
+            coop_engine, coop_sessions, _ = _read_only_engine(source["database"])
+            coop_client = httpx.AsyncClient(transport=_CountingASGITransport(_read_only_app(coop_sessions)),
+                                           base_url="http://optional-coop-offers.local/")
+            coop_resources.append((coop_client, coop_engine))
+            coop_own = OwnGroceryPriceProvider("http://optional-coop-offers.local", client=coop_client,
+                include_offers_only=True, include_conditional_offer_products=True,
+                max_age_hours=max_price_age_hours, use_member_prices=False)
+            provider = CoopMunicipalityOfferProvider(provider, coop_own, database=source["database"],
+                inventory=source["inventory"], include_xtra=source.get("include_xtra", False))
+        except (OSError, ValueError, sqlite3.Error) as exc:
+            provider.coop_setup_error = type(exc).__name__
+    citygross_resources, citygross_loaded = [], []
+    citygross_errors = list(citygross_source_errors)
+    if citygross_municipal_enabled:
+        from app.providers.citygross_municipality import CityGrossMunicipalityProvider
+        for source in citygross_sources:
+            try:
+                cg_engine, cg_sessions, _ = _read_only_engine(source["database"])
+                cg_client = httpx.AsyncClient(
+                    transport=_CountingASGITransport(_read_only_app(cg_sessions)),
+                    base_url="http://municipal-citygross.local/")
+                citygross_resources.append((cg_client, cg_engine))
+                cg_own = OwnGroceryPriceProvider("http://municipal-citygross.local", client=cg_client,
+                    include_offers_only=True, include_conditional_offer_products=True,
+                    max_age_hours=max_price_age_hours, use_member_prices=False)
+                citygross_loaded.append({**source, "own": cg_own})
+            except (OSError, ValueError, sqlite3.Error) as exc:
+                citygross_errors.append({"status": "source_setup_failed", "error_type": type(exc).__name__})
+        provider = CityGrossMunicipalityProvider(provider, citygross_loaded,
+                                               allow_empty_base=external_cache is None)
+    lidl_resources, lidl_loaded = [], []
+    lidl_errors = list(lidl_source_errors)
+    if lidl_municipal_enabled:
+        from app.providers.lidl_municipality import LidlMunicipalityProvider
+        for source in lidl_sources:
+            try:
+                ld_engine, ld_sessions, _ = _read_only_engine(source["database"])
+                ld_client = httpx.AsyncClient(
+                    transport=_CountingASGITransport(_read_only_app(ld_sessions)),
+                    base_url="http://municipal-lidl.local/")
+                lidl_resources.append((ld_client, ld_engine))
+                ld_own = OwnGroceryPriceProvider("http://municipal-lidl.local", client=ld_client,
+                    include_offers_only=True, include_conditional_offer_products=True,
+                    max_age_hours=max_price_age_hours, use_member_prices=False)
+                lidl_loaded.append({**source, "own": ld_own})
+            except (OSError, ValueError, sqlite3.Error) as exc:
+                lidl_errors.append({"status": "source_setup_failed", "error_type": type(exc).__name__})
+        provider = LidlMunicipalityProvider(provider, lidl_loaded,
+                                               allow_empty_base=external_cache is None)
+    willys_flyer_resources, willys_flyer_loaded = [], []
+    willys_flyer_errors = list(willys_flyer_source_errors)
+    if willys_flyer_enabled:
+        from app.providers.willys_flyers import WillysFlyerProvider
+        for source in willys_flyer_sources:
+            try:
+                wf_engine, wf_sessions, _ = _read_only_engine(source["database"])
+                wf_client = httpx.AsyncClient(
+                    transport=_CountingASGITransport(_read_only_app(wf_sessions)),
+                    base_url="http://municipal-willys-flyer.local/")
+                willys_flyer_resources.append((wf_client, wf_engine))
+                wf_own = OwnGroceryPriceProvider("http://municipal-willys-flyer.local", client=wf_client,
+                    include_offers_only=True, include_conditional_offer_products=True,
+                    max_age_hours=max_price_age_hours, use_member_prices=False)
+                willys_flyer_loaded.append({**source, "own": wf_own})
+            except (OSError, ValueError, sqlite3.Error) as exc:
+                willys_flyer_errors.append({"status": "source_setup_failed", "error_type": type(exc).__name__})
+        provider = WillysFlyerProvider(provider, willys_flyer_loaded,
+                                               allow_empty_base=external_cache is None)
     setup_ms = (perf_counter() - setup_started) * 1000
 
     staging = output.with_name(f".{output.name}.{uuid4().hex}.candidate")
@@ -633,6 +776,11 @@ async def build_city_price_universe(
         performance = trace.snapshot()
         if network_attempts:
             raise NetworkAccessBlockedError("PriceUniverse build attempted live network access")
+        if municipal_willys_stores is not None:
+            represented = {s.source_store_id for s in prepared.stores if s.chain.casefold() == "willys"
+                           and s.price_context_type == "online_store"}
+            if represented != set(municipal_willys_stores):
+                raise RuntimeError("municipal Willys source contexts missing from prepared universe")
         if database_before != _file_state(database):
             raise RuntimeError("database changed during immutable PriceUniverse build")
         if external_cache is not None and external_before != _file_state(external_cache):
@@ -707,6 +855,11 @@ async def build_city_price_universe(
                 "source_resolution": diagnostics,
             },
             "network_attempts": network_attempts,
+            "coop_optional_setup_error": getattr(provider, "coop_setup_error", None),
+            "coop_source_errors": list(coop_offer_source_errors),
+            "citygross_source_errors": citygross_errors,
+            "lidl_source_errors": lidl_errors,
+            "willys_flyer_source_errors": willys_flyer_errors,
             "database_read_only": True,
             "database_unchanged": database_before == _file_state(database),
             "external_cache_unchanged": (
@@ -719,6 +872,22 @@ async def build_city_price_universe(
     finally:
         await provider.aclose()
         await client.aclose()
+        if offer_client is not None:
+            await offer_client.aclose()
+        if offer_engine is not None:
+            offer_engine.dispose()
+        for ld_client, ld_engine in lidl_resources:
+            await ld_client.aclose()
+            ld_engine.dispose()
+        for wf_client, wf_engine in willys_flyer_resources:
+            await wf_client.aclose()
+            wf_engine.dispose()
+        for cg_client, cg_engine in citygross_resources:
+            await cg_client.aclose()
+            cg_engine.dispose()
+        for coop_client, coop_engine in coop_resources:
+            await coop_client.aclose()
+            coop_engine.dispose()
         engine.dispose()
         staging.unlink(missing_ok=True)
         staging_temporary.unlink(missing_ok=True)

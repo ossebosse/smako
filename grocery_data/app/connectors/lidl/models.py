@@ -7,9 +7,83 @@ from html import unescape
 from typing import Any
 from urllib.parse import urljoin, urlparse
 
+from grocery_data.app.monitoring.schema_fingerprint import SchemaDiff
+
 
 class LidlSchemaError(ValueError):
     """A public Lidl response no longer satisfies the verified source contract."""
+
+
+# Reviewed against rejected snapshot 2542a7f6684342c3a2c23da242715c8d.
+# The one-row discovery probe changes its example product daily. These exact
+# optional additions/removals do not change the independently validated region
+# identity or a catalog price. Keep direction and every type change strict.
+_REVIEWED_ADDITIONS = frozenset(
+    "offer_context_probe:$[].items[].gridbox.data." + suffix
+    for suffix in (
+        "price.basePrice",
+        "price.basePrice.prefix",
+        "price.basePrice.text",
+        'regionsPrices["1"].currentPrice.basePrice.text',
+        "stockAvailability.badgeInfoV2[].validUntil",
+        "storeEndDate",
+    )
+)
+# Same-day scheduler evidence adds an independently scoped price region 2 for
+# jacket 11110172. The selected default still points to price region 1. Exact
+# additions only: never wildcard a region, change of type, or removed price.
+_REVIEWED_ADDITIONS |= frozenset(
+    'public-default-region:offer_page:$[].items[].gridbox.data.regionsPrices["2"]' + suffix
+    for suffix in (
+        "",
+        ".currentPrice",
+        ".currentPrice.basePrice",
+        ".currentPrice.basePrice.prefix",
+        ".currentPrice.currencyCode",
+        ".currentPrice.currencyCodeSecond",
+        ".currentPrice.currencySymbol",
+        ".currentPrice.currencySymbolSecond",
+        ".currentPrice.discount",
+        ".currentPrice.discount.discountHasStar",
+        ".currentPrice.discount.discountText",
+        ".currentPrice.discount.fromNormalPriceForLidlPlus",
+        ".currentPrice.discount.fromRecommendedPrice",
+        ".currentPrice.discount.showDiscount",
+        ".currentPrice.discount.showFrom",
+        ".currentPrice.discount.showPercentage",
+        ".currentPrice.discount.showUpTo",
+        ".currentPrice.endDate",
+        ".currentPrice.endDateExclusive",
+        ".currentPrice.hasStar",
+        ".currentPrice.hasVat",
+        ".currentPrice.price",
+        ".currentPrice.priceTheme",
+        ".currentPrice.specialTaxes",
+        ".currentPrice.startDate",
+        ".currentPrice.variantsHaveDifferentPrices",
+        ".futureLidlPlusPrices",
+    )
+)
+_REVIEWED_REMOVALS = frozenset(
+    {
+        "offer_context_probe:$[].items[].gridbox.data.seals[]",
+        "offer_context_probe:$[].items[].gridbox.data.seals[].altText",
+        "offer_context_probe:$[].items[].gridbox.data.seals[].image",
+        (
+            "public-default-region:offer_page:$[].items[].gridbox.data."
+            'regionsPrices["1"].futurePrices'
+        ),
+    }
+)
+
+
+def reviewed_lidl_schema_diff(diff: SchemaDiff) -> SchemaDiff:
+    """Review only the observed optional drift; unknown changes still block."""
+    return SchemaDiff(
+        added=tuple(path for path in diff.added if path not in _REVIEWED_ADDITIONS),
+        removed=tuple(path for path in diff.removed if path not in _REVIEWED_REMOVALS),
+        type_changed=diff.type_changed,
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -26,17 +100,17 @@ _DETAIL_LINK = re.compile(
 )
 _STORE_HEADING = re.compile(
     r'<span[^>]*class=["\'][^"\']*main-info__headline-store[^"\']*["\'][^>]*>'
-    r'(?P<value>.*?)</span>',
+    r"(?P<value>.*?)</span>",
     re.IGNORECASE | re.DOTALL,
 )
 _TNC = re.compile(r'(?:[?&]|&amp;)TNC=(?P<value>\d+)(?:[&#"\']|$)', re.IGNORECASE)
 _BING_POSITION = re.compile(
-    r'https://bing\.com/maps/default\.aspx\?rtp=~pos\.'
-    r'(?P<latitude>-?\d+(?:\.\d+)?)_(?P<longitude>-?\d+(?:\.\d+)?)_',
+    r"https://bing\.com/maps/default\.aspx\?rtp=~pos\."
+    r"(?P<latitude>-?\d+(?:\.\d+)?)_(?P<longitude>-?\d+(?:\.\d+)?)_",
     re.IGNORECASE,
 )
 _ADDRESS = re.compile(
-    r'^(?P<address>.+),\s*(?P<postal>\d{3}\s?\d{2})\s+(?P<city>.+)$',
+    r"^(?P<address>.+),\s*(?P<postal>\d{3}\s?\d{2})\s+(?P<city>.+)$",
     re.DOTALL,
 )
 _TAG = re.compile(r"<[^>]+>")

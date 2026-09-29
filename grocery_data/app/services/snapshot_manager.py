@@ -22,7 +22,7 @@ from grocery_data.app.monitoring import (
     assess_run_health,
     fingerprint_json,
 )
-from grocery_data.app.services.collector import _merge_schema_diff
+from grocery_data.app.services.collector import _merge_schema_diff, _review_schema_diff
 from grocery_data.app.services.coop_online_context_activation import (
     activate_promoted_coop_online_context,
 )
@@ -232,11 +232,40 @@ def _assess_persisted_snapshot(
                 raise SnapshotValidationError("snapshot schema diff is invalid") from exc
     if payload.get("schema_change_accepted") is True:
         schema_diff = None
+    schema_diff = _review_schema_diff(Chain(row.chain), row.parser_version, schema_diff)
     assessment = assess_run_health(
         metrics,
         baseline=baseline_metrics,
         schema_diff=schema_diff,
     )
+    if payload.get("row_acceptance") is not None:
+        from grocery_data.app.domain import SourceOffer, SourceProduct
+        from grocery_data.app.services.offer_rows import contract_allows_publication, row_blockers
+        from grocery_data.app.storage.models import PromotionModel, SourceProductModel
+
+        contract = payload["row_acceptance"]
+        if (not contract_allows_publication(contract, metrics=metrics, scope_key=row.scope_key,
+                chain=row.chain, coverage=row.coverage)
+                or (schema_diff is not None and schema_diff.has_changes)):
+            raise SnapshotValidationError("partial offers contract or shared schema evidence invalid")
+        sources = list(session.scalars(select(SourceProductModel).where(SourceProductModel.catalog_snapshot_id == row.id)))
+        if {s.external_product_id for s in sources} != set(contract["accepted_ids"]):
+            raise SnapshotValidationError("partial accepted IDs do not reconcile")
+        for source in sources:
+            promotions = session.scalars(select(PromotionModel).where(PromotionModel.source_product_id == source.id))
+            evidence = SourceProduct(chain=source.chain, store_external_id=source.store_external_id,
+                external_product_id=source.external_product_id, gtin=source.gtin, name=source.name,
+                regular_price=source.regular_price, package_quantity=source.package_quantity,
+                package_unit=source.package_unit, sale_unit=source.sale_unit,
+                fetched_at=source.fetched_at, raw_reference=source.raw_reference,
+                source_fields=source.source_fields, offers=tuple(SourceOffer(
+                    external_id=p.external_id, type=p.type, price=p.price, quantity=p.quantity,
+                    member_only=p.member_only, max_quantity=p.max_quantity,
+                    valid_from=p.valid_from, valid_to=p.valid_to, source_payload=p.source_payload)
+                    for p in promotions))
+            if source.store_external_id != contract["store_id"] or row_blockers(evidence):
+                raise SnapshotValidationError("persisted partial row no longer qualifies")
+        return metrics
     if assessment.status != ConnectorStatus.HEALTHY:
         detail = "; ".join(assessment.warnings) or assessment.status.value
         raise SnapshotValidationError(f"snapshot health check failed: {detail}")

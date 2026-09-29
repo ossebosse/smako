@@ -205,13 +205,14 @@ def test_piece_product_remains_distinct_from_weight_comparison_price() -> None:
 def test_variable_weight_member_offer_keeps_rate_and_piece_cost_separate() -> None:
     source = _parse("variable_weight.html", kind="rendered_offers_page").products[0]
     canonical = ProductNormalizer().normalize(source, parser_version=CoopParser.parser_version)
-    assert source.sale_price == 110
+    assert source.sale_price is None and source.regular_price is None
     assert source.sale_unit == "kg"
     assert source.average_weight_kg == Decimal("1.1")
     assert canonical.sale_model == SaleModel.VARIABLE_WEIGHT_PACKAGE
     assert canonical.quantity_confidence == Confidence.ESTIMATED
-    assert canonical.unit_price == 110
-    assert canonical.sale_price == 121
+    assert canonical.unit_price is None
+    assert canonical.sale_price is None
+    assert source.offers[0].source_payload["comparison_reference_text"]
     assert source.offers[0].type == PromotionType.MEMBER_PRICE
     assert source.offers[0].price == Decimal("74.90")
     assert source.offers[0].member_only is True
@@ -220,7 +221,8 @@ def test_variable_weight_member_offer_keeps_rate_and_piece_cost_separate() -> No
 def test_member_multibuy_is_never_flattened_to_unit_price() -> None:
     source = _parse("member_multibuy.html", kind="rendered_offers_page").products[0]
     offer = source.offers[0]
-    assert source.sale_price == Decimal("74.65")
+    assert source.sale_price is None and source.regular_price is None
+    assert "74" in offer.source_payload["ordinary_reference_text"]
     assert source.member_price is None
     assert offer.type == PromotionType.MULTIBUY
     assert offer.quantity == 2
@@ -231,7 +233,7 @@ def test_member_multibuy_is_never_flattened_to_unit_price() -> None:
 
 def test_single_member_price_remains_conditional() -> None:
     source = _parse("member_price.html", kind="rendered_offers_page").products[0]
-    assert source.sale_price == Decimal("59.57")
+    assert source.sale_price is None and source.regular_price is None
     assert source.member_price == 39
     assert source.offers[0].type == PromotionType.MEMBER_PRICE
     assert source.offers[0].member_only is True

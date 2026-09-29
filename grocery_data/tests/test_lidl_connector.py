@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime
 from decimal import Decimal
 from pathlib import Path
 
@@ -66,6 +67,7 @@ def _offer_raw(name: str = "offer_samples.json") -> RawBatch:
                 chain=Chain.LIDL,
                 store_external_id=LidlClient.public_offer_context_id,
                 kind="offer_page",
+                fetched_at=datetime(2026, 8, 20, 12, tzinfo=UTC),
                 method="GET",
                 url="https://www.lidl.se/q/api/search",
                 query={"offset": "0"},
@@ -298,7 +300,8 @@ def test_real_offer_fixture_preserves_price_quantity_and_promotion_semantics() -
 
     weight = by_id["11029717"]
     assert weight.sale_price == Decimal("24.9")
-    assert weight.regular_price == Decimal("44.9")
+    assert weight.regular_price is None
+    assert weight.source_fields["deleted_price"] == "44.9"
     assert weight.sale_unit == "kg"
     assert weight.package_quantity is None
     assert weight.offers[0].type == PromotionType.PERCENT_DISCOUNT
@@ -310,8 +313,10 @@ def test_real_offer_fixture_preserves_price_quantity_and_promotion_semantics() -
     assert weight_normalized.sale_model == SaleModel.SOLD_BY_WEIGHT
 
     member = by_id["11001090"]
-    assert member.sale_price == member.regular_price == Decimal("32.2")
-    assert member.member_price == Decimal("24.9")
+    assert member.sale_price is None
+    assert member.regular_price is None
+    assert member.member_price is None  # Future campaign remains conditional offer evidence.
+    assert member.offers[0].price == Decimal("24.9")
     assert member.offers[0].type == PromotionType.MEMBER_PRICE
     assert member.offers[0].member_only is True
     assert member.offers[0].source_payload["member_offer_scope"] == "generic_member"

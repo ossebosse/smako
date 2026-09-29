@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import json
 import re
 from datetime import UTC, datetime
@@ -31,7 +32,7 @@ class CoopBrowserOffersTransport:
     headers and network credentials are never inspected or persisted.
     """
 
-    transport_version = "coop-browser-offers-v2"
+    transport_version = "coop-browser-offers-v3"
 
     def __init__(self, *, navigation_timeout_ms: int = 30_000) -> None:
         self.navigation_timeout_ms = navigation_timeout_ms
@@ -48,6 +49,13 @@ class CoopBrowserOffersTransport:
             browser = await playwright.chromium.launch(headless=True)
             try:
                 page = await browser.new_page()
+                # Observe the SAME public response used by this page. Never copy
+                # credentials, request headers, runtime state or online prices.
+                from .structured_offers import capture_public_response, confirmed_empty_response
+                captures: list[dict] = []
+                tasks: list = []
+                page.on("response", lambda response: tasks.append(asyncio.create_task(
+                    capture_public_response(response, store, captures))))
                 response = await page.goto(
                     url,
                     wait_until="domcontentloaded",
@@ -78,7 +86,9 @@ class CoopBrowserOffersTransport:
                         raise CoopAccessChallenge(
                             "Coop public page displayed an access challenge"
                         ) from exc
-                    raise RuntimeError("Coop public offer page rendered no product cards") from exc
+                    await asyncio.gather(*tasks)
+                    if not confirmed_empty_response(captures, store):
+                        raise RuntimeError("Coop public offer page rendered no product cards") from exc
                 visible = await page.locator("body").inner_text()
                 if _CHALLENGE.search(visible):
                     raise CoopAccessChallenge("Coop public page displayed an access challenge")
@@ -93,10 +103,12 @@ class CoopBrowserOffersTransport:
                     selector,
                     declared_total=declared_total,
                 )
+                await asyncio.gather(*tasks)
                 payload = self._sanitized_payload(
                     cards,
                     declared_total=declared_total,
                     store=store,
+                    structured_responses=captures,
                 )
                 return RawFetch(
                     chain=Chain.COOP,
@@ -119,6 +131,7 @@ class CoopBrowserOffersTransport:
         *,
         declared_total: int | None,
         store: SourceStore,
+        structured_responses: list[dict] | None = None,
     ) -> bytes:
         safe_cards: list[dict[str, str | None]] = []
         for card in cards:
@@ -127,8 +140,10 @@ class CoopBrowserOffersTransport:
             if not aria_label:
                 continue
             safe_href = href if href.startswith("/handla/varor/") else None
-            safe_cards.append({"href": safe_href, "aria_label": aria_label})
-        if not safe_cards:
+            safe_cards.append({"href": safe_href, "aria_label": aria_label,
+                               "visible_text": str(card.get("visibleText") or "")})
+        from .structured_offers import confirmed_empty_response
+        if not safe_cards and not confirmed_empty_response(structured_responses, store):
             raise RuntimeError("Coop public offer page yielded no safe offer cards")
         if declared_total is not None and len(safe_cards) != declared_total:
             raise RuntimeError(
@@ -146,6 +161,10 @@ class CoopBrowserOffersTransport:
             "capture_evidence": "declared_total" if declared_total is not None else "dom_stable",
             "cards": safe_cards,
         }
+        if structured_responses:
+            if len(structured_responses) != 1:
+                raise RuntimeError("Coop public page exposed ambiguous structured responses")
+            envelope["structured_offers"] = structured_responses[0]
         return json.dumps(envelope, ensure_ascii=False, separators=(",", ":")).encode()
 
     @staticmethod
@@ -189,12 +208,13 @@ class CoopBrowserOffersTransport:
                     /pris|kronor|öre/i.test(element.getAttribute('aria-label') || '')
                 ).map(element => ({
                     href: element.getAttribute('href'),
-                    ariaLabel: element.getAttribute('aria-label')
+                    ariaLabel: element.getAttribute('aria-label'),
+                    visibleText: element.closest('article').innerText
                 }))"""
             )
             if declared_total is not None and len(cards) > declared_total:
                 raise RuntimeError("Coop public offer page exceeded its declared offer total")
-            if cards and cards == previous:
+            if cards == previous:
                 stable_observations += 1
             else:
                 stable_observations = 0

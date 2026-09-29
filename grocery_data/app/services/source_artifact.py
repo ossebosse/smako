@@ -37,7 +37,7 @@ from grocery_data.app.services.raw_storage import sanitize_json_payload
 SCHEMA = "smako-source-snapshot-v1"
 APPROVED_WILLYS_CONTEXTS = ("2176", "2354")
 MAX_BYTES = 256 * 1024 * 1024
-MAX_DOCUMENTS = 3000
+MAX_DOCUMENTS = 6000
 HASH = re.compile(r"^[0-9a-f]{64}$")
 
 
@@ -71,6 +71,7 @@ class SourceManifest(BaseModel):
         default=(), max_length=4
     )
     source_scope: SourceScopeDescriptor
+    municipality_boundary: dict[str, Any] | None = None
     collection_started_at: datetime
     collection_finished_at: datetime
     observed_from: datetime
@@ -105,18 +106,42 @@ def _aware(value: datetime) -> datetime:
     return value.astimezone(UTC)
 
 
-def _willys_completion(documents: tuple[RawFetch, ...]) -> dict[str, CatalogCompletion]:
+def _source_stores(documents, area, boundary):
+    raw = RawBatch(chain=Chain.WILLYS, documents=documents)
+    refs = ["artifact:stores"] * len(documents)
+    if area.mode == "municipality":
+        from grocery_data.app.connectors.willys.municipality_inventory import build_inventory
+        from grocery_data.app.domain import SourceStore
+
+        inventory = build_inventory(area, raw, refs, boundary)
+        return [SourceStore.model_validate(row["store"]) for row in inventory["stores"]
+                if row["collection_selected"]]
+    if boundary is not None:
+        raise SourceArtifactError("municipal evidence on legacy locality contract")
+    return WillysParser().parse_stores(raw, refs, area)
+
+
+def _verify_scope(manifest):
+    area = manifest.source_scope.geographic_area
+    if area.mode == "municipality":
+        if (manifest.source_scope.scope_key not in {area.city.casefold(), area.area_key.casefold()} or not manifest.municipality_boundary
+                or manifest.source_policy_version != "willys-municipality-policy-v1"
+                or not manifest.context_ids or tuple(sorted(set(manifest.context_ids))) != manifest.context_ids):
+            raise SourceArtifactError("invalid municipal source contract")
+    elif (manifest.source_scope.scope_key != "lund" or area.city.casefold() != "lund"
+          or manifest.context_ids != APPROVED_WILLYS_CONTEXTS or manifest.municipality_boundary is not None
+          or manifest.source_policy_version != "willys-source-policy-v1"):
+        raise SourceArtifactError("unapproved legacy geographic source scope")
+
+
+def _willys_completion(documents: tuple[RawFetch, ...], *, area=None, boundary=None, contexts=APPROVED_WILLYS_CONTEXTS) -> dict[str, CatalogCompletion]:
     """Derive completion from tree/pages; never trust a producer PASS flag."""
-    allowed = APPROVED_WILLYS_CONTEXTS
+    allowed = contexts
+    parser = WillysParser()
     discovery = [d for d in documents if d.kind == "stores"]
     if len(discovery) != 1 or discovery[0].store_external_id is not None:
         raise SourceArtifactError("one original store discovery is required")
-    parser = WillysParser()
-    stores = parser.parse_stores(
-        RawBatch(chain=Chain.WILLYS, documents=tuple(discovery)),
-        ["artifact:stores"],
-        GeographicArea(city="Lund"),
-    )
+    stores = _source_stores(tuple(discovery), area or GeographicArea(city="Lund"), boundary)
     chosen = [s for s in stores if s.external_id in allowed]
     if {s.external_id for s in chosen} != set(allowed):
         raise SourceArtifactError("approved contexts are absent from source discovery")
@@ -224,31 +249,23 @@ def verify_source_artifact(path: Path, *, now: datetime | None = None) -> Verifi
             # own independently reviewed qualifier before it can be imported.
             if manifest.source is not Chain.WILLYS:
                 raise SourceArtifactError("source has no approved artifact qualifier")
-            if manifest.context_ids != APPROVED_WILLYS_CONTEXTS:
-                raise SourceArtifactError("source context allowlist mismatch")
+            _verify_scope(manifest)
             if (
                 manifest.collector_version != WillysConnector.connector_version
                 or manifest.parser_version != WillysConnector.parser_version
             ):
                 raise SourceArtifactError("unqualified collector/parser version")
-            if manifest.source_policy_version != "willys-source-policy-v1":
-                raise SourceArtifactError("unsupported source policy version")
             if manifest.normalizer_version != ProductNormalizer.normalizer_version:
                 raise SourceArtifactError("unqualified normalizer version")
-            if (
-                manifest.source_scope.scope_key != "lund"
-                or manifest.source_scope.geographic_area.city.casefold() != "lund"
-            ):
-                raise SourceArtifactError("unapproved geographic source scope")
             policy = manifest.source_policy
             if (
                 policy.source_policy.value != "allow"
-                or policy.store_allowlist != APPROVED_WILLYS_CONTEXTS
+                or policy.store_allowlist != manifest.context_ids
                 or policy.max_concurrency != 1
                 or policy.requests_per_second != 1
             ):
                 raise SourceArtifactError("unapproved source collection policy")
-            if not len(manifest.payloads) + 2 <= manifest.request_count <= 2000:
+            if not len(manifest.payloads) + 2 <= manifest.request_count <= (min(5900, 1000 * len(manifest.context_ids) + 100) if manifest.municipality_boundary else 2000):
                 raise SourceArtifactError("request count does not reconcile original evidence")
             expected_names = {"manifest.json", "manifest.sha256"} | {
                 p.path for p in manifest.payloads
@@ -303,7 +320,7 @@ def verify_source_artifact(path: Path, *, now: datetime | None = None) -> Verifi
                 if d.kind in {"stores", "store_context", "category_tree"} and d.query:
                     raise SourceArtifactError("unexpected public request parameters")
                 if (
-                    d.store_external_id not in (*APPROVED_WILLYS_CONTEXTS, None)
+                    d.store_external_id not in (*manifest.context_ids, None)
                     or d.connector_version != manifest.collector_version
                 ):
                     raise SourceArtifactError("raw source context/version mismatch")
@@ -327,7 +344,12 @@ def verify_source_artifact(path: Path, *, now: datetime | None = None) -> Verifi
         _aware(d.fetched_at) for d in documents
     ):
         raise SourceArtifactError("observation interval does not match raw evidence")
-    completion = _willys_completion(tuple(documents))
+    area = manifest.source_scope.geographic_area
+    if area.mode == "municipality":
+        chosen = _source_stores(tuple(d for d in documents if d.kind == "stores"), area, manifest.municipality_boundary)
+        if {s.external_id for s in chosen} != set(manifest.context_ids):
+            raise SourceArtifactError("municipal contexts differ from independently verified inventory")
+    completion = _willys_completion(tuple(documents), area=area, boundary=manifest.municipality_boundary, contexts=manifest.context_ids)
     if manifest.catalog_completion != completion:
         raise SourceArtifactError("declared completion differs from independent traversal")
     _verify_product_counts(tuple(documents), manifest)
@@ -347,11 +369,7 @@ def _verify_product_counts(documents: tuple[RawFetch, ...], manifest: SourceMani
 
     discovery = tuple(d for d in documents if d.kind == "stores")
     parser = WillysParser()
-    stores = parser.parse_stores(
-        RawBatch(chain=Chain.WILLYS, documents=discovery),
-        ["artifact:stores"],
-        GeographicArea(city="Lund"),
-    )
+    stores = _source_stores(discovery, manifest.source_scope.geographic_area, manifest.municipality_boundary)
     processor = CatalogProcessor()
     parts = []
     products = []
@@ -362,7 +380,7 @@ def _verify_product_counts(documents: tuple[RawFetch, ...], manifest: SourceMani
         parse_catalog = parser.parse_catalog
 
     for store in stores:
-        if store.external_id not in APPROVED_WILLYS_CONTEXTS:
+        if store.external_id not in manifest.context_ids:
             continue
         scoped = tuple(d for d in documents if d.store_external_id == store.external_id)
         batch = RawBatch(chain=Chain.WILLYS, documents=scoped)
@@ -455,14 +473,40 @@ async def import_source_candidate(
     from grocery_data.app.services.collector import GroceryCollector
     from grocery_data.app.services.snapshot_manager import SnapshotManager
     from grocery_data.app.storage import session_scope
-    from grocery_data.app.storage.models import CatalogSnapshotModel, ProductModel
+    from grocery_data.app.storage.models import CatalogSnapshotModel, ProductModel, RawSnapshotModel
 
     verified = verify_source_artifact(path)
+    from grocery_data.app.services.willys_municipal_scope import require_import_scope
+    require_import_scope(verified.manifest)
     duplicate = None
+    unchanged_requalification = False
+    unchanged_snapshot_id = None
     with session_scope(session_factory) as session:
         for snapshot in session.scalars(
             select(CatalogSnapshotModel).where(CatalogSnapshotModel.chain == "willys")
         ):
+            if (snapshot.is_active
+                    and snapshot.scope_key == verified.manifest.source_scope.geographic_area.city.casefold()
+                    and (snapshot.metrics or {}).get("willys_municipal_inventory")
+                    and verified.manifest.source_scope.geographic_area.mode != "municipality"):
+                raise SourceArtifactError("legacy relay cannot silently replace a municipal source")
+            if (snapshot.is_active
+                    and snapshot.scope_key == verified.manifest.source_scope.geographic_area.city.casefold()
+                    and verified.manifest.source_scope.geographic_area.mode == "municipality"
+                    and not (snapshot.metrics or {}).get("willys_municipal_inventory")
+                    and snapshot.parser_version == verified.manifest.parser_version
+                    and snapshot.normalizer_version == verified.manifest.normalizer_version):
+                # Scope-only requalification is allowed only for the EXACT
+                # existing raw observations, not equal prices or fuzzy products.
+                old_evidence = set(session.execute(select(
+                    RawSnapshotModel.store_external_id, RawSnapshotModel.kind,
+                    RawSnapshotModel.payload_hash, RawSnapshotModel.fetched_at,
+                ).where(RawSnapshotModel.catalog_snapshot_id == snapshot.id)))
+                incoming_evidence = {(d.store_external_id, d.kind, sha256(raw_store._safe_payload(d)).hexdigest(), d.fetched_at)
+                                     for d in verified.documents}
+                unchanged_requalification = bool(old_evidence) and old_evidence == incoming_evidence
+                if unchanged_requalification:
+                    unchanged_snapshot_id = snapshot.id
             if (snapshot.metrics or {}).get("source_artifact", {}).get(
                 "sha256"
             ) == verified.artifact_sha256:
@@ -481,28 +525,32 @@ async def import_source_candidate(
         active_observations = session.execute(
             select(
                 ProductModel.store_external_id,
+                CatalogSnapshotModel.id,
                 func.min(ProductModel.observed_at),
                 func.max(ProductModel.observed_at),
             )
             .join(CatalogSnapshotModel, ProductModel.catalog_snapshot_id == CatalogSnapshotModel.id)
             .where(CatalogSnapshotModel.chain == "willys", CatalogSnapshotModel.is_active.is_(True))
-            .group_by(ProductModel.store_external_id)
+            .group_by(ProductModel.store_external_id, CatalogSnapshotModel.id)
         )
-        for context, oldest, newest in active_observations:
+        for context, active_snapshot_id, oldest, newest in active_observations:
             observations = [
                 d.fetched_at
                 for d in verified.documents
                 if d.store_external_id == context and d.kind == "catalog_page"
             ]
-            if observations and (min(observations) < oldest or max(observations) <= newest):
+            if (observations and (min(observations) < oldest or max(observations) <= newest)
+                    and active_snapshot_id != unchanged_snapshot_id):
                 raise SourceArtifactError("artifact would replace newer active source observations")
     if duplicate is not None:
         return duplicate
     connector = WillysConnector(
-        client=OfflineWillysClient(verified), allowed_store_ids=APPROVED_WILLYS_CONTEXTS
+        client=OfflineWillysClient(verified), allowed_store_ids=verified.manifest.context_ids,
+        municipality_boundary=verified.manifest.municipality_boundary
     )
     result = await GroceryCollector(session_factory, raw_store).collect_area(
-        connector, GeographicArea(city="Lund"), auto_promote=False
+        connector, verified.manifest.source_scope.geographic_area, auto_promote=False,
+        scope_key=verified.manifest.source_scope.geographic_area.city.casefold()
     )
     manager = SnapshotManager(session_factory)
     manager.validate(result.snapshot_id)
@@ -525,6 +573,8 @@ async def import_source_candidate(
         snapshot = session.get(CatalogSnapshotModel, result.snapshot_id)
         snapshot.metrics = {
             **snapshot.metrics,
+            "requalification_without_new_price_observation": unchanged_requalification,
+            **({"willys_municipal_inventory": connector.municipality_inventory} if connector.municipality_inventory else {}),
             "source_artifact": {
                 "schema_version": SCHEMA,
                 "sha256": verified.artifact_sha256,
@@ -556,6 +606,7 @@ def export_source_artifact(
     collection_started_at: datetime | None = None,
     collection_finished_at: datetime | None = None,
     original_request_count: int | None = None,
+    municipality_boundary: dict | None = None,
 ) -> Path:
     """Package an existing normal HEALTH_CHECKED candidate, never a partial run."""
     from sqlalchemy import func, select
@@ -613,7 +664,9 @@ def export_source_artifact(
         )
         for row in rows
     )
-    completion = _willys_completion(docs)
+    scope = SourceScopeDescriptor.model_validate(snapshot.metrics["source_scope"])
+    contexts = tuple(sorted(s.external_id for s in _source_stores(tuple(d for d in docs if d.kind == "stores"), scope.geographic_area, municipality_boundary))) if municipality_boundary else APPROVED_WILLYS_CONTEXTS
+    completion = _willys_completion(docs, area=scope.geographic_area, boundary=municipality_boundary, contexts=contexts)
     entries = tuple(
         PayloadEntry(
             metadata=d.model_dump(mode="json", exclude={"payload", "payload_hash"}),
@@ -624,7 +677,8 @@ def export_source_artifact(
         for i, d in enumerate(docs)
     )
     manifest = SourceManifest(
-        context_ids=APPROVED_WILLYS_CONTEXTS,
+        context_ids=contexts,
+        municipality_boundary=municipality_boundary,
         source_snapshot_id=snapshot_id,
         source_scope=snapshot.metrics["source_scope"],
         collection_started_at=start,
@@ -634,7 +688,7 @@ def export_source_artifact(
         collector_version=snapshot.connector_version,
         parser_version=snapshot.parser_version,
         normalizer_version=snapshot.normalizer_version,
-        source_policy_version="willys-source-policy-v1",
+        source_policy_version="willys-municipality-policy-v1" if municipality_boundary else "willys-source-policy-v1",
         source_policy=snapshot.metrics["source_policy_audit"],
         row_count=row_count,
         product_count=product_count,

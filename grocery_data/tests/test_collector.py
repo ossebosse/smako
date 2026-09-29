@@ -402,6 +402,8 @@ async def test_explicit_context_scope_does_not_replace_city_identity(tmp_path: P
             "scope_key": "lund:willys:2354",
             "geographic_area": {
                 "city": "Lund",
+                "mode": "locality",
+                "municipality_code": None,
                 "postal_codes": [],
                 "latitude": None,
                 "longitude": None,

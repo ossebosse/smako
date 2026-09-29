@@ -24,18 +24,22 @@ class PlanningDiagnostics:
         self.singleton_passed = 0
         self.missing_needs = {}
         self.estimate_alternatives = []
+        self.nutrition_searches = []
+        self.omitted_nutrition_searches = 0
 
     def reject(self, stage, recipe, reason):
         self.filters[stage] += 1
         self.details.append({"stage": stage, "recipe": recipe.name, "reason": reason})
 
     def branch(self, depth, stage):
-        self.branches.setdefault(depth, Counter())[stage] += 1
+        attempt = self.search[-1].get("attempt", 1) if self.search else 1
+        self.branches.setdefault((attempt, depth), Counter())[stage] += 1
 
     def snapshot(self):
         raw = sum(p["raw"] for p in self.pools)
         return {
             "version": "candidate-and-branch-counts-v1",
+            "product_decisions": self.product_trace.snapshot() if hasattr(self, "product_trace") else None,
             "raw_recipe_pool": raw,
             "pools": self.pools,
             "candidate_rejections": [
@@ -50,7 +54,7 @@ class PlanningDiagnostics:
                 {
                     **row,
                     "rejections": {
-                        key: self.branches.get(row["depth"], {}).get(key, 0) for key in STAGES
+                        key: self.branches.get((row.get("attempt", 1), row["depth"]), {}).get(key, 0) for key in STAGES
                     },
                 }
                 for row in self.search
@@ -58,5 +62,7 @@ class PlanningDiagnostics:
             "candidate_details": self.details,
             "missing_needs": list(self.missing_needs.values()),
             "estimate_alternatives": self.estimate_alternatives,
+            "nutrition_searches": self.nutrition_searches,
+            "omitted_nutrition_searches": self.omitted_nutrition_searches,
             "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet.",
         }

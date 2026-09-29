@@ -17,6 +17,12 @@ def _ingredient(name: str) -> NormalizedIngredient:
     return NormalizedIngredient(canonical_name=name, required_quantity=500, unit="g")
 
 
+def test_salad_cheese_flavour_is_not_a_garlic_bulb():
+    p = _product("synthetic", "Vitost Tärnad Vitlök & persilja", "vitlök",
+                 category="Fetaost & Salladsost")
+    assert not evaluate_product_semantics("vitlök", p).compatible
+
+
 def _product(
     product_id: str,
     name: str,

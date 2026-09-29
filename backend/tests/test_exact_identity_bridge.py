@@ -436,3 +436,19 @@ def test_unknown_or_user_specific_offer_never_enters_shared_bridge() -> None:
     assert metrics["accepted"] == 0
     assert metrics["unknown_scope_excluded"] == 1
     assert metrics["user_specific_excluded"] == 1
+
+
+def test_new_ica_channel_excludes_legacy_campaign_copy_without_removing_targets(tmp_path,monkeypatch):
+    import sqlite3
+    from app.providers import exact_identity_bridge as module
+    database=tmp_path/'evidence.sqlite'
+    with sqlite3.connect(database) as c:c.execute('CREATE TABLE fixture(id)')
+    target=_identity('external:ica:1088004:product-1')
+    row=BridgeOffer(identity=_identity('legacy-offer'),scope=SharedOfferScope.GENERIC_MEMBER,
+        offer=_offer(),valid_from=date(2026,8,25),valid_to=date(2026,9,1),is_multibuy=False)
+    monkeypatch.setattr(module,'_database_targets',lambda _: [target])
+    monkeypatch.setattr(module,'_database_member_offers',lambda _: [row])
+    legacy=module.load_exact_identity_bridge(database,on_date=date(2026,8,31))
+    assert legacy.report()['member_offer_reconciliation']['ica']['discovered']==1
+    current=module.load_exact_identity_bridge(database,on_date=date(2026,8,31),exclude_offer_chains=frozenset({Chain.ICA}))
+    assert current.report()['targets']==1 and 'ica' not in current.report()['member_offer_reconciliation']

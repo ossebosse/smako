@@ -3,6 +3,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from grocery_data.app.domain.price_context_evidence import PriceContextEvidence
+
 
 class SourceProvenance(BaseModel):
     """Consumer-safe lineage for one provider observation.
@@ -28,9 +30,24 @@ class SourceProvenance(BaseModel):
     store_name: str | None = Field(default=None, min_length=1)
     provider_store_id: str | None = Field(default=None, min_length=1)
     price_context: str | None = Field(default=None, min_length=1)
+    price_context_evidence: PriceContextEvidence | None = Field(
+        default=None, exclude_if=lambda value: value is None
+    )
     coverage: str | None = Field(default=None, min_length=1)
     semantic_confidence: str | None = Field(default=None, min_length=1)
     quantity_confidence: str | None = Field(default=None, min_length=1)
+    # Retailer namespace, never an inferred GTIN or a cross-channel price join.
+    retailer_product_id: str | None = Field(default=None, exclude_if=lambda value: value is None)
+    retailer_id_namespace: str | None = Field(default=None, exclude_if=lambda value: value is None)
+    retailer_identity_source_sha256: str | None = Field(
+        default=None, pattern=r"^[0-9a-f]{64}$", exclude_if=lambda value: value is None
+    )
+    # Explicit retailer purchase limit, separate from discounted promotion caps.
+    maximum_purchase_units: int | None = Field(
+        default=None, ge=1, exclude_if=lambda value: value is None
+    )
+    official_product_url: str | None = Field(default=None, exclude_if=lambda value: value is None)
+    quantity_limit_source_url: str | None = Field(default=None, exclude_if=lambda value: value is None)
     # Omit absent transport metadata to preserve existing immutable product hashes.
     collection_location: Literal["LOCAL_RELAY"] | None = Field(
         default=None, exclude_if=lambda value: value is None

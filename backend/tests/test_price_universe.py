@@ -372,6 +372,31 @@ def test_disabled_member_checkout_price_rejected_but_public_equal_price_is_safe(
     )
     assert safe.products[0].effective_price == 15
 
+    same_as_ordinary = leaked.model_copy(update={'price':15})
+    safe = _universe([same_as_ordinary], key=_key('snapshot-1',memberships={'ica':False}))
+    assert safe.products[0].price == 15
+
+
+def test_retained_public_catalog_price_equal_to_member_price_does_not_stop_build(monkeypatch):
+    from pathlib import Path
+    product = Product.model_validate_json((Path(__file__).parent/'fixtures/public-member-equal-20260919.json').read_bytes())
+    # Replay the retained campaign on its original observation day. The wall
+    # clock advancing must neither age this regression out nor refresh data.
+    from app.models import product as product_module
+    observed = product.source_provenance.source_observed_at
+    class ReplayClock(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return observed.astimezone(tz) if tz else observed.replace(tzinfo=None)
+    monkeypatch.setattr(product_module, 'datetime', ReplayClock)
+    key = _key(product.source_provenance.source_snapshot_id, memberships={'willys':False})
+    assert product.price == product.sale_price == product.offers[0].price == 19.9
+    result = PriceUniverseBuilder().build(key,[product],built_at=product.source_provenance.source_observed_at)
+    assert result.products[0].price == 19.9
+    with pytest.raises(IneligibleMemberPriceError):
+        PriceUniverseBuilder().build(key,[product.model_copy(update={'price':25})],
+            built_at=product.source_provenance.source_observed_at)
+
 
 def test_atomic_manager_keeps_active_universe_after_broken_build_or_validation() -> None:
     manager = PriceUniverseManager()
