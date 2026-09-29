@@ -67,3 +67,17 @@ async def test_database_failure_keeps_inbox_bytes_queued(tmp_path, monkeypatch):
     assert reports[0]["causes"][-1]["reason"] == "no such table: missing_release_table"
     assert path.read_bytes() == payload
     assert not (tmp_path / "rejected").exists()
+
+
+def test_receiver_sqlite_cause_survives_ssh_boundary(monkeypatch):
+    def failed(command, **kwargs):
+        raise subprocess.CalledProcessError(1, command, output=json.dumps({
+            "status":"failed", "causes":[{"error_type":"OperationalError",
+            "reason":"database is locked", "sqlite_errorname":"SQLITE_BUSY"}]}),
+            stderr="private transport diagnostics must not be copied")
+    monkeypatch.setattr(subprocess, "run", failed)
+    with pytest.raises(subprocess.CalledProcessError) as failure:
+        remote_activate("a"*64)
+    details=failure_details(failure.value)
+    assert details[0]["receiver_causes"][0]["reason"] == "database is locked"
+    assert "private transport" not in json.dumps(details)

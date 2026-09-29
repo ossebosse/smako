@@ -23,12 +23,27 @@ from grocery_data.app.services.source_artifact import verify_source_artifact
 from grocery_data.relay_config import RelayTransport, load_transport
 
 
+def _receiver_command(command, *, check, **kwargs):
+    try:
+        return subprocess.run(command, check=check, **kwargs)
+    except subprocess.CalledProcessError as exc:
+        # The receiver CLI emits a structured, parameter-free diagnostic chain.
+        # Keep it through the SSH boundary; never log arbitrary stderr/stdout.
+        try:
+            result = json.loads((exc.stdout or "").strip().splitlines()[-1])
+            if result.get("status") == "failed" and isinstance(result.get("causes"), list):
+                exc.receiver_causes = result["causes"]
+        except (ValueError, IndexError, AttributeError):
+            pass
+        raise
+
+
 def remote_activate(digest: str, transport: RelayTransport | None = None):
     transport = transport or RelayTransport()
     import re
     if not re.fullmatch(r"[0-9a-f]{64}", digest):
         raise ValueError("Invalid artifact digest")
-    result = subprocess.run(
+    result = _receiver_command(
         [
             "ssh",
             "-oBatchMode=yes",
