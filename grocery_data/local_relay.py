@@ -20,9 +20,14 @@ from grocery_data.app.services.manual_refresh_operations import (
     RefreshRunLock,
 )
 from grocery_data.app.services.source_artifact import verify_source_artifact
+from grocery_data.relay_config import RelayTransport, load_transport
 
 
-def remote_activate(digest: str):
+def remote_activate(digest: str, transport: RelayTransport | None = None):
+    transport = transport or RelayTransport()
+    import re
+    if not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise ValueError("Invalid artifact digest")
     result = subprocess.run(
         [
             "ssh",
@@ -30,17 +35,17 @@ def remote_activate(digest: str):
             "-oConnectTimeout=15",
             "-oServerAliveInterval=30",
             "-oServerAliveCountMax=3",
-            "smako",
+            transport.ssh_host,
             "docker",
             "exec",
             "--user",
             "10001:10001",
-            "smako-scheduler-1",
+            transport.container,
             "python",
             "-m",
             "grocery_data.source_cli",
             "import",
-            f"/srv/app/var/raw_snapshots/source-inbox/willys/{digest}.smako-source",
+            f"{transport.inbox}/{digest}.smako-source",
         ],
         capture_output=True,
         text=True,
@@ -214,7 +219,8 @@ def run(
         log("already_running")
         return 0
     except Exception as exc:  # noqa: BLE001 - redact at the operator boundary
-        log("task_failed", error_type=type(exc).__name__)
+        from grocery_data.app.services.failure_diagnostics import failure_details
+        log("task_failed", error_type=type(exc).__name__, causes=failure_details(exc))
         return 1
     finally:
         log("task_end", seconds=round(monotonic() - started, 3))
@@ -223,7 +229,13 @@ def run(
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", type=Path, required=True)
-    return run(parser.parse_args().workspace)
+    parser.add_argument("--config", type=Path)
+    args = parser.parse_args()
+    transport = load_transport(args.config)
+    return run(args.workspace,
+        push=lambda a: source_cli.push(SimpleNamespace(
+            artifact=a.artifact, host=transport.ssh_host, transport=transport)),
+        activate=lambda digest: remote_activate(digest, transport))
 
 
 if __name__ == "__main__":

@@ -31,6 +31,7 @@ from grocery_data.app.services.source_artifact import (
     verify_source_artifact,
 )
 from grocery_data.app.storage import create_database_engine, create_schema, create_session_factory
+from grocery_data.relay_config import RelayTransport
 
 
 def _json(value):
@@ -166,6 +167,7 @@ async def collect(args):
 
 
 def push(args):
+    transport = getattr(args, "transport", None) or RelayTransport(ssh_host=args.host)
     verified = verify_source_artifact(args.artifact)
     digest = verified.artifact_sha256
     encoded = base64.b64encode(args.artifact.read_bytes()).decode("ascii")
@@ -180,8 +182,8 @@ def require(condition, message):
  if not condition: raise ValueError(message)
 payload=base64.b64decode({encoded!r},validate=True)
 require(sha256(payload).hexdigest()=={digest!r}, 'transport hash mismatch')
-parent=Path('/srv/app/var/raw_snapshots/source-inbox')
-root=parent/'willys'
+root=Path({transport.inbox!r})
+parent=root.parent
 for directory in (parent,root):
  require(not directory.is_symlink(), 'inbox cannot be a symlink')
  directory.mkdir(mode=0o700,exist_ok=True)
@@ -210,13 +212,13 @@ print('uploaded_to_inbox_only')
             "ssh",
             "-oBatchMode=yes",
             "-oConnectTimeout=15",
-            args.host,
+            transport.ssh_host,
             "docker",
             "exec",
             "-i",
             "--user",
             "10001:10001",
-            "smako-scheduler-1",
+            transport.container,
             "python",
             "-",
         ],
@@ -229,7 +231,7 @@ print('uploaded_to_inbox_only')
     return {
         "status": "uploaded",
         "sha256": digest,
-        "inbox_artifact": f"/srv/smako/data/raw_snapshots/source-inbox/willys/{digest}.smako-source",
+        "inbox_artifact": f"{transport.inbox}/{digest}.smako-source",
         "active_data_modified": False,
     }
 
@@ -328,7 +330,9 @@ def main():
             result = asyncio.run(import_and_activate(args))
     except Exception as exc:  # noqa: BLE001 - redact at the operator boundary
         # Never print arbitrary request/credential-bearing exception bodies.
-        _json({"status": "failed", "error_type": type(exc).__name__})
+        from grocery_data.app.services.failure_diagnostics import failure_details
+        _json({"status": "failed", "error_type": type(exc).__name__,
+               "causes": failure_details(exc)})
         return 1
     _json(result)
     return 0

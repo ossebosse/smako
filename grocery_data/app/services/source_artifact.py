@@ -708,6 +708,11 @@ async def import_source_inbox(
     and activates its PriceUniverse afterwards. Bad arrivals do not block other
     retailers, and processed bytes remain in the inbox archive for audit.
     """
+    import sqlite3
+
+    from sqlalchemy.exc import SQLAlchemyError
+
+    from grocery_data.app.services.failure_diagnostics import failure_details
     from grocery_data.app.services.snapshot_manager import SnapshotManager
 
     if not inbox.is_dir():
@@ -733,12 +738,19 @@ async def import_source_inbox(
                 manager.promote(snapshot.id)
             reports.append(result)
             bucket = "processed"
+        except (SQLAlchemyError, sqlite3.Error, OSError) as exc:
+            # An infrastructure failure is not invalid source evidence. Keep
+            # the exact inbox bytes queued for retry and expose the DB cause.
+            reports.append({"status": "deferred", "artifact_sha256": path.stem,
+                            "error_type": type(exc).__name__, "causes": failure_details(exc)})
+            continue
         except (ValueError, RuntimeError) as exc:
             reports.append(
                 {
                     "status": "rejected",
                     "artifact_sha256": path.stem,
                     "error_type": type(exc).__name__,
+                    "causes": failure_details(exc),
                 }
             )
         archive = root / bucket
