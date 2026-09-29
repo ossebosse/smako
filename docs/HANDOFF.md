@@ -1,8 +1,13 @@
 # Aktuell arbetsrot: lokal konsolidering 2026-09-29
 
-Permanent rot: **D:\Projects\Smako**. Arbetsgren: chore/consolidate-smako;
-avsedd huvudgren: master. Denna mellanliggande handoff förbereder verifiering
-av en ren klon; slutresultat dokumenteras innan lokal konsolideringstagg skapas.
+Permanent rot: **D:\Projects\Smako**. Huvudgren: `master`.
+Integrationsgren: `chore/consolidate-smako`. Lokal tagg:
+`consolidation-20260929-local` (ingen produktionsrelease).
+
+Konsolideringsverifiering: **672 godkända, fem befintliga fel, inga nya fel**
+bland 677 unika testfall; samma resultat i ren klon. Planner/audit/sparning/
+återläsning matchar basen. Frontend 30/30, Ruff, compileall och pip check PASS.
+Dockerbygge och browser-E2E är inte körda. Alla 16 historiska Lidl-prov passerar.
 
 Den samlade koden är arbetskopians smako-legacy-purchase-terms:20260929-v5,
 inklusive dess tidigare ocommittade kommunflöden, PurchaseTerms, exakta/uppskattade/

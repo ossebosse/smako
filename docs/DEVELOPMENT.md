@@ -71,6 +71,12 @@ pnpm --dir frontend/barcode-scanner check
 pnpm --dir frontend/barcode-scanner build
 ```
 
+När Docker redan är tillgängligt kan rotens fristående Dockerfile byggas lokalt
+med `docker build -t smako:local .`. Detta kommando har inte verifierats här
+eftersom Docker-daemon saknades. De historiska kandidat-Dockerfilerna i `deploy`
+kräver dessutom uttryckligt `BROWSER_BASE`/`release-wheels`; deras gamla image-
+kedja ersätter inte miljöåterskapandet ovan. `.local` ingår inte i byggkontexten.
+
 För hela befintliga sviten, utelämna `@files`. Kända basfel och prov som inte körts
 redovisas i `CONSOLIDATION.md`; ingen grön totalsvit påstås. Testdatabaser använder
 TEMP/TMP. Under konsolideringen användes en separat temporär katalog på C: för
@@ -84,6 +90,8 @@ $env:PYTHONPATH='backend;.'
 $env:PYTHON_DOTENV_DISABLED='1'
 $env:APP_ENV='development'
 $env:PRICE_PROVIDER='mock'
+$env:OPENAI_API_KEY=''
+$env:FIELD_MODE_ENABLED='false'
 $env:PLAN_STORE_PATH='.local/runtime/plans.sqlite3'
 $env:GROCERY_DATABASE_URL='sqlite+pysqlite:///.local/runtime/grocery.sqlite'
 $env:GROCERY_RAW_SNAPSHOT_ROOT='.local/runtime/raw_snapshots'

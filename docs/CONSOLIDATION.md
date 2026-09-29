@@ -126,7 +126,7 @@ Aktiv rapportkod och dokumentation bevaras i Git; äldre kodsnapshots förblir
 arkivunderlag. Stora JSON/PDF-/databas-/råfilberoenden har separata hashmanifest
 och ett kontrollerat återställningsverktyg. JSON ignoreras inte generellt.
 Lidl-fixturerna har uttryckliga ignore-undantag. `.gitattributes` bevarar bytes
-i historiska rapporter och hashkontrollerade fixtures även efter kloning.
+i de återfunna Lidl-bevisen och hashkontrollerade fixtures även efter kloning.
 
 Mönstersökning av 1 694 historiska Git-blobbar och 4 015 arbetskopiefiler gav
 inga högkonfidensfynd av token-/nyckelvärden. Detta är ingen garanti om all
@@ -157,6 +157,12 @@ produktionstillstånd är **inte aktiverad enligt dess lokala handoff**; aktuell
 serverstatus har inte undersökts eller ändrats.
 
 ## Verifiering
+
+Slutlig konsolideringsverifiering: 672 godkända och fem befintliga fel bland
+677 unika testfall, med identiskt utfall i ren klon och inga nytillkomna fel.
+Alla 16 återställda Lidl-prov passerar. 887 lokala testunderlag har kontrollerad
+återställning. Huvudgrenen etableras genom fast-forward; lokal tagg är
+`consolidation-20260929-local`, utan innebörd som produktionsrelease.
 
 Slutresultat och kvarstående basfel redovisas i det separata
 `consolidation/VERIFICATION.md`. Isolerade återspel använder historiska klockor,
