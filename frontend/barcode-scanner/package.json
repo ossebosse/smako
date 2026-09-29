@@ -1,0 +1,18 @@
+{
+  "name": "grocery-physical-barcode-scanner",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --format=iife --global-name=GroceryBarcodeScanner --platform=browser --target=safari15,chrome100 --minify --legal-comments=none --outfile=../../grocery_data/app/static/physical-barcode-scanner.js",
+    "test": "node --test test/api-errors.test.cjs test/gtin.test.js test/scanner.test.js",
+    "check": "node --check src/gtin.js && node --check src/scanner.js && node --check src/index.js && node --check ../../grocery_data/app/static/physical-check-api-errors.js && node --check ../../grocery_data/app/static/physical-check.js && node --check ../../grocery_data/app/static/scanner-test.js && node --test test/api-errors.test.cjs test/gtin.test.js test/scanner.test.js"
+  },
+  "dependencies": {
+    "@zxing/browser": "0.2.1",
+    "@zxing/library": "0.23.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}
