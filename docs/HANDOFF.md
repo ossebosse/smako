@@ -1,5 +1,26 @@
 # Aktuell releasekandidat: Lund och repobaserat Willys-relä 2026-09-30
 
+**Senaste fortsättning: driftspärrar, INTE REDO.** Läs först
+[OPERATIONS.md](releases/lund-20260929/OPERATIONS.md) och uppdaterad
+[ACTIVATION.md](releases/lund-20260929/ACTIVATION.md). Runtime/paket är kvar
+på bdc9f7d; denna fortsättning ändrar endast provverktyg och underlag.
+Faktisk produktionsbild `54dde838…` tappar 64/12 planfält och ger 500 för
+`kind=campaign`, även efter omstart med gammalt manifest. Ny bild återläser
+alla tre nya planer identiskt på 44 132-manifestet; samtliga 37 revisionsrader
+bevarade. Originalpolicyn stoppar publicering av den gamla kön genom saknad
+Primat-bas. Det nya Windows-paketets SSH-replay/kvittot/not_due passerar;
+det är inte ett obevakat liveprov. Föreslagen S4U-testuppgift är bara
+förberedd, inte registrerad. Operatören behöver granska och köra
+`scripts/release_verification/prepare_s4u_probe.ps1 -Register` i upphöjd PS7
+under samma konto, med separat godkännande för testregistreringen.
+S4U/Limited/konto ändras inte. Mottagaren `smako-lund-ops-s4u` är provad i
+isolering och lämnad stoppad, utan scheman; kontrollera färskhet före start.
+Aktiva Windows-uppgiftens XML är byteidentisk före/efter. Produktionens
+bild, policy och scheman är oförändrade; ingen push. De tre
+produktionsbesluten är fortfarande separata och ej fattade.
+
+### Ursprungligt releaseunderlag före driftkompletteringen
+
 Arbeta i **D:\Projects\Smako** på `release/lund-relay-20260929`.
 Runtime-källcommit för separat server- och Windows-reläpaket är
 `bdc9f7df417084641d0a712e3dad188dad1ad7d4`; se
@@ -14,8 +35,7 @@ kontexter efter behovsstyrd frivillig insamling, med fem giltiga obligatoriska
 onlinebaser. Äldre mottagare kan inte ta ny kommunartefakt och ny mottagare
 avvisar gammal city-scope-artefakt. Tillfälligt S4U-testjobb kunde inte
 registreras (`Åtkomst nekad`); obevakad kandidatkörning är därför fortfarande
-öppen. **INTE REDO** för skarp aktivering utan de separata besluten och
-återstående kompatibilitets-/driftprov.
+öppen. Statusen ovan ersätter tidigare oprövade återgångsantaganden.
 
 ---
 

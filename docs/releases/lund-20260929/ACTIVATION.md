@@ -6,6 +6,12 @@ beslut krävs: (1) `lund-own-five-base-20260928-v1` som produktionsomfattning,
 dem följer av att ett isolerat test passerar. Fullständigt Malmö-underlag och
 dess baspolicy är ett annat beslut.
 
+**Teknisk status: INTE REDO.** [Kompletterande driftprov](OPERATIONS.md)
+visar blockerad S4U-verifiering, otömd gammal kö på originalpolicyn och
+inkompatibel planläsning i faktisk produktionsbild. Nedanstående är en
+villkorad ordning, inte ett godkänt körschema. Korsversionerna är
+inkompatibla: ett kort samordnat avbrott är obligatoriskt.
+
 ## Utgåva och exakta ändringar
 
 Källcommit för båda driftpaketen är `bdc9f7df417084641d0a712e3dad188dad1ad7d4`.
@@ -34,9 +40,11 @@ Det föreslagna värdet för `PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS` är exakt
 Nuvarande Windows-uppgift `Smako Willys Local Relay` kör befintlig PS7 med
 `ossia`/S4U/Limited, dagligen 01:30, `IgnoreNew`, PT3H,
 `StartWhenAvailable` och `WakeToRun`. Förslaget i
-`D:\Smako-release-work\task-proposed-bdc9\task-proposed.xml` ändrar **endast**
+den nya privata mallen
+`D:\Projects\Smako\.local\drift-verification\task-proposed-municipal\task-proposed.xml`
+ändrar **endast**
 `Actions/Exec/Arguments` till `start_packaged_relay.ps1` med versionsbunden
-`-File`, oförändrat `-Workspace D:\smako-local-relay` och separat
+`-File`, separat `-Workspace D:\smako-local-relay\scopes\municipality-1281` och
 `-Config D:\smako-local-relay\config\relay.json`, samt
 `Actions/Exec/WorkingDirectory` till den versionsbundna katalogen. `Command`,
 körkonto, rättigheter, triggers och övriga inställningar är kvar. Den privata
@@ -45,8 +53,16 @@ läggas i Git. Uppgiften är ännu inte ändrad eller registrerad från mallen.
 Nuvarande `Arguments` är
 `-NoProfile -NonInteractive -File "C:\Users\ossia\Documents\Codex\2026-08-20\jag-vill-att-du-bygger-en\deploy\scripts\collect_willys_local.ps1" -Repository "C:\Users\ossia\Documents\Codex\2026-08-20\jag-vill-att-du-bygger-en" -Workspace "D:\smako-local-relay"`.
 Föreslagen `Arguments` är
-`-NoProfile -NonInteractive -File "D:\smako-local-relay\releases\bdc9f7df4170\deploy\scripts\start_packaged_relay.ps1" -Workspace "D:\smako-local-relay" -Config "D:\smako-local-relay\config\relay.json"`.
+`-NoProfile -NonInteractive -File "D:\smako-local-relay\releases\bdc9f7df4170\deploy\scripts\start_packaged_relay.ps1" -Workspace "D:\smako-local-relay\scopes\municipality-1281" -Config "D:\smako-local-relay\config\relay.json"`.
 Programmet förblir den nuvarande pinnade `pwsh.exe`-sökvägen.
+
+Den nya arbetsytan är ett uttryckligt tillägg till Windows-förslaget: gamla
+city-scope-köer/kvitton ska ligga kvar oförändrade i den gamla arbetsytan,
+nya kommunartefakter ska ha eget aktuellt tillstånd. Tidigare XML med samma
+arbetsyta för båda versionerna är bevarad historik, inte aktuell instruktion.
+Varken katalogen eller produktionskonfigurationen har installerats här.
+Ändringen ingår i det separata Windows-beslutet. Ingen gammal artefakt får
+konverteras, kvitteras som publicerad eller raderas för att flytta kön.
 
 ## Kontroller före varje byte
 
@@ -74,26 +90,58 @@ Programmet förblir den nuvarande pinnade `pwsh.exe`-sökvägen.
    måste vara identiskt för `app`, `migrate`, `scheduler` och användas av
    collector/refresh. Genomför databas- och läsbarhetsprov innan trafik byts.
 
-## Godkänd cutover och återgång
+## Samordnad cutover: ett enda kontrollerat avbrott
 
-Efter **alla tre** separata besluten: frys endast relevant schemalagd körning,
-vänta ut operationer och verifiera backup; växla serverbild och först därefter
-den enda Windows-uppgiftens kodreferenser enligt granskad XML. Starta inte en
-parallell uppgift. Kör mottagarvalidering och ett enda reläjobb när det är
-förfallet; kontrollera källhash, ordinarie inbox/import, OWN, atomiskt manifest,
-serving-reload och beständigt kvitto. Återuppta ordinarie scheman först när
-observationer och faktisk serving är verifierade. Om den äldre reläversionen
-inte kan leverera mot den nya mottagaren krävs ett planerat kort avbrott för
-just denna övergång, inte ett obevakat server-först-fönster.
+Får utföras först när tekniska spärrar stängts och **alla tre** separata
+beslut fattats. Gamla/nya relä- och mottagarversioner får inte köras i kors.
 
-Vid fel: stoppa nya jobb och vänta ut operationslåset; återställ tidigare
-serverbild/symlink och uppgifts-XML med samma körkonto/triggers. Behåll alltid
-den **senaste** plan-databasen och reläets köer/kvitton samt nya råartefakter.
-Byt aldrig tillbaka till en äldre kopia av dessa tillstånd: det skulle radera
-nya användarplaner eller tappa leveranser. Kontrollera äldre kods läsning av
-nya planer separat från förmågan att räkna om dem. Om läskompatibiliteten inte
-är bevisad, behåll ny serverbild för planläsning eller använd en särskilt
-verifierad kompatibilitetsåtergång. Den äldre mottagaren får inte skriva över
-ett nytt aktivt manifest eller importera samma kö igen utan idempotensprov.
-Gamla releaser och kodmappar bevaras tills ingen aktiv drift använder dem;
-tidigare policyspärrar för städning gäller fortfarande.
+1. Blockera nya berörda schemastarter på både server och Windows inom det
+   godkända avbrottet. Vänta ut pågående jobb, barnprocesser och operationer;
+   kontrollera låsägarna, bryt inte lås. Behåll gamla paret tills det är tyst.
+2. Inventera/hashförteckna gamla/nya köer, inboxar och senaste kvitton.
+   Med gamla paret ska giltiga gamla väntande artefakter importeras och
+   faktiskt publiceras före bytet, eller hållas separat under ett uttryckligen
+   granskat förfarande. **Nu blockerad:** originalpolicyn kan inte publicera
+   utan Primat-baser. En redan importerad men opublicerad artefakt får inte
+   bli ett framgångskvitto. Valideringsavvisade äldre filer bevaras separat
+   med felorsak; de får inte tyst tappas eller bindas om till kommun.
+3. Ta konsistenta skyddade backuper och låset enligt kontrollerna ovan.
+   Bevara gamla prisroten som separat återgångskandidat, men återställ aldrig
+   äldre planer, köer eller kvitton över nytillkommet tillstånd.
+4. Under samma avbrott, med **båda jobbsidor fortsatt pausade**, byt app,
+   migrate, collector/refresh/scheduler till verifierad ny bild och godkänd
+   femkällorspolicy. Byt den enda Windows-uppgiftens Arguments/WorkingDirectory
+   enligt aktuell XML, inklusive separat kommunarbetsyta. Behåll konto,
+   S4U/Limited, triggers, IgnoreNew, tidsgräns och övriga inställningar.
+   Den gamla arbetsytan/uppgiftexporten bevaras. Inget obevakat
+   server-först-fönster tillåts.
+5. Tillåt endast en kontrollerad körning av det nya paret. Använd giltiga
+   nya artefakter för replay där det är relevant; gör ny verklig hämtning
+   när behovsstyrningen kräver det. Verifiera hash, scope, observation,
+   inbox, operationslås, import, atomisk publicering, laddat manifest,
+   beständigt kvitto och idempotens. Planläsning och kvalitetsstatus måste
+   passera. Återuppta båda sidors normala scheman först därefter.
+
+## Återgång: stoppa vid konstaterad läsinkompatibilitet
+
+Vid fel hålls **båda** sidors nya jobb pausade och pågående operationer väntas
+ut. Nya artefakter/kvitton stannar i nya kommunarbetsytan/inboxen, gamla i
+gamla. Inga nya artefakter skickas till gamla mottagaren. Återanvänd senaste
+kvittot inom rätt scope; återställ inte en äldre backup över kön. Upprepad
+import ska kontrolleras mot artefakthash/snapshot, inte filnamn eller körtid.
+
+Ett rent bildbyte tillbaka är **inte verifierat säkert**: faktisk gammal
+bild avvisar nya manifestfält och tappar planfält; kampanjplanens GET ger
+500 även med det gamla manifestet. Återställ därför inte den äldre bilden
+som enda användarserver med nya planer. Innan godkänd aktivering behövs en
+verifierad kompatibilitetsåtergång, eller en separat granskad lösning som
+behåller nya bildens läsning av den senaste plandatabasen under avbrottet.
+Att ny bild kan läsa planerna efter vårt test är inte bevis på att en sådan
+trafik-/driftlösning är installerad. Denna spärr är öppen.
+
+När en säker återgång väl verifierats ska tidigare serverbild/konfiguration,
+separat kompatibel prisrot och ursprunglig Windows-XML bytas tillsammans
+innan scheman återupptas. Originalpolicyn med obligatoriska Primat-baser är
+fortfarande separat och saknar giltigt underlag; återställd planläsning får
+inte betecknas som återställd nyplanering/full drift. Omräkning provas
+separat. Gamla mappar och backuper bevaras; inga städspärrar kringgås.

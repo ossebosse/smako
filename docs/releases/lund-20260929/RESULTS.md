@@ -1,5 +1,13 @@
 # Lund: verifierad kandidat och kvarstående aktiveringsspärrar
 
+**Senaste driftkomplettering:** [OPERATIONS.md](OPERATIONS.md), med
+[Docker/HTTP-bevis](OPS-EVIDENCE.json) och [Windows-replay](WINDOWS-EVIDENCE.json).
+Faktisk produktionsbild har nu provats: äldre GET tappar planfält och ger
+500 för öppet kampanjval; originalpolicyn kan inte tömma den gamla kön med
+lyckad publicering. S4U-liveprovet väntar på granskad administrativ
+testregistrering. Ny bild återläser alla nya planer identiskt. Följande
+ordinarie svitresultat är tidigare releasebevis, inte nya omkörningar.
+
 **Status 2026-09-30:** implementerad och isolerat verifierad kandidat, inte
 produktionsaktiverad. Runtime-paketens gemensamma källcommit är
 `bdc9f7df417084641d0a712e3dad188dad1ad7d4` på
@@ -209,11 +217,12 @@ exporten före arbetet), senast resultat 1 och nästa schemalagd körning
 Windows-jobb har installerats/aktiverats i produktion.
 
 Aktiverings-/återgångsordning och exakta ändringar finns i
-[ACTIVATION.md](ACTIVATION.md). Kvarstående konkreta spärrar är minst
-obevakad S4U-verifiering av kandidatpaketet, planerad gemensam
-versionsövergång eftersom korsversionerna avvisas, återgångsprov för läsning
-av nytillkomna planer och de **tre separata besluten** om policy,
-serveraktivering och aktiv Windows-uppgift. Testresultatens tidsstämplar och
+[ACTIVATION.md](ACTIVATION.md). Kvarstående tekniska spärrar är
+obevakad S4U-verifiering av kandidatpaketet, gemensam versionsövergång med
+säker köhantering och nu **belagd** läsinkompatibilitet i återgångsbilden;
+se driftkompletteringen ovan. De **tre separata besluten** om policy,
+serveraktivering och aktiv Windows-uppgift är ytterligare godkännanden,
+inte ersättning för teknisk beredskap. Testresultatens tidsstämplar och
 källfärskhet måste kontrolleras igen vid själva aktiveringen; denna rapport
 gör dem inte evigt giltiga.
 
