@@ -67,7 +67,10 @@ godkända, 0 fel**. Slutcommitens rena, uppdelade nämnare är alltså **3455
 godkända, 0 fel, 0 skip**. En fullskalig slutkörning på C: gav tio SQLite-/diskutrymmesfel
 vid cirka 280 MB ledigt; alla tio passerade på D:. En andra full körning på D:
 avbröts vid 91 % utan pytest-summering. Dessa körningar redovisas som
-infrastruktur-/ofullständiga och får inte räknas som full PASS.
+infrastruktur-/ofullständiga och får inte räknas som full PASS. Hela
+Linux-sviten på just `bdc9f7d` kördes inte om; dess schemaändring täcks av
+Windows-fokustest, paketbildens hashkontroll och autentisk import genom den
+slutliga Dockerbilden.
 
 Frontendens 30 tester, `check` och bygge passerade i ren klon efter
 runtime-commiten. Ruff, `compileall` och `pip check` passerade för berörda
