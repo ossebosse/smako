@@ -48,15 +48,17 @@ def test_generated_techniques_have_executable_evidence_and_explicit_pantry():
     assert len({p.recipe_family for p in profiles}) >= 5
     for recipe, profile in zip(recipes, profiles, strict=True):
         steps = " ".join(recipe.instructions).lower()
-        assert "basvaror: vatten, salt, peppar" in steps
-        assert "alla ingredienser" in steps
+        assert "använd exakt de angivna ingrediensformerna" in steps
+        assert "inga olistade ingredienser" in steps
+        assert "endast dricksvatten" in steps
+        assert any(i.canonical_name == "rapsolja" for i in recipe.ingredients)
         if profile.cooking_method == "oven":
-            assert "ugnen" in steps and "minuter" in steps
+            assert "ugnen" in steps and "genomlag" in steps
         if profile.recipe_family == "wrap":
-            assert "vik ihop tortillas" in steps
+            assert "tortillas" in steps
             assert any(i.canonical_name == "tortillas" for i in recipe.ingredients)
         if profile.recipe_family == "soppa":
-            assert "häll på vatten" in steps and "soppa" in steps
+            assert "vatten" in steps and "soppa" in steps
 
 
 @pytest.mark.parametrize("count,families,methods", [(3,3,2),(5,4,3),(7,5,3)])

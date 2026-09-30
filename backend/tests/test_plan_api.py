@@ -1,9 +1,22 @@
 from __future__ import annotations
 
+from app.api import plan as plan_api
 from app.config import Settings
 from app.main import app
 from app.models import PlanRequest
 from fastapi.testclient import TestClient
+
+
+def test_request_mode_sets_planner_quantity_policy_without_mutating_shared_settings(monkeypatch) -> None:
+    shared = Settings(price_provider="mock", allow_estimated_quantities=True)
+    monkeypatch.setattr(plan_api, "get_settings", lambda: shared)
+
+    exact = plan_api._service(PlanRequest(purchase_planning_mode="exact"))
+    estimated = plan_api._service(PlanRequest(purchase_planning_mode="estimated"))
+
+    assert exact.settings.allow_estimated_quantities is False
+    assert estimated.settings.allow_estimated_quantities is True
+    assert shared.allow_estimated_quantities is True
 
 
 def test_mock_plan_is_complete_and_package_priced(monkeypatch) -> None:

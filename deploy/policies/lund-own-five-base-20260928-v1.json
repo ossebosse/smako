@@ -1,0 +1,28 @@
+{
+  "schema": "smako-test-base-policy-v1",
+  "id": "lund-own-five-base-20260928-v1",
+  "production_activation": false,
+  "city": "Lund",
+  "postal_code": "22350",
+  "municipality_code": "1281",
+  "own_sources_only": true,
+  "required_context_ids": [
+    "context:coop:23eaae11c9661e68",
+    "context:hemkop:3288e04edd97e349",
+    "context:hemkop:756955d0e6e05f23",
+    "context:willys:383650ec6ff5a636",
+    "context:willys:4a671428fc484e43"
+  ],
+  "allowed_channels": "unchanged original profile; no added user store restrictions",
+  "original_policy": "retained unchanged in prior isolated environment and production; Primat 1004409 full_catalog failure remains",
+  "warning_hours": 36,
+  "hard_stop_hours": 48,
+  "optional_sources": [
+    "ica_structured_locality",
+    "coop_municipal",
+    "xtra_municipal",
+    "citygross_municipal",
+    "lidl_municipal",
+    "willys_flyer"
+  ]
+}

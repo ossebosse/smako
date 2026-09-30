@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
     <script src="/static/frontend-bootstrap.js?v=loading-hotfix-20260909" defer></script>
-    <script src="/static/app.js?v=product-search-20260909" defer></script>
+    <script src="/static/app.js?v=lund-release-20260930" defer></script>
     <script src="/static/product-search.js?v=ica-quality-20260909" defer></script>
   </head>
   <body>
@@ -146,6 +146,15 @@
                   <option value="3">3 inköpsställen</option>
                 </select>
                 <span class="field-hint">Ett inköpsställe kan vara en butikskopplad eller onlinebaserad priskontext. Fler stopp kan ge lägre pris.</span>
+              </div>
+
+              <div class="field field-wide">
+                <label for="purchase-planning-mode">Köpplanering</label>
+                <select id="purchase-planning-mode" name="purchase_planning_mode">
+                  <option value="exact" selected>Exakt – bara styrkta mängder</option>
+                  <option value="estimated">Uppskattad – även källbelagda cirka-mängder</option>
+                </select>
+                <span class="field-hint">Uppskattningar märks i inköpslistan. Oklart variantval eller allergenunderlag godkänns inte automatiskt.</span>
               </div>
 
               <div class="field field-wide">

@@ -4,6 +4,7 @@ from pathlib import Path
 from grocery_data.app.connectors.ica.parser import IcaParser
 from grocery_data.app.domain import RawBatch, SourceStore
 from grocery_data.app.services.offer_rows import row_blockers
+from grocery_data.app.services.source_purchase_terms import bound_purchase_terms
 
 
 def parsed(account,bms):
@@ -24,13 +25,21 @@ def test_real_oats_butter_weight_and_reference_roles_survive_current_parser():
     assert not row_blockers(oats)
     butter=rows['5004146030']
     assert 'Gäller ej ekologisk' in butter.offers[0].description
-    assert 'exact_single_variant_unverified' in row_blockers(butter)
+    terms = bound_purchase_terms(butter)
+    assert terms is not None and terms.usage == 'variant_selection_required'
+    assert set(terms.eligible_variant_ids) == set(butter.source_fields['price_evidence']['variant_ids'])
+    assert butter.gtin is None and butter.package_quantity is None
+    assert not row_blockers(butter)  # Priceable only after an explicit campaign choice.
     chicken=rows['5004145966']
     assert chicken.sale_unit=='kg' and chicken.offers[0].price==Decimal('87.9')
     assert chicken.package_text=='Ca 900 g' and 'Färsk' in chicken.offers[0].description
     assert chicken.regular_price is None and chicken.comparison_price is None
     assert chicken.source_fields['price_evidence']['reference_regular']=='101.93'
-    assert 'fixed_purchase_package_unverified' in row_blockers(chicken)
+    chicken_terms = bound_purchase_terms(chicken)
+    assert chicken_terms is not None and chicken_terms.usage == 'estimated'
+    assert chicken_terms.purchase_form == 'variable_package'
+    assert chicken_terms.approximate_package_g == 900
+    assert not row_blockers(chicken)
 
 
 def test_real_chicken_mince_sales_package_is_separate_from_800g_content():

@@ -27,6 +27,7 @@
     recipesInput: document.querySelector("#recipes"),
     servingsInput: document.querySelector("#servings"),
     maxStoresInput: document.querySelector("#max-stores"),
+    purchasePlanningMode: document.querySelector("#purchase-planning-mode"),
     dietPreference: document.querySelector("#diet-preference"),
     variedBudget: document.querySelector("#varied-budget"),
     membershipInputs: document.querySelectorAll('input[name="membership"]'),
@@ -599,6 +600,7 @@
       recipes: Number(dom.recipesInput.value),
       servings: Number(dom.servingsInput.value),
       max_stores: Number(dom.maxStoresInput.value),
+      purchase_planning_mode: dom.purchasePlanningMode.value,
       diet_preference: dom.dietPreference.value,
       diversity_mode: selectedDiversityMode(),
       varied_budget_percent: Number(dom.variedBudget.value),
@@ -628,6 +630,7 @@
       if (optionHasValue(dom.recipesInput, saved.recipes)) dom.recipesInput.value = String(saved.recipes);
       if (Number(saved.servings) >= 1 && Number(saved.servings) <= 8) dom.servingsInput.value = String(saved.servings);
       if (optionHasValue(dom.maxStoresInput, saved.max_stores)) dom.maxStoresInput.value = String(saved.max_stores);
+      if (optionHasValue(dom.purchasePlanningMode, saved.purchase_planning_mode)) dom.purchasePlanningMode.value = String(saved.purchase_planning_mode);
       if (optionHasValue(dom.dietPreference, saved.diet_preference)) dom.dietPreference.value = String(saved.diet_preference);
       checkDiversityInput(normalizeDiversityMode(saved.diversity_mode));
       if (Number.isFinite(saved.varied_budget_percent) && saved.varied_budget_percent >= 0 && saved.varied_budget_percent <= 100) dom.variedBudget.value = String(saved.varied_budget_percent);
@@ -650,6 +653,7 @@
     dom.recipesInput.value = "5";
     dom.servingsInput.value = "4";
     dom.maxStoresInput.value = "2";
+    dom.purchasePlanningMode.value = "exact";
     dom.dietPreference.value = "mixed";
     checkDiversityInput("balanced");
     setSelectedMemberships([]);
@@ -2410,6 +2414,7 @@
     dom.recipesInput.value = String(first(request, ["recipes"], dom.recipesInput.value));
     dom.servingsInput.value = String(first(request, ["servings"], dom.servingsInput.value));
     dom.maxStoresInput.value = String(first(request, ["max_stores"], dom.maxStoresInput.value));
+    dom.purchasePlanningMode.value = first(request, ["purchase_planning_mode"], "exact");
     dom.dietPreference.value = first(request, ["diet_preference"], dom.dietPreference.value);
     checkDiversityInput(normalizeDiversityMode(first(request, ["diversity_mode"], "balanced")));
     dom.variedBudget.value = String(first(request, ["varied_budget_percent"], 25));
@@ -3177,6 +3182,7 @@
       recipes: Number(dom.recipesInput.value),
       servings: Number(dom.servingsInput.value),
       max_stores: Number(dom.maxStoresInput.value),
+      purchase_planning_mode: dom.purchasePlanningMode.value,
       diet_preference: dom.dietPreference.value,
       availability_mode: selectedAvailabilityMode(),
       avoid_ingredients: excludedIngredients,
@@ -3297,6 +3303,7 @@
     persistPlannerPreferences();
     sendAnalyticsEvent("max_stores_selected", { max_stores: Number(dom.maxStoresInput.value) });
   });
+  dom.purchasePlanningMode.addEventListener("change", persistPlannerPreferences);
   dom.dietPreference.addEventListener("change", () => {
     persistPlannerPreferences();
     sendAnalyticsEvent("diet_selected", { diet: dom.dietPreference.value });
