@@ -1,3 +1,26 @@
+# Aktuell releasekandidat: Lund och repobaserat Willys-relä 2026-09-30
+
+Arbeta i **D:\Projects\Smako** på `release/lund-relay-20260929`.
+Runtime-källcommit för separat server- och Windows-reläpaket är
+`bdc9f7df417084641d0a712e3dad188dad1ad7d4`; se
+[resultat, källfärskhet, hashvärden och blockerare](releases/lund-20260929/RESULTS.md)
+och [förberedd aktivering/återgång](releases/lund-20260929/ACTIVATION.md).
+Konsolideringstaggen och originalmapparna är bevarade. Fem tidigare basfel är
+utredda/rättade; de 16 autentiska Lidl-proven passerar. Kandidaten är byggd,
+installerad som **inaktiv** relärelease och isolerat provad; den är inte
+installerad eller aktiverad på produktionsservern och den aktiva Windows-uppgiften
+har inte ändrats. Senaste isolerade faktiska serving hade 44 132 produkter i 33
+kontexter efter behovsstyrd frivillig insamling, med fem giltiga obligatoriska
+onlinebaser. Äldre mottagare kan inte ta ny kommunartefakt och ny mottagare
+avvisar gammal city-scope-artefakt. Tillfälligt S4U-testjobb kunde inte
+registreras (`Åtkomst nekad`); obevakad kandidatkörning är därför fortfarande
+öppen. **INTE REDO** för skarp aktivering utan de separata besluten och
+återstående kompatibilitets-/driftprov.
+
+---
+
+## Bevarad konsolideringshandoff 2026-09-29
+
 # Aktuell arbetsrot: lokal konsolidering 2026-09-29
 
 Permanent rot: **D:\Projects\Smako**. Huvudgren: `master`.

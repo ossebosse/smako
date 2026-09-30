@@ -1,5 +1,49 @@
 # Lokal utveckling i Smako
 
+## Reproducera Lund-kandidaten från en bestämd commit
+
+[Releaseunderlag](releases/lund-20260929/RESULTS.md) och
+[aktiveringsordning](releases/lund-20260929/ACTIVATION.md) är aktuella för
+`release/lund-relay-20260929`; avsnitten längre ned beskriver den bevarade
+konsolideringens utvecklingsmiljö. Server/relä har separata ZIP-paket från
+**samma** runtime-commit `bdc9f7df417084641d0a712e3dad188dad1ad7d4`.
+Skapa en ren klon från denna commit, återställ de 887 stora autentiska
+testfilerna med `scripts/restore_local_data.py` och `--check`, och verifiera
+både databaser, snapshots och alla refererade råfiler innan planeringsprov.
+Stora testdata finns i skyddad lokal backup, inte i Git eller driftpaketen.
+Arbeta med tillräckligt ledigt TEMP-utrymme (under dessa prov krävdes D:);
+SQLite-fel vid nästan full C: är inte ett produktfel.
+
+```powershell
+git clone --no-local D:\Projects\Smako D:\Smako-release-work\clean-clone
+Set-Location D:\Smako-release-work\clean-clone
+git switch --detach bdc9f7df417084641d0a712e3dad188dad1ad7d4
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe scripts/restore_local_data.py --backup D:\Smako-backups\consolidation-20260929
+.\.venv\Scripts\python.exe scripts/restore_local_data.py --backup D:\Smako-backups\consolidation-20260929 --check
+$env:PYTHONPATH='backend;.'
+$env:SMAKO_FORBIDDEN_ROOTS='D:\Projects\Smako'
+.\.venv\Scripts\python.exe scripts/verify_offline.py -q -m 'not live' backend/tests grocery_data/tests --basetemp D:\Smako-release-work\pytest-release
+.\.venv\Scripts\python.exe scripts/build_release.py --commit bdc9f7df4170 --output D:\Smako-release-work\packages-bdc9
+```
+
+`verify_offline.py` spärrar nät och läsning av den gamla arbetsroten;
+`PYTHONPATH` ovan pekar enbart på **den rena klonen** under test, aldrig på en
+gammal datumkatalog. Paketbyggaren läser Git-blobbar, inte arbetskopian.
+Jämför ZIP-hasharna med releaseunderlaget. Extrahera server-ZIP som
+Docker-byggkontext, bygg med root-`Dockerfile` och kör det externt monterade
+`scripts/release_verification/verify_server_image.py` **i** bilden med
+`/release.zip` och `/work` monterade samt `--network none`; det verifierar
+`RELEASE.json`, filhashar, pip och Chromium. Bygg inte från en
+Windows-`git archive` med lokalt omskrivna CRLF.
+Reläet installeras från relä-ZIP med
+`deploy/scripts/install_relay_release.ps1` till en versionsbunden katalog;
+lokal konfiguration, hemligheter, köer och tillstånd förblir separat. Den
+aktiva Windows-uppgiften ändras endast efter separat beslut. Dockerbild,
+frontendprov och browser-E2E har faktiskt körts för denna kandidat; äldre
+noteringar nedan om ej körd Docker gäller bara 2026-09-29-konsolideringen.
+
 Permanent rot: `D:\Projects\Smako`. Huvudgren: `master`. Konsolidering sker på
 `chore/consolidate-smako`. Ingen del av dessa instruktioner aktiverar produktion.
 

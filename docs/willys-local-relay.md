@@ -1,5 +1,25 @@
 # Willys OWN LOCAL_RELAY operations
 
+## Releasekandidat 2026-09-30 (ännu inte aktiv)
+
+Den repobaserade koden och dess hjälpskript/tester ligger i
+`D:\Projects\Smako` på `release/lund-relay-20260929`. Kandidatens
+runtime-commit är `bdc9f7df417084641d0a712e3dad188dad1ad7d4`.
+Det versionsbundna reläpaketet är installerat för **isolerade prov** under
+`D:\smako-local-relay\releases\bdc9f7df4170`; aktiv schemalagd uppgift
+`Smako Willys Local Relay` fortsätter oförändrad från den gamla
+`C:\Users\ossia\Documents\Codex\2026-08-20\jag-vill-att-du-bygger-en`.
+Aktuell kandidatverifiering, mottagarkompatibilitet, råhash, behovsstyrning
+och blockerare finns i [releaseutfallet](releases/lund-20260929/RESULTS.md).
+Den exakta föreslagna uppgiftsändringen, backup och återgång finns i
+[aktiveringsordningen](releases/lund-20260929/ACTIVATION.md). Den äldre
+driftinstruktionen nedan är historik för den **aktiva** versionen, inte
+verifiering av kandidatens obevakade S4U-körning. Registrering av en separat
+S4U-testuppgift nekades av Windows; ändra inte den aktiva uppgiften som
+testgenväg.
+
+---
+
 Verified 10 September 2026: **Smako Willys Local Relay**, ossia, **S4U / Limited**,
 daily **01:30 Europe/Stockholm**. Interactive desktop login is not required.
 Actual session-0 filesystem/DNS/HTTPS/SSH/inbox probes and a genuine full task run
