@@ -84,7 +84,7 @@ def test_each_meal_keeps_own_minimum_and_zero_count_has_no_effect():
     assert [r["values"]["protein_g"] for r in result.personal.checks["nutrition"]] == [34.7, 22]
     assert req == before
     req.personal.meals[1].limits.min_protein_g = 40
-    with pytest.raises(PolicyConflict, match="min_protein_g 40"):
+    with pytest.raises(PolicyConflict, match="protein_g.*minimum 40"):
         run(p, req, facts=evidence)
 
 
