@@ -235,6 +235,16 @@ def _review_schema_diff(
         required_type_changes = tuple(
             change for change in diff.type_changed if not reviewed_hemkop_type_change(change)
         )
+    elif chain == Chain.WILLYS and parser_version == "willys-parser-v3":
+        from grocery_data.app.connectors.willys.schema_review import (
+            reviewed_willys_schema_diff,
+            reviewed_willys_type_change,
+        )
+
+        reviewed = reviewed_willys_schema_diff(diff)
+        required_type_changes = tuple(
+            change for change in diff.type_changed if not reviewed_willys_type_change(change)
+        )
     else:
         return diff
     if not isinstance(reviewed, SchemaDiff):
