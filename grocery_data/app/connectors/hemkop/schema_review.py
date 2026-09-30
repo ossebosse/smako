@@ -2,8 +2,9 @@
 
 Current 2026-09-27 raw evidence contains an EPREL lamp energy label, not
 food nutrition, in energyDeclaration. These descriptive fields are unused
-by the product/price parser. Results may omit null from the aggregate type
-set when no category happens to need the exact-page terminal sentinel.
+by the product/price parser. Results may gain or lose null in the aggregate
+type set according to whether a category needs the exact-page terminal
+sentinel. The 2026-09-29 Karhögstorg run gained null at this exact path.
 validated_catalog_page still checks every page's total, length and terminal
 shape; the schema review cannot establish completeness on its own.
 """
@@ -21,8 +22,12 @@ _RESULTS = re.compile(_PREFIX + r"\Z")
 def reviewed_hemkop_type_change(change: SchemaTypeChange) -> bool:
     before, after = set(change.old_types), set(change.new_types)
     if _RESULTS.fullmatch(change.path):
-        # Only disappearance of a terminal-null sample is reviewed here.
-        return before == {"null", "array"} and after == {"array"}
+        # Every page is independently checked for exact pagination and the
+        # proven null sentinel before this aggregate review.
+        return (before, after) in [
+            ({"null", "array"}, {"array"}),
+            ({"array"}, {"null", "array"}),
+        ]
     if _LABEL_ROOT.fullmatch(change.path):
         return (before, after) in [
             ({"null"}, {"null", "object"}),

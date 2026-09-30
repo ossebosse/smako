@@ -7,12 +7,16 @@ from grocery_data.app.services.collector import _review_schema_diff
 
 
 @pytest.mark.parametrize('store', ['4123', '4224', '9999'])
-def test_real_current_nullable_label_and_terminal_sample_change(store):
+@pytest.mark.parametrize('before,after', [
+    (('null', 'array'), ('array',)),
+    (('array',), ('null', 'array')),
+])
+def test_real_current_nullable_label_and_terminal_sample_change(store, before, after):
     prefix = store + ':catalog_page:$[].results'
     diff = SchemaDiff(
         added=tuple(prefix + '[].energyDeclaration.' + k for k in ['image', 'link', 'value']),
         type_changed=(
-            SchemaTypeChange(path=prefix, old_types=('null', 'array'), new_types=('array',)),
+            SchemaTypeChange(path=prefix, old_types=before, new_types=after),
             SchemaTypeChange(path=prefix+'[].energyDeclaration', old_types=('null',),
                              new_types=('null', 'object')),
         ),
@@ -23,7 +27,6 @@ def test_real_current_nullable_label_and_terminal_sample_change(store):
 
 
 @pytest.mark.parametrize('path,old,new', [
-    ('results', ('array',), ('null', 'array')),
     ('results', ('array',), ('object',)),
     ('results[].energyDeclaration', ('null',), ('string',)),
     ('results[].energyDeclaration.value', ('string',), ('number',)),
