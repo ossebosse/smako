@@ -192,7 +192,7 @@ def test_api_admission_overflow_is_a_retryable_safe_error(
             await release.wait()
             return "closed-result"
 
-    monkeypatch.setattr(plan_api, "_service", FakeService)
+    monkeypatch.setattr(plan_api, "_service", lambda _request: FakeService())
     settings = Settings(price_provider="mock")
     controller = PlannerAdmissionController(max_concurrent=1, max_queued=0)
     http_request = FastAPIRequest(

@@ -970,6 +970,7 @@ def create_recipe_candidate_generator(
     openai_api_key: str | None = None,
     openai_model: str = "gpt-5.4-mini",
     batch_size: int = 20,
+    recipe_version: str = "edible-input-v1",
 ) -> RecipeCandidateGenerator:
     """Choose the LLM implementation only when credentials are configured."""
 
@@ -979,7 +980,7 @@ def create_recipe_candidate_generator(
             openai_model,
             batch_size=batch_size,
         )
-    return DeterministicRecipeCandidateGenerator()
+    return DeterministicRecipeCandidateGenerator(recipe_version=recipe_version)
 
 
 __all__ = [

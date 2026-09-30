@@ -153,7 +153,7 @@ def test_provider_api_error_does_not_echo_exception_or_url(
                 "GET https://provider.invalid?api_key=TOPSECRET Cookie=session-secret"
             )
 
-    monkeypatch.setattr(plan_api, "_service", lambda: FailingService())
+    monkeypatch.setattr(plan_api, "_service", lambda _request: FailingService())
     monkeypatch.setenv("PRICE_UNIVERSE_REQUIRED", "false")
     response = TestClient(app).post(
         "/api/plan",

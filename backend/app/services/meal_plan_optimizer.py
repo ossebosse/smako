@@ -843,6 +843,7 @@ class MealPlanService:
         generator = self.candidate_generator or create_recipe_candidate_generator(
             openai_api_key=self.settings.openai_api_key,
             openai_model=self.settings.openai_model,
+            recipe_version="legacy",
         )
         source = (
             "openai-candidates"
@@ -1246,7 +1247,7 @@ class MealPlanService:
                 "OpenAI:s kandidatrecept misslyckades; samma ekonomiska pool "
                 f"användes med deterministisk kandidatgenerering ({type(exc).__name__})."
             )
-            generator = DeterministicRecipeCandidateGenerator()
+            generator = DeterministicRecipeCandidateGenerator(recipe_version="legacy")
             source = "deterministic-candidate-fallback"
             recipes = await asyncio.to_thread(
                 generator.generate_candidates,
@@ -1259,7 +1260,8 @@ class MealPlanService:
             return recipes, source, batch_statistics, frozenset()
 
         stable_pool = StableCandidatePoolBuilder(
-            stable_count=self.settings.stable_candidate_base_count
+            stable_count=self.settings.stable_candidate_base_count,
+            generator=DeterministicRecipeCandidateGenerator(recipe_version="legacy"),
         ).build(
             recipes,
             servings=request.servings,

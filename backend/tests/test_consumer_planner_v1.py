@@ -244,7 +244,7 @@ def test_production_plan_api_rejects_expensive_internal_search_options_before_se
         price_provider="mock",
     )
     monkeypatch.setattr(plan_api, "get_settings", lambda: settings)
-    monkeypatch.setattr(plan_api, "_service", lambda: MustNotRunService())
+    monkeypatch.setattr(plan_api, "_service", lambda _request: MustNotRunService())
 
     client = TestClient(app)
     response = client.post(
@@ -413,7 +413,7 @@ def test_saved_plan_api_persists_without_repricing(
         async def create_plan(self, _request):
             return plan
 
-    monkeypatch.setattr(plan_api, "_service", lambda: FakeService())
+    monkeypatch.setattr(plan_api, "_service", lambda _request: FakeService())
     monkeypatch.setenv("PRICE_PROVIDER", "mock")
     monkeypatch.setenv("PLAN_STORE_PATH", str(tmp_path / "api-plans.sqlite3"))
     client = TestClient(app)
@@ -463,7 +463,7 @@ def test_saved_plan_reads_and_mutations_require_creating_anonymous_session(
         mutation_calls.append("recipe")
         return current_plan
 
-    monkeypatch.setattr(plan_api, "_service", lambda: FakeService())
+    monkeypatch.setattr(plan_api, "_service", lambda _request: FakeService())
     monkeypatch.setattr(plan_api, "replace_product", fake_replace_product)
     monkeypatch.setattr(plan_api, "replace_recipe", fake_replace_recipe)
     monkeypatch.setenv("PRICE_PROVIDER", "mock")
@@ -768,7 +768,7 @@ def test_saved_plan_endpoint_rejects_nonlocal_price_source(
         async def create_plan(self, _request):
             return unsafe
 
-    monkeypatch.setattr(plan_api, "_service", lambda: FakeService())
+    monkeypatch.setattr(plan_api, "_service", lambda _request: FakeService())
     monkeypatch.setenv("PRICE_PROVIDER", "mock")
     monkeypatch.setenv("PLAN_STORE_PATH", str(tmp_path / "unsafe.sqlite3"))
     response = TestClient(app).post(
@@ -790,7 +790,7 @@ def test_offline_preflight_fails_before_service_or_provider_can_run(
             called = True
             raise AssertionError("planning must not start without a local universe")
 
-    monkeypatch.setattr(plan_api, "_service", lambda: MustNotRunService())
+    monkeypatch.setattr(plan_api, "_service", lambda _request: MustNotRunService())
     monkeypatch.setattr(
         plan_api.GLOBAL_PREPARED_PRICE_UNIVERSES,
         "get_for_request",

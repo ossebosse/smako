@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+from dataclasses import replace
 from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Annotated
@@ -62,7 +63,10 @@ router = APIRouter(prefix="/api", tags=["meal plan"])
 def _service(request: PlanRequest | None = None) -> MealPlanService:
     settings = get_settings()
     if request is not None:
-        settings = settings.model_copy(update={"allow_estimated_quantities": request.purchase_planning_mode == "estimated"})
+        settings = replace(
+            settings,
+            allow_estimated_quantities=request.purchase_planning_mode == "estimated",
+        )
     return MealPlanService(
         settings,
         price_universe_manager=GLOBAL_PREPARED_PRICE_UNIVERSES,
