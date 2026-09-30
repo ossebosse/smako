@@ -154,6 +154,18 @@ planer gav byteidentiskt GET även efter faktisk Uvicorn-processomstart.
 `reproducible=true` och `recalculation_available=false` skiljer läsbarhet
 från omräkning. Prisvärdet är uppmätt på detta underlag, inget historiskt
 acceptansvärde. Inga användaranrop gjorde externa prisförfrågningar.
+Nästa ordinarie import-/rebuild-/publiceringspipeline kördes två gånger på
+den separata plan-kopian utan externt nät; frivilliga insamlingshooks var
+uttryckligen uppskjutna. Båda körningarna byggde en kandidat men gav
+`degraded`/exit 2 för det avgränsade insamlingsläget och behöll samma faktiskt
+laddade manifest `1e1b3695…`; de får inte maskeras som full käll-PASS.
+Efter första rebuild låg samtliga fyra ursprungliga planers sparade
+`response_json` kvar oförändrad i `plans.sqlite`. En ny anonym session fick
+förväntat HTTP 403 på en annan sessions plan. En ny källbelagd plan skapad
+med bevarad sessionskaka gav HTTP 200 och identisk plan/ursprungligt
+PriceUniverse-ID efter **andra rebuild och faktisk appomstart**.
+`price_version_status=current`, `recalculation_available=false`; detta
+bevisar sparad läsning på ny kod, inte äldre kods omräkning av nya planer.
 
 Representativa källbelagda köp mot samma app/manifest gav:
 
