@@ -41,3 +41,14 @@ def test_transition_obeys_active_relay_lock(tmp_path):
     with RefreshRunLock(root / "local-workflow.lock"), pytest.raises(RefreshAlreadyRunningError):
         preserve(workspace=root, archive=tmp_path / "archive")
     assert not (tmp_path / "archive").exists()
+
+
+def test_unknown_historical_container_is_preserved_without_inventing_scope(tmp_path):
+    root = tmp_path / "old"
+    root.mkdir()
+    (root / "unknown.smako-source").write_bytes(b"opaque historical bytes")
+    result = preserve(workspace=root, archive=tmp_path / "archive")
+    item = next(iter(result["files"].values()))
+    assert item["status"] == "unclassified_not_published"
+    assert "source_scope" not in item
+    assert (tmp_path / "archive/objects" / item["sha256"]).read_bytes() == b"opaque historical bytes"

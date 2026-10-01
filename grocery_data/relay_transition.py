@@ -112,11 +112,16 @@ def preserve(
             if item["kind"] != "artifact":
                 continue
             digest = item["sha256"]
-            with zipfile.ZipFile(archive / "objects" / digest) as z:
-                manifest = json.loads(z.read("manifest.json"))
-            item["source_scope"] = manifest["source_scope"]
-            item["observed_from"] = manifest["observed_from"]
-            item["source_snapshot_id"] = manifest["source_snapshot_id"]
+            try:
+                with zipfile.ZipFile(archive / "objects" / digest) as z:
+                    manifest = json.loads(z.read("manifest.json"))
+                item["source_scope"] = manifest["source_scope"]
+                item["observed_from"] = manifest["observed_from"]
+                item["source_snapshot_id"] = manifest["source_snapshot_id"]
+            except (zipfile.BadZipFile, KeyError, ValueError) as exc:
+                # Historical/invalid containers still belong in the inventory.
+                # Preserve bytes; do not repair, infer scope or acknowledge them.
+                item["contract_read_error"] = type(exc).__name__
             item["status"] = (
                 "acknowledged"
                 if digest in acknowledged
@@ -127,6 +132,8 @@ def preserve(
                 else "pending_delivery"
             )
             item["disposition"] = "preserved_in_old_generation_not_routed_to_new_contract"
+            if "contract_read_error" in item:
+                item["status"] = "unclassified_not_published"
         report = {
             "schema": "smako-relay-transition-v1",
             "files": files,
