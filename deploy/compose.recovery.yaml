@@ -6,7 +6,7 @@ services:
     env_file: ${SMAKO_ENV_FILE:?set existing private environment file}
     environment:
       SMAKO_RECOVERY_READ_ONLY: "true"
-      PLAN_STORE_PATH: /recovery/plans.sqlite
+      PLAN_STORE_PATH: /recovery/${SMAKO_PLAN_FILENAME:-consumer_plans.sqlite3}
     command: ["python", "-m", "uvicorn", "app.recovery:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
     volumes:
       - ${SMAKO_LATEST_PLAN_DIRECTORY:?mount latest plans directory}:/recovery:ro

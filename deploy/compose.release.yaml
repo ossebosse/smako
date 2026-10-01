@@ -7,6 +7,15 @@ services:
   app:
     image: ${SMAKO_RELEASE_IMAGE:?set verified sha256 image ID}
     build: !reset null
+    env_file: ${SMAKO_RELEASE_ENV_FILE:?set reviewed private release environment}
   scheduler:
+    image: ${SMAKO_RELEASE_IMAGE:?set verified sha256 image ID}
+    build: !reset null
+    env_file: ${SMAKO_RELEASE_ENV_FILE:?set reviewed private release environment}
+  refresh-once:
+    image: ${SMAKO_RELEASE_IMAGE:?set verified sha256 image ID}
+    build: !reset null
+    env_file: ${SMAKO_RELEASE_ENV_FILE:?set reviewed private release environment}
+  backup-once:
     image: ${SMAKO_RELEASE_IMAGE:?set verified sha256 image ID}
     build: !reset null
