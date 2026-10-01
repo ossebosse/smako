@@ -1,20 +1,21 @@
 # Aktuell releasekandidat: Lund och repobaserat Willys-relä 2026-09-30
 
-**Fortsättning 2026-10-01:** operatören har registrerat S4U-testuppgiften.
-Återläsningen visar rätt bdc9-paket, ossia/S4U/Limited och noll triggers;
-uppgiften har aldrig körts. PS7-värden har befintlig RemoteSigned-policy,
-medan Windows PowerShell 5.1 har AllSigned. Inga policyer/argument har ändrats.
-Se [S4U-PREFLIGHT.md](releases/lund-20260929/S4U-PREFLIGHT.md) för
-mottagarkontroller, tidsgräns och det startkommando som fortfarande måste
-godkännas separat. Kör inte registreringsskriptet igen och starta inte
-uppgiften med stöd av tidigare instruktioner om registrering.
+**Senaste granskning 2026-10-01: obevakad livehämtning och leverans PASS.**
+Operatören körde den isolerade uppgiften 09:44:23–10:33:32 svensk tid.
+`ossia`, S4U/Limited, session 0, icke-interaktivt; giltigt startkvitto.
+1 255 verkliga Willys-anrop (två återhämtade HTTP 500), 18 939 produktposter,
+ny artefakt `5b1a2b6b…`, exakt en mottagarimport `293e1533…`.
+Faktisk reload och senare HTTP-läsning visar manifest `19cd1da8…`, **44 066**
+råproduktposter; samma ID/hash i beständigt framgångskvitto. Mottagare,
+relä, observatör och Task Scheduler rapporterar 0 för denna körning.
+Se [S4U-LIVE.md](releases/lund-20260929/S4U-LIVE.md) och dess hashade bevis.
+Granskningen startade inget nytt jobb, samlade inte in och ändrade inte drift.
+Starta inte igen med stöd av gamla instruktioner eller gammalt startkvitto.
 
-Förkontrollen passerade 2026-10-01 07:25 UTC: separat mottagare igång,
-44 080 poster på manifest `a69651bd…`, fem FRESH-baser, 2 232 kontrollerade
-råfiler utan fel. Uppdateringen är `degraded` genom frivilliga källors
-redovisade radfel, inte genom basfel. Lokalt `receiver-ready.json` gäller
-till **09:25:03 UTC / 11:25:03 svensk tid samma dag**. Därefter krävs ny
-förkontroll, inte bara flyttad sluttid. Windows-testet är ännu inte startat.
+[Förkontrollen](releases/lund-20260929/S4U-PREFLIGHT.md) är historik:
+dess 44 080-manifest har ersatts av denna liveleverans. Profilproven på
+42 491 och de tidigare driftproven på 44 132 är fortfarande separata bevis.
+Inga säkerhetspolicyer, uppgiftsargument eller produktionsbeslut ändrades.
 
 **Driftspärrar från 2026-09-30, fortsatt INTE REDO.** Läs även
 [OPERATIONS.md](releases/lund-20260929/OPERATIONS.md) och uppdaterad
@@ -25,10 +26,9 @@ Faktisk produktionsbild `54dde838…` tappar 64/12 planfält och ger 500 för
 alla tre nya planer identiskt på 44 132-manifestet; samtliga 37 revisionsrader
 bevarade. Originalpolicyn stoppar publicering av den gamla kön genom saknad
 Primat-bas. Det nya Windows-paketets SSH-replay/kvittot/not_due passerar;
-det är inte ett obevakat liveprov. Testuppgiften registrerades därefter av
-operatören; registreringshindret är stängt. S4U/Limited/konto är bevarade.
-Aktuell mottagarstatus och nästa startgräns finns i förkontrollen ovan;
-ingen start är godkänd genom själva registreringen.
+det är separat från det nu granskade obevakade liveprovet. Registrerings-
+och S4U-livehindren är stängda för provad konfiguration. Versionsövergång
+och säker återgång är fortsatt blockerade och har inte omprövats här.
 Aktiva Windows-uppgiftens XML är byteidentisk före/efter. Produktionens
 bild, policy och scheman är oförändrade; ingen push. De tre
 produktionsbesluten är fortfarande separata och ej fattade.

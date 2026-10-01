@@ -4,8 +4,10 @@
 [Docker/HTTP-bevis](OPS-EVIDENCE.json) och [Windows-replay](WINDOWS-EVIDENCE.json).
 Faktisk produktionsbild har nu provats: äldre GET tappar planfält och ger
 500 för öppet kampanjval; originalpolicyn kan inte tömma den gamla kön med
-lyckad publicering. S4U-testuppgiften är nu registrerad av operatören men
-inte körd; aktuell förkontroll finns i [S4U-PREFLIGHT.md](S4U-PREFLIGHT.md).
+lyckad publicering. **Obevakad S4U-livehämtning/leverans är nu PASS** för
+operatörens körning 20261001T074423Z; se [S4U-LIVE.md](S4U-LIVE.md).
+Det nya serving-manifestet har 44 066 poster; det ersätter inte bevisen
+från äldre profil-, drift- eller förkontrollmanifest.
 Ny bild återläser alla nya planer identiskt. Följande
 ordinarie svitresultat är tidigare releasebevis, inte nya omkörningar.
 

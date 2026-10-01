@@ -1,0 +1,319 @@
+{
+  "run_id": "20261001T074423Z",
+  "started_utc": "2026-10-01T07:44:23+00:00",
+  "finished_utc": "2026-10-01T08:33:32.1981288Z",
+  "account": "ossia",
+  "session_id": 0,
+  "interactive": false,
+  "logon_type": "S4U",
+  "run_level": "Limited",
+  "observer_exit": 0,
+  "readiness_checked_utc": "2026-10-01T07:25:03.838295+00:00",
+  "readiness_expires_utc": "2026-10-01T09:25:03.838295+00:00",
+  "readiness_valid_at_start": true,
+  "package_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+  "package_files_verified": 624,
+  "collection_metrics": {
+    "status": "complete",
+    "started_at": "2026-10-01T07:44:31.546140+00:00",
+    "finished_at": "2026-10-01T08:22:51.763468+00:00",
+    "runtime_seconds": 2300.234,
+    "requests": 1255,
+    "http_statuses": {
+      "200": 1253,
+      "500": 2
+    },
+    "challenges": 0,
+    "http_errors": 2
+  },
+  "relay_events": [
+    {
+      "at": "2026-10-01T07:44:27.471571+00:00",
+      "event": "task_start",
+      "expected_daily_time": null,
+      "schedule_policy": "base_35h",
+      "schedule_timezone": "Europe/Stockholm",
+      "invocation_kind": "scheduled_or_manual_not_inferred"
+    },
+    {
+      "at": "2026-10-01T07:44:27.579037+00:00",
+      "event": "collection_start"
+    },
+    {
+      "at": "2026-10-01T08:22:51.837424+00:00",
+      "event": "collection_complete",
+      "requests": 1255,
+      "rows": 18939,
+      "runtime_seconds": 2299.984
+    },
+    {
+      "at": "2026-10-01T08:23:20.680226+00:00",
+      "event": "validation_pass",
+      "sha256_prefix": "5b1a2b6b01ba",
+      "artifact_file": "049d1ce3a2e546f3922cbadd89e3d73f.smako-source",
+      "observed_from": "2026-10-01 07:44:37.057437+00:00",
+      "bytes": 3948272
+    },
+    {
+      "at": "2026-10-01T08:23:58.470395+00:00",
+      "event": "upload_pass",
+      "seconds": 37.781
+    },
+    {
+      "at": "2026-10-01T08:23:58.470395+00:00",
+      "event": "server_import_start"
+    },
+    {
+      "at": "2026-10-01T08:33:30.023123+00:00",
+      "event": "server_activation_pass",
+      "seconds": 571.563,
+      "activation": "normal_managed_refresh",
+      "snapshot_id": "293e153376ae45bbbf114c0cbb5790d3",
+      "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671"
+    },
+    {
+      "at": "2026-10-01T08:33:31.857691+00:00",
+      "event": "task_success",
+      "sha256_prefix": "5b1a2b6b01ba"
+    },
+    {
+      "at": "2026-10-01T08:33:31.858661+00:00",
+      "event": "task_end",
+      "seconds": 2944.406
+    }
+  ],
+  "receipt": {
+    "sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+    "municipality_code": "1281",
+    "next_fetch_at": "2026-10-02T18:44:37.057437+00:00",
+    "collection_day": "2026-10-01",
+    "observed_from": "2026-10-01T07:44:37.057437+00:00",
+    "completed_at": "2026-10-01T08:33:30.023635+00:00",
+    "server": {
+      "activation": "normal_managed_refresh",
+      "snapshot_id": "293e153376ae45bbbf114c0cbb5790d3",
+      "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671"
+    }
+  },
+  "file_hashes": {
+    "20261001T074423Z-context.json": "7aabdb339c974d2485ba6b4fc2636228ee0119fa92517c59afd776b464f7d875",
+    "20261001T074423Z-result.json": "86bb47ee8f39dd4f927d391ae1762cdcd93bbe146ccf45df9ec2a9a76d892dc1",
+    "20261001T074423Z-process.log": "599a516e3dc925a2ccfc35a2f9d2ca3feab7568e68ab4e8b5e05b0175aaec7a8",
+    "receiver-ready.json": "2f50da3cf88625e515842ef9e6a4cc6cd529fe89ad6e378e0ce689a0ac306b27",
+    "run_s4u_probe.ps1": "66551d592c2a992adc09b74a5ca09b32c7a84cd3d8b5b84d55a850b4bae5316f",
+    "state\\last-success.json": "f71d3df701960e7a0f545ddeb99eb44cd62a896d7b8281007b102a11e77065e5",
+    "state\\logs\\20261001T074427Z-df53c49d3dfb4cbb9dfc0750d740c87e.jsonl": "b7b6984d5e9744749464b536e520e204edd8a0d8c814c1a44496461554707c04"
+  },
+  "receiver": {
+    "checked_utc": "2026-10-01T08:50:29.318520+00:00",
+    "read_only": true,
+    "retailer_requests_during_audit": 0,
+    "artifact_sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+    "source_manifest": {
+      "schema_version": "smako-source-snapshot-v1",
+      "source_snapshot_id": "049d1ce3a2e546f3922cbadd89e3d73f",
+      "collection_started_at": "2026-10-01T07:44:35.953394Z",
+      "collection_finished_at": "2026-10-01T08:21:47.301012Z",
+      "observed_from": "2026-10-01T07:44:37.057437Z",
+      "observed_to": "2026-10-01T08:15:10.740536Z",
+      "row_count": 18939,
+      "product_count": 10496,
+      "request_count": 1255,
+      "context_ids": [
+        "2176",
+        "2354"
+      ],
+      "parser_version": "willys-parser-v3",
+      "normalizer_version": "product-normalizer-v3-recipe-taxonomy"
+    },
+    "completion": {
+      "2176": {
+        "complete": true,
+        "limited": false,
+        "expected_categories": 447,
+        "completed_categories": 447,
+        "pages_fetched": 658,
+        "products_observed": 10266,
+        "expected_products": null,
+        "raw_rows": null,
+        "unique_products": null,
+        "duplicate_products": null,
+        "within_partition_duplicates": null,
+        "cross_partition_duplicates": null,
+        "exact_duplicates_removed": null,
+        "conflicting_duplicates": null,
+        "pagination_overlaps": null,
+        "expected_pages": null,
+        "reason": null
+      },
+      "2354": {
+        "complete": true,
+        "limited": false,
+        "expected_categories": 432,
+        "completed_categories": 432,
+        "pages_fetched": 585,
+        "products_observed": 8673,
+        "expected_products": null,
+        "raw_rows": null,
+        "unique_products": null,
+        "duplicate_products": null,
+        "within_partition_duplicates": null,
+        "cross_partition_duplicates": null,
+        "exact_duplicates_removed": null,
+        "conflicting_duplicates": null,
+        "pagination_overlaps": null,
+        "expected_pages": null,
+        "reason": null
+      }
+    },
+    "matching_import_snapshots": 1,
+    "imported_snapshot": {
+      "id": "293e153376ae45bbbf114c0cbb5790d3",
+      "chain": "willys",
+      "scope_key": "lund",
+      "coverage": "full_catalog",
+      "state": "promoted",
+      "is_active": 1,
+      "collector_run_id": "a7365d2fa23246f0847e5e3eec918677",
+      "previous_active_snapshot_id": "a3806a4fa4614cabb451eca73a1426d0",
+      "connector_version": "willys-v1",
+      "parser_version": "willys-parser-v3",
+      "normalizer_version": "product-normalizer-v3-recipe-taxonomy",
+      "schema_fingerprint": "9d242a2c7eccbf40a3adf08e0fd459d0d91b81298e9639e73579087735ffed70",
+      "created_at": "2026-10-01T08:24:32.766350+00:00",
+      "parsed_at": "2026-10-01T08:27:46.699659+00:00",
+      "validated_at": "2026-10-01T08:27:46.701649+00:00",
+      "health_checked_at": "2026-10-01T08:27:46.702938+00:00",
+      "promoted_at": "2026-10-01T08:28:17.769090+00:00",
+      "rejected_at": null,
+      "rejection_reason": null
+    },
+    "import_run": {
+      "id": "a7365d2fa23246f0847e5e3eec918677",
+      "status": "succeeded",
+      "successful": 1,
+      "started_at": "2026-10-01T08:24:32.741644+00:00",
+      "finished_at": "2026-10-01T08:27:46.711127+00:00",
+      "error_summary": null
+    },
+    "import_source_metadata": {
+      "schema_version": "smako-source-snapshot-v1",
+      "sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+      "source_snapshot_id": "049d1ce3a2e546f3922cbadd89e3d73f",
+      "parent_snapshot_ids": [],
+      "collection_location": "LOCAL_RELAY",
+      "retailer_source": "willys",
+      "collection_started_at": "2026-10-01T07:44:35.953394+00:00",
+      "collection_finished_at": "2026-10-01T08:21:47.301012+00:00",
+      "observed_from": "2026-10-01T07:44:37.057437+00:00",
+      "observed_to": "2026-10-01T08:15:10.740536+00:00",
+      "original_request_count": 1255
+    },
+    "imported_source_rows": [
+      {
+        "store_external_id": "2176",
+        "rows": 10266,
+        "observed_from": "2026-10-01T07:44:43.807014+00:00",
+        "observed_to": "2026-10-01T07:56:05.388896+00:00"
+      },
+      {
+        "store_external_id": "2354",
+        "rows": 8673,
+        "observed_from": "2026-10-01T08:03:35.952756+00:00",
+        "observed_to": "2026-10-01T08:15:10.740536+00:00"
+      }
+    ],
+    "raw_payloads_verified": 1250,
+    "raw_hashes_times_contexts_equal_source": true,
+    "source_validation": "PASS",
+    "runner": {
+      "city": "Lund",
+      "completed_at": "2026-10-01T08:33:29.492671+00:00",
+      "coop_source_configuration": {
+        "configuration_valid": true,
+        "configured_context_ids": [
+          "730400"
+        ],
+        "configured_policy": "review",
+        "context_id": "730400",
+        "diagnostic_code": null,
+        "operator_opt_in": true,
+        "price_semantics": "online_price",
+        "required_context_id": "730400",
+        "scope": "online_fulfillment",
+        "valid": true
+      },
+      "exit_code": 0,
+      "previous_restart_manifest": "verified",
+      "refresh_exit_code": 0,
+      "run_kind": "source_relay_import",
+      "runtime_reload": {
+        "changed": true,
+        "new_price_universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671",
+        "old_price_universe_id": "price-universe:a69651bdd5bae3326e23269cf86829d1569ea809061e6e0a02434a1a478a4fd8",
+        "plan_prewarm": "disabled",
+        "pricing_projection": "miss_filled"
+      },
+      "schema_version": "production-refresh-runner-v1",
+      "started_at": "2026-10-01T08:28:17.820992+00:00",
+      "status": "complete"
+    },
+    "active_manifest_sha256": "330a446eb382e2845c1270fbe8be6379ce64331e002a54a5cb655efd5beef2cc",
+    "prepared_artifact_sha256": "2912262e77e83f7e33356cf6ae5f2f5b900fc6e0f2064404fad8495e21e0f0bb",
+    "serving": {
+      "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671",
+      "built_at": "2026-10-01T08:29:18.770893Z",
+      "raw_product_count": 44066,
+      "product_count": 2246,
+      "snapshot_ids": [
+        "03ecb507c93c45ecb3d1ab8d18de2e63",
+        "0a02770853d247279ebaedb5309a37a9",
+        "0b59b3ace78f4b6db2d8b1d97c96d4fb",
+        "16c7ec31fa4e4f5899f3a6d19ae4d590",
+        "1eefdcbec9934b1b85b53ee1ceeba625",
+        "228179f436044eba99af165b817b89b3",
+        "293e153376ae45bbbf114c0cbb5790d3",
+        "2c47d341b8f246848d2bfcfa46757044",
+        "3552c63e2d174bac85a8e015b93a4a43",
+        "358873a8e8f549089062628531f43c86",
+        "363e3c9fe81b48c982142f01047d08b2",
+        "3f2de252bae34dbd9eb80c4664424c79",
+        "512e0fab56674cce8498757944a8e119",
+        "54e3331d7b4c4e96a1ff002e5d830cdf",
+        "588288bf13bd4b9cb91af8cb9ec27ee2",
+        "593e2808b7344d858fbca285046fac36",
+        "5d76abc53d40471897d92a7326eca306",
+        "695a6f9788cc4b59aa71bf61af78b661",
+        "6beedfc24e6542b89b39277c185d92a3",
+        "7a864c3cb9f54a38be5f77c612b5160b",
+        "7fde30299d184a9b86af058990997ff4",
+        "92d1e8138efb41878d4d5ded88fd3be5",
+        "98740403af1e47caa7cc61937d0e650b",
+        "9aaa68ea82be49dbb0d10ece3f4fcc2b",
+        "b5acc16727ca4ce7972b4135de9bc127",
+        "c1517b4e7e234c23b85d04fcb8b76ccf",
+        "c22e18c8e3f846efaccb0b5d84ec2b02",
+        "cda8609ac4cb4d51a0450836961ba063",
+        "e465b42fdcee42048abf9c87783da850",
+        "e8cc9da9b3d54c50bd58b3524b5e059f",
+        "f0762bc7495648938996d690e73b0c60",
+        "fa288ef064e147878c6b983c78649e3f"
+      ]
+    },
+    "served_rows_from_this_import": 18760,
+    "served_rows_by_store": {
+      "2176": 10170,
+      "2354": 8590
+    },
+    "served_source_times_preserved": true,
+    "ready_http": 200
+  },
+  "unattended_live_collection_and_delivery": "PASS",
+  "retailer_requests_during_audit": 0,
+  "new_task_start": false,
+  "production_task_xml_sha256": "c781d10ce504aa172d8006f365f7ad167ac2ca23688fcf629d1b0851c5ff6755",
+  "receiver_image": "sha256:2f81344208e05cbc57d16fa74a73c97b26bc729859936ca5d96ab150579fe221",
+  "receiver_container": "smako-lund-ops-s4u",
+  "receiver_mount": "/var/tmp/smako-repo-release-20260929/ops-verification/s4u-data:/work",
+  "scheduler_operational_log_enabled": false
+}

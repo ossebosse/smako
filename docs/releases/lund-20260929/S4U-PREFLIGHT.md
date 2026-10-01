@@ -1,5 +1,10 @@
 # S4U: förkontroller 2026-10-01
 
+**Historiskt förkontrollunderlag.** Operatören körde därefter uppgiften.
+[S4U-LIVE.md](S4U-LIVE.md) redovisar PASS för exakt den avslutade körningen.
+Nedanstående startkommando och tidsbegränsade kvitto är inte tillstånd
+att köra uppgiften igen.
+
 Operatören har registrerat testuppgiften. Den har **inte startats** av
 Codex. Start kräver fortfarande separat uttryckligt godkännande för den
 isolerade livekörningen. Detta är inte något av produktionsbesluten.
