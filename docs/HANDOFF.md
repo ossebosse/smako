@@ -1,4 +1,22 @@
-# Aktivering 2026-10-01: stopp vid aktuell schemakontroll
+# Aktivering 2026-10-01: schema godkänt, stopp vid Windows-behörighet
+
+Alla fyra beslut är givna: femkällorspolicy, server med begränsad läsåtergång,
+bdc9-reläbyte och lokala 01:30/09:30/17:30. Begär inte dessa igen.
+Faktisk uppdatering/paus av befintlig uppgift nekades 19:50:00 UTC med
+`0x80070005 E_ACCESSDENIED` för ossia utan förhöjning. Uppgiften är byteidentisk,
+fortfarande Ready med enbart 01:30. Ingen paus/serverändring/insamling utförd.
+Läs [aktuellt operatörssteg och bevis](releases/lund-20260929/ACTIVATION-OPERATOR-20261001.md).
+Slutligt granskat skript `scripts/release_verification/set_lund_task_paused.ps1`
+stagerar godkända Arguments/WorkingDirectory och tre lokala tider, lämnar
+befintlig uppgift DISABLED och bevarar principal/övriga inställningar. Det ska
+köras förhöjt som samma ossia, utan policyöverstyrning. Därefter läs tillbaka
+och fortsätt serverförkontroller/paus/backup/samordnat byte enligt ACTIVATION.
+Återuppta inte scheman före faktisk produktionsacceptans.
+Nytt bdc9-not_due-prov på kopierat autentiskt tillstånd: 0 externa anrop,
+byteidentiskt kvitto/källtid. Normal drift/nyplanering/uttrycklig omräkning/GET
+är ännu inte provade i ny produktion. Inga gamla blockerare återinförs.
+
+## Föregående stopp före det nu givna schemagodkännandet
 
 **Tre produktionsbeslut är nu uttryckligen godkända, villkorat av förkontroller.**
 Godkännandena ska inte begäras igen. Ingen aktivering har gjorts: bdc9-reläets

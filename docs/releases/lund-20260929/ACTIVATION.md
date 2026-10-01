@@ -1,19 +1,20 @@
 # Lund: samordnat byte och begränsad återgång
 
-**Aktuellt 2026-10-01:** de tre besluten nedan är uttryckligen godkända,
-villkorat av aktuella förkontroller, inklusive begränsad läsåtergång. Begär
-inte samma beslut igen. Byte har stoppats före paus på grund av det nu
-belagda glappet mellan dygnstrigger och 35/48-timmarsregler; se
-[aktiveringsprotokoll och separat schemaförslag](ACTIVATION-PREFLIGHT-20261001.md).
-Ingen schemamutation är godkänd eller utförd. Återstående förkontroller ska
-fortsätta efter ett separat schemabeslut innan nedanstående byte genomförs.
+**Aktuellt 2026-10-01:** de tre produktionsbesluten och schemaändringen till
+01:30/09:30/17:30 Europe/Stockholm är uttryckligen godkända, villkorat av
+aktuella förkontroller. Begär inte besluten igen. Den faktiska Windows-
+uppdateringen/pausen nekades med `0x80070005`; inga driftinställningar ändrades.
+Se [aktuellt operatörssteg](ACTIVATION-OPERATOR-20261001.md). Tidigare
+[schemastopp](ACTIVATION-PREFLIGHT-20261001.md) är historik; själva schemaförslaget
+är nu godkänt. Återstående förkontroller och samordnat byte kvarstår efter
+operatörens behörighetssteg. Inga nya scheman har faktiskt registrerats.
 
 Besluten omfattar femkällorspolicyn, serveraktivering och ändring av den aktiva
 Windows-uppgiftens Arguments/WorkingDirectory. Godkänt återgångsmål erbjuder
 **läsning av sparade planer, inte full drift**.
 Se [TRANSITION.md](TRANSITION.md) för provad sekvens och teknisk slutstatus.
 Tidigare tekniska övergångs-/återgångsprov är fortsatt PASS. Aktuell
-produktionsaktivering är **STOPPAD VID SCHEMAFÖRKONTROLL**, inte utförd.
+produktionsaktivering är **STOPPAD VID WINDOWS-BEHÖRIGHET**, inte utförd.
 Malmö, utökad erbjudandetäckning och städning ingår inte.
 
 ## Versionsbundna mål
@@ -45,7 +46,7 @@ Gammal produktionsbild `54dde8382599ac30beee8bffd05d8cefff232e1ea5c81f1fd7f302db
 
 ## Exakta föreslagna inställningsändringar
 
-Efter separat policybeslut används `lund-own-five-base-20260928-v1`,
+Enligt det givna policybeslutet används `lund-own-five-base-20260928-v1`,
 `OWN_SOURCES_ONLY=true` och exakt följande `PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS`:
 
 ```text
@@ -67,7 +68,7 @@ Renderad Compose ska bekräfta dessa bindningar före byte. Gamla inboxen får i
 pollas av det nya kommunflödet. Befintligt operationslås serialiserar alla
 refresh-/importvägar även efter att normala jobb återupptas.
 
-Windows-förslaget ändrar endast Arguments och WorkingDirectory för
+Windows-bytet ändrar Arguments, WorkingDirectory och godkända schematider för
 `Smako Willys Local Relay`:
 
 ```text
@@ -75,12 +76,25 @@ Windows-förslaget ändrar endast Arguments och WorkingDirectory för
 WorkingDirectory: D:\smako-local-relay\releases\bdc9f7df4170
 ```
 
-Behåll befintlig pinnad pwsh.exe, ossia/S4U/Limited, 01:30-trigger, IgnoreNew,
+Behåll befintlig pinnad pwsh.exe, ossia/S4U/Limited, IgnoreNew,
 PT3H, StartWhenAvailable och WakeToRun. Kontrollera effektiv körpolicy och
 signering enligt provat startförfarande; tillfällig Bypass vid registrering
 bevisar inte schemalagd laddning. Ingen permanent säkerhetspolicy ändras.
 Privat uppgiftsmall: `.local/drift-verification/task-proposed-municipal/task-proposed.xml`.
 Gamla skript, arbetsytor och uppgiftexport bevaras.
+
+Behåll 01:30 och lägg till 09:30/17:30 som lokala klockslag utan fast UTC-offset
+i StartBoundary. Windows-zonen ska vara W. Europe Standard Time (Stockholm).
+Det granskade operatörsskriptet lämnar uppgiften pausad och sätter första
+triggerdagen till nästa lokala dag för att undvika omedelbar catch-up av nya
+passerade tider. Efter bytet kontrolleras faktisk NextRunTime före återupptagning.
+35-timmarsregel/36-timmarsvarning/48-timmarsstopp är oförändrade. Räkna hela
+hämtning–import–publicering–reload: högst åtta timmars normal väntan plus tre
+timmars genomförandebudget ger två timmars marginal, en timme vid höstens
+nio timmars glapp. Försening/lås förbrukar marginalen; missad start kan ge
+54–55 timmar och hårt stopp. Dator-/nätbortfall ger ingen färskhetsgaranti.
+PT3H i Windows bevisar inte att eventuella fjärrbarn är avslutade; kontrollera
+operationslås och faktisk serving innan resultat eller återupptagning godtas.
 
 ## Enda övergångsordningen efter besluten
 
@@ -112,7 +126,10 @@ Gamla skript, arbetsytor och uppgiftexport bevaras.
    autentiserad transport, validering, exakt en import, atomisk publicering,
    **faktiskt laddat** manifest och beständigt kvitto. Förlorat lokalt kvitto
    efter publicering ska ge återleverans/already_active utan dubbelimport.
-   Kontrollera planläsning. Återuppta scheman först när detta passerat.
+   Kontrollera fyra nya 15/20-profiler, representativa köp och planläsning efter
+   omstart. Prova uttrycklig omräkning av sparad verifieringsplan separat från
+   nyplanering och GET; läsbarhet räcker inte som omräkningsbevis. Använd separat
+   verifieringsidentitet. Återuppta scheman först när produktionsproven passerat.
 
 ## Begränsad återgång och återstart
 

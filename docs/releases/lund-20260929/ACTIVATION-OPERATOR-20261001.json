@@ -1,0 +1,246 @@
+{
+  "checked_utc": "2026-10-01T19:58:43.882518+00:00",
+  "status": "BLOCKED_AT_WINDOWS_PERMISSION; no production changes",
+  "approved": {
+    "five_base_policy": true,
+    "server_with_limited_recovery": true,
+    "bdc9_arguments_working_directory": true,
+    "local_0130_0930_1730": true
+  },
+  "runtime_commit": "08c137475d9ca96a6ef7673245a639c8c5c9e922",
+  "image": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+  "relay_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+  "registration_error": {
+    "utc": "2026-10-01T19:50:00.2202792Z",
+    "operation": "RegisterTask TASK_UPDATE|TASK_DONT_ADD_PRINCIPAL_ACE",
+    "task": "Smako Willys Local Relay",
+    "caller": "LAPTOP-I109S875\\ossia",
+    "elevated": false,
+    "hresult": "0x80070005",
+    "message": "Åtkomst nekad. (0x80070005 (E_ACCESSDENIED))",
+    "task_unchanged": true
+  },
+  "original_and_final_task_xml_sha256": "c781d10ce504aa172d8006f365f7ad167ac2ca23688fcf629d1b0851c5ff6755",
+  "task_readback": {
+    "state": "Ready",
+    "last_run": "2026-10-01T01:30:01.0000000+02:00",
+    "last_result": 1,
+    "next_run": "2026-10-02T01:30:00.0000000+02:00",
+    "principal": {
+      "UserId": "ossia",
+      "LogonType": 2,
+      "RunLevel": 0
+    },
+    "triggers": {
+      "StartBoundary": "2026-09-09T01:30:00+02:00",
+      "Enabled": true,
+      "DaysInterval": 1
+    }
+  },
+  "schedule_and_not_due": {
+    "checked_utc": "2026-10-01T19:52:55.634498+00:00",
+    "schedule_approved_but_not_registered": true,
+    "kind": "Calculation, not future execution; not_due is guarded execution on copied state",
+    "due_hours": 35,
+    "warning_hours": 36,
+    "hard_stop_hours": 48,
+    "not_due": {
+      "exit": 0,
+      "calls": {
+        "collection": 0,
+        "push": 0,
+        "activation": 0
+      },
+      "receipt_unchanged": true,
+      "original_state_unchanged": true,
+      "observed_from": "2026-10-01T07:44:37.057437+00:00",
+      "receipt_sha256": "f71d3df701960e7a0f545ddeb99eb44cd62a896d7b8281007b102a11e77065e5",
+      "package_files_verified": 624
+    },
+    "clock_times_local": [
+      "01:30",
+      "09:30",
+      "17:30"
+    ],
+    "normal": {
+      "minimum_gap_hours": 8.0,
+      "maximum_gap_hours": 8.0,
+      "worst_observation_to_serving_budget_hours": 46.0,
+      "minimum_margin_hours": 2.0
+    },
+    "autumn_20261025": {
+      "minimum_gap_hours": 8.0,
+      "maximum_gap_hours": 9.0,
+      "worst_observation_to_serving_budget_hours": 47.0,
+      "minimum_margin_hours": 1.0
+    },
+    "spring_20270328": {
+      "minimum_gap_hours": 7.0,
+      "maximum_gap_hours": 8.0,
+      "worst_observation_to_serving_budget_hours": 46.0,
+      "minimum_margin_hours": 2.0
+    },
+    "next_relay_due_local": "2026-10-02T20:44:37.057437+02:00",
+    "projected_collection_start_local": "2026-10-03T01:30:00+02:00",
+    "hard_stop_original_observation_local": "2026-10-03T09:44:37.057437+02:00",
+    "measured_prior_full_delivery_seconds": 2949.198128,
+    "projected_serving_with_measured_duration_local": "2026-10-03T02:19:09.198128+02:00",
+    "projected_serving_with_3h_budget_local": "2026-10-03T04:30:00+02:00",
+    "margin_with_3h_budget_hours": 5.2436270658333335,
+    "one_missed_poll_worst_case": {
+      "normal_hours_until_serving": 54,
+      "autumn_hours_until_serving": 55,
+      "freshness_guaranteed": false
+    },
+    "delay_or_lock": "Delay consumes margin; a skipped due run or persistent lock can exceed 48h. IgnoreNew/StartWhenAvailable/WakeToRun do not guarantee recovery while computer/network unavailable. Never break locks.",
+    "runtime_budget_limit": "Three hours is a planning bound through serving/reload, not a guarantee. Confirm receiver completion: Windows PT3H alone does not prove remote child operations stopped."
+  },
+  "production_preexisting_state": {
+    "manifest_sha256": "1fd662ffdbd32d2ab471e0cb6a5c3d7e8057c50be2157bbb7a9334980fd9a8fa",
+    "ready": {
+      "http": 503
+    },
+    "api/price-universe/status": {
+      "http": 200,
+      "status": null,
+      "universe_id": "price-universe:96ca8bfb2ac873a5bdd6d54b9c7840b4be2b069b1d780905a885c325edd38a2a",
+      "raw_product_count": 36906,
+      "freshness": "stale",
+      "oldest_usable_price_age_hours": null
+    },
+    "plan_revisions": 170
+  },
+  "production_image_ids": {
+    "/smako-app-1": "sha256:54dde8382599ac30beee8bffd05d8cefff232e1ea5c81f1fd7f302db0d591c1f",
+    "/smako-scheduler-1": "sha256:54dde8382599ac30beee8bffd05d8cefff232e1ea5c81f1fd7f302db0d591c1f"
+  },
+  "production_cron_unchanged": [
+    {
+      "schedule": "47 02 * * *",
+      "script": "backup_sqlite.py"
+    },
+    {
+      "schedule": "17 03 * * *",
+      "script": "run_daily_refresh.py"
+    },
+    {
+      "schedule": "17 06 * * *",
+      "script": "run_source_retry.py"
+    }
+  ],
+  "candidate_freshness_not_production": {
+    "checked_utc": "2026-10-01T19:51:39.880433+00:00",
+    "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671",
+    "raw_rows": 44066,
+    "mandatory_contexts": {
+      "context:coop:23eaae11c9661e68": {
+        "rows": 11428,
+        "oldest_observed_at": "2026-10-01T06:09:21.920468+00:00",
+        "age_hours": 13.705,
+        "state": "FRESH"
+      },
+      "context:hemkop:3288e04edd97e349": {
+        "rows": 5071,
+        "oldest_observed_at": "2026-10-01T06:55:05.319713+00:00",
+        "age_hours": 12.943,
+        "state": "FRESH"
+      },
+      "context:hemkop:756955d0e6e05f23": {
+        "rows": 6205,
+        "oldest_observed_at": "2026-10-01T06:39:40.871532+00:00",
+        "age_hours": 13.2,
+        "state": "FRESH"
+      },
+      "context:willys:383650ec6ff5a636": {
+        "rows": 10170,
+        "oldest_observed_at": "2026-10-01T07:44:43.807014+00:00",
+        "age_hours": 12.116,
+        "state": "FRESH"
+      },
+      "context:willys:4a671428fc484e43": {
+        "rows": 8590,
+        "oldest_observed_at": "2026-10-01T08:03:35.952756+00:00",
+        "age_hours": 11.801,
+        "state": "FRESH"
+      }
+    },
+    "test_clock_used": false
+  },
+  "candidate_manifest_times_not_renewed": {
+    "manifest": {
+      "built_at": "2026-10-01T10:54:40.796845Z",
+      "oldest_base_observed_at": "2026-09-30T11:17:53.844785Z",
+      "oldest_observed_at": "2026-09-28T14:54:06.510315Z"
+    },
+    "artifact": {
+      "oldest_observed_at": "2026-09-28T14:54:06.510315Z"
+    },
+    "universe": {
+      "built_at": "2026-10-01T10:54:40.796845Z"
+    },
+    "metadata": {}
+  },
+  "candidate_source_observations": {
+    "wal_empty_or_absent": true,
+    "observations": [
+      [
+        "willys",
+        "2176",
+        "2026-10-01T07:44:43.807014+00:00",
+        "293e153376ae45bbbf114c0cbb5790d3",
+        "2026-10-01T08:28:17.769090+00:00"
+      ],
+      [
+        "willys",
+        "2354",
+        "2026-10-01T08:03:35.952756+00:00",
+        "293e153376ae45bbbf114c0cbb5790d3",
+        "2026-10-01T08:28:17.769090+00:00"
+      ],
+      [
+        "hemkop",
+        "4224",
+        "2026-10-01T06:55:05.319713+00:00",
+        "228179f436044eba99af165b817b89b3",
+        "2026-10-01T07:07:06.705008+00:00"
+      ],
+      [
+        "hemkop",
+        "4123",
+        "2026-10-01T06:39:40.871532+00:00",
+        "92d1e8138efb41878d4d5ded88fd3be5",
+        "2026-10-01T06:54:14.598219+00:00"
+      ],
+      [
+        "coop",
+        "730400",
+        "2026-10-01T06:09:21.920468+00:00",
+        "512e0fab56674cce8498757944a8e119",
+        "2026-10-01T06:38:50.043505+00:00"
+      ],
+      [
+        "coop",
+        "730400",
+        "2026-09-24T20:38:12.483965+00:00",
+        "aad9742ad47644e9a8abbb55788cdf58",
+        "2026-09-24T21:08:33.657460+00:00"
+      ]
+    ],
+    "temporary_sort": "memory"
+  },
+  "production_changed": false,
+  "any_job_paused": false,
+  "any_job_started": false,
+  "retailer_calls": 0,
+  "backup": "Only task XML saved; consistent production backups not started",
+  "new_production_tests": {
+    "delivery_import_reload": "NOT RUN",
+    "new_planning_four_profiles": "NOT RUN",
+    "explicit_saved_plan_recalculation": "NOT RUN",
+    "saved_get_after_restart": "NOT RUN"
+  },
+  "operator_script": "scripts/release_verification/set_lund_task_paused.ps1",
+  "operator_script_sha256": "fa625621d33d77355a70824cb735cdf398ffe25539f06fc8fbeb72755a352285",
+  "operator_script_final_version": "XML/package validation only; final action staging not registered",
+  "prior_s4u_transition_recovery_evidence": "Preserved; not represented as new production results"
+}
