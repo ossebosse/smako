@@ -1,21 +1,29 @@
-# Lund: samordnat byte och begränsad återgång
+# Lund: aktiverad normal drift och begränsad återgång
 
-**Aktuellt 2026-10-01:** de tre produktionsbesluten och schemaändringen till
-01:30/09:30/17:30 Europe/Stockholm är uttryckligen godkända, villkorat av
-aktuella förkontroller. Begär inte besluten igen. Den faktiska Windows-
-uppdateringen/pausen nekades med `0x80070005`; inga driftinställningar ändrades.
-Se [aktuellt operatörssteg](ACTIVATION-OPERATOR-20261001.md). Tidigare
-[schemastopp](ACTIVATION-PREFLIGHT-20261001.md) är historik; själva schemaförslaget
-är nu godkänt. Återstående förkontroller och samordnat byte kvarstår efter
-operatörens behörighetssteg. Inga nya scheman har faktiskt registrerats.
+**Aktuellt 2026-10-02: AKTIVERAT, normal drift.** De fem givna godkännandena
+har tillämpats: femkällorspolicy, serverutgåva med begränsad läsåtergång,
+bdc9-reläbyte, Windows 01:30/09:30/17:30 samt serverkontroll var 15:e minut.
+Se [faktiskt aktiveringsprotokoll](ACTIVATION-LIVE-20261001.md) och
+[maskinläsbart bevis](ACTIVATION-LIVE-EVIDENCE.json). Begär inte besluten igen.
 
-Besluten omfattar femkällorspolicyn, serveraktivering och ändring av den aktiva
-Windows-uppgiftens Arguments/WorkingDirectory. Godkänt återgångsmål erbjuder
-**läsning av sparade planer, inte full drift**.
-Se [TRANSITION.md](TRANSITION.md) för provad sekvens och teknisk slutstatus.
-Tidigare tekniska övergångs-/återgångsprov är fortsatt PASS. Aktuell
-produktionsaktivering är **STOPPAD VID WINDOWS-BEHÖRIGHET**, inte utförd.
-Malmö, utökad erbjudandetäckning och städning ingår inte.
+Server och policy är aktiverade, samma befintliga Windows-uppgift är Ready.
+Båda schemana återupptogs efter kontrollerad leverans, fyra profiler,
+representativa köp, uttrycklig omräkning och identisk planläsning efter omstart.
+Nästa körningar vid återupptagandet: server 2 oktober 00:15, Windows 01:30 CEST.
+Dessa är prognoser; en kommande schemakörning är inte ett genomfört prov.
+Tidigare Windows-behörighets-/schemastopp är avslutade och bevarade som historik.
+
+Auktoritativ serverrelease är `/opt/smako/current` →
+`/opt/smako/releases/lund-08c137475d9c`. `/opt/smako/compose` använder paketets
+`compose.release.yaml`, befintlig värdvolymkonfiguration och skyddad
+`activation-private.env`. Alla fem tjänster är pinnade. Befintlig Caddy är
+uttryckligen undantagen från denna releaseaktivering och har inte återskapats.
+Originalets env/policy finns separat kvar. Se protokollet innan driftarbete.
+
+Återgångsmålet ger **autentiserad läsning av sparade planer, inte full drift**.
+Det är verifierat men inte aktiverat. Ingen äldre databas/kö får ersätta det
+senaste tillståndet. Malmö, utökad erbjudandetäckning och städning ingår inte.
+[TRANSITION.md](TRANSITION.md) dokumenterar tidigare isolerade övergångsprov.
 
 ## Versionsbundna mål
 
@@ -44,7 +52,7 @@ svarar kontrollerat 503; source_cli/refresh vägrar med exit 3 i återgångsläg
 Gammal produktionsbild `54dde8382599ac30beee8bffd05d8cefff232e1ea5c81f1fd7f302db0d591c1f`
 är bevarad historik, **inte ett fungerande återgångsmål för nya planer**.
 
-## Exakta föreslagna inställningsändringar
+## Aktiverade inställningar
 
 Enligt det givna policybeslutet används `lund-own-five-base-20260928-v1`,
 `OWN_SOURCES_ONLY=true` och exakt följande `PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS`:
@@ -83,6 +91,11 @@ bevisar inte schemalagd laddning. Ingen permanent säkerhetspolicy ändras.
 Privat uppgiftsmall: `.local/drift-verification/task-proposed-municipal/task-proposed.xml`.
 Gamla skript, arbetsytor och uppgiftexport bevaras.
 
+Aktiverat serverläge är `DEMAND_REFRESH_ENABLED=true` och
+`DEMAND_REFRESH_CRON="*/15 * * * *"`; detta ersätter gamla 03:17-refresh och
+06:17-retry. Backup 02:47 består. Varje kontroll använder ordinarie behovsplan
+och operationslås. Serverns faktiska `not_due` med noll prisanrop är verifierat.
+
 Behåll 01:30 och lägg till 09:30/17:30 som lokala klockslag utan fast UTC-offset
 i StartBoundary. Windows-zonen ska vara W. Europe Standard Time (Stockholm).
 Det granskade operatörsskriptet lämnar uppgiften pausad och sätter första
@@ -96,7 +109,7 @@ nio timmars glapp. Försening/lås förbrukar marginalen; missad start kan ge
 PT3H i Windows bevisar inte att eventuella fjärrbarn är avslutade; kontrollera
 operationslås och faktisk serving innan resultat eller återupptagning godtas.
 
-## Enda övergångsordningen efter besluten
+## Genomförd övergångsordning, referens för kontrollerat byte
 
 1. Kontrollera paket-/bildhashar, faktiskt laddat manifest, refererade råfiler
    och äldsta verkliga observation i var och en av de fem baserna. Varning vid

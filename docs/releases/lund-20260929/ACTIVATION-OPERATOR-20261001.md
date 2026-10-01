@@ -1,3 +1,6 @@
+> Historik: operatörssteget är genomfört och uppgiften senare återupptagen.
+> Se [faktiskt aktiveringsprotokoll](ACTIVATION-LIVE-20261001.md). Kör inte om ApplyPaused.
+
 # Aktivering stoppad vid Windows-behörighet, 2026-10-01
 
 **EJ AKTIVERAT.** Alla fyra avgränsade beslut är godkända. Schemat är inte längre

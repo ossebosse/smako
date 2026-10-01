@@ -1,0 +1,1310 @@
+{
+  "checked_utc": "2026-10-01T22:05:31.769948+00:00",
+  "status": "NORMAL_PRODUCTION_ACTIVE",
+  "runtime_commit": "08c137475d9ca96a6ef7673245a639c8c5c9e922",
+  "server_image": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+  "policy_id": "lund-own-five-base-20260928-v1",
+  "policy_sha256": "a2053bd41157fe818c9c9d437cba540d423b249a8232e2baebb49e94f1e954a1",
+  "release_pointer": "/opt/smako/releases/lund-08c137475d9c",
+  "production_env": "/opt/smako/current/activation-private.env",
+  "all_jobs_same_image": true,
+  "original_auth_preserved": true,
+  "server_schedule": {
+    "timezone": "Europe/Stockholm",
+    "demand_cron": "*/15 * * * *",
+    "backup_cron": "47 02 * * *",
+    "cron_sha256": "beb9b7a47256fc4b9a3c1b458ac011741a401905bdad74b586f1bc0a724c4a5e",
+    "actual_process": "cron -f",
+    "future_scheduled_runs_verified": false
+  },
+  "delivery": {
+    "artifact_sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+    "source_manifest": {
+      "schema_version": "smako-source-snapshot-v1",
+      "source_snapshot_id": "049d1ce3a2e546f3922cbadd89e3d73f",
+      "collection_started_at": "2026-10-01T07:44:35.953394Z",
+      "collection_finished_at": "2026-10-01T08:21:47.301012Z",
+      "observed_from": "2026-10-01T07:44:37.057437Z",
+      "observed_to": "2026-10-01T08:15:10.740536Z",
+      "row_count": 18939,
+      "product_count": 10496,
+      "request_count": 1255,
+      "context_ids": [
+        "2176",
+        "2354"
+      ],
+      "parser_version": "willys-parser-v3",
+      "normalizer_version": "product-normalizer-v3-recipe-taxonomy"
+    },
+    "matching_import_snapshots": 1,
+    "imported_source_rows": [
+      {
+        "store_external_id": "2176",
+        "rows": 10266,
+        "observed_from": "2026-10-01T07:44:43.807014+00:00",
+        "observed_to": "2026-10-01T07:56:05.388896+00:00"
+      },
+      {
+        "store_external_id": "2354",
+        "rows": 8673,
+        "observed_from": "2026-10-01T08:03:35.952756+00:00",
+        "observed_to": "2026-10-01T08:15:10.740536+00:00"
+      }
+    ],
+    "raw_payloads_verified": 1250,
+    "raw_hashes_times_contexts_equal_source": true,
+    "served_rows_from_this_import": 18760,
+    "served_rows_by_store": {
+      "2176": 10170,
+      "2354": 8590
+    },
+    "served_source_times_preserved": true,
+    "runner": {
+      "city": "Lund",
+      "completed_at": "2026-10-01T21:30:11.258760+00:00",
+      "coop_source_configuration": {
+        "configuration_valid": true,
+        "configured_context_ids": [
+          "730400"
+        ],
+        "configured_policy": "review",
+        "context_id": "730400",
+        "diagnostic_code": null,
+        "operator_opt_in": true,
+        "price_semantics": "online_price",
+        "required_context_id": "730400",
+        "scope": "online_fulfillment",
+        "valid": true
+      },
+      "exit_code": 0,
+      "previous_restart_manifest": "verified",
+      "refresh_exit_code": 0,
+      "run_kind": "source_relay_import",
+      "runtime_reload": {
+        "changed": true,
+        "new_price_universe_id": "price-universe:57ca714ed72b687bf1f2af9de7d48d233aac9b51bfd2500021bb4176b7a19a0d",
+        "old_price_universe_id": "price-universe:96ca8bfb2ac873a5bdd6d54b9c7840b4be2b069b1d780905a885c325edd38a2a",
+        "plan_prewarm": "disabled",
+        "pricing_projection": "miss_filled"
+      },
+      "schema_version": "production-refresh-runner-v1",
+      "started_at": "2026-10-01T21:24:18.651005+00:00",
+      "status": "complete"
+    },
+    "active_manifest_sha256": "adcbeaf79dc111f438fd62cc3458f6ca2ee4bbedc9177d1e10ed33a2d08872b0",
+    "prepared_artifact_sha256": "df357720e6b3297460522c84a0363bbe2321f192f329aa6787c3e33cbac93cae"
+  },
+  "delivery_snapshot_id": "304d09f31d704d7fac7f76ab5360fc41",
+  "profile_serving": {
+    "universe_id": "price-universe:57ca714ed72b687bf1f2af9de7d48d233aac9b51bfd2500021bb4176b7a19a0d",
+    "raw_product_count": 44077,
+    "freshness": "fresh"
+  },
+  "profiles": [
+    {
+      "case": "original-exact",
+      "http": 201,
+      "seconds": 180.1,
+      "total": 440.72,
+      "store_count": 2,
+      "verification_status": "VERIFIED",
+      "plan_sha256": "ad377cb2ccb9620a9dc46a4c0e8c97ceced9dae31623841cca27445cfc4ac0f4",
+      "request_sha256": "fac1f8102f94827934646981b969d36c44431e103ef2d09ef44cb4aa2b28ea06",
+      "identical_get": true
+    },
+    {
+      "case": "original-estimated",
+      "http": 201,
+      "seconds": 195.05,
+      "total": 440.72,
+      "store_count": 2,
+      "verification_status": "VERIFIED",
+      "plan_sha256": "9905f52274a70044ca3a8b33e18f9461d4f7caff27558c7ac47afe82d3f551a4",
+      "request_sha256": "e58cdbfe2ef59a0582b31b20795ecd435b90375520208cac0021ee94c2b2767c",
+      "identical_get": true
+    },
+    {
+      "case": "plus-exact",
+      "http": 201,
+      "seconds": 167.24,
+      "total": 440.72,
+      "store_count": 2,
+      "verification_status": "VERIFIED",
+      "plan_sha256": "7044f4672cc48819c757f938e18bf88d821f14988686d6a299f386ee77ec1326",
+      "request_sha256": "1727a03ca724885a1169ffe17ea4bff7930fa8d7c00dbb5b8d29e4dedfb95dcf",
+      "identical_get": true
+    },
+    {
+      "case": "plus-estimated",
+      "http": 201,
+      "seconds": 192.99,
+      "total": 440.72,
+      "store_count": 2,
+      "verification_status": "VERIFIED",
+      "plan_sha256": "f8254e1494278e64efe7bfb9b2a7b8b49d417509c67c99881941cc1d6b58873c",
+      "request_sha256": "f690cb71646f2ae993432c6ca1410bb9b00160abbef0c6069f1f0f198d7baadd",
+      "identical_get": true
+    }
+  ],
+  "profile_audits": [
+    {
+      "case": "original-exact",
+      "checkout": "PASS",
+      "totals_reconciled": true,
+      "price_status": "VERIFIED",
+      "allergen_status": "NOT_REQUESTED",
+      "nutrition": [
+        {
+          "slot_id": "dinner-1",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 41.96522717647059
+          }
+        },
+        {
+          "slot_id": "dinner-2",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 40.8
+          }
+        },
+        {
+          "slot_id": "dinner-3",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 41.94
+          }
+        },
+        {
+          "slot_id": "dinner-4",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 46.125
+          }
+        },
+        {
+          "slot_id": "dinner-5",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 46.175
+          }
+        },
+        {
+          "slot_id": "breakfast-1",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-2",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-3",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-4",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-5",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "snack-1",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-2",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-3",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-4",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 22.0
+          }
+        },
+        {
+          "slot_id": "snack-5",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 22.0
+          }
+        }
+      ]
+    },
+    {
+      "case": "original-estimated",
+      "checkout": "PASS",
+      "totals_reconciled": true,
+      "price_status": "VERIFIED",
+      "allergen_status": "NOT_REQUESTED",
+      "nutrition": [
+        {
+          "slot_id": "dinner-1",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 41.96522717647059
+          }
+        },
+        {
+          "slot_id": "dinner-2",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 40.8
+          }
+        },
+        {
+          "slot_id": "dinner-3",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 41.94
+          }
+        },
+        {
+          "slot_id": "dinner-4",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 46.125
+          }
+        },
+        {
+          "slot_id": "dinner-5",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 46.175
+          }
+        },
+        {
+          "slot_id": "breakfast-1",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-2",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-3",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-4",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-5",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "snack-1",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-2",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-3",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-4",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 22.0
+          }
+        },
+        {
+          "slot_id": "snack-5",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 22.0
+          }
+        }
+      ]
+    },
+    {
+      "case": "plus-exact",
+      "checkout": "PASS",
+      "totals_reconciled": true,
+      "price_status": "VERIFIED",
+      "allergen_status": "NOT_REQUESTED",
+      "nutrition": [
+        {
+          "slot_id": "dinner-1",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 41.96522717647059
+          }
+        },
+        {
+          "slot_id": "dinner-2",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 40.8
+          }
+        },
+        {
+          "slot_id": "dinner-3",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 41.94
+          }
+        },
+        {
+          "slot_id": "dinner-4",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 46.125
+          }
+        },
+        {
+          "slot_id": "dinner-5",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 46.175
+          }
+        },
+        {
+          "slot_id": "breakfast-1",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-2",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-3",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-4",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-5",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "snack-1",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-2",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-3",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-4",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 22.0
+          }
+        },
+        {
+          "slot_id": "snack-5",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 22.0
+          }
+        }
+      ]
+    },
+    {
+      "case": "plus-estimated",
+      "checkout": "PASS",
+      "totals_reconciled": true,
+      "price_status": "VERIFIED",
+      "allergen_status": "NOT_REQUESTED",
+      "nutrition": [
+        {
+          "slot_id": "dinner-1",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 41.96522717647059
+          }
+        },
+        {
+          "slot_id": "dinner-2",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 40.8
+          }
+        },
+        {
+          "slot_id": "dinner-3",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 41.94
+          }
+        },
+        {
+          "slot_id": "dinner-4",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 46.125
+          }
+        },
+        {
+          "slot_id": "dinner-5",
+          "status": "ESTIMATED",
+          "values": {
+            "protein_g": 46.175
+          }
+        },
+        {
+          "slot_id": "breakfast-1",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-2",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-3",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-4",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "breakfast-5",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 35.5
+          }
+        },
+        {
+          "slot_id": "snack-1",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-2",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-3",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 25.3
+          }
+        },
+        {
+          "slot_id": "snack-4",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 22.0
+          }
+        },
+        {
+          "slot_id": "snack-5",
+          "status": "VERIFIED",
+          "values": {
+            "protein_g": 22.0
+          }
+        }
+      ]
+    }
+  ],
+  "representative": [
+    {
+      "case": "ica-approx-laxsida",
+      "total": 166.8,
+      "purchase_terms": {
+        "version": "purchase-terms-v1",
+        "source_reference": "raw:b6874c430fef47708984f02464c26fc7#weeklyOffers/2",
+        "purchase_form": "variable_package",
+        "identity_scope": "product",
+        "variant_selection": "resolved",
+        "complete_group_size": 1,
+        "eligible_variant_ids": [],
+        "exclusions": [],
+        "variant_package_minimum": null,
+        "variant_package_maximum": null,
+        "variant_package_unit": null,
+        "approximate_package_g": 1200.0,
+        "minimum_package_g": null,
+        "maximum_package_g": null,
+        "quantity_basis": "source_approximation",
+        "deposit_status": "not_applicable",
+        "critical_blockers": [],
+        "limit_scope": "offer"
+      },
+      "source_provenance": {
+        "source_provider": "own",
+        "source_channel": "offers",
+        "source_snapshot_id": "6beedfc24e6542b89b39277c185d92a3",
+        "source_observed_at": "2026-09-29T12:51:04.292625Z",
+        "source_role": null,
+        "fallback_used": false,
+        "chain": "ica",
+        "store_id": "context:ica:1a19476898da3fb0",
+        "store_name": "ICA Kvantum Brunnshög",
+        "provider_store_id": "1086002",
+        "price_context": "physical_store",
+        "coverage": "offers_only",
+        "semantic_confidence": "high",
+        "quantity_confidence": "estimated"
+      },
+      "checkout": "PASS",
+      "totals_reconciled": true,
+      "price_status": "VERIFIED_WITH_ESTIMATES",
+      "allergen_status": "NOT_REQUESTED",
+      "nutrition": []
+    },
+    {
+      "case": "ica-approx-laxsida-blocked-control",
+      "http": 422,
+      "controlled_exact_refusal": true
+    },
+    {
+      "case": "ica-loose-weight",
+      "total": 31.15,
+      "purchase_terms": {
+        "version": "purchase-terms-v1",
+        "source_reference": "raw:0ff7e8f51c8c4a1292684bf05a5f1f75#weeklyOffers/8",
+        "purchase_form": "loose_weight",
+        "identity_scope": "product",
+        "variant_selection": "resolved",
+        "complete_group_size": 1,
+        "eligible_variant_ids": [],
+        "exclusions": [],
+        "variant_package_minimum": null,
+        "variant_package_maximum": null,
+        "variant_package_unit": null,
+        "approximate_package_g": null,
+        "minimum_package_g": null,
+        "maximum_package_g": null,
+        "quantity_basis": "requirement",
+        "deposit_status": "not_applicable",
+        "critical_blockers": [],
+        "limit_scope": "offer"
+      },
+      "source_provenance": {
+        "source_provider": "own",
+        "source_channel": "offers",
+        "source_snapshot_id": "0a02770853d247279ebaedb5309a37a9",
+        "source_observed_at": "2026-10-01T07:07:09.366831Z",
+        "source_role": null,
+        "fallback_used": false,
+        "chain": "ica",
+        "store_id": "context:ica:e03aeae83df25aa4",
+        "store_name": "ICA Kvantum Malmborgs Clemenstorget",
+        "provider_store_id": "1004409",
+        "price_context": "physical_store",
+        "coverage": "offers_only",
+        "semantic_confidence": "unknown",
+        "quantity_confidence": "derived"
+      },
+      "checkout": "PASS",
+      "totals_reconciled": true,
+      "price_status": "VERIFIED_WITH_ESTIMATES",
+      "allergen_status": "NOT_REQUESTED",
+      "nutrition": []
+    },
+    {
+      "case": "ica-whole-three-pack",
+      "total": 25.0,
+      "purchase_terms": {
+        "version": "purchase-terms-v1",
+        "source_reference": "raw:8a87f43985d642cfb3ed7d700fa03d36#weeklyOffers/114",
+        "purchase_form": "fixed_package",
+        "identity_scope": "product",
+        "variant_selection": "resolved",
+        "complete_group_size": 3,
+        "eligible_variant_ids": [],
+        "exclusions": [],
+        "variant_package_minimum": null,
+        "variant_package_maximum": null,
+        "variant_package_unit": null,
+        "approximate_package_g": null,
+        "minimum_package_g": null,
+        "maximum_package_g": null,
+        "quantity_basis": "source_exact",
+        "deposit_status": "not_applicable",
+        "critical_blockers": [],
+        "limit_scope": "household_campaign"
+      },
+      "source_provenance": {
+        "source_provider": "own",
+        "source_channel": "offers",
+        "source_snapshot_id": "16c7ec31fa4e4f5899f3a6d19ae4d590",
+        "source_observed_at": "2026-09-29T12:51:06.163540Z",
+        "source_role": null,
+        "fallback_used": false,
+        "chain": "ica",
+        "store_id": "context:ica:0edf5d52980ffcd7",
+        "store_name": "ICA Kvantum Malmborgs Tuna",
+        "provider_store_id": "1003391",
+        "price_context": "physical_store",
+        "coverage": "offers_only",
+        "semantic_confidence": "high",
+        "quantity_confidence": "exact"
+      },
+      "checkout": "PASS",
+      "totals_reconciled": true,
+      "price_status": "VERIFIED",
+      "allergen_status": "NOT_REQUESTED",
+      "nutrition": []
+    },
+    {
+      "case": "hemkop-open-pizza",
+      "total": 79.0,
+      "purchase_terms": {
+        "version": "purchase-terms-v1",
+        "source_reference": "raw:0254388583374b33b99d047e1eae5636#result=9",
+        "purchase_form": "fixed_package",
+        "identity_scope": "campaign_group",
+        "variant_selection": "required",
+        "complete_group_size": 2,
+        "eligible_variant_ids": [
+          "100867340_ST",
+          "100795659_ST",
+          "101094496_ST",
+          "101336084_ST",
+          "101117765_ST",
+          "101117792_ST"
+        ],
+        "mixing_allowed": true,
+        "campaign_group_id": "hemkop:campaign:2500317459:2026-09-28:2026-10-04",
+        "exclusions": [],
+        "variant_package_minimum": null,
+        "variant_package_maximum": null,
+        "variant_package_unit": null,
+        "approximate_package_g": null,
+        "minimum_package_g": null,
+        "maximum_package_g": null,
+        "quantity_basis": "unknown",
+        "deposit_status": "not_applicable",
+        "critical_blockers": [],
+        "limit_scope": "offer"
+      },
+      "source_provenance": {
+        "source_provider": "own",
+        "source_channel": "offers",
+        "source_snapshot_id": "0b59b3ace78f4b6db2d8b1d97c96d4fb",
+        "source_observed_at": "2026-09-30T11:18:13.831942Z",
+        "source_role": null,
+        "fallback_used": false,
+        "chain": "hemkop",
+        "store_id": "context:hemkop:1283c412b9030d45",
+        "store_name": "Hemköp Dalby",
+        "provider_store_id": "4517",
+        "price_context": "physical_store",
+        "coverage": "offers_only",
+        "semantic_confidence": "unknown",
+        "quantity_confidence": "unknown"
+      },
+      "checkout": "PASS",
+      "totals_reconciled": true,
+      "price_status": "UNVERIFIED",
+      "allergen_status": "NOT_REQUESTED",
+      "nutrition": []
+    }
+  ],
+  "campaign_guard": {
+    "open_choice_unverified": true,
+    "exact_ingredient_refused": 422
+  },
+  "recalculation": {
+    "phase": "recalculate",
+    "started_utc": "2026-10-01T21:49:27.555820+00:00",
+    "serving": {
+      "universe_id": "price-universe:57ca714ed72b687bf1f2af9de7d48d233aac9b51bfd2500021bb4176b7a19a0d",
+      "raw_product_count": 44077,
+      "freshness": "fresh"
+    },
+    "http": 200,
+    "previous_revision": 1,
+    "new_revision": 2,
+    "old_revision_preserved": true,
+    "identical_new_get": true,
+    "new_plan_sha256": "05ab7e073bd0cdcd21fac2400d32356d6a996c9d4488071bbbca1798d9df7245",
+    "finished_utc": "2026-10-01T21:49:46.210223+00:00"
+  },
+  "read_after_restart": {
+    "phase": "read-after-restart",
+    "started_utc": "2026-10-01T22:02:28.147372+00:00",
+    "cases": [
+      {
+        "case": "original-exact",
+        "identical_plan": true,
+        "plan_sha256": "ad377cb2ccb9620a9dc46a4c0e8c97ceced9dae31623841cca27445cfc4ac0f4"
+      },
+      {
+        "case": "original-estimated",
+        "identical_plan": true,
+        "plan_sha256": "9905f52274a70044ca3a8b33e18f9461d4f7caff27558c7ac47afe82d3f551a4"
+      },
+      {
+        "case": "plus-exact",
+        "identical_plan": true,
+        "plan_sha256": "7044f4672cc48819c757f938e18bf88d821f14988686d6a299f386ee77ec1326"
+      },
+      {
+        "case": "plus-estimated",
+        "identical_plan": true,
+        "plan_sha256": "f8254e1494278e64efe7bfb9b2a7b8b49d417509c67c99881941cc1d6b58873c"
+      },
+      {
+        "case": "ica-approx-laxsida",
+        "identical_plan": true,
+        "plan_sha256": "a9fb98461bbf652759ce5e416afc9ab33be143c46aff4facf1573e1c042a6ce1"
+      },
+      {
+        "case": "ica-loose-weight",
+        "identical_plan": true,
+        "plan_sha256": "bd2608670bb92a251daca7504c6de2067bb839e417b031e223e8ee5579f1b475"
+      },
+      {
+        "case": "ica-whole-three-pack",
+        "identical_plan": true,
+        "plan_sha256": "408da9592b01fd46c84f5b3939990eb2a9438c22babd190327525fe5716c9e41"
+      },
+      {
+        "case": "hemkop-open-pizza",
+        "identical_plan": true,
+        "plan_sha256": "734eb5b178356b019c1c25685fda8a5de8b9fedf8d2f8265eef26d707771dbd8"
+      },
+      {
+        "case": "explicit-recalculation",
+        "identical_plan": true,
+        "plan_sha256": "05ab7e073bd0cdcd21fac2400d32356d6a996c9d4488071bbbca1798d9df7245"
+      }
+    ],
+    "serving": {
+      "universe_id": "price-universe:57ca714ed72b687bf1f2af9de7d48d233aac9b51bfd2500021bb4176b7a19a0d",
+      "raw_product_count": 44077,
+      "freshness": "fresh"
+    },
+    "wrong_owner_status": 403,
+    "finished_utc": "2026-10-01T22:02:30.386647+00:00"
+  },
+  "actual_process_restart": {
+    "started_utc": "2026-10-01T22:01:57.191866+00:00",
+    "completed_utc": "2026-10-01T22:02:30.607936+00:00",
+    "previous_process_started": "2026-10-01T21:16:07.649008484Z",
+    "new_process_started": "2026-10-01T22:02:03.473769644Z",
+    "status": "PASS"
+  },
+  "ordinary_rebuild": {
+    "city": "Lund",
+    "completed_at": "2026-10-01T22:00:38.986360+00:00",
+    "coop_source_configuration": {
+      "configuration_valid": true,
+      "configured_context_ids": [
+        "730400"
+      ],
+      "configured_policy": "review",
+      "context_id": "730400",
+      "diagnostic_code": null,
+      "operator_opt_in": true,
+      "price_semantics": "online_price",
+      "required_context_id": "730400",
+      "scope": "online_fulfillment",
+      "valid": true
+    },
+    "exit_code": 0,
+    "previous_restart_manifest": "verified",
+    "refresh_exit_code": 0,
+    "run_kind": "daily_refresh",
+    "runtime_reload": {
+      "changed": false,
+      "new_price_universe_id": "price-universe:57ca714ed72b687bf1f2af9de7d48d233aac9b51bfd2500021bb4176b7a19a0d",
+      "old_price_universe_id": "price-universe:57ca714ed72b687bf1f2af9de7d48d233aac9b51bfd2500021bb4176b7a19a0d",
+      "plan_prewarm": "disabled",
+      "pricing_projection": "miss_filled"
+    },
+    "schema_version": "production-refresh-runner-v1",
+    "source_relay_imports": [
+      {
+        "artifact_sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+        "network_requests": 0,
+        "snapshot_id": "304d09f31d704d7fac7f76ab5360fc41",
+        "state": "promoted",
+        "status": "duplicate"
+      }
+    ],
+    "started_at": "2026-10-01T21:50:12.004138+00:00",
+    "status": "complete"
+  },
+  "not_due": {
+    "status": "PASS",
+    "checked_at": "2026-10-01T22:01:30.147151+00:00",
+    "external_price_requests": 0,
+    "unchanged_state": {
+      "counts": {
+        "catalog_snapshots": 194,
+        "collector_runs": 194,
+        "raw_snapshots": 60948
+      },
+      "manifest_sha256": "7cf22ceb453492583f4cd5c1d5f4c432f9fe5ceee8ac6552dda4a5efc6f579d4"
+    }
+  },
+  "final_raw_and_bases": {
+    "checked_utc": "2026-10-01T22:02:41.625654+00:00",
+    "manifest": {
+      "activated_at": "2026-10-01T21:59:35.267572Z",
+      "artifact_bytes": 92081822,
+      "artifact_file": "artifacts/91986d7a14c63a4435a2f81112ccffb8b24d978d94d7847cc9b703e3499e72b2.json",
+      "artifact_sha256": "91986d7a14c63a4435a2f81112ccffb8b24d978d94d7847cc9b703e3499e72b2",
+      "built_at": "2026-10-01T21:56:03.884860Z",
+      "canonical_index_count": 56,
+      "city": "lund",
+      "oldest_base_observed_at": "2026-09-30T11:17:53.844785Z",
+      "oldest_observed_at": "2026-09-29T12:51:04.292625Z",
+      "product_count": 2248,
+      "provider_requests": 0,
+      "schema_version": "active-prepared-price-universe-v1",
+      "scope_id": "city:lund",
+      "snapshot_ids": [
+        "00fc6788bc6c4ebd9877adc0a77c431f",
+        "03ecb507c93c45ecb3d1ab8d18de2e63",
+        "0a02770853d247279ebaedb5309a37a9",
+        "0b59b3ace78f4b6db2d8b1d97c96d4fb",
+        "0c9f4b1315294991928c200734ae06b4",
+        "16c7ec31fa4e4f5899f3a6d19ae4d590",
+        "1ce19b594dc7488eb6f2a5bcd9d3668a",
+        "1eefdcbec9934b1b85b53ee1ceeba625",
+        "1fc61ab987b245d2b7b38569e4faed59",
+        "304d09f31d704d7fac7f76ab5360fc41",
+        "3552c63e2d174bac85a8e015b93a4a43",
+        "363e3c9fe81b48c982142f01047d08b2",
+        "3f2de252bae34dbd9eb80c4664424c79",
+        "482481191a434121994d25cbc50f621b",
+        "54e3331d7b4c4e96a1ff002e5d830cdf",
+        "593e2808b7344d858fbca285046fac36",
+        "695a6f9788cc4b59aa71bf61af78b661",
+        "6beedfc24e6542b89b39277c185d92a3",
+        "728bcbd743984305828d67f1a3bea7e0",
+        "7fde30299d184a9b86af058990997ff4",
+        "90be3431f222474c89c148c42bd7b186",
+        "9aaa68ea82be49dbb0d10ece3f4fcc2b",
+        "b3851b56bc6d40c4bb7d9f6a6a5ca7ca",
+        "b5acc16727ca4ce7972b4135de9bc127",
+        "bfa9ae8ca1d949fab71c157e01f44d1b",
+        "c1517b4e7e234c23b85d04fcb8b76ccf",
+        "c3876bff882247139b7b0f7a197fe3a4",
+        "cda8609ac4cb4d51a0450836961ba063",
+        "d1feec3dc6ad4d8e9d5b567dc98bb1bc",
+        "e465b42fdcee42048abf9c87783da850",
+        "e8cc9da9b3d54c50bd58b3524b5e059f",
+        "f0762bc7495648938996d690e73b0c60"
+      ],
+      "universe_id": "price-universe:57ca714ed72b687bf1f2af9de7d48d233aac9b51bfd2500021bb4176b7a19a0d"
+    },
+    "manifest_sha256": "7cf22ceb453492583f4cd5c1d5f4c432f9fe5ceee8ac6552dda4a5efc6f579d4",
+    "raw_files": 2232,
+    "bad_raw_files": 0,
+    "sources": [
+      {
+        "context": "context:coop:23eaae11c9661e68",
+        "name": "Coop Online Syd",
+        "observed_from": "2026-10-01T06:09:21.920468+00:00",
+        "warning_36h": "2026-10-02T18:09:21.920468+00:00",
+        "stop_48h": "2026-10-03T06:09:21.920468+00:00",
+        "rows": 11428
+      },
+      {
+        "context": "context:hemkop:3288e04edd97e349",
+        "name": "Hemköp Lund Brunnshög",
+        "observed_from": "2026-10-01T06:55:05.319713+00:00",
+        "warning_36h": "2026-10-02T18:55:05.319713+00:00",
+        "stop_48h": "2026-10-03T06:55:05.319713+00:00",
+        "rows": 5071
+      },
+      {
+        "context": "context:hemkop:756955d0e6e05f23",
+        "name": "Hemköp Lund Karhögstorg",
+        "observed_from": "2026-10-01T06:39:40.871532+00:00",
+        "warning_36h": "2026-10-02T18:39:40.871532+00:00",
+        "stop_48h": "2026-10-03T06:39:40.871532+00:00",
+        "rows": 6205
+      },
+      {
+        "context": "context:willys:383650ec6ff5a636",
+        "name": "Willys Lund",
+        "observed_from": "2026-10-01T07:44:43.807014+00:00",
+        "warning_36h": "2026-10-02T19:44:43.807014+00:00",
+        "stop_48h": "2026-10-03T07:44:43.807014+00:00",
+        "rows": 10170
+      },
+      {
+        "context": "context:willys:4a671428fc484e43",
+        "name": "Willys Lund Nova",
+        "observed_from": "2026-10-01T08:03:35.952756+00:00",
+        "warning_36h": "2026-10-02T20:03:35.952756+00:00",
+        "stop_48h": "2026-10-03T08:03:35.952756+00:00",
+        "rows": 8590
+      }
+    ]
+  },
+  "final_serving": {
+    "universe_id": "price-universe:57ca714ed72b687bf1f2af9de7d48d233aac9b51bfd2500021bb4176b7a19a0d",
+    "raw_product_count": 44077,
+    "product_count": 2248,
+    "freshness": "fresh",
+    "snapshot_ids": [
+      "00fc6788bc6c4ebd9877adc0a77c431f",
+      "03ecb507c93c45ecb3d1ab8d18de2e63",
+      "0a02770853d247279ebaedb5309a37a9",
+      "0b59b3ace78f4b6db2d8b1d97c96d4fb",
+      "0c9f4b1315294991928c200734ae06b4",
+      "16c7ec31fa4e4f5899f3a6d19ae4d590",
+      "1ce19b594dc7488eb6f2a5bcd9d3668a",
+      "1eefdcbec9934b1b85b53ee1ceeba625",
+      "1fc61ab987b245d2b7b38569e4faed59",
+      "304d09f31d704d7fac7f76ab5360fc41",
+      "3552c63e2d174bac85a8e015b93a4a43",
+      "363e3c9fe81b48c982142f01047d08b2",
+      "3f2de252bae34dbd9eb80c4664424c79",
+      "482481191a434121994d25cbc50f621b",
+      "54e3331d7b4c4e96a1ff002e5d830cdf",
+      "593e2808b7344d858fbca285046fac36",
+      "695a6f9788cc4b59aa71bf61af78b661",
+      "6beedfc24e6542b89b39277c185d92a3",
+      "728bcbd743984305828d67f1a3bea7e0",
+      "7fde30299d184a9b86af058990997ff4",
+      "90be3431f222474c89c148c42bd7b186",
+      "9aaa68ea82be49dbb0d10ece3f4fcc2b",
+      "b3851b56bc6d40c4bb7d9f6a6a5ca7ca",
+      "b5acc16727ca4ce7972b4135de9bc127",
+      "bfa9ae8ca1d949fab71c157e01f44d1b",
+      "c1517b4e7e234c23b85d04fcb8b76ccf",
+      "c3876bff882247139b7b0f7a197fe3a4",
+      "cda8609ac4cb4d51a0450836961ba063",
+      "d1feec3dc6ad4d8e9d5b567dc98bb1bc",
+      "e465b42fdcee42048abf9c87783da850",
+      "e8cc9da9b3d54c50bd58b3524b5e059f",
+      "f0762bc7495648938996d690e73b0c60"
+    ]
+  },
+  "containers": [
+    {
+      "name": "/smako-app-1",
+      "image": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+      "command": [
+        "python",
+        "-m",
+        "uvicorn",
+        "app.main:app",
+        "--app-dir",
+        "backend",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--workers",
+        "1",
+        "--proxy-headers",
+        "--forwarded-allow-ips",
+        "*",
+        "--timeout-keep-alive",
+        "30",
+        "--no-access-log"
+      ],
+      "started_at": "2026-10-01T22:02:03.473769644Z",
+      "running": true
+    },
+    {
+      "name": "/smako-scheduler-1",
+      "image": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+      "command": [
+        "python",
+        "deploy/scripts/start_cron.py"
+      ],
+      "started_at": "2026-10-01T22:03:52.244256496Z",
+      "running": true
+    }
+  ],
+  "source_coverage": {
+    "coop-municipal": {
+      "registry_rows": {
+        "coop": 720,
+        "xtra": 58
+      },
+      "inventory_complete": false,
+      "selected_store_ids": [
+        "1158",
+        "2696",
+        "3656",
+        "3659",
+        "3813",
+        "3820",
+        "3837",
+        "3839",
+        "3841"
+      ],
+      "approved_count": 10,
+      "municipality_classifications": {
+        "outside": 768,
+        "inside": 10
+      },
+      "selected_statuses": {
+        "partial_candidate": 9,
+        "partial_text_candidate": 1
+      },
+      "unresolved_registry_count": 0
+    },
+    "hemkop-municipal": {
+      "registry_rows": 205,
+      "inventory_complete": false,
+      "selected_store_ids": [
+        "4123",
+        "4224",
+        "4517"
+      ],
+      "approved_count": 3,
+      "municipality_classifications": {},
+      "selected_statuses": {},
+      "unresolved_registry_count": 0
+    },
+    "lidl-municipal": {
+      "registry_rows": 212,
+      "inventory_complete": false,
+      "selected_store_ids": [
+        "0163",
+        "0303"
+      ],
+      "approved_count": 2,
+      "municipality_classifications": {
+        "outside": 210,
+        "inside": 2
+      },
+      "selected_statuses": {
+        "success": 2
+      },
+      "unresolved_registry_count": 0
+    },
+    "willys-flyer": {
+      "registry_rows": 259,
+      "inventory_complete": false,
+      "selected_store_ids": [
+        "2863"
+      ],
+      "approved_count": 1,
+      "municipality_classifications": {
+        "outside": 255,
+        "inside": 3
+      },
+      "selected_statuses": {
+        "success": 1
+      },
+      "unresolved_registry_count": 1
+    },
+    "ica-structured": {
+      "municipality_complete": false,
+      "stores": 12,
+      "collection_statuses": {
+        "not_due_retained": 4,
+        "success": 8
+      },
+      "raw_row_summary": {
+        "source_offer_count": 1042,
+        "parsed": 1000,
+        "rejected": 42
+      }
+    }
+  },
+  "original_plans": {
+    "revisions_before": 170,
+    "revisions_after": 179,
+    "all_old_rows_identical": true,
+    "new_verification_revisions": 9
+  },
+  "old_server_queue_counts": {
+    "received_not_published": 16,
+    "unclassified_not_published": 1
+  },
+  "recipe_runtime_files": {
+    "backend/app/services/personal_planner.py": "9464873c13d5a4b2d58e2658a59e0052189f72cf6c98511718655b1a4fef5b26",
+    "backend/app/services/recipe_preparation.py": "db1163cd6d95c1a8aa2730d7372a8f2219c66579e0454ddb4e191b977193ebc0",
+    "backend/app/services/reviewed_warm_meals.py": "3d886a53bce3d145340f798a8fe658f86b750562a0e43feddc3e944e68c11a65"
+  },
+  "backup_root": "/srv/smako/backups/lund-activation-20261001T2110Z",
+  "raw_replay_network": "none for three online catalog replays; zero new Willys collection; ordinary source handling kept",
+  "limited_recovery_activated": false,
+  "production_code_changed": false,
+  "windows_task": {
+    "checked_utc": "2026-10-01T22:03:27.2173211+00:00",
+    "protected_fields_unchanged": true,
+    "enabled": true,
+    "action": "C:\\Users\\ossia\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+    "arguments": "-NoProfile -NonInteractive -File \"D:\\smako-local-relay\\releases\\bdc9f7df4170\\deploy\\scripts\\start_packaged_relay.ps1\" -Workspace \"D:\\smako-local-relay\\scopes\\municipality-1281\" -Config \"D:\\smako-local-relay\\config\\relay.json\"",
+    "working_directory": "D:\\smako-local-relay\\releases\\bdc9f7df4170",
+    "logon_type": 2,
+    "run_level": "Limited",
+    "start_boundaries": [
+      "2026-10-02T01:30:00",
+      "2026-10-02T09:30:00",
+      "2026-10-02T17:30:00"
+    ],
+    "next_run_local": "2026-10-02T01:30:00.0000000",
+    "state": 3,
+    "task": "Smako Willys Local Relay",
+    "acl_unchanged": true,
+    "daily_times": [
+      "01:30",
+      "09:30",
+      "17:30"
+    ],
+    "account": "ossia",
+    "logon": "S4U",
+    "IgnoreNew": true,
+    "execution_limit": "PT3H",
+    "StartWhenAvailable": true,
+    "WakeToRun": true,
+    "enabled_xml_sha256": "6ece9417794dfc3a9db3d605ce310b2edc873ee56914757d26e340053055e515"
+  },
+  "relay_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+  "server_zip_sha256": "c20f8ad6ce316df121117c32cb44dc308a8d73011d097ec8799be095883b1e22",
+  "relay_zip_sha256": "299ff34ecb7b5976e317afeef54719c9286d0ecd64c2807cee58533945de57d7",
+  "redelivery": {
+    "activation": {
+      "activation": "already_active",
+      "snapshot_id": "304d09f31d704d7fac7f76ab5360fc41"
+    },
+    "receipt_unchanged": true,
+    "receipt_sha256": "6b39a086cea86307702222bd6c3da8cb88517c7f4a39762b0872c06f9e98510e",
+    "new_retailer_requests": 0
+  },
+  "old_windows_queue_counts": {
+    "pending_delivery": 15,
+    "acknowledged": 1,
+    "receipt": 1
+  },
+  "old_windows_inventory_sha256": "1f88f6732b8bfc7c3bf69178c9247675a7c14c9d287611e22a0cdd820fb4ad39",
+  "old_server_inventory_sha256": "5a38368eef0419cc5efdd9987a8086de12a40d4e03b138b795e95164a6b1e240",
+  "backups_sha256": {
+    "server_data_tar": "be1824d3ac35d6cc33cbbbd70348a932529e78a15c4f11b84e64a128e6060881",
+    "server_configuration_tar": "5440a06e94ebf372e7f84bb9551a2ded84334b8d877d9eb22e16d69fa36a62fe",
+    "old_server_image_tar": "535d0c6dbdd3c9455a2070f5f84d2f0407be5ff90ed72e38cf4e6655350487a4",
+    "old_deploy_files_tar": "d970bd8e4e845fb7d2c4192e8fc55d9d41eedf62ddb256261c19c78c5b6366af",
+    "grocery_sqlite": "d2e0431f3630f05c8eff12959b400d1e3f3e976d4707499a472411147ec0947c",
+    "plans_sqlite": "981db164095208b1bbddab6ba48e1004301f12d35998055237746c5a358d71c0",
+    "windows_zip": "bab58443548737c6f5f3804218865b07aa993c52b00cd758f50be4e5a2ddba67"
+  },
+  "relay_not_due": {
+    "checked_utc": "2026-10-01T21:37:49.079569Z",
+    "external_price_requests": 0,
+    "receipt_unchanged": true,
+    "next_fetch_at": "2026-10-02T18:44:37.057437Z"
+  },
+  "approved_decisions": [
+    "five_base_policy",
+    "server_activation_with_read_only_recovery",
+    "bdc9_windows_action",
+    "Windows_local_0130_0930_1730",
+    "server_demand_every_15_minutes"
+  ],
+  "prior_test_evidence_only": {
+    "five_original_failures": "resolved_PASS",
+    "Windows_split_clean_suite": 3455,
+    "Lidl_authentic_tests": 16,
+    "frontend_tests": 30,
+    "browser_checks": 4,
+    "transition_focused_tests": 168
+  },
+  "next_stage_not_implemented": [
+    "campaign Sunday-Monday and Wednesday-Thursday nights with actual source dates",
+    "measure genuine base-price changes before future interval decisions"
+  ]
+}

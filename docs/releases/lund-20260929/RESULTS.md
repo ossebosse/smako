@@ -1,3 +1,6 @@
+> Aktuell produktion: [genomförd aktivering 1–2 oktober](ACTIVATION-LIVE-20261001.md).
+> Nedanstående svit- och releasebevis är tidigare körningar, inte omkörda under aktiveringen.
+
 # Lund: verifierad kandidat och kvarstående aktiveringsspärrar
 
 **Senaste status:** [TRANSITION.md](TRANSITION.md) och

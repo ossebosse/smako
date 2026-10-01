@@ -1,3 +1,56 @@
+# 2026-10-02: Lund 1281 aktiverat i normal drift
+
+**Aktiveringen är genomförd och båda schemana är återupptagna.** Läs
+[aktuellt aktiveringsprotokoll](releases/lund-20260929/ACTIVATION-LIVE-20261001.md),
+[dess sanerade bevis](releases/lund-20260929/ACTIVATION-LIVE-EVIDENCE.json) och
+[drift-/återgångsordningen](releases/lund-20260929/ACTIVATION.md).
+Äldre statusnoteringar nedanför är bevarad historik, inte aktuella blockerare.
+
+Fem godkännanden är givna och tillämpade: femkällorspolicy, slutlig server,
+bdc9-reläbyte, Windows 01:30/09:30/17:30 och serverns behovskontroll var 15:e
+minut. Inhämta inte dessa igen för samma omfattning. Backup är fortsatt 02:47;
+35h behov, 36h varning och 48h stopp är oförändrade. Ingen säkerhetspolicy ändrad.
+
+Serverruntime `08c137475d9ca96a6ef7673245a639c8c5c9e922`, bild `sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7`.
+Alla fem Compose-jobb använder bilden. Windows använder oförändrat
+`D:\smako-local-relay\releases\bdc9f7df4170`, separat kommunarbetsyta och
+scheduler/receiver som transportmål. Återläst befintlig uppgift: Ready,
+ossia/S4U/Limited, tre lokala tider, nästa 2 oktober 01:30. Övriga XML-fält/ACL
+är bevarade. Servern kör faktisk `cron -f`, nästa kontroll vid återupptagandet
+00:15. Framtida schemakörningar är ännu inte verifierade.
+
+En autentisk Willys-leverans, en import, atomisk publicering, faktisk reload
+och beständigt kvitto passerar. Återleverans `already_active`; både relä och
+server `not_due` med noll prisanrop och oförändrade observationer. Serving
+`57ca714e…`, 44 077 råproduktposter, samtliga 2 232 råfiler hashverifierade.
+Fyra 15/20-profiler: 440,72 kr, två butiker, checkout PASS, 40/30/20 uppfyllt.
+Näring är separat VERIFIED/ESTIMATED. Cirka-vikt/lösvikt/flerköp/villkorat
+kampanjval och spärrar passerar. **Uttrycklig omräkning PASS**, revision 1→2;
+nio verifieringsrevisioner identiska efter faktisk appomstart, fel ägare 403.
+Alla 170 ursprungliga planrevisioner är oförändrade; totalt 179 vid kontrollen.
+
+Backuper och gamla köer är bevarade. Inga gamla Primat-artefakter fick falskt
+publiceringskvitto. Serverns skyddade backup ligger under
+`/srv/smako/backups/lund-activation-20261001T2110Z`; lokala bevis/backup under
+`.local/activation-live-20261001`. `/opt/smako/current` och `/opt/smako/compose`
+använder nu slutpaketet och skyddad `activation-private.env`; äldre env/policy
+är separat bevarade. Använd inte gamla bilden som återgångsmål.
+
+Godkänd reservdrift är slutbildens `app.recovery`, senaste checkpointade
+planbas read-only och befintlig autentisering; ingen nyplanering/omräkning/import.
+Den är **inte aktiverad**. Full normal drift är aktiv. Begränsad fysisk
+utbudstäckning, karantän och schema-/datorbortfallsrisker finns i protokollet.
+Konservativ manifestgräns är 2 oktober 13:17:53 CEST; förfallna frivilliga
+källkontroller beräknas omkring 00:30. Bekräfta verkliga kommande körningar,
+använd aldrig rebuildtid som observationstid.
+
+Ingen applikationskod eller identifierat paket ändrades under aktiveringen.
+Verifieringsverktyg/driftunderlag har ändrats lokalt; ingen push, städning eller
+Malmö-aktivering. Nästa separat etapp: kampanjfönstren söndag–måndag och
+onsdag–torsdag samt mätning av basprisförändringar, inte implementerat här.
+
+## Bevarad historik före genomförandet
+
 # Aktivering 2026-10-01: schema godkänt, stopp vid Windows-behörighet
 
 Alla fyra beslut är givna: femkällorspolicy, server med begränsad läsåtergång,
