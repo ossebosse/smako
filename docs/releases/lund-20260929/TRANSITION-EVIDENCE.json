@@ -1,0 +1,699 @@
+{
+  "checked_utc": "2026-10-01T11:04:55.724069+00:00",
+  "branch": "release/lund-relay-20260929",
+  "runtime_commit": "08c137475d9ca96a6ef7673245a639c8c5c9e922",
+  "packages": {
+    "server": {
+      "file": "smako-server-08c137475d9c.zip",
+      "sha256": "c20f8ad6ce316df121117c32cb44dc308a8d73011d097ec8799be095883b1e22",
+      "bytes": 2285641,
+      "files": 628
+    },
+    "windows-relay": {
+      "file": "smako-windows-relay-08c137475d9c.zip",
+      "sha256": "399cd71f195538c08425afda938cb0b56c6046e150f67145a7a7285ad5bb61d2",
+      "bytes": 2285646,
+      "files": 628
+    }
+  },
+  "server_and_recovery_image": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+  "recommended_relay_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+  "recommended_relay_zip_sha256": "299ff34ecb7b5976e317afeef54719c9286d0ecd64c2807cee58533945de57d7",
+  "status": {
+    "original_s4u_live": "PASS for unchanged bdc9 package/configuration only",
+    "queue_transition": "PASS",
+    "recovery_saved_plan_reading": "PASS",
+    "recovery_recalculation": "DISABLED: controlled 503, not supported",
+    "production_activation": "NOT DONE; three decisions outstanding"
+  },
+  "new_retailer_requests": 0,
+  "test_clock_used": false,
+  "new_windows_package_installed_or_s4u_verified": false,
+  "isolated_services_stopped_after_verification": true,
+  "old_queue": {
+    "old_inventory_sha256": "6d283353f166870f1086fffcd4aacc4aa0ab82138cc3fd5d07a2ce5b1234f11b",
+    "old_artifact_status_counts": {
+      "received_not_published": 17,
+      "acknowledged": 1,
+      "unclassified_not_published": 1
+    },
+    "old_unique_artifacts": 17,
+    "old_receipt_files": 1,
+    "preserved_archive_hashes_valid": true
+  },
+  "old_blocked_artifact_sha256": "05ab5b72790d7e270072945fd5090ca205dac0c4a174463233885ad10700c4b3",
+  "old_policy_failure": "required_external_cache_unavailable; no successful old publication required",
+  "old_policy_log_sha256": "a9ab11ddd3b469b2864a3f1f8e220a544cfc6f93fd1aa1829c1d64228e46d38f",
+  "replays": {
+    "relay-first": {
+      "kind": "guarded replay; not S4U live collection",
+      "exit": 0,
+      "calls": {
+        "retailer": 0,
+        "push": 1,
+        "activate": 1
+      },
+      "package_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+      "files_verified": 624,
+      "receipt": {
+        "sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+        "municipality_code": "1281",
+        "next_fetch_at": "2026-10-02T18:44:37.057437+00:00",
+        "collection_day": "2026-10-01",
+        "observed_from": "2026-10-01T07:44:37.057437+00:00",
+        "completed_at": "2026-10-01T10:26:18.084559+00:00",
+        "server": {
+          "activation": "normal_managed_refresh",
+          "snapshot_id": "293e153376ae45bbbf114c0cbb5790d3",
+          "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671"
+        }
+      }
+    },
+    "relay-redelivery": {
+      "kind": "guarded replay; not S4U live collection",
+      "exit": 0,
+      "calls": {
+        "retailer": 0,
+        "push": 1,
+        "activate": 1
+      },
+      "package_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+      "files_verified": 624,
+      "receipt": {
+        "sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+        "municipality_code": "1281",
+        "next_fetch_at": "2026-10-02T18:44:37.057437+00:00",
+        "collection_day": "2026-10-01",
+        "observed_from": "2026-10-01T07:44:37.057437+00:00",
+        "completed_at": "2026-10-01T10:29:20.470534+00:00",
+        "server": {
+          "activation": "already_active",
+          "snapshot_id": "293e153376ae45bbbf114c0cbb5790d3"
+        }
+      }
+    },
+    "relay-not-due": {
+      "kind": "guarded replay; not S4U live collection",
+      "exit": 0,
+      "calls": {
+        "retailer": 0,
+        "push": 0,
+        "activate": 0
+      },
+      "package_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+      "files_verified": 624,
+      "receipt": {
+        "sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+        "municipality_code": "1281",
+        "next_fetch_at": "2026-10-02T18:44:37.057437+00:00",
+        "collection_day": "2026-10-01",
+        "observed_from": "2026-10-01T07:44:37.057437+00:00",
+        "completed_at": "2026-10-01T10:29:20.470534+00:00",
+        "server": {
+          "activation": "already_active",
+          "snapshot_id": "293e153376ae45bbbf114c0cbb5790d3"
+        }
+      }
+    },
+    "relay-final-pair": {
+      "kind": "guarded replay; not S4U live collection",
+      "exit": 0,
+      "calls": {
+        "retailer": 0,
+        "push": 1,
+        "activate": 1
+      },
+      "package_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+      "files_verified": 624,
+      "receipt": {
+        "sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+        "municipality_code": "1281",
+        "next_fetch_at": "2026-10-02T18:44:37.057437+00:00",
+        "collection_day": "2026-10-01",
+        "observed_from": "2026-10-01T07:44:37.057437+00:00",
+        "completed_at": "2026-10-01T10:59:14.939513+00:00",
+        "server": {
+          "activation": "normal_managed_refresh",
+          "snapshot_id": "293e153376ae45bbbf114c0cbb5790d3",
+          "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671"
+        }
+      }
+    },
+    "relay-final-not-due": {
+      "kind": "guarded replay; not S4U live collection",
+      "exit": 0,
+      "calls": {
+        "retailer": 0,
+        "push": 0,
+        "activate": 0
+      },
+      "package_commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+      "files_verified": 624,
+      "receipt": {
+        "sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+        "municipality_code": "1281",
+        "next_fetch_at": "2026-10-02T18:44:37.057437+00:00",
+        "collection_day": "2026-10-01",
+        "observed_from": "2026-10-01T07:44:37.057437+00:00",
+        "completed_at": "2026-10-01T10:59:14.939513+00:00",
+        "server": {
+          "activation": "normal_managed_refresh",
+          "snapshot_id": "293e153376ae45bbbf114c0cbb5790d3",
+          "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671"
+        }
+      }
+    }
+  },
+  "live_artifact_audit": {
+    "artifact_sha256": "5b1a2b6b01ba65338f224cdd6af432c8178f214b1612d5d54ec400ffe8f9362a",
+    "source_manifest": {
+      "schema_version": "smako-source-snapshot-v1",
+      "source_snapshot_id": "049d1ce3a2e546f3922cbadd89e3d73f",
+      "collection_started_at": "2026-10-01T07:44:35.953394Z",
+      "collection_finished_at": "2026-10-01T08:21:47.301012Z",
+      "observed_from": "2026-10-01T07:44:37.057437Z",
+      "observed_to": "2026-10-01T08:15:10.740536Z",
+      "row_count": 18939,
+      "product_count": 10496,
+      "request_count": 1255,
+      "context_ids": [
+        "2176",
+        "2354"
+      ],
+      "parser_version": "willys-parser-v3",
+      "normalizer_version": "product-normalizer-v3-recipe-taxonomy"
+    },
+    "matching_import_snapshots": 1,
+    "raw_payloads_verified": 1250,
+    "raw_hashes_times_contexts_equal_source": true,
+    "imported_source_rows": [
+      {
+        "store_external_id": "2176",
+        "rows": 10266,
+        "observed_from": "2026-10-01T07:44:43.807014+00:00",
+        "observed_to": "2026-10-01T07:56:05.388896+00:00"
+      },
+      {
+        "store_external_id": "2354",
+        "rows": 8673,
+        "observed_from": "2026-10-01T08:03:35.952756+00:00",
+        "observed_to": "2026-10-01T08:15:10.740536+00:00"
+      }
+    ],
+    "active_manifest_sha256": "52af66337280a939937bcc4f6df86cfaf1ef533a1079113906c9cba91471ba74",
+    "prepared_artifact_sha256": "0894b8c9b2d63d47614d284f7db15e0435a89782f1c36845c30a9332848f513c",
+    "serving": {
+      "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671",
+      "built_at": "2026-10-01T10:54:40.796845Z",
+      "raw_product_count": 44066,
+      "product_count": 2246,
+      "snapshot_ids": [
+        "03ecb507c93c45ecb3d1ab8d18de2e63",
+        "0a02770853d247279ebaedb5309a37a9",
+        "0b59b3ace78f4b6db2d8b1d97c96d4fb",
+        "16c7ec31fa4e4f5899f3a6d19ae4d590",
+        "1eefdcbec9934b1b85b53ee1ceeba625",
+        "228179f436044eba99af165b817b89b3",
+        "293e153376ae45bbbf114c0cbb5790d3",
+        "2c47d341b8f246848d2bfcfa46757044",
+        "3552c63e2d174bac85a8e015b93a4a43",
+        "358873a8e8f549089062628531f43c86",
+        "363e3c9fe81b48c982142f01047d08b2",
+        "3f2de252bae34dbd9eb80c4664424c79",
+        "512e0fab56674cce8498757944a8e119",
+        "54e3331d7b4c4e96a1ff002e5d830cdf",
+        "588288bf13bd4b9cb91af8cb9ec27ee2",
+        "593e2808b7344d858fbca285046fac36",
+        "5d76abc53d40471897d92a7326eca306",
+        "695a6f9788cc4b59aa71bf61af78b661",
+        "6beedfc24e6542b89b39277c185d92a3",
+        "7a864c3cb9f54a38be5f77c612b5160b",
+        "7fde30299d184a9b86af058990997ff4",
+        "92d1e8138efb41878d4d5ded88fd3be5",
+        "98740403af1e47caa7cc61937d0e650b",
+        "9aaa68ea82be49dbb0d10ece3f4fcc2b",
+        "b5acc16727ca4ce7972b4135de9bc127",
+        "c1517b4e7e234c23b85d04fcb8b76ccf",
+        "c22e18c8e3f846efaccb0b5d84ec2b02",
+        "cda8609ac4cb4d51a0450836961ba063",
+        "e465b42fdcee42048abf9c87783da850",
+        "e8cc9da9b3d54c50bd58b3524b5e059f",
+        "f0762bc7495648938996d690e73b0c60",
+        "fa288ef064e147878c6b983c78649e3f"
+      ]
+    },
+    "served_rows_from_this_import": 18760,
+    "served_source_times_preserved": true
+  },
+  "final_actual_reload": {
+    "changed": true,
+    "new_price_universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671",
+    "old_price_universe_id": "price-universe:a69651bdd5bae3326e23269cf86829d1569ea809061e6e0a02434a1a478a4fd8",
+    "plan_prewarm": "disabled",
+    "pricing_projection": "miss_filled"
+  },
+  "raw_files": {
+    "checked_at": "2026-10-01T10:59:49.612843+00:00",
+    "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671",
+    "manifest_sha256": "52af66337280a939937bcc4f6df86cfaf1ef533a1079113906c9cba91471ba74",
+    "artifact_sha256": "0894b8c9b2d63d47614d284f7db15e0435a89782f1c36845c30a9332848f513c",
+    "raw_files": 2232,
+    "bad_raw_files": 0,
+    "oldest_base_observed_at": "2026-09-30T11:17:53.844785Z",
+    "source_observations_unchanged": true
+  },
+  "freshness": {
+    "checked_utc": "2026-10-01T10:59:49.799691+00:00",
+    "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671",
+    "raw_rows": 44066,
+    "mandatory_contexts": {
+      "context:coop:23eaae11c9661e68": {
+        "rows": 11428,
+        "oldest_observed_at": "2026-10-01T06:09:21.920468+00:00",
+        "age_hours": 4.841,
+        "state": "FRESH"
+      },
+      "context:hemkop:3288e04edd97e349": {
+        "rows": 5071,
+        "oldest_observed_at": "2026-10-01T06:55:05.319713+00:00",
+        "age_hours": 4.079,
+        "state": "FRESH"
+      },
+      "context:hemkop:756955d0e6e05f23": {
+        "rows": 6205,
+        "oldest_observed_at": "2026-10-01T06:39:40.871532+00:00",
+        "age_hours": 4.336,
+        "state": "FRESH"
+      },
+      "context:willys:383650ec6ff5a636": {
+        "rows": 10170,
+        "oldest_observed_at": "2026-10-01T07:44:43.807014+00:00",
+        "age_hours": 3.252,
+        "state": "FRESH"
+      },
+      "context:willys:4a671428fc484e43": {
+        "rows": 8590,
+        "oldest_observed_at": "2026-10-01T08:03:35.952756+00:00",
+        "age_hours": 2.937,
+        "state": "FRESH"
+      }
+    },
+    "test_clock_used": false
+  },
+  "plan_probes": {
+    "normal-before-recovery": {
+      "phase": "normal-before-recovery",
+      "before_revisions": 40,
+      "cases": [
+        {
+          "case": "profile-15-20",
+          "older": false,
+          "plan_id": "f822ddcb-a48b-47c1-901a-c8af14ee0ca7",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "3b25b345ac31b685f472e47065e495216bd1be6f893d34679cae4317b5703935"
+        },
+        {
+          "case": "ica-approx-laxsida",
+          "older": false,
+          "plan_id": "4089bf18-5ebf-40ac-a9e1-2ec482df5fca",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "554c255742615564e3eb549435b238fd001bda51e59c0968c256a10fcf1f0ff6"
+        },
+        {
+          "case": "hemkop-open-pizza",
+          "older": false,
+          "plan_id": "8a06e7f5-0a3a-44ee-b738-70f2b3a0744a",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "ed2051c25811e2635a68603fc1cfa6e0bdc9d4892f10d0a3cb8fe5773dbdd899"
+        },
+        {
+          "case": "profile-15-20",
+          "older": true,
+          "plan_id": "75744970-cfeb-48d1-8b38-3e0974c16160",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "fa9c8288c05fe579b81b26a6547c8487c687eff7372d0922e2d386fdd84a63e5"
+        },
+        {
+          "case": "ica-approx-laxsida",
+          "older": true,
+          "plan_id": "7fd0ca98-fece-4ed0-ac49-f82e56b25e79",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "7cb9a902d33ea4e6eac77289db075f98ccd772220bdbeea4a12eb6e3f13cd0b1"
+        },
+        {
+          "case": "hemkop-open-pizza",
+          "older": true,
+          "plan_id": "372d60e2-b517-4561-a0b7-453fac4cd2e7",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "0ebd39478e5285581fad3ae9a801ce0735a4ba09ec002f47e33ac4aace6819cd"
+        }
+      ],
+      "all_previous_revisions_unchanged": true,
+      "after_revisions": 40
+    },
+    "recovery-before-restart": {
+      "phase": "recovery-before-restart",
+      "before_revisions": 40,
+      "cases": [
+        {
+          "case": "profile-15-20",
+          "older": false,
+          "plan_id": "f822ddcb-a48b-47c1-901a-c8af14ee0ca7",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "3b25b345ac31b685f472e47065e495216bd1be6f893d34679cae4317b5703935"
+        },
+        {
+          "case": "ica-approx-laxsida",
+          "older": false,
+          "plan_id": "4089bf18-5ebf-40ac-a9e1-2ec482df5fca",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "554c255742615564e3eb549435b238fd001bda51e59c0968c256a10fcf1f0ff6"
+        },
+        {
+          "case": "hemkop-open-pizza",
+          "older": false,
+          "plan_id": "8a06e7f5-0a3a-44ee-b738-70f2b3a0744a",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "ed2051c25811e2635a68603fc1cfa6e0bdc9d4892f10d0a3cb8fe5773dbdd899"
+        },
+        {
+          "case": "profile-15-20",
+          "older": true,
+          "plan_id": "75744970-cfeb-48d1-8b38-3e0974c16160",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "fa9c8288c05fe579b81b26a6547c8487c687eff7372d0922e2d386fdd84a63e5"
+        },
+        {
+          "case": "ica-approx-laxsida",
+          "older": true,
+          "plan_id": "7fd0ca98-fece-4ed0-ac49-f82e56b25e79",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "7cb9a902d33ea4e6eac77289db075f98ccd772220bdbeea4a12eb6e3f13cd0b1"
+        },
+        {
+          "case": "hemkop-open-pizza",
+          "older": true,
+          "plan_id": "372d60e2-b517-4561-a0b7-453fac4cd2e7",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "0ebd39478e5285581fad3ae9a801ce0735a4ba09ec002f47e33ac4aace6819cd"
+        }
+      ],
+      "wrong_owner_status": 403,
+      "disabled": {
+        "/api/plans": 503,
+        "/api/plan": 503,
+        "/api/personal/plans/f822ddcb-a48b-47c1-901a-c8af14ee0ca7/change": 503,
+        "/api/plans/f822ddcb-a48b-47c1-901a-c8af14ee0ca7/replace-product": 503,
+        "/api/internal/price-universe/reload": 503
+      },
+      "all_previous_revisions_unchanged": true,
+      "after_revisions": 40
+    },
+    "recovery-final-routes": {
+      "phase": "recovery-final-routes",
+      "before_revisions": 40,
+      "cases": [
+        {
+          "case": "profile-15-20",
+          "older": false,
+          "plan_id": "f822ddcb-a48b-47c1-901a-c8af14ee0ca7",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "3b25b345ac31b685f472e47065e495216bd1be6f893d34679cae4317b5703935"
+        },
+        {
+          "case": "ica-approx-laxsida",
+          "older": false,
+          "plan_id": "4089bf18-5ebf-40ac-a9e1-2ec482df5fca",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "554c255742615564e3eb549435b238fd001bda51e59c0968c256a10fcf1f0ff6"
+        },
+        {
+          "case": "hemkop-open-pizza",
+          "older": false,
+          "plan_id": "8a06e7f5-0a3a-44ee-b738-70f2b3a0744a",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "ed2051c25811e2635a68603fc1cfa6e0bdc9d4892f10d0a3cb8fe5773dbdd899"
+        },
+        {
+          "case": "profile-15-20",
+          "older": true,
+          "plan_id": "75744970-cfeb-48d1-8b38-3e0974c16160",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "fa9c8288c05fe579b81b26a6547c8487c687eff7372d0922e2d386fdd84a63e5"
+        },
+        {
+          "case": "ica-approx-laxsida",
+          "older": true,
+          "plan_id": "7fd0ca98-fece-4ed0-ac49-f82e56b25e79",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "7cb9a902d33ea4e6eac77289db075f98ccd772220bdbeea4a12eb6e3f13cd0b1"
+        },
+        {
+          "case": "hemkop-open-pizza",
+          "older": true,
+          "plan_id": "372d60e2-b517-4561-a0b7-453fac4cd2e7",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "0ebd39478e5285581fad3ae9a801ce0735a4ba09ec002f47e33ac4aace6819cd"
+        }
+      ],
+      "wrong_owner_status": 403,
+      "disabled": {
+        "/api/plans": 503,
+        "/api/plan": 503,
+        "/api/personal/plans/f822ddcb-a48b-47c1-901a-c8af14ee0ca7/change": 503,
+        "/api/plans/f822ddcb-a48b-47c1-901a-c8af14ee0ca7/replace-product": 503,
+        "/api/plans/f822ddcb-a48b-47c1-901a-c8af14ee0ca7/replace-recipe": 503,
+        "/api/admin/reload-price-universe": 503,
+        "/api/internal/price-universe/reload": 503
+      },
+      "all_previous_revisions_unchanged": true,
+      "after_revisions": 40
+    },
+    "normal-final": {
+      "phase": "normal-final",
+      "before_revisions": 40,
+      "cases": [
+        {
+          "case": "profile-15-20",
+          "older": false,
+          "plan_id": "f822ddcb-a48b-47c1-901a-c8af14ee0ca7",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "3b25b345ac31b685f472e47065e495216bd1be6f893d34679cae4317b5703935"
+        },
+        {
+          "case": "ica-approx-laxsida",
+          "older": false,
+          "plan_id": "4089bf18-5ebf-40ac-a9e1-2ec482df5fca",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "554c255742615564e3eb549435b238fd001bda51e59c0968c256a10fcf1f0ff6"
+        },
+        {
+          "case": "hemkop-open-pizza",
+          "older": false,
+          "plan_id": "8a06e7f5-0a3a-44ee-b738-70f2b3a0744a",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "ed2051c25811e2635a68603fc1cfa6e0bdc9d4892f10d0a3cb8fe5773dbdd899"
+        },
+        {
+          "case": "profile-15-20",
+          "older": true,
+          "plan_id": "75744970-cfeb-48d1-8b38-3e0974c16160",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "fa9c8288c05fe579b81b26a6547c8487c687eff7372d0922e2d386fdd84a63e5"
+        },
+        {
+          "case": "ica-approx-laxsida",
+          "older": true,
+          "plan_id": "7fd0ca98-fece-4ed0-ac49-f82e56b25e79",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "7cb9a902d33ea4e6eac77289db075f98ccd772220bdbeea4a12eb6e3f13cd0b1"
+        },
+        {
+          "case": "hemkop-open-pizza",
+          "older": true,
+          "plan_id": "372d60e2-b517-4561-a0b7-453fac4cd2e7",
+          "revision": 1,
+          "status": 200,
+          "plan_identical": true,
+          "saved_sha256": "0ebd39478e5285581fad3ae9a801ce0735a4ba09ec002f47e33ac4aace6819cd"
+        }
+      ],
+      "all_previous_revisions_unchanged": true,
+      "after_revisions": 40
+    }
+  },
+  "recovery_restart_probe": {
+    "phase": "recovery-after-restart",
+    "before_revisions": 40,
+    "cases": [
+      {
+        "case": "profile-15-20",
+        "older": false,
+        "plan_id": "f822ddcb-a48b-47c1-901a-c8af14ee0ca7",
+        "revision": 1,
+        "status": 200,
+        "plan_identical": true,
+        "saved_sha256": "3b25b345ac31b685f472e47065e495216bd1be6f893d34679cae4317b5703935"
+      },
+      {
+        "case": "ica-approx-laxsida",
+        "older": false,
+        "plan_id": "4089bf18-5ebf-40ac-a9e1-2ec482df5fca",
+        "revision": 1,
+        "status": 200,
+        "plan_identical": true,
+        "saved_sha256": "554c255742615564e3eb549435b238fd001bda51e59c0968c256a10fcf1f0ff6"
+      },
+      {
+        "case": "hemkop-open-pizza",
+        "older": false,
+        "plan_id": "8a06e7f5-0a3a-44ee-b738-70f2b3a0744a",
+        "revision": 1,
+        "status": 200,
+        "plan_identical": true,
+        "saved_sha256": "ed2051c25811e2635a68603fc1cfa6e0bdc9d4892f10d0a3cb8fe5773dbdd899"
+      },
+      {
+        "case": "profile-15-20",
+        "older": true,
+        "plan_id": "75744970-cfeb-48d1-8b38-3e0974c16160",
+        "revision": 1,
+        "status": 200,
+        "plan_identical": true,
+        "saved_sha256": "fa9c8288c05fe579b81b26a6547c8487c687eff7372d0922e2d386fdd84a63e5"
+      },
+      {
+        "case": "ica-approx-laxsida",
+        "older": true,
+        "plan_id": "7fd0ca98-fece-4ed0-ac49-f82e56b25e79",
+        "revision": 1,
+        "status": 200,
+        "plan_identical": true,
+        "saved_sha256": "7cb9a902d33ea4e6eac77289db075f98ccd772220bdbeea4a12eb6e3f13cd0b1"
+      },
+      {
+        "case": "hemkop-open-pizza",
+        "older": true,
+        "plan_id": "372d60e2-b517-4561-a0b7-453fac4cd2e7",
+        "revision": 1,
+        "status": 200,
+        "plan_identical": true,
+        "saved_sha256": "0ebd39478e5285581fad3ae9a801ce0735a4ba09ec002f47e33ac4aace6819cd"
+      }
+    ],
+    "wrong_owner_status": 403,
+    "disabled": {
+      "/api/plans": 503,
+      "/api/plan": 503,
+      "/api/personal/plans/f822ddcb-a48b-47c1-901a-c8af14ee0ca7/change": 503,
+      "/api/plans/f822ddcb-a48b-47c1-901a-c8af14ee0ca7/replace-product": 503,
+      "/api/internal/price-universe/reload": 503
+    },
+    "all_previous_revisions_unchanged": true,
+    "after_revisions": 40
+  },
+  "checkpoint": {
+    "checkpoint": [
+      0,
+      0,
+      0
+    ],
+    "revisions": 40,
+    "all_rows_preserved": true,
+    "database_sha256": "2bfcb7049620206561e2461236a9119923eec9622f4968edb9dd09089334a2d5"
+  },
+  "latest_plan_revisions": 40,
+  "plan_content_sha256": "a19c80bbabc84e9cfd087daed43c7167b48918b07e174000af10266bfe0598cc",
+  "final_image_verification": {
+    "commit": "08c137475d9ca96a6ef7673245a639c8c5c9e922",
+    "package_sha256": "c20f8ad6ce316df121117c32cb44dc308a8d73011d097ec8799be095883b1e22",
+    "checked_runtime_files": 621,
+    "allowed_missing": [
+      "deploy/.env.production.example"
+    ],
+    "mismatch": [],
+    "pip_check": "PASS",
+    "chromium_offline_launch": "PASS",
+    "network": "none"
+  },
+  "compose_render": {
+    "render_only": true,
+    "private_values_omitted": true,
+    "pinned_services": {
+      "app": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+      "migrate": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+      "scheduler": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+      "refresh-once": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+      "backup-once": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7"
+    },
+    "municipality": "1281",
+    "separate_inbox": "/srv/app/var/raw_snapshots/source-inbox/municipality-1281",
+    "app_raw_and_prices_readonly": true,
+    "receiver_raw_and_prices_writable": true,
+    "receiver_reload_target": "http://app:8000"
+  },
+  "regression_passed": 168,
+  "proof_file_hashes": {
+    "final-replay-audit.json": "a9552eabd0479266a83427bbb7e115815a310fc74d83cb55eff29c56c15c549a",
+    "state-final.json": "7a84ff99c63e15c4b77d2a479c7bdbb7d19131857e2fe897322825436fd78954",
+    "old-inventory-final.json": "860c5c6c966f76f75e50346cfbc2ffdaa643b82093b8ef2e8975676cddd87f3c",
+    "regression-08c1374-final.log": "82dc709afe62bcda9ed39939c9f2c44a616ff1fd5d82655c712e809db11c072c",
+    "recovery-final-state.log": "f137dae07ba138d0d5f3bba88b5784f24823e17024c3f7cd09ef100ee0af1cf6",
+    "production-task-after.xml": "c781d10ce504aa172d8006f365f7ad167ac2ca23688fcf629d1b0851c5ff6755",
+    "final-stopped-state.txt": "d90f191fcd9499b0f2100b173ffffbafef2b36d47483a8bb30c572468deddfb2"
+  },
+  "historical_evidence_not_rerun": {
+    "ordinary_windows_tests_bdc9": 3455,
+    "restored_lidl_tests": 16,
+    "five_previous_failures_focused_after": 40,
+    "frontend_tests": 30,
+    "browser_form_cases": 4
+  },
+  "technical_decision": "REDO FÖR SEPARAT AKTIVERINGSBESLUT; rollback scope is authenticated saved-plan reading only"
+}

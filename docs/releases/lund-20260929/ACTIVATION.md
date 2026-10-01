@@ -1,152 +1,140 @@
-# Separat besluts- och aktiveringsordning för Lund
+# Lund: samordnat byte och begränsad återgång
 
-Detta är en **förberedd ordning**, inte ett utfört produktionsbyte. Tre skilda
-beslut krävs: (1) `lund-own-five-base-20260928-v1` som produktionsomfattning,
-(2) serveraktivering och (3) ändring av den aktiva Windows-uppgiften. Inget av
-dem följer av att ett isolerat test passerar. Fullständigt Malmö-underlag och
-dess baspolicy är ett annat beslut.
+Detta är instruktionen för ett senare godkänt byte, **inte utförd produktion**.
+Tre separata beslut krävs: femkällorspolicyn, serveraktivering och ändring av
+den aktiva Windows-uppgiften. Serverbeslutet måste uttryckligen omfatta att
+återgångsmålet erbjuder **läsning av sparade planer, inte full drift**.
+Se [TRANSITION.md](TRANSITION.md) för provad sekvens och teknisk slutstatus.
+Teknisk status: **REDO FÖR SEPARAT AKTIVERINGSBESLUT** för denna begränsade
+återgång. Det är inget godkännande att ändra drift.
+Malmö, utökad erbjudandetäckning och städning ingår inte.
 
-**Teknisk status: INTE REDO.** [Kompletterande driftprov](OPERATIONS.md)
-visar otömd gammal kö på originalpolicyn och
-inkompatibel planläsning i faktisk produktionsbild. Nedanstående är en
-villkorad ordning, inte ett godkänt körschema. Korsversionerna är
-inkompatibla: ett kort samordnat avbrott är obligatoriskt.
+## Versionsbundna mål
 
-Testregistreringen och den isolerade S4U-livekörningen är utförda av
-operatören. [Granskningen av exakt körning 20261001T074423Z](S4U-LIVE.md)
-ger PASS för obevakad hämtning/leverans. Det stänger inte köövergången
-eller återgångens läskompatibilitet och godkänner ingen produktionsändring.
+Server, migration, collector och refresh/scheduler ska använda den slutliga
+bilden och runtime-commiten i [TRANSITION-EVIDENCE.json](TRANSITION-EVIDENCE.json).
+Använd `deploy/compose.release.yaml`: samma bild för app, migrate, scheduler,
+refresh-once och backup-once, utan lokalt bygge. Ange både
+`SMAKO_RELEASE_IMAGE` och `SMAKO_RELEASE_ENV_FILE` till granskade privata värden.
+Rendera med samma skyddade env som interpolationskälla. `env_file` gör även
+de fullständiga kommun-/källinställningarna tillgängliga; befintliga explicita
+Compose-miljövärden har företräde och ska stämmas av mot den granskade filen.
 
-## Utgåva och exakta ändringar
+Windows använder det liveprovade **oförändrade** paketet
+`D:\smako-local-relay\releases\bdc9f7df4170`. Dess kontrakt provas mot den nya
+servern genom autentisk replay. Det nya Windows-ZIP:et är byggt från samma
+slutcommit som servern men inte installerat/S4U-liveprovat; ersätt inte bdc9
+automatiskt. Ursprungligt [S4U-bevis](S4U-LIVE.md) gäller exakt bdc9 och dess
+provade konfiguration. Ett annat konto, transport, nyckelskydd, startargument
+eller körpolicy kräver uttryckligt godkänd kompletterande kontroll.
 
-Källcommit för båda driftpaketen är `bdc9f7df417084641d0a712e3dad188dad1ad7d4`.
-Serverpaketet är `smako-server-bdc9f7df4170.zip`; reläpaketet är
-`smako-windows-relay-bdc9f7df4170.zip`. Kontrollera SHA-256 mot
-[resultatrapporten](RESULTS.md) innan någon installation eller bildstart.
-Serverns `app`, `migrate` och `scheduler` ska alla få samma verifierade
-innehållsadresserade bild via `deploy/compose.release.yaml`, utan värdbygge.
-Separat versionsbundet relä finns förberett under
-`D:\smako-local-relay\releases\bdc9f7df4170`; tillstånd och lokal konfiguration
-ska vara kvar utanför denna katalog.
+Återgångsmålet är den slutliga pinnade serverbilden med entrypoint
+`app.recovery:app`, genom `deploy/compose.recovery.yaml`. Den läser den senaste
+plandatakatalogen read-only med befintliga autentiseringsnycklar och
+åtkomstkontroller. Ingen prisrot krävs. Nyplanering, omräkning och API-import
+svarar kontrollerat 503; source_cli/refresh vägrar med exit 3 i återgångsläget.
+Gammal produktionsbild `54dde8382599ac30beee8bffd05d8cefff232e1ea5c81f1fd7f302db0d591c1f`
+är bevarad historik, **inte ett fungerande återgångsmål för nya planer**.
 
-Nuvarande produktionsbild är `sha256:54dde8382599ac30beee8bffd05d8cefff232e1ea5c81f1fd7f302db0d591c1f`
-och `BUILD_ID=price-recovery-lund-20260914a`. Nuvarande serverpolicy har
-`OWN_SOURCES_ONLY=false` och sex obligatoriska kontexter, inklusive två
-ICA/Primat-baser. Ett **separat godkänt** Lund-byte skulle sätta
-`OWN_SOURCES_ONLY=true` och exakt fem `PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS`
-från `deploy/policies/lund-own-five-base-20260928-v1.json`: Coop Online Syd,
-Hemköp Brunnshög, Hemköp Karhögstorg, Willys Lund och Willys Lund Nova.
-`WILLYS_COLLECTION_LOCATION=LOCAL_RELAY`, 36/48-timmarsgränserna,
-`offers_only`, valda kommunflöden och användarens tillåtna butiker får inte
-förändras som bieffekt. Originalpolicyn ska arkiveras separat och återställbar.
-Det föreslagna värdet för `PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS` är exakt
-`context:coop:23eaae11c9661e68,context:hemkop:3288e04edd97e349,context:hemkop:756955d0e6e05f23,context:willys:383650ec6ff5a636,context:willys:4a671428fc484e43`.
+## Exakta föreslagna inställningsändringar
 
-Nuvarande Windows-uppgift `Smako Willys Local Relay` kör befintlig PS7 med
-`ossia`/S4U/Limited, dagligen 01:30, `IgnoreNew`, PT3H,
-`StartWhenAvailable` och `WakeToRun`. Förslaget i
-den nya privata mallen
-`D:\Projects\Smako\.local\drift-verification\task-proposed-municipal\task-proposed.xml`
-ändrar **endast**
-`Actions/Exec/Arguments` till `start_packaged_relay.ps1` med versionsbunden
-`-File`, separat `-Workspace D:\smako-local-relay\scopes\municipality-1281` och
-`-Config D:\smako-local-relay\config\relay.json`, samt
-`Actions/Exec/WorkingDirectory` till den versionsbundna katalogen. `Command`,
-körkonto, rättigheter, triggers och övriga inställningar är kvar. Den privata
-konfigurationsfilen skapas först i samband med ett godkänt byte och ska aldrig
-läggas i Git. Uppgiften är ännu inte ändrad eller registrerad från mallen.
-Nuvarande `Arguments` är
-`-NoProfile -NonInteractive -File "C:\Users\ossia\Documents\Codex\2026-08-20\jag-vill-att-du-bygger-en\deploy\scripts\collect_willys_local.ps1" -Repository "C:\Users\ossia\Documents\Codex\2026-08-20\jag-vill-att-du-bygger-en" -Workspace "D:\smako-local-relay"`.
-Föreslagen `Arguments` är
-`-NoProfile -NonInteractive -File "D:\smako-local-relay\releases\bdc9f7df4170\deploy\scripts\start_packaged_relay.ps1" -Workspace "D:\smako-local-relay\scopes\municipality-1281" -Config "D:\smako-local-relay\config\relay.json"`.
-Programmet förblir den nuvarande pinnade `pwsh.exe`-sökvägen.
+Efter separat policybeslut används `lund-own-five-base-20260928-v1`,
+`OWN_SOURCES_ONLY=true` och exakt följande `PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS`:
 
-Den nya arbetsytan är ett uttryckligt tillägg till Windows-förslaget: gamla
-city-scope-köer/kvitton ska ligga kvar oförändrade i den gamla arbetsytan,
-nya kommunartefakter ska ha eget aktuellt tillstånd. Tidigare XML med samma
-arbetsyta för båda versionerna är bevarad historik, inte aktuell instruktion.
-Varken katalogen eller produktionskonfigurationen har installerats här.
-Ändringen ingår i det separata Windows-beslutet. Ingen gammal artefakt får
-konverteras, kvitteras som publicerad eller raderas för att flytta kön.
+```text
+context:coop:23eaae11c9661e68,context:hemkop:3288e04edd97e349,context:hemkop:756955d0e6e05f23,context:willys:383650ec6ff5a636,context:willys:4a671428fc484e43
+```
 
-## Kontroller före varje byte
+Det är Coop Online Syd, Hemköp Brunnshög/Karhögstorg och Willys Lund/Lund Nova.
+Originalpolicyn med obligatoriska Primat-baser sparas separat.
+`WILLYS_COLLECTION_LOCATION=LOCAL_RELAY`, 36/48 timmar, `offers_only`,
+kommunflöden och användarens butiksval ändras inte.
 
-1. Läs [resultatrapporten](RESULTS.md) och verifiera att både gammal/ny
-   mottagar- och reläversion har passerat den faktiska kompatibilitetsordningen.
-   Kontrollera att fem obligatoriska källor är under 48 timmar gamla, att
-   kampanjer gäller på plandagen och att faktiskt laddat manifest innehåller
-   dem. Degradationskod eller HTTP 200 ensam är inte godkännande.
-2. Vänta tills pågående Windows-jobb och serverns refresh/import är färdiga.
-   Ta operationslåset för en kort kontrollerad cutover. Kör inte gamla och nya
-   reläet samtidigt. Säkerhetskopiera **konsistent**, utan skrivare, den aktuella
-   serverreleasen och bild-ID:t, Compose-filer och skyddad `.env`,
-   `/srv/smako/data/grocery`, `/srv/smako/data/plans`, aktivt manifest och
-   PriceUniverse under `/srv/smako/data/price_universes`, refererade
-   `/srv/smako/data/raw_snapshots` inklusive inbox, samt rapporter/uppdateringsstatus.
-   Använd SQLite online-backup eller stoppade skrivare, verifiera hash och
-   återläsbarhet. Spara sekretesskyddade kopior utanför Git och rapporter.
-3. Exportera den aktiva Windows-uppgiften och dess hash igen. Ta en konsistent
-   kopia av `D:\smako-local-relay` till skyddat backupmål, inklusive köer,
-   `last-success.json`, lås-/uppdateringsstatus och lokal konfiguration.
-   Bevara rättigheter. Inga gamla datumkataloger raderas.
-4. Verifiera releasebildens OCI-revision, server-ZIP:ens filhashar och
-   `docker compose -f compose.yaml -f /opt/smako/compose.vps.yaml -f
-   compose.release.yaml config` med skyddad produktionskonfiguration. Bild-ID
-   måste vara identiskt för `app`, `migrate`, `scheduler` och användas av
-   collector/refresh. Genomför databas- och läsbarhetsprov innan trafik byts.
+Ny mottagarinbox är `/srv/app/var/raw_snapshots/source-inbox/municipality-1281`,
+på värden `/srv/smako/data/raw_snapshots/source-inbox/municipality-1281`.
+Sätt `SOURCE_RELAY_INBOX` och privat `relay.json` till samma containersökväg.
+Transporten ska rikta sig till den nya **scheduler/receiver-containern** med
+skrivbara grocery/raw/prisvolymer och `INTERNAL_APP_BASE_URL=http://app:8000`.
+Vanlig app har read-only raw/prisvolymer och ska inte göras skrivbar som genväg.
+Renderad Compose ska bekräfta dessa bindningar före byte. Gamla inboxen får inte
+pollas av det nya kommunflödet. Befintligt operationslås serialiserar alla
+refresh-/importvägar även efter att normala jobb återupptas.
 
-## Samordnad cutover: ett enda kontrollerat avbrott
+Windows-förslaget ändrar endast Arguments och WorkingDirectory för
+`Smako Willys Local Relay`:
 
-Får utföras först när tekniska spärrar stängts och **alla tre** separata
-beslut fattats. Gamla/nya relä- och mottagarversioner får inte köras i kors.
+```text
+-NoProfile -NonInteractive -File "D:\smako-local-relay\releases\bdc9f7df4170\deploy\scripts\start_packaged_relay.ps1" -Workspace "D:\smako-local-relay\scopes\municipality-1281" -Config "D:\smako-local-relay\config\relay.json"
+WorkingDirectory: D:\smako-local-relay\releases\bdc9f7df4170
+```
 
-1. Blockera nya berörda schemastarter på både server och Windows inom det
-   godkända avbrottet. Vänta ut pågående jobb, barnprocesser och operationer;
-   kontrollera låsägarna, bryt inte lås. Behåll gamla paret tills det är tyst.
-2. Inventera/hashförteckna gamla/nya köer, inboxar och senaste kvitton.
-   Med gamla paret ska giltiga gamla väntande artefakter importeras och
-   faktiskt publiceras före bytet, eller hållas separat under ett uttryckligen
-   granskat förfarande. **Nu blockerad:** originalpolicyn kan inte publicera
-   utan Primat-baser. En redan importerad men opublicerad artefakt får inte
-   bli ett framgångskvitto. Valideringsavvisade äldre filer bevaras separat
-   med felorsak; de får inte tyst tappas eller bindas om till kommun.
-3. Ta konsistenta skyddade backuper och låset enligt kontrollerna ovan.
-   Bevara gamla prisroten som separat återgångskandidat, men återställ aldrig
-   äldre planer, köer eller kvitton över nytillkommet tillstånd.
-4. Under samma avbrott, med **båda jobbsidor fortsatt pausade**, byt app,
-   migrate, collector/refresh/scheduler till verifierad ny bild och godkänd
-   femkällorspolicy. Byt den enda Windows-uppgiftens Arguments/WorkingDirectory
-   enligt aktuell XML, inklusive separat kommunarbetsyta. Behåll konto,
-   S4U/Limited, triggers, IgnoreNew, tidsgräns och övriga inställningar.
-   Den gamla arbetsytan/uppgiftexporten bevaras. Inget obevakat
-   server-först-fönster tillåts.
-5. Tillåt endast en kontrollerad körning av det nya paret. Använd giltiga
-   nya artefakter för replay där det är relevant; gör ny verklig hämtning
-   när behovsstyrningen kräver det. Verifiera hash, scope, observation,
-   inbox, operationslås, import, atomisk publicering, laddat manifest,
-   beständigt kvitto och idempotens. Planläsning och kvalitetsstatus måste
-   passera. Återuppta båda sidors normala scheman först därefter.
+Behåll befintlig pinnad pwsh.exe, ossia/S4U/Limited, 01:30-trigger, IgnoreNew,
+PT3H, StartWhenAvailable och WakeToRun. Kontrollera effektiv körpolicy och
+signering enligt provat startförfarande; tillfällig Bypass vid registrering
+bevisar inte schemalagd laddning. Ingen permanent säkerhetspolicy ändras.
+Privat uppgiftsmall: `.local/drift-verification/task-proposed-municipal/task-proposed.xml`.
+Gamla skript, arbetsytor och uppgiftexport bevaras.
 
-## Återgång: stoppa vid konstaterad läsinkompatibilitet
+## Enda övergångsordningen efter besluten
 
-Vid fel hålls **båda** sidors nya jobb pausade och pågående operationer väntas
-ut. Nya artefakter/kvitton stannar i nya kommunarbetsytan/inboxen, gamla i
-gamla. Inga nya artefakter skickas till gamla mottagaren. Återanvänd senaste
-kvittot inom rätt scope; återställ inte en äldre backup över kön. Upprepad
-import ska kontrolleras mot artefakthash/snapshot, inte filnamn eller körtid.
+1. Kontrollera paket-/bildhashar, faktiskt laddat manifest, refererade råfiler
+   och äldsta verkliga observation i var och en av de fem baserna. Varning vid
+   36 timmar, stopp vid 48; kampanjens faktiska slut gäller. Återanvänd giltiga
+   underlag. Kopiering/rebuild får aldrig föryngra observationer.
+2. Pausa nya starter på **båda** jobbsidor under ett kort planerat avbrott.
+   Vänta ut jobb, barnprocesser och befintliga operationslås; bryt inte lås.
+   Inget obevakat server-först-fönster och inga dubbla importerare tillåts.
+3. Ta konsistenta skyddade backuper av Windows-XML/hash, serverbild/Compose/env,
+   senaste plan- och grocery-databaser, manifest/prisrot, råfiler, köer, kvitton
+   och uppdateringsstatus. Använd SQLite online-backup eller stoppade skrivare.
+   Bevara rättigheter och hemligheter utanför Git och rapporter.
+4. Kör `python -m grocery_data.relay_transition` från slutpaketet på respektive
+   värd med `--workspace` och/eller `--inbox --database --price-root`, samt
+   separat `--archive`. Verktyget använder befintliga lås, väntar högst 300 s
+   som standard och vägrar vid kvarvarande operation. Det bevarar original,
+   innehållsadresserade kopior, kvitton och klassificering. Upprepning med
+   oförändrat tillstånd ger samma inventeringshash. Kvitterade, mottagna utan
+   belagd publicering, väntande och oläsbara filer hålls synligt åtskilda.
+   **Ingen gammal publicering krävs före bytet.** Ingen falsk kvittens,
+   påhittad kommunbindning eller ändrad observation tillåts.
+5. Behåll gamla arbetsytan/inboxen separat. Under samma paus installeras nya
+   servermålet och Windows-förslaget med separat kommunarbetsyta/inbox.
+   Verifiera att samtliga serverjobb använder samma bild. Återuppta redan
+   påbörjad övergång från senaste köer; skriv inte tomt tillstånd över dem.
+6. Prova en kontrollerad leverans med kompatibla paret: hash, scope/tider,
+   autentiserad transport, validering, exakt en import, atomisk publicering,
+   **faktiskt laddat** manifest och beständigt kvitto. Förlorat lokalt kvitto
+   efter publicering ska ge återleverans/already_active utan dubbelimport.
+   Kontrollera planläsning. Återuppta scheman först när detta passerat.
 
-Ett rent bildbyte tillbaka är **inte verifierat säkert**: faktisk gammal
-bild avvisar nya manifestfält och tappar planfält; kampanjplanens GET ger
-500 även med det gamla manifestet. Återställ därför inte den äldre bilden
-som enda användarserver med nya planer. Innan godkänd aktivering behövs en
-verifierad kompatibilitetsåtergång, eller en separat granskad lösning som
-behåller nya bildens läsning av den senaste plandatabasen under avbrottet.
-Att ny bild kan läsa planerna efter vårt test är inte bevis på att en sådan
-trafik-/driftlösning är installerad. Denna spärr är öppen.
+## Begränsad återgång och återstart
 
-När en säker återgång väl verifierats ska tidigare serverbild/konfiguration,
-separat kompatibel prisrot och ursprunglig Windows-XML bytas tillsammans
-innan scheman återupptas. Originalpolicyn med obligatoriska Primat-baser är
-fortfarande separat och saknar giltigt underlag; återställd planläsning får
-inte betecknas som återställd nyplanering/full drift. Omräkning provas
-separat. Gamla mappar och backuper bevaras; inga städspärrar kringgås.
+1. Pausa båda jobbsidor, vänta ut operationer och stoppa vanlig app/importörer.
+   Behåll **senaste** planer, revisioner, köer och kvitton. Ta ny backup;
+   återställ aldrig tidigare databas- eller kökopia över nytillkommet tillstånd.
+2. Med samtliga skrivare stoppade: kör SQLite `PRAGMA wal_checkpoint(TRUNCATE)`
+   mot senaste planfilen och kontrollera resultatet, revisionsantal och att WAL
+   är tom/saknas. Behåll skrivarna stoppade hela läsdriften. Läsaren använder
+   SQLite immutable/read-only för att inte skapa sidofiler på read-only-volymen
+   och vägrar med 503 om en icke-tom WAL finns; den får inte ignorera nya revisioner.
+   Starta pinnad återgångsbild med `deploy/compose.recovery.yaml`, befintlig
+   `SMAKO_ENV_FILE`, `SMAKO_LATEST_PLAN_DIRECTORY=/srv/smako/data/plans` och
+   `SMAKO_PLAN_FILENAME=consumer_plans.sqlite3` (verifierat produktionsfilnamn).
+   Containerflaggan är `SMAKO_RECOVERY_READ_ONLY=true`. Katalog och
+   containerfilsystem är read-only; endast `/tmp` är skrivbart. Ingen
+   scheduler, collector eller reläleverans startas i detta läge.
+3. Verifiera `/ready` med `mode=recovery_read_only`, ägarens GET av gamla/nya
+   planer och 403 för fel användare. Kontrollera full sparad JSON, revision
+   och källreferenser. Läsningen räknar aldrig om resultat. Nyplanering,
+   omräkning/import ska ge `503 recovery_read_only`, inte 500 eller PASS.
+   Byt därefter trafik till lästjänstens localhost-port via granskad proxy.
+   Detta är läsdrift; komplett planerings-UI/full drift utlovas inte.
+4. Ingen gammal prisrot/originalpolicy aktiveras för nyplanering. Primat-hindret
+   kvarstår i originalpolicyn; det påverkar inte prisoberoende planläsning.
+5. Återstart: stoppa lästjänsten, starta nya normala paret med **samma senaste
+   data**, kontrollera aktuella 36/48-timmarsgränser/kampanjer, serving och
+   idempotens. Återuppta därefter scheman. Skicka inga nya artefakter till
+   gamla paret, radera inga gamla mappar och återställ inga äldre köer.
+
+Köarkiv är bevarandebevis, inte publiceringskvitton. Inkompatibla/oläsbara gamla
+leveranser kvarstår synligt ej publicerade för separat granskning.

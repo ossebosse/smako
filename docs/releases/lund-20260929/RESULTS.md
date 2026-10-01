@@ -1,5 +1,15 @@
 # Lund: verifierad kandidat och kvarstående aktiveringsspärrar
 
+**Senaste status:** [TRANSITION.md](TRANSITION.md) och
+[TRANSITION-EVIDENCE.json](TRANSITION-EVIDENCE.json) ersätter nedanstående
+öppna kö-/återgångspunkter. Ny runtime `08c1374` innehåller köbevarande och
+begränsad autentiserad läsdrift, med nya reproducerade paket, 168 fokustester
+och isolerade Docker/HTTP-/omstartsprov. bdc9-livebeviset och tidigare
+fullsvit/browserresultat nedan är bevarade tidigare bevis, inte nya körningar.
+Enda aktuella driftordningen finns i [ACTIVATION.md](ACTIVATION.md).
+
+## Bevarat ursprungligt releaseunderlag
+
 **Senaste driftkomplettering:** [OPERATIONS.md](OPERATIONS.md), med
 [Docker/HTTP-bevis](OPS-EVIDENCE.json) och [Windows-replay](WINDOWS-EVIDENCE.json).
 Faktisk produktionsbild har nu provats: äldre GET tappar planfält och ger

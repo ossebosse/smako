@@ -1,9 +1,14 @@
 # Driftspärrar: komplettering 2026-09-30
 
+**Historisk rapport.** Kö-/återgångspunkterna nedan har nu implementerats och
+omprövats i [TRANSITION.md](TRANSITION.md). Använd endast den uppdaterade
+[ACTIVATION.md](ACTIVATION.md) för ett senare separat godkänt byte. Den gamla
+bilden är inte återgångsmål; nytt begränsat läsläge använder senaste planer.
+
 **Nyare livebevis 2026-10-01:** operatörens avslutade S4U-test har granskats,
 **obevakad hämtning/leverans PASS**, se [S4U-LIVE.md](S4U-LIVE.md).
 Det stänger de historiska registrerings- och S4U-spärrarna nedan.
-Köövergång och läskompatibel återgång är fortsatt blockerade.
+Köövergång och läskompatibel återgång var då fortsatt blockerade.
 Återregistrera eller återstarta inte uppgiften med stöd av historiska instruktioner.
 
 **INTE REDO.** Detta är kompletterande driftprov, inte nya resultat för hela

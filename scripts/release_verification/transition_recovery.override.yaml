@@ -1,0 +1,11 @@
+# Test-only overlay; the production recovery service itself comes from the ZIP.
+services:
+  recovery:
+    network_mode: none
+    ports: !reset []
+    environment:
+      PROBE_DATA_ROOT: /recovery
+      PROBE_OUTPUT_ROOT: /evidence
+    volumes:
+      - ${TRANSITION_PROBE_SCRIPTS:?set isolated probe scripts}:/probe:ro
+      - ${TRANSITION_EVIDENCE:?set isolated evidence directory}:/evidence

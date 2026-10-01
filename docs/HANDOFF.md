@@ -1,4 +1,27 @@
-# Aktuell releasekandidat: Lund och repobaserat Willys-relä 2026-09-30
+# Aktuell releasekandidat: Lund och repobaserat Willys-relä 2026-10-01
+
+**REDO FÖR SEPARAT AKTIVERINGSBESLUT**, med begränsad återgång till sparad
+planläsning. Köövergång och kompatibilitetsåtergång är implementerade och provade.
+Läs [TRANSITION.md](releases/lund-20260929/TRANSITION.md), dess maskinläsbara
+bevis och [ACTIVATION.md](releases/lund-20260929/ACTIVATION.md) före driftarbete.
+Slutlig runtime är `08c137475d9ca96a6ef7673245a639c8c5c9e922`; server-/
+återgångsbild `sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7`.
+Föreslaget Windows-relä förblir det oförändrade liveprovade bdc9-paketet.
+Nytt Windows-ZIP är byggt men inte installerat/S4U-liveprovat.
+
+Gamla kön arkiveras återupptagbart under befintliga lås och hålls separat;
+blockerad gammal Primat-publicering behöver **inte** lyckas före bytet.
+Återgångsmålet är slutbildens `app.recovery`, senaste checkpointade planbas,
+read-only, befintlig autentisering och full sparad JSON. Det stöder läsdrift,
+inte nyplanering/omräkning/import; de funktionerna vägras kontrollerat.
+Ingen äldre databas eller kö återställs över nytillkommet tillstånd.
+168 fokustester passerade i ren klon; paket reproducerade, Docker/HTTP-prov
+och verklig omstart redovisade i det nya underlaget. Produktionsbild, aktiv
+Windows-uppgift och säkerhetspolicy/scheman är oförändrade; ingen push.
+Femkällorspolicy, serveraktivering (inklusive begränsad återgång) och byte av
+Windows-uppgiften är fortfarande tre separata, ej fattade beslut.
+
+## Bevarat S4U-livebevis och tidigare driftstatus
 
 **Senaste granskning 2026-10-01: obevakad livehämtning och leverans PASS.**
 Operatören körde den isolerade uppgiften 09:44:23–10:33:32 svensk tid.
@@ -17,10 +40,10 @@ dess 44 080-manifest har ersatts av denna liveleverans. Profilproven på
 42 491 och de tidigare driftproven på 44 132 är fortfarande separata bevis.
 Inga säkerhetspolicyer, uppgiftsargument eller produktionsbeslut ändrades.
 
-**Driftspärrar från 2026-09-30, fortsatt INTE REDO.** Läs även
+**Historiska driftspärrar från 2026-09-30, ersatta av TRANSITION ovan.** Läs även
 [OPERATIONS.md](releases/lund-20260929/OPERATIONS.md) och uppdaterad
 [ACTIVATION.md](releases/lund-20260929/ACTIVATION.md). Runtime/paket är kvar
-på bdc9f7d; denna fortsättning ändrar endast provverktyg och underlag.
+på bdc9f7d i det historiska underlaget; dess fortsättning ändrade endast provverktyg och underlag.
 Faktisk produktionsbild `54dde838…` tappar 64/12 planfält och ger 500 för
 `kind=campaign`, även efter omstart med gammalt manifest. Ny bild återläser
 alla tre nya planer identiskt på 44 132-manifestet; samtliga 37 revisionsrader
