@@ -1,4 +1,19 @@
-# Aktuell releasekandidat: Lund och repobaserat Willys-relä 2026-10-01
+# Aktivering 2026-10-01: stopp vid aktuell schemakontroll
+
+**Tre produktionsbeslut är nu uttryckligen godkända, villkorat av förkontroller.**
+Godkännandena ska inte begäras igen. Ingen aktivering har gjorts: bdc9-reläets
+35-timmarsregel ihop med enbart daglig 01:30-start ger ett återkommande glapp
+vid 48-timmarsstoppet. Användarens uttryckliga stoppvillkor i B gäller.
+Läs [aktiveringsprotokollet](releases/lund-20260929/ACTIVATION-PREFLIGHT-20261001.md)
+och [aktuella driftordningen](releases/lund-20260929/ACTIVATION.md).
+Förslag till separat schemabeslut: behåll 01:30, lägg till 09:30/17:30-kontroller
+med oförändrade behovsregler, konto och PT3H. Inget schema har ändrats.
+Produktion kör fortsatt gammal bild; läsande kontroll visade stale och /ready 503,
+170 planrevisioner. Inga planer, köer, policyer eller drifttillstånd ändrades.
+Releaseidentitet/filer verifierade. Återstående aktuella aktiveringskontroller
+är inte generellt PASS. Tidigare kö-/återgångs-/S4U-bevis gäller fortfarande.
+
+## Bevarad releasebedömning före villkorat aktiveringsgodkännande
 
 **REDO FÖR SEPARAT AKTIVERINGSBESLUT**, med begränsad återgång till sparad
 planläsning. Köövergång och kompatibilitetsåtergång är implementerade och provade.

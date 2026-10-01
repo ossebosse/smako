@@ -1,12 +1,19 @@
 # Lund: samordnat byte och begränsad återgång
 
-Detta är instruktionen för ett senare godkänt byte, **inte utförd produktion**.
-Tre separata beslut krävs: femkällorspolicyn, serveraktivering och ändring av
-den aktiva Windows-uppgiften. Serverbeslutet måste uttryckligen omfatta att
-återgångsmålet erbjuder **läsning av sparade planer, inte full drift**.
+**Aktuellt 2026-10-01:** de tre besluten nedan är uttryckligen godkända,
+villkorat av aktuella förkontroller, inklusive begränsad läsåtergång. Begär
+inte samma beslut igen. Byte har stoppats före paus på grund av det nu
+belagda glappet mellan dygnstrigger och 35/48-timmarsregler; se
+[aktiveringsprotokoll och separat schemaförslag](ACTIVATION-PREFLIGHT-20261001.md).
+Ingen schemamutation är godkänd eller utförd. Återstående förkontroller ska
+fortsätta efter ett separat schemabeslut innan nedanstående byte genomförs.
+
+Besluten omfattar femkällorspolicyn, serveraktivering och ändring av den aktiva
+Windows-uppgiftens Arguments/WorkingDirectory. Godkänt återgångsmål erbjuder
+**läsning av sparade planer, inte full drift**.
 Se [TRANSITION.md](TRANSITION.md) för provad sekvens och teknisk slutstatus.
-Teknisk status: **REDO FÖR SEPARAT AKTIVERINGSBESLUT** för denna begränsade
-återgång. Det är inget godkännande att ändra drift.
+Tidigare tekniska övergångs-/återgångsprov är fortsatt PASS. Aktuell
+produktionsaktivering är **STOPPAD VID SCHEMAFÖRKONTROLL**, inte utförd.
 Malmö, utökad erbjudandetäckning och städning ingår inte.
 
 ## Versionsbundna mål

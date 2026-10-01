@@ -1,0 +1,292 @@
+{
+  "checked_utc": "2026-10-01T18:50:01.183966+00:00",
+  "approval": {
+    "policy": true,
+    "server_with_read_only_recovery": true,
+    "windows_arguments_and_working_directory_only": true,
+    "schedule_change": false
+  },
+  "result": "STOPPED_BEFORE_PAUSE_OR_CUTOVER: daily trigger cannot sustain 35h due / 48h stop with collection time",
+  "working_branch": "release/lund-relay-20260929",
+  "starting_documentation_commit": "6d84984e6e882becb9e49747c0b85d9016283855",
+  "initial_worktree_clean": true,
+  "server_identity": {
+    "commit": "08c137475d9ca96a6ef7673245a639c8c5c9e922",
+    "package_sha256": "c20f8ad6ce316df121117c32cb44dc308a8d73011d097ec8799be095883b1e22",
+    "checked_runtime_files": 621,
+    "allowed_missing": [
+      "deploy/.env.production.example"
+    ],
+    "mismatch": [],
+    "pip_check": "PASS",
+    "chromium_offline_launch": "PASS",
+    "network": "none"
+  },
+  "relay_identity": {
+    "status": "PASS",
+    "commit": "bdc9f7df417084641d0a712e3dad188dad1ad7d4",
+    "files": 624,
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "relay_module": "D:\\smako-local-relay\\releases\\bdc9f7df4170\\grocery_data\\local_relay.py",
+    "network_calls": 0
+  },
+  "target_image": "sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7",
+  "policy_id": "lund-own-five-base-20260928-v1",
+  "packaged_policy_sha256": "a2053bd41157fe818c9c9d437cba540d423b249a8232e2baebb49e94f1e954a1",
+  "required_context_ids": [
+    "context:coop:23eaae11c9661e68",
+    "context:hemkop:3288e04edd97e349",
+    "context:hemkop:756955d0e6e05f23",
+    "context:willys:383650ec6ff5a636",
+    "context:willys:4a671428fc484e43"
+  ],
+  "windows_task_xml_sha256": "c781d10ce504aa172d8006f365f7ad167ac2ca23688fcf629d1b0851c5ff6755",
+  "windows_task_state": "Ready",
+  "next_windows_run_local": "2026-10-02T01:30:00+02:00",
+  "last_windows_run_local": "2026-10-01T01:30:01+02:00",
+  "last_windows_result": 1,
+  "powershell_effective_policy": "RemoteSigned; registered PS7 executable, no override",
+  "production_images": {
+    "/smako-app-1": "sha256:54dde8382599ac30beee8bffd05d8cefff232e1ea5c81f1fd7f302db0d591c1f",
+    "/smako-scheduler-1": "sha256:54dde8382599ac30beee8bffd05d8cefff232e1ea5c81f1fd7f302db0d591c1f"
+  },
+  "production_checked_utc": "2026-10-01T18:46:59.698750+00:00",
+  "production_ready": {
+    "http": 503
+  },
+  "production_serving": {
+    "http": 200,
+    "status": null,
+    "universe_id": "price-universe:96ca8bfb2ac873a5bdd6d54b9c7840b4be2b069b1d780905a885c325edd38a2a",
+    "raw_product_count": 36906,
+    "freshness": "stale",
+    "oldest_usable_price_age_hours": null
+  },
+  "production_manifest_sha256": "1fd662ffdbd32d2ab471e0cb6a5c3d7e8057c50be2157bbb7a9334980fd9a8fa",
+  "production_plan_revisions": 170,
+  "old_inbox_paths": 17,
+  "old_inbox_unique_artifacts": 17,
+  "old_windows_receipt": {
+    "sha256": "9599fe667d385f4eb5bc998f6b41fa4457f038c14fff14012232137be20b7b84",
+    "artifact_sha256": "0a154581af244a8dace6315ea393efd5fe4983cc5856be8c82494c7990993237",
+    "observed_from": "2026-09-22T23:31:47.294186+00:00",
+    "collection_day": "2026-09-23"
+  },
+  "server_cron": [
+    {
+      "schedule": "47 02 * * *",
+      "script": "backup_sqlite.py"
+    },
+    {
+      "schedule": "17 03 * * *",
+      "script": "run_daily_refresh.py"
+    },
+    {
+      "schedule": "17 06 * * *",
+      "script": "run_source_retry.py"
+    }
+  ],
+  "candidate_freshness_not_production": {
+    "checked_utc": "2026-10-01T18:47:37.835323+00:00",
+    "universe_id": "price-universe:19cd1da8ee3880e446d447c2141f9675f13afc5a26705709e67789e58c4e2671",
+    "raw_rows": 44066,
+    "mandatory_contexts": {
+      "context:coop:23eaae11c9661e68": {
+        "rows": 11428,
+        "oldest_observed_at": "2026-10-01T06:09:21.920468+00:00",
+        "age_hours": 12.638,
+        "state": "FRESH"
+      },
+      "context:hemkop:3288e04edd97e349": {
+        "rows": 5071,
+        "oldest_observed_at": "2026-10-01T06:55:05.319713+00:00",
+        "age_hours": 11.876,
+        "state": "FRESH"
+      },
+      "context:hemkop:756955d0e6e05f23": {
+        "rows": 6205,
+        "oldest_observed_at": "2026-10-01T06:39:40.871532+00:00",
+        "age_hours": 12.132,
+        "state": "FRESH"
+      },
+      "context:willys:383650ec6ff5a636": {
+        "rows": 10170,
+        "oldest_observed_at": "2026-10-01T07:44:43.807014+00:00",
+        "age_hours": 11.048,
+        "state": "FRESH"
+      },
+      "context:willys:4a671428fc484e43": {
+        "rows": 8590,
+        "oldest_observed_at": "2026-10-01T08:03:35.952756+00:00",
+        "age_hours": 10.734,
+        "state": "FRESH"
+      }
+    },
+    "test_clock_used": false
+  },
+  "schedule_projection": {
+    "kind": "calculation, not actual future task runs or fabricated source fixtures",
+    "authentic_initial_observed_from": "2026-10-01T07:44:37.057437+00:00",
+    "measured_delivery_seconds": 2949.198128,
+    "measured_observation_start_offset_seconds": 14.057437,
+    "due_hours": 35,
+    "warning_hours": 36,
+    "hard_stop_hours": 48,
+    "registered_daily_0130_projection": [
+      {
+        "start_local": "2026-10-02T01:30:00+02:00",
+        "start_utc": "2026-10-01T23:30:00+00:00",
+        "projected_source_age_hours": 15.756372934166667,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-03T01:30:00+02:00",
+        "start_utc": "2026-10-02T23:30:00+00:00",
+        "projected_source_age_hours": 39.75637293416666,
+        "decision": "would_collect",
+        "hard_stop_local": "2026-10-03T09:44:37.057437+02:00",
+        "margin_after_measured_delivery_minutes": 445.46432181666665,
+        "margin_after_3h_budget_minutes": 314.61762395
+      },
+      {
+        "start_local": "2026-10-04T01:30:00+02:00",
+        "start_utc": "2026-10-03T23:30:00+00:00",
+        "projected_source_age_hours": 23.99609515638889,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-05T01:30:00+02:00",
+        "start_utc": "2026-10-04T23:30:00+00:00",
+        "projected_source_age_hours": 47.99609515638888,
+        "decision": "would_collect",
+        "hard_stop_local": "2026-10-05T01:30:14.057437+02:00",
+        "margin_after_measured_delivery_minutes": -48.919011516666664,
+        "margin_after_3h_budget_minutes": -179.76570938333333
+      },
+      {
+        "start_local": "2026-10-06T01:30:00+02:00",
+        "start_utc": "2026-10-05T23:30:00+00:00",
+        "projected_source_age_hours": 23.99609515638889,
+        "decision": "not_due"
+      }
+    ],
+    "proposed_only_8h_projection": [
+      {
+        "start_local": "2026-10-02T01:30:00+02:00",
+        "start_utc": "2026-10-01T23:30:00+00:00",
+        "projected_source_age_hours": 15.756372934166667,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-02T09:30:00+02:00",
+        "start_utc": "2026-10-02T07:30:00+00:00",
+        "projected_source_age_hours": 23.756372934166667,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-02T17:30:00+02:00",
+        "start_utc": "2026-10-02T15:30:00+00:00",
+        "projected_source_age_hours": 31.756372934166667,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-03T01:30:00+02:00",
+        "start_utc": "2026-10-02T23:30:00+00:00",
+        "projected_source_age_hours": 39.75637293416666,
+        "decision": "would_collect",
+        "hard_stop_local": "2026-10-03T09:44:37.057437+02:00",
+        "margin_after_measured_delivery_minutes": 445.46432181666665,
+        "margin_after_3h_budget_minutes": 314.61762395
+      },
+      {
+        "start_local": "2026-10-03T09:30:00+02:00",
+        "start_utc": "2026-10-03T07:30:00+00:00",
+        "projected_source_age_hours": 7.996095156388889,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-03T17:30:00+02:00",
+        "start_utc": "2026-10-03T15:30:00+00:00",
+        "projected_source_age_hours": 15.996095156388888,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-04T01:30:00+02:00",
+        "start_utc": "2026-10-03T23:30:00+00:00",
+        "projected_source_age_hours": 23.99609515638889,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-04T09:30:00+02:00",
+        "start_utc": "2026-10-04T07:30:00+00:00",
+        "projected_source_age_hours": 31.99609515638889,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-04T17:30:00+02:00",
+        "start_utc": "2026-10-04T15:30:00+00:00",
+        "projected_source_age_hours": 39.99609515638888,
+        "decision": "would_collect",
+        "hard_stop_local": "2026-10-05T01:30:14.057437+02:00",
+        "margin_after_measured_delivery_minutes": 431.08098848333333,
+        "margin_after_3h_budget_minutes": 300.23429061666667
+      },
+      {
+        "start_local": "2026-10-05T01:30:00+02:00",
+        "start_utc": "2026-10-04T23:30:00+00:00",
+        "projected_source_age_hours": 7.996095156388889,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-05T09:30:00+02:00",
+        "start_utc": "2026-10-05T07:30:00+00:00",
+        "projected_source_age_hours": 15.996095156388888,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-05T17:30:00+02:00",
+        "start_utc": "2026-10-05T15:30:00+00:00",
+        "projected_source_age_hours": 23.99609515638889,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-06T01:30:00+02:00",
+        "start_utc": "2026-10-05T23:30:00+00:00",
+        "projected_source_age_hours": 31.99609515638889,
+        "decision": "not_due"
+      },
+      {
+        "start_local": "2026-10-06T09:30:00+02:00",
+        "start_utc": "2026-10-06T07:30:00+00:00",
+        "projected_source_age_hours": 39.99609515638888,
+        "decision": "would_collect",
+        "hard_stop_local": "2026-10-06T17:30:14.057437+02:00",
+        "margin_after_measured_delivery_minutes": 431.08098848333333,
+        "margin_after_3h_budget_minutes": 300.23429061666667
+      },
+      {
+        "start_local": "2026-10-06T17:30:00+02:00",
+        "start_utc": "2026-10-06T15:30:00+00:00",
+        "projected_source_age_hours": 7.996095156388889,
+        "decision": "not_due"
+      }
+    ],
+    "phase_independent_budget_hours": {
+      "due": 35,
+      "max_poll_gap": 8,
+      "execution_budget": 3,
+      "total": 46,
+      "hard_stop_margin": 2
+    },
+    "any_trigger_changed": false,
+    "any_source_request": false
+  },
+  "production_writes": 0,
+  "retailer_requests": 0,
+  "jobs_paused": false,
+  "task_modified": false,
+  "backup_status": "NOT STARTED; no consistent cutover backup claimed",
+  "remaining_checks": "full current source/raw/campaign/optional-source validation, final private Compose/transport configuration, lock ownership, backups, deployment and all production acceptance tests not completed because schedule gate failed",
+  "previous_queue_and_recovery_evidence": "still valid for the previously verified exact packages; not reopened",
+  "next_phase_only": "campaign windows Sunday-Monday and Wednesday-Thursday Europe/Stockholm; measure base-price changes between authentic collections; no implementation or schedule change"
+}
