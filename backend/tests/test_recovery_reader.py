@@ -40,6 +40,8 @@ def test_lossless_owned_read_revisions_and_denied_operations(tmp_path, monkeypat
                     owner,
                 ),
             )
+    db.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+    db.close()
     before = path.read_bytes()
     with TestClient(app) as client:
         headers = {"X-Anonymous-Session-ID": "creator-session-12345678"}
@@ -82,3 +84,23 @@ def test_import_and_refresh_refuse_recovery_mode(monkeypatch, capsys):
     assert source_cli.main() == 3
     assert run_daily_refresh.main() == 3
     assert capsys.readouterr().out.count("recovery_read_only") == 2
+
+
+def test_uncheckpointed_wal_refuses_reading_instead_of_losing_revisions(tmp_path, monkeypatch):
+    path = tmp_path / "plans.sqlite"
+    monkeypatch.setenv("PLAN_STORE_PATH", str(path))
+    monkeypatch.setenv("APP_ENV", "development")
+    PlanStore(path)
+    db = sqlite3.connect(path)
+    try:
+        db.execute("PRAGMA journal_mode=WAL")
+        db.execute("CREATE TABLE checkpoint_probe (value TEXT)")
+        db.commit()
+        with TestClient(app) as client:
+            assert client.get("/ready").status_code == 503
+            assert client.get("/api/plans/missing").status_code == 503
+            db.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+            assert client.get("/ready").status_code == 200
+            assert client.get("/api/plans/missing").status_code == 404
+    finally:
+        db.close()

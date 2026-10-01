@@ -6,6 +6,7 @@ plan database. It deliberately never instantiates PlanStore or loads a universe.
 
 import json
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 from app.api.account import install_account
@@ -22,6 +23,20 @@ app = FastAPI(
 )
 app.add_middleware(BetaRequestMiddleware, settings_factory=get_settings)
 install_account(app)
+
+
+def checkpointed_connection():
+    """Read a quiescent checkpointed store without creating WAL/SHM sidecars.
+
+    Operators must stop all writers and checkpoint before mounting read-only.
+    Refuse a nonempty WAL rather than silently omit its committed revisions.
+    Keep writers stopped for the entire lifetime of this recovery service.
+    """
+    path = get_settings().plan_store_path.expanduser().resolve()
+    wal = Path(str(path) + "-wal")
+    if wal.exists() and wal.stat().st_size:
+        raise sqlite3.OperationalError("recovery requires completed WAL checkpoint")
+    return sqlite3.connect(path.as_uri() + "?mode=ro&immutable=1", uri=True)
 
 
 @app.middleware("http")
@@ -58,8 +73,7 @@ def read_plan(plan_id: str, request: Request, revision: int | None = None):
     owner = _plan_actor_hash(request, settings)
     PlanStore._validate_owner_actor_hash(owner)
     try:
-        uri = settings.plan_store_path.expanduser().resolve().as_uri() + "?mode=ro"
-        with sqlite3.connect(uri, uri=True) as db:
+        with closing(checkpointed_connection()) as db:
             db.row_factory = sqlite3.Row
             row = db.execute(
                 "SELECT * FROM consumer_plan_revisions WHERE plan_id=? AND (? IS NULL OR revision=?) ORDER BY revision DESC LIMIT 1",
@@ -105,8 +119,7 @@ def read_plan(plan_id: str, request: Request, revision: int | None = None):
 @app.get("/ready")
 def health():
     try:
-        uri = get_settings().plan_store_path.expanduser().resolve().as_uri() + "?mode=ro"
-        with sqlite3.connect(uri, uri=True) as db:
+        with closing(checkpointed_connection()) as db:
             db.execute(
                 "SELECT plan_id, response_json, owner_actor_hash FROM consumer_plan_revisions LIMIT 1"
             ).fetchall()
