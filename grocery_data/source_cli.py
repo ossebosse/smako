@@ -313,6 +313,9 @@ def parser():
 
 
 def main():
+    if os.getenv("SMAKO_RECOVERY_READ_ONLY", "").lower() == "true":
+        _json({"status": "unavailable", "code": "recovery_read_only"})
+        return 3
     args = parser().parse_args()
     try:
         if args.command == "collect":

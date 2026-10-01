@@ -552,6 +552,9 @@ def _run_demand_locked(lock, *, started_at):
 
 
 def main() -> int:
+    if os.getenv("SMAKO_RECOVERY_READ_ONLY", "").lower() == "true":
+        print(json.dumps({"status": "unavailable", "code": "recovery_read_only"}))
+        return 3
     started_at = datetime.now(UTC)
     city = os.getenv("REFRESH_CITY", "Lund").strip() or "Lund"
     operations_lock = _operations_lock()

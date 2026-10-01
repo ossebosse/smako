@@ -1,0 +1,18 @@
+# Standalone restricted recovery service. Stop app/collector/refresh/scheduler
+# and wait for their locks before starting. Never restore an older plans volume.
+services:
+  recovery:
+    image: ${SMAKO_RECOVERY_IMAGE:?set verified immutable image}
+    env_file: ${SMAKO_ENV_FILE:?set existing private environment file}
+    environment:
+      SMAKO_RECOVERY_READ_ONLY: "true"
+      PLAN_STORE_PATH: /recovery/plans.sqlite
+    command: ["python", "-m", "uvicorn", "app.recovery:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
+    volumes:
+      - ${SMAKO_LATEST_PLAN_DIRECTORY:?mount latest plans directory}:/recovery:ro
+    ports:
+      - "127.0.0.1:${SMAKO_RECOVERY_PORT:-8011}:8000"
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: "no"
