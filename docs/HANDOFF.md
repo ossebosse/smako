@@ -1,6 +1,22 @@
 # Aktuell releasekandidat: Lund och repobaserat Willys-relä 2026-09-30
 
-**Senaste fortsättning: driftspärrar, INTE REDO.** Läs först
+**Fortsättning 2026-10-01:** operatören har registrerat S4U-testuppgiften.
+Återläsningen visar rätt bdc9-paket, ossia/S4U/Limited och noll triggers;
+uppgiften har aldrig körts. PS7-värden har befintlig RemoteSigned-policy,
+medan Windows PowerShell 5.1 har AllSigned. Inga policyer/argument har ändrats.
+Se [S4U-PREFLIGHT.md](releases/lund-20260929/S4U-PREFLIGHT.md) för
+mottagarkontroller, tidsgräns och det startkommando som fortfarande måste
+godkännas separat. Kör inte registreringsskriptet igen och starta inte
+uppgiften med stöd av tidigare instruktioner om registrering.
+
+Förkontrollen passerade 2026-10-01 07:25 UTC: separat mottagare igång,
+44 080 poster på manifest `a69651bd…`, fem FRESH-baser, 2 232 kontrollerade
+råfiler utan fel. Uppdateringen är `degraded` genom frivilliga källors
+redovisade radfel, inte genom basfel. Lokalt `receiver-ready.json` gäller
+till **09:25:03 UTC / 11:25:03 svensk tid samma dag**. Därefter krävs ny
+förkontroll, inte bara flyttad sluttid. Windows-testet är ännu inte startat.
+
+**Driftspärrar från 2026-09-30, fortsatt INTE REDO.** Läs även
 [OPERATIONS.md](releases/lund-20260929/OPERATIONS.md) och uppdaterad
 [ACTIVATION.md](releases/lund-20260929/ACTIVATION.md). Runtime/paket är kvar
 på bdc9f7d; denna fortsättning ändrar endast provverktyg och underlag.
@@ -9,12 +25,10 @@ Faktisk produktionsbild `54dde838…` tappar 64/12 planfält och ger 500 för
 alla tre nya planer identiskt på 44 132-manifestet; samtliga 37 revisionsrader
 bevarade. Originalpolicyn stoppar publicering av den gamla kön genom saknad
 Primat-bas. Det nya Windows-paketets SSH-replay/kvittot/not_due passerar;
-det är inte ett obevakat liveprov. Föreslagen S4U-testuppgift är bara
-förberedd, inte registrerad. Operatören behöver granska och köra
-`scripts/release_verification/prepare_s4u_probe.ps1 -Register` i upphöjd PS7
-under samma konto, med separat godkännande för testregistreringen.
-S4U/Limited/konto ändras inte. Mottagaren `smako-lund-ops-s4u` är provad i
-isolering och lämnad stoppad, utan scheman; kontrollera färskhet före start.
+det är inte ett obevakat liveprov. Testuppgiften registrerades därefter av
+operatören; registreringshindret är stängt. S4U/Limited/konto är bevarade.
+Aktuell mottagarstatus och nästa startgräns finns i förkontrollen ovan;
+ingen start är godkänd genom själva registreringen.
 Aktiva Windows-uppgiftens XML är byteidentisk före/efter. Produktionens
 bild, policy och scheman är oförändrade; ingen push. De tre
 produktionsbesluten är fortfarande separata och ej fattade.

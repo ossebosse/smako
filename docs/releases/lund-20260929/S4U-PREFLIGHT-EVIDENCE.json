@@ -1,0 +1,120 @@
+{
+  "windows": {
+    "checked_utc": "2026-10-01T06:07:43.0294773Z",
+    "task": "Smako Lund bdc9 S4U isolated verification",
+    "program": "C:\\Users\\ossia\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+    "arguments": "-NoProfile -NonInteractive -File \"D:\\Projects\\Smako\\.local\\drift-verification\\s4u\\run_s4u_probe.ps1\"",
+    "working_directory": "D:\\smako-local-relay\\releases\\bdc9f7df4170",
+    "user": "ossia",
+    "logon_type": "S4U",
+    "run_level": "Limited",
+    "triggers": 0,
+    "last_result": "0x41303",
+    "registered_xml_sha256": "71D10E9074645D0917EBC3C790E181DB75F157E47800C91C8D25E24ED622352E",
+    "production_xml_sha256": "C781D10CE504AA172D8006F365F7AD167AC2CA23688FCF629D1B0851C5FF6755",
+    "pwsh_version": "7.6.5",
+    "pwsh_effective_policy": "RemoteSigned",
+    "pwsh_other_policy_scopes": "Undefined",
+    "windows_powershell_localmachine": "AllSigned",
+    "check_install_exit": 0,
+    "package_files_verified": 624,
+    "network_calls": 0,
+    "unsigned_scripts_have_zone_identifier": false,
+    "task_started": false
+  },
+  "receiver": {
+    "checked_utc": "2026-10-01T09:25:03.838295+02:00",
+    "expires_utc": "2026-10-01T11:25:03.838295+02:00",
+    "image": "sha256:2f81344208e05cbc57d16fa74a73c97b26bc729859936ca5d96ab150579fe221",
+    "universe_id": "price-universe:a69651bdd5bae3326e23269cf86829d1569ea809061e6e0a02434a1a478a4fd8",
+    "raw_product_count": 44080,
+    "manifest_sha256": "821bb564c63ae1ddb2112c95d98d928882e09c67ccc79a50c806d83180def223",
+    "raw_files_verified": 2232,
+    "mandatory_contexts": {
+      "context:coop:23eaae11c9661e68": {
+        "rows": 11428,
+        "oldest_observed_at": "2026-10-01T08:09:21.920468+02:00",
+        "age_hours": 1.262,
+        "state": "FRESH"
+      },
+      "context:hemkop:3288e04edd97e349": {
+        "rows": 5071,
+        "oldest_observed_at": "2026-10-01T08:55:05.319713+02:00",
+        "age_hours": 0.5,
+        "state": "FRESH"
+      },
+      "context:hemkop:756955d0e6e05f23": {
+        "rows": 6205,
+        "oldest_observed_at": "2026-10-01T08:39:40.871532+02:00",
+        "age_hours": 0.756,
+        "state": "FRESH"
+      },
+      "context:willys:383650ec6ff5a636": {
+        "rows": 10180,
+        "oldest_observed_at": "2026-09-30T11:13:41.324214+02:00",
+        "age_hours": 22.19,
+        "state": "FRESH"
+      },
+      "context:willys:4a671428fc484e43": {
+        "rows": 8594,
+        "oldest_observed_at": "2026-09-30T11:35:23.553516+02:00",
+        "age_hours": 21.828,
+        "state": "FRESH"
+      }
+    },
+    "ready_http": 200,
+    "task_start_authorized": false
+  },
+  "receiver_mount": "/var/tmp/smako-repo-release-20260929/ops-verification/s4u-data:/work",
+  "receiver_network": "none",
+  "receiver_restart": "no",
+  "receiver_ports": [],
+  "refresh_runner": {
+    "city": "Lund",
+    "completed_at": "2026-10-01T09:22:02.83063+02:00",
+    "coop_source_configuration": {
+      "configuration_valid": true,
+      "configured_context_ids": [
+        "730400"
+      ],
+      "configured_policy": "review",
+      "context_id": "730400",
+      "diagnostic_code": null,
+      "operator_opt_in": true,
+      "price_semantics": "online_price",
+      "required_context_id": "730400",
+      "scope": "online_fulfillment",
+      "valid": true
+    },
+    "exit_code": 2,
+    "previous_restart_manifest": "verified",
+    "refresh_exit_code": 2,
+    "run_kind": "daily_refresh",
+    "runtime_reload": {
+      "changed": true,
+      "new_price_universe_id": "price-universe:a69651bdd5bae3326e23269cf86829d1569ea809061e6e0a02434a1a478a4fd8",
+      "old_price_universe_id": "price-universe:624e4de9d762221ad0754f2c21051ae9003cde3f2a5b866a623966821952a6fa",
+      "plan_prewarm": "disabled",
+      "pricing_projection": "miss_filled"
+    },
+    "schema_version": "production-refresh-runner-v1",
+    "source_relay_imports": [
+      {
+        "artifact_sha256": "76eabee073a1f0b5dfe08f51b65eb1154c991ec0207ffaa032c0e30c955b5325",
+        "network_requests": 0,
+        "snapshot_id": "a3806a4fa4614cabb451eca73a1426d0",
+        "state": "promoted",
+        "status": "duplicate"
+      }
+    ],
+    "started_at": "2026-10-01T08:07:19.915706+02:00",
+    "status": "degraded"
+  },
+  "post_refresh_demand": {
+    "work_due": false,
+    "due_sources": [],
+    "external_price_requests": 0
+  },
+  "production_task_unchanged": true,
+  "task_started": false
+}

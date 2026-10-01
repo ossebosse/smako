@@ -7,10 +7,13 @@ dem följer av att ett isolerat test passerar. Fullständigt Malmö-underlag och
 dess baspolicy är ett annat beslut.
 
 **Teknisk status: INTE REDO.** [Kompletterande driftprov](OPERATIONS.md)
-visar blockerad S4U-verifiering, otömd gammal kö på originalpolicyn och
+visar ännu oprövad S4U-livekedja, otömd gammal kö på originalpolicyn och
 inkompatibel planläsning i faktisk produktionsbild. Nedanstående är en
 villkorad ordning, inte ett godkänt körschema. Korsversionerna är
 inkompatibla: ett kort samordnat avbrott är obligatoriskt.
+
+Testregistreringen är utförd av operatören. Aktuella förkontroller och
+gränsen före start finns i [S4U-PREFLIGHT.md](S4U-PREFLIGHT.md).
 
 ## Utgåva och exakta ändringar
 

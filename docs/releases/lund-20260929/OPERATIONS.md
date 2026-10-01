@@ -1,5 +1,10 @@
 # Driftspärrar: komplettering 2026-09-30
 
+**Nyare förkontroll 2026-10-01:** operatören har registrerat testuppgiften;
+den är fortfarande inte startad. [S4U-PREFLIGHT.md](S4U-PREFLIGHT.md)
+ersätter nedanstående historiska registreringshinder och anger aktuell
+körpolicy/mottagarkontroll. Återregistrera inte uppgiften.
+
 **INTE REDO.** Detta är kompletterande driftprov, inte nya resultat för hela
 testsviten. Arbetsgren `release/lund-relay-20260929`, ren utgång
 `1d578b2cb53225f9d73cf891c2c0d7445d22bf78`. Senare arbete bevarades.
@@ -230,7 +235,8 @@ cirka 28,4 timmar vid dessa prov. Detta är en tidsstämplad observation, inte
 ett framtida aktiveringsintyg. Aktuell kandidat och alla äldsta basobservationer
 måste omprövas vid faktisk aktivering med oförändrade 36/48-gränser.
 
-Nästa nödvändiga operatörsåtgärd är enbart den granskade testregistreringen.
-Därefter återstår S4U-livekedjan, köövergångens blockerare och verifierad
+Testregistreringen utfördes senare av operatören; se
+[aktuella förkontroller och startgräns](S4U-PREFLIGHT.md).
+Fortfarande återstår S4U-livekedjan, köövergångens blockerare och verifierad
 läskompatibel återgång. Femkällorspolicy, serveraktivering och byte av aktiv
 Windows-uppgift är fortfarande **tre separata, ej fattade beslut**.

@@ -4,8 +4,9 @@
 [Docker/HTTP-bevis](OPS-EVIDENCE.json) och [Windows-replay](WINDOWS-EVIDENCE.json).
 Faktisk produktionsbild har nu provats: äldre GET tappar planfält och ger
 500 för öppet kampanjval; originalpolicyn kan inte tömma den gamla kön med
-lyckad publicering. S4U-liveprovet väntar på granskad administrativ
-testregistrering. Ny bild återläser alla nya planer identiskt. Följande
+lyckad publicering. S4U-testuppgiften är nu registrerad av operatören men
+inte körd; aktuell förkontroll finns i [S4U-PREFLIGHT.md](S4U-PREFLIGHT.md).
+Ny bild återläser alla nya planer identiskt. Följande
 ordinarie svitresultat är tidigare releasebevis, inte nya omkörningar.
 
 **Status 2026-09-30:** implementerad och isolerat verifierad kandidat, inte
