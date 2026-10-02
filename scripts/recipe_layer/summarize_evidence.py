@@ -88,18 +88,18 @@ def main():
                    "qualified_base_ids": sorted(data["qualified_base_ids"])}
             for name, data in sorted(by_cuisine.items())}}
     (args.output / "evidence.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
-    lines = ["# Autentiska menyer och inköp", "", "Fryst publicerat prisunderlag från 2026-10-02. "
+    lines = ["# Autentiska menyer och inköp", "", ("Fryst publicerat prisunderlag från 2026-10-02. "
              "Beloppen är historiska replayresultat och inga nya prisutfästelser. "
-             "Fullständiga underlag med källor och receptversioner finns i evidence.json.", ""]
+             "Fullständiga underlag med källor och receptversioner finns i evidence.json."), ""]
     for case, entry in report["menus"].items():
         lines.extend([f"## {case}", ""])
         if "plan" not in entry:
             lines.extend([f"Stopp: {entry['code']} — {entry['reason']}", ""])
             continue
         plan = entry["plan"]
-        lines.extend([f"Inköp **{plan['checkout_total']:.2f} kr**, {entry['seconds']:.2f} sekunder. "
+        lines.extend([(f"Inköp **{plan['checkout_total']:.2f} kr**, {entry['seconds']:.2f} sekunder. "
                       "Fem middagar för två personer, högst två inköpsställen. "
-                      "Lägsta hittade inköpskostnad inom valen; global optimalitet är inte bevisad.", "",
+                      "Lägsta hittade inköpskostnad inom valen; global optimalitet är inte bevisad."), "",
                       "| Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |",
                       "|---|---:|---:|---|---|"])
         for meal in plan["recipes"]:
@@ -121,8 +121,8 @@ def main():
                 f"{item['required_quantity']:g} {item['unit']} | {item['packages_needed']:g} × "
                 f"{item['package_quantity']:g} {item['package_unit']} | {item['waste_quantity']:g} {item['unit']} | "
                 f"{item['total_price']:.2f} kr | {', '.join(flags)} |")
-        lines.extend(["", "Resterna är planerade mängder och bokförs inte som uppmätt skafferi. "
-                      "Vid avrunnen vara avser användning/rest ätbar avrunnen mängd, medan förpackningen kan ange totalvikt.", ""])
+        lines.extend(["", ("Resterna är planerade mängder och bokförs inte som uppmätt skafferi. "
+                      "Vid avrunnen vara avser användning/rest ätbar avrunnen mängd, medan förpackningen kan ange totalvikt."), ""])
     (args.output / "MENUS.md").write_text("\n".join(lines) + "\n", encoding="utf8")
     print(json.dumps({"menus": len(report["menus"]), "output": str(args.output)}, ensure_ascii=False))
 
