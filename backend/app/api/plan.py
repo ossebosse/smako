@@ -24,6 +24,7 @@ from app.services.beta_observability import pseudonymous_actor
 from app.services.meal_plan_optimizer import MealPlanService
 from app.services.personal_policy import PolicyConflict
 from app.services.personal_store import PersonalConflict
+from app.services.plan_jobs import PlanJobs, PlanJobsFull
 from app.services.plan_mutation import (
     product_alternatives,
     replace_product,
@@ -46,6 +47,7 @@ from app.services.price_universe_runtime import (
 from app.services.product_lookup import lookup_gtin
 from app.services.user_pricing import current_pricing_date
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
 from grocery_data.app.api.community_evidence import (
@@ -604,13 +606,66 @@ async def create_plan(
 
 
 @router.post("/plans", response_model=SavedPlan, status_code=201)
-async def create_saved_plan(request: PlanRequest, http_request: Request) -> SavedPlan:
+async def create_saved_plan(request: PlanRequest, http_request: Request):
     """Create and persist a reproducible, provider-offline consumer plan."""
 
     settings = get_settings()
     request = _production_consumer_request(request, settings)
     consumer_request = _consumer_request(request)
     _assert_offline_ready(consumer_request, settings)
+    if "respond-async" in {value.strip() for value in http_request.headers.get("Prefer", "").lower().split(",")}:
+        owner = _plan_actor_hash(http_request, settings)
+        jobs = _plan_jobs(http_request, settings)
+        try:
+            job = jobs.start(
+                owner, _planner_admission_key(consumer_request, settings),
+                http_request.state.request_id,
+                lambda: _create_saved_plan(consumer_request, http_request, settings),
+            )
+        except PlanJobsFull as exc:
+            raise HTTPException(503, "Det är många som skapar menyer just nu.", headers={
+                "X-Error-Code": "planner_admission_full", "Retry-After": "10",
+            }) from exc
+        return _pending_plan_job(job)
+    return await _create_saved_plan(consumer_request, http_request, settings)
+
+
+def _plan_jobs(http_request: Request, settings: Settings) -> PlanJobs:
+    jobs = getattr(http_request.app.state, "plan_jobs", None)
+    if not isinstance(jobs, PlanJobs):
+        jobs = PlanJobs(max_pending=settings.planner_max_concurrent_requests + settings.planner_max_queued_requests)
+        http_request.app.state.plan_jobs = jobs
+    return jobs
+
+
+def _pending_plan_job(job):
+    return JSONResponse(status_code=202, content={
+        "status": "pending", "status_url": f"/api/plan-jobs/{job.job_id}",
+        "request_id": job.request_id,
+    }, headers={"Cache-Control": "private, no-store", "Retry-After": "2",
+                "Preference-Applied": "respond-async"})
+
+
+@router.get("/plan-jobs/{job_id}", response_model=SavedPlan, status_code=201)
+async def poll_plan_job(job_id: str, http_request: Request):
+    settings = get_settings()
+    job = _plan_jobs(http_request, settings).get(job_id, _plan_actor_hash(http_request, settings))
+    if job is None or job.task.cancelled():
+        raise HTTPException(404, "Planeringsförsöket har gått ut. Skapa menyn igen.",
+                            headers={"X-Error-Code": "planner_job_expired", "Cache-Control": "private, no-store"})
+    if not job.task.done():
+        return _pending_plan_job(job)
+    try:
+        saved = job.task.result()
+    except HTTPException as exc:
+        exc.headers = {**(exc.headers or {}), "Cache-Control": "private, no-store",
+                       "X-Plan-Request-ID": job.request_id}
+        raise
+    return JSONResponse(status_code=201, content=_annotate_freshness(saved).model_dump(mode="json"),
+                        headers={"Cache-Control": "private, no-store", "X-Plan-Request-ID": job.request_id})
+
+
+async def _create_saved_plan(consumer_request: PlanRequest, http_request: Request, settings: Settings) -> SavedPlan:
     try:
         plan = _with_release(
             await _run_admitted_plan(consumer_request, http_request, settings),

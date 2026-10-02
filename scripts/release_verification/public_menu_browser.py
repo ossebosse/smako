@@ -16,6 +16,8 @@ def main():
     parser.add_argument('--case')
     parser.add_argument('--postal-code', default='22350')
     parser.add_argument('--browser', choices=['chromium', 'webkit'], default='chromium')
+    parser.add_argument('--reject-postal-first')
+    parser.add_argument('--ignore-https-errors', action='store_true', help='Only for isolated self-signed candidate TLS')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as pw:
@@ -28,7 +30,7 @@ def main():
             if args.case and name != args.case:
                 continue
             context = browser.new_context(viewport={'width': 390 if mobile else 1280, 'height': 844 if mobile else 900},
-                                          is_mobile=mobile, has_touch=mobile)
+                                          is_mobile=mobile, has_touch=mobile, ignore_https_errors=args.ignore_https_errors)
             page = context.new_page()
             errors = []
             page.on('pageerror', lambda error, sink=errors: sink.append(str(error)))
@@ -44,6 +46,30 @@ def main():
                 for checkbox in page.locator('input[name="membership"]').all():
                     checkbox.check()
             page.locator('#diversity-' + mode).check()
+            rejection = None
+            if args.reject_postal_first:
+                page.locator('#postal-code').fill(args.reject_postal_first)
+                rejected_at = time.monotonic()
+                with page.expect_response(lambda r: r.request.method == 'POST' and r.url.endswith('/api/plans')) as observed:
+                    page.locator('#submit-button').click()
+                rejected = observed.value
+                page.locator('#error-state:visible').wait_for()
+                rejection = {
+                    'url': rejected.url, 'method': rejected.request.method,
+                    'request': rejected.request.post_data_json, 'status': rejected.status,
+                    'body': rejected.json(), 'seconds': round(time.monotonic()-rejected_at, 3),
+                    'headers': {k: v for k, v in rejected.headers.items() if k in {'x-request-id', 'x-error-code'}},
+                    'message': page.locator('#error-message').inner_text(),
+                    'postal_invalid': page.locator('#postal-code').get_attribute('aria-invalid'),
+                    'submit_enabled': page.locator('#submit-button').is_enabled(),
+                }
+                (args.output/(name+'-initial-rejection.json')).write_text(json.dumps(rejection,ensure_ascii=False,indent=2),encoding='utf-8')
+                page.screenshot(path=str(args.output/(name+'-initial-rejection.png')),full_page=True)
+                assert rejected.status == 422 and rejection['postal_invalid'] == 'true' and rejection['submit_enabled']
+                assert rejection['body']['detail'][0]['loc'] == ['body','postal_code']
+                assert page.locator('#postal-code').input_value() == args.reject_postal_first
+                assert page.locator('#servings').input_value() == '2' and page.locator('#max-stores').input_value() == '3'
+                page.locator('#postal-code').fill(args.postal_code)
             fields = page.locator('#plan-form input, #plan-form select').evaluate_all('(es)=>es.map(e=>({name:e.name,id:e.id,type:e.type,value:e.value,checked:e.checked}))')
             page.screenshot(path=str(args.output / (name + '-before.png')), full_page=True)
             started = time.monotonic()
@@ -59,7 +85,7 @@ def main():
             responses = []
             requests = []
             page.on('request', lambda r, sink=requests: sink.append(r) if r.method == 'POST' and r.url.endswith('/api/plans') else None)
-            page.on('response', lambda r, sink=responses: sink.append(r) if r.request.method == 'POST' and r.url.endswith('/api/plans') else None)
+            page.on('response', lambda r, sink=responses: sink.append(r) if (r.request.method == 'POST' and r.url.endswith('/api/plans')) or '/api/plan-jobs/' in r.url else None)
             page.locator('#submit-button').click()
             page.locator('#error-state:visible, #results:visible').first.wait_for(state='visible',timeout=610000)
             response = responses[-1] if responses else None
@@ -72,6 +98,13 @@ def main():
                       'status': response.status if response else None, 'body': body, 'seconds': round(time.monotonic()-started, 3),
                       'headers': {k: v for k, v in (response.headers if response else request.headers if request else {}).items() if k in {'x-request-id','x-error-code','content-type','retry-after'}},
                       'page_errors': errors}
+            report['initial_rejection'] = rejection
+            initial = next((r for r in responses if r.request.method == 'POST'), None)
+            report['initial_response'] = {'status': initial.status, 'body': initial.json() if initial.status == 202 else None,
+                                          'request_id': initial.headers.get('x-request-id')} if initial else None
+            report['transport'] = [{'url': r.url, 'method': r.request.method, 'status': r.status,
+                                    'request_id': r.headers.get('x-request-id'), 'error_code': r.headers.get('x-error-code')}
+                                   for r in responses]
             if response and response.status < 400:
                 page.locator('#submit-button:not([disabled])').wait_for(timeout=10000)
             report['submit_enabled_after_response'] = page.locator('#submit-button').is_enabled()

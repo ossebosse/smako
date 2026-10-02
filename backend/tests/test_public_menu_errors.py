@@ -132,6 +132,9 @@ def test_browser_error_classes_retain_choices_and_identify_actual_field():
             path = self.path.split('?')[0]
             if path == '/ready':
                 return self.send(case.get('ready_status', 200), {'status': case.get('ready_body', 'ready')})
+            if path.startswith('/api/plan-jobs/'):
+                case['polled'] = True
+                return self.send(503, {}, headers={'X-Error-Code': 'price_universe_unusable', 'X-Request-ID': 'poll-error-12345'})
             file = static / ('index.html' if path == '/' else path.removeprefix('/static/'))
             if file.is_file():
                 return self.send(200, file.read_bytes(), mimetypes.guess_type(file)[0] or 'text/plain')
@@ -156,6 +159,7 @@ def test_browser_error_classes_retain_choices_and_identify_actual_field():
             page.locator('#servings').fill('2')
             page.locator('#max-stores').select_option('3')
             cases = [
+                (202, {'status': 'pending', 'status_url': '/api/plan-jobs/' + 'a' * 32}, {}, 'verifieringskraven'),
                 (503, {'detail': 'private service details'}, {}, 'tillfälligt otillgänglig'),
                 (422, {'detail': [{'loc': ['body', 'postal_code'], 'msg': 'Prisområde saknas'}]}, {}, 'Postnummer'),
                 (422, {'detail': [{'loc': ['body', 'max_stores'], 'msg': 'Värdet är ogiltigt'}]}, {}, 'Max antal inköpsställen'),
@@ -180,6 +184,8 @@ def test_browser_error_classes_retain_choices_and_identify_actual_field():
                 assert 'private configuration' not in text
                 assert 'private service' not in text
                 assert 'uppdaterar priserna' not in text
+                if status == 202:
+                    assert case['polled'] and 'poll-error-12345' in text
                 assert page.locator('#submit-button').is_enabled()
                 assert case['request']['max_stores'] == 3
                 assert case['request']['servings'] == 2

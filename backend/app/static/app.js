@@ -165,7 +165,7 @@
   let activeScanner = null;
   let plannerReady = false;
   // Transient request ownership is never persisted or inferred from restored DOM.
-  const FRONTEND_VERSION = "public-menu-errors-20261002";
+  const FRONTEND_VERSION = "public-menu-async-20261002";
   // Same bounded wait as personal planning; the public proxy permits 540 s.
   const PLAN_WAIT_MS = 600000;
   let activePlanRequest = null;
@@ -201,6 +201,33 @@
       throw new Error("Servern skickade ett ogiltigt planeringsresultat. Försök igen.");
     }
     return { response, data };
+  }
+
+  async function awaitPlanResult(response, signal) {
+    let statusUrl = null;
+    while (response.status === 202) {
+      const pending = await responseJson(response);
+      const next = pending?.status_url;
+      if (pending?.status !== "pending" || !/^\/api\/plan-jobs\/[a-f0-9]{32}$/.test(next || "")
+          || (statusUrl && statusUrl !== next)) {
+        throw new Error("Servern skickade ett ogiltigt planeringssvar. Försök igen.");
+      }
+      statusUrl = next;
+      await new Promise((resolve, reject) => {
+        const abort = () => { window.clearTimeout(timer); reject(signal.reason); };
+        const timer = window.setTimeout(() => {
+          signal.removeEventListener("abort", abort);
+          resolve();
+        }, 2000);
+        signal.addEventListener("abort", abort, { once: true });
+        if (signal.aborted) abort();
+      });
+      response = await fetch(statusUrl, {
+        headers: { Accept: "application/json", "X-Request-ID": crypto.randomUUID() },
+        cache: "no-store", signal,
+      });
+    }
+    return planningResponse(response);
   }
 
   function reconcilePlanningState() {
@@ -878,6 +905,9 @@
     if (status === 502) return "Servern kunde inte få svar från planeringstjänsten. Försök igen om en stund.";
     if (normalizedCode === "saved_plan_owner_session_unavailable") {
       return "Din session kunde inte upprättas för att spara menyn. Ladda om sidan och försök igen. Dina val är kvar.";
+    }
+    if (normalizedCode === "planner_job_expired") {
+      return "Planeringsförsöket har gått ut eller tjänsten har startats om. Skapa menyn igen. Dina val är kvar.";
     }
     if (normalizedCode === "price_universe_unusable") {
       return "Prisunderlaget uppfyller inte färskhets- eller verifieringskraven just nu. Planeringen är därför pausad. Dina val är kvar.";
@@ -3254,14 +3284,14 @@
       const { response, data } = await boundedRequest(request.controller, PLAN_WAIT_MS, async (signal) => {
         const options = {
           method: "POST",
-          headers: { Accept: "application/json", "Content-Type": "application/json", "X-Request-ID": request.id },
+          headers: { Accept: "application/json", "Content-Type": "application/json", "X-Request-ID": request.id, Prefer: "respond-async" },
           body: JSON.stringify(payload), signal,
         };
         let response = await fetch("/api/plans", options);
         signal.throwIfAborted();
         // Only a route-unsupported response can use the legacy route; never retry capacity/errors.
         if (response.status === 404 || response.status === 405) response = await fetch("/api/plan", options);
-        return planningResponse(response);
+        return awaitPlanResult(response, signal);
       });
       if (activePlanRequest !== request) return;
 

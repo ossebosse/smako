@@ -12,6 +12,7 @@ from app.api.plan import router as plan_router
 from app.api.product_search import router as product_search_router
 from app.config import Settings, get_settings
 from app.services.beta_observability import BetaRequestMiddleware
+from app.services.plan_jobs import PlanJobs
 from app.services.plan_prewarm import prewarm_active_price_universe
 from app.services.plan_store import PlanStore
 from app.services.planner_admission import PlannerAdmissionController
@@ -84,6 +85,9 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         max_concurrent=settings.planner_max_concurrent_requests,
         max_queued=settings.planner_max_queued_requests,
     )
+    application.state.plan_jobs = PlanJobs(
+        max_pending=settings.planner_max_concurrent_requests + settings.planner_max_queued_requests,
+    )
     prepared = load_configured_price_universe(settings)
     # The selector-dependent but membership-independent semantic projection is
     # process-local. Build it after the immutable artifact is active so the
@@ -99,6 +103,7 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
     try:
         yield
     finally:
+        await application.state.plan_jobs.close()
         community_engine = getattr(application.state, "community_evidence_engine", None)
         if community_engine is not None:
             community_engine.dispose()
