@@ -51,7 +51,7 @@ async def main():
                   peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
                   trace=dataclasses.asdict(trace.snapshot()))
     (root / (case + '.json')).write_text(json.dumps(record, ensure_ascii=False, indent=2, default=str))
-    print(json.dumps({k: v for k, v in record.items() if k not in {'checks', 'trace', 'request'}}, ensure_ascii=False), flush=True)
+    print(json.dumps({k: v for k, v in record.items() if k not in {'checks', 'trace', 'request', 'stage', 'diagnostics'}}, ensure_ascii=False), flush=True)
 
 
 if __name__ == '__main__':
