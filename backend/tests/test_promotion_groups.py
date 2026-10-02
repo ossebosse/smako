@@ -277,3 +277,79 @@ def test_shared_household_group_cap_is_aggregated_across_stores_and_survives_aud
     bad=g.model_copy(update={'valid_to':date(2026,9,2)})
     with pytest.raises(ValueError,match='campaign dates'):
         BasketCalculator.quote_group_basket([i.model_copy(update={'promotion_groups':(bad,)}) for i in first])
+
+
+@pytest.mark.parametrize("entry", ["basket", "nested", "requirements", "single", "relaxed"])
+def test_unrequested_offer_aliases_do_not_trigger_joint_cartesian_search(entry, monkeypatch):
+    """The municipal pool is larger than the actual basket's ingredient set."""
+    from app.models.ingredient import NormalizedIngredient
+    from app.models.product import ProductCandidate
+    from app.services.basket_optimizer import BasketOptimizer
+
+    p = catalog()
+    candidates = {v.name: [ProductCandidate.from_product(v, match_score=1)] for v in p.universe.products}
+    unrelated = candidates["ris"][0].model_copy(update={
+        "price": None, "product_id": "unrequested-product",
+        "offers": [OfferMetadata(kind="campaign", description="Synthetic cap", price=20, max_quantity=1)],
+    })
+    expanded = {**candidates, "unrequested-a": [unrelated], "unrequested-b": [unrelated]}
+    needs = [NormalizedIngredient(canonical_name="ris", required_quantity=1000, unit="g")]
+    optimizer = BasketOptimizer()
+
+    def calculate(rows):
+        if entry == "basket":
+            return optimizer.optimize(needs, rows, p.stores, 3)
+        if entry == "nested":
+            return optimizer.same_depth_nested_store_limited_keys(needs, rows, p.stores, max_stores=3)
+        if entry == "requirements":
+            return optimizer.same_depth_nested_store_limited_requirement_keys([("ris", 1000, "g")], rows, p.stores, max_stores=3)
+        if entry == "single":
+            return optimizer.single_store_options(needs, rows, p.stores)
+        return optimizer.optimistic_relaxed_key(needs, rows, allowed_store_ids=[s.store_id for s in p.stores])
+
+    expected = calculate(candidates)
+    def no_unrelated_cartesian_search(*args, **kwargs):
+        raise AssertionError("Unrequested offer aliases trigger Cartesian checkout")
+    monkeypatch.setattr(optimizer, "_optimize_promotion_groups", no_unrelated_cartesian_search)
+    assert calculate(expanded) == expected
+
+
+def test_nested_caps_share_one_exact_group_search(monkeypatch):
+    from app.models.ingredient import NormalizedIngredient
+    from app.models.product import ProductCandidate
+    from app.services.basket_optimizer import BasketOptimizer
+    p = catalog(group())
+    candidates = {v.name: [ProductCandidate.from_product(v, match_score=1)] for v in p.universe.products}
+    needs = [NormalizedIngredient(canonical_name=v.name, required_quantity=1000, unit=v.package_unit) for v in p.universe.products]
+    stores = [p.stores[0], p.stores[0].model_copy(update={"store_id":"unused-2"}), p.stores[0].model_copy(update={"store_id":"unused-3"})]
+    optimizer = BasketOptimizer()
+    expected = tuple(optimizer.same_depth_store_limited_key(needs, candidates, stores, max_stores=cap) for cap in (1, 2, 3))
+    original = optimizer._optimize_promotion_groups
+    calls = []
+    def counted(*args, **kwargs):
+        calls.append(1)
+        return original(*args, **kwargs)
+    monkeypatch.setattr(optimizer, "_optimize_promotion_groups", counted)
+    assert optimizer.same_depth_nested_store_limited_keys(needs, candidates, stores, max_stores=3) == expected
+    assert len(calls) == 1, "Nested caps must share the same exact Cartesian enumeration"
+
+
+def test_group_budget_fallback_uses_identical_compact_nested_keys(monkeypatch):
+    from app.models.ingredient import NormalizedIngredient
+    from app.models.product import ProductCandidate
+    from app.services import basket_optimizer as module
+    p = catalog(group())
+    candidates = {}
+    for value in p.universe.products:
+        offer = ProductCandidate.from_product(value, match_score=1).model_copy(update={"coverage":"offers_only"})
+        base = offer.model_copy(update={"product_id":value.product_id+"-base", "promotion_groups":(), "coverage":"full", "price":40})
+        candidates[value.name] = (offer, base)
+    needs = [NormalizedIngredient(canonical_name=v.name, required_quantity=1000, unit=v.package_unit) for v in p.universe.products]
+    stores = [p.stores[0], p.stores[0].model_copy(update={"store_id":"unused-2"}), p.stores[0].model_copy(update={"store_id":"unused-3"})]
+    monkeypatch.setattr(module, "_MAX_GROUP_COMBINATIONS", 0)
+    optimizer = module.BasketOptimizer()
+    expected = tuple(optimizer.same_depth_store_limited_key(needs, candidates, stores, max_stores=cap) for cap in (1, 2, 3))
+    def no_materialized_checkout(*args, **kwargs):
+        raise AssertionError("Ranking must reuse compact keys for the existing base fallback")
+    monkeypatch.setattr(optimizer, "optimize", no_materialized_checkout)
+    assert optimizer.same_depth_nested_store_limited_keys(needs, candidates, stores, max_stores=3) == expected

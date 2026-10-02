@@ -60,7 +60,7 @@ _VERIFICATION_RANK: dict[BasketVerificationStatus, int] = {
 
 _MAX_GROUP_COMBINATIONS = 200000
 
-def _has_coupled_checkout(candidates_by_name):
+def _has_coupled_checkout(candidates_by_name, required_names=None):
     """Use joint search only where separate lines share a source constraint.
 
     A single normalized ingredient already aggregates all recipe quantities;
@@ -68,13 +68,28 @@ def _has_coupled_checkout(candidates_by_name):
     product combination merely because one such offer exists would destroy
     the bounded store-subset path without adding correctness.
     """
+    # The shared municipal pool also contains aliases absent from this basket.
+    # Follow the same direct/canonical lookup as _ingredient_candidates: only
+    # two actual requested lines can jointly consume an offer's product cap.
+    selected = None
+    if required_names is not None:
+        selected = set()
+        for name in required_names:
+            if name in candidates_by_name:
+                selected.add(name)
+            else:
+                canonical = canonicalize_ingredient_name(str(name))
+                match = next((key for key in candidates_by_name
+                              if canonicalize_ingredient_name(str(key)) == canonical), None)
+                if match is not None:
+                    selected.add(match)
     constrained = set()
-    for rows in candidates_by_name.values():
+    for name, rows in candidates_by_name.items():
         identities = set()
         for candidate in rows:
             if candidate.promotion_groups:
                 return True
-            if candidate.price is None and any(o.max_quantity is not None for o in candidate.offers):
+            if (selected is None or name in selected) and candidate.price is None and any(o.max_quantity is not None for o in candidate.offers):
                 identities.add((candidate.store_id, candidate.product_id))
         if constrained & identities:
             return True
@@ -978,7 +993,7 @@ class BasketOptimizer:
         increment_performance_counter("optimistic_basket_bounds")
         # Independent line totals can overestimate a future group discount.
         # Zero is conservative even when multiple promotions compete.
-        if _has_coupled_checkout(candidates_by_name):
+        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients)):
             total = Decimal(0)
         return verification_rank, money(total)
 
@@ -1002,22 +1017,11 @@ class BasketOptimizer:
         or bounds across future recipe additions.
         """
 
-        if _has_coupled_checkout(candidates_by_name):
-            limit = len(stores) if not max_stores or max_stores < 0 else min(max_stores, len(stores))
-            result = []
-            for cap in range(1, limit + 1):
-                try:
-                    basket = self._optimize_promotion_groups(
-                        ingredients, candidates_by_name, stores, cap, calculate_savings=False
-                    )
-                    rank = max(
-                        (_VERIFICATION_RANK[i.verification_status] for g in basket.stores for i in g.items),
-                        default=0,
-                    )
-                    result.append((rank, money(basket.total), len(basket.stores)))
-                except IncompleteBasketError:
-                    result.append(None)
-            return tuple(result)
+        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients)):
+            return self._optimize_promotion_groups(
+                ingredients, candidates_by_name, stores, max_stores,
+                calculate_savings=False, nested_keys=True,
+            )
         quoted_requirements = tuple(
             self._candidate_quotes_with_key(
                 ingredient,
@@ -1049,7 +1053,7 @@ class BasketOptimizer:
         membership and tie-breaking semantics remain shared with checkout.
         """
 
-        if _has_coupled_checkout(candidates_by_name):
+        if _has_coupled_checkout(candidates_by_name, (str(r[0]) for r in requirements)):
             return self.same_depth_nested_store_limited_keys(
                 [NormalizedIngredient(canonical_name=str(r[0]), required_quantity=float(r[1]), unit=str(r[2])) for r in requirements],
                 candidates_by_name, stores, max_stores=max_stores,
@@ -1316,7 +1320,7 @@ class BasketOptimizer:
         candidates_by_name: Mapping[str, Sequence[ProductCandidate]],
         stores: Sequence[Store],
     ) -> list[StoreBasket]:
-        if _has_coupled_checkout(candidates_by_name):
+        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients)):
             options = []
             for store in stores:
                 try:
@@ -1399,7 +1403,7 @@ class BasketOptimizer:
         *,
         calculate_savings: bool = True,
     ) -> OptimizedBasket:
-        if _has_coupled_checkout(candidates_by_name):
+        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients)):
             return self._optimize_promotion_groups(
                 ingredients,
                 candidates_by_name,
@@ -1576,7 +1580,7 @@ class BasketOptimizer:
         return result
 
     def _optimize_promotion_groups(
-        self, ingredients, candidates_by_name, stores, max_stores, *, calculate_savings=True
+        self, ingredients, candidates_by_name, stores, max_stores, *, calculate_savings=True, nested_keys=False
     ):
         """Group interactions require joint product selection within each store cap.
 
@@ -1588,6 +1592,8 @@ class BasketOptimizer:
         from math import prod
 
         source_stores = {s.store_id: s for s in stores}
+        limit = len(stores) if not max_stores or max_stores < 0 else min(max_stores, len(stores))
+        nested_winners = [None] * limit if nested_keys else []
         source_groups = {}
         for rows in candidates_by_name.values():
             for candidate in rows:
@@ -1637,6 +1643,8 @@ class BasketOptimizer:
                     plain[candidate.store_id] = (quote, candidate)
             choices.append([*group_quotes, *plain.values()])
         if any(not c for c in choices):
+            if nested_keys:
+                return tuple(nested_winners)
             raise IncompleteBasketError("No complete basket can be built with the selected stores.")
         # The exact search counts every Cartesian choice, including store-cap
         # exclusions. Its size is known before pricing: do not burn the entire
@@ -1649,6 +1657,12 @@ class BasketOptimizer:
                                for name, rows in candidates_by_name.items()}
             if any(len(base_candidates[name]) != len(rows)
                    for name, rows in candidates_by_name.items()):
+                if nested_keys:
+                    # Same existing verified-base fallback, using the compact
+                    # one-pass cap ranking rather than materializing 1/2/3 baskets.
+                    return self.same_depth_nested_store_limited_keys(
+                        ingredients, base_candidates, stores, max_stores=max_stores
+                    )
                 basket = self.optimize(ingredients, base_candidates, stores, max_stores,
                                        calculate_savings=False)
                 return basket.model_copy(update={"savings_vs_single_store": None,
@@ -1684,10 +1698,20 @@ class BasketOptimizer:
                 tuple(sorted(used_stores)),
                 tuple((i.product_id, i.packages_needed) for i in priced),
             )
+            if nested_keys:
+                # Every combination valid for cap K is also valid for K+1.
+                # Enumerate and price once, retaining identical exact winners.
+                for cap in range(max(1, len(used_stores)), limit + 1):
+                    previous = nested_winners[cap - 1]
+                    leading = (rank, total, len(used_stores))
+                    if previous is None or leading < previous:
+                        nested_winners[cap - 1] = leading
             if best is None or key < best:
                 best, best_items = key, priced
             if len(used_stores) == 1 and (single is None or (rank, total) < single):
                 single = (rank, total)
+        if nested_keys:
+            return tuple(nested_winners)
         if best is None:
             raise IncompleteBasketError("No complete basket can be built with the selected stores.")
         grouped = []
