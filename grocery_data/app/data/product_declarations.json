@@ -395,6 +395,73 @@
       },
       "binding_requirement": "existing_exact_gtin_brand_fixed_package",
       "parser": "dabas-base-quantity-v2"
+    },
+    {
+      "gtin": null,
+      "name": "Röda linser",
+      "brand": "GoGreen",
+      "package_quantity": 400.0,
+      "package_unit": "g",
+      "ingredients": "Torkade, skalade och delade röda linser.",
+      "nutrition": {
+        "kcal": 349.0,
+        "fat_g": 1.8,
+        "carbs_g": 51.0,
+        "protein_g": 26.0
+      },
+      "basis_quantity": 100,
+      "basis_unit": "g",
+      "preparation": "as_sold",
+      "culinary_forms": [
+        "red_split"
+      ],
+      "source": {
+        "url": "https://www.gogreen.se/produkter/roda-linser/",
+        "resolved_url": "https://www.gogreen.se/produkter/roda-linser/",
+        "status": 200,
+        "sha256": "941ae40eb8940c4a4a1c1202a11025e49c32eff3cce3d774e3a48103c83eca36",
+        "observed_at": "2026-10-02T15:58:59.849266+00:00"
+      },
+      "identity_source": {
+        "url": "https://www.gogreen.se/produkter/",
+        "resolved_url": "https://www.gogreen.se/produkter/",
+        "status": 200,
+        "sha256": "2e8842d3666060bb33c32198b8a9e5d598286d585057d87f70ba7c2a3e7c7815",
+        "observed_at": "2026-10-02T16:00:47.493253+00:00"
+      },
+      "binding_requirement": "unique_exact_complete_brand_variant_fixed_pack",
+      "parser": "gogreen-linked-product-declaration-v1"
+    },
+    {
+      "gtin": "07350027796831",
+      "name": "Stora vita bönor",
+      "brand": "Zeta",
+      "package_quantity": 480.0,
+      "package_unit": "g",
+      "net_quantity": 480.0,
+      "net_unit": "g",
+      "comparison_quantity": 290.0,
+      "comparison_unit": "g",
+      "comparison_basis": "Per avrunnen vikt",
+      "ingredients": "Ingredienser: Stora vita bönor, vatten, salt.",
+      "nutrition": {
+        "kcal": 102.0,
+        "fat_g": 1.1,
+        "carbs_g": 13.0,
+        "protein_g": 6.5
+      },
+      "basis_quantity": 100,
+      "basis_unit": "g",
+      "preparation": "as_sold_draining_unspecified",
+      "document_version": "2021-03-25",
+      "source": {
+        "url": "https://www.dabas.com/productsheet/07350027796831",
+        "resolved_url": "https://www.dabas.com/productsheet/07350027796831",
+        "status": 200,
+        "sha256": "167f38f7da997b98fc3ac7dc6650b8f6c2f807e51e377ee3ea9f6e08cb45f4a9",
+        "observed_at": "2026-10-02T15:55:35.956163+00:00"
+      },
+      "parser": "dabas-consumer-quantity-v1"
     }
   ]
 }

@@ -12,7 +12,7 @@ import math
 import re
 import unicodedata
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
 
@@ -173,8 +173,91 @@ def parse_arla(body, acquisition):
     }
 
 
-def parse_declaration(body, acquisition):
+def parse_gogreen(body, acquisition, identity_body, identity_acquisition):
+    """Complete named product plus independently linked official package size.
+
+    GoGreen's page does not publish a GTIN. Keep it unknown: the manufacturer's
+    exact product-index link supplies the fixed package without interpreting a
+    filename or borrowing the size of a neighbouring cooked product.
+    """
+    for document, source in ((body, acquisition), (identity_body, identity_acquisition)):
+        if (not document or not source or urlparse(source["url"]).hostname != "www.gogreen.se"
+                or source.get("status") != 200 or not source.get("observed_at")
+                or hashlib.sha256(document).hexdigest() != source.get("sha256")
+                or source.get("resolved_url", source["url"]) != source["url"]):
+            raise ValueError("unverified_gogreen_source")
+    if urlparse(identity_acquisition["url"]).path != "/produkter/":
+        raise ValueError("unverified_gogreen_product_index")
+    soup = BeautifulSoup(body, "html.parser")
+    index = BeautifulSoup(identity_body, "html.parser")
+    headings = soup.find_all("h1")
+    brands = soup.find_all("meta", attrs={"property": "og:site_name"})
+    structured = [json.loads(node.get_text()) for node in soup.select('script[type="application/ld+json"]')]
+    structured = [row for row in structured if str(row.get("@type", "")).lower() == "product"]
+    if len(headings) != 1 or len(brands) != 1 or len(structured) != 1:
+        raise ValueError("gogreen_product_identity_not_unique")
+    name = headings[0].get_text(" ", strip=True)
+    brand = brands[0].get("content")
+    if brand != "GoGreen" or identity_text(structured[0]["name"]) != identity_text(name):
+        raise ValueError("gogreen_product_identity_conflict")
+    links = [a for a in index.select("a.callout-link[href]")
+             if urljoin(identity_acquisition["url"], a["href"]) == acquisition["url"]]
+    if len(links) != 1:
+        raise ValueError("gogreen_package_identity_not_unique")
+    title = links[0].select_one(".callout-title")
+    measure = links[0].select_one(".callout-measure")
+    if not title or not measure or identity_text(title.get_text(" ", strip=True)) != identity_text(name):
+        raise ValueError("gogreen_package_variant_conflict")
+    pack = re.fullmatch(r"(\d+(?:[.,]\d+)?)\s*g", measure.get_text(" ", strip=True))
+    if not pack:
+        raise ValueError("gogreen_fixed_gram_package_unverified")
+    ingredients_node = soup.select_one(".content-productcontents")
+    if not ingredients_node:
+        raise ValueError("gogreen_ingredients_missing")
+    # Ingredient list is the labelled paragraph, not the site's generic allergy
+    # guidance or country-of-origin paragraph following it.
+    ingredient_paragraphs = ingredients_node.find_all("p", recursive=False)
+    if not ingredient_paragraphs:
+        raise ValueError("gogreen_ingredients_missing")
+    ingredients = ingredient_paragraphs[0].get_text(" ", strip=True)
+    nutrient_headers = [h for h in soup.find_all("h2") if h.get_text(strip=True) == "Näringsvärde per 100 g"]
+    if len(nutrient_headers) != 1:
+        raise ValueError("gogreen_nutrition_basis_unverified")
+    table = nutrient_headers[0].find_next_sibling("table")
+    if table is None:
+        raise ValueError("gogreen_nutrition_missing")
+    values = {}
+    for row in table.select("tr"):
+        cells = row.find_all("td")
+        if len(cells) != 2:
+            continue
+        label, value = (cell.get_text(" ", strip=True) for cell in cells)
+        key = {"Energi": "kcal", "Fett": "fat_g", "Kolhydrat": "carbs_g", "Protein": "protein_g"}.get(label)
+        if key is None:
+            continue
+        pattern = r"[\d,.]+\s*kJ/\s*([\d,.]+)\s*kcal" if key == "kcal" else r"([\d,.]+)\s*g"
+        match = re.fullmatch(pattern, value)
+        if not match or key in values:
+            raise ValueError("gogreen_nutrition_value_unverified")
+        values[key] = float(match[1].replace(",", "."))
+    if len(values) != 4 or not all(math.isfinite(v) and v >= 0 for v in values.values()):
+        raise ValueError("gogreen_nutrition_incomplete")
+    forms = []
+    if identity_text(ingredients) == "torkade skalade och delade röda linser":
+        forms.append("red_split")
+    return {"gtin": None, "name": name, "brand": brand,
+            "package_quantity": float(pack[1].replace(",", ".")), "package_unit": "g",
+            "ingredients": ingredients, "nutrition": values, "basis_quantity": 100,
+            "basis_unit": "g", "preparation": "as_sold", "culinary_forms": forms,
+            "source": dict(acquisition), "identity_source": dict(identity_acquisition),
+            "binding_requirement": "unique_exact_complete_brand_variant_fixed_pack",
+            "parser": "gogreen-linked-product-declaration-v1"}
+
+
+def parse_declaration(body, acquisition, *, identity_body=None, identity_acquisition=None):
     host = urlparse(acquisition["url"]).hostname
+    if host == "www.gogreen.se":
+        return parse_gogreen(body, acquisition, identity_body, identity_acquisition)
     if host == "www.dabas.com":
         return parse_dabas(body, acquisition)
     if host == "www.arla.se":

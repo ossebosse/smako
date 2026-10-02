@@ -99,6 +99,62 @@ def declaration_matches_product(product, fact):
     return fact == declared_facts([product]).get((product.store_id, product.product_id))
 
 
+def _supplement_named_catalog_facts(products, original):
+    """Strict existing name/brand/fixed-pack rule for official catalog facts.
+
+    No GTIN is synthesized and no price, identity or stock field is changed.
+    The parser requires two official documents for the same unique linked item.
+    """
+    from dataclasses import replace
+
+    from grocery_data.app.services.product_declarations import declarations
+
+    rows = [r for r in declarations() if r.get("parser") == "gogreen-linked-product-declaration-v1"]
+    result = dict(original)
+    for p in products:
+        prov = p.source_provenance
+        if (not prov or not prov.source_snapshot_id or p.sale_model != "fixed_package"
+                or not p.package_quantity or p.package_unit != "g"
+                or (p.purchase_terms and p.purchase_terms.identity_scope != "product")):
+            continue
+        row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit,
+                                gtin=p.gtin, rows=rows)
+        if row is None:
+            continue
+        key = (p.store_id, p.product_id)
+        prior = result.get(key) or ProductFacts(source="verified_supplier_catalog_supplement",
+            source_product_id=p.product_id, source_snapshot_id=prov.source_snapshot_id)
+        source = {**row["source"], "source": row["source"]["url"],
+                  "identity_method": row["binding_requirement"], "supplier_gtin": row["gtin"],
+                  "declared_name": row["name"], "declared_brand": row["brand"],
+                  "identity_source": row["identity_source"], "kind": "supplier_declaration",
+                  "bound_product_id": p.product_id, "bound_store_id": p.store_id,
+                  "bound_snapshot_id": prov.source_snapshot_id,
+                  "source_package_quantity": p.package_quantity, "source_package_unit": p.package_unit,
+                  "basis_unit": "g", "preparation": "as_sold", "original_nutrition": row["nutrition"]}
+        fields = dict(prior.field_sources)
+        fields["supplier_declaration"] = (*fields.get("supplier_declaration", ()), source)
+        changes = {}
+        if prior.nutrition and (prior.nutrition_unit != "g" or any(
+                prior.nutrition[k] != row["nutrition"][k] for k in prior.nutrition.keys() & row["nutrition"].keys())):
+            changes["conflicts"] = (*prior.conflicts, "supplier_nutrition_conflict")
+            fields["supplier_nutrition_conflict"] = (source,)
+        else:
+            changes.update(nutrition=dict(row["nutrition"]), nutrition_unit="g",
+                           nutrition_basis="Officiell produktdeklaration per 100 g som såld")
+            for key_name in row["nutrition"]:
+                fields["nutrition." + key_name] = (*fields.get("nutrition." + key_name, ()), source)
+        if not prior.ingredients:
+            changes.update(ingredients=(row["ingredients"],), ingredients_complete=True,
+                           ingredient_evidence_kind="product_declaration")
+            fields["ingredients"] = (source,)
+        if row.get("culinary_forms"):
+            changes["product_classification"] = tuple(dict.fromkeys((*prior.product_classification, *row["culinary_forms"])))
+            fields["product_classification"] = (*fields.get("product_classification", ()), source)
+        result[(p.store_id, p.product_id)] = replace(prior, **changes, field_sources=fields)
+    return result
+
+
 def supplement_catalog_facts(products, original):
     """Exact-GTIN supplier fields, retaining every conflicting declaration.
 
@@ -112,7 +168,7 @@ def supplement_catalog_facts(products, original):
     from grocery_data.app.services.product_declarations import declarations, identity_text
 
     rows = [r for r in declarations() if r.get("parser") in {"dabas-consumer-quantity-v1", "dabas-base-quantity-v2"}]
-    result = dict(original)
+    result = _supplement_named_catalog_facts(products, original)
     for p in products:
         if not p.gtin or not p.source_provenance or (p.purchase_terms and p.purchase_terms.identity_scope != "product"):
             continue
