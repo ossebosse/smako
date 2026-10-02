@@ -36,6 +36,9 @@
         throw new Error("Raderingen kunde inte genomföras. Försök igen senare.");
       }
       window.localStorage.clear();
+      for (const key of ["smako.planJob.public", "smako.planJob.personal", "smako.recipeChoices.public", "smako.recipeChoices.personal", "smako.personal.requestDraft"]) {
+        window.sessionStorage.removeItem(key);
+      }
       confirmation.checked = false;
       status.textContent = "Dina betauppgifter har raderats.";
     } catch (error) {

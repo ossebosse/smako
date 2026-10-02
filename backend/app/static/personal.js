@@ -238,7 +238,7 @@
 
     if(state.status==="SIGNED_IN"){
 
-      out.append(button("Logga ut",async()=>{await api("/api/account/logout",{});location.assign("/personal#account");}));
+      out.append(button("Logga ut",async()=>{await api("/api/account/logout",{});window.SmakoRecipes.clearPrivateDrafts();location.assign("/personal#account");}));
 
       const preview=await api("/api/account/guest-migration-preview");
 

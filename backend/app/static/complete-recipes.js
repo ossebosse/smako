@@ -191,6 +191,7 @@
   const validJobUrl=url=>/^\/api\/plan-jobs\/[a-f0-9]{32}$/.test(url||"");
   const stages={queued:"Din menyberäkning väntar på en ledig plats.",product_facts:"Kontrollerar produktfakta och aktuella prisvillkor.",candidate_qualification:"Prövar rätternas produkter, mängder och näringskrav.",week_search:"Söker efter en samordnad veckomeny och inköpskorg.",final_audit:"Slutkontrollerar hela inköpslistan och dina krav.",saving:"Sparar den färdiga planrevisionen."};
   const jobKey=scope=>`smako.planJob.${scope}`;
+  function clearPrivateDrafts(){for(const key of ["smako.planJob.public","smako.planJob.personal","smako.recipeChoices.public","smako.recipeChoices.personal","smako.personal.requestDraft"])storage.remove(key);}
   function pendingJob(scope) { const saved=storage.get(jobKey(scope));return validJobUrl(saved?.url)?saved:null; }
   function forgetJob(scope) {storage.remove(jobKey(scope));}
   async function poll(response,{scope,signal,onProgress=()=>{},context=null}={}) {
@@ -209,5 +210,5 @@
     }
     forgetJob(scope);return response;
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,financials,productDetails,ingredientCount,cuisines,poll,pendingJob,forgetJob,storage});
+  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,financials,productDetails,ingredientCount,cuisines,poll,pendingJob,forgetJob,clearPrivateDrafts,storage});
 })();

@@ -181,6 +181,8 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     expect(page.locator(".complete-feedback-dialog [role=status]")).to_contain_text("receptversionen")
     assert feedback[-1]["recipe_feedback"] == {"revision": 3, "recipe_index": 0, "taste": 5, "difficulty": 2,
                                               "portion_size": "right", "actual_minutes": 37}
+    page.evaluate("SmakoRecipes.clearPrivateDrafts()")
+    assert page.evaluate("['smako.planJob.public','smako.planJob.personal','smako.recipeChoices.public','smako.recipeChoices.personal','smako.personal.requestDraft'].every(key=>sessionStorage.getItem(key)===null)")
     assert not errors, errors
     result = {"browser": engine, "mobile_emulation": mobile, "personal": personal,
               "posts": len(plans), "polls_after_reload": mode["polls"], "page_errors": errors,
