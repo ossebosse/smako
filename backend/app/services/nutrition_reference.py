@@ -69,6 +69,23 @@ MAPPINGS = {
     374: ("ärtor", "frozen"),
     574: ("mango", "raw"),
     580: ("persika", "raw"),
+    362: ("zucchini", "raw"),
+    372: ("aubergine", "raw"),
+    4941: ("spenat", "raw"),
+    361: ("spenat", "frozen"),
+    322: ("blomkål", "raw"),
+    323: ("blomkål", "frozen"),
+    333: ("champinjoner", "raw"),
+    383: ("champinjoner", "frozen"),
+    291: ("pepparrot", "raw"),
+    377: ("dill", "raw"),
+    352: ("persilja", "raw"),
+    379: ("basilika", "raw"),
+    7199: ("spiskummin", "dry"),
+    2306: ("kanel", "dry"),
+    7198: ("gurkmeja", "dry"),
+    702: ("havregryn", "dry"),
+    1941: ("vetemjöl", "dry"),
 }
 COOKED = {2481: 2515, 870: 2079, 289: 305, 344: 448, 370: 465, 1173: 3594, 1255: 1317, 1246: 1335}
 FRIED = {1255: 1316, 1246: 1337}
@@ -108,7 +125,7 @@ def macro_values(rows):
 def reference_data():
     raw = PATH.read_bytes()
     data = json.loads(raw)
-    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json')):
+    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json')):
         supplement = json.loads(path.read_bytes())
         if data['foods'].keys() & supplement['foods'].keys():
             raise ValueError('SLV supplement must not silently replace retained references')
@@ -302,6 +319,11 @@ def product_reference(product, name, facts):
     """Narrow reviewed plain-food mappings; never fix conflicting facts with estimates."""
     if facts and facts.conflicts:
         return None
+    from app.services.recipe_ingredient_references import reviewed_reference
+
+    reference = reviewed_reference(product, name, facts)
+    if reference is not None:
+        return reference
     text = product.name.casefold()
     canonical = canonicalize_ingredient_name(name)
     if canonical in {'kycklingbröstfilé', 'kycklingfilé'}:

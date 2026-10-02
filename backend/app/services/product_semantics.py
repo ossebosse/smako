@@ -1974,6 +1974,24 @@ def evaluate_product_semantics(
     """Apply food, role, form and explicit-exclusion gates in that order."""
 
     requirement = semantic_requirement(canonical_name)
+    # Specific culinary identities absent from the legacy dinner taxonomy.
+    # Full product labels are required; a component/flavour word cannot match.
+    if requirement.canonical_name in {"yoghurt naturell", "paprikapulver"}:
+        label = _search_text(str(_value(product, "name", "")))
+        if requirement.canonical_name == "paprikapulver":
+            compatible = bool(re.fullmatch(r"paprikapulver(?: milt| mild| stark| rokt| eko| burk| pase)*", label))
+            role, form, food = "single_spice", "dry", "paprikapulver"
+        else:
+            compatible = bool(re.fullmatch(
+                r"(?:(?:mild|grekisk|turkisk|laktosfri|latt|naturell) )*yoghurt(?: (?:naturell|mild|latt|laktosfri|eko|ekologisk|[0-9]+))*", label
+            ) and "naturell" in label)
+            role, form, food = "plain_yoghurt", "as_sold", "yoghurt naturell"
+        return SemanticMatchResult(
+            compatible=compatible,
+            confidence=SemanticConfidence.HIGH if compatible else SemanticConfidence.REJECTED,
+            canonical_food=food, product_role=role, product_form=form,
+            evidence=["exact_plain_culinary_product_label" if compatible else "different_culinary_product_or_flavour"],
+        )
     requires_red_lentils = _requires_red_lentil_identity(canonical_name)
     name = str(_value(product, "name", _value(product, "product_name", "")))
     name_text = _search_text(name)
