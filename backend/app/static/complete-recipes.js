@@ -139,7 +139,7 @@
     const allocations=(personal?.allocations||[]).filter(a=>slotId && (a.source===slotId||a.slot_id===slotId));
     if(allocations.length){ingredients.append(el("h4","Skafferi används"));for(const row of allocations)ingredients.append(el("p",`${row.name||row.ingredient||"Skafferivara"}: ${number(row.quantity)} ${row.unit||""}.`));}
     out.append(ingredients);
-    const method=el("section");method.append(el("h3","Gör så här"));const steps=el("ol",null,"instructions-list complete-recipe-steps");
+    const method=el("section",null,"complete-recipe-method");method.append(el("h3","Gör så här"));const steps=el("ol",null,"instructions-list complete-recipe-steps");
     const timing=new Map((design.steps||[]).map((s,i)=>[s.id,{step:s,index:i+1}]));
     const instructions=recipe.instructions||[];
     instructions.forEach((instruction,index)=>{

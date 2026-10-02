@@ -160,13 +160,28 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
                              {"id": "serve", "duration_minutes": 5, "depends_on": ["prepare"]}],
                    "provenance": {"content_review": "reviewed", "machine_validation": "passed", "cooking_test": "not_cooked"}},
     }
-    page.evaluate("recipe => { window.testRecipe=recipe; const node=SmakoRecipes.renderRecipe(recipe,{nutrition:{status:'ESTIMATED',values:{protein_g:40.123,kcal:650}}});node.id='contract-recipe-card';document.body.append(node); }", recipe)
+    page.evaluate("""recipe => {
+      window.testRecipe=recipe;
+      const wrapper=document.createElement('article');wrapper.className='recipe-card';wrapper.style.maxWidth='1120px';wrapper.style.margin='20px auto';
+      const content=document.createElement('div');content.className='recipe-content';wrapper.append(content);
+      const node=SmakoRecipes.renderRecipe(recipe,{nutrition:{status:'ESTIMATED',values:{protein_g:40.123,kcal:650}}});
+      node.id='contract-recipe-card';content.append(node);document.body.append(wrapper);
+    }""", recipe)
     card = page.locator("#contract-recipe-card")
     expect(card).to_contain_text("4 ingredienser")
     expect(card).to_contain_text("Provlagning: inte genomförd")
     expect(card).to_contain_text("efter steg 1")
     assert card.locator(".recipe-component").count() == 3
     assert page.evaluate("SmakoRecipes.ingredientCount(window.testRecipe)") == 4
+    ingredient_box = card.locator(".complete-recipe-ingredients").bounding_box()
+    method_box = card.locator(".complete-recipe-method").bounding_box()
+    assert ingredient_box and method_box
+    if mobile:
+        assert method_box["y"] >= ingredient_box["y"] + ingredient_box["height"]
+    else:
+        assert method_box["x"] >= ingredient_box["x"] + ingredient_box["width"]
+        assert abs(method_box["y"] - ingredient_box["y"]) < 2
+        assert card.bounding_box()["width"] >= 900
     rendered = page.evaluate("""() => {
       const demands=['färs','potatis','yoghurt','vitlök'].map((name,index)=>({name,source:'slot1',demand_key:String(index),quantity:100,original_quantity:100}));
       const personal={remaining_demands:demands,allocations:[{demand_key:'0',quantity:100},{demand_key:'1',quantity:25}],checks:{}};
