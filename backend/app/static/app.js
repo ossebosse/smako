@@ -3593,7 +3593,7 @@
   }
 
   void resumePublicJob();
-  window.addEventListener("online", () => { if(!activePlanRequest)void resumePublicJob(); });
+  window.addEventListener("online", () => { void loadPublicRuntimeStatus(); if(!activePlanRequest)void resumePublicJob(); });
 
   window.addEventListener("pageshow", reconcilePlanningState);
   window.addEventListener("pagehide", (event) => {

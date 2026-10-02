@@ -208,7 +208,7 @@
     if(last){const loaded=await api(`/api/plans/${encodeURIComponent(last)}`);if(loaded.plan.personal)await accept(loaded);else notify("Detta är en tidigare middagsplan. Öppna den i den tidigare planeringen.");}
     if(location.hash==="#pantry")show("pantry");renderExtras();
   });
-  window.addEventListener("online",()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(resumePersonalJob);});
+  window.addEventListener("online",()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(async()=>{try{const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true);}catch(_){/* A saved pending job can still reconnect. */}await resumePersonalJob();});});
 
   function renderSuggestions(){
 
