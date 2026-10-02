@@ -34,11 +34,23 @@ def test_references_keep_raw_frozen_and_dried_forms_separate():
     for name in ('Dill Burk', 'Dill torkad', 'Dillchips', 'Dill & Gräslök Dippmix'):
         assert product_reference(product(name, 'Skafferi'), 'dill', None) is None
     assert product_reference(product('Blomkål stuvad', 'Färdigmat'), 'blomkål', None) is None
+    assert product_reference(product('Aubergine', 'Zucchini & Aubergine'), 'aubergine', None) == 372
+    assert product_reference(product('Stjälkselleri', 'Frukt & Grönt'), 'selleri', None) == 321
+    assert product_reference(product('Rotselleri', 'Frukt & Grönt'), 'selleri', None) is None
+    assert product_reference(product('Sellerisalt', 'Kryddor'), 'selleri', None) is None
+
+
+@pytest.mark.parametrize('canonical', ['aubergine', 'zucchini'])
+def test_new_whole_vegetable_semantics_reject_preserved_and_prepared(canonical):
+    assert evaluate_product_semantics(canonical, {'name': canonical.title(), 'category': 'Frukt & Grönt'}).compatible
+    for name, category in [(canonical + ' inlagd', 'Konserver'), (canonical + ' i olja', 'Konserver'),
+                           ('Lasagne med ' + canonical, 'Färdigrätter')]:
+        assert not evaluate_product_semantics(canonical, {'name': name, 'category': category}).compatible
 
 
 def test_imported_sources_retain_ids_versions_and_all_unrounded_macros():
     data = reference_data()
-    for identity in (362, 372, 4941, 361, 322, 323, 333, 383, 291, 377, 352, 379, 7199, 2306, 7198, 702, 1941):
+    for identity in (362, 372, 4941, 361, 322, 323, 333, 383, 291, 377, 352, 379, 7199, 2306, 7198, 702, 1941, 321):
         entry = data['foods'][str(identity)]
         assert entry['food']['nummer'] == identity and entry['food']['version']
         assert all(a['url'].startswith('https://dataportal.livsmedelsverket.se/') and len(a['sha256']) == 64

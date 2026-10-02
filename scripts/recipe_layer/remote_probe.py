@@ -2,6 +2,7 @@
 import argparse
 import io
 import json
+import re
 import shlex
 import subprocess
 import tarfile
@@ -20,6 +21,7 @@ def ssh(code, data=None):
 
 
 def stage(arm):
+    assert re.fullmatch(r'(?:baseline|candidate)(?:-[a-z0-9-]+)?', arm)
     payload = io.BytesIO()
     with tarfile.open(fileobj=payload, mode='w:gz') as archive:
         for folder in ('backend/app', 'grocery_data/app', 'scripts/recipe_layer'):
@@ -55,6 +57,7 @@ subprocess.run({command!r},check=True)""").decode())
 
 
 def run(arm, script, arguments):
+    assert re.fullmatch(r'(?:baseline|candidate)(?:-[a-z0-9-]+)?', arm)
     command = ['docker', 'run', '--rm', '--network', 'none', '--cpus', '2', '--memory', '3g',
                '--read-only', '--user', '0:0', '--tmpfs', '/tmp:rw,size=512m',
                '-e', 'PYTHON_DOTENV_DISABLED=1', '-e', 'PYTHONPATH=/srv/app/backend:/srv/app',
@@ -91,7 +94,7 @@ def retrieve():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('action', choices=('stage', 'freeze', 'run', 'retrieve'))
-    parser.add_argument('--arm', choices=('baseline', 'candidate'), default='candidate')
+    parser.add_argument('--arm', default='candidate')
     parser.add_argument('--script', default='benchmark.py')
     parser.add_argument('arguments', nargs='*')
     args = parser.parse_args()

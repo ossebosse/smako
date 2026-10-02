@@ -447,6 +447,16 @@ _RULES: dict[str, IngredientSemanticRule] = {
         food_family="vegetable",
         identity_terms=("broccoli",),
     ),
+    "aubergine": _raw_produce_rule(
+        canonical_food="aubergine",
+        food_family="vegetable",
+        identity_terms=("aubergine", "auberginer"),
+    ),
+    "zucchini": _raw_produce_rule(
+        canonical_food="zucchini",
+        food_family="vegetable",
+        identity_terms=("zucchini", "squash"),
+    ),
     "purjolök": _raw_produce_rule(
         canonical_food="leek",
         food_family="allium",

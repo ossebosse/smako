@@ -21,7 +21,8 @@ names = ['yoghurt naturell', 'yoghurt', 'fetaost', 'citronjuice', 'limejuice', '
          'spenat', 'blomkål', 'champinjoner', 'haricots verts', 'senap', 'pepparrot', 'dill', 'persilja',
          'basilika', 'torkad oregano', 'oregano', 'paprikapulver', 'spiskummin', 'chilipulver', 'gurkmeja',
          'kanel', 'ingefära', 'jordnötssmör', 'sojasås', 'sesamfrön', 'ströbröd', 'havregryn', 'vetemjöl',
-         'rapsolja', 'salt', 'potatis', 'kyckling', 'nötfärs', 'kikärtor', 'tofu', 'majs']
+         'rapsolja', 'salt', 'potatis', 'kyckling', 'nötfärs', 'kikärtor', 'tofu', 'majs', 'selleri', 'kapris', 'keso',
+         'mjölk', 'kokosmjölk', 'bröd', 'rödbeta']
 report = {}
 for name in names:
     try:
