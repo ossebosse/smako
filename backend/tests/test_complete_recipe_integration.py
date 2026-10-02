@@ -78,6 +78,17 @@ def test_feedback_accepts_partial_and_binds_nonempty_ratings():
         RecipeFeedback(revision=2, recipe_index=0)
 
 
+def test_source_nutrition_bound_rejections_are_in_visible_totals():
+    from app.services.planning_diagnostics import PlanningDiagnostics
+    diagnostics = PlanningDiagnostics()
+    diagnostics.pools.append({"meal_type": "dinner", "raw": 2})
+    diagnostics.singleton_passed = 1
+    diagnostics.reject("nutrition_bound", SimpleNamespace(name="Kvalificerad rätt"), "Högsta möjliga protein understiger målet.")
+    result = diagnostics.snapshot()
+    assert sum(r["rejected"] for r in result["candidate_rejections"]) + result["singleton_passed"] == 2
+    assert result["not_singleton_evaluated"] == 0
+
+
 def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path):
     from app.models.personal import MealSlot
     from app.services.personal_planner import PersonalPlanner

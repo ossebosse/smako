@@ -5,6 +5,7 @@ from collections import Counter
 STAGES = {
     "policy_taste": "Policy/smak",
     "nutrition": "Näringskrav",
+    "nutrition_bound": "Näringsgräns från kvalificerade produkter",
     "organic": "Eko",
     "store_cap": "Butikstak",
     "variation": "Variationskrav",
