@@ -662,6 +662,7 @@ class PersonalPlanner:
             recipe = self.clean_recipe(slot.recipe, meal)
             profile = merged_profile(self.spec.profile, meal.profile)
             for ingredient in self.service.normalizer.normalize_and_aggregate([recipe]):
+                source_ingredient = next((i for i in recipe.ingredients if canonicalize_ingredient_name(i.name) == ingredient.canonical_name), None)
                 rows.append(
                     {
                         "name": ingredient.canonical_name,
@@ -674,6 +675,9 @@ class PersonalPlanner:
                         "properties": [],
                         "profile": profile,
                         "organic_animals": self.spec.organic_animals or meal.organic_animals,
+                        **({"input_form": source_ingredient.form,
+                            "product_requirements": list(getattr(source_ingredient, "product_requirements", None) or ())}
+                           if self.complete and source_ingredient is not None else {}),
                     }
                 )
         for extra in self.spec.extras:
@@ -728,6 +732,10 @@ class PersonalPlanner:
                 if item["product_key"] not in keys:
                     continue
             else:
+                if self.complete and row.get("input_form"):
+                    from app.services.complete_recipes import pantry_form_compatible
+                    if not pantry_form_compatible(item, row):
+                        continue
                 if row["product_key"] or row["properties"]:
                     continue
                 if canonicalize_ingredient_name(item["name"]) != canonicalize_ingredient_name(
@@ -2255,6 +2263,32 @@ class PersonalPlanner:
         recipes = [s.recipe for s in chosen if s.recipe]
         result["checks"]["checkout_audit"] = result["audit"].model_dump(mode="json")
         result["checks"]["allowed_store_ids"] = sorted(self.store_ids)
+        if self.complete:
+            purchased_items = [item for store in result["basket"].stores for item in store.items]
+            cost_known = all(item.merchandise_total is not None and item.purchased_usable_quantity for item in purchased_items)
+            used_cost = (float(money(sum(item.merchandise_total * item.required_quantity / item.purchased_usable_quantity
+                                       for item in purchased_items))) if cost_known else None)
+            result["checks"]["new_purchase_used_cost"] = used_cost
+            result["checks"]["used_ingredient_cost"] = used_cost if not result["allocations"] else None
+            result["checks"]["used_cost_basis"] = {
+                "method": "proportional_allocation_of_paid_merchandise_cost_to_used_usable_quantity",
+                "deposit_included": False,
+                "pantry_cost_status": "UNKNOWN" if result["allocations"] else "NOT_USED",
+                "quantity_status": "ESTIMATED" if any(i.quantity_confidence == "estimated" for i in purchased_items) else "VERIFIED",
+                "description": "Varukostnad utan pant fördelad efter använd andel av inköpt användbar mängd. Skafferiets tidigare inköpspris är okänt. Resternas framtida värde dras inte av från köpbeloppet.",
+            }
+            result["checks"]["ingredient_product_details"] = []
+            for item in purchased_items:
+                product = self.prepared.universe.products[self.by_identity[(item.store_id, item.product_id)]]
+                fact = self.source_facts(product)
+                result["checks"]["ingredient_product_details"].append({
+                    "ingredient": item.ingredient, "product_name": item.product_name,
+                    "ingredients": list(fact.ingredients) if fact else [],
+                    "ingredients_complete": bool(fact and fact.ingredients_complete),
+                    "allergens_present": list(fact.allergens_present) if fact else [],
+                    "allergens_trace": list(fact.allergens_trace) if fact else [],
+                    "source": fact.source if fact else None,
+                })
         self._trace_final_alternatives(chosen, result)
         basket = result["basket"]
         comparisons = []

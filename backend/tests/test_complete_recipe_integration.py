@@ -88,7 +88,11 @@ def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path
 
     prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products")
     recipe = candidates(prefs, 2)[0]
-    universe = prepared(*[product(i.name, max(100, i.quantity), i.unit, 10) for i in recipe.ingredients])
+    products = [product(i.name, max(100, i.quantity), i.unit, 10).model_copy(update={
+        "category": "Kryddor" if i.form == "dry" else "Frukt & grönsaker" if i.form == "raw_edible" else "Mat",
+        "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name,
+    }) for i in recipe.ingredients]
+    universe = prepared(*products)
     request = PlanRequest(recipes=1, servings=2, max_stores=1, recipe_preferences=prefs,
         personal=PersonalPlanning(meals=[MealSettings(count=1, servings=2)],
             slots=[MealSlot(id="dinner-1", day=1, meal_type="dinner", recipe=recipe)]))
@@ -112,6 +116,42 @@ def test_edited_unregistered_recipe_cannot_enter_complete_mode():
     edited = recipe.model_copy(update={"instructions": ["Använd olja efter eget tycke."]})
     with pytest.raises(ValueError):
         matches_preferences(edited, prefs)
+
+
+@pytest.mark.parametrize("ingredient,form,label,category,expected", [
+    ("dill", "raw_edible", "Dill & Gräslök Chips", "Snacks", False),
+    ("dill", "raw_edible", "Dill Påse", "Kryddor", False),
+    ("dill", "raw_edible", "Dill", "Frukt & grönt", True),
+    ("dill", "raw_edible", "Dill Finhackad Fryst", "Fryst", True),
+    ("oregano", "dry", "Oregano Klass 1", "Frukt & grönt", False),
+    ("oregano", "dry", "Oregano Burk", "Kryddor", True),
+    ("spiskummin", "dry", "Kryddost Spiskummin & Nejlika 31%", "Ost", False),
+    ("tofu", "as_sold", "Tofu Naturell Fast Vegansk", "Vegetariskt", True),
+    ("tofu", "as_sold", "Tofu Alspånsrökt Ekologisk", "Vegetariskt", False),
+    ("tofu", "as_sold", "Tofu Silkesmjuk Ekologisk", "Vegetariskt", False),
+    ("yoghurt naturell", "as_sold", "Grekisk Yoghurt Jordgubb 0,2%", "Mejeri", False),
+    ("yoghurt naturell", "as_sold", "Grekisk Yoghurt Naturell 10%", "Mejeri", True),
+    ("kyckling", "raw_edible", "Kyckling Nuggets", "Fågel", False),
+    ("kyckling", "raw_edible", "Kyckling Bröstfilé", "Fågel", True),
+    ("rapsolja", "as_sold", "Smör- & Rapsolja Flytande", "Matfett", False),
+    ("jordnötssmör", "as_sold", "Jordnötssmör Kakao Granola Nötsmörsbakad", "Skafferi", False),
+    ("sojasås", "as_sold", "Sojasås Sweet", "Soja", False),
+    ("sojasås", "as_sold", "Sojasås Japansk", "Soja", True),
+])
+def test_whole_food_identity_never_substring_matches(ingredient, form, label, category, expected):
+    from app.services.complete_recipes import _whole_food_identity
+    assert _whole_food_identity(ingredient, form, SimpleNamespace(name=label, category=category), None) == expected
+
+
+def test_compound_chili_and_unknown_pantry_form_do_not_qualify():
+    from app.services.complete_recipes import _whole_food_identity, pantry_form_compatible
+    product = SimpleNamespace(name="Chilipulver", category="Kryddor")
+    mixture = SimpleNamespace(ingredients=["Chilipeppar 84%, spiskummin, salt, oregano, vitlök."], ingredients_complete=True)
+    assert not _whole_food_identity("chilipulver", "dry", product, mixture)
+    row = {"name": "vitlök", "input_form": "raw_edible"}
+    assert not pantry_form_compatible({"name": "vitlök", "unit": "g"}, row)
+    assert not pantry_form_compatible({"name": "Torkad vitlök", "unit": "g", "form": "raw_edible"}, row)
+    assert pantry_form_compatible({"name": "vitlök", "unit": "g", "form": "raw_edible"}, row)
 
 
 @pytest.mark.asyncio
