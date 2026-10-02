@@ -1934,10 +1934,14 @@ class PersonalPlanner:
                     calculation_basis(recipe, allow_estimates=True)
                 stage = "product_qualification"
                 recipe = self.clean_recipe(recipe, meal)
-                # Existing dinner safeguards remain approximate structural checks.
+                # Sealed authored designs have their own ingredient, portion,
+                # method and timeline validation in clean_recipe. Their actual
+                # product nutrition is qualified by basket below. The legacy
+                # coarse taxonomy estimator lacks these new foods and cannot
+                # veto source-qualified meals merely for incomplete coverage.
                 quality = (
                     self.service._nutrition_for(self.request).validate_recipes([recipe])
-                    if meal.meal_type == "dinner"
+                    if meal.meal_type == "dinner" and not self.complete
                     else None
                 )
                 if quality and not quality.is_valid:

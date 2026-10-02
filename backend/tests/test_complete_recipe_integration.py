@@ -121,6 +121,38 @@ def test_edited_unregistered_recipe_cannot_enter_complete_mode():
         matches_preferences(edited, prefs)
 
 
+def test_complete_candidates_use_actual_product_nutrition_not_legacy_coverage(monkeypatch):
+    from app.services import recipe_library
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.personal_policy import ProductFacts
+
+    from backend.tests.test_personal_planning_v2 import NOW, prepared, product, state
+
+    prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products", min_protein_g=1)
+    recipe = recipe_library.candidates(prefs, 2)[0]
+    monkeypatch.setattr(recipe_library, "candidates", lambda *args: [recipe])
+    products = [product(i.name, max(100, i.quantity), i.unit, 10).model_copy(update={
+        "category": "Kryddor" if i.form == "dry" else "Frukt & grönsaker" if i.form == "raw_edible" else "Mat",
+        "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name + " Malen" if i.name == "spiskummin" else i.name,
+    }) for i in recipe.ingredients]
+    facts = {(p.store_id, p.product_id): ProductFacts(source="synthetic_test_declaration", source_product_id=p.product_id,
+        source_snapshot_id="v2-frozen", ingredients=(p.name,), ingredients_complete=True, nutrition={"protein_g": 1},
+        nutrition_unit=p.usable_unit, nutrition_basis="Synthetic test per 100 input units") for p in products}
+    request = PlanRequest(recipes=1, servings=2, max_stores=1, recipe_preferences=prefs,
+        personal=PersonalPlanning(allow_nutrition_estimates=True, meals=[MealSettings(count=1, servings=2)]))
+    planner = PersonalPlanner(request, Settings(complete_recipes_enabled=True), prepared(*products), state(), facts=facts, now=NOW)
+    def legacy_estimate_must_not_run(*args):
+        raise AssertionError("Legacy coarse coverage cannot override sealed complete design/source nutrition")
+    monkeypatch.setattr(planner.service, "_nutrition_for", legacy_estimate_must_not_run)
+    assert planner._candidates(planner.spec.meals[0]) == [recipe]
+    assert planner.diagnostics.singleton_passed == 1
+    request.recipe_preferences = prefs.model_copy(update={"min_protein_g": 300})
+    strict = PersonalPlanner(request, Settings(complete_recipes_enabled=True), prepared(*products), state(), facts=facts, now=NOW)
+    with pytest.raises(PolicyConflict) as stopped:
+        strict._candidates(strict.spec.meals[0])
+    assert stopped.value.code == "NUTRITION_TARGET_NOT_MET"
+
+
 @pytest.mark.parametrize("ingredient,form,label,category,expected", [
     ("dill", "raw_edible", "Dill & Gräslök Chips", "Snacks", False),
     ("dill", "raw_edible", "Dill Påse", "Kryddor", False),
