@@ -60,6 +60,7 @@ class CulinarySimilarityComponents:
     carb: float
     protein: float
     sauce: float
+    flavor: float | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -147,6 +148,9 @@ class CulinarySimilarity:
             carb=_exact_similarity(left.primary_carb, right.primary_carb),
             protein=_exact_similarity(left.primary_protein, right.primary_protein),
             sauce=_exact_similarity(left.sauce_base, right.sauce_base),
+            flavor=(len(set(left.flavor_profile) & set(right.flavor_profile)) /
+                    len(set(left.flavor_profile) | set(right.flavor_profile)))
+                    if left.authored_base_id and right.authored_base_id and (left.flavor_profile or right.flavor_profile) else None,
         )
         weights = self.weights
         score = (
@@ -176,7 +180,17 @@ class CulinarySimilarity:
             and left.cooking_method == right.cooking_method
             and left.sauce_base == right.sauce_base
         )
-        if same_structure or same_main_combination or same_core_with_different_side:
+        if left.authored_base_id and right.authored_base_id:
+            # Authored multi-component meals can share rice and a pot while
+            # having different mains, sauces and serving structures. Their
+            # explicit flavor profile participates in the comparison. Variants
+            # of one base are always the same dinner for variation purposes.
+            score = score * 0.9 + (components.flavor or 0) * 0.1
+            if (left.authored_base_id == right.authored_base_id
+                    or (same_structure and left.primary_protein == right.primary_protein
+                        and left.flavor_profile == right.flavor_profile and left.sauce_base == right.sauce_base)):
+                score = max(score, 0.90)
+        elif same_structure or same_main_combination or same_core_with_different_side:
             score = max(score, 0.90)
         return CulinarySimilarityPair(
             left_recipe=left.recipe_name,

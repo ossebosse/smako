@@ -16,6 +16,11 @@ from app.services.recipe_candidate_validator import (
 from app.services.recipe_similarity import RecipeSimilarityAnalyzer
 
 
+def _authored_role(recipe, role):
+    operands = [(i.quantity, i.canonical_name or i.name) for i in recipe.ingredients if i.role == role]
+    return max(operands)[1] if operands else None
+
+
 @dataclass(frozen=True, slots=True)
 class RecipeProfile:
     """Canonical culinary structure extracted from one recipe."""
@@ -30,6 +35,9 @@ class RecipeProfile:
     vegetables: tuple[str, ...]
     major_ingredients: tuple[str, ...]
     ingredient_weights: tuple[tuple[str, float], ...]
+    authored_base_id: str | None = None
+    flavor_profile: tuple[str, ...] = ()
+    side_description: str | None = None
 
     @property
     def ingredient_weight_map(self) -> dict[str, float]:
@@ -160,6 +168,9 @@ class RecipeProfileBuilder:
                 major.add(ingredient.canonical_name)
 
         weighted_profile = self.ingredient_similarity.build_profile(recipe)
+        if recipe.design:
+            major = {i.canonical_name or i.name for i in recipe.ingredients if i.role not in {"flavour", "cooking"}}
+            vegetables = tuple(sorted(i.canonical_name or i.name for i in recipe.ingredients if i.role == "vegetable"))
         filtered_weights = tuple(
             sorted(
                 (
@@ -175,9 +186,9 @@ class RecipeProfileBuilder:
             recipe_family=family,
             cooking_method=method,
             dish_form=self._dish_form(family),
-            primary_protein=primary_ingredient(recipe),
-            primary_carb=carbohydrate_ingredient(recipe),
-            sauce_base=_dominant_in_category(
+            primary_protein=recipe.design.primary_ingredient if recipe.design else primary_ingredient(recipe),
+            primary_carb=_authored_role(recipe, "side") if recipe.design else carbohydrate_ingredient(recipe),
+            sauce_base=_authored_role(recipe, "sauce") if recipe.design else _dominant_in_category(
                 recipe,
                 IngredientCategory.SAUCE_BASE,
                 self.normalizer,
@@ -185,6 +196,9 @@ class RecipeProfileBuilder:
             vegetables=vegetables,
             major_ingredients=tuple(sorted(major)),
             ingredient_weights=filtered_weights,
+            authored_base_id=recipe.design.base_id if recipe.design else None,
+            flavor_profile=recipe.design.flavor_profile if recipe.design else (),
+            side_description=recipe.design.side if recipe.design else None,
         )
 
 

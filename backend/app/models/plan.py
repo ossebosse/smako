@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from grocery_data.app.domain.promotion_pricing import MembershipProgram
 
 from .basket import OptimizedBasket, StoreBasket
-from .diversity import DiversityMode
+from .diversity import DiversityMode, DiversityPolicyOverrides
 from .ingredient import NormalizedIngredient
 from .personal import PersonalPlanning, PersonalResult
 from .product import CheapIngredient
@@ -47,6 +47,7 @@ class AvailabilityMode(StrEnum):
 class PlanRequest(BaseModel):
     model_config = ConfigDict(allow_inf_nan=False)
     recipe_preferences: RecipePreferences | None = Field(default=None, exclude_if=lambda v: v is None)
+    recipe_diversity_overrides: dict[str, int | float | None] | None = Field(default=None, exclude_if=lambda v: v is None)
     allow_nutrition_estimates: bool = Field(default=False, exclude_if=lambda v: not v)
     use_pantry: bool = Field(default=True, exclude_if=lambda v: v)
     purchase_planning_mode: Literal["exact", "estimated"] = "exact"
@@ -119,6 +120,13 @@ class PlanRequest(BaseModel):
         if len(set(values)) != len(values):
             raise ValueError("Butiks-ID måste vara unika.")
         return values
+
+    @field_validator("recipe_diversity_overrides")
+    @classmethod
+    def validate_recipe_diversity_overrides(cls, values):
+        if values is None:
+            return None
+        return DiversityPolicyOverrides.model_validate(values).model_dump(exclude_unset=True)
 
     @model_validator(mode="after")
     def explicit_store_selection_requires_personal(self):

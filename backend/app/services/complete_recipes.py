@@ -44,7 +44,35 @@ def prepare_request(request, settings, *, pantry_revision=0):
             if limits["max_protein_g"] is not None and limits["max_protein_g"] < limits["min_protein_g"]:
                 raise PolicyConflict("Proteinmålet överstiger måltidens maxgräns. Ändra en av proteingränserna.", code="RECIPE_CHOICES_CONFLICT")
             meal.limits = PortionLimits.model_validate(limits)
-    return request.model_copy(update={"personal": spec, "strategy": "optimized"})
+    from app.models.diversity import DiversityPolicyOverrides
+    overrides = request.recipe_diversity_overrides
+    if overrides is None:
+        # Persist explicit choices once. model_fields_set is not preserved by
+        # ordinary JSON reload; otherwise omitted legacy defaults reappear as
+        # user overrides when a complete plan is explicitly recalculated.
+        values = {key: getattr(request, key) for key in DiversityPolicyOverrides.model_fields
+                  if key in request.model_fields_set}
+        if "max_pairwise_recipe_similarity" in request.model_fields_set and "max_pairwise_culinary_similarity" not in values:
+            values["max_pairwise_culinary_similarity"] = request.max_pairwise_recipe_similarity
+        overrides = DiversityPolicyOverrides.model_validate(values).model_dump(exclude_unset=True)
+    return request.model_copy(update={"personal": spec, "strategy": "optimized", "recipe_diversity_overrides": overrides})
+
+
+def diversity_policy(request, policy):
+    """Keep price goals and explicit limits; judge authored dinners together.
+
+    Repeated rice or a saucepan alone does not make two complete meals copies.
+    Family/main/dish limits and multi-factor near-duplicate rejection remain;
+    Varied still needs real changes versus Balanced within its price ceiling.
+    """
+    if not enabled(request):
+        return policy
+    overrides = request.recipe_diversity_overrides
+    return policy.model_copy(update={
+        "policy_version": "authored-meal-multifactor-v1", "min_cooking_methods": 0,
+        "max_same_cooking_method_meals": None, "max_same_carbohydrate_meals": None,
+        **(overrides or {}),
+    })
 
 
 def identity(recipe):

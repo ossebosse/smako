@@ -2168,6 +2168,9 @@ class PersonalPlanner:
         )
         policy_request = personal_policy_request(self.request, dinner_count)
         policy = self.service._diversity_policy_for(policy_request, self.request.diversity_mode)
+        if self.complete:
+            from app.services.complete_recipes import diversity_policy
+            policy = diversity_policy(self.request, policy)
         if dinner_count < 2:
             policy = policy.model_copy(update={"min_cooking_methods": 0})
         constraints = self.service._culinary_constraints(dinner_pool, policy)
@@ -2290,6 +2293,10 @@ class PersonalPlanner:
         result["checks"]["checkout_audit"] = result["audit"].model_dump(mode="json")
         result["checks"]["allowed_store_ids"] = sorted(self.store_ids)
         if self.complete:
+            result["checks"]["recipe_variation_policy"] = {
+                **policy.model_dump(mode="json"),
+                "description": "Rättfamilj, huvudråvara, beredning, sås/smakprofil och tillbehör bedöms tillsammans. Samma ris eller kastrull är inte ensamt en upprepning. Uttryckliga begränsningar gäller fortfarande.",
+            }
             purchased_items = [item for store in result["basket"].stores for item in store.items]
             cost_known = all(item.merchandise_total is not None and item.purchased_usable_quantity for item in purchased_items)
             used_cost = (float(money(sum(item.merchandise_total * item.required_quantity / item.purchased_usable_quantity
