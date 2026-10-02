@@ -1,0 +1,387 @@
+"""Real browser acceptance against an isolated Smako app; no mocked routes.
+
+Examples:
+  py -3.12 scripts/release_verification/complete_recipe_browser.py --base http://127.0.0.1:8087 --output .local/recipe-browser --browser both --viewport both --view both --allow-nutrition-estimates
+
+The optional restart handshake writes restart-ready-CASE.json. Restart the
+isolated app externally, then write restart-continue-CASE.json containing the
+same run_id. The browser, owner session and immutable revision checks persist.
+This runner never restarts services or changes production configuration.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import time
+import uuid
+from datetime import UTC, datetime
+from pathlib import Path
+from urllib.parse import urlsplit
+
+from playwright.sync_api import TimeoutError as BrowserTimeout
+from playwright.sync_api import expect, sync_playwright
+
+
+def dump(path: Path, value):
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def digest(envelope):
+    return hashlib.sha256(json.dumps({"plan": envelope["plan"], "request": envelope["request"]},
+                                     sort_keys=True).encode()).hexdigest()
+
+
+def is_operation_response(response):
+    path = urlsplit(response.url).path
+    return (response.request.method == "POST" and
+            (path in {"/api/plans", "/api/plan"} or path.endswith(("/change", "/replace-recipe")))) or path.startswith("/api/plan-jobs/")
+
+
+def wait_operation(page, observed, begin, *, timeout, reload_after=None):
+    started = time.monotonic()
+    consumed = begin
+    rows, terminal, pending_urls = [], None, set()
+    reloaded = False
+    while time.monotonic() - started < timeout:
+        while consumed < len(observed):
+            response = observed[consumed]
+            consumed += 1
+            if not is_operation_response(response):
+                continue
+            body = response.json()
+            row = {"url": response.url, "method": response.request.method, "status": response.status,
+                   "request_id": response.headers.get("x-request-id"),
+                   "error_code": response.headers.get("x-error-code"),
+                   "response_ms": response.request.timing.get("responseEnd"),
+                   "observed_after_seconds": round(time.monotonic() - started, 3)}
+            if response.status == 202:
+                pending_urls.add(body["status_url"])
+                row["stage"] = body.get("stage")
+            else:
+                terminal = (response, body)
+            rows.append(row)
+        if terminal:
+            break
+        if pending_urls and reload_after is not None and not reloaded and time.monotonic() - started >= reload_after:
+            page.reload(wait_until="domcontentloaded")
+            reloaded = True
+        page.wait_for_timeout(250)
+    if terminal is None:
+        raise AssertionError(f"No terminal planning response in {timeout} seconds; transport={rows[-4:]}")
+    response, body = terminal
+    envelope = body.get("saved", body)
+    result = {"seconds": round(time.monotonic() - started, 3), "status": response.status,
+              "transport": rows, "job_count": len(pending_urls), "reloaded_during_job": reloaded,
+              "longer_than_minute": time.monotonic() - started > 60,
+              "expensive_post_count": sum(row["method"] == "POST" for row in rows),
+              "all_status_gets_under_10_seconds": all((row["response_ms"] or 0) < 10000
+                                                      for row in rows if row["method"] == "GET")}
+    return result, envelope
+
+
+def read_saved(context, base, plan_id, revision=None):
+    url = f"{base}/api/plans/{plan_id}"
+    if revision is not None:
+        url += f"?revision={revision}"
+    response = context.request.get(url, timeout=30000)
+    assert response.ok, f"Saved readback returned {response.status}"
+    return response.json()
+
+
+def observe_layout(page):
+    return page.evaluate("""() => ({
+      viewport: {width:innerWidth,height:innerHeight},
+      documentWidth:document.documentElement.scrollWidth,
+      noHorizontalPageOverflow:document.documentElement.scrollWidth <= innerWidth,
+      overflowingControls:[...document.querySelectorAll('input,select,button')].filter(el=>{
+        const r=el.getBoundingClientRect();return r.width && getComputedStyle(el).visibility!=='hidden' && (r.right>innerWidth+1||r.left < -1);
+      }).map(el=>({id:el.id,text:(el.textContent||'').slice(0,100)}))
+    })""")
+
+
+def wait_render(page, personal):
+    if personal:
+        expect(page.locator("#plan-content h1")).to_have_text("Din plan", timeout=15000)
+        expect(page.locator("#generate-plan")).to_be_enabled(timeout=15000)
+    else:
+        expect(page.locator("#results")).to_be_visible(timeout=15000)
+        expect(page.locator("#submit-button")).to_be_enabled(timeout=15000)
+
+
+def open_recipes(page, personal):
+    if personal:
+        summaries = page.locator("#plan-content details > summary").filter(has_text="Öppna recept")
+    else:
+        summaries = page.locator("#recipes-list .recipe-card > summary")
+    for summary in summaries.all():
+        if summary.evaluate("el=>!el.parentElement.open"):
+            summary.click()
+    return summaries.count()
+
+
+def assert_recipe_result(envelope, args):
+    plan = envelope["plan"]
+    recipes = plan["recipes"]
+    basket = plan["optimized_basket"]
+    assert len(recipes) == args.dinners and all(recipe["servings"] == args.servings for recipe in recipes)
+    assert 0 <= basket["store_count"] <= args.max_stores
+    assert basket["total_reconciled"] and basket["verification_status"] in {"VERIFIED", "VERIFIED_WITH_ESTIMATES"}
+    for recipe in recipes:
+        assert recipe["ingredients"] and recipe["instructions"] and all(step.strip() for step in recipe["instructions"])
+        assert all(ingredient["quantity"] > 0 and ingredient["unit"] for ingredient in recipe["ingredients"])
+        if args.recipe_mode == "complete":
+            design = recipe["design"]
+            assert args.min_ingredients <= design["ingredient_count"] <= args.max_ingredients
+            if args.cuisines:
+                assert set(design["cuisines"]) & set(args.cuisines)
+            if args.max_minutes:
+                assert design["estimated_minutes"] <= args.max_minutes
+            if not args.allow_fish:
+                assert design["fish"] is False
+            assert design["base_id"] and design["version"] and design["variant_id"]
+    if args.recipe_mode == "complete":
+        preferences = envelope["request"]["recipe_preferences"]
+        assert set(preferences["cuisines"]) == set(args.cuisines)
+        assert preferences["min_ingredients"] == args.min_ingredients
+        assert preferences["max_ingredients"] == args.max_ingredients
+        assert preferences["max_minutes"] == args.max_minutes
+        assert preferences["min_protein_g"] == args.min_protein
+        if args.min_protein is not None:
+            nutrition = plan["personal"]["checks"]["nutrition"]
+            assert len(nutrition) == args.dinners
+            assert all(row["values"]["protein_g"] >= args.min_protein for row in nutrition)
+    return {"recipe_names": [recipe["name"] for recipe in recipes], "total": basket["total"],
+            "store_count": basket["store_count"], "verification_status": basket["verification_status"],
+            "used_ingredient_cost": plan.get("personal", {}).get("checks", {}).get("used_ingredient_cost"),
+            "estimated_rows": sum(row.get("quantity_confidence") == "estimated" for store in basket["stores"] for row in store["items"]),
+            "campaign_rows": sum(row.get("price_mechanism") not in {None, "regular"} or bool(row.get("group_applications"))
+                                 for store in basket["stores"] for row in store["items"])}
+
+
+def run_case(browser, engine, mobile, personal, args):
+    case = f"{engine}-{'mobile' if mobile else 'desktop'}-{'personal' if personal else 'public'}"
+    target = args.output / case
+    target.mkdir(parents=True, exist_ok=True)
+    report = {"case": case, "base": args.base, "started_utc": datetime.now(UTC).isoformat(),
+              "physical_device_test": False, "mocked_routes": False, "run_id": uuid.uuid4().hex}
+    context = browser.new_context(viewport={"width": 390 if mobile else 1280, "height": 844 if mobile else 900},
+                                  is_mobile=mobile, has_touch=mobile, ignore_https_errors=args.ignore_https_errors)
+    page = context.new_page()
+    observed, errors, failures = [], [], []
+    page.on("response", lambda response: observed.append(response))
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.on("requestfailed", lambda request: failures.append({"url": request.url, "method": request.method, "failure": request.failure}))
+    try:
+        page.goto(args.base + ("/personal" if personal else "/"), wait_until="domcontentloaded")
+        if personal:
+            expect(page.locator("#generate-plan")).to_be_enabled(timeout=30000)
+            page.locator('[data-open="choices"]').first.click()
+        elif page.locator("#onboarding-dialog").is_visible():
+            page.locator("#onboarding-cta").click()
+        page.locator("#postal-code").fill(args.postal_code)
+        page.locator("#max-stores").select_option(str(args.max_stores))
+        page.locator("#purchase-planning-mode").select_option(args.purchase_mode)
+        if personal:
+            page.locator("#dinner-count").fill(str(args.dinners))
+            page.locator("#dinner-servings").fill(str(args.servings))
+            page.locator("#dinner-diet").select_option(args.diet)
+            page.locator("#mode").select_option(args.mode)
+            page.locator("#allow-nutrition-estimates").set_checked(args.allow_nutrition_estimates)
+            if args.exclusions:
+                page.locator("#profile-exclusions").fill(", ".join(args.exclusions))
+        else:
+            page.locator("#recipes").select_option(str(args.dinners))
+            page.locator("#servings").fill(str(args.servings))
+            page.locator("#diet-preference").select_option(args.diet)
+            page.locator("#diversity-" + args.mode).check()
+            if args.memberships or args.exclusions:
+                page.locator("details.advanced-options > summary").click()
+            if args.exclusions:
+                page.locator("#excluded-ingredients").fill(", ".join(args.exclusions))
+        for membership in args.memberships:
+            page.locator(f'input[name="membership"][value="{membership}"]').check()
+        if args.recipe_mode == "complete":
+            expect(page.locator("#recipe-style")).to_be_visible(timeout=30000)
+            page.locator("#recipe-style").select_option("complete")
+            for cuisine in args.cuisines:
+                page.locator("#cuisine-" + cuisine).check()
+            page.locator("#recipe-ingredient-preset").select_option("custom")
+            page.locator("#recipe-min-ingredients").fill(str(args.min_ingredients))
+            page.locator("#recipe-max-ingredients").fill(str(args.max_ingredients))
+            if args.max_minutes:
+                page.locator("#recipe-max-minutes").fill(str(args.max_minutes))
+            if args.min_protein is not None:
+                page.locator("#recipe-min-protein").fill(str(args.min_protein))
+            page.locator("#recipe-adaptation").select_option(args.adaptation)
+            page.locator("#recipe-allow-fish").set_checked(args.allow_fish)
+            if not personal:
+                page.locator("#recipe-nutrition-estimates").set_checked(args.allow_nutrition_estimates)
+        page.screenshot(path=str(target / "choices.png"), full_page=True)
+        report["form_layout"] = observe_layout(page)
+        assert report["form_layout"]["noHorizontalPageOverflow"]
+        start = len(observed)
+        page.locator("#generate-plan" if personal else "#submit-button").dblclick()
+        generation, envelope = wait_operation(page, observed, start, timeout=args.timeout, reload_after=args.reload_after)
+        report["generation"] = generation
+        dump(target / "generated.json", envelope)
+        assert generation["status"] < 400, envelope
+        assert generation["expensive_post_count"] == 1
+        assert generation["all_status_gets_under_10_seconds"]
+        if args.require_long_job:
+            assert generation["longer_than_minute"], "Generation was faster than one minute; long-job condition not exercised"
+        if args.require_pending_reload:
+            assert generation["reloaded_during_job"], "Generation completed before a pending-job reload"
+        report["acceptance"] = assert_recipe_result(envelope, args)
+        wait_render(page, personal)
+        assert open_recipes(page, personal) == args.dinners
+        report["recipe_text"] = page.locator("#plan-content" if personal else "#recipes-list").inner_text()
+        report["recipe_layout"] = observe_layout(page)
+        assert report["recipe_layout"]["noHorizontalPageOverflow"]
+        if args.recipe_mode == "complete":
+            assert page.locator(".complete-recipe-content:visible").count() == args.dinners
+            assert page.locator(".recipe-component:visible").count() >= args.dinners
+        page.locator("#plan-content" if personal else "#menu-section").screenshot(path=str(target / "recipes.png"))
+        if personal:
+            page.get_by_role("button", name="Öppna inköpslistan", exact=True).click()
+        report["shopping_text"] = page.locator("#shopping-content" if personal else "#shopping-section").inner_text()
+        page.locator("#shopping-content" if personal else "#shopping-section").screenshot(path=str(target / "shopping.png"))
+        originals = {envelope["revision"]: envelope}
+        assert digest(read_saved(context, args.base, envelope["plan_id"])) == digest(envelope)
+        page.reload(wait_until="domcontentloaded")
+        wait_render(page, personal)
+        report["identical_saved_reload"] = digest(read_saved(context, args.base, envelope["plan_id"])) == digest(envelope)
+        assert report["identical_saved_reload"]
+        if not args.skip_mutations:
+            if personal:
+                page.locator('.personal-nav [data-open="plan"]').click()
+            open_recipes(page, personal)
+            previous = envelope
+            start = len(observed)
+            page.get_by_role("button", name="Byt recept och räkna om inköpen", exact=True).first.click()
+            replacement, envelope = wait_operation(page, observed, start, timeout=args.timeout)
+            report["replacement"] = replacement
+            dump(target / "replacement.json", envelope)
+            assert replacement["status"] < 400, envelope
+            assert envelope["plan_id"] == previous["plan_id"] and envelope["revision"] > previous["revision"]
+            assert envelope["plan"]["recipes"] != previous["plan"]["recipes"]
+            assert_recipe_result(envelope, args)
+            originals[envelope["revision"]] = envelope
+            wait_render(page, personal)
+            previous = envelope
+            start = len(observed)
+            page.get_by_role("button", name="Räkna om med aktuellt skafferi/pris" if personal else "Räkna om inköpslistan", exact=True).click()
+            recalculation, envelope = wait_operation(page, observed, start, timeout=args.timeout)
+            report["recalculation"] = recalculation
+            dump(target / "recalculated.json", envelope)
+            assert recalculation["status"] < 400, envelope
+            assert envelope["plan_id"] == previous["plan_id"] and envelope["revision"] > previous["revision"]
+            assert_recipe_result(envelope, args)
+            originals[envelope["revision"]] = envelope
+            wait_render(page, personal)
+        report["revision_hashes"] = {str(revision): digest(value) for revision, value in originals.items()}
+        for revision, value in originals.items():
+            assert digest(read_saved(context, args.base, envelope["plan_id"], revision)) == digest(value)
+        if args.restart_handshake:
+            ready = args.output / f"restart-ready-{case}.json"
+            resume = args.output / f"restart-continue-{case}.json"
+            dump(ready, {"run_id": report["run_id"], "case": case, "plan_id": envelope["plan_id"],
+                         "revision_hashes": report["revision_hashes"], "continue_path": str(resume)})
+            print(json.dumps({"waiting_for_isolated_restart": str(ready), "run_id": report["run_id"]}), flush=True)
+            deadline = time.monotonic() + args.timeout
+            while time.monotonic() < deadline:
+                try:
+                    if json.loads(resume.read_text(encoding="utf-8"))["run_id"] == report["run_id"]:
+                        break
+                except (FileNotFoundError, ValueError, KeyError):
+                    pass
+                page.wait_for_timeout(500)
+            else:
+                raise AssertionError("Isolated restart handshake not completed")
+            page.reload(wait_until="domcontentloaded")
+            wait_render(page, personal)
+            for revision, value in originals.items():
+                assert digest(read_saved(context, args.base, envelope["plan_id"], revision)) == digest(value)
+            report["identical_after_external_app_restart"] = True
+        # A separate clean owner must not gain access to the saved private result.
+        other = browser.new_context(ignore_https_errors=args.ignore_https_errors)
+        other.request.get(args.base + "/", timeout=30000)
+        denied = other.request.get(f"{args.base}/api/plans/{envelope['plan_id']}", timeout=30000)
+        report["other_owner_status"] = denied.status
+        assert denied.status in {403, 404}
+        other.close()
+        assert not errors, errors
+        report["outcome"] = "PASS"
+    except Exception as error:  # noqa: BLE001 - retain first-stop evidence even for unexpected browser errors
+        report["outcome"] = "FAIL"
+        report["first_stop"] = str(error)
+        try:
+            report["failure_visible_text"] = page.locator("body").inner_text(timeout=3000)
+            page.screenshot(path=str(target / "failure.png"), full_page=True, timeout=10000)
+        except BrowserTimeout:
+            pass
+    finally:
+        report["page_errors"] = errors
+        report["network_failures"] = failures
+        report["finished_utc"] = datetime.now(UTC).isoformat()
+        dump(target / "report.json", report)
+        print(json.dumps({"case": case, "outcome": report["outcome"], "first_stop": (report.get("first_stop") or "")[:500],
+                          "seconds": report.get("generation", {}).get("seconds"), "report": str(target / "report.json")}), flush=True)
+        context.close()
+    return report
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--base", required=True)
+    parser.add_argument("--output", type=Path, required=True, help="Private ignored evidence directory")
+    parser.add_argument("--browser", choices=["chromium", "webkit", "both"], default="chromium")
+    parser.add_argument("--viewport", choices=["desktop", "mobile", "both"], default="mobile")
+    parser.add_argument("--view", choices=["public", "personal", "both"], default="public")
+    parser.add_argument("--postal-code", default="22350")
+    parser.add_argument("--dinners", type=int, default=5)
+    parser.add_argument("--servings", type=int, default=2)
+    parser.add_argument("--max-stores", type=int, default=2)
+    parser.add_argument("--recipe-mode", choices=["legacy", "complete"], default="complete")
+    parser.add_argument("--cuisines", nargs="*", default=["greek", "mexican"])
+    parser.add_argument("--min-ingredients", type=int, default=10)
+    parser.add_argument("--max-ingredients", type=int, default=15)
+    parser.add_argument("--max-minutes", type=int)
+    parser.add_argument("--min-protein", type=float)
+    parser.add_argument("--adaptation", choices=["products", "approved"], default="approved")
+    parser.add_argument("--allow-fish", action="store_true")
+    parser.add_argument("--allow-nutrition-estimates", action="store_true")
+    parser.add_argument("--mode", choices=["cheapest", "balanced", "varied"], default="cheapest")
+    parser.add_argument("--diet", choices=["mixed", "vegetarian", "vegan"], default="mixed")
+    parser.add_argument("--purchase-mode", choices=["exact", "estimated"], default="exact")
+    parser.add_argument("--memberships", nargs="*", default=[])
+    parser.add_argument("--exclusions", nargs="*", default=[])
+    parser.add_argument("--timeout", type=int, default=900)
+    parser.add_argument("--reload-after", type=float, default=3)
+    parser.add_argument("--require-long-job", action="store_true")
+    parser.add_argument("--require-pending-reload", action="store_true")
+    parser.add_argument("--skip-mutations", action="store_true")
+    parser.add_argument("--restart-handshake", action="store_true")
+    parser.add_argument("--ignore-https-errors", action="store_true")
+    parser.add_argument("--allow-nonlocal-isolated-target", action="store_true")
+    args = parser.parse_args()
+    args.base = args.base.rstrip("/")
+    if not args.allow_nonlocal_isolated_target and urlsplit(args.base).hostname not in {"localhost", "127.0.0.1", "::1"}:
+        parser.error("Use an isolated local app, or explicitly identify a nonlocal isolated target with --allow-nonlocal-isolated-target")
+    if args.recipe_mode == "legacy" and not args.skip_mutations:
+        parser.error("Legacy long-job coverage uses --skip-mutations; complete revision controls apply to complete mode")
+    args.output.mkdir(parents=True, exist_ok=True)
+    results = []
+    with sync_playwright() as pw:
+        for engine in ("chromium", "webkit") if args.browser == "both" else (args.browser,):
+            browser = getattr(pw, engine).launch()
+            for mobile in (False, True) if args.viewport == "both" else (args.viewport == "mobile",):
+                for personal in (False, True) if args.view == "both" else (args.view == "personal",):
+                    results.append(run_case(browser, engine, mobile, personal, args))
+            browser.close()
+    dump(args.output / "summary.json", [{key: row.get(key) for key in ("case", "outcome", "first_stop", "generation", "acceptance")} for row in results])
+    raise SystemExit(0 if all(row["outcome"] == "PASS" for row in results) else 1)
+
+
+if __name__ == "__main__":
+    main()
