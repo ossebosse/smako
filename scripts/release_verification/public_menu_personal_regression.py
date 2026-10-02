@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import ssl
 import time
 from pathlib import Path
 
@@ -11,11 +12,14 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--base',default='https://beta.smako.nu')
 parser.add_argument('--inputs',type=Path,required=True)
 parser.add_argument('--output',type=Path,required=True)
+parser.add_argument('--ca-file',type=Path,help='Trust the isolated candidate TLS CA without disabling verification')
+parser.add_argument('--origin',help='Configured application origin for an isolated transport alias')
 args=parser.parse_args()
 inputs=json.loads(args.inputs.read_bytes())['cases']
 assert len(inputs)==4
 report={'path':'separate PersonalPlanner API regression','cases':[]}
-with httpx.Client(base_url=args.base,timeout=540,headers={'Origin':args.base}) as client:
+verify = ssl.create_default_context(cafile=str(args.ca_file)) if args.ca_file else True
+with httpx.Client(base_url=args.base,timeout=540,headers={'Origin':args.origin or args.base},verify=verify) as client:
     for case in inputs:
         request=case['request']
         personal=request['personal']

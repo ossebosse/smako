@@ -1,0 +1,206 @@
+[
+  {
+    "case": "mobile-six-balanced",
+    "started_utc": "2026-10-02T09:07:58.473821+00:00",
+    "browser": "webkit isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "mobile_emulation": true,
+    "physical_iphone_test": false,
+    "url": "https://localhost:18443/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "balanced",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "status": 201,
+    "seconds": 336.25,
+    "headers": {
+      "content-type": "application/json",
+      "x-request-id": "7d0adc85-856e-49a9-b2c3-4781d157f60c"
+    },
+    "initial_response": {
+      "status": 202,
+      "body": {
+        "status": "pending",
+        "status_url": "/api/plan-jobs/4d6a8226204144e1966afecb8e0e4a23",
+        "request_id": "195a4eec-e5b4-4505-90b0-d1cb80337b89"
+      },
+      "request_id": "195a4eec-e5b4-4505-90b0-d1cb80337b89"
+    },
+    "initial_rejection": {
+      "url": "https://localhost:18443/api/plans",
+      "method": "POST",
+      "request": {
+        "postal_code": "22222",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 3,
+        "purchase_planning_mode": "exact",
+        "diet_preference": "mixed",
+        "availability_mode": "normal",
+        "avoid_ingredients": [],
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "use_member_prices": true,
+        "memberships": [
+          "CITY_GROSS_PRIO",
+          "COOP_MEMBER",
+          "HEMKOP_MEMBER",
+          "ICA_STAMMIS",
+          "LIDL_PLUS",
+          "WILLYS_PLUS"
+        ],
+        "optimization_iterations": 1,
+        "strategy": "optimized",
+        "candidate_recipe_count": 80,
+        "beam_width": 30,
+        "debug": false
+      },
+      "status": 422,
+      "body": {
+        "detail": [
+          {
+            "loc": [
+              "body",
+              "postal_code"
+            ],
+            "msg": "Det finns inget aktiverat prisområde för postnumret. Tillgängliga postnummer i betan: 22350",
+            "type": "value_error"
+          }
+        ]
+      },
+      "seconds": 1.39,
+      "headers": {
+        "x-error-code": "form_validation_error",
+        "x-request-id": "35db129e-e6eb-42bf-8fd1-e4db1cb91931"
+      },
+      "message": "Postnummer: Det finns inget aktiverat prisområde för postnumret. Tillgängliga postnummer i betan: 22350. Fel-ID: 35db129e-e6eb-42bf-8fd1-e4db1cb91931",
+      "postal_invalid": "true",
+      "submit_enabled": true
+    },
+    "acceptance": {
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": [],
+    "total": 168.55,
+    "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+    "transport_responses": 147
+  },
+  {
+    "case": "mobile-six-cheapest",
+    "started_utc": "2026-10-02T09:14:44.210028+00:00",
+    "browser": "webkit isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "mobile_emulation": true,
+    "physical_iphone_test": false,
+    "url": "https://localhost:18443/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "cheapest",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "status": 201,
+    "seconds": 3.547,
+    "headers": {
+      "content-type": "application/json",
+      "x-request-id": "98c103af-43f5-4909-8d90-fd4f9add2c3c"
+    },
+    "initial_response": {
+      "status": 202,
+      "body": {
+        "status": "pending",
+        "status_url": "/api/plan-jobs/a0e06c9fe49a421c9af3dd9462e0d0e5",
+        "request_id": "fa4e0a0e-cf61-4c77-9408-e26be99e2f2f"
+      },
+      "request_id": "fa4e0a0e-cf61-4c77-9408-e26be99e2f2f"
+    },
+    "initial_rejection": null,
+    "acceptance": {
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": [],
+    "total": 125.1,
+    "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+    "transport_responses": 2
+  }
+]

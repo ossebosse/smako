@@ -1,0 +1,844 @@
+{
+  "path": "Separate synchronous PersonalPlanner API regressions in isolated candidate, not public-button acceptance",
+  "image": "sha256:80e8ba59c9b04c8bff668062da2bf1937eae236881472449e2a0180f42387180",
+  "full_evidence": ".local\\public-menu-followup-20261002\\personal-candidate-after.json",
+  "transport": "HTTPS loopback alias with candidate CA validation and configured application Origin; production settings and read-only prices retained",
+  "cases": [
+    {
+      "case": "original-exact",
+      "status": 201,
+      "seconds": 186.172,
+      "request_id": "e3ddae1bbadf4b6da7936a47e3dd53b6",
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 0,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "exact"
+      },
+      "total": 440.72,
+      "stores": 2,
+      "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+      "plan_sha256": "dfe50be56ee6944a07f37a8102c6d5fbb2e8791912a2bcd17b1688bf27e0f4d0",
+      "identical_reload": true,
+      "checkout": {
+        "passed": true,
+        "totals_reconciled": true,
+        "verification_status": "VERIFIED",
+        "unknown_quantities": 0,
+        "deficits": []
+      },
+      "protein_checks": [
+        {
+          "slot_id": "dinner-1",
+          "protein_g": 41.96522717647059,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-2",
+          "protein_g": 40.8,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-3",
+          "protein_g": 41.94,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-4",
+          "protein_g": 46.125,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-5",
+          "protein_g": 46.175,
+          "minimum": 40
+        },
+        {
+          "slot_id": "breakfast-1",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-2",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-3",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-4",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-5",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "snack-1",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-2",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-3",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-4",
+          "protein_g": 22.0,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-5",
+          "protein_g": 22.0,
+          "minimum": 20
+        }
+      ]
+    },
+    {
+      "case": "original-estimated",
+      "status": 201,
+      "seconds": 201.891,
+      "request_id": "d34d5b35e3d148fc8ba67f8b10a6339d",
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 1,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "estimated"
+      },
+      "total": 440.72,
+      "stores": 2,
+      "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+      "plan_sha256": "028735cab2b394c12ae6537eb181662c921cf3b00746478589afccb05d614a0f",
+      "identical_reload": true,
+      "checkout": {
+        "passed": true,
+        "totals_reconciled": true,
+        "verification_status": "VERIFIED",
+        "unknown_quantities": 0,
+        "deficits": []
+      },
+      "protein_checks": [
+        {
+          "slot_id": "dinner-1",
+          "protein_g": 41.96522717647059,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-2",
+          "protein_g": 40.8,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-3",
+          "protein_g": 41.94,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-4",
+          "protein_g": 46.125,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-5",
+          "protein_g": 46.175,
+          "minimum": 40
+        },
+        {
+          "slot_id": "breakfast-1",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-2",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-3",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-4",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-5",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "snack-1",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-2",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-3",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-4",
+          "protein_g": 22.0,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-5",
+          "protein_g": 22.0,
+          "minimum": 20
+        }
+      ]
+    },
+    {
+      "case": "plus-exact",
+      "status": 201,
+      "seconds": 176.532,
+      "request_id": "0c42b3c816e84e72b9e5d701c5696d93",
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": {
+          "willys": true,
+          "lidl": true
+        },
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 2,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "exact"
+      },
+      "total": 440.72,
+      "stores": 2,
+      "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+      "plan_sha256": "817dfb3ebaa4416e8823e56955b7ce165568e8a68c038987c1c95f7831ab11a7",
+      "identical_reload": true,
+      "checkout": {
+        "passed": true,
+        "totals_reconciled": true,
+        "verification_status": "VERIFIED",
+        "unknown_quantities": 0,
+        "deficits": []
+      },
+      "protein_checks": [
+        {
+          "slot_id": "dinner-1",
+          "protein_g": 41.96522717647059,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-2",
+          "protein_g": 40.8,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-3",
+          "protein_g": 41.94,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-4",
+          "protein_g": 46.125,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-5",
+          "protein_g": 46.175,
+          "minimum": 40
+        },
+        {
+          "slot_id": "breakfast-1",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-2",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-3",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-4",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-5",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "snack-1",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-2",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-3",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-4",
+          "protein_g": 22.0,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-5",
+          "protein_g": 22.0,
+          "minimum": 20
+        }
+      ]
+    },
+    {
+      "case": "plus-estimated",
+      "status": 201,
+      "seconds": 197.359,
+      "request_id": "585bc8df46c5429b9394804708560c09",
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": {
+          "willys": true,
+          "lidl": true
+        },
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 3,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "estimated"
+      },
+      "total": 440.72,
+      "stores": 2,
+      "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+      "plan_sha256": "3ef59b54ea738ff40cebe95816f6689e5ff7096a99765483567c5b72cac81d37",
+      "identical_reload": true,
+      "checkout": {
+        "passed": true,
+        "totals_reconciled": true,
+        "verification_status": "VERIFIED",
+        "unknown_quantities": 0,
+        "deficits": []
+      },
+      "protein_checks": [
+        {
+          "slot_id": "dinner-1",
+          "protein_g": 41.96522717647059,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-2",
+          "protein_g": 40.8,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-3",
+          "protein_g": 41.94,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-4",
+          "protein_g": 46.125,
+          "minimum": 40
+        },
+        {
+          "slot_id": "dinner-5",
+          "protein_g": 46.175,
+          "minimum": 40
+        },
+        {
+          "slot_id": "breakfast-1",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-2",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-3",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-4",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "breakfast-5",
+          "protein_g": 35.5,
+          "minimum": 30
+        },
+        {
+          "slot_id": "snack-1",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-2",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-3",
+          "protein_g": 25.3,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-4",
+          "protein_g": 22.0,
+          "minimum": 20
+        },
+        {
+          "slot_id": "snack-5",
+          "protein_g": 22.0,
+          "minimum": 20
+        }
+      ]
+    }
+  ],
+  "backend_metrics": [
+    {
+      "created_at": "2026-10-02T09:27:24.277018+00:00",
+      "request_id": "0c42b3c816e84e72b9e5d701c5696d93",
+      "endpoint": "/api/plans",
+      "method": "POST",
+      "status_code": 201,
+      "duration_ms": 175758.778,
+      "error_code": null,
+      "build_id": "74c9077001b3084317f36630fd38ce48e4663473"
+    },
+    {
+      "created_at": "2026-10-02T09:30:42.376784+00:00",
+      "request_id": "585bc8df46c5429b9394804708560c09",
+      "endpoint": "/api/plans",
+      "method": "POST",
+      "status_code": 201,
+      "duration_ms": 196361.802,
+      "error_code": null,
+      "build_id": "74c9077001b3084317f36630fd38ce48e4663473"
+    },
+    {
+      "created_at": "2026-10-02T09:24:26.788379+00:00",
+      "request_id": "d34d5b35e3d148fc8ba67f8b10a6339d",
+      "endpoint": "/api/plans",
+      "method": "POST",
+      "status_code": 201,
+      "duration_ms": 200894.469,
+      "error_code": null,
+      "build_id": "74c9077001b3084317f36630fd38ce48e4663473"
+    },
+    {
+      "created_at": "2026-10-02T09:21:04.647864+00:00",
+      "request_id": "e3ddae1bbadf4b6da7936a47e3dd53b6",
+      "endpoint": "/api/plans",
+      "method": "POST",
+      "status_code": 201,
+      "duration_ms": 185568.978,
+      "error_code": null,
+      "build_id": "74c9077001b3084317f36630fd38ce48e4663473"
+    }
+  ]
+}

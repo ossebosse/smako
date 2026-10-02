@@ -95,6 +95,8 @@ def main():
                       'mobile_emulation': mobile, 'physical_iphone_test': False,
                       'available_memberships': available, 'form': fields, 'url': request.url if request else None,
                       'method': request.method if request else None, 'request': request.post_data_json if request else None,
+                      'request_headers': {k: v for k, v in (request.headers if request else {}).items()
+                                          if k in {'accept', 'content-type', 'prefer', 'x-request-id'}},
                       'status': response.status if response else None, 'body': body, 'seconds': round(time.monotonic()-started, 3),
                       'headers': {k: v for k, v in (response.headers if response else request.headers if request else {}).items() if k in {'x-request-id','x-error-code','content-type','retry-after'}},
                       'page_errors': errors}
@@ -103,7 +105,8 @@ def main():
             report['initial_response'] = {'status': initial.status, 'body': initial.json() if initial.status == 202 else None,
                                           'request_id': initial.headers.get('x-request-id')} if initial else None
             report['transport'] = [{'url': r.url, 'method': r.request.method, 'status': r.status,
-                                    'request_id': r.headers.get('x-request-id'), 'error_code': r.headers.get('x-error-code')}
+                                    'request_id': r.headers.get('x-request-id'), 'error_code': r.headers.get('x-error-code'),
+                                    'elapsed_ms': r.request.timing['responseEnd']}
                                    for r in responses]
             if response and response.status < 400:
                 page.locator('#submit-button:not([disabled])').wait_for(timeout=10000)

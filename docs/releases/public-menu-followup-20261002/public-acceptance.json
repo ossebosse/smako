@@ -1,0 +1,2946 @@
+[
+  {
+    "case": "mobile-six-balanced",
+    "started_utc": "2026-10-02T09:16:23.009783+00:00",
+    "browser": "webkit isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "mobile_emulation": true,
+    "physical_iphone_test": false,
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "balanced",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "request_headers": {
+      "accept": "application/json",
+      "content-type": "application/json",
+      "x-request-id": "30fa32ef-4aad-4c7c-ae9f-d17c02d98f9a",
+      "prefer": "respond-async"
+    },
+    "status": 201,
+    "seconds": 338.359,
+    "headers": {
+      "content-type": "application/json",
+      "x-request-id": "f66227a7-cc29-4f07-94be-31dd176b9819"
+    },
+    "initial_response": {
+      "status": 202,
+      "body": {
+        "status": "pending",
+        "status_url": "/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "request_id": "30fa32ef-4aad-4c7c-ae9f-d17c02d98f9a"
+      },
+      "request_id": "30fa32ef-4aad-4c7c-ae9f-d17c02d98f9a"
+    },
+    "initial_rejection": {
+      "url": "https://beta.smako.nu/api/plans",
+      "method": "POST",
+      "request": {
+        "postal_code": "22222",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 3,
+        "purchase_planning_mode": "exact",
+        "diet_preference": "mixed",
+        "availability_mode": "normal",
+        "avoid_ingredients": [],
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "use_member_prices": true,
+        "memberships": [
+          "CITY_GROSS_PRIO",
+          "COOP_MEMBER",
+          "HEMKOP_MEMBER",
+          "ICA_STAMMIS",
+          "LIDL_PLUS",
+          "WILLYS_PLUS"
+        ],
+        "optimization_iterations": 1,
+        "strategy": "optimized",
+        "candidate_recipe_count": 80,
+        "beam_width": 30,
+        "debug": false
+      },
+      "status": 422,
+      "body": {
+        "detail": [
+          {
+            "loc": [
+              "body",
+              "postal_code"
+            ],
+            "msg": "Det finns inget aktiverat prisområde för postnumret. Tillgängliga postnummer i betan: 22350",
+            "type": "value_error"
+          }
+        ]
+      },
+      "seconds": 1.188,
+      "headers": {
+        "x-error-code": "form_validation_error",
+        "x-request-id": "52e2d325-181a-48a5-83b2-5b1bb4e7b943"
+      },
+      "message": "Postnummer: Det finns inget aktiverat prisområde för postnumret. Tillgängliga postnummer i betan: 22350. Fel-ID: 52e2d325-181a-48a5-83b2-5b1bb4e7b943",
+      "postal_invalid": "true",
+      "submit_enabled": true
+    },
+    "acceptance": {
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": [],
+    "quality_label": "✓\nMatkasse verifierad\n\nAlla valda produkter har säkra semantiska matchningar och härledda eller exakta inköpsmängder.",
+    "total": 168.55,
+    "stores": 3,
+    "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+    "transport_responses": 155,
+    "longest_http_ms": 4932.231,
+    "transport": [
+      {
+        "url": "https://beta.smako.nu/api/plans",
+        "method": "POST",
+        "status": 202,
+        "request_id": "30fa32ef-4aad-4c7c-ae9f-d17c02d98f9a",
+        "error_code": null,
+        "elapsed_ms": 4932.231
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "40e3fe0c-88e8-4470-a416-f5c79499fd41",
+        "error_code": null,
+        "elapsed_ms": 131.549
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "aa915f3b-a422-4b73-ac54-537698e04a2b",
+        "error_code": null,
+        "elapsed_ms": 130.783
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a2770289-5c65-4e76-9e5b-417b0a231702",
+        "error_code": null,
+        "elapsed_ms": 127.9
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "086915b3-b921-4e25-ad41-86290483e64b",
+        "error_code": null,
+        "elapsed_ms": 129.396
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6e1e3a83-44a9-4431-9d82-3689d9990bb7",
+        "error_code": null,
+        "elapsed_ms": 132.515
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "09a81303-72a6-4b8b-bdf8-4edb57af7da0",
+        "error_code": null,
+        "elapsed_ms": 139.108
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e1f735af-3d79-4af3-8d08-51d7d9a7b3f2",
+        "error_code": null,
+        "elapsed_ms": 114.691
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c3f6d908-7721-4a5a-8188-ae7588e85f01",
+        "error_code": null,
+        "elapsed_ms": 148.033
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e81580e5-4d1b-417a-befd-1198b7f0c625",
+        "error_code": null,
+        "elapsed_ms": 90.778
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "56f18c70-7787-40e1-966f-8ea553acb478",
+        "error_code": null,
+        "elapsed_ms": 593.291
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a9db94b9-2741-4f0a-b874-5524131a531c",
+        "error_code": null,
+        "elapsed_ms": 123.875
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e1036649-c1ae-4b79-8377-5f367eaee448",
+        "error_code": null,
+        "elapsed_ms": 144.972
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4b97f87c-a032-4342-9fe8-a9ee5a639019",
+        "error_code": null,
+        "elapsed_ms": 95.325
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "30e653f0-a15d-4ecd-be48-0c300239b78d",
+        "error_code": null,
+        "elapsed_ms": 164.806
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6c1b8e88-1f10-4a0d-a2ff-f36df2724476",
+        "error_code": null,
+        "elapsed_ms": 85.316
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "deb7a620-31aa-44d5-8ef9-64e272383401",
+        "error_code": null,
+        "elapsed_ms": 86.543
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "974c0179-4f26-4e8d-9735-65206aedb322",
+        "error_code": null,
+        "elapsed_ms": 129.184
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4c2ed28b-9737-4551-b366-c7f220929303",
+        "error_code": null,
+        "elapsed_ms": 129.646
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "2ec62d3c-86b6-4f27-a475-3e742d1761fa",
+        "error_code": null,
+        "elapsed_ms": 242.711
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c5b2897c-6397-455e-9182-58e46f1e10dc",
+        "error_code": null,
+        "elapsed_ms": 88.742
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "bcf0f490-df1a-4854-9cb3-ba88047194cf",
+        "error_code": null,
+        "elapsed_ms": 166.742
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "81fded60-1d69-4202-a612-7f5d09253e92",
+        "error_code": null,
+        "elapsed_ms": 114.479
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "25c59e86-d662-4cc5-930b-266ac1ca3873",
+        "error_code": null,
+        "elapsed_ms": 152.974
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "2048202e-49fb-49b1-9c7a-b2fed1aa4a00",
+        "error_code": null,
+        "elapsed_ms": 145.93
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1a5a98f7-18ea-4eda-a80d-5dcfe75e9e48",
+        "error_code": null,
+        "elapsed_ms": 126.277
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "98f8ec4d-e5e4-4c0e-92e3-3b7d5f51059c",
+        "error_code": null,
+        "elapsed_ms": 123.509
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c6f0b82b-2447-42d5-90c5-522b6c4f9143",
+        "error_code": null,
+        "elapsed_ms": 134.093
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a1a824c0-bbb9-4a0d-960b-5b6e580e0fc1",
+        "error_code": null,
+        "elapsed_ms": 132.382
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "58759493-ca15-42e4-9c52-97625a05534b",
+        "error_code": null,
+        "elapsed_ms": 134.459
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f6045f27-b7cf-4d79-b183-b460d9c871ad",
+        "error_code": null,
+        "elapsed_ms": 132.225
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "2a4c8816-7f4d-48db-9a16-88040316a280",
+        "error_code": null,
+        "elapsed_ms": 134.082
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "509f01be-df2b-4cf6-b8a5-e3b3bbd5b654",
+        "error_code": null,
+        "elapsed_ms": 130.346
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1fcecb00-ad6d-49e9-8f5e-4570d4b8397a",
+        "error_code": null,
+        "elapsed_ms": 128.707
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "bc4461fe-ff18-4f4b-8645-42c5108c3fa7",
+        "error_code": null,
+        "elapsed_ms": 130.04
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ef7f6d54-0c59-46ca-a379-44ea63cf37ec",
+        "error_code": null,
+        "elapsed_ms": 129.662
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "0155a261-ef77-474f-95f3-b49340750a5c",
+        "error_code": null,
+        "elapsed_ms": 100.731
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "314a693a-ef6d-439f-b4d3-e5de5957a3b5",
+        "error_code": null,
+        "elapsed_ms": 151.273
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a8ab410d-4bdd-432e-aaa1-111c29e9a071",
+        "error_code": null,
+        "elapsed_ms": 312.94
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "991c8f8f-8567-40b8-961b-f1bb730cd4c4",
+        "error_code": null,
+        "elapsed_ms": 97.62
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6710b51c-3833-4b12-b9cc-08c1bd6c0c61",
+        "error_code": null,
+        "elapsed_ms": 93.245
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "bd6ecc79-d839-41b2-9b45-c7dec67e2964",
+        "error_code": null,
+        "elapsed_ms": 94.881
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "abe9511e-547a-461b-a978-f8045da96e0a",
+        "error_code": null,
+        "elapsed_ms": 211.33
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "8b03cb7e-deb1-4432-9bf7-196e48c8f1fc",
+        "error_code": null,
+        "elapsed_ms": 92.831
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "0a2340ec-f69f-4dc5-beae-fc55e4904b0e",
+        "error_code": null,
+        "elapsed_ms": 127.637
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4040b606-165a-4a1c-a5c7-96be6f2a860d",
+        "error_code": null,
+        "elapsed_ms": 126.42
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b4374836-c9f6-4ff2-b303-6e97215a76ad",
+        "error_code": null,
+        "elapsed_ms": 126.613
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "91aee61b-ede4-44a0-a52c-d71144cf2990",
+        "error_code": null,
+        "elapsed_ms": 129.73
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4013c676-b1a6-4c2a-928f-3fd88e19a388",
+        "error_code": null,
+        "elapsed_ms": 91.936
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "81868e88-991f-4fd1-b8c2-f482c485140f",
+        "error_code": null,
+        "elapsed_ms": 82.876
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7a7b9451-677a-4a6a-abea-5fb3a0dacdf4",
+        "error_code": null,
+        "elapsed_ms": 298.397
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "dee22b57-d85c-42bf-acb3-13ef63ec5401",
+        "error_code": null,
+        "elapsed_ms": 251.015
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "641a0695-2d12-4dda-9e30-97fbef1d731c",
+        "error_code": null,
+        "elapsed_ms": 124.809
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c9b4adaf-20ea-4730-9d23-6188994e7abf",
+        "error_code": null,
+        "elapsed_ms": 125.444
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "89c64203-363c-42e0-b1dc-e765597fb8ff",
+        "error_code": null,
+        "elapsed_ms": 122.604
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7e6b6303-ddb7-4275-9dbd-6d551ef9f1f9",
+        "error_code": null,
+        "elapsed_ms": 136.02
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c537dd13-8eb5-44c9-92a8-5edb5e8e579a",
+        "error_code": null,
+        "elapsed_ms": 136.47
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "87c90aeb-303a-478f-9a6b-8b5128cffef7",
+        "error_code": null,
+        "elapsed_ms": 139.286
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "28a625ed-507a-48db-ae5f-5e14c32149f3",
+        "error_code": null,
+        "elapsed_ms": 136.873
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c438268e-0a90-4a00-9b97-e3fe45f92ee0",
+        "error_code": null,
+        "elapsed_ms": 136.968
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "0e98f6d9-5d58-4625-9a58-9e11a9576d91",
+        "error_code": null,
+        "elapsed_ms": 133.963
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f715d9ab-6ba5-4dd6-bc92-369f93b54f15",
+        "error_code": null,
+        "elapsed_ms": 86.132
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b6782282-de31-46b6-a7d7-01295136e9c2",
+        "error_code": null,
+        "elapsed_ms": 94.191
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "2623059e-85e4-4320-844c-93a1f11df65d",
+        "error_code": null,
+        "elapsed_ms": 90.332
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "3438c3ed-4454-4364-aacc-1e9d641c9a15",
+        "error_code": null,
+        "elapsed_ms": 95.584
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b6fa4e10-74e0-448b-94f4-4612930b09eb",
+        "error_code": null,
+        "elapsed_ms": 88.507
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ff684165-3969-45e9-836f-a812574b1f7e",
+        "error_code": null,
+        "elapsed_ms": 132.276
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1d5ca556-57dd-4807-b6d8-45a7ef74d3c9",
+        "error_code": null,
+        "elapsed_ms": 96.256
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6bd5e151-e78c-4487-8fa6-59df41ed916d",
+        "error_code": null,
+        "elapsed_ms": 159.15
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "2fbe010a-4361-4c55-90dc-2fc2d6cf1d69",
+        "error_code": null,
+        "elapsed_ms": 135.086
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7bb536d7-b017-487c-a779-1bdd5d633e83",
+        "error_code": null,
+        "elapsed_ms": 87.508
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "82def39b-97a6-4e0b-bdbc-53f9d840947f",
+        "error_code": null,
+        "elapsed_ms": 91.211
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c352927f-cd71-4eaa-a4ba-95f0632da150",
+        "error_code": null,
+        "elapsed_ms": 123.935
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "027874e9-2bbe-4e50-ad4b-476e6f355047",
+        "error_code": null,
+        "elapsed_ms": 122.222
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "230e1f70-10ac-4d25-ad8a-6ff11b8f443e",
+        "error_code": null,
+        "elapsed_ms": 134.111
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "83b66545-f76f-4d3c-89a0-70a6c47c8fec",
+        "error_code": null,
+        "elapsed_ms": 269.478
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c3c830fe-8725-4b09-9bcf-c8cc3f9d1efb",
+        "error_code": null,
+        "elapsed_ms": 90.888
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "423797fa-c7ac-486e-9011-c6f95e431357",
+        "error_code": null,
+        "elapsed_ms": 150.477
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a30888b0-9469-428e-a8c7-ba2fd3538d90",
+        "error_code": null,
+        "elapsed_ms": 121.885
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a133c8c5-7cd6-4216-be6a-7081c8c1ddee",
+        "error_code": null,
+        "elapsed_ms": 146.431
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4e9b31a1-73ba-4507-8a8b-0a91df339a0c",
+        "error_code": null,
+        "elapsed_ms": 130.437
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "8f0c0d64-b2b7-41c4-9591-b0f2ac296852",
+        "error_code": null,
+        "elapsed_ms": 143.552
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d3319224-0546-46ec-8c61-ced2b8000f06",
+        "error_code": null,
+        "elapsed_ms": 112.986
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e2c8928b-f842-4985-ae90-eb4a5b91e61f",
+        "error_code": null,
+        "elapsed_ms": 131.898
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1f1382c3-9594-49e6-8e52-07c331fc954d",
+        "error_code": null,
+        "elapsed_ms": 121.926
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "5755c9ef-abee-42f6-9498-e6840b4d7743",
+        "error_code": null,
+        "elapsed_ms": 137.95
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c27a8ea4-de48-4f48-b2d4-45e063bbf26b",
+        "error_code": null,
+        "elapsed_ms": 145.838
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "20af9740-a43f-4649-bfdd-1ac3d4e283e0",
+        "error_code": null,
+        "elapsed_ms": 127.499
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "22cbaea0-da85-4d46-9860-b28827119013",
+        "error_code": null,
+        "elapsed_ms": 116.571
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "0d370c19-b24d-4ef8-8d28-6af01f7f94cb",
+        "error_code": null,
+        "elapsed_ms": 129.187
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ac24b9fe-6ec2-49bd-8ed7-1604aae98bb4",
+        "error_code": null,
+        "elapsed_ms": 126.579
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "9f78fe2f-8815-4ffb-836e-29e912597a44",
+        "error_code": null,
+        "elapsed_ms": 122.109
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "9ce27f47-0d14-4f4c-ba3e-025304b3223d",
+        "error_code": null,
+        "elapsed_ms": 92.97
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f8531000-b363-41c7-b9c1-783b8e9c2e18",
+        "error_code": null,
+        "elapsed_ms": 93.871
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b3c6e9d3-179d-4a49-a299-0501caa491d5",
+        "error_code": null,
+        "elapsed_ms": 114.479
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4b0c034c-f66e-4297-8b0b-b0f4ef1c5810",
+        "error_code": null,
+        "elapsed_ms": 110.392
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "77f53822-e4fa-4f36-a20a-1121680d7697",
+        "error_code": null,
+        "elapsed_ms": 96.469
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "970c0fb4-3e9d-4db3-a9a2-49365478e23b",
+        "error_code": null,
+        "elapsed_ms": 155.956
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "5f330385-b400-4dc1-aa4b-b5c3027bd2f8",
+        "error_code": null,
+        "elapsed_ms": 95.283
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "89e104ab-701a-448c-bcc9-747116212ae3",
+        "error_code": null,
+        "elapsed_ms": 94.743
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "251745ef-564d-4317-bdac-5de78c0a0907",
+        "error_code": null,
+        "elapsed_ms": 98.245
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f11e26c6-37c4-45a6-9ae4-6f3875983fb4",
+        "error_code": null,
+        "elapsed_ms": 108.946
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "dbb21de3-d6b5-4aea-a209-4de90a1cc3e6",
+        "error_code": null,
+        "elapsed_ms": 122.03
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "08a48d88-8fad-4f2c-94f5-0596773ac2e3",
+        "error_code": null,
+        "elapsed_ms": 137.488
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "73d490c6-55f0-41af-8ef6-d25be953e9cc",
+        "error_code": null,
+        "elapsed_ms": 138.994
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "85485007-4305-4941-932c-31ba07344c34",
+        "error_code": null,
+        "elapsed_ms": 137.756
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6331880e-940e-4bf4-8dc3-b6eb41871c67",
+        "error_code": null,
+        "elapsed_ms": 134.636
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "29636246-016d-42a8-a9c4-51f4f7b0331d",
+        "error_code": null,
+        "elapsed_ms": 134.635
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "cde261e7-ac2b-47ad-86de-50b7d54040de",
+        "error_code": null,
+        "elapsed_ms": 236.578
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "922980fe-d1b1-41d4-abe8-4579fada6ec0",
+        "error_code": null,
+        "elapsed_ms": 125.845
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6ed28b72-9b0b-4251-8fb0-572f9e62523c",
+        "error_code": null,
+        "elapsed_ms": 123.409
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f71820c8-1e63-4656-9ded-0a15a7b13b1f",
+        "error_code": null,
+        "elapsed_ms": 633.085
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "54d877a6-25db-4b90-bc46-7d47aaddea25",
+        "error_code": null,
+        "elapsed_ms": 139.13
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "8b666698-d121-4bfc-998f-2829a4691c0c",
+        "error_code": null,
+        "elapsed_ms": 139.262
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f5552560-f02f-49d6-9228-7ae7c45e4529",
+        "error_code": null,
+        "elapsed_ms": 124.477
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "399a3277-c324-4e86-a8be-831969e748c6",
+        "error_code": null,
+        "elapsed_ms": 839.877
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7ca6d2fb-8e0e-437e-8c0e-52e5d73c9c28",
+        "error_code": null,
+        "elapsed_ms": 137.377
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "9fb5eb9b-0a82-4634-846d-e7d6abd31d4f",
+        "error_code": null,
+        "elapsed_ms": 235.334
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "30badc79-eb0d-4baf-a7f4-dd48764b460b",
+        "error_code": null,
+        "elapsed_ms": 127.447
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "875bb694-883b-405a-9437-3c2f2d608ab4",
+        "error_code": null,
+        "elapsed_ms": 129.221
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "9e2ecdf9-f8d4-4d64-9b30-46e0b9e12493",
+        "error_code": null,
+        "elapsed_ms": 93.137
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c25ac86b-5d13-4d78-83d4-e65fc0288477",
+        "error_code": null,
+        "elapsed_ms": 99.04
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "0fbf2663-f53e-4b98-8d08-8a04962a2ffc",
+        "error_code": null,
+        "elapsed_ms": 117.279
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b2155293-2a32-4890-b3c7-bddebd927b21",
+        "error_code": null,
+        "elapsed_ms": 114.628
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "668804fa-c61f-4b35-a06b-d5ccc6c285dd",
+        "error_code": null,
+        "elapsed_ms": 94.805
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "97805f4d-abaf-4830-bf67-af5f25bcb99b",
+        "error_code": null,
+        "elapsed_ms": 170.516
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "91d8b45d-147d-4b6b-b6e8-39db08eeb690",
+        "error_code": null,
+        "elapsed_ms": 127.081
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "064636c9-ca6e-45e3-ab70-99322db40f27",
+        "error_code": null,
+        "elapsed_ms": 125.831
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1425fa41-b2dc-4a29-a05e-cba682508151",
+        "error_code": null,
+        "elapsed_ms": 109.975
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d0f4aa42-4e86-4b49-8381-7d810d83f9dd",
+        "error_code": null,
+        "elapsed_ms": 91.074
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "fedc6348-8d9b-4746-a078-4b56ab4e1673",
+        "error_code": null,
+        "elapsed_ms": 90.842
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ef29b059-71ee-4163-ad81-3b6dfd07a21a",
+        "error_code": null,
+        "elapsed_ms": 112.031
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f48c0252-0080-494f-b1d7-0a32b5384247",
+        "error_code": null,
+        "elapsed_ms": 92.639
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1783221a-4e23-4ee6-a491-1dd4e474c127",
+        "error_code": null,
+        "elapsed_ms": 93.893
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e9bacd40-614e-45e7-bcb5-3de55c29b0ec",
+        "error_code": null,
+        "elapsed_ms": 123.299
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "3798a790-bd4b-4653-9b72-fead5f73c352",
+        "error_code": null,
+        "elapsed_ms": 137.505
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "374f1c3a-adb7-4170-8d09-3542e7840253",
+        "error_code": null,
+        "elapsed_ms": 137.415
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e2405cd0-b913-43bc-bae7-04ea652d4480",
+        "error_code": null,
+        "elapsed_ms": 135.395
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d8f9fe61-ca9c-4f2d-92b5-7eef86065158",
+        "error_code": null,
+        "elapsed_ms": 239.938
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "8426a9c9-d050-44d7-8d02-b563c7b69f01",
+        "error_code": null,
+        "elapsed_ms": 128.952
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d800fe16-2a1a-42ca-9744-9c9e0f70a609",
+        "error_code": null,
+        "elapsed_ms": 96.442
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4e5e734d-c241-445a-8d7e-d3b551b246de",
+        "error_code": null,
+        "elapsed_ms": 101.476
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6a73b293-b8d4-4b68-8710-4375989394b8",
+        "error_code": null,
+        "elapsed_ms": 185.096
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ff988be9-05a4-4312-ab3c-a0496e8aa61c",
+        "error_code": null,
+        "elapsed_ms": 134.629
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f8cf6ab3-5f1b-4b02-b0e9-7517b3f21d13",
+        "error_code": null,
+        "elapsed_ms": 137.988
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b6b3e14c-5846-483f-af2a-67250b7eba4f",
+        "error_code": null,
+        "elapsed_ms": 134.367
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "49bbe371-4a99-48d3-bbf5-839fb66d740a",
+        "error_code": null,
+        "elapsed_ms": 135.87
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "32811327-4c8f-4e75-a18e-ea78ef0d4c66",
+        "error_code": null,
+        "elapsed_ms": 102.935
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "78ae37f3-619e-4bc8-a8a8-0cfb495ae7dd",
+        "error_code": null,
+        "elapsed_ms": 101.418
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "bf0fd003-1ad9-467d-adc7-fa20448d39fb",
+        "error_code": null,
+        "elapsed_ms": 87.235
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "01019aab-617d-4051-9180-b4230503323f",
+        "error_code": null,
+        "elapsed_ms": 86.806
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "5f71bf33-f902-4f99-854a-3d503f526d4e",
+        "error_code": null,
+        "elapsed_ms": 104.001
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "73392da8-05d0-4e87-94a0-f1c0d1db2c8a",
+        "error_code": null,
+        "elapsed_ms": 118.773
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6ba6bdad-3ce7-451e-a032-c2e2d8d6c4b6",
+        "error_code": null,
+        "elapsed_ms": 184.814
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/2c3fa62b94cf457aaa48f7a400c932c6",
+        "method": "GET",
+        "status": 201,
+        "request_id": "f66227a7-cc29-4f07-94be-31dd176b9819",
+        "error_code": null,
+        "elapsed_ms": 555.822
+      }
+    ],
+    "full_evidence": ".local\\public-menu-followup-20261002\\public-webkit\\mobile-six-balanced.json"
+  },
+  {
+    "case": "mobile-six-cheapest",
+    "started_utc": "2026-10-02T09:23:04.111957+00:00",
+    "browser": "webkit isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "mobile_emulation": true,
+    "physical_iphone_test": false,
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "cheapest",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "request_headers": {
+      "accept": "application/json",
+      "content-type": "application/json",
+      "x-request-id": "b83906c2-e52c-4f77-b017-43f79ecf0abf",
+      "prefer": "respond-async"
+    },
+    "status": 201,
+    "seconds": 3.563,
+    "headers": {
+      "content-type": "application/json",
+      "x-request-id": "03a6cc5a-b005-4a39-8497-8437f37d0fa6"
+    },
+    "initial_response": {
+      "status": 202,
+      "body": {
+        "status": "pending",
+        "status_url": "/api/plan-jobs/a4f1738b35a14565ac9d3b40a6905d33",
+        "request_id": "b83906c2-e52c-4f77-b017-43f79ecf0abf"
+      },
+      "request_id": "b83906c2-e52c-4f77-b017-43f79ecf0abf"
+    },
+    "initial_rejection": null,
+    "acceptance": {
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": [],
+    "quality_label": "✓\nMatkasse verifierad\n\nAlla valda produkter har säkra semantiska matchningar och härledda eller exakta inköpsmängder.",
+    "total": 125.1,
+    "stores": 3,
+    "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+    "transport_responses": 2,
+    "longest_http_ms": 748.239,
+    "transport": [
+      {
+        "url": "https://beta.smako.nu/api/plans",
+        "method": "POST",
+        "status": 202,
+        "request_id": "b83906c2-e52c-4f77-b017-43f79ecf0abf",
+        "error_code": null,
+        "elapsed_ms": 748.239
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/a4f1738b35a14565ac9d3b40a6905d33",
+        "method": "GET",
+        "status": 201,
+        "request_id": "03a6cc5a-b005-4a39-8497-8437f37d0fa6",
+        "error_code": null,
+        "elapsed_ms": 345.104
+      }
+    ],
+    "full_evidence": ".local\\public-menu-followup-20261002\\public-webkit\\mobile-six-cheapest.json"
+  },
+  {
+    "case": "clean-balanced",
+    "started_utc": "2026-10-02T09:23:09.007094+00:00",
+    "browser": "chromium isolated context",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "mobile_emulation": false,
+    "physical_iphone_test": false,
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "balanced",
+      "varied_budget_percent": 25,
+      "use_member_prices": false,
+      "memberships": [],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "request_headers": {
+      "x-request-id": "1ceea9a6-8c5b-4482-8ccf-3dd90863d6f8",
+      "prefer": "respond-async",
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "status": 201,
+    "seconds": 314.218,
+    "headers": {
+      "x-request-id": "b94f560b-95e3-42a7-bdc7-70dd4d37e7ed",
+      "content-type": "application/json"
+    },
+    "initial_response": {
+      "status": 202,
+      "body": {
+        "status": "pending",
+        "status_url": "/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "request_id": "1ceea9a6-8c5b-4482-8ccf-3dd90863d6f8"
+      },
+      "request_id": "1ceea9a6-8c5b-4482-8ccf-3dd90863d6f8"
+    },
+    "initial_rejection": null,
+    "acceptance": {
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": [],
+    "quality_label": "✓\nMatkasse verifierad\n\nAlla valda produkter har säkra semantiska matchningar och härledda eller exakta inköpsmängder.",
+    "total": 168.55,
+    "stores": 3,
+    "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+    "transport_responses": 146,
+    "longest_http_ms": 3496.644,
+    "transport": [
+      {
+        "url": "https://beta.smako.nu/api/plans",
+        "method": "POST",
+        "status": 202,
+        "request_id": "1ceea9a6-8c5b-4482-8ccf-3dd90863d6f8",
+        "error_code": null,
+        "elapsed_ms": 574.551
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1b5bd3fb-163c-4192-9f55-b85f19657111",
+        "error_code": null,
+        "elapsed_ms": 81.705
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "0eec7ea5-62cf-4895-a752-05beb04285a0",
+        "error_code": null,
+        "elapsed_ms": 88.703
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f3ea6946-fa89-4b3d-ab08-d4e60f6cd1bf",
+        "error_code": null,
+        "elapsed_ms": 114.391
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "54a0398f-be43-43d1-aea4-822973f32cc3",
+        "error_code": null,
+        "elapsed_ms": 132.8
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7343bed2-3422-4ae0-8149-ba3ad4f50511",
+        "error_code": null,
+        "elapsed_ms": 146.896
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f29526bc-627b-4131-a2ca-2202e292b153",
+        "error_code": null,
+        "elapsed_ms": 250.226
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e89d4ded-020e-4a62-99a2-d89426b4c1e5",
+        "error_code": null,
+        "elapsed_ms": 146.773
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "41dc4a8d-3b96-4f6e-8adb-3241656dcfda",
+        "error_code": null,
+        "elapsed_ms": 144.111
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "12aa7d74-f1a4-4500-ba1c-acf894f75688",
+        "error_code": null,
+        "elapsed_ms": 144.235
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "41c48cdb-d9d7-4e92-b024-249564496aac",
+        "error_code": null,
+        "elapsed_ms": 252.628
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ce43d912-ac11-490f-a576-540ee5a0b5ae",
+        "error_code": null,
+        "elapsed_ms": 144.13
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f70381b1-294e-4d3c-918d-5ff4a1a3f7d1",
+        "error_code": null,
+        "elapsed_ms": 144.262
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "35366c29-979b-43e7-a107-9cbce675fe46",
+        "error_code": null,
+        "elapsed_ms": 143.649
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "9506f5ea-5a97-4aad-a705-b68f1f9fe700",
+        "error_code": null,
+        "elapsed_ms": 143.094
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "08dbeb4b-2173-4cbd-9db3-ef018a967072",
+        "error_code": null,
+        "elapsed_ms": 250.584
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "3c241e7b-a81a-4e5b-b071-51adcbd16a4d",
+        "error_code": null,
+        "elapsed_ms": 102.529
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "416c814b-f608-4b3d-a82e-77e290e13191",
+        "error_code": null,
+        "elapsed_ms": 87.002
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "286be545-6283-4826-bc69-e0a1372f5d86",
+        "error_code": null,
+        "elapsed_ms": 103.127
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c254e7d5-bc97-4440-ab1d-29572e435903",
+        "error_code": null,
+        "elapsed_ms": 90.972
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a88d729f-f913-4cc9-9d3b-2d9949889c6b",
+        "error_code": null,
+        "elapsed_ms": 115.6
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "2ff226a9-2beb-4221-ac76-93ad4c250023",
+        "error_code": null,
+        "elapsed_ms": 79.772
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "75107339-8b15-4744-8143-9cdec546f460",
+        "error_code": null,
+        "elapsed_ms": 106.206
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "fdfa2fed-7966-46e0-a45e-5f109c94c09b",
+        "error_code": null,
+        "elapsed_ms": 88.071
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7ef341e4-bbe0-4bbf-85db-577b180fa317",
+        "error_code": null,
+        "elapsed_ms": 127.428
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a626ac9e-31de-42b6-80e3-ac6947e1aaf2",
+        "error_code": null,
+        "elapsed_ms": 84.953
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "933ae4f1-7e5c-4bd0-b37d-1c7ac96703f7",
+        "error_code": null,
+        "elapsed_ms": 91.342
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1d35e270-8706-4ba6-b342-0e57ccddf349",
+        "error_code": null,
+        "elapsed_ms": 124.412
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "81502ad7-e47f-4473-8ea7-77997cd685c9",
+        "error_code": null,
+        "elapsed_ms": 146.607
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "5bc7f085-3d0f-4af4-9681-440ddedb454a",
+        "error_code": null,
+        "elapsed_ms": 139.088
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "eb7345ca-40c7-4fa8-9213-6b1b60d90638",
+        "error_code": null,
+        "elapsed_ms": 145.496
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "07c71fae-7e23-4d04-a554-a289d0c1c131",
+        "error_code": null,
+        "elapsed_ms": 101.026
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6b2007cd-5720-4442-88ad-5aa7a880664c",
+        "error_code": null,
+        "elapsed_ms": 88.713
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c6ff4e74-4d3d-40ff-ab4b-02cf0efc6be5",
+        "error_code": null,
+        "elapsed_ms": 148.153
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d8a8c0bd-495b-4279-a01d-903962165915",
+        "error_code": null,
+        "elapsed_ms": 148.062
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "9cdcdfc4-fc28-45d7-a014-7ec9159fa466",
+        "error_code": null,
+        "elapsed_ms": 146.452
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "9a14a5c4-5660-4936-a0a8-e6b18562142b",
+        "error_code": null,
+        "elapsed_ms": 146.968
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "8ec3bbcc-d373-4d44-bef8-7255c3c1a47e",
+        "error_code": null,
+        "elapsed_ms": 77.622
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "5b58dced-7af2-4425-b0b4-c5e4b546518d",
+        "error_code": null,
+        "elapsed_ms": 76.341
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7b7d3e9b-9291-4e0a-93fb-15e6b633083c",
+        "error_code": null,
+        "elapsed_ms": 95.73
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "631e5be1-18bd-4d15-a7e7-2fd0c653a4e3",
+        "error_code": null,
+        "elapsed_ms": 136.525
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d5621d9b-1677-4abe-9783-f0c7b6737dab",
+        "error_code": null,
+        "elapsed_ms": 124.05
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ccc8085b-cae4-43a7-b906-877bf490b116",
+        "error_code": null,
+        "elapsed_ms": 143.649
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b31f0947-13fe-4a90-b1b0-07b6669fe660",
+        "error_code": null,
+        "elapsed_ms": 144.643
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "8a1fa57f-9203-4163-889a-9b9d0506c1c0",
+        "error_code": null,
+        "elapsed_ms": 145.969
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "0c2d7e02-48a1-4dd7-8184-a1ac987a0819",
+        "error_code": null,
+        "elapsed_ms": 113.68
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "931b8173-0a4e-4634-91c7-24c3d4a2dad8",
+        "error_code": null,
+        "elapsed_ms": 87.962
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "23fcc77e-5a54-4e19-9f5d-95fb8f414d25",
+        "error_code": null,
+        "elapsed_ms": 121.337
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "fc00b24b-d51e-4b2f-9d33-3ed1a131aa5f",
+        "error_code": null,
+        "elapsed_ms": 137.562
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7778920e-e8f4-4025-9628-a0849a287fa8",
+        "error_code": null,
+        "elapsed_ms": 144.896
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "26ec0c5d-764f-4c99-aaa6-077da40f515e",
+        "error_code": null,
+        "elapsed_ms": 139.64
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "56224a1b-266d-4bc3-b725-c4d9c75aeae3",
+        "error_code": null,
+        "elapsed_ms": 139.354
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "19fcebca-aab0-4aed-a7c6-57ddbc33db01",
+        "error_code": null,
+        "elapsed_ms": 111.32
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d3beb701-4eff-468d-b8f2-374bad67229f",
+        "error_code": null,
+        "elapsed_ms": 97.304
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "27ceb62d-6e02-4bb8-b0d4-0f323a9e5799",
+        "error_code": null,
+        "elapsed_ms": 122.561
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "311fd62e-b6b7-441a-91d8-0360f7e8277a",
+        "error_code": null,
+        "elapsed_ms": 146.276
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "07c7535f-24a9-4ed9-97ba-92aec57e3f87",
+        "error_code": null,
+        "elapsed_ms": 143.371
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c928119b-b266-4e25-8383-f05224b9fcda",
+        "error_code": null,
+        "elapsed_ms": 151.784
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4c6efabd-4062-4967-a2f6-be6fd2b6d093",
+        "error_code": null,
+        "elapsed_ms": 243.918
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a7f16ee6-098a-4b87-b101-c56d4ad77cb9",
+        "error_code": null,
+        "elapsed_ms": 77.996
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "da74f9be-c3cb-4594-bf97-683144a938f3",
+        "error_code": null,
+        "elapsed_ms": 112.788
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "122a04cc-b9a2-41f5-a29b-eb3690999fd7",
+        "error_code": null,
+        "elapsed_ms": 85.654
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "97a2beea-6fc4-4053-b0eb-bd9d108fa09a",
+        "error_code": null,
+        "elapsed_ms": 193.216
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "3a965508-72a9-4477-96eb-263b1587f6e1",
+        "error_code": null,
+        "elapsed_ms": 84.541
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ea1a4ec5-fc72-45ac-b00b-8b8b01c500e1",
+        "error_code": null,
+        "elapsed_ms": 97.909
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "465785fa-3913-4867-934e-05204bc2fa50",
+        "error_code": null,
+        "elapsed_ms": 142.876
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "bbbe70d1-e6b3-46c0-88da-5ce2ba0459a3",
+        "error_code": null,
+        "elapsed_ms": 143.313
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "29bf177b-194c-49d1-bb3e-27b632160aca",
+        "error_code": null,
+        "elapsed_ms": 144.647
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "02769621-9ec7-4007-95ed-6cf540a87316",
+        "error_code": null,
+        "elapsed_ms": 143.558
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "753f6ecd-bf8f-476c-a9a3-2a8ebf9c8cf8",
+        "error_code": null,
+        "elapsed_ms": 147.471
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "bf797b37-5cdd-400c-80db-a687315c7f62",
+        "error_code": null,
+        "elapsed_ms": 148.818
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b7e67ac6-56e1-46eb-88c4-a750258d8d6f",
+        "error_code": null,
+        "elapsed_ms": 148.222
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "cf3aabd8-bc0f-4be2-b898-f422ceacc30c",
+        "error_code": null,
+        "elapsed_ms": 145.951
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a5e4d18b-5547-4f68-b165-0f87fa5238ab",
+        "error_code": null,
+        "elapsed_ms": 80.039
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "790da1af-5c58-463a-b55d-e738a286b75e",
+        "error_code": null,
+        "elapsed_ms": 104.605
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c5877bd7-1b70-4060-8374-ebb3478a7691",
+        "error_code": null,
+        "elapsed_ms": 153.084
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "bcb010e3-1b40-4665-89b7-c7d83801f3e9",
+        "error_code": null,
+        "elapsed_ms": 86.6
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "177db392-3202-4c1b-bf94-e62962d77c09",
+        "error_code": null,
+        "elapsed_ms": 95.85
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "82f69129-c1d9-47b1-9778-ee12dba8ee3a",
+        "error_code": null,
+        "elapsed_ms": 91.547
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c81cb211-3fef-459d-b727-a69ce842bfd0",
+        "error_code": null,
+        "elapsed_ms": 91.717
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f4f5cbc9-b27f-40ad-a662-6be5d9b56e5e",
+        "error_code": null,
+        "elapsed_ms": 144.612
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b60c855f-78f1-470c-8cc0-da7cb8388314",
+        "error_code": null,
+        "elapsed_ms": 102.225
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "153c9e7f-afde-42bd-b27b-ff54253ba16d",
+        "error_code": null,
+        "elapsed_ms": 182.508
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "29cf0769-350b-4d93-903c-53379a41825d",
+        "error_code": null,
+        "elapsed_ms": 86.161
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "58e08b29-043b-4579-9b01-59e55cfef64e",
+        "error_code": null,
+        "elapsed_ms": 98.407
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e959383f-89ee-45fc-936c-232382cd2565",
+        "error_code": null,
+        "elapsed_ms": 89.367
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "69a0ea89-3d20-4e03-9a3f-1f40e422697b",
+        "error_code": null,
+        "elapsed_ms": 115.058
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "3c00c9c2-829c-4916-9b90-cbc62b4d09c8",
+        "error_code": null,
+        "elapsed_ms": 89.603
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f9c0e6da-5910-4d26-a901-ba0b3e86a0a3",
+        "error_code": null,
+        "elapsed_ms": 176.167
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "842ca4b5-40cf-469b-994b-e4c33c5d40f6",
+        "error_code": null,
+        "elapsed_ms": 90.461
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "fa2c6154-53e4-48cd-b4ca-342a10fd1838",
+        "error_code": null,
+        "elapsed_ms": 114.285
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "61e05ea9-b1b0-408d-9890-acff87eaed0b",
+        "error_code": null,
+        "elapsed_ms": 83.344
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "2189adf8-3915-4e64-98e2-9f481d578ab8",
+        "error_code": null,
+        "elapsed_ms": 186.7
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "404cef1e-09bc-48ae-90d7-f867963f582d",
+        "error_code": null,
+        "elapsed_ms": 104.413
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1919729b-fac1-41fe-8835-eba8afad3730",
+        "error_code": null,
+        "elapsed_ms": 81.032
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f07a77c2-d1c8-444d-8171-28265ab9e0e4",
+        "error_code": null,
+        "elapsed_ms": 150.154
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c9fd68c8-c10c-411d-9ff1-3d41c1bd58b9",
+        "error_code": null,
+        "elapsed_ms": 243.831
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b2132c11-1072-4824-93ed-8f025db02a41",
+        "error_code": null,
+        "elapsed_ms": 86.148
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "e00451ca-43df-4db8-aa16-a05e7d226558",
+        "error_code": null,
+        "elapsed_ms": 94.284
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "5bd73056-9a4f-45d4-b814-a9b88a446699",
+        "error_code": null,
+        "elapsed_ms": 107.149
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b1f4ecdc-b030-4e2f-8d91-01e8bec02091",
+        "error_code": null,
+        "elapsed_ms": 111.577
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c77dd9a3-17c2-4fa1-9fd3-1384c1e438c2",
+        "error_code": null,
+        "elapsed_ms": 3496.644
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "c55cb899-b1b2-4250-b95f-de1caf797b6b",
+        "error_code": null,
+        "elapsed_ms": 557.249
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "deff24c4-3f04-4f77-b0c1-d8c10290d67f",
+        "error_code": null,
+        "elapsed_ms": 129.404
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "64351d8e-67ea-4c09-8086-6a77697ca440",
+        "error_code": null,
+        "elapsed_ms": 87.211
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6f2054ec-d0d4-4dd7-a0c5-2c52053564ae",
+        "error_code": null,
+        "elapsed_ms": 325.236
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7e01ba1a-7399-433b-b08e-274862092864",
+        "error_code": null,
+        "elapsed_ms": 138.587
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a422372a-ae61-43d4-b098-8f02b18e2c8f",
+        "error_code": null,
+        "elapsed_ms": 138.704
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "aef3b125-3bbf-42e5-a19b-b087410b6c1c",
+        "error_code": null,
+        "elapsed_ms": 158.181
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "67b01979-269d-4f06-aaa5-e1e00a2b5cd8",
+        "error_code": null,
+        "elapsed_ms": 130.304
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "46f966de-eb92-4366-a5db-83a787372299",
+        "error_code": null,
+        "elapsed_ms": 145.848
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "157755f8-57b9-46ce-be14-a8877de44f62",
+        "error_code": null,
+        "elapsed_ms": 138.184
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "8b558a93-eb7d-45a5-9c77-71e8f49148f6",
+        "error_code": null,
+        "elapsed_ms": 137.119
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "cd7c7447-cdef-4ff6-9499-a28966434659",
+        "error_code": null,
+        "elapsed_ms": 139.623
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f8cdfe1c-c83d-4052-b812-ae3e823766e3",
+        "error_code": null,
+        "elapsed_ms": 139.452
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "812cb731-2f67-4f9a-874a-d4eb2b73adb9",
+        "error_code": null,
+        "elapsed_ms": 139.295
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d0902163-5448-42b5-8498-1150c827a487",
+        "error_code": null,
+        "elapsed_ms": 143.979
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "32a7dace-4cf9-48e5-8e4b-c8a9f7010741",
+        "error_code": null,
+        "elapsed_ms": 149.86
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "9b3334d6-c002-4253-90d8-741cf8f6b5aa",
+        "error_code": null,
+        "elapsed_ms": 126.013
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "3ff73ed7-6a2d-4ee8-a1ae-4b22425ebbfc",
+        "error_code": null,
+        "elapsed_ms": 87.76
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "2466d323-ec96-47a3-9a15-405a1de14fb2",
+        "error_code": null,
+        "elapsed_ms": 115.916
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6002be48-962c-49d7-ae37-9a42d9d2c166",
+        "error_code": null,
+        "elapsed_ms": 140.582
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ec897e74-236f-4d97-b9d8-4dad3b66c9ab",
+        "error_code": null,
+        "elapsed_ms": 141.565
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "1d0b3ed4-9996-42d2-8a72-cc1677c7435f",
+        "error_code": null,
+        "elapsed_ms": 141.926
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "7a02c1df-fa92-40a4-a842-8e679b8f72fb",
+        "error_code": null,
+        "elapsed_ms": 141.88
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "922e3d59-147f-42fd-af7c-3947221b926e",
+        "error_code": null,
+        "elapsed_ms": 143.096
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "650ea896-41f5-4de6-8662-a4a71f59bc65",
+        "error_code": null,
+        "elapsed_ms": 86.079
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "07cd683f-e8a6-4e2d-bdd7-9060f8155e3f",
+        "error_code": null,
+        "elapsed_ms": 93.369
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "f9112029-7e17-4a40-9c52-7e940339e86e",
+        "error_code": null,
+        "elapsed_ms": 93.237
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4c415715-ddb8-46f2-a657-a72fa4d6e87b",
+        "error_code": null,
+        "elapsed_ms": 108.476
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4e1a2a42-5657-4a89-bd29-710d9f9a2426",
+        "error_code": null,
+        "elapsed_ms": 86.862
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "0bc3bdf8-63cf-469a-a723-9c5f95f3c33b",
+        "error_code": null,
+        "elapsed_ms": 90.448
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ca4e9091-0757-4bc8-9894-e694d1a3153e",
+        "error_code": null,
+        "elapsed_ms": 141.337
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "4243f482-aed9-42db-9163-54956d74587f",
+        "error_code": null,
+        "elapsed_ms": 143.722
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d4e27140-a859-4e2e-bd8b-1f660bdc0200",
+        "error_code": null,
+        "elapsed_ms": 145.556
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a9cf61f0-e6f0-4d47-b291-3e78ded95259",
+        "error_code": null,
+        "elapsed_ms": 145.21
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "a78dd817-5f77-462a-9d4f-e5aae19b2a20",
+        "error_code": null,
+        "elapsed_ms": 88.978
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "ad701e60-2b64-4959-ab11-a68040dd3939",
+        "error_code": null,
+        "elapsed_ms": 89.859
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "6a7b940f-364c-4aea-9b2a-aa4245e6583c",
+        "error_code": null,
+        "elapsed_ms": 139.826
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "d72eda55-5a41-4977-bdb5-b266f047735e",
+        "error_code": null,
+        "elapsed_ms": 96.711
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "b1c7e435-3673-4011-b285-a05de3251142",
+        "error_code": null,
+        "elapsed_ms": 90.149
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "cdfd4833-bb43-4f5f-a351-a4ddd6d8bc9e",
+        "error_code": null,
+        "elapsed_ms": 143.175
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "3da229fe-03db-43ca-b6e6-f1622cfdef71",
+        "error_code": null,
+        "elapsed_ms": 145.735
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "3a069115-03fe-479b-99b9-ab9096aa6039",
+        "error_code": null,
+        "elapsed_ms": 90.074
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 202,
+        "request_id": "649a9eb1-9ff9-4e30-80fd-faa16345ddf8",
+        "error_code": null,
+        "elapsed_ms": 99.664
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/e98fd34a240f4ae9bfaba04e27bec791",
+        "method": "GET",
+        "status": 201,
+        "request_id": "b94f560b-95e3-42a7-bdc7-70dd4d37e7ed",
+        "error_code": null,
+        "elapsed_ms": 338.743
+      }
+    ],
+    "full_evidence": ".local\\public-menu-followup-20261002\\public-chromium\\clean-balanced.json"
+  },
+  {
+    "case": "mobile-six-balanced",
+    "started_utc": "2026-10-02T09:28:29.511695+00:00",
+    "browser": "chromium isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "mobile_emulation": true,
+    "physical_iphone_test": false,
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "balanced",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "request_headers": {
+      "x-request-id": "3c9b8008-f818-4e42-9843-686f1d2aedfc",
+      "prefer": "respond-async",
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "status": 201,
+    "seconds": 3.046,
+    "headers": {
+      "x-request-id": "2136c78d-4bd9-44a3-8767-e8d418a082bd",
+      "content-type": "application/json"
+    },
+    "initial_response": {
+      "status": 202,
+      "body": {
+        "status": "pending",
+        "status_url": "/api/plan-jobs/c7855570c5764892b6f70210efe41913",
+        "request_id": "3c9b8008-f818-4e42-9843-686f1d2aedfc"
+      },
+      "request_id": "3c9b8008-f818-4e42-9843-686f1d2aedfc"
+    },
+    "initial_rejection": null,
+    "acceptance": {
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": [],
+    "quality_label": "✓\nMatkasse verifierad\n\nAlla valda produkter har säkra semantiska matchningar och härledda eller exakta inköpsmängder.",
+    "total": 168.55,
+    "stores": 3,
+    "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+    "transport_responses": 2,
+    "longest_http_ms": 612.536,
+    "transport": [
+      {
+        "url": "https://beta.smako.nu/api/plans",
+        "method": "POST",
+        "status": 202,
+        "request_id": "3c9b8008-f818-4e42-9843-686f1d2aedfc",
+        "error_code": null,
+        "elapsed_ms": 612.536
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/c7855570c5764892b6f70210efe41913",
+        "method": "GET",
+        "status": 201,
+        "request_id": "2136c78d-4bd9-44a3-8767-e8d418a082bd",
+        "error_code": null,
+        "elapsed_ms": 206.925
+      }
+    ],
+    "full_evidence": ".local\\public-menu-followup-20261002\\public-chromium\\mobile-six-balanced.json"
+  },
+  {
+    "case": "mobile-six-cheapest",
+    "started_utc": "2026-10-02T09:28:37.096979+00:00",
+    "browser": "chromium isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "mobile_emulation": true,
+    "physical_iphone_test": false,
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "cheapest",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "request_headers": {
+      "x-request-id": "54398e42-3ea1-4f88-ab92-e208aad57382",
+      "prefer": "respond-async",
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "status": 201,
+    "seconds": 3.515,
+    "headers": {
+      "x-request-id": "1f12adff-a8ed-42ed-b3f7-fcfcc62a5d68",
+      "content-type": "application/json"
+    },
+    "initial_response": {
+      "status": 202,
+      "body": {
+        "status": "pending",
+        "status_url": "/api/plan-jobs/c4fc230dcf374554b31e94f4d45f6c80",
+        "request_id": "54398e42-3ea1-4f88-ab92-e208aad57382"
+      },
+      "request_id": "54398e42-3ea1-4f88-ab92-e208aad57382"
+    },
+    "initial_rejection": null,
+    "acceptance": {
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": [],
+    "quality_label": "✓\nMatkasse verifierad\n\nAlla valda produkter har säkra semantiska matchningar och härledda eller exakta inköpsmängder.",
+    "total": 125.1,
+    "stores": 3,
+    "build_id": "74c9077001b3084317f36630fd38ce48e4663473",
+    "transport_responses": 2,
+    "longest_http_ms": 610.542,
+    "transport": [
+      {
+        "url": "https://beta.smako.nu/api/plans",
+        "method": "POST",
+        "status": 202,
+        "request_id": "54398e42-3ea1-4f88-ab92-e208aad57382",
+        "error_code": null,
+        "elapsed_ms": 610.542
+      },
+      {
+        "url": "https://beta.smako.nu/api/plan-jobs/c4fc230dcf374554b31e94f4d45f6c80",
+        "method": "GET",
+        "status": 201,
+        "request_id": "1f12adff-a8ed-42ed-b3f7-fcfcc62a5d68",
+        "error_code": null,
+        "elapsed_ms": 269.432
+      }
+    ],
+    "full_evidence": ".local\\public-menu-followup-20261002\\public-chromium\\mobile-six-cheapest.json"
+  }
+]

@@ -1,0 +1,145 @@
+[
+  {
+    "case": "mobile-six-balanced",
+    "started_utc": "2026-10-02T08:39:32.344131+00:00",
+    "browser": "Chromium isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "balanced",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "status": 201,
+    "seconds": 3.125,
+    "headers": {
+      "x-request-id": "230c7e6d-f659-45b8-9eac-cab537bda945",
+      "content-type": "application/json"
+    },
+    "page_errors": [],
+    "submit_enabled_after_response": null,
+    "response_body": null,
+    "evidence": ".local\\public-menu-followup-20261002\\before\\mobile-six-balanced.json"
+  },
+  {
+    "case": "mobile-six-balanced",
+    "started_utc": "2026-10-02T08:42:29.556087+00:00",
+    "browser": "Chromium isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22222",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "balanced",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "status": 503,
+    "seconds": 0.14,
+    "headers": {
+      "x-request-id": "5f6b151f-df2c-497e-a703-22ade9cb7f10",
+      "content-type": "application/json"
+    },
+    "page_errors": [],
+    "submit_enabled_after_response": false,
+    "response_body": {
+      "detail": "consumer planning requires a matching active local PriceUniverse"
+    },
+    "evidence": ".local\\public-menu-followup-20261002\\unsupported-before\\mobile-six-balanced.json"
+  },
+  {
+    "case": "mobile-six-cheapest",
+    "started_utc": "2026-10-02T08:54:23.789556+00:00",
+    "browser": "webkit isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "url": "http://127.0.0.1:18082/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "cheapest",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "status": null,
+    "seconds": 66.735,
+    "headers": {
+      "content-type": "application/json",
+      "x-request-id": "1bb9ba07-08df-4423-af6d-56470fabd482"
+    },
+    "page_errors": [],
+    "submit_enabled_after_response": true,
+    "response_body": null,
+    "evidence": ".local\\public-menu-followup-20261002\\candidate-webkit\\mobile-six-cheapest.json"
+  }
+]

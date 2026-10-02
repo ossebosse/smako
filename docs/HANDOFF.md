@@ -1,3 +1,38 @@
+# 2026-10-02: Uppföljning – korrekta fältfel och fungerande lång generering
+
+Appen kör nu Git `74c9077001b3084317f36630fd38ce48e4663473`, image
+`sha256:80e8ba59c9b04c8bff668062da2bf1937eae236881472449e2a0180f42387180`.
+Det ersätter appversionen i följande historiknotering. Scheduler/källjobb
+är fortfarande `08c1374`. [Full rapport och bevis](releases/public-menu-followup-20261002/RESULTS.md).
+
+Två fel är reproducerade och rättade: postnummer utanför artefaktens
+aktiverade täckning gav missvisande 503/prisuppdatering och avstängd knapp;
+WebKit bröt lång generering efter cirka en minut. Postnummerfel ger nu
+422 på rätt fält, dataproblem har egna koder och vanlig 503 beskrivs som
+tjänstefel. Publika knappen använder sessionsbundna, begränsade planjobb
+med korta statusanrop runt samma planner och samma sparning. Ingen
+policy, optimeringsgräns eller medgivande ändrat. Oavslutade transportjobb
+löper ut vid appomstart; färdiga planer ligger kvar i PlanStore.
+
+Fem publika knapp-prov PASS: WebKit mobil Balanserad (kall 338,359 s)
+och Billigast; Chromium ren session samt båda mobilvalen. Fem middagar × två,
+max tre inköpsställen, exact/mixed, verkliga medlems-ID:n, fullständiga recept,
+inköpslista, kostnad, kvalitet och identisk återläsning verifierade.
+Balanserad 168,55 kr, Billigast 125,10 kr. 308 HTTP-anrop korrelerade med
+backend; frontendhashar matchar. Fyra separata 15/20-regressioner i samma
+isolerade image PASS, 440,72 kr. Ingen fysisk iPhone har provats.
+
+App-only-byte under driftlås cirka 11:15 CEST. Alla 188 tidigare revisioner
+oförändrade, 193 efter proven. Prismanifest, proxy, scheduler och miljö
+(utom appens BUILD_ID) bevarade. Skyddad backup/återgång under
+`/opt/smako/evidence/public-menu-followup-20261002`. Testtjänster stoppade,
+bevis bevarade. Ingen Git-push, städning eller Malmö-aktivering.
+
+Användarens Fel-ID från 10:19 är matchat till 503/1,658 ms i gamla builden,
+men den historiska body:n och det aktuella postnumret är inte bekräftade.
+Det enskilda försöket tillskrivs därför inte säkert postnummerfelet.
+Kalla menyberäkningar tar fortfarande cirka fem–sex minuter.
+
 # 2026-10-02: Publik veckomeny – app-hotfix efter aktiveringen
 
 Se [felsökning, request-ID:n och offentlig knappacceptans](releases/public-menu-20261002/RESULTS.md).
