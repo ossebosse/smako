@@ -277,6 +277,14 @@ def test_supplier_classification_is_bound_to_product_snapshot_and_package():
     assert not _requirements_compatible("linser", ["red_split"], product, fact)
 
 
+def test_white_bean_variant_requires_positive_named_white_beans():
+    from app.services.complete_recipes import _requirements_compatible
+    assert _requirements_compatible("bönor", ["white_beans"], SimpleNamespace(name="Vita Bönor Stora Eko"), None)
+    assert not _requirements_compatible("bönor", ["white_beans"], SimpleNamespace(name="Bönor"), None)
+    assert _requirements_compatible("bönor", ["white_beans"], SimpleNamespace(name="Bönor"), SimpleNamespace(ingredients=["Vita bönor, vatten, salt."]))
+    assert not _requirements_compatible("bönor", ["future_unknown_requirement"], SimpleNamespace(name="Vita Bönor"), None)
+
+
 def test_source_frozen_corn_qualifies_without_category_guess_and_rejects_mixed_food():
     from app.services.personal_source_facts import project_raw_facts
     f = project_raw_facts({"id": "gtin", "consumerInformationText": ["Fryst"],

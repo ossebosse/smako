@@ -107,6 +107,10 @@ def product_form_compatible(recipe, name, product, fact):
 def _requirements_compatible(canonical, requirements, product, fact):
     text = product.name.casefold()
     composition = " ".join(fact.ingredients).casefold() if fact else ""
+    if set(requirements) - {"plain", "ground", "firm", "thick", "pure_juice", "frozen", "red_split", "white_rice", "white_beans", "dried_leaf"}:
+        return False
+    if "white_beans" in requirements and not re.search(r"\bvita\b", text + " " + composition):
+        return False
     if "ground" in requirements:
         if re.search(r"\bhel(?:a)?\b|stång|stänger", text):
             return False
