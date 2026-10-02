@@ -463,6 +463,9 @@ _RULES: dict[str, IngredientSemanticRule] = {
     "rödbeta": _raw_produce_rule(
         canonical_food="beetroot", food_family="vegetable", identity_terms=("rödbeta", "rödbetor"),
     ),
+    "sötpotatis": _raw_produce_rule(
+        canonical_food="sweet_potato", food_family="vegetable", identity_terms=("sötpotatis",),
+    ),
     "purjolök": _raw_produce_rule(
         canonical_food="leek",
         food_family="allium",
@@ -1297,6 +1300,17 @@ def _infer_primary_product_identity(
     such as ``Livsmedel`` or ``Mat``.
     """
 
+    # A low-confidence collector may preserve the whole raw label as its food
+    # key (e.g. rodbeta_klass_1). The complete label AND fresh-produce category
+    # establish the actual food; no juice, pickle, puree or flavoured composite.
+    if any(t in category_text for t in ('frukt', 'gronsak', 'gront', 'rotsak', 'potatis', 'aubergine', 'zucchini')):
+        for pattern, food in (
+            (r'rodbet(?:a|or)', 'beetroot'), (r'sotpotatis', 'sweet_potato'),
+            (r'aubergine', 'aubergine'), (r'(?:zucchini|squash)', 'zucchini'),
+            (r'pepparrot', 'horseradish'),
+        ):
+            if re.fullmatch(rf'(?:ekologisk |farsk )?{pattern}(?: klass 1| eko| ekologisk| svensk| sverige| i ask)*', name_text):
+                return food, 'vegetable', 'whole_vegetable', 'fresh'
     # A complete Swedish bread-loaf noun, including branded compounds. A loaf
     # shape alone is not food identity: meat/fish/vegetable loaves and cake/mix
     # names must not become bread. Nutrition still needs its own declaration.
@@ -1438,6 +1452,7 @@ _CULINARY_LABELS = {
     "basilika": (r"basilika", "herb"),
     "dill": (r"dill", "herb"),
     "sesamfrön": (r"sesamfron", "seed"),
+    "jordnötssmör": (r"jordnotssmor", "nut_butter"),
 }
 
 
@@ -1445,6 +1460,8 @@ def _culinary_label_match(canonical, product):
     label = _search_text(str(_value(product, "name", "")))
     identity, role = _CULINARY_LABELS[canonical]
     descriptors = r"(?:malen|mald|eko|ekologisk|ekologiska|burk|pase|tetra|hel|hela|torkad|krus|blad|knippe|kruka|i kruka|i ask|fryst|frysta|finhackad|farsk|vita|skalade|oskalade|klass 1)"
+    if canonical == 'jordnötssmör':
+        descriptors = r'(?:crunchy|smooth|creamy|crunch|super chunk|eko|ekologiskt|ekologisk)'
     compatible = bool(re.fullmatch(rf"(?:{descriptors} )*{identity}(?: {descriptors})*", label))
     return SemanticMatchResult(
         compatible=compatible,

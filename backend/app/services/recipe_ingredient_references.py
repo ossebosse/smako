@@ -20,7 +20,7 @@ def reviewed_reference(product, name, facts):
     label = re.sub(r'^(?:ekologisk |färsk )', '', label)
     label = re.sub(r'\s+(?:eko|ekologisk|klass 1|i ask)$', '', label)
     label = re.sub(r'\s+\d+(?:[,.]\d+)?\s*g$', '', label)
-    fresh_category = any(x in category for x in ('frukt', 'grönsak', 'grönt', 'svamp', 'blomkål', 'broccoli', 'zucchini', 'aubergine', 'selleri'))
+    fresh_category = any(x in category for x in ('frukt', 'grönsak', 'grönt', 'svamp', 'blomkål', 'broccoli', 'zucchini', 'aubergine', 'selleri', 'potatis', 'rotsaker'))
     frozen = bool(re.search(r'\b(?:fryst|frysta|djupfryst|djupfrysta)\b', label) or 'fryst' in category)
     forbidden = r'konserv|inlagd|saltlag|kryddblandning|marinerad|sås|soppa|stuvad|stekt|torkad|pulver|dipp|chips'
     produce = {
@@ -29,6 +29,7 @@ def reviewed_reference(product, name, facts):
         'aubergine': (372, None, r'aubergine'),
         'selleri': (321, None, r'(?:stjälkselleri|blekselleri|bladselleri|selleri)'),
         'rödbeta': (294, None, r'(?:rödbeta|rödbetor)'),
+        'sötpotatis': (3765, None, r'sötpotatis'),
         'spenat': (4941, 361, r'(?:babyspenat|spenat)(?: blad| hackad)?'),
         'blomkål': (322, 323, r'blomkål(?: buketter)?'),
         'champinjoner': (333, 383, r'champinjoner(?: skivade)?'),

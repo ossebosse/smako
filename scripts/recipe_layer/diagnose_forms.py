@@ -40,7 +40,7 @@ for name in sys.argv[1:] or ['bönor', 'kidneybönor', 'tortillas', 'salt', 'gur
                     {'kcal', 'protein_g', 'carbs_g', 'fat_g'}, recipe) if form_ok and semantic.compatible else None
         rows.append({'product': p.model_dump(mode='json'), 'projected_quantity': projected.usable_quantity,
             'projected_unit': projected.usable_unit, 'facts': dataclasses.asdict(fact) if fact else None,
-            'form_ok': form_ok, 'semantic': dataclasses.asdict(semantic),
+            'form_ok': form_ok, 'semantic': semantic.model_dump(mode='json'),
             'nutrition': dataclasses.asdict(nutrition) if nutrition else None})
     try:
         resolved = planner.resolve(name, ingredient.quantity, ingredient.unit, profile=TasteProfile(), recipe=recipe)

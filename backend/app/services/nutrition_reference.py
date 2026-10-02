@@ -88,6 +88,7 @@ MAPPINGS = {
     1941: ("vetemjöl", "dry"),
     321: ("selleri", "raw"),
     294: ("rödbeta", "raw"),
+    3765: ("sötpotatis", "raw"),
 }
 COOKED = {2481: 2515, 870: 2079, 289: 305, 344: 448, 370: 465, 1173: 3594, 1255: 1317, 1246: 1335}
 FRIED = {1255: 1316, 1246: 1337}
@@ -127,7 +128,7 @@ def macro_values(rows):
 def reference_data():
     raw = PATH.read_bytes()
     data = json.loads(raw)
-    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json')):
+    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json')):
         supplement = json.loads(path.read_bytes())
         if data['foods'].keys() & supplement['foods'].keys():
             raise ValueError('SLV supplement must not silently replace retained references')

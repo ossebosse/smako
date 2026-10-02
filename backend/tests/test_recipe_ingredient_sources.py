@@ -41,6 +41,7 @@ def test_cottage_cheese_and_capers_require_complete_food_label(canonical, name, 
     ('persilja', 'Persilja Krus Kruka Ekologisk', True), ('persilja', 'Chips Persilja & parmesan', False),
     ('basilika', 'Basilika', True), ('basilika', 'Tomater Krossade Med Basilika', False),
     ('cayennepeppar', 'Cayennepeppar Burk', True), ('cayennepeppar', 'Kryddblandning Cayennepeppar', False),
+    ('jordnötssmör', 'Jordnötssmör Smooth Eko', True), ('jordnötssmör', 'Granola Jordnötssmör & kakao', False),
 ])
 def test_plain_culinary_labels_provide_shared_identity_without_flavour_substrings(canonical, name, accepted):
     assert evaluate_product_semantics(canonical, {'name': name}).compatible == accepted
@@ -73,9 +74,19 @@ def test_new_whole_vegetable_semantics_reject_preserved_and_prepared(canonical):
         assert not evaluate_product_semantics(canonical, {'name': name, 'category': category}).compatible
 
 
+@pytest.mark.parametrize('canonical', ['rödbeta', 'sötpotatis', 'aubergine', 'pepparrot'])
+def test_complete_raw_root_label_overrides_unparsed_low_confidence_collector_key(canonical):
+    p = {'name': canonical.title() + ' Klass 1', 'category': 'Frukt & Grönt',
+         'canonical_food': canonical + ' klass 1', 'semantic_confidence': 'low'}
+    assert evaluate_product_semantics(canonical, p).compatible
+    for name, category in [(canonical + ' Skivad', 'Inlagda grönsaker'), (canonical, 'Juice')]:
+        p.update(name=name, category=category)
+        assert not evaluate_product_semantics(canonical, p).compatible
+
+
 def test_imported_sources_retain_ids_versions_and_all_unrounded_macros():
     data = reference_data()
-    for identity in (362, 372, 4941, 361, 322, 323, 333, 383, 291, 377, 352, 379, 7199, 2306, 7198, 702, 1941, 321, 294):
+    for identity in (362, 372, 4941, 361, 322, 323, 333, 383, 291, 377, 352, 379, 7199, 2306, 7198, 702, 1941, 321, 294, 3765):
         entry = data['foods'][str(identity)]
         assert entry['food']['nummer'] == identity and entry['food']['version']
         assert all(a['url'].startswith('https://dataportal.livsmedelsverket.se/') and len(a['sha256']) == 64
