@@ -2142,7 +2142,14 @@ class PersonalPlanner:
                     r
                     for r in pools[slot.meal_type]
                     if not slot.recipe or recipe_id(r) != recipe_id(slot.recipe)
+                    if not (self.complete and slot.recipe and slot.recipe.design and r.design
+                            and slot.recipe.design.base_id == r.design.base_id)
                 ]
+                if slot.id == replace_slot and not choices:
+                    raise PolicyConflict(
+                        "Ingen annan grundrätt kvalificerades med dina val. Den tidigare planrevisionen är bevarad. "
+                        "Utöka matkök, tid eller ingrediensintervall uttryckligen, eller behåll rätten.",
+                        code="RECIPE_ALTERNATIVE_NOT_FOUND", stage="variation")
                 options.append([slot.model_copy(update={"recipe": r}) for r in choices])
             else:
                 options.append([slot])

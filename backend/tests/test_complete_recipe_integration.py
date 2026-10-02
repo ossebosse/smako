@@ -89,7 +89,7 @@ def test_source_nutrition_bound_rejections_are_in_visible_totals():
     assert result["not_singleton_evaluated"] == 0
 
 
-def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path):
+def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path, monkeypatch):
     from app.models.personal import MealSlot
     from app.services.personal_planner import PersonalPlanner
     from app.services.personal_policy import ProductFacts
@@ -120,6 +120,19 @@ def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path
     assert reopened.plan.recipes == result.recipes
     assert reopened.request.recipe_preferences == prefs
     assert reopened.plan.personal.checks["search_outcome"]["global_optimum_proven"] is False
+    approved = prefs.model_copy(update={"adaptation": "approved"})
+    variant = next(r for r in candidates(approved, 2) if r.design.base_id == recipe.design.base_id and r.design.variant_id != recipe.design.variant_id)
+    request.recipe_preferences = approved
+    automatic = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(), facts=facts, now=NOW)
+    monkeypatch.setattr(automatic, "_candidates", lambda meal: [recipe, variant])
+    with pytest.raises(PolicyConflict) as stopped:
+        automatic.create(replace_slot="dinner-1")
+    assert stopped.value.code == "RECIPE_ALTERNATIVE_NOT_FOUND"
+    # Explicitly selected approved variants keep their meaning and are fully
+    # qualified, even though automatic 'replace recipe' needs another base.
+    request.personal.slots[0].recipe = variant
+    explicit = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(), facts=facts, now=NOW).create()
+    assert explicit.recipes[0] == variant
 
 
 def test_edited_unregistered_recipe_cannot_enter_complete_mode():
