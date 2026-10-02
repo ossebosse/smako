@@ -284,13 +284,13 @@ def input_evidence(recipe, product, name, unit, qualified, fact):
         # Reuse the established fresh/juice/puree/canned identity boundary even
         # when all requested nutrient fields happen to be available.
         return None
-    if form == "cooked_drained":
+    if form in {"cooked_drained", "preserved_drained"}:
         # The existing usable_quantity drives whole-package purchase planning.
         # It must explicitly refer to source-proven drained contents. A small
         # package number, a bean name or a generic reference is not that proof.
         if not (
             fact
-            and fact.nutrition_preparation in {"cooked_drained", "draining_unspecified"}
+            and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained", "draining_unspecified"}
             and unit == "g"
             and fact.nutrition_unit == "g"
             and any(
@@ -302,7 +302,7 @@ def input_evidence(recipe, product, name, unit, qualified, fact):
             )
         ):
             return None
-        qualified = bool(fact.nutrition and fact.nutrition_basis and fact.nutrition_preparation == "cooked_drained")
+        qualified = bool(fact.nutrition and fact.nutrition_basis and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained"})
     evidence = fact if qualified else None
     if evidence is None:
         if unit != "g" or (fact and fact.nutrition and not (

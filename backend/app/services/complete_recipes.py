@@ -91,8 +91,11 @@ def product_form_compatible(recipe, name, product, fact):
         return False
     ingredient = next((i for i in getattr(recipe, "ingredients", ()) if canonicalize_ingredient_name(i.name) == canonical), None)
     requirements = getattr(ingredient, "product_requirements", None) or ()
-    if "ground" in requirements and not (re.search(r"malen|pulver", text) or canonical in {"paprikapulver", "chilipulver", "gurkmeja"}):
-        return False
+    if "ground" in requirements:
+        if re.search(r"\bhel(?:a)?\b|stång|stänger", text):
+            return False
+        if not (re.search(r"malen|pulver", text + " " + composition) or canonical in {"paprikapulver", "chilipulver", "gurkmeja", "cayennepeppar"}):
+            return False
     if "firm" in requirements and not re.search(r"\bfast\b|\bfirm\b", text):
         return False
     if "thick" in requirements:
@@ -102,11 +105,36 @@ def product_form_compatible(recipe, name, product, fact):
             fat = fact.nutrition.get("fat_g")
         if not re.search(r"grekisk|turkisk|avrunnen|strained", text) or fat is None or not 5 <= fat <= 10:
             return False
+    if "pure_juice" in requirements:
+        declared = composition.split("kan innehålla")[0]
+        if not fact or not fact.ingredients_complete or not declared or re.search(r"socker|sirap|sötningsmedel|juiceblandning", declared):
+            return False
+        if canonical == "citronjuice" and re.search(r"apelsin|lime|äpple", declared):
+            return False
+        if canonical == "limejuice" and re.search(r"apelsin|citron|äpple", declared):
+            return False
+    if ("plain" in requirements and canonical == "jordnötssmör"
+            and (not fact or not fact.ingredients_complete or not composition or re.search(r"socker|sirap|sötningsmedel|kakao|choklad", composition.split("kan innehålla")[0]))):
+        return False
+    if "frozen" in requirements and not re.search(r"fryst|frysta|djupfryst", text + " " + (getattr(product, "category", None) or "").casefold()):
+        return False
+    if "red_split" in requirements:
+        if not re.search(r"röd", text + " " + composition) or re.search(r"gröna|svarta|hela", text + " " + composition):
+            return False
+        # Red lentils are often split but whole red lentils also exist. An
+        # explicit split/peeled source description is required for this method.
+        if not re.search(r"delade|split|skalade", text + " " + composition):
+            return False
+    if "white_rice" in requirements:
+        if re.search(r"fullkorn|råris|brunt|svart|rött|vildris", text + " " + composition):
+            return False
+        if not re.search(r"vitt|white|jasmin|basmati|parboiled|långkorn", text + " " + composition):
+            return False
     if form == "raw_edible" and re.search(r"torkad|pulver|granulat|kokt|grillad|stekt|panerad|nugget|rökt|gravad|rimmad|marinerad", text):
         return False
     if form == "dry" and (re.search(r"kokt|färdig|konserv|avrun", text) or "vatten" in composition):
         return False
-    if form == "cooked_drained":
+    if form in {"cooked_drained", "preserved_drained"}:
         return bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
                                 and e.get("quantity") == product.usable_quantity and e.get("source")
                                 for e in fact.field_sources.get("usable_quantity", ())))
@@ -129,6 +157,7 @@ def _whole_food_identity(canonical, form, product, fact):
     label = re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:kg|g|ml|cl|l)\b", "", label)
     label = " ".join(label.split())
     composition = " ".join(fact.ingredients).casefold() if fact else ""
+    declared = re.split(r"kan innehålla|kan indeholde|may contain", composition)[0]
     if re.search(r"chips|kex|dipp|buljong|kryddblandning|mariner|smaksatt|nugget|färdigrätt|färdigmat|torrfoder", label):
         return False
     fresh = any(k in category for k in ("frukt", "grönt", "grönsak", "kryddväxt")) or bool(re.search(r"klass [12]|färsk|kruka|knippe", label))
@@ -139,11 +168,12 @@ def _whole_food_identity(canonical, form, product, fact):
         descriptor = f"(?:{common}|{extra})" if extra else common
         return bool(re.fullmatch(rf"(?:{descriptor} )*{pattern}(?: {descriptor})*", label))
     if canonical in herbs:
-        return form == "raw_edible" and simple(herbs[canonical]) and (fresh or frozen)
+        return (form == "raw_edible" and simple(herbs[canonical]) and (fresh or frozen)
+                and not re.search(r"\b(?:salt|socker|olja|smör|grädde|vitlök)\b", declared))
     if canonical == "oregano":
         return (form == "dry" and simple("oregano", "torkad|burk") and not fresh and not frozen
                 and ("krydd" in category or re.search(r"torkad|burk|påse", label)))
-    spices = {"paprikapulver": r"paprikapulver", "spiskummin": r"spiskummin", "chilipulver": r"chilipulver", "gurkmeja": r"gurkmeja", "kanel": r"(?:kanel|kanel cassia)"}
+    spices = {"paprikapulver": r"paprikapulver", "spiskummin": r"spiskummin", "chilipulver": r"chilipulver", "cayennepeppar": r"cayennepeppar", "gurkmeja": r"gurkmeja", "kanel": r"(?:kanel|kanel cassia)"}
     if canonical in spices:
         if not (form == "dry" and simple(spices[canonical], "malen|milt|mild|söt|stark|burk") and not fresh):
             return False
@@ -158,9 +188,10 @@ def _whole_food_identity(canonical, form, product, fact):
         "vitlök": r"vitlök", "gul lök": r"(?:gul lök|lök gul)", "rödlök": r"(?:rödlök|röd lök)",
         "gurka": r"gurka", "morot": r"(?:morot|morötter)", "zucchini": r"(?:zucchini|squash)",
         "aubergine": r"aubergine", "paprika": r"paprika", "vitkål": r"vitkål", "broccoli": r"broccoli",
-        "blomkål": r"blomkål", "champinjoner": r"champinjoner", "selleri": r"(?:selleri|stjälkselleri|blekselleri)",
+        "blomkål": r"blomkål", "champinjoner": r"champinjoner", "selleri": r"(?:selleri|stjälkselleri|blekselleri|bladselleri)",
         "haricots verts": r"haricots verts", "pepparrot": r"pepparrot", "ingefära": r"ingefära",
         "spenat": r"(?:spenat|babyspenat)",
+        "rödbeta": r"(?:rödbeta|rödbetor)", "sötpotatis": r"sötpotatis",
     }
     if canonical in produce:
         if not simple(produce[canonical], "fast|mjölig|tvättad|kok|stor|smått&gott|små|delikatess|libanesisk|grön|röd|gul|orange|lila|buketter|blad|ofilmad|i kapsel|skivor"):
@@ -170,7 +201,7 @@ def _whole_food_identity(canonical, form, product, fact):
         return not re.search(r"konserv|tork|krydd", category) or fresh
     proteins = {
         "kyckling": r"(?:kycklingfilé|kycklingbröstfilé|kycklingbröst|kyckling lårfilé|kycklinglårfilé|kyckling innerfilé|kycklinginnerfilé|kyckling bröstfilé|kyckling filé)",
-        "nötfärs": r"nötfärs", "fläskfärs": r"fläskfärs", "fläskkött": r"(?:fläskfilé|fläskytterfilé|fläskkarré benfri|benfri fläskkarré)",
+        "nötfärs": r"nötfärs", "fläskfärs": r"fläskfärs", "blandfärs": r"blandfärs", "fläskkött": r"(?:fläskfilé|fläskytterfilé|fläskkarré benfri|benfri fläskkarré)",
         "lax": r"(?:laxfilé|laxfile|lax filé|lax)", "fisk": r"(?:torsk|torskfilé|sejfilé|koljafilé|alaska pollock|alaska pollockfilé|torskrygg)",
     }
     if canonical in proteins:
@@ -178,11 +209,11 @@ def _whole_food_identity(canonical, form, product, fact):
                 and not re.search(r"\b(?:salt|socker|marinad|kryddor|vatten)\b", composition.split("kan innehålla")[0]))
     if canonical in {"yoghurt", "yoghurt naturell"}:
         return bool(re.fullmatch(r"(?:(?:mild|lätt|grekisk|turkisk|laktosfri|ekologisk|eko|naturell) )*yoghurt(?: (?:mild|lätt|naturell|laktosfri|ekologisk|eko|\d+(?:[,.]\d+)?\s*%))*", label)
-                    and "naturell" in label)
+                    and "naturell" in label and not re.search(r"socker|sirap|vanilj|jordgubb|banan|kokos", declared))
     if canonical == "tofu":
-        return bool(re.fullmatch(r"(?:(?:naturell|fast|ekologisk|eko) )*tofu(?: (?:naturell|fast|firm|ekologisk|eko|vegansk|vegan))*", label.replace("/", " ")) and "naturell" in label)
+        return bool(re.fullmatch(r"(?:(?:naturell|fast|extra fast|ekologisk|eko) )*tofu(?: (?:naturell|fast|extra fast|firm|ekologisk|eko|vegansk|vegan))*", label.replace("/", " ")) and "naturell" in label and not re.search(r"rök|vitlök|ingefära|chili|marinad|socker", declared))
     if canonical == "keso":
-        return bool(re.fullmatch(r"(?:keso|cottage cheese)(?: (?:mini|laktosfri|naturell|ekologisk|eko|\d+(?:[,.]\d+)?\s*%))*", label))
+        return bool(re.fullmatch(r"(?:keso|keso cottage cheese|cottage cheese)(?: (?:mini|laktosfri|naturell|ekologisk|eko|\d+(?:[,.]\d+)?\s*%))*", label))
     if canonical == "sojasås":
         return bool(re.fullmatch(r"(?:(?:glutenfri|japansk|tamari) )*sojasås(?: (?:japansk|tamari|glutenfri|vegan))*", label))
     if canonical == "jordnötssmör":
@@ -203,6 +234,7 @@ def _whole_food_identity(canonical, form, product, fact):
         "senap": r"(?:dijon )?senap(?: dijon| stark| mild| grov| skånsk| sötstark| finmalen)*",
         "kapris": r"kapris(?: små| fina| fin| i lag)*", "oliver": r"(?:gröna |svarta )?oliver(?: utan kärnor| urkärnade| kalamata| gröna| svarta)*",
         "salt": r"(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*",
+        "mjölk": r"(?:standardmjölk|mellanmjölk|lättmjölk|mjölk)(?: laktosfri| ekologisk| eko| \d+(?:[,.]\d+)?\s*%)*",
     }
     if canonical in staples:
         return bool(re.fullmatch(staples[canonical], label))
@@ -214,7 +246,7 @@ def _whole_food_identity(canonical, form, product, fact):
         "havregryn": r"(?:havregryn|fina havregryn)", "ströbröd": r"(?:ströbröd|panko|panko ströbröd)",
     }
     if canonical in grains:
-        return form == "dry" and simple(grains[canonical], "fullkorn|fullkorns|glutenfri|glutenfritt|snabb|original|durumvete|durum|malet|fint|finmalet|special|siktat|torkade")
+        return form == "dry" and simple(grains[canonical], "fullkorn|fullkorns|glutenfri|glutenfritt|snabb|original|durumvete|durum|malet|fint|finmalet|special|siktat|torkade|delade|skalade|split")
     legumes = {"kikärtor": "kikärtor|kikärter", "kidneybönor": "kidneybönor|röda kidneybönor", "svarta bönor": "svarta bönor", "bönor": "bönor|vita bönor|stora vita bönor", "majs": "majs|majskorn|sockermajs", "ärtor": "ärtor|gröna ärtor"}
     if canonical in legumes:
         return simple(f"(?:{legumes[canonical]})", "kokta|avrunna|sweet corn|extra fina|söta|2-p|3-pack|utan tillsatt socker")

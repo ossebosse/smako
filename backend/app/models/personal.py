@@ -128,7 +128,7 @@ class PantryItem(PrivateModel):
     unusable: bool = False
     food: bool = True
     nutrition_reference: str | None = Field(default=None, max_length=60)
-    form: Literal["raw_edible", "dry", "as_sold", "cooked_drained"] | None = Field(default=None, exclude_if=lambda v: v is None)
+    form: Literal["raw_edible", "dry", "as_sold", "cooked_drained", "preserved_drained"] | None = Field(default=None, exclude_if=lambda v: v is None)
 
     @model_validator(mode="after")
     def reference_identity(self):

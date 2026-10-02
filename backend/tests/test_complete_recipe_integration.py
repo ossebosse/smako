@@ -81,6 +81,7 @@ def test_feedback_accepts_partial_and_binds_nonempty_ratings():
 def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path):
     from app.models.personal import MealSlot
     from app.services.personal_planner import PersonalPlanner
+    from app.services.personal_policy import ProductFacts
     from app.services.plan_store import PlanStore
     from app.services.recipe_library import candidates
 
@@ -90,13 +91,15 @@ def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path
     recipe = candidates(prefs, 2)[0]
     products = [product(i.name, max(100, i.quantity), i.unit, 10).model_copy(update={
         "category": "Kryddor" if i.form == "dry" else "Frukt & grönsaker" if i.form == "raw_edible" else "Mat",
-        "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name,
+        "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name + " Malen" if i.name == "spiskummin" else i.name,
     }) for i in recipe.ingredients]
     universe = prepared(*products)
     request = PlanRequest(recipes=1, servings=2, max_stores=1, recipe_preferences=prefs,
         personal=PersonalPlanning(meals=[MealSettings(count=1, servings=2)],
             slots=[MealSlot(id="dinner-1", day=1, meal_type="dinner", recipe=recipe)]))
-    result = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(), facts={}, now=NOW).create()
+    facts = {(p.store_id, p.product_id): ProductFacts(source="synthetic_test_declaration", source_product_id=p.product_id,
+        source_snapshot_id="v2-frozen", ingredients=(p.name,), ingredients_complete=True) for p in products}
+    result = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(), facts=facts, now=NOW).create()
     assert result.personal.checks["checkout_audit"]["passed"]
     assert result.optimized_basket.total == 10 * len(recipe.ingredients)
     assert result.recipes[0] == recipe
@@ -137,6 +140,12 @@ def test_edited_unregistered_recipe_cannot_enter_complete_mode():
     ("jordnötssmör", "as_sold", "Jordnötssmör Kakao Granola Nötsmörsbakad", "Skafferi", False),
     ("sojasås", "as_sold", "Sojasås Sweet", "Soja", False),
     ("sojasås", "as_sold", "Sojasås Japansk", "Soja", True),
+    ("keso", "as_sold", "Keso Cottage Cheese Naturell Mini 1,5%", "Mejeri", True),
+    ("selleri", "raw_edible", "Bladselleri", "Frukt & grönt", True),
+    ("rödbeta", "raw_edible", "Rödbetor Kokta", "Grönsaker", False),
+    ("rödbeta", "raw_edible", "Rödbetor Klass 1", "Frukt & grönt", True),
+    ("cayennepeppar", "dry", "Cayennepeppar", "Kryddor", True),
+    ("mjölk", "as_sold", "Mellanmjölk 1,5%", "Mejeri", True),
 ])
 def test_whole_food_identity_never_substring_matches(ingredient, form, label, category, expected):
     from app.services.complete_recipes import _whole_food_identity
@@ -152,6 +161,23 @@ def test_compound_chili_and_unknown_pantry_form_do_not_qualify():
     assert not pantry_form_compatible({"name": "vitlök", "unit": "g"}, row)
     assert not pantry_form_compatible({"name": "Torkad vitlök", "unit": "g", "form": "raw_edible"}, row)
     assert pantry_form_compatible({"name": "vitlök", "unit": "g", "form": "raw_edible"}, row)
+
+
+@pytest.mark.parametrize("name,requirement,good,bad", [
+    ("yoghurt naturell", "thick", "Grekisk Yoghurt Naturell 10%", "Mild Naturell Yoghurt 0,5%"),
+    ("tofu", "firm", "Tofu Naturell Extra Fast", "Tofu Naturell"),
+    ("spiskummin", "ground", "Spiskummin Malen", "Spiskummin Hel"),
+    ("linser", "red_split", "Röda Linser Delade", "Röda Linser Hela"),
+    ("ris", "white_rice", "Basmatiris", "Ris Fullkorn"),
+])
+def test_reviewed_texture_and_cooking_time_properties_are_binding(name, requirement, good, bad):
+    form = "as_sold" if requirement in {"thick", "firm"} else "dry"
+    recipe = SimpleNamespace(design=True, preparation=SimpleNamespace(input_forms={name: form}),
+        ingredients=[SimpleNamespace(name=name, product_requirements=[requirement])])
+    def item(label):
+        return SimpleNamespace(name=label, category="Kryddor", purchase_terms=None)
+    assert product_form_compatible(recipe, name, item(good), None)
+    assert not product_form_compatible(recipe, name, item(bad), None)
 
 
 @pytest.mark.asyncio
