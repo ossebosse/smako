@@ -37,6 +37,7 @@ from app.services.diet_policy import recipe_respects_diet
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 from app.services.inter_plan_distance import compare_plans, required_changes
 from app.services.meal_plan_optimizer import MealPlanService, _consumer_price_context_coverage
+from app.services.performance_trace import performance_span
 from app.services.personal_nutrition import calculation_basis, requested_nutrients
 from app.services.personal_policy import (
     PolicyConflict,
@@ -66,7 +67,8 @@ def timed_stage(name):
         def measured(self, *args, **kwargs):
             started = perf_counter()
             try:
-                return function(self, *args, **kwargs)
+                with performance_span("personal_" + name):
+                    return function(self, *args, **kwargs)
             finally:
                 self.timings[name] += perf_counter() - started
         return measured
@@ -151,9 +153,10 @@ class PersonalPlanner:
         facts_started = perf_counter()
         from app.services.plan_jobs import report_stage
         report_stage("product_facts")
-        self.facts = (
-            load_retained_facts(prepared) if facts is None and needs_facts else facts
-        ) or {}
+        with performance_span("personal_product_facts"):
+            self.facts = (
+                load_retained_facts(prepared) if facts is None and needs_facts else facts
+            ) or {}
         self.timings["product_facts"] += perf_counter() - facts_started
         from app.services.personal_source_facts import facts_version
 
@@ -945,9 +948,10 @@ class PersonalPlanner:
         with self.optimizer.quote_cache(reuse_existing=True):
             try:
                 package_started = perf_counter()
-                basket = self.optimizer.optimize(
-                    ingredients, candidate_map, self.view.stores, max_stores=self.request.max_stores
-                )
+                with performance_span("personal_package_calculation"):
+                    basket = self.optimizer.optimize(
+                        ingredients, candidate_map, self.view.stores, max_stores=self.request.max_stores
+                    )
                 self.timings["package_calculation"] += perf_counter() - package_started
             except IncompleteBasketError as exc:
                 stores = sorted({c.store_id for cs in candidate_map.values() for c in cs})
@@ -985,12 +989,13 @@ class PersonalPlanner:
                     nutrition_bounds=nutrition_bounds,
                 )
         audit_started = perf_counter()
-        audit = self.auditor.audit(
-            ingredients,
-            basket,
-            user_pricing_context=self.user,
-            strategic_extras_allowed=self.spec.surplus_mode == "allow_larger",
-        )
+        with performance_span("personal_audit"):
+            audit = self.auditor.audit(
+                ingredients,
+                basket,
+                user_pricing_context=self.user,
+                strategic_extras_allowed=self.spec.surplus_mode == "allow_larger",
+            )
         self.timings["audit"] += perf_counter() - audit_started
         if not audit.passed:
             raise PolicyConflict("Korgens mängder/prisvillkor kunde inte verifieras.")
@@ -1895,14 +1900,15 @@ class PersonalPlanner:
     def _candidates(self, meal):
         from app.services.plan_jobs import report_stage
         report_stage("candidate_qualification")
-        if self.complete and meal.meal_type == "dinner":
-            from app.services.recipe_library import candidates as library_candidates
-            candidates = library_candidates(self.request.recipe_preferences, meal.servings)
-        else:
-            generator = self.service.candidate_generator or DeterministicRecipeCandidateGenerator()
-            candidates = generator.generate_for_meal_type(
-                self.view.economic_pool, meal.meal_type, count=80, servings=meal.servings
-            )
+        with performance_span("personal_candidate_generation"):
+            if self.complete and meal.meal_type == "dinner":
+                from app.services.recipe_library import candidates as library_candidates
+                candidates = library_candidates(self.request.recipe_preferences, meal.servings)
+            else:
+                generator = self.service.candidate_generator or DeterministicRecipeCandidateGenerator()
+                candidates = generator.generate_for_meal_type(
+                    self.view.economic_pool, meal.meal_type, count=80, servings=meal.servings
+                )
         if (
             not self.complete
             and
@@ -2264,25 +2270,26 @@ class PersonalPlanner:
         search_started = perf_counter()
         from app.services.plan_jobs import report_stage
         report_stage("week_search")
-        chosen, result = self.service.menu_optimizer.optimize_slots(
-            options,
-            evaluate=evaluate,
-            accepts=accepts,
-            score=score,
-            beam_width=8,
-            fallback_beam_width=64,
-            search_trace=self.diagnostics.search,
-            decision_observer=self.product_trace.search_decision,
-            # Generated meals of one type share requirements. With no pantry
-            # allocation or product locks, permuting their day numbers cannot
-            # change the whole basket or per-recipe nutrient constraints.
-            # Explicit edited schedules and private allocations remain ordered.
-            state_identity=(
-                lambda chosen: tuple(sorted(
-                    (s.meal_type, recipe_id(s.recipe) if s.recipe else "") for s in chosen
-                ))
-            ) if generating and not self.items and not self.spec.product_locks else None,
-        )
+        with performance_span("personal_week_search"):
+            chosen, result = self.service.menu_optimizer.optimize_slots(
+                options,
+                evaluate=evaluate,
+                accepts=accepts,
+                score=score,
+                beam_width=8,
+                fallback_beam_width=64,
+                search_trace=self.diagnostics.search,
+                decision_observer=self.product_trace.search_decision,
+                # Generated meals of one type share requirements. With no pantry
+                # allocation or product locks, permuting their day numbers cannot
+                # change the whole basket or per-recipe nutrient constraints.
+                # Explicit edited schedules and private allocations remain ordered.
+                state_identity=(
+                    lambda chosen: tuple(sorted(
+                        (s.meal_type, recipe_id(s.recipe) if s.recipe else "") for s in chosen
+                    ))
+                ) if generating and not self.items and not self.spec.product_locks else None,
+            )
         self.timings["week_search"] += perf_counter() - search_started
         # Recheck every final constraint even if the cache supplied a beam result.
         report_stage("final_audit")

@@ -91,6 +91,7 @@ def test_source_nutrition_bound_rejections_are_in_visible_totals():
 
 def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path, monkeypatch):
     from app.models.personal import MealSlot
+    from app.services.performance_trace import activate_performance_trace
     from app.services.personal_planner import PersonalPlanner
     from app.services.personal_policy import ProductFacts
     from app.services.plan_store import PlanStore
@@ -110,7 +111,9 @@ def test_authored_complete_recipe_uses_real_basket_and_survives_storage(tmp_path
             slots=[MealSlot(id="dinner-1", day=1, meal_type="dinner", recipe=recipe)]))
     facts = {(p.store_id, p.product_id): ProductFacts(source="synthetic_test_declaration", source_product_id=p.product_id,
         source_snapshot_id="v2-frozen", ingredients=(p.name,), ingredients_complete=True) for p in products}
-    result = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(), facts=facts, now=NOW).create()
+    with activate_performance_trace() as trace:
+        result = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(), facts=facts, now=NOW).create()
+    assert {'personal_product_facts', 'personal_package_calculation', 'personal_audit', 'personal_week_search', 'personal_nutrition'} <= trace.snapshot().span_statistics.keys()
     assert result.personal.checks["checkout_audit"]["passed"]
     assert result.optimized_basket.total == 10 * len(recipe.ingredients)
     assert result.recipes[0] == recipe
