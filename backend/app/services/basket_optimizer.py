@@ -909,26 +909,26 @@ class BasketOptimizer:
         store_bits = {
             store_id: 1 << index for index, store_id in enumerate(ordered_store_ids)
         }
+        # The selected quote for a store is immutable in this quote-cache
+        # session. Compute its sort key and compact representation once, not
+        # once for every subset containing it (millions of repeated calls).
+        sort_keys = {store_id: self._quote_sort_key(quote) for store_id, quote in per_store.items()}
+        compact = {store_id: _CompactQuoteSelection(
+            quote=quote,
+            verification_rank=self.verification_policy.rank_for_quote(quote),
+            total_price=quote.total_price,
+            store_id=store_id,
+            store_mask=store_bits.get(store_id, 0),
+        ) for store_id, quote in per_store.items()}
+        missing = _CompactQuoteSelection(quote=None)
         rows: list[_CompactQuoteSelection] = []
         for combo_ids in store_subsets:
-            eligible = tuple(
-                per_store[store_id]
-                for store_id in combo_ids
-                if store_id in per_store
-            )
+            eligible = tuple(store_id for store_id in combo_ids if store_id in per_store)
             if not eligible:
-                rows.append(_CompactQuoteSelection(quote=None))
+                rows.append(missing)
                 continue
-            quote = min(eligible, key=self._quote_sort_key)
-            rows.append(
-                _CompactQuoteSelection(
-                    quote=quote,
-                    verification_rank=self.verification_policy.rank_for_quote(quote),
-                    total_price=quote.total_price,
-                    store_id=quote.store_id,
-                    store_mask=store_bits[quote.store_id],
-                )
-            )
+            store_id = min(eligible, key=sort_keys.__getitem__)
+            rows.append(compact[store_id])
         result = tuple(rows)
         if vector_key is not None and session is not None:
             session.subset_vectors[vector_key] = result
