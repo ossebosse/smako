@@ -7,8 +7,10 @@
   <title>Smako · Min plan och skafferi</title>
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
   <link rel="stylesheet" href="/static/personal.css?v=personal-v2-1" />
+  <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
-  <script src="/static/personal.js?v=recipe-resolution-20260926" defer></script>
+  <script src="/static/complete-recipes.js?v=complete-recipes-1" defer></script>
+  <script src="/static/personal.js?v=complete-recipes-1" defer></script>
   <script src="/static/product-search.js?v=personal-v2-1" defer></script>
 </head>
 <body class="personal-app">
@@ -51,6 +53,7 @@
     </section>
     <section data-view="choices" id="personal-choices" hidden><h1>Mina val</h1>
       <form id="personal-form">
+        <div id="complete-recipe-controls"></div>
         <fieldset><legend>Prisområde och butiker</legend><div class="personal-grid"><label>Postnummer<input id="postal-code" value="22350" inputmode="numeric" pattern="[0-9]{5}" required /></label><label>Max inköpsställen för hela korgen<select id="max-stores"><option>1</option><option selected>2</option><option>3</option></select></label></div>
           <p>Välj dina butiksmedlemskap. De är skilda från ett Smakokonto.</p><div id="memberships" class="personal-checks"></div>
         </fieldset>

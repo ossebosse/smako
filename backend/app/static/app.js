@@ -165,7 +165,8 @@
   let activeScanner = null;
   let plannerReady = false;
   // Transient request ownership is never persisted or inferred from restored DOM.
-  const FRONTEND_VERSION = "public-menu-async-20261002";
+  const FRONTEND_VERSION = "complete-recipes-1";
+  const recipeControls = window.SmakoRecipes.controls(document.getElementById("complete-recipe-controls"));
   // Same bounded wait as personal planning; the public proxy permits 540 s.
   const PLAN_WAIT_MS = 600000;
   let activePlanRequest = null;
@@ -204,29 +205,8 @@
   }
 
   async function awaitPlanResult(response, signal) {
-    let statusUrl = null;
-    while (response.status === 202) {
-      const pending = await responseJson(response);
-      const next = pending?.status_url;
-      if (pending?.status !== "pending" || !/^\/api\/plan-jobs\/[a-f0-9]{32}$/.test(next || "")
-          || (statusUrl && statusUrl !== next)) {
-        throw new Error("Servern skickade ett ogiltigt planeringssvar. Försök igen.");
-      }
-      statusUrl = next;
-      await new Promise((resolve, reject) => {
-        const abort = () => { window.clearTimeout(timer); reject(signal.reason); };
-        const timer = window.setTimeout(() => {
-          signal.removeEventListener("abort", abort);
-          resolve();
-        }, 2000);
-        signal.addEventListener("abort", abort, { once: true });
-        if (signal.aborted) abort();
-      });
-      response = await fetch(statusUrl, {
-        headers: { Accept: "application/json", "X-Request-ID": crypto.randomUUID() },
-        cache: "no-store", signal,
-      });
-    }
+    response = await window.SmakoRecipes.poll(response, {scope:"public", signal,
+      onProgress: message => { dom.loadingMessage.textContent = message; }});
     return planningResponse(response);
   }
 
@@ -631,6 +611,9 @@
       diversity_mode: selectedDiversityMode(),
       varied_budget_percent: Number(dom.variedBudget.value),
       memberships: selectedMemberships(),
+      availability_mode: selectedAvailabilityMode(),
+      avoid_ingredients: dom.excludedIngredients.value.split(",").map(value => value.trim()).filter(Boolean),
+      ...recipeControls.values(),
     };
   }
 
@@ -661,6 +644,9 @@
       checkDiversityInput(normalizeDiversityMode(saved.diversity_mode));
       if (Number.isFinite(saved.varied_budget_percent) && saved.varied_budget_percent >= 0 && saved.varied_budget_percent <= 100) dom.variedBudget.value = String(saved.varied_budget_percent);
       setSelectedMemberships(saved.memberships || []);
+      dom.excludedIngredients.value = list(saved.avoid_ingredients).join(", ");
+      if (saved.availability_mode) dom.availabilityInputs.forEach(input => { input.checked = input.value === saved.availability_mode; });
+      if (saved.recipe_preferences) recipeControls.restore(saved);
     } catch (_error) {
       // Ignore malformed or unavailable local storage.
     }
@@ -681,6 +667,8 @@
     dom.maxStoresInput.value = "2";
     dom.purchasePlanningMode.value = "exact";
     dom.dietPreference.value = "mixed";
+    dom.excludedIngredients.value = "";
+    recipeControls.reset();
     checkDiversityInput("balanced");
     setSelectedMemberships([]);
     updatePortionChip();
@@ -877,6 +865,7 @@
   }
 
   function errorFromResponse(payload, fallback, status = null, errorCode = null, retryAfter = null) {
+    const reason = typeof payload?.detail === "string" ? payload.detail.trim() : "";
     const normalizedCode = String(errorCode || first(payload, ["error_code", "code"], ""))
       .trim()
       .toLowerCase();
@@ -889,10 +878,10 @@
         : `Det är många som skapar menyer just nu. Försök igen om cirka ${seconds} sekunder.`;
     }
     if (normalizedCode === "data_blocked") {
-      return "Planeringen stoppades eftersom nödvändigt pris-, mängd- eller näringsunderlag inte kan verifieras. Dina val är kvar.";
+      return `Nödvändigt underlag saknas. ${reason || "Pris-, mängd- eller näringsunderlaget kunde inte verifieras."} Dina val är kvar.`;
     }
     if (normalizedCode === "plan_infeasible") {
-      return "Ingen komplett meny kunde byggas med dina krav och det tillgängliga underlaget. Dina val är kvar.";
+      return `${reason || "Ingen komplett meny hittades med dina krav och det tillgängliga underlaget."} Dina val är kvar.`;
     }
     if (status === 422 && Array.isArray(payload?.detail)) {
       return payload.detail.map((entry) => {
@@ -900,7 +889,7 @@
         return field ? `${field.label}: ${entry.msg || "kontrollera värdet"}.` : "Ett värde i begäran är ogiltigt.";
       }).join(" ");
     }
-    if (status === 422) return "Planeringen kunde inte genomföras med det tillgängliga underlaget. Dina val är kvar.";
+    if (status === 422) return `${reason || "Planeringen kunde inte genomföras med det tillgängliga underlaget."} Dina val är kvar.`;
     if (status === 504) return "Planeringstjänsten svarade inte i tid. Försök igen om en stund.";
     if (status === 502) return "Servern kunde inte få svar från planeringstjänsten. Försök igen om en stund.";
     if (normalizedCode === "saved_plan_owner_session_unavailable") {
@@ -940,6 +929,8 @@
       diet_preference: { node: dom.dietPreference, label: "Kost" },
       varied_budget_percent: { node: dom.variedBudget, label: "Kostnadstak för Varierad" },
       avoid_ingredients: { node: dom.excludedIngredients, label: "Undvik ingredienser" },
+      recipe_preferences: { node: document.getElementById("recipe-style"), label: "Receptval" },
+      allowed_store_ids: { node: document.getElementById("recipe-price-contexts"), label: "Butiker och priskanaler" },
     };
   }
 
@@ -1065,12 +1056,24 @@
       }
       instructionsSection.append(instructionsList);
       content.append(ingredientsSection, instructionsSection);
+      if (recipe.design) {
+        const slot = data.personal?.slots?.filter(row => row.recipe)[index];
+        const nutrition = data.personal?.checks?.nutrition?.find(row => row.slot_id === slot?.id);
+        const completeContent = window.SmakoRecipes.renderRecipe(recipe, {nutrition, personal:data.personal, slotId:slot?.id});
+        content.replaceChildren(completeContent);
+      }
       const recipeActions = createElement("div", "recipe-actions");
-      const replaceButton = createElement("button", "secondary-button compact-button", "Byt recept");
+      const replaceButton = createElement("button", "secondary-button compact-button", recipe.design ? "Byt recept och räkna om inköpen" : "Byt recept");
       replaceButton.type = "button";
       replaceButton.hidden = !first(currentResponse, ["plan_id"]);
       replaceButton.addEventListener("click", () => void replaceRecipe(index, replaceButton));
       recipeActions.append(replaceButton);
+      if (recipe.design && currentResponse?.plan_id) {
+        const feedbackButton = createElement("button", "secondary-button compact-button", "Så blev rätten");
+        feedbackButton.type = "button";
+        feedbackButton.addEventListener("click", () => window.SmakoRecipes.recipeFeedback({recipe, recipeIndex:index, planId:currentResponse.plan_id, revision:currentResponse.plan_revision}));
+        recipeActions.append(feedbackButton);
+      }
       content.append(recipeActions);
       details.append(content);
       dom.recipesList.append(details);
@@ -2452,13 +2455,14 @@
     dom.planPersistenceStatus.textContent = createdAt
       ? `Sparad ${createdAt}${pricedAt ? ` · prisberäknad ${pricedAt}` : ""}. Beloppet ändras inte i efterhand.`
       : "Planen är sparad. Priserna ändras inte i efterhand.";
+    if (data.personal) dom.planPersistenceStatus.textContent += ` Revision ${data.plan_revision}. Receptbyte och omräkning sparar en ny revision.`;
     dom.copyPlanLink.hidden = false;
     const versionStatus = String(first(data, ["price_version_status"], "current"));
     const savedUniverseId = first(data, ["price_universe_id", "data.price_universe_id"]);
     const showBanner = versionStatus === "newer_available"
       || versionStatus === "coverage_changed"
       || (versionStatus === "unavailable" && Boolean(savedUniverseId));
-    dom.newPricesBanner.hidden = !showBanner;
+    dom.newPricesBanner.hidden = !showBanner && !data.personal;
     if (versionStatus === "coverage_changed") {
       dom.newPricesTitle.textContent = "En tidigare priskälla behöver uppdateras";
       dom.newPricesMessage.textContent = "Planen visas med priset från när den skapades. Räkna om för att använda bara priskällor som är aktuella nu.";
@@ -2466,10 +2470,11 @@
       dom.newPricesTitle.textContent = "Aktuella priser kan inte kontrolleras just nu";
       dom.newPricesMessage.textContent = "Den sparade planen och dess ursprungliga pris visas oförändrade. Försök kontrollera aktuella priser senare.";
     } else {
-      dom.newPricesTitle.textContent = "Nya priser finns";
-      dom.newPricesMessage.textContent = "Din sparade plan visas fortfarande med sitt ursprungliga prisunderlag.";
+      dom.newPricesTitle.textContent = showBanner ? "Nya priser finns" : "Samordnade inköp för hela veckan";
+      dom.newPricesMessage.textContent = showBanner ? "Din sparade plan visas fortfarande med sitt ursprungliga prisunderlag." : "Räkna uttryckligen om med aktuellt prisunderlag och skafferi. Den tidigare revisionen bevaras.";
     }
-    dom.recalculatePlanButton.hidden = !Boolean(first(data, ["recalculation_available"], false));
+    dom.recalculatePlanButton.hidden = !data.personal && !Boolean(first(data, ["recalculation_available"], false));
+    dom.recalculatePlanButton.textContent = data.personal ? "Räkna om inköpslistan" : "Uppdatera planen";
   }
 
   function applySavedRequestToForm(request) {
@@ -2479,6 +2484,7 @@
     dom.servingsInput.value = String(first(request, ["servings"], dom.servingsInput.value));
     dom.maxStoresInput.value = String(first(request, ["max_stores"], dom.maxStoresInput.value));
     dom.purchasePlanningMode.value = first(request, ["purchase_planning_mode"], "exact");
+    recipeControls.restore(request);
     dom.dietPreference.value = first(request, ["diet_preference"], dom.dietPreference.value);
     checkDiversityInput(normalizeDiversityMode(first(request, ["diversity_mode"], "balanced")));
     dom.variedBudget.value = String(first(request, ["varied_budget_percent"], 25));
@@ -2560,6 +2566,7 @@
     savedPlanRequest = payload && payload.request && typeof payload.request === "object"
       ? payload.request
       : null;
+    if (savedPlanRequest) applySavedRequestToForm(savedPlanRequest);
     const savedMemberships = first(payload, [
       "request.membership_programs",
       "request.memberships",
@@ -2582,7 +2589,43 @@
     try { return await response.json(); } catch (_error) { return null; }
   }
 
+  async function changeCompletePlan(action, fields, button) {
+    if (activePlanRequest || !currentResponse?.plan_id) return;
+    const request = {controller:new AbortController(), deadline:Date.now()+PLAN_WAIT_MS, id:crypto.randomUUID()};
+    activePlanRequest=request;setLoading(true);if(button)button.disabled=true;
+    try {
+      const result=await boundedRequest(request.controller,PLAN_WAIT_MS,async signal=>{
+        const stateResponse=await fetch("/api/personal/state",{headers:{Accept:"application/json"},cache:"no-store",signal});
+        const state=await responseJson(stateResponse);if(!stateResponse.ok)throw new Error(errorFromResponse(state,"Skafferiet kunde inte läsas."));
+        const response=await fetch(`/api/personal/plans/${encodeURIComponent(currentResponse.plan_id)}/change`,{method:"POST",headers:{"Content-Type":"application/json",Prefer:"respond-async","X-Request-ID":request.id},body:JSON.stringify({action,revision:currentResponse.plan_revision,pantry_revision:state.revision,...fields}),signal});
+        const final=await window.SmakoRecipes.poll(response,{scope:"public",signal,context:{kind:"change"},onProgress:message=>{dom.loadingMessage.textContent=message;}});
+        const payload=await responseJson(final);if(!final.ok)throw new Error(errorFromResponse(payload,"Planen kunde inte räknas om. Din tidigare revision finns kvar.",final.status));return payload;
+      });
+      applySavedPlan(result.saved);if(action==="replace")sendAnalyticsEvent("recipe_replaced");
+    } catch(error){showError(`${error.message} Fel-ID: ${request.id}`);}
+    finally{if(activePlanRequest===request){activePlanRequest=null;setLoading(false);}if(button)button.disabled=false;}
+  }
+
+  async function resumePublicJob() {
+    const pending=window.SmakoRecipes.pendingJob("public");if(!pending||activePlanRequest)return;
+    const request={controller:new AbortController(),deadline:Date.now()+PLAN_WAIT_MS,id:crypto.randomUUID()};activePlanRequest=request;planViewEpoch+=1;savedPlanController?.abort();setLoading(true);
+    dom.loadingMessage.textContent="Återansluter till din pågående menyberäkning…";
+    try {
+      const payload=await boundedRequest(request.controller,PLAN_WAIT_MS,async signal=>{
+        let response=await fetch(pending.url,{headers:{Accept:"application/json"},cache:"no-store",signal});
+        response=await window.SmakoRecipes.poll(response,{scope:"public",signal,onProgress:message=>{dom.loadingMessage.textContent=message;}});
+        const data=await responseJson(response);if(!response.ok)throw new Error(errorFromResponse(data,response.status===410?"Beräkningen avslutades vid serveromstart. Dina val finns kvar; skapa menyn igen.":"Beräkningen kunde inte återläsas.",response.status));return data;
+      });
+      applySavedPlan(payload.saved||payload);
+    }catch(error){showError(`${error.message} Dina val och tidigare sparade planer finns kvar.`);}
+    finally{if(activePlanRequest===request){activePlanRequest=null;setLoading(false);}}
+  }
+
   async function replaceRecipe(recipeIndex, button) {
+    if (currentResponse?.personal) {
+      const slots = currentResponse.personal.slots.filter(slot => slot.recipe);
+      return changeCompletePlan("replace", {slot_id:slots[recipeIndex]?.id}, button);
+    }
     const planId = first(currentResponse, ["plan_id"]);
     if (!planId) return;
     const original = button.textContent;
@@ -3203,6 +3246,7 @@
       });
       if (!payload) throw new Error("readiness unavailable");
       frontendBuildId = String(first(payload, ["build_id", "app_version", "version"], "beta"));
+      recipeControls.enabled(payload.features?.complete_recipes_enabled === true);
       dom.appVersion.textContent = `Beta · ${frontendBuildId} · UI ${FRONTEND_VERSION}`;
       // /ready owns the policy: AGING/WARNING remains usable, while missing,
       // STALE or BROKEN required data returns 503. Mock/local modes may be
@@ -3223,6 +3267,7 @@
   async function submitPlan(event) {
     event.preventDefault();
     if (activePlanRequest) return;
+    if (window.SmakoRecipes.pendingJob("public")) { await resumePublicJob(); return; }
     dom.errorState.hidden = true;
     Object.values(planErrorFields()).forEach(({ node }) => node.removeAttribute("aria-invalid"));
 
@@ -3234,6 +3279,7 @@
       dom.form.reportValidity();
       return;
     }
+    if (!recipeControls.validate()) { dom.form.reportValidity(); return; }
 
     const memberships = selectedMemberships();
     setSelectedMemberships(memberships, { persist: true });
@@ -3260,6 +3306,7 @@
       candidate_recipe_count: 80,
       beam_width: 30,
       debug: debugMode,
+      ...recipeControls.values(),
     };
 
     const requestStartedAt = performance.now();
@@ -3380,6 +3427,8 @@
     sendAnalyticsEvent("max_stores_selected", { max_stores: Number(dom.maxStoresInput.value) });
   });
   dom.purchasePlanningMode.addEventListener("change", persistPlannerPreferences);
+  dom.excludedIngredients.addEventListener("change", persistPlannerPreferences);
+  dom.availabilityInputs.forEach(input => input.addEventListener("change", persistPlannerPreferences));
   dom.dietPreference.addEventListener("change", () => {
     persistPlannerPreferences();
     sendAnalyticsEvent("diet_selected", { diet: dom.dietPreference.value });
@@ -3414,6 +3463,7 @@
   });
   dom.copyPlanLink.addEventListener("click", () => void copyCurrentPlanLink());
   dom.recalculatePlanButton.addEventListener("click", () => {
+    if (currentResponse?.personal) { void changeCompletePlan("recalculate", {}, dom.recalculatePlanButton); return; }
     if (!savedPlanRequest) return;
     applySavedRequestToForm(savedPlanRequest);
     dom.form.requestSubmit();
@@ -3509,7 +3559,7 @@
     try { locallySavedPlanId = window.localStorage.getItem(lastPlanStorageKey); } catch (_error) { locallySavedPlanId = null; }
   }
   const requestedPlanId = urlPlanId || locallySavedPlanId;
-  if (requestedPlanId) {
+  if (requestedPlanId && !window.SmakoRecipes.pendingJob("public")) {
     const restoreEpoch = planViewEpoch;
     savedPlanController = new AbortController();
     void boundedRequest(savedPlanController, 20000, async (signal) => {
@@ -3537,6 +3587,9 @@
         : "Den sparade planen kunde inte hämtas just nu. Plan-ID:t finns kvar på den här enheten. Du kan ladda om sidan eller skapa en ny meny.");
     });
   }
+
+  void resumePublicJob();
+  window.addEventListener("online", () => { if(!activePlanRequest)void resumePublicJob(); });
 
   window.addEventListener("pageshow", reconcilePlanningState);
   window.addEventListener("pagehide", (event) => {

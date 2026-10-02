@@ -13,9 +13,11 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/static/icons/app-icon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
     <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
     <script src="/static/frontend-bootstrap.js?v=loading-hotfix-20260909" defer></script>
-    <script src="/static/app.js?v=public-menu-async-20261002" defer></script>
+    <script src="/static/complete-recipes.js?v=complete-recipes-1" defer></script>
+    <script src="/static/app.js?v=complete-recipes-1" defer></script>
     <script src="/static/product-search.js?v=ica-quality-20260909" defer></script>
   </head>
   <body>
@@ -167,6 +169,8 @@
                 </select>
               </div>
             </div>
+
+            <div id="complete-recipe-controls"></div>
 
             <fieldset class="variation-field" aria-describedby="variation-hint">
               <legend>Mål</legend>
