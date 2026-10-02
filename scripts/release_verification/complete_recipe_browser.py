@@ -263,6 +263,31 @@ def run_case(browser, engine, mobile, personal, args):
         page.locator("#shopping-content" if personal else "#shopping-section").screenshot(path=str(target / "shopping.png"))
         originals = {envelope["revision"]: envelope}
         assert digest(read_saved(context, args.base, envelope["plan_id"])) == digest(envelope)
+        if args.recipe_mode == "complete":
+            if personal:
+                page.locator('.personal-nav [data-open="plan"]').click()
+            open_recipes(page, personal)
+            page.get_by_role("button", name="Så blev rätten", exact=True).first.click()
+            page.locator("#recipe-feedback-taste").select_option("4")
+            page.locator("#recipe-feedback-difficulty").select_option("2")
+            page.locator("#recipe-feedback-portion").select_option("right")
+            page.locator("#recipe-feedback-minutes").fill("37")
+            page.locator(".complete-feedback-dialog textarea").fill(
+                "Automatiserat gränssnittsprov i isolerad miljö. Betyg och tid är syntetiska testvärden; detta är inte provlagning.")
+            with page.expect_response(lambda response: response.request.method == "POST" and urlsplit(response.url).path == "/api/feedback") as received:
+                page.locator(".complete-feedback-dialog button[type=submit]").click()
+            feedback_response = received.value
+            expected = {"revision": envelope["revision"], "recipe_index": 0, "taste": 4, "difficulty": 2,
+                        "portion_size": "right", "actual_minutes": 37}
+            assert feedback_response.status == 201
+            assert feedback_response.request.post_data_json["recipe_feedback"] == expected
+            expect(page.locator(".complete-feedback-dialog [role=status]")).to_contain_text("receptversionen")
+            report["recipe_feedback"] = {"request": expected, "response": feedback_response.json(),
+                                         "expected_bound_design": envelope["plan"]["recipes"][0]["design"],
+                                         "synthetic_ratings_not_cooking_evidence": True,
+                                         "persisted_binding_requires_feedback_store_readback": True}
+            page.locator(".complete-feedback-dialog").get_by_role("button", name="Stäng", exact=True).click()
+            assert digest(read_saved(context, args.base, envelope["plan_id"])) == digest(envelope)
         page.reload(wait_until="domcontentloaded")
         wait_render(page, personal)
         report["identical_saved_reload"] = digest(read_saved(context, args.base, envelope["plan_id"])) == digest(envelope)
@@ -325,7 +350,7 @@ def run_case(browser, engine, mobile, personal, args):
             if args.expect_flag_off_after_restart:
                 metadata = context.request.get(args.base + "/api/recipe-library", timeout=30000).json()
                 assert metadata["enabled"] is False
-                expect(page.locator("#complete-recipe-controls")).to_be_hidden(timeout=15000)
+                expect(page.locator("#recipe-style")).to_be_hidden(timeout=15000)
                 assert open_recipes(page, personal) == args.dinners
                 assert page.locator(".complete-recipe-content:visible").count() == args.dinners
                 report["saved_recipes_readable_with_feature_disabled"] = True
@@ -336,6 +361,9 @@ def run_case(browser, engine, mobile, personal, args):
         denied = other.request.get(f"{args.base}/api/plans/{envelope['plan_id']}", timeout=30000)
         report["other_owner_status"] = denied.status
         assert denied.status in {403, 404}
+        job_urls = {response.url for response in observed if urlsplit(response.url).path.startswith("/api/plan-jobs/")}
+        report["other_owner_job_statuses"] = [other.request.get(url, timeout=30000).status for url in sorted(job_urls)]
+        assert all(status in {403, 404} for status in report["other_owner_job_statuses"])
         other.close()
         assert not errors, errors
         report["outcome"] = "PASS"
