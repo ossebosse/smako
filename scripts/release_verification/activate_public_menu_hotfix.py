@@ -87,7 +87,8 @@ def stage(candidate):
     (release/'keep-existing-proxy.yaml').write_bytes((old/'keep-existing-proxy.yaml').read_bytes())
     override=release/'public-menu-app.yaml'
     override.write_text('services:\n  app:\n    image: '+candidate['image']+'\n    environment:\n      BUILD_ID: '+candidate['commit']+'\n')
-    before=compose_config(old)
+    old_override=old/'public-menu-app.yaml'
+    before=compose_config(old, ('-f',str(old_override)) if old_override.exists() else ())
     after=compose_config(release,('-f',str(override)))
     assert set(before['services'])==set(after['services']) and 'caddy' not in after['services']
     for name in before['services']:
@@ -100,9 +101,14 @@ def stage(candidate):
 
 
 def main():
+    global EVIDENCE, STATE
     parser=argparse.ArgumentParser()
     parser.add_argument('mode',choices=['stage','activate','rollback'])
+    parser.add_argument('--evidence-root',type=Path,default=EVIDENCE)
     args=parser.parse_args()
+    EVIDENCE=args.evidence_root.resolve()
+    assert EVIDENCE.is_relative_to(ROOT/'evidence')
+    STATE=EVIDENCE/'deployment-before.private.json'
     candidate=json.loads((EVIDENCE/'candidate-image.json').read_text())
     if args.mode=='stage':
         result=stage(candidate)
@@ -147,8 +153,10 @@ finally:
                       'image':app['Image'],'scheduler_id':scheduler,'proxy_id':proxy}
             STATE.write_text(json.dumps(original))
             STATE.chmod(0o600)
-            wrapper=original['wrapper'].replace(' "$@"',' -f /opt/smako/current/public-menu-app.yaml "$@"')
-            assert wrapper!=original['wrapper']
+            wrapper=original['wrapper']
+            if '/opt/smako/current/public-menu-app.yaml' not in wrapper:
+                wrapper=wrapper.replace(' "$@"',' -f /opt/smako/current/public-menu-app.yaml "$@"')
+                assert wrapper!=original['wrapper']
             try:
                 switch(Path(candidate['release']),wrapper)
             except Exception:

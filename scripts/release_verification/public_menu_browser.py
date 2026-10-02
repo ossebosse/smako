@@ -14,10 +14,12 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--base', default='https://beta.smako.nu')
     parser.add_argument('--case')
+    parser.add_argument('--postal-code', default='22350')
+    parser.add_argument('--browser', choices=['chromium', 'webkit'], default='chromium')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as pw:
-        browser = pw.chromium.launch()
+        browser = getattr(pw, args.browser).launch()
         for name, mobile, members, mode in (
             ('clean-balanced', False, False, 'balanced'),
             ('mobile-six-balanced', True, True, 'balanced'),
@@ -25,13 +27,14 @@ def main():
         ):
             if args.case and name != args.case:
                 continue
-            context = browser.new_context(viewport={'width': 390 if mobile else 1280, 'height': 844 if mobile else 900})
+            context = browser.new_context(viewport={'width': 390 if mobile else 1280, 'height': 844 if mobile else 900},
+                                          is_mobile=mobile, has_touch=mobile)
             page = context.new_page()
             errors = []
             page.on('pageerror', lambda error, sink=errors: sink.append(str(error)))
             page.goto(args.base)
             page.locator('#onboarding-cta').click()
-            page.locator('#postal-code').fill('22350')
+            page.locator('#postal-code').fill(args.postal_code)
             page.locator('#recipes').select_option('5')
             page.locator('#servings').fill('2')
             page.locator('#max-stores').select_option('3')
@@ -62,13 +65,16 @@ def main():
             response = responses[-1] if responses else None
             request = requests[-1] if requests else None
             body = response.json() if response else None
-            report = {'case': name, 'started_utc': utc, 'browser': 'Chromium isolated context', 'viewport': page.viewport_size,
+            report = {'case': name, 'started_utc': utc, 'browser': args.browser + ' isolated context', 'viewport': page.viewport_size,
+                      'mobile_emulation': mobile, 'physical_iphone_test': False,
                       'available_memberships': available, 'form': fields, 'url': request.url if request else None,
                       'method': request.method if request else None, 'request': request.post_data_json if request else None,
                       'status': response.status if response else None, 'body': body, 'seconds': round(time.monotonic()-started, 3),
                       'headers': {k: v for k, v in (response.headers if response else request.headers if request else {}).items() if k in {'x-request-id','x-error-code','content-type','retry-after'}},
                       'page_errors': errors}
-            page.locator('#submit-button:not([disabled])').wait_for(timeout=10000)
+            if response and response.status < 400:
+                page.locator('#submit-button:not([disabled])').wait_for(timeout=10000)
+            report['submit_enabled_after_response'] = page.locator('#submit-button').is_enabled()
             report['visible_text'] = page.locator('body').inner_text()
             report['service_workers'] = page.evaluate('async()=> (await navigator.serviceWorker.getRegistrations()).map(r=>r.active?.scriptURL)')
             page.screenshot(path=str(args.output / (name + '-after.png')), full_page=True)

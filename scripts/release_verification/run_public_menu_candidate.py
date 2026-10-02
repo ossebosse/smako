@@ -6,9 +6,11 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', required=True)
+parser.add_argument('--evidence-root', type=Path, default=Path('/opt/smako/evidence/public-menu-20261002'))
 args = parser.parse_args()
 assert args.name.startswith('smako-public-menu-')
-root = Path('/opt/smako/evidence/public-menu-20261002')
+root = args.evidence_root.resolve()
+assert root.is_relative_to('/opt/smako/evidence')
 candidate = json.loads((root/'candidate-image.json').read_text())
 app = json.loads(subprocess.check_output(['docker','inspect','smako-app-1']))[0]
 env = dict(v.split('=',1) for v in app['Config']['Env'])

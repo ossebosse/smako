@@ -165,7 +165,7 @@
   let activeScanner = null;
   let plannerReady = false;
   // Transient request ownership is never persisted or inferred from restored DOM.
-  const FRONTEND_VERSION = "public-menu-20261002";
+  const FRONTEND_VERSION = "public-menu-errors-20261002";
   // Same bounded wait as personal planning; the public proxy permits 540 s.
   const PLAN_WAIT_MS = 600000;
   let activePlanRequest = null;
@@ -828,7 +828,7 @@
     if (plannerReady) return;
     dom.serviceAvailabilityTitle.textContent = "Planeringen är tillfälligt pausad";
     dom.serviceAvailabilityMessage.textContent = message
-      || "Prisunderlaget är inte tillgängligt just nu. Vi uppdaterar priserna; försök igen om en stund.";
+      || "Planeringstjänsten är tillfälligt otillgänglig. Kontrollera status igen om en stund. Dina val är kvar.";
   }
 
   function validatePostalCode() {
@@ -876,9 +876,16 @@
     if (status === 422) return "Planeringen kunde inte genomföras med det tillgängliga underlaget. Dina val är kvar.";
     if (status === 504) return "Planeringstjänsten svarade inte i tid. Försök igen om en stund.";
     if (status === 502) return "Servern kunde inte få svar från planeringstjänsten. Försök igen om en stund.";
-    if (status === 503 || normalizedCode.includes("price_universe")) {
-      return "Prisunderlaget är inte tillgängligt just nu. Vi uppdaterar priserna; försök igen om en stund.";
+    if (normalizedCode === "saved_plan_owner_session_unavailable") {
+      return "Din session kunde inte upprättas för att spara menyn. Ladda om sidan och försök igen. Dina val är kvar.";
     }
+    if (normalizedCode === "price_universe_unusable") {
+      return "Prisunderlaget uppfyller inte färskhets- eller verifieringskraven just nu. Planeringen är därför pausad. Dina val är kvar.";
+    }
+    if (normalizedCode === "price_universe_unavailable") {
+      return "Prisunderlaget är inte tillgängligt just nu. Försök igen om en stund. Dina val är kvar.";
+    }
+    if (status === 503) return "Planeringstjänsten är tillfälligt otillgänglig. Försök igen om en stund. Dina val är kvar.";
     if (status >= 500) return "Ett serverfel hindrade planeringen. Försök igen om en stund. Dina val är kvar.";
     if (status === 401 || status === 403) return "Din session saknar åtkomst. Ladda om sidan och försök igen. Dina val är kvar.";
     const detail = payload && payload.detail;
@@ -3278,8 +3285,10 @@
           responseErrorCode,
           response.headers.get("Retry-After"),
         );
-        if (response.status === 503 && responseErrorCode !== "planner_admission_full" && (!response.headers.get("Retry-After") || responseErrorCode.includes("price_universe"))) {
-          setPlannerReadiness(false, message);
+        if (response.status === 503 && responseErrorCode.startsWith("price_universe_")) {
+          // A failed plan does not establish global unavailability. Only /ready
+          // may disable planning, with its existing status-retry control.
+          await loadPublicRuntimeStatus();
         }
         throw new Error(message);
       }

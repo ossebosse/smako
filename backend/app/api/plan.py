@@ -378,6 +378,7 @@ def _assert_offline_plan(plan: PlanResponse) -> None:
         raise HTTPException(
             status_code=503,
             detail="consumer planning attempted a live source request",
+            headers={"X-Error-Code": "planner_offline_violation"},
         )
     # A prepared artifact preserves the source name that built it (for example
     # "federated" or "own").  Presence of immutable PlanPriceData plus the
@@ -386,6 +387,7 @@ def _assert_offline_plan(plan: PlanResponse) -> None:
         raise HTTPException(
             status_code=503,
             detail="consumer planning requires an active local PriceUniverse",
+            headers={"X-Error-Code": "planner_offline_violation"},
         )
 
 
@@ -403,9 +405,19 @@ def _assert_offline_ready(request: PlanRequest, settings: Settings) -> None:
         memberships,
     )
     if prepared is None:
+        city = " ".join(settings.price_universe_city.casefold().split())
+        active = GLOBAL_PREPARED_PRICE_UNIVERSES.get_active(f"city:{city}")
+        if active is not None and request.postal_code not in active.universe.key.postal_codes:
+            supported = ", ".join(sorted(active.universe.key.postal_codes))
+            raise _form_error(
+                "postal_code",
+                "Det finns inget aktiverat prisområde för postnumret. "
+                f"Tillgängliga postnummer i betan: {supported}",
+            )
         raise HTTPException(
             status_code=503,
             detail="consumer planning requires a matching active local PriceUniverse",
+            headers={"X-Error-Code": "price_universe_unavailable"},
         )
     status = prepared.status(
         warning_age_hours=settings.price_age_warning_hours,
@@ -420,6 +432,7 @@ def _assert_offline_ready(request: PlanRequest, settings: Settings) -> None:
         raise HTTPException(
             status_code=503,
             detail="active local PriceUniverse is not usable for consumer planning",
+            headers={"X-Error-Code": "price_universe_unusable"},
         )
 
 

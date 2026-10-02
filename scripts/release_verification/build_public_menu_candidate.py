@@ -9,13 +9,15 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument('--commit', required=True)
 parser.add_argument('--sha256', required=True)
+parser.add_argument('--evidence-root', type=Path, default=Path('/opt/smako/evidence/public-menu-20261002'))
 args = parser.parse_args()
 commit = args.commit
 assert len(commit) == 40 and all(c in '0123456789abcdef' for c in commit)
 base = 'sha256:d8a166fa7ee162cd0570f9d8089ff800e00d9c949ac3c674e387c5fff1538dd7'
 base_tag = 'smako-lund-transition:08c137475d9c'
 assert subprocess.check_output(['docker','image','inspect',base_tag,'--format','{{.Id}}'],text=True).strip() == base
-evidence = Path('/opt/smako/evidence/public-menu-20261002')
+evidence = args.evidence_root.resolve()
+assert evidence.is_relative_to('/opt/smako/evidence')
 archive = evidence / f'smako-server-{commit[:12]}.zip'
 assert hashlib.sha256(archive.read_bytes()).hexdigest() == args.sha256
 release = Path('/opt/smako/releases/public-menu-' + commit[:12])
