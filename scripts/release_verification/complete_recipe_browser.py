@@ -255,6 +255,7 @@ def run_case(browser, engine, mobile, personal, args):
         if args.recipe_mode == "complete":
             assert page.locator(".complete-recipe-content:visible").count() == args.dinners
             assert page.locator(".recipe-component:visible").count() >= args.dinners
+            page.locator(".complete-recipe-content:visible").first.screenshot(path=str(target / "first-recipe.png"))
         page.locator("#plan-content" if personal else "#menu-section").screenshot(path=str(target / "recipes.png"))
         if personal:
             page.get_by_role("button", name="Öppna inköpslistan", exact=True).click()
@@ -279,6 +280,10 @@ def run_case(browser, engine, mobile, personal, args):
             assert replacement["status"] < 400, envelope
             assert envelope["plan_id"] == previous["plan_id"] and envelope["revision"] > previous["revision"]
             assert envelope["plan"]["recipes"] != previous["plan"]["recipes"]
+            if args.recipe_mode == "complete":
+                report["replacement_changed_base_recipe"] = (
+                    envelope["plan"]["recipes"][0]["design"]["base_id"] != previous["plan"]["recipes"][0]["design"]["base_id"])
+                assert report["replacement_changed_base_recipe"], "Automatic recipe replacement returned another variant of the same base dish"
             assert_recipe_result(envelope, args)
             originals[envelope["revision"]] = envelope
             wait_render(page, personal)
@@ -317,6 +322,14 @@ def run_case(browser, engine, mobile, personal, args):
             for revision, value in originals.items():
                 assert digest(read_saved(context, args.base, envelope["plan_id"], revision)) == digest(value)
             report["identical_after_external_app_restart"] = True
+            if args.expect_flag_off_after_restart:
+                metadata = context.request.get(args.base + "/api/recipe-library", timeout=30000).json()
+                assert metadata["enabled"] is False
+                expect(page.locator("#complete-recipe-controls")).to_be_hidden(timeout=15000)
+                assert open_recipes(page, personal) == args.dinners
+                assert page.locator(".complete-recipe-content:visible").count() == args.dinners
+                report["saved_recipes_readable_with_feature_disabled"] = True
+                page.screenshot(path=str(target / "flag-off-saved-plan.png"), full_page=True)
         # A separate clean owner must not gain access to the saved private result.
         other = browser.new_context(ignore_https_errors=args.ignore_https_errors)
         other.request.get(args.base + "/", timeout=30000)
@@ -391,12 +404,15 @@ def main():
     parser.add_argument("--require-pending-reload", action="store_true")
     parser.add_argument("--skip-mutations", action="store_true")
     parser.add_argument("--restart-handshake", action="store_true")
+    parser.add_argument("--expect-flag-off-after-restart", action="store_true", help="With restart handshake, require disabled creation controls and readable immutable complete recipes")
     parser.add_argument("--ignore-https-errors", action="store_true")
     parser.add_argument("--allow-nonlocal-isolated-target", action="store_true")
     args = parser.parse_args()
     args.base = args.base.rstrip("/")
     if not 0 <= args.offline_seconds <= 30:
         parser.error("--offline-seconds must be between 0 and 30")
+    if args.expect_flag_off_after_restart and not args.restart_handshake:
+        parser.error("--expect-flag-off-after-restart requires --restart-handshake")
     if not args.allow_nonlocal_isolated_target and urlsplit(args.base).hostname not in {"localhost", "127.0.0.1", "::1"}:
         parser.error("Use an isolated local app, or explicitly identify a nonlocal isolated target with --allow-nonlocal-isolated-target")
     if args.recipe_mode == "legacy" and not args.skip_mutations:
