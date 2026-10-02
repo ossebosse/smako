@@ -889,14 +889,11 @@ def project_economic_pool(
                 for candidate in public_semantic
             }
             changed_by_identity = {
-                (candidate.store_id, candidate.product_id): (
-                    price_candidate_for_context(
-                        candidate,
-                        context,
-                        on_date=target_date,
-                    )
+                (candidate.store_id, candidate.product_id): candidate
+                for candidate in _project_rows(
+                    membership_changing_rows, context, on_date=target_date,
+                    planning_mode="estimated" if selector.verification_policy.allow_estimated_quantities else "exact",
                 )
-                for candidate in membership_changing_rows
             }
             matched = []
             for candidate in source_rows:
@@ -907,11 +904,13 @@ def project_economic_pool(
                 if projected is None:
                     # Defensive compatibility for older/incomplete public
                     # projections: fall back to the authoritative full path.
-                    projected = price_candidate_for_context(
-                        candidate,
-                        context,
-                        on_date=target_date,
+                    eligible = _project_rows(
+                        [candidate], context, on_date=target_date,
+                        planning_mode="estimated" if selector.verification_policy.allow_estimated_quantities else "exact",
                     )
+                    if not eligible:
+                        continue
+                    projected = eligible[0]
                 matched.append(projected)
             semantic = matched
             current_by_identity = {

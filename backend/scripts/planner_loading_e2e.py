@@ -208,7 +208,7 @@ def main():
                         {"detail": [{"msg": "raw validation"}]},
                         "application/json",
                         {},
-                        "Kontrollera dina val",
+                        "Ett värde i begäran är ogiltigt",
                     ),
                     (429, {}, "application/json", {"Retry-After": "55"}, "55 sekunder"),
                     (

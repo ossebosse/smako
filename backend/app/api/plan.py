@@ -310,10 +310,18 @@ def _with_release(plan: PlanResponse, settings: Settings) -> PlanResponse:
     )
 
 
+def _form_error(field: str, message: str) -> HTTPException:
+    return HTTPException(
+        status_code=422,
+        detail=[{"loc": ["body", field], "msg": message, "type": "value_error"}],
+        headers={"X-Error-Code": "form_validation_error"},
+    )
+
+
 def _consumer_request(request: PlanRequest) -> PlanRequest:
     if request.personal is not None:
         if request.max_stores > 3:
-            raise HTTPException(422, "Butikstaket gäller hela korgen och ska vara 1, 2 eller 3.")
+            raise _form_error("max_stores", "Välj 1, 2 eller 3 inköpsställen")
         if request.strategy == "legacy":
             raise HTTPException(422, "Personlig planering använder den gemensamma optimeraren.")
         if request.diet_preference.value not in {"mixed", "meat_allowed"} and any(
@@ -322,11 +330,11 @@ def _consumer_request(request: PlanRequest) -> PlanRequest:
             raise HTTPException(422, "Måltidernas kostval strider mot planens kostval.")
         return request.model_copy(update={"strategy": "optimized", "debug": False})
     if request.recipes < 3:
-        raise HTTPException(status_code=422, detail="consumer plans require 3-7 meals")
+        raise _form_error("recipes", "Välj 3–7 middagar")
     if request.servings > 8:
-        raise HTTPException(status_code=422, detail="consumer plans support 1-8 servings")
+        raise _form_error("servings", "Välj 1–8 portioner")
     if request.max_stores > 3:
-        raise HTTPException(status_code=422, detail="consumer plans support max 1-3 stores")
+        raise _form_error("max_stores", "Välj 1, 2 eller 3 inköpsställen")
     if request.strategy == "legacy":
         raise HTTPException(status_code=422, detail="consumer plans require optimized strategy")
     return request.model_copy(update={"strategy": "optimized", "debug": False})
@@ -342,6 +350,9 @@ def _production_consumer_request(
         return request
     if request.personal is not None:
         return _consumer_request(request)
+    # Apply form limits before the separate computational-budget guard, so a
+    # genuine input error identifies the field rather than a server/model field.
+    _consumer_request(request)
     exceeds_budget = (
         request.recipes < 3
         or request.servings > 8
@@ -568,11 +579,15 @@ async def create_plan(
     except (PolicyConflict, PersonalConflict):
         raise
     except IncompleteBasketError as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
+        raise HTTPException(status_code=422, detail=str(exc),
+                            headers={"X-Error-Code": "plan_infeasible"}) from exc
     except PriceProviderError as exc:
         raise HTTPException(status_code=502, detail="price provider unavailable") from exc
     except ValueError as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
+        # Request validation has already completed. A model/configuration error
+        # inside planning is a server failure, never evidence of a bad form field.
+        raise HTTPException(status_code=500, detail="Planeringstjänsten kunde inte slutföra menyn.",
+                            headers={"X-Error-Code": "planner_internal_error"}) from exc
 
 
 @router.post("/plans", response_model=SavedPlan, status_code=201)
@@ -599,11 +614,13 @@ async def create_saved_plan(request: PlanRequest, http_request: Request) -> Save
     except (PolicyConflict, PersonalConflict):
         raise
     except IncompleteBasketError as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
+        raise HTTPException(status_code=422, detail=str(exc),
+                            headers={"X-Error-Code": "plan_infeasible"}) from exc
     except PriceProviderError as exc:
         raise HTTPException(status_code=502, detail="price provider unavailable") from exc
     except ValueError as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
+        raise HTTPException(status_code=500, detail="Planeringstjänsten kunde inte slutföra menyn.",
+                            headers={"X-Error-Code": "planner_internal_error"}) from exc
 
 
 @router.get("/plans/{plan_id}", response_model=SavedPlan)

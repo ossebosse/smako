@@ -88,6 +88,7 @@ from app.services.performance_trace import (
 )
 from app.services.price_universe_runtime import (
     PACKAGE_CALCULATOR_VERSION,
+    LocalPriceUniverseProvider,
     PreparedPriceUniverse,
     PreparedPriceUniverseManager,
     menu_search_cache_key,
@@ -1113,6 +1114,15 @@ class MealPlanService:
                 if not self.basket_auditor.is_pantry(ingredient)
             ]
             for label, limit in specifications:
+                # This optional comparison must not allocate the full municipal
+                # power set (33 contexts => 8,589,934,591 subsets). It is not the
+                # requested basket: finite 1/2/3-store plans keep all their gates.
+                if limit is None and len(stores) > 12:
+                    scenarios.append(OptimizationScenario(
+                        label=label, max_stores=None,
+                        error="Jämförelsen med obegränsat antal inköpsställen är inte beräknad för detta stora prisområde.",
+                    ))
+                    continue
                 try:
                     basket = self.basket_optimizer.optimize(
                         purchasable,
@@ -2813,10 +2823,28 @@ class MealPlanService:
             raise ValueError(
                 "Kost- och ingrediensfilter kräver optimized-strategin."
             )
-        provider = create_price_provider(
-            self.settings,
-            use_member_prices=request.use_member_prices,
-            memberships=request.memberships or None,
+        # Serving an immutable artifact must not require live collector credentials
+        # or a live OWN API. The builder still applies its normal freshness,
+        # membership, purchase and nutrition gates to the prepared request view.
+        prepared = (
+            self.price_universe_manager.get_for_request(
+                request.postal_code,
+                normalized_memberships(
+                    request.memberships or None,
+                    use_member_prices=request.use_member_prices,
+                ),
+            )
+            if strategy == "optimized" and self.price_universe_manager is not None
+            else None
+        )
+        provider = (
+            LocalPriceUniverseProvider(prepared.universe, prepared.stores)
+            if prepared is not None
+            else create_price_provider(
+                self.settings,
+                use_member_prices=request.use_member_prices,
+                memberships=request.memberships or None,
+            )
         )
         builder = (
             self._build_optimized_with_provider

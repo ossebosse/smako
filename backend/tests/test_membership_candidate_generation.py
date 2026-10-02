@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date
 
+import pytest
 from app.models.product import (
     OfferKind,
     OfferMetadata,
@@ -12,7 +13,7 @@ from app.models.product import (
 )
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.store import Store
-from app.services.basket_optimizer import BasketOptimizer
+from app.services.basket_optimizer import BasketOptimizer, BasketVerificationPolicy
 from app.services.economic_ingredient_selector import (
     EconomicIngredientPool,
     EconomicIngredientSelector,
@@ -130,6 +131,32 @@ def _candidate(
 
 def _context(*memberships: MembershipProgram) -> UserPricingContext:
     return UserPricingContext(memberships=set(memberships))
+
+
+@pytest.mark.parametrize("weight_has_member_price", [False, True])
+def test_exact_member_delta_excludes_weight_rows_like_full_projection(weight_has_member_price):
+    selector = EconomicIngredientSelector(
+        taxonomy=(_entry("potatis"),),
+        verification_policy=BasketVerificationPolicy(allow_estimated_quantities=False),
+    )
+    fixed = _candidate("potatis", "fixed", 20, member_price=10)
+    weight = _candidate("potatis", "weight", 15,
+                        member_price=5 if weight_has_member_price else None).model_copy(
+        update={"sale_model": SaleModel.SOLD_BY_WEIGHT},
+    )
+    pool = EconomicIngredientPool(
+        semantic_candidates_by_name={"potatis": [fixed, weight]},
+        matched_candidates_by_name={"potatis": [fixed, weight]},
+        projection_semantics_identity=selector.cache_identity,
+    )
+    public = project_economic_pool(pool, _context(), selector=selector, on_date=TODAY)
+    member = _context(MembershipProgram.COOP_MEMBER)
+    full = project_economic_pool(pool, member, selector=selector, on_date=TODAY)
+    delta = project_economic_pool(pool, member, selector=selector,
+                                  on_date=TODAY, public_floor_pool=public)
+    assert delta.candidates_by_name == full.candidates_by_name
+    assert {c.product_id for c in delta.semantic_candidates_by_name["potatis"]} == {"fixed"}
+    assert pool.semantic_candidates_by_name["potatis"] == [fixed, weight]
 
 
 def test_member_price_is_applied_before_per_store_product_shortlist() -> None:

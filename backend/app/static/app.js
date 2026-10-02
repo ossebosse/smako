@@ -165,10 +165,9 @@
   let activeScanner = null;
   let plannerReady = false;
   // Transient request ownership is never persisted or inferred from restored DOM.
-  const FRONTEND_VERSION = "loading-hotfix-20260909";
-  // Caddy waits 60 s for response headers (5 s dial); allow body/network grace.
-  // This covers the observed ~55 s queue latency without pretending to cancel server work.
-  const PLAN_WAIT_MS = 90000;
+  const FRONTEND_VERSION = "public-menu-20261002";
+  // Same bounded wait as personal planning; the public proxy permits 540 s.
+  const PLAN_WAIT_MS = 600000;
   let activePlanRequest = null;
   let savedPlanController = null;
   let planViewEpoch = 0;
@@ -804,7 +803,7 @@
     dom.loadingState.hidden = false;
     dom.errorState.hidden = true;
     dom.results.hidden = true;
-    dom.loadingMessage.textContent = "Vi söker vidare tills en komplett, prisberäknad plan är klar. Det kan ta några sekunder.";
+    dom.loadingMessage.textContent = "Vi söker efter en komplett, prisberäknad plan. Det kan ta några minuter.";
   }
 
   function showError(message) {
@@ -862,11 +861,26 @@
         ? "Det är många som skapar menyer just nu. Försök igen om några sekunder."
         : `Det är många som skapar menyer just nu. Försök igen om cirka ${seconds} sekunder.`;
     }
-    if (status === 422) return "Kontrollera dina val i formuläret och försök igen.";
-    if (status === 502 || status === 504) return "Planeringstjänsten svarade inte i tid. Försök igen om en stund.";
+    if (normalizedCode === "data_blocked") {
+      return "Planeringen stoppades eftersom nödvändigt pris-, mängd- eller näringsunderlag inte kan verifieras. Dina val är kvar.";
+    }
+    if (normalizedCode === "plan_infeasible") {
+      return "Ingen komplett meny kunde byggas med dina krav och det tillgängliga underlaget. Dina val är kvar.";
+    }
+    if (status === 422 && Array.isArray(payload?.detail)) {
+      return payload.detail.map((entry) => {
+        const field = planErrorFields()[entry?.loc?.[1]];
+        return field ? `${field.label}: ${entry.msg || "kontrollera värdet"}.` : "Ett värde i begäran är ogiltigt.";
+      }).join(" ");
+    }
+    if (status === 422) return "Planeringen kunde inte genomföras med det tillgängliga underlaget. Dina val är kvar.";
+    if (status === 504) return "Planeringstjänsten svarade inte i tid. Försök igen om en stund.";
+    if (status === 502) return "Servern kunde inte få svar från planeringstjänsten. Försök igen om en stund.";
     if (status === 503 || normalizedCode.includes("price_universe")) {
       return "Prisunderlaget är inte tillgängligt just nu. Vi uppdaterar priserna; försök igen om en stund.";
     }
+    if (status >= 500) return "Ett serverfel hindrade planeringen. Försök igen om en stund. Dina val är kvar.";
+    if (status === 401 || status === 403) return "Din session saknar åtkomst. Ladda om sidan och försök igen. Dina val är kvar.";
     const detail = payload && payload.detail;
     if (typeof detail === "string" && detail.trim()) return detail;
     if (Array.isArray(detail)) {
@@ -877,6 +891,19 @@
     }
     const message = first(payload, ["message", "error.message", "error"]);
     return isPresent(message) ? String(message) : fallback;
+  }
+
+  function planErrorFields() {
+    return {
+      postal_code: { node: dom.postalCode, label: "Postnummer" },
+      recipes: { node: dom.recipesInput, label: "Middagar" },
+      servings: { node: dom.servingsInput, label: "Portioner" },
+      max_stores: { node: dom.maxStoresInput, label: "Max antal inköpsställen" },
+      purchase_planning_mode: { node: dom.purchasePlanningMode, label: "Köpplanering" },
+      diet_preference: { node: dom.dietPreference, label: "Kost" },
+      varied_budget_percent: { node: dom.variedBudget, label: "Kostnadstak för Varierad" },
+      avoid_ingredients: { node: dom.excludedIngredients, label: "Undvik ingredienser" },
+    };
   }
 
   function recipeIngredientAmount(ingredient) {
@@ -3160,6 +3187,7 @@
     event.preventDefault();
     if (activePlanRequest) return;
     dom.errorState.hidden = true;
+    Object.values(planErrorFields()).forEach(({ node }) => node.removeAttribute("aria-invalid"));
 
     if (!validatePostalCode()) {
       dom.postalCode.focus();
@@ -3208,7 +3236,7 @@
 
     planViewEpoch += 1;
     savedPlanController?.abort();
-    const request = { controller: new AbortController(), deadline: Date.now() + PLAN_WAIT_MS };
+    const request = { controller: new AbortController(), deadline: Date.now() + PLAN_WAIT_MS, id: crypto.randomUUID() };
     activePlanRequest = request;
     setLoading(true);
 
@@ -3219,7 +3247,7 @@
       const { response, data } = await boundedRequest(request.controller, PLAN_WAIT_MS, async (signal) => {
         const options = {
           method: "POST",
-          headers: { Accept: "application/json", "Content-Type": "application/json" },
+          headers: { Accept: "application/json", "Content-Type": "application/json", "X-Request-ID": request.id },
           body: JSON.stringify(payload), signal,
         };
         let response = await fetch("/api/plans", options);
@@ -3230,11 +3258,19 @@
       });
       if (activePlanRequest !== request) return;
 
+      request.id = response.headers.get("X-Request-ID") || request.id;
+
       if (!response.ok) {
         const responseErrorCode = String(
           response.headers.get("X-Error-Code") || first(data, ["error_code", "code"], ""),
         ).trim().toLowerCase();
         planFailureCode = responseErrorCode || null;
+        if (response.status === 422 && Array.isArray(data?.detail)) {
+          data.detail.forEach((entry) => {
+            const field = planErrorFields()[entry?.loc?.[1]];
+            if (field) field.node.setAttribute("aria-invalid", "true");
+          });
+        }
         const message = errorFromResponse(
           data,
           "Planen kunde inte skapas. Försök igen om en stund.",
@@ -3276,7 +3312,8 @@
         latency_ms: Math.round(performance.now() - requestStartedAt), outcome: "failed",
         error_code: timedOut ? "client_timeout" : aborted ? "client_aborted" : networkError ? "network_error" : planFailureCode || "planner_error",
       });
-      showError(message);
+      showError(`${message} Fel-ID: ${request.id}`);
+      dom.form.querySelector('[aria-invalid="true"]')?.focus();
     } finally {
       if (activePlanRequest === request) {
         activePlanRequest = null;

@@ -880,6 +880,40 @@ class _FixtureCandidateGenerator(RecipeCandidateGenerator):
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize("mode", ["balanced", "cheapest"])
+async def test_public_five_dinner_own_only_uses_local_provider_without_live_configuration(
+    monkeypatch: pytest.MonkeyPatch, mode: str,
+) -> None:
+    """The deployed OWN-only release has an artifact, but no live OWN API URL."""
+    manager, prepared, _, _ = await _build_prepared(
+        products=[_product("rice", "ris", price=20, quantity=1000)],
+    )
+    service = MealPlanService(
+        Settings(price_provider="auto", own_sources_only=True,
+                 own_grocery_base_url=None, price_universe_required=True),
+        price_universe_manager=manager,
+    )
+    request = PlanRequest(
+        postal_code="22350", recipes=5, servings=2, max_stores=3,
+        purchase_planning_mode="exact", diversity_mode=mode,
+        diet_preference="mixed", strategy="optimized",
+        memberships=["ICA_STAMMIS", "COOP_MEMBER", "HEMKOP_MEMBER",
+                     "LIDL_PLUS", "WILLYS_PLUS", "CITY_GROSS_PRIO"],
+    )
+    original = request.model_dump()
+    marker = object()
+
+    async def inspect_builder(actual, provider):
+        assert actual.model_dump() == original
+        assert isinstance(provider, LocalPriceUniverseProvider)
+        assert provider.universe is prepared.universe
+        return marker
+
+    monkeypatch.setattr(service, "_build_optimized_with_provider", inspect_builder)
+    assert await service.create_plan(request) is marker
+
+
+@pytest.mark.asyncio
 async def test_meal_plan_uses_prepared_universe_without_provider_io_and_keeps_lineage(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1099,6 +1133,7 @@ async def test_runtime_readiness_warns_at_36_and_requires_all_contexts_at_48(mon
 
 def test_campaign_survives_48h_but_expires_locally_without_rebuild():
     from datetime import date
+
     from grocery_data.app.domain.campaign_validity import CampaignEvidence
     observed = datetime(2026,9,14,8,tzinfo=UTC)
     p = _product("campaign-rice", "ris", price=20, quantity=1000, observed_at=observed)

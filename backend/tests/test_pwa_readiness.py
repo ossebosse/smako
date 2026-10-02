@@ -26,7 +26,7 @@ def test_manifest_describes_root_scoped_standalone_consumer_app() -> None:
 def test_service_worker_only_caches_static_shell_and_never_api_or_posts() -> None:
     worker = (STATIC / "service-worker.js").read_text(encoding="utf-8")
 
-    assert 'const SHELL_CACHE = "billigaste-veckomenyn-shell-v10"' in worker
+    assert 'const SHELL_CACHE = "billigaste-veckomenyn-shell-v11"' in worker
     assert 'request.method !== "GET"' in worker
     assert 'url.pathname.startsWith("/api/")' in worker
     assert 'request.mode === "navigate"' in worker
