@@ -250,6 +250,9 @@ class StoreSubsetCacheStats:
 
 @dataclass(slots=True)
 class _QuoteCacheSession:
+    base_candidate_rows: dict[
+        int, tuple[tuple[ProductCandidate, ...], tuple[ProductCandidate, ...]]
+    ] = field(default_factory=dict)
     quotes: dict[_QuoteCacheKey, BasketItemQuote] = field(default_factory=dict)
     candidate_fingerprints: dict[int, tuple[ProductCandidate, _CandidateFingerprint]] = field(
         default_factory=dict
@@ -1653,8 +1656,20 @@ class BasketOptimizer:
             # Optional offers must not make an independently valid base
             # basket unavailable. Keep the exact-search limit unchanged;
             # never approximate campaign groups or relax purchase caps.
-            base_candidates = {name: [c for c in rows if c.coverage != "offers_only"]
-                               for name, rows in candidates_by_name.items()}
+            base_candidates = {}
+            session = self._quote_cache_context.get()
+            for name, rows in candidates_by_name.items():
+                cached = session.base_candidate_rows.get(id(rows)) if session is not None and isinstance(rows, tuple) else None
+                if cached is not None and cached[0] is rows:
+                    base_candidates[name] = cached[1]
+                else:
+                    filtered = tuple(c for c in rows if c.coverage != "offers_only")
+                    base_candidates[name] = filtered
+                    # Retain both tuples in the existing request-local scope:
+                    # immutable identities stay cacheable; mutable callers never
+                    # reuse a filtered result or another request's prices.
+                    if session is not None and isinstance(rows, tuple):
+                        session.base_candidate_rows[id(rows)] = (rows, filtered)
             if any(len(base_candidates[name]) != len(rows)
                    for name, rows in candidates_by_name.items()):
                 if nested_keys:

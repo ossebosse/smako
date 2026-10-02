@@ -31,6 +31,8 @@ def main():
             page.on('pageerror', lambda error, sink=errors: sink.append(str(error)))
             page.goto(args.base)
             page.locator('#onboarding-cta').click()
+            page.locator('#postal-code').fill('22350')
+            page.locator('#recipes').select_option('5')
             page.locator('#servings').fill('2')
             page.locator('#max-stores').select_option('3')
             page.locator('details.advanced-options summary').click()
@@ -71,6 +73,36 @@ def main():
             report['service_workers'] = page.evaluate('async()=> (await navigator.serviceWorker.getRegistrations()).map(r=>r.active?.scriptURL)')
             page.screenshot(path=str(args.output / (name + '-after.png')), full_page=True)
             if response and response.status == 201:
+                plan = body['plan']
+                basket = plan['optimized_basket']
+                recipes = plan['recipes']
+                cards = page.locator('#recipes-list details')
+                for card in cards.all():
+                    if card.get_attribute('open') is None:
+                        card.locator('summary').click()
+                rows = [item for group in basket['stores'] for item in group['items']]
+                report['acceptance'] = {
+                    'five_dinners_two_servings': len(recipes) == 5 and all(r['servings'] == 2 for r in recipes),
+                    'ten_total_portions': plan['portions'] == 10,
+                    'full_recipes': all(r['instructions'] and all(step.strip() for step in r['instructions']) and r['ingredients'] and all(i['quantity'] > 0 and i['unit'] for i in r['ingredients']) for r in recipes),
+                    'five_visible_recipe_cards': cards.count() == 5 and page.locator('.instructions-list:visible').count() == 5,
+                    'quantities_rendered': all(v.strip() not in {'', '\u2014'} for v in page.locator('.ingredient-amount').all_text_contents()),
+                    'shopping_rows_rendered': page.locator('#store-groups tbody tr').count() == len(rows) and bool(rows),
+                    'max_three_stores': basket['max_stores'] == 3 and 0 < basket['store_count'] <= 3,
+                    'exact_request': body['request']['purchase_planning_mode'] == 'exact' and not body['request'].get('personal'),
+                    'memberships_preserved': sorted(body['request']['membership_programs']) == sorted(request.post_data_json['memberships']),
+                    'selected_diversity_preserved': plan['diversity_mode'] == mode,
+                    'verified_basket': basket['verification_status'] == 'VERIFIED',
+                    'total_reconciled': basket['total_reconciled'] and basket['total'] > 0,
+                    'basket_audit_passed': plan['quality']['basket_audit']['passed'],
+                    'nutrition_quality_passed': plan['quality']['nutrition']['status'] == 'PASS',
+                    'quality_label_visible': page.locator('#basket-verification-title').is_visible(),
+                }
+                report['quality_label'] = page.locator('#basket-verification').inner_text()
+                report['recipe_text'] = page.locator('#recipes-list').inner_text()
+                report['shopping_text'] = page.locator('#shopping-section').inner_text()
+                page.locator('#menu-section').screenshot(path=str(args.output/(name+'-recipes.png')))
+                page.locator('#shopping-section').screenshot(path=str(args.output/(name+'-shopping.png')))
                 report['plan_sha256'] = hashlib.sha256(json.dumps(body['plan'],sort_keys=True).encode()).hexdigest()
                 with page.expect_response(lambda r: r.request.method == 'GET' and '/api/plans/' in r.url, timeout=30000) as readback:
                     page.reload()
@@ -83,6 +115,8 @@ def main():
             if response and response.status >= 400:
                 print(json.dumps(body,ensure_ascii=False), flush=True)
             context.close()
+            if report.get('acceptance'):
+                assert all(report['acceptance'].values()) and report['identical_reload'], report['acceptance']
             if response is None:
                 break
         browser.close()

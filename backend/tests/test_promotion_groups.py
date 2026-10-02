@@ -352,4 +352,10 @@ def test_group_budget_fallback_uses_identical_compact_nested_keys(monkeypatch):
     def no_materialized_checkout(*args, **kwargs):
         raise AssertionError("Ranking must reuse compact keys for the existing base fallback")
     monkeypatch.setattr(optimizer, "optimize", no_materialized_checkout)
-    assert optimizer.same_depth_nested_store_limited_keys(needs, candidates, stores, max_stores=3) == expected
+    with optimizer.quote_cache() as stats:
+        assert optimizer.same_depth_nested_store_limited_keys(needs, candidates, stores, max_stores=3) == expected
+        misses = stats.subset_vector_misses
+        assert misses > 0, "Verified base rows must retain immutable quote-cache eligibility"
+        assert optimizer.same_depth_nested_store_limited_keys(needs, candidates, stores, max_stores=3) == expected
+        assert stats.subset_vector_misses == misses
+        assert stats.subset_vector_hits > 0
