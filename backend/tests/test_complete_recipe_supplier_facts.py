@@ -71,3 +71,30 @@ def test_imported_source_rows_are_unique_and_gtin_unknown_is_explicit():
     assert rows[0]["gtin"] is None
     assert rows[0]["source"]["url"] == "https://www.gogreen.se/produkter/roda-linser/"
     assert rows[0]["identity_source"]["url"] == "https://www.gogreen.se/produkter/"
+
+
+@pytest.mark.parametrize("gtin,brand,package,drained", [
+    ("7316150775242", "Fontana", 220, 110),
+    ("7316150777093", "Fontana", 360, 180),
+    ("7316150770346", "Fontana", 290, 130),
+    ("7350002405543", "Zeta", 370, 170),
+    ("8410159044077", "Figaro", 240, 110),
+])
+def test_official_pitted_olive_quantity_has_exact_package_and_separate_nutrient_basis(
+    gtin, brand, package, drained,
+):
+    p = product("Oliver urkärnade", package, "g", 25, brand=brand, gtin=gtin)
+    f = supplement_catalog_facts([p], {})[(p.store_id, p.product_id)]
+    projected = project_usable_quantity(p, f, required_unit="g")
+    assert projected.usable_quantity == drained
+    assert projected.package_quantity == package
+    assert projected.price == p.price
+    assert f.nutrition_preparation == "draining_unspecified"
+    assert not f.allergens_checked
+    proof = f.field_sources["usable_quantity"][0]
+    assert proof["basis"] == "drained"
+    assert proof["gtin"].zfill(14) == gtin.zfill(14)
+    assert proof["source_package_quantity"] == package
+    changed = p.model_copy(update={"package_quantity": package + 10})
+    assert (changed.store_id, changed.product_id) not in supplement_catalog_facts([changed], {})
+    assert project_usable_quantity(changed, f, required_unit="g") == changed
