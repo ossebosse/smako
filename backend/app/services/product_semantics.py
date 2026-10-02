@@ -1420,7 +1420,38 @@ def _component_position(
 
 def has_semantic_rule(canonical_name: str) -> bool:
     """Whether a generic query has an authoritative shared identity/form rule."""
-    return canonicalize_ingredient_name(canonical_name) in _RULES or canonicalize_ingredient_name(canonical_name) in {"yoghurt naturell", "paprikapulver", "keso", "kapris"}
+    return canonicalize_ingredient_name(canonical_name) in _RULES or canonicalize_ingredient_name(canonical_name) in {
+        "yoghurt naturell", "paprikapulver", "keso", "kapris", *_CULINARY_LABELS,
+    }
+
+
+# Full, plain product labels supply identity for culinary ingredients absent
+# from the historical dinner taxonomy. They cannot match a flavour inside a
+# cheese/chip/ready meal. Recipe input-form guards remain independently binding.
+_CULINARY_LABELS = {
+    "spiskummin": (r"spiskummin", "single_spice"),
+    "cayennepeppar": (r"cayennepeppar", "single_spice"),
+    "kanel": (r"kanel(?: cassia| ceylon)?", "single_spice"),
+    "gurkmeja": (r"gurkmeja", "single_spice"),
+    "oregano": (r"oregano", "herb"),
+    "persilja": (r"(?:persilja|bladpersilja)", "herb"),
+    "basilika": (r"basilika", "herb"),
+    "dill": (r"dill", "herb"),
+    "sesamfrön": (r"sesamfron", "seed"),
+}
+
+
+def _culinary_label_match(canonical, product):
+    label = _search_text(str(_value(product, "name", "")))
+    identity, role = _CULINARY_LABELS[canonical]
+    descriptors = r"(?:malen|mald|eko|ekologisk|ekologiska|burk|pase|tetra|hel|hela|torkad|krus|blad|knippe|kruka|i kruka|i ask|fryst|frysta|finhackad|farsk|vita|skalade|oskalade|klass 1)"
+    compatible = bool(re.fullmatch(rf"(?:{descriptors} )*{identity}(?: {descriptors})*", label))
+    return SemanticMatchResult(
+        compatible=compatible,
+        confidence=SemanticConfidence.HIGH if compatible else SemanticConfidence.REJECTED,
+        canonical_food=canonical, product_role=role,
+        evidence=["complete_plain_culinary_label" if compatible else "different_whole_product_identity"],
+    )
 
 
 def semantic_requirement(canonical_name: str) -> SemanticRequirement:
@@ -1990,6 +2021,8 @@ def evaluate_product_semantics(
     """Apply food, role, form and explicit-exclusion gates in that order."""
 
     requirement = semantic_requirement(canonical_name)
+    if requirement.canonical_name in _CULINARY_LABELS:
+        return _culinary_label_match(requirement.canonical_name, product)
     # Specific culinary identities absent from the legacy dinner taxonomy.
     # Full product labels are required; a component/flavour word cannot match.
     if requirement.canonical_name in {"yoghurt naturell", "paprikapulver", "keso", "kapris"}:

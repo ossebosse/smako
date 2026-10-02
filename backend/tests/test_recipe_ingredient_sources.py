@@ -35,6 +35,17 @@ def test_cottage_cheese_and_capers_require_complete_food_label(canonical, name, 
     assert evaluate_product_semantics(canonical, {'name': name}).compatible == accepted
 
 
+@pytest.mark.parametrize('canonical,name,accepted', [
+    ('spiskummin', 'Spiskummin Malen', True), ('spiskummin', 'Kryddost Spiskummin & Nejlika 31%', False),
+    ('kanel', 'Kanel Cassia Malen', True), ('kanel', 'Granola Kanel', False),
+    ('persilja', 'Persilja Krus Kruka Ekologisk', True), ('persilja', 'Chips Persilja & parmesan', False),
+    ('basilika', 'Basilika', True), ('basilika', 'Tomater Krossade Med Basilika', False),
+    ('cayennepeppar', 'Cayennepeppar Burk', True), ('cayennepeppar', 'Kryddblandning Cayennepeppar', False),
+])
+def test_plain_culinary_labels_provide_shared_identity_without_flavour_substrings(canonical, name, accepted):
+    assert evaluate_product_semantics(canonical, {'name': name}).compatible == accepted
+
+
 def product(name, category):
     return SimpleNamespace(name=name, category=category, offers=[])
 

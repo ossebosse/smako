@@ -33,7 +33,7 @@ def reviewed_reference(product, name, facts):
         'champinjoner': (333, 383, r'champinjoner(?: skivade)?'),
         'pepparrot': (291, None, r'pepparrot'),
         'dill': (377, None, r'dill(?: i knippe)?'),
-        'persilja': (352, None, r'(?:bladpersilja|persilja)(?: blad| i knippe)?'),
+        'persilja': (352, None, r'(?:bladpersilja|persilja)(?: blad| krus| kruka| i kruka| i knippe)*'),
         'basilika': (379, None, r'basilika'),
     }
     if canonical in produce:
@@ -48,7 +48,7 @@ def reviewed_reference(product, name, facts):
     dry = {
         'spiskummin': (7199, r'spiskummin(?: malen| hel| burk| påse)?'),
         'gurkmeja': (7198, r'gurkmeja(?: malen| burk| påse)?'),
-        'kanel': (2306, r'kanel(?: malen| burk| påse)?'),
+        'kanel': (2306, r'kanel(?: cassia)?(?: malen| burk| påse)?'),
         'havregryn': (702, r'havregryn(?: fullkorn)?'),
         'vetemjöl': (1941, r'(?:vetemjöl|kärnvetemjöl)'),
         'salt': (1975, r'(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)?'),

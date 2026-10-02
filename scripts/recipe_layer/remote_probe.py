@@ -91,9 +91,37 @@ def retrieve():
     print(json.dumps({'retrieved_to': str(target)}))
 
 
+def serve(arm, *, stop=False):
+    assert re.fullmatch(r'candidate(?:-[a-z0-9-]+)?', arm)
+    name = 'smako-complete-recipes-isolated'
+    # Dedicated test container only. Existing application/scheduler containers
+    # are never inspected for credentials, stopped, replaced or reconfigured.
+    command = ['docker', 'run', '-d', '--name', name,
+               '--label', 'smako.test=complete-recipes-20261002',
+               '--cpus', '2', '--memory', '3g', '--read-only', '--user', '0:0',
+               '--tmpfs', '/tmp:rw,size=512m', '-p', '127.0.0.1:18122:8000',
+               '-e', 'PYTHON_DOTENV_DISABLED=1', '-e', 'PYTHONPATH=/srv/app/backend:/srv/app',
+               '-v', STAGE + '/inputs:/inputs:ro', '-v', STAGE + '/browser-state:/state',
+               '-v', STAGE + '/results:/results',
+               '-v', STAGE + f'/{arm}/backend/app:/srv/app/backend/app:ro',
+               '-v', STAGE + f'/{arm}/grocery_data/app:/srv/app/grocery_data/app:ro',
+               '-v', STAGE + f'/{arm}/scripts/recipe_layer:/evaluation:ro',
+               '--entrypoint', 'python', IMAGE, '/evaluation/serve.py']
+    print(ssh(f"""import json,pathlib,subprocess
+p=pathlib.Path({STAGE!r});assert (p/'.owner').read_text()=='complete-recipes-20261002'
+(p/'browser-state').mkdir(exist_ok=True)
+r=subprocess.run(['docker','inspect',{name!r}],capture_output=True,text=True)
+if r.returncode==0:
+ data=json.loads(r.stdout)[0];assert data['Config']['Labels'].get('smako.test')=='complete-recipes-20261002'
+ subprocess.run(['docker','stop',{name!r}],check=True,stdout=subprocess.DEVNULL)
+ subprocess.run(['docker','rm',{name!r}],check=True,stdout=subprocess.DEVNULL)
+if not {stop!r}: subprocess.run({command!r},check=True)
+else: print('isolated container stopped; all plan revisions retained')""").decode())
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('action', choices=('stage', 'freeze', 'run', 'retrieve'))
+    parser.add_argument('action', choices=('stage', 'freeze', 'run', 'retrieve', 'serve', 'stop'))
     parser.add_argument('--arm', default='candidate')
     parser.add_argument('--script', default='benchmark.py')
     parser.add_argument('arguments', nargs='*')
@@ -104,5 +132,7 @@ if __name__ == '__main__':
         freeze()
     elif args.action == 'run':
         run(args.arm, args.script, args.arguments)
+    elif args.action in {'serve', 'stop'}:
+        serve(args.arm, stop=args.action == 'stop')
     else:
         retrieve()
