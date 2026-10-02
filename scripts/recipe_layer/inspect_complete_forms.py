@@ -1,4 +1,5 @@
 """Read-only ingredient qualification evidence from the frozen public universe."""
+import argparse
 import json
 from datetime import datetime
 from pathlib import Path
@@ -16,6 +17,12 @@ from app.services.recipe_library import candidates
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--ingredients', nargs='+', default=['bönor', 'kidneybönor', 'kikärtor', 'linser', 'kapris', 'oliver', 'tortillas', 'salt', 'gurka', 'citronjuice', 'limejuice', 'jordnötssmör'])
+    parser.add_argument('--report', default='ingredient-forms')
+    args = parser.parse_args()
+    if not args.report.replace('-', '').replace('_', '').isalnum():
+        parser.error('report must be a simple directory name')
     prepared = PreparedPriceUniverseArtifact.model_validate_json(Path('/inputs/universe.json').read_bytes()).restore()
     clock = datetime.fromisoformat(json.loads(Path('/inputs/freeze.json').read_text())['frozen_at_utc'])
     request = PlanRequest(max_stores=2, purchase_planning_mode='estimated', recipe_preferences={'mode': 'complete'},
@@ -24,7 +31,7 @@ def main():
         {'revision': 0, 'items': [], 'reservations': {}, 'events': {}}, facts=load_retained_facts(prepared), now=clock)
     library = candidates(RecipePreferences(mode='complete'), 2)
     report = {}
-    for name in ('bönor', 'kidneybönor', 'kikärtor', 'linser', 'kapris', 'oliver', 'tortillas', 'salt', 'gurka', 'citronjuice', 'limejuice', 'jordnötssmör'):
+    for name in args.ingredients:
         recipe = next(r for r in library if any(i.canonical_name == name for i in r.ingredients))
         ingredient = next(i for i in recipe.ingredients if i.canonical_name == name)
         try:
@@ -56,7 +63,7 @@ def main():
         print(json.dumps({'ingredient': name, 'error': error, 'total': len(rows),
                           'forms': sum(r['form_pass'] for r in rows), 'resolved': len(resolved_ids),
                           'nutrition': sum(r['resolved'] and r['nutrition_pass'] for r in rows)}, ensure_ascii=False), flush=True)
-    target = Path('/results/integration-forms2')
+    target = Path('/results') / args.report
     target.mkdir(exist_ok=True)
     (target / 'inspection.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
 
