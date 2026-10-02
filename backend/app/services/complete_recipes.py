@@ -91,6 +91,22 @@ def product_form_compatible(recipe, name, product, fact):
         return False
     ingredient = next((i for i in getattr(recipe, "ingredients", ()) if canonicalize_ingredient_name(i.name) == canonical), None)
     requirements = getattr(ingredient, "product_requirements", None) or ()
+    if not _requirements_compatible(canonical, requirements, product, fact):
+        return False
+    if form == "raw_edible" and re.search(r"torkad|pulver|granulat|kokt|grillad|stekt|panerad|nugget|rökt|gravad|rimmad|marinerad", text):
+        return False
+    if form == "dry" and (re.search(r"kokt|färdig|konserv|avrun", text) or "vatten" in composition):
+        return False
+    if form in {"cooked_drained", "preserved_drained"}:
+        return bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
+                                and e.get("quantity") == product.usable_quantity and e.get("source")
+                                for e in fact.field_sources.get("usable_quantity", ())))
+    return True
+
+
+def _requirements_compatible(canonical, requirements, product, fact):
+    text = product.name.casefold()
+    composition = " ".join(fact.ingredients).casefold() if fact else ""
     if "ground" in requirements:
         if re.search(r"\bhel(?:a)?\b|stång|stänger", text):
             return False
@@ -117,22 +133,37 @@ def product_form_compatible(recipe, name, product, fact):
             return False
         # Red lentils are often split but whole red lentils also exist. An
         # explicit split/peeled source description is required for this method.
-        if not re.search(r"delade|split|skalade", text + " " + composition):
+        if not (re.search(r"delade|split|skalade", text + " " + composition)
+                or _supplier_classification(product, fact, "red_split")):
             return False
     if "white_rice" in requirements:
         if re.search(r"fullkorn|råris|brunt|svart|rött|vildris", text + " " + composition):
             return False
         if not re.search(r"vitt|white|jasmin|basmati|parboiled|långkorn", text + " " + composition):
             return False
-    if form == "raw_edible" and re.search(r"torkad|pulver|granulat|kokt|grillad|stekt|panerad|nugget|rökt|gravad|rimmad|marinerad", text):
-        return False
-    if form == "dry" and (re.search(r"kokt|färdig|konserv|avrun", text) or "vatten" in composition):
-        return False
-    if form in {"cooked_drained", "preserved_drained"}:
-        return bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
-                                and e.get("quantity") == product.usable_quantity and e.get("source")
-                                for e in fact.field_sources.get("usable_quantity", ())))
     return True
+
+
+def _supplier_classification(product, fact, value):
+    """A culinary declaration must be bound to this source product and pack."""
+    if not fact or value not in getattr(fact, "product_classification", ()):
+        return False
+    provenance = getattr(product, "source_provenance", None)
+    if provenance is None:
+        return False
+    for source in fact.field_sources.get("product_classification", ()):
+        if (source.get("identity_method") in {
+                "exact_checksum_gtin_brand_fixed_package",
+                "unique_exact_complete_brand_variant_fixed_pack"}
+                and source.get("bound_product_id") == product.product_id
+                and source.get("bound_store_id") == product.store_id
+                and source.get("bound_snapshot_id") == provenance.source_snapshot_id
+                and source.get("source_package_quantity") == product.package_quantity
+                and source.get("source_package_unit") == product.package_unit
+                and (source.get("source") or source.get("url"))
+                and (source.get("sha256") or source.get("document_sha256"))):
+            return True
+    return False
 
 
 def _whole_food_identity(canonical, form, product, fact):
@@ -307,5 +338,5 @@ def pantry_form_compatible(item, row):
     category = "frukt och grönsaker" if form == "raw_edible" else "kryddor" if form == "dry" else ""
     if not _whole_food_identity(row["name"], form, SimpleNamespace(name=item["name"], category=category), None):
         return False
-    # Texture-specific compound food cannot be established by a generic name.
-    return not set(row.get("product_requirements", ())) & {"thick", "firm"}
+    return _requirements_compatible(row["name"], row.get("product_requirements", ()),
+        SimpleNamespace(name=item["name"], category=category), None)

@@ -168,6 +168,19 @@ def test_compound_chili_and_unknown_pantry_form_do_not_qualify():
     assert pantry_form_compatible({"name": "vitlök", "unit": "g", "form": "raw_edible"}, row)
 
 
+@pytest.mark.parametrize("name,form,requirement,good,bad", [
+    ("linser", "dry", "red_split", "Röda Linser Delade", "Röda Linser Hela"),
+    ("spiskummin", "dry", "ground", "Spiskummin Malen", "Spiskummin Hel"),
+    ("ris", "dry", "white_rice", "Basmatiris", "Ris Fullkorn"),
+    ("spenat", "as_sold", "frozen", "Spenat Fryst", "Spenat"),
+])
+def test_generic_pantry_cannot_bypass_reviewed_product_requirements(name, form, requirement, good, bad):
+    from app.services.complete_recipes import pantry_form_compatible
+    row = {"name": name, "input_form": form, "product_requirements": [requirement]}
+    assert pantry_form_compatible({"name": good, "unit": "g", "form": form}, row)
+    assert not pantry_form_compatible({"name": bad, "unit": "g", "form": form}, row)
+
+
 @pytest.mark.parametrize("name,requirement,good,bad", [
     ("yoghurt naturell", "thick", "Grekisk Yoghurt Naturell 10%", "Mild Naturell Yoghurt 0,5%"),
     ("tofu", "firm", "Tofu Naturell Extra Fast", "Tofu Naturell"),
@@ -183,6 +196,23 @@ def test_reviewed_texture_and_cooking_time_properties_are_binding(name, requirem
         return SimpleNamespace(name=label, category="Kryddor", purchase_terms=None)
     assert product_form_compatible(recipe, name, item(good), None)
     assert not product_form_compatible(recipe, name, item(bad), None)
+
+
+def test_supplier_classification_is_bound_to_product_snapshot_and_package():
+    from app.services.complete_recipes import _requirements_compatible
+    product = SimpleNamespace(name="Röda linser", product_id="source-product", store_id="source-store",
+        package_quantity=400, package_unit="g", source_provenance=SimpleNamespace(source_snapshot_id="snapshot"))
+    source = {"identity_method": "unique_exact_complete_brand_variant_fixed_pack", "bound_product_id": "source-product",
+        "bound_store_id": "source-store", "bound_snapshot_id": "snapshot", "source_package_quantity": 400,
+        "source_package_unit": "g", "url": "https://manufacturer.example/roda-linser", "sha256": "digest"}
+    fact = SimpleNamespace(ingredients=["Röda linser"], product_classification=("red_split",),
+        field_sources={"product_classification": [source]})
+    assert _requirements_compatible("linser", ["red_split"], product, fact)
+    product.package_quantity = 800
+    assert not _requirements_compatible("linser", ["red_split"], product, fact)
+    product.package_quantity = 400
+    product.source_provenance.source_snapshot_id = "other"
+    assert not _requirements_compatible("linser", ["red_split"], product, fact)
 
 
 def test_resolution_cache_separates_texture_requirements():
