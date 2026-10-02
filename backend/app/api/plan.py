@@ -211,6 +211,9 @@ def _planner_admission_key(request: PlanRequest, settings: Settings) -> str:
             "allow_unknown_sale_model": settings.allow_unknown_sale_model,
         },
     }
+    if request.recipe_preferences is not None:
+        from app.services.recipe_library import library_version
+        payload["recipe_library"] = library_version()
     encoded = json.dumps(
         payload,
         ensure_ascii=False,
@@ -581,6 +584,7 @@ async def create_plan(
         request = request.model_copy(update={"debug": debug})
     settings = get_settings()
     request = _production_consumer_request(request, settings)
+    request = _prepare_complete_request(request, http_request, settings)
     if settings.price_universe_required:
         _assert_offline_ready(request, settings)
     try:
@@ -611,6 +615,7 @@ async def create_saved_plan(request: PlanRequest, http_request: Request):
 
     settings = get_settings()
     request = _production_consumer_request(request, settings)
+    request = _prepare_complete_request(request, http_request, settings)
     consumer_request = _consumer_request(request)
     _assert_offline_ready(consumer_request, settings)
     if "respond-async" in {value.strip() for value in http_request.headers.get("Prefer", "").lower().split(",")}:
@@ -618,7 +623,7 @@ async def create_saved_plan(request: PlanRequest, http_request: Request):
         jobs = _plan_jobs(http_request, settings)
         try:
             job = jobs.start(
-                owner, _planner_admission_key(consumer_request, settings),
+                owner, _job_request_key(consumer_request, http_request, settings),
                 http_request.state.request_id,
                 lambda: _create_saved_plan(consumer_request, http_request, settings),
             )
@@ -628,6 +633,26 @@ async def create_saved_plan(request: PlanRequest, http_request: Request):
             }) from exc
         return _pending_plan_job(job)
     return await _create_saved_plan(consumer_request, http_request, settings)
+
+
+def _prepare_complete_request(request, http_request, settings):
+    from app.services.complete_recipes import enabled, prepare_request
+    if not enabled(request):
+        return request
+    from app.services.personal_store import PersonalStore
+    state = PersonalStore(_store(http_request)).read(_plan_actor_hash(http_request, settings))
+    return prepare_request(request, settings, pantry_revision=state["revision"])
+
+
+def _job_request_key(request, http_request, settings):
+    key = _planner_admission_key(request, settings)
+    if request.personal is not None:
+        from app.services.personal_store import PersonalStore
+        state = PersonalStore(_store(http_request)).read(_plan_actor_hash(http_request, settings))
+        # Owned pantry revision must also bind the transport cache, before
+        # admission; an old explicit revision must not return a stale success.
+        key = hashlib.sha256(f"{key}:pantry:{state['revision']}".encode()).hexdigest()
+    return key
 
 
 def _plan_jobs(http_request: Request, settings: Settings) -> PlanJobs:
@@ -642,6 +667,7 @@ def _pending_plan_job(job):
     return JSONResponse(status_code=202, content={
         "status": "pending", "status_url": f"/api/plan-jobs/{job.job_id}",
         "request_id": job.request_id,
+        "stage": job.stage,
     }, headers={"Cache-Control": "private, no-store", "Retry-After": "2",
                 "Preference-Applied": "respond-async"})
 
@@ -661,7 +687,9 @@ async def poll_plan_job(job_id: str, http_request: Request):
         exc.headers = {**(exc.headers or {}), "Cache-Control": "private, no-store",
                        "X-Plan-Request-ID": job.request_id}
         raise
-    return JSONResponse(status_code=201, content=_annotate_freshness(saved).model_dump(mode="json"),
+    from fastapi.encoders import jsonable_encoder
+    content = jsonable_encoder(saved) if isinstance(saved, dict) else _annotate_freshness(saved).model_dump(mode="json")
+    return JSONResponse(status_code=201, content=content,
                         headers={"Cache-Control": "private, no-store", "X-Plan-Request-ID": job.request_id})
 
 
@@ -672,6 +700,8 @@ async def _create_saved_plan(consumer_request: PlanRequest, http_request: Reques
             settings,
         )
         _assert_offline_plan(plan)
+        from app.services.plan_jobs import report_stage
+        report_stage("saving")
         return _annotate_freshness(
             _store(http_request).create(
                 consumer_request,
@@ -854,6 +884,28 @@ async def report_saved_plan_product(
 @router.get("/health")
 async def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@router.get("/recipe-library")
+async def recipe_library_metadata():
+    from app.services.recipe_library import library_summary
+    return {"enabled": get_settings().complete_recipes_enabled, **library_summary()}
+
+
+@router.get("/price-contexts")
+async def available_price_contexts(postal_code: str = "22350"):
+    normalized = PlanRequest(postal_code=postal_code).postal_code
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(normalized, {})
+    if prepared is None:
+        raise HTTPException(503, "Lokalt prisunderlag saknas.")
+    settings = get_settings()
+    view = prepared.request_view(stale_age_hours=settings.max_price_age_hours)
+    from app.services.meal_plan_optimizer import _consumer_price_context_coverage
+    compared, excluded = _consumer_price_context_coverage(prepared,
+        usable_context_ids={s.store_id for s in view.stores},
+        excluded_stale_context_ids=view.excluded_stale_context_ids)
+    return {"contexts": [row.model_dump(mode="json") for row in compared],
+            "excluded": [row.model_dump(mode="json") for row in excluded]}
 
 
 @router.get("/price-universe/status")

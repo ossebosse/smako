@@ -173,6 +173,10 @@ def adapt(recipe, family, *, origin="smako_recipe_design"):
 
 
 def validate(recipe):
+    if getattr(recipe, "design", None) is not None:
+        from app.services.recipe_library import validate_recipe_design
+        validate_recipe_design(recipe)
+        return True
     p = recipe.preparation
     if p is None:
         return False

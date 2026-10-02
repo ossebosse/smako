@@ -113,6 +113,22 @@ def _release_fields(request: Request) -> dict[str, str | None]:
     }
 
 
+class RecipeFeedback(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    revision: int = Field(ge=1)
+    recipe_index: int = Field(ge=0, le=20)
+    taste: int | None = Field(default=None, ge=1, le=5)
+    difficulty: int | None = Field(default=None, ge=1, le=5)
+    portion_size: Literal["small", "right", "large"] | None = None
+    actual_minutes: int | None = Field(default=None, ge=1, le=600)
+
+    @model_validator(mode="after")
+    def not_empty(self):
+        if all(getattr(self, k) is None for k in ("taste", "difficulty", "portion_size", "actual_minutes")):
+            raise ValueError("Ange minst ett omdöme eller faktisk tillagningstid.")
+        return self
+
+
 class FeedbackRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -122,6 +138,7 @@ class FeedbackRequest(BaseModel):
     page_context: str = Field(min_length=1, max_length=128)
     plan_id: str | None = Field(default=None, min_length=1, max_length=128)
     email: str | None = Field(default=None, max_length=320)
+    recipe_feedback: RecipeFeedback | None = None
 
     @field_validator("message", "page_context", mode="before")
     @classmethod
@@ -408,6 +425,7 @@ def ready(request: Request) -> JSONResponse:
                     "price_universe": prices,
                     "app_version": settings.app_version,
                     "build_id": settings.build_id,
+                    "features": {"complete_recipes_enabled": settings.complete_recipes_enabled},
                 },
                 default=str,
             )
@@ -422,10 +440,35 @@ def create_feedback(
     session: SessionDep,
 ) -> FeedbackResponse:
     settings = _settings(request)
+    message = payload.message
+    if payload.recipe_feedback is not None:
+        from app.api.plan import _plan_actor_hash, _store
+        from app.services.plan_store import (
+            PlanNotFoundError,
+            PlanOwnerMismatchError,
+            PlanReadOnlyError,
+        )
+        if not payload.plan_id:
+            raise HTTPException(422, "Receptåterkoppling kräver en sparad plan.")
+        feedback = payload.recipe_feedback
+        try:
+            saved = _store(request).get_owned(payload.plan_id, owner_actor_hash=_plan_actor_hash(request, settings), revision=feedback.revision)
+        except (PlanNotFoundError, PlanOwnerMismatchError, PlanReadOnlyError) as exc:
+            raise HTTPException(404, "Planrevisionen finns inte i din session.") from exc
+        if feedback.recipe_index >= len(saved.plan.recipes):
+            raise HTTPException(422, "Receptet saknas i planrevisionen.")
+        recipe = saved.plan.recipes[feedback.recipe_index]
+        from app.services.recipe_candidate_validator import recipe_id
+        design = getattr(recipe, "design", None)
+        bound = {**feedback.model_dump(), "recipe_hash": recipe_id(recipe), "name": recipe.name,
+                 "design": {k: getattr(design, k) for k in ("base_id", "version", "variant_id", "content_sha256")} if design else None}
+        # Existing feedback persistence, privacy export/erasure and moderation
+        # remain authoritative. No recipe or another person's plan is modified.
+        message = json.dumps({"recipe_feedback": bound, "message": message}, ensure_ascii=False)
     row = BetaFeedbackModel(
         actor_hash=pseudonymous_actor(_session_id(request, payload.anonymous_session_id), settings),
         category=payload.category,
-        message=payload.message,
+        message=message,
         page_context=payload.page_context,
         plan_id=payload.plan_id,
         contact_email=payload.email,

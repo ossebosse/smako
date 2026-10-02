@@ -49,6 +49,7 @@ def _optional_int(value: str | None) -> int | None:
 
 @dataclass(frozen=True, slots=True)
 class Settings:
+    complete_recipes_enabled: bool = False
     app_env: str = "development"
     app_version: str = "0.1.0"
     build_id: str = "local"
@@ -286,6 +287,7 @@ class Settings:
     @classmethod
     def from_env(cls) -> Settings:
         return cls(
+            complete_recipes_enabled=_as_bool(os.getenv("COMPLETE_RECIPES_ENABLED")),
             app_env=os.getenv("APP_ENV", "development").strip().casefold(),
             app_version=os.getenv("APP_VERSION", "0.1.0").strip() or "0.1.0",
             build_id=os.getenv("BUILD_ID", "local").strip() or "local",

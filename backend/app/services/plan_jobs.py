@@ -8,11 +8,20 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable, Callable
+from contextvars import ContextVar
 from dataclasses import dataclass
 from time import monotonic
 from uuid import uuid4
 
 from app.models import SavedPlan
+
+_stage_reporter: ContextVar = ContextVar("plan_stage_reporter", default=None)
+
+
+def report_stage(stage: str):
+    reporter = _stage_reporter.get()
+    if reporter:
+        reporter(stage)
 
 
 class PlanJobsFull(RuntimeError):
@@ -27,6 +36,7 @@ class PlanJob:
     request_id: str
     task: asyncio.Task[SavedPlan]
     completed_at: float | None = None
+    stage: str = "queued"
 
 
 class PlanJobs:
@@ -45,7 +55,8 @@ class PlanJobs:
               work: Callable[[], Awaitable[SavedPlan]]) -> PlanJob:
         self._prune()
         for job in self.jobs.values():
-            if job.owner == owner and job.key == key and not job.task.done():
+            if (job.owner == owner and job.key == key
+                    and (not job.task.done() or (not job.task.cancelled() and job.task.exception() is None))):
                 return job
         if sum(not job.task.done() for job in self.jobs.values()) >= self.max_pending:
             raise PlanJobsFull()
@@ -55,7 +66,14 @@ class PlanJobs:
                 raise PlanJobsFull()
             oldest = min(completed, key=lambda job: job.completed_at or 0)
             del self.jobs[oldest.job_id]
-        job = PlanJob(uuid4().hex, owner, key, request_id, asyncio.create_task(work()))
+        async def run():
+            token = _stage_reporter.set(lambda stage: setattr(job, "stage", stage))
+            try:
+                return await work()
+            finally:
+                _stage_reporter.reset(token)
+
+        job = PlanJob(uuid4().hex, owner, key, request_id, asyncio.create_task(run()))
         self.jobs[job.job_id] = job
 
         def finished(task):

@@ -77,6 +77,11 @@ class RecipeProfileBuilder:
 
     @staticmethod
     def _structure(recipe: Recipe) -> tuple[str, str]:
+        if getattr(recipe, "design", None) is not None:
+            from app.services.recipe_library import validate_recipe_design
+            validate_recipe_design(recipe)
+            method = {"pan": "pan_cook", "pot": "simmer", "bake": "oven"}.get(recipe.design.method, recipe.design.method)
+            return recipe.design.family, method
         # Names are display text. Only actual instructions establish technique
         # and serving structure; unsupported labels earn no diversity credit.
         text = _plain_text(" ".join(recipe.instructions))

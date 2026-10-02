@@ -20,6 +20,7 @@ from .quality import (
     SurplusSummary,
 )
 from .recipe import Recipe
+from .recipe_preferences import RecipePreferences
 
 
 class DietPreference(StrEnum):
@@ -45,6 +46,9 @@ class AvailabilityMode(StrEnum):
 
 class PlanRequest(BaseModel):
     model_config = ConfigDict(allow_inf_nan=False)
+    recipe_preferences: RecipePreferences | None = Field(default=None, exclude_if=lambda v: v is None)
+    allow_nutrition_estimates: bool = Field(default=False, exclude_if=lambda v: not v)
+    use_pantry: bool = Field(default=True, exclude_if=lambda v: v)
     purchase_planning_mode: Literal["exact", "estimated"] = "exact"
     allowed_store_ids: tuple[str, ...] = Field(
         default=(), max_length=40,
@@ -118,7 +122,7 @@ class PlanRequest(BaseModel):
 
     @model_validator(mode="after")
     def explicit_store_selection_requires_personal(self):
-        if self.allowed_store_ids and self.personal is None:
+        if self.allowed_store_ids and self.personal is None and not (self.recipe_preferences and self.recipe_preferences.mode == "complete"):
             raise ValueError("Uttryckligt butiksval stöds i personlig planering.")
         return self
 

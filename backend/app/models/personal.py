@@ -148,6 +148,7 @@ class MealSlot(PrivateModel):
 
 
 class PersonalPlanning(PrivateModel):
+    use_pantry: bool = Field(default=True, exclude_if=lambda v: v)
     profile: TasteProfile = Field(default_factory=TasteProfile)
     meals: list[MealSettings] = Field(default_factory=list, max_length=3)
     extras: list[ExtraNeed] = Field(default_factory=list, max_length=60)
@@ -223,6 +224,7 @@ class PersonalMutation(PrivateModel):
         "restore_revision",
     ]
     slot_id: str | None = Field(default=None, max_length=64)
+    recipe_id: str | None = Field(default=None, max_length=200)
     recipe: Recipe | None = None
     extras: list[ExtraNeed] | None = Field(default=None, max_length=60)
     ingredient: str | None = Field(default=None, max_length=120)

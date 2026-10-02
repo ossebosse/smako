@@ -2815,6 +2815,18 @@ class MealPlanService:
         )
 
     async def create_plan(self, request: PlanRequest) -> PlanResponse:
+        from app.services.complete_recipes import enabled, prepare_request
+        if enabled(request):
+            from app.services.personal_planner import PersonalPlanner
+            from app.services.personal_policy import PolicyConflict
+            prepared = self.price_universe_manager.get_for_request(request.postal_code, {}) if self.price_universe_manager else None
+            if prepared is None:
+                raise PolicyConflict("Lokalt publicerat prisunderlag saknas. Försök när prisunderlaget är tillgängligt.", code="DATA_BLOCKED")
+            state = {"revision": 0, "profile": {}, "items": [], "reservations": {}, "events": {}, "ledger": []}
+            request = prepare_request(request, self.settings)
+            # The HTTP path supplies its owned pantry state before reaching this
+            # method. Direct callers get an explicitly empty private workspace.
+            return await asyncio.to_thread(lambda: PersonalPlanner(request, self.settings, prepared, state).create())
         strategy = self._strategy(request)
         if strategy == "legacy" and (
             request.diet_preference.value not in {"mixed", "meat_allowed"}

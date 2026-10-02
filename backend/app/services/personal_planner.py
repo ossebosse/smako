@@ -13,7 +13,9 @@ from collections import defaultdict
 from dataclasses import replace
 from datetime import UTC, datetime
 from decimal import Decimal
+from functools import wraps
 from itertools import combinations
+from time import perf_counter
 from zoneinfo import ZoneInfo
 
 from app.errors import IncompleteBasketError
@@ -58,13 +60,27 @@ from grocery_data.app.domain.promotion_pricing import UserPricingContext
 POLICY_VERSION = "personal-policy-v2-7"
 
 
+def timed_stage(name):
+    def decorate(function):
+        @wraps(function)
+        def measured(self, *args, **kwargs):
+            started = perf_counter()
+            try:
+                return function(self, *args, **kwargs)
+            finally:
+                self.timings[name] += perf_counter() - started
+        return measured
+    return decorate
+
+
 # Exact recipe value, including preparation and unrounded ingredient quantities.
 # Recipe's nested lists are mutable, so object ID/name alone is not a safe key.
 def _recipe_value(recipe):
     if recipe is None:
         return None
     return (recipe.name, recipe.servings, tuple(recipe.ingredients), tuple(recipe.instructions),
-            recipe.preparation.model_dump_json() if recipe.preparation else None)
+            recipe.preparation.model_dump_json() if recipe.preparation else None,
+            recipe.design.model_dump_json() if getattr(recipe, "design", None) else None)
 
 
 def personal_policy_request(request, dinner_count):
@@ -99,8 +115,12 @@ class PersonalPlanner:
         if not 1 <= nutrition_search_limit <= 65536:
             raise ValueError("Invalid diagnostic nutrition search limit")
         self.nutrition_search_limit = nutrition_search_limit
+        self.timings = defaultdict(float)
+        from app.services.complete_recipes import enabled, prepare_request
+        request = prepare_request(request, settings, pantry_revision=state["revision"])
+        self.complete = enabled(request)
         self.request, self.settings, self.prepared, self.state = request, settings, prepared, state
-        if request.diet_preference in {"vegetarian", "vegan"}:
+        if request.diet_preference in {"vegetarian", "vegan"} and not self.complete:
             raise PolicyConflict(
                 "Personlig planering har kostval per måltidstyp. Det äldre globala kostkravet kan inte ignoreras: ange det i måltidsvalen och ta bort det globala fältet innan du bekräftar."
             )
@@ -112,7 +132,8 @@ class PersonalPlanner:
         from app.services.personal_source_facts import load_retained_facts
 
         needs_facts = (
-            self.spec.organic_percent
+            self.complete
+            or self.spec.organic_percent
             or self.spec.organic_animals
             or self.spec.profile.allergies
             or self.spec.profile.exclusions
@@ -127,9 +148,13 @@ class PersonalPlanner:
                 for m in self.spec.meals
             )
         )
+        facts_started = perf_counter()
+        from app.services.plan_jobs import report_stage
+        report_stage("product_facts")
         self.facts = (
             load_retained_facts(prepared) if facts is None and needs_facts else facts
         ) or {}
+        self.timings["product_facts"] += perf_counter() - facts_started
         from app.services.personal_source_facts import facts_version
 
         self.facts_version = getattr(self.facts, "version", None) or facts_version(self.facts)
@@ -170,7 +195,7 @@ class PersonalPlanner:
         self.by_identity = {
             (p.store_id, p.product_id): i for i, p in enumerate(prepared.universe.products)
         }
-        self.items = available_items(state, plan_id=plan_id)
+        self.items = available_items(state, plan_id=plan_id) if self.spec.use_pantry else []
         self.meals = {m.meal_type: m for m in self.spec.meals}
         # Exact declarations may identify food classes absent from a brand's
         # short retail name. Keep this projection request-local; never change
@@ -384,6 +409,7 @@ class PersonalPlanner:
             organic_animals,
             food,
             campaign_choice,
+            tuple(sorted(recipe.preparation.input_forms.items())) if self.complete and recipe and recipe.preparation else None,
         )
         if cache_key in self.lookup_cache:
             for i, stage, outcome, reason in self._resolution_trace.get(cache_key, ()):
@@ -436,6 +462,11 @@ class PersonalPlanner:
             product = self.prepared.universe.products[i]
             from app.services.official_product_facts import project_usable_quantity
             product = project_usable_quantity(product, self.source_facts(product), allow_estimates=self.request.purchase_planning_mode == 'estimated', required_unit=unit)
+            if self.complete and recipe is not None:
+                from app.services.complete_recipes import product_form_compatible
+                if not product_form_compatible(recipe, name, product, self.source_facts(product)):
+                    note(i, "recipe_match", "stopped", "authored ingredient input form is incompatible with product")
+                    continue
             note(i, "candidate_index", "passed", "retrieved by existing index/search for this ingredient")
             if product.store_id not in self.store_ids:
                 note(i, "store_freshness", "stopped", "store/context excluded by request view or explicit allowed stores")
@@ -574,6 +605,10 @@ class PersonalPlanner:
         return candidates
 
     def clean_recipe(self, recipe, meal):
+        if self.complete and meal.meal_type == "dinner":
+            from app.services.complete_recipes import matches_preferences
+            if not matches_preferences(recipe, self.request.recipe_preferences):
+                raise PolicyConflict("Receptet uppfyller inte val av matkök, ingrediensantal, tid eller anpassning. Välj ett kvalificerat alternativ.", code="RECIPE_CHOICES_CONFLICT")
         # Request-local only. Source facts, stock and store view do not change
         # during this planner. Full recipe content includes preparation version,
         # units and quantities; meal policy and pricing opt-ins remain distinct.
@@ -898,9 +933,11 @@ class PersonalPlanner:
             self._reject_nutrition_bounds(slots, nutrition_bounds)
         with self.optimizer.quote_cache(reuse_existing=True):
             try:
+                package_started = perf_counter()
                 basket = self.optimizer.optimize(
                     ingredients, candidate_map, self.view.stores, max_stores=self.request.max_stores
                 )
+                self.timings["package_calculation"] += perf_counter() - package_started
             except IncompleteBasketError as exc:
                 stores = sorted({c.store_id for cs in candidate_map.values() for c in cs})
                 covers = any(
@@ -936,12 +973,14 @@ class PersonalPlanner:
                     final=final,
                     nutrition_bounds=nutrition_bounds,
                 )
+        audit_started = perf_counter()
         audit = self.auditor.audit(
             ingredients,
             basket,
             user_pricing_context=self.user,
             strategic_extras_allowed=self.spec.surplus_mode == "allow_larger",
         )
+        self.timings["audit"] += perf_counter() - audit_started
         if not audit.passed:
             raise PolicyConflict("Korgens mängder/prisvillkor kunde inte verifieras.")
         for group in groups:
@@ -1581,6 +1620,7 @@ class PersonalPlanner:
             ],
         }
 
+    @timed_stage("nutrition")
     def _check_nutrition(self, slots, selected_products, rows, allocations):
         """Reuse the same per-portion calculation, never an approximate price.
 
@@ -1840,12 +1880,21 @@ class PersonalPlanner:
             nutrition.append(row)
         return nutrition
 
+    @timed_stage("candidate_generation_and_qualification")
     def _candidates(self, meal):
-        generator = self.service.candidate_generator or DeterministicRecipeCandidateGenerator()
-        candidates = generator.generate_for_meal_type(
-            self.view.economic_pool, meal.meal_type, count=80, servings=meal.servings
-        )
+        from app.services.plan_jobs import report_stage
+        report_stage("candidate_qualification")
+        if self.complete and meal.meal_type == "dinner":
+            from app.services.recipe_library import candidates as library_candidates
+            candidates = library_candidates(self.request.recipe_preferences, meal.servings)
+        else:
+            generator = self.service.candidate_generator or DeterministicRecipeCandidateGenerator()
+            candidates = generator.generate_for_meal_type(
+                self.view.economic_pool, meal.meal_type, count=80, servings=meal.servings
+            )
         if (
+            not self.complete
+            and
             self.spec.allow_nutrition_estimates
             and meal.meal_type == "dinner"
             and requested_nutrients(meal.limits)
@@ -1889,7 +1938,7 @@ class PersonalPlanner:
                         f"Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {asdict(quality.results[0])}",
                     )
                     continue
-                if meal.limits.active:
+                if meal.limits.active or self.complete:
                     # Qualify every meal type before menu branching. Previously
                     # only depth-one dinners were independently checked; failed
                     # breakfasts/snacks could remain hidden behind dinner search.
@@ -1912,19 +1961,58 @@ class PersonalPlanner:
                 if len(local_conflicts) < 10:
                     local_conflicts.append(exc)
         if not valid:
+            if self.complete:
+                reason = str(local_conflicts[0]) if local_conflicts else "Inget grundrecept uppfyller kombinationen av matkök, tid och ingrediensantal."
+                raise PolicyConflict(reason + " Prova längre tillagningstid, ett bredare ingrediensintervall eller fler matkök. Dina krav har inte ändrats.", code="RECIPE_CHOICES_UNFULFILLED")
             if local_conflicts:
                 raise local_conflicts[0]
             raise PolicyConflict(f"Inga användbara recept för {meal.meal_type} med dina val.")
         return valid
 
-    def create(self, *, replace_slot=None, balanced_reference=None):
+    def create(self, *, replace_slot=None, balanced_reference=None, _compare_scopes=True):
+        started = perf_counter()
+        incumbents = []
+        if (self.complete and _compare_scopes and self.request.diversity_mode == "cheapest"
+                and self.spec.slots is None and replace_slot is None):
+            scopes = [(cap, self.request.purchase_planning_mode) for cap in range(1, self.request.max_stores)]
+            if self.request.purchase_planning_mode == "estimated":
+                scopes.extend((cap, "exact") for cap in range(1, self.request.max_stores + 1))
+            for cap, purchase_mode in scopes:
+                comparison_request = self.request.model_copy(update={"max_stores": cap, "purchase_planning_mode": purchase_mode})
+                try:
+                    candidate = PersonalPlanner(comparison_request, self.settings, self.prepared, self.state,
+                        plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
+                        nutrition_search_limit=self.nutrition_search_limit).create(_compare_scopes=False)
+                except (ValueError, IncompleteBasketError):
+                    continue
+                incumbents.append(candidate)
         try:
             with self.optimizer.quote_cache():
                 result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
+            if incumbents:
+                result = min([result, *incumbents], key=lambda p: p.optimized_basket.total)
+                result.personal.checks["scope_comparison"] = {
+                    "retained_valid_incumbents": len(incumbents),
+                    "comparison_totals": [p.optimized_basket.total for p in incumbents],
+                    "meaning": "Giltiga lösningar med färre butiker och exakt köp behålls när sökområdet utökas.",
+                }
             self.product_trace.finalize(result.optimized_basket)
             result.personal.checks["planning_diagnostics"] = self.diagnostics.snapshot()
+            self.timings["total"] += perf_counter() - started
+            if self.complete:
+                result.personal.checks["timings_seconds"] = dict(self.timings)
+                result.personal.checks["recipe_preferences"] = self.request.recipe_preferences.model_dump(mode="json")
+                result.personal.checks["search_outcome"] = {"status": "VALID_SOLUTION", "global_optimum_proven": False, "label": "Lägsta hittade inköpskostnad inom dina val"}
             return result
         except (ValueError, IncompleteBasketError) as exc:
+            if incumbents:
+                result = min(incumbents, key=lambda p: p.optimized_basket.total)
+                result.personal.checks["scope_comparison"] = {
+                    "retained_valid_incumbents": len(incumbents),
+                    "expanded_search_completed_without_better_solution": True,
+                    "comparison_totals": [p.optimized_basket.total for p in incumbents],
+                }
+                return result
             message = str(exc)
             code = getattr(exc, "code", "SEARCH_BLOCKED")
             if isinstance(exc, IncompleteBasketError):
@@ -1934,7 +2022,7 @@ class PersonalPlanner:
                     "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. "
                     + message
                 )
-            if not self.spec.allow_nutrition_estimates and any(
+            if not self.complete and not self.spec.allow_nutrition_estimates and any(
                 m.count and requested_nutrients(m.limits) for m in self.spec.meals
             ):
                 self._estimate_alternatives()
@@ -2083,6 +2171,9 @@ class PersonalPlanner:
             if len({recipe_id(r) for r in dinners}) != len(dinners):
                 self.diagnostics.branch(len(chosen), "variation")
                 return False
+            if self.complete and len({r.design.base_id for r in dinners}) != len(dinners):
+                self.diagnostics.branch(len(chosen), "variation")
+                return False
             # Repeated breakfasts/snacks are permitted. Dinner variation follows
             # the existing actual ingredient/preparation constraints.
             accepted = self.service.menu_optimizer.accepts_recipes(dinners, constraints)
@@ -2133,6 +2224,9 @@ class PersonalPlanner:
                 )
             return result
 
+        search_started = perf_counter()
+        from app.services.plan_jobs import report_stage
+        report_stage("week_search")
         chosen, result = self.service.menu_optimizer.optimize_slots(
             options,
             evaluate=evaluate,
@@ -2152,7 +2246,9 @@ class PersonalPlanner:
                 ))
             ) if generating and not self.items and not self.spec.product_locks else None,
         )
+        self.timings["week_search"] += perf_counter() - search_started
         # Recheck every final constraint even if the cache supplied a beam result.
+        report_stage("final_audit")
         result = self.basket(chosen, final=True)
         if not accepts(chosen, final=True):
             raise PolicyConflict("Slutlig fördelning eller variation kunde inte verifieras.")
@@ -2254,7 +2350,7 @@ class PersonalPlanner:
                 compared_price_contexts=compared,
                 excluded_price_contexts=excluded,
             ),
-            recipe_source="deterministic-candidates+personal-planning",
+            recipe_source="versioned-complete-library+personal-planning" if self.complete else "deterministic-candidates+personal-planning",
             warnings=[
                 "Köpkostnaden avser hela förpackningar. Näring, allergener och eko är separata kontroller.",
                 "Kontosynk kräver verifierad inloggning. Gästläget är privat för denna webbläsarsession.",

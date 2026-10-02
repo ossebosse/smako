@@ -7,7 +7,10 @@ import json
 
 from app.api.beta_ops import _require_same_origin
 from app.api.plan import (
+    _pending_plan_job,
     _plan_actor_hash,
+    _plan_jobs,
+    _planner_admission_key,
     _run_personal_thread,
     _run_personal_work,
     _store,
@@ -145,6 +148,25 @@ def profile_update(payload: ProfileWrite, request: Request, response: Response):
 async def change_plan(
     plan_id: str, payload: PersonalMutation, request: Request, response: Response
 ):
+    if "respond-async" in {value.strip() for value in request.headers.get("Prefer", "").lower().split(",")}:
+        settings, plans, owner = context(request, response)
+        try:
+            saved = plans.get_owned(plan_id, owner_actor_hash=owner)
+        except (PlanNotFoundError, PlanOwnerMismatchError, PlanReadOnlyError) as exc:
+            raise HTTPException(404, "Planen finns inte i din session.") from exc
+        from app.services.plan_jobs import PlanJobsFull
+        key = hashlib.sha256(json.dumps([plan_id, payload.model_dump(mode="json"),
+            _planner_admission_key(saved.request, settings)], sort_keys=True).encode()).hexdigest()
+        try:
+            job = _plan_jobs(request, settings).start(owner, key, request.state.request_id,
+                lambda: _change_plan(plan_id, payload, request, response))
+        except PlanJobsFull as exc:
+            raise HTTPException(503, "Det är många som skapar menyer just nu.", headers={"Retry-After": "10"}) from exc
+        return _pending_plan_job(job)
+    return await _change_plan(plan_id, payload, request, response)
+
+
+async def _change_plan(plan_id, payload, request, response):
     settings, plans, owner = context(request, response)
     private = PersonalStore(plans)
     try:
@@ -201,7 +223,19 @@ async def change_plan(
         elif payload.action == "remove":
             slot.recipe = None
         else:
-            replace_slot = slot.id
+            if payload.recipe_id:
+                from app.services.complete_recipes import enabled, identity
+                from app.services.recipe_library import candidates
+                if not enabled(saved.request):
+                    raise HTTPException(422, "Recept-ID kräver genomarbetat receptläge.")
+                meal = next(m for m in spec.meals if m.meal_type == slot.meal_type)
+                selected = next((r for r in candidates(saved.request.recipe_preferences, meal.servings)
+                                 if identity(r) == payload.recipe_id), None)
+                if selected is None:
+                    raise HTTPException(422, "Receptet uppfyller inte dina val. Välj ett annat alternativ.")
+                slot.recipe = selected
+            else:
+                replace_slot = slot.id
     elif payload.action == "restore_revision":
         if payload.restore_revision is None:
             raise HTTPException(422, "Välj en historisk planrevision.")
