@@ -1,5 +1,6 @@
 """Isolated, bounded recipe-layer evaluation helpers. Never activate or collect."""
 import argparse
+import hashlib
 import io
 import json
 import re
@@ -23,11 +24,19 @@ def ssh(code, data=None):
 def stage(arm):
     assert re.fullmatch(r'(?:baseline|candidate)(?:-[a-z0-9-]+)?', arm)
     payload = io.BytesIO()
+    files = {}
     with tarfile.open(fileobj=payload, mode='w:gz') as archive:
         for folder in ('backend/app', 'grocery_data/app', 'scripts/recipe_layer'):
             for path in (ROOT / folder).rglob('*'):
                 if path.is_file() and '__pycache__' not in path.parts:
                     archive.add(path, arcname=f'{arm}/{path.relative_to(ROOT).as_posix()}')
+                    files[path.relative_to(ROOT).as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
+        version = {'commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+                   'files': files, 'source_sha256': hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest()}
+        data = json.dumps(version, indent=2).encode()
+        info = tarfile.TarInfo(f'{arm}/scripts/recipe_layer/stage.json')
+        info.size = len(data)
+        archive.addfile(info, io.BytesIO(data))
     print(ssh(f"""import pathlib,sys,tarfile,io
 p=pathlib.Path({STAGE!r});p.mkdir(exist_ok=True)
 owner=p/'.owner'

@@ -34,7 +34,8 @@ async def main():
         recipe_preferences=preferences,
         personal={'allow_nutrition_estimates': True, 'meals': [{'count': 5, 'servings': 2,
             'limits': {'min_protein_g': 0, 'min_carbs_g': 0, 'min_fat_g': 0, 'max_kcal': 4000}}]})
-    record = {'clock': clock.isoformat(), 'case': case, 'request': request.model_dump(mode='json'),
+    record = {'clock': clock.isoformat(), 'stage': json.loads(Path('/evaluation/stage.json').read_text()),
+              'case': case, 'request': request.model_dump(mode='json'),
               'resources': {'cpus': 2, 'memory_gib': 3}}
     started, cpu = time.perf_counter(), time.process_time()
     with activate_performance_trace() as trace:

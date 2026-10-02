@@ -32,7 +32,8 @@ def main():
         'meals': [{'count': 1, 'servings': 2, 'limits': {'min_protein_g': 0, 'min_carbs_g': 0, 'min_fat_g': 0, 'max_kcal': 4000}}]})
     planner = PersonalPlanner(request, Settings(price_provider='mock', complete_recipes_enabled=True), prepared,
         {'revision': 0, 'items': [], 'reservations': {}, 'events': {}}, facts=facts, now=clock)
-    report = {'library': validate_library(), 'fact_seconds': fact_seconds, 'mode': mode, 'recipes': []}
+    report = {'library': validate_library(), 'fact_seconds': fact_seconds, 'mode': mode, 'recipes': [],
+              'stage': json.loads(Path('/evaluation/stage.json').read_text())}
     for recipe in candidates(RecipePreferences(mode='complete'), servings=2):
         record = {'id': recipe.design.base_id, 'variant': recipe.design.variant_id, 'name': recipe.name,
                   'cuisine': recipe.design.cuisines[0], 'ingredients': recipe.design.ingredient_count}

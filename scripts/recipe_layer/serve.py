@@ -21,6 +21,8 @@ if not secret.exists():
     secret.write_text(secrets.token_hex(32))
     secret.chmod(0o600)
 os.environ['SECRET_KEY'] = secret.read_text()
+stage = json.loads(Path('/evaluation/stage.json').read_text())
+os.environ['BUILD_ID'] = 'recipe-candidate-' + stage['commit'][:8] + '-' + stage['source_sha256'][:8]
 database = state / 'grocery.sqlite'
 if not database.exists():
     shutil.copyfile('/inputs/grocery.sqlite', database)
