@@ -224,6 +224,9 @@ def run_case(browser, engine, mobile, personal, args):
         page.locator("#generate-plan" if personal else "#submit-button").dblclick()
         generation, envelope = wait_operation(page, observed, start, timeout=args.timeout, reload_after=args.reload_after)
         report["generation"] = generation
+        submitted = next((response.request.post_data_json for response in observed[start:]
+                          if response.request.method == "POST" and urlsplit(response.url).path == "/api/plans"), None)
+        report["submitted_request"] = submitted
         dump(target / "generated.json", envelope)
         assert generation["status"] < 400, envelope
         assert generation["expensive_post_count"] == 1
@@ -317,6 +320,19 @@ def run_case(browser, engine, mobile, personal, args):
         report["first_stop"] = str(error)
         try:
             report["failure_visible_text"] = page.locator("body").inner_text(timeout=3000)
+            report["failure_form"] = page.locator("#personal-form input, #personal-form select, #plan-form input, #plan-form select").evaluate_all(
+                "nodes=>nodes.map(n=>({id:n.id,name:n.name,type:n.type,value:n.value,checked:n.checked,disabled:n.disabled}))")
+            report["failure_layout"] = observe_layout(page)
+            report["failure_submit_enabled"] = page.locator("#generate-plan" if personal else "#submit-button").is_enabled()
+            values = {row["id"]: row["value"] for row in report["failure_form"] if row["id"]}
+            report["failure_core_choices_retained"] = (
+                values.get("dinner-servings" if personal else "servings") == str(args.servings)
+                and values.get("max-stores") == str(args.max_stores)
+                and (args.recipe_mode != "complete" or (
+                    values.get("recipe-style") == "complete"
+                    and values.get("recipe-min-ingredients") == str(args.min_ingredients)
+                    and values.get("recipe-max-ingredients") == str(args.max_ingredients)
+                    and {row["value"] for row in report["failure_form"] if row["id"].startswith("cuisine-") and row["checked"]} == set(args.cuisines))))
             page.screenshot(path=str(target / "failure.png"), full_page=True, timeout=10000)
         except BrowserTimeout:
             pass
