@@ -23,6 +23,18 @@ def test_powdered_paprika_is_a_distinct_whole_ingredient(name, accepted):
     assert evaluate_product_semantics('paprikapulver', {'name': name}).compatible == accepted
 
 
+@pytest.mark.parametrize('canonical,name,accepted', [
+    ('keso', 'Keso Cottage cheese Naturell 4%', True),
+    ('keso', 'Keso Cottage Cheese Naturell Mini 1,5%', True),
+    ('keso', 'Keso Cottage Cheese Vanilj 2,9%', False),
+    ('keso', 'Kusar Keso Osötat', False),
+    ('kapris', 'Kapris Små', True), ('kapris', 'Kapris Non Pareilles', True),
+    ('kapris', 'Tapenade Al Basilico Basilika Oliv Kapris', False),
+])
+def test_cottage_cheese_and_capers_require_complete_food_label(canonical, name, accepted):
+    assert evaluate_product_semantics(canonical, {'name': name}).compatible == accepted
+
+
 def product(name, category):
     return SimpleNamespace(name=name, category=category, offers=[])
 
@@ -50,7 +62,7 @@ def test_new_whole_vegetable_semantics_reject_preserved_and_prepared(canonical):
 
 def test_imported_sources_retain_ids_versions_and_all_unrounded_macros():
     data = reference_data()
-    for identity in (362, 372, 4941, 361, 322, 323, 333, 383, 291, 377, 352, 379, 7199, 2306, 7198, 702, 1941, 321):
+    for identity in (362, 372, 4941, 361, 322, 323, 333, 383, 291, 377, 352, 379, 7199, 2306, 7198, 702, 1941, 321, 294):
         entry = data['foods'][str(identity)]
         assert entry['food']['nummer'] == identity and entry['food']['version']
         assert all(a['url'].startswith('https://dataportal.livsmedelsverket.se/') and len(a['sha256']) == 64

@@ -457,6 +457,12 @@ _RULES: dict[str, IngredientSemanticRule] = {
         food_family="vegetable",
         identity_terms=("zucchini", "squash"),
     ),
+    "pepparrot": _raw_produce_rule(
+        canonical_food="horseradish", food_family="vegetable", identity_terms=("pepparrot",),
+    ),
+    "rödbeta": _raw_produce_rule(
+        canonical_food="beetroot", food_family="vegetable", identity_terms=("rödbeta", "rödbetor"),
+    ),
     "purjolök": _raw_produce_rule(
         canonical_food="leek",
         food_family="allium",
@@ -1414,7 +1420,7 @@ def _component_position(
 
 def has_semantic_rule(canonical_name: str) -> bool:
     """Whether a generic query has an authoritative shared identity/form rule."""
-    return canonicalize_ingredient_name(canonical_name) in _RULES
+    return canonicalize_ingredient_name(canonical_name) in _RULES or canonicalize_ingredient_name(canonical_name) in {"yoghurt naturell", "paprikapulver", "keso", "kapris"}
 
 
 def semantic_requirement(canonical_name: str) -> SemanticRequirement:
@@ -1986,11 +1992,19 @@ def evaluate_product_semantics(
     requirement = semantic_requirement(canonical_name)
     # Specific culinary identities absent from the legacy dinner taxonomy.
     # Full product labels are required; a component/flavour word cannot match.
-    if requirement.canonical_name in {"yoghurt naturell", "paprikapulver"}:
+    if requirement.canonical_name in {"yoghurt naturell", "paprikapulver", "keso", "kapris"}:
         label = _search_text(str(_value(product, "name", "")))
         if requirement.canonical_name == "paprikapulver":
             compatible = bool(re.fullmatch(r"paprikapulver(?: milt| mild| stark| rokt| eko| burk| pase)*", label))
             role, form, food = "single_spice", "dry", "paprikapulver"
+        elif requirement.canonical_name == "keso":
+            compatible = bool(re.fullmatch(
+                r"(?:laktosfri )?(?:keso(?: cottage cheese)?|cottage cheese)(?: naturell| mini| supermini| laktosfri| ekologisk| eko| [0-9]+)*", label
+            ))
+            role, form, food = "plain_cottage_cheese", "as_sold", "keso"
+        elif requirement.canonical_name == "kapris":
+            compatible = bool(re.fullmatch(r"kapris(?: sma| medelstora| fina| non pareilles| i lag)*", label))
+            role, form, food = "capers", "preserved", "kapris"
         else:
             compatible = bool(re.fullmatch(
                 r"(?:(?:mild|grekisk|turkisk|laktosfri|latt|naturell) )*yoghurt(?: (?:naturell|mild|latt|laktosfri|eko|ekologisk|[0-9]+))*", label

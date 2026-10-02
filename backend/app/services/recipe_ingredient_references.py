@@ -27,6 +27,7 @@ def reviewed_reference(product, name, facts):
         'zucchini': (362, None, r'(?:zucchini|squash)'),
         'aubergine': (372, None, r'aubergine'),
         'selleri': (321, None, r'(?:stjälkselleri|blekselleri|bladselleri|selleri)'),
+        'rödbeta': (294, None, r'(?:rödbeta|rödbetor)'),
         'spenat': (4941, 361, r'(?:babyspenat|spenat)(?: blad| hackad)?'),
         'blomkål': (322, 323, r'blomkål(?: buketter)?'),
         'champinjoner': (333, 383, r'champinjoner(?: skivade)?'),
