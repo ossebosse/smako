@@ -1,6 +1,6 @@
 """Synthetic source contract across the real collector, OWN, PU and checkout."""
 
-from datetime import date
+from datetime import UTC, date, datetime, timedelta
 from decimal import Decimal
 
 import httpx
@@ -21,6 +21,8 @@ from grocery_data.app.services.collector import GroceryCollector
 from grocery_data.app.services.raw_storage import FilesystemRawSnapshotStore
 from grocery_data.app.storage import create_database_engine, create_schema, create_session_factory
 from grocery_data.tests.test_collector import FixtureWillysConnector
+
+SOURCE_DAY = datetime.now(UTC).date()
 
 
 class MixedSource(FixtureWillysConnector):
@@ -51,8 +53,8 @@ class MixedSource(FixtureWillysConnector):
             price=Decimal(75),
             quantity=3,
             max_quantity=2,
-            valid_from=date(2026, 9, 1),
-            valid_to=date(2026, 10, 1),
+            valid_from=SOURCE_DAY - timedelta(days=1),
+            valid_to=SOURCE_DAY + timedelta(days=1),
             description="SYNTHETIC: mix three exact source IDs",
             source_payload={"purchase_terms": terms.model_dump(mode="json")},
         )
@@ -125,7 +127,7 @@ async def test_collector_own_pu_mixed_subset_checkout_and_roundtrip(tmp_path):
                 price_candidate_for_context(
                     ProductCandidate.from_product(p, 1),
                     UserPricingContext(),
-                    on_date=date(2026, 9, 24),
+                    on_date=SOURCE_DAY,
                 )
             ]
             for p, n in zip(universe.products, needs, strict=True)

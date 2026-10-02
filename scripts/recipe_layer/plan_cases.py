@@ -45,7 +45,8 @@ async def main():
             record.update(status='qualified', total=plan.optimized_basket.total,
                           recipes=[r.name for r in plan.recipes], checks=plan.personal.checks)
         except ValueError as exc:
-            record.update(status='stopped', reason=str(exc), stage=getattr(exc, 'stage', None), code=getattr(exc, 'code', None))
+            record.update(status='stopped', reason=str(exc), failure_stage=getattr(exc, 'stage', None),
+                          code=getattr(exc, 'code', None), diagnostics=getattr(exc, 'diagnostics', None))
     record.update(seconds=time.perf_counter()-started, cpu_seconds=time.process_time()-cpu,
                   peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
                   trace=dataclasses.asdict(trace.snapshot()))

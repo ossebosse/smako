@@ -46,14 +46,14 @@ def main():
                 record.update(status='qualified', result_keys=list(result),
                               basket=result['basket'].model_dump(mode='json'))
                 record['checks'] = result.get('checks')
-                record['audit'] = result.get('audit')
+                record['audit'] = result['audit'].model_dump(mode='json')
             except ValueError as exc:
                 record.update(status='stopped', reason=str(exc), stage=getattr(exc, 'stage', None), code=getattr(exc, 'code', None))
         record['seconds'] = time.perf_counter() - started
         record['trace'] = dataclasses.asdict(trace.snapshot())
         report['recipes'].append(record)
         (root / 'qualification.json').write_text(json.dumps(report, ensure_ascii=False, indent=2, default=str))
-        print(json.dumps({k: v for k, v in record.items() if k not in {'basket', 'trace', 'nutrition'}}, ensure_ascii=False), flush=True)
+        print(json.dumps({k: v for k, v in record.items() if k not in {'basket', 'trace', 'nutrition', 'checks', 'audit'}}, ensure_ascii=False), flush=True)
 
 
 if __name__ == '__main__':

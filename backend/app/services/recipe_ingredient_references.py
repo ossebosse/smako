@@ -20,7 +20,7 @@ def reviewed_reference(product, name, facts):
     label = re.sub(r'^(?:ekologisk |färsk )', '', label)
     label = re.sub(r'\s+(?:eko|ekologisk|klass 1|i ask)$', '', label)
     label = re.sub(r'\s+\d+(?:[,.]\d+)?\s*g$', '', label)
-    fresh_category = any(x in category for x in ('frukt', 'grönsak', 'grönt', 'svamp', 'blomkål', 'broccoli', 'zucchini', 'aubergine', 'selleri', 'potatis', 'rotsaker'))
+    fresh_category = any(x in category for x in ('frukt', 'grönsak', 'grönt', 'svamp', 'blomkål', 'broccoli', 'zucchini', 'aubergine', 'selleri', 'potatis', 'rotsaker', 'färska örter', 'kryddväxt')) or bool(re.search(r'\bkruka\b', label))
     frozen = bool(re.search(r'\b(?:fryst|frysta|djupfryst|djupfrysta)\b', label) or 'fryst' in category)
     forbidden = r'konserv|inlagd|saltlag|kryddblandning|marinerad|sås|soppa|stuvad|stekt|torkad|pulver|dipp|chips'
     produce = {
@@ -36,8 +36,12 @@ def reviewed_reference(product, name, facts):
         'pepparrot': (291, None, r'pepparrot'),
         'dill': (377, None, r'dill(?: i knippe)?'),
         'persilja': (352, None, r'(?:bladpersilja|persilja)(?: blad| krus| kruka| i kruka| i knippe)*'),
-        'basilika': (379, None, r'basilika'),
+        'basilika': (379, None, r'basilika(?: kruka| i kruka| blad)*'),
     }
+    if canonical == 'paprika' and fresh_category:
+        match = re.fullmatch(r'paprika(?: (röd|grön|gul))?', label)
+        if match:
+            return {'röd': 351, 'grön': 350, 'gul': 381, None: 392}[match.group(1)]
     if canonical in produce:
         raw_id, frozen_id, pattern = produce[canonical]
         simple = re.sub(r'\s+(?:fryst|frysta|djupfryst|djupfrysta)$', '', label)

@@ -64,6 +64,11 @@ def test_references_keep_raw_frozen_and_dried_forms_separate():
     assert product_reference(product('Stjälkselleri', 'Frukt & Grönt'), 'selleri', None) == 321
     assert product_reference(product('Rotselleri', 'Frukt & Grönt'), 'selleri', None) is None
     assert product_reference(product('Sellerisalt', 'Kryddor'), 'selleri', None) is None
+    assert product_reference(product('Basilika Kruka Ekologisk', 'Frukt & Grönt'), 'basilika', None) == 379
+    assert product_reference(product('Paprika Röd', 'Frukt & Grönt'), 'paprika', None) == 351
+    assert product_reference(product('Paprika Gul', 'Frukt & Grönt'), 'paprika', None) == 381
+    assert product_reference(product('Paprika', 'Kryddor'), 'paprika', None) is None
+    assert product_reference(product('Paprika Röd Grillad', 'Frukt & Grönt'), 'paprika', None) is None
 
 
 @pytest.mark.parametrize('canonical', ['aubergine', 'zucchini'])
@@ -86,7 +91,7 @@ def test_complete_raw_root_label_overrides_unparsed_low_confidence_collector_key
 
 def test_imported_sources_retain_ids_versions_and_all_unrounded_macros():
     data = reference_data()
-    for identity in (362, 372, 4941, 361, 322, 323, 333, 383, 291, 377, 352, 379, 7199, 2306, 7198, 702, 1941, 321, 294, 3765):
+    for identity in (362, 372, 4941, 361, 322, 323, 333, 383, 291, 377, 352, 379, 7199, 2306, 7198, 702, 1941, 321, 294, 3765, 350, 351, 381, 392):
         entry = data['foods'][str(identity)]
         assert entry['food']['nummer'] == identity and entry['food']['version']
         assert all(a['url'].startswith('https://dataportal.livsmedelsverket.se/') and len(a['sha256']) == 64
