@@ -1,0 +1,619 @@
+[
+  {
+    "case": "clean-balanced",
+    "started_utc": "2026-10-02T06:00:55.034272+00:00",
+    "browser": "Chromium isolated context",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "available_memberships": [
+      {
+        "id": "ICA_STAMMIS",
+        "checked": false
+      },
+      {
+        "id": "COOP_MEMBER",
+        "checked": false
+      },
+      {
+        "id": "HEMKOP_MEMBER",
+        "checked": false
+      },
+      {
+        "id": "LIDL_PLUS",
+        "checked": false
+      },
+      {
+        "id": "WILLYS_PLUS",
+        "checked": false
+      },
+      {
+        "id": "CITY_GROSS_PRIO",
+        "checked": false
+      }
+    ],
+    "form": [
+      {
+        "name": "postal_code",
+        "id": "postal-code",
+        "type": "text",
+        "value": "22350",
+        "checked": false
+      },
+      {
+        "name": "recipes",
+        "id": "recipes",
+        "type": "select-one",
+        "value": "5",
+        "checked": null
+      },
+      {
+        "name": "servings",
+        "id": "servings",
+        "type": "number",
+        "value": "2",
+        "checked": false
+      },
+      {
+        "name": "max_stores",
+        "id": "max-stores",
+        "type": "select-one",
+        "value": "3",
+        "checked": null
+      },
+      {
+        "name": "purchase_planning_mode",
+        "id": "purchase-planning-mode",
+        "type": "select-one",
+        "value": "exact",
+        "checked": null
+      },
+      {
+        "name": "diet_preference",
+        "id": "diet-preference",
+        "type": "select-one",
+        "value": "mixed",
+        "checked": null
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-cheapest",
+        "type": "radio",
+        "value": "cheapest",
+        "checked": false
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-balanced",
+        "type": "radio",
+        "value": "balanced",
+        "checked": true
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-varied",
+        "type": "radio",
+        "value": "varied",
+        "checked": false
+      },
+      {
+        "name": "varied_budget_percent",
+        "id": "varied-budget",
+        "type": "number",
+        "value": "25",
+        "checked": false
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "ICA_STAMMIS",
+        "checked": false
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "COOP_MEMBER",
+        "checked": false
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "HEMKOP_MEMBER",
+        "checked": false
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "LIDL_PLUS",
+        "checked": false
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "WILLYS_PLUS",
+        "checked": false
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "CITY_GROSS_PRIO",
+        "checked": false
+      },
+      {
+        "name": "availability_mode",
+        "id": "",
+        "type": "radio",
+        "value": "normal",
+        "checked": true
+      },
+      {
+        "name": "availability_mode",
+        "id": "",
+        "type": "radio",
+        "value": "strict",
+        "checked": false
+      },
+      {
+        "name": "excluded_ingredients",
+        "id": "excluded-ingredients",
+        "type": "text",
+        "value": "",
+        "checked": false
+      }
+    ],
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "balanced",
+      "varied_budget_percent": 25,
+      "use_member_prices": false,
+      "memberships": [],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "status": 422,
+    "body": {
+      "detail": "OWN_SOURCES_ONLY=true requires OWN_GROCERY_BASE_URL"
+    },
+    "seconds": 0.312,
+    "headers": {
+      "x-request-id": "4f363c813de649f384b20d86a693f491",
+      "content-type": "application/json"
+    },
+    "page_errors": []
+  },
+  {
+    "case": "mobile-six-balanced",
+    "started_utc": "2026-10-02T06:00:58.378154+00:00",
+    "browser": "Chromium isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "available_memberships": [
+      {
+        "id": "ICA_STAMMIS",
+        "checked": false
+      },
+      {
+        "id": "COOP_MEMBER",
+        "checked": false
+      },
+      {
+        "id": "HEMKOP_MEMBER",
+        "checked": false
+      },
+      {
+        "id": "LIDL_PLUS",
+        "checked": false
+      },
+      {
+        "id": "WILLYS_PLUS",
+        "checked": false
+      },
+      {
+        "id": "CITY_GROSS_PRIO",
+        "checked": false
+      }
+    ],
+    "form": [
+      {
+        "name": "postal_code",
+        "id": "postal-code",
+        "type": "text",
+        "value": "22350",
+        "checked": false
+      },
+      {
+        "name": "recipes",
+        "id": "recipes",
+        "type": "select-one",
+        "value": "5",
+        "checked": null
+      },
+      {
+        "name": "servings",
+        "id": "servings",
+        "type": "number",
+        "value": "2",
+        "checked": false
+      },
+      {
+        "name": "max_stores",
+        "id": "max-stores",
+        "type": "select-one",
+        "value": "3",
+        "checked": null
+      },
+      {
+        "name": "purchase_planning_mode",
+        "id": "purchase-planning-mode",
+        "type": "select-one",
+        "value": "exact",
+        "checked": null
+      },
+      {
+        "name": "diet_preference",
+        "id": "diet-preference",
+        "type": "select-one",
+        "value": "mixed",
+        "checked": null
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-cheapest",
+        "type": "radio",
+        "value": "cheapest",
+        "checked": false
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-balanced",
+        "type": "radio",
+        "value": "balanced",
+        "checked": true
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-varied",
+        "type": "radio",
+        "value": "varied",
+        "checked": false
+      },
+      {
+        "name": "varied_budget_percent",
+        "id": "varied-budget",
+        "type": "number",
+        "value": "25",
+        "checked": false
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "ICA_STAMMIS",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "COOP_MEMBER",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "HEMKOP_MEMBER",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "LIDL_PLUS",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "WILLYS_PLUS",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "CITY_GROSS_PRIO",
+        "checked": true
+      },
+      {
+        "name": "availability_mode",
+        "id": "",
+        "type": "radio",
+        "value": "normal",
+        "checked": true
+      },
+      {
+        "name": "availability_mode",
+        "id": "",
+        "type": "radio",
+        "value": "strict",
+        "checked": false
+      },
+      {
+        "name": "excluded_ingredients",
+        "id": "excluded-ingredients",
+        "type": "text",
+        "value": "",
+        "checked": false
+      }
+    ],
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "balanced",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "status": 422,
+    "body": {
+      "detail": "OWN_SOURCES_ONLY=true requires OWN_GROCERY_BASE_URL"
+    },
+    "seconds": 0.11,
+    "headers": {
+      "x-request-id": "61721907c2cb4401a6554207e13be720",
+      "content-type": "application/json"
+    },
+    "page_errors": []
+  },
+  {
+    "case": "mobile-six-cheapest",
+    "started_utc": "2026-10-02T06:01:01.443474+00:00",
+    "browser": "Chromium isolated context",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "available_memberships": [
+      {
+        "id": "ICA_STAMMIS",
+        "checked": false
+      },
+      {
+        "id": "COOP_MEMBER",
+        "checked": false
+      },
+      {
+        "id": "HEMKOP_MEMBER",
+        "checked": false
+      },
+      {
+        "id": "LIDL_PLUS",
+        "checked": false
+      },
+      {
+        "id": "WILLYS_PLUS",
+        "checked": false
+      },
+      {
+        "id": "CITY_GROSS_PRIO",
+        "checked": false
+      }
+    ],
+    "form": [
+      {
+        "name": "postal_code",
+        "id": "postal-code",
+        "type": "text",
+        "value": "22350",
+        "checked": false
+      },
+      {
+        "name": "recipes",
+        "id": "recipes",
+        "type": "select-one",
+        "value": "5",
+        "checked": null
+      },
+      {
+        "name": "servings",
+        "id": "servings",
+        "type": "number",
+        "value": "2",
+        "checked": false
+      },
+      {
+        "name": "max_stores",
+        "id": "max-stores",
+        "type": "select-one",
+        "value": "3",
+        "checked": null
+      },
+      {
+        "name": "purchase_planning_mode",
+        "id": "purchase-planning-mode",
+        "type": "select-one",
+        "value": "exact",
+        "checked": null
+      },
+      {
+        "name": "diet_preference",
+        "id": "diet-preference",
+        "type": "select-one",
+        "value": "mixed",
+        "checked": null
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-cheapest",
+        "type": "radio",
+        "value": "cheapest",
+        "checked": true
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-balanced",
+        "type": "radio",
+        "value": "balanced",
+        "checked": false
+      },
+      {
+        "name": "diversity_mode",
+        "id": "diversity-varied",
+        "type": "radio",
+        "value": "varied",
+        "checked": false
+      },
+      {
+        "name": "varied_budget_percent",
+        "id": "varied-budget",
+        "type": "number",
+        "value": "25",
+        "checked": false
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "ICA_STAMMIS",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "COOP_MEMBER",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "HEMKOP_MEMBER",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "LIDL_PLUS",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "WILLYS_PLUS",
+        "checked": true
+      },
+      {
+        "name": "membership",
+        "id": "",
+        "type": "checkbox",
+        "value": "CITY_GROSS_PRIO",
+        "checked": true
+      },
+      {
+        "name": "availability_mode",
+        "id": "",
+        "type": "radio",
+        "value": "normal",
+        "checked": true
+      },
+      {
+        "name": "availability_mode",
+        "id": "",
+        "type": "radio",
+        "value": "strict",
+        "checked": false
+      },
+      {
+        "name": "excluded_ingredients",
+        "id": "excluded-ingredients",
+        "type": "text",
+        "value": "",
+        "checked": false
+      }
+    ],
+    "url": "https://beta.smako.nu/api/plans",
+    "method": "POST",
+    "request": {
+      "postal_code": "22350",
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "purchase_planning_mode": "exact",
+      "diet_preference": "mixed",
+      "availability_mode": "normal",
+      "avoid_ingredients": [],
+      "diversity_mode": "cheapest",
+      "varied_budget_percent": 25,
+      "use_member_prices": true,
+      "memberships": [
+        "CITY_GROSS_PRIO",
+        "COOP_MEMBER",
+        "HEMKOP_MEMBER",
+        "ICA_STAMMIS",
+        "LIDL_PLUS",
+        "WILLYS_PLUS"
+      ],
+      "optimization_iterations": 1,
+      "strategy": "optimized",
+      "candidate_recipe_count": 80,
+      "beam_width": 30,
+      "debug": false
+    },
+    "status": 422,
+    "body": {
+      "detail": "OWN_SOURCES_ONLY=true requires OWN_GROCERY_BASE_URL"
+    },
+    "seconds": 0.125,
+    "headers": {
+      "x-request-id": "03548dcd1ee04ccaadb49d91f3c77015",
+      "content-type": "application/json"
+    },
+    "page_errors": []
+  }
+]

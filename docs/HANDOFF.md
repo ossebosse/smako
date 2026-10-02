@@ -1,3 +1,31 @@
+# 2026-10-02: Publik veckomeny – app-hotfix efter aktiveringen
+
+Se [felsökning, request-ID:n och offentlig knappacceptans](releases/public-menu-20261002/RESULTS.md).
+Webbappen kör nu Git `14cc716ae54e2bb09ceaed5c4e3c2159e3a9c97d`, image
+`sha256:7dcc2c5c9b35a0f0ab68e1e1b180eada790c3f0a045d8f6a63c883ee7461ebef`.
+Scheduler/källjobb ligger avsiktligt kvar på nedanstående 08c1374-release.
+Detta var ett app-only-byte under befintligt driftlås, inte en ny Lund-aktivering.
+Relä, scheman, femkällorspolicy, autentisering, prismanifest och alla 179 tidigare
+planrevisioner bevarades. Återgångsunderlag och plandatabackup ligger skyddade under
+`/opt/smako/evidence/public-menu-20261002`; återgång återställer enbart appkod.
+
+Grundfelet var att publika femmiddagsformulärets MealPlanService skapade en
+liveprovider innan den förberedda lokala PriceUniverse-vägen valdes. Därmed gav
+normal drift utan OWN_GROCERY_BASE_URL ett missvisande 422. PersonalPlanner-provet
+15/20 använde en annan kodväg. Följdfel i exakt medlemsprojektion, frivillig
+obegränsad butiksjämförelse och kampanjsökningens cache/nested-gränser rättades
+med reproducerande regressioner. Felpresentationen skiljer nu fältfel,
+dataspärr, timeout och serverfel och visar Fel-ID med bibehållna val.
+
+Publika mobilprov för Balanserad och Billigast med 22350, 5 × 2, tre inköpsställen,
+exact, mixed och sex faktiskt tillgängliga medlemsprogram har passerat via knappen:
+168,55 respektive 125,10 kr, verifierad korg, fullständiga recept och identisk
+sparning/GET. Ren desktopsession utan medlemskap passerar också: 168,55 kr,
+313,984 s, identisk sparning/GET. Fyra separata 15/20-profiler passerar med
+440,72 kr; alla sju anrop matchas mot backendlogg och nya build-ID:t.
+Kall femmiddagsberäkning tar
+fortfarande flera minuter. Ingen fysisk iPhone har provats. Ingen Git-push.
+
 # 2026-10-02: Lund 1281 aktiverat i normal drift
 
 **Aktiveringen är genomförd och båda schemana är återupptagna.** Läs

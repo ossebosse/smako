@@ -58,7 +58,7 @@ def main():
             page.on('request', lambda r, sink=requests: sink.append(r) if r.method == 'POST' and r.url.endswith('/api/plans') else None)
             page.on('response', lambda r, sink=responses: sink.append(r) if r.request.method == 'POST' and r.url.endswith('/api/plans') else None)
             page.locator('#submit-button').click()
-            page.wait_for_function("!document.querySelector('#error-state').hidden || !document.querySelector('#results').hidden",timeout=610000)
+            page.locator('#error-state:visible, #results:visible').first.wait_for(state='visible',timeout=610000)
             response = responses[-1] if responses else None
             request = requests[-1] if requests else None
             body = response.json() if response else None
@@ -72,6 +72,7 @@ def main():
             report['visible_text'] = page.locator('body').inner_text()
             report['service_workers'] = page.evaluate('async()=> (await navigator.serviceWorker.getRegistrations()).map(r=>r.active?.scriptURL)')
             page.screenshot(path=str(args.output / (name + '-after.png')), full_page=True)
+            (args.output / (name + '.json')).write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
             if response and response.status == 201:
                 plan = body['plan']
                 basket = plan['optimized_basket']
