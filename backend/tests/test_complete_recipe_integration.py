@@ -180,6 +180,29 @@ def test_reviewed_texture_and_cooking_time_properties_are_binding(name, requirem
     assert not product_form_compatible(recipe, name, item(bad), None)
 
 
+def test_resolution_cache_separates_texture_requirements():
+    from app.models.personal import TasteProfile
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.recipe_library import candidates
+
+    from backend.tests.test_personal_planning_v2 import NOW, prepared, product, state
+
+    prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products")
+    recipe = candidates(prefs, 2)[0]
+    plain = recipe.model_copy(update={"ingredients": [i.model_copy(update={"product_requirements": ()}) for i in recipe.ingredients]})
+    thin = product("Mild Naturell Yoghurt 0,5%", 1000, "g", 10, identity="thin")
+    thick = product("Grekisk Yoghurt Naturell 10%", 1000, "g", 20, identity="thick")
+    universe = prepared(thin, thick)
+    request = PlanRequest(recipe_preferences=prefs, personal=PersonalPlanning(meals=[MealSettings(count=1)]))
+    planner = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(), facts={}, now=NOW)
+    # Lower-level cache only: clean_recipe separately rejects the unregistered
+    # modified content, while resolve must still never conflate its constraints.
+    ordinary = planner.resolve("yoghurt naturell", 100, "g", profile=TasteProfile(), recipe=plain)
+    qualified = planner.resolve("yoghurt naturell", 100, "g", profile=TasteProfile(), recipe=recipe)
+    assert {c.product_id for _, c in ordinary} == {"thin", "thick"}
+    assert {c.product_id for _, c in qualified} == {"thick"}
+
+
 @pytest.mark.asyncio
 async def test_job_progress_and_successful_retry_reuse():
     from app.services.plan_jobs import PlanJobs, report_stage

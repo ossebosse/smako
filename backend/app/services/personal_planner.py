@@ -409,7 +409,10 @@ class PersonalPlanner:
             organic_animals,
             food,
             campaign_choice,
-            tuple(sorted(recipe.preparation.input_forms.items())) if self.complete and recipe and recipe.preparation else None,
+            tuple((i.form, tuple(getattr(i, "product_requirements", None) or ()))
+                  for i in recipe.ingredients
+                  if canonicalize_ingredient_name(i.name) == canonicalize_ingredient_name(name))
+            if self.complete and recipe and recipe.preparation else None,
         )
         if cache_key in self.lookup_cache:
             for i, stage, outcome, reason in self._resolution_trace.get(cache_key, ()):
