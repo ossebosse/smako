@@ -19,7 +19,7 @@ from app.models.recipe_preferences import RecipePreferences
 LIBRARY_VERSION = "smako-complete-dinners-v1"
 LIBRARY_PATH = Path(__file__).parents[1] / "data/recipes/complete-dinners-v1.json"
 # Updated only together with reviewed, versioned source content.
-CONTENT_SHA256 = "eb6e9d0d1333204db80c50efed822bcd17d96ad93047cacb570245e2848dd218"
+CONTENT_SHA256 = "4baec1580728294b2805e3716b719d68b2d12ca0f2cbdc469bb074769700de66"
 COUNT_EXEMPT = frozenset({"salt", "svartpeppar", "peppar", "vatten"})
 
 
@@ -112,6 +112,28 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
         for key in ("quantity", "quantity_min", "quantity_max", "quantity_step")
     }) for i in recipe.ingredients]
     result = recipe.model_copy(deep=True, update={"servings": servings, "ingredients": ingredients})
+    if servings > 4:
+        # A larger pan is not an implicit unlimited cooking resource. Reserve
+        # sequential batches and show that allowance instead of silently keeping
+        # the two-person time estimate for twelve portions.
+        batches = (servings + 3) // 4
+        steps = list(result.design.steps)
+        heat = next((index for index, step in enumerate(steps)
+                     if index > 0 and step.duration_minutes >= 10), 0)
+        original = steps[heat]
+        extra = original.duration_minutes * (batches - 1)
+        steps[heat] = original.model_copy(update={
+            "duration_minutes": original.duration_minutes + extra,
+            "text": original.text + f" För {servings} portioner: tillaga i {batches} omgångar "
+            "om allt inte ryms med samma djup i panna eller form. Håll färdig mat varm. "
+            f"Tidsuppskattningen inkluderar {extra} minuter för omgångarna.",
+        })
+        result = result.model_copy(update={
+            "design": result.design.model_copy(update={
+                "steps": tuple(steps), "estimated_minutes": result.design.estimated_minutes + extra,
+            }),
+            "instructions": [s.text for s in steps],
+        })
     digest = content_hash(result)
     result = result.model_copy(update={"design": result.design.model_copy(update={"content_sha256": digest})})
     return result.model_copy(update={"preparation": RecipePreparation(

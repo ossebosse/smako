@@ -87,6 +87,7 @@ class RecipeIngredient(BaseModel):
     quantity_min: float | None = Field(default=None, gt=0, exclude_if=lambda v: v is None)
     quantity_max: float | None = Field(default=None, gt=0, exclude_if=lambda v: v is None)
     quantity_step: float | None = Field(default=None, gt=0, exclude_if=lambda v: v is None)
+    product_requirements: tuple[str, ...] | None = Field(default=None, exclude_if=lambda v: v is None)
 
 
 class Recipe(BaseModel):
