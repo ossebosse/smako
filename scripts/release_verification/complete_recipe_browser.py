@@ -224,6 +224,8 @@ def run_case(browser, engine, mobile, personal, args):
                 page.locator("#recipe-min-protein").fill(str(args.min_protein))
             page.locator("#recipe-adaptation").select_option(args.adaptation)
             page.locator("#recipe-allow-fish").set_checked(args.allow_fish)
+            for store_context in args.store_contexts:
+                page.locator(f'#recipe-price-contexts input[value="{store_context}"]').check()
             if not personal:
                 page.locator("#recipe-nutrition-estimates").set_checked(args.allow_nutrition_estimates)
         page.screenshot(path=str(target / "choices.png"), full_page=True)
@@ -380,6 +382,7 @@ def main():
     parser.add_argument("--diet", choices=["mixed", "vegetarian", "vegan"], default="mixed")
     parser.add_argument("--purchase-mode", choices=["exact", "estimated"], default="exact")
     parser.add_argument("--memberships", nargs="*", default=[])
+    parser.add_argument("--store-contexts", nargs="*", default=[], help="Exact currently published context IDs to select through the form")
     parser.add_argument("--exclusions", nargs="*", default=[])
     parser.add_argument("--timeout", type=int, default=900)
     parser.add_argument("--reload-after", type=float, default=3)
