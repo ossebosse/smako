@@ -1318,7 +1318,7 @@
     return lineTotal;
   }
 
-  function renderStoreGroup(group, basketStatus) {
+  function renderStoreGroup(group, basketStatus, productDetails = []) {
     const items = storeItems(group);
     const article = createElement("article", "store-group");
     const heading = createElement("div", "store-heading");
@@ -1406,6 +1406,8 @@
       ]);
       productMeta.push(assortmentLabel(availability));
       if (productMeta.length) productCell.append(createElement("span", null, productMeta.join(" · ")));
+      const declaration=window.SmakoRecipes.productDetails(productDetails.find(detail=>detail.ingredient===ingredientName&&detail.product_name===productName));
+      if(declaration)productCell.append(declaration);
       row.append(productCell);
 
       const commonUnit = first(item, ["unit", "required_unit", "ingredient.unit", "normalized_unit"]);
@@ -1500,6 +1502,8 @@
 
   function renderShopping(data, recipes) {
     empty(dom.storeGroups);
+    const financials=window.SmakoRecipes.financials(data);
+    if(financials)dom.storeGroups.append(financials);
     const basket = optimizedBasket(data);
     const verification = renderBasketVerification(basket);
     const groups = basketGroups(basket);
@@ -1507,7 +1511,7 @@
     if (!groups.length) {
       dom.storeGroups.append(emptyMessage("Ingen optimerad inköpslista returnerades i svaret."));
     } else {
-      groups.forEach((group) => dom.storeGroups.append(renderStoreGroup(group, verification.status)));
+      groups.forEach((group) => dom.storeGroups.append(renderStoreGroup(group, verification.status, data.personal?.checks?.ingredient_product_details||[])));
     }
     renderMembershipPlanSummary(groups, data);
 

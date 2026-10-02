@@ -133,7 +133,7 @@ def test_planner_fails_closed_with_swedish_readiness_copy() -> None:
     assert "setPlannerReadiness(ready)" in script
     assert 'serviceRetryButton.addEventListener("click"' in script
     assert (
-        'if (response.status === 503 && responseErrorCode !== "planner_admission_full"'
+        'if (response.status === 503 && responseErrorCode.startsWith("price_universe_")'
         in script
     )
     assert 'normalizedCode === "planner_admission_full"' in script

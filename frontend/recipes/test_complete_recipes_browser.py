@@ -160,6 +160,15 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     expect(card).to_contain_text("efter steg 1")
     assert card.locator(".recipe-component").count() == 3
     assert page.evaluate("SmakoRecipes.ingredientCount(window.testRecipe)") == 4
+    page.evaluate("""() => {
+      const node=SmakoRecipes.financials({optimized_basket:{total:123.45,verification_status:'VERIFIED'},personal:{allocations:[{name:'Ris',quantity:100,unit:'g'}],checks:{used_ingredient_cost:null,new_purchase_used_cost:100,used_cost_basis:{quantity_status:'VERIFIED',description:'Kostnadsfördelning, utan avdrag på betalningen.'}}}});
+      node.id='contract-financials';document.body.append(node);
+      const declaration=SmakoRecipes.productDetails({ingredients:[],ingredients_complete:false,allergens_present:[],allergens_trace:[]});declaration.id='contract-declaration';declaration.open=true;document.body.append(declaration);
+    }""")
+    expect(page.locator("#contract-financials")).to_contain_text("123,45 kr")
+    expect(page.locator("#contract-financials")).to_contain_text("Kostnaden för allt som används är okänd")
+    expect(page.locator("#contract-financials")).to_contain_text("100 kr")
+    expect(page.locator("#contract-declaration")).to_contain_text("Detta bevisar inte frånvaro")
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
     if output:
         card.screenshot(path=str(output / f"{engine}-{'mobile' if mobile else 'desktop'}-{'personal' if personal else 'public'}-recipe.png"))

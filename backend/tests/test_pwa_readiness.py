@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 from app.main import app
@@ -26,7 +27,7 @@ def test_manifest_describes_root_scoped_standalone_consumer_app() -> None:
 def test_service_worker_only_caches_static_shell_and_never_api_or_posts() -> None:
     worker = (STATIC / "service-worker.js").read_text(encoding="utf-8")
 
-    assert 'const SHELL_CACHE = "billigaste-veckomenyn-shell-v11"' in worker
+    assert re.search(r'^const SHELL_CACHE = "billigaste-veckomenyn-shell-v\d+";', worker, re.MULTILINE)
     assert 'request.method !== "GET"' in worker
     assert 'url.pathname.startsWith("/api/")' in worker
     assert 'request.mode === "navigate"' in worker
@@ -40,6 +41,11 @@ def test_service_worker_only_caches_static_shell_and_never_api_or_posts() -> Non
     assert '"/"' not in shell_block
     assert "plans" not in shell_block
     assert "prices" not in shell_block
+    for page_name in ("index.html", "personal.html"):
+        page = (STATIC / page_name).read_text(encoding="utf-8")
+        scripts = re.findall(r'<script src="(/static/(?:app|personal|complete-recipes)\.js[^\"]*)"', page)
+        assert scripts
+        assert all(f'"{script}"' in shell_block for script in scripts)
 
 
 def test_root_worker_route_is_not_cached_and_allows_root_scope() -> None:

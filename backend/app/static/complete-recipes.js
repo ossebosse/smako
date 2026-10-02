@@ -167,6 +167,27 @@
     });dialog.showModal();taste.focus();
   }
 
+  function financials(plan) {
+    const checks=plan.personal?.checks;if(!checks||!("used_ingredient_cost" in checks))return null;
+    const money=value=>`${number(value)} kr`;const out=el("section",null,"recipe-purchase-explanation");out.append(el("h3","Inköp och förbrukning"));
+    const estimated=checks.used_cost_basis?.quantity_status==="ESTIMATED";
+    out.append(el("p",`${plan.optimized_basket.verification_status==="VERIFIED_WITH_ESTIMATES"?"Uppskattat belopp att betala":"Belopp att betala"}: ${money(plan.optimized_basket.total)}. Hela köp, inklusive eventuell pant.`));
+    out.append(el("p",checks.used_ingredient_cost==null?"Kostnaden för allt som används är okänd eftersom skafferiets tidigare inköpspris saknas.":`${estimated?"Uppskattad kostnad":"Kostnad"} för mängderna som används: ${money(checks.used_ingredient_cost)} (utan pant).`));
+    if(checks.used_ingredient_cost==null&&checks.new_purchase_used_cost!=null)out.append(el("p",`Använd andel av de nya matinköpen: ${estimated?"cirka ":""}${money(checks.new_purchase_used_cost)}. Skafferiets historiska kostnad ingår inte.`));
+    if(plan.personal.allocations?.length){out.append(el("h4","Från ditt faktiska skafferi"));const list=el("ul");for(const row of plan.personal.allocations)list.append(el("li",`${row.name}: ${number(row.quantity)} ${row.unit}`));out.append(list);}
+    if(checks.used_cost_basis?.description)out.append(el("p",checks.used_cost_basis.description,"field-hint"));
+    out.append(el("p","Resterna i inköpslistan är planerade mängder. De bokförs inte automatiskt som lager och deras framtida värde minskar inte beloppet att betala.","field-hint"));return out;
+  }
+
+  function productDetails(detail) {
+    if(!detail)return null;const out=el("details",null,"recipe-product-declaration");out.append(el("summary","Sammansättning och allergenunderlag"));
+    out.append(el("p",detail.ingredients?.length?`Ingrediensunderlag: ${detail.ingredients.join(", ")}.`:"Ingrediensdeklaration saknas i detta underlag."));
+    if(!detail.ingredients_complete)out.append(el("p","Ingrediensunderlaget är inte komplett.","field-hint"));
+    out.append(el("p",detail.allergens_present?.length?`Angivna allergener: ${detail.allergens_present.join(", ")}.`:"Inga allergener anges i detta underlag. Detta bevisar inte frånvaro."));
+    out.append(el("p",detail.allergens_trace?.length?`Angivna spår: ${detail.allergens_trace.join(", ")}.`:"Inga spår anges i detta underlag. Följ planens separata allergenkontroll."));
+    if(detail.source)out.append(el("p",`Källreferens: ${detail.source}`,"small"));return out;
+  }
+
   const validJobUrl=url=>/^\/api\/plan-jobs\/[a-f0-9]{32}$/.test(url||"");
   const stages={queued:"Din menyberäkning väntar på en ledig plats.",product_facts:"Kontrollerar produktfakta och aktuella prisvillkor.",candidate_qualification:"Prövar rätternas produkter, mängder och näringskrav.",week_search:"Söker efter en samordnad veckomeny och inköpskorg.",final_audit:"Slutkontrollerar hela inköpslistan och dina krav.",saving:"Sparar den färdiga planrevisionen."};
   const jobKey=scope=>`smako.planJob.${scope}`;
@@ -188,5 +209,5 @@
     }
     forgetJob(scope);return response;
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,ingredientCount,cuisines,poll,pendingJob,forgetJob,storage});
+  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,financials,productDetails,ingredientCount,cuisines,poll,pendingJob,forgetJob,storage});
 })();

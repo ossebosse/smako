@@ -213,7 +213,7 @@ def test_planner_admission_full_has_retryable_consumer_copy_without_disabling_se
     assert "Det är många som skapar menyer just nu" in script
     assert "Math.max(1, Math.ceil(parsedRetry))" in script
     assert 'response.headers.get("Retry-After")' in script
-    assert 'responseErrorCode !== "planner_admission_full"' in script
+    assert 'responseErrorCode.startsWith("price_universe_")' in script
     assert "setTimeout(submitPlan" not in script
     assert 'if (activePlanRequest) return;' in script
 
