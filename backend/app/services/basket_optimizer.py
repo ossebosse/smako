@@ -250,6 +250,10 @@ class StoreSubsetCacheStats:
 
 @dataclass(slots=True)
 class _QuoteCacheSession:
+    # Exact quotient of subset vectors, request-local like the source quotes.
+    # A bit marks every store subset with that same rank/price/winning store.
+    subset_partitions: dict[int, tuple[tuple, tuple]] = field(default_factory=dict)
+    subset_cap_masks: dict[int, tuple[tuple, tuple[int, ...]]] = field(default_factory=dict)
     base_candidate_rows: dict[
         int, tuple[tuple[ProductCandidate, ...], tuple[ProductCandidate, ...]]
     ] = field(default_factory=dict)
@@ -1207,35 +1211,9 @@ class BasketOptimizer:
             )
             for quotes, quote_set_key in quoted_requirements
         )
-        best_by_cap: list[tuple[int, Decimal, int] | None] = [None] * limit
-        infeasible_subsets = 0
-        for subset_index, combo_ids in enumerate(store_subsets):
-            verification_rank = _VERIFICATION_RANK[
-                BasketVerificationStatus.VERIFIED
-            ]
-            total = Decimal(0)
-            used_store_mask = 0
-            for vector in subset_vectors:
-                selection = vector[subset_index]
-                if selection.store_id is None:
-                    break
-                if selection.verification_rank > verification_rank:  # noqa: PLR1730
-                    verification_rank = selection.verification_rank
-                total += selection.total_price
-                used_store_mask |= selection.store_mask
-            else:
-                key = (
-                    verification_rank,
-                    total,
-                    used_store_mask.bit_count(),
-                )
-                for cap_index in range(len(combo_ids) - 1, limit):
-                    current = best_by_cap[cap_index]
-                    if current is None or key < current:
-                        best_by_cap[cap_index] = key
-                continue
-            if subset_vectors:
-                infeasible_subsets += 1
+        best_by_cap, infeasible_subsets = self._grouped_subset_keys(
+            subset_vectors, store_subsets, limit, session
+        )
         session = self._quote_cache_context.get()
         if session is not None:
             session.stats.optimistic_store_subset_evaluations += len(store_subsets)
@@ -1255,6 +1233,67 @@ class BasketOptimizer:
         else:
             session.stats.same_depth_keys += 1
         return tuple(best_by_cap)
+
+    @staticmethod
+    def _grouped_subset_keys(subset_vectors, store_subsets, limit, session=None):
+        """Aggregate every exact subset once per distinct winning-quote pattern.
+
+        Store IDs and quote contracts are not collapsed. Bit partitions merely
+        group positions of the existing vectors which have identical operands.
+        Refining by intersection gives precisely the scalar loop's feasible
+        subsets, Decimal sums, max ranks and union of winning stores, including
+        every nested cap. No float, heuristic pruning or weaker bound is used.
+        """
+        partitions = []
+        for vector in subset_vectors:
+            cached = session.subset_partitions.get(id(vector)) if session else None
+            if cached is not None and cached[0] is vector:
+                groups = cached[1]
+            else:
+                grouped = {}
+                for index, selection in enumerate(vector):
+                    if selection.store_id is not None:
+                        key = (selection.verification_rank, selection.total_price, selection.store_mask)
+                        grouped[key] = grouped.get(key, 0) | (1 << index)
+                groups = tuple(grouped.items())
+                if session:
+                    session.subset_partitions[id(vector)] = (vector, groups)
+            partitions.append(groups)
+        # Small partitions first reduces intermediate intersections without
+        # changing the commutative arithmetic or quote selection.
+        partitions.sort(key=len)
+        states = {(0, Decimal(0), 0): (1 << len(store_subsets)) - 1}
+        for groups in partitions:
+            refined = {}
+            for (rank, total, stores), mask in states.items():
+                for (line_rank, line_total, line_store), line_mask in groups:
+                    overlap = mask & line_mask
+                    if overlap:
+                        key = (max(rank, line_rank), total + line_total, stores | line_store)
+                        refined[key] = refined.get(key, 0) | overlap
+            states = refined
+            if not states:
+                break
+        cached = session.subset_cap_masks.get(id(store_subsets)) if session else None
+        if cached is not None and cached[0] is store_subsets:
+            cap_masks = cached[1]
+        else:
+            masks = [0] * limit
+            for index, combo in enumerate(store_subsets):
+                masks[len(combo) - 1] |= 1 << index
+            cap_masks = tuple(masks)
+            if session:
+                session.subset_cap_masks[id(store_subsets)] = (store_subsets, cap_masks)
+        best_by_cap = [None] * limit
+        feasible_mask = 0
+        for (rank, total, stores), mask in states.items():
+            feasible_mask |= mask
+            key = (rank, total, stores.bit_count())
+            first_cap = next(i for i, cap_mask in enumerate(cap_masks) if cap_mask & mask)
+            for cap in range(first_cap, limit):
+                if best_by_cap[cap] is None or key < best_by_cap[cap]:
+                    best_by_cap[cap] = key
+        return best_by_cap, len(store_subsets) - feasible_mask.bit_count()
 
     def same_depth_store_limited_key(
         self,

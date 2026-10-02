@@ -1,0 +1,58 @@
+"""Compare the optimized exact aggregate with exhaustive independent subsets."""
+from decimal import Decimal
+from itertools import combinations
+from random import Random
+
+from app.services.basket_optimizer import (
+    BasketOptimizer,
+    _CompactQuoteSelection,
+    _QuoteCacheSession,
+)
+
+
+def test_partition_keys_match_scalar_for_all_caps_including_ties_and_missing_stores():
+    random = Random(1729)
+    for _ in range(160):
+        count, limit = random.randrange(2, 9), random.randrange(2, 5)
+        limit = min(count, limit)
+        subsets = tuple(c for size in range(1, limit + 1) for c in combinations(range(count), size))
+        vectors = []
+        for _ingredient in range(random.randrange(0, 12)):
+            stores = {s: (random.randrange(0, 3), Decimal(random.randrange(0, 20)) / 100)
+                      for s in range(count) if random.random() > .3}
+            vector = []
+            for combo in subsets:
+                present = [s for s in combo if s in stores]
+                if not present:
+                    vector.append(_CompactQuoteSelection(quote=None))
+                else:
+                    winner = min(present, key=lambda s: (*stores[s], s))
+                    rank, price = stores[winner]
+                    vector.append(_CompactQuoteSelection(quote=None, verification_rank=rank,
+                                  total_price=price, store_id=str(winner), store_mask=1 << winner))
+            vectors.append(tuple(vector))
+        expected, infeasible = [None] * limit, 0
+        for index, combo in enumerate(subsets):
+            chosen = [vector[index] for vector in vectors]
+            if any(s.store_id is None for s in chosen):
+                infeasible += 1
+                continue
+            key = (max((s.verification_rank for s in chosen), default=0),
+                   sum((s.total_price for s in chosen), Decimal(0)),
+                   len({s.store_id for s in chosen}))
+            for cap in range(len(combo) - 1, limit):
+                expected[cap] = min(expected[cap], key) if expected[cap] else key
+        session = _QuoteCacheSession()
+        for _repeat in range(2):
+            actual = BasketOptimizer._grouped_subset_keys(vectors, subsets, limit, session)
+            assert actual == (expected, infeasible)
+
+
+def test_partition_cache_keeps_source_references_and_different_operands_separate():
+    session = _QuoteCacheSession()
+    subsets = ((0,), (1,), (0, 1))
+    for price in (Decimal('.01'), Decimal('100.00')):
+        vector = tuple(_CompactQuoteSelection(quote=None, store_id='0', store_mask=1,
+                       total_price=price) for _ in subsets)
+        actual, missing = BasketOptimizer._grouped_subset_keys((vector,), subsets, 2, session)
+        assert actual == [(0, price, 1), (0, price, 1)] and missing == 0
