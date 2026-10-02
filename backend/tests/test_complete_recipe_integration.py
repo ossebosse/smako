@@ -162,6 +162,12 @@ def test_complete_candidates_use_actual_product_nutrition_not_legacy_coverage(mo
     with pytest.raises(PolicyConflict) as stopped:
         strict._candidates(strict.spec.meals[0])
     assert stopped.value.code == "NUTRITION_TARGET_NOT_MET"
+    # Complete candidates also have singleton qualification with no optional
+    # target. Subsequent week-search evaluation must not count them twice.
+    request.recipe_preferences = prefs.model_copy(update={"min_protein_g": None})
+    unrestricted = PersonalPlanner(request, Settings(complete_recipes_enabled=True), prepared(*products), state(), facts=facts, now=NOW)
+    unrestricted.create()
+    assert unrestricted.diagnostics.singleton_passed == 1
 
 
 @pytest.mark.parametrize("ingredient,form,label,category,expected", [

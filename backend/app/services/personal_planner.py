@@ -2232,6 +2232,7 @@ class PersonalPlanner:
                 if (
                     len(chosen) == 1
                     and generating
+                    and not self.complete
                     and chosen[0].recipe
                     and not self.meals[chosen[0].meal_type].limits.active
                 ):
@@ -2240,6 +2241,7 @@ class PersonalPlanner:
             if (
                 len(chosen) == 1
                 and generating
+                and not self.complete
                 and not self.meals[chosen[0].meal_type].limits.active
             ):
                 self.diagnostics.singleton_passed += 1
