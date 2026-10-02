@@ -24,6 +24,7 @@ def reviewed_reference(product, name, facts):
     frozen = bool(re.search(r'\b(?:fryst|frysta|djupfryst|djupfrysta)\b', label) or 'fryst' in category)
     forbidden = r'konserv|inlagd|saltlag|kryddblandning|marinerad|sås|soppa|stuvad|stekt|torkad|pulver|dipp|chips'
     produce = {
+        'gurka': (339, None, r'gurka(?: sverige| svensk| ofilmad)?'),
         'zucchini': (362, None, r'(?:zucchini|squash)'),
         'aubergine': (372, None, r'aubergine'),
         'selleri': (321, None, r'(?:stjälkselleri|blekselleri|bladselleri|selleri)'),

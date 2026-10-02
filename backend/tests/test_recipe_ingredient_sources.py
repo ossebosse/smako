@@ -51,6 +51,8 @@ def product(name, category):
 
 
 def test_references_keep_raw_frozen_and_dried_forms_separate():
+    assert product_reference(product('Gurka Sverige Klass 1', 'Frukt & Grönt'), 'gurka', None) == 339
+    assert product_reference(product('Gurka med Dill', 'Pickles'), 'gurka', None) is None
     assert product_reference(product('Blomkål', 'Frukt & Grönt'), 'blomkål', None) == 322
     assert product_reference(product('Blomkål Fryst', 'Fryst'), 'blomkål', None) == 323
     assert product_reference(product('Dill', 'Frukt & Grönt'), 'dill', None) == 377
@@ -83,3 +85,22 @@ def test_imported_sources_retain_ids_versions_and_all_unrounded_macros():
         assert evidence.evidence_kind == 'generic_reference'
     conflict = SimpleNamespace(conflicts=('nutrition.protein_g',), ingredients=())
     assert product_reference(product('Spenat', 'Frukt & Grönt'), 'spenat', conflict) is None
+
+
+def test_partial_salt_declaration_is_preserved_beside_explicit_generic_reference():
+    from dataclasses import replace
+
+    from app.models.recipe_preferences import RecipePreferences
+    from app.services.personal_policy import ProductFacts
+    from app.services.recipe_library import candidates
+    from app.services.recipe_preparation import input_evidence
+    recipe = candidates(RecipePreferences(mode='complete'), servings=2)[0]
+    fact = ProductFacts(nutrition={'kcal': 0}, nutrition_unit='g', nutrition_basis='per100g',
+                        nutrition_preparation='as_sold', source='retained catalog',
+                        source_product_id='salt', source_snapshot_id='snapshot')
+    result = input_evidence(recipe, product('Salt', 'Salt'), 'salt', 'g', False, fact)
+    assert result and result.evidence_kind != 'product_declaration'
+    assert fact.nutrition == {'kcal': 0}
+    assert any(e['kind'] == 'unused_partial_product_declaration' for e in result.field_sources['nutrition.protein_g'])
+    fact = replace(fact, conflicts=('nutrition.kcal',))
+    assert input_evidence(recipe, product('Salt', 'Salt'), 'salt', 'g', False, fact) is None

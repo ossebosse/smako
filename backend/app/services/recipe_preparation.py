@@ -304,10 +304,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact):
             return None
         qualified = bool(fact.nutrition and fact.nutrition_basis and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained"})
     evidence = fact if qualified else None
+    plain_salt_reference = (
+        canonical(name) == 'salt' and form == 'as_sold' and unit == 'g'
+        and product_reference(product, name, fact) == 1975
+    )
     if evidence is None:
         if unit != "g" or (fact and fact.nutrition and not (
             form == "cooked_drained" and fact.nutrition_preparation == "draining_unspecified"
-        )):
+        ) and not plain_salt_reference):
             return None
         if form == "cooked_drained":
             words = set(re.findall(r"[a-zåäö0-9]+", composition))
@@ -327,6 +331,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact):
         if identity is None:
             return None
         evidence = reference_evidence(identity)
+        if plain_salt_reference and fact and fact.nutrition:
+            # A partial declaration is retained as partial. This is an entire,
+            # opt-in generic reference, never a zero-fill or branded assertion.
+            evidence = replace(evidence, field_sources={
+                k: (*v, {'kind': 'unused_partial_product_declaration',
+                         'values': dict(fact.nutrition), 'unit': fact.nutrition_unit,
+                         'source': fact.source, 'basis': fact.nutrition_basis})
+                for k, v in evidence.field_sources.items()})
         if form == "cooked_drained" and fact:
             # The supplier's table is retained but cannot establish drained
             # nutrients. Use an explicitly generic drained reference only;
