@@ -1,0 +1,179 @@
+"""Original, versioned complete dinners. No runtime model call or price engine.
+
+Content is immutable application data; candidates are exact registered portions
+and approved variations. Product declarations and the existing planner still
+decide nutrition, allergens, purchase feasibility and economic selection.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from collections import Counter
+from functools import lru_cache
+from pathlib import Path
+
+from app.models.recipe import Recipe, RecipePreparation
+from app.models.recipe_preferences import RecipePreferences
+
+LIBRARY_VERSION = "smako-complete-dinners-v1"
+LIBRARY_PATH = Path(__file__).parents[1] / "data/recipes/complete-dinners-v1.json"
+# Updated only together with reviewed, versioned source content.
+CONTENT_SHA256 = "eb6e9d0d1333204db80c50efed822bcd17d96ad93047cacb570245e2848dd218"
+COUNT_EXEMPT = frozenset({"salt", "svartpeppar", "peppar", "vatten"})
+
+
+def ingredient_key(ingredient) -> str:
+    return f"{ingredient.canonical_name or ingredient.name}|{ingredient.form or 'unspecified'}"
+
+
+def ingredient_count(recipe: Recipe) -> int:
+    return len({ingredient_key(i) for i in recipe.ingredients
+                if (i.canonical_name or i.name) not in COUNT_EXEMPT})
+
+
+def content_hash(recipe: Recipe) -> str:
+    value = recipe.model_dump(mode="json", exclude={"preparation"})
+    if value.get("design"):
+        value["design"].pop("content_sha256", None)
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True,
+                                    separators=(",", ":")).encode()).hexdigest()
+
+
+def _structural_check(recipe: Recipe) -> None:
+    d = recipe.design
+    if d is None:
+        raise ValueError("Receptet saknar versionsbundet innehåll.")
+    keys = {ingredient_key(i) for i in recipe.ingredients}
+    if len(keys) != len(recipe.ingredients):
+        raise ValueError("Samla samma ingrediens och form innan antal och köp beräknas.")
+    if len({i.canonical_name for i in recipe.ingredients}) != len(keys):
+        raise ValueError("Olika former av samma råvara kräver separata kvalificerade identiteter.")
+    components = {c.id for c in d.components}
+    if len(components) != len(d.components):
+        raise ValueError("Komponent-ID:n måste vara unika.")
+    for i in recipe.ingredients:
+        if not i.canonical_name or not i.form or i.component not in components:
+            raise ValueError("Ingrediensen saknar identitet, form eller komponent.")
+        if i.unit not in {"g", "ml"} or (i.form != "as_sold" and i.unit != "g"):
+            raise ValueError("Mängden kräver en uttryckligt kvalificerad gram-/volymgrund.")
+        if not (i.quantity_min and i.quantity_max and i.quantity_step):
+            raise ValueError("Ingrediensen saknar godkänt mängdintervall.")
+        if not i.quantity_min <= i.quantity <= i.quantity_max:
+            raise ValueError("Mängden ligger utanför receptets godkända intervall.")
+    if d.ingredient_count != ingredient_count(recipe):
+        raise ValueError("Ingrediensantalet stämmer inte med hela rätten.")
+    ends: dict[str, int] = {}
+    used: set[str] = set()
+    for step in d.steps:
+        if step.id in ends or not set(step.depends_on) <= ends.keys():
+            raise ValueError("Tillagningsplanen har en cykel eller okänt beroende.")
+        if not set(step.ingredient_keys) <= keys:
+            raise ValueError("Instruktionerna använder en ingrediens som inte finns i receptet.")
+        used.update(step.ingredient_keys)
+        ends[step.id] = max((ends[k] for k in step.depends_on), default=0) + step.duration_minutes
+    if used != keys or not ends:
+        raise ValueError("Varje ingrediens måste användas i den dokumenterade tillagningen.")
+    if max(ends.values()) > d.estimated_minutes:
+        raise ValueError("Beroendena ryms inte inom den uppskattade tillagningstiden.")
+    if recipe.instructions != [s.text for s in d.steps]:
+        raise ValueError("Visade instruktioner skiljer sig från den granskade tillagningsplanen.")
+    if content_hash(recipe) != d.content_sha256:
+        raise ValueError("Receptets innehåll har ändrats utan ny granskad version.")
+    p = recipe.preparation
+    if (p is None or p.parent_sha256 != d.content_sha256 or p.family != d.family
+            or p.input_forms != {i.canonical_name: i.form for i in recipe.ingredients}):
+        raise ValueError("Beredningsmetoden är inte bunden till receptets exakta innehåll.")
+
+
+@lru_cache(maxsize=1)
+def _registered() -> tuple[Recipe, ...]:
+    raw = LIBRARY_PATH.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != CONTENT_SHA256:
+        raise ValueError("Receptbibliotekets kontrollsumma avviker från granskad utgåva.")
+    payload = json.loads(raw)
+    if payload["library_version"] != LIBRARY_VERSION:
+        raise ValueError("Okänd receptutgåva.")
+    result = tuple(Recipe.model_validate(r) for r in payload["recipes"])
+    identities = set()
+    for recipe in result:
+        _structural_check(recipe)
+        identity = (recipe.design.base_id, recipe.design.version, recipe.design.variant_id)
+        if identity in identities:
+            raise ValueError("Receptversionen förekommer flera gånger.")
+        identities.add(identity)
+    return result
+
+
+def _scaled(recipe: Recipe, servings: int) -> Recipe:
+    factor = servings / recipe.servings
+    ingredients = [i.model_copy(update={
+        key: round(getattr(i, key) * factor, 8)
+        for key in ("quantity", "quantity_min", "quantity_max", "quantity_step")
+    }) for i in recipe.ingredients]
+    result = recipe.model_copy(deep=True, update={"servings": servings, "ingredients": ingredients})
+    digest = content_hash(result)
+    result = result.model_copy(update={"design": result.design.model_copy(update={"content_sha256": digest})})
+    return result.model_copy(update={"preparation": RecipePreparation(
+        version="smako-edible-input-v1", origin="smako_recipe_design", parent_sha256=digest,
+        family=result.design.family,
+        input_forms={i.canonical_name: i.form for i in ingredients},
+    )})
+
+
+@lru_cache(maxsize=12)
+def _registered_portions(servings: int) -> tuple[Recipe, ...]:
+    if not 1 <= servings <= 12:
+        raise ValueError("Antal portioner måste vara mellan 1 och 12.")
+    return tuple(_scaled(r, servings) for r in _registered())
+
+
+def validate_recipe_design(recipe: Recipe) -> bool:
+    """Only exact issued versions qualify; a self-computed hash cannot approve edits."""
+    if recipe.design is None:
+        return False
+    _structural_check(recipe)
+    d = recipe.design
+    registered = next((r for r in _registered_portions(recipe.servings)
+                       if (r.design.base_id, r.design.version, r.design.variant_id)
+                       == (d.base_id, d.version, d.variant_id)), None)
+    if registered is None or registered.model_dump() != recipe.model_dump():
+        raise ValueError("Receptversionen eller mängden saknar godkänd innehållsgranskning.")
+    return True
+
+
+def candidates(preferences: RecipePreferences, servings: int = 2) -> list[Recipe]:
+    """Return complete allowed candidates; nutrition targets are qualified downstream."""
+    if preferences.mode != "complete":
+        return []
+    return [r.model_copy(deep=True) for r in _registered_portions(servings)
+            if (not preferences.cuisines or set(r.design.cuisines) & set(preferences.cuisines))
+            and preferences.min_ingredients <= r.design.ingredient_count <= preferences.max_ingredients
+            and (preferences.max_minutes is None or r.design.estimated_minutes <= preferences.max_minutes)
+            and (preferences.allow_fish or not r.design.fish)
+            and (preferences.adaptation == "approved" or r.design.variant_id == "base")]
+
+
+def validate_library() -> dict:
+    recipes = _registered()
+    base = [r for r in recipes if r.design.variant_id == "base"]
+    return {
+        "library_version": LIBRARY_VERSION,
+        "content_sha256": CONTENT_SHA256,
+        "base_recipes": len(base), "approved_variants": len(recipes) - len(base),
+        "by_cuisine": dict(Counter(r.design.cuisines[0] for r in base)),
+        "vegetarian_by_cuisine": dict(Counter(r.design.cuisines[0] for r in base if r.design.vegetarian)),
+        "structural_validation": "passed", "content_review": "model_assisted_review",
+        "cooking_test": "not_cooked", "purchase_qualification": "performed_by_planner_per_snapshot",
+        "nutrition_qualification": "performed_by_planner_per_product_and_user_consent",
+    }
+
+
+def library_version() -> str:
+    return f"{LIBRARY_VERSION}:{CONTENT_SHA256}"
+
+
+def library_summary() -> dict:
+    return {**validate_library(), "ingredient_bounds": {"min": 3, "max": 20},
+            "ingredient_presets": [[5, 9], [10, 15], [16, 20]],
+            "cuisines": ["greek", "italian", "mexican", "indian", "thai", "swedish"]}
