@@ -18,6 +18,10 @@ PROFILE = {"likes": [], "dislikes": [], "exclusions": [], "allergies": []}
 STATE = {"revision": 0, "items": [], "reservations": {}, "ledger": [], "profile": PROFILE,
          "account": {"message": "Isolerat frontendprov"}}
 JOB = "/api/plan-jobs/" + "a" * 32
+DIAGNOSTICS = {"raw_recipe_pool": 20, "singleton_passed": 1, "not_singleton_evaluated": 0,
+               "candidate_rejections": [{"stage": "nutrition", "label": "Näringskrav", "rejected": 8}],
+               "candidate_details": [{"recipe": "Testbiffar", "stage": "nutrition", "reason": "Befintlig strukturell måltidskontroll: {'violations': ('estimate_confidence_below_minimum',)}"}],
+               "search": [{"rejections": {"variation": 1}}], "counting": "Sökningen bevisar inte global omöjlighet."}
 
 
 def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
@@ -56,12 +60,12 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
             if mode["async"]:
                 req.fulfill(status=202, json={"status": "pending", "status_url": JOB, "stage": "candidate_qualification"})
                 return
-            req.fulfill(status=422, json={"detail": "Testets oförenliga val: öka tillagningstiden eller sänk proteinmålet.", "code": "POLICY_CONFLICT"})
+            req.fulfill(status=422, json={"detail": "Testets oförenliga val: öka tillagningstiden eller sänk proteinmålet.", "code": "POLICY_CONFLICT", "planning_diagnostics": DIAGNOSTICS})
             return
         elif path == JOB:
             mode["polls"] += 1
             if mode["done"]:
-                req.fulfill(status=422, json={"detail": "Det återanslutna testjobbet har avslutats."})
+                req.fulfill(status=422, json={"detail": "Det återanslutna testjobbet har avslutats.", "planning_diagnostics": DIAGNOSTICS})
             else:
                 req.fulfill(status=202, json={"status": "pending", "status_url": JOB, "stage": "week_search"})
             return
@@ -98,6 +102,9 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     status = page.locator("#personal-status" if personal else "#error-message")
     submit.click()
     expect(status).to_contain_text("oförenliga val")
+    expect(page.locator(".recipe-planning-diagnostics")).to_contain_text("Blockeringsfördelning")
+    expect(page.locator(".recipe-planning-diagnostics")).to_contain_text("Näringskrav: 8 avslag")
+    expect(page.locator(".recipe-planning-diagnostics")).not_to_contain_text("estimate_confidence_below_minimum")
     assert len(plans) == 1
     assert plans[0]["recipe_preferences"] == {"mode": "complete", "cuisines": ["greek", "mexican"],
                                              "min_ingredients": 10, "max_ingredients": 15, "max_minutes": 40,

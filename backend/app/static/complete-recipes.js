@@ -188,6 +188,20 @@
     if(detail.source)out.append(el("p",`Källreferens: ${detail.source}`,"small"));return out;
   }
 
+  function diagnostics(data) {
+    if(!data)return null;const out=el("details",null,"recipe-planning-diagnostics");out.open=true;out.append(el("summary","Blockeringsfördelning"));
+    out.append(el("p",`${data.raw_recipe_pool??"Okänt antal"} receptkandidater ingick i underlaget. ${data.singleton_passed??"Okänt antal"} klarade den enskilda kontrollen; ${data.not_singleton_evaluated??"okänt antal"} blev inte enskilt prövade. Ett enskilt godkännande innebär inte att rätterna tillsammans bildar en giltig veckomeny.`));
+    const counts=el("ul");for(const row of data.candidate_rejections||[])if(row.rejected)counts.append(el("li",`${row.label}: ${row.rejected} avslag.`));out.append(counts);
+    const examples=el("ul");const seen=new Set();for(const row of data.candidate_details||[]){
+      const reason=String(row.reason||"").startsWith("Befintlig strukturell måltidskontroll")?"Rättens grundkontroll saknar tillräckligt näringsunderlag. Detta är inte i sig ett avslag på ditt valda proteinmål.":String(row.reason||"").replace(/\bprotein_g\b/g,"protein").replace(/\bas_sold\b/g,"som såld").replace(/\braw_edible\b/g,"rå ätbar mängd").replace(/\bcooked_drained\b/g,"kokt och avrunnen");
+      const text=`${row.recipe}: ${reason}`;if(seen.has(text))continue;seen.add(text);if(examples.children.length<8)examples.append(el("li",text));
+    }if(examples.children.length){out.append(el("h3","Exempel på vad som stoppade recepten"),examples);if(seen.size>8)out.append(el("p",`Visar 8 av ${seen.size} skilda exempel.`));}
+    if((data.search||[]).some(row=>row.rejections?.variation))out.append(el("p","Veckans variationskrav stoppade kombinationer av de kvarvarande rätterna. Ett alternativ är att välja fler matkök eller längre tillagningstid för att ge fler rätter möjlighet att prövas."));
+    else if((data.candidate_details||[]).some(row=>row.stage==="nutrition_bound"))out.append(el("p","Ett alternativ är att tillåta godkända receptvariationer eller välja fler matkök. Du kan också uttryckligen ändra proteinmålet. Inget av dina val ändras automatiskt."));
+    else out.append(el("p","Prova fler matkök eller längre tillagningstid för att låta fler rätter prövas. Saknat produktunderlag behöver kompletteras; ändrade val garanterar inte en lösning."));
+    out.append(el("p",data.counting||"Sökningen är begränsad och bevisar inte att alla möjliga menyer är omöjliga.","field-hint"));return out;
+  }
+
   const validJobUrl=url=>/^\/api\/plan-jobs\/[a-f0-9]{32}$/.test(url||"");
   const stages={queued:"Din menyberäkning väntar på en ledig plats.",product_facts:"Kontrollerar produktfakta och aktuella prisvillkor.",candidate_qualification:"Prövar rätternas produkter, mängder och näringskrav.",week_search:"Söker efter en samordnad veckomeny och inköpskorg.",final_audit:"Slutkontrollerar hela inköpslistan och dina krav.",saving:"Sparar den färdiga planrevisionen."};
   const jobKey=scope=>`smako.planJob.${scope}`;
@@ -210,5 +224,5 @@
     }
     forgetJob(scope);return response;
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,financials,productDetails,ingredientCount,cuisines,poll,pendingJob,forgetJob,clearPrivateDrafts,storage});
+  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,financials,productDetails,diagnostics,ingredientCount,cuisines,poll,pendingJob,forgetJob,clearPrivateDrafts,storage});
 })();

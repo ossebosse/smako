@@ -163,8 +163,10 @@ def test_browser_error_classes_retain_choices_and_identify_actual_field():
                 (503, {'detail': 'private service details'}, {}, 'tillfälligt otillgänglig'),
                 (422, {'detail': [{'loc': ['body', 'postal_code'], 'msg': 'Prisområde saknas'}]}, {}, 'Postnummer'),
                 (422, {'detail': [{'loc': ['body', 'max_stores'], 'msg': 'Värdet är ogiltigt'}]}, {}, 'Max antal inköpsställen'),
-                (422, {'detail': 'underlag', 'code': 'DATA_BLOCKED'}, {}, 'inte kan verifieras'),
-                (422, {'detail': 'saknas'}, {'X-Error-Code': 'plan_infeasible'}, 'Ingen komplett meny'),
+                (422, {'detail': 'Citronjuice saknar tillämpligt näringsunderlag.', 'code': 'DATA_BLOCKED'}, {}, 'Nödvändigt underlag saknas'),
+                (422, {'detail': 'Ingen meny med fem olika rätter hittades inom dina val.'}, {'X-Error-Code': 'plan_infeasible'}, 'fem olika rätter'),
+                (422, {'detail': 'Högst 20 minuter utesluter alla valda grekiska recept.', 'code': 'RECIPE_CHOICES_UNFULFILLED'}, {}, '20 minuter'),
+                (422, {'detail': 'Sökbudgeten avslutades utan en komplett meny.', 'code': 'SEARCH_BLOCKED'}, {}, 'Sökbudgeten'),
                 (500, {'detail': 'private configuration detail'}, {}, 'serverfel'),
                 (504, {}, {}, 'inte i tid'),
                 (503, {}, {'X-Error-Code': 'price_universe_unavailable'}, 'Prisunderlaget'),
@@ -184,6 +186,11 @@ def test_browser_error_classes_retain_choices_and_identify_actual_field():
                 assert 'private configuration' not in text
                 assert 'private service' not in text
                 assert 'uppdaterar priserna' not in text
+                if status == 422 and isinstance(body.get('detail'), str):
+                    # Concrete policy/search reasons must survive the UI boundary;
+                    # a source gap must not be renamed to impossible user choices.
+                    assert body['detail'] in text
+                    assert 'Dina val är kvar.' in text
                 if status == 202:
                     assert case['polled'] and 'poll-error-12345' in text
                 assert page.locator('#submit-button').is_enabled()

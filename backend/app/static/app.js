@@ -817,15 +817,19 @@
     dom.statusRegion.hidden = false;
     dom.loadingState.hidden = false;
     dom.errorState.hidden = true;
+    dom.errorState.querySelector(".recipe-planning-diagnostics")?.remove();
     dom.results.hidden = true;
     dom.loadingMessage.textContent = "Vi söker efter en komplett, prisberäknad plan. Det kan ta några minuter.";
   }
 
-  function showError(message) {
+  function showError(message, diagnostics = null) {
     setLoading(false);
     dom.statusRegion.hidden = false;
     dom.errorState.hidden = false;
     dom.errorMessage.textContent = message || "Försök igen om en liten stund.";
+    dom.errorState.querySelector(".recipe-planning-diagnostics")?.remove();
+    const explanation=window.SmakoRecipes.diagnostics(diagnostics);
+    if(explanation)dom.errorMessage.after(explanation);
     dom.results.hidden = true;
     scrollToNode(dom.errorState, "center");
   }
@@ -2593,6 +2597,11 @@
     try { return await response.json(); } catch (_error) { return null; }
   }
 
+  function planningError(payload, fallback, status = null, errorCode = null, retryAfter = null) {
+    const error=new Error(errorFromResponse(payload,fallback,status,errorCode,retryAfter));
+    error.planningDiagnostics=payload?.planning_diagnostics;return error;
+  }
+
   async function changeCompletePlan(action, fields, button) {
     if (activePlanRequest || !currentResponse?.plan_id) return;
     const request = {controller:new AbortController(), deadline:Date.now()+PLAN_WAIT_MS, id:crypto.randomUUID()};
@@ -2603,10 +2612,10 @@
         const state=await responseJson(stateResponse);if(!stateResponse.ok)throw new Error(errorFromResponse(state,"Skafferiet kunde inte läsas."));
         const response=await fetch(`/api/personal/plans/${encodeURIComponent(currentResponse.plan_id)}/change`,{method:"POST",headers:{"Content-Type":"application/json",Prefer:"respond-async","X-Request-ID":request.id},body:JSON.stringify({action,revision:currentResponse.plan_revision,pantry_revision:state.revision,...fields}),signal});
         const final=await window.SmakoRecipes.poll(response,{scope:"public",signal,context:{kind:"change"},onProgress:message=>{dom.loadingMessage.textContent=message;}});
-        const payload=await responseJson(final);if(!final.ok)throw new Error(errorFromResponse(payload,"Planen kunde inte räknas om. Din tidigare revision finns kvar.",final.status));return payload;
+        const payload=await responseJson(final);if(!final.ok)throw planningError(payload,"Planen kunde inte räknas om. Din tidigare revision finns kvar.",final.status);return payload;
       });
       applySavedPlan(result.saved);if(action==="replace")sendAnalyticsEvent("recipe_replaced");
-    } catch(error){showError(`${error.message} Fel-ID: ${request.id}`);}
+    } catch(error){showError(`${error.message} Fel-ID: ${request.id}`,error.planningDiagnostics);}
     finally{if(activePlanRequest===request){activePlanRequest=null;setLoading(false);}if(button)button.disabled=false;}
   }
 
@@ -2618,10 +2627,10 @@
       const payload=await boundedRequest(request.controller,PLAN_WAIT_MS,async signal=>{
         let response=await fetch(pending.url,{headers:{Accept:"application/json"},cache:"no-store",signal});
         response=await window.SmakoRecipes.poll(response,{scope:"public",signal,onProgress:message=>{dom.loadingMessage.textContent=message;}});
-        const data=await responseJson(response);if(!response.ok)throw new Error(errorFromResponse(data,response.status===410?"Beräkningen avslutades vid serveromstart. Dina val finns kvar; skapa menyn igen.":"Beräkningen kunde inte återläsas.",response.status));return data;
+        const data=await responseJson(response);if(!response.ok)throw planningError(data,response.status===410?"Beräkningen avslutades vid serveromstart. Dina val finns kvar; skapa menyn igen.":"Beräkningen kunde inte återläsas.",response.status);return data;
       });
       applySavedPlan(payload.saved||payload);
-    }catch(error){showError(`${error.message} Dina val och tidigare sparade planer finns kvar.`);}
+    }catch(error){showError(`${error.message} Dina val och tidigare sparade planer finns kvar.`,error.planningDiagnostics);}
     finally{if(activePlanRequest===request){activePlanRequest=null;setLoading(false);}}
   }
 
@@ -3371,7 +3380,7 @@
           // may disable planning, with its existing status-retry control.
           await loadPublicRuntimeStatus();
         }
-        throw new Error(message);
+        const error=new Error(message);error.planningDiagnostics=data?.planning_diagnostics;throw error;
       }
       if (!data || typeof data !== "object") {
         throw new Error("Servern returnerade inget läsbart planeringsresultat.");
@@ -3402,7 +3411,7 @@
         latency_ms: Math.round(performance.now() - requestStartedAt), outcome: "failed",
         error_code: timedOut ? "client_timeout" : aborted ? "client_aborted" : networkError ? "network_error" : planFailureCode || "planner_error",
       });
-      showError(`${message} Fel-ID: ${request.id}`);
+      showError(`${message} Fel-ID: ${request.id}`,error.planningDiagnostics);
       dom.form.querySelector('[aria-invalid="true"]')?.focus();
     } finally {
       if (activePlanRequest === request) {

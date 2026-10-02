@@ -51,21 +51,10 @@
   }
 
   function renderDiagnostics(d) {
-
-    const box=el("div");box.append(el("p",`Rå receptpool: ${d.raw_recipe_pool}. Klarade enskild prövning: ${d.singleton_passed}. Inte enskilt prövade: ${d.not_singleton_evaluated}.`));
-
-    const list=el("ul");for(const row of d.candidate_rejections)list.append(el("li",`${row.label}: ${row.rejected} bortfall`));box.append(list);
-
-    for(const row of d.search){const rejected=Object.entries(row.rejections).filter(([,v])=>v).map(([key,v])=>`${d.candidate_rejections.find(r=>r.stage===key)?.label||key}: ${v}`).join(" · ");box.append(el("p",`Middag/måltid ${row.depth}: ${row.proposals} menyförslag; ${rejected||"inga kravavslag"}. ${row.priced} prisberäknade, ${row.retained} behölls, ${row.beam_pruned} utanför sökbredden.`));}
-
-    const failures=el("div");for(const [title,stages] of [["Saknat underlag",["product_qualification","preparation"]],["Beräknade näringsavslag",["nutrition"]],["Övriga krav och kombinationshinder",["policy_taste","organic","store_cap","variation","price_basket"]]]){const rows=d.candidate_details.filter(r=>stages.includes(r.stage));if(rows.length){const list=el("ul");for(const row of rows)list.append(el("li",`${row.recipe}: ${row.reason}`));failures.append(details(`${title} (${rows.length})`,list));}}box.append(failures);
-
-    if(d.estimate_alternatives?.length){box.append(el("p","Spårbara uppskattningar är av. Ett separat prov fann följande enskilda alternativ; det innebär inte att hela kombinationen fungerar."));for(const row of d.estimate_alternatives)box.append(el("p",`${names[row.meal_type]}: ${row.recipe}, ${number(row.values.protein_g)} g protein per portion.`));box.append(button("Visa valet för näringsuppskattningar",async()=>{show("choices");$('allow-nutrition-estimates').scrollIntoView({block:"center"});$('allow-nutrition-estimates').focus();}));}
-
-    box.append(el("p",d.counting));const detail=details("Blockeringsfördelning",box);detail.id="planning-diagnostics";detail.open=true;$("personal-status").after(detail);
-
+    const box=window.SmakoRecipes.diagnostics(d);if(!box)return;box.id="planning-diagnostics";
+    if(d.estimate_alternatives?.length){box.append(el("p","Näringsuppskattningar är av. Ett separat prov fann enskilda alternativ med sådant underlag; detta innebär inte att hela menyn är genomförbar."),button("Visa valet för näringsuppskattningar",async()=>{show("choices");$('allow-nutrition-estimates').scrollIntoView({block:"center"});$('allow-nutrition-estimates').focus();}));}
+    $("personal-status").after(box);
   }
-
   async function task(work) {
 
     if(busy)return;busy=true;$("data-blocked-actions")?.remove();$("planning-diagnostics")?.remove();notify("Arbetar…");
