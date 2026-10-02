@@ -38,11 +38,12 @@ def is_operation_response(response):
             (path in {"/api/plans", "/api/plan"} or path.endswith(("/change", "/replace-recipe")))) or path.startswith("/api/plan-jobs/")
 
 
-def wait_operation(page, observed, begin, *, timeout, reload_after=None):
+def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline_seconds=0):
     started = time.monotonic()
     consumed = begin
     rows, terminal, pending_urls = [], None, set()
     reloaded = False
+    network_interrupted = False
     while time.monotonic() - started < timeout:
         while consumed < len(observed):
             response = observed[consumed]
@@ -66,6 +67,13 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None):
         if pending_urls and reload_after is not None and not reloaded and time.monotonic() - started >= reload_after:
             page.reload(wait_until="domcontentloaded")
             reloaded = True
+        if pending_urls and offline_seconds and not network_interrupted and (reload_after is None or reloaded):
+            page.context.set_offline(True)
+            try:
+                page.wait_for_timeout(offline_seconds * 1000)
+            finally:
+                page.context.set_offline(False)
+            network_interrupted = True
         page.wait_for_timeout(250)
     if terminal is None:
         raise AssertionError(f"No terminal planning response in {timeout} seconds; transport={rows[-4:]}")
@@ -73,6 +81,7 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None):
     envelope = body.get("saved", body)
     result = {"seconds": round(time.monotonic() - started, 3), "status": response.status,
               "transport": rows, "job_count": len(pending_urls), "reloaded_during_job": reloaded,
+              "browser_network_interrupted_seconds": offline_seconds if network_interrupted else 0,
               "longer_than_minute": time.monotonic() - started > 60,
               "expensive_post_count": sum(row["method"] == "POST" for row in rows),
               "all_status_gets_under_10_seconds": all((row["response_ms"] or 0) < 10000
@@ -222,7 +231,7 @@ def run_case(browser, engine, mobile, personal, args):
         assert report["form_layout"]["noHorizontalPageOverflow"]
         start = len(observed)
         page.locator("#generate-plan" if personal else "#submit-button").dblclick()
-        generation, envelope = wait_operation(page, observed, start, timeout=args.timeout, reload_after=args.reload_after)
+        generation, envelope = wait_operation(page, observed, start, timeout=args.timeout, reload_after=args.reload_after, offline_seconds=args.offline_seconds)
         report["generation"] = generation
         submitted = next((response.request.post_data_json for response in observed[start:]
                           if response.request.method == "POST" and urlsplit(response.url).path == "/api/plans"), None)
@@ -374,6 +383,7 @@ def main():
     parser.add_argument("--exclusions", nargs="*", default=[])
     parser.add_argument("--timeout", type=int, default=900)
     parser.add_argument("--reload-after", type=float, default=3)
+    parser.add_argument("--offline-seconds", type=float, default=0, help="Temporarily disable the browser network during the pending job, at most 30 seconds")
     parser.add_argument("--require-long-job", action="store_true")
     parser.add_argument("--require-pending-reload", action="store_true")
     parser.add_argument("--skip-mutations", action="store_true")
@@ -382,6 +392,8 @@ def main():
     parser.add_argument("--allow-nonlocal-isolated-target", action="store_true")
     args = parser.parse_args()
     args.base = args.base.rstrip("/")
+    if not 0 <= args.offline_seconds <= 30:
+        parser.error("--offline-seconds must be between 0 and 30")
     if not args.allow_nonlocal_isolated_target and urlsplit(args.base).hostname not in {"localhost", "127.0.0.1", "::1"}:
         parser.error("Use an isolated local app, or explicitly identify a nonlocal isolated target with --allow-nonlocal-isolated-target")
     if args.recipe_mode == "legacy" and not args.skip_mutations:
