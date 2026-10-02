@@ -44,7 +44,7 @@ def test_all_six_cuisines_have_eight_distinct_original_dishes():
 
 def test_every_version_has_consistent_count_time_steps_and_declared_review():
     recipes = library.candidates(complete())
-    assert len(recipes) == 96
+    assert len(recipes) == 104
     for recipe in recipes:
         assert library.validate_recipe_design(recipe)
         assert 10 <= library.ingredient_count(recipe) <= 15
@@ -59,7 +59,7 @@ def test_every_version_has_consistent_count_time_steps_and_declared_review():
 @pytest.mark.parametrize("servings", [1, 2, 4, 6, 12])
 def test_issued_portions_are_exact_reproducible_versions(servings):
     recipes = library.candidates(complete(max_minutes=180), servings)
-    assert len(recipes) == 96
+    assert len(recipes) == 104
     for recipe in recipes:
         assert recipe.servings == servings
         assert library.validate_recipe_design(recipe)
@@ -131,7 +131,7 @@ def test_file_checksum_and_quality_are_explicit():
     assert hashlib.sha256(library.LIBRARY_PATH.read_bytes()).hexdigest() == library.CONTENT_SHA256
     summary = library.library_summary()
     assert summary["base_recipes"] == 48
-    assert summary["approved_variants"] == 48
+    assert summary["approved_variants"] == 56
     assert summary["cooking_test"] == "not_cooked"
     assert "planner" in summary["purchase_qualification"]
     assert json.dumps(summary)
@@ -143,7 +143,45 @@ def test_prior_issued_versions_remain_valid_but_new_candidates_use_current_conte
     archived = Recipe.model_validate(previous)
     assert archived.design.version == "1.0.0"
     assert library.validate_recipe_design(archived)
-    assert all(r.design.version == "1.1.0" for r in library.candidates(complete()))
+    assert {r.design.version for r in library.candidates(complete())} == {"1.1.0", "1.2.0"}
+
+
+def test_original_96_recipe_objects_are_unchanged_and_archived():
+    current = json.loads(library.LIBRARY_PATH.read_bytes())["recipes"]
+    previous = json.loads(library.LIBRARY_PATH.with_name("complete-dinners-1.1.0.json").read_bytes())["recipes"]
+    assert current[:96] == previous
+    digest = hashlib.sha256(json.dumps(previous, ensure_ascii=False, sort_keys=True,
+                                      separators=(",", ":")).encode()).hexdigest()
+    assert digest == "f69b7f6d758f179a2c977aa6cf54d42d1436871bfed894777f8dd3c90828354f"
+    for row in previous:
+        assert library.validate_recipe_design(Recipe.model_validate(row))
+
+
+def test_approved_culinary_variations_change_instructions_count_and_flavor_deliberately():
+    approved = [r for r in library.candidates(complete()) if r.design.version == "1.2.0"]
+    assert len(approved) == 8
+    assert len({r.design.base_id for r in approved}) == 4
+    assert not any(r.design.version == "1.2.0" for r in library.candidates(complete(adaptation="products")))
+    for recipe in approved:
+        by_name = {i.name: i for i in recipe.ingredients}
+        instructions = " ".join(recipe.instructions)
+        assert library.validate_recipe_design(recipe)
+        assert recipe.design.provenance.cooking_test == "not_cooked"
+        if recipe.design.variant_id.startswith("white-bean"):
+            assert "white_beans" in by_name["vita bönor"].product_requirements
+            assert "kidney" not in instructions
+            assert by_name["vita bönor"].form == "cooked_drained"
+        else:
+            assert "mjölk" not in by_name
+            assert "mjölk" not in instructions
+        if recipe.design.variant_id.startswith("water-panade"):
+            assert "3 g vatten per gram ströbröd" in instructions
+            assert by_name["crème fraiche"].quantity == 120
+            assert recipe.design.ingredient_count == 12
+        if recipe.design.base_id.endswith("green-pea-soup"):
+            assert by_name["crème fraiche"].quantity == 80
+            assert by_name["citronjuice"].quantity == 12
+            assert "från värmen" in instructions and "utan kraftig kokning" in instructions
 
 
 def test_cured_ingredients_need_drained_evidence_and_frozen_corn_is_heated():

@@ -5,3 +5,5 @@
 /reports/lidl-nutrition-20260915/* -text
 /backend/tests/fixtures/** -text
 /grocery_data/tests/fixtures/** -text
+# Authored recipes carry exact file hashes; checkout must preserve their bytes.
+/backend/app/data/recipes/*.json -text

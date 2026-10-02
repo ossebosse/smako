@@ -19,10 +19,11 @@ from app.models.recipe_preferences import RecipePreferences
 LIBRARY_VERSION = "smako-complete-dinners-v1"
 LIBRARY_PATH = Path(__file__).parents[1] / "data/recipes/complete-dinners-v1.json"
 # Updated only together with reviewed, versioned source content.
-CONTENT_SHA256 = "b27912d63f05f993635d4a3516a4e1bba0fa94acd5f682a258eeccdacb4efd07"
+CONTENT_SHA256 = "92d7ff63473969e659c61b7ff96b9bd852d8037e7174499a65d60f58297a983e"
 COUNT_EXEMPT = frozenset({"salt", "svartpeppar", "peppar", "vatten"})
 ARCHIVED_CONTENT = {
     "complete-dinners-1.0.0.json": "4baec1580728294b2805e3716b719d68b2d12ca0f2cbdc469bb074769700de66",
+    "complete-dinners-1.1.0.json": "b27912d63f05f993635d4a3516a4e1bba0fa94acd5f682a258eeccdacb4efd07",
 }
 
 
