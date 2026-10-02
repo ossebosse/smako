@@ -48,7 +48,7 @@ def test_every_version_has_consistent_count_time_steps_and_declared_review():
     for recipe in recipes:
         assert library.validate_recipe_design(recipe)
         assert 10 <= library.ingredient_count(recipe) <= 15
-        assert recipe.design.estimated_minutes <= 40
+        assert recipe.design.estimated_minutes <= 50
         assert recipe.design.provenance.cooking_test == "not_cooked"
         assert recipe.design.provenance.machine_validation == "passed"
         assert all(i.required and i.quantity > 0 and i.unit in {"g", "ml"}
@@ -135,6 +135,43 @@ def test_file_checksum_and_quality_are_explicit():
     assert summary["cooking_test"] == "not_cooked"
     assert "planner" in summary["purchase_qualification"]
     assert json.dumps(summary)
+
+
+def test_prior_issued_versions_remain_valid_but_new_candidates_use_current_content():
+    previous = json.loads(library.LIBRARY_PATH.with_name("complete-dinners-1.0.0.json").read_text(
+        encoding="utf8"))["recipes"][0]
+    archived = Recipe.model_validate(previous)
+    assert archived.design.version == "1.0.0"
+    assert library.validate_recipe_design(archived)
+    assert all(r.design.version == "1.1.0" for r in library.candidates(complete()))
+
+
+def test_cured_ingredients_need_drained_evidence_and_frozen_corn_is_heated():
+    for recipe in library.candidates(complete()):
+        for ingredient in recipe.ingredients:
+            if ingredient.name in {"oliver", "kapris"}:
+                assert ingredient.form == "preserved_drained"
+                assert "avrinning" in " ".join(recipe.instructions)
+            if ingredient.name in {"majs", "spenat", "ärtor", "haricots verts"}:
+                assert "frozen" in ingredient.product_requirements
+        if recipe.design.base_id.endswith(("fish-tacos", "tofu-sofritas")):
+            assert "Hetta upp majsen" in " ".join(recipe.instructions)
+
+
+def test_complex_bakes_are_not_presented_as_forty_minute_dinners():
+    quick = library.candidates(complete(max_minutes=40))
+    assert not any(r.design.base_id.endswith(("lentil-moussaka", "stuffed-peppers", "bean-enchiladas"))
+                   for r in quick)
+    all_recipes = library.candidates(complete())
+    assert any(r.design.base_id.endswith("lentil-moussaka") for r in all_recipes)
+
+
+def test_four_portions_include_additional_preparation_time():
+    two = library.candidates(complete(), 2)[0]
+    four = library.candidates(complete(), 4)[0]
+    assert four.design.estimated_minutes == two.design.estimated_minutes + 3
+    assert four.ingredients[0].quantity == 2 * two.ingredients[0].quantity
+    assert four.design.content_sha256 != two.design.content_sha256
 
 
 @pytest.mark.parametrize("values", [

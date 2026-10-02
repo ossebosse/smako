@@ -80,7 +80,7 @@ class RecipeIngredient(BaseModel):
     quantity: float = Field(gt=0, le=100000)
     unit: RecipeUnit
     canonical_name: str | None = None
-    form: Literal["dry", "raw_edible", "as_sold", "cooked_drained"] | None = Field(default=None, exclude_if=lambda v: v is None)
+    form: Literal["dry", "raw_edible", "as_sold", "cooked_drained", "preserved_drained"] | None = Field(default=None, exclude_if=lambda v: v is None)
     component: str | None = Field(default=None, exclude_if=lambda v: v is None)
     required: bool | None = Field(default=None, exclude_if=lambda v: v is None)
     role: Literal["primary", "side", "vegetable", "sauce", "flavour", "cooking"] | None = Field(default=None, exclude_if=lambda v: v is None)

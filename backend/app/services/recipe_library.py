@@ -19,8 +19,11 @@ from app.models.recipe_preferences import RecipePreferences
 LIBRARY_VERSION = "smako-complete-dinners-v1"
 LIBRARY_PATH = Path(__file__).parents[1] / "data/recipes/complete-dinners-v1.json"
 # Updated only together with reviewed, versioned source content.
-CONTENT_SHA256 = "4baec1580728294b2805e3716b719d68b2d12ca0f2cbdc469bb074769700de66"
+CONTENT_SHA256 = "b27912d63f05f993635d4a3516a4e1bba0fa94acd5f682a258eeccdacb4efd07"
 COUNT_EXEMPT = frozenset({"salt", "svartpeppar", "peppar", "vatten"})
+ARCHIVED_CONTENT = {
+    "complete-dinners-1.0.0.json": "4baec1580728294b2805e3716b719d68b2d12ca0f2cbdc469bb074769700de66",
+}
 
 
 def ingredient_key(ingredient) -> str:
@@ -105,6 +108,21 @@ def _registered() -> tuple[Recipe, ...]:
     return result
 
 
+@lru_cache(maxsize=1)
+def _registered_history() -> tuple[Recipe, ...]:
+    """Retain validation of issued plans when current authoring advances."""
+    result = list(_registered())
+    for filename, digest in ARCHIVED_CONTENT.items():
+        raw = LIBRARY_PATH.with_name(filename).read_bytes()
+        if hashlib.sha256(raw).hexdigest() != digest:
+            raise ValueError("En arkiverad receptutgåva har ändrats.")
+        for value in json.loads(raw)["recipes"]:
+            recipe = Recipe.model_validate(value)
+            _structural_check(recipe)
+            result.append(recipe)
+    return tuple(result)
+
+
 def _scaled(recipe: Recipe, servings: int) -> Recipe:
     factor = servings / recipe.servings
     ingredients = [i.model_copy(update={
@@ -112,6 +130,22 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
         for key in ("quantity", "quantity_min", "quantity_max", "quantity_step")
     }) for i in recipe.ingredients]
     result = recipe.model_copy(deep=True, update={"servings": servings, "ingredients": ingredients})
+    if servings > 2 and result.design.version != "1.0.0":
+        # More chopping/weighing for four portions is real work, even when the
+        # oven or a large pot can accommodate the full batch without extra heat.
+        extra_prep = ((servings - 1) // 2) * 3
+        steps = list(result.design.steps)
+        steps[0] = steps[0].model_copy(update={
+            "duration_minutes": steps[0].duration_minutes + extra_prep,
+            "text": steps[0].text + f" För {servings} portioner är {extra_prep} extra minuter "
+            "för vägning och beredning inräknade i tidsuppskattningen.",
+        })
+        result = result.model_copy(update={
+            "design": result.design.model_copy(update={
+                "steps": tuple(steps), "estimated_minutes": result.design.estimated_minutes + extra_prep,
+            }),
+            "instructions": [s.text for s in steps],
+        })
     if servings > 4:
         # A larger pan is not an implicit unlimited cooking resource. Reserve
         # sequential batches and show that allowance instead of silently keeping
@@ -150,13 +184,20 @@ def _registered_portions(servings: int) -> tuple[Recipe, ...]:
     return tuple(_scaled(r, servings) for r in _registered())
 
 
+@lru_cache(maxsize=12)
+def _registered_historical_portions(servings: int) -> tuple[Recipe, ...]:
+    if not 1 <= servings <= 12:
+        raise ValueError("Antal portioner måste vara mellan 1 och 12.")
+    return tuple(_scaled(r, servings) for r in _registered_history())
+
+
 def validate_recipe_design(recipe: Recipe) -> bool:
     """Only exact issued versions qualify; a self-computed hash cannot approve edits."""
     if recipe.design is None:
         return False
     _structural_check(recipe)
     d = recipe.design
-    registered = next((r for r in _registered_portions(recipe.servings)
+    registered = next((r for r in _registered_historical_portions(recipe.servings)
                        if (r.design.base_id, r.design.version, r.design.variant_id)
                        == (d.base_id, d.version, d.variant_id)), None)
     if registered is None or registered.model_dump() != recipe.model_dump():

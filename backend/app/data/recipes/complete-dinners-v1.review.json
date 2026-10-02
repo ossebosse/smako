@@ -1,0 +1,2162 @@
+{
+  "review_id": "complete-dinners-content-review-2026-10-02",
+  "review_kind": "model_assisted_editorial_and_structural",
+  "reviewed_at": "2026-10-02",
+  "library": {
+    "library_version": "smako-complete-dinners-v1",
+    "content_sha256": "b27912d63f05f993635d4a3516a4e1bba0fa94acd5f682a258eeccdacb4efd07",
+    "base_recipes": 48,
+    "approved_variants": 48,
+    "by_cuisine": {
+      "greek": 8,
+      "italian": 8,
+      "mexican": 8,
+      "indian": 8,
+      "thai": 8,
+      "swedish": 8
+    },
+    "vegetarian_by_cuisine": {
+      "greek": 4,
+      "italian": 5,
+      "mexican": 4,
+      "indian": 4,
+      "thai": 3,
+      "swedish": 3
+    },
+    "structural_validation": "passed",
+    "content_review": "model_assisted_review",
+    "cooking_test": "not_cooked",
+    "purchase_qualification": "performed_by_planner_per_snapshot",
+    "nutrition_qualification": "performed_by_planner_per_product_and_user_consent"
+  },
+  "physical_cooking_tests": 0,
+  "scope": "48 distinct base dishes and their 48 explicitly designed protein portions; no runtime language model and no authentic-cuisine claim.",
+  "time_method": "Estimated active preparation and passive heat/dependencies for 2 portions; 4 portions adds 3 minutes preparation; larger portions include batch allowance. These are not measured cooking times.",
+  "ingredient_count_method": "Unique canonical identity plus form across all components; salt/pepper/water excluded, oils/spices/sauces included. Pantry does not alter count.",
+  "quantity_method": "Every listed amount is used edible input in explicit raw/dry/drained/as-sold form, not whole purchased-package nutrition. No density, peel loss or raw-to-cooked yield is assumed.",
+  "versions": "Current1.1.0; earlier1.0.0 retained with fixed checksum for saved-plan validation. The earlier version is never a new candidate.",
+  "new_source_requirements": [
+    "Drained quantity and matching nutrition for preserved olives/capers",
+    "Plain frozen vegetables in gram-based recipes",
+    "Pure unsweetened juice at ready-to-use strength, including100% juice reconstituted from concentrate",
+    "Actual ml nutrition for milk/soy/coconut and juices; no assumed density",
+    "Plain thick yoghurt, firm unflavoured tofu, red split lentils and white rice"
+  ],
+  "at_most_40_minutes_for_two_by_cuisine": {
+    "greek": 5,
+    "italian": 5,
+    "mexican": 7,
+    "indian": 7,
+    "thai": 8,
+    "swedish": 5
+  },
+  "recipes": [
+    {
+      "base_id": "smako-greek-keftedes",
+      "name": "Färsbiffar med citronpotatis, tzatziki och tomatsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "husman",
+      "method": "oven",
+      "side": "rostad potatis",
+      "components": [
+        "Oreganobiffar",
+        "Citronpotatis",
+        "Tzatziki",
+        "Tomatsallad"
+      ],
+      "flavor_profile": [
+        "citron",
+        "oregano",
+        "vitlök"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 45,
+      "content_review": "Självständig biffmåltid med rostad stärkelse, sval gurksås och rå tomatsallad. Hälften av olja/citron/vitlök fördelas uttryckligen. Tiden höjd för ugnsuppvärmning, finfördelad potatis och biffarnas stekning; ingen fri färsökning över 210 g/person.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-greek-lemon-chicken",
+      "name": "Citronkyckling med spenatris, feta och gurksallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "risrätt",
+      "method": "pan",
+      "side": "spenatris",
+      "components": [
+        "Citronkyckling",
+        "Spenatris",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "citron",
+        "oregano",
+        "feta"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kyckling",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Stekt citronkyckling och absorptionskokt spenatris ger annan metod och konsistens än biffmåltiden. Feta är salt accent, inte enda proteinkälla. Den kalla salladen görs medan riset kokar.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-greek-lentil-moussaka",
+      "name": "Linsmoussaka med aubergine, potatis och yoghurtlock",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "gratäng",
+      "method": "bake",
+      "side": "potatisskivor",
+      "components": [
+        "Lins- och aubergineragu",
+        "Potatis",
+        "Yoghurtlock"
+      ],
+      "flavor_profile": [
+        "kanel",
+        "tomat",
+        "oregano"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "linser",
+          "quantity": 75.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 35.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 50,
+      "content_review": "Linsragu, förkokt tunn potatis och aubergine kräver både spis och gratinering. Tiden höjd till 50 minuter. Yoghurt, mjöl och ost är ett definierat lock; linserna blir tjock fyllning, ingen ospecificerad äggstanning.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-greek-gigantes",
+      "name": "Tomatbakade vita bönor med feta och örtigt couscous",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "ugn",
+      "method": "oven",
+      "side": "örtcouscous",
+      "components": [
+        "Tomatbakade bönor",
+        "Örtcouscous"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "dill",
+        "citron"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "bönor",
+          "quantity": 220.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "fetaost",
+          "quantity": 45.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Bönorna bakas i egen tomatragu; selleri/morot ger sötma och dillcouscous kontrast. Korta ingrediensbitar och kokta avrunna bönor gör uppskattningen 40 minuter rimlig. Feta60 g/person är övre godkänd accent, inte godtycklig proteinmaximering.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-greek-fish-plaki",
+      "name": "Ugnsfisk i tomat och oliver med citroncouscous",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "ugn",
+      "method": "oven",
+      "side": "citroncouscous",
+      "components": [
+        "Fisk plaki",
+        "Citroncouscous"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "oliver",
+        "persilja"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "fisk",
+          "quantity": 180.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Fisk bakas täckt i tomat, paprika och oliver. Olivmängden korrigerad till konserverad avrunnen form; spad får inte räknas som olivgram. Såsens fulla mängd serveras med couscous, inte bortslagen fiskbuljong.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-greek-spanakorizo",
+      "name": "Spenatris med kikärtor, feta och citronyoghurt",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "risrätt",
+      "method": "pot",
+      "side": "spenatris",
+      "components": [
+        "Spenatris med kikärtor",
+        "Citronyoghurt",
+        "Frisk sallad"
+      ],
+      "flavor_profile": [
+        "dill",
+        "citron",
+        "feta"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kikärtor",
+          "quantity": 180.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "fetaost",
+          "quantity": 40.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Ris och spenat utgör själva rätten, kikärtor och feta är integrerade komponenter. Ingen femte komponent läggs till för kvoten. Dill/citron används både smakmässigt och i instruktionerna. 35 minuter med parallell kall sås.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-greek-souvlaki",
+      "name": "Oreganofläsk i tortillabröd med kålsallad och yoghurtsås",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "wrap",
+      "method": "pan",
+      "side": "tortillabröd",
+      "components": [
+        "Oreganofläsk",
+        "Bröd och kålsallad",
+        "Gurkyoghurt"
+      ],
+      "flavor_profile": [
+        "oregano",
+        "citron",
+        "vitlök"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "fläskkött",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Tunt stekt fläsk och varm tortilla med sur kålsallad ger tydlig kontrast mot kycklingris och färsbiff. Namnet gör ingen autenticitetsutsaga. Yoghurt får aldrig ha kommit i kontakt med rått kött.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-greek-stuffed-peppers",
+      "name": "Paprikahalvor med linsris, feta och vitlöksyoghurt",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "gratäng",
+      "method": "bake",
+      "side": "fyllt ris",
+      "components": [
+        "Fyllda paprikor",
+        "Vitlöksyoghurt",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "oregano",
+        "tomat",
+        "citron"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "linser",
+          "quantity": 65.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "fetaost",
+          "quantity": 40.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 50,
+      "content_review": "Fyllda paprikahalvor behöver förbakning medan ris och linser blir mjuka, därefter separat gratinering. Tidsplanen rättad så att förbakningen faktiskt startar i första momentet; total uppskattning 50 minuter.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-italian-piccata",
+      "name": "Citronkyckling med kaprispasta och broccoli",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "pasta",
+      "method": "pan",
+      "side": "citronpasta",
+      "components": [
+        "Citronkyckling",
+        "Pasta och broccoli",
+        "Tomater"
+      ],
+      "flavor_profile": [
+        "citron",
+        "kapris",
+        "persilja"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kyckling",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Mjölad kyckling får kapris/citronsås och broccoliabsorptionspasta. Allt uppmätt mjöl används även om lite blir kvar efter vändning. Kapris måste vägas efter avrinning, och avrunnen produktgrund kvalificeras separat.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-italian-polpette",
+      "name": "Små färsbullar i tomatsås med pasta och zucchinisallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "pasta",
+      "method": "pot",
+      "side": "pasta",
+      "components": [
+        "Färsbullar och tomatsås",
+        "Pasta",
+        "Zucchinisallad"
+      ],
+      "flavor_profile": [
+        "basilika",
+        "vitlök",
+        "tomat"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Små bullar sjuds direkt i tomatsås och serveras med rå zucchini, tydligt annan teknik än grekiska stekta biffar. Ströbröd och riven lök binder utan odeklarerat ägg. Extra förberedelsetid för formning är inräknad.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-italian-lentil-ragu",
+      "name": "Linsragu med selleri, svamp och pasta",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "pasta",
+      "method": "pot",
+      "side": "pasta",
+      "components": [
+        "Linsragu",
+        "Pasta med ost"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "oregano",
+        "vitlök"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "linser",
+          "quantity": 85.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 30.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Finhackad svamp, selleri och morot bygger ragu med tomatpuré och röda delade linser. Grönsakerna är genomtänkta smakbärare. Mjuk pasta kokas separat utan att den beräknade näringen hälls bort i vatten.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-italian-ribollita",
+      "name": "Vit bön- och kålsoppa med bröd, tomat och ost",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "soppa",
+      "method": "pot",
+      "side": "bröd i soppan",
+      "components": [
+        "Bön- och kålsoppa",
+        "Bröd och ost"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "vitlök",
+        "basilika"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "bönor",
+          "quantity": 240.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 30.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Mosade och hela vita bönor gör soppa matig; bröd binds i soppan. Detta är en sopprätt med kål, inte en bolognese med bytt protein. Inget köpt buljongpulver göms i instruktionerna.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-italian-mushroom-risotto",
+      "name": "Krämigt svamp- och linsris med spenat och citron",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "risrätt",
+      "method": "pot",
+      "side": "krämigt ris",
+      "components": [
+        "Svamp- och linsris",
+        "Gurka"
+      ],
+      "flavor_profile": [
+        "svamp",
+        "citron",
+        "persilja"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "linser",
+          "quantity": 60.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 35.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 45,
+      "content_review": "Benämningen är krämigt svamp- och linsris, utan krav på en odeklarerad risottorissort. Svampen bryns före riset; linser och stärkelse ger krämighet. Tiden höjd till 45 minuter för hackning, bryning och successiv vätsketillsats.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-italian-salmon-cartoccio",
+      "name": "Laxpaket med tomat, oliver och basilikapotatis",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "ugn",
+      "method": "oven",
+      "side": "basilikapotatis",
+      "components": [
+        "Laxpaket",
+        "Basilikapotatis",
+        "Citronkräm"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "oliver",
+        "citron"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "lax",
+          "quantity": 180.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Lax och grönsaker bakas täckta, potatis ångkokas och smaksätts med basilika. Oliverna vägs avrunna och fiskskyn serveras. Den kalla citronkrämen görs parallellt, utan extra olistad olja.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-italian-aubergine-gratin",
+      "name": "Aubergine- och kikärtsgratäng med tomat och örtcouscous",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "gratäng",
+      "method": "bake",
+      "side": "örtcouscous",
+      "components": [
+        "Auberginegratäng",
+        "Örtcouscous"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "basilika",
+        "ost"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kikärtor",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 40.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 45,
+      "content_review": "Aubergine behöver bli mjuk i panna före gratinering. Både den fasen och ostytan har avsatt tid, vilket ger 45 minuter. Kikärtor/couscous har andra roller än linserna i moussaka.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-italian-spinach-pasta-bake",
+      "name": "Spenat- och kesofylld pastagratäng med tomatsås",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "gratäng",
+      "method": "bake",
+      "side": "gratinerad pasta",
+      "components": [
+        "Spenatpasta",
+        "Tomatsås",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "spenat",
+        "vitlök",
+        "basilika"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "keso",
+          "quantity": 180.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 30.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 45,
+      "content_review": "Keso och spenat blandas i pasta, med separat kokad tomatsås och ugnsyta. Tiden höjd till 45 minuter inklusive vattenabsorption och genomvärmning. Ingen ricotta eller grädde används utan ingrediensrad.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-mexican-chicken-bowl",
+      "name": "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "bowl",
+      "method": "pan",
+      "side": "ris",
+      "components": [
+        "Kryddig kyckling",
+        "Ris och majsröra",
+        "Limeyoghurt",
+        "Tomatsalsa"
+      ],
+      "flavor_profile": [
+        "lime",
+        "spiskummin",
+        "tomat"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kyckling",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Fyra avsiktliga komponenter: kryddkyckling, ris/varm majsröra, limeyoghurt, färsk salsa. Majsen är definierad fryst ren vara och värms. Kryddor och vitlök kan inte tas bort av prisoptimeringen.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-mexican-beef-fajita",
+      "name": "Färsfajitas med paprika, bönröra och kålsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "wrap",
+      "method": "pan",
+      "side": "tortillas",
+      "components": [
+        "Färs och paprika",
+        "Tortillas och bönröra",
+        "Kålsallad"
+      ],
+      "flavor_profile": [
+        "spiskummin",
+        "lime",
+        "paprika"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "nötfärs",
+          "quantity": 160.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "svarta bönor",
+          "quantity": 80.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Stekt färs och strimlad paprika fyller tortilla tillsammans med mosade svarta bönor och kål. Inga hårda proteinbyten skapar fler grundrecept. Bönröran använder uppmätt yoghurt och tillräckligt salt för helheten.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-mexican-bean-enchiladas",
+      "name": "Bönenchiladas med sötpotatis, tomatsås och limekål",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "gratäng",
+      "method": "bake",
+      "side": "tortillas",
+      "components": [
+        "Fyllda tortillas",
+        "Tomatsås",
+        "Limekål"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "spiskummin",
+        "lime"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "svarta bönor",
+          "quantity": 180.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 35.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 50,
+      "content_review": "Sötpotatisen måste mjukna före fyllning och rullning; det och gräddningen ger 50 minuter. Tomatsås och ost skyddar tortillas från att torka. Svarta bönor är dokumenterat avrunna.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-mexican-fish-tacos",
+      "name": "Fisktacos med majssalsa, krispig kål och limekräm",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "wrap",
+      "method": "pan",
+      "side": "tortillas",
+      "components": [
+        "Kryddstekt fisk",
+        "Tortillas och kål",
+        "Majssalsa",
+        "Limekräm"
+      ],
+      "flavor_profile": [
+        "lime",
+        "chili",
+        "spiskummin"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "fisk",
+          "quantity": 180.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Mjölad fisk och kall majssalsa kräver separata moment. Fryst majs värms först och svalnar utspridd under fiskstekningen. All mjölblandning och steksky tas med, och limekrämen innehåller definierad vitlök.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-mexican-lentil-chili",
+      "name": "Mustig lins- och kidneychili med ris och yoghurt",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "chili",
+      "method": "pot",
+      "side": "ris",
+      "components": [
+        "Lins- och bönchili",
+        "Ris",
+        "Limeyoghurt"
+      ],
+      "flavor_profile": [
+        "spiskummin",
+        "chili",
+        "tomat"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "linser",
+          "quantity": 60.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "kidneybönor",
+          "quantity": 120.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Röda linser ger såsens kropp, kidneybönor ger bett. Ris och sval yoghurt balanserar kryddningen. Ren mald cayenne i låg mängd ersätter ett oklart sammansatt chilipulver; ingen blandningsallergen döljs.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-mexican-pork-arroz",
+      "name": "Tomatris med fläsk, svarta bönor och varm paprikasalsa",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "risrätt",
+      "method": "pan",
+      "side": "tomatris",
+      "components": [
+        "Fläsk och bönor",
+        "Tomatris",
+        "Varm paprikasalsa"
+      ],
+      "flavor_profile": [
+        "paprika",
+        "spiskummin",
+        "lime"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "fläskkött",
+          "quantity": 160.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "svarta bönor",
+          "quantity": 80.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Ris tillagas i tomat med bönor medan fläsk, paprika och majs steks separat; skilda strukturer jämfört med burritobowl. Majsen tillagas i den heta pannan. Grytvätska och köttsky stannar i måltiden.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-mexican-tofu-sofritas",
+      "name": "Smulig tofubowl med bönor, limekål och tomatris",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "bowl",
+      "method": "pan",
+      "side": "tomatris",
+      "components": [
+        "Sofritaskryddad tofu",
+        "Tomatris",
+        "Limekål"
+      ],
+      "flavor_profile": [
+        "chili",
+        "lime",
+        "spiskummin"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "tofu",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "svarta bönor",
+          "quantity": 100.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Tofu smulas och steks med tomatpuré, inte bara byts in i kycklingrecept. Bönor kompletterar den ordentliga tofuportionen. Fryst majs värms och svalnar innan den vänds med rå limekål.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-mexican-corn-soup",
+      "name": "Majs- och bönsoppa med ostquesadilla och tomatsalsa",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "soppa",
+      "method": "pot",
+      "side": "ostquesadilla",
+      "components": [
+        "Majs- och bönsoppa",
+        "Ostquesadilla",
+        "Tomatsalsa"
+      ],
+      "flavor_profile": [
+        "majs",
+        "lime",
+        "chili"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "bönor",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 35.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Mosade bönor och majs bildar soppa utan buljongtärning, med ostquesadilla som tillbehör. Mjölk är ml eftersom prisunderlaget har volym; produktens näringsenhet måste matcha separat och får inte antas.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-indian-tandoori-chicken",
+      "name": "Yoghurtkryddad kyckling med gurkmejaris och gurksallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "ugn",
+      "method": "oven",
+      "side": "gurkmejaris",
+      "components": [
+        "Yoghurtkryddad kyckling",
+        "Gurkmejaris",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "spiskummin",
+        "paprika",
+        "citron"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kyckling",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Yoghurtmarinad, själv blandade rena kryddor och ugn ger tydlig metod. Kall sås tas ur den orörda yoghurthalvan, med uttrycklig råvaruhygien i steget. Tiden 40 minuter avser snabb marinering, inte lång traditionell marinering.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-indian-tofu-dal",
+      "name": "Röd linsdal med spenat, mjuk tofu och citronris",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "side": "citronris",
+      "components": [
+        "Linsdal",
+        "Citronris"
+      ],
+      "flavor_profile": [
+        "ingefära",
+        "spiskummin",
+        "gurkmeja"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "linser",
+          "quantity": 75.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "tofu",
+          "quantity": 140.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Röda delade linser bildar krämig dal och tofu håller proteinmängden rimlig. Ris startar parallellt före slutsteget; tidigare tvetydig treminutersriskokning är rättad. Ingen grön linsvariant tillåts under samma tid.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-indian-keema",
+      "name": "Färskeema med ärtor, potatis och sval tomatyoghurt",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "gryta",
+      "method": "pot",
+      "side": "potatis i grytan",
+      "components": [
+        "Keema med potatis",
+        "Tomatyoghurt"
+      ],
+      "flavor_profile": [
+        "ingefära",
+        "spiskummin",
+        "kanel"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Små potatistärningar och ärtor ingår i färsgrytan, så det krävs inget extra ris för en komplett måltid. Tomatyoghurt serveras kall. Kryddorna är separata uppmätta ingredienser.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-indian-chana-cauliflower",
+      "name": "Kikärts- och blomkålsmasala med ris och gurkyoghurt",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "side": "ris",
+      "components": [
+        "Kikärtsmasala",
+        "Ris",
+        "Gurkyoghurt"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "ingefära",
+        "spiskummin"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kikärtor",
+          "quantity": 220.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Kikärtor och blomkål sjuder tillsammans i tomat/ingefära och får ris och gurkyoghurt. Bukettstorlek och genomvärmning är preciserade. Proteinkrav kan fortfarande stoppa vissa produktkombinationer; inga värden antas.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-indian-fish-coconut",
+      "name": "Fisk i kokos- och tomatcurry med ris och limegurka",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "side": "ris",
+      "components": [
+        "Fiskcurry",
+        "Ris",
+        "Limegurka"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "ingefära",
+        "lime"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "fisk",
+          "quantity": 180.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Fisk läggs sist i färdig kokos/tomatsås för att inte koka sönder. Kokosmjölk är mätt ml med faktisk produktdeklaration som villkor. Gurka med lime ger kall kontrast utan extra curryblandning.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-indian-palak-tofu",
+      "name": "Krämig spenattofu med ärtor och vitlöksris",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "side": "vitlöksris",
+      "components": [
+        "Spenattofu",
+        "Vitlöksris"
+      ],
+      "flavor_profile": [
+        "spenat",
+        "ingefära",
+        "spiskummin"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "tofu",
+          "quantity": 220.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Stor spenatmängd, ärtor och fast naturell tofu är grytans kärna. Yoghurt rörs i efter att grytan tagits av värmen. Ris får vitlök, så ingen smakkomponent står oanvänd.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-indian-chicken-biryani",
+      "name": "Kryddigt kycklingris med morot, ärtor och gurkraita",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "risrätt",
+      "method": "pot",
+      "side": "kryddris",
+      "components": [
+        "Kycklingris",
+        "Gurkraita"
+      ],
+      "flavor_profile": [
+        "kanel",
+        "ingefära",
+        "gurkmeja"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kyckling",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 45,
+      "content_review": "Ett kryddigt kycklingris, där lök först steks och sedan ris och kyckling får sjuda under lock. Tiden höjd till 45 minuter för de sekventiella momenten. Ingen påstådd autentisk långlagad biryani.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-indian-bean-potato-curry",
+      "name": "Vit böncurry med potatis, kokos och tomatsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "side": "potatis",
+      "components": [
+        "Bön- och potatiscurry",
+        "Tomatsallad"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "ingefära",
+        "citron"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "bönor",
+          "quantity": 230.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Vita bönor och potatis ger annan struktur än linser och tofu. Kokos, spenat och citron/tomatsallad balanserar. Proteinportion300 g bönor är övre gräns; inget löfte om 40 g protein utan faktiska näringsdata.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-thai-peanut-noodles",
+      "name": "Kycklingnudlar med broccoli, ingefära och jordnötssås",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "nudelrätt",
+      "method": "pan",
+      "side": "nudlar",
+      "components": [
+        "Kyckling och grönsaker",
+        "Nudlar",
+        "Jordnötssås"
+      ],
+      "flavor_profile": [
+        "jordnöt",
+        "lime",
+        "ingefära"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kyckling",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Jordnötssås binder absorptionskokta nudlar och kyckling/broccoli. Såsrelationen 25 g jordnötssmör och50 ml kokos per person är matlagning, inte näringsoptimering genom enorm såsmängd. All sås serveras.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-thai-basil-tofu",
+      "name": "Basilikastekt tofu med gröna bönor, paprika och ris",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "wok",
+      "method": "pan",
+      "side": "ris",
+      "components": [
+        "Basilikastekt tofu",
+        "Ris",
+        "Lime- och sojasås"
+      ],
+      "flavor_profile": [
+        "basilika",
+        "lime",
+        "soja"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "tofu",
+          "quantity": 230.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Fast tofu steks med gröna bönor och paprika, basilika vänds i sist. Ren fryst bönprodukt behöver tillagas, vilket stek/sjudmomentet gör. Sesam är en uppmätt smakkomponent som också måste allergenkvalificeras.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-thai-coconut-fish-soup",
+      "name": "Kokosfisksoppa med svamp, ingefära och lime",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "soppa",
+      "method": "pot",
+      "side": "ris",
+      "components": [
+        "Kokosfisksoppa",
+        "Ris"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "lime",
+        "ingefära"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "fisk",
+          "quantity": 180.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Soppa med fisk, svamp och tomat skiljer sig från tjock indisk fiskcurry. Ingefäran skivas tunt och äts; inga smakbitar fiskas ur efter beräkning. All kokosbuljong ingår i portionen.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-thai-lime-pork",
+      "name": "Lime- och ingefärsfläsk med ris och krispig kålsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "bowl",
+      "method": "pan",
+      "side": "ris",
+      "components": [
+        "Limefläsk",
+        "Ris",
+        "Kålsallad"
+      ],
+      "flavor_profile": [
+        "lime",
+        "ingefära",
+        "jordnöt"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "fläskkött",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Tunt fläsk och rå kål/morot/gurka med jordnötsdressing ger skål med tydlig temperaturkontrast. Lime delas mellan dressing och varmt kött. Inget tillsatt socker behövs eller är olistat.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-thai-chicken-coconut-curry",
+      "name": "Kycklingcurry med kokos, paprika, gröna bönor och ris",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "curry",
+      "method": "pot",
+      "side": "ris",
+      "components": [
+        "Kycklingcurry",
+        "Ris",
+        "Lime"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "ingefära",
+        "basilika"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kyckling",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Ingefära, vitlök, ren cayenne och basilika skapar inspiration utan odeklarerad currypasta. Kyckling tillagas färdigt i kokos, paprika och bönor. Den är inte samma metod som ugnsmarinerad indisk kyckling.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-thai-tofu-satay",
+      "name": "Jordnötsbakad tofu med gurksallad, broccoli och ris",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "ugn",
+      "method": "oven",
+      "side": "ris",
+      "components": [
+        "Jordnötsbakad tofu",
+        "Ris och broccoli",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "jordnöt",
+        "lime",
+        "ingefära"
+      ],
+      "ingredient_count": 14,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "tofu",
+          "quantity": 230.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Tofustavar bakas med del av jordnötssåsen, resterande sås värms separat. Broccoli ångas över ris; gurksallad ger kontrast. Tofun får vara fast naturell, inte smaksatt eller silkestofu.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-thai-beef-broccoli",
+      "name": "Basilikafärs med broccoli, sojanudlar och limegurka",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "nudelrätt",
+      "method": "pan",
+      "side": "nudlar",
+      "components": [
+        "Basilikafärs",
+        "Sojanudlar",
+        "Limegurka"
+      ],
+      "flavor_profile": [
+        "soja",
+        "ingefära",
+        "basilika"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Smulig färs och basilika serveras med nudlar, med broccoli och rå limegurka. Förbrukningen inkluderar både soja och sesam. Detta är inte fajita med ny köketikett; tillbehör, sås och teknik är ändrade.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-thai-lentil-coconut-soup",
+      "name": "Krämig lins- och kokossoppa med ingefärstofu",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "soppa",
+      "method": "pot",
+      "side": "stekt tofu",
+      "components": [
+        "Lins- och kokossoppa",
+        "Stekt tofu"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "lime",
+        "jordnöt"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "linser",
+          "quantity": 75.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "tofu",
+          "quantity": 160.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Soppan av röda linser och morot toppas med separat stekt ingefärstofu och jordnötssky. Tofuns stekta textur är funktionell, inte protein lagt på utan instruktioner. Lime tillsätts efter sjudning.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-swedish-mustard-chicken",
+      "name": "Senapskyckling med dillpotatis och krämig kålsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "husman",
+      "method": "pan",
+      "side": "dillpotatis",
+      "components": [
+        "Senapskyckling",
+        "Dillpotatis",
+        "Krämig kålsallad"
+      ],
+      "flavor_profile": [
+        "senap",
+        "dill",
+        "citron"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "kyckling",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Senap/crème fraiche-sås med dillpotatis och yoghurtkål ger en sammanhållen svensk vardagsrätt. Oljan är exakt definierad för stekning. Ingen grädde eller smör tillkommer i potatisen.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-swedish-beef-patties",
+      "name": "Pannbiff med svampsås, rostade rotfrukter och gurka",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "husman",
+      "method": "oven",
+      "side": "rostade rotfrukter",
+      "components": [
+        "Pannbiff",
+        "Rostade rotfrukter",
+        "Svampsås",
+        "Gurka"
+      ],
+      "flavor_profile": [
+        "svamp",
+        "senap",
+        "persilja"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 45,
+      "content_review": "Pannbiff, svampsås och rostade rotfrukter kräver formning, stekning och en efterföljande såsfas. Tiden höjd till45 minuter. Samma panna används så att den beräknade stekskyn faktiskt kommer med såsen.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-swedish-lentil-patties",
+      "name": "Lins- och havrebiffar med varm potatissallad och dillkräm",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "husman",
+      "method": "pan",
+      "side": "varm potatissallad",
+      "components": [
+        "Linsbiffar",
+        "Potatissallad",
+        "Dillkräm"
+      ],
+      "flavor_profile": [
+        "dill",
+        "senap",
+        "citron"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "linser",
+          "quantity": 80.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "keso",
+          "quantity": 80.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 45,
+      "content_review": "Linserna absorberar vatten före bindning med havre/mjöl och stekning; dessa moment kan inte behandlas som samtidigt. Tidsplanen rättad och uppskattningen45 minuter. Keso i dillkrämen hjälper protein utan överstor biffmassa.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-swedish-mustard-salmon",
+      "name": "Senapsbakad lax med potatis, ärtor och pepparrotsyoghurt",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "ugn",
+      "method": "oven",
+      "side": "potatis och ärtor",
+      "components": [
+        "Senapsbakad lax",
+        "Potatis och ärtor",
+        "Pepparrotsyoghurt",
+        "Gurka"
+      ],
+      "flavor_profile": [
+        "senap",
+        "dill",
+        "pepparrot"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "lax",
+          "quantity": 180.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Ugnsbakad lax, ångkokt potatis/morot/ärtor och rå pepparrotsyoghurt är egna komponenter. Färsk pepparrot är explicit, inte en färdig tubblandning. Citron och dill delas utan att räknas dubbelt.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-swedish-pork-stroganoff",
+      "name": "Fläskstroganoff med ris, ärtor och syrlig kålsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "gryta",
+      "method": "pan",
+      "side": "ris",
+      "components": [
+        "Fläskstroganoff",
+        "Ris och ärtor",
+        "Kålsallad"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "senap",
+        "paprika"
+      ],
+      "ingredient_count": 12,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "fläskkött",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 30,
+      "reviewed_estimated_minutes": 35,
+      "content_review": "Strimlat fläsk i senap/tomat/crème fraiche är en egen gryta utan odeklarerad korv. Ris och ärtor kokas ihop, och syrlig rå kål balanserar. Tiden35 minuter inkluderar förberedelse och genomstekning.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-swedish-green-pea-soup",
+      "name": "Grön ärt- och bönsoppa med spenat och ostbröd",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "soppa",
+      "method": "pot",
+      "side": "ostbröd",
+      "components": [
+        "Ärt- och bönsoppa",
+        "Ostbröd",
+        "Pepparrot"
+      ],
+      "flavor_profile": [
+        "dill",
+        "citron",
+        "pepparrot"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "bönor",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "ost",
+          "quantity": 35.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Potatis och mosade vita bönor ger kropp till grön ärtsoppa. Ostbröd och färsk pepparrot gör måltiden fullständig. Tiden40 minuter inkluderar den sista soppmosningen och brödets smältning.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-swedish-tofu-root-hash",
+      "name": "Rotfruktspytt med tofu, senapskräm och varm rödbeta",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "potatisrätt",
+      "method": "oven",
+      "side": "rotfruktspytt",
+      "components": [
+        "Tofu- och rotfruktspytt",
+        "Varm rödbeta",
+        "Senapskräm"
+      ],
+      "flavor_profile": [
+        "senap",
+        "dill",
+        "citron"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "tofu",
+          "quantity": 220.0,
+          "unit": "g"
+        },
+        {
+          "ingredient": "keso",
+          "quantity": 70.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 40,
+      "reviewed_estimated_minutes": 45,
+      "content_review": "Rödbeta rivs grovt och hålls i ett eget hörn så att den hinner tillagas samtidigt som övrig pytt. Tiden45 minuter är ärligare än40 med hackning och rostning. Keso/yoghurt/senap används som kall kräm.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    },
+    {
+      "base_id": "smako-swedish-cabbage-mince-pot",
+      "name": "Kål- och färsgryta med potatis och dillig gurkkräm",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "gryta",
+      "method": "pot",
+      "side": "potatis i grytan",
+      "components": [
+        "Kål- och färsgryta",
+        "Dillig gurkkräm"
+      ],
+      "flavor_profile": [
+        "kål",
+        "senap",
+        "dill"
+      ],
+      "ingredient_count": 13,
+      "portions": 2,
+      "primary_quantities_per_portion": [
+        {
+          "ingredient": "blandfärs",
+          "quantity": 170.0,
+          "unit": "g"
+        }
+      ],
+      "previous_estimated_minutes": 35,
+      "reviewed_estimated_minutes": 40,
+      "content_review": "Kål, färs, små potatistärningar och morot sjuder tillsammans; dillgurkkräm ger kall kontrast. Tomatpuré och senap är små men meningsfulla smakbärare. Ingen dold fond eller sötad sås används.",
+      "checks": {
+        "all_ingredients_have_steps": true,
+        "all_step_ingredients_have_amounts": true,
+        "all_oil_measured": true,
+        "all_edible_input_served": true,
+        "dependencies_fit_estimate": true,
+        "base_count_distinct": true
+      },
+      "cooking_test": "not_cooked",
+      "nutrition_status": "requires_product_qualification",
+      "purchase_status": "requires_snapshot_qualification"
+    }
+  ]
+}
