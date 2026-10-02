@@ -105,16 +105,10 @@ def product_form_compatible(recipe, name, product, fact):
             fat = fact.nutrition.get("fat_g")
         if not re.search(r"grekisk|turkisk|avrunnen|strained", text) or fat is None or not 5 <= fat <= 10:
             return False
-    if "pure_juice" in requirements:
-        declared = composition.split("kan innehålla")[0]
-        if not fact or not fact.ingredients_complete or not declared or re.search(r"socker|sirap|sötningsmedel|juiceblandning", declared):
-            return False
-        if canonical == "citronjuice" and re.search(r"apelsin|lime|äpple", declared):
-            return False
-        if canonical == "limejuice" and re.search(r"apelsin|citron|äpple", declared):
-            return False
+    if "pure_juice" in requirements and not plain_juice_composition(canonical, composition):
+        return False
     if ("plain" in requirements and canonical == "jordnötssmör"
-            and (not fact or not fact.ingredients_complete or not composition or re.search(r"socker|sirap|sötningsmedel|kakao|choklad", composition.split("kan innehålla")[0]))):
+            and not plain_peanut_composition(composition)):
         return False
     if "frozen" in requirements and not re.search(r"fryst|frysta|djupfryst", text + " " + (getattr(product, "category", None) or "").casefold()):
         return False
@@ -247,14 +241,50 @@ def _whole_food_identity(canonical, form, product, fact):
     }
     if canonical in grains:
         return form == "dry" and simple(grains[canonical], "fullkorn|fullkorns|glutenfri|glutenfritt|snabb|original|durumvete|durum|malet|fint|finmalet|special|siktat|torkade|delade|skalade|split")
-    legumes = {"kikärtor": "kikärtor|kikärter", "kidneybönor": "kidneybönor|röda kidneybönor", "svarta bönor": "svarta bönor", "bönor": "bönor|vita bönor|stora vita bönor", "majs": "majs|majskorn|sockermajs", "ärtor": "ärtor|gröna ärtor"}
+    legumes = {"kikärtor": "kikärtor|kikärter", "kidneybönor": "kidneybönor|röda kidneybönor", "svarta bönor": "svarta bönor", "bönor": "bönor|vita bönor|stora vita bönor|vita bönor stora", "majs": "majs|majskorn|sockermajs", "ärtor": "ärtor|gröna ärtor"}
     if canonical in legumes:
         return simple(f"(?:{legumes[canonical]})", "kokta|avrunna|sweet corn|extra fina|söta|2-p|3-pack|utan tillsatt socker")
     if canonical == "tortillas":
-        return bool(re.fullmatch(r"(?:tortilla|tortillas|vetetortilla|vetetortillas)(?: original| medium| large| small| fullkorn| vete| majs| soft| mini| wraps| ekologiska| eko)*", label))
+        return bool(re.fullmatch(r"(?:(?:street|corn|glutenfria|glutenfri) )*(?:tortilla|tortillas|vetetortilla|vetetortillas)(?: original| medium| large| small| fullkorn| vete| majs| soft| mini| wraps| glutenfri| glutenfria| ekologiska| eko)*", label))
     if canonical == "bröd":
         return bool(re.fullmatch(r"(?:bröd|fullkornsbröd|surdegsbröd|rågbröd|formbröd|rostbröd|lantbröd|pitabröd)(?: fullkorn| grovt| ljust| mörkt| skivat| skivor| original| vete| råg| ekologiskt| eko)*", label))
     return False
+
+
+def _culinary_words(composition):
+    # This parses a stated culinary formula. It does not assert that retailer
+    # source coverage is complete enough to prove allergen absence. Preserve
+    # the original declaration and its separate ingredients_complete flag.
+    declared = re.split(r"kan innehålla|kan indeholde|may contain|förvaras|förvaring", composition.casefold())[0]
+    return set(re.findall(r"[^\W\d_]+", declared)), declared
+
+
+def plain_juice_composition(canonical, composition):
+    # Origin and certification are not extra ingredients. Remove only these
+    # explicit metadata shapes, preserving every token of the actual formula.
+    fruit = {"citronjuice": "citron", "limejuice": "lime"}.get(canonical)
+    if fruit is None:
+        return False
+    source = composition.casefold()
+    source = re.sub(rf"\({fruit}: (?:eu \()?[^()]+\)?\)", "", source)
+    source = re.split(r"\*+krav-ekologisk ingrediens\.", source)[0]
+    words, declared = _culinary_words(source)
+    allowed = {canonical, "ingredienser", "juice", "från", "koncentrat", "framställd", "framställt", "av", "vatten",
+               "antioxidationsmedel", "konserveringsmedel", "kaliummetabisulfit", "kaliumdisulfit", "svaveldioxid",
+               "natriumbensoat", "e", "citronsyra", "sulfit", "ekologisk", "pastöriserad", "inte"}
+    if not words or canonical not in words or not words <= allowed:
+        return False
+    if "vatten" in words and "från koncentrat" not in declared:
+        return False
+    fraction = re.search(r"juice\s*\(?\s*(\d+(?:[,.]\d+)?)\s*%", declared)
+    return fraction is None or float(fraction.group(1).replace(",", ".")) >= 99
+
+
+def plain_peanut_composition(composition):
+    words, _ = _culinary_words(composition)
+    allowed = {"ingredienser", "jordnötter", "jordnöt", "jordnötssmör", "rostade", "malda", "och", "ekologiska",
+               "ekologisk", "salt", "havssalt", "kina", "argentina", "ursprung", "eu", "icke"}
+    return bool(words & {"jordnötter", "jordnöt"}) and words <= allowed
 
 
 def pantry_form_compatible(item, row):

@@ -146,6 +146,11 @@ def test_edited_unregistered_recipe_cannot_enter_complete_mode():
     ("rödbeta", "raw_edible", "Rödbetor Klass 1", "Frukt & grönt", True),
     ("cayennepeppar", "dry", "Cayennepeppar", "Kryddor", True),
     ("mjölk", "as_sold", "Mellanmjölk 1,5%", "Mejeri", True),
+    ("tortillas", "as_sold", "Street Tortillas", "Bröd", True),
+    ("tortillas", "as_sold", "Glutenfria Corn Tortillas", "Bröd", True),
+    ("tortillas", "as_sold", "Tortillas Nacho Cheese Chips", "Snacks", False),
+    ("bönor", "cooked_drained", "Vita Bönor Stora Eko", "Konserver", True),
+    ("bönor", "cooked_drained", "Vita Bönor i Tomatsås", "Konserver", False),
 ])
 def test_whole_food_identity_never_substring_matches(ingredient, form, label, category, expected):
     from app.services.complete_recipes import _whole_food_identity
@@ -201,6 +206,25 @@ def test_resolution_cache_separates_texture_requirements():
     qualified = planner.resolve("yoghurt naturell", 100, "g", profile=TasteProfile(), recipe=recipe)
     assert {c.product_id for _, c in ordinary} == {"thin", "thick"}
     assert {c.product_id for _, c in qualified} == {"thick"}
+
+
+def test_culinary_formula_is_separate_from_allergen_completeness():
+    from app.services.complete_recipes import plain_juice_composition, plain_peanut_composition
+    assert plain_juice_composition("citronjuice", "INGREDIENSER: Citronjuice från koncentrat, antioxidationsmedel (KALIUMMETABISULFIT).")
+    assert not plain_juice_composition("citronjuice", "Citronjuice 10%, vatten, socker.")
+    assert not plain_juice_composition("citronjuice", "Citronjuice, limejuice.")
+    assert plain_juice_composition("citronjuice", "INGREDIENSER: Citronjuice (citron: EU (Italien och/eller Spanien)), konserveringsmedel (E 224 KALIUMDISULFIT).")
+    assert plain_juice_composition("citronjuice", "INGREDIENSER: Citronjuice från koncentrat (citron: Argentina), konserveringsmedel (E 224 SULFIT).")
+    assert plain_juice_composition("limejuice", "INGREDIENSER: Ekologisk limejuice** (lime: Brasilien). **KRAV-ekologisk ingrediens. KRAV-märkningen verifieras av Kiwa.")
+    assert not plain_juice_composition("citronjuice", "Citronjuice, vatten.")
+    assert not plain_juice_composition("citronjuice", "Citronjuice (citron: Italien), socker.")
+    assert plain_peanut_composition("INGREDIENSER: Rostade och malda ekologiska JORDNÖTTER 99,4% (Kina), havssalt. Kan innehålla spår av mandel, hasselnötter och cashewnötter.")
+    assert not plain_peanut_composition("JORDNÖTTER 90%, rörsocker, vegetabiliskt fett, salt.")
+    recipe = SimpleNamespace(design=True, preparation=SimpleNamespace(input_forms={"citronjuice": "as_sold"}),
+        ingredients=[SimpleNamespace(name="citronjuice", product_requirements=["pure_juice"])])
+    fact = SimpleNamespace(ingredients=["Citronjuice från koncentrat."], ingredients_complete=False, conflicts=[])
+    assert product_form_compatible(recipe, "citronjuice", SimpleNamespace(name="Citronjuice", category="Juice", purchase_terms=None), fact)
+    assert fact.ingredients_complete is False
 
 
 @pytest.mark.asyncio

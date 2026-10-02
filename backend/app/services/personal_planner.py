@@ -1973,8 +1973,18 @@ class PersonalPlanner:
                     local_conflicts.append(exc)
         if not valid:
             if self.complete:
-                reason = str(local_conflicts[0]) if local_conflicts else "Inget grundrecept uppfyller kombinationen av matkök, tid och ingrediensantal."
-                raise PolicyConflict(reason + " Prova längre tillagningstid, ett bredare ingrediensintervall eller fler matkök. Dina krav har inte ändrats.", code="RECIPE_CHOICES_UNFULFILLED")
+                if not candidates:
+                    raise PolicyConflict("Inget grundrecept uppfyller kombinationen av matkök, tid och ingrediensantal. Prova längre tillagningstid, ett bredare ingrediensintervall eller fler matkök. Dina krav har inte ändrats.", code="RECIPE_CHOICES_UNFULFILLED", stage="policy_taste")
+                first = local_conflicts[0] if local_conflicts else None
+                code = getattr(first, "code", "RECIPE_QUALIFICATION_BLOCKED")
+                reason = str(first) if first else "Recepten stoppades av måltidskontrollen. Se den första orsaken per recept i underlaget."
+                if code == "DATA_BLOCKED":
+                    suggestion = "Underlaget räcker inte för ett kvalificerat köp eller den begärda näringen. Prova ett annat matkök eller fler tillåtna inköpsställen; saknade uppgifter kräver nytt verifierat källunderlag."
+                elif code == "NUTRITION_TARGET_NOT_MET":
+                    suggestion = "Pröva godkända receptvariationer eller ändra näringsmålet uttryckligen."
+                else:
+                    suggestion = "Kontrollera vilka kostval eller uteslutningar som anges i orsakerna, eller välj ett annat matkök."
+                raise PolicyConflict(reason + " " + suggestion + " Dina krav har inte ändrats.", code=code, stage=getattr(first, "stage", None))
             if local_conflicts:
                 raise local_conflicts[0]
             raise PolicyConflict(f"Inga användbara recept för {meal.meal_type} med dina val.")
