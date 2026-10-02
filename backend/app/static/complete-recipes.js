@@ -2,7 +2,7 @@
 (() => {
   "use strict";
   const cuisines = {greek:"Grekiskt", italian:"Italienskt", mexican:"Mexikanskt", indian:"Indiskt", thai:"Thailändskt", swedish:"Svenskt"};
-  const number = value => Number(value).toLocaleString("sv-SE", {maximumFractionDigits:2});
+  const number = value => value==null||value===""||!Number.isFinite(Number(value))?"okänd":Number(value).toLocaleString("sv-SE", {maximumFractionDigits:2});
   const storage = {
     get(key) { try { return JSON.parse(sessionStorage.getItem(key) || "null"); } catch (_) { return null; } },
     set(key, value) { try { sessionStorage.setItem(key, JSON.stringify(value)); } catch (_) { /* Optional tab-local recovery. */ } },
@@ -110,19 +110,21 @@
     const count=design.ingredient_count??ingredientCount(recipe);
     intro.append(el("p",`${recipe.servings} portioner · ${count} ingredienser · uppskattad tid ${number(design.estimated_minutes)} min`,"complete-recipe-facts"));
     const demands=(personal?.remaining_demands||[]).filter(row=>row.source===slotId&&!['salt','peppar','svartpeppar','vitpeppar','vatten'].includes(row.name));
-    if(demands.length===count){
+    if(demands.length===count&&demands.every(row=>row.original_quantity==null||Math.abs(row.original_quantity-row.quantity)<0.000001)){
       let home=0,partial=0;
       for(const demand of demands){const used=(personal.allocations||[]).filter(row=>row.demand_key===demand.demand_key).reduce((sum,row)=>sum+row.quantity,0);if(used>=demand.quantity-0.000001)home++;else if(used>0)partial++;}
-      intro.append(el("p",`${count} ingredienser, ${count-home} behöver köpas, ${home} finns helt hemma${partial?`; ytterligare ${partial} finns delvis hemma`:""}.`));
+      intro.append(el("p",`${count} ingredienser: ${count-home} behöver köpas och ${home} finns helt hemma.${partial?` Av de ${count-home} som behöver köpas finns ${partial} redan delvis hemma.`:""}`));
+    } else if(demands.some(row=>row.original_quantity!=null&&row.original_quantity>row.quantity)){
+      intro.append(el("p","En del av rättens behov har redan bokförts som förbrukat. Inköpslistan visar återstående behov; receptets ingrediensantal är oförändrat."));
     }
     intro.append(el("p",`Recept ${design.base_id} · version ${design.version} · ${design.variant_id==="base"?"grundrecept":`variation ${design.variant_id}`}`,"small"));
     if(nutrition){
       const values=nutrition.values||nutrition;const parts=[];
-      for(const [key,alt,label] of [["protein_g","protein_g_per_serving","g protein"],["kcal","kcal_per_serving","kcal"],["carbs_g","carbs_g_per_serving","g kolhydrater"],["fat_g","fat_g_per_serving","g fett"]]){const value=values[key]??values[alt];if(value!=null)parts.push(`${number(value)} ${label}`);}
-      intro.append(el("p",`${parts.length?`${parts.join(" · ")} per portion. `:""}Näring: ${{VERIFIED:"produktdeklarationer",ESTIMATED:"spårbar uppskattning",UNKNOWN:"okänd",FAILED:"ej kvalificerad"}[nutrition.status]||nutrition.status||"okänd"}.`));
+      for(const [key,alt,label] of [["protein_g","protein_g_per_serving","g protein"],["kcal","kcal_per_serving","kcal"],["carbs_g","carbs_g_per_serving","g kolhydrater"],["fat_g","fat_g_per_serving","g fett"]]){const value=values[key]??values[alt];if(value!=null&&value!==""&&Number.isFinite(Number(value)))parts.push(`${number(value)} ${label}`);}
+      intro.append(el("p",`${parts.length?`${parts.join(" · ")} per portion. `:""}Näring: ${{VERIFIED:"produktdeklarationer",ESTIMATED:"spårbar uppskattning",NOT_REQUESTED:"inte beräknad – inget näringsmål valt",UNKNOWN:"okänd",FAILED:"ej kvalificerad"}[nutrition.status]||"okänd"}.${parts.length<4?" Saknade näringsvärden är okända.":""}`));
     } else intro.append(el("p","Näring: se planens kvalitetsunderlag. Saknade näringsvärden är okända."));
     if(personal)intro.append(el("p",`Allergenstatus: ${personal.checks?.allergy==="VERIFIED"?"kontrollerad mot källdeklarationer enligt dina krav":"ingen verifierad allergikontroll begärd"}. Köpstatus och näringsstatus bedöms separat.`,"small"));
-    if(nutrition?.sources?.length){const sources=el("details");sources.append(el("summary","Näringskällor och mängdgrund"));if(nutrition.calculation_basis?.description)sources.append(el("p",nutrition.calculation_basis.description));for(const source of nutrition.sources)sources.append(el("p",`${source.ingredient||"Ingrediens"}: ${number(source.quantity)} ${source.unit||""}. ${source.basis||"Mängdgrund inte angiven"}. Källa: ${source.source||"saknas"}. ${source.evidence_kind==="qualified_product_declaration"?"Produktdeklaration":"Spårbar uppskattning"}.`,"small"));intro.append(sources);}
+    if(nutrition?.sources?.length){const sources=el("details");sources.append(el("summary","Näringskällor och mängdgrund"));if(nutrition.calculation_basis?.description)sources.append(el("p",nutrition.calculation_basis.description));for(const source of nutrition.sources)sources.append(el("p",`${source.ingredient||"Ingrediens"}: ${number(source.quantity)} ${source.unit||""}. ${source.basis||"Mängdgrund inte angiven"}. Källa: ${source.source||"saknas"}. ${source.evidence_kind==="qualified_product_declaration"?"Produktdeklaration":source.evidence_kind&&source.source?"Spårbar uppskattning":"Källstatus okänd"}.`,"small"));intro.append(sources);}
     const provenance=design.provenance||{};
     intro.append(el("p",`Innehåll: ${provenance.content_review==="reviewed"?"granskat":"granskningsstatus saknas"}. Maskinell validering: ${provenance.machine_validation==="passed"?"godkänd":"status saknas"}. Provlagning: ${provenance.cooking_test==="not_cooked"?"inte genomförd":provenance.cooking_test||"underlag saknas"}.`,"recipe-quality-note"));
     if(design.equipment?.length)intro.append(el("p",`Utrustning: ${design.equipment.join(", ")}.`));out.append(intro);

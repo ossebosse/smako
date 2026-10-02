@@ -167,6 +167,25 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     expect(card).to_contain_text("efter steg 1")
     assert card.locator(".recipe-component").count() == 3
     assert page.evaluate("SmakoRecipes.ingredientCount(window.testRecipe)") == 4
+    rendered = page.evaluate("""() => {
+      const demands=['färs','potatis','yoghurt','vitlök'].map((name,index)=>({name,source:'slot1',demand_key:String(index),quantity:100,original_quantity:100}));
+      const personal={remaining_demands:demands,allocations:[{demand_key:'0',quantity:100},{demand_key:'1',quantity:25}],checks:{}};
+      const counts=SmakoRecipes.renderRecipe(testRecipe,{personal,slotId:'slot1'}).textContent;
+      personal.remaining_demands[0].quantity=0;
+      const consumed=SmakoRecipes.renderRecipe(testRecipe,{personal,slotId:'slot1'}).textContent;
+      const unknown=SmakoRecipes.renderRecipe(testRecipe,{nutrition:{status:'NOT_REQUESTED',values:{protein_g:null,kcal:null,fat_g:null,carbs_g:null},sources:[{quantity:null}]}}).textContent;
+      const knownZero=SmakoRecipes.renderRecipe(testRecipe,{nutrition:{status:'ESTIMATED',values:{protein_g:0}}}).textContent;
+      return {counts,consumed,unknown,knownZero};
+    }""")
+    assert "4 ingredienser: 3 behöver köpas och 1 finns helt hemma" in rendered["counts"]
+    assert "Av de 3 som behöver köpas finns 1 redan delvis hemma" in rendered["counts"]
+    assert "finns helt hemma" not in rendered["consumed"] and "bokförts som förbrukat" in rendered["consumed"]
+    assert "inte beräknad – inget näringsmål valt" in rendered["unknown"]
+    assert "Saknade näringsvärden är okända" in rendered["unknown"]
+    assert "0 g protein" not in rendered["unknown"] and "0 kcal" not in rendered["unknown"]
+    assert "Ingrediens: okänd" in rendered["unknown"]
+    assert "Källstatus okänd" in rendered["unknown"] and "Spårbar uppskattning" not in rendered["unknown"]
+    assert "0 g protein" in rendered["knownZero"]
     page.evaluate("""() => {
       const node=SmakoRecipes.financials({optimized_basket:{total:123.45,verification_status:'VERIFIED'},personal:{allocations:[{name:'Ris',quantity:100,unit:'g'}],checks:{used_ingredient_cost:null,new_purchase_used_cost:100,used_cost_basis:{quantity_status:'VERIFIED',description:'Kostnadsfördelning, utan avdrag på betalningen.'}}}});
       node.id='contract-financials';document.body.append(node);

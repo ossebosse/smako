@@ -6,7 +6,7 @@
 
   const money = (v) => `${Number(v).toLocaleString("sv-SE", {minimumFractionDigits:2, maximumFractionDigits:2})} kr`;
 
-  const number = (v) => Number(v).toLocaleString("sv-SE", {maximumFractionDigits:2});
+  const number = (v) => v==null||v===""||!Number.isFinite(Number(v))?"okänd":Number(v).toLocaleString("sv-SE", {maximumFractionDigits:2});
 
   const names = {dinner:"Middag", breakfast:"Frukost", snack:"Mellanmål"};
 
