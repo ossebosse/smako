@@ -63,6 +63,20 @@ def test_declarations_map_without_certifying_allergen_absence_or_cooked_yield():
     assert fact({"accreditedTags": [{"code": "EU_ECO_LABEL"}]}).organic is None
     assert fact({"labels": ["eu_ecological"], "nonEkoProduct": False}, "willys").organic is True
     assert fact({"labels": ["eu_ecological"], "nonEkoProduct": True}, "willys").organic is None
+
+
+def test_explicit_frozen_source_form_is_independent_of_flattened_category_and_allergens():
+    raw = {"id": "7340191151833", "name": "Majs", "consumerInformationText": ["Fryst"],
+           "claimReportingInformations": {"description": [{"languageCode": "sv", "value": "Djupfryst"}]},
+           "listOfIngredients": "INGREDIENSER: Majskorn (Ungern)."}
+    f = fact(raw, identity="corn")
+    assert f.product_classification == ("frozen",)
+    evidence = f.field_sources["product_classification"][0]
+    assert evidence["product_id"] == "corn" and evidence["snapshot_id"] == "v2-frozen"
+    assert evidence["raw_fields"]["consumerInformationText"] == ["Fryst"]
+    assert not f.ingredients_complete and not f.allergens_checked
+    assert not fact({"maxStorageTemperature": "-18"}).product_classification
+    assert not fact({"consumerInformationText": ["Frys ej"]}).product_classification
     assert fact({"labels": [], "nonEkoProduct": True}, "hemkop").organic is False
     assert fact({"labels": [], "nonEkoProduct": False}, "hemkop").organic is None
     assert not fact({"energyDeclaration": {"value": "G"}}, "willys").nutrition

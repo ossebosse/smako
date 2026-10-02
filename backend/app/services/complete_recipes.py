@@ -126,7 +126,9 @@ def _requirements_compatible(canonical, requirements, product, fact):
     if ("plain" in requirements and canonical == "jordnötssmör"
             and not plain_peanut_composition(composition)):
         return False
-    if "frozen" in requirements and not re.search(r"fryst|frysta|djupfryst", text + " " + (getattr(product, "category", None) or "").casefold()):
+    if ("frozen" in requirements
+            and not re.search(r"fryst|frysta|djupfryst", text + " " + (getattr(product, "category", None) or "").casefold())
+            and not _retained_classification(product, fact, "frozen")):
         return False
     if "red_split" in requirements:
         if not re.search(r"röd", text + " " + composition) or re.search(r"gröna|svarta|hela", text + " " + composition):
@@ -166,6 +168,21 @@ def _supplier_classification(product, fact, value):
     return False
 
 
+def _retained_classification(product, fact, value):
+    if not fact or value not in getattr(fact, "product_classification", ()):
+        return False
+    provenance = getattr(product, "source_provenance", None)
+    if provenance is None:
+        return False
+    return any(source.get("identity_method") == "hash_verified_retained_product_fields"
+               and source.get("value") == value
+               and source.get("product_id") == product.product_id
+               and source.get("snapshot_id") == provenance.source_snapshot_id
+               and source.get("source") == fact.source
+               and source.get("raw_fields")
+               for source in fact.field_sources.get("product_classification", ()))
+
+
 def _whole_food_identity(canonical, form, product, fact):
     """Whole-product label and declared form, never a substring suggestion.
 
@@ -186,7 +203,7 @@ def _whole_food_identity(canonical, form, product, fact):
     if re.search(r"chips|kex|dipp|buljong|kryddblandning|mariner|smaksatt|nugget|färdigrätt|färdigmat|torrfoder", label):
         return False
     fresh = any(k in category for k in ("frukt", "grönt", "grönsak", "kryddväxt")) or bool(re.search(r"klass [12]|färsk|kruka|knippe", label))
-    frozen = bool(re.search(r"fryst|frysta|djupfryst", label + " " + category))
+    frozen = bool(re.search(r"fryst|frysta|djupfryst", label + " " + category)) or _retained_classification(product, fact, "frozen")
     herbs = {"dill": r"dill", "persilja": r"(?:persilja|bladpersilja)", "basilika": r"basilika", "koriander": r"koriander", "grönmynta": r"grönmynta"}
     common = r"(?:eko|ekologisk|ekologiskt|ekologiska|svensk|svenska|sverige|klass [12]|krav|färsk|färska|fryst|frysta|djupfryst|djupfrysta|finhackad|hackad|i ask|i påse|påse|kruka|i kruka|knippe|i knippe|blad|krus|hel|hela|skivad|skivade)"
     def simple(pattern, extra=""):

@@ -247,6 +247,23 @@ def test_supplier_classification_is_bound_to_product_snapshot_and_package():
     assert not _requirements_compatible("linser", ["red_split"], product, fact)
 
 
+def test_source_frozen_corn_qualifies_without_category_guess_and_rejects_mixed_food():
+    from app.services.personal_source_facts import project_raw_facts
+    f = project_raw_facts({"id": "gtin", "consumerInformationText": ["Fryst"],
+            "listOfIngredients": "INGREDIENSER: Majskorn (Ungern)."}, chain="coop", product_id="corn",
+        snapshot_id="snapshot", source_reference="coop:raw:verified-hash")
+    recipe = SimpleNamespace(design=True, preparation=SimpleNamespace(input_forms={"majs": "as_sold"}),
+        ingredients=[SimpleNamespace(name="majs", product_requirements=("frozen", "plain"))])
+    product = SimpleNamespace(name="Majs", product_id="corn", category="Grönsaker", purchase_terms=None,
+        source_provenance=SimpleNamespace(source_snapshot_id="snapshot"))
+    assert product_form_compatible(recipe, "majs", product, f)
+    product.name = "Ärtor Majs Paprika"
+    assert not product_form_compatible(recipe, "majs", product, f)
+    product.name = "Majs"
+    product.source_provenance.source_snapshot_id = "different-snapshot"
+    assert not product_form_compatible(recipe, "majs", product, f)
+
+
 def test_resolution_cache_separates_texture_requirements():
     from app.models.personal import TasteProfile
     from app.services.personal_planner import PersonalPlanner

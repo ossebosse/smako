@@ -20,7 +20,7 @@ from threading import RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v6-official-declarations"
+FACTS_VERSION = "retained-catalog-facts-v7-explicit-culinary-form"
 _CACHE = {}
 _LOCK = RLock()
 
@@ -130,6 +130,18 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         conflicts.append("animal")
     if chain in {"willys", "hemkop"} and positive and negative:
         conflicts.append("organic")
+    frozen_fields = {}
+    if chain == "coop":
+        # Exact positive retailer declarations, not an inferred flattened
+        # category or a storage temperature shared by unrelated foods.
+        consumer = raw.get("consumerInformationText", ())
+        if isinstance(consumer, list) and any(isinstance(v, str) and v.strip().casefold() in {"fryst", "frysta", "djupfryst", "djupfrysta"} for v in consumer):
+            frozen_fields["consumerInformationText"] = consumer
+        claims = raw.get("claimReportingInformations", {})
+        descriptions = claims.get("description", ()) if isinstance(claims, dict) else ()
+        if isinstance(descriptions, list) and any(isinstance(v, dict) and v.get("languageCode") == "sv"
+                and str(v.get("value", "")).strip().casefold() in {"fryst", "frysta", "djupfryst", "djupfrysta"} for v in descriptions):
+            frozen_fields["claimReportingInformations.description"] = descriptions
     # A complete ingredient string is useful for positive conflicts; it is NOT
     # an exhaustive proof of allergen absence or compound-product suitability.
     fact = ProductFacts(
@@ -137,6 +149,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         source_product_id=product_id,
         source_snapshot_id=snapshot_id,
         retailer_product_id=str(raw.get("id") if chain == "coop" else raw.get("code") or ""),
+        product_classification=("frozen",) if frozen_fields else (),
         ingredients_complete=False,
         ingredients=(ingredients,) if isinstance(ingredients, str) and ingredients.strip() else (),
         organic=organic,
@@ -174,6 +187,8 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
     }
     return replace(
         fact, field_sources={**{k: (dict(evidence),) for k, v in fields.items() if v is not None},
+                            **({"product_classification": ({**evidence, "value": "frozen", "raw_fields": frozen_fields,
+                                "identity_method": "hash_verified_retained_product_fields"},)} if frozen_fields else {}),
                             **({"nutrition_limits": tuple({**evidence, **r} for r in limits)}
                                if limits else {})}
     )
