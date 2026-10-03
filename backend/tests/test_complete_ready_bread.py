@@ -142,6 +142,19 @@ def test_ready_does_not_mean_frozen_raw_dry_or_allergen_safe():
     assert not product_form_compatible(r, "bröd", p, f)
 
 
+@pytest.mark.parametrize("name", ["Rostbröd", "Bröd Varsågod Skivad"])
+@pytest.mark.parametrize("source_field", ["consumerInformationText", "claimReportingInformations"])
+def test_explicit_frozen_evidence_vetoes_both_bread_identity_paths(name, source_field):
+    raw = raw_bread()
+    raw["name"] = name
+    raw[source_field] = (["Fryst"] if source_field == "consumerInformationText" else
+                         {"description": [{"languageCode": "sv", "value": "Djupfryst"}]})
+    r, p, f = prepared(raw)
+    assert "frozen" in f.product_classification
+    assert "ready_baked_bread" not in f.product_classification
+    assert not product_form_compatible(r, "bröd", p, f)
+
+
 def test_evidence_is_copied_and_allergy_formula_remains_separate():
     raw = raw_bread()
     raw["listOfIngredients"] += " Kan innehålla spår av SESAM."

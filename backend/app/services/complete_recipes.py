@@ -409,6 +409,7 @@ def _whole_food_identity(canonical, form, product, fact):
         return bool(re.fullmatch(r"(?:(?:street|corn|glutenfria|glutenfri) )*(?:tortilla|tortillas|vetetortilla|vetetortillas)(?: original| medium| large| small| fullkorn| vete| majs| soft| mini| wraps| glutenfri| glutenfria| ekologiska| eko)*", label))
     if canonical == "bröd":
         if (form != "as_sold" or _retained_classification(product, fact, "not_ready_plain_bread")
+                or _retained_classification(product, fact, "frozen")
                 or (composition and not plain_bread_composition(composition))):
             return False
         if re.fullmatch(r"(?:bröd|fullkornsbröd|surdegsbröd|rågbröd|formbröd|rostbröd|lantbröd|pitabröd)(?: fullkorn| grovt| ljust| mörkt| skivat| skivor| original| vete| råg| ekologiskt| eko)*", label):
