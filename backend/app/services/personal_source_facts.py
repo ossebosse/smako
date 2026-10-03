@@ -50,10 +50,16 @@ def _coop_bread_form_fields(raw):
         return None
     consumer = raw.get("consumerInformationText", ())
     consumer = [v for v in consumer if isinstance(v, str)] if isinstance(consumer, list) else []
-    context = " ".join([str(raw.get("name", "")), description, *categories, *consumer]).casefold()
+    claims = raw.get("claimReportingInformations")
+    claims = claims.get("description", []) if isinstance(claims, dict) else []
+    claims = claims if isinstance(claims, list) else []
+    claim_text = [r["value"] for r in claims if isinstance(r, dict)
+                  and r.get("languageCode") == "sv" and isinstance(r.get("value"), str)]
+    context = " ".join([str(raw.get("name", "")), description, *categories, *consumer, *claim_text]).casefold()
     fields = {"name": raw.get("name"), "navCategories": deepcopy(raw.get("navCategories", [])),
               "description": description, "listOfIngredients": ingredients,
-              "consumerInformationText": consumer}
+              "consumerInformationText": consumer,
+              "claimReportingInformations.description": deepcopy(claims)}
     # A ready-to-eat statement conditional on baking/thawing is not proof of
     # the as-sold form. Negative preparation information wins over a positive.
     if re.search(r"\b(?:baka|bakas|grädda|gräddas|gräddning|ugn|halvgrädd\w*|förgrädd\w*|"

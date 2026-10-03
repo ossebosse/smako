@@ -155,6 +155,25 @@ def test_explicit_frozen_evidence_vetoes_both_bread_identity_paths(name, source_
     assert not product_form_compatible(r, "bröd", p, f)
 
 
+@pytest.mark.parametrize("name", ["Rostbröd", "Bröd Varsågod Skivad"])
+@pytest.mark.parametrize("text", ["Halvgräddat", "Gräddas före servering"])
+@pytest.mark.parametrize("source_field", ["consumerInformationText", "claimReportingInformations"])
+def test_mandatory_preparation_in_each_retained_text_field_vetoes_ready_claim(name, text, source_field):
+    raw = raw_bread()
+    raw["name"] = name
+    raw[source_field] = ([text] if source_field == "consumerInformationText" else
+                         {"description": [{"languageCode": "sv", "value": text}]})
+    r, p, f = prepared(raw)
+    assert "not_ready_plain_bread" in f.product_classification
+    assert "ready_baked_bread" not in f.product_classification
+    assert not product_form_compatible(r, "bröd", p, f)
+    proof = f.field_sources["product_classification"][0]["raw_fields"]
+    if source_field == "claimReportingInformations":
+        assert proof["claimReportingInformations.description"] == raw[source_field]["description"]
+    else:
+        assert proof[source_field] == [text]
+
+
 def test_evidence_is_copied_and_allergy_formula_remains_separate():
     raw = raw_bread()
     raw["listOfIngredients"] += " Kan innehålla spår av SESAM."
