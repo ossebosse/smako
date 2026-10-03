@@ -42,6 +42,7 @@ from app.services.price_universe import (
     canonical_requirement_items,
 )
 from app.services.recipe_candidate_validator import recipe_id
+from app.services.recipe_computation_cache import RecipeComputationCache
 from app.services.recipe_profile import RecipeProfileBuilder
 from app.services.stable_candidate_pool import stratified_candidate_shortlist
 
@@ -841,11 +842,13 @@ class MenuOptimizer:
         start = len(trace)
         exhausted = {}
         evaluation_cache = {}
+        recipe_ids = RecipeComputationCache()
         try:
             return self._optimize_slots(
                 candidates_by_slot, evaluate=evaluate, accepts=accepts, score=score,
                 beam_width=beam_width, search_trace=trace, state_identity=state_identity,
-                _exhaustion=exhausted, _attempt_number=1, _evaluation_cache=evaluation_cache, decision_observer=decision_observer,
+                _exhaustion=exhausted, _attempt_number=1, _evaluation_cache=evaluation_cache,
+                _recipe_ids=recipe_ids, decision_observer=decision_observer,
             )
         except (IncompleteBasketError, ValueError):
             pruned_different_states = any(
@@ -858,12 +861,13 @@ class MenuOptimizer:
             return self._optimize_slots(
                 candidates_by_slot, evaluate=evaluate, accepts=accepts, score=score,
                 beam_width=fallback_beam_width, search_trace=trace, state_identity=state_identity,
-                _exhaustion={}, _attempt_number=2, _evaluation_cache=evaluation_cache, decision_observer=decision_observer,
+                _exhaustion={}, _attempt_number=2, _evaluation_cache=evaluation_cache,
+                _recipe_ids=recipe_ids, decision_observer=decision_observer,
             )
 
     def _optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
                         search_trace=None, state_identity=None, _exhaustion=None, _attempt_number=1,
-                        _evaluation_cache=None, decision_observer=None):
+                        _evaluation_cache=None, _recipe_ids=None, decision_observer=None):
         """Use the same complete-basket search discipline for typed meal slots.
 
         ``evaluate`` aggregates ALL meal types, explicit extras and allocated stock
@@ -872,6 +876,7 @@ class MenuOptimizer:
         """
         states = [([], None)]
         cache = _evaluation_cache if _evaluation_cache is not None else {}
+        recipe_ids = _recipe_ids if _recipe_ids is not None else RecipeComputationCache()
         for index, options in enumerate(candidates_by_slot):
             errors = []
             trace = {"depth": index + 1, "attempt": _attempt_number, "beam_width": beam_width,
@@ -891,7 +896,7 @@ class MenuOptimizer:
                         if decision_observer:
                             decision_observer(slots, "constraints_rejected", depth=index+1)
                         continue
-                    key = tuple((s.id, recipe_id(s.recipe) if s.recipe else None) for s in slots)
+                    key = tuple((s.id, recipe_ids.get(s.recipe, recipe_id) if s.recipe else None) for s in slots)
                     try:
                         if key not in cache:
                             trace["evaluations_executed"] += 1
@@ -939,11 +944,17 @@ class MenuOptimizer:
             return [], evaluate([], final=True)
         return min(states, key=lambda state: score(*state))
 
-    def accepts_recipes(self, recipes, constraints):
+    def accepts_recipes(self, recipes, constraints, *, profile_cache=None):
         classified = []
+        # Custom/injected normalizers and optimizer subclasses may be stateful;
+        # retain their previous call behavior, just like custom price calculators.
+        reuse_profile = (profile_cache is not None and type(self) is MenuOptimizer
+                         and type(self.normalizer) is IngredientNormalizer)
         for recipe in recipes:
             family, primary, carb, method, form = self._classify(recipe, constraints)
-            classified.append(_Candidate(recipe=recipe, profile=self._profile(recipe),
+            profile = (profile_cache.get(recipe, self._profile) if reuse_profile
+                       else self._profile(recipe))
+            classified.append(_Candidate(recipe=recipe, profile=profile,
                 verification_rank=0, individual_total=Decimal(0), family=family,
                 primary_ingredient=primary, carbohydrate=carb, cooking_method=method, dish_form=form))
         return self._satisfies_diversity(classified, constraints)

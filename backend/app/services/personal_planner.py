@@ -54,6 +54,7 @@ from app.services.personal_store import available_items, consumed_demands, deman
 from app.services.product_search import ProductSearchRequest
 from app.services.recipe_candidate_generator import DeterministicRecipeCandidateGenerator
 from app.services.recipe_candidate_validator import recipe_id
+from app.services.recipe_computation_cache import RecipeComputationCache, recipe_value
 from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
@@ -78,11 +79,7 @@ def timed_stage(name):
 # Exact recipe value, including preparation and unrounded ingredient quantities.
 # Recipe's nested lists are mutable, so object ID/name alone is not a safe key.
 def _recipe_value(recipe):
-    if recipe is None:
-        return None
-    return (recipe.name, recipe.servings, tuple(recipe.ingredients), tuple(recipe.instructions),
-            recipe.preparation.model_dump_json() if recipe.preparation else None,
-            recipe.design.model_dump_json() if getattr(recipe, "design", None) else None)
+    return recipe_value(recipe)
 
 
 def personal_policy_request(request, dinner_count):
@@ -217,6 +214,7 @@ class PersonalPlanner:
         self.nutrition_cache = {}
         self.slot_nutrition_cache = {}
         self.clean_recipe_cache = {}
+        self.recipe_computations = RecipeComputationCache()
         self.queries = {}
         from app.services.planning_diagnostics import PlanningDiagnostics
 
@@ -611,19 +609,20 @@ class PersonalPlanner:
         return candidates
 
     def clean_recipe(self, recipe, meal):
+        # Request-local only. Source facts, stock and store view do not change
+        # during this planner. Full recipe content includes preparation version,
+        # units and quantities; meal policy and pricing opt-ins remain distinct.
+        cache_key = (recipe_value(recipe), meal.model_dump_json(),
+                     self.spec.profile.model_dump_json(), self.spec.organic_animals,
+                     tuple(self.request.avoid_ingredients), self.request.purchase_planning_mode,
+                     self.user.cache_identity,
+                     self.request.recipe_preferences.model_dump_json() if self.request.recipe_preferences else None)
+        if cache_key in self.clean_recipe_cache:
+            return self.clean_recipe_cache[cache_key]
         if self.complete and meal.meal_type == "dinner":
             from app.services.complete_recipes import matches_preferences
             if not matches_preferences(recipe, self.request.recipe_preferences):
                 raise PolicyConflict("Receptet uppfyller inte val av matkök, ingrediensantal, tid eller anpassning. Välj ett kvalificerat alternativ.", code="RECIPE_CHOICES_CONFLICT")
-        # Request-local only. Source facts, stock and store view do not change
-        # during this planner. Full recipe content includes preparation version,
-        # units and quantities; meal policy and pricing opt-ins remain distinct.
-        cache_key = (recipe.model_dump_json(), meal.model_dump_json(),
-                     self.spec.profile.model_dump_json(), self.spec.organic_animals,
-                     tuple(self.request.avoid_ingredients), self.request.purchase_planning_mode,
-                     self.user.cache_identity)
-        if cache_key in self.clean_recipe_cache:
-            return self.clean_recipe_cache[cache_key]
         # Never trust a caller/LLM supplied canonical identity over the visible ingredient.
         recipe = Recipe.model_validate(
             {
@@ -658,6 +657,12 @@ class PersonalPlanner:
             self.clean_recipe_cache.clear()
         self.clean_recipe_cache[cache_key] = recipe
         return recipe
+
+    def _recipe_id(self, recipe):
+        return self.recipe_computations.get(recipe, recipe_id)
+
+    def _protein_category(self, recipe):
+        return self.recipe_computations.get(recipe, protein_category)
 
     def _need_rows(self, slots):
         rows = []
@@ -1630,7 +1635,7 @@ class PersonalPlanner:
             else "NOT_REQUESTED",
             "organic_definition": "Minst X % av matinköpets varukostnad ska vara verifierat ekologisk.",
             "distribution": [
-                {"meal_type": s.meal_type, "slot_id": s.id, "protein": protein_category(s.recipe)}
+                {"meal_type": s.meal_type, "slot_id": s.id, "protein": self._protein_category(s.recipe)}
                 for s in slots
                 if s.recipe
             ],
@@ -1670,7 +1675,7 @@ class PersonalPlanner:
                     )
                 )
             weight = (
-                self.cooked_weights.get(recipe_id(slot.recipe))
+                self.cooked_weights.get(self._recipe_id(slot.recipe))
                 if limits.min_weight_g is not None or limits.max_weight_g is not None
                 else None
             )
@@ -1860,7 +1865,7 @@ class PersonalPlanner:
                                 }
                             )
                 if limits.min_weight_g is not None or limits.max_weight_g is not None:
-                    weight = self.cooked_weights.get(recipe_id(slot.recipe))
+                    weight = self.cooked_weights.get(self._recipe_id(slot.recipe))
                     if (
                         not weight
                         or not weight.get("source")
@@ -2152,7 +2157,7 @@ class PersonalPlanner:
                 choices = [
                     r
                     for r in pools[slot.meal_type]
-                    if not slot.recipe or recipe_id(r) != recipe_id(slot.recipe)
+                    if not slot.recipe or self._recipe_id(r) != self._recipe_id(slot.recipe)
                     if not (self.complete and slot.recipe and slot.recipe.design and r.design
                             and slot.recipe.design.base_id == r.design.base_id)
                 ]
@@ -2166,7 +2171,7 @@ class PersonalPlanner:
                 options.append([slot])
         dinner_pool = list(
             {
-                recipe_id(s.recipe): s.recipe
+                self._recipe_id(s.recipe): s.recipe
                 for group in options
                 for s in group
                 if s.meal_type == "dinner" and s.recipe
@@ -2210,11 +2215,12 @@ class PersonalPlanner:
         draft = any(not group[0].recipe for group in options if len(group) == 1)
 
         def accepts(chosen, *, final):
-            if not distribution_ok(chosen, self.spec.meals, partial=not final or draft):
+            if not distribution_ok(chosen, self.spec.meals, partial=not final or draft,
+                                   classify=self._protein_category):
                 self.diagnostics.branch(len(chosen), "policy_taste")
                 return False
             dinners = [s.recipe for s in chosen if s.meal_type == "dinner" and s.recipe]
-            if len({recipe_id(r) for r in dinners}) != len(dinners):
+            if len({self._recipe_id(r) for r in dinners}) != len(dinners):
                 self.diagnostics.branch(len(chosen), "variation")
                 return False
             if self.complete and len({r.design.base_id for r in dinners}) != len(dinners):
@@ -2222,7 +2228,8 @@ class PersonalPlanner:
                 return False
             # Repeated breakfasts/snacks are permitted. Dinner variation follows
             # the existing actual ingredient/preparation constraints.
-            accepted = self.service.menu_optimizer.accepts_recipes(dinners, constraints)
+            accepted = self.service.menu_optimizer.accepts_recipes(
+                dinners, constraints, profile_cache=self.recipe_computations)
             if not accepted:
                 self.diagnostics.branch(len(chosen), "variation")
             return accepted
@@ -2291,7 +2298,7 @@ class PersonalPlanner:
                 # Explicit edited schedules and private allocations remain ordered.
                 state_identity=(
                     lambda chosen: tuple(sorted(
-                        (s.meal_type, recipe_id(s.recipe) if s.recipe else "") for s in chosen
+                        (s.meal_type, self._recipe_id(s.recipe) if s.recipe else "") for s in chosen
                     ))
                 ) if generating and not self.items and not self.spec.product_locks else None,
             )

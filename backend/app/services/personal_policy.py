@@ -296,10 +296,10 @@ def protein_category(recipe):
     return "vegetarian"
 
 
-def distribution_ok(slots, meals, *, partial=False):
+def distribution_ok(slots, meals, *, partial=False, classify=protein_category):
     for meal in meals:
         chosen = [s.recipe for s in slots if s.meal_type == meal.meal_type and s.recipe]
-        counts = Counter(protein_category(r) for r in chosen)
+        counts = Counter(classify(r) for r in chosen)
         remaining = meal.count - len(chosen)
         for kind, number in meal.distribution.items():
             if counts[kind] > number or counts[kind] + remaining < number:
