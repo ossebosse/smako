@@ -13,6 +13,7 @@ from dataclasses import replace
 
 from app.models.recipe import Recipe, RecipeIngredient, RecipePreparation
 from app.services.ingredient_normalizer import canonicalize_ingredient_name as canonical
+from app.services.recipe_computation_cache import RecipeComputationCache
 
 VERSION = "smako-edible-input-v1"
 # Culinary design choices in ml per serving, NOT measured oil uptake or yield.
@@ -241,11 +242,16 @@ def basis(recipe):
     }
 
 
-def input_evidence(recipe, product, name, unit, qualified, fact):
+def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache: RecipeComputationCache | None = None):
     """Preserve identity, units, source values and opt-in at the caller."""
     from app.services.nutrition_reference import product_reference, reference_evidence
 
-    if not validate(recipe):
+    # Only the exact recipe's pure preparation validation is reusable. Product
+    # identity, source, input form, units and nutrient qualification below still
+    # run for each input. The planner owns the bounded cache for one request;
+    # its key snapshots mutable recipe lists/forms and every frozen design field.
+    valid_recipe = validate(recipe) if recipe_cache is None else recipe_cache.get(recipe, validate)
+    if not valid_recipe:
         return None
     form = recipe.preparation.input_forms.get(canonical(name))
     if not form or unit not in {"g", "ml"} or (fact and fact.conflicts):

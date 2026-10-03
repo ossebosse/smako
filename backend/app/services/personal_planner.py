@@ -302,7 +302,8 @@ class PersonalPlanner:
             from app.services.recipe_preparation import input_evidence
             if not self.spec.allow_nutrition_estimates or not requested <= {"protein_g", "fat_g", "carbs_g", "kcal"}:
                 return None
-            return input_evidence(recipe, product, name, unit, qualified, fact)
+            return input_evidence(recipe, product, name, unit, qualified, fact,
+                                  recipe_cache=self.recipe_computations)
         from app.services.reviewed_product_nutrition import is_reviewed_raw_thigh
 
         if is_reviewed_raw_thigh(fact):
