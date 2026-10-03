@@ -36,7 +36,7 @@ def complete_request(*, servings=2, cuisines=None, mode='balanced', purchase='es
     return {'postal_code': '22350', 'recipes': 5, 'servings': servings, 'max_stores': 2,
         'memberships': [], 'diversity_mode': mode, 'purchase_planning_mode': purchase,
         'allow_nutrition_estimates': True,
-        'recipe_preferences': {'mode': 'complete', 'cuisines': cuisines or ['greek'],
+        'recipe_preferences': {'mode': 'complete', 'cuisines': ['greek'] if cuisines is None else cuisines,
             'min_ingredients': 10, 'max_ingredients': 15, 'adaptation': 'approved'},
         'personal': {'allow_nutrition_estimates': True, 'meals': [{'meal_type': 'dinner', 'count': 5,
             'servings': servings, 'limits': {'min_protein_g': 0, 'min_carbs_g': 0, 'min_fat_g': 0, 'max_kcal': 4000}}]}}
@@ -50,13 +50,25 @@ def cases():
         'greek-cheapest': complete_request(mode='cheapest'),
         'greek-varied': complete_request(mode='varied'),
         'greek-pantry': complete_request(), 'indian-vegetarian': complete_request(cuisines=['indian']),
+        'mixed-four': complete_request(servings=4, cuisines=['greek', 'mexican']),
+        'mixed-four-time-negative': complete_request(servings=4, cuisines=['greek', 'mexican']),
+        'mixed-vegetarian': complete_request(cuisines=['greek', 'italian', 'indian']),
+        'custom-ingredients': complete_request(cuisines=[]),
+        'products-only': complete_request(), 'onion-exclusion': complete_request(cuisines=[]),
         'choices-time-negative': complete_request(), 'fish-conflict-negative': complete_request(),
         'allergy-negative': complete_request(cuisines=['greek']),
         'channel-negative': complete_request(),
     }
     result['mixed-protein40']['recipe_preferences'].update(min_protein_g=40, max_minutes=40)
-    result['indian-vegetarian']['diet_preference'] = 'vegetarian'
-    result['indian-vegetarian']['personal']['meals'][0]['diet'] = 'vegetarian'
+    result['mixed-four']['recipe_preferences']['max_minutes'] = 45
+    result['mixed-four-time-negative']['recipe_preferences']['max_minutes'] = 40
+    result['custom-ingredients']['recipe_preferences'].update(min_ingredients=12, max_ingredients=13, max_minutes=50)
+    result['products-only']['recipe_preferences']['adaptation'] = 'products'
+    result['onion-exclusion']['recipe_preferences']['allow_fish'] = False
+    result['onion-exclusion']['personal']['profile'] = {'exclusions': ['lök']}
+    for name in ('indian-vegetarian', 'mixed-vegetarian'):
+        result[name]['diet_preference'] = 'vegetarian'
+        result[name]['personal']['meals'][0]['diet'] = 'vegetarian'
     result['choices-time-negative']['recipe_preferences']['max_minutes'] = 10
     result['fish-conflict-negative']['recipe_preferences']['allow_fish'] = False
     result['fish-conflict-negative']['personal']['meals'][0]['distribution'] = {'fish': 1}

@@ -43,3 +43,13 @@ def test_runner_scenarios_are_real_validated_requests_not_product_patches():
         assert not request.personal.slots, name
         assert not request.personal.product_locks, name
         assert not request.personal.extras, name
+
+
+def test_extended_choices_are_explicit_and_do_not_silently_loosen_negative_case():
+    scenarios = cases()
+    assert scenarios['mixed-four']['recipe_preferences']['max_minutes'] == 45
+    assert scenarios['mixed-four-time-negative']['recipe_preferences']['max_minutes'] == 40
+    custom = scenarios['custom-ingredients']['recipe_preferences']
+    assert (custom['min_ingredients'], custom['max_ingredients'], custom['cuisines']) == (12, 13, [])
+    assert scenarios['products-only']['recipe_preferences']['adaptation'] == 'products'
+    assert scenarios['mixed-vegetarian']['personal']['meals'][0]['diet'] == 'vegetarian'

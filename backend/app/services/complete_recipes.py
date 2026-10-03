@@ -97,6 +97,48 @@ def matches_preferences(recipe, preferences):
     return not (preferences.adaptation == "products" and d.variant_id != "base")
 
 
+def validate_content_capacity(preferences, meal, profile, candidates):
+    """Prove only an authored-content shortage, before source qualification.
+
+    Variants cannot supply additional distinct dinners. The library filter and
+    existing hard dietary/exclusion rules are exhaustive for this content check;
+    sufficient content never promises source coverage or a feasible weekly buy.
+    """
+    from app.services.diet_policy import recipe_respects_diet
+    from app.services.recipe_library import candidates as library_candidates
+
+    def eligible(recipes):
+        return [recipe for recipe in recipes if recipe_respects_diet(
+            recipe, preference=meal.diet,
+            avoid_ingredients=profile.exclusions + profile.allergies)]
+
+    available = eligible(candidates)
+    count = len({recipe.design.base_id for recipe in available})
+    if count >= meal.count:
+        return
+    suggestions = []
+    if preferences.max_minutes is not None:
+        without_time = eligible(library_candidates(
+            preferences.model_copy(update={"max_minutes": None}), meal.servings))
+        earliest = {}
+        for recipe in without_time:
+            key = recipe.design.base_id
+            earliest[key] = min(earliest.get(key, float("inf")), recipe.design.estimated_minutes)
+        if len(earliest) >= meal.count:
+            minimum = sorted(earliest.values())[meal.count - 1]
+            suggestions.append(f"Höj högsta tillagningstid till minst {minimum:g} minuter")
+    if count:
+        suggestions.append(f"välj högst {count} middagar")
+    if not suggestions:
+        suggestions.append("Utöka matkök eller ingrediensintervall, eller ändra kostval och uteslutningar uttryckligen")
+    raise PolicyConflict(
+        f"Biblioteket innehåller {count} distinkta grundrätter för {meal.servings} personer "
+        f"med dina val av matkök, ingrediensantal, tid, anpassningar och kost; du har valt {meal.count} middagar. "
+        + ", eller ".join(suggestions) + ". "
+        "Detta är en innehållskontroll före produkt-, närings- och inköpskvalificering; fler kandidater garanterar inte en köpbar meny. Dina krav har inte ändrats.",
+        code="RECIPE_CHOICES_CONFLICT", stage="policy_taste")
+
+
 def product_form_compatible(recipe, name, product, fact):
     """Apply raw/dry/drained boundaries even without a nutrition target.
 

@@ -63,6 +63,53 @@ def test_existing_personal_limits_are_not_lowered_or_opted_in():
     assert request.personal.meals[0].limits.min_protein_g == 40
 
 
+def test_distinct_content_shortage_precedes_product_search_and_suggests_actual_time(monkeypatch):
+    from app.models.personal import TasteProfile
+    from app.services.complete_recipes import validate_content_capacity
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.recipe_library import candidates
+
+    from backend.tests.test_personal_planning_v2 import NOW, prepared, state
+
+    prefs = RecipePreferences(mode="complete", cuisines=["greek", "mexican"], max_minutes=40)
+    meal = MealSettings(count=5, servings=4)
+    recipes = candidates(prefs, 4)
+    assert len(recipes) >= 5  # A variant count would falsely admit this request.
+    with pytest.raises(PolicyConflict) as stopped:
+        validate_content_capacity(prefs, meal, TasteProfile(), recipes)
+    assert stopped.value.code == "RECIPE_CHOICES_CONFLICT"
+    assert "4 distinkta grundrätter" in str(stopped.value)
+    assert "43 minuter" in str(stopped.value)
+    assert "garanterar inte" in str(stopped.value)
+    request = PlanRequest(recipes=5, servings=4, recipe_preferences=prefs)
+    planner = PersonalPlanner(request, Settings(complete_recipes_enabled=True), prepared(), state(), facts={}, now=NOW)
+    def products_must_not_run(*args):
+        raise AssertionError("Content shortage must stop before product qualification")
+    monkeypatch.setattr(planner, "clean_recipe", products_must_not_run)
+    with pytest.raises(PolicyConflict, match="4 distinkta grundrätter"):
+        planner._candidates(planner.spec.meals[0])
+    # Same choices with an explicit larger time allowance pass content checks.
+    wider = prefs.model_copy(update={"max_minutes": 45})
+    validate_content_capacity(wider, meal, TasteProfile(), candidates(wider, 4))
+
+
+def test_content_capacity_honors_merged_diet_and_hard_exclusions():
+    from app.models.personal import TasteProfile
+    from app.services.complete_recipes import validate_content_capacity
+    from app.services.personal_policy import merged_profile
+    from app.services.recipe_library import candidates
+
+    prefs = RecipePreferences(mode="complete", cuisines=["indian"])
+    recipes = candidates(prefs, 2)
+    with pytest.raises(PolicyConflict, match="4 distinkta grundrätter"):
+        validate_content_capacity(prefs, MealSettings(count=5, diet="vegetarian"), TasteProfile(), recipes)
+    merged = merged_profile(TasteProfile(exclusions=["lök"]), TasteProfile(allergies=["mjölk"]))
+    with pytest.raises(PolicyConflict) as stopped:
+        validate_content_capacity(prefs, MealSettings(count=5), merged, recipes)
+    assert stopped.value.stage == "policy_taste"
+    assert "Dina krav har inte ändrats" in str(stopped.value)
+
+
 @pytest.mark.parametrize("name", ["Vitlök pulver", "Torkad vitlök", "Kycklingnuggets", "Marinerad kyckling"])
 def test_raw_product_form_is_guarded_without_requested_nutrition(name):
     ingredient = "vitlök" if "vitlök" in name.casefold() else "kyckling"

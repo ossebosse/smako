@@ -1924,6 +1924,10 @@ class PersonalPlanner:
         valid = []
         local_conflicts = []
         self.diagnostics.pools.append({"meal_type": meal.meal_type, "raw": len(candidates)})
+        if self.complete and meal.meal_type == "dinner" and self.spec.slots is None:
+            from app.services.complete_recipes import validate_content_capacity
+            validate_content_capacity(self.request.recipe_preferences, meal,
+                merged_profile(self.spec.profile, meal.profile), candidates)
         for recipe in candidates:
             self.product_trace.recipe(recipe)
             stage = "policy_taste"
