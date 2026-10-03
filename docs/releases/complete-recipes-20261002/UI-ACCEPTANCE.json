@@ -355,5 +355,151 @@
     "authentic_runner": "scripts/release_verification/complete_recipe_browser.py",
     "synthetic_runner": "frontend/recipes/test_complete_recipes_browser.py",
     "raw_evidence_policy": "Råa rapporter, plansvar och bilder ligger utanför Git i arbetskopians ignorerade .local. Denna rapport innehåller inga cookies, sessionsidentiteter, planåtkomstnycklar eller återkopplings-ID:n."
+  },
+  "later_energy_source_impact_review": {
+    "review_date": "2026-10-03",
+    "evidence_type": "local_read_only_review_of_existing_saved_browser_artifacts",
+    "source_build_id": "recipe-candidate-26ecd5d3-fe953617",
+    "products": {
+      "beef": {
+        "product_id": "236d66dffc0f477cba9cb3d86c1e33df",
+        "gtin": "7392055078800",
+        "description": "Coop nötfärs, motstridig energideklaration"
+      },
+      "toast": {
+        "product_id": "ed6502c4a20a44c9a1aafd0eb2df997c",
+        "gtin": "7300156594488",
+        "description": "Coop rostbröd, motstridig energideklaration"
+      }
+    },
+    "reviewed_revisions": 12,
+    "method": "Sökning efter båda produkt-ID:n och GTIN genom samtliga värden i de tolv sparade plansvaren, med separat bedömning av vald inköpskorg, använda näringskällor och kandidatdiagnostik.",
+    "results": [
+      {
+        "case": "chromium-desktop-public",
+        "revision": 1,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 6,
+          "toast": 0
+        }
+      },
+      {
+        "case": "chromium-desktop-public",
+        "revision": 2,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 4,
+          "toast": 0
+        }
+      },
+      {
+        "case": "chromium-desktop-public",
+        "revision": 3,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 0,
+          "toast": 0
+        }
+      },
+      {
+        "case": "webkit-mobile-personal",
+        "revision": 1,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 6,
+          "toast": 0
+        }
+      },
+      {
+        "case": "webkit-mobile-personal",
+        "revision": 2,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 4,
+          "toast": 0
+        }
+      },
+      {
+        "case": "webkit-mobile-personal",
+        "revision": 3,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 0,
+          "toast": 0
+        }
+      },
+      {
+        "case": "chromium-mobile-public",
+        "revision": 1,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 4,
+          "toast": 0
+        }
+      },
+      {
+        "case": "chromium-mobile-public",
+        "revision": 2,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 4,
+          "toast": 0
+        }
+      },
+      {
+        "case": "chromium-mobile-public",
+        "revision": 3,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 0,
+          "toast": 0
+        }
+      },
+      {
+        "case": "webkit-desktop-personal",
+        "revision": 1,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 6,
+          "toast": 0
+        }
+      },
+      {
+        "case": "webkit-desktop-personal",
+        "revision": 2,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 4,
+          "toast": 0
+        }
+      },
+      {
+        "case": "webkit-desktop-personal",
+        "revision": 3,
+        "selected_purchase_product_matches": 0,
+        "used_nutrition_source_matches": 0,
+        "candidate_diagnostic_matches": {
+          "beef": 0,
+          "toast": 0
+        }
+      }
+    ],
+    "conclusion": "Ingen träff för dessa två produkter i valda inköpsprodukter eller använda näringskällor. Nötfärsen förekommer enbart som prissatt/prövad kandidat i recipe_search för revision 1 och 2 i alla fyra proven. Ingen sådan förekomst i revision 3. Rostbrödet förekommer inte alls.",
+    "diagnostic_interpretation": "Kandidatdiagnostikens retained gäller delberäkningens kandidater och betyder inte att produkten valdes till slutmenyn.",
+    "scope_limit": "Detta är en avgränsad eftergranskning av två identifierade motstridiga deklarationer, inte ett nytt fullflöde eller en ny allmän näringskvalificering. De tidigare UI-, åtkomst-, revisions- och omstartproven behåller sin ursprungliga byggbindning.",
+    "http_requests": 0,
+    "runtime_changes": false
   }
 }
