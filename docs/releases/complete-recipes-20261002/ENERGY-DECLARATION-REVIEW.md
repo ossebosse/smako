@@ -89,8 +89,14 @@ Den blandade 40-g-proteinmenyn ger ett autentiskt delningsbevis som inte använd
 
 ## Fortsatt verifiering
 
+**Slutförd 2026-10-03:** se [slutlig omkvalificering](FINAL-QUALIFICATION.md).
+Samtliga 104 versioner och sju fria menyer har körts om på runtime `17a9c133`.
+De nya 94 kvalificerade versionerna väljer andra giltiga produkter; inget av
+de två motstridiga energiparen används. Denna utrednings tidigare värden
+bevaras som historiskt felunderlag, inte som aktuell näringsacceptans.
+
 Konfliktspärren ska granska de ursprungliga energifälten och deras mängdbas, bevara råbeviset och inte tyst rätta enheterna eller tillåta generisk reservnäring genom en konflikt. En konservativ pargräns är en integritetskontroll, inte en juridisk tolerans eller ett bevis på exakt ekvivalens. Den separata massgränsen får inte appliceras på milliliter utan densitetsunderlag.
 
 Oberoende kodgranskning av `d26983762bb0da6d0dab4842d4daf39493c97fea` fann ingen avvikelse från dessa krav. Den nya versionen `retained-catalog-facts-v8-qualified-energy-pairs` provades dessutom lokalt mot de **verkliga två hashbundna råposterna**: båda förlorade kvalificerbar kcal och fick `nutrition.kcal` plus `nutrition.energy` som konflikt; färsen träffade även massgränsen. Fem extra direkta gränsprov kontrollerade exakt 8 kJ och precis utanför på ursprunglig 10-g-bas, ett normalt 37-kJ/9-kcal-par samt separat gram-/milliliterhantering vid 1 001 kcal. Gränsproven bekräftade avsedd kontroll utan härledning eller korrigering. Kodens tester omfattar även konfliktbevarande genom exakt produktidentitet, leverantörskomplettering och generiska referenser. Denna granskning ersätter inte de återstående normala recept- och menykörningarna.
 
-Efter rättningen krävs ny 104-kvalificering, sju fria menyer och påverkat HTTP-monotoniprov på ett nytt versionsbundet underlag. Historiska planer och rapporter ska bevaras med denna rättelse, inte skrivas om till gissade näringsvärden. Fulla råfiler, plansvar, sessionsuppgifter och arbetsanteckningar ligger utanför Git; denna rapport innehåller endast offentliga produktidentiteter, källhashar och sanerade resultat.
+Vid utredningens första version återstod ny 104-kvalificering, sju fria menyer och påverkat HTTP-monotoniprov på ett nytt versionsbundet underlag. Recept- och menykörningarna är nu slutförda enligt länken ovan; HTTP-omprovet redovisas i sin separata acceptansrapport. Historiska planer och rapporter bevaras med denna rättelse och skrivs inte om till gissade näringsvärden. Fulla råfiler, plansvar, sessionsuppgifter och arbetsanteckningar ligger utanför Git; denna rapport innehåller endast offentliga produktidentiteter, källhashar och sanerade resultat.

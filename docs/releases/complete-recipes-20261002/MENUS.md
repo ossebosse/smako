@@ -1,10 +1,12 @@
 # Autentiska menyer och inköp
 
-Fryst publicerat prisunderlag från 2026-10-02. Beloppen är historiska replayresultat och inga nya prisutfästelser. Fullständiga underlag med källor och receptversioner finns i evidence.json. Dessa är funktionella slutprov under delad acceptanslast; tiderna är inte den isolerade prestandajämförelsen. Alla sju prov använder Balanserad, uppskattade köp och uttryckligt medgivande till näringsuppskattningar.
+Slutruntime `17a9c1330dcc72ff9750a3fa680fa6982f7ed99b`, image `sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35`. Inga runtimekällor monterades in i containern. Energispärr och källbunden brödform var aktiva; gamla feldeklarerade produkter har inte korrigerats eller tvingats in.
+
+Fryst publicerat prisunderlag från 2026-10-02. Beloppen är historiska replayresultat och inga nya prisutfästelser. Fullständiga underlag med källor och receptversioner finns i evidence.json. Dessa funktionella slutprov kördes sekventiellt i nya processer, utan annan plannerlast, på 2 CPU och 3 GiB. Tiderna är separata från den kontrollerade kalla/varma prestandajämförelsen. Alla sju prov använder Balanserad, uppskattade köp och uttryckligt medgivande till näringsuppskattningar.
 
 ## Grekiskt
 
-Inköp **682.23 kr**, 46.94 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
+Inköp **682.23 kr**, 30.83 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
 
 | Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |
 |---|---:|---:|---|---|
@@ -49,14 +51,14 @@ Resterna är planerade mängder och bokförs inte som uppmätt skafferi. Vid avr
 
 ## Indiskt
 
-Inköp **628.95 kr**, 37.69 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
+Inköp **647.95 kr**, 26.31 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
 
 | Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |
 |---|---:|---:|---|---|
 | Krämig spenattofu med ärtor och vitlöksris | 12 | 35 min | 31.59 / 61.90 / 21.51 / 594.34 | ESTIMATED |
 | Röd linsdal med spenat, mjuk tofu och citronris | 13 | 44 min | 37.56 / 85.75 / 15.29 / 663.82 | ESTIMATED |
 | Kryddigt kycklingris med morot, ärtor och gurkraita | 14 | 45 min | 53.48 / 73.51 / 16.47 / 678.94 | ESTIMATED |
-| Färskeema med ärtor, potatis och sval tomatyoghurt | 14 | 40 min | 42.57 / 52.98 / 46.77 / 2280.49 | ESTIMATED |
+| Färskeema med ärtor, potatis och sval tomatyoghurt | 14 | 40 min | 47.67 / 52.98 / 38.27 / 767.49 | ESTIMATED |
 | Yoghurtkryddad kyckling med gurkmejaris och gurksallad | 14 | 40 min | 50.49 / 63.87 / 16.60 / 623.03 | ESTIMATED |
 
 | Inköpsställe / kanal | Produkt | Behov | Köp | Planerad rest | Betala | Villkor / status |
@@ -68,7 +70,7 @@ Inköp **628.95 kr**, 37.69 sekunder. Fem middagar för två personer, högst tv
 | Coop Online Syd / online_fulfillment | Kanel Malen | 1.6 g | 1 × 19 g | 17.4 g | 12.50 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Tomater Krossade | 500 g | 2 × 390 g | 280 g | 15.68 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Morötter | 160 g | 1 × 500 g | 340 g | 9.90 kr | VERIFIED |
-| Coop Online Syd / online_fulfillment | Nötfärs 20% | 340 g | 1 × 500 g | 160 g | 67.50 kr | VERIFIED |
+| Coop Online Syd / online_fulfillment | Nötfärs Naturbeteskött | 340 g | 1 × 500 g | 160 g | 86.50 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Paprikapulver | 3 g | 1 × 37 g | 34 g | 25.50 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Potatis Mjölig | 360 g | 1 × 900 g | 540 g | 16.90 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Rapsolja | 80 ml | 1 × 500 ml | 420 ml | 24.50 kr | VERIFIED |
@@ -91,20 +93,20 @@ Resterna är planerade mängder och bokförs inte som uppmätt skafferi. Vid avr
 
 ## Italienskt
 
-Inköp **647.98 kr**, 40.35 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
+Inköp **651.94 kr**, 28.67 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
 
 | Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |
 |---|---:|---:|---|---|
-| Krämigt svamp- och linsris med spenat och citron | 12 | 45 min | 34.31 / 59.41 / 30.13 / 674.71 | ESTIMATED |
-| Linsragu med selleri, svamp och pasta | 13 | 40 min | 42.93 / 99.86 / 17.83 / 771.41 | ESTIMATED |
-| Spenat- och kesofylld pastagratäng med tomatsås | 12 | 45 min | 47.76 / 68.06 / 23.50 / 690.05 | ESTIMATED |
 | Aubergine- och kikärtsgratäng med tomat och örtcouscous | 12 | 45 min | 36.03 / 78.59 / 24.11 / 721.64 | ESTIMATED |
-| Vit bön- och kålsoppa med bröd, tomat och ost | 12 | 40 min | 33.76 / 85.45 / 18.50 / 1150.25 | ESTIMATED |
+| Spenat- och kesofylld pastagratäng med tomatsås | 12 | 45 min | 47.76 / 68.06 / 23.50 / 690.05 | ESTIMATED |
+| Linsragu med selleri, svamp och pasta | 13 | 40 min | 42.93 / 99.86 / 17.83 / 771.41 | ESTIMATED |
+| Krämigt svamp- och linsris med spenat och citron | 12 | 45 min | 34.31 / 59.41 / 30.13 / 674.71 | ESTIMATED |
+| Vit bön- och kålsoppa med bröd, tomat och ost | 12 | 40 min | 33.64 / 87.25 / 19.46 / 712.25 | ESTIMATED |
 
 | Inköpsställe / kanal | Produkt | Behov | Köp | Planerad rest | Betala | Villkor / status |
 |---|---|---:|---:|---:|---:|---|
 | Coop Online Syd / online_fulfillment | Aubergine | 360 g | 2 × 275 g | 190 g | 33.98 kr | VERIFIED |
-| Coop Online Syd / online_fulfillment | Rostbröd | 120 g | 1 × 700 g | 580 g | 21.55 kr | VERIFIED |
+| Coop Online Syd / online_fulfillment | Bröd Varsågod Skivad | 120 g | 1 × 715 g | 595 g | 25.51 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Vita Bönor Stora | 480 g | 2 × 480 g | 100 g | 35.00 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Champinjoner skivade | 520 g | 2 × 400 g | 280 g | 26.40 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Citronjuice | 64 ml | 1 × 200 ml | 136 ml | 8.99 kr | VERIFIED |
@@ -135,7 +137,7 @@ Resterna är planerade mängder och bokförs inte som uppmätt skafferi. Vid avr
 
 ## Mexikanskt
 
-Inköp **673.87 kr**, 48.40 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
+Inköp **673.87 kr**, 31.57 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
 
 | Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |
 |---|---:|---:|---|---|
@@ -178,7 +180,7 @@ Resterna är planerade mängder och bokförs inte som uppmätt skafferi. Vid avr
 
 ## Grekiskt/mexikanskt, minst 40 g protein och högst 40 minuter
 
-Inköp **738.17 kr**, 122.59 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
+Inköp **738.17 kr**, 76.00 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
 
 | Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |
 |---|---:|---:|---|---|
@@ -224,7 +226,7 @@ Resterna är planerade mängder och bokförs inte som uppmätt skafferi. Vid avr
 
 ## Svenskt
 
-Inköp **730.09 kr**, 44.30 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
+Inköp **734.05 kr**, 30.76 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
 
 | Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |
 |---|---:|---:|---|---|
@@ -232,12 +234,12 @@ Inköp **730.09 kr**, 44.30 sekunder. Fem middagar för två personer, högst tv
 | Senapskyckling med dillpotatis och krämig kålsallad | 12 | 40 min | 39.44 / 60.91 / 46.63 / 855.91 | ESTIMATED |
 | Rotfruktspytt med tofu, senapskräm och varm rödbeta | 13 | 45 min | 34.54 / 64.06 / 28.66 / 683.39 | ESTIMATED |
 | Kål- och färsgryta med potatis och dillig gurkkräm | 13 | 40 min | 42.04 / 55.91 / 47.35 / 841.34 | ESTIMATED |
-| Krämig grön ärt- och bönsoppa med spenat och ostbröd | 13 | 44 min | 38.75 / 82.24 / 30.95 / 1197.29 | ESTIMATED |
+| Krämig grön ärt- och bönsoppa med spenat och ostbröd | 13 | 44 min | 38.65 / 83.74 / 31.75 / 832.29 | ESTIMATED |
 
 | Inköpsställe / kanal | Produkt | Behov | Köp | Planerad rest | Betala | Villkor / status |
 |---|---|---:|---:|---:|---:|---|
 | Coop Online Syd / online_fulfillment | Blandfärs 18% | 340 g | 1 × 500 g | 160 g | 54.95 kr | VERIFIED |
-| Coop Online Syd / online_fulfillment | Rostbröd | 100 g | 1 × 700 g | 600 g | 21.55 kr | VERIFIED |
+| Coop Online Syd / online_fulfillment | Bröd Varsågod Skivad | 100 g | 1 × 715 g | 615 g | 25.51 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Vita Bönor Stora Eko | 400 g | 2 × 380 g | 60 g | 31.00 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Citronjuice | 126 ml | 1 × 200 ml | 74 ml | 8.99 kr | VERIFIED |
 | Coop Online Syd / online_fulfillment | Crème Fraiche 32% | 200 g | 1 × 200 ml | 0 g | 12.95 kr | VERIFIED |
@@ -271,7 +273,7 @@ Resterna är planerade mängder och bokförs inte som uppmätt skafferi. Vid avr
 
 ## Thailändskt
 
-Inköp **638.99 kr**, 47.62 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
+Inköp **638.99 kr**, 30.01 sekunder. Fem middagar för två personer, högst två inköpsställen. Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad.
 
 | Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |
 |---|---:|---:|---|---|

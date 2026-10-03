@@ -3,9 +3,9 @@
   "menus": {
     "greek": {
       "status": "qualified",
-      "seconds": 46.94202623516321,
-      "cpu_seconds": 46.88980949500001,
-      "peak_rss_kib": 1301228,
+      "seconds": 30.8326020790264,
+      "cpu_seconds": 30.768223404999997,
+      "peak_rss_kib": 1382356,
       "request": {
         "recipe_preferences": {
           "mode": "complete",
@@ -101,9 +101,9 @@
       },
       "reason": null,
       "code": null,
-      "evidence_sha256": "85af4e95563c7415944bb6362dbf1143716bf69d1a66d991ceff554e84ee1fdd",
-      "source_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
-      "plan_sha256": "d04ec422bf969c4222ecb62cbe193d2009a6cb0f1057af8350b325c816013f8a",
+      "evidence_sha256": "730aed2b0a5d46cb65cc894884a01ab3f6f9a19d48e75ec4780190b941554810",
+      "source_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "plan_sha256": "18a8238c9cc0de8122368143c431f5ffb63b97ad180d13c63c559eba362d9b2d",
       "plan": {
         "checkout_total": 682.23,
         "purchase_status": "VERIFIED_WITH_ESTIMATES",
@@ -125,8 +125,8 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "kcal": 729.59,
               "fat_g": 31.482,
+              "kcal": 729.59,
               "protein_g": 45.118999999999986,
               "carbs_g": 61.03099999999999
             },
@@ -157,8 +157,8 @@
             "estimated_minutes": 50,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "kcal": 714.0799999999999,
               "fat_g": 23.227000000000004,
+              "kcal": 714.0799999999999,
               "protein_g": 33.67399999999999,
               "carbs_g": 84.70100000000001
             },
@@ -190,8 +190,8 @@
             "estimated_minutes": 35,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "kcal": 753.1399999999999,
               "fat_g": 26.504999999999995,
+              "kcal": 753.1399999999999,
               "protein_g": 33.715,
               "carbs_g": 84.62500000000001
             },
@@ -222,8 +222,8 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "kcal": 715.58,
               "fat_g": 20.91,
+              "kcal": 715.58,
               "protein_g": 34.063,
               "carbs_g": 86.37599999999999
             },
@@ -254,8 +254,8 @@
             "estimated_minutes": 50,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "kcal": 755.4649999999999,
               "fat_g": 24.3205,
+              "kcal": 755.4649999999999,
               "protein_g": 38.608000000000004,
               "carbs_g": 84.04249999999999
             },
@@ -1501,13 +1501,32 @@
           }
         ],
         "optimization": null
+      },
+      "execution_binding": {
+        "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+        "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+        "stage": "candidate-packaged-17a",
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+        "source_mounts": false,
+        "network": "none",
+        "cpus": 2,
+        "memory_gib": 3,
+        "script": "plan_cases.py",
+        "arguments": [
+          "menus-packaged-17a",
+          "greek"
+        ],
+        "script_sha256": "fdf75dc40e04d2653ab4507758fd28c5ac6395715203284b38413324995e7653",
+        "status": "completed",
+        "result_sha256": "730aed2b0a5d46cb65cc894884a01ab3f6f9a19d48e75ec4780190b941554810",
+        "execution_evidence_sha256": "e6310625fd0c768f74ad3f417b2f5533d721a8e553f8ca783bc8df2a188c4c7b"
       }
     },
     "indian": {
       "status": "qualified",
-      "seconds": 37.68928875029087,
-      "cpu_seconds": 37.67497015,
-      "peak_rss_kib": 1300504,
+      "seconds": 26.305524236056954,
+      "cpu_seconds": 26.22378255,
+      "peak_rss_kib": 1383484,
       "request": {
         "recipe_preferences": {
           "mode": "complete",
@@ -1603,17 +1622,17 @@
       },
       "reason": null,
       "code": null,
-      "evidence_sha256": "41a5c5f6142d0adcaabc6f7d841c807cc0e3e0810d351f385195ecb9b7c85bd3",
-      "source_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
-      "plan_sha256": "c942abb3aa835ca8bfdf59a7e9d8e05922655674bfc06c5d2d474fb7655997b8",
+      "evidence_sha256": "6d1e56dac941c1633ff22fb404bd040ec57d37403032ab06092c75856cf1b9dc",
+      "source_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "plan_sha256": "3c0353e82b28608fc437dff3ea19d8d940f98afc22b36b2b9bd2422922df3b4c",
       "plan": {
-        "checkout_total": 628.95,
+        "checkout_total": 647.95,
         "purchase_status": "VERIFIED",
         "checks": {
           "purchase_planning_mode": "estimated",
           "allergy": "NOT_REQUESTED",
-          "new_purchase_used_cost": 333.5,
-          "used_ingredient_cost": 333.5
+          "new_purchase_used_cost": 346.42,
+          "used_ingredient_cost": 346.42
         },
         "recipes": [
           {
@@ -1628,8 +1647,8 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "kcal": 594.34,
-              "protein_g": 31.588999999999995,
               "carbs_g": 61.904,
+              "protein_g": 31.588999999999995,
               "fat_g": 21.514000000000003
             },
             "source_ids": [
@@ -1660,8 +1679,8 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "kcal": 663.8199999999999,
-              "protein_g": 37.55610000000001,
               "carbs_g": 85.74959999999999,
+              "protein_g": 37.55610000000001,
               "fat_g": 15.287999999999998
             },
             "source_ids": [
@@ -1693,8 +1712,8 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "kcal": 678.938,
-              "protein_g": 53.47650000000001,
               "carbs_g": 73.5126,
+              "protein_g": 53.47650000000001,
               "fat_g": 16.467999999999996
             },
             "source_ids": [
@@ -1726,17 +1745,17 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "kcal": 2280.4899999999993,
-              "protein_g": 42.57340000000001,
+              "kcal": 767.49,
               "carbs_g": 52.97999999999999,
-              "fat_g": 46.767999999999994
+              "protein_g": 47.67340000000001,
+              "fat_g": 38.267999999999994
             },
             "source_ids": [
-              "236d66dffc0f477cba9cb3d86c1e33df",
               "2708f6ca8e4342238bdd689a9f7cec10",
               "550d580a666b4950ac1f405f858a6d05",
               "7a52a5d71f014eea8e1ab6c4d677596a",
               "8d9b20dca72d49e1bfbb9b95bbe3b77f",
+              "a4bb1cf3d3024d7c99b4d4829be14d49",
               "c0c3c9afaabc411c8b5fca05bc60a350",
               "c54870b4a74e4be1b9f0d1a37ebbd433",
               "slv:1975",
@@ -1761,8 +1780,8 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "kcal": 623.0250000000001,
-              "protein_g": 50.487100000000005,
               "carbs_g": 63.871599999999994,
+              "protein_g": 50.487100000000005,
               "fat_g": 16.603
             },
             "source_ids": [
@@ -2090,9 +2109,9 @@
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
             "ingredient": "nötfärs [21]",
-            "product_id": "236d66dffc0f477cba9cb3d86c1e33df",
-            "gtin": "7392055078800",
-            "product_name": "Nötfärs 20%",
+            "product_id": "a4bb1cf3d3024d7c99b4d4829be14d49",
+            "gtin": "7300156583260",
+            "product_name": "Nötfärs Naturbeteskött",
             "price_context_type": "online_fulfillment",
             "required_quantity": 340.0,
             "unit": "g",
@@ -2103,7 +2122,7 @@
             "purchased_quantity": 500.0,
             "purchased_usable_quantity": 500.0,
             "waste_quantity": 160.0,
-            "total_price": 67.5,
+            "total_price": 86.5,
             "deposit_total": 0.0,
             "membership_required": false,
             "membership_program": null,
@@ -2127,7 +2146,7 @@
               "semantic_confidence": "high",
               "quantity_confidence": "exact"
             },
-            "price_contract_id": "price-contract:9bb10706f078c3148348c687"
+            "price_contract_id": "price-contract:7d50cdf13341d6c1d4c56409"
           },
           {
             "store": "Coop Online Syd",
@@ -2880,13 +2899,32 @@
           }
         ],
         "optimization": null
+      },
+      "execution_binding": {
+        "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+        "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+        "stage": "candidate-packaged-17a",
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+        "source_mounts": false,
+        "network": "none",
+        "cpus": 2,
+        "memory_gib": 3,
+        "script": "plan_cases.py",
+        "arguments": [
+          "menus-packaged-17a",
+          "indian"
+        ],
+        "script_sha256": "fdf75dc40e04d2653ab4507758fd28c5ac6395715203284b38413324995e7653",
+        "status": "completed",
+        "result_sha256": "6d1e56dac941c1633ff22fb404bd040ec57d37403032ab06092c75856cf1b9dc",
+        "execution_evidence_sha256": "a2b76563f20e5c3f468211cc6c2ba5ee6a695494169c994d585ed8176d75fbc5"
       }
     },
     "italian": {
       "status": "qualified",
-      "seconds": 40.34667220292613,
-      "cpu_seconds": 40.066606799,
-      "peak_rss_kib": 1300540,
+      "seconds": 28.674356695264578,
+      "cpu_seconds": 28.594769119,
+      "peak_rss_kib": 1381068,
       "request": {
         "recipe_preferences": {
           "mode": "complete",
@@ -2982,49 +3020,81 @@
       },
       "reason": null,
       "code": null,
-      "evidence_sha256": "65687de6c18a15b0d0a4446efd7ca09fac8bcbede05777df02bc00f16b4d0163",
-      "source_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
-      "plan_sha256": "910fd0a1005b7312fb05daffc6e6826e23f1b6341002654d8991ed3945b707a3",
+      "evidence_sha256": "82790564cd4416b83fef356193d36c32d7b1a212544a1e79d2d0d9262d43341c",
+      "source_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "plan_sha256": "53416c45e60c5a7e33c1cdb48358b738b3ae9be3d2d50531fd661d6ad19e3ea0",
       "plan": {
-        "checkout_total": 647.98,
+        "checkout_total": 651.94,
         "purchase_status": "VERIFIED_WITH_ESTIMATES",
         "checks": {
           "purchase_planning_mode": "estimated",
           "allergy": "NOT_REQUESTED",
-          "new_purchase_used_cost": 359.83,
-          "used_ingredient_cost": 359.83
+          "new_purchase_used_cost": 360.42,
+          "used_ingredient_cost": 360.42
         },
         "recipes": [
           {
-            "name": "Krämigt svamp- och linsris med spenat och citron",
-            "base_id": "smako-italian-mushroom-risotto",
+            "name": "Aubergine- och kikärtsgratäng med tomat och örtcouscous",
+            "base_id": "smako-italian-aubergine-gratin",
             "version": "1.4.0",
             "variant": "base",
-            "content_sha256": "c56e318378e50f4bed0d45019e56be6f374a1b6e28fd967c1380726692a78e21",
+            "content_sha256": "2b03b721c4afc7ddb2ed587983292e374cfff40076fc27f713b8833e7dfd22ce",
             "servings": 2,
             "ingredients": 12,
             "estimated_minutes": 45,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "protein_g": 34.31,
-              "carbs_g": 59.41,
-              "kcal": 674.7099999999999,
-              "fat_g": 30.134999999999994
+              "carbs_g": 78.595,
+              "protein_g": 36.035,
+              "kcal": 721.64,
+              "fat_g": 24.113
             },
             "source_ids": [
-              "65e85bd3666a47878a6df7620d0522b8",
-              "894085afcdd148748a476fa816587d31",
+              "1ead1b15c9044d2db5c0367ee1793c82",
+              "577242ce60444cf59e6b1208b30186d1",
+              "7a52a5d71f014eea8e1ab6c4d677596a",
               "8d9b20dca72d49e1bfbb9b95bbe3b77f",
-              "b87e8f9c86ed44d5bb5811f502e402ff",
               "c0c3c9afaabc411c8b5fca05bc60a350",
-              "cf33e3677fd54821b7cbc7bc203c6d2a",
-              "d62cf02add594471b13213644db452dc",
+              "ed88161bf1ee4fce98a407c7f7f372b9",
+              "f379b1a61d9942af890a6e1c79f2daa2",
+              "slv:1975",
+              "slv:344",
+              "slv:371",
+              "slv:372",
+              "slv:379",
+              "slv:3815"
+            ]
+          },
+          {
+            "name": "Spenat- och kesofylld pastagratäng med tomatsås",
+            "base_id": "smako-italian-spinach-pasta-bake",
+            "version": "1.4.0",
+            "variant": "base",
+            "content_sha256": "13322902e0447a19c0826a1d3ed490c69865c34e9ee9896514a7ad3e20c214f0",
+            "servings": 2,
+            "ingredients": 12,
+            "estimated_minutes": 45,
+            "nutrition_status": "ESTIMATED",
+            "per_portion": {
+              "carbs_g": 68.05600000000001,
+              "protein_g": 47.756,
+              "kcal": 690.05,
+              "fat_g": 23.499000000000002
+            },
+            "source_ids": [
+              "1ead1b15c9044d2db5c0367ee1793c82",
+              "2035e83ea4c34f4ba23fcc4ecc640c03",
+              "65e85bd3666a47878a6df7620d0522b8",
+              "7a52a5d71f014eea8e1ab6c4d677596a",
+              "8d9b20dca72d49e1bfbb9b95bbe3b77f",
+              "af18591047fc4cb0b346d712cf8dcec7",
+              "c0c3c9afaabc411c8b5fca05bc60a350",
               "f379b1a61d9942af890a6e1c79f2daa2",
               "slv:1975",
               "slv:339",
               "slv:344",
-              "slv:352",
-              "slv:371"
+              "slv:371",
+              "slv:379"
             ]
           },
           {
@@ -3038,8 +3108,8 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "protein_g": 42.934,
               "carbs_g": 99.861,
+              "protein_g": 42.934,
               "kcal": 771.41,
               "fat_g": 17.832
             },
@@ -3061,67 +3131,35 @@
             ]
           },
           {
-            "name": "Spenat- och kesofylld pastagratäng med tomatsås",
-            "base_id": "smako-italian-spinach-pasta-bake",
+            "name": "Krämigt svamp- och linsris med spenat och citron",
+            "base_id": "smako-italian-mushroom-risotto",
             "version": "1.4.0",
             "variant": "base",
-            "content_sha256": "13322902e0447a19c0826a1d3ed490c69865c34e9ee9896514a7ad3e20c214f0",
+            "content_sha256": "c56e318378e50f4bed0d45019e56be6f374a1b6e28fd967c1380726692a78e21",
             "servings": 2,
             "ingredients": 12,
             "estimated_minutes": 45,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "protein_g": 47.756,
-              "carbs_g": 68.05600000000001,
-              "kcal": 690.05,
-              "fat_g": 23.499000000000002
+              "carbs_g": 59.41,
+              "protein_g": 34.31,
+              "kcal": 674.7099999999999,
+              "fat_g": 30.134999999999994
             },
             "source_ids": [
-              "1ead1b15c9044d2db5c0367ee1793c82",
-              "2035e83ea4c34f4ba23fcc4ecc640c03",
               "65e85bd3666a47878a6df7620d0522b8",
-              "7a52a5d71f014eea8e1ab6c4d677596a",
+              "894085afcdd148748a476fa816587d31",
               "8d9b20dca72d49e1bfbb9b95bbe3b77f",
-              "af18591047fc4cb0b346d712cf8dcec7",
+              "b87e8f9c86ed44d5bb5811f502e402ff",
               "c0c3c9afaabc411c8b5fca05bc60a350",
+              "cf33e3677fd54821b7cbc7bc203c6d2a",
+              "d62cf02add594471b13213644db452dc",
               "f379b1a61d9942af890a6e1c79f2daa2",
               "slv:1975",
               "slv:339",
               "slv:344",
-              "slv:371",
-              "slv:379"
-            ]
-          },
-          {
-            "name": "Aubergine- och kikärtsgratäng med tomat och örtcouscous",
-            "base_id": "smako-italian-aubergine-gratin",
-            "version": "1.4.0",
-            "variant": "base",
-            "content_sha256": "2b03b721c4afc7ddb2ed587983292e374cfff40076fc27f713b8833e7dfd22ce",
-            "servings": 2,
-            "ingredients": 12,
-            "estimated_minutes": 45,
-            "nutrition_status": "ESTIMATED",
-            "per_portion": {
-              "protein_g": 36.035,
-              "carbs_g": 78.595,
-              "kcal": 721.64,
-              "fat_g": 24.113
-            },
-            "source_ids": [
-              "1ead1b15c9044d2db5c0367ee1793c82",
-              "577242ce60444cf59e6b1208b30186d1",
-              "7a52a5d71f014eea8e1ab6c4d677596a",
-              "8d9b20dca72d49e1bfbb9b95bbe3b77f",
-              "c0c3c9afaabc411c8b5fca05bc60a350",
-              "ed88161bf1ee4fce98a407c7f7f372b9",
-              "f379b1a61d9942af890a6e1c79f2daa2",
-              "slv:1975",
-              "slv:344",
-              "slv:371",
-              "slv:372",
-              "slv:379",
-              "slv:3815"
+              "slv:352",
+              "slv:371"
             ]
           },
           {
@@ -3135,16 +3173,16 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "protein_g": 33.756,
-              "carbs_g": 85.446,
-              "kcal": 1150.25,
-              "fat_g": 18.499
+              "carbs_g": 87.246,
+              "protein_g": 33.636,
+              "kcal": 712.25,
+              "fat_g": 19.459
             },
             "source_ids": [
               "1ead1b15c9044d2db5c0367ee1793c82",
+              "47655948c20c4766b308ab7e27b28cde",
               "7a52a5d71f014eea8e1ab6c4d677596a",
               "c0c3c9afaabc411c8b5fca05bc60a350",
-              "ed6502c4a20a44c9a1aafd0eb2df997c",
               "f379b1a61d9942af890a6e1c79f2daa2",
               "slv:1975",
               "slv:289",
@@ -3161,7 +3199,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "aubergine [22]",
+            "ingredient": "aubergine [1]",
             "product_id": "f231a8540bfc4347916869e83afdcaef",
             "gtin": "7300156595737",
             "product_name": "Aubergine",
@@ -3205,20 +3243,20 @@
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
             "ingredient": "bröd [27]",
-            "product_id": "ed6502c4a20a44c9a1aafd0eb2df997c",
-            "gtin": "7300156594488",
-            "product_name": "Rostbröd",
+            "product_id": "47655948c20c4766b308ab7e27b28cde",
+            "gtin": "7312200016945",
+            "product_name": "Bröd Varsågod Skivad",
             "price_context_type": "online_fulfillment",
             "required_quantity": 120.0,
             "unit": "g",
             "packages_needed": 1,
-            "package_quantity": 700.0,
+            "package_quantity": 715.0,
             "package_unit": "g",
-            "usable_quantity": 700.0,
-            "purchased_quantity": 700.0,
-            "purchased_usable_quantity": 700.0,
-            "waste_quantity": 580.0,
-            "total_price": 21.55,
+            "usable_quantity": 715.0,
+            "purchased_quantity": 715.0,
+            "purchased_usable_quantity": 715.0,
+            "waste_quantity": 595.0,
+            "total_price": 25.51,
             "deposit_total": 0.0,
             "membership_required": false,
             "membership_program": null,
@@ -3230,7 +3268,7 @@
               "source_provider": "own",
               "source_channel": "catalog",
               "source_snapshot_id": "bfa9ae8ca1d949fab71c157e01f44d1b",
-              "source_observed_at": "2026-10-01T06:24:33.180626Z",
+              "source_observed_at": "2026-10-01T06:24:35.154729Z",
               "source_role": "basket",
               "fallback_used": false,
               "chain": "coop",
@@ -3242,7 +3280,7 @@
               "semantic_confidence": "high",
               "quantity_confidence": "exact"
             },
-            "price_contract_id": "price-contract:42409c8ef0ecf3b848fba55b"
+            "price_contract_id": "price-contract:dade9478ee5c4d444408329c"
           },
           {
             "store": "Coop Online Syd",
@@ -3290,7 +3328,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "champinjoner [3]",
+            "ingredient": "champinjoner [19]",
             "product_id": "d62cf02add594471b13213644db452dc",
             "gtin": "7340191152731",
             "product_name": "Champinjoner skivade",
@@ -3333,7 +3371,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "citronjuice [10]",
+            "ingredient": "citronjuice [12]",
             "product_id": "8d9b20dca72d49e1bfbb9b95bbe3b77f",
             "gtin": "7340191116641",
             "product_name": "Citronjuice",
@@ -3376,7 +3414,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "couscous [24]",
+            "ingredient": "couscous [10]",
             "product_id": "ed88161bf1ee4fce98a407c7f7f372b9",
             "gtin": "7340191142992",
             "product_name": "Couscous Eko",
@@ -3419,7 +3457,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "crème fraiche [9]",
+            "ingredient": "crème fraiche [24]",
             "product_id": "894085afcdd148748a476fa816587d31",
             "gtin": "7310867003803",
             "product_name": "Crème Fraiche 32%",
@@ -3462,7 +3500,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "keso [20]",
+            "ingredient": "keso [15]",
             "product_id": "af18591047fc4cb0b346d712cf8dcec7",
             "gtin": "7310865008060",
             "product_name": "Keso Cottage cheese Naturell 4%",
@@ -3505,7 +3543,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "kikärtor [23]",
+            "ingredient": "kikärtor [2]",
             "product_id": "bd0e6441f87d47f18395e69089c1d8cf",
             "gtin": "7350002402955",
             "product_name": "Kikärtor Eko",
@@ -3548,7 +3586,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "krossade tomater [16]",
+            "ingredient": "krossade tomater [3]",
             "product_id": "7a52a5d71f014eea8e1ab6c4d677596a",
             "gtin": "7340191170407",
             "product_name": "Tomater Krossade",
@@ -3591,7 +3629,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "morot [14]",
+            "ingredient": "morot [20]",
             "product_id": "9c9f625cc897453cb9e5f38e1e612ca7",
             "gtin": "7300156476302",
             "product_name": "Morötter",
@@ -3634,7 +3672,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "oregano [18]",
+            "ingredient": "oregano [7]",
             "product_id": "577242ce60444cf59e6b1208b30186d1",
             "gtin": "7311311014536",
             "product_name": "Oregano",
@@ -3677,7 +3715,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "ost [8]",
+            "ingredient": "ost [9]",
             "product_id": "f379b1a61d9942af890a6e1c79f2daa2",
             "gtin": "7300156598271",
             "product_name": "Hushållsost Skivad",
@@ -3720,7 +3758,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "pasta [19]",
+            "ingredient": "pasta [14]",
             "product_id": "2035e83ea4c34f4ba23fcc4ecc640c03",
             "gtin": "7340191156159",
             "product_name": "Spaghetti",
@@ -3763,7 +3801,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "rapsolja [7]",
+            "ingredient": "rapsolja [8]",
             "product_id": "c0c3c9afaabc411c8b5fca05bc60a350",
             "gtin": "7350002400227",
             "product_name": "Rapsolja",
@@ -3806,7 +3844,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "ris [2]",
+            "ingredient": "ris [23]",
             "product_id": "cf33e3677fd54821b7cbc7bc203c6d2a",
             "gtin": "7350113940285",
             "product_name": "Basmatiris",
@@ -3892,7 +3930,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "spenat [6]",
+            "ingredient": "spenat [16]",
             "product_id": "65e85bd3666a47878a6df7620d0522b8",
             "gtin": "7340191174597",
             "product_name": "Hackad spenat",
@@ -3935,7 +3973,7 @@
           {
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
-            "ingredient": "tomatpuré [17]",
+            "ingredient": "tomatpuré [6]",
             "product_id": "1ead1b15c9044d2db5c0367ee1793c82",
             "gtin": "7340191171503",
             "product_name": "Tomatpuré",
@@ -4064,7 +4102,7 @@
           {
             "store": "Hemköp Lund Brunnshög",
             "store_id": "context:hemkop:3288e04edd97e349",
-            "ingredient": "basilika [21]",
+            "ingredient": "basilika [11]",
             "product_id": "11131aad20094e1caa919225f3b68df3",
             "gtin": null,
             "product_name": "Basilika i Kruka Ekologisk",
@@ -4150,7 +4188,7 @@
           {
             "store": "Hemköp Lund Brunnshög",
             "store_id": "context:hemkop:3288e04edd97e349",
-            "ingredient": "gurka [12]",
+            "ingredient": "gurka [17]",
             "product_id": "d2a19575577245f2ac417dd33a93bda8",
             "gtin": null,
             "product_name": "Gurka Sverige Klass 1",
@@ -4193,7 +4231,7 @@
           {
             "store": "Hemköp Lund Brunnshög",
             "store_id": "context:hemkop:3288e04edd97e349",
-            "ingredient": "linser [1]",
+            "ingredient": "linser [18]",
             "product_id": "b87e8f9c86ed44d5bb5811f502e402ff",
             "gtin": null,
             "product_name": "Röda Linser",
@@ -4236,7 +4274,7 @@
           {
             "store": "Hemköp Lund Brunnshög",
             "store_id": "context:hemkop:3288e04edd97e349",
-            "ingredient": "persilja [11]",
+            "ingredient": "persilja [22]",
             "product_id": "7d4ce9ce1d694921a14f4cc65b9806fa",
             "gtin": null,
             "product_name": "Persilja Krus",
@@ -4279,7 +4317,7 @@
           {
             "store": "Hemköp Lund Brunnshög",
             "store_id": "context:hemkop:3288e04edd97e349",
-            "ingredient": "selleri [15]",
+            "ingredient": "selleri [21]",
             "product_id": "347d94169bef41c59910199648593a00",
             "gtin": null,
             "product_name": "Bladselleri",
@@ -4321,13 +4359,32 @@
           }
         ],
         "optimization": null
+      },
+      "execution_binding": {
+        "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+        "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+        "stage": "candidate-packaged-17a",
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+        "source_mounts": false,
+        "network": "none",
+        "cpus": 2,
+        "memory_gib": 3,
+        "script": "plan_cases.py",
+        "arguments": [
+          "menus-packaged-17a",
+          "italian"
+        ],
+        "script_sha256": "fdf75dc40e04d2653ab4507758fd28c5ac6395715203284b38413324995e7653",
+        "status": "completed",
+        "result_sha256": "82790564cd4416b83fef356193d36c32d7b1a212544a1e79d2d0d9262d43341c",
+        "execution_evidence_sha256": "add5d03825c46f6053cf5d1c4de1a74dbbf9fbeed51f5bead0aedca4856d4a8c"
       }
     },
     "mexican": {
       "status": "qualified",
-      "seconds": 48.40334412408993,
-      "cpu_seconds": 48.35411335799999,
-      "peak_rss_kib": 1299564,
+      "seconds": 31.572157005779445,
+      "cpu_seconds": 30.783190931,
+      "peak_rss_kib": 1380400,
       "request": {
         "recipe_preferences": {
           "mode": "complete",
@@ -4423,9 +4480,9 @@
       },
       "reason": null,
       "code": null,
-      "evidence_sha256": "d0c0bf87a68697cfff1d77f693113357886348447bea55146a19225b99897e93",
-      "source_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
-      "plan_sha256": "f6d2ecc76544e1c487dd55b0125327111433cc6812652f2a7abceea782227e7b",
+      "evidence_sha256": "be4e35258e58608acda59948d3408b83f9eaab33677827e204a8eb722e929492",
+      "source_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "plan_sha256": "5fd525b984e6b287324a46056132c797dfd277dbb125190d88dd046142f3fd9b",
       "plan": {
         "checkout_total": 673.87,
         "purchase_status": "VERIFIED_WITH_ESTIMATES",
@@ -4447,10 +4504,10 @@
             "estimated_minutes": 50,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "fat_g": 27.373,
-              "kcal": 813.0869999999999,
               "protein_g": 35.657500000000006,
-              "carbs_g": 92.867
+              "carbs_g": 92.867,
+              "fat_g": 27.373,
+              "kcal": 813.0869999999999
             },
             "source_ids": [
               "4b63b66e309b43e2afc6dc4ddfc9e65a",
@@ -4481,10 +4538,10 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "fat_g": 15.1965,
-              "kcal": 736.9350000000001,
               "protein_g": 34.27250000000001,
-              "carbs_g": 104.03549999999998
+              "carbs_g": 104.03549999999998,
+              "fat_g": 15.1965,
+              "kcal": 736.9350000000001
             },
             "source_ids": [
               "4b63b66e309b43e2afc6dc4ddfc9e65a",
@@ -4514,10 +4571,10 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "fat_g": 18.336500000000004,
-              "kcal": 661.0649999999999,
               "protein_g": 31.694499999999998,
-              "carbs_g": 83.9675
+              "carbs_g": 83.9675,
+              "fat_g": 18.336500000000004,
+              "kcal": 661.0649999999999
             },
             "source_ids": [
               "1ead1b15c9044d2db5c0367ee1793c82",
@@ -4548,10 +4605,10 @@
             "estimated_minutes": 37,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "fat_g": 33.528999999999996,
-              "kcal": 830.4420000000001,
               "protein_g": 32.581999999999994,
-              "carbs_g": 88.515
+              "carbs_g": 88.515,
+              "fat_g": 33.528999999999996,
+              "kcal": 830.4420000000001
             },
             "source_ids": [
               "4b63b66e309b43e2afc6dc4ddfc9e65a",
@@ -4582,10 +4639,10 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "fat_g": 13.953999999999997,
-              "kcal": 685.085,
               "protein_g": 50.0835,
-              "carbs_g": 81.884
+              "carbs_g": 81.884,
+              "fat_g": 13.953999999999997,
+              "kcal": 685.085
             },
             "source_ids": [
               "4b63b66e309b43e2afc6dc4ddfc9e65a",
@@ -5753,13 +5810,32 @@
           }
         ],
         "optimization": null
+      },
+      "execution_binding": {
+        "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+        "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+        "stage": "candidate-packaged-17a",
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+        "source_mounts": false,
+        "network": "none",
+        "cpus": 2,
+        "memory_gib": 3,
+        "script": "plan_cases.py",
+        "arguments": [
+          "menus-packaged-17a",
+          "mexican"
+        ],
+        "script_sha256": "fdf75dc40e04d2653ab4507758fd28c5ac6395715203284b38413324995e7653",
+        "status": "completed",
+        "result_sha256": "be4e35258e58608acda59948d3408b83f9eaab33677827e204a8eb722e929492",
+        "execution_evidence_sha256": "f38a38426f4e1abcb8509f0f88ac3b21f06532d9a4c497f7361758234844e813"
       }
     },
     "mixed-protein40": {
       "status": "qualified",
-      "seconds": 122.59105743607506,
-      "cpu_seconds": 122.438448024,
-      "peak_rss_kib": 1424792,
+      "seconds": 75.99743757164106,
+      "cpu_seconds": 75.92862620599999,
+      "peak_rss_kib": 1399120,
       "request": {
         "recipe_preferences": {
           "mode": "complete",
@@ -5856,9 +5932,9 @@
       },
       "reason": null,
       "code": null,
-      "evidence_sha256": "f75b6d6a6fb68c9a3b896908bc87a45ee28529d91cd7bb3b1ab9391797d13c16",
-      "source_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
-      "plan_sha256": "efabd43bca38a88330461486f6af0c3b155f85ae01548147214d48bbc8e6d6d0",
+      "evidence_sha256": "55e847a6d5c190782c5e42604f6ff7a38a9ecd799060410c97d193be7c3d497f",
+      "source_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "plan_sha256": "03245b3f2ffa4ea6a0697b7b905f081a5177903b7f2aab2f88411318014fbfad",
       "plan": {
         "checkout_total": 738.17,
         "purchase_status": "VERIFIED_WITH_ESTIMATES",
@@ -5880,10 +5956,10 @@
             "estimated_minutes": 37,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "carbs_g": 97.29,
               "fat_g": 37.909,
-              "protein_g": 40.17199999999999,
-              "kcal": 944.2920000000001
+              "carbs_g": 97.29,
+              "kcal": 944.2920000000001,
+              "protein_g": 40.17199999999999
             },
             "source_ids": [
               "4b63b66e309b43e2afc6dc4ddfc9e65a",
@@ -5914,10 +5990,10 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "carbs_g": 122.62550000000002,
               "fat_g": 15.9665,
-              "protein_g": 43.532500000000006,
-              "kcal": 866.985
+              "carbs_g": 122.62550000000002,
+              "kcal": 866.985,
+              "protein_g": 43.532500000000006
             },
             "source_ids": [
               "4b63b66e309b43e2afc6dc4ddfc9e65a",
@@ -5947,10 +6023,10 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "carbs_g": 78.0725,
               "fat_g": 16.146499999999996,
-              "protein_g": 52.45450000000001,
-              "kcal": 686.715
+              "carbs_g": 78.0725,
+              "kcal": 686.715,
+              "protein_g": 52.45450000000001
             },
             "source_ids": [
               "4b63b66e309b43e2afc6dc4ddfc9e65a",
@@ -5981,10 +6057,10 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "carbs_g": 61.03099999999999,
               "fat_g": 18.221999999999998,
-              "protein_g": 55.489,
-              "kcal": 646.2900000000001
+              "carbs_g": 61.03099999999999,
+              "kcal": 646.2900000000001,
+              "protein_g": 55.489
             },
             "source_ids": [
               "30bebd191da6484ba710dede59254589",
@@ -6013,10 +6089,10 @@
             "estimated_minutes": 35,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "carbs_g": 94.185,
               "fat_g": 32.605,
-              "protein_g": 41.515,
-              "kcal": 885.1399999999999
+              "carbs_g": 94.185,
+              "kcal": 885.1399999999999,
+              "protein_g": 41.515
             },
             "source_ids": [
               "30bebd191da6484ba710dede59254589",
@@ -7285,13 +7361,32 @@
           }
         ],
         "optimization": null
+      },
+      "execution_binding": {
+        "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+        "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+        "stage": "candidate-packaged-17a",
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+        "source_mounts": false,
+        "network": "none",
+        "cpus": 2,
+        "memory_gib": 3,
+        "script": "plan_cases.py",
+        "arguments": [
+          "menus-packaged-17a",
+          "mixed-protein40"
+        ],
+        "script_sha256": "fdf75dc40e04d2653ab4507758fd28c5ac6395715203284b38413324995e7653",
+        "status": "completed",
+        "result_sha256": "55e847a6d5c190782c5e42604f6ff7a38a9ecd799060410c97d193be7c3d497f",
+        "execution_evidence_sha256": "eb73c04fd4118a7c1268d07a15ec6f6d68394b803c80fcd800b8f888c9349ca2"
       }
     },
     "swedish": {
       "status": "qualified",
-      "seconds": 44.29593058954924,
-      "cpu_seconds": 44.252576348999995,
-      "peak_rss_kib": 1300716,
+      "seconds": 30.76013114815578,
+      "cpu_seconds": 30.73385116,
+      "peak_rss_kib": 1382300,
       "request": {
         "recipe_preferences": {
           "mode": "complete",
@@ -7387,17 +7482,17 @@
       },
       "reason": null,
       "code": null,
-      "evidence_sha256": "5e04be01395a620ee43a349fb87a2d7e3f383fb31653c24a11d369eb8c35d5a0",
-      "source_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
-      "plan_sha256": "1f68feda9b9dd6fda6ad558ac6c23dc062e39c4b054335055bd367e94a0e53f5",
+      "evidence_sha256": "84f90f9e4fb3c7c454de63a00b63d51b026251250a4ca04300ae1fe5e997e057",
+      "source_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "plan_sha256": "ecd12dcc4d66e9f847a2868763d02018c28fbd96bfdc9ea7e90be6c02bc640b7",
       "plan": {
-        "checkout_total": 730.09,
+        "checkout_total": 734.05,
         "purchase_status": "VERIFIED_WITH_ESTIMATES",
         "checks": {
           "purchase_planning_mode": "estimated",
           "allergy": "NOT_REQUESTED",
-          "new_purchase_used_cost": 355.12,
-          "used_ingredient_cost": 355.12
+          "new_purchase_used_cost": 355.61,
+          "used_ingredient_cost": 355.61
         },
         "recipes": [
           {
@@ -7411,9 +7506,9 @@
             "estimated_minutes": 45,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
+              "protein_g": 43.18600000000001,
               "kcal": 836.46,
               "carbs_g": 104.97899999999998,
-              "protein_g": 43.18600000000001,
               "fat_g": 22.383999999999997
             },
             "source_ids": [
@@ -7444,9 +7539,9 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
+              "protein_g": 39.437000000000005,
               "kcal": 855.9100000000001,
               "carbs_g": 60.906,
-              "protein_g": 39.437000000000005,
               "fat_g": 46.633
             },
             "source_ids": [
@@ -7476,9 +7571,9 @@
             "estimated_minutes": 45,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
+              "protein_g": 34.535000000000004,
               "kcal": 683.39,
               "carbs_g": 64.065,
-              "protein_g": 34.535000000000004,
               "fat_g": 28.659999999999997
             },
             "source_ids": [
@@ -7509,9 +7604,9 @@
             "estimated_minutes": 40,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
+              "protein_g": 42.039,
               "kcal": 841.34,
               "carbs_g": 55.90500000000001,
-              "protein_g": 42.039,
               "fat_g": 47.35099999999999
             },
             "source_ids": [
@@ -7542,18 +7637,18 @@
             "estimated_minutes": 44,
             "nutrition_status": "ESTIMATED",
             "per_portion": {
-              "kcal": 1197.2899999999997,
-              "carbs_g": 82.24099999999999,
-              "protein_g": 38.751,
-              "fat_g": 30.950000000000003
+              "protein_g": 38.651,
+              "kcal": 832.29,
+              "carbs_g": 83.74099999999999,
+              "fat_g": 31.75
             },
             "source_ids": [
               "1a6923d12e9c4335b74ac756d0729aa1",
+              "47655948c20c4766b308ab7e27b28cde",
               "894085afcdd148748a476fa816587d31",
               "8d9b20dca72d49e1bfbb9b95bbe3b77f",
               "c0c3c9afaabc411c8b5fca05bc60a350",
               "c54870b4a74e4be1b9f0d1a37ebbd433",
-              "ed6502c4a20a44c9a1aafd0eb2df997c",
               "f379b1a61d9942af890a6e1c79f2daa2",
               "slv:1975",
               "slv:291",
@@ -7613,20 +7708,20 @@
             "store": "Coop Online Syd",
             "store_id": "context:coop:23eaae11c9661e68",
             "ingredient": "bröd [28]",
-            "product_id": "ed6502c4a20a44c9a1aafd0eb2df997c",
-            "gtin": "7300156594488",
-            "product_name": "Rostbröd",
+            "product_id": "47655948c20c4766b308ab7e27b28cde",
+            "gtin": "7312200016945",
+            "product_name": "Bröd Varsågod Skivad",
             "price_context_type": "online_fulfillment",
             "required_quantity": 100.0,
             "unit": "g",
             "packages_needed": 1,
-            "package_quantity": 700.0,
+            "package_quantity": 715.0,
             "package_unit": "g",
-            "usable_quantity": 700.0,
-            "purchased_quantity": 700.0,
-            "purchased_usable_quantity": 700.0,
-            "waste_quantity": 600.0,
-            "total_price": 21.55,
+            "usable_quantity": 715.0,
+            "purchased_quantity": 715.0,
+            "purchased_usable_quantity": 715.0,
+            "waste_quantity": 615.0,
+            "total_price": 25.51,
             "deposit_total": 0.0,
             "membership_required": false,
             "membership_program": null,
@@ -7638,7 +7733,7 @@
               "source_provider": "own",
               "source_channel": "catalog",
               "source_snapshot_id": "bfa9ae8ca1d949fab71c157e01f44d1b",
-              "source_observed_at": "2026-10-01T06:24:33.180626Z",
+              "source_observed_at": "2026-10-01T06:24:35.154729Z",
               "source_role": "basket",
               "fallback_used": false,
               "chain": "coop",
@@ -7650,7 +7745,7 @@
               "semantic_confidence": "high",
               "quantity_confidence": "exact"
             },
-            "price_contract_id": "price-contract:42409c8ef0ecf3b848fba55b"
+            "price_contract_id": "price-contract:dade9478ee5c4d444408329c"
           },
           {
             "store": "Coop Online Syd",
@@ -8894,13 +8989,32 @@
           }
         ],
         "optimization": null
+      },
+      "execution_binding": {
+        "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+        "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+        "stage": "candidate-packaged-17a",
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+        "source_mounts": false,
+        "network": "none",
+        "cpus": 2,
+        "memory_gib": 3,
+        "script": "plan_cases.py",
+        "arguments": [
+          "menus-packaged-17a",
+          "swedish"
+        ],
+        "script_sha256": "fdf75dc40e04d2653ab4507758fd28c5ac6395715203284b38413324995e7653",
+        "status": "completed",
+        "result_sha256": "84f90f9e4fb3c7c454de63a00b63d51b026251250a4ca04300ae1fe5e997e057",
+        "execution_evidence_sha256": "a3718dfd90f54804f85deed3f9ee5b989ebb43611b646ce567b47d99cf33b40e"
       }
     },
     "thai": {
       "status": "qualified",
-      "seconds": 47.62404100596905,
-      "cpu_seconds": 47.57848624499999,
-      "peak_rss_kib": 1301212,
+      "seconds": 30.00607232004404,
+      "cpu_seconds": 29.979947240999998,
+      "peak_rss_kib": 1383020,
       "request": {
         "recipe_preferences": {
           "mode": "complete",
@@ -8996,9 +9110,9 @@
       },
       "reason": null,
       "code": null,
-      "evidence_sha256": "def2daefb8b03e7997a941418331ea9eed076c947af04926f5b7c058b0d0c1ee",
-      "source_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
-      "plan_sha256": "b48fd97a91554a95b4daa342361bae883fc26df1c6df28fc5983356ca2e6f23e",
+      "evidence_sha256": "ffb28cf08a956b08915814d8e3a2711056939f7a2ddfa9116850f66734da751f",
+      "source_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "plan_sha256": "e4a39ca9fa4ae6948861f2060131f9bb3c92dbc3d9ad67abeadff8e7c1c08bea",
       "plan": {
         "checkout_total": 638.99,
         "purchase_status": "VERIFIED_WITH_ESTIMATES",
@@ -9021,9 +9135,9 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "carbs_g": 63.96649999999999,
-              "protein_g": 27.335,
+              "fat_g": 22.3425,
               "kcal": 589.5500000000001,
-              "fat_g": 22.3425
+              "protein_g": 27.335
             },
             "source_ids": [
               "2708f6ca8e4342238bdd689a9f7cec10",
@@ -9054,9 +9168,9 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "carbs_g": 66.872,
-              "protein_g": 50.605000000000004,
+              "fat_g": 24.307999999999996,
               "kcal": 709.198,
-              "fat_g": 24.307999999999996
+              "protein_g": 50.605000000000004
             },
             "source_ids": [
               "2708f6ca8e4342238bdd689a9f7cec10",
@@ -9087,9 +9201,9 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "carbs_g": 56.8345,
-              "protein_g": 40.446000000000005,
+              "fat_g": 39.051500000000004,
               "kcal": 773.5600000000001,
-              "fat_g": 39.051500000000004
+              "protein_g": 40.446000000000005
             },
             "source_ids": [
               "2708f6ca8e4342238bdd689a9f7cec10",
@@ -9120,9 +9234,9 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "carbs_g": 59.528000000000006,
-              "protein_g": 62.81200000000002,
+              "fat_g": 32.884,
               "kcal": 809.2620000000001,
-              "fat_g": 32.884
+              "protein_g": 62.81200000000002
             },
             "source_ids": [
               "2708f6ca8e4342238bdd689a9f7cec10",
@@ -9152,9 +9266,9 @@
             "nutrition_status": "ESTIMATED",
             "per_portion": {
               "carbs_g": 60.62599999999999,
-              "protein_g": 37.122,
+              "fat_g": 43.04900000000001,
               "kcal": 799.1319999999998,
-              "fat_g": 43.04900000000001
+              "protein_g": 37.122
             },
             "source_ids": [
               "2708f6ca8e4342238bdd689a9f7cec10",
@@ -10185,6 +10299,25 @@
           }
         ],
         "optimization": null
+      },
+      "execution_binding": {
+        "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+        "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+        "stage": "candidate-packaged-17a",
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+        "source_mounts": false,
+        "network": "none",
+        "cpus": 2,
+        "memory_gib": 3,
+        "script": "plan_cases.py",
+        "arguments": [
+          "menus-packaged-17a",
+          "thai"
+        ],
+        "script_sha256": "fdf75dc40e04d2653ab4507758fd28c5ac6395715203284b38413324995e7653",
+        "status": "completed",
+        "result_sha256": "ffb28cf08a956b08915814d8e3a2711056939f7a2ddfa9116850f66734da751f",
+        "execution_evidence_sha256": "e4d56d9b7a36168f310e1e47d77b669486576ea267a87798997fd3299e1a669f"
       }
     }
   },
@@ -10216,8 +10349,8 @@
       "purchase_qualification": "performed_by_planner_per_snapshot",
       "nutrition_qualification": "performed_by_planner_per_product_and_user_consent"
     },
-    "source_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
-    "evidence_sha256": "2b6ffbd7da74359d38602ad7a663697dcbb64d8bcc273e35760dee83df46277d",
+    "source_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+    "evidence_sha256": "c46c148b4c2fc5d9174f314ed4024c8ba3cc4291e4cc67847acbae2eb3152a80",
     "by_cuisine": {
       "greek": {
         "base_ids": [
@@ -10445,6 +10578,39 @@
         "qualified_variants": 16,
         "first_stops": []
       }
-    }
+    },
+    "execution_binding": {
+      "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+      "stage": "candidate-packaged-17a",
+      "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+      "source_mounts": false,
+      "network": "none",
+      "cpus": 2,
+      "memory_gib": 3,
+      "script": "qualify_library.py",
+      "arguments": [
+        "qualification-packaged-17a",
+        "estimated"
+      ],
+      "script_sha256": "8bc2feacd7613ccb5b3731e0f57d16713c8885c854de3e2939c17b823c3d5d72",
+      "status": "completed",
+      "result_sha256": "c46c148b4c2fc5d9174f314ed4024c8ba3cc4291e4cc67847acbae2eb3152a80",
+      "execution_evidence_sha256": "ff3db9e90e7f898163a0edde4d7f6fcbf0ee909f520f8e7ed149988b6b8be994"
+    },
+    "qualified_versions": 94,
+    "qualified_base_families": 47,
+    "qualified_originals": 43
+  },
+  "runtime_artifact": {
+    "commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+    "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+    "package_sha256": "d3327b9137d4310707118b5272bc826ed0403ebd6d0c0ab935bb1196efee060a",
+    "facts_version": "retained-catalog-facts-v9-ready-baked-bread",
+    "application_source_bind_mounts": false,
+    "network": "none",
+    "cpus": 2,
+    "memory_gib": 3,
+    "timing_scope": "Sequential fresh-process functional recipe/menu replay with no other planner workload; not a controlled cold/warm performance comparison"
   }
 }
