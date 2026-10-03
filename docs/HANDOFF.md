@@ -1,5 +1,26 @@
 # 2026-10-03: Nästa receptlager – lokal, versionsbunden kandidat
 
+## Pågående slutkontroll 2026-10-03 kl. 10:08
+
+Efter paketet nedan är ren receptberäkningsmemo integrerad som `808a082`.
+Kontrollerad A/B gav identiska hela planer utom tidsfält: kall 171,591 →
+134,079 s, varm 165,582 → 127,943 s. Nytt kontrollprov av gamla publika
+flödet gav 158,501 s kallt mot baseline 328,424 s (−51,74 %), identiska
+recept/ingredienser/korg 168,55 kr. Se `PURE-RECIPE-CACHE-AB.json` och
+`LEGACY-PERFORMANCE.json` i releasemappen. Bred offline-regression på denna
+runtime pågår; 173 riktade tester har passerat.
+
+Bred Varierad-profilering gav samma 583,70-kronorsplan som HTTP-provet men
+visade upprepad ren versionsvalidering på näringsvägen. Separat worktree har
+`de95691` för detta och en oförändrad efterdiagnos pågår. Integrationsworktree
+har `70ee288`: bevara exakt billigare incumbent-korg, återkvalificera den
+under målbegäran och korrigera metadata; åtta adversarialprov och totalt
+139 riktade tester passerar. Dessa två commits är ännu inte integrerade.
+
+**38ee1aa-paketet nedan är verifierad jämförelseversion, inte den slutliga
+uppdaterade leveransen.** Nytt paket/image, slutliga API-/browserprov och
+samtidighetsmätning återstår efter integration. Ingen aktivering eller push.
+
 Arbetet ligger på `feature/complete-recipe-layer`, från den faktiska lokala
 kodbasen `402a5c9` ovanpå den fungerande publika rättningen `74c9077`.
 **Ingen produktionsaktivering eller Git-push är gjord.** Produktionens app
