@@ -42,6 +42,7 @@ p=pathlib.Path({STAGE!r});p.mkdir(exist_ok=True)
 owner=p/'.owner'
 if owner.exists(): assert owner.read_text()=='complete-recipes-20261002'
 else: owner.write_text('complete-recipes-20261002')
+assert not (p/{arm!r}).exists(), 'A staged evaluation arm is immutable; choose a new arm name'
 with tarfile.open(fileobj=io.BytesIO(sys.stdin.buffer.read()),mode='r:gz') as archive:
  for m in archive.getmembers():
   out=(p/m.name).resolve();assert m.isfile() and out.is_relative_to(p)
