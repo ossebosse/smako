@@ -148,7 +148,7 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
         "name": "Testbiffar med potatis och yoghurtsås", "servings": 2,
         "ingredients": [{"name": "Färs", "canonical_name": "färs", "quantity": 400, "unit": "g", "form": "raw_edible", "component": "main"},
                         {"name": "Potatis", "canonical_name": "potatis", "quantity": 500, "unit": "g", "form": "raw_edible", "component": "side"},
-                        {"name": "Yoghurt", "canonical_name": "yoghurt", "quantity": 100, "unit": "g", "form": "as_sold", "component": "sauce"},
+                        {"name": "Yoghurt", "canonical_name": "yoghurt", "quantity": 100, "unit": "g", "form": "as_sold", "component": "sauce", "product_requirements": ["plain", "thick"]},
                         {"name": "Vitlök", "canonical_name": "vitlök", "quantity": 5, "unit": "g", "form": "raw_edible", "component": "main"},
                         {"name": "Vitlök", "canonical_name": "vitlök", "quantity": 5, "unit": "g", "form": "raw_edible", "component": "sauce"},
                         {"name": "Salt", "canonical_name": "salt", "quantity": 2, "unit": "g", "component": "main"}],
@@ -171,6 +171,10 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     expect(card).to_contain_text("4 ingredienser")
     expect(card).to_contain_text("Provlagning: inte genomförd")
     expect(card).to_contain_text("efter steg 1")
+    expect(card).to_contain_text("rå, ätbar mängd")
+    expect(card).to_contain_text("mängd som såld")
+    expect(card).to_contain_text("naturell · tjock yoghurt, 5–10 % fetthalt")
+    expect(card).not_to_contain_text("as_sold")
     assert card.locator(".recipe-component").count() == 3
     assert page.evaluate("SmakoRecipes.ingredientCount(window.testRecipe)") == 4
     ingredient_box = card.locator(".complete-recipe-ingredients").bounding_box()

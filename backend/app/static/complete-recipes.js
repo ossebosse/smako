@@ -2,6 +2,8 @@
 (() => {
   "use strict";
   const cuisines = {greek:"Grekiskt", italian:"Italienskt", mexican:"Mexikanskt", indian:"Indiskt", thai:"Thailändskt", swedish:"Svenskt"};
+  const ingredientForms = {raw_edible:"rå, ätbar mängd",dry:"torr råvara",as_sold:"mängd som såld",cooked_drained:"kokt och avrunnen mängd",preserved_drained:"avrunnen konserverad vara"};
+  const ingredientRequirements = {plain:"naturell",frozen:"fryst",red_split:"röda, delade",ground:"malen",firm:"fast",thick:"tjock yoghurt, 5–10 % fetthalt",white_rice:"vitt ris",white_beans:"vita bönor",pure_juice:"ren juice",dried_leaf:"torkade blad"};
   const number = value => value==null||value===""||!Number.isFinite(Number(value))?"okänd":Number(value).toLocaleString("sv-SE", {maximumFractionDigits:2});
   const storage = {
     get(key) { try { return JSON.parse(sessionStorage.getItem(key) || "null"); } catch (_) { return null; } },
@@ -133,7 +135,7 @@
     const groups=[...componentRows];if((recipe.ingredients||[]).some(i=>!mapped.has(i.component)))groups.push({id:null,name:"Övriga ingredienser"});
     for(const component of groups){const rows=(recipe.ingredients||[]).filter(i=>component.id?i.component===component.id:!mapped.has(i.component));if(!rows.length)continue;
       const group=el("div",null,"recipe-component");group.append(el("h4",component.name));const list=el("ul",null,"recipe-ingredients");
-      for(const row of rows){const item=el("li");item.append(el("span",row.name),el("span",`${number(row.quantity)} ${row.unit}`,"ingredient-amount"));list.append(item);}group.append(list);ingredients.append(group);
+      for(const row of rows){const item=el("li"),name=el("span",row.name);const basis=[ingredientForms[row.form],...(row.product_requirements||[]).map(key=>ingredientRequirements[key])].filter(Boolean);if(basis.length)name.append(el("small",basis.join(" · "),"recipe-ingredient-form"));item.append(name,el("span",`${number(row.quantity)} ${row.unit}`,"ingredient-amount"));list.append(item);}group.append(list);ingredients.append(group);
     }
     ingredients.append(el("p","Mängderna avser receptets använda ingredienser. Samma ingrediens och form räknas en gång även när den används i flera komponenter. Salt, peppar och vatten ingår i listan men inte i det valda antalet.","field-hint"));
     const allocations=(personal?.allocations||[]).filter(a=>slotId && (a.source===slotId||a.slot_id===slotId));
