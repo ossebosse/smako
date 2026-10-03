@@ -28,7 +28,8 @@ if not database.exists():
     shutil.copyfile('/inputs/grocery.sqlite', database)
 os.environ.update(
     GROCERY_DATABASE_URL='sqlite:////state/grocery.sqlite', GROCERY_RAW_SNAPSHOT_ROOT='/inputs/raw',
-    PLAN_STORE_PATH='/state/plans.sqlite', COMPLETE_RECIPES_ENABLED='true',
+    PLAN_STORE_PATH='/state/plans.sqlite',
+    COMPLETE_RECIPES_ENABLED=os.environ.get('SMAKO_REPLAY_COMPLETE_RECIPES', 'true'),
     PRICE_PROVIDER='own', PRICE_UNIVERSE_REQUIRED='true', MEAL_PLAN_STRATEGY='optimized',
     STABLE_CANDIDATE_SEARCH_ENABLED='true', APP_ENV='test',
     ALLOW_PROVIDER_FALLBACK='false', ALLOW_MOCK_FALLBACK='false',

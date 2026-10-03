@@ -100,7 +100,7 @@ def retrieve():
     print(json.dumps({'retrieved_to': str(target)}))
 
 
-def serve(arm, *, stop=False):
+def serve(arm, *, stop=False, feature_disabled=False):
     assert re.fullmatch(r'candidate(?:-[a-z0-9-]+)?', arm)
     name = 'smako-complete-recipes-isolated'
     # Dedicated test container only. Existing application/scheduler containers
@@ -110,6 +110,7 @@ def serve(arm, *, stop=False):
                '--cpus', '2', '--memory', '3g', '--read-only', '--user', '0:0',
                '--tmpfs', '/tmp:rw,size=512m', '-p', '127.0.0.1:18122:8000',
                '-e', 'PYTHON_DOTENV_DISABLED=1', '-e', 'PYTHONPATH=/srv/app/backend:/srv/app',
+               '-e', 'SMAKO_REPLAY_COMPLETE_RECIPES=' + ('false' if feature_disabled else 'true'),
                '-v', STAGE + '/inputs:/inputs:ro', '-v', STAGE + '/browser-state:/state',
                '-v', STAGE + '/results:/results',
                '-v', STAGE + f'/{arm}/backend/app:/srv/app/backend/app:ro',
@@ -133,6 +134,7 @@ if __name__ == '__main__':
     parser.add_argument('action', choices=('stage', 'freeze', 'run', 'retrieve', 'serve', 'stop'))
     parser.add_argument('--arm', default='candidate')
     parser.add_argument('--script', default='benchmark.py')
+    parser.add_argument('--feature-disabled', action='store_true')
     parser.add_argument('arguments', nargs='*')
     args = parser.parse_args()
     if args.action == 'stage':
@@ -142,6 +144,6 @@ if __name__ == '__main__':
     elif args.action == 'run':
         run(args.arm, args.script, args.arguments)
     elif args.action in {'serve', 'stop'}:
-        serve(args.arm, stop=args.action == 'stop')
+        serve(args.arm, stop=args.action == 'stop', feature_disabled=args.feature_disabled)
     else:
         retrieve()
