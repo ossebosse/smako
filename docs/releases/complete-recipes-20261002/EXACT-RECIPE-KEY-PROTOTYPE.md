@@ -40,9 +40,10 @@ medianer. Detta mäter **inte** en användarbegäran, nätanrop eller en hel pla
 | Rent arbete | Tidigare | Prototyp |
 |---|---:|---:|
 | Exakt receptnyckel och hash | 0,194543 s | 0,028255 s |
-| Ordnad formsignatur för samma ingrediens | 2,614448 s | 0,030989 s |
+| Ordnad formsignatur inklusive kanonisering av efterfrågat namn | 2,602999 s | 0,035870 s |
 
 Råmikroprofilen ligger utanför Git i `.local/recipe-key-microbenchmark.json`.
-Nyckelinterneringen och formsignaturerna behöver därefter jämföras med samma
-autentiska fria Varierad-begäran; resultatlikhet ska bedömas före eventuell
-integration och en profilerad diagnostid får inte kallas rent benchmark.
+Nyckelinterneringen och formsignaturerna har därefter jämförts med samma
+autentiska fria Varierad-begäran i [efterprovet](VARIED-EXACT-KEY-RESULT.md).
+Resultatlikhet ska bedömas före eventuell integration och en profilerad
+diagnostid får inte kallas rent benchmark.
