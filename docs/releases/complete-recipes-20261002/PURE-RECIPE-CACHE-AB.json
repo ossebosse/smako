@@ -1,0 +1,551 @@
+{
+  "kind": "controlled before/after pure recipe computation reuse",
+  "price_input_sha256": "1335cbb6680237f5826912f19a1d5c348476089ec3091126cb073c4cc5a643e0",
+  "image_id": "sha256:65670569e3d142e9a58e823a237869a845f3f544b2292880f119e231f0df25e4",
+  "resources": {
+    "cpus": 2,
+    "memory_gib": 3
+  },
+  "network": "none",
+  "concurrent_acceptance_work": false,
+  "request_and_search_limits_unchanged": true,
+  "recipe_library": "1.4.0",
+  "measurement_setting": "benchmark_complete.py Settings defaults; stable_candidate_search_enabled=false in both arms. HTTP acceptance uses true and is reported separately.",
+  "arms": {
+    "before": {
+      "runtime_commit": "38ee1aa5ecbc64045801a4f40f9c0302ed0e4a09",
+      "runtime_bind_mounts": false,
+      "summary_sha256": "5648bee851e039964e32cd5ae6aadb8e07e3a5a5c5aaf03c483fbc5d0af94d7a",
+      "load_seconds": 15.958912806585431,
+      "request": {
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek",
+            "mexican"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "max_minutes": 40,
+          "adaptation": "approved",
+          "min_protein_g": 40.0,
+          "allow_fish": true
+        },
+        "allow_nutrition_estimates": true,
+        "purchase_planning_mode": "estimated",
+        "postal_code": "22350",
+        "recipes": 5,
+        "personal": null,
+        "servings": 2,
+        "max_stores": 2,
+        "use_member_prices": false,
+        "memberships": {},
+        "membership_programs": [],
+        "optimization_iterations": 1,
+        "strategy": null,
+        "candidate_recipe_count": 80,
+        "candidate_search_limit": null,
+        "beam_width": 30,
+        "varied_budget_percent": 25.0,
+        "diversity_mode": "cheapest",
+        "diet_preference": "mixed",
+        "availability_mode": "normal",
+        "avoid_ingredients": [],
+        "max_same_primary_ingredient_meals": 2,
+        "max_same_recipe_family": 2,
+        "max_same_carbohydrate_meals": 3,
+        "max_pairwise_recipe_similarity": 0.7,
+        "max_same_cooking_method_meals": null,
+        "max_same_dish_form_meals": null,
+        "max_pairwise_culinary_similarity": null,
+        "min_kcal_per_serving": 450.0,
+        "max_kcal_per_serving": 900.0,
+        "min_protein_g_per_serving": 18.0,
+        "min_vegetable_g_per_serving": 100.0,
+        "debug": false
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 171.5908261970617,
+          "cpu_seconds": 171.424917177,
+          "peak_rss_kib": 1414320,
+          "total": 738.17,
+          "recipes": [
+            "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+            "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+            "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+            "Citronkyckling med spenatris, feta och gurksallad",
+            "Spenatris med kikärtor, feta och citronyoghurt"
+          ],
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 38759.256,
+              "personal_audit": 2883.93,
+              "personal_candidate_generation": 143.874,
+              "personal_candidate_generation_and_qualification": 22685.875,
+              "personal_nutrition": 14457.117,
+              "personal_package_calculation": 3872.384,
+              "personal_product_facts": 11569.317,
+              "personal_week_search": 131377.579
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 15552,
+                "wall_ms": 38759.256,
+                "cpu_ms": 0.0,
+                "average_ms": 2.492,
+                "max_ms": 941.37
+              },
+              "personal_audit": {
+                "calls": 650,
+                "wall_ms": 2883.93,
+                "cpu_ms": 2882.1,
+                "average_ms": 4.437,
+                "max_ms": 12.145
+              },
+              "personal_candidate_generation": {
+                "calls": 4,
+                "wall_ms": 143.874,
+                "cpu_ms": 143.229,
+                "average_ms": 35.968,
+                "max_ms": 117.036
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 4,
+                "wall_ms": 22685.875,
+                "cpu_ms": 22666.966,
+                "average_ms": 5671.469,
+                "max_ms": 6812.941
+              },
+              "personal_nutrition": {
+                "calls": 31536,
+                "wall_ms": 14457.117,
+                "cpu_ms": 14433.529,
+                "average_ms": 0.458,
+                "max_ms": 28.748
+              },
+              "personal_package_calculation": {
+                "calls": 678,
+                "wall_ms": 3872.384,
+                "cpu_ms": 3867.137,
+                "average_ms": 5.711,
+                "max_ms": 28.863
+              },
+              "personal_product_facts": {
+                "calls": 6,
+                "wall_ms": 11569.317,
+                "cpu_ms": 11543.855,
+                "average_ms": 1928.22,
+                "max_ms": 11569.283
+              },
+              "personal_week_search": {
+                "calls": 2,
+                "wall_ms": 131377.579,
+                "cpu_ms": 131260.342,
+                "average_ms": 65688.789,
+                "max_ms": 103125.307
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 16550,
+              "cache_hits": 1571272,
+              "cache_misses": 13082,
+              "package_cache_hits": 1571272,
+              "package_cache_misses": 13082,
+              "package_calculations": 13082,
+              "product_match_calculations": 4578,
+              "semantic_candidates_returned": 4244,
+              "semantic_comparisons": 4578,
+              "store_combinations": 9269766,
+              "store_combinations_pruned_infeasible": 9242866
+            },
+            "depth_counters": {}
+          }
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 165.58201810810715,
+          "cpu_seconds": 165.431807953,
+          "peak_rss_kib": 1610028,
+          "total": 738.17,
+          "recipes": [
+            "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+            "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+            "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+            "Citronkyckling med spenatris, feta och gurksallad",
+            "Spenatris med kikärtor, feta och citronyoghurt"
+          ],
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 39561.697,
+              "personal_audit": 2875.681,
+              "personal_candidate_generation": 35.73,
+              "personal_candidate_generation_and_qualification": 20947.297,
+              "personal_nutrition": 15455.375,
+              "personal_package_calculation": 3875.775,
+              "personal_product_facts": 5567.441,
+              "personal_week_search": 134321.11
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 15552,
+                "wall_ms": 39561.697,
+                "cpu_ms": 0.0,
+                "average_ms": 2.544,
+                "max_ms": 1221.992
+              },
+              "personal_audit": {
+                "calls": 650,
+                "wall_ms": 2875.681,
+                "cpu_ms": 2873.743,
+                "average_ms": 4.424,
+                "max_ms": 9.375
+              },
+              "personal_candidate_generation": {
+                "calls": 4,
+                "wall_ms": 35.73,
+                "cpu_ms": 35.727,
+                "average_ms": 8.933,
+                "max_ms": 8.958
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 4,
+                "wall_ms": 20947.297,
+                "cpu_ms": 20928.576,
+                "average_ms": 5236.824,
+                "max_ms": 6927.089
+              },
+              "personal_nutrition": {
+                "calls": 31536,
+                "wall_ms": 15455.375,
+                "cpu_ms": 15429.095,
+                "average_ms": 0.49,
+                "max_ms": 929.612
+              },
+              "personal_package_calculation": {
+                "calls": 678,
+                "wall_ms": 3875.775,
+                "cpu_ms": 3872.06,
+                "average_ms": 5.716,
+                "max_ms": 27.121
+              },
+              "personal_product_facts": {
+                "calls": 6,
+                "wall_ms": 5567.441,
+                "cpu_ms": 5563.191,
+                "average_ms": 927.907,
+                "max_ms": 5567.399
+              },
+              "personal_week_search": {
+                "calls": 2,
+                "wall_ms": 134321.11,
+                "cpu_ms": 134197.636,
+                "average_ms": 67160.555,
+                "max_ms": 105011.68
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 16550,
+              "cache_hits": 1571272,
+              "cache_misses": 13082,
+              "package_cache_hits": 1571272,
+              "package_cache_misses": 13082,
+              "package_calculations": 13082,
+              "product_match_calculations": 4578,
+              "semantic_candidates_returned": 4244,
+              "semantic_comparisons": 4578,
+              "store_combinations": 9269766,
+              "store_combinations_pruned_infeasible": 9242866
+            },
+            "depth_counters": {}
+          }
+        }
+      ]
+    },
+    "after": {
+      "runtime_commit": "2abf67cf4715e14e1e879918e2678fe2855a8263",
+      "runtime_bind_mounts": true,
+      "summary_sha256": "f9fe9eea9795c82008fb3e919b413886f9ac2db90ee74e30ce4d341bed12fe8f",
+      "load_seconds": 14.424496947787702,
+      "request": {
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek",
+            "mexican"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "max_minutes": 40,
+          "adaptation": "approved",
+          "min_protein_g": 40.0,
+          "allow_fish": true
+        },
+        "allow_nutrition_estimates": true,
+        "purchase_planning_mode": "estimated",
+        "postal_code": "22350",
+        "recipes": 5,
+        "personal": null,
+        "servings": 2,
+        "max_stores": 2,
+        "use_member_prices": false,
+        "memberships": {},
+        "membership_programs": [],
+        "optimization_iterations": 1,
+        "strategy": null,
+        "candidate_recipe_count": 80,
+        "candidate_search_limit": null,
+        "beam_width": 30,
+        "varied_budget_percent": 25.0,
+        "diversity_mode": "cheapest",
+        "diet_preference": "mixed",
+        "availability_mode": "normal",
+        "avoid_ingredients": [],
+        "max_same_primary_ingredient_meals": 2,
+        "max_same_recipe_family": 2,
+        "max_same_carbohydrate_meals": 3,
+        "max_pairwise_recipe_similarity": 0.7,
+        "max_same_cooking_method_meals": null,
+        "max_same_dish_form_meals": null,
+        "max_pairwise_culinary_similarity": null,
+        "min_kcal_per_serving": 450.0,
+        "max_kcal_per_serving": 900.0,
+        "min_protein_g_per_serving": 18.0,
+        "min_vegetable_g_per_serving": 100.0,
+        "debug": false
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 134.07878955174237,
+          "cpu_seconds": 133.950200916,
+          "peak_rss_kib": 1373116,
+          "total": 738.17,
+          "recipes": [
+            "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+            "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+            "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+            "Citronkyckling med spenatris, feta och gurksallad",
+            "Spenatris med kikärtor, feta och citronyoghurt"
+          ],
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 39123.861,
+              "personal_audit": 2931.936,
+              "personal_candidate_generation": 135.828,
+              "personal_candidate_generation_and_qualification": 21663.542,
+              "personal_nutrition": 11375.839,
+              "personal_package_calculation": 3833.017,
+              "personal_product_facts": 10817.819,
+              "personal_week_search": 97090.029
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 15552,
+                "wall_ms": 39123.861,
+                "cpu_ms": 0.0,
+                "average_ms": 2.516,
+                "max_ms": 1247.985
+              },
+              "personal_audit": {
+                "calls": 650,
+                "wall_ms": 2931.936,
+                "cpu_ms": 2928.687,
+                "average_ms": 4.511,
+                "max_ms": 10.08
+              },
+              "personal_candidate_generation": {
+                "calls": 4,
+                "wall_ms": 135.828,
+                "cpu_ms": 134.685,
+                "average_ms": 33.957,
+                "max_ms": 109.943
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 4,
+                "wall_ms": 21663.542,
+                "cpu_ms": 21640.307,
+                "average_ms": 5415.886,
+                "max_ms": 6594.642
+              },
+              "personal_nutrition": {
+                "calls": 31536,
+                "wall_ms": 11375.839,
+                "cpu_ms": 11353.248,
+                "average_ms": 0.361,
+                "max_ms": 31.451
+              },
+              "personal_package_calculation": {
+                "calls": 678,
+                "wall_ms": 3833.017,
+                "cpu_ms": 3829.602,
+                "average_ms": 5.653,
+                "max_ms": 26.285
+              },
+              "personal_product_facts": {
+                "calls": 6,
+                "wall_ms": 10817.819,
+                "cpu_ms": 10803.585,
+                "average_ms": 1802.97,
+                "max_ms": 10817.792
+              },
+              "personal_week_search": {
+                "calls": 2,
+                "wall_ms": 97090.029,
+                "cpu_ms": 97006.356,
+                "average_ms": 48545.014,
+                "max_ms": 76620.14
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 16550,
+              "cache_hits": 1571272,
+              "cache_misses": 13082,
+              "package_cache_hits": 1571272,
+              "package_cache_misses": 13082,
+              "package_calculations": 13082,
+              "product_match_calculations": 4578,
+              "semantic_candidates_returned": 4244,
+              "semantic_comparisons": 4578,
+              "store_combinations": 9269766,
+              "store_combinations_pruned_infeasible": 9242866
+            },
+            "depth_counters": {}
+          }
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 127.94261645013466,
+          "cpu_seconds": 127.83192530699998,
+          "peak_rss_kib": 1551848,
+          "total": 738.17,
+          "recipes": [
+            "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+            "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+            "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+            "Citronkyckling med spenatris, feta och gurksallad",
+            "Spenatris med kikärtor, feta och citronyoghurt"
+          ],
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 37356.878,
+              "personal_audit": 3780.624,
+              "personal_candidate_generation": 37.127,
+              "personal_candidate_generation_and_qualification": 20558.469,
+              "personal_nutrition": 11143.393,
+              "personal_package_calculation": 3811.178,
+              "personal_product_facts": 5374.154,
+              "personal_week_search": 97454.185
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 15552,
+                "wall_ms": 37356.878,
+                "cpu_ms": 0.0,
+                "average_ms": 2.402,
+                "max_ms": 1033.202
+              },
+              "personal_audit": {
+                "calls": 650,
+                "wall_ms": 3780.624,
+                "cpu_ms": 3777.633,
+                "average_ms": 5.816,
+                "max_ms": 908.446
+              },
+              "personal_candidate_generation": {
+                "calls": 4,
+                "wall_ms": 37.127,
+                "cpu_ms": 37.137,
+                "average_ms": 9.282,
+                "max_ms": 9.949
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 4,
+                "wall_ms": 20558.469,
+                "cpu_ms": 20540.583,
+                "average_ms": 5139.617,
+                "max_ms": 6326.185
+              },
+              "personal_nutrition": {
+                "calls": 31536,
+                "wall_ms": 11143.393,
+                "cpu_ms": 11120.796,
+                "average_ms": 0.353,
+                "max_ms": 35.122
+              },
+              "personal_package_calculation": {
+                "calls": 678,
+                "wall_ms": 3811.178,
+                "cpu_ms": 3806.997,
+                "average_ms": 5.621,
+                "max_ms": 25.908
+              },
+              "personal_product_facts": {
+                "calls": 6,
+                "wall_ms": 5374.154,
+                "cpu_ms": 5369.646,
+                "average_ms": 895.692,
+                "max_ms": 5374.126
+              },
+              "personal_week_search": {
+                "calls": 2,
+                "wall_ms": 97454.185,
+                "cpu_ms": 97369.86,
+                "average_ms": 48727.092,
+                "max_ms": 76507.537
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 16550,
+              "cache_hits": 1571272,
+              "cache_misses": 13082,
+              "package_cache_hits": 1571272,
+              "package_cache_misses": 13082,
+              "package_calculations": 13082,
+              "product_match_calculations": 4578,
+              "semantic_candidates_returned": 4244,
+              "semantic_comparisons": 4578,
+              "store_combinations": 9269766,
+              "store_combinations_pruned_infeasible": 9242866
+            },
+            "depth_counters": {}
+          }
+        }
+      ]
+    }
+  },
+  "comparisons": [
+    {
+      "phase": "cold",
+      "entire_plan_equal_except_measured_timings": true,
+      "operation_counters_identical": true,
+      "before_plan_sha256": "4d816e68402d4fda5283627001cd9420137cc4d8ed728a29e6d2edaa5e71da09",
+      "after_plan_sha256": "d67e9790b9b564af498c5dd93de89a23e36a8502e0583739a8584b0f5024232c",
+      "generation_reduction_percent": 21.861329930446868
+    },
+    {
+      "phase": "warm",
+      "entire_plan_equal_except_measured_timings": true,
+      "operation_counters_identical": true,
+      "before_plan_sha256": "033f591c1c51e75da341262df7208765136e383e684c611ed68c9fd72a7293be",
+      "after_plan_sha256": "d308d31cb7d36457e4a35aa928dc93e2fafe8cfbfefb1041ed451e012bb20ec2",
+      "generation_reduction_percent": 22.73157561915813
+    }
+  ],
+  "integrated_as": "808a082",
+  "targeted_regression": {
+    "runtime_commit": "857266b",
+    "results": {
+      "tests": "173",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "21.070"
+    },
+    "xml_sha256": "d30b4a1d5a14554fda2c0931d07ee7e3787c131c3426dfd8e5f09ff896669206",
+    "ruff": "passed",
+    "compileall": "passed",
+    "external_access": "none"
+  }
+}

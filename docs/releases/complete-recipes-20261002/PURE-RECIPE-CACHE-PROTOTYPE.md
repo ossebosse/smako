@@ -56,3 +56,25 @@ syntetisk fixtures enumfält, inte avvikande resultat.
 Nästa verifiering är samma autentiska breda Varierad-begäran med oförändrat
 fryst prisunderlag, resursnivå, medlemskap och val. Full meny, audit, kostnad,
 ordning och sökdiagnostik behöver jämföras innan eventuell integration.
+
+## Kontrollerad autentisk A/B efter prototypen
+
+Ändringen är nu integrerad som `808a082`. Samma fullständiga begäran,
+frysta prisunderlag, bibliotek 1.4.0, Python-image och 2 CPU/3 GiB:
+
+| Fas | Före (38ee1aa) | Efter (2abf67c) | Förbättring |
+|---|---:|---:|---:|
+| Kall | 171,591 s | 134,079 s | 21,86 % |
+| Varm ny beräkning | 165,582 s | 127,943 s | 22,73 % |
+
+Både kalla och varma planers **hela innehåll är identiskt** när enbart
+uppmätta tidsfält undantas. Inköp 738,17 kr, samma receptversioner,
+produkter, mängder, näring, audit och sökdiagnostik. Även operationernas
+räknare är identiska; sökbredd och sökbudget minskades inte.
+
+Före använder exakt verifierad paketimage utan runtimebindningar. Efter
+använder samma image/interpreter med prototypens källfiler monterade
+skrivskyddat. Paketets slutprov redovisas separat. Testskriptets inställning
+`stable_candidate_search_enabled=false` är identisk i båda armarna;
+HTTP-miljön använder `true`, så dessa tider ersätter inte dess mätning.
+[Maskinellt underlag och hashbindning](PURE-RECIPE-CACHE-AB.json).
