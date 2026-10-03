@@ -14,15 +14,86 @@ import re
 import sqlite3
 import unicodedata
 from collections import defaultdict
+from copy import deepcopy
 from dataclasses import asdict, replace
 from pathlib import Path
 from threading import RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v7-explicit-culinary-form"
+FACTS_VERSION = "retained-catalog-facts-v8-qualified-energy-pairs"
 _CACHE = {}
 _LOCK = RLock()
+
+
+def _coop_energy_evidence(raw, *, basis_quantity, basis_unit):
+    """Veto gross declaration contradictions; never correct or derive energy.
+
+    EU 1169/2011 Annex XIV uses separately rounded kJ/kcal nutrient factors
+    (e.g. 37/9 for fat and 8/2 for fibre). Exact conversion is inappropriate:
+    https://eur-lex.europa.eu/eli/reg/2011/1169/oj
+    Our conservative integrity screen permits max(8 kJ, 8% of the larger
+    energy) on the ORIGINAL declared basis. This is neither a legal tolerance
+    nor proof of equivalence. The separate >1000 kcal/100g veto exceeds the
+    dietary-fat factor with margin; no mass ceiling applies to ml without
+    density. Thresholds remain unknown, and macros are not used to infer kcal.
+    """
+    entries = [deepcopy(row) for row in raw.get("nutrientLinks", ())
+               if isinstance(row, dict) and row.get("description") == "Energi"
+               and row.get("unit") in {"Kilokalori", "Kilojoule"}]
+    if not entries:
+        return None
+    reasons, values = [], {}
+    for source_unit, key in (("Kilokalori", "kcal"), ("Kilojoule", "kj")):
+        rows = [row for row in entries if row["unit"] == source_unit]
+        if len(rows) > 1:
+            reasons.append(f"{key}_duplicate")
+            continue
+        if not rows:
+            continue
+        row = rows[0]
+        amounts = row.get("amount")
+        if not isinstance(amounts, list) or len(amounts) != 1:
+            reasons.append(f"{key}_invalid_amount")
+            continue
+        accuracy = row.get("amountAccuracy", {})
+        if not isinstance(accuracy, dict):
+            reasons.append(f"{key}_invalid_accuracy")
+            continue
+        if accuracy.get("code") not in (None, "EXACT"):
+            continue  # A declared bound is not a point value or a pair member.
+        try:
+            value = float(amounts[0])
+        except (TypeError, ValueError, OverflowError):
+            reasons.append(f"{key}_invalid_amount")
+            continue
+        if isinstance(amounts[0], bool) or not math.isfinite(value) or value < 0:
+            reasons.append(f"{key}_invalid_amount")
+        else:
+            values[key] = value
+    pair = None
+    if "kcal" in values and "kj" in values:
+        converted = values["kcal"] * 4.184
+        difference = abs(values["kj"] - converted)
+        tolerance = max(8.0, 0.08 * max(values["kj"], converted))
+        if not math.isfinite(converted) or difference > tolerance:
+            reasons.append("energy_pair_mismatch")
+        # Preserve only finite calculated diagnostics in serializable evidence.
+        pair = {"reference_kj_per_kcal": 4.184,
+                "absolute_tolerance_kj": 8.0, "relative_tolerance": 0.08}
+    if basis_unit == "g" and basis_quantity and "kcal" in values:
+        per_100g = values["kcal"] / basis_quantity * 100
+        if not math.isfinite(per_100g) or per_100g > 1000:
+            reasons.append("kcal_above_conservative_mass_ceiling")
+    return {
+        "policy": "coop-explicit-energy-integrity-v1",
+        "status": "conflict" if reasons else "no_conflict_detected",
+        "reasons": reasons,
+        "raw_fields": {"nutrientLinks": entries,
+                       "nutrientInformation": deepcopy(raw.get("nutrientInformation", []))},
+        "basis_quantity": basis_quantity, "basis_unit": basis_unit,
+        "pair_check": pair,
+    }
 
 
 def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, observed_at=None):
@@ -42,6 +113,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
             None if positive and negative else True if positive else False if negative else None
         )
     nutrition, unit, basis = {}, None, None
+    energy_quantity, energy_evidence = None, None
     conflicts = []
     limits = []
     if chain == "coop":
@@ -60,6 +132,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
                 and amount > 0
             ):
                 unit = {"GRM": "g", "MLT": "ml"}[code]
+                energy_quantity = amount
                 fields = {
                     ("Energi", "Kilokalori"): "kcal",
                     ("Protein", "Gram"): "protein_g",
@@ -68,20 +141,23 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
                 }
                 values = defaultdict(list)
                 for nutrient in raw.get("nutrientLinks", []):
+                    if not isinstance(nutrient, dict):
+                        continue
                     key = fields.get((nutrient.get("description"), nutrient.get("unit")))
                     raw_values = nutrient.get("amount", [])
-                    accuracy = nutrient.get("amountAccuracy", {}).get("code")
-                    if key and accuracy not in {None, "EXACT"}:
+                    raw_accuracy = nutrient.get("amountAccuracy", {})
+                    accuracy = raw_accuracy.get("code") if isinstance(raw_accuracy, dict) else "UNKNOWN"
+                    if key and accuracy not in (None, "EXACT"):
                         limits.append({"field": key, "amount": raw_values,
                                        "accuracy": accuracy, "basis_quantity": amount,
                                        "basis_unit": unit})
                         continue  # A threshold is not an exact declared value.
-                    if key and len(raw_values) != 1:
+                    if key and (not isinstance(raw_values, list) or len(raw_values) != 1):
                         conflicts.append("nutrition." + key)
-                    if key and len(raw_values) == 1:
+                    if key and isinstance(raw_values, list) and len(raw_values) == 1:
                         try:
                             value = float(raw_values[0])
-                        except (TypeError, ValueError):
+                        except (TypeError, ValueError, OverflowError):
                             conflicts.append("nutrition." + key)
                             continue
                         if math.isfinite(value) and value >= 0:
@@ -103,6 +179,11 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
             conflicts.append("nutrition_basis")
     if chain == "coop" and raw.get("nutrientInformation") and basis is None:
         conflicts.append("nutrition_basis")
+    if chain == "coop":
+        energy_evidence = _coop_energy_evidence(raw, basis_quantity=energy_quantity, basis_unit=unit)
+        if energy_evidence and energy_evidence["status"] == "conflict":
+            nutrition.pop("kcal", None)
+            conflicts.extend(("nutrition.kcal", "nutrition.energy"))
     tags = {t.get("code") for t in raw.get("accreditedTags", []) if isinstance(t, dict)}
     vegan = bool(
         tags & {"EUROPEAN_V_LABEL_VEGAN", "VEGAN_SOCIETY_VEGAN_LOGO", "100_PERCENT_VEGANSKT"}
@@ -167,7 +248,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         else "as_sold",
         animal=animal,
         observed_at=observed_at,
-        conflicts=tuple(conflicts),
+        conflicts=tuple(dict.fromkeys(conflicts)),
     )
     evidence = {
         "source": source_reference,
@@ -187,6 +268,10 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
     }
     return replace(
         fact, field_sources={**{k: (dict(evidence),) for k, v in fields.items() if v is not None},
+                            **({"nutrition.energy": ({**evidence, **energy_evidence},),
+                                **({"nutrition.kcal": ({**evidence, **energy_evidence},)}
+                                   if energy_evidence["status"] == "conflict" or "kcal" in nutrition else {})}
+                               if energy_evidence else {}),
                             **({"product_classification": ({**evidence, "value": "frozen", "raw_fields": frozen_fields,
                                 "identity_method": "hash_verified_retained_product_fields"},)} if frozen_fields else {}),
                             **({"nutrition_limits": tuple({**evidence, **r} for r in limits)}
@@ -371,6 +456,11 @@ def complete_identity_facts(prepared, original):
             changes["nutrition"] = nutrition
             if len(bases) > 1 or "nutrition_basis" in conflicts:
                 changes.update(nutrition_unit=None, nutrition_basis=None)
+        if "nutrition.energy" in conflicts:
+            # Rejected kcal is intentionally absent from nutrition above, but
+            # its original pair must accompany the conflict across exact joins.
+            for field in ("nutrition.energy", "nutrition.kcal"):
+                sources[field] = tuple(e for f in entries for e in f.field_sources.get(field, ()))
         for p in products:
             key = (p.store_id, p.product_id)
             current = original.get(key) or ProductFacts(
@@ -616,6 +706,16 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
     from app.services.official_product_facts import declared_facts
 
     def merge_fact(prior, fact):
+        if prior and "nutrition.energy" in prior.conflicts:
+            # A declaration with only invalid energy has no usable nutrition
+            # left. Another source must not erase that unresolved conflict or
+            # the raw pair needed to investigate it.
+            sources = dict(fact.field_sources)
+            for field in ("nutrition.energy", "nutrition.kcal"):
+                sources[field] = (*prior.field_sources.get(field, ()),
+                                  *sources.get(field, ()))
+            return replace(fact, field_sources=sources,
+                           conflicts=tuple(dict.fromkeys((*fact.conflicts, *prior.conflicts))))
         # Missing fields are not contradictory values; differing overlapping
         # authoritative values/units must never disappear behind precedence.
         if prior and prior.nutrition and fact.nutrition and (
@@ -624,8 +724,6 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
                    for k in prior.nutrition.keys() & fact.nutrition.keys())
             or prior.conflicts
         ):
-            from dataclasses import replace
-
             return replace(fact, conflicts=(*fact.conflicts, 'official_declaration_conflict'))
         return fact
 

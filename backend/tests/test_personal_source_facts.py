@@ -165,6 +165,13 @@ def test_hash_snapshot_context_and_exact_product_join(tmp_path, monkeypatch, dri
         db.executescript("CREATE TABLE telemetry(value); INSERT INTO telemetry VALUES (1);")
     # Unrelated activity must not reparse/project unchanged public source data.
     assert load_retained_facts(p, database=str(db_path), raw_root=raw) is facts
+    from app.services import personal_source_facts as module
+
+    with monkeypatch.context() as version_patch:
+        version_patch.setattr(module, "FACTS_VERSION", module.FACTS_VERSION + "-next-policy")
+        requalified = load_retained_facts(p, database=str(db_path), raw_root=raw)
+        assert requalified is not facts and requalified.version != facts.version
+    assert load_retained_facts(p, database=str(db_path), raw_root=raw) is facts
     metadata = (raw / "page.json").stat()
     (raw / "page.json").write_bytes(content.replace(b"source-milk", b"wrong--milk"))
     os.utime(raw / "page.json", ns=(metadata.st_atime_ns, metadata.st_mtime_ns))
