@@ -213,9 +213,14 @@ där. Ingen insamling startades av kontrollen.
 
 ## Genomförd bred regression
 
-Den nätspärrade ordinarie sviten på integrationen `2611169` passerade
-**3 641 tester, 0 fel, 0 överhoppade**, på 1 010,676 sekunder. Efterföljande
-begränsade ändringar provas separat med berörda regressions- och acceptansprov.
+Den nätspärrade ordinarie sviten på runtime `38ee1aa` passerade
+**3 694 tester, 0 fel, 0 överhoppade**, på 2 059,201 sekunder. Inga externa
+nätförsök eller läsningar av spärrade äldre källkopior registrerades.
+[TESTS.json](TESTS.json) binder resultatet till rårapportens hash.
+Ett upptäckt bakåtkompatibilitetsfel är rättat: okända nya smakkomponenter
+utelämnas ur äldre numeriska kvalitetsrapporter, medan faktiskt nollvärde
+behålls. Okänt konverteras alltså inte till noll. Efterföljande begränsade
+ändringar provas separat med berörda regressions- och acceptansprov.
 Ruff på samtliga ändrade Python-filer, compileall och pip check är godkända.
 
 Slutresultaten för innehåll, fria menyer, fyra browserkombinationer, privata

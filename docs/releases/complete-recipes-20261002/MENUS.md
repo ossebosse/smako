@@ -308,4 +308,3 @@ Inköp **638.99 kr**, 47.62 sekunder. Fem middagar för två personer, högst tv
 | Hemköp Lund Brunnshög / online_store | Naturell Tofu Fast Vegansk | 1240 g | 7 × 200 g | 160 g | 79.20 kr | VERIFIED, kampanj |
 
 Resterna är planerade mängder och bokförs inte som uppmätt skafferi. Vid avrunnen vara avser användning/rest ätbar avrunnen mängd, medan förpackningen kan ange totalvikt.
-

@@ -128,7 +128,7 @@ def main():
                 f"{item['total_price']:.2f} kr | {', '.join(flags)} |")
         lines.extend(["", ("Resterna är planerade mängder och bokförs inte som uppmätt skafferi. "
                       "Vid avrunnen vara avser användning/rest ätbar avrunnen mängd, medan förpackningen kan ange totalvikt."), ""])
-    (args.output / "MENUS.md").write_text("\n".join(lines) + "\n", encoding="utf8")
+    (args.output / "MENUS.md").write_text("\n".join(lines).rstrip() + "\n", encoding="utf8")
     print(json.dumps({"menus": len(report["menus"]), "output": str(args.output)}, ensure_ascii=False))
 
 
