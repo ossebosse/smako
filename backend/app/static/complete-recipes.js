@@ -165,7 +165,13 @@
       if(!taste.value&&!difficulty.value&&!portion.value&&!minutes.value){status.textContent="Ange minst ett betyg, en portionsstorlek eller en faktisk tillagningstid.";return;}
       submit.disabled=true;status.textContent="Sparar…";
       const ratings={revision,recipe_index:recipeIndex,taste:taste.value?Number(taste.value):null,difficulty:difficulty.value?Number(difficulty.value):null,portion_size:portion.value||null,actual_minutes:minutes.value?Number(minutes.value):null};
-      try { const response=await fetch("/api/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({category:"suggestion",message:message.value.trim()||`Receptåterkoppling för ${recipe.name}`,page_context:location.pathname,plan_id:planId,recipe_feedback:ratings})});const data=await response.json();if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Återkopplingen kunde inte sparas.");status.textContent="Tack! Återkopplingen är sparad till den här receptversionen.";submit.hidden=true;}catch(error){status.textContent=error.message;}finally{submit.disabled=false;}
+      try {
+        // Share the existing beta feedback identity used by privacy erasure.
+        // This local capability is never the authority for plan ownership.
+        let feedbackSession=localStorage.getItem("grocery-anonymous-session-id");
+        if(!feedbackSession){feedbackSession=crypto.randomUUID().replaceAll("-","");localStorage.setItem("grocery-anonymous-session-id",feedbackSession);}
+        const response=await fetch("/api/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({category:"suggestion",anonymous_session_id:feedbackSession,message:message.value.trim()||`Receptåterkoppling för ${recipe.name}`,page_context:location.pathname,plan_id:planId,recipe_feedback:ratings})});const data=await response.json();if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Återkopplingen kunde inte sparas.");status.textContent="Tack! Återkopplingen är sparad till den här receptversionen.";submit.hidden=true;
+      }catch(error){status.textContent=error.message;}finally{submit.disabled=false;}
     });dialog.showModal();taste.focus();
   }
 

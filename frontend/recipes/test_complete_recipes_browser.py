@@ -213,6 +213,7 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
     if output:
         card.screenshot(path=str(output / f"{engine}-{'mobile' if mobile else 'desktop'}-{'personal' if personal else 'public'}-recipe.png"))
+    previous_feedback_identity = page.evaluate("localStorage.getItem('grocery-anonymous-session-id')")
     page.evaluate("SmakoRecipes.recipeFeedback({recipe:window.testRecipe,recipeIndex:0,planId:'synthetic-plan',revision:3})")
     page.locator("#recipe-feedback-taste").select_option("5")
     page.locator("#recipe-feedback-difficulty").select_option("2")
@@ -222,6 +223,12 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     expect(page.locator(".complete-feedback-dialog [role=status]")).to_contain_text("receptversionen")
     assert feedback[-1]["recipe_feedback"] == {"revision": 3, "recipe_index": 0, "taste": 5, "difficulty": 2,
                                               "portion_size": "right", "actual_minutes": 37}
+    # Public uses its existing capability; the personal-only flow creates one.
+    # Do not write either value to test reports or logs.
+    assert len(feedback[-1]["anonymous_session_id"]) >= 32
+    assert feedback[-1]["anonymous_session_id"] == page.evaluate("localStorage.getItem('grocery-anonymous-session-id')")
+    if previous_feedback_identity:
+        assert feedback[-1]["anonymous_session_id"] == previous_feedback_identity
     page.evaluate("SmakoRecipes.clearPrivateDrafts()")
     assert page.evaluate("['smako.planJob.public','smako.planJob.personal','smako.recipeChoices.public','smako.recipeChoices.personal','smako.personal.requestDraft'].every(key=>sessionStorage.getItem(key)===null)")
     assert not errors, errors
