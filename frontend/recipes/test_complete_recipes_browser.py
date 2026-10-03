@@ -205,6 +205,14 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     assert "Ingrediens: okänd" in rendered["unknown"]
     assert "Källstatus okänd" in rendered["unknown"] and "Spårbar uppskattning" not in rendered["unknown"]
     assert "0 g protein" in rendered["knownZero"]
+    search_status = page.evaluate("""() => {
+      const plan={recipes:[testRecipe],personal:{checks:{search_outcome:{budget_message:'En delberäkning nådde sökbudgeten. Menyn är fortfarande helt validerad.'}}}};
+      return {cheapest:SmakoRecipes.searchNotice(plan,'cheapest').textContent,balanced:SmakoRecipes.searchNotice(plan,'balanced').textContent,legacy:SmakoRecipes.searchNotice({recipes:[{}]},'cheapest')};
+    }""")
+    assert "Lägsta hittade inköpskostnad inom dina val" in search_status["cheapest"]
+    assert "Menyn är fortfarande helt validerad" in search_status["cheapest"]
+    assert "balans mellan pris och variation" in search_status["balanced"]
+    assert search_status["legacy"] is None
     page.evaluate("""() => {
       const node=SmakoRecipes.financials({optimized_basket:{total:123.45,verification_status:'VERIFIED'},personal:{allocations:[{name:'Ris',quantity:100,unit:'g'}],checks:{used_ingredient_cost:null,new_purchase_used_cost:100,used_cost_basis:{quantity_status:'VERIFIED',description:'Kostnadsfördelning, utan avdrag på betalningen.'}}}});
       node.id='contract-financials';document.body.append(node);

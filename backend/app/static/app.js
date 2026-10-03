@@ -2417,6 +2417,9 @@
   function renderPlanContent(data, isPrimary) {
     const mode = normalizeDiversityMode(first(data, ["diversity_mode"], activePlanMode));
     dom.resultsTitle.textContent = diversityModes[mode].resultTitle;
+    dom.results.querySelector(".recipe-search-status")?.remove();
+    const searchNotice=window.SmakoRecipes.searchNotice(data,mode);
+    if(searchNotice)dom.resultsTitle.after(searchNotice);
     const recipes = renderRecipes(data);
     renderIngredients(data);
     const shopping = renderShopping(data, recipes);

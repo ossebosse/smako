@@ -177,6 +177,13 @@
     });dialog.showModal();taste.focus();
   }
 
+  function searchNotice(plan,mode) {
+    if(!(plan.recipes||[]).some(recipe=>recipe.design))return null;
+    const out=el("div",null,"recipe-search-status data-note");
+    out.append(el("p",mode==="cheapest"?"Lägsta hittade inköpskostnad inom dina val. Sökningen bevisar inte global optimalitet.":"Inköpskostnaden följer ditt val av balans mellan pris och variation. Sökningen bevisar inte global optimalitet."));
+    const budget=plan.personal?.checks?.search_outcome?.budget_message;if(typeof budget==="string"&&budget.trim())out.append(el("p",budget));return out;
+  }
+
   function financials(plan) {
     const checks=plan.personal?.checks;if(!checks||!("used_ingredient_cost" in checks))return null;
     const money=value=>`${number(value)} kr`;const out=el("section",null,"recipe-purchase-explanation");out.append(el("h3","Inköp och förbrukning"));
@@ -234,5 +241,5 @@
     }
     forgetJob(scope);return response;
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,financials,productDetails,diagnostics,ingredientCount,cuisines,poll,pendingJob,forgetJob,clearPrivateDrafts,storage});
+  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,productDetails,diagnostics,ingredientCount,cuisines,poll,pendingJob,forgetJob,clearPrivateDrafts,storage});
 })();
