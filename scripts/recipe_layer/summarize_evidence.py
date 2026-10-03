@@ -90,16 +90,21 @@ def main():
     (args.output / "evidence.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     lines = ["# Autentiska menyer och inköp", "", ("Fryst publicerat prisunderlag från 2026-10-02. "
              "Beloppen är historiska replayresultat och inga nya prisutfästelser. "
-             "Fullständiga underlag med källor och receptversioner finns i evidence.json."), ""]
+             "Fullständiga underlag med källor och receptversioner finns i evidence.json. "
+             "Dessa är funktionella slutprov under delad acceptanslast; tiderna är inte den isolerade prestandajämförelsen. "
+             "Alla sju prov använder Balanserad, uppskattade köp och uttryckligt medgivande till näringsuppskattningar."), ""]
+    labels = {"greek": "Grekiskt", "italian": "Italienskt", "mexican": "Mexikanskt",
+              "indian": "Indiskt", "thai": "Thailändskt", "swedish": "Svenskt",
+              "mixed-protein40": "Grekiskt/mexikanskt, minst 40 g protein och högst 40 minuter"}
     for case, entry in report["menus"].items():
-        lines.extend([f"## {case}", ""])
+        lines.extend([f"## {labels.get(case, case)}", ""])
         if "plan" not in entry:
             lines.extend([f"Stopp: {entry['code']} — {entry['reason']}", ""])
             continue
         plan = entry["plan"]
         lines.extend([(f"Inköp **{plan['checkout_total']:.2f} kr**, {entry['seconds']:.2f} sekunder. "
                       "Fem middagar för två personer, högst två inköpsställen. "
-                      "Lägsta hittade inköpskostnad inom valen; global optimalitet är inte bevisad."), "",
+                      "Giltig hittad meny inom valen och målet Balanserad; global optimalitet är inte bevisad."), "",
                       "| Rätt | Ingredienser | Uppskattad tid | Protein / kolhydrat / fett / kcal per portion | Näringsstatus |",
                       "|---|---:|---:|---|---|"])
         for meal in plan["recipes"]:

@@ -1,3 +1,42 @@
+# 2026-10-03: Nästa receptlager – lokal, versionsbunden kandidat
+
+Arbetet ligger på `feature/complete-recipe-layer`, från den faktiska lokala
+kodbasen `402a5c9` ovanpå den fungerande publika rättningen `74c9077`.
+**Ingen produktionsaktivering eller Git-push är gjord.** Produktionens app
+är fortsatt `74c9077`; relä, scheduler, källpolicy och färskhetsgränser är
+oförändrade. Läs [slutrapport](releases/complete-recipes-20261002/RESULTS.md),
+[menyer och inköp](releases/complete-recipes-20261002/MENUS.md) samt
+[aktivering och återgång](releases/complete-recipes-20261002/ACTIVATION.md).
+
+Runtime-commit `38ee1aa5ecbc64045801a4f40f9c0302ed0e4a09`, serverpaket
+`smako-server-38ee1aa5ecbc.zip` under `.local/releases/complete-recipes-20261002`,
+SHA-256 `6764c69429f132360431df436de9ce7338e162a4496d1db090091fda1d2a2143`.
+Verifierad image `sha256:65670569e3d142e9a58e823a237869a845f3f544b2292880f119e231f0df25e4`.
+Senare commits gäller dokumentation och acceptansverktyg, inte paketets runtime.
+
+Flaggan `COMPLETE_RECIPES_ENABLED` är av som standard. Publik och personlig
+planering har integrerade val för matkök, ingrediensantal, tid, protein,
+kost och godkända anpassningar. Befintliga optimeringsmål och köp-/näringsskydd
+återanvänds. Byte och uttrycklig omräkning skapar nya planrevisioner; gamla
+receptversioner arkiveras och återkoppling binds till exakt använt innehåll.
+Återgång är i första hand flaggan av i samma nya version, aldrig återställning
+av en äldre databas över senare användarplaner.
+
+Biblioteket har 48 grundrätter och 56 godkända variationer, åtta grundrätter
+per matkök. Autentisk fryst kvalificering: 94/104 konkreta kandidater och
+47/48 grundrätter med minst en fungerande variant; 43/48 originalvarianter.
+Kaprisunderlag spärrar hela piccatafamiljen. Mjölk/kidneybönor spärrar vissa
+original men godkända variationer fungerar. Det är synliga externa dataluckor,
+inte tillåtelse att försvaga mängd-, närings- eller allergenkontroller.
+Sju fria femmiddagsmenyer är genomförda. Fysisk provlagning och fysisk iPhone
+har inte utförts; granskning, maskinell validering och browserprov särredovisas.
+
+Stora frysta offentliga källunderlag, testplaner, browserbilder och råloggar
+ligger utanför Git i `.local/complete-recipes-20261002` och de dokumenterade
+separata worktree-mapparna. Isolerad fjärrmiljö ligger under
+`/var/tmp/smako-complete-recipes-20261002`; dess replayklocka och nya
+sessionslagring får aldrig användas som produktionskonfiguration.
+
 # 2026-10-02: Uppföljning – korrekta fältfel och fungerande lång generering
 
 Appen kör nu Git `74c9077001b3084317f36630fd38ce48e4663473`, image
