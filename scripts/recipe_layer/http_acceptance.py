@@ -263,7 +263,7 @@ async def monotonic_scopes(args):
     try:
         await session.bootstrap()
         await stranger.bootstrap()
-        for stores, purchase in ((1, 'exact'), (2, 'exact'), (2, 'estimated')):
+        for stores, purchase in ((1, 'exact'), (2, 'exact'), (2, 'estimated'), (3, 'estimated')):
             current_state = await session.bootstrap()
             assert not current_state['items'], 'Scope comparison requires the same empty pantry'
             payload = complete_request(mode='cheapest', purchase=purchase)
