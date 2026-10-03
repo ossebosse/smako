@@ -19,9 +19,10 @@ from app.models.recipe_preferences import RecipePreferences
 LIBRARY_VERSION = "smako-complete-dinners-v1"
 LIBRARY_PATH = Path(__file__).parents[1] / "data/recipes/complete-dinners-v1.json"
 # Updated only together with reviewed, versioned source content.
-CONTENT_SHA256 = "27d53cb050248c826285b445deac0c6e1a87f9a1182fe39b881b189ab3a136b8"
+CONTENT_SHA256 = "1c623aa7e4a8e8f9cde292807198c59d6f191f0dd3030462a254893995e7e90c"
 COUNT_EXEMPT = frozenset({"salt", "svartpeppar", "peppar", "vatten"})
 ARCHIVED_CONTENT = {
+    "complete-dinners-1.3.0.json": "27d53cb050248c826285b445deac0c6e1a87f9a1182fe39b881b189ab3a136b8",
     "complete-dinners-1.2.0.json": "92d7ff63473969e659c61b7ff96b9bd852d8037e7174499a65d60f58297a983e",
     "complete-dinners-1.0.0.json": "4baec1580728294b2805e3716b719d68b2d12ca0f2cbdc469bb074769700de66",
     "complete-dinners-1.1.0.json": "b27912d63f05f993635d4a3516a4e1bba0fa94acd5f682a258eeccdacb4efd07",
@@ -156,7 +157,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
         steps = list(result.design.steps)
         heat = next((index for index, step in enumerate(steps)
                      if index > 0 and step.duration_minutes >= 10
-                     and not (result.design.version == "1.3.0"
+                     and not (result.design.version in {"1.3.0", "1.4.0"}
                               and step.id in {"rice", "prebake"})), 0)
         original = steps[heat]
         extra = original.duration_minutes * (batches - 1)

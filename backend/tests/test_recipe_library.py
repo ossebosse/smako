@@ -143,7 +143,7 @@ def test_prior_issued_versions_remain_valid_but_new_candidates_use_current_conte
     archived = Recipe.model_validate(previous)
     assert archived.design.version == "1.0.0"
     assert library.validate_recipe_design(archived)
-    assert {r.design.version for r in library.candidates(complete())} == {"1.1.0", "1.2.0", "1.3.0"}
+    assert {r.design.version for r in library.candidates(complete())} == {"1.1.0", "1.3.0", "1.4.0"}
 
 
 def test_original_96_recipe_objects_are_unchanged_and_archived():
@@ -278,10 +278,37 @@ def test_four_person_mixed_content_needs_explicit_forty_three_minute_choice():
 
 def test_larger_portion_allowance_is_not_assigned_to_new_auxiliary_timer():
     for recipe in library.candidates(complete(max_minutes=180), 6):
-        if recipe.design.version == "1.3.0":
+        if recipe.design.version in {"1.3.0", "1.4.0"}:
             for step in recipe.design.steps:
                 if step.id in {"rice", "prebake"}:
                     assert "omgångar" not in step.text
+
+
+def test_equipment_revision_preserves_every_previously_issued_meal_and_timing():
+    old = json.loads(library.LIBRARY_PATH.with_name("complete-dinners-1.3.0.json").read_bytes())["recipes"]
+    new = json.loads(library.LIBRARY_PATH.read_bytes())["recipes"]
+    for issued, current in zip(old, new, strict=True):
+        assert library.validate_recipe_design(Recipe.model_validate(issued))
+        assert issued['ingredients'] == current['ingredients']
+        assert issued['instructions'] == current['instructions']
+        assert issued['design']['steps'] == current['design']['steps']
+        assert issued['design']['estimated_minutes'] == current['design']['estimated_minutes']
+        if issued['design']['equipment'] != current['design']['equipment']:
+            assert current['design']['version'] == '1.4.0'
+
+
+def test_secondary_cookware_exists_for_simultaneous_soup_and_bread_components():
+    for recipe in library.candidates(complete(max_minutes=180)):
+        base = recipe.design.base_id.removeprefix('smako-')
+        tools = ' '.join(recipe.design.equipment)
+        if base in {'mexican-corn-soup', 'swedish-green-pea-soup'}:
+            assert all(tool in tools for tool in ('gryta', 'stekpanna', 'potatisstöt', 'rivjärn'))
+        if base in {'greek-keftedes', 'swedish-beef-patties', 'thai-lentil-coconut-soup'}:
+            assert 'stekpanna' in tools
+        if base in {'thai-tofu-satay', 'swedish-lentil-patties'}:
+            assert 'två kastruller' in tools
+        if base in {'greek-fish-plaki', 'italian-salmon-cartoccio'}:
+            assert 'ugnsform med ugnssäkert lock eller folie' in tools
 
 
 @pytest.mark.parametrize("values", [
