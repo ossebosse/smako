@@ -10,16 +10,19 @@ dagens publicerade underlag.
 
 | Artefakt | Identitet |
 | --- | --- |
-| Runtime-commit | `dd3f6add6a6b4cffe58f1a72c9408816f08a6f25` |
-| Serverpaket | `smako-server-dd3f6add6a6b.zip` |
-| Paketets SHA-256 | `58eebb0c056bc6b9cd10c6d6392ac3855b2bbf6e51cc16f9fa1d937767837773` |
-| Verifierad Docker image-ID | `sha256:7a9834d2d5b58a7b7c835b77d833ae5640f0a6c53dda350282dc1e034329bbcb` |
-| Appens föreskrivna drift-BUILD_ID | `complete-recipes-dd3f6add6a6b` |
+| Runtime-commit | `17a9c1330dcc72ff9750a3fa680fa6982f7ed99b` |
+| Serverpaket | `smako-server-17a9c1330dcc.zip` |
+| Paketstorlek | `2739005` byte |
+| Paketets SHA-256 | `d3327b9137d4310707118b5272bc826ed0403ebd6d0c0ab935bb1196efee060a` |
+| Verifierad Docker image-ID | `sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35` |
+| Verifieringens lokala imagetagg | `smako-complete-recipes-candidate:17a9c1330dcc` |
+| Appens föreskrivna drift-BUILD_ID | `complete-recipes-17a9c1330dcc` |
 
 Image-ID är den lokala innehållsadresserade imagen, inte en registrys
 manifestdigest. Den ska finnas installerad via ordinarie kontrollerad
 imageöverföring. Ett annat resultat från en egen ombyggnad kräver separat
 imageverifiering; ersätt inte ID:t med en rörlig tagg.
+Taggen ovan är ett läsbart namn; override-filen låser det verifierade image-ID:t.
 
 Kontrollera paketet innan uppackning. Följande Bash/Python-kommandon är för en
 senare operatör, inte kommandon som körts i denna leverans. Sätt
@@ -31,17 +34,18 @@ python3 - "$SMAKO_PACKAGE" <<'PY'
 import hashlib, json, sys, zipfile
 from pathlib import Path
 p = Path(sys.argv[1])
-assert p.name == "smako-server-dd3f6add6a6b.zip"
-assert hashlib.sha256(p.read_bytes()).hexdigest() == "58eebb0c056bc6b9cd10c6d6392ac3855b2bbf6e51cc16f9fa1d937767837773"
+assert p.name == "smako-server-17a9c1330dcc.zip"
+assert p.stat().st_size == 2739005
+assert hashlib.sha256(p.read_bytes()).hexdigest() == "d3327b9137d4310707118b5272bc826ed0403ebd6d0c0ab935bb1196efee060a"
 with zipfile.ZipFile(p) as z:
     m = json.loads(z.read("RELEASE.json"))
-    assert m["commit"] == "dd3f6add6a6b4cffe58f1a72c9408816f08a6f25" and m["kind"] == "server"
+    assert m["commit"] == "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b" and m["kind"] == "server"
     assert set(z.namelist()) == set(m["files"]) | {"RELEASE.json"}
     assert all(hashlib.sha256(z.read(n)).hexdigest() == h for n, h in m["files"].items())
 print("Paket och samtliga manifestbundna filer: PASS")
 PY
-test "$(docker image inspect --format '{{.Id}}' sha256:7a9834d2d5b58a7b7c835b77d833ae5640f0a6c53dda350282dc1e034329bbcb)" = \
-  'sha256:7a9834d2d5b58a7b7c835b77d833ae5640f0a6c53dda350282dc1e034329bbcb'
+test "$(docker image inspect --format '{{.Id}}' sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35)" = \
+  'sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35'
 ```
 
 Kopiera aldrig testklocka, frysta prisfiler, testdatabaser, utvecklingens `.local`
@@ -120,8 +124,8 @@ assert sys.argv[3] in {"false", "true"}
 expected = copy.deepcopy(before)
 app = expected["services"]["app"]
 assert isinstance(app.get("environment"), dict)
-app["image"] = "sha256:7a9834d2d5b58a7b7c835b77d833ae5640f0a6c53dda350282dc1e034329bbcb"
-app["environment"]["BUILD_ID"] = "complete-recipes-dd3f6add6a6b"
+app["image"] = "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35"
+app["environment"]["BUILD_ID"] = "complete-recipes-17a9c1330dcc"
 app["environment"]["COMPLETE_RECIPES_ENABLED"] = sys.argv[3]
 assert actual == expected, "STOPP: annan konfigurationsskillnad eller fel kandidat"
 print("Endast avsedda appfält skiljer sig: PASS")
@@ -148,13 +152,13 @@ processminnet och överlever inte appomstart; färdiga sparade revisioner gör d
 "$SMAKO_COMPOSE_WRAPPER" up -d --no-build --pull never --no-deps --force-recreate app
 APP_CID=$("$SMAKO_COMPOSE_WRAPPER" ps -q app)
 test "$(docker inspect --format '{{.Image}}' "$APP_CID")" = \
-  'sha256:7a9834d2d5b58a7b7c835b77d833ae5640f0a6c53dda350282dc1e034329bbcb'
+  'sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35'
 "$SMAKO_COMPOSE_WRAPPER" exec -T app python - <<'PY'
 import json, urllib.request
 with urllib.request.urlopen("http://127.0.0.1:8000/ready", timeout=5) as r:
     state = json.load(r)
 assert state["status"] == "ready"
-assert state["build_id"] == "complete-recipes-dd3f6add6a6b"
+assert state["build_id"] == "complete-recipes-17a9c1330dcc"
 assert state["features"]["complete_recipes_enabled"] is False
 print("Appens image, readiness, BUILD_ID och flagga av: PASS")
 PY
