@@ -27,7 +27,7 @@ from app.services.plan_store import PlanStore
 from fastapi import APIRouter, Depends, Header, HTTPException, Request, Response, status
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
-from sqlalchemy import select, update
+from sqlalchemy import or_, select, update
 from sqlalchemy.orm import Session
 
 from grocery_data.app.api.community_evidence import get_community_session
@@ -590,7 +590,13 @@ def erase_anonymous_beta_data(
 
     feedback_rows = list(
         session.scalars(
-            select(BetaFeedbackModel).where(BetaFeedbackModel.actor_hash == beta_actor_hash)
+            select(BetaFeedbackModel).where(or_(
+                BetaFeedbackModel.actor_hash == beta_actor_hash,
+                # Version-bound recipe feedback can predate the tab's local
+                # capability or use the owned-session fallback. These plan IDs
+                # come from verified storage ownership, never the erase payload.
+                BetaFeedbackModel.plan_id.in_(owned_plan_ids),
+            ))
         )
     )
     analytics_rows = list(

@@ -189,7 +189,17 @@ def test_privacy_erasure_removes_owned_beta_data_and_unlinks_evidence(
             category="other",
             message="Keep",
             page_context="/",
+            plan_id="other-plan",
             contact_email="other@example.test",
+            app_version="1.2.3",
+            build_id="privacy-test-build",
+        )
+        recipe_feedback_from_other_tab = BetaFeedbackModel(
+            actor_hash=owner_hash,
+            category="other",
+            message='{"recipe_feedback":{"revision":1,"recipe_index":0,"taste":4}}',
+            page_context="/personal",
+            plan_id="owned-plan-b",
             app_version="1.2.3",
             build_id="privacy-test-build",
         )
@@ -235,6 +245,7 @@ def test_privacy_erasure_removes_owned_beta_data_and_unlinks_evidence(
             [
                 feedback,
                 unrelated_feedback,
+                recipe_feedback_from_other_tab,
                 analytics,
                 frontend_error,
                 owned_metric,
@@ -268,6 +279,7 @@ def test_privacy_erasure_removes_owned_beta_data_and_unlinks_evidence(
         session.commit()
         target_ids = {
             "feedback": feedback.id,
+            "recipe_feedback": recipe_feedback_from_other_tab.id,
             "analytics": analytics.id,
             "frontend": frontend_error.id,
             "metric": owned_metric.id,
@@ -294,13 +306,13 @@ def test_privacy_erasure_removes_owned_beta_data_and_unlinks_evidence(
     assert response.json() == {
         "plans_deleted": 2,
         "plan_revisions_deleted": 3,
-        "feedback_deleted": 1,
+        "feedback_deleted": 2,
         "analytics_events_deleted": 1,
         "frontend_errors_deleted": 1,
         "request_metrics_deleted": 1,
         "community_observations_unlinked": 1,
         "receipt_ingestions_unlinked": 1,
-        "suppression_events_added": 8,
+        "suppression_events_added": 9,
     }
     for secret in (local_session_id, beta_hash, community_hash, owner_hash):
         assert secret not in response.text
@@ -311,6 +323,7 @@ def test_privacy_erasure_removes_owned_beta_data_and_unlinks_evidence(
         metric_future.result(timeout=2)
     with factory() as session:  # type: ignore[operator]
         assert session.get(BetaFeedbackModel, target_ids["feedback"]) is None
+        assert session.get(BetaFeedbackModel, target_ids["recipe_feedback"]) is None
         assert session.get(ProductAnalyticsEventModel, target_ids["analytics"]) is None
         assert session.get(FrontendErrorModel, target_ids["frontend"]) is None
         assert session.get(BetaRequestMetricModel, target_ids["metric"]) is None
@@ -341,7 +354,7 @@ def test_privacy_erasure_removes_owned_beta_data_and_unlinks_evidence(
         assert preserved_receipt.actor_hash != community_hash
         assert preserved_evidence.actor_hash != preserved_receipt.actor_hash
         suppressions = list(session.scalars(select(PrivacyErasureSuppressionModel)))
-        assert len(suppressions) == 8
+        assert len(suppressions) == 9
         assert all(row.action == "SUPPRESS_ON_RESTORE" for row in suppressions)
         assert all(
             local_session_id not in row.target_record_id
