@@ -791,7 +791,15 @@ class PersonalPlanner:
                 return 0, allocations
         return remaining, allocations
 
-    def basket(self, slots, *, final=True):
+    def basket(self, slots, *, final=True, _retained=None):
+        # A narrower search incumbent is a concrete purchase, not merely a
+        # recipe seed. Requalify its exact products and private allocation while
+        # retaining its package/offer checkout; never send it through a new
+        # product search that could lose the already validated lower amount.
+        retained_items = ({i.ingredient: i for s in _retained.optimized_basket.stores for i in s.items}
+                          if _retained is not None else {})
+        retained_needs = ({d: need for need in _retained.personal.needs for d in need["demand_keys"]}
+                          if _retained is not None else {})
         available = {i["id"]: i["available"] for i in self.items}
         rows = self._need_rows(slots)
         allocations, groups = [], []
@@ -871,10 +879,32 @@ class PersonalPlanner:
                     }
                 else:
                     resolved = verified
-            quantity, allocation = self._allocate(row, resolved, available)
+            if _retained is None:
+                quantity, allocation = self._allocate(row, resolved, available)
+            else:
+                expected = [a for a in _retained.personal.allocations if a["demand_key"] == row["demand_key"]]
+                allocation_budget = {key: 0 for key in available}
+                for allocation in expected:
+                    key, amount = allocation["item_id"], allocation["quantity"]
+                    if key not in available or amount > available[key] + 1e-8:
+                        raise PolicyConflict("Tidigare skafferifördelning är inte längre tillgänglig.")
+                    allocation_budget[key] += amount
+                quantity, allocation = self._allocate(row, resolved, allocation_budget)
+                if allocation != expected:
+                    raise PolicyConflict("Tidigare skafferifördelning uppfyller inte målbegäran.")
+                for used in allocation:
+                    available[used["item_id"]] -= used["quantity"]
             allocations.extend(allocation)
             if quantity <= 0:
                 continue
+            if _retained is not None:
+                previous = retained_needs.get(row["demand_key"])
+                item = retained_items.get(previous["key"]) if previous else None
+                resolved = [(i, c) for i, c in resolved if item is not None
+                            and (c.store_id, c.product_id) == (item.store_id, item.product_id)
+                            and c.source_provenance == item.source_provenance]
+                if not resolved or item.purchase_date != self.pricing_date:
+                    raise PolicyConflict("Tidigare produkt och prisunderlag uppfyller inte målbegäran.")
             identities = {i for i, _ in resolved}
             group = next(
                 (
@@ -913,6 +943,11 @@ class PersonalPlanner:
         ingredients, candidate_map = [], {}
         for n, group in enumerate(groups):
             key = f"{group['name']} [{n + 1}]"
+            if _retained is not None:
+                original = retained_needs[group["demand_keys"][0]]
+                if set(original["demand_keys"]) != set(group["demand_keys"]):
+                    raise PolicyConflict("Tidigare gemensamma ingrediensbehov kunde inte återskapas.")
+                key = original["key"]
             group["key"] = key
             for row in rows:
                 if row["demand_key"] in group["demand_keys"]:
@@ -954,9 +989,14 @@ class PersonalPlanner:
             try:
                 package_started = perf_counter()
                 with performance_span("personal_package_calculation"):
-                    basket = self.optimizer.optimize(
-                        ingredients, candidate_map, self.view.stores, max_stores=self.request.max_stores
-                    )
+                    if _retained is None:
+                        basket = self.optimizer.optimize(
+                            ingredients, candidate_map, self.view.stores, max_stores=self.request.max_stores
+                        )
+                    else:
+                        basket = _retained.optimized_basket.model_copy(deep=True, update={"max_stores": self.request.max_stores})
+                        if basket.store_count > self.request.max_stores:
+                            raise PolicyConflict("Tidigare inköp överskrider målbegärans butikstak.")
                 self.timings["package_calculation"] += perf_counter() - package_started
             except IncompleteBasketError as exc:
                 stores = sorted({c.store_id for cs in candidate_map.values() for c in cs})
@@ -969,9 +1009,11 @@ class PersonalPlanner:
                     str(exc), stage="price_basket" if covers else "store_cap"
                 ) from exc
             ordinary_total = basket.total
-            if self.spec.surplus_mode == "allow_larger":
+            if _retained is not None and self._eco_percent(basket, groups) + 1e-8 < self.spec.organic_percent:
+                raise PolicyConflict("Tidigare inköp uppfyller inte målbegärans ekokrav.")
+            if _retained is None and self.spec.surplus_mode == "allow_larger":
                 basket = self._larger_packages(basket, ingredients, candidate_map)
-            if self.spec.organic_percent:
+            if _retained is None and self.spec.organic_percent:
                 try:
                     basket = self._ecological_basket(ingredients, candidate_map, groups, basket)
                 except PolicyConflict as exc:
@@ -981,7 +1023,7 @@ class PersonalPlanner:
                     # A later meal can still raise the global cost share. Do not
                     # declare a partial menu infeasible, but price qualified
                     # alternatives before beam pruning whenever available.
-            if any(self.meals[s.meal_type].limits.active for s in slots if s.recipe):
+            if _retained is None and any(self.meals[s.meal_type].limits.active for s in slots if s.recipe):
                 basket = self._qualified_nutrition_basket(
                     slots,
                     basket,
@@ -2012,6 +2054,7 @@ class PersonalPlanner:
     def create(self, *, replace_slot=None, balanced_reference=None, _compare_scopes=True):
         started = perf_counter()
         incumbents = []
+        incumbent_scopes = {}
         if (self.complete and _compare_scopes and self.request.diversity_mode == "cheapest"
                 and self.spec.slots is None and replace_slot is None):
             scopes = [(cap, self.request.purchase_planning_mode) for cap in range(1, self.request.max_stores)]
@@ -2026,34 +2069,30 @@ class PersonalPlanner:
                 except (ValueError, IncompleteBasketError):
                     continue
                 incumbents.append(candidate)
+                incumbent_scopes[id(candidate)] = {"max_stores": cap, "purchase_planning_mode": purchase_mode}
         try:
             with self.optimizer.quote_cache():
                 result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
             if incumbents:
-                result = min([result, *incumbents], key=lambda p: p.optimized_basket.total)
-                result.personal.checks["scope_comparison"] = {
+                winner = min([result, *incumbents], key=lambda p: p.optimized_basket.total)
+                if winner is not result:
+                    result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)])
+                result.personal.checks.setdefault("scope_comparison", {}).update({
                     "retained_valid_incumbents": len(incumbents),
                     "comparison_totals": [p.optimized_basket.total for p in incumbents],
                     "meaning": "Giltiga lösningar med färre butiker och exakt köp behålls när sökområdet utökas.",
-                }
-            self.product_trace.finalize(result.optimized_basket)
-            result.personal.checks["planning_diagnostics"] = self.diagnostics.snapshot()
-            self.timings["total"] += perf_counter() - started
-            if self.complete:
-                from app.services.complete_recipes import completed_search_outcome
-                result.personal.checks["timings_seconds"] = dict(self.timings)
-                result.personal.checks["recipe_preferences"] = self.request.recipe_preferences.model_dump(mode="json")
-                result.personal.checks["search_outcome"] = completed_search_outcome(result.personal.checks["planning_diagnostics"])
-            return result
+                })
+            return self._finalize_result(result, started)
         except (ValueError, IncompleteBasketError) as exc:
             if incumbents:
-                result = min(incumbents, key=lambda p: p.optimized_basket.total)
-                result.personal.checks["scope_comparison"] = {
+                winner = min(incumbents, key=lambda p: p.optimized_basket.total)
+                result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)], error=exc)
+                result.personal.checks["scope_comparison"].update({
                     "retained_valid_incumbents": len(incumbents),
                     "expanded_search_completed_without_better_solution": True,
                     "comparison_totals": [p.optimized_basket.total for p in incumbents],
-                }
-                return result
+                })
+                return self._finalize_result(result, started)
             message = str(exc)
             code = getattr(exc, "code", "SEARCH_BLOCKED")
             if isinstance(exc, IncompleteBasketError):
@@ -2073,6 +2112,70 @@ class PersonalPlanner:
                 conflicts=getattr(exc, "conflicts", None),
                 diagnostics=self.diagnostics.snapshot(),
             ) from exc
+
+    def _retain_scope_incumbent(self, candidate, selected_scope, *, error=None):
+        """Requalify the exact earlier checkout under the actual wider request."""
+        expanded_diagnostics = self.diagnostics.snapshot()
+        validated = self.basket(candidate.personal.slots, final=True, _retained=candidate)
+        if validated["allocations"] != candidate.personal.allocations:
+            raise PolicyConflict("Tidigare skafferifördelning kunde inte bevaras.")
+        result = candidate.model_copy(deep=True, update={"optimized_basket": validated["basket"]})
+        result.personal.checks.update(validated["checks"])
+        result.personal.checks["checkout_audit"] = validated["audit"].model_dump(mode="json")
+        result.personal.checks["allowed_store_ids"] = sorted(self.store_ids)
+        result.personal.cache_identity = self._cache_identity(result.recipes)
+        result.personal.checks["planning_diagnostics_scope"] = "selected_narrow_search"
+        result.personal.checks["scope_comparison"] = {
+            "selected_from_narrow_scope": True,
+            "selected_scope": selected_scope,
+            "target_scope": {"max_stores": self.request.max_stores,
+                             "purchase_planning_mode": self.request.purchase_planning_mode},
+            "exact_checkout_and_private_allocations_preserved": True,
+            "target_audit_passed": validated["audit"].passed,
+            "expanded_search_diagnostics": expanded_diagnostics,
+            "expanded_search_error": ({"code": getattr(error, "code", "SEARCH_BLOCKED"),
+                                       "message": str(error)} if error else None),
+        }
+        return result
+
+    def _finalize_result(self, result, started):
+        self.product_trace.finalize(result.optimized_basket)
+        comparison = result.personal.checks.get("scope_comparison", {})
+        if not comparison.get("selected_from_narrow_scope"):
+            result.personal.checks["planning_diagnostics"] = self.diagnostics.snapshot()
+        self.timings["total"] += perf_counter() - started
+        if self.complete:
+            from app.services.complete_recipes import completed_search_outcome
+            result.personal.checks["timings_seconds"] = dict(self.timings)
+            result.personal.checks["recipe_preferences"] = self.request.recipe_preferences.model_dump(mode="json")
+            outcome = completed_search_outcome(result.personal.checks["planning_diagnostics"])
+            if comparison.get("selected_from_narrow_scope"):
+                outcome["diagnostics_scope"] = "selected_narrow_search"
+                outcome["expanded_search_budget"] = completed_search_outcome(
+                    comparison["expanded_search_diagnostics"])["search_budget"]
+                if comparison["expanded_search_error"] or outcome["expanded_search_budget"]["nutrition_status"] == "REACHED":
+                    outcome["budget_message"] = (outcome.get("budget_message") or "En giltig meny hittades.") + (
+                        " Sökningen i det större tillåtna området gav ingen bättre giltig lösning; "
+                        "den tidigare lösningen behölls och kontrollerades mot dina val.")
+            result.personal.checks["search_outcome"] = outcome
+        return result
+
+    def _cache_identity(self, recipes):
+        payload = {
+            "policy": POLICY_VERSION,
+            "request": self.request.model_dump(mode="json"),
+            "pantry_revision": self.state["revision"],
+            "facts_policy_version": self.facts_version,
+            "nutrition_reference_version": self.reference_version,
+            "cooked_weight_evidence": self.cooked_weights,
+            "state": self.state,
+            "recipes": [r.model_dump() for r in recipes],
+            "prices": self.prepared.universe.universe_id,
+            "freshness": self.view.cache_identity,
+            "pricing_date": self.pricing_date.isoformat(),
+            "memberships": self.user.cache_identity,
+        }
+        return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
     def _estimate_alternatives(self):
         """Read-only eligibility probe; never changes the submitted opt-in."""
@@ -2371,23 +2474,7 @@ class PersonalPlanner:
             except (PolicyConflict, IncompleteBasketError) as exc:
                 comparisons.append({"max_stores": cap, "status": "CONFLICT", "message": str(exc)})
         result["checks"]["same_menu_comparisons"] = comparisons
-        payload = {
-            "policy": POLICY_VERSION,
-            "request": self.request.model_dump(mode="json"),
-            "pantry_revision": self.state["revision"],
-            "facts_policy_version": self.facts_version,
-            "nutrition_reference_version": self.reference_version,
-            "cooked_weight_evidence": self.cooked_weights,
-            "state": self.state,
-            "recipes": [r.model_dump() for r in recipes],
-            "prices": self.prepared.universe.universe_id,
-            "freshness": self.view.cache_identity,
-            "pricing_date": self.pricing_date.isoformat(),
-            "memberships": self.user.cache_identity,
-        }
-        digest = hashlib.sha256(
-            json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()
-        ).hexdigest()
+        digest = self._cache_identity(recipes)
         needs = [
             {k: v for k, v in g.items() if k not in {"positions", "candidates"}}
             for g in result["groups"]

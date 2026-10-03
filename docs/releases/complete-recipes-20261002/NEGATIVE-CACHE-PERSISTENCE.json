@@ -1,0 +1,586 @@
+{
+  "runtime_commit": "38ee1aa5ecbc64045801a4f40f9c0302ed0e4a09",
+  "suite": {
+    "tests": "3694",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "time": "2059.201",
+    "timestamp": "2026-10-03T08:39:32.585075+02:00"
+  },
+  "raw_xml_sha256": "18559988d806dd740d708c800e929bdd87190bd00e2bb90f4cac130f1fe9d15c",
+  "mapping": {
+    "expired_campaign": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_lidl_municipal_purchase.py::test_expired_campaign_cannot_fall_back_to_unknown_ordinary_price",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_product_search.py::test_expired_flattened_campaign_excluded_and_date_cache_changes",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_price_universe_runtime.py::test_campaign_survives_48h_but_expires_locally_without_rebuild",
+          "status": "PASS"
+        }
+      ]
+    },
+    "wrong_store_or_channel": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_exact_identity_bridge.py::test_coop_physical_offer_scope_never_becomes_online_scope",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_price_universe.py::test_build_fails_closed_for_missing_mismatched_or_wrong_snapshot_provenance",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_qualified_facts.py::test_other_market_or_source_revision_cannot_supply_facts",
+          "status": "PASS"
+        }
+      ],
+      "authentic_http": {
+        "report": "HTTP-ACCEPTANCE.json",
+        "case": "channel-negative",
+        "code": "DATA_BLOCKED",
+        "scope": "Explicit unavailable context; separate contract tests verify physical-versus-online identity."
+      }
+    },
+    "unknown_deposit": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_verified_offer_deposit.py::test_unknown_deposit_or_cross_variant_cannot_price",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_verified_offer_deposit.py::test_deposit_not_silently_assigned_to_unverified_ordinary_remainder",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_purchase_planning_modes.py::test_critical_or_variant_uncertainty_does_not_become_estimated_purchase",
+          "status": "PASS"
+        }
+      ]
+    },
+    "ambiguous_variant": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_purchase_planning_modes.py::test_critical_or_variant_uncertainty_does_not_become_estimated_purchase",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_purchase_planning_modes.py::test_open_campaign_never_borrows_specific_product_nutrition",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_supplier_facts.py::test_named_facts_never_cross_variant_package_or_explicit_gtin[changes0]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_supplier_facts.py::test_named_facts_never_cross_variant_package_or_explicit_gtin[changes1]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_supplier_facts.py::test_named_facts_never_cross_variant_package_or_explicit_gtin[changes2]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_supplier_facts.py::test_named_facts_never_cross_variant_package_or_explicit_gtin[changes3]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_supplier_facts.py::test_named_facts_never_cross_variant_package_or_explicit_gtin[changes4]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_supplier_facts.py::test_named_facts_never_cross_variant_package_or_explicit_gtin[changes5]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_supplier_facts.py::test_named_facts_never_cross_variant_package_or_explicit_gtin[changes6]",
+          "status": "PASS"
+        }
+      ]
+    },
+    "incompatible_food_form": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_raw_product_form_is_guarded_without_requested_nutrition[Vitl\\xf6k pulver]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_raw_product_form_is_guarded_without_requested_nutrition[Torkad vitl\\xf6k]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_raw_product_form_is_guarded_without_requested_nutrition[Kycklingnuggets]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_raw_product_form_is_guarded_without_requested_nutrition[Marinerad kyckling]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[dill-raw_edible-Dill & Gr\\xe4sl\\xf6k Chips-Snacks-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[dill-raw_edible-Dill P\\xe5se-Kryddor-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[dill-raw_edible-Dill-Frukt & gr\\xf6nt-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[dill-raw_edible-Dill Finhackad Fryst-Fryst-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[oregano-dry-Oregano Klass 1-Frukt & gr\\xf6nt-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[oregano-dry-Oregano Burk-Kryddor-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[spiskummin-dry-Kryddost Spiskummin & Nejlika 31%-Ost-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[tofu-as_sold-Tofu Naturell Fast Vegansk-Vegetariskt-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[tofu-as_sold-Tofu Alsp\\xe5nsr\\xf6kt Ekologisk-Vegetariskt-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[tofu-as_sold-Tofu Silkesmjuk Ekologisk-Vegetariskt-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[yoghurt naturell-as_sold-Grekisk Yoghurt Jordgubb 0,2%-Mejeri-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[yoghurt naturell-as_sold-Grekisk Yoghurt Naturell 10%-Mejeri-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[kyckling-raw_edible-Kyckling Nuggets-F\\xe5gel-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[kyckling-raw_edible-Kyckling Br\\xf6stfil\\xe9-F\\xe5gel-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[rapsolja-as_sold-Sm\\xf6r- & Rapsolja Flytande-Matfett-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[jordn\\xf6tssm\\xf6r-as_sold-Jordn\\xf6tssm\\xf6r Kakao Granola N\\xf6tsm\\xf6rsbakad-Skafferi-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[sojas\\xe5s-as_sold-Sojas\\xe5s Sweet-Soja-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[sojas\\xe5s-as_sold-Sojas\\xe5s Japansk-Soja-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[keso-as_sold-Keso Cottage Cheese Naturell Mini 1,5%-Mejeri-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[selleri-raw_edible-Bladselleri-Frukt & gr\\xf6nt-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[r\\xf6dbeta-raw_edible-R\\xf6dbetor Kokta-Gr\\xf6nsaker-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[r\\xf6dbeta-raw_edible-R\\xf6dbetor Klass 1-Frukt & gr\\xf6nt-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[cayennepeppar-dry-Cayennepeppar-Kryddor-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[mj\\xf6lk-as_sold-Mellanmj\\xf6lk 1,5%-Mejeri-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[tortillas-as_sold-Street Tortillas-Br\\xf6d-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[tortillas-as_sold-Glutenfria Corn Tortillas-Br\\xf6d-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[tortillas-as_sold-Tortillas Nacho Cheese Chips-Snacks-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[b\\xf6nor-cooked_drained-Vita B\\xf6nor Stora Eko-Konserver-True]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_whole_food_identity_never_substring_matches[b\\xf6nor-cooked_drained-Vita B\\xf6nor i Tomats\\xe5s-Konserver-False]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_compound_chili_and_unknown_pantry_form_do_not_qualify",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_reviewed_texture_and_cooking_time_properties_are_binding[yoghurt naturell-thick-Grekisk Yoghurt Naturell 10%-Mild Naturell Yoghurt 0,5%]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_reviewed_texture_and_cooking_time_properties_are_binding[tofu-firm-Tofu Naturell Extra Fast-Tofu Naturell]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_reviewed_texture_and_cooking_time_properties_are_binding[spiskummin-ground-Spiskummin Malen-Spiskummin Hel]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_reviewed_texture_and_cooking_time_properties_are_binding[linser-red_split-R\\xf6da Linser Delade-R\\xf6da Linser Hela]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_reviewed_texture_and_cooking_time_properties_are_binding[ris-white_rice-Basmatiris-Ris Fullkorn]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_source_facts.py::test_prepared_nutrition_cannot_be_used_as_purchased_raw_ingredient",
+          "status": "PASS"
+        }
+      ]
+    },
+    "missing_or_conflicting_nutrition": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_personal_planning_v2.py::test_selected_nutrition_limit_never_uses_unknown_as_zero",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_planning_v2.py::test_conflicting_nutrition_never_passes[-1]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_planning_v2.py::test_conflicting_nutrition_never_passes[nan]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_planning_v2.py::test_conflicting_nutrition_never_passes[inf]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_complete_candidates_use_actual_product_nutrition_not_legacy_coverage",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_supplier_facts.py::test_conflicting_nutrition_remains_blocked",
+          "status": "PASS"
+        }
+      ],
+      "authentic_qualification": {
+        "report": "results/qualification-release-final/qualification.json",
+        "scope": "Six original milk-containing recipe versions stop with DATA_BLOCKED for missing compatible-unit nutrition; no zero substituted. Approved nonmilk variants qualify independently."
+      }
+    },
+    "incompatible_user_choices": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_feature_gate_and_contradictions_are_explicit",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_existing_personal_limits_are_not_lowered_or_opted_in",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_distinct_content_shortage_precedes_product_search_and_suggests_actual_time",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_content_capacity_honors_merged_diet_and_hard_exclusions",
+          "status": "PASS"
+        }
+      ],
+      "authentic_http": {
+        "report": "HTTP-ACCEPTANCE.json",
+        "cases": [
+          "mixed-four-time-negative",
+          "indian-vegetarian",
+          "choices-time-negative",
+          "fish-conflict-negative"
+        ],
+        "code": "RECIPE_CHOICES_CONFLICT"
+      }
+    },
+    "cache_recipe_method_and_source_binding": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_recipe_resolution.py::test_recipe_validation_cache_separates_units_version_and_policy",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_resolution_cache_separates_texture_requirements",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_supplier_classification_is_bound_to_product_snapshot_and_package",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_source_frozen_corn_qualifies_without_category_guess_and_rejects_mixed_food",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_nutrition_reference.py::test_mapping_content_is_part_of_cache_version",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_performance.py::test_unrounded_quantity_limits_and_mutable_preparation_do_not_alias",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_performance.py::test_other_fact_versions_and_accounts_cannot_share_nutrition",
+          "status": "PASS"
+        }
+      ]
+    },
+    "cache_price_context_date_membership_and_stock": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_personal_planning_v2.py::test_personal_cache_identity_includes_owner_state_profile_memberships_and_recipes",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_price_universe.py::test_semantic_cache_is_scoped_by_universe_contexts_and_matcher_version",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_price_universe.py::test_package_cache_normalizes_quantity_and_keeps_multibuy_caps_in_key",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_price_universe.py::test_basket_cache_separates_store_limit_and_contexts_and_preserves_result",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_shared_membership_pricing.py::test_pricing_projection_cache_reuses_only_exact_context_and_date",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_product_search.py::test_stale_and_aging_cache_boundaries",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_performance.py::test_joint_free_search_equals_uncached_with_changed_profile_and_stock[1-30-0]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_performance.py::test_joint_free_search_equals_uncached_with_changed_profile_and_stock[2-32-0]",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_performance.py::test_joint_free_search_equals_uncached_with_changed_profile_and_stock[1-30-100]",
+          "status": "PASS"
+        }
+      ]
+    },
+    "monotonicity_existing_engines": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_search_monotonicity.py::test_fixed_basket_cannot_become_more_expensive_when_products_are_added",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_search_monotonicity.py::test_exact_cheapest_menu_is_monotone_for_fixed_recipe_candidates",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_search_monotonicity.py::test_production_beam_cheapest_is_monotone_when_products_are_only_added",
+          "status": "PASS"
+        }
+      ],
+      "authentic_http": {
+        "report": "http-final-corrected/monotonic-scopes.json",
+        "exact_two_store_sek": 777.15,
+        "estimated_two_store_sek": 682.23,
+        "same_actual_pantry": "empty, verified before each request; revision is only a concurrency token",
+        "one_store_result": "CONFLICT; no positive one-to-two-store cost comparison is proven"
+      }
+    },
+    "saving_owner_revision_and_reload": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_complete_recipe_integration.py::test_authored_complete_recipe_uses_real_basket_and_survives_storage",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_consumer_planner_v1.py::test_plan_store_is_append_only_and_metrics_are_privacy_safe",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_consumer_planner_v1.py::test_saved_plan_api_persists_without_repricing",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_consumer_planner_v1.py::test_saved_plan_reads_and_mutations_require_creating_anonymous_session",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_consumer_planner_v1.py::test_saved_plan_roundtrip_preserves_pricing_time_context_and_snapshot_lineage",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_booked_revisions.py::test_generator_replaces_booked_recipe_twice_preserving_history",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_personal_booked_revisions.py::test_concurrent_tabs_have_one_winner_and_no_inventory_change",
+          "status": "PASS"
+        }
+      ],
+      "authentic_browser": {
+        "report": "UI-ACCEPTANCE.json",
+        "cases": [
+          "chromium-desktop-public",
+          "webkit-mobile-personal",
+          "chromium-mobile-public",
+          "webkit-desktop-personal"
+        ],
+        "saved_revisions": [
+          1,
+          2,
+          3
+        ],
+        "reload_hashes_unchanged": true,
+        "restart_case": "webkit-desktop-personal",
+        "restart_scope": "Controlled application restart with feature disabled; all three saved revisions retain identical request/plan hashes. This is saved-result persistence, not unfinished-job recovery."
+      }
+    },
+    "jobs_dedupe_owner_and_short_status": {
+      "evidence_level": "offline controlled regression; do not relabel fixtures as live market acceptance",
+      "tests": [
+        {
+          "nodeid": "backend/tests/test_plan_jobs.py::test_async_plan_returns_before_work_finishes_and_preserves_failure",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_plan_jobs.py::test_jobs_are_bounded_owned_and_completed_transport_expires",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_planner_admission.py::test_identical_in_flight_requests_share_one_result",
+          "status": "PASS"
+        },
+        {
+          "nodeid": "backend/tests/test_planner_admission.py::test_distinct_cold_jobs_are_admitted_one_at_a_time",
+          "status": "PASS"
+        }
+      ],
+      "authentic_evidence": {
+        "http": "HTTP-ACCEPTANCE.json: all completed ordinary cases check duplicate POST reuse, stranger job denial, saved reread and stranger plan denial",
+        "browser": "UI-ACCEPTANCE.json: generation over one minute, reload while pending, WebKit mobile three-second network interruption and same-job reconnection"
+      }
+    }
+  },
+  "gaps_and_limits": [
+    {
+      "kind": "evidence_gap",
+      "finding": "No successful one-store complete five-dinner menu in the current HTTP monotonic scenario; exact one-store stopped before a valid plan. Thus that scenario proves exact-to-estimated monotonicity but not a positive one-to-two-store transition."
+    },
+    {
+      "kind": "resolved_by_supplemental_regression",
+      "finding": "Eight new adversarial cases verify cheaper incumbent preservation for both scope expansions, wider search stop, private stock/choice isolation, target metadata and SQLite reread; revoked membership, absent private stock and tampered checkout totals are rejected by the real qualification/audit path."
+    },
+    {
+      "kind": "evidence_scope",
+      "finding": "Expired campaign, unknown deposit and ambiguous campaign variant are verified through controlled source/pricing regression tests, not separate browser-generated complete five-dinner failures. Do not claim otherwise."
+    },
+    {
+      "kind": "pending_final_image",
+      "finding": "Legacy-public after the actual serialization fix, complete-1520 with unchanged 40/30/20 targets, three simultaneous independent users, and final-image UI are still reserved for the post-benchmark phase."
+    },
+    {
+      "kind": "version_scope",
+      "finding": "The full 3694-test suite belongs to 38ee1aa. The pure recipe memo prototype and subsequent incumbent correction have separate focused checks; this map does not silently extend the full-suite claim to a new runtime."
+    }
+  ],
+  "new_tests_or_remote_jobs_executed": "Supplemental local focused tests only; no remote jobs.",
+  "supplemental_incumbent_regression": {
+    "test_scope": "Synthetic declared products/prices, real authored recipes, ordinary product/quantity/nutrition/private allocation/package/audit/storage paths; only the wider optimize_slots proposal is substituted. Not authentic-market acceptance.",
+    "changes": "Selected concrete checkout and private allocation are retained without new product optimization, qualified under target choices, and finalized with target request/cache metadata. Narrow selected-search and expanded-attempt diagnostics remain separate. No injected product locks.",
+    "results": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "139",
+      "time": "8.989",
+      "timestamp": "2026-10-03T09:59:40.116231+02:00"
+    },
+    "raw_xml_sha256": "4a52e4e195844a32b8ee54662c364db8b0e2ef6ebb42483729fa775ccafa76df",
+    "tests": [
+      {
+        "nodeid": "backend/tests/test_complete_scope_incumbents.py::test_complete_cheapest_keeps_audited_narrow_incumbent_under_wider_request[more_expensive-exact_to_estimated]",
+        "status": "PASS"
+      },
+      {
+        "nodeid": "backend/tests/test_complete_scope_incumbents.py::test_complete_cheapest_keeps_audited_narrow_incumbent_under_wider_request[more_expensive-one_to_two_stores]",
+        "status": "PASS"
+      },
+      {
+        "nodeid": "backend/tests/test_complete_scope_incumbents.py::test_complete_cheapest_keeps_audited_narrow_incumbent_under_wider_request[budget_stop-exact_to_estimated]",
+        "status": "PASS"
+      },
+      {
+        "nodeid": "backend/tests/test_complete_scope_incumbents.py::test_complete_cheapest_keeps_audited_narrow_incumbent_under_wider_request[budget_stop-one_to_two_stores]",
+        "status": "PASS"
+      },
+      {
+        "nodeid": "backend/tests/test_complete_scope_incumbents.py::test_complete_incumbents_do_not_cross_private_stock_or_changed_food_choices",
+        "status": "PASS"
+      },
+      {
+        "nodeid": "backend/tests/test_complete_scope_incumbents.py::test_retained_checkout_still_runs_real_authorization_allocation_and_audit[membership]",
+        "status": "PASS"
+      },
+      {
+        "nodeid": "backend/tests/test_complete_scope_incumbents.py::test_retained_checkout_still_runs_real_authorization_allocation_and_audit[private_stock]",
+        "status": "PASS"
+      },
+      {
+        "nodeid": "backend/tests/test_complete_scope_incumbents.py::test_retained_checkout_still_runs_real_authorization_allocation_and_audit[checkout_amount]",
+        "status": "PASS"
+      }
+    ],
+    "new_remote_jobs": false
+  }
+}
