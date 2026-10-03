@@ -1,0 +1,69 @@
+{
+  "evidence_type": "read_only_exact_synthetic_feedback_rows",
+  "rows_checked": 2,
+  "private_identifiers_in_output": false,
+  "database_writes": 0,
+  "results": [
+    {
+      "case": "chromium-mobile-personal",
+      "result": "PASS",
+      "revision": 1,
+      "recipe_index": 0,
+      "recipe_hash": "09d00c53d9861a120606",
+      "design": {
+        "base_id": "smako-mexican-corn-soup",
+        "version": "1.4.0",
+        "variant_id": "creme-fraiche-protein",
+        "content_sha256": "160b1db4786899a2fff00e2acc9f8360f0951eee785268a5b81b7fd0fcb5b75b"
+      },
+      "ratings_match": true,
+      "saved_revision_recipe_matches": true,
+      "server_build_id": "recipe-candidate-17a9c133-0476bf36"
+    },
+    {
+      "case": "webkit-desktop-public",
+      "result": "PASS",
+      "revision": 1,
+      "recipe_index": 0,
+      "recipe_hash": "09d00c53d9861a120606",
+      "design": {
+        "base_id": "smako-mexican-corn-soup",
+        "version": "1.4.0",
+        "variant_id": "creme-fraiche-protein",
+        "content_sha256": "160b1db4786899a2fff00e2acc9f8360f0951eee785268a5b81b7fd0fcb5b75b"
+      },
+      "ratings_match": true,
+      "saved_revision_recipe_matches": true,
+      "server_build_id": "recipe-candidate-17a9c133-0476bf36"
+    }
+  ],
+  "verification_recorded_utc": "2026-10-03T10:39:59.498136+00:00",
+  "runtime_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+  "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+  "method": "Exact two synthetic feedback IDs from ignored UTF-8 browser reports; parameterized SELECTs limited to those feedback rows and their bound saved revisions. Compared full bound rating object, recipe_id(), design identity/version/content hash, build and exact saved recipe.",
+  "read_safety": "Verified isolated container owner label, exact image and existing state mount, no app source mounts. Required WAL-free databases; SQLite mode=ro&immutable=1 plus query_only. No sessions, actors or contact fields selected.",
+  "helper_sha256": "cdf2553254d35593c8952771f0845101911ff7886bb39145ce2335bb86687ed7",
+  "sanitized_raw_result_sha256": "35df05b2f228b214d818f128f784b994efd615d6d30d319b28b357d7c3ec767e",
+  "original_evidence_bindings": [
+    {
+      "case": "chromium-mobile-personal",
+      "original_artifact_sha256": {
+        "generated.json": "05a43c7283fe0027a917bf1b81d866f3e334025b83a9f5358f836336468022fc",
+        "report.json": "b0bee5231e903c8f6ad6d4033b15d0d7b2db7e9679d2499dff88c4eb1046ae15",
+        "first-recipe-viewport.png": "0fde6cc95407aaa31b600f07b85ccc92e0c2daf02c45f4aac228300866aff868"
+      },
+      "own_recipe_card_equipment_rechecked_from_original_UTF8": true
+    },
+    {
+      "case": "webkit-desktop-public",
+      "original_artifact_sha256": {
+        "generated.json": "ff2f45502ba1e4b06b99a47d0a8954e33b58d68237bcd78796fb98ff692a97ae",
+        "report.json": "9a68cca65304e09f408927cdba076aa1f50332b09fab2995e9f0897a436dbd8a",
+        "first-recipe-viewport.png": "a3450c33fcc8ec26c1fc9feafae1e16ac6b9d95efba5444bdcbccf96110fbea0"
+      },
+      "own_recipe_card_equipment_rechecked_from_original_UTF8": true
+    }
+  ],
+  "synthetic_ratings_not_cooking_evidence": true,
+  "new_planning_jobs": 0
+}
