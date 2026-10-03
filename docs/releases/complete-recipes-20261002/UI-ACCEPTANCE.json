@@ -739,14 +739,14 @@
         "version": "1.4.0",
         "variant_id": "creme-fraiche-protein",
         "equipment": [
-          "kÃ¶ksvÃ¥g",
-          "skÃ¤rbrÃ¤da",
+          "köksvåg",
+          "skärbräda",
           "kniv",
           "gryta med lock",
           "kastrull",
-          "rivjÃ¤rn",
+          "rivjärn",
           "stekpanna",
-          "potatisstÃ¶t"
+          "potatisstöt"
         ],
         "equipment_and_version_in_own_card_DOM": true
       },
@@ -755,8 +755,8 @@
         "version": "1.3.0",
         "variant_id": "white-bean-protein",
         "equipment": [
-          "kÃ¶ksvÃ¥g",
-          "skÃ¤rbrÃ¤da",
+          "köksvåg",
+          "skärbräda",
           "kniv",
           "gryta med lock",
           "kastrull"
@@ -768,12 +768,12 @@
         "version": "1.4.0",
         "variant_id": "base",
         "equipment": [
-          "kÃ¶ksvÃ¥g",
-          "skÃ¤rbrÃ¤da",
+          "köksvåg",
+          "skärbräda",
           "kniv",
           "rymlig stekpanna med lock",
           "kastrull",
-          "rivjÃ¤rn"
+          "rivjärn"
         ],
         "equipment_and_version_in_own_card_DOM": true
       },
@@ -782,8 +782,8 @@
         "version": "1.3.0",
         "variant_id": "base",
         "equipment": [
-          "kÃ¶ksvÃ¥g",
-          "skÃ¤rbrÃ¤da",
+          "köksvåg",
+          "skärbräda",
           "kniv",
           "rymlig stekpanna med lock",
           "kastrull"
@@ -795,8 +795,8 @@
         "version": "1.1.0",
         "variant_id": "protein",
         "equipment": [
-          "kÃ¶ksvÃ¥g",
-          "skÃ¤rbrÃ¤da",
+          "köksvåg",
+          "skärbräda",
           "kniv",
           "gryta med lock",
           "kastrull"
@@ -810,7 +810,7 @@
       "saved_search_outcome": {
         "status": "VALID_SOLUTION",
         "global_optimum_proven": false,
-        "label": "LÃ¤gsta hittade inkÃ¶pskostnad inom dina val",
+        "label": "Lägsta hittade inköpskostnad inom dina val",
         "search_budget": {
           "scope": "current_planner_search_diagnostics",
           "nutrition_status": "REACHED",
@@ -820,7 +820,7 @@
           "week_search_method": "bounded_beam",
           "distinct_week_proposals_pruned": 295
         },
-        "budget_message": "En giltig meny hittades. SÃ¶kbudgeten nÃ¥ddes i 154 registrerade nÃ¤ringsdelberÃ¤kningar; andra godkÃ¤nda produktkombinationer kan finnas. Globalt lÃ¤gsta pris Ã¤r inte bevisat."
+        "budget_message": "En giltig meny hittades. Sökbudgeten nåddes i 154 registrerade näringsdelberäkningar; andra godkända produktkombinationer kan finnas. Globalt lägsta pris är inte bevisat."
       },
       "exact_server_message_present_in_DOM": true,
       "public_case_direct_capture": "NOT_CAPTURED"
@@ -865,6 +865,37 @@
       "Ingen fysisk mobil eller provlagning. Inga valda kampanjrader i dessa menyer; exakt köp, fler matkök och andra kost-/allergenprofiler kräver sina separata prov.",
       "Inga CPU- eller minnesmått hävdas från dessa browserflöden. En giltig meny och ett avslutat prov är inte bevis för globalt lägsta kostnad."
     ],
-    "raw_artifacts_policy": "Råa rapporter, plansvar, bilder och snäv feedbackhjälpare finns endast utanför Git i ignorerad .local/real-ui-final-17a9c133. Inga cookies, sessions-, plan- eller återkopplings-ID:n ingår här."
+    "raw_artifacts_policy": "Råa rapporter, plansvar, bilder och snäv feedbackhjälpare finns endast utanför Git i ignorerad .local/real-ui-final-17a9c133. Inga cookies, sessions-, plan- eller återkopplings-ID:n ingår här.",
+    "local_UTF8_summary_review": {
+      "scope": "Only the local derived presentation summary; original browser and saved-plan bytes were already correct UTF-8.",
+      "cause": "An intermediate Windows read_text() without encoding decoded UTF-8 bytes using the locale default; the derived equipment and budget strings were then encoded again.",
+      "correction": "Rebuilt equipment and budget fields directly from unchanged original generated.json and report.json decoded explicitly as UTF-8. No guessed transcoding was used.",
+      "original_bindings": [
+        {
+          "case": "chromium-mobile-personal",
+          "original_artifact_sha256": {
+            "generated.json": "05a43c7283fe0027a917bf1b81d866f3e334025b83a9f5358f836336468022fc",
+            "report.json": "b0bee5231e903c8f6ad6d4033b15d0d7b2db7e9679d2499dff88c4eb1046ae15",
+            "first-recipe-viewport.png": "0fde6cc95407aaa31b600f07b85ccc92e0c2daf02c45f4aac228300866aff868"
+          },
+          "own_recipe_card_equipment_rechecked_from_original_UTF8": true
+        },
+        {
+          "case": "webkit-desktop-public",
+          "original_artifact_sha256": {
+            "generated.json": "ff2f45502ba1e4b06b99a47d0a8954e33b58d68237bcd78796fb98ff692a97ae",
+            "report.json": "9a68cca65304e09f408927cdba076aa1f50332b09fab2995e9f0897a436dbd8a",
+            "first-recipe-viewport.png": "a3450c33fcc8ec26c1fc9feafae1e16ac6b9d95efba5444bdcbccf96110fbea0"
+          },
+          "own_recipe_card_equipment_rechecked_from_original_UTF8": true
+        }
+      ],
+      "original_evidence_rewritten": false,
+      "runtime_changes": false,
+      "new_HTTP_requests": 0,
+      "visual_check": "The saved WebKit viewport screenshot shows the same correctly spelled equipment as its original UTF-8 DOM text.",
+      "unaffected_results": "Numeric timings, costs, qualification outcomes and revision checks are unchanged. The public budget message remains NOT_CAPTURED.",
+      "feedback_helper_encoding": "Both generated.json and report.json are read with explicit encoding=utf-8 before computing expected feedback bindings."
+    }
   }
 }
