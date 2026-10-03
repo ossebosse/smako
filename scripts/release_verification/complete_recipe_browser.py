@@ -103,6 +103,7 @@ def observe_layout(page):
       viewport: {width:innerWidth,height:innerHeight},
       documentWidth:document.documentElement.scrollWidth,
       noHorizontalPageOverflow:document.documentElement.scrollWidth <= innerWidth,
+      skipLink:(()=>{const el=document.querySelector('.skip-link');if(!el)return null;const r=el.getBoundingClientRect();return {focused:el===document.activeElement,top:r.top,bottom:r.bottom,overlapsViewport:r.bottom>0&&r.top<innerHeight};})(),
       overflowingControls:[...document.querySelectorAll('input,select,button')].filter(el=>{
         const r=el.getBoundingClientRect();return r.width && getComputedStyle(el).visibility!=='hidden' && (r.right>innerWidth+1||r.left < -1);
       }).map(el=>({id:el.id,text:(el.textContent||'').slice(0,100)}))
@@ -252,10 +253,14 @@ def run_case(browser, engine, mobile, personal, args):
         report["recipe_text"] = page.locator("#plan-content" if personal else "#recipes-list").inner_text()
         report["recipe_layout"] = observe_layout(page)
         assert report["recipe_layout"]["noHorizontalPageOverflow"]
+        skip_link = report["recipe_layout"]["skipLink"]
+        assert not skip_link or skip_link["focused"] or not skip_link["overlapsViewport"]
         if args.recipe_mode == "complete":
             assert page.locator(".complete-recipe-content:visible").count() == args.dinners
             assert page.locator(".recipe-component:visible").count() >= args.dinners
             page.locator(".complete-recipe-content:visible").first.screenshot(path=str(target / "first-recipe.png"))
+            page.locator(".complete-recipe-content:visible").first.evaluate("el=>el.scrollIntoView({block:'start'})")
+            page.screenshot(path=str(target / "first-recipe-viewport.png"))
         page.locator("#plan-content" if personal else "#menu-section").screenshot(path=str(target / "recipes.png"))
         if personal:
             page.get_by_role("button", name="Öppna inköpslistan", exact=True).click()
