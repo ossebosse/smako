@@ -1,75 +1,65 @@
-# 2026-10-03: Nästa receptlager – lokal, versionsbunden kandidat
+# 2026-10-03: Nästa receptlager – slutkandidat, sista HTTP-prov pågår
 
-## Pågående slutkontroll kl. 11:42
+Aktuellt kl. 12:16: arbetet ligger på `feature/complete-recipe-layer`, från
+faktiska `402a5c9` ovanpå publika `74c9077`. Ingen produktionsaktivering eller
+Git-push. Runtime är låst till `17a9c1330dcc72ff9750a3fa680fa6982f7ed99b`.
+Efterföljande commits ändrar dokumentation och acceptansskript, inte runtime.
 
-Slutruntime är nu `17a9c1330dcc72ff9750a3fa680fa6982f7ed99b` med både
-energiintegritet och källbunden brödkvalificering. Explicit fryst eller
-obligatorisk beredning spärras oavsett stödd källfältsform och kortnamn.
-Nya positiva matbrödsnamn kräver kategori, ätklarhetsuppgift och granskad
-sammansättning; allergen- och näringskrav är separata. 252 integrerade riktade
-prov, Ruff för samtliga ändrade Python-filer, compileall och pip check PASS.
-Full 17a-regression startad; runtimefilerna hålls fasta under denna körning.
-Föregående dd3-fullsvit avslutades med 3 818 PASS, 0 fel/överhoppade,
-2 087,676 s, inga spärrade nät-/källåtkomster.
-
-Serverpaket `smako-server-17a9c1330dcc.zip`, 2 739 005 byte, SHA-256
+Serverpaket `.local/releases/complete-recipes-20261002/smako-server-17a9c1330dcc.zip`,
+2 739 005 byte, SHA-256
 `d3327b9137d4310707118b5272bc826ed0403ebd6d0c0ab935bb1196efee060a`.
-Ny imageverifiering för 17a pågår. Därefter körs samtliga 104 receptversioner
-och sju fria menyer, rena kall-/varmprov, fem HTTP-fall och ett nytt
-Chromium-mobilflöde. Isolerad fjärrresurs tilldelas dessa sekventiellt;
-tidigare dd3- och ca57-paket nedan är kontrollversioner. HTTP-servern är
-ännu äldre testbuild. Inga produktionsändringar eller push.
+Image `sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35`:
+645 runtimefiler matchar; pip check och offline-Chromium som appanvändare PASS.
+[App-only aktivering och beständig flaggåtergång](releases/complete-recipes-20261002/ACTIVATION.md)
+är låsta till dessa identiteter men har inte utförts i produktion.
 
+Full offline-regression på oförändrad slutruntime: **3 887 PASS**, 0 fel eller
+överhoppade, 2 042,099 s, inga spärrade nät-/äldre källåtkomster. 252 riktade
+integrationsprov plus 6 slutliga HTTP-runner-kontrakt PASS. Ruff för samtliga
+ändrade Python-filer, compileall och pip check PASS.
+[TESTS.json](releases/complete-recipes-20261002/TESTS.json) bevarar även äldre körningar.
 
-Arbetet ligger på `feature/complete-recipe-layer` från faktiska `402a5c9`,
-ovanpå fungerande publika `74c9077`. Ingen produktionsaktivering eller push.
-Aktuell kandidatruntime: `dd3f6add6a6b4cffe58f1a72c9408816f08a6f25`.
-Serverpaket `smako-server-dd3f6add6a6b.zip`, 2 737 637 byte, SHA-256
-`58eebb0c056bc6b9cd10c6d6392ac3855b2bbf6e51cc16f9fa1d937767837773`.
-Verifierad image
-`sha256:7a9834d2d5b58a7b7c835b77d833ae5640f0a6c53dda350282dc1e034329bbcb`:
-645 runtimefiler matchar, pip check och offline-Chromium som appanvändare
-passerar. Paketet ligger under `.local/releases/complete-recipes-20261002`.
+Slutlig 104-kvalificering och sju fria menyer är klara på exakt image utan
+app-source-mounts: **94/104 versioner, 47/48 familjer, 43/48 original**.
+Bibliotek 1.4.0: 48 distinkta grundrätter, 56 variationer. Energifelen i två
+Coop-produkter är spärrade; vanlig kvalificering hittar annan färs och
+källstyrkt färdigt matbröd i 16 versioner, med oförändrade receptmängder.
+Tio kvarvarande verkliga källstopp gäller kapris, kidneybönor och mjölkbasis.
+[Slutkvalificering](releases/complete-recipes-20261002/FINAL-QUALIFICATION.md),
+[alla menyer och inköp](releases/complete-recipes-20261002/MENUS.md).
+Ingen fysisk provlagning eller fysisk iPhone-testning har utförts.
 
-Slutgranskningen fann två hashbundna motstridiga energipar i Coop-färs och
-rostbröd. `dd3f6ad` spärrar dessa generellt och bevarar originalvärden/proveniens
-även vid exakt identitets- och leverantörskomplettering. Inga enheter gissas om.
-125 riktade prov och oberoende kontroll av de verkliga råposterna passerar.
-Tidigare 94/104-kvalificering är historisk, inte slutgodkännande: 16 kandidater,
-tre menyer och ett monotoniprov berördes. Se
-[energiutredningen](releases/complete-recipes-20261002/ENERGY-DECLARATION-REVIEW.md).
-Ny 104-kvalificering och sju fria menyer körs nu på exakt dd3-image, utan
-runtime-kodmounts eller tvingade produkter. Bred offline-regression på dd3 pågår.
-Föregående ca57-regression: 3 774 PASS, 0 fel/överhoppade, 2 078,881 s.
+Ren slutmätning med samma frysta underlag och 2 CPU/3 GiB:
+- Äldre publikt flöde 161,047 s kallt mot baseline 328,424 s (**−50,96 %**),
+  2,264 s varmt. Recept, ingredienser och hela korgen identiska: 168,55 kr.
+- Komplett grekisk/mexikansk 5×2, 10–15, 40 min/40 g, Billigast: 105,721 s
+  kallt / 95,976 s varmt, samma korg 738,17 kr.
+- Python 3.12.13 och alla 47 beroendeversioner identiska mot baseline.
+[Fulla mätvärden](releases/complete-recipes-20261002/PACKAGED-FINAL-PERFORMANCE.json).
 
-Receptberäknings-, validerings- och nyckelåteranvändning är integrerade,
-liksom återkvalificering av billigare bevarade inköpslösningar under utökade
-användarval. Kontrollerad ca57-mätning: gammalt publikt flöde 160,900 s kallt
-mot baseline 328,424 s; samma recept/korg 168,55 kr. Ny blandad 40g/40min-plan
-100,136 s kallt / 93,239 s varmt, 738,17 kr. Detta är kontrollversionens tider;
-dd3 får egen slutmätning. Samma 2 CPU/3 GiB och identiska 47 beroendeversioner.
+Slutimagen kör isolerat på localhost:18122 via befintlig SSH-tunnel,
+BUILD_ID `recipe-candidate-17a9c133-0476bf36`, featureflagga på. Alla 28 äldre
+testrevisioner är oförändrade över imagebytet. Chromium mobil/personligt
+slutflöde PASS: generering 95,328 s, byte 17,719 s, omräkning 11,937 s,
+versioner/redskap/budgettext/DOM/layout/feedback/revision 1–3 kontrollerade.
+WebKit desktop/publikt kör nu och lämnar restart-handshake till root före
+label-/imageverifierad `docker restart` och ny hashkontroll. UI-agent äger
+fjärrresursen tills den lämnas tillbaka. Inga samtidiga tunga acceptansjobb.
 
-Flaggan `COMPLETE_RECIPES_ENABLED` är av som standard. Publik och personlig
-planering har integrerade val för matkök, ingrediensantal, tid, protein,
-kost och godkända anpassningar. Befintliga optimeringsmål och köp-/näringsskydd
-återanvänds. Byte och uttrycklig omräkning skapar nya planrevisioner;
-återkoppling binds till exakt receptversion. Bibliotek 1.4.0 har 48 grundrätter
-och 56 godkända variationer, åtta grundrätter per matkök. Ingen fysisk
-provlagning eller fysisk iPhone-testning har utförts.
+**Återstår före leverans:** slutför WebKit/omstart, ge sedan integrationagent
+resursen för fem nya HTTP-fall: legacy-public, complete-1520, unrestricted-varied,
+monotonic-scopes (exact1→exact2→estimated2→estimated3) och concurrent-three.
+Alla måste bindas till slutbuilden. Därefter integreras sanerade UI/HTTP-bevis,
+RESULTS.md färdigställs från `.local/complete-recipes-20261002/RESULTS.template.md`
+och denna handoff uppdateras. RESULTS.md är ännu ett äldre arbetsunderlag.
 
-Fyra autentiska browserflöden på tidigare build bevaras. Deras tolv revisioner
-använde ingen av de två feldeklarerade produkterna. Nytt Chromium-mobilflöde,
-fem slutliga HTTP-fall och samtidighetsmätning återstår efter omkvalificeringen.
-[RESULTS.md](releases/complete-recipes-20261002/RESULTS.md) är fortfarande ett
-pågående underlag. Uppdaterad app-only aktiverings-/återgångsanvisning bereds.
-Återgång är flaggan av i samma nya version, aldrig en gammal databas över nya planer.
-
-Produktionens app är fortsatt `74c9077`; relä, scheduler, källpolicy,
-kommuntäckning och färskhetsgränser är orörda. Stora frysta offentliga
-källunderlag, testplaner, bilder och råloggar ligger utanför Git i
-`.local/complete-recipes-20261002` och dokumenterade worktrees. Den isolerade
-fjärrmiljön ligger under `/var/tmp/smako-complete-recipes-20261002`; dess
-replayklocka och sessionslagring får aldrig bli produktionskonfiguration.
+Produktion kontrollerad skrivskyddat 2026-10-03 10:12:15 UTC: HTTP200/ready,
+fortfarande build `74c9077001b3084317f36630fd38ce48e4663473`. Relä, scheduler,
+insamling, femkällorspolicy, kommunomfattning och 36/48-timmarsgränser orörda.
+Råfiler och privata/syntetiska testplaner ligger utanför Git i `.local` och
+befintliga agentworktrees. Den isolerade fjärrroten är
+`/var/tmp/smako-complete-recipes-20261002`; replayklocka/state får aldrig
+användas som produktionskonfiguration. Återgång bevarar planrevisionerna.
 
 # 2026-10-02: Uppföljning – korrekta fältfel och fungerande lång generering
 
