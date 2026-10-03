@@ -131,6 +131,19 @@ def test_omitted_nutrition_details_do_not_claim_no_search_limit_was_reached():
     assert completed_search_outcome({})["search_budget"]["nutrition_status"] == "NOT_REACHED"
 
 
+@pytest.mark.parametrize("label,expected", [
+    ("Oliver Kalamata Urkärnade Eko", True),
+    ("Oliver Kalamata Urkärnade Ekologiska", True),
+    ("Oliver Kalamata Urkärnade Eko Fyllda Med Ost", False),
+    ("Oliver Kalamata Urkärnade Eko Vitlök", False),
+    ("Oliver Kalamata Urkärnade Eko Tapenade", False),
+    ("Oliver Kalamata Urkärnade Eko Marinerade", False),
+])
+def test_organic_olive_label_remains_whole_identity_not_a_flavor_substitution(label, expected):
+    from app.services.complete_recipes import _whole_food_identity
+    assert _whole_food_identity("oliver", "preserved_drained", SimpleNamespace(name=label), None) is expected
+
+
 @pytest.mark.parametrize("name", ["Vitlök pulver", "Torkad vitlök", "Kycklingnuggets", "Marinerad kyckling"])
 def test_raw_product_form_is_guarded_without_requested_nutrition(name):
     ingredient = "vitlök" if "vitlök" in name.casefold() else "kyckling"

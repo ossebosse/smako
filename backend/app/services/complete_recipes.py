@@ -385,7 +385,7 @@ def _whole_food_identity(canonical, form, product, fact):
         "kokosmjölk": r"kokosmjölk(?: eko| ekologisk| original)*",
         "sesamfrön": r"sesamfrön(?: vita| skalade| oskalade| eko| ekologiska| burk)*",
         "senap": r"(?:dijon )?senap(?: dijon| stark| mild| grov| skånsk| sötstark| finmalen)*",
-        "kapris": r"kapris(?: små| fina| fin| i lag)*", "oliver": r"(?:gröna |svarta )?oliver(?: utan kärnor| urkärnade| kalamata| gröna| svarta)*",
+        "kapris": r"kapris(?: små| fina| fin| i lag)*", "oliver": r"(?:gröna |svarta )?oliver(?: utan kärnor| urkärnade| kalamata| gröna| svarta| eko| ekologiska)*",
         "salt": r"(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*",
         "mjölk": r"(?:standardmjölk|mellanmjölk|lättmjölk|mjölk)(?: laktosfri| ekologisk| eko| \d+(?:[,.]\d+)?\s*%)*",
     }
