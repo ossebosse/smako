@@ -250,6 +250,7 @@ async def concurrent_three(args):
 async def monotonic_scopes(args):
     session, stranger = Session(args.base), Session(args.base)
     results = []
+    shared_choices = None
     try:
         await session.bootstrap()
         await stranger.bootstrap()
@@ -262,8 +263,17 @@ async def monotonic_scopes(args):
             # Rebind that concurrency token; do not retry an obsolete request or
             # interpret REVISION_CONFLICT as an economic result.
             payload['personal']['pantry_revision'] = current_state['revision']
+            comparable = copy.deepcopy(payload)
+            comparable.pop('max_stores')
+            comparable.pop('purchase_planning_mode')
+            comparable['personal'].pop('pantry_revision')
+            if shared_choices is None:
+                shared_choices = comparable
+            assert comparable == shared_choices, 'A purchase or nutrition choice changed between scopes'
             result = await submit(session, payload, deadline=args.deadline, stranger=stranger)
             result['scope'] = {'stores': stores, 'purchase': purchase}
+            result['pantry_comparison'] = {'items': [], 'revision': current_state['revision'],
+                'revision_meaning': 'Concurrency token only; actual pantry quantities remain unchanged and empty'}
             if result['status'] == 'complete':
                 verify_saved(result['response'], payload)
                 result['total'] = result['response']['plan']['optimized_basket']['total']
@@ -278,6 +288,7 @@ async def monotonic_scopes(args):
                                     'narrower_total': earlier['total'], 'wider_total': later.get('total')})
         return {'case': 'monotonic-scopes', 'results': results, 'comparisons': comparisons,
                 'all_comparisons_passed': all(c['passed'] for c in comparisons) if comparisons else None,
+                'unchanged_choices': shared_choices,
                 'http': session.http}
     finally:
         await session.client.aclose()

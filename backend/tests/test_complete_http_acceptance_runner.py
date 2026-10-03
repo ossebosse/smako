@@ -83,5 +83,9 @@ def test_monotonic_runner_rebinds_current_empty_pantry_revision(monkeypatch):
 
     monkeypatch.setattr(runner, 'Session', SessionStub)
     monkeypatch.setattr(runner, 'submit', submit_stub)
-    asyncio.run(runner.monotonic_scopes(SimpleNamespace(base='isolated-test', deadline=1)))
+    result = asyncio.run(runner.monotonic_scopes(SimpleNamespace(base='isolated-test', deadline=1)))
     assert seen == [0, 1, 2]
+    assert all(row['pantry_comparison']['items'] == [] for row in result['results'])
+    assert [row['pantry_comparison']['revision'] for row in result['results']] == [0, 1, 2]
+    assert result['unchanged_choices']['personal']['allow_nutrition_estimates'] is True
+    assert 'max_stores' not in result['unchanged_choices']
