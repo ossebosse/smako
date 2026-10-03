@@ -1,6 +1,19 @@
 # 2026-10-03: Nästa receptlager – lokal, versionsbunden kandidat
 
-## Pågående slutkontroll kl. 11:08
+## Pågående slutkontroll kl. 11:25
+
+**Ny konkret integration 11:15:** dd3-kvalificeringen gav 90/104 versioner,
+45/48 familjer och 42/48 original. Alla tolv färsrätter hittar annan korrekt
+produkt. Fyra brödberoende soppor stoppades; fortsatt källgranskning fann att
+vanligt färdigskivat matbröd felaktigt nekas av den snäva namn-/formkontrollen.
+Integrationagent utökar nu kvalificeringen med uttrycklig källkategori,
+ätklarhetsuppgift och granskad brödsammansättning; inga GTIN-undantag eller
+bake-off-genvägar. dd3 är därför kontrollkandidat inför nästa avgränsade fix.
+Två av sju dd3-menyer är körda som diagnostik; fem pausades. Fjärrresursen
+är fri, HTTP-servern fortfarande äldre testbuild och inte den nya imagen.
+Ny bild/104+7/rena tider/fem HTTP-fall/mobilflöde ska följa efter fixen.
+Pågående dd3-fullsvit behålls versionsren och slutförs före main-kodändring.
+
 
 Arbetet ligger på `feature/complete-recipe-layer` från faktiska `402a5c9`,
 ovanpå fungerande publika `74c9077`. Ingen produktionsaktivering eller push.
