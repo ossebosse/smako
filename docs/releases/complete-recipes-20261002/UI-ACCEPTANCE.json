@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "title": "Frontendacceptans för Smakos genomarbetade recept",
+  "evidence_type": "autentiska isolerade browserprov med fryst prisunderlag, kompletterade av separat syntetisk kontraktskontroll",
+  "authentic_browser_build": {
+    "build_id": "recipe-candidate-26ecd5d3-fe953617",
+    "server_arm": "candidate-ui-clock-final",
+    "frozen_price_time_utc": "2026-10-02T15:09:36Z",
+    "price_universe": "price-universe:8ecd0659a7e69b8eb007e383ae4f9686a3d1a4f24570b0dd9b72c9c875653bad",
+    "mocked_routes": false,
+    "qualification_path": "Ordinarie API, jobb, PersonalPlanner, produkt-/mängd-/näringskontroll, gemensam inköpsmotor, audit och planlagring.",
+    "scope": "Ingen produktionsaktivering. Prisögonblicket och prisbeloppen är historiska. Senare receptutgåva 1.4.0 kördes inte om genom dessa fyra fulla browserprov."
+  },
+  "common_positive_choices": {
+    "dinners": 5,
+    "recipe_mode": "complete",
+    "cuisines": [
+      "greek",
+      "mexican"
+    ],
+    "ingredient_range": [
+      10,
+      15
+    ],
+    "minimum_protein_g_per_portion": 40,
+    "max_stores": 2,
+    "purchase_mode": "estimated",
+    "allow_nutrition_estimates": true,
+    "adaptation": "approved",
+    "allow_fish": false,
+    "pantry_stock": "Inget testlager angivet."
+  },
+  "cases": [
+    {
+      "case": "chromium-desktop-public",
+      "result": "PASS",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "servings": 2,
+      "max_minutes": 40,
+      "optimization": "cheapest",
+      "memberships": {},
+      "initial_checkout_sek": 738.17,
+      "initial_used_ingredient_cost_sek": 444.93,
+      "initial_store_count": 2,
+      "purchase_status": "VERIFIED_WITH_ESTIMATES",
+      "estimated_purchase_rows": 1,
+      "selected_campaign_rows": 0,
+      "menu_reference": "two_person_menu",
+      "protein_g_per_portion_before_rounding": [
+        40.17199999999999,
+        43.532500000000006,
+        52.45450000000001,
+        55.489,
+        41.515
+      ],
+      "operation_seconds": {
+        "generation": 151.016,
+        "replacement": 23.609,
+        "recalculation": 11.843
+      },
+      "maximum_status_get_ms": 1076.549,
+      "generation_reloaded_while_pending": true,
+      "offline_seconds": 0,
+      "different_base_after_replacement": true,
+      "saved_revision_numbers": [
+        1,
+        2,
+        3
+      ],
+      "saved_request_and_plan_hashes_unchanged_on_reload": true,
+      "app_restart_hashes_unchanged": null,
+      "saved_rich_recipes_readable_when_feature_disabled": null,
+      "no_horizontal_overflow": true,
+      "javascript_errors": 0,
+      "network_failures": 0
+    },
+    {
+      "case": "webkit-mobile-personal",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "servings": 2,
+      "max_minutes": 40,
+      "optimization": "cheapest",
+      "memberships": {
+        "coop": true,
+        "willys": true
+      },
+      "initial_checkout_sek": 738.17,
+      "initial_used_ingredient_cost_sek": 444.93,
+      "initial_store_count": 2,
+      "purchase_status": "VERIFIED_WITH_ESTIMATES",
+      "estimated_purchase_rows": 1,
+      "selected_campaign_rows": 0,
+      "menu_reference": "two_person_menu",
+      "protein_g_per_portion_before_rounding": [
+        40.17199999999999,
+        43.532500000000006,
+        52.45450000000001,
+        55.489,
+        41.515
+      ],
+      "operation_seconds": {
+        "generation": 142.079,
+        "replacement": 25.25,
+        "recalculation": 11.875
+      },
+      "maximum_status_get_ms": 1766.242,
+      "generation_reloaded_while_pending": true,
+      "offline_seconds": 3.0,
+      "different_base_after_replacement": true,
+      "saved_revision_numbers": [
+        1,
+        2,
+        3
+      ],
+      "saved_request_and_plan_hashes_unchanged_on_reload": true,
+      "app_restart_hashes_unchanged": null,
+      "saved_rich_recipes_readable_when_feature_disabled": null,
+      "no_horizontal_overflow": true,
+      "javascript_errors": 0,
+      "network_failures": 2
+    },
+    {
+      "case": "chromium-mobile-public",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "servings": 4,
+      "max_minutes": 45,
+      "optimization": "balanced",
+      "memberships": {},
+      "initial_checkout_sek": 1125.59,
+      "initial_used_ingredient_cost_sek": 874.16,
+      "initial_store_count": 2,
+      "purchase_status": "VERIFIED_WITH_ESTIMATES",
+      "estimated_purchase_rows": 1,
+      "selected_campaign_rows": 0,
+      "menu_reference": "four_person_menu",
+      "protein_g_per_portion_before_rounding": [
+        40.05199999999999,
+        44.07250000000001,
+        52.45450000000001,
+        41.515,
+        40.528000000000006
+      ],
+      "operation_seconds": {
+        "generation": 99.344,
+        "replacement": 23.313,
+        "recalculation": 13.047
+      },
+      "maximum_status_get_ms": 1089.823,
+      "generation_reloaded_while_pending": true,
+      "offline_seconds": 0,
+      "different_base_after_replacement": true,
+      "saved_revision_numbers": [
+        1,
+        2,
+        3
+      ],
+      "saved_request_and_plan_hashes_unchanged_on_reload": true,
+      "app_restart_hashes_unchanged": null,
+      "saved_rich_recipes_readable_when_feature_disabled": null,
+      "no_horizontal_overflow": true,
+      "javascript_errors": 0,
+      "network_failures": 0
+    },
+    {
+      "case": "webkit-desktop-personal",
+      "result": "PASS",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "servings": 2,
+      "max_minutes": 40,
+      "optimization": "cheapest",
+      "memberships": {},
+      "initial_checkout_sek": 738.17,
+      "initial_used_ingredient_cost_sek": 444.93,
+      "initial_store_count": 2,
+      "purchase_status": "VERIFIED_WITH_ESTIMATES",
+      "estimated_purchase_rows": 1,
+      "selected_campaign_rows": 0,
+      "menu_reference": "two_person_menu",
+      "protein_g_per_portion_before_rounding": [
+        40.17199999999999,
+        43.532500000000006,
+        52.45450000000001,
+        55.489,
+        41.515
+      ],
+      "operation_seconds": {
+        "generation": 142.5,
+        "replacement": 25.828,
+        "recalculation": 14.203
+      },
+      "maximum_status_get_ms": 1079.686,
+      "generation_reloaded_while_pending": true,
+      "offline_seconds": 0,
+      "different_base_after_replacement": true,
+      "saved_revision_numbers": [
+        1,
+        2,
+        3
+      ],
+      "saved_request_and_plan_hashes_unchanged_on_reload": true,
+      "app_restart_hashes_unchanged": true,
+      "saved_rich_recipes_readable_when_feature_disabled": true,
+      "no_horizontal_overflow": true,
+      "javascript_errors": 0,
+      "network_failures": 0
+    }
+  ],
+  "two_person_menu": [
+    "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+    "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+    "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+    "Citronkyckling med spenatris, feta och gurksallad",
+    "Spenatris med kikärtor, feta och citronyoghurt"
+  ],
+  "four_person_menu": [
+    "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+    "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+    "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+    "Spenatris med kikärtor, feta och citronyoghurt",
+    "Tomatbakade vita bönor med feta och örtigt couscous"
+  ],
+  "common_observations": [
+    "Alla fyra prov skapade en verklig femmiddagsmeny från formulärets knapp; samtliga tog över en minut.",
+    "Varje generering, receptbyte och omräkning gav en dyr POST och ett jobb. Dubbelklick och omladdning av pågående generering startade inte en ny beräkning.",
+    "Statusanrop var korta och visade faktiska arbetssteg. Det längsta observerade statusanropet var 1766,242 ms.",
+    "Receptbytet valde en annan grundrätt, kvalificerade den samordnade korgen och sparade revision 2. Uttrycklig omräkning sparade revision 3.",
+    "Alla tre sparade revisioners request- och plandata jämfördes med hash efter återläsning; tidigare revisioner förblev oförändrade.",
+    "Inköpslistor och recept öppnades via det vanliga gränssnittet. DOM-kontroll och sparade bilder visar två kolumner på desktop och en på mobil, utan horisontellt sidöverskott.",
+    "Separata browserägare nekades åtkomst till sparade planer med 403. De tre första fallen gav 404 för den andra ägarens jobbanrop före omstart; i fjärde fallet var jobben dessutom avslutade genom omstart."
+  ],
+  "offline_and_restart": {
+    "offline_case": "webkit-mobile-personal",
+    "offline_observation": "Tre sekunders avsiktligt nätavbrott efter omladdning av pågående jobb. Två förväntade GET-fel gällde butikskontexter och personligt tillstånd. Återanslutning slutförde samma jobb; inga JavaScript-fel.",
+    "restart_case": "webkit-desktop-personal",
+    "restart_observation": "Extern kontrollerad appomstart med COMPLETE_RECIPES_ENABLED=false. Revision 1, 2 och 3 behöll identiska hashvärden. Sparade fullständiga recept kunde läsas, medan valet för nya genomarbetade recept var dolt.",
+    "limit": "Detta verifierar färdiga sparade planer vid omstart. Det visar inte att ett ofärdigt beräkningsjobb överlever en appomstart."
+  },
+  "feedback": {
+    "ui_submission_succeeded_in_cases": 4,
+    "test_ratings": {
+      "taste": 4,
+      "difficulty": 2,
+      "portion_size": "right",
+      "actual_minutes": 37
+    },
+    "bound_revision": 1,
+    "bound_recipe_index": 0,
+    "first_binding_verified_in_database": {
+      "base_id": "smako-mexican-corn-soup",
+      "version": "1.3.0",
+      "variant_id": "creme-fraiche-protein",
+      "content_sha256": "599538c22cc95455b0543e9cf04a4e886f97f6ded2279f0925cd6f429669484e"
+    },
+    "qualification": "Betyg och minuter är uttryckligt märkta syntetiska gränssnittsdata, inte bedömd smak eller uppmätt tillagning. Serverbindningen för första fallet kontrollerades separat i den isolerade databasen."
+  },
+  "negative_case": {
+    "case": "chromium-mobile-public",
+    "servings": 4,
+    "max_minutes": 40,
+    "dinners": 5,
+    "cuisines": [
+      "greek",
+      "mexican"
+    ],
+    "ingredient_range": [
+      10,
+      15
+    ],
+    "minimum_protein_g_per_portion": 40,
+    "result": "PASS vid manuell bedömning som avsett negativt prov",
+    "positive_runner_original_outcome": "FAIL eftersom positiv-runnaren väntade på en färdig meny",
+    "http_status": 422,
+    "error_code": "RECIPE_CHOICES_CONFLICT",
+    "seconds": 6.0,
+    "visible_explanation": "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. Biblioteket innehåller 4 distinkta grundrätter för 4 personer med dina val av matkök, ingrediensantal, tid, anpassningar och kost; du har valt 5 middagar. Höj högsta tillagningstid till minst 43 minuter, eller välj högst 4 middagar. Detta är en innehållskontroll före produkt-, närings- och inköpskvalificering; fler kandidater garanterar inte en köpbar meny. Dina krav har inte ändrats.",
+    "choices_retained": true,
+    "submit_button_enabled": true,
+    "no_horizontal_overflow": true,
+    "positive_followup": "Fyrportionsprovet valde uttryckligen 45 minuter i formuläret. Ingen tyst höjning av 40-minuterskravet gjordes."
+  },
+  "final_integrated_contract_check": {
+    "integrated_commit": "28bca2d057abed908436f2431eb45aeb0f0a90c0",
+    "read_only_main_worktree": true,
+    "new_http_planning_jobs": 0,
+    "focused_pytest": {
+      "passed": 49,
+      "failed": 0,
+      "files": [
+        "test_basket_ui_contract.py",
+        "test_consumer_static_ui.py",
+        "test_public_beta_ui.py",
+        "test_pwa_readiness.py",
+        "test_public_menu_errors.py"
+      ]
+    },
+    "synthetic_browser_matrix": {
+      "passed": 8,
+      "failed": 0,
+      "axes": [
+        "Chromium och WebKit",
+        "desktop och mobilemulering",
+        "publik och personlig vy"
+      ],
+      "mocked_api": true,
+      "assets": "Den integrerade arbetskopians verkliga statiska filer."
+    },
+    "syntax_check": "Node --check godkänd för complete-recipes.js, app.js, personal.js, privacy.js och service-worker.js.",
+    "coverage": [
+      "Samtliga nya formulärfält till API och återställning av val",
+      "Legacy utan nya fält, flagga av och fel med bevarade val",
+      "Statusjobb återansluts efter omladdning utan extra POST",
+      "Komponenter, mängdformer och deklarerade produktkrav på svenska",
+      "Delvis skafferi räknas inom kvarvarande inköpsbehov",
+      "Okända näringsvärden visas inte som noll",
+      "Smak/svårighet/portion/tid kopplas till receptrevision",
+      "Privata formulärutkast rensas enligt befintlig integritetsväg",
+      "Lägsta hittade inköpskostnad och separat notis när delberäkning når sökbudget"
+    ],
+    "geometry_note": "Ett första syntetiskt prov fick avvikande Y-värden när två element mättes i separata browseranrop. Felet återkom inte i fem diagnostiska körningar. Samma strikta layoutkrav prövas nu med alla mått hämtade atomärt, så pågående mjuk scroll inte kan ge osamtida viewportkoordinater. Inga produktionsfiler ändrades för detta.",
+    "asset_sha256": {
+      "backend/app/static/complete-recipes.js": "18a8e37f8792b0aebd7e7d0f39371acdc08de73f020faf98e01e8bcff37f296a",
+      "backend/app/static/complete-recipes.css": "1453c856edf5ed7f5fb133fb312c5cbf9342cab2a97026696b3c1558164545c7",
+      "backend/app/static/app.js": "451aeba1bc020cad5cafaef6c89a118b06f7bc722cad71e94bdb669f891c9895",
+      "backend/app/static/personal.js": "7bb21d189248afd157a1c696f132b642f482620759f93e80a5e78f549c9072f6",
+      "backend/app/static/privacy.js": "1c8897dc8cecb34caa2e1f1d9700bf1ae74b20302e2357d88a932e18e3c38e51",
+      "backend/app/static/service-worker.js": "0e18d610e56d320131263f4af7ed5d2f324a3472f688fff26358480f39cdd518"
+    },
+    "asset_hashes_rechecked_at_commit": "38ee1aa5ecbc64045801a4f40f9c0302ed0e4a09",
+    "asset_recheck_note": "Huvudgrenen fick senare backendändringar under rapportarbetet. Dessa sex frontendfiler är innehållsmässigt oförändrade jämfört med den testade integrationen."
+  },
+  "limitations": [
+    "Fyra autentiska kombinationer är inte åtta autentiska kombinationer. Åtta gäller endast den separata syntetiska frontendmatrisen.",
+    "WebKit och mobilemulering är inte fysisk iPhone-verifiering. Ingen fysisk provlagning har utförts.",
+    "Dessa browserfall prövar blandat grekiskt/mexikanskt, Billigast/Balanserad och uppskattat köp med uttryckligt näringsmedgivande. Alla sex matkök, Varierad, exakt köp, angivet skafferilager och strikta allergenkrav har inte bevisats av dessa browserfall.",
+    "De valda browsermenyerna hade en uppskattad inköpsrad men ingen vald kampanjrad. Kampanjacceptans kräver separat bevisning.",
+    "Observerade UI-tider är slutprov, inte en kontrollerad kall/varm jämförelse eller mätning av CPU/minne.",
+    "De autentiska browserprovens bygg-ID och dåvarande receptversioner ska bevaras i slutredovisningen. Slutlig integrerad frontendkontroll ersätter inte en ny full receptkvalificering av senare innehåll.",
+    "Ingen global optimalitet bevisas av en hittad giltig meny eller av dessa browserprov."
+  ],
+  "artifacts": {
+    "authentic_runner": "scripts/release_verification/complete_recipe_browser.py",
+    "synthetic_runner": "frontend/recipes/test_complete_recipes_browser.py",
+    "raw_evidence_policy": "Råa rapporter, plansvar och bilder ligger utanför Git i arbetskopians ignorerade .local. Denna rapport innehåller inga cookies, sessionsidentiteter, planåtkomstnycklar eller återkopplings-ID:n."
+  }
+}
