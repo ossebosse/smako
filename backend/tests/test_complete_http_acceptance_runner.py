@@ -40,6 +40,10 @@ def test_four_person_and_monotonic_inputs_only_change_stated_scope():
 def test_runner_scenarios_are_real_validated_requests_not_product_patches():
     for name, value in cases().items():
         request = PlanRequest.model_validate(value)
+        if name == 'legacy-public':
+            assert request.personal is None and request.recipe_preferences is None
+            assert not request.recipe_diversity_overrides
+            continue
         assert not request.personal.slots, name
         assert not request.personal.product_locks, name
         assert not request.personal.extras, name

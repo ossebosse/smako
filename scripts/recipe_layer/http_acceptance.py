@@ -79,6 +79,12 @@ def cases():
     # mutable revision is rebound to the fresh private test workspace below.
     for item in json.loads(PROFILE_SOURCE.read_bytes())['cases']:
         result['legacy-1520-' + item['case']] = copy.deepcopy(item['request'])
+    # Original public baseline choices, with no new fields or personal model.
+    # Do not send serialized null diversity overrides as explicit user choices.
+    result['legacy-public'] = {'postal_code': '22350', 'recipes': 5, 'servings': 2,
+        'max_stores': 3, 'diversity_mode': 'balanced', 'purchase_planning_mode': 'exact',
+        'diet_preference': 'mixed',
+        'memberships': {k: True for k in ('coop', 'ica', 'hemkop', 'willys', 'lidl', 'citygross')}}
     return result
 
 
@@ -90,7 +96,16 @@ def critical_saved(saved):
 
 def verify_saved(saved, submitted):
     plan = saved['plan']
-    personal = plan['personal']
+    personal = plan.get('personal')
+    if personal is None:
+        assert not submitted.get('recipe_preferences') and not submitted.get('personal')
+        assert len(plan['recipes']) == submitted['recipes']
+        assert all(r['servings'] == submitted['servings'] for r in plan['recipes'])
+        assert len(plan['optimized_basket']['stores']) <= submitted['max_stores']
+        assert plan['quality']['basket_audit']['status'] == 'PASS'
+        for pair in plan['quality']['diversity']['pairs']:
+            assert 'flavor' not in pair['components']  # Absent legacy metadata is not zero.
+        return
     meals = {m['meal_type']: m for m in saved['request']['personal']['meals']}
     assert personal['checks']['checkout_audit']['passed'], 'Final checkout audit did not pass'
     assert len(plan['optimized_basket']['stores']) <= submitted['max_stores']
