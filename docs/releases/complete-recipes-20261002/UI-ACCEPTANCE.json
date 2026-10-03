@@ -501,5 +501,370 @@
     "scope_limit": "Detta är en avgränsad eftergranskning av två identifierade motstridiga deklarationer, inte ett nytt fullflöde eller en ny allmän näringskvalificering. De tidigare UI-, åtkomst-, revisions- och omstartproven behåller sin ursprungliga byggbindning.",
     "http_requests": 0,
     "runtime_changes": false
+  },
+  "final_image_browser_acceptance": {
+    "build_id": "recipe-candidate-17a9c133-0476bf36",
+    "runtime_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+    "image_id": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+    "package_sha256": "d3327b9137d4310707118b5272bc826ed0403ebd6d0c0ab935bb1196efee060a",
+    "library_content_sha256": "1c623aa7e4a8e8f9cde292807198c59d6f191f0dd3030462a254893995e7e90c",
+    "evidence_type": "Två nya verkliga knappflöden, sekventiellt mot exakt slutimage med autentiskt fryst prisunderlag och vanlig kvalificering.",
+    "mocked_routes": false,
+    "physical_device_test": false,
+    "production_activation": false,
+    "choices": {
+      "dinners": 5,
+      "servings": 2,
+      "cuisines": [
+        "greek",
+        "mexican"
+      ],
+      "ingredient_range": [
+        10,
+        15
+      ],
+      "max_minutes": 40,
+      "min_protein_g_per_portion": 40,
+      "max_stores": 2,
+      "mode": "cheapest",
+      "purchase_planning_mode": "estimated",
+      "allow_nutrition_estimates": true,
+      "adaptation": "approved",
+      "allow_fish": false
+    },
+    "timing_policy": "Inga påtvingade väntetider eller hårda krav på minst en minuts jobb. Omladdning försöktes efter tre sekunder om jobbet pågick. Båda genereringarna tog ändå över en minut. Tiderna är observerade UI-slutprov, inte kontrollerade kall/varm-prestandamätningar.",
+    "cases": [
+      {
+        "case": "chromium-mobile-personal",
+        "result": "PASS",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "operations": {
+          "generation": {
+            "seconds": 95.328,
+            "status": 201,
+            "job_count": 1,
+            "expensive_post_count": 1,
+            "reloaded_during_job": true,
+            "longer_than_minute": true,
+            "all_status_gets_under_10_seconds": true
+          },
+          "replacement": {
+            "seconds": 17.719,
+            "status": 201,
+            "job_count": 1,
+            "expensive_post_count": 1,
+            "reloaded_during_job": false,
+            "longer_than_minute": false,
+            "all_status_gets_under_10_seconds": true
+          },
+          "recalculation": {
+            "seconds": 11.937,
+            "status": 201,
+            "job_count": 1,
+            "expensive_post_count": 1,
+            "reloaded_during_job": false,
+            "longer_than_minute": false,
+            "all_status_gets_under_10_seconds": true
+          }
+        },
+        "maximum_status_get_ms": 2234.04,
+        "initial_checkout_sek": 738.17,
+        "used_ingredient_cost_sek": 444.93,
+        "store_count": 2,
+        "purchase_status": "VERIFIED_WITH_ESTIMATES",
+        "estimated_purchase_rows": 1,
+        "selected_campaign_rows": 0,
+        "protein_g_per_portion_before_rounding": [
+          40.17199999999999,
+          43.532500000000006,
+          52.45450000000001,
+          55.489,
+          41.515
+        ],
+        "revision_summaries": [
+          {
+            "revision": 1,
+            "total": 738.17,
+            "versions": [
+              "1.4.0",
+              "1.3.0",
+              "1.4.0",
+              "1.3.0",
+              "1.1.0"
+            ]
+          },
+          {
+            "revision": 2,
+            "total": 764.86,
+            "versions": [
+              "1.1.0",
+              "1.3.0",
+              "1.4.0",
+              "1.3.0",
+              "1.1.0"
+            ]
+          },
+          {
+            "revision": 3,
+            "total": 764.86,
+            "versions": [
+              "1.1.0",
+              "1.3.0",
+              "1.4.0",
+              "1.3.0",
+              "1.1.0"
+            ]
+          }
+        ],
+        "replacement_changed_base": true,
+        "immutable_saved_readback": true,
+        "same_browser_revision_readback_after_restart": null,
+        "other_owner_plan_status": 403,
+        "other_owner_jobs_denied": true,
+        "other_owner_job_limit": null,
+        "no_horizontal_overflow": true,
+        "unfocused_skip_link_outside_viewport": true,
+        "javascript_errors": 0,
+        "network_failures": 0,
+        "each_recipes_declared_equipment_and_version_found_in_its_own_DOM_card": true,
+        "budget_message_direct_DOM_evidence": "PASS",
+        "budget_capture_limit": null
+      },
+      {
+        "case": "webkit-desktop-public",
+        "result": "PASS",
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "operations": {
+          "generation": {
+            "seconds": 86.593,
+            "status": 201,
+            "job_count": 1,
+            "expensive_post_count": 1,
+            "reloaded_during_job": true,
+            "longer_than_minute": true,
+            "all_status_gets_under_10_seconds": true
+          },
+          "replacement": {
+            "seconds": 19.688,
+            "status": 201,
+            "job_count": 1,
+            "expensive_post_count": 1,
+            "reloaded_during_job": false,
+            "longer_than_minute": false,
+            "all_status_gets_under_10_seconds": true
+          },
+          "recalculation": {
+            "seconds": 12.265,
+            "status": 201,
+            "job_count": 1,
+            "expensive_post_count": 1,
+            "reloaded_during_job": false,
+            "longer_than_minute": false,
+            "all_status_gets_under_10_seconds": true
+          }
+        },
+        "maximum_status_get_ms": 1054.457,
+        "initial_checkout_sek": 738.17,
+        "used_ingredient_cost_sek": 444.93,
+        "store_count": 2,
+        "purchase_status": "VERIFIED_WITH_ESTIMATES",
+        "estimated_purchase_rows": 1,
+        "selected_campaign_rows": 0,
+        "protein_g_per_portion_before_rounding": [
+          40.17199999999999,
+          43.532500000000006,
+          52.45450000000001,
+          55.489,
+          41.515
+        ],
+        "revision_summaries": [
+          {
+            "revision": 1,
+            "total": 738.17,
+            "versions": [
+              "1.4.0",
+              "1.3.0",
+              "1.4.0",
+              "1.3.0",
+              "1.1.0"
+            ]
+          },
+          {
+            "revision": 2,
+            "total": 764.86,
+            "versions": [
+              "1.1.0",
+              "1.3.0",
+              "1.4.0",
+              "1.3.0",
+              "1.1.0"
+            ]
+          },
+          {
+            "revision": 3,
+            "total": 764.86,
+            "versions": [
+              "1.1.0",
+              "1.3.0",
+              "1.4.0",
+              "1.3.0",
+              "1.1.0"
+            ]
+          }
+        ],
+        "replacement_changed_base": true,
+        "immutable_saved_readback": true,
+        "same_browser_revision_readback_after_restart": true,
+        "other_owner_plan_status": 403,
+        "other_owner_jobs_denied": true,
+        "other_owner_job_limit": "I WebKit-provet har jobben även avslutats genom omstart. Dess 404 ensamt bevisar därför inte ägargränsen.",
+        "no_horizontal_overflow": true,
+        "unfocused_skip_link_outside_viewport": true,
+        "javascript_errors": 0,
+        "network_failures": 0,
+        "each_recipes_declared_equipment_and_version_found_in_its_own_DOM_card": true,
+        "budget_message_direct_DOM_evidence": "NOT_CAPTURED",
+        "budget_capture_limit": "Runnaren sparade receptlistans text och bild, inte sammanfattningen där budgetnotisen ligger. Den publika notisens synlighet hävdas inte utifrån denna fångst."
+      }
+    ],
+    "initial_recipe_versions_and_equipment": [
+      {
+        "base_id": "smako-mexican-corn-soup",
+        "version": "1.4.0",
+        "variant_id": "creme-fraiche-protein",
+        "equipment": [
+          "kÃ¶ksvÃ¥g",
+          "skÃ¤rbrÃ¤da",
+          "kniv",
+          "gryta med lock",
+          "kastrull",
+          "rivjÃ¤rn",
+          "stekpanna",
+          "potatisstÃ¶t"
+        ],
+        "equipment_and_version_in_own_card_DOM": true
+      },
+      {
+        "base_id": "smako-mexican-lentil-chili",
+        "version": "1.3.0",
+        "variant_id": "white-bean-protein",
+        "equipment": [
+          "kÃ¶ksvÃ¥g",
+          "skÃ¤rbrÃ¤da",
+          "kniv",
+          "gryta med lock",
+          "kastrull"
+        ],
+        "equipment_and_version_in_own_card_DOM": true
+      },
+      {
+        "base_id": "smako-mexican-chicken-bowl",
+        "version": "1.4.0",
+        "variant_id": "base",
+        "equipment": [
+          "kÃ¶ksvÃ¥g",
+          "skÃ¤rbrÃ¤da",
+          "kniv",
+          "rymlig stekpanna med lock",
+          "kastrull",
+          "rivjÃ¤rn"
+        ],
+        "equipment_and_version_in_own_card_DOM": true
+      },
+      {
+        "base_id": "smako-greek-lemon-chicken",
+        "version": "1.3.0",
+        "variant_id": "base",
+        "equipment": [
+          "kÃ¶ksvÃ¥g",
+          "skÃ¤rbrÃ¤da",
+          "kniv",
+          "rymlig stekpanna med lock",
+          "kastrull"
+        ],
+        "equipment_and_version_in_own_card_DOM": true
+      },
+      {
+        "base_id": "smako-greek-spanakorizo",
+        "version": "1.1.0",
+        "variant_id": "protein",
+        "equipment": [
+          "kÃ¶ksvÃ¥g",
+          "skÃ¤rbrÃ¤da",
+          "kniv",
+          "gryta med lock",
+          "kastrull"
+        ],
+        "equipment_and_version_in_own_card_DOM": true
+      }
+    ],
+    "version_interpretation": "Den aktuella biblioteksutgåvan innehåller ändrade recept på 1.4.0 och oförändrade recept på sina tidigare versioner. De nya redskapen i majsoppan och kycklingbowlen visas i båda riktiga flödena. Alla fem rättversioner och deras deklarerade redskap kontrollerades mot sina egna öppnade receptkort.",
+    "budget_evidence": {
+      "direct_DOM_case": "chromium-mobile-personal",
+      "saved_search_outcome": {
+        "status": "VALID_SOLUTION",
+        "global_optimum_proven": false,
+        "label": "LÃ¤gsta hittade inkÃ¶pskostnad inom dina val",
+        "search_budget": {
+          "scope": "current_planner_search_diagnostics",
+          "nutrition_status": "REACHED",
+          "nutrition_searches_recorded": 159,
+          "nutrition_searches_omitted": 0,
+          "nutrition_budget_exhausted_recorded": 154,
+          "week_search_method": "bounded_beam",
+          "distinct_week_proposals_pruned": 295
+        },
+        "budget_message": "En giltig meny hittades. SÃ¶kbudgeten nÃ¥ddes i 154 registrerade nÃ¤ringsdelberÃ¤kningar; andra godkÃ¤nda produktkombinationer kan finnas. Globalt lÃ¤gsta pris Ã¤r inte bevisat."
+      },
+      "exact_server_message_present_in_DOM": true,
+      "public_case_direct_capture": "NOT_CAPTURED"
+    },
+    "restart": {
+      "browser_case": "webkit-desktop-public",
+      "mechanism": "Endast docker restart av label- och imagekontrollerad isolerad container. Samma state-mount, inga app-source-mounts eller flaggändringar.",
+      "same_build_and_enabled_feature_verified_after_restart": true,
+      "browser_revisions_checked": [
+        1,
+        2,
+        3
+      ],
+      "all_rows_persistence_reference": "FINAL-PERSISTENCE.json",
+      "rows_before_and_after": 34,
+      "previous_revisions_preserved": 28,
+      "new_revisions_preserved": 6,
+      "aggregate_sha256_before_and_after": "2caaa3ce041c947988055d08a01149f595eaf7806fb5d9b0d0831aa5607a35c2",
+      "database_evidence_source": "Separat skrivskyddad verifiering av samtliga kolumners radhashar före/efter omstart, dokumenterad av huvudleveransen."
+    },
+    "feedback": {
+      "ui_POST_201_cases": 2,
+      "revision": 1,
+      "recipe_index": 0,
+      "ratings": {
+        "taste": 4,
+        "difficulty": 2,
+        "portion_size": "right",
+        "actual_minutes": 37
+      },
+      "expected_design": {
+        "base_id": "smako-mexican-corn-soup",
+        "version": "1.4.0",
+        "variant_id": "creme-fraiche-protein",
+        "content_sha256": "160b1db4786899a2fff00e2acc9f8360f0951eee785268a5b81b7fd0fcb5b75b"
+      },
+      "persisted_database_binding": "PENDING_SEPARATE_READ_ONLY_CHECK",
+      "quality_note": "Betyg och minuter är syntetiska testdata, uttryckligt märkta som ett gränssnittsprov. De bevisar inte provlagning eller smak."
+    },
+    "limits": [
+      "De fyra ursprungliga browserfallen och deras flagga-av-prov behåller sin tidigare byggbindning; detta är två separata nya fall.",
+      "Ingen fysisk mobil eller provlagning. Inga valda kampanjrader i dessa menyer; exakt köp, fler matkök och andra kost-/allergenprofiler kräver sina separata prov.",
+      "Inga CPU- eller minnesmått hävdas från dessa browserflöden. En giltig meny och ett avslutat prov är inte bevis för globalt lägsta kostnad."
+    ],
+    "raw_artifacts_policy": "Råa rapporter, plansvar, bilder och snäv feedbackhjälpare finns endast utanför Git i ignorerad .local/real-ui-final-17a9c133. Inga cookies, sessions-, plan- eller återkopplings-ID:n ingår här."
   }
 }
