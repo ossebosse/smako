@@ -79,6 +79,14 @@ def cases():
     # mutable revision is rebound to the fresh private test workspace below.
     for item in json.loads(PROFILE_SOURCE.read_bytes())['cases']:
         result['legacy-1520-' + item['case']] = copy.deepcopy(item['request'])
+    # The complete dinner layer also runs inside the existing full personal
+    # profile. Breakfast/snack and all original 40/30/20 goals stay unchanged.
+    result['complete-1520'] = copy.deepcopy(result['legacy-1520-original-estimated'])
+    result['complete-1520']['recipe_preferences'] = {
+        'mode': 'complete', 'cuisines': ['greek', 'mexican'],
+        'min_ingredients': 10, 'max_ingredients': 15, 'max_minutes': 40,
+        'adaptation': 'approved', 'min_protein_g': 40,
+    }
     # Original public baseline choices, with no new fields or personal model.
     # Do not send serialized null diversity overrides as explicit user choices.
     result['legacy-public'] = {'postal_code': '22350', 'recipes': 5, 'servings': 2,
@@ -123,6 +131,7 @@ def verify_saved(saved, submitted):
     if prefs:
         assert saved['request']['recipe_preferences'] == {**saved['request']['recipe_preferences'], **prefs}
         dinners = [s['recipe'] for s in personal['slots'] if s['meal_type'] == 'dinner']
+        assert all(not s['recipe'].get('design') for s in personal['slots'] if s['meal_type'] != 'dinner')
         assert len({r['design']['base_id'] for r in dinners}) == len(dinners)
         for recipe in dinners:
             design = recipe['design']

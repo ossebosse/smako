@@ -60,6 +60,19 @@ def test_extended_choices_are_explicit_and_do_not_silently_loosen_negative_case(
     assert scenarios['mixed-vegetarian']['personal']['meals'][0]['diet'] == 'vegetarian'
 
 
+def test_complete_full_profile_adds_only_dinner_preferences_to_original_targets():
+    scenarios = cases()
+    complete = copy.deepcopy(scenarios['complete-1520'])
+    preferences = complete.pop('recipe_preferences')
+    assert complete == scenarios['legacy-1520-original-estimated']
+    assert [m['limits']['min_protein_g'] for m in complete['personal']['meals']] == [40, 30, 20]
+    assert [(m['count'], m['servings']) for m in complete['personal']['meals']] == [(5, 2), (5, 1), (5, 1)]
+    assert complete['personal']['allow_nutrition_estimates'] is True
+    assert preferences['cuisines'] == ['greek', 'mexican']
+    assert preferences['max_minutes'] == 40 and preferences['min_protein_g'] == 40
+    assert preferences['adaptation'] == 'approved'
+
+
 def test_monotonic_runner_rebinds_current_empty_pantry_revision(monkeypatch):
     from types import SimpleNamespace
 
