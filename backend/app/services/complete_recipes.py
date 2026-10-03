@@ -139,6 +139,43 @@ def validate_content_capacity(preferences, meal, profile, candidates):
         code="RECIPE_CHOICES_CONFLICT", stage="policy_taste")
 
 
+def completed_search_outcome(diagnostics):
+    """A valid checkout and a reached sub-search limit can both be true.
+
+    These counters describe the recorded planner search. Omitted diagnostic
+    details cannot establish that no nutrition search reached its limit.
+    Equivalence pruning does not spend the beam budget on different menus.
+    """
+    nutrition = diagnostics.get("nutrition_searches", [])
+    omitted = diagnostics.get("omitted_nutrition_searches", 0)
+    exhausted = sum(bool(row.get("budget_exhausted")) for row in nutrition)
+    status = "REACHED" if exhausted else "UNKNOWN" if omitted else "NOT_REACHED"
+    pruned = sum(max(0, row.get("beam_pruned", 0) - row.get("equivalent_pruned", 0))
+                 for row in diagnostics.get("search", []))
+    if exhausted:
+        message = (f"En giltig meny hittades. Sökbudgeten nåddes i {exhausted} registrerade "
+                   "näringsdelberäkningar; andra godkända produktkombinationer kan finnas.")
+    elif omitted:
+        message = ("En giltig meny hittades. Sökningen är begränsad och delar av sökloggen "
+                   "saknas; det går inte att fastställa om alla näringsdelberäkningar höll sig inom sin budget.")
+    else:
+        message = "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget."
+    return {
+        "status": "VALID_SOLUTION", "global_optimum_proven": False,
+        "label": "Lägsta hittade inköpskostnad inom dina val",
+        "search_budget": {
+            "scope": "current_planner_search_diagnostics",
+            "nutrition_status": status,
+            "nutrition_searches_recorded": len(nutrition),
+            "nutrition_searches_omitted": omitted,
+            "nutrition_budget_exhausted_recorded": exhausted,
+            "week_search_method": "bounded_beam",
+            "distinct_week_proposals_pruned": pruned,
+        },
+        "budget_message": message + " Globalt lägsta pris är inte bevisat.",
+    }
+
+
 def product_form_compatible(recipe, name, product, fact):
     """Apply raw/dry/drained boundaries even without a nutrition target.
 

@@ -110,6 +110,27 @@ def test_content_capacity_honors_merged_diet_and_hard_exclusions():
     assert "Dina krav har inte ändrats" in str(stopped.value)
 
 
+def test_valid_solution_reports_nutrition_budget_separately_from_checkout_validity():
+    from app.services.complete_recipes import completed_search_outcome
+    result = completed_search_outcome({"nutrition_searches": [
+        {"budget_exhausted": True, "evaluated": 256, "qualifying_basket_found": True},
+        {"budget_exhausted": False, "evaluated": 12}],
+        "search": [{"beam_pruned": 9, "equivalent_pruned": 3}]})
+    assert result["status"] == "VALID_SOLUTION"
+    assert result["global_optimum_proven"] is False
+    assert result["search_budget"]["nutrition_status"] == "REACHED"
+    assert result["search_budget"]["nutrition_budget_exhausted_recorded"] == 1
+    assert result["search_budget"]["distinct_week_proposals_pruned"] == 6
+    assert "En giltig meny hittades" in result["budget_message"]
+
+
+def test_omitted_nutrition_details_do_not_claim_no_search_limit_was_reached():
+    from app.services.complete_recipes import completed_search_outcome
+    result = completed_search_outcome({"omitted_nutrition_searches": 1})
+    assert result["search_budget"]["nutrition_status"] == "UNKNOWN"
+    assert completed_search_outcome({})["search_budget"]["nutrition_status"] == "NOT_REACHED"
+
+
 @pytest.mark.parametrize("name", ["Vitlök pulver", "Torkad vitlök", "Kycklingnuggets", "Marinerad kyckling"])
 def test_raw_product_form_is_guarded_without_requested_nutrition(name):
     ingredient = "vitlök" if "vitlök" in name.casefold() else "kyckling"

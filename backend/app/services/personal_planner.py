@@ -2035,9 +2035,10 @@ class PersonalPlanner:
             result.personal.checks["planning_diagnostics"] = self.diagnostics.snapshot()
             self.timings["total"] += perf_counter() - started
             if self.complete:
+                from app.services.complete_recipes import completed_search_outcome
                 result.personal.checks["timings_seconds"] = dict(self.timings)
                 result.personal.checks["recipe_preferences"] = self.request.recipe_preferences.model_dump(mode="json")
-                result.personal.checks["search_outcome"] = {"status": "VALID_SOLUTION", "global_optimum_proven": False, "label": "Lägsta hittade inköpskostnad inom dina val"}
+                result.personal.checks["search_outcome"] = completed_search_outcome(result.personal.checks["planning_diagnostics"])
             return result
         except (ValueError, IncompleteBasketError) as exc:
             if incumbents:
