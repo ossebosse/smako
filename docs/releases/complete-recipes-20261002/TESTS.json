@@ -1,23 +1,43 @@
 {
-  "runtime_commit": "38ee1aa5ecbc64045801a4f40f9c0302ed0e4a09",
+  "runtime_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
   "command": "python scripts/verify_offline.py -q -m \"not live\" backend/tests grocery_data/tests",
   "results": {
-    "tests": "3694",
     "errors": "0",
     "failures": "0",
     "skipped": "0",
-    "time": "2059.201",
-    "timestamp": "2026-10-03T08:39:32.585075+02:00"
+    "tests": "3887",
+    "time": "2042.099",
+    "timestamp": "2026-10-03T11:39:56.229853+02:00"
   },
   "exit_code": 0,
   "network_guard": true,
   "old_source_guard": true,
   "blocked_access": [],
-  "raw_xml_sha256": "18559988d806dd740d708c800e929bdd87190bd00e2bb90f4cac130f1fe9d15c",
+  "raw_xml_sha256": "cb390eeb81c5629f7e80816d71c6230d8570c4b6365104572716e58649c79a59",
   "access_report_sha256": "fd98098b6ab008c7216fc0de100e55eb1d2a519d21d7b2c9831a431569e8f6da",
-  "raw_artifacts_outside_git": ".local/complete-recipes-20261002/final-suite.xml and final-suite.log",
-  "interpretation": "Full offline regression of the packaged runtime. Test duration is not planner latency. Subsequent test-only and performance changes require their separately bound checks.",
-  "later_full_regressions": [
+  "raw_artifacts_outside_git": ".local/complete-recipes-20261002/packaged-final-suite.xml",
+  "interpretation": "Full offline regression on the final packaged runtime, kept unchanged throughout the run. Test duration is not planner latency. Authentic recipe qualification and UI/HTTP acceptance are separate evidence.",
+  "earlier_full_regressions": [
+    {
+      "runtime_commit": "38ee1aa5ecbc64045801a4f40f9c0302ed0e4a09",
+      "command": "python scripts/verify_offline.py -q -m \"not live\" backend/tests grocery_data/tests",
+      "results": {
+        "tests": "3694",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "time": "2059.201",
+        "timestamp": "2026-10-03T08:39:32.585075+02:00"
+      },
+      "exit_code": 0,
+      "network_guard": true,
+      "old_source_guard": true,
+      "blocked_access": [],
+      "raw_xml_sha256": "18559988d806dd740d708c800e929bdd87190bd00e2bb90f4cac130f1fe9d15c",
+      "access_report_sha256": "fd98098b6ab008c7216fc0de100e55eb1d2a519d21d7b2c9831a431569e8f6da",
+      "raw_artifacts_outside_git": ".local/complete-recipes-20261002/final-suite.xml and final-suite.log",
+      "interpretation": "Full offline regression of the packaged runtime. Test duration is not planner latency. Subsequent test-only and performance changes require their separately bound checks."
+    },
     {
       "runtime_commit": "808a082",
       "test_scripts_commit": "857266b",
@@ -77,7 +97,7 @@
       "interpretation": "Full regression after authentic energy-conflict veto, before the separately tested ready-bread qualification correction."
     }
   ],
-  "subsequent_targeted_regressions": [
+  "focused_regressions": [
     {
       "runtime_commit": "6b2511b",
       "scope": "Combined exact recipe memo, preparation validation memo and retained cheaper checkout requalification",
@@ -113,6 +133,22 @@
       "ruff": "passed for all changed Python files",
       "compileall": "passed",
       "pip_check": "passed",
+      "exit_code": 0
+    },
+    {
+      "runtime_commit": "17a9c1330dcc72ff9750a3fa680fa6982f7ed99b",
+      "test_script_commit": "6b1d68e",
+      "scope": "Final HTTP runner with exact1/exact2/estimated2/estimated3 scopes and stable request/pantry comparison",
+      "results": {
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "6",
+        "time": "1.335",
+        "timestamp": "2026-10-03T12:15:13.418657+02:00"
+      },
+      "raw_xml_sha256": "ee255e78af1910a8058d15f121e609f2246df18f18c2d40e5c4bd56744b9a27f",
+      "blocked_access": [],
       "exit_code": 0
     }
   ]
