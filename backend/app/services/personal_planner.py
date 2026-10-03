@@ -252,7 +252,7 @@ class PersonalPlanner:
             name,
             unit,
             frozenset(requested),
-            _recipe_value(recipe),
+            self.recipe_computations.key(recipe),
             self.spec.allow_nutrition_estimates,
         )
         if key not in self.nutrition_cache:
@@ -411,9 +411,7 @@ class PersonalPlanner:
             organic_animals,
             food,
             campaign_choice,
-            tuple((i.form, tuple(getattr(i, "product_requirements", None) or ()))
-                  for i in recipe.ingredients
-                  if canonicalize_ingredient_name(i.name) == canonicalize_ingredient_name(name))
+            self.recipe_computations.forms_for(recipe, canonicalize_ingredient_name(name))
             if self.complete and recipe and recipe.preparation else None,
         )
         if cache_key in self.lookup_cache:
@@ -613,7 +611,7 @@ class PersonalPlanner:
         # Request-local only. Source facts, stock and store view do not change
         # during this planner. Full recipe content includes preparation version,
         # units and quantities; meal policy and pricing opt-ins remain distinct.
-        cache_key = (recipe_value(recipe), meal.model_dump_json(),
+        cache_key = (self.recipe_computations.key(recipe), meal.model_dump_json(),
                      self.spec.profile.model_dump_json(), self.spec.organic_animals,
                      tuple(self.request.avoid_ingredients), self.request.purchase_planning_mode,
                      self.user.cache_identity,
@@ -1723,7 +1721,7 @@ class PersonalPlanner:
                 else None
             )
             key = (
-                _recipe_value(slot.recipe),
+                self.recipe_computations.key(slot.recipe),
                 slot.meal_type,
                 limits.model_dump_json(),
                 self.spec.allow_nutrition_estimates,
