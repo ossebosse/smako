@@ -13,6 +13,7 @@ import copy
 import hashlib
 import json
 import re
+import shlex
 import time
 from contextlib import AsyncExitStack
 from datetime import UTC, datetime
@@ -23,6 +24,12 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[2]
 PROFILE_SOURCE = ROOT / 'docs/releases/public-menu-followup-20261002/personal-regressions.json'
+
+
+class AcceptanceFailure(AssertionError):
+    def __init__(self, message, evidence):
+        super().__init__(message)
+        self.evidence = evidence
 
 
 def complete_request(*, servings=2, cuisines=None, mode='balanced', purchase='estimated'):
@@ -183,6 +190,10 @@ async def execute_case(name, payload, args):
                 result['actual_entered_stock_used_g'] = used
         result['http'] = session.http
         return result
+    except Exception as exc:
+        evidence = locals().get('result', {'case': name, 'request': payload})
+        evidence['http'] = session.http
+        raise AcceptanceFailure(str(exc), evidence) from exc
     finally:
         await session.client.aclose()
         await stranger.client.aclose()
@@ -245,10 +256,14 @@ async def sample_resources(args, stop, samples):
     while not stop.is_set():
         command = ['docker', 'stats', '--no-stream', '--format', '{{json .}}', args.container]
         if args.ssh_host:
-            command = ['ssh', '-oBatchMode=yes', args.ssh_host, *command]
+            command = ['ssh', '-oBatchMode=yes', args.ssh_host, shlex.join(command)]
         started = time.perf_counter()
         process = await asyncio.create_subprocess_exec(*command, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
-        output, _error = await process.communicate()
+        try:
+            output, _error = await asyncio.wait_for(process.communicate(), timeout=20)
+        except TimeoutError:
+            process.kill()
+            output, _error = await process.communicate()
         samples.append({'elapsed': started-args.started, 'exit_code': process.returncode,
                         'docker_stats': json.loads(output) if process.returncode == 0 and output.strip() else None})
         try:
@@ -270,6 +285,11 @@ async def main(args):
         if response.status_code == 404:
             response = await client.get(args.base + '/ready', timeout=10)
         metadata['readiness'] = response.json()
+        response.raise_for_status()
+        assert metadata['readiness'].get('build_id', '').startswith('recipe-candidate-'), 'Listener is not the isolated candidate build'
+        assert metadata['readiness'].get('features', {}).get('complete_recipes_enabled') is True
+        if args.expected_build:
+            assert metadata['readiness']['build_id'] == args.expected_build, 'Isolated build changed'
     stop = asyncio.Event()
     sampler = asyncio.create_task(sample_resources(args, stop, metadata['resource_samples']))
     try:
@@ -281,6 +301,8 @@ async def main(args):
             metadata['result'] = await execute_case(args.case, selected[args.case], args)
     except Exception as exc:
         metadata.update(runner_failure=type(exc).__name__, reason=str(exc))
+        if isinstance(exc, AcceptanceFailure):
+            metadata['failed_evidence'] = exc.evidence
         raise
     finally:
         stop.set()
@@ -297,6 +319,7 @@ if __name__ == '__main__':
     parser.add_argument('--case', required=True, choices=[*cases(), 'concurrent-three', 'monotonic-scopes'])
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--deadline', type=float, default=1200)
+    parser.add_argument('--expected-build', help='Require this exact isolated build ID before any state writes')
     parser.add_argument('--container', help='Optional isolated container for sampled resource usage')
     parser.add_argument('--ssh-host', help='Optional SSH host for read-only docker stats')
     parsed = parser.parse_args()
