@@ -1,4 +1,5 @@
 """Acceptance-runner contracts only; these are not authentic API results."""
+import asyncio
 import copy
 import importlib.util
 import json
@@ -57,3 +58,30 @@ def test_extended_choices_are_explicit_and_do_not_silently_loosen_negative_case(
     assert (custom['min_ingredients'], custom['max_ingredients'], custom['cuisines']) == (12, 13, [])
     assert scenarios['products-only']['recipe_preferences']['adaptation'] == 'products'
     assert scenarios['mixed-vegetarian']['personal']['meals'][0]['diet'] == 'vegetarian'
+
+
+def test_monotonic_runner_rebinds_current_empty_pantry_revision(monkeypatch):
+    from types import SimpleNamespace
+
+    class SessionStub:
+        def __init__(self, base):
+            self.revision, self.http = 0, []
+            self.client = self
+
+        async def bootstrap(self):
+            return {'revision': self.revision, 'items': []}
+
+        async def aclose(self):
+            pass
+
+    seen = []
+    async def submit_stub(session, payload, **kwargs):
+        seen.append(payload['personal']['pantry_revision'])
+        assert seen[-1] == session.revision
+        session.revision += 1
+        return {'status': 'stopped'}  # Orchestration test only, no fake products.
+
+    monkeypatch.setattr(runner, 'Session', SessionStub)
+    monkeypatch.setattr(runner, 'submit', submit_stub)
+    asyncio.run(runner.monotonic_scopes(SimpleNamespace(base='isolated-test', deadline=1)))
+    assert seen == [0, 1, 2]

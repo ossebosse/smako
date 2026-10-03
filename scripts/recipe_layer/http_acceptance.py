@@ -254,8 +254,14 @@ async def monotonic_scopes(args):
         await session.bootstrap()
         await stranger.bootstrap()
         for stores, purchase in ((1, 'exact'), (2, 'exact'), (2, 'estimated')):
+            current_state = await session.bootstrap()
+            assert not current_state['items'], 'Scope comparison requires the same empty pantry'
             payload = complete_request(mode='cheapest', purchase=purchase)
             payload['max_stores'] = stores
+            # Saving a plan advances even an empty pantry's reservation revision.
+            # Rebind that concurrency token; do not retry an obsolete request or
+            # interpret REVISION_CONFLICT as an economic result.
+            payload['personal']['pantry_revision'] = current_state['revision']
             result = await submit(session, payload, deadline=args.deadline, stranger=stranger)
             result['scope'] = {'stores': stores, 'purchase': purchase}
             if result['status'] == 'complete':
