@@ -1,18 +1,24 @@
 # 2026-10-03: Nästa receptlager – lokal, versionsbunden kandidat
 
-## Pågående slutkontroll kl. 11:25
+## Pågående slutkontroll kl. 11:42
 
-**Ny konkret integration 11:15:** dd3-kvalificeringen gav 90/104 versioner,
-45/48 familjer och 42/48 original. Alla tolv färsrätter hittar annan korrekt
-produkt. Fyra brödberoende soppor stoppades; fortsatt källgranskning fann att
-vanligt färdigskivat matbröd felaktigt nekas av den snäva namn-/formkontrollen.
-Integrationagent utökar nu kvalificeringen med uttrycklig källkategori,
-ätklarhetsuppgift och granskad brödsammansättning; inga GTIN-undantag eller
-bake-off-genvägar. dd3 är därför kontrollkandidat inför nästa avgränsade fix.
-Två av sju dd3-menyer är körda som diagnostik; fem pausades. Fjärrresursen
-är fri, HTTP-servern fortfarande äldre testbuild och inte den nya imagen.
-Ny bild/104+7/rena tider/fem HTTP-fall/mobilflöde ska följa efter fixen.
-Pågående dd3-fullsvit behålls versionsren och slutförs före main-kodändring.
+Slutruntime är nu `17a9c1330dcc72ff9750a3fa680fa6982f7ed99b` med både
+energiintegritet och källbunden brödkvalificering. Explicit fryst eller
+obligatorisk beredning spärras oavsett stödd källfältsform och kortnamn.
+Nya positiva matbrödsnamn kräver kategori, ätklarhetsuppgift och granskad
+sammansättning; allergen- och näringskrav är separata. 252 integrerade riktade
+prov, Ruff för samtliga ändrade Python-filer, compileall och pip check PASS.
+Full 17a-regression startad; runtimefilerna hålls fasta under denna körning.
+Föregående dd3-fullsvit avslutades med 3 818 PASS, 0 fel/överhoppade,
+2 087,676 s, inga spärrade nät-/källåtkomster.
+
+Serverpaket `smako-server-17a9c1330dcc.zip`, 2 739 005 byte, SHA-256
+`d3327b9137d4310707118b5272bc826ed0403ebd6d0c0ab935bb1196efee060a`.
+Ny imageverifiering för 17a pågår. Därefter körs samtliga 104 receptversioner
+och sju fria menyer, rena kall-/varmprov, fem HTTP-fall och ett nytt
+Chromium-mobilflöde. Isolerad fjärrresurs tilldelas dessa sekventiellt;
+tidigare dd3- och ca57-paket nedan är kontrollversioner. HTTP-servern är
+ännu äldre testbuild. Inga produktionsändringar eller push.
 
 
 Arbetet ligger på `feature/complete-recipe-layer` från faktiska `402a5c9`,
