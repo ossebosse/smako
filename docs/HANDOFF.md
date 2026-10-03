@@ -1,25 +1,31 @@
 # 2026-10-03: Nästa receptlager – lokal, versionsbunden kandidat
 
-## Pågående slutkontroll 2026-10-03 kl. 10:08
+## Pågående slutkontroll 2026-10-03 kl. 10:38
 
-Efter paketet nedan är ren receptberäkningsmemo integrerad som `808a082`.
-Kontrollerad A/B gav identiska hela planer utom tidsfält: kall 171,591 →
-134,079 s, varm 165,582 → 127,943 s. Nytt kontrollprov av gamla publika
-flödet gav 158,501 s kallt mot baseline 328,424 s (−51,74 %), identiska
-recept/ingredienser/korg 168,55 kr. Se `PURE-RECIPE-CACHE-AB.json` och
-`LEGACY-PERFORMANCE.json` i releasemappen. Bred offline-regression på denna
-runtime pågår; 173 riktade tester har passerat.
+Kontrollruntime är `ca57fb22ba0e58cee41cc1e40673e1edbfbf4d78`.
+Slutgranskningen fann en autentisk motstridig energideklaration i Coop-färs
+GTIN7392055078800: 1 100 kcal / 250 kJ per100g. Tidigare94/104-kvalificering
+är inte längre slutligt godkännande. Tolv kandidater och indiska menyn berörs
+direkt. Integrationagent rättar källkvalificeringen med konfliktspärr och
+biblioteksagent förbereder ny fullkvalificering/menybevis. Ingen gissad
+korrigering av källans enheter. Ny runtime/paket krävs efter fixen.
+Ren receptmemo, valideringsmemo och exakta receptnycklar är integrerade,
+liksom återkvalificering av billigare bevarade inköpslösningar under utökade
+användarval. Bred offline-regression körs nu på denna exakta runtime.
+Den föregående fulla körningen gav 3 718 godkända tester; därefter har
+170 kombinerade integrationsprov och 246 nyckel-/cacheprov passerat.
 
-Bred Varierad-profilering gav samma 583,70-kronorsplan som HTTP-provet men
-visade upprepad ren versionsvalidering på näringsvägen. Separat worktree har
-`de95691` för detta och en oförändrad efterdiagnos pågår. Integrationsworktree
-har `70ee288`: bevara exakt billigare incumbent-korg, återkvalificera den
-under målbegäran och korrigera metadata; åtta adversarialprov och totalt
-139 riktade tester passerar. Dessa två commits är ännu inte integrerade.
+Slutpaket `smako-server-ca57fb22ba0e.zip`, 2 736 155 byte, SHA-256
+`61c57bf98e853f86b02a49dea487dd06d9ecc5971aa19c171479450fbe382da2`.
+Verifierad image
+`sha256:51a1bffce59a1b5fc68ebab2364fdd952e6e6f4148a7c53814af2549d8edf9f8`:
+645 runtimefiler matchar, pip check och offline-Chromium som appanvändare
+passerar. Rena public/complete-slutbenchmark pågår utan runtime-kodmounts.
+Därefter återstår fyra HTTP-fall och ett extra Chromium-mobilflöde på image.
+Ingen produktionsaktivering eller Git-push.
 
-**38ee1aa-paketet nedan är verifierad jämförelseversion, inte den slutliga
-uppdaterade leveransen.** Nytt paket/image, slutliga API-/browserprov och
-samtidighetsmätning återstår efter integration. Ingen aktivering eller push.
+Äldre `38ee1aa`-paket nedan är endast bevarad jämförelseversion.
+Slutrapporten och release.json anger den nya versionsbundna kandidaten.
 
 Arbetet ligger på `feature/complete-recipe-layer`, från den faktiska lokala
 kodbasen `402a5c9` ovanpå den fungerande publika rättningen `74c9077`.

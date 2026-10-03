@@ -3,6 +3,14 @@
 Detta underlag uppdateras under slutproven. Kandidaten är inte
 produktionsaktiverad och ingen Git-push ingår.
 
+**Slutgranskning 2026-10-03:** en hashbunden Coop-deklaration för nötfärs
+GTIN 7392055078800 innehåller det motstridiga paret 1 100 kcal / 250 kJ per
+100 g. Tidigare kvalificering godtog kcal-fältet utan att kontrollera paret.
+De redovisade 94/104 och den indiska menyn är därför tidigare körresultat,
+inte slutligt godkänd näring. En spårbar konfliktspärr och omkörning pågår;
+värdena korrigeras inte genom gissad enhetsväxling. Paket ca57 nedan är
+verifierad kontrollversion och ersätts före slutleverans.
+
 ## Leveransens användarflöde
 
 Det publika menyflödet och den personliga planeringen har ett valbart läge
@@ -232,17 +240,17 @@ Aktiverings- och återgångsvägen finns i [ACTIVATION.md](ACTIVATION.md).
 
 ## Versionsbunden kandidat
 
-Runtime-commit: **`38ee1aa5ecbc64045801a4f40f9c0302ed0e4a09`**.
+Runtime-commit: **`ca57fb22ba0e58cee41cc1e40673e1edbfbf4d78`**.
 Dokumentations- och acceptansskriptcommits efter den ändrar inte paketets
-runtimefiler. Serverpaket: `smako-server-38ee1aa5ecbc.zip`, 2 732 614 byte,
-SHA-256 `6764c69429f132360431df436de9ce7338e162a4496d1db090091fda1d2a2143`.
+runtimefiler. Serverpaket: `smako-server-ca57fb22ba0e.zip`, 2 736 155 byte,
+SHA-256 `61c57bf98e853f86b02a49dea487dd06d9ecc5971aa19c171479450fbe382da2`.
 Det finns lokalt under `.local/releases/complete-recipes-20261002/`.
 Paketmanifest och verifiering finns i [release.json](release.json) och
-[image-verification-38ee1aa5ecbc.json](image-verification-38ee1aa5ecbc.json).
+[image-verification-ca57fb22ba0e.json](image-verification-ca57fb22ba0e.json).
 
 Byggd Linux/amd64-image:
-`sha256:65670569e3d142e9a58e823a237869a845f3f544b2292880f119e231f0df25e4`,
-tagg `smako-complete-recipes-candidate:38ee1aa5ecbc`. 644 runtimefiler
+`sha256:51a1bffce59a1b5fc68ebab2364fdd952e6e6f4148a7c53814af2549d8edf9f8`,
+tagg `smako-complete-recipes-candidate:ca57fb22ba0e`. 645 runtimefiler
 matchar paketmanifestet, inga avvikelser. `pip check` och Chromium-start
 som bildens ordinarie appanvändare passerade utan nätverk. Det enda
 avsiktligt uteblivna exemplet är `deploy/.env.production.example`.
