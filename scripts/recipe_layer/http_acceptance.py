@@ -49,6 +49,7 @@ def cases():
         'greek-exact': complete_request(purchase='exact'),
         'greek-cheapest': complete_request(mode='cheapest'),
         'greek-varied': complete_request(mode='varied'),
+        'unrestricted-varied': complete_request(cuisines=[], mode='varied'),
         'greek-pantry': complete_request(), 'indian-vegetarian': complete_request(cuisines=['indian']),
         'mixed-four': complete_request(servings=4, cuisines=['greek', 'mexican']),
         'mixed-four-time-negative': complete_request(servings=4, cuisines=['greek', 'mexican']),
