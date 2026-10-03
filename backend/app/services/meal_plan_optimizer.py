@@ -738,7 +738,9 @@ class MealPlanService:
                         policy.max_pairwise_culinary_similarity is not None
                         and pair.score >= policy.max_pairwise_culinary_similarity
                     ),
-                    components=asdict(pair.components),
+                    # Legacy recipes have no authored flavor score. Keep that
+                    # component absent rather than inventing a numeric zero.
+                    components={key: value for key, value in asdict(pair.components).items() if value is not None},
                 )
                 for pair in report.pairs
             ],

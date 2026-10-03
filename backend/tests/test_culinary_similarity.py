@@ -61,6 +61,32 @@ SAUSAGE_TRAY = recipe(
 )
 
 
+def test_legacy_quality_summary_omits_unknown_flavor_and_roundtrips() -> None:
+    from app.models.diversity import DiversityPolicy
+    from app.models.quality import DiversityQualitySummary
+    from app.services.meal_plan_optimizer import MealPlanService
+
+    report = analyze_culinary_menu([TOFU_RICE, SAUSAGE_TRAY])
+    assert report.pairs[0].components.flavor is None
+    summary = MealPlanService._diversity_summary(report, DiversityPolicy(mode="balanced"))
+    assert "flavor" not in summary.pairs[0].components
+    assert summary.pairs[0].score == report.pairs[0].score
+    assert len(summary.pairs[0].components) == 7
+    assert DiversityQualitySummary.model_validate_json(summary.model_dump_json()) == summary
+
+
+def test_authored_quality_summary_preserves_known_zero_flavor_score() -> None:
+    from dataclasses import replace
+
+    from app.models.diversity import DiversityPolicy
+    from app.services.meal_plan_optimizer import MealPlanService
+
+    report = analyze_culinary_menu([TOFU_RICE, SAUSAGE_TRAY])
+    pair = replace(report.pairs[0], components=replace(report.pairs[0].components, flavor=0.0))
+    summary = MealPlanService._diversity_summary(replace(report, pairs=(pair,)), DiversityPolicy(mode="balanced"))
+    assert summary.pairs[0].components["flavor"] == 0.0
+
+
 def test_default_weights_match_requested_contract() -> None:
     weights = CulinarySimilarityWeights()
 
