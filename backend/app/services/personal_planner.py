@@ -2053,7 +2053,7 @@ class PersonalPlanner:
             code = getattr(exc, "code", "SEARCH_BLOCKED")
             if isinstance(exc, IncompleteBasketError):
                 message = "Sökningen hittade ingen komplett meny med dina krav. Se blockeringsfördelningen. Inga krav har sänkts."
-            elif self.diagnostics.pools:
+            elif self.diagnostics.pools and not (self.complete and code == "RECIPE_CHOICES_CONFLICT"):
                 message = (
                     "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. "
                     + message

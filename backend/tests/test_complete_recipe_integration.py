@@ -88,6 +88,10 @@ def test_distinct_content_shortage_precedes_product_search_and_suggests_actual_t
     monkeypatch.setattr(planner, "clean_recipe", products_must_not_run)
     with pytest.raises(PolicyConflict, match="4 distinkta grundrätter"):
         planner._candidates(planner.spec.meals[0])
+    with pytest.raises(PolicyConflict) as creation:
+        planner.create(_compare_scopes=False)
+    assert str(creation.value).startswith("Biblioteket innehåller 4")
+    assert "kandidater har prövats" not in str(creation.value)
     # Same choices with an explicit larger time allowance pass content checks.
     wider = prefs.model_copy(update={"max_minutes": 45})
     validate_content_capacity(wider, meal, TasteProfile(), candidates(wider, 4))
