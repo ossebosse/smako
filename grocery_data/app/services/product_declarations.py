@@ -374,6 +374,47 @@ def parse_dabas(body, acquisition):
 
 
 
+def parse_fontana_corroboration(body, acquisition, identity_row):
+    """Retain a second official table for the same complete name and fixed pack.
+
+    This cannot supply a GTIN or override an existing declaration. The caller
+    attaches it to the already verified Dabas identity and preserves conflicts.
+    """
+    if (urlparse(acquisition["url"]).hostname != "www.fontana.se"
+            or not urlparse(acquisition["url"]).path.startswith("/produkt/")
+            or acquisition.get("status") != 200 or not acquisition.get("observed_at")
+            or hashlib.sha256(body).hexdigest() != acquisition["sha256"]
+            or identity_row.get("parser") not in {"dabas-consumer-quantity-v1", "dabas-base-quantity-v2"}
+            or identity_text(identity_row["brand"]) != "fontana"):
+        raise ValueError("official_corroboration_acquisition_unverified")
+    soup = BeautifulSoup(body, "html.parser")
+    headings = soup.select("h1")
+    text = soup.get_text(" ", strip=True)
+    packs = re.findall(r"Tillgänglig i (\d+(?:[,.]\d+)?) (g|ml)\b", text)
+    if (len(headings) != 1 or identity_text(headings[0].get_text(" ", strip=True)) != identity_text(identity_row["name"])
+            or len(packs) != 1
+            or (float(packs[0][0].replace(",", ".")), packs[0][1]) != (identity_row["package_quantity"], identity_row["package_unit"])):
+        raise ValueError("official_corroboration_identity_mismatch")
+    tables = [h for h in soup.select("h2") if h.get_text(" ", strip=True) == "Näringsvärden per 100g"]
+    if len(tables) != 1:
+        raise ValueError("official_corroboration_basis_unverified")
+    nutrition_text = text.split("Näringsvärden per 100g", 1)[1].split("Köp denna produkt", 1)[0]
+    macros = {}
+    for key, pattern in {"kcal": r"([\d.,]+) kcal", "fat_g": r"\bFett ([\d.,]+) g",
+                         "carbs_g": r"\bKolhydrater ([\d.,]+) g", "protein_g": r"\bProtein ([\d.,]+) g"}.items():
+        values = re.findall(pattern, nutrition_text)
+        if len(values) != 1:
+            raise ValueError("official_corroboration_nutrition_ambiguous")
+        macros[key] = float(values[0].replace(",", "."))
+    return {"name": identity_row["name"], "brand": identity_row["brand"],
+            "package_quantity": identity_row["package_quantity"], "package_unit": identity_row["package_unit"],
+            "nutrition": macros, "basis_quantity": 100, "basis_unit": "g",
+            "nutrition_text": nutrition_text.strip(), "source": dict(acquisition),
+            "identity_source": identity_row["source"],
+            "identity_method": "exact_complete_manufacturer_name_fixed_package_linked_dabas_identity",
+            "parser": "fontana-labelled-corroboration-v1"}
+
+
 def declarations():
     return json.loads(PATH.read_bytes())["declarations"] if PATH.exists() else []
 

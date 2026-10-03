@@ -49,7 +49,7 @@ def products():
 def test_all_reviewed_references_have_sourced_units_and_not_product_identities():
     with patch("socket.socket.connect", side_effect=AssertionError("offline")):
         data = reference_data()
-        assert len(MAPPINGS) == 70  # 46 retained plus 24 explicitly imported recipe-layer foods.
+        assert len(MAPPINGS) == 71  # Includes the separately reviewed black/oiled/drained olive reference.
         for identity in MAPPINGS:
             f = reference_evidence(identity)
             assert set(f.nutrition) == {"kcal", "protein_g", "fat_g", "carbs_g"}
@@ -224,6 +224,7 @@ def test_reference_version_is_independent_of_json_line_endings(tmp_path, monkeyp
     (tmp_path / "slv-20261002-beetroot.json").write_bytes(module.PATH.with_name("slv-20261002-beetroot.json").read_bytes())
     (tmp_path / "slv-20261002-sweetpotato.json").write_bytes(module.PATH.with_name("slv-20261002-sweetpotato.json").read_bytes())
     (tmp_path / "slv-20261002-peppers.json").write_bytes(module.PATH.with_name("slv-20261002-peppers.json").read_bytes())
+    (tmp_path / "slv-20261003-black-olives.json").write_bytes(module.PATH.with_name("slv-20261003-black-olives.json").read_bytes())
     monkeypatch.setattr(module, "PATH", path)
     reference_data.cache_clear()
     try:

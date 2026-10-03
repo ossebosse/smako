@@ -308,10 +308,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact):
         canonical(name) == 'salt' and form == 'as_sold' and unit == 'g'
         and product_reference(product, name, fact) == 1975
     )
+    drained_olive_reference = (
+        canonical(name) == 'oliver' and form == 'preserved_drained' and unit == 'g'
+        and product_reference(product, name, fact) == 402
+    )
     if evidence is None:
         if unit != "g" or (fact and fact.nutrition and not (
             form == "cooked_drained" and fact.nutrition_preparation == "draining_unspecified"
-        ) and not plain_salt_reference):
+        ) and not plain_salt_reference and not drained_olive_reference):
             return None
         if form == "cooked_drained":
             words = set(re.findall(r"[a-zåäö0-9]+", composition))
@@ -339,7 +343,7 @@ def input_evidence(recipe, product, name, unit, qualified, fact):
                          'values': dict(fact.nutrition), 'unit': fact.nutrition_unit,
                          'source': fact.source, 'basis': fact.nutrition_basis})
                 for k, v in evidence.field_sources.items()})
-        if form == "cooked_drained" and fact:
+        if (form == "cooked_drained" or drained_olive_reference) and fact:
             # The supplier's table is retained but cannot establish drained
             # nutrients. Use an explicitly generic drained reference only;
             # never relabel that reference as a product declaration.

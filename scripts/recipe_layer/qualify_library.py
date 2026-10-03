@@ -20,6 +20,7 @@ from app.services.recipe_library import candidates, validate_library
 def main():
     label = sys.argv[1] if len(sys.argv) > 1 else 'qualification'
     mode = sys.argv[2] if len(sys.argv) > 2 else 'estimated'
+    selected_bases = set(sys.argv[3:])
     root = Path('/results') / label
     root.mkdir(parents=True, exist_ok=True)
     prepared = PreparedPriceUniverseArtifact.model_validate_json(Path('/inputs/universe.json').read_bytes()).restore()
@@ -33,8 +34,11 @@ def main():
     planner = PersonalPlanner(request, Settings(price_provider='mock', complete_recipes_enabled=True), prepared,
         {'revision': 0, 'items': [], 'reservations': {}, 'events': {}}, facts=facts, now=clock)
     report = {'library': validate_library(), 'fact_seconds': fact_seconds, 'mode': mode, 'recipes': [],
-              'stage': json.loads(Path('/evaluation/stage.json').read_text())}
+              'stage': json.loads(Path('/evaluation/stage.json').read_text()),
+              'selected_bases': sorted(selected_bases)}
     for recipe in candidates(RecipePreferences(mode='complete'), servings=2):
+        if selected_bases and recipe.design.base_id not in selected_bases:
+            continue
         record = {'id': recipe.design.base_id, 'variant': recipe.design.variant_id, 'name': recipe.name,
                   'cuisine': recipe.design.cuisines[0], 'ingredients': recipe.design.ingredient_count}
         started = time.perf_counter()

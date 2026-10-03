@@ -16,6 +16,8 @@ def reviewed_reference(product, name, facts):
     label = ' '.join(product.name.casefold().split())
     category = (getattr(product, 'category', None) or '').casefold()
     composition = ' '.join(facts.ingredients).casefold() if facts else ''
+    if canonical == 'oliver':
+        return _black_oiled_drained_olive_reference(product, facts, label, composition)
     # This prefix/suffix cleanup never removes variant or cooking information.
     label = re.sub(r'^(?:ekologisk |färsk )', '', label)
     label = re.sub(r'\s+(?:eko|ekologisk|klass 1|i ask)$', '', label)
@@ -66,3 +68,34 @@ def reviewed_reference(product, name, facts):
             # Grain/spice form is conveyed by its exact whole-product name.
             return identity
     return None
+
+
+def _black_oiled_drained_olive_reference(product, facts, label, composition):
+    """SLV 402: black, oil-coated, pitted and drained; not every preserved olive.
+
+    SLV report 3/2016 pp. 8, 18, 44 and LanguaL C0139/K0026/Z0219
+    document the reviewed preparation. The source is a generic composite sample,
+    never the exact branded declaration. Actual drained package proof is separate.
+    """
+    if not facts or facts.conflicts or not composition:
+        return None
+    label = re.sub(r'\s+(?:eko|ekologisk|ekologiska)$', '', label)
+    if not re.fullmatch(r'(?:svarta oliver|oliver (?:svarta|kalamata|kalamon))'
+                        r' (?:urkärnade|utan kärna|utan kärnor)', label):
+        return None
+    words = set(re.findall(r'[a-zåäö]+', composition))
+    allowed = {'ingredienser', 'vatten', 'urkärnade', 'svarta', 'oliver', 'kalamataoliver',
+               'kalamonoliver', 'av', 'sorten', 'kalamata', 'kalamon', 'vinäger', 'extra',
+               'virgin', 'olivolja', 'havssalt', 'salt', 'ekologiskt', 'ekologiska',
+               'certifierad', 'ingrediens'}
+    if (not words <= allowed or 'olivolja' not in words or 'urkärnade' not in words
+            or not words & {'svarta', 'kalamata', 'kalamon', 'kalamataoliver', 'kalamonoliver'}):
+        return None
+    if (getattr(product, 'usable_unit', None) != 'g'
+            or not any(e.get('basis') == 'drained' and e.get('unit') == 'g'
+                       and e.get('quantity', 0) > 0
+                       and e.get('quantity') == getattr(product, 'usable_quantity', None)
+                       and e.get('source')
+                       for e in facts.field_sources.get('usable_quantity', ()))):
+        return None
+    return 402

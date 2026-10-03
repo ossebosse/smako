@@ -217,9 +217,19 @@ def supplement_catalog_facts(products, original):
         overlap_conflict = bool(prior.nutrition and (
             prior.nutrition_unit != unit or any(prior.nutrition[k] != nutrition[k]
                 for k in prior.nutrition.keys() & nutrition.keys())))
-        if overlap_conflict:
+        # A later official table never silently replaces a contradictory one.
+        # The offline importer binds these to the exact complete product and pack.
+        contradictions = [r for r in row.get('corroborating_declarations', ())
+            if (r['basis_unit'] != row['basis_unit'] or any(
+                r['nutrition'][k] != row['nutrition'][k]
+                for k in r['nutrition'].keys() & row['nutrition'].keys()))]
+        if overlap_conflict or contradictions:
             changes['conflicts'] = (*prior.conflicts, 'supplier_nutrition_conflict')
-            fields['supplier_nutrition_conflict'] = (source,)
+            fields['supplier_nutrition_conflict'] = (source, *(
+                {**source, **r['source'], 'source': r['source']['url'],
+                 'identity_method': r['identity_method'], 'identity_source': r['identity_source'],
+                 'original_nutrition': r['nutrition'], 'basis_unit': r['basis_unit']}
+                for r in contradictions))
         else:
             changes.update(nutrition=nutrition, nutrition_unit=unit,
                            nutrition_basis=f"Leverantörsdeklaration per 100 {unit}; se dokumenterad mängdgrund")

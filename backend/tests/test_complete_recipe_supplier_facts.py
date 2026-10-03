@@ -86,7 +86,12 @@ def test_official_pitted_olive_quantity_has_exact_package_and_separate_nutrient_
     p = product("Oliver urkärnade", package, "g", 25, brand=brand, gtin=gtin)
     f = supplement_catalog_facts([p], {})[(p.store_id, p.product_id)]
     projected = project_usable_quantity(p, f, required_unit="g")
-    assert projected.usable_quantity == drained
+    if gtin == "7316150770346":
+        assert projected.usable_quantity == drained  # Quantity and nutrition are separate.
+        assert "supplier_nutrition_conflict" in f.conflicts
+        assert {r['original_nutrition']['kcal'] for r in f.field_sources['supplier_nutrition_conflict']} == {271, 278}
+    else:
+        assert projected.usable_quantity == drained
     assert projected.package_quantity == package
     assert projected.price == p.price
     assert f.nutrition_preparation == "draining_unspecified"
