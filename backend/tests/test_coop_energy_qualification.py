@@ -217,7 +217,7 @@ def test_exact_supplier_supplement_does_not_clear_prior_energy_conflict():
 def test_fact_version_binds_policy_and_even_rejected_raw_energy(monkeypatch):
     f = fact(declaration(1100, 250))
     version = module.facts_version({("coop", "mjölk"): f})
-    assert version.startswith("retained-catalog-facts-v8-qualified-energy-pairs:")
+    assert version.startswith("retained-catalog-facts-v9-ready-baked-bread:")
     different_raw = fact(declaration(1100, 240))
     assert version != module.facts_version({("coop", "mjölk"): different_raw})
     monkeypatch.setattr(module, "FACTS_VERSION", "test-future-policy")

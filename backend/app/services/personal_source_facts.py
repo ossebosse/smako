@@ -21,9 +21,51 @@ from threading import RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v8-qualified-energy-pairs"
+FACTS_VERSION = "retained-catalog-facts-v9-ready-baked-bread"
 _CACHE = {}
 _LOCK = RLock()
+
+
+def _coop_bread_form_fields(raw):
+    """Positive ready-to-eat Matbröd evidence, never a marketing-name guess."""
+    description = raw.get("description")
+    ingredients = raw.get("listOfIngredients")
+    if not isinstance(description, str) or not isinstance(ingredients, str) or not ingredients.strip():
+        return None
+    category_fields = raw.get("navCategories")
+    if not isinstance(category_fields, list):
+        return None
+    pending = list(category_fields)
+    categories = []
+    for _ in range(100):
+        if not pending:
+            break
+        node = pending.pop()
+        if isinstance(node, dict):
+            categories.append(str(node.get("name", "")).casefold().strip())
+            parents = node.get("superCategories")
+            if isinstance(parents, list):
+                pending.extend(parents)
+    if "matbröd" not in categories or pending:
+        return None
+    consumer = raw.get("consumerInformationText", ())
+    consumer = [v for v in consumer if isinstance(v, str)] if isinstance(consumer, list) else []
+    context = " ".join([str(raw.get("name", "")), description, *categories, *consumer]).casefold()
+    fields = {"name": raw.get("name"), "navCategories": deepcopy(raw.get("navCategories", [])),
+              "description": description, "listOfIngredients": ingredients,
+              "consumerInformationText": consumer}
+    # A ready-to-eat statement conditional on baking/thawing is not proof of
+    # the as-sold form. Negative preparation information wins over a positive.
+    if re.search(r"\b(?:baka|bakas|grädda|gräddas|gräddning|ugn|halvgrädd\w*|förgrädd\w*|"
+                 r"bake[ -]?off|deg|brödmix|brödblandning|fylld\w*|fyllt|fyllning|"
+                 r"kaffebröd|brioche|kaka|kakor|muffin\w*|fryst\w*|djupfryst\w*|tina|tinas|upptining|"
+                 r"uppvärmning|värmas|tillagas|tillagning|måste)\b", context) or re.search(
+                     r"\b(?:inte|ej|aldrig)\b.{0,60}\b(?:äta|ätas|servera|serveras|avnjuta|avnjutas)\b|"
+                     r"\b(?:äta|ätas|serveras)\b.{0,15}\b(?:inte|ej)\b", context):
+        return "not_ready_plain_bread", fields
+    if not re.search(r"\b(?:äta|ätas|servera|serveras|avnjuta|avnjutas)\s+(?:precis\s+)?som\s+(?:den|det|de)\s+är\b", description.casefold()):
+        return None
+    return "ready_baked_bread", fields
 
 
 def _coop_energy_evidence(raw, *, basis_quantity, basis_unit):
@@ -212,6 +254,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
     if chain in {"willys", "hemkop"} and positive and negative:
         conflicts.append("organic")
     frozen_fields = {}
+    classifications = {}
     if chain == "coop":
         # Exact positive retailer declarations, not an inferred flattened
         # category or a storage temperature shared by unrelated foods.
@@ -223,6 +266,11 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         if isinstance(descriptions, list) and any(isinstance(v, dict) and v.get("languageCode") == "sv"
                 and str(v.get("value", "")).strip().casefold() in {"fryst", "frysta", "djupfryst", "djupfrysta"} for v in descriptions):
             frozen_fields["claimReportingInformations.description"] = descriptions
+        if frozen_fields:
+            classifications["frozen"] = frozen_fields
+        bread_form = _coop_bread_form_fields(raw)
+        if bread_form and (bread_form[0] != "ready_baked_bread" or not frozen_fields):
+            classifications[bread_form[0]] = bread_form[1]
     # A complete ingredient string is useful for positive conflicts; it is NOT
     # an exhaustive proof of allergen absence or compound-product suitability.
     fact = ProductFacts(
@@ -230,7 +278,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         source_product_id=product_id,
         source_snapshot_id=snapshot_id,
         retailer_product_id=str(raw.get("id") if chain == "coop" else raw.get("code") or ""),
-        product_classification=("frozen",) if frozen_fields else (),
+        product_classification=tuple(classifications),
         ingredients_complete=False,
         ingredients=(ingredients,) if isinstance(ingredients, str) and ingredients.strip() else (),
         organic=organic,
@@ -272,8 +320,9 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
                                 **({"nutrition.kcal": ({**evidence, **energy_evidence},)}
                                    if energy_evidence["status"] == "conflict" or "kcal" in nutrition else {})}
                                if energy_evidence else {}),
-                            **({"product_classification": ({**evidence, "value": "frozen", "raw_fields": frozen_fields,
-                                "identity_method": "hash_verified_retained_product_fields"},)} if frozen_fields else {}),
+                            **({"product_classification": tuple({**evidence, "value": value, "raw_fields": fields,
+                                "identity_method": "hash_verified_retained_product_fields"}
+                                for value, fields in classifications.items())} if classifications else {}),
                             **({"nutrition_limits": tuple({**evidence, **r} for r in limits)}
                                if limits else {})}
     )

@@ -279,7 +279,7 @@ def _supplier_classification(product, fact, value):
     return False
 
 
-def _retained_classification(product, fact, value):
+def _retained_classification(product, fact, value, *, raw_fields=None):
     if not fact or value not in getattr(fact, "product_classification", ()):
         return False
     provenance = getattr(product, "source_provenance", None)
@@ -291,6 +291,8 @@ def _retained_classification(product, fact, value):
                and source.get("snapshot_id") == provenance.source_snapshot_id
                and source.get("source") == fact.source
                and source.get("raw_fields")
+               and (raw_fields is None or all(source["raw_fields"].get(k) == v
+                                              for k, v in raw_fields.items()))
                for source in fact.field_sources.get("product_classification", ()))
 
 
@@ -406,7 +408,14 @@ def _whole_food_identity(canonical, form, product, fact):
     if canonical == "tortillas":
         return bool(re.fullmatch(r"(?:(?:street|corn|glutenfria|glutenfri) )*(?:tortilla|tortillas|vetetortilla|vetetortillas)(?: original| medium| large| small| fullkorn| vete| majs| soft| mini| wraps| glutenfri| glutenfria| ekologiska| eko)*", label))
     if canonical == "bröd":
-        return bool(re.fullmatch(r"(?:bröd|fullkornsbröd|surdegsbröd|rågbröd|formbröd|rostbröd|lantbröd|pitabröd)(?: fullkorn| grovt| ljust| mörkt| skivat| skivor| original| vete| råg| ekologiskt| eko)*", label))
+        if (form != "as_sold" or _retained_classification(product, fact, "not_ready_plain_bread")
+                or (composition and not plain_bread_composition(composition))):
+            return False
+        if re.fullmatch(r"(?:bröd|fullkornsbröd|surdegsbröd|rågbröd|formbröd|rostbröd|lantbröd|pitabröd)(?: fullkorn| grovt| ljust| mörkt| skivat| skivor| original| vete| råg| ekologiskt| eko)*", label):
+            return True
+        return bool(fact and len(fact.ingredients) == 1 and plain_bread_composition(composition)
+                    and _retained_classification(product, fact, "ready_baked_bread", raw_fields={
+                        "name": product.name, "listOfIngredients": fact.ingredients[0]}))
     return False
 
 
@@ -444,6 +453,26 @@ def plain_peanut_composition(composition):
     allowed = {"ingredienser", "jordnötter", "jordnöt", "jordnötssmör", "rostade", "malda", "och", "ekologiska",
                "ekologisk", "salt", "havssalt", "kina", "argentina", "ursprung", "eu", "icke"}
     return bool(words & {"jordnötter", "jordnöt"}) and words <= allowed
+
+
+def plain_bread_composition(composition):
+    """A reviewed plain cereal formula; this does not prove allergen absence."""
+    words, declared = _culinary_words(composition)
+    flours = {"vetemjöl", "rågmjöl", "fullkornsvetemjöl", "fullkornsrågmjöl", "havremjöl",
+              "kornmjöl", "dinkelmjöl", "durumvetemjöl"}
+    allowed = flours | {"ingredienser", "vatten", "jäst", "surdeg", "surdegspulver", "vete", "råg",
+        "korn", "havre", "dinkel", "malt", "vetemalt", "rågmalt", "kornmalt", "maltmjöl",
+        "rågkärnor", "vetekärnor", "havregryn", "vetegluten", "gluten", "fullkorn", "fullkorns",
+        "socker", "sirap", "rapsolja", "solrosolja", "olivolja", "salt", "havssalt",
+        "mjölbehandlingsmedel", "askorbinsyra", "enzym", "enzymer", "av", "och",
+        "grovt", "grova", "klippta", "krossade", "fermenterat", "siktat", "torkad", "torkat",
+        "ekologisk", "ekologiskt", "ekologiska"}
+    first = re.sub(r"^\s*ingredienser\s*:?\s*", "", declared)
+    first = re.sub(r"^ekologisk(?:t|a)?\s+", "", first)
+    first_word = re.match(r"[^\W\d_]+", first)
+    return bool(words <= allowed and words & flours and "vatten" in words
+                and words & {"jäst", "surdeg", "surdegspulver"}
+                and first_word and first_word[0] in flours | {"vatten"})
 
 
 def pantry_form_compatible(item, row):
