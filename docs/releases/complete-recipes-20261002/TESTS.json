@@ -16,5 +16,27 @@
   "raw_xml_sha256": "18559988d806dd740d708c800e929bdd87190bd00e2bb90f4cac130f1fe9d15c",
   "access_report_sha256": "fd98098b6ab008c7216fc0de100e55eb1d2a519d21d7b2c9831a431569e8f6da",
   "raw_artifacts_outside_git": ".local/complete-recipes-20261002/final-suite.xml and final-suite.log",
-  "interpretation": "Full offline regression of the packaged runtime. Test duration is not planner latency. Subsequent test-only and performance changes require their separately bound checks."
+  "interpretation": "Full offline regression of the packaged runtime. Test duration is not planner latency. Subsequent test-only and performance changes require their separately bound checks.",
+  "later_full_regressions": [
+    {
+      "runtime_commit": "808a082",
+      "test_scripts_commit": "857266b",
+      "results": {
+        "tests": "3718",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "time": "2051.041",
+        "timestamp": "2026-10-03T09:41:52.362927+02:00"
+      },
+      "exit_code": 0,
+      "network_guard": true,
+      "old_source_guard": true,
+      "blocked_access": [],
+      "raw_xml_sha256": "90f71db9d9f6f1be4d707008521288123b7a964a6c20045fc408e078860e84ac",
+      "access_report_sha256": "fd98098b6ab008c7216fc0de100e55eb1d2a519d21d7b2c9831a431569e8f6da",
+      "raw_artifacts_outside_git": ".local/complete-recipes-20261002/memo-full-suite.xml and memo-full-suite.log",
+      "interpretation": "Full regression after exact pure recipe memoization. Subsequent incumbent metadata and preparation memoization changes are covered by separately bound focused tests and final-image acceptance."
+    }
+  ]
 }
