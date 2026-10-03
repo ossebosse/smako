@@ -1,5 +1,9 @@
 # Nästa receptlager – testad lokal kandidat
 
+Senare driftstatus: receptlagret aktiverades på beta.smako.nu den 3 oktober.
+Se [produktionsaktiveringen och de publika knapp-proven](../complete-recipes-production-20261003/RESULTS.md).
+Denna rapport nedan beskriver de tidigare isolerade kandidatproven.
+
 Funktionen är integrerad i Smako på `feature/complete-recipe-layer`, byggd
 från den fungerande kodbasen `402a5c9` ovanpå publika rättningen `74c9077`.
 Slutruntime är **`17a9c1330dcc72ff9750a3fa680fa6982f7ed99b`**. Den är aktiverad

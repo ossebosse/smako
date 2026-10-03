@@ -1,3 +1,66 @@
+# 2026-10-03: Nya receptlagret aktiverat på beta.smako.nu
+
+Uttryckligen godkänd app-only-aktivering är genomförd. Slutkontroll
+**2026-10-03 15:38:23 UTC (17:38 svensk tid)**: beta.smako.nu är ready,
+BUILD_ID **`complete-recipes-17a9c1330dcc`**, featureflagga **true**.
+Aktiv runtime `17a9c1330dcc72ff9750a3fa680fa6982f7ed99b`, image
+`sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35`.
+Ingen Git-push. Ingen funktionsutveckling under aktiveringen.
+
+[Full driftrapport](releases/complete-recipes-production-20261003/RESULTS.md),
+[sanerade aktiveringsbevis](releases/complete-recipes-production-20261003/ACTIVATION-RESULT.json),
+[faktisk produktionsmeny och inköp](releases/complete-recipes-production-20261003/LIVE-MENU.json).
+
+På vanliga betasidan och `/personal`: **Receptstil → Välj receptläge →
+Genomarbetade middagar**. Där finns matkök, ingrediensintervall, tid och
+proteinmål. Befintliga vardagsrecept är kvar. Uppskattade köp och medgivande
+till uppskattad näring är fortsatt separata val; formulärberoendet verifierat.
+
+Före bytet körde produktion fortfarande 74c9077; alla 419 runtimefiler matchade
+dess manifest. Kandidatpaketets fulla SHA och 651 filer verifierades lokalt
+samt på servern. Installerad kandidatimage och 644 runtimefiler kontrollerades.
+Befintlig Compose-wrapper `/opt/smako/compose` har fått beständig override sist:
+`/opt/smako/overrides/complete-recipes-17a9c1330dcc.yaml`.
+Exakt konfigjämförelse tillåter endast appens image, BUILD_ID och flagga.
+`current`-länk, basfiler, scheduler, proxy, collector, migrate, backup-tjänst,
+Windows-relä, insamling, scheman, policy och kommunurval är oförändrade.
+
+Gemensamt driftlås, vilande app före omstart samt konsekventa online-backuper
+före båda stegen. Privata backup-/konfig-/tillståndsbevis finns under
+`/opt/smako/evidence/complete-recipes-20261003`:
+`backups-off/20261003T150917Z` och `backups-on/20261003T152044Z`.
+Alla **195 ursprungliga planrevisioner** och **52 ursprungliga personliga
+tillstånd** är bevarade. Slutkontroll: **207 revisioner**, alla läsbara med
+PlanStore och SQLite quick_check ok. Inga äldre databaser återställdes.
+
+Flagga-av-prov: äldre publikt 101,781 s, personlig 15/20-profil 283,296 s,
+401,35 kr och oförändrade 40/30/20-proteinkrav. Därefter beständig aktivering.
+På faktisk HTTPS-beta passerade Chromium mobil/publikt (101,797 s), WebKit
+mobil/publikt (92,610 s), WebKit desktop/personligt (92,797 s) samt ett nytt
+äldre publikt desktopprov (102,688 s). De nya proven gav fem middagar för två,
+grekiskt/mexikanskt, 10–15 ingredienser, högst två butiker, 40 min och 40 g,
+beräknat inköp cirka 738,17 kr. Omladdning under generering, byte till annan
+grundrätt, omräkning, revision 1–3, inköpslista, kvalitetsmärkning, DOM/layout
+och ägarisolering kontrollerades. Äldre testägda planer/val återlästes efter
+flaggbytet. Ingen fysisk iPhone och ingen syntetisk smakfeedback.
+
+WebKit/personligt fick först en automatisk klick-timeout efter lyckat byte.
+Samma ägares revision 2 öppnades igen via Min plan; den vanliga synliga och
+aktiverade knappen räknade om på 13,281 s utan force-klick eller appändring.
+Alla tre revisioner stämde efteråt. Både första verktygsutfall och fortsättning
+är bevarade. Inget kvarstående konkret app-/datakompatibilitetsfel konstaterat.
+
+Riktig klocka och aktuellt publicerat underlag användes: universe
+`price-universe:a2eb6ab5ffec325392ad98c69e6483a3b901312359c5c659673ea7da5fadd0c6`,
+byggt 2026-10-03 11:31:32 UTC. Inga replaypriser/testdatabaser kopierades till
+produktion. Köp- och näringsuppskattningar är märkta; färskhetsgränser 36/48 h.
+Kandidatens källluckor kvarstår enligt rapporterna nedan.
+
+Återgång vid framtida fel: samma nya image, endast flagga av i den beständiga
+overriden, exakt konfigjämförelse och enbart appåterskapning efter jobbslut.
+Bevara senaste data och revisioner. Följ [nya receptlagrets aktiveringsordning](releases/complete-recipes-20261002/ACTIVATION.md),
+inte den historiska Lund-/reläreleasens byte av current eller globala versioner.
+
 # 2026-10-03: Nästa receptlager – testad kandidat levererad lokalt
 
 Arbetet är slutfört på `feature/complete-recipe-layer`, från faktiska `402a5c9`
