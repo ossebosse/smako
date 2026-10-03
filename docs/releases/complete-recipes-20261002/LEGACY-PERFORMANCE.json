@@ -1,0 +1,756 @@
+{
+  "kind": "controlled legacy public baseline comparison",
+  "runtime_commit": "2abf67cf4715e14e1e879918e2678fe2855a8263",
+  "integrated_runtime_equivalent": "808a082",
+  "image_id": "sha256:65670569e3d142e9a58e823a237869a845f3f544b2292880f119e231f0df25e4",
+  "runtime_source_mounts": true,
+  "concurrent_acceptance_work": false,
+  "resources": {
+    "cpus": 2,
+    "memory_gib": 3
+  },
+  "arms": {
+    "baseline": {
+      "summary_sha256": "1026fd49cb233c041b7bf6e0161f83c2c11ca30ad6c0aa8ed9203b54549576c3",
+      "label": "baseline",
+      "artifact_sha256": "1335cbb6680237f5826912f19a1d5c348476089ec3091126cb073c4cc5a643e0",
+      "clock": "2026-10-02T15:09:36.223910+00:00",
+      "universe_id": "price-universe:8ecd0659a7e69b8eb007e383ae4f9686a3d1a4f24570b0dd9b72c9c875653bad",
+      "load_seconds": 14.583635187940672,
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "request": {
+        "purchase_planning_mode": "exact",
+        "postal_code": "22350",
+        "recipes": 5,
+        "personal": null,
+        "servings": 2,
+        "max_stores": 3,
+        "use_member_prices": true,
+        "memberships": {
+          "coop": true,
+          "ica": true,
+          "hemkop": true,
+          "willys": true,
+          "lidl": true,
+          "citygross": true
+        },
+        "membership_programs": [
+          "CITY_GROSS_PRIO",
+          "COOP_MEMBER",
+          "HEMKOP_MEMBER",
+          "ICA_STAMMIS",
+          "LIDL_PLUS",
+          "WILLYS_PLUS"
+        ],
+        "optimization_iterations": 1,
+        "strategy": null,
+        "candidate_recipe_count": 80,
+        "candidate_search_limit": null,
+        "beam_width": 30,
+        "varied_budget_percent": 25.0,
+        "diversity_mode": "balanced",
+        "diet_preference": "mixed",
+        "availability_mode": "normal",
+        "avoid_ingredients": [],
+        "max_same_primary_ingredient_meals": 2,
+        "max_same_recipe_family": 2,
+        "max_same_carbohydrate_meals": 3,
+        "max_pairwise_recipe_similarity": 0.7,
+        "max_same_cooking_method_meals": null,
+        "max_same_dish_form_meals": null,
+        "max_pairwise_culinary_similarity": null,
+        "min_kcal_per_serving": 450.0,
+        "max_kcal_per_serving": 900.0,
+        "min_protein_g_per_serving": 18.0,
+        "min_vegetable_g_per_serving": 100.0,
+        "debug": false
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 328.42367388587445,
+          "cpu_seconds": 328.146510615,
+          "peak_rss_kib": 1281328,
+          "trace": {
+            "timings_ms": {
+              "basket_audit": 13.791,
+              "basket_optimization": 26792.7,
+              "candidate_validation": 123.432,
+              "diversity": 605.074,
+              "menu_search": 319634.468,
+              "nutrition": 10.007,
+              "price_universe_lookup": 3.685,
+              "recipe_candidate_generation": 165.72,
+              "total_runtime": 328361.6
+            },
+            "span_statistics": {
+              "basket_audit": {
+                "calls": 5,
+                "wall_ms": 13.791,
+                "cpu_ms": 13.766,
+                "average_ms": 2.758,
+                "max_ms": 3.112
+              },
+              "basket_optimization": {
+                "calls": 1342,
+                "wall_ms": 26792.7,
+                "cpu_ms": 0.0,
+                "average_ms": 19.965,
+                "max_ms": 337.662
+              },
+              "candidate_validation": {
+                "calls": 1,
+                "wall_ms": 123.432,
+                "cpu_ms": 0.0,
+                "average_ms": 123.432,
+                "max_ms": 123.432
+              },
+              "diversity": {
+                "calls": 2,
+                "wall_ms": 605.074,
+                "cpu_ms": 604.643,
+                "average_ms": 302.537,
+                "max_ms": 603.352
+              },
+              "menu_search": {
+                "calls": 3,
+                "wall_ms": 319634.468,
+                "cpu_ms": 0.0,
+                "average_ms": 106544.823,
+                "max_ms": 173459.05
+              },
+              "nutrition": {
+                "calls": 2,
+                "wall_ms": 10.007,
+                "cpu_ms": 0.226,
+                "average_ms": 5.004,
+                "max_ms": 9.781
+              },
+              "price_universe_lookup": {
+                "calls": 1,
+                "wall_ms": 3.685,
+                "cpu_ms": 3.684,
+                "average_ms": 3.685,
+                "max_ms": 3.685
+              },
+              "recipe_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 165.72,
+                "cpu_ms": 0.0,
+                "average_ms": 165.72,
+                "max_ms": 165.72
+              },
+              "total_runtime": {
+                "calls": 1,
+                "wall_ms": 328361.6,
+                "cpu_ms": 0.0,
+                "average_ms": 328361.6,
+                "max_ms": 328361.6
+              }
+            },
+            "operation_counters": {
+              "basket_cache_hits": 673,
+              "basket_cache_misses": 1334,
+              "basket_calculations": 1342,
+              "beam_states": 1007,
+              "cache_hits": 10316183,
+              "cache_misses": 349702,
+              "diversity_rejections": 16151,
+              "duplicate_economic_state_hits": 10119,
+              "duplicate_state_rejections": 1625,
+              "expansion_candidates_visited": 59532,
+              "full_basket_evaluations": 664,
+              "greedy_seed_evaluations": 15,
+              "incremental_requirement_cache_hits": 1502,
+              "incremental_requirement_cache_misses": 516,
+              "menu_cache_hits": 343,
+              "menu_cache_misses": 664,
+              "menu_search_result_cache_misses": 3,
+              "optimistic_bound_cache_hits": 10119,
+              "optimistic_bound_evaluations": 27825,
+              "optimistic_bound_rejections": 37471,
+              "optimistic_store_subset_evaluations": 170911488,
+              "optimistic_store_subsets_infeasible": 120993467,
+              "package_cache_hits": 2246998,
+              "package_cache_misses": 10387,
+              "package_calculations": 44831,
+              "per_store_selection_cache_hits": 336073,
+              "per_store_selection_cache_misses": 506,
+              "possible_menu_combinations": 2823777528,
+              "price_universe_cache_hits": 1,
+              "pricing_projection_cache_misses": 3,
+              "products_loaded": 44185,
+              "quote_selection_cache_hits": 6814861,
+              "quote_selection_cache_misses": 335768,
+              "quote_set_cache_hits": 538139,
+              "quote_set_cache_misses": 506,
+              "quote_subset_vector_cache_hits": 344680,
+              "quote_subset_vector_cache_misses": 531,
+              "recipe_candidates_considered": 516,
+              "recipe_candidates_generated": 196,
+              "recipe_candidates_structurally_rejected": 3,
+              "recipe_candidates_structurally_valid": 193,
+              "same_depth_store_limited_keys": 49904,
+              "states_pruned_by_cost_bound": 40398,
+              "store_combinations": 2971386,
+              "store_combinations_pruned_infeasible": 2035157,
+              "store_subset_cache_hits": 34418,
+              "store_subset_cache_misses": 3,
+              "stores_loaded": 33,
+              "unique_economic_states": 27825
+            },
+            "depth_counters": {
+              "1": {
+                "cost_bound_rejections": 402,
+                "diversity_rejections": 0,
+                "duplicate_state_rejections": 0,
+                "incomplete_rejections": 0,
+                "states_evaluated": 90,
+                "states_expanded": 90,
+                "states_kept": 90
+              },
+              "2": {
+                "cost_bound_rejections": 12641,
+                "diversity_rejections": 714,
+                "duplicate_state_rejections": 1225,
+                "incomplete_rejections": 0,
+                "states_evaluated": 90,
+                "states_expanded": 90,
+                "states_kept": 90
+              },
+              "3": {
+                "cost_bound_rejections": 11166,
+                "diversity_rejections": 3174,
+                "duplicate_state_rejections": 148,
+                "incomplete_rejections": 0,
+                "states_evaluated": 92,
+                "states_expanded": 92,
+                "states_kept": 90
+              },
+              "4": {
+                "cost_bound_rejections": 9419,
+                "diversity_rejections": 4827,
+                "duplicate_state_rejections": 154,
+                "incomplete_rejections": 0,
+                "states_evaluated": 90,
+                "states_expanded": 90,
+                "states_kept": 90
+              },
+              "5": {
+                "cost_bound_rejections": 6770,
+                "diversity_rejections": 7436,
+                "duplicate_state_rejections": 98,
+                "incomplete_rejections": 0,
+                "states_evaluated": 96,
+                "states_expanded": 96,
+                "states_kept": 90
+              }
+            }
+          },
+          "total": 168.55,
+          "recipes": [
+            "Tomatgryta på svarta bönor med tortillas och gul lök",
+            "Tacos med tofu och morot",
+            "Tomatpasta med tofu och morot",
+            "Bowl med korv, nudlar och morot",
+            "Gryta med korv, nudlar och gul lök"
+          ],
+          "profiled": false
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 2.166203428991139,
+          "cpu_seconds": 2.1640288380000356,
+          "peak_rss_kib": 1281328,
+          "trace": {
+            "timings_ms": {
+              "basket_audit": 13.79,
+              "basket_optimization": 1536.236,
+              "candidate_validation": 108.625,
+              "diversity": 1.713,
+              "menu_search": 8.031,
+              "nutrition": 7.558,
+              "price_universe_lookup": 3.837,
+              "recipe_candidate_generation": 144.326,
+              "total_runtime": 2106.6
+            },
+            "span_statistics": {
+              "basket_audit": {
+                "calls": 5,
+                "wall_ms": 13.79,
+                "cpu_ms": 13.71,
+                "average_ms": 2.758,
+                "max_ms": 3.071
+              },
+              "basket_optimization": {
+                "calls": 11,
+                "wall_ms": 1536.236,
+                "cpu_ms": 0.0,
+                "average_ms": 139.658,
+                "max_ms": 335.819
+              },
+              "candidate_validation": {
+                "calls": 1,
+                "wall_ms": 108.625,
+                "cpu_ms": 0.0,
+                "average_ms": 108.625,
+                "max_ms": 108.625
+              },
+              "diversity": {
+                "calls": 1,
+                "wall_ms": 1.713,
+                "cpu_ms": 1.714,
+                "average_ms": 1.713,
+                "max_ms": 1.713
+              },
+              "menu_search": {
+                "calls": 1,
+                "wall_ms": 8.031,
+                "cpu_ms": 0.0,
+                "average_ms": 8.031,
+                "max_ms": 8.031
+              },
+              "nutrition": {
+                "calls": 2,
+                "wall_ms": 7.558,
+                "cpu_ms": 0.225,
+                "average_ms": 3.779,
+                "max_ms": 7.333
+              },
+              "price_universe_lookup": {
+                "calls": 1,
+                "wall_ms": 3.837,
+                "cpu_ms": 3.838,
+                "average_ms": 3.837,
+                "max_ms": 3.837
+              },
+              "recipe_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 144.326,
+                "cpu_ms": 0.0,
+                "average_ms": 144.326,
+                "max_ms": 144.326
+              },
+              "total_runtime": {
+                "calls": 1,
+                "wall_ms": 2106.6,
+                "cpu_ms": 0.0,
+                "average_ms": 2106.6,
+                "max_ms": 2106.6
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 11,
+              "cache_hits": 2643,
+              "cache_misses": 1318,
+              "menu_search_result_cache_hits": 2,
+              "package_cache_hits": 2636,
+              "package_cache_misses": 1318,
+              "package_calculations": 849,
+              "price_universe_cache_hits": 1,
+              "pricing_projection_cache_hits": 3,
+              "products_loaded": 44185,
+              "recipe_candidates_generated": 196,
+              "recipe_candidates_structurally_rejected": 3,
+              "recipe_candidates_structurally_valid": 193,
+              "store_combinations": 30679,
+              "store_combinations_pruned_infeasible": 22277,
+              "store_subset_cache_hits": 7,
+              "stores_loaded": 33
+            },
+            "depth_counters": {}
+          },
+          "total": 168.55,
+          "recipes": [
+            "Tomatgryta på svarta bönor med tortillas och gul lök",
+            "Tacos med tofu och morot",
+            "Tomatpasta med tofu och morot",
+            "Bowl med korv, nudlar och morot",
+            "Gryta med korv, nudlar och gul lök"
+          ],
+          "profiled": false
+        }
+      ]
+    },
+    "candidate": {
+      "summary_sha256": "18e57347ff0d59103d733c6539e1ede89e3244b75ad88e900c5ed52fbe805535",
+      "label": "pure-memo-public",
+      "artifact_sha256": "1335cbb6680237f5826912f19a1d5c348476089ec3091126cb073c4cc5a643e0",
+      "clock": "2026-10-02T15:09:36.223910+00:00",
+      "universe_id": "price-universe:8ecd0659a7e69b8eb007e383ae4f9686a3d1a4f24570b0dd9b72c9c875653bad",
+      "load_seconds": 13.8973558251746,
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "request": {
+        "purchase_planning_mode": "exact",
+        "postal_code": "22350",
+        "recipes": 5,
+        "personal": null,
+        "servings": 2,
+        "max_stores": 3,
+        "use_member_prices": true,
+        "memberships": {
+          "coop": true,
+          "ica": true,
+          "hemkop": true,
+          "willys": true,
+          "lidl": true,
+          "citygross": true
+        },
+        "membership_programs": [
+          "CITY_GROSS_PRIO",
+          "COOP_MEMBER",
+          "HEMKOP_MEMBER",
+          "ICA_STAMMIS",
+          "LIDL_PLUS",
+          "WILLYS_PLUS"
+        ],
+        "optimization_iterations": 1,
+        "strategy": null,
+        "candidate_recipe_count": 80,
+        "candidate_search_limit": null,
+        "beam_width": 30,
+        "varied_budget_percent": 25.0,
+        "diversity_mode": "balanced",
+        "diet_preference": "mixed",
+        "availability_mode": "normal",
+        "avoid_ingredients": [],
+        "max_same_primary_ingredient_meals": 2,
+        "max_same_recipe_family": 2,
+        "max_same_carbohydrate_meals": 3,
+        "max_pairwise_recipe_similarity": 0.7,
+        "max_same_cooking_method_meals": null,
+        "max_same_dish_form_meals": null,
+        "max_pairwise_culinary_similarity": null,
+        "min_kcal_per_serving": 450.0,
+        "max_kcal_per_serving": 900.0,
+        "min_protein_g_per_serving": 18.0,
+        "min_vegetable_g_per_serving": 100.0,
+        "debug": false
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 158.50090381503105,
+          "cpu_seconds": 158.355368952,
+          "peak_rss_kib": 1194852,
+          "trace": {
+            "timings_ms": {
+              "basket_audit": 13.979,
+              "basket_optimization": 27014.627,
+              "candidate_validation": 101.788,
+              "diversity": 590.026,
+              "menu_search": 149894.613,
+              "nutrition": 8.024,
+              "price_universe_lookup": 3.546,
+              "recipe_candidate_generation": 161.286,
+              "total_runtime": 158430.8
+            },
+            "span_statistics": {
+              "basket_audit": {
+                "calls": 5,
+                "wall_ms": 13.979,
+                "cpu_ms": 13.97,
+                "average_ms": 2.796,
+                "max_ms": 3.147
+              },
+              "basket_optimization": {
+                "calls": 1342,
+                "wall_ms": 27014.627,
+                "cpu_ms": 0.0,
+                "average_ms": 20.13,
+                "max_ms": 678.533
+              },
+              "candidate_validation": {
+                "calls": 1,
+                "wall_ms": 101.788,
+                "cpu_ms": 0.0,
+                "average_ms": 101.788,
+                "max_ms": 101.788
+              },
+              "diversity": {
+                "calls": 2,
+                "wall_ms": 590.026,
+                "cpu_ms": 589.545,
+                "average_ms": 295.013,
+                "max_ms": 588.283
+              },
+              "menu_search": {
+                "calls": 3,
+                "wall_ms": 149894.613,
+                "cpu_ms": 0.0,
+                "average_ms": 49964.871,
+                "max_ms": 87457.139
+              },
+              "nutrition": {
+                "calls": 2,
+                "wall_ms": 8.024,
+                "cpu_ms": 0.287,
+                "average_ms": 4.012,
+                "max_ms": 7.738
+              },
+              "price_universe_lookup": {
+                "calls": 1,
+                "wall_ms": 3.546,
+                "cpu_ms": 3.547,
+                "average_ms": 3.546,
+                "max_ms": 3.546
+              },
+              "recipe_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 161.286,
+                "cpu_ms": 0.0,
+                "average_ms": 161.286,
+                "max_ms": 161.286
+              },
+              "total_runtime": {
+                "calls": 1,
+                "wall_ms": 158430.8,
+                "cpu_ms": 0.0,
+                "average_ms": 158430.8,
+                "max_ms": 158430.8
+              }
+            },
+            "operation_counters": {
+              "basket_cache_hits": 673,
+              "basket_cache_misses": 1334,
+              "basket_calculations": 1342,
+              "beam_states": 1007,
+              "cache_hits": 10316183,
+              "cache_misses": 349702,
+              "diversity_rejections": 16151,
+              "duplicate_economic_state_hits": 10119,
+              "duplicate_state_rejections": 1625,
+              "expansion_candidates_visited": 59532,
+              "full_basket_evaluations": 664,
+              "greedy_seed_evaluations": 15,
+              "incremental_requirement_cache_hits": 1502,
+              "incremental_requirement_cache_misses": 516,
+              "menu_cache_hits": 343,
+              "menu_cache_misses": 664,
+              "menu_search_result_cache_misses": 3,
+              "optimistic_bound_cache_hits": 10119,
+              "optimistic_bound_evaluations": 27825,
+              "optimistic_bound_rejections": 37471,
+              "optimistic_store_subset_evaluations": 170911488,
+              "optimistic_store_subsets_infeasible": 120993467,
+              "package_cache_hits": 2246998,
+              "package_cache_misses": 10387,
+              "package_calculations": 44831,
+              "per_store_selection_cache_hits": 336073,
+              "per_store_selection_cache_misses": 506,
+              "possible_menu_combinations": 2823777528,
+              "price_universe_cache_hits": 1,
+              "pricing_projection_cache_misses": 3,
+              "products_loaded": 44185,
+              "quote_selection_cache_hits": 6814861,
+              "quote_selection_cache_misses": 335768,
+              "quote_set_cache_hits": 538139,
+              "quote_set_cache_misses": 506,
+              "quote_subset_vector_cache_hits": 344680,
+              "quote_subset_vector_cache_misses": 531,
+              "recipe_candidates_considered": 516,
+              "recipe_candidates_generated": 196,
+              "recipe_candidates_structurally_rejected": 3,
+              "recipe_candidates_structurally_valid": 193,
+              "same_depth_store_limited_keys": 49904,
+              "states_pruned_by_cost_bound": 40398,
+              "store_combinations": 2971386,
+              "store_combinations_pruned_infeasible": 2035157,
+              "store_subset_cache_hits": 34418,
+              "store_subset_cache_misses": 3,
+              "stores_loaded": 33,
+              "unique_economic_states": 27825
+            },
+            "depth_counters": {
+              "1": {
+                "cost_bound_rejections": 402,
+                "diversity_rejections": 0,
+                "duplicate_state_rejections": 0,
+                "incomplete_rejections": 0,
+                "states_evaluated": 90,
+                "states_expanded": 90,
+                "states_kept": 90
+              },
+              "2": {
+                "cost_bound_rejections": 12641,
+                "diversity_rejections": 714,
+                "duplicate_state_rejections": 1225,
+                "incomplete_rejections": 0,
+                "states_evaluated": 90,
+                "states_expanded": 90,
+                "states_kept": 90
+              },
+              "3": {
+                "cost_bound_rejections": 11166,
+                "diversity_rejections": 3174,
+                "duplicate_state_rejections": 148,
+                "incomplete_rejections": 0,
+                "states_evaluated": 92,
+                "states_expanded": 92,
+                "states_kept": 90
+              },
+              "4": {
+                "cost_bound_rejections": 9419,
+                "diversity_rejections": 4827,
+                "duplicate_state_rejections": 154,
+                "incomplete_rejections": 0,
+                "states_evaluated": 90,
+                "states_expanded": 90,
+                "states_kept": 90
+              },
+              "5": {
+                "cost_bound_rejections": 6770,
+                "diversity_rejections": 7436,
+                "duplicate_state_rejections": 98,
+                "incomplete_rejections": 0,
+                "states_evaluated": 96,
+                "states_expanded": 96,
+                "states_kept": 90
+              }
+            }
+          },
+          "total": 168.55,
+          "recipes": [
+            "Tomatgryta på svarta bönor med tortillas och gul lök",
+            "Tacos med tofu och morot",
+            "Tomatpasta med tofu och morot",
+            "Bowl med korv, nudlar och morot",
+            "Gryta med korv, nudlar och gul lök"
+          ],
+          "profiled": false
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 2.2571902740746737,
+          "cpu_seconds": 2.2555513039999937,
+          "peak_rss_kib": 1194852,
+          "trace": {
+            "timings_ms": {
+              "basket_audit": 16.117,
+              "basket_optimization": 1582.972,
+              "candidate_validation": 109.712,
+              "diversity": 1.677,
+              "menu_search": 10.333,
+              "nutrition": 8.223,
+              "price_universe_lookup": 3.851,
+              "recipe_candidate_generation": 179.426,
+              "total_runtime": 2197.1
+            },
+            "span_statistics": {
+              "basket_audit": {
+                "calls": 5,
+                "wall_ms": 16.117,
+                "cpu_ms": 16.093,
+                "average_ms": 3.223,
+                "max_ms": 4.4
+              },
+              "basket_optimization": {
+                "calls": 11,
+                "wall_ms": 1582.972,
+                "cpu_ms": 0.0,
+                "average_ms": 143.907,
+                "max_ms": 358.767
+              },
+              "candidate_validation": {
+                "calls": 1,
+                "wall_ms": 109.712,
+                "cpu_ms": 0.0,
+                "average_ms": 109.712,
+                "max_ms": 109.712
+              },
+              "diversity": {
+                "calls": 1,
+                "wall_ms": 1.677,
+                "cpu_ms": 1.678,
+                "average_ms": 1.677,
+                "max_ms": 1.677
+              },
+              "menu_search": {
+                "calls": 1,
+                "wall_ms": 10.333,
+                "cpu_ms": 0.0,
+                "average_ms": 10.333,
+                "max_ms": 10.333
+              },
+              "nutrition": {
+                "calls": 2,
+                "wall_ms": 8.223,
+                "cpu_ms": 0.242,
+                "average_ms": 4.111,
+                "max_ms": 7.982
+              },
+              "price_universe_lookup": {
+                "calls": 1,
+                "wall_ms": 3.851,
+                "cpu_ms": 3.851,
+                "average_ms": 3.851,
+                "max_ms": 3.851
+              },
+              "recipe_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 179.426,
+                "cpu_ms": 0.0,
+                "average_ms": 179.426,
+                "max_ms": 179.426
+              },
+              "total_runtime": {
+                "calls": 1,
+                "wall_ms": 2197.1,
+                "cpu_ms": 0.0,
+                "average_ms": 2197.1,
+                "max_ms": 2197.1
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 11,
+              "cache_hits": 2643,
+              "cache_misses": 1318,
+              "menu_search_result_cache_hits": 2,
+              "package_cache_hits": 2636,
+              "package_cache_misses": 1318,
+              "package_calculations": 849,
+              "price_universe_cache_hits": 1,
+              "pricing_projection_cache_hits": 3,
+              "products_loaded": 44185,
+              "recipe_candidates_generated": 196,
+              "recipe_candidates_structurally_rejected": 3,
+              "recipe_candidates_structurally_valid": 193,
+              "store_combinations": 30679,
+              "store_combinations_pruned_infeasible": 22277,
+              "store_subset_cache_hits": 7,
+              "stores_loaded": 33
+            },
+            "depth_counters": {}
+          },
+          "total": 168.55,
+          "recipes": [
+            "Tomatgryta på svarta bönor med tortillas och gul lök",
+            "Tacos med tofu och morot",
+            "Tomatpasta med tofu och morot",
+            "Bowl med korv, nudlar och morot",
+            "Gryta med korv, nudlar och gul lök"
+          ],
+          "profiled": false
+        }
+      ]
+    }
+  },
+  "comparisons": [
+    {
+      "phase": "cold",
+      "full_recipes_ingredients_and_checkout_identical": true,
+      "wall_reduction_percent": 51.738892041592194
+    },
+    {
+      "phase": "warm",
+      "full_recipes_ingredients_and_checkout_identical": true,
+      "wall_reduction_percent": -4.20029088061733
+    }
+  ]
+}
