@@ -143,13 +143,21 @@ def test_prior_issued_versions_remain_valid_but_new_candidates_use_current_conte
     archived = Recipe.model_validate(previous)
     assert archived.design.version == "1.0.0"
     assert library.validate_recipe_design(archived)
-    assert {r.design.version for r in library.candidates(complete())} == {"1.1.0", "1.2.0"}
+    assert {r.design.version for r in library.candidates(complete())} == {"1.1.0", "1.2.0", "1.3.0"}
 
 
 def test_original_96_recipe_objects_are_unchanged_and_archived():
     current = json.loads(library.LIBRARY_PATH.read_bytes())["recipes"]
     previous = json.loads(library.LIBRARY_PATH.with_name("complete-dinners-1.1.0.json").read_bytes())["recipes"]
-    assert current[:96] == previous
+    archived = json.loads(library.LIBRARY_PATH.with_name("complete-dinners-1.2.0.json").read_bytes())["recipes"]
+    assert archived[:96] == previous
+    assert len(current) == len(archived) == 104
+    for issued, current_row in zip(archived, current, strict=True):
+        assert issued["ingredients"] == current_row["ingredients"]
+        assert issued["name"] == current_row["name"]
+        assert issued["design"]["base_id"] == current_row["design"]["base_id"]
+        assert issued["design"]["variant_id"] == current_row["design"]["variant_id"]
+        assert library.validate_recipe_design(Recipe.model_validate(issued))
     digest = hashlib.sha256(json.dumps(previous, ensure_ascii=False, sort_keys=True,
                                       separators=(",", ":")).encode()).hexdigest()
     assert digest == "f69b7f6d758f179a2c977aa6cf54d42d1436871bfed894777f8dd3c90828354f"
@@ -158,10 +166,10 @@ def test_original_96_recipe_objects_are_unchanged_and_archived():
 
 
 def test_approved_culinary_variations_change_instructions_count_and_flavor_deliberately():
-    approved = [r for r in library.candidates(complete()) if r.design.version == "1.2.0"]
+    approved = [r for r in library.candidates(complete()) if r.design.variant_id not in {"base", "protein"}]
     assert len(approved) == 8
     assert len({r.design.base_id for r in approved}) == 4
-    assert not any(r.design.version == "1.2.0" for r in library.candidates(complete(adaptation="products")))
+    assert all(r.design.variant_id == "base" for r in library.candidates(complete(adaptation="products")))
     for recipe in approved:
         by_name = {i.name: i for i in recipe.ingredients}
         instructions = " ".join(recipe.instructions)
@@ -210,6 +218,70 @@ def test_four_portions_include_additional_preparation_time():
     assert four.design.estimated_minutes == two.design.estimated_minutes + 3
     assert four.ingredients[0].quantity == 2 * two.ingredients[0].quantity
     assert four.design.content_sha256 != two.design.content_sha256
+
+
+def test_parallel_cooking_finishes_before_plating_and_rice_is_explicit():
+    rice_bases = {"smako-indian-tofu-dal", "smako-indian-fish-coconut",
+                  "smako-thai-coconut-fish-soup", "smako-thai-chicken-coconut-curry"}
+    for recipe in library.candidates(complete()):
+        steps = {s.id: s for s in recipe.design.steps}
+        final = recipe.design.steps[-1]
+        assert set(final.depends_on) == set(steps) - {final.id}
+        if recipe.design.base_id in rice_bases:
+            assert steps["rice"].duration_minutes >= 22
+            assert "ris|dry" in steps["rice"].ingredient_keys
+            assert steps["rice"].depends_on == ("s1",)
+        if recipe.design.base_id == "smako-greek-lemon-chicken":
+            assert "Smula fetaosten" in final.text
+            assert "fetaost|as_sold" in final.ingredient_keys
+            assert "spenatriset" not in steps["s4"].text
+        if recipe.design.base_id == "smako-mexican-chicken-bowl":
+            assert "Lägg ris i skålar" in final.text
+            assert "toppa med kyckling" not in steps["s4"].text
+        if recipe.design.base_id == "smako-thai-tofu-satay":
+            assert "Servera tofu" in final.text
+            assert "sesamfrön|as_sold" in final.ingredient_keys
+        if recipe.design.base_id == "smako-greek-stuffed-peppers":
+            assert "prebake" in steps["s3"].depends_on
+            assert "Ta ut formen" in steps["prebake"].text
+            assert "fyllning som inte ryms" in steps["s3"].text.lower()
+        if recipe.design.base_id == "smako-italian-lentil-ragu":
+            assert "Vänd pastan med ragun" in steps["s4"].text
+            assert set(steps["s4"].depends_on) == {"s2", "s3"}
+
+
+def test_frozen_spinach_heating_has_margin_and_strict_time_filter_excludes_it():
+    for recipe in library.candidates(complete()):
+        if recipe.design.base_id in {"smako-indian-tofu-dal", "smako-indian-bean-potato-curry"}:
+            assert recipe.design.estimated_minutes == 44
+            assert "5–7 minuter" in " ".join(recipe.instructions)
+    quick = library.candidates(complete(max_minutes=40))
+    assert not any(r.design.base_id in {"smako-indian-tofu-dal", "smako-indian-bean-potato-curry"}
+                   for r in quick)
+
+
+@pytest.mark.parametrize("servings,expected_bases", [(2, 12), (4, 4)])
+def test_mixed_greek_mexican_content_limit_at_forty_minutes_is_not_relaxed(servings, expected_bases):
+    recipes = library.candidates(complete(cuisines=("greek", "mexican"), max_minutes=40), servings)
+    # Content availability only: actual product, nutrition and basket qualification
+    # is deliberately tested through the planner on a real snapshot elsewhere.
+    assert len({r.design.base_id for r in recipes}) == expected_bases
+    assert {r.design.cuisines[0] for r in recipes} == {"greek", "mexican"}
+    assert all(r.design.estimated_minutes <= 40 for r in recipes)
+
+
+def test_four_person_mixed_content_needs_explicit_forty_three_minute_choice():
+    for minutes, expected in [(42, 4), (43, 12), (45, 12)]:
+        recipes = library.candidates(complete(cuisines=("greek", "mexican"), max_minutes=minutes), 4)
+        assert len({r.design.base_id for r in recipes}) == expected
+
+
+def test_larger_portion_allowance_is_not_assigned_to_new_auxiliary_timer():
+    for recipe in library.candidates(complete(max_minutes=180), 6):
+        if recipe.design.version == "1.3.0":
+            for step in recipe.design.steps:
+                if step.id in {"rice", "prebake"}:
+                    assert "omgångar" not in step.text
 
 
 @pytest.mark.parametrize("values", [

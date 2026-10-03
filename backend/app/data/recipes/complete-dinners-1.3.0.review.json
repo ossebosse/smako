@@ -1,0 +1,2515 @@
+{
+  "review_id": "complete-dinners-content-review-2026-10-03",
+  "reviewed_at": "2026-10-03",
+  "content_sha256": "27d53cb050248c826285b445deac0c6e1a87f9a1182fe39b881b189ab3a136b8",
+  "scope": {
+    "base_recipes": 48,
+    "approved_variants": 56,
+    "concrete_candidates": 104,
+    "vegetarian_bases": 23,
+    "fish_bases": 6,
+    "bases_per_cuisine": {
+      "greek": 8,
+      "italian": 8,
+      "mexican": 8,
+      "indian": 8,
+      "thai": 8,
+      "swedish": 8
+    }
+  },
+  "content_review": {
+    "method": "Samtliga 48 grundrecept lästa med ingredienser, mängder och fullständiga steg; alla 56 godkända variationer jämförda med sina grundrecept. Modellassisterad redaktionell granskning, inte en oberoende kocks eller provköks utlåtande.",
+    "result": "Sammanhängande måltidskomponenter och avsiktliga smaksättningar. Inga ytterligare påvisade olistade inköpsingredienser, godtyckliga proteinbyten, vegetariska fiskrätter eller artificiella ingredienskvoter efter rättningarna.",
+    "resolved": [
+      "Uppläggning flyttad från parallell förberedelse till steg vars beroenden väntar på maten.",
+      "Fyra risrätter har separat koksteg på 24 minuter och slutsteg som väntar på riset.",
+      "Paprikornas förbakning avslutas efter 15 minuter; gratinering väntar även på fyllningen. Överskottsfyllning ligger runt paprikorna och hela receptmängden används.",
+      "Majssoppans extra avslutningstid hör till soppan, inte quesadillan.",
+      "Rimligare värmningsmarginal för fryst spenat och kalla ingredienser: två indiska grytor 44 minuter; gröna ärtsoppan 42 minuter eller 44 med crème fraîche."
+    ],
+    "portions": "Mängderna i alla 104 konkreta kandidater är oförändrade. Proteinportionerna håller sina tidigare godkända intervall; granskningen ersätter inte näringsberäkning för valda produkter.",
+    "limits": [
+      "Smak, konsistens, kökskapacitet och faktisk arbetstid är inte uppmätta.",
+      "Tiderna är uppskattningar och beror på vald produkt, spis, utrustning och vana. Förpackningens tillagningsanvisning och att maten är genomvarm går före klockan.",
+      "Modellgranskning kan missa praktiska brister; ingen version får märkas provlagad utifrån detta underlag."
+    ]
+  },
+  "machine_validation": {
+    "focused_pytest_cases": 37,
+    "status": "passed",
+    "portion_sizes_checked": [
+      1,
+      2,
+      4,
+      6,
+      12
+    ],
+    "concrete_scaled_candidates_checked": 520,
+    "checks": [
+      "Exakt arkiverad receptregistrering och oförändrade ingrediens-/produktkrav.",
+      "Ingrediensräkning, positiv definierad mängd, instruktioner och ingrediensnycklar åt båda håll.",
+      "Acykliska beroenden och kritisk stig inom angiven total uppskattning.",
+      "Slutsteg väntar på samtliga delar; separata ris- och förbakningssteg.",
+      "Strikta matköks-, tids-, fisk- och anpassningsfilter utan tysta lättnader.",
+      "Självsignerade obehöriga receptändringar nekas."
+    ]
+  },
+  "physical_cooking": {
+    "tests": 0,
+    "status": "not_cooked",
+    "statement": "Ingen faktisk provlagning har utförts eller redovisats."
+  },
+  "source_purchase_nutrition_and_economic_choice": "Kvalificeras separat genom den vanliga planeraren mot autentiskt prisunderlag och verkliga produkter. Innehållsgranskningen bevisar inte köpbarhet, näringsmål, allergensäkerhet eller ekonomiskt menyval.",
+  "mixed_greek_mexican_time_filter": {
+    "min_ingredients": 10,
+    "max_ingredients": 15,
+    "two_people_at_40_minutes_distinct_bases": 12,
+    "four_people_at_40_minutes_distinct_bases": 4,
+    "four_people_at_42_minutes_distinct_bases": 4,
+    "four_people_at_43_minutes_distinct_bases": 12,
+    "explanation": "För fyra personer räcker innehållet inte till fem olika middagar inom 40 minuter. Ett uttryckligt val av minst 43 minuter utökar innehållskandidaterna; faktisk produkt- och näringskvalificering krävs fortfarande."
+  },
+  "version_preservation": {
+    "new_version": "1.3.0",
+    "changed_concrete_candidates": 52,
+    "changed_bases": 23,
+    "unchanged_ingredient_objects": 104,
+    "archives": [
+      "1.0.0",
+      "1.1.0",
+      "1.2.0"
+    ],
+    "prior_current_sha256": "92d7ff63473969e659c61b7ff96b9bd852d8037e7174499a65d60f58297a983e"
+  },
+  "changes": [
+    {
+      "base_id": "smako-greek-keftedes",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-greek-keftedes",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-greek-lemon-chicken",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-greek-lemon-chicken",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-greek-fish-plaki",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-greek-fish-plaki",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-greek-stuffed-peppers",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 50,
+      "minutes_after": 50
+    },
+    {
+      "base_id": "smako-greek-stuffed-peppers",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 50,
+      "minutes_after": 50
+    },
+    {
+      "base_id": "smako-italian-lentil-ragu",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-italian-lentil-ragu",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-italian-aubergine-gratin",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-italian-aubergine-gratin",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-mexican-chicken-bowl",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-mexican-chicken-bowl",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-mexican-lentil-chili",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-mexican-lentil-chili",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-mexican-tofu-sofritas",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-mexican-tofu-sofritas",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-mexican-corn-soup",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 35,
+      "minutes_after": 35
+    },
+    {
+      "base_id": "smako-mexican-corn-soup",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 35,
+      "minutes_after": 35
+    },
+    {
+      "base_id": "smako-indian-tofu-dal",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 44
+    },
+    {
+      "base_id": "smako-indian-tofu-dal",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 44
+    },
+    {
+      "base_id": "smako-indian-chana-cauliflower",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-indian-chana-cauliflower",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-indian-fish-coconut",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 35,
+      "minutes_after": 35
+    },
+    {
+      "base_id": "smako-indian-fish-coconut",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 35,
+      "minutes_after": 35
+    },
+    {
+      "base_id": "smako-indian-chicken-biryani",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-indian-chicken-biryani",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-indian-bean-potato-curry",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 44
+    },
+    {
+      "base_id": "smako-indian-bean-potato-curry",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 44
+    },
+    {
+      "base_id": "smako-thai-coconut-fish-soup",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 35,
+      "minutes_after": 35
+    },
+    {
+      "base_id": "smako-thai-coconut-fish-soup",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 35,
+      "minutes_after": 35
+    },
+    {
+      "base_id": "smako-thai-chicken-coconut-curry",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-thai-chicken-coconut-curry",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-thai-tofu-satay",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-thai-tofu-satay",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-swedish-mustard-chicken",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-swedish-mustard-chicken",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-swedish-lentil-patties",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-swedish-lentil-patties",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-swedish-mustard-salmon",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-swedish-mustard-salmon",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-swedish-green-pea-soup",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 42
+    },
+    {
+      "base_id": "smako-swedish-green-pea-soup",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 40,
+      "minutes_after": 42
+    },
+    {
+      "base_id": "smako-swedish-tofu-root-hash",
+      "variant_id": "base",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-swedish-tofu-root-hash",
+      "variant_id": "protein",
+      "previous_version": "1.1.0",
+      "minutes_before": 45,
+      "minutes_after": 45
+    },
+    {
+      "base_id": "smako-mexican-lentil-chili",
+      "variant_id": "white-bean",
+      "previous_version": "1.2.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-mexican-lentil-chili",
+      "variant_id": "white-bean-protein",
+      "previous_version": "1.2.0",
+      "minutes_before": 40,
+      "minutes_after": 40
+    },
+    {
+      "base_id": "smako-mexican-corn-soup",
+      "variant_id": "creme-fraiche",
+      "previous_version": "1.2.0",
+      "minutes_before": 37,
+      "minutes_after": 37
+    },
+    {
+      "base_id": "smako-mexican-corn-soup",
+      "variant_id": "creme-fraiche-protein",
+      "previous_version": "1.2.0",
+      "minutes_before": 37,
+      "minutes_after": 37
+    },
+    {
+      "base_id": "smako-swedish-green-pea-soup",
+      "variant_id": "creme-fraiche",
+      "previous_version": "1.2.0",
+      "minutes_before": 42,
+      "minutes_after": 44
+    },
+    {
+      "base_id": "smako-swedish-green-pea-soup",
+      "variant_id": "creme-fraiche-protein",
+      "previous_version": "1.2.0",
+      "minutes_before": 42,
+      "minutes_after": 44
+    }
+  ],
+  "recipes": [
+    {
+      "base_id": "smako-greek-keftedes",
+      "name": "Färsbiffar med citronpotatis, tzatziki och tomatsallad",
+      "recipe_version": "1.3.0",
+      "cuisine": "greek",
+      "family": "husman",
+      "method": "oven",
+      "primary_ingredient": "nötfärs",
+      "side": "rostad potatis",
+      "components": [
+        "Oreganobiffar",
+        "Citronpotatis",
+        "Tzatziki",
+        "Tomatsallad"
+      ],
+      "flavor_profile": [
+        "citron",
+        "oregano",
+        "vitlök"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 45,
+      "estimated_dependency_path_minutes": 42,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-greek-lemon-chicken",
+      "name": "Citronkyckling med spenatris, feta och gurksallad",
+      "recipe_version": "1.3.0",
+      "cuisine": "greek",
+      "family": "risrätt",
+      "method": "pan",
+      "primary_ingredient": "kyckling",
+      "side": "spenatris",
+      "components": [
+        "Citronkyckling",
+        "Spenatris",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "citron",
+        "oregano",
+        "feta"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 32,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kyckling",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-greek-lentil-moussaka",
+      "name": "Linsmoussaka med aubergine, potatis och yoghurtlock",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "gratäng",
+      "method": "bake",
+      "primary_ingredient": "linser",
+      "side": "potatisskivor",
+      "components": [
+        "Lins- och aubergineragu",
+        "Potatis",
+        "Yoghurtlock"
+      ],
+      "flavor_profile": [
+        "kanel",
+        "tomat",
+        "oregano"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 50,
+      "estimated_dependency_path_minutes": 49,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "linser",
+          "quantity": 75.0,
+          "unit": "g",
+          "form": "dry"
+        },
+        {
+          "name": "ost",
+          "quantity": 35.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-greek-gigantes",
+      "name": "Tomatbakade vita bönor med feta och örtigt couscous",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "ugn",
+      "method": "oven",
+      "primary_ingredient": "bönor",
+      "side": "örtcouscous",
+      "components": [
+        "Tomatbakade bönor",
+        "Örtcouscous"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "dill",
+        "citron"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 39,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "bönor",
+          "quantity": 220.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        },
+        {
+          "name": "fetaost",
+          "quantity": 45.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-greek-fish-plaki",
+      "name": "Ugnsfisk i tomat och oliver med citroncouscous",
+      "recipe_version": "1.3.0",
+      "cuisine": "greek",
+      "family": "ugn",
+      "method": "oven",
+      "primary_ingredient": "fisk",
+      "side": "citroncouscous",
+      "components": [
+        "Fisk plaki",
+        "Citroncouscous"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "oliver",
+        "persilja"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": true,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 36,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "fisk",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-greek-spanakorizo",
+      "name": "Spenatris med kikärtor, feta och citronyoghurt",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "risrätt",
+      "method": "pot",
+      "primary_ingredient": "kikärtor",
+      "side": "spenatris",
+      "components": [
+        "Spenatris med kikärtor",
+        "Citronyoghurt",
+        "Frisk sallad"
+      ],
+      "flavor_profile": [
+        "dill",
+        "citron",
+        "feta"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 35,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kikärtor",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        },
+        {
+          "name": "fetaost",
+          "quantity": 40.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-greek-souvlaki",
+      "name": "Oreganofläsk i tortillabröd med kålsallad och yoghurtsås",
+      "recipe_version": "1.1.0",
+      "cuisine": "greek",
+      "family": "wrap",
+      "method": "pan",
+      "primary_ingredient": "fläskkött",
+      "side": "tortillabröd",
+      "components": [
+        "Oreganofläsk",
+        "Bröd och kålsallad",
+        "Gurkyoghurt"
+      ],
+      "flavor_profile": [
+        "oregano",
+        "citron",
+        "vitlök"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 31,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "fläskkött",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-greek-stuffed-peppers",
+      "name": "Paprikahalvor med linsris, feta och vitlöksyoghurt",
+      "recipe_version": "1.3.0",
+      "cuisine": "greek",
+      "family": "gratäng",
+      "method": "bake",
+      "primary_ingredient": "linser",
+      "side": "fyllt ris",
+      "components": [
+        "Fyllda paprikor",
+        "Vitlöksyoghurt",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "oregano",
+        "tomat",
+        "citron"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 50,
+      "estimated_dependency_path_minutes": 46,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "linser",
+          "quantity": 65.0,
+          "unit": "g",
+          "form": "dry"
+        },
+        {
+          "name": "fetaost",
+          "quantity": 40.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-italian-piccata",
+      "name": "Citronkyckling med kaprispasta och broccoli",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "pasta",
+      "method": "pan",
+      "primary_ingredient": "kyckling",
+      "side": "citronpasta",
+      "components": [
+        "Citronkyckling",
+        "Pasta och broccoli",
+        "Tomater"
+      ],
+      "flavor_profile": [
+        "citron",
+        "kapris",
+        "persilja"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 32,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kyckling",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-italian-polpette",
+      "name": "Små färsbullar i tomatsås med pasta och zucchinisallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "pasta",
+      "method": "pot",
+      "primary_ingredient": "nötfärs",
+      "side": "pasta",
+      "components": [
+        "Färsbullar och tomatsås",
+        "Pasta",
+        "Zucchinisallad"
+      ],
+      "flavor_profile": [
+        "basilika",
+        "vitlök",
+        "tomat"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 39,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-italian-lentil-ragu",
+      "name": "Linsragu med selleri, svamp och pasta",
+      "recipe_version": "1.3.0",
+      "cuisine": "italian",
+      "family": "pasta",
+      "method": "pot",
+      "primary_ingredient": "linser",
+      "side": "pasta",
+      "components": [
+        "Linsragu",
+        "Pasta med ost"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "oregano",
+        "vitlök"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 40,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "linser",
+          "quantity": 85.0,
+          "unit": "g",
+          "form": "dry"
+        },
+        {
+          "name": "ost",
+          "quantity": 30.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-italian-ribollita",
+      "name": "Vit bön- och kålsoppa med bröd, tomat och ost",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "soppa",
+      "method": "pot",
+      "primary_ingredient": "bönor",
+      "side": "bröd i soppan",
+      "components": [
+        "Bön- och kålsoppa",
+        "Bröd och ost"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "vitlök",
+        "basilika"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 39,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "bönor",
+          "quantity": 240.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        },
+        {
+          "name": "ost",
+          "quantity": 30.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-italian-mushroom-risotto",
+      "name": "Krämigt svamp- och linsris med spenat och citron",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "risrätt",
+      "method": "pot",
+      "primary_ingredient": "linser",
+      "side": "krämigt ris",
+      "components": [
+        "Svamp- och linsris",
+        "Gurka"
+      ],
+      "flavor_profile": [
+        "svamp",
+        "citron",
+        "persilja"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 45,
+      "estimated_dependency_path_minutes": 42,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "linser",
+          "quantity": 60.0,
+          "unit": "g",
+          "form": "dry"
+        },
+        {
+          "name": "ost",
+          "quantity": 35.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-italian-salmon-cartoccio",
+      "name": "Laxpaket med tomat, oliver och basilikapotatis",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "ugn",
+      "method": "oven",
+      "primary_ingredient": "lax",
+      "side": "basilikapotatis",
+      "components": [
+        "Laxpaket",
+        "Basilikapotatis",
+        "Citronkräm"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "oliver",
+        "citron"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": true,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 36,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "lax",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-italian-aubergine-gratin",
+      "name": "Aubergine- och kikärtsgratäng med tomat och örtcouscous",
+      "recipe_version": "1.3.0",
+      "cuisine": "italian",
+      "family": "gratäng",
+      "method": "bake",
+      "primary_ingredient": "kikärtor",
+      "side": "örtcouscous",
+      "components": [
+        "Auberginegratäng",
+        "Örtcouscous"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "basilika",
+        "ost"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 45,
+      "estimated_dependency_path_minutes": 43,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kikärtor",
+          "quantity": 200.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        },
+        {
+          "name": "ost",
+          "quantity": 40.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-italian-spinach-pasta-bake",
+      "name": "Spenat- och kesofylld pastagratäng med tomatsås",
+      "recipe_version": "1.1.0",
+      "cuisine": "italian",
+      "family": "gratäng",
+      "method": "bake",
+      "primary_ingredient": "keso",
+      "side": "gratinerad pasta",
+      "components": [
+        "Spenatpasta",
+        "Tomatsås",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "spenat",
+        "vitlök",
+        "basilika"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 45,
+      "estimated_dependency_path_minutes": 44,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "keso",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "as_sold"
+        },
+        {
+          "name": "ost",
+          "quantity": 30.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-mexican-chicken-bowl",
+      "name": "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+      "recipe_version": "1.3.0",
+      "cuisine": "mexican",
+      "family": "bowl",
+      "method": "pan",
+      "primary_ingredient": "kyckling",
+      "side": "ris",
+      "components": [
+        "Kryddig kyckling",
+        "Ris och majsröra",
+        "Limeyoghurt",
+        "Tomatsalsa"
+      ],
+      "flavor_profile": [
+        "lime",
+        "spiskummin",
+        "tomat"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 34,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kyckling",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-mexican-beef-fajita",
+      "name": "Färsfajitas med paprika, bönröra och kålsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "wrap",
+      "method": "pan",
+      "primary_ingredient": "nötfärs",
+      "side": "tortillas",
+      "components": [
+        "Färs och paprika",
+        "Tortillas och bönröra",
+        "Kålsallad"
+      ],
+      "flavor_profile": [
+        "spiskummin",
+        "lime",
+        "paprika"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 34,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "nötfärs",
+          "quantity": 160.0,
+          "unit": "g",
+          "form": "raw_edible"
+        },
+        {
+          "name": "svarta bönor",
+          "quantity": 80.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-mexican-bean-enchiladas",
+      "name": "Bönenchiladas med sötpotatis, tomatsås och limekål",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "gratäng",
+      "method": "bake",
+      "primary_ingredient": "svarta bönor",
+      "side": "tortillas",
+      "components": [
+        "Fyllda tortillas",
+        "Tomatsås",
+        "Limekål"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "spiskummin",
+        "lime"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 50,
+      "estimated_dependency_path_minutes": 46,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "svarta bönor",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        },
+        {
+          "name": "ost",
+          "quantity": 35.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-mexican-fish-tacos",
+      "name": "Fisktacos med majssalsa, krispig kål och limekräm",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "wrap",
+      "method": "pan",
+      "primary_ingredient": "fisk",
+      "side": "tortillas",
+      "components": [
+        "Kryddstekt fisk",
+        "Tortillas och kål",
+        "Majssalsa",
+        "Limekräm"
+      ],
+      "flavor_profile": [
+        "lime",
+        "chili",
+        "spiskummin"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": false,
+      "fish": true,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 29,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "fisk",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-mexican-lentil-chili",
+      "name": "Mustig lins- och kidneychili med ris och yoghurt",
+      "recipe_version": "1.3.0",
+      "cuisine": "mexican",
+      "family": "chili",
+      "method": "pot",
+      "primary_ingredient": "linser",
+      "side": "ris",
+      "components": [
+        "Lins- och bönchili",
+        "Ris",
+        "Limeyoghurt"
+      ],
+      "flavor_profile": [
+        "spiskummin",
+        "chili",
+        "tomat"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 37,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        },
+        {
+          "id": "white-bean",
+          "version": "1.3.0"
+        },
+        {
+          "id": "white-bean-protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "linser",
+          "quantity": 60.0,
+          "unit": "g",
+          "form": "dry"
+        },
+        {
+          "name": "kidneybönor",
+          "quantity": 120.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-mexican-pork-arroz",
+      "name": "Tomatris med fläsk, svarta bönor och varm paprikasalsa",
+      "recipe_version": "1.1.0",
+      "cuisine": "mexican",
+      "family": "risrätt",
+      "method": "pan",
+      "primary_ingredient": "fläskkött",
+      "side": "tomatris",
+      "components": [
+        "Fläsk och bönor",
+        "Tomatris",
+        "Varm paprikasalsa"
+      ],
+      "flavor_profile": [
+        "paprika",
+        "spiskummin",
+        "lime"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 40,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "fläskkött",
+          "quantity": 160.0,
+          "unit": "g",
+          "form": "raw_edible"
+        },
+        {
+          "name": "svarta bönor",
+          "quantity": 80.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-mexican-tofu-sofritas",
+      "name": "Smulig tofubowl med bönor, limekål och tomatris",
+      "recipe_version": "1.3.0",
+      "cuisine": "mexican",
+      "family": "bowl",
+      "method": "pan",
+      "primary_ingredient": "tofu",
+      "side": "tomatris",
+      "components": [
+        "Sofritaskryddad tofu",
+        "Tomatris",
+        "Limekål"
+      ],
+      "flavor_profile": [
+        "chili",
+        "lime",
+        "spiskummin"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 36,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "tofu",
+          "quantity": 200.0,
+          "unit": "g",
+          "form": "as_sold"
+        },
+        {
+          "name": "svarta bönor",
+          "quantity": 100.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-mexican-corn-soup",
+      "name": "Majs- och bönsoppa med ostquesadilla och tomatsalsa",
+      "recipe_version": "1.3.0",
+      "cuisine": "mexican",
+      "family": "soppa",
+      "method": "pot",
+      "primary_ingredient": "bönor",
+      "side": "ostquesadilla",
+      "components": [
+        "Majs- och bönsoppa",
+        "Ostquesadilla",
+        "Tomatsalsa"
+      ],
+      "flavor_profile": [
+        "majs",
+        "lime",
+        "chili"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 32,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        },
+        {
+          "id": "creme-fraiche",
+          "version": "1.3.0"
+        },
+        {
+          "id": "creme-fraiche-protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "bönor",
+          "quantity": 200.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        },
+        {
+          "name": "ost",
+          "quantity": 35.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-indian-tandoori-chicken",
+      "name": "Yoghurtkryddad kyckling med gurkmejaris och gurksallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "ugn",
+      "method": "oven",
+      "primary_ingredient": "kyckling",
+      "side": "gurkmejaris",
+      "components": [
+        "Yoghurtkryddad kyckling",
+        "Gurkmejaris",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "spiskummin",
+        "paprika",
+        "citron"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 39,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kyckling",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-indian-tofu-dal",
+      "name": "Röd linsdal med spenat, mjuk tofu och citronris",
+      "recipe_version": "1.3.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "primary_ingredient": "linser",
+      "side": "citronris",
+      "components": [
+        "Linsdal",
+        "Citronris"
+      ],
+      "flavor_profile": [
+        "ingefära",
+        "spiskummin",
+        "gurkmeja"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 44,
+      "estimated_dependency_path_minutes": 43,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "linser",
+          "quantity": 75.0,
+          "unit": "g",
+          "form": "dry"
+        },
+        {
+          "name": "tofu",
+          "quantity": 140.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-indian-keema",
+      "name": "Färskeema med ärtor, potatis och sval tomatyoghurt",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "gryta",
+      "method": "pot",
+      "primary_ingredient": "nötfärs",
+      "side": "potatis i grytan",
+      "components": [
+        "Keema med potatis",
+        "Tomatyoghurt"
+      ],
+      "flavor_profile": [
+        "ingefära",
+        "spiskummin",
+        "kanel"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 40,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-indian-chana-cauliflower",
+      "name": "Kikärts- och blomkålsmasala med ris och gurkyoghurt",
+      "recipe_version": "1.3.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "primary_ingredient": "kikärtor",
+      "side": "ris",
+      "components": [
+        "Kikärtsmasala",
+        "Ris",
+        "Gurkyoghurt"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "ingefära",
+        "spiskummin"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 37,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kikärtor",
+          "quantity": 220.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-indian-fish-coconut",
+      "name": "Fisk i kokos- och tomatcurry med ris och limegurka",
+      "recipe_version": "1.3.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "primary_ingredient": "fisk",
+      "side": "ris",
+      "components": [
+        "Fiskcurry",
+        "Ris",
+        "Limegurka"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "ingefära",
+        "lime"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": true,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 34,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "fisk",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-indian-palak-tofu",
+      "name": "Krämig spenattofu med ärtor och vitlöksris",
+      "recipe_version": "1.1.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "primary_ingredient": "tofu",
+      "side": "vitlöksris",
+      "components": [
+        "Spenattofu",
+        "Vitlöksris"
+      ],
+      "flavor_profile": [
+        "spenat",
+        "ingefära",
+        "spiskummin"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 34,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "tofu",
+          "quantity": 220.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-indian-chicken-biryani",
+      "name": "Kryddigt kycklingris med morot, ärtor och gurkraita",
+      "recipe_version": "1.3.0",
+      "cuisine": "indian",
+      "family": "risrätt",
+      "method": "pot",
+      "primary_ingredient": "kyckling",
+      "side": "kryddris",
+      "components": [
+        "Kycklingris",
+        "Gurkraita"
+      ],
+      "flavor_profile": [
+        "kanel",
+        "ingefära",
+        "gurkmeja"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 45,
+      "estimated_dependency_path_minutes": 44,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kyckling",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-indian-bean-potato-curry",
+      "name": "Vit böncurry med potatis, kokos och tomatsallad",
+      "recipe_version": "1.3.0",
+      "cuisine": "indian",
+      "family": "curry",
+      "method": "pot",
+      "primary_ingredient": "bönor",
+      "side": "potatis",
+      "components": [
+        "Bön- och potatiscurry",
+        "Tomatsallad"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "ingefära",
+        "citron"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 44,
+      "estimated_dependency_path_minutes": 43,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "bönor",
+          "quantity": 230.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-thai-peanut-noodles",
+      "name": "Kycklingnudlar med broccoli, ingefära och jordnötssås",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "nudelrätt",
+      "method": "pan",
+      "primary_ingredient": "kyckling",
+      "side": "nudlar",
+      "components": [
+        "Kyckling och grönsaker",
+        "Nudlar",
+        "Jordnötssås"
+      ],
+      "flavor_profile": [
+        "jordnöt",
+        "lime",
+        "ingefära"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 31,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kyckling",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-thai-basil-tofu",
+      "name": "Basilikastekt tofu med gröna bönor, paprika och ris",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "wok",
+      "method": "pan",
+      "primary_ingredient": "tofu",
+      "side": "ris",
+      "components": [
+        "Basilikastekt tofu",
+        "Ris",
+        "Lime- och sojasås"
+      ],
+      "flavor_profile": [
+        "basilika",
+        "lime",
+        "soja"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 35,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "tofu",
+          "quantity": 230.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-thai-coconut-fish-soup",
+      "name": "Kokosfisksoppa med svamp, ingefära och lime",
+      "recipe_version": "1.3.0",
+      "cuisine": "thai",
+      "family": "soppa",
+      "method": "pot",
+      "primary_ingredient": "fisk",
+      "side": "ris",
+      "components": [
+        "Kokosfisksoppa",
+        "Ris"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "lime",
+        "ingefära"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": true,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 34,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "fisk",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-thai-lime-pork",
+      "name": "Lime- och ingefärsfläsk med ris och krispig kålsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "bowl",
+      "method": "pan",
+      "primary_ingredient": "fläskkött",
+      "side": "ris",
+      "components": [
+        "Limefläsk",
+        "Ris",
+        "Kålsallad"
+      ],
+      "flavor_profile": [
+        "lime",
+        "ingefära",
+        "jordnöt"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 34,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "fläskkött",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-thai-chicken-coconut-curry",
+      "name": "Kycklingcurry med kokos, paprika, gröna bönor och ris",
+      "recipe_version": "1.3.0",
+      "cuisine": "thai",
+      "family": "curry",
+      "method": "pot",
+      "primary_ingredient": "kyckling",
+      "side": "ris",
+      "components": [
+        "Kycklingcurry",
+        "Ris",
+        "Lime"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "ingefära",
+        "basilika"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 40,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kyckling",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-thai-tofu-satay",
+      "name": "Jordnötsbakad tofu med gurksallad, broccoli och ris",
+      "recipe_version": "1.3.0",
+      "cuisine": "thai",
+      "family": "ugn",
+      "method": "oven",
+      "primary_ingredient": "tofu",
+      "side": "ris",
+      "components": [
+        "Jordnötsbakad tofu",
+        "Ris och broccoli",
+        "Gurksallad"
+      ],
+      "flavor_profile": [
+        "jordnöt",
+        "lime",
+        "ingefära"
+      ],
+      "ingredient_count": 14,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 37,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "tofu",
+          "quantity": 230.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-thai-beef-broccoli",
+      "name": "Basilikafärs med broccoli, sojanudlar och limegurka",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "nudelrätt",
+      "method": "pan",
+      "primary_ingredient": "nötfärs",
+      "side": "nudlar",
+      "components": [
+        "Basilikafärs",
+        "Sojanudlar",
+        "Limegurka"
+      ],
+      "flavor_profile": [
+        "soja",
+        "ingefära",
+        "basilika"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 32,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-thai-lentil-coconut-soup",
+      "name": "Krämig lins- och kokossoppa med ingefärstofu",
+      "recipe_version": "1.1.0",
+      "cuisine": "thai",
+      "family": "soppa",
+      "method": "pot",
+      "primary_ingredient": "linser",
+      "side": "stekt tofu",
+      "components": [
+        "Lins- och kokossoppa",
+        "Stekt tofu"
+      ],
+      "flavor_profile": [
+        "kokos",
+        "lime",
+        "jordnöt"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 40,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "linser",
+          "quantity": 75.0,
+          "unit": "g",
+          "form": "dry"
+        },
+        {
+          "name": "tofu",
+          "quantity": 160.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-swedish-mustard-chicken",
+      "name": "Senapskyckling med dillpotatis och krämig kålsallad",
+      "recipe_version": "1.3.0",
+      "cuisine": "swedish",
+      "family": "husman",
+      "method": "pan",
+      "primary_ingredient": "kyckling",
+      "side": "dillpotatis",
+      "components": [
+        "Senapskyckling",
+        "Dillpotatis",
+        "Krämig kålsallad"
+      ],
+      "flavor_profile": [
+        "senap",
+        "dill",
+        "citron"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 35,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "kyckling",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-swedish-beef-patties",
+      "name": "Pannbiff med svampsås, rostade rotfrukter och gurka",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "husman",
+      "method": "oven",
+      "primary_ingredient": "nötfärs",
+      "side": "rostade rotfrukter",
+      "components": [
+        "Pannbiff",
+        "Rostade rotfrukter",
+        "Svampsås",
+        "Gurka"
+      ],
+      "flavor_profile": [
+        "svamp",
+        "senap",
+        "persilja"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 45,
+      "estimated_dependency_path_minutes": 44,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        },
+        {
+          "id": "water-panade",
+          "version": "1.2.0"
+        },
+        {
+          "id": "water-panade-protein",
+          "version": "1.2.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "nötfärs",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-swedish-lentil-patties",
+      "name": "Lins- och havrebiffar med varm potatissallad och dillkräm",
+      "recipe_version": "1.3.0",
+      "cuisine": "swedish",
+      "family": "husman",
+      "method": "pan",
+      "primary_ingredient": "linser",
+      "side": "varm potatissallad",
+      "components": [
+        "Linsbiffar",
+        "Potatissallad",
+        "Dillkräm"
+      ],
+      "flavor_profile": [
+        "dill",
+        "senap",
+        "citron"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 45,
+      "estimated_dependency_path_minutes": 42,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "linser",
+          "quantity": 80.0,
+          "unit": "g",
+          "form": "dry"
+        },
+        {
+          "name": "keso",
+          "quantity": 80.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-swedish-mustard-salmon",
+      "name": "Senapsbakad lax med potatis, ärtor och pepparrotsyoghurt",
+      "recipe_version": "1.3.0",
+      "cuisine": "swedish",
+      "family": "ugn",
+      "method": "oven",
+      "primary_ingredient": "lax",
+      "side": "potatis och ärtor",
+      "components": [
+        "Senapsbakad lax",
+        "Potatis och ärtor",
+        "Pepparrotsyoghurt",
+        "Gurka"
+      ],
+      "flavor_profile": [
+        "senap",
+        "dill",
+        "pepparrot"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": true,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 35,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "lax",
+          "quantity": 180.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-swedish-pork-stroganoff",
+      "name": "Fläskstroganoff med ris, ärtor och syrlig kålsallad",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "gryta",
+      "method": "pan",
+      "primary_ingredient": "fläskkött",
+      "side": "ris",
+      "components": [
+        "Fläskstroganoff",
+        "Ris och ärtor",
+        "Kålsallad"
+      ],
+      "flavor_profile": [
+        "tomat",
+        "senap",
+        "paprika"
+      ],
+      "ingredient_count": 12,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 35,
+      "estimated_dependency_path_minutes": 34,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "fläskkött",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-swedish-green-pea-soup",
+      "name": "Grön ärt- och bönsoppa med spenat och ostbröd",
+      "recipe_version": "1.3.0",
+      "cuisine": "swedish",
+      "family": "soppa",
+      "method": "pot",
+      "primary_ingredient": "bönor",
+      "side": "ostbröd",
+      "components": [
+        "Ärt- och bönsoppa",
+        "Ostbröd",
+        "Pepparrot"
+      ],
+      "flavor_profile": [
+        "dill",
+        "citron",
+        "pepparrot"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 42,
+      "estimated_dependency_path_minutes": 41,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        },
+        {
+          "id": "creme-fraiche",
+          "version": "1.3.0"
+        },
+        {
+          "id": "creme-fraiche-protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "bönor",
+          "quantity": 200.0,
+          "unit": "g",
+          "form": "cooked_drained"
+        },
+        {
+          "name": "ost",
+          "quantity": 35.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-swedish-tofu-root-hash",
+      "name": "Rotfruktspytt med tofu, senapskräm och varm rödbeta",
+      "recipe_version": "1.3.0",
+      "cuisine": "swedish",
+      "family": "potatisrätt",
+      "method": "oven",
+      "primary_ingredient": "tofu",
+      "side": "rotfruktspytt",
+      "components": [
+        "Tofu- och rotfruktspytt",
+        "Varm rödbeta",
+        "Senapskräm"
+      ],
+      "flavor_profile": [
+        "senap",
+        "dill",
+        "citron"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": true,
+      "fish": false,
+      "estimated_minutes_for_two": 45,
+      "estimated_dependency_path_minutes": 44,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.3.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "tofu",
+          "quantity": 220.0,
+          "unit": "g",
+          "form": "as_sold"
+        },
+        {
+          "name": "keso",
+          "quantity": 70.0,
+          "unit": "g",
+          "form": "as_sold"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    },
+    {
+      "base_id": "smako-swedish-cabbage-mince-pot",
+      "name": "Kål- och färsgryta med potatis och dillig gurkkräm",
+      "recipe_version": "1.1.0",
+      "cuisine": "swedish",
+      "family": "gryta",
+      "method": "pot",
+      "primary_ingredient": "blandfärs",
+      "side": "potatis i grytan",
+      "components": [
+        "Kål- och färsgryta",
+        "Dillig gurkkräm"
+      ],
+      "flavor_profile": [
+        "kål",
+        "senap",
+        "dill"
+      ],
+      "ingredient_count": 13,
+      "vegetarian": false,
+      "fish": false,
+      "estimated_minutes_for_two": 40,
+      "estimated_dependency_path_minutes": 40,
+      "approved_variants": [
+        {
+          "id": "protein",
+          "version": "1.1.0"
+        }
+      ],
+      "primary_used_quantity_per_person": [
+        {
+          "name": "blandfärs",
+          "quantity": 170.0,
+          "unit": "g",
+          "form": "raw_edible"
+        }
+      ],
+      "content_review": "Modellgranskad helhet, mängder, instruktioner och beroenden. Ingen fysisk provlagning."
+    }
+  ]
+}
