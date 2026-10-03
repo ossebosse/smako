@@ -1,17 +1,32 @@
-# 2026-10-03: Nästa receptlager – slutkandidat, sista HTTP-prov pågår
+# 2026-10-03: Nästa receptlager – testad kandidat levererad lokalt
 
-Aktuellt kl. 12:16: arbetet ligger på `feature/complete-recipe-layer`, från
-faktiska `402a5c9` ovanpå publika `74c9077`. Ingen produktionsaktivering eller
-Git-push. Runtime är låst till `17a9c1330dcc72ff9750a3fa680fa6982f7ed99b`.
+Arbetet är slutfört på `feature/complete-recipe-layer`, från faktiska `402a5c9`
+ovanpå publika `74c9077`. Ingen produktionsaktivering eller Git-push.
+Runtime är låst till **`17a9c1330dcc72ff9750a3fa680fa6982f7ed99b`**.
 Efterföljande commits ändrar dokumentation och acceptansskript, inte runtime.
 
-Serverpaket `.local/releases/complete-recipes-20261002/smako-server-17a9c1330dcc.zip`,
+[Slutredovisning](releases/complete-recipes-20261002/RESULTS.md),
+[alla sju menyer, produkter och inköp](releases/complete-recipes-20261002/MENUS.md),
+[kontrollerad aktivering och beständig flaggåtergång](releases/complete-recipes-20261002/ACTIVATION.md).
+
+Paket `.local/releases/complete-recipes-20261002/smako-server-17a9c1330dcc.zip`,
 2 739 005 byte, SHA-256
 `d3327b9137d4310707118b5272bc826ed0403ebd6d0c0ab935bb1196efee060a`.
 Image `sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35`:
 645 runtimefiler matchar; pip check och offline-Chromium som appanvändare PASS.
-[App-only aktivering och beständig flaggåtergång](releases/complete-recipes-20261002/ACTIVATION.md)
-är låsta till dessa identiteter men har inte utförts i produktion.
+Featureflaggan är av som standard. Planrevisioner ska bevaras även vid återgång.
+
+Både publikt och personligt flöde har matkök, ingrediensantal, tid, kost,
+valfritt proteinmål och tillåtna variationer. Valen följer jobb, generering,
+ordinarie pris-/korgmotor, sparning, receptbyte och uttrycklig omräkning.
+Bibliotek 1.4.0 har **48 distinkta grundrätter och 56 variationer**.
+Samtliga 104 är prövade på slutimagen: **94 kvalificerade versioner, 47/48
+fungerande grundrätter, 43/48 original**. Alla sju fria femmiddagsmenyer PASS.
+De tio verkliga källstoppen gäller kapris, kidneybönors mängdbasis och mjölkens
+näringsbasis. Piccata saknar fungerande variant i detta underlag. Två produkter
+med motstridiga energipar spärras; normal produktkvalificering hittar annan
+färs och källstyrkt färdigt matbröd i 16 versioner utan ändrade receptmängder.
+Ingen fysisk provlagning eller fysisk iPhone-testning har utförts.
 
 Full offline-regression på oförändrad slutruntime: **3 887 PASS**, 0 fel eller
 överhoppade, 2 042,099 s, inga spärrade nät-/äldre källåtkomster. 252 riktade
@@ -19,47 +34,46 @@ integrationsprov plus 6 slutliga HTTP-runner-kontrakt PASS. Ruff för samtliga
 ändrade Python-filer, compileall och pip check PASS.
 [TESTS.json](releases/complete-recipes-20261002/TESTS.json) bevarar även äldre körningar.
 
-Slutlig 104-kvalificering och sju fria menyer är klara på exakt image utan
-app-source-mounts: **94/104 versioner, 47/48 familjer, 43/48 original**.
-Bibliotek 1.4.0: 48 distinkta grundrätter, 56 variationer. Energifelen i två
-Coop-produkter är spärrade; vanlig kvalificering hittar annan färs och
-källstyrkt färdigt matbröd i 16 versioner, med oförändrade receptmängder.
-Tio kvarvarande verkliga källstopp gäller kapris, kidneybönor och mjölkbasis.
-[Slutkvalificering](releases/complete-recipes-20261002/FINAL-QUALIFICATION.md),
-[alla menyer och inköp](releases/complete-recipes-20261002/MENUS.md).
-Ingen fysisk provlagning eller fysisk iPhone-testning har utförts.
+Ren slutmätning med identiska frysta underlag/beroenden och 2 CPU/3 GiB:
 
-Ren slutmätning med samma frysta underlag och 2 CPU/3 GiB:
 - Äldre publikt flöde 161,047 s kallt mot baseline 328,424 s (**−50,96 %**),
   2,264 s varmt. Recept, ingredienser och hela korgen identiska: 168,55 kr.
 - Komplett grekisk/mexikansk 5×2, 10–15, 40 min/40 g, Billigast: 105,721 s
   kallt / 95,976 s varmt, samma korg 738,17 kr.
-- Python 3.12.13 och alla 47 beroendeversioner identiska mot baseline.
-[Fulla mätvärden](releases/complete-recipes-20261002/PACKAGED-FINAL-PERFORMANCE.json).
+- Brett Varierad HTTP-prov: 359,675 s. Sex minuters väntan kvarstår som
+  prestandabegränsning; ingen global optimalitet påstås.
 
-Slutimagen kör isolerat på localhost:18122 via befintlig SSH-tunnel,
-BUILD_ID `recipe-candidate-17a9c133-0476bf36`, featureflagga på. Alla 28 äldre
-testrevisioner är oförändrade över imagebytet. Chromium mobil/personligt
-slutflöde PASS: generering 95,328 s, byte 17,719 s, omräkning 11,937 s,
-versioner/redskap/budgettext/DOM/layout/feedback/revision 1–3 kontrollerade.
-WebKit desktop/publikt kör nu och lämnar restart-handshake till root före
-label-/imageverifierad `docker restart` och ny hashkontroll. UI-agent äger
-fjärrresursen tills den lämnas tillbaka. Inga samtidiga tunga acceptansjobb.
+Alla fem slutliga HTTP-fall PASS: gamla publika anrop, komplett 15/20-profil,
+Varierad, exakt2→uppskattat2→uppskattat3 (796,15→682,23→665,62 kr) och tre
+samtidiga användare. Tre klienter fick separata planer efter 24,66/48,29/70,82 s,
+högst samplat 2,073 GiB. Befintlig kö med en aktiv beräkning användes.
+Dubbelstart, ägarisolering och återläsning verifierades.
+[HTTP-bevis](releases/complete-recipes-20261002/HTTP-ACCEPTANCE.json).
 
-**Återstår före leverans:** slutför WebKit/omstart, ge sedan integrationagent
-resursen för fem nya HTTP-fall: legacy-public, complete-1520, unrestricted-varied,
-monotonic-scopes (exact1→exact2→estimated2→estimated3) och concurrent-three.
-Alla måste bindas till slutbuilden. Därefter integreras sanerade UI/HTTP-bevis,
-RESULTS.md färdigställs från `.local/complete-recipes-20261002/RESULTS.template.md`
-och denna handoff uppdateras. RESULTS.md är ännu ett äldre arbetsunderlag.
+Slutliga Chromium mobil/personligt och WebKit desktop/publikt PASS:
+generering 95,328 respektive 86,593 s, omladdning under jobb, receptbyte,
+omräkning, versioner/redskap, DOM/layout och sparade revisioner. Kontrollerad
+omstart bevarade alla 34 testrevisioner exakt, inklusive alla 28 äldre.
+Två feedbackrader matchar sina sparade receptversioner vid skrivskyddad
+DB-verifiering. Tidigare fyra browserfall täcker båda motorerna på mobil och
+desktop, tillfälligt nätavbrott och flagga-av-omstart, med egna versionsbindningar.
+[UI-bevis](releases/complete-recipes-20261002/UI-ACCEPTANCE.json),
+[omstart](releases/complete-recipes-20261002/FINAL-PERSISTENCE.json).
+
+Isolerat test kör på **http://127.0.0.1:18122** via befintlig SSH-tunnel,
+BUILD_ID `recipe-candidate-17a9c133-0476bf36`, featureflagga på. Det använder
+frysta historiska priser från 2026-10-02, inte löften om dagens inköp.
+Inga acceptansjobb återstår på resursen. Fjärrrot
+`/var/tmp/smako-complete-recipes-20261002`, endast syntetisk privat teststate.
+Replayklocka/state/testlauncher får aldrig användas som produktionskonfiguration.
 
 Produktion kontrollerad skrivskyddat 2026-10-03 10:12:15 UTC: HTTP200/ready,
 fortfarande build `74c9077001b3084317f36630fd38ce48e4663473`. Relä, scheduler,
 insamling, femkällorspolicy, kommunomfattning och 36/48-timmarsgränser orörda.
+[Oberoende paket- och driftgränskontroll](releases/complete-recipes-20261002/PACKAGE-BOUNDARIES.md).
 Råfiler och privata/syntetiska testplaner ligger utanför Git i `.local` och
-befintliga agentworktrees. Den isolerade fjärrroten är
-`/var/tmp/smako-complete-recipes-20261002`; replayklocka/state får aldrig
-användas som produktionskonfiguration. Återgång bevarar planrevisionerna.
+befintliga agentworktrees. Återstående begränsningar är dokumenterade källluckor,
+uppskattad näring/tillagningstid, utebliven fysisk provlagning och söktiderna.
 
 # 2026-10-02: Uppföljning – korrekta fältfel och fungerande lång generering
 
