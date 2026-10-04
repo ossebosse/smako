@@ -1492,6 +1492,15 @@ class BasketOptimizer:
             )
             for ingredient in ingredients
         ]
+        # A store with no qualified quote for any requested ingredient can
+        # never supply a line. Removing it only removes duplicate unions of
+        # exactly the same winning quotes (or incomplete baskets). Keep every
+        # supplying store, product and contract, in the original order. This
+        # is deliberately after qualification and outside coupled promotions.
+        supplying_stores = {quote.store_id for _, quotes, _ in quoted_ingredients for quote in quotes}
+        ordered_stores = [store for store in ordered_stores
+                          if str(_value(store, "store_id")) in supplying_stores]
+        limit = min(limit, len(ordered_stores))
         store_bits = {
             str(_value(store, "store_id")): 1 << index for index, store in enumerate(ordered_stores)
         }
@@ -1517,12 +1526,11 @@ class BasketOptimizer:
             if any(mask & combo_mask == 0 for mask in ingredient_store_masks):
                 infeasible_store_combinations += 1
                 continue
-            allowed = set(combo_ids)
             chosen: list[BasketItemQuote] = []
             for _ingredient, quotes, quote_set_key in quoted_ingredients:
-                quote = self._cheapest_quote_for_set(
+                quote = self._cheapest_quote_for_subset_key(
                     quotes,
-                    allowed,
+                    combo_ids,
                     quote_set_key,
                 )
                 if quote is None:

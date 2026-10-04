@@ -147,8 +147,10 @@ def test_store_availability_prunes_only_infeasible_subsets() -> None:
     counters = trace.snapshot().operation_counters
     assert optimized.total == 20
     assert [group.store_id for group in optimized.stores] == ["a", "b"]
-    assert counters["store_combinations"] == 6
-    assert counters["store_combinations_pruned_infeasible"] == 5
+    # The empty store cannot contribute a quote: its unions duplicate the
+    # two supplying stores or remain incomplete.
+    assert counters["store_combinations"] == 3
+    assert counters["store_combinations_pruned_infeasible"] == 2
 
 
 def test_store_combination_trace_is_batched_without_changing_result(
@@ -178,13 +180,13 @@ def test_store_combination_trace_is_batched_without_changing_result(
     assert optimized.total == 20
     assert [group.store_id for group in optimized.stores] == ["a", "b"]
     assert [row for row in increments if row[0] == "store_combinations"] == [
-        ("store_combinations", 6)
+        ("store_combinations", 3)
     ]
     assert [
         row
         for row in increments
         if row[0] == "store_combinations_pruned_infeasible"
-    ] == [("store_combinations_pruned_infeasible", 5)]
+    ] == [("store_combinations_pruned_infeasible", 2)]
 
 
 @pytest.mark.parametrize("max_stores", [1, 2, 3, None, 0])

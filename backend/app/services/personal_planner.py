@@ -9,7 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-from collections import defaultdict
+from collections import OrderedDict, defaultdict
 from dataclasses import replace
 from datetime import UTC, datetime
 from decimal import Decimal
@@ -168,6 +168,7 @@ class PersonalPlanner:
         self.pricing_date = self.now.astimezone(ZoneInfo("Europe/Stockholm")).date()
         self.service = MealPlanService(settings)
         self.optimizer = BasketOptimizer(
+            memoize_store_subsets=True,
             verification_policy=BasketVerificationPolicy.strict_live(
                 allow_estimated_quantities=request.purchase_planning_mode == "estimated", allow_medium_semantic=False
             )
@@ -211,7 +212,10 @@ class PersonalPlanner:
         # Only this planner owns these immutable-by-convention facts and this
         # request's estimate policy. Nothing survives into another request or
         # account. Bound the cache even for unusually large edit inputs.
-        self.nutrition_cache = {}
+        self.nutrition_cache = OrderedDict()
+        self.candidate_sequences = {}
+        self.normalized_recipe_rows = {}
+        self.qualified_nutrition_candidates = {}
         self.slot_nutrition_cache = {}
         self.clean_recipe_cache = {}
         self.recipe_computations = RecipeComputationCache()
@@ -257,9 +261,11 @@ class PersonalPlanner:
         )
         if key not in self.nutrition_cache:
             result = self._nutrition_evidence(product, name, unit, requested, recipe)
-            if len(self.nutrition_cache) >= 16384:
-                self.nutrition_cache.clear()
+            if len(self.nutrition_cache) >= 32768:
+                self.nutrition_cache.popitem(last=False)
             self.nutrition_cache[key] = result
+        else:
+            self.nutrition_cache.move_to_end(key)
         return self.nutrition_cache[key]
 
     def _nutrition_evidence(self, product, name, unit, requested, recipe):
@@ -421,8 +427,10 @@ class PersonalPlanner:
         observed = []
 
         def note(i, stage, outcome, reason):
-            observed.append((i, stage, outcome, reason))
-            self.product_trace.event(self.prepared.universe.products[i], recipe, name, stage, outcome, reason)
+            product = self.prepared.universe.products[i]
+            if (product.store_id, product.product_id) in self.product_trace.products:
+                observed.append((i, stage, outcome, reason))
+                self.product_trace.event(product, recipe, name, stage, outcome, reason)
 
         canonical = canonicalize_ingredient_name(name)
         requirement = NormalizedIngredient(
@@ -671,8 +679,17 @@ class PersonalPlanner:
             meal = self.meals[slot.meal_type]
             recipe = self.clean_recipe(slot.recipe, meal)
             profile = merged_profile(self.spec.profile, meal.profile)
-            for ingredient in self.service.normalizer.normalize_and_aggregate([recipe]):
-                source_ingredient = next((i for i in recipe.ingredients if canonicalize_ingredient_name(i.name) == ingredient.canonical_name), None)
+            normalized_key = (self.service.normalizer, self.recipe_computations.key(recipe))
+            if normalized_key not in self.normalized_recipe_rows:
+                sources = {}
+                for source in recipe.ingredients:
+                    sources.setdefault(canonicalize_ingredient_name(source.name), source)
+                normalized = self.service.normalizer.normalize_and_aggregate([recipe])
+                if len(self.normalized_recipe_rows) >= 512:
+                    self.normalized_recipe_rows.clear()
+                self.normalized_recipe_rows[normalized_key] = tuple(
+                    (ingredient, sources.get(ingredient.canonical_name)) for ingredient in normalized)
+            for ingredient, source_ingredient in self.normalized_recipe_rows[normalized_key]:
                 rows.append(
                     {
                         "name": ingredient.canonical_name,
@@ -800,6 +817,8 @@ class PersonalPlanner:
         retained_needs = ({d: need for need in _retained.personal.needs for d in need["demand_keys"]}
                           if _retained is not None else {})
         available = {i["id"]: i["available"] for i in self.items}
+        recipes_by_slot = {slot.id: slot.recipe for slot in slots}
+        meals_by_slot = {slot.id: self.meals[slot.meal_type] for slot in slots}
         rows = self._need_rows(slots)
         allocations, groups = [], []
         missing_nutrition = set()
@@ -810,7 +829,7 @@ class PersonalPlanner:
         for row in rows:
             if row["quantity"] <= 0:
                 continue
-            recipe = next((s.recipe for s in slots if s.id == row["source"]), None)
+            recipe = recipes_by_slot.get(row["source"])
             resolved = self.resolve(
                 row["name"],
                 row["quantity"],
@@ -823,36 +842,46 @@ class PersonalPlanner:
                 campaign_choice=row.get("campaign_choice", False),
                 recipe=recipe,
             )
-            meal = next((self.meals[s.meal_type] for s in slots if s.id == row["source"]), None)
+            meal = meals_by_slot.get(row["source"])
             requested = requested_nutrients(meal.limits) if meal else set()
-            recipe = next((s.recipe for s in slots if s.id == row["source"]), None)
             row["nutrients"] = sorted(requested)
             if requested:
                 nutrition_needs.add(row["name"])
-                verified = [
-                    (i, c)
-                    for i, c in resolved
-                    if (
-                        fact := self.nutrition_evidence(
-                            self.prepared.universe.products[i],
-                            row["name"],
-                            row["unit"],
-                            requested,
-                            recipe,
+                qualification_key = (id(resolved), self.recipe_computations.key(recipe), row["name"],
+                                     row["unit"], frozenset(requested))
+                cached_qualification = self.qualified_nutrition_candidates.get(qualification_key)
+                if cached_qualification is not None and cached_qualification[0] is resolved:
+                    verified = cached_qualification[1]
+                else:
+                    verified = [
+                        (i, c)
+                        for i, c in resolved
+                        if (
+                            fact := self.nutrition_evidence(
+                                self.prepared.universe.products[i],
+                                row["name"],
+                                row["unit"],
+                                requested,
+                                recipe,
+                            )
                         )
-                    )
-                    and fact.nutrition_unit == row["unit"]
-                    and fact.nutrition_basis
-                    and fact.nutrition_preparation == "as_sold"
-                    and requested <= fact.nutrition.keys()
-                    and all(
-                        math.isfinite(fact.nutrition[k]) and fact.nutrition[k] >= 0
-                        for k in requested
-                    )
-                ]
+                        and fact.nutrition_unit == row["unit"]
+                        and fact.nutrition_basis
+                        and fact.nutrition_preparation == "as_sold"
+                        and requested <= fact.nutrition.keys()
+                        and all(
+                            math.isfinite(fact.nutrition[k]) and fact.nutrition[k] >= 0
+                            for k in requested
+                        )
+                    ]
+                    if len(self.qualified_nutrition_candidates) >= 4096:
+                        self.qualified_nutrition_candidates.clear()
+                    self.qualified_nutrition_candidates[qualification_key] = (resolved, verified)
                 verified_ids = {i for i, _ in verified}
                 for i, _ in resolved:
                     product = self.prepared.universe.products[i]
+                    if (product.store_id, product.product_id) not in self.product_trace.products:
+                        continue
                     fact = self.source_facts(product)
                     self.product_trace.event(product, recipe, row["name"], "nutrition",
                         "passed" if i in verified_ids else "stopped",
@@ -961,14 +990,23 @@ class PersonalPlanner:
                 ]
                 if not candidates:
                     raise PolicyConflict(f"Låst produkt saknas för {group['name']}.")
-            candidate_map[key] = candidates
+            # These frozen, request-owned candidates are never edited. Retain
+            # the exact ordered objects so the shared engine's immutable quote
+            # set cache can reuse identical subproblems across weekly baskets.
+            # Holding the tuple prevents ID reuse; nothing crosses requests.
+            sequence_key = tuple(id(candidate) for candidate in candidates)
+            if len(self.candidate_sequences) >= 4096:
+                self.candidate_sequences.clear()
+            candidate_map[key] = self.candidate_sequences.setdefault(sequence_key, tuple(candidates))
+            group_rows = [row for row in rows if row["demand_key"] in group["demand_keys"]]
             for c in candidates:
+                if (c.store_id, c.product_id) not in self.product_trace.products:
+                    continue
                 product = self.prepared.universe.products[self.by_identity[(c.store_id, c.product_id)]]
-                for row in rows:
-                    if row["demand_key"] in group["demand_keys"]:
-                        recipe = next((s.recipe for s in slots if s.id == row["source"]), None)
-                        self.product_trace.event(product, recipe, row["name"], "basket_candidates", "passed",
-                            "qualified candidate passed to whole-basket optimizer")
+                for row in group_rows:
+                    recipe = recipes_by_slot.get(row["source"])
+                    self.product_trace.event(product, recipe, row["name"], "basket_candidates", "passed",
+                        "qualified candidate passed to whole-basket optimizer")
             ingredients.append(
                 NormalizedIngredient(
                     canonical_name=key,

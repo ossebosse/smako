@@ -74,6 +74,36 @@ def test_other_fact_versions_and_accounts_cannot_share_nutrition():
     assert other.slot_nutrition_cache is not p.slot_nutrition_cache
 
 
+def test_repeated_basket_reuses_exact_candidates_and_nutrition_qualification():
+    from app.services.performance_trace import activate_performance_trace
+
+    p, slot = planner()
+    with activate_performance_trace() as trace, p.optimizer.quote_cache():
+        first = p.basket([slot])
+        with patch.object(p, "_nutrition_evidence", wraps=p._nutrition_evidence) as evidence:
+            second = p.basket([slot])
+        assert evidence.call_count == 0
+    assert first["basket"] == second["basket"]
+    assert first["audit"] == second["audit"]
+    assert first["checks"] == second["checks"]
+    assert trace.snapshot().operation_counters["quote_set_cache_hits"] > 0
+
+
+def test_normalized_rows_cache_preserves_first_ingredient_and_mutated_amounts():
+    p, slot = planner()
+    with patch.object(p.service.normalizer, "normalize_and_aggregate",
+                      wraps=p.service.normalizer.normalize_and_aggregate) as normalize:
+        rows = p._need_rows([slot])
+        calls = normalize.call_count
+        assert p._need_rows([slot]) == rows
+        assert normalize.call_count == calls
+        ingredient = slot.recipe.ingredients[0]
+        slot.recipe.ingredients[0] = ingredient.model_copy(update={"quantity": ingredient.quantity + 1e-9})
+        changed = p._need_rows([slot])
+        assert changed != rows
+        assert normalize.call_count > calls
+
+
 @pytest.mark.parametrize("servings,minimum,stock", [(1, 30, 0), (2, 32, 0), (1, 30, 100)])
 def test_joint_free_search_equals_uncached_with_changed_profile_and_stock(servings, minimum, stock):
     prepared, facts = products()
