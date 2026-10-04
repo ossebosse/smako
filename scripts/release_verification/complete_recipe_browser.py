@@ -233,6 +233,7 @@ def run_case(browser, engine, mobile, personal, args):
         report["form_layout"] = observe_layout(page)
         assert report["form_layout"]["noHorizontalPageOverflow"]
         start = len(observed)
+        clicked_at = time.monotonic()
         page.locator("#generate-plan" if personal else "#submit-button").dblclick()
         generation, envelope = wait_operation(page, observed, start, timeout=args.timeout, reload_after=args.reload_after, offline_seconds=args.offline_seconds)
         report["generation"] = generation
@@ -249,6 +250,7 @@ def run_case(browser, engine, mobile, personal, args):
             assert generation["reloaded_during_job"], "Generation completed before a pending-job reload"
         report["acceptance"] = assert_recipe_result(envelope, args)
         wait_render(page, personal)
+        generation['click_to_render_seconds'] = round(time.monotonic() - clicked_at, 3)
         assert open_recipes(page, personal) == args.dinners
         report["recipe_text"] = page.locator("#plan-content" if personal else "#recipes-list").inner_text()
         report["recipe_layout"] = observe_layout(page)

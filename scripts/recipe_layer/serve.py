@@ -22,7 +22,7 @@ if not secret.exists():
     secret.chmod(0o600)
 os.environ['SECRET_KEY'] = secret.read_text()
 stage = json.loads(Path('/evaluation/stage.json').read_text())
-os.environ['BUILD_ID'] = 'recipe-candidate-' + stage['commit'][:8] + '-' + stage['source_sha256'][:8]
+os.environ['BUILD_ID'] = os.environ.get('SMAKO_REPLAY_BUILD_ID') or 'recipe-candidate-' + stage['commit'][:8] + '-' + stage['source_sha256'][:8]
 database = state / 'grocery.sqlite'
 if not database.exists():
     shutil.copyfile('/inputs/grocery.sqlite', database)
@@ -34,7 +34,7 @@ os.environ.update(
     STABLE_CANDIDATE_SEARCH_ENABLED='true', APP_ENV='test',
     ALLOW_PROVIDER_FALLBACK='false', ALLOW_MOCK_FALLBACK='false',
     PLANNER_MAX_CONCURRENT_REQUESTS='1', PLANNER_MAX_QUEUED_REQUESTS='4',
-    PUBLIC_BASE_URL='http://127.0.0.1:18122',
+    PUBLIC_BASE_URL=os.environ.get('SMAKO_REPLAY_BASE_URL', 'http://127.0.0.1:18122'),
 )
 from grocery_data.app.storage.database import create_database_engine, create_schema
 
@@ -55,4 +55,7 @@ def load_frozen(settings, *, manager=GLOBAL_PREPARED_PRICE_UNIVERSES):
 
 
 main.load_configured_price_universe = load_frozen
+if os.environ.get('SMAKO_REPLAY_METRICS'):
+    from http_measurements import install
+    install(os.environ['SMAKO_REPLAY_METRICS'])
 uvicorn.run(main.app, host='0.0.0.0', port=8000)
