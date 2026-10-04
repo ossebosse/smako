@@ -2355,11 +2355,21 @@ class PersonalPlanner:
         draft = any(not group[0].recipe for group in options if len(group) == 1)
 
         def accepts(chosen, *, final):
-            if not distribution_ok(chosen, self.spec.meals, partial=not final or draft,
+            # During a one-slot replacement every remaining slot is fixed.
+            # Reject only provably incompatible completions before they occupy
+            # the bounded beam. Keep actual pricing/allocation in original order.
+            constraint_slots = chosen
+            constraint_final = final
+            if replace_slot and any(s.id == replace_slot for s in chosen) and not final:
+                suffix = options[len(chosen):]
+                if all(len(group) == 1 for group in suffix):
+                    constraint_slots = [*chosen, *(group[0] for group in suffix)]
+                    constraint_final = True
+            if not distribution_ok(constraint_slots, self.spec.meals, partial=not constraint_final or draft,
                                    classify=self._protein_category):
                 self.diagnostics.branch(len(chosen), "policy_taste")
                 return False
-            dinners = [s.recipe for s in chosen if s.meal_type == "dinner" and s.recipe]
+            dinners = [s.recipe for s in constraint_slots if s.meal_type == "dinner" and s.recipe]
             if len({self._recipe_id(r) for r in dinners}) != len(dinners):
                 self.diagnostics.branch(len(chosen), "variation")
                 return False

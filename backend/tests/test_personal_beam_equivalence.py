@@ -81,3 +81,43 @@ def test_retry_branch_diagnostics_do_not_mix_attempts():
     rows = diagnostics.snapshot()["search"]
     assert rows[0]["rejections"]["nutrition"] == 1 and rows[0]["rejections"]["variation"] == 0
     assert rows[1]["rejections"]["nutrition"] == 0 and rows[1]["rejections"]["variation"] == 1
+
+
+def test_replacement_does_not_fill_beam_with_a_dish_in_the_fixed_suffix(monkeypatch):
+    """Synthetic prices expose the actual replacement constraint callback."""
+    from app.config import Settings
+    from app.models.personal import MealSettings
+    from app.services.personal_planner import PersonalPlanner
+
+    from backend.tests.test_personal_planning_v2 import (
+        NOW,
+        prepared,
+        product,
+        recipe,
+        request,
+        state,
+    )
+
+    dishes = [recipe(name) for name in ("A", "B", "C")]
+    slots = [MealSlot(id=f"d{i}", day=i, meal_type="dinner", recipe=r)
+             for i, r in enumerate(dishes[:2], 1)]
+    planner = PersonalPlanner(request(slots=slots, meals=[MealSettings(count=2, servings=1)]),
+        Settings(price_provider="mock"), prepared(product("mjölk", 1000, "ml", 20)), state(), now=NOW)
+    monkeypatch.setattr(planner, "_candidates", lambda meal: dishes[1:])
+    monkeypatch.setattr(planner.service.menu_optimizer, "accepts_recipes", lambda *a, **k: True)
+    optimize = planner.service.menu_optimizer.optimize_slots
+
+    class SearchChecked(Exception):
+        pass
+
+    def check_search(options, *, accepts, **kwargs):
+        chosen, _ = optimize(options, accepts=accepts,
+            evaluate=lambda slots, final: sum(1 if s.recipe.name == "B" else 10 for s in slots),
+            score=lambda slots, total: total, beam_width=1)
+        assert [s.recipe.name for s in chosen] == ["C", "B"]
+        assert chosen[1] == slots[1]  # Fixed slot/order survives; no allocation permutation.
+        raise SearchChecked
+
+    monkeypatch.setattr(planner.service.menu_optimizer, "optimize_slots", check_search)
+    with pytest.raises(SearchChecked):
+        planner.create(replace_slot="d1")

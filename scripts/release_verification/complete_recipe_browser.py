@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import time
 import uuid
 from datetime import UTC, datetime
@@ -253,6 +254,15 @@ def run_case(browser, engine, mobile, personal, args):
         generation['click_to_render_seconds'] = round(time.monotonic() - clicked_at, 3)
         assert open_recipes(page, personal) == args.dinners
         report["recipe_text"] = page.locator("#plan-content" if personal else "#recipes-list").inner_text()
+        if args.expect_refined_recipes:
+            assert not re.search(r'\d+\.\d{6,}', report['recipe_text']), 'Raw numeric artifact visible'
+            assert 'Huvudproteinkälla: Vegetariska' not in report['recipe_text']
+            assert 'Protein före visningsavrundning' not in report['recipe_text']
+            assert page.locator('.recipe-nutrition-info:visible').count() == args.dinners
+            for method in page.locator('.complete-recipe-method:visible').all():
+                assert 'Endast dricksvatten får tillkomma' not in method.inner_text()
+                assert 'inte ett provlagningsresultat' not in method.inner_text()
+            report['refined_recipe_text_checked'] = True
         report["recipe_layout"] = observe_layout(page)
         assert report["recipe_layout"]["noHorizontalPageOverflow"]
         skip_link = report["recipe_layout"]["skipLink"]
@@ -438,6 +448,7 @@ def main():
     parser.add_argument("--require-long-job", action="store_true")
     parser.add_argument("--require-pending-reload", action="store_true")
     parser.add_argument("--skip-mutations", action="store_true")
+    parser.add_argument("--expect-refined-recipes", action="store_true")
     parser.add_argument("--restart-handshake", action="store_true")
     parser.add_argument("--expect-flag-off-after-restart", action="store_true", help="With restart handshake, require disabled creation controls and readable immutable complete recipes")
     parser.add_argument("--ignore-https-errors", action="store_true")
