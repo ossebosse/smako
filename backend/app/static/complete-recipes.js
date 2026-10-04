@@ -104,8 +104,78 @@
   function ingredientCount(recipe) {
     return new Set((recipe.ingredients||[]).filter(i=>!["salt","peppar","svartpeppar","vitpeppar","vatten"].includes(String(i.canonical_name||i.name).toLowerCase())).map(i=>`${i.canonical_name||i.name}|${i.form||""}`)).size;
   }
+  function nutritionNumber(value, status) {
+    if(value==null||value===""||!Number.isFinite(Number(value)))return "okänd";
+    const displayed=Number(value).toLocaleString("sv-SE",{maximumFractionDigits:1});
+    return `${status==="ESTIMATED"?"ca ":""}${displayed}`;
+  }
+  function nutritionInformation(nutrition,{methodNotes=[]}={}) {
+    const details=el("details",null,"recipe-nutrition-info");
+    details.append(el("summary","Om näringsberäkningen"));
+    details.append(el("p","Värdena gäller ingrediensmängderna som används per portion, inte hela inköpta förpackningar. Visningen avrundas; näringsmålen kontrolleras före avrundning."));
+    if(nutrition?.status==="ESTIMATED")details.append(el("p","Näringen är en spårbar uppskattning. Märkningen ca gäller näringsvärdena, inte en ändring av ditt näringsmål."));
+    for(const note of methodNotes)details.append(el("p",note));
+    if(nutrition?.calculation_basis?.description)details.append(el("p",nutrition.calculation_basis.description));
+    if(nutrition?.sources?.length){
+      const sources=el("details",null,"recipe-nutrition-sources");sources.append(el("summary","Näringskällor och mängdgrund"));
+      for(const source of nutrition.sources)sources.append(el("p",`${source.ingredient||"Ingrediens"}: ${number(source.quantity)} ${source.unit||""}. ${source.basis||"Mängdgrund inte angiven"}. Källa: ${source.source||"saknas"}. ${source.evidence_kind==="qualified_product_declaration"?"Produktdeklaration":source.evidence_kind&&source.source?"Spårbar uppskattning":"Källstatus okänd"}.`,"small"));
+      details.append(sources);
+    }
+    return details;
+  }
+  function mealDescription(recipe, category) {
+    const labels={vegetarian:"Vegetarisk",chicken:"Kyckling",fish:"Fisk och skaldjur",meat:"Kött"};
+    const main=recipe.design?.primary_ingredient;
+    const ingredient=(recipe.ingredients||[]).find(row=>(row.canonical_name||row.name)===main);
+    const label=recipe.design?.vegetarian===true?"Vegetarisk":labels[category];
+    return [label,ingredient?`Huvudråvara: ${ingredient.name}`:null].filter(Boolean).join(" · ");
+  }
+  function cookingPresentation(recipe) {
+    const instructions=[...(recipe.instructions||[])];
+    const original={instructions,methodNotes:[],waterOnly:false};
+    const design=recipe.design,preparation=recipe.preparation;
+    // This is a display projection of the server-qualified immutable method.
+    // Unknown versions and structurally different recipes keep every original
+    // word. The source recipe, its content hash and its amounts are never edited.
+    if(!design||!preparation||preparation.version!=="smako-edible-input-v1"||preparation.origin!=="smako_recipe_design")return original;
+    if(!["1.0.0","1.1.0","1.2.0","1.3.0","1.4.0"].includes(design.version)||!["bake","oven","pan","pot"].includes(design.method))return original;
+    if(!/^[0-9a-f]{64}$/.test(design.content_sha256||"")||preparation.parent_sha256!==design.content_sha256||preparation.family!==design.family)return original;
+    if(design.provenance?.authoring!=="model_assisted_original"||design.provenance?.content_review!=="reviewed")return original;
+    const forms=preparation.input_forms||{},ingredients=recipe.ingredients||[],steps=design.steps||[];
+    if(Object.keys(forms).length!==ingredients.length||!ingredients.every(item=>item.canonical_name&&forms[item.canonical_name]===item.form))return original;
+    if(steps.length!==instructions.length||steps.length<2||!steps.every((step,index)=>step.text===instructions[index]))return original;
+    const last=steps.at(-1),previous=new Set(steps.slice(0,-1).map(step=>step.id));
+    if(previous.size!==steps.length-1||previous.has(last.id)||last.parallel_group||(last.depends_on||[]).length!==previous.size||!last.depends_on.every(id=>previous.has(id)))return original;
+    const methodEnding="Fördela rättens komponenter jämnt mellan portionerna. Servera all uppmätt sås, olja och genomhettad sky; skrapa ur pannor och formar. Endast dricksvatten får tillkomma utöver listan. Tiden är en uppskattning, inte ett provlagningsresultat.";
+    const prefix=last.text===methodEnding?"":last.text.endsWith(` ${methodEnding}`)?last.text.slice(0,-methodEnding.length):null;
+    if(prefix===null)return original;
+    instructions[instructions.length-1]=`${prefix}Fördela rätten jämnt mellan portionerna och servera med all sås och genomhettad sky.`;
+    return {instructions,waterOnly:true,methodNotes:[
+      "Beräkningsmetoden förutsätter att alla angivna mängder, även olja, sås och sky, ingår i portionerna. Endast dricksvatten får tillkomma utöver ingredienslistan.",
+      "Tillagningstiden är en uppskattning. Den är inte uppmätt genom provlagning.",
+    ]};
+  }
+  function parallelPlan(steps) {
+    const indexed=new Map(steps.map((step,index)=>[step.id,{step,index:index+1}]));
+    if(indexed.size!==steps.length)return [];
+    const groups=new Map();
+    for(const step of steps){
+      if(!step.parallel_group)continue;
+      const dependencies=step.depends_on||[];
+      if(dependencies.some(id=>!indexed.has(id)||indexed.get(id).index>=indexed.get(step.id).index))continue;
+      const key=JSON.stringify([step.parallel_group,[...dependencies].sort()]);
+      if(!groups.has(key))groups.set(key,{dependencies,indices:[]});
+      groups.get(key).indices.push(indexed.get(step.id).index);
+    }
+    const join=values=>values.length<2?String(values[0]):`${values.slice(0,-1).join(", ")} och ${values.at(-1)}`;
+    return [...groups.values()].filter(group=>group.indices.length>1).map(group=>{
+      const before=group.dependencies.map(id=>indexed.get(id).index).sort((a,b)=>a-b);
+      return `${before.length?`När steg ${join(before)} är ${before.length===1?"klart":"klara"}`:"Från början"} kan du göra steg ${join(group.indices)} parallellt.`;
+    });
+  }
   function renderRecipe(recipe,{nutrition=null,personal=null,slotId=null}={}) {
     const design=recipe.design;if(!design)return null;
+    const presentation=cookingPresentation(recipe);
     const out=el("div",null,"complete-recipe-content");
     const intro=el("div",null,"complete-recipe-intro");
     intro.append(el("p",(design.cuisines||[]).map(c=>`${(cuisines[c]||c).toLowerCase()} inspirerad`).join(" · "),"recipe-cuisine-label"));
@@ -122,15 +192,16 @@
     intro.append(el("p",`Recept ${design.base_id} · version ${design.version} · ${design.variant_id==="base"?"grundrecept":`variation ${design.variant_id}`}`,"small"));
     if(nutrition){
       const values=nutrition.values||nutrition;const parts=[];
-      for(const [key,alt,label] of [["protein_g","protein_g_per_serving","g protein"],["kcal","kcal_per_serving","kcal"],["carbs_g","carbs_g_per_serving","g kolhydrater"],["fat_g","fat_g_per_serving","g fett"]]){const value=values[key]??values[alt];if(value!=null&&value!==""&&Number.isFinite(Number(value)))parts.push(`${number(value)} ${label}`);}
+      for(const [key,alt,label] of [["protein_g","protein_g_per_serving","g protein"],["kcal","kcal_per_serving","kcal"],["carbs_g","carbs_g_per_serving","g kolhydrater"],["fat_g","fat_g_per_serving","g fett"]]){const value=values[key]??values[alt];if(value!=null&&value!==""&&Number.isFinite(Number(value)))parts.push(`${nutritionNumber(value,nutrition.status)} ${label}`);}
       intro.append(el("p",`${parts.length?`${parts.join(" · ")} per portion. `:""}Näring: ${{VERIFIED:"produktdeklarationer",ESTIMATED:"spårbar uppskattning",NOT_REQUESTED:"inte beräknad – inget näringsmål valt",UNKNOWN:"okänd",FAILED:"ej kvalificerad"}[nutrition.status]||"okänd"}.${parts.length<4?" Saknade näringsvärden är okända.":""}`));
-    } else intro.append(el("p","Näring: se planens kvalitetsunderlag. Saknade näringsvärden är okända."));
+      intro.append(nutritionInformation(nutrition,presentation));
+    } else {intro.append(el("p","Näring: se planens kvalitetsunderlag. Saknade näringsvärden är okända."));if(presentation.methodNotes.length)intro.append(nutritionInformation(null,presentation));}
     if(personal)intro.append(el("p",`Allergenstatus: ${personal.checks?.allergy==="VERIFIED"?"kontrollerad mot källdeklarationer enligt dina krav":"ingen verifierad allergikontroll begärd"}. Köpstatus och näringsstatus bedöms separat.`,"small"));
-    if(nutrition?.sources?.length){const sources=el("details");sources.append(el("summary","Näringskällor och mängdgrund"));if(nutrition.calculation_basis?.description)sources.append(el("p",nutrition.calculation_basis.description));for(const source of nutrition.sources)sources.append(el("p",`${source.ingredient||"Ingrediens"}: ${number(source.quantity)} ${source.unit||""}. ${source.basis||"Mängdgrund inte angiven"}. Källa: ${source.source||"saknas"}. ${source.evidence_kind==="qualified_product_declaration"?"Produktdeklaration":source.evidence_kind&&source.source?"Spårbar uppskattning":"Källstatus okänd"}.`,"small"));intro.append(sources);}
     const provenance=design.provenance||{};
     intro.append(el("p",`Innehåll: ${provenance.content_review==="reviewed"?"granskat":"granskningsstatus saknas"}. Maskinell validering: ${provenance.machine_validation==="passed"?"godkänd":"status saknas"}. Provlagning: ${provenance.cooking_test==="not_cooked"?"inte genomförd":provenance.cooking_test||"underlag saknas"}.`,"recipe-quality-note"));
     if(design.equipment?.length)intro.append(el("p",`Utrustning: ${design.equipment.join(", ")}.`));out.append(intro);
     const ingredients=el("section",null,"complete-recipe-ingredients");ingredients.append(el("h3","Ingredienser för hela receptet"));
+    if(presentation.waterOnly)ingredients.append(el("p","Använd de angivna mängderna. Utöver listan tillkommer bara dricksvatten.","recipe-method-note"));
     const componentRows=design.components||[];const mapped=new Set(componentRows.map(c=>c.id));
     const groups=[...componentRows];if((recipe.ingredients||[]).some(i=>!mapped.has(i.component)))groups.push({id:null,name:"Övriga ingredienser"});
     for(const component of groups){const rows=(recipe.ingredients||[]).filter(i=>component.id?i.component===component.id:!mapped.has(i.component));if(!rows.length)continue;
@@ -142,12 +213,13 @@
     if(allocations.length){ingredients.append(el("h4","Skafferi används"));for(const row of allocations)ingredients.append(el("p",`${row.name||row.ingredient||"Skafferivara"}: ${number(row.quantity)} ${row.unit||""}.`));}
     out.append(ingredients);
     const method=el("section",null,"complete-recipe-method");method.append(el("h3","Gör så här"));const steps=el("ol",null,"instructions-list complete-recipe-steps");
-    const timing=new Map((design.steps||[]).map((s,i)=>[s.id,{step:s,index:i+1}]));
-    const instructions=recipe.instructions||[];
+    const overlap=parallelPlan(design.steps||[]);
+    if(overlap.length){const plan=el("div",null,"recipe-parallel-plan");for(const text of overlap)plan.append(el("p",text));method.append(plan);}
+    const instructions=presentation.instructions;
     instructions.forEach((instruction,index)=>{
       const item=el("li");const step=design.steps?.[index];item.append(el("p",typeof instruction==="string"?instruction:instruction.text));
-      if(step){const after=(step.depends_on||[]).map(id=>timing.get(id)?.index).filter(Boolean);const parts=[step.duration_minutes!=null?`cirka ${number(step.duration_minutes)} min`:null,after.length?`efter steg ${after.join(", ")}`:null,step.parallel_group?"kan överlappa andra oberoende moment":null].filter(Boolean);if(parts.length)item.append(el("span",parts.join(" · "),"step-timing"));}steps.append(item);
-    });method.append(steps,el("p","Tiderna är uppskattningar. Följ stegens beroenden; oberoende moment kan göras parallellt.","field-hint"));out.append(method);return out;
+      if(step?.duration_minutes!=null)item.append(el("span",`ca ${number(step.duration_minutes)} min`,"step-timing"));steps.append(item);
+    });method.append(steps,el("p","Stegtiderna är uppskattningar. Summera dem inte när moment görs parallellt.","field-hint"));out.append(method);return out;
   }
 
   function recipeFeedback({recipe,recipeIndex,planId,revision}) {
@@ -241,5 +313,5 @@
     }
     forgetJob(scope);return response;
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,productDetails,diagnostics,ingredientCount,cuisines,poll,pendingJob,forgetJob,clearPrivateDrafts,storage});
+  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,poll,pendingJob,forgetJob,clearPrivateDrafts,storage});
 })();
