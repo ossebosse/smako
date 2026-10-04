@@ -1,3 +1,49 @@
+# 2026-10-04: Femköksplanering – testad prestandakandidat, ej aktiverad
+
+På `perf/five-cuisine-planning`. Runtime **b89fadb96c4edc4576cb4daae6c5d80e553ad8ca**,
+BUILD_ID `five-cuisine-b89fadb96c4e`. [Resultat och samtliga prov](releases/five-cuisine-performance-20261004/RESULTS.md),
+[app-only-aktivering/återgång](releases/five-cuisine-performance-20261004/ACTIVATION.md).
+Ingen Git-push eller produktionsaktivering. Det äldre godkännandet för 17a9c13
+är inte ett beslut för denna kandidat. Produktion är fortsatt ready på 17a9c13,
+flagga true, samma container/image; autentisk ursprungsrevision hashoförändrad.
+
+Exakt sparad femköksbegäran återfanns: fem middagar × fyra, Balanserad,
+10–15 ingredienser, 30 g protein, inget tidstak, fem tillåtna kök, butikstak tre,
+uppskattade köp och separat näringsmedgivande. Fullt autentiskt pris-/faktaunderlag
+frystes isolerat. Reproducerad meny, mängder, produkter, näring, audit och
+768,04 kr är oförändrade. Historiska belopp är inga nya produktionspriser.
+
+På samma 2 CPU/3 GiB och identiska beroenden: median kall ny process
+**204,8 → 83,6 s**, varm **ny beräkning 179,2 → 58,9 s**, tre prov vardera.
+Tre samtidiga användares sista resultat **582,7 → 194,1 s**, kö separat.
+Brett Varierad **345,2 → 100,9 s**, identisk hel plan. **60-sekundersmålet
+från klick är inte nått**: slutliga Chromium/WebKit-knappar gav 72,3/75,0 s.
+Nästa kostnader är förpackningsberäkning, audit och kall fakta/indexberedning.
+
+Begäranslokal begränsad återanvändning av kvalificerade kandidater, normaliserade
+recept och näring; befintlig korgmotor undviker butiker som saknar varje kvalificerad
+vara. Inga mindre sökbudgetar, receptmängder, alternativa prismotorer eller ändrade
+insamlingsinställningar. Svenska näringsdecimaler och naturligare metodvisning
+ändrar inte sparat receptinnehåll. Ett befintligt bytesfel reproducerades i 17a
+och rättades genom tidigare kontroll mot de redan låsta rätterna.
+
+2 226 backendtester och 1 664 tester för oförändrad grocery_data-kod PASS.
+Alla 104 varianter renderade i Chromium/WebKit mobil/desktop. Riktiga publika
+Chromium- och personliga WebKit-mobilflöden PASS: generation, omladdning, byte,
+omräkning och revision 1–3 efter omstart. 19 tidigare testrevisioner oförändrade,
+29 vid slutkontroll. Ingen fysisk iPhone eller fysisk provlagning påstås.
+
+Paket `.local/releases/five-cuisine-final-20261004/smako-server-b89fadb96c4e.zip`,
+SHA-256 `eafba3aa7b4ab59d8fb92e258c995792caff9b9a3eb41838c3481b47142f982b`.
+Image `sha256:80dd265779182eb750453e3b12a2249e71a9ed845f62c6e9c3c5f1a3a86ee4d1`;
+645 runtimefiler, pip check och offline-Chromium PASS.
+Fulla privata bevis och testdata ligger i `.local/five-cuisine-20261004` och
+`/var/tmp/smako-five-cuisine-20261004`. Testcontainer `smako-five-cuisine-isolated`
+är stoppad efter slutförda prov; data och revisioner är bevarade. Den använder
+enbart dessa isolerade data. Kopiera aldrig replayklockan/databaserna
+till produktion. Tidigare UI-arbetskopia i `D:/Projects/Smako-worktrees/five-cuisine-presentation`
+är bevarad; dess integrerade ändringar finns redan i root-branchens commits.
+
 # 2026-10-03: Nya receptlagret aktiverat på beta.smako.nu
 
 Uttryckligen godkänd app-only-aktivering är genomförd. Slutkontroll

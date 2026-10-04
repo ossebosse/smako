@@ -1,0 +1,1202 @@
+{
+  "runtime": "f45347d0114ea98ca3de236300d37193b4fecc1e",
+  "note": "Later b89fadb changes only replacement feasibility, not new generation. Real final replacement is separately tested. Historical frozen input, no source collection.",
+  "cases": [
+    {
+      "case": "allergy-negative",
+      "status": "stopped",
+      "http_status": 422,
+      "seconds": 8.186487999977544,
+      "total": null,
+      "first_stop": "Ingen komplett kombination hittades. Flera kandidater har prÃ¶vats; exemplet nedan fÃ¶rklarar inte hela veckoplanen. NÃ¶tfÃ¤rs: fullstÃ¤ndig spÃ¥rbar ingrediens-/allergeninformation saknas. Underlaget rÃ¤cker inte fÃ¶r ett kvalificerat kÃ¶p eller den begÃ¤rda nÃ¤ringen. Prova ett annat matkÃ¶k eller fler tillÃ¥tna inkÃ¶psstÃ¤llen; saknade uppgifter krÃ¤ver nytt verifierat kÃ¤llunderlag. Dina krav har inte Ã¤ndrats.",
+      "code": "DATA_BLOCKED",
+      "reload_identical": null,
+      "other_owner_plan_denied": null,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "purchase_planning_mode": "estimated",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "adaptation": "approved"
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              }
+            }
+          ],
+          "profile": {
+            "allergies": [
+              "mjÃ¶lk"
+            ]
+          },
+          "pantry_revision": 0
+        }
+      },
+      "recipe_names": [],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "channel-negative",
+      "status": "stopped",
+      "http_status": 422,
+      "seconds": 7.401143399998546,
+      "total": null,
+      "first_stop": "Valda priskontexter saknas eller Ã¤r fÃ¶r gamla: context:unknown:outside-frozen-universe",
+      "code": "DATA_BLOCKED",
+      "reload_identical": null,
+      "other_owner_plan_denied": null,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "purchase_planning_mode": "estimated",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "adaptation": "approved"
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              }
+            }
+          ],
+          "pantry_revision": 0
+        },
+        "allowed_store_ids": [
+          "context:unknown:outside-frozen-universe"
+        ]
+      },
+      "recipe_names": [],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "choices-time-negative",
+      "status": "stopped",
+      "http_status": 422,
+      "seconds": 6.944009299855679,
+      "total": null,
+      "first_stop": "Biblioteket innehÃ¥ller 0 distinkta grundrÃ¤tter fÃ¶r 2 personer med dina val av matkÃ¶k, ingrediensantal, tid, anpassningar och kost; du har valt 5 middagar. HÃ¶j hÃ¶gsta tillagningstid till minst 40 minuter. Detta Ã¤r en innehÃ¥llskontroll fÃ¶re produkt-, nÃ¤rings- och inkÃ¶pskvalificering; fler kandidater garanterar inte en kÃ¶pbar meny. Dina krav har inte Ã¤ndrats.",
+      "code": "RECIPE_CHOICES_CONFLICT",
+      "reload_identical": null,
+      "other_owner_plan_denied": null,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "purchase_planning_mode": "estimated",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "adaptation": "approved",
+          "max_minutes": 10
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              }
+            }
+          ],
+          "pantry_revision": 0
+        }
+      },
+      "recipe_names": [],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "complete-1520",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 78.19794870004989,
+      "total": 850.17,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 0,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "estimated",
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek",
+            "mexican"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "max_minutes": 40,
+          "adaptation": "approved",
+          "min_protein_g": 40
+        }
+      },
+      "recipe_names": [
+        "KrÃ¤mig majs- och bÃ¶nsoppa med ostquesadilla och tomatsalsa â€“ stÃ¶rre huvudportion",
+        "Mustig linschili med vita bÃ¶nor, ris och limeyoghurt â€“ stÃ¶rre huvudportion",
+        "Kycklingbowl med ris, majsrÃ¶ra, limeyoghurt och tomatsalsa",
+        "Citronkyckling med spenatris, feta och gurksallad",
+        "Spenatris med kikÃ¤rtor, feta och citronyoghurt",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Naturell kvarg",
+        "Naturell kvarg",
+        "Naturell kvarg"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "custom-ingredients",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 45.29060980002396,
+      "total": 595.26,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "purchase_planning_mode": "estimated",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [],
+          "min_ingredients": 12,
+          "max_ingredients": 13,
+          "adaptation": "approved",
+          "max_minutes": 50
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              }
+            }
+          ],
+          "pantry_revision": 0
+        }
+      },
+      "recipe_names": [
+        "KrÃ¤mig spenattofu med Ã¤rtor och vitlÃ¶ksris",
+        "RÃ¶d linsdal med spenat, mjuk tofu och citronris",
+        "Mustig linschili med vita bÃ¶nor, ris och limeyoghurt",
+        "Spenatris med kikÃ¤rtor, feta och citronyoghurt",
+        "KrÃ¤mig grÃ¶n Ã¤rt- och bÃ¶nsoppa med spenat och ostbrÃ¶d"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "greek-cheapest",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 27.09539039991796,
+      "total": 682.23,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "cheapest",
+        "purchase_planning_mode": "estimated",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "adaptation": "approved"
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              }
+            }
+          ],
+          "pantry_revision": 0
+        }
+      },
+      "recipe_names": [
+        "Citronkyckling med spenatris, feta och gurksallad",
+        "Paprikahalvor med linsris, feta och vitlÃ¶ksyoghurt",
+        "Spenatris med kikÃ¤rtor, feta och citronyoghurt",
+        "Tomatbakade vita bÃ¶nor med feta och Ã¶rtigt couscous",
+        "Linsmoussaka med aubergine, potatis och yoghurtlock"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "greek-exact",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 15.122077400097623,
+      "total": 796.15,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "purchase_planning_mode": "exact",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "adaptation": "approved"
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              }
+            }
+          ],
+          "pantry_revision": 0
+        }
+      },
+      "recipe_names": [
+        "Citronkyckling med spenatris, feta och gurksallad",
+        "Spenatris med kikÃ¤rtor, feta och citronyoghurt",
+        "Tomatbakade vita bÃ¶nor med feta och Ã¶rtigt couscous",
+        "Linsmoussaka med aubergine, potatis och yoghurtlock",
+        "FÃ¤rsbiffar med citronpotatis, tzatziki och tomatsallad"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "greek-pantry",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 16.490969899808988,
+      "total": 665.33,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "purchase_planning_mode": "estimated",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "adaptation": "approved"
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              }
+            }
+          ],
+          "pantry_revision": 1
+        }
+      },
+      "recipe_names": [
+        "Linsmoussaka med aubergine, potatis och yoghurtlock",
+        "Paprikahalvor med linsris, feta och vitlÃ¶ksyoghurt",
+        "Citronkyckling med spenatris, feta och gurksallad",
+        "Spenatris med kikÃ¤rtor, feta och citronyoghurt",
+        "Tomatbakade vita bÃ¶nor med feta och Ã¶rtigt couscous"
+      ],
+      "actual_entered_stock_used_g": 300.0
+    },
+    {
+      "case": "legacy-1520-original-estimated",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 73.47853249986656,
+      "total": 430.26,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 0,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "estimated"
+      },
+      "recipe_names": [
+        "Gryta med fisk, nudlar och gul lÃ¶k",
+        "Tomatpasta med fisk och morot",
+        "Pasta med rÃ¶d linssÃ¥s, tomat och riven ost",
+        "Ugnsbakad kyckling med morÃ¶tter och ris",
+        "Kokt kyckling med ris och morÃ¶tter",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Naturell kvarg",
+        "Naturell kvarg"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "legacy-1520-original-exact",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 64.9432449999731,
+      "total": 430.26,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 0,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "exact"
+      },
+      "recipe_names": [
+        "Gryta med fisk, nudlar och gul lÃ¶k",
+        "Tomatpasta med fisk och morot",
+        "Pasta med rÃ¶d linssÃ¥s, tomat och riven ost",
+        "Ugnsbakad kyckling med morÃ¶tter och ris",
+        "Kokt kyckling med ris och morÃ¶tter",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Naturell kvarg",
+        "Naturell kvarg"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "legacy-1520-plus-estimated",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 71.31659889989533,
+      "total": 430.26,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": {
+          "willys": true,
+          "lidl": true
+        },
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 0,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "estimated"
+      },
+      "recipe_names": [
+        "Kokt kyckling med ris och morÃ¶tter",
+        "Pasta med rÃ¶d linssÃ¥s, tomat och riven ost",
+        "Ugnsbakad kyckling med morÃ¶tter och ris",
+        "Gryta med fisk, nudlar och gul lÃ¶k",
+        "Tomatpasta med fisk och morot",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Naturell kvarg",
+        "Naturell kvarg"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "legacy-1520-plus-exact",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 65.87097479985096,
+      "total": 430.26,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": {
+          "willys": true,
+          "lidl": true
+        },
+        "diversity_mode": "balanced",
+        "varied_budget_percent": 25,
+        "strategy": "optimized",
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 40,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 30,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 5,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": 20,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "pantry_revision": 0,
+          "allow_nutrition_estimates": true,
+          "organic_percent": 0,
+          "organic_animals": false,
+          "surplus_mode": "minimize"
+        },
+        "purchase_planning_mode": "exact"
+      },
+      "recipe_names": [
+        "Kokt kyckling med ris och morÃ¶tter",
+        "Pasta med rÃ¶d linssÃ¥s, tomat och riven ost",
+        "Ugnsbakad kyckling med morÃ¶tter och ris",
+        "Gryta med fisk, nudlar och gul lÃ¶k",
+        "Tomatpasta med fisk och morot",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Naturell kvarg med brÃ¶d",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Kvarg med liten ostsmÃ¶rgÃ¥s",
+        "Naturell kvarg",
+        "Naturell kvarg"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "legacy-public",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 157.42553939996287,
+      "total": 168.55,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 3,
+        "diversity_mode": "balanced",
+        "purchase_planning_mode": "exact",
+        "diet_preference": "mixed",
+        "memberships": {
+          "coop": true,
+          "ica": true,
+          "hemkop": true,
+          "willys": true,
+          "lidl": true,
+          "citygross": true
+        }
+      },
+      "recipe_names": [
+        "Tomatgryta pÃ¥ kidneybÃ¶nor med tortillas och morot",
+        "Tacos med tofu och morot",
+        "Tomatpasta med korv och gul lÃ¶k",
+        "Gryta med tofu, nudlar och gul lÃ¶k",
+        "Bowl med korv, nudlar och morot"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "mixed-vegetarian",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 21.589825599920005,
+      "total": 593.3,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "balanced",
+        "purchase_planning_mode": "estimated",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [
+            "greek",
+            "italian",
+            "indian"
+          ],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "adaptation": "approved"
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              },
+              "diet": "vegetarian"
+            }
+          ],
+          "pantry_revision": 0
+        },
+        "diet_preference": "vegetarian"
+      },
+      "recipe_names": [
+        "KrÃ¤mig spenattofu med Ã¤rtor och vitlÃ¶ksris",
+        "RÃ¶d linsdal med spenat, mjuk tofu och citronris",
+        "KrÃ¤migt svamp- och linsris med spenat och citron",
+        "Spenat- och kesofylld pastagratÃ¤ng med tomatsÃ¥s",
+        "Spenatris med kikÃ¤rtor, feta och citronyoghurt"
+      ],
+      "actual_entered_stock_used_g": null
+    },
+    {
+      "case": "unrestricted-varied",
+      "status": "complete",
+      "http_status": 201,
+      "seconds": 100.92886079987511,
+      "total": 587.96,
+      "first_stop": null,
+      "code": null,
+      "reload_identical": true,
+      "other_owner_plan_denied": true,
+      "request": {
+        "postal_code": "22350",
+        "recipes": 5,
+        "servings": 2,
+        "max_stores": 2,
+        "memberships": [],
+        "diversity_mode": "varied",
+        "purchase_planning_mode": "estimated",
+        "allow_nutrition_estimates": true,
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "adaptation": "approved"
+        },
+        "personal": {
+          "allow_nutrition_estimates": true,
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "limits": {
+                "min_protein_g": 0,
+                "min_carbs_g": 0,
+                "min_fat_g": 0,
+                "max_kcal": 4000
+              }
+            }
+          ],
+          "pantry_revision": 0
+        }
+      },
+      "recipe_names": [
+        "RÃ¶d linsdal med spenat, mjuk tofu och citronris",
+        "Vit bÃ¶ncurry med potatis, kokos och tomatsallad",
+        "Mustig lins- och kidneychili med ris och yoghurt",
+        "Smulig tofubowl med bÃ¶nor, limekÃ¥l och tomatris",
+        "Senapskyckling med dillpotatis och krÃ¤mig kÃ¥lsallad"
+      ],
+      "actual_entered_stock_used_g": null
+    }
+  ]
+}

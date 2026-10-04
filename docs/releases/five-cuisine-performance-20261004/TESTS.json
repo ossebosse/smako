@@ -1,0 +1,39 @@
+{
+  "runtime": "b89fadb96c4edc4576cb4daae6c5d80e553ad8ca",
+  "backend": {
+    "count": 2226,
+    "status": "PASS",
+    "command": ".venv/Scripts/python.exe -m pytest backend/tests -q",
+    "log_sha256": "90b0b64ba0a1542f7b9a37a52421f4c2d77d49c342bdbfc56556c8429932d720"
+  },
+  "grocery_data": {
+    "count": 1664,
+    "status": "PASS",
+    "reuse": "Source unchanged since completed full run before final replacement fix"
+  },
+  "frontend_contract": {
+    "cases": 8,
+    "status": "PASS",
+    "engines": [
+      "chromium",
+      "webkit"
+    ],
+    "layouts": [
+      "mobile",
+      "desktop"
+    ],
+    "api": "Explicit synthetic contract fixtures"
+  },
+  "presentation": {
+    "render_cases": 4,
+    "recipe_variants_per_case": 104,
+    "status": "PASS",
+    "nutrition_edge_fixture": "31.588999999999995 formats to 31,6 without changing value"
+  },
+  "real_browsers": "BROWSER.json",
+  "real_http_regressions": "REGRESSIONS.json",
+  "ruff": "PASS",
+  "compileall": "PASS",
+  "physical_iphone": false,
+  "physical_cooking": false
+}
