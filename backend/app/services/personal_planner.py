@@ -494,7 +494,11 @@ class PersonalPlanner:
             from app.services.official_product_facts import project_usable_quantity
             product = project_usable_quantity(product, self.source_facts(product), allow_estimates=self.request.purchase_planning_mode == 'estimated', required_unit=unit)
             if self.complete and recipe is not None:
-                from app.services.complete_recipes import product_form_compatible
+                from app.services.complete_recipes import (
+                    product_form_compatible,
+                    project_retained_frozen_form,
+                )
+                product = project_retained_frozen_form(product, self.source_facts(product))
                 if not product_form_compatible(recipe, name, product, self.source_facts(product)):
                     note(i, "recipe_match", "stopped", "authored ingredient input form is incompatible with product")
                     continue

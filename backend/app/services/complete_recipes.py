@@ -307,6 +307,14 @@ def _retained_classification(product, fact, value, *, raw_fields=None):
                for source in fact.field_sources.get("product_classification", ()))
 
 
+def project_retained_frozen_form(product, fact):
+    """Correct a name-inferred form only with this exact retained source label."""
+    if (product.product_form in (None, "fresh")
+            and _retained_classification(product, fact, "frozen")):
+        return product.model_copy(update={"product_form": "frozen"})
+    return product
+
+
 def _whole_food_identity(canonical, form, product, fact, requirements=()):
     """Whole-product label and declared form, never a substring suggestion.
 
