@@ -227,13 +227,14 @@ def basis(recipe):
 
     return {
         "sources": SOURCES,
-        "version": VERSION,
+        "version": recipe.preparation.version,
         "method": "measured_edible_input_sum_per_portion",
         "origin": recipe.preparation.origin,
         "parent_sha256": recipe.preparation.parent_sha256,
         "family": recipe.preparation.family,
         "input_forms": recipe.preparation.input_forms,
-        "description": "Receptutformning: summera deklarerad eller tillåten referensbaserad näring från använda ätbara insatser och dela med portioner. All mat, olja och sky ska serveras. Uppskattning, inte uppmätt retention.",
+        "description": (recipe.design.content_source.method_note if recipe.design and recipe.design.content_source else
+                        "Receptutformning: summera deklarerad eller tillåten referensbaserad näring från använda ätbara insatser och dela med portioner. All mat, olja och sky ska serveras. Uppskattning, inte uppmätt retention."),
         "cooked_weight": "NOT_VERIFIED",
         "per_100g_cooked": "NOT_AVAILABLE",
         "retention_factors": "NOT_MEASURED",
@@ -379,7 +380,7 @@ def wrap_evidence(recipe, name, evidence):
         + (
             {
                 "kind": "recipe_design_input_estimate",
-                "version": VERSION,
+                "version": recipe.preparation.version,
                 "family": recipe.preparation.family,
                 "input_form": form,
                 "input_evidence_kind": getattr(

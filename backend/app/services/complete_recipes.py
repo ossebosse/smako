@@ -212,6 +212,11 @@ def product_form_compatible(recipe, name, product, fact):
 
 
 def _requirements_compatible(canonical, requirements, product, fact):
+    from app.services.content_pack_requirements import compatible
+    pack = [r.removeprefix("pack:") for r in requirements if r.startswith("pack:")]
+    if pack and not compatible(pack, product, fact):
+        return False
+    requirements = tuple(r for r in requirements if not r.startswith("pack:"))
     text = product.name.casefold()
     composition = " ".join(fact.ingredients).casefold() if fact else ""
     if set(requirements) - {"plain", "ground", "firm", "thick", "pure_juice", "frozen", "red_split", "white_rice", "white_beans", "dried_leaf"}:
@@ -395,7 +400,7 @@ def _whole_food_identity(canonical, form, product, fact):
         return bool(re.fullmatch(staples[canonical], label))
     grains = {
         "ris": r"(?:ris|jasminris|basmatiris|långkornigt ris|parboiled ris)",
-        "pasta": r"(?:pasta|spaghetti|spagetti|penne|fusilli|makaroner|tagliatelle|rigatoni|farfalle|linguine|orecchiette)",
+        "pasta": r"(?:pasta|spaghetti|spagetti|penne|fusilli|makaroner|tagliatelle|rigatoni|farfalle|linguine|orecchiette|risoni|kritharaki|orzo)",
         "nudlar": r"(?:äggnudlar|nudlar|risnudlar)", "couscous": r"couscous",
         "linser": r"(?:röda linser|linser röda|linser)", "vetemjöl": r"(?:vetemjöl|kärnvetemjöl)",
         "havregryn": r"(?:havregryn|fina havregryn)", "ströbröd": r"(?:ströbröd|panko|panko ströbröd)",
@@ -417,7 +422,8 @@ def _whole_food_identity(canonical, form, product, fact):
         return bool(fact and len(fact.ingredients) == 1 and plain_bread_composition(composition)
                     and _retained_classification(product, fact, "ready_baked_bread", raw_fields={
                         "name": product.name, "listOfIngredients": fact.ingredients[0]}))
-    return False
+    from app.services.content_pack_requirements import additional_whole_identity
+    return additional_whole_identity(canonical, form, label, composition)
 
 
 def _culinary_words(composition):

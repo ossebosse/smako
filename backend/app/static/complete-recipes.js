@@ -134,6 +134,7 @@
     const instructions=[...(recipe.instructions||[])];
     const original={instructions,methodNotes:[],waterOnly:false};
     const design=recipe.design,preparation=recipe.preparation;
+    if(design?.content_source&&preparation?.version==="smako-authored-input-v2")return {...original,methodNotes:[design.content_source.method_note],waterOnly:true};
     // This is a display projection of the server-qualified immutable method.
     // Unknown versions and structurally different recipes keep every original
     // word. The source recipe, its content hash and its amounts are never edited.
@@ -204,7 +205,10 @@
     if(presentation.waterOnly)ingredients.append(el("p","Använd de angivna mängderna. Utöver listan tillkommer bara dricksvatten.","recipe-method-note"));
     const componentRows=design.components||[];const mapped=new Set(componentRows.map(c=>c.id));
     const groups=[...componentRows];if((recipe.ingredients||[]).some(i=>!mapped.has(i.component)))groups.push({id:null,name:"Övriga ingredienser"});
-    for(const component of groups){const rows=(recipe.ingredients||[]).filter(i=>component.id?i.component===component.id:!mapped.has(i.component));if(!rows.length)continue;
+    for(const component of groups){const rows=component.amounts?.map(amount=>{
+        const source=(recipe.ingredients||[]).find(i=>`${i.canonical_name||i.name}|${i.form}`===amount.ingredient_key);
+        return {...source,...amount,form:source?.form||"process_water"};
+      })||(recipe.ingredients||[]).filter(i=>component.id?i.component===component.id:!mapped.has(i.component));if(!rows.length)continue;
       const group=el("div",null,"recipe-component");group.append(el("h4",component.name));const list=el("ul",null,"recipe-ingredients");
       for(const row of rows){const item=el("li"),name=el("span",row.name);const basis=[ingredientForms[row.form],...(row.product_requirements||[]).map(key=>ingredientRequirements[key])].filter(Boolean);if(basis.length)name.append(el("small",basis.join(" · "),"recipe-ingredient-form"));item.append(name,el("span",`${number(row.quantity)} ${row.unit}`,"ingredient-amount"));list.append(item);}group.append(list);ingredients.append(group);
     }
@@ -213,7 +217,8 @@
     if(allocations.length){ingredients.append(el("h4","Skafferi används"));for(const row of allocations)ingredients.append(el("p",`${row.name||row.ingredient||"Skafferivara"}: ${number(row.quantity)} ${row.unit||""}.`));}
     out.append(ingredients);
     const method=el("section",null,"complete-recipe-method");method.append(el("h3","Gör så här"));const steps=el("ol",null,"instructions-list complete-recipe-steps");
-    const overlap=parallelPlan(design.steps||[]);
+    const overlap=design.content_source?[]:parallelPlan(design.steps||[]);
+    if(design.content_source)method.append(el("p","Följ tidsankarna i stegen. Total tid är en uppskattning för angiven portionsmängd; flera pannor eller omgångar kan påverka tiden.","field-hint"));
     if(overlap.length){const plan=el("div",null,"recipe-parallel-plan");for(const text of overlap)plan.append(el("p",text));method.append(plan);}
     const instructions=presentation.instructions;
     instructions.forEach((instruction,index)=>{

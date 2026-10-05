@@ -20,6 +20,8 @@ LIBRARY_VERSION = "smako-complete-dinners-v1"
 LIBRARY_PATH = Path(__file__).parents[1] / "data/recipes/complete-dinners-v1.json"
 # Updated only together with reviewed, versioned source content.
 CONTENT_SHA256 = "1c623aa7e4a8e8f9cde292807198c59d6f191f0dd3030462a254893995e7e90c"
+SUPPLEMENT_PATH = LIBRARY_PATH.parent / "content-pack-20261004/registered.json"
+SUPPLEMENT_SHA256 = "eb2c33f75a78037f2607100f6d4d2f8a544a39e9ac8922cdeba28fe11a50cbbc"
 COUNT_EXEMPT = frozenset({"salt", "svartpeppar", "peppar", "vatten"})
 ARCHIVED_CONTENT = {
     "complete-dinners-1.3.0.json": "27d53cb050248c826285b445deac0c6e1a87f9a1182fe39b881b189ab3a136b8",
@@ -67,6 +69,22 @@ def _structural_check(recipe: Recipe) -> None:
             raise ValueError("Ingrediensen saknar godkänt mängdintervall.")
         if not i.quantity_min <= i.quantity <= i.quantity_max:
             raise ValueError("Mängden ligger utanför receptets godkända intervall.")
+    if d.content_source is not None:
+        totals: dict[str, float] = {}
+        units = {ingredient_key(i): i.unit for i in recipe.ingredients}
+        for c in d.components:
+            if not c.amounts:
+                raise ValueError("Innehållspaketet saknar komponentmängder.")
+            for amount in c.amounts:
+                if amount.ingredient_key == "vatten|process_water":
+                    if amount.unit != "ml":
+                        raise ValueError("Processvatten ska anges i ml.")
+                    continue
+                if units.get(amount.ingredient_key) != amount.unit:
+                    raise ValueError("Komponentens ingrediens eller mängdbasis avviker.")
+                totals[amount.ingredient_key] = totals.get(amount.ingredient_key, 0) + amount.quantity
+        if set(totals) != keys or any(abs(totals[ingredient_key(i)] - i.quantity) > 1e-7 for i in recipe.ingredients):
+            raise ValueError("Komponentmängderna stämmer inte med inköpsbehovet.")
     if d.ingredient_count != ingredient_count(recipe):
         raise ValueError("Ingrediensantalet stämmer inte med hela rätten.")
     ends: dict[str, int] = {}
@@ -100,7 +118,10 @@ def _registered() -> tuple[Recipe, ...]:
     payload = json.loads(raw)
     if payload["library_version"] != LIBRARY_VERSION:
         raise ValueError("Okänd receptutgåva.")
-    result = tuple(Recipe.model_validate(r) for r in payload["recipes"])
+    supplement = SUPPLEMENT_PATH.read_bytes()
+    if hashlib.sha256(supplement).hexdigest() != SUPPLEMENT_SHA256:
+        raise ValueError("Innehållspaketets kontrollsumma avviker från granskad utgåva.")
+    result = tuple(Recipe.model_validate(r) for r in [*payload["recipes"], *json.loads(supplement)["recipes"]])
     identities = set()
     for recipe in result:
         _structural_check(recipe)
@@ -133,6 +154,24 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
         for key in ("quantity", "quantity_min", "quantity_max", "quantity_step")
     }) for i in recipe.ingredients]
     result = recipe.model_copy(deep=True, update={"servings": servings, "ingredients": ingredients})
+    if result.design.content_source is not None:
+        components = tuple(c.model_copy(update={"amounts": tuple(a.model_copy(update={
+            "quantity": round(a.quantity * factor, 8)}) for a in c.amounts)}) for c in result.design.components)
+        steps = []
+        for step in result.design.steps:
+            text = step.text
+            for token, quantity in (step.scalable_amounts or {}).items():
+                text = text.replace(token, f"{quantity * factor:g} ml")
+            if servings != 2:
+                for phrase in ("två portioner", "två djupa tallrikar", "två tallrikar"):
+                    text = text.replace(phrase, f"{servings} portioner")
+            steps.append(step.model_copy(update={"text": text}))
+        if servings >= 4:
+            steps[0] = steps[0].model_copy(update={"text": steps[0].text +
+                " Använd tillräckligt stor panna eller fler plåtar så att lagrets djup är detsamma. "
+                "Om maten måste lagas i omgångar blir tiden längre än uppskattningen."})
+        result = result.model_copy(update={"design": result.design.model_copy(update={
+            "components": components, "steps": tuple(steps)}), "instructions": [s.text for s in steps]})
     if servings > 2 and result.design.version != "1.0.0":
         # More chopping/weighing for four portions is real work, even when the
         # oven or a large pot can accommodate the full batch without extra heat.
@@ -176,7 +215,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
     digest = content_hash(result)
     result = result.model_copy(update={"design": result.design.model_copy(update={"content_sha256": digest})})
     return result.model_copy(update={"preparation": RecipePreparation(
-        version="smako-edible-input-v1", origin="smako_recipe_design", parent_sha256=digest,
+        version=recipe.preparation.version, origin="smako_recipe_design", parent_sha256=digest,
         family=result.design.family,
         input_forms={i.canonical_name: i.form for i in ingredients},
     )})
@@ -210,12 +249,13 @@ def validate_recipe_design(recipe: Recipe) -> bool:
     return True
 
 
-def candidates(preferences: RecipePreferences, servings: int = 2) -> list[Recipe]:
+def candidates(preferences: RecipePreferences, servings: int = 2, *, include_supplement: bool = True) -> list[Recipe]:
     """Return complete allowed candidates; nutrition targets are qualified downstream."""
     if preferences.mode != "complete":
         return []
     return [r.model_copy(deep=True) for r in _registered_portions(servings)
-            if (not preferences.cuisines or set(r.design.cuisines) & set(preferences.cuisines))
+            if (include_supplement or r.design.content_source is None)
+            and (not preferences.cuisines or set(r.design.cuisines) & set(preferences.cuisines))
             and preferences.min_ingredients <= r.design.ingredient_count <= preferences.max_ingredients
             and (preferences.max_minutes is None or r.design.estimated_minutes <= preferences.max_minutes)
             and (preferences.allow_fish or not r.design.fish)
@@ -238,7 +278,7 @@ def validate_library() -> dict:
 
 
 def library_version() -> str:
-    return f"{LIBRARY_VERSION}:{CONTENT_SHA256}"
+    return f"{LIBRARY_VERSION}:{CONTENT_SHA256}:{SUPPLEMENT_SHA256}"
 
 
 def library_summary() -> dict:

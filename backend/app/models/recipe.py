@@ -7,10 +7,33 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 RecipeUnit = Literal["g", "kg", "ml", "l", "dl", "cl", "st"]
 
 
+class RecipeComponentAmount(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid", allow_inf_nan=False)
+    ingredient_key: str
+    quantity: float = Field(gt=0, le=100000)
+    unit: Literal["g", "ml"]
+    note: str = ""
+    name: str
+
+
+class RecipeContentSource(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+    pack_id: str
+    proposal_id: str
+    sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    priority: Literal[1, 2]
+    timing_basis: Literal["authored_estimate_coarse_dependencies"]
+    active_minutes: int = Field(ge=1, le=180)
+    method_note: str
+    scaling_note: str
+    safety_sources: tuple[str, ...]
+
+
 class RecipeComponent(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
     id: str
     name: str
+    amounts: tuple[RecipeComponentAmount, ...] | None = Field(default=None, exclude_if=lambda v: v is None)
 
 
 class RecipeStep(BaseModel):
@@ -21,6 +44,9 @@ class RecipeStep(BaseModel):
     depends_on: tuple[str, ...] = ()
     duration_minutes: int = Field(ge=1, le=180)
     parallel_group: str | None = None
+    # Exact authored tokens, explicitly reviewed by the importer. Never scale
+    # temperatures, durations or dimensions by searching arbitrary numbers.
+    scalable_amounts: dict[str, float] | None = Field(default=None, exclude_if=lambda v: v is None)
 
 
 class RecipeProvenance(BaseModel):
@@ -59,13 +85,14 @@ class RecipeDesign(BaseModel):
     ingredient_count: int = Field(ge=1, le=40)
     provenance: RecipeProvenance
     content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    content_source: RecipeContentSource | None = Field(default=None, exclude_if=lambda v: v is None)
 
 
 class RecipePreparation(BaseModel):
     """Versioned recipe design, never an assertion of measured cooking yield."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
-    version: Literal["smako-edible-input-v1"]
+    version: Literal["smako-edible-input-v1", "smako-authored-input-v2"]
     origin: Literal["smako_recipe_design", "explicit_adaptation"]
     parent_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     family: str
