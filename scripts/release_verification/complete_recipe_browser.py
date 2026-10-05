@@ -18,8 +18,10 @@ import time
 import uuid
 from datetime import UTC, datetime
 from pathlib import Path
+from types import SimpleNamespace
 from urllib.parse import urlsplit
 
+from playwright.sync_api import Error as BrowserError
 from playwright.sync_api import TimeoutError as BrowserTimeout
 from playwright.sync_api import expect, sync_playwright
 
@@ -39,6 +41,27 @@ def is_operation_response(response):
             (path in {"/api/plans", "/api/plan"} or path.endswith(("/change", "/replace-recipe")))) or path.startswith("/api/plan-jobs/")
 
 
+def record_response(response, observed):
+    """Retain real response data before an intentional reload releases it.
+
+    A cancelled poll is transport evidence, not a planner failure. Keep it and
+    await the ordinary resumed job polling; never fabricate a terminal result.
+    """
+    if not is_operation_response(response):
+        return
+    body, error = None, None
+    try:
+        body = response.json()
+    except BrowserError as exc:
+        error = str(exc)
+    observed.append(SimpleNamespace(
+        url=response.url, status=response.status, headers=response.headers,
+        request=SimpleNamespace(method=response.request.method,
+            post_data_json=response.request.post_data_json, timing=response.request.timing),
+        captured_body=body, body_error=error,
+    ))
+
+
 def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline_seconds=0):
     started = time.monotonic()
     consumed = begin
@@ -51,12 +74,16 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
             consumed += 1
             if not is_operation_response(response):
                 continue
-            body = response.json()
+            body = response.captured_body
             row = {"url": response.url, "method": response.request.method, "status": response.status,
                    "request_id": response.headers.get("x-request-id"),
                    "error_code": response.headers.get("x-error-code"),
                    "response_ms": response.request.timing.get("responseEnd"),
                    "observed_after_seconds": round(time.monotonic() - started, 3)}
+            if response.body_error:
+                row.update(body_available=False, transport_error=response.body_error)
+                rows.append(row)
+                continue
             if response.status == 202:
                 pending_urls.add(body["status_url"])
                 row["stage"] = body.get("stage")
@@ -86,7 +113,8 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
               "longer_than_minute": time.monotonic() - started > 60,
               "expensive_post_count": sum(row["method"] == "POST" for row in rows),
               "all_status_gets_under_10_seconds": all((row["response_ms"] or 0) < 10000
-                                                      for row in rows if row["method"] == "GET")}
+                                                      for row in rows if row["method"] == "GET" and row.get("body_available", True)),
+              "unavailable_transport_bodies": sum(not row.get("body_available", True) for row in rows)}
     return result, envelope
 
 
@@ -180,7 +208,7 @@ def run_case(browser, engine, mobile, personal, args):
                                   is_mobile=mobile, has_touch=mobile, ignore_https_errors=args.ignore_https_errors)
     page = context.new_page()
     observed, errors, failures = [], [], []
-    page.on("response", lambda response: observed.append(response))
+    page.on("response", lambda response: record_response(response, observed))
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.on("requestfailed", lambda request: failures.append({"url": request.url, "method": request.method, "failure": request.failure}))
     try:
