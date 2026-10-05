@@ -103,7 +103,8 @@ def _supplement_named_catalog_facts(products, original):
     """Strict existing name/brand/fixed-pack rule for official catalog facts.
 
     No GTIN is synthesized and no price, identity or stock field is changed.
-    The parser requires two official documents for the same unique linked item.
+    The parser requires linked official identity documents or one manufacturer
+    declaration with explicit GS1 identity, complete name/category and pack.
     """
     from dataclasses import replace
 

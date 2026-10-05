@@ -116,6 +116,9 @@ def test_apple_reference_is_generic_measured_edible_form_and_rejects_conflicts()
     from app.services.nutrition_reference import product_reference, reference_evidence
     p = product('Äpple Röda', 1000, 'g', 30).model_copy(update={'category': 'Frukt & grönt'})
     assert product_reference(p, 'äpple', None) == 588
+    leaf = p.model_copy(update={'name': 'Äpple', 'category': 'Äpple'})
+    assert product_reference(leaf, 'äpple', None) == 588
+    assert product_reference(leaf.model_copy(update={'category': 'Skafferi'}), 'äpple', None) is None
     evidence = reference_evidence(588)
     assert evidence.nutrition_unit == 'g'
     assert evidence.ingredient == 'äpple med skal'

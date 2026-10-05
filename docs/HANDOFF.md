@@ -1,3 +1,35 @@
+# 2026-10-05: Pågående förbättring av användbarhet och beräkningskostnad
+
+Arbetsgren `feature/recipe-usability-20261005`, kodkandidat
+`3a3c502fca78731b72ebfdbe1722475803863073`. Ingen produktion eller push.
+[Låst jämförelsebas](releases/recipe-usability-20261005/BASELINE.md).
+Källbunden mildhetsuppgift för Santa Maria 200 g, Garant Risoni 500 g och
+SLV 588 för rått äpple med skal har införts genom befintliga faktavägar.
+Mängder/receptversioner är oförändrade. Gemensamma rättningar omfattar
+kandidatalias, småpasta och skaläggsidentitet; mängd-/näringsprövning kvarstår.
+Exakta butikskombinationer grupperas med befintlig Decimal-/bitmasksberäkning,
+med alla ekonomiska alternativ och oförändrad slutaudit. Negativa uppslag är
+begränsade till en begäran; cache rensas mellan oberoende plannerinstanser.
+
+Slutverifiering **pågår**, kandidaten är ännu inte leveransklar. Förprovet
+bekräftar 11 uppskattade/7 exakta, överlapp 7. Isolerad mellanversion med enbart
+paprikakompletteringen gav 23/17 och huvudkorg 747,77 kr. Detta är inte resultatet
+för den slutliga tre-källorsjämförelsen. Samma-fakta-kodens första nya mätning
+gav 82,89 s kall process/54,29 s varm nyberäkning, samma korg 768,04 kr;
+tre repetitioner, fulla kvalificeringar och webbläsarprov återstår i den pågående kön.
+
+Bevis: `.local/recipe-usability-20261005`, isolerat serverområde
+`/var/tmp/smako-recipe-usability-20261005` med egen `.owner`.
+`final_runs.py` kör sekventiella A/B/C-prov, 2 CPU/3 GiB, inga konkurrerande
+tunga testjobb. B monterar ursprungliga deklarationer och referensfiler; C är
+berikad historisk jämförelse med nya källors verkliga hämtningstider.
+650 installerade runtimefiler verifierade mot serverpaketets manifest.
+Image `sha256:a84c79490fdb515f4b6b49235b8cd731ee4113e0ced076499142f45ec424c2fe`.
+Paket `.local/releases/recipe-usability-20261005/smako-server-3a3c502fca78.zip`,
+SHA-256 `7b7219acf9c48bcd865887d06d3e3edcc9aab7f7a4d4af8a312f99d8295f2d20`.
+Separat aktiveringsanvisning ska skrivas efter slutproven; tidigare godkännande
+för 17a9-versionen gäller inte denna kandidat.
+
 # 2026-10-05: Innehållspaket 24 + 24 integrerat, ej aktiverat
 
 Gren `feature/recipe-content-pack-20261005`, runtime

@@ -28,7 +28,11 @@ def reviewed_reference(product, name, facts):
         from app.services.nutrition_reference import MAPPINGS
         # Raw apple with skin, measured edible grams. Neither a named cultivar
         # declaration nor a piece yield; preserve the separate quantity gate.
-        return 588 if (588 in MAPPINGS and fresh_category and not frozen and not composition
+        # Retained retailer catalogs also publish a leaf category "Äpple".
+        # Its verified parent is Frukt & bär / Frukt & Grönsaker; requiring the
+        # parent words in the flattened leaf discarded these plain fresh foods.
+        apple_category = fresh_category or category.strip() in {'äpple', 'äpplen'}
+        return 588 if (588 in MAPPINGS and apple_category and not frozen and not composition
             and re.fullmatch(r'(?:äpple|äpplen)(?: röda| gröna| svenska| ekologiska| klass [12])*', label)) else None
     forbidden = r'konserv|inlagd|saltlag|kryddblandning|marinerad|sås|soppa|stuvad|stekt|torkad|pulver|dipp|chips'
     produce = {

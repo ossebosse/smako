@@ -4,6 +4,7 @@ The extra ingredient passes are diagnostic only: they do not replace a failed
 whole recipe, edit candidates, lower targets or supply any source facts.
 """
 import json
+import os
 import sys
 from dataclasses import asdict
 from datetime import datetime
@@ -29,8 +30,9 @@ def main():
         Path('/inputs/universe.json').read_bytes()).restore()
     facts = load_retained_facts(prepared)
     clock = datetime.fromisoformat(json.loads(Path('/inputs/freeze.json').read_text())['frozen_at_utc'])
+    scope = os.getenv('RECIPE_DIAGNOSTIC_SCOPE', 'content')
     recipes = [r for r in candidates(RecipePreferences(mode='complete'), 2)
-               if r.design.content_source]
+               if bool(r.design.content_source) == (scope == 'content')]
     report = {'facts_version': facts_version(facts), 'clock': clock.isoformat(),
               'universe_id': prepared.universe.universe_id, 'modes': {}}
     products = {}
@@ -60,7 +62,7 @@ def main():
         planner.product_trace.event = observe
         mode_rows = report['modes'][mode] = []
         for recipe in recipes:
-            row = {'proposal_id': recipe.design.content_source.proposal_id,
+            row = {'proposal_id': recipe.design.content_source.proposal_id if recipe.design.content_source else None,
                    'base_id': recipe.design.base_id, 'version': recipe.design.version,
                    'variant_id': recipe.design.variant_id, 'cuisine': recipe.design.cuisines,
                    'family': recipe.design.family, 'name': recipe.name, 'ingredients': []}
@@ -76,7 +78,8 @@ def main():
             # original recipe passed its earlier first stop.
             sources = {canonicalize_ingredient_name(i.name): i for i in recipe.ingredients}
             meal = planner.meals['dinner']
-            for ingredient in planner.service.normalizer.normalize_and_aggregate([recipe]):
+            ingredients = planner.service.normalizer.normalize_and_aggregate([recipe]) if scope == 'content' else []
+            for ingredient in ingredients:
                 source = sources[ingredient.canonical_name]
                 need = {'name': ingredient.canonical_name, 'quantity': ingredient.required_quantity,
                     'unit': ingredient.unit, 'input_form': source.form,
