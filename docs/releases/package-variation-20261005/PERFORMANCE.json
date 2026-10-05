@@ -1,0 +1,547 @@
+{
+  "final_runtime_commit": "82de80e1ae898e2ab005c16c8d95e6670898be93",
+  "final_image_id": "sha256:30de1272e6d2896714f9e815f7d6537019fc43548c4a55767a812c379ebb1b0a",
+  "limits": {
+    "cpus": 2,
+    "memory_gib": 3
+  },
+  "cold_definition": "new process including import, price/fact load and serialization; OS disk cache not flushed",
+  "warm_definition": "new planner computation in the same process, never fetching a saved plan",
+  "runs": {
+    "R0-final-fixed": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 19.322501053102314,
+          "cpu_seconds": 19.296876258,
+          "cold_process_to_serialized_seconds": 35.65981205087155,
+          "serialization_seconds": 0.010450981091707945,
+          "peak_rss_kib": 1368784,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 14.992296386975795,
+            "package_calculation": 0.11538300570100546,
+            "nutrition": 0.019495743326842785,
+            "audit": 0.01738019986078143,
+            "week_search": 1.04516486171633,
+            "total": 4.026865047868341
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:ad52d1456e89d5fb7862e864d4d32966785ea01eeacfca2d415e1c1f8b07e158",
+          "total": 747.77,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    },
+    "R1-final-fixed": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 19.11917091999203,
+          "cpu_seconds": 19.078740553000003,
+          "cold_process_to_serialized_seconds": 34.687837907113135,
+          "serialization_seconds": 0.011451059021055698,
+          "peak_rss_kib": 1368360,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 15.027618839871138,
+            "package_calculation": 0.1080364203080535,
+            "nutrition": 0.018967281095683575,
+            "audit": 0.018298272509127855,
+            "week_search": 1.0034396196715534,
+            "total": 3.78345826594159
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:9f7c889ce8394060378df198d45a052792bb2146a99212f5d32be2d961d6262a",
+          "total": 747.77,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    },
+    "R1-final-free": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 64.33847263781354,
+          "cpu_seconds": 64.296332678,
+          "cold_process_to_serialized_seconds": 79.90896356198937,
+          "serialization_seconds": 0.0379888191819191,
+          "peak_rss_kib": 2090788,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 14.951693512033671,
+            "package_calculation": 15.223424586001784,
+            "nutrition": 0.7027959660626948,
+            "audit": 11.032521563582122,
+            "candidate_generation_and_qualification": 8.458737093023956,
+            "week_search": 38.22460102569312,
+            "total": 49.0532777258195
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:9f7c889ce8394060378df198d45a052792bb2146a99212f5d32be2d961d6262a",
+          "total": 747.77,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 54.02661490486935,
+          "cpu_seconds": 53.98429321799999,
+          "cold_process_to_serialized_seconds": null,
+          "serialization_seconds": 0.036757290828973055,
+          "peak_rss_kib": 2204332,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 5.985430916771293,
+            "package_calculation": 12.06594490725547,
+            "nutrition": 1.7246977710165083,
+            "audit": 9.394129331689328,
+            "candidate_generation_and_qualification": 7.401792265009135,
+            "week_search": 38.06368921836838,
+            "total": 47.79704215703532
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:9f7c889ce8394060378df198d45a052792bb2146a99212f5d32be2d961d6262a",
+          "total": 747.77,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    },
+    "R2-82de-fixed": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 19.996664776001126,
+          "cpu_seconds": 19.989453788,
+          "cold_process_to_serialized_seconds": 37.62541023083031,
+          "serialization_seconds": 0.010622207075357437,
+          "peak_rss_kib": 1369076,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 15.918833130039275,
+            "package_calculation": 0.11263995803892612,
+            "nutrition": 0.024673810228705406,
+            "audit": 0.0185247422195971,
+            "week_search": 1.013250781223178,
+            "total": 3.784791791345924
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 741.15,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    },
+    "R2-final-main-1": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 65.23806630400941,
+          "cpu_seconds": 65.206648829,
+          "cold_process_to_serialized_seconds": 80.91912541491911,
+          "serialization_seconds": 0.03809235570952296,
+          "peak_rss_kib": 2077796,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 15.385004619136453,
+            "package_calculation": 13.49981077760458,
+            "nutrition": 0.6950090206228197,
+            "audit": 12.453257720451802,
+            "candidate_generation_and_qualification": 8.352199158165604,
+            "week_search": 38.85491207614541,
+            "total": 49.506720680743456
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 741.15,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 52.95428612921387,
+          "cpu_seconds": 52.92371697899999,
+          "cold_process_to_serialized_seconds": null,
+          "serialization_seconds": 0.03423554403707385,
+          "peak_rss_kib": 2184944,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 6.018765321932733,
+            "package_calculation": 14.12727425340563,
+            "nutrition": 0.6761870761401951,
+            "audit": 10.26228561392054,
+            "candidate_generation_and_qualification": 7.101625943090767,
+            "week_search": 37.12546806316823,
+            "total": 46.68371544824913
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 741.15,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    },
+    "R2-final-main-2": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 65.05698722135276,
+          "cpu_seconds": 64.990379074,
+          "cold_process_to_serialized_seconds": 80.71719301026314,
+          "serialization_seconds": 0.03334632841870189,
+          "peak_rss_kib": 2077488,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 15.572441281750798,
+            "package_calculation": 13.3584397402592,
+            "nutrition": 0.6874577393755317,
+            "audit": 12.275262176524848,
+            "candidate_generation_and_qualification": 8.257665498182178,
+            "week_search": 38.525825303047895,
+            "total": 49.14471693756059
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 741.15,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 54.54743436584249,
+          "cpu_seconds": 54.53891209800001,
+          "cold_process_to_serialized_seconds": null,
+          "serialization_seconds": 0.04920388059690595,
+          "peak_rss_kib": 2185720,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 6.052569943945855,
+            "package_calculation": 14.571894347667694,
+            "nutrition": 0.6890784096904099,
+            "audit": 10.521337615791708,
+            "candidate_generation_and_qualification": 7.521314471960068,
+            "week_search": 38.22606828389689,
+            "total": 48.23376412782818
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 741.15,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    },
+    "R2-final-main-3": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 65.65937381191179,
+          "cpu_seconds": 65.617643474,
+          "cold_process_to_serialized_seconds": 81.834523556754,
+          "serialization_seconds": 0.04220809508115053,
+          "peak_rss_kib": 2077584,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 15.489035302773118,
+            "package_calculation": 13.577475992962718,
+            "nutrition": 0.6962406360544264,
+            "audit": 12.484433497302234,
+            "candidate_generation_and_qualification": 8.320158053189516,
+            "week_search": 39.15619336301461,
+            "total": 49.8318458837457
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 741.15,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 54.489780760835856,
+          "cpu_seconds": 54.469244927999995,
+          "cold_process_to_serialized_seconds": null,
+          "serialization_seconds": 0.034670296125113964,
+          "peak_rss_kib": 2186776,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 5.982873618602753,
+            "package_calculation": 14.521315823309124,
+            "nutrition": 0.6965822377242148,
+            "audit": 10.703411639668047,
+            "candidate_generation_and_qualification": 7.152147661428899,
+            "week_search": 38.7692628367804,
+            "total": 48.2505749873817
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 741.15,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    },
+    "R3-final-min3-cap2": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 59.55362708121538,
+          "cpu_seconds": 59.521896319999996,
+          "cold_process_to_serialized_seconds": 76.30801115976647,
+          "serialization_seconds": 0.03112267516553402,
+          "peak_rss_kib": 1960344,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 15.331496921833605,
+            "package_calculation": 12.295677910093218,
+            "nutrition": 0.5977328009903431,
+            "audit": 10.557928748894483,
+            "candidate_generation_and_qualification": 8.11224286770448,
+            "week_search": 33.10926548670977,
+            "total": 43.87096969503909
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 787.56,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Kryddigt kycklingris med morot, ärtor och gurkraita",
+            "Spenat- och kesofylld pastagratäng med tomatsås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 50.03277649637312,
+          "cpu_seconds": 50.01012442700001,
+          "cold_process_to_serialized_seconds": null,
+          "serialization_seconds": 0.03307222109287977,
+          "peak_rss_kib": 2155628,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 5.278711834922433,
+            "package_calculation": 11.968213314190507,
+            "nutrition": 0.6464526462368667,
+            "audit": 8.1816454869695,
+            "candidate_generation_and_qualification": 7.646117467433214,
+            "week_search": 34.23565631872043,
+            "total": 44.47458548285067
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 787.56,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Kryddigt kycklingris med morot, ärtor och gurkraita",
+            "Spenat- och kesofylld pastagratäng med tomatsås"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    },
+    "R3-final-each-cuisine": {
+      "artifact_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+      "clock": "2026-10-04T07:19:16.028059+00:00",
+      "resources": {
+        "cpus": 2,
+        "memory_gib": 3
+      },
+      "runs": [
+        {
+          "phase": "cold",
+          "wall_seconds": 50.33156088227406,
+          "cpu_seconds": 50.316518058,
+          "cold_process_to_serialized_seconds": 66.52527671586722,
+          "serialization_seconds": 0.04391282517462969,
+          "peak_rss_kib": 1720580,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 15.348587430082262,
+            "package_calculation": 11.18872383190319,
+            "nutrition": 0.4748038980178535,
+            "audit": 5.71753072924912,
+            "candidate_generation_and_qualification": 8.407335949130356,
+            "week_search": 23.771184707060456,
+            "total": 34.644929212052375
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 910.39,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Mustig linschili med vita bönor, ris och limeyoghurt",
+            "Krämigt svamp- och linsris med spenat och citron",
+            "Kritharaki-gryta – med mild keso",
+            "Basilikastekt tofu med gröna bönor, paprika och ris"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 38.38353480491787,
+          "cpu_seconds": 38.379415316999996,
+          "cold_process_to_serialized_seconds": null,
+          "serialization_seconds": 0.03609360987320542,
+          "peak_rss_kib": 1895476,
+          "trace": null,
+          "planner_timings": {
+            "product_facts": 6.086088798940182,
+            "package_calculation": 10.164815166033804,
+            "nutrition": 0.4603461869992316,
+            "audit": 5.360267211217433,
+            "candidate_generation_and_qualification": 6.384891722351313,
+            "week_search": 23.179277368355542,
+            "total": 32.04451652429998
+          },
+          "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+          "total": 910.39,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Mustig linschili med vita bönor, ris och limeyoghurt",
+            "Krämigt svamp- och linsris med spenat och citron",
+            "Kritharaki-gryta – med mild keso",
+            "Basilikastekt tofu med gröna bönor, paprika och ris"
+          ],
+          "profiled": false,
+          "facts_comparison": "enriched_historical; source retrieval dates preserved"
+        }
+      ]
+    }
+  },
+  "R2_free_cold_seconds": [
+    80.91912541491911,
+    80.71719301026314,
+    81.834523556754
+  ],
+  "R2_free_cold_median_seconds": 80.91912541491911,
+  "R2_free_warm_recomputation_seconds": [
+    52.95428612921387,
+    54.54743436584249,
+    54.489780760835856
+  ],
+  "R2_free_warm_median_seconds": 54.489780760835856,
+  "R2_free_peak_rss_kib": 2186776
+}

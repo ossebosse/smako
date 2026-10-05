@@ -1,0 +1,75 @@
+{
+  "comparison": "enriched_historical_replay",
+  "frozen_price_universe_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+  "new_fact": {
+    "product": "Apetit Nordiska Ärtor 1 kg",
+    "store": "Willys Lund",
+    "channel": "online_store",
+    "frozen_product_id": "250367d3737340609b0cc2516c64dbf1",
+    "retailer_product_id": "101698397_ST",
+    "frozen_price_sek": 34.92,
+    "price_observed_at": "2026-10-02T23:35:12.903763Z",
+    "raw_price_sha256": "dbf85551ed03ae152c5699120009cb685e8551190b2ecd83f2b0a4579014a7f8",
+    "identity": {
+      "raw_image_ean14": "06430104920418",
+      "supplier_ean13": "6430104920418",
+      "image_ean_checksum_valid": true,
+      "required_match": ["brand", "exact name", "fixed 1 kg pack", "image EAN"]
+    },
+    "declaration": {
+      "url": "https://outofhome.se/nordiska-artor-10x1kg",
+      "attributed_to": "Apetit Ruoka Oy via Validoo",
+      "publisher": "Out of Home",
+      "retrieved_at": "2026-10-05T20:47:02.550356+00:00",
+      "raw_html_sha256": "2641afc5c30de71b8d51c97b8fa3738f8c328411cc4b7d0e222b89fe72145788",
+      "raw_html_bytes": 229185,
+      "import_parser_version": "supplier-validoo-exact-gtin-v1",
+      "binding_requirement": "exact_retained_retailer_image_gtin_brand_variant_fixed_pack",
+      "ingredients": "Ärtor 100% (Finland).",
+      "nutrition_basis": "per 100 g",
+      "kcal": 75,
+      "fat_g": 0.8,
+      "carbs_g": 9.5,
+      "protein_g": 5.6
+    },
+    "effect": {
+      "qualified_product_alternative": true,
+      "actual_whole_basket_switch": true,
+      "paid_delta_sek": -6.62,
+      "new_whole_recipe_version_proven": false
+    }
+  },
+  "rejected_source": {
+    "url": "https://apetit.se/produkt/arter/",
+    "reason": "retrieved page showed a different 600 g peas, maize and paprika variant; search cache was not accepted as a declaration for 1 kg peas"
+  },
+  "open_cases": [
+    {
+      "product": "Santa Maria Paprikapulver 37 g, GTIN 7311311015182",
+      "missing_field": "variant-bound mildness/strength declaration",
+      "checked_urls": [
+        "https://www.dabas.com/productsheet/07311311015182",
+        "https://www.santamariaworld.com/se/produkter/kryddor/paprika-liten/"
+      ],
+      "status": "blocked_before_basket_comparison"
+    },
+    {
+      "product": "Änglamark Kikärtor Eko 380 g, GTIN 7340191129801",
+      "missing_field": "usable drained quantity and matching nutrition basis for the recipe's drained grams",
+      "status": "not_established_as_cheaper_qualified_basket"
+    },
+    {
+      "product": "Coop Kikärtor 380 g, GTIN 7340191144460",
+      "missing_field": "full nonconflicting nutrition; retained row gives only 0 kcal",
+      "status": "blocked_before_basket_comparison"
+    }
+  ],
+  "remaining_categories_from_prior_research": [
+    "chiliflingor: torr form, näring, styrka",
+    "majs: avrunnen mängd och näringsbasis",
+    "rökt paprika: hämtning och form",
+    "pitabröd: exakt färdigbakad identitet",
+    "mjölk: massbasis",
+    "ägg: ätbar mängd"
+  ]
+}

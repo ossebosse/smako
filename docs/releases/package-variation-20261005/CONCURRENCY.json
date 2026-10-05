@@ -1,0 +1,90 @@
+{
+  "runtime_commit": "82de80e1ae898e2ab005c16c8d95e6670898be93",
+  "limits": {
+    "cpus": 2,
+    "memory_gib": 3
+  },
+  "first_attempt": {
+    "outcome": "test_client_transport_error",
+    "source_script": "scripts/recipe_layer/concurrent_plans.py",
+    "error": "APIRequestContext.get: socket hang up while polling /api/plan-jobs/b88f96c2c1f045618c20d671ea459047",
+    "three_distinct_jobs_accepted": true,
+    "job_ids_from_isolated_server_log": [
+      "05f87522410b41af8be8d235928d8dcb",
+      "b88f96c2c1f045618c20d671ea459047",
+      "e35eb00c6a424405afcd424d37bea9d8"
+    ],
+    "duplicate_posts_reused_job": true,
+    "foreign_status_gets_returned_404": true,
+    "container_running_after_error": true,
+    "container_oom_killed": false,
+    "queue_times_valid": false
+  },
+  "retry_with_transport_recovery": {
+    "outcome": "PASS",
+    "source_script": ".local/next-milestone-20261005/concurrent_retry.py",
+    "source_summary": ".local/next-milestone-20261005/concurrent-retry/summary.json",
+    "owners": [
+      {
+        "owner": 1,
+        "generation_including_queue_seconds": 64.8740950000938,
+        "completed_fetch_seconds": 1.9050191000569612,
+        "duplicate_started_same_job": true,
+        "foreign_job_status": 404,
+        "foreign_plan_status": 403,
+        "paid_sek": 741.15,
+        "transport_errors": 0,
+        "max_status_get_seconds": 4.0607860998716205
+      },
+      {
+        "owner": 2,
+        "generation_including_queue_seconds": 126.1814009998925,
+        "completed_fetch_seconds": 1.897700399858877,
+        "duplicate_started_same_job": true,
+        "foreign_job_status": 404,
+        "foreign_plan_status": 403,
+        "paid_sek": 741.15,
+        "transport_errors": 0,
+        "max_status_get_seconds": 3.6584073998965323
+      },
+      {
+        "owner": 3,
+        "generation_including_queue_seconds": 185.64974149991758,
+        "completed_fetch_seconds": 1.3088096999563277,
+        "duplicate_started_same_job": true,
+        "foreign_job_status": 404,
+        "foreign_plan_status": 403,
+        "paid_sek": 741.15,
+        "transport_errors": 0,
+        "max_status_get_seconds": 1.991312599973753
+      }
+    ],
+    "server_calculations_in_completion_order": [
+      {
+        "kind": "new_calculation",
+        "queue_seconds": 2.7762725949287415e-05,
+        "memory_cleanup_seconds": 1.0677391281351447,
+        "calculation_seconds": 59.495627637021244,
+        "cpu_seconds": 58.665293952999946,
+        "peak_rss_kib": 2662308
+      },
+      {
+        "kind": "new_calculation",
+        "queue_seconds": 59.74849666748196,
+        "memory_cleanup_seconds": 1.2345398627221584,
+        "calculation_seconds": 59.62634088471532,
+        "cpu_seconds": 59.41306165600008,
+        "peak_rss_kib": 2662308
+      },
+      {
+        "kind": "new_calculation",
+        "queue_seconds": 120.86916721565649,
+        "memory_cleanup_seconds": 1.0075406893156469,
+        "calculation_seconds": 58.85766590060666,
+        "cpu_seconds": 58.31347861200004,
+        "peak_rss_kib": 2662308
+      }
+    ],
+    "max_peak_rss_kib": 2662308
+  }
+}

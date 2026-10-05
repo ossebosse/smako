@@ -1,3 +1,33 @@
+# 2026-10-06: Hela förpackningsköp och uttrycklig veckovariation – lokal kandidat
+
+Gren `feature/package-variation-20261005`, slutlig runtime
+**82de80e1ae898e2ab005c16c8d95e6670898be93**. Källbasen är den senaste
+sammanhängande receptkandidaten inklusive senare relevanta ändringar. Ingen
+produktionsaktivering, push, relay-, insamlings-, kommun- eller policyändring.
+[Resultat och kvarstående begränsningar](releases/package-variation-20261005/RESULTS.md),
+[fulla menyer och inköp](releases/package-variation-20261005/MENU.md),
+[käll- och kandidatspår](releases/package-variation-20261005/RESEARCH.md),
+[testbevis](releases/package-variation-20261005/TESTS.md),
+[separat app-only-anvisning](releases/package-variation-20261005/ACTIVATION.md).
+
+Fryst historisk replay: samma fem recept och mängder **747,77 → 741,15 kr** i
+hela betalningen efter exakt identifierad 1 kg-ärtförpackning; ny kod utan nya
+fakta gav ingen sänkning. Använd mängd 494,93 → 495,13 kr. Paprikapulver 37 g
+finns till 25,50 kr i samma snapshot men saknar belagd variantbunden mildhet
+och har inte valts. Fritt R2: fyra indiska/en mexikansk. Uttryckligt minst tre
+kök och proteintak: 787,56 kr; ett av vart och ett av fem kök: 910,39 kr.
+Olika rätter jämförs inte som besparing för samma mat.
+
+Tre kalla R2-processer median 80,92 s, tre varma nyberäkningar 54,49 s.
+Chromium/WebKit huvudklick 70,72/61,56 s: 60-sekundersmålet återstår.
+WebKit rapporterade åter ett status-`fetch`-fel precis vid avsiktlig omladdning;
+rått underkänt prov bevaras. Tre samtidiga klienter klarade kö, dubbelstart,
+ägarisolering och 3 GiB-gräns efter ett separat avbrutet första klientförsök.
+Elva äldre planrevisioner lästes med identiska hashvärden av nya imagen från en
+kopia av tidigare testlagring. Blandning av olika förpackningsstorlekar i samma
+ingrediensköp är ännu inte implementerad. Den förberedda appimagen är **inte**
+installerad; se aktiveringsanvisningen före något separat framtida beslut.
+
 # 2026-10-05: Receptens användbarhet och beräkningskostnad – verifierad kandidat
 
 Gren `feature/recipe-usability-20261005`, runtime

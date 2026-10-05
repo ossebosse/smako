@@ -186,6 +186,19 @@ def assert_recipe_result(envelope, args):
         assert preferences["max_ingredients"] == args.max_ingredients
         assert preferences["max_minutes"] == args.max_minutes
         assert preferences["min_protein_g"] == args.min_protein
+        expected_distribution = "minimum" if args.more_variety else args.cuisine_distribution
+        assert preferences.get("cuisine_distribution", "free") == expected_distribution
+        if expected_distribution == "minimum":
+            assert preferences["min_distinct_cuisines"] == (3 if args.more_variety else args.min_distinct_cuisines)
+        assert preferences.get("max_same_main_protein_dinners") == (2 if args.more_variety else args.main_protein_cap)
+        distribution = plan["personal"]["checks"]["week_distribution"]
+        if expected_distribution == "minimum":
+            assert distribution["distinct_cuisines"] >= (3 if args.more_variety else args.min_distinct_cuisines)
+        elif expected_distribution == "each_selected":
+            assert set(args.cuisines) <= set(distribution["cuisines"])
+        cap = 2 if args.more_variety else args.main_protein_cap
+        if cap is not None:
+            assert all(count <= cap for count in distribution["main_proteins"].values())
         if args.min_protein is not None:
             nutrition = plan["personal"]["checks"]["nutrition"]
             assert len(nutrition) == args.dinners
@@ -253,6 +266,17 @@ def run_case(browser, engine, mobile, personal, args):
             page.locator("#recipe-style").select_option("complete")
             for cuisine in args.cuisines:
                 page.locator("#cuisine-" + cuisine).check()
+            if args.more_variety:
+                page.get_by_role("button", name=re.compile("Mer omväxling")).click()
+                assert page.locator("#recipe-cuisine-distribution").input_value() == "minimum"
+                assert page.locator("#recipe-min-cuisines").input_value() == "3"
+                assert page.locator("#recipe-main-protein-cap").input_value() == "2"
+            else:
+                page.locator("#recipe-cuisine-distribution").select_option(args.cuisine_distribution)
+                if args.cuisine_distribution == "minimum":
+                    page.locator("#recipe-min-cuisines").fill(str(args.min_distinct_cuisines))
+                if args.main_protein_cap is not None:
+                    page.locator("#recipe-main-protein-cap").fill(str(args.main_protein_cap))
             page.locator("#recipe-ingredient-preset").select_option("custom")
             page.locator("#recipe-min-ingredients").fill(str(args.min_ingredients))
             page.locator("#recipe-max-ingredients").fill(str(args.max_ingredients))
@@ -467,6 +491,10 @@ def main():
     parser.add_argument("--max-stores", type=int, default=2)
     parser.add_argument("--recipe-mode", choices=["legacy", "complete"], default="complete")
     parser.add_argument("--cuisines", nargs="*", default=["greek", "mexican"])
+    parser.add_argument("--cuisine-distribution", choices=["free", "minimum", "each_selected"], default="free")
+    parser.add_argument("--min-distinct-cuisines", type=int)
+    parser.add_argument("--main-protein-cap", type=int)
+    parser.add_argument("--more-variety", action="store_true")
     parser.add_argument("--min-ingredients", type=int, default=10)
     parser.add_argument("--max-ingredients", type=int, default=15)
     parser.add_argument("--max-minutes", type=int)

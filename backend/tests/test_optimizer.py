@@ -406,13 +406,14 @@ def test_quote_cache_hits_and_misses_are_request_local() -> None:
         )
 
     assert first.misses == 3
-    # The second basket now reuses the exact requirement-level quote tuple and
-    # store-subset winner before it needs to touch either package quote again.
+    # The second basket reuses the exact requirement-level quote tuple and
+    # subset vector before it needs to touch either package quote again.
     assert first.hits == 0
     assert first.quote_set_hits == 1
     assert first.quote_set_misses == 1
-    assert first.selection_hits == 1
-    assert first.selection_misses == 1
+    assert first.selection_hits == 0
+    assert first.selection_misses == 0
+    assert first.subset_vector_hits >= 1
     assert repriced_result.total == 10
 
     # A new request/session must recalculate from its own product snapshot.
