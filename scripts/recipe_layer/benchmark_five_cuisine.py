@@ -78,10 +78,13 @@ async def main():
                   'facts_version': plan.personal.checks.get('facts_version'),
                   'total': plan.optimized_basket.total,
                   'recipes': [r.name for r in plan.recipes], 'profiled': profiled}
+        if os.getenv('FACTS_COMPARISON_MODE') == 'enriched_historical':
+            report['facts_comparison'] = 'enriched_historical; source retrieval dates preserved'
+        else:
+            assert report['facts_version'] == freeze['expected_facts_version'], 'Historical facts differ from original request'
         summary['runs'].append(report)
         (root / (phase + '-plan.json')).write_text(payload)
         (root / 'summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2))
-        assert report['facts_version'] == freeze['expected_facts_version'], 'Historical facts differ from original request'
         if profiled:
             profiler.dump_stats(str(root / (phase + '.prof')))
             with (root / (phase + '-profile.txt')).open('w') as stream:

@@ -399,7 +399,8 @@ class BasketOptimizer:
             maps = (existing.quotes, existing.candidate_fingerprints,
                     existing.quote_sets, existing.selections,
                     existing.per_store_selections, existing.per_store_compact,
-                    existing.subset_vectors, existing.store_orders)
+                    existing.subset_vectors, existing.store_orders,
+                    existing.subset_partitions, existing.subset_cap_masks, existing.base_candidate_rows)
             if sum(map(len, maps)) > 32768:
                 for mapping in maps:
                     mapping.clear()
@@ -472,6 +473,9 @@ class BasketOptimizer:
             session.per_store_compact.clear()
             session.subset_vectors.clear()
             session.store_orders.clear()
+            session.subset_partitions.clear()
+            session.subset_cap_masks.clear()
+            session.base_candidate_rows.clear()
 
     @staticmethod
     def _build_candidate_fingerprint(
@@ -1235,7 +1239,7 @@ class BasketOptimizer:
         return tuple(best_by_cap)
 
     @staticmethod
-    def _grouped_subset_keys(subset_vectors, store_subsets, limit, session=None):
+    def _grouped_subset_keys(subset_vectors, store_subsets, limit, session=None, *, winning_mask=False):
         """Aggregate every exact subset once per distinct winning-quote pattern.
 
         Store IDs and quote contracts are not collapsed. Bit partitions merely
@@ -1293,7 +1297,14 @@ class BasketOptimizer:
             for cap in range(first_cap, limit):
                 if best_by_cap[cap] is None or key < best_by_cap[cap]:
                     best_by_cap[cap] = key
-        return best_by_cap, len(store_subsets) - feasible_mask.bit_count()
+        infeasible = len(store_subsets) - feasible_mask.bit_count()
+        if winning_mask:
+            winners = 0
+            for (rank, total, stores), mask in states.items():
+                if (rank, total, stores.bit_count()) == best_by_cap[-1]:
+                    winners |= mask
+            return best_by_cap, infeasible, winners
+        return best_by_cap, infeasible
 
     def same_depth_store_limited_key(
         self,
@@ -1501,47 +1512,37 @@ class BasketOptimizer:
         ordered_stores = [store for store in ordered_stores
                           if str(_value(store, "store_id")) in supplying_stores]
         limit = min(limit, len(ordered_stores))
-        store_bits = {
-            str(_value(store, "store_id")): 1 << index for index, store in enumerate(ordered_stores)
-        }
-        ingredient_store_masks = tuple(
-            sum({store_bits[quote.store_id] for quote in quotes if quote.store_id in store_bits})
-            for _ingredient, quotes, _quote_set_key in quoted_ingredients
-        )
         best_key: tuple[int, Decimal, int, tuple[str, ...], tuple[str, ...]] | None = None
         best_quotes: tuple[BasketItemQuote, ...] | None = None
         best_single_total: Decimal | None = None
         best_single_key: tuple[int, Decimal] | None = None
         store_ids = tuple(str(_value(store, "store_id")) for store in ordered_stores)
-        store_combinations = 0
-        infeasible_store_combinations = 0
-        for combo_ids in self._eligible_store_subsets(store_ids, limit):
-            # This is a very hot loop during menu search.  Accumulate exact
-            # diagnostics locally and publish them once below; taking the
-            # request trace's thread lock for every subset used to add pure
-            # instrumentation overhead to hundreds of thousands of otherwise
-            # tiny evaluations.
-            store_combinations += 1
-            combo_mask = sum(store_bits[store_id] for store_id in combo_ids)
-            if any(mask & combo_mask == 0 for mask in ingredient_store_masks):
-                infeasible_store_combinations += 1
-                continue
-            chosen: list[BasketItemQuote] = []
-            for _ingredient, quotes, quote_set_key in quoted_ingredients:
-                quote = self._cheapest_quote_for_subset_key(
-                    quotes,
-                    combo_ids,
-                    quote_set_key,
-                )
-                if quote is None:
-                    break
-                chosen.append(quote)
-            if len(chosen) != len(ingredients):
-                continue
-
-            total = _sum_quotes(chosen)
-            verification_rank = self._quotes_verification_rank(chosen)
-            used_store_ids = tuple(sorted({quote.store_id for quote in chosen}))
+        store_subsets = self._eligible_store_subsets(store_ids, limit)
+        # Same exact per-store minima and deterministic tie breakers as the
+        # scalar subset loop. Reuse the existing bounded, request-local quote
+        # vectors instead of millions of repeated dictionary lookups and rank
+        # calculations. Coupled campaigns take their separate joint path above.
+        vectors = tuple(self._quote_subset_vector(quotes, key, store_ids, store_subsets, limit)
+                        for _ingredient, quotes, key in quoted_ingredients)
+        leading, infeasible_store_combinations, winning_positions = self._grouped_subset_keys(
+            vectors, store_subsets, limit, self._quote_cache_context.get(), winning_mask=True)
+        store_combinations = len(store_subsets)
+        if leading[0] is not None:
+            best_single_key, best_single_total = leading[0][:2], leading[0][1]
+        # Every subset was included in exact Decimal/rank aggregation above.
+        # Materialize only ties on its proven best leading key, preserving
+        # ascending subset order and every store/product tie breaker below.
+        # This is no search-budget reduction or comparison-price pruning.
+        while winning_positions:
+            bit = winning_positions & -winning_positions
+            position = bit.bit_length() - 1
+            winning_positions ^= bit
+            combo_ids = store_subsets[position]
+            selections = tuple(vector[position] for vector in vectors)
+            total = money(sum((selection.total_price for selection in selections), Decimal(0)))
+            verification_rank = max((selection.verification_rank for selection in selections),
+                                    default=_VERIFICATION_RANK[BasketVerificationStatus.VERIFIED])
+            used_store_ids = tuple(sorted({selection.store_id for selection in selections}))
             leading_key = (
                 verification_rank,
                 total,
@@ -1553,6 +1554,7 @@ class BasketOptimizer:
             # subset cannot affect a strict leading-key loser, so defer the
             # work until a subset can actually replace the incumbent.
             if best_key is None or leading_key <= best_key[:4]:
+                chosen = tuple(selection.quote for selection in selections)
                 product_key = tuple(
                     f"{quote.ingredient}:{quote.unit}:{quote.store_id}:"
                     f"{quote.product_id}:{quote.packages_needed}"

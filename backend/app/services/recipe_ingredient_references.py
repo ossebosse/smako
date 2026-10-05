@@ -24,6 +24,12 @@ def reviewed_reference(product, name, facts):
     label = re.sub(r'\s+\d+(?:[,.]\d+)?\s*g$', '', label)
     fresh_category = any(x in category for x in ('frukt', 'grönsak', 'grönt', 'svamp', 'blomkål', 'broccoli', 'zucchini', 'aubergine', 'selleri', 'potatis', 'rotsaker', 'färska örter', 'kryddväxt')) or bool(re.search(r'\bkruka\b', label))
     frozen = bool(re.search(r'\b(?:fryst|frysta|djupfryst|djupfrysta)\b', label) or 'fryst' in category)
+    if canonical == 'äpple':
+        from app.services.nutrition_reference import MAPPINGS
+        # Raw apple with skin, measured edible grams. Neither a named cultivar
+        # declaration nor a piece yield; preserve the separate quantity gate.
+        return 588 if (588 in MAPPINGS and fresh_category and not frozen and not composition
+            and re.fullmatch(r'(?:äpple|äpplen)(?: röda| gröna| svenska| ekologiska| klass [12])*', label)) else None
     forbidden = r'konserv|inlagd|saltlag|kryddblandning|marinerad|sås|soppa|stuvad|stekt|torkad|pulver|dipp|chips'
     produce = {
         'gurka': (339, None, r'gurka(?: sverige| svensk| ofilmad)?'),

@@ -77,6 +77,12 @@ def parse_garant(body, acquisition):
         macros[key] = float(values[0].replace(",", "."))
     if not all(math.isfinite(v) and v >= 0 for v in macros.values()):
         raise ValueError("invalid_declared_macronutrient")
+    identity_names = [names[0]]
+    # Manufacturer explicitly calls the whole named product a durum-wheat
+    # pasta. The retailer may append that exact category noun; never remove
+    # flavours, ingredients, qualifiers or arbitrary words from its identity.
+    if re.fullmatch(re.escape(names[0].strip()) + r"\. Pasta gjord på durumvete\. \d+ gram\.", description.strip(), re.IGNORECASE):
+        identity_names.append(names[0].strip() + ' Pasta')
     return {
         "gtin": gtin,
         "name": names[0],
@@ -92,6 +98,9 @@ def parse_garant(body, acquisition):
         "nutrition_text": text,
         "source": dict(acquisition),
         "parser": "garant-explicit-gs1-declaration-v1",
+        **({"identity_names": identity_names,
+            "binding_requirement": "unique_exact_complete_brand_variant_fixed_pack",
+            "identity_source": dict(acquisition)} if len(identity_names) > 1 else {}),
     }
 
 
@@ -419,6 +428,47 @@ def declarations():
     return json.loads(PATH.read_bytes())["declarations"] if PATH.exists() else []
 
 
+def culinary_declarations():
+    """Positive manufacturer attributes, separate from nutrient declarations."""
+    return json.loads(PATH.read_bytes()).get("culinary_declarations", []) if PATH.exists() else []
+
+
+def parse_santa_maria_culinary(body, acquisition):
+    """Bind explicit mildness to one complete named variant and declared unit pack.
+
+    This document may omit ingredients/nutrients. It supplies neither of them,
+    no GTIN, no price and no allergen assurance. A case count is retained and
+    never multiplied into the independently priced consumer package.
+    """
+    if (urlparse(acquisition["url"]).hostname != "www.santamariaworld.com"
+            or not urlparse(acquisition["url"]).path.startswith("/se/produkter/")
+            or acquisition.get("status") != 200 or not acquisition.get("observed_at")
+            or hashlib.sha256(body).hexdigest() != acquisition["sha256"]):
+        raise ValueError("unverified_manufacturer_culinary_source")
+    soup = BeautifulSoup(body, "html.parser")
+    main = soup.find("main")
+    if main is None:
+        raise ValueError("manufacturer_product_content_missing")
+    headings = {h.get_text(" ", strip=True) for h in main.select("h1")}
+    if len(headings) != 1:
+        raise ValueError("manufacturer_product_identity_ambiguous")
+    match = re.fullmatch(r"(.+?)\s+(\d+(?:[.,]\d+)?)Gx(\d+)", headings.pop())
+    if not match:
+        raise ValueError("manufacturer_consumer_pack_unspecified")
+    text = main.get_text(" ", strip=True)
+    # A statement about THIS spice, not a recipe suggestion or a heat number
+    # whose interpretation is not declared. Keep this parser conservative.
+    if identity_text(match[1]) != "paprikapulver" or "Paprika är mild och smakrik." not in text:
+        raise ValueError("manufacturer_mild_spice_not_declared")
+    return {"name": match[1], "brand": "Santa Maria", "gtin": None,
+            "package_quantity": float(match[2].replace(",", ".")), "package_unit": "g",
+            "declared_case_units": int(match[3]), "culinary_forms": ["mild_spice"],
+            "evidence": {"heading": match[0], "statement": "Paprika är mild och smakrik."},
+            "source": dict(acquisition),
+            "binding_requirement": "unique_exact_complete_brand_variant_fixed_pack",
+            "parser": "santa-maria-explicit-culinary-v1"}
+
+
 def exact_declaration(
     name, brand, quantity, unit, *, gtin=None, rows=None, identity_qualifiers=None
 ):
@@ -428,7 +478,7 @@ def exact_declaration(
         r
         for r in (declarations() if rows is None else rows)
         if r.get("parser") not in {"dabas-consumer-quantity-v1", "dabas-base-quantity-v2"}
-        and identity_text(r["name"]) == identity_text(name)
+        and identity_text(name) in {identity_text(n) for n in r.get("identity_names", [r["name"]])}
         and identity_text(r["brand"]) == identity_text(brand)
         and r["package_quantity"] == float(quantity)
         and r["package_unit"] == unit

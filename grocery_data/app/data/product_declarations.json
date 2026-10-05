@@ -650,6 +650,74 @@
         "observed_at": "2026-10-02T16:13:37.169193+00:00"
       },
       "parser": "dabas-consumer-quantity-v1"
+    },
+    {
+      "gtin": "7311043002030",
+      "name": "RISONI ",
+      "brand": "GARANT",
+      "package_quantity": 500.0,
+      "package_unit": "g",
+      "ingredients": "DURUMVETE. Kan innehålla spår av SOJA och SENAP.",
+      "nutrition": {
+        "kcal": 353.0,
+        "fat_g": 1.3,
+        "carbs_g": 72.0,
+        "protein_g": 12.0
+      },
+      "basis_quantity": 100,
+      "basis_unit": "g",
+      "preparation": "as_sold",
+      "description": "Risoni. Pasta gjord på durumvete. 500 gram.",
+      "nutrition_text": "(per 100 g) Energi 1495 kJ/ 353 kcal Fett 1.3 g varav mättat fett 0.3 g Kolhydrat 72 g varav sockerarter 1.5 g Fiber 3.1 g Protein 12 g Salt 0.01 g",
+      "source": {
+        "url": "https://www.garantskafferiet.se/vara-produkter/skafferi/pasta/risoni/",
+        "requested_url": "https://www.garantskafferiet.se/vara-produkter/skafferi/pasta/risoni/",
+        "status": 200,
+        "observed_at": "2026-10-05T10:04:21.042952+00:00",
+        "sha256": "a4309a23226ca1e4c1bf33687237813d88fa7a889c59991b2a145002a06eafd6",
+        "bytes": 43887
+      },
+      "parser": "garant-explicit-gs1-declaration-v1",
+      "identity_names": [
+        "RISONI ",
+        "RISONI Pasta"
+      ],
+      "binding_requirement": "unique_exact_complete_brand_variant_fixed_pack",
+      "identity_source": {
+        "url": "https://www.garantskafferiet.se/vara-produkter/skafferi/pasta/risoni/",
+        "requested_url": "https://www.garantskafferiet.se/vara-produkter/skafferi/pasta/risoni/",
+        "status": 200,
+        "observed_at": "2026-10-05T10:04:21.042952+00:00",
+        "sha256": "a4309a23226ca1e4c1bf33687237813d88fa7a889c59991b2a145002a06eafd6",
+        "bytes": 43887
+      }
+    }
+  ],
+  "culinary_declarations": [
+    {
+      "name": "Paprikapulver",
+      "brand": "Santa Maria",
+      "gtin": null,
+      "package_quantity": 200.0,
+      "package_unit": "g",
+      "declared_case_units": 6,
+      "culinary_forms": [
+        "mild_spice"
+      ],
+      "evidence": {
+        "heading": "Paprikapulver 200Gx6",
+        "statement": "Paprika är mild och smakrik."
+      },
+      "source": {
+        "url": "https://www.santamariaworld.com/se/produkter/paprika-stor/",
+        "requested_url": "https://www.santamariaworld.com/se/produkter/paprika-stor/",
+        "status": 200,
+        "observed_at": "2026-10-05T10:04:18.456371+00:00",
+        "sha256": "256e13ecbbe543660b42d822bbffea1710373f22b4ecfa4454339b97c4636aff",
+        "bytes": 79643
+      },
+      "binding_requirement": "unique_exact_complete_brand_variant_fixed_pack",
+      "parser": "santa-maria-explicit-culinary-v1"
     }
   ]
 }

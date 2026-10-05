@@ -212,6 +212,7 @@ class PersonalPlanner:
                 self.declared_classes[i] = food_class
                 self.declared_positions[food_class].add(i)
         self.lookup_cache = {}
+        self.lookup_failures = OrderedDict()
         # Only this planner owns these immutable-by-convention facts and this
         # request's estimate policy. Nothing survives into another request or
         # account. Bound the cache even for unusually large edit inputs.
@@ -423,9 +424,17 @@ class PersonalPlanner:
             self.recipe_computations.forms_for(recipe, canonicalize_ingredient_name(name))
             if self.complete and recipe and recipe.preparation else None,
         )
-        if cache_key in self.lookup_cache:
+        if cache_key in self.lookup_cache or cache_key in self.lookup_failures:
             for i, stage, outcome, reason in self._resolution_trace.get(cache_key, ()):
                 self.product_trace.event(self.prepared.universe.products[i], recipe, name, stage, outcome, reason)
+            if cache_key in self.lookup_failures:
+                # Request-owned: facts, source snapshot, date, memberships and
+                # pantry are fixed for this planner. Nothing persists to a new
+                # request or crosses owners. Recreate errors; callers annotate
+                # stage/diagnostics and must not mutate a cached exception.
+                message, code, conflicts, stage = self.lookup_failures[cache_key]
+                self.lookup_failures.move_to_end(cache_key)
+                raise PolicyConflict(message, code=code, conflicts=list(conflicts), stage=stage)
             return self.lookup_cache[cache_key]
         observed = []
 
@@ -467,7 +476,15 @@ class PersonalPlanner:
             if not positions or properties or self.facts or self.request.purchase_planning_mode == "estimated":
                 key = name
                 if key not in self.queries:
-                    matches, _, _ = self.index.retrieve(ProductSearchRequest(query=name))
+                    from app.services.ingredient_normalizer import CANONICAL_ALIASES
+                    # Curated spelling aliases retrieve candidates only. Exact
+                    # whole-food/form, source, quantity and policy gates below
+                    # remain authoritative (e.g. chili flakes is not sauce).
+                    aliases = (name, *CANONICAL_ALIASES.get(canonical, ())) if self.complete else (name,)
+                    matches = set()
+                    for alias in dict.fromkeys(aliases):
+                        found, _, _ = self.index.retrieve(ProductSearchRequest(query=alias))
+                        matches.update(found)
                     self.queries[key] = {i for k in matches for i in self.index.groups[k]}
                 positions |= self.queries[key]
         candidates = []
@@ -609,12 +626,17 @@ class PersonalPlanner:
             candidates.append((i, candidate))
         self._resolution_trace[cache_key] = observed
         if not candidates:
-            if conflicts:
-                raise conflicts[0]
-            raise PolicyConflict(
+            failure = conflicts[0] if conflicts else PolicyConflict(
                 f"Ingen verifierad köpbar vara för {name}, {unit}. Kontrollera mängden, egenskaperna eller exakt produkt.",
                 code="DATA_BLOCKED",
             )
+            if failure.diagnostics is None:
+                if len(self.lookup_failures) >= 1024:
+                    expired, _ = self.lookup_failures.popitem(last=False)
+                    self._resolution_trace.pop(expired, None)
+                self.lookup_failures[cache_key] = (str(failure), failure.code,
+                    tuple(failure.conflicts), failure.stage)
+            raise failure
         self.lookup_cache[cache_key] = candidates
         return candidates
 

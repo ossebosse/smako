@@ -49,7 +49,7 @@ def products():
 def test_all_reviewed_references_have_sourced_units_and_not_product_identities():
     with patch("socket.socket.connect", side_effect=AssertionError("offline")):
         data = reference_data()
-        assert len(MAPPINGS) == 71  # Includes the separately reviewed black/oiled/drained olive reference.
+        assert len(MAPPINGS) == 72  # Includes separately reviewed apple with skin.
         for identity in MAPPINGS:
             f = reference_evidence(identity)
             assert set(f.nutrition) == {"kcal", "protein_g", "fat_g", "carbs_g"}

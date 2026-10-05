@@ -15,9 +15,12 @@ import httpx
 BASE = 'https://dataportal.livsmedelsverket.se/livsmedel'
 
 
-def acquire(client, url):
+def acquire(client, url, raw_dir=None):
     response = client.get(url)
     response.raise_for_status()
+    if raw_dir is not None:
+        raw_dir.mkdir(parents=True, exist_ok=True)
+        (raw_dir / (hashlib.sha256(response.content).hexdigest() + '.json')).write_bytes(response.content)
     return response.json(), {'url': str(response.url), 'sha256': hashlib.sha256(response.content).hexdigest(),
                              'observed_at': datetime.now(UTC).isoformat(), 'status': response.status_code}
 
@@ -25,6 +28,7 @@ def acquire(client, url):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--raw-dir', type=Path, help='Retain exact response bytes outside Git')
     parser.add_argument('food_ids', nargs='+', type=int)
     args = parser.parse_args()
     if args.output.exists():
@@ -34,10 +38,10 @@ def main():
               'retrieved_at': datetime.now(UTC).isoformat(), 'foods': {}}
     with httpx.Client(timeout=30, follow_redirects=True) as client:
         for identity in sorted(set(args.food_ids)):
-            food, acquisition = acquire(client, f'{BASE}/api/v1/livsmedel/{identity}?sprak=1')
+            food, acquisition = acquire(client, f'{BASE}/api/v1/livsmedel/{identity}?sprak=1', args.raw_dir)
             assert food['nummer'] == identity and food['version']
             link = next(x['href'] for x in food['links'] if x['rel'] == 'naringvarden')
-            nutrients, nutrient_acquisition = acquire(client, BASE + link)
+            nutrients, nutrient_acquisition = acquire(client, BASE + link, args.raw_dir)
             result['foods'][str(identity)] = {'food': food, 'nutrients': nutrients,
                 'source_url': acquisition['url'], 'retrieved_at': acquisition['observed_at'],
                 'acquisition': [acquisition, nutrient_acquisition]}

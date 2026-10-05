@@ -109,7 +109,9 @@ def _supplement_named_catalog_facts(products, original):
 
     from grocery_data.app.services.product_declarations import declarations
 
-    rows = [r for r in declarations() if r.get("parser") == "gogreen-linked-product-declaration-v1"]
+    rows = [r for r in declarations() if r.get("parser") == "gogreen-linked-product-declaration-v1"
+            or (r.get("parser") == "garant-explicit-gs1-declaration-v1"
+                and r.get("binding_requirement") == "unique_exact_complete_brand_variant_fixed_pack")]
     result = dict(original)
     for p in products:
         prov = p.source_provenance
@@ -155,6 +157,44 @@ def _supplement_named_catalog_facts(products, original):
     return result
 
 
+def _supplement_culinary_attributes(products, original):
+    """Attach source-bound attributes without replacing any prior declaration.
+
+    This uses the existing complete brand/variant/fixed-package identity rule;
+    a culinary document cannot certify nutrients, allergens or campaign scope.
+    """
+    from dataclasses import replace
+
+    from grocery_data.app.services.product_declarations import culinary_declarations
+
+    rows = culinary_declarations()
+    result = dict(original)
+    for p in products:
+        prior = result.get((p.store_id, p.product_id))
+        prov = p.source_provenance
+        if (prior is None or prior.conflicts or not prov or not prov.source_snapshot_id
+                or p.sale_model != 'fixed_package'
+                or (p.purchase_terms and p.purchase_terms.identity_scope != 'product')):
+            continue
+        # A matching GTIN is not needed for a unique complete named pack, but
+        # no absent supplier GTIN may veto the retailer's independent GTIN.
+        row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit, rows=rows)
+        if row is None or row.get('parser') != 'santa-maria-explicit-culinary-v1':
+            continue
+        source = {**row['source'], 'source': row['source']['url'],
+            'kind': 'manufacturer_culinary_declaration', 'identity_method': row['binding_requirement'],
+            'declared_name': row['name'], 'declared_brand': row['brand'],
+            'declared_forms': row['culinary_forms'], 'raw_fields': row['evidence'],
+            'bound_product_id': p.product_id, 'bound_store_id': p.store_id,
+            'bound_snapshot_id': prov.source_snapshot_id,
+            'source_package_quantity': p.package_quantity, 'source_package_unit': p.package_unit}
+        fields = dict(prior.field_sources)
+        fields['product_classification'] = (*fields.get('product_classification', ()), source)
+        result[(p.store_id, p.product_id)] = replace(prior, field_sources=fields,
+            product_classification=tuple(dict.fromkeys((*prior.product_classification, *row['culinary_forms']))))
+    return result
+
+
 def supplement_catalog_facts(products, original):
     """Exact-GTIN supplier fields, retaining every conflicting declaration.
 
@@ -168,7 +208,7 @@ def supplement_catalog_facts(products, original):
     from grocery_data.app.services.product_declarations import declarations, identity_text
 
     rows = [r for r in declarations() if r.get("parser") in {"dabas-consumer-quantity-v1", "dabas-base-quantity-v2"}]
-    result = _supplement_named_catalog_facts(products, original)
+    result = _supplement_culinary_attributes(products, _supplement_named_catalog_facts(products, original))
     for p in products:
         if not p.gtin or not p.source_provenance or (p.purchase_terms and p.purchase_terms.identity_scope != "product"):
             continue

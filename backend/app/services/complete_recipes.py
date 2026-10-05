@@ -270,6 +270,12 @@ def _supplier_classification(product, fact, value):
     if provenance is None:
         return False
     for source in fact.field_sources.get("product_classification", ()):
+        if source.get('kind') == 'manufacturer_culinary_declaration':
+            from grocery_data.app.services.product_declarations import identity_text
+            if (value not in source.get('declared_forms', ())
+                    or identity_text(source.get('declared_name', '')) != identity_text(product.name)
+                    or identity_text(source.get('declared_brand', '')) != identity_text(product.brand or '')):
+                continue
         if (source.get("identity_method") in {
                 "exact_checksum_gtin_brand_fixed_package",
                 "unique_exact_complete_brand_variant_fixed_pack"}
@@ -407,7 +413,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
     }
     if canonical in grains:
         if canonical == "pasta" and "pack:small_pasta" in requirements:
-            return form == "dry" and simple(r"(?:risoni|kritharaki|orzo)", "original|durumvete|durum")
+            return form == "dry" and simple(r"(?:risoni|kritharaki|orzo)(?: pasta)?", "original|durumvete|durum")
         return form == "dry" and simple(grains[canonical], "fullkorn|fullkorns|glutenfri|glutenfritt|snabb|original|durumvete|durum|malet|fint|finmalet|special|siktat|torkade|delade|skalade|split")
     legumes = {"kikärtor": "kikärtor|kikärter", "kidneybönor": "kidneybönor|röda kidneybönor", "svarta bönor": "svarta bönor", "bönor": "bönor|vita bönor|stora vita bönor|vita bönor stora", "majs": "majs|majskorn|sockermajs", "ärtor": "ärtor|gröna ärtor"}
     if canonical in legumes:

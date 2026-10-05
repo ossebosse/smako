@@ -19,6 +19,7 @@ from grocery_data.app.domain.recipe import RECIPE_RELEVANT_INGREDIENTS
 # distinct canonical ingredients.
 CANONICAL_ALIASES: dict[str, tuple[str, ...]] = {
     "chiliflakes": ("chiliflakes", "chili flakes", "chiliflingor"),
+    "rökt paprikapulver": ("rökt paprikapulver", "paprikapulver rökt"),
     # Real Coop source: parent "Vetemjöl", exact child "Kärnvetemjöl".
     # Do not collapse the ambiguous generic "mjöl" or other flour identities.
     "vetemjöl": ("vetemjöl", "kärnvetemjöl"),
@@ -306,6 +307,14 @@ def canonicalize_ingredient_name(name: str) -> str:
     if not isinstance(name, str) or not name.strip():
         raise ValueError("Ingredient name must be a non-empty string")
 
+    return _canonicalize_name(name) if len(name) <= 4096 else _canonicalize_name.__wrapped__(name)
+
+
+@lru_cache(maxsize=4096)
+def _canonicalize_name(name: str) -> str:
+    # The alias tables are constructed once at module import from versioned
+    # source. No prices, product facts or private request state enter this pure
+    # text operation. A new runtime imports its own tables and empty cache.
     cleaned = _search_text(name)
     recipe_canonical = _RECIPE_ID_TO_MATCHER_CANONICAL.get(cleaned)
     if recipe_canonical:

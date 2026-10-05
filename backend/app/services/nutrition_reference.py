@@ -19,6 +19,7 @@ from app.services.ingredient_normalizer import canonicalize_ingredient_name
 POLICY_VERSION = "slv-component-input-v4"
 PATH = Path(__file__).parents[1] / "data/nutrition/slv-20260911.json"
 SUPPLEMENT_PATH = PATH.with_name('slv-20260924.json')
+APPLE_SUPPLEMENT_PATH = PATH.with_name('slv-20261005-apple.json')
 ASSEMBLY_PATH = PATH.with_name("couscous-assembly-20260912.json")
 # Explicit reviewed identity + purchased/used preparation. Missing mappings stay missing.
 # IDs identify foods, not a retailer product. No prices, organic or allergens here.
@@ -95,6 +96,10 @@ MAPPINGS = {
     392: ("paprika", "raw"),
     402: ("oliver", "drained"),
 }
+# Optional data availability is explicit for isolated same-facts comparisons.
+# Deployed reference files are immutable and included in content_version below.
+if APPLE_SUPPLEMENT_PATH.exists():
+    MAPPINGS[588] = ("äpple med skal", "raw")
 COOKED = {2481: 2515, 870: 2079, 289: 305, 344: 448, 370: 465, 1173: 3594, 1255: 1317, 1246: 1335}
 FRIED = {1255: 1316, 1246: 1337}
 MACROS = {
@@ -133,7 +138,7 @@ def macro_values(rows):
 def reference_data():
     raw = PATH.read_bytes()
     data = json.loads(raw)
-    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json'), PATH.with_name('slv-20261002-peppers.json'), PATH.with_name('slv-20261003-black-olives.json')):
+    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json'), PATH.with_name('slv-20261002-peppers.json'), PATH.with_name('slv-20261003-black-olives.json'), *((APPLE_SUPPLEMENT_PATH,) if APPLE_SUPPLEMENT_PATH.exists() else ())):
         supplement = json.loads(path.read_bytes())
         if data['foods'].keys() & supplement['foods'].keys():
             raise ValueError('SLV supplement must not silently replace retained references')

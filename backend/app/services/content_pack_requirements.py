@@ -9,6 +9,7 @@ PACK_KEYS = frozenset(["chicken_thigh", "chicken_breast", "cod", "salmon", "pork
 
 
 def compatible(keys, product, fact):
+    from app.services.complete_recipes import _supplier_classification
     if not set(keys) <= PACK_KEYS:
         return False
     text = product.name.casefold()
@@ -37,7 +38,8 @@ def compatible(keys, product, fact):
             # Authored mild/medium flakes are not arbitrary hot chili. A name
             # synonym alone supplies neither heat nor a substitute quantity.
             return False
-        if key == "paprika_powder" and not re.search(r"\b(?:mild|milt|söt|sweet)\b", text + " " + composition):
+        if (key == "paprika_powder" and not re.search(r"\b(?:mild|milt|söt|sweet)\b", text + " " + composition)
+                and not _supplier_classification(product, fact, "mild_spice")):
             return False
         if key == "black_pepper" and not re.search(r"\b(?:malen|finmalen|mald|ground)\b", text + " " + composition):
             return False
@@ -64,6 +66,9 @@ def additional_whole_identity(canonical, form, label, composition):
     culinary label alone never supplies a missing declaration or mass basis.
     """
     patterns = {
+        # Only a whole shell-egg identity. Edible mass, declared nutrients and
+        # cooking are separately qualified by the existing quantity pathway.
+        "ägg": ("raw_edible", r"(?:ägg|skåneägg|bruna ägg)(?: ekologiska| eko| frigående| inomhus| utomhus| stora| små| [sml]| [sml]-[sml]| \d+-pack| \d+ pack)*"),
         "svartpeppar": ("dry", r"(?:malen )?svartpeppar(?: malen| finmalen| burk)*"),
         "rökt paprikapulver": ("dry", r"(?:rökt paprikapulver|paprikapulver rökt)(?: milt| mild| burk)*"),
         "malen koriander": ("dry", r"(?:malen koriander|koriander malen)(?: burk)*"),
@@ -77,4 +82,7 @@ def additional_whole_identity(canonical, form, label, composition):
     entry = patterns.get(canonical)
     if entry is None or form != entry[0] or not re.fullmatch(entry[1], label):
         return False
+    if canonical == "ägg":
+        words = set(re.findall(r"[^\W\d_]+", composition))
+        return bool(words and words <= {"ingredienser", "krav", "ekologiska", "ägg"})
     return not (canonical in {"svartpeppar", "rökt paprikapulver", "malen koriander", "chiliflakes"} and re.search(r"\b(?:salt|socker|lök|vitlök|senap|selleri|olja)\b", composition.split("kan innehålla")[0]))
