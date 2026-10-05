@@ -16,6 +16,7 @@ import unicodedata
 from collections import defaultdict
 from copy import deepcopy
 from dataclasses import asdict, replace
+from functools import lru_cache
 from pathlib import Path
 from threading import RLock
 
@@ -24,6 +25,15 @@ from app.services.personal_policy import ProductFacts
 FACTS_VERSION = "retained-catalog-facts-v9-ready-baked-bread"
 _CACHE = {}
 _LOCK = RLock()
+
+
+@lru_cache(maxsize=1)
+def _supplier_image_gtins():
+    from grocery_data.app.services.product_declarations import declarations
+
+    return frozenset(row["gtin"].zfill(14) for row in declarations()
+                     if row.get("parser") == "supplier-validoo-exact-gtin-v1"
+                     and row.get("gtin"))
 
 
 def _coop_bread_form_fields(raw):
@@ -337,12 +347,14 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
             r"https://assets\.axfood\.se/image/upload/[^?#]+/([0-9]{13,14})_[A-Za-z0-9]+_s[0-9]+",
             url or "",
         )
-        if match:
+        if match and _supplier_image_gtins():
             try:
-                image_identity = {
-                    **evidence, "gtin": normalize_gtin(match.group(1)).normalized_gtin,
-                    "image_url": url, "method": "checksum_valid_exact_retained_product_image_key",
-                }
+                gtin = normalize_gtin(match.group(1)).normalized_gtin
+                if gtin.zfill(14) in _supplier_image_gtins():
+                    image_identity = {
+                        **evidence, "gtin": gtin,
+                        "image_url": url, "method": "checksum_valid_exact_retained_product_image_key",
+                    }
             except InvalidGtinError:
                 pass
     return replace(
