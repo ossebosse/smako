@@ -86,6 +86,15 @@ def test_component_mutation_cannot_authorize_different_amount():
     ("pita", "Formbröd", False), ("unknown", "Unknown", False),
     ("small_pasta", "Ris", False), ("small_pasta", "Risoni", True),
     ("yogurt", "Grekisk yoghurt", True),
+    ("paprika_powder", "Paprikapulver", False),
+    ("paprika_powder", "Paprikapulver Milt", True),
+    ("paprika_powder", "Paprikapulver Stark", False),
+    ("black_pepper", "Svartpeppar Hel", False),
+    ("black_pepper", "Svartpeppar Malen", True),
+    ("spinach", "Spenat Blad Fryst", False),
+    ("spinach", "Spenat Hackad Fryst", True),
+    ("chili", "Chili Flakes Red Hot", False),
+    ("chili", "Chili Flakes Mild", True),
 ])
 def test_pack_culinary_restrictions(requirement, name, expected):
     # This only asserts the additional restriction; other existing checks still

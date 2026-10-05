@@ -37,6 +37,12 @@ def compatible(keys, product, fact):
             # Authored mild/medium flakes are not arbitrary hot chili. A name
             # synonym alone supplies neither heat nor a substitute quantity.
             return False
+        if key == "paprika_powder" and not re.search(r"\b(?:mild|milt|söt|sweet)\b", text + " " + composition):
+            return False
+        if key == "black_pepper" and not re.search(r"\b(?:malen|finmalen|mald|ground)\b", text + " " + composition):
+            return False
+        if key == "spinach" and not re.search(r"\b(?:hackad|finhackad|hackat|chopped)\b", text + " " + composition):
+            return False
         if key == "peanuts" and ("rostade" not in text + composition or "osaltade" not in text or re.search(r"\bsalt\b", composition)):
             return False
         if key == "gnocchi" and ("potatis" not in composition or re.search(r"fylld|spenat|ost|pesto|sås", text)):
