@@ -200,7 +200,8 @@
     if(personal)intro.append(el("p",`Allergenstatus: ${personal.checks?.allergy==="VERIFIED"?"kontrollerad mot källdeklarationer enligt dina krav":"ingen verifierad allergikontroll begärd"}. Köpstatus och näringsstatus bedöms separat.`,"small"));
     const provenance=design.provenance||{};
     intro.append(el("p",`Innehåll: ${provenance.content_review==="reviewed"?"granskat":"granskningsstatus saknas"}. Maskinell validering: ${provenance.machine_validation==="passed"?"godkänd":"status saknas"}. Provlagning: ${provenance.cooking_test==="not_cooked"?"inte genomförd":provenance.cooking_test||"underlag saknas"}.`,"recipe-quality-note"));
-    if(design.equipment?.length)intro.append(el("p",`Utrustning: ${design.equipment.join(", ")}.`));out.append(intro);
+    if(design.equipment?.length)intro.append(el("p",`Utrustning: ${design.equipment.join(", ")}.`));
+    if(design.content_source?.storage_note){const storage=el("details");storage.append(el("summary","Rester och förvaring"),el("p",design.content_source.storage_note));intro.append(storage);}out.append(intro);
     const ingredients=el("section",null,"complete-recipe-ingredients");ingredients.append(el("h3","Ingredienser för hela receptet"));
     if(presentation.waterOnly)ingredients.append(el("p","Använd de angivna mängderna. Utöver listan tillkommer bara dricksvatten.","recipe-method-note"));
     const componentRows=design.components||[];const mapped=new Set(componentRows.map(c=>c.id));
@@ -210,7 +211,7 @@
         return {...source,...amount,form:source?.form||"process_water"};
       })||(recipe.ingredients||[]).filter(i=>component.id?i.component===component.id:!mapped.has(i.component));if(!rows.length)continue;
       const group=el("div",null,"recipe-component");group.append(el("h4",component.name));const list=el("ul",null,"recipe-ingredients");
-      for(const row of rows){const item=el("li"),name=el("span",row.name);const basis=[ingredientForms[row.form],...(row.product_requirements||[]).map(key=>ingredientRequirements[key])].filter(Boolean);if(basis.length)name.append(el("small",basis.join(" · "),"recipe-ingredient-form"));item.append(name,el("span",`${number(row.quantity)} ${row.unit}`,"ingredient-amount"));list.append(item);}group.append(list);ingredients.append(group);
+      for(const row of rows){const item=el("li"),name=el("span",row.name);const basis=[ingredientForms[row.form],...(row.product_requirements||[]).map(key=>ingredientRequirements[key])].filter(Boolean);if(basis.length)name.append(el("small",basis.join(" · "),"recipe-ingredient-form"));if(row.note)name.append(el("small",row.note,"recipe-ingredient-form"));item.append(name,el("span",`${number(row.quantity)} ${row.unit}`,"ingredient-amount"));list.append(item);}group.append(list);ingredients.append(group);
     }
     ingredients.append(el("p","Mängderna avser receptets använda ingredienser. Samma ingrediens och form räknas en gång även när den används i flera komponenter. Salt, peppar och vatten ingår i listan men inte i det valda antalet.","field-hint"));
     const allocations=(personal?.allocations||[]).filter(a=>slotId && (a.source===slotId||a.slot_id===slotId));

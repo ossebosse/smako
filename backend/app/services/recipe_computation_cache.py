@@ -41,7 +41,7 @@ class ExactRecipeKey:
 class RecipeComputationCache:
     """Owned by one planner; never cache prices, nutrition or user decisions."""
 
-    def __init__(self, *, limit=512):
+    def __init__(self, *, limit=1024):
         self.limit = limit
         self.values = {}
         self._identities = {}

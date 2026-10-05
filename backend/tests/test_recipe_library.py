@@ -11,6 +11,11 @@ from app.services import recipe_library as library
 from pydantic import ValidationError
 
 
+def prior_candidates(*args, **kwargs):
+    """Assertions specific to issued 1.x cooking design, retained unchanged."""
+    return library.candidates(*args, **kwargs, include_supplement=False)
+
+
 def complete(**kwargs):
     return RecipePreferences(mode="complete", **kwargs)
 
@@ -23,11 +28,11 @@ def test_legacy_recipe_and_preferences_remain_additive():
     assert "design" not in stored and "preparation" not in stored
     assert stored["ingredients"] == [{**value["ingredients"][0], "canonical_name": None}]
     assert RecipePreferences().mode == "legacy"
-    assert library.candidates(RecipePreferences()) == []
+    assert prior_candidates(RecipePreferences()) == []
 
 
 def test_all_six_cuisines_have_eight_distinct_original_dishes():
-    bases = library.candidates(complete(adaptation="products"))
+    bases = prior_candidates(complete(adaptation="products"))
     assert len(bases) == 48
     assert Counter(r.design.cuisines[0] for r in bases) == dict.fromkeys(
         ["greek", "italian", "mexican", "indian", "thai", "swedish"], 8)
@@ -43,7 +48,7 @@ def test_all_six_cuisines_have_eight_distinct_original_dishes():
 
 
 def test_every_version_has_consistent_count_time_steps_and_declared_review():
-    recipes = library.candidates(complete())
+    recipes = prior_candidates(complete())
     assert len(recipes) == 104
     for recipe in recipes:
         assert library.validate_recipe_design(recipe)
@@ -58,7 +63,7 @@ def test_every_version_has_consistent_count_time_steps_and_declared_review():
 
 @pytest.mark.parametrize("servings", [1, 2, 4, 6, 12])
 def test_issued_portions_are_exact_reproducible_versions(servings):
-    recipes = library.candidates(complete(max_minutes=180), servings)
+    recipes = prior_candidates(complete(max_minutes=180), servings)
     assert len(recipes) == 104
     for recipe in recipes:
         assert recipe.servings == servings
@@ -67,16 +72,16 @@ def test_issued_portions_are_exact_reproducible_versions(servings):
 
 
 def test_user_constraints_filter_without_silent_relaxation():
-    recipes = library.candidates(complete(cuisines=("greek", "mexican"), allow_fish=False,
+    recipes = prior_candidates(complete(cuisines=("greek", "mexican"), allow_fish=False,
                                         max_minutes=35, min_ingredients=13, max_ingredients=14))
     assert recipes
     assert all(r.design.cuisines[0] in {"greek", "mexican"} and not r.design.fish
                and r.design.estimated_minutes <= 35 and 13 <= r.design.ingredient_count <= 14
                for r in recipes)
-    assert not library.candidates(complete(min_ingredients=3, max_ingredients=4))
-    assert not library.candidates(complete(max_minutes=10))
+    assert not prior_candidates(complete(min_ingredients=3, max_ingredients=4))
+    assert not prior_candidates(complete(max_minutes=10))
     assert all(r.design.variant_id == "base"
-               for r in library.candidates(complete(adaptation="products")))
+               for r in prior_candidates(complete(adaptation="products")))
 
 
 def test_exact_ingredient_identity_counts_once_across_components():
@@ -93,7 +98,7 @@ def test_exact_ingredient_identity_counts_once_across_components():
 
 @pytest.mark.parametrize("kind", ["quantity", "instructions", "form", "identity", "time", "requirements"])
 def test_untrusted_self_signed_edit_cannot_borrow_approved_preparation(kind):
-    recipe = library.candidates(complete())[0]
+    recipe = prior_candidates(complete())[0]
     raw = recipe.model_dump(mode="json")
     if kind == "quantity":
         raw["ingredients"][0]["quantity"] += 10
@@ -120,9 +125,9 @@ def test_untrusted_self_signed_edit_cannot_borrow_approved_preparation(kind):
 
 
 def test_candidates_cannot_mutate_the_cached_registry():
-    first = library.candidates(complete())
+    first = prior_candidates(complete())
     first[0].ingredients.clear()
-    second = library.candidates(complete())
+    second = prior_candidates(complete())
     assert second[0].ingredients
     assert library.validate_recipe_design(second[0])
 
@@ -130,8 +135,8 @@ def test_candidates_cannot_mutate_the_cached_registry():
 def test_file_checksum_and_quality_are_explicit():
     assert hashlib.sha256(library.LIBRARY_PATH.read_bytes()).hexdigest() == library.CONTENT_SHA256
     summary = library.library_summary()
-    assert summary["base_recipes"] == 48
-    assert summary["approved_variants"] == 56
+    assert summary["base_recipes"] == 62
+    assert summary["approved_variants"] == 90
     assert summary["cooking_test"] == "not_cooked"
     assert "planner" in summary["purchase_qualification"]
     assert json.dumps(summary)
@@ -143,7 +148,7 @@ def test_prior_issued_versions_remain_valid_but_new_candidates_use_current_conte
     archived = Recipe.model_validate(previous)
     assert archived.design.version == "1.0.0"
     assert library.validate_recipe_design(archived)
-    assert {r.design.version for r in library.candidates(complete())} == {"1.1.0", "1.3.0", "1.4.0"}
+    assert {r.design.version for r in prior_candidates(complete())} == {"1.1.0", "1.3.0", "1.4.0"}
 
 
 def test_original_96_recipe_objects_are_unchanged_and_archived():
@@ -166,10 +171,10 @@ def test_original_96_recipe_objects_are_unchanged_and_archived():
 
 
 def test_approved_culinary_variations_change_instructions_count_and_flavor_deliberately():
-    approved = [r for r in library.candidates(complete()) if r.design.variant_id not in {"base", "protein"}]
+    approved = [r for r in prior_candidates(complete()) if r.design.variant_id not in {"base", "protein"}]
     assert len(approved) == 8
     assert len({r.design.base_id for r in approved}) == 4
-    assert all(r.design.variant_id == "base" for r in library.candidates(complete(adaptation="products")))
+    assert all(r.design.variant_id == "base" for r in prior_candidates(complete(adaptation="products")))
     for recipe in approved:
         by_name = {i.name: i for i in recipe.ingredients}
         instructions = " ".join(recipe.instructions)
@@ -193,7 +198,7 @@ def test_approved_culinary_variations_change_instructions_count_and_flavor_delib
 
 
 def test_cured_ingredients_need_drained_evidence_and_frozen_corn_is_heated():
-    for recipe in library.candidates(complete()):
+    for recipe in prior_candidates(complete()):
         for ingredient in recipe.ingredients:
             if ingredient.name in {"oliver", "kapris"}:
                 assert ingredient.form == "preserved_drained"
@@ -205,16 +210,16 @@ def test_cured_ingredients_need_drained_evidence_and_frozen_corn_is_heated():
 
 
 def test_complex_bakes_are_not_presented_as_forty_minute_dinners():
-    quick = library.candidates(complete(max_minutes=40))
+    quick = prior_candidates(complete(max_minutes=40))
     assert not any(r.design.base_id.endswith(("lentil-moussaka", "stuffed-peppers", "bean-enchiladas"))
                    for r in quick)
-    all_recipes = library.candidates(complete())
+    all_recipes = prior_candidates(complete())
     assert any(r.design.base_id.endswith("lentil-moussaka") for r in all_recipes)
 
 
 def test_four_portions_include_additional_preparation_time():
-    two = library.candidates(complete(), 2)[0]
-    four = library.candidates(complete(), 4)[0]
+    two = prior_candidates(complete(), 2)[0]
+    four = prior_candidates(complete(), 4)[0]
     assert four.design.estimated_minutes == two.design.estimated_minutes + 3
     assert four.ingredients[0].quantity == 2 * two.ingredients[0].quantity
     assert four.design.content_sha256 != two.design.content_sha256
@@ -223,7 +228,7 @@ def test_four_portions_include_additional_preparation_time():
 def test_parallel_cooking_finishes_before_plating_and_rice_is_explicit():
     rice_bases = {"smako-indian-tofu-dal", "smako-indian-fish-coconut",
                   "smako-thai-coconut-fish-soup", "smako-thai-chicken-coconut-curry"}
-    for recipe in library.candidates(complete()):
+    for recipe in prior_candidates(complete()):
         steps = {s.id: s for s in recipe.design.steps}
         final = recipe.design.steps[-1]
         assert set(final.depends_on) == set(steps) - {final.id}
@@ -251,18 +256,18 @@ def test_parallel_cooking_finishes_before_plating_and_rice_is_explicit():
 
 
 def test_frozen_spinach_heating_has_margin_and_strict_time_filter_excludes_it():
-    for recipe in library.candidates(complete()):
+    for recipe in prior_candidates(complete()):
         if recipe.design.base_id in {"smako-indian-tofu-dal", "smako-indian-bean-potato-curry"}:
             assert recipe.design.estimated_minutes == 44
             assert "5–7 minuter" in " ".join(recipe.instructions)
-    quick = library.candidates(complete(max_minutes=40))
+    quick = prior_candidates(complete(max_minutes=40))
     assert not any(r.design.base_id in {"smako-indian-tofu-dal", "smako-indian-bean-potato-curry"}
                    for r in quick)
 
 
 @pytest.mark.parametrize("servings,expected_bases", [(2, 12), (4, 4)])
 def test_mixed_greek_mexican_content_limit_at_forty_minutes_is_not_relaxed(servings, expected_bases):
-    recipes = library.candidates(complete(cuisines=("greek", "mexican"), max_minutes=40), servings)
+    recipes = prior_candidates(complete(cuisines=("greek", "mexican"), max_minutes=40), servings)
     # Content availability only: actual product, nutrition and basket qualification
     # is deliberately tested through the planner on a real snapshot elsewhere.
     assert len({r.design.base_id for r in recipes}) == expected_bases
@@ -272,12 +277,12 @@ def test_mixed_greek_mexican_content_limit_at_forty_minutes_is_not_relaxed(servi
 
 def test_four_person_mixed_content_needs_explicit_forty_three_minute_choice():
     for minutes, expected in [(42, 4), (43, 12), (45, 12)]:
-        recipes = library.candidates(complete(cuisines=("greek", "mexican"), max_minutes=minutes), 4)
+        recipes = prior_candidates(complete(cuisines=("greek", "mexican"), max_minutes=minutes), 4)
         assert len({r.design.base_id for r in recipes}) == expected
 
 
 def test_larger_portion_allowance_is_not_assigned_to_new_auxiliary_timer():
-    for recipe in library.candidates(complete(max_minutes=180), 6):
+    for recipe in prior_candidates(complete(max_minutes=180), 6):
         if recipe.design.version in {"1.3.0", "1.4.0"}:
             for step in recipe.design.steps:
                 if step.id in {"rice", "prebake"}:
@@ -298,7 +303,7 @@ def test_equipment_revision_preserves_every_previously_issued_meal_and_timing():
 
 
 def test_secondary_cookware_exists_for_simultaneous_soup_and_bread_components():
-    for recipe in library.candidates(complete(max_minutes=180)):
+    for recipe in prior_candidates(complete(max_minutes=180)):
         base = recipe.design.base_id.removeprefix('smako-')
         tools = ' '.join(recipe.design.equipment)
         if base in {'mexican-corn-soup', 'swedish-green-pea-soup'}:

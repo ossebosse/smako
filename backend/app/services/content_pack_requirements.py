@@ -33,6 +33,10 @@ def compatible(keys, product, fact):
             return False
         if key == "mustard" and re.search(r"grov|skånsk|kornig", text):
             return False
+        if key == "chili" and not re.search(r"\b(?:mild|medium|medel)\b", text + " " + composition):
+            # Authored mild/medium flakes are not arbitrary hot chili. A name
+            # synonym alone supplies neither heat nor a substitute quantity.
+            return False
         if key == "peanuts" and ("rostade" not in text + composition or "osaltade" not in text or re.search(r"\bsalt\b", composition)):
             return False
         if key == "gnocchi" and ("potatis" not in composition or re.search(r"fylld|spenat|ost|pesto|sås", text)):
@@ -57,7 +61,7 @@ def additional_whole_identity(canonical, form, label, composition):
         "svartpeppar": ("dry", r"(?:malen )?svartpeppar(?: malen| finmalen| burk)*"),
         "rökt paprikapulver": ("dry", r"(?:rökt paprikapulver|paprikapulver rökt)(?: milt| mild| burk)*"),
         "malen koriander": ("dry", r"(?:malen koriander|koriander malen)(?: burk)*"),
-        "chiliflakes": ("dry", r"chiliflakes(?: mild| medium| burk)*"),
+        "chiliflakes": ("dry", r"(?:chiliflakes|chili flakes|chiliflingor)(?: mild| medium| medel| burk| påse| eko)*"),
         "strösocker": ("dry", r"strösocker(?: ekologiskt| eko)*"),
         "äpple": ("raw_edible", r"(?:äpple|äpplen)(?: röda| gröna| svenska| ekologiska| klass [12])*"),
         "jordnötter": ("as_sold", r"(?:rostade )?jordnötter(?: rostade| osaltade)*"),
@@ -67,7 +71,4 @@ def additional_whole_identity(canonical, form, label, composition):
     entry = patterns.get(canonical)
     if entry is None or form != entry[0] or not re.fullmatch(entry[1], label):
         return False
-    if (canonical in {"svartpeppar", "rökt paprikapulver", "malen koriander", "chiliflakes"}
-            and re.search(r"\b(?:salt|socker|lök|vitlök|senap|selleri|olja)\b", composition.split("kan innehålla")[0])):
-        return False
-    return True
+    return not (canonical in {"svartpeppar", "rökt paprikapulver", "malen koriander", "chiliflakes"} and re.search(r"\b(?:salt|socker|lök|vitlök|senap|selleri|olja)\b", composition.split("kan innehålla")[0]))

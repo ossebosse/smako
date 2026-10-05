@@ -80,6 +80,24 @@ METHOD_NOTE = ("Näringen uppskattas från de använda ätbara ingredienserna f�
                "Mätt retention och tillagad vikt saknas. Förluster till kokvatten, panna och redskap är inte uppmätta. "
                "Följ receptets anvisning om avhällning; lägg inte till olja eller mat utöver angivna mängder. "
                "Dricksvatten till tillagning är en processuppgift, inte en inköpsvara.")
+NEW_DISH_FAMILIES = {"GR02": "pasta", "GR04": "ugn", "IT01": "panna", "IT02": "pasta",
+    "IT03": "pastasallad", "IT04": "pizza", "MX01": "tostada", "MX02": "potatisrätt",
+    "MX03": "quesadilla", "IN03": "pasta", "IN04": "ugn", "TH01": "nudelsallad",
+    "SE01": "pannkaka", "SE02": "gratäng"}
+FLAVORS = {
+    "GR01": ["oregano", "citron", "vitlök"], "GR02": ["tomat", "oregano", "citron"],
+    "GR03": ["citron", "dill", "oregano"], "GR04": ["spiskummin", "citron", "persilja"],
+    "IT01": ["svamp", "citron", "persilja"], "IT02": ["tomat", "oliver", "oregano"],
+    "IT03": ["citron", "senap", "oregano"], "IT04": ["svamp", "spenat", "oregano"],
+    "MX01": ["lime", "spiskummin", "rökt paprika"], "MX02": ["rökt paprika", "lime", "spiskummin"],
+    "MX03": ["svamp", "lime", "spiskummin"], "MX04": ["tomat", "rökt paprika", "lime"],
+    "IN01": ["tomat", "ingefära", "spiskummin"], "IN02": ["tomat", "ingefära", "gurkmeja"],
+    "IN03": ["tomat", "ingefära", "spiskummin"], "IN04": ["kokos", "citron", "spiskummin"],
+    "TH01": ["lime", "jordnöt", "soja"], "TH02": ["kokos", "lime", "basilika"],
+    "TH03": ["basilika", "lime", "soja"], "TH04": ["ingefära", "soja", "lime"],
+    "SE01": ["spenat", "senap", "citron"], "SE02": ["dill", "senap", "citron"],
+    "SE03": ["svamp", "senap", "dill"], "SE04": ["äpple", "senap", "dill"],
+}
 
 
 def build(priority=2):
@@ -87,6 +105,8 @@ def build(priority=2):
     assert hashlib.sha256(raw).hexdigest() == SOURCE_SHA256
     source = json.loads(raw)
     catalog = source["ingredient_catalog"]
+    old = {r["design"]["base_id"]: r["design"] for r in json.loads((DATA / "complete-dinners-v1.json").read_bytes())["recipes"]
+           if r["design"]["variant_id"] == "base"}
     assert set(catalog) == set(NAMES)
     result = []
     for r in sorted(source["recipe_versions"], key=lambda r: (r["priority"], r["family_proposal_id"], r["variant_kind"] != "base_proposal")):
@@ -135,13 +155,13 @@ def build(priority=2):
                       {"10 ml": 10} if r["proposal_id"] == "IT03-tofu" and number == 3 else
                       {"50 ml": 50} if family == "SE02" and number == 3 else None)
             steps.append({"id": s["step_id"], "text": text.strip(), "ingredient_keys": keys, "depends_on": s["depends_on"],
-                              "duration_minutes": s["duration_minutes_estimate"], "scalable_amounts": tokens})
+                              "duration_minutes": s["duration_minutes_estimate"], "scalable_amounts": tuple(tokens.items()) if tokens else None})
         primary = NAMES[r["primary_protein_keys"][0]]
         slug = r["proposal_id"].lower()
         design = {"base_id": base_id, "version": "2.0.0", "variant_id": slug if overlap or r["variant_kind"] != "base_proposal" else "base",
-            "cuisines": [cuisine], "family": base_id.removeprefix("smako-"), "primary_ingredient": primary, "method": method,
+            "cuisines": [cuisine], "family": old[base_id]["family"] if overlap else NEW_DISH_FAMILIES[family], "primary_ingredient": primary, "method": method,
             "side": "potatis" if r["proposal_id"] == "IT01-potatis" else side,
-            "flavor_profile": r["culinary_character_sv"], "components": components, "steps": steps,
+            "flavor_profile": FLAVORS[family], "components": components, "steps": steps,
             "estimated_minutes": r["time"]["total_minutes_estimate"], "equipment": r["equipment_sv"],
             "vegetarian": r["diet_intent"] == "vegetarian_candidate_requires_product_check", "fish": bool(set(totals) & {"cod", "salmon", "tuna"}),
             "ingredient_count": r["ingredient_count_excluding_salt_pepper_water"],
@@ -149,9 +169,12 @@ def build(priority=2):
             "content_sha256": "0" * 64, "content_source": {"pack_id": source["pack_id"], "proposal_id": r["proposal_id"],
                 "sha256": SOURCE_SHA256, "priority": r["priority"], "timing_basis": "authored_estimate_coarse_dependencies",
                 "active_minutes": r["time"]["active_minutes_estimate"], "method_note": METHOD_NOTE,
-                "scaling_note": r["scaling_rule_sv"], "safety_sources": [source["sources"][s]["url"] for k in r["safety_profile_ids"] for s in source["shared_safety_profiles"][k]["source_ids"]]}}
+                "scaling_note": r["scaling_rule_sv"], "safety_sources": [source["sources"][s]["url"] for k in r["safety_profile_ids"] for s in source["shared_safety_profiles"][k]["source_ids"]],
+                "storage_note": source["shared_safety_profiles"]["leftovers"]["text_sv"]}}
         if isinstance(design["flavor_profile"], str):
             design["flavor_profile"] = [design["flavor_profile"]]
+        if r["proposal_id"] == "SE01-svamp":
+            design["flavor_profile"] = ["svamp", "senap", "citron"]
         recipe = Recipe.model_validate({"name": r["name_sv"], "servings": 2, "ingredients": ingredients,
                                             "instructions": [s["text"] for s in steps], "design": design})
         digest = content_hash(recipe)

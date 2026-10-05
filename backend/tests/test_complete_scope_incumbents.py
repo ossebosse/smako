@@ -69,6 +69,38 @@ def planner(request, universe, facts, pantry):
                            pantry, facts=facts, now=NOW)
 
 
+@pytest.mark.parametrize("budget_stop", [False, True])
+def test_content_expansion_retains_real_revalidated_checkout(monkeypatch, budget_stop):
+    request, universe, facts, pantry = fixture()
+    baseline = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe,
+        pantry, facts=facts, now=NOW, include_content_pack=False).create()
+    expanded = planner(request, universe, facts, pantry)
+    original_candidates = expanded._candidates
+
+    def expanded_pool(meal):
+        rows = original_candidates(meal)
+        # Simulate the expansion marker. Only this search is adversarial; the
+        # old pool, real quantities, source qualification and audit stay real.
+        expanded._supplement_qualified = True
+        return rows
+
+    def proposal(options, *, evaluate, accepts, **kwargs):
+        if budget_stop:
+            raise PolicyConflict("Synthetic expanded search budget stop", code="SEARCH_BLOCKED")
+        chosen = [next(s for s in options[0] if s.recipe.design.variant_id == "protein")]
+        assert accepts(chosen, final=True)
+        return chosen, evaluate(chosen, final=True)
+
+    monkeypatch.setattr(expanded, "_candidates", expanded_pool)
+    monkeypatch.setattr(expanded.service.menu_optimizer, "optimize_slots", proposal)
+    result = expanded.create()
+    assert result.optimized_basket.stores == baseline.optimized_basket.stores
+    assert result.optimized_basket.total == baseline.optimized_basket.total
+    assert result.personal.allocations == baseline.personal.allocations
+    assert result.personal.checks["scope_comparison"]["selected_scope"]["library"] == "before_content_pack"
+    assert result.personal.checks["checkout_audit"]["passed"]
+
+
 @pytest.mark.parametrize("expansion", ["exact_to_estimated", "one_to_two_stores"])
 @pytest.mark.parametrize("wide_result", ["more_expensive", "budget_stop"])
 def test_complete_cheapest_keeps_audited_narrow_incumbent_under_wider_request(monkeypatch, tmp_path, expansion, wide_result):

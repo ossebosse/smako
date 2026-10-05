@@ -18,6 +18,7 @@ from grocery_data.app.domain.recipe import RECIPE_RELEVANT_INGREDIENTS
 # are not always interchangeable (nötfärs/blandfärs, smör/margarin) remain
 # distinct canonical ingredients.
 CANONICAL_ALIASES: dict[str, tuple[str, ...]] = {
+    "chiliflakes": ("chiliflakes", "chili flakes", "chiliflingor"),
     # Real Coop source: parent "Vetemjöl", exact child "Kärnvetemjöl".
     # Do not collapse the ambiguous generic "mjöl" or other flour identities.
     "vetemjöl": ("vetemjöl", "kärnvetemjöl"),

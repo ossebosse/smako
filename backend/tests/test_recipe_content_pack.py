@@ -5,12 +5,16 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-
-from app.models.recipe_preferences import RecipePreferences
 from app.models.recipe import Recipe
+from app.models.recipe_preferences import RecipePreferences
 from app.services.content_pack_requirements import compatible
 from app.services.recipe_library import (
-    LIBRARY_PATH, _registered, _structural_check, candidates, ingredient_key, validate_recipe_design,
+    LIBRARY_PATH,
+    _registered,
+    _structural_check,
+    candidates,
+    ingredient_key,
+    validate_recipe_design,
 )
 
 ROOT = Path(__file__).parents[2]
@@ -35,12 +39,21 @@ def test_deterministic_import_preserves_every_amount_and_own_instruction():
             assert actual.depends_on == tuple(expected["depends_on"])
         assert recipe.design.ingredient_count == original["ingredient_count_excluding_salt_pepper_water"]
         assert recipe.design.provenance.cooking_test == "not_cooked"
+        assert isinstance(hash(recipe.design), int)  # bounded calculation caches
 
 
 def test_old_104_recipes_unchanged_and_registered():
     old = json.loads(LIBRARY_PATH.read_text(encoding="utf8"))["recipes"]
     assert [r.model_dump(mode="json") for r in _registered() if r.design.content_source is None] == [Recipe.model_validate(r).model_dump(mode="json") for r in old]
     assert len(old) == 104
+
+
+def test_overlap_variants_keep_the_existing_diversity_family():
+    original = {r.design.base_id: r.design.family for r in _registered() if not r.design.content_source}
+    for r in _registered():
+        if r.design.content_source and r.design.base_id in original:
+            assert r.design.variant_id != "base"
+            assert r.design.family == original[r.design.base_id]
 
 
 @pytest.mark.parametrize("servings", [1, 2, 4, 6, 12])

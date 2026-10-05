@@ -1443,6 +1443,13 @@ def has_semantic_rule(canonical_name: str) -> bool:
 # from the historical dinner taxonomy. They cannot match a flavour inside a
 # cheese/chip/ready meal. Recipe input-form guards remain independently binding.
 _CULINARY_LABELS = {
+    "svartpeppar": (r"svartpeppar", "single_spice"),
+    "rökt paprikapulver": (r"(?:rokt paprikapulver|paprikapulver rokt)", "single_spice"),
+    "malen koriander": (r"(?:malen koriander|koriander malen)", "single_spice"),
+    "chiliflakes": (r"(?:chiliflakes|chili flakes|chiliflingor)", "single_spice"),
+    "strösocker": (r"strosocker", "sugar"),
+    "jordnötter": (r"(?:rostade )?jordnotter(?: rostade| osaltade)*", "nuts"),
+    "gnocchi": (r"(?:potatisgnocchi|gnocchi)(?: di patate| potatis| naturell| original)*", "pasta"),
     "spiskummin": (r"spiskummin", "single_spice"),
     "cayennepeppar": (r"cayennepeppar", "single_spice"),
     "kanel": (r"kanel(?: cassia| ceylon)?", "single_spice"),

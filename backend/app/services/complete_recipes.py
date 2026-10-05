@@ -194,10 +194,10 @@ def product_form_compatible(recipe, name, product, fact):
     composition = " ".join(fact.ingredients).casefold() if fact else ""
     if fact and fact.conflicts:
         return False
-    if not _whole_food_identity(canonical, form, product, fact):
-        return False
     ingredient = next((i for i in getattr(recipe, "ingredients", ()) if canonicalize_ingredient_name(i.name) == canonical), None)
     requirements = getattr(ingredient, "product_requirements", None) or ()
+    if not _whole_food_identity(canonical, form, product, fact, requirements):
+        return False
     if not _requirements_compatible(canonical, requirements, product, fact):
         return False
     if form == "raw_edible" and re.search(r"torkad|pulver|granulat|kokt|grillad|stekt|panerad|nugget|rökt|gravad|rimmad|marinerad", text):
@@ -301,7 +301,7 @@ def _retained_classification(product, fact, value, *, raw_fields=None):
                for source in fact.field_sources.get("product_classification", ()))
 
 
-def _whole_food_identity(canonical, form, product, fact):
+def _whole_food_identity(canonical, form, product, fact, requirements=()):
     """Whole-product label and declared form, never a substring suggestion.
 
     This is an additional culinary filter after source identity retrieval. The
@@ -400,12 +400,14 @@ def _whole_food_identity(canonical, form, product, fact):
         return bool(re.fullmatch(staples[canonical], label))
     grains = {
         "ris": r"(?:ris|jasminris|basmatiris|långkornigt ris|parboiled ris)",
-        "pasta": r"(?:pasta|spaghetti|spagetti|penne|fusilli|makaroner|tagliatelle|rigatoni|farfalle|linguine|orecchiette|risoni|kritharaki|orzo)",
+        "pasta": r"(?:pasta|spaghetti|spagetti|penne|fusilli|makaroner|tagliatelle|rigatoni|farfalle|linguine|orecchiette)",
         "nudlar": r"(?:äggnudlar|nudlar|risnudlar)", "couscous": r"couscous",
         "linser": r"(?:röda linser|linser röda|linser)", "vetemjöl": r"(?:vetemjöl|kärnvetemjöl)",
         "havregryn": r"(?:havregryn|fina havregryn)", "ströbröd": r"(?:ströbröd|panko|panko ströbröd)",
     }
     if canonical in grains:
+        if canonical == "pasta" and "pack:small_pasta" in requirements:
+            return form == "dry" and simple(r"(?:risoni|kritharaki|orzo)", "original|durumvete|durum")
         return form == "dry" and simple(grains[canonical], "fullkorn|fullkorns|glutenfri|glutenfritt|snabb|original|durumvete|durum|malet|fint|finmalet|special|siktat|torkade|delade|skalade|split")
     legumes = {"kikärtor": "kikärtor|kikärter", "kidneybönor": "kidneybönor|röda kidneybönor", "svarta bönor": "svarta bönor", "bönor": "bönor|vita bönor|stora vita bönor|vita bönor stora", "majs": "majs|majskorn|sockermajs", "ärtor": "ärtor|gröna ärtor"}
     if canonical in legumes:

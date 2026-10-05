@@ -64,6 +64,11 @@ def test_existing_personal_limits_are_not_lowered_or_opted_in():
 
 
 def test_distinct_content_shortage_precedes_product_search_and_suggests_actual_time(monkeypatch):
+    # Regression of the issued 1.x pool. The expanded library can satisfy this
+    # content count, which is not a promise of product/nutrition qualification.
+    from app.services import recipe_library
+    original_candidates = recipe_library.candidates
+    monkeypatch.setattr(recipe_library, "candidates", lambda *args, **kwargs: original_candidates(*args, include_supplement=False))
     from app.models.personal import TasteProfile
     from app.services.complete_recipes import validate_content_capacity
     from app.services.personal_planner import PersonalPlanner
@@ -104,7 +109,7 @@ def test_content_capacity_honors_merged_diet_and_hard_exclusions():
     from app.services.recipe_library import candidates
 
     prefs = RecipePreferences(mode="complete", cuisines=["indian"])
-    recipes = candidates(prefs, 2)
+    recipes = candidates(prefs, 2, include_supplement=False)
     with pytest.raises(PolicyConflict, match="4 distinkta grundrätter"):
         validate_content_capacity(prefs, MealSettings(count=5, diet="vegetarian"), TasteProfile(), recipes)
     merged = merged_profile(TasteProfile(exclusions=["lök"]), TasteProfile(allergies=["mjölk"]))
@@ -242,7 +247,7 @@ def test_complete_candidates_use_actual_product_nutrition_not_legacy_coverage(mo
 
     prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products", min_protein_g=1)
     recipe = recipe_library.candidates(prefs, 2)[0]
-    monkeypatch.setattr(recipe_library, "candidates", lambda *args: [recipe])
+    monkeypatch.setattr(recipe_library, "candidates", lambda *args, **kwargs: [recipe])
     products = [product(i.name, max(100, i.quantity), i.unit, 10).model_copy(update={
         "category": "Kryddor" if i.form == "dry" else "Frukt & grönsaker" if i.form == "raw_edible" else "Mat",
         "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name + " Malen" if i.name == "spiskummin" else i.name,

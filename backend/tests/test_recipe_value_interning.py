@@ -73,7 +73,8 @@ def test_every_frozen_design_field_changes_key_even_with_reused_content_sha(fiel
         "estimated_minutes": 179, "equipment": (*design.equipment, "changed"),
         "vegetarian": not design.vegetarian, "fish": not design.fish,
         "ingredient_count": 39, "provenance": design.provenance.model_copy(update={"notes": "changed"}),
-        "content_sha256": "0" * 64}
+        "content_sha256": "0" * 64,
+        "content_source": next(r.design.content_source for r in candidates(RecipePreferences(mode="complete")) if r.design.content_source)}
     assert set(updates) == set(RecipeDesign.model_fields)
     assert updates[field] != getattr(design, field)
     changed = recipe.model_copy(update={"design": design.model_copy(update={field: updates[field]})})
@@ -98,7 +99,7 @@ def test_forms_equal_original_comprehension_for_all_104_recipes_and_missing_name
         for name in [i.name for i in recipe.ingredients] + ["unknown"]:
             canonical = canonicalize_ingredient_name(name)
             assert cache.forms_for(recipe, canonical) == old_forms(recipe, canonical)
-    assert len(cache._forms) == 104
+    assert len(cache._forms) == len(recipes) == 152
     assert not cache.values  # Does not consume the four computations' 416 slots.
 
 

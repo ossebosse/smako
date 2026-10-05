@@ -1,6 +1,7 @@
 """First actual stop per authored recipe on frozen public sources, normal engine."""
 import dataclasses
 import json
+import os
 import sys
 import time
 from datetime import datetime
@@ -37,10 +38,14 @@ def main():
               'stage': json.loads(Path('/evaluation/stage.json').read_text()),
               'selected_bases': sorted(selected_bases)}
     for recipe in candidates(RecipePreferences(mode='complete'), servings=2):
+        if os.getenv('CONTENT_PACK_ONLY') == '1' and not getattr(recipe.design, 'content_source', None):
+            continue
         if selected_bases and recipe.design.base_id not in selected_bases:
             continue
-        record = {'id': recipe.design.base_id, 'variant': recipe.design.variant_id, 'name': recipe.name,
+        record = {'id': recipe.design.base_id, 'version': recipe.design.version, 'variant': recipe.design.variant_id, 'name': recipe.name,
                   'cuisine': recipe.design.cuisines[0], 'ingredients': recipe.design.ingredient_count}
+        record['recipe'] = recipe.model_dump(mode='json')
+        record['proposal_id'] = recipe.design.content_source.proposal_id if getattr(recipe.design, 'content_source', None) else None
         started = time.perf_counter()
         with activate_performance_trace() as trace:
             try:
@@ -51,13 +56,14 @@ def main():
                               basket=result['basket'].model_dump(mode='json'))
                 record['checks'] = result.get('checks')
                 record['audit'] = result['audit'].model_dump(mode='json')
+                record['nutrition'] = result.get('nutrition')
             except ValueError as exc:
                 record.update(status='stopped', reason=str(exc), stage=getattr(exc, 'stage', None), code=getattr(exc, 'code', None))
         record['seconds'] = time.perf_counter() - started
         record['trace'] = dataclasses.asdict(trace.snapshot())
         report['recipes'].append(record)
         (root / 'qualification.json').write_text(json.dumps(report, ensure_ascii=False, indent=2, default=str))
-        print(json.dumps({k: v for k, v in record.items() if k not in {'basket', 'trace', 'nutrition', 'checks', 'audit'}}, ensure_ascii=False), flush=True)
+        print(json.dumps({k: v for k, v in record.items() if k not in {'recipe', 'basket', 'trace', 'nutrition', 'checks', 'audit'}}, ensure_ascii=False), flush=True)
 
 
 if __name__ == '__main__':

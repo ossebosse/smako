@@ -73,7 +73,7 @@ def test_changed_nested_recipe_values_cannot_reuse_old_computation(change):
 
 def test_bound_profiles_and_pure_ids_equal_uncached_for_all_issued_candidates():
     recipes = candidates(RecipePreferences(mode="complete"), 2)
-    assert len(recipes) == 104
+    assert len(recipes) == 152
     cache = RecipeComputationCache()
     optimizer = MenuOptimizer()
     constraints = DiversityConstraints(target_recipe_count=5)

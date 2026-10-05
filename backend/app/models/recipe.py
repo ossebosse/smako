@@ -27,6 +27,7 @@ class RecipeContentSource(BaseModel):
     method_note: str
     scaling_note: str
     safety_sources: tuple[str, ...]
+    storage_note: str
 
 
 class RecipeComponent(BaseModel):
@@ -46,7 +47,7 @@ class RecipeStep(BaseModel):
     parallel_group: str | None = None
     # Exact authored tokens, explicitly reviewed by the importer. Never scale
     # temperatures, durations or dimensions by searching arbitrary numbers.
-    scalable_amounts: dict[str, float] | None = Field(default=None, exclude_if=lambda v: v is None)
+    scalable_amounts: tuple[tuple[str, float], ...] | None = Field(default=None, exclude_if=lambda v: v is None)
 
 
 class RecipeProvenance(BaseModel):

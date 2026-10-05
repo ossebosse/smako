@@ -21,7 +21,7 @@ LIBRARY_PATH = Path(__file__).parents[1] / "data/recipes/complete-dinners-v1.jso
 # Updated only together with reviewed, versioned source content.
 CONTENT_SHA256 = "1c623aa7e4a8e8f9cde292807198c59d6f191f0dd3030462a254893995e7e90c"
 SUPPLEMENT_PATH = LIBRARY_PATH.parent / "content-pack-20261004/registered.json"
-SUPPLEMENT_SHA256 = "eb2c33f75a78037f2607100f6d4d2f8a544a39e9ac8922cdeba28fe11a50cbbc"
+SUPPLEMENT_SHA256 = "d1c5325453bf1d7583658db4a069623777902846c89d7935a80289abc4c2e20c"
 COUNT_EXEMPT = frozenset({"salt", "svartpeppar", "peppar", "vatten"})
 ARCHIVED_CONTENT = {
     "complete-dinners-1.3.0.json": "27d53cb050248c826285b445deac0c6e1a87f9a1182fe39b881b189ab3a136b8",
@@ -160,7 +160,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
         steps = []
         for step in result.design.steps:
             text = step.text
-            for token, quantity in (step.scalable_amounts or {}).items():
+            for token, quantity in (step.scalable_amounts or ()):
                 text = text.replace(token, f"{quantity * factor:g} ml")
             if servings != 2:
                 for phrase in ("två portioner", "två djupa tallrikar", "två tallrikar"):

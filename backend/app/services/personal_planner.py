@@ -110,10 +110,13 @@ class PersonalPlanner:
         cooked_weights=None,
         now=None,
         nutrition_search_limit=256,
+        include_content_pack=True,
     ):
         if not 1 <= nutrition_search_limit <= 65536:
             raise ValueError("Invalid diagnostic nutrition search limit")
         self.nutrition_search_limit = nutrition_search_limit
+        self.include_content_pack = include_content_pack
+        self._supplement_qualified = False
         self.timings = defaultdict(float)
         from app.services.complete_recipes import enabled, prepare_request
         request = prepare_request(request, settings, pantry_revision=state["revision"])
@@ -1987,7 +1990,8 @@ class PersonalPlanner:
         with performance_span("personal_candidate_generation"):
             if self.complete and meal.meal_type == "dinner":
                 from app.services.recipe_library import candidates as library_candidates
-                candidates = library_candidates(self.request.recipe_preferences, meal.servings)
+                candidates = library_candidates(self.request.recipe_preferences, meal.servings,
+                                                include_supplement=self.include_content_pack)
             else:
                 generator = self.service.candidate_generator or DeterministicRecipeCandidateGenerator()
                 candidates = generator.generate_for_meal_type(
@@ -2064,6 +2068,8 @@ class PersonalPlanner:
                     )
                     self.diagnostics.singleton_passed += 1
                 valid.append(recipe)
+                if recipe.design and recipe.design.content_source:
+                    self._supplement_qualified = True
             except (PolicyConflict, ValueError) as exc:
                 self.product_trace.recipe(recipe, getattr(exc, "stage", None) or stage, str(exc))
                 self.diagnostics.reject(getattr(exc, "stage", None) or stage, recipe, str(exc))
@@ -2102,14 +2108,35 @@ class PersonalPlanner:
                 try:
                     candidate = PersonalPlanner(comparison_request, self.settings, self.prepared, self.state,
                         plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
-                        nutrition_search_limit=self.nutrition_search_limit).create(_compare_scopes=False)
+                        nutrition_search_limit=self.nutrition_search_limit,
+                        include_content_pack=self.include_content_pack).create(_compare_scopes=False)
                 except (ValueError, IncompleteBasketError):
                     continue
                 incumbents.append(candidate)
                 incumbent_scopes[id(candidate)] = {"max_stores": cap, "purchase_planning_mode": purchase_mode}
+        def retain_library_comparison():
+            # A larger candidate pool can reorder bounded search. Re-run the
+            # exact earlier pool through this same planner, same data/clock,
+            # private state and budget. Never load another owner's saved plan.
+            # If no added recipe qualifies, the old ordered pool is identical
+            # and repeating its full search would have no benefit.
+            if (not self.complete or not self.include_content_pack or not self._supplement_qualified
+                    or not _compare_scopes or self.request.diversity_mode != "cheapest"
+                    or self.spec.slots is not None or replace_slot is not None):
+                return
+            try:
+                candidate = PersonalPlanner(self.request, self.settings, self.prepared, self.state,
+                    plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
+                    nutrition_search_limit=self.nutrition_search_limit, include_content_pack=False).create()
+            except (ValueError, IncompleteBasketError):
+                return
+            incumbents.append(candidate)
+            incumbent_scopes[id(candidate)] = {"max_stores": self.request.max_stores,
+                "purchase_planning_mode": self.request.purchase_planning_mode, "library": "before_content_pack"}
         try:
             with self.optimizer.quote_cache():
                 result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
+            retain_library_comparison()
             if incumbents:
                 winner = min([result, *incumbents], key=lambda p: p.optimized_basket.total)
                 if winner is not result:
@@ -2117,10 +2144,12 @@ class PersonalPlanner:
                 result.personal.checks.setdefault("scope_comparison", {}).update({
                     "retained_valid_incumbents": len(incumbents),
                     "comparison_totals": [p.optimized_basket.total for p in incumbents],
-                    "meaning": "Giltiga lösningar med färre butiker och exakt köp behålls när sökområdet utökas.",
+                    "meaning": "Giltiga lösningar med färre butiker, exakt köp och tidigare recepturval jämförs när sökområdet utökas.",
                 })
             return self._finalize_result(result, started)
         except (ValueError, IncompleteBasketError) as exc:
+            if not any(scope.get("library") == "before_content_pack" for scope in incumbent_scopes.values()):
+                retain_library_comparison()
             if incumbents:
                 winner = min(incumbents, key=lambda p: p.optimized_basket.total)
                 result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)], error=exc)
