@@ -1543,9 +1543,9 @@ class BasketOptimizer:
         # calculations. Coupled campaigns take their separate joint path above.
         store_combinations = len(store_subsets)
         vectors = None
-        if self._quote_cache_context.get() is None:
+        if any(key is None for _ingredient, _quotes, key in quoted_ingredients):
             # Nutrition alternatives often make one-off baskets with very few
-            # feasible subsets. Without a reuse session, building full vectors
+            # feasible subsets. Without reusable quote identities, full vectors
             # repeats work for every impossible subset. Use the same exact
             # scalar checkout, rejecting only proven missing ingredient cover.
             store_bits = {store_id: 1 << index for index, store_id in enumerate(store_ids)}

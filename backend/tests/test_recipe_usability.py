@@ -160,6 +160,8 @@ def test_vector_checkout_matches_scalar_subset_selection_with_ties_and_changed_a
                     ingredients, products, stores, max_stores=cap)
                 assert vector.optimize(ingredients, products, stores, max_stores=cap) == BasketOptimizer().optimize(
                     ingredients, products, stores, max_stores=cap)
+                assert vector.optimize(ingredients, products, stores, max_stores=cap) == vector.optimize(
+                    ingredients, {key: list(rows) for key, rows in products.items()}, stores, max_stores=cap)
 
 
 def test_no_qualified_quotes_reports_incomplete_basket_not_internal_error():
