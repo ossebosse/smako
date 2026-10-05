@@ -1,0 +1,9 @@
+# Prepared operator example; not part of runtime deployment configuration.
+# Copy to the verified persistent operations location and append LAST to the
+# existing Compose -f list. Do not change global/shared image or BUILD_ID values.
+services:
+  app:
+    image: sha256:362e0eabf703d515b96ffad1412bd80d0c97a42927738fa75e1a033db240415d
+    environment:
+      BUILD_ID: recipe-usability-2816d50e4a14
+      COMPLETE_RECIPES_ENABLED: "false"

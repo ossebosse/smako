@@ -1,34 +1,69 @@
-# 2026-10-05: Pågående förbättring av användbarhet och beräkningskostnad
+# 2026-10-05: Receptens användbarhet och beräkningskostnad – verifierad kandidat
 
-Arbetsgren `feature/recipe-usability-20261005`, kodkandidat
-`3a3c502fca78731b72ebfdbe1722475803863073`. Ingen produktion eller push.
-[Låst jämförelsebas](releases/recipe-usability-20261005/BASELINE.md).
-Källbunden mildhetsuppgift för Santa Maria 200 g, Garant Risoni 500 g och
-SLV 588 för rått äpple med skal har införts genom befintliga faktavägar.
-Mängder/receptversioner är oförändrade. Gemensamma rättningar omfattar
-kandidatalias, småpasta och skaläggsidentitet; mängd-/näringsprövning kvarstår.
-Exakta butikskombinationer grupperas med befintlig Decimal-/bitmasksberäkning,
-med alla ekonomiska alternativ och oförändrad slutaudit. Negativa uppslag är
-begränsade till en begäran; cache rensas mellan oberoende plannerinstanser.
+Gren `feature/recipe-usability-20261005`, runtime
+**2816d50e4a14dd118015a4c047f2346435b981ef**. Efterföljande b58e2c1 förbättrar
+endast testloggning. Ingen produktionsaktivering eller push.
+[Slutrapport](releases/recipe-usability-20261005/RESULTS.md),
+[kvarstående källunderlag](releases/recipe-usability-20261005/RESEARCH.md),
+[separat aktivering och återgång](releases/recipe-usability-20261005/ACTIVATION.md).
 
-Slutverifiering **pågår**, kandidaten är ännu inte leveransklar. Förprovet
-bekräftar 11 uppskattade/7 exakta, överlapp 7. Isolerad mellanversion med enbart
-paprikakompletteringen gav 23/17 och huvudkorg 747,77 kr. Detta är inte resultatet
-för den slutliga tre-källorsjämförelsen. Samma-fakta-kodens första nya mätning
-gav 82,89 s kall process/54,29 s varm nyberäkning, samma korg 768,04 kr;
-tre repetitioner, fulla kvalificeringar och webbläsarprov återstår i den pågående kön.
+Alla 48 paketversioner prövade i båda köplägena på samma frysta underlag:
+**11 → 27 uppskattat, 7 → 19 exakt; överlapp 19, union 27 efter ändringen**.
+Paketets användbara grundrätter ökar 6 → 14 respektive 4 → 10. Över hela
+biblioteket är ökningen 52 → 57 respektive 26 → 32. Alla äldre godkännanden
+består: 96/104 uppskattat och 44/104 exakt, identiska versionsmängder.
+Källbunden mildhet för Santa Maria 200 g, Garant Risoni 500 g och SLV 588 för
+äpple införs i befintliga faktavägar. Mängder och receptversioner är oförändrade.
+C är berikad historisk replay; källornas nya hämtningstider har inte backdaterats.
 
-Bevis: `.local/recipe-usability-20261005`, isolerat serverområde
-`/var/tmp/smako-recipe-usability-20261005` med egen `.owner`.
-`final_runs.py` kör sekventiella A/B/C-prov, 2 CPU/3 GiB, inga konkurrerande
-tunga testjobb. B monterar ursprungliga deklarationer och referensfiler; C är
-berikad historisk jämförelse med nya källors verkliga hämtningstider.
-650 installerade runtimefiler verifierade mot serverpaketets manifest.
-Image `sha256:a84c79490fdb515f4b6b49235b8cd731ee4113e0ced076499142f45ec424c2fe`.
-Paket `.local/releases/recipe-usability-20261005/smako-server-3a3c502fca78.zip`,
-SHA-256 `7b7219acf9c48bcd865887d06d3e3edcc9aab7f7a4d4af8a312f99d8295f2d20`.
-Separat aktiveringsanvisning ska skrivas efter slutproven; tidigare godkännande
-för 17a9-versionen gäller inte denna kandidat.
+Samtliga 16 nytillkomna versioner har faktiskt prissatts i fri veckosökning.
+Huvudkorgen minskar **768,04 → 747,77 kr**, använd mängd 566,87 → 494,93 kr.
+IN03-base och IN04-kikartor väljs fritt. Bred Varierad minskar 591,65 → 590,08 kr;
+nio andra lyckade profiler behåller inköpstotalen. Indisk vegetarisk femmiddagsprofil
+stannar fortfarande i begränsad variationssökning. Ingen global omöjlighet påstås.
+
+Tre kalla och tre varma nya beräkningar per A/B/C, samma 2 CPU/3 GiB:
+median kall **92,17 → 79,25 s**, varm **66,68 → 54,80 s**. Med enbart ny kod
+och gamla fakta (B) är medianerna 74,55/47,00 s. Parat färskprocessprov på mobil:
+Chromium 82,14 → 70,20 s, WebKit 80,88 → 68,94 s klick till renderat resultat.
+**60-sekundersmålet är inte uppnått.** Samtliga råtider och sidoprofilernas
+regressioner redovisas, inklusive bred Varierad 117,89 → 120,47 s i HTTP-provet.
+
+Begränsad återanvändning av exakta prisvektorer, rangordningsmönster, ren text och
+negativa uppslag minskar dubbelarbete utan lägre budget eller mindre receptpool.
+Mutable kandidater använder exakt skalär prövning; 40 g-regressionen i 522 är rättad.
+Mellanversion 0da nådde 3 GiB efter åtta HTTP-profiler. 2816 frigör avslutade
+felramars lokala variabler och oåtkomliga sökcykler inför nästa antagna jobb.
+Slutmatrisens alla tolv profiler klarade samma process utan OOM. Slutaudit kvarstår.
+
+**1 076 regressionstester PASS**, Ruff och riktad compileall PASS. Chromium och
+WebKit mobil/desktop genomförde ordinarie knappflöden, omladdning, byte, explicit
+omräkning och återläsning efter faktisk omstart. 28 explicita versions-/köplägesprov
+(16 uppskattat/12 exakt) täcker alla nykvalificerade versioner, 58 revisioner
+bevarade efter omstart. Tre samtidiga klienter, ägarisolering och dubbelstart PASS.
+51 tidigare testrevisioner bevarade med flagga på/av. Isolerad slutbackup:
+75 planer/141 revisioner, SQLite-integritet PASS. Inga produktionsdata återställda.
+
+**Testanmärkning:** första WebKit-mobilförsöket fick ett statusanropsfel med
+"access control checks" efter passerade funktioner. Full omkörning och parat
+färskprocessprov passerade. Orsaken är inte fastställd eller påstått rättad;
+underkänd rapport bevaras och ska beaktas vid framtida aktiveringskontroll.
+
+Paket `.local/releases/recipe-usability-memory-20261005/smako-server-2816d50e4a14.zip`
+(2 832 452 byte), SHA-256
+`c74ad647643e949085f048644492432f6226c3d01a2bb90d6ae088b798f013b4`.
+Image `sha256:362e0eabf703d515b96ffad1412bd80d0c97a42927738fa75e1a033db240415d`.
+650 installerade runtimefiler manifestverifierade; pip check och offline browser PASS.
+Föreskrivet framtida BUILD_ID `recipe-usability-2816d50e4a14`.
+Aktivering kräver nytt beslut. Återgång: flagga av i samma nya image, bevara alla
+revisioner; återställ aldrig äldre databas eller äldre binär över nyare planer.
+
+Beta är fortsatt ready på **complete-recipes-17a9c1330dcc**, flagga true;
+app, scheduler, Linux-relä och proxy har oförändrade container-/image-ID:n och
+starttider. Windows-relä, insamling och scheman är orörda. Egna testcontainrar är
+avslutade; isolerad backup och bevis bevaras i `.local/recipe-usability-20261005`
+och `/var/tmp/smako-recipe-usability-20261005`. Manifestet binder rapporternas
+råbevis till hashvärden. Privata sessionsuppgifter/databaser ligger utanför Git.
 
 # 2026-10-05: Innehållspaket 24 + 24 integrerat, ej aktiverat
 

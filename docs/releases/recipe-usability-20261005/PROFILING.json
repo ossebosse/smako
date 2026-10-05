@@ -1,0 +1,2606 @@
+{
+  "interpretation": "Heavy cProfile plus existing span instrumentation. Not ordinary latency measurements. Cumulative spans overlap: never add them as independent wall-time phases. Final non-profiled repeated measurements are in PERFORMANCE.json.",
+  "profiles": {
+    "A_main": {
+      "runtime": "dbd89abbed0a",
+      "status": "baseline",
+      "artifact_load_seconds": 14.143056251108646,
+      "run": {
+        "phase": "cold",
+        "wall_seconds": 131.3855645749718,
+        "cpu_seconds": 131.274922569,
+        "cold_process_to_serialized_seconds": 147.14370536478236,
+        "serialization_seconds": 0.03042725007981062,
+        "peak_rss_kib": 1931344,
+        "trace": {
+          "timings_ms": {
+            "basket_optimization": 49615.644,
+            "personal_audit": 22422.153,
+            "personal_candidate_generation": 675.487,
+            "personal_candidate_generation_and_qualification": 19724.559,
+            "personal_nutrition": 1068.41,
+            "personal_package_calculation": 50277.87,
+            "personal_product_facts": 14200.836,
+            "personal_week_search": 92332.185
+          },
+          "span_statistics": {
+            "basket_optimization": {
+              "calls": 2252,
+              "wall_ms": 49615.644,
+              "cpu_ms": 0.0,
+              "average_ms": 22.032,
+              "max_ms": 1495.588
+            },
+            "personal_audit": {
+              "calls": 2248,
+              "wall_ms": 22422.153,
+              "cpu_ms": 22400.864,
+              "average_ms": 9.974,
+              "max_ms": 1650.294
+            },
+            "personal_candidate_generation": {
+              "calls": 1,
+              "wall_ms": 675.487,
+              "cpu_ms": 672.541,
+              "average_ms": 675.487,
+              "max_ms": 675.487
+            },
+            "personal_candidate_generation_and_qualification": {
+              "calls": 1,
+              "wall_ms": 19724.559,
+              "cpu_ms": 19700.829,
+              "average_ms": 19724.559,
+              "max_ms": 19724.559
+            },
+            "personal_nutrition": {
+              "calls": 2670,
+              "wall_ms": 1068.41,
+              "cpu_ms": 1067.851,
+              "average_ms": 0.4,
+              "max_ms": 5.46
+            },
+            "personal_package_calculation": {
+              "calls": 2249,
+              "wall_ms": 50277.87,
+              "cpu_ms": 50221.146,
+              "average_ms": 22.356,
+              "max_ms": 1495.893
+            },
+            "personal_product_facts": {
+              "calls": 3,
+              "wall_ms": 14200.836,
+              "cpu_ms": 14189.453,
+              "average_ms": 4733.612,
+              "max_ms": 14200.816
+            },
+            "personal_week_search": {
+              "calls": 1,
+              "wall_ms": 92332.185,
+              "cpu_ms": 92230.806,
+              "average_ms": 92332.185,
+              "max_ms": 92332.185
+            }
+          },
+          "operation_counters": {
+            "basket_calculations": 2253,
+            "cache_hits": 2946522,
+            "cache_misses": 486045,
+            "package_cache_hits": 594,
+            "package_cache_misses": 50140,
+            "package_calculations": 50140,
+            "per_store_selection_cache_hits": 415136,
+            "per_store_selection_cache_misses": 6900,
+            "product_match_calculations": 3004,
+            "quote_selection_cache_hits": 2481607,
+            "quote_selection_cache_misses": 422036,
+            "quote_set_cache_hits": 46974,
+            "quote_set_cache_misses": 6927,
+            "semantic_candidates_returned": 2791,
+            "semantic_comparisons": 3004,
+            "store_combinations": 3586449,
+            "store_combinations_pruned_infeasible": 3465700,
+            "store_subset_cache_hits": 2211,
+            "store_subset_cache_misses": 42
+          },
+          "depth_counters": {}
+        },
+        "planner_timings": {
+          "product_facts": 14.20503764692694,
+          "package_calculation": 50.29543598461896,
+          "nutrition": 1.1828144816681743,
+          "audit": 22.52437033923343,
+          "candidate_generation_and_qualification": 19.724640969652683,
+          "week_search": 92.33233110886067,
+          "total": 116.83593654213473
+        },
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread:6d0a692188c0e3efbd674814ececf5ff21208aba0fcc2087c11700970ce473b5",
+        "total": 768.04,
+        "recipes": [
+          "Krämig spenattofu med ärtor och vitlöksris",
+          "Röd linsdal med spenat, mjuk tofu och citronris",
+          "Mustig lins- och kidneychili med ris och yoghurt",
+          "Smulig tofubowl med bönor, limekål och tomatris",
+          "Bönenchiladas med sötpotatis, tomatsås och limekål"
+        ],
+        "profiled": true
+      },
+      "evidence": {
+        "path": ".local/recipe-usability-20261005/results/A-profile/summary.json",
+        "sha256": "80626563c45d35b2ca60972eee5efca936b82d9f7bba4077ed59d2037ef1de73"
+      }
+    },
+    "A_P40": {
+      "runtime": "dbd89abbed0a",
+      "status": "baseline",
+      "artifact_load_seconds": 14.777593879960477,
+      "run": {
+        "phase": "cold",
+        "wall_seconds": 113.14858367713168,
+        "cpu_seconds": 112.67122004400001,
+        "cold_process_to_serialized_seconds": 129.63129398133606,
+        "serialization_seconds": 0.028980740811675787,
+        "peak_rss_kib": 1422468,
+        "trace": {
+          "timings_ms": {
+            "basket_optimization": 40426.562,
+            "personal_audit": 5095.099,
+            "personal_candidate_generation": 488.117,
+            "personal_candidate_generation_and_qualification": 11087.907,
+            "personal_nutrition": 12777.705,
+            "personal_package_calculation": 4794.884,
+            "personal_product_facts": 15269.744,
+            "personal_week_search": 83441.478
+          },
+          "span_statistics": {
+            "basket_optimization": {
+              "calls": 11166,
+              "wall_ms": 40426.562,
+              "cpu_ms": 0.0,
+              "average_ms": 3.621,
+              "max_ms": 916.894
+            },
+            "personal_audit": {
+              "calls": 544,
+              "wall_ms": 5095.099,
+              "cpu_ms": 5090.962,
+              "average_ms": 9.366,
+              "max_ms": 968.757
+            },
+            "personal_candidate_generation": {
+              "calls": 1,
+              "wall_ms": 488.117,
+              "cpu_ms": 485.825,
+              "average_ms": 488.117,
+              "max_ms": 488.117
+            },
+            "personal_candidate_generation_and_qualification": {
+              "calls": 1,
+              "wall_ms": 11087.907,
+              "cpu_ms": 11072.623,
+              "average_ms": 11087.907,
+              "max_ms": 11087.907
+            },
+            "personal_nutrition": {
+              "calls": 22323,
+              "wall_ms": 12777.705,
+              "cpu_ms": 12757.391,
+              "average_ms": 0.572,
+              "max_ms": 35.531
+            },
+            "personal_package_calculation": {
+              "calls": 545,
+              "wall_ms": 4794.884,
+              "cpu_ms": 4789.777,
+              "average_ms": 8.798,
+              "max_ms": 1195.093
+            },
+            "personal_product_facts": {
+              "calls": 2,
+              "wall_ms": 15269.744,
+              "cpu_ms": 14892.375,
+              "average_ms": 7634.872,
+              "max_ms": 15269.735
+            },
+            "personal_week_search": {
+              "calls": 1,
+              "wall_ms": 83441.478,
+              "cpu_ms": 83343.467,
+              "average_ms": 83441.478,
+              "max_ms": 83441.478
+            }
+          },
+          "operation_counters": {
+            "basket_calculations": 11595,
+            "cache_hits": 1047669,
+            "cache_misses": 18385,
+            "package_cache_hits": 993516,
+            "package_cache_misses": 12655,
+            "package_calculations": 12655,
+            "per_store_selection_cache_hits": 2217,
+            "per_store_selection_cache_misses": 1147,
+            "product_match_calculations": 1855,
+            "quote_selection_cache_hits": 28086,
+            "quote_selection_cache_misses": 3364,
+            "quote_set_cache_hits": 12298,
+            "quote_set_cache_misses": 1176,
+            "semantic_candidates_returned": 1725,
+            "semantic_comparisons": 1855,
+            "store_combinations": 1656754,
+            "store_combinations_pruned_infeasible": 1636015,
+            "store_subset_cache_hits": 11552,
+            "store_subset_cache_misses": 43
+          },
+          "depth_counters": {}
+        },
+        "planner_timings": {
+          "product_facts": 15.271877438761294,
+          "package_calculation": 4.772930050268769,
+          "nutrition": 13.658141884487122,
+          "audit": 5.120254568289965,
+          "candidate_generation_and_qualification": 11.087983395904303,
+          "week_search": 83.44156072614715,
+          "total": 97.59607123630121
+        },
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread:6d0a692188c0e3efbd674814ececf5ff21208aba0fcc2087c11700970ce473b5",
+        "total": 738.17,
+        "recipes": [
+          "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+          "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+          "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+          "Citronkyckling med spenatris, feta och gurksallad",
+          "Spenatris med kikärtor, feta och citronyoghurt"
+        ],
+        "profiled": true
+      },
+      "evidence": {
+        "path": ".local/recipe-usability-20261005/results/A-p40-profile/summary.json",
+        "sha256": "45310d29efbde28ec65ed91a034100cac4a2a20f028c2eff515d5dc571d9c68f"
+      },
+      "total_calls": 134016745,
+      "primitive_calls": 133356770,
+      "profiled_cpu_seconds": 97.39021099699981,
+      "top_cumulative_functions": [
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2097,
+          "function": "create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 6.7586e-05,
+          "cumulative_seconds": 97.59639839900001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2296,
+          "function": "_create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.015677969,
+          "cumulative_seconds": 97.58144706200001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 813,
+          "function": "basket",
+          "primitive_calls": 557,
+          "calls": 557,
+          "self_seconds": 1.3367979410000002,
+          "cumulative_seconds": 89.63843569400001
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 830,
+          "function": "optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 1.5099e-05,
+          "cumulative_seconds": 83.44144683900001
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 868,
+          "function": "_optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.011180694000000001,
+          "cumulative_seconds": 83.44143000700001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2429,
+          "function": "evaluate",
+          "primitive_calls": 523,
+          "calls": 523,
+          "self_seconds": 0.004033396,
+          "cumulative_seconds": 83.17638664200001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1373,
+          "function": "_qualified_nutrition_basket",
+          "primitive_calls": 544,
+          "calls": 544,
+          "self_seconds": 5.318381053,
+          "cumulative_seconds": 71.059586405
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1439,
+          "function": "optimize",
+          "primitive_calls": 11595,
+          "calls": 11595,
+          "self_seconds": 4.727062916,
+          "cumulative_seconds": 43.836656657000006
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 67,
+          "function": "measured",
+          "primitive_calls": 21617,
+          "calls": 22324,
+          "self_seconds": 0.160170275,
+          "cumulative_seconds": 24.068076839000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1726,
+          "function": "_check_nutrition",
+          "primitive_calls": 22323,
+          "calls": 22323,
+          "self_seconds": 2.283433332,
+          "cumulative_seconds": 12.584073479
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 728,
+          "function": "_candidate_quotes_with_key",
+          "primitive_calls": 274318,
+          "calls": 274318,
+          "self_seconds": 1.4693812970000002,
+          "cumulative_seconds": 11.505040446
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1986,
+          "function": "_candidates",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0030390350000000003,
+          "cumulative_seconds": 11.08788078
+        },
+        {
+          "file": "/usr/local/lib/python3.12/site-packages/pydantic/main.py",
+          "line": 253,
+          "function": "__init__",
+          "primitive_calls": 444229,
+          "calls": 444229,
+          "self_seconds": 0.345216688,
+          "cumulative_seconds": 10.67100016
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'validate_python' of 'pydantic_core._pydantic_core.SchemaValidator' objects>",
+          "primitive_calls": 446555,
+          "calls": 447627,
+          "self_seconds": 3.9023941640000004,
+          "cumulative_seconds": 10.458836698
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1662,
+          "function": "_check_final",
+          "primitive_calls": 11275,
+          "calls": 11275,
+          "self_seconds": 0.244956728,
+          "cumulative_seconds": 9.608298787
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 400,
+          "function": "resolve",
+          "primitive_calls": 25216,
+          "calls": 25216,
+          "self_seconds": 0.294001434,
+          "cumulative_seconds": 8.484324674
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1792,
+          "function": "_check_nutrition_uncached",
+          "primitive_calls": 8404,
+          "calls": 8404,
+          "self_seconds": 1.614050186,
+          "cumulative_seconds": 8.447914886000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 590,
+          "function": "_calculate_quote",
+          "primitive_calls": 1006171,
+          "calls": 1006171,
+          "self_seconds": 1.158589722,
+          "cumulative_seconds": 8.314770409000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 333,
+          "function": "to_basket_item",
+          "primitive_calls": 263388,
+          "calls": 263388,
+          "self_seconds": 2.698079712,
+          "cumulative_seconds": 8.242991643
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 621,
+          "function": "clean_recipe",
+          "primitive_calls": 1800,
+          "calls": 1800,
+          "self_seconds": 0.025545141,
+          "cumulative_seconds": 7.773364027
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.any>",
+          "primitive_calls": 3031345,
+          "calls": 3115215,
+          "self_seconds": 1.8561502060000001,
+          "cumulative_seconds": 7.120040447
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_nutrition.py",
+          "line": 105,
+          "function": "calculation_basis",
+          "primitive_calls": 8446,
+          "calls": 8446,
+          "self_seconds": 0.030609169000000002,
+          "cumulative_seconds": 5.9387932150000005
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_library.py",
+          "line": 238,
+          "function": "validate_recipe_design",
+          "primitive_calls": 8570,
+          "calls": 8570,
+          "self_seconds": 0.18226050900000001,
+          "cumulative_seconds": 5.912602921
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_preparation.py",
+          "line": 223,
+          "function": "basis",
+          "primitive_calls": 8446,
+          "calls": 8446,
+          "self_seconds": 0.038755295,
+          "cumulative_seconds": 5.904341181
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_preparation.py",
+          "line": 176,
+          "function": "validate",
+          "primitive_calls": 8483,
+          "calls": 8483,
+          "self_seconds": 0.025053403000000002,
+          "cumulative_seconds": 5.889457475
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 806,
+          "function": "_cheapest_quote_for_subset_key",
+          "primitive_calls": 488334,
+          "calls": 488334,
+          "self_seconds": 0.497316146,
+          "cumulative_seconds": 5.1213311290000005
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_auditor.py",
+          "line": 180,
+          "function": "audit",
+          "primitive_calls": 544,
+          "calls": 544,
+          "self_seconds": 0.5321300990000001,
+          "cumulative_seconds": 5.082935494
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.next>",
+          "primitive_calls": 249423,
+          "calls": 249424,
+          "self_seconds": 0.12049844200000001,
+          "cumulative_seconds": 4.8664427
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 172,
+          "function": "match",
+          "primitive_calls": 1855,
+          "calls": 1855,
+          "self_seconds": 0.047097893,
+          "cumulative_seconds": 4.824480789
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 255,
+          "function": "nutrition_evidence",
+          "primitive_calls": 247255,
+          "calls": 247255,
+          "self_seconds": 0.75935759,
+          "cumulative_seconds": 4.762810804
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'get' of 'dict' objects>",
+          "primitive_calls": 9439519,
+          "calls": 9439519,
+          "self_seconds": 4.565125505,
+          "cumulative_seconds": 4.57970506
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.min>",
+          "primitive_calls": 896776,
+          "calls": 896776,
+          "self_seconds": 0.9574642080000001,
+          "cumulative_seconds": 4.480321337
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1316,
+          "function": "_cheapest_quote",
+          "primitive_calls": 456884,
+          "calls": 456884,
+          "self_seconds": 0.318337133,
+          "cumulative_seconds": 4.447312716
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_semantics.py",
+          "line": 2041,
+          "function": "evaluate_product_semantics",
+          "primitive_calls": 1874,
+          "calls": 1874,
+          "self_seconds": 0.049173327,
+          "cumulative_seconds": 4.189524522
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 158,
+          "function": "evaluate_semantics",
+          "primitive_calls": 1855,
+          "calls": 1855,
+          "self_seconds": 0.0059650680000000005,
+          "cumulative_seconds": 4.176004797
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.sum>",
+          "primitive_calls": 2510619,
+          "calls": 2514131,
+          "self_seconds": 1.7722500760000002,
+          "cumulative_seconds": 4.0746949390000005
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 47,
+          "function": "money",
+          "primitive_calls": 1750014,
+          "calls": 1750014,
+          "self_seconds": 0.563459755,
+          "cumulative_seconds": 3.4640247370000004
+        },
+        {
+          "file": "/srv/app/backend/app/models/basket.py",
+          "line": 165,
+          "function": "validate_quantities",
+          "primitive_calls": 526776,
+          "calls": 526776,
+          "self_seconds": 2.4826500570000003,
+          "cumulative_seconds": 3.3520585040000004
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 677,
+          "function": "_need_rows",
+          "primitive_calls": 557,
+          "calls": 557,
+          "self_seconds": 0.10706950100000001,
+          "cumulative_seconds": 3.226619217
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1327,
+          "function": "_quote_sort_key",
+          "primitive_calls": 777868,
+          "calls": 777868,
+          "self_seconds": 0.770042267,
+          "cumulative_seconds": 3.176275388
+        }
+      ]
+    },
+    "B_P40_regression": {
+      "runtime": "522502cffffe",
+      "status": "rejected performance experiment",
+      "artifact_load_seconds": 15.346881616860628,
+      "run": {
+        "phase": "cold",
+        "wall_seconds": 196.7360354559496,
+        "cpu_seconds": 194.558856324,
+        "cold_process_to_serialized_seconds": 213.84769802493975,
+        "serialization_seconds": 0.02275622496381402,
+        "peak_rss_kib": 1431900,
+        "trace": {
+          "timings_ms": {
+            "basket_optimization": 118435.186,
+            "personal_audit": 3301.457,
+            "personal_candidate_generation": 611.065,
+            "personal_candidate_generation_and_qualification": 12973.985,
+            "personal_nutrition": 13636.469,
+            "personal_package_calculation": 7952.308,
+            "personal_product_facts": 16794.708,
+            "personal_week_search": 163660.49
+          },
+          "span_statistics": {
+            "basket_optimization": {
+              "calls": 11166,
+              "wall_ms": 118435.186,
+              "cpu_ms": 0.0,
+              "average_ms": 10.607,
+              "max_ms": 1190.636
+            },
+            "personal_audit": {
+              "calls": 544,
+              "wall_ms": 3301.457,
+              "cpu_ms": 3299.365,
+              "average_ms": 6.069,
+              "max_ms": 12.472
+            },
+            "personal_candidate_generation": {
+              "calls": 1,
+              "wall_ms": 611.065,
+              "cpu_ms": 509.326,
+              "average_ms": 611.065,
+              "max_ms": 611.065
+            },
+            "personal_candidate_generation_and_qualification": {
+              "calls": 1,
+              "wall_ms": 12973.985,
+              "cpu_ms": 12513.039,
+              "average_ms": 12973.985,
+              "max_ms": 12973.985
+            },
+            "personal_nutrition": {
+              "calls": 22323,
+              "wall_ms": 13636.469,
+              "cpu_ms": 13619.036,
+              "average_ms": 0.611,
+              "max_ms": 41.226
+            },
+            "personal_package_calculation": {
+              "calls": 545,
+              "wall_ms": 7952.308,
+              "cpu_ms": 7941.236,
+              "average_ms": 14.591,
+              "max_ms": 1144.75
+            },
+            "personal_product_facts": {
+              "calls": 2,
+              "wall_ms": 16794.708,
+              "cpu_ms": 15579.853,
+              "average_ms": 8397.354,
+              "max_ms": 16794.701
+            },
+            "personal_week_search": {
+              "calls": 1,
+              "wall_ms": 163660.49,
+              "cpu_ms": 163537.402,
+              "average_ms": 163660.49,
+              "max_ms": 163660.49
+            }
+          },
+          "operation_counters": {
+            "basket_calculations": 11595,
+            "cache_hits": 1027360,
+            "cache_misses": 30534,
+            "package_cache_hits": 993516,
+            "package_cache_misses": 22048,
+            "package_calculations": 22048,
+            "per_store_selection_cache_hits": 1459,
+            "per_store_selection_cache_misses": 2328,
+            "product_match_calculations": 1900,
+            "quote_set_cache_hits": 11146,
+            "quote_set_cache_misses": 2328,
+            "quote_subset_vector_cache_hits": 9687,
+            "quote_subset_vector_cache_misses": 3787,
+            "semantic_candidates_returned": 1769,
+            "semantic_comparisons": 1900,
+            "store_combinations": 1656754,
+            "store_combinations_pruned_infeasible": 1636015,
+            "store_subset_cache_hits": 11552,
+            "store_subset_cache_misses": 43
+          },
+          "depth_counters": {}
+        },
+        "planner_timings": {
+          "product_facts": 16.796624009963125,
+          "package_calculation": 7.928745658136904,
+          "nutrition": 14.578549133613706,
+          "audit": 3.326823686249554,
+          "candidate_generation_and_qualification": 12.974060983862728,
+          "week_search": 163.66057016607374,
+          "total": 179.24257985502481
+        },
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread:6d0a692188c0e3efbd674814ececf5ff21208aba0fcc2087c11700970ce473b5",
+        "total": 738.17,
+        "recipes": [
+          "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+          "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+          "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+          "Citronkyckling med spenatris, feta och gurksallad",
+          "Spenatris med kikärtor, feta och citronyoghurt"
+        ],
+        "profiled": true
+      },
+      "evidence": {
+        "path": ".local/recipe-usability-20261005/results/B-p40-profile/summary.json",
+        "sha256": "b6d20e71355d5158524d04798f037de3606d8e6a36214585b62981c545ad8ed3"
+      },
+      "total_calls": 235416671,
+      "primitive_calls": 234755552,
+      "profiled_cpu_seconds": 177.43877829100018,
+      "top_cumulative_functions": [
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2119,
+          "function": "create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 6.9453e-05,
+          "cumulative_seconds": 179.242894073
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2318,
+          "function": "_create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.015223783000000001,
+          "cumulative_seconds": 179.20050469400002
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 835,
+          "function": "basket",
+          "primitive_calls": 559,
+          "calls": 559,
+          "self_seconds": 2.6244033150000003,
+          "cumulative_seconds": 170.381797906
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 830,
+          "function": "optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 1.5570000000000002e-05,
+          "cumulative_seconds": 163.66046010600002
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 868,
+          "function": "_optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.011503181000000001,
+          "cumulative_seconds": 163.660442894
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2451,
+          "function": "evaluate",
+          "primitive_calls": 523,
+          "calls": 523,
+          "self_seconds": 0.00408631,
+          "cumulative_seconds": 163.402576606
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1395,
+          "function": "_qualified_nutrition_basket",
+          "primitive_calls": 544,
+          "calls": 544,
+          "self_seconds": 5.545255498,
+          "cumulative_seconds": 150.06963104500002
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1450,
+          "function": "optimize",
+          "primitive_calls": 11595,
+          "calls": 11595,
+          "self_seconds": 2.1661082940000003,
+          "cumulative_seconds": 123.97805708000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1525,
+          "function": "<genexpr>",
+          "primitive_calls": 285913,
+          "calls": 285913,
+          "self_seconds": 0.456158265,
+          "cumulative_seconds": 77.193726928
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 884,
+          "function": "_quote_subset_vector",
+          "primitive_calls": 274318,
+          "calls": 274318,
+          "self_seconds": 43.718188456,
+          "cumulative_seconds": 76.737568663
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 67,
+          "function": "measured",
+          "primitive_calls": 21617,
+          "calls": 22324,
+          "self_seconds": 0.17959691900000002,
+          "cumulative_seconds": 26.725076401000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 732,
+          "function": "_candidate_quotes_with_key",
+          "primitive_calls": 274318,
+          "calls": 274318,
+          "self_seconds": 1.5511997320000002,
+          "cumulative_seconds": 14.591272704000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1748,
+          "function": "_check_nutrition",
+          "primitive_calls": 22323,
+          "calls": 22323,
+          "self_seconds": 2.440219501,
+          "cumulative_seconds": 13.422130758000002
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2008,
+          "function": "_candidates",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.003076048,
+          "cumulative_seconds": 12.973959029000001
+        },
+        {
+          "file": "/usr/local/lib/python3.12/site-packages/pydantic/main.py",
+          "line": 253,
+          "function": "__init__",
+          "primitive_calls": 471436,
+          "calls": 471436,
+          "self_seconds": 1.3944277980000002,
+          "cumulative_seconds": 12.893874522
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'validate_python' of 'pydantic_core._pydantic_core.SchemaValidator' objects>",
+          "primitive_calls": 473806,
+          "calls": 474914,
+          "self_seconds": 4.353640791,
+          "cumulative_seconds": 11.641280315000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 930,
+          "function": "<genexpr>",
+          "primitive_calls": 50270199,
+          "calls": 50270199,
+          "self_seconds": 11.547533073,
+          "cumulative_seconds": 11.547533073
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 594,
+          "function": "_calculate_quote",
+          "primitive_calls": 1015564,
+          "calls": 1015564,
+          "self_seconds": 1.2228272690000002,
+          "cumulative_seconds": 11.245755733000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1241,
+          "function": "_grouped_subset_keys",
+          "primitive_calls": 11595,
+          "calls": 11595,
+          "self_seconds": 7.69148865,
+          "cumulative_seconds": 10.583853741
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1684,
+          "function": "_check_final",
+          "primitive_calls": 11275,
+          "calls": 11275,
+          "self_seconds": 0.308426073,
+          "cumulative_seconds": 10.516882310000002
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 333,
+          "function": "to_basket_item",
+          "primitive_calls": 263388,
+          "calls": 263388,
+          "self_seconds": 2.8226890790000003,
+          "cumulative_seconds": 10.144940896000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1814,
+          "function": "_check_nutrition_uncached",
+          "primitive_calls": 8404,
+          "calls": 8404,
+          "self_seconds": 1.749594201,
+          "cumulative_seconds": 8.991965105
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'get' of 'dict' objects>",
+          "primitive_calls": 20634043,
+          "calls": 20634043,
+          "self_seconds": 8.301688823000001,
+          "cumulative_seconds": 8.317172696
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'append' of 'list' objects>",
+          "primitive_calls": 43152703,
+          "calls": 43152703,
+          "self_seconds": 7.944837715,
+          "cumulative_seconds": 7.944837715
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 643,
+          "function": "clean_recipe",
+          "primitive_calls": 1802,
+          "calls": 1802,
+          "self_seconds": 0.024246015000000003,
+          "cumulative_seconds": 7.849219596
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 401,
+          "function": "resolve",
+          "primitive_calls": 25270,
+          "calls": 25270,
+          "self_seconds": 0.29103876,
+          "cumulative_seconds": 7.384812581
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_nutrition.py",
+          "line": 105,
+          "function": "calculation_basis",
+          "primitive_calls": 8446,
+          "calls": 8446,
+          "self_seconds": 0.032663952,
+          "cumulative_seconds": 6.524066869
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_preparation.py",
+          "line": 223,
+          "function": "basis",
+          "primitive_calls": 8446,
+          "calls": 8446,
+          "self_seconds": 0.042362373,
+          "cumulative_seconds": 6.435548682
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_library.py",
+          "line": 238,
+          "function": "validate_recipe_design",
+          "primitive_calls": 8572,
+          "calls": 8572,
+          "self_seconds": 0.195430442,
+          "cumulative_seconds": 6.434551099
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_preparation.py",
+          "line": 176,
+          "function": "validate",
+          "primitive_calls": 8485,
+          "calls": 8485,
+          "self_seconds": 0.028116865,
+          "cumulative_seconds": 6.419082324000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1338,
+          "function": "_quote_sort_key",
+          "primitive_calls": 1376961,
+          "calls": 1376961,
+          "self_seconds": 1.445779034,
+          "cumulative_seconds": 5.892657460000001
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.min>",
+          "primitive_calls": 9784307,
+          "calls": 9784307,
+          "self_seconds": 5.126892140000001,
+          "cumulative_seconds": 5.2223507730000005
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 47,
+          "function": "money",
+          "primitive_calls": 2391336,
+          "calls": 2391336,
+          "self_seconds": 0.7716405540000001,
+          "cumulative_seconds": 4.763402471
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 172,
+          "function": "match",
+          "primitive_calls": 1900,
+          "calls": 1900,
+          "self_seconds": 0.048153669,
+          "cumulative_seconds": 4.664343226000001
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.any>",
+          "primitive_calls": 1396205,
+          "calls": 1480987,
+          "self_seconds": 1.159758496,
+          "cumulative_seconds": 4.6400787580000005
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.next>",
+          "primitive_calls": 270492,
+          "calls": 270492,
+          "self_seconds": 0.136202404,
+          "cumulative_seconds": 4.640065547
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 630,
+          "function": "_calculate_quote_uncached",
+          "primitive_calls": 22048,
+          "calls": 22048,
+          "self_seconds": 0.070013068,
+          "cumulative_seconds": 4.2486544340000005
+        },
+        {
+          "file": "/srv/app/grocery_data/app/services/fixed_checkout_price.py",
+          "line": 33,
+          "function": "money",
+          "primitive_calls": 2524092,
+          "calls": 2524092,
+          "self_seconds": 2.793692136,
+          "cumulative_seconds": 4.2175114
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 850,
+          "function": "_cheapest_quotes_by_store",
+          "primitive_calls": 264631,
+          "calls": 264631,
+          "self_seconds": 0.8469977540000001,
+          "cumulative_seconds": 4.1554161270000005
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 698,
+          "function": "quote_item",
+          "primitive_calls": 22048,
+          "calls": 22048,
+          "self_seconds": 0.376424197,
+          "cumulative_seconds": 4.148727275000001
+        }
+      ]
+    },
+    "C_main_intermediate": {
+      "runtime": "d68c8a14",
+      "status": "intermediate, not final latency",
+      "artifact_load_seconds": 14.164340154733509,
+      "run": {
+        "phase": "cold",
+        "wall_seconds": 118.72273774910718,
+        "cpu_seconds": 118.672335103,
+        "cold_process_to_serialized_seconds": 134.51491068303585,
+        "serialization_seconds": 0.04874484287574887,
+        "peak_rss_kib": 2086856,
+        "trace": {
+          "timings_ms": {
+            "basket_optimization": 41510.805,
+            "personal_audit": 20485.521,
+            "personal_candidate_generation": 630.604,
+            "personal_candidate_generation_and_qualification": 17340.226,
+            "personal_nutrition": 1177.158,
+            "personal_package_calculation": 42153.209,
+            "personal_product_facts": 14812.904,
+            "personal_week_search": 81190.882
+          },
+          "span_statistics": {
+            "basket_optimization": {
+              "calls": 2578,
+              "wall_ms": 41510.805,
+              "cpu_ms": 0.0,
+              "average_ms": 16.102,
+              "max_ms": 1471.637
+            },
+            "personal_audit": {
+              "calls": 2574,
+              "wall_ms": 20485.521,
+              "cpu_ms": 20469.597,
+              "average_ms": 7.959,
+              "max_ms": 1650.603
+            },
+            "personal_candidate_generation": {
+              "calls": 1,
+              "wall_ms": 630.604,
+              "cpu_ms": 630.097,
+              "average_ms": 630.604,
+              "max_ms": 630.604
+            },
+            "personal_candidate_generation_and_qualification": {
+              "calls": 1,
+              "wall_ms": 17340.226,
+              "cpu_ms": 17326.846,
+              "average_ms": 17340.226,
+              "max_ms": 17340.226
+            },
+            "personal_nutrition": {
+              "calls": 3058,
+              "wall_ms": 1177.158,
+              "cpu_ms": 1176.951,
+              "average_ms": 0.385,
+              "max_ms": 6.119
+            },
+            "personal_package_calculation": {
+              "calls": 2575,
+              "wall_ms": 42153.209,
+              "cpu_ms": 42121.22,
+              "average_ms": 16.37,
+              "max_ms": 1471.908
+            },
+            "personal_product_facts": {
+              "calls": 3,
+              "wall_ms": 14812.904,
+              "cpu_ms": 14800.493,
+              "average_ms": 4937.635,
+              "max_ms": 14812.887
+            },
+            "personal_week_search": {
+              "calls": 1,
+              "wall_ms": 81190.882,
+              "cpu_ms": 81122.082,
+              "average_ms": 81190.882,
+              "max_ms": 81190.882
+            }
+          },
+          "operation_counters": {
+            "basket_calculations": 2579,
+            "cache_hits": 118994,
+            "cache_misses": 41382,
+            "package_cache_hits": 1599,
+            "package_cache_misses": 25662,
+            "package_calculations": 25662,
+            "per_store_selection_cache_hits": 4758,
+            "per_store_selection_cache_misses": 3640,
+            "product_match_calculations": 3343,
+            "quote_set_cache_hits": 57429,
+            "quote_set_cache_misses": 3640,
+            "quote_subset_vector_cache_hits": 52671,
+            "quote_subset_vector_cache_misses": 8398,
+            "semantic_candidates_returned": 3091,
+            "semantic_comparisons": 3343,
+            "store_combinations": 4100312,
+            "store_combinations_pruned_infeasible": 3961412,
+            "store_subset_cache_hits": 2537,
+            "store_subset_cache_misses": 42
+          },
+          "depth_counters": {}
+        },
+        "planner_timings": {
+          "product_facts": 14.814900724217296,
+          "package_calculation": 42.16810535220429,
+          "nutrition": 1.2926669721491635,
+          "audit": 20.593312098179013,
+          "candidate_generation_and_qualification": 17.340299342758954,
+          "week_search": 81.19101569987833,
+          "total": 103.57963962387294
+        },
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread:ad52d1456e89d5fb7862e864d4d32966785ea01eeacfca2d415e1c1f8b07e158",
+        "total": 747.77,
+        "recipes": [
+          "Krämig spenattofu med ärtor och vitlöksris",
+          "Röd linsdal med spenat, mjuk tofu och citronris",
+          "Mustig lins- och kidneychili med ris och yoghurt",
+          "Masalapasta med tofu, ärtor och tomatyoghurt",
+          "Rostad blomkål och kikärtor med kokos-linssås"
+        ],
+        "profiled": true,
+        "facts_comparison": "enriched_historical; source retrieval dates preserved"
+      },
+      "evidence": {
+        "path": ".local/recipe-usability-20261005/results/C-release-profile/summary.json",
+        "sha256": "7b8f9a8061e1b48dda657297b2899bcb05c11feeb5441324961a865878643c49"
+      },
+      "total_calls": 123042109,
+      "primitive_calls": 122222044,
+      "profiled_cpu_seconds": 102.8214252760002,
+      "top_cumulative_functions": [
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2119,
+          "function": "create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0018822280000000001,
+          "cumulative_seconds": 103.57973860400001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2318,
+          "function": "_create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.36950684500000003,
+          "cumulative_seconds": 103.54498446900001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 835,
+          "function": "basket",
+          "primitive_calls": 2583,
+          "calls": 2583,
+          "self_seconds": 5.537433396,
+          "cumulative_seconds": 91.688270536
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 830,
+          "function": "optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.000379735,
+          "cumulative_seconds": 80.846341132
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 868,
+          "function": "_optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.049299308,
+          "cumulative_seconds": 80.84594744
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2451,
+          "function": "evaluate",
+          "primitive_calls": 2477,
+          "calls": 2477,
+          "self_seconds": 0.021945695,
+          "cumulative_seconds": 79.27094671200001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1450,
+          "function": "optimize",
+          "primitive_calls": 2579,
+          "calls": 2579,
+          "self_seconds": 0.874787763,
+          "cumulative_seconds": 42.117497574000005
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1525,
+          "function": "<genexpr>",
+          "primitive_calls": 63652,
+          "calls": 63652,
+          "self_seconds": 0.067833606,
+          "cumulative_seconds": 25.592038832
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 884,
+          "function": "_quote_subset_vector",
+          "primitive_calls": 61073,
+          "calls": 61073,
+          "self_seconds": 15.354781063,
+          "cumulative_seconds": 25.524205226000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_auditor.py",
+          "line": 180,
+          "function": "audit",
+          "primitive_calls": 2578,
+          "calls": 2578,
+          "self_seconds": 2.474906126,
+          "cumulative_seconds": 20.454728783
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 67,
+          "function": "measured",
+          "primitive_calls": 2964,
+          "calls": 3059,
+          "self_seconds": 0.024577883000000002,
+          "cumulative_seconds": 18.511210759
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2008,
+          "function": "_candidates",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.011125442000000001,
+          "cumulative_seconds": 17.340204803000002
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 401,
+          "function": "resolve",
+          "primitive_calls": 113110,
+          "calls": 113110,
+          "self_seconds": 0.910908241,
+          "cumulative_seconds": 13.17878435
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 643,
+          "function": "clean_recipe",
+          "primitive_calls": 8227,
+          "calls": 8227,
+          "self_seconds": 0.09835089500000001,
+          "cumulative_seconds": 11.005598970000001
+        },
+        {
+          "file": "/usr/local/lib/python3.12/site-packages/pydantic/main.py",
+          "line": 253,
+          "function": "__init__",
+          "primitive_calls": 673009,
+          "calls": 673009,
+          "self_seconds": 0.574241969,
+          "cumulative_seconds": 9.061087035
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'validate_python' of 'pydantic_core._pydantic_core.SchemaValidator' objects>",
+          "primitive_calls": 676789,
+          "calls": 678817,
+          "self_seconds": 5.4880848360000005,
+          "cumulative_seconds": 8.689160152000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 172,
+          "function": "match",
+          "primitive_calls": 3343,
+          "calls": 3343,
+          "self_seconds": 0.082662152,
+          "cumulative_seconds": 7.047891736
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.any>",
+          "primitive_calls": 1477525,
+          "calls": 1622611,
+          "self_seconds": 1.315249213,
+          "cumulative_seconds": 6.955241343000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 699,
+          "function": "_need_rows",
+          "primitive_calls": 2583,
+          "calls": 2583,
+          "self_seconds": 0.515168415,
+          "cumulative_seconds": 6.704406580000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 53,
+          "function": "resolve_fixed_checkout_price",
+          "primitive_calls": 96911,
+          "calls": 96911,
+          "self_seconds": 0.36534826400000003,
+          "cumulative_seconds": 6.46539422
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_semantics.py",
+          "line": 2041,
+          "function": "evaluate_product_semantics",
+          "primitive_calls": 3373,
+          "calls": 3373,
+          "self_seconds": 0.07860977100000001,
+          "cumulative_seconds": 5.992890658
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 158,
+          "function": "evaluate_semantics",
+          "primitive_calls": 3343,
+          "calls": 3343,
+          "self_seconds": 0.010311399,
+          "cumulative_seconds": 5.977295585
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 732,
+          "function": "_candidate_quotes_with_key",
+          "primitive_calls": 61073,
+          "calls": 61073,
+          "self_seconds": 0.24467027300000002,
+          "cumulative_seconds": 5.853419477
+        },
+        {
+          "file": "/srv/app/backend/app/services/purchase_quantity_resolver.py",
+          "line": 122,
+          "function": "resolve",
+          "primitive_calls": 89801,
+          "calls": 89801,
+          "self_seconds": 0.36657016600000003,
+          "cumulative_seconds": 5.651819451000001
+        },
+        {
+          "file": "/srv/app/grocery_data/app/services/fixed_checkout_price.py",
+          "line": 100,
+          "function": "resolve_fixed_package_checkout",
+          "primitive_calls": 100370,
+          "calls": 100370,
+          "self_seconds": 1.166455338,
+          "cumulative_seconds": 5.555703838
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 256,
+          "function": "nutrition_evidence",
+          "primitive_calls": 52360,
+          "calls": 52360,
+          "self_seconds": 0.20480942700000002,
+          "cumulative_seconds": 5.395297017000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 594,
+          "function": "_calculate_quote",
+          "primitive_calls": 27261,
+          "calls": 27261,
+          "self_seconds": 0.10299823200000001,
+          "cumulative_seconds": 5.360402736
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 630,
+          "function": "_calculate_quote_uncached",
+          "primitive_calls": 25662,
+          "calls": 25662,
+          "self_seconds": 0.080185569,
+          "cumulative_seconds": 4.988702634
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 275,
+          "function": "_nutrition_evidence",
+          "primitive_calls": 27477,
+          "calls": 27477,
+          "self_seconds": 0.15026033,
+          "cumulative_seconds": 4.953585438
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 698,
+          "function": "quote_item",
+          "primitive_calls": 25662,
+          "calls": 25662,
+          "self_seconds": 0.500926748,
+          "cumulative_seconds": 4.876167788
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 930,
+          "function": "<genexpr>",
+          "primitive_calls": 20526995,
+          "calls": 20526995,
+          "self_seconds": 4.774135895000001,
+          "cumulative_seconds": 4.774135895000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_preparation.py",
+          "line": 246,
+          "function": "input_evidence",
+          "primitive_calls": 27477,
+          "calls": 27477,
+          "self_seconds": 0.18742055500000002,
+          "cumulative_seconds": 4.639783578
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.next>",
+          "primitive_calls": 344607,
+          "calls": 344607,
+          "self_seconds": 0.17776897400000002,
+          "cumulative_seconds": 4.569637774
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1241,
+          "function": "_grouped_subset_keys",
+          "primitive_calls": 2579,
+          "calls": 2579,
+          "self_seconds": 3.072995874,
+          "cumulative_seconds": 4.434122018
+        },
+        {
+          "file": "/srv/app/backend/app/services/purchase_quantity_resolver.py",
+          "line": 153,
+          "function": "_fixed_package",
+          "primitive_calls": 84542,
+          "calls": 84542,
+          "self_seconds": 0.7568451270000001,
+          "cumulative_seconds": 3.9777253580000003
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'get' of 'dict' objects>",
+          "primitive_calls": 12225498,
+          "calls": 12225498,
+          "self_seconds": 3.6478554200000004,
+          "cumulative_seconds": 3.6656059560000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1684,
+          "function": "_check_final",
+          "primitive_calls": 3058,
+          "calls": 3058,
+          "self_seconds": 0.086393038,
+          "cumulative_seconds": 3.649840095
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 429,
+          "function": "quote_group_basket",
+          "primitive_calls": 667,
+          "calls": 1060,
+          "self_seconds": 0.181838722,
+          "cumulative_seconds": 3.3656693420000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1395,
+          "function": "_qualified_nutrition_basket",
+          "primitive_calls": 2578,
+          "calls": 2578,
+          "self_seconds": 0.013435150000000002,
+          "cumulative_seconds": 3.2917780650000004
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_semantics.py",
+          "line": 1653,
+          "function": "_infer_special_identity",
+          "primitive_calls": 12259,
+          "calls": 12259,
+          "self_seconds": 0.239433151,
+          "cumulative_seconds": 3.0740995460000002
+        }
+      ]
+    },
+    "B_P40_final": {
+      "runtime": "2816d50e4a14",
+      "status": "final",
+      "artifact_load_seconds": 14.625156574882567,
+      "run": {
+        "phase": "cold",
+        "wall_seconds": 110.82600132841617,
+        "cpu_seconds": 110.739772588,
+        "cold_process_to_serialized_seconds": 127.08311491692439,
+        "serialization_seconds": 0.018206926994025707,
+        "peak_rss_kib": 1439964,
+        "trace": {
+          "timings_ms": {
+            "basket_optimization": 44153.51,
+            "personal_audit": 3305.753,
+            "personal_candidate_generation": 490.133,
+            "personal_candidate_generation_and_qualification": 10133.254,
+            "personal_nutrition": 12792.867,
+            "personal_package_calculation": 3733.615,
+            "personal_product_facts": 14641.335,
+            "personal_week_search": 83244.718
+          },
+          "span_statistics": {
+            "basket_optimization": {
+              "calls": 11166,
+              "wall_ms": 44153.51,
+              "cpu_ms": 0.0,
+              "average_ms": 3.954,
+              "max_ms": 1110.051
+            },
+            "personal_audit": {
+              "calls": 544,
+              "wall_ms": 3305.753,
+              "cpu_ms": 3303.171,
+              "average_ms": 6.077,
+              "max_ms": 11.013
+            },
+            "personal_candidate_generation": {
+              "calls": 1,
+              "wall_ms": 490.133,
+              "cpu_ms": 489.769,
+              "average_ms": 490.133,
+              "max_ms": 490.133
+            },
+            "personal_candidate_generation_and_qualification": {
+              "calls": 1,
+              "wall_ms": 10133.254,
+              "cpu_ms": 10121.927,
+              "average_ms": 10133.254,
+              "max_ms": 10133.254
+            },
+            "personal_nutrition": {
+              "calls": 22323,
+              "wall_ms": 12792.867,
+              "cpu_ms": 12776.322,
+              "average_ms": 0.573,
+              "max_ms": 33.223
+            },
+            "personal_package_calculation": {
+              "calls": 545,
+              "wall_ms": 3733.615,
+              "cpu_ms": 3731.229,
+              "average_ms": 6.851,
+              "max_ms": 45.021
+            },
+            "personal_product_facts": {
+              "calls": 2,
+              "wall_ms": 14641.335,
+              "cpu_ms": 14627.234,
+              "average_ms": 7320.667,
+              "max_ms": 14641.329
+            },
+            "personal_week_search": {
+              "calls": 1,
+              "wall_ms": 83244.718,
+              "cpu_ms": 83167.437,
+              "average_ms": 83244.718,
+              "max_ms": 83244.718
+            }
+          },
+          "operation_counters": {
+            "basket_calculations": 11595,
+            "cache_hits": 1031831,
+            "cache_misses": 17737,
+            "package_cache_hits": 993516,
+            "package_cache_misses": 12655,
+            "package_calculations": 12655,
+            "per_store_selection_cache_hits": 1279,
+            "per_store_selection_cache_misses": 1176,
+            "product_match_calculations": 1900,
+            "quote_set_cache_hits": 12298,
+            "quote_set_cache_misses": 1176,
+            "quote_subset_pattern_cache_hits": 2223,
+            "quote_subset_pattern_cache_misses": 232,
+            "quote_subset_vector_cache_hits": 10963,
+            "quote_subset_vector_cache_misses": 2455,
+            "semantic_candidates_returned": 1769,
+            "semantic_comparisons": 1900,
+            "store_combinations": 1656754,
+            "store_combinations_pruned_infeasible": 1636015,
+            "store_subset_cache_hits": 11552,
+            "store_subset_cache_misses": 43
+          },
+          "depth_counters": {}
+        },
+        "planner_timings": {
+          "product_facts": 14.644031113944948,
+          "package_calculation": 3.712641187477857,
+          "nutrition": 13.681620774790645,
+          "audit": 3.3306932798586786,
+          "candidate_generation_and_qualification": 10.133328686002642,
+          "week_search": 83.24479229329154,
+          "total": 95.91311751538888
+        },
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread:6d0a692188c0e3efbd674814ececf5ff21208aba0fcc2087c11700970ce473b5",
+        "total": 738.17,
+        "recipes": [
+          "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+          "Mustig linschili med vita bönor, ris och limeyoghurt – större huvudportion",
+          "Kycklingbowl med ris, majsröra, limeyoghurt och tomatsalsa",
+          "Citronkyckling med spenatris, feta och gurksallad",
+          "Spenatris med kikärtor, feta och citronyoghurt"
+        ],
+        "profiled": true
+      },
+      "evidence": {
+        "path": ".local/recipe-usability-20261005/results/B-guard-p40-profile/summary.json",
+        "sha256": "ba47e594043f92fd012485dbe33ddf97268a7a665db4eaffa0f5906ae3d247df"
+      },
+      "total_calls": 134503055,
+      "primitive_calls": 133841936,
+      "profiled_cpu_seconds": 95.66572972100008,
+      "top_cumulative_functions": [
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2119,
+          "function": "create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 6.3144e-05,
+          "cumulative_seconds": 95.91339576700001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2318,
+          "function": "_create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.014088573,
+          "cumulative_seconds": 95.895145567
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 835,
+          "function": "basket",
+          "primitive_calls": 559,
+          "calls": 559,
+          "self_seconds": 1.239949849,
+          "cumulative_seconds": 88.641843569
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 830,
+          "function": "optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 1.4719000000000001e-05,
+          "cumulative_seconds": 83.24468558000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 868,
+          "function": "_optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.010011681000000001,
+          "cumulative_seconds": 83.244668707
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2451,
+          "function": "evaluate",
+          "primitive_calls": 523,
+          "calls": 523,
+          "self_seconds": 0.003674216,
+          "cumulative_seconds": 82.997341366
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1395,
+          "function": "_qualified_nutrition_basket",
+          "primitive_calls": 544,
+          "calls": 544,
+          "self_seconds": 5.336872688000001,
+          "cumulative_seconds": 73.528067299
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1469,
+          "function": "optimize",
+          "primitive_calls": 11595,
+          "calls": 11595,
+          "self_seconds": 5.139316094000001,
+          "cumulative_seconds": 46.394661873000004
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 67,
+          "function": "measured",
+          "primitive_calls": 21617,
+          "calls": 22324,
+          "self_seconds": 0.164377152,
+          "cumulative_seconds": 23.141408422
+        },
+        {
+          "file": "/usr/local/lib/python3.12/site-packages/pydantic/main.py",
+          "line": 253,
+          "function": "__init__",
+          "primitive_calls": 444737,
+          "calls": 444737,
+          "self_seconds": 0.36478349200000004,
+          "cumulative_seconds": 12.994763343
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'validate_python' of 'pydantic_core._pydantic_core.SchemaValidator' objects>",
+          "primitive_calls": 447107,
+          "calls": 448215,
+          "self_seconds": 3.9515607040000003,
+          "cumulative_seconds": 12.766964773000002
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1748,
+          "function": "_check_nutrition",
+          "primitive_calls": 22323,
+          "calls": 22323,
+          "self_seconds": 2.30614242,
+          "cumulative_seconds": 12.593221125000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 743,
+          "function": "_candidate_quotes_with_key",
+          "primitive_calls": 274318,
+          "calls": 274318,
+          "self_seconds": 1.49524458,
+          "cumulative_seconds": 11.567425006
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2008,
+          "function": "_candidates",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0026833770000000002,
+          "cumulative_seconds": 10.13323149
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1684,
+          "function": "_check_final",
+          "primitive_calls": 11275,
+          "calls": 11275,
+          "self_seconds": 0.24030015600000001,
+          "cumulative_seconds": 9.594084529
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 333,
+          "function": "to_basket_item",
+          "primitive_calls": 263388,
+          "calls": 263388,
+          "self_seconds": 2.664061593,
+          "cumulative_seconds": 9.448554973
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1814,
+          "function": "_check_nutrition_uncached",
+          "primitive_calls": 8404,
+          "calls": 8404,
+          "self_seconds": 1.625704269,
+          "cumulative_seconds": 8.469150651
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 605,
+          "function": "_calculate_quote",
+          "primitive_calls": 1006171,
+          "calls": 1006171,
+          "self_seconds": 1.172692048,
+          "cumulative_seconds": 8.332030709
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 401,
+          "function": "resolve",
+          "primitive_calls": 25270,
+          "calls": 25270,
+          "self_seconds": 0.28329080100000004,
+          "cumulative_seconds": 7.222235054
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 643,
+          "function": "clean_recipe",
+          "primitive_calls": 1802,
+          "calls": 1802,
+          "self_seconds": 0.024857083000000002,
+          "cumulative_seconds": 6.783171202
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_nutrition.py",
+          "line": 105,
+          "function": "calculation_basis",
+          "primitive_calls": 8446,
+          "calls": 8446,
+          "self_seconds": 0.029180675000000003,
+          "cumulative_seconds": 5.941995784
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_library.py",
+          "line": 238,
+          "function": "validate_recipe_design",
+          "primitive_calls": 8572,
+          "calls": 8572,
+          "self_seconds": 0.185562803,
+          "cumulative_seconds": 5.921368028000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_preparation.py",
+          "line": 223,
+          "function": "basis",
+          "primitive_calls": 8446,
+          "calls": 8446,
+          "self_seconds": 0.036050931,
+          "cumulative_seconds": 5.909315889
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_preparation.py",
+          "line": 176,
+          "function": "validate",
+          "primitive_calls": 8485,
+          "calls": 8485,
+          "self_seconds": 0.02483025,
+          "cumulative_seconds": 5.898743563
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.any>",
+          "primitive_calls": 2952263,
+          "calls": 3037045,
+          "self_seconds": 1.8801580240000002,
+          "cumulative_seconds": 5.848498183
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1579,
+          "function": "<genexpr>",
+          "primitive_calls": 476287,
+          "calls": 476287,
+          "self_seconds": 0.235005653,
+          "cumulative_seconds": 5.237793892
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.sum>",
+          "primitive_calls": 2381237,
+          "calls": 2384749,
+          "self_seconds": 1.7330443800000002,
+          "cumulative_seconds": 5.108743253
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 821,
+          "function": "_cheapest_quote_for_subset_key",
+          "primitive_calls": 456884,
+          "calls": 456884,
+          "self_seconds": 0.44692372,
+          "cumulative_seconds": 5.002788239
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 172,
+          "function": "match",
+          "primitive_calls": 1900,
+          "calls": 1900,
+          "self_seconds": 0.04678837,
+          "cumulative_seconds": 4.675953796
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'get' of 'dict' objects>",
+          "primitive_calls": 9592612,
+          "calls": 9592612,
+          "self_seconds": 4.510505166000001,
+          "cumulative_seconds": 4.52425005
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.min>",
+          "primitive_calls": 933943,
+          "calls": 933943,
+          "self_seconds": 0.992004548,
+          "cumulative_seconds": 4.516676271000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1346,
+          "function": "_cheapest_quote",
+          "primitive_calls": 456884,
+          "calls": 456884,
+          "self_seconds": 0.31454089300000004,
+          "cumulative_seconds": 4.463688294000001
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.next>",
+          "primitive_calls": 251089,
+          "calls": 251089,
+          "self_seconds": 0.118834065,
+          "cumulative_seconds": 4.114508113
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_semantics.py",
+          "line": 2041,
+          "function": "evaluate_product_semantics",
+          "primitive_calls": 1919,
+          "calls": 1919,
+          "self_seconds": 0.047269950000000005,
+          "cumulative_seconds": 4.067334729000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 158,
+          "function": "evaluate_semantics",
+          "primitive_calls": 1900,
+          "calls": 1900,
+          "self_seconds": 0.006045087,
+          "cumulative_seconds": 4.055871732
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 47,
+          "function": "money",
+          "primitive_calls": 1753228,
+          "calls": 1753228,
+          "self_seconds": 0.562214611,
+          "cumulative_seconds": 3.4983545250000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 699,
+          "function": "_need_rows",
+          "primitive_calls": 559,
+          "calls": 559,
+          "self_seconds": 0.102082397,
+          "cumulative_seconds": 3.46687886
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_auditor.py",
+          "line": 180,
+          "function": "audit",
+          "primitive_calls": 544,
+          "calls": 544,
+          "self_seconds": 0.5198451310000001,
+          "cumulative_seconds": 3.2940813660000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 256,
+          "function": "nutrition_evidence",
+          "primitive_calls": 247644,
+          "calls": 247644,
+          "self_seconds": 0.742055931,
+          "cumulative_seconds": 3.2417333640000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1357,
+          "function": "_quote_sort_key",
+          "primitive_calls": 781559,
+          "calls": 781559,
+          "self_seconds": 0.774614146,
+          "cumulative_seconds": 3.2072886190000003
+        }
+      ]
+    },
+    "C_main_final": {
+      "runtime": "2816d50e4a14",
+      "status": "final",
+      "artifact_load_seconds": 14.553189189173281,
+      "run": {
+        "phase": "cold",
+        "wall_seconds": 105.15284050162882,
+        "cpu_seconds": 105.05630175799999,
+        "cold_process_to_serialized_seconds": 121.37512468686327,
+        "serialization_seconds": 0.03404346527531743,
+        "peak_rss_kib": 2090100,
+        "trace": {
+          "timings_ms": {
+            "basket_optimization": 26852.767,
+            "personal_audit": 19795.418,
+            "personal_candidate_generation": 644.26,
+            "personal_candidate_generation_and_qualification": 17450.56,
+            "personal_nutrition": 2086.443,
+            "personal_package_calculation": 27451.713,
+            "personal_product_facts": 15106.995,
+            "personal_week_search": 67169.956
+          },
+          "span_statistics": {
+            "basket_optimization": {
+              "calls": 2578,
+              "wall_ms": 26852.767,
+              "cpu_ms": 0.0,
+              "average_ms": 10.416,
+              "max_ms": 176.86
+            },
+            "personal_audit": {
+              "calls": 2574,
+              "wall_ms": 19795.418,
+              "cpu_ms": 19778.107,
+              "average_ms": 7.691,
+              "max_ms": 1425.107
+            },
+            "personal_candidate_generation": {
+              "calls": 1,
+              "wall_ms": 644.26,
+              "cpu_ms": 643.566,
+              "average_ms": 644.26,
+              "max_ms": 644.26
+            },
+            "personal_candidate_generation_and_qualification": {
+              "calls": 1,
+              "wall_ms": 17450.56,
+              "cpu_ms": 17417.792,
+              "average_ms": 17450.56,
+              "max_ms": 17450.56
+            },
+            "personal_nutrition": {
+              "calls": 3058,
+              "wall_ms": 2086.443,
+              "cpu_ms": 2081.191,
+              "average_ms": 0.682,
+              "max_ms": 932.37
+            },
+            "personal_package_calculation": {
+              "calls": 2575,
+              "wall_ms": 27451.713,
+              "cpu_ms": 27424.232,
+              "average_ms": 10.661,
+              "max_ms": 177.185
+            },
+            "personal_product_facts": {
+              "calls": 3,
+              "wall_ms": 15106.995,
+              "cpu_ms": 15087.142,
+              "average_ms": 5035.665,
+              "max_ms": 15106.979
+            },
+            "personal_week_search": {
+              "calls": 1,
+              "wall_ms": 67169.956,
+              "cpu_ms": 67101.572,
+              "average_ms": 67169.956,
+              "max_ms": 67169.956
+            }
+          },
+          "operation_counters": {
+            "basket_calculations": 2579,
+            "cache_hits": 126723,
+            "cache_misses": 42365,
+            "package_cache_hits": 1593,
+            "package_cache_misses": 25580,
+            "package_calculations": 25580,
+            "per_store_selection_cache_hits": 4930,
+            "per_store_selection_cache_misses": 3625,
+            "product_match_calculations": 3343,
+            "quote_selection_cache_hits": 184,
+            "quote_selection_cache_misses": 200,
+            "quote_set_cache_hits": 57444,
+            "quote_set_cache_misses": 3625,
+            "quote_subset_pattern_cache_hits": 7417,
+            "quote_subset_pattern_cache_misses": 938,
+            "quote_subset_vector_cache_hits": 52618,
+            "quote_subset_vector_cache_misses": 8355,
+            "semantic_candidates_returned": 3091,
+            "semantic_comparisons": 3343,
+            "store_combinations": 4100312,
+            "store_combinations_pruned_infeasible": 3961412,
+            "store_subset_cache_hits": 2537,
+            "store_subset_cache_misses": 42
+          },
+          "depth_counters": {}
+        },
+        "planner_timings": {
+          "product_facts": 15.109568966086954,
+          "package_calculation": 27.467606440652162,
+          "nutrition": 2.1981898909434676,
+          "audit": 19.900043699424714,
+          "candidate_generation_and_qualification": 17.450657905079424,
+          "week_search": 67.17008124524727,
+          "total": 89.71107782516629
+        },
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread:ad52d1456e89d5fb7862e864d4d32966785ea01eeacfca2d415e1c1f8b07e158",
+        "total": 747.77,
+        "recipes": [
+          "Krämig spenattofu med ärtor och vitlöksris",
+          "Röd linsdal med spenat, mjuk tofu och citronris",
+          "Mustig lins- och kidneychili med ris och yoghurt",
+          "Masalapasta med tofu, ärtor och tomatyoghurt",
+          "Rostad blomkål och kikärtor med kokos-linssås"
+        ],
+        "profiled": true,
+        "facts_comparison": "enriched_historical; source retrieval dates preserved"
+      },
+      "evidence": {
+        "path": ".local/recipe-usability-20261005/results/C-guard-profile/summary.json",
+        "sha256": "b2a669db7803e119c431cb1cbd26202669a5ca17e8d41ac22d233a943b6184a3"
+      },
+      "total_calls": 116817400,
+      "primitive_calls": 115997335,
+      "profiled_cpu_seconds": 88.05376412700002,
+      "top_cumulative_functions": [
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2119,
+          "function": "create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0015748110000000002,
+          "cumulative_seconds": 89.711177215
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2318,
+          "function": "_create",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.35775158500000004,
+          "cumulative_seconds": 89.67672986100001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 835,
+          "function": "basket",
+          "primitive_calls": 2583,
+          "calls": 2583,
+          "self_seconds": 5.314419439,
+          "cumulative_seconds": 77.498263601
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 830,
+          "function": "optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.00045027900000000004,
+          "cumulative_seconds": 66.837604213
+        },
+        {
+          "file": "/srv/app/backend/app/services/menu_optimizer.py",
+          "line": 868,
+          "function": "_optimize_slots",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.046359337,
+          "cumulative_seconds": 66.83715173
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2451,
+          "function": "evaluate",
+          "primitive_calls": 2477,
+          "calls": 2477,
+          "self_seconds": 0.021866387,
+          "cumulative_seconds": 65.31403414100001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1469,
+          "function": "optimize",
+          "primitive_calls": 2579,
+          "calls": 2579,
+          "self_seconds": 0.923173295,
+          "cumulative_seconds": 27.438007171000002
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_auditor.py",
+          "line": 180,
+          "function": "audit",
+          "primitive_calls": 2578,
+          "calls": 2578,
+          "self_seconds": 2.4208840200000004,
+          "cumulative_seconds": 19.772317624000003
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 67,
+          "function": "measured",
+          "primitive_calls": 2964,
+          "calls": 3059,
+          "self_seconds": 0.024484171000000002,
+          "cumulative_seconds": 18.594575512000002
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 2008,
+          "function": "_candidates",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.010944497000000001,
+          "cumulative_seconds": 17.450536323
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 401,
+          "function": "resolve",
+          "primitive_calls": 113110,
+          "calls": 113110,
+          "self_seconds": 0.8847744930000001,
+          "cumulative_seconds": 13.384533217000001
+        },
+        {
+          "file": "/usr/local/lib/python3.12/site-packages/pydantic/main.py",
+          "line": 253,
+          "function": "__init__",
+          "primitive_calls": 672765,
+          "calls": 672765,
+          "self_seconds": 1.956536285,
+          "cumulative_seconds": 11.412997115000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 643,
+          "function": "clean_recipe",
+          "primitive_calls": 8227,
+          "calls": 8227,
+          "self_seconds": 0.090532605,
+          "cumulative_seconds": 11.277284656
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1559,
+          "function": "<genexpr>",
+          "primitive_calls": 63548,
+          "calls": 63548,
+          "self_seconds": 0.054561544000000003,
+          "cumulative_seconds": 10.940332966000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 895,
+          "function": "_quote_subset_vector",
+          "primitive_calls": 60973,
+          "calls": 60973,
+          "self_seconds": 2.020933911,
+          "cumulative_seconds": 10.885771422000001
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'validate_python' of 'pydantic_core._pydantic_core.SchemaValidator' objects>",
+          "primitive_calls": 676545,
+          "calls": 678573,
+          "self_seconds": 5.2378921730000005,
+          "cumulative_seconds": 9.668008679
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 172,
+          "function": "match",
+          "primitive_calls": 3343,
+          "calls": 3343,
+          "self_seconds": 0.08012757400000001,
+          "cumulative_seconds": 7.280983091
+        },
+        {
+          "file": "/srv/app/backend/app/services/purchase_quantity_resolver.py",
+          "line": 122,
+          "function": "resolve",
+          "primitive_calls": 89719,
+          "calls": 89719,
+          "self_seconds": 0.37137636,
+          "cumulative_seconds": 7.028147527000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 699,
+          "function": "_need_rows",
+          "primitive_calls": 2583,
+          "calls": 2583,
+          "self_seconds": 0.479305058,
+          "cumulative_seconds": 6.616750457
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 53,
+          "function": "resolve_fixed_checkout_price",
+          "primitive_calls": 96835,
+          "calls": 96835,
+          "self_seconds": 0.348892542,
+          "cumulative_seconds": 6.298093139000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_semantics.py",
+          "line": 2041,
+          "function": "evaluate_product_semantics",
+          "primitive_calls": 3373,
+          "calls": 3373,
+          "self_seconds": 0.079531213,
+          "cumulative_seconds": 6.209546399000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_matcher.py",
+          "line": 158,
+          "function": "evaluate_semantics",
+          "primitive_calls": 3343,
+          "calls": 3343,
+          "self_seconds": 0.010243485,
+          "cumulative_seconds": 6.193554081
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.any>",
+          "primitive_calls": 1485370,
+          "calls": 1630456,
+          "self_seconds": 1.3497052900000002,
+          "cumulative_seconds": 5.8515978340000006
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 743,
+          "function": "_candidate_quotes_with_key",
+          "primitive_calls": 61073,
+          "calls": 61073,
+          "self_seconds": 0.243252564,
+          "cumulative_seconds": 5.816958195000001
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'get' of 'dict' objects>",
+          "primitive_calls": 26275489,
+          "calls": 26275489,
+          "self_seconds": 5.744674489,
+          "cumulative_seconds": 5.761762879
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 955,
+          "function": "<genexpr>",
+          "primitive_calls": 14080752,
+          "calls": 14080752,
+          "self_seconds": 3.5758251970000003,
+          "cumulative_seconds": 5.721229482
+        },
+        {
+          "file": "/srv/app/grocery_data/app/services/fixed_checkout_price.py",
+          "line": 100,
+          "function": "resolve_fixed_package_checkout",
+          "primitive_calls": 100294,
+          "calls": 100294,
+          "self_seconds": 1.14970485,
+          "cumulative_seconds": 5.425027569
+        },
+        {
+          "file": "/srv/app/backend/app/services/purchase_quantity_resolver.py",
+          "line": 153,
+          "function": "_fixed_package",
+          "primitive_calls": 84466,
+          "calls": 84466,
+          "self_seconds": 0.749634468,
+          "cumulative_seconds": 5.353505794
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 605,
+          "function": "_calculate_quote",
+          "primitive_calls": 27173,
+          "calls": 27173,
+          "self_seconds": 0.10562447100000001,
+          "cumulative_seconds": 5.333308048
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1684,
+          "function": "_check_final",
+          "primitive_calls": 3058,
+          "calls": 3058,
+          "self_seconds": 0.079289496,
+          "cumulative_seconds": 5.213737650000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 641,
+          "function": "_calculate_quote_uncached",
+          "primitive_calls": 25580,
+          "calls": 25580,
+          "self_seconds": 0.079773443,
+          "cumulative_seconds": 4.960439291
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 1395,
+          "function": "_qualified_nutrition_basket",
+          "primitive_calls": 2578,
+          "calls": 2578,
+          "self_seconds": 0.012418535000000001,
+          "cumulative_seconds": 4.859915837
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_calculator.py",
+          "line": 698,
+          "function": "quote_item",
+          "primitive_calls": 25580,
+          "calls": 25580,
+          "self_seconds": 0.49912610100000004,
+          "cumulative_seconds": 4.849414252
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.next>",
+          "primitive_calls": 345060,
+          "calls": 345060,
+          "self_seconds": 0.169226818,
+          "cumulative_seconds": 4.651849561000001
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 256,
+          "function": "nutrition_evidence",
+          "primitive_calls": 52360,
+          "calls": 52360,
+          "self_seconds": 0.21061663500000002,
+          "cumulative_seconds": 4.546427168
+        },
+        {
+          "file": "/srv/app/backend/app/services/basket_optimizer.py",
+          "line": 1260,
+          "function": "_grouped_subset_keys",
+          "primitive_calls": 2575,
+          "calls": 2575,
+          "self_seconds": 3.103157432,
+          "cumulative_seconds": 4.4589782510000004
+        },
+        {
+          "file": "/srv/app/backend/app/services/personal_planner.py",
+          "line": 275,
+          "function": "_nutrition_evidence",
+          "primitive_calls": 27477,
+          "calls": 27477,
+          "self_seconds": 0.14861537900000002,
+          "cumulative_seconds": 4.091906634
+        },
+        {
+          "file": "/srv/app/backend/app/services/recipe_preparation.py",
+          "line": 246,
+          "function": "input_evidence",
+          "primitive_calls": 27477,
+          "calls": 27477,
+          "self_seconds": 0.19271125700000002,
+          "cumulative_seconds": 3.7734824610000004
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_semantics.py",
+          "line": 1653,
+          "function": "_infer_special_identity",
+          "primitive_calls": 12259,
+          "calls": 12259,
+          "self_seconds": 0.245757414,
+          "cumulative_seconds": 3.182928081
+        },
+        {
+          "file": "/srv/app/backend/app/services/product_semantics.py",
+          "line": 2339,
+          "function": "<genexpr>",
+          "primitive_calls": 2459,
+          "calls": 2459,
+          "self_seconds": 0.017137633,
+          "cumulative_seconds": 3.0565971920000004
+        }
+      ]
+    }
+  }
+}
