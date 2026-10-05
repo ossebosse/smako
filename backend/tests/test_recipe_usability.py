@@ -158,6 +158,8 @@ def test_vector_checkout_matches_scalar_subset_selection_with_ties_and_changed_a
             for cap in (1, 2, 4):
                 assert vector.optimize(ingredients, products, stores, max_stores=cap) == scalar.optimize(
                     ingredients, products, stores, max_stores=cap)
+                assert vector.optimize(ingredients, products, stores, max_stores=cap) == BasketOptimizer().optimize(
+                    ingredients, products, stores, max_stores=cap)
 
 
 def test_no_qualified_quotes_reports_incomplete_basket_not_internal_error():
@@ -171,3 +173,29 @@ def test_no_qualified_quotes_reports_incomplete_basket_not_internal_error():
             [NormalizedIngredient(canonical_name="x", required_quantity=1, unit="st")],
             {"x": []}, [_store("a")], max_stores=1,
         )
+
+
+def test_subset_patterns_rebind_amounts_and_recompute_price_order():
+    from app.models import NormalizedIngredient
+    from app.services.basket_optimizer import BasketOptimizer
+
+    from backend.tests.test_search_reuse import _product, _store
+
+    optimizer = BasketOptimizer(memoize_store_subsets=True)
+    stores = [_store(s) for s in ('a', 'b')]
+    products = {'x': (_product('x', 3, store_id='a', package_quantity=1),
+                      _product('x', 5, store_id='b', package_quantity=2))}
+    with optimizer.quote_cache() as stats:
+        totals = []
+        for quantity in (1, 3, 2):
+            ingredient = NormalizedIngredient(canonical_name='x', required_quantity=quantity, unit='st')
+            actual = optimizer.optimize([ingredient], products, stores, max_stores=2)
+            reference = BasketOptimizer().optimize([ingredient], products, stores, max_stores=2)
+            assert actual == reference
+            totals.append(actual.total)
+        assert totals == [3, 9, 5]
+        assert stats.subset_pattern_hits >= 1
+        assert stats.subset_pattern_misses == 2
+        session = optimizer._quote_cache_context.get()
+        assert len(session.subset_patterns) == 2
+    assert not session.subset_patterns

@@ -299,7 +299,7 @@ def run_case(browser, engine, mobile, personal, args):
             assert page.locator(".complete-recipe-content:visible").count() == args.dinners
             assert page.locator(".recipe-component:visible").count() >= args.dinners
             page.locator(".complete-recipe-content:visible").first.screenshot(path=str(target / "first-recipe.png"))
-            page.locator(".complete-recipe-content:visible").first.evaluate("el=>el.scrollIntoView({block:'start'})")
+            page.locator(".complete-recipe-content:visible").first.evaluate("el=>el.scrollIntoView({block:'start',behavior:'instant'})")
             page.screenshot(path=str(target / "first-recipe-viewport.png"))
         page.locator("#plan-content" if personal else "#menu-section").screenshot(path=str(target / "recipes.png"))
         if personal:

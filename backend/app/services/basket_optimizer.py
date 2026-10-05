@@ -212,6 +212,8 @@ class QuoteCacheStats:
     per_store_selection_misses: int = 0
     subset_vector_hits: int = 0
     subset_vector_misses: int = 0
+    subset_pattern_hits: int = 0
+    subset_pattern_misses: int = 0
     store_subset_hits: int = 0
     store_subset_misses: int = 0
     same_depth_keys: int = 0
@@ -250,6 +252,9 @@ class StoreSubsetCacheStats:
 
 @dataclass(slots=True)
 class _QuoteCacheSession:
+    # Only the authoritative ordering of stores determines a subset's winner.
+    # Rebind that structural pattern to current quotes; never cache prices here.
+    subset_patterns: dict[tuple, tuple[str | None, ...]] = field(default_factory=dict)
     # Exact quotient of subset vectors, request-local like the source quotes.
     # A bit marks every store subset with that same rank/price/winning store.
     subset_partitions: dict[int, tuple[tuple, tuple]] = field(default_factory=dict)
@@ -400,7 +405,8 @@ class BasketOptimizer:
                     existing.quote_sets, existing.selections,
                     existing.per_store_selections, existing.per_store_compact,
                     existing.subset_vectors, existing.store_orders,
-                    existing.subset_partitions, existing.subset_cap_masks, existing.base_candidate_rows)
+                    existing.subset_partitions, existing.subset_cap_masks, existing.base_candidate_rows,
+                    existing.subset_patterns)
             if sum(map(len, maps)) > 32768:
                 for mapping in maps:
                     mapping.clear()
@@ -434,6 +440,8 @@ class BasketOptimizer:
                 ),
                 "quote_subset_vector_cache_hits": session.stats.subset_vector_hits,
                 "quote_subset_vector_cache_misses": session.stats.subset_vector_misses,
+                "quote_subset_pattern_cache_hits": session.stats.subset_pattern_hits,
+                "quote_subset_pattern_cache_misses": session.stats.subset_pattern_misses,
                 "store_subset_cache_hits": session.stats.store_subset_hits,
                 "store_subset_cache_misses": session.stats.store_subset_misses,
                 "same_depth_store_limited_keys": session.stats.same_depth_keys,
@@ -450,6 +458,7 @@ class BasketOptimizer:
                     + session.stats.selection_hits
                     + session.stats.per_store_selection_hits
                     + session.stats.subset_vector_hits
+                    + session.stats.subset_pattern_hits
                     + session.stats.store_subset_hits
                 ),
                 "cache_misses": (
@@ -458,6 +467,7 @@ class BasketOptimizer:
                     + session.stats.selection_misses
                     + session.stats.per_store_selection_misses
                     + session.stats.subset_vector_misses
+                    + session.stats.subset_pattern_misses
                     + session.stats.store_subset_misses
                 ),
             }
@@ -472,6 +482,7 @@ class BasketOptimizer:
             session.per_store_selections.clear()
             session.per_store_compact.clear()
             session.subset_vectors.clear()
+            session.subset_patterns.clear()
             session.store_orders.clear()
             session.subset_partitions.clear()
             session.subset_cap_masks.clear()
@@ -925,15 +936,23 @@ class BasketOptimizer:
             store_mask=store_bits.get(store_id, 0),
         ) for store_id, quote in per_store.items()}
         missing = _CompactQuoteSelection(quote=None)
-        rows: list[_CompactQuoteSelection] = []
-        for combo_ids in store_subsets:
-            eligible = tuple(store_id for store_id in combo_ids if store_id in per_store)
-            if not eligible:
-                rows.append(missing)
-                continue
-            store_id = min(eligible, key=sort_keys.__getitem__)
-            rows.append(compact[store_id])
-        result = tuple(rows)
+        pattern_key = (ordered_store_ids, limit, tuple(sorted(per_store, key=sort_keys.__getitem__)))
+        pattern = session.subset_patterns.get(pattern_key) if session else None
+        if pattern is None:
+            # Store ID is part of the authoritative quote key, so distinct
+            # stores cannot tie. Changing quantity, price or policy recomputes
+            # this order before reuse; current quote objects supply all values.
+            ranks = {store_id: rank for rank, store_id in enumerate(pattern_key[2])}
+            pattern = tuple(min((s for s in combo if s in ranks),
+                                key=ranks.__getitem__, default=None) for combo in store_subsets)
+            if session:
+                session.stats.subset_pattern_misses += 1
+                if len(session.subset_patterns) >= 256:
+                    session.subset_patterns.pop(next(iter(session.subset_patterns)))
+                session.subset_patterns[pattern_key] = pattern
+        elif session:
+            session.stats.subset_pattern_hits += 1
+        result = tuple(compact.get(store_id, missing) for store_id in pattern)
         if vector_key is not None and session is not None:
             session.subset_vectors[vector_key] = result
         return result
@@ -1522,27 +1541,54 @@ class BasketOptimizer:
         # scalar subset loop. Reuse the existing bounded, request-local quote
         # vectors instead of millions of repeated dictionary lookups and rank
         # calculations. Coupled campaigns take their separate joint path above.
-        vectors = tuple(self._quote_subset_vector(quotes, key, store_ids, store_subsets, limit)
-                        for _ingredient, quotes, key in quoted_ingredients)
-        leading, infeasible_store_combinations, winning_positions = self._grouped_subset_keys(
-            vectors, store_subsets, limit, self._quote_cache_context.get(), winning_mask=True)
         store_combinations = len(store_subsets)
-        if leading and leading[0] is not None:
-            best_single_key, best_single_total = leading[0][:2], leading[0][1]
-        # Every subset was included in exact Decimal/rank aggregation above.
-        # Materialize only ties on its proven best leading key, preserving
-        # ascending subset order and every store/product tie breaker below.
-        # This is no search-budget reduction or comparison-price pruning.
+        vectors = None
+        if self._quote_cache_context.get() is None:
+            # Nutrition alternatives often make one-off baskets with very few
+            # feasible subsets. Without a reuse session, building full vectors
+            # repeats work for every impossible subset. Use the same exact
+            # scalar checkout, rejecting only proven missing ingredient cover.
+            store_bits = {store_id: 1 << index for index, store_id in enumerate(store_ids)}
+            ingredient_store_masks = tuple(
+                sum({store_bits[q.store_id] for q in quotes if q.store_id in store_bits})
+                for _ingredient, quotes, _key in quoted_ingredients
+            )
+            winning_positions = (1 << store_combinations) - 1
+            infeasible_store_combinations = 0
+        else:
+            vectors = tuple(self._quote_subset_vector(quotes, key, store_ids, store_subsets, limit)
+                            for _ingredient, quotes, key in quoted_ingredients)
+            leading, infeasible_store_combinations, winning_positions = self._grouped_subset_keys(
+                vectors, store_subsets, limit, self._quote_cache_context.get(), winning_mask=True)
+            if leading and leading[0] is not None:
+                best_single_key, best_single_total = leading[0][:2], leading[0][1]
+        # With vectors every subset was included in exact aggregation; inspect
+        # only ties on its proven best leading key. The scalar path visits all
+        # subsets here. Both preserve ascending order and every tie breaker;
+        # neither reduces the menu search budget or prunes by comparison price.
         while winning_positions:
             bit = winning_positions & -winning_positions
             position = bit.bit_length() - 1
             winning_positions ^= bit
             combo_ids = store_subsets[position]
-            selections = tuple(vector[position] for vector in vectors)
-            total = money(sum((selection.total_price for selection in selections), Decimal(0)))
-            verification_rank = max((selection.verification_rank for selection in selections),
-                                    default=_VERIFICATION_RANK[BasketVerificationStatus.VERIFIED])
-            used_store_ids = tuple(sorted({selection.store_id for selection in selections}))
+            if vectors is None:
+                combo_mask = sum(store_bits[s] for s in combo_ids)
+                if any(mask & combo_mask == 0 for mask in ingredient_store_masks):
+                    infeasible_store_combinations += 1
+                    continue
+                chosen = tuple(self._cheapest_quote_for_subset_key(quotes, combo_ids, key)
+                               for _ingredient, quotes, key in quoted_ingredients)
+                if any(quote is None for quote in chosen):
+                    continue
+                total = _sum_quotes(chosen)
+                verification_rank = self._quotes_verification_rank(chosen)
+            else:
+                selections = tuple(vector[position] for vector in vectors)
+                chosen = tuple(selection.quote for selection in selections)
+                total = money(sum((selection.total_price for selection in selections), Decimal(0)))
+                verification_rank = max((selection.verification_rank for selection in selections),
+                                        default=_VERIFICATION_RANK[BasketVerificationStatus.VERIFIED])
+            used_store_ids = tuple(sorted({quote.store_id for quote in chosen}))
             leading_key = (
                 verification_rank,
                 total,
@@ -1554,7 +1600,6 @@ class BasketOptimizer:
             # subset cannot affect a strict leading-key loser, so defer the
             # work until a subset can actually replace the incumbent.
             if best_key is None or leading_key <= best_key[:4]:
-                chosen = tuple(selection.quote for selection in selections)
                 product_key = tuple(
                     f"{quote.ingredient}:{quote.unit}:{quote.store_id}:"
                     f"{quote.product_id}:{quote.packages_needed}"
