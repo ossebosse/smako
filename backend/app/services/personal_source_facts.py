@@ -277,6 +277,10 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         bread_form = _coop_bread_form_fields(raw)
         if bread_form and (bread_form[0] != "ready_baked_bread" or not frozen_fields):
             classifications[bread_form[0]] = bread_form[1]
+    elif chain in {"willys", "hemkop"}:
+        labels = raw.get("labels")
+        if isinstance(labels, list) and "frozen" in labels:
+            classifications["frozen"] = {"labels": deepcopy(labels)}
     # A complete ingredient string is useful for positive conflicts; it is NOT
     # an exhaustive proof of allergen absence or compound-product suitability.
     fact = ProductFacts(
