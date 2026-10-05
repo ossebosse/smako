@@ -329,7 +329,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
     fresh = any(k in category for k in ("frukt", "grönt", "grönsak", "kryddväxt")) or bool(re.search(r"klass [12]|färsk|kruka|knippe", label))
     frozen = bool(re.search(r"fryst|frysta|djupfryst", label + " " + category)) or _retained_classification(product, fact, "frozen")
     herbs = {"dill": r"dill", "persilja": r"(?:persilja|bladpersilja)", "basilika": r"basilika", "koriander": r"koriander", "grönmynta": r"grönmynta"}
-    common = r"(?:eko|ekologisk|ekologiskt|ekologiska|svensk|svenska|sverige|klass [12]|krav|färsk|färska|fryst|frysta|djupfryst|djupfrysta|finhackad|hackad|i ask|i påse|påse|kruka|i kruka|knippe|i knippe|blad|krus|hel|hela|skivad|skivade)"
+    common = r"(?:eko|ekologisk|ekologiskt|ekologiska|svensk|svenska|sverige|nordisk|nordiska|skånsk|skånska|klass [12]|krav|färsk|färska|fryst|frysta|djupfryst|djupfrysta|finhackad|hackad|i ask|i påse|påse|kruka|i kruka|knippe|i knippe|blad|krus|hel|hela|skivad|skivade)"
     def simple(pattern, extra=""):
         descriptor = f"(?:{common}|{extra})" if extra else common
         return bool(re.fullmatch(rf"(?:{descriptor} )*{pattern}(?: {descriptor})*", label))

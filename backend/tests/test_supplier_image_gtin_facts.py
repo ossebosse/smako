@@ -1,5 +1,6 @@
 """A supplier declaration needs an exact retained product image identity."""
 
+from app.services.complete_recipes import _requirements_compatible, _whole_food_identity
 from app.services.official_product_facts import supplement_catalog_facts
 from app.services.personal_source_facts import project_raw_facts
 
@@ -19,6 +20,8 @@ def test_supplier_submitted_nutrition_binds_only_to_exact_image_ean():
     assert selected.nutrition == {"kcal": 75, "fat_g": 0.8, "carbs_g": 9.5, "protein_g": 5.6}
     assert selected.field_sources["supplier_declaration"][0]["retailer_image_identity"]["gtin"] == "06430104920418"
     assert selected.product_classification == ("frozen",)
+    assert _whole_food_identity("ärtor", "as_sold", p, selected, ("plain", "frozen"))
+    assert _requirements_compatible("ärtor", ("plain", "frozen"), p, selected)
     assert not selected.allergens_checked
 
     for image in ("06430104920425_C1N1_s01", "nonsense_C1N1_s01"):
