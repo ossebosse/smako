@@ -208,8 +208,16 @@ def run_case(browser, engine, mobile, personal, args):
                                   is_mobile=mobile, has_touch=mobile, ignore_https_errors=args.ignore_https_errors)
     page = context.new_page()
     observed, errors, failures = [], [], []
+    error_events = []
+    navigation_events = []
+    def record_page_error(error):
+        errors.append(str(error))
+        error_events.append({"message": str(error), "stack": getattr(error, "stack", None),
+                             "at_utc": datetime.now(UTC).isoformat(), "page_url": page.url})
     page.on("response", lambda response: record_response(response, observed))
-    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.on("pageerror", record_page_error)
+    page.on("framenavigated", lambda frame: navigation_events.append(
+        {"at_utc": datetime.now(UTC).isoformat(), "url": frame.url}) if frame.parent_frame is None else None)
     page.on("requestfailed", lambda request: failures.append({"url": request.url, "method": request.method, "failure": request.failure}))
     try:
         page.goto(args.base + ("/personal" if personal else "/"), wait_until="domcontentloaded")
@@ -435,6 +443,8 @@ def run_case(browser, engine, mobile, personal, args):
             pass
     finally:
         report["page_errors"] = errors
+        report["page_error_events"] = error_events
+        report["navigation_events"] = navigation_events
         report["network_failures"] = failures
         report["finished_utc"] = datetime.now(UTC).isoformat()
         dump(target / "report.json", report)
