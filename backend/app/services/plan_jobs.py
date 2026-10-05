@@ -7,6 +7,7 @@ here. A process restart expires unfinished jobs rather than replaying writes.
 from __future__ import annotations
 
 import asyncio
+import traceback
 from collections.abc import Awaitable, Callable
 from contextvars import ContextVar
 from dataclasses import dataclass
@@ -26,6 +27,27 @@ def report_stage(stage: str):
 
 class PlanJobsFull(RuntimeError):
     pass
+
+
+def _release_exception_frames(error: BaseException | None) -> None:
+    """Keep pollable error evidence without retaining finished planner locals.
+
+    A Task retains its exception for the transport retention period. Chained
+    tracebacks otherwise retain the complete planner, facts and search caches.
+    Clearing completed frames preserves exception type, public fields, cause
+    chain and traceback locations; it never changes the user-visible failure.
+    """
+    pending = [error]
+    seen = set()
+    while pending:
+        current = pending.pop()
+        if current is None or id(current) in seen:
+            continue
+        seen.add(id(current))
+        traceback.clear_frames(current.__traceback__)
+        pending.extend((current.__cause__, current.__context__))
+        if isinstance(current, BaseExceptionGroup):
+            pending.extend(current.exceptions)
 
 
 @dataclass
@@ -81,7 +103,7 @@ class PlanJobs:
             # Retrieve exceptions even when a browser never polls again. The
             # existing API exception handlers render them on an owned poll.
             if not task.cancelled():
-                task.exception()
+                _release_exception_frames(task.exception())
 
         job.task.add_done_callback(finished)
         return job

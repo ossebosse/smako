@@ -23,10 +23,14 @@ def install(path):
 
         async def measured_factory():
             admitted, cpu = time.perf_counter(), time.process_time()
+            from app.services import planner_admission
+            cleanup_context = getattr(planner_admission, 'memory_cleanup_seconds', None)
+            cleanup = cleanup_context.get() if cleanup_context is not None else 0.0
             try:
                 return await factory()
             finally:
-                record({'kind': 'new_calculation', 'queue_seconds': admitted - submitted,
+                record({'kind': 'new_calculation', 'queue_seconds': max(0, admitted - submitted - cleanup),
+                        'memory_cleanup_seconds': cleanup,
                         'calculation_seconds': time.perf_counter() - admitted,
                         'cpu_seconds': time.process_time() - cpu,
                         'peak_rss_kib': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss})

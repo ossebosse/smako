@@ -11,11 +11,15 @@ requests.  It does not alter any planner input or economic result.
 from __future__ import annotations
 
 import asyncio
+import gc
 from collections.abc import Awaitable, Callable
+from contextvars import ContextVar
 from dataclasses import dataclass
+from time import perf_counter
 from typing import TypeVar
 
 Result = TypeVar("Result")
+memory_cleanup_seconds: ContextVar[float] = ContextVar("planner_memory_cleanup_seconds", default=0.0)
 
 
 class PlannerAdmissionOverloaded(RuntimeError):
@@ -109,6 +113,7 @@ class PlannerAdmissionController:
             return outcome.value  # type: ignore[return-value]
 
         acquired = False
+        cleanup_token = None
         try:
             await self._capacity.acquire()
             acquired = True
@@ -116,6 +121,14 @@ class PlannerAdmissionController:
                 self._queued -= 1
                 self._active += 1
                 self._peak_active = max(self._peak_active, self._active)
+
+            # Completed searches can leave cyclic garbage in Python's oldest
+            # generation even after their bounded caches go out of scope.
+            # Collect between admitted builds, before allocating another search.
+            # This neither evicts live facts nor changes candidates or budgets.
+            cleanup_started = perf_counter()
+            await asyncio.to_thread(gc.collect)
+            cleanup_token = memory_cleanup_seconds.set(perf_counter() - cleanup_started)
 
             try:
                 value = await factory()
@@ -136,6 +149,8 @@ class PlannerAdmissionController:
                 outcome_future.set_result(_Outcome(error=exc))
             raise
         finally:
+            if cleanup_token is not None:
+                memory_cleanup_seconds.reset(cleanup_token)
             async with self._state_lock:
                 if acquired:
                     self._active -= 1

@@ -164,16 +164,23 @@ def test_vector_checkout_matches_scalar_subset_selection_with_ties_and_changed_a
                     ingredients, {key: list(rows) for key, rows in products.items()}, stores, max_stores=cap)
 
 
-def test_no_qualified_quotes_reports_incomplete_basket_not_internal_error():
+@pytest.mark.parametrize('cached', [False, True])
+def test_no_qualified_quotes_reports_incomplete_basket_not_internal_error(cached):
+    from contextlib import nullcontext
+
     from app.models import NormalizedIngredient
     from app.services.basket_optimizer import BasketOptimizer, IncompleteBasketError
 
     from backend.tests.test_search_reuse import _store
 
-    with pytest.raises(IncompleteBasketError, match="No complete basket"):
-        BasketOptimizer().optimize(
+    optimizer = BasketOptimizer()
+    with (
+        optimizer.quote_cache() if cached else nullcontext(),
+        pytest.raises(IncompleteBasketError, match="No complete basket"),
+    ):
+        optimizer.optimize(
             [NormalizedIngredient(canonical_name="x", required_quantity=1, unit="st")],
-            {"x": []}, [_store("a")], max_stores=1,
+            {"x": () if cached else []}, [_store("a")], max_stores=1,
         )
 
 

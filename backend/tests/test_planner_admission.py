@@ -249,3 +249,45 @@ def test_admission_limits_are_configurable_from_environment(
 def test_negative_admission_queue_is_rejected() -> None:
     with pytest.raises(ValueError, match="PLANNER_MAX_QUEUED_REQUESTS"):
         Settings(planner_max_queued_requests=-1)
+
+
+@pytest.mark.asyncio
+async def test_unreachable_search_state_is_collected_before_next_build(monkeypatch):
+    import gc
+    import weakref
+
+    from app.services import planner_admission
+
+    class SearchState:
+        pass
+
+    events = []
+    collect = gc.collect
+
+    def measured_collect():
+        events.append('collect')
+        return collect()
+
+    monkeypatch.setattr(planner_admission.gc, 'collect', measured_collect)
+    enabled = gc.isenabled()
+    gc.disable()
+    try:
+        state = SearchState()
+        state.cycle = state
+        reference = weakref.ref(state)
+        del state
+        assert reference() is not None
+
+        async def build():
+            events.append('build')
+            assert reference() is None
+            assert planner_admission.memory_cleanup_seconds.get() >= 0
+            return 'same valid result'
+
+        controller = PlannerAdmissionController(max_concurrent=1)
+        assert await controller.run('new-request', build) == 'same valid result'
+        assert events == ['collect', 'build']
+        assert planner_admission.memory_cleanup_seconds.get() == 0
+    finally:
+        if enabled:
+            gc.enable()
