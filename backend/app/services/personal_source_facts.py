@@ -320,8 +320,30 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         "nutrition_unit": unit,
         **{f"nutrition.{k}": v for k, v in nutrition.items()},
     }
+    image_identity = None
+    if chain in {"willys", "hemkop"}:
+        # Axfood's exact product image key can carry a checksum-valid EAN even
+        # when the catalogue row omits its GTIN. It is identity evidence only:
+        # neither a nutrient declaration nor an offer is inferred from it.
+        from grocery_data.app.domain.identifiers import InvalidGtinError, normalize_gtin
+
+        image = raw.get("image")
+        url = image.get("url") if isinstance(image, dict) else None
+        match = re.fullmatch(
+            r"https://assets\.axfood\.se/image/upload/[^?#]+/([0-9]{13,14})_[A-Za-z0-9]+_s[0-9]+",
+            url or "",
+        )
+        if match:
+            try:
+                image_identity = {
+                    **evidence, "gtin": normalize_gtin(match.group(1)).normalized_gtin,
+                    "image_url": url, "method": "checksum_valid_exact_retained_product_image_key",
+                }
+            except InvalidGtinError:
+                pass
     return replace(
         fact, field_sources={**{k: (dict(evidence),) for k, v in fields.items() if v is not None},
+                            **({"retailer_image_gtin": (image_identity,)} if image_identity else {}),
                             **({"nutrition.energy": ({**evidence, **energy_evidence},),
                                 **({"nutrition.kcal": ({**evidence, **energy_evidence},)}
                                    if energy_evidence["status"] == "conflict" or "kcal" in nutrition else {})}

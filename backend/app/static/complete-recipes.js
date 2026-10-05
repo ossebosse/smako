@@ -76,6 +76,8 @@
       minCuisines.disabled=cuisineDistribution.value!=="minimum"||advanced.disabled;
       const selected=cuisineInputs.filter(n=>n.checked).length;
       const dinners=Number(document.getElementById(personal?"dinner-count":"recipes")?.value||5);
+      moreVariety.disabled=advanced.disabled||dinners<3||(selected>0&&selected<3);
+      moreVariety.title=moreVariety.disabled&&enabled&&mode.value==="complete"?"Välj minst tre middagar och tre tillåtna matkök för detta förslag.":"";
       const required=cuisineDistribution.value==="each_selected"?selected:cuisineDistribution.value==="minimum"?Number(minCuisines.value):0;
       cuisineDistribution.setCustomValidity(cuisineDistribution.value==="each_selected"&&!selected?"Välj minst ett matkök.":required>dinners?"Fler obligatoriska matkök än middagar.":cuisineDistribution.value==="minimum"&&required>(selected||6)?"Välj fler tillåtna matkök eller sänk minimiantalet.":"");
       feedback.textContent="";
@@ -272,7 +274,7 @@
     if(!(plan.recipes||[]).some(recipe=>recipe.design))return null;
     const out=el("div",null,"recipe-search-status data-note");
     out.append(el("p",mode==="cheapest"?"Lägsta hittade inköpskostnad inom dina val. Sökningen bevisar inte global optimalitet.":"Inköpskostnaden följer ditt val av balans mellan pris och variation. Sökningen bevisar inte global optimalitet."));
-    const distribution=plan.personal?.checks?.week_distribution;if(distribution){const proteins=Object.entries(distribution.main_proteins||{}).map(([source,count])=>`${source} ${count} ${count===1?"middag":"middagar"}`);out.append(el("p",`${distribution.distinct_cuisines} matkök${proteins.length?` · ${proteins.join(" · ")}`:""}.`));}
+    const distribution=plan.personal?.checks?.week_distribution;if(distribution){const cuisineCounts=Object.entries(distribution.cuisines||{}).map(([name,count])=>`${cuisines[name]||name} ${count}`);const proteins=Object.entries(distribution.main_proteins||{}).map(([source,count])=>`${source} ${count} ${count===1?"middag":"middagar"}`);out.append(el("p",`${distribution.distinct_cuisines} matkök${cuisineCounts.length?` · ${cuisineCounts.join(" · ")}`:""}${proteins.length?` · ${proteins.join(" · ")}`:""}.`));}
     const budget=plan.personal?.checks?.search_outcome?.budget_message;if(typeof budget==="string"&&budget.trim())out.append(el("p",budget));return out;
   }
 

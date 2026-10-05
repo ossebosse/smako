@@ -113,6 +113,8 @@ def _supplement_named_catalog_facts(products, original):
     rows = [r for r in declarations() if r.get("parser") == "gogreen-linked-product-declaration-v1"
             or (r.get("parser") == "garant-explicit-gs1-declaration-v1"
                 and r.get("binding_requirement") == "unique_exact_complete_brand_variant_fixed_pack")]
+    image_bound_rows = [r for r in declarations()
+                        if r.get("parser") == "supplier-validoo-exact-gtin-v1"]
     result = dict(original)
     for p in products:
         prov = p.source_provenance
@@ -120,12 +122,22 @@ def _supplement_named_catalog_facts(products, original):
                 or not p.package_quantity or p.package_unit != "g"
                 or (p.purchase_terms and p.purchase_terms.identity_scope != "product")):
             continue
+        key = (p.store_id, p.product_id)
+        prior = result.get(key)
         row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit,
                                 gtin=p.gtin, rows=rows)
+        image_source = None
+        if row is None and prior and image_bound_rows:
+            sources = prior.field_sources.get("retailer_image_gtin", ())
+            valid = [source for source in sources if source.get("snapshot_id") == prov.source_snapshot_id
+                     and source.get("product_id") == p.product_id and source.get("gtin")]
+            if len(valid) == 1 and (not p.gtin or p.gtin.zfill(14) == valid[0]["gtin"].zfill(14)):
+                image_source = valid[0]
+                row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit,
+                                        gtin=image_source["gtin"], rows=image_bound_rows)
         if row is None:
             continue
-        key = (p.store_id, p.product_id)
-        prior = result.get(key) or ProductFacts(source="verified_supplier_catalog_supplement",
+        prior = prior or ProductFacts(source="verified_supplier_catalog_supplement",
             source_product_id=p.product_id, source_snapshot_id=prov.source_snapshot_id)
         source = {**row["source"], "source": row["source"]["url"],
                   "identity_method": row["binding_requirement"], "supplier_gtin": row["gtin"],
@@ -135,6 +147,8 @@ def _supplement_named_catalog_facts(products, original):
                   "bound_snapshot_id": prov.source_snapshot_id,
                   "source_package_quantity": p.package_quantity, "source_package_unit": p.package_unit,
                   "basis_unit": "g", "preparation": "as_sold", "original_nutrition": row["nutrition"]}
+        if image_source:
+            source["retailer_image_identity"] = image_source
         fields = dict(prior.field_sources)
         fields["supplier_declaration"] = (*fields.get("supplier_declaration", ()), source)
         changes = {}

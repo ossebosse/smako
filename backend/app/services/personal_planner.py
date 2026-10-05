@@ -2257,8 +2257,11 @@ class PersonalPlanner:
         return result
 
     def _cache_identity(self, recipes):
+        from app.services.recipe_week_variation import CLASSIFICATION_VERSION
+
         payload = {
             "policy": POLICY_VERSION,
+            "week_classification": CLASSIFICATION_VERSION,
             "request": self.request.model_dump(mode="json"),
             "pantry_revision": self.state["revision"],
             "facts_policy_version": self.facts_version,

@@ -67,6 +67,7 @@ def week_summary(recipes) -> dict:
         "distinct_cuisines": len(cuisine_counts),
         "dinner_count": len(recipes),
         "base_ids": sorted({r.design.base_id for r in recipes if r.design}),
+        "base_id_counts": dict(sorted(Counter(r.design.base_id for r in recipes if r.design).items())),
         "dish_families": dict(sorted(Counter(r.design.family for r in recipes if r.design).items())),
         "cooking_methods": dict(sorted(Counter(r.design.method for r in recipes if r.design).items())),
     }

@@ -486,7 +486,8 @@ def exact_declaration(
     ]
     # Conflicting same-name variants cannot be resolved merely by cheap price.
     if gtin:
-        candidates = [r for r in candidates if r["gtin"] == normalize_gtin(gtin).normalized_gtin]
+        expected = normalize_gtin(gtin).normalized_gtin.zfill(14)
+        candidates = [r for r in candidates if r.get("gtin") and normalize_gtin(r["gtin"]).normalized_gtin.zfill(14) == expected]
     if len(candidates) != 1:
         return None
     return candidates[0]
