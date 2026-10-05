@@ -1,3 +1,55 @@
+# 2026-10-05: Innehållspaket 24 + 24 integrerat, ej aktiverat
+
+Gren `feature/recipe-content-pack-20261005`, runtime
+**dbd89abbed0a0e3b9d8955badabb17615d6c8d09**, BUILD_ID `content-dbd89abbed0a`.
+[Slutresultat, kvalificering och mätningar](releases/recipe-content-20261005/RESULTS.md),
+[separat app-only-aktivering och funktionsåtergång](releases/recipe-content-20261005/ACTIVATION.md).
+Ingen produktionsaktivering, Git-push, insamling eller driftpolicyändring.
+
+Paketets färdiga innehåll infördes prioritet 1 före 2 utan ny receptgenerering.
+24 familjeförslag jämfördes mot alla 104 aktuella versioner: 14 nya grundrätter,
+10 befintliga familjer med motiverade variationer. 48 nya 2.0.0-versioner;
+totalt 62 grundrätter/152 versioner. Alla äldre recept bevarade och hashoförändrade.
+Komponentmängder, former, varianternas egna steg och processvatten bevaras.
+Ny metod `smako-authored-input-v2` redovisar uppskattad näring och okända
+beredningsförluster utan att kräva att källans avhällda kokvatten serveras.
+
+På samma autentiska frysta pris-/faktaunderlag kvalificeras 11/48 nya versioner
+med uppskattade köp och 7/48 med exakta köp. Uppskattad full näringsprofil:
+96 → 107 kvalificerade versioner, 47 → 52 distinkta familjer. De 37 datastoppen
+beror bland annat på milt paprikapulvers näring, chiliflakes, avrunnen majs,
+pita/småpasta och ätbar mängd för ägg/tonfisk. Inga fakta eller mängder uppfanns.
+Tidigare preliminära 23 kvalificerade/698,77 kr är underkända som slutacceptans
+efter striktare kontroll mot innehållspaketets angivna ingredienser.
+
+Huvudfallet bevarar exakt recept, produkter, mängder, näring, audit och rester:
+768,04 kr inköp/566,87 kr använd mängd. Billigast 534,40 kr och Varierad 808,76 kr
+är också oförändrade före/efter. Utbyggnaden ger längre söktid, ingen dold besparing:
+huvudfall kall process 82,49 → 93,11 s, varm nyberäkning 58,00 → 64,93 s;
+Billigast kall process 66,59 → 109,77 s (inklusive tidigare pools omvalidering),
+Varierad 135,02 → 149,84 s. Samma 2 CPU/3 GiB, oförändrad sökbudget, en observation
+per sidofall. 60-sekundersmålet är inte uppnått. Ingen färdigplancache används i måtten.
+
+2 258 backendtester, deterministisk import, Ruff och compileall PASS.
+48 versioner renderade i båda webbläsarna på mobil/desktop. Riktigt publikt
+Chromium-flöde väljer nya IT04-base vid byte, omräknar och läser revisionerna
+1–3 efter faktisk omstart; personlig WebKit-mobil gör motsvarande femköksflöde.
+Ägarisolering/dubbelstart passerar. Angivet 500 g potatisskafferi används med
+300 g utan automatisk restbokföring. Inga fysiska iPhone- eller provlagningspåståenden.
+
+Serverpaket `.local/releases/recipe-content-final-20261005/smako-server-dbd89abbed0a.zip`,
+SHA-256 `e6fe6c4698af816d1b1c8f8f36e23a7be770008237672927557ec38a27ebef4c`,
+image `sha256:a7b0440c6efb19cc2f4b25ae12689656f19f881a2446d7e4f2249d00d0950727`.
+Alla 649 installerade runtimefiler verifierade mot paketet. Produktion är fortsatt
+ready på `complete-recipes-17a9c1330dcc`, flagga true, oförändrad image/starttid.
+**Efter sparade 2.0.0-planer: funktionsåtergång med flagga av i samma nya image,
+inte äldre binär eller återställd databas.**
+
+Fulla lokala bevis `.local/recipe-content-20261005`, serverns isolerade bevis
+`/var/tmp/smako-content-20261005`. Testcontainer `smako-content-isolated` stoppad,
+eget tillstånd och alla revisioner bevarade med konsistent slutbackup. Frysta
+indata från tidigare prestandaarbete har inte ändrats eller kopierats till produktion.
+
 # 2026-10-04: Femköksplanering – testad prestandakandidat, ej aktiverad
 
 På `perf/five-cuisine-planning`. Runtime **b89fadb96c4edc4576cb4daae6c5d80e553ad8ca**,
