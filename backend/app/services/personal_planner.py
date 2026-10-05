@@ -1442,11 +1442,19 @@ class PersonalPlanner:
             current = next(
                 i for store in baseline.stores for i in store.items if i.ingredient == key
             )
+            # Rank alternatives by the actual checkout for the week's pooled
+            # requirement. Unit price and one-package price can both rank a
+            # small requirement incorrectly after whole-package rounding.
+            requirement = next(i for i in ingredients if i.canonical_name == key)
+            checkout_totals = {
+                (q.store_id, q.product_id): q.total_price
+                for q in self.optimizer._candidate_quotes(requirement, candidates[key])
+            }
             ordered = sorted(
                 candidates[key],
                 key=lambda c: (
                     c.product_id != current.product_id or c.store_id != current.store_id,
-                    c.effective_price,
+                    checkout_totals.get((c.store_id, c.product_id), Decimal("Infinity")),
                     c.product_id,
                 ),
             )
@@ -2421,6 +2429,12 @@ class PersonalPlanner:
                 self.diagnostics.branch(len(chosen), "policy_taste")
                 return False
             dinners = [s.recipe for s in constraint_slots if s.meal_type == "dinner" and s.recipe]
+            if self.complete:
+                from app.services.recipe_week_variation import accepts_week
+                if not accepts_week(dinners, self.request.recipe_preferences,
+                                    dinner_count=dinner_count, final=constraint_final and not draft):
+                    self.diagnostics.branch(len(chosen), "variation")
+                    return False
             if len({self._recipe_id(r) for r in dinners}) != len(dinners):
                 self.diagnostics.branch(len(chosen), "variation")
                 return False
@@ -2513,6 +2527,9 @@ class PersonalPlanner:
         result["checks"]["checkout_audit"] = result["audit"].model_dump(mode="json")
         result["checks"]["allowed_store_ids"] = sorted(self.store_ids)
         if self.complete:
+            from app.services.recipe_week_variation import week_summary
+            result["checks"]["week_distribution"] = week_summary(
+                [s.recipe for s in chosen if s.meal_type == "dinner" and s.recipe])
             result["checks"]["recipe_variation_policy"] = {
                 **policy.model_dump(mode="json"),
                 "description": "Rättfamilj, huvudråvara, beredning, sås/smakprofil och tillbehör bedöms tillsammans. Samma ris eller kastrull är inte ensamt en upprepning. Uttryckliga begränsningar gäller fortfarande.",

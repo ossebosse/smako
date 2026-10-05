@@ -27,6 +27,12 @@
     const cuisineField=el("fieldset",null,"recipe-cuisines");cuisineField.append(el("legend","Matkök och inspiration"));
     const cuisineInputs=Object.entries(cuisines).map(([value,label])=>{const checkbox=input(`cuisine-${value}`,"checkbox",value);const row=field(label,checkbox);row.className="check-label";cuisineField.append(row);return checkbox;});
     cuisineField.append(el("p","Välj ett eller flera. Inget markerat betyder alla matkök. Rätterna är inspirerade av matkökens smaker.","field-hint"));advanced.append(cuisineField);
+    const cuisineDistribution=select("recipe-cuisine-distribution",[["free","Välj fritt bland valda matkök"],["minimum","Minst X olika matkök"],["each_selected","Minst en rätt från varje valt matkök"]],"free");
+    const minCuisines=input("recipe-min-cuisines","number",3,{min:"1",max:"6",step:"1"});
+    const proteinCap=input("recipe-main-protein-cap","number","",{min:"1",max:"7",step:"1",placeholder:"Inget extra tak"});
+    const moreVariety=el("button","Mer omväxling: minst 3 matkök, högst 2 middagar per huvudprotein");moreVariety.type="button";
+    const variation=el("div",null,"complete-recipe-grid");variation.append(field("Köksfördelning",cuisineDistribution),field("Minsta antal olika matkök",minCuisines),field("Högst middagar per huvudproteinkälla",proteinCap));
+    advanced.append(variation,moreVariety,el("p","Valen ovan är frivilliga krav för hela veckans middagar. En blandrätt räknas en gång för varje huvudsaklig proteinkälla som ingår. Billigast, Balanserad och Varierad behåller sina ekonomiska mål.","field-hint"));
     const grid=el("div",null,"complete-recipe-grid");
     const preset=select("recipe-ingredient-preset",[["10-15","10–15 ingredienser"],["6-10","6–10 ingredienser"],["10-20","10–20 ingredienser"],["custom","Eget intervall"]],"10-15");
     const min=input("recipe-min-ingredients","number",10,{min:"3",max:"20",step:"1",required:true});
@@ -67,12 +73,17 @@
       custom.hidden=preset.value!=="custom";min.disabled=custom.hidden;max.disabled=custom.hidden;
       min.setCustomValidity("");max.setCustomValidity("");
       if(preset.value==="custom"&&Number(min.value)>Number(max.value))max.setCustomValidity("Högsta antalet måste vara minst lika stort som lägsta antalet.");
+      minCuisines.disabled=cuisineDistribution.value!=="minimum"||advanced.disabled;
+      const selected=cuisineInputs.filter(n=>n.checked).length;
+      const dinners=Number(document.getElementById(personal?"dinner-count":"recipes")?.value||5);
+      const required=cuisineDistribution.value==="each_selected"?selected:cuisineDistribution.value==="minimum"?Number(minCuisines.value):0;
+      cuisineDistribution.setCustomValidity(cuisineDistribution.value==="each_selected"&&!selected?"Välj minst ett matkök.":required>dinners?"Fler obligatoriska matkök än middagar.":cuisineDistribution.value==="minimum"&&required>(selected||6)?"Välj fler tillåtna matkök eller sänk minimiantalet.":"");
       feedback.textContent="";
     }
     function values() {
       if(mode.value!=="complete")return {};
       const [lo,hi]=preset.value==="custom"?[Number(min.value),Number(max.value)]:preset.value.split("-").map(Number);
-      const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
+      const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
       if(selectedContexts.length)result.allowed_store_ids=selectedContexts.slice();
       if(!personal)Object.assign(result,{allow_nutrition_estimates:estimates.checked,use_pantry:pantry.checked});
       return result;
@@ -84,6 +95,7 @@
       min.value=preferences.min_ingredients??10;max.value=preferences.max_ingredients??15;
       const pair=`${min.value}-${max.value}`;preset.value=["10-15","6-10","10-20"].includes(pair)?pair:"custom";
       minutes.value=preferences.max_minutes??"";protein.value=preferences.min_protein_g??"";adaptation.value=preferences.adaptation||"approved";fish.checked=preferences.allow_fish!==false;
+      cuisineDistribution.value=preferences.cuisine_distribution||"free";minCuisines.value=preferences.min_distinct_cuisines??3;proteinCap.value=preferences.max_same_main_protein_dinners??"";
       if(estimates)estimates.checked=request.allow_nutrition_estimates===true;
       if(pantry)pantry.checked=request.use_pantry!==false;
       sync();
@@ -92,6 +104,7 @@
     box.addEventListener("input",()=>{sync();storage.set(key,values());});
     box.addEventListener("change",()=>{sync();storage.set(key,values());});
     mode.addEventListener("change",()=>void loadContexts());
+    moreVariety.addEventListener("click",()=>{cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;sync();storage.set(key,values());});
     restore(storage.get(key)||{});
     return {
       values(){return enabled?values():{};}, restore,
@@ -259,6 +272,7 @@
     if(!(plan.recipes||[]).some(recipe=>recipe.design))return null;
     const out=el("div",null,"recipe-search-status data-note");
     out.append(el("p",mode==="cheapest"?"Lägsta hittade inköpskostnad inom dina val. Sökningen bevisar inte global optimalitet.":"Inköpskostnaden följer ditt val av balans mellan pris och variation. Sökningen bevisar inte global optimalitet."));
+    const distribution=plan.personal?.checks?.week_distribution;if(distribution){const proteins=Object.entries(distribution.main_proteins||{}).map(([source,count])=>`${source} ${count} ${count===1?"middag":"middagar"}`);out.append(el("p",`${distribution.distinct_cuisines} matkök${proteins.length?` · ${proteins.join(" · ")}`:""}.`));}
     const budget=plan.personal?.checks?.search_outcome?.budget_message;if(typeof budget==="string"&&budget.trim())out.append(el("p",budget));return out;
   }
 
