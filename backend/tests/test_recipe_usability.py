@@ -158,3 +158,16 @@ def test_vector_checkout_matches_scalar_subset_selection_with_ties_and_changed_a
             for cap in (1, 2, 4):
                 assert vector.optimize(ingredients, products, stores, max_stores=cap) == scalar.optimize(
                     ingredients, products, stores, max_stores=cap)
+
+
+def test_no_qualified_quotes_reports_incomplete_basket_not_internal_error():
+    from app.models import NormalizedIngredient
+    from app.services.basket_optimizer import BasketOptimizer, IncompleteBasketError
+
+    from backend.tests.test_search_reuse import _store
+
+    with pytest.raises(IncompleteBasketError, match="No complete basket"):
+        BasketOptimizer().optimize(
+            [NormalizedIngredient(canonical_name="x", required_quantity=1, unit="st")],
+            {"x": []}, [_store("a")], max_stores=1,
+        )

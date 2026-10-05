@@ -1527,7 +1527,7 @@ class BasketOptimizer:
         leading, infeasible_store_combinations, winning_positions = self._grouped_subset_keys(
             vectors, store_subsets, limit, self._quote_cache_context.get(), winning_mask=True)
         store_combinations = len(store_subsets)
-        if leading[0] is not None:
+        if leading and leading[0] is not None:
             best_single_key, best_single_total = leading[0][:2], leading[0][1]
         # Every subset was included in exact Decimal/rank aggregation above.
         # Materialize only ties on its proven best leading key, preserving
