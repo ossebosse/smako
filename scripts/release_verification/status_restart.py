@@ -47,9 +47,6 @@ async def main(args):
                 report['before_interruption_stage'] = body['stage']
                 break
             await asyncio.sleep(.2)
-        elif args.scenario == 'cookie-expiry':
-            await context.add_cookies([{**cookie, 'expires': time.time()-1} for cookie in original_cookies])
-            report['session_test'] = 'browser-enforced expiry of guest cookies, not signed-account expiry'
         else:
             raise AssertionError('Job never began computing')
         original_cookies = await context.cookies()
@@ -60,6 +57,9 @@ async def main(args):
             while not (args.output/'restart-continue.json').exists():
                 assert time.monotonic() < deadline
                 await asyncio.sleep(.25)
+        elif args.scenario == 'cookie-expiry':
+            await context.add_cookies([{**cookie, 'expires': time.time()-1} for cookie in original_cookies])
+            report['session_test'] = 'browser-enforced expiry of guest cookies, not signed-account expiry'
         else:
             await context.clear_cookies()
             report['session_test'] = 'guest cookie removal, not signed-account expiry'
