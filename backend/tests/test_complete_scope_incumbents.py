@@ -82,6 +82,7 @@ def test_content_expansion_retains_real_revalidated_checkout(monkeypatch, budget
         # Simulate the expansion marker. Only this search is adversarial; the
         # old pool, real quantities, source qualification and audit stay real.
         expanded._supplement_qualified = True
+        expanded._expanded_cohort_qualified = True
         return rows
 
     def proposal(options, *, evaluate, accepts, **kwargs):

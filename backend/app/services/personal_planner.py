@@ -2171,6 +2171,16 @@ class PersonalPlanner:
                     continue
                 incumbents.append(candidate)
                 incumbent_scopes[id(candidate)] = {"max_stores": cap, "purchase_planning_mode": purchase_mode}
+        def release_search_intermediates():
+            # These are pure request-local memoized calculations. A finished
+            # result owns its basket/checks; no search cache is an approval.
+            for name in ("lookup_cache", "lookup_failures", "_resolution_trace",
+                         "nutrition_cache", "candidate_sequences", "normalized_recipe_rows",
+                         "qualified_nutrition_candidates", "slot_nutrition_cache", "clean_recipe_cache"):
+                getattr(self,name).clear()
+            self.recipe_computations = RecipeComputationCache()
+            import gc
+            gc.collect()
         def retain_library_comparison():
             # A larger candidate pool can reorder bounded search. Re-run the
             # exact earlier pool through this same planner, same data/clock,
@@ -2186,6 +2196,7 @@ class PersonalPlanner:
                 return
             if generation <= 2 and self.request.diversity_mode != "cheapest":
                 return
+            release_search_intermediates()
             try:
                 candidate = PersonalPlanner(self.request, self.settings, self.prepared, self.state,
                     plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,

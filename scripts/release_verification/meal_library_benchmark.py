@@ -1,6 +1,7 @@
 """Real isolated fresh planner computations; not completed-menu cache reads."""
 import hashlib
 import json
+import os
 import resource
 import sys
 import time
@@ -12,6 +13,34 @@ from app.models import PlanRequest
 from app.services.personal_planner import PersonalPlanner
 from app.services.personal_source_facts import load_retained_facts
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+
+if os.environ.get("SMAKO_DIAGNOSTIC_MEMORY"):
+ from functools import wraps
+ def traced(method):
+  @wraps(method)
+  def run(self,*args,**kwargs):
+   def emit(phase):
+    print(json.dumps({"memory_phase":method.__name__+":"+phase,
+      "rss_kib":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+      "generation":getattr(self,"_generation",None),
+      "caches":{k:len(getattr(self,k,{})) for k in ["lookup_cache","candidate_sequences","slot_nutrition_cache","normalized_recipe_rows","nutrition_cache"]}}),flush=True)
+   emit("start")
+   try:return method(self,*args,**kwargs)
+   finally:emit("end")
+  return run
+ for name in ["__init__","_candidates","_create","create"]:
+  setattr(PersonalPlanner,name,traced(getattr(PersonalPlanner,name)))
+
+ _basket=PersonalPlanner.basket
+ def traced_basket(self,*args,**kwargs):
+  self._memory_baskets=getattr(self,"_memory_baskets",0)+1
+  if self._memory_baskets % 25==0:
+   session=self.optimizer._quote_cache_context.get()
+   print(json.dumps({"baskets":self._memory_baskets,"rss_kib":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+    "quote_maps":{name:len(getattr(session,name,{})) for name in ["quotes","quote_sets","subset_vectors","subset_patterns","subset_partitions"]},
+    "vector_cells":sum(len(v) for v in session.subset_vectors.values()) if session else 0}),flush=True)
+  return _basket(self,*args,**kwargs)
+ PersonalPlanner.basket=traced_basket
 
 label,case,cache_mode=sys.argv[1:4]
 root=Path('/results')/label;root.mkdir(exist_ok=True)

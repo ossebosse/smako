@@ -121,3 +121,28 @@ def test_replacement_does_not_fill_beam_with_a_dish_in_the_fixed_suffix(monkeypa
     monkeypatch.setattr(planner.service.menu_optimizer, "optimize_slots", check_search)
     with pytest.raises(SearchChecked):
         planner.create(replace_slot="d1")
+
+
+def test_streaming_slot_beam_bounds_live_baskets_without_pruning_candidates():
+    import weakref
+    class Result:
+        def __init__(self,cost):self.cost=cost
+    refs=[];peak=0
+    recipes=[Recipe(name=f"Load {n:04d}",servings=1,
+        ingredients=[RecipeIngredient(name="ris",quantity=n+1,unit="g")],instructions=["synthetic"])
+        for n in range(600)]
+    options=[[MealSlot(id=f"breakfast-{day}",day=day,meal_type="breakfast",recipe=r)
+        for r in recipes] for day in (1,2)]
+    def evaluate(slots,*,final):
+        nonlocal peak
+        value=Result(sum(600-int(s.recipe.name.split()[-1]) for s in slots))
+        refs.append(weakref.ref(value));peak=max(peak,sum(r() is not None for r in refs))
+        return value
+    trace=[]
+    chosen,result=MenuOptimizer().optimize_slots(options,evaluate=evaluate,
+        accepts=lambda slots,final:True,score=lambda slots,r:r.cost,beam_width=8,
+        search_trace=trace,state_identity=lambda slots:tuple(sorted(s.recipe.name for s in slots)))
+    assert [s.recipe.name for s in chosen]==["Load 0599","Load 0599"] and result.cost==2
+    assert sum(r["proposals"] for r in trace)==600+8*600
+    assert peak<=290, f"Complete partial baskets retained: {peak}"
+    assert all(r["retained"]==8 and r["priced"]==r["retained"]+r["beam_pruned"] for r in trace)

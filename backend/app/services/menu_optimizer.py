@@ -841,7 +841,7 @@ class MenuOptimizer:
         trace = search_trace if search_trace is not None else []
         start = len(trace)
         exhausted = {}
-        evaluation_cache = {}
+        evaluation_cache = OrderedDict()
         recipe_ids = RecipeComputationCache()
         try:
             return self._optimize_slots(
@@ -875,7 +875,7 @@ class MenuOptimizer:
         cache is request-local because stock, profile and locks are private inputs.
         """
         states = [([], None)]
-        cache = _evaluation_cache if _evaluation_cache is not None else {}
+        cache = _evaluation_cache if _evaluation_cache is not None else OrderedDict()
         recipe_ids = _recipe_ids if _recipe_ids is not None else RecipeComputationCache()
         for index, options in enumerate(candidates_by_slot):
             errors = []
@@ -886,6 +886,9 @@ class MenuOptimizer:
             if search_trace is not None:
                 search_trace.append(trace)
             expanded = []
+            seen_states = set()
+            priced_count = 0
+            sequence = 0
             for chosen, _result in states:
                 for slot in options:
                     slots = [*chosen, slot]
@@ -900,14 +903,42 @@ class MenuOptimizer:
                     try:
                         if key not in cache:
                             trace["evaluations_executed"] += 1
-                            cache[key] = evaluate(slots, final=final)
+                            result = evaluate(slots, final=final)
+                            # Memoization changes work, never candidate admission or
+                            # beam quality. Recompute evicted exact values on a miss.
+                            if len(cache) >= 256:
+                                cache.pop(next(iter(cache)))
+                            cache[key] = result
                         else:
                             trace["evaluation_cache_hits"] += 1
                         result = cache[key]
-                        expanded.append((slots, result))
                         trace["priced"] += 1
                         if decision_observer:
                             decision_observer(slots, "priced", result=result, depth=index+1)
+                        priced_count += 1
+                        identity = state_identity(slots) if state_identity is not None else sequence
+                        seen_states.add(identity)
+                        row = (score(slots, result), sequence, identity, slots, result)
+                        sequence += 1
+                        # Exact streaming top-k: the same stable sort and best
+                        # distinct states as collecting every priced basket.
+                        previous = next((r for r in expanded if r[2] == identity), None)
+                        discarded = None
+                        if previous is not None:
+                            if row[:2] >= previous[:2]:
+                                discarded = row
+                            else:
+                                expanded.remove(previous)
+                                discarded = previous
+                        if discarded is not row:
+                            expanded.append(row)
+                            expanded.sort(key=lambda r: r[:2])
+                            if len(expanded) > beam_width:
+                                removed = expanded.pop()
+                                if decision_observer:
+                                    decision_observer(removed[3], "beam_pruned", result=removed[4], depth=index+1)
+                        if discarded is not None and decision_observer:
+                            decision_observer(discarded[3], "beam_pruned", result=discarded[4], depth=index+1)
                     except (IncompleteBasketError, ValueError) as exc:
                         trace["evaluation_rejected"] += 1
                         if decision_observer:
@@ -921,23 +952,12 @@ class MenuOptimizer:
                 if errors:
                     raise errors[-1]
                 raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")
-            expanded.sort(key=lambda state: score(*state))
-            priced_count = len(expanded)
             if state_identity is not None:
-                # The caller must establish order independence. Keep the
-                # actual slots/result pair, never reuse slot-bound output for
-                # another permutation. Equivalent schedules must not occupy
-                # the whole beam and suppress different meal combinations.
-                distinct = {}
-                for state in expanded:
-                    distinct.setdefault(state_identity(state[0]), state)
-                expanded = list(distinct.values())
-                trace["equivalent_pruned"] = priced_count - len(expanded)
-            states = expanded[:beam_width]
+                trace["equivalent_pruned"] = priced_count - len(seen_states)
+            states = [(r[3], r[4]) for r in expanded]
             if decision_observer:
-                for chosen, result in expanded:
-                    decision_observer(chosen, "retained" if any(chosen is state[0] for state in states) else "beam_pruned",
-                                      result=result, depth=index+1)
+                for chosen, result in states:
+                    decision_observer(chosen, "retained", result=result, depth=index+1)
             trace["retained"] = len(states)
             trace["beam_pruned"] = priced_count - len(states)
         if not candidates_by_slot:
