@@ -36,7 +36,7 @@ with httpx.Client(base_url=args.base,headers={'Origin':args.base},timeout=60) as
     state=actor.get('/api/personal/state').json()
     pantry_id=str(uuid.uuid4())
     write=actor.put('/api/personal/pantry',json={'revision':state['revision'],'items':[
-        {'id':pantry_id,'name':'ost','quantity':100,'unit':'g','form':'as_sold','food':True,'unusable':False}]})
+        {'id':pantry_id,'name':'ost','quantity':300,'unit':'g','form':'as_sold','food':True,'unusable':False}]})
     write.raise_for_status();state=write.json()
     assert not other.get('/api/personal/state').json()['items']
     request=json.loads(args.request.read_text(encoding='utf8'))
@@ -49,7 +49,7 @@ with httpx.Client(base_url=args.base,headers={'Origin':args.base},timeout=60) as
     dump('pantry-generated.json',saved)
     allocations=[r for r in saved['plan']['personal']['allocations'] if r.get('item_id')==pantry_id or r.get('pantry_id')==pantry_id]
     if not allocations:allocations=saved['plan']['personal']['allocations']
-    assert abs(sum(r['quantity'] for r in allocations)-100)<1e-6,allocations
+    assert abs(sum(r['quantity'] for r in allocations)-300)<1e-6,allocations
     assert len({r['source'] for r in allocations})>1,allocations
     assert other.get('/api/plans/'+plan_id).status_code==404
     if start.json().get('status_url'):assert other.get(start.json()['status_url']).status_code==404
