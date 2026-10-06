@@ -71,5 +71,6 @@
     "derived_dockerfile": "FROM smako-meal-library:4a34888068ec\nENV BUILD_ID=a168d36026d1ef20675f272aa301b410763fdfbe\nLABEL org.opencontainers.image.revision=a168d36026d1ef20675f272aa301b410763fdfbe\nCOPY --chown=app:app backend/app/api/personal.py /srv/app/backend/app/api/personal.py\nCOPY --chown=app:app backend/app/api/plan.py /srv/app/backend/app/api/plan.py\nCOPY --chown=app:app backend/app/data/recipes/library-manifest.json /srv/app/backend/app/data/recipes/library-manifest.json\nCOPY --chown=app:app backend/app/services/meal_library_cli.py /srv/app/backend/app/services/meal_library_cli.py\nCOPY --chown=app:app backend/app/services/meal_library_content.py /srv/app/backend/app/services/meal_library_content.py\nCOPY --chown=app:app backend/app/services/recipe_library.py /srv/app/backend/app/services/recipe_library.py\n"
   },
   "image_test_mounts": "No runtime source mounts; read-only retained public inputs and frozen harness; new isolated state only.",
-  "production_activated": false
+  "production_activated": false,
+  "delivery_scope": "Only the server ZIP and identified app image are the app candidate. The existing packager also emits a Windows relay companion ZIP; it has not been installed or qualified for a relay release. source_tag is inherited packaging metadata, not the runtime identity; commit and file hashes above identify the code."
 }

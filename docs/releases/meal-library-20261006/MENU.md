@@ -833,4 +833,3 @@ Tillagning:
 | Willys Lund · online_store | Långkornigt Ris (`c4617939687841858e8c8e4fb2bad00c`) | 120,0 g | 1 × 1000,0 g | 880,0 g | 19,9 kr |
 | Willys Lund · online_store | Naturell Tofu Fast Vegansk (`ef808e2be8e44105a1a3d3071b298bf3`) | 400,0 g | 2 × 200,0 g | 0,0 g | 19,8 kr |
 | Willys Lund · online_store | Vitkål Sverige Klass 1 (`1d3c4a72e6d4499984e743790dbb2d09`) | 200,0 g | 1 × 2000,0 g | 1800,0 g | 19,8 kr |
-

@@ -7,6 +7,14 @@ variant, portionsgrund, fullständiga ingredienser och instruktioner.
 simple/crafted. Blandning är ett användarval, inte en egen måltidstyp.
 Matkök får vara tomt. Aktiv tid, total tid och väntetid är separata minuter.
 
+`base_id` ska vara stabil för samma grundrätt: nytt namn, portionsantal,
+innehållsversion eller mindre ingrediensvariant ger inte en ny grundrätt.
+En ny variant använder samma `base_id` och ett nytt `variant_id`; importeraren
+redovisar detta separat. Rättfamilj, huvudproteinkällor och tillagningsmetod
+är egna dimensioner. Författargranskningen ska motivera nya grundrätter
+utifrån själva maträtten; olika ID:n eller metoder ensamma bevisar inte
+kulinarisk skillnad. Identiska dubbletter i ett paket redovisas utan dubbelimport.
+
 Ingredienser anger kanonisk identitet, g/ml/st, mängd, komponent, roll,
 råvaruform och eventuella stödda produktkrav. Komponenternas mängder måste
 överensstämma med ingredienslistan. Steg har stabilt ID, ingrediensreferenser,

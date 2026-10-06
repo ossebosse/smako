@@ -36,6 +36,12 @@ dd12. Ingen ny byggning ska göras under aktiveringen.
    `app-only.override.example.yaml` sist. Den fullständiga upplösta diffen
    får endast ändra appens image, BUILD_ID och COMPLETE_RECIPES_ENABLED.
    Bevara scheduler, collector, migrate, relä, proxy, kanaler, policys och mounts.
+   Wrappern innehåller redan dd12:s override. Förbered och kontrollera först
+   konfigurationen med `compose -f /opt/smako/overrides/meal-library-fd2cfda5490a.yaml config`.
+   Vid ett godkänt byte ska den nya `-f`-referensen sparas sist i wrappern,
+   före dess `"$@"`, med bevarad filmode och atomiskt filbyte. Kontrollera
+   den upplösta diffen igen innan `up`. Ett engångsargument utan beständig
+   wrapperreferens är inte en beständig aktivering.
 4. Låt pågående jobb avslutas; processminnesjobb överlever inte ett appbyte.
    Använd befintligt operation lock och ta konsistent backup av aktuell
    plan-/användarlagring. Kontrollera fingerprint för revisioner, ägarbindning,
@@ -60,3 +66,7 @@ av detta prov och får inte förutsättas kompatibel med nya planfält.
 
 Denna leverans ändrar inga produktionsscheman eller källor. Recept- och
 faktaunderlag från isolerad berikad historisk replay hör till testbevisen.
+Isolerade prov begränsades till två CPU och 3 GiB. Etapp A bevarade faktisk
+produktionskonfiguration, som saknade dessa explicita caps. Kontrollera och
+redovisa detta före ett framtida beslut; ändra inte resursfält under en
+godkänd diff som bara omfattar image, BUILD_ID och receptflagga.

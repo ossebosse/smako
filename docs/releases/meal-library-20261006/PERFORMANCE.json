@@ -1,0 +1,5117 @@
+{
+  "runtime": "fd2cfda5490ac93295e6a2cef6b6b8408497f89e",
+  "limits": {
+    "cpus": 2,
+    "memory_bytes": 3221225472,
+    "heavy_jobs": 1
+  },
+  "no_completed_plan_cache": true,
+  "complete": true,
+  "measurement_notes": [
+    "Cold process includes container/Python startup, universe restoration, public facts, planner and serialization.",
+    "Warm iterations 1..3 are new planner calculations in one process; first warming calculation 0 is retained but excluded from the warm median.",
+    "Facts+planner excludes already restored universe. These times are not browser click times.",
+    "Persistent is a new process reading cold-1 public artifacts, one run per case.",
+    "RSS is cumulative process maximum, not per-iteration incremental memory. Cgroup peak includes charged cache.",
+    "Host tmpfs preserves test artifacts across app processes, not host reboot; archived files are copied to D with hashes.",
+    "No p95 inferred from three observations. Same host may have ordinary production background activity."
+  ],
+  "groups": [
+    {
+      "cohort": "p0",
+      "case": "main",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          86.47319395514205,
+          87.57679067086428,
+          86.48925660224631
+        ],
+        "n": 3,
+        "median": 86.48925660224631,
+        "min": 86.47319395514205,
+        "max": 87.57679067086428
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          66.20630646916106,
+          66.81180458609015,
+          65.79909431003034
+        ],
+        "n": 3,
+        "median": 66.20630646916106,
+        "min": 65.79909431003034,
+        "max": 66.81180458609015
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          55.38685514777899,
+          51.89358633803204,
+          53.62067355494946
+        ],
+        "n": 3,
+        "median": 53.62067355494946,
+        "min": 51.89358633803204,
+        "max": 55.38685514777899
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          49.42610314488411,
+          45.7471907180734,
+          46.383068637922406
+        ],
+        "n": 3,
+        "median": 46.383068637922406,
+        "min": 45.7471907180734,
+        "max": 49.42610314488411
+      },
+      "persistent_process_seconds": null,
+      "persistent_facts_and_planner_seconds": null,
+      "max_cgroup_memory_bytes": 2224394240,
+      "max_rss_kib": 2045820,
+      "paid_values": [
+        741.15
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.002631937153637409,
+            "package_calculation": 14.987230550032109,
+            "nutrition": 0.7046681186184287,
+            "audit": 10.197690003085881,
+            "candidate_generation_and_qualification": 8.092949591111392,
+            "week_search": 39.612632216885686,
+            "total": 50.35431643528864
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 15.32499208720401,
+          "planner_seconds": 50.881307487841696,
+          "wall_seconds": 66.20630646916106,
+          "universe_seconds": 14.047577556688339,
+          "maxrss_kib": 1833172,
+          "run": "final2-p0-main-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p0-main-cold-1\\main-cold-timings.json",
+          "raw_sha256": "4b43c93b488d20b1ac7eca822ef8171e6edb56f813310fc85521c28862bc0926"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.002411847934126854,
+            "package_calculation": 14.988861061166972,
+            "nutrition": 0.7225888036191463,
+            "audit": 9.999744402244687,
+            "candidate_generation_and_qualification": 8.368850339204073,
+            "week_search": 39.573306654114276,
+            "total": 50.37604436185211
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 15.941466097254306,
+          "planner_seconds": 50.87033217679709,
+          "wall_seconds": 66.81180458609015,
+          "universe_seconds": 14.914216035045683,
+          "maxrss_kib": 1833232,
+          "run": "final2-p0-main-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p0-main-cold-2\\main-cold-timings.json",
+          "raw_sha256": "deb35b222dc59f7e72cea604b8d6c5dc65ee427639b1245e7acf9d9dfeb19edb"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0025315959937870502,
+            "package_calculation": 14.850858536548913,
+            "nutrition": 0.6918821181170642,
+            "audit": 9.850244032219052,
+            "candidate_generation_and_qualification": 8.572437793947756,
+            "week_search": 38.532512955833226,
+            "total": 49.52222535107285
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 15.784106833860278,
+          "planner_seconds": 50.014980060979724,
+          "wall_seconds": 65.79909431003034,
+          "universe_seconds": 14.269404048565775,
+          "maxrss_kib": 1832888,
+          "run": "final2-p0-main-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p0-main-cold-3\\main-cold-timings.json",
+          "raw_sha256": "33b351ffee4e4d38887e1dc8f7eded7cdef8844932ffe094888b97bc229ccfd9"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023783729411661625,
+            "package_calculation": 14.187374126166105,
+            "nutrition": 0.661014961078763,
+            "audit": 9.374897888861597,
+            "candidate_generation_and_qualification": 8.248671538662165,
+            "week_search": 36.76263773115352,
+            "total": 47.28925187792629
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 15.372591389808804,
+          "planner_seconds": 47.77924328716472,
+          "wall_seconds": 63.15184145886451,
+          "universe_seconds": 13.869408298749477,
+          "maxrss_kib": 1833596,
+          "run": "final2-p0-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p0-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "0b961bdd0c6ab81fd2b4aa58c6085f72b9e3b17b2814ec8a9c8fe24c71e7a8b0"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.523837611079216e-05,
+            "package_calculation": 12.939123634248972,
+            "nutrition": 0.7126073157414794,
+            "audit": 14.524416799191386,
+            "candidate_generation_and_qualification": 7.451708045322448,
+            "week_search": 39.07186236884445,
+            "total": 48.92701135762036
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 5.960746462922543,
+          "planner_seconds": 49.42610314488411,
+          "wall_seconds": 55.38685514777899,
+          "universe_seconds": 13.869408298749477,
+          "maxrss_kib": 1983816,
+          "run": "final2-p0-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p0-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "0b961bdd0c6ab81fd2b4aa58c6085f72b9e3b17b2814ec8a9c8fe24c71e7a8b0"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.5568995624780655e-05,
+            "package_calculation": 12.896947499830276,
+            "nutrition": 0.6686580553650856,
+            "audit": 10.212684913538396,
+            "candidate_generation_and_qualification": 6.489512403961271,
+            "week_search": 36.500366965308785,
+            "total": 45.25336977886036
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 6.146390319801867,
+          "planner_seconds": 45.7471907180734,
+          "wall_seconds": 51.89358633803204,
+          "universe_seconds": 13.869408298749477,
+          "maxrss_kib": 2022388,
+          "run": "final2-p0-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p0-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "0b961bdd0c6ab81fd2b4aa58c6085f72b9e3b17b2814ec8a9c8fe24c71e7a8b0"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.487795427441597e-05,
+            "package_calculation": 11.556000185199082,
+            "nutrition": 0.6801515808328986,
+            "audit": 12.080760855227709,
+            "candidate_generation_and_qualification": 6.4569003488868475,
+            "week_search": 37.10183184687048,
+            "total": 45.88900205027312
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 7.237599988933653,
+          "planner_seconds": 46.383068637922406,
+          "wall_seconds": 53.62067355494946,
+          "universe_seconds": 13.869408298749477,
+          "maxrss_kib": 2045820,
+          "run": "final2-p0-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p0-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "0b961bdd0c6ab81fd2b4aa58c6085f72b9e3b17b2814ec8a9c8fe24c71e7a8b0"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-p0-main-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 86.47319395514205,
+          "cgroup_memory_peak_bytes": 1951002624,
+          "host_available_before_bytes": 7333486592,
+          "scratch_storage_bytes": 24168424
+        },
+        {
+          "run": "final2-p0-main-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 87.57679067086428,
+          "cgroup_memory_peak_bytes": 2009419776,
+          "host_available_before_bytes": 7304859648,
+          "scratch_storage_bytes": 29967706
+        },
+        {
+          "run": "final2-p0-main-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 86.48925660224631,
+          "cgroup_memory_peak_bytes": 1967181824,
+          "host_available_before_bytes": 7269007360,
+          "scratch_storage_bytes": 35766992
+        },
+        {
+          "run": "final2-p0-main-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 245.07795225735754,
+          "cgroup_memory_peak_bytes": 2224394240,
+          "host_available_before_bytes": 7295709184,
+          "scratch_storage_bytes": 58963497
+        }
+      ]
+    },
+    {
+      "cohort": "p1b",
+      "case": "main",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          99.01532861497253,
+          96.95159850409254,
+          97.91162987006828
+        ],
+        "n": 3,
+        "median": 97.91162987006828,
+        "min": 96.95159850409254,
+        "max": 99.01532861497253
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          79.20417368086055,
+          76.96392560796812,
+          77.91889670770615
+        ],
+        "n": 3,
+        "median": 77.91889670770615,
+        "min": 76.96392560796812,
+        "max": 79.20417368086055
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          58.2809790186584,
+          56.07279125973582,
+          57.706554582342505
+        ],
+        "n": 3,
+        "median": 57.706554582342505,
+        "min": 56.07279125973582,
+        "max": 58.2809790186584
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          52.19713787175715,
+          49.89547352632508,
+          50.705429184250534
+        ],
+        "n": 3,
+        "median": 50.705429184250534,
+        "min": 49.89547352632508,
+        "max": 52.19713787175715
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          84.45464387489483
+        ],
+        "n": 1,
+        "median": 84.45464387489483,
+        "min": 84.45464387489483,
+        "max": 84.45464387489483
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          64.25545988278463
+        ],
+        "n": 1,
+        "median": 64.25545988278463,
+        "min": 64.25545988278463,
+        "max": 64.25545988278463
+      },
+      "max_cgroup_memory_bytes": 1610731520,
+      "max_rss_kib": 1569376,
+      "paid_values": [
+        741.15
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023242910392582417,
+            "package_calculation": 13.81175249721855,
+            "nutrition": 1.5302694430574775,
+            "audit": 13.973629632499069,
+            "candidate_generation_and_qualification": 10.791527437977493,
+            "week_search": 40.39798999298364,
+            "total": 55.22645953996107
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.526151140686125,
+          "planner_seconds": 56.67801624815911,
+          "wall_seconds": 79.20417368086055,
+          "universe_seconds": 14.056998918298632,
+          "maxrss_kib": 1439416,
+          "preparation_stats": {
+            "hits": 176,
+            "misses": 385,
+            "writes": 385,
+            "invalid": 0
+          },
+          "run": "final2-p1b-main-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p1b-main-cold-1\\main-cold-timings.json",
+          "raw_sha256": "041aaf1c264b5b3837377d0c1b02d56b655d106e75bdf4f9809725d7a3c2c4b7"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023859282955527306,
+            "package_calculation": 13.098763928283006,
+            "nutrition": 1.4575377735309303,
+            "audit": 13.652905581984669,
+            "candidate_generation_and_qualification": 9.505462542176247,
+            "week_search": 39.56238193484023,
+            "total": 53.07445332407951
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.442050305660814,
+          "planner_seconds": 54.52186656417325,
+          "wall_seconds": 76.96392560796812,
+          "universe_seconds": 13.867247300222516,
+          "maxrss_kib": 1440660,
+          "preparation_stats": {
+            "hits": 176,
+            "misses": 385,
+            "writes": 385,
+            "invalid": 0
+          },
+          "run": "final2-p1b-main-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p1b-main-cold-2\\main-cold-timings.json",
+          "raw_sha256": "1035d498cb20e7a383857126bddca99b1e1018d9737ef0339c3b35dc07cb0425"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024073380045592785,
+            "package_calculation": 12.881233412306756,
+            "nutrition": 1.4578511966392398,
+            "audit": 13.403557617217302,
+            "candidate_generation_and_qualification": 9.491673417855054,
+            "week_search": 38.56923187710345,
+            "total": 52.16907884599641
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 24.328719903714955,
+          "planner_seconds": 53.59016917971894,
+          "wall_seconds": 77.91889670770615,
+          "universe_seconds": 14.296404635999352,
+          "maxrss_kib": 1439884,
+          "preparation_stats": {
+            "hits": 176,
+            "misses": 385,
+            "writes": 385,
+            "invalid": 0
+          },
+          "run": "final2-p1b-main-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p1b-main-cold-3\\main-cold-timings.json",
+          "raw_sha256": "2e8fe053ca2875b3a1e2874e285a9c48a2ae8a14422578ff53eee6081f3ac520"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024024001322686672,
+            "package_calculation": 11.627640190534294,
+            "nutrition": 1.6953181601129472,
+            "audit": 14.557248659431934,
+            "candidate_generation_and_qualification": 8.482423831243068,
+            "week_search": 38.08868360891938,
+            "total": 50.53573691518977
+          },
+          "case": "main",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 12.333996495697647,
+          "planner_seconds": 51.92145751602948,
+          "wall_seconds": 64.25545988278463,
+          "universe_seconds": 13.88278606114909,
+          "maxrss_kib": 1443428,
+          "preparation_stats": {
+            "hits": 561,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p1b-main-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p1b-main-persistent-1\\main-persistent-timings.json",
+          "raw_sha256": "ce0a8c9a10c583acbb61018c7f8e1b1618ed1a3abbdae4ee90616ce6cee0ca6e"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0025360342115163803,
+            "package_calculation": 11.818288868293166,
+            "nutrition": 1.70191496796906,
+            "audit": 14.735447520390153,
+            "candidate_generation_and_qualification": 8.598576101940125,
+            "week_search": 39.1305848560296,
+            "total": 51.82424878468737
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.440521976910532,
+          "planner_seconds": 53.207171553280205,
+          "wall_seconds": 65.64770008157939,
+          "universe_seconds": 14.32993714697659,
+          "maxrss_kib": 1443684,
+          "preparation_stats": {
+            "hits": 561,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p1b-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p1b-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "e4e370294592ff6daeb303ac10773285185d5e6f1c19ba4774a0c3a9262095df"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.7792993932962418e-05,
+            "package_calculation": 13.057115071918815,
+            "nutrition": 0.5733033702708781,
+            "audit": 13.565323252230883,
+            "candidate_generation_and_qualification": 7.781843975186348,
+            "week_search": 39.13043294614181,
+            "total": 50.877620508894324
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 6.083835525903851,
+          "planner_seconds": 52.19713787175715,
+          "wall_seconds": 58.2809790186584,
+          "universe_seconds": 14.32993714697659,
+          "maxrss_kib": 1549328,
+          "preparation_stats": {
+            "hits": 564,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p1b-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p1b-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "e4e370294592ff6daeb303ac10773285185d5e6f1c19ba4774a0c3a9262095df"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.825399860739708e-05,
+            "package_calculation": 12.79346831003204,
+            "nutrition": 0.5226039015688002,
+            "audit": 13.55651285033673,
+            "candidate_generation_and_qualification": 6.292236372828484,
+            "week_search": 38.25183208612725,
+            "total": 48.52021315600723
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 6.177312392741442,
+          "planner_seconds": 49.89547352632508,
+          "wall_seconds": 56.07279125973582,
+          "universe_seconds": 14.32993714697659,
+          "maxrss_kib": 1562072,
+          "preparation_stats": {
+            "hits": 567,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p1b-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p1b-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "e4e370294592ff6daeb303ac10773285185d5e6f1c19ba4774a0c3a9262095df"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.921605482697487e-05,
+            "package_calculation": 11.499598443508148,
+            "nutrition": 1.744567138608545,
+            "audit": 14.380580032709986,
+            "candidate_generation_and_qualification": 6.31291053397581,
+            "week_search": 37.971606294158846,
+            "total": 49.36332952417433
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 7.001119998283684,
+          "planner_seconds": 50.705429184250534,
+          "wall_seconds": 57.706554582342505,
+          "universe_seconds": 14.32993714697659,
+          "maxrss_kib": 1569376,
+          "preparation_stats": {
+            "hits": 570,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p1b-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p1b-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "e4e370294592ff6daeb303ac10773285185d5e6f1c19ba4774a0c3a9262095df"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-p1b-main-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 99.01532861497253,
+          "cgroup_memory_peak_bytes": 1528561664,
+          "host_available_before_bytes": 7303184384,
+          "scratch_storage_bytes": 71804776
+        },
+        {
+          "run": "final2-p1b-main-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 96.95159850409254,
+          "cgroup_memory_peak_bytes": 1467260928,
+          "host_available_before_bytes": 7238217728,
+          "scratch_storage_bytes": 84646055
+        },
+        {
+          "run": "final2-p1b-main-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 97.91162987006828,
+          "cgroup_memory_peak_bytes": 1466511360,
+          "host_available_before_bytes": 7227899904,
+          "scratch_storage_bytes": 97487334
+        },
+        {
+          "run": "final2-p1b-main-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 84.45464387489483,
+          "cgroup_memory_peak_bytes": 1464037376,
+          "host_available_before_bytes": 7229349888,
+          "scratch_storage_bytes": 103289951
+        },
+        {
+          "run": "final2-p1b-main-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 258.39062540233135,
+          "cgroup_memory_peak_bytes": 1610731520,
+          "host_available_before_bytes": 7217004544,
+          "scratch_storage_bytes": 126499738
+        }
+      ]
+    },
+    {
+      "cohort": "p2final",
+      "case": "main",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          95.82915697013959,
+          98.99166604503989,
+          95.94668790977448
+        ],
+        "n": 3,
+        "median": 95.94668790977448,
+        "min": 95.82915697013959,
+        "max": 98.99166604503989
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          75.8172678318806,
+          78.4994602939114,
+          76.29752797493711
+        ],
+        "n": 3,
+        "median": 76.29752797493711,
+        "min": 75.8172678318806,
+        "max": 78.4994602939114
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          58.063918387982994,
+          57.5614600032568,
+          57.40762185584754
+        ],
+        "n": 3,
+        "median": 57.5614600032568,
+        "min": 57.40762185584754,
+        "max": 58.063918387982994
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          51.99316520197317,
+          51.68728222325444,
+          51.4734274786897
+        ],
+        "n": 3,
+        "median": 51.68728222325444,
+        "min": 51.4734274786897,
+        "max": 51.99316520197317
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          84.44683570414782
+        ],
+        "n": 1,
+        "median": 84.44683570414782,
+        "min": 84.44683570414782,
+        "max": 84.44683570414782
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          64.75103564513847
+        ],
+        "n": 1,
+        "median": 64.75103564513847,
+        "min": 64.75103564513847,
+        "max": 64.75103564513847
+      },
+      "max_cgroup_memory_bytes": 1642889216,
+      "max_rss_kib": 1570348,
+      "paid_values": [
+        741.15
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0025812098756432533,
+            "package_calculation": 15.001447307877243,
+            "nutrition": 0.5531018753536046,
+            "audit": 11.124006727710366,
+            "candidate_generation_and_qualification": 9.697998559102416,
+            "week_search": 38.25999327097088,
+            "total": 51.931371254846454
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.37103428412229,
+          "planner_seconds": 53.44622710393742,
+          "wall_seconds": 75.8172678318806,
+          "universe_seconds": 14.081745389848948,
+          "maxrss_kib": 1438464,
+          "preparation_stats": {
+            "hits": 200,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-main-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-main-cold-1\\main-cold-timings.json",
+          "raw_sha256": "1f2e790f5be74ef7c2f3757b8ba45863bb43c249bd2c88066702f171527015c7"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023834239691495895,
+            "package_calculation": 15.15115177584812,
+            "nutrition": 0.5702275042422116,
+            "audit": 11.297579528298229,
+            "candidate_generation_and_qualification": 10.131244422867894,
+            "week_search": 39.039533080067486,
+            "total": 53.474602403119206
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 23.49835294485092,
+          "planner_seconds": 55.001101057976484,
+          "wall_seconds": 78.4994602939114,
+          "universe_seconds": 14.246798437088728,
+          "maxrss_kib": 1438360,
+          "preparation_stats": {
+            "hits": 200,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-main-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-main-cold-2\\main-cold-timings.json",
+          "raw_sha256": "9be6c0bacf1d08af3b23a69b80b2a29f25f66e5bb45d7e0055af02d7c104f295"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023462530225515366,
+            "package_calculation": 15.053470119368285,
+            "nutrition": 0.5535125466994941,
+            "audit": 10.977338891476393,
+            "candidate_generation_and_qualification": 9.879946160130203,
+            "week_search": 38.07737245596945,
+            "total": 52.117666439153254
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.682319467887282,
+          "planner_seconds": 53.61520049208775,
+          "wall_seconds": 76.29752797493711,
+          "universe_seconds": 14.302227054256946,
+          "maxrss_kib": 1441072,
+          "preparation_stats": {
+            "hits": 200,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-main-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-main-cold-3\\main-cold-timings.json",
+          "raw_sha256": "e1c8ac9089dec2fe1f6878c7d78382ff279907ab86e3bdfb8a9e46a4bf4441c9"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0028497115708887577,
+            "package_calculation": 12.620295242406428,
+            "nutrition": 0.5494882585480809,
+            "audit": 14.44917767867446,
+            "candidate_generation_and_qualification": 8.60713155195117,
+            "week_search": 38.3595684110187,
+            "total": 51.06225992413238
+          },
+          "case": "main",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 12.23230109596625,
+          "planner_seconds": 52.51872772630304,
+          "wall_seconds": 64.75103564513847,
+          "universe_seconds": 14.212430782616138,
+          "maxrss_kib": 1342692,
+          "preparation_stats": {
+            "hits": 663,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-main-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-main-persistent-1\\main-persistent-timings.json",
+          "raw_sha256": "af9c82e935061f0cf7cb85b431c097bbb9be97db9ba602ff88709b38506ec05a"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.002340862061828375,
+            "package_calculation": 13.049202741589397,
+            "nutrition": 0.5790504314936697,
+            "audit": 14.887568960431963,
+            "candidate_generation_and_qualification": 8.953199702315032,
+            "week_search": 39.70610195491463,
+            "total": 52.8133260239847
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.001601585187018,
+          "planner_seconds": 54.30647035036236,
+          "wall_seconds": 66.30807948904112,
+          "universe_seconds": 14.252339656930417,
+          "maxrss_kib": 1342376,
+          "preparation_stats": {
+            "hits": 663,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "6c5000024a6e16b5d394f58fdb57e69ccc93da71bc999b4cff0f134fc8a7d1f2"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.547912299633026e-05,
+            "package_calculation": 11.85587481688708,
+            "nutrition": 0.5620722426101565,
+            "audit": 13.512149795424193,
+            "candidate_generation_and_qualification": 7.389684414956719,
+            "week_search": 39.011472610756755,
+            "total": 50.594907861202955
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 6.070748426951468,
+          "planner_seconds": 51.99316520197317,
+          "wall_seconds": 58.063918387982994,
+          "universe_seconds": 14.252339656930417,
+          "maxrss_kib": 1552448,
+          "preparation_stats": {
+            "hits": 666,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "6c5000024a6e16b5d394f58fdb57e69ccc93da71bc999b4cff0f134fc8a7d1f2"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.3886095732450485e-05,
+            "package_calculation": 12.933390127960593,
+            "nutrition": 0.5497861988842487,
+            "audit": 14.71204049885273,
+            "candidate_generation_and_qualification": 7.364241725299507,
+            "week_search": 38.749813123140484,
+            "total": 50.24695566901937
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.874172320123762,
+          "planner_seconds": 51.68728222325444,
+          "wall_seconds": 57.5614600032568,
+          "universe_seconds": 14.252339656930417,
+          "maxrss_kib": 1563332,
+          "preparation_stats": {
+            "hits": 669,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "6c5000024a6e16b5d394f58fdb57e69ccc93da71bc999b4cff0f134fc8a7d1f2"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.4527311325073242e-05,
+            "package_calculation": 12.782376132439822,
+            "nutrition": 0.5312158684246242,
+            "audit": 14.813195372465998,
+            "candidate_generation_and_qualification": 7.173456195741892,
+            "week_search": 38.65593499131501,
+            "total": 50.06441363459453
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.934176731854677,
+          "planner_seconds": 51.4734274786897,
+          "wall_seconds": 57.40762185584754,
+          "universe_seconds": 14.252339656930417,
+          "maxrss_kib": 1570348,
+          "preparation_stats": {
+            "hits": 672,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "6c5000024a6e16b5d394f58fdb57e69ccc93da71bc999b4cff0f134fc8a7d1f2"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-p2final-main-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 95.82915697013959,
+          "cgroup_memory_peak_bytes": 1465434112,
+          "host_available_before_bytes": 7199399936,
+          "scratch_storage_bytes": 139445772
+        },
+        {
+          "run": "final2-p2final-main-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 98.99166604503989,
+          "cgroup_memory_peak_bytes": 1464954880,
+          "host_available_before_bytes": 7186583552,
+          "scratch_storage_bytes": 152391813
+        },
+        {
+          "run": "final2-p2final-main-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 95.94668790977448,
+          "cgroup_memory_peak_bytes": 1467928576,
+          "host_available_before_bytes": 7155834880,
+          "scratch_storage_bytes": 165337854
+        },
+        {
+          "run": "final2-p2final-main-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 84.44683570414782,
+          "cgroup_memory_peak_bytes": 1360740352,
+          "host_available_before_bytes": 7137251328,
+          "scratch_storage_bytes": 171140470
+        },
+        {
+          "run": "final2-p2final-main-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 260.6825448977761,
+          "cgroup_memory_peak_bytes": 1642889216,
+          "host_available_before_bytes": 7141314560,
+          "scratch_storage_bytes": 194350273
+        }
+      ]
+    },
+    {
+      "cohort": "p2final",
+      "case": "simple",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          56.57590657612309,
+          57.63124123169109,
+          56.61713175103068
+        ],
+        "n": 3,
+        "median": 56.61713175103068,
+        "min": 56.57590657612309,
+        "max": 57.63124123169109
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          36.24763904791325,
+          37.74211060395464,
+          36.53523382591084
+        ],
+        "n": 3,
+        "median": 36.53523382591084,
+        "min": 36.24763904791325,
+        "max": 37.74211060395464
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          17.898739723023027,
+          18.020085083786398,
+          17.74985272111371
+        ],
+        "n": 3,
+        "median": 17.898739723023027,
+        "min": 17.74985272111371,
+        "max": 18.020085083786398
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          11.889576621353626,
+          12.122777433134615,
+          11.871247380040586
+        ],
+        "n": 3,
+        "median": 11.889576621353626,
+        "min": 11.871247380040586,
+        "max": 12.122777433134615
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          45.3545042113401
+        ],
+        "n": 1,
+        "median": 45.3545042113401,
+        "min": 45.3545042113401,
+        "max": 45.3545042113401
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          25.50702827423811
+        ],
+        "n": 1,
+        "median": 25.50702827423811,
+        "min": 25.50702827423811,
+        "max": 25.50702827423811
+      },
+      "max_cgroup_memory_bytes": 1521692672,
+      "max_rss_kib": 1471836,
+      "paid_values": [
+        328.16
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 328.16,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med kikärtor och paprika",
+            "Varma bönwraps med kål och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023734839633107185,
+            "package_calculation": 2.641136107966304,
+            "audit": 0.49368407018482685,
+            "candidate_generation_and_qualification": 3.4306976408697665,
+            "nutrition": 0.004906206391751766,
+            "week_search": 3.371933011803776,
+            "total": 12.933680558111519
+          },
+          "case": "simple",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.062127009034157,
+          "planner_seconds": 14.185504936147481,
+          "wall_seconds": 36.24763904791325,
+          "universe_seconds": 14.224269589874893,
+          "maxrss_kib": 1439416,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-simple-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-simple-cold-1\\simple-cold-timings.json",
+          "raw_sha256": "527b035db42a1b11d487aef8b4abf75e485005aee9159679caf7acd8dbee84ba"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 328.16,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med kikärtor och paprika",
+            "Varma bönwraps med kål och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.002429732121527195,
+            "package_calculation": 2.6891156653873622,
+            "audit": 0.5014619408175349,
+            "candidate_generation_and_qualification": 3.712523221038282,
+            "nutrition": 0.0051066139712929726,
+            "week_search": 3.4382584132254124,
+            "total": 13.53532545408234
+          },
+          "case": "simple",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.857024343684316,
+          "planner_seconds": 14.885079476051033,
+          "wall_seconds": 37.74211060395464,
+          "universe_seconds": 13.890043103136122,
+          "maxrss_kib": 1438956,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-simple-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-simple-cold-2\\simple-cold-timings.json",
+          "raw_sha256": "efa4164a4b2f89e89b969efa67b6bb9d172725578de597920112ec671d329eec"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 328.16,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med kikärtor och paprika",
+            "Varma bönwraps med kål och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024754079058766365,
+            "package_calculation": 2.669345517642796,
+            "audit": 0.4868873404338956,
+            "candidate_generation_and_qualification": 3.6265174048021436,
+            "nutrition": 0.004457416012883186,
+            "week_search": 3.37147504882887,
+            "total": 13.046632709912956
+          },
+          "case": "simple",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.250148389022797,
+          "planner_seconds": 14.285077963024378,
+          "wall_seconds": 36.53523382591084,
+          "universe_seconds": 14.452996171079576,
+          "maxrss_kib": 1439348,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-simple-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-simple-cold-3\\simple-cold-timings.json",
+          "raw_sha256": "725fa1daa5d3be51c655f085c8afe7b72b24b59b7fe3a25f4e963381d298d479"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 328.16,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med kikärtor och paprika",
+            "Varma bönwraps med kål och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023142308928072453,
+            "package_calculation": 2.7915786816738546,
+            "audit": 0.5026245443150401,
+            "candidate_generation_and_qualification": 2.3460778896696866,
+            "nutrition": 0.005450133699923754,
+            "week_search": 3.5650378721766174,
+            "total": 11.227068145759404
+          },
+          "case": "simple",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 13.094981834292412,
+          "planner_seconds": 12.412040087860078,
+          "wall_seconds": 25.50702827423811,
+          "universe_seconds": 14.41477887192741,
+          "maxrss_kib": 1441788,
+          "preparation_stats": {
+            "hits": 664,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-simple-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-simple-persistent-1\\simple-persistent-timings.json",
+          "raw_sha256": "b6ed63d70d1c95eec66e44991056b60d0003ab8226e2ffaa88537a97d03e14ad"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 328.16,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med kikärtor och paprika",
+            "Varma bönwraps med kål och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.002352133858948946,
+            "package_calculation": 2.8011683793738484,
+            "audit": 0.5091442759148777,
+            "candidate_generation_and_qualification": 2.234240834135562,
+            "nutrition": 0.004942439030855894,
+            "week_search": 3.589864878449589,
+            "total": 11.47694535786286
+          },
+          "case": "simple",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.58088767901063,
+          "planner_seconds": 12.776649252977222,
+          "wall_seconds": 25.357543234247714,
+          "universe_seconds": 14.46290487004444,
+          "maxrss_kib": 1443660,
+          "preparation_stats": {
+            "hits": 664,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-simple-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-simple-warm-1\\simple-warm-timings.json",
+          "raw_sha256": "dfc797b1941ecd86ffbb02d565b5ec8ca483ae31809eed26072ae7c59c2cfc3f"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 328.16,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med kikärtor och paprika",
+            "Varma bönwraps med kål och ost"
+          ],
+          "check_timings": {
+            "product_facts": 2.7822796255350113e-05,
+            "package_calculation": 3.630566364619881,
+            "audit": 0.48895263159647584,
+            "candidate_generation_and_qualification": 1.1846189200878143,
+            "nutrition": 0.0049268812872469425,
+            "week_search": 4.357272533234209,
+            "total": 10.784277311060578
+          },
+          "case": "simple",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 6.009157502092421,
+          "planner_seconds": 11.889576621353626,
+          "wall_seconds": 17.898739723023027,
+          "universe_seconds": 14.46290487004444,
+          "maxrss_kib": 1458236,
+          "preparation_stats": {
+            "hits": 668,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-simple-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-simple-warm-1\\simple-warm-timings.json",
+          "raw_sha256": "dfc797b1941ecd86ffbb02d565b5ec8ca483ae31809eed26072ae7c59c2cfc3f"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 328.16,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med kikärtor och paprika",
+            "Varma bönwraps med kål och ost"
+          ],
+          "check_timings": {
+            "product_facts": 3.0878931283950806e-05,
+            "package_calculation": 2.701065819244832,
+            "audit": 1.3661753530614078,
+            "candidate_generation_and_qualification": 1.1759030451066792,
+            "nutrition": 0.004631771240383387,
+            "week_search": 4.296812221873552,
+            "total": 11.003769591916353
+          },
+          "case": "simple",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.897302501834929,
+          "planner_seconds": 12.122777433134615,
+          "wall_seconds": 18.020085083786398,
+          "universe_seconds": 14.46290487004444,
+          "maxrss_kib": 1465816,
+          "preparation_stats": {
+            "hits": 672,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-simple-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-simple-warm-1\\simple-warm-timings.json",
+          "raw_sha256": "dfc797b1941ecd86ffbb02d565b5ec8ca483ae31809eed26072ae7c59c2cfc3f"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 328.16,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med kikärtor och paprika",
+            "Varma bönwraps med kål och ost"
+          ],
+          "check_timings": {
+            "product_facts": 2.4616718292236328e-05,
+            "package_calculation": 2.685859540477395,
+            "audit": 1.3198543204925954,
+            "candidate_generation_and_qualification": 1.198417752981186,
+            "nutrition": 0.004514520056545734,
+            "week_search": 4.242081763688475,
+            "total": 10.736338710878044
+          },
+          "case": "simple",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.878600281197578,
+          "planner_seconds": 11.871247380040586,
+          "wall_seconds": 17.74985272111371,
+          "universe_seconds": 14.46290487004444,
+          "maxrss_kib": 1471836,
+          "preparation_stats": {
+            "hits": 676,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-simple-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-simple-warm-1\\simple-warm-timings.json",
+          "raw_sha256": "dfc797b1941ecd86ffbb02d565b5ec8ca483ae31809eed26072ae7c59c2cfc3f"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-p2final-simple-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 56.57590657612309,
+          "cgroup_memory_peak_bytes": 1521692672,
+          "host_available_before_bytes": 7140909056,
+          "scratch_storage_bytes": 202220888
+        },
+        {
+          "run": "final2-p2final-simple-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 57.63124123169109,
+          "cgroup_memory_peak_bytes": 1466232832,
+          "host_available_before_bytes": 7090565120,
+          "scratch_storage_bytes": 210091503
+        },
+        {
+          "run": "final2-p2final-simple-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 56.61713175103068,
+          "cgroup_memory_peak_bytes": 1466564608,
+          "host_available_before_bytes": 7106510848,
+          "scratch_storage_bytes": 217962116
+        },
+        {
+          "run": "final2-p2final-simple-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 45.3545042113401,
+          "cgroup_memory_peak_bytes": 1462743040,
+          "host_available_before_bytes": 7119777792,
+          "scratch_storage_bytes": 218702002
+        },
+        {
+          "run": "final2-p2final-simple-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 98.9375628111884,
+          "cgroup_memory_peak_bytes": 1495093248,
+          "host_available_before_bytes": 7096000512,
+          "scratch_storage_bytes": 221660838
+        }
+      ]
+    },
+    {
+      "cohort": "p2final",
+      "case": "breakfast",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          51.507115656044334,
+          53.498709553387016,
+          52.492887299042195
+        ],
+        "n": 3,
+        "median": 52.492887299042195,
+        "min": 51.507115656044334,
+        "max": 53.498709553387016
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          31.8806427186355,
+          32.978911937680095,
+          31.980902967974544
+        ],
+        "n": 3,
+        "median": 31.980902967974544,
+        "min": 31.8806427186355,
+        "max": 32.978911937680095
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          14.29435880901292,
+          14.058791963849217,
+          14.152624881826341
+        ],
+        "n": 3,
+        "median": 14.152624881826341,
+        "min": 14.058791963849217,
+        "max": 14.29435880901292
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          8.385860628914088,
+          8.405279316008091,
+          8.3828753400594
+        ],
+        "n": 3,
+        "median": 8.385860628914088,
+        "min": 8.3828753400594,
+        "max": 8.405279316008091
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          41.217006135731936
+        ],
+        "n": 1,
+        "median": 41.217006135731936,
+        "min": 41.217006135731936,
+        "max": 41.217006135731936
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          21.21452681021765
+        ],
+        "n": 1,
+        "median": 21.21452681021765,
+        "min": 21.21452681021765,
+        "max": 21.21452681021765
+      },
+      "max_cgroup_memory_bytes": 1478934528,
+      "max_rss_kib": 1455920,
+      "paid_values": [
+        40.7
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.002661983948200941,
+            "package_calculation": 0.9292070530354977,
+            "audit": 0.2619799259118736,
+            "candidate_generation_and_qualification": 2.893999186810106,
+            "nutrition": 0.004794459789991379,
+            "week_search": 1.422983965370804,
+            "total": 8.577011285815388
+          },
+          "case": "breakfast",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.01869245292619,
+          "planner_seconds": 9.861943614203483,
+          "wall_seconds": 31.8806427186355,
+          "universe_seconds": 14.424278280232102,
+          "maxrss_kib": 1301484,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-breakfast-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-breakfast-cold-1\\breakfast-cold-timings.json",
+          "raw_sha256": "da97af8342f663692abba6d4972d014c02f512f4b4c878261232d3a6950e5852"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024244007654488087,
+            "package_calculation": 0.9412382780574262,
+            "audit": 0.26409947918727994,
+            "candidate_generation_and_qualification": 2.9549504639580846,
+            "nutrition": 0.00480723986402154,
+            "week_search": 1.4528580410405993,
+            "total": 8.819833246991038
+          },
+          "case": "breakfast",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.80414441274479,
+          "planner_seconds": 10.174760229885578,
+          "wall_seconds": 32.978911937680095,
+          "universe_seconds": 14.69675917737186,
+          "maxrss_kib": 1439780,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-breakfast-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-breakfast-cold-2\\breakfast-cold-timings.json",
+          "raw_sha256": "8ca2d966543547c73dd3e23250eee26c6cc2eca68a1c14b85d574f37ccd893c3"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.0032060216180980206,
+            "package_calculation": 0.9643210517242551,
+            "audit": 0.2681862018071115,
+            "candidate_generation_and_qualification": 2.8932870300486684,
+            "nutrition": 0.004808509256690741,
+            "week_search": 1.4876102446578443,
+            "total": 8.665790186729282
+          },
+          "case": "breakfast",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.012816553004086,
+          "planner_seconds": 9.968081125058234,
+          "wall_seconds": 31.980902967974544,
+          "universe_seconds": 14.472827405203134,
+          "maxrss_kib": 1439512,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-breakfast-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-breakfast-cold-3\\breakfast-cold-timings.json",
+          "raw_sha256": "2cb84f2f5a1d6b5d9327589aadcb4e5140cf19a826abe9d43517dd4753b30ec5"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.002453186083585024,
+            "package_calculation": 0.9685838054865599,
+            "audit": 0.27734027802944183,
+            "candidate_generation_and_qualification": 1.6516706608235836,
+            "nutrition": 0.004909081384539604,
+            "week_search": 1.4999331561848521,
+            "total": 7.486471923068166
+          },
+          "case": "breakfast",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 12.507893035188317,
+          "planner_seconds": 8.706627472303808,
+          "wall_seconds": 21.21452681021765,
+          "universe_seconds": 14.267974609974772,
+          "maxrss_kib": 1441124,
+          "preparation_stats": {
+            "hits": 664,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-breakfast-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-breakfast-persistent-1\\breakfast-persistent-timings.json",
+          "raw_sha256": "664ea2a25cd6ef3c5536b5dd234763327fe49cc3391412946c0f243253365ed9"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023811589926481247,
+            "package_calculation": 0.963782090228051,
+            "audit": 0.2755452087149024,
+            "candidate_generation_and_qualification": 1.6916792490519583,
+            "nutrition": 0.004931124858558178,
+            "week_search": 1.4931858740746975,
+            "total": 7.5614935872145
+          },
+          "case": "breakfast",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.247281391639262,
+          "planner_seconds": 8.841139193158597,
+          "wall_seconds": 21.088426646776497,
+          "universe_seconds": 14.257089670747519,
+          "maxrss_kib": 1443124,
+          "preparation_stats": {
+            "hits": 664,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-breakfast-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-breakfast-warm-1\\breakfast-warm-timings.json",
+          "raw_sha256": "fb1606cc76a2308530d26a4a7465c27b2b96c6935487f4ade515454fb5050f1e"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 3.275228664278984e-05,
+            "package_calculation": 1.8648976036347449,
+            "audit": 0.27950034383684397,
+            "candidate_generation_and_qualification": 0.6141145429573953,
+            "nutrition": 0.00509148184210062,
+            "week_search": 2.4155061370693147,
+            "total": 7.250680315773934
+          },
+          "case": "breakfast",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 5.9084941311739385,
+          "planner_seconds": 8.385860628914088,
+          "wall_seconds": 14.29435880901292,
+          "universe_seconds": 14.257089670747519,
+          "maxrss_kib": 1449588,
+          "preparation_stats": {
+            "hits": 668,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-breakfast-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-breakfast-warm-1\\breakfast-warm-timings.json",
+          "raw_sha256": "fb1606cc76a2308530d26a4a7465c27b2b96c6935487f4ade515454fb5050f1e"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 2.84537672996521e-05,
+            "package_calculation": 0.9507174366153777,
+            "audit": 0.27283144230023026,
+            "candidate_generation_and_qualification": 0.5894871978089213,
+            "nutrition": 0.004624573513865471,
+            "week_search": 2.3159164856188,
+            "total": 7.322229784913361
+          },
+          "case": "breakfast",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.65350886201486,
+          "planner_seconds": 8.405279316008091,
+          "wall_seconds": 14.058791963849217,
+          "universe_seconds": 14.257089670747519,
+          "maxrss_kib": 1453892,
+          "preparation_stats": {
+            "hits": 672,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-breakfast-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-breakfast-warm-1\\breakfast-warm-timings.json",
+          "raw_sha256": "fb1606cc76a2308530d26a4a7465c27b2b96c6935487f4ade515454fb5050f1e"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 2.8995331376791e-05,
+            "package_calculation": 0.9537639077752829,
+            "audit": 0.27655904134735465,
+            "candidate_generation_and_qualification": 0.5984314866364002,
+            "nutrition": 0.005040333606302738,
+            "week_search": 2.341425882652402,
+            "total": 7.276010280940682
+          },
+          "case": "breakfast",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.769745845813304,
+          "planner_seconds": 8.3828753400594,
+          "wall_seconds": 14.152624881826341,
+          "universe_seconds": 14.257089670747519,
+          "maxrss_kib": 1455920,
+          "preparation_stats": {
+            "hits": 676,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-breakfast-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-breakfast-warm-1\\breakfast-warm-timings.json",
+          "raw_sha256": "fb1606cc76a2308530d26a4a7465c27b2b96c6935487f4ade515454fb5050f1e"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-p2final-breakfast-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 51.507115656044334,
+          "cgroup_memory_peak_bytes": 1325191168,
+          "host_available_before_bytes": 7078227968,
+          "scratch_storage_bytes": 229262351
+        },
+        {
+          "run": "final2-p2final-breakfast-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 53.498709553387016,
+          "cgroup_memory_peak_bytes": 1467109376,
+          "host_available_before_bytes": 7098396672,
+          "scratch_storage_bytes": 236863879
+        },
+        {
+          "run": "final2-p2final-breakfast-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 52.492887299042195,
+          "cgroup_memory_peak_bytes": 1466695680,
+          "host_available_before_bytes": 7085191168,
+          "scratch_storage_bytes": 244465409
+        },
+        {
+          "run": "final2-p2final-breakfast-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 41.217006135731936,
+          "cgroup_memory_peak_bytes": 1462243328,
+          "host_available_before_bytes": 7074062336,
+          "scratch_storage_bytes": 244935330
+        },
+        {
+          "run": "final2-p2final-breakfast-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 83.32746178656816,
+          "cgroup_memory_peak_bytes": 1478934528,
+          "host_available_before_bytes": 7052857344,
+          "scratch_storage_bytes": 246814289
+        }
+      ]
+    },
+    {
+      "cohort": "p2final",
+      "case": "snack",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          51.53175412584096,
+          52.55204753857106,
+          51.442046091891825
+        ],
+        "n": 3,
+        "median": 51.53175412584096,
+        "min": 51.442046091891825,
+        "max": 52.55204753857106
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          31.737444332335144,
+          33.203137918841094,
+          31.20157691463828
+        ],
+        "n": 3,
+        "median": 31.737444332335144,
+        "min": 31.20157691463828,
+        "max": 33.203137918841094
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          13.79940563486889,
+          13.840239414013922,
+          13.522389758843929
+        ],
+        "n": 3,
+        "median": 13.79940563486889,
+        "min": 13.522389758843929,
+        "max": 13.840239414013922
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          7.899679507128894,
+          7.967909848783165,
+          7.730040234979242
+        ],
+        "n": 3,
+        "median": 7.899679507128894,
+        "min": 7.730040234979242,
+        "max": 7.967909848783165
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          40.228457087185234
+        ],
+        "n": 1,
+        "median": 40.228457087185234,
+        "min": 40.228457087185234,
+        "max": 40.228457087185234
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          20.03601060109213
+        ],
+        "n": 1,
+        "median": 20.03601060109213,
+        "min": 20.03601060109213,
+        "max": 20.03601060109213
+      },
+      "max_cgroup_memory_bytes": 1485381632,
+      "max_rss_kib": 1462408,
+      "paid_values": [
+        56.86
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023340298794209957,
+            "package_calculation": 0.7045571664348245,
+            "audit": 0.19560874672606587,
+            "candidate_generation_and_qualification": 2.6839891066774726,
+            "nutrition": 0.0035085598938167095,
+            "week_search": 1.077973713632673,
+            "total": 7.978446405380964
+          },
+          "case": "snack",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.528136564418674,
+          "planner_seconds": 9.209301816765219,
+          "wall_seconds": 31.737444332335144,
+          "universe_seconds": 14.11312800180167,
+          "maxrss_kib": 1441804,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-snack-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-snack-cold-1\\snack-cold-timings.json",
+          "raw_sha256": "40a8e05349465b046ce2402859cc8a14a99571f0f68249621ebeb0bf23ec6282"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.002441924996674061,
+            "package_calculation": 0.724997058045119,
+            "audit": 0.20160424383357167,
+            "candidate_generation_and_qualification": 2.7789055900648236,
+            "nutrition": 0.0036241114139556885,
+            "week_search": 1.113618740811944,
+            "total": 8.445311596151441
+          },
+          "case": "snack",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 23.461772145703435,
+          "planner_seconds": 9.741359550971538,
+          "wall_seconds": 33.203137918841094,
+          "universe_seconds": 14.127494347747415,
+          "maxrss_kib": 1301740,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-snack-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-snack-cold-2\\snack-cold-timings.json",
+          "raw_sha256": "c194223962332c7c5ecf1dfea19709a195d028af9e5735bf0f82ad694f0c2ee1"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.0022968980483710766,
+            "package_calculation": 0.7089277817867696,
+            "audit": 0.19801134383305907,
+            "candidate_generation_and_qualification": 2.534533930942416,
+            "nutrition": 0.0035928948782384396,
+            "week_search": 1.0866813641041517,
+            "total": 7.910989566706121
+          },
+          "case": "snack",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.069989959709346,
+          "planner_seconds": 9.131580803077668,
+          "wall_seconds": 31.20157691463828,
+          "universe_seconds": 14.254976226016879,
+          "maxrss_kib": 1440860,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 463,
+            "writes": 463,
+            "invalid": 0
+          },
+          "run": "final2-p2final-snack-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-snack-cold-3\\snack-cold-timings.json",
+          "raw_sha256": "06cde3a5d4fa2db39ba1db60fbcfecb5ca658c4333f5f181902d24ad835488f6"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023843860253691673,
+            "package_calculation": 0.7334881173446774,
+            "audit": 0.19385346677154303,
+            "candidate_generation_and_qualification": 1.3211324596777558,
+            "nutrition": 0.003706881310790777,
+            "week_search": 1.12303919903934,
+            "total": 6.834265423938632
+          },
+          "case": "snack",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 12.053087312262505,
+          "planner_seconds": 7.9829182690009475,
+          "wall_seconds": 20.03601060109213,
+          "universe_seconds": 14.180760476272553,
+          "maxrss_kib": 1443632,
+          "preparation_stats": {
+            "hits": 664,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-snack-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-snack-persistent-1\\snack-persistent-timings.json",
+          "raw_sha256": "4a58a2e73340b0d9bde184c91d5406eb82f1840ff67bfa4c13607c5d49c9e10a"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023270258679986,
+            "package_calculation": 0.7497588717378676,
+            "audit": 0.19753303239122033,
+            "candidate_generation_and_qualification": 1.3481027618981898,
+            "nutrition": 0.003794177435338497,
+            "week_search": 1.1368850134313107,
+            "total": 6.908879384864122
+          },
+          "case": "snack",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.258623762056231,
+          "planner_seconds": 8.122549067717046,
+          "wall_seconds": 20.38117768894881,
+          "universe_seconds": 13.902482122182846,
+          "maxrss_kib": 1444888,
+          "preparation_stats": {
+            "hits": 664,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-snack-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-snack-warm-1\\snack-warm-timings.json",
+          "raw_sha256": "1539ca4cfda4b8e02678c98c42a2b6a2fd0b5dc1b5df994b21d27e43c4aeb9d1"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 2.7101952582597733e-05,
+            "package_calculation": 0.7460418655537069,
+            "audit": 0.20393523760139942,
+            "candidate_generation_and_qualification": 0.3185108839534223,
+            "nutrition": 0.0037472485564649105,
+            "week_search": 2.015688573010266,
+            "total": 6.796009078156203
+          },
+          "case": "snack",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 5.899721518624574,
+          "planner_seconds": 7.899679507128894,
+          "wall_seconds": 13.79940563486889,
+          "universe_seconds": 13.902482122182846,
+          "maxrss_kib": 1451144,
+          "preparation_stats": {
+            "hits": 668,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-snack-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-snack-warm-1\\snack-warm-timings.json",
+          "raw_sha256": "1539ca4cfda4b8e02678c98c42a2b6a2fd0b5dc1b5df994b21d27e43c4aeb9d1"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 2.6761088520288467e-05,
+            "package_calculation": 0.7702264548279345,
+            "audit": 0.20957182999700308,
+            "candidate_generation_and_qualification": 0.33938820194453,
+            "nutrition": 0.0039403922855854034,
+            "week_search": 2.0454032360576093,
+            "total": 6.846985931973904
+          },
+          "case": "snack",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.872324544005096,
+          "planner_seconds": 7.967909848783165,
+          "wall_seconds": 13.840239414013922,
+          "universe_seconds": 13.902482122182846,
+          "maxrss_kib": 1457320,
+          "preparation_stats": {
+            "hits": 672,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-snack-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-snack-warm-1\\snack-warm-timings.json",
+          "raw_sha256": "1539ca4cfda4b8e02678c98c42a2b6a2fd0b5dc1b5df994b21d27e43c4aeb9d1"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 2.4667009711265564e-05,
+            "package_calculation": 0.7318129669874907,
+            "audit": 0.19913775147870183,
+            "candidate_generation_and_qualification": 0.3169797360897064,
+            "nutrition": 0.0036995774134993553,
+            "week_search": 1.9557317607104778,
+            "total": 6.645894385874271
+          },
+          "case": "snack",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.792345084715635,
+          "planner_seconds": 7.730040234979242,
+          "wall_seconds": 13.522389758843929,
+          "universe_seconds": 13.902482122182846,
+          "maxrss_kib": 1462408,
+          "preparation_stats": {
+            "hits": 676,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-snack-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-snack-warm-1\\snack-warm-timings.json",
+          "raw_sha256": "1539ca4cfda4b8e02678c98c42a2b6a2fd0b5dc1b5df994b21d27e43c4aeb9d1"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-p2final-snack-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 51.53175412584096,
+          "cgroup_memory_peak_bytes": 1468387328,
+          "host_available_before_bytes": 7083425792,
+          "scratch_storage_bytes": 254398817
+        },
+        {
+          "run": "final2-p2final-snack-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 52.55204753857106,
+          "cgroup_memory_peak_bytes": 1325363200,
+          "host_available_before_bytes": 7065526272,
+          "scratch_storage_bytes": 261983339
+        },
+        {
+          "run": "final2-p2final-snack-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 51.442046091891825,
+          "cgroup_memory_peak_bytes": 1467904000,
+          "host_available_before_bytes": 7065591808,
+          "scratch_storage_bytes": 269567863
+        },
+        {
+          "run": "final2-p2final-snack-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 40.228457087185234,
+          "cgroup_memory_peak_bytes": 1463943168,
+          "host_available_before_bytes": 7045337088,
+          "scratch_storage_bytes": 270020779
+        },
+        {
+          "run": "final2-p2final-snack-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 81.26934965886176,
+          "cgroup_memory_peak_bytes": 1485381632,
+          "host_available_before_bytes": 7015129088,
+          "scratch_storage_bytes": 271831756
+        }
+      ]
+    },
+    {
+      "cohort": "p2final",
+      "case": "combined",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          67.01632471196353,
+          65.86948855919763,
+          69.02403354272246
+        ],
+        "n": 3,
+        "median": 67.01632471196353,
+        "min": 65.86948855919763,
+        "max": 69.02403354272246
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          46.784730582963675,
+          46.709002959076315,
+          48.486771021969616
+        ],
+        "n": 3,
+        "median": 46.784730582963675,
+        "min": 46.709002959076315,
+        "max": 48.486771021969616
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          26.060277773067355,
+          25.951007708907127,
+          26.000450489111245
+        ],
+        "n": 3,
+        "median": 26.000450489111245,
+        "min": 25.951007708907127,
+        "max": 26.060277773067355
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          20.321225136052817,
+          20.18817400978878,
+          20.164462309796363
+        ],
+        "n": 3,
+        "median": 20.18817400978878,
+        "min": 20.164462309796363,
+        "max": 20.321225136052817
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          54.680106826126575
+        ],
+        "n": 1,
+        "median": 54.680106826126575,
+        "min": 54.680106826126575,
+        "max": 54.680106826126575
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          34.613025688100606
+        ],
+        "n": 1,
+        "median": 34.613025688100606,
+        "min": 34.613025688100606,
+        "max": 34.613025688100606
+      },
+      "max_cgroup_memory_bytes": 1536397312,
+      "max_rss_kib": 1510192,
+      "paid_values": [
+        495.44
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 495.44,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Varma bönwraps med kål och ost",
+            "Potatispanna med kikärtor och paprika",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Varm linsfrukost med morot",
+            "Varm kikärts- och morotsskål",
+            "Äppelklyftor och ost",
+            "Äppelklyftor och ost",
+            "Havre- och ostflarn med morot",
+            "Havre- och ostflarn med morot"
+          ],
+          "check_timings": {
+            "product_facts": 0.002288562711328268,
+            "package_calculation": 6.59019384207204,
+            "audit": 3.6084858723916113,
+            "candidate_generation_and_qualification": 4.615260202437639,
+            "nutrition": 0.014855539426207542,
+            "week_search": 13.082477116025984,
+            "total": 23.066152547020465
+          },
+          "case": "combined",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.419869161210954,
+          "planner_seconds": 24.364854739047587,
+          "wall_seconds": 46.784730582963675,
+          "universe_seconds": 14.383621133863926,
+          "maxrss_kib": 1437524,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 464,
+            "writes": 464,
+            "invalid": 0
+          },
+          "run": "final2-p2final-combined-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-combined-cold-1\\combined-cold-timings.json",
+          "raw_sha256": "92fe5187a3443698dbff7e4f756724c45f96a32e5a287d1e0f9cab5f405f0a72"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 495.44,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Varma bönwraps med kål och ost",
+            "Potatispanna med kikärtor och paprika",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Varm linsfrukost med morot",
+            "Varm kikärts- och morotsskål",
+            "Äppelklyftor och ost",
+            "Äppelklyftor och ost",
+            "Havre- och ostflarn med morot",
+            "Havre- och ostflarn med morot"
+          ],
+          "check_timings": {
+            "product_facts": 0.0025174892507493496,
+            "package_calculation": 6.4480582806281745,
+            "audit": 3.4893981465138495,
+            "candidate_generation_and_qualification": 4.69722308171913,
+            "nutrition": 0.014758980367332697,
+            "week_search": 12.669620957225561,
+            "total": 22.780944103375077
+          },
+          "case": "combined",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.618940747808665,
+          "planner_seconds": 24.09005558816716,
+          "wall_seconds": 46.709002959076315,
+          "universe_seconds": 13.852198380976915,
+          "maxrss_kib": 1439264,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 464,
+            "writes": 464,
+            "invalid": 0
+          },
+          "run": "final2-p2final-combined-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-combined-cold-2\\combined-cold-timings.json",
+          "raw_sha256": "06b69fb4359aab00747a9820f7d737faf1bda7d9ac86a51729b44fae61d4862b"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 495.44,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Varma bönwraps med kål och ost",
+            "Potatispanna med kikärtor och paprika",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Varm linsfrukost med morot",
+            "Varm kikärts- och morotsskål",
+            "Äppelklyftor och ost",
+            "Äppelklyftor och ost",
+            "Havre- och ostflarn med morot",
+            "Havre- och ostflarn med morot"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023867501877248287,
+            "package_calculation": 7.3512702831067145,
+            "audit": 3.941430858336389,
+            "candidate_generation_and_qualification": 4.748180347960442,
+            "nutrition": 0.014977986458688974,
+            "week_search": 14.47898383717984,
+            "total": 24.712723987177014
+          },
+          "case": "combined",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.513454867061228,
+          "planner_seconds": 25.973310474306345,
+          "wall_seconds": 48.486771021969616,
+          "universe_seconds": 14.299485060852021,
+          "maxrss_kib": 1439948,
+          "preparation_stats": {
+            "hits": 201,
+            "misses": 464,
+            "writes": 464,
+            "invalid": 0
+          },
+          "run": "final2-p2final-combined-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-combined-cold-3\\combined-cold-timings.json",
+          "raw_sha256": "3a8b70d1eda6b17802e89fe8ff6e53e2984ac112fde266b143987e73aab93445"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 495.44,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Varma bönwraps med kål och ost",
+            "Potatispanna med kikärtor och paprika",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Varm linsfrukost med morot",
+            "Varm kikärts- och morotsskål",
+            "Äppelklyftor och ost",
+            "Äppelklyftor och ost",
+            "Havre- och ostflarn med morot",
+            "Havre- och ostflarn med morot"
+          ],
+          "check_timings": {
+            "product_facts": 0.0025398419238626957,
+            "package_calculation": 6.529395665507764,
+            "audit": 3.422955373302102,
+            "candidate_generation_and_qualification": 2.898133776150644,
+            "nutrition": 0.014868520200252533,
+            "week_search": 12.737011138349771,
+            "total": 20.94749089097604
+          },
+          "case": "combined",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 12.47449726704508,
+          "planner_seconds": 22.138522420078516,
+          "wall_seconds": 34.613025688100606,
+          "universe_seconds": 14.03603850165382,
+          "maxrss_kib": 1443768,
+          "preparation_stats": {
+            "hits": 665,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-combined-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-combined-persistent-1\\combined-persistent-timings.json",
+          "raw_sha256": "88bd65a485b557f6cd740053a3dc6e6bc34a6fc4c02bb2538744d94bfdc50bfc"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 495.44,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Varma bönwraps med kål och ost",
+            "Potatispanna med kikärtor och paprika",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Varm linsfrukost med morot",
+            "Varm kikärts- och morotsskål",
+            "Äppelklyftor och ost",
+            "Äppelklyftor och ost",
+            "Havre- och ostflarn med morot",
+            "Havre- och ostflarn med morot"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023858994245529175,
+            "package_calculation": 6.450286142062396,
+            "audit": 3.395215312484652,
+            "candidate_generation_and_qualification": 2.927771633025259,
+            "nutrition": 0.0141039346344769,
+            "week_search": 12.38660880131647,
+            "total": 20.896379271056503
+          },
+          "case": "combined",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.602527331095189,
+          "planner_seconds": 22.107413719873875,
+          "wall_seconds": 34.70994720328599,
+          "universe_seconds": 14.139636642765254,
+          "maxrss_kib": 1444200,
+          "preparation_stats": {
+            "hits": 665,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-combined-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-combined-warm-1\\combined-warm-timings.json",
+          "raw_sha256": "3052611080d82f0319e749a9bb9e34c64cff27f1c98aaa975fcd0adcfa15156d"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 495.44,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Varma bönwraps med kål och ost",
+            "Potatispanna med kikärtor och paprika",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Varm linsfrukost med morot",
+            "Varm kikärts- och morotsskål",
+            "Äppelklyftor och ost",
+            "Äppelklyftor och ost",
+            "Havre- och ostflarn med morot",
+            "Havre- och ostflarn med morot"
+          ],
+          "check_timings": {
+            "product_facts": 2.9095914214849472e-05,
+            "package_calculation": 6.318231046199799,
+            "audit": 3.402956326957792,
+            "candidate_generation_and_qualification": 1.4089217581786215,
+            "nutrition": 0.014300000388175249,
+            "week_search": 12.323175152298063,
+            "total": 19.17739643668756
+          },
+          "case": "combined",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 5.739047607872635,
+          "planner_seconds": 20.321225136052817,
+          "wall_seconds": 26.060277773067355,
+          "universe_seconds": 14.139636642765254,
+          "maxrss_kib": 1493484,
+          "preparation_stats": {
+            "hits": 669,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-combined-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-combined-warm-1\\combined-warm-timings.json",
+          "raw_sha256": "3052611080d82f0319e749a9bb9e34c64cff27f1c98aaa975fcd0adcfa15156d"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 495.44,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Varma bönwraps med kål och ost",
+            "Potatispanna med kikärtor och paprika",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Varm linsfrukost med morot",
+            "Varm kikärts- och morotsskål",
+            "Äppelklyftor och ost",
+            "Äppelklyftor och ost",
+            "Havre- och ostflarn med morot",
+            "Havre- och ostflarn med morot"
+          ],
+          "check_timings": {
+            "product_facts": 2.6769936084747314e-05,
+            "package_calculation": 6.245778895448893,
+            "audit": 3.3719698167406023,
+            "candidate_generation_and_qualification": 1.4188231718726456,
+            "nutrition": 0.014308605343103409,
+            "week_search": 12.172435086686164,
+            "total": 19.08198444917798
+          },
+          "case": "combined",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.762828289996833,
+          "planner_seconds": 20.18817400978878,
+          "wall_seconds": 25.951007708907127,
+          "universe_seconds": 14.139636642765254,
+          "maxrss_kib": 1503632,
+          "preparation_stats": {
+            "hits": 673,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-combined-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-combined-warm-1\\combined-warm-timings.json",
+          "raw_sha256": "3052611080d82f0319e749a9bb9e34c64cff27f1c98aaa975fcd0adcfa15156d"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 495.44,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Varma bönwraps med kål och ost",
+            "Potatispanna med kikärtor och paprika",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Spenatcouscous med smält ost",
+            "Varm linsfrukost med morot",
+            "Varm kikärts- och morotsskål",
+            "Äppelklyftor och ost",
+            "Äppelklyftor och ost",
+            "Havre- och ostflarn med morot",
+            "Havre- och ostflarn med morot"
+          ],
+          "check_timings": {
+            "product_facts": 3.170128911733627e-05,
+            "package_calculation": 6.234214345924556,
+            "audit": 3.3893979652784765,
+            "candidate_generation_and_qualification": 1.4338091281242669,
+            "nutrition": 0.014044263865798712,
+            "week_search": 12.184339148923755,
+            "total": 18.990868801251054
+          },
+          "case": "combined",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.835983741097152,
+          "planner_seconds": 20.164462309796363,
+          "wall_seconds": 26.000450489111245,
+          "universe_seconds": 14.139636642765254,
+          "maxrss_kib": 1510192,
+          "preparation_stats": {
+            "hits": 677,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-p2final-combined-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-p2final-combined-warm-1\\combined-warm-timings.json",
+          "raw_sha256": "3052611080d82f0319e749a9bb9e34c64cff27f1c98aaa975fcd0adcfa15156d"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-p2final-combined-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 67.01632471196353,
+          "cgroup_memory_peak_bytes": 1463918592,
+          "host_available_before_bytes": 7043432448,
+          "scratch_storage_bytes": 280749061
+        },
+        {
+          "run": "final2-p2final-combined-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 65.86948855919763,
+          "cgroup_memory_peak_bytes": 1466945536,
+          "host_available_before_bytes": 7021371392,
+          "scratch_storage_bytes": 289666371
+        },
+        {
+          "run": "final2-p2final-combined-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 69.02403354272246,
+          "cgroup_memory_peak_bytes": 1466732544,
+          "host_available_before_bytes": 7006568448,
+          "scratch_storage_bytes": 298583681
+        },
+        {
+          "run": "final2-p2final-combined-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 54.680106826126575,
+          "cgroup_memory_peak_bytes": 1464520704,
+          "host_available_before_bytes": 6992130048,
+          "scratch_storage_bytes": 299818394
+        },
+        {
+          "run": "final2-p2final-combined-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 132.8961911732331,
+          "cgroup_memory_peak_bytes": 1536397312,
+          "host_available_before_bytes": 7015387136,
+          "scratch_storage_bytes": 304756566
+        }
+      ]
+    },
+    {
+      "cohort": "final",
+      "case": "main",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          99.89212430967018,
+          95.75070048775524,
+          95.8672086186707
+        ],
+        "n": 3,
+        "median": 95.8672086186707,
+        "min": 95.75070048775524,
+        "max": 99.89212430967018
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          79.60602347878739,
+          75.37403136305511,
+          76.01189813530073
+        ],
+        "n": 3,
+        "median": 76.01189813530073,
+        "min": 75.37403136305511,
+        "max": 79.60602347878739
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          56.91370288282633,
+          57.11118071200326,
+          58.8488838551566
+        ],
+        "n": 3,
+        "median": 57.11118071200326,
+        "min": 56.91370288282633,
+        "max": 58.8488838551566
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          50.994473872706294,
+          51.120250683277845,
+          52.95662432489917
+        ],
+        "n": 3,
+        "median": 51.120250683277845,
+        "min": 50.994473872706294,
+        "max": 52.95662432489917
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          87.50687713734806
+        ],
+        "n": 1,
+        "median": 87.50687713734806,
+        "min": 87.50687713734806,
+        "max": 87.50687713734806
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          67.33265220699832
+        ],
+        "n": 1,
+        "median": 67.33265220699832,
+        "min": 67.33265220699832,
+        "max": 67.33265220699832
+      },
+      "max_cgroup_memory_bytes": 1611034624,
+      "max_rss_kib": 1569620,
+      "paid_values": [
+        741.15
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023534069769084454,
+            "package_calculation": 12.514376146253198,
+            "nutrition": 0.5862252516672015,
+            "audit": 15.235867264214903,
+            "candidate_generation_and_qualification": 10.04566032718867,
+            "week_search": 40.823918130714446,
+            "total": 55.29274669988081
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.684446807019413,
+          "planner_seconds": 56.92156931804493,
+          "wall_seconds": 79.60602347878739,
+          "universe_seconds": 14.497972824145108,
+          "maxrss_kib": 1302776,
+          "preparation_stats": {
+            "hits": 206,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-main-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-main-cold-1\\main-cold-timings.json",
+          "raw_sha256": "0e4f769d465872686954a97f395432e34fb8ea50e4fd664ee4a97e94fdc88946"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023178071714937687,
+            "package_calculation": 11.574271961580962,
+            "nutrition": 0.5315234274603426,
+            "audit": 14.173530725296587,
+            "candidate_generation_and_qualification": 9.692693060729653,
+            "week_search": 37.673356318846345,
+            "total": 51.33451943099499
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.556870447006077,
+          "planner_seconds": 52.817154083866626,
+          "wall_seconds": 75.37403136305511,
+          "universe_seconds": 14.129115016199648,
+          "maxrss_kib": 1439484,
+          "preparation_stats": {
+            "hits": 206,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-main-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-main-cold-2\\main-cold-timings.json",
+          "raw_sha256": "e6b251b82caa73fe301fd94d6c1539c6438d8d11eed253a5ab87a963a05a9e24"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024401708506047726,
+            "package_calculation": 11.755504816770554,
+            "nutrition": 0.5470010889694095,
+            "audit": 14.292638031300157,
+            "candidate_generation_and_qualification": 9.828486643731594,
+            "week_search": 38.18366439267993,
+            "total": 52.1555894901976
+          },
+          "case": "main",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.39261890714988,
+          "planner_seconds": 53.61927212495357,
+          "wall_seconds": 76.01189813530073,
+          "universe_seconds": 14.01440218789503,
+          "maxrss_kib": 1436592,
+          "preparation_stats": {
+            "hits": 206,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-main-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-main-cold-3\\main-cold-timings.json",
+          "raw_sha256": "47526cef302d402ea8b39d9c0c18f64d657e4e8ee1df93a438978f8954856a34"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.0026107262820005417,
+            "package_calculation": 11.869647589046508,
+            "nutrition": 0.5462717483751476,
+            "audit": 15.814262389671057,
+            "candidate_generation_and_qualification": 9.046259947586805,
+            "week_search": 38.706429219804704,
+            "total": 51.86170206731185
+          },
+          "case": "main",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 13.864111893810332,
+          "planner_seconds": 53.46853244910017,
+          "wall_seconds": 67.33265220699832,
+          "universe_seconds": 13.915345653891563,
+          "maxrss_kib": 1341948,
+          "preparation_stats": {
+            "hits": 675,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-main-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-main-persistent-1\\main-persistent-timings.json",
+          "raw_sha256": "dc322e4b2e8962d9dcdc359a2923405d306b5900acd77ade1c8db7cd38f4838a"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 0.002647257409989834,
+            "package_calculation": 11.650515998713672,
+            "nutrition": 0.538466177880764,
+            "audit": 15.776413530111313,
+            "candidate_generation_and_qualification": 8.626708077732474,
+            "week_search": 38.369665200822055,
+            "total": 51.03133234428242
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.325820993632078,
+          "planner_seconds": 52.41844552429393,
+          "wall_seconds": 64.74427285976708,
+          "universe_seconds": 14.158319550100714,
+          "maxrss_kib": 1444152,
+          "preparation_stats": {
+            "hits": 675,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "1dfba38cbe4a5030c1f7b65c5b587aae490f6c3a612dda16d57917f45c2d5c93"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.8374139219522476e-05,
+            "package_calculation": 13.69020348507911,
+            "nutrition": 0.5376333058811724,
+            "audit": 13.396316189318895,
+            "candidate_generation_and_qualification": 7.365361575037241,
+            "week_search": 38.18080448079854,
+            "total": 49.63555632904172
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 5.919223248958588,
+          "planner_seconds": 50.994473872706294,
+          "wall_seconds": 56.91370288282633,
+          "universe_seconds": 14.158319550100714,
+          "maxrss_kib": 1550728,
+          "preparation_stats": {
+            "hits": 678,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "1dfba38cbe4a5030c1f7b65c5b587aae490f6c3a612dda16d57917f45c2d5c93"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.6870984584093094e-05,
+            "package_calculation": 12.689183287788182,
+            "nutrition": 0.5442438330501318,
+            "audit": 14.404608039651066,
+            "candidate_generation_and_qualification": 7.216949600260705,
+            "week_search": 38.495204919949174,
+            "total": 49.76126595027745
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.990923766978085,
+          "planner_seconds": 51.120250683277845,
+          "wall_seconds": 57.11118071200326,
+          "universe_seconds": 14.158319550100714,
+          "maxrss_kib": 1563600,
+          "preparation_stats": {
+            "hits": 681,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "1dfba38cbe4a5030c1f7b65c5b587aae490f6c3a612dda16d57917f45c2d5c93"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 741.15,
+          "portions": 20,
+          "recipes": [
+            "Krämig spenattofu med ärtor och vitlöksris",
+            "Röd linsdal med spenat, mjuk tofu och citronris",
+            "Mustig lins- och kidneychili med ris och yoghurt",
+            "Masalapasta med tofu, ärtor och tomatyoghurt",
+            "Rostad blomkål och kikärtor med kokos-linssås"
+          ],
+          "check_timings": {
+            "product_facts": 2.645142376422882e-05,
+            "package_calculation": 15.463793427683413,
+            "nutrition": 0.5913475900888443,
+            "audit": 12.655950046144426,
+            "candidate_generation_and_qualification": 6.377969622146338,
+            "week_search": 40.02850469527766,
+            "total": 50.56316235521808
+          },
+          "case": "main",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.89225465990603,
+          "planner_seconds": 52.95662432489917,
+          "wall_seconds": 58.8488838551566,
+          "universe_seconds": 14.158319550100714,
+          "maxrss_kib": 1569620,
+          "preparation_stats": {
+            "hits": 684,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-main-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-main-warm-1\\main-warm-timings.json",
+          "raw_sha256": "1dfba38cbe4a5030c1f7b65c5b587aae490f6c3a612dda16d57917f45c2d5c93"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-final-main-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 99.89212430967018,
+          "cgroup_memory_peak_bytes": 1326395392,
+          "host_available_before_bytes": 7013703680,
+          "scratch_storage_bytes": 317712370
+        },
+        {
+          "run": "final2-final-main-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 95.75070048775524,
+          "cgroup_memory_peak_bytes": 1466417152,
+          "host_available_before_bytes": 6915948544,
+          "scratch_storage_bytes": 330668170
+        },
+        {
+          "run": "final2-final-main-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 95.8672086186707,
+          "cgroup_memory_peak_bytes": 1463619584,
+          "host_available_before_bytes": 6993219584,
+          "scratch_storage_bytes": 343623960
+        },
+        {
+          "run": "final2-final-main-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 87.50687713734806,
+          "cgroup_memory_peak_bytes": 1360678912,
+          "host_available_before_bytes": 6952513536,
+          "scratch_storage_bytes": 349426583
+        },
+        {
+          "run": "final2-final-main-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 259.6827562581748,
+          "cgroup_memory_peak_bytes": 1611034624,
+          "host_available_before_bytes": 6934970368,
+          "scratch_storage_bytes": 372636386
+        }
+      ]
+    },
+    {
+      "cohort": "final",
+      "case": "simple",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          66.99063271097839,
+          66.89827408408746,
+          65.85854881303385
+        ],
+        "n": 3,
+        "median": 66.89827408408746,
+        "min": 65.85854881303385,
+        "max": 66.99063271097839
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          46.96403216896579,
+          47.54017025930807,
+          46.24694481911138
+        ],
+        "n": 3,
+        "median": 46.96403216896579,
+        "min": 46.24694481911138,
+        "max": 47.54017025930807
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          28.463347058277577,
+          28.3655724581331,
+          28.208391254767776
+        ],
+        "n": 3,
+        "median": 28.3655724581331,
+        "min": 28.208391254767776,
+        "max": 28.463347058277577
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          22.512093803845346,
+          22.579467902891338,
+          22.31264350609854
+        ],
+        "n": 3,
+        "median": 22.512093803845346,
+        "min": 22.31264350609854,
+        "max": 22.579467902891338
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          57.73503964720294
+        ],
+        "n": 1,
+        "median": 57.73503964720294,
+        "min": 57.73503964720294,
+        "max": 57.73503964720294
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          38.0810500360094
+        ],
+        "n": 1,
+        "median": 38.0810500360094,
+        "min": 38.0810500360094,
+        "max": 38.0810500360094
+      },
+      "max_cgroup_memory_bytes": 1510567936,
+      "max_rss_kib": 1475168,
+      "paid_values": [
+        262.28
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 262.28,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "check_timings": {
+            "product_facts": 0.002374425996094942,
+            "package_calculation": 2.8280317904427648,
+            "audit": 0.5128208608366549,
+            "candidate_generation_and_qualification": 3.5943434918299317,
+            "nutrition": 0.006153325084596872,
+            "week_search": 4.525241123046726,
+            "total": 23.130945384968072
+          },
+          "case": "simple",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.527495762798935,
+          "planner_seconds": 24.43652947433293,
+          "wall_seconds": 46.96403216896579,
+          "universe_seconds": 14.422315835952759,
+          "maxrss_kib": 1440380,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-simple-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-simple-cold-1\\simple-cold-timings.json",
+          "raw_sha256": "0c527d583e52659916a645f8fafe795b4fc93db438ceec1cb040b2e31f7938a0"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 262.28,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "check_timings": {
+            "product_facts": 0.002509674057364464,
+            "package_calculation": 2.8798030340112746,
+            "audit": 0.5277642696164548,
+            "candidate_generation_and_qualification": 3.6032915180549026,
+            "nutrition": 0.006141329184174538,
+            "week_search": 4.691491635050625,
+            "total": 23.4695208449848
+          },
+          "case": "simple",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.77311093127355,
+          "planner_seconds": 24.76705306628719,
+          "wall_seconds": 47.54017025930807,
+          "universe_seconds": 14.136075077112764,
+          "maxrss_kib": 1439312,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-simple-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-simple-cold-2\\simple-cold-timings.json",
+          "raw_sha256": "89e56e5ad281bff62d22bb770f82150e799903961540bfdad18c6f2277a5e144"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 262.28,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "check_timings": {
+            "product_facts": 0.00234176404774189,
+            "package_calculation": 2.823194920551032,
+            "audit": 0.51217320561409,
+            "candidate_generation_and_qualification": 3.5721115320920944,
+            "nutrition": 0.005985729396343231,
+            "week_search": 4.48258473072201,
+            "total": 22.8405817351304
+          },
+          "case": "simple",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.119825011119246,
+          "planner_seconds": 24.1271144580096,
+          "wall_seconds": 46.24694481911138,
+          "universe_seconds": 14.126217736396939,
+          "maxrss_kib": 1302596,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-simple-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-simple-cold-3\\simple-cold-timings.json",
+          "raw_sha256": "22bba49282ff5fdc082892f0feb5c4398f9b62595ffd1fc3313bea2cf225c7b4"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 262.28,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "check_timings": {
+            "product_facts": 0.0026471158489584923,
+            "package_calculation": 3.3988050715997815,
+            "audit": 0.6182163027115166,
+            "candidate_generation_and_qualification": 2.620678045786917,
+            "nutrition": 0.00711676012724638,
+            "week_search": 4.400316959712654,
+            "total": 22.956455007195473
+          },
+          "case": "simple",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 13.697712038177997,
+          "planner_seconds": 24.383331655990332,
+          "wall_seconds": 38.0810500360094,
+          "universe_seconds": 14.10129895573482,
+          "maxrss_kib": 1444144,
+          "preparation_stats": {
+            "hits": 679,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-simple-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-simple-persistent-1\\simple-persistent-timings.json",
+          "raw_sha256": "07eb07cdb5702c0608494dcf454dfe5b9ccd95ab3999243c0f2d593920b237e1"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 262.28,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024760300293564796,
+            "package_calculation": 2.9845636296086013,
+            "audit": 0.5476019438356161,
+            "candidate_generation_and_qualification": 2.217684118077159,
+            "nutrition": 0.006567272357642651,
+            "week_search": 3.943910756614059,
+            "total": 22.00842882413417
+          },
+          "case": "simple",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.751421875320375,
+          "planner_seconds": 23.221318505704403,
+          "wall_seconds": 35.97274489933625,
+          "universe_seconds": 14.181258365977556,
+          "maxrss_kib": 1443272,
+          "preparation_stats": {
+            "hits": 679,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-simple-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-simple-warm-1\\simple-warm-timings.json",
+          "raw_sha256": "740707da2a689ae7ab2e8d0c2f81e053e206ec3281362a5947f7d869f6204c14"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 262.28,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "check_timings": {
+            "product_facts": 2.6341062039136887e-05,
+            "package_calculation": 3.79248708486557,
+            "audit": 0.5365376006811857,
+            "candidate_generation_and_qualification": 1.1786797610111535,
+            "nutrition": 0.006519111804664135,
+            "week_search": 4.713632098864764,
+            "total": 21.42569483164698
+          },
+          "case": "simple",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 5.951248756144196,
+          "planner_seconds": 22.512093803845346,
+          "wall_seconds": 28.463347058277577,
+          "universe_seconds": 14.181258365977556,
+          "maxrss_kib": 1459532,
+          "preparation_stats": {
+            "hits": 686,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-simple-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-simple-warm-1\\simple-warm-timings.json",
+          "raw_sha256": "740707da2a689ae7ab2e8d0c2f81e053e206ec3281362a5947f7d869f6204c14"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 262.28,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "check_timings": {
+            "product_facts": 2.4755951017141342e-05,
+            "package_calculation": 3.888776586856693,
+            "audit": 0.5526609881781042,
+            "candidate_generation_and_qualification": 1.2124203070998192,
+            "nutrition": 0.006541560869663954,
+            "week_search": 4.841598682105541,
+            "total": 21.472186835017055
+          },
+          "case": "simple",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.786099896300584,
+          "planner_seconds": 22.579467902891338,
+          "wall_seconds": 28.3655724581331,
+          "universe_seconds": 14.181258365977556,
+          "maxrss_kib": 1467992,
+          "preparation_stats": {
+            "hits": 693,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-simple-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-simple-warm-1\\simple-warm-timings.json",
+          "raw_sha256": "740707da2a689ae7ab2e8d0c2f81e053e206ec3281362a5947f7d869f6204c14"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 262.28,
+          "portions": 10,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "check_timings": {
+            "product_facts": 2.4546869099140167e-05,
+            "package_calculation": 3.835865999571979,
+            "audit": 0.5424378179013729,
+            "candidate_generation_and_qualification": 1.2221177536994219,
+            "nutrition": 0.00648999959230423,
+            "week_search": 4.748427917715162,
+            "total": 21.178218976128846
+          },
+          "case": "simple",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.895742749795318,
+          "planner_seconds": 22.31264350609854,
+          "wall_seconds": 28.208391254767776,
+          "universe_seconds": 14.181258365977556,
+          "maxrss_kib": 1475168,
+          "preparation_stats": {
+            "hits": 700,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-simple-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-simple-warm-1\\simple-warm-timings.json",
+          "raw_sha256": "740707da2a689ae7ab2e8d0c2f81e053e206ec3281362a5947f7d869f6204c14"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-final-simple-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 66.99063271097839,
+          "cgroup_memory_peak_bytes": 1493524480,
+          "host_available_before_bytes": 6945349632,
+          "scratch_storage_bytes": 380491875
+        },
+        {
+          "run": "final2-final-simple-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 66.89827408408746,
+          "cgroup_memory_peak_bytes": 1466785792,
+          "host_available_before_bytes": 6928101376,
+          "scratch_storage_bytes": 388347360
+        },
+        {
+          "run": "final2-final-simple-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 65.85854881303385,
+          "cgroup_memory_peak_bytes": 1325711360,
+          "host_available_before_bytes": 6907789312,
+          "scratch_storage_bytes": 396202835
+        },
+        {
+          "run": "final2-final-simple-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 57.73503964720294,
+          "cgroup_memory_peak_bytes": 1465315328,
+          "host_available_before_bytes": 6904147968,
+          "scratch_storage_bytes": 396919044
+        },
+        {
+          "run": "final2-final-simple-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 142.18197611998767,
+          "cgroup_memory_peak_bytes": 1510567936,
+          "host_available_before_bytes": 6915014656,
+          "scratch_storage_bytes": 399783209
+        }
+      ]
+    },
+    {
+      "cohort": "final",
+      "case": "breakfast",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          60.77789833210409,
+          59.68044737493619,
+          60.726745293010026
+        ],
+        "n": 3,
+        "median": 60.726745293010026,
+        "min": 59.68044737493619,
+        "max": 60.77789833210409
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          40.03097514435649,
+          40.20568322809413,
+          40.520666104741395
+        ],
+        "n": 3,
+        "median": 40.20568322809413,
+        "min": 40.03097514435649,
+        "max": 40.520666104741395
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          21.27054172102362,
+          21.070901326369494,
+          20.83257143618539
+        ],
+        "n": 3,
+        "median": 21.070901326369494,
+        "min": 20.83257143618539,
+        "max": 21.27054172102362
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          15.428044018801302,
+          15.239587489049882,
+          14.933275040239096
+        ],
+        "n": 3,
+        "median": 15.239587489049882,
+        "min": 14.933275040239096,
+        "max": 15.428044018801302
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          49.42575625190511
+        ],
+        "n": 1,
+        "median": 49.42575625190511,
+        "min": 49.42575625190511,
+        "max": 49.42575625190511
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          28.922474889084697
+        ],
+        "n": 1,
+        "median": 28.922474889084697,
+        "min": 28.922474889084697,
+        "max": 28.922474889084697
+      },
+      "max_cgroup_memory_bytes": 1487347712,
+      "max_rss_kib": 1458244,
+      "paid_values": [
+        40.7
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023961677215993404,
+            "package_calculation": 1.3289573430083692,
+            "audit": 0.3554240493103862,
+            "candidate_generation_and_qualification": 3.0189503226429224,
+            "nutrition": 0.0063776299357414246,
+            "week_search": 1.9921342278830707,
+            "total": 16.616057835053653
+          },
+          "case": "breakfast",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.090103765018284,
+          "planner_seconds": 17.94086583890021,
+          "wall_seconds": 40.03097514435649,
+          "universe_seconds": 14.13701791409403,
+          "maxrss_kib": 1440684,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-breakfast-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-breakfast-cold-1\\breakfast-cold-timings.json",
+          "raw_sha256": "225b87b09dc2dc25980166f2beb9c21141db0dba30bcd569e3edbb25c8b06f6b"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023963782005012035,
+            "package_calculation": 1.2945357067510486,
+            "audit": 0.33700800221413374,
+            "candidate_generation_and_qualification": 3.01138213602826,
+            "nutrition": 0.005983209703117609,
+            "week_search": 1.911451037041843,
+            "total": 16.484640134032816
+          },
+          "case": "breakfast",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.369323200080544,
+          "planner_seconds": 17.83635391620919,
+          "wall_seconds": 40.20568322809413,
+          "universe_seconds": 14.311312508769333,
+          "maxrss_kib": 1439748,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-breakfast-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-breakfast-cold-2\\breakfast-cold-timings.json",
+          "raw_sha256": "7dfe0abc955ee96b36c619dd603673a374fe91b82fb6ff2bd2d835dea71497a8"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.002331733237951994,
+            "package_calculation": 1.3138270121999085,
+            "audit": 0.3449434097856283,
+            "candidate_generation_and_qualification": 3.053444475866854,
+            "nutrition": 0.006043075118213892,
+            "week_search": 1.9402610971592367,
+            "total": 16.807492683641613
+          },
+          "case": "breakfast",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.477026575710624,
+          "planner_seconds": 18.043632836081088,
+          "wall_seconds": 40.520666104741395,
+          "universe_seconds": 13.981683822348714,
+          "maxrss_kib": 1439368,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-breakfast-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-breakfast-cold-3\\breakfast-cold-timings.json",
+          "raw_sha256": "c49b2ae10c116a69e94131d6326fdd3f2d79bff42bf9a45ea65cd077121dfeb3"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024495390243828297,
+            "package_calculation": 1.4256652598269284,
+            "audit": 0.3752283938229084,
+            "candidate_generation_and_qualification": 1.808523755054921,
+            "nutrition": 0.006599047686904669,
+            "week_search": 2.1364935408346355,
+            "total": 14.798333118669689
+          },
+          "case": "breakfast",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 12.910048693884164,
+          "planner_seconds": 16.012420805171132,
+          "wall_seconds": 28.922474889084697,
+          "universe_seconds": 14.411961438134313,
+          "maxrss_kib": 1443440,
+          "preparation_stats": {
+            "hits": 679,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-breakfast-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-breakfast-persistent-1\\breakfast-persistent-timings.json",
+          "raw_sha256": "438c5fecba48939e2f9cb3a7e5114f4d9d9c15a0bd55fb97f7922014280f77c6"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023931320756673813,
+            "package_calculation": 1.391609005164355,
+            "audit": 0.36725115636363626,
+            "candidate_generation_and_qualification": 1.7773803998716176,
+            "nutrition": 0.006601780652999878,
+            "week_search": 2.0783377909101546,
+            "total": 14.59169122390449
+          },
+          "case": "breakfast",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.640721524134278,
+          "planner_seconds": 15.842512311879545,
+          "wall_seconds": 28.483239928260446,
+          "universe_seconds": 13.939362498000264,
+          "maxrss_kib": 1444424,
+          "preparation_stats": {
+            "hits": 679,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-breakfast-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-breakfast-warm-1\\breakfast-warm-timings.json",
+          "raw_sha256": "8fb5e749ceec448c7b5396c8465d94cd35af7845ef6c0364337256f574f86e9d"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 6.847083568572998e-05,
+            "package_calculation": 1.3261591028422117,
+            "audit": 1.212098148651421,
+            "candidate_generation_and_qualification": 0.6993123781867325,
+            "nutrition": 0.0063324254006147385,
+            "week_search": 2.8420737348496914,
+            "total": 14.320511862635612
+          },
+          "case": "breakfast",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 5.842493304051459,
+          "planner_seconds": 15.428044018801302,
+          "wall_seconds": 21.27054172102362,
+          "universe_seconds": 13.939362498000264,
+          "maxrss_kib": 1453060,
+          "preparation_stats": {
+            "hits": 686,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-breakfast-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-breakfast-warm-1\\breakfast-warm-timings.json",
+          "raw_sha256": "8fb5e749ceec448c7b5396c8465d94cd35af7845ef6c0364337256f574f86e9d"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 2.5810208171606064e-05,
+            "package_calculation": 1.33208002243191,
+            "audit": 1.1742838914506137,
+            "candidate_generation_and_qualification": 0.7501957360655069,
+            "nutrition": 0.0059605310671031475,
+            "week_search": 2.7647277740761638,
+            "total": 14.156609306111932
+          },
+          "case": "breakfast",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.831308396998793,
+          "planner_seconds": 15.239587489049882,
+          "wall_seconds": 21.070901326369494,
+          "universe_seconds": 13.939362498000264,
+          "maxrss_kib": 1457296,
+          "preparation_stats": {
+            "hits": 693,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-breakfast-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-breakfast-warm-1\\breakfast-warm-timings.json",
+          "raw_sha256": "8fb5e749ceec448c7b5396c8465d94cd35af7845ef6c0364337256f574f86e9d"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 40.7,
+          "portions": 5,
+          "recipes": [
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före",
+            "Yoghurtgryn med äpple, förbered kvällen före"
+          ],
+          "check_timings": {
+            "product_facts": 2.565840259194374e-05,
+            "package_calculation": 1.3017669119872153,
+            "audit": 1.1513008852489293,
+            "candidate_generation_and_qualification": 0.6923226281069219,
+            "nutrition": 0.005847184918820858,
+            "week_search": 2.7344359615817666,
+            "total": 13.858223957940936
+          },
+          "case": "breakfast",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.899291517212987,
+          "planner_seconds": 14.933275040239096,
+          "wall_seconds": 20.83257143618539,
+          "universe_seconds": 13.939362498000264,
+          "maxrss_kib": 1458244,
+          "preparation_stats": {
+            "hits": 700,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-breakfast-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-breakfast-warm-1\\breakfast-warm-timings.json",
+          "raw_sha256": "8fb5e749ceec448c7b5396c8465d94cd35af7845ef6c0364337256f574f86e9d"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-final-breakfast-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 60.77789833210409,
+          "cgroup_memory_peak_bytes": 1475870720,
+          "host_available_before_bytes": 6904352768,
+          "scratch_storage_bytes": 407413289
+        },
+        {
+          "run": "final2-final-breakfast-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 59.68044737493619,
+          "cgroup_memory_peak_bytes": 1468768256,
+          "host_available_before_bytes": 6870822912,
+          "scratch_storage_bytes": 415043367
+        },
+        {
+          "run": "final2-final-breakfast-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 60.726745293010026,
+          "cgroup_memory_peak_bytes": 1466359808,
+          "host_available_before_bytes": 6863089664,
+          "scratch_storage_bytes": 422673449
+        },
+        {
+          "run": "final2-final-breakfast-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 49.42575625190511,
+          "cgroup_memory_peak_bytes": 1463943168,
+          "host_available_before_bytes": 6808494080,
+          "scratch_storage_bytes": 423164048
+        },
+        {
+          "run": "final2-final-breakfast-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 113.17495892383158,
+          "cgroup_memory_peak_bytes": 1487347712,
+          "host_available_before_bytes": 6858190848,
+          "scratch_storage_bytes": 425125740
+        }
+      ]
+    },
+    {
+      "cohort": "final",
+      "case": "snack",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          58.76518391165882,
+          58.7367135300301,
+          58.696998867206275
+        ],
+        "n": 3,
+        "median": 58.7367135300301,
+        "min": 58.696998867206275,
+        "max": 58.76518391165882
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          38.02114407578483,
+          38.859089012257755,
+          38.85382692981511
+        ],
+        "n": 3,
+        "median": 38.85382692981511,
+        "min": 38.02114407578483,
+        "max": 38.859089012257755
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          19.733109201770276,
+          19.85444713709876,
+          19.910447255708277
+        ],
+        "n": 3,
+        "median": 19.85444713709876,
+        "min": 19.733109201770276,
+        "max": 19.910447255708277
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          13.998429731000215,
+          14.156879039015621,
+          13.768105733208358
+        ],
+        "n": 3,
+        "median": 13.998429731000215,
+        "min": 13.768105733208358,
+        "max": 14.156879039015621
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          47.319091422948986
+        ],
+        "n": 1,
+        "median": 47.319091422948986,
+        "min": 47.319091422948986,
+        "max": 47.319091422948986
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          26.81582582509145
+        ],
+        "n": 1,
+        "median": 26.81582582509145,
+        "min": 26.81582582509145,
+        "max": 26.81582582509145
+      },
+      "max_cgroup_memory_bytes": 1487118336,
+      "max_rss_kib": 1456916,
+      "paid_values": [
+        56.86
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.002409262116998434,
+            "package_calculation": 0.8708193534985185,
+            "audit": 0.25843730801716447,
+            "candidate_generation_and_qualification": 2.7667659800499678,
+            "nutrition": 0.0047382633201777935,
+            "week_search": 1.3693127180449665,
+            "total": 14.374135258141905
+          },
+          "case": "snack",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.394252771046013,
+          "planner_seconds": 15.626884230878204,
+          "wall_seconds": 38.02114407578483,
+          "universe_seconds": 14.247156118042767,
+          "maxrss_kib": 1439632,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-snack-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-snack-cold-1\\snack-cold-timings.json",
+          "raw_sha256": "70ed29d83f8f0df15f347d16e91faf03c1a0b1e9005727c375e95a72006e9836"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.002286868169903755,
+            "package_calculation": 0.8416816811077297,
+            "audit": 0.25150511506944895,
+            "candidate_generation_and_qualification": 2.7519433652050793,
+            "nutrition": 0.00461282255128026,
+            "week_search": 1.325079700909555,
+            "total": 14.590235481970012
+          },
+          "case": "snack",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.941395194269717,
+          "planner_seconds": 15.917687896639109,
+          "wall_seconds": 38.859089012257755,
+          "universe_seconds": 14.231194701045752,
+          "maxrss_kib": 1438868,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-snack-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-snack-cold-2\\snack-cold-timings.json",
+          "raw_sha256": "d90c64f965986ce650e307aeae3fe982f096ef236b9fe9eb6cf307d9a5316fba"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.002452423796057701,
+            "package_calculation": 0.9442239552736282,
+            "audit": 0.28037680918350816,
+            "candidate_generation_and_qualification": 2.8041200041770935,
+            "nutrition": 0.0050826906226575375,
+            "week_search": 1.492521472275257,
+            "total": 14.480818598996848
+          },
+          "case": "snack",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.964354138821363,
+          "planner_seconds": 15.889466530177742,
+          "wall_seconds": 38.85382692981511,
+          "universe_seconds": 14.565619419328868,
+          "maxrss_kib": 1440664,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 469,
+            "writes": 469,
+            "invalid": 0
+          },
+          "run": "final2-final-snack-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-snack-cold-3\\snack-cold-timings.json",
+          "raw_sha256": "5d531d57f3d88201de3e46f700e07e9cdf16396fc1a44e6fc11573d9f08ec22b"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024683959782123566,
+            "package_calculation": 0.9038891247473657,
+            "audit": 0.27171573182567954,
+            "candidate_generation_and_qualification": 1.4626332176849246,
+            "nutrition": 0.004901052452623844,
+            "week_search": 1.4337194608524442,
+            "total": 13.214450635015965
+          },
+          "case": "snack",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 12.392018310725689,
+          "planner_seconds": 14.423802324105054,
+          "wall_seconds": 26.81582582509145,
+          "universe_seconds": 14.71260881330818,
+          "maxrss_kib": 1443012,
+          "preparation_stats": {
+            "hits": 679,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-snack-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-snack-persistent-1\\snack-persistent-timings.json",
+          "raw_sha256": "255588e92b985a4c82c0b7c1add063538d9bfb4ccab04c706c32a3223afaaa6c"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 0.002332596108317375,
+            "package_calculation": 0.8830193136818707,
+            "audit": 0.26094902167096734,
+            "candidate_generation_and_qualification": 1.4288393491879106,
+            "nutrition": 0.004857321735471487,
+            "week_search": 1.4044430549256504,
+            "total": 13.082907957024872
+          },
+          "case": "snack",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.339880163781345,
+          "planner_seconds": 14.278276589233428,
+          "wall_seconds": 26.61816359590739,
+          "universe_seconds": 14.11034054774791,
+          "maxrss_kib": 1443840,
+          "preparation_stats": {
+            "hits": 679,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-snack-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-snack-warm-1\\snack-warm-timings.json",
+          "raw_sha256": "de002f6875404289ec265e9b6d5c3570f295376f39403a7e106e6f6152f8a727"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 2.653989940881729e-05,
+            "package_calculation": 1.732009444385767,
+            "audit": 0.26171837421134114,
+            "candidate_generation_and_qualification": 0.3999778847210109,
+            "nutrition": 0.004969093482941389,
+            "week_search": 2.2543436721898615,
+            "total": 12.928385504055768
+          },
+          "case": "snack",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 5.73467530310154,
+          "planner_seconds": 13.998429731000215,
+          "wall_seconds": 19.733109201770276,
+          "universe_seconds": 14.11034054774791,
+          "maxrss_kib": 1451568,
+          "preparation_stats": {
+            "hits": 686,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-snack-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-snack-warm-1\\snack-warm-timings.json",
+          "raw_sha256": "de002f6875404289ec265e9b6d5c3570f295376f39403a7e106e6f6152f8a727"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 2.9095914214849472e-05,
+            "package_calculation": 1.7583200498484075,
+            "audit": 0.26804489456117153,
+            "candidate_generation_and_qualification": 0.42165806237608194,
+            "nutrition": 0.00497337756678462,
+            "week_search": 2.2920900536701083,
+            "total": 13.066698017995805
+          },
+          "case": "snack",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.697564801201224,
+          "planner_seconds": 14.156879039015621,
+          "wall_seconds": 19.85444713709876,
+          "universe_seconds": 14.11034054774791,
+          "maxrss_kib": 1456916,
+          "preparation_stats": {
+            "hits": 693,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-snack-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-snack-warm-1\\snack-warm-timings.json",
+          "raw_sha256": "de002f6875404289ec265e9b6d5c3570f295376f39403a7e106e6f6152f8a727"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 56.86,
+          "portions": 5,
+          "recipes": [
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Varm äppel- och morotskompott med yoghurt",
+            "Morotsstavar med kvargdipp",
+            "Morotsstavar med kvargdipp"
+          ],
+          "check_timings": {
+            "product_facts": 2.7962028980255127e-05,
+            "package_calculation": 1.6912351702339947,
+            "audit": 0.25738524412736297,
+            "candidate_generation_and_qualification": 0.40621075639501214,
+            "nutrition": 0.005068548023700714,
+            "week_search": 2.197506967931986,
+            "total": 12.692900558002293
+          },
+          "case": "snack",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 6.142337504774332,
+          "planner_seconds": 13.768105733208358,
+          "wall_seconds": 19.910447255708277,
+          "universe_seconds": 14.11034054774791,
+          "maxrss_kib": 1456916,
+          "preparation_stats": {
+            "hits": 700,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-snack-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-snack-warm-1\\snack-warm-timings.json",
+          "raw_sha256": "de002f6875404289ec265e9b6d5c3570f295376f39403a7e106e6f6152f8a727"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-final-snack-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 58.76518391165882,
+          "cgroup_memory_peak_bytes": 1477943296,
+          "host_available_before_bytes": 6875578368,
+          "scratch_storage_bytes": 432730607
+        },
+        {
+          "run": "final2-final-snack-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 58.7367135300301,
+          "cgroup_memory_peak_bytes": 1472905216,
+          "host_available_before_bytes": 6845075456,
+          "scratch_storage_bytes": 440335465
+        },
+        {
+          "run": "final2-final-snack-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 58.696998867206275,
+          "cgroup_memory_peak_bytes": 1467838464,
+          "host_available_before_bytes": 6830997504,
+          "scratch_storage_bytes": 447940324
+        },
+        {
+          "run": "final2-final-snack-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 47.319091422948986,
+          "cgroup_memory_peak_bytes": 1464160256,
+          "host_available_before_bytes": 6846582784,
+          "scratch_storage_bytes": 448405699
+        },
+        {
+          "run": "final2-final-snack-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 107.12919548898935,
+          "cgroup_memory_peak_bytes": 1487118336,
+          "host_available_before_bytes": 6828441600,
+          "scratch_storage_bytes": 450266508
+        }
+      ]
+    },
+    {
+      "cohort": "final",
+      "case": "combined",
+      "complete": true,
+      "cold_process_seconds": {
+        "raw": [
+          87.56546187400818,
+          91.65867268899456,
+          87.48616718268022
+        ],
+        "n": 3,
+        "median": 87.56546187400818,
+        "min": 87.48616718268022,
+        "max": 91.65867268899456
+      },
+      "cold_facts_and_planner_seconds": {
+        "raw": [
+          68.18253953522071,
+          70.58854059921578,
+          67.74989310884848
+        ],
+        "n": 3,
+        "median": 68.18253953522071,
+        "min": 67.74989310884848,
+        "max": 70.58854059921578
+      },
+      "warm_fresh_facts_and_planner_seconds": {
+        "raw": [
+          48.246467251796275,
+          46.59143989998847,
+          48.41566026210785
+        ],
+        "n": 3,
+        "median": 48.246467251796275,
+        "min": 46.59143989998847,
+        "max": 48.41566026210785
+      },
+      "warm_planner_seconds": {
+        "raw": [
+          42.16428231168538,
+          40.7566601568833,
+          42.6151279611513
+        ],
+        "n": 3,
+        "median": 42.16428231168538,
+        "min": 40.7566601568833,
+        "max": 42.6151279611513
+      },
+      "persistent_process_seconds": {
+        "raw": [
+          77.11663475213572
+        ],
+        "n": 1,
+        "median": 77.11663475213572,
+        "min": 77.11663475213572,
+        "max": 77.11663475213572
+      },
+      "persistent_facts_and_planner_seconds": {
+        "raw": [
+          56.49187011923641
+        ],
+        "n": 1,
+        "median": 56.49187011923641,
+        "min": 56.49187011923641,
+        "max": 56.49187011923641
+      },
+      "max_cgroup_memory_bytes": 1546915840,
+      "max_rss_kib": 1513944,
+      "paid_values": [
+        418.17
+      ],
+      "raw": [
+        {
+          "outcome": "PASS",
+          "paid": 418.17,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Bönsmörgås med tomat",
+            "Bönsmörgås med tomat",
+            "Varm tomat- och spenatröra med bröd",
+            "Varm tomat- och spenatröra med bröd",
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Äppelklyftor och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.0023787054233253,
+            "package_calculation": 6.900409725960344,
+            "audit": 3.7517608725465834,
+            "candidate_generation_and_qualification": 4.736768654547632,
+            "nutrition": 0.021749253384768963,
+            "week_search": 14.172388855367899,
+            "total": 44.7057419270277
+          },
+          "case": "combined",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.173344342038035,
+          "planner_seconds": 46.00918802013621,
+          "wall_seconds": 68.18253953522071,
+          "universe_seconds": 14.144751313142478,
+          "maxrss_kib": 1302788,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 470,
+            "writes": 470,
+            "invalid": 0
+          },
+          "run": "final2-final-combined-cold-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-combined-cold-1\\combined-cold-timings.json",
+          "raw_sha256": "1f609074a8d3413a28e44003ff1b83d370ceb17534f559e505e640de646535af"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 418.17,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Bönsmörgås med tomat",
+            "Bönsmörgås med tomat",
+            "Varm tomat- och spenatröra med bröd",
+            "Varm tomat- och spenatröra med bröd",
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Äppelklyftor och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.0026296316646039486,
+            "package_calculation": 6.82874442730099,
+            "audit": 3.629318448714912,
+            "candidate_generation_and_qualification": 4.718818578869104,
+            "nutrition": 0.018651330843567848,
+            "week_search": 13.740697236265987,
+            "total": 46.279445560183376
+          },
+          "case": "combined",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.988084313925356,
+          "planner_seconds": 47.60044988291338,
+          "wall_seconds": 70.58854059921578,
+          "universe_seconds": 14.278701030183583,
+          "maxrss_kib": 1439072,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 470,
+            "writes": 470,
+            "invalid": 0
+          },
+          "run": "final2-final-combined-cold-2",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-combined-cold-2\\combined-cold-timings.json",
+          "raw_sha256": "010136acf85bd287a2862af83d5d7f1e6446bfe231b29adac66987e577423688"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 418.17,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Bönsmörgås med tomat",
+            "Bönsmörgås med tomat",
+            "Varm tomat- och spenatröra med bröd",
+            "Varm tomat- och spenatröra med bröd",
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Äppelklyftor och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.0025207041762769222,
+            "package_calculation": 6.671708468813449,
+            "audit": 3.576558014843613,
+            "candidate_generation_and_qualification": 4.813436669297516,
+            "nutrition": 0.0179926254786551,
+            "week_search": 13.429387842770666,
+            "total": 44.13456686399877
+          },
+          "case": "combined",
+          "cache_mode": "cold",
+          "iteration": 0,
+          "facts_seconds": 22.29058358585462,
+          "planner_seconds": 45.45930379116908,
+          "wall_seconds": 67.74989310884848,
+          "universe_seconds": 13.911211764905602,
+          "maxrss_kib": 1438624,
+          "preparation_stats": {
+            "hits": 210,
+            "misses": 470,
+            "writes": 470,
+            "invalid": 0
+          },
+          "run": "final2-final-combined-cold-3",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-combined-cold-3\\combined-cold-timings.json",
+          "raw_sha256": "ad6ae5440eb4110210cbdccae56c5aa690696b5b079e77ecfb480151ea3730f7"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 418.17,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Bönsmörgås med tomat",
+            "Bönsmörgås med tomat",
+            "Varm tomat- och spenatröra med bröd",
+            "Varm tomat- och spenatröra med bröd",
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Äppelklyftor och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.002329670824110508,
+            "package_calculation": 5.9259009580127895,
+            "audit": 4.626050099730492,
+            "candidate_generation_and_qualification": 2.970847122836858,
+            "nutrition": 0.018382404930889606,
+            "week_search": 13.843360116239637,
+            "total": 42.75804781913757
+          },
+          "case": "combined",
+          "cache_mode": "persistent",
+          "iteration": 0,
+          "facts_seconds": 12.50641545606777,
+          "planner_seconds": 43.985449293162674,
+          "wall_seconds": 56.49187011923641,
+          "universe_seconds": 14.192770706955343,
+          "maxrss_kib": 1442816,
+          "preparation_stats": {
+            "hits": 680,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-combined-persistent-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-combined-persistent-1\\combined-persistent-timings.json",
+          "raw_sha256": "7502a76a6f5aad1c9db203e85f5c7137cd893800f70d179761f3bd6a5e4ca33b"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 418.17,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Bönsmörgås med tomat",
+            "Bönsmörgås med tomat",
+            "Varm tomat- och spenatröra med bröd",
+            "Varm tomat- och spenatröra med bröd",
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Äppelklyftor och ost"
+          ],
+          "check_timings": {
+            "product_facts": 0.0024403133429586887,
+            "package_calculation": 6.066454020794481,
+            "audit": 4.658127143979073,
+            "candidate_generation_and_qualification": 2.9710463918745518,
+            "nutrition": 0.01654959563165903,
+            "week_search": 13.938052589073777,
+            "total": 42.618161473888904
+          },
+          "case": "combined",
+          "cache_mode": "warm",
+          "iteration": 0,
+          "facts_seconds": 12.461793486960232,
+          "planner_seconds": 43.90327771613374,
+          "wall_seconds": 56.36509104119614,
+          "universe_seconds": 14.237019183579832,
+          "maxrss_kib": 1443092,
+          "preparation_stats": {
+            "hits": 680,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-combined-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-combined-warm-1\\combined-warm-timings.json",
+          "raw_sha256": "f68e826f4661d07db9bb70f862079647a9a363f004dce160fc4c00700108bb5f"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 418.17,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Bönsmörgås med tomat",
+            "Bönsmörgås med tomat",
+            "Varm tomat- och spenatröra med bröd",
+            "Varm tomat- och spenatröra med bröd",
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Äppelklyftor och ost"
+          ],
+          "check_timings": {
+            "product_facts": 3.152014687657356e-05,
+            "package_calculation": 6.031882809940726,
+            "audit": 4.809133398346603,
+            "candidate_generation_and_qualification": 1.5981455729342997,
+            "nutrition": 0.017165921162813902,
+            "week_search": 14.28992430306971,
+            "total": 40.9887304129079
+          },
+          "case": "combined",
+          "cache_mode": "warm",
+          "iteration": 1,
+          "facts_seconds": 6.082179750781506,
+          "planner_seconds": 42.16428231168538,
+          "wall_seconds": 48.246467251796275,
+          "universe_seconds": 14.237019183579832,
+          "maxrss_kib": 1502928,
+          "preparation_stats": {
+            "hits": 687,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-combined-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-combined-warm-1\\combined-warm-timings.json",
+          "raw_sha256": "f68e826f4661d07db9bb70f862079647a9a363f004dce160fc4c00700108bb5f"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 418.17,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Bönsmörgås med tomat",
+            "Bönsmörgås med tomat",
+            "Varm tomat- och spenatröra med bröd",
+            "Varm tomat- och spenatröra med bröd",
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Äppelklyftor och ost"
+          ],
+          "check_timings": {
+            "product_facts": 3.084912896156311e-05,
+            "package_calculation": 5.705412583425641,
+            "audit": 4.510298386216164,
+            "candidate_generation_and_qualification": 1.5120848724618554,
+            "nutrition": 0.01764783961698413,
+            "week_search": 13.36329133901745,
+            "total": 39.58804546063766
+          },
+          "case": "combined",
+          "cache_mode": "warm",
+          "iteration": 2,
+          "facts_seconds": 5.834775083698332,
+          "planner_seconds": 40.7566601568833,
+          "wall_seconds": 46.59143989998847,
+          "universe_seconds": 14.237019183579832,
+          "maxrss_kib": 1510756,
+          "preparation_stats": {
+            "hits": 694,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-combined-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-combined-warm-1\\combined-warm-timings.json",
+          "raw_sha256": "f68e826f4661d07db9bb70f862079647a9a363f004dce160fc4c00700108bb5f"
+        },
+        {
+          "outcome": "PASS",
+          "paid": 418.17,
+          "portions": 30,
+          "recipes": [
+            "Len lins- och morotssoppa",
+            "Lins- och spenatgryta med ris",
+            "Pastapanna med smulad tofu",
+            "Potatismosgratäng med vita bönor",
+            "Potatispanna med tofu och mjuk kål",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Varm linsfrukost med morot",
+            "Bönsmörgås med tomat",
+            "Bönsmörgås med tomat",
+            "Varm tomat- och spenatröra med bröd",
+            "Varm tomat- och spenatröra med bröd",
+            "Brödstavar med naturell yoghurtdipp",
+            "Brödstavar med naturell yoghurtdipp",
+            "Äppelklyftor och ost"
+          ],
+          "check_timings": {
+            "product_facts": 2.484722062945366e-05,
+            "package_calculation": 6.1800925033167005,
+            "audit": 4.713896575383842,
+            "candidate_generation_and_qualification": 1.5497552207671106,
+            "nutrition": 0.019391834270209074,
+            "week_search": 14.536654035095125,
+            "total": 41.48823742289096
+          },
+          "case": "combined",
+          "cache_mode": "warm",
+          "iteration": 3,
+          "facts_seconds": 5.8005271400325,
+          "planner_seconds": 42.6151279611513,
+          "wall_seconds": 48.41566026210785,
+          "universe_seconds": 14.237019183579832,
+          "maxrss_kib": 1513944,
+          "preparation_stats": {
+            "hits": 701,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "run": "final2-final-combined-warm-1",
+          "raw_file": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final2-final-combined-warm-1\\combined-warm-timings.json",
+          "raw_sha256": "f68e826f4661d07db9bb70f862079647a9a363f004dce160fc4c00700108bb5f"
+        }
+      ],
+      "process_runs": [
+        {
+          "run": "final2-final-combined-cold-1",
+          "exit": 0,
+          "container_wall_seconds": 87.56546187400818,
+          "cgroup_memory_peak_bytes": 1335193600,
+          "host_available_before_bytes": 6834999296,
+          "scratch_storage_bytes": 459221276
+        },
+        {
+          "run": "final2-final-combined-cold-2",
+          "exit": 0,
+          "container_wall_seconds": 91.65867268899456,
+          "cgroup_memory_peak_bytes": 1466159104,
+          "host_available_before_bytes": 6795927552,
+          "scratch_storage_bytes": 468176052
+        },
+        {
+          "run": "final2-final-combined-cold-3",
+          "exit": 0,
+          "container_wall_seconds": 87.48616718268022,
+          "cgroup_memory_peak_bytes": 1471254528,
+          "host_available_before_bytes": 6777053184,
+          "scratch_storage_bytes": 477130822
+        },
+        {
+          "run": "final2-final-combined-persistent-1",
+          "exit": 0,
+          "container_wall_seconds": 77.11663475213572,
+          "cgroup_memory_peak_bytes": 1464455168,
+          "host_available_before_bytes": 6779539456,
+          "scratch_storage_bytes": 478388404
+        },
+        {
+          "run": "final2-final-combined-warm-1",
+          "exit": 0,
+          "container_wall_seconds": 221.32055843202397,
+          "cgroup_memory_peak_bytes": 1546915840,
+          "host_available_before_bytes": 6766698496,
+          "scratch_storage_bytes": 483418029
+        }
+      ]
+    }
+  ]
+}
