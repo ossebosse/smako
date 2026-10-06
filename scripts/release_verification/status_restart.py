@@ -47,6 +47,9 @@ async def main(args):
                 report['before_interruption_stage'] = body['stage']
                 break
             await asyncio.sleep(.2)
+        elif args.scenario == 'cookie-expiry':
+            await context.add_cookies([{**cookie, 'expires': time.time()-1} for cookie in original_cookies])
+            report['session_test'] = 'browser-enforced expiry of guest cookies, not signed-account expiry'
         else:
             raise AssertionError('Job never began computing')
         original_cookies = await context.cookies()
@@ -66,7 +69,7 @@ async def main(args):
         assert await page.evaluate("SmakoRecipes.pendingJob('public')===null")
         assert not report['page_errors']
         await page.screenshot(path=str(args.output/'expired-job.png'))
-        if args.scenario == 'cookie-loss':
+        if args.scenario in {'cookie-loss', 'cookie-expiry'}:
             await context.add_cookies(original_cookies)
             await page.evaluate("pending=>SmakoRecipes.storage.set('smako.planJob.public',{url:pending.status_url,requestId:pending.request_id,started_at:Date.now()})", pending)
             await page.reload(wait_until='domcontentloaded')
@@ -94,7 +97,7 @@ if __name__ == '__main__':
     parser.add_argument('--base', default='http://127.0.0.1:18127')
     parser.add_argument('--request', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
-    parser.add_argument('--scenario', choices=['restart', 'cookie-loss'], required=True)
+    parser.add_argument('--scenario', choices=['restart', 'cookie-loss', 'cookie-expiry'], required=True)
     args = parser.parse_args()
     assert args.base.startswith('http://127.0.0.1:')
     try:
