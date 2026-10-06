@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import os
 import zlib
@@ -47,11 +48,13 @@ def root():
 @lru_cache(maxsize=1)
 def method_signature():
     base = Path(__file__).parents[1]
-    paths = [base / "models/recipe.py", base / "services/recipe_library.py",
-             base / "services/recipe_preparation.py", base / "services/ingredient_normalizer.py",
-             base / "services/personal_source_facts.py", base / "services/personal_policy.py",
-             base / "services/declaration_semantics.py"]
-    return digest(encoded({str(p.relative_to(base)):digest(p.read_bytes()) for p in paths}))
+    repository = Path(__file__).parents[3]
+    # Conservative code invalidation also binds authoritative declaration
+    # adapters and model changes. Content-only imports keep this signature.
+    paths = [*base.joinpath("models").glob("*.py"),*base.joinpath("services").glob("*.py"),
+             repository / "grocery_data/app/services/product_declarations.py"]
+    return digest(encoded({p.relative_to(repository).as_posix():digest(p.read_bytes())
+                           for p in sorted(paths)}))
 
 
 def prepared(kind, identity, compute):
@@ -127,8 +130,13 @@ def declaration_index(universe, facts, source_facts):
     version = getattr(facts,"version",None) or facts_version(facts)
     # The prepared universe also contains large search indexes. Classification
     # depends on the exact product inventory and facts, not those derived indexes.
-    inventory = [p.model_dump(mode="json") for p in universe.products]
-    identity = [universe.universe_id, digest(encoded(inventory)), version]
+    inventory = hashlib.sha256()
+    # Hash every exact product row without building a second large Python/JSON
+    # inventory tree. Order and all fields still bind additions and negatives.
+    for product in universe.products:
+        inventory.update(product.model_dump_json().encode())
+        inventory.update(b"\n")
+    identity = [universe.universe_id, inventory.hexdigest(), version]
     def compute():
         return {str(i):food_class for i,product in enumerate(universe.products)
                 if (food_class := declaration_food_class(product,source_facts(product)))}

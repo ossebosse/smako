@@ -137,3 +137,25 @@ def test_large_fact_projection_survives_process_reload_and_corruption(tmp_path,m
     envelope['payload']='corrupt-compressed-payload'
     envelope_path.write_bytes(content.encoded(envelope))
     assert artifacts.prepared('source_facts','exact-source-v1',compute)==value and len(calls)==2
+
+
+def test_declaration_inventory_binds_changed_rows_and_new_products(tmp_path,monkeypatch):
+    from app.services import declaration_semantics
+
+    from backend.tests.test_personal_planning_v2 import product
+    monkeypatch.setenv('RECIPE_PREPARATION_CACHE_ROOT',str(tmp_path))
+    calls=[]
+    def classify(p,fact):calls.append(p.product_id);return 'bröd'
+    monkeypatch.setattr(declaration_semantics,'declaration_food_class',classify)
+    p=product('bröd',500,'g',20)
+    facts=SimpleNamespace(version='same-explicit-facts-version')
+    universe=SimpleNamespace(universe_id='same-source-id',products=(p,))
+    assert artifacts.declaration_index(universe,facts,lambda p:None)=={0:'bröd'}
+    artifacts.declaration_index(universe,facts,lambda p:None)
+    assert len(calls)==1
+    universe.products=(p.model_copy(update={'package_quantity':600}),)
+    artifacts.declaration_index(universe,facts,lambda p:None)
+    assert len(calls)==2
+    universe.products=(*universe.products,product('annan vara',500,'g',30))
+    assert artifacts.declaration_index(universe,facts,lambda p:None)=={0:'bröd',1:'bröd'}
+    assert len(calls)==4
