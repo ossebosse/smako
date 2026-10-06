@@ -53,15 +53,21 @@ def record_response(response, observed):
     if not is_operation_response(response):
         return
     body, error = None, None
+    error_kind = None
     try:
         body = response.json()
     except BrowserError as exc:
         error = str(exc)
+        error_kind = "browser_body_unavailable"
+    except json.JSONDecodeError as exc:
+        error = str(exc)
+        error_kind = "invalid_json"
     observed.append(SimpleNamespace(
         url=response.url, status=response.status, headers=response.headers,
         request=SimpleNamespace(method=response.request.method,
-            post_data_json=response.request.post_data_json, timing=response.request.timing),
-        captured_body=body, body_error=error,
+            post_data_json=response.request.post_data_json, timing=response.request.timing,
+            request_id=response.request.headers.get("x-request-id")),
+        captured_body=body, body_error=error, body_error_kind=error_kind,
     ))
 
 
@@ -85,7 +91,16 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
                    "response_ms": response.request.timing.get("responseEnd"),
                    "observed_after_seconds": round(time.monotonic() - started, 3)}
             if response.body_error:
-                row.update(body_available=False, transport_error=response.body_error)
+                row.update(body_available=False, transport_error=response.body_error,
+                           body_error_kind=getattr(response, "body_error_kind", None))
+                if row["body_error_kind"] == "invalid_json":
+                    reference = row["request_id"] or response.request.request_id
+                    injected_match = next((event for event in (fault or {}).get("injected", [])
+                        if event.get("url") == response.url and event.get("request_id") == reference
+                        and event["kind"] in {"lost_accepted_start_response", "HTML_instead_of_status_JSON"}), None)
+                    if not injected_match:
+                        raise AssertionError(f"Unexpected invalid JSON status response: {row}")
+                    row["exact_injected_response_match"] = injected_match
                 rows.append(row)
                 continue
             if response.status == 202:
@@ -302,7 +317,7 @@ def run_case(browser, engine, mobile, personal, args):
     error_events = []
     navigation_events = []
     traces=[];injected=[]
-    fault={'scenario':args.transport_fault,'enabled':True,'aborts':0,'away_url':args.base+('/' if personal else '/personal')}
+    fault={'scenario':args.transport_fault,'enabled':True,'aborts':0,'away_url':args.base+('/' if personal else '/personal'), 'injected':injected}
     context.expose_binding('__smakoTrace',lambda source,data:traces.append({**data,'observed_utc':datetime.now(UTC).isoformat()}))
     context.expose_binding('__smakoUnhandled',lambda source,data:errors.append('unhandledrejection: '+data['message']))
     context.add_init_script("window.__smakoDocument=crypto.randomUUID();window.addEventListener('smako:plan-transport',e=>{window.__smakoTrace({...e.detail,document_id:window.__smakoDocument}).catch(()=>{});});")
@@ -313,7 +328,7 @@ def run_case(browser, engine, mobile, personal, args):
         if scenario in {'lost-start','lost-start-race'} and req.method=='POST' and path=='/api/plans' and not fault.get('accepted'):
             accepted=route.fetch(timeout=30000);body=accepted.json();assert accepted.status==202
             fault['accepted']=body['status_url']
-            injected.append({'kind':'lost_accepted_start_response','job_url':body['status_url'],'request_id':req.headers.get('x-request-id'),'at_utc':datetime.now(UTC).isoformat()})
+            injected.append({'kind':'lost_accepted_start_response','url':req.url,'job_url':body['status_url'],'request_id':req.headers.get('x-request-id'),'at_utc':datetime.now(UTC).isoformat()})
             observed.append(SimpleNamespace(url=req.url,status=accepted.status,headers=accepted.headers,request=SimpleNamespace(method=req.method,post_data_json=req.post_data_json,timing=req.timing),captured_body=body,body_error=None))
             route.abort('connectionreset');return
         if scenario=='lost-start-race' and path.startswith('/api/plan-job-requests/') and not fault.get('discovery_miss'):
@@ -433,11 +448,12 @@ def run_case(browser, engine, mobile, personal, args):
                 for key in ["min_ingredients","max_ingredients","max_active_minutes","max_total_minutes","max_waiting_minutes"]:
                     if choices.get(key) is not None:page.locator(f'#meal-{category}-{key}').fill(str(choices[key]))
                 if meal.get("max_same_base_meals") is not None:page.locator(f'#meal-{category}-max_same_base_meals').fill(str(meal["max_same_base_meals"]))
-                if meal.get("limits",{}).get("min_protein_g") is not None:
+                if "min_protein_g" in meal.get("limits", {}):
                     limit=page.locator(f'#{category}-min_protein_g' if personal else f'#meal-{category}-min-protein')
                     for detail in limit.locator('xpath=ancestor::details').all():
                         if detail.get_attribute('open') is None:detail.locator(':scope > summary').click()
-                    limit.fill(str(meal['limits']['min_protein_g']))
+                    value = meal['limits']['min_protein_g']
+                    limit.fill("" if value is None else str(value))
         page.screenshot(path=str(target / "choices.png"), full_page=True)
         report['loaded_assets']=assets
         report['ready_build_id']=context.request.get(args.base+'/ready').json().get('build_id')
@@ -691,6 +707,8 @@ def main():
     args = parser.parse_args()
     args.base = args.base.rstrip("/")
     args.meal_request=json.loads(args.meal_request.read_text(encoding="utf8")) if args.meal_request else None
+    if args.meal_request:
+        args.cuisines = args.meal_request["recipe_preferences"]["cuisines"]
     args.expected_meals=sum(m["count"] for m in args.meal_request["personal"]["meals"]) if args.meal_request else args.dinners
     if not 0 <= args.offline_seconds <= 30:
         parser.error("--offline-seconds must be between 0 and 30")

@@ -10,6 +10,44 @@ from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 
+@pytest.mark.parametrize("kind,status,code", [("policy",422,"RECIPE_CHOICES_CONFLICT"),
+                                             ("revision",409,"REVISION_CONFLICT")])
+def test_retained_domain_failure_keeps_direct_http_contract(monkeypatch,tmp_path,kind,status,code):
+    import time
+
+    from app import main
+    from app.services.personal_policy import PolicyConflict
+    from app.services.personal_store import PersonalConflict
+
+    settings=Settings(price_provider="mock",plan_store_path=tmp_path/"plans.sqlite3")
+    monkeypatch.setattr(api,"get_settings",lambda:settings)
+    monkeypatch.setattr(main,"get_settings",lambda:settings)
+    calls=[]
+    async def blocked(*args):
+        calls.append(True)
+        if kind=="policy":
+            raise PolicyConflict("Omöjligt måltidsval",code=code,diagnostics={"bounded":True})
+        raise PersonalConflict("Senaste revision är bevarad")
+    monkeypatch.setattr(api,"_run_admitted_plan",blocked)
+    with TestClient(app,raise_server_exceptions=False) as client:
+        accepted=client.post("/api/plans",headers={"Prefer":"respond-async","X-Request-ID":"domain-"+kind},json={"recipes":5})
+        assert accepted.status_code==202
+        url=accepted.json()["status_url"]
+        for _ in range(100):
+            result=client.get(url)
+            if result.status_code!=202:break
+            time.sleep(.01)
+        assert result.status_code==status
+        assert result.json()["code"]==code
+        assert result.headers["cache-control"]=="private, no-store"
+        assert result.headers["x-plan-request-id"]=="domain-"+kind
+        assert len(calls)==1
+        for _ in range(3):
+            again=client.get(url)
+            assert again.status_code==status and again.json()==result.json()
+        assert client.get(url,headers={"X-Anonymous-Session-ID":"separate-domain-reader-12345"}).status_code==404
+
+
 def test_async_plan_returns_before_work_finishes_and_preserves_failure(monkeypatch, tmp_path):
     from app import main
 

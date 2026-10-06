@@ -134,7 +134,8 @@ def test_browser_error_classes_retain_choices_and_identify_actual_field():
                 return self.send(case.get('ready_status', 200), {'status': case.get('ready_body', 'ready')})
             if path.startswith('/api/plan-jobs/'):
                 case['polled'] = True
-                return self.send(503, {}, headers={'X-Error-Code': 'price_universe_unusable', 'X-Request-ID': 'poll-error-12345'})
+                return self.send(503, {}, headers={'X-Error-Code': 'price_universe_unusable',
+                    'X-Request-ID': 'poll-error-12345', 'X-Plan-Request-ID':case['reference']})
             file = static / ('index.html' if path == '/' else path.removeprefix('/static/'))
             if file.is_file():
                 return self.send(200, file.read_bytes(), mimetypes.guess_type(file)[0] or 'text/plain')
@@ -144,8 +145,16 @@ def test_browser_error_classes_retain_choices_and_identify_actual_field():
             body = json.loads(self.rfile.read(int(self.headers.get('Content-Length', 0))) or '{}')
             if self.path == '/api/plans':
                 case['request'] = body
+                case['reference'] = self.headers['X-Request-ID']
                 headers = {'X-Request-ID': self.headers['X-Request-ID'], **case.get('headers', {})}
-                return self.send(case['status'], case['body'], headers=headers)
+                # This fixture tests terminal error presentation. Transient
+                # reconnect/backoff uses separate transport regressions.
+                if case['status'] >= 400:
+                    headers['X-Plan-Request-ID'] = case['reference']
+                reply = dict(case['body'])
+                if case['status'] == 202:
+                    reply['request_id'] = self.headers['X-Request-ID']
+                return self.send(case['status'], reply, headers=headers)
             self.send(202, {})
 
     server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
@@ -178,7 +187,11 @@ def test_browser_error_classes_retain_choices_and_identify_actual_field():
             for status, body, headers, expected in cases:
                 case.update(status=status, body=body, headers=headers)
                 page.locator('#submit-button').click()
-                page.locator('#error-state').wait_for(state='visible')
+                try:
+                    page.locator('#error-state').wait_for(state='visible')
+                except Exception as exc:
+                    raise AssertionError(f"Expected error {status}/{expected}; fixture={case}; "
+                                         f"DOM={page.locator('body').inner_text()[-3500:]}") from exc
                 text = page.locator('#error-message').inner_text()
                 assert expected in text
                 assert 'Fel-ID: ' in text

@@ -689,6 +689,11 @@ async def poll_plan_job(job_id: str, http_request: Request):
     # A completion callback releases its planner traceback frames; attaching
     # live request frames to that same object can clear a suspended reader.
     error = job.task.exception()
+    if isinstance(error, (PolicyConflict, PersonalConflict)):
+        from app.api.personal import personal_conflict_response
+        response = personal_conflict_response(error)
+        response.headers["X-Plan-Request-ID"] = job.request_id
+        return response
     if isinstance(error, HTTPException):
         raise HTTPException(error.status_code, error.detail, headers={
             **(error.headers or {}), "Cache-Control": "private, no-store",

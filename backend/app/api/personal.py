@@ -343,6 +343,20 @@ async def surplus_suggestions(plan_id: str, request: Request, response: Response
     }
 
 
+def personal_conflict_response(exc):
+    """The same domain error contract for direct calls and retained jobs."""
+    from fastapi.responses import JSONResponse
+    if isinstance(exc, PersonalConflict):
+        return JSONResponse(status_code=409,
+            content={"detail":str(exc),"code":"REVISION_CONFLICT"},
+            headers={"Cache-Control":"private, no-store"})
+    if isinstance(exc, PolicyConflict):
+        return JSONResponse(status_code=422,content={"detail":str(exc),"code":exc.code,
+            "conflicts":exc.conflicts,"planning_diagnostics":exc.diagnostics},
+            headers={"Cache-Control":"private, no-store"})
+    raise TypeError("Unknown personal domain conflict")
+
+
 def install_handlers(app):
     from app.services.basket_calculator import GroupPricingError
     from fastapi.responses import JSONResponse
@@ -360,21 +374,8 @@ def install_handlers(app):
 
     @app.exception_handler(PersonalConflict)
     async def stale_personal(_request, exc):
-        return JSONResponse(
-            status_code=409,
-            content={"detail": str(exc), "code": "REVISION_CONFLICT"},
-            headers={"Cache-Control": "private, no-store"},
-        )
+        return personal_conflict_response(exc)
 
     @app.exception_handler(PolicyConflict)
     async def blocked_personal(_request, exc):
-        return JSONResponse(
-            status_code=422,
-            content={
-                "detail": str(exc),
-                "code": exc.code,
-                "conflicts": exc.conflicts,
-                "planning_diagnostics": exc.diagnostics,
-            },
-            headers={"Cache-Control": "private, no-store"},
-        )
+        return personal_conflict_response(exc)
