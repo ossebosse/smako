@@ -41,13 +41,13 @@
     const planning=payload!==undefined&&((url==="/api/plans"&&payload.personal)||/^\/api\/personal\/plans\/[^/]+\/change$/.test(url));
     const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),planning||url.startsWith("/api/plan-jobs/")?600000:90000);
     try {
-      const pending=planning?window.SmakoRecipes.pendingJob("personal"):null;
-      let r=await fetch(pending?.url||url,{method:pending||payload===undefined?"GET":method,headers:{"Content-Type":"application/json",...(planning?{Prefer:"respond-async","X-Request-ID":crypto.randomUUID()}:{})},body:pending||payload===undefined?undefined:JSON.stringify(payload),signal:controller.signal,cache:"no-store"});
-      if(planning||url.startsWith("/api/plan-jobs/"))r=await window.SmakoRecipes.poll(r,{scope:"personal",signal:controller.signal,onProgress:notify,context:planning?{kind:url==="/api/plans"?"create":"change"}:null});
+      let r;
+      if(planning||url.startsWith("/api/plan-jobs/")||url.startsWith("/api/plan-job-requests/"))r=await window.SmakoRecipes.jobRequest({scope:"personal",url,payload,signal:controller.signal,onProgress:notify,context:planning?{kind:url==="/api/plans"?"create":"change"}:null});
+      else r=await fetch(url,{method:payload===undefined?"GET":method,headers:{"Content-Type":"application/json"},body:payload===undefined?undefined:JSON.stringify(payload),signal:controller.signal,cache:"no-store"});
       const d=await r.json();
       if(!r.ok){const message=typeof d.detail==="string"?d.detail:Array.isArray(d.detail)?d.detail.map(e=>e.msg).join(" · "):"Begäran kunde inte genomföras.";const error=new Error(`${d.code==="DATA_BLOCKED"?"Underlag saknas: ":""}${message}${r.headers.get("X-Request-ID")?` Fel-ID: ${r.headers.get("X-Request-ID")}`:""}`);error.code=d.code;error.diagnostics=d.planning_diagnostics;throw error;}
       return d;
-    } catch(e){if(e.name==="AbortError")throw new Error("Svarstiden överskreds. Ladda om för att återansluta till samma beräkning. Dina val och tidigare plan finns kvar.");throw e;} finally{clearTimeout(timer);}
+    } catch(e){if(e.lifecycle)throw e;if(e.name==="AbortError")throw new Error("Svarstiden överskreds. Ladda om för att återansluta till samma beräkning. Dina val och tidigare plan finns kvar.");throw e;} finally{clearTimeout(timer);}
   }
 
   function renderDiagnostics(d) {
@@ -57,13 +57,15 @@
   }
   async function task(work) {
 
-    if(busy)return;busy=true;$("data-blocked-actions")?.remove();$("planning-diagnostics")?.remove();notify("Arbetar…");
+    if(busy)return;busy=true;$("plan-reconnect-actions")?.remove();$("data-blocked-actions")?.remove();$("planning-diagnostics")?.remove();notify("Arbetar…");
 
     const controls=[...document.querySelectorAll("button")].filter(n=>!n.disabled);controls.forEach(n=>n.disabled=true);
 
-    try {await work();notify("");} catch(e){notify(e.message||"Åtgärden kunde inte slutföras.");if(e.diagnostics)renderDiagnostics(e.diagnostics);if(e.code==="DATA_BLOCKED"){const choices=el("div",null,"personal-actions");choices.id="data-blocked-actions";choices.append(button("Ändra mina val",async()=>show("choices")),button("Granska berörda behov",async()=>{const box=el("div");box.append(el("h2","Underlag för berörda ingrediensbehov"));const rows=e.diagnostics?.missing_needs||[];for(const row of rows)box.append(el("p",`${names[row.meal_type]} · ${row.recipe}: ${row.ingredient}, ${number(row.quantity)} ${row.unit}. ${row.reason}`));if(!rows.length)box.append(el("p","Se receptens beredningshinder i blockeringsfördelningen. Ingen produktändring har gjorts."));openDialog(box);}),button("Gå tillbaka",async()=>show(saved?"plan":"choices")));$("personal-status").after(choices);}$('personal-status').scrollIntoView({block:"nearest"});}
+    try {await work();notify("");} catch(e){if(e.lifecycle)return;notify(e.message||"Åtgärden kunde inte slutföras.");if(e.diagnostics)renderDiagnostics(e.diagnostics);if(e.code==="DATA_BLOCKED"){const choices=el("div",null,"personal-actions");choices.id="data-blocked-actions";choices.append(button("Ändra mina val",async()=>show("choices")),button("Granska berörda behov",async()=>{const box=el("div");box.append(el("h2","Underlag för berörda ingrediensbehov"));const rows=e.diagnostics?.missing_needs||[];for(const row of rows)box.append(el("p",`${names[row.meal_type]} · ${row.recipe}: ${row.ingredient}, ${number(row.quantity)} ${row.unit}. ${row.reason}`));if(!rows.length)box.append(el("p","Se receptens beredningshinder i blockeringsfördelningen. Ingen produktändring har gjorts."));openDialog(box);}),button("Gå tillbaka",async()=>show(saved?"plan":"choices")));$("personal-status").after(choices);}$('personal-status').scrollIntoView({block:"nearest"});}
 
-    finally {busy=false;controls.forEach(n=>{if(n.isConnected)n.disabled=false;});$('generate-plan').textContent="Skapa plan och inköpslista";requestAnimationFrame(()=>{if(document.activeElement?.matches('.skip-link'))focusView();});}
+    finally {busy=false;controls.forEach(n=>{if(n.isConnected)n.disabled=false;});$('generate-plan').textContent=window.SmakoRecipes.pendingJob('personal')?'Återuppta statuskontrollen':'Skapa plan och inköpslista';
+      if(window.SmakoRecipes.pendingJob('personal')&&!document.hidden){const actions=el('div',null,'personal-actions');actions.id='plan-reconnect-actions';actions.append(button('Återuppta statuskontrollen',resumePersonalJob),button('Skapa en ny meny',async()=>{window.SmakoRecipes.forgetJob('personal');actions.remove();show('choices');}));$('personal-status').after(actions);}
+      requestAnimationFrame(()=>{if(document.activeElement?.matches('.skip-link'))focusView();});}
 
   }
 
@@ -130,7 +132,7 @@
 
   function putChoices(request){recipeControls.restore(request);$("purchase-planning-mode").value=request.purchase_planning_mode||"exact";const spec=request.personal;if(!spec)return;$('allow-nutrition-estimates').checked=spec.allow_nutrition_estimates===true;putProfile(spec.profile);$('profile-text').value="";parsedText="";for(const meal of spec.meals){const t=meal.meal_type;$(`${t}-count`).value=meal.count;$(`${t}-servings`).value=meal.servings;$(`${t}-diet`).value=meal.diet;putProfile(meal.profile,t);Object.keys(proteinNames).forEach(k=>$(`${t}-${k}`).value=meal.distribution[k]??"");Object.keys(limitLabels).forEach(k=>$(`${t}-${k}`).value=meal.limits[k]??"");$(`${t}-organic`).checked=meal.organic_animals;}$('organic-percent').value=spec.organic_percent;$('organic-animals').checked=spec.organic_animals;$('surplus-mode').value=spec.surplus_mode;$('mode').value=request.diversity_mode;$('max-stores').value=request.max_stores;$('postal-code').value=request.postal_code;$('varied-budget').value=request.varied_budget_percent;document.querySelectorAll('input[name="membership"]').forEach(n=>n.checked=request.membership_programs.includes(n.value));}
 
-  $('personal-form').addEventListener("submit",e=>{e.preventDefault();void task(async()=>{const payload=requestPayload();window.SmakoRecipes.storage.set("smako.personal.requestDraft",payload);$('generate-plan').textContent="Skapar din gemensamma plan…";notify("Alla måltider räknas mot samma korg. En stor plan kan ta flera minuter. Dina krav och senaste sparade plan behålls medan du väntar.");const result=await api("/api/plans",payload);await accept(result.saved||result);show("plan");});});
+  $('personal-form').addEventListener("submit",e=>{e.preventDefault();void task(async()=>{if(window.SmakoRecipes.pendingJob("personal")){await resumePersonalJob();return;}const payload=requestPayload();window.SmakoRecipes.storage.set("smako.personal.requestDraft",payload);$('generate-plan').textContent="Skapar din gemensamma plan…";notify("Alla måltider räknas mot samma korg. En stor plan kan ta flera minuter. Dina krav och senaste sparade plan behålls medan du väntar.");const result=await api("/api/plans",payload);await accept(result.saved||result);show("plan");});});
 
   $('interpret-profile').addEventListener("click",()=>void task(async()=>{const parsed=await api("/api/personal/interpret-profile",{text:$('profile-text').value});putProfile(parsed.profile);parsedText=$('profile-text').value.trim();$('unresolved-label').hidden=!parsed.unresolved.length;$('unresolved-text').value=parsed.unresolved.join("\n");}));
 
@@ -154,9 +156,9 @@
 
   $('calculate-extras').addEventListener("click",()=>void task(async()=>{if(saved){await change("extras",{extras});}else{await accept(await api("/api/plans",requestPayload({standalone:true})));}show("shopping");}));
 
-  async function accept(envelope){saved=envelope;extras=structuredClone(saved.request.personal.extras);putChoices(saved.request);try{localStorage.setItem("smako.personal.lastPlan",saved.plan_id);}catch(_){}history.replaceState({},"",`/personal#plan=${encodeURIComponent(saved.plan_id)}`);await refreshState();renderPlan();renderExtras();}
+  async function accept(envelope){saved=envelope;extras=structuredClone(saved.request.personal.extras);putChoices(saved.request);try{localStorage.setItem("smako.personal.lastPlan",saved.plan_id);}catch(_){}history.replaceState({},"",`/personal#plan=${encodeURIComponent(saved.plan_id)}`);await refreshState();renderPlan();renderExtras();window.SmakoRecipes.forgetJob("personal");}
 
-  async function change(action,fields={}){if(!saved)throw new Error("Skapa en plan först.");const result=await api(`/api/personal/plans/${encodeURIComponent(saved.plan_id)}/change`,{revision:saved.revision,pantry_revision:privateState.revision,action,...fields});saved=result.saved;privateState=result.state;extras=structuredClone(saved.request.personal.extras);renderPlan();renderPantry();renderExtras();if(!document.querySelector("dialog[open]"))focusView();}
+  async function change(action,fields={}){if(!saved)throw new Error("Skapa en plan först.");const result=await api(`/api/personal/plans/${encodeURIComponent(saved.plan_id)}/change`,{revision:saved.revision,pantry_revision:privateState.revision,action,...fields});saved=result.saved;window.SmakoRecipes.forgetJob("personal");privateState=result.state;extras=structuredClone(saved.request.personal.extras);renderPlan();renderPantry();renderExtras();if(!document.querySelector("dialog[open]"))focusView();}
 
   function renderPlan(){const plan=saved.plan, personal=plan.personal;if(!personal)return;const out=$('plan-content');out.replaceChildren();document.querySelector('.personal-intro').hidden=true;const top=el("div",null,"personal-card");const filled=personal.slots.filter(s=>s.recipe),dinners=filled.filter(s=>s.meal_type==="dinner").length;top.append(el("h1","Din plan"),el("p",`${dinners} middagar · ${filled.length-dinners} övriga måltider · ${plan.portions} portioner${personal.empty_slots?` · ${personal.empty_slots} tomma tillfällen`:""}`),el("div",`${plan.optimized_basket.verification_status==="VERIFIED_WITH_ESTIMATES"?"ca ":""}${money(plan.optimized_basket.total)}`,"personal-total"),el("p",`${plan.optimized_basket.verification_status==="VERIFIED_WITH_ESTIMATES"?"Uppskattad full inköpskostnad":"Beräknad full inköpskostnad"} · ${plan.optimized_basket.store_count} av max ${saved.request.max_stores} inköpsställen`));plan.optimized_basket.stores.forEach(g=>top.append(el("p",`${g.store_name}: ${money(g.subtotal)}`)));const actions=el("div",null,"personal-actions");actions.append(button("Öppna inköpslistan",async()=>show("shopping"),true),button("Räkna om med aktuellt skafferi/pris",()=>change("recalculate")),button("Ny plan",async()=>show("choices")));top.append(actions,el("p",`Revision ${saved.revision}. Receptbyte och uttrycklig omräkning sparar en ny revision. Tidigare resultat bevaras.`,"recipe-plan-revision"));const searchNotice=window.SmakoRecipes.searchNotice(plan,saved.request.diversity_mode);if(searchNotice)top.append(searchNotice);if(plan.optimized_basket.stores.some(g=>g.items.some(i=>i.conditional_variant_choice)))top.append(el("p","Villkorad inköpsplan: välj kampanjmärkta varianter enligt radernas villkor. Inte ett verifierat slutkvitto."));if(saved.prices_changed_since_creation||saved.price_contexts_changed_since_creation)top.append(el("p","Sparade priser visas. Prisunderlaget har ändrats; räkna om för aktuell korg.","data-note"));out.append(top);const comparison=el("div");for(const row of personal.checks.same_menu_comparisons||[]){comparison.append(el("p",row.status==="FEASIBLE"?`Samma recept, skafferibidrag och extrabehov med max ${row.max_stores} inköpsställen: ${money(row.total)}. ${row.stores.map(s=>s.name).join(" · ")}`:`Samma meny med max ${row.max_stores} inköpsställen: ingen genomförbar korg hittades med dina krav.`));}if(comparison.children.length)out.append(details("Samma meny i färre butiker",comparison));
 
@@ -185,7 +187,7 @@
   async function resumePersonalJob() {
     const pending=window.SmakoRecipes.pendingJob("personal");if(!pending)return false;
     notify("Återansluter till din pågående menyberäkning…");
-    const result=await api(pending.url);await accept(result.saved||result);show("plan");return true;
+    const result=await api(pending.url||`/api/plan-job-requests/${pending.requestId}`);await accept(result.saved||result);show("plan");return true;
   }
   void task(async()=>{
     try {const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true);}catch(_){recipeControls.enabled(false);}
@@ -197,6 +199,8 @@
     if(last){const loaded=await api(`/api/plans/${encodeURIComponent(last)}`);if(loaded.plan.personal)await accept(loaded);else notify("Detta är en tidigare middagsplan. Öppna den i den tidigare planeringen.");}
     if(location.hash==="#pantry")show("pantry");renderExtras();
   });
+  const resume=()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(resumePersonalJob);};
+  window.addEventListener("pageshow",resume);document.addEventListener("visibilitychange",()=>{if(!document.hidden)resume();});
   window.addEventListener("online",()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(async()=>{try{const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true);}catch(_){/* A saved pending job can still reconnect. */}await resumePersonalJob();});});
 
   function renderSuggestions(){

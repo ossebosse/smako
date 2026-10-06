@@ -1,4 +1,4 @@
-"""Real browser acceptance against an isolated Smako app; no mocked routes.
+"""Real browser acceptance against an isolated Smako app; real planner jobs. Optional faults affect transport/lifecycle only.
 
 Examples:
   py -3.12 scripts/release_verification/complete_recipe_browser.py --base http://127.0.0.1:8087 --output .local/recipe-browser --browser both --viewport both --view both --allow-nutrition-estimates
@@ -38,7 +38,7 @@ def digest(envelope):
 def is_operation_response(response):
     path = urlsplit(response.url).path
     return (response.request.method == "POST" and
-            (path in {"/api/plans", "/api/plan"} or path.endswith(("/change", "/replace-recipe")))) or path.startswith("/api/plan-jobs/")
+            (path in {"/api/plans", "/api/plan"} or path.endswith(("/change", "/replace-recipe")))) or path.startswith(("/api/plan-jobs/", "/api/plan-job-requests/"))
 
 
 def record_response(response, observed):
@@ -62,7 +62,7 @@ def record_response(response, observed):
     ))
 
 
-def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline_seconds=0):
+def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline_seconds=0, fault=None):
     started = time.monotonic()
     consumed = begin
     rows, terminal, pending_urls = [], None, set()
@@ -92,9 +92,33 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
             rows.append(row)
         if terminal:
             break
-        if pending_urls and reload_after is not None and not reloaded and time.monotonic() - started >= reload_after:
+        if fault and pending_urls:
+            scenario=fault['scenario']
+            if scenario in {'away','hidden'} and not fault.get('lifecycle_done'):
+                if scenario=='away':
+                    page.goto(fault['away_url'],wait_until='domcontentloaded');page.go_back(wait_until='domcontentloaded')
+                else:
+                    page.evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>true});document.dispatchEvent(new Event('visibilitychange'))")
+                    page.wait_for_timeout(1000)
+                    page.evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>false});document.dispatchEvent(new Event('visibilitychange'))")
+                fault['lifecycle_done']=True
+            if scenario=='long-outage' and fault.get('aborts',0)>=8 and not fault.get('manual_resume'):
+                control=page.get_by_role('button',name='Återuppta statuskontrollen',exact=True).last
+                if control.is_visible() and control.is_enabled():
+                    fault['enabled']=False;control.click();fault['manual_resume']=True
+            if scenario=='timeout' and fault.get('held_at') and time.monotonic()-fault['held_at']>22:
+                for route in fault.pop('held',[]):
+                    try:route.abort('timedout')
+                    except BrowserError:pass
+        can_reload=not fault or fault['scenario']!='delayed-reload' or fault.get('held_at')
+        if can_reload and pending_urls and reload_after is not None and not reloaded and time.monotonic() - started >= reload_after:
             page.reload(wait_until="domcontentloaded")
             reloaded = True
+            if fault and fault['scenario']=='delayed-reload':
+                fault['reloaded_with_inflight']=True
+                for route in fault.pop('held',[]):
+                    try:route.abort('aborted')
+                    except BrowserError:pass
         if pending_urls and offline_seconds and not network_interrupted and (reload_after is None or reloaded):
             page.context.set_offline(True)
             try:
@@ -223,6 +247,28 @@ def run_case(browser, engine, mobile, personal, args):
     observed, errors, failures = [], [], []
     error_events = []
     navigation_events = []
+    traces=[];injected=[]
+    fault={'scenario':args.transport_fault,'enabled':True,'aborts':0,'away_url':args.base+('/' if personal else '/personal')}
+    context.expose_binding('__smakoTrace',lambda source,data:traces.append({**data,'observed_utc':datetime.now(UTC).isoformat()}))
+    context.add_init_script("window.addEventListener('smako:plan-transport',e=>{window.__smakoTrace(e.detail).catch(()=>{});});")
+    def inject(route):
+        req=route.request;path=urlsplit(req.url).path
+        scenario=fault['scenario']
+        if scenario=='lost-start' and req.method=='POST' and path=='/api/plans' and not fault.get('accepted'):
+            accepted=route.fetch(timeout=30000);body=accepted.json();assert accepted.status==202
+            fault['accepted']=body['status_url']
+            injected.append({'kind':'lost_accepted_start_response','job_url':body['status_url'],'request_id':req.headers.get('x-request-id'),'at_utc':datetime.now(UTC).isoformat()})
+            observed.append(SimpleNamespace(url=req.url,status=accepted.status,headers=accepted.headers,request=SimpleNamespace(method=req.method,post_data_json=req.post_data_json,timing=req.timing),captured_body=body,body_error=None))
+            route.abort('connectionreset');return
+        if path.startswith('/api/plan-jobs/') and fault['enabled']:
+            if scenario in {'reset','long-outage'} and (not fault['aborts'] or scenario=='long-outage'):
+                fault['aborts']+=1;injected.append({'kind':'connectionreset','url':req.url,'request_id':req.headers.get('x-request-id'),'at_utc':datetime.now(UTC).isoformat()});route.abort('connectionreset');return
+            if scenario in {'delayed-reload','timeout'} and not fault.get('held_at'):
+                accepted=route.fetch(timeout=30000);assert accepted.status in {202,201}
+                fault['held_at']=time.monotonic();fault['held']=[route]
+                injected.append({'kind':'delayed_real_status_response','url':req.url,'request_id':req.headers.get('x-request-id'),'backend_status':accepted.status,'at_utc':datetime.now(UTC).isoformat()});return
+        route.continue_()
+    if args.transport_fault!='none':context.route('**/api/**',inject)
     def record_page_error(error):
         errors.append(str(error))
         error_events.append({"message": str(error), "stack": getattr(error, "stack", None),
@@ -296,7 +342,7 @@ def run_case(browser, engine, mobile, personal, args):
         start = len(observed)
         clicked_at = time.monotonic()
         page.locator("#generate-plan" if personal else "#submit-button").dblclick()
-        generation, envelope = wait_operation(page, observed, start, timeout=args.timeout, reload_after=args.reload_after, offline_seconds=args.offline_seconds)
+        generation, envelope = wait_operation(page, observed, start, timeout=args.timeout, reload_after=args.reload_after, offline_seconds=args.offline_seconds, fault=fault)
         report["generation"] = generation
         submitted = next((response.request.post_data_json for response in observed[start:]
                           if response.request.method == "POST" and urlsplit(response.url).path == "/api/plans"), None)
@@ -466,6 +512,10 @@ def run_case(browser, engine, mobile, personal, args):
         except BrowserTimeout:
             pass
     finally:
+        report['transport_fault']=args.transport_fault
+        report['injected_events']=injected
+        report['transport_lifecycle_events']=traces
+        report['fault_assertions']={k:v for k,v in fault.items() if k not in {'held','away_url'}}
         report["page_errors"] = errors
         report["page_error_events"] = error_events
         report["navigation_events"] = navigation_events
@@ -509,6 +559,7 @@ def main():
     parser.add_argument("--store-contexts", nargs="*", default=[], help="Exact currently published context IDs to select through the form")
     parser.add_argument("--exclusions", nargs="*", default=[])
     parser.add_argument("--timeout", type=int, default=900)
+    parser.add_argument('--transport-fault',choices=['none','reset','lost-start','delayed-reload','timeout','away','hidden','long-outage'],default='none')
     parser.add_argument("--reload-after", type=float, default=3)
     parser.add_argument("--offline-seconds", type=float, default=0, help="Temporarily disable the browser network during the pending job, at most 30 seconds")
     parser.add_argument("--require-long-job", action="store_true")

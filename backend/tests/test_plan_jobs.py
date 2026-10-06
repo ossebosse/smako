@@ -29,7 +29,7 @@ def test_async_plan_returns_before_work_finishes_and_preserves_failure(monkeypat
     monkeypatch.setattr(api, '_run_admitted_plan', slow)
     try:
         with TestClient(app) as client:
-            response = client.post('/api/plans', headers={'Prefer': 'respond-async'}, json={
+            response = client.post('/api/plans', headers={'Prefer': 'respond-async', 'X-Request-ID': 'lost-response-1'}, json={
                 'recipes': 5, 'servings': 2, 'max_stores': 3, 'purchase_planning_mode': 'exact',
             })
             assert response.status_code == 202
@@ -37,6 +37,11 @@ def test_async_plan_returns_before_work_finishes_and_preserves_failure(monkeypat
             status_url = response.json()['status_url']
             assert status_url.startswith('/api/plan-jobs/')
             assert client.get(status_url).status_code == 202
+            recovery = client.get('/api/plan-job-requests/lost-response-1')
+            assert recovery.status_code == 202 and recovery.json()['status_url'] == status_url
+            assert client.get('/api/plan-job-requests/lost-response-1', headers={
+                'X-Anonymous-Session-ID': 'another-isolated-session-12345'}).status_code == 404
+            assert client.get('/api/plan-job-requests/missing').status_code == 404
             duplicate = client.post('/api/plans', headers={'Prefer': 'respond-async'}, json={
                 'recipes': 5, 'servings': 2, 'max_stores': 3, 'purchase_planning_mode': 'exact',
             })
@@ -75,6 +80,8 @@ async def test_jobs_are_bounded_owned_and_completed_transport_expires(monkeypatc
 
     first = jobs.start('owner', 'input-key', 'request-1', work)
     assert jobs.start('owner', 'input-key', 'request-2', work) is first
+    assert jobs.by_request('request-2', 'owner') is first
+    assert jobs.by_request('request-2', 'stranger') is None
     assert jobs.get(first.job_id, 'stranger') is None
     with pytest.raises(plan_jobs.PlanJobsFull):
         jobs.start('stranger', 'other-key', 'request-3', work)
@@ -85,6 +92,8 @@ async def test_jobs_are_bounded_owned_and_completed_transport_expires(monkeypatc
     await asyncio.sleep(0)
     now[0] = 211
     assert jobs.get(first.job_id, 'owner') is None
+    assert jobs.by_request('request-2', 'owner') is None
+    assert plan_jobs.PlanJobs(max_pending=1).by_request('request-1', 'owner') is None
     await jobs.close()
 
 

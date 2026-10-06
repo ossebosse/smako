@@ -7,6 +7,7 @@ here. A process restart expires unfinished jobs rather than replaying writes.
 from __future__ import annotations
 
 import asyncio
+import logging
 import traceback
 from collections.abc import Awaitable, Callable
 from contextvars import ContextVar
@@ -17,6 +18,7 @@ from uuid import uuid4
 from app.models import SavedPlan
 
 _stage_reporter: ContextVar = ContextVar("plan_stage_reporter", default=None)
+logger = logging.getLogger(__name__)
 
 
 def report_stage(stage: str):
@@ -67,11 +69,13 @@ class PlanJobs:
         self.max_retained = max_retained
         self.retention = retention
         self.jobs: dict[str, PlanJob] = {}
+        self.requests: dict[tuple[str, str], str] = {}
 
     def _prune(self):
         cutoff = monotonic() - self.retention
         self.jobs = {key: job for key, job in self.jobs.items()
                      if job.completed_at is None or job.completed_at > cutoff}
+        self.requests = {key: value for key, value in self.requests.items() if value in self.jobs}
 
     def start(self, owner: str, key: str, request_id: str,
               work: Callable[[], Awaitable[SavedPlan]]) -> PlanJob:
@@ -79,6 +83,8 @@ class PlanJobs:
         for job in self.jobs.values():
             if (job.owner == owner and job.key == key
                     and (not job.task.done() or (not job.task.cancelled() and job.task.exception() is None))):
+                self.requests[owner, request_id] = job.job_id
+                logger.info("plan_job reused job=%s request=%s stage=%s", job.job_id, request_id, job.stage)
                 return job
         if sum(not job.task.done() for job in self.jobs.values()) >= self.max_pending:
             raise PlanJobsFull()
@@ -97,6 +103,8 @@ class PlanJobs:
 
         job = PlanJob(uuid4().hex, owner, key, request_id, asyncio.create_task(run()))
         self.jobs[job.job_id] = job
+        self.requests[owner, request_id] = job.job_id
+        logger.info("plan_job accepted job=%s request=%s", job.job_id, request_id)
 
         def finished(task):
             job.completed_at = monotonic()
@@ -104,6 +112,8 @@ class PlanJobs:
             # existing API exception handlers render them on an owned poll.
             if not task.cancelled():
                 _release_exception_frames(task.exception())
+            logger.info("plan_job completed job=%s request=%s outcome=%s", job.job_id, job.request_id,
+                        "cancelled" if task.cancelled() else "failed" if task.exception() else "saved")
 
         job.task.add_done_callback(finished)
         return job
@@ -112,6 +122,10 @@ class PlanJobs:
         self._prune()
         job = self.jobs.get(job_id)
         return job if job is not None and job.owner == owner else None
+
+    def by_request(self, request_id: str, owner: str) -> PlanJob | None:
+        self._prune()
+        return self.get(self.requests.get((owner, request_id), ""), owner)
 
     async def close(self):
         tasks = [job.task for job in self.jobs.values() if not job.task.done()]

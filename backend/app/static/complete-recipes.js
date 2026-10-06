@@ -317,23 +317,100 @@
   const stages={queued:"Din menyberäkning väntar på en ledig plats.",product_facts:"Kontrollerar produktfakta och aktuella prisvillkor.",candidate_qualification:"Prövar rätternas produkter, mängder och näringskrav.",week_search:"Söker efter en samordnad veckomeny och inköpskorg.",final_audit:"Slutkontrollerar hela inköpslistan och dina krav.",saving:"Sparar den färdiga planrevisionen."};
   const jobKey=scope=>`smako.planJob.${scope}`;
   function clearPrivateDrafts(){for(const key of ["smako.planJob.public","smako.planJob.personal","smako.recipeChoices.public","smako.recipeChoices.personal","smako.personal.requestDraft"])storage.remove(key);}
-  function pendingJob(scope) { const saved=storage.get(jobKey(scope));return validJobUrl(saved?.url)?saved:null; }
-  function forgetJob(scope) {storage.remove(jobKey(scope));}
-  async function poll(response,{scope,signal,onProgress=()=>{},context=null}={}) {
-    let statusUrl=pendingJob(scope)?.url||null;
-    while(response.status===202){
-      const pending=await response.json();if(pending.status!=="pending"||!validJobUrl(pending.status_url)||(statusUrl&&statusUrl!==pending.status_url))throw new Error("Servern skickade ett ogiltigt planeringssvar.");
-      statusUrl=pending.status_url;storage.set(jobKey(scope),{url:statusUrl,context:context||pendingJob(scope)?.context,started_at:pendingJob(scope)?.started_at||Date.now()});
-      onProgress(typeof pending.stage_label==="string"?pending.stage_label:stages[pending.stage]||typeof pending.progress?.label==="string"&&pending.progress.label||typeof pending.message==="string"&&pending.message||"Servern arbetar med din meny. Du kan ladda om och återansluta till samma beräkning.");
-      await new Promise((resolve,reject)=>{const abort=()=>{clearTimeout(timer);reject(signal?.reason||new DOMException("Avbruten","AbortError"));};const timer=setTimeout(()=>{signal?.removeEventListener("abort",abort);resolve();},2000);signal?.addEventListener("abort",abort,{once:true});if(signal?.aborted)abort();});
-      while(true){
-        const controller=new AbortController();const abort=()=>controller.abort(signal.reason);signal?.addEventListener("abort",abort,{once:true});if(signal?.aborted)abort();const timeout=setTimeout(()=>controller.abort(),20000);
-        try { response=await fetch(statusUrl,{headers:{Accept:"application/json"},cache:"no-store",signal:controller.signal});break; }
-        catch(error){if(signal?.aborted)throw error;onProgress("Anslutningen avbröts. Återansluter till samma menyberäkning…");await new Promise(resolve=>setTimeout(resolve,3000));}
-        finally{clearTimeout(timeout);signal?.removeEventListener("abort",abort);}
-      }
-    }
-    forgetJob(scope);return response;
+  function pendingJob(scope) {
+    const saved=storage.get(jobKey(scope));
+    return validJobUrl(saved?.url)||/^[a-f0-9-]{32,36}$/.test(saved?.requestId||"")?saved:null;
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,poll,pendingJob,forgetJob,clearPrivateDrafts,storage});
+  function forgetJob(scope) {storage.remove(jobKey(scope));}
+  // One reader per document. Navigation aborts this reader, never the server job.
+  let reader=null, generation=0, leaving=false;
+  function trace(flow,event,extra={}) {
+    window.dispatchEvent(new CustomEvent("smako:plan-transport",{detail:{
+      event,generation:flow?.generation??generation,request_id:flow?.requestId,
+      job:flow?.url?.split("/").pop(),at:performance.now(),...extra}}));
+  }
+  function lifecycle(reason) { const error=new DOMException("Statusläsningen avbröts på denna sida.","AbortError");error.lifecycle=reason;return error; }
+  function stopReader(reason) {if(reader){trace(reader,"abort",{reason});reader.controller.abort(lifecycle(reason));}}
+  window.addEventListener("pagehide",()=>{leaving=true;stopReader("pagehide");});
+  window.addEventListener("pageshow",()=>{leaving=false;trace(null,"pageshow");});
+  document.addEventListener("visibilitychange",()=>trace(reader,"visibility",{hidden:document.hidden}));
+  function check(flow) {flow.controller.signal.throwIfAborted();if(reader!==flow||leaving)throw lifecycle("superseded");}
+  function delay(ms,flow) {
+    return new Promise((resolve,reject)=>{
+      const signal=flow.controller.signal;
+      const abort=()=>{clearTimeout(timer);signal.removeEventListener("abort",abort);reject(signal.reason);};
+      const timer=setTimeout(()=>{signal.removeEventListener("abort",abort);resolve();},ms);
+      signal.addEventListener("abort",abort,{once:true});if(signal.aborted)abort();
+    });
+  }
+  function reconnectError() {const e=new Error("Kontakten med servern är tillfälligt avbruten. Återuppta statuskontrollen för samma meny; ingen ny beräkning startas.");e.reconnect=true;return e;}
+  async function readResponse(response,flow) {
+    const type=response.headers.get("Content-Type")||"";
+    if(!/application\/(?:[a-z0-9.-]+\+)?json(?:;|$)/i.test(type))throw new Error("Servern skickade en oväntad svarstyp vid statuskontrollen.");
+    let data;try{data=await response.clone().json();}catch(error){check(flow);if(error instanceof SyntaxError)throw new Error("Servern skickade ogiltig JSON vid statuskontrollen.");if(error instanceof TypeError)error.transport=true;throw error;}
+    check(flow);
+    if(!data||typeof data!=="object"||Array.isArray(data))throw new Error("Servern skickade ett ogiltigt statusformat.");
+    if(response.status===202){
+      if(data.status!=="pending"||!validJobUrl(data.status_url)||(flow.url&&flow.url!==data.status_url))throw new Error("Servern skickade ett ogiltigt planeringssvar.");
+    }else if(response.ok){
+      const saved=data.saved||data;
+      if(!saved.plan_id||!Number.isInteger(saved.revision)||!saved.plan||!Array.isArray(saved.plan.recipes)||!saved.plan.optimized_basket)throw new Error("Servern skickade ett ogiltigt planeringsresultat.");
+    }
+    return data;
+  }
+  async function transport(url,options,flow,onProgress) {
+    for(;;){
+      check(flow);
+      const controller=new AbortController(),signal=flow.controller.signal;
+      const abort=()=>controller.abort(signal.reason);signal.addEventListener("abort",abort,{once:true});
+      const timeout=setTimeout(()=>controller.abort(new DOMException("Statusanropets tidsgräns","TimeoutError")),20000);
+      let retryAfter=0,lost=false;
+      const reference=crypto.randomUUID();
+      try{
+        trace(flow,"start",{reference,method:options.method||"GET"});
+        let response;try{response=await fetch(url,{...options,headers:{Accept:"application/json",...options.headers,"X-Request-ID":options.method==="POST"?flow.requestId:reference},cache:"no-store",signal:controller.signal});}catch(error){error.transport=true;throw error;}
+        // Read body under the same timeout; a response with a stalled body is not success.
+        const data=await readResponse(response,flow);
+        trace(flow,"response",{reference,status:response.status,type:response.headers.get("Content-Type"),server_request:response.headers.get("X-Request-ID")});
+        if([429,502,503,504].includes(response.status)&&!response.headers.get("X-Plan-Request-ID")){
+          const seconds=Number(response.headers.get("Retry-After"));retryAfter=Number.isFinite(seconds)?Math.min(60000,Math.max(0,seconds*1000)):0;
+        }else return {response,data};
+      }catch(error){
+        if(flow.controller.signal.aborted)trace(flow,"request-abort",{reference,reason:flow.controller.signal.reason?.lifecycle||"caller"});
+        check(flow);
+        // Only fetch transport rejection and our own request timeout are retried.
+        if(!error.transport&&!controller.signal.aborted)throw error;lost=true;
+        trace(flow,"transport-error",{reference,category:controller.signal.aborted?"timeout":"network"});
+      }finally{clearTimeout(timeout);signal.removeEventListener("abort",abort);}
+      flow.failures+=1;flow.disconnectedAt??=Date.now();
+      if(flow.failures>=8||Date.now()-flow.disconnectedAt>=120000)throw reconnectError();
+      onProgress("Anslutningen avbröts. Återansluter till samma menyberäkning…");
+      // A lost POST response is recovered by owned lookup, never another POST.
+      if(lost&&options.method==="POST"){url=`/api/plan-job-requests/${flow.requestId}`;options={};}
+      await delay(Math.max(retryAfter,Math.min(30000,2000*2**(flow.failures-1))),flow);
+    }
+  }
+  async function jobRequest({scope,url,payload,signal,onProgress=()=>{},context=null,requestId=crypto.randomUUID()}) {
+    stopReader("replaced");
+    const saved=pendingJob(scope);
+    const flow={controller:new AbortController(),generation:++generation,requestId:saved?.requestId||requestId,url:saved?.url||null,failures:0,disconnectedAt:null};reader=flow;
+    const abort=()=>flow.controller.abort(signal.reason);signal?.addEventListener("abort",abort,{once:true});if(signal?.aborted)abort();
+    if(!saved){storage.set(jobKey(scope),{requestId:flow.requestId,context,started_at:Date.now()});}
+    try{
+      let target=saved?.url||(saved?`/api/plan-job-requests/${flow.requestId}`:url);
+      let options=!saved&&payload!==undefined?{method:"POST",headers:{"Content-Type":"application/json",Prefer:"respond-async"},body:JSON.stringify(payload)}:{};
+      for(;;){
+        const {response,data}=await transport(target,options,flow,onProgress);check(flow);
+        if(response.status!==202){
+          if(!response.ok)forgetJob(scope);
+          trace(flow,"terminal",{status:response.status});return response;
+        }
+        flow.url=data.status_url;flow.failures=0;flow.disconnectedAt=null;
+        storage.set(jobKey(scope),{url:flow.url,requestId:flow.requestId,context:context||saved?.context,started_at:saved?.started_at||Date.now()});
+        onProgress(stages[data.stage]||"Servern arbetar med din meny. Du kan återansluta till samma beräkning.");
+        await delay(2000,flow);target=flow.url;options={};
+      }
+    }finally{signal?.removeEventListener("abort",abort);if(reader===flow)reader=null;}
+  }
+  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,clearPrivateDrafts,storage});
 })();

@@ -108,7 +108,8 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     assert len(plans) == 1
     assert plans[0]["recipe_preferences"] == {"mode": "complete", "cuisines": ["greek", "mexican"],
                                              "min_ingredients": 10, "max_ingredients": 15, "max_minutes": 40,
-                                             "adaptation": "approved", "min_protein_g": 40, "allow_fish": False}
+                                             "adaptation": "approved", "min_protein_g": 40, "allow_fish": False,
+                                             "cuisine_distribution": "free", "min_distinct_cuisines": None, "max_same_main_protein_dinners": None}
     assert plans[0]["allowed_store_ids"] == ["context-one"]
     assert (plans[0].get("personal") or plans[0])["allow_nutrition_estimates"] is True
     expect(page.locator("#recipe-min-protein")).to_have_value("40")
@@ -129,7 +130,7 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     page.locator("#recipe-style").select_option("complete")
     submit.click()
     scope = "personal" if personal else "public"
-    page.wait_for_function("scope => sessionStorage.getItem('smako.planJob.' + scope) !== null", arg=scope)
+    page.wait_for_function("scope => JSON.parse(sessionStorage.getItem('smako.planJob.' + scope)||'null')?.url !== undefined", arg=scope)
     expected_posts = len(plans)
     mode["done"] = True
     page.reload()

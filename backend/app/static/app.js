@@ -204,12 +204,6 @@
     return { response, data };
   }
 
-  async function awaitPlanResult(response, signal) {
-    response = await window.SmakoRecipes.poll(response, {scope:"public", signal,
-      onProgress: message => { dom.loadingMessage.textContent = message; }});
-    return planningResponse(response);
-  }
-
   function reconcilePlanningState() {
     if (activePlanRequest && Date.now() >= activePlanRequest.deadline) {
       activePlanRequest.controller.abort(new DOMException("Väntetiden tog slut", "TimeoutError"));
@@ -807,7 +801,7 @@
   function setLoading(active) {
     dom.submitButton.disabled = active || !plannerReady;
     dom.form.setAttribute("aria-busy", String(active));
-    dom.submitLabel.textContent = active ? "Skapar veckomenyn…" : "Skapa veckomeny";
+    dom.submitLabel.textContent = active ? "Skapar veckomenyn…" : window.SmakoRecipes.pendingJob("public") ? "Återuppta statuskontrollen" : "Skapa veckomeny";
 
     if (!active) {
       dom.loadingState.hidden = true;
@@ -827,6 +821,17 @@
     dom.statusRegion.hidden = false;
     dom.errorState.hidden = false;
     dom.errorMessage.textContent = message || "Försök igen om en liten stund.";
+    const pending=window.SmakoRecipes.pendingJob("public");
+    dom.errorState.querySelector("h2").textContent=pending?"Statuskontrollen behöver återupptas":"Menyn kunde inte skapas";
+    dom.errorState.querySelector(".plan-reconnect-actions")?.remove();
+    if(pending){
+      const actions=createElement("div","plan-reconnect-actions");
+      const resume=createElement("button","secondary-button","Återuppta statuskontrollen");resume.type="button";
+      resume.addEventListener("click",()=>void resumePublicJob());
+      const fresh=createElement("button","secondary-button","Skapa en ny meny");fresh.type="button";
+      fresh.addEventListener("click",()=>{window.SmakoRecipes.forgetJob("public");dom.errorState.hidden=true;setLoading(false);dom.submitButton.focus();});
+      actions.append(resume,fresh);dom.errorMessage.after(actions);
+    }
     dom.errorState.querySelector(".recipe-planning-diagnostics")?.remove();
     const explanation=window.SmakoRecipes.diagnostics(diagnostics);
     if(explanation)dom.errorMessage.after(explanation);
@@ -2589,6 +2594,7 @@
       try { window.localStorage.setItem(lastPlanStorageKey, plan.plan_id); } catch (_error) { /* Optional device-local convenience. */ }
     }
     renderResults(plan);
+    window.SmakoRecipes.forgetJob("public");
     if (updateUrl && plan.plan_id) {
       const url = planUrl(plan.plan_id);
       if (!debugMode) url.searchParams.delete("debug");
@@ -2613,12 +2619,11 @@
       const result=await boundedRequest(request.controller,PLAN_WAIT_MS,async signal=>{
         const stateResponse=await fetch("/api/personal/state",{headers:{Accept:"application/json"},cache:"no-store",signal});
         const state=await responseJson(stateResponse);if(!stateResponse.ok)throw new Error(errorFromResponse(state,"Skafferiet kunde inte läsas."));
-        const response=await fetch(`/api/personal/plans/${encodeURIComponent(currentResponse.plan_id)}/change`,{method:"POST",headers:{"Content-Type":"application/json",Prefer:"respond-async","X-Request-ID":request.id},body:JSON.stringify({action,revision:currentResponse.plan_revision,pantry_revision:state.revision,...fields}),signal});
-        const final=await window.SmakoRecipes.poll(response,{scope:"public",signal,context:{kind:"change"},onProgress:message=>{dom.loadingMessage.textContent=message;}});
+        const final=await window.SmakoRecipes.jobRequest({scope:"public",url:`/api/personal/plans/${encodeURIComponent(currentResponse.plan_id)}/change`,payload:{action,revision:currentResponse.plan_revision,pantry_revision:state.revision,...fields},requestId:request.id,signal,context:{kind:"change"},onProgress:message=>{dom.loadingMessage.textContent=message;}});
         const payload=await responseJson(final);if(!final.ok)throw planningError(payload,"Planen kunde inte räknas om. Din tidigare revision finns kvar.",final.status);return payload;
       });
       applySavedPlan(result.saved);if(action==="replace")sendAnalyticsEvent("recipe_replaced");
-    } catch(error){showError(`${error.message} Fel-ID: ${request.id}`,error.planningDiagnostics);}
+    } catch(error){if(error.lifecycle)return;showError(`${error.message} Fel-ID: ${request.id}`,error.planningDiagnostics);}
     finally{if(activePlanRequest===request){activePlanRequest=null;setLoading(false);}if(button)button.disabled=false;}
   }
 
@@ -2628,12 +2633,11 @@
     dom.loadingMessage.textContent="Återansluter till din pågående menyberäkning…";
     try {
       const payload=await boundedRequest(request.controller,PLAN_WAIT_MS,async signal=>{
-        let response=await fetch(pending.url,{headers:{Accept:"application/json"},cache:"no-store",signal});
-        response=await window.SmakoRecipes.poll(response,{scope:"public",signal,onProgress:message=>{dom.loadingMessage.textContent=message;}});
+        const response=await window.SmakoRecipes.jobRequest({scope:"public",signal,onProgress:message=>{dom.loadingMessage.textContent=message;}});
         const data=await responseJson(response);if(!response.ok)throw planningError(data,response.status===410?"Beräkningen avslutades vid serveromstart. Dina val finns kvar; skapa menyn igen.":"Beräkningen kunde inte återläsas.",response.status);return data;
       });
       applySavedPlan(payload.saved||payload);
-    }catch(error){showError(`${error.message} Dina val och tidigare sparade planer finns kvar.`,error.planningDiagnostics);}
+    }catch(error){if(error.lifecycle)return;showError(`${error.message} Dina val och tidigare sparade planer finns kvar.`,error.planningDiagnostics);}
     finally{if(activePlanRequest===request){activePlanRequest=null;setLoading(false);}}
   }
 
@@ -3345,16 +3349,8 @@
     try {
       scrollToNode(dom.statusRegion, "center");
       const { response, data } = await boundedRequest(request.controller, PLAN_WAIT_MS, async (signal) => {
-        const options = {
-          method: "POST",
-          headers: { Accept: "application/json", "Content-Type": "application/json", "X-Request-ID": request.id, Prefer: "respond-async" },
-          body: JSON.stringify(payload), signal,
-        };
-        let response = await fetch("/api/plans", options);
-        signal.throwIfAborted();
-        // Only a route-unsupported response can use the legacy route; never retry capacity/errors.
-        if (response.status === 404 || response.status === 405) response = await fetch("/api/plan", options);
-        return awaitPlanResult(response, signal);
+        const response=await window.SmakoRecipes.jobRequest({scope:"public",url:"/api/plans",payload,requestId:request.id,signal,onProgress:message=>{dom.loadingMessage.textContent=message;}});
+        return planningResponse(response);
       });
       if (activePlanRequest !== request) return;
 
@@ -3400,7 +3396,7 @@
         outcome: "success",
       });
     } catch (error) {
-      if (activePlanRequest !== request) return;
+      if (activePlanRequest !== request || error.lifecycle) return;
       const timedOut = error?.name === "TimeoutError";
       const aborted = error?.name === "AbortError";
       const networkError = error instanceof TypeError && !renderingResult;
@@ -3607,13 +3603,9 @@
   void resumePublicJob();
   window.addEventListener("online", () => { void loadPublicRuntimeStatus(); if(!activePlanRequest)void resumePublicJob(); });
 
-  window.addEventListener("pageshow", reconcilePlanningState);
-  window.addEventListener("pagehide", (event) => {
-    if (!event.persisted) activePlanRequest?.controller.abort();
-  });
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") reconcilePlanningState();
-  });
+  const resumeReader=()=>{reconcilePlanningState();if(!activePlanRequest)void resumePublicJob();};
+  window.addEventListener("pageshow",resumeReader);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)resumeReader();});
   reconcilePlanningState();
   document.documentElement.dataset.frontendInitialized = "true";
   document.documentElement.dataset.frontendVersion = FRONTEND_VERSION;

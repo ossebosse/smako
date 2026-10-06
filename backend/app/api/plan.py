@@ -693,6 +693,17 @@ async def poll_plan_job(job_id: str, http_request: Request):
                         headers={"Cache-Control": "private, no-store", "X-Plan-Request-ID": job.request_id})
 
 
+@router.get("/plan-job-requests/{request_id}")
+async def find_plan_job(request_id: str, http_request: Request):
+    """Recover an accepted start whose response was lost; never start new work."""
+    settings = get_settings()
+    job = _plan_jobs(http_request, settings).by_request(request_id, _plan_actor_hash(http_request, settings))
+    if job is None:
+        raise HTTPException(404, "Startförsöket kan inte återfinnas i din session. Det kan ha gått ut eller avslutats vid serveromstart. Ingen ny beräkning har startats.",
+                            headers={"X-Error-Code": "planner_job_expired", "Cache-Control": "private, no-store"})
+    return _pending_plan_job(job)
+
+
 async def _create_saved_plan(consumer_request: PlanRequest, http_request: Request, settings: Settings) -> SavedPlan:
     try:
         plan = _with_release(
