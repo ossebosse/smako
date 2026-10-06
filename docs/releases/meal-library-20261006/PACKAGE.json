@@ -1,0 +1,75 @@
+{
+  "runtime": {
+    "commit": "fd2cfda5490ac93295e6a2cef6b6b8408497f89e",
+    "package_sha256": "342b74f913ce0625ee78bcdf283f02937273e9b36b730d26216ec55ffd5014e3",
+    "image": "sha256:b8541e165a2075c4c5657e1296c83e276f3aa8f59607292e32b653b60a7655fb",
+    "tag": "smako-meal-library:fd2cfda5490a",
+    "parent_image": "sha256:82cb349b2f81071e3d9b04cf2f8200e9b9db2f1d37627bc6bc29eb1472f34942",
+    "changed_copy_files": [
+      "backend/app/data/recipes/extension-second-20261006.json",
+      "backend/app/data/recipes/library-manifest.json",
+      "backend/app/data/recipes/meal-pack-ff06e9fcdb58f4ab9ccd24cd6745f7f41b7e8e68e80bb40fdd5a5ba627b9b6a4.json"
+    ],
+    "source_manifest_files": 669,
+    "build_seconds": 0.9152486380189657,
+    "derived_dockerfile": "FROM smako-meal-library:e2e5d248ee44\nENV BUILD_ID=fd2cfda5490ac93295e6a2cef6b6b8408497f89e\nLABEL org.opencontainers.image.revision=fd2cfda5490ac93295e6a2cef6b6b8408497f89e\nCOPY --chown=app:app backend/app/data/recipes/extension-second-20261006.json /srv/app/backend/app/data/recipes/extension-second-20261006.json\nCOPY --chown=app:app backend/app/data/recipes/library-manifest.json /srv/app/backend/app/data/recipes/library-manifest.json\nCOPY --chown=app:app backend/app/data/recipes/meal-pack-ff06e9fcdb58f4ab9ccd24cd6745f7f41b7e8e68e80bb40fdd5a5ba627b9b6a4.json /srv/app/backend/app/data/recipes/meal-pack-ff06e9fcdb58f4ab9ccd24cd6745f7f41b7e8e68e80bb40fdd5a5ba627b9b6a4.json\n"
+  },
+  "package": {
+    "commit": "fd2cfda5490ac93295e6a2cef6b6b8408497f89e",
+    "source_tag": "consolidation-20260929-local",
+    "packages": {
+      "server": {
+        "file": "smako-server-fd2cfda5490a.zip",
+        "sha256": "342b74f913ce0625ee78bcdf283f02937273e9b36b730d26216ec55ffd5014e3",
+        "bytes": 2918412,
+        "files": 670
+      },
+      "windows-relay": {
+        "file": "smako-windows-relay-fd2cfda5490a.zip",
+        "sha256": "66079bd4a1957260c7db3c24d3a5cc29f3344b262d53cb261d01a7565af62bed",
+        "bytes": 2918417,
+        "files": 670
+      }
+    }
+  },
+  "P2": {
+    "commit": "e2e5d248ee44657b45080f20f5a003b1ced46a13",
+    "package_sha256": "00cad306c81243727b26377877b4e5d425b1bfbb9200a36850869184fe49e30d",
+    "image": "sha256:82cb349b2f81071e3d9b04cf2f8200e9b9db2f1d37627bc6bc29eb1472f34942",
+    "tag": "smako-meal-library:e2e5d248ee44",
+    "parent_image": "sha256:f5a7953917552e19b7b35ab80c6b3e32cbe7b3697297c8d46c677e82aa4cb177",
+    "changed_copy_files": [
+      "backend/app/api/personal.py",
+      "backend/app/api/plan.py",
+      "backend/app/data/recipes/extension-20261006.json",
+      "backend/app/data/recipes/library-manifest.json",
+      "backend/app/data/recipes/meal-pack-6f6a9baacd3fd807a968a98696a0cfb24dc4a7675e9201a5a951c59c01593fc6.json",
+      "backend/app/services/meal_library_cli.py",
+      "backend/app/services/meal_library_content.py",
+      "backend/app/services/recipe_library.py"
+    ],
+    "source_manifest_files": 667,
+    "build_seconds": 1.7782195848412812,
+    "derived_dockerfile": "FROM smako-meal-library:4a34888068ec\nENV BUILD_ID=e2e5d248ee44657b45080f20f5a003b1ced46a13\nLABEL org.opencontainers.image.revision=e2e5d248ee44657b45080f20f5a003b1ced46a13\nCOPY --chown=app:app backend/app/api/personal.py /srv/app/backend/app/api/personal.py\nCOPY --chown=app:app backend/app/api/plan.py /srv/app/backend/app/api/plan.py\nCOPY --chown=app:app backend/app/data/recipes/extension-20261006.json /srv/app/backend/app/data/recipes/extension-20261006.json\nCOPY --chown=app:app backend/app/data/recipes/library-manifest.json /srv/app/backend/app/data/recipes/library-manifest.json\nCOPY --chown=app:app backend/app/data/recipes/meal-pack-6f6a9baacd3fd807a968a98696a0cfb24dc4a7675e9201a5a951c59c01593fc6.json /srv/app/backend/app/data/recipes/meal-pack-6f6a9baacd3fd807a968a98696a0cfb24dc4a7675e9201a5a951c59c01593fc6.json\nCOPY --chown=app:app backend/app/services/meal_library_cli.py /srv/app/backend/app/services/meal_library_cli.py\nCOPY --chown=app:app backend/app/services/meal_library_content.py /srv/app/backend/app/services/meal_library_content.py\nCOPY --chown=app:app backend/app/services/recipe_library.py /srv/app/backend/app/services/recipe_library.py\n"
+  },
+  "P1": {
+    "commit": "a168d36026d1ef20675f272aa301b410763fdfbe",
+    "package_sha256": "5fe701acb441e3de869782bf244ae1b7e7a25e00f16b3b771a6c7d9568553180",
+    "image": "sha256:1a8bb7f303a9a04219c93c94ec86326992a98e56972ff3d8ed523a2b38002f12",
+    "tag": "smako-meal-library:a168d36026d1",
+    "parent_image": "sha256:f5a7953917552e19b7b35ab80c6b3e32cbe7b3697297c8d46c677e82aa4cb177",
+    "changed_copy_files": [
+      "backend/app/api/personal.py",
+      "backend/app/api/plan.py",
+      "backend/app/data/recipes/library-manifest.json",
+      "backend/app/services/meal_library_cli.py",
+      "backend/app/services/meal_library_content.py",
+      "backend/app/services/recipe_library.py"
+    ],
+    "source_manifest_files": 661,
+    "build_seconds": 0.9052598979324102,
+    "derived_dockerfile": "FROM smako-meal-library:4a34888068ec\nENV BUILD_ID=a168d36026d1ef20675f272aa301b410763fdfbe\nLABEL org.opencontainers.image.revision=a168d36026d1ef20675f272aa301b410763fdfbe\nCOPY --chown=app:app backend/app/api/personal.py /srv/app/backend/app/api/personal.py\nCOPY --chown=app:app backend/app/api/plan.py /srv/app/backend/app/api/plan.py\nCOPY --chown=app:app backend/app/data/recipes/library-manifest.json /srv/app/backend/app/data/recipes/library-manifest.json\nCOPY --chown=app:app backend/app/services/meal_library_cli.py /srv/app/backend/app/services/meal_library_cli.py\nCOPY --chown=app:app backend/app/services/meal_library_content.py /srv/app/backend/app/services/meal_library_content.py\nCOPY --chown=app:app backend/app/services/recipe_library.py /srv/app/backend/app/services/recipe_library.py\n"
+  },
+  "image_test_mounts": "No runtime source mounts; read-only retained public inputs and frozen harness; new isolated state only.",
+  "production_activated": false
+}

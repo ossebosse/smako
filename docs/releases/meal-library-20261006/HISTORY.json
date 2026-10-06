@@ -1,0 +1,175 @@
+{
+  "production_activation_errors": "See separate status-activation-20261006 report; no assumed shared cause.",
+  "previous_dd12_status_errors": "Preserved in status-reconnect-20261006/HISTORY.json; reused unchanged evidence, not newly run tests.",
+  "failures": [
+    {
+      "category": "content-basis-error",
+      "assessment": "Confirmed instruction/amount-basis mismatch; see WITHDRAWN.json; numerically passing menus withdrawn.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\content_review.py",
+          "sha256": "f41f94cb9fce892865af22c660ecdc0123fc02c1711125f90e22a4b5ce0d8a57",
+          "bytes": 1541
+        },
+        {
+          "path": ".local\\meal-library-20261006\\pilot-refinement-validation.json",
+          "sha256": "536da0bb6ee572812add7313d3aaa80803d7d5b9811019b2361a4528907ca8a1",
+          "bytes": 1871
+        },
+        {
+          "path": ".local\\meal-library-20261006\\extension-local-qualification.json",
+          "sha256": "a32ea2e9e3ce2a4d59020c1e12f9c7a5a14f1833179bb54356eb44900b283173",
+          "bytes": 2171792
+        }
+      ]
+    },
+    {
+      "category": "memory-oom",
+      "assessment": "Confirmed Docker oom/die137 in old 0860 image; bounded search fixed without changing evaluated proposals.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\scale-container-events.jsonl",
+          "sha256": "3bcb90555824407f37873fb6777b750b92b493606e5d089b722e30494ac4d291",
+          "bytes": 369
+        },
+        {
+          "path": ".local\\meal-library-20261006\\targeted-scale-p2-2-main.log",
+          "sha256": "4fe355f6926769648af24f171afbe674a685d7c25a96fbb6753e5f2da7310f5b",
+          "bytes": 1361
+        },
+        {
+          "path": ".local\\meal-library-20261006\\topk-before.log",
+          "sha256": "ee97e1216018b56fc8d25cc449559b5ff43b34e10297bc5623fa60bb08fdb7df",
+          "bytes": 1950
+        },
+        {
+          "path": ".local\\meal-library-20261006\\topk-after2.log",
+          "sha256": "ad99f5d512b74f73b659bbe80eb3dca41bbda9300cb7f330b60e794ecc3a7f3d",
+          "bytes": 1443
+        }
+      ]
+    },
+    {
+      "category": "controlled-incremental-exit139",
+      "assessment": "Controlled incremental process exit139 in old 0860 image retained; exact cause not established. Later PASS does not identify cause.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\targeted-incremental-p2corrected-.log",
+          "sha256": "8d669ed137c16c0783536c60a1bfae30bb1e7b88ed31a7e1b8afbe10d1351429",
+          "bytes": 1312
+        },
+        {
+          "path": ".local\\meal-library-20261006\\incremental-corrected.log",
+          "sha256": "1dec648b57d3fd19c47f7b165816b168b9562a0c295094f13fdf5b67efb178df",
+          "bytes": 3620
+        }
+      ]
+    },
+    {
+      "category": "domain-error-http500",
+      "assessment": "Confirmed retained domain failures were mapped to 500; regression and packaged 422/409 response fix.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\domain-job-before.log",
+          "sha256": "04f1e4021abfbad09364d47f6c541d144521f2b088e9ffdbd5a2f16c2adcc229",
+          "bytes": 4651
+        },
+        {
+          "path": ".local\\meal-library-20261006\\domain-job-after.log",
+          "sha256": "1f2d65195578fc61ac65732d55f3064ae75d61ca0620fcbad638f220f28b3994",
+          "bytes": 219
+        },
+        {
+          "path": ".local\\meal-library-20261006\\final-domain-browser-tests.log",
+          "sha256": "9f9cde1302544ed1e798262e0fdbf7c7d13c412abfefac24eabc11178b091aad",
+          "bytes": 7111
+        }
+      ]
+    },
+    {
+      "category": "strict-pantry-client-disconnect",
+      "assessment": "Spontaneous RemoteProtocolError on status GET; backend same job finished once, no OOM. Unchanged retry PASS; cause unknown.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\sequence-meal_library_api_checks-.log",
+          "sha256": "033f07c4dd0006c73bc972561edb32b9929b31631b0dc535a4628c5c89e9370c",
+          "bytes": 3963
+        },
+        {
+          "path": ".local\\meal-library-20261006\\final-api-checks-retry.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "category": "wrong-benchmark-harness",
+      "assessment": "Old evaluation helper accidentally invoked. Its menu/timings are excluded from P0; corrected uploaded frozen helper verified including CRLF/LF equivalence.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\final-backend-before-harness-verification-failure.log",
+          "sha256": "26f98ae30c94f7d84983c8348cfae4655f63e44ad7634649b22be7e654a6d911",
+          "bytes": 2311
+        }
+      ]
+    },
+    {
+      "category": "tool-and-fixture-errors",
+      "assessment": "Tool input/environment/access failures preserved, not counted as app fixes or valid performance trials.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\final-content-trial-tool-syntax-failure.log",
+          "sha256": "b0574783e0095a517f4e559eebb54a59480149cebfcebc3651363017eee2ba23",
+          "bytes": 310
+        },
+        {
+          "path": ".local\\meal-library-20261006\\sequence-content-before-pythonpath-failure.log",
+          "sha256": "9e3d6ebfce7b6d2ad59ead7d2eeb26825dd830e612969f84239e48c3ceb1d706",
+          "bytes": 231
+        },
+        {
+          "path": ".local\\meal-library-20261006\\final-storage-readonly-before-fixture-access-failure.log",
+          "sha256": "299cfae370456ad7b06042a6e5561ebe69164c582656b3826a7771a710c0fcf2",
+          "bytes": 4514
+        },
+        {
+          "path": ".local\\meal-library-20261006\\sequence-resume-complete_recipe_browser-chromium.log",
+          "sha256": "8a8aefc5bfe15719cabf9d105701881ddc53952078038223a2fdb15c9b1adfcc",
+          "bytes": 753
+        }
+      ]
+    },
+    {
+      "category": "retained-rejected-attempt",
+      "path": ".local\\meal-library-20261006\\browser\\final2-main-chromium",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\browser\\final2-main-chromium\\summary.json",
+          "bytes": 172917,
+          "sha256": "e322a7b117d9b7ef9de06a25f2a872d8ccd92629fb036230b5db7f48d4dcf0fa"
+        },
+        {
+          "path": ".local\\meal-library-20261006\\browser\\final2-main-chromium\\chromium-mobile-public\\generated.json",
+          "bytes": 252547,
+          "sha256": "a30f1e7ace61d01eec12d3c75340629beb5214c5fab6339def72898e2ae82755"
+        },
+        {
+          "path": ".local\\meal-library-20261006\\browser\\final2-main-chromium\\chromium-mobile-public\\report.json",
+          "bytes": 209898,
+          "sha256": "e0160da15818a5c91d5dd23e675d53c1d17bff23a9aa371f94329204d8b40742"
+        }
+      ]
+    },
+    {
+      "category": "retained-rejected-attempt",
+      "path": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final-p0-main-cold-1.log",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\final-remote\\ram\\results\\final-p0-main-cold-1.log",
+          "bytes": 1035,
+          "sha256": "3d478290251a8b253ad8e649fd561baa7bcb774a5f1aa73fb25067333d5e3d00"
+        }
+      ]
+    }
+  ]
+}
