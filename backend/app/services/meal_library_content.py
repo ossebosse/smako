@@ -19,7 +19,7 @@ ROOT = Path(__file__).parents[1] / "data/recipes"
 MANIFEST = ROOT / "library-manifest.json"
 MAX_BYTES = 16 * 1024 * 1024
 MAX_RECIPES = 4096
-METHODS = frozenset({"pot", "pan", "oven", "salad", "cold_assembly", "refrigerated_assembly"})
+METHODS = frozenset({"pot", "pan", "oven", "bake", "salad", "cold_assembly", "refrigerated_assembly"})
 
 
 def encoded(value):

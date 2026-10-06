@@ -60,6 +60,16 @@ def test_manifest_escape_duplicate_json_and_unknown_field(tmp_path):
     assert 'executable' in content.validate_pack(path)['rejections'][0]['reason']
 
 
+def test_existing_bake_method_imports_but_unknown_method_is_rejected(tmp_path):
+    path=pack(tmp_path);raw=json.loads(path.read_bytes())
+    raw['recipes'][0]['design']['method']='bake'
+    path.write_bytes(content.encoded(raw))
+    assert not content.validate_pack(path)['rejections']
+    raw['recipes'][0]['design']['method']='unknown-executable-method'
+    path.write_bytes(content.encoded(raw))
+    assert content.validate_pack(path)['rejections']
+
+
 def test_corrupt_artifact_recomputed_and_versions_negative_results_change(tmp_path,monkeypatch):
     monkeypatch.setenv('RECIPE_PREPARATION_CACHE_ROOT',str(tmp_path))
     calls=[]

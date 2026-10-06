@@ -93,7 +93,7 @@ after=price_candidate_for_context(candidate,UserPricingContext(),on_date=offer.v
 rows.append({'label':'campaign-expiry','injected_clock_only':True,'product_id':campaign.product_id,
              'valid_to':str(offer.valid_to),'before':before.model_dump(mode='json'),'after':after.model_dump(mode='json')})
 # A new content version rebuilds only its own static row; issued v1 is retained.
-row=recipe.model_dump(mode='json');row['design']['version']='1.1.0';row['name']+=' (tekniskt versionsprov)'
+row=recipe.model_dump(mode='json');row['design']['version']='1.2.0';row['name']+=' (tekniskt versionsprov)'
 path=Path('/tmp/changed-content.json');path.write_bytes(encoded({'schema_version':'smako-meal-pack-v1',
     'pack_id':'controlled-incremental-content','recipes':[row]}))
 before=dict(STATS);import_pack(path);updated=prepare_content(current_recipes())

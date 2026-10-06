@@ -15,10 +15,13 @@ from app.services.recipe_library import current_recipes
 factor=int(sys.argv[1]);case=sys.argv[2]
 assert factor in {1,2,5}
 original=current_recipes();rows=[];started=time.perf_counter()
+sources=[r for r in original if not (r.design.method in {'salad','cold_assembly','refrigerated_assembly'}
+    and any(i.canonical_name in {'kyckling','nötfärs','fläskkött','ägg','fisk','lax'}
+        and i.form=='raw_edible' for i in r.ingredients))]
 for n in range(len(original)*(factor-1)):
-    source=original[n % len(original)]
+    source=sources[n % len(sources)]
     row=source.model_dump(mode='json');d=row['design']
-    d.update(base_id=f'synthetic-load-{factor}-{n}',version='1.0.0',variant_id='base',
+    d.update(base_id=f'smako-synthetic-load-{factor}-{n}',version='1.0.0',variant_id='base',
              active_minutes=d.get('active_minutes') or min(d['estimated_minutes'],20),
              total_minutes=d.get('total_minutes') or d['estimated_minutes'])
     d.pop('content_source',None)
@@ -26,6 +29,13 @@ for n in range(len(original)*(factor-1)):
     # Different operands and identities exercise relevant candidates, not just
     # thousands of exact copies. These are not reviewed new culinary dishes.
     ratio=0.9+(n % 9)*0.025
+    # Older issued content omits redundant component amounts. Populate them
+    # in the synthetic import from its actual ingredient/component mapping.
+    for component in d['components']:
+        if not component.get('amounts'):
+            component['amounts']=[{'ingredient_key':i['canonical_name']+'|'+i['form'],
+                'name':i['name'],'quantity':i['quantity'],'unit':i['unit']}
+                for i in row['ingredients'] if i['component']==component['id']]
     for ingredient in row['ingredients']:
         for field in ['quantity','quantity_min','quantity_max','quantity_step']:
             if ingredient.get(field) is not None:ingredient[field]*=ratio
