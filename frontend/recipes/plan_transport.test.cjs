@@ -6,7 +6,7 @@ const fs=require('node:fs');
 const {webcrypto}=require('node:crypto');
 const source=fs.readFileSync(process.env.SMAKO_TRANSPORT_SOURCE||'backend/app/static/complete-recipes.js','utf8');
 const job='/api/plan-jobs/'+'a'.repeat(32), old='/api/plan-jobs/'+'b'.repeat(32);
-const final={plan_id:'saved',revision:1,plan:{recipes:[],optimized_basket:{stores:[]}}};
+const final={plan_id:'saved',revision:1,request:{},plan:{recipes:[],optimized_basket:{stores:[]}}};
 const response=(data,status=201)=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json'}});
 function setup(fetch){
   const events=[],data=new Map(),window=new EventTarget(),document=new EventTarget();
@@ -88,4 +88,11 @@ test('reload discovery tolerates server acceptance still in flight, without anot
   });
   assert.equal((await api.jobRequest({scope:'public',url:'/api/plans',payload:{}})).status,201);
   assert.equal(posts,1);assert.equal(lookups,2);
+});
+test('partial result and missing personal slots are rejected before accepting a result',async()=>{
+  for(const data of [{...final,request:null},{...final,plan:{recipes:[],optimized_basket:{}}},{...final,request:{personal:{extras:[]}}}]){
+    let calls=0;const {api,events}=setup(async()=>{calls++;return response(data);});
+    await assert.rejects(api.jobRequest({scope:'personal',url:job}),e=>e.schema===true);
+    assert.equal(calls,1);assert.ok(events.some(e=>e.event==='response-error'&&e.category==='schema'));
+  }
 });

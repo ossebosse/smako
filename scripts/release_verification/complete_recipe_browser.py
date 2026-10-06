@@ -22,12 +22,15 @@ from types import SimpleNamespace
 from urllib.parse import urlsplit
 
 from playwright.sync_api import Error as BrowserError
-from playwright.sync_api import TimeoutError as BrowserTimeout
 from playwright.sync_api import expect, sync_playwright
 
 
 def dump(path: Path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def safe_error(error):
+    return re.sub(r"(?im)^.*(?:cookie:|authorization:|set-cookie:).*$", "  [secret header redacted]", str(error))
 
 
 def digest(envelope):
@@ -77,6 +80,7 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
             body = response.captured_body
             row = {"url": response.url, "method": response.request.method, "status": response.status,
                    "request_id": response.headers.get("x-request-id"),
+                   "response_type": response.headers.get("content-type"),
                    "error_code": response.headers.get("x-error-code"),
                    "response_ms": response.request.timing.get("responseEnd"),
                    "observed_after_seconds": round(time.monotonic() - started, 3)}
@@ -87,6 +91,13 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
             if response.status == 202:
                 pending_urls.add(body["status_url"])
                 row["stage"] = body.get("stage")
+            elif (fault and fault['scenario']=='lost-start-race' and response.status==404
+                  and urlsplit(response.url).path.startswith('/api/plan-job-requests/')
+                  and not fault.get('discovery_observed_once')):
+                # Preserve this exact injected discovery response. The app has
+                # a bounded acceptance grace, so it is not a terminal job reply.
+                fault['discovery_observed_once']=True
+                row['injected_unconfirmed_start_discovery']=True
             else:
                 terminal = (response, body)
             rows.append(row)
@@ -97,14 +108,18 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
             if scenario in {'away','hidden'} and not fault.get('lifecycle_done'):
                 if scenario=='away':
                     page.goto(fault['away_url'],wait_until='domcontentloaded');page.go_back(wait_until='domcontentloaded')
+                    page.go_forward(wait_until='domcontentloaded');page.go_back(wait_until='domcontentloaded')
+                    fault['native_back_and_forward']=True
                 else:
                     page.evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>true});document.dispatchEvent(new Event('visibilitychange'))")
                     page.wait_for_timeout(1000)
                     page.evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>false});document.dispatchEvent(new Event('visibilitychange'))")
                 fault['lifecycle_done']=True
-            if scenario=='long-outage' and fault.get('aborts',0)>=8 and not fault.get('manual_resume'):
+            if (scenario=='long-outage' and fault.get('aborts',0)>=8 or scenario=='invalid-body' and fault.get('invalid_body')) and not fault.get('manual_resume'):
                 control=page.get_by_role('button',name='Återuppta statuskontrollen',exact=True).last
                 if control.is_visible() and control.is_enabled():
+                    fault['recovery_dom']=page.locator('#personal-status, #error-message').all_text_contents()
+                    if scenario=='invalid-body':assert any('oväntad svarstyp' in text for text in fault['recovery_dom'])
                     fault['enabled']=False;control.click();fault['manual_resume']=True
             if scenario=='timeout' and fault.get('held_at') and time.monotonic()-fault['held_at']>22:
                 for route in fault.pop('held',[]):
@@ -123,6 +138,7 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
             page.context.set_offline(True)
             try:
                 page.wait_for_timeout(offline_seconds * 1000)
+                if fault:fault['offline_dom']=page.locator('#personal-status, #loading-message').all_text_contents()
             finally:
                 page.context.set_offline(False)
             network_interrupted = True
@@ -146,7 +162,19 @@ def read_saved(context, base, plan_id, revision=None):
     url = f"{base}/api/plans/{plan_id}"
     if revision is not None:
         url += f"?revision={revision}"
-    response = context.request.get(url, timeout=30000)
+    reference = str(uuid.uuid4())
+    row = {"url": url, "reference": reference, "started_utc": datetime.now(UTC).isoformat()}
+    context.smako_api_reads.append(row)
+    started = time.monotonic()
+    try:
+        response = context.request.get(url, timeout=30000, headers={"X-Request-ID": reference})
+        row.update(status=response.status, type=response.headers.get("content-type"),
+                   server_request=response.headers.get("x-request-id"))
+    except BrowserError as error:
+        row["error"] = safe_error(error)
+        raise
+    finally:
+        row.update(finished_utc=datetime.now(UTC).isoformat(), seconds=time.monotonic()-started)
     assert response.ok, f"Saved readback returned {response.status}"
     return response.json()
 
@@ -242,7 +270,9 @@ def run_case(browser, engine, mobile, personal, args):
     report = {"case": case, "base": args.base, "started_utc": datetime.now(UTC).isoformat(),
               "physical_device_test": False, "mocked_routes": False, "run_id": uuid.uuid4().hex}
     context = browser.new_context(viewport={"width": 390 if mobile else 1280, "height": 844 if mobile else 900},
-                                  is_mobile=mobile, has_touch=mobile, ignore_https_errors=args.ignore_https_errors)
+                                  is_mobile=mobile, has_touch=mobile, ignore_https_errors=args.ignore_https_errors,
+                                  service_workers="block" if args.transport_fault in {'lost-start', 'lost-start-race', 'reset', 'timeout', 'delayed-reload', 'long-outage', 'invalid-body'} else "allow")
+    context.smako_api_reads = []
     page = context.new_page()
     observed, errors, failures = [], [], []
     error_events = []
@@ -250,17 +280,29 @@ def run_case(browser, engine, mobile, personal, args):
     traces=[];injected=[]
     fault={'scenario':args.transport_fault,'enabled':True,'aborts':0,'away_url':args.base+('/' if personal else '/personal')}
     context.expose_binding('__smakoTrace',lambda source,data:traces.append({**data,'observed_utc':datetime.now(UTC).isoformat()}))
-    context.add_init_script("window.addEventListener('smako:plan-transport',e=>{window.__smakoTrace(e.detail).catch(()=>{});});")
+    context.expose_binding('__smakoUnhandled',lambda source,data:errors.append('unhandledrejection: '+data['message']))
+    context.add_init_script("window.__smakoDocument=crypto.randomUUID();window.addEventListener('smako:plan-transport',e=>{window.__smakoTrace({...e.detail,document_id:window.__smakoDocument}).catch(()=>{});});")
+    context.add_init_script("window.addEventListener('unhandledrejection',e=>{window.__smakoUnhandled({message:String(e.reason?.message||e.reason)}).catch(()=>{});});")
     def inject(route):
         req=route.request;path=urlsplit(req.url).path
         scenario=fault['scenario']
-        if scenario=='lost-start' and req.method=='POST' and path=='/api/plans' and not fault.get('accepted'):
+        if scenario in {'lost-start','lost-start-race'} and req.method=='POST' and path=='/api/plans' and not fault.get('accepted'):
             accepted=route.fetch(timeout=30000);body=accepted.json();assert accepted.status==202
             fault['accepted']=body['status_url']
             injected.append({'kind':'lost_accepted_start_response','job_url':body['status_url'],'request_id':req.headers.get('x-request-id'),'at_utc':datetime.now(UTC).isoformat()})
             observed.append(SimpleNamespace(url=req.url,status=accepted.status,headers=accepted.headers,request=SimpleNamespace(method=req.method,post_data_json=req.post_data_json,timing=req.timing),captured_body=body,body_error=None))
             route.abort('connectionreset');return
+        if scenario=='lost-start-race' and path.startswith('/api/plan-job-requests/') and not fault.get('discovery_miss'):
+            real=route.fetch(timeout=30000);body=real.json();assert real.status==202 and body['status_url']==fault['accepted']
+            fault['discovery_miss']=True
+            injected.append({'kind':'simulated_unconfirmed_start_discovery_404','url':req.url,'request_id':req.headers.get('x-request-id'),'backend_status':real.status,'real_job_url':body['status_url'],'at_utc':datetime.now(UTC).isoformat()})
+            route.fulfill(status=404,json={'detail':'Startförsöket har ännu inte kunnat återfinnas i det isolerade provet.'});return
         if path.startswith('/api/plan-jobs/') and fault['enabled']:
+            if scenario=='invalid-body' and not fault.get('invalid_body'):
+                real=route.fetch(timeout=30000);assert real.status in {202,201}
+                fault['invalid_body']=True
+                injected.append({'kind':'HTML_instead_of_status_JSON','url':req.url,'request_id':req.headers.get('x-request-id'),'backend_status':real.status,'at_utc':datetime.now(UTC).isoformat()})
+                route.fulfill(status=200,body='<html>Invalid isolated status response</html>',content_type='text/html');return
             if scenario in {'reset','long-outage'} and (not fault['aborts'] or scenario=='long-outage'):
                 fault['aborts']+=1;injected.append({'kind':'connectionreset','url':req.url,'request_id':req.headers.get('x-request-id'),'at_utc':datetime.now(UTC).isoformat()});route.abort('connectionreset');return
             if scenario in {'delayed-reload','timeout'} and not fault.get('held_at'):
@@ -268,7 +310,10 @@ def run_case(browser, engine, mobile, personal, args):
                 fault['held_at']=time.monotonic();fault['held']=[route]
                 injected.append({'kind':'delayed_real_status_response','url':req.url,'request_id':req.headers.get('x-request-id'),'backend_status':accepted.status,'at_utc':datetime.now(UTC).isoformat()});return
         route.continue_()
-    if args.transport_fault!='none':context.route('**/api/**',inject)
+    if args.transport_fault in {'lost-start','lost-start-race'}:
+        context.route('**/api/plans',inject)
+        if args.transport_fault=='lost-start-race':context.route('**/api/plan-job-requests/*',inject)
+    elif args.transport_fault in {'reset','timeout','delayed-reload','long-outage','invalid-body'}:context.route('**/api/plan-jobs/*',inject)
     def record_page_error(error):
         errors.append(str(error))
         error_events.append({"message": str(error), "stack": getattr(error, "stack", None),
@@ -283,7 +328,8 @@ def run_case(browser, engine, mobile, personal, args):
     page.on("pageerror", record_page_error)
     page.on("framenavigated", lambda frame: navigation_events.append(
         {"at_utc": datetime.now(UTC).isoformat(), "url": frame.url}) if frame.parent_frame is None else None)
-    page.on("requestfailed", lambda request: failures.append({"url": request.url, "method": request.method, "failure": request.failure}))
+    page.on("requestfailed", lambda request: failures.append({"url": request.url, "method": request.method, "failure": request.failure,
+        "request_id": request.headers.get('x-request-id'), "observed_utc": datetime.now(UTC).isoformat()}))
     try:
         page.goto(args.base + ("/personal" if personal else "/"), wait_until="domcontentloaded")
         if personal:
@@ -359,6 +405,8 @@ def run_case(browser, engine, mobile, personal, args):
         dump(target / "generated.json", envelope)
         assert generation["status"] < 400, envelope
         assert generation["expensive_post_count"] == 1
+        if args.transport_fault in {'lost-start','lost-start-race','reset','timeout','delayed-reload','long-outage','invalid-body'}:
+            assert injected, "Requested controlled fault was not injected"
         assert generation["all_status_gets_under_10_seconds"]
         if args.require_long_job:
             assert generation["longer_than_minute"], "Generation was faster than one minute; long-job condition not exercised"
@@ -501,7 +549,7 @@ def run_case(browser, engine, mobile, personal, args):
         report["outcome"] = "PASS"
     except Exception as error:  # noqa: BLE001 - retain first-stop evidence even for unexpected browser errors
         report["outcome"] = "FAIL"
-        report["first_stop"] = str(error)
+        report["first_stop"] = safe_error(error)
         try:
             report["failure_visible_text"] = page.locator("body").inner_text(timeout=3000)
             report["failure_form"] = page.locator("#personal-form input, #personal-form select, #plan-form input, #plan-form select").evaluate_all(
@@ -518,8 +566,8 @@ def run_case(browser, engine, mobile, personal, args):
                     and values.get("recipe-max-ingredients") == str(args.max_ingredients)
                     and {row["value"] for row in report["failure_form"] if row["id"].startswith("cuisine-") and row["checked"]} == set(args.cuisines))))
             page.screenshot(path=str(target / "failure.png"), full_page=True, timeout=10000)
-        except BrowserTimeout:
-            pass
+        except BrowserError as capture_error:
+            report['failure_capture_error'] = str(capture_error)
     finally:
         report['transport_fault']=args.transport_fault
         report['injected_events']=injected
@@ -530,6 +578,7 @@ def run_case(browser, engine, mobile, personal, args):
         report["navigation_events"] = navigation_events
         report["network_failures"] = failures
         report["finished_utc"] = datetime.now(UTC).isoformat()
+        report['saved_api_reads'] = context.smako_api_reads
         dump(target / "report.json", report)
         print(json.dumps({"case": case, "outcome": report["outcome"], "first_stop": (report.get("first_stop") or "")[:500],
                           "seconds": report.get("generation", {}).get("seconds"), "report": str(target / "report.json")}), flush=True)
@@ -569,7 +618,7 @@ def main():
     parser.add_argument("--exclusions", nargs="*", default=[])
     parser.add_argument("--timeout", type=int, default=900)
     parser.add_argument('--expected-transport-sha')
-    parser.add_argument('--transport-fault',choices=['none','reset','lost-start','delayed-reload','timeout','away','hidden','long-outage'],default='none')
+    parser.add_argument('--transport-fault',choices=['none','reset','lost-start','lost-start-race','delayed-reload','timeout','away','hidden','long-outage','invalid-body'],default='none')
     parser.add_argument("--reload-after", type=float, default=3)
     parser.add_argument("--offline-seconds", type=float, default=0, help="Temporarily disable the browser network during the pending job, at most 30 seconds")
     parser.add_argument("--require-long-job", action="store_true")

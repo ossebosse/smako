@@ -319,20 +319,22 @@
   function clearPrivateDrafts(){for(const key of ["smako.planJob.public","smako.planJob.personal","smako.recipeChoices.public","smako.recipeChoices.personal","smako.personal.requestDraft"])storage.remove(key);}
   function pendingJob(scope) {
     const saved=storage.get(jobKey(scope));
-    return validJobUrl(saved?.url)||/^[a-f0-9-]{32,36}$/.test(saved?.requestId||"")?saved:null;
+    if(validJobUrl(saved?.url))return saved;
+    return /^[a-f0-9-]{32,36}$/.test(saved?.requestId||"")?{...saved,url:null}:null;
   }
   function forgetJob(scope) {storage.remove(jobKey(scope));}
   // One reader per document. Navigation aborts this reader, never the server job.
+  const documentId=crypto.randomUUID();
   let reader=null, generation=0, leaving=false;
   function trace(flow,event,extra={}) {
     window.dispatchEvent(new CustomEvent("smako:plan-transport",{detail:{
-      event,generation:flow?.generation??generation,request_id:flow?.requestId,
+      event,document_id:documentId,generation:flow?.generation??generation,request_id:flow?.requestId,
       job:flow?.url?.split("/").pop(),at:performance.now(),...extra}}));
   }
   function lifecycle(reason) { const error=new DOMException("Statusläsningen avbröts på denna sida.","AbortError");error.lifecycle=reason;return error; }
   function stopReader(reason) {if(reader){trace(reader,"abort",{reason});reader.controller.abort(lifecycle(reason));}}
-  window.addEventListener("pagehide",()=>{leaving=true;stopReader("pagehide");});
-  window.addEventListener("pageshow",()=>{leaving=false;trace(null,"pageshow");});
+  window.addEventListener("pagehide",event=>{trace(reader,"pagehide",{persisted:event.persisted});leaving=true;stopReader("pagehide");});
+  window.addEventListener("pageshow",event=>{leaving=false;trace(null,"pageshow",{persisted:event.persisted});});
   document.addEventListener("visibilitychange",()=>trace(reader,"visibility",{hidden:document.hidden}));
   function check(flow) {flow.controller.signal.throwIfAborted();if(reader!==flow||leaving)throw lifecycle("superseded");}
   function delay(ms,flow) {
@@ -343,18 +345,20 @@
       signal.addEventListener("abort",abort,{once:true});if(signal.aborted)abort();
     });
   }
-  function reconnectError() {const e=new Error("Kontakten med servern är tillfälligt avbruten. Återuppta statuskontrollen för samma meny; ingen ny beräkning startas.");e.reconnect=true;return e;}
+  function reconnectError() {const e=new Error("Statuskontrollen kan inte nå servern just nu. Återuppta statuskontrollen för samma meny; ingen ny beräkning startas.");e.reconnect=true;return e;}
+  function schemaError(message) {const error=new Error(message);error.schema=true;return error;}
   async function readResponse(response,flow) {
     const type=response.headers.get("Content-Type")||"";
-    if(!/application\/(?:[a-z0-9.-]+\+)?json(?:;|$)/i.test(type))throw new Error("Servern skickade en oväntad svarstyp vid statuskontrollen.");
-    let data;try{data=await response.clone().json();}catch(error){check(flow);if(error instanceof SyntaxError)throw new Error("Servern skickade ogiltig JSON vid statuskontrollen.");if(error instanceof TypeError)error.transport=true;throw error;}
+    if(!/application\/(?:[a-z0-9.-]+\+)?json(?:;|$)/i.test(type))throw schemaError("Servern skickade en oväntad svarstyp vid statuskontrollen.");
+    let data;try{data=await response.clone().json();}catch(error){check(flow);if(error instanceof SyntaxError)throw schemaError("Servern skickade ogiltig JSON vid statuskontrollen.");if(error instanceof TypeError)error.transport=true;throw error;}
     check(flow);
-    if(!data||typeof data!=="object"||Array.isArray(data))throw new Error("Servern skickade ett ogiltigt statusformat.");
+    if(!data||typeof data!=="object"||Array.isArray(data))throw schemaError("Servern skickade ett ogiltigt statusformat.");
     if(response.status===202){
-      if(data.status!=="pending"||!validJobUrl(data.status_url)||(flow.url&&flow.url!==data.status_url))throw new Error("Servern skickade ett ogiltigt planeringssvar.");
+      if(data.status!=="pending"||!validJobUrl(data.status_url)||(flow.url&&flow.url!==data.status_url))throw schemaError("Servern skickade ett ogiltigt planeringssvar.");
     }else if(response.ok){
       const saved=data.saved||data;
-      if(!saved.plan_id||!Number.isInteger(saved.revision)||!saved.plan||!Array.isArray(saved.plan.recipes)||!saved.plan.optimized_basket)throw new Error("Servern skickade ett ogiltigt planeringsresultat.");
+      if(!saved.plan_id||!Number.isInteger(saved.revision)||!saved.request||!saved.plan||!Array.isArray(saved.plan.recipes)||!Array.isArray(saved.plan.optimized_basket?.stores)
+          ||(saved.request.personal&&(!Array.isArray(saved.plan.personal?.slots)||!saved.plan.personal?.checks)))throw schemaError("Servern skickade ett ogiltigt planeringsresultat.");
     }
     return data;
   }
@@ -369,9 +373,9 @@
       try{
         trace(flow,"start",{reference,method:options.method||"GET"});
         let response;try{response=await fetch(url,{...options,headers:{Accept:"application/json",...options.headers,"X-Request-ID":options.method==="POST"?flow.requestId:reference},cache:"no-store",signal:controller.signal});}catch(error){error.transport=true;throw error;}
+        trace(flow,"response",{reference,status:response.status,type:response.headers.get("Content-Type"),response_type:response.type,server_request:response.headers.get("X-Request-ID")});
         // Read body under the same timeout; a response with a stalled body is not success.
         const data=await readResponse(response,flow);
-        trace(flow,"response",{reference,status:response.status,type:response.headers.get("Content-Type"),server_request:response.headers.get("X-Request-ID")});
         const unconfirmed=response.status===404&&!flow.url&&url.startsWith("/api/plan-job-requests/");
         if(unconfirmed&&Date.now()-flow.startedAt<30000){
           // Reload can race server acceptance of the original POST. This is
@@ -384,7 +388,7 @@
         if(flow.controller.signal.aborted)trace(flow,"request-abort",{reference,reason:flow.controller.signal.reason?.lifecycle||"caller"});
         check(flow);
         // Only fetch transport rejection and our own request timeout are retried.
-        if(!error.transport&&!controller.signal.aborted)throw error;lost=true;
+        if(!error.transport&&!controller.signal.aborted){trace(flow,"response-error",{reference,category:error.schema?"schema":"programming"});throw error;}lost=true;
         trace(flow,"transport-error",{reference,category:controller.signal.aborted?"timeout":"network"});
       }finally{clearTimeout(timeout);signal.removeEventListener("abort",abort);}
       flow.failures+=1;flow.disconnectedAt??=Date.now();
