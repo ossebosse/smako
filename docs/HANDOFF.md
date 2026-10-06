@@ -1,4 +1,4 @@
-# 2026-10-06: Statuskandidaten aktiverad; måltidsbibliotek i separat utveckling
+# 2026-10-06: Statuskandidaten aktiverad; måltidsbibliotek färdig kandidat
 
 Etapp A är genomförd med användarens uttryckliga app-only-godkännande:
 beta.smako.nu kör dd12-image `c8362751b13a`, BUILD_ID
@@ -15,9 +15,36 @@ testets 10 s-gräns, trots färdig meny utan sidfel. Servermetriken för samma
 anrop är 159,367 ms; exakt fördröjningsorsak är fortsatt obelagd. Omkörning
 är inte en appfix. Kontoinloggning är avstängd i faktisk drift; proven gäller gäster.
 
-Etapp B utvecklas på `feature/meal-library-20261006`, ovanpå eaf9dfd och dd12.
-Den koden är inte aktiverad. B:s receptformat, måltidsval och beständiga
-förberedelseartefakter befinner sig ännu i implementation/isolering.
+Etapp B är lokalt färdig på `feature/meal-library-20261006`, ovanpå eaf9dfd och dd12.
+Låst implementation P2 `e2e5d248ee44`, slutlig runtime P3
+`fd2cfda5490ac93295e6a2cef6b6b8408497f89e`, image
+`sha256:b8541e165a2075c4c5657e1296c83e276f3aa8f59607292e32b653b60a7655fb`.
+Senare lokala dokumentationscommits ändrar inte runtime. Den koden är inte
+aktiverad. Receptformat, importerare, tre måltidstyper, gemensam veckokorg
+och beständiga förberedelseartefakter är implementerade. 24 pilotrecept och
+ett separat sexreceptspaket; ny data-only-import efter kodlåsning med
+oförändrade runtimefiler. Två felaktiga versioner från det första
+sexreceptsförsöket är återkallade, historiska GET bevaras.
+
+Slutimagen har passerat strikta Chromium/WebKit-mobilflöden, gamla 15/20-
+profiler, privat skafferi, ägarisolering, omstart och flagga av. 267 isolerade
+historiska revisioner läses oförändrat. Hela P0–P3-matrisen med tre kalla
+och tre varma nyberäkningar är färdig. Main 741,15 kr oförändrat;
+nya fria enkla middagar 328,16→262,28 kr, kombinerat 495,44→418,17 kr.
+De senare är olika receptval, inte billigare samma mat. Inga nya produktfakta.
+Huvudklick utan omladdning 63,81/72,30 s: 60-sekundersmålet återstår; kall start är långsammare
+än dd12, minnestoppen lägre. [Slutrapport](releases/meal-library-20261006/RESULTS.md).
+Alla 30 slutkvalificeringar och 1×/2×/5×-skal-/invalideringsprov passerade.
+5× huvudfall tog 919,89 s, topp 1,62 GiB: snabb storbibliotekssökning återstår.
+Data-only-målet och återanvändning är verifierade; kandidaten är färdig för
+separat aktiveringsbedömning, inte installerad. Fjorton strikta mobilprov; enkla
+fem middagar för två tog 38,53 s via ordinarie knapp. Inga nya fakta/priser.
+
+Beta är separat degraderad: planlagringen fungerar efter uttryckligt godkänd
+arkivering av endast etappens nya byggmappar; `/health` 200 men `/ready` 503
+för två för gamla Willys-underlag. Rätt dd12-image/JS och flagga på har
+återverifierats. Senaste driftkontroll 20:36:31 UTC: bara 172 MB ledigt på rotvolymen.
+Ingen ny insamling, ytterligare städning eller gränsändring har gjorts.
 Ingen push, relä-, scheduler-, collector-, proxy- eller säkerhetsändring.
 
 # 2026-10-06: Statusflöde och återanslutning – färdig lokal appkandidat

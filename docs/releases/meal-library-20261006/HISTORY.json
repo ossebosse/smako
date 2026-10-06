@@ -170,6 +170,59 @@
           "sha256": "3d478290251a8b253ad8e649fd561baa7bcb774a5f1aa73fb25067333d5e3d00"
         }
       ]
+    },
+    {
+      "category": "supplemental-test-contract-scope",
+      "assessment": "First price-only probe did not demonstrate changed checkout, and first supplemental campaign candidate failed independent semantic audit. First assertions/raw output retained. Retried diagnostic reports every rejected candidate and selects an audit-valid actual campaign; no app code or approval rules changed.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\contract-supplement-raw.log",
+          "bytes": 9887,
+          "sha256": "ef95e550aa7ed6f3a2fc4929ef533ec06c11a2892a5bd00c03c095b1072b721b"
+        },
+        {
+          "path": ".local\\meal-library-20261006\\final-remote\\ram\\results\\incremental-contract-supplement.json",
+          "bytes": 208165,
+          "sha256": "dccb95b2e5977fa4c7b6951da69398dc169639e16450d4ff43d76dc046db070f"
+        },
+        {
+          "path": ".local\\meal-library-20261006\\contract-supplement-retry-raw.log",
+          "bytes": 423,
+          "sha256": "3d87563159bd3326120f3e12961016a4431a9f119d1fb477e63276a2e0add99f"
+        }
+      ]
+    },
+    {
+      "category": "isolated-launch-readiness-missing",
+      "assessment": "Additional Chromium trial navigated at 20:29:14 UTC, about two seconds after new isolated container start, without awaiting ready. Root request ERR_EMPTY_RESPONSE, followed by test init crypto.randomUUID error on chrome-error:// page; no plan POST/job. Launcher loads artifact before starting Uvicorn. First captured successful root access 20:29:46 UTC. Exact transport-reset point not independently logged. Raw strict FAIL retained; readiness checked before separate Chromium trial, no app/security/error-filter change.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\browser\\final5-main-no-navigation\\chromium-mobile-public\\report.json",
+          "bytes": 1915,
+          "sha256": "541c6d447251328e4b143a797b423afb73bad77b899bb4c9cd25a80190052f30"
+        },
+        {
+          "path": ".local\\meal-library-20261006\\main-no-navigation-server-raw.log",
+          "bytes": 7563,
+          "sha256": "59ed65ef2076db06c3b05a2b0c0835deab922d3269b308a6973d21344534d659"
+        }
+      ]
+    },
+    {
+      "category": "package-path-audit-tool",
+      "assessment": "First supplemental filename audit classified tracked deploy/.env.production.example as secret storage. Inspected template and corrected only suffix policy; package/runtime unchanged. No private DB/local or real env file found.",
+      "files": [
+        {
+          "path": ".local\\meal-library-20261006\\final_delivery_checks.py",
+          "bytes": 1046,
+          "sha256": "ec3e974f39711aa1d11c398d8b51f1e679d4d6d42f006475ffa88ceb2493f105"
+        },
+        {
+          "path": ".local\\meal-library-20261006\\final_delivery_checks_retry.py",
+          "bytes": 1052,
+          "sha256": "3a7c175446ef70a12d53b07f05a7cacffae7bb37804a80eb210a5300f7eb01f4"
+        }
+      ]
     }
   ]
 }

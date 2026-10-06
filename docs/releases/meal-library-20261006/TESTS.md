@@ -27,9 +27,9 @@ Meningsfulla före/efter:
 
 ## Paketerade verkliga användarflöden
 
-Elva positiva mobilflöden på slutimagen: tre riktade navigations-/återanslutnings-
+Fjorton positiva mobilflöden på slutimagen: tre riktade navigations-/återanslutnings-
 resor per webbläsare, ordinarie huvudklick i båda, sexreceptspaketets fasta
-sparnings-/renderingsdiagnostik i båda samt äldre menyflöde med flagga av.
+sparnings-/renderingsdiagnostik i båda samt äldre menyflöde med flagga av och fem enkla middagar för två via den ordinarie knappen.
 [Full evidens](BROWSER-EVIDENCE.json) bevarar tidsstämplar, jobbreferenser,
 laddade JavaScript-hashar, DOM, statusanrop, injektioner och råa avbrott.
 Varje återhämtningsgeneration binds till exakt en instrumenterad tung
@@ -79,5 +79,14 @@ Dd12:s tidigare status-, ägar-, idempotens- och admissionbevis återanvänds ba
 för de oförändrade delarna; de räknas inte som nykörda i B. Historiska råa
 FAIL för WebKit, socketfel, två innehållsfel, sökningens OOM och instrumenterat
 SIG139 bevaras. Nyare PASS visar provad robusthet, inte att intermittenta fel
-omöjligen kan återkomma. Slutliga individuella kvalificeringar och tids-/skal-
-prov redovisas separat när respektive råkörning är färdig.
+omöjligen kan återkomma. Slutliga individuella kvalificeringar, tidsmatris och 1×/2×/5×-skalprov är färdiga; råfilerna och begränsningarna redovisas separat.
+
+## Slutlig innehålls- och uppdateringsprövning
+
+Alla 24 + 6 recept kvalificerade i slutimagen, med full korg, numerisk näringsprövning och oberoende audit. Inga obligatoriska 30/40-g-mål i individproven. [Individuella utfall](QUALIFICATION.md). Hela P0–P3-tidsmatrisen är färdig, tre kalla och tre varma nyberäkningar per ordinarie fall, separat artefaktläsning och CPU-förberedelse. [Prestanda](PERFORMANCE.md), [skalning](SCALE.md).
+
+Kontrollerad invalidering prövade oförändrat underlag, en ändrad näringsfakta, ett först saknat och sedan återinfört verkligt kvarg-SKU, ändrat pris, kampanjdatum och ny receptversion. Identiskt källunderlag gav en träff utan omskrivning; ny receptversion en ny strukturrad och 181 återanvända. Ändrad källsignatur återbyggdes konservativt. [Operander och faktiska korgar](INCREMENTAL.json). Injekterade uppgifter är endast testoperander, inte nya publicerade fakta. Ett separat fast tvåmåltidsprov använder 150 + 150 g av samma yoghurt och köper en 1 000-g-förpackning; inga besparingar tillskrivs det provet.
+
+Det första prisändringsprovet ändrade endast ordinarie pris, medan lägre befintligt effektivt pris fortfarande var tillämpligt. Det gav ingen betalningsförändring. Ett kompletterande produktlåst prov ändrar hela det kontrollerade prisavtalet och visar 29,40→30,40 kr, oförändrad näring och godkänd audit. En riktig katalogkampanjs korg ger 39,00→56,70 kr dagen efter utgång. Fyra kandidater med otillräcklig semantisk kvalificering stoppas av samma audit och redovisas; första försökets assertion är bevarad. Detta är testverktygsomfattning, ingen ny appfix eller försvagat godkännande.
+
+Två slutliga huvudklick utan omladdning under generering passerade: Chromium 63,812 s och WebKit 72,297 s. Samma fulla recept, korg, näring, audit och övriga icke-diagnostiska kontroller som tidigare huvudprov; en tung beräkning var. Ett första extra Chromium-försök startade utan readiness-grind och fick tomt startsidesvar, sedan testinitieringsfel på webbläsarens felsida. Rått FAIL bevaras, inga fellyssnare eller appregler ändrades. Föregående 63,875/63,281 s var prov med avsiktlig omladdning, inte ostörda huvudklick.

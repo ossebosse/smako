@@ -2,6 +2,4445 @@
   "price_basis": "enriched historical replay, not current quote",
   "menus": [
     {
+      "case": "simple",
+      "selection": "free ordinary button selection",
+      "request": {
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "max_minutes": null,
+          "adaptation": "approved",
+          "min_protein_g": null,
+          "allow_fish": true
+        },
+        "recipe_diversity_overrides": {},
+        "allow_nutrition_estimates": true,
+        "purchase_planning_mode": "estimated",
+        "postal_code": "22350",
+        "recipes": 5,
+        "personal": {
+          "profile": {
+            "likes": [],
+            "dislikes": [],
+            "exclusions": [],
+            "allergies": []
+          },
+          "meals": [
+            {
+              "meal_type": "dinner",
+              "count": 5,
+              "servings": 2,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": null,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false,
+              "recipe_choices": {
+                "dinner_level": "simple",
+                "min_ingredients": 4,
+                "max_ingredients": 8,
+                "max_active_minutes": null,
+                "max_total_minutes": 30,
+                "max_waiting_minutes": null
+              }
+            },
+            {
+              "meal_type": "breakfast",
+              "count": 0,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": null,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            },
+            {
+              "meal_type": "snack",
+              "count": 0,
+              "servings": 1,
+              "diet": "mixed",
+              "profile": {
+                "likes": [],
+                "dislikes": [],
+                "exclusions": [],
+                "allergies": []
+              },
+              "distribution": {},
+              "limits": {
+                "min_weight_g": null,
+                "max_weight_g": null,
+                "min_protein_g": null,
+                "max_protein_g": null,
+                "min_carbs_g": null,
+                "max_carbs_g": null,
+                "min_fat_g": null,
+                "max_fat_g": null,
+                "max_kcal": null
+              },
+              "organic_animals": false
+            }
+          ],
+          "extras": [],
+          "slots": null,
+          "pantry_revision": 0,
+          "organic_percent": 0.0,
+          "organic_animals": false,
+          "allow_nutrition_estimates": true,
+          "surplus_mode": "minimize",
+          "product_locks": {}
+        },
+        "servings": 2,
+        "max_stores": 3,
+        "use_member_prices": true,
+        "memberships": {
+          "coop": true,
+          "hemkop": true,
+          "ica": true,
+          "lidl": true,
+          "willys": true
+        },
+        "membership_programs": [
+          "COOP_MEMBER",
+          "HEMKOP_MEMBER",
+          "ICA_STAMMIS",
+          "LIDL_PLUS",
+          "WILLYS_PLUS"
+        ],
+        "optimization_iterations": 1,
+        "strategy": "optimized",
+        "candidate_recipe_count": 80,
+        "candidate_search_limit": null,
+        "beam_width": 30,
+        "varied_budget_percent": 25.0,
+        "diversity_mode": "balanced",
+        "diet_preference": "mixed",
+        "availability_mode": "normal",
+        "avoid_ingredients": [],
+        "max_same_primary_ingredient_meals": 2,
+        "max_same_recipe_family": 2,
+        "max_same_carbohydrate_meals": 3,
+        "max_pairwise_recipe_similarity": 0.7,
+        "max_same_cooking_method_meals": null,
+        "max_same_dish_form_meals": null,
+        "max_pairwise_culinary_similarity": null,
+        "min_kcal_per_serving": 450.0,
+        "max_kcal_per_serving": 900.0,
+        "min_protein_g_per_serving": 18.0,
+        "min_vegetable_g_per_serving": 100.0,
+        "debug": false
+      },
+      "plan_id": "9b6ff26a-9b53-40a5-a3aa-fedc901186e2",
+      "revision": 1,
+      "runtime": "fd2cfda5490ac93295e6a2cef6b6b8408497f89e",
+      "paid": 262.28,
+      "used_cost": 129.88,
+      "portions": 10,
+      "recipes": [
+        {
+          "name": "Len lins- och morotssoppa",
+          "servings": 2,
+          "ingredients": [
+            {
+              "name": "linser",
+              "quantity": 160.0,
+              "unit": "g",
+              "canonical_name": "linser",
+              "form": "dry",
+              "component": "main",
+              "required": true,
+              "role": "primary",
+              "quantity_min": 160.0,
+              "quantity_max": 160.0,
+              "quantity_step": 160.0,
+              "product_requirements": [
+                "red_split"
+              ]
+            },
+            {
+              "name": "morot",
+              "quantity": 240.0,
+              "unit": "g",
+              "canonical_name": "morot",
+              "form": "raw_edible",
+              "component": "main",
+              "required": true,
+              "role": "vegetable",
+              "quantity_min": 240.0,
+              "quantity_max": 240.0,
+              "quantity_step": 240.0
+            },
+            {
+              "name": "krossade tomater",
+              "quantity": 400.0,
+              "unit": "g",
+              "canonical_name": "krossade tomater",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "sauce",
+              "quantity_min": 400.0,
+              "quantity_max": 400.0,
+              "quantity_step": 400.0
+            },
+            {
+              "name": "gul lök",
+              "quantity": 100.0,
+              "unit": "g",
+              "canonical_name": "gul lök",
+              "form": "raw_edible",
+              "component": "main",
+              "required": true,
+              "role": "flavour",
+              "quantity_min": 100.0,
+              "quantity_max": 100.0,
+              "quantity_step": 100.0
+            },
+            {
+              "name": "rapsolja",
+              "quantity": 10.0,
+              "unit": "ml",
+              "canonical_name": "rapsolja",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "cooking",
+              "quantity_min": 10.0,
+              "quantity_max": 10.0,
+              "quantity_step": 10.0
+            },
+            {
+              "name": "spiskummin",
+              "quantity": 2.0,
+              "unit": "g",
+              "canonical_name": "spiskummin",
+              "form": "dry",
+              "component": "main",
+              "required": true,
+              "role": "flavour",
+              "quantity_min": 2.0,
+              "quantity_max": 2.0,
+              "quantity_step": 2.0
+            }
+          ],
+          "instructions": [
+            "Väg upp listans ätbara mängder. Hacka löken och skär moroten i tunna skivor. Fräs varsamt i den uppmätta oljan i en kastrull. Tillsätt torra röda linser, tomater, spiskummin och dricksvatten så att allt täcks. Sjud tills linser och morot är helt mjuka. Mixa till soppa och behåll all vätska; späd med vatten om det behövs. Fördela all angiven mat jämnt mellan portionerna."
+          ],
+          "preparation": {
+            "version": "smako-authored-input-v2",
+            "origin": "smako_recipe_design",
+            "parent_sha256": "7d8f12ae8f263c6c7eb6b7f546d8a7991e1e35c0d1a49ca5453dac3a0a5d900e",
+            "family": "soppa",
+            "input_forms": {
+              "linser": "dry",
+              "morot": "raw_edible",
+              "krossade tomater": "as_sold",
+              "gul lök": "raw_edible",
+              "rapsolja": "as_sold",
+              "spiskummin": "dry"
+            }
+          },
+          "design": {
+            "base_id": "smako-dinner-lentil-carrot-soup",
+            "version": "1.2.0",
+            "variant_id": "base",
+            "cuisines": [],
+            "family": "soppa",
+            "primary_ingredient": "linser",
+            "method": "pot",
+            "side": "grönsaker",
+            "flavor_profile": [
+              "mild"
+            ],
+            "components": [
+              {
+                "id": "main",
+                "name": "Hela måltiden",
+                "amounts": [
+                  {
+                    "ingredient_key": "linser|dry",
+                    "quantity": 160.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "linser"
+                  },
+                  {
+                    "ingredient_key": "morot|raw_edible",
+                    "quantity": 240.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "morot"
+                  },
+                  {
+                    "ingredient_key": "krossade tomater|as_sold",
+                    "quantity": 400.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "krossade tomater"
+                  },
+                  {
+                    "ingredient_key": "gul lök|raw_edible",
+                    "quantity": 100.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "gul lök"
+                  },
+                  {
+                    "ingredient_key": "rapsolja|as_sold",
+                    "quantity": 10.0,
+                    "unit": "ml",
+                    "note": "",
+                    "name": "rapsolja"
+                  },
+                  {
+                    "ingredient_key": "spiskummin|dry",
+                    "quantity": 2.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "spiskummin"
+                  }
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "id": "prepare",
+                "text": "Väg upp listans ätbara mängder. Hacka löken och skär moroten i tunna skivor. Fräs varsamt i den uppmätta oljan i en kastrull. Tillsätt torra röda linser, tomater, spiskummin och dricksvatten så att allt täcks. Sjud tills linser och morot är helt mjuka. Mixa till soppa och behåll all vätska; späd med vatten om det behövs. Fördela all angiven mat jämnt mellan portionerna.",
+                "ingredient_keys": [
+                  "linser|dry",
+                  "morot|raw_edible",
+                  "krossade tomater|as_sold",
+                  "gul lök|raw_edible",
+                  "rapsolja|as_sold",
+                  "spiskummin|dry"
+                ],
+                "depends_on": [],
+                "duration_minutes": 25,
+                "parallel_group": null
+              }
+            ],
+            "estimated_minutes": 25,
+            "equipment": [
+              "kastrull",
+              "kniv",
+              "stavmixer"
+            ],
+            "vegetarian": true,
+            "fish": false,
+            "ingredient_count": 6,
+            "provenance": {
+              "authoring": "model_assisted_original",
+              "content_review": "reviewed",
+              "machine_validation": "passed",
+              "cooking_test": "not_cooked",
+              "reviewed_at": "2026-10-06",
+              "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Författade tidsuppskattningar. Ingen laboratorienäring eller veckohållbarhet påstås. Revision 1.2 kortar instruktionernas tekniska text; befintliga mängder är oförändrade. Två närliggande utkast har ersatts av nya grundrätter, inte nya titlar."
+            },
+            "content_sha256": "7d8f12ae8f263c6c7eb6b7f546d8a7991e1e35c0d1a49ca5453dac3a0a5d900e",
+            "content_source": {
+              "pack_id": "pilot-20261006",
+              "proposal_id": "smako-dinner-lentil-carrot-soup",
+              "sha256": "564d7362e55cd1ef7467b61bae10e33f189966f7b4ff66d4818779d14afd7935",
+              "priority": 1,
+              "timing_basis": "authored_estimate_coarse_dependencies",
+              "active_minutes": 12,
+              "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+              "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+              "safety_sources": [],
+              "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+            },
+            "dinner_level": "simple",
+            "active_minutes": 12,
+            "total_minutes": 25
+          }
+        },
+        {
+          "name": "Lins- och spenatgryta med ris",
+          "servings": 2,
+          "ingredients": [
+            {
+              "name": "linser",
+              "quantity": 120.0,
+              "unit": "g",
+              "canonical_name": "linser",
+              "form": "dry",
+              "component": "main",
+              "required": true,
+              "role": "primary",
+              "quantity_min": 120.0,
+              "quantity_max": 120.0,
+              "quantity_step": 120.0,
+              "product_requirements": [
+                "red_split"
+              ]
+            },
+            {
+              "name": "ris",
+              "quantity": 120.0,
+              "unit": "g",
+              "canonical_name": "ris",
+              "form": "dry",
+              "component": "main",
+              "required": true,
+              "role": "side",
+              "quantity_min": 120.0,
+              "quantity_max": 120.0,
+              "quantity_step": 120.0
+            },
+            {
+              "name": "spenat",
+              "quantity": 200.0,
+              "unit": "g",
+              "canonical_name": "spenat",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "vegetable",
+              "quantity_min": 200.0,
+              "quantity_max": 200.0,
+              "quantity_step": 200.0
+            },
+            {
+              "name": "krossade tomater",
+              "quantity": 400.0,
+              "unit": "g",
+              "canonical_name": "krossade tomater",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "vegetable",
+              "quantity_min": 400.0,
+              "quantity_max": 400.0,
+              "quantity_step": 400.0
+            },
+            {
+              "name": "rapsolja",
+              "quantity": 10.0,
+              "unit": "ml",
+              "canonical_name": "rapsolja",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "cooking",
+              "quantity_min": 10.0,
+              "quantity_max": 10.0,
+              "quantity_step": 10.0
+            }
+          ],
+          "instructions": [
+            "Väg linser och ris torra och spenat samt krossade tomater enligt listan. Häll all uppmätt olja och tomaterna i en kastrull. Rör ned linser och ris. Tillsätt dricksvatten enligt risets och linsernas absorptionsanvisningar på förpackningarna.",
+            "Sjud under lock ungefär 18 minuter. Rör om ibland och tillsätt lite dricksvatten om det börjar fastna. Lägg i spenaten mot slutet och värm tills den är genomvarm och både ris och linser mjuka. Häll inte bort kokvätska.",
+            "Skrapa ned all gryta i två lika stora portioner och servera varmt."
+          ],
+          "preparation": {
+            "version": "smako-authored-input-v2",
+            "origin": "smako_recipe_design",
+            "parent_sha256": "3c0a1d409b5a3934042cff5e04fff800bcfbf6f4948ec14198feca5b1d4846ef",
+            "family": "gryta",
+            "input_forms": {
+              "linser": "dry",
+              "ris": "dry",
+              "spenat": "as_sold",
+              "krossade tomater": "as_sold",
+              "rapsolja": "as_sold"
+            }
+          },
+          "design": {
+            "base_id": "smako-dinner-lentil-spinach-rice-pot",
+            "version": "1.0.0",
+            "variant_id": "base",
+            "cuisines": [],
+            "family": "gryta",
+            "primary_ingredient": "linser",
+            "method": "pot",
+            "side": "grönsaker",
+            "flavor_profile": [
+              "mild"
+            ],
+            "components": [
+              {
+                "id": "main",
+                "name": "Hela måltiden",
+                "amounts": [
+                  {
+                    "ingredient_key": "linser|dry",
+                    "quantity": 120.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "linser"
+                  },
+                  {
+                    "ingredient_key": "ris|dry",
+                    "quantity": 120.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "ris"
+                  },
+                  {
+                    "ingredient_key": "spenat|as_sold",
+                    "quantity": 200.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "spenat"
+                  },
+                  {
+                    "ingredient_key": "krossade tomater|as_sold",
+                    "quantity": 400.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "krossade tomater"
+                  },
+                  {
+                    "ingredient_key": "rapsolja|as_sold",
+                    "quantity": 10.0,
+                    "unit": "ml",
+                    "note": "",
+                    "name": "rapsolja"
+                  }
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "id": "step-1",
+                "text": "Väg linser och ris torra och spenat samt krossade tomater enligt listan. Häll all uppmätt olja och tomaterna i en kastrull. Rör ned linser och ris. Tillsätt dricksvatten enligt risets och linsernas absorptionsanvisningar på förpackningarna.",
+                "ingredient_keys": [
+                  "linser|dry",
+                  "ris|dry",
+                  "spenat|as_sold",
+                  "krossade tomater|as_sold",
+                  "rapsolja|as_sold"
+                ],
+                "depends_on": [],
+                "duration_minutes": 8,
+                "parallel_group": null
+              },
+              {
+                "id": "step-2",
+                "text": "Sjud under lock ungefär 18 minuter. Rör om ibland och tillsätt lite dricksvatten om det börjar fastna. Lägg i spenaten mot slutet och värm tills den är genomvarm och både ris och linser mjuka. Häll inte bort kokvätska.",
+                "ingredient_keys": [
+                  "linser|dry",
+                  "ris|dry",
+                  "spenat|as_sold",
+                  "krossade tomater|as_sold",
+                  "rapsolja|as_sold"
+                ],
+                "depends_on": [
+                  "step-1"
+                ],
+                "duration_minutes": 18,
+                "parallel_group": null
+              },
+              {
+                "id": "step-3",
+                "text": "Skrapa ned all gryta i två lika stora portioner och servera varmt.",
+                "ingredient_keys": [
+                  "linser|dry",
+                  "ris|dry",
+                  "spenat|as_sold",
+                  "krossade tomater|as_sold",
+                  "rapsolja|as_sold"
+                ],
+                "depends_on": [
+                  "step-2"
+                ],
+                "duration_minutes": 4,
+                "parallel_group": null
+              }
+            ],
+            "estimated_minutes": 30,
+            "equipment": [
+              "kastrull med lock",
+              "slev",
+              "våg"
+            ],
+            "vegetarian": true,
+            "fish": false,
+            "ingredient_count": 5,
+            "provenance": {
+              "authoring": "model_assisted_original",
+              "content_review": "reviewed",
+              "machine_validation": "passed",
+              "cooking_test": "not_cooked",
+              "reviewed_at": "2026-10-06",
+              "notes": "Andra oberoende innehållsförsöket efter kodlåsning 569e8f5. Mängdbasis och instruktioner manuellt jämförda. Författade tidsuppskattningar; ingen fysisk provlagning, veckohållbarhet eller laboratorienäring påstås."
+            },
+            "content_sha256": "3c0a1d409b5a3934042cff5e04fff800bcfbf6f4948ec14198feca5b1d4846ef",
+            "content_source": {
+              "pack_id": "extension-second-20261006",
+              "proposal_id": "smako-dinner-lentil-spinach-rice-pot",
+              "sha256": "f8b02a4161488cd86207dd2a72a409fb5424e7985843d1bad838d3ffcd1f76b7",
+              "priority": 1,
+              "timing_basis": "authored_estimate_coarse_dependencies",
+              "active_minutes": 10,
+              "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+              "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+              "safety_sources": [],
+              "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+            },
+            "dinner_level": "simple",
+            "active_minutes": 10,
+            "total_minutes": 30
+          }
+        },
+        {
+          "name": "Pastapanna med smulad tofu",
+          "servings": 2,
+          "ingredients": [
+            {
+              "name": "pasta",
+              "quantity": 140.0,
+              "unit": "g",
+              "canonical_name": "pasta",
+              "form": "dry",
+              "component": "main",
+              "required": true,
+              "role": "side",
+              "quantity_min": 140.0,
+              "quantity_max": 140.0,
+              "quantity_step": 140.0
+            },
+            {
+              "name": "tofu",
+              "quantity": 300.0,
+              "unit": "g",
+              "canonical_name": "tofu",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "primary",
+              "quantity_min": 300.0,
+              "quantity_max": 300.0,
+              "quantity_step": 300.0,
+              "product_requirements": [
+                "plain"
+              ]
+            },
+            {
+              "name": "krossade tomater",
+              "quantity": 400.0,
+              "unit": "g",
+              "canonical_name": "krossade tomater",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "sauce",
+              "quantity_min": 400.0,
+              "quantity_max": 400.0,
+              "quantity_step": 400.0
+            },
+            {
+              "name": "morot",
+              "quantity": 120.0,
+              "unit": "g",
+              "canonical_name": "morot",
+              "form": "raw_edible",
+              "component": "main",
+              "required": true,
+              "role": "vegetable",
+              "quantity_min": 120.0,
+              "quantity_max": 120.0,
+              "quantity_step": 120.0
+            },
+            {
+              "name": "gul lök",
+              "quantity": 80.0,
+              "unit": "g",
+              "canonical_name": "gul lök",
+              "form": "raw_edible",
+              "component": "main",
+              "required": true,
+              "role": "flavour",
+              "quantity_min": 80.0,
+              "quantity_max": 80.0,
+              "quantity_step": 80.0
+            },
+            {
+              "name": "rapsolja",
+              "quantity": 10.0,
+              "unit": "ml",
+              "canonical_name": "rapsolja",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "cooking",
+              "quantity_min": 10.0,
+              "quantity_max": 10.0,
+              "quantity_step": 10.0
+            }
+          ],
+          "instructions": [
+            "Väg upp listans ätbara mängder. Riv moroten och hacka löken. Fräs dem i den uppmätta oljan och smula ned tofun. Tillsätt tomater, torr kort pasta och vatten lite i taget. Sjud och rör tills pastan är genomkokt och såsen omsluter den. Behåll all mat och vätska i pannan. Fördela all angiven mat jämnt mellan portionerna."
+          ],
+          "preparation": {
+            "version": "smako-authored-input-v2",
+            "origin": "smako_recipe_design",
+            "parent_sha256": "a0515a4b566c1dc3bf26634b29bbc14cbfef6c126c4879bd3981e379b73578f1",
+            "family": "pasta",
+            "input_forms": {
+              "pasta": "dry",
+              "tofu": "as_sold",
+              "krossade tomater": "as_sold",
+              "morot": "raw_edible",
+              "gul lök": "raw_edible",
+              "rapsolja": "as_sold"
+            }
+          },
+          "design": {
+            "base_id": "smako-dinner-tofu-pasta-ragu",
+            "version": "1.2.0",
+            "variant_id": "base",
+            "cuisines": [],
+            "family": "pasta",
+            "primary_ingredient": "tofu",
+            "method": "pot",
+            "side": "pasta",
+            "flavor_profile": [
+              "mild"
+            ],
+            "components": [
+              {
+                "id": "main",
+                "name": "Hela måltiden",
+                "amounts": [
+                  {
+                    "ingredient_key": "pasta|dry",
+                    "quantity": 140.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "pasta"
+                  },
+                  {
+                    "ingredient_key": "tofu|as_sold",
+                    "quantity": 300.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "tofu"
+                  },
+                  {
+                    "ingredient_key": "krossade tomater|as_sold",
+                    "quantity": 400.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "krossade tomater"
+                  },
+                  {
+                    "ingredient_key": "morot|raw_edible",
+                    "quantity": 120.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "morot"
+                  },
+                  {
+                    "ingredient_key": "gul lök|raw_edible",
+                    "quantity": 80.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "gul lök"
+                  },
+                  {
+                    "ingredient_key": "rapsolja|as_sold",
+                    "quantity": 10.0,
+                    "unit": "ml",
+                    "note": "",
+                    "name": "rapsolja"
+                  }
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "id": "prepare",
+                "text": "Väg upp listans ätbara mängder. Riv moroten och hacka löken. Fräs dem i den uppmätta oljan och smula ned tofun. Tillsätt tomater, torr kort pasta och vatten lite i taget. Sjud och rör tills pastan är genomkokt och såsen omsluter den. Behåll all mat och vätska i pannan. Fördela all angiven mat jämnt mellan portionerna.",
+                "ingredient_keys": [
+                  "pasta|dry",
+                  "tofu|as_sold",
+                  "krossade tomater|as_sold",
+                  "morot|raw_edible",
+                  "gul lök|raw_edible",
+                  "rapsolja|as_sold"
+                ],
+                "depends_on": [],
+                "duration_minutes": 25,
+                "parallel_group": null
+              }
+            ],
+            "estimated_minutes": 25,
+            "equipment": [
+              "kastrull",
+              "kniv"
+            ],
+            "vegetarian": true,
+            "fish": false,
+            "ingredient_count": 6,
+            "provenance": {
+              "authoring": "model_assisted_original",
+              "content_review": "reviewed",
+              "machine_validation": "passed",
+              "cooking_test": "not_cooked",
+              "reviewed_at": "2026-10-06",
+              "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Författade tidsuppskattningar. Ingen laboratorienäring eller veckohållbarhet påstås. Revision 1.2 kortar instruktionernas tekniska text; befintliga mängder är oförändrade. Två närliggande utkast har ersatts av nya grundrätter, inte nya titlar."
+            },
+            "content_sha256": "a0515a4b566c1dc3bf26634b29bbc14cbfef6c126c4879bd3981e379b73578f1",
+            "content_source": {
+              "pack_id": "pilot-20261006",
+              "proposal_id": "smako-dinner-tofu-pasta-ragu",
+              "sha256": "564d7362e55cd1ef7467b61bae10e33f189966f7b4ff66d4818779d14afd7935",
+              "priority": 1,
+              "timing_basis": "authored_estimate_coarse_dependencies",
+              "active_minutes": 13,
+              "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+              "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+              "safety_sources": [],
+              "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+            },
+            "dinner_level": "simple",
+            "active_minutes": 13,
+            "total_minutes": 25
+          }
+        },
+        {
+          "name": "Potatismosgratäng med vita bönor",
+          "servings": 2,
+          "ingredients": [
+            {
+              "name": "potatis",
+              "quantity": 450.0,
+              "unit": "g",
+              "canonical_name": "potatis",
+              "form": "raw_edible",
+              "component": "main",
+              "required": true,
+              "role": "side",
+              "quantity_min": 450.0,
+              "quantity_max": 450.0,
+              "quantity_step": 450.0
+            },
+            {
+              "name": "vita bönor",
+              "quantity": 300.0,
+              "unit": "g",
+              "canonical_name": "bönor",
+              "form": "cooked_drained",
+              "component": "main",
+              "required": true,
+              "role": "primary",
+              "quantity_min": 300.0,
+              "quantity_max": 300.0,
+              "quantity_step": 300.0,
+              "product_requirements": [
+                "white_beans"
+              ]
+            },
+            {
+              "name": "spenat",
+              "quantity": 150.0,
+              "unit": "g",
+              "canonical_name": "spenat",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "vegetable",
+              "quantity_min": 150.0,
+              "quantity_max": 150.0,
+              "quantity_step": 150.0
+            },
+            {
+              "name": "ost",
+              "quantity": 60.0,
+              "unit": "g",
+              "canonical_name": "ost",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "sauce",
+              "quantity_min": 60.0,
+              "quantity_max": 60.0,
+              "quantity_step": 60.0
+            },
+            {
+              "name": "rapsolja",
+              "quantity": 10.0,
+              "unit": "ml",
+              "canonical_name": "rapsolja",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "cooking",
+              "quantity_min": 10.0,
+              "quantity_max": 10.0,
+              "quantity_step": 10.0
+            }
+          ],
+          "instructions": [
+            "Väg upp listans ätbara mängder. Värm ugnen till 225 grader. Tärna potatisen fint och sjud i en liten uppmätt mängd vatten tills mjuk. Mosa med kokvattnet och oljan. Väg färdigkokta vita bönor efter avrinning och värm dem med spenaten. Lägg bönor och spenat i en liten form, täck med mos och ost. Gratinera tills osten smält och maten är genomvarm. Servera också vätska och ost som hamnat i formen. Fördela all angiven mat jämnt mellan portionerna."
+          ],
+          "preparation": {
+            "version": "smako-authored-input-v2",
+            "origin": "smako_recipe_design",
+            "parent_sha256": "85088882311f816def9fb108dc7560cff9554a6d1d87c856698dce0b116b493a",
+            "family": "gratäng",
+            "input_forms": {
+              "potatis": "raw_edible",
+              "bönor": "cooked_drained",
+              "spenat": "as_sold",
+              "ost": "as_sold",
+              "rapsolja": "as_sold"
+            }
+          },
+          "design": {
+            "base_id": "smako-dinner-bean-mash-gratin",
+            "version": "1.2.0",
+            "variant_id": "base",
+            "cuisines": [],
+            "family": "gratäng",
+            "primary_ingredient": "bönor",
+            "method": "oven",
+            "side": "potatis",
+            "flavor_profile": [
+              "mild"
+            ],
+            "components": [
+              {
+                "id": "main",
+                "name": "Hela måltiden",
+                "amounts": [
+                  {
+                    "ingredient_key": "potatis|raw_edible",
+                    "quantity": 450.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "potatis"
+                  },
+                  {
+                    "ingredient_key": "bönor|cooked_drained",
+                    "quantity": 300.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "vita bönor"
+                  },
+                  {
+                    "ingredient_key": "spenat|as_sold",
+                    "quantity": 150.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "spenat"
+                  },
+                  {
+                    "ingredient_key": "ost|as_sold",
+                    "quantity": 60.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "ost"
+                  },
+                  {
+                    "ingredient_key": "rapsolja|as_sold",
+                    "quantity": 10.0,
+                    "unit": "ml",
+                    "note": "",
+                    "name": "rapsolja"
+                  }
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "id": "prepare",
+                "text": "Väg upp listans ätbara mängder. Värm ugnen till 225 grader. Tärna potatisen fint och sjud i en liten uppmätt mängd vatten tills mjuk. Mosa med kokvattnet och oljan. Väg färdigkokta vita bönor efter avrinning och värm dem med spenaten. Lägg bönor och spenat i en liten form, täck med mos och ost. Gratinera tills osten smält och maten är genomvarm. Servera också vätska och ost som hamnat i formen. Fördela all angiven mat jämnt mellan portionerna.",
+                "ingredient_keys": [
+                  "potatis|raw_edible",
+                  "bönor|cooked_drained",
+                  "spenat|as_sold",
+                  "ost|as_sold",
+                  "rapsolja|as_sold"
+                ],
+                "depends_on": [],
+                "duration_minutes": 30,
+                "parallel_group": null
+              }
+            ],
+            "estimated_minutes": 30,
+            "equipment": [
+              "ugn",
+              "form",
+              "kastrull",
+              "kniv",
+              "potatisstamp"
+            ],
+            "vegetarian": true,
+            "fish": false,
+            "ingredient_count": 5,
+            "provenance": {
+              "authoring": "model_assisted_original",
+              "content_review": "reviewed",
+              "machine_validation": "passed",
+              "cooking_test": "not_cooked",
+              "reviewed_at": "2026-10-06",
+              "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Författade tidsuppskattningar. Ingen laboratorienäring eller veckohållbarhet påstås. Revision 1.2 kortar instruktionernas tekniska text; befintliga mängder är oförändrade. Två närliggande utkast har ersatts av nya grundrätter, inte nya titlar."
+            },
+            "content_sha256": "85088882311f816def9fb108dc7560cff9554a6d1d87c856698dce0b116b493a",
+            "content_source": {
+              "pack_id": "pilot-20261006",
+              "proposal_id": "smako-dinner-bean-mash-gratin",
+              "sha256": "564d7362e55cd1ef7467b61bae10e33f189966f7b4ff66d4818779d14afd7935",
+              "priority": 1,
+              "timing_basis": "authored_estimate_coarse_dependencies",
+              "active_minutes": 15,
+              "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+              "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+              "safety_sources": [],
+              "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+            },
+            "dinner_level": "simple",
+            "active_minutes": 15,
+            "total_minutes": 30
+          }
+        },
+        {
+          "name": "Potatispanna med tofu och mjuk kål",
+          "servings": 2,
+          "ingredients": [
+            {
+              "name": "potatis",
+              "quantity": 400.0,
+              "unit": "g",
+              "canonical_name": "potatis",
+              "form": "raw_edible",
+              "component": "main",
+              "required": true,
+              "role": "vegetable",
+              "quantity_min": 400.0,
+              "quantity_max": 400.0,
+              "quantity_step": 400.0
+            },
+            {
+              "name": "tofu",
+              "quantity": 300.0,
+              "unit": "g",
+              "canonical_name": "tofu",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "primary",
+              "quantity_min": 300.0,
+              "quantity_max": 300.0,
+              "quantity_step": 300.0,
+              "product_requirements": [
+                "plain"
+              ]
+            },
+            {
+              "name": "vitkål",
+              "quantity": 200.0,
+              "unit": "g",
+              "canonical_name": "vitkål",
+              "form": "raw_edible",
+              "component": "main",
+              "required": true,
+              "role": "vegetable",
+              "quantity_min": 200.0,
+              "quantity_max": 200.0,
+              "quantity_step": 200.0
+            },
+            {
+              "name": "gul lök",
+              "quantity": 100.0,
+              "unit": "g",
+              "canonical_name": "gul lök",
+              "form": "raw_edible",
+              "component": "main",
+              "required": true,
+              "role": "vegetable",
+              "quantity_min": 100.0,
+              "quantity_max": 100.0,
+              "quantity_step": 100.0
+            },
+            {
+              "name": "rapsolja",
+              "quantity": 15.0,
+              "unit": "ml",
+              "canonical_name": "rapsolja",
+              "form": "as_sold",
+              "component": "main",
+              "required": true,
+              "role": "cooking",
+              "quantity_min": 15.0,
+              "quantity_max": 15.0,
+              "quantity_step": 15.0
+            }
+          ],
+          "instructions": [
+            "Skala potatis och lök och ta bort kålens oätliga delar före vägning. Skär potatisen i små tärningar och strimla kål och lök. Väg tofun enligt listan och skär i tärningar.",
+            "Värm all uppmätt olja i en belagd panna. Lägg i potatis och lite dricksvatten, täck och tillaga tills nästan mjuk. Tillsätt tofu, kål och lök. Vänd försiktigt och fortsätt under lock tills potatisen är mjuk och resten genomvarmt. Ta av locket mot slutet så överflödig vätska kan ånga bort.",
+            "Skrapa upp all mat och olja i två lika stora portioner."
+          ],
+          "preparation": {
+            "version": "smako-authored-input-v2",
+            "origin": "smako_recipe_design",
+            "parent_sha256": "d472a1a1dd69d4eb7d50626dafd8d32ecac2524ff8adc2bf192380c592d34aab",
+            "family": "panna",
+            "input_forms": {
+              "potatis": "raw_edible",
+              "tofu": "as_sold",
+              "vitkål": "raw_edible",
+              "gul lök": "raw_edible",
+              "rapsolja": "as_sold"
+            }
+          },
+          "design": {
+            "base_id": "smako-dinner-potato-tofu-cabbage-pan",
+            "version": "1.0.0",
+            "variant_id": "base",
+            "cuisines": [],
+            "family": "panna",
+            "primary_ingredient": "tofu",
+            "method": "pan",
+            "side": "grönsaker",
+            "flavor_profile": [
+              "mild"
+            ],
+            "components": [
+              {
+                "id": "main",
+                "name": "Hela måltiden",
+                "amounts": [
+                  {
+                    "ingredient_key": "potatis|raw_edible",
+                    "quantity": 400.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "potatis"
+                  },
+                  {
+                    "ingredient_key": "tofu|as_sold",
+                    "quantity": 300.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "tofu"
+                  },
+                  {
+                    "ingredient_key": "vitkål|raw_edible",
+                    "quantity": 200.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "vitkål"
+                  },
+                  {
+                    "ingredient_key": "gul lök|raw_edible",
+                    "quantity": 100.0,
+                    "unit": "g",
+                    "note": "",
+                    "name": "gul lök"
+                  },
+                  {
+                    "ingredient_key": "rapsolja|as_sold",
+                    "quantity": 15.0,
+                    "unit": "ml",
+                    "note": "",
+                    "name": "rapsolja"
+                  }
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "id": "step-1",
+                "text": "Skala potatis och lök och ta bort kålens oätliga delar före vägning. Skär potatisen i små tärningar och strimla kål och lök. Väg tofun enligt listan och skär i tärningar.",
+                "ingredient_keys": [
+                  "potatis|raw_edible",
+                  "tofu|as_sold",
+                  "vitkål|raw_edible",
+                  "gul lök|raw_edible",
+                  "rapsolja|as_sold"
+                ],
+                "depends_on": [],
+                "duration_minutes": 10,
+                "parallel_group": null
+              },
+              {
+                "id": "step-2",
+                "text": "Värm all uppmätt olja i en belagd panna. Lägg i potatis och lite dricksvatten, täck och tillaga tills nästan mjuk. Tillsätt tofu, kål och lök. Vänd försiktigt och fortsätt under lock tills potatisen är mjuk och resten genomvarmt. Ta av locket mot slutet så överflödig vätska kan ånga bort.",
+                "ingredient_keys": [
+                  "potatis|raw_edible",
+                  "tofu|as_sold",
+                  "vitkål|raw_edible",
+                  "gul lök|raw_edible",
+                  "rapsolja|as_sold"
+                ],
+                "depends_on": [
+                  "step-1"
+                ],
+                "duration_minutes": 17,
+                "parallel_group": null
+              },
+              {
+                "id": "step-3",
+                "text": "Skrapa upp all mat och olja i två lika stora portioner.",
+                "ingredient_keys": [
+                  "potatis|raw_edible",
+                  "tofu|as_sold",
+                  "vitkål|raw_edible",
+                  "gul lök|raw_edible",
+                  "rapsolja|as_sold"
+                ],
+                "depends_on": [
+                  "step-2"
+                ],
+                "duration_minutes": 3,
+                "parallel_group": null
+              }
+            ],
+            "estimated_minutes": 30,
+            "equipment": [
+              "belagd panna med lock",
+              "kniv",
+              "skärbräda",
+              "våg"
+            ],
+            "vegetarian": true,
+            "fish": false,
+            "ingredient_count": 5,
+            "provenance": {
+              "authoring": "model_assisted_original",
+              "content_review": "reviewed",
+              "machine_validation": "passed",
+              "cooking_test": "not_cooked",
+              "reviewed_at": "2026-10-06",
+              "notes": "Andra oberoende innehållsförsöket efter kodlåsning 569e8f5. Mängdbasis och instruktioner manuellt jämförda. Författade tidsuppskattningar; ingen fysisk provlagning, veckohållbarhet eller laboratorienäring påstås."
+            },
+            "content_sha256": "d472a1a1dd69d4eb7d50626dafd8d32ecac2524ff8adc2bf192380c592d34aab",
+            "content_source": {
+              "pack_id": "extension-second-20261006",
+              "proposal_id": "smako-dinner-potato-tofu-cabbage-pan",
+              "sha256": "f8b02a4161488cd86207dd2a72a409fb5424e7985843d1bad838d3ffcd1f76b7",
+              "priority": 1,
+              "timing_basis": "authored_estimate_coarse_dependencies",
+              "active_minutes": 15,
+              "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+              "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+              "safety_sources": [],
+              "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+            },
+            "dinner_level": "simple",
+            "active_minutes": 15,
+            "total_minutes": 30
+          }
+        }
+      ],
+      "slots": [
+        {
+          "id": "dinner-1",
+          "day": 1,
+          "meal_type": "dinner",
+          "recipe": {
+            "name": "Len lins- och morotssoppa",
+            "servings": 2,
+            "ingredients": [
+              {
+                "name": "linser",
+                "quantity": 160.0,
+                "unit": "g",
+                "canonical_name": "linser",
+                "form": "dry",
+                "component": "main",
+                "required": true,
+                "role": "primary",
+                "quantity_min": 160.0,
+                "quantity_max": 160.0,
+                "quantity_step": 160.0,
+                "product_requirements": [
+                  "red_split"
+                ]
+              },
+              {
+                "name": "morot",
+                "quantity": 240.0,
+                "unit": "g",
+                "canonical_name": "morot",
+                "form": "raw_edible",
+                "component": "main",
+                "required": true,
+                "role": "vegetable",
+                "quantity_min": 240.0,
+                "quantity_max": 240.0,
+                "quantity_step": 240.0
+              },
+              {
+                "name": "krossade tomater",
+                "quantity": 400.0,
+                "unit": "g",
+                "canonical_name": "krossade tomater",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "sauce",
+                "quantity_min": 400.0,
+                "quantity_max": 400.0,
+                "quantity_step": 400.0
+              },
+              {
+                "name": "gul lök",
+                "quantity": 100.0,
+                "unit": "g",
+                "canonical_name": "gul lök",
+                "form": "raw_edible",
+                "component": "main",
+                "required": true,
+                "role": "flavour",
+                "quantity_min": 100.0,
+                "quantity_max": 100.0,
+                "quantity_step": 100.0
+              },
+              {
+                "name": "rapsolja",
+                "quantity": 10.0,
+                "unit": "ml",
+                "canonical_name": "rapsolja",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "cooking",
+                "quantity_min": 10.0,
+                "quantity_max": 10.0,
+                "quantity_step": 10.0
+              },
+              {
+                "name": "spiskummin",
+                "quantity": 2.0,
+                "unit": "g",
+                "canonical_name": "spiskummin",
+                "form": "dry",
+                "component": "main",
+                "required": true,
+                "role": "flavour",
+                "quantity_min": 2.0,
+                "quantity_max": 2.0,
+                "quantity_step": 2.0
+              }
+            ],
+            "instructions": [
+              "Väg upp listans ätbara mängder. Hacka löken och skär moroten i tunna skivor. Fräs varsamt i den uppmätta oljan i en kastrull. Tillsätt torra röda linser, tomater, spiskummin och dricksvatten så att allt täcks. Sjud tills linser och morot är helt mjuka. Mixa till soppa och behåll all vätska; späd med vatten om det behövs. Fördela all angiven mat jämnt mellan portionerna."
+            ],
+            "preparation": {
+              "version": "smako-authored-input-v2",
+              "origin": "smako_recipe_design",
+              "parent_sha256": "7d8f12ae8f263c6c7eb6b7f546d8a7991e1e35c0d1a49ca5453dac3a0a5d900e",
+              "family": "soppa",
+              "input_forms": {
+                "linser": "dry",
+                "morot": "raw_edible",
+                "krossade tomater": "as_sold",
+                "gul lök": "raw_edible",
+                "rapsolja": "as_sold",
+                "spiskummin": "dry"
+              }
+            },
+            "design": {
+              "base_id": "smako-dinner-lentil-carrot-soup",
+              "version": "1.2.0",
+              "variant_id": "base",
+              "cuisines": [],
+              "family": "soppa",
+              "primary_ingredient": "linser",
+              "method": "pot",
+              "side": "grönsaker",
+              "flavor_profile": [
+                "mild"
+              ],
+              "components": [
+                {
+                  "id": "main",
+                  "name": "Hela måltiden",
+                  "amounts": [
+                    {
+                      "ingredient_key": "linser|dry",
+                      "quantity": 160.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "linser"
+                    },
+                    {
+                      "ingredient_key": "morot|raw_edible",
+                      "quantity": 240.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "morot"
+                    },
+                    {
+                      "ingredient_key": "krossade tomater|as_sold",
+                      "quantity": 400.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "krossade tomater"
+                    },
+                    {
+                      "ingredient_key": "gul lök|raw_edible",
+                      "quantity": 100.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "gul lök"
+                    },
+                    {
+                      "ingredient_key": "rapsolja|as_sold",
+                      "quantity": 10.0,
+                      "unit": "ml",
+                      "note": "",
+                      "name": "rapsolja"
+                    },
+                    {
+                      "ingredient_key": "spiskummin|dry",
+                      "quantity": 2.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "spiskummin"
+                    }
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "id": "prepare",
+                  "text": "Väg upp listans ätbara mängder. Hacka löken och skär moroten i tunna skivor. Fräs varsamt i den uppmätta oljan i en kastrull. Tillsätt torra röda linser, tomater, spiskummin och dricksvatten så att allt täcks. Sjud tills linser och morot är helt mjuka. Mixa till soppa och behåll all vätska; späd med vatten om det behövs. Fördela all angiven mat jämnt mellan portionerna.",
+                  "ingredient_keys": [
+                    "linser|dry",
+                    "morot|raw_edible",
+                    "krossade tomater|as_sold",
+                    "gul lök|raw_edible",
+                    "rapsolja|as_sold",
+                    "spiskummin|dry"
+                  ],
+                  "depends_on": [],
+                  "duration_minutes": 25,
+                  "parallel_group": null
+                }
+              ],
+              "estimated_minutes": 25,
+              "equipment": [
+                "kastrull",
+                "kniv",
+                "stavmixer"
+              ],
+              "vegetarian": true,
+              "fish": false,
+              "ingredient_count": 6,
+              "provenance": {
+                "authoring": "model_assisted_original",
+                "content_review": "reviewed",
+                "machine_validation": "passed",
+                "cooking_test": "not_cooked",
+                "reviewed_at": "2026-10-06",
+                "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Författade tidsuppskattningar. Ingen laboratorienäring eller veckohållbarhet påstås. Revision 1.2 kortar instruktionernas tekniska text; befintliga mängder är oförändrade. Två närliggande utkast har ersatts av nya grundrätter, inte nya titlar."
+              },
+              "content_sha256": "7d8f12ae8f263c6c7eb6b7f546d8a7991e1e35c0d1a49ca5453dac3a0a5d900e",
+              "content_source": {
+                "pack_id": "pilot-20261006",
+                "proposal_id": "smako-dinner-lentil-carrot-soup",
+                "sha256": "564d7362e55cd1ef7467b61bae10e33f189966f7b4ff66d4818779d14afd7935",
+                "priority": 1,
+                "timing_basis": "authored_estimate_coarse_dependencies",
+                "active_minutes": 12,
+                "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+                "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+                "safety_sources": [],
+                "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+              },
+              "dinner_level": "simple",
+              "active_minutes": 12,
+              "total_minutes": 25
+            }
+          }
+        },
+        {
+          "id": "dinner-2",
+          "day": 2,
+          "meal_type": "dinner",
+          "recipe": {
+            "name": "Lins- och spenatgryta med ris",
+            "servings": 2,
+            "ingredients": [
+              {
+                "name": "linser",
+                "quantity": 120.0,
+                "unit": "g",
+                "canonical_name": "linser",
+                "form": "dry",
+                "component": "main",
+                "required": true,
+                "role": "primary",
+                "quantity_min": 120.0,
+                "quantity_max": 120.0,
+                "quantity_step": 120.0,
+                "product_requirements": [
+                  "red_split"
+                ]
+              },
+              {
+                "name": "ris",
+                "quantity": 120.0,
+                "unit": "g",
+                "canonical_name": "ris",
+                "form": "dry",
+                "component": "main",
+                "required": true,
+                "role": "side",
+                "quantity_min": 120.0,
+                "quantity_max": 120.0,
+                "quantity_step": 120.0
+              },
+              {
+                "name": "spenat",
+                "quantity": 200.0,
+                "unit": "g",
+                "canonical_name": "spenat",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "vegetable",
+                "quantity_min": 200.0,
+                "quantity_max": 200.0,
+                "quantity_step": 200.0
+              },
+              {
+                "name": "krossade tomater",
+                "quantity": 400.0,
+                "unit": "g",
+                "canonical_name": "krossade tomater",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "vegetable",
+                "quantity_min": 400.0,
+                "quantity_max": 400.0,
+                "quantity_step": 400.0
+              },
+              {
+                "name": "rapsolja",
+                "quantity": 10.0,
+                "unit": "ml",
+                "canonical_name": "rapsolja",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "cooking",
+                "quantity_min": 10.0,
+                "quantity_max": 10.0,
+                "quantity_step": 10.0
+              }
+            ],
+            "instructions": [
+              "Väg linser och ris torra och spenat samt krossade tomater enligt listan. Häll all uppmätt olja och tomaterna i en kastrull. Rör ned linser och ris. Tillsätt dricksvatten enligt risets och linsernas absorptionsanvisningar på förpackningarna.",
+              "Sjud under lock ungefär 18 minuter. Rör om ibland och tillsätt lite dricksvatten om det börjar fastna. Lägg i spenaten mot slutet och värm tills den är genomvarm och både ris och linser mjuka. Häll inte bort kokvätska.",
+              "Skrapa ned all gryta i två lika stora portioner och servera varmt."
+            ],
+            "preparation": {
+              "version": "smako-authored-input-v2",
+              "origin": "smako_recipe_design",
+              "parent_sha256": "3c0a1d409b5a3934042cff5e04fff800bcfbf6f4948ec14198feca5b1d4846ef",
+              "family": "gryta",
+              "input_forms": {
+                "linser": "dry",
+                "ris": "dry",
+                "spenat": "as_sold",
+                "krossade tomater": "as_sold",
+                "rapsolja": "as_sold"
+              }
+            },
+            "design": {
+              "base_id": "smako-dinner-lentil-spinach-rice-pot",
+              "version": "1.0.0",
+              "variant_id": "base",
+              "cuisines": [],
+              "family": "gryta",
+              "primary_ingredient": "linser",
+              "method": "pot",
+              "side": "grönsaker",
+              "flavor_profile": [
+                "mild"
+              ],
+              "components": [
+                {
+                  "id": "main",
+                  "name": "Hela måltiden",
+                  "amounts": [
+                    {
+                      "ingredient_key": "linser|dry",
+                      "quantity": 120.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "linser"
+                    },
+                    {
+                      "ingredient_key": "ris|dry",
+                      "quantity": 120.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "ris"
+                    },
+                    {
+                      "ingredient_key": "spenat|as_sold",
+                      "quantity": 200.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "spenat"
+                    },
+                    {
+                      "ingredient_key": "krossade tomater|as_sold",
+                      "quantity": 400.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "krossade tomater"
+                    },
+                    {
+                      "ingredient_key": "rapsolja|as_sold",
+                      "quantity": 10.0,
+                      "unit": "ml",
+                      "note": "",
+                      "name": "rapsolja"
+                    }
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "id": "step-1",
+                  "text": "Väg linser och ris torra och spenat samt krossade tomater enligt listan. Häll all uppmätt olja och tomaterna i en kastrull. Rör ned linser och ris. Tillsätt dricksvatten enligt risets och linsernas absorptionsanvisningar på förpackningarna.",
+                  "ingredient_keys": [
+                    "linser|dry",
+                    "ris|dry",
+                    "spenat|as_sold",
+                    "krossade tomater|as_sold",
+                    "rapsolja|as_sold"
+                  ],
+                  "depends_on": [],
+                  "duration_minutes": 8,
+                  "parallel_group": null
+                },
+                {
+                  "id": "step-2",
+                  "text": "Sjud under lock ungefär 18 minuter. Rör om ibland och tillsätt lite dricksvatten om det börjar fastna. Lägg i spenaten mot slutet och värm tills den är genomvarm och både ris och linser mjuka. Häll inte bort kokvätska.",
+                  "ingredient_keys": [
+                    "linser|dry",
+                    "ris|dry",
+                    "spenat|as_sold",
+                    "krossade tomater|as_sold",
+                    "rapsolja|as_sold"
+                  ],
+                  "depends_on": [
+                    "step-1"
+                  ],
+                  "duration_minutes": 18,
+                  "parallel_group": null
+                },
+                {
+                  "id": "step-3",
+                  "text": "Skrapa ned all gryta i två lika stora portioner och servera varmt.",
+                  "ingredient_keys": [
+                    "linser|dry",
+                    "ris|dry",
+                    "spenat|as_sold",
+                    "krossade tomater|as_sold",
+                    "rapsolja|as_sold"
+                  ],
+                  "depends_on": [
+                    "step-2"
+                  ],
+                  "duration_minutes": 4,
+                  "parallel_group": null
+                }
+              ],
+              "estimated_minutes": 30,
+              "equipment": [
+                "kastrull med lock",
+                "slev",
+                "våg"
+              ],
+              "vegetarian": true,
+              "fish": false,
+              "ingredient_count": 5,
+              "provenance": {
+                "authoring": "model_assisted_original",
+                "content_review": "reviewed",
+                "machine_validation": "passed",
+                "cooking_test": "not_cooked",
+                "reviewed_at": "2026-10-06",
+                "notes": "Andra oberoende innehållsförsöket efter kodlåsning 569e8f5. Mängdbasis och instruktioner manuellt jämförda. Författade tidsuppskattningar; ingen fysisk provlagning, veckohållbarhet eller laboratorienäring påstås."
+              },
+              "content_sha256": "3c0a1d409b5a3934042cff5e04fff800bcfbf6f4948ec14198feca5b1d4846ef",
+              "content_source": {
+                "pack_id": "extension-second-20261006",
+                "proposal_id": "smako-dinner-lentil-spinach-rice-pot",
+                "sha256": "f8b02a4161488cd86207dd2a72a409fb5424e7985843d1bad838d3ffcd1f76b7",
+                "priority": 1,
+                "timing_basis": "authored_estimate_coarse_dependencies",
+                "active_minutes": 10,
+                "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+                "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+                "safety_sources": [],
+                "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+              },
+              "dinner_level": "simple",
+              "active_minutes": 10,
+              "total_minutes": 30
+            }
+          }
+        },
+        {
+          "id": "dinner-3",
+          "day": 3,
+          "meal_type": "dinner",
+          "recipe": {
+            "name": "Pastapanna med smulad tofu",
+            "servings": 2,
+            "ingredients": [
+              {
+                "name": "pasta",
+                "quantity": 140.0,
+                "unit": "g",
+                "canonical_name": "pasta",
+                "form": "dry",
+                "component": "main",
+                "required": true,
+                "role": "side",
+                "quantity_min": 140.0,
+                "quantity_max": 140.0,
+                "quantity_step": 140.0
+              },
+              {
+                "name": "tofu",
+                "quantity": 300.0,
+                "unit": "g",
+                "canonical_name": "tofu",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "primary",
+                "quantity_min": 300.0,
+                "quantity_max": 300.0,
+                "quantity_step": 300.0,
+                "product_requirements": [
+                  "plain"
+                ]
+              },
+              {
+                "name": "krossade tomater",
+                "quantity": 400.0,
+                "unit": "g",
+                "canonical_name": "krossade tomater",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "sauce",
+                "quantity_min": 400.0,
+                "quantity_max": 400.0,
+                "quantity_step": 400.0
+              },
+              {
+                "name": "morot",
+                "quantity": 120.0,
+                "unit": "g",
+                "canonical_name": "morot",
+                "form": "raw_edible",
+                "component": "main",
+                "required": true,
+                "role": "vegetable",
+                "quantity_min": 120.0,
+                "quantity_max": 120.0,
+                "quantity_step": 120.0
+              },
+              {
+                "name": "gul lök",
+                "quantity": 80.0,
+                "unit": "g",
+                "canonical_name": "gul lök",
+                "form": "raw_edible",
+                "component": "main",
+                "required": true,
+                "role": "flavour",
+                "quantity_min": 80.0,
+                "quantity_max": 80.0,
+                "quantity_step": 80.0
+              },
+              {
+                "name": "rapsolja",
+                "quantity": 10.0,
+                "unit": "ml",
+                "canonical_name": "rapsolja",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "cooking",
+                "quantity_min": 10.0,
+                "quantity_max": 10.0,
+                "quantity_step": 10.0
+              }
+            ],
+            "instructions": [
+              "Väg upp listans ätbara mängder. Riv moroten och hacka löken. Fräs dem i den uppmätta oljan och smula ned tofun. Tillsätt tomater, torr kort pasta och vatten lite i taget. Sjud och rör tills pastan är genomkokt och såsen omsluter den. Behåll all mat och vätska i pannan. Fördela all angiven mat jämnt mellan portionerna."
+            ],
+            "preparation": {
+              "version": "smako-authored-input-v2",
+              "origin": "smako_recipe_design",
+              "parent_sha256": "a0515a4b566c1dc3bf26634b29bbc14cbfef6c126c4879bd3981e379b73578f1",
+              "family": "pasta",
+              "input_forms": {
+                "pasta": "dry",
+                "tofu": "as_sold",
+                "krossade tomater": "as_sold",
+                "morot": "raw_edible",
+                "gul lök": "raw_edible",
+                "rapsolja": "as_sold"
+              }
+            },
+            "design": {
+              "base_id": "smako-dinner-tofu-pasta-ragu",
+              "version": "1.2.0",
+              "variant_id": "base",
+              "cuisines": [],
+              "family": "pasta",
+              "primary_ingredient": "tofu",
+              "method": "pot",
+              "side": "pasta",
+              "flavor_profile": [
+                "mild"
+              ],
+              "components": [
+                {
+                  "id": "main",
+                  "name": "Hela måltiden",
+                  "amounts": [
+                    {
+                      "ingredient_key": "pasta|dry",
+                      "quantity": 140.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "pasta"
+                    },
+                    {
+                      "ingredient_key": "tofu|as_sold",
+                      "quantity": 300.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "tofu"
+                    },
+                    {
+                      "ingredient_key": "krossade tomater|as_sold",
+                      "quantity": 400.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "krossade tomater"
+                    },
+                    {
+                      "ingredient_key": "morot|raw_edible",
+                      "quantity": 120.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "morot"
+                    },
+                    {
+                      "ingredient_key": "gul lök|raw_edible",
+                      "quantity": 80.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "gul lök"
+                    },
+                    {
+                      "ingredient_key": "rapsolja|as_sold",
+                      "quantity": 10.0,
+                      "unit": "ml",
+                      "note": "",
+                      "name": "rapsolja"
+                    }
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "id": "prepare",
+                  "text": "Väg upp listans ätbara mängder. Riv moroten och hacka löken. Fräs dem i den uppmätta oljan och smula ned tofun. Tillsätt tomater, torr kort pasta och vatten lite i taget. Sjud och rör tills pastan är genomkokt och såsen omsluter den. Behåll all mat och vätska i pannan. Fördela all angiven mat jämnt mellan portionerna.",
+                  "ingredient_keys": [
+                    "pasta|dry",
+                    "tofu|as_sold",
+                    "krossade tomater|as_sold",
+                    "morot|raw_edible",
+                    "gul lök|raw_edible",
+                    "rapsolja|as_sold"
+                  ],
+                  "depends_on": [],
+                  "duration_minutes": 25,
+                  "parallel_group": null
+                }
+              ],
+              "estimated_minutes": 25,
+              "equipment": [
+                "kastrull",
+                "kniv"
+              ],
+              "vegetarian": true,
+              "fish": false,
+              "ingredient_count": 6,
+              "provenance": {
+                "authoring": "model_assisted_original",
+                "content_review": "reviewed",
+                "machine_validation": "passed",
+                "cooking_test": "not_cooked",
+                "reviewed_at": "2026-10-06",
+                "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Författade tidsuppskattningar. Ingen laboratorienäring eller veckohållbarhet påstås. Revision 1.2 kortar instruktionernas tekniska text; befintliga mängder är oförändrade. Två närliggande utkast har ersatts av nya grundrätter, inte nya titlar."
+              },
+              "content_sha256": "a0515a4b566c1dc3bf26634b29bbc14cbfef6c126c4879bd3981e379b73578f1",
+              "content_source": {
+                "pack_id": "pilot-20261006",
+                "proposal_id": "smako-dinner-tofu-pasta-ragu",
+                "sha256": "564d7362e55cd1ef7467b61bae10e33f189966f7b4ff66d4818779d14afd7935",
+                "priority": 1,
+                "timing_basis": "authored_estimate_coarse_dependencies",
+                "active_minutes": 13,
+                "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+                "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+                "safety_sources": [],
+                "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+              },
+              "dinner_level": "simple",
+              "active_minutes": 13,
+              "total_minutes": 25
+            }
+          }
+        },
+        {
+          "id": "dinner-4",
+          "day": 4,
+          "meal_type": "dinner",
+          "recipe": {
+            "name": "Potatismosgratäng med vita bönor",
+            "servings": 2,
+            "ingredients": [
+              {
+                "name": "potatis",
+                "quantity": 450.0,
+                "unit": "g",
+                "canonical_name": "potatis",
+                "form": "raw_edible",
+                "component": "main",
+                "required": true,
+                "role": "side",
+                "quantity_min": 450.0,
+                "quantity_max": 450.0,
+                "quantity_step": 450.0
+              },
+              {
+                "name": "vita bönor",
+                "quantity": 300.0,
+                "unit": "g",
+                "canonical_name": "bönor",
+                "form": "cooked_drained",
+                "component": "main",
+                "required": true,
+                "role": "primary",
+                "quantity_min": 300.0,
+                "quantity_max": 300.0,
+                "quantity_step": 300.0,
+                "product_requirements": [
+                  "white_beans"
+                ]
+              },
+              {
+                "name": "spenat",
+                "quantity": 150.0,
+                "unit": "g",
+                "canonical_name": "spenat",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "vegetable",
+                "quantity_min": 150.0,
+                "quantity_max": 150.0,
+                "quantity_step": 150.0
+              },
+              {
+                "name": "ost",
+                "quantity": 60.0,
+                "unit": "g",
+                "canonical_name": "ost",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "sauce",
+                "quantity_min": 60.0,
+                "quantity_max": 60.0,
+                "quantity_step": 60.0
+              },
+              {
+                "name": "rapsolja",
+                "quantity": 10.0,
+                "unit": "ml",
+                "canonical_name": "rapsolja",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "cooking",
+                "quantity_min": 10.0,
+                "quantity_max": 10.0,
+                "quantity_step": 10.0
+              }
+            ],
+            "instructions": [
+              "Väg upp listans ätbara mängder. Värm ugnen till 225 grader. Tärna potatisen fint och sjud i en liten uppmätt mängd vatten tills mjuk. Mosa med kokvattnet och oljan. Väg färdigkokta vita bönor efter avrinning och värm dem med spenaten. Lägg bönor och spenat i en liten form, täck med mos och ost. Gratinera tills osten smält och maten är genomvarm. Servera också vätska och ost som hamnat i formen. Fördela all angiven mat jämnt mellan portionerna."
+            ],
+            "preparation": {
+              "version": "smako-authored-input-v2",
+              "origin": "smako_recipe_design",
+              "parent_sha256": "85088882311f816def9fb108dc7560cff9554a6d1d87c856698dce0b116b493a",
+              "family": "gratäng",
+              "input_forms": {
+                "potatis": "raw_edible",
+                "bönor": "cooked_drained",
+                "spenat": "as_sold",
+                "ost": "as_sold",
+                "rapsolja": "as_sold"
+              }
+            },
+            "design": {
+              "base_id": "smako-dinner-bean-mash-gratin",
+              "version": "1.2.0",
+              "variant_id": "base",
+              "cuisines": [],
+              "family": "gratäng",
+              "primary_ingredient": "bönor",
+              "method": "oven",
+              "side": "potatis",
+              "flavor_profile": [
+                "mild"
+              ],
+              "components": [
+                {
+                  "id": "main",
+                  "name": "Hela måltiden",
+                  "amounts": [
+                    {
+                      "ingredient_key": "potatis|raw_edible",
+                      "quantity": 450.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "potatis"
+                    },
+                    {
+                      "ingredient_key": "bönor|cooked_drained",
+                      "quantity": 300.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "vita bönor"
+                    },
+                    {
+                      "ingredient_key": "spenat|as_sold",
+                      "quantity": 150.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "spenat"
+                    },
+                    {
+                      "ingredient_key": "ost|as_sold",
+                      "quantity": 60.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "ost"
+                    },
+                    {
+                      "ingredient_key": "rapsolja|as_sold",
+                      "quantity": 10.0,
+                      "unit": "ml",
+                      "note": "",
+                      "name": "rapsolja"
+                    }
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "id": "prepare",
+                  "text": "Väg upp listans ätbara mängder. Värm ugnen till 225 grader. Tärna potatisen fint och sjud i en liten uppmätt mängd vatten tills mjuk. Mosa med kokvattnet och oljan. Väg färdigkokta vita bönor efter avrinning och värm dem med spenaten. Lägg bönor och spenat i en liten form, täck med mos och ost. Gratinera tills osten smält och maten är genomvarm. Servera också vätska och ost som hamnat i formen. Fördela all angiven mat jämnt mellan portionerna.",
+                  "ingredient_keys": [
+                    "potatis|raw_edible",
+                    "bönor|cooked_drained",
+                    "spenat|as_sold",
+                    "ost|as_sold",
+                    "rapsolja|as_sold"
+                  ],
+                  "depends_on": [],
+                  "duration_minutes": 30,
+                  "parallel_group": null
+                }
+              ],
+              "estimated_minutes": 30,
+              "equipment": [
+                "ugn",
+                "form",
+                "kastrull",
+                "kniv",
+                "potatisstamp"
+              ],
+              "vegetarian": true,
+              "fish": false,
+              "ingredient_count": 5,
+              "provenance": {
+                "authoring": "model_assisted_original",
+                "content_review": "reviewed",
+                "machine_validation": "passed",
+                "cooking_test": "not_cooked",
+                "reviewed_at": "2026-10-06",
+                "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Författade tidsuppskattningar. Ingen laboratorienäring eller veckohållbarhet påstås. Revision 1.2 kortar instruktionernas tekniska text; befintliga mängder är oförändrade. Två närliggande utkast har ersatts av nya grundrätter, inte nya titlar."
+              },
+              "content_sha256": "85088882311f816def9fb108dc7560cff9554a6d1d87c856698dce0b116b493a",
+              "content_source": {
+                "pack_id": "pilot-20261006",
+                "proposal_id": "smako-dinner-bean-mash-gratin",
+                "sha256": "564d7362e55cd1ef7467b61bae10e33f189966f7b4ff66d4818779d14afd7935",
+                "priority": 1,
+                "timing_basis": "authored_estimate_coarse_dependencies",
+                "active_minutes": 15,
+                "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+                "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+                "safety_sources": [],
+                "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+              },
+              "dinner_level": "simple",
+              "active_minutes": 15,
+              "total_minutes": 30
+            }
+          }
+        },
+        {
+          "id": "dinner-5",
+          "day": 5,
+          "meal_type": "dinner",
+          "recipe": {
+            "name": "Potatispanna med tofu och mjuk kål",
+            "servings": 2,
+            "ingredients": [
+              {
+                "name": "potatis",
+                "quantity": 400.0,
+                "unit": "g",
+                "canonical_name": "potatis",
+                "form": "raw_edible",
+                "component": "main",
+                "required": true,
+                "role": "vegetable",
+                "quantity_min": 400.0,
+                "quantity_max": 400.0,
+                "quantity_step": 400.0
+              },
+              {
+                "name": "tofu",
+                "quantity": 300.0,
+                "unit": "g",
+                "canonical_name": "tofu",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "primary",
+                "quantity_min": 300.0,
+                "quantity_max": 300.0,
+                "quantity_step": 300.0,
+                "product_requirements": [
+                  "plain"
+                ]
+              },
+              {
+                "name": "vitkål",
+                "quantity": 200.0,
+                "unit": "g",
+                "canonical_name": "vitkål",
+                "form": "raw_edible",
+                "component": "main",
+                "required": true,
+                "role": "vegetable",
+                "quantity_min": 200.0,
+                "quantity_max": 200.0,
+                "quantity_step": 200.0
+              },
+              {
+                "name": "gul lök",
+                "quantity": 100.0,
+                "unit": "g",
+                "canonical_name": "gul lök",
+                "form": "raw_edible",
+                "component": "main",
+                "required": true,
+                "role": "vegetable",
+                "quantity_min": 100.0,
+                "quantity_max": 100.0,
+                "quantity_step": 100.0
+              },
+              {
+                "name": "rapsolja",
+                "quantity": 15.0,
+                "unit": "ml",
+                "canonical_name": "rapsolja",
+                "form": "as_sold",
+                "component": "main",
+                "required": true,
+                "role": "cooking",
+                "quantity_min": 15.0,
+                "quantity_max": 15.0,
+                "quantity_step": 15.0
+              }
+            ],
+            "instructions": [
+              "Skala potatis och lök och ta bort kålens oätliga delar före vägning. Skär potatisen i små tärningar och strimla kål och lök. Väg tofun enligt listan och skär i tärningar.",
+              "Värm all uppmätt olja i en belagd panna. Lägg i potatis och lite dricksvatten, täck och tillaga tills nästan mjuk. Tillsätt tofu, kål och lök. Vänd försiktigt och fortsätt under lock tills potatisen är mjuk och resten genomvarmt. Ta av locket mot slutet så överflödig vätska kan ånga bort.",
+              "Skrapa upp all mat och olja i två lika stora portioner."
+            ],
+            "preparation": {
+              "version": "smako-authored-input-v2",
+              "origin": "smako_recipe_design",
+              "parent_sha256": "d472a1a1dd69d4eb7d50626dafd8d32ecac2524ff8adc2bf192380c592d34aab",
+              "family": "panna",
+              "input_forms": {
+                "potatis": "raw_edible",
+                "tofu": "as_sold",
+                "vitkål": "raw_edible",
+                "gul lök": "raw_edible",
+                "rapsolja": "as_sold"
+              }
+            },
+            "design": {
+              "base_id": "smako-dinner-potato-tofu-cabbage-pan",
+              "version": "1.0.0",
+              "variant_id": "base",
+              "cuisines": [],
+              "family": "panna",
+              "primary_ingredient": "tofu",
+              "method": "pan",
+              "side": "grönsaker",
+              "flavor_profile": [
+                "mild"
+              ],
+              "components": [
+                {
+                  "id": "main",
+                  "name": "Hela måltiden",
+                  "amounts": [
+                    {
+                      "ingredient_key": "potatis|raw_edible",
+                      "quantity": 400.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "potatis"
+                    },
+                    {
+                      "ingredient_key": "tofu|as_sold",
+                      "quantity": 300.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "tofu"
+                    },
+                    {
+                      "ingredient_key": "vitkål|raw_edible",
+                      "quantity": 200.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "vitkål"
+                    },
+                    {
+                      "ingredient_key": "gul lök|raw_edible",
+                      "quantity": 100.0,
+                      "unit": "g",
+                      "note": "",
+                      "name": "gul lök"
+                    },
+                    {
+                      "ingredient_key": "rapsolja|as_sold",
+                      "quantity": 15.0,
+                      "unit": "ml",
+                      "note": "",
+                      "name": "rapsolja"
+                    }
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "id": "step-1",
+                  "text": "Skala potatis och lök och ta bort kålens oätliga delar före vägning. Skär potatisen i små tärningar och strimla kål och lök. Väg tofun enligt listan och skär i tärningar.",
+                  "ingredient_keys": [
+                    "potatis|raw_edible",
+                    "tofu|as_sold",
+                    "vitkål|raw_edible",
+                    "gul lök|raw_edible",
+                    "rapsolja|as_sold"
+                  ],
+                  "depends_on": [],
+                  "duration_minutes": 10,
+                  "parallel_group": null
+                },
+                {
+                  "id": "step-2",
+                  "text": "Värm all uppmätt olja i en belagd panna. Lägg i potatis och lite dricksvatten, täck och tillaga tills nästan mjuk. Tillsätt tofu, kål och lök. Vänd försiktigt och fortsätt under lock tills potatisen är mjuk och resten genomvarmt. Ta av locket mot slutet så överflödig vätska kan ånga bort.",
+                  "ingredient_keys": [
+                    "potatis|raw_edible",
+                    "tofu|as_sold",
+                    "vitkål|raw_edible",
+                    "gul lök|raw_edible",
+                    "rapsolja|as_sold"
+                  ],
+                  "depends_on": [
+                    "step-1"
+                  ],
+                  "duration_minutes": 17,
+                  "parallel_group": null
+                },
+                {
+                  "id": "step-3",
+                  "text": "Skrapa upp all mat och olja i två lika stora portioner.",
+                  "ingredient_keys": [
+                    "potatis|raw_edible",
+                    "tofu|as_sold",
+                    "vitkål|raw_edible",
+                    "gul lök|raw_edible",
+                    "rapsolja|as_sold"
+                  ],
+                  "depends_on": [
+                    "step-2"
+                  ],
+                  "duration_minutes": 3,
+                  "parallel_group": null
+                }
+              ],
+              "estimated_minutes": 30,
+              "equipment": [
+                "belagd panna med lock",
+                "kniv",
+                "skärbräda",
+                "våg"
+              ],
+              "vegetarian": true,
+              "fish": false,
+              "ingredient_count": 5,
+              "provenance": {
+                "authoring": "model_assisted_original",
+                "content_review": "reviewed",
+                "machine_validation": "passed",
+                "cooking_test": "not_cooked",
+                "reviewed_at": "2026-10-06",
+                "notes": "Andra oberoende innehållsförsöket efter kodlåsning 569e8f5. Mängdbasis och instruktioner manuellt jämförda. Författade tidsuppskattningar; ingen fysisk provlagning, veckohållbarhet eller laboratorienäring påstås."
+              },
+              "content_sha256": "d472a1a1dd69d4eb7d50626dafd8d32ecac2524ff8adc2bf192380c592d34aab",
+              "content_source": {
+                "pack_id": "extension-second-20261006",
+                "proposal_id": "smako-dinner-potato-tofu-cabbage-pan",
+                "sha256": "f8b02a4161488cd86207dd2a72a409fb5424e7985843d1bad838d3ffcd1f76b7",
+                "priority": 1,
+                "timing_basis": "authored_estimate_coarse_dependencies",
+                "active_minutes": 15,
+                "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+                "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+                "safety_sources": [],
+                "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats."
+              },
+              "dinner_level": "simple",
+              "active_minutes": 15,
+              "total_minutes": 30
+            }
+          }
+        }
+      ],
+      "basket": {
+        "total": 262.28,
+        "stores": [
+          {
+            "store_id": "context:coop:23eaae11c9661e68",
+            "store_name": "Coop Online Syd",
+            "items": [
+              {
+                "ingredient": "bönor [12]",
+                "product_id": "d78893b522d343809fc6267c906b6912",
+                "product_name": "Vita Bönor Stora Eko",
+                "gtin": "7350002402962",
+                "chain": "coop",
+                "price_context_type": "online_fulfillment",
+                "coverage": "full_online_catalog",
+                "store_id": "context:coop:23eaae11c9661e68",
+                "store_name": "Coop Online Syd",
+                "required_quantity": 300.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "white_bean",
+                "food_family": "legume",
+                "product_role": "plain_bean",
+                "product_form": "plain",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_food:white_bean",
+                  "visible_role:plain_bean",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 15.5,
+                "sale_unit": "st",
+                "comparison_price": null,
+                "comparison_unit": null,
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 380.0,
+                "package_unit": "g",
+                "usable_quantity": 230.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 2,
+                "purchased_quantity": 760.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 460.0,
+                "waste_quantity": 160.0,
+                "unit_price": 15.5,
+                "regular_unit_price": 15.5,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:d77472fd8700770f3c7ce3d4",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 15.5,
+                "total_price": 31.0,
+                "regular_total_price": 31.0,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "35086de9fe2845e0a5190fd9e168b031",
+                  "source_observed_at": "2026-10-04T04:43:21.559868Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "coop",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "provider_store_id": "730400",
+                  "price_context": "online_fulfillment",
+                  "coverage": "full_online_catalog",
+                  "semantic_confidence": "low",
+                  "quantity_confidence": "exact"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 31.0,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "morot [2]",
+                "product_id": "d50405fa91e64373825f8a8ffe4e1b44",
+                "product_name": "Morötter",
+                "gtin": "7300156476302",
+                "chain": "coop",
+                "price_context_type": "online_fulfillment",
+                "coverage": "full_online_catalog",
+                "store_id": "context:coop:23eaae11c9661e68",
+                "store_name": "Coop Online Syd",
+                "required_quantity": 360.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "carrot",
+                "food_family": null,
+                "product_role": "whole_vegetable",
+                "product_form": "fresh",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_role:whole_vegetable",
+                  "visible_raw_form:fresh",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 9.9,
+                "sale_unit": "st",
+                "comparison_price": 19.8,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 500.0,
+                "package_unit": "g",
+                "usable_quantity": 500.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 500.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 500.0,
+                "waste_quantity": 140.0,
+                "unit_price": 9.9,
+                "regular_unit_price": 9.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:7b3cba6daa681e7d87318fb6",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 9.9,
+                "total_price": 9.9,
+                "regular_total_price": 9.9,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "35086de9fe2845e0a5190fd9e168b031",
+                  "source_observed_at": "2026-10-04T04:32:56.677626Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "coop",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "provider_store_id": "730400",
+                  "price_context": "online_fulfillment",
+                  "coverage": "full_online_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 9.9,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "pasta [9]",
+                "product_id": "2858557b2bd0420e9e290c5566affaa2",
+                "product_name": "Spaghetti",
+                "gtin": "7340191156159",
+                "chain": "coop",
+                "price_context_type": "online_fulfillment",
+                "coverage": "full_online_catalog",
+                "store_id": "context:coop:23eaae11c9661e68",
+                "store_name": "Coop Online Syd",
+                "required_quantity": 140.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "pasta",
+                "food_family": null,
+                "product_role": null,
+                "product_form": null,
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 13.95,
+                "sale_unit": "st",
+                "comparison_price": 13.95,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 1000.0,
+                "package_unit": "g",
+                "usable_quantity": 1000.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 1000.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 1000.0,
+                "waste_quantity": 860.0,
+                "unit_price": 13.95,
+                "regular_unit_price": 13.95,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:3d533f80520c0361be06d9a2",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 13.95,
+                "total_price": 13.95,
+                "regular_total_price": 13.95,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "35086de9fe2845e0a5190fd9e168b031",
+                  "source_observed_at": "2026-10-04T04:44:47.718160Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "coop",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "provider_store_id": "730400",
+                  "price_context": "online_fulfillment",
+                  "coverage": "full_online_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 13.95,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "potatis [11]",
+                "product_id": "7c3bb8a14a604ec8807a5db762e6d1f4",
+                "product_name": "Potatis Mjölig",
+                "gtin": "7300156577474",
+                "chain": "coop",
+                "price_context_type": "online_fulfillment",
+                "coverage": "full_online_catalog",
+                "store_id": "context:coop:23eaae11c9661e68",
+                "store_name": "Coop Online Syd",
+                "required_quantity": 850.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "potato",
+                "food_family": null,
+                "product_role": "whole_vegetable",
+                "product_form": "fresh",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_role:whole_vegetable",
+                  "visible_raw_form:fresh",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 10.0,
+                "sale_unit": "st",
+                "comparison_price": 18.78,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 900.0,
+                "package_unit": "g",
+                "usable_quantity": 900.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 900.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 900.0,
+                "waste_quantity": 50.0,
+                "unit_price": 10.0,
+                "regular_unit_price": 16.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:0b1bb6db294b091b1a25dc4d",
+                "eligibility": "member",
+                "price_mechanism": "sale_price",
+                "membership_program": "COOP_MEMBER",
+                "base_checkout_unit_price": 10.0,
+                "total_price": 10.0,
+                "regular_total_price": 16.9,
+                "purchase_warning": null,
+                "offer_description": "Medlemspris-Potatis Mjölig-10:- /st",
+                "applied_offer": {
+                  "kind": "member",
+                  "description": "Medlemspris-Potatis Mjölig-10:- /st",
+                  "price": 10.0,
+                  "required_packages": 1,
+                  "max_quantity": null,
+                  "price_contract_id": "price-contract:0b1bb6db294b091b1a25dc4d",
+                  "eligibility": "member",
+                  "mechanism": "sale_price",
+                  "membership_program": "COOP_MEMBER",
+                  "member_program": "coop medlem",
+                  "percent_discount": null,
+                  "currency": "SEK",
+                  "source_confidence": null,
+                  "semantic_confidence": null,
+                  "quantity_confidence": null,
+                  "valid_from": "2026-09-27",
+                  "valid_to": "2026-10-04"
+                },
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "35086de9fe2845e0a5190fd9e168b031",
+                  "source_observed_at": "2026-10-04T04:33:00.693674Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "coop",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "provider_store_id": "730400",
+                  "price_context": "online_fulfillment",
+                  "coverage": "full_online_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact"
+                },
+                "membership_required": true,
+                "deposit_total": 0.0,
+                "merchandise_total": 10.0,
+                "verification_status": "VERIFIED"
+              }
+            ],
+            "subtotal": 64.85,
+            "subtotal_reconciled": true
+          },
+          {
+            "store_id": "context:willys:383650ec6ff5a636",
+            "store_name": "Willys Lund",
+            "items": [
+              {
+                "ingredient": "gul lök [4]",
+                "product_id": "6d4747b203c04f04aa86746c102a73e6",
+                "product_name": "Lök Gul i Påse Klass 1",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 280.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "yellow_onion",
+                "food_family": null,
+                "product_role": "whole_vegetable",
+                "product_form": "fresh",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_role:whole_vegetable",
+                  "visible_raw_form:fresh",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 9.9,
+                "sale_unit": "st",
+                "comparison_price": 9.9,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 1000.0,
+                "package_unit": "g",
+                "usable_quantity": 1000.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 1000.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 1000.0,
+                "waste_quantity": 720.0,
+                "unit_price": 9.9,
+                "regular_unit_price": 9.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:2cad2f7cc878f7dc8614f72a",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 9.9,
+                "total_price": 9.9,
+                "regular_total_price": 9.9,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:34:37.575339Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 9.9,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "krossade tomater [3]",
+                "product_id": "3f3d991aff8d4ca1a2a6c01b1a7f98a0",
+                "product_name": "Tomater Krossade",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 1200.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "krossade_tomater",
+                "food_family": "vegetable",
+                "product_role": "preserved_tomato",
+                "product_form": "canned",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_food:krossade_tomater",
+                  "primary_product_identity:krossade_tomater",
+                  "visible_role:preserved_tomato",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 7.9,
+                "sale_unit": "st",
+                "comparison_price": 15.8,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 500.0,
+                "package_unit": "g",
+                "usable_quantity": 500.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 3,
+                "purchased_quantity": 1500.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 1500.0,
+                "waste_quantity": 300.0,
+                "unit_price": 7.9,
+                "regular_unit_price": 7.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:f1158a3395563356b2391066",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 7.9,
+                "total_price": 23.7,
+                "regular_total_price": 23.7,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:40:47.139232Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 23.7,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "linser [1]",
+                "product_id": "8b579adb2dba44e8b36cadb241191f80",
+                "product_name": "Röda Linser",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 280.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "lentil",
+                "food_family": "legume",
+                "product_role": "dry_staple",
+                "product_form": "dry",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_food:lentil",
+                  "visible_role:dry_staple",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 18.83,
+                "sale_unit": "st",
+                "comparison_price": 47.08,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 400.0,
+                "package_unit": "g",
+                "usable_quantity": 400.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 400.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 400.0,
+                "waste_quantity": 120.0,
+                "unit_price": 18.83,
+                "regular_unit_price": 18.83,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:fcaeafa32b7dc1a5a213ed63",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 18.83,
+                "total_price": 18.83,
+                "regular_total_price": 18.83,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:41:54.015384Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 18.83,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "ost [13]",
+                "product_id": "b62995384cab424ebc98a43dd7ff7dbb",
+                "product_name": "Hushållsost",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 60.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "cheese",
+                "food_family": "dairy",
+                "product_role": "hard_cheese",
+                "product_form": "cheese",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_food:cheese",
+                  "primary_product_identity:cheese",
+                  "visible_role:hard_cheese",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 21.9,
+                "sale_unit": "st",
+                "comparison_price": 146.0,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 150.0,
+                "package_unit": "g",
+                "usable_quantity": 150.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 150.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 150.0,
+                "waste_quantity": 90.0,
+                "unit_price": 21.9,
+                "regular_unit_price": 21.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:dce948310330ed413f2d4b11",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 21.9,
+                "total_price": 21.9,
+                "regular_total_price": 21.9,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:39:51.638617Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 21.9,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "rapsolja [5]",
+                "product_id": "ed573dc5e7aa41809c1e05002b2d38ac",
+                "product_name": "Rapsolja",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 55.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "ml",
+                "canonical_food": "rapsolja",
+                "food_family": null,
+                "product_role": null,
+                "product_form": null,
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 23.9,
+                "sale_unit": "st",
+                "comparison_price": 23.9,
+                "comparison_unit": "l",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 1000.0,
+                "package_unit": "ml",
+                "usable_quantity": 1000.0,
+                "usable_unit": "ml",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 1000.0,
+                "purchased_unit": "ml",
+                "purchased_usable_quantity": 1000.0,
+                "waste_quantity": 945.0,
+                "unit_price": 23.9,
+                "regular_unit_price": 23.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:4f90433f688325317c4fb8e0",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 23.9,
+                "total_price": 23.9,
+                "regular_total_price": 23.9,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:41:20.623973Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 23.9,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "ris [7]",
+                "product_id": "c4617939687841858e8c8e4fb2bad00c",
+                "product_name": "Långkornigt Ris",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 120.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "rice",
+                "food_family": "grain",
+                "product_role": "cooking_staple",
+                "product_form": "grain",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_food:rice",
+                  "visible_role:cooking_staple",
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 19.9,
+                "sale_unit": "st",
+                "comparison_price": 19.9,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 1000.0,
+                "package_unit": "g",
+                "usable_quantity": 1000.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 1000.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 1000.0,
+                "waste_quantity": 880.0,
+                "unit_price": 19.9,
+                "regular_unit_price": 19.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:9235c44ac334e20d2a356eb3",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 19.9,
+                "total_price": 19.9,
+                "regular_total_price": 19.9,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:41:33.756863Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 19.9,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "spenat [8]",
+                "product_id": "c5777b4b74ac4a89894d37372d2bc9c9",
+                "product_name": "Hackad Spenat Fryst",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 350.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "spenat",
+                "food_family": null,
+                "product_role": null,
+                "product_form": "frozen",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 14.9,
+                "sale_unit": "st",
+                "comparison_price": 33.11,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 450.0,
+                "package_unit": "g",
+                "usable_quantity": 450.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 450.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 450.0,
+                "waste_quantity": 100.0,
+                "unit_price": 14.9,
+                "regular_unit_price": 14.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:f52a602f6b84241fb6b6a6b0",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 14.9,
+                "total_price": 14.9,
+                "regular_total_price": 14.9,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:35:13.824198Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 14.9,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "spiskummin [6]",
+                "product_id": "907927d0b79246199755b351785e9df0",
+                "product_name": "Spiskummin Malen",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 2.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "spiskummin",
+                "food_family": null,
+                "product_role": "single_spice",
+                "product_form": null,
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "complete_plain_culinary_label"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 14.9,
+                "sale_unit": "st",
+                "comparison_price": 248.33,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 60.0,
+                "package_unit": "g",
+                "usable_quantity": 60.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 1,
+                "purchased_quantity": 60.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 60.0,
+                "waste_quantity": 58.0,
+                "unit_price": 14.9,
+                "regular_unit_price": 14.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:e82af35db8c7fe16b1e7f7be",
+                "eligibility": "public",
+                "price_mechanism": "regular",
+                "membership_program": null,
+                "base_checkout_unit_price": 14.9,
+                "total_price": 14.9,
+                "regular_total_price": 14.9,
+                "purchase_warning": null,
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:40:53.283032Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "low",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 14.9,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "tofu [10]",
+                "product_id": "ef808e2be8e44105a1a3d3071b298bf3",
+                "product_name": "Naturell Tofu Fast Vegansk",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 600.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "tofu",
+                "food_family": null,
+                "product_role": null,
+                "product_form": null,
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_identity_match"
+                ],
+                "sale_model": "fixed_package",
+                "sale_price": 9.9,
+                "sale_unit": "st",
+                "comparison_price": 59.5,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 200.0,
+                "package_unit": "g",
+                "usable_quantity": 200.0,
+                "usable_unit": "g",
+                "quantity_confidence": "exact",
+                "variable_weight": false,
+                "packages_needed": 3,
+                "purchased_quantity": 600.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 600.0,
+                "waste_quantity": 0.0,
+                "unit_price": 9.9,
+                "regular_unit_price": 11.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:eba47448d45ea43652054592",
+                "eligibility": "public",
+                "price_mechanism": "sale_price",
+                "membership_program": null,
+                "base_checkout_unit_price": 9.9,
+                "total_price": 29.7,
+                "regular_total_price": 35.7,
+                "purchase_warning": null,
+                "offer_description": "Spara 2,00 kr/st",
+                "applied_offer": {
+                  "kind": "campaign",
+                  "description": "Spara 2,00 kr/st",
+                  "price": 9.9,
+                  "required_packages": 1,
+                  "max_quantity": null,
+                  "price_contract_id": "price-contract:eba47448d45ea43652054592",
+                  "eligibility": "public",
+                  "mechanism": "sale_price",
+                  "membership_program": null,
+                  "member_program": null,
+                  "percent_discount": null,
+                  "currency": "SEK",
+                  "source_confidence": null,
+                  "semantic_confidence": null,
+                  "quantity_confidence": null,
+                  "valid_from": null,
+                  "valid_to": "2026-10-11"
+                },
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:42:25.138577Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "exact",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 29.7,
+                "verification_status": "VERIFIED"
+              },
+              {
+                "ingredient": "vitkål [14]",
+                "product_id": "1d3c4a72e6d4499984e743790dbb2d09",
+                "product_name": "Vitkål Sverige Klass 1",
+                "gtin": null,
+                "chain": "willys",
+                "price_context_type": "online_store",
+                "coverage": "full_catalog",
+                "store_id": "context:willys:383650ec6ff5a636",
+                "store_name": "Willys Lund",
+                "required_quantity": 200.0,
+                "strategic_extra_quantity": 0.0,
+                "unit": "g",
+                "canonical_food": "white_cabbage",
+                "food_family": null,
+                "product_role": "whole_vegetable",
+                "product_form": "fresh",
+                "semantic_confidence": "high",
+                "semantic_evidence": [
+                  "visible_role:whole_vegetable",
+                  "visible_raw_form:fresh",
+                  "visible_identity_match"
+                ],
+                "sale_model": "variable_weight_package",
+                "sale_price": 9.9,
+                "sale_unit": "kg",
+                "comparison_price": 16.9,
+                "comparison_unit": "kg",
+                "piece_price": null,
+                "estimated_piece_weight": null,
+                "estimated_piece_weight_unit": "g",
+                "package_quantity": 2000.0,
+                "package_unit": "g",
+                "usable_quantity": 2000.0,
+                "usable_unit": "g",
+                "quantity_confidence": "estimated",
+                "variable_weight": true,
+                "packages_needed": 1,
+                "purchased_quantity": 2000.0,
+                "purchased_unit": "g",
+                "purchased_usable_quantity": 2000.0,
+                "waste_quantity": 1800.0,
+                "unit_price": 19.8,
+                "regular_unit_price": 16.9,
+                "ordinary_price_known": true,
+                "purchase_date": "2026-10-04",
+                "price_contract_id": "price-contract:98605147a2b16be1757f8907",
+                "eligibility": "public",
+                "price_mechanism": "sale_price",
+                "membership_program": null,
+                "base_checkout_unit_price": null,
+                "total_price": 19.8,
+                "regular_total_price": 19.8,
+                "purchase_warning": "variable package weight and total are estimates",
+                "offer_description": null,
+                "applied_offer": null,
+                "promotion_groups": [],
+                "checkout_offers": [],
+                "group_applications": [],
+                "group_residual_packages": null,
+                "group_residual_total": null,
+                "ungrouped_total_price": null,
+                "source_provenance": {
+                  "source_provider": "own",
+                  "source_channel": "catalog",
+                  "source_snapshot_id": "f464efd40f51443d8d684316289a60ed",
+                  "source_observed_at": "2026-10-02T23:34:29.279558Z",
+                  "source_role": "basket",
+                  "fallback_used": false,
+                  "chain": "willys",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "provider_store_id": "2176",
+                  "price_context": "online_store",
+                  "coverage": "full_catalog",
+                  "semantic_confidence": "high",
+                  "quantity_confidence": "estimated",
+                  "collection_location": "LOCAL_RELAY"
+                },
+                "membership_required": false,
+                "deposit_total": 0.0,
+                "merchandise_total": 19.8,
+                "verification_status": "VERIFIED_WITH_ESTIMATES"
+              }
+            ],
+            "subtotal": 197.43,
+            "subtotal_reconciled": true
+          }
+        ],
+        "max_stores": 3,
+        "savings_vs_single_store": null,
+        "verification_status": "VERIFIED_WITH_ESTIMATES",
+        "verification_warnings": [
+          "Matkassen innehåller uppskattade mängder eller vikter."
+        ],
+        "total_reconciled": true,
+        "store_count": 2
+      },
+      "checks": {
+        "purchase": "VERIFIED_WITH_ESTIMATES",
+        "purchase_planning_mode": "estimated",
+        "allergy": "NOT_REQUESTED",
+        "ingredient_exclusions": [],
+        "nutrition": [
+          {
+            "slot_id": "dinner-1",
+            "status": "NOT_REQUESTED",
+            "values": {},
+            "sources": []
+          },
+          {
+            "slot_id": "dinner-2",
+            "status": "NOT_REQUESTED",
+            "values": {},
+            "sources": []
+          },
+          {
+            "slot_id": "dinner-3",
+            "status": "NOT_REQUESTED",
+            "values": {},
+            "sources": []
+          },
+          {
+            "slot_id": "dinner-4",
+            "status": "NOT_REQUESTED",
+            "values": {},
+            "sources": []
+          },
+          {
+            "slot_id": "dinner-5",
+            "status": "NOT_REQUESTED",
+            "values": {},
+            "sources": []
+          }
+        ],
+        "facts_version": "retained-catalog-facts-v9-ready-baked-bread:f0c026bb5a5b4f7177ea8ef02b8fe72cadb972c36ae30cdd5f8879e67399b6c8",
+        "nutrition_reference_version": "slv-component-input-v4:47331f0319e6a09c1b8b5d2aa6280d3c15b2148297b829d66ce164bfdfb5882e",
+        "organic_cost_percent": 11.819429617202989,
+        "organic_evidence": {
+          "status": "CALCULATED",
+          "requested_percent": 0,
+          "lines": [
+            {
+              "product_id": "d78893b522d343809fc6267c906b6912",
+              "name": "Vita Bönor Stora Eko",
+              "cost": 31.0,
+              "organic": true,
+              "sources": [
+                {
+                  "market": "SE",
+                  "observed_at": "2026-10-04T04:43:21.559868+00:00",
+                  "product_id": "d78893b522d343809fc6267c906b6912",
+                  "snapshot_id": "35086de9fe2845e0a5190fd9e168b031",
+                  "source": "coop:raw:734f857ecca943d191e4b043536ff95f#results.items[2]:1c9cf1019155780d2ef385389d74a7fb25f58699c374228baa6bfbe3db1215d8",
+                  "source_product_id": "7350002402962"
+                }
+              ]
+            },
+            {
+              "product_id": "d50405fa91e64373825f8a8ffe4e1b44",
+              "name": "Morötter",
+              "cost": 9.9,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "2858557b2bd0420e9e290c5566affaa2",
+              "name": "Spaghetti",
+              "cost": 13.95,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "7c3bb8a14a604ec8807a5db762e6d1f4",
+              "name": "Potatis Mjölig",
+              "cost": 10.0,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "6d4747b203c04f04aa86746c102a73e6",
+              "name": "Lök Gul i Påse Klass 1",
+              "cost": 9.9,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "3f3d991aff8d4ca1a2a6c01b1a7f98a0",
+              "name": "Tomater Krossade",
+              "cost": 23.7,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "8b579adb2dba44e8b36cadb241191f80",
+              "name": "Röda Linser",
+              "cost": 18.83,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "b62995384cab424ebc98a43dd7ff7dbb",
+              "name": "Hushållsost",
+              "cost": 21.9,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "ed573dc5e7aa41809c1e05002b2d38ac",
+              "name": "Rapsolja",
+              "cost": 23.9,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "c4617939687841858e8c8e4fb2bad00c",
+              "name": "Långkornigt Ris",
+              "cost": 19.9,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "c5777b4b74ac4a89894d37372d2bc9c9",
+              "name": "Hackad Spenat Fryst",
+              "cost": 14.9,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "907927d0b79246199755b351785e9df0",
+              "name": "Spiskummin Malen",
+              "cost": 14.9,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "ef808e2be8e44105a1a3d3071b298bf3",
+              "name": "Naturell Tofu Fast Vegansk",
+              "cost": 29.7,
+              "organic": null,
+              "sources": []
+            },
+            {
+              "product_id": "1d3c4a72e6d4499984e743790dbb2d09",
+              "name": "Vitkål Sverige Klass 1",
+              "cost": 19.8,
+              "organic": null,
+              "sources": []
+            }
+          ],
+          "food_cost": 262.28,
+          "organic_food_cost": 31.0
+        },
+        "organic_animals": "NOT_REQUESTED",
+        "organic_definition": "Minst X % av matinköpets varukostnad ska vara verifierat ekologisk.",
+        "distribution": [
+          {
+            "meal_type": "dinner",
+            "slot_id": "dinner-1",
+            "protein": "vegetarian"
+          },
+          {
+            "meal_type": "dinner",
+            "slot_id": "dinner-2",
+            "protein": "vegetarian"
+          },
+          {
+            "meal_type": "dinner",
+            "slot_id": "dinner-3",
+            "protein": "vegetarian"
+          },
+          {
+            "meal_type": "dinner",
+            "slot_id": "dinner-4",
+            "protein": "vegetarian"
+          },
+          {
+            "meal_type": "dinner",
+            "slot_id": "dinner-5",
+            "protein": "vegetarian"
+          }
+        ],
+        "checkout_audit": {
+          "status": "PASS",
+          "items": [
+            {
+              "canonical_name": "bönor",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 300.0,
+              "purchased_usable_quantity": 460.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 160.0,
+              "surplus_percent": 53.33,
+              "estimated_surplus_value": 10.78,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "d78893b522d343809fc6267c906b6912",
+                  "product_name": "Vita Bönor Stora Eko",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "packages_needed": 2,
+                  "usable_quantity": 230.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 760.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 460.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 31.0
+                }
+              ]
+            },
+            {
+              "canonical_name": "gul lök",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 280.0,
+              "purchased_usable_quantity": 1000.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 720.0,
+              "surplus_percent": 257.14,
+              "estimated_surplus_value": 7.13,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "6d4747b203c04f04aa86746c102a73e6",
+                  "product_name": "Lök Gul i Påse Klass 1",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 1,
+                  "usable_quantity": 1000.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 1000.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 1000.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 9.9
+                }
+              ]
+            },
+            {
+              "canonical_name": "krossade tomater",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 1200.0,
+              "purchased_usable_quantity": 1500.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 300.0,
+              "surplus_percent": 25.0,
+              "estimated_surplus_value": 4.74,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "3f3d991aff8d4ca1a2a6c01b1a7f98a0",
+                  "product_name": "Tomater Krossade",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 3,
+                  "usable_quantity": 500.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 1500.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 1500.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 23.7
+                }
+              ]
+            },
+            {
+              "canonical_name": "linser",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 280.0,
+              "purchased_usable_quantity": 400.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 120.0,
+              "surplus_percent": 42.86,
+              "estimated_surplus_value": 5.65,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "8b579adb2dba44e8b36cadb241191f80",
+                  "product_name": "Röda Linser",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 1,
+                  "usable_quantity": 400.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 400.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 400.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 18.83
+                }
+              ]
+            },
+            {
+              "canonical_name": "morot",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 360.0,
+              "purchased_usable_quantity": 500.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 140.0,
+              "surplus_percent": 38.89,
+              "estimated_surplus_value": 2.77,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "d50405fa91e64373825f8a8ffe4e1b44",
+                  "product_name": "Morötter",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "packages_needed": 1,
+                  "usable_quantity": 500.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 500.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 500.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 9.9
+                }
+              ]
+            },
+            {
+              "canonical_name": "ost",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 60.0,
+              "purchased_usable_quantity": 150.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 90.0,
+              "surplus_percent": 150.0,
+              "estimated_surplus_value": 13.14,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "b62995384cab424ebc98a43dd7ff7dbb",
+                  "product_name": "Hushållsost",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 1,
+                  "usable_quantity": 150.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 150.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 150.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 21.9
+                }
+              ]
+            },
+            {
+              "canonical_name": "pasta",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 140.0,
+              "purchased_usable_quantity": 1000.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 860.0,
+              "surplus_percent": 614.29,
+              "estimated_surplus_value": 12.0,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "2858557b2bd0420e9e290c5566affaa2",
+                  "product_name": "Spaghetti",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "packages_needed": 1,
+                  "usable_quantity": 1000.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 1000.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 1000.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 13.95
+                }
+              ]
+            },
+            {
+              "canonical_name": "potatis",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 850.0,
+              "purchased_usable_quantity": 900.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 50.0,
+              "surplus_percent": 5.88,
+              "estimated_surplus_value": 0.56,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "7c3bb8a14a604ec8807a5db762e6d1f4",
+                  "product_name": "Potatis Mjölig",
+                  "store_id": "context:coop:23eaae11c9661e68",
+                  "store_name": "Coop Online Syd",
+                  "packages_needed": 1,
+                  "usable_quantity": 900.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 900.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 900.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 10.0
+                }
+              ]
+            },
+            {
+              "canonical_name": "rapsolja [5]",
+              "unit": "ml",
+              "status": "PASS",
+              "required_quantity": 55.0,
+              "purchased_usable_quantity": 1000.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 945.0,
+              "surplus_percent": 1718.18,
+              "estimated_surplus_value": 22.59,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "ed573dc5e7aa41809c1e05002b2d38ac",
+                  "product_name": "Rapsolja",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 1,
+                  "usable_quantity": 1000.0,
+                  "usable_unit": "ml",
+                  "purchased_quantity": 1000.0,
+                  "purchased_unit": "ml",
+                  "purchased_usable_quantity": 1000.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 23.9
+                }
+              ]
+            },
+            {
+              "canonical_name": "ris",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 120.0,
+              "purchased_usable_quantity": 1000.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 880.0,
+              "surplus_percent": 733.33,
+              "estimated_surplus_value": 17.51,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "c4617939687841858e8c8e4fb2bad00c",
+                  "product_name": "Långkornigt Ris",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 1,
+                  "usable_quantity": 1000.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 1000.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 1000.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 19.9
+                }
+              ]
+            },
+            {
+              "canonical_name": "spenat [8]",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 350.0,
+              "purchased_usable_quantity": 450.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 100.0,
+              "surplus_percent": 28.57,
+              "estimated_surplus_value": 3.31,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "c5777b4b74ac4a89894d37372d2bc9c9",
+                  "product_name": "Hackad Spenat Fryst",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 1,
+                  "usable_quantity": 450.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 450.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 450.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 14.9
+                }
+              ]
+            },
+            {
+              "canonical_name": "spiskummin [6]",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 2.0,
+              "purchased_usable_quantity": 60.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 58.0,
+              "surplus_percent": 2900.0,
+              "estimated_surplus_value": 14.4,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "907927d0b79246199755b351785e9df0",
+                  "product_name": "Spiskummin Malen",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 1,
+                  "usable_quantity": 60.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 60.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 60.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 14.9
+                }
+              ]
+            },
+            {
+              "canonical_name": "tofu [10]",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 600.0,
+              "purchased_usable_quantity": 600.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 0.0,
+              "surplus_percent": 0.0,
+              "estimated_surplus_value": 0.0,
+              "quantity_confidence": "exact",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "ef808e2be8e44105a1a3d3071b298bf3",
+                  "product_name": "Naturell Tofu Fast Vegansk",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 3,
+                  "usable_quantity": 200.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 600.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 600.0,
+                  "quantity_confidence": "exact",
+                  "semantic_confidence": "high",
+                  "sale_model": "fixed_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 29.7
+                }
+              ]
+            },
+            {
+              "canonical_name": "vitkål",
+              "unit": "g",
+              "status": "PASS",
+              "required_quantity": 200.0,
+              "purchased_usable_quantity": 2000.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 1800.0,
+              "surplus_percent": 900.0,
+              "estimated_surplus_value": 17.82,
+              "quantity_confidence": "estimated",
+              "quantity_reconciled": true,
+              "cost_reconciled": true,
+              "selected_products": [
+                {
+                  "product_id": "1d3c4a72e6d4499984e743790dbb2d09",
+                  "product_name": "Vitkål Sverige Klass 1",
+                  "store_id": "context:willys:383650ec6ff5a636",
+                  "store_name": "Willys Lund",
+                  "packages_needed": 1,
+                  "usable_quantity": 2000.0,
+                  "usable_unit": "g",
+                  "purchased_quantity": 2000.0,
+                  "purchased_unit": "g",
+                  "purchased_usable_quantity": 2000.0,
+                  "quantity_confidence": "estimated",
+                  "semantic_confidence": "high",
+                  "sale_model": "variable_weight_package",
+                  "quantity_reconciled": true,
+                  "cost_reconciled": true,
+                  "reconciliation_error": null,
+                  "total_price": 19.8
+                }
+              ]
+            }
+          ],
+          "pantry_items": [],
+          "deficits": [],
+          "unit_totals": [
+            {
+              "unit": "g",
+              "required_quantity": 4742.0,
+              "purchased_usable_quantity": 10020.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 5278.0,
+              "estimated_surplus_value": 109.81
+            },
+            {
+              "unit": "ml",
+              "required_quantity": 55.0,
+              "purchased_usable_quantity": 1000.0,
+              "deficit_quantity": 0.0,
+              "surplus_quantity": 945.0,
+              "estimated_surplus_value": 22.59
+            }
+          ],
+          "estimated_surplus_value_total": 132.4,
+          "verification_status": "VERIFIED_WITH_ESTIMATES",
+          "verification_warnings": [
+            "Basket audit uses estimated piece or variable-package weights."
+          ],
+          "totals_reconciled": true,
+          "calculated_total": 262.28,
+          "reported_total": 262.28,
+          "total_reconciliation_errors": [],
+          "passed": true,
+          "ingredients_checked": 14,
+          "unknown_quantities": 0
+        },
+        "allowed_store_ids": [
+          "context:coop:23eaae11c9661e68",
+          "context:coop:698f7b6528879df2",
+          "context:coop:709f87b60ef8c210",
+          "context:coop:95aeb1242c92bd40",
+          "context:coop:a35d1de8aaaf5b41",
+          "context:coop:a5a6ee957014972a",
+          "context:coop:db7c87478187339f",
+          "context:coop:e6ab1bde1aaf6609",
+          "context:coop:e9ccea03a65e7252",
+          "context:coop:f0f14586a4a5abfa",
+          "context:coop:fee53e0e0c90eab3",
+          "context:hemkop:1283c412b9030d45",
+          "context:hemkop:182a78a0a6121b12",
+          "context:hemkop:3288e04edd97e349",
+          "context:hemkop:756955d0e6e05f23",
+          "context:hemkop:c5c4ece13cd2bd5c",
+          "context:ica:0edf5d52980ffcd7",
+          "context:ica:1a19476898da3fb0",
+          "context:ica:24c415e3af6438b4",
+          "context:ica:2d734344abd8c685",
+          "context:ica:3d991cfe2014eb8c",
+          "context:ica:602d84df14d47e3d",
+          "context:ica:7b8c7bd0161c50dc",
+          "context:ica:7f1f6e52c3152f98",
+          "context:ica:b7a8ac31980d0bd7",
+          "context:ica:b7ad17cc0a7001fd",
+          "context:ica:cb840c0edbf56816",
+          "context:ica:e03aeae83df25aa4",
+          "context:lidl:05f1cb3d9fc89bc3",
+          "context:lidl:46dd1e85257757e0",
+          "context:willys:383650ec6ff5a636",
+          "context:willys:4a671428fc484e43",
+          "context:willys:f3f63d6851275fcc"
+        ],
+        "week_distribution": {
+          "classification_version": "authored-week-sources-v1",
+          "cuisines": {},
+          "main_proteins": {
+            "bönor": 1,
+            "linser": 2,
+            "tofu": 2
+          },
+          "distinct_cuisines": 0,
+          "dinner_count": 5,
+          "base_ids": [
+            "smako-dinner-bean-mash-gratin",
+            "smako-dinner-lentil-carrot-soup",
+            "smako-dinner-lentil-spinach-rice-pot",
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "smako-dinner-tofu-pasta-ragu"
+          ],
+          "base_id_counts": {
+            "smako-dinner-bean-mash-gratin": 1,
+            "smako-dinner-lentil-carrot-soup": 1,
+            "smako-dinner-lentil-spinach-rice-pot": 1,
+            "smako-dinner-potato-tofu-cabbage-pan": 1,
+            "smako-dinner-tofu-pasta-ragu": 1
+          },
+          "dish_families": {
+            "gratäng": 1,
+            "gryta": 1,
+            "panna": 1,
+            "pasta": 1,
+            "soppa": 1
+          },
+          "cooking_methods": {
+            "oven": 1,
+            "pan": 1,
+            "pot": 3
+          }
+        },
+        "recipe_variation_policy": {
+          "policy_version": "authored-meal-multifactor-v1",
+          "min_recipe_families": 0,
+          "min_cooking_methods": 0,
+          "target_recipe_count": 5,
+          "mode": "balanced",
+          "reject_exact_recipe_duplicates": true,
+          "reject_duplicate_ingredient_profiles": true,
+          "max_same_recipe_family": 2,
+          "max_same_primary_ingredient_meals": 2,
+          "max_same_carbohydrate_meals": null,
+          "max_same_cooking_method_meals": null,
+          "max_same_dish_form_meals": 2,
+          "max_pairwise_culinary_similarity": 0.85,
+          "description": "Rättfamilj, huvudråvara, beredning, sås/smakprofil och tillbehör bedöms tillsammans. Samma ris eller kastrull är inte ensamt en upprepning. Uttryckliga begränsningar gäller fortfarande."
+        },
+        "new_purchase_used_cost": 129.88,
+        "used_ingredient_cost": 129.88,
+        "used_cost_basis": {
+          "method": "proportional_allocation_of_paid_merchandise_cost_to_used_usable_quantity",
+          "deposit_included": false,
+          "pantry_cost_status": "NOT_USED",
+          "quantity_status": "ESTIMATED",
+          "description": "Varukostnad utan pant fördelad efter använd andel av inköpt användbar mängd. Skafferiets tidigare inköpspris är okänt. Resternas framtida värde dras inte av från köpbeloppet."
+        },
+        "recipe_preferences": {
+          "mode": "complete",
+          "cuisines": [],
+          "min_ingredients": 10,
+          "max_ingredients": 15,
+          "max_minutes": null,
+          "adaptation": "approved",
+          "min_protein_g": null,
+          "allow_fish": true
+        },
+        "search_outcome": {
+          "status": "VALID_SOLUTION",
+          "global_optimum_proven": false,
+          "label": "Lägsta hittade inköpskostnad inom dina val",
+          "search_budget": {
+            "scope": "current_planner_search_diagnostics",
+            "nutrition_status": "NOT_REACHED",
+            "nutrition_searches_recorded": 0,
+            "nutrition_searches_omitted": 0,
+            "nutrition_budget_exhausted_recorded": 0,
+            "week_search_method": "bounded_beam",
+            "distinct_week_proposals_pruned": 145
+          },
+          "budget_message": "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget. Globalt lägsta pris är inte bevisat."
+        }
+      },
+      "raw_file": ".local\\meal-library-20261006\\browser\\final4-simple\\chromium-mobile-public\\generated.json",
+      "raw_sha256": "04e9964ae37cde136caa83cf6d0f00f2795a810fded59851205de70b7849c540"
+    },
+    {
       "case": "main",
       "selection": "free ordinary button selection",
       "request": {
@@ -109,7 +4548,7 @@
         "min_vegetable_g_per_serving": 100.0,
         "debug": false
       },
-      "plan_id": "f0827839-4569-46d6-89ea-9ddd2d10b110",
+      "plan_id": "595ca545-5d52-4db2-93bc-f8ada71c99ae",
       "revision": 1,
       "runtime": "fd2cfda5490ac93295e6a2cef6b6b8408497f89e",
       "paid": 741.15,
@@ -18936,8 +23375,8 @@
           "budget_message": "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget. Globalt lägsta pris är inte bevisat."
         }
       },
-      "raw_file": ".local\\meal-library-20261006\\browser\\final3-main-chromium\\chromium-mobile-public\\generated.json",
-      "raw_sha256": "804dc6df5641a3e0752043ca2bb6c06c06781a83572b81174b99560fa447fbe2"
+      "raw_file": ".local\\meal-library-20261006\\browser\\final6-main-no-navigation-chromium\\chromium-mobile-public\\generated.json",
+      "raw_sha256": "0da4538f5bf286417af4e0d5eef3e6d4fc984964c2b2ad69b318aefb1b07e292"
     },
     {
       "case": "crafted",

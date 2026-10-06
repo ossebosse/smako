@@ -1,0 +1,82 @@
+{
+  "observed_at_utc": "2026-10-06T20:36:30.757324+00:00",
+  "image": "sha256:c8362751b13a6e649beadad2a3c27b9b5df8bfd1e2fa177ff68e01e1d7b8b2c7",
+  "build_id": "status-reconnect-dd12cc80e98c",
+  "complete_recipes_enabled": "true",
+  "container_running": true,
+  "oom_killed": false,
+  "root_disk_free_bytes": 172077056,
+  "/health": {
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "status": "ok",
+      "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+      "build_id": "status-reconnect-dd12cc80e98c"
+    }
+  },
+  "/ready": {
+    "status": 503,
+    "content_type": "application/json",
+    "body": {
+      "status": "not_ready",
+      "database": "ok",
+      "plan_store": "ok",
+      "price_universe": {
+        "active": true,
+        "required_contexts_usable": false,
+        "missing_required_context_ids": [
+          "context:willys:383650ec6ff5a636",
+          "context:willys:4a671428fc484e43"
+        ],
+        "usable_context_ids": [
+          "context:coop:23eaae11c9661e68",
+          "context:hemkop:3288e04edd97e349",
+          "context:hemkop:756955d0e6e05f23",
+          "context:ica:0edf5d52980ffcd7",
+          "context:ica:1a19476898da3fb0",
+          "context:ica:24c415e3af6438b4",
+          "context:ica:2d734344abd8c685",
+          "context:ica:3d991cfe2014eb8c",
+          "context:ica:602d84df14d47e3d",
+          "context:ica:7b8c7bd0161c50dc",
+          "context:ica:7f1f6e52c3152f98",
+          "context:ica:b7a8ac31980d0bd7",
+          "context:ica:b7ad17cc0a7001fd",
+          "context:ica:cb840c0edbf56816",
+          "context:ica:e03aeae83df25aa4",
+          "context:lidl:05f1cb3d9fc89bc3",
+          "context:lidl:46dd1e85257757e0",
+          "context:willys:f3f63d6851275fcc"
+        ],
+        "requires_attention": true,
+        "warning_age_hours": 36.0,
+        "stale_age_hours": 48.0,
+        "status": "degraded",
+        "price_universe_id": "price-universe:387cc368662cc45b3ee4714aaf57ed42e4a6ff1123a814d7fb62e25f5ead80e9",
+        "built_at": "2026-10-05 22:16:50.460741+00:00",
+        "oldest_price_age_hours": 53.091,
+        "oldest_usable_price_age_hours": 46.309,
+        "hours_until_oldest_usable_stale": 1.691,
+        "usable_context_count": 18,
+        "excluded_stale_context_count": 2,
+        "excluded_stale_context_ids": [
+          "context:willys:383650ec6ff5a636",
+          "context:willys:4a671428fc484e43"
+        ],
+        "product_count": 2234
+      },
+      "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+      "build_id": "status-reconnect-dd12cc80e98c",
+      "features": {
+        "complete_recipes_enabled": true
+      }
+    }
+  },
+  "/static/complete-recipes.js?v=status-reconnect-1": {
+    "status": 200,
+    "content_type": "text/javascript; charset=utf-8",
+    "bytes": 46582,
+    "sha256": "17311d27a3a50ec9e75415316ca8cc90d10c94ac85380b36a75a3541d1b7114e"
+  }
+}

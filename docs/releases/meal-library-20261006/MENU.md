@@ -4,6 +4,105 @@ Berikad historisk replay med oförändrat pris-/faktaunderlag. Lägsta hittade k
 
 Fullständiga recept, slots, mängder, näringskällor, köpvillkor och audit finns i [MENUS.json](MENUS.json). Separat kvalificering med näringskontroll redovisas i QUALIFICATION.json. Ingen fysisk provlagning eller uppmätt tillagningstid påstås.
 
+## simple
+
+262,28 kr hela inköp · 129,88 kr använd mängd · 10 portioner. Urval: free ordinary button selection.
+
+### 1. Len lins- och morotssoppa
+
+Grundrätt `smako-dinner-lentil-carrot-soup`, version `1.2.0`, 2 portioner.
+
+- 160,0 g linser (dry)
+- 240,0 g morot (raw_edible)
+- 400,0 g krossade tomater (as_sold)
+- 100,0 g gul lök (raw_edible)
+- 10,0 ml rapsolja (as_sold)
+- 2,0 g spiskummin (dry)
+
+Tillagning:
+
+1. Väg upp listans ätbara mängder. Hacka löken och skär moroten i tunna skivor. Fräs varsamt i den uppmätta oljan i en kastrull. Tillsätt torra röda linser, tomater, spiskummin och dricksvatten så att allt täcks. Sjud tills linser och morot är helt mjuka. Mixa till soppa och behåll all vätska; späd med vatten om det behövs. Fördela all angiven mat jämnt mellan portionerna.
+
+### 2. Lins- och spenatgryta med ris
+
+Grundrätt `smako-dinner-lentil-spinach-rice-pot`, version `1.0.0`, 2 portioner.
+
+- 120,0 g linser (dry)
+- 120,0 g ris (dry)
+- 200,0 g spenat (as_sold)
+- 400,0 g krossade tomater (as_sold)
+- 10,0 ml rapsolja (as_sold)
+
+Tillagning:
+
+1. Väg linser och ris torra och spenat samt krossade tomater enligt listan. Häll all uppmätt olja och tomaterna i en kastrull. Rör ned linser och ris. Tillsätt dricksvatten enligt risets och linsernas absorptionsanvisningar på förpackningarna.
+2. Sjud under lock ungefär 18 minuter. Rör om ibland och tillsätt lite dricksvatten om det börjar fastna. Lägg i spenaten mot slutet och värm tills den är genomvarm och både ris och linser mjuka. Häll inte bort kokvätska.
+3. Skrapa ned all gryta i två lika stora portioner och servera varmt.
+
+### 3. Pastapanna med smulad tofu
+
+Grundrätt `smako-dinner-tofu-pasta-ragu`, version `1.2.0`, 2 portioner.
+
+- 140,0 g pasta (dry)
+- 300,0 g tofu (as_sold)
+- 400,0 g krossade tomater (as_sold)
+- 120,0 g morot (raw_edible)
+- 80,0 g gul lök (raw_edible)
+- 10,0 ml rapsolja (as_sold)
+
+Tillagning:
+
+1. Väg upp listans ätbara mängder. Riv moroten och hacka löken. Fräs dem i den uppmätta oljan och smula ned tofun. Tillsätt tomater, torr kort pasta och vatten lite i taget. Sjud och rör tills pastan är genomkokt och såsen omsluter den. Behåll all mat och vätska i pannan. Fördela all angiven mat jämnt mellan portionerna.
+
+### 4. Potatismosgratäng med vita bönor
+
+Grundrätt `smako-dinner-bean-mash-gratin`, version `1.2.0`, 2 portioner.
+
+- 450,0 g potatis (raw_edible)
+- 300,0 g vita bönor (cooked_drained)
+- 150,0 g spenat (as_sold)
+- 60,0 g ost (as_sold)
+- 10,0 ml rapsolja (as_sold)
+
+Tillagning:
+
+1. Väg upp listans ätbara mängder. Värm ugnen till 225 grader. Tärna potatisen fint och sjud i en liten uppmätt mängd vatten tills mjuk. Mosa med kokvattnet och oljan. Väg färdigkokta vita bönor efter avrinning och värm dem med spenaten. Lägg bönor och spenat i en liten form, täck med mos och ost. Gratinera tills osten smält och maten är genomvarm. Servera också vätska och ost som hamnat i formen. Fördela all angiven mat jämnt mellan portionerna.
+
+### 5. Potatispanna med tofu och mjuk kål
+
+Grundrätt `smako-dinner-potato-tofu-cabbage-pan`, version `1.0.0`, 2 portioner.
+
+- 400,0 g potatis (raw_edible)
+- 300,0 g tofu (as_sold)
+- 200,0 g vitkål (raw_edible)
+- 100,0 g gul lök (raw_edible)
+- 15,0 ml rapsolja (as_sold)
+
+Tillagning:
+
+1. Skala potatis och lök och ta bort kålens oätliga delar före vägning. Skär potatisen i små tärningar och strimla kål och lök. Väg tofun enligt listan och skär i tärningar.
+2. Värm all uppmätt olja i en belagd panna. Lägg i potatis och lite dricksvatten, täck och tillaga tills nästan mjuk. Tillsätt tofu, kål och lök. Vänd försiktigt och fortsätt under lock tills potatisen är mjuk och resten genomvarmt. Ta av locket mot slutet så överflödig vätska kan ånga bort.
+3. Skrapa upp all mat och olja i två lika stora portioner.
+
+### Inköpsrader
+
+| Inköpsställe och kanal | Produkt | Behov | Köp | Planerad rest | Betalning |
+| --- | --- | --- | --- | --- | --- |
+| Coop Online Syd · online_fulfillment | Vita Bönor Stora Eko (`d78893b522d343809fc6267c906b6912`) | 300,0 g | 2 × 380,0 g | 160,0 g | 31,0 kr |
+| Coop Online Syd · online_fulfillment | Morötter (`d50405fa91e64373825f8a8ffe4e1b44`) | 360,0 g | 1 × 500,0 g | 140,0 g | 9,9 kr |
+| Coop Online Syd · online_fulfillment | Spaghetti (`2858557b2bd0420e9e290c5566affaa2`) | 140,0 g | 1 × 1000,0 g | 860,0 g | 13,95 kr |
+| Coop Online Syd · online_fulfillment | Potatis Mjölig (`7c3bb8a14a604ec8807a5db762e6d1f4`) | 850,0 g | 1 × 900,0 g | 50,0 g | 10,0 kr |
+| Willys Lund · online_store | Lök Gul i Påse Klass 1 (`6d4747b203c04f04aa86746c102a73e6`) | 280,0 g | 1 × 1000,0 g | 720,0 g | 9,9 kr |
+| Willys Lund · online_store | Tomater Krossade (`3f3d991aff8d4ca1a2a6c01b1a7f98a0`) | 1200,0 g | 3 × 500,0 g | 300,0 g | 23,7 kr |
+| Willys Lund · online_store | Röda Linser (`8b579adb2dba44e8b36cadb241191f80`) | 280,0 g | 1 × 400,0 g | 120,0 g | 18,83 kr |
+| Willys Lund · online_store | Hushållsost (`b62995384cab424ebc98a43dd7ff7dbb`) | 60,0 g | 1 × 150,0 g | 90,0 g | 21,9 kr |
+| Willys Lund · online_store | Rapsolja (`ed573dc5e7aa41809c1e05002b2d38ac`) | 55,0 ml | 1 × 1000,0 ml | 945,0 ml | 23,9 kr |
+| Willys Lund · online_store | Långkornigt Ris (`c4617939687841858e8c8e4fb2bad00c`) | 120,0 g | 1 × 1000,0 g | 880,0 g | 19,9 kr |
+| Willys Lund · online_store | Hackad Spenat Fryst (`c5777b4b74ac4a89894d37372d2bc9c9`) | 350,0 g | 1 × 450,0 g | 100,0 g | 14,9 kr |
+| Willys Lund · online_store | Spiskummin Malen (`907927d0b79246199755b351785e9df0`) | 2,0 g | 1 × 60,0 g | 58,0 g | 14,9 kr |
+| Willys Lund · online_store | Naturell Tofu Fast Vegansk (`ef808e2be8e44105a1a3d3071b298bf3`) | 600,0 g | 3 × 200,0 g | 0,0 g | 29,7 kr |
+| Willys Lund · online_store | Vitkål Sverige Klass 1 (`1d3c4a72e6d4499984e743790dbb2d09`) | 200,0 g | 1 × 2000,0 g | 1800,0 g | 19,8 kr |
+
 ## main
 
 741,15 kr hela inköp · 495,13 kr använd mängd · 20 portioner. Urval: free ordinary button selection.

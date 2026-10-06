@@ -25,12 +25,24 @@ Varje färdig grupp har tre kalla och tre varma nyberäkningar. Råtider, min/ma
 
 ## Klick till visat resultat
 
-Slutligt ostört huvudfall: Chromium 63,875 s och WebKit 63,281 s. 60-sekundersmålet är inte uppnått. Små frukost-/mellanmålsflöden tog 25,828/24,032 s inklusive kontrollerad återhämtning; de är inte ostörda backendmedianer. Kombinerad vecka tog 59,859/52,047 s med separat förlustinjicering respektive dold sida/offline. [Webbprov](BROWSER-EVIDENCE.json) skiljer kö, beräkning och klientleverans.
+Slutligt huvudklick utan omladdning eller nätinjektion under genereringen: Chromium 63,812 s och WebKit 72,297 s. WebKit var första huvudberäkningen i en ny appprocess; Chromium följande varma begäran. Dessa enskilda prov är inte parade kall-/varmmedianer. 60-sekundersmålet är inte uppnått. Tidigare huvudklick 63,875/63,281 s innehöll verktygets avsiktliga omladdning och redovisas som återanslutningsprov, inte ostörd leverans. Små frukost-/mellanmålsflöden tog 25,828/24,032 s inklusive kontrollerad återhämtning; de är inte ostörda backendmedianer. Kombinerad vecka tog 59,859/52,047 s med separat förlustinjicering respektive dold sida/offline. [Webbprov](BROWSER-EVIDENCE.json) skiljer kö, beräkning och klientleverans.
 
 ## Förberedelse och lagring
 
-Ordinarie CLI för hela utfärdade biblioteket och portioner 1/2/4: 42,853 s inuti processen, 47,407 s inklusive container; cgroup-topp 1,505 GiB. Cirka 8,55 MB artefakter. Struktur-/skalning förbereds vid innehålls-/metodändring, offentliga källprojektioner vid ändrad källsignatur. Privata begäranskrav och slutlig audit körs fortfarande. Separat CPU-mätning redovisas när råprovet är avslutat.
+Ordinarie CLI för hela utfärdade biblioteket och portioner 1/2/4: 42,853 s inuti processen, 47,407 s inklusive container; cgroup-topp 1,505 GiB. Cirka 8,55 MB artefakter. Struktur-/skalning förbereds vid innehålls-/metodändring, offentliga källprojektioner vid ändrad källsignatur. Privata begäranskrav och slutlig audit körs fortfarande. Separat CPU-mätning är färdig i [PREPARATION.json](PREPARATION.json).
 
 Beständiga artefakter är hashkontrollerade och begränsade i storlek och generationer. Proven använder värdens tmpfs och kopierar evidens med hash till D:; tmpfs överlever appomstart men inte värdomstart. Detta är isolerad testlagring, inte en rekommendation att flytta produktionsdata till RAM.
 
 Skalprov och inkrementella källändringar redovisas separat. Syntetiskt innehåll räknas inte som recept, matkvalitet eller konsumentmenyer. Bibliotekstillväxt kräver fortfarande mer relevant kandidatarbete; global kostnadsoptimalitet är inte bevisad.
+
+## CPU, återanvändning och biblioteksstorlek
+
+Full CLI-förberedelse i ny process: 42,61 s, 40,91 CPU-s användarkod och 1,66 CPU-s systemkod. En andra CLI-förberedelse i samma process med giltiga artefakter: 22,92 s, 22,40 + 0,48 CPU-s. Den senare läser och hashkontrollerar källunderlag igen; det är inte noll arbete eller en ny process. Ackumulerad RSS-topp 1,46/1,75 GiB. Cirka 8,55 MB beständiga artefakter för hela utfärdade biblioteket och portioner 1/2/4. Förberedelse sker vid ändrat innehåll/metod eller källsignatur; inga nya produktionsscheman har införts.
+
+[SCALE.md](SCALE.md) visar 1×/2×/5×. Den relevanta middagssökningen tar vid 5× 919,89 s och frukost 78,29 s i kalla processer. Alla slutprov håller sig under 3 GiB, men snabb storbibliotekssökning är inte uppnådd. Import- och förberedelsetiden finns separat i skalrapporten.
+
+Oförändrat huvudfall: varm P3 57,11 s mot dd12 53,62 s, +3,49 s; kall P3 95,87 mot 86,49 s. Sex fler relevanta recept och jämförelse med tidigare giltig pool ger också högre sökkostnad: kombinerad varm median 26,00 s i P2 mot 48,25 s i P3. Nytt frukost-/mellanmålsarbete är mindre än huvudfallet, men P3 är långsammare än P2. Den tidigare minnesförlusten är rättad; det innebär inte att alla prestandamål är nådda.
+
+Förberedda filer behålls inom fasta storleks-/generationsgränser. Vid full kapacitet återberäknas uppgifter säkert i minnet; ingen automatisk generationsutrensning infördes. Källändring kan konservativt bygga om hela källindexet. Beroendeindexet pekar ut berörda ingredienser/recept, men är inte ett löfte om enbart partiell källomräkning.
+
+Enkel femmiddagsplan för två tog 38,531 s via ordinarie Chromium-knapp, med avsiktlig omladdning under jobb. En köväntan på 0,000039 s, beräkning 36,283 s och sparning 0,021 s finns i samma instrumenterade jobbreferens. Ingen exakt procentuell framstegsmätare eller garanterad sluttid infördes.

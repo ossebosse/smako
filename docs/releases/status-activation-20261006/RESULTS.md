@@ -38,3 +38,9 @@ enligt oförändrad 48-timmarsgräns. Den aktiva imagen, BUILD_ID och receptflag
 är fortsatt dd12 enligt ovan. Detta är senaste läget, inte en återkallelse av
 de tidigare knappflödesproven. Ingen ny insamling, schemauppdatering eller
 försvagad färskhetskontroll har gjorts. [Tidsstämplad observation](LATEST-STATE.json).
+
+Slutkontroll 6 oktober 20:36:31 UTC: samma dd12-image, BUILD_ID, flagga och
+JavaScript; `/health` 200, `/ready` 503, planlagring `ok`. Två obligatoriska
+Willys-kontexter är stale. Rotvolymen har 172 077 056 byte ledigt.
+[Tidsstämplad slutobservation](STATE-20261006T203631Z.json). Ingen ytterligare
+städning, insamling eller driftändring utfördes.
