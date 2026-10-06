@@ -54,6 +54,22 @@ def rebuild(products):
         source_name='controlled-incremental-retained-data',oldest_observed_at=prepared.oldest_observed_at)
 baseline=basket('baseline',prepared);assert baseline['status']=='PASS'
 basket('identical-source-reuse',prepared)
+# Real fixed dishes demonstrate one compatible purchase across meal categories.
+# This is an integration probe, not a free economic selection or savings claim.
+shared_recipes=[next(r for r in current_recipes() if r.design.base_id==base) for base in
+    ['smako-dinner-bean-couscous-salad','smako-breakfast-overnight-apple-oats']]
+shared_request=request.model_copy(deep=True)
+shared_request.personal.meals=[request.personal.meals[0].model_copy(update={
+    'meal_type':r.design.meal_types[0],'servings':r.servings}) for r in shared_recipes]
+shared_planner=PersonalPlanner(shared_request,Settings(price_provider='mock',complete_recipes_enabled=True),prepared,
+    {'revision':0,'items':[],'reservations':{},'events':{}},facts=facts,now=clock)
+shared_slots=[MealSlot(id=r.design.meal_types[0]+'-1',day=1,meal_type=r.design.meal_types[0],
+    recipe=shared_planner.clean_recipe(r,shared_planner.meals[r.design.meal_types[0]])) for r in shared_recipes]
+joint=shared_planner.basket(shared_slots)
+Path('/results/shared-meal-purchase.json').write_bytes(encoded({'selection':'fixed real recipes, not free selection',
+    'slots':[s.model_dump(mode='json') for s in shared_slots],
+    'basket':joint['basket'].model_dump(mode='json'),'checks':joint['checks'],
+    'audit':joint['audit'].model_dump(mode='json')}))
 item=next(i for s in baseline['basket']['stores'] for i in s['items'] if i['ingredient'].startswith('kvarg'))
 target=next(p for p in prepared.universe.products if p.product_id==item['product_id'] and p.store_id==item['store_id'])
 key=(target.store_id,target.product_id);fact=facts[key]
