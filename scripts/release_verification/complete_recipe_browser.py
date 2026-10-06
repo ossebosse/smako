@@ -429,7 +429,11 @@ def run_case(browser, engine, mobile, personal, args):
                 for key in ["min_ingredients","max_ingredients","max_active_minutes","max_total_minutes","max_waiting_minutes"]:
                     if choices.get(key) is not None:page.locator(f'#meal-{category}-{key}').fill(str(choices[key]))
                 if meal.get("max_same_base_meals") is not None:page.locator(f'#meal-{category}-max_same_base_meals').fill(str(meal["max_same_base_meals"]))
-                if meal.get("limits",{}).get("min_protein_g") is not None:page.locator(f'#{category}-min_protein_g' if personal else f'#meal-{category}-min-protein').fill(str(meal['limits']['min_protein_g']))
+                if meal.get("limits",{}).get("min_protein_g") is not None:
+                    limit=page.locator(f'#{category}-min_protein_g' if personal else f'#meal-{category}-min-protein')
+                    for detail in limit.locator('xpath=ancestor::details').all():
+                        if detail.get_attribute('open') is None:detail.locator(':scope > summary').click()
+                    limit.fill(str(meal['limits']['min_protein_g']))
         page.screenshot(path=str(target / "choices.png"), full_page=True)
         report['loaded_assets']=assets
         report['ready_build_id']=context.request.get(args.base+'/ready').json().get('build_id')
