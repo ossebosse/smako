@@ -119,6 +119,12 @@ class PersonalPlanner:
         self.include_content_pack = include_content_pack
         self.library_generation = library_generation
         self._supplement_qualified = False
+        self._expanded_cohort_qualified = False
+        from app.services.meal_library_content import identity, manifest_entries
+        from app.services.recipe_library import current_recipes
+        self._generation = library_generation or len(manifest_entries()["current"])
+        self._prior_recipe_ids = ({identity(r) for r in current_recipes(self._generation-1)}
+                                 if self._generation > 2 else None)
         self.timings = defaultdict(float)
         from app.services.complete_recipes import enabled, prepare_request
         request = prepare_request(request, settings, pantry_revision=state["revision"])
@@ -2118,6 +2124,9 @@ class PersonalPlanner:
                 valid.append(recipe)
                 if recipe.design and recipe.design.content_source:
                     self._supplement_qualified = True
+                    from app.services.meal_library_content import identity
+                    if self._prior_recipe_ids is not None and identity(recipe) not in self._prior_recipe_ids:
+                        self._expanded_cohort_qualified = True
             except (PolicyConflict, ValueError) as exc:
                 self.product_trace.recipe(recipe, getattr(exc, "stage", None) or stage, str(exc))
                 self.diagnostics.reject(getattr(exc, "stage", None) or stage, recipe, str(exc))
@@ -2172,8 +2181,11 @@ class PersonalPlanner:
                     or not _compare_scopes
                     or self.spec.slots is not None or replace_slot is not None):
                 return
-            from app.services.meal_library_content import manifest_entries
-            generation = self.library_generation or len(manifest_entries()["current"])
+            generation = self._generation
+            if generation > 2 and not self._expanded_cohort_qualified:
+                return
+            if generation <= 2 and self.request.diversity_mode != "cheapest":
+                return
             try:
                 candidate = PersonalPlanner(self.request, self.settings, self.prepared, self.state,
                     plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
@@ -2373,6 +2385,7 @@ class PersonalPlanner:
                 facts=self.facts,
                 cooked_weights=self.cooked_weights,
                 now=self.now,
+                include_content_pack=self.include_content_pack, library_generation=self.library_generation,
             ).create()
         pools, options = {}, []
         for slot in slots:

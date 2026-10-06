@@ -22,7 +22,7 @@ eller ett permanent köp-/allergengodkännande.
 ## Körbara kommandon
 
 Kör från repositoryroten med Python 3.12 och `PYTHONPATH=backend;.` på Windows
-(`backend:.` på Linux). Gemensam CLI:
+(`backend:.` på Linux). Gemensam CLI (även `python -m app.services.meal_library_cli` i appimagen):
 
 ```powershell
 $env:PYTHONPATH='backend;.'
