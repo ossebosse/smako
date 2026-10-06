@@ -20,6 +20,7 @@ from app.services.meal_library_content import (
     load_entries,
     manifest_entries,
     pack_diff,
+    revoke_recipe,
     validate_pack,
 )
 
@@ -27,6 +28,10 @@ from app.services.meal_library_content import (
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
+    p = sub.add_parser("revoke")
+    p.add_argument("--recipe-id", required=True)
+    p.add_argument("--reason", required=True)
+    p.add_argument("--output", type=Path, required=True)
     for name in ["validate", "diff", "import"]:
         p = sub.add_parser(name)
         p.add_argument("input",type=Path)
@@ -48,7 +53,9 @@ def main():
     p.add_argument("--allow-nutrition-estimates",action="store_true")
     args = parser.parse_args()
     started = time.perf_counter()
-    if args.command in {"validate","diff","import"}:
+    if args.command == "revoke":
+        report = revoke_recipe(args.recipe_id, args.reason)
+    elif args.command in {"validate","diff","import"}:
         checked = validate_pack(args.input)
         report = {k:v for k,v in checked.items() if k != "recipes"}
         report["valid_identities"] = [f"{r.design.base_id}:{r.design.version}:{r.design.variant_id}" for r in checked["recipes"]]

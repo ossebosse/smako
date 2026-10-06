@@ -112,13 +112,16 @@ def _structural_check(recipe: Recipe) -> None:
 
 def current_recipes(generation=None):
     from app.services.meal_library_content import load_entries, manifest_entries
-    entries = manifest_entries()["current"]
+    manifest = manifest_entries()
+    entries = manifest["current"]
     if generation is not None:
         entries = entries[:generation]
     # Importing a package containing an unchanged older version must not
     # reactivate it over a newer version. All issued versions remain readable.
     current = {}
     for recipe in load_entries(entries):
+        if f"{recipe.design.base_id}:{recipe.design.version}:{recipe.design.variant_id}" in manifest.get("revocations", {}):
+            continue
         key = (recipe.design.base_id, recipe.design.variant_id)
         previous = current.get(key)
         version = tuple(map(int, recipe.design.version.split(".")))
@@ -131,6 +134,13 @@ def reset_library_caches():
     for function in (_registered, _registered_history, _registered_portions,
                      _registered_historical_portions, _issued_index):
         function.cache_clear()
+    _revocations.cache_clear()
+
+
+@lru_cache(maxsize=1)
+def _revocations():
+    from app.services.meal_library_content import manifest_entries
+    return manifest_entries().get("revocations", {})
 
 
 @lru_cache(maxsize=1)
@@ -266,6 +276,9 @@ def validate_recipe_design(recipe: Recipe) -> bool:
     if recipe.design is None:
         return False
     d = recipe.design
+    reason = _revocations().get(f"{d.base_id}:{d.version}:{d.variant_id}")
+    if reason:
+        raise ValueError("Receptversionens innehållsgodkännande har återkallats: " + reason)
     registered = _issued_index(recipe.servings).get((d.base_id, d.version, d.variant_id))
     if registered is None or _exact_value(recipe) != registered:
         _structural_check(recipe)  # retain precise diagnostics for rejected edits

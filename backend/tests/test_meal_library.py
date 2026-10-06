@@ -26,6 +26,40 @@ def library_root(tmp_path):
     return root
 
 
+def test_withdrawn_version_remains_readable_but_cannot_be_planned(monkeypatch):
+    from app.services import recipe_library as library
+    recipe = _registered()[0].model_copy(deep=True)
+    key = content.identity(recipe)
+    monkeypatch.setattr(content, "manifest_entries", lambda: {
+        "current": [], "history": [], "revocations": {key: "Mängdbasis motsäger instruktionen"}})
+    monkeypatch.setattr(content, "load_entries", lambda entries: (recipe,))
+    library.reset_library_caches()
+    try:
+        assert not library.current_recipes()
+        # Historical content is retained and still parses for immutable GETs.
+        assert library._registered_history()[0].model_dump() == recipe.model_dump()
+        with pytest.raises(ValueError, match="återkallats"):
+            library.validate_recipe_design(recipe)
+    finally:
+        library.reset_library_caches()
+
+
+def test_revocation_requires_known_version_and_preserves_all_content(tmp_path):
+    path = pack(tmp_path);root = library_root(tmp_path)
+    imported = content.import_pack(path, root=root)
+    issued = (root / imported["published_file"]).read_bytes()
+    before = (root / content.MANIFEST.name).read_bytes()
+    with pytest.raises(ValueError, match="okänd"):
+        content.revoke_recipe("unknown:1.0.0:base", "Wrong basis", root=root)
+    assert before == (root / content.MANIFEST.name).read_bytes()
+    key = imported["diff"][0]["id"]
+    content.revoke_recipe(key, "Wrong basis", root=root)
+    manifest = (root / content.MANIFEST.name).read_bytes()
+    content.revoke_recipe(key, "Wrong basis", root=root)
+    assert manifest == (root / content.MANIFEST.name).read_bytes()
+    assert issued == (root / imported["published_file"]).read_bytes()
+
+
 def test_import_idempotent_and_conflict_is_atomic(tmp_path):
     path=pack(tmp_path);root=library_root(tmp_path)
     first=content.import_pack(path,root=root)

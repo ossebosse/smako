@@ -61,11 +61,18 @@ def checked_path(root, relative):
 
 def manifest_entries(root=ROOT):
     manifest = read_json(root / MANIFEST.name)
-    if (set(manifest) != {"schema_version", "current", "history"}
+    if (set(manifest) not in ({"schema_version", "current", "history"},
+                              {"schema_version", "current", "history", "revocations"})
             or manifest["schema_version"] != MANIFEST_SCHEMA):
         raise ValueError("Okänd eller felaktig biblioteksschema")
     if len(manifest["current"]) + len(manifest["history"]) > 128:
         raise ValueError("Biblioteket har för många paketgenerationer")
+    revoked = manifest.get("revocations", {})
+    if (not isinstance(revoked, dict) or len(revoked) > MAX_RECIPES
+            or any(not isinstance(key, str) or len(key) > 300
+                   or not isinstance(reason, str) or not 1 <= len(reason.strip()) <= 2000
+                   for key, reason in revoked.items())):
+        raise ValueError("Felaktiga återkallade receptversioner")
     return manifest
 
 
@@ -198,6 +205,26 @@ def atomic_write(path, data):
     with temporary.open("xb") as stream:
         stream.write(data);stream.flush();os.fsync(stream.fileno())
     os.replace(temporary, path)
+
+
+def revoke_recipe(recipe_id, reason, *, root=ROOT):
+    """Withdraw planning approval while retaining immutable issued content."""
+    manifest = manifest_entries(root)
+    if recipe_id not in {identity(r) for r in load_entries(
+            [*manifest["current"], *manifest["history"]], root)}:
+        raise ValueError("Återkallelsen avser en okänd receptversion")
+    if not isinstance(reason, str) or not 1 <= len(reason.strip()) <= 2000:
+        raise ValueError("Återkallelsen måste ha en konkret orsak")
+    revoked = manifest.setdefault("revocations", {})
+    if recipe_id in revoked and revoked[recipe_id] != reason:
+        raise ValueError("Befintlig återkallelse har en annan orsak")
+    revoked[recipe_id] = reason
+    atomic_write(root / MANIFEST.name, encoded(manifest))
+    if root.resolve() == ROOT.resolve():
+        from app.services.recipe_library import reset_library_caches
+        reset_library_caches()
+    return {"revoked_id": recipe_id, "reason": reason,
+            "manifest_sha256": library_signature(root), "issued_content_preserved": True}
 
 
 def import_pack(path, *, root=ROOT, accepted_ids=None):

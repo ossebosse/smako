@@ -32,6 +32,7 @@ python scripts/recipe_layer/library.py import paket.json --output import.json
 python scripts/recipe_layer/library.py prepare --servings 1 --servings 2 --servings 4 --universe universe.json --output preparation.json
 python scripts/recipe_layer/library.py qualify --pack paket.json --universe universe.json --clock 2026-10-05T10:00:00+00:00 --allow-nutrition-estimates --output qualification.json
 python scripts/recipe_layer/library.py build --output bibliotekskandidat
+python scripts/recipe_layer/library.py revoke --recipe-id grundratt:1.0.0:base --reason "Konkret innehållsfel" --output aterkallelse.json
 ```
 
 Importera före kvalificering så att exakt utfärdad version finns i registret.
@@ -48,6 +49,20 @@ Ett paket med en oförändrad äldre version återaktiverar den inte.
 Avvisningar sparas med fil, fält, ID och orsak. Vid avvisningar publiceras
 bara en uttrycklig `--accept-id grundrätt:version:variant`-delmängd.
 Hashnamnat paket skrivs före atomiskt manifestbyte; ingen halvimport exponeras.
+
+En konstaterat felaktig utfärdad version återkallas genom manifestets
+versionsbundna `revocations`, med konkret orsak. Den filtreras från nya val
+och stoppas även vid uttrycklig omräkning. Ursprungligt innehåll och sparade
+revisions-GET bevaras. Att byta titel eller att importera samma version igen
+tar inte bort återkallelsen. Detta är innehållsstyrd granskning, ingen permanent
+köpbarhetsflagga.
+
+Den strukturella valideringen kan inte bevisa att fri instruktionstext beskriver
+rätt mängdbasis. Innehållsgranskningen ska också kontrollera instruktionerna
+mot varje `form`: exempelvis betyder `cooked_drained` uppvägd avrunnen vara;
+burklag får då inte ersätta en del av den vikten. Numerisk kvalificering ensam
+är inte tillräcklig innehållsgranskning. Två poster i det första tilläggsförsöket
+återkallades av detta skäl; råa lyckade numeriska prov och textfelet bevaras.
 
 ## Beroenden och återanvändning
 
