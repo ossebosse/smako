@@ -31,8 +31,11 @@ async def main(args):
         contexts = [await browser.new_context(viewport={'width': 390, 'height': 844}, is_mobile=True, has_touch=True,
                                               service_workers='block' if args.interrupt else 'allow') for _ in range(3)]
         rows = []
+        prepared = 0
+        all_prepared, first_accepted = asyncio.Event(), asyncio.Event()
 
         async def owner(index):
+            nonlocal prepared
             context = contexts[index]
             page = await context.new_page()
             row = {'owner_label': index+1, 'injected': [], 'page_errors': [], 'network_failures': [], 'responses': [], 'posts': 0, 'lifecycle': []}
@@ -57,6 +60,7 @@ async def main(args):
                     if r.request.method == 'POST':
                         row['posts'] += 1
                         row['job_url'] = body['status_url']
+                        if index == 0:first_accepted.set()
                     if r.status == 201:
                         row['saved'] = body
                     if index > 0 and r.status == 202 and body.get('stage') == 'queued' and not row.get('queued_dom'):
@@ -99,6 +103,12 @@ async def main(args):
             await page.locator('#recipe-nutrition-estimates').check()
             for store in request['allowed_store_ids']:
                 await page.locator(f'#recipe-price-contexts input[value="{store}"]').check()
+            prepared += 1
+            if prepared == 3:all_prepared.set()
+            await all_prepared.wait()
+            # Admit the interrupted owner first, then start the two other real
+            # button flows while it computes. Queue/reload coverage is deliberate.
+            if index > 0:await first_accepted.wait()
             clicked = time.monotonic()
             await page.locator('#submit-button').dblclick()
             await expect(page.locator('#results')).to_be_visible(timeout=420000)
