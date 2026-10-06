@@ -1,0 +1,408 @@
+{
+  "runtime_commit": "dd12cc80e98c79aa32c159223c8bc1ceeaaa7580",
+  "transport_regressions": {
+    "tests": 10,
+    "pass": 10,
+    "source_after": {
+      "path": ".local\\status-reconnect-20261006\\navigation-after.log",
+      "sha256": "b3c76affe15b028c38403b3fcfe87da8da3fde6ddaa13502a2e5f380115c5826"
+    },
+    "before_same_test_failed": {
+      "path": ".local\\status-reconnect-20261006\\navigation-before.log",
+      "sha256": "1926ac020d1c972d219e471a5c4953c34e830f86e757983e9a33f483699cb68d"
+    },
+    "start_acceptance_before_failed": {
+      "path": ".local\\status-reconnect-20261006\\discovery-before.log",
+      "sha256": "29a26bb0a8dd0761e2a49de6f8bd12c7ba7fdaf5227d653267aeabc56419aeba"
+    }
+  },
+  "backend": {
+    "tests": 41,
+    "pass": 41,
+    "source": {
+      "path": ".local\\status-reconnect-20261006\\backend-finaldd.log",
+      "sha256": "274c5f96d23bb491757fef3a15033b56f272126823a4bde2519699708c5ec9f0"
+    }
+  },
+  "synthetic_frontend": {
+    "cases": 8,
+    "pass": 8,
+    "source": {
+      "path": ".local\\status-reconnect-20261006\\frontend-finaldd\\results.json",
+      "sha256": "b0e5c7358d969da32908c3e124940b5d79dc38141c1b5603d4a2f35a285f60b7"
+    }
+  },
+  "real_negative_cases": [
+    {
+      "scenario": "cookie-loss",
+      "page_errors": [],
+      "statuses": [
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+          "status": 201
+        }
+      ],
+      "start_kind": "ordinary_API_real_planner",
+      "mocked_completed_menus": false,
+      "job_url": "/api/plan-jobs/11569788b0bd49cd937e1ffdee813266",
+      "request_id": "5f69b8bf-3dd3-4f78-ab4a-68ca8b20b39c",
+      "before_interruption_stage": "product_facts",
+      "session_test": "guest cookie removal, not signed-account expiry",
+      "error_dom": "!\nMenyn kunde inte skapas\n\nPlaneringsförsöket har gått ut. Skapa menyn igen. Dina val och tidigare sparade planer finns kvar.",
+      "same_job_result_restored_with_original_test_owner": true,
+      "outcome": "PASS",
+      "source": {
+        "path": ".local\\status-reconnect-20261006\\cookie-loss-final\\report.json",
+        "sha256": "8191d3cfdade8ffe000356886995e205ad18ab92bf46de4b8fd3a74c2a607207"
+      },
+      "metrics": [
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 3.0357856303453445e-05,
+          "memory_cleanup_seconds": 1.0684835650026798,
+          "calculation_seconds": 57.66771005000919,
+          "cpu_seconds": 57.81196652899996,
+          "peak_rss_kib": 2471504,
+          "job_id": "11569788b0bd49cd937e1ffdee813266",
+          "request_id": "5f69b8bf-3dd3-4f78-ab4a-68ca8b20b39c",
+          "recorded_utc": "2026-10-06T10:09:16.450775+00:00"
+        },
+        {
+          "kind": "save",
+          "wall_seconds": 0.1158974589779973,
+          "job_id": "11569788b0bd49cd937e1ffdee813266",
+          "request_id": "5f69b8bf-3dd3-4f78-ab4a-68ca8b20b39c",
+          "recorded_utc": "2026-10-06T10:09:16.567436+00:00"
+        }
+      ]
+    },
+    {
+      "scenario": "cookie-expiry",
+      "page_errors": [],
+      "statuses": [
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+          "status": 201
+        }
+      ],
+      "start_kind": "ordinary_API_real_planner",
+      "mocked_completed_menus": false,
+      "job_url": "/api/plan-jobs/5cf62fdad37a4b479433baa4dec14ec2",
+      "request_id": "fd8f2565-fab9-41ec-a863-c6e69a029bf4",
+      "before_interruption_stage": "product_facts",
+      "session_test": "browser-enforced expiry of guest cookies, not signed-account expiry",
+      "error_dom": "!\nMenyn kunde inte skapas\n\nPlaneringsförsöket har gått ut. Skapa menyn igen. Dina val och tidigare sparade planer finns kvar.",
+      "same_job_result_restored_with_original_test_owner": true,
+      "outcome": "PASS",
+      "source": {
+        "path": ".local\\status-reconnect-20261006\\cookie-expiry-final\\report.json",
+        "sha256": "772b17f048b20bfb7407f7eecbe743e6aee97b9c345baa7fa9506691dce8c9c5"
+      },
+      "metrics": [
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 4.052836447954178e-05,
+          "memory_cleanup_seconds": 0.7771950978785753,
+          "calculation_seconds": 72.67141539789736,
+          "cpu_seconds": 66.563055633,
+          "peak_rss_kib": 2105304,
+          "job_id": "5cf62fdad37a4b479433baa4dec14ec2",
+          "request_id": "fd8f2565-fab9-41ec-a863-c6e69a029bf4",
+          "recorded_utc": "2026-10-06T10:33:48.882177+00:00"
+        },
+        {
+          "kind": "save",
+          "wall_seconds": 0.13438005978241563,
+          "job_id": "5cf62fdad37a4b479433baa4dec14ec2",
+          "request_id": "fd8f2565-fab9-41ec-a863-c6e69a029bf4",
+          "recorded_utc": "2026-10-06T10:33:49.018862+00:00"
+        }
+      ]
+    },
+    {
+      "scenario": "restart",
+      "page_errors": [],
+      "statuses": [
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/12fdacd5d2cb49b7ae87da34286de6fa",
+          "status": 202
+        },
+        {
+          "url": "http://127.0.0.1:18127/api/plan-jobs/12fdacd5d2cb49b7ae87da34286de6fa",
+          "status": 404
+        }
+      ],
+      "start_kind": "ordinary_API_real_planner",
+      "mocked_completed_menus": false,
+      "job_url": "/api/plan-jobs/12fdacd5d2cb49b7ae87da34286de6fa",
+      "request_id": "6a3d4af3-fb4f-43f7-84c2-c99ff3428415",
+      "before_interruption_stage": "product_facts",
+      "error_dom": "!\nMenyn kunde inte skapas\n\nPlaneringsförsöket har gått ut. Skapa menyn igen. Dina val och tidigare sparade planer finns kvar.",
+      "unfinished_job_not_claimed_persistent": true,
+      "outcome": "PASS",
+      "source": {
+        "path": ".local\\status-reconnect-20261006\\restart-pending-final\\report.json",
+        "sha256": "28c73721e80f1069496aa0c62ecc244e36fe1e95efad3a5f9be5cf1804c66cfe"
+      },
+      "metrics": [
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 2.6380643248558044e-05,
+          "memory_cleanup_seconds": 0.013910767622292042,
+          "calculation_seconds": 56.407720889896154,
+          "cpu_seconds": 56.38133345299991,
+          "peak_rss_kib": 2476408,
+          "job_id": "12fdacd5d2cb49b7ae87da34286de6fa",
+          "request_id": "6a3d4af3-fb4f-43f7-84c2-c99ff3428415",
+          "recorded_utc": "2026-10-06T10:10:28.074379+00:00"
+        }
+      ]
+    }
+  ],
+  "final_server_logs": [
+    {
+      "path": ".local\\status-reconnect-20261006\\server-logs\\ab800ea54802-1791281373715687363.log",
+      "sha256": "983016665f1cfb47f282aaeb0a49f2d034165fe6107f23fcb87d180b5a855c47",
+      "error_traceback_asgi_markers": 0,
+      "scope": "isolated DD runtime, retained raw logs"
+    },
+    {
+      "path": ".local\\status-reconnect-20261006\\server-logs\\final-dd-after-expiry.log",
+      "sha256": "be0de491db4b3d8ae37d9fd28a455bcf4fb1c6296f21b6a372d1a8a58feccafb",
+      "error_traceback_asgi_markers": 0,
+      "scope": "isolated DD runtime, retained raw logs"
+    }
+  ]
+}

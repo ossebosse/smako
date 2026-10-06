@@ -1,0 +1,187 @@
+{
+  "historical_runtime": "82de80e1ae898e2ab005c16c8d95e6670898be93",
+  "historical_webkit": {
+    "raw_report": ".local/next-milestone-20261005/browser/webkit-personal-each-rollback/webkit-mobile-personal/report.json",
+    "error_utc": "2026-10-05T21:44:26.338773Z",
+    "navigation_utc": "2026-10-05T21:44:26.364396Z",
+    "exact_root_cause_proven": false,
+    "hypothesis": "navigation cancelled status fetch; timing alone cannot prove causality"
+  },
+  "historical_concurrency": {
+    "source": "docs/releases/package-variation-20261005/CONCURRENCY.json",
+    "error": "APIRequestContext.get: socket hang up during status GET",
+    "container_running": true,
+    "oom_killed": false,
+    "original_request_server_proxy_correlation_available": false,
+    "exact_root_cause_proven": false,
+    "same_cause_as_webkit_proven": false
+  },
+  "new_preserved_failed_attempts": [
+    {
+      "raw_report": ".local\\status-reconnect-20261006\\browser-final\\webkit-personal-each-full-delayed-reload-offline0\\webkit-mobile-personal\\report.json",
+      "sha256": "b09408de35a16b13af21cd19f9585ab764bf139395f07c599629ca0af15ed5e9",
+      "started_utc": "2026-10-06T08:11:17.176299+00:00",
+      "finished_utc": "2026-10-06T08:11:27.430050+00:00",
+      "first_stop": "",
+      "page_error_events": [],
+      "loaded_assets": {
+        "/static/complete-recipes.js": {
+          "url": "http://127.0.0.1:18127/static/complete-recipes.js?v=status-reconnect-1",
+          "sha256": "a11bc671b1981a850b135176acdfc57b3cdbb3237d3b6f4341b8c9d7753c4e0e"
+        },
+        "/static/personal.js": {
+          "url": "http://127.0.0.1:18127/static/personal.js?v=status-reconnect-1",
+          "sha256": "8eb1c930db7c149a26eef380d70dbb8a65794408e36e781562d75efb321e2181"
+        }
+      },
+      "classified_expected_navigation_abort": false
+    },
+    {
+      "raw_report": ".local\\status-reconnect-20261006\\browser-final\\webkit-personal-free-skip-away-offline0-reload3-final15-h3\\webkit-mobile-personal\\report.json",
+      "sha256": "37032bbad21c5707786c25e8721398ab8302e7f9a869c11aec2d1ad6a723ff1b",
+      "started_utc": "2026-10-06T09:05:11.346543+00:00",
+      "finished_utc": "2026-10-06T09:06:32.531333+00:00",
+      "first_stop": "APIRequestContext.get: socket hang up\nCall log:\n  - → GET http://127.0.0.1:18127/api/plans/db7f19a8-f9cd-4b0d-9a71-21ba1b49cf2a\n    - user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15\n    - accept: */*\n    - accept-encoding: gzip,deflate,br\n    - cookie: [redacted]\n",
+      "page_error_events": [],
+      "loaded_assets": {
+        "/static/complete-recipes.js": {
+          "url": "http://127.0.0.1:18127/static/complete-recipes.js?v=status-reconnect-1",
+          "sha256": "1bb7ef00717a0a225bd06a27cce030dee4cc50f09c9b92ae3a3e724400bb29da"
+        },
+        "/static/personal.js": {
+          "url": "http://127.0.0.1:18127/static/personal.js?v=status-reconnect-1",
+          "sha256": "8eb1c930db7c149a26eef380d70dbb8a65794408e36e781562d75efb321e2181"
+        },
+        "/static/app.js": {
+          "url": "http://127.0.0.1:18127/static/app.js?v=status-reconnect-1",
+          "sha256": "5ccfbb930096994cfde16a569caee5cfb0065b6f8ee781a8301cb37a9a8f8540"
+        }
+      },
+      "classified_expected_navigation_abort": false
+    },
+    {
+      "raw_report": ".local\\status-reconnect-20261006\\browser-final\\webkit-public-free-skip-lost-start-offline0-reload3\\webkit-mobile-public\\report.json",
+      "sha256": "6617c561cb4ffc966a63e795a612f73e12ff663507ed58e50ca3b56796e2b641",
+      "started_utc": "2026-10-06T08:20:40.815026+00:00",
+      "finished_utc": "2026-10-06T08:22:34.889790+00:00",
+      "first_stop": "Timeout 30000ms exceeded while waiting for event \"response\"",
+      "page_error_events": [],
+      "loaded_assets": {
+        "/static/complete-recipes.js": {
+          "url": "http://127.0.0.1:18127/static/complete-recipes.js?v=status-reconnect-1",
+          "sha256": "a11bc671b1981a850b135176acdfc57b3cdbb3237d3b6f4341b8c9d7753c4e0e"
+        },
+        "/static/app.js": {
+          "url": "http://127.0.0.1:18127/static/app.js?v=status-reconnect-1",
+          "sha256": "5ccfbb930096994cfde16a569caee5cfb0065b6f8ee781a8301cb37a9a8f8540"
+        }
+      },
+      "classified_expected_navigation_abort": false
+    },
+    {
+      "raw_report": ".local\\status-reconnect-20261006\\browser-final\\webkit-public-free-skip-lost-start-race-offline0-reload3-final15\\webkit-mobile-public\\report.json",
+      "sha256": "017a3baf18f6c6a140663d6148e9e3718a5c227fbd449ecd957f5e7ff2097b1a",
+      "started_utc": "2026-10-06T08:51:07.464960+00:00",
+      "finished_utc": "2026-10-06T08:51:21.902603+00:00",
+      "first_stop": "{'detail': 'Startförsöket har ännu inte kunnat återfinnas i det isolerade provet.'}",
+      "page_error_events": [],
+      "loaded_assets": {
+        "/static/complete-recipes.js": {
+          "url": "http://127.0.0.1:18127/static/complete-recipes.js?v=status-reconnect-1",
+          "sha256": "1bb7ef00717a0a225bd06a27cce030dee4cc50f09c9b92ae3a3e724400bb29da"
+        },
+        "/static/app.js": {
+          "url": "http://127.0.0.1:18127/static/app.js?v=status-reconnect-1",
+          "sha256": "5ccfbb930096994cfde16a569caee5cfb0065b6f8ee781a8301cb37a9a8f8540"
+        }
+      },
+      "classified_expected_navigation_abort": false
+    },
+    {
+      "raw_report": ".local\\status-reconnect-20261006\\browser-final\\webkit-public-free-skip-none-offline20-reload45-finalcdc\\webkit-mobile-public\\report.json",
+      "sha256": "791e0c5646a9108af2f6295283aa2fc378ad5fbf418982e3778d530468af7dd2",
+      "started_utc": "2026-10-06T09:27:53.838913+00:00",
+      "finished_utc": "2026-10-06T09:29:56.583613+00:00",
+      "first_stop": "['/127.0.0.1:18127/api/plan-jobs/3e37917c48894e2395a8c85302b643e2 due to access control checks.']",
+      "page_error_events": [
+        {
+          "message": "/127.0.0.1:18127/api/plan-jobs/3e37917c48894e2395a8c85302b643e2 due to access control checks.",
+          "stack": "Fetch API cannot load http://127.0.0.1:18127/api/plan-jobs/3e37917c48894e2395a8c85302b643e2 due to access control checks.\n    at transport (http://127.0.0.1:18127/static/complete-recipes.js?v=status-reconnect-1:375:46)\n    at jobRequest (http://127.0.0.1:18127/static/complete-recipes.js?v=status-reconnect-1:412:46)",
+          "at_utc": "2026-10-06T09:28:53.808438+00:00",
+          "page_url": "http://127.0.0.1:18127/"
+        }
+      ],
+      "loaded_assets": {
+        "/static/complete-recipes.js": {
+          "url": "http://127.0.0.1:18127/static/complete-recipes.js?v=status-reconnect-1",
+          "sha256": "1b7d1a1273f376287b395cb0fa1a7c7ced371b36febf70c7f76d5d0cba4cbd0f"
+        },
+        "/static/app.js": {
+          "url": "http://127.0.0.1:18127/static/app.js?v=status-reconnect-1",
+          "sha256": "5ccfbb930096994cfde16a569caee5cfb0065b6f8ee781a8301cb37a9a8f8540"
+        }
+      },
+      "classified_expected_navigation_abort": false
+    },
+    {
+      "raw_report": ".local\\status-reconnect-20261006\\browser\\webkit-personal-each-full-delayed-reload\\webkit-mobile-personal\\report.json",
+      "sha256": "fcd4a8565434a0452643dab9806e2d9d6ec2a5d27908dd17f626d805a6d715fe",
+      "started_utc": "2026-10-06T08:06:19.346603+00:00",
+      "finished_utc": "2026-10-06T08:06:49.925762+00:00",
+      "first_stop": "Page.goto: Server returned nothing (no headers, no data)\nCall log:\n  - navigating to \"http://127.0.0.1:18127/personal\", waiting until \"domcontentloaded\"\n",
+      "page_error_events": [],
+      "loaded_assets": null,
+      "classified_expected_navigation_abort": false
+    },
+    {
+      "raw_report": ".local\\status-reconnect-20261006\\legacy-finalcdc\\chromium-mobile-public\\report.json",
+      "sha256": "757cd40441e009abc33a27de2354a4219dad5e7806b359b31e295d497e4f03e8",
+      "started_utc": "2026-10-06T09:22:13.049358+00:00",
+      "finished_utc": "2026-10-06T09:23:00.344026+00:00",
+      "first_stop": "'NoneType' object has no attribute 'get'",
+      "page_error_events": [],
+      "loaded_assets": {
+        "/static/complete-recipes.js": {
+          "url": "http://127.0.0.1:18127/static/complete-recipes.js?v=status-reconnect-1",
+          "sha256": "1b7d1a1273f376287b395cb0fa1a7c7ced371b36febf70c7f76d5d0cba4cbd0f"
+        },
+        "/static/app.js": {
+          "url": "http://127.0.0.1:18127/static/app.js?v=status-reconnect-1",
+          "sha256": "5ccfbb930096994cfde16a569caee5cfb0065b6f8ee781a8301cb37a9a8f8540"
+        }
+      },
+      "classified_expected_navigation_abort": false
+    }
+  ],
+  "new_socket_followup": {
+    "source": ".local\\status-reconnect-20261006\\new-socket-server-metrics.json",
+    "observed_completed_app_reads": [
+      {
+        "request_id": "bc05dccb60cd4d519f4fb5843d36ae96",
+        "created_at": "2026-10-06T09:06:26.595778+00:00",
+        "endpoint": "/api/plans/{plan_id}",
+        "method": "GET",
+        "duration_ms": 224.711,
+        "status_code": 200,
+        "error_code": null,
+        "plan_id": "db7f19a8-f9cd-4b0d-9a71-21ba1b49cf2a",
+        "build_id": "status-reconnect-15f288360554"
+      }
+    ],
+    "exact_failed_request_reference_missing": true,
+    "root_cause_proven": false,
+    "statement": "UI rendered the result; subsequent test API GET failed. Only one completed app GET 200 exists in the available server metrics; this is insufficient to explain the failed connection."
+  },
+  "confirmed_provisional_navigation_gap": {
+    "runtime_before": "cdc28096be73d0d4e68546015bd0775cd5c493bf",
+    "failed_report": ".local\\status-reconnect-20261006\\browser-final\\webkit-public-free-skip-none-offline20-reload45-finalcdc\\webkit-mobile-public\\report.json",
+    "document_id": "4bde1882-b802-48a8-a0ae-9986265c0332",
+    "request_reference": "f5442bf5-c048-4ec9-a9aa-12e6e2eadc37",
+    "fetch_start_utc": "2026-10-06T09:28:53.807437Z",
+    "page_error_utc": "2026-10-06T09:28:53.808438Z",
+    "pagehide_utc": "2026-10-06T09:28:54.170473Z",
+    "own_abort_was_later": true,
+    "strict_outcome": "FAIL",
+    "code_fix": "Stop reader/timer at beforeunload as well as pagehide. The same scheduled-poll regression fails before and passes after. Exact historical WebKit root cause remains unknown."
+  }
+}

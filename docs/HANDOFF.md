@@ -1,3 +1,47 @@
+# 2026-10-06: Statusflöde och återanslutning – färdig lokal appkandidat
+
+Gren `feature/status-reconnect-20261006`, slutlig paketerad runtime
+**dd12cc80e98c79aa32c159223c8bc1ceeaaa7580**, ovanpå f5deaef/82de.
+Senare commits för testverktyg och dokumentation ändrar inte runtime.
+**REDO FÖR SEPARAT APP-AKTIVERINGSBESLUT.** Betan är oförändrad;
+ingen aktivering, push, insamling, relä-, schema-, proxy- eller säkerhetsändring.
+[Resultat och beslutsmatris](releases/status-reconnect-20261006/RESULTS.md),
+[testbevis](releases/status-reconnect-20261006/TESTS.md),
+[bevarade fel och osäkerheter](releases/status-reconnect-20261006/HISTORY.json),
+[senaste app-only-anvisning](releases/status-reconnect-20261006/ACTIVATION.md).
+
+Publikt och personligt flöde delar en sekventiell livscykelbunden statusläsare.
+Egna avbrott stoppar klienten, aldrig serverjobbet. Sena svar spärras även
+efter JSON-läsning. Begränsad återhämtning och manuell statusåterupptagning
+behåller samma jobb; förlorat accepterat startsvar återfinns genom ägarbunden
+GET med samma begäransreferens. Inget nytt beständigt bakgrundsjobbsystem.
+Ofärdiga processminnesjobb överlever inte backendomstart; sparade revisioner gör det.
+
+Slutimagen passerade 11 riktiga Chromium/WebKit-mobilresor, två separata
+treägarkörningar (ostörd och kontrollerat statusavbrott), verklig gästcookieutgång,
+cookieborttagning och omstart under ofärdigt jobb. En instrumenterad tung
+beräkning per ursprungligt återhämtningsförsök, samma jobb och ägarisolering.
+10 transport-, 41 backend- och 8 syntetiska frontendprov passerade.
+Fullt resultat matchar 82de i 15 jämförelser, inklusive byte/omräkning;
+741,15 / 787,56 / 910,39 kr är oförändrad historisk replay.
+11 äldre HTTP-revisioner och 22 revisioner i separat lagringskopia läses
+oförändrat. Flagga-av på samma image och äldre menyflöde fungerar.
+Äldre binäråtergång och signerad kontosessionsexpiry är inte kvalificerade.
+
+Ett nytt strikt WebKit-fel gav en reproducerad lucka före pagehide; beforeunload
+stoppar nu pollningen tidigare. Exakt historisk WebKit-orsak och det separata
+historiska socketfelet är fortfarande obelagda. Råa FAIL har bevarats.
+Ostört huvudklick 67,81 s: 60-sekundersmålet återstår. Två CPU, 3 GiB och
+en tung admissionplats är oförändrade. Recept, fakta, sökbudget, pris,
+näring, variation och audit ändrades inte i denna etapp.
+
+Paket `smako-server-dd12cc80e98c.zip`, SHA-256
+`bc1ec3f2b03c228348bb63bcf3bba0f84f300b56aa375cdbe877f0dc8838484c`.
+Verifierad image
+`sha256:c8362751b13a6e649beadad2a3c27b9b5df8bfd1e2fa177ff68e01e1d7b8b2c7`.
+Använd just den nya app-only-anvisningen vid ett separat framtida beslut;
+återställ aldrig äldre databas över senare användararbete.
+
 # 2026-10-06: Hela förpackningsköp och uttrycklig veckovariation – lokal kandidat
 
 Gren `feature/package-variation-20261005`, slutlig runtime
