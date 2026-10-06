@@ -81,7 +81,8 @@ def main():
         facts = load_retained_facts(prepared)
         checked = validate_pack(args.pack)
         report = {"price_basis":"explicit historical replay when clock is older than execution",
-                  "universe_id":prepared.universe.universe_id,"source_sha256":checked["source_sha256"],
+                  "universe_id":prepared.universe.universe_id,"universe_artifact_sha256":digest(args.universe.read_bytes()),
+                  "source_sha256":checked["source_sha256"],
                   "rejections":checked["rejections"],"recipes":[]}
         for recipe in checked["recipes"]:
             category = recipe.design.meal_types[0]
@@ -105,6 +106,7 @@ def main():
                            nutrition=result.get("nutrition"))
             except ValueError as error:
                 row.update(status="stopped",reason=str(error),stage=getattr(error,"stage",None),code=getattr(error,"code",None))
+            row["candidate_trace"] = planner.product_trace.snapshot()
             report["recipes"].append(row)
             args.output.parent.mkdir(parents=True,exist_ok=True)
             args.output.write_bytes(encoded(report))
@@ -113,7 +115,9 @@ def main():
         args.output.parent.mkdir(parents=True,exist_ok=True)
         args.output.write_bytes(encoded(report))
     print(json.dumps({k:v for k,v in report.items() if k not in {"recipes","dependencies"}},ensure_ascii=False))
-    if report.get("rejections"):raise SystemExit(1)
+    if report.get("rejections") or (args.command == "qualify" and any(
+            row["status"] != "qualified" for row in report["recipes"])):
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":main()

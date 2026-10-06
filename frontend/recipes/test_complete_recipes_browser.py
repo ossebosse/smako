@@ -118,6 +118,30 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     if output:
         page.screenshot(path=str(output / f"{engine}-{'mobile' if mobile else 'desktop'}-{'personal' if personal else 'public'}.png"), full_page=True)
 
+    # New per-type choices: explicitly synthetic form contract, not meal qualification.
+    page.locator("#recipe-style").select_option("library")
+    page.locator("#meal-dinner-level").select_option("simple")
+    for category in ("breakfast","snack"):
+        page.locator(f'#{category}-count' if personal else f'#meal-{category}-count').fill("5")
+        page.locator(f'#{category}-servings' if personal else f'#meal-{category}-servings').fill("1")
+    page.locator("#meal-breakfast-max_active_minutes").fill("7")
+    page.locator("#meal-breakfast-max_same_base_meals").fill("5")
+    page.locator("#meal-snack-max_same_base_meals").fill("2")
+    page.locator("#meal-snack-max_ingredients").fill("3")
+    with page.expect_response(lambda r: urlsplit(r.url).path=="/api/plans" and r.request.method=="POST"):
+        submit.click()
+    request=plans[-1]
+    assert request["recipe_preferences"]["min_protein_g"] is None
+    meals={m["meal_type"]:m for m in request["personal"]["meals"]}
+    assert meals["dinner"]["recipe_choices"]["dinner_level"]=="simple"
+    assert meals["breakfast"]["recipe_choices"]["max_active_minutes"]==7
+    assert meals["breakfast"]["count"]==5 and meals["breakfast"]["servings"]==1
+    assert meals["breakfast"]["max_same_base_meals"]==5 and meals["snack"]["max_same_base_meals"]==2
+    assert meals["snack"]["recipe_choices"]["max_ingredients"]==3
+    assert meals["breakfast"]["recipe_choices"]["max_ingredients"] is None
+    assert not meals["breakfast"].get("limits",{}).get("min_protein_g")
+    page.wait_for_function("document.querySelector('#generate-plan, #submit-button').disabled === false")
+
     page.locator("#recipe-style").select_option("legacy")
     submit.click()
     expect(status).to_contain_text("oförenliga val")

@@ -106,7 +106,11 @@ def validate_pack(path):
     from app.services.ingredient_normalizer import canonicalize_ingredient_name
     from app.services.recipe_library import _structural_check, content_hash
 
-    raw = read_json(path)
+    source = path.read_bytes()
+    if len(source) > MAX_BYTES:
+        raise ValueError(f"{path}: filen överstiger {MAX_BYTES} byte")
+    raw = json.loads(source, object_pairs_hook=_unique_pairs)
+    source_sha256 = digest(source)
     if set(raw) != {"schema_version", "pack_id", "recipes"} or raw["schema_version"] != SCHEMA:
         raise ValueError(f"{path}: okänd paketstruktur")
     if not isinstance(raw["pack_id"], str) or not raw["pack_id"] or len(raw["pack_id"]) > 100:
@@ -116,7 +120,8 @@ def validate_pack(path):
     recipes, errors, seen = [], [], {}
     for index, row in enumerate(raw["recipes"]):
         ref = f"recipes[{index}]"
-        key = row.get("design", {}).get("base_id", "unknown") if isinstance(row, dict) else "unknown"
+        design = row.get("design") if isinstance(row, dict) else None
+        key = design.get("base_id", "unknown") if isinstance(design, dict) else "unknown"
         try:
             _reject_unknown(row, Recipe, ref)
             for n, ingredient in enumerate(row["ingredients"]):
@@ -127,7 +132,7 @@ def validate_pack(path):
             data["design"]["content_sha256"] = "0" * 64
             if not data["design"].get("content_source"):
                 data["design"]["content_source"] = {
-                    "pack_id":raw["pack_id"],"proposal_id":key,"sha256":digest(path.read_bytes()),
+                    "pack_id":raw["pack_id"],"proposal_id":key,"sha256":source_sha256,
                     "priority":1,"timing_basis":"authored_estimate_coarse_dependencies",
                     "active_minutes":data["design"]["active_minutes"],
                     "method_note":"Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
@@ -168,7 +173,7 @@ def validate_pack(path):
             if isinstance(exc, ValidationError):
                 field += "." + ".".join(str(x) for x in exc.errors()[0]["loc"])
             errors.append({"file": str(path), "field": field, "recipe_id": key, "reason": str(exc)})
-    return {"pack_id":raw["pack_id"], "source_sha256":digest(path.read_bytes()),
+    return {"pack_id":raw["pack_id"], "source_sha256":source_sha256,
             "recipes":recipes, "rejections":errors}
 
 

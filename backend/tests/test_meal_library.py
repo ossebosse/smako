@@ -110,3 +110,9 @@ def test_imported_older_version_cannot_replace_newer_current(monkeypatch):
     monkeypatch.setattr(content,'manifest_entries',lambda:{'current':[{}]})
     monkeypatch.setattr(content,'load_entries',lambda entries:(new,old))
     assert current_recipes()==(new,)
+
+def test_null_design_does_not_hide_independent_valid_rows(tmp_path):
+    path=pack(tmp_path);raw=json.loads(path.read_bytes());raw['recipes'].append({'design':None})
+    path.write_bytes(content.encoded(raw));checked=content.validate_pack(path)
+    assert len(checked['recipes'])==1 and len(checked['rejections'])==1
+    assert checked['rejections'][0]['recipe_id']=='unknown'
