@@ -135,8 +135,13 @@ def test_candidates_cannot_mutate_the_cached_registry():
 def test_file_checksum_and_quality_are_explicit():
     assert hashlib.sha256(library.LIBRARY_PATH.read_bytes()).hexdigest() == library.CONTENT_SHA256
     summary = library.library_summary()
-    assert summary["base_recipes"] == 62
-    assert summary["approved_variants"] == 90
+    # The original cohort stays immutable while later manifest packs can grow.
+    original = library.current_recipes(2)
+    assert sum(r.design.variant_id == "base" for r in original) == 62
+    assert sum(r.design.variant_id != "base" for r in original) == 90
+    current = library.current_recipes()
+    assert summary["base_recipes"] == sum(r.design.variant_id == "base" for r in current)
+    assert summary["approved_variants"] == sum(r.design.variant_id != "base" for r in current)
     assert summary["cooking_test"] == "not_cooked"
     assert "planner" in summary["purchase_qualification"]
     assert json.dumps(summary)
