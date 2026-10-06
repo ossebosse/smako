@@ -2435,7 +2435,10 @@
     renderIngredients(data);
     const shopping = renderShopping(data, recipes);
     dom.summaryMeals.textContent = String(recipes.length || "—");
-    dom.summaryServings.textContent = String(first(recipes[0], ["servings", "portions"], dom.servingsInput.value));
+    const multipleMealTypes = (data.personal?.slots || []).some(slot => slot.recipe && slot.meal_type !== "dinner");
+    document.getElementById("summary-meals-label").textContent = multipleMealTypes ? "måltidstillfällen" : "middagar";
+    document.getElementById("summary-servings-label").textContent = multipleMealTypes ? "portioner totalt" : "portioner per middag";
+    dom.summaryServings.textContent = String(multipleMealTypes ? data.portions : first(recipes[0], ["servings", "portions"], dom.servingsInput.value));
     dom.summaryStores.textContent = String(shopping.groups.length || "—");
     dom.summaryTotal.textContent = shopping.total || "—";
     dom.summaryPerServing.textContent = displayBasketMoney(
