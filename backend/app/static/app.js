@@ -195,6 +195,7 @@
     if (/application\/(?:[a-z0-9.-]+\+)?json(?:;|$)/i.test(type)) {
       try { data = await response.json(); } catch (_error) { /* Checked below. */ }
     }
+    response.smakoCheck?.();
     if (!response.ok) return { response, data };
     const plan = planFromEnvelope(data);
     if (!plan || !Array.isArray(plan.recipes) || !plan.recipes.length
@@ -2620,7 +2621,7 @@
         const stateResponse=await fetch("/api/personal/state",{headers:{Accept:"application/json"},cache:"no-store",signal});
         const state=await responseJson(stateResponse);if(!stateResponse.ok)throw new Error(errorFromResponse(state,"Skafferiet kunde inte läsas."));
         const final=await window.SmakoRecipes.jobRequest({scope:"public",url:`/api/personal/plans/${encodeURIComponent(currentResponse.plan_id)}/change`,payload:{action,revision:currentResponse.plan_revision,pantry_revision:state.revision,...fields},requestId:request.id,signal,context:{kind:"change"},onProgress:message=>{dom.loadingMessage.textContent=message;}});
-        const payload=await responseJson(final);if(!final.ok)throw planningError(payload,"Planen kunde inte räknas om. Din tidigare revision finns kvar.",final.status);return payload;
+        const payload=await responseJson(final);final.smakoCheck?.();if(!final.ok)throw planningError(payload,"Planen kunde inte räknas om. Din tidigare revision finns kvar.",final.status);return payload;
       });
       applySavedPlan(result.saved);if(action==="replace")sendAnalyticsEvent("recipe_replaced");
     } catch(error){if(error.lifecycle)return;showError(`${error.message} Fel-ID: ${request.id}`,error.planningDiagnostics);}
@@ -2634,7 +2635,7 @@
     try {
       const payload=await boundedRequest(request.controller,PLAN_WAIT_MS,async signal=>{
         const response=await window.SmakoRecipes.jobRequest({scope:"public",signal,onProgress:message=>{dom.loadingMessage.textContent=message;}});
-        const data=await responseJson(response);if(!response.ok)throw planningError(data,response.status===410?"Beräkningen avslutades vid serveromstart. Dina val finns kvar; skapa menyn igen.":"Beräkningen kunde inte återläsas.",response.status);return data;
+        const data=await responseJson(response);response.smakoCheck?.();if(!response.ok)throw planningError(data,response.status===410?"Beräkningen avslutades vid serveromstart. Dina val finns kvar; skapa menyn igen.":"Beräkningen kunde inte återläsas.",response.status);return data;
       });
       applySavedPlan(payload.saved||payload);
     }catch(error){if(error.lifecycle)return;showError(`${error.message} Dina val och tidigare sparade planer finns kvar.`,error.planningDiagnostics);}
@@ -3604,7 +3605,7 @@
   window.addEventListener("online", () => { void loadPublicRuntimeStatus(); if(!activePlanRequest)void resumePublicJob(); });
 
   const resumeReader=()=>{reconcilePlanningState();if(!activePlanRequest)void resumePublicJob();};
-  window.addEventListener("pageshow",resumeReader);
+  window.addEventListener("pageshow",()=>setTimeout(resumeReader,0));
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)resumeReader();});
   reconcilePlanningState();
   document.documentElement.dataset.frontendInitialized = "true";

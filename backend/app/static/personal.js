@@ -45,6 +45,7 @@
       if(planning||url.startsWith("/api/plan-jobs/")||url.startsWith("/api/plan-job-requests/"))r=await window.SmakoRecipes.jobRequest({scope:"personal",url,payload,signal:controller.signal,onProgress:notify,context:planning?{kind:url==="/api/plans"?"create":"change"}:null});
       else r=await fetch(url,{method:payload===undefined?"GET":method,headers:{"Content-Type":"application/json"},body:payload===undefined?undefined:JSON.stringify(payload),signal:controller.signal,cache:"no-store"});
       const d=await r.json();
+      r.smakoCheck?.();
       if(!r.ok){const message=typeof d.detail==="string"?d.detail:Array.isArray(d.detail)?d.detail.map(e=>e.msg).join(" · "):"Begäran kunde inte genomföras.";const error=new Error(`${d.code==="DATA_BLOCKED"?"Underlag saknas: ":""}${message}${r.headers.get("X-Request-ID")?` Fel-ID: ${r.headers.get("X-Request-ID")}`:""}`);error.code=d.code;error.diagnostics=d.planning_diagnostics;throw error;}
       return d;
     } catch(e){if(e.lifecycle)throw e;if(e.name==="AbortError")throw new Error("Svarstiden överskreds. Ladda om för att återansluta till samma beräkning. Dina val och tidigare plan finns kvar.");throw e;} finally{clearTimeout(timer);}
@@ -200,7 +201,7 @@
     if(location.hash==="#pantry")show("pantry");renderExtras();
   });
   const resume=()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(resumePersonalJob);};
-  window.addEventListener("pageshow",resume);document.addEventListener("visibilitychange",()=>{if(!document.hidden)resume();});
+  window.addEventListener("pageshow",()=>setTimeout(resume,0));document.addEventListener("visibilitychange",()=>{if(!document.hidden)resume();});
   window.addEventListener("online",()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(async()=>{try{const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true);}catch(_){/* A saved pending job can still reconnect. */}await resumePersonalJob();});});
 
   function renderSuggestions(){

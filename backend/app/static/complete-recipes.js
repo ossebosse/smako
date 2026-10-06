@@ -403,6 +403,7 @@
         const {response,data}=await transport(target,options,flow,onProgress);check(flow);
         if(response.status!==202){
           if(!response.ok)forgetJob(scope);
+          response.smakoCheck=()=>{flow.controller.signal.throwIfAborted();if(leaving||generation!==flow.generation)throw lifecycle("superseded");};
           trace(flow,"terminal",{status:response.status});return response;
         }
         flow.url=data.status_url;flow.failures=0;flow.disconnectedAt=null;
