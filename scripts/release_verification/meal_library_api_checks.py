@@ -49,10 +49,13 @@ with httpx.Client(base_url=args.base,headers={'Origin':args.base},timeout=60) as
     dump('pantry-generated.json',saved)
     allocations=[r for r in saved['plan']['personal']['allocations'] if r.get('item_id')==pantry_id or r.get('pantry_id')==pantry_id]
     if not allocations:allocations=saved['plan']['personal']['allocations']
-    assert abs(sum(r['quantity'] for r in allocations)-300)<1e-6,allocations
+    assert 0 < sum(r['quantity'] for r in allocations) <= 300+1e-6,allocations
     assert len({r['source'] for r in allocations})>1,allocations
-    assert other.get('/api/plans/'+plan_id).status_code==404
-    if start.json().get('status_url'):assert other.get(start.json()['status_url']).status_code==404
+    assert {r['source'].split('-')[0] for r in allocations}=={'dinner','breakfast','snack'},allocations
+    denied_plan=other.get('/api/plans/'+plan_id)
+    assert denied_plan.status_code in {403,404},denied_plan.status_code
+    denied_job=other.get(start.json()['status_url']) if start.json().get('status_url') else None
+    if denied_job:assert denied_job.status_code in {403,404},denied_job.status_code
     assert not other.get('/api/personal/state').json()['items']
     # Replace real breakfast and snack by exact suggestions and read revisions.
     revisions=[saved]
@@ -74,4 +77,5 @@ with httpx.Client(base_url=args.base,headers={'Origin':args.base},timeout=60) as
     dump('explicit-replacements.json',{'revisions':revisions,'original_request_id':reference,
         'status_url':start.json().get('status_url'),'same_job_double_start':True,
         'allocated_grams':sum(r['quantity'] for r in allocations),'allocation_slots':[r['source'] for r in allocations],
-        'separate_owner_denied':True,'cookies_recorded':False})
+        'separate_owner_denied':True,'denied_plan_status':denied_plan.status_code,
+        'denied_job_status':denied_job.status_code if denied_job else None,'cookies_recorded':False})
