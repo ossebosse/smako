@@ -29,7 +29,7 @@ $env:PYTHONPATH='backend;.'
 python scripts/recipe_layer/library.py validate paket.json --output validation.json
 python scripts/recipe_layer/library.py diff paket.json --output diff.json
 python scripts/recipe_layer/library.py import paket.json --output import.json
-python scripts/recipe_layer/library.py prepare --output preparation.json
+python scripts/recipe_layer/library.py prepare --servings 1 --servings 2 --servings 4 --universe universe.json --output preparation.json
 python scripts/recipe_layer/library.py qualify --pack paket.json --universe universe.json --clock 2026-10-05T10:00:00+00:00 --allow-nutrition-estimates --output qualification.json
 python scripts/recipe_layer/library.py build --output bibliotekskandidat
 ```
@@ -59,6 +59,10 @@ kontroll av varje refererad råfils hash och de exakta databaskopplingarna.
 Nya tidigare saknade produkter ändrar nyckeln även när ett gammalt resultat
 var negativt. Pris, kampanj, datum, kanal, medlemskap, skafferi och aktuella
 måltidskrav prövas fortfarande i den gemensamma veckovägen och slutliga audit.
+
+`prepare --universe` förbereder källprojektioner utan användarberoende
+köpgodkännande. `--servings` förbereder återanvändbara portionsskalningar.
+Rapporten redovisar tid, träffar/omräkningar och lagringsstorlek.
 
 Beständig lagring följer PlanStore-mappens `recipe_prepared`, eller en
 operatörsvald `RECIPE_PREPARATION_CACHE_ROOT`. JSON-kuvert verifierar schema,

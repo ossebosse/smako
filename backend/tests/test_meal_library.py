@@ -116,3 +116,9 @@ def test_null_design_does_not_hide_independent_valid_rows(tmp_path):
     path.write_bytes(content.encoded(raw));checked=content.validate_pack(path)
     assert len(checked['recipes'])==1 and len(checked['rejections'])==1
     assert checked['rejections'][0]['recipe_id']=='unknown'
+
+def test_meal_choices_keep_explicit_products_only_adaptation():
+    from app.services.recipe_library import matches_meal
+    recipe=next(r for r in _registered() if r.design.variant_id!='base')
+    meal=MealSettings(recipe_choices={'dinner_level':'crafted'})
+    assert not matches_meal(recipe,meal,RecipePreferences(mode='complete',adaptation='products'))
