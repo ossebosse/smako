@@ -225,11 +225,11 @@ async def _change_plan(plan_id, payload, request, response):
         else:
             if payload.recipe_id:
                 from app.services.complete_recipes import enabled, identity
-                from app.services.recipe_library import candidates
+                from app.services.recipe_library import meal_candidates
                 if not enabled(saved.request):
                     raise HTTPException(422, "Recept-ID kräver genomarbetat receptläge.")
                 meal = next(m for m in spec.meals if m.meal_type == slot.meal_type)
-                selected = next((r for r in candidates(saved.request.recipe_preferences, meal.servings)
+                selected = next((r for r in meal_candidates(meal,saved.request.recipe_preferences)
                                  if identity(r) == payload.recipe_id), None)
                 if selected is None:
                     raise HTTPException(422, "Receptet uppfyller inte dina val. Välj ett annat alternativ.")

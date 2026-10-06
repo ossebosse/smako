@@ -159,3 +159,35 @@ def test_declaration_inventory_binds_changed_rows_and_new_products(tmp_path,monk
     universe.products=(*universe.products,product('annan vara',500,'g',30))
     assert artifacts.declaration_index(universe,facts,lambda p:None)=={0:'bröd',1:'bröd'}
     assert len(calls)==4
+
+
+@pytest.mark.parametrize('category',['breakfast','snack'])
+def test_explicit_replacement_resolves_current_meal_type_before_week_recalculation(category,monkeypatch):
+    import asyncio
+
+    from app.api import personal as api
+    from app.config import Settings
+    from app.models import PlanRequest
+    from app.models.personal import PersonalMutation
+    from app.services import complete_recipes
+    recipe=next(r for r in _registered() if category in r.design.meal_types)
+    spec={'use_pantry':False,'meals':[{'meal_type':category,'count':1,'servings':recipe.servings,'recipe_choices':{}}]}
+    request=PlanRequest(recipes=0,recipe_preferences={'mode':'complete'},personal=spec)
+    slot=MealSlot(id=category+'-1',day=1,meal_type=category,recipe=recipe)
+    saved=SimpleNamespace(revision=1,request=request,plan=SimpleNamespace(personal=SimpleNamespace(slots=[slot])))
+    store=SimpleNamespace(get_owned=lambda *args,**kwargs:saved)
+    state={'revision':0,'items':[],'reservations':{},'events':{}}
+    private=SimpleNamespace(read=lambda owner:state,prepare_revision=lambda owner,saved:state)
+    settings=Settings(complete_recipes_enabled=True)
+    monkeypatch.setattr(api,'context',lambda *args:(settings,store,'synthetic-owner'))
+    monkeypatch.setattr(api,'PersonalStore',lambda plans:private)
+    monkeypatch.setattr(api,'GLOBAL_PREPARED_PRICE_UNIVERSES',SimpleNamespace(get_for_request=lambda *args:object()))
+    async def reaches_week_recalculation(updated,*args,**kwargs):
+        assert updated.personal.slots[0].recipe.design.base_id==recipe.design.base_id
+        assert updated.personal.slots[0].meal_type==category
+        raise ValueError('reached independent whole-week recalculation')
+    monkeypatch.setattr(api,'_run_personal_work',reaches_week_recalculation)
+    payload=PersonalMutation(revision=1,pantry_revision=0,action='replace',slot_id=slot.id,
+        recipe_id=complete_recipes.identity(recipe))
+    with pytest.raises(ValueError,match='reached independent whole-week'):
+        asyncio.run(api._change_plan('synthetic-plan',payload,None,None))
