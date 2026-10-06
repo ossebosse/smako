@@ -99,7 +99,10 @@ def declaration_index(universe, facts, source_facts):
     from app.services.declaration_semantics import declaration_food_class
     from app.services.personal_source_facts import facts_version
     version = getattr(facts,"version",None) or facts_version(facts)
-    identity = [universe.universe_id, digest(universe.model_dump_json().encode()), version]
+    # The prepared universe also contains large search indexes. Classification
+    # depends on the exact product inventory and facts, not those derived indexes.
+    inventory = [p.model_dump(mode="json") for p in universe.products]
+    identity = [universe.universe_id, digest(encoded(inventory)), version]
     def compute():
         return {str(i):food_class for i,product in enumerate(universe.products)
                 if (food_class := declaration_food_class(product,source_facts(product)))}

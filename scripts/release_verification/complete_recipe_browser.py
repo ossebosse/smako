@@ -216,13 +216,36 @@ def assert_recipe_result(envelope, args):
     plan = envelope["plan"]
     recipes = plan["recipes"]
     basket = plan["optimized_basket"]
-    assert len(recipes) == args.dinners and all(recipe["servings"] == args.servings for recipe in recipes)
+    if args.meal_request:
+        from collections import Counter
+        meals={m["meal_type"]:m for m in args.meal_request["personal"]["meals"]}
+        slots=plan["personal"]["slots"]
+        assert Counter(s["meal_type"] for s in slots if s["recipe"]) == {t:m["count"] for t,m in meals.items() if m["count"]}
+        assert plan["portions"] == sum(m["count"]*m["servings"] for m in meals.values())
+        assert len(recipes) == args.expected_meals
+        for slot in slots:
+            if not slot["recipe"]:continue
+            recipe=slot["recipe"];meal=meals[slot["meal_type"]];choices=meal.get("recipe_choices",{})
+            assert recipe["servings"]==meal["servings"] and slot["meal_type"] in recipe["design"].get("meal_types",["dinner"])
+            for field,actual,lower in [("min_ingredients",recipe["design"]["ingredient_count"],True),("max_ingredients",recipe["design"]["ingredient_count"],False),("max_active_minutes",recipe["design"].get("active_minutes"),False),("max_total_minutes",recipe["design"].get("total_minutes",recipe["design"]["estimated_minutes"]),False),("max_waiting_minutes",recipe["design"].get("waiting_minutes",0),False)]:
+                bound=choices.get(field)
+                if bound is not None:assert actual is not None and (actual>=bound if lower else actual<=bound)
+            if slot["meal_type"]=="dinner" and choices.get("dinner_level") not in {None,"mixed"}:assert recipe["design"].get("dinner_level","crafted")==choices["dinner_level"]
+            target=meal.get("limits",{}).get("min_protein_g")
+            if target is not None:
+                n=next(n for n in plan["personal"]["checks"]["nutrition"] if n["slot_id"]==slot["id"])
+                assert n["values"]["protein_g"]>=target
+        for category,meal in meals.items():
+            counts=Counter(s["recipe"]["design"]["base_id"] for s in slots if s["meal_type"]==category and s["recipe"])
+            if meal.get("max_same_base_meals") is not None:assert all(n<=meal["max_same_base_meals"] for n in counts.values())
+    else:
+        assert len(recipes) == args.dinners and all(recipe["servings"] == args.servings for recipe in recipes)
     assert 0 <= basket["store_count"] <= args.max_stores
     assert basket["total_reconciled"] and basket["verification_status"] in {"VERIFIED", "VERIFIED_WITH_ESTIMATES"}
     for recipe in recipes:
         assert recipe["ingredients"] and recipe["instructions"] and all(step.strip() for step in recipe["instructions"])
         assert all(ingredient["quantity"] > 0 and ingredient["unit"] for ingredient in recipe["ingredients"])
-        if args.recipe_mode == "complete":
+        if args.recipe_mode == "complete" and not args.meal_request:
             design = recipe["design"]
             assert args.min_ingredients <= design["ingredient_count"] <= args.max_ingredients
             if args.cuisines:
@@ -232,7 +255,7 @@ def assert_recipe_result(envelope, args):
             if not args.allow_fish:
                 assert design["fish"] is False
             assert design["base_id"] and design["version"] and design["variant_id"]
-    if args.recipe_mode == "complete":
+    if args.recipe_mode == "complete" and not args.meal_request:
         preferences = envelope["request"]["recipe_preferences"]
         assert set(preferences["cuisines"]) == set(args.cuisines)
         assert preferences["min_ingredients"] == args.min_ingredients
@@ -338,6 +361,9 @@ def run_case(browser, engine, mobile, personal, args):
             page.locator('[data-open="choices"]').first.click()
         elif page.locator("#onboarding-dialog").is_visible():
             page.locator("#onboarding-cta").click()
+        if args.meal_request:
+            expect(page.locator("#recipe-style")).to_be_visible(timeout=30000)
+            page.locator("#recipe-style").select_option("library")
         page.locator("#postal-code").fill(args.postal_code)
         page.locator("#max-stores").select_option(str(args.max_stores))
         page.locator("#purchase-planning-mode").select_option(args.purchase_mode)
@@ -389,6 +415,21 @@ def run_case(browser, engine, mobile, personal, args):
                 page.locator(f'#recipe-price-contexts input[value="{store_context}"]').check()
             if not personal:
                 page.locator("#recipe-nutrition-estimates").set_checked(args.allow_nutrition_estimates)
+        if args.meal_request:
+            page.locator("#recipe-style").select_option("library")
+            for meal in args.meal_request["personal"]["meals"]:
+                category=meal["meal_type"]
+                count_id=f"{category}-count" if personal else "recipes" if category=="dinner" else f"meal-{category}-count"
+                servings_id=f"{category}-servings" if personal else "servings" if category=="dinner" else f"meal-{category}-servings"
+                if personal or category!="dinner":page.locator('#'+count_id).fill(str(meal["count"]))
+                else:page.locator('#'+count_id).select_option(str(meal["count"]))
+                page.locator('#'+servings_id).fill(str(meal["servings"]))
+                choices=meal.get("recipe_choices",{})
+                if category=="dinner":page.locator("#meal-dinner-level").select_option(choices.get("dinner_level","simple"))
+                for key in ["min_ingredients","max_ingredients","max_active_minutes","max_total_minutes","max_waiting_minutes"]:
+                    if choices.get(key) is not None:page.locator(f'#meal-{category}-{key}').fill(str(choices[key]))
+                if meal.get("max_same_base_meals") is not None:page.locator(f'#meal-{category}-max_same_base_meals').fill(str(meal["max_same_base_meals"]))
+                if meal.get("limits",{}).get("min_protein_g") is not None:page.locator(f'#{category}-min_protein_g' if personal else f'#meal-{category}-min-protein').fill(str(meal['limits']['min_protein_g']))
         page.screenshot(path=str(target / "choices.png"), full_page=True)
         report['loaded_assets']=assets
         report['ready_build_id']=context.request.get(args.base+'/ready').json().get('build_id')
@@ -416,13 +457,13 @@ def run_case(browser, engine, mobile, personal, args):
         report["acceptance"] = assert_recipe_result(envelope, args)
         wait_render(page, personal)
         generation['click_to_render_seconds'] = round(time.monotonic() - clicked_at, 3)
-        assert open_recipes(page, personal) == args.dinners
+        assert open_recipes(page, personal) == args.expected_meals
         report["recipe_text"] = page.locator("#plan-content" if personal else "#recipes-list").inner_text()
         if args.expect_refined_recipes:
             assert not re.search(r'\d+\.\d{6,}', report['recipe_text']), 'Raw numeric artifact visible'
             assert 'Huvudproteinkälla: Vegetariska' not in report['recipe_text']
             assert 'Protein före visningsavrundning' not in report['recipe_text']
-            assert page.locator('.recipe-nutrition-info:visible').count() == args.dinners
+            assert page.locator('.recipe-nutrition-info:visible').count() == args.expected_meals
             for method in page.locator('.complete-recipe-method:visible').all():
                 assert 'Endast dricksvatten får tillkomma' not in method.inner_text()
                 assert 'inte ett provlagningsresultat' not in method.inner_text()
@@ -432,8 +473,8 @@ def run_case(browser, engine, mobile, personal, args):
         skip_link = report["recipe_layout"]["skipLink"]
         assert not skip_link or skip_link["focused"] or not skip_link["overlapsViewport"]
         if args.recipe_mode == "complete":
-            assert page.locator(".complete-recipe-content:visible").count() == args.dinners
-            assert page.locator(".recipe-component:visible").count() >= args.dinners
+            assert page.locator(".complete-recipe-content:visible").count() == args.expected_meals
+            assert page.locator(".recipe-component:visible").count() >= args.expected_meals
             page.locator(".complete-recipe-content:visible").first.screenshot(path=str(target / "first-recipe.png"))
             page.locator(".complete-recipe-content:visible").first.evaluate("el=>el.scrollIntoView({block:'start',behavior:'instant'})")
             page.screenshot(path=str(target / "first-recipe-viewport.png"))
@@ -532,8 +573,8 @@ def run_case(browser, engine, mobile, personal, args):
                 metadata = context.request.get(args.base + "/api/recipe-library", timeout=30000).json()
                 assert metadata["enabled"] is False
                 expect(page.locator("#recipe-style")).to_be_hidden(timeout=15000)
-                assert open_recipes(page, personal) == args.dinners
-                assert page.locator(".complete-recipe-content:visible").count() == args.dinners
+                assert open_recipes(page, personal) == args.expected_meals
+                assert page.locator(".complete-recipe-content:visible").count() == args.expected_meals
                 report["saved_recipes_readable_with_feature_disabled"] = True
                 page.screenshot(path=str(target / "flag-off-saved-plan.png"), full_page=True)
         # A separate clean owner must not gain access to the saved private result.
@@ -595,6 +636,7 @@ def main():
     parser.add_argument("--viewport", choices=["desktop", "mobile", "both"], default="mobile")
     parser.add_argument("--view", choices=["public", "personal", "both"], default="public")
     parser.add_argument("--postal-code", default="22350")
+    parser.add_argument("--meal-request",type=Path,help="Ordinary per-type form fixture, no backend injection")
     parser.add_argument("--dinners", type=int, default=5)
     parser.add_argument("--servings", type=int, default=2)
     parser.add_argument("--max-stores", type=int, default=2)
@@ -632,6 +674,8 @@ def main():
     parser.add_argument("--allow-nonlocal-isolated-target", action="store_true")
     args = parser.parse_args()
     args.base = args.base.rstrip("/")
+    args.meal_request=json.loads(args.meal_request.read_text(encoding="utf8")) if args.meal_request else None
+    args.expected_meals=sum(m["count"] for m in args.meal_request["personal"]["meals"]) if args.meal_request else args.dinners
     if not 0 <= args.offline_seconds <= 30:
         parser.error("--offline-seconds must be between 0 and 30")
     if args.expect_flag_off_after_restart and not args.restart_handshake:
