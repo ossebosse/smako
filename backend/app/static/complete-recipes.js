@@ -372,9 +372,14 @@
         // Read body under the same timeout; a response with a stalled body is not success.
         const data=await readResponse(response,flow);
         trace(flow,"response",{reference,status:response.status,type:response.headers.get("Content-Type"),server_request:response.headers.get("X-Request-ID")});
-        if([429,502,503,504].includes(response.status)&&!response.headers.get("X-Plan-Request-ID")){
+        const unconfirmed=response.status===404&&!flow.url&&url.startsWith("/api/plan-job-requests/");
+        if(unconfirmed&&Date.now()-flow.startedAt<30000){
+          // Reload can race server acceptance of the original POST. This is
+          // discovery of an unconfirmed start, not retrying a missing known job.
+          retryAfter=2000;
+        }else if([429,502,503,504].includes(response.status)&&!response.headers.get("X-Plan-Request-ID")){
           const seconds=Number(response.headers.get("Retry-After"));retryAfter=Number.isFinite(seconds)?Math.min(60000,Math.max(0,seconds*1000)):0;
-        }else return {response,data};
+        }else {response.smakoUnconfirmed=unconfirmed;return {response,data};}
       }catch(error){
         if(flow.controller.signal.aborted)trace(flow,"request-abort",{reference,reason:flow.controller.signal.reason?.lifecycle||"caller"});
         check(flow);
@@ -393,7 +398,7 @@
   async function jobRequest({scope,url,payload,signal,onProgress=()=>{},context=null,requestId=crypto.randomUUID()}) {
     stopReader("replaced");
     const saved=pendingJob(scope);
-    const flow={controller:new AbortController(),generation:++generation,requestId:saved?.requestId||requestId,url:saved?.url||null,failures:0,disconnectedAt:null};reader=flow;
+    const flow={controller:new AbortController(),generation:++generation,requestId:saved?.requestId||requestId,url:saved?.url||null,startedAt:saved?.started_at||Date.now(),failures:0,disconnectedAt:null};reader=flow;
     const abort=()=>flow.controller.abort(signal.reason);signal?.addEventListener("abort",abort,{once:true});if(signal?.aborted)abort();
     if(!saved){storage.set(jobKey(scope),{requestId:flow.requestId,context,started_at:Date.now()});}
     try{
@@ -402,12 +407,12 @@
       for(;;){
         const {response,data}=await transport(target,options,flow,onProgress);check(flow);
         if(response.status!==202){
-          if(!response.ok)forgetJob(scope);
+          if(!response.ok&&!response.smakoUnconfirmed)forgetJob(scope);
           response.smakoCheck=()=>{flow.controller.signal.throwIfAborted();if(leaving||generation!==flow.generation)throw lifecycle("superseded");};
           trace(flow,"terminal",{status:response.status});return response;
         }
         flow.url=data.status_url;flow.failures=0;flow.disconnectedAt=null;
-        storage.set(jobKey(scope),{url:flow.url,requestId:flow.requestId,context:context||saved?.context,started_at:saved?.started_at||Date.now()});
+        storage.set(jobKey(scope),{url:flow.url,requestId:flow.requestId,context:context||saved?.context,started_at:flow.startedAt});
         onProgress(stages[data.stage]||"Servern arbetar med din meny. Du kan återansluta till samma beräkning.");
         await delay(2000,flow);target=flow.url;options={};
       }

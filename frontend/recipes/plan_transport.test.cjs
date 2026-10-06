@@ -72,3 +72,20 @@ test('replaced reader cannot return a late old response',async()=>{
   assert.equal((await second).status,201);release(response(final));
   assert.equal((await caught).lifecycle,'replaced');
 });
+test('terminal result consumption is fenced after replacement or pagehide',async()=>{
+  const {api,window}=setup(async()=>response(final));
+  const first=await api.jobRequest({scope:'public',url:old});
+  const second=await api.jobRequest({scope:'personal',url:job});
+  assert.throws(()=>first.smakoCheck(),e=>e.lifecycle==='superseded');
+  second.smakoCheck();window.dispatchEvent(new Event('pagehide'));
+  assert.throws(()=>second.smakoCheck(),e=>e.lifecycle==='superseded');
+});
+test('reload discovery tolerates server acceptance still in flight, without another POST',async()=>{
+  let lookups=0,posts=0;const {api}=setup(async(url,options)=>{
+    if(options.method==='POST'){posts++;throw new TypeError('lost start');}
+    if(url.includes('plan-job-requests')){lookups++;return lookups===1?response({detail:'not accepted yet'},404):response({status:'pending',status_url:job},202);}
+    return response(final);
+  });
+  assert.equal((await api.jobRequest({scope:'public',url:'/api/plans',payload:{}})).status,201);
+  assert.equal(posts,1);assert.equal(lookups,2);
+});
