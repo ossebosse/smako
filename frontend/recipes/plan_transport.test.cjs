@@ -64,6 +64,15 @@ test('pagehide abort is explicit; pageshow reconnects same saved job',async()=>{
   slow=false;window.dispatchEvent(new Event('pageshow'));assert.equal((await api.jobRequest({scope:'public'})).status,201);
   assert.ok(events.some(e=>e.event==='abort'&&e.reason==='pagehide'));
 });
+test('beforeunload stops a scheduled poll before pagehide and retains the same job',async()=>{
+  let calls=0;const {api,window,events}=setup(async(url)=>{calls++;return url==='/api/plans'?response({status:'pending',status_url:job},202):response(final);});
+  const first=api.jobRequest({scope:'public',url:'/api/plans',payload:{},onProgress:()=>window.dispatchEvent(new Event('beforeunload'))});
+  await assert.rejects(first,e=>e.lifecycle==='beforeunload');
+  await new Promise(r=>setTimeout(r,5));assert.equal(calls,1);
+  assert.equal(api.pendingJob('public').url,job);
+  assert.ok(events.some(e=>e.event==='abort'&&e.reason==='beforeunload'));
+  assert.equal((await api.jobRequest({scope:'public'})).status,201);assert.equal(calls,2);
+});
 test('replaced reader cannot return a late old response',async()=>{
   let release;const {api}=setup(async url=>url===old?new Promise(r=>{release=r;}):response(final));
   const first=api.jobRequest({scope:'public',url:old});

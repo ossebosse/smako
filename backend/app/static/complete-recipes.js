@@ -333,6 +333,9 @@
   }
   function lifecycle(reason) { const error=new DOMException("Statusläsningen avbröts på denna sida.","AbortError");error.lifecycle=reason;return error; }
   function stopReader(reason) {if(reader){trace(reader,"abort",{reason});reader.controller.abort(lifecycle(reason));}}
+  // pagehide can arrive after WebKit has begun a provisional navigation.
+  // Stop its timer before another fetch is attempted in that old document.
+  window.addEventListener("beforeunload",()=>{trace(reader,"beforeunload");stopReader("beforeunload");});
   window.addEventListener("pagehide",event=>{trace(reader,"pagehide",{persisted:event.persisted});leaving=true;stopReader("pagehide");});
   window.addEventListener("pageshow",event=>{leaving=false;trace(null,"pageshow",{persisted:event.persisted});});
   document.addEventListener("visibilitychange",()=>trace(reader,"visibility",{hidden:document.hidden}));

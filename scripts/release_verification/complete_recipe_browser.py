@@ -127,6 +127,7 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
                     except BrowserError:pass
         can_reload=not fault or fault['scenario']!='delayed-reload' or fault.get('held_at')
         if can_reload and pending_urls and reload_after is not None and not reloaded and time.monotonic() - started >= reload_after:
+            if fault:fault['reload_requested_utc']=datetime.now(UTC).isoformat()
             page.reload(wait_until="domcontentloaded")
             reloaded = True
             if fault and fault['scenario']=='delayed-reload':
