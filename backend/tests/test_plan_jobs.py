@@ -59,6 +59,9 @@ def test_async_plan_returns_before_work_finishes_and_preserves_failure(monkeypat
                 time.sleep(.01)
             assert final.status_code == 503
             assert final.headers['x-error-code'] == 'price_universe_unusable'
+            for _ in range(3):
+                again = client.get(status_url)
+                assert again.status_code == 503 and again.json() == final.json()
             assert calls[0].servings == 2 and calls[0].max_stores == 3
             assert calls[0].purchase_planning_mode == 'exact'
     finally:

@@ -681,12 +681,18 @@ async def poll_plan_job(job_id: str, http_request: Request):
                             headers={"X-Error-Code": "planner_job_expired", "Cache-Control": "private, no-store"})
     if not job.task.done():
         return _pending_plan_job(job)
-    try:
-        saved = job.task.result()
-    except HTTPException as exc:
-        exc.headers = {**(exc.headers or {}), "Cache-Control": "private, no-store",
-                       "X-Plan-Request-ID": job.request_id}
-        raise
+    # Never raise the task's retained exception object in a reader coroutine.
+    # A completion callback releases its planner traceback frames; attaching
+    # live request frames to that same object can clear a suspended reader.
+    error = job.task.exception()
+    if isinstance(error, HTTPException):
+        raise HTTPException(error.status_code, error.detail, headers={
+            **(error.headers or {}), "Cache-Control": "private, no-store",
+            "X-Plan-Request-ID": job.request_id,
+        })
+    if error is not None:
+        raise RuntimeError("Planeringsjobbet avslutades med ett serverfel.") from error
+    saved = job.task.result()
     from fastapi.encoders import jsonable_encoder
     content = jsonable_encoder(saved) if isinstance(saved, dict) else _annotate_freshness(saved).model_dump(mode="json")
     return JSONResponse(status_code=201, content=content,

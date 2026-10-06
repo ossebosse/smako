@@ -273,7 +273,13 @@ def run_case(browser, engine, mobile, personal, args):
         errors.append(str(error))
         error_events.append({"message": str(error), "stack": getattr(error, "stack", None),
                              "at_utc": datetime.now(UTC).isoformat(), "page_url": page.url})
-    page.on("response", lambda response: record_response(response, observed))
+    assets={}
+    def observe_response(response):
+        record_response(response,observed)
+        if urlsplit(response.url).path in {'/static/complete-recipes.js','/static/app.js','/static/personal.js'}:
+            try:assets[urlsplit(response.url).path]={'url':response.url,'sha256':hashlib.sha256(response.body()).hexdigest()}
+            except BrowserError:pass
+    page.on("response",observe_response)
     page.on("pageerror", record_page_error)
     page.on("framenavigated", lambda frame: navigation_events.append(
         {"at_utc": datetime.now(UTC).isoformat(), "url": frame.url}) if frame.parent_frame is None else None)
@@ -337,6 +343,9 @@ def run_case(browser, engine, mobile, personal, args):
             if not personal:
                 page.locator("#recipe-nutrition-estimates").set_checked(args.allow_nutrition_estimates)
         page.screenshot(path=str(target / "choices.png"), full_page=True)
+        report['loaded_assets']=assets
+        report['ready_build_id']=context.request.get(args.base+'/ready').json().get('build_id')
+        if args.expected_transport_sha:assert assets['/static/complete-recipes.js']['sha256']==args.expected_transport_sha
         report["form_layout"] = observe_layout(page)
         assert report["form_layout"]["noHorizontalPageOverflow"]
         start = len(observed)
@@ -559,6 +568,7 @@ def main():
     parser.add_argument("--store-contexts", nargs="*", default=[], help="Exact currently published context IDs to select through the form")
     parser.add_argument("--exclusions", nargs="*", default=[])
     parser.add_argument("--timeout", type=int, default=900)
+    parser.add_argument('--expected-transport-sha')
     parser.add_argument('--transport-fault',choices=['none','reset','lost-start','delayed-reload','timeout','away','hidden','long-outage'],default='none')
     parser.add_argument("--reload-after", type=float, default=3)
     parser.add_argument("--offline-seconds", type=float, default=0, help="Temporarily disable the browser network during the pending job, at most 30 seconds")
