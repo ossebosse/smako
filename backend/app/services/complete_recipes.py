@@ -397,6 +397,11 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         return bool(re.fullmatch(r"(?:(?:naturell|fast|extra fast|ekologisk|eko) )*tofu(?: (?:naturell|fast|extra fast|firm|ekologisk|eko|vegansk|vegan))*", label.replace("/", " ")) and "naturell" in label and not re.search(r"rök|vitlök|ingefära|chili|marinad|socker", declared))
     if canonical == "keso":
         return bool(re.fullmatch(r"(?:keso|keso cottage cheese|cottage cheese)(?: (?:mini|laktosfri|naturell|ekologisk|eko|\d+(?:[,.]\d+)?\s*%))*", label))
+    if canonical == "kvarg":
+        # Reuse the already qualified cold-meal identity/composition rule for
+        # authored content, without restricting it to named legacy recipes.
+        from app.services.reviewed_cold_meals import plain_quark
+        return form == "as_sold" and plain_quark(product, fact)
     if canonical == "sojasås":
         return bool(re.fullmatch(r"(?:(?:glutenfri|japansk|tamari) )*sojasås(?: (?:japansk|tamari|glutenfri|vegan))*", label))
     if canonical == "jordnötssmör":

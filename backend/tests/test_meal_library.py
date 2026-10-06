@@ -87,3 +87,17 @@ def test_final_week_check_rejects_base_repeat_on_swap_before_audit():
     planner=SimpleNamespace(meals={'dinner':MealSettings(count=3,max_same_base_meals=2)},request=SimpleNamespace(recipe_preferences=RecipePreferences(mode='complete')))
     slots=[MealSlot(id=f'dinner-{day}',day=day,meal_type='dinner',recipe=recipe) for day in range(1,4)]
     with pytest.raises(ValueError,match='upprepningsgränsen'):PersonalPlanner._check_final(planner,slots,None,None,None,None)
+
+def test_authored_quark_reuses_existing_exact_identity_rule():
+    from app.services.complete_recipes import _whole_food_identity
+    from app.services.personal_policy import ProductFacts
+
+    from backend.tests.test_personal_planning_v2 import product
+    p=product('Kvarg Naturell',500,'g',20)
+    fact=ProductFacts(source='synthetic-regression',source_product_id=p.product_id,
+        source_snapshot_id='unit',animal=True,ingredients=('MJÖLK, mjölksyrakultur',))
+    assert _whole_food_identity('kvarg','as_sold',p,fact)
+    assert not _whole_food_identity('kvarg','dry',p,fact)
+    assert not _whole_food_identity('kvarg','as_sold',p.model_copy(update={'name':'Kvarg vanilj'}),fact)
+    from dataclasses import replace
+    assert not _whole_food_identity('kvarg','as_sold',p,replace(fact,ingredients=('MJÖLK, socker',)))
