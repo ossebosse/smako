@@ -1,3 +1,25 @@
+# 2026-10-06: Statuskandidaten aktiverad; måltidsbibliotek i separat utveckling
+
+Etapp A är genomförd med användarens uttryckliga app-only-godkännande:
+beta.smako.nu kör dd12-image `c8362751b13a`, BUILD_ID
+`status-reconnect-dd12cc80e98c`, kompletta recept på. Inga testdata eller
+historisk klocka installerades. Samma mounts och aktuella data; alla tidigare
+209 revisionsrader och 58 privata tillståndsrader har bevarade fingerprint.
+Privat, integritetskontrollerad backup togs före bytet. Endast appen ersattes.
+[Separat aktiveringsrapport](releases/status-activation-20261006/RESULTS.md).
+
+Riktiga publika Chromium- och personliga WebKit-knappflöden passerade,
+inklusive dubbelstart, omladdning/offline, byte, omräkning och revisions-GET.
+Första WebKit-provet är bevarat som FAIL för statuslatens 16,12 s mot
+testets 10 s-gräns, trots färdig meny utan sidfel. Servermetriken för samma
+anrop är 159,367 ms; exakt fördröjningsorsak är fortsatt obelagd. Omkörning
+är inte en appfix. Kontoinloggning är avstängd i faktisk drift; proven gäller gäster.
+
+Etapp B utvecklas på `feature/meal-library-20261006`, ovanpå eaf9dfd och dd12.
+Den koden är inte aktiverad. B:s receptformat, måltidsval och beständiga
+förberedelseartefakter befinner sig ännu i implementation/isolering.
+Ingen push, relä-, scheduler-, collector-, proxy- eller säkerhetsändring.
+
 # 2026-10-06: Statusflöde och återanslutning – färdig lokal appkandidat
 
 Gren `feature/status-reconnect-20261006`, slutlig paketerad runtime
