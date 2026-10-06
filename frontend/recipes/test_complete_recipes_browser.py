@@ -142,6 +142,26 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     assert not meals["breakfast"].get("limits",{}).get("min_protein_g")
     page.wait_for_function("document.querySelector('#generate-plan, #submit-button').disabled === false")
 
+    # An inactive meal category must not block active breakfasts/snacks.
+    page.locator('#recipe-cuisine-distribution').select_option('each_selected')
+    page.locator('#meal-dinner-min_ingredients').fill('8')
+    page.locator('#meal-dinner-max_ingredients').fill('3')
+    dinner_count=page.locator('#dinner-count' if personal else '#recipes')
+    dinner_count.fill('0') if personal else dinner_count.select_option('0')
+    with page.expect_response(lambda r:urlsplit(r.url).path=='/api/plans' and r.request.method=='POST',timeout=10000):
+        submit.click()
+    request=plans[-1];meals={m['meal_type']:m for m in request['personal']['meals']}
+    assert request['recipe_preferences']['cuisine_distribution']=='free'
+    assert request['recipe_preferences']['min_distinct_cuisines'] is None
+    assert meals['dinner']['count']==0 and meals['dinner']['recipe_choices'] is None
+    assert not meals['dinner']['limits'] and not meals['dinner']['distribution']
+    assert meals['breakfast']['count']==5
+    page.wait_for_function("document.querySelector('#generate-plan, #submit-button').disabled === false")
+    dinner_count.fill('5') if personal else dinner_count.select_option('5')
+    page.locator('#meal-dinner-min_ingredients').fill('')
+    page.locator('#meal-dinner-max_ingredients').fill('')
+    page.locator('#recipe-cuisine-distribution').select_option('free')
+
     page.locator("#recipe-style").select_option("legacy")
     submit.click()
     expect(status).to_contain_text("oförenliga val")

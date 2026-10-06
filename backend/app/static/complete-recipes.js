@@ -89,6 +89,7 @@
     function mealValues(meals){
       if(mode.value!=="library"||!enabled)return meals;
       return meals.map(meal=>{
+        if(!meal.count)return {...meal,recipe_choices:null,max_same_base_meals:null,limits:{},distribution:{}};
         const row=mealRows[meal.meal_type],choices={};
         for(const key of ["min_ingredients","max_ingredients","max_active_minutes","max_total_minutes","max_waiting_minutes"])choices[key]=row[key].value===""?null:Number(row[key].value);
         if(meal.meal_type==="dinner")choices.dinner_level=level.value;
@@ -104,23 +105,34 @@
       mealFields.hidden=mode.value!=="library";mealFields.disabled=advanced.disabled||mealFields.hidden;
       grid.hidden=mode.value==="library";grid.querySelectorAll("input,select").forEach(n=>n.disabled=grid.hidden);
       if(!personal){const count=document.getElementById("recipes");if(count){for(let n=0;n<3;n++){let option=[...count.options].find(o=>o.value===String(n));if(!option){option=el("option",String(n));option.value=String(n);count.prepend(option);}option.disabled=mode.value!=="library";option.hidden=mode.value!=="library";}}}
-      for(const row of Object.values(mealRows)){row.max_ingredients.setCustomValidity(row.min_ingredients.value!==""&&row.max_ingredients.value!==""&&Number(row.min_ingredients.value)>Number(row.max_ingredients.value)?"Högsta ingrediensantalet är lägre än det minsta.":"");}
+      for(const [type,row] of Object.entries(mealRows)){
+        const count=document.getElementById(personal?`${type}-count`:type==="dinner"?"recipes":`meal-${type}-count`);
+        const inactive=mode.value==="library"&&Number(count?.value??0)===0;
+        for(const [key,node] of Object.entries(row))if(key!=="count")node.disabled=inactive||mealFields.disabled;
+        row.max_ingredients.setCustomValidity(!inactive&&row.min_ingredients.value!==""&&row.max_ingredients.value!==""&&Number(row.min_ingredients.value)>Number(row.max_ingredients.value)?"Högsta ingrediensantalet är lägre än det minsta.":"");
+      }
       custom.hidden=mode.value==="library"||preset.value!=="custom";min.disabled=custom.hidden;max.disabled=custom.hidden;
       min.setCustomValidity("");max.setCustomValidity("");
       if(preset.value==="custom"&&Number(min.value)>Number(max.value))max.setCustomValidity("Högsta antalet måste vara minst lika stort som lägsta antalet.");
-      minCuisines.disabled=cuisineDistribution.value!=="minimum"||advanced.disabled;
       const selected=cuisineInputs.filter(n=>n.checked).length;
       const dinners=Number(document.getElementById(personal?"dinner-count":"recipes")?.value||5);
+      const inactiveDinner=mode.value==="library"&&dinners===0;
+      cuisineDistribution.disabled=inactiveDinner||advanced.disabled;
+      minCuisines.disabled=inactiveDinner||cuisineDistribution.value!=="minimum"||advanced.disabled;
+      proteinCap.disabled=inactiveDinner||advanced.disabled;
+      level.disabled=inactiveDinner||mealFields.disabled;
+      for(const node of cuisineInputs)node.disabled=inactiveDinner||advanced.disabled;
       moreVariety.disabled=advanced.disabled||dinners<3||(selected>0&&selected<3);
       moreVariety.title=moreVariety.disabled&&enabled&&["complete","library"].includes(mode.value)?"Välj minst tre middagar och tre tillåtna matkök för detta förslag.":"";
       const required=cuisineDistribution.value==="each_selected"?selected:cuisineDistribution.value==="minimum"?Number(minCuisines.value):0;
-      cuisineDistribution.setCustomValidity(cuisineDistribution.value==="each_selected"&&!selected?"Välj minst ett matkök.":required>dinners?"Fler obligatoriska matkök än middagar.":cuisineDistribution.value==="minimum"&&required>(selected||6)?"Välj fler tillåtna matkök eller sänk minimiantalet.":"");
-      feedback.textContent="";
+      cuisineDistribution.setCustomValidity(inactiveDinner?"":cuisineDistribution.value==="each_selected"&&!selected?"Välj minst ett matkök.":required>dinners?"Fler obligatoriska matkök än middagar.":cuisineDistribution.value==="minimum"&&required>(selected||6)?"Välj fler tillåtna matkök eller sänk minimiantalet.":"");
+      feedback.textContent=inactiveDinner?"Middagsvalen tillämpas när du lägger till middagar.":"";
     }
     function values() {
       if(!["complete","library"].includes(mode.value))return {};
       const [lo,hi]=preset.value==="custom"?[Number(min.value),Number(max.value)]:preset.value.split("-").map(Number);
       const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:mode.value==="library"||protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
+      if(mode.value==="library"&&Number(document.getElementById(personal?"dinner-count":"recipes")?.value??0)===0)Object.assign(result.recipe_preferences,{cuisines:[],cuisine_distribution:"free",min_distinct_cuisines:null,max_same_main_protein_dinners:null,max_minutes:null});
       if(selectedContexts.length)result.allowed_store_ids=selectedContexts.slice();
       if(!personal)Object.assign(result,{allow_nutrition_estimates:estimates.checked,use_pantry:pantry.checked});
       if(mode.value==="library"&&!personal){
@@ -152,6 +164,8 @@
     }
     box.addEventListener("input",()=>{sync();storage.set(key,values());});
     box.addEventListener("change",()=>{sync();storage.set(key,values());});
+    const mealCountIds=new Set(personal?["dinner-count","breakfast-count","snack-count"]:["recipes"]);
+    document.addEventListener("input",event=>{if(mealCountIds.has(event.target.id))sync();});
     mode.addEventListener("change",()=>void loadContexts());
     moreVariety.addEventListener("click",()=>{cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;sync();storage.set(key,values());});
     restore(storage.get(key)||{});
