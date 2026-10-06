@@ -43,7 +43,8 @@ med noll minima ger näringsunderlag separat från 30/40-godkännande.
 Konflikt: samma ID/version/variant med olika innehåll stoppas. Oändrade
 objekt och identiska dubbletter redovisas; omimport förändrar inte manifestet.
 Ny version behåller tidigare utfärdade versioner för sparade planer.
-Manifestordningen publicerar senaste versionen av samma grundrätt/variant.
+Den högsta numeriska innehållsversionen används för samma grundrätt/variant.
+Ett paket med en oförändrad äldre version återaktiverar den inte.
 Avvisningar sparas med fil, fält, ID och orsak. Vid avvisningar publiceras
 bara en uttrycklig `--accept-id grundrätt:version:variant`-delmängd.
 Hashnamnat paket skrivs före atomiskt manifestbyte; ingen halvimport exponeras.

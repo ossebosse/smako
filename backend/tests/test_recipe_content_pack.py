@@ -22,7 +22,8 @@ ROOT = Path(__file__).parents[2]
 
 def test_deterministic_import_preserves_every_amount_and_own_instruction():
     importer = runpy.run_path(str(ROOT / "scripts/recipe_layer/import_content_pack.py"))
-    issued = [r for r in _registered() if r.design.content_source]
+    issued = [r for r in _registered() if r.design.content_source
+              and r.design.content_source.pack_id == "smako-recipe-expansion-content-20261004-v1"]
     priority = max(r.design.content_source.priority for r in issued)
     assert importer["build"](priority)["recipes"] == [r.model_dump(mode="json") for r in issued]
     source = json.loads(importer["SOURCE"].read_text(encoding="utf8"))

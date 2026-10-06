@@ -115,10 +115,15 @@ def current_recipes(generation=None):
     entries = manifest_entries()["current"]
     if generation is not None:
         entries = entries[:generation]
-    # Manifest order publishes successive versions; history remains readable.
+    # Importing a package containing an unchanged older version must not
+    # reactivate it over a newer version. All issued versions remain readable.
     current = {}
     for recipe in load_entries(entries):
-        current[(recipe.design.base_id, recipe.design.variant_id)] = recipe
+        key = (recipe.design.base_id, recipe.design.variant_id)
+        previous = current.get(key)
+        version = tuple(map(int, recipe.design.version.split(".")))
+        if previous is None or version > tuple(map(int, previous.design.version.split("."))):
+            current[key] = recipe
     return tuple(current.values())
 
 

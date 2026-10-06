@@ -101,3 +101,12 @@ def test_authored_quark_reuses_existing_exact_identity_rule():
     assert not _whole_food_identity('kvarg','as_sold',p.model_copy(update={'name':'Kvarg vanilj'}),fact)
     from dataclasses import replace
     assert not _whole_food_identity('kvarg','as_sold',p,replace(fact,ingredients=('MJÖLK, socker',)))
+
+def test_imported_older_version_cannot_replace_newer_current(monkeypatch):
+    from app.services.recipe_library import current_recipes
+    recipe=_registered()[0]
+    old=recipe.model_copy(update={'design':recipe.design.model_copy(update={'version':'1.0.0'})})
+    new=recipe.model_copy(update={'design':recipe.design.model_copy(update={'version':'10.0.0'})})
+    monkeypatch.setattr(content,'manifest_entries',lambda:{'current':[{}]})
+    monkeypatch.setattr(content,'load_entries',lambda entries:(new,old))
+    assert current_recipes()==(new,)
