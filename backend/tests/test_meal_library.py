@@ -122,3 +122,18 @@ def test_meal_choices_keep_explicit_products_only_adaptation():
     recipe=next(r for r in _registered() if r.design.variant_id!='base')
     meal=MealSettings(recipe_choices={'dinner_level':'crafted'})
     assert not matches_meal(recipe,meal,RecipePreferences(mode='complete',adaptation='products'))
+
+
+def test_large_fact_projection_survives_process_reload_and_corruption(tmp_path,monkeypatch):
+    monkeypatch.setenv('RECIPE_PREPARATION_CACHE_ROOT',str(tmp_path))
+    value={'exact_evidence':['råvara och källa ' * 30000]}
+    calls=[]
+    def compute():calls.append(1);return value
+    assert artifacts.prepared('source_facts','exact-source-v1',compute)==value
+    envelope_path=next((tmp_path/'source_facts').glob('*.json'))
+    envelope=json.loads(envelope_path.read_bytes())
+    assert envelope['encoding']=='zlib-json-v1'
+    assert artifacts.prepared('source_facts','exact-source-v1',compute)==value and len(calls)==1
+    envelope['payload']='corrupt-compressed-payload'
+    envelope_path.write_bytes(content.encoded(envelope))
+    assert artifacts.prepared('source_facts','exact-source-v1',compute)==value and len(calls)==2

@@ -1,17 +1,41 @@
 """Bounded, durable preparation of public content; never cache purchase approval."""
 from __future__ import annotations
 
+import base64
 import json
 import os
+import zlib
 from functools import lru_cache
 from pathlib import Path
 
 from app.services.meal_library_content import atomic_write, digest, encoded
 
-SCHEMA = "smako-recipe-preparation-v1"
+SCHEMA = "smako-recipe-preparation-v2"
 MAX_GENERATIONS = 8
 MAX_BYTES = 32 * 1024 * 1024
 STATS = {"hits":0,"misses":0,"writes":0,"invalid":0}
+
+
+def payload_bytes(value):
+    return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(",", ":")).encode()
+
+
+def decode_payload(envelope):
+    if envelope.get("encoding") == "zlib-json-v1":
+        compressed = base64.b64decode(envelope["payload"],validate=True)
+        decoder = zlib.decompressobj()
+        raw = decoder.decompress(compressed,128 * 1024 * 1024 + 1)
+        if len(raw) > 128 * 1024 * 1024 or not decoder.eof or decoder.unused_data:
+            raise ValueError("Prepared payload exceeds expansion limit or is incomplete")
+        if digest(raw) != envelope["sha256"]:
+            raise ValueError("Prepared artifact payload hash mismatch")
+        return json.loads(raw)
+    if envelope.get("encoding") != "json-v1":
+        raise ValueError("Unknown prepared payload encoding")
+    payload = envelope["payload"]
+    if digest(payload_bytes(payload)) != envelope["sha256"]:
+        raise ValueError("Prepared artifact payload hash mismatch")
+    return payload
 
 
 def root():
@@ -41,18 +65,20 @@ def prepared(kind, identity, compute):
         envelope = json.loads(path.read_bytes())
         if envelope["schema"] != SCHEMA or envelope["key"] != key:
             raise ValueError("Prepared artifact signature mismatch")
-        payload = envelope["payload"]
-        if digest(encoded(payload)) != envelope["sha256"]:
-            raise ValueError("Prepared artifact payload hash mismatch")
+        payload = decode_payload(envelope)
         STATS["hits"] += 1
         return payload
     except FileNotFoundError:
         pass
-    except (OSError,ValueError,KeyError,TypeError):
+    except (OSError,ValueError,KeyError,TypeError,zlib.error):
         STATS["invalid"] += 1
     STATS["misses"] += 1
     payload = compute()
-    data = encoded({"schema":SCHEMA,"key":key,"payload":payload,"sha256":digest(encoded(payload))})
+    raw = payload_bytes(payload)
+    compressed = len(raw) > 256 * 1024
+    data = payload_bytes({"schema":SCHEMA,"key":key,"payload":
+        base64.b64encode(zlib.compress(raw,1)).decode() if compressed else payload,
+        "encoding":"zlib-json-v1" if compressed else "json-v1", "sha256":digest(raw)})
     try:
         directory.mkdir(parents=True,exist_ok=True)
         # Existing generation evidence is retained. At the bounded capacity,
@@ -60,7 +86,7 @@ def prepared(kind, identity, compute):
         existing = list(directory.glob("*.json"))
         limit = 4096 if kind == "content" else MAX_GENERATIONS
         total_bytes = sum(p.stat().st_size for p in existing)
-        if (len(data) <= MAX_BYTES and total_bytes + len(data) <= MAX_BYTES
+        if (len(raw) <= 128 * 1024 * 1024 and len(data) <= MAX_BYTES and total_bytes + len(data) <= MAX_BYTES
                 and (path.exists() or len(existing) < limit)):
             atomic_write(path,data)
             STATS["writes"] += 1

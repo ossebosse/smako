@@ -68,6 +68,10 @@ Beständig lagring följer PlanStore-mappens `recipe_prepared`, eller en
 operatörsvald `RECIPE_PREPARATION_CACHE_ROOT`. JSON-kuvert verifierar schema,
 nyckel och payloadhash. Fel/partiella filer återberäknas säkert. Kapacitet:
 32 MiB per typ, högst åtta käll-/skalningsgenerationer och 4096 strukturrader.
+Stora projektioner lagras förlustfritt komprimerade; hash gäller de kompakta
+JSON-byten före komprimering. Uppackning är begränsad till 128 MiB och
+avvisar ofullständiga eller felaktiga strömmar. Schema v2 återanvänder inte
+äldre artefaktkuvert. Detta ändrar inga produktuppgifter eller köpbeslut.
 Vid fullt eller skrivskyddat utrymme fortsätter vanlig kontroll i minnet;
 äldre bevis raderas inte. Ingen bakgrundstjänst eller produktionsinsamling.
 
