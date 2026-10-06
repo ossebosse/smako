@@ -18,6 +18,7 @@ from uuid import uuid4
 from app.models import SavedPlan
 
 _stage_reporter: ContextVar = ContextVar("plan_stage_reporter", default=None)
+job_reference: ContextVar = ContextVar("plan_job_reference", default=None)
 logger = logging.getLogger(__name__)
 
 
@@ -80,6 +81,10 @@ class PlanJobs:
     def start(self, owner: str, key: str, request_id: str,
               work: Callable[[], Awaitable[SavedPlan]]) -> PlanJob:
         self._prune()
+        # Bound recovery aliases as well as retained tasks. Never store an owner
+        # or request capability in public diagnostics.
+        if len(self.requests) >= 4096:
+            del self.requests[next(iter(self.requests))]
         for job in self.jobs.values():
             if (job.owner == owner and job.key == key
                     and (not job.task.done() or (not job.task.cancelled() and job.task.exception() is None))):
@@ -96,9 +101,11 @@ class PlanJobs:
             del self.jobs[oldest.job_id]
         async def run():
             token = _stage_reporter.set(lambda stage: setattr(job, "stage", stage))
+            reference_token = job_reference.set({"job_id": job.job_id, "request_id": job.request_id})
             try:
                 return await work()
             finally:
+                job_reference.reset(reference_token)
                 _stage_reporter.reset(token)
 
         job = PlanJob(uuid4().hex, owner, key, request_id, asyncio.create_task(run()))
