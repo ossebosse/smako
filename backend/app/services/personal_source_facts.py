@@ -758,34 +758,59 @@ def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
         cacheable = all(hashes[path] == row["payload_hash"] for _, row, _, path in source_rows)
         if cacheable and key in _CACHE:
             return _CACHE[key]
-        last_path, document = None, None
-        for snapshot, row, product, path in source_rows:
-            if hashes[path] != row["payload_hash"]:
-                continue
-            try:
-                if path != last_path:
-                    data = path.read_bytes()
-                    if hashlib.sha256(data).hexdigest() != row["payload_hash"]:
-                        cacheable = False
-                        continue
-                    document = json.loads(data)
-                    last_path = path
-                raw = raw_product(document, row["raw_reference"])
-                identity = raw.get("id") if row["chain"] == "coop" else raw.get("code")
-                if str(identity) != row["external_product_id"]:
+        nonlocal_cacheable = [cacheable]
+        def project():
+            last_path, document = None, None
+            for snapshot, row, product, path in source_rows:
+                if hashes[path] != row["payload_hash"]:
                     continue
-                result[(product.store_id, product.product_id)] = project_raw_facts(
-                    raw,
-                    chain=row["chain"],
-                    product_id=product.product_id,
-                    snapshot_id=snapshot,
-                    source_reference=f"{row['chain']}:{row['raw_reference']}:{row['payload_hash']}",
-                    observed_at=product.source_provenance.source_observed_at.isoformat(),
-                )
-            except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
-                cacheable = False
-                continue  # Missing or conflicting evidence remains unknown.
-        projected = complete_identity_facts(prepared, result)
+                try:
+                    if path != last_path:
+                        data = path.read_bytes()
+                        if hashlib.sha256(data).hexdigest() != row["payload_hash"]:
+                            nonlocal_cacheable[0] = False
+                            continue
+                        document = json.loads(data)
+                        last_path = path
+                    raw = raw_product(document, row["raw_reference"])
+                    identity = raw.get("id") if row["chain"] == "coop" else raw.get("code")
+                    if str(identity) != row["external_product_id"]:
+                        continue
+                    result[(product.store_id, product.product_id)] = project_raw_facts(
+                        raw,
+                        chain=row["chain"],
+                        product_id=product.product_id,
+                        snapshot_id=snapshot,
+                        source_reference=f"{row['chain']}:{row['raw_reference']}:{row['payload_hash']}",
+                        observed_at=product.source_provenance.source_observed_at.isoformat(),
+                    )
+                except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
+                    nonlocal_cacheable[0] = False
+                    continue  # Missing or conflicting evidence remains unknown.
+            return complete_identity_facts(prepared, result)
+        if cacheable:
+            from dataclasses import asdict
+
+            from app.services.meal_prepared_artifacts import prepared as read_prepared
+            def compute_projection():
+                return [{"store_id":store,"product_id":product,"facts":asdict(fact)}
+                        for (store,product),fact in project().items()]
+            def restore_projection(rows):
+                projected = {}
+                for row in rows:
+                    values = row["facts"]
+                    for field in ("product_classification","ingredients","allergens_checked","allergens_present","allergens_trace","conflicts"):
+                        values[field] = tuple(values[field])
+                    values["field_sources"] = {field:tuple(sources) for field,sources in values["field_sources"].items()}
+                    projected[(row["store_id"],row["product_id"])] = ProductFacts(**values)
+                return FactsCollection(projected)
+            try:
+                projected = restore_projection(read_prepared("source_facts",list(key),compute_projection))
+            except (ValueError,KeyError,TypeError):
+                projected = project()
+        else:
+            projected = project()
+        cacheable = nonlocal_cacheable[0]
         if cacheable:
             if len(_CACHE) >= 4:
                 _CACHE.pop(next(iter(_CACHE)))

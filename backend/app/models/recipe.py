@@ -43,7 +43,7 @@ class RecipeStep(BaseModel):
     text: str = Field(min_length=1, max_length=2000)
     ingredient_keys: tuple[str, ...]
     depends_on: tuple[str, ...] = ()
-    duration_minutes: int = Field(ge=1, le=180)
+    duration_minutes: int = Field(ge=1, le=1440)
     parallel_group: str | None = None
     # Exact authored tokens, explicitly reviewed by the importer. Never scale
     # temperatures, durations or dimensions by searching arbitrary numbers.
@@ -87,6 +87,15 @@ class RecipeDesign(BaseModel):
     provenance: RecipeProvenance
     content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     content_source: RecipeContentSource | None = Field(default=None, exclude_if=lambda v: v is None)
+    meal_types: tuple[Literal["dinner", "breakfast", "snack"], ...] = Field(
+        default=("dinner",), exclude_if=lambda v: v == ("dinner",))
+    dinner_level: Literal["simple", "crafted"] = Field(
+        default="crafted", exclude_if=lambda v: v == "crafted")
+    active_minutes: int | None = Field(default=None, ge=1, le=180,
+                                      exclude_if=lambda v: v is None)
+    waiting_minutes: int = Field(default=0, ge=0, le=1440, exclude_if=lambda v: v == 0)
+    total_minutes: int | None = Field(default=None, ge=1, le=2880,
+                                     exclude_if=lambda v: v is None)
 
 
 class RecipePreparation(BaseModel):

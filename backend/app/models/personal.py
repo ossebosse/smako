@@ -61,6 +61,23 @@ class PortionLimits(PrivateModel):
         return any(v is not None for v in self.model_dump().values())
 
 
+class MealRecipeChoices(PrivateModel):
+    """Optional authored content filters, scoped to one meal type."""
+    dinner_level: Literal["simple", "crafted", "mixed"] | None = None
+    min_ingredients: int | None = Field(default=None, ge=1, le=40)
+    max_ingredients: int | None = Field(default=None, ge=1, le=40)
+    max_active_minutes: int | None = Field(default=None, ge=1, le=180)
+    max_total_minutes: int | None = Field(default=None, ge=1, le=2880)
+    max_waiting_minutes: int | None = Field(default=None, ge=0, le=1440)
+
+    @model_validator(mode="after")
+    def coherent(self):
+        if (self.min_ingredients is not None and self.max_ingredients is not None
+                and self.min_ingredients > self.max_ingredients):
+            raise ValueError("Minsta ingrediensantal får inte överstiga det största.")
+        return self
+
+
 class MealSettings(PrivateModel):
     meal_type: MealType = "dinner"
     count: int = Field(default=5, ge=0, le=7)
@@ -70,9 +87,14 @@ class MealSettings(PrivateModel):
     distribution: dict[Protein, int] = Field(default_factory=dict)
     limits: PortionLimits = Field(default_factory=PortionLimits)
     organic_animals: bool = False
+    recipe_choices: MealRecipeChoices | None = Field(default=None, exclude_if=lambda v: v is None)
+    max_same_base_meals: int | None = Field(default=None, ge=1, le=7,
+                                          exclude_if=lambda v: v is None)
 
     @model_validator(mode="after")
     def counts(self):
+        if self.meal_type != "dinner" and self.recipe_choices and self.recipe_choices.dinner_level:
+            raise ValueError("Middagsnivå används bara för middagar.")
         if any(v < 0 for v in self.distribution.values()):
             raise ValueError("Antalet rätter kan inte vara negativt.")
         if sum(self.distribution.values()) > self.count:

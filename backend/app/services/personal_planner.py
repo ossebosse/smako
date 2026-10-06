@@ -9,7 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-from collections import OrderedDict, defaultdict
+from collections import Counter, OrderedDict, defaultdict
 from dataclasses import replace
 from datetime import UTC, datetime
 from decimal import Decimal
@@ -111,11 +111,13 @@ class PersonalPlanner:
         now=None,
         nutrition_search_limit=256,
         include_content_pack=True,
+        library_generation=None,
     ):
         if not 1 <= nutrition_search_limit <= 65536:
             raise ValueError("Invalid diagnostic nutrition search limit")
         self.nutrition_search_limit = nutrition_search_limit
         self.include_content_pack = include_content_pack
+        self.library_generation = library_generation
         self._supplement_qualified = False
         self.timings = defaultdict(float)
         from app.services.complete_recipes import enabled, prepare_request
@@ -204,13 +206,12 @@ class PersonalPlanner:
         # Exact declarations may identify food classes absent from a brand's
         # short retail name. Keep this projection request-local; never change
         # the shared product identity, price or source scope.
-        from app.services.declaration_semantics import declaration_food_class
+        from app.services.meal_prepared_artifacts import declaration_index
         self.declared_classes = {}
         self.declared_positions = defaultdict(set)
-        for i, product in enumerate(prepared.universe.products):
-            if food_class := declaration_food_class(product, self.source_facts(product)):
-                self.declared_classes[i] = food_class
-                self.declared_positions[food_class].add(i)
+        self.declared_classes = declaration_index(prepared.universe,self.facts,self.source_facts)
+        for i, food_class in self.declared_classes.items():
+            self.declared_positions[food_class].add(i)
         self.lookup_cache = {}
         self.lookup_failures = OrderedDict()
         # Only this planner owns these immutable-by-convention facts and this
@@ -655,9 +656,9 @@ class PersonalPlanner:
                      self.request.recipe_preferences.model_dump_json() if self.request.recipe_preferences else None)
         if cache_key in self.clean_recipe_cache:
             return self.clean_recipe_cache[cache_key]
-        if self.complete and meal.meal_type == "dinner":
-            from app.services.complete_recipes import matches_preferences
-            if not matches_preferences(recipe, self.request.recipe_preferences):
+        if self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
+            from app.services.recipe_library import matches_meal
+            if not matches_meal(recipe, meal, self.request.recipe_preferences):
                 raise PolicyConflict("Receptet uppfyller inte val av matkök, ingrediensantal, tid eller anpassning. Välj ett kvalificerat alternativ.", code="RECIPE_CHOICES_CONFLICT")
         # Never trust a caller/LLM supplied canonical identity over the visible ingredient.
         recipe = Recipe.model_validate(
@@ -1694,6 +1695,19 @@ class PersonalPlanner:
         return min(winners, key=lambda b: b.total)
 
     def _check_final(self, slots, basket, groups, rows, allocations):
+        # Recheck explicit whole-week constraints independently of search pruning
+        # (also applies to user edits and persisted/reloaded slots).
+        from app.services.recipe_library import matches_meal
+        for category, meal in self.meals.items():
+            recipes = [s.recipe for s in slots if s.meal_type == category and s.recipe]
+            if meal.recipe_choices is not None and any(
+                    not r.design or not matches_meal(r, meal, self.request.recipe_preferences)
+                    for r in recipes):
+                raise PolicyConflict("Ett recept strider mot måltidstypens val.", code="RECIPE_CHOICES_CONFLICT")
+            counts = Counter(r.design.base_id if r.design else self._recipe_id(r) for r in recipes)
+            if meal.max_same_base_meals is not None and any(
+                    n > meal.max_same_base_meals for n in counts.values()):
+                raise PolicyConflict("Veckan överstiger upprepningsgränsen för måltidstypen.", code="RECIPE_CHOICES_CONFLICT")
         ingredient_checks = []
         purchased = {i.ingredient: i for s in basket.stores for i in s.items}
         for need in rows:
@@ -2022,10 +2036,10 @@ class PersonalPlanner:
         from app.services.plan_jobs import report_stage
         report_stage("candidate_qualification")
         with performance_span("personal_candidate_generation"):
-            if self.complete and meal.meal_type == "dinner":
-                from app.services.recipe_library import candidates as library_candidates
-                candidates = library_candidates(self.request.recipe_preferences, meal.servings,
-                                                include_supplement=self.include_content_pack)
+            if self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
+                from app.services.recipe_library import meal_candidates
+                candidates = meal_candidates(meal,self.request.recipe_preferences,
+                                             include_supplement=self.include_content_pack, generation=self.library_generation)
             else:
                 generator = self.service.candidate_generator or DeterministicRecipeCandidateGenerator()
                 candidates = generator.generate_for_meal_type(
@@ -2049,7 +2063,7 @@ class PersonalPlanner:
         if self.complete and meal.meal_type == "dinner" and self.spec.slots is None:
             from app.services.complete_recipes import validate_content_capacity
             validate_content_capacity(self.request.recipe_preferences, meal,
-                merged_profile(self.spec.profile, meal.profile), candidates)
+                                      merged_profile(self.spec.profile, meal.profile), candidates)
         for recipe in candidates:
             self.product_trace.recipe(recipe)
             stage = "policy_taste"
@@ -2143,7 +2157,7 @@ class PersonalPlanner:
                     candidate = PersonalPlanner(comparison_request, self.settings, self.prepared, self.state,
                         plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
                         nutrition_search_limit=self.nutrition_search_limit,
-                        include_content_pack=self.include_content_pack).create(_compare_scopes=False)
+                        include_content_pack=self.include_content_pack, library_generation=self.library_generation).create(_compare_scopes=False)
                 except (ValueError, IncompleteBasketError):
                     continue
                 incumbents.append(candidate)
@@ -2155,13 +2169,17 @@ class PersonalPlanner:
             # If no added recipe qualifies, the old ordered pool is identical
             # and repeating its full search would have no benefit.
             if (not self.complete or not self.include_content_pack or not self._supplement_qualified
-                    or not _compare_scopes or self.request.diversity_mode != "cheapest"
+                    or not _compare_scopes
                     or self.spec.slots is not None or replace_slot is not None):
                 return
+            from app.services.meal_library_content import manifest_entries
+            generation = self.library_generation or len(manifest_entries()["current"])
             try:
                 candidate = PersonalPlanner(self.request, self.settings, self.prepared, self.state,
                     plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
-                    nutrition_search_limit=self.nutrition_search_limit, include_content_pack=False).create()
+                    nutrition_search_limit=self.nutrition_search_limit,
+                    include_content_pack=generation > 2,
+                    library_generation=generation-1 if generation > 2 else None).create()
             except (ValueError, IncompleteBasketError):
                 return
             incumbents.append(candidate)
@@ -2274,6 +2292,7 @@ class PersonalPlanner:
             "state": self.state,
             "recipes": [r.model_dump() for r in recipes],
             "prices": self.prepared.universe.universe_id,
+            "library_generation": self.library_generation,
             "freshness": self.view.cache_identity,
             "pricing_date": self.pricing_date.isoformat(),
             "memberships": self.user.cache_identity,
@@ -2431,6 +2450,14 @@ class PersonalPlanner:
                 if all(len(group) == 1 for group in suffix):
                     constraint_slots = [*chosen, *(group[0] for group in suffix)]
                     constraint_final = True
+            for meal_type, meal in self.meals.items():
+                if meal.max_same_base_meals is None:
+                    continue
+                counts = Counter((s.recipe.design.base_id if s.recipe.design else self._recipe_id(s.recipe))
+                                 for s in constraint_slots if s.meal_type == meal_type and s.recipe)
+                if any(count > meal.max_same_base_meals for count in counts.values()):
+                    self.diagnostics.branch(len(chosen), "variation")
+                    return False
             if not distribution_ok(constraint_slots, self.spec.meals, partial=not constraint_final or draft,
                                    classify=self._protein_category):
                 self.diagnostics.branch(len(chosen), "policy_taste")

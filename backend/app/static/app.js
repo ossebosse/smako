@@ -641,7 +641,7 @@
       setSelectedMemberships(saved.memberships || []);
       dom.excludedIngredients.value = list(saved.avoid_ingredients).join(", ");
       if (saved.availability_mode) dom.availabilityInputs.forEach(input => { input.checked = input.value === saved.availability_mode; });
-      if (saved.recipe_preferences) recipeControls.restore(saved);
+      if (saved.recipe_preferences || saved.personal) recipeControls.restore(saved);
     } catch (_error) {
       // Ignore malformed or unavailable local storage.
     }
@@ -871,7 +871,9 @@
       dom.formChip.textContent = "Portioner beräknas från dina val";
       return;
     }
-    dom.formChip.textContent = `${numberFormatter.format(recipes * servings)} portioner med valen`;
+    const meals=recipeControls.values().personal?.meals;
+    const portions=meals?meals.reduce((sum,m)=>sum+m.count*m.servings,0):recipes*servings;
+    dom.formChip.textContent = meals?`${meals.reduce((sum,m)=>sum+m.count,0)} tillfällen · ${numberFormatter.format(portions)} portioner`:`${numberFormatter.format(portions)} portioner med valen`;
   }
 
   function errorFromResponse(payload, fallback, status = null, errorCode = null, retryAfter = null) {

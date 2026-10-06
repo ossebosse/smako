@@ -20,7 +20,7 @@
     const key=`smako.recipeChoices.${personal?"personal":"public"}`;
     const box=el("fieldset",null,"complete-recipe-options");box.hidden=true;box.disabled=true;
     box.append(el("legend","Receptstil"));
-    const mode=select("recipe-style",[["legacy","Befintliga vardagsrecept"],["complete","Genomarbetade middagar"]],"legacy");
+    const mode=select("recipe-style",[["legacy","Befintliga vardagsrecept"],["complete","Genomarbetade middagar"],["library","Måltidsbibliotek: middag, frukost och mellanmål"]],"legacy");
     box.append(field("Välj receptläge",mode),el("p","Receptstilen gäller middagar. Billigast, Balanserad och Varierad behåller sina mål.","field-hint"));
     const advanced=el("fieldset",null,"complete-recipe-fields");advanced.hidden=true;advanced.disabled=true;
     advanced.append(el("legend","Dina middagar"));
@@ -48,7 +48,7 @@
     const contextOptions=el("div");const contextStatus=el("p",null,"field-hint");contextStatus.setAttribute("role","status");contexts.append(contextOptions,contextStatus);advanced.append(contexts);
     let selectedContexts=[],contextEpoch=0;
     async function loadContexts(){
-      if(!enabled||mode.value!=="complete")return;
+      if(!enabled||!["complete","library"].includes(mode.value))return;
       const postal=document.getElementById("postal-code")?.value.replace(/\s/g,"");if(!/^\d{5}$/.test(postal||""))return;
       const epoch=++contextEpoch;contextStatus.textContent="Hämtar inköpsställen i ditt prisområde…";
       try {const response=await fetch(`/api/price-contexts?postal_code=${encodeURIComponent(postal)}`,{headers:{Accept:"application/json"},cache:"no-store"});const data=await response.json();if(epoch!==contextEpoch)return;if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Inköpsställena kunde inte hämtas. Dina val är kvar.");
@@ -66,32 +66,79 @@
       advanced.append(field("Tillåt spårbara näringsuppskattningar",estimates),el("p","Separat från uppskattade köp: tillåt dokumenterade generiska näringsreferenser och granskad varm beredning. Källor och status visas i resultatet.","field-hint"),field("Använd mitt faktiskt angivna skafferi",pantry));
       const link=el("a","Öppna och ändra mitt skafferi");link.href="/personal#pantry";advanced.append(link);
     } else advanced.append(el("p","Näringsunderlag, kostinriktning, uteslutningar och skafferi följer dina övriga personliga val. Både middagens näringsgränser och målet ovan gäller.","field-hint"));
+    const mealFields=el("fieldset",null,"complete-recipe-fields");
+    mealFields.append(el("legend","Val för varje måltidstyp"),el("p","Antal tillfällen och portioner är olika val. Proteinmål är frivilliga. Middagens köksfördelning gäller bara middagar.","field-hint"));
+    const level=select("meal-dinner-level",[["simple","Enkla middagar"],["crafted","Genomarbetade middagar"],["mixed","Blandning av enkla och genomarbetade"]],"simple");
+    mealFields.append(field("Middagsnivå",level));
+    const mealRows={};
+    for(const [type,label] of [["dinner","Middag"],["breakfast","Frukost"],["snack","Mellanmål"]]){
+      const group=el("fieldset",null,"complete-recipe-grid");group.append(el("legend",label));
+      const row={};
+      if(!personal&&type!=="dinner"){
+        row.count=input(`meal-${type}-count`,"number",0,{min:"0",max:"7",step:"1",required:true});
+        row.servings=input(`meal-${type}-servings`,"number",1,{min:"1",max:"8",step:"1",required:true});
+        group.append(field("Antal tillfällen",row.count),field("Portioner per tillfälle",row.servings));
+      }
+      for(const [key,label,max] of [["min_ingredients","Minst ingredienser",40],["max_ingredients","Högst ingredienser",40],["max_active_minutes","Högst aktiv tid (min)",180],["max_total_minutes","Högst total tid (min)",2880],["max_waiting_minutes","Högst väntetid (min)",1440],["max_same_base_meals","Högst tillfällen med samma grundrätt",7]]){
+        row[key]=input(`meal-${type}-${key}`,"number","",{min:key==="max_waiting_minutes"?"0":"1",max:String(max),step:"1",placeholder:"Ingen extra gräns"});group.append(field(label,row[key]));
+      }
+      if(!personal){row.min_protein_g=input(`meal-${type}-min-protein`,"number","",{min:"0",max:"300",step:"any",placeholder:"Inget mål"});group.append(field("Minst protein per portion (g)",row.min_protein_g));}
+      mealRows[type]=row;mealFields.append(group);
+    }
+    advanced.append(mealFields);
+    function mealValues(meals){
+      if(mode.value!=="library"||!enabled)return meals;
+      return meals.map(meal=>{
+        const row=mealRows[meal.meal_type],choices={};
+        for(const key of ["min_ingredients","max_ingredients","max_active_minutes","max_total_minutes","max_waiting_minutes"])choices[key]=row[key].value===""?null:Number(row[key].value);
+        if(meal.meal_type==="dinner")choices.dinner_level=level.value;
+        const result={...meal,recipe_choices:choices,max_same_base_meals:row.max_same_base_meals.value===""?null:Number(row.max_same_base_meals.value)};
+        if(row.min_protein_g)result.limits={...(meal.limits||{}),min_protein_g:row.min_protein_g.value===""?null:Number(row.min_protein_g.value)};
+        return result;
+      });
+    }
     const feedback=el("p",null,"field-hint");feedback.setAttribute("role","status");advanced.append(feedback);box.append(advanced);host.replaceChildren(box);
     let enabled=false;
     function sync() {
-      advanced.hidden=mode.value!=="complete";advanced.disabled=!enabled||advanced.hidden;
-      custom.hidden=preset.value!=="custom";min.disabled=custom.hidden;max.disabled=custom.hidden;
+      advanced.hidden=!["complete","library"].includes(mode.value);advanced.disabled=!enabled||advanced.hidden;
+      mealFields.hidden=mode.value!=="library";mealFields.disabled=advanced.disabled||mealFields.hidden;
+      grid.hidden=mode.value==="library";grid.querySelectorAll("input,select").forEach(n=>n.disabled=grid.hidden);
+      if(!personal){const count=document.getElementById("recipes");if(count){for(let n=0;n<3;n++){let option=[...count.options].find(o=>o.value===String(n));if(!option){option=el("option",String(n));option.value=String(n);count.prepend(option);}option.disabled=mode.value!=="library";option.hidden=mode.value!=="library";}}}
+      for(const row of Object.values(mealRows)){row.max_ingredients.setCustomValidity(row.min_ingredients.value!==""&&row.max_ingredients.value!==""&&Number(row.min_ingredients.value)>Number(row.max_ingredients.value)?"Högsta ingrediensantalet är lägre än det minsta.":"");}
+      custom.hidden=mode.value==="library"||preset.value!=="custom";min.disabled=custom.hidden;max.disabled=custom.hidden;
       min.setCustomValidity("");max.setCustomValidity("");
       if(preset.value==="custom"&&Number(min.value)>Number(max.value))max.setCustomValidity("Högsta antalet måste vara minst lika stort som lägsta antalet.");
       minCuisines.disabled=cuisineDistribution.value!=="minimum"||advanced.disabled;
       const selected=cuisineInputs.filter(n=>n.checked).length;
       const dinners=Number(document.getElementById(personal?"dinner-count":"recipes")?.value||5);
       moreVariety.disabled=advanced.disabled||dinners<3||(selected>0&&selected<3);
-      moreVariety.title=moreVariety.disabled&&enabled&&mode.value==="complete"?"Välj minst tre middagar och tre tillåtna matkök för detta förslag.":"";
+      moreVariety.title=moreVariety.disabled&&enabled&&["complete","library"].includes(mode.value)?"Välj minst tre middagar och tre tillåtna matkök för detta förslag.":"";
       const required=cuisineDistribution.value==="each_selected"?selected:cuisineDistribution.value==="minimum"?Number(minCuisines.value):0;
       cuisineDistribution.setCustomValidity(cuisineDistribution.value==="each_selected"&&!selected?"Välj minst ett matkök.":required>dinners?"Fler obligatoriska matkök än middagar.":cuisineDistribution.value==="minimum"&&required>(selected||6)?"Välj fler tillåtna matkök eller sänk minimiantalet.":"");
       feedback.textContent="";
     }
     function values() {
-      if(mode.value!=="complete")return {};
+      if(!["complete","library"].includes(mode.value))return {};
       const [lo,hi]=preset.value==="custom"?[Number(min.value),Number(max.value)]:preset.value.split("-").map(Number);
-      const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
+      const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:mode.value==="library"||protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
       if(selectedContexts.length)result.allowed_store_ids=selectedContexts.slice();
       if(!personal)Object.assign(result,{allow_nutrition_estimates:estimates.checked,use_pantry:pantry.checked});
+      if(mode.value==="library"&&!personal){
+        const dinner={meal_type:"dinner",count:Number(document.getElementById("recipes").value),servings:Number(document.getElementById("servings").value)};
+        const meals=[dinner,...["breakfast","snack"].map(type=>({meal_type:type,count:Number(mealRows[type].count.value),servings:Number(mealRows[type].servings.value)}))];
+        const diet=document.getElementById("diet-preference")?.value;
+        result.personal={meals:mealValues(meals).map(m=>({...m,diet:["vegetarian","vegan"].includes(diet)?diet:"mixed"})),use_pantry:pantry.checked,allow_nutrition_estimates:estimates.checked,profile:{exclusions:(document.getElementById("excluded-ingredients")?.value||"").split(",").map(v=>v.trim()).filter(Boolean)}};
+      }
       return result;
     }
     function restore(request={}) {
       const preferences=request?.recipe_preferences||{};mode.value=preferences.mode==="complete"?"complete":"legacy";
+      if(request.personal?.meals?.some(m=>m.recipe_choices!=null))mode.value="library";
+      for(const [type,row] of Object.entries(mealRows)){
+        const meal=request.personal?.meals?.find(m=>m.meal_type===type)||{};
+        for(const [key,node] of Object.entries(row))node.value=key==="count"?(meal.count??0):key==="servings"?(meal.servings??1):key==="min_protein_g"?(meal.limits?.min_protein_g??""):(meal.recipe_choices?.[key]??meal[key]??"");
+        if(type==="dinner")level.value=meal.recipe_choices?.dinner_level||"simple";
+      }
       selectedContexts=[...(request.allowed_store_ids||[])];
       cuisineInputs.forEach(n=>n.checked=(preferences.cuisines||[]).includes(n.value));
       min.value=preferences.min_ingredients??10;max.value=preferences.max_ingredients??15;
@@ -109,7 +156,7 @@
     moreVariety.addEventListener("click",()=>{cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;sync();storage.set(key,values());});
     restore(storage.get(key)||{});
     return {
-      values(){return enabled?values():{};}, restore,
+      values(){return enabled?values():{};}, mealValues, restore,
       enabled(value){enabled=value===true;box.hidden=!enabled;box.disabled=!enabled;sync();if(enabled)void loadContexts();},
       reset(){restore({});storage.remove(key);},
       validate(){sync();return !enabled||advanced.hidden||[...advanced.querySelectorAll("input,select")].every(node=>node.disabled||node.checkValidity());},

@@ -69,7 +69,7 @@ def _structural_check(recipe: Recipe) -> None:
             raise ValueError("Ingrediensen saknar godkänt mängdintervall.")
         if not i.quantity_min <= i.quantity <= i.quantity_max:
             raise ValueError("Mängden ligger utanför receptets godkända intervall.")
-    if d.content_source is not None:
+    if d.content_source is not None or any(c.amounts for c in d.components):
         totals: dict[str, float] = {}
         units = {ingredient_key(i): i.unit for i in recipe.ingredients}
         for c in d.components:
@@ -98,7 +98,7 @@ def _structural_check(recipe: Recipe) -> None:
         ends[step.id] = max((ends[k] for k in step.depends_on), default=0) + step.duration_minutes
     if used != keys or not ends:
         raise ValueError("Varje ingrediens måste användas i den dokumenterade tillagningen.")
-    if max(ends.values()) > d.estimated_minutes:
+    if max(ends.values()) > (d.total_minutes or d.estimated_minutes):
         raise ValueError("Beroendena ryms inte inom den uppskattade tillagningstiden.")
     if recipe.instructions != [s.text for s in d.steps]:
         raise ValueError("Visade instruktioner skiljer sig från den granskade tillagningsplanen.")
@@ -110,21 +110,31 @@ def _structural_check(recipe: Recipe) -> None:
         raise ValueError("Beredningsmetoden är inte bunden till receptets exakta innehåll.")
 
 
+def current_recipes(generation=None):
+    from app.services.meal_library_content import load_entries, manifest_entries
+    entries = manifest_entries()["current"]
+    if generation is not None:
+        entries = entries[:generation]
+    # Manifest order publishes successive versions; history remains readable.
+    current = {}
+    for recipe in load_entries(entries):
+        current[(recipe.design.base_id, recipe.design.variant_id)] = recipe
+    return tuple(current.values())
+
+
+def reset_library_caches():
+    for function in (_registered, _registered_history, _registered_portions,
+                     _registered_historical_portions, _issued_index):
+        function.cache_clear()
+
+
 @lru_cache(maxsize=1)
 def _registered() -> tuple[Recipe, ...]:
-    raw = LIBRARY_PATH.read_bytes()
-    if hashlib.sha256(raw).hexdigest() != CONTENT_SHA256:
-        raise ValueError("Receptbibliotekets kontrollsumma avviker från granskad utgåva.")
-    payload = json.loads(raw)
-    if payload["library_version"] != LIBRARY_VERSION:
-        raise ValueError("Okänd receptutgåva.")
-    supplement = SUPPLEMENT_PATH.read_bytes()
-    if hashlib.sha256(supplement).hexdigest() != SUPPLEMENT_SHA256:
-        raise ValueError("Innehållspaketets kontrollsumma avviker från granskad utgåva.")
-    result = tuple(Recipe.model_validate(r) for r in [*payload["recipes"], *json.loads(supplement)["recipes"]])
+    result = current_recipes()
+    from app.services.meal_prepared_artifacts import prepare_content
+    prepare_content(result)
     identities = set()
     for recipe in result:
-        _structural_check(recipe)
         identity = (recipe.design.base_id, recipe.design.version, recipe.design.variant_id)
         if identity in identities:
             raise ValueError("Receptversionen förekommer flera gånger.")
@@ -135,15 +145,11 @@ def _registered() -> tuple[Recipe, ...]:
 @lru_cache(maxsize=1)
 def _registered_history() -> tuple[Recipe, ...]:
     """Retain validation of issued plans when current authoring advances."""
-    result = list(_registered())
-    for filename, digest in ARCHIVED_CONTENT.items():
-        raw = LIBRARY_PATH.with_name(filename).read_bytes()
-        if hashlib.sha256(raw).hexdigest() != digest:
-            raise ValueError("En arkiverad receptutgåva har ändrats.")
-        for value in json.loads(raw)["recipes"]:
-            recipe = Recipe.model_validate(value)
-            _structural_check(recipe)
-            result.append(recipe)
+    from app.services.meal_library_content import load_entries, manifest_entries
+    result = list(load_entries(manifest_entries()["current"]))
+    for recipe in load_entries(manifest_entries()["history"]):
+        _structural_check(recipe)
+        result.append(recipe)
     return tuple(result)
 
 
@@ -172,7 +178,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
                 "Om maten måste lagas i omgångar blir tiden längre än uppskattningen."})
         result = result.model_copy(update={"design": result.design.model_copy(update={
             "components": components, "steps": tuple(steps)}), "instructions": [s.text for s in steps]})
-    if servings > 2 and result.design.version != "1.0.0":
+    if servings > 2 and (result.design.version != "1.0.0" or result.design.active_minutes is not None):
         # More chopping/weighing for four portions is real work, even when the
         # oven or a large pot can accommodate the full batch without extra heat.
         extra_prep = ((servings - 1) // 2) * 3
@@ -212,6 +218,12 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
             }),
             "instructions": [s.text for s in steps],
         })
+    if result.design.total_minutes is not None:
+        extra = result.design.estimated_minutes - recipe.design.estimated_minutes
+        result = result.model_copy(update={"design": result.design.model_copy(update={
+            "total_minutes": recipe.design.total_minutes + extra,
+            "active_minutes": recipe.design.active_minutes + extra if recipe.design.active_minutes else None,
+        })})
     digest = content_hash(result)
     result = result.model_copy(update={"design": result.design.model_copy(update={"content_sha256": digest})})
     return result.model_copy(update={"preparation": RecipePreparation(
@@ -232,21 +244,50 @@ def _registered_portions(servings: int) -> tuple[Recipe, ...]:
 def _registered_historical_portions(servings: int) -> tuple[Recipe, ...]:
     if not 1 <= servings <= 12:
         raise ValueError("Antal portioner måste vara mellan 1 och 12.")
-    return tuple(_scaled(r, servings) for r in _registered_history())
+    from app.services.meal_prepared_artifacts import prepared
+    source = _registered_history()
+    def compute():
+        result = [_scaled(r, servings) for r in source]
+        for recipe in result:
+            _structural_check(recipe)
+        return [r.model_dump(mode="json") for r in result]
+    rows = prepared(f"scaled-{servings}",
+                    [servings, [r.model_dump(mode="json") for r in source]], compute)
+    return tuple(Recipe.model_validate(r) for r in rows)
 
 
 def validate_recipe_design(recipe: Recipe) -> bool:
     """Only exact issued versions qualify; a self-computed hash cannot approve edits."""
     if recipe.design is None:
         return False
-    _structural_check(recipe)
     d = recipe.design
-    registered = next((r for r in _registered_historical_portions(recipe.servings)
-                       if (r.design.base_id, r.design.version, r.design.variant_id)
-                       == (d.base_id, d.version, d.variant_id)), None)
-    if registered is None or registered.model_dump() != recipe.model_dump():
+    registered = _issued_index(recipe.servings).get((d.base_id, d.version, d.variant_id))
+    if registered is None or _exact_value(recipe) != registered:
+        _structural_check(recipe)  # retain precise diagnostics for rejected edits
         raise ValueError("Receptversionen eller mängden saknar godkänd innehållsgranskning.")
     return True
+
+
+def _exact_value(recipe):
+    from app.services.recipe_computation_cache import recipe_value
+    value = recipe_value(recipe)
+    prep = value[4]
+    if prep:
+        prep = (*prep[:4], tuple(sorted(prep[4])))
+    return (*value[:4], prep, value[5])
+
+
+@lru_cache(maxsize=12)
+def _issued_index(servings):
+    result = {}
+    for recipe in _registered_historical_portions(servings):
+        d = recipe.design
+        key = (d.base_id, d.version, d.variant_id)
+        value = _exact_value(recipe)
+        if key in result and result[key] != value:
+            raise ValueError("Motstridigt innehåll för en utfärdad receptversion")
+        result[key] = value
+    return result
 
 
 def candidates(preferences: RecipePreferences, servings: int = 2, *, include_supplement: bool = True) -> list[Recipe]:
@@ -254,12 +295,57 @@ def candidates(preferences: RecipePreferences, servings: int = 2, *, include_sup
     if preferences.mode != "complete":
         return []
     return [r.model_copy(deep=True) for r in _registered_portions(servings)
+            if "dinner" in r.design.meal_types
             if (include_supplement or r.design.content_source is None)
             and (not preferences.cuisines or set(r.design.cuisines) & set(preferences.cuisines))
             and preferences.min_ingredients <= r.design.ingredient_count <= preferences.max_ingredients
             and (preferences.max_minutes is None or r.design.estimated_minutes <= preferences.max_minutes)
             and (preferences.allow_fish or not r.design.fish)
             and (preferences.adaptation == "approved" or r.design.variant_id == "base")]
+
+
+def matches_meal(recipe, meal, preferences):
+    """A cheap content filter applied before product and basket qualification."""
+    validate_recipe_design(recipe)
+    d, choices = recipe.design, meal.recipe_choices
+    if not d or meal.meal_type not in d.meal_types:
+        return False
+    if choices is None:
+        if meal.meal_type == "dinner":
+            from app.services.complete_recipes import matches_preferences
+            return matches_preferences(recipe,preferences)
+        return True
+    if meal.meal_type == "dinner":
+        if choices.dinner_level not in {None,"mixed",d.dinner_level}:
+            return False
+        if preferences.cuisines and not set(preferences.cuisines).intersection(d.cuisines):
+            return False
+        if not preferences.allow_fish and d.fish:
+            return False
+    count = ingredient_count(recipe)
+    active = d.active_minutes or (d.content_source.active_minutes if d.content_source else None)
+    return ((choices.min_ingredients is None or count >= choices.min_ingredients)
+            and (choices.max_ingredients is None or count <= choices.max_ingredients)
+            and (choices.max_active_minutes is None or active is not None and active <= choices.max_active_minutes)
+            and (choices.max_total_minutes is None or (d.total_minutes or d.estimated_minutes) <= choices.max_total_minutes)
+            and (choices.max_waiting_minutes is None or d.waiting_minutes <= choices.max_waiting_minutes))
+
+
+def meal_candidates(meal, preferences, *, include_supplement=True, generation=None):
+    if meal.meal_type == "dinner" and meal.recipe_choices is None and generation is None:
+        return candidates(preferences, meal.servings, include_supplement=include_supplement)
+    result = []
+    # Filter unscaled metadata by meal type first. Irrelevant categories never
+    # trigger quantity scaling, product matching or basket construction.
+    for recipe in (_registered() if generation is None else current_recipes(generation)):
+        if meal.meal_type not in recipe.design.meal_types:
+            continue
+        if not include_supplement and recipe.design.content_source is not None:
+            continue
+        scaled = _scaled(recipe,meal.servings)
+        if matches_meal(scaled,meal,preferences):
+            result.append(scaled)
+    return result
 
 
 def validate_library() -> dict:
@@ -269,8 +355,8 @@ def validate_library() -> dict:
         "library_version": LIBRARY_VERSION,
         "content_sha256": CONTENT_SHA256,
         "base_recipes": len(base), "approved_variants": len(recipes) - len(base),
-        "by_cuisine": dict(Counter(r.design.cuisines[0] for r in base)),
-        "vegetarian_by_cuisine": dict(Counter(r.design.cuisines[0] for r in base if r.design.vegetarian)),
+        "by_cuisine": dict(Counter(r.design.cuisines[0] for r in base if r.design.cuisines)),
+        "vegetarian_by_cuisine": dict(Counter(r.design.cuisines[0] for r in base if r.design.vegetarian and r.design.cuisines)),
         "structural_validation": "passed", "content_review": "model_assisted_review",
         "cooking_test": "not_cooked", "purchase_qualification": "performed_by_planner_per_snapshot",
         "nutrition_qualification": "performed_by_planner_per_product_and_user_consent",
@@ -278,7 +364,8 @@ def validate_library() -> dict:
 
 
 def library_version() -> str:
-    return f"{LIBRARY_VERSION}:{CONTENT_SHA256}:{SUPPLEMENT_SHA256}"
+    from app.services.meal_library_content import library_signature
+    return f"{LIBRARY_VERSION}:{library_signature()}"
 
 
 def library_summary() -> dict:

@@ -641,7 +641,11 @@ def _prepare_complete_request(request, http_request, settings):
         return request
     from app.services.personal_store import PersonalStore
     state = PersonalStore(_store(http_request)).read(_plan_actor_hash(http_request, settings))
-    return prepare_request(request, settings, pantry_revision=state["revision"])
+    prepared = prepare_request(request, settings, pantry_revision=state["revision"])
+    # The public form may now describe several meal types. Bind its implicit
+    # pantry revision exactly as the existing public dinner translation does.
+    prepared.personal.pantry_revision = state["revision"]
+    return prepared
 
 
 def _job_request_key(request, http_request, settings):

@@ -12,7 +12,8 @@ from app.services.personal_policy import PolicyConflict
 
 
 def enabled(request):
-    return bool(request.recipe_preferences and request.recipe_preferences.mode == "complete")
+    return bool((request.recipe_preferences and request.recipe_preferences.mode == "complete")
+                or (request.personal and any(m.recipe_choices is not None for m in request.personal.meals)))
 
 
 def prepare_request(request, settings, *, pantry_revision=0):
@@ -20,6 +21,9 @@ def prepare_request(request, settings, *, pantry_revision=0):
         return request
     if not settings.complete_recipes_enabled:
         raise PolicyConflict("Genomarbetade middagar är inte aktiverade i denna miljö. Välj befintligt receptläge.", code="FEATURE_DISABLED")
+    if request.recipe_preferences is None:
+        from app.models.recipe_preferences import RecipePreferences
+        request = request.model_copy(update={"recipe_preferences":RecipePreferences(mode="complete")})
     prefs = request.recipe_preferences
     if request.personal is None:
         spec = PersonalPlanning(
@@ -116,6 +120,11 @@ def validate_content_capacity(preferences, meal, profile, candidates):
     count = len({recipe.design.base_id for recipe in available})
     if count >= meal.count:
         return
+    if meal.recipe_choices is not None:
+        raise PolicyConflict(
+            f"Biblioteket innehåller {count} grundrätter för middag med dina måltidsvisa val; "
+            f"du har valt {meal.count} middagar. Dina krav har inte ändrats.",
+            code="RECIPE_CHOICES_CONFLICT",stage="policy_taste")
     suggestions = []
     if preferences.max_minutes is not None:
         without_time = eligible(library_candidates(
