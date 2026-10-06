@@ -131,7 +131,7 @@ def main():
                 result = planner.basket([MealSlot(id=category+"-1",day=1,meal_type=category,recipe=recipe)])
                 row.update(status="qualified",basket=result["basket"].model_dump(mode="json"),
                            audit=result["audit"].model_dump(mode="json"),checks=result.get("checks"),
-                           nutrition=result.get("nutrition"))
+                           nutrition=result.get("checks",{}).get("nutrition"))
             except ValueError as error:
                 row.update(status="stopped",reason=str(error),stage=getattr(error,"stage",None),code=getattr(error,"code",None))
             row["candidate_trace"] = planner.product_trace.snapshot()
