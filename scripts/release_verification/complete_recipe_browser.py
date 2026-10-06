@@ -257,7 +257,7 @@ def assert_recipe_result(envelope, args):
             assert all(row["values"]["protein_g"] >= args.min_protein for row in nutrition)
     return {"recipe_names": [recipe["name"] for recipe in recipes], "total": basket["total"],
             "store_count": basket["store_count"], "verification_status": basket["verification_status"],
-            "used_ingredient_cost": plan.get("personal", {}).get("checks", {}).get("used_ingredient_cost"),
+            "used_ingredient_cost": (plan.get("personal") or {}).get("checks", {}).get("used_ingredient_cost"),
             "estimated_rows": sum(row.get("quantity_confidence") == "estimated" for store in basket["stores"] for row in store["items"]),
             "campaign_rows": sum(row.get("price_mechanism") not in {None, "regular"} or bool(row.get("group_applications"))
                                  for store in basket["stores"] for row in store["items"])}
