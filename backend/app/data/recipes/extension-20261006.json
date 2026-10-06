@@ -1,0 +1,1074 @@
+{
+  "pack_id": "extension-20261006",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 10,
+        "base_id": "smako-dinner-chickpea-carrot-oat-slice",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "kikärtor",
+                "quantity": 340,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "quantity": 200,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "havregryn|dry",
+                "name": "havregryn",
+                "quantity": 60,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "quantity": 80,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 10,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "ugn",
+          "liten ugnsform",
+          "rivjärn",
+          "gaffel"
+        ],
+        "estimated_minutes": 30,
+        "family": "ugnsskiva",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "notes": "Oberoende innehållspaket efter implementationens låsning. Originalinnehåll, strukturellt granskat. Författade tidsuppskattningar, inte uppmätta. Inte fysiskt provlagat. Ingen veckohållbarhet eller laboratorienäring påstås.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "step-1",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "morot|raw_edible",
+              "havregryn|dry",
+              "ost|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Värm ugnen till 200 °C. Väg listans mängder: kikärterna som sålda utan avrinning och moroten efter skalning. Mosa kikärterna och deras uppmätta vätska väl. Finriv morot och ost. Blanda allt med havregrynen."
+          },
+          {
+            "depends_on": [
+              "step-1"
+            ],
+            "duration_minutes": 20,
+            "id": "step-2",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "morot|raw_edible",
+              "havregryn|dry",
+              "ost|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Smörj en liten ugnsform med all uppmätt rapsolja. Bred ut blandningen i ett jämnt, cirka 2 cm tjockt lager. Grädda ungefär 20 minuter tills moroten är mjuk och ytan fått färg. Behåll hela blandningen; om den är mjuk kan den serveras med sked."
+          },
+          {
+            "depends_on": [
+              "step-2"
+            ],
+            "duration_minutes": 2,
+            "id": "step-3",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "morot|raw_edible",
+              "havregryn|dry",
+              "ost|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Dela eller skeda upp all mat i två lika stora portioner och servera varmt. Tiden är en uppskattning för två portioner, inte en provlagning."
+          }
+        ],
+        "total_minutes": 30,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 340,
+          "quantity_max": 340,
+          "quantity_min": 340,
+          "quantity_step": 340,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 200,
+          "quantity_max": 200,
+          "quantity_min": 200,
+          "quantity_step": 200,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "havregryn",
+          "component": "main",
+          "form": "dry",
+          "name": "havregryn",
+          "quantity": 60,
+          "quantity_max": 60,
+          "quantity_min": 60,
+          "quantity_step": 60,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10,
+          "quantity_max": 10,
+          "quantity_min": 10,
+          "quantity_step": 10,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 200 °C. Väg listans mängder: kikärterna som sålda utan avrinning och moroten efter skalning. Mosa kikärterna och deras uppmätta vätska väl. Finriv morot och ost. Blanda allt med havregrynen.",
+        "Smörj en liten ugnsform med all uppmätt rapsolja. Bred ut blandningen i ett jämnt, cirka 2 cm tjockt lager. Grädda ungefär 20 minuter tills moroten är mjuk och ytan fått färg. Behåll hela blandningen; om den är mjuk kan den serveras med sked.",
+        "Dela eller skeda upp all mat i två lika stora portioner och servera varmt. Tiden är en uppskattning för två portioner, inte en provlagning."
+      ],
+      "name": "Kikärts- och morotsruta med havre och ost",
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 10,
+        "base_id": "smako-dinner-white-bean-spinach-lemon-soup",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "vita bönor",
+                "quantity": 340,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "spenat",
+                "quantity": 200,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "quantity": 400,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "quantity": 100,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 10,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "quantity": 20,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "kastrull",
+          "kniv",
+          "sked"
+        ],
+        "estimated_minutes": 25,
+        "family": "soppa",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "bönor",
+        "provenance": {
+          "notes": "Oberoende innehållspaket efter implementationens låsning. Originalinnehåll, strukturellt granskat. Författade tidsuppskattningar, inte uppmätta. Inte fysiskt provlagat. Ingen veckohållbarhet eller laboratorienäring påstås.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "step-1",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "spenat|as_sold",
+              "krossade tomater|as_sold",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "citronjuice|as_sold"
+            ],
+            "text": "Väg alla mängder. Hacka den skalade löken. Väg bönorna som sålda utan avrinning och spenaten enligt listans mängdbasis."
+          },
+          {
+            "depends_on": [
+              "step-1"
+            ],
+            "duration_minutes": 17,
+            "id": "step-2",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "spenat|as_sold",
+              "krossade tomater|as_sold",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "citronjuice|as_sold"
+            ],
+            "text": "Fräs löken försiktigt i all rapsolja i kastrullen. Tillsätt krossade tomater, vita bönor och deras uppmätta vätska samt spenaten. Låt sjuda cirka 15 minuter tills spenaten är varm och löken mjuk. Rör om och behåll all vätska; späd vid behov med lite dricksvatten."
+          },
+          {
+            "depends_on": [
+              "step-2"
+            ],
+            "duration_minutes": 3,
+            "id": "step-3",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "spenat|as_sold",
+              "krossade tomater|as_sold",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "citronjuice|as_sold"
+            ],
+            "text": "Rör ner all citronjuice och servera hela soppan fördelad på två portioner."
+          }
+        ],
+        "total_minutes": 25,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bönor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "vita bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 340,
+          "quantity_max": 340,
+          "quantity_min": 340,
+          "quantity_step": 340,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "main",
+          "form": "as_sold",
+          "name": "spenat",
+          "quantity": 200,
+          "quantity_max": 200,
+          "quantity_min": 200,
+          "quantity_step": 200,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "main",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 400,
+          "quantity_max": 400,
+          "quantity_min": 400,
+          "quantity_step": 400,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 100,
+          "quantity_max": 100,
+          "quantity_min": 100,
+          "quantity_step": 100,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10,
+          "quantity_max": 10,
+          "quantity_min": 10,
+          "quantity_step": 10,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "main",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice",
+            "pack:lemon_juice"
+          ],
+          "quantity": 20,
+          "quantity_max": 20,
+          "quantity_min": 20,
+          "quantity_step": 20,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg alla mängder. Hacka den skalade löken. Väg bönorna som sålda utan avrinning och spenaten enligt listans mängdbasis.",
+        "Fräs löken försiktigt i all rapsolja i kastrullen. Tillsätt krossade tomater, vita bönor och deras uppmätta vätska samt spenaten. Låt sjuda cirka 15 minuter tills spenaten är varm och löken mjuk. Rör om och behåll all vätska; späd vid behov med lite dricksvatten.",
+        "Rör ner all citronjuice och servera hela soppan fördelad på två portioner."
+      ],
+      "name": "Vit bönsoppa med spenat och citron",
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 8,
+        "base_id": "smako-breakfast-toasted-oat-cucumber-yoghurt",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "quantity": 180,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "havregryn|dry",
+                "name": "havregryn",
+                "quantity": 40,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "quantity": 80,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "stekpanna",
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 10,
+        "family": "yoghurtskål",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "yoghurt naturell",
+        "provenance": {
+          "notes": "Oberoende innehållspaket efter implementationens låsning. Originalinnehåll, strukturellt granskat. Författade tidsuppskattningar, inte uppmätta. Inte fysiskt provlagat. Ingen veckohållbarhet eller laboratorienäring påstås.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "step-1",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold",
+              "havregryn|dry",
+              "gurka|raw_edible"
+            ],
+            "text": "Väg listans mängder. Rosta havregrynen i en torr stekpanna på medelvärme cirka 3–5 minuter. Rör hela tiden; grynen ska få lätt färg utan att brännas."
+          },
+          {
+            "depends_on": [
+              "step-1"
+            ],
+            "duration_minutes": 3,
+            "id": "step-2",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold",
+              "havregryn|dry",
+              "gurka|raw_edible"
+            ],
+            "text": "Låt grynen svalna något medan du tvättar och tärnar gurkan. Väg naturell yoghurt utan avrinning och lägg i en skål."
+          },
+          {
+            "depends_on": [
+              "step-2"
+            ],
+            "duration_minutes": 2,
+            "id": "step-3",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold",
+              "havregryn|dry",
+              "gurka|raw_edible"
+            ],
+            "text": "Lägg hela mängden gurka och rostade havregryn på yoghurten. Servera direkt som en portion."
+          }
+        ],
+        "total_minutes": 10,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "main",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 180,
+          "quantity_max": 180,
+          "quantity_min": 180,
+          "quantity_step": 180,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "havregryn",
+          "component": "main",
+          "form": "dry",
+          "name": "havregryn",
+          "quantity": 40,
+          "quantity_max": 40,
+          "quantity_min": 40,
+          "quantity_step": 40,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg listans mängder. Rosta havregrynen i en torr stekpanna på medelvärme cirka 3–5 minuter. Rör hela tiden; grynen ska få lätt färg utan att brännas.",
+        "Låt grynen svalna något medan du tvättar och tärnar gurkan. Väg naturell yoghurt utan avrinning och lägg i en skål.",
+        "Lägg hela mängden gurka och rostade havregryn på yoghurten. Servera direkt som en portion."
+      ],
+      "name": "Naturell yoghurt med rostade havregryn och gurka",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 8,
+        "base_id": "smako-breakfast-warm-pea-cheese-toast",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ärtor|as_sold",
+                "name": "ärtor",
+                "quantity": 100,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "quantity": 40,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "quantity": 35,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 5,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "stekpanna med lock",
+          "gaffel"
+        ],
+        "estimated_minutes": 12,
+        "family": "varm smörgås",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "ärtor",
+        "provenance": {
+          "notes": "Oberoende innehållspaket efter implementationens låsning. Originalinnehåll, strukturellt granskat. Författade tidsuppskattningar, inte uppmätta. Inte fysiskt provlagat. Ingen veckohållbarhet eller laboratorienäring påstås.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "step-1",
+            "ingredient_keys": [
+              "ärtor|as_sold",
+              "bröd|as_sold",
+              "ost|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Väg alla ingredienser. Värm ärtorna i stekpannan med en matsked dricksvatten tills de är genomvarma. Mosa dem grovt; behåll vätskan."
+          },
+          {
+            "depends_on": [
+              "step-1"
+            ],
+            "duration_minutes": 6,
+            "id": "step-2",
+            "ingredient_keys": [
+              "ärtor|as_sold",
+              "bröd|as_sold",
+              "ost|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Flytta ärtmoset till en skål. Lägg all rapsolja i pannan och rosta brödet lätt på ena sidan. Vänd och lägg på allt ärtmos och den rivna osten. Lägg på lock och värm försiktigt tills osten smält."
+          },
+          {
+            "depends_on": [
+              "step-2"
+            ],
+            "duration_minutes": 2,
+            "id": "step-3",
+            "ingredient_keys": [
+              "ärtor|as_sold",
+              "bröd|as_sold",
+              "ost|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Servera hela smörgåsen och eventuellt ärtmos som finns kvar i skålen. Mängderna avser en portion."
+          }
+        ],
+        "total_minutes": 12,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ärtor",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ärtor",
+          "quantity": 100,
+          "quantity_max": 100,
+          "quantity_min": 100,
+          "quantity_step": 100,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "main",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40,
+          "quantity_max": 40,
+          "quantity_min": 40,
+          "quantity_step": 40,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 35,
+          "quantity_max": 35,
+          "quantity_min": 35,
+          "quantity_step": 35,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5,
+          "quantity_max": 5,
+          "quantity_min": 5,
+          "quantity_step": 5,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg alla ingredienser. Värm ärtorna i stekpannan med en matsked dricksvatten tills de är genomvarma. Mosa dem grovt; behåll vätskan.",
+        "Flytta ärtmoset till en skål. Lägg all rapsolja i pannan och rosta brödet lätt på ena sidan. Vänd och lägg på allt ärtmos och den rivna osten. Lägg på lock och värm försiktigt tills osten smält.",
+        "Servera hela smörgåsen och eventuellt ärtmos som finns kvar i skålen. Mängderna avser en portion."
+      ],
+      "name": "Varm ärt- och ostsmörgås",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 8,
+        "base_id": "smako-snack-roasted-potato-carrot-yoghurt",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "quantity": 120,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "quantity": 60,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "quantity": 80,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 5,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "ugn",
+          "plåt",
+          "rivjärn",
+          "skål"
+        ],
+        "estimated_minutes": 30,
+        "family": "potatisklyftor med dipp",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "oven",
+        "primary_ingredient": "potatis",
+        "provenance": {
+          "notes": "Oberoende innehållspaket efter implementationens låsning. Originalinnehåll, strukturellt granskat. Författade tidsuppskattningar, inte uppmätta. Inte fysiskt provlagat. Ingen veckohållbarhet eller laboratorienäring påstås.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "step-1",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "morot|raw_edible",
+              "yoghurt naturell|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Värm ugnen till 220 °C. Tvätta potatisen och väg den ätbara mängden enligt listan. Skär i tunna klyftor och vänd med all rapsolja på en plåt."
+          },
+          {
+            "depends_on": [
+              "step-1"
+            ],
+            "duration_minutes": 22,
+            "id": "step-2",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "morot|raw_edible",
+              "yoghurt naturell|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Rosta potatisen cirka 20–25 minuter tills den är mjuk; vänd efter halva tiden. Under tiden: skala moroten, väg den ätbara mängden och finriv. Blanda hela morotsmängden med naturell yoghurt utan avrinning."
+          },
+          {
+            "depends_on": [
+              "step-2"
+            ],
+            "duration_minutes": 3,
+            "id": "step-3",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "morot|raw_edible",
+              "yoghurt naturell|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Servera all potatis med hela dippen som en portion. Uppskattad tid avser dessa tunna klyftor, inte uppmätt tillagning."
+          }
+        ],
+        "total_minutes": 30,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 120,
+          "quantity_max": 120,
+          "quantity_min": 120,
+          "quantity_step": 120,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 60,
+          "quantity_max": 60,
+          "quantity_min": 60,
+          "quantity_step": 60,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "main",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5,
+          "quantity_max": 5,
+          "quantity_min": 5,
+          "quantity_step": 5,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 220 °C. Tvätta potatisen och väg den ätbara mängden enligt listan. Skär i tunna klyftor och vänd med all rapsolja på en plåt.",
+        "Rosta potatisen cirka 20–25 minuter tills den är mjuk; vänd efter halva tiden. Under tiden: skala moroten, väg den ätbara mängden och finriv. Blanda hela morotsmängden med naturell yoghurt utan avrinning.",
+        "Servera all potatis med hela dippen som en portion. Uppskattad tid avser dessa tunna klyftor, inte uppmätt tillagning."
+      ],
+      "name": "Rostad potatis med morots- och yoghurtdipp",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 5,
+        "base_id": "smako-snack-tomato-cucumber-salsa-bread",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "quantity": 80,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "quantity": 60,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "quantity": 40,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 5,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "kniv",
+          "skål"
+        ],
+        "estimated_minutes": 5,
+        "family": "smörgås med salsa",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "bröd",
+        "provenance": {
+          "notes": "Oberoende innehållspaket efter implementationens låsning. Originalinnehåll, strukturellt granskat. Författade tidsuppskattningar, inte uppmätta. Inte fysiskt provlagat. Ingen veckohållbarhet eller laboratorienäring påstås.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "step-1",
+            "ingredient_keys": [
+              "tomat|raw_edible",
+              "gurka|raw_edible",
+              "bröd|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Tvätta tomat och gurka. Väg listans ätbara mängder och finhacka dem i en skål. Behåll all saft. Vänd ihop grönsakerna med all uppmätt rapsolja."
+          },
+          {
+            "depends_on": [
+              "step-1"
+            ],
+            "duration_minutes": 2,
+            "id": "step-2",
+            "ingredient_keys": [
+              "tomat|raw_edible",
+              "gurka|raw_edible",
+              "bröd|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "text": "Väg brödet och skeda på hela salsan. Servera genast; eventuell salsa som inte ryms på brödet serveras bredvid. Mängderna avser en portion."
+          }
+        ],
+        "total_minutes": 5,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tomat",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 60,
+          "quantity_max": 60,
+          "quantity_min": 60,
+          "quantity_step": 60,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "main",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40,
+          "quantity_max": 40,
+          "quantity_min": 40,
+          "quantity_step": 40,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5,
+          "quantity_max": 5,
+          "quantity_min": 5,
+          "quantity_step": 5,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Tvätta tomat och gurka. Väg listans ätbara mängder och finhacka dem i en skål. Behåll all saft. Vänd ihop grönsakerna med all uppmätt rapsolja.",
+        "Väg brödet och skeda på hela salsan. Servera genast; eventuell salsa som inte ryms på brödet serveras bredvid. Mängderna avser en portion."
+      ],
+      "name": "Bröd med tomat- och gurksalsa",
+      "servings": 1
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}
