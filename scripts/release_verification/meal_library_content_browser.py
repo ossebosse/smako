@@ -52,6 +52,8 @@ def fp(saved):return hashlib.sha256(json.dumps({'request':saved['request'],'plan
 with sync_playwright() as pw:
     browser=getattr(pw,args.browser).launch()
     context=browser.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True)
+    context.expose_binding('__smakoUnhandled',lambda source,data:errors.append('unhandledrejection: '+data['message']))
+    context.add_init_script("window.addEventListener('unhandledrejection',e=>{window.__smakoUnhandled({message:String(e.reason?.message||e.reason)}).catch(()=>{});});")
     page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(args.base+'/personal');page.wait_for_load_state('networkidle')
     reference=str(uuid.uuid4());headers={'Prefer':'respond-async','X-Request-ID':reference,'Origin':args.base}
@@ -59,6 +61,7 @@ with sync_playwright() as pw:
     response=context.request.post(args.base+'/api/plans',data=request,headers=headers,timeout=60000)
     assert response.status==202,response.text()
     status_url=response.json()['status_url']
+    (args.output/'job.json').write_text(json.dumps({'request_id':reference,'status_url':status_url,'accepted':response.json()},indent=2),encoding='utf8')
     duplicate=context.request.post(args.base+'/api/plans',data=request,headers=headers,timeout=60000)
     assert duplicate.status in {201,202} and (duplicate.status==201 or duplicate.json()['status_url']==status_url)
     deadline=time.monotonic()+900
@@ -77,6 +80,7 @@ with sync_playwright() as pw:
     read=context.request.get(args.base+f'/api/plans/{plan_id}?revision={saved["revision"]}')
     assert read.status==200 and fp(read.json())==fp(saved)
     page.goto(args.base+'/personal#plan='+plan_id)
+    page.reload()  # A fragment-only goto does not run document initialization.
     expect(page.locator('#plan-content h1')).to_have_text('Din plan',timeout=60000)
     summaries=page.locator('#plan-content details > summary').filter(has_text='Öppna recept')
     assert summaries.count()==len(recipes)
