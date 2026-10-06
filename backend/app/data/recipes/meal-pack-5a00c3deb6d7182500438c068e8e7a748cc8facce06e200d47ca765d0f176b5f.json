@@ -1,0 +1,4072 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 12,
+        "base_id": "smako-dinner-lentil-carrot-soup",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "linser|dry",
+                "name": "linser",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "spiskummin",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "3b6a54b88f7279581409ac4e6e8bd696a63756a53f907ac4ed4a7d7855732498",
+        "content_source": {
+          "active_minutes": 12,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-dinner-lentil-carrot-soup",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "kastrull",
+          "kniv",
+          "stavmixer"
+        ],
+        "estimated_minutes": 25,
+        "family": "soppa",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 6,
+        "method": "pot",
+        "primary_ingredient": "linser",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 25,
+            "id": "prepare",
+            "ingredient_keys": [
+              "linser|dry",
+              "morot|raw_edible",
+              "krossade tomater|as_sold",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "spiskummin|dry"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Hacka löken och skär moroten i tunna skivor. Fräs varsamt i den uppmätta oljan i en kastrull. Tillsätt torra röda linser, tomater, spiskummin och dricksvatten så att allt täcks. Sjud tills linser och morot är helt mjuka. Mixa till soppa och behåll all vätska; späd med vatten om det behövs. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 25,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "linser",
+          "component": "main",
+          "form": "dry",
+          "name": "linser",
+          "product_requirements": [
+            "red_split"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "main",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "main",
+          "form": "dry",
+          "name": "spiskummin",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Hacka löken och skär moroten i tunna skivor. Fräs varsamt i den uppmätta oljan i en kastrull. Tillsätt torra röda linser, tomater, spiskummin och dricksvatten så att allt täcks. Sjud tills linser och morot är helt mjuka. Mixa till soppa och behåll all vätska; späd med vatten om det behövs. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Len lins- och morotssoppa",
+      "preparation": {
+        "family": "soppa",
+        "input_forms": {
+          "gul lök": "raw_edible",
+          "krossade tomater": "as_sold",
+          "linser": "dry",
+          "morot": "raw_edible",
+          "rapsolja": "as_sold",
+          "spiskummin": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "3b6a54b88f7279581409ac4e6e8bd696a63756a53f907ac4ed4a7d7855732498",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 12,
+        "base_id": "smako-dinner-chicken-tomato-pilaf",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "kyckling",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ärtor|as_sold",
+                "name": "ärtor",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "9aca13ce51e4e91decf158867b2d3baf49e0d2cc42677cc04cecb9ae8a2f4b73",
+        "content_source": {
+          "active_minutes": 12,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-dinner-chicken-tomato-pilaf",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "kastrull",
+          "kniv",
+          "termometer"
+        ],
+        "estimated_minutes": 28,
+        "family": "risrätt",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 6,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 28,
+            "id": "prepare",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "ris|dry",
+              "krossade tomater|as_sold",
+              "ärtor|as_sold",
+              "rapsolja|as_sold",
+              "oregano|dry"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Skär kycklingen i små jämna bitar och fräs i den uppmätta oljan. Rör ned ris, tomater, oregano och dricksvatten enligt risets förpackningsanvisning för absorption. Sjud under lock tills riset är mjukt. Rör ned ärtorna mot slutet och hetta igenom. Kycklingen ska vara helt genomlagad; använd termometer och följ förpackningens säkerhetsanvisning. Häll inte bort vätska. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 28,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "main",
+          "form": "dry",
+          "name": "ris",
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "main",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ärtor",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ärtor",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "main",
+          "form": "dry",
+          "name": "oregano",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Skär kycklingen i små jämna bitar och fräs i den uppmätta oljan. Rör ned ris, tomater, oregano och dricksvatten enligt risets förpackningsanvisning för absorption. Sjud under lock tills riset är mjukt. Rör ned ärtorna mot slutet och hetta igenom. Kycklingen ska vara helt genomlagad; använd termometer och följ förpackningens säkerhetsanvisning. Häll inte bort vätska. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Kyckling- och tomatris i en kastrull",
+      "preparation": {
+        "family": "risrätt",
+        "input_forms": {
+          "krossade tomater": "as_sold",
+          "kyckling": "raw_edible",
+          "oregano": "dry",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "ärtor": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "9aca13ce51e4e91decf158867b2d3baf49e0d2cc42677cc04cecb9ae8a2f4b73",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 13,
+        "base_id": "smako-dinner-tofu-pasta-ragu",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "pasta",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "tofu",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "6a33905a137ea5a945169dd001b352704c2feb25cdb6b28dffc09af267ea3ac8",
+        "content_source": {
+          "active_minutes": 13,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-dinner-tofu-pasta-ragu",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "kastrull",
+          "kniv"
+        ],
+        "estimated_minutes": 25,
+        "family": "pasta",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 6,
+        "method": "pot",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "pasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 25,
+            "id": "prepare",
+            "ingredient_keys": [
+              "pasta|dry",
+              "tofu|as_sold",
+              "krossade tomater|as_sold",
+              "morot|raw_edible",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Riv moroten och hacka löken. Fräs dem i den uppmätta oljan och smula ned tofun. Tillsätt tomater, torr kort pasta och vatten lite i taget. Sjud och rör tills pastan är genomkokt och såsen omsluter den. Behåll all mat och vätska i pannan. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 25,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "main",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tofu",
+          "component": "main",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "main",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Riv moroten och hacka löken. Fräs dem i den uppmätta oljan och smula ned tofun. Tillsätt tomater, torr kort pasta och vatten lite i taget. Sjud och rör tills pastan är genomkokt och såsen omsluter den. Behåll all mat och vätska i pannan. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Pastapanna med smulad tofu",
+      "preparation": {
+        "family": "pasta",
+        "input_forms": {
+          "gul lök": "raw_edible",
+          "krossade tomater": "as_sold",
+          "morot": "raw_edible",
+          "pasta": "dry",
+          "rapsolja": "as_sold",
+          "tofu": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "6a33905a137ea5a945169dd001b352704c2feb25cdb6b28dffc09af267ea3ac8",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 17,
+        "base_id": "smako-dinner-chickpea-potato-skillet",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "kikärtor",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "paprika",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "62016c14246dff259fc2cb782bc1f73df4bfac88247c03a061418000f87c30c6",
+        "content_source": {
+          "active_minutes": 17,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-dinner-chickpea-potato-skillet",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "belagd panna",
+          "kniv"
+        ],
+        "estimated_minutes": 30,
+        "family": "potatisrätt",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 6,
+        "method": "pan",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 30,
+            "id": "prepare",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "kikärtor|cooked_drained",
+              "gul lök|raw_edible",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "oregano|dry"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Skär potatisen i små tärningar, hacka lök och paprika. Väg färdigkokta kikärtor efter avrinning. Tillaga potatisen i en täckt belagd panna med uppmätt olja och lite vatten tills mjuk. Tillsätt lök, paprika, kikärtor och oregano och värm under omrörning. Ta av locket mot slutet och låt ytan få färg. Skrapa ned all mat och olja i portionerna. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 30,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kikärtor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "main",
+          "form": "dry",
+          "name": "oregano",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Skär potatisen i små tärningar, hacka lök och paprika. Väg färdigkokta kikärtor efter avrinning. Tillaga potatisen i en täckt belagd panna med uppmätt olja och lite vatten tills mjuk. Tillsätt lök, paprika, kikärtor och oregano och värm under omrörning. Ta av locket mot slutet och låt ytan få färg. Skrapa ned all mat och olja i portionerna. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Potatispanna med kikärtor och paprika",
+      "preparation": {
+        "family": "potatisrätt",
+        "input_forms": {
+          "gul lök": "raw_edible",
+          "kikärtor": "cooked_drained",
+          "oregano": "dry",
+          "paprika": "raw_edible",
+          "potatis": "raw_edible",
+          "rapsolja": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "62016c14246dff259fc2cb782bc1f73df4bfac88247c03a061418000f87c30c6",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 15,
+        "base_id": "smako-dinner-bean-mash-gratin",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "vita bönor",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "spenat",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "adac15f175705d34cf8c9868f1b38b95eeaf819653f06f6339ea0294e92623c9",
+        "content_source": {
+          "active_minutes": 15,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-dinner-bean-mash-gratin",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "ugn",
+          "form",
+          "kastrull",
+          "kniv",
+          "potatisstamp"
+        ],
+        "estimated_minutes": 30,
+        "family": "gratäng",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 5,
+        "method": "oven",
+        "primary_ingredient": "bönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 30,
+            "id": "prepare",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "bönor|cooked_drained",
+              "spenat|as_sold",
+              "ost|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Värm ugnen till 225 grader. Tärna potatisen fint och sjud i en liten uppmätt mängd vatten tills mjuk. Mosa med kokvattnet och oljan. Väg färdigkokta vita bönor efter avrinning och värm dem med spenaten. Lägg bönor och spenat i en liten form, täck med mos och ost. Gratinera tills osten smält och maten är genomvarm. Servera också vätska och ost som hamnat i formen. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 30,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bönor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "vita bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "main",
+          "form": "as_sold",
+          "name": "spenat",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Värm ugnen till 225 grader. Tärna potatisen fint och sjud i en liten uppmätt mängd vatten tills mjuk. Mosa med kokvattnet och oljan. Väg färdigkokta vita bönor efter avrinning och värm dem med spenaten. Lägg bönor och spenat i en liten form, täck med mos och ost. Gratinera tills osten smält och maten är genomvarm. Servera också vätska och ost som hamnat i formen. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Potatismosgratäng med vita bönor",
+      "preparation": {
+        "family": "gratäng",
+        "input_forms": {
+          "bönor": "cooked_drained",
+          "ost": "as_sold",
+          "potatis": "raw_edible",
+          "rapsolja": "as_sold",
+          "spenat": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "adac15f175705d34cf8c9868f1b38b95eeaf819653f06f6339ea0294e92623c9",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 12,
+        "base_id": "smako-dinner-bean-couscous-salad",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "couscous|dry",
+                "name": "couscous",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kidneybönor|cooked_drained",
+                "name": "kidneybönor",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "b69a914d3ab6491da9ec2face734c606b1ceb10439dbf2db7ecba0e6405d2abb",
+        "content_source": {
+          "active_minutes": 12,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-dinner-bean-couscous-salad",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "kastrull",
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 18,
+        "family": "bowl",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 6,
+        "method": "salad",
+        "primary_ingredient": "kidneybönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "couscous",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "prepare",
+            "ingredient_keys": [
+              "couscous|dry",
+              "kidneybönor|cooked_drained",
+              "gurka|raw_edible",
+              "tomat|raw_edible",
+              "yoghurt naturell|as_sold",
+              "oregano|dry"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Tillaga couscous med absorptionsmetod enligt förpackningen; häll inte bort vätska. Väg färdigkokta kidneybönor efter avrinning. Tärna gurka och tomat och behåll saften. Blanda med couscous och bönor. Rör ihop naturell yoghurt och oregano och servera all sås till salladen. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 18,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "couscous",
+          "component": "main",
+          "form": "dry",
+          "name": "couscous",
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kidneybönor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "kidneybönor",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "main",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "main",
+          "form": "dry",
+          "name": "oregano",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Tillaga couscous med absorptionsmetod enligt förpackningen; häll inte bort vätska. Väg färdigkokta kidneybönor efter avrinning. Tärna gurka och tomat och behåll saften. Blanda med couscous och bönor. Rör ihop naturell yoghurt och oregano och servera all sås till salladen. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Ljummen bön- och couscoussallad med yoghurt",
+      "preparation": {
+        "family": "bowl",
+        "input_forms": {
+          "couscous": "dry",
+          "gurka": "raw_edible",
+          "kidneybönor": "cooked_drained",
+          "oregano": "dry",
+          "tomat": "raw_edible",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "b69a914d3ab6491da9ec2face734c606b1ceb10439dbf2db7ecba0e6405d2abb",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 13,
+        "base_id": "smako-dinner-salmon-spinach-plate",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lax|raw_edible",
+                "name": "lax",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "spenat",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "aeb5069dc2bab98259ad8dafe7482bdefda2e404127d6fc882b5c5c430c87902",
+        "content_source": {
+          "active_minutes": 13,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-dinner-salmon-spinach-plate",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "ugn",
+          "form",
+          "kastrull",
+          "kniv",
+          "termometer"
+        ],
+        "estimated_minutes": 28,
+        "family": "ugn",
+        "fish": true,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 5,
+        "method": "oven",
+        "primary_ingredient": "lax",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 28,
+            "id": "prepare",
+            "ingredient_keys": [
+              "lax|raw_edible",
+              "ris|dry",
+              "spenat|as_sold",
+              "yoghurt naturell|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Värm ugnen till 200 grader. Lägg benfri lax i en täckt liten ugnsform med uppmätt olja. Baka tills helt genomlagad enligt förpackningens anvisning. Koka samtidigt riset med absorptionsmetod. Vänd ned spenaten och låt den bli genomvarm. Fördela lax, genomhettad sky, ris och naturell yoghurt mellan portionerna; inget av den uppmätta oljan hälls bort. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 28,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lax",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "lax",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "main",
+          "form": "dry",
+          "name": "ris",
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "main",
+          "form": "as_sold",
+          "name": "spenat",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "main",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Värm ugnen till 200 grader. Lägg benfri lax i en täckt liten ugnsform med uppmätt olja. Baka tills helt genomlagad enligt förpackningens anvisning. Koka samtidigt riset med absorptionsmetod. Vänd ned spenaten och låt den bli genomvarm. Fördela lax, genomhettad sky, ris och naturell yoghurt mellan portionerna; inget av den uppmätta oljan hälls bort. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Ugnslax med spenatris och yoghurt",
+      "preparation": {
+        "family": "ugn",
+        "input_forms": {
+          "lax": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "spenat": "as_sold",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "aeb5069dc2bab98259ad8dafe7482bdefda2e404127d6fc882b5c5c430c87902",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 13,
+        "base_id": "smako-dinner-black-bean-cabbage-wrap",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tortillas|as_sold",
+                "name": "tortillas",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "svarta bönor",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "fe8e347bfb105b0ac4f01281c6607e0bdd81b6f839dcc211517882032eba30bb",
+        "content_source": {
+          "active_minutes": 13,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-dinner-black-bean-cabbage-wrap",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "dinner_level": "simple",
+        "equipment": [
+          "belagd panna",
+          "kniv"
+        ],
+        "estimated_minutes": 20,
+        "family": "wrap",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 6,
+        "method": "pan",
+        "primary_ingredient": "svarta bönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "tortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 20,
+            "id": "prepare",
+            "ingredient_keys": [
+              "tortillas|as_sold",
+              "svarta bönor|cooked_drained",
+              "vitkål|raw_edible",
+              "ost|as_sold",
+              "krossade tomater|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta svarta bönor efter avrinning. Strimla kålen fint och mjuka upp den i den uppmätta oljan. Mosa bönorna grovt och värm med tomaterna. Fördela bönröra, kål och ost på uppvägda tortillas. Vik och värm försiktigt i belagd panna tills fyllningen är varm. Servera all röra, kål och ost; rester i pannan hör till måltiden. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 20,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tortillas",
+          "component": "main",
+          "form": "as_sold",
+          "name": "tortillas",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svarta bönor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "main",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta svarta bönor efter avrinning. Strimla kålen fint och mjuka upp den i den uppmätta oljan. Mosa bönorna grovt och värm med tomaterna. Fördela bönröra, kål och ost på uppvägda tortillas. Vik och värm försiktigt i belagd panna tills fyllningen är varm. Servera all röra, kål och ost; rester i pannan hör till måltiden. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Varma bönwraps med kål och ost",
+      "preparation": {
+        "family": "wrap",
+        "input_forms": {
+          "krossade tomater": "as_sold",
+          "ost": "as_sold",
+          "rapsolja": "as_sold",
+          "svarta bönor": "cooked_drained",
+          "tortillas": "as_sold",
+          "vitkål": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "fe8e347bfb105b0ac4f01281c6607e0bdd81b6f839dcc211517882032eba30bb",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 5,
+        "base_id": "smako-breakfast-overnight-apple-oats",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "havregryn|dry",
+                "name": "havregryn",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "d3e9ab0f874d3e357c12c67b5f87ba3db8da5988b74d0eb1da2a8a7714f724b5",
+        "content_source": {
+          "active_minutes": 5,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-breakfast-overnight-apple-oats",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "kylskåp"
+        ],
+        "estimated_minutes": 5,
+        "family": "overnight-oats",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "refrigerated_assembly",
+        "primary_ingredient": "yoghurt naturell",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "havregryn",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "prepare",
+            "ingredient_keys": [
+              "havregryn|dry",
+              "yoghurt naturell|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Blanda uppvägda havregryn och naturell yoghurt i en ren behållare och täck. Ställ i kylskåp över natten, cirka åtta timmar. Före servering: tvätta äpplet, ta bort kärnhuset, väg den ätbara mängden och riv ned den. Servera hela blandningen. Detta är förberedelse till nästa frukost, ingen rekommendation om en veckas förvaring. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          },
+          {
+            "depends_on": [
+              "prepare"
+            ],
+            "duration_minutes": 480,
+            "id": "wait",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt den täckta blandningen stå i kylskåp cirka åtta timmar till nästa frukost."
+          }
+        ],
+        "total_minutes": 485,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0",
+        "waiting_minutes": 480
+      },
+      "ingredients": [
+        {
+          "canonical_name": "havregryn",
+          "component": "main",
+          "form": "dry",
+          "name": "havregryn",
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "main",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Blanda uppvägda havregryn och naturell yoghurt i en ren behållare och täck. Ställ i kylskåp över natten, cirka åtta timmar. Före servering: tvätta äpplet, ta bort kärnhuset, väg den ätbara mängden och riv ned den. Servera hela blandningen. Detta är förberedelse till nästa frukost, ingen rekommendation om en veckas förvaring. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten.",
+        "Låt den täckta blandningen stå i kylskåp cirka åtta timmar till nästa frukost."
+      ],
+      "name": "Yoghurtgryn med äpple, förbered kvällen före",
+      "preparation": {
+        "family": "overnight-oats",
+        "input_forms": {
+          "havregryn": "dry",
+          "yoghurt naturell": "as_sold",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "d3e9ab0f874d3e357c12c67b5f87ba3db8da5988b74d0eb1da2a8a7714f724b5",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 9,
+        "base_id": "smako-breakfast-tofu-tomato-scramble",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "tofu",
+                "note": "",
+                "quantity": 125.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "a74e71ffdf2725f7fa3231b44cfe365b7059f55903f36117f2630f06f75ee7e6",
+        "content_source": {
+          "active_minutes": 9,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-breakfast-tofu-tomato-scramble",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "belagd panna",
+          "kniv"
+        ],
+        "estimated_minutes": 12,
+        "family": "tofu-scramble",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "prepare",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "tofu|as_sold",
+              "tomat|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Smula tofun. Väg och tärna tomaten och behåll saften. Värm tillsammans i belagd panna med uppmätt olja till en sammanhållen varm röra. Servera hela röran och all olja med det uppvägda brödet vid sidan. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 12,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bröd",
+          "component": "main",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tofu",
+          "component": "main",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 125.0,
+          "quantity_max": 125.0,
+          "quantity_min": 125.0,
+          "quantity_step": 125.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Smula tofun. Väg och tärna tomaten och behåll saften. Värm tillsammans i belagd panna med uppmätt olja till en sammanhållen varm röra. Servera hela röran och all olja med det uppvägda brödet vid sidan. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Smulad tofu och tomat med bröd",
+      "preparation": {
+        "family": "tofu-scramble",
+        "input_forms": {
+          "bröd": "as_sold",
+          "rapsolja": "as_sold",
+          "tofu": "as_sold",
+          "tomat": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "a74e71ffdf2725f7fa3231b44cfe365b7059f55903f36117f2630f06f75ee7e6",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 5,
+        "base_id": "smako-breakfast-spinach-couscous-bowl",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "couscous|dry",
+                "name": "couscous",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "spenat",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "7203898384ca4e42c8afaca023646cfbca8772977c7d57f83d614c151c65b25c",
+        "content_source": {
+          "active_minutes": 5,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-breakfast-spinach-couscous-bowl",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "kastrull",
+          "kniv"
+        ],
+        "estimated_minutes": 12,
+        "family": "spinach-couscous",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pot",
+        "primary_ingredient": "ost",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "couscous",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "prepare",
+            "ingredient_keys": [
+              "couscous|dry",
+              "ost|as_sold",
+              "spenat|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Värm den uppvägda spenaten med lite dricksvatten tills genomvarm. Tillsätt couscous och vatten enligt förpackningens absorptionsanvisning. Låt grynen svälla utan avrinning. Rör ned osten tills smält och servera hela blandningen. Ingen olja tillsätts. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 12,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "couscous",
+          "component": "main",
+          "form": "dry",
+          "name": "couscous",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "main",
+          "form": "as_sold",
+          "name": "spenat",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Värm den uppvägda spenaten med lite dricksvatten tills genomvarm. Tillsätt couscous och vatten enligt förpackningens absorptionsanvisning. Låt grynen svälla utan avrinning. Rör ned osten tills smält och servera hela blandningen. Ingen olja tillsätts. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Spenatcouscous med smält ost",
+      "preparation": {
+        "family": "spinach-couscous",
+        "input_forms": {
+          "couscous": "dry",
+          "ost": "as_sold",
+          "spenat": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "7203898384ca4e42c8afaca023646cfbca8772977c7d57f83d614c151c65b25c",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 8,
+        "base_id": "smako-breakfast-white-bean-tomato-toast",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "vita bönor",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "e7e3b6c12becdbb28203212071c9b1cd2e9c7c13e5bedef8a21d5c189bbea236",
+        "content_source": {
+          "active_minutes": 8,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-breakfast-white-bean-tomato-toast",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 8,
+        "family": "bean-toast",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "bönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "prepare",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "bönor|cooked_drained",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta vita bönor efter avrinning och mosa dem med lite dricksvatten. Bred på uppvägt bröd. Väg tomat efter att oätliga delar tagits bort, skiva och lägg på smörgåsen. Servera all röra. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 8,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bröd",
+          "component": "main",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bönor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "vita bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta vita bönor efter avrinning och mosa dem med lite dricksvatten. Bred på uppvägt bröd. Väg tomat efter att oätliga delar tagits bort, skiva och lägg på smörgåsen. Servera all röra. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Bönsmörgås med tomat",
+      "preparation": {
+        "family": "bean-toast",
+        "input_forms": {
+          "bröd": "as_sold",
+          "bönor": "cooked_drained",
+          "tomat": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "e7e3b6c12becdbb28203212071c9b1cd2e9c7c13e5bedef8a21d5c189bbea236",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 8,
+        "base_id": "smako-breakfast-lentil-carrot-porridge",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "linser|dry",
+                "name": "linser",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "spiskummin",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "afc12eaf39c089a68c752c325c165d3e6665d911b6fa124dbd1bf00e041a5813",
+        "content_source": {
+          "active_minutes": 8,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-breakfast-lentil-carrot-porridge",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "kastrull",
+          "kniv",
+          "rivjärn"
+        ],
+        "estimated_minutes": 22,
+        "family": "lentil-porridge",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pot",
+        "primary_ingredient": "linser",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 22,
+            "id": "prepare",
+            "ingredient_keys": [
+              "linser|dry",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "spiskummin|dry"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Riv den uppvägda moroten. Sjud den med torra röda linser och vatten tills allt är helt mjukt. Rör i uppmätt olja och spiskummin och värm kort. Behåll all vätska och servera som en varm matig gröt. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 22,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "linser",
+          "component": "main",
+          "form": "dry",
+          "name": "linser",
+          "product_requirements": [
+            "red_split"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "main",
+          "form": "dry",
+          "name": "spiskummin",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Riv den uppvägda moroten. Sjud den med torra röda linser och vatten tills allt är helt mjukt. Rör i uppmätt olja och spiskummin och värm kort. Behåll all vätska och servera som en varm matig gröt. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Varm linsfrukost med morot",
+      "preparation": {
+        "family": "lentil-porridge",
+        "input_forms": {
+          "linser": "dry",
+          "morot": "raw_edible",
+          "rapsolja": "as_sold",
+          "spiskummin": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "afc12eaf39c089a68c752c325c165d3e6665d911b6fa124dbd1bf00e041a5813",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 7,
+        "base_id": "smako-breakfast-quark-apple-oat-bowl",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kvarg|as_sold",
+                "name": "kvarg",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "havregryn|dry",
+                "name": "havregryn",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "ad07c712b4f3a3066c334f9fc07a8d1c73544f42d9bb66a426cf8d915ede7619",
+        "content_source": {
+          "active_minutes": 7,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-breakfast-quark-apple-oat-bowl",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv",
+          "rivjärn"
+        ],
+        "estimated_minutes": 7,
+        "family": "quark-bowl",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "kvarg",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "havregryn",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "prepare",
+            "ingredient_keys": [
+              "kvarg|as_sold",
+              "äpple|raw_edible",
+              "havregryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg naturell kvarg utan att hälla av vätska. Tvätta äpplet, ta bort kärnhuset, väg den ätbara delen och riv. Rör ihop kvarg, äpple och uppvägda havregryn avsedda att kunna ätas utan kokning. Servera hela blandningen. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 7,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kvarg",
+          "component": "main",
+          "form": "as_sold",
+          "name": "kvarg",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "havregryn",
+          "component": "main",
+          "form": "dry",
+          "name": "havregryn",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg naturell kvarg utan att hälla av vätska. Tvätta äpplet, ta bort kärnhuset, väg den ätbara delen och riv. Rör ihop kvarg, äpple och uppvägda havregryn avsedda att kunna ätas utan kokning. Servera hela blandningen. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Kvargskål med rivet äpple och havre",
+      "preparation": {
+        "family": "quark-bowl",
+        "input_forms": {
+          "havregryn": "dry",
+          "kvarg": "as_sold",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "ad07c712b4f3a3066c334f9fc07a8d1c73544f42d9bb66a426cf8d915ede7619",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 8,
+        "base_id": "smako-breakfast-cottage-cheese-salad",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "keso|as_sold",
+                "name": "keso",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "455b3ec8acd723733563457b78cbf768b91bf7be99a017579d4a2b8e0083f0d3",
+        "content_source": {
+          "active_minutes": 8,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-breakfast-cottage-cheese-salad",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 8,
+        "family": "cottage-salad",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "keso",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "prepare",
+            "ingredient_keys": [
+              "keso|as_sold",
+              "tomat|raw_edible",
+              "gurka|raw_edible",
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg keso som såld, utan att hälla av vätska. Skölj grönsakerna, avlägsna oätliga delar före vägning och tärna. Blanda med keson och behåll saften. Servera allt tillsammans med uppvägt bröd. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 8,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "keso",
+          "component": "main",
+          "form": "as_sold",
+          "name": "keso",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "main",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg keso som såld, utan att hälla av vätska. Skölj grönsakerna, avlägsna oätliga delar före vägning och tärna. Blanda med keson och behåll saften. Servera allt tillsammans med uppvägt bröd. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Keso med tomat, gurka och bröd",
+      "preparation": {
+        "family": "cottage-salad",
+        "input_forms": {
+          "bröd": "as_sold",
+          "gurka": "raw_edible",
+          "keso": "as_sold",
+          "tomat": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "455b3ec8acd723733563457b78cbf768b91bf7be99a017579d4a2b8e0083f0d3",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 6,
+        "base_id": "smako-breakfast-pea-cheese-rice",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ärtor|as_sold",
+                "name": "ärtor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "7eb18c650262712e222dbc42c7147023362f2700d935bf55b7f68ca2e9bf3425",
+        "content_source": {
+          "active_minutes": 6,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-breakfast-pea-cheese-rice",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "kastrull",
+          "kniv"
+        ],
+        "estimated_minutes": 22,
+        "family": "rice-mug",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pot",
+        "primary_ingredient": "ärtor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 22,
+            "id": "prepare",
+            "ingredient_keys": [
+              "ris|dry",
+              "ärtor|as_sold",
+              "ost|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Koka riset med absorptionsmetod enligt förpackningen. Lägg i ärtorna mot slutet och låt dem bli genomvarma. Rör ned osten tills den smälter. Servera allt ris, alla ärtor och all ost utan att hälla av vätska. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 22,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ris",
+          "component": "main",
+          "form": "dry",
+          "name": "ris",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ärtor",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ärtor",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Koka riset med absorptionsmetod enligt förpackningen. Lägg i ärtorna mot slutet och låt dem bli genomvarma. Rör ned osten tills den smälter. Servera allt ris, alla ärtor och all ost utan att hälla av vätska. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Varm risfrukost med ärtor och ost",
+      "preparation": {
+        "family": "rice-mug",
+        "input_forms": {
+          "ost": "as_sold",
+          "ris": "dry",
+          "ärtor": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "7eb18c650262712e222dbc42c7147023362f2700d935bf55b7f68ca2e9bf3425",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 7,
+        "base_id": "smako-snack-carrot-quark-dip",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kvarg|as_sold",
+                "name": "kvarg",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "9bc4ca6e6864af6defaa42b325086a956095ca6ceeda31900eab64ff771a0390",
+        "content_source": {
+          "active_minutes": 7,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-snack-carrot-quark-dip",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 7,
+        "family": "vegetable-dip",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 2,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "kvarg",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "prepare",
+            "ingredient_keys": [
+              "morot|raw_edible",
+              "kvarg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Skölj moroten, avlägsna oätliga delar och väg den ätbara mängden. Skär i stavar. Väg naturell kvarg utan att hälla av vätska och servera som dipp. Inga olistade ingredienser tillsätts. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 7,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "morot",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kvarg",
+          "component": "main",
+          "form": "as_sold",
+          "name": "kvarg",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Skölj moroten, avlägsna oätliga delar och väg den ätbara mängden. Skär i stavar. Väg naturell kvarg utan att hälla av vätska och servera som dipp. Inga olistade ingredienser tillsätts. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Morotsstavar med kvargdipp",
+      "preparation": {
+        "family": "vegetable-dip",
+        "input_forms": {
+          "kvarg": "as_sold",
+          "morot": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "9bc4ca6e6864af6defaa42b325086a956095ca6ceeda31900eab64ff771a0390",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 5,
+        "base_id": "smako-snack-apple-cheese-plate",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "0830ea291e4d68e3e86811cfb35a90a54ae11bab15c98b52847c0345eb8179d8",
+        "content_source": {
+          "active_minutes": 5,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-snack-apple-cheese-plate",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 5,
+        "family": "fruit-cheese-plate",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 2,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "ost",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "prepare",
+            "ingredient_keys": [
+              "äpple|raw_edible",
+              "ost|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Tvätta äpplet, ta bort kärnhuset och väg den ätbara mängden. Skär i klyftor. Väg och skär osten i bitar och servera tillsammans. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 5,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "äpple",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Tvätta äpplet, ta bort kärnhuset och väg den ätbara mängden. Skär i klyftor. Väg och skär osten i bitar och servera tillsammans. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Äppelklyftor och ost",
+      "preparation": {
+        "family": "fruit-cheese-plate",
+        "input_forms": {
+          "ost": "as_sold",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "0830ea291e4d68e3e86811cfb35a90a54ae11bab15c98b52847c0345eb8179d8",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 8,
+        "base_id": "smako-snack-chickpea-cucumber-dip",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "kikärtor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "7bb30b92a016c7731d1fe832eb16ff082b22eadb90c2a43f205436acce9dcbb1",
+        "content_source": {
+          "active_minutes": 8,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-snack-chickpea-cucumber-dip",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 8,
+        "family": "legume-dip",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 2,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "prepare",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "gurka|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta kikärtor efter avrinning. Mosa med lite dricksvatten till en grov röra. Skölj gurkan, ta bort oätliga delar före vägning och skär i stavar. Servera alla kikärtor och all gurka. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 8,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta kikärtor efter avrinning. Mosa med lite dricksvatten till en grov röra. Skölj gurkan, ta bort oätliga delar före vägning och skär i stavar. Servera alla kikärtor och all gurka. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Kikärtsröra med gurkstavar",
+      "preparation": {
+        "family": "legume-dip",
+        "input_forms": {
+          "gurka": "raw_edible",
+          "kikärtor": "cooked_drained"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "7bb30b92a016c7731d1fe832eb16ff082b22eadb90c2a43f205436acce9dcbb1",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 7,
+        "base_id": "smako-snack-tofu-tomato-bites",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "tofu",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "799e01ae695b1b72bcc69ba1eb1b12475217377f7807ca89c2c4346cd6fbe565",
+        "content_source": {
+          "active_minutes": 7,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-snack-tofu-tomato-bites",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "belagd panna",
+          "kniv"
+        ],
+        "estimated_minutes": 10,
+        "family": "tofu-bites",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "prepare",
+            "ingredient_keys": [
+              "tofu|as_sold",
+              "tomat|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Tärna tofun och värm varsamt i belagd panna med uppmätt olja. Skölj tomaten och väg den ätbara mängden. Servera tofubitar, tomat och all uppmätt olja tillsammans. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 10,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tofu",
+          "component": "main",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Tärna tofun och värm varsamt i belagd panna med uppmätt olja. Skölj tomaten och väg den ätbara mängden. Servera tofubitar, tomat och all uppmätt olja tillsammans. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Varma tofubitar med tomat",
+      "preparation": {
+        "family": "tofu-bites",
+        "input_forms": {
+          "rapsolja": "as_sold",
+          "tofu": "as_sold",
+          "tomat": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "799e01ae695b1b72bcc69ba1eb1b12475217377f7807ca89c2c4346cd6fbe565",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 9,
+        "base_id": "smako-snack-warm-chickpea-carrot",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "kikärtor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "c7635be62804deb999d25060e6dfda0c4973fbbedb9787f17be677bf1c061fae",
+        "content_source": {
+          "active_minutes": 9,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-snack-warm-chickpea-carrot",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "belagd panna",
+          "kniv"
+        ],
+        "estimated_minutes": 15,
+        "family": "warm-legume-cup",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "prepare",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "morot|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta kikärtor efter avrinning. Riv den uppvägda ätbara moroten. Värm båda i belagd panna med uppmätt olja och lite dricksvatten tills moroten mjuknat. Servera hela blandningen och all olja. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 15,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta kikärtor efter avrinning. Riv den uppvägda ätbara moroten. Värm båda i belagd panna med uppmätt olja och lite dricksvatten tills moroten mjuknat. Servera hela blandningen och all olja. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Varm kikärts- och morotsskål",
+      "preparation": {
+        "family": "warm-legume-cup",
+        "input_forms": {
+          "kikärtor": "cooked_drained",
+          "morot": "raw_edible",
+          "rapsolja": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "c7635be62804deb999d25060e6dfda0c4973fbbedb9787f17be677bf1c061fae",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 6,
+        "base_id": "smako-snack-quark-apple-cup",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kvarg|as_sold",
+                "name": "kvarg",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "d661acfd6296b060af76d7aee70d634d100ea98fc095333f770ca701b15a94ae",
+        "content_source": {
+          "active_minutes": 6,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-snack-quark-apple-cup",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 6,
+        "family": "quark-fruit-cup",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 2,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "kvarg",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "prepare",
+            "ingredient_keys": [
+              "kvarg|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Tvätta äpplet, ta bort kärnhuset och väg den ätbara mängden. Skär i små klyftor. Väg naturell kvarg utan avrinning och servera med äpplet. Ät hela den angivna mängden. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 6,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kvarg",
+          "component": "main",
+          "form": "as_sold",
+          "name": "kvarg",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Tvätta äpplet, ta bort kärnhuset och väg den ätbara mängden. Skär i små klyftor. Väg naturell kvarg utan avrinning och servera med äpplet. Ät hela den angivna mängden. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Kvarg med äppelklyftor",
+      "preparation": {
+        "family": "quark-fruit-cup",
+        "input_forms": {
+          "kvarg": "as_sold",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "d661acfd6296b060af76d7aee70d634d100ea98fc095333f770ca701b15a94ae",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 10,
+        "base_id": "smako-snack-cucumber-bean-cheese-rolls",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "vita bönor",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "b3a80fb1c43033e854db0392a0b555b8b87a58cc3a0bbd4c39875b40f6bebbec",
+        "content_source": {
+          "active_minutes": 10,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-snack-cucumber-bean-cheese-rolls",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 10,
+        "family": "vegetable-canapes",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "bönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "prepare",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "ost|as_sold",
+              "gurka|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta vita bönor efter avrinning och mosa med lite dricksvatten. Skölj gurkan, väg ätbar mängd och skär i breda skivor. Fördela bönröra och uppvägd ost på skivorna. Servera också eventuell röra som inte ryms på skivorna. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 10,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bönor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "vita bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg färdigkokta vita bönor efter avrinning och mosa med lite dricksvatten. Skölj gurkan, väg ätbar mängd och skär i breda skivor. Fördela bönröra och uppvägd ost på skivorna. Servera också eventuell röra som inte ryms på skivorna. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Gurkskivor med bönröra och ost",
+      "preparation": {
+        "family": "vegetable-canapes",
+        "input_forms": {
+          "bönor": "cooked_drained",
+          "gurka": "raw_edible",
+          "ost": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "b3a80fb1c43033e854db0392a0b555b8b87a58cc3a0bbd4c39875b40f6bebbec",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 5,
+        "base_id": "smako-snack-bread-yoghurt-dip",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Hela måltiden"
+          }
+        ],
+        "content_sha256": "056d4c37cb3e93ca2e41c8e3c4937045b9ec417d281f1c6909bff95b02b37d76",
+        "content_source": {
+          "active_minutes": 5,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "pilot-20261006",
+          "priority": 1,
+          "proposal_id": "smako-snack-bread-yoghurt-dip",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "e68ab3c5aa6a36ffea248583c1d6e82388f720cace0c851781bd13348cc53718",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [],
+        "equipment": [
+          "skål",
+          "kniv"
+        ],
+        "estimated_minutes": 5,
+        "family": "bread-dip",
+        "fish": false,
+        "flavor_profile": [
+          "mild"
+        ],
+        "ingredient_count": 2,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "yoghurt naturell",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Original pilotinnehåll, strukturellt granskat. Inte provlagat. Ingen laboratorienäring, uppmätt tidsåtgång eller veckohållbarhet påstås. Version 1.1 kompletterar utrustningslistan; mängder och instruktioner är oförändrade.",
+          "reviewed_at": "2026-10-06"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "prepare",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg brödet och skär i stavar. Väg naturell yoghurt utan avrinning och rör om. Servera som dipp till brödet; inga olistade ingredienser tillsätts. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+          }
+        ],
+        "total_minutes": 5,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.1.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bröd",
+          "component": "main",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "main",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp ingredienslistans angivna ätbara mängder. Gram och ml hålls separata. Förpackningsrester och borttagna delar ingår inte. Väg brödet och skär i stavar. Väg naturell yoghurt utan avrinning och rör om. Servera som dipp till brödet; inga olistade ingredienser tillsätts. Fördela all angiven mat jämnt mellan portionerna. Tid är en författad uppskattning, inte uppmätt tillagning. Följ produktens hanteringsanvisning och förbered inte öppnade råvaror för hela veckan utan stöd för hållbarheten."
+      ],
+      "name": "Brödstavar med naturell yoghurtdipp",
+      "preparation": {
+        "family": "bread-dip",
+        "input_forms": {
+          "bröd": "as_sold",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "056d4c37cb3e93ca2e41c8e3c4937045b9ec417d281f1c6909bff95b02b37d76",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    }
+  ]
+}
