@@ -243,7 +243,8 @@
     const intro=el("div",null,"complete-recipe-intro");
     intro.append(el("p",(design.cuisines||[]).map(c=>`${(cuisines[c]||c).toLowerCase()} inspirerad`).join(" · "),"recipe-cuisine-label"));
     const count=design.ingredient_count??ingredientCount(recipe);
-    intro.append(el("p",`${recipe.servings} portioner · ${count} ingredienser · uppskattad tid ${number(design.estimated_minutes)} min`,"complete-recipe-facts"));
+    const timing=design.total_minutes!=null?`uppskattad total tid ${number(design.total_minutes)} min · aktiv ${number(design.active_minutes)} min${design.waiting_minutes?` · väntan ${number(design.waiting_minutes)} min`:""}`:`uppskattad tid ${number(design.estimated_minutes)} min`;
+    intro.append(el("p",`${recipe.servings} portioner · ${count} ingredienser · ${timing}`,"complete-recipe-facts"));
     const demands=(personal?.remaining_demands||[]).filter(row=>row.source===slotId&&!['salt','peppar','svartpeppar','vitpeppar','vatten'].includes(row.name));
     if(demands.length===count&&demands.every(row=>row.original_quantity==null||Math.abs(row.original_quantity-row.quantity)<0.000001)){
       let home=0,partial=0;

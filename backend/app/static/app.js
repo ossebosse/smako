@@ -982,7 +982,10 @@
       summary.append(createElement("span", "recipe-name", recipeName));
 
       const servings = first(recipe, ["servings", "portions"]);
+      const slot=data.personal?.slots?.filter(s=>s.recipe)[index];
+      const mealLabel=slot?`${{dinner:"Middag",breakfast:"Frukost",snack:"Mellanmål"}[slot.meal_type]} · dag ${slot.day}`:null;
       const summaryMeta = [
+        mealLabel,
         isPresent(servings) ? `${servings} portioner` : null,
         formatMoney(allocatedBasketCost),
       ].filter(Boolean).join(" · ");

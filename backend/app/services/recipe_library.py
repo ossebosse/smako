@@ -147,9 +147,9 @@ def _registered_history() -> tuple[Recipe, ...]:
     """Retain validation of issued plans when current authoring advances."""
     from app.services.meal_library_content import load_entries, manifest_entries
     result = list(load_entries(manifest_entries()["current"]))
-    for recipe in load_entries(manifest_entries()["history"]):
-        _structural_check(recipe)
-        result.append(recipe)
+    result.extend(load_entries(manifest_entries()["history"]))
+    from app.services.meal_prepared_artifacts import prepare_content
+    prepare_content(result)
     return tuple(result)
 
 
@@ -172,7 +172,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
                 for phrase in ("två portioner", "två djupa tallrikar", "två tallrikar"):
                     text = text.replace(phrase, f"{servings} portioner")
             steps.append(step.model_copy(update={"text": text}))
-        if servings >= 4:
+        if servings >= 4 and not (result.design.active_minutes is not None and result.design.method in {"cold_assembly", "refrigerated_assembly"}):
             steps[0] = steps[0].model_copy(update={"text": steps[0].text +
                 " Använd tillräckligt stor panna eller fler plåtar så att lagrets djup är detsamma. "
                 "Om maten måste lagas i omgångar blir tiden längre än uppskattningen."})
@@ -194,7 +194,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
             }),
             "instructions": [s.text for s in steps],
         })
-    if servings > 4:
+    if servings > 4 and not (result.design.active_minutes is not None and result.design.method in {"cold_assembly", "refrigerated_assembly"}):
         # A larger pan is not an implicit unlimited cooking resource. Reserve
         # sequential batches and show that allowance instead of silently keeping
         # the two-person time estimate for twelve portions.
