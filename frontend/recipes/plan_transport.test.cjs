@@ -46,9 +46,12 @@ test('HTTP failures, HTML, malformed JSON and status schema are not network retr
     assert.equal(calls,1);
   }
 });
-test('server terminal 503 is preserved; transport 429 retries with no extra generation',async()=>{
-  let calls=0;const {api}=setup(async()=>{calls++;return calls===1?response({detail:'limited'},429):response(final);});
-  assert.equal((await api.jobRequest({scope:'public',url:'/api/plans',payload:{}})).status,201);assert.equal(calls,2);
+test('server terminal 503 is preserved; transient HTTP statuses retry the same job',async()=>{
+  for(const status of [429,502,503,504]){
+    let calls=0;const {api}=setup(async(url,options)=>{calls++;assert.equal(url,job);assert.notEqual(options.method,'POST');const r=calls===1?response({detail:'temporarily unavailable'},status):response(final);if(calls===1)r.headers.set('Retry-After','2');return r;});
+    api.storage.set('smako.planJob.public',{url:job});
+    assert.equal((await api.jobRequest({scope:'public'})).status,201);assert.equal(calls,2);
+  }
   const other=setup(async()=>{const r=response({detail:'failed'},503);r.headers.set('X-Plan-Request-ID','original');return r;});
   assert.equal((await other.api.jobRequest({scope:'public',url:job})).status,503);
 });
