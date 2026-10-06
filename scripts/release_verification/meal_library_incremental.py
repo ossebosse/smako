@@ -81,7 +81,7 @@ remaining=[p for p in prepared.universe.products if p.product_id not in {
     p.product_id for p in prepared.universe.products if 'kvarg' in p.name.lower()}]
 missing=basket('previously-missing-product',rebuild(remaining));assert missing['status']=='STOPPED'
 restored=basket('one-retained-product-added',rebuild([*remaining,target]));assert restored['status']=='PASS'
-price_products=[p.model_copy(update={'price':p.price+1,'base_price':p.base_price+1 if p.base_price is not None else None})
+price_products=[p.model_copy(update={'price':p.price+1})
     if p.product_id==target.product_id and p.store_id==target.store_id else p for p in prepared.universe.products]
 priced=basket('one-controlled-price-change',rebuild(price_products));assert priced['status']=='PASS'
 # Campaign expiry is an ordinary datetime gate, not a permanent source approval.
