@@ -55,5 +55,5 @@ content=prepare_content(current_recipes())
 Path(f'/results/scale-{factor}-{case}-preparation.json').write_bytes(encoded({
     'synthetic':True,'original_recipes':len(original),'library_recipes':len(current_recipes()),
     'added_synthetic_recipes':len(rows),'seconds':time.perf_counter()-started,'preparation':content}))
-sys.argv=['benchmark',f'scale-{factor}-{case}',case,'warm']
+sys.argv=['benchmark',f'scale-{factor}-{case}',case,'cold']
 runpy.run_path('/evaluation/benchmark.py',run_name='__main__')
