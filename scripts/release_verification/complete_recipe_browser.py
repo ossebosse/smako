@@ -423,6 +423,10 @@ def run_case(browser, engine, mobile, personal, args):
                 servings_id=f"{category}-servings" if personal else "servings" if category=="dinner" else f"meal-{category}-servings"
                 if personal or category!="dinner":page.locator('#'+count_id).fill(str(meal["count"]))
                 else:page.locator('#'+count_id).select_option(str(meal["count"]))
+                if meal["count"] == 0:
+                    # The ordinary form disables irrelevant fields. Setting the
+                    # count is sufficient; do not edit disabled zero-slot choices.
+                    continue
                 page.locator('#'+servings_id).fill(str(meal["servings"]))
                 choices=meal.get("recipe_choices",{})
                 if category=="dinner":page.locator("#meal-dinner-level").select_option(choices.get("dinner_level","simple"))

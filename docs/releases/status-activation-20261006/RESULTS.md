@@ -19,3 +19,22 @@ Priserna kom från faktiskt publicerad PriceUniverse `price-universe:387cc368662
 Funktionsåtergång är flagga av på samma image enligt [dd12-anvisningen](../status-reconnect-20261006/ACTIVATION.md), med senaste data kvar. Den har inte aktiverats eftersom inget kvarstående funktionsfel kräver den. Ingen äldre binäråtergång eller databasåterställning ingår. Etapp B är separat utveckling och har inte installerats.
 
 [Maskinbevis](EVIDENCE.json). Fulla prov, skärmbilder och råa fel bevaras privat under `.local/meal-library-20261006/activation/`; Compose/env/backup finns privat på servern. Inga cookies, token eller privata planer committas. Ingen Git-push.
+
+## Senare driftobservation – separat från aktiveringsprovet
+
+Den 6 oktober blev serverdisken full och `/ready` rapporterade att planlagringen
+inte kunde nås. Utvecklingens nya byggmappar bidrog till utrymmesbehovet;
+exakt fördelning av diskökningen över andra skrivare har inte belagts.
+Ingen ny app installerades och ingen databas återställdes.
+
+Efter ett separat uttryckligt godkännande arkiverades endast denna etapps tolv
+nya `build-*`-mappar till D:. Samtliga 7 362 filer verifierades mot sina hashvärden
+innan serverkopiorna frigjordes. Arkivet behålls; äldre underlag, imagen och
+användarlagringen bevarades. Cirka 253 MB blev tillgängliga. Därefter svarar
+planlagringen åter `ok`. [Arkiv- och omfattningsbevis](STORAGE-RECOVERY.json).
+
+Beta är ändå **inte ready**: två obligatoriska Willys-kontexter är nu stale
+enligt oförändrad 48-timmarsgräns. Den aktiva imagen, BUILD_ID och receptflaggan
+är fortsatt dd12 enligt ovan. Detta är senaste läget, inte en återkallelse av
+de tidigare knappflödesproven. Ingen ny insamling, schemauppdatering eller
+försvagad färskhetskontroll har gjorts. [Tidsstämplad observation](LATEST-STATE.json).
