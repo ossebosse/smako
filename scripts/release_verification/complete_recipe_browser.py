@@ -482,7 +482,15 @@ def run_case(browser, engine, mobile, personal, args):
             page.locator(".complete-recipe-content:visible").first.screenshot(path=str(target / "first-recipe.png"))
             page.locator(".complete-recipe-content:visible").first.evaluate("el=>el.scrollIntoView({block:'start',behavior:'instant'})")
             page.screenshot(path=str(target / "first-recipe-viewport.png"))
-        page.locator("#plan-content" if personal else "#menu-section").screenshot(path=str(target / "recipes.png"))
+        recipe_view=page.locator("#plan-content" if personal else "#menu-section")
+        if recipe_view.bounding_box()['height'] > 30000:
+            report['recipe_screenshot_scope']='viewport plus every individual recipe; full DOM checked separately'
+            page.screenshot(path=str(target / "recipes-viewport.png"))
+            for index,card in enumerate(page.locator('.complete-recipe-content:visible').all()):
+                card.screenshot(path=str(target / f"recipe-{index+1}.png"))
+        else:
+            report['recipe_screenshot_scope']='complete result element'
+            recipe_view.screenshot(path=str(target / "recipes.png"))
         if personal:
             page.get_by_role("button", name="Öppna inköpslistan", exact=True).click()
         report["shopping_text"] = page.locator("#shopping-content" if personal else "#shopping-section").inner_text()
