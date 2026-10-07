@@ -101,6 +101,7 @@ def run(
     activate=remote_activate,
     now=None,
     delay=sleep,
+    capacity_check=None,
 ):
     now = now or datetime.now(UTC)
     workspace = workspace.resolve()
@@ -154,6 +155,8 @@ def run(
             if not demand_enabled and receipt.get("collection_day") == day:
                 log("already_delivered", sha256_prefix=receipt["sha256"][:12])
                 return 0
+            if capacity_check is not None:
+                log("receiver_storage_preflight", **capacity_check())
             candidate = None
             # Resume complete unpublished runs; never restamp old observations.
             for path in sorted(
@@ -175,6 +178,8 @@ def run(
                     candidate = path
                     break
             if candidate is None:
+                from grocery_data.relay_storage import collection_capacity
+                log("storage_preflight", **collection_capacity(workspace))
                 log("collection_start")
                 result = asyncio.run(collect(SimpleNamespace(workspace=workspace, municipality=municipality)))
                 if result["status"] != "complete":
@@ -202,12 +207,16 @@ def run(
                 bytes=candidate.stat().st_size,
             )
             transfer_start = monotonic()
+            if capacity_check is not None:
+                log("receiver_storage_preflight_before_delivery", **capacity_check())
             transient_retry(
                 lambda: push(SimpleNamespace(artifact=candidate, host="smako")), log, delay=delay
             )
             log("upload_pass", seconds=round(monotonic() - transfer_start, 3))
             import_start = monotonic()
             log("server_import_start")
+            if capacity_check is not None:
+                log("receiver_storage_preflight_before_import", **capacity_check())
             server = transient_retry(lambda: activate(digest), log, delay=delay)
             log("server_activation_pass", seconds=round(monotonic() - import_start, 3), **server)
             observed = verified.manifest.observed_from
@@ -235,7 +244,9 @@ def run(
         return 0
     except Exception as exc:  # noqa: BLE001 - redact at the operator boundary
         from grocery_data.app.services.failure_diagnostics import failure_details
-        log("task_failed", error_type=type(exc).__name__, causes=failure_details(exc))
+        log("task_failed", error_type=type(exc).__name__, causes=failure_details(exc),
+            storage=getattr(exc, "storage_status", None) or
+                (exc.status() if hasattr(exc, "preflight") else None))
         return 1
     finally:
         log("task_end", seconds=round(monotonic() - started, 3))
@@ -247,10 +258,13 @@ def main():
     parser.add_argument("--config", type=Path)
     args = parser.parse_args()
     transport = load_transport(args.config)
+    from grocery_data.relay_storage import configure_storage, receiver_capacity
+    configure_storage(args.workspace)
     return run(args.workspace,
         push=lambda a: source_cli.push(SimpleNamespace(
             artifact=a.artifact, host=transport.ssh_host, transport=transport)),
-        activate=lambda digest: remote_activate(digest, transport))
+        activate=lambda digest: remote_activate(digest, transport),
+        capacity_check=lambda: receiver_capacity(transport, args.workspace))
 
 
 if __name__ == "__main__":

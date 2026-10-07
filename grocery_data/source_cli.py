@@ -19,7 +19,7 @@ from grocery_data.app.connectors.willys.client import WillysClient
 from grocery_data.app.connectors.willys.connector import WillysConnector
 from grocery_data.app.domain import GeographicArea
 from grocery_data.app.services.collector import GroceryCollector
-from grocery_data.app.services.durable_files import atomic_write_bytes
+from grocery_data.app.services.durable_files import atomic_write_bytes, require_free_space
 from grocery_data.app.services.manual_refresh_operations import RefreshRunLock
 from grocery_data.app.services.prepared_universe_activation import PreparedUniverseArtifactStore
 from grocery_data.app.services.raw_storage import FilesystemRawSnapshotStore
@@ -54,6 +54,8 @@ async def collect(args):
     root = args.workspace.resolve()
     root.mkdir(parents=True, exist_ok=True)
     with RefreshRunLock(root / "local-collection.lock"):
+        from grocery_data.relay_storage import collection_capacity
+        collection_capacity(root)
         run = root / "runs" / f"{datetime.now(UTC):%Y%m%dT%H%M%SZ}-{uuid4().hex}"
         run.mkdir(parents=True, exist_ok=False)
         database = run / "candidate.sqlite3"
@@ -82,6 +84,7 @@ async def collect(args):
                 raise SourceArtifactError("bounded local collection stopped")
             count += 1
             if count % 100 == 0:
+                require_free_space(run, required_bytes=8 * 1024**2, reserve_bytes=64 * 1024**2)
                 atomic_write_bytes(run / "progress.json", json.dumps({"requests": count, "request_budget": request_budget,
                     "runtime_seconds": round(monotonic()-started, 3), "status": "collecting"}).encode())
 
@@ -177,7 +180,7 @@ def push(args):
 from hashlib import sha256
 from uuid import uuid4
 import base64, os
-from grocery_data.app.services.durable_files import _fsync_directory
+from grocery_data.app.services.durable_files import _fsync_directory, require_free_space
 def require(condition, message):
  if not condition: raise ValueError(message)
 payload=base64.b64decode({encoded!r},validate=True)
@@ -193,6 +196,7 @@ require(not target.is_symlink(), 'inbox artifact cannot be a symlink')
 if target.exists():
  require(sha256(target.read_bytes()).hexdigest()=={digest!r}, 'inbox collision')
 else:
+ require_free_space(root,required_bytes=len(payload),reserve_bytes=512*1024*1024)
  temporary=root/('.'+uuid4().hex+'.partial')
  try:
   fd=os.open(temporary,os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600)

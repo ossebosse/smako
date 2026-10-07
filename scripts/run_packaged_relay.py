@@ -18,5 +18,23 @@ if "--check-install" in sys.argv:
     print(json.dumps({"status": "PASS", "commit": manifest["commit"], "files": len(manifest["files"]),
                       "python": sys.version, "relay_module": local_relay.__file__, "network_calls": 0}))
 else:
+    # Validate actual writable temporary storage before importing collection code.
+    from grocery_data.relay_storage import configure_storage, storage_probe
+    workspace = Path(sys.argv[sys.argv.index('--workspace') + 1])
+    configure_storage(workspace)
+    probe_request = workspace / 'storage-preflight.request'
+    if probe_request.exists():
+        import os
+        from datetime import UTC, datetime
+
+        from grocery_data.app.services.durable_files import atomic_write_bytes
+        from grocery_data.app.services.manual_refresh_operations import RefreshRunLock
+        with RefreshRunLock(workspace / 'local-workflow.lock'):
+            os.replace(probe_request, workspace / 'storage-preflight.consumed')
+            result = storage_probe(workspace)
+            result.update(commit=manifest['commit'], checked_at=datetime.now(UTC).isoformat())
+            atomic_write_bytes(workspace / 'storage-preflight.json', json.dumps(result).encode())
+            print(json.dumps(result))
+        raise SystemExit(0)
     from grocery_data.local_relay import main
     raise SystemExit(main())
