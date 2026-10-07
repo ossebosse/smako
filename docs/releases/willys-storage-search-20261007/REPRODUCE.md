@@ -18,6 +18,12 @@ på den verifierade D:-placerade Docker-disken.
   föregående etapps `scale.py` och P2-innehåll, 176/352/880 poster.
   Syntetiska tillägg är belastningsdata, inte kvalificerade nya recept.
 
+INPUTS.json binder samtliga begäranden till föregående etapps JSON:
+alla tio är exakt lika som objekt. Skalgeneratorns Git-objekt använder LF
+och den körda Windows-kopian CRLF; efter enbart denna radslutsnormalisering
+är källan identisk. Båda bytehasharna bevaras. Ingen generatorlogik eller
+syntetisk mängdregel har ändrats.
+
 ## Körväg
 
 Den versionshanterade harnessen är
