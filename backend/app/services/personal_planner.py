@@ -54,7 +54,11 @@ from app.services.personal_store import available_items, consumed_demands, deman
 from app.services.product_search import ProductSearchRequest
 from app.services.recipe_candidate_generator import DeterministicRecipeCandidateGenerator
 from app.services.recipe_candidate_validator import recipe_id
-from app.services.recipe_computation_cache import RecipeComputationCache, recipe_value
+from app.services.recipe_computation_cache import (
+    RecipeComputationCache,
+    recipe_value,
+    remember_bounded,
+)
 from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
@@ -224,11 +228,11 @@ class PersonalPlanner:
         # request's estimate policy. Nothing survives into another request or
         # account. Bound the cache even for unusually large edit inputs.
         self.nutrition_cache = OrderedDict()
-        self.candidate_sequences = {}
-        self.normalized_recipe_rows = {}
-        self.qualified_nutrition_candidates = {}
-        self.slot_nutrition_cache = {}
-        self.clean_recipe_cache = {}
+        self.candidate_sequences = OrderedDict()
+        self.normalized_recipe_rows = OrderedDict()
+        self.qualified_nutrition_candidates = OrderedDict()
+        self.slot_nutrition_cache = OrderedDict()
+        self.clean_recipe_cache = OrderedDict()
         self.recipe_computations = RecipeComputationCache()
         self.queries = {}
         from app.services.planning_diagnostics import PlanningDiagnostics
@@ -661,6 +665,7 @@ class PersonalPlanner:
                      self.user.cache_identity,
                      self.request.recipe_preferences.model_dump_json() if self.request.recipe_preferences else None)
         if cache_key in self.clean_recipe_cache:
+            self.clean_recipe_cache.move_to_end(cache_key)
             return self.clean_recipe_cache[cache_key]
         if self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
             from app.services.recipe_library import matches_meal
@@ -696,9 +701,7 @@ class PersonalPlanner:
                 organic_animals=self.spec.organic_animals or meal.organic_animals,
                 recipe=recipe,
             )
-        if len(self.clean_recipe_cache) >= 512:
-            self.clean_recipe_cache.clear()
-        self.clean_recipe_cache[cache_key] = recipe
+        remember_bounded(self.clean_recipe_cache, cache_key, recipe, 512)
         return recipe
 
     def _recipe_id(self, recipe):
@@ -721,10 +724,10 @@ class PersonalPlanner:
                 for source in recipe.ingredients:
                     sources.setdefault(canonicalize_ingredient_name(source.name), source)
                 normalized = self.service.normalizer.normalize_and_aggregate([recipe])
-                if len(self.normalized_recipe_rows) >= 512:
-                    self.normalized_recipe_rows.clear()
-                self.normalized_recipe_rows[normalized_key] = tuple(
-                    (ingredient, sources.get(ingredient.canonical_name)) for ingredient in normalized)
+                remember_bounded(self.normalized_recipe_rows, normalized_key, tuple(
+                    (ingredient, sources.get(ingredient.canonical_name)) for ingredient in normalized), 512)
+            else:
+                self.normalized_recipe_rows.move_to_end(normalized_key)
             for ingredient, source_ingredient in self.normalized_recipe_rows[normalized_key]:
                 rows.append(
                     {
@@ -887,6 +890,7 @@ class PersonalPlanner:
                                      row["unit"], frozenset(requested))
                 cached_qualification = self.qualified_nutrition_candidates.get(qualification_key)
                 if cached_qualification is not None and cached_qualification[0] is resolved:
+                    self.qualified_nutrition_candidates.move_to_end(qualification_key)
                     verified = cached_qualification[1]
                 else:
                     verified = [
@@ -910,9 +914,8 @@ class PersonalPlanner:
                             for k in requested
                         )
                     ]
-                    if len(self.qualified_nutrition_candidates) >= 4096:
-                        self.qualified_nutrition_candidates.clear()
-                    self.qualified_nutrition_candidates[qualification_key] = (resolved, verified)
+                    remember_bounded(self.qualified_nutrition_candidates, qualification_key,
+                                     (resolved, verified), 4096)
                 verified_ids = {i for i, _ in verified}
                 for i, _ in resolved:
                     product = self.prepared.universe.products[i]
@@ -1031,9 +1034,11 @@ class PersonalPlanner:
             # set cache can reuse identical subproblems across weekly baskets.
             # Holding the tuple prevents ID reuse; nothing crosses requests.
             sequence_key = tuple(id(candidate) for candidate in candidates)
-            if len(self.candidate_sequences) >= 4096:
-                self.candidate_sequences.clear()
-            candidate_map[key] = self.candidate_sequences.setdefault(sequence_key, tuple(candidates))
+            if sequence_key not in self.candidate_sequences:
+                remember_bounded(self.candidate_sequences, sequence_key, tuple(candidates), 4096)
+            else:
+                self.candidate_sequences.move_to_end(sequence_key)
+            candidate_map[key] = self.candidate_sequences[sequence_key]
             group_rows = [row for row in rows if row["demand_key"] in group["demand_keys"]]
             for c in candidates:
                 if (c.store_id, c.product_id) not in self.product_trace.products:
@@ -1833,9 +1838,9 @@ class PersonalPlanner:
                 except PolicyConflict as exc:
                     # Store values, not exceptions retaining whole search stacks.
                     cached = (None, (str(exc), exc.code, exc.stage))
-                if len(self.slot_nutrition_cache) >= 2048:
-                    self.slot_nutrition_cache.clear()
-                self.slot_nutrition_cache[key] = cached
+                remember_bounded(self.slot_nutrition_cache, key, cached, 2048)
+            else:
+                self.slot_nutrition_cache.move_to_end(key)
             value, error = cached
             if error:
                 raise PolicyConflict(error[0], code=error[1], stage=error[2])

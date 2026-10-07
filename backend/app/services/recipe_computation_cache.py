@@ -1,9 +1,19 @@
 """Bounded request-local reuse of pure computations on exact recipe values."""
 
+from collections import OrderedDict
 from dataclasses import dataclass, field
 
 from app.models.recipe import Recipe
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
+
+
+def remember_bounded(mapping, key, value, limit):
+    """Retain frequently used pure work without raising its existing bound."""
+    if key not in mapping and len(mapping) >= limit:
+        mapping.popitem(last=False)
+    mapping[key] = value
+    mapping.move_to_end(key)
+    return value
 
 
 def recipe_value(recipe: Recipe | None):
@@ -42,11 +52,18 @@ class RecipeComputationCache:
     """Owned by one planner; never cache prices, nutrition or user decisions."""
 
     def __init__(self, *, limit=1024):
+        if limit < 1:
+            raise ValueError("Recipe computation cache limit must be positive")
         self.limit = limit
-        self.values = {}
-        self._identities = {}
-        self._interned = {}
-        self._forms = {}
+        self.values = OrderedDict()
+        self._identities = OrderedDict()
+        self._interned = OrderedDict()
+        self._forms = OrderedDict()
+
+    def _put(self, mapping, key, value):
+        # An additional recipe must not flush every frequently reused prefix.
+        # The old bounds remain unchanged; evicted pure work is recomputed.
+        remember_bounded(mapping, key, value, self.limit)
 
     def key(self, recipe):
         # Always take a fresh snapshot of mutable lists and the form dictionary.
@@ -55,13 +72,12 @@ class RecipeComputationCache:
         snapshot = recipe_value(recipe)
         previous = self._identities.get(id(recipe))
         if previous is not None and previous[0] is recipe and previous[1] == snapshot:
+            self._identities.move_to_end(id(recipe))
             return previous[2]
         key = ExactRecipeKey(snapshot)
-        if len(self._identities) >= self.limit or len(self._interned) >= self.limit:
-            self._identities.clear()
-            self._interned.clear()
-        key = self._interned.setdefault(key, key)
-        self._identities[id(recipe)] = (recipe, snapshot, key)
+        key = self._interned.get(key, key)
+        self._put(self._interned, key, key)
+        self._put(self._identities, id(recipe), (recipe, snapshot, key))
         return key
 
     def forms_for(self, recipe, canonical_name):
@@ -73,9 +89,9 @@ class RecipeComputationCache:
                 name = canonicalize_ingredient_name(ingredient.name)
                 grouped.setdefault(name, []).append(
                     (ingredient.form, tuple(ingredient.product_requirements or ())))
-            if len(self._forms) >= self.limit:
-                self._forms.clear()
-            self._forms[key] = {name: tuple(rows) for name, rows in grouped.items()}
+            self._put(self._forms, key, {name: tuple(rows) for name, rows in grouped.items()})
+        else:
+            self._forms.move_to_end(key)
         return self._forms[key].get(canonical_name, ())
 
     def get(self, recipe, compute):
@@ -84,7 +100,7 @@ class RecipeComputationCache:
         key = (compute, self.key(recipe))
         if key not in self.values:
             value = compute(recipe)
-            if len(self.values) >= self.limit:
-                self.values.clear()
-            self.values[key] = value
+            self._put(self.values, key, value)
+        else:
+            self.values.move_to_end(key)
         return self.values[key]

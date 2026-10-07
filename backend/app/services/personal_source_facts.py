@@ -15,7 +15,7 @@ import sqlite3
 import unicodedata
 from collections import defaultdict
 from copy import deepcopy
-from dataclasses import asdict, replace
+from dataclasses import fields, is_dataclass, replace
 from functools import lru_cache
 from pathlib import Path
 from threading import RLock
@@ -372,19 +372,31 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
     )
 
 
+def _fact_json(value):
+    # JSON walks the nested values itself. asdict would first deep-copy every
+    # source document, even though hashing never mutates or retains that tree.
+    if is_dataclass(value) and not isinstance(value, type):
+        return {field.name: getattr(value, field.name) for field in fields(value)}
+    raise TypeError(f"Object of type {type(value).__name__} is not JSON serializable")
+
+
 def facts_version(facts):
-    return (
-        FACTS_VERSION
-        + ":"
-        + hashlib.sha256(
-            json.dumps(
-                [[list(k), asdict(v)] for k, v in sorted(facts.items())],
-                sort_keys=True,
-                ensure_ascii=False,
-                separators=(",", ":"),
-            ).encode()
-        ).hexdigest()
-    )
+    """Hash the exact previous canonical bytes without a second whole fact tree.
+
+    No value is memoized: changed fields, negatives and newly added products
+    always participate. Streaming the outer list bounds temporary memory while
+    retaining the existing fact version, including its whitespace/Unicode rules.
+    """
+    digest = hashlib.sha256()
+    digest.update(b"[")
+    for position, (key, fact) in enumerate(sorted(facts.items())):
+        if position:
+            digest.update(b",")
+        digest.update(json.dumps([list(key), fact], default=_fact_json,
+                                 sort_keys=True, ensure_ascii=False,
+                                 separators=(",", ":")).encode())
+    digest.update(b"]")
+    return FACTS_VERSION + ":" + digest.hexdigest()
 
 
 def identity_variant_conflicts(products):

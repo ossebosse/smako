@@ -131,6 +131,31 @@ def test_recipe_reuse_is_bounded_and_separate_between_planners():
     assert len(second.values) == 1
 
 
+def test_expanding_library_keeps_hot_prefix_without_raising_cache_bounds():
+    recipe = authored()
+    cache = RecipeComputationCache(limit=4)
+    calls = []
+
+    def compute(value):
+        calls.append(value.name)
+        return recipe_id(value)
+
+    expected = recipe_id(recipe)
+    for index in range(30):
+        assert cache.get(recipe, compute) == expected
+        candidate = recipe.model_copy(update={"name": f"independent-base-{index}"})
+        assert cache.get(candidate, compute) == recipe_id(candidate)
+        cache.forms_for(recipe, recipe.ingredients[0].canonical_name)
+        cache.forms_for(candidate, recipe.ingredients[0].canonical_name)
+        for mapping in (cache.values, cache._identities, cache._interned, cache._forms):
+            assert len(mapping) <= 4
+    assert calls.count(recipe.name) == 1
+    # Reusing the hot prefix still compares its entire mutable current value.
+    recipe.instructions.append("Explicit instruction change, new computation required.")
+    assert cache.get(recipe, compute) == recipe_id(recipe)
+    assert calls.count(recipe.name) == 2
+
+
 def test_clean_cache_reuses_only_validated_content_and_current_preferences(monkeypatch):
     prefs = RecipePreferences(mode="complete", cuisines=["greek"])
     request = PlanRequest(recipes=1, recipe_preferences=prefs)
