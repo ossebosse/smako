@@ -1,0 +1,32 @@
+{
+  "warnings_request_ids": [
+    "077c0863-ad45-4185-b212-26b63c1d1b07",
+    "1144c3f4-bea7-4647-850d-8c299f11a6e3",
+    "417d5087-359f-4124-91cf-6471af703465",
+    "c9ef1b8f-ad2f-47a9-8963-89d0eef3c1ab",
+    "f7cb86a4-cbf5-4e78-8470-8a3bd3892767"
+  ],
+  "explicitly_repeated_start_request_ids": [
+    "077c0863-ad45-4185-b212-26b63c1d1b07",
+    "1144c3f4-bea7-4647-850d-8c299f11a6e3",
+    "417d5087-359f-4124-91cf-6471af703465",
+    "c9ef1b8f-ad2f-47a9-8963-89d0eef3c1ab",
+    "f7cb86a4-cbf5-4e78-8470-8a3bd3892767"
+  ],
+  "all_match_explicit_duplicate_starts": true,
+  "same_warning_reproduced": {
+    "injected": true,
+    "scope": "Isolated in-memory exact existing telemetry function, repeated request ID",
+    "rows": 1,
+    "errors": [
+      {
+        "exception": "IntegrityError",
+        "sqlite_code": "SQLITE_CONSTRAINT_UNIQUE"
+      }
+    ],
+    "raw_warning": "{\"event\":\"telemetry_persist_failed\",\"request_id\":\"controlled-duplicate-request\"}\n",
+    "no_app_change": true
+  },
+  "historical_exception_not_directly_logged": true,
+  "interpretation": "Exact warning IDs match intentionally duplicated accepted start requests; unique request_id collision reproduced in isolated existing telemetry implementation. These warnings are retained separately from HTTP 500/503 SQLite lock failures."
+}

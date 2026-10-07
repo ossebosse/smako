@@ -53,7 +53,8 @@
         }
       },
       "raw_report": "browser\\after-00-chromium-public-main-none\\chromium-mobile-public\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-01-chromium-public-main-none",
@@ -106,7 +107,8 @@
         }
       },
       "raw_report": "browser\\after-01-chromium-public-main-none\\chromium-mobile-public\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-02-webkit-personal-main-none",
@@ -159,7 +161,8 @@
         }
       },
       "raw_report": "browser\\after-02-webkit-personal-main-none\\webkit-mobile-personal\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-03-chromium-public-crafted-delayed-reload",
@@ -253,7 +256,8 @@
         }
       },
       "raw_report": "browser\\after-03-chromium-public-crafted-delayed-reload\\chromium-mobile-public\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-04-webkit-personal-crafted-reset",
@@ -339,7 +343,8 @@
         }
       },
       "raw_report": "browser\\after-04-webkit-personal-crafted-reset\\webkit-mobile-personal\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-05-chromium-public-combined-lost-start",
@@ -422,7 +427,8 @@
         }
       },
       "raw_report": "browser\\after-05-chromium-public-combined-lost-start\\chromium-mobile-public\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-06-webkit-personal-combined-hidden",
@@ -490,7 +496,8 @@
         }
       },
       "raw_report": "browser\\after-06-webkit-personal-combined-hidden\\webkit-mobile-personal\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-07-chromium-personal-snack-away",
@@ -562,7 +569,8 @@
         }
       },
       "raw_report": "browser\\after-07-chromium-personal-snack-away\\chromium-mobile-personal\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-08-webkit-public-breakfast-delayed-reload",
@@ -656,7 +664,8 @@
         }
       },
       "raw_report": "browser\\after-08-webkit-public-breakfast-delayed-reload\\webkit-mobile-public\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "after-09-chromium-public-simple-none",
@@ -709,7 +718,62 @@
         }
       },
       "raw_report": "browser\\after-09-chromium-public-simple-none\\chromium-mobile-public\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
+    },
+    {
+      "label": "after-legacy-flag-off",
+      "browser_case": "chromium-mobile-public",
+      "outcome": "PASS",
+      "build": "week-search-54cb2e8159a1",
+      "generation": {
+        "seconds": 40.75,
+        "status": 201,
+        "job_count": 1,
+        "reloaded_during_job": true,
+        "browser_network_interrupted_seconds": 0,
+        "longer_than_minute": false,
+        "expensive_post_count": 1,
+        "all_status_gets_under_10_seconds": true,
+        "unavailable_transport_bodies": 0,
+        "click_to_render_seconds": 40.843
+      },
+      "one_heavy_calculation": [
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 3.9402000766131096e-05,
+          "memory_cleanup_seconds": 0.46521646399924066,
+          "calculation_seconds": 38.45807424200029,
+          "cpu_seconds": 38.479701399999996,
+          "peak_rss_kib": 1188328,
+          "job_id": "a976c0441de648abbd4b0f1dcce61c23",
+          "request_id": "7e4bb60d-8e95-4b7e-be6d-74f1784edc87",
+          "recorded_utc": "2026-10-07T11:57:37.182067+00:00"
+        }
+      ],
+      "injected_events": [],
+      "page_errors": [],
+      "network_failures": [],
+      "revision_hashes": {
+        "1": "642413d2aad0823b8a2dea473f25526bc4c41d5d4fdc3f783034178a8565e7d2"
+      },
+      "other_owner_status": 403,
+      "other_owner_job_statuses": [
+        404
+      ],
+      "loaded_assets": {
+        "/static/complete-recipes.js": {
+          "url": "http://127.0.0.1:18128/static/complete-recipes.js?v=meal-library-1",
+          "sha256": "c5d7a4e27a8b23a52499fedc73d2d688169e2c89f4b782d86eafd98a4644cd37"
+        },
+        "/static/app.js": {
+          "url": "http://127.0.0.1:18128/static/app.js?v=status-reconnect-1",
+          "sha256": "291e3ffd415597be5de5bf8339191936afabd1dd84f116a66a6368d9a813a9a9"
+        }
+      },
+      "raw_report": "browser\\after-legacy-flag-off\\chromium-mobile-public\\report.json",
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 30
     },
     {
       "label": "before-00-chromium-public-main-none",
@@ -762,7 +826,8 @@
         }
       },
       "raw_report": "browser\\before-00-chromium-public-main-none\\chromium-mobile-public\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "before-01-chromium-public-main-none",
@@ -815,7 +880,8 @@
         }
       },
       "raw_report": "browser\\before-01-chromium-public-main-none\\chromium-mobile-public\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     },
     {
       "label": "before-02-webkit-personal-main-none",
@@ -868,9 +934,9 @@
         }
       },
       "raw_report": "browser\\before-02-webkit-personal-main-none\\webkit-mobile-personal\\report.json",
-      "physical_device_test": false
+      "physical_device_test": false,
+      "sqlite_timeout_seconds": 5
     }
   ],
-  "correlation": "One admission factory record for each exact submitted request ID; status GETs and saved reads are not calculations.",
-  "qualification": "in_progress"
+  "correlation": "One admission factory record for each exact submitted request ID; status GETs and saved reads are not calculations."
 }

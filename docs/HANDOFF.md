@@ -1,5 +1,14 @@
 # 2026-10-07: D-lagring och veckosökning – pågående, separata spår
 
+Uppdatering 12:00 UTC: servern har fortfarande 0 byte tillgängligt och
+Windows-uppgiften pekar fortsatt på bdc9. A är inte återställd. B:s
+paketerade huvud-/webbläsar-/profilprov är utförda; längre sekventiell
+1×/2×/5×-matris pågår via `.local/willys-storage-search-20261007/remaining_sequence.py`.
+Den stoppar vid fel och kör aldrig parallella tunga prov. Slutlig runtime är
+fortfarande `54cb2e8159a1`; senare commits gäller dokumentation och striktare
+testverktyg. Se [testläget](releases/willys-storage-search-20261007/TESTS.md)
+för bevarade SQLite-/testfel, korrigerad isolerad SQLite-väntetid och omkörningar.
+
 Arbetsgren `feature/willys-storage-search-20261007`. Betan kör fortsatt rätt
 dd12-image; ingen måltids-/prestandakod har aktiverats. Vid ny kontroll
 7 oktober var serverns rotvolym åter full (0 byte tillgängligt), `/ready`
