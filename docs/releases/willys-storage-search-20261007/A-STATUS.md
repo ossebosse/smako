@@ -107,6 +107,11 @@ verklig ny leverans/import/publicering är ännu inte utförd.
 
 ## Konkreta blockerare
 
+Återkontroll 2026-10-07 12:00:50 UTC: samma servervolym har fortfarande
+0 byte tillgängligt. Windows-uppgiften är fortsatt Ready och pekar på bdc9.
+Ett separat [retentionförslag med läsinventering](RETENTION-DRY-RUN.md)
+redovisar filantal och byte; inga objekt är godkända för radering.
+
 1. Servern behöver ledigt utrymme. Ingen bred radering eller Docker-prune utförs.
 2. Windows nekade `Set-ScheduledTask` med **Åtkomst nekad**. Hela uppgifts-XML
    är verifierat oförändrad; ordinarie starter är fortsatt aktiverade.

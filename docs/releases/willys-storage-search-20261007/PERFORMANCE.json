@@ -1,0 +1,1861 @@
+{
+  "qualification": "in_progress",
+  "runtime": "54cb2e8159a126de26fa11cb1d393dc275238fd3",
+  "baseline": "fd2cfda5490ac93295e6a2cef6b6b8408497f89e",
+  "cpu_limit": 2,
+  "memory_limit_bytes": 3221225472,
+  "historical_clock": "2026-10-04T07:19:16.028059+00:00",
+  "groups": [
+    {
+      "side": "after",
+      "factor": "0",
+      "case": "main",
+      "mode": "cold",
+      "n": 3,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            90.0718392699996,
+            90.99547388600058,
+            91.4883217659999
+          ],
+          "median": 90.99547388600058,
+          "min": 90.0718392699996,
+          "max": 91.4883217659999
+        },
+        "facts_seconds": {
+          "raw": [
+            15.496328226999594,
+            15.23859684099989,
+            15.999441322000166
+          ],
+          "median": 15.496328226999594,
+          "min": 15.23859684099989,
+          "max": 15.999441322000166
+        },
+        "planner_seconds": {
+          "raw": [
+            74.38747704900015,
+            75.53185818099973,
+            75.28848234900033
+          ],
+          "median": 75.28848234900033,
+          "min": 74.38747704900015,
+          "max": 75.53185818099973
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.18802939399984098,
+            0.22501486400051363,
+            0.20039379500030918
+          ],
+          "median": 0.20039379500030918,
+          "min": 0.18802939399984098,
+          "max": 0.22501486400051363
+        },
+        "universe_seconds": {
+          "raw": [
+            13.78667135700016,
+            13.8394455990001,
+            13.547035146999406
+          ],
+          "median": 13.78667135700016,
+          "min": 13.547035146999406,
+          "max": 13.8394455990001
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            61.007189,
+            61.812059999999995,
+            62.385285
+          ],
+          "median": 61.812059999999995,
+          "min": 61.007189,
+          "max": 62.385285
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            1.1057700000000001,
+            0.9767269999999999,
+            1.150378
+          ],
+          "median": 1.1057700000000001,
+          "min": 0.9767269999999999,
+          "max": 1.150378
+        },
+        "maxrss_kib": {
+          "raw": [
+            1390644,
+            1252192,
+            1390860
+          ],
+          "median": 1390644,
+          "min": 1252192,
+          "max": 1390860
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1410998272,
+            1279737856,
+            1410596864
+          ],
+          "median": 1410596864,
+          "min": 1279737856,
+          "max": 1410998272
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "after-main-cold-1",
+          "wall_seconds": 111.22595170000568,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        },
+        {
+          "trial": "after-main-cold-2",
+          "wall_seconds": 111.02498119999655,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        },
+        {
+          "trial": "after-main-cold-3",
+          "wall_seconds": 111.15818759985268,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "after-main-cold-1",
+        "after-main-cold-2",
+        "after-main-cold-3"
+      ]
+    },
+    {
+      "side": "after",
+      "factor": "0",
+      "case": "main",
+      "mode": "persistent",
+      "n": 1,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            54.73991406999994
+          ],
+          "median": 54.73991406999994,
+          "min": 54.73991406999994,
+          "max": 54.73991406999994
+        },
+        "facts_seconds": {
+          "raw": [
+            8.190917357000217
+          ],
+          "median": 8.190917357000217,
+          "min": 8.190917357000217,
+          "max": 8.190917357000217
+        },
+        "planner_seconds": {
+          "raw": [
+            46.35551664099967
+          ],
+          "median": 46.35551664099967,
+          "min": 46.35551664099967,
+          "max": 46.35551664099967
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.19347537100020418
+          ],
+          "median": 0.19347537100020418,
+          "min": 0.19347537100020418,
+          "max": 0.19347537100020418
+        },
+        "universe_seconds": {
+          "raw": [
+            14.202508592999948
+          ],
+          "median": 14.202508592999948,
+          "min": 14.202508592999948,
+          "max": 14.202508592999948
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            53.721427000000006
+          ],
+          "median": 53.721427000000006,
+          "min": 53.721427000000006,
+          "max": 53.721427000000006
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.815783
+          ],
+          "median": 0.815783,
+          "min": 0.815783,
+          "max": 0.815783
+        },
+        "maxrss_kib": {
+          "raw": [
+            1342368
+          ],
+          "median": 1342368,
+          "min": 1342368,
+          "max": 1342368
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1361203200
+          ],
+          "median": 1361203200,
+          "min": 1361203200,
+          "max": 1361203200
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "after-main-persistent-1",
+          "wall_seconds": 75.18402739986777,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "after-main-persistent-1"
+      ]
+    },
+    {
+      "side": "after",
+      "factor": "0",
+      "case": "main",
+      "mode": "warm",
+      "n": 3,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            47.666573534000236,
+            48.75464419199943,
+            48.38970146799966
+          ],
+          "median": 48.38970146799966,
+          "min": 47.666573534000236,
+          "max": 48.75464419199943
+        },
+        "facts_seconds": {
+          "raw": [
+            3.8573620590004793,
+            4.42352362299971,
+            3.8103563410004426
+          ],
+          "median": 3.8573620590004793,
+          "min": 3.8103563410004426,
+          "max": 4.42352362299971
+        },
+        "planner_seconds": {
+          "raw": [
+            43.61473782400026,
+            44.136626322000666,
+            44.29488527600006
+          ],
+          "median": 44.136626322000666,
+          "min": 43.61473782400026,
+          "max": 44.29488527600006
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.19447035099983623,
+            0.1944911470000079,
+            0.28445724999983213
+          ],
+          "median": 0.1944911470000079,
+          "min": 0.19447035099983623,
+          "max": 0.28445724999983213
+        },
+        "universe_seconds": {
+          "raw": [
+            13.811615585999789,
+            13.811615585999789,
+            13.811615585999789
+          ],
+          "median": 13.811615585999789,
+          "min": 13.811615585999789,
+          "max": 13.811615585999789
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            47.143326,
+            48.25344099999998,
+            47.820683
+          ],
+          "median": 47.820683,
+          "min": 47.143326,
+          "max": 48.25344099999998
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.3154810000000001,
+            0.28770300000000004,
+            0.2758530000000001
+          ],
+          "median": 0.28770300000000004,
+          "min": 0.2758530000000001,
+          "max": 0.3154810000000001
+        },
+        "maxrss_kib": {
+          "raw": [
+            1391496,
+            1391496,
+            1391496
+          ],
+          "median": 1391496,
+          "min": 1391496,
+          "max": 1391496
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1411641344,
+            1420652544,
+            1428987904
+          ],
+          "median": 1420652544,
+          "min": 1411641344,
+          "max": 1428987904
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "after-main-warm-1",
+          "wall_seconds": 254.3618643998634,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "after-main-warm-1",
+        "after-main-warm-1",
+        "after-main-warm-1"
+      ]
+    },
+    {
+      "side": "after",
+      "factor": "1",
+      "case": "main",
+      "mode": "cold",
+      "n": 1,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            79.65760135100027
+          ],
+          "median": 79.65760135100027,
+          "min": 79.65760135100027,
+          "max": 79.65760135100027
+        },
+        "facts_seconds": {
+          "raw": [
+            15.5660357809993
+          ],
+          "median": 15.5660357809993,
+          "min": 15.5660357809993,
+          "max": 15.5660357809993
+        },
+        "planner_seconds": {
+          "raw": [
+            63.901128630999665
+          ],
+          "median": 63.901128630999665,
+          "min": 63.901128630999665,
+          "max": 63.901128630999665
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.19043273799979943
+          ],
+          "median": 0.19043273799979943,
+          "min": 0.19043273799979943,
+          "max": 0.19043273799979943
+        },
+        "universe_seconds": {
+          "raw": [
+            13.763952417999462
+          ],
+          "median": 13.763952417999462,
+          "min": 13.763952417999462,
+          "max": 13.763952417999462
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            61.227278999999996
+          ],
+          "median": 61.227278999999996,
+          "min": 61.227278999999996,
+          "max": 61.227278999999996
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.8879619999999998
+          ],
+          "median": 0.8879619999999998,
+          "min": 0.8879619999999998,
+          "max": 0.8879619999999998
+        },
+        "maxrss_kib": {
+          "raw": [
+            1267280
+          ],
+          "median": 1267280,
+          "min": 1267280,
+          "max": 1267280
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1302372352
+          ],
+          "median": 1302372352,
+          "min": 1302372352,
+          "max": 1302372352
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "after-scale1-cold-1",
+          "wall_seconds": 109.86609599995427,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 10.057653153999127,
+            "original_recipes": 176,
+            "library_recipes": 176,
+            "added_synthetic_recipes": 0
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "after-scale1-cold-1"
+      ]
+    },
+    {
+      "side": "after",
+      "factor": "1",
+      "case": "main",
+      "mode": "warm",
+      "n": 3,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            49.15726130099938,
+            49.16811887399854,
+            48.91047340699879
+          ],
+          "median": 49.15726130099938,
+          "min": 48.91047340699879,
+          "max": 49.16811887399854
+        },
+        "facts_seconds": {
+          "raw": [
+            4.129389801999423,
+            4.052666968998892,
+            4.573566962999394
+          ],
+          "median": 4.129389801999423,
+          "min": 4.052666968998892,
+          "max": 4.573566962999394
+        },
+        "planner_seconds": {
+          "raw": [
+            44.83635441399929,
+            44.91494293100004,
+            44.1424248179992
+          ],
+          "median": 44.83635441399929,
+          "min": 44.1424248179992,
+          "max": 44.91494293100004
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.19151428500117618,
+            0.20050637400163396,
+            0.19447982600104297
+          ],
+          "median": 0.19447982600104297,
+          "min": 0.19151428500117618,
+          "max": 0.20050637400163396
+        },
+        "universe_seconds": {
+          "raw": [
+            13.641070282001238,
+            13.641070282001238,
+            13.641070282001238
+          ],
+          "median": 13.641070282001238,
+          "min": 13.641070282001238,
+          "max": 13.641070282001238
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            48.606481,
+            48.70317999999999,
+            48.316310000000016
+          ],
+          "median": 48.606481,
+          "min": 48.316310000000016,
+          "max": 48.70317999999999
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.3478110000000001,
+            0.251846,
+            0.37575000000000003
+          ],
+          "median": 0.3478110000000001,
+          "min": 0.251846,
+          "max": 0.37575000000000003
+        },
+        "maxrss_kib": {
+          "raw": [
+            1407480,
+            1407480,
+            1407480
+          ],
+          "median": 1407480,
+          "min": 1407480,
+          "max": 1407480
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1429618688,
+            1436516352,
+            1442889728
+          ],
+          "median": 1436516352,
+          "min": 1429618688,
+          "max": 1442889728
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "after-scale1-warm-1",
+          "wall_seconds": 257.9826972000301,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 9.968820918998972,
+            "original_recipes": 176,
+            "library_recipes": 176,
+            "added_synthetic_recipes": 0
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "after-scale1-warm-1",
+        "after-scale1-warm-1",
+        "after-scale1-warm-1"
+      ]
+    },
+    {
+      "side": "after",
+      "factor": "2",
+      "case": "main",
+      "mode": "cold",
+      "n": 1,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            184.3268616940004
+          ],
+          "median": 184.3268616940004,
+          "min": 184.3268616940004,
+          "max": 184.3268616940004
+        },
+        "facts_seconds": {
+          "raw": [
+            16.220957663999798
+          ],
+          "median": 16.220957663999798,
+          "min": 16.220957663999798,
+          "max": 16.220957663999798
+        },
+        "planner_seconds": {
+          "raw": [
+            167.75943555899903
+          ],
+          "median": 167.75943555899903,
+          "min": 167.75943555899903,
+          "max": 167.75943555899903
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.34646437100127514
+          ],
+          "median": 0.34646437100127514,
+          "min": 0.34646437100127514,
+          "max": 0.34646437100127514
+        },
+        "universe_seconds": {
+          "raw": [
+            14.112439989999984
+          ],
+          "median": 14.112439989999984,
+          "min": 14.112439989999984,
+          "max": 14.112439989999984
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            165.630756
+          ],
+          "median": 165.630756,
+          "min": 165.630756,
+          "max": 165.630756
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            1.369281
+          ],
+          "median": 1.369281,
+          "min": 1.369281,
+          "max": 1.369281
+        },
+        "maxrss_kib": {
+          "raw": [
+            1419916
+          ],
+          "median": 1419916,
+          "min": 1419916,
+          "max": 1419916
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1447714816
+          ],
+          "median": 1447714816,
+          "min": 1447714816,
+          "max": 1447714816
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "after-scale2-cold-1",
+          "wall_seconds": 227.83302010013722,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 23.004464181000003,
+            "original_recipes": 176,
+            "library_recipes": 352,
+            "added_synthetic_recipes": 176
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        733.38
+      ],
+      "trials": [
+        "after-scale2-cold-1"
+      ]
+    },
+    {
+      "side": "after",
+      "factor": "2",
+      "case": "main",
+      "mode": "warm",
+      "n": 3,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            155.2520384189993,
+            155.75069757600068,
+            155.63963329800026
+          ],
+          "median": 155.63963329800026,
+          "min": 155.2520384189993,
+          "max": 155.75069757600068
+        },
+        "facts_seconds": {
+          "raw": [
+            4.204202386999896,
+            3.934224394000921,
+            4.146331514999474
+          ],
+          "median": 4.146331514999474,
+          "min": 3.934224394000921,
+          "max": 4.204202386999896
+        },
+        "planner_seconds": {
+          "raw": [
+            150.69358699700024,
+            151.4617612589991,
+            151.10838843799866
+          ],
+          "median": 151.10838843799866,
+          "min": 150.69358699700024,
+          "max": 151.4617612589991
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.3542460349999601,
+            0.354709721999825,
+            0.3849111450017517
+          ],
+          "median": 0.354709721999825,
+          "min": 0.3542460349999601,
+          "max": 0.3849111450017517
+        },
+        "universe_seconds": {
+          "raw": [
+            14.057582023000577,
+            14.057582023000577,
+            14.057582023000577
+          ],
+          "median": 14.057582023000577,
+          "min": 14.057582023000577,
+          "max": 14.057582023000577
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            154.520173,
+            155.03855899999996,
+            154.943149
+          ],
+          "median": 154.943149,
+          "min": 154.520173,
+          "max": 155.03855899999996
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.33998799999999996,
+            0.32391999999999976,
+            0.279938
+          ],
+          "median": 0.32391999999999976,
+          "min": 0.279938,
+          "max": 0.33998799999999996
+        },
+        "maxrss_kib": {
+          "raw": [
+            1489960,
+            1510440,
+            1510476
+          ],
+          "median": 1510440,
+          "min": 1489960,
+          "max": 1510476
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1540403200,
+            1571860480,
+            1582174208
+          ],
+          "median": 1571860480,
+          "min": 1540403200,
+          "max": 1582174208
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "after-scale2-warm-1",
+          "wall_seconds": 697.120552400127,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 22.936979399000847,
+            "original_recipes": 176,
+            "library_recipes": 352,
+            "added_synthetic_recipes": 176
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        733.38
+      ],
+      "trials": [
+        "after-scale2-warm-1",
+        "after-scale2-warm-1",
+        "after-scale2-warm-1"
+      ]
+    },
+    {
+      "side": "after",
+      "factor": "5",
+      "case": "main",
+      "mode": "cold",
+      "n": 1,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            437.60184271399976
+          ],
+          "median": 437.60184271399976,
+          "min": 437.60184271399976,
+          "max": 437.60184271399976
+        },
+        "facts_seconds": {
+          "raw": [
+            15.568252890000167
+          ],
+          "median": 15.568252890000167,
+          "min": 15.568252890000167,
+          "max": 15.568252890000167
+        },
+        "planner_seconds": {
+          "raw": [
+            421.42382033399963
+          ],
+          "median": 421.42382033399963,
+          "min": 421.42382033399963,
+          "max": 421.42382033399963
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.6097643900002367
+          ],
+          "median": 0.6097643900002367,
+          "min": 0.6097643900002367,
+          "max": 0.6097643900002367
+        },
+        "universe_seconds": {
+          "raw": [
+            13.52706568199983
+          ],
+          "median": 13.52706568199983,
+          "min": 13.52706568199983,
+          "max": 13.52706568199983
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            419.18685000000005
+          ],
+          "median": 419.18685000000005,
+          "min": 419.18685000000005,
+          "max": 419.18685000000005
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            1.917481
+          ],
+          "median": 1.917481,
+          "min": 1.917481,
+          "max": 1.917481
+        },
+        "maxrss_kib": {
+          "raw": [
+            1584152
+          ],
+          "median": 1584152,
+          "min": 1584152,
+          "max": 1584152
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1667276800
+          ],
+          "median": 1667276800,
+          "min": 1667276800,
+          "max": 1667276800
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "after-scale5-cold-1",
+          "wall_seconds": 516.5315036000684,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 58.7679769450001,
+            "original_recipes": 176,
+            "library_recipes": 880,
+            "added_synthetic_recipes": 704
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        725.34
+      ],
+      "trials": [
+        "after-scale5-cold-1"
+      ]
+    },
+    {
+      "side": "before",
+      "factor": "0",
+      "case": "main",
+      "mode": "cold",
+      "n": 3,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            98.93812985499972,
+            96.70772068399947,
+            97.67140261700024
+          ],
+          "median": 97.67140261700024,
+          "min": 96.70772068399947,
+          "max": 98.93812985499972
+        },
+        "facts_seconds": {
+          "raw": [
+            23.252379819999987,
+            21.262815872999454,
+            21.947234594000292
+          ],
+          "median": 21.947234594000292,
+          "min": 21.262815872999454,
+          "max": 23.252379819999987
+        },
+        "planner_seconds": {
+          "raw": [
+            75.49997635999989,
+            75.23800633200062,
+            75.53498032199968
+          ],
+          "median": 75.49997635999989,
+          "min": 75.23800633200062,
+          "max": 75.53498032199968
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.18576957400000538,
+            0.20689337799922214,
+            0.1891827009994813
+          ],
+          "median": 0.1891827009994813,
+          "min": 0.18576957400000538,
+          "max": 0.20689337799922214
+        },
+        "universe_seconds": {
+          "raw": [
+            13.563022366000041,
+            13.99173954700018,
+            13.731650107999485
+          ],
+          "median": 13.731650107999485,
+          "min": 13.563022366000041,
+          "max": 13.99173954700018
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            66.299419,
+            67.334075,
+            68.20503599999999
+          ],
+          "median": 67.334075,
+          "min": 66.299419,
+          "max": 68.20503599999999
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            1.3231460000000004,
+            1.7319489999999997,
+            1.6076920000000001
+          ],
+          "median": 1.6076920000000001,
+          "min": 1.3231460000000004,
+          "max": 1.7319489999999997
+        },
+        "maxrss_kib": {
+          "raw": [
+            1302640,
+            1441252,
+            1439088
+          ],
+          "median": 1439088,
+          "min": 1302640,
+          "max": 1441252
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1664122880,
+            1469116416,
+            1466941440
+          ],
+          "median": 1469116416,
+          "min": 1466941440,
+          "max": 1664122880
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "before-main-cold-1",
+          "wall_seconds": 123.35158249991946,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        },
+        {
+          "trial": "before-main-cold-2",
+          "wall_seconds": 118.36860549985431,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        },
+        {
+          "trial": "before-main-cold-3",
+          "wall_seconds": 117.40392989991233,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "before-main-cold-1",
+        "before-main-cold-2",
+        "before-main-cold-3"
+      ]
+    },
+    {
+      "side": "before",
+      "factor": "0",
+      "case": "main",
+      "mode": "persistent",
+      "n": 1,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            57.95570219500041
+          ],
+          "median": 57.95570219500041,
+          "min": 57.95570219500041,
+          "max": 57.95570219500041
+        },
+        "facts_seconds": {
+          "raw": [
+            11.194881085000816
+          ],
+          "median": 11.194881085000816,
+          "min": 11.194881085000816,
+          "max": 11.194881085000816
+        },
+        "planner_seconds": {
+          "raw": [
+            46.56977037100023
+          ],
+          "median": 46.56977037100023,
+          "min": 46.56977037100023,
+          "max": 46.56977037100023
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.19104573799995705
+          ],
+          "median": 0.19104573799995705,
+          "min": 0.19104573799995705,
+          "max": 0.19104573799995705
+        },
+        "universe_seconds": {
+          "raw": [
+            13.640105108999705
+          ],
+          "median": 13.640105108999705,
+          "min": 13.640105108999705,
+          "max": 13.640105108999705
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            56.909695
+          ],
+          "median": 56.909695,
+          "min": 56.909695,
+          "max": 56.909695
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.840404
+          ],
+          "median": 0.840404,
+          "min": 0.840404,
+          "max": 0.840404
+        },
+        "maxrss_kib": {
+          "raw": [
+            1342492
+          ],
+          "median": 1342492,
+          "min": 1342492,
+          "max": 1342492
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1362087936
+          ],
+          "median": 1362087936,
+          "min": 1362087936,
+          "max": 1362087936
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "before-main-persistent-1",
+          "wall_seconds": 77.64865799993277,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "before-main-persistent-1"
+      ]
+    },
+    {
+      "side": "before",
+      "factor": "0",
+      "case": "main",
+      "mode": "warm",
+      "n": 3,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            50.803289429999495,
+            51.08878226399975,
+            51.48712303299999
+          ],
+          "median": 51.08878226399975,
+          "min": 50.803289429999495,
+          "max": 51.48712303299999
+        },
+        "facts_seconds": {
+          "raw": [
+            5.92075891299919,
+            6.500246995999987,
+            6.453473817000486
+          ],
+          "median": 6.453473817000486,
+          "min": 5.92075891299919,
+          "max": 6.500246995999987
+        },
+        "planner_seconds": {
+          "raw": [
+            44.687896293999984,
+            44.383563857999434,
+            44.83541128499928
+          ],
+          "median": 44.687896293999984,
+          "min": 44.383563857999434,
+          "max": 44.83541128499928
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.19463062300019374,
+            0.20496821000051568,
+            0.1982348310002635
+          ],
+          "median": 0.1982348310002635,
+          "min": 0.19463062300019374,
+          "max": 0.20496821000051568
+        },
+        "universe_seconds": {
+          "raw": [
+            13.684390757999608,
+            13.684390757999608,
+            13.684390757999608
+          ],
+          "median": 13.684390757999608,
+          "min": 13.684390757999608,
+          "max": 13.684390757999608
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            50.04090700000002,
+            50.270730999999984,
+            50.71348800000001
+          ],
+          "median": 50.270730999999984,
+          "min": 50.04090700000002,
+          "max": 50.71348800000001
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.555323,
+            0.5954449999999998,
+            0.555717
+          ],
+          "median": 0.555717,
+          "min": 0.555323,
+          "max": 0.5954449999999998
+        },
+        "maxrss_kib": {
+          "raw": [
+            1483812,
+            1489224,
+            1497444
+          ],
+          "median": 1489224,
+          "min": 1483812,
+          "max": 1497444
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1522003968,
+            1533591552,
+            1547575296
+          ],
+          "median": 1533591552,
+          "min": 1522003968,
+          "max": 1547575296
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "before-main-warm-1",
+          "wall_seconds": 271.522412000224,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": null
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "before-main-warm-1",
+        "before-main-warm-1",
+        "before-main-warm-1"
+      ]
+    },
+    {
+      "side": "before",
+      "factor": "1",
+      "case": "main",
+      "mode": "cold",
+      "n": 1,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            86.38075952399959
+          ],
+          "median": 86.38075952399959,
+          "min": 86.38075952399959,
+          "max": 86.38075952399959
+        },
+        "facts_seconds": {
+          "raw": [
+            20.546680786999787
+          ],
+          "median": 20.546680786999787,
+          "min": 20.546680786999787,
+          "max": 20.546680786999787
+        },
+        "planner_seconds": {
+          "raw": [
+            65.6456403230004
+          ],
+          "median": 65.6456403230004,
+          "min": 65.6456403230004,
+          "max": 65.6456403230004
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.18843441299941333
+          ],
+          "median": 0.18843441299941333,
+          "min": 0.18843441299941333,
+          "max": 0.18843441299941333
+        },
+        "universe_seconds": {
+          "raw": [
+            13.823403747999691
+          ],
+          "median": 13.823403747999691,
+          "min": 13.823403747999691,
+          "max": 13.823403747999691
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            67.840198
+          ],
+          "median": 67.840198,
+          "min": 67.840198,
+          "max": 67.840198
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            1.1757140000000001
+          ],
+          "median": 1.1757140000000001,
+          "min": 1.1757140000000001,
+          "max": 1.1757140000000001
+        },
+        "maxrss_kib": {
+          "raw": [
+            1317476
+          ],
+          "median": 1317476,
+          "min": 1317476,
+          "max": 1317476
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1346412544
+          ],
+          "median": 1346412544,
+          "min": 1346412544,
+          "max": 1346412544
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "before-scale1-cold-1",
+          "wall_seconds": 117.96199110010639,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 11.498590503999367,
+            "original_recipes": 176,
+            "library_recipes": 176,
+            "added_synthetic_recipes": 0
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "before-scale1-cold-1"
+      ]
+    },
+    {
+      "side": "before",
+      "factor": "1",
+      "case": "main",
+      "mode": "warm",
+      "n": 3,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            52.19960699500007,
+            52.8319848839983,
+            52.22900442399987
+          ],
+          "median": 52.22900442399987,
+          "min": 52.19960699500007,
+          "max": 52.8319848839983
+        },
+        "facts_seconds": {
+          "raw": [
+            6.164924750999489,
+            5.835823358998823,
+            6.614435640000011
+          ],
+          "median": 6.164924750999489,
+          "min": 5.835823358998823,
+          "max": 6.614435640000011
+        },
+        "planner_seconds": {
+          "raw": [
+            45.84041997300119,
+            46.80025814700093,
+            45.396928415999355
+          ],
+          "median": 45.84041997300119,
+          "min": 45.396928415999355,
+          "max": 46.80025814700093
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.19425967099959962,
+            0.19590097799846262,
+            0.2176380680011789
+          ],
+          "median": 0.19590097799846262,
+          "min": 0.19425967099959962,
+          "max": 0.2176380680011789
+        },
+        "universe_seconds": {
+          "raw": [
+            14.083469455999875,
+            14.083469455999875,
+            14.083469455999875
+          ],
+          "median": 14.083469455999875,
+          "min": 14.083469455999875,
+          "max": 14.083469455999875
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            51.597734,
+            52.15379300000001,
+            51.545120999999995
+          ],
+          "median": 51.597734,
+          "min": 51.545120999999995,
+          "max": 52.15379300000001
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.3877259999999998,
+            0.463835,
+            0.4437929999999999
+          ],
+          "median": 0.4437929999999999,
+          "min": 0.3877259999999998,
+          "max": 0.463835
+        },
+        "maxrss_kib": {
+          "raw": [
+            1497716,
+            1504764,
+            1511332
+          ],
+          "median": 1504764,
+          "min": 1497716,
+          "max": 1511332
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1536872448,
+            1549635584,
+            1562726400
+          ],
+          "median": 1549635584,
+          "min": 1536872448,
+          "max": 1562726400
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "before-scale1-warm-1",
+          "wall_seconds": 274.92191860009916,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 10.344988109000042,
+            "original_recipes": 176,
+            "library_recipes": 176,
+            "added_synthetic_recipes": 0
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        741.15
+      ],
+      "trials": [
+        "before-scale1-warm-1",
+        "before-scale1-warm-1",
+        "before-scale1-warm-1"
+      ]
+    },
+    {
+      "side": "before",
+      "factor": "2",
+      "case": "main",
+      "mode": "cold",
+      "n": 1,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            196.8542046249986
+          ],
+          "median": 196.8542046249986,
+          "min": 196.8542046249986,
+          "max": 196.8542046249986
+        },
+        "facts_seconds": {
+          "raw": [
+            20.833398561999275
+          ],
+          "median": 20.833398561999275,
+          "min": 20.833398561999275,
+          "max": 20.833398561999275
+        },
+        "planner_seconds": {
+          "raw": [
+            175.67035957700136
+          ],
+          "median": 175.67035957700136,
+          "min": 175.67035957700136,
+          "max": 175.67035957700136
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.3504413859991473
+          ],
+          "median": 0.3504413859991473,
+          "min": 0.3504413859991473,
+          "max": 0.3504413859991473
+        },
+        "universe_seconds": {
+          "raw": [
+            13.929557991001275
+          ],
+          "median": 13.929557991001275,
+          "min": 13.929557991001275,
+          "max": 13.929557991001275
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            178.05601
+          ],
+          "median": 178.05601,
+          "min": 178.05601,
+          "max": 178.05601
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            1.7244869999999999
+          ],
+          "median": 1.7244869999999999,
+          "min": 1.7244869999999999,
+          "max": 1.7244869999999999
+        },
+        "maxrss_kib": {
+          "raw": [
+            1467556
+          ],
+          "median": 1467556,
+          "min": 1467556,
+          "max": 1467556
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1504833536
+          ],
+          "median": 1504833536,
+          "min": 1504833536,
+          "max": 1504833536
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "before-scale2-cold-1",
+          "wall_seconds": 239.6272244998254,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 22.652613138998277,
+            "original_recipes": 176,
+            "library_recipes": 352,
+            "added_synthetic_recipes": 176
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        733.38
+      ],
+      "trials": [
+        "before-scale2-cold-1"
+      ]
+    },
+    {
+      "side": "before",
+      "factor": "2",
+      "case": "main",
+      "mode": "warm",
+      "n": 3,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            160.5384122280011,
+            161.70432862899906,
+            161.0390355920008
+          ],
+          "median": 161.0390355920008,
+          "min": 160.5384122280011,
+          "max": 161.70432862899906
+        },
+        "facts_seconds": {
+          "raw": [
+            5.884280980000767,
+            5.8621958999992785,
+            5.976200300001437
+          ],
+          "median": 5.884280980000767,
+          "min": 5.8621958999992785,
+          "max": 5.976200300001437
+        },
+        "planner_seconds": {
+          "raw": [
+            154.3032710309999,
+            155.4797661190005,
+            154.71157636300086
+          ],
+          "median": 154.71157636300086,
+          "min": 154.3032710309999,
+          "max": 155.4797661190005
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.3508570169997256,
+            0.3623617100001866,
+            0.3512559280006826
+          ],
+          "median": 0.3512559280006826,
+          "min": 0.3508570169997256,
+          "max": 0.3623617100001866
+        },
+        "universe_seconds": {
+          "raw": [
+            13.935506240000905,
+            13.935506240000905,
+            13.935506240000905
+          ],
+          "median": 13.935506240000905,
+          "min": 13.935506240000905,
+          "max": 13.935506240000905
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            159.59715000000003,
+            160.82691999999997,
+            160.19058999999993
+          ],
+          "median": 160.19058999999993,
+          "min": 159.59715000000003,
+          "max": 160.82691999999997
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            0.5556700000000001,
+            0.46771799999999963,
+            0.45984500000000006
+          ],
+          "median": 0.46771799999999963,
+          "min": 0.45984500000000006,
+          "max": 0.5556700000000001
+        },
+        "maxrss_kib": {
+          "raw": [
+            1641024,
+            1651320,
+            1652936
+          ],
+          "median": 1651320,
+          "min": 1641024,
+          "max": 1652936
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1694781440,
+            1716822016,
+            1729232896
+          ],
+          "median": 1716822016,
+          "min": 1694781440,
+          "max": 1729232896
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "before-scale2-warm-1",
+          "wall_seconds": 724.0918391000014,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 22.512620311999854,
+            "original_recipes": 176,
+            "library_recipes": 352,
+            "added_synthetic_recipes": 176
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        733.38
+      ],
+      "trials": [
+        "before-scale2-warm-1",
+        "before-scale2-warm-1",
+        "before-scale2-warm-1"
+      ]
+    },
+    {
+      "side": "before",
+      "factor": "5",
+      "case": "main",
+      "mode": "cold",
+      "n": 1,
+      "metrics": {
+        "wall_seconds": {
+          "raw": [
+            786.4997609939996
+          ],
+          "median": 786.4997609939996,
+          "min": 786.4997609939996,
+          "max": 786.4997609939996
+        },
+        "facts_seconds": {
+          "raw": [
+            21.044843197999853
+          ],
+          "median": 21.044843197999853,
+          "min": 21.044843197999853,
+          "max": 21.044843197999853
+        },
+        "planner_seconds": {
+          "raw": [
+            764.863931116
+          ],
+          "median": 764.863931116,
+          "min": 764.863931116,
+          "max": 764.863931116
+        },
+        "serialization_seconds": {
+          "raw": [
+            0.5909799790001671
+          ],
+          "median": 0.5909799790001671,
+          "min": 0.5909799790001671,
+          "max": 0.5909799790001671
+        },
+        "universe_seconds": {
+          "raw": [
+            14.24327928899993
+          ],
+          "median": 14.24327928899993,
+          "min": 14.24327928899993,
+          "max": 14.24327928899993
+        },
+        "cpu_user_seconds": {
+          "raw": [
+            766.9357689999999
+          ],
+          "median": 766.9357689999999,
+          "min": 766.9357689999999,
+          "max": 766.9357689999999
+        },
+        "cpu_system_seconds": {
+          "raw": [
+            3.027127
+          ],
+          "median": 3.027127,
+          "min": 3.027127,
+          "max": 3.027127
+        },
+        "maxrss_kib": {
+          "raw": [
+            1661812
+          ],
+          "median": 1661812,
+          "min": 1661812,
+          "max": 1661812
+        },
+        "cgroup_memory_peak_bytes": {
+          "raw": [
+            1757417472
+          ],
+          "median": 1757417472,
+          "min": 1757417472,
+          "max": 1757417472
+        }
+      },
+      "container_runs": [
+        {
+          "trial": "before-scale5-cold-1",
+          "wall_seconds": 866.5254810999613,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 58.88648797499991,
+            "original_recipes": 176,
+            "library_recipes": 880,
+            "added_synthetic_recipes": 704
+          }
+        }
+      ],
+      "metric_scopes": {
+        "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
+        "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
+        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
+      },
+      "paid": [
+        725.34
+      ],
+      "trials": [
+        "before-scale5-cold-1"
+      ]
+    }
+  ],
+  "environment": "Paired local Docker images with the same local OS/Python dependencies. Not a direct comparison with historical server timings."
+}
