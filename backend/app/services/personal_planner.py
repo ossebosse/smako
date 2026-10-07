@@ -265,14 +265,31 @@ class PersonalPlanner:
         return None
 
     def nutrition_evidence(self, product, name, unit, requested, recipe):
+        if recipe is not None and recipe.preparation is not None:
+            from app.services.recipe_preparation import input_evidence_identity
+
+            # This cache belongs only to this planner's coherent product/fact
+            # snapshot and user policy. Reuse source-per-100 evidence across
+            # independently validated recipes, never their portion checks,
+            # identities, quantities, recipe basis or final basket audit.
+            if not self.spec.allow_nutrition_estimates or not requested <= {"protein_g", "fat_g", "carbs_g", "kcal"}:
+                return None
+            identity = input_evidence_identity(recipe, name, self.recipe_computations)
+            if identity is None:
+                return None
+            recipe_key = ("prepared_input", identity)
+        else:
+            # Legacy evidence methods can depend on the entire recipe.
+            recipe_key = ("legacy", self.recipe_computations.key(recipe))
         key = (
             product.store_id,
             product.product_id,
             name,
             unit,
             frozenset(requested),
-            self.recipe_computations.key(recipe),
+            recipe_key,
             self.spec.allow_nutrition_estimates,
+            self.request.purchase_planning_mode,
         )
         if key not in self.nutrition_cache:
             result = self._nutrition_evidence(product, name, unit, requested, recipe)

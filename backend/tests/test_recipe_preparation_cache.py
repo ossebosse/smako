@@ -1,4 +1,4 @@
-"""Pure recipe reuse must not cache product or source qualification decisions."""
+"""Reuse exact recipe work and request-local input evidence without sharing approval."""
 
 from dataclasses import replace
 from unittest.mock import patch
@@ -140,7 +140,9 @@ def test_planner_recipe_cache_preserves_each_product_source_unit_form_and_opt_in
         assert cached is None or cached.source != original_fact.source
         planner.spec.allow_nutrition_estimates = False
         assert value(second) is None
-        assert verify.call_count == 2  # One normal cached validation + explicit uncached comparison.
+        # One ordinary validation; bypassing the pure cache validates both
+        # the shared identity and the uncached evidence path independently.
+        assert verify.call_count == 3
 
 
 def test_non_prepared_recipe_false_is_reused_without_promoting_it():
@@ -152,3 +154,51 @@ def test_non_prepared_recipe_false_is_reused_without_promoting_it():
             assert recipe_preparation.input_evidence(recipe, item, "tofu", "g", True,
                                                      fact(), recipe_cache=cache) is None
         assert verify.call_count == 1
+
+
+def test_distinct_recipes_share_input_work_but_keep_exact_validation_and_provenance():
+    recipes = candidates(RecipePreferences(mode="complete"), 2)
+    item = product("Rapsolja", 500, "ml", 20)
+    evidence = {(item.store_id, item.product_id): facts(item,
+        nutrition={"protein_g": 0, "fat_g": 92, "carbs_g": 0, "kcal": 828},
+        nutrition_unit="ml", nutrition_basis="per 100 ml",
+        field_sources={"nutrition.protein_g": ({"source": "test declaration"},)})}
+    planner = PersonalPlanner(request(allow_nutrition_estimates=True), Settings(),
+        prepared(item), state(), facts=evidence, now=NOW)
+    fields = frozenset({"protein_g", "fat_g", "carbs_g", "kcal"})
+    expected = [planner._nutrition_evidence(item, "rapsolja", "ml", fields, r) for r in recipes]
+    assert all(expected)
+    planner.recipe_computations = RecipeComputationCache()
+    with (
+        patch.object(planner, "_nutrition_evidence", wraps=planner._nutrition_evidence) as compute,
+        patch.object(recipe_preparation, "validate", wraps=recipe_preparation.validate) as verify,
+    ):
+        actual = [planner.nutrition_evidence(item, "rapsolja", "ml", fields, r) for r in recipes]
+        assert actual == expected  # Includes family, method and original source provenance.
+        assert verify.call_count == len(recipes)  # Never borrow another recipe's approval.
+        distinct = {(r.preparation.version, r.preparation.family,
+                     r.preparation.input_forms["rapsolja"]) for r in recipes}
+        assert compute.call_count == len(distinct) < len(recipes)
+        # A cache hit must not conceal even a tiny amount change or broken seal.
+        recipe = recipes[0].model_copy(deep=True)
+        ingredient = recipe.ingredients[0]
+        recipe.ingredients[0] = ingredient.model_copy(update={"quantity": ingredient.quantity + 1e-10})
+        with pytest.raises(ValueError):
+            planner.nutrition_evidence(item, "rapsolja", "ml", fields, recipe)
+        assert compute.call_count == len(distinct)
+
+
+def test_input_sharing_preserves_different_preparation_families():
+    first = recipe_preparation.adapt(original(), "panna")
+    second = recipe_preparation.adapt(original().model_copy(update={"name": "En annan rätt"}), "gryta")
+    item = product("Tofu naturell Fast", 300, "g", 20)
+    evidence = {(item.store_id, item.product_id): facts(item, nutrition={"protein_g": 15},
+        nutrition_unit="g", nutrition_basis="per 100 g",
+        field_sources={"nutrition.protein_g": ({"source": "test declaration"},)})}
+    planner = PersonalPlanner(request(allow_nutrition_estimates=True), Settings(),
+        prepared(item), state(), facts=evidence, now=NOW)
+    for recipe in (first, second):
+        actual = planner.nutrition_evidence(item, "tofu", "g", {"protein_g"}, recipe)
+        assert actual == planner._nutrition_evidence(item, "tofu", "g", {"protein_g"}, recipe)
+        assert actual.field_sources["nutrition.protein_g"][-1]["family"] == recipe.preparation.family
+    assert len(planner.nutrition_cache) == 2

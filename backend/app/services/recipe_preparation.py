@@ -243,6 +243,21 @@ def basis(recipe):
     }
 
 
+def input_evidence_identity(recipe, name, recipe_cache):
+    """Recipe-dependent identity of input evidence, after exact validation.
+
+    Input evidence uses the form and wraps the source with method version and
+    family. Amounts, servings and recipe identity belong to the later portion
+    calculation, not the source-per-100 evidence. Never share recipe approval:
+    each exact recipe (including mutable instructions/forms) validates first.
+    Keep this identity aligned with input_evidence and wrap_evidence below.
+    """
+    if not recipe_cache.get(recipe, validate):
+        return None
+    return (recipe.preparation.version, recipe.preparation.family,
+            recipe.preparation.input_forms.get(canonical(name)))
+
+
 def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache: RecipeComputationCache | None = None):
     """Preserve identity, units, source values and opt-in at the caller."""
     from app.services.nutrition_reference import product_reference, reference_evidence
