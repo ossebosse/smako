@@ -38,6 +38,7 @@ async def main(args):
             nonlocal prepared
             context = contexts[index]
             page = await context.new_page()
+            click_finished = asyncio.Event()
             row = {'owner_label': index+1, 'injected': [], 'page_errors': [], 'network_failures': [], 'responses': [], 'posts': 0, 'lifecycle': []}
             rows.append(row)
             await context.expose_binding('__cTrace', lambda source, data: row['lifecycle'].append({**data, 'observed_utc': datetime.now(UTC).isoformat()}))
@@ -68,6 +69,13 @@ async def main(args):
                         row['queued_dom'] = await page.locator('#loading-message').inner_text()
                     if args.interrupt and index > 0 and r.status == 202 and body.get('stage') == 'queued' and path.startswith('/api/plan-jobs/') and not row.get('queued_reload'):
                         row['queued_reload'] = True
+                        row['queued_reload_requested_utc'] = datetime.now(UTC).isoformat()
+                        # A response callback can run before Playwright's
+                        # dblclick action has returned. Do not navigate out
+                        # from under that action and make it retry against the
+                        # correctly disabled button in the replacement page.
+                        await click_finished.wait()
+                        row['queued_reload_started_utc'] = datetime.now(UTC).isoformat()
                         await page.reload(wait_until='domcontentloaded')
 
             page.on('response', response)
@@ -110,7 +118,10 @@ async def main(args):
             # button flows while it computes. Queue/reload coverage is deliberate.
             if index > 0:await first_accepted.wait()
             clicked = time.monotonic()
+            row['click_started_utc'] = datetime.now(UTC).isoformat()
             await page.locator('#submit-button').dblclick()
+            row['click_finished_utc'] = datetime.now(UTC).isoformat()
+            click_finished.set()
             await expect(page.locator('#results')).to_be_visible(timeout=420000)
             row['click_to_result_seconds'] = time.monotonic()-clicked
             assert row['posts'] == 1 and not row['page_errors']
@@ -127,7 +138,12 @@ async def main(args):
             del row['saved']
             return row
 
-        await asyncio.gather(*(owner(i) for i in range(3)))
+        try:
+            await asyncio.gather(*(owner(i) for i in range(3)))
+        finally:
+            # Preserve observed job references and event ordering on failure;
+            # the rows contain no authentication headers or session cookies.
+            (args.output/'observed-owners.json').write_text(json.dumps(rows, indent=2), encoding='utf8')
         rows.sort(key=lambda r: r['owner_label'])
         if args.interrupt:
             assert len(rows[0]['injected']) == 1
