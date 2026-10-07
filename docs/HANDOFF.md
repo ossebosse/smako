@@ -1,3 +1,39 @@
+# 2026-10-07: D-lagring och veckosökning – pågående, separata spår
+
+Arbetsgren `feature/willys-storage-search-20261007`. Betan kör fortsatt rätt
+dd12-image; ingen måltids-/prestandakod har aktiverats. Vid ny kontroll
+7 oktober var serverns rotvolym åter full (0 byte tillgängligt), `/ready`
+503 och planlagringen gav `SQLITE_IOERR_SHMSIZE`. Äldre 172 MB är historiskt.
+[Aktuell A-rapport](releases/willys-storage-search-20261007/A-STATUS.md).
+
+Lagringsfix `813eadda8e26`, separat ren reläkandidat ovanpå bdc9
+`fe795e5b04f5a5ff973b71bb9bcdd28ca8668ce2`, installerad men ännu inte vald
+av uppgiften. Den binder även temporärfiler till befintlig kommunarbetsyta
+på D: och stoppar vid otillräcklig lokal/serverkapacitet. Windows nekade
+`Set-ScheduledTask`; definitionen är verifierat oförändrad och fortsatt aktiv.
+Användaren har fått ett avgränsat administratörsskript. S4U-prov och verklig
+prisåterhämtning väntar på behörighet respektive serverutrymme. Köer, state,
+rådata och tidigare paket bevaras. Inga nya prisanrop eller raderingar gjorda.
+
+B utgår från fd2 och bevarar samtliga recept/fakta/import-/statusfiler.
+Delprofil av exakt tidigare 176→880-korpus visade upprepad näringsprövning:
+1,4 miljoner `input_evidence`-anrop i ett avbrutet 657-s-prov (inte ett
+slutfört prestandaprov). Optimeringscommits `ada436763c8a` och
+`54cb2e8159a126de26fa11cb1d393dc275238fd3` strömmar samma faktahash,
+behåller ofta använda cacheposter inom samma gränser och delar
+ingrediensunderlag efter separat validering av varje exakt recept.
+Portionsberäkning, veckosökbudget och oberoende slutlig audit är oförändrade.
+
+Paket `smako-server-54cb2e8159a1.zip`, SHA-256
+`98446fac69395c8f7eded6c15f23f8194b5e26dffde1810e83cb5a9007338667`,
+lokal image `sha256:8a537fc4d333d9fc17fd06916061ed481ba433951126688df51b6b4da19766f3`.
+664 imagefiler hashkontrollerade. **Slutkvalificering pågår; ännu inte redo
+för aktiveringsbeslut.** Första parade kalla huvudfallet: 98,94→90,07 s,
+741,15 kr, full resultatekvivalens utom explicita mät-/byggmetadata och
+ordning i medlemsmängden. Det är inte median eller klicktid. Råunderlag,
+testloggar, isolerade profiler och pågående matris finns på D: under
+`.local/willys-storage-search-20261007/`. Docker-data-VHDX ligger på D:.
+
 # 2026-10-06: Statuskandidaten aktiverad; måltidsbibliotek färdig kandidat
 
 Etapp A är genomförd med användarens uttryckliga app-only-godkännande:
