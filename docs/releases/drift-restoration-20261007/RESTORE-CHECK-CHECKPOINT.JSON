@@ -1,0 +1,13 @@
+{
+  "completed_targets": [
+    "/var/tmp/smako-repo-release-20260929/ops-verification/old-pair-data/grocery.sqlite",
+    "/var/tmp/smako-repo-release-20260929/ops-verification/old-pair-data-v2/grocery.sqlite",
+    "/var/tmp/smako-repo-release-20260929/ops-verification/rollback-data/grocery.sqlite",
+    "/var/tmp/smako-repo-release-20260929/ops-verification/rollback-data-v2/grocery.sqlite"
+  ],
+  "checks": "lstat regular file, exact size, SHA256 matched source manifest",
+  "source": "Four per-target completion records returned by the serial verify_restored.py execution before controlled stop",
+  "file_count": 4,
+  "remaining_hashes_restarted": true,
+  "reason": "Bound local archive verification to eight independent I/O workers; no server work or runtime changes"
+}

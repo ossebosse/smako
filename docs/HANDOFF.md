@@ -1,3 +1,43 @@
+# 2026-10-07 kväll: Endast driftåterställning – operatörsåtgärder återstår
+
+Gren `ops/restore-price-flow-20261007`, ovanpå `72a936b`. Ingen ny apprelease
+eller fortsatt prestandaetapp. Betan behåller dd12, kompletta recept på.
+Ny faktisk kontroll 20:40 UTC: `/ready` 503, PlanStore
+`SQLITE_IOERR_SHMSIZE`, serverns faktiska filsystem fortfarande 0 byte
+tillgängligt. C: hade cirka 6,6 GB och D: cirka 688 GB vid etappens start.
+Alla fem baser är STALE; aktiv prisartefakt och 2 236 råreferenser är
+hashverifierade och ligger kvar i produktionens ordinarie rårot.
+
+17:30-reläkörningen är avslutad men saknar slutkvitto och task_success.
+Schemaläggarens slutkod 0 bevisar inte lyckad leverans. Uppgiften är
+Ready/Enabled och använder fortsatt bdc9. Ingen paus eller insamling
+har startats av oss i denna etapp. Nästa Windows-start 8 oktober 01:30;
+serverns behovskontroll var 15:e minut och backup 02:47 svensk tid.
+
+Operatören har tidigt fått exakt administratörskommando för
+`scripts/activate_willys_storage_fix.ps1 -Apply`, commit `43a712a`.
+Verktyget verifierar förväntad hel uppgifts-XML, paketmanifest och 625 filer,
+bevarar konto/S4U/Limited/schema och respekterar båda lokala låsen. Endast
+Actions Arguments/WorkingDirectory ändras; det startar ingen insamling.
+Läsande förkontroll passerade. Ingen automatisk elevation eller ACL-ändring.
+
+Nio inaktiva testdataobjekt under gamla `ops-verification` är arkiverade
+direkt till skyddad D:-lagring. Arkivets 89 550 filer matchar originalens
+SHA-256; full återställning med rätt filantal/storlek genomförd. Ytterligare
+hashkontroll av återställda filer passerade för 39 532 filer inklusive alla
+fyra databaser; resterande extra efterkontroll stoppades uttryckligen och
+påstås inte genomförd. Inga hashfel observerade. Arkiv SHA-256
+`21946e544ae4b8605c0d5f52aa32fad3ae21869052716c7c00207441a5f5e3f4`.
+Ingen serverkopia är godkänd för ny radering. Exakt nioobjektslista har
+lämnats till användaren för beslut; ingen radering före svar.
+Exakt lista, arkiv-/återställningsbevis och nästa operatörssteg finns i
+[aktuell driftstatus](releases/drift-restoration-20261007/STATUS.md) och
+[arkivförslaget](releases/drift-restoration-20261007/ARCHIVE-PROPOSAL.md).
+Målen saknar container-/öppna filreferenser; planer, konfigurationer,
+produktionsrådata, köer och paket är undantagna. Kontrollera referenser och
+innehåll igen efter ett eventuellt raderingsgodkännande. Gamla tillstånd,
+paket och större råbevis finns utanför Git på D:. Ingen Git-push.
+
 # 2026-10-07: Slutleverans – A blockerad, B kvalificerad i isolering
 
 Arbetsgren `feature/willys-storage-search-20261007`. Ingen Git-push eller

@@ -1,0 +1,64 @@
+{
+  "image": "sha256:c8362751b13a6e649beadad2a3c27b9b5df8bfd1e2fa177ff68e01e1d7b8b2c7",
+  "app_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/srv/smako/data/grocery",
+      "Destination": "/srv/app/var/grocery",
+      "Mode": "rw",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/srv/smako/data/plans",
+      "Destination": "/srv/app/var/plans",
+      "Mode": "rw",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/srv/smako/data/price_universes",
+      "Destination": "/srv/app/var/price_universes",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/srv/smako/data/raw_snapshots",
+      "Destination": "/srv/app/var/raw_snapshots",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/srv/smako/data/reports",
+      "Destination": "/srv/app/var/reports",
+      "Mode": "rw",
+      "RW": true,
+      "Propagation": "rprivate"
+    }
+  ],
+  "scheduler_state": "running",
+  "policies": [
+    {
+      "container": "/smako-app-1",
+      "key": "BUILD_ID",
+      "value": "status-reconnect-dd12cc80e98c"
+    },
+    {
+      "container": "/smako-app-1",
+      "key": "COMPLETE_RECIPES_ENABLED",
+      "value": "true"
+    },
+    {
+      "container": "/smako-scheduler-1",
+      "key": "BUILD_ID",
+      "value": "08c137475d9ca96a6ef7673245a639c8c5c9e922"
+    }
+  ],
+  "operational_config_target_references": []
+}

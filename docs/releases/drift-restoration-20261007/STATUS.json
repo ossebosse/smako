@@ -1,0 +1,257 @@
+{
+  "status": "WAITING_FOR_EXACT_OPERATOR_ACTION",
+  "observed_at": "2026-10-07T20:40:59.705643+00:00",
+  "serving_image": "sha256:c8362751b13a6e649beadad2a3c27b9b5df8bfd1e2fa177ff68e01e1d7b8b2c7",
+  "build_id": "status-reconnect-dd12cc80e98c",
+  "complete_recipes": true,
+  "ready_status": 503,
+  "plan_store_error": "SQLITE_IOERR_SHMSIZE",
+  "five_bases": [
+    {
+      "context_id": "context:coop:23eaae11c9661e68",
+      "rows": 11481,
+      "oldest_observed_at": "2026-10-05T10:30:54.804399Z",
+      "snapshots": [
+        "ff6e64a1bd9e435c9b9178e8aebec3f2"
+      ],
+      "age_hours": 58.168028123333336,
+      "serving_status": "STALE; excluded from usable federation"
+    },
+    {
+      "context_id": "context:hemkop:3288e04edd97e349",
+      "rows": 5027,
+      "oldest_observed_at": "2026-10-05T01:01:52.060296Z",
+      "snapshots": [
+        "07e930083562494c8e787094c85d4098"
+      ],
+      "age_hours": 67.65212370750001,
+      "serving_status": "STALE; excluded from usable federation"
+    },
+    {
+      "context_id": "context:hemkop:756955d0e6e05f23",
+      "rows": 6278,
+      "oldest_observed_at": "2026-10-05T00:46:18.267865Z",
+      "snapshots": [
+        "645904c1548549119c0e7892c36dd3ab"
+      ],
+      "age_hours": 67.91151049388888,
+      "serving_status": "STALE; excluded from usable federation"
+    },
+    {
+      "context_id": "context:willys:383650ec6ff5a636",
+      "rows": 10217,
+      "oldest_observed_at": "2026-10-04T15:31:05.108770Z",
+      "snapshots": [
+        "5ddb11e6ddd54fe9ad7c75a6a06e52bf"
+      ],
+      "age_hours": 77.16516579805555,
+      "serving_status": "STALE; excluded from usable federation"
+    },
+    {
+      "context_id": "context:willys:4a671428fc484e43",
+      "rows": 8647,
+      "oldest_observed_at": "2026-10-04T15:49:42.410373Z",
+      "snapshots": [
+        "5ddb11e6ddd54fe9ad7c75a6a06e52bf"
+      ],
+      "age_hours": 76.85480424166667,
+      "serving_status": "STALE; excluded from usable federation"
+    }
+  ],
+  "receiver_capacity": {
+    "status": "FAIL",
+    "volumes": [
+      {
+        "paths": [
+          "/srv/app/var/raw_snapshots/source-inbox/municipality-1281",
+          "/srv/app/var/raw_snapshots",
+          "/srv/app/var/grocery",
+          "/srv/app/var/price_universes"
+        ],
+        "required_bytes": 7521539842,
+        "reserve_bytes": 536870912,
+        "free_bytes": 0
+      }
+    ],
+    "database_bytes": 3500412928,
+    "largest_price_file_bytes": 92584833,
+    "uid": 10001,
+    "reason": "insufficient_receiver_storage"
+  },
+  "archive_candidates": [
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/old-pair-data/grocery.sqlite",
+      "files": 1,
+      "logical_bytes": 2771906560,
+      "allocated_bytes": 2771906560
+    },
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/old-pair-data-v2/grocery.sqlite",
+      "files": 1,
+      "logical_bytes": 2771906560,
+      "allocated_bytes": 2771906560
+    },
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/rollback-data/grocery.sqlite",
+      "files": 1,
+      "logical_bytes": 2545623040,
+      "allocated_bytes": 2545623040
+    },
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/rollback-data-v2/grocery.sqlite",
+      "files": 1,
+      "logical_bytes": 2545623040,
+      "allocated_bytes": 2545623040
+    },
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/old-pair-data/raw",
+      "files": 26527,
+      "logical_bytes": 1382334213,
+      "allocated_bytes": 1443131392
+    },
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/old-pair-data-v2/raw",
+      "files": 55973,
+      "logical_bytes": 2982365623,
+      "allocated_bytes": 3114520576
+    },
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/old-pair-data-v2/price-universes",
+      "files": 48,
+      "logical_bytes": 1924926968,
+      "allocated_bytes": 1925058560
+    },
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/rollback-data-v2/raw",
+      "files": 6973,
+      "logical_bytes": 322444930,
+      "allocated_bytes": 338657280
+    },
+    {
+      "path": "/var/tmp/smako-repo-release-20260929/ops-verification/rollback-data-v2/price-universes",
+      "files": 25,
+      "logical_bytes": 1944346179,
+      "allocated_bytes": 1944428544
+    }
+  ],
+  "archive": {
+    "archive": "D:\\Projects\\Smako\\.local\\drift-restoration-20261007\\inactive-test-data.tar.gz",
+    "archive_sha256": "21946e544ae4b8605c0d5f52aa32fad3ae21869052716c7c00207441a5f5e3f4",
+    "archive_bytes": 3613102573,
+    "files": 89550,
+    "logical_bytes": 19191477113,
+    "allocated_source_bytes": 19400855552,
+    "transfer_exit": 0,
+    "all_files_hash_verified": true,
+    "unix_owner_mode_verified": true,
+    "acls_xattrs_preserved_by_GNU_tar": true,
+    "source_removed": false,
+    "seconds": 826.8755238056183,
+    "all_files_restored_with_correct_size": true,
+    "restored_files": 89550,
+    "restored_bytes": 19191477113,
+    "restore_path": "D:\\Projects\\Smako\\.local\\drift-restoration-20261007\\restore-check",
+    "all_files_restored_and_hash_verified": false,
+    "restored_hash_verified_files": 39532,
+    "restored_hash_scope": "Four complete database checks plus the first 40000 members of the remaining manifest; per-target and per-10000 completion records preserved. All 89550 archive members were independently SHA256-verified against original files before full restoration.",
+    "optional_extra_restore_hash_check": "Stopped by operator agent after completed archive checksum validation, full restoration/size check and 39532 restored-file checksum checks. No checksum failure observed; remaining restored-file checks not claimed.",
+    "stopped_at": "2026-10-07T21:23:42.069224+00:00",
+    "restore_scope": "Full contents restored on NTFS; Unix ownership/mode and ACL/xattrs preserved in GNU tar metadata, not applied as Windows identities.",
+    "verification_restarts": [
+      "restore-check-restart.json",
+      "restore-check-checkpoint.json"
+    ]
+  },
+  "removed_in_this_task": [],
+  "collection_started_in_this_task": false,
+  "operator_script": "D:/Projects/Smako/scripts/activate_willys_storage_fix.ps1",
+  "operator_script_sha256": "53be1b7467d1e9f1c223a31696af2a36da1ed0cebe2aac99406619bcd399ef8a",
+  "no_new_app_release": true,
+  "final_local": {
+    "at": "2026-10-07T21:24:20.4971265Z",
+    "taskState": "Ready",
+    "enabled": true,
+    "package": "D:\\smako-local-relay\\releases\\bdc9f7df4170",
+    "nextRunUtc": "2026-10-07T23:30:00.0000000Z",
+    "volumes": [
+      {
+        "DriveLetter": "D",
+        "SizeRemaining": 664460079104,
+        "Size": 1000187359232
+      },
+      {
+        "DriveLetter": "C",
+        "SizeRemaining": 6629289984,
+        "Size": 254721126400
+      }
+    ]
+  },
+  "final_ready": {
+    "at": "2026-10-07T21:25:04.297012+00:00",
+    "status": 503,
+    "build_id": "status-reconnect-dd12cc80e98c",
+    "complete_recipes": "true",
+    "free_bytes": 0,
+    "ready": {
+      "status": "not_ready",
+      "database": "ok",
+      "plan_store": "plan_store_unavailable",
+      "price_universe": {
+        "active": true,
+        "required_contexts_usable": false,
+        "missing_required_context_ids": [
+          "context:coop:23eaae11c9661e68",
+          "context:hemkop:3288e04edd97e349",
+          "context:hemkop:756955d0e6e05f23",
+          "context:willys:383650ec6ff5a636",
+          "context:willys:4a671428fc484e43"
+        ],
+        "usable_context_ids": [
+          "context:ica:0edf5d52980ffcd7",
+          "context:ica:1a19476898da3fb0",
+          "context:ica:24c415e3af6438b4",
+          "context:ica:2d734344abd8c685",
+          "context:ica:3d991cfe2014eb8c",
+          "context:ica:602d84df14d47e3d",
+          "context:ica:7b8c7bd0161c50dc",
+          "context:ica:7f1f6e52c3152f98",
+          "context:ica:b7a8ac31980d0bd7",
+          "context:ica:b7ad17cc0a7001fd",
+          "context:ica:cb840c0edbf56816",
+          "context:ica:e03aeae83df25aa4"
+        ],
+        "requires_attention": true,
+        "warning_age_hours": 36.0,
+        "stale_age_hours": 48.0,
+        "status": "degraded",
+        "price_universe_id": "price-universe:387cc368662cc45b3ee4714aaf57ed42e4a6ff1123a814d7fb62e25f5ead80e9",
+        "built_at": "2026-10-05 22:16:50.460741+00:00",
+        "oldest_price_age_hours": 77.9,
+        "oldest_usable_price_age_hours": null,
+        "hours_until_oldest_usable_stale": null,
+        "usable_context_count": 12,
+        "excluded_stale_context_count": 8,
+        "excluded_stale_context_ids": [
+          "context:coop:23eaae11c9661e68",
+          "context:hemkop:3288e04edd97e349",
+          "context:hemkop:756955d0e6e05f23",
+          "context:lidl:05f1cb3d9fc89bc3",
+          "context:lidl:46dd1e85257757e0",
+          "context:willys:383650ec6ff5a636",
+          "context:willys:4a671428fc484e43",
+          "context:willys:f3f63d6851275fcc"
+        ],
+        "product_count": 2234
+      },
+      "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+      "build_id": "status-reconnect-dd12cc80e98c",
+      "features": {
+        "complete_recipes_enabled": true
+      }
+    }
+  },
+  "operator_actions_pending": [
+    "Run reviewed task registration as administrator",
+    "Approve exact nine archived server objects for deletion"
+  ]
+}
