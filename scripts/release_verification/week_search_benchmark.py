@@ -1,6 +1,7 @@
 """Measure real planner work in a resource-limited, isolated release container.
 
-The previous scale generator remains byte-identical. Its handoff to benchmark.py
+The previous scale generator logic is unchanged (LF/CRLF is recorded separately).
+Its handoff to benchmark.py
 is routed here only to add CPU/cgroup metrics and separate trial output names.
 No products, recipe definitions, requests, planner results or clocks are mocked.
 """

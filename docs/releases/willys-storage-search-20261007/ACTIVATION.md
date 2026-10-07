@@ -1,6 +1,9 @@
 # Veckosökning – framtida separat app-only-aktivering
 
-**Slutkvalificering pågår. Detta dokument är en förberedd driftväg, inte ett aktiveringsbeslut.**
+**Isolerad slutkvalificering PASS. Detta är en förberedd driftväg för ett separat aktiveringsbeslut.**
+
+Ingen del av B är aktiverad. A:s aktuella serverutrymmes- och readinesshinder
+måste vara lösta före ett framtida appbyte. Se QUALIFICATION.json och RESULTS.md.
 
 Tidigare etapp aktiverade dd12; denna etapps reläarbete är separat. Denna instruktion gäller endast ett framtida, separat
 beslut för måltidskandidaten. Läs SEARCH.md och A-STATUS.md och aktuellt driftläge före beslut.
@@ -14,6 +17,9 @@ Detta dokument är ingen installation eller ny insamlings-/proxyrelease.
 | Image | `sha256:8a537fc4d333d9fc17fd06916061ed481ba433951126688df51b6b4da19766f3` |
 | Avsett BUILD_ID | `week-search-54cb2e8159a1` |
 | Kompletta recept | `true` efter lyckad kontroll |
+| Exporterad imagefil | `smako-week-search-54cb2e8159a1-image.tar` |
+| Imagefil SHA-256 | `ec82580cc0a7c6d001bfda93dd0f2b8fc48938cda5d0ea5f57f7d93d9879ff19` |
+| Imagefil storlek | 593 880 576 byte |
 
 Paketet finns i `.local/willys-storage-search-20261007/package-54cb2e8159a1/`. Imagen byggdes
 från hashkontrollerade paketfiler ovanpå identifierad, verifierad föregångare.
@@ -23,6 +29,11 @@ complete-recipes.js SHA-256
 Webbläsarens URL-version är `meal-library-1`. Före- och efterimagen i denna lokala jämförelse har samma OS- och
 Pythonberoenden. Den lokala OS-basen är inte identisk med den historiska
 serverimagen; inspektera paketinventeringen inför beslut. Ingen ny byggning ska göras under aktiveringen.
+Den exporterade imagen ligger bredvid ZIP-filen. Efter separat godkänt
+beslut: överför den hashkontrollerade TAR-filen till den valda releaseplatsen,
+läs in den med `docker image load --input <verifierad-tar>` och kontrollera
+ovanstående image-ID. Exporten innehåller inga testvolymer eller containerlager
+från felinjektionerna. Bygg inte om paketet vid installation.
 
 ## Förkontroller och avgränsning
 

@@ -1,4 +1,4 @@
-# B – optimering av veckosökningen, kvalificering pågår
+# B – optimering av veckosökningen, verifierad isolerad kandidat
 
 Detta är isolerad utveckling. Ingen del av B har aktiverats på betan.
 
@@ -46,7 +46,7 @@ upprepade produkt-/referensprövningar under veckosökningen.
 1. `ada436763c8a`: faktaversionen beräknas med strömmande JSON och exakt
    samma kanoniska byte/hash, utan full kopiering av alla nästlade fakta.
    Förändrade eller nya fakta ingår fortfarande i signaturen.
-2. Samma commit: befintliga begränsade recept-/kandidatcacher behåller ofta
+2. Samma commit: befintliga begränsade recept-/kandidatcacher behåller senast
    använda poster i stället för att tömmas helt när gränsen nås. Gränserna
    höjs inte; borttagna rena beräkningar kan alltid göras om.
 3. `54cb2e8159a1`: varje exakt recept valideras innan dess produktunderlag
@@ -86,7 +86,7 @@ kan finnas. Resultatet är lägsta hittade kostnad inom valen, inte ett bevis
 för global optimalitet. Diagnostikens begränsade spår räknas inte som en
 fullständig profil av alla produktanrop.
 
-## Hittills verifierat
+## Kodprov och första mätpar
 
 80 riktade prov passerade efter den sista kodändringen, inklusive
 receptberedning, underlagscache, personlig prestanda/ekvivalens, granskad
@@ -96,6 +96,8 @@ Ett avgränsat föreprov med fd2:s verkliga `nutrition_evidence` fallerar:
 identiska värden och källreferenser, fortfarande 152 egna receptvalideringar.
 Manipulerat mängdsigill stoppas. Tidigare prov av opåverkade status-/importdelar
 är återanvända versionsbevis, inte nykörda tester.
+Den avslutande bredare körningen omfattar 206 passerade backendtester;
+de 80 överlappande proven adderas inte till den siffran.
 
 Första parade kalla huvudprovet, inga förberedda artefakter:
 
@@ -132,7 +134,7 @@ spårkontexter, faktiska sökhändelser och stopporsaker är identiska. Räknare
 råa värden och den första oklassificerade diffen bevaras. Den normaliseras
 bara i resultatjämförelsen; inga webbläsarfel eller serverfel undantas.
 
-## Miljö och återstående kvalificering
+## Miljö och slutkvalificering
 
 Windows lokala Docker, två CPU och 3 GiB per isolerad process, inga parallella
 tunga planerare. Data-VHDX verifierad på
@@ -142,9 +144,12 @@ Samma lokala basimage och Pythonberoenden används före/efter. Den lokalt
 återbyggda basimagen är inte den historiska serverimagen; historiska
 servermätningar redovisas separat och blandas inte med dessa parade värden.
 
-Full 1×/2×/5×-matris, tre kalla/varma huvud-/skalprov, kompletterande
-profilfall och paketerade webbläsar-/lagringsprov pågår. Kandidaten är
-**ännu inte slutkvalificerad eller redo för aktiveringsbeslut**.
+Full 1×/2×/5×-matris och kompletterande profilfall är klara: 36 separata
+planerarprocesser och 60 fulla planresultat. Huvudfallet och 5× har tre kalla
+och tre varma prov per version. 1×/2× har ett kallt och tre varma prov per
+version. Paketerade webbläsar-, innehålls- och lagringsprov är också klara.
+**Kandidaten är slutkvalificerad i isolering och inte aktiverad.** Ett framtida
+appbyte kräver separat beslut och godkända aktuella driftförkontroller.
 Råa test- och verktygsfel bevaras under
 `.local/willys-storage-search-20261007/`, inklusive avbrutna profiler.
 
@@ -165,7 +170,7 @@ rådata redovisar även dem separat. Inget färdigt resultat återanvänds.
 60-sekundersmålet nås i de två varma knappflödena, men inte från kallt
 tillstånd. En mätning per rad bevisar inte en percentil eller generell gräns.
 
-Tretton strikta mobilwebbläsarprov har passerat (tre före, tio efter).
+Fjorton strikta mobilwebbläsarprov har passerat (tre före, elva efter).
 För varje ursprunglig menyavsikt finns exakt en tung beräkning i serverns
 logg, korrelerad med begärans-ID. Byte och omräkning är separata avsikter.
 Chromium och WebKit täcker publikt/personligt, enkel/genomarbetad middag,
@@ -176,5 +181,16 @@ Råa nätfel från felinjektion finns kvar; oväntade sidfel har inte undantagit
 Detta är mobil layout och simulerad synlighet, inte fysisk iPhone eller
 verifierat byte mellan operativsystemets appar. Se BROWSER-EVIDENCE.json.
 
-Fulla resultat i tolv hittills färdiga före/efter-par matchar efter ovan
-redovisad normalisering. Samtidighets-, äldre profil- och skalprov fortsätter.
+Fulla resultat i samtliga 37 före/efter-par matchar efter redovisad
+normalisering. För de separata historiska privata profilsessionerna skiljer
+även tillståndets cachehash; villkoren för den begränsade jämförelsen finns
+i TESTS.md. Ingen mat, mängd, produkt, kanal, köpstatus, näring eller audit
+undantas. COMPARISONS.json och RESULT-VALIDATION.json innehåller utfallet.
+
+Slutliga medianer för hela kalla 5×-processen: 892,01→534,79 s, −40,05 %.
+Varma nya 5×-beräkningar: 775,67→419,03 s, −45,98 %. Alla råtider,
+processgränser, CPU, minnestoppar, förberedelsekostnader och profilpar finns
+i PERFORMANCE.md/json och PREPARATION.md/json. Nio äldre isolerade
+revisionsrader läses oförändrade; 30 av 30 recept kvalificeras med uttryckligt
+redovisade villkor. Begränsningen kvarstår: kallt huvudklick tog 87,08 s och
+den stora 5×-sökningen tar fortfarande flera minuter.

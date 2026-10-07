@@ -1,4 +1,4 @@
-# Verifiering – pågående slutmatris
+# Verifiering – avslutad isolerad slutmatris
 
 Appens testade runtime är `54cb2e8159a126de26fa11cb1d393dc275238fd3`,
 image `8a537fc4d333`. Senare dokumentations-/testverktygscommits ändrar inte
@@ -74,11 +74,21 @@ denna begränsade normalisering gäller endast separata historiska HTTP-sessione
 
 ## Begränsningar och återstående arbete
 
-Slutlig 1×/2×/5×-matris och individuella innehålls-/invalideringsprov
-fortsätter. Kandidaten är ännu
-inte slutkvalificerad. Lokal replay använder frysta historiska priser/fakta,
+Slutlig 1×/2×/5×-matris och individuella innehålls-/invalideringsprov har
+passerat. QUALIFICATION.json binder 36 planerarprocesser, 60 validerade
+fulla resultat, 37 matchande före/efter-par och 30 receptkvalificeringar till
+den slutliga imagen. Nio bevarade isolerade revisionsrader läses oförändrade,
+inklusive två rader med senare återkallat innehåll. Gamla och nya revisioner
+överlever de separata HTTP-/webbläsarprovens faktiska appomstarter och
+flagga av; tidigare 267-radersbevis återanvänds för oförändrad kod.
+
+Lokal replay använder frysta historiska priser/fakta,
 två CPU, 3 GiB och en tung planerare. Inga produktionspriser eller privata
 produktionsplaner ingår. Mobil WebKit är inte fysisk iPhone-testning.
+Kallt huvudklick överstiger fortfarande 60 sekunder. Stora relevanta bibliotek
+har lägre kostnad per sökning men flera minuters väntan. Befintliga
+sökbudgetgränser är oförändrade och redovisas; global optimalitet är inte
+bevisad. A:s produktionsåterställning är separat blockerad.
 
 Råbevis finns på D: under `.local/willys-storage-search-20261007/`.
 Avbrutna profiler, ursprungliga testfel och omkörningar bevaras var för sig.

@@ -1,4 +1,48 @@
-# 2026-10-07: D-lagring och veckosökning – pågående, separata spår
+# 2026-10-07: Slutleverans – A blockerad, B kvalificerad i isolering
+
+Arbetsgren `feature/willys-storage-search-20261007`. Ingen Git-push eller
+aktivering av måltids-/prestandakandidaten. [Slutrapport](releases/willys-storage-search-20261007/RESULTS.md).
+
+**A är inte återställd.** Full driftkontroll 15:05 UTC visade rätt dd12,
+kompletta recept på, serverns faktiska datavolymer med 0 byte tillgängligt,
+`/ready` 503 och `SQLITE_IOERR_SHMSIZE`. Alla fem obligatoriska baser var
+över 48 timmar. Den separata reläkandidaten `fe795e5b04f5` är installerad,
+men Windows nekade `Set-ScheduledTask`; uppgiften använder fortsatt bdc9.
+Schema, konto, S4U/Limited och övriga inställningar är bevarade. Ordinarie
+17:30-start observerades; det är ingen manuellt kontrollerad start.
+Serverutrymme och administratörskörning av det redan avgränsade
+`update_relay_task.ps1` behövs före fortsatt S4U-/driftverifiering.
+Ingen kö eller tidigare data har raderats. Se tidsstämplad
+[A-status](releases/willys-storage-search-20261007/A-STATUS.md).
+
+**B är färdig och isolerat kvalificerad, inte aktiverad.** Runtime
+`54cb2e8159a126de26fa11cb1d393dc275238fd3`, image
+`sha256:8a537fc4d333d9fc17fd06916061ed481ba433951126688df51b6b4da19766f3`.
+ZIP SHA-256 `98446fac69395c8f7eded6c15f23f8194b5e26dffde1810e83cb5a9007338667`.
+Verifierad imageexport SHA-256
+`ec82580cc0a7c6d001bfda93dd0f2b8fc48938cda5d0ea5f57f7d93d9879ff19`.
+Båda finns i `.local/willys-storage-search-20261007/package-54cb2e8159a1/`.
+Senare commits gäller dokumentation/testverktyg; bygg inte om slutpaketet.
+
+Tre kalla 5×-processer per sida: median 892,01→534,79 s (−40 %).
+Tre varma nya 5×-beräkningar: 775,67→419,03 s (−46 %). Samma relevanta
+620 recept och 12 781 veckoutvärderingar; samma begränsade sökbudget.
+Huvudklick varmt 54,234 s Chromium/53,234 s WebKit; kallt 87,078 s når
+fortfarande inte 60-sekundersmålet. Ingen global optimalitet hävdas.
+
+37 fullständiga resultatpar matchar efter redovisad metadatanormalisering;
+60 planresultat, 206 backendtester, 14 strikta webbläsarprov, fyra äldre
+15/20-profiler och alla 24+6 receptkvalificeringar passerar. Individuell
+receptkvalificering hade inget proteinmål. Import, invalidering, gemensamt
+inköp, privat skafferi, ägarisolering, revisioner, omstart och flagga av
+verifierade. Ursprungliga samtidighetsfel och telemetrivarningar bevaras;
+SQLite-väntetiden rättades i testmiljön, inte i appimagen.
+Alla tunga testsekvenser är avslutade. Se
+[slutkontroll](releases/willys-storage-search-20261007/QUALIFICATION.json),
+[mätgränser](releases/willys-storage-search-20261007/PERFORMANCE.md) och
+[framtida app-only-anvisning](releases/willys-storage-search-20261007/ACTIVATION.md).
+
+## Historiska delstatusar 7 oktober – ersatta av slutläget ovan
 
 Uppdatering 14:35 UTC: basens tre varma 5×-nyberäkningar är klara,
 775,67/775,73/771,76 s (median 775,67). Efterversionens motsvarande serie
