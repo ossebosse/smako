@@ -16,6 +16,8 @@ den paketerade appkoden. A:s rena reläpaket är separat `fe795e5b04f5`.
   verklig planering, DOM, sparad GET och ägarisolering. Navigations-/nätprov
   och mutations-/omstartsprov anges individuellt i BROWSER-EVIDENCE.json.
   Varje ursprunglig begärans-ID motsvarar exakt en tung beräkning i serverloggen.
+  Proven använder gästsessioner i publikt och personligt flöde; de är inte
+  verifiering av samtliga signerade kontosessionsformer.
 - Fyra äldre 15/20-profiler, exakt/uppskattat och original/plus, passerade
   15 måltider, 20 portioner, 40/30/20 g, korg/audit och sparade revisioner efter
   faktisk appomstart. Hela resultaten jämfördes med fd2:s bevarade prov.
@@ -36,6 +38,9 @@ visade analytics HTTP 500 (`database is locked`) 11:33:44 UTC. Slutbedömningen
 503 under formulärförberedelsen. Endast två jobb accepterades; båda slutfördes.
 Den tredje klientens dubbelklick väntade på en spärrad knapp. Det är inte
 bevisat att navigation var den historiska orsaken till just detta klickfel.
+CONCURRENCY.json använder den strikta bedömningen som samlat `outcome`;
+klientens ursprungliga PASS ligger separat i `client_reported_outcome`.
+Den ursprungliga rårapporten är orörd.
 
 Testverktyget hade också en konkret osäker ordning: statuscallbacken kunde
 navigera innan Playwrights klick hade avslutats. `f3dc1ac` ordnar dessa

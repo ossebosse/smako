@@ -1,5 +1,15 @@
 # 2026-10-07: D-lagring och veckosökning – pågående, separata spår
 
+Uppdatering 14:35 UTC: basens tre varma 5×-nyberäkningar är klara,
+775,67/775,73/771,76 s (median 775,67). Efterversionens motsvarande serie
+pågår i `smako-search-after-scale5-warm-1`. Därefter kör den redan startade
+sekvensen de fem profilparen och `container_followups.py` inklusive 30
+kvalificeringar, invalidering, äldre lagring och imageexport. Kör inte en
+andra tung sekvens parallellt. Slutkontroller finns förberedda som
+`collect_followups.py`, `compare_all.py`, `validate_results.py`,
+`final_gate.py` och `index_evidence.py` under samma lokala evidensrot.
+14:11 UTC var servern fortsatt full och uppgiften fortsatt bdc9.
+
 Uppdatering 13:32 UTC: tre kalla 5×-par klara. Hela processens median
 892,01→534,79 s (cirka −40 %); varma 5×-nyberäkningar pågår därefter i
 samma sekventiella matris. Runtime/image är fortfarande 54cb/8a537fc4d333.
