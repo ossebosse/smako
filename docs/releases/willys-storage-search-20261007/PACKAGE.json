@@ -1,0 +1,35 @@
+{
+  "runtime": "54cb2e8159a126de26fa11cb1d393dc275238fd3",
+  "image": "sha256:8a537fc4d333d9fc17fd06916061ed481ba433951126688df51b6b4da19766f3",
+  "package": {
+    "file": "smako-server-54cb2e8159a1.zip",
+    "sha256": "98446fac69395c8f7eded6c15f23f8194b5e26dffde1810e83cb5a9007338667",
+    "bytes": 2923461,
+    "files": 671
+  },
+  "changed_runtime_files": [
+    "backend/app/services/personal_planner.py",
+    "backend/app/services/personal_source_facts.py",
+    "backend/app/services/recipe_computation_cache.py",
+    "backend/app/services/recipe_preparation.py",
+    "deploy/scripts/start_packaged_relay.ps1",
+    "grocery_data/local_relay.py",
+    "grocery_data/relay_storage.py",
+    "grocery_data/source_cli.py"
+  ],
+  "qualification": "in_progress",
+  "tag": "smako-week-search:54cb2e8159a1-packaged",
+  "manifest_verification": {
+    "commit": "54cb2e8159a126de26fa11cb1d393dc275238fd3",
+    "verified_files": 664,
+    "package_only_files": [
+      ".dockerignore",
+      "Dockerfile",
+      "deploy/.env.production.example",
+      "requirements-dev.lock",
+      "scripts/build_release.py",
+      "scripts/run_packaged_relay.py"
+    ],
+    "mismatches": []
+  }
+}

@@ -3,6 +3,19 @@
 Pågående arbete. **Prisflödet är ännu inte återställt.** Kontrollerat 7 oktober
 2026 kl. 09:05 UTC, ingen appinstallation eller prisinsamling utförd i denna etapp.
 
+Återkontroll **10:59:38 UTC**: fortfarande 0 byte tillgängligt på de verkliga
+rådata-/pris-/databas-/planvolymerna, rätt dd12 och kompletta recept på,
+`/health` 200, `/ready` 503, `SQLITE_IOERR_SHMSIZE`. Alla fem baserna är då
+äldre än 48 timmar: Coop 48,48 h; Hemköp 57,96/58,22 h; Willys
+67,48/67,17 h. Enbart Willys räcker därmed inte för återställd readiness.
+Ordinarie återhämtning för övriga baser behövs också, med samma policy.
+Willys har 10 217 respektive 8 647 aktiva rader från faktiskt
+`source_snapshot_id=5ddb11e6ddd54fe9ad7c75a6a06e52bf`.
+Den första probens tomma snapshot-lista berodde på fel fältnamn i
+diagnostikskriptet (`snapshot_id`); råa observationstider och manifestets
+hash var rätt. Den korrigerade proben och den ursprungliga finns båda kvar.
+Ingen priskälla har anropats av dessa läskontroller.
+
 ## Verifierad drift
 
 - Beta kör fortfarande dd12, image `c8362751b13a`, BUILD_ID
