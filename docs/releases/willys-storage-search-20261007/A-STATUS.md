@@ -107,6 +107,15 @@ verklig ny leverans/import/publicering är ännu inte utförd.
 
 ## Konkreta blockerare
 
+Återkontroll **13:08:17 UTC** från appens faktiska miljösökvägar: samma fyra
+datavolymer har fortfarande 0 byte ledigt, dd12 och receptflaggan är oförändrade.
+Windows 13:07:38 UTC: C: 436 301 824 byte, D: 688 816 566 272 byte ledigt.
+Uppgiften är fortsatt Ready/Enabled med bdc9, S4U/Limited. Ingen återhämtning
+eller S4U-körning med det nya paketet kan därför redovisas som genomförd.
+En föregående direkt `df` mot en antagen värdvolymsökväg fick åtkomstfel;
+den används inte som volymbevis. Den efterföljande proben läser appens
+verkliga miljösökvägar inne i den körande containern.
+
 Återkontroll 2026-10-07 12:00:50 UTC: samma servervolym har fortfarande
 0 byte tillgängligt. Windows-uppgiften är fortsatt Ready och pekar på bdc9.
 Ett separat [retentionförslag med läsinventering](RETENTION-DRY-RUN.md)
