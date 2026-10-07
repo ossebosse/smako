@@ -1,0 +1,1296 @@
+{
+  "scope": "Counters from completed first cold pairs. Inclusive timing spans overlap and are not added. Relevant pool is after static request filters; singleton qualification is a separate step.",
+  "unchanged_search_and_rejections": true,
+  "rows": [
+    {
+      "factor": 1,
+      "side": "before",
+      "total_library_recipes": 176,
+      "raw_relevant_pool": 124,
+      "pools": [
+        {
+          "meal_type": "dinner",
+          "raw": 124
+        }
+      ],
+      "singleton_passed": 95,
+      "not_singleton_evaluated": 0,
+      "candidate_rejections": [
+        {
+          "stage": "policy_taste",
+          "label": "Policy/smak",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition",
+          "label": "Näringskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition_bound",
+          "label": "Näringsgräns från kvalificerade produkter",
+          "rejected": 6
+        },
+        {
+          "stage": "organic",
+          "label": "Eko",
+          "rejected": 0
+        },
+        {
+          "stage": "store_cap",
+          "label": "Butikstak",
+          "rejected": 0
+        },
+        {
+          "stage": "variation",
+          "label": "Variationskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "preparation",
+          "label": "Tillagning/beredning",
+          "rejected": 0
+        },
+        {
+          "stage": "product_qualification",
+          "label": "Produktkvalificering",
+          "rejected": 23
+        },
+        {
+          "stage": "price_basket",
+          "label": "Pris/korg",
+          "rejected": 0
+        }
+      ],
+      "search": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 95,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 95,
+          "retained": 8,
+          "beam_pruned": 87,
+          "evaluations_executed": 95,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 0,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 760,
+          "constraints_rejected": 20,
+          "evaluation_rejected": 0,
+          "priced": 740,
+          "retained": 8,
+          "beam_pruned": 732,
+          "evaluations_executed": 740,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 25,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 20,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 760,
+          "constraints_rejected": 128,
+          "evaluation_rejected": 0,
+          "priced": 632,
+          "retained": 8,
+          "beam_pruned": 624,
+          "evaluations_executed": 632,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 8,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 128,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 760,
+          "constraints_rejected": 224,
+          "evaluation_rejected": 0,
+          "priced": 536,
+          "retained": 8,
+          "beam_pruned": 528,
+          "evaluations_executed": 536,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 224,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 760,
+          "constraints_rejected": 286,
+          "evaluation_rejected": 0,
+          "priced": 474,
+          "retained": 8,
+          "beam_pruned": 466,
+          "evaluations_executed": 474,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 286,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        }
+      ],
+      "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet.",
+      "search_outcome": {
+        "status": "VALID_SOLUTION",
+        "global_optimum_proven": false,
+        "label": "Lägsta hittade inköpskostnad inom dina val",
+        "search_budget": {
+          "scope": "current_planner_search_diagnostics",
+          "nutrition_status": "NOT_REACHED",
+          "nutrition_searches_recorded": 6,
+          "nutrition_searches_omitted": 0,
+          "nutrition_budget_exhausted_recorded": 0,
+          "week_search_method": "bounded_beam",
+          "distinct_week_proposals_pruned": 2404
+        },
+        "budget_message": "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget. Globalt lägsta pris är inte bevisat."
+      },
+      "product_summary": {
+        "version": "product-decision-path-v1",
+        "product_limit": 256,
+        "context_limit": 4096,
+        "omitted_products": 2377,
+        "omitted_context_events": 0,
+        "interpretation": "First stops are per actual recipe/ingredient path. An unreached path is not a passed gate. Index absence and final nonselection do not prove economic rejection. Comparisons are explicitly bounded final-menu counterfactuals through the same optimizer, nutrition and audit."
+      },
+      "nutrition_searches_recorded": 6,
+      "omitted_nutrition_searches": 0,
+      "source": "trials\\before-scale1-cold-1\\result\\main-cold-0-plan.json"
+    },
+    {
+      "factor": 1,
+      "side": "after",
+      "total_library_recipes": 176,
+      "raw_relevant_pool": 124,
+      "pools": [
+        {
+          "meal_type": "dinner",
+          "raw": 124
+        }
+      ],
+      "singleton_passed": 95,
+      "not_singleton_evaluated": 0,
+      "candidate_rejections": [
+        {
+          "stage": "policy_taste",
+          "label": "Policy/smak",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition",
+          "label": "Näringskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition_bound",
+          "label": "Näringsgräns från kvalificerade produkter",
+          "rejected": 6
+        },
+        {
+          "stage": "organic",
+          "label": "Eko",
+          "rejected": 0
+        },
+        {
+          "stage": "store_cap",
+          "label": "Butikstak",
+          "rejected": 0
+        },
+        {
+          "stage": "variation",
+          "label": "Variationskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "preparation",
+          "label": "Tillagning/beredning",
+          "rejected": 0
+        },
+        {
+          "stage": "product_qualification",
+          "label": "Produktkvalificering",
+          "rejected": 23
+        },
+        {
+          "stage": "price_basket",
+          "label": "Pris/korg",
+          "rejected": 0
+        }
+      ],
+      "search": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 95,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 95,
+          "retained": 8,
+          "beam_pruned": 87,
+          "evaluations_executed": 95,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 0,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 760,
+          "constraints_rejected": 20,
+          "evaluation_rejected": 0,
+          "priced": 740,
+          "retained": 8,
+          "beam_pruned": 732,
+          "evaluations_executed": 740,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 25,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 20,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 760,
+          "constraints_rejected": 128,
+          "evaluation_rejected": 0,
+          "priced": 632,
+          "retained": 8,
+          "beam_pruned": 624,
+          "evaluations_executed": 632,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 8,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 128,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 760,
+          "constraints_rejected": 224,
+          "evaluation_rejected": 0,
+          "priced": 536,
+          "retained": 8,
+          "beam_pruned": 528,
+          "evaluations_executed": 536,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 224,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 760,
+          "constraints_rejected": 286,
+          "evaluation_rejected": 0,
+          "priced": 474,
+          "retained": 8,
+          "beam_pruned": 466,
+          "evaluations_executed": 474,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 286,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        }
+      ],
+      "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet.",
+      "search_outcome": {
+        "status": "VALID_SOLUTION",
+        "global_optimum_proven": false,
+        "label": "Lägsta hittade inköpskostnad inom dina val",
+        "search_budget": {
+          "scope": "current_planner_search_diagnostics",
+          "nutrition_status": "NOT_REACHED",
+          "nutrition_searches_recorded": 6,
+          "nutrition_searches_omitted": 0,
+          "nutrition_budget_exhausted_recorded": 0,
+          "week_search_method": "bounded_beam",
+          "distinct_week_proposals_pruned": 2404
+        },
+        "budget_message": "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget. Globalt lägsta pris är inte bevisat."
+      },
+      "product_summary": {
+        "version": "product-decision-path-v1",
+        "product_limit": 256,
+        "context_limit": 4096,
+        "omitted_products": 2377,
+        "omitted_context_events": 0,
+        "interpretation": "First stops are per actual recipe/ingredient path. An unreached path is not a passed gate. Index absence and final nonselection do not prove economic rejection. Comparisons are explicitly bounded final-menu counterfactuals through the same optimizer, nutrition and audit."
+      },
+      "nutrition_searches_recorded": 6,
+      "omitted_nutrition_searches": 0,
+      "source": "trials\\after-scale1-cold-1\\result\\main-cold-0-plan.json"
+    },
+    {
+      "factor": 2,
+      "side": "before",
+      "total_library_recipes": 352,
+      "raw_relevant_pool": 248,
+      "pools": [
+        {
+          "meal_type": "dinner",
+          "raw": 248
+        }
+      ],
+      "singleton_passed": 191,
+      "not_singleton_evaluated": 0,
+      "candidate_rejections": [
+        {
+          "stage": "policy_taste",
+          "label": "Policy/smak",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition",
+          "label": "Näringskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition_bound",
+          "label": "Näringsgräns från kvalificerade produkter",
+          "rejected": 12
+        },
+        {
+          "stage": "organic",
+          "label": "Eko",
+          "rejected": 0
+        },
+        {
+          "stage": "store_cap",
+          "label": "Butikstak",
+          "rejected": 0
+        },
+        {
+          "stage": "variation",
+          "label": "Variationskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "preparation",
+          "label": "Tillagning/beredning",
+          "rejected": 0
+        },
+        {
+          "stage": "product_qualification",
+          "label": "Produktkvalificering",
+          "rejected": 45
+        },
+        {
+          "stage": "price_basket",
+          "label": "Pris/korg",
+          "rejected": 0
+        }
+      ],
+      "search": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 191,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 191,
+          "retained": 8,
+          "beam_pruned": 183,
+          "evaluations_executed": 191,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 0,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 1528,
+          "constraints_rejected": 36,
+          "evaluation_rejected": 0,
+          "priced": 1492,
+          "retained": 8,
+          "beam_pruned": 1484,
+          "evaluations_executed": 1492,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 23,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 36,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 1528,
+          "constraints_rejected": 184,
+          "evaluation_rejected": 0,
+          "priced": 1344,
+          "retained": 8,
+          "beam_pruned": 1336,
+          "evaluations_executed": 1344,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 184,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 1528,
+          "constraints_rejected": 440,
+          "evaluation_rejected": 0,
+          "priced": 1088,
+          "retained": 8,
+          "beam_pruned": 1080,
+          "evaluations_executed": 1088,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 440,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 1528,
+          "constraints_rejected": 556,
+          "evaluation_rejected": 0,
+          "priced": 972,
+          "retained": 8,
+          "beam_pruned": 964,
+          "evaluations_executed": 972,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 556,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        }
+      ],
+      "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet.",
+      "search_outcome": {
+        "status": "VALID_SOLUTION",
+        "global_optimum_proven": false,
+        "label": "Lägsta hittade inköpskostnad inom dina val",
+        "search_budget": {
+          "scope": "current_planner_search_diagnostics",
+          "nutrition_status": "REACHED",
+          "nutrition_searches_recorded": 49,
+          "nutrition_searches_omitted": 0,
+          "nutrition_budget_exhausted_recorded": 35,
+          "week_search_method": "bounded_beam",
+          "distinct_week_proposals_pruned": 5024
+        },
+        "budget_message": "En giltig meny hittades. Sökbudgeten nåddes i 35 registrerade näringsdelberäkningar; andra godkända produktkombinationer kan finnas. Globalt lägsta pris är inte bevisat."
+      },
+      "product_summary": {
+        "version": "product-decision-path-v1",
+        "product_limit": 256,
+        "context_limit": 4096,
+        "omitted_products": 2377,
+        "omitted_context_events": 0,
+        "interpretation": "First stops are per actual recipe/ingredient path. An unreached path is not a passed gate. Index absence and final nonselection do not prove economic rejection. Comparisons are explicitly bounded final-menu counterfactuals through the same optimizer, nutrition and audit."
+      },
+      "nutrition_searches_recorded": 49,
+      "omitted_nutrition_searches": 0,
+      "source": "trials\\before-scale2-cold-1\\result\\main-cold-0-plan.json"
+    },
+    {
+      "factor": 2,
+      "side": "after",
+      "total_library_recipes": 352,
+      "raw_relevant_pool": 248,
+      "pools": [
+        {
+          "meal_type": "dinner",
+          "raw": 248
+        }
+      ],
+      "singleton_passed": 191,
+      "not_singleton_evaluated": 0,
+      "candidate_rejections": [
+        {
+          "stage": "policy_taste",
+          "label": "Policy/smak",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition",
+          "label": "Näringskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition_bound",
+          "label": "Näringsgräns från kvalificerade produkter",
+          "rejected": 12
+        },
+        {
+          "stage": "organic",
+          "label": "Eko",
+          "rejected": 0
+        },
+        {
+          "stage": "store_cap",
+          "label": "Butikstak",
+          "rejected": 0
+        },
+        {
+          "stage": "variation",
+          "label": "Variationskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "preparation",
+          "label": "Tillagning/beredning",
+          "rejected": 0
+        },
+        {
+          "stage": "product_qualification",
+          "label": "Produktkvalificering",
+          "rejected": 45
+        },
+        {
+          "stage": "price_basket",
+          "label": "Pris/korg",
+          "rejected": 0
+        }
+      ],
+      "search": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 191,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 191,
+          "retained": 8,
+          "beam_pruned": 183,
+          "evaluations_executed": 191,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 0,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 1528,
+          "constraints_rejected": 36,
+          "evaluation_rejected": 0,
+          "priced": 1492,
+          "retained": 8,
+          "beam_pruned": 1484,
+          "evaluations_executed": 1492,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 23,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 36,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 1528,
+          "constraints_rejected": 184,
+          "evaluation_rejected": 0,
+          "priced": 1344,
+          "retained": 8,
+          "beam_pruned": 1336,
+          "evaluations_executed": 1344,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 184,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 1528,
+          "constraints_rejected": 440,
+          "evaluation_rejected": 0,
+          "priced": 1088,
+          "retained": 8,
+          "beam_pruned": 1080,
+          "evaluations_executed": 1088,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 440,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 1528,
+          "constraints_rejected": 556,
+          "evaluation_rejected": 0,
+          "priced": 972,
+          "retained": 8,
+          "beam_pruned": 964,
+          "evaluations_executed": 972,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 556,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        }
+      ],
+      "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet.",
+      "search_outcome": {
+        "status": "VALID_SOLUTION",
+        "global_optimum_proven": false,
+        "label": "Lägsta hittade inköpskostnad inom dina val",
+        "search_budget": {
+          "scope": "current_planner_search_diagnostics",
+          "nutrition_status": "REACHED",
+          "nutrition_searches_recorded": 49,
+          "nutrition_searches_omitted": 0,
+          "nutrition_budget_exhausted_recorded": 35,
+          "week_search_method": "bounded_beam",
+          "distinct_week_proposals_pruned": 5024
+        },
+        "budget_message": "En giltig meny hittades. Sökbudgeten nåddes i 35 registrerade näringsdelberäkningar; andra godkända produktkombinationer kan finnas. Globalt lägsta pris är inte bevisat."
+      },
+      "product_summary": {
+        "version": "product-decision-path-v1",
+        "product_limit": 256,
+        "context_limit": 4096,
+        "omitted_products": 2377,
+        "omitted_context_events": 0,
+        "interpretation": "First stops are per actual recipe/ingredient path. An unreached path is not a passed gate. Index absence and final nonselection do not prove economic rejection. Comparisons are explicitly bounded final-menu counterfactuals through the same optimizer, nutrition and audit."
+      },
+      "nutrition_searches_recorded": 49,
+      "omitted_nutrition_searches": 0,
+      "source": "trials\\after-scale2-cold-1\\result\\main-cold-0-plan.json"
+    },
+    {
+      "factor": 5,
+      "side": "before",
+      "total_library_recipes": 880,
+      "raw_relevant_pool": 620,
+      "pools": [
+        {
+          "meal_type": "dinner",
+          "raw": 620
+        }
+      ],
+      "singleton_passed": 480,
+      "not_singleton_evaluated": 0,
+      "candidate_rejections": [
+        {
+          "stage": "policy_taste",
+          "label": "Policy/smak",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition",
+          "label": "Näringskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition_bound",
+          "label": "Näringsgräns från kvalificerade produkter",
+          "rejected": 29
+        },
+        {
+          "stage": "organic",
+          "label": "Eko",
+          "rejected": 0
+        },
+        {
+          "stage": "store_cap",
+          "label": "Butikstak",
+          "rejected": 0
+        },
+        {
+          "stage": "variation",
+          "label": "Variationskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "preparation",
+          "label": "Tillagning/beredning",
+          "rejected": 0
+        },
+        {
+          "stage": "product_qualification",
+          "label": "Produktkvalificering",
+          "rejected": 111
+        },
+        {
+          "stage": "price_basket",
+          "label": "Pris/korg",
+          "rejected": 0
+        }
+      ],
+      "search": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 480,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 480,
+          "retained": 8,
+          "beam_pruned": 472,
+          "evaluations_executed": 480,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 0,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 3840,
+          "constraints_rejected": 82,
+          "evaluation_rejected": 0,
+          "priced": 3758,
+          "retained": 8,
+          "beam_pruned": 3750,
+          "evaluations_executed": 3758,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 16,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 82,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 3840,
+          "constraints_rejected": 657,
+          "evaluation_rejected": 0,
+          "priced": 3183,
+          "retained": 8,
+          "beam_pruned": 3175,
+          "evaluations_executed": 3183,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 3,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 657,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 3840,
+          "constraints_rejected": 1120,
+          "evaluation_rejected": 0,
+          "priced": 2720,
+          "retained": 8,
+          "beam_pruned": 2712,
+          "evaluations_executed": 2720,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 1120,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 3840,
+          "constraints_rejected": 1200,
+          "evaluation_rejected": 0,
+          "priced": 2640,
+          "retained": 8,
+          "beam_pruned": 2632,
+          "evaluations_executed": 2640,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 1200,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        }
+      ],
+      "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet.",
+      "search_outcome": {
+        "status": "VALID_SOLUTION",
+        "global_optimum_proven": false,
+        "label": "Lägsta hittade inköpskostnad inom dina val",
+        "search_budget": {
+          "scope": "current_planner_search_diagnostics",
+          "nutrition_status": "REACHED",
+          "nutrition_searches_recorded": 162,
+          "nutrition_searches_omitted": 0,
+          "nutrition_budget_exhausted_recorded": 129,
+          "week_search_method": "bounded_beam",
+          "distinct_week_proposals_pruned": 12722
+        },
+        "budget_message": "En giltig meny hittades. Sökbudgeten nåddes i 129 registrerade näringsdelberäkningar; andra godkända produktkombinationer kan finnas. Globalt lägsta pris är inte bevisat."
+      },
+      "product_summary": {
+        "version": "product-decision-path-v1",
+        "product_limit": 256,
+        "context_limit": 4096,
+        "omitted_products": 2377,
+        "omitted_context_events": 1076831,
+        "interpretation": "First stops are per actual recipe/ingredient path. An unreached path is not a passed gate. Index absence and final nonselection do not prove economic rejection. Comparisons are explicitly bounded final-menu counterfactuals through the same optimizer, nutrition and audit."
+      },
+      "nutrition_searches_recorded": 162,
+      "omitted_nutrition_searches": 0,
+      "source": "trials\\before-scale5-cold-1\\result\\main-cold-0-plan.json"
+    },
+    {
+      "factor": 5,
+      "side": "after",
+      "total_library_recipes": 880,
+      "raw_relevant_pool": 620,
+      "pools": [
+        {
+          "meal_type": "dinner",
+          "raw": 620
+        }
+      ],
+      "singleton_passed": 480,
+      "not_singleton_evaluated": 0,
+      "candidate_rejections": [
+        {
+          "stage": "policy_taste",
+          "label": "Policy/smak",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition",
+          "label": "Näringskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "nutrition_bound",
+          "label": "Näringsgräns från kvalificerade produkter",
+          "rejected": 29
+        },
+        {
+          "stage": "organic",
+          "label": "Eko",
+          "rejected": 0
+        },
+        {
+          "stage": "store_cap",
+          "label": "Butikstak",
+          "rejected": 0
+        },
+        {
+          "stage": "variation",
+          "label": "Variationskrav",
+          "rejected": 0
+        },
+        {
+          "stage": "preparation",
+          "label": "Tillagning/beredning",
+          "rejected": 0
+        },
+        {
+          "stage": "product_qualification",
+          "label": "Produktkvalificering",
+          "rejected": 111
+        },
+        {
+          "stage": "price_basket",
+          "label": "Pris/korg",
+          "rejected": 0
+        }
+      ],
+      "search": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 480,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 480,
+          "retained": 8,
+          "beam_pruned": 472,
+          "evaluations_executed": 480,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 0,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 3840,
+          "constraints_rejected": 82,
+          "evaluation_rejected": 0,
+          "priced": 3758,
+          "retained": 8,
+          "beam_pruned": 3750,
+          "evaluations_executed": 3758,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 16,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 82,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 3840,
+          "constraints_rejected": 657,
+          "evaluation_rejected": 0,
+          "priced": 3183,
+          "retained": 8,
+          "beam_pruned": 3175,
+          "evaluations_executed": 3183,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 3,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 657,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 3840,
+          "constraints_rejected": 1120,
+          "evaluation_rejected": 0,
+          "priced": 2720,
+          "retained": 8,
+          "beam_pruned": 2712,
+          "evaluations_executed": 2720,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 1120,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 8,
+          "proposals": 3840,
+          "constraints_rejected": 1200,
+          "evaluation_rejected": 0,
+          "priced": 2640,
+          "retained": 8,
+          "beam_pruned": 2632,
+          "evaluations_executed": 2640,
+          "evaluation_cache_hits": 0,
+          "equivalent_pruned": 0,
+          "rejections": {
+            "policy_taste": 0,
+            "nutrition": 0,
+            "nutrition_bound": 0,
+            "organic": 0,
+            "store_cap": 0,
+            "variation": 1200,
+            "preparation": 0,
+            "product_qualification": 0,
+            "price_basket": 0
+          }
+        }
+      ],
+      "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet.",
+      "search_outcome": {
+        "status": "VALID_SOLUTION",
+        "global_optimum_proven": false,
+        "label": "Lägsta hittade inköpskostnad inom dina val",
+        "search_budget": {
+          "scope": "current_planner_search_diagnostics",
+          "nutrition_status": "REACHED",
+          "nutrition_searches_recorded": 162,
+          "nutrition_searches_omitted": 0,
+          "nutrition_budget_exhausted_recorded": 129,
+          "week_search_method": "bounded_beam",
+          "distinct_week_proposals_pruned": 12722
+        },
+        "budget_message": "En giltig meny hittades. Sökbudgeten nåddes i 129 registrerade näringsdelberäkningar; andra godkända produktkombinationer kan finnas. Globalt lägsta pris är inte bevisat."
+      },
+      "product_summary": {
+        "version": "product-decision-path-v1",
+        "product_limit": 256,
+        "context_limit": 4096,
+        "omitted_products": 2377,
+        "omitted_context_events": 1069500,
+        "interpretation": "First stops are per actual recipe/ingredient path. An unreached path is not a passed gate. Index absence and final nonselection do not prove economic rejection. Comparisons are explicitly bounded final-menu counterfactuals through the same optimizer, nutrition and audit."
+      },
+      "nutrition_searches_recorded": 162,
+      "omitted_nutrition_searches": 0,
+      "source": "trials\\after-scale5-cold-1\\result\\main-cold-0-plan.json"
+    }
+  ]
+}

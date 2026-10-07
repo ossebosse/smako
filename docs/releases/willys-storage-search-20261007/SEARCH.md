@@ -61,6 +61,31 @@ prövas fortsatt i den individuella näringsberäkningen. Samma oberoende
 slutliga checkout/audit körs. Sökordning, budget, priser, produkter, krav,
 butikstak och gemensam veckokorg har inte ändrats.
 
+## Faktiskt sökarbete i skalproven
+
+De fullständiga första kalla parens räknare finns i SEARCH-WORK.json.
+Alla nedanstående värden och stopporsaker är identiska före/efter:
+
+| Skala | Totalt innehåll | Efter statiska användarfilter | Klarade prövning var för sig | Veckoutvärderingar | Befintlig ekvivalensbeskärning | Näringsdelprov som nådde budgeten |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1× | 176 | 124 | 95 | 2 477 | 33 | 0 |
+| 2× | 352 | 248 | 191 | 5 087 | 23 | 35 |
+| 5× | 880 | 620 | 480 | 12 781 | 19 | 129 |
+
+Det är alltså en verklig femfaldig ökning av den relevanta receptpoolen,
+med ytterligare innehåll som filtreras bort tidigt. Tilläggen är fortfarande
+syntetiska. Förbättringen kommer från billigare återkommande delberäkningar;
+antalet utvärderade veckotillstånd har inte sänkts. Ingen ny beskärning eller
+mindre kandidatlista har införts. Veckotillståndscachens registrerade träffar
+är noll i dessa par; detta är inte en förbättring från cachade färdiga veckor.
+
+Sökningen behåller sin befintliga begränsade beam med bredd 8. Vid 5×
+registreras 162 näringsdelprövningar, varav 129 når sin befintliga budget.
+De returnerade veckorna klarar slutkontrollerna, men andra produktkombinationer
+kan finnas. Resultatet är lägsta hittade kostnad inom valen, inte ett bevis
+för global optimalitet. Diagnostikens begränsade spår räknas inte som en
+fullständig profil av alla produktanrop.
+
 ## Hittills verifierat
 
 80 riktade prov passerade efter den sista kodändringen, inklusive
