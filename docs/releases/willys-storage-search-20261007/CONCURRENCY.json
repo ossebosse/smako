@@ -3091,7 +3091,7 @@
           "click_started_utc": "2026-10-07T11:43:55.553166+00:00",
           "click_finished_utc": "2026-10-07T11:43:55.593210+00:00",
           "job_url": "/api/plan-jobs/567e993cc53743f6a03fb497a2357b9d",
-          "queued_dom": "Din menyberäkning väntar på en ledig plats.",
+          "queued_dom": "Din menyber\u00e4kning v\u00e4ntar p\u00e5 en ledig plats.",
           "queued_reload": true,
           "queued_reload_requested_utc": "2026-10-07T11:43:57.701748+00:00",
           "queued_reload_started_utc": "2026-10-07T11:43:57.701748+00:00",
@@ -5914,7 +5914,7 @@
           "click_started_utc": "2026-10-07T11:43:55.553667+00:00",
           "click_finished_utc": "2026-10-07T11:43:55.592212+00:00",
           "job_url": "/api/plan-jobs/8037f2f86bf64c16bd9ecef219bce81c",
-          "queued_dom": "Din menyberäkning väntar på en ledig plats.",
+          "queued_dom": "Din menyber\u00e4kning v\u00e4ntar p\u00e5 en ledig plats.",
           "queued_reload": true,
           "queued_reload_requested_utc": "2026-10-07T11:43:57.940350+00:00",
           "queued_reload_started_utc": "2026-10-07T11:43:57.940350+00:00",
@@ -5938,13 +5938,14 @@
         }
       ],
       "sampled_peak_container_memory_bytes": 1519344680,
+      "client_reported_outcome": "PASS",
       "strict_server_assessment": {
         "outcome": "PASS"
       }
     },
     {
       "label": "concurrency-normal",
-      "outcome": "PASS",
+      "outcome": "FAIL",
       "controlled_interruption": false,
       "owners": [
         {
@@ -9525,7 +9526,7 @@
             }
           ],
           "job_url": "/api/plan-jobs/f943ed6f9862477090fef6050de14d7d",
-          "queued_dom": "Din menyberäkning väntar på en ledig plats.",
+          "queued_dom": "Din menyber\u00e4kning v\u00e4ntar p\u00e5 en ledig plats.",
           "click_to_result_seconds": 166.34400000004098,
           "complete_result_hash": "1292a05c4c5352073903fe715a48ffdd47c215d69e531d37ef829e948da110c9",
           "recipe_cards": 5,
@@ -11324,7 +11325,7 @@
             }
           ],
           "job_url": "/api/plan-jobs/2da00979580946a5a72cb60caaf478d5",
-          "queued_dom": "Din menyberäkning väntar på en ledig plats.",
+          "queued_dom": "Din menyber\u00e4kning v\u00e4ntar p\u00e5 en ledig plats.",
           "click_to_result_seconds": 113.10900000017136,
           "complete_result_hash": "af6bc3d31cbdd8346047b0eaa77e1607c5acc0ca83d23efe6b2dcdb0b862352b",
           "recipe_cards": 5,
@@ -11345,6 +11346,7 @@
         }
       ],
       "sampled_peak_container_memory_bytes": 1551556935,
+      "client_reported_outcome": "PASS",
       "strict_server_assessment": {
         "outcome": "FAIL",
         "ui_plan_delivery": "PASS",
@@ -14189,7 +14191,7 @@
           "click_started_utc": "2026-10-07T11:47:57.516972+00:00",
           "click_finished_utc": "2026-10-07T11:47:57.551562+00:00",
           "job_url": "/api/plan-jobs/d95b80ff765a4838b9e22498832331e2",
-          "queued_dom": "Din menyberäkning väntar på en ledig plats.",
+          "queued_dom": "Din menyber\u00e4kning v\u00e4ntar p\u00e5 en ledig plats.",
           "click_to_result_seconds": 114.95299999997951,
           "complete_result_hash": "69fd55a7f574b49abb87ac0c3267f1331787d62ecc3d44d5ab0458cfb826c74b",
           "recipe_cards": 5,
@@ -16849,7 +16851,7 @@
           "click_started_utc": "2026-10-07T11:47:57.516469+00:00",
           "click_finished_utc": "2026-10-07T11:47:57.552563+00:00",
           "job_url": "/api/plan-jobs/4745a62127b04671add3ee3be651c1d7",
-          "queued_dom": "Din menyberäkning väntar på en ledig plats.",
+          "queued_dom": "Din menyber\u00e4kning v\u00e4ntar p\u00e5 en ledig plats.",
           "click_to_result_seconds": 168.48399999993853,
           "complete_result_hash": "df42765c2e1e5272cf58b8729a3370baa3f9b026824cad39466c6bdc1540dc5d",
           "recipe_cards": 5,
@@ -16870,6 +16872,7 @@
         }
       ],
       "sampled_peak_container_memory_bytes": 1545114484,
+      "client_reported_outcome": "PASS",
       "strict_server_assessment": {
         "outcome": "PASS"
       }
@@ -16880,7 +16883,7 @@
   "first_interrupted_failure": {
     "outcome": "FAIL",
     "category": "TimeoutError",
-    "raw_error_redacted": "Locator.dblclick: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#submit-button\")\n    - locator resolved to <button disabled type=\"submit\" id=\"submit-button\" class=\"primary-button\">…</button>\n  - attempting dblclick action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying dblclick action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying dblclick action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not enabled\n     - retrying dblclick action\n       - waiting 500ms"
+    "raw_error_redacted": "Locator.dblclick: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#submit-button\")\n    - locator resolved to <button disabled type=\"submit\" id=\"submit-button\" class=\"primary-button\">\u2026</button>\n  - attempting dblclick action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying dblclick action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying dblclick action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is not enabled\n     - retrying dblclick action\n       - waiting 500ms"
   },
   "first_interrupted_jobs": {
     "accepted_jobs": 2,
