@@ -39,7 +39,7 @@ async def main(args):
             context = contexts[index]
             page = await context.new_page()
             click_finished = asyncio.Event()
-            row = {'owner_label': index+1, 'injected': [], 'page_errors': [], 'network_failures': [], 'responses': [], 'posts': 0, 'lifecycle': []}
+            row = {'owner_label': index+1, 'injected': [], 'page_errors': [], 'server_errors': [], 'network_failures': [], 'responses': [], 'posts': 0, 'lifecycle': []}
             rows.append(row)
             await context.expose_binding('__cTrace', lambda source, data: row['lifecycle'].append({**data, 'observed_utc': datetime.now(UTC).isoformat()}))
             await context.expose_binding('__cUnhandled', lambda source, data: row['page_errors'].append('unhandledrejection: '+data))
@@ -51,6 +51,9 @@ async def main(args):
 
             async def response(r):
                 path = urlsplit(r.url).path
+                if r.status >= 500:
+                    row['server_errors'].append({'path': path, 'status': r.status,
+                        'request_id': r.headers.get('x-request-id'), 'at_utc': datetime.now(UTC).isoformat()})
                 if path == '/api/plans' and r.request.method == 'POST' or path.startswith('/api/plan-jobs/'):
                     try:
                         body = await r.json()
@@ -124,7 +127,7 @@ async def main(args):
             click_finished.set()
             await expect(page.locator('#results')).to_be_visible(timeout=420000)
             row['click_to_result_seconds'] = time.monotonic()-clicked
-            assert row['posts'] == 1 and not row['page_errors']
+            assert row['posts'] == 1 and not row['page_errors'] and not row['server_errors']
             saved = row['saved']
             assert saved['plan']['optimized_basket']['total'] == 741.15
             read = await context.request.get(args.base+'/api/plans/'+saved['plan_id'], timeout=30000)
