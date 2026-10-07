@@ -12,7 +12,7 @@ Historiska servertider är separata observationer, inte kontrollgruppen här.
 | Huvudfall P3 | 3/3 | 118,37 s | 111,16 s | -6,09 % |
 | 1× P2 | 1/1 | 117,96 s | 109,87 s | -6,86 % |
 | 2× P2 | 1/1 | 239,63 s | 227,83 s | -4,92 % |
-| 5× P2 | 1/1 | 866,53 s | 516,53 s | -40,39 % |
+| 5× P2 | 3/3 | 892,01 s | 534,79 s | -40,05 % |
 
 Här ingår containerstart, Python, innehållsförberedelse, prisinläsning,
 fakta, sökning, slutkontroller och serialisering. Skalverktygets särskilda

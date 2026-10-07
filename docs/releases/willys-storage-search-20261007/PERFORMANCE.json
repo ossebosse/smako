@@ -127,7 +127,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -230,7 +230,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -349,7 +349,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -457,7 +457,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -581,7 +581,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -689,7 +689,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -813,7 +813,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -830,78 +830,96 @@
       "factor": "5",
       "case": "main",
       "mode": "cold",
-      "n": 1,
+      "n": 3,
       "metrics": {
         "wall_seconds": {
           "raw": [
-            437.60184271399976
+            437.60184271399976,
+            455.0207138019996,
+            456.3702194519992
           ],
-          "median": 437.60184271399976,
+          "median": 455.0207138019996,
           "min": 437.60184271399976,
-          "max": 437.60184271399976
+          "max": 456.3702194519992
         },
         "facts_seconds": {
           "raw": [
-            15.568252890000167
+            15.568252890000167,
+            16.251884585999505,
+            15.695899000000281
           ],
-          "median": 15.568252890000167,
+          "median": 15.695899000000281,
           "min": 15.568252890000167,
-          "max": 15.568252890000167
+          "max": 16.251884585999505
         },
         "planner_seconds": {
           "raw": [
-            421.42382033399963
+            421.42382033399963,
+            437.960669338001,
+            440.08615336799994
           ],
-          "median": 421.42382033399963,
+          "median": 437.960669338001,
           "min": 421.42382033399963,
-          "max": 421.42382033399963
+          "max": 440.08615336799994
         },
         "serialization_seconds": {
           "raw": [
-            0.6097643900002367
+            0.6097643900002367,
+            0.8081546779994824,
+            0.5881631840002228
           ],
           "median": 0.6097643900002367,
-          "min": 0.6097643900002367,
-          "max": 0.6097643900002367
+          "min": 0.5881631840002228,
+          "max": 0.8081546779994824
         },
         "universe_seconds": {
           "raw": [
-            13.52706568199983
+            13.52706568199983,
+            13.628555422001227,
+            13.835733342999447
           ],
-          "median": 13.52706568199983,
+          "median": 13.628555422001227,
           "min": 13.52706568199983,
-          "max": 13.52706568199983
+          "max": 13.835733342999447
         },
         "cpu_user_seconds": {
           "raw": [
-            419.18685000000005
+            419.18685000000005,
+            435.98262700000004,
+            438.205486
           ],
-          "median": 419.18685000000005,
+          "median": 435.98262700000004,
           "min": 419.18685000000005,
-          "max": 419.18685000000005
+          "max": 438.205486
         },
         "cpu_system_seconds": {
           "raw": [
-            1.917481
+            1.917481,
+            2.1450540000000005,
+            1.7248319999999997
           ],
           "median": 1.917481,
-          "min": 1.917481,
-          "max": 1.917481
+          "min": 1.7248319999999997,
+          "max": 2.1450540000000005
         },
         "maxrss_kib": {
           "raw": [
-            1584152
+            1584152,
+            1584320,
+            1583048
           ],
           "median": 1584152,
-          "min": 1584152,
-          "max": 1584152
+          "min": 1583048,
+          "max": 1584320
         },
         "cgroup_memory_peak_bytes": {
           "raw": [
-            1667276800
+            1667276800,
+            1667272704,
+            1666052096
           ],
-          "median": 1667276800,
-          "min": 1667276800,
+          "median": 1667272704,
+          "min": 1666052096,
           "max": 1667276800
         }
       },
@@ -916,19 +934,43 @@
             "library_recipes": 880,
             "added_synthetic_recipes": 704
           }
+        },
+        {
+          "trial": "after-scale5-cold-2",
+          "wall_seconds": 534.7865220000967,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 59.0680957880013,
+            "original_recipes": 176,
+            "library_recipes": 880,
+            "added_synthetic_recipes": 704
+          }
+        },
+        {
+          "trial": "after-scale5-cold-3",
+          "wall_seconds": 536.232960900059,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 59.000543742000445,
+            "original_recipes": 176,
+            "library_recipes": 880,
+            "added_synthetic_recipes": 704
+          }
         }
       ],
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
         725.34
       ],
       "trials": [
-        "after-scale5-cold-1"
+        "after-scale5-cold-1",
+        "after-scale5-cold-2",
+        "after-scale5-cold-3"
       ]
     },
     {
@@ -1052,7 +1094,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -1155,7 +1197,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -1274,7 +1316,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -1382,7 +1424,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -1506,7 +1548,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -1614,7 +1656,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -1738,7 +1780,7 @@
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
@@ -1755,78 +1797,96 @@
       "factor": "5",
       "case": "main",
       "mode": "cold",
-      "n": 1,
+      "n": 3,
       "metrics": {
         "wall_seconds": {
           "raw": [
-            786.4997609939996
+            786.4997609939996,
+            805.9684301910002,
+            815.7615409589998
           ],
-          "median": 786.4997609939996,
+          "median": 805.9684301910002,
           "min": 786.4997609939996,
-          "max": 786.4997609939996
+          "max": 815.7615409589998
         },
         "facts_seconds": {
           "raw": [
-            21.044843197999853
+            21.044843197999853,
+            22.072824519000278,
+            22.109720591999576
           ],
-          "median": 21.044843197999853,
+          "median": 22.072824519000278,
           "min": 21.044843197999853,
-          "max": 21.044843197999853
+          "max": 22.109720591999576
         },
         "planner_seconds": {
           "raw": [
-            764.863931116
+            764.863931116,
+            783.3056662359995,
+            793.043300284
           ],
-          "median": 764.863931116,
+          "median": 783.3056662359995,
           "min": 764.863931116,
-          "max": 764.863931116
+          "max": 793.043300284
         },
         "serialization_seconds": {
           "raw": [
-            0.5909799790001671
+            0.5909799790001671,
+            0.5899347359991225,
+            0.6085154829997919
           ],
           "median": 0.5909799790001671,
-          "min": 0.5909799790001671,
-          "max": 0.5909799790001671
+          "min": 0.5899347359991225,
+          "max": 0.6085154829997919
         },
         "universe_seconds": {
           "raw": [
-            14.24327928899993
+            14.24327928899993,
+            14.201818247998744,
+            14.080985132000933
           ],
-          "median": 14.24327928899993,
-          "min": 14.24327928899993,
+          "median": 14.201818247998744,
+          "min": 14.080985132000933,
           "max": 14.24327928899993
         },
         "cpu_user_seconds": {
           "raw": [
-            766.9357689999999
+            766.9357689999999,
+            786.679772,
+            796.186465
           ],
-          "median": 766.9357689999999,
+          "median": 786.679772,
           "min": 766.9357689999999,
-          "max": 766.9357689999999
+          "max": 796.186465
         },
         "cpu_system_seconds": {
           "raw": [
-            3.027127
+            3.027127,
+            2.489034,
+            2.7921080000000003
           ],
-          "median": 3.027127,
-          "min": 3.027127,
+          "median": 2.7921080000000003,
+          "min": 2.489034,
           "max": 3.027127
         },
         "maxrss_kib": {
           "raw": [
-            1661812
+            1661812,
+            1661896,
+            1661672
           ],
           "median": 1661812,
-          "min": 1661812,
-          "max": 1661812
+          "min": 1661672,
+          "max": 1661896
         },
         "cgroup_memory_peak_bytes": {
           "raw": [
-            1757417472
+            1757417472,
+            1749942272,
+            1732411392
           ],
-          "median": 1757417472,
-          "min": 1757417472,
+          "median": 1749942272,
+          "min": 1732411392,
           "max": 1757417472
         }
       },
@@ -1841,19 +1901,43 @@
             "library_recipes": 880,
             "added_synthetic_recipes": 704
           }
+        },
+        {
+          "trial": "before-scale5-cold-2",
+          "wall_seconds": 892.0096903999802,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 65.30560013700051,
+            "original_recipes": 176,
+            "library_recipes": 880,
+            "added_synthetic_recipes": 704
+          }
+        },
+        {
+          "trial": "before-scale5-cold-3",
+          "wall_seconds": 895.7182835999411,
+          "scope": "Container launch through exit; warm mode includes priming and three subsequent fresh calculations",
+          "content_import_preparation": {
+            "seconds": 58.56627907099937,
+            "original_recipes": 176,
+            "library_recipes": 880,
+            "added_synthetic_recipes": 704
+          }
         }
       ],
       "metric_scopes": {
         "wall_seconds": "Facts + planner + serialization; excludes process startup, initial universe load and scale-generator preparation",
         "cpu_user_seconds": "Facts + planner only; excludes serialization, initial universe load and scale-generator preparation",
-        "memory": "Peak of the process/container from startup, not incremental peak of each warm iteration",
+        "memory": "Cumulative peaks from process start, not incremental per warm iteration. RSS sampled after planner, cgroup peak after serialization.",
         "universe_seconds": "Once per process; repeated in warm rows for provenance, not performed anew per iteration"
       },
       "paid": [
         725.34
       ],
       "trials": [
-        "before-scale5-cold-1"
+        "before-scale5-cold-1",
+        "before-scale5-cold-2",
+        "before-scale5-cold-3"
       ]
     }
   ],

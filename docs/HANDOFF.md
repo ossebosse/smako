@@ -1,5 +1,11 @@
 # 2026-10-07: D-lagring och veckosökning – pågående, separata spår
 
+Uppdatering 13:32 UTC: tre kalla 5×-par klara. Hela processens median
+892,01→534,79 s (cirka −40 %); varma 5×-nyberäkningar pågår därefter i
+samma sekventiella matris. Runtime/image är fortfarande 54cb/8a537fc4d333.
+Serverns faktiska appdatavolymer hade 0 byte ledigt 13:08 UTC; uppgiften
+pekade fortsatt på bdc9. Se REPRODUCE.md för bevarade körkommandon.
+
 Uppdatering 12:00 UTC: servern har fortfarande 0 byte tillgängligt och
 Windows-uppgiften pekar fortsatt på bdc9. A är inte återställd. B:s
 paketerade huvud-/webbläsar-/profilprov är utförda; längre sekventiell
