@@ -1,0 +1,224 @@
+{
+  "outcome": "BLOCKED",
+  "server_observed_at": "2026-10-07T15:05:10.799666+00:00",
+  "serving_image": "sha256:c8362751b13a6e649beadad2a3c27b9b5df8bfd1e2fa177ff68e01e1d7b8b2c7",
+  "build_id": "status-reconnect-dd12cc80e98c",
+  "complete_recipes": "true",
+  "server_data_volumes": {
+    "GROCERY_RAW_SNAPSHOT_ROOT": {
+      "path": "/srv/app/var/raw_snapshots",
+      "free": 0,
+      "device": 64769
+    },
+    "PRICE_UNIVERSE_CACHE_ROOT": {
+      "path": "/srv/app/var/price_universes",
+      "free": 0,
+      "device": 64769
+    },
+    "PLAN_STORE_PATH": {
+      "path": "/srv/app/var/plans",
+      "free": 0,
+      "device": 64769
+    },
+    "GROCERY_DATABASE_URL": {
+      "path": "/srv/app/var/grocery",
+      "free": 0,
+      "device": 64769
+    }
+  },
+  "health_status": 200,
+  "ready_status": 503,
+  "plan_store_error": {
+    "type": "OperationalError",
+    "code": "SQLITE_IOERR_SHMSIZE"
+  },
+  "active_manifests": [
+    {
+      "path": "/srv/app/var/price_universes/active/city-lund.json",
+      "manifest": {
+        "activated_at": "2026-10-05T22:19:17.370140Z",
+        "artifact_bytes": 81579850,
+        "artifact_file": "artifacts/963cd15324de1925222d4958c5ee6b77e43d2baff83adf3fb95d8e89da951f50.json",
+        "artifact_sha256": "963cd15324de1925222d4958c5ee6b77e43d2baff83adf3fb95d8e89da951f50",
+        "built_at": "2026-10-05T22:16:50.460741Z",
+        "canonical_index_count": 57,
+        "city": "lund",
+        "oldest_base_observed_at": "2026-10-04T15:31:05.108770Z",
+        "oldest_observed_at": "2026-10-04T15:31:05.108770Z",
+        "product_count": 2234,
+        "provider_requests": 0,
+        "schema_version": "active-prepared-price-universe-v1",
+        "scope_id": "city:lund",
+        "snapshot_ids": [
+          "07e930083562494c8e787094c85d4098",
+          "0a86505c68b04236b6342801a9856b62",
+          "0d625ac7cbdf4e7485077b1e61145655",
+          "1ddd2635554d48abb0bcabfd3311b80f",
+          "3121607416ed453cba88872fb212cf08",
+          "3c358e06b5994d78ab71c88d9825827a",
+          "512f8ea8771448af9c08e5f1d4155997",
+          "5ce3b40a74e94bafa17175433f984930",
+          "5ddb11e6ddd54fe9ad7c75a6a06e52bf",
+          "5f4aa0accf1c4baeb6dcb7d54079f1e9",
+          "631c4cbc03e246b297398d246ce7388c",
+          "6408dcc633bb494385dda76e29b4e7d7",
+          "645904c1548549119c0e7892c36dd3ab",
+          "b8cf0f94cb554f0893e92a83de478730",
+          "b8e26a184d284109bf7ca495c81817ce",
+          "e94a6c4e604043d2895fbeb37abdd8e6",
+          "eadb81fc8dec4cf691d9b23b569fa0e1",
+          "eafe2b0bc3e442f68e0432da095195ac",
+          "ff6e64a1bd9e435c9b9178e8aebec3f2"
+        ],
+        "universe_id": "price-universe:387cc368662cc45b3ee4714aaf57ed42e4a6ff1123a814d7fb62e25f5ead80e9"
+      },
+      "hash_valid": true
+    }
+  ],
+  "required_contexts": {
+    "context:coop:23eaae11c9661e68": {
+      "name": "Coop Online Syd",
+      "rows": 11481,
+      "oldest_observed_at": "2026-10-05T10:30:54.804399Z",
+      "snapshots": [
+        "ff6e64a1bd9e435c9b9178e8aebec3f2"
+      ],
+      "age_hours": 52.57110979638889
+    },
+    "context:hemkop:3288e04edd97e349": {
+      "name": "Hemk\u00f6p kontext 3288e04edd97e349",
+      "rows": 5027,
+      "oldest_observed_at": "2026-10-05T01:01:52.060296Z",
+      "snapshots": [
+        "07e930083562494c8e787094c85d4098"
+      ],
+      "age_hours": 62.055205380555556
+    },
+    "context:hemkop:756955d0e6e05f23": {
+      "name": "Hemk\u00f6p kontext 756955d0e6e05f23",
+      "rows": 6278,
+      "oldest_observed_at": "2026-10-05T00:46:18.267865Z",
+      "snapshots": [
+        "645904c1548549119c0e7892c36dd3ab"
+      ],
+      "age_hours": 62.31459216694444
+    },
+    "context:willys:383650ec6ff5a636": {
+      "name": "Willys Lund",
+      "rows": 10217,
+      "oldest_observed_at": "2026-10-04T15:31:05.108770Z",
+      "snapshots": [
+        "5ddb11e6ddd54fe9ad7c75a6a06e52bf"
+      ],
+      "age_hours": 71.5682474711111
+    },
+    "context:willys:4a671428fc484e43": {
+      "name": "Willys Lund Nova",
+      "rows": 8647,
+      "oldest_observed_at": "2026-10-04T15:49:42.410373Z",
+      "snapshots": [
+        "5ddb11e6ddd54fe9ad7c75a6a06e52bf"
+      ],
+      "age_hours": 71.25788591472222
+    }
+  },
+  "task": {
+    "at": "2026-10-07T15:06:04.0323453Z",
+    "state": "Ready",
+    "enabled": true,
+    "workingDirectory": "D:\\smako-local-relay\\releases\\bdc9f7df4170",
+    "principal": "ossia",
+    "logonType": "S4U",
+    "runLevel": "Limited",
+    "definitionUnchanged": true,
+    "lastRunUtc": "2026-10-07T07:30:01.0000000Z",
+    "lastResult": 1,
+    "nextRunUtc": "2026-10-07T15:30:00.0000000Z",
+    "volumes": [
+      {
+        "DriveLetter": "D",
+        "SizeRemaining": 688353505280,
+        "Size": 1000187359232
+      },
+      {
+        "DriveLetter": "C",
+        "SizeRemaining": 155295744,
+        "Size": 254721126400
+      }
+    ]
+  },
+  "pending_artifact": {
+    "at": "2026-10-07T15:10:00.5126914Z",
+    "path": "D:\\smako-local-relay\\scopes\\municipality-1281\\completed\\8f4be22e8b594d0ea09c3e3d783564fa.smako-source",
+    "bytes": 3974025,
+    "sha256": "1e4b3036ac09bd25b0d80f47502c0f40d0fa851b5d7da69b13457e4e8b47d1ab",
+    "status": "Completed local artifact, not a confirmed publication receipt"
+  },
+  "relay_fix_runtime": "fe795e5b04f5a5ff973b71bb9bcdd28ca8668ce2",
+  "relay_fix_installed": true,
+  "relay_fix_selected_by_task": false,
+  "s4u_storage_probe": "pending OS task-registration permission",
+  "controlled_collection_delivery_import_publication_this_task": "none",
+  "production_plan_probes": "blocked by plan-store availability and five stale required contexts",
+  "blockers": [
+    "Server data filesystem has zero available bytes",
+    "Windows denied Set-ScheduledTask; original task remains enabled and unchanged"
+  ],
+  "ordinary_start_observation": {
+    "at": "2026-10-07T15:32:06.6067284Z",
+    "taskState": "Running",
+    "workingDirectory": "D:\\smako-local-relay\\releases\\bdc9f7df4170",
+    "lastRunUtc": "2026-10-07T15:30:01.0000000Z",
+    "lastResult": 267009,
+    "nextRunUtc": "2026-10-07T23:30:00.0000000Z",
+    "volumes": [
+      {
+        "DriveLetter": "D",
+        "SizeRemaining": 687642865664,
+        "Size": 1000187359232
+      },
+      {
+        "DriveLetter": "C",
+        "SizeRemaining": 154697728,
+        "Size": 254721126400
+      }
+    ],
+    "serverCapacityRaw": [
+      "Filesystem        1B-blocks         Used Available Use% Mounted on",
+      "/dev/vda1      415381426176 415364648960         0 100% /",
+      "/dev/vda1      415381426176 415364648960         0 100% /"
+    ],
+    "relayLog": "D:\\smako-local-relay\\scopes\\municipality-1281\\logs\\20261007T153017Z-c17732c543d4484eb6aba8c883745414.jsonl",
+    "events": [
+      {
+        "at": "2026-10-07T17:30:17.724674+02:00",
+        "event": "task_start",
+        "expected_daily_time": null,
+        "schedule_policy": "base_35h",
+        "schedule_timezone": "Europe/Stockholm",
+        "invocation_kind": "scheduled_or_manual_not_inferred"
+      },
+      {
+        "at": "2026-10-07T17:30:52.831767+02:00",
+        "event": "pending_validation_rejected",
+        "artifact_file": "702dca61c48a4ec296411f87a21e09a5.smako-source"
+      },
+      {
+        "at": "2026-10-07T17:30:57.921272+02:00",
+        "event": "pending_validation_rejected",
+        "artifact_file": "0bee538117544af1a9d78f612301e262.smako-source"
+      },
+      {
+        "at": "2026-10-07T17:31:02.896642+02:00",
+        "event": "pending_validation_rejected",
+        "artifact_file": "049d1ce3a2e546f3922cbadd89e3d73f.smako-source"
+      },
+      {
+        "at": "2026-10-07T17:31:02.9016+02:00",
+        "event": "collection_start"
+      }
+    ],
+    "manuallyStartedByThisTask": false,
+    "partialRunningObservation": true
+  }
+}

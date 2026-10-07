@@ -1,7 +1,52 @@
 # A – aktuell driftkontroll och lagringskandidat
 
-Pågående arbete. **Prisflödet är ännu inte återställt.** Kontrollerat 7 oktober
-2026 kl. 09:05 UTC, ingen appinstallation eller prisinsamling utförd i denna etapp.
+**BLOCKERAD ÅTERSTÄLLNING. Prisflödet är inte återställt.** Lagringsfixen
+är implementerad och separat paketerad, men inte vald av Windows-uppgiften.
+Ingen appinstallation, kontrollerad prisinsamling, leverans, import eller
+publicering har utförts i denna etapp. Full maskinrapport: A-STATUS.json.
+
+## Senaste slutkontroll, 7 oktober
+
+**15:32 UTC, kompletterande läskontroll:** servern har fortsatt 0 byte
+tillgängligt. C: 154 697 728 byte och D: 687 642 865 664 byte ledigt.
+Den registrerade uppgiften startade 15:30:01 UTC med gamla bdc9 och var
+fortfarande `Running`. Loggen visar tre avvisade äldre väntande artefakter
+och `collection_start` 15:31:02 UTC. Körningen har inte startats manuellt
+av oss och har inte avbrutits. Detta är en pågående observation, inte
+bevis på lyckad leverans/import/publicering eller flera dagars drift.
+Råa händelser finns i `ordinary-start-observation.json`; inget slutkvitto
+finns i den observationen. Uppgiftsändringen måste fortsatt vänta ut aktiva
+skrivare. Serverbristen är inte löst av att den lokala insamlingen startar.
+
+15:05:10 UTC: faktisk dd12-image `c8362751b13a`, rätt BUILD_ID och kompletta
+recept på. `/health` 200, `/ready` 503 och planlagringen
+`SQLITE_IOERR_SHMSIZE`. De verkliga appdatavolymerna har **0 byte tillgängligt**.
+Samma aktiva prismanifest och dess hash är verifierade; alla fem baser är
+över 48 timmar:
+
+| Kontext | Ålder timmar |
+| --- | ---: |
+| Coop Online Syd | 52,57 |
+| Hemköp `3288e04edd97e349` | 62,06 |
+| Hemköp `756955d0e6e05f23` | 62,31 |
+| Willys Lund | 71,57 |
+| Willys Lund Nova | 71,26 |
+
+15:06:04 UTC: C: **155 295 744 byte**, D: **688 353 505 280 byte** ledigt.
+Hela exporterade uppgiftsdefinitionen matchar föreprovet. Uppgiften är
+Ready/Enabled, ossia/S4U/Limited och använder fortfarande bdc9. Nästa
+registrerade start är 15:30 UTC, alltså 17:30 svensk tid.
+Ordinarie schemakörningar har inte pausats eller ändrats.
+
+15:10 UTC: den färdiga lokala 8f4b-artefakten är oförändrad, med nedan
+angiven hash och storlek. Katalognamnet `completed` betyder färdig lokal
+artefakt; det är inte ett bevis på publicering. Serverutrymme och
+administratörsregistrering av den avgränsade relästarten återstår. S4U-prov,
+verklig slutkvittering, behovskontroll `not_due` och nya produktionsplanprov
+kan därför inte redovisas som genomförda. Senaste data och tidigare paket
+har bevarats; ingen radering, appåterinstallation eller binär återgång.
+
+## Tidigare kontroller i samma etapp
 
 Återkontroll **10:59:38 UTC**: fortfarande 0 byte tillgängligt på de verkliga
 rådata-/pris-/databas-/planvolymerna, rätt dd12 och kompletta recept på,
