@@ -7,6 +7,7 @@ from grocery_data.app.connectors.hemkop.models import (
     HemkopSchemaError,
     top_level_category_paths,
     validated_catalog_page,
+    validated_store_context,
 )
 from grocery_data.app.connectors.willys.parser import (
     WillysParser,
@@ -45,7 +46,7 @@ class HemkopParser:
     rewritten to Hemköp before leaving this adapter.
     """
 
-    parser_version = "hemkop-parser-v1"
+    parser_version = "hemkop-parser-v1.1-picking-contract"
 
     def __init__(self, *, accept_sales_price_object: bool = True) -> None:
         self._axfood_products = WillysParser(
@@ -101,6 +102,8 @@ class HemkopParser:
                 external_id = str(row.get("storeId") or "").strip()
                 if not external_id or not name:
                     continue
+                if not validated_store_context(row, external_id):
+                    raise HemkopSchemaError("Hemköp unreviewed picking base store binding")
                 geo_point = row.get("geoPoint") if isinstance(row.get("geoPoint"), dict) else {}
                 latitude = _decimal(address.get("latitude") or geo_point.get("latitude"))
                 longitude = _decimal(address.get("longitude") or geo_point.get("longitude"))
@@ -140,6 +143,7 @@ class HemkopParser:
                             "observed_at": document.fetched_at.isoformat()},
                         "flyer_url": row.get("flyerURL"),
                         "external": row.get("external"),
+                        **({"hasPickingBaseStore": row["hasPickingBaseStore"]} if "hasPickingBaseStore" in row else {}),
                         "clickAndCollect": row.get("clickAndCollect"),
                         "price_context": "activated_online_store"
                         if online_shopping is True
@@ -207,7 +211,7 @@ class HemkopParser:
                 context_payload = document.json_payload()
             except (TypeError, ValueError):
                 continue
-            if self._contains_store_id(context_payload, store.external_id):
+            if validated_store_context(context_payload, store.external_id):
                 activation_confirmed = True
                 break
         catalog_references = [

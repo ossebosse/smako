@@ -212,3 +212,24 @@ def top_level_category_paths(tree_fetch: bytes) -> tuple[str, ...]:
     except (TypeError, ValueError) as exc:
         raise HemkopSchemaError("Hemköp category tree shape changed") from exc
     return tree.top_level_paths()
+
+
+def validated_store_context(payload: object, expected: str) -> bool:
+    """Exact observed active store shapes; never infer a picking-base mapping.
+
+    Missing flag retains the legacy contract. Explicit false is the only new
+    value evidenced in the 2026-10-08 store/active responses. True may signal
+    a different picking store and requires a separately reviewed binding.
+    Null, numbers and strings are not boolean false. Do not recurse through
+    arbitrary nested store IDs to authorize a price context.
+    """
+    if not isinstance(payload, dict):
+        return False
+    rows = [payload] if "storeId" in payload else [
+        payload[key] for key in ("store", "pickingStore") if key in payload
+    ]
+    return bool(rows) and all(
+        isinstance(row, dict) and str(row.get("storeId") or "") == expected
+        and ("hasPickingBaseStore" not in row or row["hasPickingBaseStore"] is False)
+        for row in rows
+    )

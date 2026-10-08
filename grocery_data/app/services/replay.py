@@ -473,7 +473,7 @@ class DatabaseReplayService:
                 }
                 schema_diff = _merge_schema_diff(baseline_schemas, typed_schemas)
                 effective_schema_diff = _review_schema_diff(
-                    connector.chain, connector.parser_version, schema_diff,
+                    connector.chain, connector.parser_version, schema_diff, schemas=typed_schemas,
                 )
                 assessment = assess_run_health(
                     aggregate,

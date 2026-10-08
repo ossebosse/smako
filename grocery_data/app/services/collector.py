@@ -204,7 +204,7 @@ def _merge_schema_diff(
 
 
 def _review_schema_diff(
-    chain: Chain, parser_version: str | None, diff: SchemaDiff | None,
+    chain: Chain, parser_version: str | None, diff: SchemaDiff | None, *, schemas=None,
 ) -> SchemaDiff | None:
     """Apply a versioned source contract review, retaining raw diff evidence.
 
@@ -225,13 +225,15 @@ def _review_schema_diff(
         from grocery_data.app.connectors.coop.schema_review import reviewed_coop_online_schema_diff
 
         reviewed = reviewed_coop_online_schema_diff(diff)
-    elif chain == Chain.HEMKOP and parser_version == "hemkop-parser-v1":
+    elif chain == Chain.HEMKOP and parser_version in {"hemkop-parser-v1", "hemkop-parser-v1.1-picking-contract"}:
         from grocery_data.app.connectors.hemkop.schema_review import (
             reviewed_hemkop_schema_diff,
             reviewed_hemkop_type_change,
         )
 
-        reviewed = reviewed_hemkop_schema_diff(diff)
+        reviewed = reviewed_hemkop_schema_diff(
+            diff, schemas=schemas, picking_contract=parser_version == "hemkop-parser-v1.1-picking-contract",
+        )
         required_type_changes = tuple(
             change for change in diff.type_changed if not reviewed_hemkop_type_change(change)
         )
@@ -724,7 +726,7 @@ class GroceryCollector:
                     baseline_schemas = baseline_payload.get("schemas", {})
                 schema_diff = _merge_schema_diff(baseline_schemas, all_schemas)
                 effective_schema_diff = _review_schema_diff(
-                    connector.chain, connector.parser_version, schema_diff,
+                    connector.chain, connector.parser_version, schema_diff, schemas=all_schemas,
                 )
                 assessment = assess_run_health(
                     aggregate,

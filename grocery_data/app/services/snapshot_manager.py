@@ -232,7 +232,7 @@ def _assess_persisted_snapshot(
                 raise SnapshotValidationError("snapshot schema diff is invalid") from exc
     if payload.get("schema_change_accepted") is True:
         schema_diff = None
-    schema_diff = _review_schema_diff(Chain(row.chain), row.parser_version, schema_diff)
+    schema_diff = _review_schema_diff(Chain(row.chain), row.parser_version, schema_diff, schemas=schemas)
     assessment = assess_run_health(
         metrics,
         baseline=baseline_metrics,

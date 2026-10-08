@@ -36,9 +36,22 @@ def reviewed_hemkop_type_change(change: SchemaTypeChange) -> bool:
     return False
 
 
-def reviewed_hemkop_schema_diff(diff: SchemaDiff) -> SchemaDiff:
+def reviewed_hemkop_schema_diff(diff: SchemaDiff, *, schemas=None, picking_contract=False) -> SchemaDiff:
+    def reviewed_addition(path):
+        if _LABEL.fullmatch(path):
+            return True
+        if not picking_contract or not re.fullmatch(
+            r"(?:[0-9]+:store_context:\$\[\]|stores:\$\[\]\[\])\.hasPickingBaseStore", path
+        ):
+            return False
+        group, field = path.rsplit(":", 1)
+        schema = (schemas or {}).get(group)
+        paths = schema.get("paths", {}) if isinstance(schema, dict) else getattr(schema, "paths", {})
+        # Value semantics are independently checked by parser and transport.
+        return set(paths.get(field, ())) == {"boolean"}
+
     return SchemaDiff(
-        added=tuple(path for path in diff.added if not _LABEL.fullmatch(path)),
+        added=tuple(path for path in diff.added if not reviewed_addition(path)),
         removed=tuple(path for path in diff.removed if not _LABEL.fullmatch(path)),
         type_changed=tuple(c for c in diff.type_changed if not reviewed_hemkop_type_change(c)),
     )

@@ -701,7 +701,8 @@ class HemkopClient:
             payload = active.json_payload()
         except (TypeError, ValueError) as exc:
             raise RuntimeError("Hemköp active-store response is not JSON") from exc
-        if not self._contains_store_id(payload, store_external_id):
+        from grocery_data.app.connectors.hemkop.models import validated_store_context
+        if not validated_store_context(payload, store_external_id):
             raise RuntimeError("Hemköp did not confirm the requested store context")
 
     @staticmethod
