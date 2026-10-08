@@ -47,6 +47,8 @@ def repair(args):
         if not pipeline:
             with readonly(database) as db:
                 current = evidence(db, incident['snapshot_id'])
+                if current['code'] == 'SOURCE_COMMERCIAL_CONFLICT':
+                    current = reproduce(database, os.environ['GROCERY_RAW_SNAPSHOT_ROOT'], incident['snapshot_id'])
                 if current['signature'] != args.signature or current['state'] != 'rejected':
                     raise ValueError('source_state_changed_rediagnose')
         report = status()

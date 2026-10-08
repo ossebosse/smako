@@ -278,3 +278,18 @@ def test_busy_operation_does_not_write_incident_index(context, monkeypatch):
     monkeypatch.setattr(ops,'record_incidents',must_not_run)
     runner._write_status({'status':'degraded','runtime_reload':{'reason':'operation_lock_held'}})
     assert not (context.root/'source-incidents.json').exists()
+
+
+def test_commercial_incident_identity_uses_actual_product_and_terms(context):
+    metrics={'catalog_completion':{'4123':{'complete':False,'conflicting_duplicates':1}}}
+    for sid, product in [('first','A'),('repeat','A'),('different','B')]:
+        snapshot(context,sid,metrics=metrics)
+        for n, offers in enumerate([[],[{'id':'member','price':12}]]):
+            raw(context,sid,{'results':[{'code':product,'potentialPromotions':offers}]},name=f'{sid}-{n}.json',kind='catalog_page')
+    items=ops.record_incidents(context.env)['incidents']
+    assert len(items)==2
+    assert sorted(i['occurrences'] for i in items.values())==[1,2]
+    legacy={'schema':'source-incidents-v1','watermark':0,'incidents':{}}
+    (context.root/'source-incidents.json').write_text(json.dumps(legacy))
+    assert ops.record_incidents(context.env)['schema']=='source-incidents-v2'
+    assert json.loads((context.root/'source-incidents-v1.json').read_text())==legacy

@@ -166,6 +166,13 @@ def reproduce(database, raw_root, snapshot_id):
                 seen[identity] = (value, ref)
     out.update(raw_files_verified=len(refs), raw_bytes_verified=total,
                fields=fields[:24], conflicts=conflicts[:4], conflicts_truncated=len(conflicts) > 4)
+    if out['code'] == 'SOURCE_COMMERCIAL_CONFLICT' and conflicts:
+        # Group the same actual contradiction across attempts, without merging
+        # unrelated products/offers or making timestamps part of its identity.
+        identities = sorted(digest({k: c[k] for k in ('store_id', 'product_id', 'changed')})
+                            for c in conflicts)
+        out['signature'] = digest([out['signature'], identities])
+        out['incident_id'] = 'source-' + out['signature'][:24]
     return out
 
 
@@ -179,7 +186,19 @@ def record_incidents(environment=None):
     env = os.environ if environment is None else environment
     database, _universe, root = paths(env)
     path = root / 'source-incidents.json'
-    index = read_json(path) or {'schema': 'source-incidents-v1', 'watermark': 0, 'incidents': {}}
+    index = read_json(path)
+    if index and index.get('schema') == 'source-incidents-v1':
+        # Preserve the one earlier small index before rebuilding more precise
+        # commercial identities from the retained authoritative snapshots.
+        previous = root/'source-incidents-v1.json'
+        payload = json.dumps(index, ensure_ascii=False, sort_keys=True).encode()
+        if previous.exists() and previous.read_bytes() != payload:
+            raise ValueError('incident_migration_archive_conflict')
+        atomic_write_bytes(previous, payload)
+        index = {}
+    if index and index.get('schema') != 'source-incidents-v2':
+        raise ValueError('unsupported_incident_schema')
+    index = index or {'schema': 'source-incidents-v2', 'watermark': 0, 'incidents': {}}
     with readonly(database) as db:
         if not index['watermark']:
             latest = db.execute('SELECT max(rowid) FROM catalog_snapshots').fetchone()[0] or 0
@@ -200,6 +219,13 @@ def record_incidents(environment=None):
             if row['state'] != 'rejected':
                 continue
             current = evidence(db, row['id'])
+            proof = None
+            if current['code'] == 'SOURCE_COMMERCIAL_CONFLICT':
+                try:
+                    proof = reproduce(database, env['GROCERY_RAW_SNAPSHOT_ROOT'], row['id'])
+                    current.update(signature=proof['signature'], incident_id=proof['incident_id'])
+                except (OSError, ValueError, KeyError, TypeError) as exc:
+                    current['reproduction_error'] = type(exc).__name__
             key = current['incident_id']
             previous = index['incidents'].get(key, {})
             current.update(first_seen=previous.get('first_seen', current['observed_at']),
@@ -209,7 +235,7 @@ def record_incidents(environment=None):
             # retain references to their own newest source and the first proof.
             if not previous:
                 try:
-                    proof = reproduce(database, env['GROCERY_RAW_SNAPSHOT_ROOT'], row['id'])
+                    proof = proof or reproduce(database, env['GROCERY_RAW_SNAPSHOT_ROOT'], row['id'])
                     current['reproduction'] = {k: proof[k] for k in ('fields', 'conflicts', 'raw_files_verified')}
                 except (OSError, ValueError, KeyError, TypeError) as exc:
                     current['reproduction_error'] = type(exc).__name__
