@@ -267,12 +267,22 @@ def status(environment=None, *, now=None):
             provenance = physical.get('source_provenance', {})
             chain = physical['chain']
             external_id = provenance.get('provider_store_id')
-            row = db.execute('SELECT cs.id,min(sp.fetched_at) observed,cs.promoted_at, '
-                             'json_extract(cs.metrics,\'$.source_artifact.sha256\') artifact_sha256 FROM source_products sp '
-                             'JOIN catalog_snapshots cs ON cs.id=sp.catalog_snapshot_id '
-                             'WHERE cs.is_active=1 AND cs.state=\'promoted\' AND cs.coverage!=\'offers_only\' '
-                             'AND sp.chain=? AND sp.store_external_id=? GROUP BY cs.id '
-                             'ORDER BY cs.promoted_at DESC LIMIT 1', (chain, external_id)).fetchone()
+            # Never join large snapshot metrics onto every product before a
+            # GROUP BY: SQLite can materialize gigabytes of repeated JSON.
+            # Read each active snapshot once, then its small indexed aggregate.
+            row = None
+            candidates = db.execute('SELECT id,promoted_at, '
+                'json_extract(metrics,\'$.source_artifact.sha256\') artifact_sha256 '
+                'FROM catalog_snapshots WHERE chain=? AND is_active=1 '
+                'AND state=\'promoted\' AND coverage!=\'offers_only\' '
+                'ORDER BY promoted_at DESC', (chain,)).fetchall()
+            for candidate in candidates:
+                observed = db.execute('SELECT min(fetched_at) FROM source_products '
+                    'WHERE catalog_snapshot_id=? AND chain=? AND store_external_id=?',
+                    (candidate['id'], chain, external_id)).fetchone()[0]
+                if observed is not None:
+                    row = {**dict(candidate), 'observed': observed}
+                    break
             entry = {'context_id': physical['store_id'], 'chain': chain, 'store_id': external_id,
                      'channel': physical.get('price_context_type', provenance.get('price_context_type', 'unknown'))}
             if row:
