@@ -1,0 +1,1696 @@
+{
+  "schema_version": "smako-meal-pack-v1",
+  "pack_id": "all-meal-classes-20261008",
+  "recipes": [
+    {
+      "name": "Ärtpasta med keso och citron",
+      "servings": 2,
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "main",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 160,
+          "quantity_max": 160,
+          "quantity_min": 160,
+          "quantity_step": 160,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ärtor",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ärtor",
+          "quantity": 200,
+          "quantity_max": 200,
+          "quantity_min": 200,
+          "quantity_step": 200,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "keso",
+          "component": "main",
+          "form": "as_sold",
+          "name": "keso",
+          "quantity": 250,
+          "quantity_max": 250,
+          "quantity_min": 250,
+          "quantity_step": 250,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "name": "citronjuice",
+          "canonical_name": "citronjuice",
+          "quantity": 20,
+          "unit": "ml",
+          "form": "as_sold",
+          "component": "main",
+          "required": true,
+          "role": "flavour",
+          "quantity_min": 20,
+          "quantity_max": 20,
+          "quantity_step": 20,
+          "product_requirements": [
+            "pure_juice"
+          ]
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10,
+          "quantity_max": 10,
+          "quantity_min": 10,
+          "quantity_step": 10,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg pastan torr. Koka den enligt förpackningen och lägg i ärtorna så att de får den koktid som deras förpackning anger. Spara lite kokvatten och häll av resten.",
+        "Mosa hälften av de varma ärtorna i kastrullen. Rör ned all keso och olja med pasta och resterande ärtor. Värm varsamt under omrörning; späd med lite sparat kokvatten om såsen är tjock.",
+        "Mät upp 20 ml citronjuice och rör ned. Fördela hela rätten i två portioner."
+      ],
+      "design": {
+        "base_id": "smako-dinner-pea-cottage-pasta",
+        "version": "1.0.0",
+        "variant_id": "base",
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "meal_types": [
+          "dinner"
+        ],
+        "dinner_level": "simple",
+        "cuisines": [],
+        "method": "pot",
+        "family": "pasta",
+        "primary_ingredient": "keso",
+        "vegetarian": true,
+        "fish": false,
+        "ingredient_count": 5,
+        "side": "grönsaker",
+        "flavor_profile": [
+          "mild"
+        ],
+        "estimated_minutes": 20,
+        "total_minutes": 20,
+        "active_minutes": 15,
+        "waiting_minutes": 0,
+        "equipment": [
+          "våg",
+          "kniv",
+          "skärbräda",
+          "kastrull",
+          "slev"
+        ],
+        "components": [
+          {
+            "id": "main",
+            "name": "Huvudrätt",
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "pasta",
+                "quantity": 160,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ärtor|as_sold",
+                "name": "ärtor",
+                "quantity": 200,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "keso|as_sold",
+                "name": "keso",
+                "quantity": 250,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "quantity": 20,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 10,
+                "unit": "ml"
+              }
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "id": "step-1",
+            "text": "Väg pastan torr. Koka den enligt förpackningen och lägg i ärtorna så att de får den koktid som deras förpackning anger. Spara lite kokvatten och häll av resten.",
+            "duration_minutes": 12,
+            "depends_on": [],
+            "ingredient_keys": [
+              "pasta|dry",
+              "ärtor|as_sold"
+            ]
+          },
+          {
+            "id": "step-2",
+            "text": "Mosa hälften av de varma ärtorna i kastrullen. Rör ned all keso och olja med pasta och resterande ärtor. Värm varsamt under omrörning; späd med lite sparat kokvatten om såsen är tjock.",
+            "duration_minutes": 5,
+            "depends_on": [
+              "step-1"
+            ],
+            "ingredient_keys": [
+              "pasta|dry",
+              "ärtor|as_sold",
+              "keso|as_sold",
+              "rapsolja|as_sold"
+            ]
+          },
+          {
+            "id": "step-3",
+            "text": "Mät upp 20 ml citronjuice och rör ned. Fördela hela rätten i två portioner.",
+            "duration_minutes": 3,
+            "depends_on": [
+              "step-2"
+            ],
+            "ingredient_keys": [
+              "citronjuice|as_sold"
+            ]
+          }
+        ],
+        "provenance": {
+          "reviewed_at": "2026-10-08",
+          "notes": "Nytt författat innehåll för prov av oförändrad 54cb-import. Mängdbasis, komponentmängder och steg granskade mot varandra. Tider är uppskattningar; ingen fysisk provlagning eller hållbarhetsprovning. Inga nya produktfakta."
+        }
+      }
+    },
+    {
+      "name": "Tomat- och couscoussoppa med kikärtor",
+      "servings": 2,
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "main",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 300,
+          "quantity_max": 300,
+          "quantity_min": 300,
+          "quantity_step": 300,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "couscous",
+          "component": "main",
+          "form": "dry",
+          "name": "couscous",
+          "quantity": 100,
+          "quantity_max": 100,
+          "quantity_min": 100,
+          "quantity_step": 100,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "main",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 400,
+          "quantity_max": 400,
+          "quantity_min": 400,
+          "quantity_step": 400,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10,
+          "quantity_max": 10,
+          "quantity_min": 10,
+          "quantity_step": 10,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "main",
+          "form": "dry",
+          "name": "oregano",
+          "quantity": 1,
+          "quantity_max": 1,
+          "quantity_min": 1,
+          "quantity_step": 1,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg kikärtorna efter avrinning och couscousen torr. Skala löken och väg 80 g ätbar lök; finhacka och mjukfräs i all olja i en kastrull.",
+        "Tillsätt krossade tomater, oregano, kikärtor och 400 ml dricksvatten. Sjud 10 minuter. Rör ned couscousen och låt svälla enligt förpackningen tills den är mjuk. Behåll all soppvätska.",
+        "Rör om, späd vid behov med dricksvatten och värm igen. Fördela hela soppan mellan två skålar."
+      ],
+      "design": {
+        "base_id": "smako-dinner-tomato-couscous-soup",
+        "version": "1.0.0",
+        "variant_id": "base",
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "meal_types": [
+          "dinner"
+        ],
+        "dinner_level": "simple",
+        "cuisines": [],
+        "method": "pot",
+        "family": "soppa",
+        "primary_ingredient": "kikärtor",
+        "vegetarian": true,
+        "fish": false,
+        "ingredient_count": 6,
+        "side": "grönsaker",
+        "flavor_profile": [
+          "mild"
+        ],
+        "estimated_minutes": 25,
+        "total_minutes": 25,
+        "active_minutes": 15,
+        "waiting_minutes": 0,
+        "equipment": [
+          "våg",
+          "kniv",
+          "skärbräda",
+          "kastrull",
+          "slev"
+        ],
+        "components": [
+          {
+            "id": "main",
+            "name": "Huvudrätt",
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "kikärtor",
+                "quantity": 300,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "couscous|dry",
+                "name": "couscous",
+                "quantity": 100,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "quantity": 400,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "quantity": 80,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 10,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "quantity": 1,
+                "unit": "g"
+              }
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "id": "step-1",
+            "text": "Väg kikärtorna efter avrinning och couscousen torr. Skala löken och väg 80 g ätbar lök; finhacka och mjukfräs i all olja i en kastrull.",
+            "duration_minutes": 7,
+            "depends_on": [],
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "couscous|dry",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold"
+            ]
+          },
+          {
+            "id": "step-2",
+            "text": "Tillsätt krossade tomater, oregano, kikärtor och 400 ml dricksvatten. Sjud 10 minuter. Rör ned couscousen och låt svälla enligt förpackningen tills den är mjuk. Behåll all soppvätska.",
+            "duration_minutes": 15,
+            "depends_on": [
+              "step-1"
+            ],
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "couscous|dry",
+              "krossade tomater|as_sold",
+              "oregano|dry"
+            ]
+          },
+          {
+            "id": "step-3",
+            "text": "Rör om, späd vid behov med dricksvatten och värm igen. Fördela hela soppan mellan två skålar.",
+            "duration_minutes": 3,
+            "depends_on": [
+              "step-2"
+            ],
+            "ingredient_keys": [
+              "couscous|dry"
+            ]
+          }
+        ],
+        "provenance": {
+          "reviewed_at": "2026-10-08",
+          "notes": "Nytt författat innehåll för prov av oförändrad 54cb-import. Mängdbasis, komponentmängder och steg granskade mot varandra. Tider är uppskattningar; ingen fysisk provlagning eller hållbarhetsprovning. Inga nya produktfakta."
+        }
+      }
+    },
+    {
+      "name": "Linsfyllda kåldolmar med tomatsås och gurkyoghurt",
+      "servings": 2,
+      "ingredients": [
+        {
+          "canonical_name": "vitkål",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 350,
+          "quantity_max": 350,
+          "quantity_min": 350,
+          "quantity_step": 350,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "linser",
+          "component": "main",
+          "form": "dry",
+          "name": "linser",
+          "product_requirements": [
+            "red_split"
+          ],
+          "quantity": 120,
+          "quantity_max": 120,
+          "quantity_min": 120,
+          "quantity_step": 120,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "main",
+          "form": "dry",
+          "name": "ris",
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "main",
+          "form": "dry",
+          "name": "spiskummin",
+          "quantity": 2,
+          "quantity_max": 2,
+          "quantity_min": 2,
+          "quantity_step": 2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10,
+          "quantity_max": 10,
+          "quantity_min": 10,
+          "quantity_step": 10,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "sauce",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 400,
+          "quantity_max": 400,
+          "quantity_min": 400,
+          "quantity_step": 400,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "name": "vitlök",
+          "canonical_name": "vitlök",
+          "quantity": 6,
+          "unit": "g",
+          "form": "raw_edible",
+          "component": "sauce",
+          "required": true,
+          "role": "flavour",
+          "quantity_min": 6,
+          "quantity_max": 6,
+          "quantity_step": 6,
+          "product_requirements": null
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "sauce",
+          "form": "dry",
+          "name": "oregano",
+          "quantity": 1,
+          "quantity_max": 1,
+          "quantity_min": 1,
+          "quantity_step": 1,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "side",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 120,
+          "quantity_max": 120,
+          "quantity_min": 120,
+          "quantity_step": 120,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "side",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 160,
+          "quantity_max": 160,
+          "quantity_min": 160,
+          "quantity_step": 160,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 200 grader. Väg ris och röda linser torra. Koka dem var för sig med vatten enligt absorptionsanvisningarna tills mjuka; ingen näringsbärande kokvätska ska hällas bort.",
+        "Väg 350 g putsade kålblad. Mjuka upp bladen i sjudande vatten tills de går att vika. Skär bort grova bladnerver och finhacka dem; de ska med i fyllningen. Skala och väg lök samt vitlök.",
+        "Finhacka löken och mjukfräs med de hackade bladnerverna i all olja. Blanda med ris, linser och spiskummin. Lägg fyllningen i kålbladen och vik till rullar. Lägg eventuell överbliven fyllning runt rullarna i formen.",
+        "Blanda krossade tomater med finhackad vitlök och oregano. Häll såsen över rullarna. Täck formen med lock eller folie och baka ungefär 25 minuter, tills kålen är mjuk och fyllningen genomvarm.",
+        "Riv den uppvägda gurkan och blanda med yoghurt, utan att hälla bort gurksaften. Servera all sås, fyllning och gurkyoghurt till två lika stora portioner kåldolmar."
+      ],
+      "design": {
+        "base_id": "smako-dinner-lentil-cabbage-rolls",
+        "version": "1.0.0",
+        "variant_id": "base",
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "meal_types": [
+          "dinner"
+        ],
+        "dinner_level": "crafted",
+        "cuisines": [
+          "greek"
+        ],
+        "method": "oven",
+        "family": "kåldolmar",
+        "primary_ingredient": "linser",
+        "vegetarian": true,
+        "fish": false,
+        "ingredient_count": 11,
+        "side": "grönsaker",
+        "flavor_profile": [
+          "mild"
+        ],
+        "estimated_minutes": 65,
+        "total_minutes": 65,
+        "active_minutes": 35,
+        "waiting_minutes": 0,
+        "equipment": [
+          "våg",
+          "kniv",
+          "skärbräda",
+          "ugn",
+          "ugnsform"
+        ],
+        "components": [
+          {
+            "id": "main",
+            "name": "Huvudrätt",
+            "amounts": [
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "quantity": 350,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "linser|dry",
+                "name": "linser",
+                "quantity": 120,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "quantity": 80,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "quantity": 80,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "spiskummin",
+                "quantity": 2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 10,
+                "unit": "ml"
+              }
+            ]
+          },
+          {
+            "id": "sauce",
+            "name": "Sås",
+            "amounts": [
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "quantity": 400,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "quantity": 6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "quantity": 1,
+                "unit": "g"
+              }
+            ]
+          },
+          {
+            "id": "side",
+            "name": "Tillbehör",
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "quantity": 120,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "quantity": 160,
+                "unit": "g"
+              }
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "id": "step-1",
+            "text": "Värm ugnen till 200 grader. Väg ris och röda linser torra. Koka dem var för sig med vatten enligt absorptionsanvisningarna tills mjuka; ingen näringsbärande kokvätska ska hällas bort.",
+            "duration_minutes": 18,
+            "depends_on": [],
+            "ingredient_keys": [
+              "linser|dry",
+              "ris|dry"
+            ]
+          },
+          {
+            "id": "step-2",
+            "text": "Väg 350 g putsade kålblad. Mjuka upp bladen i sjudande vatten tills de går att vika. Skär bort grova bladnerver och finhacka dem; de ska med i fyllningen. Skala och väg lök samt vitlök.",
+            "duration_minutes": 8,
+            "depends_on": [
+              "step-1"
+            ],
+            "ingredient_keys": [
+              "vitkål|raw_edible",
+              "gul lök|raw_edible",
+              "vitlök|raw_edible"
+            ]
+          },
+          {
+            "id": "step-3",
+            "text": "Finhacka löken och mjukfräs med de hackade bladnerverna i all olja. Blanda med ris, linser och spiskummin. Lägg fyllningen i kålbladen och vik till rullar. Lägg eventuell överbliven fyllning runt rullarna i formen.",
+            "duration_minutes": 10,
+            "depends_on": [
+              "step-2"
+            ],
+            "ingredient_keys": [
+              "vitkål|raw_edible",
+              "linser|dry",
+              "ris|dry",
+              "gul lök|raw_edible",
+              "spiskummin|dry",
+              "rapsolja|as_sold"
+            ]
+          },
+          {
+            "id": "step-4",
+            "text": "Blanda krossade tomater med finhackad vitlök och oregano. Häll såsen över rullarna. Täck formen med lock eller folie och baka ungefär 25 minuter, tills kålen är mjuk och fyllningen genomvarm.",
+            "duration_minutes": 25,
+            "depends_on": [
+              "step-3"
+            ],
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "vitlök|raw_edible",
+              "oregano|dry"
+            ]
+          },
+          {
+            "id": "step-5",
+            "text": "Riv den uppvägda gurkan och blanda med yoghurt, utan att hälla bort gurksaften. Servera all sås, fyllning och gurkyoghurt till två lika stora portioner kåldolmar.",
+            "duration_minutes": 4,
+            "depends_on": [
+              "step-4"
+            ],
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "yoghurt naturell|as_sold"
+            ]
+          }
+        ],
+        "provenance": {
+          "reviewed_at": "2026-10-08",
+          "notes": "Nytt författat innehåll för prov av oförändrad 54cb-import. Mängdbasis, komponentmängder och steg granskade mot varandra. Tider är uppskattningar; ingen fysisk provlagning eller hållbarhetsprovning. Inga nya produktfakta."
+        }
+      }
+    },
+    {
+      "name": "Tofu- och couscousfyllda tomater med rostad morot och citronkräm",
+      "servings": 2,
+      "ingredients": [
+        {
+          "canonical_name": "tomat",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 500,
+          "quantity_max": 500,
+          "quantity_min": 500,
+          "quantity_step": 500,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tofu",
+          "component": "main",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 300,
+          "quantity_max": 300,
+          "quantity_min": 300,
+          "quantity_step": 300,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "couscous",
+          "component": "main",
+          "form": "dry",
+          "name": "couscous",
+          "quantity": 100,
+          "quantity_max": 100,
+          "quantity_min": 100,
+          "quantity_step": 100,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 60,
+          "quantity_max": 60,
+          "quantity_min": 60,
+          "quantity_step": 60,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "name": "vitlök",
+          "canonical_name": "vitlök",
+          "quantity": 6,
+          "unit": "g",
+          "form": "raw_edible",
+          "component": "main",
+          "required": true,
+          "role": "flavour",
+          "quantity_min": 6,
+          "quantity_max": 6,
+          "quantity_step": 6,
+          "product_requirements": null
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "main",
+          "form": "dry",
+          "name": "oregano",
+          "quantity": 1,
+          "quantity_max": 1,
+          "quantity_min": 1,
+          "quantity_step": 1,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "main",
+          "form": "as_sold",
+          "name": "spenat",
+          "quantity": 100,
+          "quantity_max": 100,
+          "quantity_min": 100,
+          "quantity_step": 100,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "side",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 15,
+          "quantity_max": 15,
+          "quantity_min": 15,
+          "quantity_step": 15,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "side",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 240,
+          "quantity_max": 240,
+          "quantity_min": 240,
+          "quantity_step": 240,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "sauce",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 150,
+          "quantity_max": 150,
+          "quantity_min": 150,
+          "quantity_step": 150,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "name": "citronjuice",
+          "canonical_name": "citronjuice",
+          "quantity": 20,
+          "unit": "ml",
+          "form": "as_sold",
+          "component": "sauce",
+          "required": true,
+          "role": "flavour",
+          "quantity_min": 20,
+          "quantity_max": 20,
+          "quantity_step": 20,
+          "product_requirements": [
+            "pure_juice"
+          ]
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 200 grader. Väg putsade tomater och skär av lock. Gröp ur innanmätet i en skål och behåll allt. Väg moroten skalad, skär i tunna stavar och vänd i 10 ml av oljan på en plåt.",
+        "Tillaga den torra couscousen med vatten enligt förpackningen. Finhacka den skalade, uppvägda löken och vitlöken. Fräs i återstående 5 ml olja, tillsätt smulad tofu, spenat, tomatinnanmätet och oregano. Värm tills spenaten är genomvarm.",
+        "Blanda couscous med tofufyllningen och fyll tomaterna. Lägg locken ovanpå och eventuell extra fyllning bredvid i en liten ugnsform. Baka tillsammans med morötterna cirka 25 minuter, tills morötterna är mjuka och allt är genomvarmt.",
+        "Mät upp 20 ml citronjuice och blanda med yoghurten. Servera alla fyllda tomater, extra fyllning och morötter med citronkrämen, fördelat på två portioner."
+      ],
+      "design": {
+        "base_id": "smako-dinner-stuffed-tomatoes-tofu",
+        "version": "1.0.0",
+        "variant_id": "base",
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "meal_types": [
+          "dinner"
+        ],
+        "dinner_level": "crafted",
+        "cuisines": [
+          "italian"
+        ],
+        "method": "oven",
+        "family": "fyllda grönsaker",
+        "primary_ingredient": "tofu",
+        "vegetarian": true,
+        "fish": false,
+        "ingredient_count": 11,
+        "side": "grönsaker",
+        "flavor_profile": [
+          "mild"
+        ],
+        "estimated_minutes": 50,
+        "total_minutes": 50,
+        "active_minutes": 25,
+        "waiting_minutes": 0,
+        "equipment": [
+          "våg",
+          "kniv",
+          "skärbräda",
+          "ugn",
+          "ugnsform"
+        ],
+        "components": [
+          {
+            "id": "main",
+            "name": "Huvudrätt",
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "quantity": 500,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "tofu",
+                "quantity": 300,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "couscous|dry",
+                "name": "couscous",
+                "quantity": 100,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "quantity": 60,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "quantity": 6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "quantity": 1,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "spenat",
+                "quantity": 100,
+                "unit": "g"
+              }
+            ]
+          },
+          {
+            "id": "side",
+            "name": "Tillbehör",
+            "amounts": [
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "quantity": 15,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "quantity": 240,
+                "unit": "g"
+              }
+            ]
+          },
+          {
+            "id": "sauce",
+            "name": "Sås",
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "quantity": 150,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "quantity": 20,
+                "unit": "ml"
+              }
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "id": "step-1",
+            "text": "Värm ugnen till 200 grader. Väg putsade tomater och skär av lock. Gröp ur innanmätet i en skål och behåll allt. Väg moroten skalad, skär i tunna stavar och vänd i 10 ml av oljan på en plåt.",
+            "duration_minutes": 8,
+            "depends_on": [],
+            "ingredient_keys": [
+              "tomat|raw_edible",
+              "rapsolja|as_sold",
+              "morot|raw_edible"
+            ]
+          },
+          {
+            "id": "step-2",
+            "text": "Tillaga den torra couscousen med vatten enligt förpackningen. Finhacka den skalade, uppvägda löken och vitlöken. Fräs i återstående 5 ml olja, tillsätt smulad tofu, spenat, tomatinnanmätet och oregano. Värm tills spenaten är genomvarm.",
+            "duration_minutes": 12,
+            "depends_on": [
+              "step-1"
+            ],
+            "ingredient_keys": [
+              "tomat|raw_edible",
+              "tofu|as_sold",
+              "couscous|dry",
+              "gul lök|raw_edible",
+              "vitlök|raw_edible",
+              "oregano|dry",
+              "spenat|as_sold",
+              "rapsolja|as_sold"
+            ]
+          },
+          {
+            "id": "step-3",
+            "text": "Blanda couscous med tofufyllningen och fyll tomaterna. Lägg locken ovanpå och eventuell extra fyllning bredvid i en liten ugnsform. Baka tillsammans med morötterna cirka 25 minuter, tills morötterna är mjuka och allt är genomvarmt.",
+            "duration_minutes": 25,
+            "depends_on": [
+              "step-2"
+            ],
+            "ingredient_keys": [
+              "tomat|raw_edible",
+              "tofu|as_sold",
+              "couscous|dry",
+              "morot|raw_edible"
+            ]
+          },
+          {
+            "id": "step-4",
+            "text": "Mät upp 20 ml citronjuice och blanda med yoghurten. Servera alla fyllda tomater, extra fyllning och morötter med citronkrämen, fördelat på två portioner.",
+            "duration_minutes": 5,
+            "depends_on": [
+              "step-3"
+            ],
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold",
+              "citronjuice|as_sold"
+            ]
+          }
+        ],
+        "provenance": {
+          "reviewed_at": "2026-10-08",
+          "notes": "Nytt författat innehåll för prov av oförändrad 54cb-import. Mängdbasis, komponentmängder och steg granskade mot varandra. Tider är uppskattningar; ingen fysisk provlagning eller hållbarhetsprovning. Inga nya produktfakta."
+        }
+      }
+    },
+    {
+      "name": "Ugnsbakad havre med äpple och keso",
+      "servings": 1,
+      "ingredients": [
+        {
+          "canonical_name": "havregryn",
+          "component": "main",
+          "form": "dry",
+          "name": "havregryn",
+          "quantity": 50,
+          "quantity_max": 50,
+          "quantity_min": 50,
+          "quantity_step": 50,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 120,
+          "quantity_max": 120,
+          "quantity_min": 120,
+          "quantity_step": 120,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "keso",
+          "component": "main",
+          "form": "as_sold",
+          "name": "keso",
+          "quantity": 150,
+          "quantity_max": 150,
+          "quantity_min": 150,
+          "quantity_step": 150,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "main",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 200 grader. Kärna ur äpplet, väg 120 g ätbar del och riv grovt. Blanda med havregryn, keso och yoghurt i en liten ugnsform.",
+        "Baka cirka 20 minuter tills ytan har lite färg och gröten är varm i mitten. Låt svalna ett par minuter och ät hela portionen. Konsistensen ska vara mjuk, inte en skärbar kaka."
+      ],
+      "design": {
+        "base_id": "smako-breakfast-baked-oats-cottage",
+        "version": "1.0.0",
+        "variant_id": "base",
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "meal_types": [
+          "breakfast"
+        ],
+        "dinner_level": "simple",
+        "cuisines": [],
+        "method": "oven",
+        "family": "ugnsgröt",
+        "primary_ingredient": "keso",
+        "vegetarian": true,
+        "fish": false,
+        "ingredient_count": 4,
+        "side": "grönsaker",
+        "flavor_profile": [
+          "mild"
+        ],
+        "estimated_minutes": 30,
+        "total_minutes": 30,
+        "active_minutes": 8,
+        "waiting_minutes": 0,
+        "equipment": [
+          "våg",
+          "kniv",
+          "skärbräda",
+          "ugn",
+          "ugnsform"
+        ],
+        "components": [
+          {
+            "id": "main",
+            "name": "Huvudrätt",
+            "amounts": [
+              {
+                "ingredient_key": "havregryn|dry",
+                "name": "havregryn",
+                "quantity": 50,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "quantity": 120,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "keso|as_sold",
+                "name": "keso",
+                "quantity": 150,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "quantity": 80,
+                "unit": "g"
+              }
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "id": "step-1",
+            "text": "Värm ugnen till 200 grader. Kärna ur äpplet, väg 120 g ätbar del och riv grovt. Blanda med havregryn, keso och yoghurt i en liten ugnsform.",
+            "duration_minutes": 8,
+            "depends_on": [],
+            "ingredient_keys": [
+              "havregryn|dry",
+              "äpple|raw_edible",
+              "keso|as_sold",
+              "yoghurt naturell|as_sold"
+            ]
+          },
+          {
+            "id": "step-2",
+            "text": "Baka cirka 20 minuter tills ytan har lite färg och gröten är varm i mitten. Låt svalna ett par minuter och ät hela portionen. Konsistensen ska vara mjuk, inte en skärbar kaka.",
+            "duration_minutes": 22,
+            "depends_on": [
+              "step-1"
+            ],
+            "ingredient_keys": [
+              "havregryn|dry",
+              "keso|as_sold"
+            ]
+          }
+        ],
+        "provenance": {
+          "reviewed_at": "2026-10-08",
+          "notes": "Nytt författat innehåll för prov av oförändrad 54cb-import. Mängdbasis, komponentmängder och steg granskade mot varandra. Tider är uppskattningar; ingen fysisk provlagning eller hållbarhetsprovning. Inga nya produktfakta."
+        }
+      }
+    },
+    {
+      "name": "Varm morotsgröt med yoghurt",
+      "servings": 1,
+      "ingredients": [
+        {
+          "canonical_name": "havregryn",
+          "component": "main",
+          "form": "dry",
+          "name": "havregryn",
+          "quantity": 50,
+          "quantity_max": 50,
+          "quantity_min": 50,
+          "quantity_step": 50,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "side",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 150,
+          "quantity_max": 150,
+          "quantity_min": 150,
+          "quantity_step": 150,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg 80 g skalad morot och riv fint. Blanda med havregryn och 200 ml vatten i en liten kastrull.",
+        "Koka upp och sjud under omrörning tills både gryn och morot är mjuka, ungefär 6 minuter. Späd med lite vatten om gröten blir för tjock.",
+        "Häll all gröt i en skål och servera med den uppmätta yoghurten."
+      ],
+      "design": {
+        "base_id": "smako-breakfast-carrot-porridge",
+        "version": "1.0.0",
+        "variant_id": "base",
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "meal_types": [
+          "breakfast"
+        ],
+        "dinner_level": "simple",
+        "cuisines": [],
+        "method": "pot",
+        "family": "gröt",
+        "primary_ingredient": "havregryn",
+        "vegetarian": true,
+        "fish": false,
+        "ingredient_count": 3,
+        "side": "grönsaker",
+        "flavor_profile": [
+          "mild"
+        ],
+        "estimated_minutes": 12,
+        "total_minutes": 12,
+        "active_minutes": 10,
+        "waiting_minutes": 0,
+        "equipment": [
+          "våg",
+          "kniv",
+          "skärbräda",
+          "kastrull",
+          "slev"
+        ],
+        "components": [
+          {
+            "id": "main",
+            "name": "Huvudrätt",
+            "amounts": [
+              {
+                "ingredient_key": "havregryn|dry",
+                "name": "havregryn",
+                "quantity": 50,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "quantity": 80,
+                "unit": "g"
+              }
+            ]
+          },
+          {
+            "id": "side",
+            "name": "Tillbehör",
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "quantity": 150,
+                "unit": "g"
+              }
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "id": "step-1",
+            "text": "Väg 80 g skalad morot och riv fint. Blanda med havregryn och 200 ml vatten i en liten kastrull.",
+            "duration_minutes": 4,
+            "depends_on": [],
+            "ingredient_keys": [
+              "havregryn|dry",
+              "morot|raw_edible"
+            ]
+          },
+          {
+            "id": "step-2",
+            "text": "Koka upp och sjud under omrörning tills både gryn och morot är mjuka, ungefär 6 minuter. Späd med lite vatten om gröten blir för tjock.",
+            "duration_minutes": 6,
+            "depends_on": [
+              "step-1"
+            ],
+            "ingredient_keys": [
+              "havregryn|dry",
+              "morot|raw_edible"
+            ]
+          },
+          {
+            "id": "step-3",
+            "text": "Häll all gröt i en skål och servera med den uppmätta yoghurten.",
+            "duration_minutes": 2,
+            "depends_on": [
+              "step-2"
+            ],
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold"
+            ]
+          }
+        ],
+        "provenance": {
+          "reviewed_at": "2026-10-08",
+          "notes": "Nytt författat innehåll för prov av oförändrad 54cb-import. Mängdbasis, komponentmängder och steg granskade mot varandra. Tider är uppskattningar; ingen fysisk provlagning eller hållbarhetsprovning. Inga nya produktfakta."
+        }
+      }
+    },
+    {
+      "name": "Ugnsvarm tomat med ost och oregano",
+      "servings": 1,
+      "ingredients": [
+        {
+          "canonical_name": "tomat",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 180,
+          "quantity_max": 180,
+          "quantity_min": 180,
+          "quantity_step": 180,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 40,
+          "quantity_max": 40,
+          "quantity_min": 40,
+          "quantity_step": 40,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "main",
+          "form": "dry",
+          "name": "oregano",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 200 grader. Väg tomaten efter att stjälkfästet tagits bort och dela den i halvor. Lägg med snittytan upp i en liten form.",
+        "Riv osten, fördela all ost och oregano över tomaten och gratinera cirka 15 minuter tills osten smält och tomaten är varm. Servera även saften i formen."
+      ],
+      "design": {
+        "base_id": "smako-snack-baked-cheese-tomato",
+        "version": "1.0.0",
+        "variant_id": "base",
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "meal_types": [
+          "snack"
+        ],
+        "dinner_level": "simple",
+        "cuisines": [],
+        "method": "oven",
+        "family": "gratinerad grönsak",
+        "primary_ingredient": "ost",
+        "vegetarian": true,
+        "fish": false,
+        "ingredient_count": 3,
+        "side": "grönsaker",
+        "flavor_profile": [
+          "mild"
+        ],
+        "estimated_minutes": 20,
+        "total_minutes": 20,
+        "active_minutes": 5,
+        "waiting_minutes": 0,
+        "equipment": [
+          "våg",
+          "kniv",
+          "skärbräda",
+          "ugn",
+          "ugnsform"
+        ],
+        "components": [
+          {
+            "id": "main",
+            "name": "Huvudrätt",
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "quantity": 180,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "quantity": 40,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "id": "step-1",
+            "text": "Värm ugnen till 200 grader. Väg tomaten efter att stjälkfästet tagits bort och dela den i halvor. Lägg med snittytan upp i en liten form.",
+            "duration_minutes": 4,
+            "depends_on": [],
+            "ingredient_keys": [
+              "tomat|raw_edible"
+            ]
+          },
+          {
+            "id": "step-2",
+            "text": "Riv osten, fördela all ost och oregano över tomaten och gratinera cirka 15 minuter tills osten smält och tomaten är varm. Servera även saften i formen.",
+            "duration_minutes": 16,
+            "depends_on": [
+              "step-1"
+            ],
+            "ingredient_keys": [
+              "ost|as_sold",
+              "oregano|dry"
+            ]
+          }
+        ],
+        "provenance": {
+          "reviewed_at": "2026-10-08",
+          "notes": "Nytt författat innehåll för prov av oförändrad 54cb-import. Mängdbasis, komponentmängder och steg granskade mot varandra. Tider är uppskattningar; ingen fysisk provlagning eller hållbarhetsprovning. Inga nya produktfakta."
+        }
+      }
+    },
+    {
+      "name": "Ärtdipp med yoghurt och morotsstavar",
+      "servings": 1,
+      "ingredients": [
+        {
+          "canonical_name": "ärtor",
+          "component": "main",
+          "form": "as_sold",
+          "name": "ärtor",
+          "quantity": 100,
+          "quantity_max": 100,
+          "quantity_min": 100,
+          "quantity_step": 100,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "main",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 80,
+          "quantity_max": 80,
+          "quantity_min": 80,
+          "quantity_step": 80,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "side",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 120,
+          "quantity_max": 120,
+          "quantity_min": 120,
+          "quantity_step": 120,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka de uppvägda ärtorna enligt förpackningens anvisning och häll av. Låt svalna några minuter.",
+        "Mosa ärtorna med gaffel och blanda med all yoghurt. Skala moroten och väg 120 g ätbar del; skär i stavar och servera med all dipp."
+      ],
+      "design": {
+        "base_id": "smako-snack-pea-yoghurt-dip",
+        "version": "1.0.0",
+        "variant_id": "base",
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "meal_types": [
+          "snack"
+        ],
+        "dinner_level": "simple",
+        "cuisines": [],
+        "method": "pot",
+        "family": "dipp",
+        "primary_ingredient": "ärtor",
+        "vegetarian": true,
+        "fish": false,
+        "ingredient_count": 3,
+        "side": "grönsaker",
+        "flavor_profile": [
+          "mild"
+        ],
+        "estimated_minutes": 12,
+        "total_minutes": 12,
+        "active_minutes": 10,
+        "waiting_minutes": 0,
+        "equipment": [
+          "våg",
+          "kniv",
+          "skärbräda",
+          "kastrull",
+          "slev"
+        ],
+        "components": [
+          {
+            "id": "main",
+            "name": "Huvudrätt",
+            "amounts": [
+              {
+                "ingredient_key": "ärtor|as_sold",
+                "name": "ärtor",
+                "quantity": 100,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "quantity": 80,
+                "unit": "g"
+              }
+            ]
+          },
+          {
+            "id": "side",
+            "name": "Tillbehör",
+            "amounts": [
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "quantity": 120,
+                "unit": "g"
+              }
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "id": "step-1",
+            "text": "Koka de uppvägda ärtorna enligt förpackningens anvisning och häll av. Låt svalna några minuter.",
+            "duration_minutes": 7,
+            "depends_on": [],
+            "ingredient_keys": [
+              "ärtor|as_sold"
+            ]
+          },
+          {
+            "id": "step-2",
+            "text": "Mosa ärtorna med gaffel och blanda med all yoghurt. Skala moroten och väg 120 g ätbar del; skär i stavar och servera med all dipp.",
+            "duration_minutes": 5,
+            "depends_on": [
+              "step-1"
+            ],
+            "ingredient_keys": [
+              "ärtor|as_sold",
+              "yoghurt naturell|as_sold",
+              "morot|raw_edible"
+            ]
+          }
+        ],
+        "provenance": {
+          "reviewed_at": "2026-10-08",
+          "notes": "Nytt författat innehåll för prov av oförändrad 54cb-import. Mängdbasis, komponentmängder och steg granskade mot varandra. Tider är uppskattningar; ingen fysisk provlagning eller hållbarhetsprovning. Inga nya produktfakta."
+        }
+      }
+    }
+  ]
+}
