@@ -1,0 +1,113 @@
+{
+  "snapshot_id": "b662192bf600405e9b70476f8d44f667",
+  "chain": "hemkop",
+  "state": "rejected",
+  "scope": {
+    "scope_key": "lund:hemkop:4123",
+    "source_scope": {
+      "scope_key": "lund:hemkop:4123",
+      "geographic_area": {
+        "city": "Lund",
+        "mode": "locality",
+        "municipality_code": null,
+        "postal_codes": [],
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    "source_policy": "review",
+    "operator_opt_in": true,
+    "store_allowlist": [
+      "4123"
+    ],
+    "requests_per_second": 0.1,
+    "max_concurrency": 1
+  },
+  "rejection_reason": "schema changed: 2 added, 0 removed, 0 type changed",
+  "schema_fingerprint": "47a4fb1f9feeaf52bc20a46c4ee64b919b337fac563b8def7f7be91db043333c",
+  "schema_diff": {
+    "added": [
+      "4123:store_context:$[].hasPickingBaseStore",
+      "stores:$[][].hasPickingBaseStore"
+    ],
+    "removed": [
+      "4123:catalog_page:$[].results[].energyDeclaration.image",
+      "4123:catalog_page:$[].results[].energyDeclaration.link",
+      "4123:catalog_page:$[].results[].energyDeclaration.value"
+    ],
+    "type_changed": [
+      {
+        "path": "4123:catalog_page:$[].results[].energyDeclaration",
+        "old_types": [
+          "null",
+          "object"
+        ],
+        "new_types": [
+          "null"
+        ]
+      }
+    ]
+  },
+  "effective_schema_diff": {
+    "added": [
+      "4123:store_context:$[].hasPickingBaseStore",
+      "stores:$[][].hasPickingBaseStore"
+    ],
+    "removed": [],
+    "type_changed": []
+  },
+  "catalog_completion": {
+    "4123": {
+      "complete": true,
+      "limited": false,
+      "expected_categories": 20,
+      "completed_categories": 20,
+      "pages_fetched": 82,
+      "products_observed": 6304,
+      "expected_products": 7009,
+      "raw_rows": 7009,
+      "unique_products": 6304,
+      "duplicate_products": 705,
+      "within_partition_duplicates": 0,
+      "cross_partition_duplicates": 705,
+      "expected_pages": 82,
+      "reason": null
+    }
+  },
+  "metrics": {
+    "stores_found": 1,
+    "stores_successful": 1,
+    "stores_failed": 0,
+    "products_fetched": 6304,
+    "products_parsed": 6304,
+    "products_quarantined": 0,
+    "products_with_price": 6304,
+    "products_with_gtin": 0,
+    "products_with_package_quantity": 6169,
+    "unknown_sale_model": 116,
+    "request_count": 87,
+    "http_error_count": 0,
+    "rate_limit_count": 0,
+    "runtime_ms": 927194,
+    "source_policy": "review",
+    "operator_opt_in": true,
+    "store_allowlist": [
+      "4123"
+    ],
+    "requests_per_second": 0.1,
+    "max_concurrency": 1
+  },
+  "new_field_types": {
+    "4123:store_context": {
+      "$[].hasPickingBaseStore": [
+        "boolean"
+      ]
+    },
+    "stores": {
+      "$[][].hasPickingBaseStore": [
+        "boolean"
+      ]
+    }
+  },
+  "automatic_promotion_overridden": false
+}

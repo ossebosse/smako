@@ -1,0 +1,233 @@
+{
+  "checked_at": "2026-10-08T12:44:40.692812+00:00",
+  "outcome": "BLOCKED_SOURCE_QUALIFICATION",
+  "app_build": "status-reconnect-dd12cc80e98c",
+  "complete_recipes": "true",
+  "ready_http": 503,
+  "database": "ok",
+  "plan_store": "ok",
+  "server_free_before": 0,
+  "server_peak_free_after_cleanup": 14007619584,
+  "server_free_after_recovery": 13488459776,
+  "windows_before": {
+    "C": 5762117632,
+    "D": 664353087488
+  },
+  "windows_after": [
+    {
+      "DriveLetter": "D",
+      "Size": 1000187359232,
+      "SizeRemaining": 664303230976
+    },
+    {
+      "DriveLetter": "C",
+      "Size": 254721126400,
+      "SizeRemaining": 5528621056
+    }
+  ],
+  "task": {
+    "at": "2026-10-08T12:46:49.1508371Z",
+    "state": "Ready",
+    "enabled": true,
+    "last_result": 1,
+    "last_run": "2026-10-08T11:07:19.0000000Z",
+    "next_run": "2026-10-08T15:30:00.0000000Z",
+    "actions": {
+      "Execute": "C:\\Users\\ossia\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "Arguments": "-NoProfile -NonInteractive -File \"D:\\smako-local-relay\\releases\\fe795e5b04f5\\deploy\\scripts\\start_packaged_relay.ps1\" -Workspace \"D:\\smako-local-relay\\scopes\\municipality-1281\" -Config \"D:\\smako-local-relay\\config\\relay.json\"",
+      "WorkingDirectory": "D:\\smako-local-relay\\releases\\fe795e5b04f5"
+    }
+  },
+  "preservation": {
+    "consumer_plan_revisions": {
+      "before": 216,
+      "after": 216,
+      "all_previous_rows_preserved": true
+    },
+    "personal_private_state": {
+      "before": 61,
+      "after": 61,
+      "all_previous_rows_preserved": true
+    },
+    "receipt_unchanged": true,
+    "queued_artifact": {
+      "exists": true,
+      "bytes": 3977155,
+      "sha256": "d53486fb8c90740ecb68901bb6a333148eed2a37aefe9bb84ed8958715686c98"
+    }
+  },
+  "import": {
+    "at": "2026-10-08T12:46:48.058828+00:00",
+    "digest_imports": [
+      [
+        "72c524df46c34fe69af362158af38692",
+        "promoted",
+        1
+      ]
+    ]
+  },
+  "active_manifest": {
+    "activated_at": "2026-10-05T22:19:17.370140Z",
+    "artifact_bytes": 81579850,
+    "artifact_file": "artifacts/963cd15324de1925222d4958c5ee6b77e43d2baff83adf3fb95d8e89da951f50.json",
+    "artifact_sha256": "963cd15324de1925222d4958c5ee6b77e43d2baff83adf3fb95d8e89da951f50",
+    "built_at": "2026-10-05T22:16:50.460741Z",
+    "canonical_index_count": 57,
+    "city": "lund",
+    "oldest_base_observed_at": "2026-10-04T15:31:05.108770Z",
+    "oldest_observed_at": "2026-10-04T15:31:05.108770Z",
+    "product_count": 2234,
+    "provider_requests": 0,
+    "schema_version": "active-prepared-price-universe-v1",
+    "scope_id": "city:lund",
+    "snapshot_ids": [
+      "07e930083562494c8e787094c85d4098",
+      "0a86505c68b04236b6342801a9856b62",
+      "0d625ac7cbdf4e7485077b1e61145655",
+      "1ddd2635554d48abb0bcabfd3311b80f",
+      "3121607416ed453cba88872fb212cf08",
+      "3c358e06b5994d78ab71c88d9825827a",
+      "512f8ea8771448af9c08e5f1d4155997",
+      "5ce3b40a74e94bafa17175433f984930",
+      "5ddb11e6ddd54fe9ad7c75a6a06e52bf",
+      "5f4aa0accf1c4baeb6dcb7d54079f1e9",
+      "631c4cbc03e246b297398d246ce7388c",
+      "6408dcc633bb494385dda76e29b4e7d7",
+      "645904c1548549119c0e7892c36dd3ab",
+      "b8cf0f94cb554f0893e92a83de478730",
+      "b8e26a184d284109bf7ca495c81817ce",
+      "e94a6c4e604043d2895fbeb37abdd8e6",
+      "eadb81fc8dec4cf691d9b23b569fa0e1",
+      "eafe2b0bc3e442f68e0432da095195ac",
+      "ff6e64a1bd9e435c9b9178e8aebec3f2"
+    ],
+    "universe_id": "price-universe:387cc368662cc45b3ee4714aaf57ed42e4a6ff1123a814d7fb62e25f5ead80e9"
+  },
+  "artifact_hash_valid": true,
+  "contexts": [
+    {
+      "name": "Coop Online Syd",
+      "context_id": "context:coop:23eaae11c9661e68",
+      "serving_status": "STALE",
+      "rows": 11481,
+      "oldest_observed_at": "2026-10-05T10:30:54.804399Z",
+      "snapshots": [
+        "ff6e64a1bd9e435c9b9178e8aebec3f2"
+      ],
+      "age_hours": 74.22941344805555
+    },
+    {
+      "name": "Hemköp Brunnshög",
+      "context_id": "context:hemkop:3288e04edd97e349",
+      "serving_status": "STALE",
+      "rows": 5027,
+      "oldest_observed_at": "2026-10-05T01:01:52.060296Z",
+      "snapshots": [
+        "07e930083562494c8e787094c85d4098"
+      ],
+      "age_hours": 83.71350903222222
+    },
+    {
+      "name": "Hemköp Karhögstorg",
+      "context_id": "context:hemkop:756955d0e6e05f23",
+      "serving_status": "STALE",
+      "rows": 6278,
+      "oldest_observed_at": "2026-10-05T00:46:18.267865Z",
+      "snapshots": [
+        "645904c1548549119c0e7892c36dd3ab"
+      ],
+      "age_hours": 83.97289581861111
+    },
+    {
+      "name": "Willys Lund",
+      "context_id": "context:willys:383650ec6ff5a636",
+      "serving_status": "STALE",
+      "rows": 10217,
+      "oldest_observed_at": "2026-10-04T15:31:05.108770Z",
+      "snapshots": [
+        "5ddb11e6ddd54fe9ad7c75a6a06e52bf"
+      ],
+      "age_hours": 93.22655112277778
+    },
+    {
+      "name": "Willys Lund Nova",
+      "context_id": "context:willys:4a671428fc484e43",
+      "serving_status": "STALE",
+      "rows": 8647,
+      "oldest_observed_at": "2026-10-04T15:49:42.410373Z",
+      "snapshots": [
+        "5ddb11e6ddd54fe9ad7c75a6a06e52bf"
+      ],
+      "age_hours": 92.91618956638888
+    }
+  ],
+  "demand": {
+    "work_due": false,
+    "reasons": [
+      "source_promotion_pending_publication"
+    ],
+    "sources": {
+      "coop": {
+        "observations": [
+          "2026-10-08T11:33:16.566196+00:00"
+        ],
+        "snapshots": [
+          "0e91c5c39f9d490ba28a11af81c6a76b"
+        ],
+        "next_fetch_at": "2026-10-09T22:33:16.566196+00:00",
+        "reason": "base_35h_deadline_or_campaign_coalescing",
+        "observed_at": "2026-10-08T11:33:16.566196+00:00",
+        "hard_stop_at": "2026-10-10T11:33:16.566196+00:00"
+      },
+      "hemkop": {
+        "observations": [
+          "2026-10-06T02:17:04.053996+00:00",
+          "2026-10-06T02:01:18.894645+00:00"
+        ],
+        "snapshots": [
+          "e23d7e706c114b878aed1984d544f6fd",
+          "104db13b19354dbb848b4192e1a5a0aa"
+        ],
+        "next_fetch_at": "2026-10-08T12:52:43.085749+00:00",
+        "reason": "base_35h_deadline_or_campaign_coalescing",
+        "observed_at": "2026-10-06T02:01:18.894645+00:00",
+        "hard_stop_at": "2026-10-08T02:01:18.894645+00:00"
+      },
+      "willys": {
+        "observations": [
+          "2026-10-07T23:31:27.443160+00:00",
+          "2026-10-07T23:51:22.161079+00:00"
+        ],
+        "snapshots": [
+          "72c524df46c34fe69af362158af38692",
+          "72c524df46c34fe69af362158af38692"
+        ],
+        "next_fetch_at": "2026-10-09T10:31:27.443160+00:00",
+        "reason": "local_relay_35h_deadline",
+        "observed_at": "2026-10-07T23:31:27.443160+00:00",
+        "hard_stop_at": "2026-10-09T23:31:27.443160+00:00"
+      }
+    },
+    "due_sources": [],
+    "relay_due": false,
+    "external_price_requests": 0
+  },
+  "retry": {
+    "retry_at": "2026-10-08T18:37:43.085749+00:00",
+    "failures": 6,
+    "source_retries": {
+      "hemkop": {
+        "snapshots": [
+          "e23d7e706c114b878aed1984d544f6fd",
+          "104db13b19354dbb848b4192e1a5a0aa"
+        ],
+        "failures": 1,
+        "retry_at": "2026-10-08T12:52:43.085749+00:00"
+      }
+    },
+    "last_success_at": "2026-10-06T15:22:05.062655+00:00"
+  },
+  "menu_tests": "BLOCKED: current mandatory federation unusable; no successful public/personal generation claimed",
+  "runtime_changed": false,
+  "git_push": false
+}

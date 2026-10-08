@@ -1,31 +1,38 @@
-# 2026-10-08: Driftåterställning pågår – Windows och serverutrymme åtgärdade
+# 2026-10-08: Driftåterställning – konkreta Hemköp-blockerare
 
-Användaren har uttryckligen godkänt säker rensning av verifierade överflödiga
-kopior/cache och kört administratörsregistreringen. Uppgiften är nu återläst
-och pekar på fe795e5b04f5; 625 filer verifierade, hela XML utom Actions
-oförändrad. S4U/session 0 lagringsprov PASS 11:03 UTC, parent/child temp på D:.
-Ingen omregistrering av oss. Ingen måltids-/sökaktivering eller Git-push.
+**Windows och serverutrymme är åtgärdade; prispublicering är inte återställd.**
+Se [slutstatus](releases/drift-restoration-20261008/STATUS.md),
+[FINAL.json](releases/drift-restoration-20261008/FINAL.json) och
+[separata källstopp](releases/drift-restoration-20261008/BLOCKERS.md).
 
-Fem arkiverade testkataloger (raw/price-universes, inga databaser) togs bort
-efter förnyad exakt hash-/beroendekontroll. Dessutom 61 exakt identifierade
-oanvända byggcacheposter. Serverns lediga utrymme 0→14,0 GB; inga images
-eller volymer borttagna. Nuvarande prisombyggnad använder tillfällig
-SQLite-kopia 3,55 GB; kvar cirka 10,1 GB medan denna är aktiv. Arkiv på D:
-bevarat. Se [åtgärdsjournal](releases/drift-restoration-20261008/STATUS.md).
+Uppgiften använder fe795e5b04f5, 625 filer matchar, övrig XML bevarad.
+Verkligt S4U/session 0 parent/child-temp på D: PASS. Återleverans av nattens
+bdc9-artifact gav exakt en promoverad import 72c524df46c34fe69af362158af38692.
+Publiceringen misslyckades; paket kvar på D:, inget nytt last-success/kvitto.
 
-**Pågående körning – starta inte parallellt:** kontrollerad Scheduler-start
-11:07:19 UTC återlevererar nattens paket 989f961ccfc64984a830de9584d437d5,
-SHA d53486fb8c90740ecb68901bb6a333148eed2a37aefe9bb84ed8958715686c98.
-Import skapade snapshot 72c524df46c34fe69af362158af38692 (19060 rader).
-Mottagarens ordinarie source_cli import/daily-refresh har operationslåset;
-publicering/slutkvitto ännu inte bekräftade vid 11:26 UTC. Kontrollera
-faktiska processer/loggar före nästa åtgärd. Därefter ordinarie behovsstyrd
-återhämtning av för gamla Coop/Hemköp-baser, återkvittens och menyprov.
+Användarens förnyade säker-rensningsgodkännande användes för fem exakt
+arkiverade testkataloger och 61 exakta reproducerbara byggcacheposter.
+Fyra testdatabaser och alla aktiva data/images bevarade. Server 0→14,0 GB
+som mest; 13,49 GB efter återhämtning. C: cirka 5,53 GB, D: 664,30 GB.
+Ingen bred prune eller aktiv tempfilradering.
 
-Betan är samma dd12-container från 6 oktober. Plan-/grocerylagring ok efter
-frigörelse; /ready fortfarande 503 på gammalt manifest. 216 revisioner och
-61 privata tillståndsrader fingerprintade för slutjämförelse. Scheman inte
-pausade. Privata bevis i `.local/drift-restoration-20261008/`.
+Ordinarie serveråterhämtning **avslutad** 12:37:43 UTC med exit 1; exec87815
+är inte längre aktiv. Coops fullcrawl promoverad. Karhögstorg komplett men
+rejected på två booleska hasPickingBaseStore-fält. Brunnshög ofullständig
+på olika potentialPromotions för 101293703_ST. Råbevis och separata
+stopporsaker bevarade; inga spärrar kringgångna. Separat förberedelse av
+avgränsad schemafix efterfrågad, inget användarsvar vid denna notering.
+Ingen källkod ändrad eller driftsatt.
+
+Samma dd12-app/JS/flagga; /health200, /ready503, grocery/plan_store ok.
+216 revisioner och 61 privata tillståndsrader exakt bevarade. Gammalt
+manifest är fortsatt laddat med alla fem baser STALE. Menyproven blockerade.
+
+Scheman inte pausade: Windows nästa 17:30 lokal tid; server var15min.
+12:45 UTC demandkontroll not_due på **backoff**, inga prisanrop.
+Global retry_at 18:37:43 UTC; möjlig cronåterhämtning20:45 lokal tid.
+Ingen framtida automatisk framgång påstådd. Kontrollera verkliga jobb/lås
+innan nya åtgärder. Ingen måltids-/sökaktivering eller Git-push.
 
 # 2026-10-07 kväll: Endast driftåterställning – operatörsåtgärder återstår
 

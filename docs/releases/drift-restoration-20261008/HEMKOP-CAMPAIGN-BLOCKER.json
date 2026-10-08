@@ -1,0 +1,249 @@
+{
+  "snapshot_id": "927a801e126847a184f0515cffc36283",
+  "state": "rejected",
+  "scope": {
+    "scope_key": "lund:hemkop:4224",
+    "source_scope": {
+      "scope_key": "lund:hemkop:4224",
+      "geographic_area": {
+        "city": "Lund",
+        "mode": "locality",
+        "municipality_code": null,
+        "postal_codes": [],
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    "source_policy": "review",
+    "operator_opt_in": true,
+    "store_allowlist": [
+      "4224"
+    ],
+    "requests_per_second": 0.1,
+    "max_concurrency": 1
+  },
+  "error_summary": "ConnectorFetchError",
+  "catalog_completion": {
+    "4224": {
+      "complete": false,
+      "limited": false,
+      "expected_categories": 20,
+      "completed_categories": 15,
+      "pages_fetched": 45,
+      "products_observed": 3273,
+      "expected_products": 3733,
+      "raw_rows": 3491,
+      "unique_products": 3273,
+      "duplicate_products": 218,
+      "within_partition_duplicates": 0,
+      "cross_partition_duplicates": 218,
+      "exact_duplicates_removed": 0,
+      "conflicting_duplicates": 1,
+      "pagination_overlaps": 0,
+      "expected_pages": 47,
+      "reason": "ValueError"
+    }
+  },
+  "metrics": {
+    "stores_found": 1,
+    "stores_successful": 0,
+    "stores_failed": 1,
+    "products_fetched": 0,
+    "products_parsed": 0,
+    "products_quarantined": 0,
+    "products_with_price": 0,
+    "products_with_gtin": 0,
+    "products_with_package_quantity": 0,
+    "unknown_sale_model": 0,
+    "request_count": 50,
+    "http_error_count": 0,
+    "rate_limit_count": 0,
+    "runtime_ms": 492725,
+    "source_policy": "review",
+    "operator_opt_in": true,
+    "store_allowlist": [
+      "4224"
+    ],
+    "requests_per_second": 0.1,
+    "max_concurrency": 1
+  },
+  "raw_replay": {
+    "snapshot": "927a801e126847a184f0515cffc36283",
+    "verified_pages": 45,
+    "conflicts": [
+      {
+        "product_id": "101293703_ST",
+        "name": "Gyros Kebab Sverige",
+        "first": {
+          "payload_location": "hemkop/4224/927a801e126847a184f0515cffc36283/20261008T122201121507Z_0021_catalog_page_ae84a61c.json",
+          "sha256": "bcf18bc61c30039b2cca7ff96b86607580ffc292c3fdac61e131aa3c1e0c3793",
+          "observed_at": "2026-10-08T12:22:01.121507+00:00",
+          "page_number": 0
+        },
+        "second": {
+          "payload_location": "hemkop/4224/927a801e126847a184f0515cffc36283/20261008T122621346470Z_0047_catalog_page_b2e9cc57.json",
+          "sha256": "35596ebcaab89f2586a3bb971bc2dfc4c438ef3cb1e6ad99453f27f1eb7848f7",
+          "observed_at": "2026-10-08T12:26:21.346470+00:00",
+          "page_number": 0
+        },
+        "changed": {
+          "potentialPromotions": {
+            "first": [
+              {
+                "validUntil": null,
+                "redeemLimitLabel": "",
+                "comparePrice": "161,82 kr",
+                "mainProductCode": "101293702_ST",
+                "splashTitleText": "Alltid bra pris",
+                "realMixAndMatch": true,
+                "qualifyingCount": 2,
+                "cartLabel": null,
+                "timesUsed": null,
+                "conditionLabel": "2 för",
+                "rewardLabel": "89 kr",
+                "textLabel": "Alltid bra pris!",
+                "conditionLabelFormatted": "",
+                "cartLabelFormatted": "",
+                "promotionPercentage": null,
+                "promotionRedeemLimit": null,
+                "code": "10010495716",
+                "threshold": null,
+                "price": {
+                  "currencyIso": "SEK",
+                  "value": 44.5,
+                  "priceType": "BUY",
+                  "formattedValue": "44,50 kr",
+                  "minQuantity": null,
+                  "maxQuantity": null,
+                  "sapUnit": null
+                },
+                "productCodes": [
+                  "101293703_ST",
+                  "101807036_ST",
+                  "101839701_ST"
+                ],
+                "applied": false,
+                "promotionType": "MixMatchPricePromotion",
+                "textLabelGenerated": "Alltid bra pris!",
+                "campaignType": "GENERAL",
+                "textLabelManual": null,
+                "offerStatus": null,
+                "promotionTheme": {
+                  "code": "Z019",
+                  "visible": null
+                },
+                "lowestHistoricalPrice": null,
+                "priority": 208
+              }
+            ],
+            "second": [
+              {
+                "validUntil": 1791755999000,
+                "redeemLimitLabel": "",
+                "comparePrice": "145,27 kr",
+                "mainProductCode": "101807036_ST",
+                "splashTitleText": "Klubbpris",
+                "realMixAndMatch": false,
+                "qualifyingCount": 1,
+                "cartLabel": null,
+                "timesUsed": null,
+                "conditionLabel": "",
+                "rewardLabel": "39,95",
+                "textLabel": "Klubbpris",
+                "conditionLabelFormatted": "",
+                "cartLabelFormatted": "",
+                "promotionPercentage": null,
+                "promotionRedeemLimit": null,
+                "code": "2500325088",
+                "threshold": null,
+                "price": {
+                  "currencyIso": "SEK",
+                  "value": 39.95,
+                  "priceType": "BUY",
+                  "formattedValue": "39,95 kr",
+                  "minQuantity": null,
+                  "maxQuantity": null,
+                  "sapUnit": null
+                },
+                "productCodes": [
+                  "101807036_ST",
+                  "101839701_ST",
+                  "101885053_ST",
+                  "101293703_ST"
+                ],
+                "applied": false,
+                "promotionType": "MixMatchPricePromotion",
+                "textLabelGenerated": "Klubbpris",
+                "campaignType": "LOYALTY",
+                "textLabelManual": null,
+                "offerStatus": null,
+                "promotionTheme": {
+                  "code": "Z008",
+                  "visible": null
+                },
+                "lowestHistoricalPrice": {
+                  "currencyIso": "SEK",
+                  "value": 55.79,
+                  "priceType": "BUY",
+                  "formattedValue": "55,79 kr",
+                  "minQuantity": null,
+                  "maxQuantity": null,
+                  "sapUnit": null
+                },
+                "priority": 608
+              },
+              {
+                "validUntil": null,
+                "redeemLimitLabel": "",
+                "comparePrice": "161,82 kr",
+                "mainProductCode": "101293702_ST",
+                "splashTitleText": "Alltid bra pris",
+                "realMixAndMatch": true,
+                "qualifyingCount": 2,
+                "cartLabel": null,
+                "timesUsed": null,
+                "conditionLabel": "2 för",
+                "rewardLabel": "89 kr",
+                "textLabel": "Alltid bra pris!",
+                "conditionLabelFormatted": "",
+                "cartLabelFormatted": "",
+                "promotionPercentage": null,
+                "promotionRedeemLimit": null,
+                "code": "10010495716",
+                "threshold": null,
+                "price": {
+                  "currencyIso": "SEK",
+                  "value": 44.5,
+                  "priceType": "BUY",
+                  "formattedValue": "44,50 kr",
+                  "minQuantity": null,
+                  "maxQuantity": null,
+                  "sapUnit": null
+                },
+                "productCodes": [
+                  "101293703_ST",
+                  "101807036_ST",
+                  "101839701_ST"
+                ],
+                "applied": false,
+                "promotionType": "MixMatchPricePromotion",
+                "textLabelGenerated": "Alltid bra pris!",
+                "campaignType": "GENERAL",
+                "textLabelManual": null,
+                "offerStatus": null,
+                "promotionTheme": {
+                  "code": "Z019",
+                  "visible": null
+                },
+                "lowestHistoricalPrice": null,
+                "priority": 208
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "promotion_overridden": false,
+  "retry_policy_changed": false
+}
