@@ -1,3 +1,36 @@
+# 2026-10-08: Publikt status-500 avgränsat; appkandidat ej aktiverad
+
+Börja med `.venv\Scripts\python.exe -X utf8 scripts\smako_ops.py status`.
+För det historiska felet: `app-incident --request-id 9e96c548-6414-467b-ab7e-3d5e4fe6d779`
+genom samma CLI. Det läser befintlig appmetrik även på dd12; inget källbyte behövs.
+
+Klientloggen binder exakt jobb/start/statusreferens till 500 vid status-GET.
+Klientens svarstid 14:51:20.452506 UTC är inte servermetrikens lagringstid
+14:51:24.173961 UTC. Exceptionkedjan saknas och historisk grundorsak är okänd.
+Samma rekonstruerade val och bevarade pris-/faktaunderlag gav 201 i isolerad dd12.
+Sorteringshypotesen anropades inte där. Första försöket är fortfarande FAIL.
+
+En belagd separat statusdefekt rättas selektivt med befintlig ab2718a:
+PolicyConflict/PersonalConflict blir 422/409 i stället för 500. Ny bounded privat
+incidentinsamling kompletterar request/job/steg/exceptionens kodställen utan
+hemligheter. Ingen automatisk omstart eller extra genererings-POST tillagd.
+
+Kandidatdelta **293fc6c49400f6f508eebb6772774d4fdfd995c9**, image **c7295a8e…**.
+Paketet är dd12 + selektiv statusfix + incidentdelta; bygg INTE hela senare
+arbetsgrenen som apprelease. 58 riktade prov på grenen och samma 58 mot paketet,
+negativa imageprov även som UID10001, riktig Chromium mobil menyresa med
+omladdning/offline/byte/omräkning/revisions-GET/ägarskydd PASS. Fullt planinnehåll
+matchar före/efter utom versioner/tider. Egna isolerade appen är stoppad.
+
+[Resultat och kvarstående kunskapslucka](releases/app-status-incident-20261008/RESULTS.md),
+[exakt kandidat och framtida app-only-byte](releases/app-status-incident-20261008/ACTIVATION.md),
+[maskinläsbara belägg](releases/app-status-incident-20261008/EVIDENCE.json).
+Privata råprov: `.local/app-status-20261008/`. Inga nya fulla menyomkörningar
+utan nytt belägg. Betan fortsätter dd12, samma container/starttid och /ready200;
+källfix/relä/prisflöde bevarade. **Ingen aktivering eller push gjord.**
+
+---
+
 # 2026-10-08: Hemköp återställt och gemensam driftstatus aktiverad
 
 **Prisdriften är återställd; en första publik HTTP 500-händelse kvarstår som

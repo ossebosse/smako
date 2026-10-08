@@ -6,11 +6,33 @@ Kör i `D:\Projects\Smako`. Kräver befintlig SSH-administratörsåtkomst till
 ```powershell
 .venv\Scripts\python.exe -X utf8 scripts\smako_ops.py status
 .venv\Scripts\python.exe -X utf8 scripts\smako_ops.py incidents
+.venv\Scripts\python.exe -X utf8 scripts\smako_ops.py app-incident --request-id 9e96c548-6414-467b-ab7e-3d5e4fe6d779
 ```
 
 Status läser aktuell Windowsuppgift, senaste relähändelser, kö/kvitto, C:/D:,
 serverkapacitet, aktuella baskällor, publicerat/laddat manifest och readiness.
 Inga pris- eller menyanrop, imagebyggen, tester eller full arkivgenomsökning.
+Status inkluderar nu även appens senaste 20 HTTP 5xx-metriker inom ett dygn.
+`app-incident --request-id ...` läser en exakt referens även utanför detta fönster.
+Det lokala verktyget skickar en granskad läsare över befintlig administratörs-SSH;
+ingen installation, schemastart eller publik endpoint behövs. SQL är läsande.
+Metrikens `created_at` är lagringstid, inte garanterad svarstid. Jämför klientens
+`reference` i transportloggen med metrikens `request_id`, inte bara närliggande tider.
+
+Aktiva dd12 saknar beständiga exceptionkedjor. Detta visas som `unavailable`,
+även när HTTP-metriken finns. Den **ännu inte aktiverade** appkandidaten i
+[app-status-incident-20261008](releases/app-status-incident-20261008/RESULTS.md)
+skriver `app-incidents.json` bredvid privat PlanStore, högst 64 incidenter/512 kB,
+atomiskt och med skyddat filmode. Där finns start-/statusreferens, ägarkontrollerat
+jobb, steg, jobbutfall, kodställen och exceptionkedja utan meddelanden eller lokaler.
+Upprepade läsningar räknas som felanrop, **inte** som flera beräkningar.
+Pris-ID anges uttryckligen vid HTTP-anropets början; det påstås inte bevisa
+beräkningsunderlaget för ett äldre jobb om ett manifest har bytts däremellan.
+Indexet är bounded evidence, inte full historik: senaste åtta requestreferenser
+och första referensen per incident bevaras. Frånvaro är inte bevis för noll fel.
+Skrivfel ger `app_incident_write_failed` med enbart feltyp i skyddad applogg;
+ursprungligt HTTP-fel ändras inte. Oavlästa bakgrundsfel har inte fått en ny
+jobbjournal i denna etapp. Kontrollerade felprov är inte historisk orsaksbevisning.
 Otillgängliga delar är **unknown** med observationstid; senaste framgång är
 inte bevis för aktuell drift. Ett importerat Willys-paket kan uttryckligen
 vänta på andra obligatoriska källor före publicering och kvittens.

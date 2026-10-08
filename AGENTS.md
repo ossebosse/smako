@@ -7,6 +7,9 @@
   This is a bounded read-only admin check, not collection or menu generation.
 - Use `incidents` and `reproduce --snapshot-id ...` from that same entry point
   for current evidence. Do not begin by scanning all dated release archives.
+- For consumer HTTP failures use `app-incident --request-id <actual reference>`.
+  Status also reads recent app 5xx metrics. Keep client response time distinct
+  from asynchronous metric persistence; unavailable exception evidence is unknown.
 - Repairs require a current incident/signature, reviewed runtime, existing
   operation lease and explicit task authority. Preserve unknown/unreachable
   states and separate imported, published, loaded and receipted stages.
