@@ -1,3 +1,20 @@
+# 2026-10-08: Fristående inköpslista – implementerad, inte aktiverad
+
+Gren `feature/independent-shopping-list-20261008`, runtime `38a85dafa18a`.
+Exakta/generiska varor, prisfria förslag, uttryckliga antingen-eller-rader,
+fristående eller gemensam receptkorg och ägarbundna vanliga val.
+130 backendtester mot slutimagen PASS. Slutliga Chromium/WebKit-knappflöden
+PASS med audit, ägarskydd, omräkning och revisionsläsning efter omstart.
+Tidigare strikt underkända avbrutna sökförfrågningar bevaras; ingen generell
+WebKit-/nätfelsdispens. Betan saknar OIDC-konfiguration; kontoflytt backendtestad.
+[Resultat och begränsningar](releases/shopping-list-20261008/RESULTS.md),
+[framtida separat appbeslut](releases/shopping-list-20261008/ACTIVATION.md).
+Image `dce98e90…`, leveranspaket på D:, inget från denna funktion är aktiverat.
+Beta är fortsatt `meal-library-42fab888ffd7` enligt nedan. Efter liveprov finns
+232 revisioner/67 privata tillstånd, alla tidigare 228/65 bevarade.
+
+---
+
 # 2026-10-08: Måltidskandidaten aktiverad efter godkännande
 
 Beta kör **meal-library-42fab888ffd7**, image **d17a4c07…** från 20:04 UTC.

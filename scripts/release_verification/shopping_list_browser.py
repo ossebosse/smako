@@ -15,6 +15,7 @@ from playwright.sync_api import expect, sync_playwright
 
 sys.path.insert(0, str(Path("scripts/release_verification").resolve()))
 from complete_recipe_browser import record_response, wait_operation
+from transport_evidence import classify_navigation_aborts
 
 parser = argparse.ArgumentParser(
     description="Real private shopping UI against an isolated packaged app"
@@ -22,6 +23,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--base", default="http://127.0.0.1:18129")
 parser.add_argument("--output", type=Path, required=True)
 parser.add_argument("--restart-container")
+parser.add_argument("--browser", choices=["chromium", "webkit", "both"], default="both")
 args = parser.parse_args()
 assert urlsplit(args.base).hostname in {"127.0.0.1", "localhost"}, "isolated target only"
 if args.restart_container:
@@ -30,21 +32,45 @@ r = args.output
 r.mkdir(parents=True, exist_ok=False)
 base = args.base.rstrip("/")
 with sync_playwright() as pw:
-    for engine in ["chromium", "webkit"]:
+    for engine in ["chromium", "webkit"] if args.browser == "both" else [args.browser]:
         browser = getattr(pw, engine).launch()
         context = browser.new_context(viewport={"width": 390, "height": 844})
+        traces = []
+        context.expose_binding(
+            "__shoppingTrace", lambda source, data, traces=traces: traces.append(data)
+        )
+        context.add_init_script(
+            "window.addEventListener('smako:plan-transport',e=>{window.__shoppingTrace(e.detail).catch(()=>{});});"
+        )
         page = context.new_page()
+        phase = ["initial load"]
         errors = []
         failed = []
         observed = []
         page.on("pageerror", lambda e, errors=errors: errors.append(str(e)))
         page.on(
             "requestfailed",
-            lambda q, failed=failed: failed.append({"url": q.url, "error": q.failure}),
+            lambda q, failed=failed, phase=phase: failed.append(
+                {
+                    "url": q.url,
+                    "method": q.method,
+                    "request_id": q.headers.get("x-request-id"),
+                    "error": q.failure,
+                    "phase": phase[0],
+                }
+            ),
         )
         page.on("response", lambda response, observed=observed: record_response(response, observed))
+        context.expose_binding(
+            "__shoppingUnhandled",
+            lambda source, message, errors=errors: errors.append("unhandledrejection: " + message),
+        )
+        context.add_init_script(
+            "window.addEventListener('unhandledrejection',e=>{window.__shoppingUnhandled(String(e.reason?.message||e.reason)).catch(()=>{});});"
+        )
         page.goto(base + "/personal#shopping")
         expect(page.locator("#calculate-own-list")).to_be_enabled(timeout=90000)
+        page.wait_for_load_state("networkidle")
         page.locator("#shopping-query").fill("spaghetti")
         page.locator("#shopping-generic-results").get_by_role(
             "button", name="Spaghetti · 500 g", exact=True
@@ -82,11 +108,15 @@ with sync_playwright() as pw:
         expect(page.locator("#extras-list")).to_contain_text(second["name"])
         state = page.request.get(base + "/api/personal/state").json()
         assert len(state["shopping_items"]) == 2 and state["shopping_items"][1]["kind"] == "one_of"
+        page.wait_for_load_state("networkidle")
+        phase[0] = "first reload"
         page.reload()
         expect(page.locator("#calculate-own-list")).to_be_enabled(timeout=90000)
         expect(page.locator("#extras-list article")).to_have_count(2)
         page.get_by_role("button", name="Inköpslista", exact=True).click()
+        page.wait_for_load_state("networkidle")
         begin = len(observed)
+        phase[0] = "standalone"
         page.locator("#calculate-own-list").dblclick()
         outcome = wait_operation(page, observed, begin, timeout=180)
         r.joinpath(engine + "-operation.json").write_text(
@@ -115,6 +145,7 @@ with sync_playwright() as pw:
         loaded = page.request.get(base + "/api/plans/" + saved["plan_id"]).json()
         assert loaded["plan"] == saved["plan"]
         assert saved["plan"]["personal"]["checks"]["checkout_audit"]["passed"]
+        phase[0] = "recalculate"
         page.get_by_role("button", name="Min plan", exact=True).click()
         begin = len(observed)
         page.get_by_role("button", name="Räkna om med aktuellt skafferi/pris", exact=True).click()
@@ -124,6 +155,7 @@ with sync_playwright() as pw:
         assert revised["revision"] == 2
         assert revised["request"]["personal"]["extras"] == saved["request"]["personal"]["extras"]
         assert revised["plan"]["personal"]["checks"]["checkout_audit"]["passed"]
+        phase[0] = "restart"
         if args.restart_container:
             subprocess.run(
                 ["docker", "restart", args.restart_container], check=True, capture_output=True
@@ -145,6 +177,7 @@ with sync_playwright() as pw:
                 ).json()
                 assert loaded["plan"] == expected["plan"]
         mixed = None
+        mixed_generation = None
         if engine == "chromium":
             page.get_by_role("button", name="Mina val", exact=True).click()
             page.locator("#recipe-style").select_option("library")
@@ -158,7 +191,7 @@ with sync_playwright() as pw:
             page.locator("#mode").select_option("cheapest")
             begin = len(observed)
             page.locator("#generate-plan").click()
-            wait_operation(page, observed, begin, timeout=300, reload_after=3)
+            mixed_generation, _ = wait_operation(page, observed, begin, timeout=300, reload_after=3)
             expect(page.locator("#plan-content .personal-total")).to_be_visible(timeout=300000)
             terminals = [
                 x.captured_body for x in observed[begin:] if x.status == 201 and x.captured_body
@@ -171,19 +204,25 @@ with sync_playwright() as pw:
                 and mixed["plan"]["personal"]["checks"]["checkout_audit"]["passed"]
             )
         page.get_by_role("button", name="Inköpslista", exact=True).click()
+        page.wait_for_load_state("networkidle")
         page.screenshot(path=str(r / (engine + "-shopping.png")), full_page=True)
         grouped = None
         if engine == "webkit":
             # Clearing a saved draft must not resurrect old extras from the last plan.
+            phase[0] = "clear"
             for count in (1, 0):
                 page.locator("#extras-list").get_by_role(
                     "button", name="Ta bort extrarad", exact=True
                 ).first.click()
                 expect(page.locator("#extras-list article")).to_have_count(count)
+            page.wait_for_load_state("networkidle")
+            phase[0] = "clear reload"
             page.reload()
             expect(page.locator("#calculate-own-list")).to_be_enabled(timeout=90000)
             expect(page.locator("#extras-list article")).to_have_count(0)
             page.get_by_role("button", name="Inköpslista", exact=True).click()
+            page.wait_for_load_state("networkidle")
+            phase[0] = "group suggestions"
             with page.expect_response(
                 lambda response: (
                     "/shopping-suggestions?" in response.url and "spaghetti" in response.url
@@ -204,6 +243,7 @@ with sync_playwright() as pw:
             page.get_by_role("button", name="Godkänn dessa som antingen eller", exact=True).click()
             expect(page.locator("#extras-list article")).to_have_count(1)
             begin = len(observed)
+            phase[0] = "group calculate"
             page.locator("#calculate-own-list").click()
             wait_operation(page, observed, begin, timeout=180)
             expect(page.locator("#shopping-content .personal-total")).to_be_visible(timeout=180000)
@@ -215,14 +255,25 @@ with sync_playwright() as pw:
             assert set(grouped["request"]["personal"]["extras"][0]["alternatives"]) == {
                 row["product_key"] for row in choice["matches"]
             }
+        r.joinpath(engine + "-transport.json").write_text(
+            json.dumps(
+                {"failures": failed, "events": traces, "errors": errors},
+                ensure_ascii=False,
+                indent=2,
+            ),
+            encoding="utf8",
+        )
         assert not errors, errors
-        assert not failed, failed
+        assert not [response.status for response in observed if response.status >= 500]
+        expected_aborts = classify_navigation_aborts(failed, traces, mixed_generation)
         report = {
             "outcome": "PASS",
             "browser": engine,
             "physical_device": False,
             "errors": errors,
             "network_failures": failed,
+            "expected_navigation_aborts": expected_aborts,
+            "mixed_generation": mixed_generation,
             "start_posts": len(starts),
             "shopping_rows": len(state["shopping_items"]),
             "frequent_choices": len(state["shopping_common"]),

@@ -1,0 +1,190 @@
+{
+  "schema": "shopping-list-evidence-v1",
+  "runtime": "38a85dafa18a1fbc63834649fb6af38990bf33ef",
+  "production_activated": false,
+  "package": {
+    "schema": "smako-shopping-list-v1",
+    "commit": "38a85dafa18a1fbc63834649fb6af38990bf33ef",
+    "base_commit": "ccb7ee1e980455d18cb0143a7fda9aa4ab59e58e",
+    "base_image": "sha256:d17a4c077ad68ec70f5b821cc2ffbee69bc2f9012fa44ba240bce2fc2203908a",
+    "base_tag": "smako-meal-library:42fab888ffd7",
+    "content_commit": "e819a9b2e8ae106bd0b6c9d54b71a95a0676e4b5",
+    "files": {
+      "backend/app/api/personal.py": "c4e5a26db8d6734e836428c7c7d064122a6c71f20dbfb61b3f231678fa5bab2c",
+      "backend/app/models/personal.py": "257efe176165238b8f59ce907af5f90e6603f153302d0c242d97a5cca34150c9",
+      "backend/app/services/personal_planner.py": "104f3b0dc92f4b22f9be02d0cb0a6acfa4ca5a3029dcb5fd0a541bda3a2372c4",
+      "backend/app/services/personal_policy.py": "264dd06df2c4d0cc4967cfcdcdbf18bc64d4362861e4326602085d8dc850331a",
+      "backend/app/services/personal_store.py": "6ec909ae0aa48bec4878e447b9749d7fced607f3047a639e50da694079652ddb",
+      "backend/app/services/shopping_list.py": "b128a5049d6cad2325ad8aa59d4d9e23af7815cfd9f4bb605137d4166dbf0fc1",
+      "backend/app/data/shopping_generics.json": "09934a657ba0b56525706b27bdbb64088e9761e3de3eeb32129b151bf4b2d77a",
+      "backend/app/static/personal.html": "17e83f4fda23becdf5a5ae7d19a2403174186531ffed2eda1f3392775ddcb2de",
+      "backend/app/static/personal.js": "9a14c439467a687632d3c4bddca02fb49889e23a974ef12fc9c923cdd0efe0a8",
+      "backend/app/static/personal.css": "8fb065e6a5cfe1b35736e43c13fb4145b495cd4d7b2470766ae651f26c216e6c",
+      "backend/app/static/index.html": "0d34513c5f2d7ad50f7caed98a837994c0b027897128cee7a3ac0c976dc10ad1",
+      "backend/app/static/app.js": "c7b57f79f22ddcf807e956657387a723140c8d1277caaecb6aa905d699dae980"
+    },
+    "base_files": {
+      "backend/app/api/personal.py": "fe5ee67e03b55c1ac41aaaa76a5080c8a58618df4a2e7971921afc010c3fcb87",
+      "backend/app/models/personal.py": "aa64a33544652f97dd8cf4c330a0a979225e50c5879c985251791c1b53f07c9b",
+      "backend/app/services/personal_planner.py": "87352559ad7eb6a7e50e59cce5eeba47f1323d0382f816e45a887e70f2968e90",
+      "backend/app/services/personal_policy.py": "6b196b1a3191ee0a2499ba6a25cc835974640ee0b2217d5946531c96302cd889",
+      "backend/app/services/personal_store.py": "3aec5e84a73529cc91640d6c3925b95532e6f0731e1e0f32d09d9adc3374af71",
+      "backend/app/services/shopping_list.py": null,
+      "backend/app/data/shopping_generics.json": null,
+      "backend/app/static/personal.html": "4c7cd322e1ad192f34c025cab1f36edf74f6af01a07dbbac73db4f14bb45fbb7",
+      "backend/app/static/personal.js": "90bbe942c972de1f462f7d37715bd1f48a33b3ad013cc75115af2082feb7f0e0",
+      "backend/app/static/personal.css": "b30ef1466b48074eaab755b838721692539ce76032d13d9439354c1cf6ae3654",
+      "backend/app/static/index.html": "53ba28d79aa5e9e6bbe770d79537413c242f0ee0eace2c7468291401b5c2c0f2",
+      "backend/app/static/app.js": "291e3ffd415597be5de5bf8339191936afabd1dd84f116a66a6368d9a813a9a9"
+    },
+    "package": {
+      "file": "smako-shopping-list-38a85dafa18a.zip",
+      "bytes": 129631,
+      "sha256": "eb1b3596555ab2dfbe62bfa62b8f4476d349faf2b6fb6e767b7cf714fd040d7c"
+    }
+  },
+  "packaged_code": {
+    "served_files": {
+      "personal.js": "9a14c439467a687632d3c4bddca02fb49889e23a974ef12fc9c923cdd0efe0a8",
+      "personal.css": "8fb065e6a5cfe1b35736e43c13fb4145b495cd4d7b2470766ae651f26c216e6c",
+      "app.js": "c7b57f79f22ddcf807e956657387a723140c8d1277caaecb6aa905d699dae980"
+    },
+    "image": "sha256:dce98e90a79f887e1f0b14bc94d4fcd542e8d187eae865c7401d9a6c23325d02",
+    "cpu": 2,
+    "memory_bytes": 3221225472,
+    "source_mounts": false
+  },
+  "backend_tests": {
+    "count": 130,
+    "outcome": "PASS",
+    "packaged_image": true
+  },
+  "replay": {
+    "clock": "2026-10-04T07:19:16.028059+00:00",
+    "frozen_input_sha256": "f82d66103e830b82b7d919fe847fd5b3ef85c5e323e0a2133c338f064dfb8768",
+    "new_product_facts": false
+  },
+  "browsers": [
+    {
+      "browser": "chromium",
+      "outcome": "PASS",
+      "pageerrors": [],
+      "network_failures": [],
+      "expected_navigation_aborts": [],
+      "standalone_seconds": 5.0,
+      "standalone_double_click_start_posts": 1,
+      "heavy_calculations": 3,
+      "calculations": [
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 6.170200049382402e-05,
+          "memory_cleanup_seconds": 0.7318832279997878,
+          "calculation_seconds": 2.954733036000107,
+          "cpu_seconds": 2.9124456000000016,
+          "peak_rss_kib": 1083912,
+          "job_id": "8e7795648a464119a6749bb4b5b9e56d",
+          "request_id": "7ef2edf2-3dcc-42c3-aef9-4f073e4e47fe",
+          "recorded_utc": "2026-10-08T20:30:41.468288+00:00"
+        },
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 4.300199998397147e-05,
+          "memory_cleanup_seconds": 0.4990627300003325,
+          "calculation_seconds": 2.41415077199963,
+          "cpu_seconds": 2.418465000000001,
+          "peak_rss_kib": 1083912,
+          "job_id": "c129ab7c63704abf9b62d3f0f7fdf98b",
+          "request_id": "d3b4a6ec-eb8c-4212-9276-368685e54a17",
+          "recorded_utc": "2026-10-08T20:30:45.843822+00:00"
+        },
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 6.22020006630919e-05,
+          "memory_cleanup_seconds": 0.5741979159993207,
+          "calculation_seconds": 85.18772854500003,
+          "cpu_seconds": 69.4761436,
+          "peak_rss_kib": 1451968,
+          "job_id": "1bc16076e485493f928894737f9cee10",
+          "request_id": "ceeb6d04-c66c-46ef-8af5-fde9688bdbb4",
+          "recorded_utc": "2026-10-08T20:32:43.004060+00:00"
+        }
+      ],
+      "mixed_click_seconds": 87.172,
+      "restart_revisions_read": [
+        1,
+        2
+      ],
+      "checkout_audits_passed": true,
+      "foreign_owner_get": 403,
+      "saved_plan_sha256": "8c19d48ceb8df1c613dbad4374d5f1245573c8252c5378c6ae2fd7af36930271",
+      "raw_report_sha256": "c1c59184b0ca87ab173a11532a8769eb26467cace621d44980e873a7f9bc3c2f"
+    },
+    {
+      "browser": "webkit",
+      "outcome": "PASS",
+      "pageerrors": [],
+      "network_failures": [],
+      "expected_navigation_aborts": [],
+      "standalone_seconds": 5.266,
+      "standalone_double_click_start_posts": 1,
+      "heavy_calculations": 3,
+      "calculations": [
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 3.73010007024277e-05,
+          "memory_cleanup_seconds": 0.8687736890005908,
+          "calculation_seconds": 2.4011036769989005,
+          "cpu_seconds": 2.4048811999999984,
+          "peak_rss_kib": 1084536,
+          "job_id": "69849878e3284aea86ca7897fe706497",
+          "request_id": "b106298a-b5fd-46d0-852e-f9a3c34444c9",
+          "recorded_utc": "2026-10-08T20:39:38.236006+00:00"
+        },
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 3.190200004610233e-05,
+          "memory_cleanup_seconds": 0.5526382030002424,
+          "calculation_seconds": 2.747944291000749,
+          "cpu_seconds": 2.754318699999999,
+          "peak_rss_kib": 1084536,
+          "job_id": "1ab7744a7e0245c38d208660f254b731",
+          "request_id": "0fa316e3-0842-4022-90d4-ae2b296e0849",
+          "recorded_utc": "2026-10-08T20:39:43.828421+00:00"
+        },
+        {
+          "kind": "new_calculation",
+          "queue_seconds": 5.6802000472089276e-05,
+          "memory_cleanup_seconds": 0.844846977999623,
+          "calculation_seconds": 2.3407888909987378,
+          "cpu_seconds": 2.3424110999999996,
+          "peak_rss_kib": 1083892,
+          "job_id": "7e8365ad152f4442b7e3eb8eae57458a",
+          "request_id": "90bd8474-26b1-4076-8948-f67a6077c494",
+          "recorded_utc": "2026-10-08T20:40:17.925723+00:00"
+        }
+      ],
+      "mixed_click_seconds": null,
+      "restart_revisions_read": [
+        1,
+        2
+      ],
+      "checkout_audits_passed": true,
+      "foreign_owner_get": 403,
+      "saved_plan_sha256": "fba04aac35c1d0784e3ffdcddeb03c5b056be212782341e3a9591192b1124533",
+      "raw_report_sha256": "c8c9ac3d1a9cb77bedf2c8ae4165ce22b47fa0907da36f61b1fc1bc5829fa0db"
+    }
+  ],
+  "failed_attempts_preserved": [
+    "final-browser.log",
+    "release-browser.log (WebKit; Chromium passed)",
+    "release-webkit.log",
+    "release-webkit-settled.log",
+    "release-webkit-trace.log (harness indentation error before launch)"
+  ],
+  "limitations": [
+    "Real account login is not configured on beta; owner migration is backend-tested.",
+    "Mobile viewports, not physical phones.",
+    "Successful reruns do not reclassify previous canceled-request attempts.",
+    "Rapid suggestion replacement cancellations have not been fully correlated; this is not a proven lifecycle fix."
+  ]
+}
