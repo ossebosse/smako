@@ -319,6 +319,28 @@ def test_dominance_never_merges_different_promotion_conditions_or_caps() -> None
     assert universe.stats.dominance_pruned == 0
 
 
+@pytest.mark.parametrize("field,value", [
+    ("max_quantity", 2), ("member_program", "hemkop"),
+    ("valid_from", NOW.date()), ("valid_to", NOW.date()),
+])
+def test_optional_offer_terms_have_stable_aligned_order(field, value) -> None:
+    from decimal import Decimal
+
+    from app.services.price_universe import _offer_prices, _offer_structure
+
+    plain = _offer(price=10)
+    limited = _offer(price=12).model_copy(update={field: value})
+    left = _product("left", offers=[limited, plain])
+    right = _product("right", offers=[plain, limited])
+    assert _offer_structure(left) == _offer_structure(right)
+    assert _offer_prices(left) == _offer_prices(right) == (Decimal(10), Decimal(12))
+    assert len(set(_offer_structure(left))) == 2
+    # A different condition remains an independent alternative, despite price.
+    other = _product("other", price=25, offers=[plain])
+    universe = _universe([left, other])
+    assert universe.stats.dominance_pruned == 0
+
+
 def test_stratified_top_k_keeps_context_package_and_promotion_diversity() -> None:
     products = [
         _product("s1-500", store_id="ica:1", package_quantity=500, price=12),

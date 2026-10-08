@@ -29,6 +29,7 @@ from app.models.basket import OptimizedBasket
 from app.models.ingredient import NormalizedIngredient
 from app.models.product import (
     OfferKind,
+    OfferMetadata,
     Product,
     ProductCandidate,
     SaleModel,
@@ -1081,31 +1082,30 @@ def _index_entries(mapping: Mapping[str, Iterable[int]]) -> tuple[IndexEntry, ..
     )
 
 
-def _offer_structure(product: Product) -> tuple[tuple[object, ...], ...]:
-    return tuple(
-        sorted(
-            (
-                offer.kind.value,
-                offer.required_packages,
-                offer.max_quantity,
-                offer.member_program,
-                offer.valid_from.isoformat() if offer.valid_from else None,
-                offer.valid_to.isoformat() if offer.valid_to else None,
-            )
-            for offer in product.offers
-        )
+def _offer_terms(offer: OfferMetadata) -> tuple[object, ...]:
+    return (
+        offer.kind.value,
+        offer.required_packages,
+        offer.max_quantity,
+        offer.member_program,
+        offer.valid_from.isoformat() if offer.valid_from else None,
+        offer.valid_to.isoformat() if offer.valid_to else None,
     )
 
 
+def _offer_order(offer: OfferMetadata) -> tuple[tuple[bool, object], ...]:
+    # Optional terms remain None in the identity. Compare presence before value
+    # so missing terms never compare directly with strings or numbers. The same
+    # order must be used for the signature and its corresponding price vector.
+    return tuple((value is not None, value) for value in _offer_terms(offer))
+
+
+def _offer_structure(product: Product) -> tuple[tuple[object, ...], ...]:
+    return tuple(_offer_terms(offer) for offer in sorted(product.offers, key=_offer_order))
+
+
 def _offer_prices(product: Product) -> tuple[Decimal, ...]:
-    return tuple(Decimal(str(offer.price)) for offer in sorted(product.offers, key=lambda row: (
-        row.kind.value,
-        row.required_packages,
-        row.max_quantity or -1,
-        row.member_program or "",
-        row.valid_from.isoformat() if row.valid_from else "",
-        row.valid_to.isoformat() if row.valid_to else "",
-    )))
+    return tuple(Decimal(str(offer.price)) for offer in sorted(product.offers, key=_offer_order))
 
 
 def _dominance_signature(product: Product, canonical: str) -> tuple[object, ...]:
