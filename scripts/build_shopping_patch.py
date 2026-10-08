@@ -9,7 +9,7 @@ import subprocess
 import zipfile
 from pathlib import Path
 
-BASE = 'ccb7ee1'
+BASE = 'ccb7ee1e980455d18cb0143a7fda9aa4ab59e58e'
 TAG = 'smako-meal-library:42fab888ffd7'
 IMAGE = 'sha256:d17a4c077ad68ec70f5b821cc2ffbee69bc2f9012fa44ba240bce2fc2203908a'
 FILES = ('backend/app/api/personal.py', 'backend/app/models/personal.py', 'backend/app/services/personal_planner.py', 'backend/app/services/personal_policy.py', 'backend/app/services/personal_store.py', 'backend/app/services/shopping_list.py', 'backend/app/data/shopping_generics.json', 'backend/app/static/personal.html', 'backend/app/static/personal.js', 'backend/app/static/personal.css', 'backend/app/static/index.html', 'backend/app/static/app.js')

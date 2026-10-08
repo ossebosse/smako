@@ -161,6 +161,8 @@ def is_nonfood(name):
             "soppasar",
             "blojor",
             "byxblojor",
+            "bloja",
+            "byxbloja",
         }
     )
 

@@ -42,6 +42,15 @@ def test_unavailable_alternative_does_not_hide_valid_choice_or_change_unit():
         run(p, request(extras=[choice]))
 
 
+def test_exact_alternatives_allow_different_variants_but_shared_properties_bind():
+    p = prepared(product("mjölk 1,5 %", 1000, "ml", 20), product("mjölk 3 %", 1000, "ml", 10))
+    choice = ExtraNeed(kind="one_of", query="mjölk 1,5 %", quantity=500, unit="ml", confirmed=True,
+                      alternatives=[key_for(p, "mjölk 1,5 %"), key_for(p, "mjölk 3 %")])
+    assert run(p, request(extras=[choice])).optimized_basket.total == 10
+    choice.properties = ["1,5 %"]
+    assert run(p, request(extras=[choice])).optimized_basket.total == 20
+
+
 def test_alternative_hard_policy_and_owner_revision_roundtrip(tmp_path):
     p = prepared(product("mjölk A", 1000, "ml", 20), product("mjölk B", 1000, "ml", 10))
     extra = ExtraNeed(kind="one_of", query="mjölk", quantity=500, unit="ml", confirmed=True,
@@ -105,6 +114,19 @@ def test_generic_quantities_and_price_free_allowlist():
     data = price_free_products({"results": [row]})
     assert "price" not in json.dumps(data)
     assert data[0]["package"] == "500 g"
+    assert data[0]["matches"][0]["product_key"] == "a" * 32
+
+
+def test_duplicate_display_labels_preserve_distinct_exact_keys():
+    common = {"name": "Spaghetti", "brand": "Garant", "package": "1000 g",
+              "package_quantity": 1000, "package_unit": "g", "identity_basis": "context_product"}
+    first = {**common, "product_key": "a" * 32, "prices": [{"store_name": "Willys Lund", "price": 20}]}
+    second = {**common, "product_key": "b" * 32, "prices": [{"store_name": "Hemköp", "price": 21}]}
+    groups = price_free_products({"results": [first, second, first]})
+    assert len(groups) == 1 and groups[0]["display_name"] == "Garant Spaghetti"
+    assert [m["product_key"] for m in groups[0]["matches"]] == ["a" * 32, "b" * 32]
+    assert "price" not in json.dumps(groups)
+    assert len(price_free_products({"results": [first, {**second, "brand": "Barilla"}]})) == 2
 
 
 def test_shopping_api_ownership_origin_validation_and_no_price(monkeypatch, tmp_path, caplog):

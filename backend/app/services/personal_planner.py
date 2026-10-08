@@ -788,7 +788,10 @@ class PersonalPlanner:
                     }
                 )
         for extra in self.spec.extras:
-            expected = interpretation(extra.query)
+            # An either/or row's title is a display label. Its individual exact
+            # identities may legitimately differ (e.g. fat percentage). Explicit
+            # shared properties still bind every candidate in resolve_choices.
+            expected = [] if extra.kind == "one_of" else interpretation(extra.query)
             if any(p not in extra.properties for p in expected):
                 raise PolicyConflict(
                     f"Bekräfta och behåll egenskapen {', '.join(expected)} för {extra.query}."
