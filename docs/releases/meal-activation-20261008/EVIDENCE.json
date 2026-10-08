@@ -1,0 +1,261 @@
+{
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-08T20:04:26.793784+00:00",
+    "image": "sha256:d17a4c077ad68ec70f5b821cc2ffbee69bc2f9012fa44ba240bce2fc2203908a",
+    "build_id": "meal-library-42fab888ffd7",
+    "old_image": "sha256:c7295a8ea5dcb716f1580b46936da48bd63f24542bca7042e76a2903d9182c8d",
+    "app_id": "2deb3b615ae43ff852bb4be8da87069a611ab01def3e4bb43caf841ceb90e5cc",
+    "only_app_replaced": true,
+    "complete_recipes_enabled": true,
+    "ready_status": "ready",
+    "price_universe_id": "price-universe:bc39552cbb018b402f1d05fc0518728aa8d635d8e19a047e919b6e70642e1364",
+    "backup": {
+      "plans": {
+        "bytes": 105529344,
+        "sha256": "da29f8ec0ca663cd3f3350036902663039a265cb7a34fad0e24c6de8f5b5dede",
+        "integrity": "ok",
+        "table_counts": {
+          "consumer_plan_revisions": 228,
+          "personal_private_state": 65
+        }
+      }
+    },
+    "cpu_quiet_samples_seconds_per_10s": [
+      0.04,
+      0.05
+    ],
+    "idle_check": "no plan endpoint requests in previous 15 minutes plus CPU quiet; no direct in-memory job counter",
+    "compose_diff": [
+      "services.app.image",
+      "services.app.environment.BUILD_ID"
+    ],
+    "complete_flag_preserved": true,
+    "mounts_and_other_containers_unchanged": true,
+    "free_bytes": 10925735936
+  },
+  "package": {
+    "schema": "smako-meal-activation-v1",
+    "commit": "42fab888ffd7b87d8dda9a8d5191985085e14564",
+    "base_commit": "54cb2e8159a126de26fa11cb1d393dc275238fd3",
+    "base_image": "sha256:9784eb872990039ffb547203c7f4b45f424fa5c58c0c275bcfe564be189d8fc6",
+    "base_tag": "smako-content:all-classes-20261008",
+    "content_commit": "e819a9b2e8ae106bd0b6c9d54b71a95a0676e4b5",
+    "files": {
+      "backend/app/api/plan.py": "81172a69cc44836aa812dfe0c1486f946868d28fc84cd3d212010389cb4dcb4b",
+      "backend/app/services/beta_observability.py": "e21d6cd3c1c655ebf022adad124f0113cf9c855731d29e9f6cf78d4745d2a97a",
+      "backend/app/services/app_incidents.py": "13d13ff7b70efe60c6fc8f7fd9ba35087d9ac37f83d16c2f12b93455a05b628b",
+      "backend/app/services/price_universe.py": "ff8dca3f65f4e164604fb05ddc3107ce30b2ec24dffce6766ce107b4e92b28e5"
+    },
+    "base_files": {
+      "backend/app/api/plan.py": "e0c52cbdda8437ba6056e4468eb5af0c8452bb92e518d00d9618a484576a6647",
+      "backend/app/services/beta_observability.py": "761454b21e8487fd013d35ea4e9731cad56f137255d11c9e70e25a70ca05e9de",
+      "backend/app/services/app_incidents.py": null,
+      "backend/app/services/price_universe.py": "fb26bc489a3dda382290085b2c8f430a1f5e62ecb105caae8cc25d9137361fee"
+    },
+    "package": {
+      "file": "smako-meal-library-42fab888ffd7.zip",
+      "bytes": 35816,
+      "sha256": "a96f663bd9130db910c1a5aec70b588997c1a518da5de5a60549cdd640cd77fe"
+    }
+  },
+  "image_export": {
+    "file": "smako-meal-library-42fab888ffd7.tar",
+    "sha256": "8a7a5fddc9d21cc88e4d1d53e8631eaacc20ec1d467c54231d94601050809f04",
+    "bytes": 593946112
+  },
+  "archive_removal": {
+    "removed": "/opt/smako/evidence/app-incident-activation-20261008/current-state-backup/grocery.sqlite3",
+    "free_before": 7382798336,
+    "free_after": 11031560192,
+    "freed_bytes": 3648761856,
+    "approval": "user approved archive of inactive preserved material followed by removal of verified redundant server copy"
+  },
+  "preservation": {
+    "consumer_plan_revisions": {
+      "before": 228,
+      "after": 228,
+      "all_previous_rows_preserved": true
+    },
+    "personal_private_state": {
+      "before": 65,
+      "after": 65,
+      "all_previous_rows_preserved": true
+    }
+  },
+  "old_reads": {
+    "readable_old_revisions": 228,
+    "build_counts": {
+      "app-incident-293fc6c49400": 6,
+      "status-reconnect-dd12cc80e98c": 13,
+      "complete-recipes-17a9c1330dcc": 14,
+      "74c9077001b3084317f36630fd38ce48e4663473": 7,
+      "14cc716ae54e2bb09ceaed5c4e3c2159e3a9c97d": 9,
+      "08c137475d9ca96a6ef7673245a639c8c5c9e922": 9,
+      "price-recovery-lund-20260914a": 2,
+      "personal-v2-fast-403020-20260913c": 4,
+      "personal-v2-fast-403020-20260913a": 3,
+      "personal-v2-combined-403020-20260913b": 8,
+      "personal-v2-fishfree-20260913b": 6,
+      "personal-v2-fishfree-20260913": 1,
+      "personal-v2-cost-fish-20260912": 6,
+      "personal-v2-five-dinners-20260912c": 10,
+      "personal-v2-dinners-20260911c": 10,
+      "personal-v2-qualified-20260911b": 11,
+      "personal-v2-qualified-20260911": 4,
+      "personal-v2-gaps-20260911c": 6,
+      "personal-v2-gaps-20260911b": 8,
+      "personal-v2-gaps-20260911": 9,
+      "personal-v2-20260910c": 6,
+      "personal-v2-20260910b": 6,
+      "personal-v2-20260910": 6,
+      "automation-ica-v1-20260909": 5,
+      "local-relay-v1.1-20260909": 2,
+      "local-relay-v1-20260909": 2,
+      "search-coverage-v1-20260909": 3,
+      "product-search-v1-20260909": 1,
+      "balanced-conditioned-v1-20260909": 15,
+      "loading-hotfix-20260909": 11,
+      "structural-menu-v2-20260908": 9,
+      "smako-rc-20260908-78a8df06": 16
+    },
+    "all_materialized": true
+  },
+  "javascript": {
+    "sha256": "c5d7a4e27a8b23a52499fedc73d2d688169e2c89f4b782d86eafd98a4644cd37",
+    "verified": true
+  },
+  "tests": {
+    "focused_local": 47,
+    "focused_packaged": 47,
+    "early_packaged_attempts": "retained harness failures: pytest unavailable, missing asyncio plugin and test paths; corrected harness passed without runtime changes"
+  },
+  "public": {
+    "case": "chromium-mobile-public",
+    "outcome": "PASS",
+    "started_utc": "2026-10-08T20:05:23.270835+00:00",
+    "ready_build_id": "meal-library-42fab888ffd7",
+    "generation": {
+      "seconds": 54.516,
+      "status": 201,
+      "job_count": 1,
+      "reloaded_during_job": true,
+      "browser_network_interrupted_seconds": 0,
+      "longer_than_minute": false,
+      "expensive_post_count": 1,
+      "all_status_gets_under_10_seconds": true,
+      "unavailable_transport_bodies": 0,
+      "click_to_render_seconds": 54.64,
+      "transport_events": 26
+    },
+    "acceptance": {
+      "recipe_names": [
+        "Len lins- och morotssoppa",
+        "Lins- och spenatgryta med ris",
+        "Pastapanna med smulad tofu",
+        "Potatispanna med tofu och mjuk kål",
+        "Ärtpasta med keso och citron"
+      ],
+      "total": 251.95,
+      "store_count": 3,
+      "verification_status": "VERIFIED_WITH_ESTIMATES",
+      "used_ingredient_cost": 125.26,
+      "estimated_rows": 1,
+      "campaign_rows": 4
+    },
+    "page_errors": [],
+    "network_failures": []
+  },
+  "personal": {
+    "case": "webkit-mobile-personal",
+    "outcome": "PASS",
+    "started_utc": "2026-10-08T20:06:33.110785+00:00",
+    "ready_build_id": "meal-library-42fab888ffd7",
+    "generation": {
+      "seconds": 71.11,
+      "status": 201,
+      "job_count": 1,
+      "reloaded_during_job": true,
+      "browser_network_interrupted_seconds": 0,
+      "longer_than_minute": true,
+      "expensive_post_count": 1,
+      "all_status_gets_under_10_seconds": true,
+      "unavailable_transport_bodies": 0,
+      "click_to_render_seconds": 71.562,
+      "transport_events": 34
+    },
+    "acceptance": {
+      "recipe_names": [
+        "Len lins- och morotssoppa",
+        "Lins- och spenatgryta med ris",
+        "Pastapanna med smulad tofu",
+        "Potatispanna med tofu och mjuk kål",
+        "Ärtpasta med keso och citron",
+        "Varm linsfrukost med morot",
+        "Varm linsfrukost med morot",
+        "Varm linsfrukost med morot",
+        "Varm linsfrukost med morot",
+        "Varm linsfrukost med morot",
+        "Ugnsvarma tofu- och morotsstavar",
+        "Ugnsvarma tofu- och morotsstavar",
+        "Ärtdipp med yoghurt och morotsstavar",
+        "Varm äppel- och morotskompott med yoghurt",
+        "Ärtdipp med yoghurt och morotsstavar"
+      ],
+      "total": 387.45,
+      "store_count": 3,
+      "verification_status": "VERIFIED_WITH_ESTIMATES",
+      "used_ingredient_cost": 272.68,
+      "estimated_rows": 2,
+      "campaign_rows": 6
+    },
+    "page_errors": [],
+    "network_failures": []
+  },
+  "isolated": {
+    "case": "chromium-mobile-personal",
+    "outcome": "PASS",
+    "started_utc": "2026-10-08T19:45:00.528321+00:00",
+    "ready_build_id": "meal-library-42fab888ffd7",
+    "generation": {
+      "seconds": 116.75,
+      "status": 201,
+      "job_count": 1,
+      "reloaded_during_job": true,
+      "browser_network_interrupted_seconds": 0,
+      "longer_than_minute": true,
+      "expensive_post_count": 1,
+      "all_status_gets_under_10_seconds": true,
+      "unavailable_transport_bodies": 0,
+      "click_to_render_seconds": 116.907,
+      "transport_events": 57
+    },
+    "acceptance": {
+      "recipe_names": [
+        "Len lins- och morotssoppa",
+        "Lins- och spenatgryta med ris",
+        "Pastapanna med smulad tofu",
+        "Potatispanna med tofu och mjuk kål",
+        "Ärtpasta med keso och citron",
+        "Varm linsfrukost med morot",
+        "Varm linsfrukost med morot",
+        "Varm linsfrukost med morot",
+        "Varm risfrukost med ärtor och ost",
+        "Varm risfrukost med ärtor och ost",
+        "Havre- och ostflarn med morot",
+        "Havre- och ostflarn med morot",
+        "Äppelklyftor och ost",
+        "Ugnsvarma tofu- och morotsstavar",
+        "Ugnsvarma tofu- och morotsstavar"
+      ],
+      "total": 398.42,
+      "store_count": 3,
+      "verification_status": "VERIFIED_WITH_ESTIMATES",
+      "used_ingredient_cost": 286.81,
+      "estimated_rows": 2,
+      "campaign_rows": 5
+    },
+    "page_errors": [],
+    "network_failures": []
+  }
+}

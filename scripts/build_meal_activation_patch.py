@@ -17,10 +17,10 @@ FILES = ('backend/app/api/plan.py', 'backend/app/services/beta_observability.py'
 
 
 def blob(commit, path):
-    result = subprocess.run(['git', 'show', commit + ':' + path], capture_output=True)
+    result = subprocess.run(['git', 'show', commit + ':' + path], capture_output=True, check=False)
     if result.returncode:
         if subprocess.run(['git', 'cat-file', '-e', commit + ':' + path],
-                          capture_output=True).returncode:
+                          capture_output=True, check=False).returncode:
             return None
         result.check_returncode()
     return result.stdout

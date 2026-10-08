@@ -1,3 +1,15 @@
+# 2026-10-08: Måltidskandidaten aktiverad efter godkännande
+
+Beta kör **meal-library-42fab888ffd7**, image **d17a4c07…** från 20:04 UTC.
+54cb + åtta nya recept + senare status/incident/erbjudandesorteringsfixar.
+Inga nya inköpslistefunktioner ingår. /ready200, samma manifest/fem färska baser.
+Publik Chromium och personlig WebKit (15/30, byte, omräkning, revisioner) PASS.
+228 gamla revisioner och 65 privata tillstånd bevarade. Gästsessioner, OIDC ej konfigurerad.
+[Utfört byte och säkerhetskopior](releases/meal-activation-20261008/ACTIVATED.md).
+Ny inköpslista utvecklas separat; använd inte dess källmount som releasepaket.
+
+---
+
 # 2026-10-08: Åtta ytterligare recept, alla måltidsklasser – isolerat PASS
 
 Gren `content/all-meal-classes-20261008`. Två enkla middagar, två genomarbetade,
