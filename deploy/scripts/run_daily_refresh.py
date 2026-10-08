@@ -127,7 +127,8 @@ def _write_status(payload: dict[str, Any]) -> None:
     # The caller owns the ordinary operation lease except the explicit busy
     # response. Diagnostics must never steal it or change a successful job into
     # a false green: index failures are visible in the existing protected status.
-    if payload.get('reason') != 'operation_lock_held' and os.getenv('GROCERY_DATABASE_URL') and os.getenv('GROCERY_RAW_SNAPSHOT_ROOT'):
+    lease_busy = payload.get('reason') == 'operation_lock_held' or payload.get('runtime_reload', {}).get('reason') == 'operation_lock_held'
+    if not lease_busy and os.getenv('GROCERY_DATABASE_URL') and os.getenv('GROCERY_RAW_SNAPSHOT_ROOT'):
         import sqlite3
 
         from grocery_data.app.services.operations_diagnostics import (

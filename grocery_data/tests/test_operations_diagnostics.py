@@ -259,3 +259,14 @@ def test_source_package_refuses_unrelated_or_ambiguous_base():
         module.transplant(b'unrelated\n',b'old\n',b'new\n')
     with pytest.raises(ValueError,match='missing or ambiguous'):
         module.transplant(b'old\nold\n',b'old\n',b'new\n')
+
+
+def test_busy_operation_does_not_write_incident_index(context, monkeypatch):
+    from deploy.scripts import run_daily_refresh as runner
+
+    monkeypatch.setenv('REFRESH_RUNNER_STATUS_PATH',str(context.root/'runner.json'))
+    def must_not_run():
+        pytest.fail('busy response must not write an index without a lease')
+    monkeypatch.setattr(ops,'record_incidents',must_not_run)
+    runner._write_status({'status':'degraded','runtime_reload':{'reason':'operation_lock_held'}})
+    assert not (context.root/'source-incidents.json').exists()
