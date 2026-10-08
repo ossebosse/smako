@@ -2841,6 +2841,16 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
                     activation_status = activation.status
                 except Exception as exc:  # noqa: BLE001 - old active manifest is LKG
                     build_error = type(exc).__name__
+                    from grocery_data.app.services.operations_diagnostics import (
+                        record_pipeline_failure,
+                    )
+
+                    try:
+                        record_pipeline_failure("price_universe_build", exc, scope=city)
+                    except (OSError, ValueError, KeyError, TypeError) as diagnostic_error:
+                        # Original failure remains authoritative if diagnostics
+                        # cannot be written (for example a full filesystem).
+                        report["incident_index_error"] = type(diagnostic_error).__name__
                     build_failed = True
                     if universe_store.active_manifest_bytes(city) != existing_before:
                         raise RuntimeError(

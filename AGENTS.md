@@ -1,5 +1,16 @@
 # Project rules
 
+## Start recurring operations work here
+
+- Read `docs/OPERATIONS.md`, then run
+  `.venv\Scripts\python.exe -X utf8 scripts\smako_ops.py status` from this root.
+  This is a bounded read-only admin check, not collection or menu generation.
+- Use `incidents` and `reproduce --snapshot-id ...` from that same entry point
+  for current evidence. Do not begin by scanning all dated release archives.
+- Repairs require a current incident/signature, reviewed runtime, existing
+  operation lease and explicit task authority. Preserve unknown/unreachable
+  states and separate imported, published, loaded and receipted stages.
+
 ## Permanent repository and working discipline
 
 - The permanent local development root is `D:\Projects\Smako`. This repository,

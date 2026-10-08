@@ -1,0 +1,261 @@
+import hashlib
+import json
+import sqlite3
+from datetime import UTC, datetime
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from grocery_data.app.services import operations_diagnostics as ops
+
+
+@pytest.fixture
+def context(tmp_path, monkeypatch):
+    database = tmp_path/'grocery.sqlite'
+    universe = tmp_path/'price_universes'
+    raw = tmp_path/'raw'
+    (universe/'active').mkdir(parents=True)
+    raw.mkdir()
+    root = tmp_path/'reports/operations'
+    root.mkdir(parents=True)
+    env = {'GROCERY_DATABASE_URL': 'sqlite:///'+database.as_posix(),
+           'PRICE_UNIVERSE_CACHE_ROOT': str(universe), 'GROCERY_RAW_SNAPSHOT_ROOT': str(raw),
+           'PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS': 'context:willys:test', 'BUILD_ID': 'reviewed-test'}
+    for k, v in env.items():
+        monkeypatch.setenv(k, v)
+    with sqlite3.connect(database) as db:
+        db.executescript('''
+        CREATE TABLE catalog_snapshots(id TEXT PRIMARY KEY,chain TEXT,scope_key TEXT,
+        coverage TEXT,state TEXT,is_active INT,collector_run_id TEXT,parser_version TEXT,
+        connector_version TEXT,metrics TEXT,rejection_reason TEXT,created_at TEXT,rejected_at TEXT,promoted_at TEXT);
+        CREATE TABLE raw_snapshots(id TEXT PRIMARY KEY,catalog_snapshot_id TEXT,kind TEXT,store_external_id TEXT,
+        payload_location TEXT,payload_hash TEXT,fetched_at TEXT,page_number INT);
+        CREATE TABLE source_products(catalog_snapshot_id TEXT,chain TEXT,store_external_id TEXT,fetched_at TEXT);
+        ''')
+    return SimpleNamespace(database=database, universe=universe, raw=raw, root=root, env=env)
+
+
+def snapshot(c, sid, state='rejected', metrics=None, chain='hemkop'):
+    with sqlite3.connect(c.database) as db:
+        db.execute('INSERT INTO catalog_snapshots VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                   (sid, chain, 'lund:'+chain+':4123', 'full_online_catalog', state, int(state=='promoted'),
+                    'run-'+sid, 'parser-old', 'connector-v1', json.dumps(metrics or {}),
+                    'ConnectorFetchError', '2026-10-08T12:00:00+00:00',
+                    '2026-10-08T12:01:00+00:00' if state=='rejected' else None,
+                    '2026-10-08T12:02:00+00:00' if state=='promoted' else None))
+
+
+def raw(c, sid, payload, name='raw.json', kind='store_context'):
+    data=json.dumps(payload).encode()
+    (c.raw/name).write_bytes(data)
+    with sqlite3.connect(c.database) as db:
+        db.execute('INSERT INTO raw_snapshots VALUES (?,?,?,?,?,?,?,?)',
+                   (sid+name, sid, kind, '4123', name, hashlib.sha256(data).hexdigest(),
+                    '2026-10-08T12:00:00+00:00', 0))
+
+
+def test_schema_deduplicates_runs_not_ticks_and_marks_source_recovery(context):
+    c=context
+    metrics={'effective_schema_diff': {'added': ['4123:store_context:$[].hasPickingBaseStore']}}
+    snapshot(c, 'one', metrics=metrics)
+    raw(c, 'one', {'storeId':'4123', 'hasPickingBaseStore': False})
+    first=ops.record_incidents(c.env)
+    item=next(iter(first['incidents'].values()))
+    assert item['code']=='SOURCE_SCHEMA_CHANGED'
+    assert item['reproduction']['fields'][0]['value'] is False
+    assert ops.record_incidents(c.env)['incidents'][item['incident_id']]['occurrences']==1
+    snapshot(c, 'two', metrics=metrics)
+    raw(c, 'two', {'storeId':'4123', 'hasPickingBaseStore': False}, name='two.json')
+    assert ops.record_incidents(c.env)['incidents'][item['incident_id']]['occurrences']==2
+    snapshot(c, 'three', state='promoted')
+    assert ops.record_incidents(c.env)['incidents'][item['incident_id']]['status']=='source_recovered'
+
+
+def test_unfinished_older_job_does_not_hide_new_failure(context):
+    snapshot(context, 'pending', state='fetched')
+    snapshot(context, 'failed', metrics={'run_metrics': {'http_error_count':1}})
+    index=ops.record_incidents(context.env)
+    assert index['pending']==['pending']
+    assert next(iter(index['incidents'].values()))['code']=='SOURCE_TRANSPORT_FAILED'
+    with sqlite3.connect(context.database) as db:
+        db.execute("UPDATE catalog_snapshots SET state='rejected' WHERE id='pending'")
+    assert ops.record_incidents(context.env)['pending']==[]
+
+
+def test_raw_corruption_and_path_escape_fail_closed(context):
+    snapshot(context, 'one')
+    raw(context, 'one', {'storeId':'4123'})
+    (context.raw/'raw.json').write_text('{}')
+    with pytest.raises(ValueError, match='raw_hash_mismatch'):
+        ops.reproduce(context.database, context.raw, 'one')
+    with sqlite3.connect(context.database) as db:
+        db.execute("UPDATE raw_snapshots SET payload_location='../grocery.sqlite'")
+    with pytest.raises(ValueError, match='raw_reference_outside_root'):
+        ops.reproduce(context.database, context.raw, 'one')
+
+
+@pytest.mark.parametrize('metrics,code,step', [
+    ({'run_metrics': {'rate_limit_count':1}}, 'SOURCE_RATE_LIMITED', 'transport'),
+    ({'catalog_completion': {'x': {'complete':False,'conflicting_duplicates':1}}}, 'SOURCE_COMMERCIAL_CONFLICT', 'collection'),
+    ({'catalog_completion': {'x': {'complete':False}}}, 'SOURCE_INCOMPLETE', 'collection'),
+])
+def test_failure_stages(metrics, code, step):
+    assert ops.classify(metrics, 'ConnectorFetchError')[:2]==(code,step)
+
+
+def test_imported_is_not_loaded_or_receipted_and_status_is_readonly(context, monkeypatch):
+    c=context
+    snapshot(c, 'new', state='promoted', chain='willys', metrics={'source_artifact': {'sha256':'digest'}})
+    with sqlite3.connect(c.database) as db:
+        db.execute('INSERT INTO source_products VALUES (?,?,?,?)', ('new','willys','4123','2026-10-08T12:00:00+00:00'))
+    (c.root/'demand-refresh.json').write_text(json.dumps({'base_scope':[{'store_id':'context:willys:test',
+        'chain':'willys','source_provenance':{'provider_store_id':'4123'}}], 'retry_at':'2026-10-10T12:00:00+00:00'}))
+    (c.universe/'active/city-lund.json').write_text(json.dumps({'universe_id':'disk-old','snapshot_ids':['old']}))
+    monkeypatch.setattr(ops,'request_json',lambda url:{'http_status':503,'body':{'universe_id':'loaded-old','snapshot_ids':['old']}})
+    before=c.database.read_bytes()
+    result=ops.status(c.env,now=datetime(2026,10,8,14,tzinfo=UTC))
+    item=result['required_contexts'][0]
+    assert item['qualified'] and not item['loaded'] and not item['published']
+    assert item['source_artifact_sha256']=='digest' and item['receipt']=='unknown_until_relay_read'
+    assert item['freshness_risk'] and item['publication_overdue']
+    assert result['external_price_requests']==0 and c.database.read_bytes()==before
+
+
+def test_unreachable_app_and_missing_index_never_green(context, monkeypatch):
+    monkeypatch.setattr(ops.urllib.request,'urlopen',lambda *a,**k: (_ for _ in ()).throw(OSError('private token must not leak')))
+    value=ops.status(context.env)
+    assert value['ready']['status']=='unknown'
+    assert value['unknown_required_contexts']==['context:willys:test']
+    assert 'private token' not in json.dumps(value)
+
+
+def test_disk_margin_warning(context, monkeypatch):
+    monkeypatch.setattr(ops.shutil,'disk_usage',lambda _: SimpleNamespace(free=1))
+    monkeypatch.setattr(ops,'request_json',lambda _: {'status':'unknown'})
+    assert ops.status(context.env)['storage']['adequate'] is False
+
+
+def test_changed_incident_repair_is_rejected_before_source_work(context, monkeypatch):
+    from contextlib import nullcontext
+
+    from deploy.scripts import run_daily_refresh as runner
+    from grocery_data import ops as cli
+
+    monkeypatch.setattr(runner,'_operations_lock',lambda: nullcontext())
+    args=SimpleNamespace(incident_id='missing',signature='old',runtime='reviewed-test',action='retry',apply=True)
+    with pytest.raises(ValueError,match='incident_identity_changed_or_missing'):
+        cli.repair(args)
+
+
+def test_index_size_bound_preserves_previous_file(context, monkeypatch):
+    snapshot(context,'one')
+    ops.record_incidents(context.env)
+    path=context.root/'source-incidents.json'
+    before=path.read_bytes()
+    monkeypatch.setattr(ops,'MAX_INDEX_BYTES',10)
+    with pytest.raises(ValueError,match='incident_index_size_exceeded'):
+        ops.record_incidents(context.env)
+    assert path.read_bytes()==before
+
+
+def test_indicator_repetitions_and_recovery_are_transitions(context, monkeypatch):
+    value={'checked_at':'2026-10-08T14:00:00+00:00','storage':{'adequate':False},'ready':{},
+           'required_contexts':[], 'unknown_required_contexts':[]}
+    monkeypatch.setattr(ops,'status',lambda _: value)
+    for _ in range(3):
+        ops.record_indicators(context.env)
+    path=context.root/'drift-indicators.json'
+    assert json.loads(path.read_text())['indicators']['storage_capacity']['occurrences']==1
+    value['storage']['adequate']=True
+    ops.record_indicators(context.env)
+    assert not json.loads(path.read_text())['indicators']['storage_capacity']['active']
+    value['storage']['adequate']=False
+    ops.record_indicators(context.env)
+    assert json.loads(path.read_text())['indicators']['storage_capacity']['occurrences']==2
+
+
+def test_identical_schema_cannot_trigger_recrawl(context, monkeypatch):
+    from contextlib import nullcontext
+
+    from deploy.scripts import run_daily_refresh as runner
+    from grocery_data import ops as cli
+
+    snapshot(context,'one',metrics={'effective_schema_diff':{'added':['newPriceScope']}})
+    index=ops.record_incidents(context.env)
+    item=next(iter(index['incidents'].values()))
+    monkeypatch.setattr(runner,'_operations_lock',lambda: nullcontext())
+    monkeypatch.setattr(cli,'status',lambda: {'storage':{'adequate':True},'required_contexts':[]})
+    args=SimpleNamespace(incident_id=item['incident_id'],signature=item['signature'],runtime='reviewed-test',action='retry',apply=True)
+    with pytest.raises(ValueError,match='code_review_required_no_identical_schema_recrawl'):
+        cli.repair(args)
+    assert not (context.root/'incident-repairs.json').exists()
+
+
+def test_unavailable_local_relay_is_unknown(tmp_path):
+    import importlib.util
+
+    spec=importlib.util.spec_from_file_location('smako_ops_local', Path(__file__).resolve().parents[2]/'scripts/smako_ops.py')
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    result=module.relay_status(tmp_path/'does-not-exist',tmp_path/'no-shell')
+    assert result['status']=='unknown'
+
+
+def test_schema_hold_clears_only_on_recovery(context):
+    snapshot(context,'one',metrics={'effective_schema_diff':{'added':['newPriceScope']}})
+    ops.record_incidents(context.env)
+    assert set(ops.schema_holds(context.root))=={'hemkop'}
+    snapshot(context,'two',state='promoted')
+    ops.record_incidents(context.env)
+    assert ops.schema_holds(context.root)=={}
+
+
+def test_pipeline_error_keeps_stack_without_message_or_locals(context):
+    try:
+        raise TypeError('private credential must never be copied')
+    except TypeError as exc:
+        key=ops.record_pipeline_failure('price_universe_build',exc,scope='Lund')
+    value=json.loads((context.root/'pipeline-incidents.json').read_text())['incidents'][key]
+    assert value['error_type']=='TypeError' and value['frames']
+    assert 'private credential' not in json.dumps(value)
+
+
+def test_publish_refuses_incomplete_federation_and_duplicate_action(context, monkeypatch):
+    from contextlib import nullcontext
+
+    from deploy.scripts import run_daily_refresh as runner
+    from grocery_data import ops as cli
+
+    try:
+        raise TypeError('builder failed')
+    except TypeError as exc:
+        key=ops.record_pipeline_failure('price_universe_build',exc,scope='Lund')
+    incident=json.loads((context.root/'pipeline-incidents.json').read_text())['incidents'][key]
+    args=SimpleNamespace(incident_id=key,signature=incident['signature'],runtime='reviewed-test',action='publish',apply=True)
+    monkeypatch.setattr(runner,'_operations_lock',lambda: nullcontext())
+    report={'storage':{'adequate':True},'required_contexts':[{'qualified':False,'chain':'hemkop'}],
+            'unknown_required_contexts':[],'disk_manifest':'old'}
+    monkeypatch.setattr(cli,'status',lambda: report)
+    with pytest.raises(ValueError,match='mandatory_sources_not_qualified_and_fresh'):
+        cli.repair(args)
+    report['required_contexts'][0].update(qualified=True,freshness='FRESH')
+    attempt=f'{key}:old:publish:reviewed-test'
+    (context.root/'incident-repairs.json').write_text(json.dumps({'attempts':{attempt:{'status':'complete'}}}))
+    with pytest.raises(ValueError,match='repair_already_attempted'):
+        cli.repair(args)
+
+
+def test_source_package_refuses_unrelated_or_ambiguous_base():
+    import importlib.util
+
+    spec=importlib.util.spec_from_file_location('source_packager', Path(__file__).resolve().parents[2]/'scripts/build_source_patch.py')
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert module.transplant(b'old\n',b'old\n',b'new\n')==b'new\n'
+    assert module.transplant(None,None,b'new\n')==b'new\n'
+    with pytest.raises(ValueError,match='missing or ambiguous'):
+        module.transplant(b'unrelated\n',b'old\n',b'new\n')
+    with pytest.raises(ValueError,match='missing or ambiguous'):
+        module.transplant(b'old\nold\n',b'old\n',b'new\n')

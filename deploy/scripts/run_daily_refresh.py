@@ -124,6 +124,22 @@ def _reload_runtime() -> dict[str, Any]:
 
 
 def _write_status(payload: dict[str, Any]) -> None:
+    # The caller owns the ordinary operation lease except the explicit busy
+    # response. Diagnostics must never steal it or change a successful job into
+    # a false green: index failures are visible in the existing protected status.
+    if payload.get('reason') != 'operation_lock_held' and os.getenv('GROCERY_DATABASE_URL') and os.getenv('GROCERY_RAW_SNAPSHOT_ROOT'):
+        import sqlite3
+
+        from grocery_data.app.services.operations_diagnostics import (
+            record_incidents,
+            record_indicators,
+        )
+
+        try:
+            record_incidents()
+            payload['drift_indicators'] = record_indicators()
+        except (OSError, ValueError, KeyError, TypeError, sqlite3.Error) as exc:
+            payload['incident_index_error'] = type(exc).__name__
     destination = Path(
         os.getenv(
             "REFRESH_RUNNER_STATUS_PATH",
@@ -502,11 +518,16 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     if citygross_plan["work_due"]:
         reasons.append("citygross_municipal_work_due")
     remote_due = [k for k in due_sources if k != 'willys' or env.get('WILLYS_COLLECTION_LOCATION') != 'LOCAL_RELAY']
+    from grocery_data.app.services.operations_diagnostics import schema_holds
+
+    held = schema_holds(state_path.parent)
+    remote_due = [key for key in remote_due if key not in held]
     work = bool(remote_due or reasons)
     if state.get('retry_at') and datetime.fromisoformat(state['retry_at']) > now:
         work = False
     state_path.parent.mkdir(parents=True, exist_ok=True)
     return {'work_due': work, 'reasons': reasons, 'sources': sources, 'due_sources': remote_due,
+        'sources_held_for_schema_review': held,
         'hemkop_municipal': hemkop_plan, 'coop_municipal': coop_plan, 'citygross_municipal': citygross_plan, 'lidl_municipal': lidl_plan, 'willys_flyer': willys_flyer_plan, 'relay_due': 'willys' in due_sources, 'ica_store_schedule': offers.get('store_schedule', {}),
         'source_fingerprint': fingerprint, 'state': state, 'state_path': str(state_path),
         'checked_at': now.isoformat(), 'external_price_requests': 0}

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -740,6 +741,7 @@ class GroceryCollector:
                 if snapshot is None:
                     raise LookupError("catalog snapshot disappeared")
                 snapshot.metrics = {
+                    "runtime_build_id": os.getenv("BUILD_ID", "unknown"),
                     "source_scope": source_scope.model_dump(mode="json"),
                     "run_metrics": aggregate.model_dump(mode="json"),
                     "schemas": {
@@ -907,6 +909,7 @@ class GroceryCollector:
                 active = snapshots.active(connector.chain, scope_key=scope_key)
                 if snapshot is not None:
                     snapshot.metrics = {
+                        "runtime_build_id": os.getenv("BUILD_ID", "unknown"),
                         "source_scope": source_scope.model_dump(mode="json"),
                         "run_metrics": failed_metrics.model_dump(mode="json"),
                         "schemas": {

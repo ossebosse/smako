@@ -225,7 +225,7 @@ def validated_store_context(payload: object, expected: str) -> bool:
     """
     if not isinstance(payload, dict):
         return False
-    rows = [payload] if "storeId" in payload else [
+    rows = ([payload] if "storeId" in payload else []) + [
         payload[key] for key in ("store", "pickingStore") if key in payload
     ]
     return bool(rows) and all(

@@ -43,6 +43,7 @@ def test_missing_remains_legacy_and_nested_wrong_identity_cannot_authorize():
     assert validated_store_context({'pickingStore': {'storeId': '4123'}}, '4123')
     assert not validated_store_context({'storeId': 'wrong', 'other': {'storeId': '4123'}}, '4123')
     assert not validated_store_context({'storeId': 'wrong', 'pickingStore': {'storeId': '4123'}}, '4123')
+    assert not validated_store_context({'storeId': '4123', 'pickingStore': {'storeId': 'wrong'}}, '4123')
 
 def test_authentic_campaign_conflict_and_two_legitimate_offers():
     from grocery_data.app.connectors.hemkop.client import _DuplicateTracker
