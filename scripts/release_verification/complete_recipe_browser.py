@@ -68,6 +68,7 @@ def record_response(response, observed):
             post_data_json=response.request.post_data_json, timing=response.request.timing,
             request_id=response.request.headers.get("x-request-id")),
         captured_body=body, body_error=error, body_error_kind=error_kind,
+        observed_utc=datetime.now(UTC).isoformat(),
     ))
 
 
@@ -86,6 +87,8 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
             body = response.captured_body
             row = {"url": response.url, "method": response.request.method, "status": response.status,
                    "request_id": response.headers.get("x-request-id"),
+                   "client_request_id": response.request.request_id,
+                   "response_observed_utc": response.observed_utc,
                    "response_type": response.headers.get("content-type"),
                    "error_code": response.headers.get("x-error-code"),
                    "response_ms": response.request.timing.get("responseEnd"),
@@ -360,6 +363,11 @@ def run_case(browser, engine, mobile, personal, args):
     assets={}
     def observe_response(response):
         record_response(response,observed)
+        if (response.request.method == 'POST'
+                and urlsplit(response.url).path in {'/api/plans', '/api/plan'}):
+            # This runner owns explicit test input. Retain it even if generation
+            # fails before wait_operation returns; never copy headers or cookies.
+            report.setdefault('submitted_request', response.request.post_data_json)
         if urlsplit(response.url).path in {'/static/complete-recipes.js','/static/app.js','/static/personal.js'}:
             try:assets[urlsplit(response.url).path]={'url':response.url,'sha256':hashlib.sha256(response.body()).hexdigest()}
             except BrowserError:pass

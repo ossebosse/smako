@@ -683,6 +683,8 @@ async def poll_plan_job(job_id: str, http_request: Request):
     if job is None or job.task.cancelled():
         raise HTTPException(404, "Planeringsförsöket har gått ut. Skapa menyn igen.",
                             headers={"X-Error-Code": "planner_job_expired", "Cache-Control": "private, no-store"})
+    # Only an authenticated owner lookup may attach job evidence to this read.
+    http_request.state.diagnostic_plan_job = job
     if not job.task.done():
         return _pending_plan_job(job)
     # Never raise the task's retained exception object in a reader coroutine.

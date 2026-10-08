@@ -445,17 +445,26 @@ class BetaRequestMiddleware(BaseHTTPMiddleware):
                 return response
 
         started = perf_counter()
+        incident_started_at = datetime.now(UTC).isoformat()
+        incident_universe_id = price_universe_id(settings)
         status_code = 500
         error_code: str | None = None
+        failure = None
         try:
             response = await call_next(request)
             status_code = response.status_code
             if status_code >= 400:
                 error_code = response.headers.get("X-Error-Code") or f"http_{status_code}"
-        except BaseException:
+        except BaseException as exc:
+            failure = exc
             error_code = "internal_error"
             raise
         finally:
+            if status_code >= 500 and (failure is None or isinstance(failure, Exception)):
+                from app.services.app_incidents import record_http_failure
+                record_http_failure(request, settings, error=failure, status=status_code,
+                                    started_at=incident_started_at,
+                                    universe_id=incident_universe_id)
             duration_ms = round((perf_counter() - started) * 1000, 3)
             log_row = {
                 "event": "http_request",

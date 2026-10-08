@@ -77,6 +77,10 @@ def main():
     parser.add_argument('operation', nargs=argparse.REMAINDER, help='status, incidents, reproduce or guarded repair arguments')
     args = parser.parse_args()
     operation = args.operation or ['status']
+    if operation[0] == 'app-incident':
+        evidence = app_evidence(args.host, operation[1:])
+        print(json.dumps(evidence, ensure_ascii=False))
+        return int(evidence.get('status') == 'unknown')
     # SSH is a shell boundary: quote every argument, never interpolate source data.
     import shlex
 
@@ -98,6 +102,7 @@ def main():
     except (OSError, ValueError, subprocess.SubprocessError) as exc:
         server = {'status': 'unknown', 'reason': 'server_unreachable_or_invalid_status', 'error_type': type(exc).__name__}
     if operation == ['status']:
+        server['app_errors'] = app_evidence(args.host, [])
         windows = relay_status(args.workspace, args.pwsh)
         qualified = windows.get('qualified', {}).get('sha256')
         imported = [x for x in server.get('required_contexts', []) if qualified and x.get('source_artifact_sha256') == qualified]
@@ -107,6 +112,22 @@ def main():
     else:
         print(json.dumps(server, ensure_ascii=False))
     return int(server.get('status') in ('unknown', 'failed'))
+
+
+def app_evidence(host, arguments):
+    import shlex
+    # The local, reviewed reader needs no source-process release or app restart.
+    script = Path(__file__).with_name('app_incident_status.py').read_text(encoding='utf8')
+    command = shlex.join(['sudo', '-n', 'docker', 'exec', '-i', '--user', '10001:10001',
+                         'smako-app-1', 'python', '-', *arguments])
+    try:
+        proc = subprocess.run(['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', host, command],
+                              input=script, capture_output=True, text=True, encoding='utf8', timeout=30,
+                              check=False)
+        return json.loads(proc.stdout)
+    except (OSError, ValueError, subprocess.SubprocessError) as exc:
+        return {'status': 'unknown', 'reason': 'app_evidence_unreachable',
+                'error_type': type(exc).__name__}
 
 
 if __name__ == '__main__':
