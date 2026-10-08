@@ -1,4 +1,24 @@
-# 2026-10-08: Publikt status-500 avgränsat; appkandidat ej aktiverad
+# 2026-10-08: Appfix aktiverad efter godkännande
+
+Beta kör **app-incident-293fc6c49400**, image **c7295a8e…**, sedan 17:02:10 UTC.
+Det är den selektiva dd12-baserade appfixen, inte måltids-/sökoptimeringsgrenen.
+Kompletta recept är påslagna, /ready200, samma prismanifest och fem färska baser.
+Konsistenta plan-/grocery-backuper och privata konfigurationskopior finns på
+skyddad serverlagring. Alla 222 gamla revisioner och 63 privata tillståndsrader
+bevarades; gamla revisioner lästes med ny runtime. Publik Chromium och personlig
+WebKit i mobil layout PASS: dubbelstart, omladdning, receptbyte, omräkning,
+revisions-GET och ägarskydd. Inga nya 5xx observerade i efterkontrollen.
+OIDC är inte konfigurerad; proven avser befintliga gästsessionsflöden.
+
+[Utfört byte och belägg](releases/app-status-incident-20261008/ACTIVATED.md).
+Användaren godkände också commit/push till origin; aktuell leveransgren är
+`fix/app-status-incident-20261008`. Bygg inte hela senare grenen som appimage.
+Prisdrift, D:-relä, source-ops, scheman och proxy bevarades. Inga nya pauser.
+Originalets 500 nedan har fortfarande okänd grundorsak; första provet är FAIL.
+
+---
+
+# Tidigare 2026-10-08: Publikt status-500 avgränsat; då ej aktiverad
 
 Börja med `.venv\Scripts\python.exe -X utf8 scripts\smako_ops.py status`.
 För det historiska felet: `app-incident --request-id 9e96c548-6414-467b-ab7e-3d5e4fe6d779`

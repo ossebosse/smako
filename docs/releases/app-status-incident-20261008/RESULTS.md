@@ -1,4 +1,8 @@
-# Avgränsad appfix klar – inte aktiverad
+# Avgränsad appfix – kandidatprov före aktivering
+
+Senare samma dag aktiverad efter uttryckligt godkännande:
+[utförd aktivering och produktionsprov](ACTIVATED.md). Följande beskriver
+historiskt fel och kandidatens isolerade kvalificering.
 
 ## Historisk händelse: fortfarande FAIL, grundorsak okänd
 

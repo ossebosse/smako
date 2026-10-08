@@ -19,9 +19,10 @@ ingen installation, schemastart eller publik endpoint behövs. SQL är läsande.
 Metrikens `created_at` är lagringstid, inte garanterad svarstid. Jämför klientens
 `reference` i transportloggen med metrikens `request_id`, inte bara närliggande tider.
 
-Aktiva dd12 saknar beständiga exceptionkedjor. Detta visas som `unavailable`,
-även när HTTP-metriken finns. Den **ännu inte aktiverade** appkandidaten i
-[app-status-incident-20261008](releases/app-status-incident-20261008/RESULTS.md)
+Historiska dd12 saknade beständiga exceptionkedjor. Saknat underlag visas som
+`unavailable`, även när HTTP-metriken finns. Sedan 2026-10-08 17:02 UTC är
+[app-incident-293fc6c49400 aktiverad](releases/app-status-incident-20261008/ACTIVATED.md).
+Den versionen
 skriver `app-incidents.json` bredvid privat PlanStore, högst 64 incidenter/512 kB,
 atomiskt och med skyddat filmode. Där finns start-/statusreferens, ägarkontrollerat
 jobb, steg, jobbutfall, kodställen och exceptionkedja utan meddelanden eller lokaler.

@@ -1,0 +1,231 @@
+{
+  "schema": "smako-app-activation-v1",
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-08T17:02:10.202475+00:00",
+    "image": "sha256:c7295a8ea5dcb716f1580b46936da48bd63f24542bca7042e76a2903d9182c8d",
+    "build_id": "app-incident-293fc6c49400",
+    "old_image": "sha256:c8362751b13a6e649beadad2a3c27b9b5df8bfd1e2fa177ff68e01e1d7b8b2c7",
+    "app_id": "bacbc187656ffef26e1642d3f8e42d927ae2a26f3b76eb57284d1d8bad6b6077",
+    "only_app_replaced": true,
+    "complete_recipes_enabled": true,
+    "ready_status": "ready",
+    "price_universe_id": "price-universe:bc39552cbb018b402f1d05fc0518728aa8d635d8e19a047e919b6e70642e1364",
+    "backup": {
+      "plans": {
+        "bytes": 97792000,
+        "sha256": "f8726e22d2035d7aa40e8264041437ff98640e3c860ef53ae08ecd1dd52b7747",
+        "integrity": "ok",
+        "table_counts": {
+          "consumer_plan_revisions": 222,
+          "personal_private_state": 63
+        }
+      },
+      "grocery": {
+        "bytes": 3648765952,
+        "sha256": "0d61700a51cad9e7291a331f7c3f13a6e7c257aed5300a945a2fe6a5145ebfa1",
+        "integrity": "ok",
+        "table_counts": {
+          "community_receipt_ingestions": 0
+        }
+      }
+    },
+    "cpu_quiet_samples_seconds_per_10s": [
+      0.03,
+      0.04
+    ],
+    "idle_check": "no plan endpoint requests in previous 15 minutes plus CPU quiet; no direct in-memory job counter",
+    "compose_diff": [
+      "services.app.image",
+      "services.app.environment.BUILD_ID"
+    ],
+    "complete_flag_preserved": true,
+    "mounts_and_other_containers_unchanged": true,
+    "free_bytes": 9418403840
+  },
+  "package": {
+    "file": "smako-app-incident-293fc6c49400.zip",
+    "bytes": 28578,
+    "sha256": "c75a23cd91d66c30b3a4517d977c33222f0e3e1288a8e2cce9945b8e75e71e78"
+  },
+  "runtime_files": {
+    "backend/app/api/personal.py": "1082310ef1ab6a94657d88fe2789b638cc73a7edb45768df5072494c45b42dc8",
+    "backend/app/api/plan.py": "6e8ee2fd9c73609354c4d135f0401b339411c3b4a10da430e9f08502fd2d3552",
+    "backend/app/services/beta_observability.py": "e21d6cd3c1c655ebf022adad124f0113cf9c855731d29e9f6cf78d4745d2a97a",
+    "backend/app/services/app_incidents.py": "13d13ff7b70efe60c6fc8f7fd9ba35087d9ac37f83d16c2f12b93455a05b628b"
+  },
+  "served_scripts": {
+    "/static/complete-recipes.js?v=status-reconnect-1": "17311d27a3a50ec9e75415316ca8cc90d10c94ac85380b36a75a3541d1b7114e",
+    "/static/app.js?v=status-reconnect-1": "5ccfbb930096994cfde16a569caee5cfb0065b6f8ee781a8301cb37a9a8f8540"
+  },
+  "account_status": "DATA_BLOCKED",
+  "preservation": {
+    "consumer_plan_revisions": {
+      "before": 222,
+      "after": 228,
+      "all_previous_rows_preserved": true
+    },
+    "personal_private_state": {
+      "before": 63,
+      "after": 65,
+      "all_previous_rows_preserved": true
+    }
+  },
+  "old_revisions_readable": 222,
+  "status_checked_at": "2026-10-08T17:06:32.195229+00:00",
+  "manifest_equal": true,
+  "required_contexts": [
+    {
+      "context_id": "context:coop:23eaae11c9661e68",
+      "chain": "coop",
+      "store_id": "730400",
+      "channel": "online_fulfillment",
+      "snapshot_id": "0e91c5c39f9d490ba28a11af81c6a76b",
+      "observed_at": "2026-10-08T11:33:16.566196+00:00",
+      "age_hours": 5.554,
+      "freshness": "FRESH",
+      "loaded": true
+    },
+    {
+      "context_id": "context:hemkop:3288e04edd97e349",
+      "chain": "hemkop",
+      "store_id": "4224",
+      "channel": "online_store",
+      "snapshot_id": "e45cd4719bc640918977e65b4c3bf77c",
+      "observed_at": "2026-10-08T13:58:34.984628+00:00",
+      "age_hours": 3.133,
+      "freshness": "FRESH",
+      "loaded": true
+    },
+    {
+      "context_id": "context:hemkop:756955d0e6e05f23",
+      "chain": "hemkop",
+      "store_id": "4123",
+      "channel": "online_store",
+      "snapshot_id": "d621ab31a2af4083ad13c1d070691f9e",
+      "observed_at": "2026-10-08T12:03:33.407624+00:00",
+      "age_hours": 5.05,
+      "freshness": "FRESH",
+      "loaded": true
+    },
+    {
+      "context_id": "context:willys:383650ec6ff5a636",
+      "chain": "willys",
+      "store_id": "2176",
+      "channel": "online_store",
+      "snapshot_id": "72c524df46c34fe69af362158af38692",
+      "observed_at": "2026-10-07T23:31:27.443160+00:00",
+      "age_hours": 17.585,
+      "freshness": "FRESH",
+      "loaded": true
+    },
+    {
+      "context_id": "context:willys:4a671428fc484e43",
+      "chain": "willys",
+      "store_id": "2354",
+      "channel": "online_store",
+      "snapshot_id": "72c524df46c34fe69af362158af38692",
+      "observed_at": "2026-10-07T23:51:22.161079+00:00",
+      "age_hours": 17.253,
+      "freshness": "FRESH",
+      "loaded": true
+    }
+  ],
+  "browser": [
+    {
+      "case": "chromium-mobile-public",
+      "outcome": "PASS",
+      "started_utc": "2026-10-08T17:02:22.353013+00:00",
+      "finished_utc": "2026-10-08T17:04:29.014603+00:00",
+      "build_id": "app-incident-293fc6c49400",
+      "generation": {
+        "seconds": 69.922,
+        "status": 201,
+        "job_count": 1,
+        "reloaded_during_job": true,
+        "browser_network_interrupted_seconds": 0,
+        "longer_than_minute": true,
+        "expensive_post_count": 1,
+        "all_status_gets_under_10_seconds": true,
+        "unavailable_transport_bodies": 0,
+        "click_to_render_seconds": 70.109
+      },
+      "basket": {
+        "total": 649.95,
+        "store_count": 2,
+        "verification_status": "VERIFIED",
+        "used_ingredient_cost": 454.08,
+        "estimated_rows": 0,
+        "campaign_rows": 3
+      },
+      "replacement_changed_base_recipe": true,
+      "revision_numbers": [
+        "1",
+        "2",
+        "3"
+      ],
+      "identical_saved_reload": true,
+      "other_owner_status": 403,
+      "other_owner_job_statuses": [
+        404,
+        404,
+        404
+      ],
+      "page_errors": [],
+      "network_failures": [],
+      "report_sha256": "804c410d7d03dda088025a7566e77e66d76714054c551402a108cdb8f55705b8"
+    },
+    {
+      "case": "webkit-mobile-personal",
+      "outcome": "PASS",
+      "started_utc": "2026-10-08T17:04:31.051015+00:00",
+      "finished_utc": "2026-10-08T17:06:15.066782+00:00",
+      "build_id": "app-incident-293fc6c49400",
+      "generation": {
+        "seconds": 60.641,
+        "status": 201,
+        "job_count": 1,
+        "reloaded_during_job": true,
+        "browser_network_interrupted_seconds": 0,
+        "longer_than_minute": true,
+        "expensive_post_count": 1,
+        "all_status_gets_under_10_seconds": true,
+        "unavailable_transport_bodies": 0,
+        "click_to_render_seconds": 60.906
+      },
+      "basket": {
+        "total": 649.95,
+        "store_count": 2,
+        "verification_status": "VERIFIED",
+        "used_ingredient_cost": 454.08,
+        "estimated_rows": 0,
+        "campaign_rows": 3
+      },
+      "replacement_changed_base_recipe": true,
+      "revision_numbers": [
+        "1",
+        "2",
+        "3"
+      ],
+      "identical_saved_reload": true,
+      "other_owner_status": 403,
+      "other_owner_job_statuses": [
+        404,
+        404,
+        404
+      ],
+      "page_errors": [],
+      "network_failures": [],
+      "report_sha256": "8743e4903882e552440fce0c85bc65cb05b36df902ad288788b2003711ece07e"
+    }
+  ],
+  "storage_after": {
+    "free_bytes": 9410613248,
+    "required_estimate_bytes": 8000843442,
+    "adequate": true,
+    "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+  },
+  "free_before_bytes": 13165187072,
+  "post_activation_5xx_metrics": [],
+  "historical_500_remains_unresolved": true
+}

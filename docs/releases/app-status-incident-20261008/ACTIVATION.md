@@ -1,4 +1,8 @@
-# Separat app-only-kandidat – inget byte utfört
+# App-only-kandidat – aktiverad 2026-10-08
+
+**Utfört byte och verkliga produktionsprov:** [ACTIVATED.md](ACTIVATED.md).
+Anvisningen nedan dokumenterar den granskade vägen; kör inte om bytet när
+denna image redan används.
 
 | Identitet | Värde |
 | --- | --- |
@@ -13,7 +17,8 @@
 | BUILD_ID | `app-incident-293fc6c49400` |
 
 Lokalt paket/manifest: `.local/releases/app-incident-20261008/`. Isolerat
-serverprov: `/var/tmp/smako-app-incident-20261008/`; inte installerad driftrelease.
+serverprov: `/var/tmp/smako-app-incident-20261008/`. Installerad driftrelease:
+`/opt/smako/releases/app-incident-293fc6c49400`.
 Byggkommandot är `scripts/build_app_incident_patch.py --commit 293fc6c49400
 --output <ny privat målkatalog>` genom projektets Python. Det installerar inget.
 Basimagen måste matcha `c8362751…` före bygge; alla ändrade basfiler kontrolleras
