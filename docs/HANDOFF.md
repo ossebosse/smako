@@ -1,3 +1,32 @@
+# 2026-10-08: Driftåterställning pågår – Windows och serverutrymme åtgärdade
+
+Användaren har uttryckligen godkänt säker rensning av verifierade överflödiga
+kopior/cache och kört administratörsregistreringen. Uppgiften är nu återläst
+och pekar på fe795e5b04f5; 625 filer verifierade, hela XML utom Actions
+oförändrad. S4U/session 0 lagringsprov PASS 11:03 UTC, parent/child temp på D:.
+Ingen omregistrering av oss. Ingen måltids-/sökaktivering eller Git-push.
+
+Fem arkiverade testkataloger (raw/price-universes, inga databaser) togs bort
+efter förnyad exakt hash-/beroendekontroll. Dessutom 61 exakt identifierade
+oanvända byggcacheposter. Serverns lediga utrymme 0→14,0 GB; inga images
+eller volymer borttagna. Nuvarande prisombyggnad använder tillfällig
+SQLite-kopia 3,55 GB; kvar cirka 10,1 GB medan denna är aktiv. Arkiv på D:
+bevarat. Se [åtgärdsjournal](releases/drift-restoration-20261008/STATUS.md).
+
+**Pågående körning – starta inte parallellt:** kontrollerad Scheduler-start
+11:07:19 UTC återlevererar nattens paket 989f961ccfc64984a830de9584d437d5,
+SHA d53486fb8c90740ecb68901bb6a333148eed2a37aefe9bb84ed8958715686c98.
+Import skapade snapshot 72c524df46c34fe69af362158af38692 (19060 rader).
+Mottagarens ordinarie source_cli import/daily-refresh har operationslåset;
+publicering/slutkvitto ännu inte bekräftade vid 11:26 UTC. Kontrollera
+faktiska processer/loggar före nästa åtgärd. Därefter ordinarie behovsstyrd
+återhämtning av för gamla Coop/Hemköp-baser, återkvittens och menyprov.
+
+Betan är samma dd12-container från 6 oktober. Plan-/grocerylagring ok efter
+frigörelse; /ready fortfarande 503 på gammalt manifest. 216 revisioner och
+61 privata tillståndsrader fingerprintade för slutjämförelse. Scheman inte
+pausade. Privata bevis i `.local/drift-restoration-20261008/`.
+
 # 2026-10-07 kväll: Endast driftåterställning – operatörsåtgärder återstår
 
 Gren `ops/restore-price-flow-20261007`, ovanpå `72a936b`. Ingen ny apprelease
