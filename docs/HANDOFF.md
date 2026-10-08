@@ -39,6 +39,9 @@ backoff 18:37:43 UTC kvar (första efterföljande tick18:45 UTC). Windows nästa
 V2-index 13 incidenter, aktuella Hemköpsfall återhämtade. Äldre separata
 Coop-fysiska schema-/Lidl-kvalificeringsincidenter öppna; de blockerar inte femkällorsbasen.
 Ingen extern notifieringstjänst tillagd och inga skickade larm påstådda.
+Sen avläsning 15:30:52 UTC: fortfarande /ready200/samma manifest. Windowskörning
+15:30:01 UTC exit0, not_due/0 anrop; nästa registrerade start23:30 UTC. Ingen manuell
+start av oss då; reläloggen anger inte startorsak, ingen flerdygnsdrift påstås.
 
 # Tidigare kontroll 2026-10-08: Driftåterställning – konkreta Hemköp-blockerare
 

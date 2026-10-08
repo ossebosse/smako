@@ -100,3 +100,9 @@ Inga scheman pausade: Windows 01:30/09:30/17:30, nästa 17:30 svensk tid vid
 kontrollen; server var 15:e minut. Omedelbar behovskontroll gav not_due och
 0 externa prisanrop. Befintlig global backoff till 18:37:43 UTC bevarad;
 första tick därefter 18:45 UTC. Framtida automatisk framgång är inte verifierad.
+
+Sen avläsning 15:30:52 UTC: samma dd12, manifest och /ready200. Windowsuppgiften
+hade då körts 15:30:01 UTC (17:30 svensk tid), exit 0, not_due/0 externa anrop;
+nästa registrerade start 23:30 UTC (01:30 svensk tid). Ingen manuell start gjordes
+av oss vid denna tidpunkt; själva reläloggen anger inte startorsak. Detta är en
+observerad ytterligare kontroll, inte bevis för flera dygns automatisk drift.
