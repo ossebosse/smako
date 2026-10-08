@@ -116,11 +116,13 @@ class MealSettings(PrivateModel):
 
 class ExtraNeed(PrivateModel):
     id: str = Field(default_factory=lambda: uuid4().hex, min_length=1, max_length=64)
-    kind: Literal["generic", "exact", "campaign"] = "generic"
+    kind: Literal["generic", "exact", "campaign", "one_of"] = "generic"
     query: str = Field(min_length=1, max_length=120)
     quantity: float = Field(gt=0, le=100000)
     unit: Literal["g", "ml", "st"]
     product_key: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
+    alternatives: list[str] = Field(default_factory=list, max_length=8, exclude_if=lambda v: not v)
+    alternative_names: list[str] = Field(default_factory=list, max_length=8, exclude_if=lambda v: not v)
     properties: list[str] = Field(default_factory=list, max_length=15)
     confirmed: bool = False
     use_pantry: bool = False
@@ -128,6 +130,17 @@ class ExtraNeed(PrivateModel):
 
     @model_validator(mode="after")
     def identity(self):
+        import re
+        if self.kind == "one_of":
+            if self.product_key or len(set(self.alternatives)) != len(self.alternatives) or len(self.alternatives) < 2:
+                raise ValueError("Antingen eller kräver 2–8 olika exakta produkter.")
+            if any(not re.fullmatch(r"[a-f0-9]{32}", key) for key in self.alternatives):
+                raise ValueError("Ogiltig produktidentitet i antingen eller.")
+        elif self.alternatives:
+            raise ValueError("Produktalternativ kräver antingen eller.")
+        if self.alternative_names and (len(self.alternative_names) != len(self.alternatives)
+                                      or any(not name.strip() or len(name) > 200 for name in self.alternative_names)):
+            raise ValueError("Produktalternativens visningsnamn måste följa valda identiteter.")
         if self.kind in {"exact", "campaign"} and not self.product_key:
             raise ValueError("Exakt vara kräver identifierad produkt från sökningen.")
         if self.kind == "campaign" and (self.unit != "st" or self.quantity != int(self.quantity) or self.use_pantry):
@@ -138,6 +151,17 @@ class ExtraNeed(PrivateModel):
             raise ValueError("Ogiltig produktegenskap.")
         if not self.confirmed:
             raise ValueError("Bekräfta varan och dess tolkade egenskaper före beräkning.")
+        return self
+
+
+class ShoppingWrite(PrivateModel):
+    revision: int = Field(ge=0)
+    items: list[ExtraNeed] = Field(max_length=60)
+
+    @model_validator(mode="after")
+    def unique_rows(self):
+        if len({row.id for row in self.items}) != len(self.items):
+            raise ValueError("Inköpslistans rad-ID måste vara unika.")
         return self
 
 

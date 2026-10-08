@@ -2500,6 +2500,9 @@
     }
     dom.recalculatePlanButton.hidden = !data.personal && !Boolean(first(data, ["recalculation_available"], false));
     dom.recalculatePlanButton.textContent = data.personal ? "Räkna om inköpslistan" : "Uppdatera planen";
+    document.getElementById("own-shopping-link")?.remove();
+    if(data.personal && data.plan_id){const link=document.createElement("a");link.id="own-shopping-link";link.className="secondary-button";link.textContent="Lägg till egna varor till recepten";link.href=`/personal#plan=${encodeURIComponent(data.plan_id)}&view=shopping`;dom.recalculatePlanButton.after(link);}
+
   }
 
   function applySavedRequestToForm(request) {

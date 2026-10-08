@@ -159,6 +159,8 @@ def is_nonfood(name):
             "bakplatspapper",
             "avfallspasar",
             "soppasar",
+            "blojor",
+            "byxblojor",
         }
     )
 

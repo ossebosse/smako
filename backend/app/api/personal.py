@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from datetime import UTC, datetime
 
 from app.api.beta_ops import _require_same_origin
 from app.api.plan import (
@@ -22,6 +23,7 @@ from app.models.personal import (
     PersonalMutation,
     PersonalPlanning,
     ProfileWrite,
+    ShoppingWrite,
     TasteProfile,
 )
 from app.services.personal_planner import PersonalPlanner
@@ -76,6 +78,9 @@ def public_state(state, request=None, profile=None):
         "reservations": state["reservations"],
         "events": state["events"],
         "ledger": state.get("ledger", []),
+        "shopping_items": state.get("shopping_items", []),
+        "shopping_common": state.get("shopping_common", []),
+        "shopping_initialized": "shopping_items" in state,
         "account": status(request),
         "pantry_checks": pantry_checks(
             state["items"], profile or TasteProfile.model_validate(state["profile"] or {})
@@ -95,12 +100,48 @@ def profile_interpret(payload: TextInput, request: Request, response: Response):
     return interpret_profile(payload.text)
 
 
+@router.put("/shopping-list")
+def shopping_update(payload: ShoppingWrite, request: Request, response: Response):
+    _settings, plans, owner = context(request, response)
+    return public_state(PersonalStore(plans).update_shopping(owner, payload.revision, payload.items), request)
+
+
+@router.get("/shopping-suggestions")
+def shopping_suggestions(request: Request, response: Response, q: str = "", postal_code: str = "22350"):
+    from app.services.product_search import ProductSearchRequest
+    from app.services.shopping_list import generic_suggestions, price_free_products
+
+    settings, _plans, _owner = context(request, response)
+    if len(q) > 120:
+        raise HTTPException(422, "Sökningen får vara högst 120 tecken.")
+    try:
+        generic = generic_suggestions(q)
+        search = ProductSearchRequest(query=q or "mjölk", postal_code=postal_code, limit=20)
+    except ValueError as exc:
+        raise HTTPException(422, "Kontrollera varunamn, mängd och postnummer.") from exc
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(search.postal_code, {})
+    if prepared is None:
+        return {"generics": generic, "products": [], "status": "no_area_data"}
+    products = []
+    if len(q.strip()) >= 2:
+        products = price_free_products(prepared.product_search_index.search(search, now=datetime.now(UTC),
+            stale_hours=settings.max_price_age_hours, warning_hours=settings.price_age_warning_hours))
+    return {"generics": generic, "products": products, "status": "available",
+            "identity_rule": "verified_gtin_and_package; otherwise separate source identity"}
+
+
 @router.post("/interpret-extra")
 def extra_interpret(payload: TextInput, request: Request, response: Response):
     context(request, response)
+    from app.services.shopping_list import parse_quantity
+    try:
+        query, quantity, unit = parse_quantity(payload.text)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
     return {
-        "query": payload.text.strip(),
-        "properties": interpretation(payload.text),
+        "query": query,
+        **({"quantity": quantity, "unit": unit} if quantity is not None else {}),
+        "properties": interpretation(query),
         "confirmed": False,
     }
 

@@ -41,6 +41,7 @@ def demand_key(row):
                 row["unit"],
                 row.get("product_key"),
                 sorted(row.get("properties", [])),
+                *([sorted(row["alternatives"])] if row.get("alternatives") else []),
             ],
             ensure_ascii=False,
         ).encode()
@@ -185,6 +186,37 @@ class PersonalStore:
             connection.execute("BEGIN IMMEDIATE")
             state = read_state(connection, owner)
             state["profile"] = profile.model_dump()
+            return write_state(connection, owner, state, revision)
+
+    def update_shopping(self, owner, revision, items):
+        """Owner-bound draft and bounded frequently chosen rows; never books stock."""
+        self.plans._validate_owner_actor_hash(owner)
+        rows = [item.model_dump() for item in items]
+
+        def identity(row):
+            return sha256(json.dumps({k: v for k, v in row.items() if k != "id"},
+                                     sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+        with self.plans._connect() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            state = read_state(connection, owner)
+            # Repeated identical writes do not inflate frequencies or reservations.
+            if state.get("shopping_items", []) == rows:
+                return state
+            prior = {identity(row) for row in state.get("shopping_items", [])}
+            common = {row["key"]: row for row in state.get("shopping_common", [])}
+            now = datetime.now(UTC).isoformat()
+            for row in rows:
+                key = identity(row)
+                if key in prior:
+                    continue
+                previous = common.get(key, {})
+                common[key] = {"key": key, "item": row, "count": min(previous.get("count", 0) + 1, 1000000),
+                               "last_used": now}
+                prior.add(key)
+            state["shopping_items"] = rows
+            state["shopping_common"] = sorted(common.values(),
+                key=lambda row: (row["count"], row["last_used"], row["key"]), reverse=True)[:50]
             return write_state(connection, owner, state, revision)
 
     def inventory_action(

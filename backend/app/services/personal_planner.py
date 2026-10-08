@@ -426,6 +426,30 @@ class PersonalPlanner:
             method=reference_method(recipe, name) if recipe else "boil",
         )
 
+    def resolve_choices(self, name, quantity, unit, *, alternatives=(), **kwargs):
+        """Union of explicitly allowed identities, priced by the ordinary basket.
+
+        All alternatives cover the SAME minimum amount and unit. Each identity
+        independently passes existing source, purchase and personal-policy gates.
+        No cheapest-per-row choice is made here; store/campaign choice remains global.
+        """
+        if not alternatives:
+            return self.resolve(name, quantity, unit, **kwargs)
+        candidates, failures = {}, []
+        for key in alternatives:
+            try:
+                for position, candidate in self.resolve(name, quantity, unit, **{**kwargs, "product_key": key}):
+                    candidates[position] = candidate
+            except PolicyConflict as exc:
+                failures.append(exc)
+        if not candidates:
+            raise PolicyConflict(
+                f"{name}: inget av dina produktalternativ kan täcka behovet. "
+                + " · ".join(dict.fromkeys(str(exc) for exc in failures)),
+                code="DATA_BLOCKED", stage="product_qualification",
+            )
+        return sorted(candidates.items())
+
     def resolve(
         self,
         name,
@@ -778,6 +802,7 @@ class PersonalPlanner:
                     "food": not is_nonfood(extra.query),
                     "use_pantry": extra.use_pantry,
                     "product_key": extra.product_key,
+                    "alternatives": extra.alternatives,
                     "campaign_choice": extra.kind == "campaign",
                     "properties": extra.properties,
                     "profile": self.spec.profile,
@@ -819,7 +844,7 @@ class PersonalPlanner:
                     from app.services.complete_recipes import pantry_form_compatible
                     if not pantry_form_compatible(item, row):
                         continue
-                if row["product_key"] or row["properties"]:
+                if row["product_key"] or row.get("alternatives") or row["properties"]:
                     continue
                 if canonicalize_ingredient_name(item["name"]) != canonicalize_ingredient_name(
                     row["name"]
@@ -881,16 +906,17 @@ class PersonalPlanner:
         nutrition_needs = set()
         # Constrained explicit rows first: a compatible recipe can share their
         # packages, but two different exact variants never become interchangeable.
-        rows.sort(key=lambda r: (not bool(r["product_key"]), not bool(r["properties"])))
+        rows.sort(key=lambda r: (not bool(r["product_key"] or r.get("alternatives")), not bool(r["properties"])))
         for row in rows:
             if row["quantity"] <= 0:
                 continue
             recipe = recipes_by_slot.get(row["source"])
-            resolved = self.resolve(
+            resolved = self.resolve_choices(
                 row["name"],
                 row["quantity"],
                 row["unit"],
                 product_key=row["product_key"],
+                alternatives=row.get("alternatives", ()),
                 properties=row["properties"],
                 profile=row["profile"],
                 organic_animals=row["organic_animals"],
