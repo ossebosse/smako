@@ -201,7 +201,7 @@ class PersonalStore:
             connection.execute("BEGIN IMMEDIATE")
             state = read_state(connection, owner)
             # Repeated identical writes do not inflate frequencies or reservations.
-            if state.get("shopping_items", []) == rows:
+            if "shopping_items" in state and state["shopping_items"] == rows:
                 return state
             prior = {identity(row) for row in state.get("shopping_items", [])}
             common = {row["key"]: row for row in state.get("shopping_common", [])}

@@ -78,6 +78,10 @@ def test_private_draft_frequent_choices_idempotence_and_conflict(tmp_path):
     assert first["shopping_common"][0]["count"] == 1
     assert store.update_shopping(owner, 0, [item]) == first
     assert not store.read(other).get("shopping_items")
+    # A first explicit empty draft must be persisted, even for an old owner
+    # whose last saved plan contains extras. Otherwise reload resurrects them.
+    assert store.update_shopping(other, 0, [])["shopping_items"] == []
+    assert "shopping_items" in store.read(other)
     with pytest.raises(PersonalConflict):
         store.update_shopping(owner, 0, [])
     second = store.update_shopping(owner, 1, [])
@@ -156,5 +160,38 @@ def test_shopping_api_ownership_origin_validation_and_no_price(monkeypatch, tmp_
         suggestions = first.get("/api/personal/shopping-suggestions?q=kaffe%20500g")
         assert suggestions.status_code == 200
         assert "best_price" not in suggestions.text and '"prices"' not in suggestions.text
+        parsed = first.post("/api/personal/interpret-extra", json={"text": "kaffe 0,5kg"}).json()
+        assert (parsed["query"], parsed["quantity"], parsed["unit"]) == ("kaffe", 500, "g")
     assert "privat-testvara" not in caplog.text
     factory.kw["bind"].dispose()
+
+
+def test_shopping_draft_moves_only_to_verified_account(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    from app.api import account, plan
+    from app.config import Settings
+    from app.services.beta_observability import pseudonymous_actor
+    from fastapi import HTTPException
+    from starlette.requests import Request
+
+    settings = Settings(plan_store_path=tmp_path / "migration.sqlite", secret_key="test-shopping-account-migration-key")
+    plans = PlanStore(settings.plan_store_path)
+    for module in (account, plan):
+        monkeypatch.setattr(module, "get_settings", lambda: settings)
+    req = Request({"type": "http", "method": "POST", "scheme": "https", "path": "/api/account/migrate-guest",
+                   "headers": [], "server": ("testserver", 443), "session": {},
+                   "app": SimpleNamespace(state=SimpleNamespace(plan_store=plans))})
+    req.state.anonymous_session_id = "test-shopping-guest"
+    guest = pseudonymous_actor(req.state.anonymous_session_id, settings)
+    private = PersonalStore(plans)
+    source = private.update_shopping(guest, 0, [ExtraNeed(query="spaghetti", quantity=500, unit="g", confirmed=True)])
+    payload = account.MigrationRequest(guest_revision=1, account_revision=0, confirm_move_to_verified_account=True)
+    with pytest.raises(HTTPException):
+        account.migrate_guest(payload, req)
+    req.scope["session"]["account_owner"] = "a" * 64  # verified middleware output, not a client field
+    assert account.migrate_guest(payload, req)["status"] == "MOVED"
+    moved = private.read("a" * 64)
+    assert moved["shopping_items"] == source["shopping_items"]
+    assert moved["shopping_common"] == source["shopping_common"]
+    assert not private.read(guest).get("shopping_items")

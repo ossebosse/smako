@@ -38,7 +38,10 @@ with sync_playwright() as pw:
         failed = []
         observed = []
         page.on("pageerror", lambda e, errors=errors: errors.append(str(e)))
-        page.on("requestfailed", lambda q, failed=failed: failed.append({"url": q.url, "error": q.failure}))
+        page.on(
+            "requestfailed",
+            lambda q, failed=failed: failed.append({"url": q.url, "error": q.failure}),
+        )
         page.on("response", lambda response, observed=observed: record_response(response, observed))
         page.goto(base + "/personal#shopping")
         expect(page.locator("#calculate-own-list")).to_be_enabled(timeout=90000)
@@ -86,7 +89,9 @@ with sync_playwright() as pw:
         begin = len(observed)
         page.locator("#calculate-own-list").dblclick()
         outcome = wait_operation(page, observed, begin, timeout=180)
-        r.joinpath(engine + "-operation.json").write_text(json.dumps(outcome[0], ensure_ascii=False, indent=2), encoding="utf8")
+        r.joinpath(engine + "-operation.json").write_text(
+            json.dumps(outcome[0], ensure_ascii=False, indent=2), encoding="utf8"
+        )
         expect(page.locator("#shopping-content .personal-total")).to_be_visible(timeout=180000)
         starts = [
             x
@@ -167,6 +172,49 @@ with sync_playwright() as pw:
             )
         page.get_by_role("button", name="Inköpslista", exact=True).click()
         page.screenshot(path=str(r / (engine + "-shopping.png")), full_page=True)
+        grouped = None
+        if engine == "webkit":
+            # Clearing a saved draft must not resurrect old extras from the last plan.
+            for count in (1, 0):
+                page.locator("#extras-list").get_by_role(
+                    "button", name="Ta bort extrarad", exact=True
+                ).first.click()
+                expect(page.locator("#extras-list article")).to_have_count(count)
+            page.reload()
+            expect(page.locator("#calculate-own-list")).to_be_enabled(timeout=90000)
+            expect(page.locator("#extras-list article")).to_have_count(0)
+            page.get_by_role("button", name="Inköpslista", exact=True).click()
+            with page.expect_response(
+                lambda response: (
+                    "/shopping-suggestions?" in response.url and "spaghetti" in response.url
+                )
+            ) as response:
+                page.locator("#shopping-query").fill("spaghetti")
+            suggestions = response.value.json()["products"]
+            labels = [row["display_name"] + " · " + row["package"] for row in suggestions]
+            assert len(labels) == len(set(labels))
+            choice = next(
+                row
+                for row in suggestions
+                if 2 <= len(row["matches"]) <= 8 and row["package_unit"] == "g"
+            )
+            page.locator("#shopping-specific-results").get_by_role(
+                "button", name=choice["display_name"] + " · " + choice["package"], exact=True
+            ).click()
+            page.get_by_role("button", name="Godkänn dessa som antingen eller", exact=True).click()
+            expect(page.locator("#extras-list article")).to_have_count(1)
+            begin = len(observed)
+            page.locator("#calculate-own-list").click()
+            wait_operation(page, observed, begin, timeout=180)
+            expect(page.locator("#shopping-content .personal-total")).to_be_visible(timeout=180000)
+            terminals = [
+                x.captured_body for x in observed[begin:] if x.status == 201 and x.captured_body
+            ]
+            grouped = terminals[-1].get("saved", terminals[-1])
+            assert grouped["plan"]["personal"]["checks"]["checkout_audit"]["passed"]
+            assert set(grouped["request"]["personal"]["extras"][0]["alternatives"]) == {
+                row["product_key"] for row in choice["matches"]
+            }
         assert not errors, errors
         assert not failed, failed
         report = {
@@ -181,6 +229,7 @@ with sync_playwright() as pw:
             "saved": saved,
             "revised": revised,
             "mixed": mixed,
+            "grouped_identity_consent": grouped,
             "restart": bool(args.restart_container),
             "offline_injected_seconds": 0,
         }
