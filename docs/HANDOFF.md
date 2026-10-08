@@ -1,3 +1,23 @@
+# 2026-10-08: Åtta ytterligare recept, alla måltidsklasser – isolerat PASS
+
+Gren `content/all-meal-classes-20261008`. Två enkla middagar, två genomarbetade,
+två frukostar och två mellanmål importerade genom oförändrad innehållsväg.
+190 aktuella receptposter, tidigare versioner bevarade. **Inga programändringar**:
+610 imageprogramfiler och 20 äldre receptfiler identiska med 54cb-basen.
+8/8 kvalificeringar, 17 bibliotekstester, fem fria knappflöden och två explicita
+åttareceptsflöden PASS. Chromium/WebKit mobil, kombinationsvecka 15/30,
+omladdning/dubbelstart, byte/omräkning/revisions-GET och omstart testade.
+Det första felkonfigurerade crafted-provet kvarstår FAIL; appen avvisade rätt.
+
+[Resultat, recept och belägg](releases/all-meal-classes-20261008/RESULTS.md).
+Innehållsimage `9784eb87…` ovanpå exakt 54cb/8a537fc4…, inte produktionsrelease.
+Inga nya fakta; historisk replay 4 oktober. Inga protein-/allergenkrav i
+individprovet, inga provlagningspåståenden. Egna testappen är stoppad efter prov;
+state/image bevaras, återstart enligt REPRODUCE. **Beta är oförändrad enligt
+aktiveringsrapporten nedan. Ingen aktivering eller push i denna receptetapp.**
+
+---
+
 # 2026-10-08: Appfix aktiverad efter godkännande
 
 Beta kör **app-incident-293fc6c49400**, image **c7295a8e…**, sedan 17:02:10 UTC.
