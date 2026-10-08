@@ -1,4 +1,46 @@
-# 2026-10-08: Driftåterställning – konkreta Hemköp-blockerare
+# 2026-10-08: Hemköp återställt och gemensam driftstatus aktiverad
+
+**Prisdriften är återställd; en första publik HTTP 500-händelse kvarstår som
+separat, oförklarad appanmärkning.** Läs först [OPERATIONS.md](OPERATIONS.md),
+kör `.venv\Scripts\python.exe -X utf8 scripts\smako_ops.py status` i D:\Projects\Smako.
+Fortsätt med `incidents`/`reproduce`; börja inte om med hela historikarkivet.
+
+Slutlig source-runtime **ce326c1d7fcf5235e77ea4fcf2139d4fb25be849**, endast scheduler,
+image **sha256:8fce7b9c72fbadc615aba9b46d2a2fec32a81dfb87231b33aae20ebca6547e3b**.
+Betan är oförändrad dd12; fe795-reläet och Windows-XML oförändrade. Ingen
+mål-/prestandakandidat aktiverad. Releasepaket/aktivering, 173 tester och resultat:
+[RESULTS](releases/hemkop-operations-20261008/RESULTS.md),
+[FINAL.json](releases/hemkop-operations-20261008/FINAL.json),
+[ACTIVATION](releases/hemkop-operations-20261008/ACTIVATION.md).
+
+Karhögstorgs exakta booleska tillägg rättat, ordinary replay med ursprungliga
+observationer passerade. Brunnshögs gamla medlems/offentlig-källmotsägelse
+bevarad; ett nytt komplett försök passerade utan att konfliktspärren ändrades.
+Ytterligare TypeError i nullable erbjudandesortering rättad i källbyggaren.
+Alla fem baser FRESH/laddade, /ready200 vid 15:17 UTC. Manifest bc39552c…;
+2 232 råhashar verifierade. Samma Willys d53486fb… exakt en import, återleverans
+gav already_active och beständigt kvitto 14:53:39 UTC. Ingen fullhämtning igen.
+
+WebKit/personlig PASS; Chromium/publik först FAIL 500, sedan PASS utan appbyte.
+Båda PASS-flödena omfattar omladdning, dubbelstart, receptbyte, omräkning,
+tre revisions-GET och ägarisolering. Första felet: jobb
+3218c89521084fc7a1c6b53b622c7276, app-request 9e96c548-6414-467b-ab7e-3d5e4fe6d779,
+14:51:24 UTC internal_error. Exakt grundorsak okänd; påstå inte rättat av omkörningen.
+En separat dd12-hjälparprob visar nullable-sorteringsfel för 26 produkter men
+ingen bevisad koppling till detta HTTP 500. Eventuell konsumentapprelease kräver
+separat omfattning; byt inte mat/prisdata eller aktivera 54cb för att maskera felet.
+Råfel/testunderlag: skyddat D:\Projects\Smako\.local\hemkop-operations-20261008.
+
+Alla gamla 216 revisioner/61 privata rader hashbevarade; nu 222/63 efter prov.
+Server 13,32 GB, C:5,51 GB, D:664,22 GB ledigt. Ingen ny rensning i denna etapp.
+Scheman inte pausade. Omedelbar demandkontroll not_due/0 anrop; äldre global
+backoff 18:37:43 UTC kvar (första efterföljande tick18:45 UTC). Windows nästa
+17:30 svensk tid vid kontrollen; manuell tidigare start är inte fler dygns driftbevis.
+V2-index 13 incidenter, aktuella Hemköpsfall återhämtade. Äldre separata
+Coop-fysiska schema-/Lidl-kvalificeringsincidenter öppna; de blockerar inte femkällorsbasen.
+Ingen extern notifieringstjänst tillagd och inga skickade larm påstådda.
+
+# Tidigare kontroll 2026-10-08: Driftåterställning – konkreta Hemköp-blockerare
 
 **Windows och serverutrymme är åtgärdade; prispublicering är inte återställd.**
 Se [slutstatus](releases/drift-restoration-20261008/STATUS.md),

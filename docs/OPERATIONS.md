@@ -52,6 +52,9 @@ Befintlig `run_daily_refresh.py` uppdaterar under operationslåset
 `reports/operations/source-incidents.json` och `drift-indicators.json`.
 Den senaste skyddade `refresh-runner-status.json` visar eventuellt indexfel.
 Max 128 incidenter och 2 MB index, atomisk ersättning; stora råfiler refereras.
+Indexformat v2 skiljer kommersiella incidenter efter verklig produkt och
+motstridiga villkor. Vid övergång bevaras ett litet v1-index, varefter aktuellt
+index byggs om från oförändrade snapshots. Inga råarkiv dupliceras.
 Första körningen granskar högst senaste 100 snapshots; äldre historik är inte
 automatiskt återräknad. Därefter inkrementellt med återbesök av pågående jobb.
 Samma signatur slås samman och räknar nya jobb, inte statuspollningar.
@@ -96,9 +99,12 @@ gång. Ett avbrott med kvarstående running-post ska granskas mot verkligt jobb,
 inte repareras genom att radera journalen. Globala backoffhistoriken raderas
 inte. Källans retry-deadline och hastighetsgränser gäller fortsatt.
 
-Öppna deterministiska schemafel hålls från nya identiska fullhämtningar i
-behovsvägen tills granskad reparation/återhämtning. Andra kedjor filtreras inte
-bort. Ett hold är aldrig ett färskhetsgodkännande; 36/48 timmar gäller.
+Öppna deterministiska schemafel begränsar berörda onlinekontexter i de verifierade
+Hemköp-/Coop-adaptrarna tills granskad reparation/återhämtning. Andra tillåtna
+butiker i samma kedja bevaras. Fysiska erbjudandefel blockerar inte onlinebasen.
+Övriga adaptrar behåller sina befintliga återförsök och tydlig incidentrapport;
+inget nytt generellt hämtkontrakt antas. Ett hold är aldrig ett
+färskhetsgodkännande; 36/48 timmar gäller.
 
 Efter varje åtgärd: status → alla fem verkliga observationer → samma aktiva och
 laddade manifest → `/ready` → beständigt reläkvitto → publik/personlig meny,
