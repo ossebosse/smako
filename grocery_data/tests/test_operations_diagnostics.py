@@ -212,6 +212,14 @@ def test_schema_hold_clears_only_on_recovery(context):
     assert ops.schema_holds(context.root)=={}
 
 
+def test_offer_schema_failure_does_not_hold_online_base(context):
+    snapshot(context,'physical',metrics={'effective_schema_diff':{'added':['offerContract']}})
+    with sqlite3.connect(context.database) as db:
+        db.execute("UPDATE catalog_snapshots SET coverage='offers_only'")
+    ops.record_incidents(context.env)
+    assert ops.schema_holds(context.root)=={}
+
+
 def test_pipeline_error_keeps_stack_without_message_or_locals(context):
     try:
         raise TypeError('private credential must never be copied')

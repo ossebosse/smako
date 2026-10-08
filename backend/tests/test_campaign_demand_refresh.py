@@ -33,6 +33,15 @@ def test_no_due_tick_restart_base_deadline_and_new_source_promotion(tmp_path,mon
     due=runner.demand_refresh_plan(now=now+timedelta(hours=35),environment=env)
     assert due['work_due'] and due['due_sources']==['hemkop']
     assert datetime.fromisoformat(due['sources']['hemkop']['hard_stop_at']) == now+timedelta(hours=48)
+    from grocery_data.app.services import operations_diagnostics
+
+    with monkeypatch.context() as scoped:
+        scoped.setattr(operations_diagnostics,'schema_holds',lambda root:{'hemkop':['verified']})
+        partial=runner.demand_refresh_plan(now=now+timedelta(hours=35),environment=env|{'HEMKOP_STORE_EXTERNAL_IDS':'verified,other'})
+        assert partial['due_sources']==['hemkop']
+        assert partial['source_context_overrides']=={'HEMKOP_STORE_EXTERNAL_IDS':'other'}
+        blocked=runner.demand_refresh_plan(now=now+timedelta(hours=35),environment=env|{'HEMKOP_STORE_EXTERNAL_IDS':'verified'})
+        assert not blocked['due_sources'] and not blocked['source_context_overrides']
     # Campaign coalescing must not falsely advertise a local relay fetch.
     with sqlite3.connect(db) as c:
         c.execute("UPDATE source_products SET chain='willys'")

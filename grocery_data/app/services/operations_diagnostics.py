@@ -412,8 +412,12 @@ def schema_holds(operations_root):
     mark a source fresh and never removes other chains from recovery.
     """
     index = read_json(Path(operations_root)/'source-incidents.json')
-    return {item['chain']: item['incident_id'] for item in index.get('incidents', {}).values()
-            if item['code'] == 'SOURCE_SCHEMA_CHANGED' and item['status'] == 'open'}
+    result = {}
+    for item in index.get('incidents', {}).values():
+        if (item['code'] == 'SOURCE_SCHEMA_CHANGED' and item['status'] == 'open'
+                and item.get('coverage') == 'full_online_catalog'):
+            result.setdefault(item['chain'], []).extend(item['store_ids'])
+    return {chain: sorted(set(stores)) for chain, stores in result.items()}
 
 
 def record_pipeline_failure(stage, exc, *, scope):

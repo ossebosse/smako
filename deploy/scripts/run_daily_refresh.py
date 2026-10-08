@@ -522,13 +522,26 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     from grocery_data.app.services.operations_diagnostics import schema_holds
 
     held = schema_holds(state_path.parent)
-    remote_due = [key for key in remote_due if key not in held]
+    # Holds apply to the exact online collection context, never to a separate
+    # physical-offer feed or every other store belonging to the same chain.
+    bindings = {'hemkop': 'HEMKOP_STORE_EXTERNAL_IDS', 'coop': 'COOP_ONLINE_CONTEXT_IDS'}
+    scoped_overrides = {}
+    for chain, blocked_stores in held.items():
+        variable = bindings.get(chain)
+        if not variable or chain not in remote_due:
+            continue
+        allowed = [s for s in env.get(variable, '').split(',') if s and s not in blocked_stores]
+        if allowed:
+            scoped_overrides[variable] = ','.join(allowed)
+        else:
+            remote_due.remove(chain)
     work = bool(remote_due or reasons)
     if state.get('retry_at') and datetime.fromisoformat(state['retry_at']) > now:
         work = False
     state_path.parent.mkdir(parents=True, exist_ok=True)
     return {'work_due': work, 'reasons': reasons, 'sources': sources, 'due_sources': remote_due,
         'sources_held_for_schema_review': held,
+        'source_context_overrides': scoped_overrides,
         'hemkop_municipal': hemkop_plan, 'coop_municipal': coop_plan, 'citygross_municipal': citygross_plan, 'lidl_municipal': lidl_plan, 'willys_flyer': willys_flyer_plan, 'relay_due': 'willys' in due_sources, 'ica_store_schedule': offers.get('store_schedule', {}),
         'source_fingerprint': fingerprint, 'state': state, 'state_path': str(state_path),
         'checked_at': now.isoformat(), 'external_price_requests': 0}
@@ -549,7 +562,17 @@ def _run_demand_locked(lock, *, started_at):
         command.extend(['--chain', chain])
     if 'primat' not in plan['due_sources']:
         command.append('--no-external-refresh')
-    code = _run_locked(lock, started_at=started_at, command=command)
+    overrides = plan.get('source_context_overrides', {})
+    previous = {key: os.environ.get(key) for key in overrides}
+    try:
+        os.environ.update(overrides)
+        code = _run_locked(lock, started_at=started_at, command=command)
+    finally:
+        for key, value in previous.items():
+            if value is None:
+                os.environ.pop(key, None)
+            else:
+                os.environ[key] = value
     ended = datetime.now(UTC)
     after = demand_refresh_plan(now=ended)
     state.update(after['state'])
