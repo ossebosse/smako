@@ -1,3 +1,18 @@
+# 2026-10-09: Inköpslistan och snabbmenyn AKTIVERADE
+
+Beta kör `shopping-list-6b10628f22d8`, image `a5b678ca…`, sedan 16:48 UTC.
+Endast appens image/BUILD_ID bytta efter godkännande, backup och operationslås.
+Receptflagga true, källor/relä/scheman/övriga containrar bevarade. /ready200.
+234 gamla revisioner och 68 privata tillstånd bevarade. Chromium/WebKit
+riktiga inköpslisteflöden inklusive omräkning/revisioner/ägarskydd PASS.
+Publik femmiddagsknapp PASS, 145,125 s (inget 60-sekunderspåstående).
+Willys AGING cirka 41 h vid kontroll, inom 48 h; övriga obligatoriska baser FRESH.
+OIDC fortfarande ej konfigurerad; liveprov använder separata gästsessioner.
+[Utförd aktivering och verifiering](releases/shopping-quick-menu-20261009/ACTIVATED.md).
+Äldre noteringar om ej aktiverad kandidat nedan är historiska.
+
+---
+
 # 2026-10-09: Gemensam snabbmeny för inköpslistan
 
 Gren `feature/shopping-quick-menu-20261009`, runtime `6b10628f22d8`.

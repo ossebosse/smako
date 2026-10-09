@@ -1,0 +1,147 @@
+{
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-09T16:48:27.164408+00:00",
+    "image": "sha256:a5b678ca483135037c8a4d20cb61738861b544bfbcc21c58e8389b9f022bae32",
+    "build_id": "shopping-list-6b10628f22d8",
+    "old_image": "sha256:d17a4c077ad68ec70f5b821cc2ffbee69bc2f9012fa44ba240bce2fc2203908a",
+    "app_id": "af579244741a3cb23584cefd7a2ea30d061b6b3773bf4eca6b310193159ecfa4",
+    "only_app_replaced": true,
+    "complete_recipes_enabled": true,
+    "ready_status": "ready",
+    "price_universe_id": "price-universe:4a4ec281af9830115e1187a9f7594a74ab8870c0ff7720c9d6fad9631be63c9e",
+    "backup": {
+      "plans": {
+        "bytes": 108113920,
+        "sha256": "3e9157c2521dc787b450b84ae86c46054aa0855c1983f9c313326abd0867e83b",
+        "integrity": "ok",
+        "table_counts": {
+          "consumer_plan_revisions": 234,
+          "personal_private_state": 68
+        }
+      }
+    },
+    "cpu_quiet_samples_seconds_per_10s": [
+      0.03,
+      0.04
+    ],
+    "idle_check": "no plan endpoint requests in previous 15 minutes plus CPU quiet; no direct in-memory job counter",
+    "compose_diff": [
+      "services.app.image",
+      "services.app.environment.BUILD_ID"
+    ],
+    "complete_flag_preserved": true,
+    "mounts_and_other_containers_unchanged": true,
+    "free_bytes": 10017951744
+  },
+  "package": {
+    "sha256": "14ccb4780572d50e1a7331ed5e60b99366fc6029060a698e3db554bd71803bfc"
+  },
+  "image_export": {
+    "bytes": 594101248,
+    "sha256": "61a937e74417d19b3a2b3815324588d0bb73f09474bc33005265639b165a0556"
+  },
+  "served_files": {
+    "personal.html": "c4bc9142f15b1bcdd8cb6e4be63f0b8b378c1c7710e9dba780af86df580ef88c",
+    "personal.js": "b32deaa3f52cae692f6ec597b509f8defdfce91e97c8c1e401ae4b70b548e525",
+    "personal.css": "1d662238049418c1ee44d2ebd0a600ccdcba5482fe54ff02f2e3f6c975233471"
+  },
+  "shopping_browsers": [
+    {
+      "browser": "chromium",
+      "errors": [],
+      "failed_requests": [],
+      "start_posts": 1,
+      "audit_passed": true,
+      "saved_get_equal": true,
+      "revision_gets": [
+        1,
+        2
+      ],
+      "explicit_recalculation_audit": true,
+      "owner_isolation": 403
+    },
+    {
+      "browser": "webkit",
+      "errors": [],
+      "failed_requests": [],
+      "start_posts": 1,
+      "audit_passed": true,
+      "saved_get_equal": true,
+      "revision_gets": [
+        1,
+        2
+      ],
+      "explicit_recalculation_audit": true,
+      "owner_isolation": 403
+    }
+  ],
+  "required_contexts": [
+    {
+      "context_id": "context:coop:23eaae11c9661e68",
+      "snapshot_id": "8d1dba204e45414e96be4501fad38b2a",
+      "observed_at": "2026-10-09T13:30:54.726697+00:00",
+      "age_hours": 3.328,
+      "freshness": "FRESH",
+      "loaded": true
+    },
+    {
+      "context_id": "context:hemkop:3288e04edd97e349",
+      "snapshot_id": "e45cd4719bc640918977e65b4c3bf77c",
+      "observed_at": "2026-10-08T13:58:34.984628+00:00",
+      "age_hours": 26.867,
+      "freshness": "FRESH",
+      "loaded": true
+    },
+    {
+      "context_id": "context:hemkop:756955d0e6e05f23",
+      "snapshot_id": "d621ab31a2af4083ad13c1d070691f9e",
+      "observed_at": "2026-10-08T12:03:33.407624+00:00",
+      "age_hours": 28.784,
+      "freshness": "FRESH",
+      "loaded": true
+    },
+    {
+      "context_id": "context:willys:383650ec6ff5a636",
+      "snapshot_id": "72c524df46c34fe69af362158af38692",
+      "observed_at": "2026-10-07T23:31:27.443160+00:00",
+      "age_hours": 41.319,
+      "freshness": "AGING",
+      "loaded": true
+    },
+    {
+      "context_id": "context:willys:4a671428fc484e43",
+      "snapshot_id": "72c524df46c34fe69af362158af38692",
+      "observed_at": "2026-10-07T23:51:22.161079+00:00",
+      "age_hours": 40.987,
+      "freshness": "AGING",
+      "loaded": true
+    }
+  ],
+  "preservation": {
+    "consumer_plan_revisions": {
+      "before": 234,
+      "after": 239,
+      "all_previous_rows_preserved": true
+    },
+    "personal_private_state": {
+      "before": 68,
+      "after": 71,
+      "all_previous_rows_preserved": true
+    }
+  },
+  "source_changes": false,
+  "oidc_live_test": false,
+  "public_recipe_browser": {
+    "case": "chromium-mobile-public",
+    "outcome": "PASS",
+    "seconds": 145.125,
+    "generation": {
+      "status": 201,
+      "job_count": 1,
+      "reloaded_during_job": true,
+      "expensive_post_count": 1
+    },
+    "mutations_skipped": true
+  }
+}
