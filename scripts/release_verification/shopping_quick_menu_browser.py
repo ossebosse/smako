@@ -2,6 +2,8 @@
 
 import argparse
 import json
+import time
+import urllib.request
 from pathlib import Path
 
 from complete_recipe_browser import record_response, wait_operation
@@ -10,9 +12,21 @@ from playwright.sync_api import expect, sync_playwright
 parser = argparse.ArgumentParser()
 parser.add_argument("--base", default="http://127.0.0.1:18130")
 parser.add_argument("--output", type=Path, required=True)
+parser.add_argument("--expected-build", required=True)
 a = parser.parse_args()
 assert a.base.startswith("http://127.0.0.1:")
 a.output.mkdir(parents=True, exist_ok=False)
+for attempt in range(120):
+    try:
+        with urllib.request.urlopen(a.base + "/ready", timeout=3) as response:
+            ready = json.load(response)
+        if ready["build_id"] == a.expected_build and ready["status"] == "ready":
+            break
+    except OSError:
+        pass
+    time.sleep(1)
+else:
+    raise TimeoutError("Expected isolated runtime was not ready")
 with sync_playwright() as pw:
     for engine in ("chromium", "webkit"):
         browser = getattr(pw, engine).launch()

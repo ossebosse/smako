@@ -1,3 +1,16 @@
+# 2026-10-09: Gemensam snabbmeny för inköpslistan
+
+Gren `feature/shopping-quick-menu-20261009`, runtime `6b10628f22d8`.
+En Lägg till vara-knapp, sökmeny med generiskt först och konkreta produkter
+utan butiksväljare/priser. Tillbaka till generisk vara och redigering av
+befintlig generisk rad. Produktkopplingar/one_of bevarade; ingen prisidentitet
+härledd enbart från namn. Närmare generisk betydelse rankas först i förslagen.
+59 lokala och 59 paketerade tester, Chromium/WebKit riktiga korgflöden PASS.
+**Inte aktiverad.** Den äldre inköpslisteimagen har inte denna förbättring.
+[Senaste resultat, image/paket och framtida aktivering](releases/shopping-quick-menu-20261009/RESULTS.md).
+
+---
+
 # 2026-10-08: Fristående inköpslista – implementerad, inte aktiverad
 
 Gren `feature/independent-shopping-list-20261008`, runtime `38a85dafa18a`.

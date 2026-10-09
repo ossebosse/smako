@@ -1,0 +1,86 @@
+{
+  "runtime": {
+    "runtime": "6b10628f22d8315ba9758ae6e5381cb711365478",
+    "tag": "smako-shopping-list:6b10628f22d8",
+    "image": "sha256:a5b678ca483135037c8a4d20cb61738861b544bfbcc21c58e8389b9f022bae32"
+  },
+  "package": {
+    "file": "smako-shopping-list-6b10628f22d8.zip",
+    "bytes": 131100,
+    "sha256": "14ccb4780572d50e1a7331ed5e60b99366fc6029060a698e3db554bd71803bfc"
+  },
+  "files": {
+    "backend/app/api/personal.py": "e40e4bcb6ec47e805fb949e420c1a43483eb8d6955391d893cedd28ea850acc4",
+    "backend/app/models/personal.py": "257efe176165238b8f59ce907af5f90e6603f153302d0c242d97a5cca34150c9",
+    "backend/app/services/personal_planner.py": "104f3b0dc92f4b22f9be02d0cb0a6acfa4ca5a3029dcb5fd0a541bda3a2372c4",
+    "backend/app/services/personal_policy.py": "264dd06df2c4d0cc4967cfcdcdbf18bc64d4362861e4326602085d8dc850331a",
+    "backend/app/services/personal_store.py": "6ec909ae0aa48bec4878e447b9749d7fced607f3047a639e50da694079652ddb",
+    "backend/app/services/shopping_list.py": "03562d795b733235c84ee6cbec4238a21ed839b6ae523c0608b6018f79400564",
+    "backend/app/data/shopping_generics.json": "09934a657ba0b56525706b27bdbb64088e9761e3de3eeb32129b151bf4b2d77a",
+    "backend/app/static/personal.html": "c4bc9142f15b1bcdd8cb6e4be63f0b8b378c1c7710e9dba780af86df580ef88c",
+    "backend/app/static/personal.js": "b32deaa3f52cae692f6ec597b509f8defdfce91e97c8c1e401ae4b70b548e525",
+    "backend/app/static/personal.css": "1d662238049418c1ee44d2ebd0a600ccdcba5482fe54ff02f2e3f6c975233471",
+    "backend/app/static/index.html": "0d34513c5f2d7ad50f7caed98a837994c0b027897128cee7a3ac0c976dc10ad1",
+    "backend/app/static/app.js": "c7b57f79f22ddcf807e956657387a723140c8d1277caaecb6aa905d699dae980"
+  },
+  "served_files": {
+    "personal.js": "b32deaa3f52cae692f6ec597b509f8defdfce91e97c8c1e401ae4b70b548e525",
+    "personal.html": "c4bc9142f15b1bcdd8cb6e4be63f0b8b378c1c7710e9dba780af86df580ef88c",
+    "personal.css": "1d662238049418c1ee44d2ebd0a600ccdcba5482fe54ff02f2e3f6c975233471"
+  },
+  "resources": {
+    "cpu": 2,
+    "memory_bytes": 3221225472,
+    "source_mounts": false
+  },
+  "backend_tests": {
+    "local": 59,
+    "packaged": 59,
+    "outcome": "PASS"
+  },
+  "browser_tests": [
+    {
+      "browser": "chromium",
+      "outcome": "PASS",
+      "pageerrors": [],
+      "failed_requests": [],
+      "seconds": 4.75,
+      "job_count": 1,
+      "start_posts": 1,
+      "audit": true,
+      "saved_get_equal": true,
+      "foreign_owner_get": 403,
+      "first_coffee_products": [
+        "Xtra Bryggkaffe Mellanrost · 500 g",
+        "Coop Bryggkaffe Extra Mörk · 450 g",
+        "Coop Bryggkaffe Mellanrost · 450 g",
+        "Coop Bryggkaffe Mörkrost · 450 g",
+        "Löfbergs Brazil Mellanrost Bryggkaffe · 450 g"
+      ],
+      "raw_sha256": "bb68ccffb326c51ba1da4934403b06be28664f10aa1d052dedeb25f330441157"
+    },
+    {
+      "browser": "webkit",
+      "outcome": "PASS",
+      "pageerrors": [],
+      "failed_requests": [],
+      "seconds": 5.0,
+      "job_count": 1,
+      "start_posts": 1,
+      "audit": true,
+      "saved_get_equal": true,
+      "foreign_owner_get": 403,
+      "first_coffee_products": [
+        "Xtra Bryggkaffe Mellanrost · 500 g",
+        "Coop Bryggkaffe Extra Mörk · 450 g",
+        "Coop Bryggkaffe Mellanrost · 450 g",
+        "Coop Bryggkaffe Mörkrost · 450 g",
+        "Löfbergs Brazil Mellanrost Bryggkaffe · 450 g"
+      ],
+      "raw_sha256": "c5e231a30f4bdbd3908e772a116b9f183221414ac6bbf7f69cb32fc81e6de7d7"
+    }
+  ],
+  "historical_replay": true,
+  "production_activation": false,
+  "retained_failed_attempt": "packaged-browser.log: test started before image build completed; assertion failed on prior dev runtime. Final helper requires the expected BUILD_ID."
+}
