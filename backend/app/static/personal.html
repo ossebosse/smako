@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#173e35" />
   <title>Smako · Min plan och skafferi</title>
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
-  <link rel="stylesheet" href="/static/personal.css?v=shopping-list-1" />
+  <link rel="stylesheet" href="/static/personal.css?v=shopping-menu-2" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
   <script src="/static/complete-recipes.js?v=meal-library-1" defer></script>
-  <script src="/static/personal.js?v=shopping-list-1" defer></script>
+  <script src="/static/personal.js?v=shopping-menu-2" defer></script>
   <script src="/static/product-search.js?v=personal-v2-1" defer></script>
 </head>
 <body class="personal-app">
@@ -32,16 +32,17 @@
     <section data-view="shopping" id="personal-shopping" hidden><h1>En gemensam inköpslista</h1><p>Även utan recept. Alla varor delar samma butikstak och medlemskap.</p>
       <div id="shopping-content"><p>Ingen beräknad korg ännu.</p></div>
       <h2>Mina varor</h2><p>Lägg till varor med eller utan recept. Priserna visas när hela inköpslistan har beräknats.</p>
+      <button type="button" class="secondary-button" id="add-shopping-item">Lägg till vara</button>
+      <div id="shopping-search-box">
       <label for="shopping-query">Sök vara eller skriv till exempel kaffe 500g</label>
-      <input id="shopping-query" type="search" maxlength="120" autocomplete="off" placeholder="Kaffe 500g, spaghetti, en specifik produkt…" />
+      <input id="shopping-query" type="search" maxlength="120" autocomplete="off" aria-controls="shopping-suggestions" aria-expanded="false" aria-haspopup="true" placeholder="Kaffe 500g, spaghetti, en specifik produkt…" />
+      <div id="shopping-suggestions" hidden aria-label="Varuförslag"></div>
+      </div>
       <p id="shopping-search-status" role="status" aria-live="polite"></p>
       <button type="button" id="cancel-alternative" class="secondary-button" hidden>Avbryt alternativval</button>
-      <div id="shopping-suggestions"></div>
       <h3>Vanliga val</h3><div id="shopping-common"></div>
       <p id="shopping-draft-status" role="status"></p>
       <div id="extras-list"></div>
-      <button type="button" class="secondary-button" id="generic-extra">Lägg till generisk vara</button>
-      <button type="button" class="secondary-button" data-open="product-search">Välj exakt produkt</button>
       <button type="button" class="primary-button" id="calculate-extras">Beräkna inköpslistan</button>
       <button type="button" class="secondary-button" id="calculate-own-list">Beräkna bara mina varor – utan recept</button>
       <p>Om en plan redan är öppen läggs varorna till dess recept. Välj ”utan recept” för en fristående lista. Butikstak, postnummer och medlemskap väljs under Mina val.</p>

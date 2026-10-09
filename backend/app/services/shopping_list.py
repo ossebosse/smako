@@ -46,20 +46,22 @@ def price_free_products(result):
 
     The existing index already groups verified GTIN/package identities. Identical
     labels without that evidence are a presentation group: the UI must ask for
-    an exact member or explicit either/or consent. Every member retains its key.
+    explicit consent for grouped matching product choices. Stores are selected
+    later in the basket; every member retains its exact key.
     """
     groups = {}
     for raw in result["results"]:
         row = {key: raw.get(key) for key in (
             "product_key", "name", "brand", "package", "package_quantity", "package_unit", "identity_basis"
         )}
+        row["selectable"] = bool(row["package_quantity"] and row["package_unit"] in {"g", "ml", "st"})
+        row["package"] = row["package"] or "Förpackningsstorlek saknas"
         brand = row["brand"] or ""
         row["display_name"] = (brand + " " + row["name"]) if brand.casefold() not in row["name"].casefold() else row["name"]
-        row["source_label"] = " / ".join(dict.fromkeys(p["store_name"] for p in raw.get("prices", []) if p.get("store_name")))
         label = (row["name"], brand, row["package_quantity"], row["package_unit"], row["package"])
         if label not in groups:
             groups[label] = {**row, "matches": []}
         group = groups[label]
         if row["product_key"] not in {member["product_key"] for member in group["matches"]}:
             group["matches"].append(row)
-    return list(groups.values())
+    return sorted(groups.values(), key=lambda row: not row["selectable"])

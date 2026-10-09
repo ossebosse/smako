@@ -45,3 +45,12 @@
 #shopping-suggestions button,#shopping-common button {text-align:left;max-width:100%;overflow-wrap:anywhere;}
 
 #shopping-generic-results,#shopping-specific-results {display:flex;gap:8px;flex-wrap:wrap;width:100%;}
+
+/* One searchable menu: generic needs first, exact product choices below. */
+#shopping-search-box {position:relative;margin:12px 0;}
+#shopping-suggestions {display:block;position:absolute;z-index:5;top:100%;left:0;right:0;max-height:55dvh;overflow-y:auto;margin:4px 0 0;padding:6px;background:#fffef9;border:1px solid #b5c4ba;border-radius:12px;box-shadow:0 8px 24px #173e3526;}
+#shopping-suggestions[hidden] {display:none;}
+#shopping-generic-results,#shopping-specific-results {display:block;}
+#shopping-suggestions h3 {font-size:.78rem;padding:8px 10px;margin:0;color:#55685b;}
+#shopping-suggestions button {display:block;width:100%;border:0;border-radius:6px;padding:12px;text-align:left;margin:0;}
+#shopping-suggestions button:hover,#shopping-suggestions button:focus-visible {background:#e9f1eb;outline:2px solid #245b4d;outline-offset:-2px;}

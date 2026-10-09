@@ -128,6 +128,12 @@ def test_duplicate_display_labels_preserve_distinct_exact_keys():
     second = {**common, "product_key": "b" * 32, "prices": [{"store_name": "Hemköp", "price": 21}]}
     groups = price_free_products({"results": [first, second, first]})
     assert len(groups) == 1 and groups[0]["display_name"] == "Garant Spaghetti"
+    assert "Willys" not in json.dumps(groups) and "Hemköp" not in json.dumps(groups, ensure_ascii=False)
+    assert "source_label" not in json.dumps(groups)
+    incomplete = {**first, "product_key": "c" * 32, "package": None, "package_quantity": None}
+    ranked = price_free_products({"results": [incomplete, first]})
+    assert ranked[0]["selectable"] and not ranked[-1]["selectable"]
+    assert ranked[-1]["package"] == "Förpackningsstorlek saknas"
     assert [m["product_key"] for m in groups[0]["matches"]] == ["a" * 32, "b" * 32]
     assert "price" not in json.dumps(groups)
     assert len(price_free_products({"results": [first, {**second, "brand": "Barilla"}]})) == 2
@@ -162,6 +168,18 @@ def test_shopping_api_ownership_origin_validation_and_no_price(monkeypatch, tmp_
         assert "best_price" not in suggestions.text and '"prices"' not in suggestions.text
         parsed = first.post("/api/personal/interpret-extra", json={"text": "kaffe 0,5kg"}).json()
         assert (parsed["query"], parsed["quantity"], parsed["unit"]) == ("kaffe", 500, "g")
+        queries = []
+        def search_suggestions(request, **kwargs):
+            queries.append(request.query)
+            row = {"product_key": ("a" if request.query.startswith("brygg") else "b") * 32,
+                   "name": request.query, "brand": "Test", "package": "500 g",
+                   "package_quantity": 500, "package_unit": "g", "identity_basis": "context_product"}
+            return {"results": [row]}
+        monkeypatch.setattr(p.product_search_index, "search", search_suggestions)
+        ranked = first.get("/api/personal/shopping-suggestions?q=kaffe%20500g").json()
+        assert queries == ["bryggkaffe 500 g", "kaffe 500g"]
+        assert [row["product_key"] for row in ranked["products"]] == ["a" * 32, "b" * 32]
+
     assert "privat-testvara" not in caplog.text
     factory.kw["bind"].dispose()
 

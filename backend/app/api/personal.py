@@ -109,7 +109,7 @@ def shopping_update(payload: ShoppingWrite, request: Request, response: Response
 @router.get("/shopping-suggestions")
 def shopping_suggestions(request: Request, response: Response, q: str = "", postal_code: str = "22350"):
     from app.services.product_search import ProductSearchRequest
-    from app.services.shopping_list import generic_suggestions, price_free_products
+    from app.services.shopping_list import generic_suggestions, parse_quantity, price_free_products
 
     settings, _plans, _owner = context(request, response)
     if len(q) > 120:
@@ -124,8 +124,25 @@ def shopping_suggestions(request: Request, response: Response, q: str = "", post
         return {"generics": generic, "products": [], "status": "no_area_data"}
     products = []
     if len(q.strip()) >= 2:
-        products = price_free_products(prepared.product_search_index.search(search, now=datetime.now(UTC),
-            stale_hours=settings.max_price_age_hours, warning_hours=settings.price_age_warning_hours))
+        # The first curated generic is the closest meaning of a broad query.
+        # Rank its existing exact matches first, then retain the original matches.
+        # This changes suggestions only, never basket candidate eligibility.
+        searches = []
+        if generic:
+            _, amount, unit = parse_quantity(q)
+            preferred = generic[0]["query"]
+            if amount is not None:
+                preferred += f" {amount:g} {unit}"
+            if preferred.casefold() != q.strip().casefold():
+                searches.append(search.model_copy(update={"query": preferred}))
+        searches.append(search)
+        rows = []
+        now = datetime.now(UTC)
+        for suggestion_search in searches:
+            rows.extend(prepared.product_search_index.search(suggestion_search, now=now,
+                stale_hours=settings.max_price_age_hours,
+                warning_hours=settings.price_age_warning_hours)["results"])
+        products = price_free_products({"results": rows})
     return {"generics": generic, "products": products, "status": "available",
             "identity_rule": "verified_gtin_and_package; otherwise separate source identity"}
 

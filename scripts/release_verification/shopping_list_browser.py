@@ -240,7 +240,7 @@ with sync_playwright() as pw:
             page.locator("#shopping-specific-results").get_by_role(
                 "button", name=choice["display_name"] + " · " + choice["package"], exact=True
             ).click()
-            page.get_by_role("button", name="Godkänn dessa som antingen eller", exact=True).click()
+            page.get_by_role("button", name="Bekräfta och lägg till", exact=True).click()
             expect(page.locator("#extras-list article")).to_have_count(1)
             begin = len(observed)
             phase[0] = "group calculate"
