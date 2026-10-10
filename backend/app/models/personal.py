@@ -277,6 +277,9 @@ class PersonalMutation(PrivateModel):
     ingredient: str | None = Field(default=None, max_length=120)
     product_key: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
     restore_revision: int | None = Field(default=None, ge=1)
+    purchase_planning_mode: Literal["exact", "estimated"] | None = Field(
+        default=None, exclude_if=lambda value: value is None
+    )
     measured_purchase_quantities: dict[str, float] = Field(default_factory=dict, max_length=200)
     consume_fraction: float = Field(default=1, gt=0, le=1)
     operation_id: str | None = Field(default=None, pattern=r"^[a-zA-Z0-9-]{8,64}$")
@@ -284,6 +287,8 @@ class PersonalMutation(PrivateModel):
     @model_validator(mode="after")
     def partial_event_identity(self):
         import math
+        if self.purchase_planning_mode is not None and self.action not in {"extras", "recalculate"}:
+            raise ValueError("Inköpsläge kan bara ändras vid uttrycklig omräkning eller uppdatering av inköpslistan.")
         if any(not math.isfinite(q) or q <= 0 for q in self.measured_purchase_quantities.values()):
             raise ValueError('Uppmätta inköpsmängder måste vara positiva och ändliga.')
         if self.measured_purchase_quantities and self.action != 'purchase':

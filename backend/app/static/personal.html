@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
   <script src="/static/complete-recipes.js?v=return-session-1" defer></script>
-  <script src="/static/personal.js?v=return-session-1" defer></script>
-  <script src="/static/product-search.js?v=personal-v2-1" defer></script>
+  <script src="/static/personal.js?v=weight-offers-1-return-session-1" defer></script>
+  <script src="/static/product-search.js?v=weight-offers-1-personal-v2-1" defer></script>
 </head>
 <body class="personal-app">
   <a class="skip-link" href="#personal-main">Hoppa till innehållet</a>
@@ -43,6 +43,8 @@
       <h3>Vanliga val</h3><div id="shopping-common"></div>
       <p id="shopping-draft-status" role="status"></p>
       <div id="extras-list"></div>
+      <label class="check-label"><input type="checkbox" id="shopping-estimated-purchases"/> Tillåt uppskattad vikt och kostnad</label>
+      <p>Kilopris kan jämföras exakt, men viktvarornas slutbelopp beror på uppvägning. Valet gäller hela inköpslistan och dess recept. Sparad plan ändras först när du beräknar igen.</p>
       <button type="button" class="primary-button" id="calculate-extras">Beräkna inköpslistan</button>
       <button type="button" class="secondary-button" id="calculate-own-list">Beräkna bara mina varor – utan recept</button>
       <p>Om en plan redan är öppen läggs varorna till dess recept. Välj ”utan recept” för en fristående lista. Butikstak, postnummer och medlemskap väljs under Mina val.</p>

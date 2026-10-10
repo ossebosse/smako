@@ -252,6 +252,26 @@ def _fail_closed_non_fixed_price(
     )
 
 
+def comparable_weight_rate(candidate: ProductCandidate) -> tuple[float, str] | None:
+    """Quote a rate through the same quantity and cap guards as checkout.
+
+    This is not a fixed package total or a promise about the final weighed bill.
+    The caller has already applied membership, date and estimated-mode policy.
+    """
+    candidate, cap_warning = _fail_closed_non_fixed_price(candidate)
+    if cap_warning:
+        return None
+    if candidate.sale_model not in {SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE}:
+        return None
+    resolver = PurchaseQuantityResolver()
+    rate = resolver._rate(candidate)
+    if rate is None or rate[1] not in {'g', 'ml'}:
+        return None
+    if not resolver.resolve(candidate, required_quantity=1, required_unit=rate[1]).resolved:
+        return None
+    return float(rate[0] * Decimal(1000) / rate[2]), 'kg' if rate[1] == 'g' else 'l'
+
+
 def calculate_packages(required_quantity: float, package_quantity: float) -> int:
     """Return the whole number of packages which must actually be bought."""
 

@@ -39,6 +39,11 @@ from grocery_data.app.services.fixed_checkout_price import resolve_effective_pri
 _STOCKHOLM = ZoneInfo("Europe/Stockholm")
 
 
+class EstimatedPurchaseRequired(ValueError):
+    """Known variable quantity needs the user's explicit purchase consent."""
+
+
+
 def current_pricing_date() -> date:
     """Return the retail calendar date used for Swedish offer validity."""
 
@@ -475,11 +480,11 @@ def price_candidate_for_context(
         raise ValueError('Purchase requires completion: ' + terms.usage)
     if terms and terms.usage == 'estimated':
         if planning_mode != 'estimated':
-            raise ValueError('Weight-dependent checkout requires estimated planning mode')
+            raise EstimatedPurchaseRequired('Weight-dependent checkout requires estimated planning mode')
         return _price_weight_candidate(candidate, context, on_date or current_pricing_date())
     if candidate.sale_model in {SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE}:
         if planning_mode != 'estimated':
-            raise ValueError('Weight-dependent checkout requires estimated planning mode')
+            raise EstimatedPurchaseRequired('Weight-dependent checkout requires estimated planning mode')
         candidate = candidate.model_copy(update={'quantity_confidence': 'estimated'})
     target_date = on_date or current_pricing_date()
     candidate = candidate.model_copy(update={"promotion_groups": tuple(

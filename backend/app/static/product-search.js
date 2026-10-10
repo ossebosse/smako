@@ -6,6 +6,7 @@
   const coverage = $("product-search-coverage");
   let controller, sequence = 0, next = null, detailKey = null;
   const money = (value) => value == null ? "Inte jämförd" : `${Number(value).toLocaleString("sv-SE", {minimumFractionDigits: 2, maximumFractionDigits: 2})} kr`;
+  const displayed = (price) => `${money(price.display_price ?? price.effective_price)}${price.display_price_unit ? `/${price.display_price_unit}` : ""}`;
   function node(tag, text, className) {
     const item = document.createElement(tag);
     if (text != null) item.textContent = text;
@@ -20,20 +21,20 @@
   }
   function priceLine(price) {
     const block = node("div", null, "product-context");
-    block.append(node("strong", `${price.store_name} · ${money(price.effective_price)}`));
+    block.append(node("strong", `${price.store_name} · ${displayed(price)}`));
     block.append(node("p", `${price.context_label}${price.membership_required ? ` · Medlemspris · ${price.membership_label}` : ""}`));
     if (price.unit_price != null) block.append(node("p", `${money(price.unit_price)}/${price.unit}`));
     if (price.comparison_reason) block.append(node("p", price.comparison_label));
     if (price.purchase_terms) {
-      block.append(node("p", `Belagt varupris: ${money(price.quoted_price)}${price.quoted_price_unit === "kg" ? "/kg" : ` för ${price.quoted_quantity || 1} förpackning(ar)/styck`}.`));
+      block.append(node("p", `Belagt varupris: ${money(price.quoted_price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ` för ${price.quoted_quantity || 1} förpackning(ar)/styck`}.`));
       if (price.purchase_terms.variant_selection === "required") block.append(node("p", "Välj en kampanjmärkt variant i butiken. Inte närings- eller allergigodkänd som specifik produkt."));
       if (price.purchase_terms.deposit_status === "unknown") block.append(node("p", "Pant är inte fastställd. Ingen komplett köptotal visas."));
       if (price.purchase_terms.exclusions.length) block.append(node("p", `Undantag: ${price.purchase_terms.exclusions.join("; ")}`));
     }
-    block.append(node("p", `Rapporterat grundpris (kan inkludera kampanj): ${money(price.regular_price)}`));
+    block.append(node("p", `Rapporterat grundpris (kan inkludera kampanj): ${money(price.regular_price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""}`));
     for (const offer of price.promotions) {
       const label = offer.membership_required ? `Medlemskampanj · ${offer.membership_label}` : "Kampanj";
-      block.append(node("p", `${label}: ${offer.required_packages > 1 ? `${offer.required_packages} för ` : ""}${money(offer.price)} · ${offer.description}${offer.membership_required ? (offer.eligible ? " · Gäller för ditt medlemskap" : " · Kräver medlemskap som inte är valt") : ""}${offer.max_quantity ? ` · Max ${offer.max_quantity} ${offer.required_packages > 1 ? "köpgrupper" : "förpackningar"}` : ""}${offer.valid_from || offer.valid_to ? ` · Gäller ${offer.valid_from || "?"}–${offer.valid_to || "?"}` : " · Giltighetsdatum saknas"}`));
+      block.append(node("p", `${label}: ${offer.required_packages > 1 ? `${offer.required_packages} för ` : ""}${money(offer.price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""} · ${offer.description}${offer.membership_required ? (offer.eligible ? " · Gäller för ditt medlemskap" : " · Kräver medlemskap som inte är valt") : ""}${offer.max_quantity ? ` · Max ${offer.max_quantity} ${offer.required_packages > 1 ? "köpgrupper" : "förpackningar"}` : ""}${offer.valid_from || offer.valid_to ? ` · Gäller ${offer.valid_from || "?"}–${offer.valid_to || "?"}` : " · Giltighetsdatum saknas"}`));
     }
     const source = node("details");
     source.append(node("summary", "Prisets källa och aktualitet"));
@@ -61,7 +62,7 @@
     const article = node("article", null, "product-result");
     const best = product.prices[0];
     article.append(node("h3", product.name), node("p", [product.brand, product.package].filter(Boolean).join(" · ")));
-    article.append(node("strong", money(product.best_price), "product-result-price"));
+    article.append(node("strong", displayed({...best, display_price:product.display_price ?? product.best_price}), "product-result-price"));
     article.append(node("p", `${best.store_name} · ${best.context_label}`));
     if (best.membership_required) article.append(node("span", `Medlemspris · ${best.membership_label}`, "product-offer-badge"));
     else if (product.has_campaign) article.append(node("span", "Kampanj finns · se villkor", "product-offer-badge"));

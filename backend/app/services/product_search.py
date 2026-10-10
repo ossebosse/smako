@@ -343,6 +343,20 @@ class ProductSearchIndex:
             unit_price = round(
                 effective * (1 if unit == "st" else 1000) / (quantity * product.package_quantity), 2
             )
+        weight_rate = None
+        if not fixed and eligible:
+            from app.services.basket_calculator import comparable_weight_rate
+            from app.services.user_pricing import price_candidate_for_context
+            try:
+                priced = price_candidate_for_context(ProductCandidate.from_product(product, 1),
+                    user, on_date=target_date, planning_mode="estimated")
+                weight_rate = comparable_weight_rate(priced)
+            except ValueError:
+                # Unknown quantity/cap/deposit remains blocked, never a zero quote.
+                pass
+            if weight_rate:
+                unit_price, unit = weight_rate
+        display_price = weight_rate[0] if weight_rate else effective if fixed and quantity == 1 and eligible else None
         online = store.price_semantics == "online_price" or (
             store.price_context_type or ""
         ).casefold() in {"online_fulfillment", "online_store"}
@@ -358,7 +372,7 @@ class ProductSearchIndex:
             "quoted_price": effective,
             "quoted_quantity": quantity,
             "purchase_eligible": eligible,
-            "quoted_price_unit": 'kg' if any(o.price_basis_unit == 'kg' for o in product.offers) else 'package',
+            "quoted_price_unit": unit if weight_rate else 'kg' if any(o.price_basis_unit == 'kg' for o in product.offers) else product.sale_unit if product.sale_model in {SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE} else 'package',
             "chain": store.chain,
             "store_name": store.name,
             "context_type": store.price_context_type,
@@ -369,15 +383,18 @@ class ProductSearchIndex:
             "regular_price": product.price,
             "current_public_price": public_price,
             "effective_price": effective if fixed and quantity == 1 and eligible else None,
-            "price_basis": "package" if fixed else "not_compared",
+            "display_price": display_price,
+            "display_price_unit": unit if weight_rate else None,
+            "price_basis": "unit" if weight_rate else "package" if fixed else "not_compared",
             "comparison_reason": (
-                "package_semantics_unproven"
+                "weighed_total_estimated" if weight_rate else "package_semantics_unproven"
                 if not fixed
                 else "quantity_not_verified"
                 if unit_price is None
                 else None
             ),
             "comparison_label": (
+                "Jämförpriset är belagt. Välj uppskattad vikt och kostnad för inköpsberäkning; slutbeloppet beror på faktisk vikt." if weight_rate else
                 "Varupris bevarat; komplett köpberäkning kräver komplettering: " + "; ".join(product.purchase_terms.critical_blockers or ("pant/mängdunderlag saknas",))
                 if product.purchase_terms and product.purchase_terms.usage == "blocked" else
                 ("Välj en kampanjmärkt variant; variantens innehåll och näring är inte verifierade."
@@ -451,8 +468,9 @@ class ProductSearchIndex:
             matching_chains.update(p["chain"] for p in prices)
             prices.sort(
                 key=lambda p: (
-                    p["effective_price"] is None,
-                    p["effective_price"] or float("inf"),
+                    p["display_price"] is None,
+                    p["display_price_unit"] or "package",
+                    p["display_price"] or float("inf"),
                     p["store_name"],
                 )
             )
@@ -470,6 +488,8 @@ class ProductSearchIndex:
                 "comparison_semantics": "same_product" if verified else "single_context_product",
                 "prices": prices,
                 "best_price": prices[0]["effective_price"],
+                "display_price": prices[0]["display_price"],
+                "display_price_unit": prices[0]["display_price_unit"],
                 "has_campaign": any(p["promotions"] for p in prices),
             }
             if request.view == "campaigns" and not row["has_campaign"]:
@@ -489,8 +509,9 @@ class ProductSearchIndex:
         results.sort(
             key=lambda r: (
                 0 if request.view != "relevance" or r["product_key"] in exact else 1,
-                r.get("sort_unit_price", r["best_price"]) is None,
-                r.get("sort_unit_price", r["best_price"]) or float("inf"),
+                r.get("sort_unit_price", r["display_price"]) is None,
+                "" if request.view == "unit" else r["display_price_unit"] or "package",
+                r.get("sort_unit_price", r["display_price"]) or float("inf"),
                 r["name"],
                 r["product_key"],
             )

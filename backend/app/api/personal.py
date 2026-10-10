@@ -342,7 +342,10 @@ async def _change_plan(plan_id, payload, request, response):
         raise HTTPException(
             422, "Ändringen strider mot antalet tillfällen eller vald fördelning."
         ) from exc
-    plan_request = saved.request.model_copy(update={"personal": spec})
+    updates = {"personal": spec}
+    if payload.purchase_planning_mode is not None:
+        updates["purchase_planning_mode"] = payload.purchase_planning_mode
+    plan_request = saved.request.model_copy(update=updates)
     plan = _with_release(
         await _run_personal_work(
             plan_request,

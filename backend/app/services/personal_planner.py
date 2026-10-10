@@ -541,6 +541,7 @@ class PersonalPlanner:
                 positions |= self.queries[key]
         candidates = []
         conflicts = []
+        weight_consent_missing = False
         for i in sorted(positions):
             product = self.prepared.universe.products[i]
             from app.services.official_product_facts import project_usable_quantity
@@ -670,6 +671,8 @@ class PersonalPlanner:
                 candidate = price_candidate_for_context(candidate, self.user, on_date=self.pricing_date,
                     planning_mode=self.request.purchase_planning_mode, allow_campaign_choice=campaign_choice)
             except ValueError as exc:
+                from app.services.user_pricing import EstimatedPurchaseRequired
+                weight_consent_missing |= isinstance(exc, EstimatedPurchaseRequired)
                 note(i, "price_contract", "stopped", str(exc))
                 if product.price is not None and product.sale_model not in {'sold_by_weight', 'variable_weight_package'}:
                     raise
@@ -683,7 +686,9 @@ class PersonalPlanner:
         self._resolution_trace[cache_key] = observed
         if not candidates:
             failure = conflicts[0] if conflicts else PolicyConflict(
-                f"Ingen verifierad köpbar vara för {name}, {unit}. Kontrollera mängden, egenskaperna eller exakt produkt.",
+                (f"{name} finns som viktvara. Välj Tillåt uppskattad vikt och kostnad under Inköpsberäkning för att pröva dessa varor. Slutbeloppet beror på faktisk vikt; övriga krav gäller fortfarande."
+                 if weight_consent_missing else
+                 f"Ingen verifierad köpbar vara för {name}, {unit}. Kontrollera mängden, egenskaperna eller exakt produkt."),
                 code="DATA_BLOCKED",
             )
             if failure.diagnostics is None:

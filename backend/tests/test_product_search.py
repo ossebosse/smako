@@ -207,7 +207,10 @@ def test_weight_rate_never_called_package_price():
     p = product(sale_model="sold_by_weight", sale_unit="kg")
     row = search(prepare(p))["results"][0]
     assert row["best_price"] is None
-    assert row["prices"][0]["price_basis"] == "not_compared"
+    assert row["prices"][0]["price_basis"] == "unit"
+    assert row["display_price"] == 49.9
+    assert row["display_price_unit"] == "kg"
+    assert row["prices"][0]["effective_price"] is None
 
 
 def test_public_campaign():
