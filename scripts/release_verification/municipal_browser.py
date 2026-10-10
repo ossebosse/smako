@@ -54,6 +54,9 @@ with sync_playwright() as pw:
             expect(page.locator("#municipality")).to_have_value("1281")
             expect(page.locator('#municipality option[value="1480"]')).to_be_disabled()
             expect(page.locator("#postal-code")).to_be_hidden()
+            first = page.locator("#context-lund1").locator("..").bounding_box()
+            second = page.locator("#context-lund7").locator("..").bounding_box()
+            assert second["y"] >= first["y"] + first["height"], "store labels must occupy separate rows"
             page.locator("#context-lund7").check()
             assert page.evaluate("controls.values().allowed_store_ids") == ["lund7"]
             page.locator("#municipality").select_option("1280")

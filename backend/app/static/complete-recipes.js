@@ -44,7 +44,7 @@
     const fish=input("recipe-allow-fish","checkbox","",{checked:true});
     grid.append(field("Ingrediensantal",preset),field("Högsta tillagningstid (min)",minutes),field("Minst protein per portion (g)",protein),field("Tillåtna anpassningar",adaptation));
     advanced.append(grid,custom,el("p","Alla rättens komponenter räknas tillsammans. Salt, peppar och vatten visas separat. Olja, kryddor och såser räknas. Skafferiet minskar inköpen, inte ingrediensantalet.","field-hint"),field("Tillåt fisk när övriga kostval medger det",fish));
-    const contexts=el("fieldset",null,"recipe-contexts");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och priskanaler"),el("p","Inget markerat betyder alla tillåtna inköpsställen i ditt prisområde. Valda butiker och onlinekanaler begränsar sökningen; ditt butikstak gäller fortfarande.","field-hint"));
+    const contexts=el("fieldset",null,"recipe-contexts complete-recipe-options");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och priskanaler"),el("p","Inget markerat betyder alla tillåtna inköpsställen i ditt prisområde. Valda butiker och onlinekanaler begränsar sökningen; ditt butikstak gäller fortfarande.","field-hint"));
     const contextOptions=el("div");const contextStatus=el("p",null,"field-hint");contextStatus.setAttribute("role","status");contexts.append(contextOptions,contextStatus);advanced.append(contexts);
     let selectedContexts=[],contextEpoch=0,contextPosition=null;
     let contextPostal=document.getElementById("postal-code")?.value.replace(/\s/g,"");
