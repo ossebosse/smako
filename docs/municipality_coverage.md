@@ -56,6 +56,24 @@ artifact building, not the app-only consumer controls. Local evidence is in
 `.local/municipal-rollout/`; remote private activation/backup evidence is under
 `/opt/smako/evidence/municipal-activation-f5b6aedc851d`.
 
+Live mobile controls passed in Chromium and WebKit on both the public form and
+personal **Mina val**, with the real 20 Lund contexts and disabled pending Malmö.
+No menu request was submitted by those browser checks. Evidence:
+`.local/municipal-rollout/live-controls-verified/results.json` and screenshots.
+The first attempts needed the ordinary onboarding dismissal and navigation to
+Mina val; fixture tests remain separate from these live checks.
+
+A small follow-up **`74d5c03` is not deployed**: moving the store choices outside
+the recipe mode exposed missing inherited label styling. It restores the
+existing form style, giving each store a separate readable row. Four offline
+Chromium/WebKit cases now assert row separation as well as store selection.
+The prepared app ZIP is
+`.local/municipal-rollout/pending-ui-packages/smako-municipal-app-74d5c03c619d.zip`,
+SHA-256 `2722feb94e034b2e1be422c0611c2b60b3d8fc95d0d50c5029b02e24af362fed`.
+Apply it at a later controlled app change after the current collection releases
+the operation lease; the running source and relay releases do not need a change
+for this presentation fix. Live app/source/installed relay remain `f5b6aed`.
+
 The municipal rollout extends the existing `municipal-collection-scopes-v1`
 registry with `refresh_scopes`. It does not add another scheduler. The ordinary
 refresh runner holds one operation lease and processes each enabled municipality

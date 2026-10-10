@@ -45,6 +45,15 @@ Windows/appens runtime är f5b6aed. Aktiverings- och bevarandebevis finns i
 samma lokala katalog; privat serverbackup under
 `/opt/smako/evidence/municipal-activation-f5b6aedc851d`.
 
+Fyra livefall Chromium/WebKit (publik sida och Mina val) PASS: 20 Lundbutikskryss,
+Malmö avaktiverat/pending, inga skickade menyberäkningar. Befintliga privata data
+återkontrollerade oförändrade efter browserproven.
+**Ej driftsatt UI-efterrättning:** `74d5c03` återanvänder formulärstilen så varje
+butik får en egen läsbar rad. Fyra offlinebrowserfall med radlayoutkontroll PASS;
+app-ZIP finns i `.local/municipal-rollout/pending-ui-packages/`. Vänta tills det
+pågående ordinarie refreshvarvet släppt operationslåset före nästa appbyte.
+Runtime i drift är fortfarande f5b6aed. Windowsbehörigheten ovan kvarstår.
+
 ---
 
 # 2026-10-10: Jämförbarhetskandidaten AKTIVERAD – samlad på master
