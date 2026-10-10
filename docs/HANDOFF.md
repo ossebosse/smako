@@ -1,4 +1,4 @@
-# 2026-10-10: Jämförbarhetskandidaten AKTIVERAD – master uppdateras
+# 2026-10-10: Jämförbarhetskandidaten AKTIVERAD – samlad på master
 
 App `comparability-app-5786d5fa6a0f` / image `ca1b3532…` och källprocess
 `comparability-source-5786d5fa6a0f` / image `63cc251f…` aktiverade
@@ -20,8 +20,10 @@ inte ny installation eller bred utredning. Samtliga fem baser fortsatt FRESH.
 
 [Utförd aktivering](releases/comparability-20261010/ACTIVATED.md),
 [sanerade livebevis](releases/comparability-20261010/ACTIVATED.json).
-Den aktuella användaren har godkänt uppdatering av `master` och push till
-`origin` (GitHub ossebosse/smako). Kandidatens tidigare ”ingen push/aktivering”
+`master` har fast-forwardats till det sammanhängande arbetet. Aktiveringscommit
+`713e5d2` verifierades på både `origin/master` och
+`origin/feature/comparability-20261010` efter vanlig push till GitHub
+ossebosse/smako. Kandidatens tidigare ”ingen push/aktivering”
 nedan beskriver dess historiska leveranstillstånd, inte nuvarande instruktion.
 
 ---
