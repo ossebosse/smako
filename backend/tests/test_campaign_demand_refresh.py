@@ -141,3 +141,29 @@ def test_municipal_catalogs_missing_from_first_artifact_remain_scheduled(tmp_pat
     fresh = runner.demand_refresh_plan(now=now, environment=env)
     assert not fresh['due_sources']
     assert datetime.fromisoformat(fresh['sources']['hemkop']['hard_stop_at']) == now + timedelta(hours=48)
+    # One rejected small-store catalog must not refetch the three fresh peers.
+    with sqlite3.connect(database) as db:
+        db.execute("DELETE FROM source_products WHERE store_external_id='4199'")
+    partial = runner.demand_refresh_plan(now=now, environment=env)
+    assert partial['due_sources'] == ['hemkop']
+    assert partial['source_context_overrides']['MUNICIPAL_HEMKOP_DUE_STORE_IDS'] == '4199'
+    state = partial['state']
+    # The first batch promoted three peers while 4199 failed. That peer success
+    # cannot clear 4199's backoff. No original source timestamp is modified.
+    runner._record_context_retries(state, 'hemkop', plan['sources']['hemkop'],
+                                   partial['sources']['hemkop'], now)
+    assert set(state['source_context_retries']['hemkop']) == {'4199'}
+    write(Path(env['DEMAND_REFRESH_STATE_PATH']), state)
+    waiting = runner.demand_refresh_plan(now=now + timedelta(minutes=14), environment=env)
+    assert not waiting['due_sources']
+    retry = runner.demand_refresh_plan(now=now + timedelta(minutes=16), environment=env)
+    assert retry['source_context_overrides']['MUNICIPAL_HEMKOP_DUE_STORE_IDS'] == '4199'
+    runner._record_context_retries(state, 'hemkop', retry['sources']['hemkop'],
+                                   retry['sources']['hemkop'], now + timedelta(minutes=16))
+    assert state['source_context_retries']['hemkop']['4199']['failures'] == 2
+    write(Path(env['DEMAND_REFRESH_STATE_PATH']), state)
+    assert not runner.demand_refresh_plan(now=now + timedelta(minutes=45), environment=env)['due_sources']
+    assert runner.demand_refresh_plan(now=now + timedelta(minutes=46), environment=env)['due_sources'] == ['hemkop']
+    with monkeypatch.context() as guard:
+        guard.setattr(operations_diagnostics, 'schema_holds', lambda root: {'hemkop': ['4199']})
+        assert not runner.demand_refresh_plan(now=now + timedelta(minutes=46), environment=env)['due_sources']

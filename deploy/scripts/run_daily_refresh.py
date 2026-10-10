@@ -490,6 +490,10 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
                 (physical['chain'], prov['provider_store_id'])).fetchone()
             key = physical['chain']
             item = sources.setdefault(key, {'observations': [], 'snapshots': []})
+            if key == 'hemkop' and env.get('MUNICIPAL_REFRESH_SCOPE'):
+                item.setdefault('contexts', {})[prov['provider_store_id']] = {
+                    'snapshots': [row[0]] if row and row[1] else [],
+                    'observed_at': row[1] if row and row[1] else None}
             if row and row[1]:
                 item['observations'].append(row[1]); item['snapshots'].append(row[0])
             else:
@@ -515,7 +519,22 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
         due = now if observed is None or source.get('missing') else base_fetch_due(
             observed, now=now, campaign_at=None if relay_source else campaign_at)
         retry = state.get('source_retries', {}).get(key)
-        if retry and retry['snapshots'] == source['snapshots']:
+        if source.get('contexts'):
+            context_times = []
+            source['due_store_ids'] = []
+            for identity, context in source['contexts'].items():
+                stamp = context['observed_at']
+                context_due = base_fetch_due(datetime.fromisoformat(stamp), now=now,
+                    campaign_at=campaign_at) if stamp else now
+                context_retry = state.get('source_context_retries', {}).get(key, {}).get(identity)
+                if context_retry and context_retry['snapshots'] == context['snapshots']:
+                    context_due = max(context_due, datetime.fromisoformat(context_retry['retry_at']))
+                context['next_fetch_at'] = context_due.isoformat()
+                context_times.append(context_due)
+                if context_due <= now:
+                    source['due_store_ids'].append(identity)
+            due = min(context_times)
+        elif retry and retry['snapshots'] == source['snapshots']:
             due = max(due, datetime.fromisoformat(retry['retry_at']))
         source.update(next_fetch_at=due.isoformat(), reason='local_relay_35h_deadline' if relay_source else 'base_35h_deadline_or_campaign_coalescing',
                       observed_at=observed.isoformat() if observed else None,
@@ -561,6 +580,13 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
             scoped_overrides[variable] = ','.join(allowed)
         else:
             remote_due.remove(chain)
+    if env.get('MUNICIPAL_REFRESH_SCOPE') and 'hemkop' in remote_due:
+        allowed = sorted(set(sources['hemkop']['due_store_ids']) - set(held.get('hemkop', [])))
+        sources['hemkop']['due_store_ids'] = allowed
+        if allowed:
+            scoped_overrides['MUNICIPAL_HEMKOP_DUE_STORE_IDS'] = ','.join(allowed)
+        else:
+            remote_due.remove('hemkop')
     work = bool(remote_due or reasons)
     if state.get('retry_at') and datetime.fromisoformat(state['retry_at']) > now:
         work = False
@@ -622,6 +648,10 @@ def _run_demand_locked(lock, *, started_at):
     retries = state.setdefault('source_retries', {})
     for key in plan['due_sources']:
         old, new = plan['sources'][key], after['sources'][key]
+        if old.get('contexts'):
+            _record_context_retries(state, key, old, new, ended)
+            retries.pop(key, None)
+            continue
         if old['snapshots'] == new['snapshots']:
             failures = retries.get(key, {}).get('failures', 0) + 1
             retries[key] = {'snapshots': new['snapshots'], 'failures': failures,
@@ -636,6 +666,22 @@ def _run_demand_locked(lock, *, started_at):
         state.update(failures=failures, retry_at=(ended + timedelta(minutes=min(360, 15 * 2 ** min(failures-1,5)))).isoformat())
     atomic_write_bytes(path, json.dumps(state, ensure_ascii=False).encode())
     return code
+
+
+def _record_context_retries(state, chain, before, after, ended):
+    """A successful peer must not reset another store's durable failure backoff."""
+    from datetime import timedelta
+
+    retries = state.setdefault('source_context_retries', {}).setdefault(chain, {})
+    for identity in before['due_store_ids']:
+        old = before['contexts'][identity]
+        new = after.get('contexts', {}).get(identity)
+        if new is None or old['snapshots'] != new['snapshots']:
+            retries.pop(identity, None)
+            continue
+        failures = retries.get(identity, {}).get('failures', 0) + 1
+        retries[identity] = {'snapshots': new['snapshots'], 'failures': failures,
+            'retry_at': (ended + timedelta(minutes=min(360, 15 * 2 ** min(failures - 1, 5)))).isoformat()}
 
 
 def main() -> int:

@@ -85,6 +85,16 @@ async def test_municipal_transport_rechecks_official_inventory_and_opt_in(tmp_pa
         injected = HemkopOperatorCrawlPolicy(True, frozenset({'9999', *expected}))
         with pytest.raises(HemkopSourcePolicyError):
             HemkopConnector.for_exact_full_collection('9999', policy=injected)
+        with monkeypatch.context() as selected:
+            identity = min(expected)
+            selected.setenv('MUNICIPAL_HEMKOP_DUE_STORE_IDS', identity + ',9999')
+            assert hemkop_policy(city, policy).allowed_store_ids == {identity}
+            other = next(i for i in expected if i != identity)
+            with pytest.raises(HemkopSourcePolicyError):
+                HemkopConnector.for_exact_full_collection(other, policy=policy)
+            selected.setenv('MUNICIPAL_HEMKOP_DUE_STORE_IDS', '')
+            with pytest.raises(HemkopSourcePolicyError):
+                HemkopConnector.for_exact_full_collection(identity, policy=policy)
         monkeypatch.setenv('HEMKOP_ALLOW_FULL_CRAWL', 'false')
         with pytest.raises(HemkopSourcePolicyError):
             HemkopConnector.for_exact_full_collection(min(expected), policy=policy)

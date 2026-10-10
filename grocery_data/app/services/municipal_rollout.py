@@ -134,6 +134,7 @@ def add_municipality(code, postal_code, *, environment=None, persist=False):
 def scoped_environment(scope, environment=None):
     """Fully bind every adapter; never inherit another municipality's ID/seed."""
     env = dict(os.environ if environment is None else environment)
+    env.pop('MUNICIPAL_HEMKOP_DUE_STORE_IDS', None)
     code, city = scope["municipality_code"], scope["city"]
     env.update(REFRESH_CITY=city, REFRESH_POSTAL_CODE=scope["postal_code"],
                REFRESH_MUNICIPALITY_CODE=code, MUNICIPAL_REFRESH_SCOPE=code,
@@ -179,8 +180,13 @@ def hemkop_policy(city, policy):
 
     root = Path(os.getenv("PRICE_UNIVERSE_CACHE_ROOT", "var/price_universes")).parent / "reports/operations"
     held = set(schema_holds(root).get("hemkop", []))
-    return replace(policy, allowed_store_ids=frozenset(
-        identity for identity, store in stores.items() if store.online_shopping is True and identity not in held))
+    allowed = {identity for identity, store in stores.items()
+               if store.online_shopping is True and identity not in held}
+    requested = os.getenv('MUNICIPAL_HEMKOP_DUE_STORE_IDS')
+    if requested is not None:
+        # Scheduling may only narrow freshly verified authority. Empty means none.
+        allowed.intersection_update(value.strip() for value in requested.split(',') if value.strip())
+    return replace(policy, allowed_store_ids=frozenset(allowed))
 
 
 @contextmanager
