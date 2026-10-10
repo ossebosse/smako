@@ -1,60 +1,48 @@
-# 2026-10-10: Kommunvis utökning aktiverad på servern – Windowssteg blockerat
+# 2026-10-10: Kommunvis drift – Windows aktiverat, Malmöacceptans pågår
 
 Gren `feature/municipality-rollout`, permanent rot `D:\Projects\Smako`.
-Användaren har bett om Malmö i kontinuerlig drift och en återanvändbar väg att
-lägga till fler kommuner, inklusive egna butikskryss/närhet. Detta är ett nytt
-arbete ovanpå den aktiverade jämförbarhetsreleasen nedan.
+Användaren vill lägga till kommuner successivt, med Malmö som första liveprov,
+kontinuerliga priser och val av närliggande/egna butiker.
 
-Kommunregistret binder ordinarie runner, kedjejobb, Willys-relä/import, separat
-prispublicering och flera laddade prisuniversum. Bootstrap/backoff, kommunbyte,
-butiksfilter även i vanlig optimerad meny och personlig inköpslista, närhetsval
-och scoped reload implementerade. Lunds sparade kedjekonfiguration bevaras vid
-första registreringen. Samma kod/register kan lägga till en tredje kommun.
-Willys v4-identitet rättad i separat commit `a162f94`; v3-källpaket kan fortfarande
-omkvalificeras. Ändrade/äldre råpriser får inte kringgå promotionsgrinden.
+Server app/source `f5b6aedc851d` aktiverades19:34 UTC under operationslåset;
+Lund1281/22350 och Malmö1280/21120 finns i samma register/ordinarie runner.
+Lund behåller giltigt prisuniversum. Malmö är ännu pending/ready503.
+Användaren har nu utfört administratörssteget. Den befintliga Windowsuppgiften
+kör `f5b6aedc851d -Municipalities` med scopes-föräldern. Konto, triggers och
+settings har jämförts oförändrade. Samma uppgift startades20:34:47 UTC;
+Malmös Willysinsamling pågår, fyra verifierade onlinebutiker, ingen kvittens än.
+Skapa inte någon parallell schemaläggning. Reläets separata Lunddata bevaras.
 
-216 unika fokuserade offlinefall passerade efter riktade rättningar; fyra
-Chromium/WebKit-kontrollfall med fixturer passerade. Ruff/compileall PASS.
-Dessutom 17 tester på slutlig appimage och 16 på separat källimage PASS.
-Inga nya Malmöpriser påstås. Se [driftväg och begränsningar](municipality_coverage.md),
-`.local/verification/municipal-test-summary.json` och tillhörande XML/browserbevis.
+Första Malmövarvet19:45–20:42 UTC misslyckades vid publicering eftersom
+Willys ännu saknades. ICA504 produkter, Coop2087 poster och Coop Online11494
+produkter kvalificerades. Separata erbjudandejobb hade23 lyckade ICA-butiker,
+fyra Hemköp, åtta Lidl och en City Gross; Coop/X:-tra har kvar källluckor.
+Se `.local/municipal-rollout/first-malmo-refresh-summary.json`,
+`first-malmo-source-coverage.json` och `current-pipeline-incidents.json`.
 
-Servern aktiverades 19:34 UTC (21:34 svensk tid), runtime `f5b6aedc851d`.
-Appimage `e26b8243…`, källimage `f1d95f80…`. Båda kommunerna registrerade under
-operationslåset. Lund ready200 med manifest `65dee955…` och 20 kontexter;
-Malmö pending/ready503 utan fabricerade priser. Ett första ordinarie runner-varv
-startades cirka19:35 UTC; komplett Malmöpublicering är ännu inte verifierad.
-Backup/integritet kontrollerade; alla252 planrevisioner och82 privata tillstånd
-hashbevarade. Samma scheman, mounts, policy och proxy. Den gamla tomma cron-
-processen behövde avslutas efter verifiering att inga jobb fanns i containern.
+**Ny verifierad kodrättning, ännu ej aktiverad:** `03f0691`.
+Hemköps planering valde rätt kommunbutiker men transporten läste fortfarande
+Lunds gamla allowlist. Alla fyra Malmöbutiker gav `HemkopSourcePolicyError`,
+reproducerat utan nätanrop. Transporten återläser nu samma registrerade,
+verifierade inventering som planeringen; opt-in, schemaholds och exakta ID:n
+behålls.21 fokuserade offlinefall PASS, Ruff/compileall PASS. Paket/imagebygge
+pågår under `.local/municipal-rollout/transport-fix-*`. Denna kandidat innehåller
+även UI-radlayoutfixen74d5c03. Den äldre UI-only74-imagen är inte aktiverad och
+ersätts av den kombinerade kandidaten. Windowsreläet behöver inte bytas för
+Hemköps servertransport.
 
-**Hinder:** `Set-ScheduledTask` nekades åtkomst. Windowsuppgiften kör därför
-fortfarande gamla Lundreläet fe795. Nytt relä f5b6aed är installerat och
-integritetskontrollerat i `D:\smako-local-relay\releases\f5b6aedc851d`.
-Kör `deploy/scripts/enable_municipal_relay.ps1` i administratörs-PowerShell med
-de exakta argumenten i kommuninstruktionen. Skriptet bevarar konto/schema och
-ändrar befintlig action till `-Municipalities` och gemensam scopes-förälder.
-Skapa inte en parallell uppgift. Verifiera sedan verklig Malmöinsamling,
-import/publicering/laddning och kvittens. Börja nästa kontroll med aktuell
-`scripts/smako_ops.py status`, och kontrollera pågående lås innan andra åtgärder.
+Nästa steg: aktuell `scripts/smako_ops.py status` och process/lease-kontroll;
+slutför kandidattester, ladda images och aktivera granskad diff under befintligt
+lås med backup när ordinarie jobb är färdiga. Avbryt inga hämtningar. Följ sedan
+Malmöinsamling → kvalificering → import → publicering → laddning → reläkvitto,
+och verkligt butiksvälj/menyprov. Förberedda lokala scripts finns i samma katalog.
 
-Använd **qualified-packages** och **municipal-images-qualified.tar** under
-`.local/municipal-rollout/`. Tidigt kombinerat sourcepaket var felaktigt och
-ska inte användas. Builder b00bcd6 separerar källprocessens äldre beroenden;
-Windows/appens runtime är f5b6aed. Aktiverings- och bevarandebevis finns i
-samma lokala katalog; privat serverbackup under
+Tidigare:216 unika fokuserade offlinefall,17 appimage- och16 sourceimagefall,
+fyra offlinebrowserfall samt fyra livekontrollfall för Lund PASS. De bevisar
+inte färdiga Malmöpriser. Alla252 befintliga planrevisioner och82 privata
+poster hashbevarade efter första aktiveringen. Serverbackup:
 `/opt/smako/evidence/municipal-activation-f5b6aedc851d`.
-
-Fyra livefall Chromium/WebKit (publik sida och Mina val) PASS: 20 Lundbutikskryss,
-Malmö avaktiverat/pending, inga skickade menyberäkningar. Befintliga privata data
-återkontrollerade oförändrade efter browserproven.
-**Ej driftsatt UI-efterrättning:** `74d5c03` återanvänder formulärstilen så varje
-butik får en egen läsbar rad. Fyra offlinebrowserfall med radlayoutkontroll PASS;
-app-ZIP finns i `.local/municipal-rollout/pending-ui-packages/`. Vänta tills det
-pågående ordinarie refreshvarvet släppt operationslåset före nästa appbyte.
-Runtime i drift är fortfarande f5b6aed. Windowsbehörigheten ovan kvarstår.
-Senaste processkontroll19:45:51 UTC: Lunds kommunvarv `complete`, ordinarie
-`daily-refresh --city Malmö` körs. Malmöpublicering/laddning/kvittens ännu okänd.
+[Driftväg och geografiskt kontrakt](municipality_coverage.md).
 
 ---
 

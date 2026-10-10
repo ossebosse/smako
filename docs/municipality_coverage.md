@@ -2,80 +2,50 @@
 
 ## Additive operation and consumer selection, activated 2026-10-10
 
-App and scheduler were activated at **19:34 UTC / 21:34 Swedish time**, runtime
-`f5b6aedc851d28ab6fb77e7c656bd10db63c1d62`. Malmö (`1280`, build key `21120`)
-and preserved Lund (`1281`, `22350`) are registered in the shared operation.
-Lund's live readiness is 200 with loaded manifest `65dee955…`; its 20 contexts
-remain available. Malmö is honestly `pending`, with readiness 503 until its
-first qualified artifact has been published and loaded. An ordinary refresh
-was started through the existing runner at approximately 19:35 UTC; this does
-not prove completed Malmö collection.
-At 19:45:51 UTC, Lund's municipal run reported `complete` and the actual
-`daily-refresh --city Malmö` process was running. Malmö publication, loading
-and receipt were still unverified at that observation.
+App and scheduler runtime `f5b6aedc851d` was activated19:34 UTC on2026-10-10.
+Lund1281/22350 and Malmö1280/21120 share the existing registry and runner.
+Lund remains usable. Malmö is still pending until authentic publication/reload.
 
-**Remaining operational blocker:** Windows returned `Access denied` when
-updating `Smako Willys Local Relay`. Its original action still uses release
-`fe795e5b04f5` and the Lund child workspace. The new immutable release
-`D:\smako-local-relay\releases\f5b6aedc851d` is installed and its 681-file
-integrity/import/dependency checks pass, but it is not used by the task yet.
-Do not describe Malmö's recurring Willys collection as enabled until this step
-succeeds. Run the following in **PowerShell as administrator** on this Windows
-machine; it changes only the existing task action and verifies unchanged
-principal, triggers and settings. The evidence directory must be new.
+The user completed the administrator action change. The existing **Smako Willys
+Local Relay** now runs release `D:\smako-local-relay\releases\f5b6aedc851d`
+with `-Municipalities -Workspace D:\smako-local-relay\scopes`. Principal,
+triggers and settings were compared unchanged. That same task was started at
+20:34:47 UTC; the Malmö child is collecting four officially matched online stores.
+No extra timer was created. Evidence: `windows-activation-verified.json` under
+`.local/municipal-rollout/`; administrator XML under
+`D:\smako-local-relay\municipal-task-activation-f5b6aed`.
 
-```powershell
-& 'D:\Projects\Smako\deploy\scripts\enable_municipal_relay.ps1' `
-  -ReleaseRoot 'D:\smako-local-relay\releases\f5b6aedc851d' `
-  -Workspace 'D:\smako-local-relay\scopes' `
-  -Config 'D:\smako-local-relay\config\relay.json' `
-  -EvidenceDirectory 'D:\smako-local-relay\municipal-task-activation-f5b6aed'
-```
+The first server Malmö run19:45–20:42 UTC failed publication because its Willys
+snapshot did not exist yet. ICA504, Coop2087 and Coop Online11494 product rows
+qualified. Optional source results:23 successful ICA stores (one missing
+integration), four Hemköp, eight Lidl and one City Gross. Coop/X:-tra retain
+blocked/incomplete publications. These counts are source-stage evidence, not
+proof of published selectable contexts or complete municipal coverage.
 
-Then use the existing task's next run (or start that same task once) and verify
-Malmö collection → qualified source → import → publication → runtime reload →
-receipt. Do not create another scheduler or relax retailer/freshness gates.
-The relay's existing SSH route already returns both registered municipalities.
+**Candidate03f0691, not yet activated:** the live run exposed Hemköp transport
+still checking the legacy Lund allowlist after municipal planning selected the
+correct stores. All four Malmö IDs failed with `HemkopSourcePolicyError`,
+reproduced without network calls. The transport now re-reads verified municipal
+inventory and schema holds, retains explicit crawl opt-in and rejects wrong
+municipality, unknown stores and missing evidence.21 focused offline tests pass.
+The candidate includes the74d5c03 store-label row layout fix. Packages/images
+are in `.local/municipal-rollout/transport-fix-*`; the older UI-only package is
+superseded without activation. Source and app candidate tests/activation remain
+to be completed under the existing lease; the Windows Willys runtime need not
+change for this server-side Hemköp correction.
 
-The activation held the shared lease, checked idle planning traffic and CPU,
-verified image/package hashes and a consistent PlanStore backup, and preserved
-the complete Compose configuration except app/scheduler image and BUILD_ID.
-All 252 existing plan revisions and 82 private states were checked unchanged by
-row hashes afterward. The idle old cron process ignored termination; after a
-fresh process check proved it had no jobs, that old container was terminated
-to complete the controlled replacement. No collecting process was killed.
-
-Qualified local packages are in `.local/municipal-rollout/qualified-packages/`,
-Windows ZIP in `final-relay/`, and the image archive is
-`municipal-images-qualified.tar` (SHA-256
-`830b85709c4bc7fb71ac899734c5e2583d099b3c4adb31703f6c65e511826163`).
-Only the qualified source package is accepted: an earlier combined package
-failed because the older source runtime lacks consumer recipe dependencies.
-Builder `b00bcd6` applies the reviewed source hunks against that runtime and
-keeps its consumer dependency tree. The app package is byte-identical to the
-previously tested candidate. Final container tests: **17 app, 16 source PASS**,
-network disabled; source tests cover collection orchestration and actual
-artifact building, not the app-only consumer controls. Local evidence is in
-`.local/municipal-rollout/`; remote private activation/backup evidence is under
+First activation evidence/backups remain under
 `/opt/smako/evidence/municipal-activation-f5b6aedc851d`.
+All252 prior plan revisions and82 private states were hash-preserved. Existing
+mounts, proxy, schedules and policy were retained. Earlier qualified packages
+are under `qualified-packages/`, relay ZIP under `final-relay/`; rejected early
+combined source packages must not be used. Builder b00bcd6 preserves the source
+container's older dependency tree by applying only reviewed feature hunks.
 
-Live mobile controls passed in Chromium and WebKit on both the public form and
-personal **Mina val**, with the real 20 Lund contexts and disabled pending Malmö.
-No menu request was submitted by those browser checks. Evidence:
-`.local/municipal-rollout/live-controls-verified/results.json` and screenshots.
-The first attempts needed the ordinary onboarding dismissal and navigation to
-Mina val; fixture tests remain separate from these live checks.
-
-A small follow-up **`74d5c03` is not deployed**: moving the store choices outside
-the recipe mode exposed missing inherited label styling. It restores the
-existing form style, giving each store a separate readable row. Four offline
-Chromium/WebKit cases now assert row separation as well as store selection.
-The prepared app ZIP is
-`.local/municipal-rollout/pending-ui-packages/smako-municipal-app-74d5c03c619d.zip`,
-SHA-256 `2722feb94e034b2e1be422c0611c2b60b3d8fc95d0d50c5029b02e24af362fed`.
-Apply it at a later controlled app change after the current collection releases
-the operation lease; the running source and relay releases do not need a change
-for this presentation fix. Live app/source/installed relay remain `f5b6aed`.
+Prior acceptance:17 appimage and16 sourceimage tests; four mobile live browser
+checks for public/personal Lund controls; four fixture browser cases including
+store-row separation. Live Malmö selection, actual menu calculation and the
+complete collection/import/publication/load/receipt chain are still pending.
 
 The municipal rollout extends the existing `municipal-collection-scopes-v1`
 registry with `refresh_scopes`. It does not add another scheduler. The ordinary
@@ -143,9 +113,9 @@ They do not prove live Malmö prices or retailer availability.
 
 The initial 19:02 UTC check was blocked by an ordinary Lund refresh. That job
 completed, published and loaded `65dee955…`; the subsequent controlled code
-activation is recorded above. Remaining live acceptance is the privileged
-Windows action update and authentic collection → import → publication → loaded
-universe → receipt for Malmö. City Gross or any blocked retailer must remain a
+activation is recorded above. The Windows action update is now verified;
+remaining live acceptance is authentic collection → import → publication →
+loaded universe → receipt for Malmö. City Gross or any blocked retailer must remain a
 reported coverage gap, never fabricated catalog coverage.
 
 The sections below describe the earlier geographic evidence contract; their
