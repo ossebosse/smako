@@ -525,7 +525,7 @@ def run_case(browser, engine, mobile, personal, args):
         page.locator("#shopping-content" if personal else "#shopping-section").screenshot(path=str(target / "shopping.png"))
         originals = {envelope["revision"]: envelope}
         assert digest(read_saved(context, args.base, envelope["plan_id"])) == digest(envelope)
-        if args.recipe_mode == "complete":
+        if args.recipe_mode == "complete" and not getattr(args, "allow_beta", False):
             if personal:
                 page.locator('.personal-nav [data-open="plan"]').click()
             open_recipes(page, personal)
@@ -712,6 +712,7 @@ def main():
     parser.add_argument("--expect-flag-off-after-restart", action="store_true", help="With restart handshake, require disabled creation controls and readable immutable complete recipes")
     parser.add_argument("--ignore-https-errors", action="store_true")
     parser.add_argument("--allow-nonlocal-isolated-target", action="store_true")
+    parser.add_argument("--allow-beta", action="store_true", help="Authorized beta acceptance, without fault injection or synthetic feedback")
     args = parser.parse_args()
     args.base = args.base.rstrip("/")
     args.meal_request=json.loads(args.meal_request.read_text(encoding="utf8")) if args.meal_request else None
@@ -722,7 +723,9 @@ def main():
         parser.error("--offline-seconds must be between 0 and 30")
     if args.expect_flag_off_after_restart and not args.restart_handshake:
         parser.error("--expect-flag-off-after-restart requires --restart-handshake")
-    if not args.allow_nonlocal_isolated_target and urlsplit(args.base).hostname not in {"localhost", "127.0.0.1", "::1"}:
+    if args.allow_beta and (args.base != "https://beta.smako.nu" or args.transport_fault != "none" or args.offline_seconds or args.restart_handshake):
+        parser.error("Beta acceptance requires the exact beta host, no injected fault and no restart")
+    if not (args.allow_nonlocal_isolated_target or args.allow_beta) and urlsplit(args.base).hostname not in {"localhost", "127.0.0.1", "::1"}:
         parser.error("Use an isolated local app, or explicitly identify a nonlocal isolated target with --allow-nonlocal-isolated-target")
     if args.recipe_mode == "legacy" and not args.skip_mutations:
         parser.error("Legacy long-job coverage uses --skip-mutations; complete revision controls apply to complete mode")

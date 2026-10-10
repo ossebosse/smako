@@ -1,4 +1,4 @@
-"""Mobile ordinary shopping UI over isolated retained prices, never production."""
+"""Mobile ordinary shopping UI over isolated inputs, or explicitly authorized beta."""
 
 import argparse
 import json
@@ -13,8 +13,9 @@ p = argparse.ArgumentParser()
 p.add_argument("--base", required=True)
 p.add_argument("--expected-build", required=True)
 p.add_argument("--output", type=Path, required=True)
+p.add_argument("--allow-beta", action="store_true", help="Explicitly authorized beta verification with new test identities")
 a = p.parse_args()
-assert a.base.startswith("http://127.0.0.1:")
+assert a.base.startswith("http://127.0.0.1:") or (a.allow_beta and a.base == "https://beta.smako.nu")
 a.output.mkdir(parents=True, exist_ok=False)
 for _ in range(120):
     try:

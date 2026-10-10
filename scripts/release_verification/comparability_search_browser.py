@@ -1,4 +1,4 @@
-"""Bounded public product-search UI check; no production or menu generation."""
+"""Bounded public product-search UI check; no menu generation; beta requires explicit opt-in."""
 
 import argparse
 import json
@@ -9,8 +9,9 @@ from playwright.sync_api import expect, sync_playwright
 p = argparse.ArgumentParser()
 p.add_argument("--base", required=True)
 p.add_argument("--output", type=Path, required=True)
+p.add_argument("--allow-beta", action="store_true", help="Explicitly authorized beta verification with new test identities")
 a = p.parse_args()
-assert a.base.startswith("http://127.0.0.1:")
+assert a.base.startswith("http://127.0.0.1:") or (a.allow_beta and a.base == "https://beta.smako.nu")
 a.output.mkdir(parents=True, exist_ok=False)
 with sync_playwright() as pw:
     for engine in ["chromium", "webkit"]:
