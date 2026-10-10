@@ -42,6 +42,7 @@ with sync_playwright() as pw:
             page.get_by_role('button', name='Mina val', exact=True).click()
             assert page.locator('input[name="membership"]:checked').count()==0
             page.get_by_role('button',name='Sök varor',exact=True).click()
+            expect(page.get_by_role('button',name='Sök',exact=True)).to_be_enabled(timeout=120000)
             page.locator('#product-query').fill('Satsumas')
             page.locator('#product-query').press('Enter')
             card=page.locator('#product-search-results article').filter(has=page.get_by_role('heading',name='Satsumas',exact=True)).filter(has_text='Coop Online Syd')

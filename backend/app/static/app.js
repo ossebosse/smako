@@ -164,6 +164,8 @@
   let physicalStoreOptionsPromise = null;
   let activeScanner = null;
   let plannerReady = false;
+  let readinessGeneration = 0;
+  let readinessController = null;
   // Transient request ownership is never persisted or inferred from restored DOM.
   const FRONTEND_VERSION = "complete-recipes-1";
   const recipeControls = window.SmakoRecipes.controls(document.getElementById("complete-recipe-controls"));
@@ -2608,6 +2610,9 @@
       try { window.localStorage.setItem(lastPlanStorageKey, plan.plan_id); } catch (_error) { /* Optional device-local convenience. */ }
     }
     renderResults(plan);
+    // A probe during a busy/reconnecting job may have timed out. Recheck the
+    // authoritative gate after delivery; a saved plan alone is not readiness.
+    if (!plannerReady) void loadPublicRuntimeStatus();
     window.SmakoRecipes.forgetJob("public");
     if (updateUrl && plan.plan_id) {
       const url = planUrl(plan.plan_id);
@@ -3272,12 +3277,17 @@
   }
 
   async function loadPublicRuntimeStatus() {
+    const generation = ++readinessGeneration;
+    readinessController?.abort();
+    const controller = new AbortController();
+    readinessController = controller;
     dom.serviceRetryButton.disabled = true;
     try {
-      const { response, payload } = await boundedRequest(new AbortController(), 15000, async (signal) => {
+      const { response, payload } = await boundedRequest(controller, 15000, async (signal) => {
         const response = await fetch("/ready", { headers: { Accept: "application/json" }, signal });
         return { response, payload: await responseJson(response) };
       });
+      if (generation !== readinessGeneration) return;
       if (!payload) throw new Error("readiness unavailable");
       frontendBuildId = String(first(payload, ["build_id", "app_version", "version"], "beta"));
       recipeControls.enabled(payload.features?.complete_recipes_enabled === true);
@@ -3288,13 +3298,17 @@
       const ready = response.ok && first(payload, ["status"], "not_ready") === "ready";
       setPlannerReadiness(ready);
     } catch (_error) {
+      if (generation !== readinessGeneration) return;
       dom.appVersion.textContent = "Publik beta";
       setPlannerReadiness(
         false,
         "Planeringstjänsten kan inte nås just nu. Kontrollera anslutningen och försök igen om en stund.",
       );
     } finally {
-      dom.serviceRetryButton.disabled = false;
+      if (generation === readinessGeneration) {
+        readinessController = null;
+        dom.serviceRetryButton.disabled = false;
+      }
     }
   }
 
