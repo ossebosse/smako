@@ -17,9 +17,17 @@ def main():
  assert subprocess.check_output(['docker','image','inspect',tag,'--format','{{.Id}}']).decode().strip()==image
  paths=subprocess.check_output(['git','diff','--name-only','f00f5304e544',commit,'--','backend/app','grocery_data/app']).decode().splitlines()
  if a.target=='source':paths=[f for f in paths if f.startswith('grocery_data/app/')]
+ else:paths=sorted(set(paths)|{'grocery_data/app/connectors/hemkop/models.py'})
  assert paths
  files={f:blob(commit,f) for f in paths}
  manifest={'schema':'comparability-patch-v1','target':a.target,'commit':commit,'base_commit':base,'base_image':image,'base_tag':tag,'files':{f:hashlib.sha256(v).hexdigest() for f,v in files.items()},'base_files':{f:hashlib.sha256(blob(base,f)).hexdigest() for f in paths}}
+ # The pinned app image predates the already-activated source picking fix.
+ # Include its exact dependency, without substituting an unverified base hash.
+ if a.target=='app':
+  manifest['base_files'].update({
+   'grocery_data/app/connectors/hemkop/parser.py':'0dac30a8fc26241a7be47269d1458966da505822f7939e80c74587623bd72dc5',
+   'grocery_data/app/connectors/hemkop/models.py':'c2075bde4f726dff180275c8accc640a80a3bc9a23b1b93d098e21033fe76e96'})
+  manifest['dependency_note']='Include existing reviewed source picking-context validation required by Hemkop parser; source release 04e47c691e0c. Consumer base image predates this source-only fix.'
  files['COMPARABILITY-PATCH.json']=json.dumps(manifest,indent=2).encode()
  files['verify-base.py']=b"import hashlib,json;from pathlib import Path;m=json.loads(Path('/tmp/COMPARABILITY-PATCH.json').read_bytes());assert all(hashlib.sha256((Path('/srv/app')/p).read_bytes()).hexdigest()==h for p,h in m['base_files'].items()),'base code mismatch'"
  copies='\n'.join(f'COPY --chown=app:app {f} /srv/app/{f}' for f in paths)

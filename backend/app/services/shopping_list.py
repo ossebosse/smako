@@ -60,7 +60,7 @@ def price_free_products(result):
         row["package"] = "Köpförpackning – innehållsmängd okänd" if row["purchase_units"] else row["package"] or "Förpackningsstorlek saknas"
         brand = row["brand"] or ""
         row["display_name"] = (brand + " " + row["name"]) if brand.casefold() not in row["name"].casefold() else row["name"]
-        label = (row["name"], brand, row["package_quantity"], row["package_unit"], row["package"], row["purchase_units"], row["campaign_choice"], row["product_key"] if row["campaign_choice"] else None)
+        label = (row["name"], brand, row["package_quantity"], row["package_unit"], row["package"], row["purchase_units"], row["campaign_choice"], row["product_key"] if row["campaign_choice"] or row["purchase_units"] else None)
         if label not in groups:
             groups[label] = {**row, "matches": []}
         group = groups[label]
