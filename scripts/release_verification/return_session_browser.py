@@ -8,6 +8,7 @@ import argparse
 import json
 import subprocess
 import time
+import urllib.request
 from pathlib import Path
 
 from playwright.sync_api import expect, sync_playwright
@@ -16,9 +17,23 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--base", default="http://127.0.0.1:18130")
 parser.add_argument("--output", type=Path, required=True)
 parser.add_argument("--before-ref")
+parser.add_argument("--expected-build")
 a = parser.parse_args()
 assert a.base.startswith("http://127.0.0.1:")
 a.output.mkdir(parents=True, exist_ok=False)
+for attempt in range(120):
+    try:
+        with urllib.request.urlopen(a.base + "/ready", timeout=3) as response:
+            ready = json.load(response)
+        if ready["status"] == "ready" and (
+            not a.expected_build or ready["build_id"] == a.expected_build
+        ):
+            break
+    except OSError:
+        pass
+    time.sleep(1)
+else:
+    raise TimeoutError("Expected isolated app was not ready")
 reports = []
 with sync_playwright() as pw:
     for engine in ("chromium", "webkit"):
@@ -37,6 +52,9 @@ with sync_playwright() as pw:
                 )
         page = context.new_page()
         errors = []
+        failed = []
+        injected_resets = []
+        page.on("requestfailed", lambda r, *, failed=failed: failed.append(r))
         page.on("pageerror", lambda e, *, errors=errors: errors.append(str(e)))
         page.goto(a.base + "/personal#shopping")
         expect(page.locator("#add-shopping-item")).to_be_enabled(timeout=120000)
@@ -178,9 +196,12 @@ with sync_playwright() as pw:
             page.evaluate("m => SmakoRecipes.storage.set('smako.planJob.personal', m)", marker)
             reconnect_calls = []
 
-            def reset_once(route, *, reconnect_calls=reconnect_calls):
+            def reset_once(
+                route, *, reconnect_calls=reconnect_calls, injected_resets=injected_resets
+            ):
                 reconnect_calls.append(route.request.method)
                 if len(reconnect_calls) == 1:
+                    injected_resets.append(route.request)
                     route.abort("connectionreset")
                 else:
                     route.continue_()
@@ -213,10 +234,13 @@ with sync_playwright() as pw:
             ):
                 calls = []
 
-                def inject(route, *, calls=calls, codes=codes, case=case):
+                def inject(
+                    route, *, calls=calls, codes=codes, case=case, injected_resets=injected_resets
+                ):
                     calls.append(route.request.method)
                     code = codes[min(len(calls) - 1, len(codes) - 1)]
                     if code == 0:
+                        injected_resets.append(route.request)
                         route.abort("connectionreset")
                     elif case == "invalid_body":
                         route.fulfill(
@@ -256,6 +280,17 @@ with sync_playwright() as pw:
         assert page.request.get(a.base + "/api/plans/" + plan_id).json() == saved
         report["saved_revision_unchanged"] = True
         report["page_errors"] = errors
+        report["failed_requests"] = [
+            {
+                "path": r.url.removeprefix(a.base),
+                "method": r.method,
+                "failure": r.failure,
+                "injected": r in injected_resets,
+            }
+            for r in failed
+        ]
+        if not a.before_ref:
+            assert all(r in injected_resets for r in failed), report["failed_requests"]
         assert not errors
         (a.output / (engine + ".json")).write_text(
             json.dumps(report, ensure_ascii=False, indent=2), encoding="utf8"

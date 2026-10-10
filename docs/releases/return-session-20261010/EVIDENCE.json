@@ -1,0 +1,272 @@
+{
+  "runtime": "205cd8ca0f31a7de296abe815b674ad1cfa518ec",
+  "image": {
+    "commit": "205cd8ca0f31a7de296abe815b674ad1cfa518ec",
+    "image": "sha256:853d5b98b3df4a29e38bb5ff9d35a0d8add6ba247458e33a4e8c8a31073ec7a3",
+    "tag": "smako-return-session:205cd8ca0f31",
+    "build_id": "return-session-205cd8ca0f31"
+  },
+  "package": {
+    "file": "smako-return-session-205cd8ca0f31.zip",
+    "bytes": 51880,
+    "sha256": "e2a9c287c5aa1e1dec98552fccd7857680485daaa121d3ca3319e3fc08314ab9"
+  },
+  "served_files": {
+    "backend/app/static/complete-recipes.js": {
+      "sha256": "4a5c264e6fc548377378d4cc6c783c030526c0f05ec5ca1a35d4107e8d615e29",
+      "match": true
+    },
+    "backend/app/static/personal.js": {
+      "sha256": "c09e53ae42b0bb384b5cddd10bb8a247521e57814d78bea511e85747ceb7b1df",
+      "match": true
+    },
+    "backend/app/static/personal.html": {
+      "sha256": "fb58d7d1c68619d3e04d176f046e471e7beaac2fe013187c1d8263c308c72d53",
+      "match": true
+    },
+    "backend/app/static/index.html": {
+      "sha256": "5e0ceafb55d0b234dd1b5bf7161f27c77a2d8f6788599f51e7e9f665bae95aab",
+      "match": true
+    }
+  },
+  "before": [
+    {
+      "browser": "chromium",
+      "real_audit": true,
+      "double_start_posts": 1,
+      "owner_isolation": 403,
+      "cases": {
+        "price_gate": {
+          "result": "FAIL",
+          "status": "Anslutningen avbröts. Återansluter till samma menyberäkning…",
+          "posts": 2,
+          "pending": true
+        },
+        "job_expired": {
+          "result": "FAIL",
+          "saved_before_status": [
+            false
+          ],
+          "pending": false
+        },
+        "unconfirmed_expired": {
+          "result": "FAIL",
+          "saved_before_status": [
+            false
+          ],
+          "pending": true
+        }
+      },
+      "saved_revision_unchanged": true,
+      "page_errors": []
+    },
+    {
+      "browser": "webkit",
+      "real_audit": true,
+      "double_start_posts": 1,
+      "owner_isolation": 403,
+      "cases": {
+        "price_gate": {
+          "result": "FAIL",
+          "status": "Anslutningen avbröts. Återansluter till samma menyberäkning…",
+          "posts": 2,
+          "pending": true
+        },
+        "job_expired": {
+          "result": "FAIL",
+          "saved_before_status": [
+            false
+          ],
+          "pending": false
+        },
+        "unconfirmed_expired": {
+          "result": "FAIL",
+          "saved_before_status": [
+            false
+          ],
+          "pending": true
+        }
+      },
+      "saved_revision_unchanged": true,
+      "page_errors": []
+    }
+  ],
+  "packaged": [
+    {
+      "browser": "chromium",
+      "real_audit": true,
+      "double_start_posts": 1,
+      "owner_isolation": 403,
+      "cases": {
+        "price_gate": "PASS",
+        "job_expired": "PASS",
+        "unconfirmed_expired": "PASS",
+        "real_job_reconnect": {
+          "result": "PASS",
+          "injected_status_reset": 1,
+          "same_job": true,
+          "extra_posts": 0
+        },
+        "unauthorized": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST"
+          ]
+        },
+        "forbidden": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST"
+          ]
+        },
+        "temporary_503": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST",
+            "POST"
+          ]
+        },
+        "invalid_body": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST"
+          ]
+        },
+        "lost_start": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST",
+            "GET",
+            "GET",
+            "GET",
+            "GET"
+          ]
+        }
+      },
+      "saved_revision_unchanged": true,
+      "page_errors": [],
+      "failed_requests": [
+        {
+          "path": "/api/plan-jobs/a10ad455065b4f2382ce333f4de313da",
+          "method": "GET",
+          "failure": "net::ERR_CONNECTION_RESET",
+          "injected": true
+        },
+        {
+          "path": "/api/plans",
+          "method": "POST",
+          "failure": "net::ERR_CONNECTION_RESET",
+          "injected": true
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "real_audit": true,
+      "double_start_posts": 1,
+      "owner_isolation": 403,
+      "cases": {
+        "price_gate": "PASS",
+        "job_expired": "PASS",
+        "unconfirmed_expired": "PASS",
+        "real_job_reconnect": {
+          "result": "PASS",
+          "injected_status_reset": 1,
+          "same_job": true,
+          "extra_posts": 0
+        },
+        "unauthorized": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST"
+          ]
+        },
+        "forbidden": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST"
+          ]
+        },
+        "temporary_503": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST",
+            "POST"
+          ]
+        },
+        "invalid_body": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST"
+          ]
+        },
+        "lost_start": {
+          "result": "PASS",
+          "injected": true,
+          "methods": [
+            "POST",
+            "GET",
+            "GET",
+            "GET",
+            "GET"
+          ]
+        }
+      },
+      "saved_revision_unchanged": true,
+      "page_errors": [],
+      "failed_requests": [
+        {
+          "path": "/api/plan-jobs/ba66f1f5b21b4c308e42af777e003bde",
+          "method": "GET",
+          "failure": "Blocked by Web Inspector",
+          "injected": true
+        },
+        {
+          "path": "/api/plans",
+          "method": "POST",
+          "failure": "Blocked by Web Inspector",
+          "injected": true
+        }
+      ]
+    }
+  ],
+  "public_gate": [
+    {
+      "browser": "chromium",
+      "case": "public_price_gate",
+      "injected": true,
+      "posts": 1,
+      "pending": false,
+      "page_errors": [],
+      "status": "PASS"
+    },
+    {
+      "browser": "webkit",
+      "case": "public_price_gate",
+      "injected": true,
+      "posts": 1,
+      "pending": false,
+      "page_errors": [],
+      "status": "PASS"
+    }
+  ],
+  "backend_tests": {
+    "local_passed": 28,
+    "packaged_passed": 28,
+    "files": [
+      "backend/tests/test_plan_jobs.py",
+      "backend/tests/test_consumer_static_ui.py",
+      "backend/tests/test_shopping_list.py"
+    ]
+  },
+  "test_script_sha256": "3c65015a24f452d9537e7628b6db33455c3783eb6bce8d9d439b5ffffc879ae4"
+}

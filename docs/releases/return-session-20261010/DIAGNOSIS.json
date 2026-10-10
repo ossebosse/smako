@@ -1,0 +1,389 @@
+{
+  "checked_at": "2026-10-10T06:55:12.331981+00:00",
+  "runtime": "source-ops-ce326c1d7fcf",
+  "ready": {
+    "http_status": 503,
+    "body": {
+      "status": "not_ready",
+      "database": "ok",
+      "plan_store": "ok",
+      "price_universe": {
+        "active": true,
+        "required_contexts_usable": false,
+        "missing_required_context_ids": [
+          "context:willys:383650ec6ff5a636",
+          "context:willys:4a671428fc484e43"
+        ],
+        "usable_context_ids": [
+          "context:coop:23eaae11c9661e68",
+          "context:hemkop:3288e04edd97e349",
+          "context:hemkop:756955d0e6e05f23",
+          "context:ica:0edf5d52980ffcd7",
+          "context:ica:1a19476898da3fb0",
+          "context:ica:24c415e3af6438b4",
+          "context:ica:2d734344abd8c685",
+          "context:ica:3d991cfe2014eb8c",
+          "context:ica:602d84df14d47e3d",
+          "context:ica:7b8c7bd0161c50dc",
+          "context:ica:7f1f6e52c3152f98",
+          "context:ica:b7a8ac31980d0bd7",
+          "context:ica:b7ad17cc0a7001fd",
+          "context:ica:cb840c0edbf56816",
+          "context:ica:e03aeae83df25aa4",
+          "context:lidl:05f1cb3d9fc89bc3",
+          "context:lidl:46dd1e85257757e0",
+          "context:willys:f3f63d6851275fcc"
+        ],
+        "requires_attention": true,
+        "warning_age_hours": 36.0,
+        "stale_age_hours": 48.0,
+        "status": "degraded",
+        "price_universe_id": "price-universe:2c32fcefb1c4d2b92f88856b3bceb1727baff514bc8a8833074cfd06ae348341",
+        "built_at": "2026-10-09 22:37:32.849698+00:00",
+        "oldest_price_age_hours": 55.396,
+        "oldest_usable_price_age_hours": 42.861,
+        "hours_until_oldest_usable_stale": 5.139,
+        "usable_context_count": 18,
+        "excluded_stale_context_count": 2,
+        "excluded_stale_context_ids": [
+          "context:willys:383650ec6ff5a636",
+          "context:willys:4a671428fc484e43"
+        ],
+        "product_count": 2245
+      },
+      "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+      "build_id": "shopping-list-6b10628f22d8",
+      "features": {
+        "complete_recipes_enabled": true
+      }
+    }
+  },
+  "disk_manifest": "price-universe:2c32fcefb1c4d2b92f88856b3bceb1727baff514bc8a8833074cfd06ae348341",
+  "loaded_manifest": "price-universe:2c32fcefb1c4d2b92f88856b3bceb1727baff514bc8a8833074cfd06ae348341",
+  "required_contexts": [
+    {
+      "context_id": "context:coop:23eaae11c9661e68",
+      "chain": "coop",
+      "store_id": "730400",
+      "channel": "online_fulfillment",
+      "snapshot_id": "8d1dba204e45414e96be4501fad38b2a",
+      "observed_at": "2026-10-09T13:30:54.726697+00:00",
+      "age_hours": 17.405,
+      "freshness": "FRESH",
+      "remaining_hours": 30.595,
+      "qualified": true,
+      "published": true,
+      "loaded": true,
+      "receipt": "unknown_until_relay_read",
+      "stage": "loaded",
+      "source_artifact_sha256": null,
+      "serving_source": {
+        "snapshot_id": "8d1dba204e45414e96be4501fad38b2a",
+        "observed_at": "2026-10-09T13:30:54.726697+00:00",
+        "age_hours": 17.405
+      },
+      "freshness_risk": false,
+      "publication_overdue": false,
+      "first_failed_step": null,
+      "incident_ids": []
+    },
+    {
+      "context_id": "context:hemkop:3288e04edd97e349",
+      "chain": "hemkop",
+      "store_id": "4224",
+      "channel": "online_store",
+      "snapshot_id": "e45cd4719bc640918977e65b4c3bf77c",
+      "observed_at": "2026-10-08T13:58:34.984628+00:00",
+      "age_hours": 40.944,
+      "freshness": "AGING",
+      "remaining_hours": 7.056,
+      "qualified": true,
+      "published": true,
+      "loaded": true,
+      "receipt": "unknown_until_relay_read",
+      "stage": "loaded",
+      "source_artifact_sha256": null,
+      "serving_source": {
+        "snapshot_id": "e45cd4719bc640918977e65b4c3bf77c",
+        "observed_at": "2026-10-08T13:58:34.984628+00:00",
+        "age_hours": 40.944
+      },
+      "freshness_risk": false,
+      "publication_overdue": false,
+      "first_failed_step": "qualification",
+      "incident_ids": [
+        "source-246b51f6d7858eed53f12a57"
+      ]
+    },
+    {
+      "context_id": "context:hemkop:756955d0e6e05f23",
+      "chain": "hemkop",
+      "store_id": "4123",
+      "channel": "online_store",
+      "snapshot_id": "d621ab31a2af4083ad13c1d070691f9e",
+      "observed_at": "2026-10-08T12:03:33.407624+00:00",
+      "age_hours": 42.861,
+      "freshness": "AGING",
+      "remaining_hours": 5.139,
+      "qualified": true,
+      "published": true,
+      "loaded": true,
+      "receipt": "unknown_until_relay_read",
+      "stage": "loaded",
+      "source_artifact_sha256": null,
+      "serving_source": {
+        "snapshot_id": "d621ab31a2af4083ad13c1d070691f9e",
+        "observed_at": "2026-10-08T12:03:33.407624+00:00",
+        "age_hours": 42.861
+      },
+      "freshness_risk": false,
+      "publication_overdue": false,
+      "first_failed_step": "qualification",
+      "incident_ids": [
+        "source-4d6a2a3b38cca8aa517c9b8b"
+      ]
+    },
+    {
+      "context_id": "context:willys:383650ec6ff5a636",
+      "chain": "willys",
+      "store_id": "2176",
+      "channel": "online_store",
+      "snapshot_id": "72c524df46c34fe69af362158af38692",
+      "observed_at": "2026-10-07T23:31:27.443160+00:00",
+      "age_hours": 55.396,
+      "freshness": "STALE",
+      "remaining_hours": -7.396,
+      "qualified": true,
+      "published": true,
+      "loaded": true,
+      "receipt": "unknown_until_relay_read",
+      "stage": "loaded",
+      "source_artifact_sha256": "d53486fb8c90740ecb68901bb6a333148eed2a37aefe9bb84ed8958715686c98",
+      "serving_source": {
+        "snapshot_id": "72c524df46c34fe69af362158af38692",
+        "observed_at": "2026-10-07T23:31:27.443160+00:00",
+        "age_hours": 55.396
+      },
+      "freshness_risk": true,
+      "publication_overdue": false,
+      "first_failed_step": "qualification",
+      "incident_ids": [
+        "source-0a08281142660632dd42eab6"
+      ]
+    },
+    {
+      "context_id": "context:willys:4a671428fc484e43",
+      "chain": "willys",
+      "store_id": "2354",
+      "channel": "online_store",
+      "snapshot_id": "72c524df46c34fe69af362158af38692",
+      "observed_at": "2026-10-07T23:51:22.161079+00:00",
+      "age_hours": 55.064,
+      "freshness": "STALE",
+      "remaining_hours": -7.064,
+      "qualified": true,
+      "published": true,
+      "loaded": true,
+      "receipt": "unknown_until_relay_read",
+      "stage": "loaded",
+      "source_artifact_sha256": "d53486fb8c90740ecb68901bb6a333148eed2a37aefe9bb84ed8958715686c98",
+      "serving_source": {
+        "snapshot_id": "72c524df46c34fe69af362158af38692",
+        "observed_at": "2026-10-07T23:51:22.161079+00:00",
+        "age_hours": 55.064
+      },
+      "freshness_risk": true,
+      "publication_overdue": false,
+      "first_failed_step": "qualification",
+      "incident_ids": [
+        "source-0a08281142660632dd42eab6"
+      ]
+    }
+  ],
+  "storage": {
+    "free_bytes": 5202354176,
+    "required_estimate_bytes": 8693828112,
+    "adequate": false,
+    "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+  },
+  "source_incidents": [
+    {
+      "incident_id": "source-0a08281142660632dd42eab6",
+      "code": "SOURCE_SCHEMA_CHANGED",
+      "snapshot_id": "75f802ebbfcc410c9d65e356746f0816",
+      "parser_version": "willys-parser-v3",
+      "failed_step": "qualification",
+      "observed": {
+        "schema_diff": {
+          "added": [],
+          "removed": [],
+          "type_changed": [
+            {
+              "path": "2354:catalog_page:$[].results[].image.format",
+              "old_types": [
+                "null",
+                "string"
+              ],
+              "new_types": [
+                "string"
+              ]
+            },
+            {
+              "path": "2354:catalog_page:$[].results[].image.imageType",
+              "old_types": [
+                "null",
+                "string"
+              ],
+              "new_types": [
+                "string"
+              ]
+            },
+            {
+              "path": "2354:catalog_page:$[].results[].image.url",
+              "old_types": [
+                "null",
+                "string"
+              ],
+              "new_types": [
+                "string"
+              ]
+            },
+            {
+              "path": "2354:catalog_page:$[].results[].thumbnail.format",
+              "old_types": [
+                "null",
+                "string"
+              ],
+              "new_types": [
+                "string"
+              ]
+            },
+            {
+              "path": "2354:catalog_page:$[].results[].thumbnail.imageType",
+              "old_types": [
+                "null",
+                "string"
+              ],
+              "new_types": [
+                "string"
+              ]
+            },
+            {
+              "path": "2354:catalog_page:$[].results[].thumbnail.url",
+              "old_types": [
+                "null",
+                "string"
+              ],
+              "new_types": [
+                "string"
+              ]
+            }
+          ]
+        },
+        "completion": {
+          "2176": {
+            "complete": true,
+            "limited": false,
+            "expected_categories": 448,
+            "completed_categories": 448,
+            "pages_fetched": 662,
+            "products_observed": 10367,
+            "expected_products": null,
+            "raw_rows": null,
+            "unique_products": null,
+            "duplicate_products": null,
+            "expected_pages": null,
+            "reason": null
+          },
+          "2354": {
+            "complete": true,
+            "limited": false,
+            "expected_categories": 430,
+            "completed_categories": 430,
+            "pages_fetched": 584,
+            "products_observed": 8741,
+            "expected_products": null,
+            "raw_rows": null,
+            "unique_products": null,
+            "duplicate_products": null,
+            "expected_pages": null,
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "incident_id": "source-246b51f6d7858eed53f12a57",
+      "code": "SOURCE_SCHEMA_CHANGED",
+      "snapshot_id": "eb7f4129141c4bd892702f0c5abc3b56",
+      "parser_version": "hemkop-parser-v1.1-picking-contract",
+      "failed_step": "qualification",
+      "observed": {
+        "schema_diff": {
+          "added": [],
+          "removed": [
+            "4224:store_context:$[].hasPickingBaseStore",
+            "stores:$[][].hasPickingBaseStore"
+          ],
+          "type_changed": []
+        },
+        "completion": {
+          "4224": {
+            "complete": true,
+            "limited": false,
+            "expected_categories": 20,
+            "completed_categories": 20,
+            "pages_fetched": 68,
+            "products_observed": 5132,
+            "expected_products": 5665,
+            "raw_rows": 5665,
+            "unique_products": 5132,
+            "duplicate_products": 533,
+            "within_partition_duplicates": 1,
+            "cross_partition_duplicates": 532,
+            "exact_duplicates_removed": 1,
+            "conflicting_duplicates": 0,
+            "pagination_overlaps": 1,
+            "expected_pages": 68,
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "incident_id": "source-4d6a2a3b38cca8aa517c9b8b",
+      "code": "SOURCE_SCHEMA_CHANGED",
+      "snapshot_id": "0f1daad517a74f8fb9066cdf069ba7c1",
+      "parser_version": "hemkop-parser-v1.1-picking-contract",
+      "failed_step": "qualification",
+      "observed": {
+        "schema_diff": {
+          "added": [],
+          "removed": [
+            "4123:store_context:$[].hasPickingBaseStore",
+            "stores:$[][].hasPickingBaseStore"
+          ],
+          "type_changed": []
+        },
+        "completion": {
+          "4123": {
+            "complete": true,
+            "limited": false,
+            "expected_categories": 20,
+            "completed_categories": 20,
+            "pages_fetched": 81,
+            "products_observed": 6294,
+            "expected_products": 6997,
+            "raw_rows": 6997,
+            "unique_products": 6294,
+            "duplicate_products": 703,
+            "within_partition_duplicates": 0,
+            "cross_partition_duplicates": 703,
+            "expected_pages": 81,
+            "reason": null
+          }
+        }
+      }
+    }
+  ]
+}

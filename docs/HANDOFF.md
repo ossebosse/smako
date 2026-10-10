@@ -1,3 +1,19 @@
+# 2026-10-10: Fel vid återkomst – rättad kandidat, prisdrift fortfarande spärrad
+
+Gren `fix/return-session-20261010`, runtime `205cd8ca0f31`.
+Frontend återförsökte avsiktlig prisgate-503 som nätfel och återläste gamla
+jobb före sparad korg. Rättat, 28 lokala + 28 paketerade tester och strikta
+Chromium/WebKit-prov PASS. Fyra serverade filhashar verifierade.
+**Inte aktiverad, ingen push.** Beta kvar på `shopping-list-6b10628f22d8`.
+Senaste /ready 503 vid 2026-10-10 06:55 UTC: Willys >55 h, PlanStore/DB OK.
+Källvalidering blockerar nya Willys- och Hemköpsunderlag; ingen dataradering.
+Servermarginal otillräcklig för ordinarie import (5,20 GB ledigt mot 8,69 GB).
+[Resultat, precis diagnos och återstående steg](releases/return-session-20261010/RESULTS.md),
+[separat app-only-anvisning](releases/return-session-20261010/ACTIVATION.md).
+Börja fortfarande med ordinarie `smako_ops.py status`, inte gamla statusvärden.
+
+---
+
 # 2026-10-09: Inköpslistan och snabbmenyn AKTIVERADE
 
 Beta kör `shopping-list-6b10628f22d8`, image `a5b678ca…`, sedan 16:48 UTC.
