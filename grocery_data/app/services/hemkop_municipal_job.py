@@ -59,13 +59,13 @@ def source_inputs(*, city):
         return {}
 
 
-def catalog_stores(city):
+def catalog_stores(city, *, environment=None):
     """Official municipal selection for catalog discovery, independent of offers."""
     from grocery_data.app.services.municipal_rollout import scope_for_city
 
-    if scope_for_city(city) is None:
+    if scope_for_city(city, environment) is None:
         return None
-    area, root, enabled = configuration(city)
+    area, root, enabled = configuration(city, environment=environment)
     if not enabled:
         return {}
     state = read(root / 'source-state.json')

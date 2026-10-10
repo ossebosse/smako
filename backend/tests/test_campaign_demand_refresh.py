@@ -73,3 +73,71 @@ def test_no_due_tick_restart_base_deadline_and_new_source_promotion(tmp_path,mon
 def test_campaign_tick_replaces_full_daily_and_retry_but_retains_backup(monkeypatch):
     monkeypatch.setenv('DEMAND_REFRESH_ENABLED','true')
     assert scheduled_jobs()==(('DAILY_BACKUP_CRON','backup_sqlite.py'),('DEMAND_REFRESH_CRON','run_daily_refresh.py'))
+
+
+def test_municipal_catalogs_missing_from_first_artifact_remain_scheduled(tmp_path, monkeypatch):
+    import gzip
+    from pathlib import Path
+
+    from grocery_data.app.connectors.hemkop.parser import HemkopParser
+    from grocery_data.app.connectors.willys.municipality_inventory import build_inventory
+    from grocery_data.app.domain import GeographicArea, RawBatch
+    from grocery_data.app.services import operations_diagnostics
+    from grocery_data.app.services.hemkop_municipal_job import write
+    from grocery_data.app.services.municipal_rollout import (
+        add_municipality,
+        refresh_scopes,
+        scoped_environment,
+    )
+
+    now = datetime(2026, 10, 10, 20, tzinfo=UTC)
+    database = tmp_path / 'base.sqlite'
+    with sqlite3.connect(database) as db:
+        db.executescript('CREATE TABLE catalog_snapshots(id,state,is_active,coverage,promoted_at); '
+                         'CREATE TABLE source_products(catalog_snapshot_id,chain,store_external_id,fetched_at);')
+        db.execute("INSERT INTO catalog_snapshots VALUES ('coop-1','promoted',1,'full_catalog',?)", (now.isoformat(),))
+        db.execute("INSERT INTO source_products VALUES ('coop-1','coop','730400',?)", (now.isoformat(),))
+    env = {'MUNICIPAL_COLLECTION_SCOPE_PATH': str(tmp_path / 'registry.json'),
+           'PRICE_UNIVERSE_CACHE_ROOT': str(tmp_path / 'pu'),
+           'GROCERY_DATABASE_URL': 'sqlite:///' + database.as_posix(),
+           'HEMKOP_MUNICIPAL_ROOT': str(tmp_path / 'hemkop'),
+           'REFRESH_CITY': 'Lund', 'REFRESH_MUNICIPALITY_CODE': '1281', 'REFRESH_POSTAL_CODE': '22350'}
+    add_municipality('1280', '21120', environment=env, persist=True)
+    scope = next(s for s in refresh_scopes(env) if s['municipality_code'] == '1280')
+    env = scoped_environment(scope, env)
+    fixtures = Path(__file__).resolve().parents[2] / 'grocery_data/tests/fixtures'
+    raw = RawBatch.model_validate_json(gzip.decompress((fixtures / 'hemkop-municipal-register-20260928.json.gz').read_bytes()))
+    boundary = json.loads(gzip.decompress((fixtures / 'willys-municipality-20260922.json.gz').read_bytes()))['boundary-1280']
+    inventory = build_inventory(GeographicArea(city='Malmö', mode='municipality', municipality_code='1280'),
+        raw, ['saved-national-register'], boundary, parser=HemkopParser())
+    write(tmp_path / 'hemkop/1280/source-state.json', {'inventory': inventory,
+        'next_inventory_at': (now + timedelta(days=3)).isoformat(), 'store_schedule': {}})
+    artifact = tmp_path / 'artifact.json'
+    artifact.write_text(json.dumps({'stores': [{'store_id': 'context:coop', 'chain': 'coop',
+        'source_provenance': {'source_provider': 'own', 'source_channel': 'catalog', 'provider_store_id': '730400'}}]}))
+
+    class Store:
+        def __init__(self, *args): pass
+        def read_active(self, *args): return SimpleNamespace(universe_id='first-malmo')
+        def resolve_active_artifact(self, *args, **kwargs): return artifact
+
+    monkeypatch.setattr(runner, 'PreparedUniverseArtifactStore', Store)
+    plan = runner.demand_refresh_plan(now=now, environment=env)
+    expected = {'4114', '4199', '4212', '4247'}
+    assert plan['due_sources'] == ['hemkop']
+    assert set(plan['pending_catalog_contexts']) == {'own:hemkop:' + identity for identity in expected}
+    assert len(plan['state']['base_scope']) == 1  # No fabricated priced stores.
+    assert plan['sources']['hemkop']['missing']
+    write(Path(env['DEMAND_REFRESH_STATE_PATH']), plan['state'])
+    # Restart still sees the missing online catalogs, including Limhamn in Malmö.
+    assert runner.demand_refresh_plan(now=now, environment=env)['due_sources'] == ['hemkop']
+    with monkeypatch.context() as guard:
+        guard.setattr(operations_diagnostics, 'schema_holds', lambda root: {'hemkop': sorted(expected)})
+        assert not runner.demand_refresh_plan(now=now, environment=env)['due_sources']
+    with sqlite3.connect(database) as db:
+        for identity in expected:
+            db.execute("INSERT INTO catalog_snapshots VALUES (?,'promoted',1,'full_catalog',?)", ('hemkop-' + identity, now.isoformat()))
+            db.execute("INSERT INTO source_products VALUES (?,'hemkop',?,?)", ('hemkop-' + identity, identity, now.isoformat()))
+    fresh = runner.demand_refresh_plan(now=now, environment=env)
+    assert not fresh['due_sources']
+    assert datetime.fromisoformat(fresh['sources']['hemkop']['hard_stop_at']) == now + timedelta(hours=48)

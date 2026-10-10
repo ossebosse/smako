@@ -434,6 +434,21 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
         if not state["base_scope"]:
             raise ValueError('no verified base scope for demand refresh')
         state["scope_universe_id"] = manifest.universe_id
+    # A first usable artifact can precede successful catalogs for every verified
+    # municipal store. Keep those missing sources in refresh planning, without
+    # inventing priced contexts in the serving artifact or persisted base_scope.
+    refresh_scope = list(state['base_scope'])
+    pending_catalog_contexts = []
+    if env.get('MUNICIPAL_REFRESH_SCOPE'):
+        from grocery_data.app.services.hemkop_municipal_job import catalog_stores
+
+        municipal_stores = catalog_stores(city, environment=env)
+        represented = {(s['chain'], s['source_provenance']['provider_store_id']) for s in refresh_scope}
+        for identity in sorted(municipal_stores or {}):
+            if ('hemkop', identity) not in represented:
+                pending_catalog_contexts.append('own:hemkop:' + identity)
+                refresh_scope.append({'chain': 'hemkop', 'source_provenance': {
+                    'source_provider': 'own', 'source_channel': 'catalog', 'provider_store_id': identity}})
     offer_root = Path(env.get('ICA_STRUCTURED_OFFERS_ROOT', str(database.parent / 'ica-structured-offers')))
     from grocery_data.app.services.ica_offer_job import source_location
     _area, offer_location = source_location(city, offer_root, environment=env)
@@ -461,7 +476,7 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     campaign_at = min([*(campaign_times if offer_enabled else []), *coop_times, *citygross_times, *lidl_times, *willys_flyer_times, *hemkop_times], default=None)
     sources = {}
     with sqlite3.connect(f'file:{database.as_posix()}?mode=ro', uri=True) as db:
-        for physical in state['base_scope']:
+        for physical in refresh_scope:
             prov = physical['source_provenance']
             if (physical['chain'] == 'citygross' and citygross_plan['enabled']) or (physical['chain'] == 'lidl' and lidl_plan['enabled']):
                 continue
@@ -540,7 +555,7 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
             continue
         configured = env.get(variable, '').split(',')
         if env.get('MUNICIPAL_REFRESH_SCOPE') and chain == 'hemkop':
-            configured = [s['source_provenance']['provider_store_id'] for s in state['base_scope'] if s['chain'] == chain]
+            configured = [s['source_provenance']['provider_store_id'] for s in refresh_scope if s['chain'] == chain]
         allowed = [s for s in configured if s and s not in blocked_stores]
         if allowed:
             scoped_overrides[variable] = ','.join(allowed)
@@ -551,6 +566,7 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
         work = False
     state_path.parent.mkdir(parents=True, exist_ok=True)
     return {'work_due': work, 'reasons': reasons, 'sources': sources, 'due_sources': remote_due,
+        'pending_catalog_contexts': pending_catalog_contexts,
         'sources_held_for_schema_review': held,
         'source_context_overrides': scoped_overrides,
         'hemkop_municipal': hemkop_plan, 'coop_municipal': coop_plan, 'citygross_municipal': citygross_plan, 'lidl_municipal': lidl_plan, 'willys_flyer': willys_flyer_plan, 'relay_due': 'willys' in due_sources, 'ica_store_schedule': offers.get('store_schedule', {}),
