@@ -9,12 +9,26 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 
+def select_area(page, base, postal_code):
+    """Use the visible municipal selector when postal scope is an internal key."""
+    if page.locator('#municipality').count():
+        response = page.request.get(base.rstrip('/') + '/api/municipalities')
+        assert response.ok
+        area = next(row for row in response.json()['municipalities']
+                    if row['postal_code'] == postal_code and row['available'])
+        page.locator('#municipality').select_option(area['municipality_code'])
+        assert page.locator('#postal-code').input_value() == postal_code
+    else:
+        page.locator('#postal-code').fill(postal_code)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--base', default='https://beta.smako.nu')
     parser.add_argument('--case')
     parser.add_argument('--postal-code', default='22350')
+    parser.add_argument('--store-context', help='Select exactly this published context via its checkbox')
     parser.add_argument('--browser', choices=['chromium', 'webkit'], default='chromium')
     parser.add_argument('--reject-postal-first')
     parser.add_argument('--ignore-https-errors', action='store_true', help='Only for isolated self-signed candidate TLS')
@@ -36,7 +50,7 @@ def main():
             page.on('pageerror', lambda error, sink=errors: sink.append(str(error)))
             page.goto(args.base)
             page.locator('#onboarding-cta').click()
-            page.locator('#postal-code').fill(args.postal_code)
+            select_area(page, args.base, args.postal_code)
             page.locator('#recipes').select_option('5')
             page.locator('#servings').fill('2')
             page.locator('#max-stores').select_option('3')
@@ -48,6 +62,9 @@ def main():
             page.locator('#diversity-' + mode).check()
             rejection = None
             if args.reject_postal_first:
+                assert page.locator('#postal-code').is_visible(), (
+                    'Postal input rejection is not a user flow in municipality mode'
+                )
                 page.locator('#postal-code').fill(args.reject_postal_first)
                 rejected_at = time.monotonic()
                 with page.expect_response(lambda r: r.request.method == 'POST' and r.url.endswith('/api/plans')) as observed:
@@ -69,7 +86,13 @@ def main():
                 assert rejection['body']['detail'][0]['loc'] == ['body','postal_code']
                 assert page.locator('#postal-code').input_value() == args.reject_postal_first
                 assert page.locator('#servings').input_value() == '2' and page.locator('#max-stores').input_value() == '3'
-                page.locator('#postal-code').fill(args.postal_code)
+                select_area(page, args.base, args.postal_code)
+            if args.store_context:
+                selected = page.locator('[id="context-' + args.store_context + '"]')
+                selected.wait_for(state='visible', timeout=30000)
+                for checkbox in page.locator('input[id^="context-"]:checked').all():
+                    checkbox.uncheck()
+                selected.check()
             fields = page.locator('#plan-form input, #plan-form select').evaluate_all('(es)=>es.map(e=>({name:e.name,id:e.id,type:e.type,value:e.value,checked:e.checked}))')
             page.screenshot(path=str(args.output / (name + '-before.png')), full_page=True)
             started = time.monotonic()
@@ -125,6 +148,11 @@ def main():
                         card.locator('summary').click()
                 rows = [item for group in basket['stores'] for item in group['items']]
                 report['acceptance'] = {
+                    'postal_scope_preserved': body['request']['postal_code'] == args.postal_code,
+                    'selected_store_filter': args.store_context is None or (
+                        request.post_data_json.get('allowed_store_ids') == [args.store_context]
+                        and {store['store_id'] for store in basket['stores']} <= {args.store_context}
+                    ),
                     'five_dinners_two_servings': len(recipes) == 5 and all(r['servings'] == 2 for r in recipes),
                     'ten_total_portions': plan['portions'] == 10,
                     'full_recipes': all(r['instructions'] and all(step.strip() for step in r['instructions']) and r['ingredients'] and all(i['quantity'] > 0 and i['unit'] for i in r['ingredients']) for r in recipes),
@@ -158,6 +186,9 @@ def main():
             if response and response.status >= 400:
                 print(json.dumps(body,ensure_ascii=False), flush=True)
             context.close()
+            if args.store_context:
+                assert response is not None and response.status == 201 and not errors, report['status']
+                assert report.get('acceptance'), 'Scoped menu did not produce acceptance evidence'
             if report.get('acceptance'):
                 assert all(report['acceptance'].values()) and report['identical_reload'], report['acceptance']
             if response is None:
