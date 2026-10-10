@@ -1,64 +1,55 @@
 # Explicit municipality area mode
 
-**Latest candidate: `2b83475`, not activated yet (21:06 UTC).** This includes
-`03f0691` plus recurring planning for officially verified Hemköp catalogs that
-were absent from the first published artifact. An offline regression fails on
-the prior source image (no Hemköp work scheduled) and passes with the fix;
-15 focused planning/municipal tests pass. Pending sources are not inserted into
-the priced artifact. New packages/images are in `recovery-packages/` and
-`recovery-images/`. The temporary activation waiter for03f0691 was stopped
-without touching collection jobs; do not restart that older activation script.
-Its images and the earlier UI-only image were never activated. Their two
-unused remote staging TARs were hash-checked against retained local copies
-and removed; active releases, backups and data are untouched.
+## Current activation and acceptance, 2026-10-10
 
+App and scheduler runtime **`2b83475f5e68`** was activated at21:45:44 UTC under
+the existing operation lease after the ordinary refresh finished. Lund1281/22350
+remains ready200 with20 contexts and manifest `fb1c195bd9ab28de2d31852504dcde6f42d31aa572fd280c561b452d606d1925`.
+Malmö1280/21120 is registered in the same runner, but still pending until its
+first authentic artifact is published and loaded. No completed Malmö receipt yet.
 
-## Additive operation and consumer selection, activated 2026-10-10
+The user completed the administrator action. The existing **Smako Willys Local
+Relay** runs `D:\smako-local-relay\releases\f5b6aedc851d` with
+`-Municipalities -Workspace D:\smako-local-relay\scopes`; principal, triggers
+and settings were verified unchanged. It was started20:34:47 UTC. By21:46,
+three of Malmö's four verified online-store catalogs are collected and the fourth
+is being fetched. This server correction needs no further Windows package change.
 
-App and scheduler runtime `f5b6aedc851d` was activated19:34 UTC on2026-10-10.
-Lund1281/22350 and Malmö1280/21120 share the existing registry and runner.
-Lund remains usable. Malmö is still pending until authentic publication/reload.
+The rollout exposed and fixed two Hemköp defects. Planning selected the right
+municipal stores but transport still checked Lund's legacy allowlist; `03f0691`
+re-reads the verified municipal authority at transport construction, retaining
+explicit crawl opt-in and schema holds. Actual deployed constructors now accept
+Malmö IDs4114,4199,4212,4247 without external requests. `2b83475` keeps missing
+verified catalogs due after first publication, without inventing priced contexts.
+Its regression fails on the preceding source image and passes on this image.
+Runtime also includes74d5c03's mobile store-label row fix.
 
-The user completed the administrator action change. The existing **Smako Willys
-Local Relay** now runs release `D:\smako-local-relay\releases\f5b6aedc851d`
-with `-Municipalities -Workspace D:\smako-local-relay\scopes`. Principal,
-triggers and settings were compared unchanged. That same task was started at
-20:34:47 UTC; the Malmö child is collecting four officially matched online stores.
-No extra timer was created. Evidence: `windows-activation-verified.json` under
-`.local/municipal-rollout/`; administrator XML under
-`D:\smako-local-relay\municipal-task-activation-f5b6aed`.
+Final candidate image verification:17 app tests and33 source tests PASS.
+Focused transport/planning tests, Ruff and compileall passed. Earlier216 distinct
+focused tests and fixture-browser evidence remain valid for unchanged behavior;
+this is not a claim of a green complete repository suite or live Malmö prices.
+Four live Lund checks after activation pass (public/personal, Chromium/WebKit),
+including separate store-label rows. An initial sequential geometry assertion
+crossed a layout shift; simultaneous DOM measurement plus screenshot inspection
+verified the layout. Malmö browser/store-constrained menu acceptance remains pending.
 
-The first server Malmö run19:45–20:42 UTC failed publication because its Willys
-snapshot did not exist yet. ICA504, Coop2087 and Coop Online11494 product rows
-qualified. Optional source results:23 successful ICA stores (one missing
-integration), four Hemköp, eight Lidl and one City Gross. Coop/X:-tra retain
-blocked/incomplete publications. These counts are source-stage evidence, not
-proof of published selectable contexts or complete municipal coverage.
+Only app/scheduler images and BUILD_ID changed. Mounts, proxy, receiver, isolated
+recipe service and schedules were retained. Backup integrity/FK checks passed
+for252 plan revisions and82 private states. Activation evidence and backup:
+`/opt/smako/evidence/municipal-recovery-activation-2b83475f5e68`;
+local `.local/municipal-rollout/recovery-activation.stdout`, `recovery-images/`.
+Old UI-only74 and transport-only03 images were never activated. Their verified
+remote staging archives were removed; local archives remain. The successful2b
+activation also removed only its verified remote staging TAR. Do not rerun any
+of those activation scripts against the new runtime.
 
-**Candidate03f0691, not yet activated:** the live run exposed Hemköp transport
-still checking the legacy Lund allowlist after municipal planning selected the
-correct stores. All four Malmö IDs failed with `HemkopSourcePolicyError`,
-reproduced without network calls. The transport now re-reads verified municipal
-inventory and schema holds, retains explicit crawl opt-in and rejects wrong
-municipality, unknown stores and missing evidence.21 focused offline tests pass.
-The candidate includes the74d5c03 store-label row layout fix. Packages/images
-are in `.local/municipal-rollout/transport-fix-*`; the older UI-only package is
-superseded without activation. Source and app candidate tests/activation remain
-to be completed under the existing lease; the Windows Willys runtime need not
-change for this server-side Hemköp correction.
-
-First activation evidence/backups remain under
-`/opt/smako/evidence/municipal-activation-f5b6aedc851d`.
-All252 prior plan revisions and82 private states were hash-preserved. Existing
-mounts, proxy, schedules and policy were retained. Earlier qualified packages
-are under `qualified-packages/`, relay ZIP under `final-relay/`; rejected early
-combined source packages must not be used. Builder b00bcd6 preserves the source
-container's older dependency tree by applying only reviewed feature hunks.
-
-Prior acceptance:17 appimage and16 sourceimage tests; four mobile live browser
-checks for public/personal Lund controls; four fixture browser cases including
-store-row separation. Live Malmö selection, actual menu calculation and the
-complete collection/import/publication/load/receipt chain are still pending.
+The first server Malmö run failed before Willys import. ICA504, Coop2087 and
+Coop Online11494 source rows qualified. Optional source results included23
+successful ICA stores, four Hemköp, eight Lidl and one City Gross. Coop/X:-tra
+retain blocked/incomplete publications. These are source-stage counts, not proof
+of published selectable contexts or complete municipal coverage. Lund Hemköp4224
+retains its schema hold. Server free space after activation was14.6GB; expansion
+requires fresh capacity measurements, not assumptions from Malmö alone.
 
 The municipal rollout extends the existing `municipal-collection-scopes-v1`
 registry with `refresh_scopes`. It does not add another scheduler. The ordinary
