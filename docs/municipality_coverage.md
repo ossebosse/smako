@@ -1,5 +1,18 @@
 # Explicit municipality area mode
 
+**Latest candidate: `2b83475`, not activated yet (21:06 UTC).** This includes
+`03f0691` plus recurring planning for officially verified Hemköp catalogs that
+were absent from the first published artifact. An offline regression fails on
+the prior source image (no Hemköp work scheduled) and passes with the fix;
+15 focused planning/municipal tests pass. Pending sources are not inserted into
+the priced artifact. New packages/images are in `recovery-packages/` and
+`recovery-images/`. The temporary activation waiter for03f0691 was stopped
+without touching collection jobs; do not restart that older activation script.
+Its images and the earlier UI-only image were never activated. Their two
+unused remote staging TARs were hash-checked against retained local copies
+and removed; active releases, backups and data are untouched.
+
+
 ## Additive operation and consumer selection, activated 2026-10-10
 
 App and scheduler runtime `f5b6aedc851d` was activated19:34 UTC on2026-10-10.
