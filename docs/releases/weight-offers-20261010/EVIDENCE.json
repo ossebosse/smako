@@ -1,0 +1,126 @@
+{
+  "runtime": "0e7c20dfa91183b622cce340093a8a6cca93a5a9",
+  "base_image": "sha256:853d5b98b3df4a29e38bb5ff9d35a0d8add6ba247458e33a4e8c8a31073ec7a3",
+  "image": "sha256:523caa8ec5b09264738a90942f9e0d4157fe7fb41efc0a59d3e38b2e472f578e",
+  "build_id": "weight-offers-0e7c20dfa911",
+  "package": {
+    "file": "smako-weight-offers-0e7c20dfa911.zip",
+    "bytes": 110394,
+    "sha256": "799ee154a142d7586362cc548a2cc585488cc56486f983cfe6b6144f6ded33cc"
+  },
+  "activated": false,
+  "artifact_sha256": "a7255fb2ffeb810ff883c1247e1be65a59d5291ca2a858e6cbb059c6a3456f6f",
+  "universe_id": "price-universe:50c0bb0e83de94803b9eb6d06576cbe653e29a5f5d7a43abc5af9117c721cd5a",
+  "replay_clock": "2026-10-10T12:00:00+00:00",
+  "counts": {
+    "package": 40100,
+    "unit": 1002,
+    "not_compared": 1390
+  },
+  "weight_rates_by_chain": {
+    "coop": 167,
+    "hemkop": 277,
+    "ica": 34,
+    "lidl": 4,
+    "willys": 520
+  },
+  "blocked_categories": {
+    "unknown:legacy": 957,
+    "variable_weight_package:legacy": 29,
+    "unknown:variant_selection_required": 399,
+    "fixed_package:variant_selection_required": 5
+  },
+  "raw_verified": [
+    {
+      "sha256": "2f31c289588adc9da5930472540ea0abb1ae8c581c94345c2f5885068dd3f89f",
+      "bytes": 66286,
+      "fetched_at": "2026-10-09T13:33:04.893007+00:00",
+      "reference": "coop/730400/8d1dba204e45414e96be4501fad38b2a/20261009T133304893007Z_0066_coop_product_category_page_bf48747a.json"
+    },
+    {
+      "sha256": "9bf158b1df88c76ee1a1fca2eed68aaff559f8412d23ba644566162c1b931774",
+      "bytes": 17938,
+      "fetched_at": "2026-10-09T13:31:56.782848+00:00",
+      "reference": "coop/730400/8d1dba204e45414e96be4501fad38b2a/20261009T133156782848Z_0032_coop_product_category_page_98ce1492.json"
+    }
+  ],
+  "local_tests": 166,
+  "packaged_tests_passed_across_runs": 167,
+  "browser": [
+    {
+      "status": "PASS",
+      "engine": "chromium",
+      "build": "weight-offers-0e7c20dfa911",
+      "purchase_mode": "estimated",
+      "total": 22.4,
+      "member_rate_per_kg": 20,
+      "start_posts": 1,
+      "checkout_audit": true,
+      "saved_get_equal": true,
+      "reload": true,
+      "recalculated_revision": 2,
+      "failed_exact_mutation_preserved_revision": true,
+      "old_revision_equal": true,
+      "owner_isolation": 403,
+      "errors": [],
+      "failed_requests": [],
+      "operation_seconds": 5.797
+    },
+    {
+      "status": "PASS",
+      "engine": "webkit",
+      "build": "weight-offers-0e7c20dfa911",
+      "purchase_mode": "estimated",
+      "total": 22.4,
+      "member_rate_per_kg": 20,
+      "start_posts": 1,
+      "checkout_audit": true,
+      "saved_get_equal": true,
+      "reload": true,
+      "recalculated_revision": 2,
+      "failed_exact_mutation_preserved_revision": true,
+      "old_revision_equal": true,
+      "owner_isolation": 403,
+      "errors": [],
+      "failed_requests": [],
+      "operation_seconds": 5.25
+    }
+  ],
+  "preserved_attempts": {
+    "before-regression.log": "missing pytest harness dependency",
+    "before-regression-2.log": "missing py.py harness dependency",
+    "before-regression-3.log": "expected assertion fail on old packaged runtime",
+    "browser-first": "harness did not open Mina val",
+    "browser-second": "ambiguous nested summary selector",
+    "browser-third": "PASS both browsers",
+    "browser-final": "PASS includes failed exact-mode mutation preserving saved revision",
+    "packaged-tests.log": "166 passed; one fixture missing from container mount",
+    "packaged-nutrition.log": "remaining nutrition test PASS with retained fixture mount",
+    "combined-before.log": "invalid test expectation: legitimate semantic match was incorrectly expected to fail; no code relaxed"
+  },
+  "image_archive": {
+    "file": "smako-weight-offers-0e7c20dfa911.image.tar",
+    "bytes": 594294784,
+    "sha256": "f9614a02293f6c5c3872495203626bf67a93a23097852fb06bc8a4d5edb688f2"
+  },
+  "served_files": {
+    "container_files": {
+      "backend/app/api/personal.py": "189a0eb0f80478a7f349abd31fefc3a4efb4cdd757661110afa37eb5d273a815",
+      "backend/app/models/personal.py": "4d6143171035493f6b0bd9b81a549056ce5b8b4633e970716ec4d0995b731f89",
+      "backend/app/services/basket_calculator.py": "450fb394dc4162905985b65485a888309fb563aecb53d76256948a3aa44087e3",
+      "backend/app/services/personal_planner.py": "2c614daf33e7d371ae3b4792877d91b61ce581c5e7110da043d4694d6a36ffcf",
+      "backend/app/services/product_search.py": "2702c787592f27f25918303364fbfeeafea8297d79c6627e99f1f67db5c2e8da",
+      "backend/app/services/user_pricing.py": "941e7381ae63c1251e9ff33b28f9868d06ea0cfb7c9c79a21105856207d939c4",
+      "backend/app/static/index.html": "efa270007f5de0f5f4d631e5aeac8152413211fefbfe0320419d9f90ed09448f",
+      "backend/app/static/personal.html": "1a28238c619883d62d07145fd765c3b9821d024db9893ac78c41e5b102f526de",
+      "backend/app/static/personal.js": "bc089c4a1cb40f6f1f685dccae86825625db02f55aebf49f6be02cb01b046666",
+      "backend/app/static/product-search.js": "3cee905331dbdbce71ea2c2e35d5bd9d259fa36bd09231d9648625d1cfd9a492"
+    },
+    "http_files": {
+      "/personal": "1a28238c619883d62d07145fd765c3b9821d024db9893ac78c41e5b102f526de",
+      "/": "efa270007f5de0f5f4d631e5aeac8152413211fefbfe0320419d9f90ed09448f",
+      "/static/personal.js": "bc089c4a1cb40f6f1f685dccae86825625db02f55aebf49f6be02cb01b046666",
+      "/static/product-search.js": "3cee905331dbdbce71ea2c2e35d5bd9d259fa36bd09231d9648625d1cfd9a492"
+    }
+  }
+}

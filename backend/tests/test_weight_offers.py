@@ -129,6 +129,17 @@ def test_unproven_weight_quantity_is_not_comparable():
     assert row['prices'][0]['price_basis'] == 'not_compared'
 
 
+def test_unrelated_recipe_facts_do_not_block_confirmed_extra():
+    from app.services.personal_policy import ProductFacts
+
+    req = PlanRequest(recipes=0, purchase_planning_mode='estimated', memberships=['COOP_MEMBER'],
+        personal=PersonalPlanning(extras=[ExtraNeed(query='Satsumas',quantity=1000,unit='g',confirmed=True)]))
+    planner = PersonalPlanner(req,Settings(price_provider='mock'),prepare(retained()),
+        {'id':'facts-test','revision':0,'items':[],'reservations':{},'events':{}},now=NOW,
+        facts={('other-store','other-product'):ProductFacts(source='test',source_product_id='other-product',source_snapshot_id='other-snapshot')})
+    assert planner.create().optimized_basket.total == 22.4
+
+
 @pytest.mark.parametrize('chain', ['ica', 'coop', 'willys', 'hemkop', 'citygross', 'lidl'])
 def test_explicit_weight_contract_rate_uses_shared_guards(chain):
     from backend.tests.test_purchase_planning_modes import DAY, rate

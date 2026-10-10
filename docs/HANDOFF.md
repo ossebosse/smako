@@ -1,3 +1,27 @@
+# 2026-10-10: Viktprisjämförelse och synligt uppskattningsval – EJ AKTIVERAD
+
+Gren `fix/weight-offers-20261010`, runtime `0e7c20dfa91183b622cce340093a8a6cca93a5a9`.
+Appdelta på verklig 205-image, ny image `523caa8e…`, BUILD_ID
+`weight-offers-0e7c20dfa911`. Beta/källprocess/relä/prispublicering oförändrade.
+Kilopris visas med enhet genom befintliga köp- och mängdkontroller. Inköpslistan
+har ett uttryckligt uppskattningsval och tydlig exakt-mode-stopporsak.
+Samma ordinarie gemensamma korg, audit, näring, medlemskap och revisioner.
+Satsumas 20 kr/kg belagt; 1 000 g behov => cirka 1 120 g / 22,40 kr i replay.
+Scan 65 kr/kg från fysiskt blad saknar koppling till Online Syd-råsvaret
+(105 kr/kg, inga kampanj-ID:n). Det priset har inte lagts på genom namnmatchning.
+1 002 viktprisrader jämförbara; kvarstående okänd mängd/variant/köpgräns redovisad.
+167 tester PASS mot paketerad runtime över två körningar; en saknad testfixture
+i första körningen bevarad. Strikta mobila Chromium/WebKit-flöden PASS inklusive
+sparad GET, omladdning, ny/äldre revision, ägare och misslyckad lägesändring.
+10 runtimefilhashar och fyra serverade HTTP-filer verifierade. Inga liveplaner.
+[Resultat](releases/weight-offers-20261010/RESULTS.md),
+[källluckor](releases/weight-offers-20261010/RESEARCH.md),
+[separat app-only-beslut](releases/weight-offers-20261010/ACTIVATION.md).
+Paket/imagearkiv på D: `.local/weight-offers-20261010/package/`; inga privata data i Git.
+Ingen push eller aktivering utförd i denna uppgift.
+
+---
+
 # 2026-10-10: Källvalidering, importmarginal och återkomstfix AKTIVERADE
 
 Beta `return-session-205cd8ca0f31`, image `853d5b98…`, från 09:55 UTC.
