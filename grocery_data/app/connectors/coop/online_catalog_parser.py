@@ -198,6 +198,16 @@ def _package(row: dict[str, Any]) -> tuple[Decimal | None, str | None]:
     if conversion is None and source_unit.startswith(("gram/", "gram ")):
         conversion = _PACKAGE_UNITS["gram"]
     if amount is None or conversion is None:
+        # Printed quantity is independent evidence, unlike a price quotient.
+        # Do not override a provided invalid or conflicting structured unit.
+        if row.get("packageSize") is None and not source_unit:
+            match = re.fullmatch(r"\s*(\d+(?:[.,]\d+)?)\s*(g|kg|ml|cl|dl|l|st)\s*",
+                                 str(row.get("packageSizeInformation") or ""), re.IGNORECASE)
+            if match:
+                factor, unit = _PACKAGE_UNITS[match[2].lower()]
+                value = Decimal(match[1].replace(',', '.'))
+                if value > 0:
+                    return value * factor, unit
         return None, None
     factor, unit = conversion
     return amount * factor, unit
@@ -344,7 +354,7 @@ def _purchase_fingerprint(product: SourceProduct) -> str:
 class CoopOnlineCatalogParser:
     """Parser for Coop's regional online product context, separate from offers."""
 
-    parser_version = "coop-online-catalog-parser-v1"
+    parser_version = "coop-online-catalog-parser-v2"
 
     @staticmethod
     def terminal_categories(document: RawFetch) -> tuple[tuple[str, str], ...]:

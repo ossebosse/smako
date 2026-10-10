@@ -487,6 +487,20 @@ def price_candidate_for_context(
             raise EstimatedPurchaseRequired('Weight-dependent checkout requires estimated planning mode')
         candidate = candidate.model_copy(update={'quantity_confidence': 'estimated'})
     target_date = on_date or current_pricing_date()
+    from app.services.basket_calculator import has_counted_weight_contract
+    if has_counted_weight_contract(candidate, candidate.offers):
+        ordinary = candidate.sale_price
+        if ordinary is None or ordinary != candidate.price:
+            raise ValueError('Independent ordinary kg rate required for capped package checkout')
+        contracts = [_offer_contract(candidate, o, index=i, rate_contract=True)
+            for i, o in enumerate(candidate.offers) if o.limit_unit == 'purchase_packages']
+        offers = [o for o, c in zip([o for o in candidate.offers if o.limit_unit == 'purchase_packages'], contracts, strict=True)
+                  if c.is_active(target_date) and context.allows(c)]
+        # Keep inactive metadata out of checkout. No membership or cap bypass.
+        rate = min([ordinary, *(o.price for o in offers)])
+        return candidate.model_copy(update={'price': ordinary, 'sale_price': rate,
+            'effective_price': rate, 'comparison_price': rate, 'comparison_unit': 'kg',
+            'offers': offers, 'purchase_date': target_date})
     candidate = candidate.model_copy(update={"promotion_groups": tuple(
         g for g in candidate.promotion_groups
         if g.valid_from <= target_date <= g.valid_to

@@ -354,7 +354,7 @@ def _promotion_from_parts(parts: list[str]) -> SourceOffer | None:
 class CoopParser:
     """Offline parser for Coop source shapes independently verified as public."""
 
-    parser_version = "coop-parser-v5"
+    parser_version = "coop-parser-v6"
 
     @staticmethod
     def sitemap_product_urls(payload: bytes) -> tuple[str, ...]:

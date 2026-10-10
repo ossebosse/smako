@@ -54,11 +54,13 @@ def price_free_products(result):
         row = {key: raw.get(key) for key in (
             "product_key", "name", "brand", "package", "package_quantity", "package_unit", "identity_basis"
         )}
-        row["selectable"] = bool(row["package_quantity"] and row["package_unit"] in {"g", "ml", "st"})
-        row["package"] = row["package"] or "Förpackningsstorlek saknas"
+        row["purchase_units"] = bool(raw.get("prices")) and all(p.get("purchase_usage") == "sales_unit_only" for p in raw["prices"])
+        row["campaign_choice"] = bool(raw.get("prices")) and all(p.get("purchase_usage") == "variant_selection_required" for p in raw["prices"])
+        row["selectable"] = row["purchase_units"] or row["campaign_choice"] or bool(row["package_quantity"] and row["package_unit"] in {"g", "ml", "st"})
+        row["package"] = "Köpförpackning – innehållsmängd okänd" if row["purchase_units"] else row["package"] or "Förpackningsstorlek saknas"
         brand = row["brand"] or ""
         row["display_name"] = (brand + " " + row["name"]) if brand.casefold() not in row["name"].casefold() else row["name"]
-        label = (row["name"], brand, row["package_quantity"], row["package_unit"], row["package"])
+        label = (row["name"], brand, row["package_quantity"], row["package_unit"], row["package"], row["purchase_units"], row["campaign_choice"], row["product_key"] if row["campaign_choice"] else None)
         if label not in groups:
             groups[label] = {**row, "matches": []}
         group = groups[label]

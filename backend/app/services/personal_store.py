@@ -42,6 +42,7 @@ def demand_key(row):
                 row.get("product_key"),
                 sorted(row.get("properties", [])),
                 *([sorted(row["alternatives"])] if row.get("alternatives") else []),
+                *(["purchase_units"] if row.get("purchase_units") else []),
             ],
             ensure_ascii=False,
         ).encode()
@@ -269,6 +270,8 @@ class PersonalStore:
                             n for n in saved.plan.personal.needs if n["key"] == item.ingredient
                         )
                         item_key = need.get("selected_product_key")
+                        if item.purchase_units:
+                            raise PersonalConflict("Verifiera innehållets verkliga mängd före bokföring i skafferiet. Köpförpackningar är inte ätbara stycken.")
                         if item.conditional_variant_choice:
                             raise PersonalConflict('Välj den faktiskt köpta produktvarianten före bokföring i skafferiet.')
                         quantity = item.purchased_usable_quantity

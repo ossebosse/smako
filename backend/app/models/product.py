@@ -117,6 +117,7 @@ class OfferMetadata(BaseModel):
     price: float = Field(gt=0)
     price_basis_unit: Literal['package', 'kg'] = Field(default='package',
         exclude_if=lambda value: value == 'package')
+    limit_unit: Literal['purchase_packages'] | None = Field(default=None, exclude_if=lambda v: v is None)
     required_packages: int = Field(default=1, ge=1)
     max_quantity: int | None = Field(
         default=None,
@@ -176,6 +177,8 @@ class OfferMetadata(BaseModel):
 
     @model_validator(mode="after")
     def validate_offer(self) -> OfferMetadata:
+        if self.limit_unit and (self.price_basis_unit != "kg" or self.max_quantity is None or self.required_packages != 1 or self.deposit is not None or not self.price_contract_id):
+            raise ValueError("Counted weight cap requires a single kg offer, count limit and no unresolved deposit")
         if self.purchase_terms and self.purchase_terms.complete_group_size != self.required_packages:
             raise ValueError('physical purchase group and price group differ')
         if self.eligibility is PromotionEligibility.USER_SPECIFIC:
@@ -251,6 +254,7 @@ class ProductSemantics(BaseModel):
     variable_weight: bool = False
     purchase_terms: PurchaseTerms | None = Field(default=None, exclude_if=lambda v: v is None)
     conditional_variant_choice: bool = Field(default=False, exclude_if=lambda v: not v)
+    purchase_units: bool = Field(default=False, exclude_if=lambda v: not v)
 
     @model_validator(mode="before")
     @classmethod
@@ -368,6 +372,8 @@ class Product(ProductSemantics):
 
     @model_validator(mode="after")
     def fill_and_validate_prices(self) -> Product:
+        if self.purchase_units:
+            raise ValueError("Purchase-unit projection belongs to a private request, not the shared source artifact")
         if self.conditional_variant_choice:
             raise ValueError("Conditional variant choice belongs to a private request, not source product identity")
         if self.price is None:
@@ -528,6 +534,7 @@ class ProductCandidate(ProductSemantics):
             sale_price=product.sale_price,
             conditional_price_signal=product.conditional_price_signal,
             purchase_terms=product.purchase_terms,
+            purchase_units=product.purchase_units,
             sale_unit=product.sale_unit,
             comparison_price=product.comparison_price,
             comparison_unit=product.comparison_unit,

@@ -17,6 +17,22 @@ _CENT = Decimal("0.01")
 _CanonicalDimension = Literal["g", "ml", "st"]
 
 
+def project_sales_unit(product):
+    """Explicit shopping-only count of priced sales units, never edible pieces.
+
+    Callers must require an exact product, integer count and no pantry/recipe
+    use. Unknown contents remain unknown in the shared immutable universe.
+    """
+    if (product.sale_model != SaleModel.UNKNOWN or product.sale_unit != 'st'
+            or product.package_quantity is not None or product.usable_quantity is not None
+            or product.purchase_terms is not None or product.sale_price is None):
+        raise ValueError('No verified countable sales-unit price with unknown contents')
+    return product.model_copy(update={'sale_model': SaleModel.FIXED_PACKAGE,
+        'package_quantity': 1.0, 'package_unit': 'st', 'usable_quantity': 1.0,
+        'usable_unit': 'st', 'quantity_confidence': QuantityConfidence.EXACT,
+        'comparison_price': None, 'comparison_unit': None, 'purchase_units': True})
+
+
 class PurchaseResolution(BaseModel):
     """Resolved physical purchase and its monetary consequence.
 

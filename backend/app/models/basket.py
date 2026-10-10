@@ -91,6 +91,7 @@ class BasketItem(BaseModel):
     semantic_evidence: list[str] = Field(default_factory=list)
     purchase_terms: PurchaseTerms | None = Field(default=None, exclude_if=lambda v: v is None)
     conditional_variant_choice: bool = Field(default=False, exclude_if=lambda v: not v)
+    purchase_units: bool = Field(default=False, exclude_if=lambda v: not v)
     sale_model: SaleModel = SaleModel.UNKNOWN
     sale_price: float | None = Field(default=None, gt=0)
     sale_unit: str | None = None
@@ -180,6 +181,8 @@ class BasketItem(BaseModel):
                     else self.base_checkout_unit_price or self.unit_price
                 ),
             )
+        if self.purchase_units and (self.unit != "st" or self.package_quantity != 1 or self.usable_quantity != 1 or self.required_quantity != int(self.required_quantity)):
+            raise ValueError("Purchase units require integer counts of whole priced packages")
         if self.eligibility is PromotionEligibility.MEMBER:
             if self.membership_program is None:
                 raise ValueError("member checkout requires membership_program")
@@ -406,6 +409,7 @@ class BasketAuditSelectedProduct(BaseModel):
     semantic_confidence: SemanticConfidence = SemanticConfidence.LOW
     purchase_terms: PurchaseTerms | None = Field(default=None, exclude_if=lambda v: v is None)
     conditional_variant_choice: bool = Field(default=False, exclude_if=lambda v: not v)
+    purchase_units: bool = Field(default=False, exclude_if=lambda v: not v)
     sale_model: SaleModel = SaleModel.UNKNOWN
     quantity_reconciled: bool = True
     cost_reconciled: bool = True

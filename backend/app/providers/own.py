@@ -1145,6 +1145,7 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             price=price,
             price_basis_unit=row.get('price_basis_unit', 'package'),
             purchase_terms=row.get('purchase_terms'),
+            limit_unit=row.get('limit_unit'),
             required_packages=quantity,
             deposit=row.get("deposit"),
             max_quantity=max_quantity,

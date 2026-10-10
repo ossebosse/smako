@@ -46,7 +46,7 @@ class HemkopParser:
     rewritten to Hemköp before leaving this adapter.
     """
 
-    parser_version = "hemkop-parser-v1.1-picking-contract"
+    parser_version = "hemkop-parser-v1.2-counted-weight"
 
     def __init__(self, *, accept_sales_price_object: bool = True) -> None:
         self._axfood_products = WillysParser(

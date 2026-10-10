@@ -27,6 +27,8 @@ from app.models.product import (
     SemanticConfidence,
 )
 from app.services.basket_calculator import (
+    has_counted_weight_contract,
+    resolve_counted_weight_checkout,
     resolve_fixed_checkout_price,
     validate_basket_purchase_limits,
 )
@@ -151,6 +153,7 @@ class BasketAuditor:
             sale_model=item.sale_model,
             purchase_terms=item.purchase_terms,
             conditional_variant_choice=item.conditional_variant_choice,
+            purchase_units=item.purchase_units,
             package_quantity=item.package_quantity,
             package_unit=item.package_unit,
             usable_quantity=item.usable_quantity,
@@ -199,7 +202,7 @@ class BasketAuditor:
         # direct/new callers as well as for the normal consumer pipeline.
         pricing_context = user_pricing_context or UserPricingContext()
         group_reconciled = {}
-        if any(i.promotion_groups or i.group_applications or not i.ordinary_price_known for i in concrete_items):
+        if any(i.promotion_groups or i.group_applications or not i.ordinary_price_known or has_counted_weight_contract(i, i.checkout_offers) for i in concrete_items):
             from app.services.basket_calculator import BasketCalculator
 
             try:
@@ -223,7 +226,7 @@ class BasketAuditor:
         for item in concrete_items:
             if item.applied_offer and item.applied_offer.price_basis_unit == 'kg':
                 offer = item.applied_offer
-                if (not item.purchase_terms or item.purchase_terms != offer.purchase_terms
+                if ((not has_counted_weight_contract(item, item.checkout_offers) and (not item.purchase_terms or item.purchase_terms != offer.purchase_terms))
                         or item.sale_unit != 'kg' or item.sale_price != offer.price
                         or not item.purchase_date or not offer.is_active(item.purchase_date)
                         or item.price_contract_id != offer.price_contract_id):
@@ -343,6 +346,15 @@ class BasketAuditor:
                         reconciliation_error = (
                             None if cost_reconciled else "promotion-group checkout mismatch"
                         )
+                elif has_counted_weight_contract(item, item.checkout_offers):
+                    expected_total, expected_unit, expected_offer, _ = resolve_counted_weight_checkout(
+                        item, item.checkout_offers, resolution.packages_needed,
+                        item.base_checkout_unit_price, item.purchase_date)
+                    cost_reconciled = (_money(expected_total) == _money(_decimal(item.total_price))
+                        and _money(expected_unit) == _money(_decimal(item.unit_price))
+                        and expected_offer == item.applied_offer)
+                    if not cost_reconciled:
+                        reconciliation_error = 'counted weight campaign checkout mismatch'
                 else:
                     assert resolution.total_price is not None
                     cost_reconciled = _money(resolution.total_price) == _money(
@@ -389,6 +401,7 @@ class BasketAuditor:
                     sale_model=item.sale_model,
             purchase_terms=item.purchase_terms,
             conditional_variant_choice=item.conditional_variant_choice,
+            purchase_units=item.purchase_units,
                     quantity_reconciled=reconciled,
                     cost_reconciled=cost_reconciled,
                     reconciliation_error=reconciliation_error,

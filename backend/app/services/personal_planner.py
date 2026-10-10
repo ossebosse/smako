@@ -462,6 +462,7 @@ class PersonalPlanner:
         organic_animals=False,
         food=True,
         campaign_choice=False,
+        purchase_units=False,
         recipe=None,
     ):
         cache_key = (
@@ -473,6 +474,7 @@ class PersonalPlanner:
             organic_animals,
             food,
             campaign_choice,
+            purchase_units,
             self.recipe_computations.forms_for(recipe, canonicalize_ingredient_name(name))
             if self.complete and recipe and recipe.preparation else None,
         )
@@ -544,8 +546,16 @@ class PersonalPlanner:
         weight_consent_missing = False
         for i in sorted(positions):
             product = self.prepared.universe.products[i]
+            if purchase_units:
+                if recipe is not None or not product_key or unit != 'st':
+                    raise PolicyConflict('Köpförpackningar får endast användas för uttryckligt valda extravaror.')
+                from app.services.purchase_quantity_resolver import project_sales_unit
+                try:
+                    product = project_sales_unit(product)
+                except ValueError:
+                    continue
             from app.services.official_product_facts import project_usable_quantity
-            product = project_usable_quantity(product, self.source_facts(product), allow_estimates=self.request.purchase_planning_mode == 'estimated', required_unit=unit)
+            product = product if purchase_units else project_usable_quantity(product, self.source_facts(product), allow_estimates=self.request.purchase_planning_mode == 'estimated', required_unit=unit)
             if self.complete and recipe is not None:
                 from app.services.complete_recipes import (
                     product_form_compatible,
@@ -812,6 +822,7 @@ class PersonalPlanner:
                     "product_key": extra.product_key,
                     "alternatives": extra.alternatives,
                     "campaign_choice": extra.kind == "campaign",
+                    "purchase_units": extra.purchase_units,
                     "properties": extra.properties,
                     "profile": self.spec.profile,
                     "organic_animals": self.spec.organic_animals,
@@ -831,6 +842,8 @@ class PersonalPlanner:
     def _allocate(self, row, resolved, available):
         remaining = row["quantity"]
         allocations = []
+        if row.get("purchase_units"):
+            return remaining, allocations
         keys = {self.product_keys[i] for i, _ in resolved}
         purchased_ids = {
             r.get("item_id")
@@ -930,6 +943,7 @@ class PersonalPlanner:
                 organic_animals=row["organic_animals"],
                 food=row["food"],
                 campaign_choice=row.get("campaign_choice", False),
+                purchase_units=row.get("purchase_units", False),
                 recipe=recipe,
             )
             meal = meals_by_slot.get(row["source"])
@@ -1029,6 +1043,7 @@ class PersonalPlanner:
                     g
                     for g in groups
                     if g["unit"] == row["unit"]
+                    and g.get("purchase_units", False) == row.get("purchase_units", False)
                     and g["food"] == row["food"]
                     and g["positions"] & identities
                 ),
@@ -1046,6 +1061,7 @@ class PersonalPlanner:
                         "quantity": quantity,
                         "unit": row["unit"],
                         "food": row["food"],
+                        **({"purchase_units": True} if row.get("purchase_units") else {}),
                         "sources": [row["source"]],
                         "demand_keys": [row["demand_key"]],
                         "positions": identities,

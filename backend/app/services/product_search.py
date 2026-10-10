@@ -281,6 +281,10 @@ class ProductSearchIndex:
             from app.services.user_pricing import _offer_contract
             contracts = tuple(_offer_contract(ProductCandidate.from_product(product, 1), o,
                 index=i, rate_contract=True) for i, o in enumerate(product.offers))
+        if any(o.limit_unit == 'purchase_packages' for o in product.offers):
+            from app.services.user_pricing import _offer_contract
+            contracts = (*contracts, *(_offer_contract(ProductCandidate.from_product(product, 1), o,
+                index=i, rate_contract=True) for i, o in enumerate(product.offers) if o.limit_unit == 'purchase_packages'))
         quantity = 1
         eligible = True
         try:
@@ -346,6 +350,14 @@ class ProductSearchIndex:
                 effective * (1 if unit == "st" else 1000) / (quantity * product.package_quantity), 2
             )
         weight_rate = None
+        sales_unit_only = False
+        if not fixed and eligible:
+            from app.services.purchase_quantity_resolver import project_sales_unit
+            try:
+                project_sales_unit(product)
+                sales_unit_only = True
+            except ValueError:
+                pass
         if not fixed and eligible:
             from app.services.basket_calculator import comparable_weight_rate
             from app.services.user_pricing import price_candidate_for_context
@@ -358,7 +370,7 @@ class ProductSearchIndex:
                 pass
             if weight_rate:
                 unit_price, unit = weight_rate
-        display_price = weight_rate[0] if weight_rate else effective if fixed and quantity == 1 and eligible else None
+        display_price = weight_rate[0] if weight_rate else effective if (fixed or sales_unit_only) and quantity == 1 and eligible else None
         online = store.price_semantics == "online_price" or (
             store.price_context_type or ""
         ).casefold() in {"online_fulfillment", "online_store"}
@@ -370,7 +382,7 @@ class ProductSearchIndex:
         source = product.source_provenance
         return {
             "purchase_terms": product.purchase_terms.model_dump(mode='json') if product.purchase_terms else None,
-            "purchase_usage": product.purchase_terms.usage if product.purchase_terms else 'legacy',
+            "purchase_usage": 'sales_unit_only' if sales_unit_only else product.purchase_terms.usage if product.purchase_terms else 'legacy',
             "quoted_price": effective,
             "quoted_quantity": quantity,
             "purchase_eligible": eligible,
@@ -387,15 +399,16 @@ class ProductSearchIndex:
             "effective_price": effective if fixed and quantity == 1 and eligible else None,
             "display_price": display_price,
             "display_price_unit": unit if weight_rate else None,
-            "price_basis": "unit" if weight_rate else "package" if fixed else "not_compared",
+            "price_basis": "sales_unit" if sales_unit_only else "unit" if weight_rate else "package" if fixed else "not_compared",
             "comparison_reason": (
-                "weighed_total_estimated" if weight_rate else "package_semantics_unproven"
+                "sales_unit_contents_unknown" if sales_unit_only else "weighed_total_estimated" if weight_rate else "package_semantics_unproven"
                 if not fixed
                 else "quantity_not_verified"
                 if unit_price is None
                 else None
             ),
             "comparison_label": (
+                "Pris per köpförpackning. Kan köpas som exakt vara i hela antal. Innehållets vikt/volym är okänd; ingen gram-, liter- eller receptjämförelse." if sales_unit_only else
                 "Jämförpriset är belagt. Välj uppskattad vikt och kostnad för inköpsberäkning; slutbeloppet beror på faktisk vikt." if weight_rate else
                 "Varupris bevarat; komplett köpberäkning kräver komplettering: " + "; ".join(product.purchase_terms.critical_blockers or ("pant/mängdunderlag saknas",))
                 if product.purchase_terms and product.purchase_terms.usage == "blocked" else
@@ -559,6 +572,7 @@ class ProductSearchIndex:
                     "status_label": label,
                     "current_contexts": len(current),
                     "stale_contexts": len(old),
+                    "next_step": ("Ett godkänt, aktuellt underlag för vald butik och kanal behövs. Saknade rader betyder inte att butiken saknar varan." if not current else None),
                 }
             )
         return {

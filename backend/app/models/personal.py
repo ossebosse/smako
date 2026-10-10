@@ -123,6 +123,7 @@ class ExtraNeed(PrivateModel):
     product_key: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
     alternatives: list[str] = Field(default_factory=list, max_length=8, exclude_if=lambda v: not v)
     alternative_names: list[str] = Field(default_factory=list, max_length=8, exclude_if=lambda v: not v)
+    purchase_units: bool = Field(default=False, exclude_if=lambda value: not value)
     properties: list[str] = Field(default_factory=list, max_length=15)
     confirmed: bool = False
     use_pantry: bool = False
@@ -131,6 +132,9 @@ class ExtraNeed(PrivateModel):
     @model_validator(mode="after")
     def identity(self):
         import re
+        if self.purchase_units and (self.kind not in {"exact", "one_of"} or self.unit != "st"
+                or self.quantity != int(self.quantity) or self.use_pantry):
+            raise ValueError("Köpförpackningar kräver exakt varuval, hela antal och inget skafferi; innehållets mängd är okänd.")
         if self.kind == "one_of":
             if self.product_key or len(set(self.alternatives)) != len(self.alternatives) or len(self.alternatives) < 2:
                 raise ValueError("Antingen eller kräver 2–8 olika exakta produkter.")

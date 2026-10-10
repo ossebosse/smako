@@ -15,12 +15,13 @@ from grocery_data.app.domain import ParseFailure, ProductParseResult, SourceOffe
 from grocery_data.app.domain.purchase_terms import PurchaseTerms
 
 POLICY = "coop-physical-structured-v1"
-PARSER = "coop-parser-v5"
+PARSER = "coop-parser-v6"
 _ROW_KEYS = ("id", "externalId", "campaignStartDate", "campaignEndDate", "weekNumber",
              "storeLedgerAccountNumber", "channelCodes", "roleDescriptions", "eagId", "isPil",
-             "ageRestriction", "simplifiedAgeRestriction")
+             "ageRestriction", "simplifiedAgeRestriction", "weeklyTip")
 _PRICE_KEYS = ("discountValue", "isMemberPrice", "isItemPriceDiscount", "minimumAmount",
-               "unit", "dealType", "termStyle", "quantity", "isPercentageDiscount", "steps")
+               "unit", "dealType", "termStyle", "quantity", "isPercentageDiscount", "steps",
+               "buyAmount", "payAmount", "claim")
 _STEP_KEYS = ("discountValue", "quantity", "unit", "comparisonPrice", "dealType")
 _CONTENT_KEYS = ("title", "brand", "description", "amountInformation", "comparativePriceText",
                  "formattedComparativePriceText", "limitations", "dealOfferLimitText",
@@ -58,6 +59,14 @@ def sanitized_response(payload):
             *('content.' + k for k in set(value.get("content", {})) - {*_CONTENT_KEYS, "imageUrl", "enrichedComparisonPrice"})])
         if unknown:
             raise ValueError("new public offer fields require schema review: " + ", ".join(unknown))
+        if "weeklyTip" in value and type(value["weeklyTip"]) is not bool:
+            raise ValueError("row.weeklyTip requires boolean schema review")
+        price = value.get("priceInformation", {})
+        for field in ("buyAmount", "payAmount"):
+            if field in price and (type(price[field]) is not int or price[field] < 1):
+                raise ValueError(f"priceInformation.{field} requires positive integer schema review")
+        if "claim" in price and not isinstance(price["claim"], str):
+            raise ValueError("priceInformation.claim requires string schema review")
         result = {k: value[k] for k in _ROW_KEYS if k in value}
         for key, allowed in (("priceInformation", _PRICE_KEYS), ("content", _CONTENT_KEYS)):
             result[key] = {k: value.get(key, {})[k] for k in allowed if k in value.get(key, {})}
@@ -139,7 +148,7 @@ def parse_structured(envelope, *, store, document, reference):
         top = all_groups[0]["offers"]
         # The legacy DOM selector recognises monetary cards, not percentage
         # signs. Keep percentage campaigns in the FULL structured denominator.
-        monetary_total = sum(r["priceInformation"].get("termStyle") != "Percentage Off" for r in top)
+        monetary_total = sum(r["priceInformation"].get("termStyle") not in {"Percentage Off", "Buy X, Pay Y"} for r in top)
         if (all_groups[0]["offerAmount"] != len(top)
                 or envelope["captured_total"] not in {len(top), monetary_total}):
             raise ValueError("source/DOM offer totals disagree")
@@ -170,6 +179,12 @@ def parse_structured(envelope, *, store, document, reference):
         try:
             p, c = row["priceInformation"], row["content"]
             blockers = []
+            buy_pay = any(k in v for v in (p, parent["priceInformation"])
+                          for k in ("buyAmount", "payAmount", "claim"))
+            if buy_pay:
+                # The retained 3-for-2 clothing group has no prices for its
+                # individual variants. Preserve every row; never price it as 2 kr.
+                blockers.append("buy_x_pay_y_variant_prices_unverified")
             if any(v.get(k) for v in (parent, row) for k in ("ageRestriction", "simplifiedAgeRestriction")):
                 blockers.append("age_restriction_eligibility_unverified")
             parent_price = parent["priceInformation"]
@@ -198,9 +213,10 @@ def parse_structured(envelope, *, store, document, reference):
             if ("isPercentageDiscount" in p
                     and p["isPercentageDiscount"] != (p.get("termStyle") == "Percentage Off")):
                 blockers.append("percentage_role_conflict")
-            amount = None if stepped else Decimal(str(p["discountValue"]))
-            quantity = None if stepped else p.get("quantity", p.get("minimumAmount"))
-            if not stepped and (isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 1):
+            amount = None if stepped or buy_pay else Decimal(str(p["discountValue"]))
+            single = p.get("dealType") == "styckpris" and p.get("isItemPriceDiscount") is True and p.get("unit") in {"st", "kg"}
+            quantity = None if stepped or buy_pay else p.get("quantity", p.get("minimumAmount", 1 if single else None))
+            if not (stepped or buy_pay) and (isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 1):
                 raise ValueError("invalid offer quantity")
             if not stepped and p.get("minimumAmount", quantity) != quantity:
                 blockers.append("quantity_condition_conflict")
@@ -289,7 +305,7 @@ def parse_structured(envelope, *, store, document, reference):
                        "comparison_text": c.get("comparativePriceText"), "source_record": row}
             # Even source label Regular Price is bounded by THIS advertised
             # campaign. It proves neither an ordinary rest price nor later use.
-            role_supported = not stepped and p.get("termStyle") in {"Discount Price", "Regular Price", None} and not p.get("isPercentageDiscount", False)
+            role_supported = not (stepped or buy_pay) and p.get("termStyle") in {"Discount Price", "Regular Price", None} and not p.get("isPercentageDiscount", False)
             if not role_supported:
                 payload["price_role"] = "percent_discount" if p.get("termStyle") == "Percentage Off" or p.get("isPercentageDiscount") else "unknown"
             purchase_terms = None

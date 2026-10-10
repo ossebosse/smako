@@ -162,7 +162,7 @@ def qualify_rows(parsed: ProductParseResult, *, store, observed_at, original_par
     chain_policy = store.source_fields.get("offer_policy", "coop-physical-structured-v1")
     pdf = coop and chain_policy == "coop-xtra-pdf-text-v1"
     parser_version = (("willys-flyer-text-v2" if chain_policy == "willys-flyer-validated-text-v2" else "willys-flyer-text-v1") if willys else "lidl-parser-v4" if lidl else "citygross-parser-v4" if citygross else "xtra-pdf-text-v2" if pdf
-                      else "coop-parser-v5" if coop else "hemkop-physical-offers-v2" if hemkop else "ica-parser-v8")
+                      else "coop-parser-v6" if coop else "hemkop-physical-offers-v2" if hemkop else "ica-parser-v8")
     physical_proven = (bool(store.source_fields.get("store_page_path"))
                        and bool(store.source_fields.get("ledger_account_number"))
                        and not store.source_fields.get("online_fulfilment_store_id")) if coop else bool(store.source_fields.get("official_store_url"))

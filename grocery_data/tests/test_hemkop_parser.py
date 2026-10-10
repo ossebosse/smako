@@ -315,8 +315,8 @@ def test_parser_contract_version_and_lineage_are_hemkop_specific() -> None:
     source = _parse("fixed_package.json").products[0]
     canonical = ProductNormalizer().normalize(source, parser_version=HemkopParser.parser_version)
 
-    assert HemkopParser.parser_version == "hemkop-parser-v1.1-picking-contract"
-    assert canonical.parser_version == "hemkop-parser-v1.1-picking-contract"
+    assert HemkopParser.parser_version == "hemkop-parser-v1.2-counted-weight"
+    assert canonical.parser_version == "hemkop-parser-v1.2-counted-weight"
     assert source.chain is Chain.HEMKOP
     assert source.raw_reference.startswith("raw:1:fixed_package.json#results[0]")
 

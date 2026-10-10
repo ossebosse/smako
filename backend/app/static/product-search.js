@@ -6,7 +6,7 @@
   const coverage = $("product-search-coverage");
   let controller, sequence = 0, next = null, detailKey = null;
   const money = (value) => value == null ? "Inte jämförd" : `${Number(value).toLocaleString("sv-SE", {minimumFractionDigits: 2, maximumFractionDigits: 2})} kr`;
-  const displayed = (price) => `${money(price.display_price ?? price.effective_price)}${price.display_price_unit ? `/${price.display_price_unit}` : ""}`;
+  const displayed = (price) => `${money(price.display_price ?? price.effective_price)}${price.display_price_unit ? `/${price.display_price_unit}` : price.price_basis==="sales_unit"?"/köpförpackning":""}`;
   function node(tag, text, className) {
     const item = document.createElement(tag);
     if (text != null) item.textContent = text;
@@ -55,7 +55,7 @@
     if (missing.length) coverage.append(node("p", [...reasons].map(([reason, labels]) => `${labels.join(", ")} jämförs inte: ${reason.toLocaleLowerCase("sv-SE")}.`).join(" ")));
     const details = node("details");
     details.append(node("summary", "Träffar och täckning per kedja"));
-    chains.forEach((chain) => details.append(node("p", `${chain.label}: ${chain.status_label}.${chain.current_contexts && chain.stale_contexts ? " Äldre prisunderlag från ytterligare inköpsställen har uteslutits." : ""}`)));
+    chains.forEach((chain) => details.append(node("p", `${chain.label}: ${chain.status_label}.${chain.next_step?` ${chain.next_step}`:""}${chain.current_contexts && chain.stale_contexts ? " Äldre prisunderlag från ytterligare inköpsställen har uteslutits." : ""}`)));
     coverage.append(details);
   }
   function card(product, expanded) {

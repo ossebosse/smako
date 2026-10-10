@@ -123,6 +123,36 @@ def resolve_fixed_checkout_price(
     return resolution.checkout_total, resolution.displayed_unit_price, applied, description
 
 
+def has_counted_weight_contract(product, offers):
+    return bool(product.sale_model == SaleModel.VARIABLE_WEIGHT_PACKAGE
+        and product.package_unit == 'g' and product.package_quantity
+        and product.sale_unit == 'kg' and product.purchase_terms is None
+        and any(o.limit_unit == 'purchase_packages' and o.max_quantity is not None
+                and o.price_basis_unit == 'kg' and o.required_packages == 1 and o.deposit is None for o in offers))
+
+
+def resolve_counted_weight_checkout(product, offers, package_count, ordinary_package_price, on_date):
+    """Use the existing integer-pack promotion resolver at source-estimated mass.
+
+    The kg rate remains in the persisted contract. Only this request-local
+    checkout projection converts it to a representative package price.
+    """
+    if not has_counted_weight_contract(product, offers):
+        raise ValueError('Count cap lacks variable-package ordering evidence')
+    factor = Decimal(str(product.package_quantity)) / 1000
+    original = [o for o in offers if o.limit_unit == 'purchase_packages'
+                and o.price_basis_unit == 'kg' and o.required_packages == 1 and o.deposit is None]
+    projected = [o.model_copy(update={'price': float(money(Decimal(str(o.price))*factor)),
+                    'price_basis_unit': 'package'}) for o in original]
+    ordinary = money(ordinary_package_price)
+    choices = [resolve_fixed_checkout_price(
+        package_count=package_count, base_unit_price=base,
+        regular_unit_price=ordinary, on_date=on_date, offers=projected)
+        for base in sorted({ordinary, *(money(o.price) for o in projected if o.is_active(on_date) and money(o.price) < ordinary)})]
+    total, unit_price, applied, description = min(choices, key=lambda x: (x[0], x[2].price_contract_id if x[2] else ''))
+    return total, unit_price, original[projected.index(applied)] if applied else None, description
+
+
 def _best_checkout_price(
     candidate: ProductCandidate, package_count: int
 ) -> tuple[Decimal, Decimal, OfferMetadata | None, str | None]:
@@ -173,7 +203,7 @@ def _fail_closed_non_fixed_price(
         if candidate.selected_price_contract_id is None or len(candidate.offers) != 1:
             raise ValueError('Weight campaign must pass request-time eligibility first')
         return candidate, None
-    if uses_counted_offer_checkout(candidate):
+    if uses_counted_offer_checkout(candidate) or has_counted_weight_contract(candidate, candidate.offers):
         return candidate, None
 
     checkout_prices = {
@@ -349,6 +379,8 @@ class BasketItemQuote:
     purchase_terms: object = None
     pending_group_checkout: bool = False
     conditional_variant_choice: bool = False
+    purchase_units: bool = False
+    checkout_offers: tuple = ()
 
     def to_basket_item(self) -> BasketItem:
         """Build the public, fully validated model for a selected quote."""
@@ -374,6 +406,7 @@ class BasketItemQuote:
             sale_model=self.sale_model,
             purchase_terms=self.purchase_terms,
             conditional_variant_choice=self.conditional_variant_choice,
+            purchase_units=self.purchase_units,
             pending_group_checkout=self.pending_group_checkout,
             sale_price=self.sale_price,
             sale_unit=self.sale_unit,
@@ -411,7 +444,7 @@ class BasketItemQuote:
             purchase_warning=self.resolution_warning,
             offer_description=self.offer_description,
             applied_offer=self.applied_offer,
-            checkout_offers=(self.applied_offer,) if self.applied_offer and self.regular_unit_price is None else (),
+            checkout_offers=self.checkout_offers or ((self.applied_offer,) if self.applied_offer and self.regular_unit_price is None else ()),
             source_provenance=self.source_provenance,
         )
 
@@ -460,13 +493,14 @@ class BasketCalculator:
         household_caps = {}
         for item in items:
             offer = item.applied_offer
-            if (offer and offer.price_contract_id and (offer.price_contract_id.startswith(("coop:household:", "lidl:household:", "willys:household:")) or (offer.purchase_terms and offer.purchase_terms.limit_scope == "household_campaign"))
+            if (offer and offer.price_contract_id and (offer.price_contract_id.startswith(("coop:household:", "lidl:household:", "willys:household:")) or offer.limit_unit == "purchase_packages" or (offer.purchase_terms and offer.purchase_terms.limit_scope == "household_campaign"))
                     and offer.max_quantity is not None):
                 used, cap = household_caps.get(offer.price_contract_id, (0, offer.max_quantity))
                 # Source cap counts complete purchase groups; single-price
                 # contracts have required_packages=1. Different local prices
                 # stay on their own items. The stricter observed cap wins.
-                used += (item.packages_needed + offer.required_packages - 1) // offer.required_packages
+                units = (item.packages_needed + offer.required_packages - 1) // offer.required_packages
+                used += min(units, offer.max_quantity) if offer.limit_unit == "purchase_packages" else units
                 cap = min(cap, offer.max_quantity)
                 household_caps[offer.price_contract_id] = used, cap
                 if used > cap:
@@ -817,6 +851,13 @@ class BasketCalculator:
                 else total
             )
 
+        if has_counted_weight_contract(checkout_candidate, checkout_candidate.offers):
+            base_checkout_unit_price = money(Decimal(str(checkout_candidate.price))*Decimal(str(checkout_candidate.package_quantity))/1000)
+            total, unit_price, applied_offer, offer_description = resolve_counted_weight_checkout(
+                checkout_candidate, checkout_candidate.offers, package_count,
+                base_checkout_unit_price, checkout_candidate.purchase_date)
+            regular_total = money(Decimal(str(checkout_candidate.price)) * purchased / 1000)
+
         if checkout_candidate.purchase_terms and checkout_candidate.purchase_terms.usage == 'estimated':
             applied_offer = checkout_candidate.offers[0]
             if not applied_offer.is_active(checkout_candidate.purchase_date):
@@ -827,6 +868,11 @@ class BasketCalculator:
             regular_total = None if checkout_candidate.price is None else regular_total
 
         resolution_warning = ("Villkorat kampanjval: välj en kampanjmärkt variant. Innehåll, allergener och näring är inte verifierade. " + "; ".join(checkout_candidate.purchase_terms.exclusions)) if checkout_candidate.conditional_variant_choice else resolution.warning
+        if checkout_candidate.purchase_units:
+            resolution_warning = "Köpförpackningar med okänd innehållsmängd. Ingen gram-/literjämförelse eller näringsberäkning. Verifiera innehållsmängden före bokföring i skafferiet."
+        if has_counted_weight_contract(checkout_candidate, checkout_candidate.offers):
+            resolution_warning = (f"Uppskattad förpackningsvikt. Rabatten gäller högst {applied_offer.max_quantity if applied_offer else 0} förpackningar; "
+                f"övriga beräknas med belagt ordinarie pris {checkout_candidate.price:g} kr/kg. Slutbeloppet beror på verklig vikt.")
         if capped_offer_warning is not None:
             resolution_warning = (
                 f"{resolution_warning}; {capped_offer_warning}"
@@ -886,6 +932,7 @@ class BasketCalculator:
             sale_model=checkout_candidate.sale_model,
             purchase_terms=checkout_candidate.purchase_terms,
             conditional_variant_choice=checkout_candidate.conditional_variant_choice,
+            purchase_units=checkout_candidate.purchase_units,
             pending_group_checkout=defer_group_checkout,
             sale_price=checkout_candidate.sale_price,
             sale_unit=checkout_candidate.sale_unit,
@@ -909,7 +956,7 @@ class BasketCalculator:
             base_checkout_unit_price=base_checkout_unit_price,
             total_price=total,
             regular_total_price=regular_total,
-            regular_unit_price=money(checkout_candidate.price) if checkout_candidate.price is not None else None,
+            regular_unit_price=base_checkout_unit_price if has_counted_weight_contract(checkout_candidate, checkout_candidate.offers) else money(checkout_candidate.price) if checkout_candidate.price is not None else None,
             purchase_date=checkout_candidate.purchase_date,
             price_contract_id=selected_contract_id,
             eligibility=selected_eligibility,
@@ -917,6 +964,7 @@ class BasketCalculator:
             membership_program=selected_membership,
             offer_description=offer_description,
             applied_offer=applied_offer,
+            checkout_offers=tuple(checkout_candidate.offers) if has_counted_weight_contract(checkout_candidate, checkout_candidate.offers) else (),
             resolution_warning=resolution_warning,
             source_provenance=candidate.source_provenance,
         )

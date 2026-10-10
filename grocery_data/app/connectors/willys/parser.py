@@ -155,7 +155,7 @@ def _category_path(payload: dict[str, Any]) -> tuple[str, ...]:
 
 
 class WillysParser:
-    parser_version = "willys-parser-v3"
+    parser_version = "willys-parser-v4"
 
     def __init__(self, *, accept_sales_price_object: bool = True) -> None:
         self.accept_sales_price_object = accept_sales_price_object
@@ -312,6 +312,24 @@ class WillysParser:
                 except (OSError, OverflowError, ValueError):
                     valid_to = None
             max_match = _MAX_RE.search(str(promotion.get("redeemLimitLabel") or ""))
+            # A count cap needs independent ordering-unit evidence. Preserve
+            # the label and bind only the reviewed single-product kg contract.
+            stated_quantity, stated_unit, _ = parse_package_text(str(row.get('productLine2') or ''))
+            counted_weight = bool(max_match and promotion.get("code") and
+                promotion.get('redeemLimitLabel') == f'Max {int(max_match.group(1))} köp' and
+                promotion.get('promotionType') == 'SubtotalOrderPromotion' and
+                promotion.get('realMixAndMatch') is False and
+                promotion.get('mainProductCode') == row.get('code') and
+                not promotion.get('productCodes') and not quantity and
+                promotion.get('threshold') in (None, 0) and
+                promotion.get('promotionPercentage') is None and
+                promotion.get('textLabelManual') in (None, '') and
+                row.get('priceUnit') == 'kr/kg' and
+                isinstance(row.get('productBasketType'), dict) and
+                row['productBasketType'].get('code') == 'ST' and
+                (_decimal(row.get('averageWeight')) or 0) > 0 and
+                stated_unit == 'g' and stated_quantity == _decimal(row['averageWeight']) * 1000 and
+                (promotion.get('price') or {}).get('formattedValue', '').endswith('kr/kg'))
             try:
                 offers.append(
                     SourceOffer(
@@ -329,6 +347,12 @@ class WillysParser:
                             or "Kampanj"
                         ),
                         source_payload={
+                            "redeemLimitLabel": promotion.get("redeemLimitLabel"),
+                            **({'limit_unit': 'purchase_packages', 'price_basis_unit': 'kg',
+                                'price_contract_id': f"axfood:counted:{promotion.get('code')}:{row['code']}:{valid_to}",
+                                'limit_evidence': {'basket_type': 'ST', 'average_weight_kg': row['averageWeight'],
+                                    'raw_reference': raw_reference, 'product_code': row['code'],
+                                    'label': promotion['redeemLimitLabel']}} if counted_weight else {}),
                             "promotionType": promotion.get("promotionType"),
                             "campaignType": promotion.get("campaignType"),
                             "realMixAndMatch": promotion.get("realMixAndMatch"),
@@ -404,7 +428,7 @@ class WillysParser:
             package_unit=package_unit,
             drained_quantity=(drained_quantity if drained_unit == package_unit else None),
             sale_unit=sale_unit,
-            offers=self._offers(row),
+            offers=self._offers(row, raw_reference=raw_reference),
             availability=availability,
             average_weight_kg=average_weight,
             increment_value=_decimal(row.get("incrementValue")),

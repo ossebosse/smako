@@ -488,6 +488,10 @@ def _promotion_item(
         item["price_contract_id"] = promotion.source_payload.get("price_contract_id")
         if promotion.source_payload.get('price_basis_unit') == 'kg':
             item['price_basis_unit'] = 'kg'
+    if (promotion.source_payload or {}).get('limit_unit') == 'purchase_packages':
+        item['limit_unit'] = 'purchase_packages'
+        item['price_contract_id'] = promotion.source_payload.get('price_contract_id')
+        item['price_basis_unit'] = 'kg'
     if (promotion.source_payload or {}).get("purchase_terms"):
         from grocery_data.app.domain.purchase_terms import PurchaseTerms
         item["purchase_terms"] = PurchaseTerms.model_validate(promotion.source_payload["purchase_terms"]).model_dump(mode="json")
