@@ -21,7 +21,7 @@ class WillysConnector:
     chain = Chain.WILLYS
     coverage = CoverageLevel.FULL_CATALOG
     connector_version = "willys-v1"
-    parser_version = "willys-parser-v3"
+    parser_version = WillysParser.parser_version
     source_policy = SourcePolicy.ALLOW
 
     def __init__(

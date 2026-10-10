@@ -252,7 +252,7 @@ def verify_source_artifact(path: Path, *, now: datetime | None = None) -> Verifi
             _verify_scope(manifest)
             if (
                 manifest.collector_version != WillysConnector.connector_version
-                or manifest.parser_version != WillysConnector.parser_version
+                or manifest.parser_version not in {"willys-parser-v3", WillysParser.parser_version}
             ):
                 raise SourceArtifactError("unqualified collector/parser version")
             if manifest.normalizer_version != ProductNormalizer.normalizer_version:

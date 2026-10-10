@@ -90,6 +90,7 @@ def municipal_artifact(tmp_path, monkeypatch, code):
     entries = tuple(m.PayloadEntry(metadata=d.model_dump(mode="json", exclude={"payload", "payload_hash"}),
         path=f"raw/{i:05d}.json", size=len(d.payload), sha256=sha256(d.payload).hexdigest()) for i, d in enumerate(docs))
     manifest = legacy.manifest.model_copy(update={
+        "parser_version": m.WillysParser.parser_version,
         "context_ids": contexts, "source_scope": SourceScopeDescriptor(scope_key=area.city.casefold(), geographic_area=area),
         "municipality_boundary": boundary, "source_policy_version": "willys-municipality-policy-v1",
         "source_policy": legacy.manifest.source_policy.model_copy(update={"store_allowlist": contexts}),

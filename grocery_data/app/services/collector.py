@@ -238,7 +238,7 @@ def _review_schema_diff(
         required_type_changes = tuple(
             change for change in diff.type_changed if not reviewed_hemkop_type_change(change)
         )
-    elif chain == Chain.WILLYS and parser_version == "willys-parser-v3":
+    elif chain == Chain.WILLYS and parser_version in {"willys-parser-v3", "willys-parser-v4"}:
         from grocery_data.app.connectors.willys.schema_review import (
             reviewed_willys_schema_diff,
             reviewed_willys_type_change,
