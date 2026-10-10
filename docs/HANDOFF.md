@@ -53,6 +53,8 @@ butik får en egen läsbar rad. Fyra offlinebrowserfall med radlayoutkontroll PA
 app-ZIP finns i `.local/municipal-rollout/pending-ui-packages/`. Vänta tills det
 pågående ordinarie refreshvarvet släppt operationslåset före nästa appbyte.
 Runtime i drift är fortfarande f5b6aed. Windowsbehörigheten ovan kvarstår.
+Senaste processkontroll19:45:51 UTC: Lunds kommunvarv `complete`, ordinarie
+`daily-refresh --city Malmö` körs. Malmöpublicering/laddning/kvittens ännu okänd.
 
 ---
 

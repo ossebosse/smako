@@ -10,6 +10,9 @@ remain available. Malmö is honestly `pending`, with readiness 503 until its
 first qualified artifact has been published and loaded. An ordinary refresh
 was started through the existing runner at approximately 19:35 UTC; this does
 not prove completed Malmö collection.
+At 19:45:51 UTC, Lund's municipal run reported `complete` and the actual
+`daily-refresh --city Malmö` process was running. Malmö publication, loading
+and receipt were still unverified at that observation.
 
 **Remaining operational blocker:** Windows returned `Access denied` when
 updating `Smako Willys Local Relay`. Its original action still uses release
