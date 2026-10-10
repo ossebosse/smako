@@ -48,6 +48,7 @@ def test_real_weight_basket_without_membership_selection_keeps_audit_and_terms()
             ExtraNeed(query="Satsumas", quantity=1000, unit="g", confirmed=True)]))
     plan = PersonalPlanner(req, Settings(price_provider="mock"), weight_prepare(retained()),
         {"id":"conditional", "revision":0, "items":[], "reservations":{}, "events":{}}, now=NOW).create()
+    assert plan.membership_programs_used == (MembershipProgram.COOP_MEMBER,)
     assert plan.optimized_basket.total == 22.4
     row = plan.optimized_basket.stores[0].items[0]
     assert row.membership_required and row.membership_program == "COOP_MEMBER"

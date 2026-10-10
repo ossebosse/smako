@@ -2744,7 +2744,11 @@ class PersonalPlanner:
             single_store_options=[],
             portions=portions,
             price_per_portion=float(money(basket.total / portions)) if portions else 0,
-            membership_programs_used=self.user.memberships,
+            membership_programs_used=(tuple(sorted({
+                program for group in basket.stores for item in group.items
+                for program in [item.membership_program, *(a.group.membership_program for a in item.group_applications)]
+                if program is not None
+            }, key=lambda p: p.value)) if self.request.membership_price_policy == "all_advertised" else self.user.memberships),
             data_source="price-universe-offline",
             data=PlanPriceData(
                 **status.model_dump(exclude={"hours_until_oldest_usable_stale"}),
