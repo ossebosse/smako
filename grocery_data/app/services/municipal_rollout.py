@@ -165,8 +165,11 @@ def hemkop_policy(city, policy):
     from grocery_data.app.services.hemkop_municipal_job import configuration, read
 
     scope = scope_for_city(city)
-    if scope is None or os.getenv("MUNICIPAL_REFRESH_SCOPE") != scope["municipality_code"]:
+    municipal_code = os.getenv("MUNICIPAL_REFRESH_SCOPE")
+    if not municipal_code:
         return policy
+    if scope is None or municipal_code != scope["municipality_code"]:
+        raise ValueError("Hemkop transport municipality differs from registered scope")
     area, root, enabled = configuration(city)
     state = read(root / "source-state.json")
     if not enabled or state.get("inventory", {}).get("area") != area.model_dump(mode="json"):

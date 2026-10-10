@@ -42,6 +42,67 @@ def test_official_register_drives_catalog_selection_independently_of_predefined_
     engine.dispose()
 
 
+@pytest.mark.parametrize('code,city,postal', [('1281', 'Lund', '22350'), ('1280', 'Malmö', '21120')])
+async def test_municipal_transport_rechecks_official_inventory_and_opt_in(tmp_path, monkeypatch, code, city, postal):
+    from grocery_data.app.connectors.hemkop import HemkopConnector
+    from grocery_data.app.connectors.hemkop.client import HemkopSourcePolicyError
+    from grocery_data.app.services.area_membership import approved_municipal_stores
+    from grocery_data.app.services.municipal_rollout import (
+        add_municipality,
+        hemkop_policy,
+        municipal_environment,
+        refresh_scopes,
+    )
+
+    fixtures = Path(__file__).parent / 'fixtures'
+    raw = RawBatch.model_validate_json(gzip.decompress((fixtures / 'hemkop-municipal-register-20260928.json.gz').read_bytes()))
+    boundary = json.loads(gzip.decompress((fixtures / 'willys-municipality-20260922.json.gz').read_bytes()))['boundary-' + code]
+    inventory = build_inventory(GeographicArea(city=city, mode='municipality', municipality_code=code),
+        raw, ['saved-national-register'], boundary, parser=HemkopParser())
+    monkeypatch.setenv('MUNICIPAL_COLLECTION_SCOPE_PATH', str(tmp_path / 'registry.json'))
+    monkeypatch.setenv('GROCERY_DATABASE_URL', 'sqlite:///' + (tmp_path / 'grocery.sqlite').as_posix())
+    monkeypatch.setenv('HEMKOP_MUNICIPAL_ROOT', str(tmp_path / 'hemkop'))
+    monkeypatch.setenv('HEMKOP_MUNICIPAL_OFFERS_ENABLED', 'true')
+    monkeypatch.setenv('HEMKOP_STORE_EXTERNAL_IDS', '4123,4224')  # Legacy Lund transport list.
+    monkeypatch.setenv('REFRESH_CITY', 'Lund')
+    monkeypatch.setenv('REFRESH_MUNICIPALITY_CODE', '1281')
+    monkeypatch.setenv('REFRESH_POSTAL_CODE', '22350')
+    monkeypatch.setenv('PRICE_UNIVERSE_CACHE_ROOT', str(tmp_path / 'price-universes'))
+    add_municipality(code, postal, persist=True)
+    write(tmp_path / 'hemkop' / code / 'source-state.json', {'inventory': inventory})
+    scope = next(s for s in refresh_scopes() if s['municipality_code'] == code)
+    expected = {k for k, s in approved_municipal_stores(inventory).items() if s.online_shopping}
+    with municipal_environment(scope):
+        policy = hemkop_policy(city, HemkopOperatorCrawlPolicy.from_environment())
+        assert policy.allowed_store_ids == expected
+        for identity in sorted(expected):
+            connector = HemkopConnector.for_exact_full_collection(identity, policy=policy)
+            try:
+                assert connector.client.allowed_store_ids == {identity}
+            finally:
+                await connector.aclose()
+        # A stale/injected planning object cannot expand fresh transport authority.
+        injected = HemkopOperatorCrawlPolicy(True, frozenset({'9999', *expected}))
+        with pytest.raises(HemkopSourcePolicyError):
+            HemkopConnector.for_exact_full_collection('9999', policy=injected)
+        monkeypatch.setenv('HEMKOP_ALLOW_FULL_CRAWL', 'false')
+        with pytest.raises(HemkopSourcePolicyError):
+            HemkopConnector.for_exact_full_collection(min(expected), policy=policy)
+        monkeypatch.setenv('HEMKOP_ALLOW_FULL_CRAWL', 'true')
+        from grocery_data.app.services import operations_diagnostics
+        with monkeypatch.context() as guard:
+            guard.setattr(operations_diagnostics, 'schema_holds', lambda root: {'hemkop': sorted(expected)})
+            with pytest.raises(HemkopSourcePolicyError):
+                HemkopConnector.for_exact_full_collection(min(expected), policy=policy)
+        with monkeypatch.context() as guard:
+            guard.setenv('MUNICIPAL_REFRESH_SCOPE', '1480')
+            with pytest.raises(ValueError, match='municipality'):
+                HemkopConnector.for_exact_full_collection(min(expected), policy=policy)
+        write(tmp_path / 'hemkop' / code / 'source-state.json', {})
+        with pytest.raises(ValueError, match='inventory'):
+            HemkopConnector.for_exact_full_collection(min(expected), policy=policy)
+
+
 async def test_access_stop_does_not_continue_with_another_store(tmp_path, monkeypatch):
     from datetime import UTC, datetime
 

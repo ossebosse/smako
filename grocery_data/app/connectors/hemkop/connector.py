@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from typing import ClassVar
 
 from grocery_data.app.connectors.hemkop.client import (
@@ -160,10 +161,15 @@ class HemkopConnector:
         operator has opted in to several stores for a daily multi-context run.
         """
 
-        # Re-read the operator environment at transport-construction time. An
-        # injected planning snapshot can narrow authority, never substitute for
-        # or broaden the live REVIEW opt-in.
+        # Re-read the current authority at transport construction. Registered
+        # municipal operations derive the same exact IDs as the planner from
+        # verified inventory; an injected policy can only narrow that set.
+        from grocery_data.app.services.municipal_rollout import hemkop_policy
+
         configured_policy = HemkopOperatorCrawlPolicy.from_environment()
+        configured_policy = hemkop_policy(
+            os.getenv("REFRESH_CITY", "Lund"), configured_policy
+        )
         target = configured_policy.require(store_external_id)
         if policy is not None:
             policy.require(target)
