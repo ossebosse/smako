@@ -1,0 +1,273 @@
+[
+  {
+    "snapshot_id": "72c524df46c34fe69af362158af38692",
+    "chain": "willys",
+    "parser_version": "willys-parser-v3",
+    "diff": null,
+    "sampled_verified_bytes": 809399,
+    "samples": [
+      {
+        "reference": {
+          "kind": "catalog_page",
+          "url": "https://www.willys.prod.axcsfprod.aws.axfoodapp.cloud/axfood/rest/v1/c/apotek/plaster-och-sarvard",
+          "payload_location": "willys/2354/72c524df46c34fe69af362158af38692/20261007T235122161079Z_0003_catalog_page_829f5c0c.json",
+          "payload_hash": "99215b9f1f2b4d965e31c747fba1e5ef49270d99bf1a0120af9560669d7eb877",
+          "fetched_at": "2026-10-07T23:51:22.161079+00:00",
+          "page_number": 0,
+          "store_external_id": "2354"
+        },
+        "json_path": "$.results[0]",
+        "fields": {
+          "image": {
+            "imageType": "PRIMARY",
+            "format": "product",
+            "url": "https://assets.axfood.se/image/upload/f_auto,t_200/07340083490002_C1N1_s02",
+            "altText": null,
+            "galleryIndex": null,
+            "width": null
+          },
+          "thumbnail": {
+            "imageType": "PRIMARY",
+            "format": "thumbnail",
+            "url": "https://assets.axfood.se/image/upload/f_auto,t_100/07340083490002_C1N1_s02",
+            "altText": null,
+            "galleryIndex": null,
+            "width": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "snapshot_id": "75f802ebbfcc410c9d65e356746f0816",
+    "chain": "willys",
+    "parser_version": "willys-parser-v3",
+    "diff": {
+      "added": [],
+      "removed": [],
+      "type_changed": [
+        {
+          "path": "2354:catalog_page:$[].results[].image.format",
+          "old_types": [
+            "null",
+            "string"
+          ],
+          "new_types": [
+            "string"
+          ]
+        },
+        {
+          "path": "2354:catalog_page:$[].results[].image.imageType",
+          "old_types": [
+            "null",
+            "string"
+          ],
+          "new_types": [
+            "string"
+          ]
+        },
+        {
+          "path": "2354:catalog_page:$[].results[].image.url",
+          "old_types": [
+            "null",
+            "string"
+          ],
+          "new_types": [
+            "string"
+          ]
+        },
+        {
+          "path": "2354:catalog_page:$[].results[].thumbnail.format",
+          "old_types": [
+            "null",
+            "string"
+          ],
+          "new_types": [
+            "string"
+          ]
+        },
+        {
+          "path": "2354:catalog_page:$[].results[].thumbnail.imageType",
+          "old_types": [
+            "null",
+            "string"
+          ],
+          "new_types": [
+            "string"
+          ]
+        },
+        {
+          "path": "2354:catalog_page:$[].results[].thumbnail.url",
+          "old_types": [
+            "null",
+            "string"
+          ],
+          "new_types": [
+            "string"
+          ]
+        }
+      ]
+    },
+    "sampled_verified_bytes": 32554,
+    "samples": [
+      {
+        "reference": {
+          "kind": "catalog_page",
+          "url": "https://www.willys.prod.axcsfprod.aws.axfoodapp.cloud/axfood/rest/v1/c/apotek/plaster-och-sarvard",
+          "payload_location": "willys/2354/75f802ebbfcc410c9d65e356746f0816/20261009T142049022948Z_0003_catalog_page_29937d10.json",
+          "payload_hash": "92f8e67473d0e449edcb038b004a8924b77eefcae419b2114db94feb3da9211c",
+          "fetched_at": "2026-10-09T14:20:49.022948+00:00",
+          "page_number": 0,
+          "store_external_id": "2354"
+        },
+        "json_path": "$.results[0]",
+        "fields": {
+          "image": {
+            "imageType": "PRIMARY",
+            "format": "product",
+            "url": "https://assets.axfood.se/image/upload/f_auto,t_200/07340083490002_C1N1_s02",
+            "altText": null,
+            "galleryIndex": null,
+            "width": null
+          },
+          "thumbnail": {
+            "imageType": "PRIMARY",
+            "format": "thumbnail",
+            "url": "https://assets.axfood.se/image/upload/f_auto,t_100/07340083490002_C1N1_s02",
+            "altText": null,
+            "galleryIndex": null,
+            "width": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "snapshot_id": "eb7f4129141c4bd892702f0c5abc3b56",
+    "chain": "hemkop",
+    "parser_version": "hemkop-parser-v1.1-picking-contract",
+    "diff": {
+      "added": [],
+      "removed": [
+        "4224:store_context:$[].hasPickingBaseStore",
+        "stores:$[][].hasPickingBaseStore"
+      ],
+      "type_changed": []
+    },
+    "sampled_verified_bytes": 433026,
+    "samples": [
+      {
+        "reference": {
+          "kind": "stores",
+          "url": "https://www.hemkop.se/axfood/rest/store",
+          "payload_location": "hemkop/chain/eb7f4129141c4bd892702f0c5abc3b56/20261009T141558368244Z_0000_stores_e6ef70b3.json",
+          "payload_hash": "3fc735e7717cbd6819ca05f8c127b08e584ac8e6e0a779ef58612d1db985f6d1",
+          "fetched_at": "2026-10-09T14:15:58.368244+00:00",
+          "page_number": null,
+          "store_external_id": null
+        },
+        "json_path": "$[99]",
+        "fields": {
+          "storeId": "4224",
+          "onlineStore": true
+        }
+      },
+      {
+        "reference": {
+          "kind": "stores",
+          "url": "https://www.hemkop.se/axfood/rest/store",
+          "payload_location": "hemkop/chain/eb7f4129141c4bd892702f0c5abc3b56/20261009T141558368244Z_0000_stores_e6ef70b3.json",
+          "payload_hash": "3fc735e7717cbd6819ca05f8c127b08e584ac8e6e0a779ef58612d1db985f6d1",
+          "fetched_at": "2026-10-09T14:15:58.368244+00:00",
+          "page_number": null,
+          "store_external_id": null
+        },
+        "json_path": "$[100]",
+        "fields": {
+          "storeId": "4123",
+          "onlineStore": true
+        }
+      },
+      {
+        "reference": {
+          "kind": "store_context",
+          "url": "https://www.hemkop.se/axfood/rest/store/active",
+          "payload_location": "hemkop/4224/eb7f4129141c4bd892702f0c5abc3b56/20261009T141627949086Z_0001_store_context_330089c5.json",
+          "payload_hash": "d7d44b4e9fef4c04482fc431a5d1413c9a5af34b7f883f440763e9f638939623",
+          "fetched_at": "2026-10-09T14:16:27.949086+00:00",
+          "page_number": null,
+          "store_external_id": "4224"
+        },
+        "json_path": "$",
+        "fields": {
+          "storeId": "4224",
+          "onlineStore": true
+        }
+      }
+    ]
+  },
+  {
+    "snapshot_id": "0f1daad517a74f8fb9066cdf069ba7c1",
+    "chain": "hemkop",
+    "parser_version": "hemkop-parser-v1.1-picking-contract",
+    "diff": {
+      "added": [],
+      "removed": [
+        "4123:store_context:$[].hasPickingBaseStore",
+        "stores:$[][].hasPickingBaseStore"
+      ],
+      "type_changed": []
+    },
+    "sampled_verified_bytes": 433024,
+    "samples": [
+      {
+        "reference": {
+          "kind": "stores",
+          "url": "https://www.hemkop.se/axfood/rest/store",
+          "payload_location": "hemkop/chain/0f1daad517a74f8fb9066cdf069ba7c1/20261009T140033029435Z_0000_stores_cf46ba40.json",
+          "payload_hash": "a5cd109c21733cbddf0f475e4725ba86b38be4e7be9276b28ea607b32d47e73a",
+          "fetched_at": "2026-10-09T14:00:33.029435+00:00",
+          "page_number": null,
+          "store_external_id": null
+        },
+        "json_path": "$[99]",
+        "fields": {
+          "storeId": "4224",
+          "onlineStore": true
+        }
+      },
+      {
+        "reference": {
+          "kind": "stores",
+          "url": "https://www.hemkop.se/axfood/rest/store",
+          "payload_location": "hemkop/chain/0f1daad517a74f8fb9066cdf069ba7c1/20261009T140033029435Z_0000_stores_cf46ba40.json",
+          "payload_hash": "a5cd109c21733cbddf0f475e4725ba86b38be4e7be9276b28ea607b32d47e73a",
+          "fetched_at": "2026-10-09T14:00:33.029435+00:00",
+          "page_number": null,
+          "store_external_id": null
+        },
+        "json_path": "$[100]",
+        "fields": {
+          "storeId": "4123",
+          "onlineStore": true
+        }
+      },
+      {
+        "reference": {
+          "kind": "store_context",
+          "url": "https://www.hemkop.se/axfood/rest/store/active",
+          "payload_location": "hemkop/4123/0f1daad517a74f8fb9066cdf069ba7c1/20261009T140102947117Z_0001_store_context_5ff02be5.json",
+          "payload_hash": "24bc4551cb27c06f505ffebcb1862373481d5ba3a70896d17b1737423a88c891",
+          "fetched_at": "2026-10-09T14:01:02.947117+00:00",
+          "page_number": null,
+          "store_external_id": "4123"
+        },
+        "json_path": "$",
+        "fields": {
+          "storeId": "4123",
+          "onlineStore": true
+        }
+      }
+    ]
+  }
+]

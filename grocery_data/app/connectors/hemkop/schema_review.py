@@ -17,6 +17,7 @@ _PREFIX = r"(?:[0-9]+:)?catalog_page:\$\[\]\.results"
 _LABEL = re.compile(_PREFIX + r"\[\]\.energyDeclaration(?:\.(?:link|value|image))?\Z")
 _LABEL_ROOT = re.compile(_PREFIX + r"\[\]\.energyDeclaration\Z")
 _RESULTS = re.compile(_PREFIX + r"\Z")
+_PICKING = re.compile(r"(?:[0-9]+:store_context:\$\[\]|stores:\$\[\]\[\])\.hasPickingBaseStore\Z")
 
 
 def reviewed_hemkop_type_change(change: SchemaTypeChange) -> bool:
@@ -50,8 +51,23 @@ def reviewed_hemkop_schema_diff(diff: SchemaDiff, *, schemas=None, picking_contr
         # Value semantics are independently checked by parser and transport.
         return set(paths.get(field, ())) == {"boolean"}
 
+    def reviewed_removal(path):
+        if _LABEL.fullmatch(path):
+            return True
+        if not picking_contract or not _PICKING.fullmatch(path):
+            return False
+        group, field = path.rsplit(":", 1)
+        schema = (schemas or {}).get(group)
+        paths = schema.get("paths", {}) if isinstance(schema, dict) else getattr(schema, "paths", {})
+        # Oct 9 retained responses omit this optional flag again. Absence is
+        # already supported by validated_store_context; never synthesize false.
+        # The group and exact store identity must still exist. Present invalid
+        # flag values and any removed identity/binding fields remain blocked.
+        identity = field.removesuffix("hasPickingBaseStore") + "storeId"
+        return field not in paths and set(paths.get(identity, ())) == {"string"}
+
     return SchemaDiff(
         added=tuple(path for path in diff.added if not reviewed_addition(path)),
-        removed=tuple(path for path in diff.removed if not _LABEL.fullmatch(path)),
+        removed=tuple(path for path in diff.removed if not reviewed_removal(path)),
         type_changed=tuple(c for c in diff.type_changed if not reviewed_hemkop_type_change(c)),
     )
