@@ -1,3 +1,27 @@
+# 2026-10-10: Källvalidering, importmarginal och återkomstfix AKTIVERADE
+
+Beta `return-session-205cd8ca0f31`, image `853d5b98…`, från 09:55 UTC.
+Källprocess `source-ops-04e47c691e0c`, image `441e1a2b…`. Gren
+`fix/source-return-recovery-20261010`; två avgränsade paket, ingen ny måltidsrelease.
+Alla fem obligatoriska baser FRESH, `/ready` 200, laddat/publicerat manifest
+`50c0bb0e83de…` vid 10:04 UTC. Willys exakt en import och beständigt kvitto.
+Inga nya prishämtningar: autentiska 9 oktober-underlag återanvändes.
+Fyra inaktiva testkataloger arkiverade/hashverifierade på skyddad D:, därefter
+borttagna med befintligt godkännande. 11,32 GB frigjort; 16,19 GB ledigt på
+servern efter arbetet mot 8,87 GB beräknat importbehov. Ingen gräns sänkt.
+Windowsrelä fe795/S4U/Limited och scheman oförändrade; senaste manuella
+behovskontroll not_due/0 prisanrop. Inga pauser kvar.
+71 källtester, tre fulla paketerade replay och 30 534 produktjämförelser PASS.
+Publik Chromium samt personlig inköpslista Chromium/WebKit PASS; bevarat
+första felaktigt navigationsantagande i testverktyget redovisas separat.
+240 gamla revisioner/74 privata tillstånd oförändrade; alla 246 revisioner läsbara.
+Fyra faktiskt serverade filhashar matchar. Gästsessioner, inte alla OIDC-konton.
+[Slutrapport](releases/source-return-recovery-20261010/RESULTS.md),
+[utförda aktiveringar/återgång](releases/source-return-recovery-20261010/ACTIVATED.md).
+Ingen push. Kör aktuell `smako_ops.py status` vid nästa driftärende.
+
+---
+
 # 2026-10-10: Fel vid återkomst – rättad kandidat, prisdrift fortfarande spärrad
 
 Gren `fix/return-session-20261010`, runtime `205cd8ca0f31`.

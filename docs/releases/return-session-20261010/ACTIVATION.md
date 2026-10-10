@@ -1,3 +1,7 @@
+> Uppdatering 2026-10-10 10:04 UTC: denna kandidat är nu aktiverad efter
+> återställd prisdrift. [Utfört byte och slutprov](../source-return-recovery-20261010/ACTIVATED.md).
+> Texten nedan bevarar läget vid den tidigare leveransen före aktivering.
+
 # Separat app-only-kandidat: return-session-205cd8ca0f31
 
 Inte aktiverad. Se EVIDENCE.json för full runtime, image och pakethash.

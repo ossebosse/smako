@@ -1,0 +1,8 @@
+{
+  "outcome": "FAIL",
+  "reason": "Test expected visible shopping panel after reloading a #plan permalink. Actual DOM showed saved Min plan and populated hidden shopping panel.",
+  "raw_log_sha256": "193748c1495705f9b89aac4742cfdd8a84320e8a169c0c2b0e7fdc2f965a3cec",
+  "first_failed_assertion": "live_browser.py:147",
+  "correction": "Assert restored plan first, then open shopping through ordinary button. Keep strict pageerror/requestfailed/5xx checks.",
+  "application_changed_for_retry": false
+}
