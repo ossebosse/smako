@@ -411,6 +411,8 @@
     });
   }
   function reconnectError() {const e=new Error("Statuskontrollen kan inte nå servern just nu. Återuppta statuskontrollen för samma meny; ingen ny beräkning startas.");e.reconnect=true;return e;}
+  // These are explicit pre-admission refusals, not uncertain transport failures.
+  const planningBlocks={price_universe_unusable:"Prisunderlaget behöver uppdateras innan en ny beräkning kan göras. Din sparade plan och inköpslista finns kvar.",price_universe_unavailable:"Prisunderlaget är tillfälligt otillgängligt. Din sparade plan och inköpslista finns kvar."};
   function schemaError(message) {const error=new Error(message);error.schema=true;return error;}
   async function readResponse(response,flow) {
     const type=response.headers.get("Content-Type")||"";
@@ -441,6 +443,8 @@
         trace(flow,"response",{reference,status:response.status,type:response.headers.get("Content-Type"),response_type:response.type,server_request:response.headers.get("X-Request-ID")});
         // Read body under the same timeout; a response with a stalled body is not success.
         const data=await readResponse(response,flow);
+        const block=planningBlocks[response.headers.get("X-Error-Code")];
+        if(response.status===503&&block){trace(flow,"planning-blocked",{reference,code:response.headers.get("X-Error-Code")});response.smakoPlanningBlock=block;return {response,data};}
         const unconfirmed=response.status===404&&!flow.url&&url.startsWith("/api/plan-job-requests/");
         if(unconfirmed&&Date.now()-flow.startedAt<30000){
           // Reload can race server acceptance of the original POST. This is
@@ -476,7 +480,9 @@
       for(;;){
         const {response,data}=await transport(target,options,flow,onProgress);check(flow);
         if(response.status!==202){
-          if(!response.ok&&!response.smakoUnconfirmed)forgetJob(scope);
+          // A final owned lookup 404 also ends an unconfirmed start. Retaining
+          // it would force every later click back to an expired request.
+          if(!response.ok)forgetJob(scope);
           response.smakoCheck=()=>{flow.controller.signal.throwIfAborted();if(leaving||generation!==flow.generation)throw lifecycle("superseded");};
           trace(flow,"terminal",{status:response.status});return response;
         }

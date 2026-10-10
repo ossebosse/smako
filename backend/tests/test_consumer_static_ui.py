@@ -59,7 +59,7 @@ def test_consumer_ui_has_report_and_reused_barcode_flows() -> None:
     assert "const requestPayload = isSavedPlanProduct" in script
     assert "/api/community-evidence/store-options" in script
     assert 'fetch(`/api/products/${encodeURIComponent(gtin)}`' in script
-    assert 'fetch("/api/plans"' in script
+    assert 'jobRequest({scope:"public",url:"/api/plans"' in script
     assert "/replace-recipe" in script
     assert "/replace-product" in script
     assert "grocery-anonymous-session-id" in script
