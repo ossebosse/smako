@@ -694,7 +694,9 @@ def _collect_all_plan(
         for city in unique_cities:
             if chain is Chain.CITY_GROSS and municipal["enabled"] and city in selected_cities:
                 continue
-            if (chain, city.casefold().strip()) in _UNVERIFIED_OWN_COLLECTION_CONTEXTS:
+            from grocery_data.app.services.municipal_rollout import scope_for_city
+            if ((chain, city.casefold().strip()) in _UNVERIFIED_OWN_COLLECTION_CONTEXTS
+                    or (chain is Chain.HEMKOP and scope_for_city(city) is not None)):
                 skipped.append(
                     {
                         "chain": chain.value,

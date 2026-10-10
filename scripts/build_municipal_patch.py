@@ -35,16 +35,20 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     packages = []
     for target, image in BASES.items():
+        tag = f"smako-comparability-{target}:{BASE_COMMIT[:12]}"
+        actual = subprocess.check_output(["docker", "image", "inspect", tag, "--format", "{{.Id}}"]).decode().strip()
+        if actual != image:
+            raise ValueError("base image identity mismatch")
         base_hashes = json.loads(subprocess.check_output([
             "docker", "run", "--rm", "--network=none", "--read-only", "--entrypoint", "python", image, "-c", probe]))
         manifest = {"schema": "municipal-patch-v1", "target": target, "commit": commit,
-            "base_commit": BASE_COMMIT, "base_image": image, "base_files": base_hashes,
+            "base_commit": BASE_COMMIT, "base_image": image, "base_tag": tag, "base_files": base_hashes,
             "files": {p: hashlib.sha256(data).hexdigest() for p, data in files.items()}}
         payload = dict(files)
         payload["MUNICIPAL-PATCH.json"] = json.dumps(manifest, indent=2).encode()
         payload["verify-base.py"] = b"import hashlib,json;from pathlib import Path;m=json.loads(Path('/tmp/MUNICIPAL-PATCH.json').read_bytes());assert all((hashlib.sha256((Path('/srv/app')/p).read_bytes()).hexdigest() if (Path('/srv/app')/p).exists() else None)==h for p,h in m['base_files'].items()),'base code mismatch'"
         copies = "\n".join(f"COPY --chown=app:app {p} /srv/app/{p}" for p in paths)
-        payload["Dockerfile"] = (f"FROM {image}\nUSER root\nCOPY MUNICIPAL-PATCH.json verify-base.py /tmp/\nRUN python /tmp/verify-base.py\n"
+        payload["Dockerfile"] = (f"FROM {tag}\nUSER root\nCOPY MUNICIPAL-PATCH.json verify-base.py /tmp/\nRUN python /tmp/verify-base.py\n"
             + copies + f"\nCOPY MUNICIPAL-PATCH.json /srv/app/MUNICIPAL-PATCH.json\nENV BUILD_ID=municipal-{target}-{commit[:12]}\nLABEL org.opencontainers.image.revision={commit}\nUSER app\n").encode()
         destination = args.output / f"smako-municipal-{target}-{commit[:12]}.zip"
         with zipfile.ZipFile(destination, "x", zipfile.ZIP_DEFLATED) as archive:

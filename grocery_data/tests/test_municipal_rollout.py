@@ -71,6 +71,8 @@ def test_context_restores_environment_on_failed_scope(registry):
 
 
 def test_third_municipality_uses_registered_key_without_new_hardcoded_city(registry):
+    from grocery_data import __main__ as cli
+    from grocery_data.app.domain import Chain
     from grocery_data.app.api.geography import resolve_postal_scope
 
     add_municipality("1480", "41110", environment=registry, persist=True)
@@ -79,6 +81,10 @@ def test_third_municipality_uses_registered_key_without_new_hardcoded_city(regis
     assert collection_area("Göteborg", environment=registry).municipality_code == "1480"
     assert resolve_postal_scope("41110").resolved_city == "Göteborg"
     assert resolve_postal_scope("41111").resolved_city is None
+    goteborg = next(s for s in scopes if s["municipality_code"] == "1480")
+    with municipal_environment(goteborg):
+        targets, _skipped = cli._collect_all_plan(["Göteborg"], selected_chains=frozenset({Chain.HEMKOP}))
+        assert not targets  # Exact municipal context planner owns this work.
 
 
 def test_adoption_preserves_enabled_sources_in_existing_durable_configuration(tmp_path):
