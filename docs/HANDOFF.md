@@ -1,3 +1,35 @@
+# 2026-10-10: Alla annonserade medlemspriser + Scan-utredning – EJ AKTIVERAD
+
+Gren `feature/member-prices-scan-20261010`, runtime
+`f00f5304e5449bd8417f3dab4fcb547e27135de7`, image `7635779a…`,
+BUILD_ID `member-prices-f00f5304e544`. Separat appdelta på viktkandidaten 0e7/205.
+Nya menyer, omräkningar och sökning tar med alla sex generella medlemsprogram;
+valda totalsummor märks med faktiskt nödvändiga medlemskap. Innehav ändras inte,
+personliga kuponger aktiveras inte, äldre revisioner behåller sina villkor.
+145 backend/källtester på hashidentisk backend, personliga mobila Chromium/WebKit
+PASS (Satsumas 22,40 i replay, medlemsmärkning, revisioner/ägare/audit).
+Publik slutimage PASS med riktigt jobb, dubbelstart, omladdning och sparad GET.
+Föregående publika prov hittade readiness-timeout som lämnade knappen spärrad;
+nu ny readiness-GET efter resultat och generationsskydd. Före-FAIL/efter-PASS
+regression. Två nätavbrott finns kvar i slutprovet; inga pageerrors och korrekt
+återhämtning. Ingen prestandaförbättring hävdas (190,8 s enskilt klickprov).
+
+**Scan 65 kr/kg återfunnet** i fysisk Coop Värpinge Lund 3659, råsvar 9 oktober.
+Snapshot avvisades på `priceInformation.buyAmount/claim/payAmount`.
+Fältvärden/typer saknas i det bevarade strukturerade felsvaret; separat källfix
+behöver normaltransportens fullständiga JSON. Online Syd visar 105 kr/kg utan
+kampanj; inget butikspris flyttat till online. Källspärren är inte rättad av appen.
+[Resultat](releases/member-prices-scan-20261010/RESULTS.md),
+[Scan-belägg och reproduktion](releases/member-prices-scan-20261010/SCAN.md),
+[evidens](releases/member-prices-scan-20261010/EVIDENCE.json),
+[separat app-only-beslut](releases/member-prices-scan-20261010/ACTIVATION.md).
+Paket/image på skyddad lokal D: `.local/member-scan-20261010/recovery-package/`.
+Beta senast läst som return-session-205cd8ca0f31; ingen produktionsändring eller
+push. Offentliga sparade källfakta exporterades läsande till isolerat test; ingen
+ny prisinsamling eller kopiering av privata produktionsplaner.
+
+---
+
 # 2026-10-10: Viktprisjämförelse och synligt uppskattningsval – EJ AKTIVERAD
 
 Gren `fix/weight-offers-20261010`, runtime `0e7c20dfa91183b622cce340093a8a6cca93a5a9`.
