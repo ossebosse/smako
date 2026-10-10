@@ -1,3 +1,7 @@
+> Uppdatering: app och källprocess aktiverades 2026-10-10 19:28 svensk tid.
+> [Utfört byte, liveprov och kvarstående kampanjpublicering](ACTIVATED.md).
+> Texten nedan är kandidatens ursprungliga leverans-/aktiveringsunderlag.
+
 # Separat framtida aktivering – inga paket aktiverade
 
 Runtime `5786d5fa6a0febb7a581a70e583e5c876d494da2`.

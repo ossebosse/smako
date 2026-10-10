@@ -1,3 +1,31 @@
+# 2026-10-10: Jämförbarhetskandidaten AKTIVERAD – master uppdateras
+
+App `comparability-app-5786d5fa6a0f` / image `ca1b3532…` och källprocess
+`comparability-source-5786d5fa6a0f` / image `63cc251f…` aktiverade
+19:28:53 svensk tid. Runtime `5786d5fa6a0febb7a581a70e583e5c876d494da2`.
+Readiness200, fullständiga recept på, samma publicerade/laddade manifest50c0.
+Reläfe795, scheman, proxy och datamounts bevarade. Backup och komplett
+Compose-diff granskade; endast app/scheduler image+BUILD_ID ändrade.
+
+Live Chromium/WebKit shopping och produktsökning PASS. Publik femmiddagsmeny
+PASS, audit, ett jobb/dubbelstart, omladdning, inköpslista och sparad GET.
+247 tidigare revisioner/79 privata tillstånd hashbevarade; nya verifierings-
+identiteter tillförde5 revisioner/3 tillstånd. Inga gamla data återställda.
+
+**Scan65 ännu inte publicerad:** källfixen används nu, men Coops befintliga
+backoff till20:00:40 svensk tid bevaras. Ordinarie nästa passande15min-kontroll
+väntas20:15. Hämtning/publicering efter detta har ännu inte verifierats.
+Nästa kontroll ska börja med `scripts/smako_ops.py status` och Coops källjournal,
+inte ny installation eller bred utredning. Samtliga fem baser fortsatt FRESH.
+
+[Utförd aktivering](releases/comparability-20261010/ACTIVATED.md),
+[sanerade livebevis](releases/comparability-20261010/ACTIVATED.json).
+Den aktuella användaren har godkänt uppdatering av `master` och push till
+`origin` (GitHub ossebosse/smako). Kandidatens tidigare ”ingen push/aktivering”
+nedan beskriver dess historiska leveranstillstånd, inte nuvarande instruktion.
+
+---
+
 # 2026-10-10: Jämförbarhetsförslag implementerade – EJ AKTIVERADE
 
 Gren `feature/comparability-20261010`, runtime
