@@ -1,55 +1,56 @@
 # Explicit municipality area mode
 
-## Current activation and acceptance, 2026-10-10
+## Current runtime and acceptance, 2026-10-11
 
-App and scheduler runtime **`2b83475f5e68`** was activated at21:45:44 UTC under
-the existing operation lease after the ordinary refresh finished. Lund1281/22350
-remains ready200 with20 contexts and manifest `fb1c195bd9ab28de2d31852504dcde6f42d31aa572fd280c561b452d606d1925`.
-Malmö1280/21120 is registered in the same runner, but still pending until its
-first authentic artifact is published and loaded. No completed Malmö receipt yet.
+App/source runtime **2b83475f5e68** is active. Malmö1280/21120 has a published,
+loaded, receipted PriceUniverse and responds ready200. Lund1281/22350 remains
+ready200. First Malmö artifact `8d1199ee…` contains2376 products and46 selectable
+store/price contexts: ICA23, Willys10, Lidl8, Hemköp4 and City Gross1. These are
+not46 distinct physical stores or complete retailer coverage. Coop/Stora Coop/
+X:-tra remain absent from the selectable Malmö contexts because their municipal
+publications have not qualified. First publication22:37 UTC10 October; relay
+receipt22:44:12. Exact evidence: `.local/municipal-rollout/malmo-chain-acceptance.json`.
 
-The user completed the administrator action. The existing **Smako Willys Local
-Relay** runs `D:\smako-local-relay\releases\f5b6aedc851d` with
-`-Municipalities -Workspace D:\smako-local-relay\scopes`; principal, triggers
-and settings were verified unchanged. It was started20:34:47 UTC. By21:46,
-three of Malmö's four verified online-store catalogs are collected and the fourth
-is being fetched. This server correction needs no further Windows package change.
+A genuine five-dinner, two-serving public menu restricted to Willys Malmö
+Emporia passed all basket, nutrition, store-filter and identical-reload checks
+in10.172 seconds. All252 previous plan revisions and82 private states are
+hash-preserved; this isolated test added one plan revision. Evidence:
+`malmo-public-menu/clean-balanced.json` and `preservation.json` in the same folder.
 
-The rollout exposed and fixed two Hemköp defects. Planning selected the right
-municipal stores but transport still checked Lund's legacy allowlist; `03f0691`
-re-reads the verified municipal authority at transport construction, retaining
-explicit crawl opt-in and schema holds. Actual deployed constructors now accept
-Malmö IDs4114,4199,4212,4247 without external requests. `2b83475` keeps missing
-verified catalogs due after first publication, without inventing priced contexts.
-Its regression fails on the preceding source image and passes on this image.
-Runtime also includes74d5c03's mobile store-label row fix.
+**Remaining live-control blocker:** the deployed proxy sends
+`Permissions-Policy: camera=(self), geolocation=(), microphone=()`.
+Repository fix1fc4b6c allows only same-origin geolocation. The corresponding
+change to the actually bound Caddy configuration validates successfully and is
+waiting for the shared operation lease after the ordinary Hemköp collection.
+The bound runtime config differs from the file currently reached through
+`/opt/smako/current`; the prepared activation pins an exact copy of the real
+runtime config with only the geolocation change and preserves actual environment,
+image, TLS volumes and ports. Never replace it using the unreviewed host-path file.
 
-Final candidate image verification:17 app tests and33 source tests PASS.
-Focused transport/planning tests, Ruff and compileall passed. Earlier216 distinct
-focused tests and fixture-browser evidence remain valid for unchanged behavior;
-this is not a claim of a green complete repository suite or live Malmö prices.
-Four live Lund checks after activation pass (public/personal, Chromium/WebKit),
-including separate store-label rows. An initial sequential geometry assertion
-crossed a layout shift; simultaneous DOM measurement plus screenshot inspection
-verified the layout. Malmö browser/store-constrained menu acceptance remains pending.
+New reusable live probe4194ce3 is `scripts/release_verification/municipal_live_browser.py`.
+It takes municipality, postal scope, simulated latitude/longitude and output path;
+it checks public/personal Chromium/WebKit controls against the genuine API.
+The current deployed denial is reproduced explicitly in `geo-policy-negative`.
+Ruff/compileall pass. Full Malmö nearby-store browser acceptance is still pending.
 
-Only app/scheduler images and BUILD_ID changed. Mounts, proxy, receiver, isolated
-recipe service and schedules were retained. Backup integrity/FK checks passed
-for252 plan revisions and82 private states. Activation evidence and backup:
-`/opt/smako/evidence/municipal-recovery-activation-2b83475f5e68`;
-local `.local/municipal-rollout/recovery-activation.stdout`, `recovery-images/`.
-Old UI-only74 and transport-only03 images were never activated. Their verified
-remote staging archives were removed; local archives remain. The successful2b
-activation also removed only its verified remote staging TAR. Do not rerun any
-of those activation scripts against the new runtime.
+The two Hemköp fixes are deployed: transport authority now re-reads verified
+municipal inventory (03f0691), and verified full catalogs absent from the first
+artifact remain due (2b83475). Actual constructors accept IDs4114,4199,4212,4247.
+The ordinary22:45 UTC tick selected Malmö/Hemköp, beginning4114 at22:46:59.
+Full catalogs have not yet qualified. The retained traffic limit is0.1 requests/s
+with one connection; the runner timeout is7200 seconds. Measure this work before
+adding larger municipalities, rather than assuming arbitrary scopes fit.
 
-The first server Malmö run failed before Willys import. ICA504, Coop2087 and
-Coop Online11494 source rows qualified. Optional source results included23
-successful ICA stores, four Hemköp, eight Lidl and one City Gross. Coop/X:-tra
-retain blocked/incomplete publications. These are source-stage counts, not proof
-of published selectable contexts or complete municipal coverage. Lund Hemköp4224
-retains its schema hold. Server free space after activation was14.6GB; expansion
-requires fresh capacity measurements, not assumptions from Malmö alone.
+App/source activation evidence/backup:
+`/opt/smako/evidence/municipal-recovery-activation-2b83475f5e68`.
+17 appimage and33 sourceimage tests passed; earlier216 distinct focused offline
+cases remain evidence for unchanged behavior, not a whole-repository-suite claim.
+Four live Lund checks passed after activation. Windows continues using the
+verified f5b6aed relay release with `-Municipalities` and the existing account,
+triggers and task settings. The first Malmö upload encountered the active Lund
+lease; the same qualified packet was subsequently imported without refetching.
+The existing Windows task then confirmed the already-active version and receipted
+it. No new recurring scheduler was created.
 
 The municipal rollout extends the existing `municipal-collection-scopes-v1`
 registry with `refresh_scopes`. It does not add another scheduler. The ordinary
@@ -118,9 +119,9 @@ They do not prove live Malmö prices or retailer availability.
 The initial 19:02 UTC check was blocked by an ordinary Lund refresh. That job
 completed, published and loaded `65dee955…`; the subsequent controlled code
 activation is recorded above. The Windows action update is now verified;
-remaining live acceptance is authentic collection → import → publication →
-loaded universe → receipt for Malmö. City Gross or any blocked retailer must remain a
-reported coverage gap, never fabricated catalog coverage.
+the complete first Malmö collection → import → publication → loaded universe →
+receipt chain is verified. Nearby-store browser acceptance still awaits the proxy
+policy correction. Blocked retailers remain explicit coverage gaps.
 
 Before expanding to the largest municipalities, measure collection duration and
 storage using each genuine source run. The current Willys relay is bounded to
@@ -128,8 +129,14 @@ storage using each genuine source run. The current Willys relay is bounded to
 artifact, and a two-hour collection request window. The existing Windows task
 has a three-hour execution limit and processes municipalities sequentially.
 These are retained guards, not evidence that any size of municipality fits.
-The Malmö first run already shows that catalog parsing/storage contributes
-material runtime beyond network requests. Larger scopes may require resumable
+The first Malmö relay run completed four catalogs with39,594 store/product rows
+(11,422 distinct retailer products),2572 HTTP200 responses and zero challenges
+in5168.609 seconds (about86 minutes). Parsing/storage and package validation
+contribute material runtime beyond network requests. Its first upload succeeded
+but import met the ordinary Lund operation lease; the exact qualified8,162,127-
+byte artifact was retained and reused through the existing import command once
+idle. Server replay reached matching complete row counts and health_checked at
+22:19 UTC. Publication and the relay receipt are separate later checks. Larger scopes may require resumable
 per-store work and fair ordering using the existing snapshot/relay pipeline;
 do not simply increase caps or weaken completeness. Check server space before
 each addition: current builds make a consistent copy of the shared database.
