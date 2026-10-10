@@ -72,8 +72,8 @@ def test_context_restores_environment_on_failed_scope(registry):
 
 def test_third_municipality_uses_registered_key_without_new_hardcoded_city(registry):
     from grocery_data import __main__ as cli
-    from grocery_data.app.domain import Chain
     from grocery_data.app.api.geography import resolve_postal_scope
+    from grocery_data.app.domain import Chain
 
     add_municipality("1480", "41110", environment=registry, persist=True)
     scopes = refresh_scopes(registry)
