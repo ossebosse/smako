@@ -190,7 +190,7 @@ class PersonalPlanner:
         )
         self.auditor = BasketAuditor(pantry_items=frozenset())
         self.user = UserPricingContext.from_chain_flags(
-            request.memberships
+            request.pricing_memberships
             or {
                 k: request.use_member_prices
                 for k in ("ica", "coop", "willys", "hemkop", "citygross", "lidl")

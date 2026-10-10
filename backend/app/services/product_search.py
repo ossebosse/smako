@@ -98,6 +98,7 @@ class ProductSearchRequest(BaseModel):
     query: str = Field(min_length=1, max_length=120)
     postal_code: str = Field(default="22350", pattern=r"^[0-9]{5}$")
     memberships: tuple[MembershipProgram, ...] = Field(default=(), max_length=6)
+    membership_price_policy: Literal["selected", "all_advertised"] = "selected"
     limit: int = Field(default=20, ge=1, le=40)
     offset: int = Field(default=0, ge=0, le=1000)
     view: Literal["relevance", "cheapest", "campaigns", "multiple", "unit"] = "relevance"
@@ -255,7 +256,8 @@ class ProductSearchIndex:
         usable, stale, ages = prepared._context_partition(now=now, stale_age_hours=stale_hours)
         states = tuple((key, "AGING" if ages[key] >= warning_hours else "FRESH") for key in usable)
         target_date = now.astimezone(ZoneInfo("Europe/Stockholm")).date()
-        user = UserPricingContext(memberships=request.memberships)
+        user = UserPricingContext(memberships=(tuple(MembershipProgram)
+            if request.membership_price_policy == "all_advertised" else request.memberships))
         cache_key = repr(
             (
                 prepared.universe.universe_id,

@@ -67,7 +67,7 @@
       <form id="personal-form">
         <div id="complete-recipe-controls"></div>
         <fieldset><legend>Prisområde och butiker</legend><div class="personal-grid"><label>Postnummer<input id="postal-code" value="22350" inputmode="numeric" pattern="[0-9]{5}" required /></label><label>Max inköpsställen för hela korgen<select id="max-stores"><option>1</option><option selected>2</option><option>3</option></select></label></div>
-          <p>Välj dina butiksmedlemskap. De är skilda från ett Smakokonto.</p><div id="memberships" class="personal-checks"></div>
+          <p>Annonserade medlemspriser räknas alltid med. Resultatet visar vilka butiksmedlemskap som krävs. Personliga kuponger ingår inte.</p><div id="memberships" class="personal-checks" hidden></div>
         </fieldset>
         <fieldset><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Granska de svenska fälten före tillämpning. Ogillar är ett mjukt önskemål. Uteslutningar och allergier är hårda krav.</p><div id="profile-fields" class="personal-grid"></div>
           <label id="unresolved-label" hidden>Inte tolkat – flytta till rätt fält och töm sedan rutan<textarea id="unresolved-text"></textarea></label>

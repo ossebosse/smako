@@ -340,6 +340,18 @@
     const budget=plan.personal?.checks?.search_outcome?.budget_message;if(typeof budget==="string"&&budget.trim())out.append(el("p",budget));return out;
   }
 
+  function membershipSummary(plan) {
+    const labels={ICA_STAMMIS:"ICA Stammis",COOP_MEMBER:"Coop medlem",HEMKOP_MEMBER:"Klubb Hemköp",LIDL_PLUS:"Lidl Plus",WILLYS_PLUS:"Willys Plus",CITY_GROSS_PRIO:"City Gross Prio"};
+    const required=new Set();let unknown=false;
+    for(const store of plan.optimized_basket?.stores||[])for(const row of store.items||[]){
+      if(row.membership_required){if(row.membership_program)required.add(row.membership_program);else unknown=true;}
+      for(const application of row.group_applications||[]){const g=application.group;if(g?.membership_program)required.add(g.membership_program);else if(g?.eligibility==="member")unknown=true;}
+    }
+    if(!required.size&&!unknown)return "";
+    const names=[...required].sort().map(p=>labels[p]||p);if(unknown)names.push("medlemskap enligt inköpsraderna");
+    return `Medlemskapsbaserat pris. Totalsumman kräver ${names.join(", ")}. Utan dessa medlemskap kan beloppet bli högre.`;
+  }
+
   function financials(plan) {
     const checks=plan.personal?.checks;if(!checks||!("used_ingredient_cost" in checks))return null;
     const money=value=>`${number(value)} kr`;const out=el("section",null,"recipe-purchase-explanation");out.append(el("h3","Inköp och förbrukning"));
@@ -493,5 +505,5 @@
       }
     }finally{signal?.removeEventListener("abort",abort);if(reader===flow)reader=null;}
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,clearPrivateDrafts,storage});
+  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,membershipSummary,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,clearPrivateDrafts,storage});
 })();

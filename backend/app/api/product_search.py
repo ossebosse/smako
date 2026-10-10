@@ -14,6 +14,7 @@ router = APIRouter(prefix="/api", tags=["product search"])
 @router.post("/product-search")
 def search_products(request: ProductSearchRequest, response: Response) -> dict:
     started = perf_counter()
+    request = request.model_copy(update={"membership_price_policy": "all_advertised"})
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(request.postal_code, {})
     if prepared is None:
         raise HTTPException(422, "Det finns inget aktiverat prisunderlag för postnumret.")

@@ -62,6 +62,10 @@ class PlanRequest(BaseModel):
     servings: int = Field(default=4, ge=1, le=12)
     max_stores: int = Field(default=2, ge=1, le=4)
     use_member_prices: bool = False
+    membership_price_policy: Literal["selected", "all_advertised"] = Field(
+        default="selected", exclude_if=lambda value: value == "selected",
+        description="Pricing assumption, separate from memberships the user holds. Old revisions retain selected-only semantics.",
+    )
     memberships: dict[
         Literal["ica", "coop", "willys", "hemkop", "citygross", "lidl"],
         bool,
@@ -111,6 +115,12 @@ class PlanRequest(BaseModel):
     min_protein_g_per_serving: float = Field(default=18, ge=0, le=200)
     min_vegetable_g_per_serving: float = Field(default=100, ge=0, le=1000)
     debug: bool = False
+
+    @property
+    def pricing_memberships(self) -> dict[str, bool]:
+        if self.membership_price_policy == "all_advertised":
+            return {program.chain: True for program in MembershipProgram}
+        return self.memberships
 
     @field_validator("allowed_store_ids")
     @classmethod

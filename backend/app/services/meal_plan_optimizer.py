@@ -1385,7 +1385,7 @@ class MealPlanService:
         prepared: PreparedPriceUniverse | None = None
         freshness_view = None
         membership_vector = normalized_memberships(
-            request.memberships or None,
+            request.pricing_memberships or None,
             use_member_prices=request.use_member_prices,
         )
         pricing_context = UserPricingContext.from_chain_flags(membership_vector)
@@ -2657,7 +2657,7 @@ class MealPlanService:
         warnings = list(inherited_warnings or [])
         pricing_context = UserPricingContext.from_chain_flags(
             normalized_memberships(
-                request.memberships or None,
+                request.pricing_memberships or None,
                 use_member_prices=request.use_member_prices,
             )
         )
@@ -2844,7 +2844,7 @@ class MealPlanService:
             self.price_universe_manager.get_for_request(
                 request.postal_code,
                 normalized_memberships(
-                    request.memberships or None,
+                    request.pricing_memberships or None,
                     use_member_prices=request.use_member_prices,
                 ),
             )
@@ -2856,8 +2856,8 @@ class MealPlanService:
             if prepared is not None
             else create_price_provider(
                 self.settings,
-                use_member_prices=request.use_member_prices,
-                memberships=request.memberships or None,
+                use_member_prices=request.use_member_prices or request.membership_price_policy == "all_advertised",
+                memberships=request.pricing_memberships or None,
             )
         )
         builder = (
@@ -2873,7 +2873,7 @@ class MealPlanService:
                 raise
             # Restart the complete pipeline so no live and mock product rows can
             # ever coexist in the same response.
-            mock = MockPriceProvider(use_member_prices=request.use_member_prices)
+            mock = MockPriceProvider(use_member_prices=request.use_member_prices or request.membership_price_policy == "all_advertised")
             return await builder(
                 request,
                 mock,

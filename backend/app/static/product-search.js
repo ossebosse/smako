@@ -16,8 +16,8 @@
   function settings() {
     const memberships = [...document.querySelectorAll('input[name="membership"]:checked')].map((el) => el.value);
     const postal = $("postal-code").value.replace(/ /g, "");
-    $("product-search-area").textContent = `${postal} · ${memberships.length ? `${memberships.length} medlemskap` : "Utan medlemskap"} · Ändra`;
-    return {postal_code: postal, memberships};
+    $("product-search-area").textContent = `${postal} · Medlemspriser ingår · Ändra`;
+    return {postal_code: postal, memberships, membership_price_policy:"all_advertised"};
   }
   function priceLine(price) {
     const block = node("div", null, "product-context");
@@ -34,7 +34,7 @@
     block.append(node("p", `Rapporterat grundpris (kan inkludera kampanj): ${money(price.regular_price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""}`));
     for (const offer of price.promotions) {
       const label = offer.membership_required ? `Medlemskampanj · ${offer.membership_label}` : "Kampanj";
-      block.append(node("p", `${label}: ${offer.required_packages > 1 ? `${offer.required_packages} för ` : ""}${money(offer.price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""} · ${offer.description}${offer.membership_required ? (offer.eligible ? " · Gäller för ditt medlemskap" : " · Kräver medlemskap som inte är valt") : ""}${offer.max_quantity ? ` · Max ${offer.max_quantity} ${offer.required_packages > 1 ? "köpgrupper" : "förpackningar"}` : ""}${offer.valid_from || offer.valid_to ? ` · Gäller ${offer.valid_from || "?"}–${offer.valid_to || "?"}` : " · Giltighetsdatum saknas"}`));
+      block.append(node("p", `${label}: ${offer.required_packages > 1 ? `${offer.required_packages} för ` : ""}${money(offer.price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""} · ${offer.description}${offer.membership_required ? " · Kräver angivet medlemskap" : ""}${offer.max_quantity ? ` · Max ${offer.max_quantity} ${offer.required_packages > 1 ? "köpgrupper" : "förpackningar"}` : ""}${offer.valid_from || offer.valid_to ? ` · Gäller ${offer.valid_from || "?"}–${offer.valid_to || "?"}` : " · Giltighetsdatum saknas"}`));
     }
     const source = node("details");
     source.append(node("summary", "Prisets källa och aktualitet"));

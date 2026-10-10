@@ -738,11 +738,13 @@
     const parts = [];
     if (memberItems.length) {
       const labels = Array.from(new Set(memberItems.map(membershipProgramFor).filter(Boolean).map(membershipLabel)));
-      parts.push(`Din meny använder ${memberItems.length} medlemspris${memberItems.length === 1 ? "" : "er"}${labels.length ? `: ${labels.join(", ")}` : ""}.`);
+      parts.push(`Totalsumman förutsätter ${memberItems.length} medlemspris${memberItems.length === 1 ? "" : "er"}${labels.length ? `: ${labels.join(", ")}` : ""}.`);
     }
     if (savingsAmount !== null && savingsAmount > 0) {
-      parts.push(`Dina medlemskap sparar ${formatMoney(savingsAmount)} på exakt samma varor och mängder jämfört med publika priser.`);
+      parts.push(`Medlemspriserna minskar kostnaden med ${formatMoney(savingsAmount)} på exakt samma varor och mängder jämfört med publika priser.`);
     }
+    const requiredMemberships = window.SmakoRecipes.membershipSummary(data);
+    if (requiredMemberships) parts.unshift(requiredMemberships);
     parts.push(...coverageMessages);
     dom.membershipPlanSummary.hidden = parts.length === 0;
     if (!parts.length) {
@@ -3331,6 +3333,7 @@
       avoid_ingredients: excludedIngredients,
       diversity_mode: selectedDiversityMode(),
       varied_budget_percent: Number(dom.variedBudget.value),
+      membership_price_policy: "all_advertised",
       use_member_prices: memberships.length > 0,
       memberships,
       optimization_iterations: 1,

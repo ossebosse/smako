@@ -57,7 +57,7 @@ def _all_basket_items(plan: PlanResponse) -> list[BasketItem]:
 def _pricing_context(request: PlanRequest) -> UserPricingContext:
     return UserPricingContext.from_chain_flags(
         normalized_memberships(
-            request.memberships or None,
+            request.pricing_memberships or None,
             use_member_prices=request.use_member_prices,
         )
     )

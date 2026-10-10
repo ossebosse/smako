@@ -173,7 +173,7 @@ def _planner_admission_key(request: PlanRequest, settings: Settings) -> str:
     """Hash the full economic request and active immutable universe identity."""
 
     memberships = normalized_memberships(
-        request.memberships or None,
+        request.pricing_memberships or None,
         use_member_prices=request.use_member_prices,
     )
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(
@@ -351,6 +351,7 @@ def _production_consumer_request(
 ) -> PlanRequest:
     """Reject public requests that can expand planner work beyond the beta budget."""
 
+    request = request.model_copy(update={"membership_price_policy": "all_advertised"})
     if settings.app_env != "production":
         return request
     if request.personal is not None:
@@ -402,7 +403,7 @@ def _assert_offline_ready(request: PlanRequest, settings: Settings) -> None:
     if settings.price_provider == "mock":
         return
     memberships = normalized_memberships(
-        request.memberships or None,
+        request.pricing_memberships or None,
         use_member_prices=request.use_member_prices,
     )
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(
@@ -457,7 +458,7 @@ def _annotate_freshness(saved: SavedPlan) -> SavedPlan:
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(
         saved.request.postal_code,
         normalized_memberships(
-            saved.request.memberships or None,
+            saved.request.pricing_memberships or None,
             use_member_prices=saved.request.use_member_prices,
         ),
     )
@@ -809,9 +810,10 @@ async def replace_saved_product(
             raise ValueError(
                 "Använd planens personliga redigeringsflöde för en gemensam omberäkning."
             )
+        plan_request = saved.request.model_copy(update={"membership_price_policy": "all_advertised"})
         plan = replace_product(
             saved.plan,
-            saved.request,
+            plan_request,
             product_id=request.product_id,
             replacement_product_id=request.replacement_product_id,
         )
@@ -819,7 +821,7 @@ async def replace_saved_product(
         return _annotate_freshness(
             store.append(
                 plan_id=plan_id,
-                request=saved.request,
+                request=plan_request,
                 response=plan,
                 operation="product_replaced",
                 expected_parent=saved.revision,
@@ -849,9 +851,10 @@ async def replace_saved_recipe(
             raise ValueError(
                 "Använd planens personliga redigeringsflöde för en gemensam omberäkning."
             )
+        plan_request = saved.request.model_copy(update={"membership_price_policy": "all_advertised"})
         plan = await replace_recipe(
             saved.plan,
-            saved.request,
+            plan_request,
             recipe_index=request.recipe_index,
             replacement_recipe_name=request.replacement_recipe_name,
             settings=settings,
@@ -860,7 +863,7 @@ async def replace_saved_recipe(
         return _annotate_freshness(
             store.append(
                 plan_id=plan_id,
-                request=saved.request,
+                request=plan_request,
                 response=plan,
                 operation="recipe_replaced",
                 expected_parent=saved.revision,
