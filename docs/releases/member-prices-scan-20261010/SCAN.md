@@ -59,3 +59,27 @@ identiteter, perioder, prisbasis och köpgränser. Därefter schema-/semantikpro
 vanlig kvalificering och separat källpaket. Ingen generell okänd-fält-acceptans
 eller fallback från namnet ska införas. Medlemsprisändringen i denna kandidat
 rättar inte den kvarstående fysiska källspärren.
+
+## Komplettering: Coop Klostergården verifierad separat
+
+Samma erbjudande finns också i bevarat råsvar från Coop Klostergården,
+butik **3820**, ledger **106435**: Scan färsk fläskytterfilé, ca 1 kg,
+**65 kr/kg medlemspris, max 2 st/hushåll**. Värpinge är inte ensam butik.
+
+- Rå-ID `372c3d78e7b64b85a781a936fd04cb98`, samma avvisade fysiska snapshot.
+- Hämtat 2026-10-09 13:30:27.305802 UTC; 12 941 byte.
+- SHA-256 `778fd5ca02bcd72688ef036536a2c8503115a0f701608d76d4906c75bb8829a1`,
+  omkontrollerad mot originalfilen vid läsande serveråtkomst 10 oktober.
+- Sida https://www.coop.se/butiker-erbjudanden/coop/coop-klostergarden/.
+- Strukturerat endpoint `/dke/offers/sorting-groups/106435`, HTTP 200.
+- Eget stopp: `public_structured_schema_unrecognized`, okänt fält **row.weeklyTip**.
+  Det är inte samma observerade fältspärr som i Värpinges svar.
+
+Kampanjen kan modelleras gemensamt med flera belagda butikskopplingar; varje
+butiks kanal, period och köpgräns måste följa med. Ingen ny insamling eller
+källfix utförd i denna komplettering. Övriga kedjors konkreta jämförelseexempel
+och inventeringsantal finns i [COMPARABILITY.json](COMPARABILITY.json).
+Lidl har 26 publicerade kampanjrader i detta underlag, ingen kvarstående
+`not_compared` i kandidatens prisvisningsinventering; det bevisar inte komplett
+sortiment eller att varje vara klarar receptens närings-/identitetskrav.
+City Gross saknar rader i detta underlag; inga produktexempel kan styrkas där.
