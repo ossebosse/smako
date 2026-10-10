@@ -21,7 +21,11 @@ SOURCE_BACKEND = {
     "backend/app/providers/own.py",
     "backend/app/services/production_price_universe_build.py",
 }
-WINDOWS_ONLY = {"grocery_data/local_relay.py", "deploy/scripts/start_packaged_relay.ps1"}
+WINDOWS_ONLY = {
+    "grocery_data/local_relay.py",
+    "deploy/scripts/start_packaged_relay.ps1",
+    "deploy/scripts/enable_municipal_relay.ps1",
+}
 
 
 def git(*args):

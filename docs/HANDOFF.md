@@ -1,4 +1,4 @@
-# 2026-10-10: Kommunvis utökning implementerad – ännu inte aktiverad
+# 2026-10-10: Kommunvis utökning aktiverad på servern – Windowssteg blockerat
 
 Gren `feature/municipality-rollout`, permanent rot `D:\Projects\Smako`.
 Användaren har bett om Malmö i kontinuerlig drift och en återanvändbar väg att
@@ -15,18 +15,35 @@ omkvalificeras. Ändrade/äldre råpriser får inte kringgå promotionsgrinden.
 
 216 unika fokuserade offlinefall passerade efter riktade rättningar; fyra
 Chromium/WebKit-kontrollfall med fixturer passerade. Ruff/compileall PASS.
-Inga nya livepriser påstås. Se [driftväg och begränsningar](municipality_coverage.md),
+Dessutom 17 tester på slutlig appimage och 16 på separat källimage PASS.
+Inga nya Malmöpriser påstås. Se [driftväg och begränsningar](municipality_coverage.md),
 `.local/verification/municipal-test-summary.json` och tillhörande XML/browserbevis.
 
-Vid livekontrollen 19:02 UTC var Lund ready200 och det gamla prismanifestet
-fortsatt laddat. Ett ordinarie refreshjobb håller operationslåset; ingen
-produktion har ändrats här. Före aktivering: aktuell `smako_ops.py status`,
-vänta ut pågående jobb, verifiera paket/backup och använd den vanliga låsta
-aktiveringsvägen. Registrera Malmö1280/21120 med `municipal_cli`; ändra den
-befintliga Windowsuppgiftens launcher till den nya versionen och
-`-Municipalities -Workspace D:\smako-local-relay\scopes`. Bevara Lunds befintliga
-undermapp/kvitton, taskkonto, transport och schema. Verifiera sedan verklig
-insamling/import/publicering/laddning/kvittens innan Malmö kallas aktivt.
+Servern aktiverades 19:34 UTC (21:34 svensk tid), runtime `f5b6aedc851d`.
+Appimage `e26b8243…`, källimage `f1d95f80…`. Båda kommunerna registrerade under
+operationslåset. Lund ready200 med manifest `65dee955…` och 20 kontexter;
+Malmö pending/ready503 utan fabricerade priser. Ett första ordinarie runner-varv
+startades cirka19:35 UTC; komplett Malmöpublicering är ännu inte verifierad.
+Backup/integritet kontrollerade; alla252 planrevisioner och82 privata tillstånd
+hashbevarade. Samma scheman, mounts, policy och proxy. Den gamla tomma cron-
+processen behövde avslutas efter verifiering att inga jobb fanns i containern.
+
+**Hinder:** `Set-ScheduledTask` nekades åtkomst. Windowsuppgiften kör därför
+fortfarande gamla Lundreläet fe795. Nytt relä f5b6aed är installerat och
+integritetskontrollerat i `D:\smako-local-relay\releases\f5b6aedc851d`.
+Kör `deploy/scripts/enable_municipal_relay.ps1` i administratörs-PowerShell med
+de exakta argumenten i kommuninstruktionen. Skriptet bevarar konto/schema och
+ändrar befintlig action till `-Municipalities` och gemensam scopes-förälder.
+Skapa inte en parallell uppgift. Verifiera sedan verklig Malmöinsamling,
+import/publicering/laddning och kvittens. Börja nästa kontroll med aktuell
+`scripts/smako_ops.py status`, och kontrollera pågående lås innan andra åtgärder.
+
+Använd **qualified-packages** och **municipal-images-qualified.tar** under
+`.local/municipal-rollout/`. Tidigt kombinerat sourcepaket var felaktigt och
+ska inte användas. Builder b00bcd6 separerar källprocessens äldre beroenden;
+Windows/appens runtime är f5b6aed. Aktiverings- och bevarandebevis finns i
+samma lokala katalog; privat serverbackup under
+`/opt/smako/evidence/municipal-activation-f5b6aedc851d`.
 
 ---
 
