@@ -118,6 +118,18 @@ remaining live acceptance is authentic collection → import → publication →
 loaded universe → receipt for Malmö. City Gross or any blocked retailer must remain a
 reported coverage gap, never fabricated catalog coverage.
 
+Before expanding to the largest municipalities, measure collection duration and
+storage using each genuine source run. The current Willys relay is bounded to
+`min(5900, 1000 * verified_online_stores + 100)` requests, 6000 raw documents per
+artifact, and a two-hour collection request window. The existing Windows task
+has a three-hour execution limit and processes municipalities sequentially.
+These are retained guards, not evidence that any size of municipality fits.
+The Malmö first run already shows that catalog parsing/storage contributes
+material runtime beyond network requests. Larger scopes may require resumable
+per-store work and fair ordering using the existing snapshot/relay pipeline;
+do not simply increase caps or weaken completeness. Check server space before
+each addition: current builds make a consistent copy of the shared database.
+
 The sections below describe the earlier geographic evidence contract; their
 historical activation statements do not describe this candidate's capabilities.
 
