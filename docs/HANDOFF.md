@@ -1,3 +1,38 @@
+# 2026-10-10: Jämförbarhetsförslag implementerade – EJ AKTIVERADE
+
+Gren `feature/comparability-20261010`, runtime
+`5786d5fa6a0febb7a581a70e583e5c876d494da2`. Appimage `ca1b3532…`,
+källimage `63cc251f…`, separata identifierade paket på D: under
+`.local/comparability-fix-20261010/final-app-package/` och `final-source-package/`.
+Imagearkiv med båda OCI-images, 166 hashverifierade blobs, ligger i etappens rot.
+
+Scan65 återfunnet och kvalificerat i **både Värpinge3659 och Klostergården3820**.
+Två riktade offentliga butikshämtningar 13:57 UTC, inga fullkataloghämtningar.
+Exakt granskade buyAmount/payAmount/claim/weeklyTip rättade; köp3betala2 utan
+variantpriser fortsatt blockerat. Inget fysiskt pris flyttat till Online Syd.
+Vitlök57g från uttrycklig källtext, Willys verifierade styckgräns för viktpris,
+och gemensamt explicit antal köpförpackningar för okänt innehåll implementerade.
+956 av tidigare1390 blockerade rader kan väljas som antal köpförpackningar på
+samma gamla artefakt; inte nya gram-/näringsgodkännanden. ICA/Willys öppna
+kampanjval når nu snabbmenyn; Lidl befintlig uppskattningsväg bevarad.
+City Gross saknar kvalificerad källa och visas som täckningslucka.
+
+296 tester på levererad appimage PASS; 114 av dessa även på separat källimage.
+Mobila Chromium/WebKit shoppingflöden och publik sökning PASS. Riktiga jobb,
+dubbelklick1POST, audit, revision1/2, omladdning, ägare403. Inga pageerrors eller
+nätfel i godkända körningar. Testmiljöfel och tidigt baskontrollstopp bevarade.
+24 appfiler/7 källfiler/6 HTTP-filer hashkontrollerade; inga runtimekällmounts.
+
+[Resultat per fall](releases/comparability-20261010/RESULTS.md),
+[källbelägg/research](releases/comparability-20261010/RESEARCH.md),
+[maskinbevis](releases/comparability-20261010/EVIDENCE.json),
+[framtida separata aktiveringar](releases/comparability-20261010/ACTIVATION.md).
+Ingen betaaktivering, reläändring, prispublicering, schemaändring eller push.
+Senast observerad beta fortfarande return-session205; denna etapp har inte
+utfört ny driftstatuskontroll. Ny privat testlagring stannar isolerat på D:.
+
+---
+
 # 2026-10-10: Alla annonserade medlemspriser + Scan-utredning – EJ AKTIVERAD
 
 Gren `feature/member-prices-scan-20261010`, runtime
