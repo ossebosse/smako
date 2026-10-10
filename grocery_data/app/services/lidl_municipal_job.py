@@ -169,7 +169,7 @@ async def run_source_job(*, environment=None, now=None):
     now = now or datetime.now(UTC)
     env = os.environ if environment is None else environment
     root, config = configuration(env)
-    if config["enabled"] or (root / "config.json").exists():
+    if not os.getenv("MUNICIPAL_REFRESH_SCOPE") and (config["enabled"] or (root / "config.json").exists()):
         write(root / "config.json", config)
     if not config["enabled"]:
         return {"status": "disabled", "external_price_requests": 0}

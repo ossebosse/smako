@@ -97,7 +97,7 @@ def test_trace_cache_retains_recipe_context_and_limits(real):
 
 
 def test_explicit_store_selection_is_validated_and_not_silently_ignored():
-    with pytest.raises(ValueError): PlanRequest(allowed_store_ids=['x'])
+    assert PlanRequest(allowed_store_ids=['x']).allowed_store_ids == ('x',)
     with pytest.raises(ValueError): PlanRequest(allowed_store_ids=[' '],personal={})
     with pytest.raises(ValueError): PlanRequest(allowed_store_ids=['x','x'],personal={})
     assert 'allowed_store_ids' not in PlanRequest().model_dump(mode='json')

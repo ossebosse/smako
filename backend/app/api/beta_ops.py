@@ -402,8 +402,15 @@ def health(request: Request) -> dict[str, object]:
 
 
 @router.get("/ready")
-def ready(request: Request) -> JSONResponse:
+def ready(request: Request, postal_code: str | None = None) -> JSONResponse:
     settings = _settings(request)
+    if postal_code is not None:
+        from app.services.municipal_runtime import settings_for_city
+        from app.services.price_universe_runtime import GLOBAL_PREPARED_PRICE_UNIVERSES
+        prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(postal_code, {})
+        if prepared is None:
+            return JSONResponse(status_code=503, content={"status": "not_ready", "price_universe": {"active": False, "status": "unavailable"}})
+        settings = settings_for_city(settings, prepared.universe.key.scope_id.removeprefix("city:"))
     factory = getattr(request.app.state, "community_session_factory", None)
     db_ok, db_status = database_ready(factory)
     plans_ok, plan_status = plan_store_ready(settings.plan_store_path)
@@ -805,10 +812,15 @@ def admin_page(request: Request, session: SessionDep) -> HTMLResponse:
 async def reload_price_universe(
     request: Request,
     response: Response,
+    city: str | None = None,
 ) -> dict[str, Any]:
     response.headers["Cache-Control"] = "no-store"
     try:
-        return await reload_active_price_universe(request.app, _settings(request))
+        from app.services.municipal_runtime import settings_for_city
+        settings = _settings(request)
+        if city is not None:
+            settings = settings_for_city(settings, city)
+        return await reload_active_price_universe(request.app, settings)
     except (OSError, RuntimeError, ValueError) as exc:
         raise HTTPException(
             status_code=503,

@@ -643,7 +643,7 @@
       setSelectedMemberships(saved.memberships || []);
       dom.excludedIngredients.value = list(saved.avoid_ingredients).join(", ");
       if (saved.availability_mode) dom.availabilityInputs.forEach(input => { input.checked = input.value === saved.availability_mode; });
-      if (saved.recipe_preferences || saved.personal) recipeControls.restore(saved);
+      if (saved.recipe_preferences || saved.personal || saved.allowed_store_ids) recipeControls.restore(saved);
     } catch (_error) {
       // Ignore malformed or unavailable local storage.
     }
@@ -3284,7 +3284,7 @@
     dom.serviceRetryButton.disabled = true;
     try {
       const { response, payload } = await boundedRequest(controller, 15000, async (signal) => {
-        const response = await fetch("/ready", { headers: { Accept: "application/json" }, signal });
+        const response = await fetch(`/ready?postal_code=${encodeURIComponent(dom.postalCode.value.replace(/\s/g, ""))}`, { headers: { Accept: "application/json" }, signal });
         return { response, payload: await responseJson(response) };
       });
       if (generation !== readinessGeneration) return;
@@ -3463,6 +3463,7 @@
   dom.recipesInput.addEventListener("input", () => { updatePortionChip(); persistPlannerPreferences(); });
   dom.servingsInput.addEventListener("input", () => { updatePortionChip(); persistPlannerPreferences(); });
   dom.postalCode.addEventListener("change", persistPlannerPreferences);
+  dom.postalCode.addEventListener("change", () => void loadPublicRuntimeStatus());
   dom.maxStoresInput.addEventListener("change", () => {
     persistPlannerPreferences();
     sendAnalyticsEvent("max_stores_selected", { max_stores: Number(dom.maxStoresInput.value) });

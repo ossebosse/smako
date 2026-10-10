@@ -870,10 +870,12 @@ def _hemkop_collect_all_contexts(
         {city.casefold().strip(): city.strip() for city in cities if city.strip()}.values()
     )
     for city in unique_cities:
-        if (Chain.HEMKOP, city.casefold().strip()) not in _MULTI_CONTEXT_OWN_COLLECTION_CITIES:
+        from grocery_data.app.services.municipal_rollout import hemkop_policy, scope_for_city
+        if (Chain.HEMKOP, city.casefold().strip()) not in _MULTI_CONTEXT_OWN_COLLECTION_CITIES and scope_for_city(city) is None:
             continue
         try:
             policy = HemkopOperatorCrawlPolicy.from_environment()
+            policy = hemkop_policy(city, policy)
             plan = _hemkop_context_plan(factory, city, policy=policy)
         except Exception as exc:  # noqa: BLE001 - closed policy/planning boundary
             failures += 1

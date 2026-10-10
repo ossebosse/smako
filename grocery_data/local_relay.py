@@ -256,15 +256,54 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", type=Path, required=True)
     parser.add_argument("--config", type=Path)
+    parser.add_argument("--municipalities", action="store_true", help="Run registered municipal scopes sequentially; workspace is their shared parent")
     args = parser.parse_args()
     transport = load_transport(args.config)
     from grocery_data.relay_storage import configure_storage, receiver_capacity
     configure_storage(args.workspace)
+    if args.municipalities:
+        return run_municipalities(args.workspace, transport)
     return run(args.workspace,
         push=lambda a: source_cli.push(SimpleNamespace(
             artifact=a.artifact, host=transport.ssh_host, transport=transport)),
         activate=lambda digest: remote_activate(digest, transport),
         capacity_check=lambda: receiver_capacity(transport, args.workspace))
+
+
+def run_municipalities(workspace, transport, *, scopes=None, run_scope=run):
+    """Use the server's one registry; each municipality keeps its own receipts."""
+    from grocery_data.app.domain.municipality import municipality_name
+    from grocery_data.app.services.willys_municipal_scope import relay_municipality
+    from grocery_data.relay_storage import receiver_capacity
+
+    if scopes is None:
+        proc = _receiver_command(["ssh", "-oBatchMode=yes", "-oConnectTimeout=15", transport.ssh_host,
+            "docker", "exec", "--user", "10001:10001", transport.container,
+            "python", "-m", "grocery_data.municipal_cli", "relay-scopes"],
+            capture_output=True, text=True, check=True, timeout=30)
+        scopes = json.loads(proc.stdout.strip().splitlines()[-1])["municipalities"]
+    codes = [scope["municipality_code"] for scope in scopes]
+    if not codes or len(set(codes)) != len(codes):
+        raise ValueError("no unique enabled municipal relay scopes")
+    for code in codes:
+        municipality_name(code)
+    workspace = Path(workspace).resolve()
+    outcomes = []
+    with RefreshRunLock(workspace / "municipal-relay.lock"):
+        for code in codes:
+            scope_root = workspace / ("municipality-" + code)
+            scope_root.mkdir(parents=True, exist_ok=True)
+            if scope_root.is_symlink() or not scope_root.resolve().is_relative_to(workspace):
+                raise ValueError("relay municipal workspace escaped its data root")
+            relay_municipality(scope_root, code)
+            result = run_scope(scope_root,
+                push=lambda a: source_cli.push(SimpleNamespace(artifact=a.artifact, host=transport.ssh_host, transport=transport)),
+                activate=lambda digest: remote_activate(digest, transport),
+                capacity_check=lambda root=scope_root: receiver_capacity(transport, root))
+            outcomes.append({"municipality_code": code, "exit_code": result})
+        atomic_write_bytes(workspace / "municipal-relay-status.json", json.dumps({
+            "checked_at": datetime.now(UTC).isoformat(), "municipalities": outcomes}).encode())
+    return int(any(row["exit_code"] for row in outcomes))
 
 
 if __name__ == "__main__":

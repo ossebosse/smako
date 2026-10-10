@@ -582,6 +582,8 @@ async def build_city_price_universe(
     from grocery_data.app.services.willys_municipal_scope import approved_snapshot_stores
 
     municipal_willys_stores = approved_snapshot_stores(database, normalized_postal)
+    from grocery_data.app.services.hemkop_municipal_job import catalog_stores
+
     own = OwnGroceryPriceProvider(
         base_url="http://immutable-grocery-data.local",
         max_age_hours=max_price_age_hours,
@@ -590,6 +592,7 @@ async def build_city_price_universe(
         use_member_prices=False,
         client=client,
         municipal_willys_stores=municipal_willys_stores,
+        municipal_hemkop_stores=catalog_stores(normalized_city),
     )
     bindings: list[ProviderBinding] = []
     own_chains = frozenset(
@@ -678,6 +681,8 @@ async def build_city_price_universe(
         from app.providers.coop_municipality_offers import CoopMunicipalityOfferProvider
 
         try:
+            if source["inventory"]["area"]["city"].casefold() != normalized_city.casefold():
+                raise ValueError("Coop source municipality does not match the build")
             if source["database"] is None:
                 raise ValueError("explicit approved Coop offers database required")
             coop_engine, coop_sessions, _ = _read_only_engine(source["database"])

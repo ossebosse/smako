@@ -59,6 +59,22 @@ def source_inputs(*, city):
         return {}
 
 
+def catalog_stores(city):
+    """Official municipal selection for catalog discovery, independent of offers."""
+    from grocery_data.app.services.municipal_rollout import scope_for_city
+
+    if scope_for_city(city) is None:
+        return None
+    area, root, enabled = configuration(city)
+    if not enabled:
+        return {}
+    state = read(root / 'source-state.json')
+    if not state or state.get('inventory', {}).get('area') != area.model_dump(mode='json'):
+        raise ValueError('verified Hemkop municipal inventory required for catalog build')
+    return {identity: store for identity, store in approved_municipal_stores(state['inventory']).items()
+            if store.online_shopping is True}
+
+
 def persist_official_inventory(inventory, database):
     """Reuse exact physical/context registry; capability is never price approval."""
     from sqlalchemy.orm import Session

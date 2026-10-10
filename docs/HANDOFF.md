@@ -1,3 +1,35 @@
+# 2026-10-10: Kommunvis utökning implementerad – ännu inte aktiverad
+
+Gren `feature/municipality-rollout`, permanent rot `D:\Projects\Smako`.
+Användaren har bett om Malmö i kontinuerlig drift och en återanvändbar väg att
+lägga till fler kommuner, inklusive egna butikskryss/närhet. Detta är ett nytt
+arbete ovanpå den aktiverade jämförbarhetsreleasen nedan.
+
+Kommunregistret binder ordinarie runner, kedjejobb, Willys-relä/import, separat
+prispublicering och flera laddade prisuniversum. Bootstrap/backoff, kommunbyte,
+butiksfilter även i vanlig optimerad meny och personlig inköpslista, närhetsval
+och scoped reload implementerade. Lunds sparade kedjekonfiguration bevaras vid
+första registreringen. Samma kod/register kan lägga till en tredje kommun.
+Willys v4-identitet rättad i separat commit `a162f94`; v3-källpaket kan fortfarande
+omkvalificeras. Ändrade/äldre råpriser får inte kringgå promotionsgrinden.
+
+216 unika fokuserade offlinefall passerade efter riktade rättningar; fyra
+Chromium/WebKit-kontrollfall med fixturer passerade. Ruff/compileall PASS.
+Inga nya livepriser påstås. Se [driftväg och begränsningar](municipality_coverage.md),
+`.local/verification/municipal-test-summary.json` och tillhörande XML/browserbevis.
+
+Vid livekontrollen 19:02 UTC var Lund ready200 och det gamla prismanifestet
+fortsatt laddat. Ett ordinarie refreshjobb håller operationslåset; ingen
+produktion har ändrats här. Före aktivering: aktuell `smako_ops.py status`,
+vänta ut pågående jobb, verifiera paket/backup och använd den vanliga låsta
+aktiveringsvägen. Registrera Malmö1280/21120 med `municipal_cli`; ändra den
+befintliga Windowsuppgiftens launcher till den nya versionen och
+`-Municipalities -Workspace D:\smako-local-relay\scopes`. Bevara Lunds befintliga
+undermapp/kvitton, taskkonto, transport och schema. Verifiera sedan verklig
+insamling/import/publicering/laddning/kvittens innan Malmö kallas aktivt.
+
+---
+
 # 2026-10-10: Jämförbarhetskandidaten AKTIVERAD – samlad på master
 
 App `comparability-app-5786d5fa6a0f` / image `ca1b3532…` och källprocess

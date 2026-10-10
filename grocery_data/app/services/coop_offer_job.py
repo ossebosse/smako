@@ -43,8 +43,8 @@ def configuration(environment=None):
               "xtra_enabled": flag("COOP_XTRA_OFFERS_ENABLED", "xtra_enabled"),
               "municipality_code": code,
               "city": env.get("COOP_MUNICIPAL_BUILD_CITY") or env.get("REFRESH_CITY") or fallback_city or (municipality_name(code) if code else "")}
-    if config["enabled"]:
-        municipality_name(config["municipality_code"])  # official code, no fallback municipality
+    if config["enabled"] and municipality_name(config["municipality_code"]).casefold() != config["city"].casefold():
+        raise ValueError("Coop build locality must match the selected municipality")
     return root, config
 
 
@@ -123,7 +123,7 @@ async def run_offer_job(*, environment=None, now=None):
     now = now or datetime.now(UTC)
     env = os.environ if environment is None else environment
     root, config = configuration(env)
-    if config["enabled"] or (root / "config.json").exists():
+    if not os.getenv("MUNICIPAL_REFRESH_SCOPE") and (config["enabled"] or (root / "config.json").exists()):
         write(root / "config.json", config)
     if not config["enabled"]:
         return {"status": "disabled", "external_price_requests": 0}
@@ -220,6 +220,8 @@ def _source_inputs(*, city, environment=None):
     if not config["enabled"] or city.casefold() != config["city"].casefold():
         return {}
     state = read(location(root, config))
+    if state and state.get("inventory", {}).get("area", {}).get("municipality_code") != config["municipality_code"]:
+        raise ValueError("Coop source inventory belongs to another municipality")
     grouped, errors = {}, []
     for row in enabled_rows(state, config):
         identity = row["store_id"]

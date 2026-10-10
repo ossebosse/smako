@@ -46,20 +46,47 @@
     advanced.append(grid,custom,el("p","Alla rättens komponenter räknas tillsammans. Salt, peppar och vatten visas separat. Olja, kryddor och såser räknas. Skafferiet minskar inköpen, inte ingrediensantalet.","field-hint"),field("Tillåt fisk när övriga kostval medger det",fish));
     const contexts=el("fieldset",null,"recipe-contexts");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och priskanaler"),el("p","Inget markerat betyder alla tillåtna inköpsställen i ditt prisområde. Valda butiker och onlinekanaler begränsar sökningen; ditt butikstak gäller fortfarande.","field-hint"));
     const contextOptions=el("div");const contextStatus=el("p",null,"field-hint");contextStatus.setAttribute("role","status");contexts.append(contextOptions,contextStatus);advanced.append(contexts);
-    let selectedContexts=[],contextEpoch=0;
+    let selectedContexts=[],contextEpoch=0,contextPosition=null;
+    let contextPostal=document.getElementById("postal-code")?.value.replace(/\s/g,"");
+    const radius=select("store-radius",[["1","1 km"],["3","3 km"],["5","5 km"],["10","10 km"],["20","20 km"]],"3");
+    const nearby=el("button","Välj butiker nära mig");nearby.type="button";nearby.className="secondary-button";
+    contexts.insertBefore(field("Avstånd fågelvägen",radius),contextOptions);contexts.insertBefore(nearby,contextOptions);
+    nearby.addEventListener("click",async()=>{
+      if(!navigator.geolocation){contextStatus.textContent="Platsfunktionen saknas. Bocka i butikerna själv.";return;}
+      nearby.disabled=true;
+      const requestedPostal=document.getElementById("postal-code").value.replace(/\s/g,"");
+      try{
+        const position=await new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{timeout:15000,maximumAge:60000}));
+        if(requestedPostal!==document.getElementById("postal-code").value.replace(/\s/g,""))return;
+        contextPosition={latitude:position.coords.latitude,longitude:position.coords.longitude};
+        const data=await loadContexts();
+        if(!data)return;
+        const ids=data.contexts.filter(row=>row.distance_km!=null&&row.distance_km<=Number(radius.value)).map(row=>row.context_id);
+        if(!ids.length){contextStatus.textContent="Inga verifierade butikspositioner finns inom avståndet i vald kommun. Dina tidigare val är kvar; öka avståndet eller välj själv.";return;}
+        if(ids.length>40){contextStatus.textContent="Fler än 40 inköpsställen finns inom avståndet. Välj ett mindre avstånd eller bocka i butiker själv.";return;}
+        selectedContexts=ids;storage.set(key,values());await loadContexts();
+        contextStatus.textContent=`${ids.length} inköpsställen valda inom ${radius.value} km fågelvägen. Granska och ändra kryssen om du vill. Butiker utan verifierad position valdes inte.`;
+      }catch(_error){contextStatus.textContent="Platsen kunde inte läsas. Dina val är kvar; bocka i butikerna själv.";}
+      finally{nearby.disabled=false;}
+    });
     async function loadContexts(){
-      if(!enabled||!["complete","library"].includes(mode.value))return;
       const postal=document.getElementById("postal-code")?.value.replace(/\s/g,"");if(!/^\d{5}$/.test(postal||""))return;
       const epoch=++contextEpoch;contextStatus.textContent="Hämtar inköpsställen i ditt prisområde…";
-      try {const response=await fetch(`/api/price-contexts?postal_code=${encodeURIComponent(postal)}`,{headers:{Accept:"application/json"},cache:"no-store"});const data=await response.json();if(epoch!==contextEpoch)return;if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Inköpsställena kunde inte hämtas. Dina val är kvar.");
+      const positionQuery=contextPosition?`&latitude=${contextPosition.latitude}&longitude=${contextPosition.longitude}`:"";
+      try {const response=await fetch(`/api/price-contexts?postal_code=${encodeURIComponent(postal)}${positionQuery}`,{headers:{Accept:"application/json"},cache:"no-store"});const data=await response.json();if(epoch!==contextEpoch)return;if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Inköpsställena kunde inte hämtas. Dina val är kvar.");
         contextOptions.replaceChildren();const available=new Set();
-        for(const row of data.contexts||[]){available.add(row.context_id);const option=input(`context-${row.context_id}`,"checkbox",row.context_id,{checked:selectedContexts.includes(row.context_id)});const label=field(`${row.display_name}${row.price_scope_label?` · ${row.price_scope_label}`:row.price_semantics?` · ${row.price_semantics}`:""}`,option);label.className="check-label";contextOptions.append(label);}
+        for(const row of data.contexts||[]){available.add(row.context_id);const option=input(`context-${row.context_id}`,"checkbox",row.context_id,{checked:selectedContexts.includes(row.context_id)});const distance=row.distance_km!=null?` · ${number(row.distance_km)} km${row.distance_basis==="pickup"?" till upphämtning":""}`:contextPosition?" · avstånd okänt":"";const label=field(`${row.display_name}${row.address?` · ${row.address}`:""}${row.price_scope_label?` · ${row.price_scope_label}`:row.price_semantics?` · ${row.price_semantics}`:""}${distance}`,option);label.className="check-label";contextOptions.append(label);}
         for(const id of selectedContexts.filter(id=>!available.has(id))){const option=input(`context-${id}`,"checkbox",id,{checked:true});contextOptions.append(field(`Tidigare valt inköpsställe saknas i detta aktuella underlag (${id}). Avmarkera för att ändra ditt val.`,option));}
         contextStatus.textContent=data.contexts?.length?`${data.contexts.length} tillgängliga inköpsställen. Onlinepriser är skilda från fysiska butikspriser.`:"Inga aktuella inköpsställen kunde visas för området.";
+        return data;
       }catch(error){if(epoch===contextEpoch)contextStatus.textContent=error.message;}
     }
     contextOptions.addEventListener("change",()=>{selectedContexts=[...contextOptions.querySelectorAll("input:checked")].map(node=>node.value);storage.set(key,values());});
-    document.getElementById("postal-code")?.addEventListener("change",()=>void loadContexts());
+    document.getElementById("postal-code")?.addEventListener("change",()=>{
+      const postal=document.getElementById("postal-code").value.replace(/\s/g,"");
+      if(postal!==contextPostal){++contextEpoch;contextOptions.replaceChildren();storage.set(`${key}.stores.${contextPostal}`,selectedContexts);selectedContexts=storage.get(`${key}.stores.${postal}`)||[];contextPostal=postal;contextPosition=null;storage.set(key,values());}
+      void loadContexts();
+    });
     let estimates=null,pantry=null;
     if(!personal){
       estimates=input("recipe-nutrition-estimates","checkbox","");pantry=input("recipe-use-pantry","checkbox","",{checked:true});
@@ -98,7 +125,7 @@
         return result;
       });
     }
-    const feedback=el("p",null,"field-hint");feedback.setAttribute("role","status");advanced.append(feedback);box.append(advanced);host.replaceChildren(box);
+    const feedback=el("p",null,"field-hint");feedback.setAttribute("role","status");advanced.append(feedback);box.append(advanced);host.replaceChildren(contexts,box);
     let enabled=false;
     function sync() {
       advanced.hidden=!["complete","library"].includes(mode.value);advanced.disabled=!enabled||advanced.hidden;
@@ -129,7 +156,7 @@
       feedback.textContent=inactiveDinner?"Middagsvalen tillämpas när du lägger till middagar.":"";
     }
     function values() {
-      if(!["complete","library"].includes(mode.value))return {};
+      if(!["complete","library"].includes(mode.value))return selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};
       const [lo,hi]=preset.value==="custom"?[Number(min.value),Number(max.value)]:preset.value.split("-").map(Number);
       const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:mode.value==="library"||protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
       if(mode.value==="library"&&Number(document.getElementById(personal?"dinner-count":"recipes")?.value??0)===0)Object.assign(result.recipe_preferences,{cuisines:[],cuisine_distribution:"free",min_distinct_cuisines:null,max_same_main_protein_dinners:null,max_minutes:null});
@@ -152,6 +179,9 @@
         if(type==="dinner")level.value=meal.recipe_choices?.dinner_level||"simple";
       }
       selectedContexts=[...(request.allowed_store_ids||[])];
+      contextPostal=document.getElementById("postal-code")?.value.replace(/\s/g,"");
+      contextPosition=null;
+      window.dispatchEvent(new Event("smako-area-restored"));
       cuisineInputs.forEach(n=>n.checked=(preferences.cuisines||[]).includes(n.value));
       min.value=preferences.min_ingredients??10;max.value=preferences.max_ingredients??15;
       const pair=`${min.value}-${max.value}`;preset.value=["10-15","6-10","10-20"].includes(pair)?pair:"custom";
@@ -169,8 +199,10 @@
     mode.addEventListener("change",()=>void loadContexts());
     moreVariety.addEventListener("click",()=>{cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;sync();storage.set(key,values());});
     restore(storage.get(key)||{});
+    void loadContexts();
     return {
-      values(){return enabled?values():{};}, mealValues, restore,
+      storeValues(){return selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};},
+      values(){return enabled?values():selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};}, mealValues, restore,
       enabled(value){enabled=value===true;box.hidden=!enabled;box.disabled=!enabled;sync();if(enabled)void loadContexts();},
       reset(){restore({});storage.remove(key);},
       validate(){sync();return !enabled||advanced.hidden||[...advanced.querySelectorAll("input,select")].every(node=>node.disabled||node.checkValidity());},

@@ -76,7 +76,8 @@ def active_price_status(settings: Settings, *, now: datetime | None = None) -> d
     usable, _stale, ages = prepared._context_partition(
         now=evaluated_at, stale_age_hours=settings.max_price_age_hours
     )
-    missing = sorted(set(settings.price_universe_required_context_ids) - set(usable))
+    from app.services.municipal_runtime import required_contexts
+    missing = sorted(required_contexts(settings, prepared) - set(usable))
     status = prepared.status(
         now=evaluated_at,
         warning_age_hours=settings.price_age_warning_hours,
@@ -580,6 +581,15 @@ def _refresh_runner_status(path: Path) -> dict[str, Any]:
     ):
         return {"available": False, "status": "invalid_status"}
     runtime = payload.get("runtime_reload")
+    if isinstance(payload.get("municipalities"), list):
+        rows = [{"municipality_code": _safe_status_string(row.get("municipality_code")),
+                 "exit_code": row.get("exit_code") if type(row.get("exit_code")) is int else None,
+                 "error_type": _safe_status_string(row.get("error_type"))}
+                for row in payload["municipalities"] if isinstance(row, dict)]
+        return {"available": True, "status": payload.get("status") if payload.get("status") in {"complete", "degraded", "failed"} else "unknown",
+                "municipalities": rows, "exit_code": payload.get("exit_code"),
+                "runtime_activated_at_attempt": None,
+                "completed_at": _safe_status_string(payload.get("completed_at"), max_length=64)}
     runtime = runtime if isinstance(runtime, dict) else {}
     runtime_status = _safe_status_string(runtime.get("status"), max_length=64)
     new_id = _safe_status_string(runtime.get("new_price_universe_id"))

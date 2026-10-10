@@ -73,7 +73,20 @@ def load_configured_price_universe(
     artifact = store.resolve_active_artifact(settings.price_universe_city)
     if artifact is None:
         raise RuntimeError("required active PriceUniverse artifact is unavailable")
-    return manager.load_file_and_activate(artifact)
+    prepared = manager.load_file_and_activate(artifact)
+    import logging
+
+    from app.services.municipal_runtime import configured_areas
+    for area in configured_areas(settings):
+        if area["city"].casefold() == settings.price_universe_city.casefold():
+            continue
+        try:
+            extra = store.resolve_active_artifact(area["city"])
+            if extra is not None:
+                manager.load_file_and_activate(extra)
+        except (OSError, ValueError, RuntimeError) as exc:
+            logging.getLogger(__name__).warning("municipal_load_failed city=%s error_type=%s", area["city"], type(exc).__name__)
+    return prepared
 
 
 @asynccontextmanager

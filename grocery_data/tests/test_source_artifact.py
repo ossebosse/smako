@@ -369,7 +369,7 @@ async def test_operator_import_uses_normal_activation_and_duplicate_or_failure_p
         runner, "build_refresh_command", lambda: ["python", "-m", "grocery_data", "daily-refresh"]
     )
 
-    def managed(lock, *, command, run_kind, started_at):
+    def managed(lock, *, command, run_kind, started_at, status_writer):
         assert lock.info is not None
         assert command[-3:] == ["--chain", "citygross", "--no-external-refresh"]
         assert run_kind == "source_relay_import"
@@ -383,13 +383,19 @@ async def test_operator_import_uses_normal_activation_and_duplicate_or_failure_p
             )
         state.bytes = b"normal-activated-manifest"
         state.builds += 1
+        status_writer({"runtime_reload": {"new_price_universe_id": "normal-universe"}})
         return 0
 
     monkeypatch.setattr(runner, "_run_locked", managed)
+    monkeypatch.setattr(runner, "_write_status", lambda value: None)
+    monkeypatch.setattr(runner, "_reload_runtime", lambda: {"new_price_universe_id": "normal-universe"})
     result = await source_cli.import_and_activate(SimpleNamespace(artifact=p))
     assert result["activation"] == "normal_managed_refresh" and state.builds == 1
     duplicate = await source_cli.import_and_activate(SimpleNamespace(artifact=p))
     assert duplicate["activation"] == "already_active" and state.builds == 1
+    monkeypatch.setattr(runner, "_reload_runtime", lambda: {"status": "deferred"})
+    with pytest.raises(m.SourceArtifactError, match="runtime activation"):
+        await source_cli.import_and_activate(SimpleNamespace(artifact=p))
     before = state.bytes
     bad = tmp_path / "truncated-again.smako-source"
     bad.write_bytes(p.read_bytes()[:-100])

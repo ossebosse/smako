@@ -14,6 +14,7 @@ import os
 import subprocess
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from collections.abc import Callable
 from datetime import UTC, datetime
@@ -87,8 +88,9 @@ def _reload_runtime() -> dict[str, Any]:
         token = _required("BETA_ADMIN_TOKEN")
     except RuntimeError as exc:
         raise RuntimeReloadUnavailable("RuntimeReloadConfigurationMissing") from exc
+    suffix = ("?city=" + urllib.parse.quote(os.environ["REFRESH_CITY"])) if os.getenv("MUNICIPAL_REFRESH_SCOPE") else ""
     request = urllib.request.Request(
-        f"{base_url}/api/admin/reload-price-universe",
+        f"{base_url}/api/admin/reload-price-universe{suffix}",
         method="POST",
         headers={
             "Authorization": f"Bearer {token}",
@@ -417,6 +419,12 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     state = json.loads(state_path.read_bytes()) if state_path.exists() else {}
     store = PreparedUniverseArtifactStore(root)
     manifest = store.read_active(city)
+    if manifest is None:
+        retry = state.get("retry_at")
+        state_path.parent.mkdir(parents=True, exist_ok=True)
+        return {"bootstrap": True, "city": city, "work_due": not retry or datetime.fromisoformat(retry) <= now,
+                "reason": "municipality_needs_first_manifest", "state": state,
+                "state_path": str(state_path), "due_sources": [], "external_price_requests": 0}
     required = set(filter(None, env.get("PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS", "").split(",")))
     if not state.get("base_scope") or state.get("scope_universe_id") != manifest.universe_id:
         artifact = json.loads(store.resolve_active_artifact(city, verify_hash=True).read_bytes())
@@ -521,7 +529,7 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     remote_due = [k for k in due_sources if k != 'willys' or env.get('WILLYS_COLLECTION_LOCATION') != 'LOCAL_RELAY']
     from grocery_data.app.services.operations_diagnostics import schema_holds
 
-    held = schema_holds(state_path.parent)
+    held = schema_holds(root.parent / 'reports/operations' if env.get('MUNICIPAL_REFRESH_SCOPE') else state_path.parent)
     # Holds apply to the exact online collection context, never to a separate
     # physical-offer feed or every other store belonging to the same chain.
     bindings = {'hemkop': 'HEMKOP_STORE_EXTERNAL_IDS', 'coop': 'COOP_ONLINE_CONTEXT_IDS'}
@@ -530,7 +538,10 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
         variable = bindings.get(chain)
         if not variable or chain not in remote_due:
             continue
-        allowed = [s for s in env.get(variable, '').split(',') if s and s not in blocked_stores]
+        configured = env.get(variable, '').split(',')
+        if env.get('MUNICIPAL_REFRESH_SCOPE') and chain == 'hemkop':
+            configured = [s['source_provenance']['provider_store_id'] for s in state['base_scope'] if s['chain'] == chain]
+        allowed = [s for s in configured if s and s not in blocked_stores]
         if allowed:
             scoped_overrides[variable] = ','.join(allowed)
         else:
@@ -557,6 +568,21 @@ def _run_demand_locked(lock, *, started_at):
         _write_status({'status': 'not_due', **plan})
         return 0
     command = build_refresh_command()
+    if plan.get("bootstrap"):
+        if os.getenv("OWN_SOURCES_ONLY", "false").casefold() == "true":
+            command.append("--no-external-refresh")
+        code = _run_locked(lock, started_at=started_at, command=command)
+        ended = datetime.now(UTC)
+        state["last_check"] = {**plan, "exit_code": code}
+        if _artifact_store().read_active(plan["city"]) is None:
+            failures = state.get("failures", 0) + 1
+            state.update(failures=failures,
+                         retry_at=(ended + timedelta(minutes=min(360, 15 * 2 ** min(failures - 1, 5)))).isoformat())
+        else:
+            state.pop("retry_at", None)
+            state["failures"] = 0
+        atomic_write_bytes(path, json.dumps(state, ensure_ascii=False).encode())
+        return code
     chains = [k for k in plan['due_sources'] if k != 'primat']
     for chain in chains or ['citygross']:  # existing local-only rebuild path
         command.extend(['--chain', chain])
@@ -624,6 +650,31 @@ def main() -> int:
         )
         return 2
     try:
+        from grocery_data.app.services.municipal_rollout import (
+            municipal_environment,
+            refresh_scopes,
+        )
+        scopes = refresh_scopes()
+        if scopes:
+            outcomes = []
+            for scope in scopes:
+                try:
+                    with municipal_environment(scope):
+                        if os.getenv("DEMAND_REFRESH_ENABLED", "false").casefold() == "true":
+                            code = _run_demand_locked(operations_lock, started_at=datetime.now(UTC))
+                        else:
+                            code = _run_locked(operations_lock, started_at=datetime.now(UTC))
+                    outcomes.append({"municipality_code": scope["municipality_code"], "city": scope["city"], "exit_code": code})
+                except Exception as exc:  # noqa: BLE001 - independent municipal LKG, report only the class
+                    outcomes.append({"municipality_code": scope["municipality_code"], "city": scope["city"],
+                                     "exit_code": 1, "error_type": type(exc).__name__})
+            failed = any(row["exit_code"] not in {0, 2} for row in outcomes)
+            code = 1 if failed else 2 if any(row["exit_code"] == 2 for row in outcomes) else 0
+            _write_status({"schema_version": "production-refresh-runner-v1",
+                           "started_at": started_at.isoformat(), "completed_at": datetime.now(UTC).isoformat(),
+                           "status": "failed" if failed else "degraded" if code else "complete",
+                           "exit_code": code, "municipalities": outcomes})
+            return code
         if os.getenv("DEMAND_REFRESH_ENABLED", "false").casefold() == "true":
             return _run_demand_locked(operations_lock, started_at=started_at)
         return _run_locked(operations_lock, started_at=started_at)

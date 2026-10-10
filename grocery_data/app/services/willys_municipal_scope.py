@@ -31,9 +31,13 @@ def matches_relay_scope(manifest, code):
 
 
 def load_build_scopes():
+    from grocery_data.app.services.municipal_rollout import refresh_scopes
+
+    registered = {s["postal_code"]: s["municipality_code"] for s in refresh_scopes()
+                  if "willys" in s["sources"]}
     path = os.getenv("WILLYS_MUNICIPAL_CONFIG", "").strip()
     if not path:
-        return {}
+        return registered
     data = json.loads(Path(path).read_bytes())
     if set(data) != {"schema", "build_scopes"} or data["schema"] != "willys-municipal-build-v1":
         raise ValueError("unsupported Willys municipal configuration")
@@ -44,6 +48,10 @@ def load_build_scopes():
         if not isinstance(postal, str) or len(postal) != 5 or not postal.isdigit():
             raise ValueError("invalid build postal scope")
         municipality_name(code)
+    for postal, code in registered.items():
+        if postal in scopes and scopes[postal] != code:
+            raise ValueError("Willys legacy configuration conflicts with municipal registry")
+        scopes[postal] = code
     return scopes
 
 

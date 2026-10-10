@@ -1417,6 +1417,7 @@ class MealPlanService:
         if prepared is not None:
             freshness_view = prepared.request_view(
                 stale_age_hours=self.settings.max_price_age_hours,
+                allowed_context_ids=request.allowed_store_ids,
             )
             pricing_cache_identity = (
                 f"{pricing_cache_identity}:freshness:{freshness_view.cache_identity}"
@@ -1487,6 +1488,8 @@ class MealPlanService:
         else:
             increment_performance_counter("price_universe_cache_misses")
             increment_performance_counter("cache_misses")
+            if request.allowed_store_ids:
+                raise IncompleteBasketError("Lokalt prisunderlag krävs för uttryckligt butiksval.")
             if (
                 self.settings.price_universe_required
                 and str(getattr(provider, "source_name", "")).casefold() != "mock"
@@ -2830,6 +2833,8 @@ class MealPlanService:
             # method. Direct callers get an explicitly empty private workspace.
             return await asyncio.to_thread(lambda: PersonalPlanner(request, self.settings, prepared, state).create())
         strategy = self._strategy(request)
+        if request.allowed_store_ids and strategy != "optimized":
+            raise ValueError("Butiksval kräver den optimerade beräkningen.")
         if strategy == "legacy" and (
             request.diet_preference.value not in {"mixed", "meat_allowed"}
             or request.avoid_ingredients

@@ -16,8 +16,9 @@
     <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
     <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
     <script src="/static/frontend-bootstrap.js?v=loading-hotfix-20260909" defer></script>
-    <script src="/static/complete-recipes.js?v=member-prices-1" defer></script>
-  <script src="/static/app.js?v=member-prices-2" defer></script>
+    <script src="/static/complete-recipes.js?v=municipality-rollout-1" defer></script>
+    <script src="/static/municipal-areas.js?v=1" defer></script>
+  <script src="/static/app.js?v=municipal-20261010" defer></script>
     <script src="/static/product-search.js?v=comparability-20261010" defer></script>
   </head>
   <body>
@@ -38,8 +39,8 @@
     </header>
 
     <aside class="beta-coverage" aria-label="Betans geografiska täckning">
-      <strong>Publik beta i Lund</strong>
-      <span>Betan jämför just nu verifierade priskällor kring Lund. Fler områden kommer senare.</span>
+      <strong>Smako · Publik beta</strong>
+      <span>Välj en tillgänglig kommun och vilka butiker du vill jämföra.</span>
     </aside>
 
     <main id="main-content">
@@ -609,14 +610,14 @@
 
     <dialog id="onboarding-dialog" class="consumer-dialog onboarding-dialog" aria-labelledby="onboarding-title">
       <div class="dialog-card">
-        <p class="eyebrow">Välkommen till Lund-betan</p>
+        <p class="eyebrow">Välkommen till Smako-betan</p>
         <h2 id="onboarding-title">Billigare middagar, från pris till inköpslista</h2>
         <ol class="onboarding-steps">
           <li><span>1</span><strong>Vi jämför matpriser.</strong></li>
           <li><span>2</span><strong>Vi bygger recept utifrån vad som är billigt.</strong></li>
           <li><span>3</span><strong>Du får en färdig inköpslista.</strong></li>
         </ol>
-        <p class="coverage-note">Betan jämför just nu priskällor kring Lund.</p>
+        <p class="coverage-note">Kommunväljaren visar var aktuella priser finns.</p>
         <button id="onboarding-cta" class="primary-button" type="button">Skapa min veckomeny</button>
       </div>
     </dialog>
@@ -625,7 +626,7 @@
       <form id="feedback-form" method="dialog" class="dialog-card">
         <div class="dialog-heading">
           <div>
-            <p class="eyebrow">Lund-betan</p>
+            <p class="eyebrow">Smako-betan</p>
             <h2 id="feedback-dialog-title">Skicka feedback</h2>
           </div>
           <button class="dialog-close" type="button" data-close-feedback aria-label="Stäng">×</button>
@@ -765,7 +766,7 @@
 
     <footer class="site-footer">
       <div>
-        <p>Billigaste veckomenyn · Publik beta i Lund.</p>
+        <p>Billigaste veckomenyn · Publik beta.</p>
         <p id="footer-source">Produktpriser visas endast när de kommer från tjänstens prisdata.</p>
       </div>
       <nav class="footer-links" aria-label="Om tjänsten">

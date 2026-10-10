@@ -241,11 +241,17 @@ print('uploaded_to_inbox_only')
 
 
 async def import_and_activate(args):
+    from contextlib import ExitStack
+
+    from grocery_data.app.services.municipal_rollout import municipal_environment, scope_for_city
+    scope_context = ExitStack()
     if os.name != "nt" and os.geteuid() == 0:
         raise SourceArtifactError("production import must run as the application ops UID, not root")
     from deploy.scripts.run_daily_refresh import (
         _operations_lock,
+        _reload_runtime,
         _run_locked,
+        _write_status,
         build_refresh_command,
     )
     from grocery_data import __main__ as cli
@@ -264,20 +270,33 @@ async def import_and_activate(args):
             return {**result, "activation": "already_imported_superseded"}
         verified = verify_source_artifact(args.artifact)
         city = verified.manifest.source_scope.geographic_area.city
-        if os.getenv("REFRESH_CITY", "Lund").casefold() != city.casefold():
+        scope = scope_for_city(city)
+        if scope is not None:
+            scope_context.enter_context(municipal_environment(scope))
+        elif os.getenv("REFRESH_CITY", "Lund").casefold() != city.casefold():
             raise SourceArtifactError("source municipality differs from configured ordinary refresh city")
         active_store = PreparedUniverseArtifactStore(settings.price_universe_cache_root)
         active = active_store.read_active(city)
         if snapshot.is_active and active and snapshot.id in active.snapshot_ids:
             active_store.resolve_active_artifact(city, verify_hash=True)
-            return {**result, "activation": "already_active", "active_universe_unchanged": True}
+            loaded = _reload_runtime()
+            if loaded.get("new_price_universe_id") != active.universe_id:
+                raise SourceArtifactError("source published but runtime activation not confirmed")
+            return {**result, "activation": "already_active", "universe_id": active.universe_id,
+                    "active_universe_unchanged": True}
         if snapshot.state != "promoted":
             manager.promote(snapshot.id)
         command = build_refresh_command() + ["--chain", "citygross", "--no-external-refresh"]
-        # This approved Lund no-collection route invokes the existing managed
-        # build/atomic activation/index and runtime-reload/LKG wrapper.
+        # Reuse the managed build/activation/LKG wrapper. Campaign jobs may run
+        # when due; this route does not request a new base catalog collection.
+        statuses = []
+        def capture_status(status):
+            statuses.append(status)
+            _write_status(status)
+
         code = _run_locked(
-            lock, started_at=datetime.now(UTC), command=command, run_kind="source_relay_import"
+            lock, started_at=datetime.now(UTC), command=command, run_kind="source_relay_import",
+            status_writer=capture_status,
         )
         if code not in (0, 2):
             raise SourceArtifactError("normal PriceUniverse activation did not complete")
@@ -285,14 +304,16 @@ async def import_and_activate(args):
         if activated is None or snapshot.id not in activated.snapshot_ids:
             raise SourceArtifactError("qualified source was not activated; existing LKG retained")
         active_store.resolve_active_artifact(city, verify_hash=True)
+        if not statuses or statuses[-1].get("runtime_reload", {}).get("new_price_universe_id") != activated.universe_id:
+            raise SourceArtifactError("source published but runtime activation not confirmed")
         return {
             **result,
             "universe_id": activated.universe_id,
             "activation": "normal_managed_refresh",
             "exit_code": code,
-            "live_provider_requests": 0,
         }
     finally:
+        scope_context.close()
         engine.dispose()
         lock.release()
 

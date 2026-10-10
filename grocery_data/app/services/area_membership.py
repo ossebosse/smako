@@ -39,7 +39,10 @@ def collection_area(city, *, environment=None, persist=False):
     if saved.get("schema") != "municipal-collection-scopes-v1":
         raise ValueError("unsupported municipal collection scope")
     key = _key(city)
-    code = env.get("REFRESH_MUNICIPALITY_CODE") or saved["cities"].get(key)
+    code = (saved["cities"].get(key) if saved.get("refresh_scopes") else
+            env.get("REFRESH_MUNICIPALITY_CODE") or saved["cities"].get(key))
+    if env.get("MUNICIPAL_REFRESH_SCOPE") and code != env["MUNICIPAL_REFRESH_SCOPE"]:
+        raise ValueError("collection municipality differs from the current operation")
     if not code:
         return GeographicArea(city=city)
     name = municipality_name(code)

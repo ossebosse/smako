@@ -144,6 +144,7 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         include_conditional_offer_products: bool = False,
         client: httpx.AsyncClient | None = None,
         municipal_willys_stores: dict | None = None,
+        municipal_hemkop_stores: dict | None = None,
     ) -> None:
         if not base_url.strip():
             raise ValueError("OWN_GROCERY_BASE_URL must not be empty")
@@ -167,6 +168,8 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
         self._client.headers["User-Agent"] = "billigaste-veckomenyn-own-provider/1.0"
         self._stores: dict[str, Store] = {}
         self._municipal_willys_stores = municipal_willys_stores
+        self._municipal_catalog_stores = {chain: rows for chain, rows in
+            (("willys", municipal_willys_stores), ("hemkop", municipal_hemkop_stores)) if rows is not None}
         self._store_freshness: dict[str, dict[str, Any]] = {}
         # Set only by the explicit ICA row-contract provider after reading
         # promoted OWN snapshot identity. Never affects ordinary catalogues.
@@ -555,13 +558,17 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
                 empty_message="Egen prisdatatjänst hittade inga användbara butiker för",
             )
         except PriceProviderError:
-            if self._municipal_willys_stores is None:
+            if not self._municipal_catalog_stores:
                 raise
             stores = []
-        if self._municipal_willys_stores is None:
+        if not self._municipal_catalog_stores:
             return stores
-        municipal = self._municipal_willys_stores
-        result = {s.store_id: s for s in stores if s.chain.casefold() != "willys"}
+        result = {s.store_id: s for s in stores if s.chain.casefold() not in self._municipal_catalog_stores}
+        for chain, municipal in self._municipal_catalog_stores.items():
+            await self._add_municipal_catalog_stores(result, chain, municipal, postal_code)
+        return list(result.values())
+
+    async def _add_municipal_catalog_stores(self, result, chain, municipal, postal_code):
         for locality in sorted({s.city for s in municipal.values() if s.city}):
             try:
                 candidates = await self._find_stores_for_coverage(
@@ -571,13 +578,12 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
                 continue  # Remains absent/unusable; never substitutes another store.
             for candidate in candidates:
                 evidence = municipal.get(candidate.source_store_id)
-                if (candidate.chain.casefold() == "willys" and evidence is not None
+                if (candidate.chain.casefold() == chain and evidence is not None
                         and candidate.price_context_type == "online_store"
                         and candidate.physical_store_external_id == evidence.external_id
                         and candidate.address == evidence.address
                         and candidate.postal_code == "".join((evidence.postal_code or "").split())):
                     result[candidate.store_id] = candidate
-        return list(result.values())
 
     async def find_offer_stores(self, postal_code: str) -> list[Store]:
         """Discover offers-only stores for explicit diagnostics/enrichment.

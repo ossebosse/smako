@@ -79,7 +79,7 @@ def test_ordinary_runner_records_citygross_publication_only_after_actual_reload(
     statuses = _configure_refresh_runner(monkeypatch, store, tmp_path)
     monkeypatch.setenv("DEMAND_REFRESH_ENABLED", "false")
     monkeypatch.setenv("CITYGROSS_MUNICIPAL_ENABLED", "true")
-    monkeypatch.setenv("CITYGROSS_MUNICIPALITY_CODE", "1280")
+    monkeypatch.setenv("CITYGROSS_MUNICIPALITY_CODE", "1281")
     monkeypatch.setenv("CITYGROSS_MUNICIPAL_BUILD_CITY", "Lund")
     monkeypatch.setenv("CITYGROSS_MUNICIPAL_ROOT", str(tmp_path / "citygross"))
     root, config = job.configuration()

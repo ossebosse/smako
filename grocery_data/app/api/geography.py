@@ -36,6 +36,15 @@ def resolve_postal_scope(postal_code: str) -> GeographicResolution:
             coverage_limitation=POSTAL_SCOPE_LIMITATION,
         )
     city = SUPPORTED_POSTAL_PREFIXES.get(normalized[:2])
+    from grocery_data.app.services.municipal_rollout import refresh_scopes
+
+    registered = next((s for s in refresh_scopes() if s["postal_code"] == normalized), None)
+    if registered:
+        return GeographicResolution(
+            requested_postal_code=postal_code, normalized_postal_code=normalized,
+            resolved_city=registered["city"], resolution="registered_build_scope",
+            coverage_limitation="Registered build key; municipal membership requires official store evidence.",
+        )
     return GeographicResolution(
         requested_postal_code=postal_code,
         normalized_postal_code=normalized,

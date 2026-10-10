@@ -139,9 +139,7 @@ class PlanRequest(BaseModel):
         return DiversityPolicyOverrides.model_validate(values).model_dump(exclude_unset=True)
 
     @model_validator(mode="after")
-    def explicit_store_selection_requires_personal(self):
-        if self.allowed_store_ids and self.personal is None and not (self.recipe_preferences and self.recipe_preferences.mode == "complete"):
-            raise ValueError("Uttryckligt butiksval stöds i personlig planering.")
+    def validate_recipe_distribution(self):
         prefs = self.recipe_preferences
         if prefs and prefs.mode == "complete":
             dinner_count = (next((meal.count for meal in self.personal.meals if meal.meal_type == "dinner"), 0)

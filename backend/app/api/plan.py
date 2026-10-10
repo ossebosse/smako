@@ -46,7 +46,7 @@ from app.services.price_universe_runtime import (
 )
 from app.services.product_lookup import lookup_gtin
 from app.services.user_pricing import current_pricing_date
-from fastapi import APIRouter, Depends, Header, HTTPException, Request
+from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
@@ -432,9 +432,8 @@ def _assert_offline_ready(request: PlanRequest, settings: Settings) -> None:
     usable, _stale, _ages = prepared._context_partition(
         now=datetime.now(UTC), stale_age_hours=settings.max_price_age_hours
     )
-    if status.status in {"stale", "broken"} or (
-        set(settings.price_universe_required_context_ids) - set(usable)
-    ):
+    from app.services.municipal_runtime import required_contexts
+    if status.status in {"stale", "broken"} or (required_contexts(settings, prepared) - set(usable)):
         raise HTTPException(
             status_code=503,
             detail="active local PriceUniverse is not usable for consumer planning",
@@ -924,7 +923,11 @@ async def recipe_library_metadata():
 
 
 @router.get("/price-contexts")
-async def available_price_contexts(postal_code: str = "22350"):
+async def available_price_contexts(postal_code: str = "22350",
+    latitude: Annotated[float | None, Query(ge=-90, le=90)] = None,
+    longitude: Annotated[float | None, Query(ge=-180, le=180)] = None):
+    if (latitude is None) != (longitude is None):
+        raise HTTPException(422, "Ange både latitud och longitud.")
     normalized = PlanRequest(postal_code=postal_code).postal_code
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(normalized, {})
     if prepared is None:
@@ -935,8 +938,38 @@ async def available_price_contexts(postal_code: str = "22350"):
     compared, excluded = _consumer_price_context_coverage(prepared,
         usable_context_ids={s.store_id for s in view.stores},
         excluded_stale_context_ids=view.excluded_stale_context_ids)
-    return {"contexts": [row.model_dump(mode="json") for row in compared],
+    from app.services.municipal_runtime import distance_to_store
+    stores = {store.store_id: store for store in view.stores}
+    contexts = []
+    for row in compared:
+        value = row.model_dump(mode="json")
+        store = stores.get(row.context_id)
+        distance, basis = distance_to_store(store, latitude, longitude) if store else (None, None)
+        value.update(distance_km=distance, distance_basis=basis,
+                     address=store.address if store else None, city=store.city if store else None)
+        contexts.append(value)
+    if latitude is not None:
+        contexts.sort(key=lambda row: (row["distance_km"] is None, row["distance_km"] or 0, row["display_name"]))
+    return {"contexts": contexts,
             "excluded": [row.model_dump(mode="json") for row in excluded]}
+
+
+@router.get("/municipalities")
+async def available_municipalities():
+    from app.services.municipal_runtime import configured_areas, required_contexts
+    settings = get_settings()
+    rows = []
+    for scope in configured_areas(settings):
+        prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_active("city:" + scope["city"].casefold())
+        status, postal, available = "pending", scope.get("postal_code"), False
+        if prepared is not None:
+            postal = min(prepared.universe.key.postal_codes)
+            usable, _stale, _ages = prepared._context_partition(now=datetime.now(UTC), stale_age_hours=settings.max_price_age_hours)
+            status = prepared.status(stale_age_hours=settings.max_price_age_hours).status
+            available = status not in {"stale", "broken"} and not (required_contexts(settings, prepared) - set(usable))
+        rows.append({"municipality_code": scope["municipality_code"], "name": scope["city"],
+                     "postal_code": postal, "available": available, "status": status})
+    return {"municipalities": rows}
 
 
 @router.get("/price-universe/status")

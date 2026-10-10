@@ -547,6 +547,7 @@ class PreparedPriceUniverse:
         *,
         now: datetime | None = None,
         stale_age_hours: float = 48.0,
+        allowed_context_ids: tuple[str, ...] = (),
     ) -> RequestPriceUniverseView:
         """Exclude stale contexts before any economic ranking or cache lookup."""
 
@@ -556,6 +557,12 @@ class PreparedPriceUniverse:
             stale_age_hours=stale_age_hours,
         )
         allowed = frozenset(usable)
+        if allowed_context_ids:
+            selected = frozenset(allowed_context_ids)
+            if selected - allowed:
+                raise ValueError("Valda inköpsställen saknas eller har för gamla priser i vald kommun.")
+            allowed = selected
+            usable = tuple(identity for identity in usable if identity in allowed)
         filtered_maps = {
             "candidates_by_name": self._filter_candidates(
                 self.economic_pool.candidates_by_name,
@@ -594,7 +601,8 @@ class PreparedPriceUniverse:
             economic_pool=pool,
             usable_context_ids=usable,
             excluded_stale_context_ids=stale,
-            cache_identity=self.request_freshness_identity(now=evaluated_at, stale_age_hours=stale_age_hours),
+            cache_identity=self.request_freshness_identity(now=evaluated_at, stale_age_hours=stale_age_hours)
+                + (":selection:" + hashlib.sha256(json.dumps(sorted(allowed)).encode()).hexdigest() if allowed_context_ids else ""),
         )
 
     def to_artifact(self) -> PreparedPriceUniverseArtifact:
@@ -786,6 +794,10 @@ class PreparedPriceUniverseManager:
     def get_active(self, scope_id: str) -> PreparedPriceUniverse | None:
         with self._lock:
             return self._active.get(scope_id)
+
+    def active_universes(self) -> tuple[PreparedPriceUniverse, ...]:
+        with self._lock:
+            return tuple(self._active.values())
 
     def get_for_request(
         self,

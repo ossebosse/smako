@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory=$true)][string]$Workspace,
     [Parameter(Mandatory=$true)][string]$Config,
-    [switch]$CheckInstall
+    [switch]$CheckInstall,
+    [switch]$Municipalities
 )
 $ErrorActionPreference = 'Stop'
 $relayRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
@@ -42,5 +43,6 @@ $env:PYTHONDONTWRITEBYTECODE = '1'
 $relayArgs = @('-I', '-B', (Join-Path $relayRoot 'scripts/run_packaged_relay.py'))
 if ($CheckInstall) { $relayArgs += '--check-install' }
 else { $relayArgs += @('--workspace', $relayWorkspace, '--config', $relayConfig) }
+if ($Municipalities) { $relayArgs += '--municipalities' }
 & $relayPython @relayArgs
 exit $LASTEXITCODE
