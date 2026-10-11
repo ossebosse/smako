@@ -46,7 +46,9 @@ class HemkopParser:
     rewritten to Hemköp before leaving this adapter.
     """
 
-    parser_version = "hemkop-parser-v1.2-counted-weight"
+    # Version the reviewed catalog contract as well as product mapping so the
+    # guarded repair command can distinguish it from the rejected v1.2 run.
+    parser_version = "hemkop-parser-v1.3-reviewed-catalog"
 
     def __init__(self, *, accept_sales_price_object: bool = True) -> None:
         self._axfood_products = WillysParser(
