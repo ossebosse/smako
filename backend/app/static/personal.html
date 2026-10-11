@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#173e35" />
   <title>Smako · Min plan och skafferi</title>
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
-  <link rel="stylesheet" href="/static/personal.css?v=location-20261011" />
+  <link rel="stylesheet" href="/static/personal.css?v=sliders-20261011" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
   <script src="/static/complete-recipes.js?v=location-20261011" defer></script>
   <script src="/static/shopping-location.js?v=location-20261011" defer></script>
-  <script src="/static/personal.js?v=location-20261011" defer></script>
+  <script src="/static/personal.js?v=sliders-20261011" defer></script>
   <script src="/static/product-search.js?v=comparability-20261010" defer></script>
 </head>
 <body class="personal-app">
@@ -88,9 +88,7 @@
         <details id="extra-choices" class="extra-choices"><summary>Extraval</summary>
         <p>Fler måltider, smakval, butiker och egna gränser. Standardvalen gäller tills du ändrar dem.</p>
         <fieldset><legend>Fler måltider</legend><div id="extra-meal-toggles" class="personal-checks"></div><p>Valda måltider visas under middagar, med egna reglage för antal och portioner.</p></fieldset>
-        <fieldset><legend>Medlemspriser</legend>
-          <p>Annonserade medlemspriser räknas alltid med. Resultatet visar vilka butiksmedlemskap som krävs. Personliga kuponger ingår inte.</p><div id="memberships" class="personal-checks" hidden></div>
-        </fieldset>
+        <div id="memberships" hidden></div>
         <fieldset><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Granska de svenska fälten före tillämpning. Ogillar är ett mjukt önskemål. Uteslutningar och allergier är hårda krav.</p><div id="profile-fields" class="personal-grid"></div>
           <label id="unresolved-label" hidden>Inte tolkat – flytta till rätt fält och töm sedan rutan<textarea id="unresolved-text"></textarea></label>
           <p class="data-note">Uteslut ingredienser är ett hårt matval: fisk innebär inga fiskingredienser, även i sås och buljong. Det gäller inte bara huvudråvaran. Tillräckligt källstött ingrediensunderlag krävs; okänt godtas inte. Allergier anges separat och kräver även kontrollerat allergen- och spårunderlag. Ett godkänt matval är ingen allergisäkerhetskontroll. Tidigare sparade val behåller sin typ.</p>

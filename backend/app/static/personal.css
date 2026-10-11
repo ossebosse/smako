@@ -41,7 +41,10 @@ html {scroll-behavior:auto;}
 .personal-app .choices-primary {border-color:#a9c2b1; background:#fffef9;}
 .personal-app .choice-slider {padding:8px 0;}
 .choice-slider-heading {display:flex; align-items:baseline; justify-content:space-between; gap:12px;}
-.choice-slider output {font-size:1.05rem; font-weight:750; color:#245b4d; text-align:right;}
+.personal-app .choice-slider-heading>label {margin:0;}
+.slider-value-editor {display:inline-flex;align-items:center;gap:5px;flex-shrink:0;}
+.personal-app .slider-value-editor input {width:8ch;min-width:0;margin:0;padding:8px 6px;text-align:center;font-variant-numeric:tabular-nums;font-weight:750;color:#245b4d;background:#f7faf5;}
+.slider-value-editor input::placeholder {font-size:.8rem;font-weight:400;color:#55685b;opacity:1;}
 .personal-app .choice-slider input[type=range] {padding:0; border:0; background:transparent; accent-color:#245b4d; cursor:pointer; min-height:44px; margin:4px 0;}
 .choice-slider-scale {display:flex; justify-content:space-between; color:#55685b; font-size:.75rem; font-weight:400;}
 .personal-app input[type=range]:focus-visible {outline:3px solid #8fae94; outline-offset:3px; border-radius:6px;}
@@ -53,7 +56,8 @@ html {scroll-behavior:auto;}
 .meal-dialog>fieldset {padding:0;border:0;}
 .meal-settings-actions button {flex:1 1 110px;}
 .personal-app .choice-interval {padding:12px 16px;margin:14px 0;}
-.interval-value {font-variant-numeric:tabular-nums;font-weight:700;}
+.interval-value {display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums;font-weight:700;}
+.personal-app .interval-value label {display:flex;flex-direction:column;gap:6px;margin:0;}
 .interval-track {position:relative;height:48px;isolation:isolate;touch-action:pan-y;}
 .interval-track::before {content:"";position:absolute;left:12px;right:12px;top:21px;height:6px;border-radius:4px;background:linear-gradient(to right,#d9dfd6 var(--start),#245b4d var(--start),#245b4d var(--end),#d9dfd6 var(--end));}
 .personal-app .interval-track input[type=range] {appearance:none;-webkit-appearance:none;position:absolute;inset:0;width:100%;height:48px;margin:0;padding:0;border:0;background:transparent;pointer-events:none;}

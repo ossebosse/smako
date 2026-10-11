@@ -186,7 +186,7 @@ def test_meal_dialogs_intervals_and_shared_distribution_budget(choices):
     page.keyboard.press("End")
     expect(page.locator("#dinner-fish")).to_have_value("5")
     for kind in ("vegetarian", "chicken", "meat"):
-        expect(page.locator(f"#dinner-{kind}")).to_have_attribute("max", "0")
+        expect(page.locator(f"#dinner-{kind}")).to_have_attribute("max", "5")
         page.locator(f"#dinner-{kind}").focus()
         page.keyboard.press("End")
         expect(page.locator(f"#dinner-{kind}")).to_have_value("0")
@@ -229,6 +229,108 @@ def test_meal_dialogs_intervals_and_shared_distribution_budget(choices):
     assert meal["distribution"] == {"vegetarian": 0, "chicken": 0, "fish": 4, "meat": 0}
     assert meal["limits"]["min_weight_g"] is None and meal["limits"]["max_weight_g"] is None
     assert (meal["limits"]["min_protein_g"], meal["limits"]["max_protein_g"]) == (30, 60)
+
+
+def test_fixed_distribution_and_editable_values(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+
+    def enter(control, value):
+        editor = page.locator(f"#{control}-value")
+        editor.fill(value)
+        editor.press("Enter")
+
+    # Every thumb has its own accessible keyboard editor, including optional meals.
+    assert page.locator('input[type="range"]').evaluate_all(
+        "nodes=>nodes.every(n=>document.getElementById(n.id+'-value')?.getAttribute('aria-label'))")
+    enter("dinner-servings", "9")
+    expect(page.locator("#dinner-servings")).to_have_value("6")
+    enter("max-stores", "1")
+    page.locator("#dinner-distribution-open").click()
+    enter("dinner-vegetarian", "2")
+    page.locator("#dinner-chicken").focus()
+    page.keyboard.press("End")
+    expect(page.locator("#dinner-chicken")).to_have_value("3")
+    expect(page.locator("#dinner-vegetarian")).to_have_value("2")
+    # Editing an earlier category must not displace the later one either.
+    enter("dinner-vegetarian", "5")
+    expect(page.locator("#dinner-vegetarian-value")).to_have_value("2")
+    expect(page.locator("#dinner-chicken")).to_have_value("3")
+    for kind in ("vegetarian", "chicken", "fish", "meat"):
+        expect(page.locator(f"#dinner-{kind}")).to_have_attribute("max", "5")
+    enter("dinner-fish", "4")
+    expect(page.locator("#dinner-fish")).to_have_value("0")
+    enter("dinner-fish", "")
+    expect(page.locator("#dinner-fish")).to_have_value("-1")
+    page.locator("#dinner-diet").select_option("vegetarian")
+    expect(page.locator("#dinner-chicken-value")).to_be_disabled()
+    expect(page.locator("#dinner-chicken")).to_have_attribute("max", "5")
+    page.keyboard.press("Escape")
+    page.locator("#dinner-nutrition-open").click()
+    enter("dinner-min_protein_g", "30,5")
+    enter("dinner-max_protein_g", "500")
+    expect(page.locator("#dinner-max_protein_g-value")).to_have_value("100")
+    enter("dinner-max_carbs_g", "500")
+    expect(page.locator("#dinner-max_carbs_g-value")).to_have_value("400")
+    enter("dinner-max_protein_g", "20")
+    expect(page.locator("#dinner-max_protein_g-value")).to_have_value("30.5")
+    enter("dinner-max_protein_g", "")
+    enter("dinner-max_kcal", "650")
+    for width in (390, 1280):
+        page.set_viewport_size({"width": width, "height": 800})
+        assert page.locator("#dinner-nutrition-dialog").evaluate("n=>n.scrollWidth<=n.clientWidth")
+    page.keyboard.press("Escape")
+    page.locator("#extra-choices>summary").click()
+    expect(page.locator("#extra-choices")).not_to_contain_text("Medlemspriser")
+    # Blur also commits; invalid text and Escape leave the last valid value.
+    page.locator("#organic-percent-value").fill("25")
+    page.locator("#organic-percent-value").press("Tab")
+    enter("organic-percent", "abc")
+    page.locator("#organic-percent-value").fill("80")
+    page.locator("#organic-percent-value").press("Escape")
+    expect(page.locator("#organic-percent-value")).to_have_value("25")
+    assert not captured, "Enter in a value editor must not submit the plan"
+    payload = submit(page, captured)
+    assert payload["membership_price_policy"] == "all_advertised"
+    assert payload["max_stores"] == 1 and payload["personal"]["organic_percent"] == 25
+    meal = payload["personal"]["meals"][0]
+    assert meal["servings"] == 6
+    assert meal["distribution"] == {"vegetarian": 5, "chicken": 0, "fish": 0, "meat": 0}
+    assert meal["limits"]["min_protein_g"] == 30.5
+    assert meal["limits"]["max_protein_g"] is None
+    assert meal["limits"]["max_carbs_g"] == 400 and meal["limits"]["max_kcal"] == 650
+
+
+def test_saved_limits_above_new_scale_are_not_silently_lost(choices):
+    page, url, captured = choices
+    draft = {"postal_code": "22350", "personal": {"meals": [
+        {"meal_type": "dinner", "count": 5, "servings": 2,
+         "limits": {"min_protein_g": 120, "max_protein_g": 150, "max_carbs_g": 450}}]}}
+    page.add_init_script("sessionStorage.setItem('smako.personal.requestDraft', "
+                         + json.dumps(json.dumps(draft)) + ");")
+    page.goto(url)
+    choose_location(page)
+    page.locator("#dinner-nutrition-open").click()
+    expect(page.locator("#dinner-min_protein_g-value")).to_have_value("120")
+    expect(page.locator("#dinner-max_protein_g-value")).to_have_value("150")
+    expect(page.locator("#dinner-nutrition-dialog")).to_contain_text("Tidigare sparad gräns över 100 g behålls")
+    page.keyboard.press("Escape")
+    limits = submit(page, captured)["personal"]["meals"][0]["limits"]
+    assert (limits["min_protein_g"], limits["max_protein_g"], limits["max_carbs_g"]) == (120, 150, 450)
+    page.locator("#dinner-nutrition-open").click()
+    editor = page.locator("#dinner-max_protein_g-value")
+    editor.fill("50")
+    editor.press("Enter")
+    expect(editor).to_have_value("150")
+    editor.fill("")
+    editor.press("Enter")
+    page.locator("#dinner-max_protein_g").focus()
+    page.keyboard.press("ArrowLeft")
+    expect(editor).to_have_value("")
+    page.keyboard.press("Escape")
+    limits = submit(page, captured)["personal"]["meals"][0]["limits"]
+    assert limits["min_protein_g"] == 120 and limits["max_protein_g"] is None
 
 
 def test_location_radius_municipality_manual_and_invalidation(choices):

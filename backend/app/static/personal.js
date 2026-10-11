@@ -88,16 +88,42 @@
   // A negative slider position represents the existing optional/null default.
   // Zero remains an explicit, meaningful limit (or distribution count).
   const sliders = new Map();
+  // The displayed value is also a keyboard editor. Commit on Enter or blur;
+  // an empty optional value restores the planner default.
+  function valueEditor(id, title, placeholder, commit, refresh, unit="") {
+    const wrap=el("span",null,"slider-value-editor"),editor=input("text","",{inputMode:"decimal",placeholder});
+    editor.id=`${id}-value`;editor.setAttribute("aria-label",`${title} – skriv värde`);
+    let dirty=false;
+    editor.addEventListener("input",event=>{event.stopPropagation();dirty=true;});
+    function apply(){
+      if(!dirty)return;dirty=false;
+      const text=editor.value.trim().replace(",",".");
+      if(text===""||/^\d+(\.\d+)?$/.test(text))commit(text===""?null:Number(text));
+      refresh();
+    }
+    editor.addEventListener("blur",apply);
+    editor.addEventListener("keydown",event=>{
+      if(event.key==="Enter"){event.preventDefault();event.stopPropagation();apply();}
+      if(event.key==="Escape"&&dirty){event.preventDefault();event.stopPropagation();dirty=false;refresh();}
+    });
+    editor.addEventListener("focus",()=>editor.select());
+    wrap.append(editor);if(unit)wrap.append(el("span",unit));
+    return {wrap,editor};
+  }
   function slider(id, title, value, {min=0,max=7,unit="",optional=false}={}) {
     const control=input("range",0,{min:optional?-1:min,max,step:"any"});control.id=id;
     control.value=value??(optional?-1:min);
-    const label=el("label",null,"choice-slider");label.htmlFor=id;
-    const heading=el("span",null,"choice-slider-heading"),output=el("output");output.htmlFor=id;
-    heading.append(el("span",title),output);
+    const label=el("div",null,"choice-slider");
+    const heading=el("span",null,"choice-slider-heading"),caption=el("label",title);caption.htmlFor=id;
+    const valueInput=valueEditor(id,title,optional?"Standard":"",value=>{
+      control.value=value===null?(optional?-1:min):Math.max(min,Math.min(Number(control.max),Math.round(value)));
+      control.dispatchEvent(new Event("input",{bubbles:true}));
+    },refresh,unit);
+    heading.append(caption,valueInput.wrap);
     const scale=el("span",null,"choice-slider-scale");scale.setAttribute("aria-hidden","true");
     scale.append(el("span",optional?"Standard":String(min)),el("span",`${max}${unit?` ${unit}`:""}`));
     label.append(heading,control,scale);
-    function refresh(){const unset=optional&&Number(control.value)<0;const text=unset?"Standard":`${number(control.value)}${unit?` ${unit}`:""}`;output.value=text;control.setAttribute("aria-valuetext",unset?"Standard – ingen extra gräns":text);}
+    function refresh(){const unset=optional&&Number(control.value)<0;const text=unset?"Standard":`${number(control.value)}${unit?` ${unit}`:""}`;valueInput.editor.value=unset?"":control.value;control.setAttribute("aria-valuetext",unset?"Standard – ingen extra gräns":text);}
     control.addEventListener("input",()=>{control.value=Math.round(Number(control.value));refresh();});
     // step=any preserves fractional limits from existing private revisions.
     control.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowDown","ArrowRight","ArrowUp"].includes(event.key))return;event.preventDefault();control.value=Number(control.value)+(["ArrowRight","ArrowUp"].includes(event.key)?1:-1);control.dispatchEvent(new Event("input",{bubbles:true}));});
@@ -110,30 +136,44 @@
   // retain null (planner default); zero remains an explicit saved constraint.
   function interval(type, key, title, max) {
     const box=el("fieldset",null,"choice-interval");box.append(el("legend",title));
-    const output=el("p",null,"interval-value"),track=el("div",null,"interval-track");
+    const output=el("div",null,"interval-value"),track=el("div",null,"interval-track");
+    const legacy=[undefined,undefined],note=el("p",null,"small");
     const controls=["min","max"].map((end,index)=>{
       const id=`${type}-${end}_${key}`,control=input("range",0,{min:-1,max:max+1,step:"any"});
       control.id=id;control.value=index?max+1:-1;control.setAttribute("aria-label",`${title} – ${index?"högst":"minst"}`);
       track.append(control);return control;
     });
+    const read=index=>legacy[index]??(Number(controls[index].value)<0||Number(controls[index].value)>max?null:Number(controls[index].value));
+    function update(index,value){
+      const other=read(1-index);
+      // A saved minimum above the new scale is retained until explicitly edited.
+      if(index&&value!==null&&other!==null&&other>max){controls[index].value=legacy[index]===undefined?max+1:max;return;}
+      legacy[index]=undefined;
+      controls[index].value=value===null?(index?max+1:-1):index?Math.max(other??0,Math.min(max,value)):Math.min(other??max,Math.max(0,value),max);
+    }
+    const editors=controls.map((control,index)=>{
+      const editor=valueEditor(control.id,`${title} ${index?"max":"min"}`,index?"Ingen max":"Ingen min",value=>update(index,value),refresh,"g");
+      const label=el("label",index?"Max":"Min");label.htmlFor=editor.editor.id;label.append(editor.wrap);output.append(label);return editor;
+    });
     function refresh(){
       const [lo,hi]=controls.map(n=>Number(n.value));
-      const labels=[lo<0?"Ingen min":`${number(lo)} g`,hi>max?"Ingen max":`${number(hi)} g`];
-      output.textContent=lo<0&&hi>max?"Standard – inga extra gränser":labels.join(" – ");
+      const labels=controls.map((_,i)=>read(i)===null?(i?"Ingen max":"Ingen min"):`${number(read(i))} g`);
+      editors.forEach((entry,i)=>entry.editor.value=read(i)??"");
+      note.textContent=legacy.some(v=>v!==undefined)?`Tidigare sparad gräns över ${max} g behålls tills du ändrar den. Nya värden kan vara 0–${max} g.`:`0–${max} g. Lämna tomt för standard.`;
       controls.forEach((n,i)=>n.setAttribute("aria-valuetext",labels[i]));
       track.style.setProperty("--start",`${(lo+1)/(max+2)*100}%`);track.style.setProperty("--end",`${(hi+1)/(max+2)*100}%`);
     }
     controls.forEach((control,index)=>{
       control.addEventListener("input",()=>{
-        const other=Number(controls[1-index].value),value=Math.round(Number(control.value));
-        control.value=index?Math.max(0,other,value):Math.min(max,other,value);refresh();
+        const value=Math.round(Number(control.value));
+        update(index,index?(value>max?null:Math.max(0,value)):(value<0?null:Math.min(max,value)));refresh();
       });
       control.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowDown","ArrowRight","ArrowUp"].includes(event.key))return;event.preventDefault();control.value=Number(control.value)+(["ArrowRight","ArrowUp"].includes(event.key)?1:-1);control.dispatchEvent(new Event("input",{bubbles:true}));});
-      sliders.set(control.id,{set(value){control.value=value??(index?max+1:-1);refresh();},read(){const value=Number(control.value);return value<0||value>max?null:value;}});
+      sliders.set(control.id,{set(value){legacy[index]=value>max?value:undefined;control.value=value==null?(index?max+1:-1):Math.min(max,value);refresh();},read(){return read(index);}});
     });
     const reset=el("button","Återställ standard","secondary-button");reset.type="button";
-    reset.addEventListener("click",()=>{controls[0].value=-1;controls[1].value=max+1;refresh();});
-    box.append(output,track,reset);refresh();return box;
+    reset.addEventListener("click",()=>{legacy.fill(undefined);controls[0].value=-1;controls[1].value=max+1;refresh();});
+    box.append(output,track,note,reset);refresh();return box;
   }
   function mealDialog(type, key, title, content, actions) {
     const dialog=el("dialog",null,"meal-dialog");dialog.id=`${type}-${key}-dialog`;
@@ -161,21 +201,25 @@
     for(const [key,title] of Object.entries(proteinNames))distribution.append(slider(`${type}-${key}`,`${title} – antal`,null,{optional:true,max:7}));
     const remaining=el("p");remaining.setAttribute("role","status");
     options.append(el("p","Standard låter planeraren välja återstående rätter. Egna antal delar på antalet måltider. Vegetariskt tillåter ägg och mejeri; veganskt utesluter animalier."),remaining,distribution);
-    distributionSync[type]=()=>{
+    distributionSync[type]=(event)=>{
       let left=sliderValue(`${type}-count`);const keys=Object.keys(proteinNames);
       const values=keys.map(key=>sliderValue(`${type}-${key}`));
-      for(let i=0;i<keys.length;i++){
+      if(diet.value!=="mixed"){values.fill(0);values[keys.indexOf("vegetarian")]=left;}
+      // Constrain the edited thumb last so other selections never move.
+      const edited=keys.findIndex(key=>event?.target.id===`${type}-${key}`);
+      const order=keys.map((_,i)=>i).filter(i=>i!==edited);if(edited>=0)order.push(edited);
+      for(const i of order){
         const forbidden=diet.value!=="mixed"&&keys[i]!=="vegetarian";
         if(forbidden)values[i]=0;
         if(values[i]!==null){values[i]=Math.min(values[i],left);left-=values[i];}
       }
-      keys.forEach((key,i)=>{const id=`${type}-${key}`,forbidden=diet.value!=="mixed"&&key!=="vegetarian";sliders.get(id).maximum(forbidden?0:left+(values[i]??0));setSlider(id,values[i]);$(id).disabled=forbidden;});
+      keys.forEach((key,i)=>{const id=`${type}-${key}`,fixed=diet.value!=="mixed";sliders.get(id).maximum(sliderValue(`${type}-count`));setSlider(id,values[i]);$(id).disabled=fixed;$(`${id}-value`).disabled=fixed;});
       remaining.textContent=`${sliderValue(`${type}-count`)-left} av ${sliderValue(`${type}-count`)} måltider fördelade · ${left} kvar`;
     };
     distribution.addEventListener("input",distributionSync[type]);diet.addEventListener("change",distributionSync[type]);$(`${type}-count`).addEventListener("input",distributionSync[type]);
     const weight=el("div");weight.append(el("p","Dra i intervallets ändar för lägsta och högsta portionsvikt. Gäller uppskattad tillagad, ätbar vikt per portion."),interval(type,"weight_g","Portionsvikt",3000));
     const nutrition=el("div");nutrition.append(el("p","Dra i intervallets ändar för egna gränser per portion. Standard behåller matplanerarens befintliga beräkning."));
-    for(const [key,title,max] of [["protein_g","Protein",300],["carbs_g","Kolhydrater",500],["fat_g","Fett",300]])nutrition.append(interval(type,key,title,max));
+    for(const [key,title,max] of [["protein_g","Protein",100],["carbs_g","Kolhydrater",400],["fat_g","Fett",300]])nutrition.append(interval(type,key,title,max));
     nutrition.append(slider(`${type}-max_kcal`,"Högsta energi",null,{optional:true,max:4000,unit:"kcal"}));
     const organic=input("checkbox","");organic.id=`${type}-organic`;options.append(field("Kräv ekologiska animalier för denna måltidstyp",organic));
     mealDialog(type,"distribution","Fördelning",options,actions);mealDialog(type,"weight","Portionsvikt",weight,actions);mealDialog(type,"nutrition","Näringsvärden",nutrition,actions);
