@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#173e35" />
   <title>Smako · Min plan och skafferi</title>
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
-  <link rel="stylesheet" href="/static/personal.css?v=shopping-menu-2" />
+  <link rel="stylesheet" href="/static/personal.css?v=choices-20261011" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
-  <script src="/static/complete-recipes.js?v=municipality-rollout-2" defer></script>
+  <script src="/static/complete-recipes.js?v=choices-20261011" defer></script>
   <script src="/static/municipal-areas.js?v=1" defer></script>
-  <script src="/static/personal.js?v=municipal-20261010" defer></script>
+  <script src="/static/personal.js?v=choices-20261011" defer></script>
   <script src="/static/product-search.js?v=comparability-20261010" defer></script>
 </head>
 <body class="personal-app">
@@ -44,8 +44,7 @@
       <h3>Vanliga val</h3><div id="shopping-common"></div>
       <p id="shopping-draft-status" role="status"></p>
       <div id="extras-list"></div>
-      <label class="check-label"><input type="checkbox" id="shopping-estimated-purchases"/> Tillåt uppskattad vikt och kostnad</label>
-      <p>Kilopris kan jämföras exakt, men viktvarornas slutbelopp beror på uppvägning. Valet gäller hela inköpslistan och dess recept. Sparad plan ändras först när du beräknar igen.</p>
+      <p>Uppskattad vikt och kostnad räknas med när underlag finns. Viktvarornas slutbelopp beror på uppvägning.</p>
       <button type="button" class="primary-button" id="calculate-extras">Beräkna inköpslistan</button>
       <button type="button" class="secondary-button" id="calculate-own-list">Beräkna bara mina varor – utan recept</button>
       <p>Om en plan redan är öppen läggs varorna till dess recept. Välj ”utan recept” för en fristående lista. Butikstak, postnummer och medlemskap väljs under Mina val.</p>
@@ -66,8 +65,13 @@
     </section>
     <section data-view="choices" id="personal-choices" hidden><h1>Mina val</h1>
       <form id="personal-form">
-        <div id="complete-recipe-controls"></div>
-        <fieldset><legend>Prisområde och butiker</legend><div class="personal-grid"><label>Postnummer<input id="postal-code" value="22350" inputmode="numeric" pattern="[0-9]{5}" required /></label><label>Max inköpsställen för hela korgen<select id="max-stores"><option>1</option><option selected>2</option><option>3</option></select></label></div>
+        <p>Välj antal middagar, portioner och inköpsställen. Under extraval kan du anpassa planen mer.</p>
+        <div id="meal-settings"></div>
+        <fieldset class="choices-primary"><legend>Inköpsställen</legend><div id="store-count-control"></div></fieldset>
+        <details id="extra-choices" class="extra-choices"><summary>Extraval</summary>
+        <p>Fler måltider, smakval, butiker och egna gränser. Standardvalen gäller tills du ändrar dem.</p>
+        <fieldset><legend>Fler måltider</legend><div id="extra-meal-toggles" class="personal-checks"></div><p>Valda måltider visas under middagar, med egna reglage för antal och portioner.</p></fieldset>
+        <fieldset><legend>Prisområde och butiker</legend><div class="personal-grid"><label>Postnummer<input id="postal-code" value="22350" inputmode="numeric" pattern="[0-9]{5}" required /></label></div>
           <p>Annonserade medlemspriser räknas alltid med. Resultatet visar vilka butiksmedlemskap som krävs. Personliga kuponger ingår inte.</p><div id="memberships" class="personal-checks" hidden></div>
         </fieldset>
         <fieldset><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Granska de svenska fälten före tillämpning. Ogillar är ett mjukt önskemål. Uteslutningar och allergier är hårda krav.</p><div id="profile-fields" class="personal-grid"></div>
@@ -75,10 +79,11 @@
           <p class="data-note">Uteslut ingredienser är ett hårt matval: fisk innebär inga fiskingredienser, även i sås och buljong. Det gäller inte bara huvudråvaran. Tillräckligt källstött ingrediensunderlag krävs; okänt godtas inte. Allergier anges separat och kräver även kontrollerat allergen- och spårunderlag. Ett godkänt matval är ingen allergisäkerhetskontroll. Tidigare sparade val behåller sin typ.</p>
           <button type="button" id="save-profile" class="secondary-button">Spara min profil i gästsessionen</button><p>Profilen sparas för återanvändning bara med knappen ovan. Planens bekräftade krav följer dess privata revisioner.</p>
         </fieldset>
-        <fieldset><legend>Måltider och egna gränser</legend><p>Vegetariskt tillåter ägg och mejeri, men inte fisk eller kött. Veganskt utesluter animalier. Ett recept räknas en gång efter sin huvudproteinkälla; fisk är animaliskt.</p><div id="meal-settings"></div></fieldset>
-        <fieldset><legend>Näringsunderlag</legend><label class="check-label"><input type="checkbox" id="allow-nutrition-estimates"/> Tillåt spårbara näringsuppskattningar</label><p>Avstängt: kvalificerade produktdeklarationer och befintliga granskade beredningar krävs. Påslaget: tydligt mappade generiska värden från Livsmedelsverket och granskade varma beredningar får användas. Ingredienser som uppskattas visas i resultatet. Gränserna gäller beräkningen, inte en garanti för matens exakta innehåll. Tillagad portionsvikt kan fortfarande saknas. Eko och allergikrav påverkas inte.</p><p><a href="https://dataportal.livsmedelsverket.se/livsmedel/swagger/index.html">Livsmedelsverkets Livsmedelsdatabas</a> · data juni–juli 2026, CC BY 4.0. Referenser och beräkningssteg visas per ingrediens.</p></fieldset><fieldset><legend>Pris och variation</legend><label>Inköpsberäkning<select id="purchase-planning-mode"><option value="exact">Exakt mängd och beräknad kostnad</option><option value="estimated">Tillåt uppskattad vikt och kostnad</option></select></label><p>Uppskattningsläget använder belagt kilopris och källans cirka-vikt för hela paket. Slutbelopp beror på uppvägning. Variant-, medlems-, allergi- och näringskrav kvarstår.</p><label>Planläge<select id="mode"><option value="cheapest">Billigast</option><option value="balanced" selected>Balanserad</option><option value="varied">Varierad</option></select></label><label>Högsta merkostnad för Varierad jämfört med Balanserad (%)<input id="varied-budget" type="number" min="0" max="100" value="25"/></label></fieldset>
-        <fieldset><legend>Ekologiskt</legend><label>Minsta verifierade ekologiska kostnadsandel (%)<input id="organic-percent" type="number" value="0" min="0" max="100"/></label><p>Minst X % av matinköpets varukostnad ska vara verifierat ekologisk. Gäller alla köpta livsmedel efter rabatt, inklusive mat-extravaror. Skafferi, avgifter och icke-livsmedel ingår inte. Okänd status räknas inte som eko.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Källstödd ekologisk märkning finns för en del produkter. Okänd status räknas inte positivt. Animaliskt innehåll och sammansatta produkter kan fortfarande sakna tillräckligt underlag.</p></fieldset>
+        <fieldset><legend>Måltider och egna gränser</legend><p>Vegetariskt tillåter ägg och mejeri, men inte fisk eller kött. Veganskt utesluter animalier.</p><div id="meal-extra-settings"></div></fieldset>
+        <div id="complete-recipe-controls"></div>
+        <fieldset><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Minst X % av matinköpets varukostnad ska vara verifierat ekologisk. Gäller alla köpta livsmedel efter rabatt, inklusive mat-extravaror. Skafferi, avgifter och icke-livsmedel ingår inte. Okänd status räknas inte som eko.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Källstödd ekologisk märkning finns för en del produkter. Okänd status räknas inte positivt. Animaliskt innehåll och sammansatta produkter kan fortfarande sakna tillräckligt underlag.</p></fieldset>
         <fieldset><legend>Överskott</legend><label>Inköpsstrategi<select id="surplus-mode"><option value="minimize">Minimera överskott</option><option value="allow_larger">Tillåt större köp och föreslå användning av resten</option></select></label><p>Hela förpackningar kan ge oundvikligt överskott. Strategiska extraköp redovisar extra mängd och merkostnad. Rester är beräknade; hållbarhet är okänd.</p></fieldset>
+        </details>
         <button id="generate-plan" type="submit" class="primary-button">Skapa plan och inköpslista</button>
       </form>
     </section>

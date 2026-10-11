@@ -53,7 +53,7 @@
 
   function renderDiagnostics(d) {
     const box=window.SmakoRecipes.diagnostics(d);if(!box)return;box.id="planning-diagnostics";
-    if(d.estimate_alternatives?.length){box.append(el("p","Näringsuppskattningar är av. Ett separat prov fann enskilda alternativ med sådant underlag; detta innebär inte att hela menyn är genomförbar."),button("Visa valet för näringsuppskattningar",async()=>{show("choices");$('allow-nutrition-estimates').scrollIntoView({block:"center"});$('allow-nutrition-estimates').focus();}));}
+
     $("personal-status").after(box);
   }
   async function task(work) {
@@ -84,37 +84,70 @@
 
   const limitLabels = {min_weight_g:"Min tillagad portionsvikt (g)",max_weight_g:"Max tillagad portionsvikt (g)",min_protein_g:"Min protein (g)",max_protein_g:"Max protein (g)",min_carbs_g:"Min kolhydrater (g)",max_carbs_g:"Max kolhydrater (g)",min_fat_g:"Min fett (g)",max_fat_g:"Max fett (g)",max_kcal:"Max energi (kcal)"};
 
-  for(const [type,label] of Object.entries(names)){
-
-    const box=el("div",null,"personal-card");box.append(el("h2",label));const grid=el("div",null,"personal-grid");
-
-    const count=input("number",type==="dinner"?5:0,{min:"0",max:"7",required:true});count.id=`${type}-count`;
-
-    const servings=input("number",type==="dinner"?4:1,{min:"1",max:"8",required:true});servings.id=`${type}-servings`;
-
-    const diet=select([["mixed","Blandat"],["vegetarian","Vegetariskt (ägg/mejeri tillåts)"],["vegan","Veganskt"]],"mixed");diet.id=`${type}-diet`;
-
-    grid.append(field("Antal tillfällen (0–7)",count),field("Portioner per tillfälle",servings),field("Kostval",diet));box.append(grid);
-
-    const options=el("div");const distribution=el("div",null,"personal-grid");
-
-    for(const [key,title] of Object.entries(proteinNames)){const n=input("number","",{min:"0",max:"7"});n.id=`${type}-${key}`;distribution.append(field(`${title} – antal`,n));}
-
-    options.append(el("p","Tomma delval är fria. Angivna antal ska rymmas i måltidstypens tillfällen. Huvudproteinkällan visas för varje recept."),distribution);
-
-    const taste=el("div",null,"personal-grid");profileFields(taste,type);options.append(details("Egna smakval och ytterligare hårda uteslutningar",taste));
-
-    const limits=el("div");limits.append(el("p","Frivilliga gränser per portion av denna måltidstyp. Portionsvikt betyder uppskattad tillagad ätbar vikt. Råvikt, tillagningsutbyte och näring hålls separata."),el("p","Utan uppskattningsläge krävs kvalificerade produktdeklarationer och granskad kall beredning. Med det uttryckliga valet nedan kan även dokumenterade kokta middagar och bekräftade generiska skafferivaror beräknas. Saknad slutvikt, fel beredningsform eller olösta ingredienser stoppar berörda krav.","data-note"));const lg=el("div",null,"personal-grid");for(const [key,title] of Object.entries(limitLabels)){const n=input("number","",{min:"0",max:key.includes("kcal")?"4000":key.includes("weight")?"3000":"500",step:"any"});n.id=`${type}-${key}`;lg.append(field(title,n));}limits.append(lg);options.append(details("Portionsvikt och näringsgränser",limits));
-
-    const organic=input("checkbox","");organic.id=`${type}-organic`;options.append(field("Kräv ekologiska animalier för denna måltidstyp",organic));
-
-    box.append(details("Fördelning, egna smakval och gränser",options));$('meal-settings').append(box);
-
+  // A negative slider position represents the existing optional/null default.
+  // Zero remains an explicit, meaningful limit (or distribution count).
+  const sliders = new Map();
+  function slider(id, title, value, {min=0,max=7,unit="",optional=false}={}) {
+    const control=input("range",0,{min:optional?-1:min,max,step:"any"});control.id=id;
+    control.value=value??(optional?-1:min);
+    const label=el("label",null,"choice-slider");label.htmlFor=id;
+    const heading=el("span",null,"choice-slider-heading"),output=el("output");output.htmlFor=id;
+    heading.append(el("span",title),output);
+    const scale=el("span",null,"choice-slider-scale");scale.setAttribute("aria-hidden","true");
+    scale.append(el("span",optional?"Standard":String(min)),el("span",`${max}${unit?` ${unit}`:""}`));
+    label.append(heading,control,scale);
+    function refresh(){const unset=optional&&Number(control.value)<0;const text=unset?"Standard":`${number(control.value)}${unit?` ${unit}`:""}`;output.value=text;control.setAttribute("aria-valuetext",unset?"Standard – ingen extra gräns":text);}
+    control.addEventListener("input",()=>{control.value=Math.round(Number(control.value));refresh();});
+    // step=any preserves fractional limits from existing private revisions.
+    control.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowDown","ArrowRight","ArrowUp"].includes(event.key))return;event.preventDefault();control.value=Number(control.value)+(["ArrowRight","ArrowUp"].includes(event.key)?1:-1);control.dispatchEvent(new Event("input",{bubbles:true}));});
+    sliders.set(id,{set(value){control.value=value??(optional?-1:min);refresh();},read(){return optional&&Number(control.value)<0?null:Number(control.value);}});
+    refresh();return label;
   }
+  const sliderValue=id=>sliders.get(id).read();
+  const setSlider=(id,value)=>sliders.get(id).set(value);
+  const mealCards={},mealExtras={};
+  function syncMeal(type){
+    const enabled=type==="dinner"||$(`enable-${type}`).checked;
+    mealCards[type].hidden=!enabled;mealExtras[type].hidden=!enabled;
+    mealExtras[type].disabled=!enabled;
+  }
+  for(const [type,label] of Object.entries(names)){
+    const box=el("fieldset",null,"choices-primary");box.append(el("legend",label));
+    const grid=el("div",null,"personal-grid");
+    grid.append(slider(`${type}-count`,type==="dinner"?"Antal middagar":"Antal tillfällen",5,{min:type==="dinner"?0:1,max:7}),slider(`${type}-servings`,"Portioner per rätt",type==="dinner"?4:1,{min:1,max:6}));
+    box.append(grid);mealCards[type]=box;$('meal-settings').append(box);
+    const options=el("fieldset");options.append(el("legend",label));mealExtras[type]=options;
+    const diet=select([["mixed","Blandat"],["vegetarian","Vegetariskt (ägg/mejeri tillåts)"],["vegan","Veganskt"]],"mixed");diet.id=`${type}-diet`;options.append(field("Kostval",diet));
+    const distribution=el("div",null,"personal-grid");
+    for(const [key,title] of Object.entries(proteinNames))distribution.append(slider(`${type}-${key}`,`${title} – antal`,null,{optional:true,max:7}));
+    options.append(el("p","Standard låter planeraren välja fördelning. Egna antal ska tillsammans rymmas i antalet tillfällen."),distribution);
+    const limits=el("div");limits.append(el("p","Standard behåller matplanerarens befintliga beräkning utan extra gräns. Dra ett reglage för att ange en egen gräns per portion. Portionsvikt avser uppskattad tillagad ätbar vikt."));
+    const lg=el("div",null,"personal-grid");
+    for(const [key,title] of Object.entries(limitLabels)){
+      const max=key.includes("kcal")?4000:key.includes("weight")?3000:key.includes("carbs")?500:300;
+      lg.append(slider(`${type}-${key}`,title,null,{optional:true,max,unit:key.includes("kcal")?"kcal":"g"}));
+    }
+    limits.append(lg);options.append(details("Portionsvikt och näringsgränser",limits));
+    const organic=input("checkbox","");organic.id=`${type}-organic`;options.append(field("Kräv ekologiska animalier för denna måltidstyp",organic));
+    $('meal-extra-settings').append(options);
+    if(type!=="dinner"){
+      const toggle=input("checkbox","");toggle.id=`enable-${type}`;toggle.setAttribute("aria-controls",`${type}-meals`);box.id=`${type}-meals`;
+      const row=field(`Lägg till ${label.toLowerCase()}`,toggle);row.className="check-label";$('extra-meal-toggles').append(row);
+      toggle.addEventListener("change",()=>{syncMeal(type);$(`${type}-count`).dispatchEvent(new Event("input",{bubbles:true}));});
+    }
+    syncMeal(type);
+  }
+  $('store-count-control').append(slider("max-stores","Max inköpsställen för hela korgen",2,{min:1,max:3}));
+  $('organic-percent-control').append(slider("organic-percent","Minsta verifierade ekologiska kostnadsandel",0,{max:100,unit:"%"}));
 
   for(const [v,label] of [["ICA_STAMMIS","ICA Stammis"],["COOP_MEMBER","Coop"],["WILLYS_PLUS","Willys Plus"],["HEMKOP_MEMBER","Hemköp"],["CITYGROSS_MEMBER","City Gross"],["LIDL_PLUS","Lidl Plus"]]){const n=input("checkbox",v);n.name="membership";const f=field(label,n);f.className="check-label";$('memberships').append(f);}
 
-  function readMeals(){return Object.keys(names).map(t=>({meal_type:t,count:Number($(`${t}-count`).value),servings:Number($(`${t}-servings`).value),diet:$(`${t}-diet`).value,profile:profile(t),distribution:Object.fromEntries(Object.keys(proteinNames).filter(k=>$(`${t}-${k}`).value!=="").map(k=>[k,Number($(`${t}-${k}`).value)])),limits:Object.fromEntries(Object.keys(limitLabels).map(k=>[k,$(`${t}-${k}`).value===""?null:Number($(`${t}-${k}`).value)])),organic_animals:$(`${t}-organic`).checked}));}
+  function readMeals(){return Object.keys(names).map(t=>{
+    const active=t==="dinner"||$(`enable-${t}`).checked;
+    return {meal_type:t,count:active?sliderValue(`${t}-count`):0,servings:sliderValue(`${t}-servings`),diet:$(`${t}-diet`).value,
+      profile:{},distribution:active?Object.fromEntries(Object.keys(proteinNames).map(k=>[k,sliderValue(`${t}-${k}`)]).filter(([,v])=>v!==null)):{},
+      limits:active?Object.fromEntries(Object.keys(limitLabels).map(k=>[k,sliderValue(`${t}-${k}`)])):{},organic_animals:$(`${t}-organic`).checked};
+  });}
 
   function requestPayload({standalone=false}={}) {
 
@@ -127,14 +160,32 @@
     const meals=standalone?[]:recipeControls.mealValues(readMeals());
     if(!standalone&&!recipeControls.validate()){$('personal-form').reportValidity();throw new Error("Kontrollera receptvalens intervall.");}
 
-    return {...(standalone?recipeControls.storeValues():recipeControls.values()),membership_price_policy:"all_advertised",purchase_planning_mode:$("purchase-planning-mode").value,postal_code:$('postal-code').value.trim(),recipes:meals.find(m=>m.meal_type==="dinner")?.count||0,servings:meals.find(m=>m.meal_type==="dinner")?.servings||1,max_stores:Number($('max-stores').value),memberships:[...document.querySelectorAll('input[name="membership"]:checked')].map(n=>n.value),diversity_mode:$('mode').value,varied_budget_percent:Number($('varied-budget').value),strategy:"optimized",personal:{profile:profile(),meals,extras,pantry_revision:privateState.revision,allow_nutrition_estimates:$('allow-nutrition-estimates').checked,organic_percent:Number($('organic-percent').value),organic_animals:$('organic-animals').checked,surplus_mode:$('surplus-mode').value}};
+    return {...(standalone?recipeControls.storeValues():recipeControls.values()),membership_price_policy:"all_advertised",purchase_planning_mode:"estimated",postal_code:$('postal-code').value.trim(),recipes:meals.find(m=>m.meal_type==="dinner")?.count||0,servings:meals.find(m=>m.meal_type==="dinner")?.servings||1,max_stores:Number($('max-stores').value),memberships:[...document.querySelectorAll('input[name="membership"]:checked')].map(n=>n.value),diversity_mode:"balanced",varied_budget_percent:25,strategy:"optimized",personal:{profile:profile(),meals,extras,pantry_revision:privateState.revision,allow_nutrition_estimates:true,organic_percent:Number($('organic-percent').value),organic_animals:$('organic-animals').checked,surplus_mode:$('surplus-mode').value}};
 
   }
 
-  function syncPurchaseMode(){ $('shopping-estimated-purchases').checked=$('purchase-planning-mode').value==='estimated'; }
-  $('purchase-planning-mode').addEventListener('change',syncPurchaseMode);
-  $('shopping-estimated-purchases').addEventListener('change',()=>{ $('purchase-planning-mode').value=$('shopping-estimated-purchases').checked?'estimated':'exact'; });
-  function putChoices(request){$("purchase-planning-mode").value=request.purchase_planning_mode||"exact";syncPurchaseMode();const spec=request.personal;if(!spec){recipeControls.restore(request);return;}$('allow-nutrition-estimates').checked=spec.allow_nutrition_estimates===true;putProfile(spec.profile);$('profile-text').value="";parsedText="";for(const meal of spec.meals){const t=meal.meal_type;$(`${t}-count`).value=meal.count;$(`${t}-servings`).value=meal.servings;$(`${t}-diet`).value=meal.diet;putProfile(meal.profile,t);Object.keys(proteinNames).forEach(k=>$(`${t}-${k}`).value=meal.distribution[k]??"");Object.keys(limitLabels).forEach(k=>$(`${t}-${k}`).value=meal.limits[k]??"");$(`${t}-organic`).checked=meal.organic_animals;}$('organic-percent').value=spec.organic_percent;$('organic-animals').checked=spec.organic_animals;$('surplus-mode').value=spec.surplus_mode;$('mode').value=request.diversity_mode;$('max-stores').value=request.max_stores;$('postal-code').value=request.postal_code;$('varied-budget').value=request.varied_budget_percent;document.querySelectorAll('input[name="membership"]').forEach(n=>n.checked=request.membership_programs.includes(n.value));recipeControls.restore(request);}
+  function putChoices(request){
+    const spec=request.personal;if(!spec){recipeControls.restore(request);return;}
+    // Consolidate older per-meal profiles so exclusions and allergies are not lost.
+    const merged=Object.fromEntries(Object.keys(profileLabels).map(k=>[k,[...new Set([...(spec.profile?.[k]||[]),...(spec.meals||[]).flatMap(m=>m.profile?.[k]||[])])]]));
+    putProfile(merged);$('profile-text').value="";parsedText="";$('unresolved-text').value="";$('unresolved-label').hidden=true;
+    const migrated=(spec.meals||[]).some(m=>Object.values(m.profile||{}).some(v=>v.length));
+    $('profile-migration-note')?.remove();
+    if(migrated){const note=el("p","Tidigare smakval, uteslutningar och allergier per måltid har samlats här och gäller hela nästa plan. Granska dem innan du skapar en ny plan.","data-note");note.id="profile-migration-note";$('profile-fields').before(note);}
+    for(const t of Object.keys(names)){
+      const meal=spec.meals?.find(m=>m.meal_type===t)||{};
+      setSlider(`${t}-count`,meal.count|| (t==="dinner"?0:5));setSlider(`${t}-servings`,meal.servings??1);
+      if(t!=="dinner")$(`enable-${t}`).checked=meal.count>0;
+      $(`${t}-diet`).value=meal.diet||"mixed";
+      Object.keys(proteinNames).forEach(k=>setSlider(`${t}-${k}`,meal.distribution?.[k]));
+      Object.keys(limitLabels).forEach(k=>setSlider(`${t}-${k}`,meal.limits?.[k]));
+      if(t==="dinner"&&request.recipe_preferences?.min_protein_g!=null)setSlider(`${t}-min_protein_g`,Math.max(meal.limits?.min_protein_g??0,request.recipe_preferences.min_protein_g));
+      $(`${t}-organic`).checked=meal.organic_animals===true;syncMeal(t);
+    }
+    setSlider('organic-percent',spec.organic_percent??0);$('organic-animals').checked=spec.organic_animals===true;$('surplus-mode').value=spec.surplus_mode||"minimize";
+    setSlider('max-stores',request.max_stores??2);$('postal-code').value=request.postal_code||"22350";
+    document.querySelectorAll('input[name="membership"]').forEach(n=>n.checked=(request.membership_programs||request.memberships||[]).includes(n.value));recipeControls.restore(request);
+  }
 
   $('personal-form').addEventListener("submit",e=>{e.preventDefault();void task(async()=>{if(window.SmakoRecipes.pendingJob("personal")){await resumePersonalJob();return;}const payload=requestPayload();window.SmakoRecipes.storage.set("smako.personal.requestDraft",payload);$('generate-plan').textContent="Skapar din gemensamma plan…";notify("Alla måltider räknas mot samma korg. En stor plan kan ta flera minuter. Dina krav och senaste sparade plan behålls medan du väntar.");const result=await api("/api/plans",payload);await accept(result.saved||result);show("plan");});});
 
@@ -220,7 +271,7 @@
 
   async function accept(envelope,{clearJob=true}={}){saved=envelope;extras=structuredClone(saved.request.personal.extras);putChoices(saved.request);try{localStorage.setItem("smako.personal.lastPlan",saved.plan_id);}catch(_){}if(clearJob)window.SmakoRecipes.forgetJob("personal");history.replaceState({},"",`/personal#plan=${encodeURIComponent(saved.plan_id)}`);renderPlan();renderExtras();await refreshState();}
 
-  async function change(action,fields={}){if(!saved)throw new Error("Skapa en plan först.");if(["extras","recalculate"].includes(action)&&$("purchase-planning-mode").value!==saved.request.purchase_planning_mode)fields={...fields,purchase_planning_mode:$("purchase-planning-mode").value};const result=await api(`/api/personal/plans/${encodeURIComponent(saved.plan_id)}/change`,{revision:saved.revision,pantry_revision:privateState.revision,action,...fields});saved=result.saved;window.SmakoRecipes.forgetJob("personal");privateState=result.state;extras=structuredClone(saved.request.personal.extras);$("purchase-planning-mode").value=saved.request.purchase_planning_mode||"exact";syncPurchaseMode();renderPlan();renderPantry();renderExtras();if(!document.querySelector("dialog[open]"))focusView();}
+  async function change(action,fields={}){if(!saved)throw new Error("Skapa en plan först.");if(["extras","recalculate"].includes(action))fields={...fields,purchase_planning_mode:"estimated",allow_nutrition_estimates:true};const result=await api(`/api/personal/plans/${encodeURIComponent(saved.plan_id)}/change`,{revision:saved.revision,pantry_revision:privateState.revision,action,...fields});saved=result.saved;window.SmakoRecipes.forgetJob("personal");privateState=result.state;extras=structuredClone(saved.request.personal.extras);renderPlan();renderPantry();renderExtras();if(!document.querySelector("dialog[open]"))focusView();}
 
   function renderPlan(){const plan=saved.plan, personal=plan.personal;if(!personal)return;const out=$('plan-content');out.replaceChildren();document.querySelector('.personal-intro').hidden=true;const top=el("div",null,"personal-card");const filled=personal.slots.filter(s=>s.recipe),dinners=filled.filter(s=>s.meal_type==="dinner").length;top.append(el("h1","Din plan"),el("p",`${dinners} middagar · ${filled.length-dinners} övriga måltider · ${plan.portions} portioner${personal.empty_slots?` · ${personal.empty_slots} tomma tillfällen`:""}`),el("div",`${plan.optimized_basket.verification_status==="VERIFIED_WITH_ESTIMATES"?"ca ":""}${money(plan.optimized_basket.total)}`,"personal-total"),el("p",`${plan.optimized_basket.verification_status==="VERIFIED_WITH_ESTIMATES"?"Uppskattad full inköpskostnad":"Beräknad full inköpskostnad"} · ${plan.optimized_basket.store_count} av max ${saved.request.max_stores} inköpsställen`));const membership=window.SmakoRecipes.membershipSummary(plan);if(membership)top.append(el("p",membership,"membership-plan-summary"));plan.optimized_basket.stores.forEach(g=>top.append(el("p",`${g.store_name}: ${money(g.subtotal)}`)));const actions=el("div",null,"personal-actions");actions.append(button("Öppna inköpslistan",async()=>show("shopping"),true),button("Räkna om med aktuellt skafferi/pris",()=>change("recalculate")),button("Ny plan",async()=>show("choices")));top.append(actions,el("p",`Revision ${saved.revision}. Receptbyte och uttrycklig omräkning sparar en ny revision. Tidigare resultat bevaras.`,"recipe-plan-revision"));const searchNotice=window.SmakoRecipes.searchNotice(plan,saved.request.diversity_mode);if(searchNotice)top.append(searchNotice);if(plan.optimized_basket.stores.some(g=>g.items.some(i=>i.conditional_variant_choice)))top.append(el("p","Villkorad inköpsplan: välj kampanjmärkta varianter enligt radernas villkor. Inte ett verifierat slutkvitto."));if(saved.prices_changed_since_creation||saved.price_contexts_changed_since_creation)top.append(el("p","Sparade priser visas. Prisunderlaget har ändrats; räkna om för aktuell korg.","data-note"));out.append(top);const comparison=el("div");for(const row of personal.checks.same_menu_comparisons||[]){comparison.append(el("p",row.status==="FEASIBLE"?`Samma recept, skafferibidrag och extrabehov med max ${row.max_stores} inköpsställen: ${money(row.total)}. ${row.stores.map(s=>s.name).join(" · ")}`:`Samma meny med max ${row.max_stores} inköpsställen: ingen genomförbar korg hittades med dina krav.`));}if(comparison.children.length)out.append(details("Samma meny i färre butiker",comparison));
 
@@ -236,7 +287,7 @@
 
   function editRecipe(slot){const box=el("div");box.append(el("h2",slot.recipe?"Redigera recept":"Fyll tillfället"));const name=input("text",slot.recipe?.name||"",{maxLength:150});const servings=input("number",slot.recipe?.servings||1,{min:"1",max:"8"});const rows=el("div");function ingredientRow(i={name:"",quantity:1,unit:"g"}){const row=el("div",null,"ingredient-edit");const n=input("text",i.name,{maxLength:120}),q=input("number",i.quantity,{min:"0.001",step:"any"}),u=select([["g","g"],["ml","ml"],["st","st"],["kg","kg"],["l","l"]],i.unit);n.setAttribute("aria-label","Ingrediens");q.setAttribute("aria-label","Mängd");u.setAttribute("aria-label","Enhet");row.append(n,q,u,button("×",async()=>row.remove()));rows.append(row);} (slot.recipe?.ingredients||[{}]).forEach(i=>ingredientRow(i));const instructions=el("textarea");instructions.value=slot.recipe?.instructions.join("\n")||"";box.append(field("Receptnamn",name),field("Portioner (mängderna nedan är för hela receptet)",servings),el("p","Alla ingredienser måste kunna lösas till verkliga köpbara behov. Okända ingredienser stoppar uppdateringen."),rows,button("Lägg till ingrediens",async()=>ingredientRow()),field("Tillagningssteg – ett per rad",instructions),button("Spara och räkna om hela korgen",async()=>{const recipe={name:name.value,servings:Number(servings.value),ingredients:[...rows.children].map(r=>({name:r.children[0].value,quantity:Number(r.children[1].value),unit:r.children[2].value})),instructions:instructions.value.split("\n").map(s=>s.trim()).filter(Boolean)};await change("edit",{slot_id:slot.id,recipe});$('personal-dialog').close();focusView();},true));openDialog(box);}
 
-  async function pantryDialog(item=null,product=null){const box=el("div");box.append(el("h2",item?"Ändra verkligt lager":"Lägg till verkligt lager"));const name=input("text",item?.name||product?.display_name?.slice(0,120)||product?.name?.slice(0,120)||generic?.query||"",{maxLength:120}),amount=input("number",item?.quantity??product?.package_quantity??1,{min:"0",step:"any",max:"100000"}),unit=select([["g","gram"],["ml","milliliter"],["st","stycken"]],item?.unit||product?.package_unit||generic?.unit||"g"),unusable=input("checkbox","");unusable.checked=item?.unusable||false;const formChoice=select([["","Okänd / ej angiven"],["raw_edible","Rå, ätbar mängd"],["dry","Torr råvara"],["as_sold","Som såld"],["cooked_drained","Kokt och avrunnen"],["preserved_drained","Avrunnen konserverad vara"]],item?.form||"");const reference=select([["","Ingen generisk näringsreferens bekräftad"]],"");if(!product&&!item?.product_key){const refs=await api("/api/personal/nutrition-references");for(const option of refs.options){const o=el("option",`${option.name} · ${option.preparation_label} · gram`);o.value=option.id;reference.append(o);}reference.value=item?.nutrition_reference||"";box.append(field("Bekräfta livsmedel och rå/torr/avrunnen form för näringsuppskattning",reference),el("p","Välj bara en referens som stämmer med varan hemma, inklusive fetthalt och beredning. Detta ändrar inte lagermängden. Kräver även uttryckligt uppskattningsläge i Mina val."));}if(product||item?.product_key)name.readOnly=true;box.append(field("Vara",name),field("Faktisk mängd hemma",amount),field("Enhet",unit),field("Obrukbar – får inte användas",unusable),field("Råvaruform (för genomarbetade recept)",formChoice),el("p","Generiska skafferivaror behöver dokumenterad form som passar receptet. En produktidentitet ger mer underlag om exempelvis tjock yoghurt eller fast tofu.","small"),el("p",product||item?.product_key?"Exakt produktidentitet bevaras.":"Generisk vara. Ingen allergendeklaration eller vikt-/volymomräkning antas."),button("Spara skafferivara",async()=>{const clean=privateState.items.map(({available,reserved,...i})=>i);const newItem={...(formChoice.value?{form:formChoice.value}:{}),nutrition_reference:reference.value||null,id:item?.id||crypto.randomUUID(),name:name.value,quantity:Number(amount.value),unit:unit.value,unusable:unusable.checked,product_key:item?.product_key||product?.product_key||null,food:!/(servett|toalettpapper|hushållspapper|diskmedel)/i.test(name.value)};privateState=await api("/api/personal/pantry",{revision:privateState.revision,profile:profile(),items:[...clean.filter(i=>i.id!==newItem.id),newItem]},"PUT");renderPantry();$('personal-dialog').close();show("pantry");},true));openDialog(box);}
+  async function pantryDialog(item=null,product=null){const box=el("div");box.append(el("h2",item?"Ändra verkligt lager":"Lägg till verkligt lager"));const name=input("text",item?.name||product?.display_name?.slice(0,120)||product?.name?.slice(0,120)||generic?.query||"",{maxLength:120}),amount=input("number",item?.quantity??product?.package_quantity??1,{min:"0",step:"any",max:"100000"}),unit=select([["g","gram"],["ml","milliliter"],["st","stycken"]],item?.unit||product?.package_unit||generic?.unit||"g"),unusable=input("checkbox","");unusable.checked=item?.unusable||false;const formChoice=select([["","Okänd / ej angiven"],["raw_edible","Rå, ätbar mängd"],["dry","Torr råvara"],["as_sold","Som såld"],["cooked_drained","Kokt och avrunnen"],["preserved_drained","Avrunnen konserverad vara"]],item?.form||"");const reference=select([["","Ingen generisk näringsreferens bekräftad"]],"");if(!product&&!item?.product_key){const refs=await api("/api/personal/nutrition-references");for(const option of refs.options){const o=el("option",`${option.name} · ${option.preparation_label} · gram`);o.value=option.id;reference.append(o);}reference.value=item?.nutrition_reference||"";box.append(field("Bekräfta livsmedel och rå/torr/avrunnen form för näringsuppskattning",reference),el("p","Välj bara en referens som stämmer med varan hemma, inklusive fetthalt och beredning. Detta ändrar inte lagermängden. Spårbara näringsuppskattningar tillåts i nya planer."));}if(product||item?.product_key)name.readOnly=true;box.append(field("Vara",name),field("Faktisk mängd hemma",amount),field("Enhet",unit),field("Obrukbar – får inte användas",unusable),field("Råvaruform (för genomarbetade recept)",formChoice),el("p","Generiska skafferivaror behöver dokumenterad form som passar receptet. En produktidentitet ger mer underlag om exempelvis tjock yoghurt eller fast tofu.","small"),el("p",product||item?.product_key?"Exakt produktidentitet bevaras.":"Generisk vara. Ingen allergendeklaration eller vikt-/volymomräkning antas."),button("Spara skafferivara",async()=>{const clean=privateState.items.map(({available,reserved,...i})=>i);const newItem={...(formChoice.value?{form:formChoice.value}:{}),nutrition_reference:reference.value||null,id:item?.id||crypto.randomUUID(),name:name.value,quantity:Number(amount.value),unit:unit.value,unusable:unusable.checked,product_key:item?.product_key||product?.product_key||null,food:!/(servett|toalettpapper|hushållspapper|diskmedel)/i.test(name.value)};privateState=await api("/api/personal/pantry",{revision:privateState.revision,profile:profile(),items:[...clean.filter(i=>i.id!==newItem.id),newItem]},"PUT");renderPantry();$('personal-dialog').close();show("pantry");},true));openDialog(box);}
 
   $('add-pantry').addEventListener("click",()=>void task(()=>pantryDialog()));
 
@@ -261,7 +312,7 @@
     // saved plan must not clear a different, still-running request marker.
     const wantedShopping=location.hash==="#shopping"||new URLSearchParams(location.hash.slice(1)).get("view")==="shopping";const fromHash=new URLSearchParams(location.hash.slice(1)).get("plan");let last=fromHash;try{last ||= localStorage.getItem("smako.personal.lastPlan");}catch(_){}
     if(last){try{const loaded=await api(`/api/plans/${encodeURIComponent(last)}`);if(loaded.plan.personal)await accept(loaded,{clearJob:false});else notify("Detta är en tidigare middagsplan. Öppna den i den tidigare planeringen.");}catch(error){if(![401,403,404].includes(error.status))throw error;notify("Den tidigare planen kan inte öppnas i denna session. Dina tillgängliga varuval visas.");}}
-    if(shoppingInitialized)extras=shoppingDraft;if(location.hash==="#pantry")show("pantry");if(wantedShopping){show("shopping");void searchShopping();}renderExtras();
+    if(shoppingInitialized)extras=shoppingDraft;if(location.hash==="#pantry")show("pantry");if(location.hash==="#choices")show("choices");if(wantedShopping){show("shopping");void searchShopping();}renderExtras();
     if(window.SmakoRecipes.pendingJob("personal"))setTimeout(()=>{if(!busy)void task(resumePersonalJob);},0);
   });
   const resume=()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(resumePersonalJob);};

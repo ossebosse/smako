@@ -336,6 +336,8 @@ async def _change_plan(plan_id, payload, request, response):
         spec.slots.append(
             MealSlot(id=uuid4().hex, day=meal.count, meal_type="dinner", recipe=payload.recipe)
         )
+    if payload.allow_nutrition_estimates is not None:
+        spec.allow_nutrition_estimates = payload.allow_nutrition_estimates
     try:
         spec = PersonalPlanning.model_validate(spec.model_dump())
     except ValidationError as exc:

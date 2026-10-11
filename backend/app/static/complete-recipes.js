@@ -42,7 +42,9 @@
     const protein=input("recipe-min-protein","number","",{min:"0",max:"200",step:"any",placeholder:"Inget extra mål"});
     const adaptation=select("recipe-adaptation",[["products","Bara lämpliga produkt- och märkesbyten"],["approved","Även godkända receptvariationer"]],"approved");
     const fish=input("recipe-allow-fish","checkbox","",{checked:true});
-    grid.append(field("Ingrediensantal",preset),field("Högsta tillagningstid (min)",minutes),field("Minst protein per portion (g)",protein),field("Tillåtna anpassningar",adaptation));
+    grid.append(field("Ingrediensantal",preset),field("Högsta tillagningstid (min)",minutes));
+    if(!personal)grid.append(field("Minst protein per portion (g)",protein));
+    grid.append(field("Tillåtna anpassningar",adaptation));
     advanced.append(grid,custom,el("p","Alla rättens komponenter räknas tillsammans. Salt, peppar och vatten visas separat. Olja, kryddor och såser räknas. Skafferiet minskar inköpen, inte ingrediensantalet.","field-hint"),field("Tillåt fisk när övriga kostval medger det",fish));
     const contexts=el("fieldset",null,"recipe-contexts complete-recipe-options");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och priskanaler"),el("p","Inget markerat betyder alla tillåtna inköpsställen i ditt prisområde. Valda butiker och onlinekanaler begränsar sökningen; ditt butikstak gäller fortfarande.","field-hint"));
     const contextOptions=el("div");const contextStatus=el("p",null,"field-hint");contextStatus.setAttribute("role","status");contexts.append(contextOptions,contextStatus);advanced.append(contexts);
@@ -92,7 +94,7 @@
       estimates=input("recipe-nutrition-estimates","checkbox","");pantry=input("recipe-use-pantry","checkbox","",{checked:true});
       advanced.append(field("Tillåt spårbara näringsuppskattningar",estimates),el("p","Separat från uppskattade köp: tillåt dokumenterade generiska näringsreferenser och granskad varm beredning. Källor och status visas i resultatet.","field-hint"),field("Använd mitt faktiskt angivna skafferi",pantry));
       const link=el("a","Öppna och ändra mitt skafferi");link.href="/personal#pantry";advanced.append(link);
-    } else advanced.append(el("p","Näringsunderlag, kostinriktning, uteslutningar och skafferi följer dina övriga personliga val. Både middagens näringsgränser och målet ovan gäller.","field-hint"));
+    } else advanced.append(el("p","Kostval, näringsgränser och den gemensamma smakprofilen följer dina övriga extraval. Spårbara näringsuppskattningar tillåts.","field-hint"));
     const mealFields=el("fieldset",null,"complete-recipe-fields");
     mealFields.append(el("legend","Val för varje måltidstyp"),el("p","Antal tillfällen och portioner är olika val. Proteinmål är frivilliga. Middagens köksfördelning gäller bara middagar.","field-hint"));
     const level=select("meal-dinner-level",[["simple","Enkla middagar"],["crafted","Genomarbetade middagar"],["mixed","Blandning av enkla och genomarbetade"]],"simple");
@@ -110,7 +112,7 @@
         row[key]=input(`meal-${type}-${key}`,"number","",{min:key==="max_waiting_minutes"?"0":"1",max:String(max),step:"1",placeholder:"Ingen extra gräns"});group.append(field(label,row[key]));
       }
       if(!personal){row.min_protein_g=input(`meal-${type}-min-protein`,"number","",{min:"0",max:"300",step:"any",placeholder:"Inget mål"});group.append(field("Minst protein per portion (g)",row.min_protein_g));}
-      mealRows[type]=row;mealFields.append(group);
+      mealRows[type]=row;group.dataset.mealType=type;mealFields.append(group);
     }
     advanced.append(mealFields);
     function mealValues(meals){
@@ -134,7 +136,8 @@
       if(!personal){const count=document.getElementById("recipes");if(count){for(let n=0;n<3;n++){let option=[...count.options].find(o=>o.value===String(n));if(!option){option=el("option",String(n));option.value=String(n);count.prepend(option);}option.disabled=mode.value!=="library";option.hidden=mode.value!=="library";}}}
       for(const [type,row] of Object.entries(mealRows)){
         const count=document.getElementById(personal?`${type}-count`:type==="dinner"?"recipes":`meal-${type}-count`);
-        const inactive=mode.value==="library"&&Number(count?.value??0)===0;
+        const inactive=mode.value==="library"&&(Number(count?.value??0)===0||(personal&&type!=="dinner"&&!document.getElementById(`enable-${type}`)?.checked));
+        if(personal)mealFields.querySelector(`[data-meal-type="${type}"]`).hidden=inactive;
         for(const [key,node] of Object.entries(row))if(key!=="count")node.disabled=inactive||mealFields.disabled;
         row.max_ingredients.setCustomValidity(!inactive&&row.min_ingredients.value!==""&&row.max_ingredients.value!==""&&Number(row.min_ingredients.value)>Number(row.max_ingredients.value)?"Högsta ingrediensantalet är lägre än det minsta.":"");
       }
@@ -158,7 +161,7 @@
     function values() {
       if(!["complete","library"].includes(mode.value))return selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};
       const [lo,hi]=preset.value==="custom"?[Number(min.value),Number(max.value)]:preset.value.split("-").map(Number);
-      const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:mode.value==="library"||protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
+      const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:personal||mode.value==="library"||protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
       if(mode.value==="library"&&Number(document.getElementById(personal?"dinner-count":"recipes")?.value??0)===0)Object.assign(result.recipe_preferences,{cuisines:[],cuisine_distribution:"free",min_distinct_cuisines:null,max_same_main_protein_dinners:null,max_minutes:null});
       if(selectedContexts.length)result.allowed_store_ids=selectedContexts.slice();
       if(!personal)Object.assign(result,{allow_nutrition_estimates:estimates.checked,use_pantry:pantry.checked});
