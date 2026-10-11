@@ -1,0 +1,278 @@
+{
+  "schema": "municipal-scaling-release-v1",
+  "runtime_commit": "7b7fe72472dd05215f17cee5d4807ea10887c45f",
+  "server": {
+    "status": "activated",
+    "at": "2026-10-11T10:40:59.028027+00:00",
+    "commit": "7b7fe72472dd05215f17cee5d4807ea10887c45f",
+    "source_image": "sha256:1f10310fbccfae541b816fdf66b06029adcf5860923ce0a5e1b40542d5f1803b",
+    "source_build": "municipal-source-7b7fe72472dd",
+    "source_only": true,
+    "cron_schedule_preserved": true,
+    "app_proxy_receiver_isolated_unchanged": true,
+    "source_mounts_command_environment_preserved_except_build": true,
+    "evidence_directory": "/opt/smako/evidence/municipal-scaling-7b7fe72472dd",
+    "planning": [
+      {
+        "municipality": "1281",
+        "due_sources": [],
+        "hemkop": {
+          "observations": [
+            "2026-10-10T19:02:13.803503+00:00",
+            "2026-10-10T18:46:45.547447+00:00"
+          ],
+          "snapshots": [
+            "0fc4d1a4bd3e46938a2c037ed39ad479",
+            "4a4f782bc0c94f61b41fdc6a03f2077d"
+          ],
+          "contexts": {
+            "4224": {
+              "snapshots": [
+                "0fc4d1a4bd3e46938a2c037ed39ad479"
+              ],
+              "observed_at": "2026-10-10T19:02:13.803503+00:00",
+              "next_fetch_at": "2026-10-12T06:02:13.803503+00:00"
+            },
+            "4123": {
+              "snapshots": [
+                "4a4f782bc0c94f61b41fdc6a03f2077d"
+              ],
+              "observed_at": "2026-10-10T18:46:45.547447+00:00",
+              "next_fetch_at": "2026-10-12T05:46:45.547447+00:00"
+            }
+          },
+          "due_store_ids": [],
+          "next_fetch_at": "2026-10-12T05:46:45.547447+00:00",
+          "reason": "base_35h_deadline_or_campaign_coalescing",
+          "observed_at": "2026-10-10T18:46:45.547447+00:00",
+          "hard_stop_at": "2026-10-12T18:46:45.547447+00:00"
+        },
+        "overrides": {},
+        "schema_holds": {}
+      },
+      {
+        "municipality": "1280",
+        "due_sources": [],
+        "hemkop": {
+          "observations": [
+            "2026-10-10T22:47:50.138656+00:00",
+            "2026-10-11T08:21:52.812822+00:00",
+            "2026-10-10T23:37:49.489471+00:00",
+            "2026-10-11T08:04:45.234749+00:00"
+          ],
+          "snapshots": [
+            "a779dccf11664a68a80fd5fd4490716d",
+            "609c6dde3df84c2ead55e2b420ee8199",
+            "38930d3a6f6340c083ae334eefccf23b",
+            "5583bcc0ac8a4331a909cc827efb1606"
+          ],
+          "contexts": {
+            "4114": {
+              "snapshots": [
+                "a779dccf11664a68a80fd5fd4490716d"
+              ],
+              "observed_at": "2026-10-10T22:47:50.138656+00:00",
+              "next_fetch_at": "2026-10-12T09:47:50.138656+00:00"
+            },
+            "4212": {
+              "snapshots": [
+                "609c6dde3df84c2ead55e2b420ee8199"
+              ],
+              "observed_at": "2026-10-11T08:21:52.812822+00:00",
+              "next_fetch_at": "2026-10-12T19:21:52.812822+00:00"
+            },
+            "4247": {
+              "snapshots": [
+                "38930d3a6f6340c083ae334eefccf23b"
+              ],
+              "observed_at": "2026-10-10T23:37:49.489471+00:00",
+              "next_fetch_at": "2026-10-12T10:37:49.489471+00:00"
+            },
+            "4199": {
+              "snapshots": [
+                "5583bcc0ac8a4331a909cc827efb1606"
+              ],
+              "observed_at": "2026-10-11T08:04:45.234749+00:00",
+              "next_fetch_at": "2026-10-12T19:04:45.234749+00:00"
+            }
+          },
+          "due_store_ids": [],
+          "next_fetch_at": "2026-10-12T09:47:50.138656+00:00",
+          "reason": "base_35h_deadline_or_campaign_coalescing",
+          "observed_at": "2026-10-10T22:47:50.138656+00:00",
+          "hard_stop_at": "2026-10-12T22:47:50.138656+00:00"
+        },
+        "overrides": {},
+        "schema_holds": {}
+      }
+    ],
+    "preservation": {
+      "consumer_plan_revisions": {
+        "before": 256,
+        "after": 256,
+        "all_previous_rows_preserved": true
+      },
+      "personal_private_state": {
+        "before": 82,
+        "after": 82,
+        "all_previous_rows_preserved": true
+      }
+    },
+    "active_manifests_preserved": true
+  },
+  "patch_files": {
+    "deploy/scripts/run_daily_refresh.py": "a83af4138f664bbe4844cd8e2c620faad729e56a7baf4d430f7081dbfc38a618",
+    "grocery_data/app/connectors/willys/connector.py": "21edb7ec7ff8664387cd7b33a07bcaf52b0721fe93f77843b0cc9648a99b2dca",
+    "grocery_data/app/services/catalog_checkpoint.py": "f6cf1f353cb39deda4f8de264ac49a6c400c739f12de887558cca6bb9e8eb090",
+    "grocery_data/app/services/municipal_capacity.py": "ae51b5711c42e15b784031ffc0ae21b6fcfe082fc5890c6c366b545472a8d422",
+    "grocery_data/app/services/municipal_scheduling.py": "0e5655b0ade58e360be25a4f33a103616367f8e3773430ba1b8266bafa7549f8",
+    "grocery_data/local_relay.py": "efc95fccf1d2d4d3cf640cd655d39a49bf2cf02fa49adbda0615c474a9a76860",
+    "grocery_data/municipal_cli.py": "508c947249fc4e5ef13357e80b52df1e4e1136fdb37f4e1f169ac5be03a1cfb8",
+    "grocery_data/ops.py": "59eb979221b0b8f972f287a8ef381ce54feee6392cdf888d1c6935ce4fa97b9c",
+    "grocery_data/relay_status.py": "a454302a97fecadb5d717da2fef74cde47d95d3feea3773bc3469a814a9c9074",
+    "grocery_data/source_cli.py": "84a644e7a8c0467451771abf298b44ae32389719c15e6ea48b9573e652c3df02",
+    "grocery_data/relay_storage.py": "0d0aa9dd605cf7e1edafb4991e1edf6006aeb324255c71808cf8a6571adc5544"
+  },
+  "tests": {
+    "unique_release_cases_passed": 127,
+    "local_overview_case_passed": 1,
+    "method": "118 initial PASS on unchanged code; 44 final-image PASS including both packaging failures and 7 additional storage cases; one local overview test",
+    "initial_packaging_failure": "relay_storage.py absent in source-only base; included and reverified",
+    "ruff": "PASS",
+    "compileall": "PASS",
+    "live_retailer_calls_in_tests": 0,
+    "resume_scope_proofs": [
+      "1281",
+      "1280"
+    ],
+    "resume_evidence": "retained official registry and geometry, synthetic catalog; original source dates preserved"
+  },
+  "windows": {
+    "installed_release": "D:/smako-local-relay/releases/7b7fe72472dd",
+    "integrity": "PASS",
+    "files_verified": 685,
+    "dependency_check": "PASS",
+    "scheduled_release": "f5b6aedc851d",
+    "task_action_update": "BLOCKED_ACCESS_DENIED",
+    "manual_new_release_delivery_acceptance": {
+      "exit_code": 0,
+      "new_price_collection": "forbidden_by_acceptance_harness",
+      "module": "D:\\smako-local-relay\\releases\\7b7fe72472dd\\grocery_data\\local_relay.py",
+      "schedule": {
+        "checked_at": "2026-10-11T10:44:41.039577+00:00",
+        "municipalities": [
+          {
+            "municipality_code": "1281",
+            "exit_code": 0
+          },
+          {
+            "municipality_code": "1280",
+            "work_due": false,
+            "deadline": "2026-10-12T20:35:10.562100+00:00",
+            "exit_code": 0,
+            "status": "not_due"
+          }
+        ]
+      },
+      "receipts": {
+        "municipality-1280": {
+          "municipality_code": "1280",
+          "sha256": "1b6bd8531687f0e8dfe13f520bd0d5ef6669d25e16b98d99ea90636c7f5e10fc",
+          "observed_from": "2026-10-10T20:35:10.562100+00:00",
+          "completed_at": "2026-10-10T22:44:12.256624+00:00",
+          "server": {
+            "activation": "already_active",
+            "snapshot_id": "61046f2474d543c98d8d539f808412e5",
+            "universe_id": "price-universe:8d1199ee36ab056db7fa134bc78ae7856cab13ab62cd3ce97c41d865abd545fc"
+          }
+        },
+        "municipality-1281": {
+          "municipality_code": "1281",
+          "sha256": "fe7461f21438e1e8dde0384937b2b60438d57262280162da8f84168f8980e57f",
+          "observed_from": "2026-10-11T07:32:06.908062+00:00",
+          "completed_at": "2026-10-11T10:44:39.161437+00:00",
+          "server": {
+            "activation": "already_active",
+            "snapshot_id": "94f905b1bca84bbab5392f291acb650b",
+            "universe_id": "price-universe:70789e42303e705cef6876e73cfad6dc9e45e64a84ce6a706eeeb0d15b1bf42d"
+          }
+        }
+      }
+    },
+    "administrator_evidence_directory": "D:/smako-local-relay/municipal-task-activation-7b7fe72-admin"
+  },
+  "observed_at": "2026-10-11T10:51:41.670569+00:00",
+  "municipalities": [
+    {
+      "code": "1281",
+      "city": "Lund",
+      "ready_http_status": 200,
+      "published": "price-universe:70789e42303e705cef6876e73cfad6dc9e45e64a84ce6a706eeeb0d15b1bf42d",
+      "loaded": "price-universe:70789e42303e705cef6876e73cfad6dc9e45e64a84ce6a706eeeb0d15b1bf42d",
+      "pending_delivery": false,
+      "receipt_completed_at": "2026-10-11T10:44:39.161437+00:00"
+    },
+    {
+      "code": "1280",
+      "city": "Malmö",
+      "ready_http_status": 200,
+      "published": "price-universe:8c49ecda4bf9a61a2388d0f73ddd46ecce0fe7ae91421f6ba7e545fed1e0c4c0",
+      "loaded": "price-universe:8c49ecda4bf9a61a2388d0f73ddd46ecce0fe7ae91421f6ba7e545fed1e0c4c0",
+      "pending_delivery": false,
+      "receipt_completed_at": "2026-10-10T22:44:12.256624+00:00"
+    }
+  ],
+  "ordinary_schedule_observed": {
+    "jobs": {
+      "1281": {},
+      "1280": {
+        "waiting_since": "2026-10-11T10:45:06.951034+00:00",
+        "last_attempt_at": "2026-10-11T10:45:06.951019+00:00",
+        "exit_code": null
+      }
+    }
+  },
+  "capacity_guard": {
+    "exit_code": 2,
+    "capacity": {
+      "status": "BLOCKED",
+      "municipality_code": "1480",
+      "checked_at": "2026-10-11T10:43:12.628965+00:00",
+      "reasons": [
+        "complete_scope_matched_pilot_required",
+        "pilot_time_unknown",
+        "measurements_unknown"
+      ],
+      "missing_measurements": [
+        "store_count",
+        "requests",
+        "collection_seconds",
+        "build_seconds",
+        "peak_memory_bytes",
+        "database_growth_bytes",
+        "build_copy_bytes",
+        "artifact_bytes",
+        "queue_growth_bytes",
+        "backup_bytes",
+        "restore_bytes",
+        "existing_cycle_seconds",
+        "available_cycle_seconds",
+        "available_memory_bytes"
+      ],
+      "free_bytes": 117723422720,
+      "required_bytes": null,
+      "cycle_seconds": null,
+      "evidence_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    "registry_unchanged": true,
+    "external_price_requests": 0
+  },
+  "limits": [
+    "Windows automatic new-release use awaits administrator action",
+    "First ordinary new server cycle observed started, not completed at capture",
+    "No new municipality activated; complete measured pilot still required",
+    "No live interruption injected; resume validated with retained evidence",
+    "No external alert delivery configured"
+  ],
+  "local_overview_sha256_lf": "cf2891c3ca7dad603218934d8e55424ce5da04d218fe84745bf0806c3290cd0a"
+}

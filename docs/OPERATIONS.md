@@ -5,12 +5,16 @@ Kör i `D:\Projects\Smako`. Kräver befintlig SSH-administratörsåtkomst till
 
 ```powershell
 .venv\Scripts\python.exe -X utf8 scripts\smako_ops.py status
+.venv\Scripts\python.exe -X utf8 scripts\smako_ops.py municipalities
 .venv\Scripts\python.exe -X utf8 scripts\smako_ops.py incidents
 .venv\Scripts\python.exe -X utf8 scripts\smako_ops.py app-incident --request-id 9e96c548-6414-467b-ab7e-3d5e4fe6d779
 ```
 
 Status läser aktuell Windowsuppgift, senaste relähändelser, kö/kvitto, C:/D:,
 serverkapacitet, aktuella baskällor, publicerat/laddat manifest och readiness.
+`municipalities` visar samma kedja per registrerad kommun, dess butiksplanering,
+väntande laddning och exakt motsvarande lokala reläkvitto. Kommunernas
+turordningsjournal redovisas separat; saknad observation är fortfarande unknown.
 Inga pris- eller menyanrop, imagebyggen, tester eller full arkivgenomsökning.
 Status inkluderar nu även appens senaste 20 HTTP 5xx-metriker inom ett dygn.
 `app-incident --request-id ...` läser en exakt referens även utanför detta fönster.

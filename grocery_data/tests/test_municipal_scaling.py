@@ -196,3 +196,30 @@ def test_reload_retry_uses_exact_manifest_without_collection_or_build(tmp_path, 
     assert runner._run_demand_locked(object(), started_at=now) == (0 if loaded else 2)
     assert ('pending_runtime' in json.loads(path.read_bytes())) is not loaded
     assert statuses[-1]['build_reused']
+
+
+def test_local_overview_joins_receipts_to_exact_municipality(tmp_path, monkeypatch, capsys):
+    import importlib.util
+    import sys
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location('municipal_ops_test', Path(__file__).resolve().parents[2] / 'scripts/smako_ops.py')
+    smako_ops = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(smako_ops)
+
+    report = {'municipalities': [
+        {'municipality_code': code, 'operations': {'required_contexts': [
+            {'source_artifact_sha256': code, 'loaded': code == '1281'}]}}
+        for code in ('1281', '1280')]}
+    monkeypatch.setattr(sys, 'argv', ['smako_ops.py', '--workspace', str(tmp_path / 'municipality-1281'), 'municipalities'])
+    monkeypatch.setattr(smako_ops.subprocess, 'run', lambda *a, **k:
+        SimpleNamespace(stdout=json.dumps(report), returncode=0))
+    visited = []
+    def local(root, pwsh):
+        visited.append(root.name)
+        return {'qualified': {'sha256': root.name.removeprefix('municipality-')}, 'pending_delivery': True}
+    monkeypatch.setattr(smako_ops, 'relay_status', local)
+    assert smako_ops.main() == 0
+    rows = json.loads(capsys.readouterr().out)['municipalities']
+    assert visited == ['municipality-1281', 'municipality-1280']
+    assert [r['windows']['delivery_stage'] for r in rows] == ['imported_waiting_receipt', 'imported_waiting_publication']

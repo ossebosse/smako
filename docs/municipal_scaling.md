@@ -1,4 +1,4 @@
-# Kommunvis utrullning: nästa åtgärder
+# Kommunvis utrullning och kapacitetskontroll
 
 ## Implementering 2026-10-11
 
@@ -38,6 +38,7 @@ separat i HANDOFF; en kodändring är inte i sig bevis för produktionsdrift.
 - **Driftöversikt:** `scripts/smako_ops.py municipalities` visar varje kommuns
   planering, käll-/butiksscheman, kvalificering, publicerat/laddat ID och väntande
   laddning. Okända kommunresultat isoleras och döljer inte andra kommuner.
+  Det lokala kommandot fogar även in varje kommuns reläkvitto och leveransstatus.
   Reläets `store-checkpoints/progress.json` och `municipal-schedule.json` visar
   sparade/återanvända kataloger och uppskjutet arbete. En sparad traversal är inte
   en kvalificerad eller publicerad prislista. Kvitton läses från respektive lokal
@@ -123,7 +124,7 @@ butiksval, avståndsurval, verklig meny och beständig omladdning innan nästa.
 Välj pilot efter verifierad källtäckning och kapacitet; kommunens storlek ensam
 avgör inte hur lätt den är att samla in.
 
-## Redan genomfört och kvarvarande gränser
+## Historiskt utgångsläge före denna implementation
 
 Lagringsåtgärden 2026-10-11 frigjorde **106,49 GB** genom verifierade kalla
 testarkiv och rensad byggcache. Servern hade därefter **118,39 GB ledigt**.

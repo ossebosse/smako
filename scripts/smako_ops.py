@@ -89,7 +89,7 @@ def main():
     try:
         proc = subprocess.run(['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', args.host, command],
                               capture_output=True, text=True, encoding='utf-8', check=False,
-                              timeout=7500 if 'repair' in operation else 90)
+                              timeout=7500 if 'repair' in operation else 180 if operation == ['municipalities'] else 90)
         if '--help' in operation and proc.returncode == 0:
             print(proc.stdout)
             return 0
@@ -109,6 +109,25 @@ def main():
         if imported and windows.get('pending_delivery'):
             windows['delivery_stage'] = 'imported_waiting_receipt' if all(x.get('loaded') for x in imported) else 'imported_waiting_publication'
         print(json.dumps({'server': server, 'windows': windows}, ensure_ascii=False))
+    elif operation == ['municipalities']:
+        # The receiver cannot observe Windows receipts. Join each exact local
+        # scope here, without treating an older receipt as current publication.
+        import re
+
+        parent = args.workspace.parent if args.workspace.name.startswith('municipality-') else args.workspace
+        for row in server.get('municipalities', []):
+            code = row.get('municipality_code', '')
+            if not re.fullmatch(r'[0-9]{4}', code):
+                row['windows'] = {'status': 'unknown', 'reason': 'invalid_scope'}
+                continue
+            windows = relay_status(parent / ('municipality-' + code), args.pwsh)
+            digest = windows.get('qualified', {}).get('sha256')
+            imported = [c for c in row.get('operations', {}).get('required_contexts', [])
+                        if digest and c.get('source_artifact_sha256') == digest]
+            if imported and windows.get('pending_delivery'):
+                windows['delivery_stage'] = 'imported_waiting_receipt' if all(c.get('loaded') for c in imported) else 'imported_waiting_publication'
+            row['windows'] = windows
+        print(json.dumps(server, ensure_ascii=False))
     else:
         print(json.dumps(server, ensure_ascii=False))
     return int(server.get('status') in ('unknown', 'failed'))

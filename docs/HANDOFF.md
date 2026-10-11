@@ -1,3 +1,68 @@
+# 2026-10-11 10:51 UTC: skalningsfunktioner aktiverade på servern; reläets uppgiftsbyte kräver admin
+
+Källprocess **`municipal-source-7b7fe72472dd`**, image
+`sha256:1f10310fbccfae541b816fdf66b06029adcf5860923ce0a5e1b40542d5f1803b`,
+aktiverades 10:40:59 UTC under ordinarie driftlås. App, proxy, scheman, mounts,
+Coop-allowlist och användarval är bevarade. Samtliga 256 planrevisioner och 82
+privata tillstånd har verifierats oförändrade. Aktiveraren är avslutad och låset
+släppt; kör inte om den daterade aktiveringen.
+
+Implementerat: hashkontrollerade Willys-checkpoints per färdig butik, prioritering
+efter deadline/väntetid med sparad tur före start, avgränsade Hemköpsvarv,
+kapacitetskrav för nya kommuner, separat återförsök av väntande runtime-laddning,
+samt `scripts/smako_ops.py municipalities` med kommunernas butiksplanering och
+lokala reläkvitton. [Funktioner och pilotkrav](municipal_scaling.md).
+
+**Windowsinstallationen är klar men den schemalagda uppgiften är inte bytt.**
+`D:\smako-local-relay\releases\7b7fe72472dd` har verifierats (685 filer och låsta
+beroenden). `Set-ScheduledTask` nekades av Windows med ”Åtkomst nekad”. Uppgiften
+pekar fortfarande på `f5b6aedc851d`; konton och tider har inte ändrats. Kör följande
+i PowerShell som administratör för att slutföra den redan förberedda övergången:
+
+```powershell
+& 'D:\Projects\Smako\deploy\scripts\enable_municipal_relay.ps1' `
+  -ReleaseRoot 'D:\smako-local-relay\releases\7b7fe72472dd' `
+  -Workspace 'D:\smako-local-relay\scopes' `
+  -Config 'D:\smako-local-relay\config\relay.json' `
+  -EvidenceDirectory 'D:\smako-local-relay\municipal-task-activation-7b7fe72-admin'
+```
+
+Det nya installerade reläet har manuellt verifierats med ny insamling uttryckligen
+spärrad. Lunds tidigare saknade kvitto är nu återställt: `fe7461f2…`, server-snapshot
+`94f905b1bca84bbab5392f291acb650b`, `already_active`, kvitto 10:44:39 UTC. Det krävde
+varken ny prisinsamling eller nytt prisbygge. Malmö var inte insamlingsförfallet.
+Båda kommunerna visar `pending_delivery: false`. Malmökvittots äldre manifest-ID
+hör till den då levererade Willysfilen; senare kampanjpublicering har nyare ID.
+
+Live 10:51 UTC: readiness 200 i båda kommuner, publicerat=laddat. Lund
+`70789e42…`, 29 kontexter; Malmö `8c49ecda…`, 63 kontexter. Ordinarie serverpass
+10:45 startade Malmö före Lund eftersom endast Malmö hade förfallet arbete.
+Det passet var fortfarande pågående vid verifieringen; invänta ordinarie status,
+starta ingen konkurrerande uppdatering. Full avbrottsprovning i produktion har
+inte gjorts och ingen ytterligare kommun har aktiverats.
+
+128 relevanta testfall är verifierade. Den första source-paketeringen saknade
+`relay_storage.py` (två fel); slutbilden innehåller filen och 44 riktade prov
+passerar. 118 tidigare PASS återanvänds med oförändrade kodhashar; tillsammans
+127 unika releaseprov, plus ett prov för lokal kommun-/kvittoöversikt. Lund/Malmö
+återupptagningsprov använder sparat officiellt register/geometri och syntetiska
+kataloger, inga liveanrop. Ruff och compileall passerar. Den samlade adminläsaren
+behövde större tidsbudget under pågående bygge: högst 180 sekunder för kommuner,
+med fortsatt explicit unknown vid timeout. Slutkontrollen gav observed för både
+server och Windows i båda kommuner.
+
+En livekontroll utan kapacitetsmätningar gav BLOCKED för Göteborg och lämnade
+registret oförändrat. Piloter behöver fortfarande utföras och mätas före nästa
+kommun; kontrollerna fabricerar inga kapacitetsbevis. Coop/X:-tra-källuckorna
+nedan och extern larmleverans är inte lösta av denna etapp.
+
+[Maskinläsbara releasebevis](releases/municipal-scaling-20261011/ACTIVATED.json).
+Privat serverevidens: `/opt/smako/evidence/municipal-scaling-7b7fe72472dd`.
+Lokala körbevis: `.local/municipal-scaling/`. Endast ordinarie driftjobb kan
+fortfarande köras; inga aktiverings-/leveransväntare ska återstartas.
+
+---
+
 # 2026-10-11 09:11 UTC: 106,49 GB frigjort, Malmö-Hemköp publicerat
 
 Serverns lediga utrymme är **118,39 GB** efter verifierad arkivering av 15
