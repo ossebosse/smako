@@ -52,7 +52,7 @@ class PlanRequest(BaseModel):
     use_pantry: bool = Field(default=True, exclude_if=lambda v: v)
     purchase_planning_mode: Literal["exact", "estimated"] = "exact"
     allowed_store_ids: tuple[str, ...] = Field(
-        default=(), max_length=40,
+        default=(), max_length=1000,
         description="Optional explicit price-context selection for this plan only. Empty preserves the existing area.",
         exclude_if=lambda value: not value,
     )

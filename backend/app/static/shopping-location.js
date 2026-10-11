@@ -13,7 +13,7 @@
     const messages={unknown_postcode:"Postnumret finns inte i vårt geografiska underlag. Kontrollera siffrorna eller prova ett annat postnummer.",ambiguous_postcode:"Postnumret har flera geografiska lägen. Vi kan inte avgöra avståndet säkert med detta underlag.",unavailable:"Aktuella butikspriser saknas för området just nu. Försök igen senare.",outside_coverage:"Smako har ännu ingen kartlagd butik inom ungefär 10 km från detta postnummer."};
     function hideMeals(){confirmed=false;gate.hidden=true;gate.disabled=true;}
     function currentIds(){return new Set((location?.contexts||[]).map(row=>row.context_id));}
-    function validSelection(){const current=currentIds();return selected.length>0&&selected.length<=40&&selected.every(id=>current.has(id));}
+    function validSelection(){const current=currentIds();return selected.length>0&&selected.length<=1000&&selected.every(id=>current.has(id));}
     function persist(){if(location)storage.set(key,{postcode:location.postal_code,area:location.area_postal_code,mode:mode.value,radius:radius.value,ids:selected.slice()});}
     function updateSelection({automatic=true}={}){
       hideMeals();
@@ -23,7 +23,7 @@
         if(mode.value==="radius")selected=location.contexts.filter(row=>row.distance_km!=null&&row.distance_km<=Number(radius.value)).map(row=>row.context_id);
       }
       const unavailable=selected.filter(id=>!currentIds().has(id));
-      const text=unavailable.length?"En tidigare vald butik saknas i aktuellt underlag. Öppna butiksvalet och granska dina val.":selected.length>40?"Fler än 40 inköpsställen valda. Välj en mindre radie eller välj specifika butiker.":selected.length?`${selected.length} inköpsställen valda${mode.value==="radius"?` inom ungefär ${radius.value} km`:mode.value==="municipality"?` i ${location.municipality_name} kommun`:""}.`:"Inga butiker valda. Öka radien, välj kommunen eller bocka i specifika butiker.";
+      const text=unavailable.length?"En tidigare vald butik saknas i aktuellt underlag. Öppna butiksvalet och granska dina val.":selected.length>1000?"Fler än 1 000 inköpsställen valda. Välj en mindre radie eller välj specifika butiker.":selected.length?`${selected.length} inköpsställen valda${mode.value==="radius"?` inom ungefär ${radius.value} km`:mode.value==="municipality"?` i ${location.municipality_name} kommun`:""}.`:"Inga butiker valda. Öka radien, välj kommunen eller bocka i specifika butiker.";
       selectionStatus.textContent=text;$('location-modal-status').textContent=text;
       // No empty selection can silently expand to every store in the area.
       $('confirm-location').disabled=!validSelection();persist();

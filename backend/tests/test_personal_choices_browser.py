@@ -297,6 +297,24 @@ def test_late_postcode_response_cannot_replace_newer_location(choices):
     expect(page.locator("#dinner-count")).to_be_visible()
 
 
+def test_full_municipality_and_radius_can_select_more_than_forty_stores(choices):
+    page, url, captured = choices
+    rows = [{"context_id": f"store-{i}", "display_name": f"Butik {i}", "distance_km": i / 10} for i in range(63)]
+    page.route("**/api/shopping-location?**", lambda route: route.fulfill(
+        content_type="application/json", body=json.dumps({
+            "status": "eligible", "postal_code": "22350", "area_postal_code": "22350",
+            "municipality_name": "Lund", "area_name": "Lund", "municipality_available": True,
+            "nearest_distance_km": 0, "contexts": rows})))
+    page.goto(url)
+    choose_location(page)
+    page.locator("#location-radius").select_option("5")
+    page.locator("#confirm-location").click()
+    assert len(submit(page, captured)["allowed_store_ids"]) == 51
+    page.locator("#location-store-mode").select_option("municipality")
+    page.locator("#confirm-location").click()
+    assert len(submit(page, captured)["allowed_store_ids"]) == 63
+
+
 def test_estimate_change_only_applies_to_explicit_recalculation():
     for action in ("recalculate", "extras"):
         value = PersonalMutation(revision=1, pantry_revision=0, action=action,

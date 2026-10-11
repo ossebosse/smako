@@ -10,6 +10,7 @@ Utveckling på `feature/postcode-meal-dialogs`, från aktiverade Mina val.
   Okänt postnummer, okända positioner, uteblivna priser och utanför täckning
   hanteras separat. Radiegränser använder oavrundat avstånd.
 - Butiksval: 1–5 km, kartlagda inköpsställen i kommunen eller rullbar krysslista.
+  Även kommuner med fler än 40 inköpsställen kan väljas (Malmö: 63).
   Måltidsval låses upp efter bekräftat, icke-tomt butiksval. Ändringar låser
   åter måltidssteget; sena svar från tidigare postnummer får inte ta över.
 - Middag/frukost/mellanmål har Fördelning, Portionsvikt och Näringsvärden som
@@ -41,7 +42,7 @@ Källdataarkivet är lokal, ignorerad arbetsdata och distribueras inte i appen.
 
 ## Verifiering
 
-- 12 testfall (10 Chromium/WebKit, 2 API-kontrakt): huvudval, sparade krav, tillval, dialoger,
+- 14 testfall (12 Chromium/WebKit, 2 API-kontrakt): huvudval, sparade krav, tillval, dialoger,
   tangentbord, faktisk dragning av båda handtagen, gemensam fördelningsbudget,
   butiksradie, kommun, manuellt val, tomt val och invalidation.
 - 7 geografiska/kommunala testfall: verkliga lokala postnummer, negativa svar,
