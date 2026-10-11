@@ -1,3 +1,26 @@
+# 2026-10-11 19:24 UTC: Fasta skalor och redigerbara reglage aktiverade
+
+App `editable-sliders-7987bd5bc5d1` kör på betan. Fördelningens skalor följer
+måltidsantalet och summan begränsas utan att andra kategorier flyttas. Alla
+reglage har tangentbordsredigering av visade värden. Proteinets skala är 100 g,
+kolhydraternas 400 g; äldre högre krav behålls synligt tills de ändras.
+Medlemsprisavsnittet under Extraval är borttaget, prispolicyn är oförändrad.
+
+18 fokuserade testfall passerar i Chromium/WebKit och API-kontrakt; berörda
+fall återkördes efter slutjusteringar. Isolerad meny/omräkning, publik meny,
+checkout-audit, identisk GET, mobilvy och tre statiska filhashar verifierade.
+258 gamla planrevisioner och 84 privata tillstånd bevarades. Bara appimage
+och BUILD_ID byttes under driftlås med säkerhetskopia; källor, scheduler,
+Windowsuppgift och prismanifest ändrades inte.
+
+Första publika planprovet fick SQLite `database is locked` i befintlig
+produktunderlagsläsning under samtidig driftkontroll. Exakt incident sparad;
+separat läsprov och nytt publikt planprov passerade. Låsägaren är inte fastställd
+och ingen generell låsreparation påstås. Testcontainrar och tunnel är stängda.
+[Verifiering och återgång](releases/editable-sliders-20261011/VERIFIED.md).
+
+---
+
 # 2026-10-11 18:24 UTC: Postnummer och måltidsfönster aktiverade
 
 App `postcode-meals-93c4f9ac4505` kör på betan. Mina val börjar med postnummer,
