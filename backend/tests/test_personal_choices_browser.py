@@ -51,6 +51,13 @@ def choices(request):
                                            "postal_code": "22350", "available": True}]}
             elif path == "price-contexts":
                 data = {"contexts": []}
+            elif path == "shopping-location":
+                data = {"status": "eligible", "postal_code": "22350", "area_postal_code": "22350",
+                        "municipality_name": "Lund", "area_name": "Lund", "municipality_available": True,
+                        "nearest_distance_km": 1.5, "contexts": [
+                            {"context_id": "near", "display_name": "Nära butik", "distance_km": 1.5},
+                            {"context_id": "far", "display_name": "Bortre butik", "distance_km": 4.5},
+                            {"context_id": "unknown", "display_name": "Okänd position", "distance_km": None}]}
             elif path == "plans":
                 captured.append(route.request.post_data_json)
                 status = 422
@@ -79,9 +86,20 @@ def submit(page, captured):
     return captured[-1]
 
 
+def choose_location(page):
+    expect(page.locator("#check-postcode")).to_be_enabled()
+    expect(page.locator("#dinner-count")).not_to_be_visible()
+    page.locator("#customer-postcode").fill("223 50")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+    page.locator("#confirm-location").click()
+    expect(page.locator("#dinner-count")).to_be_visible()
+
+
 def test_primary_sliders_optional_meals_and_default_request(choices):
     page, url, captured = choices
     page.goto(url)
+    choose_location(page)
     expect(page.locator("#generate-plan")).to_be_enabled()
     expect(page.locator("#extra-choices")).not_to_have_attribute("open", "")
     expect(page.locator("#dinner-count")).to_have_value("5")
@@ -111,6 +129,7 @@ def test_primary_sliders_optional_meals_and_default_request(choices):
     page.locator("#snack-count").focus()
     page.keyboard.press("ArrowLeft")
     page.locator("#recipe-style").select_option("library")
+    expect(page.locator("#recipe-price-contexts")).to_have_count(0)
     expect(page.locator('[data-meal-type="breakfast"]')).to_be_visible()
     page.locator("#breakfast-min_protein_g").evaluate("node => node.value = 30")
     selected = submit(page, captured)
@@ -138,6 +157,7 @@ def test_draft_restores_sliders_and_consolidates_hard_requirements(choices):
     page.add_init_script("sessionStorage.setItem('smako.personal.requestDraft', "
                          + json.dumps(json.dumps(draft)) + ");")
     page.goto(url)
+    choose_location(page)
     expect(page.locator("#dinner-count")).to_have_value("4")
     expect(page.locator("#snack-count")).to_be_visible()
     page.locator("#extra-choices>summary").click()
@@ -154,6 +174,127 @@ def test_draft_restores_sliders_and_consolidates_hard_requirements(choices):
     assert restored["personal"]["profile"]["exclusions"] == ["fisk"]
     assert restored["personal"]["profile"]["allergies"] == ["jordnötter"]
     assert restored["personal"]["meals"][0]["limits"]["min_protein_g"] == 30.5
+
+
+def test_meal_dialogs_intervals_and_shared_distribution_budget(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    page.locator("#dinner-distribution-open").click()
+    expect(page.locator("#dinner-distribution-dialog")).to_be_visible()
+    page.locator("#dinner-fish").focus()
+    page.keyboard.press("End")
+    expect(page.locator("#dinner-fish")).to_have_value("5")
+    for kind in ("vegetarian", "chicken", "meat"):
+        expect(page.locator(f"#dinner-{kind}")).to_have_attribute("max", "0")
+        page.locator(f"#dinner-{kind}").focus()
+        page.keyboard.press("End")
+        expect(page.locator(f"#dinner-{kind}")).to_have_value("0")
+    page.keyboard.press("Escape")
+    expect(page.locator("#dinner-distribution-open")).to_be_focused()
+    page.locator("#dinner-count").focus()
+    page.keyboard.press("ArrowLeft")
+    expect(page.locator("#dinner-fish")).to_have_value("4")
+    page.locator("#dinner-weight-open").click()
+    page.locator("#dinner-min_weight_g").focus()
+    page.keyboard.press("ArrowRight")
+    page.locator("#dinner-max_weight_g").focus()
+    page.keyboard.press("Home")
+    expect(page.locator("#dinner-max_weight_g")).to_have_value("0")
+    page.locator("#dinner-min_weight_g").focus()
+    page.keyboard.press("End")
+    expect(page.locator("#dinner-min_weight_g")).to_have_value("0")
+    page.locator("#dinner-weight-dialog").get_by_role("button", name="Återställ standard").click()
+    track = page.locator("#dinner-weight-dialog .interval-track").bounding_box()
+    y = track["y"] + track["height"] / 2
+    for start, end in ((12, track["width"] * .2), (track["width"] - 12, track["width"] * .75)):
+        page.mouse.move(track["x"] + start, y)
+        page.mouse.down()
+        page.mouse.move(track["x"] + end, y, steps=8)
+        page.mouse.up()
+    assert 100 < float(page.locator("#dinner-min_weight_g").input_value()) < 1000
+    assert 1500 < float(page.locator("#dinner-max_weight_g").input_value()) < 2800
+    page.locator("#dinner-weight-dialog").get_by_role("button", name="Återställ standard").click()
+    page.locator("#dinner-weight-dialog").get_by_role("button", name="Klart").click()
+    page.locator("#dinner-nutrition-open").click()
+    page.locator("#dinner-min_protein_g").evaluate("n=>{n.value=30;n.dispatchEvent(new Event('input',{bubbles:true}));}")
+    page.locator("#dinner-max_protein_g").evaluate("n=>{n.value=60;n.dispatchEvent(new Event('input',{bubbles:true}));}")
+    for width in (1280, 390):
+        page.set_viewport_size({"width": width, "height": 800})
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        assert page.locator("#dinner-nutrition-dialog").evaluate("n=>n.scrollWidth<=n.clientWidth")
+    page.keyboard.press("Escape")
+    payload = submit(page, captured)
+    meal = payload["personal"]["meals"][0]
+    assert meal["distribution"] == {"vegetarian": 0, "chicken": 0, "fish": 4, "meat": 0}
+    assert meal["limits"]["min_weight_g"] is None and meal["limits"]["max_weight_g"] is None
+    assert (meal["limits"]["min_protein_g"], meal["limits"]["max_protein_g"]) == (30, 60)
+
+
+def test_location_radius_municipality_manual_and_invalidation(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    assert submit(page, captured)["allowed_store_ids"] == ["near"]
+    page.locator("#location-radius").select_option("1")
+    expect(page.locator("#dinner-count")).not_to_be_visible()
+
+    expect(page.locator("#confirm-location")).to_be_disabled()
+    page.locator("#location-radius").select_option("5")
+    page.locator("#confirm-location").click()
+    assert submit(page, captured)["allowed_store_ids"] == ["near", "far"]
+    page.locator("#location-store-mode").select_option("municipality")
+    page.locator("#confirm-location").click()
+    assert submit(page, captured)["allowed_store_ids"] == ["near", "far", "unknown"]
+    page.locator("#choose-specific-stores").click()
+    page.locator("#context-near").uncheck()
+    page.locator("#context-far").uncheck()
+    page.locator("#context-unknown").uncheck()
+    page.locator("#location-stores-done").click()
+    expect(page.locator("#confirm-location")).to_be_disabled()
+    page.locator("#choose-specific-stores").click()
+    page.locator("#context-far").check()
+    page.keyboard.press("Escape")
+    page.locator("#confirm-location").click()
+    assert submit(page, captured)["allowed_store_ids"] == ["far"]
+    page.locator("#customer-postcode").fill("99999")
+    expect(page.locator("#dinner-count")).not_to_be_visible()
+    expect(page.locator("#location-store-settings")).not_to_be_visible()
+    page.route("**/api/shopping-location?**", lambda route: route.fulfill(
+        content_type="application/json", body=json.dumps({"status": "outside_coverage"})))
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("ingen kartlagd butik")
+    expect(page.locator("#dinner-count")).not_to_be_visible()
+
+
+def test_late_postcode_response_cannot_replace_newer_location(choices):
+    page, url, _captured = choices
+    pending = []
+
+    def location_reply(route):
+        if "22350" in route.request.url:
+            pending.append(route)
+        else:
+            route.fulfill(content_type="application/json", body=json.dumps({
+                "status": "eligible", "postal_code": "21120", "area_postal_code": "21120",
+                "municipality_name": "Malmö", "area_name": "Malmö", "municipality_available": True,
+                "nearest_distance_km": 1, "contexts": [{"context_id": "malmo", "display_name": "Malmöbutik", "distance_km": 1}]}))
+
+    page.route("**/api/shopping-location?**", location_reply)
+    page.goto(url)
+    expect(page.locator("#check-postcode")).to_be_enabled()
+    page.locator("#customer-postcode").fill("22350")
+    with page.expect_request("**/api/shopping-location?**"):
+        page.locator("#check-postcode").click()
+    page.locator("#customer-postcode").fill("21120")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Malmö kommun")
+    assert len(pending) == 1
+    pending[0].fulfill(content_type="application/json", body=json.dumps({"status": "outside_coverage"}))
+    page.locator("#confirm-location").click()
+    expect(page.locator("#location-status")).to_contain_text("Malmö kommun")
+    expect(page.locator("#postal-code")).to_have_value("21120")
+    expect(page.locator("#dinner-count")).to_be_visible()
 
 
 def test_estimate_change_only_applies_to_explicit_recalculation():

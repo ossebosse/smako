@@ -16,6 +16,7 @@
 
   let privateState = null, saved = null, extras = [], busy = false, parsedText = "", scanner = null, swapTarget = null, alternativeTarget = null, searchGeneration = 0, searchAbort = null, searchTimer = null, shoppingGenerics = [];
   const recipeControls = window.SmakoRecipes.controls($('complete-recipe-controls'),{personal:true});
+  const locationControls = window.SmakoLocation.create();
 
   function el(tag, text, cls) { const n=document.createElement(tag); if(text != null)n.textContent=text; if(cls)n.className=cls; return n; }
 
@@ -100,15 +101,52 @@
     control.addEventListener("input",()=>{control.value=Math.round(Number(control.value));refresh();});
     // step=any preserves fractional limits from existing private revisions.
     control.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowDown","ArrowRight","ArrowUp"].includes(event.key))return;event.preventDefault();control.value=Number(control.value)+(["ArrowRight","ArrowUp"].includes(event.key)?1:-1);control.dispatchEvent(new Event("input",{bubbles:true}));});
-    sliders.set(id,{set(value){control.value=value??(optional?-1:min);refresh();},read(){return optional&&Number(control.value)<0?null:Number(control.value);}});
+    sliders.set(id,{set(value){control.value=value??(optional?-1:min);refresh();},read(){return optional&&Number(control.value)<0?null:Number(control.value);},maximum(value){control.max=value;scale.lastChild.textContent=String(value);refresh();}});
     refresh();return label;
   }
   const sliderValue=id=>sliders.get(id).read();
   const setSlider=(id,value)=>sliders.get(id).set(value);
-  const mealCards={},mealExtras={};
+  // Two native, keyboard-accessible thumbs share one track. The outer stops
+  // retain null (planner default); zero remains an explicit saved constraint.
+  function interval(type, key, title, max) {
+    const box=el("fieldset",null,"choice-interval");box.append(el("legend",title));
+    const output=el("p",null,"interval-value"),track=el("div",null,"interval-track");
+    const controls=["min","max"].map((end,index)=>{
+      const id=`${type}-${end}_${key}`,control=input("range",0,{min:-1,max:max+1,step:"any"});
+      control.id=id;control.value=index?max+1:-1;control.setAttribute("aria-label",`${title} – ${index?"högst":"minst"}`);
+      track.append(control);return control;
+    });
+    function refresh(){
+      const [lo,hi]=controls.map(n=>Number(n.value));
+      const labels=[lo<0?"Ingen min":`${number(lo)} g`,hi>max?"Ingen max":`${number(hi)} g`];
+      output.textContent=lo<0&&hi>max?"Standard – inga extra gränser":labels.join(" – ");
+      controls.forEach((n,i)=>n.setAttribute("aria-valuetext",labels[i]));
+      track.style.setProperty("--start",`${(lo+1)/(max+2)*100}%`);track.style.setProperty("--end",`${(hi+1)/(max+2)*100}%`);
+    }
+    controls.forEach((control,index)=>{
+      control.addEventListener("input",()=>{
+        const other=Number(controls[1-index].value),value=Math.round(Number(control.value));
+        control.value=index?Math.max(0,other,value):Math.min(max,other,value);refresh();
+      });
+      control.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowDown","ArrowRight","ArrowUp"].includes(event.key))return;event.preventDefault();control.value=Number(control.value)+(["ArrowRight","ArrowUp"].includes(event.key)?1:-1);control.dispatchEvent(new Event("input",{bubbles:true}));});
+      sliders.set(control.id,{set(value){control.value=value??(index?max+1:-1);refresh();},read(){const value=Number(control.value);return value<0||value>max?null:value;}});
+    });
+    const reset=el("button","Återställ standard","secondary-button");reset.type="button";
+    reset.addEventListener("click",()=>{controls[0].value=-1;controls[1].value=max+1;refresh();});
+    box.append(output,track,reset);refresh();return box;
+  }
+  function mealDialog(type, key, title, content, actions) {
+    const dialog=el("dialog",null,"meal-dialog");dialog.id=`${type}-${key}-dialog`;
+    const heading=el("h2",`${names[type]} · ${title}`);heading.id=`${dialog.id}-title`;dialog.setAttribute("aria-labelledby",heading.id);
+    const close=el("button","Klart","primary-button");close.type="button";close.addEventListener("click",()=>dialog.close());
+    dialog.append(heading,content,close);$('personal-form').append(dialog);
+    const open=el("button",title,"secondary-button");open.type="button";open.id=`${type}-${key}-open`;open.setAttribute("aria-haspopup","dialog");open.setAttribute("aria-controls",dialog.id);open.addEventListener("click",()=>dialog.showModal());actions.append(open);
+    dialog.addEventListener("close",()=>{if(document.activeElement===document.body||dialog.contains(document.activeElement))open.focus({preventScroll:true});});
+  }
+  const mealCards={},mealExtras={},distributionSync={};
   function syncMeal(type){
     const enabled=type==="dinner"||$(`enable-${type}`).checked;
-    mealCards[type].hidden=!enabled;mealExtras[type].hidden=!enabled;
+    mealCards[type].hidden=!enabled;
     mealExtras[type].disabled=!enabled;
   }
   for(const [type,label] of Object.entries(names)){
@@ -116,26 +154,37 @@
     const grid=el("div",null,"personal-grid");
     grid.append(slider(`${type}-count`,type==="dinner"?"Antal middagar":"Antal tillfällen",5,{min:type==="dinner"?0:1,max:7}),slider(`${type}-servings`,"Portioner per rätt",type==="dinner"?4:1,{min:1,max:6}));
     box.append(grid);mealCards[type]=box;$('meal-settings').append(box);
-    const options=el("fieldset");options.append(el("legend",label));mealExtras[type]=options;
+    const actions=el("div",null,"personal-actions meal-settings-actions");box.append(actions);
+    const options=el("fieldset");mealExtras[type]=options;
     const diet=select([["mixed","Blandat"],["vegetarian","Vegetariskt (ägg/mejeri tillåts)"],["vegan","Veganskt"]],"mixed");diet.id=`${type}-diet`;options.append(field("Kostval",diet));
     const distribution=el("div",null,"personal-grid");
     for(const [key,title] of Object.entries(proteinNames))distribution.append(slider(`${type}-${key}`,`${title} – antal`,null,{optional:true,max:7}));
-    options.append(el("p","Standard låter planeraren välja fördelning. Egna antal ska tillsammans rymmas i antalet tillfällen."),distribution);
-    const limits=el("div");limits.append(el("p","Standard behåller matplanerarens befintliga beräkning utan extra gräns. Dra ett reglage för att ange en egen gräns per portion. Portionsvikt avser uppskattad tillagad ätbar vikt."));
-    const lg=el("div",null,"personal-grid");
-    for(const [key,title] of Object.entries(limitLabels)){
-      const max=key.includes("kcal")?4000:key.includes("weight")?3000:key.includes("carbs")?500:300;
-      lg.append(slider(`${type}-${key}`,title,null,{optional:true,max,unit:key.includes("kcal")?"kcal":"g"}));
-    }
-    limits.append(lg);options.append(details("Portionsvikt och näringsgränser",limits));
+    const remaining=el("p");remaining.setAttribute("role","status");
+    options.append(el("p","Standard låter planeraren välja återstående rätter. Egna antal delar på antalet måltider. Vegetariskt tillåter ägg och mejeri; veganskt utesluter animalier."),remaining,distribution);
+    distributionSync[type]=()=>{
+      let left=sliderValue(`${type}-count`);const keys=Object.keys(proteinNames);
+      const values=keys.map(key=>sliderValue(`${type}-${key}`));
+      for(let i=0;i<keys.length;i++){
+        const forbidden=diet.value!=="mixed"&&keys[i]!=="vegetarian";
+        if(forbidden)values[i]=0;
+        if(values[i]!==null){values[i]=Math.min(values[i],left);left-=values[i];}
+      }
+      keys.forEach((key,i)=>{const id=`${type}-${key}`,forbidden=diet.value!=="mixed"&&key!=="vegetarian";sliders.get(id).maximum(forbidden?0:left+(values[i]??0));setSlider(id,values[i]);$(id).disabled=forbidden;});
+      remaining.textContent=`${sliderValue(`${type}-count`)-left} av ${sliderValue(`${type}-count`)} måltider fördelade · ${left} kvar`;
+    };
+    distribution.addEventListener("input",distributionSync[type]);diet.addEventListener("change",distributionSync[type]);$(`${type}-count`).addEventListener("input",distributionSync[type]);
+    const weight=el("div");weight.append(el("p","Dra i intervallets ändar för lägsta och högsta portionsvikt. Gäller uppskattad tillagad, ätbar vikt per portion."),interval(type,"weight_g","Portionsvikt",3000));
+    const nutrition=el("div");nutrition.append(el("p","Dra i intervallets ändar för egna gränser per portion. Standard behåller matplanerarens befintliga beräkning."));
+    for(const [key,title,max] of [["protein_g","Protein",300],["carbs_g","Kolhydrater",500],["fat_g","Fett",300]])nutrition.append(interval(type,key,title,max));
+    nutrition.append(slider(`${type}-max_kcal`,"Högsta energi",null,{optional:true,max:4000,unit:"kcal"}));
     const organic=input("checkbox","");organic.id=`${type}-organic`;options.append(field("Kräv ekologiska animalier för denna måltidstyp",organic));
-    $('meal-extra-settings').append(options);
+    mealDialog(type,"distribution","Fördelning",options,actions);mealDialog(type,"weight","Portionsvikt",weight,actions);mealDialog(type,"nutrition","Näringsvärden",nutrition,actions);
     if(type!=="dinner"){
       const toggle=input("checkbox","");toggle.id=`enable-${type}`;toggle.setAttribute("aria-controls",`${type}-meals`);box.id=`${type}-meals`;
       const row=field(`Lägg till ${label.toLowerCase()}`,toggle);row.className="check-label";$('extra-meal-toggles').append(row);
       toggle.addEventListener("change",()=>{syncMeal(type);$(`${type}-count`).dispatchEvent(new Event("input",{bubbles:true}));});
     }
-    syncMeal(type);
+    syncMeal(type);distributionSync[type]();
   }
   $('store-count-control').append(slider("max-stores","Max inköpsställen för hela korgen",2,{min:1,max:3}));
   $('organic-percent-control').append(slider("organic-percent","Minsta verifierade ekologiska kostnadsandel",0,{max:100,unit:"%"}));
@@ -160,11 +209,12 @@
     const meals=standalone?[]:recipeControls.mealValues(readMeals());
     if(!standalone&&!recipeControls.validate()){$('personal-form').reportValidity();throw new Error("Kontrollera receptvalens intervall.");}
 
-    return {...(standalone?recipeControls.storeValues():recipeControls.values()),membership_price_policy:"all_advertised",purchase_planning_mode:"estimated",postal_code:$('postal-code').value.trim(),recipes:meals.find(m=>m.meal_type==="dinner")?.count||0,servings:meals.find(m=>m.meal_type==="dinner")?.servings||1,max_stores:Number($('max-stores').value),memberships:[...document.querySelectorAll('input[name="membership"]:checked')].map(n=>n.value),diversity_mode:"balanced",varied_budget_percent:25,strategy:"optimized",personal:{profile:profile(),meals,extras,pantry_revision:privateState.revision,allow_nutrition_estimates:true,organic_percent:Number($('organic-percent').value),organic_animals:$('organic-animals').checked,surplus_mode:$('surplus-mode').value}};
+    return {...(standalone?recipeControls.storeValues():recipeControls.values()),...locationControls.values(),membership_price_policy:"all_advertised",purchase_planning_mode:"estimated",recipes:meals.find(m=>m.meal_type==="dinner")?.count||0,servings:meals.find(m=>m.meal_type==="dinner")?.servings||1,max_stores:Number($('max-stores').value),memberships:[...document.querySelectorAll('input[name="membership"]:checked')].map(n=>n.value),diversity_mode:"balanced",varied_budget_percent:25,strategy:"optimized",personal:{profile:profile(),meals,extras,pantry_revision:privateState.revision,allow_nutrition_estimates:true,organic_percent:Number($('organic-percent').value),organic_animals:$('organic-animals').checked,surplus_mode:$('surplus-mode').value}};
 
   }
 
   function putChoices(request){
+    locationControls.restore(request);
     const spec=request.personal;if(!spec){recipeControls.restore(request);return;}
     // Consolidate older per-meal profiles so exclusions and allergies are not lost.
     const merged=Object.fromEntries(Object.keys(profileLabels).map(k=>[k,[...new Set([...(spec.profile?.[k]||[]),...(spec.meals||[]).flatMap(m=>m.profile?.[k]||[])])]]));
@@ -177,10 +227,10 @@
       setSlider(`${t}-count`,meal.count|| (t==="dinner"?0:5));setSlider(`${t}-servings`,meal.servings??1);
       if(t!=="dinner")$(`enable-${t}`).checked=meal.count>0;
       $(`${t}-diet`).value=meal.diet||"mixed";
-      Object.keys(proteinNames).forEach(k=>setSlider(`${t}-${k}`,meal.distribution?.[k]));
+      Object.keys(proteinNames).forEach(k=>{sliders.get(`${t}-${k}`).maximum(7);setSlider(`${t}-${k}`,meal.distribution?.[k]);});
       Object.keys(limitLabels).forEach(k=>setSlider(`${t}-${k}`,meal.limits?.[k]));
       if(t==="dinner"&&request.recipe_preferences?.min_protein_g!=null)setSlider(`${t}-min_protein_g`,Math.max(meal.limits?.min_protein_g??0,request.recipe_preferences.min_protein_g));
-      $(`${t}-organic`).checked=meal.organic_animals===true;syncMeal(t);
+      $(`${t}-organic`).checked=meal.organic_animals===true;syncMeal(t);distributionSync[t]();
     }
     setSlider('organic-percent',spec.organic_percent??0);$('organic-animals').checked=spec.organic_animals===true;$('surplus-mode').value=spec.surplus_mode||"minimize";
     setSlider('max-stores',request.max_stores??2);$('postal-code').value=request.postal_code||"22350";

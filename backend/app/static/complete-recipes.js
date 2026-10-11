@@ -72,6 +72,7 @@
       finally{nearby.disabled=false;}
     });
     async function loadContexts(){
+      if(personal)return; // Personal planning owns its postcode-first store step.
       const postal=document.getElementById("postal-code")?.value.replace(/\s/g,"");if(!/^\d{5}$/.test(postal||""))return;
       const epoch=++contextEpoch;contextStatus.textContent="Hämtar inköpsställen i ditt prisområde…";
       const positionQuery=contextPosition?`&latitude=${contextPosition.latitude}&longitude=${contextPosition.longitude}`:"";
@@ -85,6 +86,7 @@
     }
     contextOptions.addEventListener("change",()=>{selectedContexts=[...contextOptions.querySelectorAll("input:checked")].map(node=>node.value);storage.set(key,values());});
     document.getElementById("postal-code")?.addEventListener("change",()=>{
+      if(personal)return;
       const postal=document.getElementById("postal-code").value.replace(/\s/g,"");
       if(postal!==contextPostal){++contextEpoch;contextOptions.replaceChildren();storage.set(`${key}.stores.${contextPostal}`,selectedContexts);selectedContexts=storage.get(`${key}.stores.${postal}`)||[];contextPostal=postal;contextPosition=null;storage.set(key,values());}
       void loadContexts();
@@ -127,7 +129,7 @@
         return result;
       });
     }
-    const feedback=el("p",null,"field-hint");feedback.setAttribute("role","status");advanced.append(feedback);box.append(advanced);host.replaceChildren(contexts,box);
+    const feedback=el("p",null,"field-hint");feedback.setAttribute("role","status");advanced.append(feedback);box.append(advanced);if(personal)contexts.remove();host.replaceChildren(...(personal?[box]:[contexts,box]));
     let enabled=false;
     function sync() {
       advanced.hidden=!["complete","library"].includes(mode.value);advanced.disabled=!enabled||advanced.hidden;

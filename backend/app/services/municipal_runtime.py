@@ -38,7 +38,7 @@ def required_contexts(settings, prepared):
             if s.source_provenance and s.source_provenance.source_channel == "catalog"}
 
 
-def distance_to_store(store, latitude, longitude):
+def distance_to_store(store, latitude, longitude, *, precision=2):
     """Straight-line distance to verified coordinates; missing stays unknown."""
     if latitude is None or longitude is None:
         return None, None
@@ -50,5 +50,6 @@ def distance_to_store(store, latitude, longitude):
         if lat is None or lon is None:
             continue
         a = sin(radians(lat - latitude) / 2) ** 2 + cos(radians(latitude)) * cos(radians(lat)) * sin(radians(lon - longitude) / 2) ** 2
-        distances.append((round(6371.0088 * 2 * asin(sqrt(min(1, max(0, a)))), 2), basis))
+        distance = 6371.0088 * 2 * asin(sqrt(min(1, max(0, a))))
+        distances.append((round(distance, precision) if precision is not None else distance, basis))
     return min(distances) if distances else (None, None)

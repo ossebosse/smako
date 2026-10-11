@@ -972,6 +972,54 @@ async def available_municipalities():
     return {"municipalities": rows}
 
 
+@router.get("/shopping-location")
+async def shopping_location(postal_code: Annotated[str, Query(min_length=5, max_length=12)]):
+    """Resolve real postcodes before selecting an existing prepared price area.
+
+    No provider calls, no new collection scope, and no guessed store positions.
+    Online fulfillment warehouses never count as nearby shops.
+    """
+    from app.services.municipal_runtime import distance_to_store
+    from app.services.postal_locations import lookup_postcode
+    try:
+        location = lookup_postcode(postal_code)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    if location["status"] != "located":
+        return location
+    areas = (await available_municipalities())["municipalities"]
+    distances = []
+    for area in areas:
+        prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_active("city:" + area["name"].casefold())
+        if prepared is None:
+            continue
+        for store in prepared.stores:
+            distance, _basis = distance_to_store(store, location["latitude"], location["longitude"], precision=None)
+            if distance is not None:
+                distances.append((distance, area))
+    if not distances:
+        return {**location, "status": "unavailable", "nearest_distance_km": None}
+    nearest, nearest_area = min(distances, key=lambda item: item[0])
+    if nearest > 10:
+        return {**location, "status": "outside_coverage", "nearest_distance_km": nearest}
+    own_area = next((area for area in areas if area["municipality_code"] == location["municipality_code"]), None)
+    area = own_area or nearest_area
+    if not area["available"]:
+        return {**location, "status": "unavailable", "nearest_distance_km": nearest}
+    data = await available_price_contexts(area["postal_code"], location["latitude"], location["longitude"])
+    # Keep full precision for radius eligibility; presentation may round later.
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(area["postal_code"], {})
+    stores = {store.store_id: store for store in prepared.stores} if prepared else {}
+    for row in data["contexts"]:
+        store = stores.get(row["context_id"])
+        if store:
+            row["distance_km"], row["distance_basis"] = distance_to_store(
+                store, location["latitude"], location["longitude"], precision=None)
+    return {**location, "status": "eligible", "nearest_distance_km": nearest,
+            "area_postal_code": area["postal_code"], "area_name": area["name"],
+            "municipality_available": own_area is not None, **data}
+
+
 @router.get("/price-universe/status")
 async def price_universe_status(city: str = "Lund") -> dict[str, object]:
     """Expose active immutable price metadata without triggering a rebuild."""

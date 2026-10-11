@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#173e35" />
   <title>Smako · Min plan och skafferi</title>
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
-  <link rel="stylesheet" href="/static/personal.css?v=choices-20261011" />
+  <link rel="stylesheet" href="/static/personal.css?v=location-20261011" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
-  <script src="/static/complete-recipes.js?v=choices-20261011" defer></script>
-  <script src="/static/municipal-areas.js?v=1" defer></script>
-  <script src="/static/personal.js?v=choices-20261011" defer></script>
+  <script src="/static/complete-recipes.js?v=location-20261011" defer></script>
+  <script src="/static/shopping-location.js?v=location-20261011" defer></script>
+  <script src="/static/personal.js?v=location-20261011" defer></script>
   <script src="/static/product-search.js?v=comparability-20261010" defer></script>
 </head>
 <body class="personal-app">
@@ -65,13 +65,30 @@
     </section>
     <section data-view="choices" id="personal-choices" hidden><h1>Mina val</h1>
       <form id="personal-form">
+        <section id="location-step" class="location-card" aria-labelledby="location-title">
+          <h2 id="location-title">Var vill du handla?</h2>
+          <p>Börja med ditt postnummer. Smako behöver ha en kartlagd butik inom ungefär 10 km.</p>
+          <div class="postcode-entry"><label for="customer-postcode">Ditt postnummer<input id="customer-postcode" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="Till exempel 223 50" /></label><button id="check-postcode" type="button" class="primary-button">Hitta butiker</button></div>
+          <p id="location-status" role="status" aria-live="polite"></p>
+          <div id="location-store-settings" hidden>
+            <label for="location-store-mode">Vilka butiker vill du jämföra?<select id="location-store-mode"><option value="radius">Butiker inom en radie</option><option value="municipality">Alla kartlagda butiker i min kommun</option><option value="specific">Välj specifika butiker</option></select></label>
+            <label id="location-radius-label" for="location-radius">Radie från postnumrets ungefärliga läge<select id="location-radius"><option value="1">1 km</option><option value="2">2 km</option><option value="3" selected>3 km</option><option value="4">4 km</option><option value="5">5 km</option></select></label>
+            <button id="choose-specific-stores" type="button" class="secondary-button" aria-haspopup="dialog" aria-controls="location-stores-dialog">Välj specifika butiker</button>
+            <p id="location-selection-status" role="status"></p>
+            <button id="confirm-location" type="button" class="primary-button">Fortsätt till måltider</button>
+          </div>
+          <p class="small">Avstånden är ungefärliga och mäts fågelvägen från postnumrets referenspunkt, inte från din adress. Butiker utan känd position ingår bara i kommunval eller egna butiksval. Onlinepriser märks separat.</p>
+          <details><summary>Om postnummerunderlaget</summary><p class="small">© European Union - GISCO, 2024, postal code point dataset, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>. Svenskt utdrag ur 2025 års data. Vissa postnummer delar referenspunkt eller kan saknas. <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/postal-codes">Läs om underlaget</a>.</p></details>
+        </section>
+        <input type="hidden" id="postal-code" value="" />
+        <fieldset id="planning-choices" hidden disabled>
         <p>Välj antal middagar, portioner och inköpsställen. Under extraval kan du anpassa planen mer.</p>
         <div id="meal-settings"></div>
         <fieldset class="choices-primary"><legend>Inköpsställen</legend><div id="store-count-control"></div></fieldset>
         <details id="extra-choices" class="extra-choices"><summary>Extraval</summary>
         <p>Fler måltider, smakval, butiker och egna gränser. Standardvalen gäller tills du ändrar dem.</p>
         <fieldset><legend>Fler måltider</legend><div id="extra-meal-toggles" class="personal-checks"></div><p>Valda måltider visas under middagar, med egna reglage för antal och portioner.</p></fieldset>
-        <fieldset><legend>Prisområde och butiker</legend><div class="personal-grid"><label>Postnummer<input id="postal-code" value="22350" inputmode="numeric" pattern="[0-9]{5}" required /></label></div>
+        <fieldset><legend>Medlemspriser</legend>
           <p>Annonserade medlemspriser räknas alltid med. Resultatet visar vilka butiksmedlemskap som krävs. Personliga kuponger ingår inte.</p><div id="memberships" class="personal-checks" hidden></div>
         </fieldset>
         <fieldset><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Granska de svenska fälten före tillämpning. Ogillar är ett mjukt önskemål. Uteslutningar och allergier är hårda krav.</p><div id="profile-fields" class="personal-grid"></div>
@@ -79,15 +96,16 @@
           <p class="data-note">Uteslut ingredienser är ett hårt matval: fisk innebär inga fiskingredienser, även i sås och buljong. Det gäller inte bara huvudråvaran. Tillräckligt källstött ingrediensunderlag krävs; okänt godtas inte. Allergier anges separat och kräver även kontrollerat allergen- och spårunderlag. Ett godkänt matval är ingen allergisäkerhetskontroll. Tidigare sparade val behåller sin typ.</p>
           <button type="button" id="save-profile" class="secondary-button">Spara min profil i gästsessionen</button><p>Profilen sparas för återanvändning bara med knappen ovan. Planens bekräftade krav följer dess privata revisioner.</p>
         </fieldset>
-        <fieldset><legend>Måltider och egna gränser</legend><p>Vegetariskt tillåter ägg och mejeri, men inte fisk eller kött. Veganskt utesluter animalier.</p><div id="meal-extra-settings"></div></fieldset>
         <div id="complete-recipe-controls"></div>
         <fieldset><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Minst X % av matinköpets varukostnad ska vara verifierat ekologisk. Gäller alla köpta livsmedel efter rabatt, inklusive mat-extravaror. Skafferi, avgifter och icke-livsmedel ingår inte. Okänd status räknas inte som eko.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Källstödd ekologisk märkning finns för en del produkter. Okänd status räknas inte positivt. Animaliskt innehåll och sammansatta produkter kan fortfarande sakna tillräckligt underlag.</p></fieldset>
         <fieldset><legend>Överskott</legend><label>Inköpsstrategi<select id="surplus-mode"><option value="minimize">Minimera överskott</option><option value="allow_larger">Tillåt större köp och föreslå användning av resten</option></select></label><p>Hela förpackningar kan ge oundvikligt överskott. Strategiska extraköp redovisar extra mängd och merkostnad. Rester är beräknade; hållbarhet är okänd.</p></fieldset>
         </details>
         <button id="generate-plan" type="submit" class="primary-button">Skapa plan och inköpslista</button>
+        </fieldset>
       </form>
     </section>
   </main>
   <footer class="personal-footer"><a href="/">Tidigare middagsplanering och feedback</a><a href="/static/privacy.html">Integritet och radera mina data</a><span id="personal-version"></span></footer>
   <dialog id="personal-dialog"><div id="dialog-body"></div><button type="button" id="dialog-close" class="secondary-button">Stäng</button></dialog>
+  <dialog id="location-stores-dialog" aria-labelledby="location-stores-title"><h2 id="location-stores-title">Välj specifika butiker</h2><p>Bocka i de butiker och priskanaler du vill jämföra.</p><div id="location-store-list" class="store-picker-list"></div><p id="location-modal-status" role="status"></p><button id="location-stores-done" type="button" class="primary-button">Klart</button></dialog>
 </body></html>
