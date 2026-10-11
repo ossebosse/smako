@@ -1,0 +1,195 @@
+{
+  "schema": "municipal-source-repair-acceptance-v1",
+  "observed_at": "2026-10-11T07:12:54.983228+00:00",
+  "source_activation": {
+    "status": "activated",
+    "at": "2026-10-11T07:12:43.208667+00:00",
+    "commit": "0e2bacd95c03d6d243f7766c77ec5647ba685b25",
+    "source_image": "sha256:3dafb660f8fa43e8a43df22a5dce37f24caaad2c65ce45fbf0c0b70dc36582fe",
+    "source_build": "municipal-source-0e2bacd95c03",
+    "source_only": true,
+    "cron_schedule_preserved": true,
+    "app_proxy_receiver_isolated_unchanged": true,
+    "source_mounts_command_environment_preserved_except_build": true,
+    "evidence_directory": "/opt/smako/evidence/municipal-repair-0e2bacd95c03"
+  },
+  "app_build": "municipal-app-2b83475f5e68",
+  "municipalities": [
+    {
+      "city": "Lund",
+      "postal_code": "22350",
+      "published_and_loaded_universe_id": "price-universe:68761dcf0c2e2e23420a78cb317ed7eb82a34111ea4c0875b97f6e222d1da04f",
+      "product_count": 2263,
+      "context_count": 29,
+      "contexts_by_chain": {
+        "coop": 10,
+        "hemkop": 2,
+        "ica": 12,
+        "lidl": 2,
+        "willys": 3
+      },
+      "freshness": "aging",
+      "readiness_http": 200
+    },
+    {
+      "city": "Malmö",
+      "postal_code": "21120",
+      "published_and_loaded_universe_id": "price-universe:77696ecb8f94fd8b9a2bc135190ccc08e231e86e395c3eef012b38f2de49999c",
+      "product_count": 2542,
+      "context_count": 61,
+      "contexts_by_chain": {
+        "coop": 13,
+        "hemkop": 6,
+        "ica": 23,
+        "lidl": 8,
+        "citygross": 1,
+        "willys": 10
+      },
+      "freshness": "fresh",
+      "readiness_http": 200
+    }
+  ],
+  "coop": {
+    "cause": "coop-parser-v6 was emitted by the collector but absent from the municipal provider allowlist",
+    "retained_source_qualification": [
+      {
+        "municipality": "1280",
+        "stores": 13,
+        "rows": 1752
+      },
+      {
+        "municipality": "1281",
+        "stores": 9,
+        "rows": 1200
+      }
+    ],
+    "actual_publication": "13 Malmö and 9 Lund physical Coop contexts added; existing Lund Online Syd remains separate",
+    "live_failed_stores": [
+      "3833 Central",
+      "3835 Kornettsgatan",
+      "3831 Djupadal"
+    ],
+    "live_failure_evidence": "Official pages HTTP 200, zero offer cards; Central public offers endpoint returned HTTP 200 with JSON {}. No qualified empty-offer assertion.",
+    "xtra_remaining": [
+      "3646 Söderkulla missing publication target",
+      "3829 Nydala empty official weeklyOffersLink"
+    ],
+    "full_crawl_allowlist": [
+      "730400"
+    ]
+  },
+  "hemkop": {
+    "lund_4224": {
+      "source_snapshot": "9d9c0341fa9e4c2bb3aebdfbb41eecef",
+      "promoted_replay_snapshot": "0fc4d1a4bd3e46938a2c037ed39ad479",
+      "products": 5103,
+      "published_and_loaded": true,
+      "network_requests": 0,
+      "original_observation_preserved": true,
+      "exact_context_activation_atomic": true
+    },
+    "malmo_catalogs": {
+      "4199": {
+        "products_in_retained_proof": 7171,
+        "reviewed_minimum": 6300
+      },
+      "4212": {
+        "products_in_retained_proof": 6475,
+        "reviewed_minimum": 5800
+      }
+    },
+    "malmo_proof": "Complete authentic retained captures qualify with deployed rules, no network; not a new production promotion. Historical replay retains its recorded 8000 minimum.",
+    "malmo_live_acceptance": "pending ordinary retry after 2026-10-11T08:02:19.106793Z; backoff preserved",
+    "default_minimum": 8000,
+    "parser": "hemkop-parser-v1.3-reviewed-catalog"
+  },
+  "verification": {
+    "source_release_cases": "146 distinct core cases passed on image 17a75cf across its test run and missing .dockerignore mount recheck; the seven tested runtime files are byte-identical in 0e2bacd. Not a whole-repository suite claim",
+    "scoped_diagnostics_cases": "23 local passed; 21 image passed plus 2 local-tool checks passed after mounting scripts read-only",
+    "runtime_files_verified": 8,
+    "browser_controls": {
+      "cases": 4,
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "surfaces": [
+        "public",
+        "personal"
+      ],
+      "contexts": 61,
+      "nearby_contexts_at_simulated_position": 6,
+      "geolocation": "simulated position, actual distance API"
+    },
+    "public_menu": {
+      "http_status": 201,
+      "request_reference": "f087a902-b32a-41ea-a5b9-bc64caf91bab",
+      "selected_contexts": [
+        "context:coop:c964acbfeb697ff3",
+        "context:willys:5adaf178f6561faa"
+      ],
+      "acceptance": {
+        "postal_scope_preserved": true,
+        "selected_store_filter": true,
+        "five_dinners_two_servings": true,
+        "ten_total_portions": true,
+        "full_recipes": true,
+        "five_visible_recipe_cards": true,
+        "quantities_rendered": true,
+        "shopping_rows_rendered": true,
+        "max_three_stores": true,
+        "exact_request": true,
+        "memberships_preserved": true,
+        "selected_diversity_preserved": true,
+        "verified_basket": true,
+        "total_reconciled": true,
+        "basket_audit_passed": true,
+        "nutrition_quality_passed": true,
+        "quality_label_visible": true
+      },
+      "identical_reload": true,
+      "plan_sha256": "4780cba63050765fbbc7db5db6c09a65cbb2b594b176ebbba1013b523be8e168",
+      "actual_basket_contexts": [
+        "context:willys:5adaf178f6561faa"
+      ],
+      "note": "Both stores were selected; the winning basket used Willys Emporia only."
+    },
+    "prior_data_preservation": {
+      "consumer_plan_revisions": {
+        "before": 255,
+        "after": 256,
+        "all_previous_rows_preserved": true
+      },
+      "personal_private_state": {
+        "before": 82,
+        "after": 82,
+        "all_previous_rows_preserved": true
+      }
+    }
+  },
+  "scoped_diagnostics": {
+    "city_and_postal_scoped": true,
+    "foreign_municipal_incidents_cannot_be_recovered_by_Lund": true,
+    "remaining_unknown": [
+      {
+        "municipality": "1280",
+        "chain": "citygross",
+        "store_id": "3211",
+        "reason": "Separate municipal source database not read by common source-products diagnostic"
+      }
+    ]
+  },
+  "capacity": {
+    "server_free_bytes_after_build": 12251774976,
+    "observed_build_copy_bytes": 4456144896,
+    "observed_build_memory": "3.07 GiB instantaneous",
+    "observed_build_cpu": "about one core instantaneous; not an overall throughput estimate"
+  },
+  "scale_up_plan": "../../municipal_scaling.md",
+  "recurrence": "Existing server cron and Windows relay task preserved; only Lund and Malmö enabled",
+  "protected_evidence": [
+    "/opt/smako/evidence/municipal-repair-17a75cf60d5a",
+    "/opt/smako/evidence/municipal-repair-0e2bacd95c03"
+  ],
+  "local_evidence": ".local/municipal-repair/"
+}

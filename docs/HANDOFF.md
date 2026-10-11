@@ -1,4 +1,50 @@
-# 2026-10-11: Malmö i kommunvis drift, platsval och butiksvisa återförsök verifierade
+# 2026-10-11 07:13 UTC: Coop publicerat, Hemköp Brunnshög återställt
+
+Källprocess `municipal-source-0e2bacd95c03` är aktiverad. App `2b83475f5e68`,
+proxy, relä, konton och scheman är bevarade. Föregående källrelease `17a75cf`
+återställde Coop/Hemköp; slutpaketet lägger till kommunavgränsad driftstatus.
+Inga aktiverings- eller publiceringsväntare ska startas om.
+
+Malmö har **2542 produkter och 61 valbara pris-/butikskontexter**: 13 fysiska
+Coop-butiker har tillkommit. Publicerat och laddat manifest är `77696ecb…`.
+Lund har **2263 produkter och 29 kontexter**, med nio ytterligare fysiska
+Coop-butiker. Manifest `68761dcf…` innehåller Hemköp Brunnshögs återställda
+5103-varukatalog, snapshot `0fc4d1a4bd3e46938a2c037ed39ad479`.
+Båda kommunerna ger readiness 200. Lund är AGING på grund av äldre Willysdata;
+Malmö är FRESH. Kontrollera den ordinarie reläkörningen 07:30 UTC vid nästa uppföljning.
+
+Hemköp Värnhem 4199 och Elinegård 4212 har granskade butiksspecifika minimigränser
+6 300 respektive 5 800. Fullständiga autentiska underlag med 7 171/6 475 produkter
+klarar den nya valideringen. **Ny liveinsamling och produktionspromovering av
+dessa två kataloger återstår**: befintlig backoff till 08:02:19 UTC bevaras;
+första möjliga ordinarie 15-minuterspass är normalt 08:15 UTC. Radera inte backoff eller
+försvaga gamla snapshots sparade 8 000-gräns. Kontrollera ny snapshot, exakt
+butikskoppling, publicering och laddning efter det ordinarie försöket.
+
+Fyra Chromium/WebKit-fall för publik/personlig kommunkontroll passerar med 61
+kontexter och sex avståndsval inom 1 km från den simulerade positionen. En verklig
+meny med Willys Emporia och Stora Coop Stadion valda passerar audit och identisk
+omladdning; den vinnande korgen använde endast Willys. Alla 255 tidigare
+planrevisioner och 82 privata tillstånd är hashbevarade; verifieringen tillförde
+en publik revision.
+
+Kvarvarande källuckor: Coop Central/Kornettsgatan/Djupadal saknade kvalificerbara
+erbjudanden vid nya liveförsök. Centralens verkliga HTTP 200-svar var `{}`.
+X:-tra Söderkulla/Nydala saknar fungerande butiksegna publikationer. Dessa är
+inte bevis för att butikerna saknar erbjudanden. Coop-fullinsamling endast 730400.
+Den gemensamma diagnostiken läser nu rätt kommun och kan inte friskförklara
+Malmö med Lunds manifest. City Gross 3211 visas dock som källbevis `unknown` i
+denna läsare eftersom dess separata kommunala källdatabas inte omfattas;
+publicerad kontext/readiness är verifierad separat. Dölj inte denna skillnad.
+
+[Releasebevis](releases/municipal-source-repair-20261011/ACTIVATED.json) och
+[prioriterad plan för större utrullning](municipal_scaling.md).
+Detaljer finns i `.local/municipal-repair/` och skyddad serverevidens enligt JSON.
+Göteborg är fortfarande endast torrkört; inga fler kommuner är aktiverade.
+
+---
+
+# Tidigare 2026-10-11: Malmö i kommunvis drift, platsval och butiksvisa återförsök verifierade
 
 Permanent rot `D:\Projects\Smako`, gren `feature/municipality-rollout`.
 Användarens administratörssteg för relä `f5b6aedc851d` är verifierat.

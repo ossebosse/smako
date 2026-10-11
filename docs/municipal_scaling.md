@@ -17,6 +17,9 @@ butikstäckning eller att insamlingen ryms inom driftens kapacitet.
 - Ett pågående prisbygge den 11 oktober använde 4,46 GB för sin tillfälliga
   databaskopia. Ledigt serverutrymme sjönk då till cirka 8,20 GB. Kopian är
   aktiv arbetsdata och ska inte raderas medan bygget pågår.
+- Det större Malmöbygget observerades med cirka 3,07 GiB arbetsminne och en
+  fullt utnyttjad CPU-kärna i en byggfas. Detta är en ögonblicksmätning,
+  inte genomsnitt eller ett dimensioneringslöfte.
 - Gemensamt operationslås skyddar insamling, publicering och aktivering.
   Fler kommuner innebär därför mer väntetid, även om deras källor är separata.
 
@@ -57,6 +60,12 @@ laddningsanropets svar går förlorat. Det undanröjer en orsak till upprepade
 byggen; en fullständig separat kö för laddningsåterförsök är ännu inte införd.
 Återupptagbar insamling och deadlinebaserad fördelning ovan är också kvarstående
 utveckling, inte redan driftsatta funktioner.
+
+Uppföljningsrelease `0e2bacd95c03` avgränsar driftstatus till rätt kommuns
+källjournal, stad och postnyckel. Pipelineincidenter kan endast återhämta sig
+mot samma kommun. Den gemensamma diagnostiken saknar fortfarande läsning av
+City Gross 3211:s separata kommunala källdatabas och visar detta som unknown;
+den publicerade priskontexten och readiness har verifierats separat.
 
 Coops fysiska erbjudanden ger inte automatiskt ett fullständigt bassortiment.
 Tre Malmöbutikers offentliga sidor saknade erbjudandekort vid nya försök;

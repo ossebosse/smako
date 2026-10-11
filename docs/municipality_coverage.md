@@ -1,6 +1,41 @@
 # Explicit municipality area mode
 
-## Current runtime and acceptance, 2026-10-11
+## Current repair acceptance, 2026-10-11 07:13 UTC
+
+Source runtime `municipal-source-0e2bacd95c03` is active; app `2b83475f5e68`,
+proxy and existing schedules are preserved. Malmö now has **2542 products and
+61 selectable contexts**, including 13 physical Coop stores. Lund has 2263
+products and 29 contexts, including 9 additional physical Coop stores and the
+repaired Hemköp Brunnshög catalog. Published and loaded IDs agree for each
+municipality; readiness 200 for both. Malmö is FRESH; Lund is AGING due to Willys.
+Contexts are separate price channels, not a count of distinct supermarkets.
+
+The Coop blocker was an obsolete provider parser allowlist. Authentic retained
+sources now qualify: Malmö 13 stores/1,752 rows, Lund 9 stores/1,200 rows. Three
+Malmö Coop pages still produced no qualified offers during fresh live attempts;
+Central's public offer response was HTTP 200 with an empty JSON object. The two
+X:-tra publication gaps remain. No missing feed is treated as confirmed no-offers.
+
+Hemköp 4199/4212 now have reviewed store floors 6,300/5,800 and retain full category,
+page and duplicate validation. Complete retained 7,171/6,475-product captures pass.
+Their **new ordinary live collection and production promotion remain pending**
+until after the preserved 08:02:19 UTC retry deadline. Historical snapshots keep
+their stored 8,000 floor. Lund 4224 was safely replayed and published with 5,103
+products and its original source observation time.
+
+Four live public/personal Chromium/WebKit control checks pass with 61 contexts.
+A real two-store selection (Willys Emporia and Stora Coop Stadion) produces an
+audited menu and identical saved reload; the winning basket uses Willys alone.
+All 255 prior plan revisions and 82 private states are preserved; one public test
+revision was added. Municipal diagnostics now use their scoped journal, city
+status and postal readiness. The common source DB reader still cannot qualify
+City Gross 3211's separate source DB; this remains explicitly unknown there.
+
+See [release evidence](releases/municipal-source-repair-20261011/ACTIVATED.json)
+and the [measured scale-up plan](municipal_scaling.md). Freshness 36/48 h, exact
+store binding, LKG and Coop full-crawl allowlist 730400 remain in force.
+
+## Earlier runtime and acceptance, 2026-10-11 00:33 UTC
 
 Malmö (1280 / build key 21120) is published, loaded and available in production.
 The first Willys source delivery was receipted by the existing Windows task at
