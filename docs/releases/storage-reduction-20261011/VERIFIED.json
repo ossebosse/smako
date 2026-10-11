@@ -1,0 +1,256 @@
+{
+  "schema": "smako-storage-maintenance-v1",
+  "completed_at": "2026-10-11T09:11:21.322976+00:00",
+  "server_evidence": "/opt/smako/evidence/storage-reduction-20261011",
+  "tool_commit": "dcbf533f768ca2077325f84fe7a57eda30dd0b34",
+  "tool_sha256": "99db8fe74917f39207b28897f5bbc055bd1aa6deea564018c9480f2bf8e120dc",
+  "operator_sha256": "3ca0a9844966520da129764730e3e589dc67b0b0bd5b6208c8916196cdfb0627",
+  "reviewed_plan_sha256": "f7deb28ce09edd63ad48db957dd96bca15f2b03ba5edcf45d47ce9cbf2c817cb",
+  "operation_lease": "acquired before mutation; released on completion",
+  "disk_before": {
+    "total": 415381426176,
+    "used": 403471187968,
+    "free": 11893460992
+  },
+  "disk_after": {
+    "total": 415381426176,
+    "used": 296976801792,
+    "free": 118387847168
+  },
+  "net_freed_bytes": 106494386176,
+  "archive_source_bytes": 60047355904,
+  "archive_compressed_bytes": 13556169436,
+  "archive_entries_verified": 54018,
+  "archives": [
+    {
+      "source": "/var/tmp/smako-citygross-municipality-20260923",
+      "archive": "/srv/smako/cold-test-archives/smako-citygross-municipality-20260923.tar.gz",
+      "entries_verified": 16,
+      "before_allocated_bytes": 1948106752,
+      "archive_bytes": 466074432,
+      "archive_sha256": "59bac6a9cf193281a5a4e12f7c7d47bc2ad67336905af14abe60a5f6ad32e2b6",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-coop-lund-activation-20260922",
+      "archive": "/srv/smako/cold-test-archives/smako-coop-lund-activation-20260922.tar.gz",
+      "entries_verified": 601,
+      "before_allocated_bytes": 3587731456,
+      "archive_bytes": 852953611,
+      "archive_sha256": "334c37f01599f52b604cec9d910f4a0cf64c144772b28a5df9ea65dcb6f27836",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-coop-refresh-integration-20260922",
+      "archive": "/srv/smako/cold-test-archives/smako-coop-refresh-integration-20260922.tar.gz",
+      "entries_verified": 3001,
+      "before_allocated_bytes": 4895477760,
+      "archive_bytes": 1028984969,
+      "archive_sha256": "e3d1fb278c3eab17e606cca028e8cb495d82af4eccfc1e184b1caca01e00c77e",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-coop-source-binding-20260928",
+      "archive": "/srv/smako/cold-test-archives/smako-coop-source-binding-20260928.tar.gz",
+      "entries_verified": 3150,
+      "before_allocated_bytes": 3513294848,
+      "archive_bytes": 759014472,
+      "archive_sha256": "f29ca3d14e152e0f1850260e99cd27ce5aeeb6e10309aec8c8b0af724710fb9e",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-legacy-purchase-terms-20260929",
+      "archive": "/srv/smako/cold-test-archives/smako-legacy-purchase-terms-20260929.tar.gz",
+      "entries_verified": 4208,
+      "before_allocated_bytes": 4513734656,
+      "archive_bytes": 888954200,
+      "archive_sha256": "513f59ed7588ff6adc8860b6e5ff2d1e51a5e65b3306b3085e9680e9b5d1cf18",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-lund-base-strategy-20260928",
+      "archive": "/srv/smako/cold-test-archives/smako-lund-base-strategy-20260928.tar.gz",
+      "entries_verified": 3037,
+      "before_allocated_bytes": 3375357952,
+      "archive_bytes": 761304139,
+      "archive_sha256": "5a6a172f0ce352a06283885c801a051eba7de57d6ea48880007f3d8b65d30256",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-lund-integration-20260927",
+      "archive": "/srv/smako/cold-test-archives/smako-lund-integration-20260927.tar.gz",
+      "entries_verified": 4656,
+      "before_allocated_bytes": 7245541376,
+      "archive_bytes": 1736763738,
+      "archive_sha256": "6ee6d8c724b313e8c5095634c6e27960aa2d4e5c759fcadd9cf4e372bb4cc96c",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-meal-library-20261006",
+      "archive": "/srv/smako/cold-test-archives/smako-meal-library-20261006.tar.gz",
+      "entries_verified": 9348,
+      "before_allocated_bytes": 908627968,
+      "archive_bytes": 191001329,
+      "archive_sha256": "069e75a41922a168bf453e12d50aafd29bf4152a985ce7b7c695704f94798d2f",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-offer-expansion-20260924",
+      "archive": "/srv/smako/cold-test-archives/smako-offer-expansion-20260924.tar.gz",
+      "entries_verified": 3342,
+      "before_allocated_bytes": 4490588160,
+      "archive_bytes": 1046479805,
+      "archive_sha256": "e4268a71caa47d3465cbf3f8539b378753c4fc5764fc0a1b049cf1060dabe41a",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-personal-offers-20260926",
+      "archive": "/srv/smako/cold-test-archives/smako-personal-offers-20260926.tar.gz",
+      "entries_verified": 3800,
+      "before_allocated_bytes": 4495855616,
+      "archive_bytes": 1047776158,
+      "archive_sha256": "d6ce4ed6ce3de7b79001b7b88b9681860094ec743a197cf7e2d26b4ab64aa099",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-purchase-planning-20260925",
+      "archive": "/srv/smako/cold-test-archives/smako-purchase-planning-20260925.tar.gz",
+      "entries_verified": 3364,
+      "before_allocated_bytes": 4493008896,
+      "archive_bytes": 1046722821,
+      "archive_sha256": "2abde18b0b5e4126742dac2ee7d61d03de3be6ff2ff87983bb43ae58e6314798",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-recipe-preparation-20260926",
+      "archive": "/srv/smako/cold-test-archives/smako-recipe-preparation-20260926.tar.gz",
+      "entries_verified": 3357,
+      "before_allocated_bytes": 4499283968,
+      "archive_bytes": 1046926015,
+      "archive_sha256": "7b72a9f997219bc3b3ae641fb02ef6583bb3faf964ba2958c2a3baf47ca3b1a6",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-recipe-resolution-20260926",
+      "archive": "/srv/smako/cold-test-archives/smako-recipe-resolution-20260926.tar.gz",
+      "entries_verified": 3962,
+      "before_allocated_bytes": 4871626752,
+      "archive_bytes": 1070941294,
+      "archive_sha256": "3441f49623d79cae32cd753e8fc0b4bce8298196b9caae65255bd77be22b44dd",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-recipe-search-20260927",
+      "archive": "/srv/smako/cold-test-archives/smako-recipe-search-20260927.tar.gz",
+      "entries_verified": 3823,
+      "before_allocated_bytes": 4673482752,
+      "archive_bytes": 1057442567,
+      "archive_sha256": "a7f05ddcd1f8091679a84bdcd4622dbf88756621fafe2f84593beaf33cf7a6e8",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/var/tmp/smako-willys-municipality-20260922",
+      "archive": "/srv/smako/cold-test-archives/smako-willys-municipality-20260922.tar.gz",
+      "entries_verified": 4353,
+      "before_allocated_bytes": 2535636992,
+      "archive_bytes": 554829886,
+      "archive_sha256": "f93702a1b1918c21941bd46ae70654ded33956389e37e718fdd669c43ff056c2",
+      "original_removed_after_verification": true
+    }
+  ],
+  "backup_baseline_archive": {
+    "path": "/srv/smako/cold-test-archives/backup-baseline-20260914T123547Z.tar.gz",
+    "sha256": "69de2d0077ea00ea568516ccb346c534fbd0ad1451876c43a301efedbf6a34cc",
+    "bytes": 188296987,
+    "all_file_hashes_verified": true
+  },
+  "directory_bytes_before": {
+    "/var/tmp": 116706611200,
+    "/var/lib/containerd": 161417302016,
+    "/srv/smako/data": 33600245760,
+    "/srv/smako/backups": 64972263424
+  },
+  "directory_bytes_after": {
+    "/var/tmp": 56659255296,
+    "/var/lib/containerd": 101184081920,
+    "/srv/smako/cold-test-archives": 13760995328,
+    "/srv/smako/data": 33954054144,
+    "/srv/smako/backups": 64972263424
+  },
+  "directory_measurement_note": "Initial inventory preceded ordinary source refresh; maintenance net savings use disk_before/disk_after under the lease.",
+  "builder_prune_command": [
+    "docker",
+    "builder",
+    "prune",
+    "--all",
+    "--force"
+  ],
+  "builder_prune_reported_logical_total": "Total:\t83.38GB",
+  "docker_after": "TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE\nImages          146       22        101.1GB   65.88GB (65%)\nContainers      40        5         1.241MB   1.085MB (87%)\nLocal Volumes   0         0         0B        0B\nBuild Cache     0         0         0B        0B\n",
+  "checks": {
+    "runtime_configs_manifests_unchanged": true,
+    "all_previous_plan_rows_preserved": true,
+    "backup_owner_repaired_contents_unchanged": true
+  },
+  "preserved_plan_row_counts": {
+    "consumer_plan_revisions": 256,
+    "personal_private_state": 82
+  },
+  "backup_rotation": {
+    "retention_days": 14,
+    "corrected_bundle": "/srv/smako/backups/20260914T123547Z",
+    "previous_owner": "0:0",
+    "owner_after": "10001:10001",
+    "content_hashes_modes_mtimes_preserved": true,
+    "uid_10001_access_verified": true,
+    "next_complete_backup_rotation": "not executed by this maintenance"
+  },
+  "tests": {
+    "linux_archive_cases_passed": 6,
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "postcheck_at": "2026-10-11T09:11:51.576944+00:00",
+  "postcheck_storage": {
+    "free_bytes": 118387953664,
+    "required_estimate_bytes": 9738328568,
+    "adequate": true,
+    "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+  },
+  "scopes": [
+    {
+      "city": "Lund",
+      "readiness_http_status": 200,
+      "published": "price-universe:68761dcf0c2e2e23420a78cb317ed7eb82a34111ea4c0875b97f6e222d1da04f",
+      "loaded": "price-universe:68761dcf0c2e2e23420a78cb317ed7eb82a34111ea4c0875b97f6e222d1da04f",
+      "freshness": "aging",
+      "product_count": 2263,
+      "context_count": 29
+    },
+    {
+      "city": "Malmö",
+      "readiness_http_status": 200,
+      "published": "price-universe:8c49ecda4bf9a61a2388d0f73ddd46ecce0fe7ae91421f6ba7e545fed1e0c4c0",
+      "loaded": "price-universe:8c49ecda4bf9a61a2388d0f73ddd46ecce0fe7ae91421f6ba7e545fed1e0c4c0",
+      "freshness": "fresh",
+      "product_count": 2607,
+      "context_count": 63
+    }
+  ],
+  "hemkop_promoted_snapshots": [
+    {
+      "id": "609c6dde3df84c2ead55e2b420ee8199",
+      "scope_key": "limhamn:hemkop:4212",
+      "state": "promoted",
+      "is_active": 1,
+      "created_at": "2026-10-11T08:21:02.332044+00:00"
+    },
+    {
+      "id": "5583bcc0ac8a4331a909cc827efb1606",
+      "scope_key": "malmö:hemkop:4199",
+      "state": "promoted",
+      "is_active": 1,
+      "created_at": "2026-10-11T08:03:54.767137+00:00"
+    }
+  ]
+}

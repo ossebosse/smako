@@ -1,3 +1,34 @@
+# 2026-10-11 09:11 UTC: 106,49 GB frigjort, Malmö-Hemköp publicerat
+
+Serverns lediga utrymme är **118,39 GB** efter verifierad arkivering av 15
+oanvända testmiljöer och rensning av oanvänd Dockerbyggcache. Inga bilder,
+containrar eller dagsbackuper raderades. Körande tjänster, återgångsversioner,
+ICA-arbete och samtliga 256 planrevisioner/82 privata tillstånd är bevarade.
+Det gemensamma driftlåset är släppt och underhållsväntaren är avslutad;
+starta inte om den daterade körningen. Arkiven finns i
+`/srv/smako/cold-test-archives`, med verifieringsbevis under
+`/opt/smako/evidence/storage-reduction-20261011`.
+
+Root-ägarskap på dagsbackup `20260914T123547Z` blockerade backupkontots åtkomst
+och den befintliga retentionens rensning. Innehållsverifierad historisk kopia
+sparades och ägarskapet rättades till 10001:10001 utan ändrade filinnehåll/modes.
+14-dagarsretentionen är oförändrad. Nästa lyckade fulla backuprotation behöver
+följas upp; den kördes inte som del av detta underhåll.
+
+Ordinarie insamling före städningen promoverade **Hemköp Värnhem 4199**,
+snapshot `5583bcc0ac8a4331a909cc827efb1606`, och **Elinegård 4212**,
+snapshot `609c6dde3df84c2ead55e2b420ee8199`. De tidigare väntande liveförsöken
+är därmed genomförda. Malmö har nu **2 607 produkter och 63 pris-/butikskontexter**,
+varav åtta Hemköp-kontexter (fysiska erbjudanden och onlinepriser hålls isär).
+Publicerat/laddat manifest är `8c49ecda4bf9a61a2388d0f73ddd46ecce0fe7ae91421f6ba7e545fed1e0c4c0`.
+Readiness är 200/FRESH. Lund har fortsatt 2 263 produkter, 29 kontexter,
+manifest `68761dcf…`, readiness 200 och befintlig AGING för Willys.
+App/source/proxy/relä och scheman är oförändrade. Övriga källuckor nedan kvarstår.
+
+[Lagringsrapport och återställning](storage-maintenance.md),
+[maskinläsbara verifieringsbevis](releases/storage-reduction-20261011/VERIFIED.json).
+
+---
 # 2026-10-11 07:13 UTC: Coop publicerat, Hemköp Brunnshög återställt
 
 Källprocess `municipal-source-0e2bacd95c03` är aktiverad. App `2b83475f5e68`,

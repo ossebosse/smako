@@ -48,6 +48,17 @@ avgör inte hur lätt den är att samla in.
 
 ## Redan genomfört och kvarvarande gränser
 
+Lagringsåtgärden 2026-10-11 frigjorde **106,49 GB** genom verifierade kalla
+testarkiv och rensad byggcache. Servern hade därefter **118,39 GB ledigt**.
+Ett ägarfel som hindrade backupkontots rotation är också rättat; nästa fulla
+rotation återstår att observera. Detta ger marginal men ersätter inte mätning
+per kommun eller referensstyrd retention av produktionshistorik.
+Se [lagringsrapporten](storage-maintenance.md) för mätvärden och återställning.
+
+Ordinarie återförsök godkände också de två tidigare avvisade Hemköp-katalogerna
+i Malmö före lagringsunderhållet. Efter publicering har Malmö 2 607 produkter
+och 63 pris-/butikskontexter, med Värnhem och Elinegård även som onlinekontexter.
+
 Den befintliga registreringen, separata kommunjournalerna, oförändrade scheman,
 butiksvisa Hemköp-återförsök och kommunvisa användarval är på plats.
 Källrelease `17a75cf60d5a` rättar Coops parserversionskontroll och Hemköps

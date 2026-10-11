@@ -97,6 +97,11 @@ last_seen, återhämtning och återkomst är separata övergångar.
 
 ## Tillåtna åtgärdsklasser
 
+Vid utrymmesbrist: läs [lagringsrapport och säker arkivering](storage-maintenance.md).
+Den skiljer aktiv data från kalla testkopior och delad Dockerlagring, dokumenterar
+backupens rättade åtkomstfel och innehåller återställningsanvisningar. Följ samma
+driftlås; en historisk cleanup-plan får inte köras om utan ny referensgranskning.
+
 | Klass | Åtgärd |
 | --- | --- |
 | A, rutin | Giltig artefakt återlevereras genom ordinarie relä; publicering återupptas; transport återförsöks begränsat. |

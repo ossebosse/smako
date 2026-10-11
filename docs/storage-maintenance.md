@@ -16,6 +16,51 @@ Detta är fysisk katalogstorlek. Dockers redovisning av bilder och byggcache
 delar lager och får inte adderas som oberoende diskutrymme. `/tmp` är tmpfs;
 dess användning är inte förklaringen till att rotfilsystemet fylldes.
 
+## Genomfört 2026-10-11 09:11 UTC
+
+**106,49 GB netto frigjort**, mätt över underhållsfönstret. Använt utrymme gick
+från 403,47 till 296,98 GB, och ledigt från 11,89 till **118,39 GB**. `df` visar
+nu 72 % använt, jämfört med 98 % före underhållet. Mellan den första inventeringen
+och driftlåsets början slutfördes en ordinarie prisuppdatering; därför skiljer
+sig startvärdet något från tabellen ovan.
+
+- 15 oanvända testmiljöer: **60,05 GB → 13,56 GB** komprimerade arkiv. Samtliga
+  54 018 poster kontrollerades; varje vanlig fils SHA-256 återlästes ur arkivet
+  före borttagning av originalträdet. Ägare, behörigheter och symlänkar verifierades.
+- `docker builder prune --all --force` rensade oanvänd byggcache. Docker redovisade
+  83,38 GB logisk cache, medan faktisk containerd-lagring minskade från **161,42
+  till 101,18 GB**. 146 bilder och 40 containrar, varav fem körande, finns kvar.
+  Den verkliga nettovinsten ovan kommer från filsystemsmätningen, inte summan
+  av Dockers delvis överlappande storlekstal.
+- Backup `20260914T123547Z` ägdes av root med 0700/0600 och kunde inte läsas eller
+  rensas av backupkontot 10001. Den befintliga rotationskoden avbryts vid sådana
+  åtkomstfel. Ägarskapet rättades till 10001:10001; filhashar, behörigheter och
+  ändringstider är bevarade och kontots åtkomst provad. En separat verifierad
+  historisk kopia på **0,188 GB** sparades före ändringen eftersom backupen också
+  nämns i äldre releasebevis. Dagsbackuperna har inte raderats av underhållet,
+  och 14-dagarsinställningen är oförändrad. Nästa fullständiga backuprotation
+  återstår att observera; den räknas inte som genomförd här.
+
+Arkivkatalogen inklusive inventarier och historisk backup tar 13,76 GB.
+`/var/tmp` minskade till 56,66 GB. Återstående testmiljöer har container-/process-
+eller ICA-beroenden och ingick inte i urvalet. Bilder för drift, återgång och
+väntande arbete är bevarade; detta var inte en generell image-/container-prune.
+
+Underhållet väntade på ordinarie prisinsamling, tog det befintliga driftlåset
+och släppte det efter verifiering. Alla fem körande containeridentiteter/bilder,
+mounts, konfiguration, cron och prismanifest är oförändrade över underhållet.
+Alla **256 planrevisioner och 82 privata tillstånd** är hashbevarade. Inga
+containrar startades om. Sex isolerade arkivtester, Ruff och compileall passerade.
+
+Efterkontroll 09:11 UTC: readiness 200 i Lund och Malmö, rätt publicerat och
+laddat manifest i båda. Malmö har 2 607 produkter och 63 pris-/butikskontexter
+(FRESH), Lund 2 263 och 29 (befintlig AGING för Willys). Den ordinarie uppdateringen
+före städningen godkände Hemköp Värnhem/Elinegård och publicerade Malmös nya
+manifest `8c49ecda…`; det var inte arkiveringen som ändrade priserna.
+
+Exakta mätvärden, arkivhashar, kontroller och snapshots finns i
+[VERIFIED.json](releases/storage-reduction-20261011/VERIFIED.json).
+
 ## Arkiveringsverktyget
 
 `scripts/archive_cold_test_tree.py` är en operatörsprimitiv för **en explicit
@@ -51,6 +96,11 @@ Arkiv finns i `/srv/smako/cold-test-archives`, skyddade med katalogläge 0700 oc
 filläge 0600. Bevis och exakt urvalslista finns i
 `/opt/smako/evidence/storage-reduction-20261011`. De är lokala återställningskopior,
 inte en ersättning för extern backup.
+
+Den extra historiska backupkopian heter
+`backup-baseline-20260914T123547Z.tar.gz`; inventariet ligger i beviskatalogens
+`backup-owner-before.private.json`. Återställ den i en isolerad katalog för
+granskning. Återinför inte en root-ägd daterad katalog i den dagliga rotationen.
 
 1. Välj exakt arkiv från resultatlistan, kontrollera dess SHA-256 mot resultatet
    och kör `verify(archive, expected)` med tillhörande privata inventarium.
