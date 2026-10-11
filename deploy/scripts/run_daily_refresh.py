@@ -82,6 +82,32 @@ def build_refresh_command() -> list[str]:
     ]
 
 
+def _confirm_loaded_runtime(expected_universe_id: str | None) -> dict[str, Any] | None:
+    """Recover a lost reload response using exact scoped serving evidence.
+
+    Optional menu prewarming can outlast the POST timeout after atomic activation.
+    A matching ready response proves loading; a disk manifest alone never does.
+    """
+    if not expected_universe_id:
+        return None
+    try:
+        base_url = _required("INTERNAL_APP_BASE_URL").rstrip("/")
+        postal = _required("REFRESH_POSTAL_CODE")
+        url = base_url + "/ready?" + urllib.parse.urlencode({"postal_code": postal})
+        with urllib.request.urlopen(url, timeout=5) as response:
+            if response.status != 200:
+                return None
+            payload = json.loads(response.read())
+        universe = payload.get("price_universe", {})
+        if (payload.get("status") != "ready" or universe.get("active") is not True
+                or universe.get("price_universe_id") != expected_universe_id):
+            return None
+    except (OSError, RuntimeError, ValueError, AttributeError, TypeError):
+        return None
+    return {"status": "confirmed_loaded_after_timeout", "new_price_universe_id": expected_universe_id,
+            "confirmation": "scoped_readiness", "postal_code": postal}
+
+
 def _reload_runtime() -> dict[str, Any]:
     try:
         base_url = _required("INTERNAL_APP_BASE_URL").rstrip("/")
@@ -320,11 +346,16 @@ def _run_locked(
                 )
                 if disk_universe_id is not None:
                     status["runtime_reload"]["disk_price_universe_id"] = disk_universe_id
+                confirmed = _confirm_loaded_runtime(disk_universe_id)
                 status["disk_manifest_rollback"] = {
                     "status": "not_attempted",
                     "reason": "candidate_retained_for_restart",
                 }
-                exit_code = 2
+                if confirmed is not None:
+                    status["runtime_reload"] = confirmed
+                    exit_code = completed.returncode
+                else:
+                    exit_code = 2
             except RuntimeReloadRejected as exc:
                 status["runtime_reload"] = {
                     "status": "failed",

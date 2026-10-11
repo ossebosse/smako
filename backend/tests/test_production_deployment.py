@@ -750,7 +750,9 @@ def test_reload_rejection_restores_previous_restart_manifest(
     tmp_path: Path,
 ) -> None:
     store = _FakeArtifactStore()
-    from grocery_data.app.services.prepared_universe_activation import ActivePreparedUniverseManifest
+    from grocery_data.app.services.prepared_universe_activation import (
+        ActivePreparedUniverseManifest,
+    )
     previous = ActivePreparedUniverseManifest(city='Lund',scope_id='city:lund',universe_id='previous',
         built_at=datetime.now(UTC),activated_at=datetime.now(UTC),oldest_observed_at=datetime.now(UTC),
         snapshot_ids=('source',),product_count=1,canonical_index_count=1,
@@ -798,6 +800,42 @@ def test_unavailable_app_retains_promoted_restart_candidate(
         "error_type": "RuntimeReloadUnavailable",
         "disk_price_universe_id": "price-universe:new",
     }
+
+
+@pytest.mark.parametrize("postal", ["22350", "21120"])
+@pytest.mark.parametrize("loaded,ready", [("price-universe:new", True), ("price-universe:old", True), ("price-universe:new", False)])
+def test_lost_reload_response_requires_exact_scoped_ready_evidence(monkeypatch, postal, loaded, ready):
+    import io
+    import json
+
+    monkeypatch.setenv("INTERNAL_APP_BASE_URL", "http://isolated-app")
+    monkeypatch.setenv("REFRESH_POSTAL_CODE", postal)
+    def get(url, timeout):
+        assert url == "http://isolated-app/ready?postal_code=" + postal
+        assert timeout == 5
+        response = io.BytesIO(json.dumps({"status": "ready" if ready else "not_ready",
+            "price_universe": {"active": True, "price_universe_id": loaded}}).encode())
+        response.status = 200
+        return response
+    monkeypatch.setattr(refresh_runner.urllib.request, "urlopen", get)
+    result = refresh_runner._confirm_loaded_runtime("price-universe:new")
+    assert bool(result) == (ready and loaded == "price-universe:new")
+
+
+def test_loaded_after_timeout_is_recorded_without_another_build(monkeypatch, tmp_path):
+    store = _FakeArtifactStore()
+    statuses = _configure_refresh_runner(monkeypatch, store, tmp_path)
+    def unavailable():
+        raise refresh_runner.RuntimeReloadUnavailable("TimeoutError")
+    monkeypatch.setattr(refresh_runner, "_reload_runtime", unavailable)
+    monkeypatch.setattr(refresh_runner, "_active_disk_universe_id", lambda *a, **k: "price-universe:new")
+    def confirm(expected):
+        assert expected == "price-universe:new"
+        return {"status": "confirmed_loaded_after_timeout", "new_price_universe_id": expected}
+    monkeypatch.setattr(refresh_runner, "_confirm_loaded_runtime", confirm)
+    assert refresh_runner.main() == 0
+    assert statuses[0]["runtime_reload"]["new_price_universe_id"] == "price-universe:new"
+    assert store.rollback_calls == []
 
 
 def test_refresh_wrapper_holds_shared_lock_through_runtime_activation(
