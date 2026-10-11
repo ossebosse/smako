@@ -356,6 +356,39 @@ def test_hemkop_full_and_replay_gate_rejects_a_future_collapsed_catalog(
         engine.dispose()
 
 
+@pytest.mark.parametrize("store,floor", [("4199", 6_300), ("4212", 5_800)])
+def test_verified_malmo_floor_preserves_completion_and_replay_guards(tmp_path, store, floor):
+    engine = create_database_engine("sqlite+pysqlite:///:memory:")
+    create_schema(engine)
+    collector = GroceryCollector(create_session_factory(engine), FilesystemRawSnapshotStore(tmp_path / "raw"))
+    connector = HemkopConnector.for_replay(store_external_ids=(store,))
+    evidence = CatalogCompletion(
+        complete=True, expected_categories=20, completed_categories=20,
+        pages_fetched=90, expected_pages=90, products_observed=floor,
+        expected_products=floor, raw_rows=floor, unique_products=floor, duplicate_products=0,
+    )
+    try:
+        assert connector.minimum_full_catalog_products == floor
+        batch = RawBatch(chain=Chain.HEMKOP, documents=(), catalog_completion=evidence)
+        collector._validate_catalog_completion(connector, batch)
+        for invalid in (
+            evidence.model_copy(update={"complete": False}),
+            evidence.model_copy(update={"limited": True}),
+            evidence.model_copy(update={"pages_fetched": 89}),
+            evidence.model_copy(update={"products_observed": floor - 1, "expected_products": floor - 1,
+                                        "raw_rows": floor - 1, "unique_products": floor - 1}),
+        ):
+            with pytest.raises(CatalogCompletenessError):
+                collector._validate_catalog_completion(connector, batch.model_copy(update={"catalog_completion": invalid}))
+        # Older rejected captures retain their stronger persisted gate on replay.
+        # Only a new collection uses the newly reviewed store-local baseline.
+        assert collector._minimum_products_for_complete_catalog(connector, persisted_minimum=8_000) == 8_000
+        assert HemkopConnector.for_replay(store_external_ids=(store, "4114")).minimum_full_catalog_products == 8_000
+        assert HemkopConnector.for_replay(store_external_ids=("unreviewed",)).minimum_full_catalog_products == 8_000
+    finally:
+        engine.dispose()
+
+
 def _projection(session, snapshot_id: str) -> tuple[tuple[Any, ...], ...]:  # type: ignore[no-untyped-def]
     products = tuple(
         tuple(row)

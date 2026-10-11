@@ -98,7 +98,10 @@ async def collect(inventory, store_ids, output):
                         blockers=dict(Counter(b for d in retained.row_acceptance["decisions"] for b in d["blockers"])))
                     row["stage"] = "complete"
                 except Exception as exc:  # noqa: BLE001 - retain failed sample stores; no retry
+                    from grocery_data.app.services.failure_diagnostics import failure_details
+
                     row["error_type"] = type(exc).__name__
+                    row["failure_details"] = failure_details(exc)
                     row["error"] = "Public fetch/identity/import failed; no activation or retry"
                 (output / "coverage.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     finally:

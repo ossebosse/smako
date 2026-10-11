@@ -75,7 +75,7 @@ async def test_missing_optional_database_keeps_base(tmp_path):
 
 
 @pytest.mark.parametrize("duplicate_base", [False, True])
-@pytest.mark.parametrize("parser_version", ["coop-parser-v3", "coop-parser-v4", "coop-parser-v5"])
+@pytest.mark.parametrize("parser_version", [None, "coop-parser-v3", "coop-parser-v4", "coop-parser-v5"])
 async def test_actual_rows_locality_inventory_caps_and_wrong_store(
     tmp_path, monkeypatch, duplicate_base, parser_version
 ):
@@ -135,9 +135,11 @@ async def test_actual_rows_locality_inventory_caps_and_wrong_store(
         )
         base = Base([online, physical] if duplicate_base else [online])
         provider = CoopMunicipalityOfferProvider(base, own, database=database, inventory=inv)
-        # Both retained reviewed v3 and newly reviewed v4 snapshots remain admissible.
-        for evidence in provider.evidence.values():
-            evidence["parser_version"] = parser_version
+        # The default uses the REAL current parser version from collection.
+        # Legacy compatibility must not hide a newly emitted version rejection.
+        if parser_version is not None:
+            for evidence in provider.evidence.values():
+                evidence["parser_version"] = parser_version
         stores = await provider.find_stores("22350")
         assert len(stores) == 2  # Online remains separate, physical never duplicated.
         assert provider.report()["coop_municipality_offers"]["3839"]["accepted"] == 93

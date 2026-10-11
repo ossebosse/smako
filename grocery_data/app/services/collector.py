@@ -226,14 +226,14 @@ def _review_schema_diff(
         from grocery_data.app.connectors.coop.schema_review import reviewed_coop_online_schema_diff
 
         reviewed = reviewed_coop_online_schema_diff(diff)
-    elif chain == Chain.HEMKOP and parser_version in {"hemkop-parser-v1", "hemkop-parser-v1.1-picking-contract"}:
+    elif chain == Chain.HEMKOP and parser_version in {"hemkop-parser-v1", "hemkop-parser-v1.1-picking-contract", "hemkop-parser-v1.2-counted-weight"}:
         from grocery_data.app.connectors.hemkop.schema_review import (
             reviewed_hemkop_schema_diff,
             reviewed_hemkop_type_change,
         )
 
         reviewed = reviewed_hemkop_schema_diff(
-            diff, schemas=schemas, picking_contract=parser_version == "hemkop-parser-v1.1-picking-contract",
+            diff, schemas=schemas, picking_contract=parser_version in {"hemkop-parser-v1.1-picking-contract", "hemkop-parser-v1.2-counted-weight"},
         )
         required_type_changes = tuple(
             change for change in diff.type_changed if not reviewed_hemkop_type_change(change)

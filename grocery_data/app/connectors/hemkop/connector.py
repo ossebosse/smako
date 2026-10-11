@@ -48,6 +48,11 @@ class HemkopConnector:
     verified_store_minimum_products: ClassVar[dict[str, int]] = {
         "4123": 5_000,
         "4224": 4_500,
+        # Repeated exact 2026-10-10/11 traversals: Värnhem 7,066–7,171,
+        # Elinegård 6,459–6,475 unique products; all 20 categories reconcile.
+        # Store-local collapse floors; full pagination and price gates remain.
+        "4199": 6_300,
+        "4212": 5_800,
     }
     # Live category proof verified that the public backend honours 100 rows.
     # Keep bounded discovery at 30, but avoid tripling a REVIEW-approved full
