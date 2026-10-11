@@ -42,6 +42,10 @@ def local_status(workspace: Path):
         outcome = "ALREADY_DELIVERED"
     elif "already_running" in by_event:
         outcome = "SKIPPED_LOCK_HELD"
+    elif "collection_deferred" in by_event:
+        outcome = "DEFERRED_WITH_CHECKPOINTS"
+    elif "not_due" in by_event:
+        outcome = "NOT_DUE"
     else:
         outcome = "INCOMPLETE_OR_RUNNING" if events else "NO_RUN_LOG"
     activation = by_event.get("server_activation_pass", {}).get("activation")
@@ -63,6 +67,8 @@ def local_status(workspace: Path):
         "artifact_id": Path(receipt["artifact"]).stem if receipt.get("artifact") else None,
         "sha256_prefix": receipt.get("sha256", "")[:12] or None,
         "multi_day_reliability": "UNOBSERVED",
+        "store_checkpoints": json.loads((workspace / 'store-checkpoints/progress.json').read_bytes())
+            if (workspace / 'store-checkpoints/progress.json').exists() else {'status': 'not_observed'},
     }
 
 

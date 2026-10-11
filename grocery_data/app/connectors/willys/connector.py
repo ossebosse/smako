@@ -37,6 +37,8 @@ class WillysConnector:
         self.parser_version = self.parser.parser_version
         self.municipality_boundary = municipality_boundary
         self.municipality_inventory = None
+        self.checkpoints = None
+        self.discovery = None
         if allowed_store_ids is None:
             configured = frozenset(
                 value.strip()
@@ -68,7 +70,8 @@ class WillysConnector:
             from grocery_data.app.services.municipality_geometry import fetch_boundary
 
             self.municipality_boundary = await fetch_boundary(area.municipality_code)
-        return await self.client.fetch_stores()
+        self.discovery = await self.client.fetch_stores()
+        return self.discovery
 
     def parse_stores(
         self,
@@ -105,6 +108,8 @@ class WillysConnector:
         )
 
     async def fetch_catalog(self, store: SourceStore) -> RawBatch:
+        if self.checkpoints is not None:
+            return await self.checkpoints.fetch(store, self.discovery, self.client.fetch_catalog)
         return await self.client.fetch_catalog(store)
 
     def parse_catalog(

@@ -1,5 +1,82 @@
 # Kommunvis utrullning: nästa åtgärder
 
+## Implementering 2026-10-11
+
+Följande funktioner finns nu i koden. Aktivering och verifierad runtime redovisas
+separat i HANDOFF; en kodändring är inte i sig bevis för produktionsdrift.
+
+- **Willys återupptar hela färdiga butikskataloger.** En atomiskt sparad,
+  komprimerad fil per butik innehåller råunderlag och kontrollhash. Vid återstart
+  kontrolleras kommun, geometri, parser, butik, sidföljd och fullständighet igen.
+  Material äldre än 24 timmar återanvänds inte. Alla ursprungliga observationstider
+  bevaras och ordinarie kvalificering/import körs fortfarande. En avbruten butik
+  hämtas om; detta är inte återupptagning mitt på en katalogsida. Kvalificerade
+  Hemköpsbutiker hade redan separata snapshots; nu hämtas den äldsta väntande
+  butiken per kommunvarv, utan att lägga backoff på ännu ostartade butiker.
+- **Båda befintliga arbetarna prioriterar efter deadline och väntetid.** Journalen
+  sparas före start, så även ett avbrutet försök lämnar tur åt andra kommuner.
+  Uppmätt tid får 25 procent marginal; okänd tid har en uttrycklig startuppskattning.
+  Efter ett dygn får en väntande kommun högre prioritet. Detta ändrar aldrig
+  prisernas giltighetstid. Windows budgeterar 170 minuter inom uppgiftens befintliga
+  tretimmarsgräns, med marginal för transport. Serverns totala körfönster är högst
+  tre timmar och barnprocessens befintliga tvåtimmarsgräns består. En butik som
+  inte bedöms rymmas skjuts upp. Överlast kan fortfarande ge färskhetsproblem;
+  prioritering skapar ingen extra kapacitet.
+- **Nya kommuner kräver ett kapacitetsunderlag genom registreringskommandot.**
+  Saknade, negativa, icke ändliga eller mer än sju dagar gamla mätningar ger
+  BLOCKED. Diskkontrollen använder faktiskt ledigt utrymme och inkluderar
+  byggkopia, datatillväxt, kö, artefakter, backup och återställning med marginal.
+  Minnesbehov och hela den delade uppdateringscykeln kontrolleras också. Befintliga
+  Lund/Malmö och idempotent registrering påverkas inte. Inga nya kommuner aktiveras
+  automatiskt. Underlaget ska komma från en komplett, avgränsad pilot i separat
+  testmiljö; kommandot utför ingen dold fullinsamling och verifierar inte självt
+  att operatörens mätfil motsvarar en utförd pilot.
+- **Laddning återförsöks utan ombygge** när ett godkänt publicerat manifest väntar
+  på appen och samma källfingeravtryck/tidsgränser fortfarande gäller. Hash, kommun,
+  manifest-ID och färskhet kontrolleras. Nya källor, insamling som är förfallen
+  eller erbjudandeövergångar går genom ordinarie uppdatering.
+- **Driftöversikt:** `scripts/smako_ops.py municipalities` visar varje kommuns
+  planering, käll-/butiksscheman, kvalificering, publicerat/laddat ID och väntande
+  laddning. Okända kommunresultat isoleras och döljer inte andra kommuner.
+  Reläets `store-checkpoints/progress.json` och `municipal-schedule.json` visar
+  sparade/återanvända kataloger och uppskjutet arbete. En sparad traversal är inte
+  en kvalificerad eller publicerad prislista. Kvitton läses från respektive lokal
+  kommunmapp. Extern larmleverans är fortfarande inte konfigurerad.
+
+### Kapacitetsunderlag för nästa kommun
+
+Kör samma insamling och prisbygge i en avgränsad pilot med separat databas,
+rålagring och artefaktrot. Använd rätt kommunregister och oförändrade källgränser.
+Mät en hel cykel inklusive Windowsrelä, serverbygge och återställningsbehov.
+Sammanställ en JSON-fil med `municipality_code`, `postal_code`, `sources`
+(sorterad lista: citygross, coop, hemkop, ica, lidl, willys, xtra),
+`pilot_complete: true`, `measured_at` (UTC med tidszon), samt följande mätningar:
+
+| Fält | Enhet/innebörd |
+| --- | --- |
+| `store_count`, `requests` | Faktiskt antal butiker och HTTP-anrop |
+| `collection_seconds`, `build_seconds` | Uppmätt insamling respektive prisbygge |
+| `peak_memory_bytes`, `available_memory_bytes` | Toppbehov och tillgängligt minne efter övriga tjänster |
+| `database_growth_bytes`, `build_copy_bytes` | Datatillväxt och hel tillfällig byggdatabas |
+| `artifact_bytes`, `queue_growth_bytes` | Artefaktstorlek och maximal tillkommande kö |
+| `backup_bytes`, `restore_bytes` | Tillkommande backup och utrymme för återställning |
+| `existing_cycle_seconds`, `available_cycle_seconds` | Befintlig total arbetsmängd och faktiskt tillgänglig arbetstid inom färskhetsfönstret |
+
+Okända fält lämnas saknade; sätt inte noll för att få godkänt. Noll är bara
+tillåtet för faktiskt utebliven tillväxt/kö och befintlig arbetsmängd. I serverns
+ordinarie driftmiljö används samma granskade fil först för kontroll, sedan för
+registrering under operationslåset:
+
+```text
+python -m grocery_data.municipal_cli capacity --municipality 1480 --postal-code 41110 --capacity-evidence /reviewed/pilot.json
+python -m grocery_data.municipal_cli add --municipality 1480 --postal-code 41110 --capacity-evidence /reviewed/pilot.json
+```
+
+Exemplet aktiveras inte av dokumentationen. En godkänd kapacitetsrapport ersätter
+inte källornas kvalitetskontroller eller verifiering av butikstäckning och meny.
+
+---
+
 Beslutsunderlag 2026-10-11. Lund och Malmö är aktiverade. Göteborg har endast
 torrkörts. Registreringen är generell, men godkänd registrering bevisar varken
 butikstäckning eller att insamlingen ryms inom driftens kapacitet.

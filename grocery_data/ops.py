@@ -135,6 +135,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
     commands.add_parser('status')
+    commands.add_parser('municipalities')
     commands.add_parser('incidents')
     rep = commands.add_parser('reproduce')
     rep.add_argument('--snapshot-id', required=True)
@@ -146,7 +147,32 @@ def main(argv=None):
     action.add_argument('--apply', action='store_true')
     args = parser.parse_args(argv)
     database, _universe, root = paths()
-    if args.command == 'status':
+    if args.command == 'municipalities':
+        from deploy.scripts.run_daily_refresh import demand_refresh_plan
+        from grocery_data.app.services.municipal_rollout import refresh_scopes, scoped_environment
+        from grocery_data.app.services.municipal_scheduling import plan_deadline
+
+        rows = []
+        for scope in refresh_scopes():
+            env = scoped_environment(scope)
+            try:
+                report = status(env)
+                plan = demand_refresh_plan(now=datetime.now(UTC), environment=env)
+                rows.append({'municipality_code': scope['municipality_code'], 'city': scope['city'],
+                    'status': 'observed', 'operations': report,
+                    'scheduling': {'work_due': plan['work_due'], 'deadline': plan_deadline(plan),
+                                   'reasons': plan.get('reasons', [])},
+                    'stores': {k: plan.get(k, {}) for k in ('sources', 'ica_store_schedule',
+                        'hemkop_municipal', 'coop_municipal', 'citygross_municipal',
+                        'lidl_municipal', 'willys_flyer')},
+                    'pending_runtime': plan.get('state', {}).get('pending_runtime'),
+                    'receipt': 'read_scope_specific_local_relay_receipt'})
+            except Exception as exc:  # noqa: BLE001 - one unavailable scope must not hide peers
+                rows.append({'municipality_code': scope['municipality_code'], 'city': scope['city'],
+                             'status': 'unknown', 'error_type': type(exc).__name__})
+        result = {'municipalities': rows, 'schedule': read_json(root / 'municipal-schedule.json'),
+                  'notification': 'protected_status_only_no_external_delivery'}
+    elif args.command == 'status':
         result = status()
     elif args.command == 'incidents':
         result = {'sources': read_json(root / 'source-incidents.json'),

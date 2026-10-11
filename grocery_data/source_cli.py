@@ -77,10 +77,11 @@ async def collect(args):
         challenges = 0
         started_at = datetime.now(UTC)
         started = monotonic()
+        collection_seconds = min(7200, max(0, getattr(args, "collection_seconds", 7200)))
 
         async def bound(request):
             nonlocal count
-            if count >= request_budget or monotonic() - started > 7200:
+            if count >= request_budget or monotonic() - started > collection_seconds:
                 raise SourceArtifactError("bounded local collection stopped")
             count += 1
             if count % 100 == 0:
@@ -116,6 +117,11 @@ async def collect(args):
                 await connector.aclose()
                 engine.dispose()
                 raise SourceArtifactError("no verified municipal online contexts")
+        from grocery_data.app.services.catalog_checkpoint import CatalogCheckpoints
+        checkpoints = CatalogCheckpoints(root / "store-checkpoints", area=area,
+            boundary=connector.municipality_boundary, parser_version=connector.parser_version,
+            deadline=started + collection_seconds)
+        connector.checkpoints = checkpoints
         status = "failed"
         try:
             result = await GroceryCollector(factory, raw).collect_area(
@@ -124,7 +130,9 @@ async def collect(args):
             )
             destination = root / "completed" / f"{result.snapshot_id}.smako-source"
             export_source_artifact(
-                factory, raw, result.snapshot_id, destination, original_request_count=count,
+                factory, raw, result.snapshot_id, destination,
+                original_request_count=count + checkpoints.reused_requests,
+                collection_started_at=min(started_at, checkpoints.oldest),
                 municipality_boundary=connector.municipality_boundary
             )
             verified = verify_source_artifact(destination)
@@ -149,6 +157,12 @@ async def collect(args):
                     k: v.model_dump(mode="json") for k, v in verified.completion.items()
                 },
             }
+        except Exception:
+            if checkpoints.deferred:
+                status = "deferred"
+                return {"status": status, "stores": checkpoints.stores,
+                        "requests": count, "reason": "collection_window"}
+            raise
         finally:
             await connector.aclose()
             engine.dispose()
@@ -161,6 +175,8 @@ async def collect(args):
                         "finished_at": datetime.now(UTC).isoformat(),
                         "runtime_seconds": round(monotonic() - started, 3),
                         "requests": count,
+                        "reused_requests": checkpoints.reused_requests,
+                        "stores": checkpoints.stores,
                         "http_statuses": dict(statuses),
                         "challenges": challenges,
                         "http_errors": sum(v for k, v in statuses.items() if int(k) >= 400),

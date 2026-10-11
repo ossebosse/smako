@@ -19,6 +19,7 @@ import urllib.request
 from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
+from time import monotonic
 from typing import Any
 from uuid import uuid4
 
@@ -635,6 +636,31 @@ def _run_demand_locked(lock, *, started_at):
     from datetime import timedelta
     plan = demand_refresh_plan(now=started_at)
     state, path = plan.pop('state'), Path(plan.pop('state_path'))
+    # A valid disk publication whose reload response was lost is already built.
+    # Retry loading only while exact inputs and time-dependent offers agree.
+    pending = state.get('pending_runtime')
+    if (pending and not plan.get('bootstrap') and not plan.get('due_sources')
+            and not plan.get('reasons') and pending['fingerprint'] == plan['source_fingerprint']):
+        manifest = _artifact_store().read_active(os.environ['REFRESH_CITY'])
+        if manifest and manifest.universe_id == pending['universe_id']:
+            from grocery_data.app.services.freshness import FreshnessPolicy, assess_freshness
+            if not assess_freshness(manifest.oldest_base_observed_at or manifest.oldest_observed_at,
+                                    policy=FreshnessPolicy(), now=started_at).usable:
+                raise ValueError('pending runtime source expired')
+            _artifact_store().resolve_active_artifact(os.environ['REFRESH_CITY'], verify_hash=True)
+            try:
+                loaded = _reload_runtime()
+            except (RuntimeReloadUnavailable, RuntimeReloadRejected):
+                loaded = _confirm_loaded_runtime(manifest.universe_id)
+            success = bool(loaded and loaded.get('new_price_universe_id') == manifest.universe_id)
+            if success:
+                state.pop('pending_runtime', None)
+            state['last_runtime_retry_at'] = started_at.isoformat()
+            atomic_write_bytes(path, json.dumps(state).encode())
+            _write_status({'status': 'complete' if success else 'degraded', 'build_reused': True,
+                           'city': os.environ['REFRESH_CITY'], 'runtime_reload': loaded or {'status': 'deferred'},
+                           'exit_code': 0 if success else 2})
+            return 0 if success else 2
     if not plan['work_due']:
         state['last_check'] = plan
         atomic_write_bytes(path, json.dumps(state, ensure_ascii=False).encode())
@@ -662,10 +688,22 @@ def _run_demand_locked(lock, *, started_at):
     if 'primat' not in plan['due_sources']:
         command.append('--no-external-refresh')
     overrides = plan.get('source_context_overrides', {})
+    if os.getenv('MUNICIPAL_REFRESH_SCOPE') and 'hemkop' in plan['due_sources']:
+        # Completed stores are already separately promoted. Bound a turn to the
+        # oldest due store so the next municipality gets the shared worker too.
+        source = plan['sources']['hemkop']
+        selected = sorted(source['due_store_ids'], key=lambda identity:
+            (source['contexts'][identity].get('observed_at') or '', identity))[:1]
+        source['due_store_ids'] = selected
+        overrides['MUNICIPAL_HEMKOP_DUE_STORE_IDS'] = ','.join(selected)
     previous = {key: os.environ.get(key) for key in overrides}
+    run_status = {}
+    def capture_status(value):
+        run_status.update(value)
+        _write_status(value)
     try:
         os.environ.update(overrides)
-        code = _run_locked(lock, started_at=started_at, command=command)
+        code = _run_locked(lock, started_at=started_at, command=command, status_writer=capture_status)
     finally:
         for key, value in previous.items():
             if value is None:
@@ -692,6 +730,13 @@ def _run_demand_locked(lock, *, started_at):
     if code in {0, 2}:
         state.update(last_success_at=ended.isoformat(), published_sources=after['source_fingerprint'], failures=0)
         state.pop('retry_at', None)
+        active = _artifact_store().read_active(os.environ['REFRESH_CITY'])
+        loaded = run_status.get('runtime_reload', {}).get('new_price_universe_id')
+        if active and loaded != active.universe_id:
+            state['pending_runtime'] = {'universe_id': active.universe_id,
+                                        'fingerprint': after['source_fingerprint']}
+        else:
+            state.pop('pending_runtime', None)
     else:
         failures = state.get('failures', 0) + 1
         state.update(failures=failures, retry_at=(ended + timedelta(minutes=min(360, 15 * 2 ** min(failures-1,5)))).isoformat())
@@ -749,10 +794,46 @@ def main() -> int:
         )
         scopes = refresh_scopes()
         if scopes:
-            outcomes = []
+            from grocery_data.app.services.municipal_scheduling import (
+                estimate_seconds,
+                order_work,
+                plan_deadline,
+                read_state,
+                record_attempt,
+                save_state,
+            )
+            schedule_path = Path(os.environ['PRICE_UNIVERSE_CACHE_ROOT']).parent / 'reports/operations/municipal-schedule.json'
+            schedule = read_state(schedule_path)
+            planning = []
             for scope in scopes:
                 try:
                     with municipal_environment(scope):
+                        plan = demand_refresh_plan(now=started_at)
+                    planning.append({**scope, 'work_due': plan['work_due'] or bool(plan.get('state', {}).get('pending_runtime')),
+                                     'deadline': plan_deadline(plan)})
+                except Exception as exc:  # noqa: BLE001 - preserve unknown planning evidence
+                    planning.append({**scope, 'work_due': True, 'planning_error': type(exc).__name__})
+            scopes = order_work(planning, schedule, now=started_at)
+            save_state(schedule_path, schedule)
+            window_started = monotonic()
+            window = int(os.getenv('MUNICIPAL_REFRESH_WINDOW_SECONDS', '10800'))
+            if not 300 <= window <= 10800:
+                raise ValueError('municipal run window must be between 300 and 10800 seconds')
+            outcomes = []
+            for scope in scopes:
+                remaining = window - (monotonic() - window_started)
+                estimate = estimate_seconds(schedule['jobs'][scope['municipality_code']])
+                if remaining < max(300, estimate):
+                    outcomes.append({'municipality_code': scope['municipality_code'], 'exit_code': 2,
+                                     'status': 'deferred', 'reason': 'run_window', 'estimated_seconds': estimate})
+                    continue
+                attempt, began = datetime.now(UTC), monotonic()
+                if scope['work_due']:
+                    record_attempt(schedule, scope['municipality_code'], started=attempt, seconds=0, result=None)
+                    save_state(schedule_path, schedule)
+                try:
+                    with municipal_environment(scope):
+                        os.environ['REFRESH_TIMEOUT_SECONDS'] = str(min(7200, int(remaining)))
                         if os.getenv("DEMAND_REFRESH_ENABLED", "false").casefold() == "true":
                             code = _run_demand_locked(operations_lock, started_at=datetime.now(UTC))
                         else:
@@ -761,6 +842,10 @@ def main() -> int:
                 except Exception as exc:  # noqa: BLE001 - independent municipal LKG, report only the class
                     outcomes.append({"municipality_code": scope["municipality_code"], "city": scope["city"],
                                      "exit_code": 1, "error_type": type(exc).__name__})
+                if scope['work_due']:
+                    record_attempt(schedule, scope['municipality_code'], started=attempt,
+                        seconds=monotonic() - began, result=outcomes[-1]['exit_code'])
+                save_state(schedule_path, schedule)
             failed = any(row["exit_code"] not in {0, 2} for row in outcomes)
             code = 1 if failed else 2 if any(row["exit_code"] == 2 for row in outcomes) else 0
             _write_status({"schema_version": "production-refresh-runner-v1",

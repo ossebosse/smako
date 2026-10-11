@@ -102,6 +102,7 @@ def run(
     now=None,
     delay=sleep,
     capacity_check=None,
+    collection_seconds=7200,
 ):
     now = now or datetime.now(UTC)
     workspace = workspace.resolve()
@@ -181,7 +182,11 @@ def run(
                 from grocery_data.relay_storage import collection_capacity
                 log("storage_preflight", **collection_capacity(workspace))
                 log("collection_start")
-                result = asyncio.run(collect(SimpleNamespace(workspace=workspace, municipality=municipality)))
+                result = asyncio.run(collect(SimpleNamespace(workspace=workspace, municipality=municipality,
+                                                             collection_seconds=collection_seconds)))
+                if result["status"] == "deferred":
+                    log("collection_deferred", **result)
+                    return 2
                 if result["status"] != "complete":
                     raise ValueError("collection did not complete")
                 candidate = Path(result["artifact"])
@@ -270,7 +275,7 @@ def main():
         capacity_check=lambda: receiver_capacity(transport, args.workspace))
 
 
-def run_municipalities(workspace, transport, *, scopes=None, run_scope=run):
+def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budget_seconds=10200):
     """Use the server's one registry; each municipality keeps its own receipts."""
     from grocery_data.app.domain.municipality import municipality_name
     from grocery_data.app.services.willys_municipal_scope import relay_municipality
@@ -290,17 +295,51 @@ def run_municipalities(workspace, transport, *, scopes=None, run_scope=run):
     workspace = Path(workspace).resolve()
     outcomes = []
     with RefreshRunLock(workspace / "municipal-relay.lock"):
+        from grocery_data.app.services.municipal_scheduling import (
+            order_work,
+            read_state,
+            record_attempt,
+            save_state,
+        )
+        journal = workspace / "municipal-schedule.json"
+        state = read_state(journal)
+        started = monotonic()
+        items = []
+        now = datetime.now(UTC)
         for code in codes:
+            receipt = read_state(workspace / ("municipality-" + code) / "last-success.json")
+            observed = receipt.get("observed_from") if receipt.get("municipality_code") == code else None
+            stamp = datetime.fromisoformat(observed) if observed else None
+            items.append({"municipality_code": code,
+                "work_due": not stamp or now >= stamp + timedelta(hours=35),
+                "deadline": (stamp + timedelta(hours=48)).isoformat() if stamp else None})
+        ordered = order_work(items, state, now=now)
+        save_state(journal, state)
+        for item in ordered:
+            code = item["municipality_code"]
+            remaining = budget_seconds - (monotonic() - started)
+            if not item["work_due"]:
+                outcomes.append({**item, "exit_code": 0, "status": "not_due"})
+                continue
+            if remaining < 2400:
+                outcomes.append({**item, "exit_code": 2, "status": "deferred", "reason": "run_window"})
+                continue
             scope_root = workspace / ("municipality-" + code)
             scope_root.mkdir(parents=True, exist_ok=True)
             if scope_root.is_symlink() or not scope_root.resolve().is_relative_to(workspace):
                 raise ValueError("relay municipal workspace escaped its data root")
             relay_municipality(scope_root, code)
-            result = run_scope(scope_root,
+            attempt, began = datetime.now(UTC), monotonic()
+            record_attempt(state, code, started=attempt, seconds=0, result=None)
+            save_state(journal, state)  # A killed task must still yield the next fair turn.
+            # Reserve transport/import time within the existing three-hour task.
+            result = run_scope(scope_root, collection_seconds=min(7200, remaining - 1800),
                 push=lambda a: source_cli.push(SimpleNamespace(artifact=a.artifact, host=transport.ssh_host, transport=transport)),
                 activate=lambda digest: remote_activate(digest, transport),
                 capacity_check=lambda root=scope_root: receiver_capacity(transport, root))
             outcomes.append({"municipality_code": code, "exit_code": result})
+            record_attempt(state, code, started=attempt, seconds=monotonic() - began, result=result)
+            save_state(journal, state)
         atomic_write_bytes(workspace / "municipal-relay-status.json", json.dumps({
             "checked_at": datetime.now(UTC).isoformat(), "municipalities": outcomes}).encode())
     return int(any(row["exit_code"] for row in outcomes))
