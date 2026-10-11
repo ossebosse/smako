@@ -1,4 +1,103 @@
-# 2026-10-11 10:51 UTC: skalningsfunktioner aktiverade på servern; reläets uppgiftsbyte kräver admin
+# Lägg till nästa kommun — kort arbetsgång för Codex
+
+Uppdaterad 2026-10-11. Vid kommunutökning: läs denna sektion och obligatoriska
+AGENTS-/driftinstruktioner. Historiken nedanför behövs endast vid ett konkret fel.
+Använd befintlig kedja; en ny kommun behöver normalt **ingen kodrelease, ny timer
+eller ändring av Windowsuppgiften**. Registrering är inte bevis för färdigt utbud.
+
+## 1. Läs nuläget en gång
+
+Arbeta i `D:\Projects\Smako`. Kontrollera gren och arbetskopia före ändringar.
+Läs [OPERATIONS](OPERATIONS.md), kör sedan:
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\smako_ops.py status
+.venv\Scripts\python.exe -X utf8 scripts\smako_ops.py municipalities
+ssh smako 'sudo -n docker exec --user 10001:10001 smako-scheduler-1 python -m grocery_data.municipal_cli list'
+```
+
+Spara JSON under `.local/municipal-<SCB-kod>/`; visa bara relevant kommun,
+runtime, kapacitet och eventuella hinder. Undvik täta statuspollningar och bred
+sökning i gamla releaser. Status är läsande och gör inga prisanrop.
+
+Senast verifierat 2026-10-11 12:16 UTC: Lund **1281/22350** och Malmö
+**1280/21120** är publicerade och laddade. Source `municipal-source-7b7fe72472dd`,
+app `municipal-app-2b83475f5e68`. Windowsuppgiften **Smako Willys Local Relay**
+är aktiverad och pekar på `D:\smako-local-relay\releases\7b7fe72472dd` med
+`-Municipalities`, workspace `D:\smako-local-relay\scopes`. Administratörsbytet
+är klart; kör inte installationssteget igen. Första schemalagda körningen efter
+bytet var ännu inte observerad. Detta är en daterad baslinje, inte aktuell status.
+
+## 2. Kontrollera kommun och mät kapacitet
+
+Använd officiell fyrsiffrig SCB-kod och en unik femsiffrig bygg-/postnyckel.
+Postnyckeln avgör inte kommungräns eller användarens position. Exemplet nedan
+gäller Göteborg, som ännu **inte** är aktiverat; byt båda värdena för vald kommun.
+
+```powershell
+ssh smako 'sudo -n docker exec --user 10001:10001 smako-scheduler-1 python -m grocery_data.municipal_cli add --municipality 1480 --postal-code 41110 --dry-run'
+```
+
+Torrkörningen validerar registreringen, inte källtäckning eller kapacitet.
+För en ny kommun behövs en komplett, uppmätt pilot i separat databas, rålagring
+och artefaktrot. Återanvänd ett befintligt matchande underlag om det är yngre än
+sju dagar och fortfarande beskriver tillgänglig kapacitet. Annars läs **endast
+”Kapacitetsunderlag för nästa kommun” i [municipal_scaling](municipal_scaling.md#kapacitetsunderlag-för-nästa-kommun)**
+för mätfält och pilotkrav. Ingen automatisk pilot finns i registreringskommandot.
+Använd samma källkedja och gränser; kopiera inte Lunds eller Malmös mätvärden.
+
+## 3. Registrera efter godkänd pilot
+
+Placera den granskade pilotfilen läsbart för UID 10001 i serverns driftmiljö.
+`/reviewed/pilot.json` nedan är en platshållare **inne i scheduler-containern**,
+inte en lokal Windowsfil. Ersätt den med filens verifierade containersökväg.
+
+```powershell
+ssh smako 'sudo -n docker exec --user 10001:10001 smako-scheduler-1 python -m grocery_data.municipal_cli capacity --municipality 1480 --postal-code 41110 --capacity-evidence /reviewed/pilot.json'
+# Kör nästa kommando endast efter PASS, inom användarens uppdrag att aktivera kommunen.
+ssh smako 'sudo -n docker exec --user 10001:10001 smako-scheduler-1 python -m grocery_data.municipal_cli add --municipality 1480 --postal-code 41110 --capacity-evidence /reviewed/pilot.json'
+```
+
+`add` tar ordinarie driftlås, kontrollerar kapaciteten igen och skriver atomiskt.
+Identisk registrering är idempotent. Vid upptaget lås: invänta ordinarie arbete;
+starta inte en konkurrerande insamling. Server och Windowsrelä läser samma
+register och tar kommunen vid kommande ordinarie pass. Reläets kö/kvitto får egen
+`municipality-<SCB-kod>`-mapp under `scopes`. Bevara konton och scheman.
+
+## 4. Verifiera innan nästa kommun
+
+Kör `municipalities` efter en hel ordinarie uppdateringscykel. Redovisa separat:
+upptäckta/kvalificerade/okända butiker, import, publicerat=laddat manifest för
+rätt kommun, readiness/färskhet och motsvarande Willys-reläkvitto. Ett äldre
+kvitto kan vara korrekt om senare erbjudanden har ändrat manifestet men samma
+Willys-snapshot finns kvar. Kontrollera även att Lund/Malmö fortsatt fungerar.
+
+Verifiera kommunval, egna butiksval, avståndsurval och en verklig meny med sparad
+omladdning under separat testidentitet. Återanvänd
+`scripts/release_verification/municipal_live_browser.py` och
+`scripts/release_verification/public_menu_browser.py`; läs deras `--help` för
+kommun, postnyckel, verifierad position och publicerade butikskontexter.
+Rapportera produktposter, beräkningsindex och priskontexter som olika mått;
+de är inte antal unika varor eller fysiska butiker.
+
+**Stoppvillkor:** BLOCKED/okänd kapacitet, fel kommun-/butiksidentitet, saknat
+källunderlag eller utebliven laddning/kvittens får inte redovisas som klart.
+Rapportera exakt steg, orsak och minsta nästa åtgärd. Vid källfel använd
+`smako_ops.py incidents` och riktad `reproduce`, inte en ny fullinsamling.
+Behåll senaste giltiga data, backoff, 36/48-timmarsgränser och Coop-fullcrawl
+endast `730400`. Fysiska Coop/X:-tra-erbjudanden är separata källor; saknat flöde
+betyder okänd täckning. Registrering ändrar inte användarens sparade butiksval.
+
+Avsluta med en kort daterad status här: kommun/byggnyckel, kapacitetsbevisets
+sökväg/hash, runtime, publicerat/laddat ID, kvitto, täckningsluckor och nästa steg.
+Länka detaljer i stället för att klistra in loggar. Ingen bred testsvit eller
+ombyggnad behövs för ren registrering; vid kodfel testa den berörda ändringen.
+
+---
+
+# Historik — läs endast vid behov; senare verifiering ovan gäller före äldre väntelägen
+
+# 2026-10-11 10:51 UTC: skalningsfunktioner aktiverade på servern
 
 Källprocess **`municipal-source-7b7fe72472dd`**, image
 `sha256:1f10310fbccfae541b816fdf66b06029adcf5860923ce0a5e1b40542d5f1803b`,
@@ -13,19 +112,12 @@ kapacitetskrav för nya kommuner, separat återförsök av väntande runtime-lad
 samt `scripts/smako_ops.py municipalities` med kommunernas butiksplanering och
 lokala reläkvitton. [Funktioner och pilotkrav](municipal_scaling.md).
 
-**Windowsinstallationen är klar men den schemalagda uppgiften är inte bytt.**
-`D:\smako-local-relay\releases\7b7fe72472dd` har verifierats (685 filer och låsta
-beroenden). `Set-ScheduledTask` nekades av Windows med ”Åtkomst nekad”. Uppgiften
-pekar fortfarande på `f5b6aedc851d`; konton och tider har inte ändrats. Kör följande
-i PowerShell som administratör för att slutföra den redan förberedda övergången:
-
-```powershell
-& 'D:\Projects\Smako\deploy\scripts\enable_municipal_relay.ps1' `
-  -ReleaseRoot 'D:\smako-local-relay\releases\7b7fe72472dd' `
-  -Workspace 'D:\smako-local-relay\scopes' `
-  -Config 'D:\smako-local-relay\config\relay.json' `
-  -EvidenceDirectory 'D:\smako-local-relay\municipal-task-activation-7b7fe72-admin'
-```
+Windowsinstallationen verifierades med 685 filer och låsta beroenden.
+Det första uppgiftsbytet nekades av Windows med ”Åtkomst nekad”. Användaren
+utförde därefter administratörssteget; läsande kontroll 12:16 UTC bekräftar
+`7b7fe72472dd`, `-Municipalities`, rätt workspace och aktiverad uppgift.
+Lokalt bevis: `.local/municipal-scaling/status-user-admin.json`.
+Det tidigare adminhindret är löst; ingen ny installation behövs.
 
 Det nya installerade reläet har manuellt verifierats med ny insamling uttryckligen
 spärrad. Lunds tidigare saknade kvitto är nu återställt: `fe7461f2…`, server-snapshot
