@@ -1,0 +1,980 @@
+{
+  "schema": "smako-municipal-rollout-acceptance-v1",
+  "verified_at": "2026-10-11T00:33:37.621089+00:00",
+  "runtime_commit": "2b83475f5e68df016eb796972103372fc4c63618",
+  "activation": {
+    "at": "2026-10-10T21:45:44.752506+00:00",
+    "build_id": "municipal-app-2b83475f5e68",
+    "image": "sha256:693166ba9e7d117c7099e2c87b20e6892093331a502ef9d8b6869bd956372ca8",
+    "source_image": "sha256:8d50774d76d695118142a009389b2edb50e4de83cbd469ab76207f7ea5b81a30",
+    "app_and_scheduler_only": true,
+    "mounts_proxy_receiver_isolated_unchanged": true
+  },
+  "backup_directory": "/opt/smako/evidence/municipal-recovery-activation-2b83475f5e68",
+  "windows_relay": {
+    "task": "Smako Willys Local Relay",
+    "release": "f5b6aedc851d",
+    "municipalities_enabled": true,
+    "account_schedule_preserved": true,
+    "additional_scheduler": false
+  },
+  "automatic_relay_followup": {
+    "status": {
+      "checked_at": "2026-10-10T23:30:25.992283+00:00",
+      "municipalities": [
+        {
+          "municipality_code": "1281",
+          "exit_code": 0
+        },
+        {
+          "municipality_code": "1280",
+          "exit_code": 0
+        }
+      ]
+    },
+    "events": {
+      "1281": [
+        {
+          "at": "2026-10-10T23:30:25.872046+00:00",
+          "event": "task_start",
+          "expected_daily_time": null,
+          "schedule_policy": "base_35h",
+          "schedule_timezone": "Europe/Stockholm",
+          "invocation_kind": "scheduled_or_manual_not_inferred"
+        },
+        {
+          "at": "2026-10-10T23:30:25.931866+00:00",
+          "event": "not_due",
+          "next_fetch_at": "2026-10-11T01:01:56.012843+00:00",
+          "external_price_requests": 0
+        },
+        {
+          "at": "2026-10-10T23:30:25.932345+00:00",
+          "event": "task_end",
+          "seconds": 0.062
+        }
+      ],
+      "1280": [
+        {
+          "at": "2026-10-10T23:30:25.933856+00:00",
+          "event": "task_start",
+          "expected_daily_time": null,
+          "schedule_policy": "base_35h",
+          "schedule_timezone": "Europe/Stockholm",
+          "invocation_kind": "scheduled_or_manual_not_inferred"
+        },
+        {
+          "at": "2026-10-10T23:30:25.992283+00:00",
+          "event": "not_due",
+          "next_fetch_at": "2026-10-12T07:35:10.562100+00:00",
+          "external_price_requests": 0
+        },
+        {
+          "at": "2026-10-10T23:30:25.992283+00:00",
+          "event": "task_end",
+          "seconds": 0.063
+        }
+      ]
+    }
+  },
+  "source": {
+    "sha256": "1b6bd8531687f0e8dfe13f520bd0d5ef6669d25e16b98d99ea90636c7f5e10fc",
+    "municipality_code": "1280",
+    "artifact_bytes": 8162127,
+    "manifest": {
+      "context_ids": [
+        "2114",
+        "2144",
+        "2244",
+        "2253"
+      ],
+      "row_count": 39594,
+      "product_count": 11422,
+      "request_count": 2572,
+      "observed_from": "2026-10-10T20:35:10.562100Z",
+      "observed_to": "2026-10-10T21:46:34.788725Z",
+      "collection_started_at": "2026-10-10T20:35:10.038290Z",
+      "collection_finished_at": "2026-10-10T21:56:21.133385Z",
+      "catalog_completion": {
+        "2114": {
+          "complete": true,
+          "completed_categories": 446,
+          "conflicting_duplicates": null,
+          "cross_partition_duplicates": null,
+          "duplicate_products": null,
+          "exact_duplicates_removed": null,
+          "expected_categories": 446,
+          "expected_pages": null,
+          "expected_products": null,
+          "limited": false,
+          "pages_fetched": 651,
+          "pagination_overlaps": null,
+          "products_observed": 10343,
+          "raw_rows": null,
+          "reason": null,
+          "unique_products": null,
+          "within_partition_duplicates": null
+        },
+        "2144": {
+          "complete": true,
+          "completed_categories": 446,
+          "conflicting_duplicates": null,
+          "cross_partition_duplicates": null,
+          "duplicate_products": null,
+          "exact_duplicates_removed": null,
+          "expected_categories": 446,
+          "expected_pages": null,
+          "expected_products": null,
+          "limited": false,
+          "pages_fetched": 638,
+          "pagination_overlaps": null,
+          "products_observed": 9661,
+          "raw_rows": null,
+          "reason": null,
+          "unique_products": null,
+          "within_partition_duplicates": null
+        },
+        "2244": {
+          "complete": true,
+          "completed_categories": 439,
+          "conflicting_duplicates": null,
+          "cross_partition_duplicates": null,
+          "duplicate_products": null,
+          "exact_duplicates_removed": null,
+          "expected_categories": 439,
+          "expected_pages": null,
+          "expected_products": null,
+          "limited": false,
+          "pages_fetched": 644,
+          "pagination_overlaps": null,
+          "products_observed": 10131,
+          "raw_rows": null,
+          "reason": null,
+          "unique_products": null,
+          "within_partition_duplicates": null
+        },
+        "2253": {
+          "complete": true,
+          "completed_categories": 444,
+          "conflicting_duplicates": null,
+          "cross_partition_duplicates": null,
+          "duplicate_products": null,
+          "exact_duplicates_removed": null,
+          "expected_categories": 444,
+          "expected_pages": null,
+          "expected_products": null,
+          "limited": false,
+          "pages_fetched": 621,
+          "pagination_overlaps": null,
+          "products_observed": 9459,
+          "raw_rows": null,
+          "reason": null,
+          "unique_products": null,
+          "within_partition_duplicates": null
+        }
+      }
+    }
+  },
+  "malmo_first_receipted": {
+    "status": "PASS",
+    "build": "municipal-app-2b83475f5e68",
+    "municipality": "1280",
+    "source_artifact_sha256": "1b6bd8531687f0e8dfe13f520bd0d5ef6669d25e16b98d99ea90636c7f5e10fc",
+    "snapshot": {
+      "id": "61046f2474d543c98d8d539f808412e5",
+      "scope_key": "malmö",
+      "state": "promoted",
+      "is_active": 1
+    },
+    "rows_by_willys_store": {
+      "2114": 10343,
+      "2144": 9661,
+      "2244": 10131,
+      "2253": 9459
+    },
+    "local_receipt": {
+      "observed_from": "2026-10-10T20:35:10.562100+00:00",
+      "completed_at": "2026-10-10T22:44:12.256624+00:00",
+      "next_fetch_at": "2026-10-12T07:35:10.562100+00:00"
+    },
+    "published_loaded_receipted_universe": "price-universe:8d1199ee36ab056db7fa134bc78ae7856cab13ab62cd3ce97c41d865abd545fc",
+    "product_count": 2376,
+    "contexts_count": 46,
+    "contexts_by_chain": {
+      "hemkop": 4,
+      "ica": 23,
+      "lidl": 8,
+      "citygross": 1,
+      "willys": 10
+    },
+    "published_at": "2026-10-10T22:37:25.348914Z",
+    "evidence_basis": "Retained first publication report, first context response, immutable source digest and persisted relay receipt. Reconstructed after a current-state probe filename collision; not a byte-for-byte restoration of the original first probe JSON."
+  },
+  "malmo_current": {
+    "verified_at": "2026-10-11T00:30:45.070082+00:00",
+    "status": "PASS",
+    "build": "municipal-app-2b83475f5e68",
+    "municipality": "1280",
+    "source_artifact_sha256": "1b6bd8531687f0e8dfe13f520bd0d5ef6669d25e16b98d99ea90636c7f5e10fc",
+    "snapshot": {
+      "id": "61046f2474d543c98d8d539f808412e5",
+      "scope_key": "malmö",
+      "state": "promoted",
+      "is_active": 1
+    },
+    "rows_by_willys_store": {
+      "2114": 10343,
+      "2144": 9661,
+      "2244": 10131,
+      "2253": 9459
+    },
+    "published_loaded_universe": "price-universe:ef27708e376313ffad291ffb23d70ccec7f803b2e97e7a412f8a8235ae3e0b30",
+    "first_receipted_universe": "price-universe:8d1199ee36ab056db7fa134bc78ae7856cab13ab62cd3ce97c41d865abd545fc",
+    "published_snapshot_ids": [
+      "0ab5f0fb2a8d49779b2f0589913fb0d9",
+      "12bfa68dc63644ca8dd97e25a4af0933",
+      "192a51544a2d49008980077aae0147c5",
+      "1b792ed938234abdbbf273e363e9ae49",
+      "257007a4c81b445497b4bf1fe6c5a414",
+      "2a3648e3ab6647e9971b872de670ae28",
+      "303a143a843446fe81b02f6fb7cddb3e",
+      "34c4aff90a17473f8dd1d9b6b0281e56",
+      "38930d3a6f6340c083ae334eefccf23b",
+      "3995798694c940d983e3b48266f289b1",
+      "3cf08a1a97f94ffea264ec2684b316be",
+      "3d00c7847b9448fa84dd4e46717f715e",
+      "4278d5af65b74d45b7e6b64afbfcfccc",
+      "47f4852351274a57adbee11cffa154aa",
+      "4a51c64f973c433baf843c34bfbcfb30",
+      "58f18517aeec42a496f3a1a58593f128",
+      "5a05c485b780496e80c93aa430217497",
+      "5b9b22a89bde4903a5abbf741694da84",
+      "61046f2474d543c98d8d539f808412e5",
+      "6ea011548ebc4e16800af9b42a7bff58",
+      "747880853d1f40f1aa2c36db797e05eb",
+      "840124e91e574f30aca70f503c567be2",
+      "97b7a32f955d408191267fb0c2731d12",
+      "9a3c1f1e106b49ec90c8e76900d796ab",
+      "9b55041334d249cfa52d26e8ba52831e",
+      "9b75d50febfd483fa9b8a91ce533f168",
+      "a779dccf11664a68a80fd5fd4490716d",
+      "bba5bb126552490aaacf8ca24773552a",
+      "be8c1f3cdbbe46c589aad0d656533f70",
+      "c3bc2ac2fe6940e9ad49fdd6defb0e06",
+      "c4c7118ffaa646f3a720e5fcdbcef127",
+      "c8d3c8da8c2b437a80ad9bcebcf1130d",
+      "ce9a303534734ff2aa4b6902bd0d0e8c",
+      "d44f59ad31a94a9db10a3b63e1652f17",
+      "d565fda4a219459ca48e3bcff2b11f52",
+      "d5c6196b48354bcdb41583a890bc358c",
+      "d5f78aff785a412b9ea951ddcbe01cd5",
+      "e137effbc43d4e418a19b87bd17446c1",
+      "e295090916ec48be94173881ec1bd3c7",
+      "e3f5ec14928e4ab98cb93e5eebc2d8ec",
+      "eb22a3d3d95b4107b84bdb3b1d1fae88",
+      "eea89a58724448eeb0ac2e3bdcc47321",
+      "eed86c369ae448f9a13444c5239b24ae",
+      "ef77a4c111a84b7c9a9bf81ba9d50fb8",
+      "f9c57024ea1847f6802b50b28893cf00"
+    ],
+    "product_count": 2529,
+    "contexts_count": 48,
+    "contexts_by_chain": {
+      "hemkop": 6,
+      "ica": 23,
+      "lidl": 8,
+      "citygross": 1,
+      "willys": 10
+    },
+    "local_receipt": {
+      "observed_from": "2026-10-10T20:35:10.562100+00:00",
+      "completed_at": "2026-10-10T22:44:12.256624+00:00",
+      "next_fetch_at": "2026-10-12T07:35:10.562100+00:00"
+    }
+  },
+  "scheduled_followup": {
+    "at": "2026-10-11T00:30:52.273580+00:00",
+    "hemkop": [
+      {
+        "id": "38930d3a6f6340c083ae334eefccf23b",
+        "scope_key": "malmö:hemkop:4247",
+        "state": "promoted",
+        "is_active": 1,
+        "created_at": "2026-10-10T23:36:58.934090+00:00",
+        "promoted_at": "2026-10-10T23:58:21.902366+00:00",
+        "rejection_reason": null,
+        "qualification": {
+          "failure_type": null,
+          "catalog_completion": {
+            "4247": {
+              "complete": true,
+              "limited": false,
+              "expected_categories": 20,
+              "completed_categories": 20,
+              "pages_fetched": 114,
+              "products_observed": 9269,
+              "expected_products": 10323,
+              "raw_rows": 10323,
+              "unique_products": 9269,
+              "duplicate_products": 1054,
+              "within_partition_duplicates": 1,
+              "cross_partition_duplicates": 1053,
+              "exact_duplicates_removed": 1,
+              "conflicting_duplicates": 0,
+              "pagination_overlaps": 1,
+              "expected_pages": 114,
+              "reason": null
+            }
+          },
+          "minimum_products_for_full_catalog": 8000
+        },
+        "products": 9269,
+        "raw": {
+          "count": 118,
+          "observed_from": "2026-10-10T23:36:59.727779+00:00",
+          "observed_to": "2026-10-10T23:56:40.635337+00:00"
+        }
+      },
+      {
+        "id": "245ab3d913b6447f98ca16ac7fb1dbc5",
+        "scope_key": "limhamn:hemkop:4212",
+        "state": "rejected",
+        "is_active": 0,
+        "created_at": "2026-10-10T23:22:54.816704+00:00",
+        "promoted_at": null,
+        "rejection_reason": "CatalogCompletenessError",
+        "qualification": {
+          "failure_type": "CatalogCompletenessError",
+          "catalog_completion": {
+            "4212": {
+              "complete": true,
+              "limited": false,
+              "expected_categories": 20,
+              "completed_categories": 20,
+              "pages_fetched": 80,
+              "products_observed": 6459,
+              "expected_products": 7121,
+              "raw_rows": 7121,
+              "unique_products": 6459,
+              "duplicate_products": 662,
+              "within_partition_duplicates": 0,
+              "cross_partition_duplicates": 662,
+              "expected_pages": 80,
+              "reason": null
+            }
+          },
+          "minimum_products_for_full_catalog": 8000
+        },
+        "products": 0,
+        "raw": {
+          "count": 84,
+          "observed_from": "2026-10-10T23:22:55.205867+00:00",
+          "observed_to": "2026-10-10T23:36:55.916895+00:00"
+        }
+      },
+      {
+        "id": "137bdfd509df41e2869c88128c1cabab",
+        "scope_key": "malmö:hemkop:4199",
+        "state": "rejected",
+        "is_active": 0,
+        "created_at": "2026-10-10T23:07:20.156067+00:00",
+        "promoted_at": null,
+        "rejection_reason": "CatalogCompletenessError",
+        "qualification": {
+          "failure_type": "CatalogCompletenessError",
+          "catalog_completion": {
+            "4199": {
+              "complete": true,
+              "limited": false,
+              "expected_categories": 20,
+              "completed_categories": 20,
+              "pages_fetched": 89,
+              "products_observed": 7066,
+              "expected_products": 7853,
+              "raw_rows": 7853,
+              "unique_products": 7066,
+              "duplicate_products": 787,
+              "within_partition_duplicates": 2,
+              "cross_partition_duplicates": 785,
+              "exact_duplicates_removed": 2,
+              "conflicting_duplicates": 0,
+              "pagination_overlaps": 2,
+              "expected_pages": 89,
+              "reason": null
+            }
+          },
+          "minimum_products_for_full_catalog": 8000
+        },
+        "products": 0,
+        "raw": {
+          "count": 93,
+          "observed_from": "2026-10-10T23:07:21.039486+00:00",
+          "observed_to": "2026-10-10T23:22:51.320065+00:00"
+        }
+      },
+      {
+        "id": "a779dccf11664a68a80fd5fd4490716d",
+        "scope_key": "malmö:hemkop:4114",
+        "state": "promoted",
+        "is_active": 1,
+        "created_at": "2026-10-10T22:46:59.602166+00:00",
+        "promoted_at": "2026-10-10T23:07:20.012076+00:00",
+        "rejection_reason": null,
+        "qualification": {
+          "failure_type": null,
+          "catalog_completion": {
+            "4114": {
+              "complete": true,
+              "limited": false,
+              "expected_categories": 20,
+              "completed_categories": 20,
+              "pages_fetched": 108,
+              "products_observed": 8837,
+              "expected_products": 9774,
+              "raw_rows": 9774,
+              "unique_products": 8837,
+              "duplicate_products": 937,
+              "within_partition_duplicates": 1,
+              "cross_partition_duplicates": 936,
+              "exact_duplicates_removed": 1,
+              "conflicting_duplicates": 0,
+              "pagination_overlaps": 1,
+              "expected_pages": 108,
+              "reason": null
+            }
+          },
+          "minimum_products_for_full_catalog": 8000
+        },
+        "products": 8837,
+        "raw": {
+          "count": 112,
+          "observed_from": "2026-10-10T22:47:00.077662+00:00",
+          "observed_to": "2026-10-10T23:05:41.043120+00:00"
+        }
+      }
+    ],
+    "reports": [
+      {
+        "file": "/srv/app/var/reports/refresh/refresh-report-20261011T001611.000133Z-bdad3cd2.json",
+        "started_at": "2026-10-10T22:46:59.339722Z",
+        "completed_at": "2026-10-11T00:16:11.000035Z",
+        "summary": {
+          "active_universes": 1,
+          "exit_code": 2,
+          "fresh_universes": 1,
+          "lkg_contexts": 0,
+          "status": "degraded",
+          "universe_builds": 1,
+          "universe_builds_per_city_max": 1
+        },
+        "timing_seconds": {
+          "collection": 4282.643,
+          "external_provider": 0.0,
+          "price_universe": 962.291,
+          "total": 5351.66
+        },
+        "universes": [
+          {
+            "build_error": null,
+            "city": "Malmö",
+            "product_count": 2529,
+            "snapshot_ids": [
+              "0ab5f0fb2a8d49779b2f0589913fb0d9",
+              "12bfa68dc63644ca8dd97e25a4af0933",
+              "192a51544a2d49008980077aae0147c5",
+              "1b792ed938234abdbbf273e363e9ae49",
+              "257007a4c81b445497b4bf1fe6c5a414",
+              "2a3648e3ab6647e9971b872de670ae28",
+              "303a143a843446fe81b02f6fb7cddb3e",
+              "34c4aff90a17473f8dd1d9b6b0281e56",
+              "38930d3a6f6340c083ae334eefccf23b",
+              "3995798694c940d983e3b48266f289b1",
+              "3cf08a1a97f94ffea264ec2684b316be",
+              "3d00c7847b9448fa84dd4e46717f715e",
+              "4278d5af65b74d45b7e6b64afbfcfccc",
+              "47f4852351274a57adbee11cffa154aa",
+              "4a51c64f973c433baf843c34bfbcfb30",
+              "58f18517aeec42a496f3a1a58593f128",
+              "5a05c485b780496e80c93aa430217497",
+              "5b9b22a89bde4903a5abbf741694da84",
+              "61046f2474d543c98d8d539f808412e5",
+              "6ea011548ebc4e16800af9b42a7bff58",
+              "747880853d1f40f1aa2c36db797e05eb",
+              "840124e91e574f30aca70f503c567be2",
+              "97b7a32f955d408191267fb0c2731d12",
+              "9a3c1f1e106b49ec90c8e76900d796ab",
+              "9b55041334d249cfa52d26e8ba52831e",
+              "9b75d50febfd483fa9b8a91ce533f168",
+              "a779dccf11664a68a80fd5fd4490716d",
+              "bba5bb126552490aaacf8ca24773552a",
+              "be8c1f3cdbbe46c589aad0d656533f70",
+              "c3bc2ac2fe6940e9ad49fdd6defb0e06",
+              "c4c7118ffaa646f3a720e5fcdbcef127",
+              "c8d3c8da8c2b437a80ad9bcebcf1130d",
+              "ce9a303534734ff2aa4b6902bd0d0e8c",
+              "d44f59ad31a94a9db10a3b63e1652f17",
+              "d565fda4a219459ca48e3bcff2b11f52",
+              "d5c6196b48354bcdb41583a890bc358c",
+              "d5f78aff785a412b9ea951ddcbe01cd5",
+              "e137effbc43d4e418a19b87bd17446c1",
+              "e295090916ec48be94173881ec1bd3c7",
+              "e3f5ec14928e4ab98cb93e5eebc2d8ec",
+              "eb22a3d3d95b4107b84bdb3b1d1fae88",
+              "eea89a58724448eeb0ac2e3bdcc47321",
+              "eed86c369ae448f9a13444c5239b24ae",
+              "ef77a4c111a84b7c9a9bf81ba9d50fb8",
+              "f9c57024ea1847f6802b50b28893cf00"
+            ],
+            "status": "fresh",
+            "universe_id": "price-universe:ef27708e376313ffad291ffb23d70ccec7f803b2e97e7a412f8a8235ae3e0b30",
+            "usable": true
+          }
+        ]
+      }
+    ]
+  },
+  "subsequent_catalog_attempts_at_verification": [
+    {
+      "id": "d754e179a0824df1b7f699508e1ce45e",
+      "scope_key": "malmö:hemkop:4199",
+      "state": "fetched",
+      "is_active": 0,
+      "created_at": "2026-10-11T00:30:12.313368+00:00",
+      "promoted_at": null,
+      "rejection_reason": null,
+      "qualification": {
+        "failure_type": null,
+        "catalog_completion": null,
+        "minimum_products_for_full_catalog": null
+      },
+      "products": 0,
+      "raw": {
+        "count": 1,
+        "observed_from": "2026-10-11T00:30:13.160576+00:00",
+        "observed_to": "2026-10-11T00:30:13.160576+00:00"
+      }
+    }
+  ],
+  "hemkop_catalog_targets": [
+    {
+      "external_id": "4212",
+      "name": "Hemköp Malmö Elinegård",
+      "city": "Limhamn",
+      "online_shopping": true
+    },
+    {
+      "external_id": "4114",
+      "name": "Hemköp Malmö Kronprinsen",
+      "city": "Malmö",
+      "online_shopping": true
+    },
+    {
+      "external_id": "4247",
+      "name": "Hemköp Malmö Triangeln",
+      "city": "Malmö",
+      "online_shopping": true
+    },
+    {
+      "external_id": "4199",
+      "name": "Hemköp Malmö Värnhem",
+      "city": "Malmö",
+      "online_shopping": true
+    }
+  ],
+  "geolocation_activation": {
+    "status": "activated",
+    "at": "2026-10-11T00:17:36.52290634Z",
+    "verified_at": "2026-10-11T00:28:28.682059+00:00",
+    "permissions_policy": "camera=(self), geolocation=(self), microphone=()",
+    "config_sha256_before": "ab97284a5cc4e9e70f1fd1490fc1676a17fe1e78d3a6e3eb5509d4d33e0c15e7",
+    "config_sha256_after": "955aaa502dc6098cda6f14e62a555bde33ff6f3e1c2c5e4019b189d341c1f9d5",
+    "proxy_image_unchanged": true,
+    "proxy_environment_preserved": true,
+    "app_source_receiver_isolated_unchanged": true,
+    "unchanged_verification": "Exact app ID and all four original service start times before 22:00 UTC; current Compose equals reviewed after configuration",
+    "tls_mounts_and_ports_preserved": true,
+    "proxy_container_before": "a5c709f53e2a900460150b1ac36704d5d0f53e8211af0616b4267edaa7fe469c",
+    "proxy_container_after": "6ce524c2c4b710737b935792e079aaa73ada8db0ef2cf3ec6c75897ca7d6506b",
+    "runtime_config_pinned": "/opt/smako/overrides/Caddyfile.geolocation-1fc4b6c",
+    "repository_fix_commit": "1fc4b6c",
+    "evidence_directory": "/opt/smako/evidence/municipal-geolocation-1fc4b6c",
+    "verification_recovery": "Initial comparison rejected Docker mount Mode empty versus ro; effective RW=false and all other bind properties match. No second proxy restart."
+  },
+  "per_store_schedule_activation": {
+    "status": "activated",
+    "at": "2026-10-11T00:28:51.237973+00:00",
+    "commit": "f6a38b849035893afdbb1393d4274c74c88b6406",
+    "source_image": "sha256:41b4d697b8e810a1fe259d69755faed468f917727859dc03d5213e40a69b9f62",
+    "source_build": "municipal-source-f6a38b849035",
+    "source_only": true,
+    "cron_schedule_preserved": true,
+    "app_proxy_receiver_isolated_unchanged": true,
+    "source_mounts_command_environment_preserved_except_build": true,
+    "evidence_directory": "/opt/smako/evidence/municipal-schedule-f6a38b849035",
+    "planning": [
+      {
+        "municipality": "1281",
+        "due_sources": [],
+        "hemkop": {
+          "observations": [
+            "2026-10-09T14:16:48.180280+00:00",
+            "2026-10-10T18:46:45.547447+00:00"
+          ],
+          "snapshots": [
+            "4f5bcff3f29845cea4a38298350d7597",
+            "4a4f782bc0c94f61b41fdc6a03f2077d"
+          ],
+          "contexts": {
+            "4224": {
+              "snapshots": [
+                "4f5bcff3f29845cea4a38298350d7597"
+              ],
+              "observed_at": "2026-10-09T14:16:48.180280+00:00",
+              "next_fetch_at": "2026-10-11T01:14:15.499433+00:00"
+            },
+            "4123": {
+              "snapshots": [
+                "4a4f782bc0c94f61b41fdc6a03f2077d"
+              ],
+              "observed_at": "2026-10-10T18:46:45.547447+00:00",
+              "next_fetch_at": "2026-10-12T05:46:45.547447+00:00"
+            }
+          },
+          "due_store_ids": [],
+          "next_fetch_at": "2026-10-11T01:14:15.499433+00:00",
+          "reason": "base_35h_deadline_or_campaign_coalescing",
+          "observed_at": "2026-10-09T14:16:48.180280+00:00",
+          "hard_stop_at": "2026-10-11T14:16:48.180280+00:00"
+        },
+        "overrides": {},
+        "schema_holds": {
+          "hemkop": [
+            "4224"
+          ]
+        }
+      },
+      {
+        "municipality": "1280",
+        "due_sources": [
+          "hemkop"
+        ],
+        "hemkop": {
+          "observations": [
+            "2026-10-10T22:47:50.138656+00:00",
+            "2026-10-10T23:37:49.489471+00:00"
+          ],
+          "snapshots": [
+            "a779dccf11664a68a80fd5fd4490716d",
+            "38930d3a6f6340c083ae334eefccf23b"
+          ],
+          "contexts": {
+            "4114": {
+              "snapshots": [
+                "a779dccf11664a68a80fd5fd4490716d"
+              ],
+              "observed_at": "2026-10-10T22:47:50.138656+00:00",
+              "next_fetch_at": "2026-10-12T09:47:50.138656+00:00"
+            },
+            "4247": {
+              "snapshots": [
+                "38930d3a6f6340c083ae334eefccf23b"
+              ],
+              "observed_at": "2026-10-10T23:37:49.489471+00:00",
+              "next_fetch_at": "2026-10-12T10:37:49.489471+00:00"
+            },
+            "4199": {
+              "snapshots": [],
+              "observed_at": null,
+              "next_fetch_at": "2026-10-11T00:28:50.728831+00:00"
+            },
+            "4212": {
+              "snapshots": [],
+              "observed_at": null,
+              "next_fetch_at": "2026-10-11T00:28:50.728831+00:00"
+            }
+          },
+          "missing": true,
+          "due_store_ids": [
+            "4199",
+            "4212"
+          ],
+          "next_fetch_at": "2026-10-11T00:28:50.728831+00:00",
+          "reason": "base_35h_deadline_or_campaign_coalescing",
+          "observed_at": "2026-10-10T22:47:50.138656+00:00",
+          "hard_stop_at": "2026-10-12T22:47:50.138656+00:00"
+        },
+        "overrides": {
+          "HEMKOP_STORE_EXTERNAL_IDS": "4114,4247,4199,4212",
+          "MUNICIPAL_HEMKOP_DUE_STORE_IDS": "4199,4212"
+        },
+        "schema_holds": {
+          "hemkop": [
+            "4224"
+          ]
+        }
+      }
+    ]
+  },
+  "source_schedule_patch": {
+    "schema": "municipal-schedule-patch-v1",
+    "target": "source",
+    "commit": "f6a38b849035893afdbb1393d4274c74c88b6406",
+    "base_commit": "2b83475f5e68",
+    "base_image": "sha256:8d50774d76d695118142a009389b2edb50e4de83cbd469ab76207f7ea5b81a30",
+    "base_files": {
+      "deploy/scripts/run_daily_refresh.py": "1c675612632e0c08d55e54e7357e38432a2b08be1fc86b2323e18e417c95567a",
+      "grocery_data/app/services/municipal_rollout.py": "ab860823371019b79aee501740001761f372dc4309a03e61fbda28a255fe67a5"
+    },
+    "files": {
+      "deploy/scripts/run_daily_refresh.py": "70a2600a7b7ecc1bf40877851aec8d0f280fe5ea79afcef78c78a927abb0581b",
+      "grocery_data/app/services/municipal_rollout.py": "ae013612ab591ff15fd5652994fbd641e46603c74f8ef957a7f3a4b7a618e7aa"
+    },
+    "base_line_endings": "Verified CRLF packaging; normalized bytes match base Git commit exactly",
+    "tag": "smako-municipal-source:f6a38b849035",
+    "image": "sha256:41b4d697b8e810a1fe259d69755faed468f917727859dc03d5213e40a69b9f62"
+  },
+  "coverage_gaps": {
+    "municipality": "1280",
+    "basis": "retained production observations; no new retailer requests",
+    "xtra": {
+      "3646": {
+        "name": "X:-tra Söderkulla",
+        "status": "blocked_publication",
+        "source_url": "https://dr.coop.se/Butik/?store=216532",
+        "observed_at": "2026-10-10T22:21:59.775062+00:00",
+        "reason": "Official publication link returned HTTP 302 to dr-saknas (missing publication).",
+        "action": "Recheck official store-linked current publication at the existing retry time; do not substitute another store flyer."
+      },
+      "3829": {
+        "name": "X:-tra Nydala",
+        "status": "missing_publication_link",
+        "evidence": {
+          "source_url": "https://x-tra.se/butiker/nydala",
+          "sha256": "2d38b9a104cf7a733d1ff65972df25351b1999d208205572b3021f3069fd7f17",
+          "observed_at": "2026-10-10T22:22:00.057954+00:00",
+          "field_path": "props.pageProps.data.store.weeklyOffersLink",
+          "store": {
+            "id": 3829,
+            "ledgerAccountNumber": "106413",
+            "streetName": "Nydalatorget 4",
+            "city": "Malmö",
+            "weeklyOffersLink": ""
+          }
+        },
+        "action": "The official store identity matches but weeklyOffersLink is empty. Wait for or verify a valid store-bound official publication."
+      }
+    },
+    "coop": {
+      "3831": {
+        "name": "Coop Djupadal",
+        "status": "failed",
+        "error_type": "ConnectorFetchError",
+        "stage": "public_offer_fetch",
+        "own": 0
+      },
+      "3833": {
+        "name": "Coop Malmö Central",
+        "status": "failed",
+        "error_type": "ConnectorFetchError",
+        "stage": "public_offer_fetch",
+        "own": 0
+      },
+      "3835": {
+        "name": "Coop Kornettsgatan",
+        "status": "failed",
+        "error_type": "ConnectorFetchError",
+        "stage": "public_offer_fetch",
+        "own": 0
+      }
+    },
+    "coop_action": "Current evidence only proves a ConnectorFetchError at public_offer_fetch. Preserve failed stores in coverage, collect sanitized exception-chain evidence on a future ordinary attempt, then repair only the verified transport/schema cause.",
+    "hemkop_4199": {
+      "snapshot_id": "137bdfd509df41e2869c88128c1cabab",
+      "store_id": "4199",
+      "failure_type": "CatalogCompletenessError",
+      "exact_evidence_reconciles": true,
+      "is_full_traversal": true,
+      "products_observed": 7066,
+      "minimum_products_for_full_catalog": 8000,
+      "raw_count": 93,
+      "http_error_count": 0,
+      "reason": "Full traversal reconciles, but unique product count is below the configured store minimum.",
+      "action": "Review a store-specific catalog baseline against retained exact source evidence; do not lower the chain-wide minimum or bypass qualification."
+    },
+    "hemkop_catalog_minimum": [
+      {
+        "store_id": "4212",
+        "snapshot_id": "245ab3d913b6447f98ca16ac7fb1dbc5",
+        "failure_type": "CatalogCompletenessError",
+        "is_full_traversal": true,
+        "exact_evidence_reconciles": true,
+        "unique_products": 6459,
+        "minimum_products": 8000,
+        "below_floor": true
+      },
+      {
+        "store_id": "4199",
+        "snapshot_id": "137bdfd509df41e2869c88128c1cabab",
+        "failure_type": "CatalogCompletenessError",
+        "is_full_traversal": true,
+        "exact_evidence_reconciles": true,
+        "unique_products": 7066,
+        "minimum_products": 8000,
+        "below_floor": true
+      }
+    ]
+  },
+  "third_municipality_registration_dry_run": {
+    "status": "PASS",
+    "runtime_dry_run": "Göteborg 1480/41110",
+    "actual_enabled_codes": [
+      "1280",
+      "1281"
+    ],
+    "proposed_codes": [
+      "1280",
+      "1281",
+      "1480"
+    ],
+    "existing_scopes_preserved": true,
+    "registry_file_unchanged": true,
+    "registry_sha256": "53e11bd1b11f83a32c988123cbc2b31202244e853d313db3c40ece30e939391b",
+    "external_price_requests": 0,
+    "persisted": false
+  },
+  "lund": {
+    "http_status": 200,
+    "body": {
+      "status": "ready",
+      "build_id": "municipal-app-2b83475f5e68",
+      "universe_id": "price-universe:8c855b102a34bec27ac21b230d9696386b75718a60c307a6f1fb4a5f4333f5d0",
+      "required_contexts_usable": true
+    }
+  },
+  "tests": {
+    "app_image_pass": 17,
+    "original_source_image_pass": 33,
+    "updated_source_image_pass": 33,
+    "store_scheduling_local_cases_pass": 15,
+    "prior_unique_focused_offline_cases": 216,
+    "full_repository_suite_claim": false,
+    "counts_are_separate_runs_not_unique_sum": true,
+    "live_controls": [
+      {
+        "browser": "chromium",
+        "page": "public",
+        "status": "pass",
+        "permissions_policy": "camera=(self), geolocation=(self), microphone=()",
+        "contexts": 48,
+        "manual_store": "context:willys:5adaf178f6561faa",
+        "nearby_count": 6,
+        "municipality": "1280",
+        "geolocation": "simulated position; actual API distance calculation",
+        "page_errors": [],
+        "store_status": [
+          "6 inköpsställen valda inom 1 km fågelvägen. Granska och ändra kryssen om du vill. Butiker utan verifierad position valdes inte."
+        ]
+      },
+      {
+        "browser": "chromium",
+        "page": "personal",
+        "status": "pass",
+        "permissions_policy": "camera=(self), geolocation=(self), microphone=()",
+        "contexts": 48,
+        "manual_store": "context:willys:5adaf178f6561faa",
+        "nearby_count": 6,
+        "municipality": "1280",
+        "geolocation": "simulated position; actual API distance calculation",
+        "page_errors": [],
+        "store_status": [
+          "6 inköpsställen valda inom 1 km fågelvägen. Granska och ändra kryssen om du vill. Butiker utan verifierad position valdes inte."
+        ]
+      },
+      {
+        "browser": "webkit",
+        "page": "public",
+        "status": "pass",
+        "permissions_policy": "camera=(self), geolocation=(self), microphone=()",
+        "contexts": 48,
+        "manual_store": "context:willys:5adaf178f6561faa",
+        "nearby_count": 6,
+        "municipality": "1280",
+        "geolocation": "simulated position; actual API distance calculation",
+        "page_errors": [],
+        "store_status": [
+          "6 inköpsställen valda inom 1 km fågelvägen. Granska och ändra kryssen om du vill. Butiker utan verifierad position valdes inte."
+        ]
+      },
+      {
+        "browser": "webkit",
+        "page": "personal",
+        "status": "pass",
+        "permissions_policy": "camera=(self), geolocation=(self), microphone=()",
+        "contexts": 48,
+        "manual_store": "context:willys:5adaf178f6561faa",
+        "nearby_count": 6,
+        "municipality": "1280",
+        "geolocation": "simulated position; actual API distance calculation",
+        "page_errors": [],
+        "store_status": [
+          "6 inköpsställen valda inom 1 km fågelvägen. Granska och ändra kryssen om du vill. Butiker utan verifierad position valdes inte."
+        ]
+      }
+    ],
+    "menu": {
+      "status": 201,
+      "browser": "webkit isolated context",
+      "acceptance": {
+        "postal_scope_preserved": true,
+        "selected_store_filter": true,
+        "five_dinners_two_servings": true,
+        "ten_total_portions": true,
+        "full_recipes": true,
+        "five_visible_recipe_cards": true,
+        "quantities_rendered": true,
+        "shopping_rows_rendered": true,
+        "max_three_stores": true,
+        "exact_request": true,
+        "memberships_preserved": true,
+        "selected_diversity_preserved": true,
+        "verified_basket": true,
+        "total_reconciled": true,
+        "basket_audit_passed": true,
+        "nutrition_quality_passed": true,
+        "quality_label_visible": true
+      },
+      "identical_reload": true,
+      "selected_store_ids": [
+        "context:willys:5adaf178f6561faa"
+      ],
+      "plan_sha256": "e5865aa6df1ac7338db35bb1f25fa42941e0e5c76ba1bf0748de8b44781867e4"
+    }
+  },
+  "previous_user_rows": {
+    "consumer_plan_revisions": {
+      "before": 252,
+      "after": 255,
+      "all_previous_rows_preserved": true
+    },
+    "personal_private_state": {
+      "before": 82,
+      "after": 82,
+      "all_previous_rows_preserved": true
+    }
+  },
+  "limitations": [
+    "Live tests use simulated geolocation and isolated browser profiles, not a physical phone.",
+    "Selectable contexts do not imply full municipal retailer coverage; offer feeds and online catalogs retain distinct scope.",
+    "Coop full crawl remains limited to 730400; Coop/X:-tra publication gaps and Lund Hemkop 4224 schema hold remain.",
+    "Before larger municipalities: measure storage and total sequential duration against two-hour collection and three-hour Windows task limits."
+  ],
+  "capacity_at_final_verification": {
+    "checked_at": "2026-10-11T00:33:41.331159+00:00",
+    "storage": {
+      "free_bytes": 13850869760,
+      "required_estimate_bytes": 9613792496,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    }
+  }
+}

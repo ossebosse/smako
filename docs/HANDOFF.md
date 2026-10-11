@@ -1,92 +1,40 @@
-# 2026-10-11: Malmö publicerat och kvitterat – platsåtkomst återstår
+# 2026-10-11: Malmö i kommunvis drift, platsval och butiksvisa återförsök verifierade
 
 Permanent rot `D:\Projects\Smako`, gren `feature/municipality-rollout`.
-Tider nedan är UTC den10 oktober. Användaren har gjort Windowsadministratörs-
-steget och bett oss slutföra kommunvis drift med Malmö som liveprov.
+Användarens administratörssteg för relä `f5b6aedc851d` är verifierat.
+Malmö och Lund är tillgängliga; Malmö har 2529 produkter och
+48 valbara butiks-/priskontexter. Detta är inte full kedjetäckning.
 
-**Serverruntime `2b83475f5e68` är aktiverad. Malmö är ready200 och valbart.**
-Första Malmömanifestet `8d1199ee36ab056db7fa134bc78ae7856cab13ab62cd3ce97c41d865abd545fc`
-publicerades22:37 och bekräftades laddat före22:39. Reläkvittot skrevs22:44:12.
-Första fullständiga kedjekontrollen PASS22:46: samma paketdigest, importerad och
-promoted källa, publicerat/laddat universum och reläkvitto. Bevara den historiska
-kontrollen även när ordinarie nästa uppdatering publicerar ett nyare manifest.
+App `2b83475f5e68`, källinsamlare `f6a38b849035`, proxyfix `1fc4b6c` är aktiva.
+Samma Windowsuppgift och servercron fortsätter kommunvis. Automatisk reläkontroll
+23:30 UTC lyckades för båda kommunerna utan nya prisförfrågningar.
+Källinsamlarens nya planering begränsar Hemköps återförsök till de butiker som
+behöver uppdateras och sparar väntetid per butik. Kvalitetsgränser är oförändrade.
 
-Malmö har2376 produkter i PriceUniverse och46 valbara butiker/priskanaler:
-ICA23, Willys10 (fyra onlinekataloger plus sex erbjudandekanaler), Lidl8,
-Hemköp4 erbjudandekanaler, City Gross1. Detta är inte46 unika fysiska butiker
-eller fullständig kedjetäckning. Coop/Stora Coop/X:-tra saknas ännu i urvalet.
-Willyskällan omfattar39594 butik/varu-rader,11422 olika produkter, fyra verifierade
-onlinebutiker: Emporia2244, Katrinelund2114, Limhamn2144 och Mobilia2253.
-Insamling5168,609 sekunder,2572 HTTP200, inga HTTP-fel eller åtkomstutmaningar.
-Källsnapshot `61046f2474d543c98d8d539f808412e5`; paketSHA
-`1b6bd8531687f0e8dfe13f520bd0d5ef6669d25e16b98d99ea90636c7f5e10fc`.
+Fyra riktiga browserfall (publik/personlig, Chromium/WebKit) passerar med
+produktionens platsåtkomst. Manuell butik, kommunspecifika sparade val och
+avståndsurval är kontrollerade. GPS-positionen är simulerad; avstånds-API:t är äkta.
+En riktig Malmömeny begränsad till Willys Emporia passerar beräkning, inköpskorg
+och identisk omladdning. Alla tidigare privata rader är hashbevarade.
 
-Lund är fortsatt ready200 med20 kontexter. Senast kontrollerat Lundmanifest:
-`8c855b102a34bec27ac21b230d9696386b75718a60c307a6f1fb4a5f4333f5d0`.
-En riktig publik Malmömeny för fem middagar/två portioner, begränsad till Willys
-Emporia, passerade alla kvalitets-, korg-, butiksvälj- och omladdningskontroller
-på10,172 sekunder. Alla252 tidigare planrevisioner och82 privata tillstånd är
-hashbevarade; ett separat test lade till en ny planrevision.
+Detaljer, uppmätta kapacitetsgränser och nästa kommuns kommandon finns i
+[kommunbeskrivningen](municipality_coverage.md) och
+[releasebeviset](releases/municipal-rollout-20261011/ACTIVATED.json).
+Första reläkvittot hör till första Malmömanifestet; senare normal publicering
+har ett nyare manifest. Jämför aktuell publicering med laddad version och rätt
+källsnapshot, inte med ett historiskt reläkvitto för samma oförändrade Willysfil.
 
-**Återstående verkligt UI-hinder:** Caddys `Permissions-Policy` har
-`geolocation=()`. Därför misslyckar "nära mig" trots fungerande manuella val.
-Rättningen `1fc4b6c` ändrar endast detta till `geolocation=(self)` i källkoden.
-Den verkligt bundna proxykonfigurationens motsvarande ändring är validerad med
-Caddy. OBS: `/opt/smako/current/deploy/Caddyfile` motsvarar INTE filen som den
-befintliga containern har bunden; använd inte den filen som runtimebas.
-Aktiveringsscriptet bevarar verkligt bunden config, faktisk miljö, binärimage,
-TLS-volymer och portar, och fäster ändrad config på en explicit ny sökväg.
-Admin-API är avstängt, så endast proxyn måste återskapas kortvarigt.
+Kvarvarande hinder: Coop/X:-tra saknar godkända Malmökanaler; Värnhem och
+Elinegårds fullkataloger når inte befintlig 8 000-varugräns. Verifiera separata
+butiksbaslinjer, utan att sänka kedjans generella kvalitetskrav. Lund 4224 har
+fortsatt schemahold. Större kommuner kräver kapacitetskontroll och kan behöva
+återupptagbar insamling per butik. Göteborg är bara torrkört, inte aktiverat.
 
-Tillfällig operatörsväntare kör `.local/municipal-rollout/run_geolocation_activation.py`
-i execsession62589. Den väntar tills schemaläggaren bara körcron, tar vanliga
-operationslåset och aktiverar ENDAST proxyn. Ingen extra schemaläggning.
-Följ `geolocation-activation.stdout/.stderr`. Deadline cirka00:45 UTC;
-aktuellt Hemköpsvarv kan nå sin7200s-gräns strax efter detta. Vid timeout före
-lease/E-skapande har inget ändrats; invänta verkligen avslutat jobb och återuppta
-samma granskade aktivering. Avbryt inga källhämtningar. Vid fel efter lease:
-inspektera exakt tillstånd/backup, kör inte om blint.
-
-Ordinarie kontroll22:45 valde Malmö/Hemköp med den rättade planeringen.
-Första katalogen4114 började22:46:59 (snapshot `a779dccf11664a68a80fd5fd4490716d`).
-Insamlingen pågår; klientens oförändrade standard är0,1 anrop/sekund och en
-anslutning. Detta är en verklig kapacitetsgräns för flera stora kommuner, inte
-skäl att höja trafikgränser eller ändra färskhetskrav. Hemköps samtliga full-
-kataloger är ännu inte liveverifierade. Lund4224 har kvar schemahold.
-
-När proxyn är aktiv: kör den nya återanvändbara kontrollen från `4194ce3`:
-
-```powershell
-.venv/Scripts/python.exe -X utf8 scripts/release_verification/municipal_live_browser.py --output .local/municipal-rollout/malmo-live-controls-fixed --municipality 1280 --postal-code 21120 --latitude 55.605 --longitude 13.0038
-```
-
-Den provar publik/personlig sida i Chromium/WebKit, separata rader, kommunvis
-sparade kryss och verklig avstånds-API med simulerad GPS. Nuvarande policy ger
-förväntat tydligt fel, dokumenterat i `geo-policy-negative`. Ruff/compileall PASS.
-Äldre lokala kontrollen `test_malmo_live_controls.py` misslyckade vid platsåtkomst;
-ingen fullständig Malmöbrowseracceptans får påstås förrän rättningen verifierats.
-
-Viktiga bevis under `.local/municipal-rollout/`: `malmo-chain-acceptance.json`,
-`malmo-qualified-source.json`, `malmo-public-menu/clean-balanced.json`,
-`malmo-first-published-report.json`, `malmo-selectable-contexts.json`,
-`recovery-activation.stdout`, `preservation.json`, `resume-state.json`.
-`write_acceptance_report.py` är en förberedd rapportgenerator, ännu INTE körd;
-uppdatera den för proxyfix, rätt browsermapp och eventuellt nyare prisuniversum.
-Första kedjeprovet matchar med avsikt första relämanifestet; en senare ordinär
-publicering ska separat verifieras laddad och innehålla samma Willysnapshot.
-Slutför senaste drift-/källrapport, eventuellt menyprov mot nytt manifest,
-privatdatabevarande och docs/commits före slutrapport till användaren.
-
-Tidigare aktivering:21:45:44 under gemensamt lås, enbart app/source-image och
-BUILD_ID.17 appimage- och33 sourceimagefall PASS, tidigare216 fokuserade fall,
-Ruff/compileall och fyra livekontroller för Lund. App/source innehåller03f0691
-(Hemköps transport återläser kommuninventering),2b83475 (saknade kataloger förblir
-planerade) och74d5c03 (butiksrader). Backup:
-`/opt/smako/evidence/municipal-recovery-activation-2b83475f5e68`.
-Windowsuppgiften fortsätter använda verifierat f5b6aed-paket, `-Municipalities`,
-samma konto/triggers/settings. Inget ytterligare administratörssteg behövs.
-
-[Driftväg och geografiskt kontrakt](municipality_coverage.md).
+Caddys korrekta runtimefil är nu explicit bunden till
+`/opt/smako/overrides/Caddyfile.geolocation-1fc4b6c`. Den tidigare bindningen
+motsvarade inte aktuella symlänksökvägen. Bevara denna exakta konfiguration.
+Aktiveringarna ändrade inte appens användardata, taskkonto eller cron-schema.
+Inga operatörsväntare ska återstartas efter deras bekräftade framgång.
 
 ---
 
