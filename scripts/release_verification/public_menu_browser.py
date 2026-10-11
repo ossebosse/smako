@@ -28,7 +28,7 @@ def main():
     parser.add_argument('--base', default='https://beta.smako.nu')
     parser.add_argument('--case')
     parser.add_argument('--postal-code', default='22350')
-    parser.add_argument('--store-context', help='Select exactly this published context via its checkbox')
+    parser.add_argument('--store-context', action='append', help='Select a published context via its checkbox; repeat for several stores')
     parser.add_argument('--browser', choices=['chromium', 'webkit'], default='chromium')
     parser.add_argument('--reject-postal-first')
     parser.add_argument('--ignore-https-errors', action='store_true', help='Only for isolated self-signed candidate TLS')
@@ -88,11 +88,11 @@ def main():
                 assert page.locator('#servings').input_value() == '2' and page.locator('#max-stores').input_value() == '3'
                 select_area(page, args.base, args.postal_code)
             if args.store_context:
-                selected = page.locator('[id="context-' + args.store_context + '"]')
-                selected.wait_for(state='visible', timeout=30000)
+                page.locator('[id="context-' + args.store_context[0] + '"]').wait_for(state='visible', timeout=30000)
                 for checkbox in page.locator('input[id^="context-"]:checked').all():
                     checkbox.uncheck()
-                selected.check()
+                for identity in args.store_context:
+                    page.locator('[id="context-' + identity + '"]').check()
             fields = page.locator('#plan-form input, #plan-form select').evaluate_all('(es)=>es.map(e=>({name:e.name,id:e.id,type:e.type,value:e.value,checked:e.checked}))')
             page.screenshot(path=str(args.output / (name + '-before.png')), full_page=True)
             started = time.monotonic()
@@ -150,8 +150,8 @@ def main():
                 report['acceptance'] = {
                     'postal_scope_preserved': body['request']['postal_code'] == args.postal_code,
                     'selected_store_filter': args.store_context is None or (
-                        request.post_data_json.get('allowed_store_ids') == [args.store_context]
-                        and {store['store_id'] for store in basket['stores']} <= {args.store_context}
+                        sorted(request.post_data_json.get('allowed_store_ids', [])) == sorted(args.store_context)
+                        and {store['store_id'] for store in basket['stores']} <= set(args.store_context)
                     ),
                     'five_dinners_two_servings': len(recipes) == 5 and all(r['servings'] == 2 for r in recipes),
                     'ten_total_portions': plan['portions'] == 10,
