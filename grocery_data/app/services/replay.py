@@ -36,6 +36,9 @@ from grocery_data.app.services.collector import (
 from grocery_data.app.services.coop_online_context_activation import (
     activate_promoted_coop_online_context,
 )
+from grocery_data.app.services.hemkop_context_collection import (
+    activate_promoted_hemkop_online_context,
+)
 from grocery_data.app.services.raw_storage import FilesystemRawSnapshotStore
 from grocery_data.app.storage import (
     CollectorRunRepository,
@@ -527,6 +530,10 @@ class DatabaseReplayService:
                         ),
                     )
                     activate_promoted_coop_online_context(session, promoted_snapshot)
+                    if connector.chain.value == "hemkop" and ":hemkop:" in scope_key:
+                        # Exact modern store scopes retain the same atomic
+                        # snapshot/context contract as a live collection.
+                        activate_promoted_hemkop_online_context(session, promoted_snapshot)
                 elif assessment.status == ConnectorStatus.BROKEN:
                     snapshots.reject(replay_id, reason="replay health check failed")
                 active = snapshots.active(connector.chain, scope_key=scope_key)
