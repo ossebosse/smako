@@ -11,6 +11,7 @@ import os
 import shutil
 import sqlite3
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -278,13 +279,16 @@ def status(environment=None, *, now=None):
     env = os.environ if environment is None else environment
     now = now or datetime.now(UTC)
     database, universe, root = paths(env)
-    state = read_json(root / 'demand-refresh.json')
-    manifest = read_json(universe / 'active' / ('city-' + env.get('REFRESH_CITY', 'Lund').lower() + '.json'))
+    city = env.get('REFRESH_CITY', 'Lund')
+    state = read_json(Path(env.get('DEMAND_REFRESH_STATE_PATH', str(root / 'demand-refresh.json'))))
+    manifest = read_json(universe / 'active' / ('city-' + city.lower() + '.json'))
     base = env.get('INTERNAL_APP_BASE_URL', 'http://127.0.0.1:8000').rstrip('/')
-    ready = request_json(base + '/ready')
-    serving = request_json(base + '/api/price-universe/status')
+    ready = request_json(base + '/ready?' + urllib.parse.urlencode({'postal_code': env.get('REFRESH_POSTAL_CODE', '22350')}))
+    serving = request_json(base + '/api/price-universe/status?' + urllib.parse.urlencode({'city': city}))
     loaded_ids = set(serving.get('body', {}).get('snapshot_ids', []))
     required_ids = set(filter(None, env.get('PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS', '').split(',')))
+    if not required_ids:
+        required_ids = {row['store_id'] for row in state.get('base_scope', [])}
     contexts = []
     with readonly(database) as db:
         for physical in state.get('base_scope', []):
@@ -424,7 +428,9 @@ def record_indicators(environment=None):
         pipeline = read_json(pipeline_path)
         if pipeline:
             for item in pipeline.get('incidents', {}).values():
-                if item['status'] == 'open':
+                if (item['status'] == 'open'
+                        and ' '.join(str(item.get('scope', '')).casefold().split())
+                        == ' '.join(env.get('REFRESH_CITY', 'Lund').casefold().split())):
                     item.update(status='recovered', recovered_at=now, verified_manifest=current['loaded_manifest'])
             atomic_write_bytes(pipeline_path, json.dumps(pipeline).encode())
     return {'active': [k for k,v in history['indicators'].items() if v['active']],

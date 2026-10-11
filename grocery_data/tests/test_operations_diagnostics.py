@@ -130,6 +130,68 @@ def test_unreachable_app_and_missing_index_never_green(context, monkeypatch):
     assert 'private token' not in json.dumps(value)
 
 
+def test_municipal_status_uses_own_journal_catalog_and_serving_scope(context, monkeypatch):
+    from urllib.parse import parse_qs, urlsplit
+
+    c = context
+    snapshot(c, 'malmo-new', state='promoted', chain='willys')
+    with sqlite3.connect(c.database) as db:
+        db.execute('INSERT INTO source_products VALUES (?,?,?,?)',
+                   ('malmo-new', 'willys', 'malmo-store', '2026-10-08T12:00:00+00:00'))
+    municipal = c.root / 'municipalities/1280/demand-refresh.json'
+    municipal.parent.mkdir(parents=True)
+    municipal.write_text(json.dumps({'base_scope': [{'store_id': 'context:willys:malmo',
+        'chain': 'willys', 'source_provenance': {'provider_store_id': 'malmo-store'}}]}))
+    (c.root / 'demand-refresh.json').write_text(json.dumps({'base_scope': [
+        {'store_id': 'context:willys:lund', 'chain': 'willys'}]}))
+    (c.universe / 'active/city-malmö.json').write_text(json.dumps(
+        {'universe_id': 'malmo-disk', 'snapshot_ids': ['malmo-new']}))
+    env = c.env | {'REFRESH_CITY': 'Malmö', 'REFRESH_POSTAL_CODE': '21120',
+                   'DEMAND_REFRESH_STATE_PATH': str(municipal),
+                   'PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS': ''}
+    requests = []
+
+    def request(url):
+        path, query = urlsplit(url).path, parse_qs(urlsplit(url).query)
+        requests.append((path, query))
+        if path == '/ready' and query == {'postal_code': ['21120']}:
+            return {'http_status': 503, 'body': {'status': 'not_ready'}}
+        if path == '/api/price-universe/status' and query == {'city': ['Malmö']}:
+            return {'http_status': 200, 'body': {'universe_id': 'malmo-old', 'snapshot_ids': ['old']}}
+        return {'http_status': 200, 'body': {'universe_id': 'lund-ready', 'snapshot_ids': ['malmo-new']}}
+
+    monkeypatch.setattr(ops, 'request_json', request)
+    result = ops.status(env, now=datetime(2026, 10, 8, 14, tzinfo=UTC))
+    assert result['disk_manifest'] == 'malmo-disk'
+    assert result['loaded_manifest'] == 'malmo-old'
+    assert result['ready']['http_status'] == 503
+    assert len(result['required_contexts']) == 1
+    row = result['required_contexts'][0]
+    assert row['context_id'] == 'context:willys:malmo'
+    assert row['published'] and not row['loaded']
+    assert requests == [('/ready', {'postal_code': ['21120']}),
+                        ('/api/price-universe/status', {'city': ['Malmö']})]
+
+
+def test_pipeline_recovery_cannot_close_other_municipality(context, monkeypatch):
+    value = {'checked_at': '2026-10-08T14:00:00+00:00', 'storage': {'adequate': True},
+             'ready': {'http_status': 200}, 'disk_manifest': 'lund-ready',
+             'loaded_manifest': 'lund-ready', 'unknown_required_contexts': [],
+             'required_contexts': [{'context_id': 'lund', 'incident_ids': [],
+                                    'loaded': True, 'freshness': 'FRESH'}]}
+    monkeypatch.setattr(ops, 'status', lambda _: value)
+    path = context.root / 'pipeline-incidents.json'
+    path.write_text(json.dumps({'incidents': {
+        'lund': {'scope': 'Lund', 'status': 'open'},
+        'malmo': {'scope': 'Malmö', 'status': 'open'},
+        'unknown': {'status': 'open'}}}))
+    ops.record_indicators(context.env)
+    rows = json.loads(path.read_text())['incidents']
+    assert rows['lund']['status'] == 'recovered'
+    assert rows['malmo']['status'] == rows['unknown']['status'] == 'open'
+    assert 'verified_manifest' not in rows['malmo']
+
+
 def test_disk_margin_warning(context, monkeypatch):
     monkeypatch.setattr(ops.shutil,'disk_usage',lambda _: SimpleNamespace(free=1))
     monkeypatch.setattr(ops,'request_json',lambda _: {'status':'unknown'})
