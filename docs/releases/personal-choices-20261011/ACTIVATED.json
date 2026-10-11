@@ -1,0 +1,92 @@
+{
+  "schema": "smako-personal-choices-release-v1",
+  "commit": "b48ca5925820bc4eb87c2d46fb5f32104fe1d2f5",
+  "build_id": "personal-choices-b48ca5925820",
+  "package_sha256": "dd8e9eccd110f53a00d481a9d96251211f14358ac38cb0004094c286058f9827",
+  "base_image": "sha256:693166ba9e7d117c7099e2c87b20e6892093331a502ef9d8b6869bd956372ca8",
+  "files": {
+    "backend/app/api/personal.py": "74072f15378000239eb218ab9f75f62c81422088270043699943c4ac18cfcedd",
+    "backend/app/models/personal.py": "33eb36d004debfa656a8c41972d850024442d550848f0bd9a57864e709ba52c5",
+    "backend/app/static/complete-recipes.js": "e91749ee7b42863d66ac7163c651f30fd4e3365e541362546745f0a15ad5bdde",
+    "backend/app/static/personal.css": "0076699a7f2b45427fc74753b969212bc2867d0748a54ef4fd1f0d219de0a4eb",
+    "backend/app/static/personal.html": "73a964cf12dcee3db3b84b268dacf4d262a2012e5dbc591d7a2498166b35072a",
+    "backend/app/static/personal.js": "dc3911635f7c3be17679045964ead7402eba6912e6581f99fce339eda6563975"
+  },
+  "candidate": {
+    "status": "pass",
+    "build_id": "personal-choices-b48ca5925820",
+    "seconds": 107.0,
+    "identical_reload": true,
+    "checkout_audit": true,
+    "recalculation_verified": true,
+    "errors": []
+  },
+  "webkit": {
+    "status": "pass",
+    "browser": "webkit",
+    "overflow": false,
+    "static_files_verified": [
+      "backend/app/static/complete-recipes.js",
+      "backend/app/static/personal.css",
+      "backend/app/static/personal.html",
+      "backend/app/static/personal.js"
+    ],
+    "errors": []
+  },
+  "local_verification": {
+    "focused_tests_passed": 51,
+    "ruff": "pass",
+    "compileall": "pass",
+    "javascript_syntax": "pass"
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-11T15:07:33.174843+00:00",
+    "build_id": "personal-choices-b48ca5925820",
+    "image": "sha256:8040a97b586b310a48b260012746798eefd87d8d945feee08d1bcf585f9978b5",
+    "old_image": "sha256:693166ba9e7d117c7099e2c87b20e6892093331a502ef9d8b6869bd956372ca8",
+    "ready": "ready",
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 256,
+      "personal_private_state": 82
+    },
+    "price_manifests_preserved": true,
+    "mounts_and_environment_preserved": true,
+    "cpu_quiet_samples": [
+      0.05,
+      0.02
+    ],
+    "backup": "/opt/smako/evidence/personal-choices-b48ca5925820/backup-20261011T150622Z",
+    "operation_lock": true
+  },
+  "live": {
+    "status": "pass",
+    "build_id": "personal-choices-b48ca5925820",
+    "seconds": 35.5,
+    "identical_reload": true,
+    "checkout_audit": true,
+    "recalculation_verified": false,
+    "errors": []
+  },
+  "live_webkit": {
+    "status": "pass",
+    "browser": "webkit",
+    "overflow": false,
+    "static_files_verified": [
+      "backend/app/static/complete-recipes.js",
+      "backend/app/static/personal.css",
+      "backend/app/static/personal.html",
+      "backend/app/static/personal.js"
+    ],
+    "errors": []
+  },
+  "post_activation_status": {
+    "server_status": "observed",
+    "http": 200,
+    "build": "personal-choices-b48ca5925820",
+    "price_status": "fresh",
+    "same_published_loaded": true,
+    "windows_status": "observed"
+  }
+}

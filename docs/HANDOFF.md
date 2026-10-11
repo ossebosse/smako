@@ -1,3 +1,19 @@
+# 2026-10-11 15:07 UTC: Mina val aktiverad på betan
+
+App `personal-choices-b48ca5925820` är aktiverad efter uttryckligt godkännande.
+Huvudreglage för middagar, 1–6 portioner och butikstak; övriga val under Extraval,
+valbar frukost/mellanmål, gemensam smak-/allergiprofil och näringsreglage.
+Spårbara näringsuppskattningar och uppskattade köp tillåts i nya planer/omräkning.
+
+256 tidigare planrevisioner och 82 privata tillstånd är bevarade; endast appen
+byttes under driftlås. Scheduler, proxy, prismanifest, miljö och Windowsuppgift
+är oförändrade. Publik Chromium-planering, checkout-audit, identisk återläsning
+samt WebKit-mobilkontroller passerar. Låset är släppt och testappen stoppad.
+Inga aktiveringsväntare ska återstartas.
+[Verifiering och återgång](releases/personal-choices-20261011/VERIFIED.md).
+
+---
+
 # Lägg till nästa kommun — kort arbetsgång för Codex
 
 Uppdaterad 2026-10-11. Vid kommunutökning: läs denna sektion och obligatoriska
