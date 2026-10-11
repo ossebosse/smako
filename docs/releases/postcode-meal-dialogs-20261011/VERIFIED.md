@@ -51,4 +51,49 @@ Källdataarkivet är lokal, ignorerad arbetsdata och distribueras inte i appen.
 - Ruff, compileall och JavaScript-syntaxkontroller.
 - Mobilbilder granskade vid 390 px; inga horisontella överflöden.
 
-Aktivering och verklig menyverifiering dokumenteras separat när genomförda.
+## Aktiverad på betan
+
+Aktiverad 2026-10-11 18:24:07 UTC (20:24 svensk tid). Appcommit
+`93c4f9ac4505a1cf8f839f8928ee6e965ee32e35`, BUILD_ID
+`postcode-meals-93c4f9ac4505`. [Aktiveringsbevis](ACTIVATED.json).
+
+Bild: `sha256:81501a07c22e49f1e889f89a6f1f0d3cdd1879172c64fe30b5498ad10be938b2`.
+Paket: `6a7200626eae4515548dd1defc44a2e79dffe8760b06ad35c0562b75065e42f1`.
+Tio appfiler som delta på exakt föregående betabild. Befintliga basfilhashar
+matchade testad Git-bas; nytillagda filer saknades i basen som förväntat.
+
+66 riktade lokala testfall passerar. Den isolerade kandidaten använde båda
+kommunernas register och publicerade underlag. Chromium skapade en middag
+för två portioner med valt Willys-underlag i Lund, räknade om och läste
+identisk sparad plan (97,2 s inklusive kontroller). Checkout-audit och
+summakontroll passerade. WebKit verifierade hela Malmövalet (63 inköpsställen),
+reglage, tillval och mobilbredd. Okänt postnummer och Stockholm utanför
+aktuell täckning gav separata, korrekta svar. Fem statiska filer hashverifierades.
+
+På publika `https://beta.smako.nu/personal#choices` passerade samma nya
+planflöde med checkout-audit och identisk återläsning (57,4 s). WebKit/Malmö-
+kontrollen och samtliga fem filhashar passerade också; inga sidfel observerades.
+Detta är automatiserad mobilvy, inte ett fysiskt iPhone-prov.
+
+Aktiveringen väntade på befintligt driftlås, kontrollerade lugn planering,
+tog SQLite-backup och bytte endast appbild och BUILD_ID. Samtliga 257 tidigare
+planrevisioner och 83 privata tillstånd hashbevarades före publik testplan.
+Mountar, övrig miljö, prismanifest, scheduler, proxy och övriga containrar
+bevarades. Windowsuppgiften ändrades inte. Driftkontrollen efter aktivering
+visar samma publicerade/laddade Lund-manifest, fem obligatoriska källor
+publicerade/laddade och `/ready` för nya BUILD_ID. Lund och Malmö har aktiva
+underlag med äldsta användbara priser cirka 23,7 respektive 22,7 timmar gamla.
+
+Serverbevis och skyddad backup:
+`/opt/smako/evidence/postcode-meals-93c4f9ac4505`.
+Lokala testbevis: `.local/postal-final/` samt tidigare `.local/postal-choices/`.
+Testcontainrarna är stoppade, SSH-tunneln stängd och driftlåset släppt. Ingen
+aktiveringsväntare återstår.
+
+## Återgång
+
+Tidigare bild:
+`sha256:8040a97b586b310a48b260012746798eefd87d8d945feee08d1bcf585f9978b5`.
+Den tidigare Compose-wrappern finns i serverbevisets `compose-wrapper.before`.
+Återgång ska ske under samma driftlås och behålla senaste databasen. Återställ
+inte den äldre databasbackupen som normal appåtergång.

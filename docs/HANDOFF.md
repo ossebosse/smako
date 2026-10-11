@@ -1,3 +1,22 @@
+# 2026-10-11 18:24 UTC: Postnummer och måltidsfönster aktiverade
+
+App `postcode-meals-93c4f9ac4505` kör på betan. Mina val börjar med postnummer,
+ungefärlig 10-km-kontroll och val av butiker (1–5 km, kommun eller krysslista).
+Måltidskort har tre dialogknappar och gemensamma min/max-reglage. Fördelningen
+ryms alltid i måltidsantalet. Receptstil är kvar enligt användarens instruktion.
+63 butiker i Malmö fungerar efter höjt explicit urvalstak; butikstaket för
+själva korgen är oförändrat. Avstånd bygger på ungefärliga GISCO-referenspunkter,
+och radieval gäller ett befintligt prisområde åt gången.
+
+66 lokala testfall, isolerad riktig meny/omräkning, publik meny/audit/identisk
+återläsning samt WebKit/Malmö-kontroll passerar. 257 tidigare planrevisioner
+och 83 privata tillstånd är bevarade. Endast appen byttes under driftlås;
+Windowsuppgift, scheduler, prismanifest och övrig miljö bevarades.
+Testcontainrar och tunnel är stängda. Inga aktiveringsväntare återstår.
+[Verifiering, geografiska begränsningar och återgång](releases/postcode-meal-dialogs-20261011/VERIFIED.md).
+
+---
+
 # 2026-10-11 15:07 UTC: Mina val aktiverad på betan
 
 App `personal-choices-b48ca5925820` är aktiverad efter uttryckligt godkännande.
