@@ -1,3 +1,23 @@
+# 2026-10-12: Ingrediensantal i Mina val — lokalt verifierat
+
+Gren `feature/ingredient-count-choices` ersätter personliga receptstil-/nivåval
+med synliga min/max-gränser per måltidstyp. Nya personliga förfrågningar använder
+befintligt måltidsbibliotek utan nivåfilter; tomma gränser tillåter alla antal.
+Äldre uttryckliga ingrediens-/tidsgränser återställs i formuläret, medan nya
+förfrågningar inte återinför gamla nivåfilter. Sparade planrevisioner ändras inte.
+Valen sparas även före inskickning i sessionen. Det äldre publika formuläret
+behåller sitt befintliga receptlägesval.
+
+41 tester passerade (Mina val i Chromium/WebKit samt måltidsbibliotek); sex
+berörda browserfall återkörda efter layoutjustering, också godkända. Faktiska
+bibliotekskandidater verifierade för intervallen 3–5 och 10–15; utan gräns ingår
+både simple och crafted. Ruff, compileall och diff-kontroll passerade. Mobilvy
+390 px visuellt granskad; separat prov bekräftade omladdning före inskickning.
+API-svaren i browserproven är syntetiska; ingen live meny-/prisverifiering eller
+produktionsaktivering utförd. Senaste aktiverade release beskrivs nedan.
+
+---
+
 # 2026-10-11 19:24 UTC: Fasta skalor och redigerbara reglage aktiverade
 
 App `editable-sliders-7987bd5bc5d1` kör på betan. Fördelningens skalor följer

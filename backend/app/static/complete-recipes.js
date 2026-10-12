@@ -19,11 +19,12 @@
     if(!host)throw new Error("Receptvalens fält saknas.");
     const key=`smako.recipeChoices.${personal?"personal":"public"}`;
     const box=el("fieldset",null,"complete-recipe-options");box.hidden=true;box.disabled=true;
-    box.append(el("legend","Receptstil"));
+    box.append(el("legend",personal?"Antal ingredienser":"Receptstil"));
     const mode=select("recipe-style",[["legacy","Befintliga vardagsrecept"],["complete","Genomarbetade middagar"],["library","Måltidsbibliotek: middag, frukost och mellanmål"]],"legacy");
-    box.append(field("Välj receptläge",mode),el("p","Receptstilen gäller middagar. Billigast, Balanserad och Varierad behåller sina mål.","field-hint"));
+    if(!personal)box.append(field("Välj receptläge",mode),el("p","Receptstilen gäller middagar. Billigast, Balanserad och Varierad behåller sina mål.","field-hint"));
+    else box.append(el("p","Välj minsta och högsta antal ingredienser per recept. Lämna tomt för ingen gräns. Både enkla och genomarbetade recept kan väljas inom ditt intervall. Billigast, Balanserad och Varierad behåller sina mål.","field-hint"));
     const advanced=el("fieldset",null,"complete-recipe-fields");advanced.hidden=true;advanced.disabled=true;
-    advanced.append(el("legend","Dina middagar"));
+    advanced.append(el("legend",personal?"Val för recepten":"Dina middagar"));
     const cuisineField=el("fieldset",null,"recipe-cuisines");cuisineField.append(el("legend","Matkök och inspiration"));
     const cuisineInputs=Object.entries(cuisines).map(([value,label])=>{const checkbox=input(`cuisine-${value}`,"checkbox",value);const row=field(label,checkbox);row.className="check-label";cuisineField.append(row);return checkbox;});
     cuisineField.append(el("p","Välj ett eller flera. Inget markerat betyder alla matkök. Rätterna är inspirerade av matkökens smaker.","field-hint"));advanced.append(cuisineField);
@@ -45,7 +46,9 @@
     grid.append(field("Ingrediensantal",preset),field("Högsta tillagningstid (min)",minutes));
     if(!personal)grid.append(field("Minst protein per portion (g)",protein));
     grid.append(field("Tillåtna anpassningar",adaptation));
-    advanced.append(grid,custom,el("p","Alla rättens komponenter räknas tillsammans. Salt, peppar och vatten visas separat. Olja, kryddor och såser räknas. Skafferiet minskar inköpen, inte ingrediensantalet.","field-hint"),field("Tillåt fisk när övriga kostval medger det",fish));
+    const countHint=el("p","Alla rättens komponenter räknas tillsammans. Salt, peppar och vatten räknas inte. Olja, kryddor och såser räknas. Skafferiet minskar inköpen, inte ingrediensantalet.","field-hint");
+    advanced.append(grid,custom,...(personal?[]:[countHint]),field("Tillåt fisk när övriga kostval medger det",fish));
+    if(personal)box.append(countHint);
     const contexts=el("fieldset",null,"recipe-contexts complete-recipe-options");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och priskanaler"),el("p","Inget markerat betyder alla tillåtna inköpsställen i ditt prisområde. Valda butiker och onlinekanaler begränsar sökningen; ditt butikstak gäller fortfarande.","field-hint"));
     const contextOptions=el("div");const contextStatus=el("p",null,"field-hint");contextStatus.setAttribute("role","status");contexts.append(contextOptions,contextStatus);advanced.append(contexts);
     let selectedContexts=[],contextEpoch=0,contextPosition=null;
@@ -100,7 +103,7 @@
     const mealFields=el("fieldset",null,"complete-recipe-fields");
     mealFields.append(el("legend","Val för varje måltidstyp"),el("p","Antal tillfällen och portioner är olika val. Proteinmål är frivilliga. Middagens köksfördelning gäller bara middagar.","field-hint"));
     const level=select("meal-dinner-level",[["simple","Enkla middagar"],["crafted","Genomarbetade middagar"],["mixed","Blandning av enkla och genomarbetade"]],"simple");
-    mealFields.append(field("Middagsnivå",level));
+    if(!personal)mealFields.append(field("Middagsnivå",level));
     const mealRows={};
     for(const [type,label] of [["dinner","Middag"],["breakfast","Frukost"],["snack","Mellanmål"]]){
       const group=el("fieldset",null,"complete-recipe-grid");group.append(el("legend",label));
@@ -116,14 +119,14 @@
       if(!personal){row.min_protein_g=input(`meal-${type}-min-protein`,"number","",{min:"0",max:"300",step:"any",placeholder:"Inget mål"});group.append(field("Minst protein per portion (g)",row.min_protein_g));}
       mealRows[type]=row;group.dataset.mealType=type;mealFields.append(group);
     }
-    advanced.append(mealFields);
+    if(personal)advanced.firstElementChild.after(mealFields);else advanced.append(mealFields);
     function mealValues(meals){
       if(mode.value!=="library"||!enabled)return meals;
       return meals.map(meal=>{
         if(!meal.count)return {...meal,recipe_choices:null,max_same_base_meals:null,limits:{},distribution:{}};
         const row=mealRows[meal.meal_type],choices={};
         for(const key of ["min_ingredients","max_ingredients","max_active_minutes","max_total_minutes","max_waiting_minutes"])choices[key]=row[key].value===""?null:Number(row[key].value);
-        if(meal.meal_type==="dinner")choices.dinner_level=level.value;
+        if(meal.meal_type==="dinner"&&!personal)choices.dinner_level=level.value;
         const result={...meal,recipe_choices:choices,max_same_base_meals:row.max_same_base_meals.value===""?null:Number(row.max_same_base_meals.value)};
         if(row.min_protein_g)result.limits={...(meal.limits||{}),min_protein_g:row.min_protein_g.value===""?null:Number(row.min_protein_g.value)};
         return result;
@@ -173,15 +176,32 @@
         const diet=document.getElementById("diet-preference")?.value;
         result.personal={meals:mealValues(meals).map(m=>({...m,diet:["vegetarian","vegan"].includes(diet)?diet:"mixed"})),use_pantry:pantry.checked,allow_nutrition_estimates:estimates.checked,profile:{exclusions:(document.getElementById("excluded-ingredients")?.value||"").split(",").map(v=>v.trim()).filter(Boolean)}};
       }
+      if(personal){
+        // Retain controls for optional meals even while that meal is disabled.
+        result.personal={meals:Object.entries(mealRows).map(([type,row])=>({
+          meal_type:type,
+          recipe_choices:Object.fromEntries(["min_ingredients","max_ingredients","max_active_minutes","max_total_minutes","max_waiting_minutes"].map(key=>[key,row[key].value===""?null:Number(row[key].value)])),
+          max_same_base_meals:row.max_same_base_meals.value===""?null:Number(row.max_same_base_meals.value),
+        }))};
+      }
       return result;
     }
     function restore(request={}) {
-      const preferences=request?.recipe_preferences||{};mode.value=preferences.mode==="complete"?"complete":"legacy";
+      const preferences=request?.recipe_preferences||{};mode.value=personal?"library":preferences.mode==="complete"?"complete":"legacy";
       if(request.personal?.meals?.some(m=>m.recipe_choices!=null))mode.value="library";
       for(const [type,row] of Object.entries(mealRows)){
         const meal=request.personal?.meals?.find(m=>m.meal_type===type)||{};
         for(const [key,node] of Object.entries(row))node.value=key==="count"?(meal.count??0):key==="servings"?(meal.servings??1):key==="min_protein_g"?(meal.limits?.min_protein_g??""):(meal.recipe_choices?.[key]??meal[key]??"");
         if(type==="dinner")level.value=meal.recipe_choices?.dinner_level||"simple";
+      }
+      // Earlier complete-mode drafts stored dinner limits at the top level.
+      // Keep those explicit limits while removing the recipe-style restriction
+      // from new personal requests. Existing saved plan revisions are untouched.
+      const oldDinner=request.personal?.meals?.find(m=>m.meal_type==="dinner");
+      if(personal&&preferences.mode==="complete"&&oldDinner?.recipe_choices==null){
+        mealRows.dinner.min_ingredients.value=preferences.min_ingredients??10;
+        mealRows.dinner.max_ingredients.value=preferences.max_ingredients??15;
+        mealRows.dinner.max_total_minutes.value=preferences.max_minutes??"";
       }
       selectedContexts=[...(request.allowed_store_ids||[])];
       contextPostal=document.getElementById("postal-code")?.value.replace(/\s/g,"");

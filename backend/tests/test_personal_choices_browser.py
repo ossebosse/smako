@@ -128,7 +128,8 @@ def test_primary_sliders_optional_meals_and_default_request(choices):
     page.locator("#enable-snack").check()
     page.locator("#snack-count").focus()
     page.keyboard.press("ArrowLeft")
-    page.locator("#recipe-style").select_option("library")
+    expect(page.locator("#recipe-style")).to_have_count(0)
+    expect(page.locator("#meal-dinner-level")).to_have_count(0)
     expect(page.locator("#recipe-price-contexts")).to_have_count(0)
     expect(page.locator('[data-meal-type="breakfast"]')).to_be_visible()
     page.locator("#breakfast-min_protein_g").evaluate("node => node.value = 30")
@@ -174,6 +175,69 @@ def test_draft_restores_sliders_and_consolidates_hard_requirements(choices):
     assert restored["personal"]["profile"]["exclusions"] == ["fisk"]
     assert restored["personal"]["profile"]["allergies"] == ["jordnötter"]
     assert restored["personal"]["meals"][0]["limits"]["min_protein_g"] == 30.5
+
+
+def test_ingredient_interval_drives_candidates_and_survives_reload(choices):
+    from app.services.recipe_library import ingredient_count, meal_candidates
+
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    page.locator("#extra-choices>summary").click()
+    minimum = page.locator("#meal-dinner-min_ingredients")
+    maximum = page.locator("#meal-dinner-max_ingredients")
+    expect(minimum).to_be_visible()
+    expect(maximum).to_be_visible()
+    minimum.fill("15")
+    maximum.fill("10")
+    assert maximum.evaluate("node => !node.checkValidity()")
+    for low, high in ((3, 5), (10, 15)):
+        minimum.fill(str(low))
+        maximum.fill(str(high))
+        payload = submit(page, captured)
+        request = PlanRequest.model_validate(payload)
+        dinner = request.personal.meals[0]
+        assert dinner.recipe_choices.dinner_level is None
+        candidates = meal_candidates(dinner, request.recipe_preferences)
+        assert candidates
+        assert all(low <= ingredient_count(recipe) <= high for recipe in candidates)
+    page.reload()
+    choose_location(page)
+    page.locator("#extra-choices>summary").click()
+    expect(minimum).to_have_value("10")
+    expect(maximum).to_have_value("15")
+    minimum.fill("")
+    maximum.fill("")
+    payload = submit(page, captured)
+    request = PlanRequest.model_validate(payload)
+    candidates = meal_candidates(request.personal.meals[0], request.recipe_preferences)
+    assert {r.design.dinner_level for r in candidates} >= {"simple", "crafted"}
+    page.set_viewport_size({"width": 390, "height": 844})
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+
+
+@pytest.mark.parametrize("old_choices", [None, {"dinner_level": "simple",
+                                              "min_ingredients": 4, "max_ingredients": 12}])
+def test_old_recipe_styles_migrate_to_visible_ingredient_limits(choices, old_choices):
+    page, url, captured = choices
+    draft = {"postal_code": "22350", "recipe_preferences": {
+        "mode": "complete", "min_ingredients": 11, "max_ingredients": 14,
+        "max_minutes": 45}, "personal": {"meals": [{
+            "meal_type": "dinner", "count": 5, "servings": 2,
+            "recipe_choices": old_choices}]}}
+    page.add_init_script("sessionStorage.setItem('smako.personal.requestDraft', "
+                         + json.dumps(json.dumps(draft)) + ");")
+    page.goto(url)
+    choose_location(page)
+    page.locator("#extra-choices>summary").click()
+    low, high = (4, 12) if old_choices else (11, 14)
+    expect(page.locator("#meal-dinner-min_ingredients")).to_have_value(str(low))
+    expect(page.locator("#meal-dinner-max_ingredients")).to_have_value(str(high))
+    payload = submit(page, captured)
+    dinner = payload["personal"]["meals"][0]["recipe_choices"]
+    assert "dinner_level" not in dinner
+    assert (dinner["min_ingredients"], dinner["max_ingredients"]) == (low, high)
+    assert dinner["max_total_minutes"] == (None if old_choices else 45)
 
 
 def test_meal_dialogs_intervals_and_shared_distribution_budget(choices):
