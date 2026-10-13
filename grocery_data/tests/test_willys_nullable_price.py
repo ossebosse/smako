@@ -10,7 +10,7 @@ from grocery_data.app.monitoring.schema_fingerprint import SchemaTypeChange
 from grocery_data.app.services.collector import _review_schema_diff
 
 
-@pytest.mark.parametrize('store', ['2114', '2144', '2244', '2253'])
+@pytest.mark.parametrize('store', ['2114', '2144', '2244', '2253', '999999'])
 @pytest.mark.parametrize('reverse', [False, True])
 def test_reviewed_nullable_number_requires_new_parser(store, reverse):
     before, after = ('number',), ('null', 'number')

@@ -1,5 +1,31 @@
 # Kommunvis utrullning och kapacitetskontroll
 
+## Gemensamma driftfixar 2026-10-13
+
+Registrering av fler kommuner använder samma aktuella kod som Lund och Malmö.
+Inga särskilda kopior av insamlare eller äldre images ska installeras per kommun.
+
+- Willys parser v5 hanterar den granskade nullable-number-övergången på
+  `priceValue` för alla butiks-ID:n; saknat pris förblir saknat. V4-reläpaket
+  verifieras fortfarande genom den gemensamma importvägen.
+- City Gross-diagnostiken följer kommunens godkända databasreferens.
+- Både reläkvittens och en väntande runtime-laddning kan bekräfta exakt rätt
+  kommun och pris-ID innan en onödig återladdning görs. Appen behåller sina
+  beräkningscacher när samma validerade prisversion återladdas.
+- ICA:s officiella butikslänkar till samma erbjudandesida räknas som en länk
+  även när ett produkt-ID finns i frågesträngen. Annan butik, annan domän eller
+  två olika sidor accepteras inte som samma integration.
+- Backup omfattar alla aktiva kommuners prisartefakter, registrerade källors
+  godkända databaser och aktuella journaler. Ändrad registreringshash gör en
+  ny backup förfallen; befintlig demand-worker tar den under samma operationslås.
+  Manuella backup-/refresh-kommandon ska använda den aktiva produktionens
+  `/opt/smako/compose` med dess granskade overrides.
+
+Regressionsprov registrerar Göteborg som en tredje kommun i isolerade data och
+verifierar återställning och exakt laddningskvittens. Detta är inte bevis på en
+live-insamling i Göteborg och aktiverar ingen ny produktionskommun. Den vanliga
+kapacitetskontrollen, kommunavgränsningen och källornas kvalitetskrav kvarstår.
+
 ## Implementering 2026-10-11
 
 Följande funktioner finns nu i koden. Aktivering och verifierad runtime redovisas
@@ -69,8 +95,8 @@ ordinarie driftmiljö används samma granskade fil först för kontroll, sedan f
 registrering under operationslåset:
 
 ```text
-python -m grocery_data.municipal_cli capacity --municipality 1480 --postal-code 41110 --capacity-evidence /reviewed/pilot.json
-python -m grocery_data.municipal_cli add --municipality 1480 --postal-code 41110 --capacity-evidence /reviewed/pilot.json
+/opt/smako/compose exec -T --user 10001:10001 scheduler python -m grocery_data.municipal_cli capacity --municipality 1480 --postal-code 41110 --capacity-evidence /reviewed/pilot.json
+/opt/smako/compose exec -T --user 10001:10001 scheduler python -m grocery_data.municipal_cli add --municipality 1480 --postal-code 41110 --capacity-evidence /reviewed/pilot.json
 ```
 
 Exemplet aktiveras inte av dokumentationen. En godkänd kapacitetsrapport ersätter
