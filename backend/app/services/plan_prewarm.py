@@ -105,6 +105,7 @@ class BackendStandardPlanPrewarmRunner:
             own_grocery_base_url=None,
             openai_api_key=None,
             allow_mock_fallback=False,
+            allow_estimated_quantities=False,
         )
 
     def _active(self) -> PreparedPriceUniverse:
@@ -138,6 +139,9 @@ class BackendStandardPlanPrewarmRunner:
             # diversity overrides affect resolved search policies and cache keys.
             "use_member_prices": False,
             "membership_price_policy": "all_advertised",
+            # Explicit web input is validated to float, whereas the model's
+            # omitted default is int. Preserve its serialized cache identity.
+            "varied_budget_percent": 25.0,
             "optimization_iterations": 1,
             "strategy": "optimized",
             "candidate_recipe_count": profile.candidate_recipe_count,

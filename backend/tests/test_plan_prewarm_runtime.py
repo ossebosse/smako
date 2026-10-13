@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import json
 from types import SimpleNamespace
 
 import pytest
 from app.config import Settings
+from app.models import PlanRequest
 from app.models.basket import BasketVerificationStatus
+from app.models.diversity import DiversityMode
+from app.services.meal_plan_optimizer import MealPlanService
 from app.services.plan_prewarm import (
     BackendStandardPlanPrewarmRunner,
     prewarm_active_price_universe,
@@ -123,6 +127,8 @@ async def test_backend_runner_fills_then_hits_same_process_cache_without_live_so
     assert all(settings.own_grocery_base_url is None for settings in received_settings)
     assert all(settings.openai_api_key is None for settings in received_settings)
     assert all(settings.price_universe_required for settings in received_settings)
+    assert all(not settings.allow_estimated_quantities for settings in received_settings)
+    assert type(service.requests[0].varied_budget_percent) is float
     assert service.requests[0].model_fields_set == {
         "postal_code",
         "recipes",
@@ -130,6 +136,7 @@ async def test_backend_runner_fills_then_hits_same_process_cache_without_live_so
         "max_stores",
         "use_member_prices",
         "membership_price_policy",
+        "varied_budget_percent",
         "optimization_iterations",
         "strategy",
         "candidate_recipe_count",
@@ -137,6 +144,22 @@ async def test_backend_runner_fills_then_hits_same_process_cache_without_live_so
         "diversity_mode",
         "debug",
     }
+    # Dict equality treats 25 and 25.0 as equal, but serialized cache keys do
+    # not. Compare the actual payload representation of an explicit web request.
+    warmed = service.requests[0]
+    web = PlanRequest.model_validate({
+        **warmed.model_dump(include=warmed.model_fields_set),
+        "memberships": [], "varied_budget_percent": 25,
+        "purchase_planning_mode": "exact", "diet_preference": "mixed",
+        "availability_mode": "normal", "avoid_ingredients": [],
+    })
+    def payload(request):
+        policies = {mode: MealPlanService._diversity_policy_for(request, mode)
+                    for mode in DiversityMode}
+        return MealPlanService._menu_search_cache_payload(
+            request, policies, 160, pricing_context_id="same-contract",
+        )
+    assert json.dumps(payload(warmed), sort_keys=True) == json.dumps(payload(web), sort_keys=True)
 
 
 @pytest.mark.asyncio
