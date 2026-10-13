@@ -1,0 +1,223 @@
+{
+  "build": {
+    "commit": "32127ccf7e14fc5273b499650a24198611500ea6",
+    "build_id": "ops-prepared-pricing-32127ccf7e14",
+    "base_image": "sha256:2a0e9e029e0c1dabdec7de756d6c2381e73c8bc2472851e61c2df35e3b13d934",
+    "base_files": {
+      "backend/app/main.py": "e013f1c89ba825e5c58431c54655a53c3d4faaa5588005e2de3706ceae62a09a",
+      "backend/app/services/basket_calculator.py": "d6ba817849d9605a20edd515f560017d6f9259ce47c01f82d56d8441dbf516f1",
+      "backend/app/services/basket_optimizer.py": "0db07664e7db29c0049129e8e41d4580cba3164da2f3f0035d74e7756d4f0140",
+      "backend/app/services/beta_observability.py": "470390e2f939caad50f95d7651c974476d950aaa4ebb1310230d0bd56f2fc962",
+      "backend/app/services/plan_prewarm.py": "1a528e29e61b20cb0ea3def5979b4e6a038ef30665df6fe41efd0f8359c7f15a",
+      "backend/app/services/planner_admission.py": "9298ca68ed646833ac1549491c8f6390adf7834bebc176986c5818fd85b8ea90"
+    },
+    "files": {
+      "backend/app/main.py": "8e1e12487f70fa4f0088f243818de3595c2b1e33e3a65de87c96d22241b97e2e",
+      "backend/app/services/basket_calculator.py": "9d244fc08160bd113f1e670a2d1594c4c256028c2a4591c99776bea804752cfc",
+      "backend/app/services/basket_optimizer.py": "b5260e2f8d66970ca99e16e01a406ec6e757a54f29d2e116a89e20545c26c507",
+      "backend/app/services/beta_observability.py": "eb6540fdf541ef47758215082bc7bac2f6a0537fa3e37cf7e7396389883d8d3c",
+      "backend/app/services/plan_prewarm.py": "3a2b63a5dbdf8a4c9f3dcb8785eb4e01e7670cc9d12968be7e8ddcc99c414602",
+      "backend/app/services/planner_admission.py": "10a1e532277e9c06db7323000ecd436624f4f01aef1d32ebc08cf5c9797b5faf"
+    },
+    "package_sha256": "c7cf829627652c6098f6a74a2a53911ad04bf086c44e9a7e2288de0c84459cc9",
+    "image": "sha256:3cf0bbe2ae5125015fad33d92955c5c7d7778ef8389c8fd00085ae62e4ff00a9"
+  },
+  "local_replay": {
+    "cold": {
+      "whole_response_equal_except_timing": true,
+      "search_counters_equal": true,
+      "before_seconds": 367.7981806000462,
+      "after_seconds": 332.4341110000387,
+      "semantic_sha256": "881fe8023dcf0ae41b294a4fd933ff9d73d94d27d64d2ade5d686679e32601ff"
+    },
+    "warm": {
+      "whole_response_equal_except_timing": true,
+      "search_counters_equal": true,
+      "before_seconds": 3.2352104999590665,
+      "after_seconds": 2.9221868999302387,
+      "semantic_sha256": "06c1d0b5bc69ef08cd87a18a991475e2df2be547b89c3832d4ee4055fc18044f"
+    }
+  },
+  "prewarm_then_fresh_service": {
+    "status": "PASS",
+    "prewarm_seconds": 278.4096603000071,
+    "fresh_service_seconds": 3.307425400009379,
+    "first_menu_cache": {
+      "hits": 0,
+      "misses": 2,
+      "evictions": 0,
+      "entries": 2
+    },
+    "fresh_service_menu_cache": {
+      "hits": 2,
+      "misses": 2,
+      "evictions": 0,
+      "entries": 2
+    },
+    "same_result_fields": [
+      "recipes",
+      "ingredients",
+      "optimized_basket",
+      "optimization_scenarios",
+      "single_store_options",
+      "quality"
+    ],
+    "live_provider_requests": 0,
+    "policy": "exact; advertised;5 dinners;2 servings;3 stores"
+  },
+  "checkout_microbenchmark": {
+    "before": {
+      "calls": 10000,
+      "seconds": [
+        0.5219987999880686,
+        0.515574699966237,
+        0.5214962000027299,
+        0.6347353000892326,
+        0.7655678000301123
+      ],
+      "median": 0.5219987999880686
+    },
+    "after": {
+      "calls": 10000,
+      "seconds": [
+        0.15590539993718266,
+        0.06015619996469468,
+        0.06268789991736412,
+        0.062472600024193525,
+        0.060622300021350384
+      ],
+      "median": 0.062472600024193525
+    },
+    "cache_info": "CacheInfo(hits=50000, misses=1, maxsize=2048, currsize=1)"
+  },
+  "verification": {
+    "unique_targeted_tests_passed": 253,
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-13T18:00:19.961336+00:00",
+    "build_id": "ops-prepared-pricing-32127ccf7e14",
+    "image": "sha256:3cf0bbe2ae5125015fad33d92955c5c7d7778ef8389c8fd00085ae62e4ff00a9",
+    "old_image": "sha256:2a0e9e029e0c1dabdec7de756d6c2381e73c8bc2472851e61c2df35e3b13d934",
+    "ready": "ready",
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 274,
+      "personal_private_state": 90
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_reviewed_environment_changes": {
+      "BUILD_ID": "ops-prepared-pricing-32127ccf7e14",
+      "PRICE_UNIVERSE_PREWARM_ENABLED": "true",
+      "PRICE_UNIVERSE_PREWARM_MODES": "balanced",
+      "PRICE_UNIVERSE_PREWARM_MAX_STORES": "3",
+      "PRICE_UNIVERSE_PREWARM_RECIPES": "5",
+      "PRICE_UNIVERSE_PREWARM_SERVINGS": "2",
+      "PRICE_UNIVERSE_PREWARM_CANDIDATE_COUNT": "80",
+      "PRICE_UNIVERSE_PREWARM_BEAM_WIDTH": "30"
+    },
+    "cpu_quiet_samples": [
+      0.05,
+      0.05
+    ],
+    "operation_lock": true
+  },
+  "live_prewarm": {
+    "status": "PASS",
+    "build_id": "ops-prepared-pricing-32127ccf7e14",
+    "reports": [
+      {
+        "scope": "city:lund",
+        "universe": "price-universe:8bbb89c60466e255b78a577e65ccba99a9a58c2bf49f2ffa5abe81a16e842336",
+        "status": "complete",
+        "profiles": "1"
+      },
+      {
+        "scope": "city:malm\u00f6",
+        "universe": "price-universe:753e70c7ab4d478330f7c5b534cac9b8e9f219e90907ce2c299321ff4398fdd2",
+        "status": "complete",
+        "profiles": "1"
+      }
+    ],
+    "active_universes": {
+      "22350": "price-universe:8bbb89c60466e255b78a577e65ccba99a9a58c2bf49f2ffa5abe81a16e842336",
+      "21120": "price-universe:753e70c7ab4d478330f7c5b534cac9b8e9f219e90907ce2c299321ff4398fdd2"
+    },
+    "wait_seconds": 450.35999999998603
+  },
+  "live_public": {
+    "first_after_prewarm_seconds": 9.719,
+    "second_browser_session_seconds": 8.172,
+    "acceptance_checks_each": 17,
+    "all_checks_passed": true,
+    "same_fields_across_sessions": [
+      "recipes",
+      "ingredients",
+      "optimized_basket",
+      "optimization_scenarios",
+      "single_store_options",
+      "quality"
+    ],
+    "menu_search_cache_hits_each": 2,
+    "menu_search_cache_misses_each": 0,
+    "identical_reload_each": true,
+    "page_errors": []
+  },
+  "live_personal": {
+    "status": "pass",
+    "build_id": "ops-prepared-pricing-32127ccf7e14",
+    "seconds": 68.6,
+    "identical_reload": true,
+    "checkout_audit": true,
+    "recalculation_verified": false,
+    "errors": []
+  },
+  "final_runtime": {
+    "at": "2026-10-13T18:09:36.719917+00:00",
+    "build_id": "ops-prepared-pricing-32127ccf7e14",
+    "containers": {
+      "smako-app-1": {
+        "image": "sha256:3cf0bbe2ae5125015fad33d92955c5c7d7778ef8389c8fd00085ae62e4ff00a9",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      },
+      "smako-scheduler-1": {
+        "image": "sha256:f45d9ae4ea8733ea336914db972285f162eee940b3fc135b4e706624551fb4ee",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      },
+      "smako-caddy-1": {
+        "image": "sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      }
+    },
+    "prior_state_preserved": {
+      "consumer_plan_revisions": 274,
+      "personal_private_state": 90
+    },
+    "current_rows": {
+      "consumer_plan_revisions": 277,
+      "personal_private_state": 91
+    },
+    "new_oom_events": 0
+  },
+  "final_readiness": {
+    "Lund": {
+      "http_status": 200,
+      "seconds": 0.343,
+      "build_id": "ops-prepared-pricing-32127ccf7e14"
+    },
+    "Malmo": {
+      "http_status": 200,
+      "seconds": 0.329,
+      "build_id": "ops-prepared-pricing-32127ccf7e14"
+    }
+  }
+}

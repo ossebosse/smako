@@ -5,6 +5,15 @@
 Registrering av fler kommuner använder samma aktuella kod som Lund och Malmö.
 Inga särskilda kopior av insamlare eller äldre images ska installeras per kommun.
 
+- `ops-prepared-pricing-32127ccf7e14` förbereder oföränderliga prisvillkor,
+  återanvänder exakta mängdberoende kassapriser och summerar redan avrundade
+  priser i heltalsören när Decimal-kontexten tillåter det. Samma kvalitet och
+  sökomfattning gäller alla kommuner. Standardmenyer köas efter uppstart och
+  prisaktivering med respektive kommuns aktiva underlag/postnummer. Kön är
+  begränsad till 64 väntande kommuner; en äldre väntande version ersätts.
+  Förberäkningen är gemensam appkonfiguration, inte en extra insamlare eller
+  kommunvis timer. Se [verifiering](releases/prepared-pricing-20261013/RESULTS.md).
+
 - Kampanjstruktur återanvänds även i `ops-menu-reuse-334aeb2fa2a8` med
   begränsning per beräkning. Aktuella mängdtak, medlemsvillkor och
   källvalidering kontrolleras fortfarande. Detta är gemensam appkod för

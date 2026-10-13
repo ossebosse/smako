@@ -1,3 +1,38 @@
+# 2026-10-13 18:00 UTC: Förberedda priser och kommunvis menyförberäkning
+
+Aktiv app `ops-prepared-pricing-32127ccf7e14`, image `3cf0bbe2ae51…`.
+Gren `perf/prepared-pricing-20261013`; kodcommits `ec542ccf38d2` och
+`32127ccf7e14`. Sex granskade appfiler ovanpå `ops-menu-reuse-334aeb2fa2a8`.
+Source/scheduler är fortsatt `ops-price-recovery-7e28ff96f72d`;
+ingrediensändringen `1518101` är inte driftsatt.
+
+Oföränderliga erbjudandevillkor och exakta mängdberoende kassapriser återanvänds
+begränsat; den inre butiksjämförelsen använder exakta heltalsören där kontexten
+tillåter det. Samtliga kandidater och sök-/kvalitetsgränser är oförändrade.
+Förberäkning i bakgrunden är aktiverad: 5 middagar, 2 portioner, 3 butiker,
+balanserat val med alla tre alternativ, webbens exakta mängdpolicy och
+annonserade medlemspriser. Samma kö gäller alla laddade och nya kommuner.
+
+Fryst före/efter: 367,798 → 332,434 s kallt; 3,235 → 2,922 s varmt.
+Hela planobjektet och sökräknarna identiska utom tider. 253 riktade testfall,
+Ruff och compileall godkända. Separat kontroll med webbens exakta policy:
+278,410 s förberäkning → 3,307 s i en ny tjänsteinstans, båda sökningarna
+cacheträffar och samma meny/korg/kvalitet. En upptäckt 25/25.0-skillnad i
+cacheidentiteten korrigerades och regressionstestades före aktivering.
+
+Aktivering under operationslås med backup; alla tidigare 274 planrevisioner
+och 90 privata tillstånd hashverifierat bevarade. Bara appen ersattes,
+prismanifest och övriga containrar bevarades. Lund/Malmö readiness 200.
+Slutprov: båda kommunernas bakgrundsberäkningar klara. Malmö 9,719 s i första
+webbsessionen efter förberäkning, 8,172 s i en ny session, två cacheträffar/noll
+missar i båda och 17/17 kontroller. Personlig meny 68,6 s med godkänd audit
+och återläsning. Efter prov 277/91 sparade rader; inga nya OOM-händelser.
+
+Se [resultat och evidens](releases/prepared-pricing-20261013/RESULTS.md).
+Privata underlag: `.local/prepared-pricing-20261013/`. Backup/aktivering:
+`/opt/smako/evidence/ops-prepared-pricing-32127ccf7e14/`. Återkör inte äldre
+aktiveringsskript eller deploya hela lokala HEAD utan selektiv granskning.
+
 # 2026-10-13: Menyåtgärder 5–6 verifierade
 
 Aktiv app `ops-menu-reuse-334aeb2fa2a8` (image `2a0e9e029e0c…`).
