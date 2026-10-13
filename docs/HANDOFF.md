@@ -1,3 +1,31 @@
+# 2026-10-13: Menyåtgärder 5–6 verifierade
+
+Aktiv app `ops-menu-reuse-334aeb2fa2a8` (image `2a0e9e029e0c…`).
+Gren `perf/menu-reuse-20261013`, kodcommit `334aeb2fa2a8`.
+Endast basket_optimizer.py lades ovanpå `ops-menu-7eab60a36fae`.
+Source/scheduler är fortsatt `ops-price-recovery-7e28ff96f72d`;
+ingrediensändringen `1518101` är inte driftsatt.
+
+Punkt 5: begränsad återanvändning av kampanjstruktur, samma aktuella
+mängdtak/källvalidering och oförändrad exakt sökning. Fryst hel meny
+395,434 → 370,976 s kallt; varmt 2,989 → 3,065 s. Hela planobjektet och
+sökräknarna är identiska utom tidsstatistik. 202 riktade testfall är godkända.
+Punkt 6 införs inte: innehållscachens 952 träffar kunde spara 4,357 s men
+nycklar/uppslag kostade 12,900 s. Minnesgränser är dokumenterade.
+
+Live: publik meny 334.266 s kall / 8.141 s varm,
+17/17 kontroller och identisk återläsning. Personlig meny 62.6 s,
+godkänd checkout-audit/återläsning. Båda readiness 200 på rätt build.
+Alla tidigare 271 planrevisioner och
+89 privata tillstånd är hashverifierat
+bevarade; efter prov 274/90.
+Inga nya OOM-händelser. Aktiveringen inväntade operationslåset.
+Samma förbättring gäller nya kommuner utan separata patchar.
+
+Se [resultat och evidens](releases/menu-reuse-20261013/RESULTS.md).
+Privata underlag: `.local/menu-reuse-20261013/`. Backup och aktiveringsbevis:
+`/opt/smako/evidence/ops-menu-reuse-334aeb2fa2a8/`. Återkör inte gamla skript.
+
 # 2026-10-13 15:04 UTC: Exakta menyoptimeringar driftsatta
 
 Gren `perf/menu-exact-20261013`. Aktiv app `ops-menu-7eab60a36fae`

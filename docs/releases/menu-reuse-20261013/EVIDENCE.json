@@ -1,0 +1,377 @@
+{
+  "schema": "smako-menu-reuse-verification-v1",
+  "candidate": {
+    "commit": "334aeb2fa2a8d963141238394e81a67a4d5d4837",
+    "build_id": "ops-menu-reuse-334aeb2fa2a8",
+    "base_image": "sha256:3faff7284b503a940ec53c22f402422c45bc61a04bf7ebcbb5fe17b3e9970b64",
+    "base_files": {
+      "backend/app/services/basket_optimizer.py": "8d73bb8da3a881bfe323dead764e3e79eb49d631b303c81e30fa8407c5ee11cc"
+    },
+    "files": {
+      "backend/app/services/basket_optimizer.py": "0db07664e7db29c0049129e8e41d4580cba3164da2f3f0035d74e7756d4f0140"
+    },
+    "package_sha256": "9a59d1a2718901b81b0fd6c300ca3123f4e6db11d4815d800abdced66d0e667e",
+    "image": "sha256:2a0e9e029e0c1dabdec7de756d6c2381e73c8bc2472851e61c2df35e3b13d934"
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-13T16:55:15.100387+00:00",
+    "build_id": "ops-menu-reuse-334aeb2fa2a8",
+    "image": "sha256:2a0e9e029e0c1dabdec7de756d6c2381e73c8bc2472851e61c2df35e3b13d934",
+    "old_image": "sha256:3faff7284b503a940ec53c22f402422c45bc61a04bf7ebcbb5fe17b3e9970b64",
+    "ready": "ready",
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 271,
+      "personal_private_state": 89
+    },
+    "price_manifests_preserved": true,
+    "mounts_and_environment_preserved": true,
+    "cpu_quiet_samples": [
+      0.06,
+      0.02
+    ],
+    "operation_lock": true
+  },
+  "point5": {
+    "status": "PASS",
+    "clock": "2026-10-13T07:19:51+00:00",
+    "network": "disabled",
+    "artifact_sha256": "de54eafb81cf9bf47fd50a6a3e2a4d6929c88357b5e00b0c48009dbe98a0d2f6",
+    "phases": {
+      "cold": {
+        "before_seconds": 395.43428829999175,
+        "after_seconds": 370.9757331000292,
+        "whole_plan_equal_except_timing": true,
+        "search_counters_equal": true,
+        "projection_sha256": "45e0bd4221027e741b12413ebb1f5e9e0d57431d93ad6c9a5dd3b52136bb8814"
+      },
+      "warm": {
+        "before_seconds": 2.9890685999998823,
+        "after_seconds": 3.0649966999772005,
+        "whole_plan_equal_except_timing": true,
+        "search_counters_equal": true,
+        "projection_sha256": "a1a4bbe34d667aeaf4e3f8c6b8b34b544fb59fc21a185284808de4e4c6df2c47"
+      }
+    }
+  },
+  "point5_memory_probe": {
+    "calls": 35897,
+    "potential_hits": 0,
+    "potential_saved_seconds": 0.0,
+    "misses": 35897,
+    "evictions": 35708,
+    "peak_entries": 100,
+    "peak_cache_bytes": 1048576,
+    "total_aggregate_seconds": 287.24452340899734,
+    "oversized": 0,
+    "peak_promotion_entries": 246,
+    "peak_promotion_candidates": 8733,
+    "sampled_promotion_container_bytes": 57664,
+    "peak_working_set_bytes": 1737486336,
+    "peak_pagefile_bytes": 1723854848
+  },
+  "point6": {
+    "status": "PASS",
+    "point6_implemented": false,
+    "decision": "Measured lookup overhead exceeds potential savings",
+    "phases": {
+      "cold": {
+        "whole_plan_equal_except_timing": true,
+        "search_counters_equal": true,
+        "seconds": 400.9496709999512
+      },
+      "warm": {
+        "whole_plan_equal_except_timing": true,
+        "search_counters_equal": true,
+        "seconds": 3.085355899995193
+      }
+    },
+    "probe": {
+      "calls": 35897,
+      "potential_hits": 0,
+      "potential_saved_seconds": 0.0,
+      "misses": 35897,
+      "evictions": 35708,
+      "peak_entries": 100,
+      "peak_cache_bytes": 1048576,
+      "total_aggregate_seconds": 287.23901739990106,
+      "oversized": 0,
+      "content_peak_entries": 256,
+      "content_peak_metadata_bytes": 363464,
+      "content_probe_seconds": 12.900106801302172,
+      "content_hits": 952,
+      "content_saved_seconds": 4.356935599935241,
+      "peak_working_set_bytes": 1742512128,
+      "peak_pagefile_bytes": 1730154496
+    }
+  },
+  "tests": {
+    "unique_passed": 202,
+    "suite_passed": 201,
+    "final_structure_suite_passed": 9,
+    "added_case_after_suite": 1,
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "public": {
+    "cold": {
+      "status": 201,
+      "seconds": 334.266,
+      "build_id": "ops-menu-reuse-334aeb2fa2a8",
+      "acceptance": {
+        "postal_scope_preserved": true,
+        "selected_store_filter": true,
+        "five_dinners_two_servings": true,
+        "ten_total_portions": true,
+        "full_recipes": true,
+        "five_visible_recipe_cards": true,
+        "quantities_rendered": true,
+        "shopping_rows_rendered": true,
+        "max_three_stores": true,
+        "exact_request": true,
+        "memberships_preserved": true,
+        "selected_diversity_preserved": true,
+        "verified_basket": true,
+        "total_reconciled": true,
+        "basket_audit_passed": true,
+        "nutrition_quality_passed": true,
+        "quality_label_visible": true
+      },
+      "identical_reload": true,
+      "page_errors": []
+    },
+    "warm": {
+      "status": 201,
+      "seconds": 8.141,
+      "build_id": "ops-menu-reuse-334aeb2fa2a8",
+      "acceptance": {
+        "postal_scope_preserved": true,
+        "selected_store_filter": true,
+        "five_dinners_two_servings": true,
+        "ten_total_portions": true,
+        "full_recipes": true,
+        "five_visible_recipe_cards": true,
+        "quantities_rendered": true,
+        "shopping_rows_rendered": true,
+        "max_three_stores": true,
+        "exact_request": true,
+        "memberships_preserved": true,
+        "selected_diversity_preserved": true,
+        "verified_basket": true,
+        "total_reconciled": true,
+        "basket_audit_passed": true,
+        "nutrition_quality_passed": true,
+        "quality_label_visible": true
+      },
+      "identical_reload": true,
+      "page_errors": []
+    }
+  },
+  "personal": {
+    "status": "pass",
+    "build_id": "ops-menu-reuse-334aeb2fa2a8",
+    "seconds": 62.6,
+    "identical_reload": true,
+    "checkout_audit": true,
+    "recalculation_verified": false,
+    "errors": []
+  },
+  "live_cache_equivalence": {
+    "same_price_universe": true,
+    "identical_fields": [
+      "recipes",
+      "optimized_basket",
+      "optimization_scenarios",
+      "single_store_options",
+      "quality"
+    ],
+    "cold_seconds": 334.266,
+    "warm_seconds": 8.141
+  },
+  "ready": {
+    "Lund": {
+      "http_status": 200,
+      "seconds": 0.25,
+      "build_id": "ops-menu-reuse-334aeb2fa2a8",
+      "price_universe": {
+        "active": true,
+        "required_contexts_usable": true,
+        "missing_required_context_ids": [],
+        "usable_context_ids": [
+          "context:coop:23eaae11c9661e68",
+          "context:coop:698f7b6528879df2",
+          "context:coop:709f87b60ef8c210",
+          "context:coop:95aeb1242c92bd40",
+          "context:coop:a35d1de8aaaf5b41",
+          "context:coop:a5a6ee957014972a",
+          "context:coop:db7c87478187339f",
+          "context:coop:e6ab1bde1aaf6609",
+          "context:coop:e9ccea03a65e7252",
+          "context:coop:f0f14586a4a5abfa",
+          "context:hemkop:1283c412b9030d45",
+          "context:hemkop:3288e04edd97e349",
+          "context:hemkop:756955d0e6e05f23",
+          "context:hemkop:c5c4ece13cd2bd5c",
+          "context:ica:0edf5d52980ffcd7",
+          "context:ica:1a19476898da3fb0",
+          "context:ica:24c415e3af6438b4",
+          "context:ica:2d734344abd8c685",
+          "context:ica:3d991cfe2014eb8c",
+          "context:ica:602d84df14d47e3d",
+          "context:ica:7b8c7bd0161c50dc",
+          "context:ica:7f1f6e52c3152f98",
+          "context:ica:b7a8ac31980d0bd7",
+          "context:ica:b7ad17cc0a7001fd",
+          "context:ica:cb840c0edbf56816",
+          "context:ica:e03aeae83df25aa4",
+          "context:lidl:05f1cb3d9fc89bc3",
+          "context:lidl:46dd1e85257757e0",
+          "context:willys:383650ec6ff5a636",
+          "context:willys:4a671428fc484e43",
+          "context:willys:f3f63d6851275fcc"
+        ],
+        "requires_attention": true,
+        "warning_age_hours": 36.0,
+        "stale_age_hours": 48.0,
+        "status": "aging",
+        "price_universe_id": "price-universe:8bbb89c60466e255b78a577e65ccba99a9a58c2bf49f2ffa5abe81a16e842336",
+        "built_at": "2026-10-13 16:28:41.446288+00:00",
+        "oldest_price_age_hours": 43.052,
+        "oldest_usable_price_age_hours": 41.464,
+        "hours_until_oldest_usable_stale": 6.536,
+        "usable_context_count": 31,
+        "excluded_stale_context_count": 0,
+        "excluded_stale_context_ids": [],
+        "product_count": 2259
+      }
+    },
+    "Malmo": {
+      "http_status": 200,
+      "seconds": 0.188,
+      "build_id": "ops-menu-reuse-334aeb2fa2a8",
+      "price_universe": {
+        "active": true,
+        "required_contexts_usable": true,
+        "missing_required_context_ids": [],
+        "usable_context_ids": [
+          "context:citygross:33b01007b20e8988",
+          "context:coop:00d3c70860d97cae",
+          "context:coop:0af1a8138f910d90",
+          "context:coop:20e4633ad51e8d1f",
+          "context:coop:55469b5a21f9b46e",
+          "context:coop:6ccb60b8518dcfba",
+          "context:coop:7249b37ed1aa3b58",
+          "context:coop:788d290977d9807c",
+          "context:coop:80003f1b518a562e",
+          "context:coop:91472761912c55cf",
+          "context:coop:a06d1b2d64d5a880",
+          "context:coop:c964acbfeb697ff3",
+          "context:coop:df2cb6829ff429e8",
+          "context:coop:f4e6dfa3fada9ab1",
+          "context:hemkop:363b00fb95065cf0",
+          "context:hemkop:559cb3b5b4885cdf",
+          "context:hemkop:7c2684c2238e291f",
+          "context:hemkop:ac1b35fa13bf792f",
+          "context:ica:094e21ba74aa33a2",
+          "context:ica:0a956c41111c4892",
+          "context:ica:0b4e04c736b28d7f",
+          "context:ica:0f3dfa38926580b4",
+          "context:ica:225fe3aad581eb30",
+          "context:ica:2ebe48fc8b94954d",
+          "context:ica:39388ccbeef44cc9",
+          "context:ica:3dea560861dd40c3",
+          "context:ica:40cf35f5cc4291d2",
+          "context:ica:5e27ad28cca298dd",
+          "context:ica:687e279d959c4fd5",
+          "context:ica:6a256df3bd824770",
+          "context:ica:7510f4e03751e496",
+          "context:ica:89adf2bc4a5fc50b",
+          "context:ica:9298d28d85680b25",
+          "context:ica:93d67e8c62b80044",
+          "context:ica:b6344d523dff467d",
+          "context:ica:b7da1e7d4e75ddec",
+          "context:ica:c7d64306e198b5c0",
+          "context:ica:d39e9477fc04e9cd",
+          "context:ica:d4f389e027dfd2aa",
+          "context:ica:e97cb5c51269702d",
+          "context:ica:ec2fb2e2de118f35",
+          "context:ica:f0d2c31124015463",
+          "context:lidl:02003cfd003cb278",
+          "context:lidl:0ae4f1f209de4e0f",
+          "context:lidl:311b7dff422ef34e",
+          "context:lidl:32e1429a0ee8d968",
+          "context:lidl:94c92b23e9747b89",
+          "context:lidl:df8c739c183feea8",
+          "context:lidl:ef2d86773be8fad3",
+          "context:lidl:f9b1e1c4921e9aa1",
+          "context:willys:4c7406e2a0cbcdf4",
+          "context:willys:5adaf178f6561faa",
+          "context:willys:6e2de1b8bdc14801",
+          "context:willys:91fc2ae693ecdec6",
+          "context:willys:9e19db13968fa0c6",
+          "context:willys:aa4f80feaf2b85d5",
+          "context:willys:b69aa27a99e005be",
+          "context:willys:bbd37ea3cd468706",
+          "context:willys:f34dc63a3595b2c9",
+          "context:willys:fc5fbe8cd6399ad8"
+        ],
+        "requires_attention": true,
+        "warning_age_hours": 36.0,
+        "stale_age_hours": 48.0,
+        "status": "aging",
+        "price_universe_id": "price-universe:753e70c7ab4d478330f7c5b534cac9b8e9f219e90907ce2c299321ff4398fdd2",
+        "built_at": "2026-10-13 16:44:02.401432+00:00",
+        "oldest_price_age_hours": 42.78,
+        "oldest_usable_price_age_hours": 42.745,
+        "hours_until_oldest_usable_stale": 5.255,
+        "usable_context_count": 60,
+        "excluded_stale_context_count": 0,
+        "excluded_stale_context_ids": [],
+        "product_count": 2589
+      }
+    }
+  },
+  "runtime": {
+    "at": "2026-10-13T17:02:39.768923+00:00",
+    "build_id": "ops-menu-reuse-334aeb2fa2a8",
+    "containers": {
+      "smako-app-1": {
+        "image": "sha256:2a0e9e029e0c1dabdec7de756d6c2381e73c8bc2472851e61c2df35e3b13d934",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      },
+      "smako-scheduler-1": {
+        "image": "sha256:f45d9ae4ea8733ea336914db972285f162eee940b3fc135b4e706624551fb4ee",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      },
+      "smako-caddy-1": {
+        "image": "sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      }
+    },
+    "prior_state_preserved": {
+      "consumer_plan_revisions": 271,
+      "personal_private_state": 89
+    },
+    "current_rows": {
+      "consumer_plan_revisions": 274,
+      "personal_private_state": 90
+    },
+    "new_oom_events": 0
+  },
+  "private_evidence_sha256": {
+    "reuse_probe.py": "4879487e0e2a73bd862a1f014fc857d662dccee762f10a62919687892786919e",
+    "replay.py": "19e01e74c9e53c42584e97060dbd7ff8b3387dbcfec1f5b48f2c048d09d2f9f6",
+    "replay_before.py": "536b47191f844a6741801bf32e3b03991ebc8f08515b717312d4ba554a436f50",
+    "full-tests.log": "3a39c64d358cf85a6893eb35462084c33ff15920f198825323cdfcfa559d8c70",
+    "structure-tests.log": "a6430ec94a84144789d2d2a8b8da5c6b04649c6f7c1e34c58e5a690bab1ce9fe",
+    "equivalence-5.json": "7a548548bd0e3e3c63ad215c41e6b3772a8cb3163a142bb6b9dc734f87c0fe98",
+    "equivalence-6.json": "fc3e7bbfb9ece8c96ffdb1d0cf7abc8b84fcfd5a436a3a2a7d4c36bde30347a7"
+  }
+}

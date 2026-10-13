@@ -5,6 +5,13 @@
 Registrering av fler kommuner använder samma aktuella kod som Lund och Malmö.
 Inga särskilda kopior av insamlare eller äldre images ska installeras per kommun.
 
+- Kampanjstruktur återanvänds även i `ops-menu-reuse-334aeb2fa2a8` med
+  begränsning per beräkning. Aktuella mängdtak, medlemsvillkor och
+  källvalidering kontrolleras fortfarande. Detta är gemensam appkod för
+  befintliga och nya kommuner. Återanvändning av ytterligare butiksdelresultat
+  infördes inte eftersom den testade varianten var långsammare. Se
+  [verifiering av punkt 5–6](releases/menu-reuse-20261013/RESULTS.md).
+
 - Menyoptimeringarna i `ops-menu-7eab60a36fae` är gemensamma för alla kommuner:
   begränsad cache för ren textnormalisering, återanvändning av recept-ID och
   profilegenskaper inom ett urval samt effektivare exakt butiksjämförelse.

@@ -83,8 +83,12 @@ Inga nya OOM-händelser under denna driftsättning och verifiering.
    Kräver både identiska prisresultat och en mätt minnesgräns; inför ingen
    obegränsad cache när fler kommuner tillkommer.
 
-Dessa två är utredningspunkter, inte driftsatta ändringar. Den befintliga
-återanvändningen av menyer för samma validerade prisversion är redan aktiv.
+Uppföljning samma dag: kampanjstrukturen (punkt 5 i åtgärdslistan) är nu
+verifierad och driftsatt. Butiksdelresultat (punkt 6) har verifierats men
+införs inte eftersom den testade återanvändningen kostade mer tid än den
+sparade. Se [resultat och evidens](../menu-reuse-20261013/RESULTS.md).
+Den befintliga återanvändningen av menyer för samma validerade prisversion
+är fortsatt aktiv.
 Första menyn är fortfarande långsam och mer arbete behövs för interaktiv svarstid.
 
 ## Spårbarhet
