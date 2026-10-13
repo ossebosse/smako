@@ -238,15 +238,17 @@ def _review_schema_diff(
         required_type_changes = tuple(
             change for change in diff.type_changed if not reviewed_hemkop_type_change(change)
         )
-    elif chain == Chain.WILLYS and parser_version in {"willys-parser-v3", "willys-parser-v4"}:
+    elif chain == Chain.WILLYS and parser_version in {"willys-parser-v3", "willys-parser-v4", "willys-parser-v5"}:
         from grocery_data.app.connectors.willys.schema_review import (
             reviewed_willys_schema_diff,
             reviewed_willys_type_change,
         )
 
-        reviewed = reviewed_willys_schema_diff(diff)
+        nullable_price = parser_version == "willys-parser-v5"
+        reviewed = reviewed_willys_schema_diff(diff, nullable_price=nullable_price)
         required_type_changes = tuple(
-            change for change in diff.type_changed if not reviewed_willys_type_change(change)
+            change for change in diff.type_changed
+            if not reviewed_willys_type_change(change, nullable_price=nullable_price)
         )
     else:
         return diff

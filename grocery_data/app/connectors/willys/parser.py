@@ -155,7 +155,7 @@ def _category_path(payload: dict[str, Any]) -> tuple[str, ...]:
 
 
 class WillysParser:
-    parser_version = "willys-parser-v4"
+    parser_version = "willys-parser-v5"
 
     def __init__(self, *, accept_sales_price_object: bool = True) -> None:
         self.accept_sales_price_object = accept_sales_price_object

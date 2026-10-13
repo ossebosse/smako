@@ -227,7 +227,7 @@ def test_category_parser_version_is_exposed_and_preserved_in_lineage() -> None:
     source = _parse("category_context.json").products[0]
     normalized = ProductNormalizer().normalize(source, parser_version=connector.parser_version)
 
-    assert parser.parser_version == "willys-parser-v4"
+    assert parser.parser_version == "willys-parser-v5"
     assert connector.parser_version == parser.parser_version
     assert normalized.parser_version == parser.parser_version
 

@@ -23,8 +23,18 @@ _PRODUCT_IMAGE_TEXT = re.compile(
     r"[0-9]+:catalog_page:\$\[\]\.results\[\]\.(?:image|thumbnail)\.(?:format|imageType|url)\Z"
 )
 
+_CATALOG_PRICE = re.compile(r"[0-9]+:catalog_page:\$\[\]\.results\[\]\.priceValue\Z")
 
-def reviewed_willys_type_change(change: SchemaTypeChange) -> bool:
+
+def reviewed_willys_type_change(change: SchemaTypeChange, *, nullable_price: bool = False) -> bool:
+    # Retained Malmö 2026-10-12: one cleaning product per store has no price.
+    # Parser preserves None (never zero or promotion fallback); normal health
+    # and purchasability gates still apply. All-null/type/removal changes stop.
+    if nullable_price and _CATALOG_PRICE.fullmatch(change.path):
+        return (set(change.old_types), set(change.new_types)) in [
+            ({"number"}, {"null", "number"}),
+            ({"null", "number"}, {"number"}),
+        ]
     if not (_LABEL_IMAGE.fullmatch(change.path) or _PRODUCT_IMAGE_TEXT.fullmatch(change.path)):
         return False
     before, after = set(change.old_types), set(change.new_types)
@@ -34,11 +44,12 @@ def reviewed_willys_type_change(change: SchemaTypeChange) -> bool:
     ]
 
 
-def reviewed_willys_schema_diff(diff: SchemaDiff) -> SchemaDiff:
+def reviewed_willys_schema_diff(diff: SchemaDiff, *, nullable_price: bool = False) -> SchemaDiff:
     return SchemaDiff(
         added=diff.added,
         removed=diff.removed,
         type_changed=tuple(
-            change for change in diff.type_changed if not reviewed_willys_type_change(change)
+            change for change in diff.type_changed
+            if not reviewed_willys_type_change(change, nullable_price=nullable_price)
         ),
     )
