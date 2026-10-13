@@ -257,7 +257,7 @@ class _QuoteCacheSession:
     subset_patterns: dict[tuple, tuple[str | None, ...]] = field(default_factory=dict)
     # Exact quotient of subset vectors, request-local like the source quotes.
     # A bit marks every store subset with that same rank/price/winning store.
-    subset_partitions: dict[int, tuple[tuple, tuple]] = field(default_factory=dict)
+    subset_partitions: dict[int, tuple[tuple, tuple, tuple]] = field(default_factory=dict)
     subset_cap_masks: dict[int, tuple[tuple, tuple[int, ...]]] = field(default_factory=dict)
     base_candidate_rows: dict[
         int, tuple[tuple[ProductCandidate, ...], tuple[ProductCandidate, ...]]
@@ -1272,24 +1272,46 @@ class BasketOptimizer:
             cached = session.subset_partitions.get(id(vector)) if session else None
             if cached is not None and cached[0] is vector:
                 groups = cached[1]
+                positions = cached[2]
             else:
                 grouped = {}
+                positions = []
+                operands = {}
                 for index, selection in enumerate(vector):
+                    key = None
                     if selection.store_id is not None:
                         key = (selection.verification_rank, selection.total_price, selection.store_mask)
+                        key = operands.setdefault(key, key)
                         grouped[key] = grouped.get(key, 0) | (1 << index)
+                    positions.append(key)
                 groups = tuple(grouped.items())
+                positions = tuple(positions)
                 if session:
-                    session.subset_partitions[id(vector)] = (vector, groups)
-            partitions.append(groups)
+                    session.subset_partitions[id(vector)] = (vector, groups, positions)
+            partitions.append((groups, positions))
         # Small partitions first reduces intermediate intersections without
         # changing the commutative arithmetic or quote selection.
-        partitions.sort(key=len)
+        partitions.sort(key=lambda partition: len(partition[0]))
         states = {(0, Decimal(0), 0): (1 << len(store_subsets)) - 1}
-        for groups in partitions:
+        for groups, positions in partitions:
             refined = {}
             for (rank, total, stores), mask in states.items():
-                for (line_rank, line_total, line_store), line_mask in groups:
+                # Sparse intersections can visit actual positions instead of
+                # testing unrelated groups. Both routes retain every exact
+                # intersection, Decimal sum, rank and winning store identity.
+                if mask.bit_count() * 2 < len(groups):
+                    overlaps = {}
+                    remaining = mask
+                    while remaining:
+                        bit = remaining & -remaining
+                        remaining ^= bit
+                        selection = positions[bit.bit_length() - 1]
+                        if selection is not None:
+                            overlaps[selection] = overlaps.get(selection, 0) | bit
+                    candidates = overlaps.items()
+                else:
+                    candidates = groups
+                for (line_rank, line_total, line_store), line_mask in candidates:
                     overlap = mask & line_mask
                     if overlap:
                         key = (max(rank, line_rank), total + line_total, stores | line_store)

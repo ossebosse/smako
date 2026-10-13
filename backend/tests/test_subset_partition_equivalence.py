@@ -3,6 +3,7 @@ from decimal import Decimal
 from itertools import combinations
 from random import Random
 
+import pytest
 from app.services.basket_optimizer import (
     BasketOptimizer,
     _CompactQuoteSelection,
@@ -10,10 +11,11 @@ from app.services.basket_optimizer import (
 )
 
 
-def test_partition_keys_match_scalar_for_all_caps_including_ties_and_missing_stores():
+@pytest.mark.parametrize("count_ceiling,repeats", [(9, 160), (24, 24)])
+def test_partition_keys_match_scalar_for_all_caps_including_ties_and_missing_stores(count_ceiling, repeats):
     random = Random(1729)
-    for _ in range(160):
-        count, limit = random.randrange(2, 9), random.randrange(2, 5)
+    for _ in range(repeats):
+        count, limit = random.randrange(2, count_ceiling), random.randrange(2, 5)
         limit = min(count, limit)
         subsets = tuple(c for size in range(1, limit + 1) for c in combinations(range(count), size))
         vectors = []
@@ -32,20 +34,26 @@ def test_partition_keys_match_scalar_for_all_caps_including_ties_and_missing_sto
                                   total_price=price, store_id=str(winner), store_mask=1 << winner))
             vectors.append(tuple(vector))
         expected, infeasible = [None] * limit, 0
+        scalar_keys = []
         for index, combo in enumerate(subsets):
             chosen = [vector[index] for vector in vectors]
             if any(s.store_id is None for s in chosen):
                 infeasible += 1
+                scalar_keys.append(None)
                 continue
             key = (max((s.verification_rank for s in chosen), default=0),
                    sum((s.total_price for s in chosen), Decimal(0)),
                    len({s.store_id for s in chosen}))
+            scalar_keys.append(key)
             for cap in range(len(combo) - 1, limit):
                 expected[cap] = min(expected[cap], key) if expected[cap] else key
         session = _QuoteCacheSession()
         for _repeat in range(2):
             actual = BasketOptimizer._grouped_subset_keys(vectors, subsets, limit, session)
             assert actual == (expected, infeasible)
+            winners = sum(1 << i for i, key in enumerate(scalar_keys)
+                          if key is not None and key == expected[-1])
+            assert BasketOptimizer._grouped_subset_keys(vectors, subsets, limit, session, winning_mask=True) == (expected, infeasible, winners)
 
 
 def test_partition_cache_keeps_source_references_and_different_operands_separate():
