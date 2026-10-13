@@ -247,3 +247,65 @@ def test_pending_loaded_scope_is_acknowledged_without_reload(tmp_path, monkeypat
     monkeypatch.setattr(runner, '_write_status', lambda value: None)
     assert runner._run_demand_locked(object(), started_at=now) == 0
     assert 'pending_runtime' not in json.loads(path.read_bytes())
+
+
+@pytest.mark.parametrize('code,city', [('1281', 'Lund'), ('1280', 'Malmö'), ('1480', 'Göteborg')])
+def test_lost_municipal_receipt_is_acknowledged_without_recollection(tmp_path, monkeypatch, code, city):
+    from deploy.scripts import run_daily_refresh as runner
+    from grocery_data.app.services import coop_offer_job as coop
+
+    now = datetime.now(UTC)
+    monkeypatch.setenv('REFRESH_CITY', city)
+    monkeypatch.setenv('COOP_MUNICIPAL_OFFERS_ROOT', str(tmp_path / 'coop'))
+    monkeypatch.setenv('COOP_MUNICIPAL_OFFERS_ENABLED', 'true')
+    monkeypatch.setenv('COOP_MUNICIPALITY_CODE', code)
+    monkeypatch.setenv('COOP_MUNICIPAL_BUILD_CITY', city)
+    root, cfg = coop.configuration()
+    source_path = coop.location(root, cfg)
+    failed_store = {'store_id': 'test-store', 'selected': True, 'concept': 'Coop',
+                    'failed_attempts': 14, 'status': 'failed', 'last_success': None,
+                    'next_fetch_at': (now + timedelta(hours=6)).isoformat()}
+    source = {'selection': {'stores': [failed_store],
+                           'next_inventory_check': (now + timedelta(days=1)).isoformat()}}
+    coop.write(source_path, source)
+    fingerprint = coop.source_plan(now=now)['fingerprint']
+    identity = 'universe:' + code
+    source.update(built={'universe_id': identity, 'fingerprint': fingerprint},
+                  publication={'status': 'publication_or_reload_pending',
+                               'retry_at': (now - timedelta(minutes=1)).isoformat()})
+    coop.write(source_path, source)
+    scoped = coop.source_plan(now=now)
+    assert scoped['publication_due'] and not scoped['inventory_due'] and not scoped['due_store_ids']
+    path = tmp_path / 'runner.json'
+    state = {'pending_runtime': {'universe_id': identity, 'fingerprint': 'same'}}
+    plan = {'state': state, 'state_path': str(path), 'work_due': True, 'due_sources': [],
+            'reasons': ['coop_municipal_work_due'], 'source_fingerprint': 'same', 'coop_municipal': scoped}
+    monkeypatch.setattr(runner, 'demand_refresh_plan', lambda **kwargs: plan)
+    manifest = SimpleNamespace(universe_id=identity, oldest_base_observed_at=now, oldest_observed_at=now)
+    monkeypatch.setattr(runner, '_artifact_store', lambda: SimpleNamespace(
+        read_active=lambda city: manifest, resolve_active_artifact=lambda *args, **kwargs: path))
+    monkeypatch.setattr(runner, '_confirm_loaded_runtime', lambda expected: {'new_price_universe_id': expected})
+    monkeypatch.setattr(runner, '_reload_runtime', lambda: pytest.fail('already loaded'))
+    monkeypatch.setattr(runner, '_run_locked', lambda *args, **kwargs: pytest.fail('unnecessary source/build work'))
+    monkeypatch.setattr(runner, '_write_status', lambda value: None)
+    assert runner._run_demand_locked(object(), started_at=now) == 0
+    assert 'pending_runtime' not in json.loads(path.read_bytes())
+    after = coop.read(source_path)
+    assert after['publication']['status'] == 'reloaded'
+    assert after['publication']['reloaded_fingerprint'] == fingerprint
+    assert after['selection']['stores'] == [failed_store]
+    assert not coop.source_plan(now=now)['work_due']
+
+
+@pytest.mark.parametrize('reason,extra', [
+    ('campaign_transition', {}), ('source_promotion_pending_publication', {}),
+    ('ica_source_due', {}), ('hemkop_municipal_work_due', {}),
+    ('coop_municipal_work_due', {'due_store_ids': ['3833']}),
+    ('coop_municipal_work_due', {'inventory_due': True}),
+    ('coop_municipal_work_due', {'publication_due': False}),
+])
+def test_publication_retry_never_suppresses_real_source_work(reason, extra):
+    from deploy.scripts.run_daily_refresh import _runtime_publication_only
+    plan = {'reasons': [reason], 'coop_municipal': {'publication_due': True,
+            'due_store_ids': [], 'inventory_due': False, **extra}}
+    assert not _runtime_publication_only(plan)

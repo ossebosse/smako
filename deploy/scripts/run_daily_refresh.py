@@ -632,6 +632,46 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
         'checked_at': now.isoformat(), 'external_price_requests': 0}
 
 
+def _runtime_publication_only(plan):
+    """Separate a lost municipal receipt from actual collection/build work."""
+    reasons = {
+        'coop_municipal_work_due': 'coop_municipal',
+        'citygross_municipal_work_due': 'citygross_municipal',
+        'lidl_municipal_work_due': 'lidl_municipal',
+        'willys_flyer_work_due': 'willys_flyer',
+    }
+    for reason in plan.get('reasons', []):
+        if reason not in reasons:
+            return False
+        source = plan.get(reasons[reason], {})
+        if (not source.get('publication_due') or source.get('due_store_ids')
+                or source.get('inventory_due')):
+            return False
+    return True
+
+
+def _acknowledge_municipal_runtime(plan, status, universe_id):
+    from grocery_data.app.services import (
+        citygross_municipal_job,
+        coop_offer_job,
+        lidl_municipal_job,
+        willys_flyer_job,
+    )
+    success = True
+    for key, module in (
+        ('coop_municipal', coop_offer_job), ('citygross_municipal', citygross_municipal_job),
+        ('lidl_municipal', lidl_municipal_job), ('willys_flyer', willys_flyer_job),
+    ):
+        if not plan.get(key, {}).get('enabled'):
+            continue
+        try:
+            module.record_publication(status=status, disk_universe_id=universe_id)
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            status[key + '_publication_state_error'] = type(exc).__name__
+            success = False
+    return success
+
+
 def _run_demand_locked(lock, *, started_at):
     from datetime import timedelta
     plan = demand_refresh_plan(now=started_at)
@@ -640,7 +680,8 @@ def _run_demand_locked(lock, *, started_at):
     # Retry loading only while exact inputs and time-dependent offers agree.
     pending = state.get('pending_runtime')
     if (pending and not plan.get('bootstrap') and not plan.get('due_sources')
-            and not plan.get('reasons') and pending['fingerprint'] == plan['source_fingerprint']):
+            and _runtime_publication_only(plan)
+            and pending['fingerprint'] == plan['source_fingerprint']):
         manifest = _artifact_store().read_active(os.environ['REFRESH_CITY'])
         if manifest and manifest.universe_id == pending['universe_id']:
             from grocery_data.app.services.freshness import FreshnessPolicy, assess_freshness
@@ -655,12 +696,16 @@ def _run_demand_locked(lock, *, started_at):
                 except (RuntimeReloadUnavailable, RuntimeReloadRejected):
                     loaded = _confirm_loaded_runtime(manifest.universe_id)
             success = bool(loaded and loaded.get('new_price_universe_id') == manifest.universe_id)
+            receipt_status = {'city': os.environ['REFRESH_CITY'], 'refresh_exit_code': 0,
+                              'runtime_reload': loaded or {'status': 'deferred'}}
+            if success:
+                success = _acknowledge_municipal_runtime(plan, receipt_status, manifest.universe_id)
             if success:
                 state.pop('pending_runtime', None)
             state['last_runtime_retry_at'] = started_at.isoformat()
             atomic_write_bytes(path, json.dumps(state).encode())
-            _write_status({'status': 'complete' if success else 'degraded', 'build_reused': True,
-                           'city': os.environ['REFRESH_CITY'], 'runtime_reload': loaded or {'status': 'deferred'},
+            _write_status({**receipt_status,
+                           'status': 'complete' if success else 'degraded', 'build_reused': True,
                            'exit_code': 0 if success else 2})
             return 0 if success else 2
     if not plan['work_due']:
