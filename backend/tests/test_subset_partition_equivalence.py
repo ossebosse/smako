@@ -64,3 +64,21 @@ def test_partition_cache_keeps_source_references_and_different_operands_separate
                        total_price=price) for _ in subsets)
         actual, missing = BasketOptimizer._grouped_subset_keys((vector,), subsets, 2, session)
         assert actual == [(0, price, 1), (0, price, 1)] and missing == 0
+
+
+def test_singleton_finishes_remaining_prices_and_rejects_later_missing_quote():
+    def selected(store, price, rank=0):
+        return _CompactQuoteSelection(quote=None, store_id=str(store),
+                                      store_mask=1 << store, total_price=Decimal(price),
+                                      verification_rank=rank)
+    absent = _CompactQuoteSelection(quote=None)
+    subsets = ((0,), (1,), (0, 1))
+    vectors = (
+        (selected(0, '1'), selected(1, '1', 1), selected(0, '3')),
+        (absent, selected(1, '2'), selected(0, '2')),
+        (selected(0, '4'), selected(1, '4', 2), absent),
+    )
+    expected = (2, Decimal(7), 1)
+    assert BasketOptimizer._grouped_subset_keys(
+        vectors, subsets, 2, winning_mask=True,
+    ) == ([expected, expected], 2, 0b010)

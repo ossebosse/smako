@@ -1293,9 +1293,27 @@ class BasketOptimizer:
         # changing the commutative arithmetic or quote selection.
         partitions.sort(key=lambda partition: len(partition[0]))
         states = {(0, Decimal(0), 0): (1 << len(store_subsets)) - 1}
-        for groups, positions in partitions:
+        settled = {}
+        for partition_index, (groups, positions) in enumerate(partitions):
             refined = {}
             for (rank, total, stores), mask in states.items():
+                if mask & (mask - 1) == 0:
+                    # A singleton cannot split again. Finish its remaining
+                    # operands directly, in the same arithmetic order, rather
+                    # than reinsert it into every intermediate partition map.
+                    position = mask.bit_length() - 1
+                    for _remaining_groups, remaining_positions in partitions[partition_index:]:
+                        selection = remaining_positions[position]
+                        if selection is None:
+                            break
+                        line_rank, line_total, line_store = selection
+                        rank = max(rank, line_rank)
+                        total += line_total
+                        stores |= line_store
+                    else:
+                        key = (rank, total, stores)
+                        settled[key] = settled.get(key, 0) | mask
+                    continue
                 # Sparse intersections can visit actual positions instead of
                 # testing unrelated groups. Both routes retain every exact
                 # intersection, Decimal sum, rank and winning store identity.
@@ -1319,6 +1337,8 @@ class BasketOptimizer:
             states = refined
             if not states:
                 break
+        for key, mask in settled.items():
+            states[key] = states.get(key, 0) | mask
         cached = session.subset_cap_masks.get(id(store_subsets)) if session else None
         if cached is not None and cached[0] is store_subsets:
             cap_masks = cached[1]
