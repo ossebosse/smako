@@ -112,10 +112,18 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
     # This fills only process-local caches against the artifact activated
     # above.  It is disabled by default, makes no provider request and its
     # per-profile failure boundary never swaps or invalidates the universe.
-    application.state.plan_prewarm = await prewarm_active_price_universe(settings)
+    if settings.price_universe_prewarm_enabled:
+        from app.services.plan_prewarm import schedule_plan_prewarm
+        for active in GLOBAL_PREPARED_PRICE_UNIVERSES.active_universes():
+            schedule_plan_prewarm(application, settings, active)
+    else:
+        application.state.plan_prewarm = await prewarm_active_price_universe(settings)
     try:
         yield
     finally:
+        background = getattr(application.state, 'background_plan_prewarm', None)
+        if background is not None:
+            await background.close()
         await application.state.plan_jobs.close()
         community_engine = getattr(application.state, "community_evidence_engine", None)
         if community_engine is not None:

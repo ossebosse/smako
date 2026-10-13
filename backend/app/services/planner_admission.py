@@ -26,6 +26,10 @@ class PlannerAdmissionOverloaded(RuntimeError):
     """Raised before work starts when the bounded distinct-job queue is full."""
 
 
+class PlannerAdmissionBusy(RuntimeError):
+    """Optional background work must yield to admitted consumer work."""
+
+
 @dataclass(frozen=True, slots=True)
 class PlannerAdmissionStats:
     active: int
@@ -75,6 +79,8 @@ class PlannerAdmissionController:
         self,
         key: str,
         factory: Callable[[], Awaitable[Result]],
+        *,
+        only_if_idle: bool = False,
     ) -> Result:
         """Run one request, coalescing an identical in-flight computation."""
 
@@ -84,6 +90,8 @@ class PlannerAdmissionController:
 
         leader = False
         async with self._state_lock:
+            if only_if_idle and self._in_flight:
+                raise PlannerAdmissionBusy('consumer planning has priority')
             existing = self._in_flight.get(normalized_key)
             if existing is not None:
                 self._coalesced += 1

@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import functools
 import json
+from collections import OrderedDict
 from collections.abc import Iterable
-from dataclasses import dataclass
-from datetime import date
-from decimal import ROUND_CEILING, Decimal
+from dataclasses import dataclass, field
+from datetime import date, datetime
+from decimal import ROUND_CEILING, Decimal, getcontext, localcontext
 from hashlib import sha256
+from threading import RLock
+from zoneinfo import ZoneInfo
 
 from app.models.basket import BasketItem
 from app.models.ingredient import NormalizedIngredient
@@ -50,29 +53,42 @@ def money(value: float | Decimal) -> Decimal:
     return shared_money(value)
 
 
-def resolve_fixed_checkout_price(
-    *,
-    package_count: int,
-    base_unit_price: float | Decimal,
-    regular_unit_price: float | Decimal | None,
-    on_date: date | None = None,
-    offers: Iterable[OfferMetadata] = (),
-) -> tuple[Decimal, Decimal, OfferMetadata | None, str | None]:
-    """Pure fixed-package checkout calculation shared by calculator and audit.
+@dataclass(frozen=True, slots=True)
+class _PreparedCheckoutOffers:
+    # Exact serialized Decimal representations, dates, deposits and evidence
+    # belong to the key. Never use product names or approximate unit prices.
+    signature: tuple[str, ...]
+    promotions: tuple[CheckoutPromotion, ...] = field(compare=False, hash=False)
 
-    ``base_unit_price`` is the already-eligible ordinary/campaign/member price
-    for buying one package. Conditional multipacks are evaluated here because
-    eligibility depends on the final package count. Persisting that base price
-    lets :class:`BasketAuditor` independently repeat the same arithmetic rather
-    than trusting a basket's stored total.
+
+_PREPARED_OFFERS = OrderedDict()
+_PREPARED_OFFERS_LOCK = RLock()
+_CHECKOUT_ZONE = ZoneInfo('Europe/Stockholm')
+
+
+def _prepare_checkout_offers(offer_rows):
+    """Compile immutable offer terms, never eligibility or requested quantity.
+
+    Retaining the exact frozen offer objects prevents identity reuse. Replacing
+    an offer in a mutable source list changes the key. Large/unhashable inputs
+    stay on the uncached path. No user profile or pantry is stored here.
     """
-
-    offer_rows = tuple(offers)
-    references: dict[str, OfferMetadata] = {}
+    cacheable = len(offer_rows) <= 8 and all(type(o) is OfferMetadata for o in offer_rows)
+    if cacheable:
+        try:
+            hash(offer_rows)
+        except TypeError:
+            cacheable = False
+    key = tuple(map(id, offer_rows))
+    if cacheable:
+        with _PREPARED_OFFERS_LOCK:
+            cached = _PREPARED_OFFERS.get(key)
+            if cached is not None and all(a is b for a, b in zip(cached[0], offer_rows, strict=True)):
+                _PREPARED_OFFERS.move_to_end(key)
+                return cached[1], True
     normalized: list[CheckoutPromotion] = []
     for index, offer in enumerate(offer_rows):
         reference = offer.price_contract_id or f"basket-offer:{index:08d}"
-        references[reference] = offer
         normalized.append(
             CheckoutPromotion(
                 reference=reference,
@@ -99,13 +115,77 @@ def resolve_fixed_checkout_price(
                 campaign_evidence=offer.campaign_evidence,
             )
         )
-    resolution = resolve_fixed_package_checkout(
-        package_count=package_count,
-        base_unit_price=base_unit_price,
-        regular_unit_price=regular_unit_price,
-        promotions=tuple(normalized),
-        on_date=on_date,
-    )
+    if cacheable and sum(len(o.model_dump_json()) for o in offer_rows) > 8192:
+        cacheable = False
+    signature = tuple(p.model_dump_json() for p in normalized) if cacheable else ()
+    if sum(map(len, signature)) > 8192:
+        cacheable = False
+        signature = ()
+    prepared = _PreparedCheckoutOffers(signature, tuple(normalized))
+    if cacheable:
+        with _PREPARED_OFFERS_LOCK:
+            _PREPARED_OFFERS[key] = (offer_rows, prepared)
+            _PREPARED_OFFERS.move_to_end(key)
+            while len(_PREPARED_OFFERS) > 256:
+                _PREPARED_OFFERS.popitem(last=False)
+    return prepared, cacheable
+
+
+@functools.lru_cache(maxsize=2048)
+def _prepared_checkout_resolution(package_count, base, regular, prepared, target_date, context_key):
+    # The context is part of the cache key. Preserve even Decimal's sticky
+    # flags on both misses and hits; trapped failures are never cached.
+    parent = getcontext()
+    with localcontext(parent) as arithmetic:
+        arithmetic.clear_flags()
+        try:
+            result = resolve_fixed_package_checkout(
+                package_count=package_count, base_unit_price=base,
+                regular_unit_price=regular, promotions=prepared.promotions,
+                on_date=target_date,
+            )
+        finally:
+            flags = tuple(signal for signal, raised in arithmetic.flags.items() if raised)
+            for signal in flags:
+                parent.flags[signal] = True
+    return result, flags
+
+
+def resolve_fixed_checkout_price(
+    *,
+    package_count: int,
+    base_unit_price: float | Decimal,
+    regular_unit_price: float | Decimal | None,
+    on_date: date | None = None,
+    offers: Iterable[OfferMetadata] = (),
+) -> tuple[Decimal, Decimal, OfferMetadata | None, str | None]:
+    """Exact quantity-dependent checkout against prepared immutable terms.
+
+    Callers still supply only eligible offers. Dates, complete package counts,
+    caps, deposits and Decimal context remain part of each exact calculation.
+    The bounded result cache stores no product selection or personal state.
+    """
+    offer_rows = tuple(offers)
+    references = {offer.price_contract_id or f'basket-offer:{index:08d}': offer
+                  for index, offer in enumerate(offer_rows)}
+    prepared, cacheable = _prepare_checkout_offers(offer_rows)
+    if cacheable:
+        context = getcontext()
+        context_key = (context.prec, context.rounding, context.Emin, context.Emax,
+                       context.capitals, context.clamp, tuple(context.traps.items()))
+        resolution, flags = _prepared_checkout_resolution(
+            package_count, str(base_unit_price),
+            str(regular_unit_price) if regular_unit_price is not None else None,
+            prepared, on_date or datetime.now(tz=_CHECKOUT_ZONE).date(), context_key,
+        )
+        for signal in flags:
+            context.flags[signal] = True
+    else:
+        resolution = resolve_fixed_package_checkout(
+            package_count=package_count, base_unit_price=base_unit_price,
+            regular_unit_price=regular_unit_price, promotions=prepared.promotions,
+            on_date=on_date,
+        )
     applied = (
         references.get(resolution.applied_promotion.reference)
         if resolution.applied_promotion is not None

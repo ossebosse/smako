@@ -129,6 +129,7 @@ async def test_backend_runner_fills_then_hits_same_process_cache_without_live_so
         "servings",
         "max_stores",
         "use_member_prices",
+        "membership_price_policy",
         "optimization_iterations",
         "strategy",
         "candidate_recipe_count",

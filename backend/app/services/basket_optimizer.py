@@ -6,7 +6,7 @@ from collections.abc import Iterable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass, field
-from decimal import Decimal
+from decimal import Decimal, getcontext
 from itertools import combinations
 from threading import RLock
 from time import perf_counter
@@ -301,7 +301,7 @@ class _QuoteCacheSession:
     subset_patterns: dict[tuple, tuple[str | None, ...]] = field(default_factory=dict)
     # Exact quotient of subset vectors, request-local like the source quotes.
     # A bit marks every store subset with that same rank/price/winning store.
-    subset_partitions: dict[int, tuple[tuple, tuple, tuple]] = field(default_factory=dict)
+    subset_partitions: dict[int, tuple[tuple, tuple, tuple, bool]] = field(default_factory=dict)
     subset_cap_masks: dict[int, tuple[tuple, tuple[int, ...]]] = field(default_factory=dict)
     base_candidate_rows: dict[
         int, tuple[tuple[ProductCandidate, ...], tuple[ProductCandidate, ...]]
@@ -1306,7 +1306,8 @@ class BasketOptimizer:
         return tuple(best_by_cap)
 
     @staticmethod
-    def _grouped_subset_keys(subset_vectors, store_subsets, limit, session=None, *, winning_mask=False):
+    def _grouped_subset_keys(subset_vectors, store_subsets, limit, session=None, *, winning_mask=False,
+                             _integer_prices=True):
         """Aggregate every exact subset once per distinct winning-quote pattern.
 
         Store IDs and quote contracts are not collapsed. Bit partitions merely
@@ -1318,32 +1319,59 @@ class BasketOptimizer:
         if not store_subsets:
             result = ([None] * limit, 0)
             return (*result, 0) if winning_mask else result
+        subset_vectors = tuple(subset_vectors)
+        context = getcontext()
+        # Checkout has already applied every price contract and rounding rule.
+        # Compile only nonnegative, two-decimal totals with <=22 coefficient
+        # digits. At most 10,000 operands then sum to <10**26 cents, exactly
+        # representable in this context. No flags, traps or rounding change.
+        # Unusual precision/exponents retain the original Decimal algorithm.
+        integer_prices = (_integer_prices and 0 < len(subset_vectors) <= 10000
+                          and context.prec >= 28 and context.Emax >= 28
+                          and context.Emin <= -2 and not context.clamp)
         partitions = []
         for vector in subset_vectors:
             cached = session.subset_partitions.get(id(vector)) if session else None
-            if cached is not None and cached[0] is vector:
+            if cached is not None and cached[0] is vector and cached[3] == integer_prices:
                 groups = cached[1]
                 positions = cached[2]
             else:
                 grouped = {}
                 positions = []
                 operands = {}
+                compiled_selections = {}
                 for index, selection in enumerate(vector):
                     key = None
                     if selection.store_id is not None:
-                        key = (selection.verification_rank, selection.total_price, selection.store_mask)
+                        if integer_prices and id(selection) in compiled_selections:
+                            key = compiled_selections[id(selection)]
+                            grouped[key] = grouped.get(key, 0) | (1 << index)
+                            positions.append(key)
+                            continue
+                        price = selection.total_price
+                        if integer_prices:
+                            parts = price.as_tuple() if isinstance(price, Decimal) else None
+                            if parts is None or parts.sign or parts.exponent != -2 or len(parts.digits) > 22:
+                                return BasketOptimizer._grouped_subset_keys(
+                                    subset_vectors, store_subsets, limit, session,
+                                    winning_mask=winning_mask, _integer_prices=False,
+                                )
+                            price = int(price.scaleb(2))
+                        key = (selection.verification_rank, price, selection.store_mask)
                         key = operands.setdefault(key, key)
+                        if integer_prices:
+                            compiled_selections[id(selection)] = key
                         grouped[key] = grouped.get(key, 0) | (1 << index)
                     positions.append(key)
                 groups = tuple(grouped.items())
                 positions = tuple(positions)
                 if session:
-                    session.subset_partitions[id(vector)] = (vector, groups, positions)
+                    session.subset_partitions[id(vector)] = (vector, groups, positions, integer_prices)
             partitions.append((groups, positions))
         # Small partitions first reduces intermediate intersections without
         # changing the commutative arithmetic or quote selection.
         partitions.sort(key=lambda partition: len(partition[0]))
-        states = {(0, Decimal(0), 0): (1 << len(store_subsets)) - 1}
+        states = {(0, 0 if integer_prices else Decimal(0), 0): (1 << len(store_subsets)) - 1}
         settled = {}
         for partition_index, (groups, positions) in enumerate(partitions):
             refined = {}
@@ -1422,7 +1450,13 @@ class BasketOptimizer:
             for (rank, total, stores), mask in states.items():
                 if (rank, total, stores.bit_count()) == best_by_cap[-1]:
                     winners |= mask
+            if integer_prices:
+                best_by_cap = [None if key is None else (key[0], Decimal(key[1]).scaleb(-2), key[2])
+                               for key in best_by_cap]
             return best_by_cap, infeasible, winners
+        if integer_prices:
+            best_by_cap = [None if key is None else (key[0], Decimal(key[1]).scaleb(-2), key[2])
+                           for key in best_by_cap]
         return best_by_cap, infeasible
 
     def same_depth_store_limited_key(

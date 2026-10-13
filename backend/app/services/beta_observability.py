@@ -1115,6 +1115,7 @@ async def reload_active_price_universe(
     artifact_store_factory = artifact_store_factory or PreparedUniverseArtifactStore
     staging_manager_factory = staging_manager_factory or PreparedPriceUniverseManager
     projection_builder = projection_builder or precompute_pricing_semantics
+    custom_prewarm_runner = prewarm_runner is not None
     prewarm_runner = prewarm_runner or prewarm_active_price_universe
     artifact = artifact_store_factory(settings.price_universe_cache_root).resolve_active_artifact(
         settings.price_universe_city
@@ -1144,9 +1145,13 @@ async def reload_active_price_universe(
     old = active_manager.activate(candidate)
     application.state.pricing_projection_prewarm = projection
     try:
-        prewarm = await prewarm_runner(settings, manager=active_manager)
-        application.state.plan_prewarm = prewarm
-        prewarm_status = prewarm.status
+        if settings.price_universe_prewarm_enabled and not custom_prewarm_runner:
+            from app.services.plan_prewarm import schedule_plan_prewarm
+            prewarm_status = schedule_plan_prewarm(application, settings, candidate, manager=active_manager)
+        else:
+            prewarm = await prewarm_runner(settings, manager=active_manager)
+            application.state.plan_prewarm = prewarm
+            prewarm_status = prewarm.status
     except Exception:  # pragma: no cover - defensive optional prewarm boundary
         LOGGER.exception("optional plan prewarm failed after valid universe activation")
         prewarm_status = "failed"

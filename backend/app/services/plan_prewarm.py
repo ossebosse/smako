@@ -14,8 +14,12 @@ changing active state.
 
 from __future__ import annotations
 
+import asyncio
+import logging
+from collections import OrderedDict
 from collections.abc import Callable
 from dataclasses import replace
+from types import SimpleNamespace
 from typing import Protocol
 
 from app.config import Settings
@@ -130,11 +134,10 @@ class BackendStandardPlanPrewarmRunner:
             "recipes": profile.recipes,
             "servings": profile.servings,
             "max_stores": profile.max_stores,
-            # These fields intentionally mirror the standard web request. The
-            # menu cache includes Pydantic's explicit-field set in its key, so
-            # adding otherwise equivalent defaults (for example memberships={})
-            # would warm a different entry than the UI consumes.
+            # Match standard web pricing and diversity settings. Explicit
+            # diversity overrides affect resolved search policies and cache keys.
             "use_member_prices": False,
+            "membership_price_policy": "all_advertised",
             "optimization_iterations": 1,
             "strategy": "optimized",
             "candidate_recipe_count": profile.candidate_recipe_count,
@@ -212,6 +215,134 @@ async def prewarm_active_price_universe(
     )
     status_registry.publish(scope_id, report)
     return report
+
+
+class BackgroundPlanPrewarm:
+    """One bounded municipal queue sharing the consumer admission controller.
+
+    Readiness and source activation never wait for menus. Pending replacements
+    supersede older versions of the same municipality. Once a CPU worker has
+    started it is joined before releasing admission, even during shutdown.
+    """
+
+    def __init__(self, application, *, manager=GLOBAL_PREPARED_PRICE_UNIVERSES,
+                 runner=prewarm_active_price_universe, delay=15.0):
+        self.application, self.manager, self.runner = application, manager, runner
+        self.delay = delay
+        self.pending = OrderedDict()
+        self.completed = OrderedDict()
+        self.task = None
+        self.stopping = False
+        self.running_key = None
+
+    def enqueue(self, settings, prepared):
+        if not settings.price_universe_prewarm_enabled or self.stopping:
+            return 'disabled'
+        scope = prepared.universe.key.scope_id
+        version = prepared.universe.universe_id
+        if self.completed.get(scope) == version or self.running_key == (scope, version):
+            return 'already_active'
+        if scope not in self.pending and len(self.pending) >= 64:
+            return 'capacity_deferred'
+        self.pending[scope] = (settings, prepared)
+        if self.task is None or self.task.done():
+            self.task = asyncio.create_task(self._run())
+        return 'scheduled'
+
+    def _admitted_factory(self, scope, version, prepared):
+        from app.services.planner_admission import PlannerAdmissionBusy
+
+        coordinator = self
+
+        class AdmittedService:
+            def __init__(self, policy, manager):
+                self.service = _default_service_factory(policy, manager)
+
+            async def create_plan(self, request):
+                async def work():
+                    if coordinator.manager.get_active(scope) is not prepared or coordinator.stopping:
+                        raise RuntimeError('prewarm universe superseded')
+                    worker = asyncio.create_task(self.service.create_plan(request))
+                    cancelled = None
+                    while not worker.done():
+                        try:
+                            await asyncio.shield(worker)
+                        except asyncio.CancelledError as exc:
+                            cancelled = exc
+                        except Exception:
+                            if cancelled is not None:
+                                raise cancelled
+                            raise
+                    if cancelled is not None:
+                        worker.exception()
+                        raise cancelled
+                    return worker.result()
+
+                while not coordinator.stopping:
+                    if coordinator.manager.get_active(scope) is not prepared:
+                        raise RuntimeError('prewarm universe superseded')
+                    try:
+                        return await coordinator.application.state.planner_admission.run(
+                            f'prewarm:{scope}:{version}', work, only_if_idle=True,
+                        )
+                    except PlannerAdmissionBusy:
+                        await asyncio.sleep(coordinator.delay)
+                raise RuntimeError('prewarm stopped')
+
+        return AdmittedService
+
+    async def _run(self):
+        while self.pending and not self.stopping:
+            await asyncio.sleep(self.delay)
+            if self.stopping:
+                break
+            scope, (settings, prepared) = self.pending.popitem(last=False)
+            if self.manager.get_active(scope) is not prepared:
+                continue
+            version = prepared.universe.universe_id
+            self.running_key = (scope, version)
+            postal = (settings.price_universe_prewarm_postal_code
+                      if settings.price_universe_prewarm_postal_code in prepared.universe.key.postal_codes
+                      else prepared.universe.key.postal_codes[0])
+            scoped = replace(settings, price_universe_city=prepared.universe.key.city,
+                             price_universe_prewarm_postal_code=postal)
+            try:
+                report = await self.runner(scoped, manager=self.manager,
+                                           service_factory=self._admitted_factory(scope, version, prepared))
+                self.application.state.plan_prewarm = report
+                logging.getLogger('uvicorn.error').info(
+                    'background_prewarm scope=%s universe=%s status=%s profiles=%s',
+                    scope, version, report.status, report.profiles_succeeded,
+                )
+                if report.status == 'complete' and self.manager.get_active(scope) is prepared:
+                    self.completed[scope] = version
+                    self.completed.move_to_end(scope)
+                    while len(self.completed) > 64:
+                        self.completed.popitem(last=False)
+            except Exception as exc:  # noqa: BLE001 -- isolate optional warming; log only exception type.
+                logging.getLogger(__name__).warning('background_prewarm_failed scope=%s error_type=%s', scope, type(exc).__name__)
+            finally:
+                self.running_key = None
+
+    async def close(self):
+        self.stopping = True
+        self.pending.clear()
+        if self.task is not None and not self.task.done():
+            self.task.cancel()
+            try:
+                await self.task
+            except asyncio.CancelledError:
+                pass
+
+
+def schedule_plan_prewarm(application, settings, prepared, *, manager=GLOBAL_PREPARED_PRICE_UNIVERSES):
+    coordinator = getattr(application.state, 'background_plan_prewarm', None)
+    if coordinator is None:
+        coordinator = BackgroundPlanPrewarm(application, manager=manager)
+        application.state.background_plan_prewarm = coordinator
+    status = coordinator.enqueue(settings, prepared)
+    application.state.plan_prewarm = SimpleNamespace(status=status)
+    return status
 
 
 __all__ = [
