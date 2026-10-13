@@ -1,3 +1,31 @@
+# 2026-10-13 15:04 UTC: Exakta menyoptimeringar driftsatta
+
+Gren `perf/menu-exact-20261013`. Aktiv app `ops-menu-7eab60a36fae`
+(image `3faff7284b50…`). Endast tre granskade appfiler lades ovanpå
+`ops-runtime-d7bcd3571125`; source/scheduler är fortsatt
+`ops-price-recovery-7e28ff96f72d`. Ingrediensändringen `1518101` är inte driftsatt.
+
+Begränsad cache för ren textnormalisering, återanvändning av innehålls-ID och
+egenskaper inom recepturvalet samt mindre arbete i den innersta exakta
+butiksjämförelsen. Tomma butikskombinationer ger korrekt ofullständig korg
+i stället för IndexError. Samma kod gäller befintliga och framtida kommuner.
+
+Fryst full meny: 440,016 → 384,693 s kallt, 3,204 → 2,962 s varmt.
+Hela planobjektet och alla sökräknare är identiska, utom tidsstatistik.
+193 tester, 80 separata jämförelser av recepturval, Ruff och compileall är gröna.
+Ingen minskning av sökutrymme eller kvalitetskrav. Första menyn är fortsatt långsam.
+
+Live Malmö: 370,813 s kallt / 8,171 s varmt, 17/17 kontroller och identisk
+återläsning; även recepten/korgarna/pris- och kvalitetsresultaten är identiska
+mellan dessa körningar. Personligt liveprov: 56,9 s, godkänd audit/återläsning.
+Båda readiness 200 på rätt build. Samtliga tidigare 268 planrevisioner och
+88 privata tillstånd är hashverifierat bevarade efter slutproven; nu 271/89
+med verifieringsplanerna. Inga nya OOM-händelser eller automatiska containeromstarter.
+
+Se [åtgärder och evidens](releases/menu-optimization-20261013/RESULTS.md).
+Privata prov: `.local/menu-optimization-20261013/`. Aktiveringsbevis och backup:
+`/opt/smako/evidence/ops-menu-7eab60a36fae/`. Återkör inte gamla aktiveringsskript.
+
 # 2026-10-13: Driftuppföljning och gemensamma kommunfixar slutförda
 
 Gren `fix/operations-20261013`. Aktiv app `ops-runtime-d7bcd3571125`

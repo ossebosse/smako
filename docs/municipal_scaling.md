@@ -5,6 +5,13 @@
 Registrering av fler kommuner använder samma aktuella kod som Lund och Malmö.
 Inga särskilda kopior av insamlare eller äldre images ska installeras per kommun.
 
+- Menyoptimeringarna i `ops-menu-7eab60a36fae` är gemensamma för alla kommuner:
+  begränsad cache för ren textnormalisering, återanvändning av recept-ID och
+  profilegenskaper inom ett urval samt effektivare exakt butiksjämförelse.
+  Tomma butikskombinationer hanteras uttryckligen. Nya kommuner behöver inga
+  egna patchar eller ändrade sök-/kvalitetsgränser. Se
+  [full jämförelse och driftprov](releases/menu-optimization-20261013/RESULTS.md).
+
 - Willys parser v5 hanterar den granskade nullable-number-övergången på
   `priceValue` för alla butiks-ID:n; saknat pris förblir saknat. V4-reläpaket
   verifieras fortfarande genom den gemensamma importvägen.
