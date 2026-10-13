@@ -7,6 +7,17 @@ from urllib.parse import urljoin, urlsplit
 from bs4 import BeautifulSoup
 
 
+def store_offer_url(links: list[str], store_id: str) -> str | None:
+    """Resolve equivalent detail links to one observed, exact store page."""
+    matches = set()
+    for url in links:
+        parsed = urlsplit(url)
+        if (parsed.scheme == 'https' and parsed.netloc == 'www.ica.se'
+                and re.fullmatch(r'/erbjudanden/[^/]+-' + re.escape(store_id) + r'/?', parsed.path)):
+            matches.add('https://www.ica.se' + parsed.path.rstrip('/') + '/')
+    return next(iter(matches)) if len(matches) == 1 else None
+
+
 def public_links(payload: bytes, base_url: str = "https://www.ica.se") -> dict:
     soup = BeautifulSoup(payload, "html.parser")
     flyers, next_pages, offers = set(), set(), set()

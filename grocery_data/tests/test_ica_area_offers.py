@@ -219,3 +219,16 @@ async def test_retained_store_page_offer_link_does_not_refetch_undue_prices(tmp_
     assert row['collection_status']=='not_due_retained' and row['row_approved_own']==7
     assert row['store']['source_fields']['offers_url']==previous['stores'][0]['offers_url']
     assert row['last_success_at']=='2026-09-28T09:00:00Z'
+
+@pytest.mark.parametrize('identity', ['1003660', '1004598', 'future-municipality-store'])
+def test_same_official_offer_page_with_product_details_is_one_integration(identity):
+    from grocery_data.app.connectors.ica.public_material import public_links, store_offer_url
+    page = f'https://www.ica.se/erbjudanden/fixture-{identity}/'
+    payload = f'<a href="{page}">Alla erbjudanden</a><a href="{page}?id=5004133830&amp;action=details">Visa erbjudande</a>'.encode()
+    links = public_links(payload)['offers_links']
+    assert len(links) == 2
+    assert store_offer_url(links, identity) == page
+    assert store_offer_url(links, 'different') is None
+    assert store_offer_url(links + [f'https://www.ica.se/erbjudanden/conflicting-{identity}/'], identity) is None
+    assert store_offer_url([page.replace('www.ica.se', 'unverified.example')], identity) is None
+    assert store_offer_url([page.replace('https:', 'http:')], identity) is None

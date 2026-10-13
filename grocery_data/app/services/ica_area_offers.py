@@ -411,12 +411,12 @@ async def collect_area_offers(area: GeographicArea, output: Path, *, collector=N
                 if not row["offers_url"] and row["official_store_url"]:
                     document = await connector.client.fetch_public_page(row["official_store_url"], store_id=store.external_id)
                     links = json.loads(document.payload)
-                    matches = [u for u in links.get("offers_links", [])
-                               if urlsplit(u).path.rstrip("/").endswith("-" + store.external_id)]
-                    if len(matches) == 1:
-                        row["offers_url"] = matches[0]
+                    from grocery_data.app.connectors.ica.public_material import store_offer_url
+                    offers_url = store_offer_url(links.get("offers_links", []), store.external_id)
+                    if offers_url:
+                        row["offers_url"] = offers_url
                         store = store.model_copy(update={"source_fields": {
-                            **store.source_fields, "offers_url": matches[0]}})
+                            **store.source_fields, "offers_url": offers_url}})
                     row["flyer_links"].extend(links.get("flyer_links", []))
                 if not row["offers_url"]:
                     row["collection_status"] = "missing_integration"
