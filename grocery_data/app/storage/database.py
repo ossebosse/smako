@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import sqlite3
 from collections.abc import Iterator
 from contextlib import contextmanager
+from pathlib import Path
 from typing import Any
 
 from sqlalchemy import Engine, create_engine, event
@@ -12,6 +14,20 @@ from sqlalchemy.pool import StaticPool
 from grocery_data.app.storage.models import Base
 
 SessionFactory = sessionmaker[Session]
+
+
+def enable_live_sqlite_readers(database: Path) -> None:
+    """Configure the live source DB under its operation lease, never an archive.
+
+    WAL keeps the last committed facts readable during long source imports.
+    The caller owns source serialization. SQLite's FULL durability is retained.
+    """
+    path = Path(database).resolve(strict=True)
+    with sqlite3.connect(path.as_uri() + '?mode=rw', uri=True, timeout=5) as db:
+        if db.execute('PRAGMA journal_mode=WAL').fetchone()[0] != 'wal':
+            raise RuntimeError('live_source_concurrent_readers_unavailable')
+        if db.execute('PRAGMA synchronous').fetchone()[0] != 2:
+            raise RuntimeError('live_source_full_durability_required')
 
 
 def create_database_engine(

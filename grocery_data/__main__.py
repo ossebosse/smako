@@ -2414,6 +2414,9 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
         "schedule": "manual_or_once_daily",
     }
     try:
+        from grocery_data.app.storage.database import enable_live_sqlite_readers
+
+        enable_live_sqlite_readers(database)
         policy = FreshnessPolicy(
             warning_age_hours=settings.price_age_warning_hours,
             stale_age_hours=settings.max_price_age_hours,

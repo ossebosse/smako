@@ -108,6 +108,9 @@ def repair(args):
         atomic_write_bytes(history_path, json.dumps(history).encode())
         try:
             if args.action == 'replay':
+                from grocery_data.app.storage.database import enable_live_sqlite_readers
+
+                enable_live_sqlite_readers(database)
                 code = asyncio.run(cli._replay(SimpleNamespace(chain=incident['chain'],
                     snapshot_id=incident['snapshot_id'], promote=True, accept_schema_change=False)))
             else:
