@@ -1,3 +1,36 @@
+# 2026-10-13: Driftuppföljning och gemensamma kommunfixar slutförda
+
+Gren `fix/operations-20261013`. Aktiv app `ops-runtime-d7bcd3571125`
+(image `96408f133010…`), source och one-off-tjänster `ops-price-recovery-7e28ff96f72d`
+(image `f45d9ae4ea87…`). Endast granskade filpatchar aktiverades.
+Ingrediensändringen `1518101` är inte driftsatt.
+
+Coop API-versioner och parser v3 är reparerade. Sparad fullkälla med 11 292
+produkter återspelades nätverksfritt till `6a0f76920461481289bc6d3df523a481`,
+med alla 819 råhashar/observationstider bevarade, och verifierades laddad i Lund.
+ICA Bunkeflostrand, Hemköp 4247/4199 och City Gross 3211 är också godkända
+på dokumenterad nivå och verifierat laddade i Malmö. Båda kommunerna har
+readiness 200 och alla obligatoriska baskontexter är FRESH.
+
+Kommunflödet äger sina fysiska Coop-erbjudanden. Exakt redan laddad publicering
+kan kvitteras utan nytt bygge; verkligt förfallna källor går ordinarie väg.
+Livekällan säkras till WAL/FULL under operationslåset före managed refresh eller
+guarded replay, även efter restore. Det rättar personliga menyers databaslås
+under prisjobb. Diagnostikens separata rågränser är 32 MB/fil och 128 MB/katalog.
+Samma fixar gäller nya kommuner; Göteborg provas isolerat utan produktionsaktivering.
+
+Offentlig Malmö-meny: 396 s kall / 8,7 s varm, 17/17 kontroller och identisk
+återläsning. Personlig meny efter låsfixen: 61,3 s, godkänd audit/återläsning.
+Första menyn är fortfarande långsam. Sex externa Coop/X:-tra-butiker saknar
+kvalificerbart underlag och behåller backoff. Inga kvalitetsgränser har sänkts.
+
+Full backup/restore-övning 60 filer/6,1 GB är godkänd. Alla tidigare 262
+planrevisioner och 86 privata tillstånd är bevarade; verifieringsplaner har
+tillkommit. Inga nya OOM-kill sedan 06:32 UTC. Båda reläer saknar väntande leverans.
+Se [slutrapport och evidens](releases/operations-followup-20261013/RESULTS.md).
+Privata körloggar finns i `.local/ops-followup-20261013/` och serverevidens under
+`/opt/smako/evidence/` för exakt BUILD_ID. Starta inte om gamla repair-/crawlskript.
+
 # 2026-10-13 07:39 UTC: Drift och prisuppdateringar granskade och reparerade
 
 Gren `fix/operations-20261013`. Malmö hade readiness 503 efter tre avvisade

@@ -131,6 +131,16 @@ gång. Ett avbrott med kvarstående running-post ska granskas mot verkligt jobb,
 inte repareras genom att radera journalen. Globala backoffhistoriken raderas
 inte. Källans retry-deadline och hastighetsgränser gäller fortsatt.
 
+Den levande gemensamma källdatabasen ska använda SQLite WAL med FULL-durabilitet.
+Managed refresh och guarded replay säkerställer läget under operationslåset,
+även efter återställning. Detta låter konsumenterna läsa committade produktfakta
+under insamling/import. Ändra aldrig journalformatet på slutna hashbundna arkiv,
+godkända kommunala källdatabaser eller byggkopior. Använd befintlig SQLite-backup
+för en konsistent kopia inklusive committad WAL, inte en filkopiering av enbart
+huvudfilen. SQLite beskriver beteendet i [WAL-dokumentationen](https://sqlite.org/wal.html).
+Diagnostikens rågränser är 32 MB per fil och 128 MB per katalog; varje hash och
+ursprunglig observationstid måste fortfarande verifieras före replay.
+
 Öppna deterministiska schemafel begränsar berörda onlinekontexter i de verifierade
 Hemköp-/Coop-adaptrarna tills granskad reparation/återhämtning. Andra tillåtna
 butiker i samma kedja bevaras. Fysiska erbjudandefel blockerar inte onlinebasen.

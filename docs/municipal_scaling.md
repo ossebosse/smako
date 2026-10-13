@@ -11,10 +11,30 @@ Inga särskilda kopior av insamlare eller äldre images ska installeras per komm
 - City Gross-diagnostiken följer kommunens godkända databasreferens.
 - Både reläkvittens och en väntande runtime-laddning kan bekräfta exakt rätt
   kommun och pris-ID innan en onödig återladdning görs. Appen behåller sina
-  beräkningscacher när samma validerade prisversion återladdas.
+  beräkningscacher när samma validerade prisversion återladdas. Väntande
+  kommunala publiceringskvittenser kan också avslutas utan nytt prisbygge när
+  samma underlag redan är laddat; verkligt förfallna butiker/inventeringar och
+  ändrade kampanjer går fortfarande genom den vanliga uppdateringen.
 - ICA:s officiella butikslänkar till samma erbjudandesida räknas som en länk
   även när ett produkt-ID finns i frågesträngen. Annan butik, annan domän eller
   två olika sidor accepteras inte som samma integration.
+- Coop Online väljer separat API-version för ecommerce och personalization
+  från Coops aktuella publika konfiguration. Versionsvalet är gemensamt och
+  testat med flera kommunnamn. Fullinsamling är fortfarande begränsad till
+  den uttryckliga online-allowlisten `730400`. Parser v3 har en separat, exakt
+  granskning av energimärkningsmetadata och märkens sorteringsprioritet; pris,
+  identitet, pant, giltighet och medlemsvillkor omfattas inte av undantaget.
+- När kommunens Coop-flöde är aktiverat äger det de fysiska erbjudandena. Den
+  gamla stadsbaserade hämtningen körs inte parallellt för samma kommun. Andra
+  kommuners flöden och den separat verifierade onlinekatalogen påverkas inte.
+- Den levande gemensamma källdatabasen använder WAL under befintligt operationslås,
+  så personliga menyer kan läsa senast committade fakta under en lång import.
+  Managed refresh och granskad replay säkerställer samma läge även efter restore.
+  FULL-durabilitet består. Slutna, hashbundna källdatabaser och byggkopior ändras
+  inte; deras hashverifiering och SQLite-backup används som tidigare.
+- Diagnostik av en hel sparad katalog skiljer på högst 32 MB per råfil och
+  128 MB totalt. Hashar kontrolleras strömmande; en stor komplett katalog kan
+  återspelas utan att kvalitets-, identitets- eller färskhetskraven hoppas över.
 - Backup omfattar alla aktiva kommuners prisartefakter, registrerade källors
   godkända databaser och aktuella journaler. Ändrad registreringshash gör en
   ny backup förfallen; befintlig demand-worker tar den under samma operationslås.

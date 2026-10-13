@@ -1,0 +1,772 @@
+{
+  "scope": "operations and inherited municipal fixes",
+  "new_municipalities_activated": false,
+  "checked_at": "2026-10-13T13:08:52.255847+00:00",
+  "app": {
+    "build_id": "ops-runtime-d7bcd3571125",
+    "image": "sha256:96408f133010817d27944163441721623adb5a848b1cc396db455a908991fb83",
+    "commit": "d7bcd3571125e51a41be3e2db589b60e0b5e5e27",
+    "files": {
+      "backend/app/services/basket_optimizer.py": "e8ae9eb1c67657e36176d50226917444d4d4910caf751e47f007ab5d28636e87"
+    }
+  },
+  "source": {
+    "build_id": "ops-price-recovery-7e28ff96f72d",
+    "image": "sha256:f45d9ae4ea8733ea336914db972285f162eee940b3fc135b4e706624551fb4ee",
+    "commit": "7e28ff96f72db04f6a9959f284a01895562d2af6",
+    "base_image": "sha256:9bf3a201d5b90e5c0e1417c16c65c1662465558cb81faad92418c181754d6629",
+    "files": {
+      "grocery_data/__main__.py": "c21cf40f22ae7c17848c75a973d21a4aa5693788d9d0f4a13acdb02efb05f5f0",
+      "grocery_data/ops.py": "da92e935006b0819302ebcb9c8424cc0fc9e806f95c1e9d3473d49ba55516a2f",
+      "grocery_data/app/storage/database.py": "47c4566811a9c08b020dfdcf748c0bf05bf98866b657c192f71920d87f4d1401"
+    }
+  },
+  "source_activation": {
+    "status": "activated",
+    "at": "2026-10-13T12:54:01.419444+00:00",
+    "cron_schedule_preserved": true,
+    "active_manifests_preserved": true,
+    "preservation": {
+      "consumer_plan_revisions": {
+        "before": 267,
+        "after": 267,
+        "all_previous_rows_preserved": true
+      },
+      "personal_private_state": {
+        "before": 87,
+        "after": 87,
+        "all_previous_rows_preserved": true
+      }
+    }
+  },
+  "oneoff": {
+    "status": "configured",
+    "image": "sha256:f45d9ae4ea8733ea336914db972285f162eee940b3fc135b4e706624551fb4ee",
+    "services": [
+      "backup-once",
+      "refresh-once"
+    ],
+    "municipal_environment_keys": [
+      "BUILD_ID",
+      "COOP_MUNICIPAL_OFFERS_ROOT",
+      "ICA_STRUCTURED_OFFERS_ROOT",
+      "HEMKOP_MUNICIPAL_ROOT",
+      "LIDL_MUNICIPAL_ROOT",
+      "WILLYS_FLYER_ROOT"
+    ],
+    "containers_restarted": false
+  },
+  "runtime_receipts": [
+    {
+      "municipality": "1281",
+      "pending_before": false,
+      "reasons": [],
+      "due_sources": [],
+      "pending_after": false
+    },
+    {
+      "municipality": "1280",
+      "pending_before": true,
+      "reasons": [
+        "coop_municipal_work_due",
+        "willys_flyer_work_due",
+        "lidl_municipal_work_due",
+        "citygross_municipal_work_due"
+      ],
+      "due_sources": [],
+      "exit_code": 0,
+      "build_reused": true,
+      "pending_after": false
+    }
+  ],
+  "coop_replay": {
+    "status": "replayed_and_promoted",
+    "at": "2026-10-13T12:55:37.646465+00:00",
+    "source_snapshot_id": "f3041b4cb3464fe898dbac344a64bb43",
+    "replay_snapshot_id": "6a0f76920461481289bc6d3df523a481",
+    "parser_version": "coop-online-catalog-parser-v3",
+    "metrics": {
+      "stores_found": 1,
+      "stores_successful": 1,
+      "stores_failed": 0,
+      "products_fetched": 11292,
+      "products_parsed": 11292,
+      "products_quarantined": 0,
+      "products_with_price": 11292,
+      "products_with_gtin": 11234,
+      "products_with_package_quantity": 11236,
+      "unknown_sale_model": 46,
+      "request_count": 0,
+      "http_error_count": 0,
+      "rate_limit_count": 0,
+      "runtime_ms": 0
+    },
+    "completion": {
+      "730400": {
+        "complete": true,
+        "limited": false,
+        "expected_categories": 748,
+        "completed_categories": 748,
+        "pages_fetched": 817,
+        "products_observed": 11292,
+        "expected_products": 12434,
+        "raw_rows": 12434,
+        "unique_products": 11292,
+        "duplicate_products": 1142,
+        "within_partition_duplicates": 0,
+        "cross_partition_duplicates": 1142,
+        "exact_duplicates_removed": 0,
+        "conflicting_duplicates": 0,
+        "pagination_overlaps": 0,
+        "expected_pages": 817,
+        "reason": null
+      }
+    },
+    "raw_files": 819,
+    "raw_hashes_and_times_preserved": true,
+    "network_requests": 0,
+    "publication_exit_code": 2,
+    "publication_finished_at": "2026-10-13T13:08:33.585298+00:00",
+    "schema_change_accepted": false,
+    "effective_schema_diff": null
+  },
+  "municipalities": [
+    {
+      "municipality_code": "1281",
+      "city": "Lund",
+      "ready_status": 200,
+      "price_universe": {
+        "price_universe_id": "price-universe:8bbb89c60466e255b78a577e65ccba99a9a58c2bf49f2ffa5abe81a16e842336",
+        "status": "aging",
+        "product_count": 2259,
+        "oldest_price_age_hours": 39.165
+      },
+      "required_contexts": [
+        {
+          "context_id": "context:coop:23eaae11c9661e68",
+          "chain": "coop",
+          "store_id": "730400",
+          "channel": "online_fulfillment",
+          "snapshot_id": "6a0f76920461481289bc6d3df523a481",
+          "observed_at": "2026-10-13T10:46:08.957361+00:00",
+          "age_hours": 2.387,
+          "freshness": "FRESH",
+          "remaining_hours": 45.613,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": null,
+          "serving_source": {
+            "snapshot_id": "6a0f76920461481289bc6d3df523a481",
+            "observed_at": "2026-10-13T10:46:08.957361+00:00",
+            "age_hours": 2.387
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:hemkop:3288e04edd97e349",
+          "chain": "hemkop",
+          "store_id": "4224",
+          "channel": "online_store",
+          "snapshot_id": "eccbb9b5b3ab468cade660e75eb7efa7",
+          "observed_at": "2026-10-12T22:16:04.428947+00:00",
+          "age_hours": 14.888,
+          "freshness": "FRESH",
+          "remaining_hours": 33.112,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": null,
+          "serving_source": {
+            "snapshot_id": "eccbb9b5b3ab468cade660e75eb7efa7",
+            "observed_at": "2026-10-12T22:16:04.428947+00:00",
+            "age_hours": 14.888
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:hemkop:756955d0e6e05f23",
+          "chain": "hemkop",
+          "store_id": "4123",
+          "channel": "online_store",
+          "snapshot_id": "88038c7bcd9343d5aaa17478aa21ecbb",
+          "observed_at": "2026-10-12T21:01:55.498638+00:00",
+          "age_hours": 16.124,
+          "freshness": "FRESH",
+          "remaining_hours": 31.876,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": null,
+          "serving_source": {
+            "snapshot_id": "88038c7bcd9343d5aaa17478aa21ecbb",
+            "observed_at": "2026-10-12T21:01:55.498638+00:00",
+            "age_hours": 16.124
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:willys:383650ec6ff5a636",
+          "chain": "willys",
+          "store_id": "2176",
+          "channel": "online_store",
+          "snapshot_id": "0ba5f99dfe8d4df1a62a75f608d2b7e8",
+          "observed_at": "2026-10-12T23:43:31.102432+00:00",
+          "age_hours": 13.431,
+          "freshness": "FRESH",
+          "remaining_hours": 34.569,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": "6c8877f8bc73a54a95b5b0f2dc693c7f0cb01eccb68ff35f3c837495f462b253",
+          "serving_source": {
+            "snapshot_id": "0ba5f99dfe8d4df1a62a75f608d2b7e8",
+            "observed_at": "2026-10-12T23:43:31.102432+00:00",
+            "age_hours": 13.431
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:willys:4a671428fc484e43",
+          "chain": "willys",
+          "store_id": "2354",
+          "channel": "online_store",
+          "snapshot_id": "0ba5f99dfe8d4df1a62a75f608d2b7e8",
+          "observed_at": "2026-10-13T00:02:22.564523+00:00",
+          "age_hours": 13.117,
+          "freshness": "FRESH",
+          "remaining_hours": 34.883,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": "6c8877f8bc73a54a95b5b0f2dc693c7f0cb01eccb68ff35f3c837495f462b253",
+          "serving_source": {
+            "snapshot_id": "0ba5f99dfe8d4df1a62a75f608d2b7e8",
+            "observed_at": "2026-10-13T00:02:22.564523+00:00",
+            "age_hours": 13.117
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        }
+      ],
+      "pending_runtime": null,
+      "relay": {
+        "checked_at": "2026-10-13T13:09:31.433692+00:00",
+        "pending_delivery": false,
+        "status": "observed",
+        "last_task_result": 0
+      },
+      "scheduling": {
+        "work_due": false,
+        "deadline": "2026-10-14T21:01:55.498638+00:00",
+        "reasons": []
+      }
+    },
+    {
+      "municipality_code": "1280",
+      "city": "Malmö",
+      "ready_status": 200,
+      "price_universe": {
+        "price_universe_id": "price-universe:753e70c7ab4d478330f7c5b534cac9b8e9f219e90907ce2c299321ff4398fdd2",
+        "status": "aging",
+        "product_count": 2589,
+        "oldest_price_age_hours": 38.894
+      },
+      "required_contexts": [
+        {
+          "context_id": "context:citygross:33b01007b20e8988",
+          "chain": "citygross",
+          "store_id": "3211",
+          "channel": "online_store",
+          "snapshot_id": "db63eb4d7c8d4a10b15d000bb523009e",
+          "observed_at": "2026-10-13T10:20:00.980528+00:00",
+          "age_hours": 2.824,
+          "freshness": "FRESH",
+          "remaining_hours": 45.176,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": null,
+          "serving_source": {
+            "snapshot_id": "db63eb4d7c8d4a10b15d000bb523009e",
+            "observed_at": "2026-10-13T10:20:00.980528+00:00",
+            "age_hours": 2.824
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:hemkop:363b00fb95065cf0",
+          "chain": "hemkop",
+          "store_id": "4114",
+          "channel": "online_store",
+          "snapshot_id": "fca533656ab1463d9a8dfc2ffcc596e2",
+          "observed_at": "2026-10-13T03:31:00.971007+00:00",
+          "age_hours": 9.641,
+          "freshness": "FRESH",
+          "remaining_hours": 38.359,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": null,
+          "serving_source": {
+            "snapshot_id": "fca533656ab1463d9a8dfc2ffcc596e2",
+            "observed_at": "2026-10-13T03:31:00.971007+00:00",
+            "age_hours": 9.641
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:hemkop:559cb3b5b4885cdf",
+          "chain": "hemkop",
+          "store_id": "4212",
+          "channel": "online_store",
+          "snapshot_id": "d053881a90484bf081f9a624c05f0c45",
+          "observed_at": "2026-10-12T19:45:59.801197+00:00",
+          "age_hours": 17.391,
+          "freshness": "FRESH",
+          "remaining_hours": 30.609,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": null,
+          "serving_source": {
+            "snapshot_id": "d053881a90484bf081f9a624c05f0c45",
+            "observed_at": "2026-10-12T19:45:59.801197+00:00",
+            "age_hours": 17.391
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:hemkop:7c2684c2238e291f",
+          "chain": "hemkop",
+          "store_id": "4247",
+          "channel": "online_store",
+          "snapshot_id": "5f57a78acfb74228a2d65ed56f25bf2f",
+          "observed_at": "2026-10-13T09:50:30.938835+00:00",
+          "age_hours": 3.316,
+          "freshness": "FRESH",
+          "remaining_hours": 44.684,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": null,
+          "serving_source": {
+            "snapshot_id": "5f57a78acfb74228a2d65ed56f25bf2f",
+            "observed_at": "2026-10-13T09:50:30.938835+00:00",
+            "age_hours": 3.316
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:hemkop:ac1b35fa13bf792f",
+          "chain": "hemkop",
+          "store_id": "4199",
+          "channel": "online_store",
+          "snapshot_id": "15f3ce678b194af6bc260282259d06e9",
+          "observed_at": "2026-10-13T12:14:52.628389+00:00",
+          "age_hours": 0.91,
+          "freshness": "FRESH",
+          "remaining_hours": 47.09,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": null,
+          "serving_source": {
+            "snapshot_id": "15f3ce678b194af6bc260282259d06e9",
+            "observed_at": "2026-10-13T12:14:52.628389+00:00",
+            "age_hours": 0.91
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:willys:5adaf178f6561faa",
+          "chain": "willys",
+          "store_id": "2244",
+          "channel": "online_store",
+          "snapshot_id": "88f6115f68be4b5eb675121bee3225e1",
+          "observed_at": "2026-10-12T16:42:48.970572+00:00",
+          "age_hours": 20.444,
+          "freshness": "FRESH",
+          "remaining_hours": 27.556,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": "1e6defa470b5adee0ac56d8fcbe0a91dba79bddf8523a7c425931508c02038b4",
+          "serving_source": {
+            "snapshot_id": "88f6115f68be4b5eb675121bee3225e1",
+            "observed_at": "2026-10-12T16:42:48.970572+00:00",
+            "age_hours": 20.444
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:willys:91fc2ae693ecdec6",
+          "chain": "willys",
+          "store_id": "2253",
+          "channel": "online_store",
+          "snapshot_id": "88f6115f68be4b5eb675121bee3225e1",
+          "observed_at": "2026-10-12T17:39:25.061070+00:00",
+          "age_hours": 19.501,
+          "freshness": "FRESH",
+          "remaining_hours": 28.499,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": "1e6defa470b5adee0ac56d8fcbe0a91dba79bddf8523a7c425931508c02038b4",
+          "serving_source": {
+            "snapshot_id": "88f6115f68be4b5eb675121bee3225e1",
+            "observed_at": "2026-10-12T17:39:25.061070+00:00",
+            "age_hours": 19.501
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:willys:bbd37ea3cd468706",
+          "chain": "willys",
+          "store_id": "2114",
+          "channel": "online_store",
+          "snapshot_id": "88f6115f68be4b5eb675121bee3225e1",
+          "observed_at": "2026-10-12T17:01:24.412525+00:00",
+          "age_hours": 20.134,
+          "freshness": "FRESH",
+          "remaining_hours": 27.866,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": "1e6defa470b5adee0ac56d8fcbe0a91dba79bddf8523a7c425931508c02038b4",
+          "serving_source": {
+            "snapshot_id": "88f6115f68be4b5eb675121bee3225e1",
+            "observed_at": "2026-10-12T17:01:24.412525+00:00",
+            "age_hours": 20.134
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        },
+        {
+          "context_id": "context:willys:fc5fbe8cd6399ad8",
+          "chain": "willys",
+          "store_id": "2144",
+          "channel": "online_store",
+          "snapshot_id": "88f6115f68be4b5eb675121bee3225e1",
+          "observed_at": "2026-10-12T17:20:40.993300+00:00",
+          "age_hours": 19.813,
+          "freshness": "FRESH",
+          "remaining_hours": 28.187,
+          "qualified": true,
+          "published": true,
+          "loaded": true,
+          "receipt": "unknown_until_relay_read",
+          "stage": "loaded",
+          "source_artifact_sha256": "1e6defa470b5adee0ac56d8fcbe0a91dba79bddf8523a7c425931508c02038b4",
+          "serving_source": {
+            "snapshot_id": "88f6115f68be4b5eb675121bee3225e1",
+            "observed_at": "2026-10-12T17:20:40.993300+00:00",
+            "age_hours": 19.813
+          },
+          "freshness_risk": false,
+          "publication_overdue": false,
+          "first_failed_step": null,
+          "incident_ids": []
+        }
+      ],
+      "pending_runtime": null,
+      "relay": {
+        "checked_at": "2026-10-13T13:09:32.917658+00:00",
+        "pending_delivery": false,
+        "status": "observed",
+        "last_task_result": 0
+      },
+      "scheduling": {
+        "work_due": false,
+        "deadline": "2026-10-14T16:42:48.970572+00:00",
+        "reasons": []
+      }
+    }
+  ],
+  "public_menu": {
+    "public-final-cold": {
+      "seconds": 396.375,
+      "status": 201,
+      "acceptance": {
+        "postal_scope_preserved": true,
+        "selected_store_filter": true,
+        "five_dinners_two_servings": true,
+        "ten_total_portions": true,
+        "full_recipes": true,
+        "five_visible_recipe_cards": true,
+        "quantities_rendered": true,
+        "shopping_rows_rendered": true,
+        "max_three_stores": true,
+        "exact_request": true,
+        "memberships_preserved": true,
+        "selected_diversity_preserved": true,
+        "verified_basket": true,
+        "total_reconciled": true,
+        "basket_audit_passed": true,
+        "nutrition_quality_passed": true,
+        "quality_label_visible": true
+      },
+      "identical_reload": true,
+      "page_errors": [],
+      "build_id": "ops-runtime-d7bcd3571125"
+    },
+    "public-final-warm": {
+      "seconds": 8.672,
+      "status": 201,
+      "acceptance": {
+        "postal_scope_preserved": true,
+        "selected_store_filter": true,
+        "five_dinners_two_servings": true,
+        "ten_total_portions": true,
+        "full_recipes": true,
+        "five_visible_recipe_cards": true,
+        "quantities_rendered": true,
+        "shopping_rows_rendered": true,
+        "max_three_stores": true,
+        "exact_request": true,
+        "memberships_preserved": true,
+        "selected_diversity_preserved": true,
+        "verified_basket": true,
+        "total_reconciled": true,
+        "basket_audit_passed": true,
+        "nutrition_quality_passed": true,
+        "quality_label_visible": true
+      },
+      "identical_reload": true,
+      "page_errors": [],
+      "build_id": "ops-runtime-d7bcd3571125"
+    }
+  },
+  "personal_menu": {
+    "status": "pass",
+    "build_id": "ops-runtime-d7bcd3571125",
+    "seconds": 61.3,
+    "identical_reload": true,
+    "checkout_audit": true,
+    "errors": []
+  },
+  "personal_failure_before_fix": {
+    "type": "sqlite3.OperationalError",
+    "reason": "source database locked during refresh",
+    "source_journal_mode_before": "delete",
+    "source_journal_mode_after": "wal"
+  },
+  "database_concurrency_canary": {
+    "concurrent_reader": "pass",
+    "sqlite_version": "3.40.1",
+    "file_limit": 32000000,
+    "catalog_limit": 128000000
+  },
+  "source_wal": {
+    "journal_mode": "wal",
+    "active_coop_snapshot_id": "6a0f76920461481289bc6d3df523a481",
+    "checked_by": "read_only_connection"
+  },
+  "restore": {
+    "status": "verified",
+    "bundle": "20261013T083139Z",
+    "files": 60,
+    "bytes": 6117333859,
+    "recovery_scope_version": 2,
+    "municipalities": [
+      "active/city-lund.json",
+      "active/city-malmö.json"
+    ],
+    "network": "none",
+    "production_restore": false,
+    "verification": {
+      "bundle": "20261013T083139Z",
+      "status": "restored",
+      "verification": {
+        "bundle_schema": "grocery-beta-backup-v1",
+        "checks": {
+          "grocery_database": {
+            "mode": "bundle_hash_then_deletion_reapplication",
+            "status": "verified"
+          },
+          "plan_database": {
+            "mode": "bundle_hash_then_deletion_reapplication",
+            "status": "verified"
+          },
+          "price_universe": {
+            "mode": "semantic_and_file_hash",
+            "status": "verified"
+          },
+          "privacy_deletion_ledger": {
+            "entries": 0,
+            "entries_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "grocery_directives_verified": 0,
+            "saved_plan_directives_verified": 0,
+            "status": "verified"
+          }
+        },
+        "deletion_ledger": {
+          "entries": 0,
+          "entries_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "source": "operator_export",
+          "status": "verified_and_applied"
+        },
+        "price_universe_id": "price-universe:a9c1b0fbe3b7e380b4d48db1dbaaa7142d2ea57a976ac1824abdf365e48ee00b",
+        "status": "verified"
+      }
+    }
+  },
+  "user_preservation": {
+    "consumer_plan_revisions": {
+      "previous": 262,
+      "current": 268,
+      "all_previous_preserved": true
+    },
+    "personal_private_state": {
+      "previous": 86,
+      "current": 88,
+      "all_previous_preserved": true
+    }
+  },
+  "oom_events_since_review": 0,
+  "memory_available_kib": 8055344,
+  "performance_equivalence": {
+    "status": "PASS",
+    "frozen_price_artifact_sha256": "de54eafb81cf9bf47fd50a6a3e2a4d6929c88357b5e00b0c48009dbe98a0d2f6",
+    "clock": "2026-10-13T07:19:51+00:00",
+    "network": "disabled",
+    "before_seconds": 856.1147624000441,
+    "after_seconds": 602.4408146999776,
+    "semantic_plan_equal_except_timing": true,
+    "quality": "PASS",
+    "all_search_counters_equal": true,
+    "projection_sha256": "881fe8023dcf0ae41b294a4fd933ff9d73d94d27d64d2ade5d686679e32601ff"
+  },
+  "singleton_equivalence": {
+    "status": "PASS",
+    "network": "disabled",
+    "clock": "2026-10-13T07:19:51+00:00",
+    "semantic_plan_equal_except_timing": true,
+    "cold_and_warm_compared": true,
+    "before_seconds": 602.4408146999776,
+    "after_seconds": 440.01598369999556,
+    "warm_seconds": 3.204271199996583,
+    "original_before_seconds": 856.1147624000441,
+    "projection_sha256": "45e0bd4221027e741b12413ebb1f5e9e0d57431d93ad6c9a5dd3b52136bb8814"
+  },
+  "verification_pending": [],
+  "remaining_store_sources": [
+    {
+      "store_id": "3658",
+      "name": "X:-Tra Skansvägen",
+      "status": "blocked_or_incomplete_publications",
+      "last_attempt": "2026-10-13T11:16:48.431121+00:00",
+      "next_fetch_at": "2026-10-13T17:16:48.431121+00:00"
+    },
+    {
+      "store_id": "3833",
+      "name": "Coop Malmö Central",
+      "status": "failed",
+      "last_attempt": "2026-10-13T10:11:30.267147+00:00",
+      "next_fetch_at": "2026-10-13T16:11:30.267147+00:00"
+    },
+    {
+      "store_id": "3835",
+      "name": "Coop Kornettsgatan",
+      "status": "failed",
+      "last_attempt": "2026-10-13T10:11:30.267147+00:00",
+      "next_fetch_at": "2026-10-13T16:11:30.267147+00:00"
+    },
+    {
+      "store_id": "3831",
+      "name": "Coop Djupadal",
+      "status": "failed",
+      "last_attempt": "2026-10-13T10:11:30.267147+00:00",
+      "next_fetch_at": "2026-10-13T16:11:30.267147+00:00"
+    },
+    {
+      "store_id": "3646",
+      "name": "X:-Tra Söderkulla",
+      "status": "blocked_or_incomplete_publications",
+      "last_attempt": "2026-10-13T10:11:30.267147+00:00",
+      "next_fetch_at": "2026-10-13T16:11:30.267147+00:00"
+    },
+    {
+      "store_id": "3829",
+      "name": "X:-Tra Nydala",
+      "status": "failed",
+      "last_attempt": "2026-10-13T10:11:30.267147+00:00",
+      "next_fetch_at": "2026-10-13T16:11:30.267147+00:00"
+    }
+  ],
+  "private_evidence_sha256": {
+    "source-concurrent/activation-confirmed.json": "ade8c59ed5792921749cccc3c60574175e0b47ffdc017e5615c0dfdc1eae70e6",
+    "source-concurrent/replay-publication-proof.json": "6f3bb5c40d7e992e25f42912c4fe29f7eb14d9cf56afe2bb065f87fd295ba745",
+    "source-concurrent/wal-verification.json": "1bff097dc9ea60438b30e859838b1113387838cc10eb47c1a017a8e9e13c0268",
+    "personal-final-live/app.log": "3f831bf528567072b89cb2125edcc1d4a3d0d974cb98c583079491974b3eebe1",
+    "personal-final-repaired/acceptance.json": "8b1b0535a1baa6849f197a42c0f1e80af3f9ba5a9918ae36e526a0131255553f",
+    "public-final-cold/clean-balanced.json": "2a3586185ce578191b0b907d99c8c970af7560c329d202beee75da2748c11215",
+    "public-final-warm/clean-balanced.json": "3d90511026a4dab9c9cc6a66ea4c4f7fa76a3cf0b2419c99681b0896b67b46a8",
+    "municipalities-final.json": "12ea127dc8a956a7a379c4b69f57c9a82d6de8216963d4cd3f41b9699e7a379d",
+    "restore-verified.json": "f528f046c8f49f64a45a5a69fdbe537fd15bb2c1d22c6e947a8b682f57725971",
+    "final-runtime-latest.json": "08b3650b562de6f45d5e8a0683030611a78faf9c3deea2c4afb8d072edf7bb8b"
+  }
+}
