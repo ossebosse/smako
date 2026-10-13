@@ -13,6 +13,7 @@ import sqlite3
 import urllib.error
 import urllib.parse
 import urllib.request
+from contextlib import ExitStack
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
@@ -290,13 +291,39 @@ def status(environment=None, *, now=None):
     if not required_ids:
         required_ids = {row['store_id'] for row in state.get('base_scope', [])}
     contexts = []
-    with readonly(database) as db:
+    municipal_citygross = None
+    with ExitStack() as readers:
+        shared_db = readers.enter_context(readonly(database))
         for physical in state.get('base_scope', []):
             if physical['store_id'] not in required_ids:
                 continue
             provenance = physical.get('source_provenance', {})
             chain = physical['chain']
             external_id = provenance.get('provider_store_id')
+            entry = {'context_id': physical['store_id'], 'chain': chain, 'store_id': external_id,
+                     'channel': physical.get('price_context_type', provenance.get('price_context_type', 'unknown'))}
+            db = shared_db
+            approved_snapshots = None
+            if chain == 'citygross':
+                from grocery_data.app.services.citygross_municipal_job import source_inputs
+
+                if municipal_citygross is None:
+                    municipal_citygross = source_inputs(city=city, environment=env, now=now)
+                if municipal_citygross.get('citygross_municipal_enabled'):
+                    sources = [s for s in municipal_citygross.get('citygross_sources', [])
+                               if external_id in s['store_ids']]
+                    if len(sources) != 1:
+                        entry.update(stage='unknown', qualified=False,
+                                     reason='municipal_source_missing_or_ambiguous')
+                        contexts.append(entry)
+                        continue
+                    approved_snapshots = set(sources[0]['snapshot_ids'])
+                    try:
+                        db = readers.enter_context(readonly(sources[0]['database']))
+                    except (OSError, sqlite3.Error):
+                        entry.update(stage='unknown', qualified=False, reason='municipal_source_unreadable')
+                        contexts.append(entry)
+                        continue
             # Never join large snapshot metrics onto every product before a
             # GROUP BY: SQLite can materialize gigabytes of repeated JSON.
             # Read each active snapshot once, then its small indexed aggregate.
@@ -307,14 +334,14 @@ def status(environment=None, *, now=None):
                 'AND state=\'promoted\' AND coverage!=\'offers_only\' '
                 'ORDER BY promoted_at DESC', (chain,)).fetchall()
             for candidate in candidates:
+                if approved_snapshots is not None and candidate['id'] not in approved_snapshots:
+                    continue
                 observed = db.execute('SELECT min(fetched_at) FROM source_products '
                     'WHERE catalog_snapshot_id=? AND chain=? AND store_external_id=?',
                     (candidate['id'], chain, external_id)).fetchone()[0]
                 if observed is not None:
                     row = {**dict(candidate), 'observed': observed}
                     break
-            entry = {'context_id': physical['store_id'], 'chain': chain, 'store_id': external_id,
-                     'channel': physical.get('price_context_type', provenance.get('price_context_type', 'unknown'))}
             if row:
                 age = (now - datetime.fromisoformat(row['observed'])).total_seconds() / 3600
                 loaded = row['id'] in loaded_ids

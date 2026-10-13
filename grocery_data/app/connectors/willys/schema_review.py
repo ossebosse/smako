@@ -5,9 +5,10 @@ The 2026-09-30 Lund municipal source artifact added a null image value to
 label for price, quantity or nutrition. The 2026-10-09 retained snapshot
 75f802ebbfcc410c9d65e356746f0816 also narrows six presentation-only
 image/thumbnail text fields from nullable text to text. These exact nullable
-text shapes are supported in either direction; neither image structure nor
-commercial fields are exempted. The raw diff is retained. Other schema changes still stop
-snapshot promotion.
+text shapes are supported in either direction. Parser v5 additionally reviews
+the observed number/nullable-number catalog price transition. Missing prices
+remain missing and ordinary quality gates apply. The raw diff is retained;
+other schema changes still stop snapshot promotion.
 """
 
 import re

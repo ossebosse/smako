@@ -173,6 +173,52 @@ def test_municipal_status_uses_own_journal_catalog_and_serving_scope(context, mo
                         ('/api/price-universe/status', {'city': ['Malmö']})]
 
 
+@pytest.mark.parametrize('source_case', ['approved', 'missing', 'wrong_store', 'wrong_snapshot', 'unreadable'])
+def test_citygross_status_follows_verified_municipal_database(context, monkeypatch, source_case):
+    from grocery_data.app.services import citygross_municipal_job
+
+    c = context
+    snapshot(c, 'municipal-cg', state='promoted', chain='citygross')
+    with sqlite3.connect(c.database) as db:
+        db.execute('INSERT INTO source_products VALUES (?,?,?,?)',
+                   ('municipal-cg', 'citygross', '3211', '2026-10-08T12:00:00+00:00'))
+    external = c.database.with_name('municipal-own.sqlite')
+    external.write_bytes(c.database.read_bytes())
+    with sqlite3.connect(c.database) as db:
+        db.execute('DELETE FROM source_products')
+        db.execute('DELETE FROM catalog_snapshots')
+    source = {'database': external, 'store_ids': ['3211'], 'snapshot_ids': ['municipal-cg']}
+    if source_case == 'wrong_store':
+        source['store_ids'] = ['other-store']
+    if source_case == 'wrong_snapshot':
+        source['snapshot_ids'] = ['not-approved']
+    if source_case == 'unreadable':
+        source['database'] = c.database.with_name('missing.sqlite')
+    monkeypatch.setattr(citygross_municipal_job, 'source_inputs', lambda **kwargs: {
+        'citygross_municipal_enabled': True,
+        'citygross_sources': [] if source_case == 'missing' else [source]})
+    (c.root/'demand-refresh.json').write_text(json.dumps({'base_scope': [{
+        'store_id': 'context:citygross:malmo', 'chain': 'citygross',
+        'source_provenance': {'provider_store_id': '3211'}}]}))
+    (c.universe/'active/city-malmö.json').write_text(json.dumps({
+        'universe_id': 'current', 'snapshot_ids': ['municipal-cg']}))
+    monkeypatch.setattr(ops, 'request_json', lambda url: {'http_status': 200,
+        'body': {'universe_id': 'current', 'snapshot_ids': ['municipal-cg']}})
+    before = (c.database.read_bytes(), external.read_bytes())
+    result = ops.status(c.env | {'REFRESH_CITY': 'Malmö',
+                                'PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS': ''},
+                        now=datetime(2026, 10, 8, 14, tzinfo=UTC))
+    item = result['required_contexts'][0]
+    if source_case == 'approved':
+        assert item['qualified'] and item['published'] and item['loaded']
+        assert item['snapshot_id'] == 'municipal-cg' and item['freshness'] == 'FRESH'
+        assert item['serving_source']['snapshot_id'] == 'municipal-cg'
+    else:
+        assert not item['qualified'] and item['stage'] == 'unknown'
+    assert before == (c.database.read_bytes(), external.read_bytes())
+    assert result['external_price_requests'] == 0
+
+
 def test_pipeline_recovery_cannot_close_other_municipality(context, monkeypatch):
     value = {'checked_at': '2026-10-08T14:00:00+00:00', 'storage': {'adequate': True},
              'ready': {'http_status': 200}, 'disk_manifest': 'lund-ready',
