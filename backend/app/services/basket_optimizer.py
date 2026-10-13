@@ -59,8 +59,43 @@ _VERIFICATION_RANK: dict[BasketVerificationStatus, int] = {
 
 
 _MAX_GROUP_COMBINATIONS = 200000
+_MAX_PROMOTION_STRUCTURE_ROWS = 256
+_MAX_PROMOTION_STRUCTURE_CANDIDATES = 32768
 
-def _has_coupled_checkout(candidates_by_name, required_names=None):
+
+def _promotion_structure(rows, session=None):
+    """Index only frozen candidate fields within the existing quote scope.
+
+    Offer lists are mutable even on frozen candidates. Cache which candidates
+    lack an ordinary price, but read their current offers/caps on every use.
+    Source validation and joint checkout still run through their usual paths.
+    """
+    cacheable = session is not None and isinstance(rows, tuple)
+    if cacheable:
+        cached = session.promotion_structure_rows.get(id(rows))
+        if cached is not None and cached[0] is rows:
+            return cached[1], cached[2]
+    grouped, offer_only = [], []
+    for candidate in rows:
+        cacheable = (cacheable and type(candidate) is ProductCandidate
+                     and isinstance(candidate.promotion_groups, tuple))
+        if candidate.promotion_groups:
+            grouped.append(candidate)
+        if candidate.price is None:
+            offer_only.append(candidate)
+    result = (tuple(grouped), tuple(offer_only))
+    if cacheable and len(rows) <= _MAX_PROMOTION_STRUCTURE_CANDIDATES:
+        if (len(session.promotion_structure_rows) >= _MAX_PROMOTION_STRUCTURE_ROWS
+                or session.promotion_structure_candidates + len(rows)
+                > _MAX_PROMOTION_STRUCTURE_CANDIDATES):
+            session.promotion_structure_rows.clear()
+            session.promotion_structure_candidates = 0
+        session.promotion_structure_rows[id(rows)] = (rows, *result)
+        session.promotion_structure_candidates += len(rows)
+    return result
+
+
+def _has_coupled_checkout(candidates_by_name, required_names=None, *, session=None):
     """Use joint search only where separate lines share a source constraint.
 
     A single normalized ingredient already aggregates all recipe quantities;
@@ -86,7 +121,14 @@ def _has_coupled_checkout(candidates_by_name, required_names=None):
     constrained = set()
     for name, rows in candidates_by_name.items():
         identities = set()
-        for candidate in rows:
+        if session is not None and isinstance(rows, tuple):
+            grouped, offer_only = _promotion_structure(rows, session)
+            if grouped:
+                return True
+            candidates = offer_only
+        else:
+            candidates = rows
+        for candidate in candidates:
             if candidate.promotion_groups:
                 return True
             if (selected is None or name in selected) and candidate.price is None and any(o.max_quantity is not None for o in candidate.offers):
@@ -252,6 +294,8 @@ class StoreSubsetCacheStats:
 
 @dataclass(slots=True)
 class _QuoteCacheSession:
+    promotion_structure_rows: dict[int, tuple[tuple, tuple, tuple]] = field(default_factory=dict)
+    promotion_structure_candidates: int = 0
     # Only the authoritative ordering of stores determines a subset's winner.
     # Rebind that structural pattern to current quotes; never cache prices here.
     subset_patterns: dict[tuple, tuple[str | None, ...]] = field(default_factory=dict)
@@ -410,6 +454,8 @@ class BasketOptimizer:
             if sum(map(len, maps)) > 32768:
                 for mapping in maps:
                     mapping.clear()
+                existing.promotion_structure_rows.clear()
+                existing.promotion_structure_candidates = 0
             yield existing.stats
             return
         session = _QuoteCacheSession(
@@ -487,6 +533,8 @@ class BasketOptimizer:
             session.subset_partitions.clear()
             session.subset_cap_masks.clear()
             session.base_candidate_rows.clear()
+            session.promotion_structure_rows.clear()
+            session.promotion_structure_candidates = 0
 
     @staticmethod
     def _build_candidate_fingerprint(
@@ -1023,7 +1071,7 @@ class BasketOptimizer:
         increment_performance_counter("optimistic_basket_bounds")
         # Independent line totals can overestimate a future group discount.
         # Zero is conservative even when multiple promotions compete.
-        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients)):
+        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients), session=self._quote_cache_context.get()):
             total = Decimal(0)
         return verification_rank, money(total)
 
@@ -1047,7 +1095,7 @@ class BasketOptimizer:
         or bounds across future recipe additions.
         """
 
-        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients)):
+        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients), session=self._quote_cache_context.get()):
             return self._optimize_promotion_groups(
                 ingredients, candidates_by_name, stores, max_stores,
                 calculate_savings=False, nested_keys=True,
@@ -1083,7 +1131,7 @@ class BasketOptimizer:
         membership and tie-breaking semantics remain shared with checkout.
         """
 
-        if _has_coupled_checkout(candidates_by_name, (str(r[0]) for r in requirements)):
+        if _has_coupled_checkout(candidates_by_name, (str(r[0]) for r in requirements), session=self._quote_cache_context.get()):
             return self.same_depth_nested_store_limited_keys(
                 [NormalizedIngredient(canonical_name=str(r[0]), required_quantity=float(r[1]), unit=str(r[2])) for r in requirements],
                 candidates_by_name, stores, max_stores=max_stores,
@@ -1444,7 +1492,7 @@ class BasketOptimizer:
         candidates_by_name: Mapping[str, Sequence[ProductCandidate]],
         stores: Sequence[Store],
     ) -> list[StoreBasket]:
-        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients)):
+        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients), session=self._quote_cache_context.get()):
             options = []
             for store in stores:
                 try:
@@ -1527,7 +1575,7 @@ class BasketOptimizer:
         *,
         calculate_savings: bool = True,
     ) -> OptimizedBasket:
-        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients)):
+        if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients), session=self._quote_cache_context.get()):
             return self._optimize_promotion_groups(
                 ingredients,
                 candidates_by_name,
@@ -1744,8 +1792,10 @@ class BasketOptimizer:
         limit = len(stores) if not max_stores or max_stores < 0 else min(max_stores, len(stores))
         nested_winners = [None] * limit if nested_keys else []
         source_groups = {}
+        session = self._quote_cache_context.get()
         for rows in candidates_by_name.values():
-            for candidate in rows:
+            grouped_candidates, _offer_only = _promotion_structure(rows, session)
+            for candidate in grouped_candidates:
                 for group in candidate.promotion_groups:
                     key = (group.store_id, group.group_id)
                     if key in source_groups and source_groups[key] != group:
@@ -1767,7 +1817,7 @@ class BasketOptimizer:
                                if g.store_id == candidate.store_id
                                and candidate.product_id in g.eligible_product_ids
                                and candidate.source_provenance
-                               and g.source_snapshot_id == candidate.source_provenance.source_snapshot_id)
+                               and g.source_snapshot_id == candidate.source_provenance.source_snapshot_id) if source_groups else ()
                 if groups:
                     candidate = candidate.model_copy(update={"promotion_groups": groups})
                 if groups and type(self.calculator) is BasketCalculator:
