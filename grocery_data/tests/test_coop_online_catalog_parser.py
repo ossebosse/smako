@@ -775,3 +775,18 @@ def test_percentage_discount_product_persists_through_bundle_repository() -> Non
             )
     finally:
         engine.dispose()
+
+
+def test_energy_label_and_badge_order_do_not_change_any_parsed_product_field():
+    before = _milk()
+    before["accreditedTags"] = [{"code": "KRAV", "description": "KRAV", "priority": 1}]
+    after = deepcopy(before)
+    after["accreditedTags"][0].pop("priority")
+    after["energyLabel"] = {
+        "accessibilityText": "Energy label", "energyClass": "A",
+        "productSheetUrl": "https://www.coop.se/product-sheet.pdf",
+        "smallImageUrl": "https://www.coop.se/energy-label.png",
+    }
+    parser = CoopOnlineCatalogParser()
+    kwargs = {"store": _store(), "reference": "raw:presentation-review", "fetched_at": OBSERVED_AT}
+    assert parser.parse_product(before, **kwargs) == parser.parse_product(after, **kwargs)

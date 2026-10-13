@@ -354,7 +354,7 @@ def _purchase_fingerprint(product: SourceProduct) -> str:
 class CoopOnlineCatalogParser:
     """Parser for Coop's regional online product context, separate from offers."""
 
-    parser_version = "coop-online-catalog-parser-v2"
+    parser_version = "coop-online-catalog-parser-v3"
 
     @staticmethod
     def terminal_categories(document: RawFetch) -> tuple[tuple[str, str], ...]:
