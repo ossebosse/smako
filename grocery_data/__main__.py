@@ -659,11 +659,29 @@ def _collect_all_plan(
             continue
         if chain is Chain.COOP:
             # Physical-store offers and the regional full online catalogue are
-            # two independent source roles.  Each requested city gets its own
-            # bounded offers refresh, while all pickup cities sharing 730400
-            # produce exactly one catalogue refresh.
+            # two independent source roles. Municipal jobs own their physical
+            # offers; other cities retain the legacy bounded offers refresh.
+            # Pickup cities sharing 730400 produce one catalogue refresh.
             if "offers" in roles:
-                targets.extend((chain, city, ("offers",)) for city in unique_cities)
+                from grocery_data.app.services.coop_offer_job import configuration
+
+                try:
+                    _root, municipal_coop = configuration()
+                except (OSError, ValueError, KeyError, TypeError):
+                    municipal_coop = {"enabled": False}
+                for city in unique_cities:
+                    if municipal_coop["enabled"] and city.casefold() == municipal_coop["city"].casefold():
+                        skipped.append({
+                            "chain": chain.value,
+                            "city": city,
+                            "status": "not_applicable",
+                            "reason": "municipal Coop job owns exact physical offer selection",
+                            "source_management": "coop_municipal",
+                            "municipality_code": municipal_coop["municipality_code"],
+                            "roles": ("offers",),
+                        })
+                    else:
+                        targets.append((chain, city, ("offers",)))
             scheduled_contexts: set[str] = set()
             if "basket" in roles:
                 for city in unique_cities:
