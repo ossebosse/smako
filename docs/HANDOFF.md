@@ -1,3 +1,43 @@
+# 2026-10-13 07:39 UTC: Drift och prisuppdateringar granskade och reparerade
+
+Gren `fix/operations-20261013`. Malmö hade readiness 503 efter tre avvisade
+Willys-importer och fyra 57–58 timmar gamla kataloger. Parser v5 hanterar nu
+den granskade nullable-number-övergången på katalogens `priceValue`, utan att
+hitta på pris eller ändra generella kvalitets-/färskhetsgränser. Full offline
+återspelning av kvarhållet underlag godkände 39 576 produktposter. City Gross-
+diagnostiken läser nu kommunens korrekta godkända databasreferens. Ett separat
+kvittensfel rättades: exakt redan laddad version kan bekräftas via scoped
+readiness utan ett onödigt reload-anrop som fick timeout.
+
+Slutlig source BUILD_ID `ops-price-recovery-2f44f4e1b13b`, image `885790a82a04…`.
+Källcommits `1a7f5098942c`, `0fa290342376`, `2f44f4e1b13b`; endast granskade
+källfiler paketerades ovanpå föregående aktiva image. Appen är oförändrat
+`editable-sliders-7987bd5bc5d1`. Den nedan beskrivna ingrediensantalsändringen
+är fortfarande lokal och ingår inte i denna produktionsaktivering.
+
+Ordinarie Windowskörning 09:30 svensk tid lyckades, senaste resultat 0, nytt
+Malmö-kvitto 09:36:19. Båda kommunerna är ready 200, publicerat = laddat och
+samtliga obligatoriska baskontexter FRESH. Inga väntande reläleveranser.
+Tidigare Willys-/prisbyggnadsincidenter är återhämtade i incidentindexet.
+
+Sex appomstarter den 12 oktober kan knytas till kärnans OOM-logg. Två gamla
+fristående testcontainrar stoppades reversibelt och frigjorde cirka 3,5 GiB;
+appen omstartades inte. Inga nya OOM-händelser under granskningen. Dagens backup
+hashverifierad. Alla ursprungliga 259 planrevisioner och 85 privata tillstånd
+är bevarade; tre isolerade menyprov tillkom.
+
+Publik och personlig Malmö-meny passerar prisaudit och identisk återläsning.
+Kvarstår: publik femmiddagsoptimering tar 512/478 sekunder även vid upprepning
+(personligt enmiddagsprov 40 s), sju butikskällor saknar godkänt underlag och
+Coop Online Syd har ett transportfel med färsk LKG och ordinarie retry 11:00.
+Prestandan är profilerad, inte reparerad. Håll kvar källornas backoff och
+färskhetsgränser. Backupmanifest 11–12 oktober saknas, orsak ej fastställd;
+ingen full återställningsövning gjord.
+
+[Full driftgranskning, kvarstående källor och återgång](releases/operations-20261013/RESULTS.md).
+
+---
+
 # 2026-10-12: Ingrediensantal i Mina val — lokalt verifierat
 
 Gren `feature/ingredient-count-choices` ersätter personliga receptstil-/nivåval

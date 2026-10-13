@@ -1,0 +1,163 @@
+{
+  "schema": "smako-operations-review-evidence-v1",
+  "checked_at": "2026-10-13T07:38:57.032834+00:00",
+  "municipalities": [
+    {
+      "city": "Lund",
+      "ready": 200,
+      "disk_and_loaded_manifest": "price-universe:a9c1b0fbe3b7e380b4d48db1dbaaa7142d2ea57a976ac1824abdf365e48ee00b",
+      "required_sources": 5,
+      "all_required_sources_fresh_qualified_published_loaded": true,
+      "pending_relay_delivery": false,
+      "scheduled_task_last_result": 0,
+      "scheduled_task_last_run": "2026-10-13T07:30:01.0000000Z",
+      "relay_receipt_at": "2026-10-13T00:46:40.051644+00:00",
+      "relay_sha256": "6c8877f8bc73a54a95b5b0f2dc693c7f0cb01eccb68ff35f3c837495f462b253"
+    },
+    {
+      "city": "Malmö",
+      "ready": 200,
+      "disk_and_loaded_manifest": "price-universe:13ad70e296a4e1fcfe68158314a050224bd66b12d3e428f0f0cbb90445306a38",
+      "required_sources": 9,
+      "all_required_sources_fresh_qualified_published_loaded": true,
+      "pending_relay_delivery": false,
+      "scheduled_task_last_result": 0,
+      "scheduled_task_last_run": "2026-10-13T07:30:01.0000000Z",
+      "relay_receipt_at": "2026-10-13T07:36:19.328595+00:00",
+      "relay_sha256": "1e6defa470b5adee0ac56d8fcbe0a91dba79bddf8523a7c425931508c02038b4"
+    }
+  ],
+  "public_menu": {
+    "status": 201,
+    "seconds": 512.328,
+    "acceptance": {
+      "postal_scope_preserved": true,
+      "selected_store_filter": true,
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": []
+  },
+  "personal_menu": {
+    "status": "pass",
+    "build_id": "editable-sliders-7987bd5bc5d1",
+    "seconds": 40.2,
+    "identical_reload": true,
+    "checkout_audit": true,
+    "errors": []
+  },
+  "public_menu_repeat": {
+    "status": 201,
+    "seconds": 477.828,
+    "all_acceptance_checks_passed": true,
+    "identical_reload": true,
+    "timings_seconds": {
+      "price_universe_lookup": 0.0076,
+      "pricing_projection": 8.034,
+      "store_lookup": 0.0,
+      "economic_pool": 0.0,
+      "price_provider_fetch": 0.0,
+      "legacy_baseline": 1.1352,
+      "candidate_generation": 0.191,
+      "nutrition_validation": 0.0071,
+      "candidate_validation": 0.1362,
+      "menu_search": 322.3152,
+      "conditioned_varied_search": 137.2123,
+      "store_tradeoff_search": 137.2369,
+      "basket_audit": 0.0057,
+      "total_runtime": 471.5826
+    }
+  },
+  "public_menu_timings_seconds": {
+    "price_universe_lookup": 0.006,
+    "pricing_projection": 8.0872,
+    "store_lookup": 0.0,
+    "economic_pool": 0.0,
+    "price_provider_fetch": 0.0,
+    "legacy_baseline": 1.2216,
+    "candidate_generation": 0.1922,
+    "nutrition_validation": 0.0152,
+    "candidate_validation": 0.158,
+    "menu_search": 360.2125,
+    "conditioned_varied_search": 130.2732,
+    "store_tradeoff_search": 130.2884,
+    "basket_audit": 0.0051,
+    "total_runtime": 502.4247
+  },
+  "backup": {
+    "status": "PASS",
+    "bundle": "20261013T004702Z",
+    "files": 6,
+    "bytes": 5256847781,
+    "all_file_hashes_verified": true,
+    "restore_rehearsal": false
+  },
+  "runtime": {
+    "checked_at": "2026-10-13T07:38:57.032834+00:00",
+    "preservation": {
+      "consumer_plan_revisions": {
+        "previous": 259,
+        "current": 262,
+        "all_previous_preserved": true
+      },
+      "personal_private_state": {
+        "previous": 85,
+        "current": 86,
+        "all_previous_preserved": true
+      }
+    },
+    "containers": {
+      "smako-app-1": {
+        "image": "sha256:78edde2cc66dc16300edf9b8de62fc378ea44aef20d6e3ebb9d7c0fca3d651f7",
+        "status": "running",
+        "started_at": "2026-10-12T17:18:26.324614616Z",
+        "restarts": 6,
+        "restart_policy": "unless-stopped"
+      },
+      "smako-scheduler-1": {
+        "image": "sha256:885790a82a04b84c0170ffdedfd68806f57e96bf37205d8e15732acf0b034653",
+        "status": "running",
+        "started_at": "2026-10-13T07:31:59.504156982Z",
+        "restarts": 0,
+        "restart_policy": "unless-stopped"
+      },
+      "smako-caddy-1": {
+        "image": "sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d",
+        "status": "running",
+        "started_at": "2026-10-11T00:17:36.52290634Z",
+        "restarts": 0,
+        "restart_policy": "unless-stopped"
+      },
+      "smako-lund-ops-s4u": {
+        "image": "sha256:2f81344208e05cbc57d16fa74a73c97b26bc729859936ca5d96ab150579fe221",
+        "status": "exited",
+        "started_at": "2026-10-01T07:23:31.292631144Z",
+        "restarts": 0,
+        "restart_policy": "no"
+      },
+      "smako-complete-recipes-isolated": {
+        "image": "sha256:99bf3bfcb4f395ec1a06df23649e0241903d52bb5bba40ca4336abbd2bbecc35",
+        "status": "exited",
+        "started_at": "2026-10-03T10:16:23.186931125Z",
+        "restarts": 0,
+        "restart_policy": "no"
+      }
+    },
+    "memory_available_kib": 7417388,
+    "oom_kill_events_since_review": 0
+  }
+}
