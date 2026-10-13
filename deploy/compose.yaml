@@ -282,6 +282,13 @@ services:
       PLAN_STORE_PATH: ${PLAN_STORE_PATH:?set PLAN_STORE_PATH}
       PRICE_UNIVERSE_CACHE_ROOT: ${PRICE_UNIVERSE_CACHE_ROOT:?set PRICE_UNIVERSE_CACHE_ROOT}
       PRICE_UNIVERSE_CITY: ${PRICE_UNIVERSE_CITY:-Lund}
+      MUNICIPAL_COLLECTION_SCOPE_PATH: ${MUNICIPAL_COLLECTION_SCOPE_PATH:-/srv/app/var/grocery/municipal-collection-scopes.json}
+      COOP_MUNICIPAL_OFFERS_ROOT: ${COOP_MUNICIPAL_OFFERS_ROOT:-/srv/app/var/grocery/coop-municipal-offers}
+      ICA_STRUCTURED_OFFERS_ROOT: ${ICA_STRUCTURED_OFFERS_ROOT:-/srv/app/var/grocery/ica-structured-offers}
+      HEMKOP_MUNICIPAL_ROOT: ${HEMKOP_MUNICIPAL_ROOT:-/srv/app/var/grocery/hemkop-municipal}
+      LIDL_MUNICIPAL_ROOT: ${LIDL_MUNICIPAL_ROOT:-/srv/app/var/grocery/lidl-municipal}
+      CITYGROSS_MUNICIPAL_ROOT: ${CITYGROSS_MUNICIPAL_ROOT:-/srv/app/var/grocery/citygross-municipal}
+      WILLYS_FLYER_ROOT: ${WILLYS_FLYER_ROOT:-/srv/app/var/grocery/willys-flyer}
       BACKUP_ROOT: ${BACKUP_ROOT:-/srv/app/var/backups}
       BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-14}
     profiles: ["ops"]

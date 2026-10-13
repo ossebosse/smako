@@ -8,9 +8,20 @@ bundle contains:
 
 - an online, transactionally consistent backup of the grocery SQLite database;
 - an online backup of the WAL-enabled consumer-plan database;
-- the active Lund PriceUniverse manifest and its exact content-addressed blob;
-- the active closed external-provider manifest and its exact blob;
+- every active municipal PriceUniverse manifest and its exact content-addressed blob;
+- each corresponding active closed external-provider manifest and its exact blob;
+- the municipality registry, current source pointers, hash-bound source databases,
+  source configuration and protected operations journals for registered scopes;
 - a SHA-256/size manifest for every file.
+
+Recovery scope version 2 is additive to the existing bundle format. Restore uses
+the same configured container data paths, preserving immutable source hashes and
+observation times. Historical source attempt trees are not copied. Adding a
+municipality changes the registry hash and makes a new complete backup due.
+The existing demand worker retries a missed daily backup under the same operation
+lock; a failed backup has a 30-minute retry delay and does not prevent source work.
+The protected `reports/operations/backup-status.json` records complete, deferred
+or failed outcomes and is included in the operations status response.
 
 The bundle manifest also contains content-free semantic fingerprints for the
 following persisted state:
