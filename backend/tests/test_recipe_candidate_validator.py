@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
+import pytest
 from app.models.recipe import Recipe, RecipeIngredient
+from app.services import recipe_candidate_validator as validator
 from app.services.ingredient_taxonomy import INGREDIENT_TAXONOMY
 from app.services.recipe_candidate_validator import (
     RecipeCandidateValidator,
@@ -248,3 +250,36 @@ def test_recipe_id_is_stable_but_sensitive_to_quantity() -> None:
     assert recipe_id(original) == recipe_id(original.model_copy(deep=True))
     assert recipe_id(original) != recipe_id(changed)
     assert ingredient_profile(original) == ingredient_profile(changed)
+
+
+@pytest.mark.parametrize("value,expected", [
+    ("ÅÄÖ crème BRÛLÉE!", "aao creme brulee"),
+    ("Straße\tÆgg 123", "strasse gg 123"),
+    ("e\u0301 — ①", "e 1"),
+    ("", ""),
+])
+def test_cached_recipe_text_preserves_unicode_normalization(value, expected):
+    assert validator._plain_text(value) == expected
+    assert validator._plain_text(value) == expected
+
+
+def test_recipe_text_cache_is_bounded_and_recipe_mutations_change_identity():
+    cache = validator._cached_plain_text
+    cache.cache_clear()
+    try:
+        original = valid_chicken_dinner()
+        initial_id = recipe_id(original)
+        assert recipe_id(original) == initial_id
+        assert cache.cache_info().hits > 0
+        original.instructions.append("Blanda i moroten först.")
+        assert recipe_id(original) != initial_id
+
+        for number in range(4200):
+            validator._plain_text(f"Återkommande recept {number}")
+        assert cache.cache_info().currsize == 4096
+        before = cache.cache_info()
+        assert validator._plain_text("Å" * 2049) == "a" * 2049
+        assert cache.cache_info() == before
+        assert recipe_id(valid_chicken_dinner()) == initial_id
+    finally:
+        cache.cache_clear()

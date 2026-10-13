@@ -82,3 +82,12 @@ def test_singleton_finishes_remaining_prices_and_rejects_later_missing_quote():
     assert BasketOptimizer._grouped_subset_keys(
         vectors, subsets, 2, winning_mask=True,
     ) == ([expected, expected], 2, 0b010)
+
+
+@pytest.mark.parametrize("limit", [0, 1, 3])
+@pytest.mark.parametrize("vectors", [(), ((),)])
+def test_no_store_subsets_has_no_winners_even_without_requirements(limit, vectors):
+    assert BasketOptimizer._grouped_subset_keys(vectors, (), limit) == ([None] * limit, 0)
+    assert BasketOptimizer._grouped_subset_keys(
+        vectors, (), limit, winning_mask=True,
+    ) == ([None] * limit, 0, 0)

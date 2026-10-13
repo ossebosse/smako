@@ -1267,6 +1267,9 @@ class BasketOptimizer:
         subsets, Decimal sums, max ranks and union of winning stores, including
         every nested cap. No float, heuristic pruning or weaker bound is used.
         """
+        if not store_subsets:
+            result = ([None] * limit, 0)
+            return (*result, 0) if winning_mask else result
         partitions = []
         for vector in subset_vectors:
             cached = session.subset_partitions.get(id(vector)) if session else None
@@ -1296,18 +1299,24 @@ class BasketOptimizer:
         settled = {}
         for partition_index, (groups, positions) in enumerate(partitions):
             refined = {}
+            # Every singleton at this depth traverses the same suffix. Build
+            # it once, without changing the order of Decimal additions.
+            remaining_positions_by_partition = tuple(
+                part[1] for part in partitions[partition_index:]
+            )
             for (rank, total, stores), mask in states.items():
                 if mask & (mask - 1) == 0:
                     # A singleton cannot split again. Finish its remaining
                     # operands directly, in the same arithmetic order, rather
                     # than reinsert it into every intermediate partition map.
                     position = mask.bit_length() - 1
-                    for _remaining_groups, remaining_positions in partitions[partition_index:]:
+                    for remaining_positions in remaining_positions_by_partition:
                         selection = remaining_positions[position]
                         if selection is None:
                             break
                         line_rank, line_total, line_store = selection
-                        rank = max(rank, line_rank)
+                        if line_rank > rank:  # noqa: PLR1730 -- measured hot loop
+                            rank = line_rank
                         total += line_total
                         stores |= line_store
                     else:
@@ -1332,7 +1341,8 @@ class BasketOptimizer:
                 for (line_rank, line_total, line_store), line_mask in candidates:
                     overlap = mask & line_mask
                     if overlap:
-                        key = (max(rank, line_rank), total + line_total, stores | line_store)
+                        key = (line_rank if line_rank > rank else rank,  # noqa: FURB136
+                               total + line_total, stores | line_store)
                         refined[key] = refined.get(key, 0) | overlap
             states = refined
             if not states:

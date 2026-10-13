@@ -9,6 +9,7 @@ import unicodedata
 from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Any
 
 from app.models.recipe import Recipe
@@ -45,6 +46,20 @@ class CandidateValidationResult:
 
 
 def _plain_text(value: str) -> str:
+    # Recipes repeat throughout the search. Cache only this pure string
+    # transformation, never mutable recipes or their content IDs. Bound both
+    # entry count and input length so long user text cannot fill the cache.
+    if len(value) <= 2048:
+        return _cached_plain_text(value)
+    return _normalize_plain_text(value)
+
+
+@lru_cache(maxsize=4096)
+def _cached_plain_text(value: str) -> str:
+    return _normalize_plain_text(value)
+
+
+def _normalize_plain_text(value: str) -> str:
     decomposed = unicodedata.normalize("NFKD", value.casefold())
     unaccented = "".join(
         character for character in decomposed if not unicodedata.combining(character)
