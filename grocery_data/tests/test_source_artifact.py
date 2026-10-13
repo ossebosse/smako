@@ -388,6 +388,7 @@ async def test_operator_import_uses_normal_activation_and_duplicate_or_failure_p
 
     monkeypatch.setattr(runner, "_run_locked", managed)
     monkeypatch.setattr(runner, "_write_status", lambda value: None)
+    monkeypatch.setattr(runner, "_confirm_loaded_runtime", lambda expected: None)
     monkeypatch.setattr(runner, "_reload_runtime", lambda: {"new_price_universe_id": "normal-universe"})
     result = await source_cli.import_and_activate(SimpleNamespace(artifact=p))
     assert result["activation"] == "normal_managed_refresh" and state.builds == 1
@@ -396,6 +397,19 @@ async def test_operator_import_uses_normal_activation_and_duplicate_or_failure_p
     monkeypatch.setattr(runner, "_reload_runtime", lambda: {"status": "deferred"})
     with pytest.raises(m.SourceArtifactError, match="runtime activation"):
         await source_cli.import_and_activate(SimpleNamespace(artifact=p))
+
+    def confirmed(expected):
+        assert expected == state.active.universe_id == "normal-universe"
+        return {"new_price_universe_id": expected, "confirmation": "scoped_readiness"}
+
+    def forbidden_reload():
+        raise AssertionError("Already loaded duplicate must not trigger another reload")
+
+    monkeypatch.setattr(runner, "_confirm_loaded_runtime", confirmed)
+    monkeypatch.setattr(runner, "_reload_runtime", forbidden_reload)
+    acknowledged = await source_cli.import_and_activate(SimpleNamespace(artifact=p))
+    assert acknowledged["activation"] == "already_active"
+    assert acknowledged["universe_id"] == "normal-universe" and state.builds == 1
     before = state.bytes
     bad = tmp_path / "truncated-again.smako-source"
     bad.write_bytes(p.read_bytes()[:-100])

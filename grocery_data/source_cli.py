@@ -264,6 +264,7 @@ async def import_and_activate(args):
     if os.name != "nt" and os.geteuid() == 0:
         raise SourceArtifactError("production import must run as the application ops UID, not root")
     from deploy.scripts.run_daily_refresh import (
+        _confirm_loaded_runtime,
         _operations_lock,
         _reload_runtime,
         _run_locked,
@@ -295,7 +296,9 @@ async def import_and_activate(args):
         active = active_store.read_active(city)
         if snapshot.is_active and active and snapshot.id in active.snapshot_ids:
             active_store.resolve_active_artifact(city, verify_hash=True)
-            loaded = _reload_runtime()
+            # A lost reload response must not force another expensive reload.
+            # Only exact, scoped ready evidence can acknowledge an existing load.
+            loaded = _confirm_loaded_runtime(active.universe_id) or _reload_runtime()
             if loaded.get("new_price_universe_id") != active.universe_id:
                 raise SourceArtifactError("source published but runtime activation not confirmed")
             return {**result, "activation": "already_active", "universe_id": active.universe_id,
