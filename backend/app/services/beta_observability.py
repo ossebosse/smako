@@ -1123,6 +1123,17 @@ async def reload_active_price_universe(
         raise RuntimeError("active PriceUniverse artifact is unavailable")
     staging_manager = staging_manager_factory()
     candidate = staging_manager.load_file_and_activate(artifact)
+    current = active_manager.get_active(candidate.universe.key.scope_id)
+    if current is not None and current.universe.universe_id == candidate.universe.universe_id:
+        # The disk candidate has passed hash/schema validation. Preserve the
+        # loaded object's expensive deterministic caches on a repeated delivery.
+        return {
+            "old_price_universe_id": current.universe.universe_id,
+            "new_price_universe_id": current.universe.universe_id,
+            "changed": False,
+            "pricing_projection": "already_active",
+            "plan_prewarm": "already_active",
+        }
     projection = projection_builder(
         settings,
         candidate,

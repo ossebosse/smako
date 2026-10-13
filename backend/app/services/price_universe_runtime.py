@@ -257,29 +257,32 @@ class MenuSearchResultCache:
             raise ValueError("max_entries must be at least one")
         self.max_entries = max_entries
         self._lock = RLock()
+        self._compute_lock = RLock()
         self._values: OrderedDict[str, Any] = OrderedDict()
         self._hits = 0
         self._misses = 0
         self._evictions = 0
 
     def get_or_compute(self, key: str, factory: Callable[[], Any]) -> Any:
-        with self._lock:
-            if key in self._values:
-                self._hits += 1
-                increment_performance_counter("menu_search_result_cache_hits")
-                increment_performance_counter("cache_hits")
-                value = self._values.pop(key)
-                self._values[key] = value
-                return value
-            self._misses += 1
-            increment_performance_counter("menu_search_result_cache_misses")
-            increment_performance_counter("cache_misses")
+        with self._compute_lock:
+            with self._lock:
+                if key in self._values:
+                    self._hits += 1
+                    increment_performance_counter("menu_search_result_cache_hits")
+                    increment_performance_counter("cache_hits")
+                    value = self._values.pop(key)
+                    self._values[key] = value
+                    return value
+                self._misses += 1
+                increment_performance_counter("menu_search_result_cache_misses")
+                increment_performance_counter("cache_misses")
             value = factory()
-            self._values[key] = value
-            if len(self._values) > self.max_entries:
-                self._values.popitem(last=False)
-                self._evictions += 1
-            return value
+            with self._lock:
+                self._values[key] = value
+                if len(self._values) > self.max_entries:
+                    self._values.popitem(last=False)
+                    self._evictions += 1
+                return value
 
     @property
     def stats(self) -> CacheStats:
@@ -301,6 +304,7 @@ class PricingProjectionCache:
         self.max_entries = max_entries
         self._values: OrderedDict[str, EconomicIngredientPool] = OrderedDict()
         self._lock = RLock()
+        self._compute_lock = RLock()
         self._hits = 0
         self._misses = 0
         self._evictions = 0
@@ -310,21 +314,23 @@ class PricingProjectionCache:
         key: str,
         factory: Callable[[], EconomicIngredientPool],
     ) -> EconomicIngredientPool:
-        with self._lock:
-            if key in self._values:
-                self._hits += 1
-                increment_performance_counter("pricing_projection_cache_hits")
-                value = self._values.pop(key)
-                self._values[key] = value
-                return value
-            self._misses += 1
-            increment_performance_counter("pricing_projection_cache_misses")
+        with self._compute_lock:
+            with self._lock:
+                if key in self._values:
+                    self._hits += 1
+                    increment_performance_counter("pricing_projection_cache_hits")
+                    value = self._values.pop(key)
+                    self._values[key] = value
+                    return value
+                self._misses += 1
+                increment_performance_counter("pricing_projection_cache_misses")
             value = factory()
-            self._values[key] = value
-            if len(self._values) > self.max_entries:
-                self._values.popitem(last=False)
-                self._evictions += 1
-            return value
+            with self._lock:
+                self._values[key] = value
+                if len(self._values) > self.max_entries:
+                    self._values.popitem(last=False)
+                    self._evictions += 1
+                return value
 
     @property
     def stats(self) -> CacheStats:

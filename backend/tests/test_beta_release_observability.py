@@ -869,7 +869,7 @@ def test_refresh_runner_and_network_limits_load_from_environment(
 @pytest.mark.asyncio
 async def test_reload_validates_projection_before_atomic_swap() -> None:
     old = SimpleNamespace(universe=SimpleNamespace(universe_id="old"))
-    candidate = SimpleNamespace(universe=SimpleNamespace(universe_id="new"))
+    candidate = SimpleNamespace(universe=SimpleNamespace(universe_id="new", key=SimpleNamespace(scope_id="city:lund")))
     events: list[str] = []
 
     class Store:
@@ -887,6 +887,9 @@ async def test_reload_validates_projection_before_atomic_swap() -> None:
             return candidate
 
     class Active:
+        def get_active(self, scope: str) -> Any:
+            return old
+
         def activate(self, prepared: Any) -> Any:
             assert prepared is candidate
             events.append("swapped")
@@ -1063,3 +1066,32 @@ def test_refresh_monitor_surfaces_current_aging_without_another_refresh(tmp_path
     result = latest_refresh_status(settings)
     assert result["requires_attention"]
     assert result["planning_readiness"]["status"] == "aging"
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('scope', ['city:lund', 'city:malmo', 'city:goteborg'])
+async def test_repeated_reload_preserves_loaded_caches_after_validation(scope):
+    current = SimpleNamespace(universe=SimpleNamespace(universe_id='same', key=SimpleNamespace(scope_id=scope)), cache=object())
+    candidate = SimpleNamespace(universe=current.universe)
+    events = []
+    class Store:
+        def __init__(self, root): pass
+        def resolve_active_artifact(self, city):
+            events.append('hash_checked')
+            return Path('candidate.json')
+    class Staging:
+        def load_file_and_activate(self, path):
+            events.append('validated')
+            return candidate
+    class Active:
+        def get_active(self, identity):
+            assert identity == scope
+            return current
+        def activate(self, prepared):
+            pytest.fail('same universe must retain its caches')
+    def project(*args, **kwargs):
+        pytest.fail('same universe must not rebuild projections')
+    result = await reload_active_price_universe(SimpleNamespace(state=SimpleNamespace()),
+        Settings(price_universe_required=False), artifact_store_factory=Store,
+        staging_manager_factory=Staging, active_manager=Active(), projection_builder=project)
+    assert events == ['hash_checked', 'validated']
+    assert not result['changed'] and result['new_price_universe_id'] == 'same'

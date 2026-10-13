@@ -1161,3 +1161,28 @@ def test_campaign_survives_48h_but_expires_locally_without_rebuild():
     broken=PreparedPriceUniverse(universe=PriceUniverseBuilder().build(key,[bad],built_at=observed),
         stores=(_store(observed_at=observed),),economic_pool=_pool([bad]),source_name='fixture',oldest_observed_at=observed)
     assert not broken.request_view(now=before).usable_context_ids
+
+@pytest.mark.parametrize('cache_name', ['MenuSearchResultCache', 'PricingProjectionCache'])
+def test_cache_status_stays_available_during_computation(cache_name):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Event
+
+    from app.services import price_universe_runtime
+    cache = getattr(price_universe_runtime, cache_name)()
+    entered, release = Event(), Event()
+    value = object()
+    def slow():
+        entered.set()
+        assert release.wait(5)
+        return value
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        first = pool.submit(cache.get_or_compute, 'same', slow)
+        try:
+            assert entered.wait(2)
+            status = pool.submit(lambda: cache.stats).result(timeout=1)
+            assert status.misses == 1 and status.entries == 0
+            second = pool.submit(cache.get_or_compute, 'same', lambda: pytest.fail('duplicate computation'))
+        finally:
+            release.set()
+        assert first.result(timeout=2) is second.result(timeout=2) is value
+    assert cache.stats.hits == 1 and cache.stats.entries == 1
