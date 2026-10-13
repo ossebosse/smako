@@ -233,6 +233,13 @@ def verify_restored_state(
             ),
         }
         expected_state = manifest.get("state_integrity")
+        if isinstance(expected_state, dict) and 'municipal_price_universes' in expected_state:
+            for relative, expected in expected_state['municipal_price_universes'].items():
+                path = Path(relative)
+                if path.is_absolute() or '..' in path.parts:
+                    raise ValueError('invalid municipal manifest path')
+                if _active_artifact_state(universe_root, path) != expected:
+                    raise ValueError('restored municipal price universe differs')
         mode = "legacy_bundle_file_hash"
         if isinstance(expected_state, dict):
             for key, state in actual_state.items():
@@ -240,6 +247,11 @@ def verify_restored_state(
                     raise ValueError(f"restored semantic state differs: {key}")
             mode = "semantic_and_file_hash"
         checks["price_universe"] = {"status": "verified", "mode": mode}
+    if verify_databases:
+        from deploy.scripts.municipal_backup import restored_target
+        for row in manifest['files']:
+            if row['path'].startswith('runtime/') and _sha256(restored_target(row['path'])) != row['sha256']:
+                raise ValueError('restored municipal recovery state differs')
     return {
         "status": "verified",
         "bundle_schema": manifest["schema_version"],
@@ -261,6 +273,9 @@ def _restore_locked(
     bundle = bundle.resolve(strict=True)
     manifest = _load_manifest(bundle)
     targets = configured_database_paths() if restore_databases else {}
+    from deploy.scripts.municipal_backup import restored_target
+    runtime_targets = {row['path']: restored_target(row['path']) for row in manifest['files']
+                       if row['path'].startswith('runtime/')} if restore_databases else {}
     timestamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
 
     staged: list[tuple[Path, Path]] = []
@@ -359,6 +374,17 @@ def _restore_locked(
             target.with_name(f"{target.name}-wal").unlink(missing_ok=True)
             target.with_name(f"{target.name}-shm").unlink(missing_ok=True)
 
+        if restore_databases:
+            for relative, target in sorted(runtime_targets.items()):
+                _private_directory(target.parent)
+                temporary = target.with_name(f'.{target.name}.{uuid4().hex}.restore')
+                shutil.copy2(bundle / relative, temporary)
+                _chmod_private(temporary, directory=False)
+                if target.exists():
+                    rollback = target.with_name(f'{target.name}.before-restore-{timestamp}')
+                    shutil.copy2(target, rollback)
+                    _chmod_private(rollback, directory=False)
+                os.replace(temporary, target)
         universe_source = bundle / "price_universes"
         if restore_universe and universe_source.is_dir():
             universe_target = Path(os.environ["PRICE_UNIVERSE_CACHE_ROOT"]).resolve()

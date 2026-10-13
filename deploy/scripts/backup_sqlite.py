@@ -183,11 +183,11 @@ def _preflight_backup_space(backup_root: Path, relative_manifest: Path) -> None:
     required = _BACKUP_ESTIMATE_OVERHEAD_BYTES + sum(
         _sqlite_backup_size_upper_bound(source) for source in databases.values()
     )
-    required += _active_artifact_pair_bytes(universe_root, relative_manifest)
-    required += _active_artifact_pair_bytes(
-        universe_root / "external-provider-cache",
-        relative_manifest,
-    )
+    for scoped_manifest in _active_manifests(universe_root, relative_manifest):
+        required += _active_artifact_pair_bytes(universe_root, scoped_manifest)
+        required += _active_artifact_pair_bytes(universe_root / "external-provider-cache", scoped_manifest)
+    from deploy.scripts.municipal_backup import current_files
+    required += sum(path.stat().st_size for path in current_files().values())
     # SQLite page accounting and copied file sizes are exact at observation
     # time; a small proportional allowance covers manifest and metadata growth.
     required += max(1024 * 1024, required // 20)
@@ -196,6 +196,10 @@ def _preflight_backup_space(backup_root: Path, relative_manifest: Path) -> None:
         required_bytes=required,
         reserve_bytes=_backup_free_space_reserve_bytes(),
     )
+
+
+def _active_manifests(root: Path, primary: Path) -> list[Path]:
+    return sorted({primary, *(p.relative_to(root) for p in (root / 'active').glob('city-*.json'))})
 
 
 def _validate_complete_backup_bundle(bundle: Path) -> None:
@@ -508,23 +512,35 @@ def _create_backup_locked(*, now: datetime | None = None) -> Path:
                 }
             )
 
-        primary_files = _copy_active_artifact(
-            source_root=universe_root,
-            relative_manifest=relative_manifest,
-            destination_root=temporary / "price_universes",
-            bundle_prefix=Path("price_universes"),
-        )
-        if not primary_files:
-            raise FileNotFoundError("required active PriceUniverse manifest is missing")
-        files.extend(primary_files)
-        files.extend(
-            _copy_active_artifact(
-                source_root=universe_root / "external-provider-cache",
-                relative_manifest=relative_manifest,
-                destination_root=temporary / "price_universes/external-provider-cache",
-                bundle_prefix=Path("price_universes/external-provider-cache"),
+        manifests = _active_manifests(universe_root, relative_manifest)
+        for scoped_manifest in manifests:
+            primary_files = _copy_active_artifact(
+                source_root=universe_root,
+                relative_manifest=scoped_manifest,
+                destination_root=temporary / "price_universes",
+                bundle_prefix=Path("price_universes"),
             )
-        )
+            if not primary_files:
+                raise FileNotFoundError("required active PriceUniverse manifest is missing")
+            files.extend(primary_files)
+            files.extend(_copy_active_artifact(
+                source_root=universe_root / "external-provider-cache",
+                relative_manifest=scoped_manifest,
+                destination_root=temporary / "price_universes/external-provider-cache",
+                bundle_prefix=Path("price_universes/external-provider-cache")))
+        from deploy.scripts.municipal_backup import current_files
+        for relative, source in current_files().items():
+            destination = temporary / relative
+            _private_directory(destination.parent)
+            shutil.copy2(source, destination)
+            _chmod_private(destination, directory=False)
+            _fsync_file(destination)
+            digest = _sha256(destination)
+            if digest != _sha256(source):
+                raise ValueError('municipal recovery file changed during locked backup')
+            files.append({'path': relative, 'sha256': digest, 'bytes': destination.stat().st_size})
+        # Two scopes may refer to the same immutable content-addressed blob.
+        files = list({row['path']: row for row in files}.values())
         active_manifest_path = universe_root / relative_manifest
         active_manifest = (
             json.loads(active_manifest_path.read_text(encoding="utf-8"))
@@ -560,8 +576,12 @@ def _create_backup_locked(*, now: datetime | None = None) -> Path:
                 relative_manifest,
             ),
         }
+        state_integrity['municipal_price_universes'] = {
+            p.as_posix(): _active_artifact_state(temporary / 'price_universes', p)
+            for p in manifests}
         manifest = {
             "schema_version": "grocery-beta-backup-v1",
+            "recovery_scope_version": 2,
             "created_at": timestamp.isoformat(),
             "app_version": os.getenv("APP_VERSION", "unknown"),
             "build_id": os.getenv("BUILD_ID", "unknown"),
@@ -574,6 +594,9 @@ def _create_backup_locked(*, now: datetime | None = None) -> Path:
             "state_integrity": state_integrity,
             "files": sorted(files, key=lambda row: str(row["path"])),
         }
+        from grocery_data.app.services.municipal_rollout import registry_path
+        registry = registry_path()
+        manifest['municipal_registry_sha256'] = _sha256(registry) if registry.exists() else None
         bundle_manifest = temporary / "manifest.json"
         atomic_write_bytes(
             bundle_manifest,
@@ -634,6 +657,7 @@ def create_backup(*, now: datetime | None = None) -> Path:
 
 
 def main() -> int:
+    from deploy.scripts.backup_schedule import record
     try:
         bundle = create_backup()
     except Exception as exc:  # noqa: BLE001 - sanitized operational boundary
@@ -645,8 +669,13 @@ def main() -> int:
             failure.update(exc.status())
         elif isinstance(exc, OSError) and exc.errno == errno.ENOSPC:
             failure["reason"] = "storage_write_failed"
+        from grocery_data.app.services.manual_refresh_operations import RefreshAlreadyRunningError
+        if isinstance(exc, RefreshAlreadyRunningError):
+            failure.update(status='deferred', reason='operation_lock_held')
+        record(**failure)
         print(json.dumps(failure, sort_keys=True))
         return 1
+    record('complete', bundle=bundle.name, completed_at=datetime.now(UTC).isoformat())
     print(json.dumps({"status": "complete", "bundle": bundle.name}))
     return 0
 

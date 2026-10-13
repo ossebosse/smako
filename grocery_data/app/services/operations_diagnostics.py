@@ -393,6 +393,7 @@ def status(environment=None, *, now=None):
     missing = sorted(required_ids - {x['context_id'] for x in contexts})
     return {'schema': 'smako-operations-status-v1', 'checked_at': now.isoformat(),
             'runtime': env.get('BUILD_ID', 'unknown'), 'ready': ready,
+            'backup': read_json(universe.parent / 'reports/operations/backup-status.json'),
             'disk_manifest': manifest.get('universe_id'),
             'loaded_manifest': serving.get('body', {}).get('universe_id'),
             'receiver_inbox': queue,

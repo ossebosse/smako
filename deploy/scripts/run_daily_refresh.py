@@ -648,10 +648,12 @@ def _run_demand_locked(lock, *, started_at):
                                     policy=FreshnessPolicy(), now=started_at).usable:
                 raise ValueError('pending runtime source expired')
             _artifact_store().resolve_active_artifact(os.environ['REFRESH_CITY'], verify_hash=True)
-            try:
-                loaded = _reload_runtime()
-            except (RuntimeReloadUnavailable, RuntimeReloadRejected):
-                loaded = _confirm_loaded_runtime(manifest.universe_id)
+            loaded = _confirm_loaded_runtime(manifest.universe_id)
+            if not loaded:
+                try:
+                    loaded = _reload_runtime()
+                except (RuntimeReloadUnavailable, RuntimeReloadRejected):
+                    loaded = _confirm_loaded_runtime(manifest.universe_id)
             success = bool(loaded and loaded.get('new_price_universe_id') == manifest.universe_id)
             if success:
                 state.pop('pending_runtime', None)
@@ -788,6 +790,13 @@ def main() -> int:
         )
         return 2
     try:
+        # A lock collision at the daily backup time must not lose a whole day.
+        # The existing worker retries under this same lease before source work.
+        if os.getenv('DEMAND_REFRESH_ENABLED', 'false').casefold() == 'true':
+            from deploy.scripts.backup_schedule import run_due_locked
+            backup = run_due_locked(now=started_at)
+            if backup is not None:
+                print(json.dumps({'daily_backup': backup}), flush=True)
         from grocery_data.app.services.municipal_rollout import (
             municipal_environment,
             refresh_scopes,

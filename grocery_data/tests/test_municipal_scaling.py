@@ -223,3 +223,27 @@ def test_local_overview_joins_receipts_to_exact_municipality(tmp_path, monkeypat
     rows = json.loads(capsys.readouterr().out)['municipalities']
     assert visited == ['municipality-1281', 'municipality-1280']
     assert [r['windows']['delivery_stage'] for r in rows] == ['imported_waiting_receipt', 'imported_waiting_publication']
+
+@pytest.mark.parametrize('municipality,city', [('1281','Lund'), ('1280','Malmö'), ('1480','Göteborg')])
+def test_pending_loaded_scope_is_acknowledged_without_reload(tmp_path, monkeypatch, municipality, city):
+    from deploy.scripts import run_daily_refresh as runner
+    path = tmp_path / (municipality + '.json')
+    now = datetime.now(UTC)
+    identity = 'universe:' + municipality
+    state = {'pending_runtime': {'universe_id': identity, 'fingerprint': 'same'}}
+    plan = {'state': state, 'state_path': str(path), 'work_due': False, 'due_sources': [],
+            'reasons': [], 'source_fingerprint': 'same'}
+    manifest = SimpleNamespace(universe_id=identity, oldest_base_observed_at=now, oldest_observed_at=now)
+    monkeypatch.setenv('REFRESH_CITY', city)
+    monkeypatch.setattr(runner, 'demand_refresh_plan', lambda **k: plan)
+    monkeypatch.setattr(runner, '_artifact_store', lambda: SimpleNamespace(read_active=lambda c: manifest,
+        resolve_active_artifact=lambda *a, **k: path))
+    monkeypatch.setattr(runner, '_reload_runtime', lambda: pytest.fail('must preserve existing caches'))
+    def confirm(value):
+        assert value == identity
+        return {'new_price_universe_id': identity, 'changed': False}
+    monkeypatch.setattr(runner, '_confirm_loaded_runtime', confirm)
+    monkeypatch.setattr(runner, '_run_locked', lambda *a, **k: pytest.fail('unnecessary collection'))
+    monkeypatch.setattr(runner, '_write_status', lambda value: None)
+    assert runner._run_demand_locked(object(), started_at=now) == 0
+    assert 'pending_runtime' not in json.loads(path.read_bytes())
