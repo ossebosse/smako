@@ -95,6 +95,29 @@ def test_raw_corruption_and_path_escape_fail_closed(context):
         ops.reproduce(context.database, context.raw, 'one')
 
 
+def test_full_catalog_verification_has_separate_page_and_total_limits(context, monkeypatch):
+    snapshot(context, 'large', chain='coop')
+    raw(context, 'large', {'page': 'a'}, name='a.json')
+    raw(context, 'large', {'page': 'b'}, name='b.json')
+    size = (context.raw / 'a.json').stat().st_size
+    monkeypatch.setattr(ops, 'MAX_RAW_BYTES', size)
+    monkeypatch.setattr(ops, 'MAX_REPRODUCTION_BYTES', size * 2)
+    result = ops.reproduce(context.database, context.raw, 'large')
+    assert result['raw_files_verified'] == 2
+    assert result['raw_bytes_verified'] == size * 2
+    monkeypatch.setattr(ops, 'MAX_REPRODUCTION_BYTES', size * 2 - 1)
+    with pytest.raises(ValueError, match='bounded_reproduction_size_exceeded'):
+        ops.reproduce(context.database, context.raw, 'large')
+    monkeypatch.setattr(ops, 'MAX_REPRODUCTION_BYTES', size * 3)
+    monkeypatch.setattr(ops, 'MAX_RAW_BYTES', size - 1)
+    with pytest.raises(ValueError, match='bounded_reproduction_size_exceeded'):
+        ops.reproduce(context.database, context.raw, 'large')
+    monkeypatch.setattr(ops, 'MAX_RAW_BYTES', size)
+    (context.raw / 'b.json').write_bytes(b'X' * size)
+    with pytest.raises(ValueError, match='raw_hash_mismatch'):
+        ops.reproduce(context.database, context.raw, 'large')
+
+
 @pytest.mark.parametrize('metrics,code,step', [
     ({'run_metrics': {'rate_limit_count':1}}, 'SOURCE_RATE_LIMITED', 'transport'),
     ({'catalog_completion': {'x': {'complete':False,'conflicting_duplicates':1}}}, 'SOURCE_COMMERCIAL_CONFLICT', 'collection'),

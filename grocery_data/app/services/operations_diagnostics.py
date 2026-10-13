@@ -24,6 +24,7 @@ from grocery_data.app.services.durable_files import atomic_write_bytes
 MAX_INCIDENTS = 128
 MAX_INDEX_BYTES = 2_000_000
 MAX_RAW_BYTES = 32_000_000
+MAX_REPRODUCTION_BYTES = 128_000_000
 
 
 def stamp():
@@ -135,15 +136,19 @@ def reproduce(database, raw_root, snapshot_id):
         path = (raw_root / rec['payload_location']).resolve()
         if not path.is_relative_to(raw_root):
             raise ValueError('raw_reference_outside_root')
-        total += path.stat().st_size
-        if total > MAX_RAW_BYTES:
+        size = path.stat().st_size
+        total += size
+        # Full catalogs span many small pages (Coop currently exceeds 32 MB).
+        # Bound the complete verification independently of any single payload.
+        if size > MAX_RAW_BYTES or total > MAX_REPRODUCTION_BYTES:
             raise ValueError('bounded_reproduction_size_exceeded')
-        data = path.read_bytes()
-        if hashlib.sha256(data).hexdigest() != rec['payload_hash']:
+        with path.open('rb') as source:
+            actual_hash = hashlib.file_digest(source, 'sha256').hexdigest()
+        if actual_hash != rec['payload_hash']:
             raise ValueError('raw_hash_mismatch')
         if out['chain'] != 'hemkop':
             continue
-        payload = json.loads(data)
+        payload = json.loads(path.read_bytes())
         ref = {k: rec[k] for k in ('payload_hash', 'payload_location', 'fetched_at', 'page_number')}
         if rec['kind'] in ('stores', 'store_context'):
             for position, row in enumerate(payload if isinstance(payload, list) else [payload]):
