@@ -240,6 +240,7 @@ class CoopOnlinePublicApiConfig:
     personalization_subscription_key: str = field(repr=False)
     ecommerce_subscription_key: str = field(repr=False)
     api_version: str = "v1"
+    ecommerce_api_version: str | None = None
 
     def __repr__(self) -> str:
         return (
@@ -248,7 +249,8 @@ class CoopOnlinePublicApiConfig:
             f"ecommerce_base_url={self.ecommerce_base_url!r}, "
             "personalization_subscription_key='[REDACTED]', "
             "ecommerce_subscription_key='[REDACTED]', "
-            f"api_version={self.api_version!r})"
+            f"api_version={self.api_version!r}, "
+            f"ecommerce_api_version={self.ecommerce_api_version!r})"
         )
 
 
@@ -320,13 +322,18 @@ def public_api_config_from_html(document: str) -> CoopOnlinePublicApiConfig:
         _config_value(
             document,
             "personalizationApiVersion",
-            "hybrisApiVersion",
             "apiVersion",
         )
         or "v1"
     )
     if not re.fullmatch(r"v\d+", api_version):
         raise CoopOnlineSourcePolicyError("Coop runtime config has an invalid API version")
+    ecommerce_api_version = (
+        _config_value(document, "hybrisApiVersion", "ecommerceApiVersion", "apiVersion")
+        or "v1"
+    )
+    if not re.fullmatch(r"v\d+", ecommerce_api_version):
+        raise CoopOnlineSourcePolicyError("Coop runtime config has an invalid ecommerce API version")
     return CoopOnlinePublicApiConfig(
         personalization_base_url=_validated_runtime_base(
             _config_value(
@@ -345,6 +352,7 @@ def public_api_config_from_html(document: str) -> CoopOnlinePublicApiConfig:
         personalization_subscription_key=personalization_key,
         ecommerce_subscription_key=ecommerce_key,
         api_version=api_version,
+        ecommerce_api_version=ecommerce_api_version,
     )
 
 
@@ -679,7 +687,8 @@ class CoopOnlineCatalogClient:
             base_url = config.ecommerce_base_url
             subscription_value = config.ecommerce_subscription_key
         request_params = dict(params)
-        request_params.setdefault("api-version", config.api_version)
+        version = (config.ecommerce_api_version or config.api_version) if surface == "ecommerce" else config.api_version
+        request_params.setdefault("api-version", version)
         safe_query = self._safe_query_metadata(request_params, logical_query)
         async with self._request_slots:
             response = await bounded_request(

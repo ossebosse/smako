@@ -187,6 +187,53 @@ def test_public_runtime_config_is_transient_and_has_redacted_repr() -> None:
     assert rendered.count("[REDACTED]") == 2
 
 
+@pytest.mark.asyncio
+@pytest.mark.parametrize("city", ["Lund", "Malmö", "Göteborg"])
+async def test_runtime_api_versions_are_selected_per_service(city) -> None:
+    # Current public frontend: personalization v2, ecommerce v1. Sending v2
+    # to pickup discovery returns 404 even though its path is still correct.
+    config = public_api_config_from_html(json.dumps({
+        "personalizationApiSubscriptionKey": "personalization-test-value",
+        "hybrisApiSubscriptionKey": "ecommerce-test-value",
+        "personalizationApiVersion": "v2",
+        "hybrisApiVersion": "v1",
+    }))
+    seen = []
+
+    def handler(request):
+        surface = request.url.path.split('/')[1]
+        seen.append((surface, request.url.params['api-version']))
+        expected = 'v1' if surface == 'ecommerce' else 'v2'
+        if request.url.params['api-version'] != expected:
+            return httpx.Response(404, json={'error': 'unsupported version'})
+        if surface == 'ecommerce':
+            assert request.url.params['query'] == city
+            return httpx.Response(200, json={'stores': [{
+                'name': 'pickup-example', 'displayName': 'Public pickup', 'storeId': '730400',
+            }]})
+        return httpx.Response(200, json={'categories': []})
+
+    client, transport = _client(handler)
+    client._public_api_config = config
+    try:
+        listing = await client.fetch_point_of_services(city)
+        assert listing.documents[0].http_status == 200
+        await client._api_request('personalization', 'GET', '/categories',
+                                 kind='test_category', context_id='730400', params={})
+    finally:
+        await transport.aclose()
+    assert seen == [('ecommerce', 'v1'), ('personalization', 'v2')]
+
+
+@pytest.mark.parametrize('field', ['personalizationApiVersion', 'hybrisApiVersion'])
+def test_invalid_service_api_version_is_rejected(field):
+    with pytest.raises(CoopOnlineSourcePolicyError, match='invalid'):
+        public_api_config_from_html(json.dumps({
+            'personalizationApiSubscriptionKey': 'personalization-test-value',
+            'hybrisApiSubscriptionKey': 'ecommerce-test-value', field: '../v2',
+        }))
+
+
 def test_raw_payload_sanitizer_removes_nested_credentials_and_browser_identity() -> None:
     sanitized = json.loads(
         sanitized_api_payload(
