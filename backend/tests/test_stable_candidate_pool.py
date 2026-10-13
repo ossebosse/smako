@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pytest
 from app.models.recipe import Recipe, RecipeIngredient
+from app.services import stable_candidate_pool
 from app.services.ingredient_taxonomy import INGREDIENT_TAXONOMY
 from app.services.recipe_candidate_generator import DeterministicRecipeCandidateGenerator
 from app.services.recipe_candidate_validator import ingredient_profile, recipe_id
@@ -170,3 +171,29 @@ def test_stratified_additions_do_not_fill_shortlist_with_one_recipe_shape() -> N
 
     assert repetitive[0] in result.recipes
     assert diverse in result.recipes
+
+
+def test_shortlist_reuses_ids_only_within_one_call_and_preserves_ranked_order(monkeypatch):
+    ranked = [_addition(f"Pris {index}", primary=primary)
+              for index, primary in enumerate(("kyckling", "lax", "tofu", "ägg"))]
+    duplicate = ranked[0].model_copy(deep=True)
+    calls = []
+
+    def measured_id(recipe):
+        calls.append(recipe)
+        return recipe_id(recipe)
+
+    monkeypatch.setattr(stable_candidate_pool, 'recipe_id', measured_id)
+    result = stratified_candidate_shortlist([*ranked, duplicate], limit=3)
+    assert len(calls) == 5
+    assert result.received == 5 and result.pruned == 2
+    assert list(result.recipes) == [r for r in ranked if r in result.recipes]
+
+    ranked[-1].instructions.append("Blanda moroten först.")
+    calls.clear()
+    result = stratified_candidate_shortlist(
+        ranked, limit=1, stable_recipe_ids=frozenset({recipe_id(ranked[-1])}),
+    )
+    assert result.recipes == (ranked[-1],)
+    assert result.retained_stable == 1
+    assert len(calls) == len(ranked)

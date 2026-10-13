@@ -153,14 +153,18 @@ def stratified_candidate_shortlist(
         raise ValueError("limit must be at least one")
     unique: list[Recipe] = []
     seen: set[str] = set()
+    # Keep the content IDs already computed for deduplication for this call.
+    # Recipes remain strongly referenced in unique; no IDs survive the call.
+    identities: dict[int, str] = {}
     for recipe in economically_ranked:
         identity = recipe_id(recipe)
         if identity in seen:
             continue
         seen.add(identity)
         unique.append(recipe)
+        identities[id(recipe)] = identity
 
-    stable = [recipe for recipe in unique if recipe_id(recipe) in stable_recipe_ids]
+    stable = [recipe for recipe in unique if identities[id(recipe)] in stable_recipe_ids]
     if len(stable) > limit:
         raise ValueError(
             "candidate limit is smaller than the validated stable base; "
@@ -175,19 +179,22 @@ def stratified_candidate_shortlist(
             pruned=len(economically_ranked) - len(unique),
         )
 
-    additions = [recipe for recipe in unique if recipe_id(recipe) not in stable_recipe_ids]
+    additions = [recipe for recipe in unique if identities[id(recipe)] not in stable_recipe_ids]
     slots = limit - len(stable)
     if not stratify_additions:
         selected_additions = additions[:slots]
     else:
         builder = profile_builder or RecipeProfileBuilder()
-        profiles = {recipe_id(recipe): builder.build(recipe) for recipe in unique}
+        dimensions_by_id = {
+            identities[id(recipe)]: _profile_dimensions(builder.build(recipe))
+            for recipe in unique
+        }
         dimensions = Counter(
             dimension
             for recipe in stable
-            for dimension in _profile_dimensions(profiles[recipe_id(recipe)])
+            for dimension in dimensions_by_id[identities[id(recipe)]]
         )
-        ranked = {recipe_id(recipe): index for index, recipe in enumerate(unique)}
+        ranked = {identities[id(recipe)]: index for index, recipe in enumerate(unique)}
         remaining = list(additions)
         selected_additions: list[Recipe] = []
         while remaining and len(selected_additions) < slots:
@@ -196,24 +203,24 @@ def stratified_candidate_shortlist(
                 key=lambda recipe: (
                     sum(
                         dimensions[dimension]
-                        for dimension in _profile_dimensions(profiles[recipe_id(recipe)])
+                        for dimension in dimensions_by_id[identities[id(recipe)]]
                     ),
                     max(
                         dimensions[dimension]
-                        for dimension in _profile_dimensions(profiles[recipe_id(recipe)])
+                        for dimension in dimensions_by_id[identities[id(recipe)]]
                     ),
-                    ranked[recipe_id(recipe)],
-                    recipe_id(recipe),
+                    ranked[identities[id(recipe)]],
+                    identities[id(recipe)],
                 ),
             )
             remaining.remove(chosen)
             selected_additions.append(chosen)
-            dimensions.update(_profile_dimensions(profiles[recipe_id(chosen)]))
+            dimensions.update(dimensions_by_id[identities[id(chosen)]])
 
-    selected_ids = {recipe_id(recipe) for recipe in (*stable, *selected_additions)}
+    selected_ids = {identities[id(recipe)] for recipe in (*stable, *selected_additions)}
     # Preserve caller ranking after deciding membership; beam tie-breaking and
     # cache artifacts therefore remain deterministic and economically ordered.
-    selected = tuple(recipe for recipe in unique if recipe_id(recipe) in selected_ids)
+    selected = tuple(recipe for recipe in unique if identities[id(recipe)] in selected_ids)
     return CandidateShortlist(
         recipes=selected,
         received=len(economically_ranked),
