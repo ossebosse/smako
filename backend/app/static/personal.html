@@ -6,17 +6,19 @@
   <meta name="theme-color" content="#173e35" />
   <title>Smako · Min plan och skafferi</title>
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
-  <link rel="stylesheet" href="/static/personal.css?v=ingredients-20261012" />
+  <link rel="stylesheet" href="/static/personal.css?v=option3-1" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
+  <link rel="stylesheet" href="/static/choices.css?v=option3-1" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
   <script src="/static/complete-recipes.js?v=ingredients-20261012" defer></script>
   <script src="/static/shopping-location.js?v=location-20261011" defer></script>
-  <script src="/static/personal.js?v=sliders-20261011" defer></script>
+  <script src="/static/choice-controls.js?v=option3-1" defer></script>
+  <script src="/static/personal.js?v=option3-1" defer></script>
   <script src="/static/product-search.js?v=comparability-20261010" defer></script>
 </head>
 <body class="personal-app">
   <a class="skip-link" href="#personal-main">Hoppa till innehållet</a>
-  <header class="personal-header"><a class="brand" href="/personal"><span class="brand-mark">S</span>Smako</a><span>Personlig planering</span></header>
+  <header class="personal-header"><a class="brand" href="/personal">Smako</a><span>En enklare väg till godare vardag</span></header>
   <nav class="personal-nav" aria-label="Huvudmeny">
     <button type="button" data-open="plan" aria-current="page">Min plan</button>
     <button type="button" data-open="shopping">Inköpslista</button>
@@ -63,12 +65,14 @@
         <div class="product-search-options"><label>Visa<select id="product-search-view"><option value="relevance">Relevanta produkter</option><option value="cheapest">Billigast relevant</option><option value="campaigns">Kampanjer</option><option value="multiple">Samma produkt i flera butiker</option><option value="unit:kg">Jämförpris kr/kg</option><option value="unit:l">Jämförpris kr/l</option></select></label><a href="#choices" id="product-search-area" data-open="choices">Postnummer och medlemskap</a></div>
       </form><p id="product-search-status" role="status"></p><div id="product-search-coverage" hidden></div><div id="product-search-results"></div><button type="button" id="product-search-more" class="secondary-button" hidden>Visa fler produkter</button>
     </section>
-    <section data-view="choices" id="personal-choices" hidden><h1>Mina val</h1>
+    <section data-view="choices" id="personal-choices" hidden>
+      <div class="choices-intro"><p class="eyebrow">Din vecka. Dina smaker.</p><h1>Skapa din matplan</h1><p>Goda måltider. Lägre matkostnad. Enklare vardag.</p></div>
+      <div class="choices-workspace">
       <form id="personal-form">
         <section id="location-step" class="location-card" aria-labelledby="location-title">
           <h2 id="location-title">Var vill du handla?</h2>
-          <p>Börja med ditt postnummer. Smako behöver ha en kartlagd butik inom ungefär 10 km.</p>
-          <div class="postcode-entry"><label for="customer-postcode">Ditt postnummer<input id="customer-postcode" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="Till exempel 223 50" /></label><button id="check-postcode" type="button" class="primary-button">Hitta butiker</button></div>
+          <p>Hitta butiker nära dig. En kartlagd butik behöver finnas inom ungefär 10 km.</p>
+          <div class="postcode-entry"><label for="customer-postcode">Ditt postnummer<input id="customer-postcode" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="Ditt postnummer" /></label><button id="check-postcode" type="button" class="primary-button">Hitta butiker</button></div>
           <p id="location-status" role="status" aria-live="polite"></p>
           <div id="location-store-settings" hidden>
             <label for="location-store-mode">Vilka butiker vill du jämföra?<select id="location-store-mode"><option value="radius">Butiker inom en radie</option><option value="municipality">Alla kartlagda butiker i min kommun</option><option value="specific">Välj specifika butiker</option></select></label>
@@ -77,30 +81,33 @@
             <p id="location-selection-status" role="status"></p>
             <button id="confirm-location" type="button" class="primary-button">Fortsätt till måltider</button>
           </div>
-          <p class="small">Avstånden är ungefärliga och mäts fågelvägen från postnumrets referenspunkt, inte från din adress. Butiker utan känd position ingår bara i kommunval eller egna butiksval. Onlinepriser märks separat.</p>
-          <details><summary>Om postnummerunderlaget</summary><p class="small">© European Union - GISCO, 2024, postal code point dataset, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>. Svenskt utdrag ur 2025 års data. Vissa postnummer delar referenspunkt eller kan saknas. <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/postal-codes">Läs om underlaget</a>.</p></details>
+          <details><summary>Om avstånd och prisunderlag</summary><p class="small">Avstånden är ungefärliga och mäts fågelvägen från postnumrets referenspunkt, inte från din adress. Butiker utan känd position ingår bara i kommunval eller egna butiksval. Onlinepriser märks separat.</p>
+          <p class="small">© European Union - GISCO, 2024, postal code point dataset, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>. Svenskt utdrag ur 2025 års data. Vissa postnummer delar referenspunkt eller kan saknas. <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/postal-codes">Läs om underlaget</a>.</p></details>
         </section>
         <input type="hidden" id="postal-code" value="" />
         <fieldset id="planning-choices" hidden disabled>
-        <p>Välj antal middagar, portioner och inköpsställen. Under extraval kan du anpassa planen mer.</p>
+        <p class="sr-only" id="meal-announcement" aria-live="polite"></p>
         <div id="meal-settings"></div>
         <fieldset class="choices-primary"><legend>Inköpsställen</legend><div id="store-count-control"></div></fieldset>
-        <details id="extra-choices" class="extra-choices"><summary>Extraval</summary>
+        <section class="choice-shortcuts"><h2>Gör planen mer din</h2><p>Genvägar till dina extraval.</p><div class="personal-actions"><button type="button" data-choice-jump="taste-choices">Smakval</button><button type="button" data-choice-jump="complete-recipe-controls">Receptval</button><button type="button" data-choice-jump="organic-choices">Ekologiskt</button><button type="button" data-choice-jump="surplus-choices">Överskott</button></div></section>
+        <details id="extra-choices" class="extra-choices"><summary>Extraval <span>Fler måltider, smakval och egna gränser</span></summary>
         <p>Fler måltider, smakval, butiker och egna gränser. Standardvalen gäller tills du ändrar dem.</p>
-        <fieldset><legend>Fler måltider</legend><div id="extra-meal-toggles" class="personal-checks"></div><p>Valda måltider visas under middagar, med egna reglage för antal och portioner.</p></fieldset>
+        <fieldset><legend>Fler måltider</legend><div id="extra-meal-toggles" class="personal-checks"></div><p>Valda måltider visas under Middag, med egna inställningar.</p><button type="button" id="go-to-meals" class="secondary-button">Gå till måltider ↑</button></fieldset>
         <div id="memberships" hidden></div>
-        <fieldset><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Granska de svenska fälten före tillämpning. Ogillar är ett mjukt önskemål. Uteslutningar och allergier är hårda krav.</p><div id="profile-fields" class="personal-grid"></div>
+        <fieldset id="taste-choices"><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Granska de svenska fälten före tillämpning. Ogillar är ett mjukt önskemål. Uteslutningar och allergier är hårda krav.</p><div id="profile-fields" class="personal-grid"></div>
           <label id="unresolved-label" hidden>Inte tolkat – flytta till rätt fält och töm sedan rutan<textarea id="unresolved-text"></textarea></label>
           <p class="data-note">Uteslut ingredienser är ett hårt matval: fisk innebär inga fiskingredienser, även i sås och buljong. Det gäller inte bara huvudråvaran. Tillräckligt källstött ingrediensunderlag krävs; okänt godtas inte. Allergier anges separat och kräver även kontrollerat allergen- och spårunderlag. Ett godkänt matval är ingen allergisäkerhetskontroll. Tidigare sparade val behåller sin typ.</p>
           <button type="button" id="save-profile" class="secondary-button">Spara min profil i gästsessionen</button><p>Profilen sparas för återanvändning bara med knappen ovan. Planens bekräftade krav följer dess privata revisioner.</p>
         </fieldset>
         <div id="complete-recipe-controls"></div>
-        <fieldset><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Minst X % av matinköpets varukostnad ska vara verifierat ekologisk. Gäller alla köpta livsmedel efter rabatt, inklusive mat-extravaror. Skafferi, avgifter och icke-livsmedel ingår inte. Okänd status räknas inte som eko.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Källstödd ekologisk märkning finns för en del produkter. Okänd status räknas inte positivt. Animaliskt innehåll och sammansatta produkter kan fortfarande sakna tillräckligt underlag.</p></fieldset>
-        <fieldset><legend>Överskott</legend><label>Inköpsstrategi<select id="surplus-mode"><option value="minimize">Minimera överskott</option><option value="allow_larger">Tillåt större köp och föreslå användning av resten</option></select></label><p>Hela förpackningar kan ge oundvikligt överskott. Strategiska extraköp redovisar extra mängd och merkostnad. Rester är beräknade; hållbarhet är okänd.</p></fieldset>
+        <fieldset id="organic-choices"><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Minst X % av matinköpets varukostnad ska vara verifierat ekologisk. Gäller alla köpta livsmedel efter rabatt, inklusive mat-extravaror. Skafferi, avgifter och icke-livsmedel ingår inte. Okänd status räknas inte som eko.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Källstödd ekologisk märkning finns för en del produkter. Okänd status räknas inte positivt. Animaliskt innehåll och sammansatta produkter kan fortfarande sakna tillräckligt underlag.</p></fieldset>
+        <fieldset id="surplus-choices"><legend>Överskott</legend><label>Inköpsstrategi<select id="surplus-mode"><option value="minimize">Minimera överskott</option><option value="allow_larger">Tillåt större köp och föreslå användning av resten</option></select></label><p>Hela förpackningar kan ge oundvikligt överskott. Strategiska extraköp redovisar extra mängd och merkostnad. Rester är beräknade; hållbarhet är okänd.</p></fieldset>
         </details>
         <button id="generate-plan" type="submit" class="primary-button">Skapa plan och inköpslista</button>
         </fieldset>
       </form>
+      <aside class="choice-summary" aria-labelledby="choice-summary-title"><p class="eyebrow">Din plan i korthet</p><h2 id="choice-summary-title">En god vecka börjar här.</h2><dl id="choice-summary-lines"></dl><p>Dina måltider planeras tillsammans i en gemensam inköpskorg.</p><button type="button" class="primary-button" id="choice-submit" disabled>Skapa plan och inköpslista</button><p class="small">Dina val och tidigare plan behålls om beräkningen inte kan slutföras.</p></aside>
+      </div>
     </section>
   </main>
   <footer class="personal-footer"><a href="/">Tidigare middagsplanering och feedback</a><a href="/static/privacy.html">Integritet och radera mina data</a><span id="personal-version"></span></footer>

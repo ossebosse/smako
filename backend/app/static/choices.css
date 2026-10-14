@@ -1,0 +1,126 @@
+/* Approved option 3. Scoped to personal configuration; result styles stay owned
+   by their existing sheets. No external fonts or image dependencies. */
+.personal-app {--sm-bg:#f7f6f0;--sm-ink:#143f35;--sm-primary:#164b3e;--sm-tint:#edf3e9;--sm-border:#d7dfd7;--sm-muted:#586a60;background:var(--sm-bg);color:var(--sm-ink);}
+.personal-app .personal-header .brand {font:normal 46px/1 Georgia,serif;letter-spacing:-2px;color:var(--sm-ink);}
+.personal-header,.personal-nav,.personal-app main,.personal-footer {max-width:1140px;}
+.personal-header {padding-top:30px;padding-bottom:26px;}
+.personal-header>span {color:var(--sm-muted);font-size:14px;}
+.personal-nav button {flex:0 1 auto;padding:10px 18px;border:0;background:transparent;font-weight:600;}
+.personal-nav button[aria-current] {background:var(--sm-primary);color:#fff;}
+#personal-choices {font-size:16px;}
+#personal-choices h1,#personal-choices h2,#personal-choices legend,.personal-app .meal-dialog h2,.personal-app .meal-dialog legend {font-family:Georgia,serif;letter-spacing:-.025em;}
+#personal-choices h1 {font-size:clamp(30px,4vw,44px);margin:8px 0;}
+.choices-intro {padding:8px 0 24px;}
+.choices-intro p {color:var(--sm-muted);margin:6px 0;}
+.choices-intro .eyebrow,.choice-summary .eyebrow {font-size:11px;font-weight:750;letter-spacing:.16em;color:var(--sm-muted);}
+.choices-workspace {display:grid;grid-template-columns:minmax(0,700px) minmax(260px,320px);gap:26px;align-items:start;}
+#personal-form {min-width:0;}
+#personal-choices .location-card,#personal-choices .choices-primary,.choice-shortcuts,.choice-summary {background:#fff;border:1px solid var(--sm-border);border-radius:18px;box-shadow:0 4px 20px #143f3506;}
+#personal-choices .location-card {padding:22px;}
+#personal-choices h2 {font-size:24px;margin:0 0 8px;}
+#personal-choices p {font-size:14px;}
+#personal-choices .small {font-size:12px;}
+#personal-choices legend {font-size:23px;font-weight:700;background:inherit;padding:0 8px;}
+#personal-choices .choices-primary {padding:14px 20px 20px;margin:24px 0;}
+#personal-choices .choices-primary .personal-grid {grid-template-columns:1fr;gap:4px;}
+#personal-choices input:not([type=checkbox]):not([type=range]),#personal-choices select,#personal-choices textarea,.meal-dialog .slider-value-editor input {font-size:16px;border-radius:10px;background:#fbfcfa;}
+#personal-choices button,.meal-dialog button {border-radius:10px;box-shadow:none;cursor:pointer;font:600 14px/1.35 inherit;}
+#personal-choices .primary-button,.meal-dialog .primary-button {background:var(--sm-primary);color:#fff;border:1px solid var(--sm-primary);}
+#personal-choices .secondary-button,.meal-dialog .secondary-button {color:var(--sm-ink);background:#fff;border:1px solid #b8cabf;}
+#personal-choices button:hover,.meal-dialog button:hover {filter:brightness(.96);}
+.personal-app :is(button,input,select,textarea,summary,a):focus-visible {outline:3px solid #247b66;outline-offset:3px;}
+.postcode-entry {gap:10px;}
+.postcode-entry label {margin:8px 0;}
+.postcode-entry button {margin:0 0 8px;min-height:48px;}
+#personal-choices .postcode-entry {display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;}
+#personal-choices .postcode-entry button {width:auto;}
+#personal-choices .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;}
+#location-store-settings {display:grid;grid-template-columns:1fr 1fr;gap:0 14px;}
+#location-store-settings>button,#location-selection-status {grid-column:1/-1;}
+#location-status:not(:empty),#location-selection-status:not(:empty) {padding:10px 12px;border-radius:10px;background:var(--sm-tint);font-size:13px;}
+#personal-choices details>summary {font-size:14px;}
+#personal-choices .choice-shortcuts {padding:18px 20px;background:var(--sm-tint);}
+.choice-shortcuts .personal-actions button {background:#fff;border:1px solid var(--sm-border);padding:8px 12px;color:var(--sm-ink);}
+#personal-choices .extra-choices {background:transparent;border-color:var(--sm-border);padding:16px 20px;margin:20px 0;}
+#personal-choices .extra-choices>summary {font-family:Georgia,serif;font-size:25px;padding:0;}
+.extra-choices>summary>span {display:block;font:400 13px/1.5 system-ui,sans-serif;margin:5px 0 0;color:var(--sm-muted);}
+#personal-choices .extra-choices fieldset {background:#fff;}
+#personal-choices .extra-choices legend {font-size:21px;}
+#extra-meal-toggles {display:block;}
+#extra-meal-toggles .check-label {justify-content:space-between;min-height:48px;margin:4px 0;}
+#extra-meal-toggles input {appearance:none;width:44px;height:26px;border-radius:20px;background:#d6ded8;border:1px solid #9fac9f;position:relative;cursor:pointer;}
+#extra-meal-toggles input::before {content:"";position:absolute;width:20px;height:20px;border-radius:50%;top:2px;left:2px;background:#fff;box-shadow:0 1px 3px #0002;}
+#extra-meal-toggles input:checked {background:var(--sm-primary);border-color:var(--sm-primary);}
+#extra-meal-toggles input:checked::before {left:20px;}
+.choice-summary {padding:24px;position:sticky;top:24px;background:var(--sm-tint);}
+.choice-summary h2 {font-size:29px!important;line-height:1.15;margin:12px 0 22px!important;}
+.choice-summary dl {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px;font-size:13px;border-block:1px solid #cdd9cd;padding:18px 0;}
+.choice-summary dt {color:var(--sm-muted);}
+.choice-summary dd {margin:0;text-align:right;font-weight:650;overflow-wrap:anywhere;}
+#choice-submit {width:100%;padding:14px 12px;}
+.choice-summary button:disabled {opacity:.5;cursor:not-allowed;}
+#generate-plan {margin:0;}
+.choice-slider {position:relative;}
+.choice-slider-heading {align-items:center;gap:12px;}
+.choice-slider-heading>label {font-size:15px;}
+.stepper {display:flex;align-items:center;border:1px solid #b8cabf;border-radius:10px;overflow:hidden;flex-shrink:0;background:#fff;}
+.personal-app .stepper .stepper-button {border:0;border-radius:0;background:#fff;color:var(--sm-ink);width:44px;min-width:44px;min-height:44px;padding:0;margin:0;font-size:21px;font-weight:500;}
+.personal-app .stepper .slider-value-editor input {width:64px;min-height:44px;border:0;border-inline:1px solid #d7dfd7;border-radius:0;margin:0;padding:8px 2px;background:#fff;}
+.personal-app .stepper .slider-value-editor input::placeholder {font-size:11px;}
+.personal-app input.stepper-model {position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:0;clip-path:inset(50%);overflow:hidden;}
+.personal-app .choice-reset {border:0;background:transparent;color:#315e4e;text-decoration:underline;text-underline-offset:3px;font-size:13px;min-height:44px;padding:6px 8px;margin:0;}
+.personal-app .choice-error {color:#9a2e29;font-size:13px;margin:8px 0;}
+.choice-error:empty {display:none;}
+.personal-app [aria-invalid=true] {border-color:#9a2e29!important;}
+.meal-settings-actions {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px;}
+.meal-settings-actions button {padding:10px 4px;margin:0;min-height:46px;font-size:12px;}
+.meal-settings-actions button {display:flex;flex-direction:column;justify-content:center;gap:0;}
+.meal-button-summary {display:block;font-size:11px;font-weight:400;color:var(--sm-muted);margin-top:4px;overflow-wrap:anywhere;}
+.choice-modal-open {overflow:hidden;}
+.personal-app .meal-dialog {width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 24px);padding:0;border-radius:26px;overflow:hidden;}
+.personal-app .meal-dialog[open] {display:flex;flex-direction:column;}
+.meal-dialog-header,.meal-dialog-footer {padding:18px 22px;flex-shrink:0;display:flex;align-items:center;gap:12px;background:#fff;}
+.personal-app .meal-dialog-header h2 {font-size:25px;line-height:1.2;margin:0;flex:1;}
+.personal-app .dialog-x {width:44px;min-width:44px;min-height:44px;margin:0;padding:0;background:transparent;border:0;font-size:28px;}
+.meal-dialog-body {overflow-y:auto;overscroll-behavior:contain;padding:0 22px 12px;min-height:0;}
+.meal-dialog-body>fieldset {border:0;padding:0;margin:0;}
+.meal-dialog-body p {font-size:14px;}
+.meal-dialog-body>.personal-grid {grid-template-columns:1fr;}
+.meal-dialog-footer {border-top:1px solid var(--sm-border);padding-bottom:max(18px,env(safe-area-inset-bottom));}
+.meal-dialog-footer button {flex:1;margin:0;}
+.personal-app .choice-interval {border:1px solid var(--sm-border);border-radius:14px;padding:10px 16px;margin:18px 0;background:#fff;}
+.personal-app .choice-interval legend {font:700 17px/1.3 system-ui,sans-serif;letter-spacing:0;}
+.personal-app .interval-value label {font-size:13px;}
+.personal-app .interval-value .slider-value-editor input {width:8ch;}
+.meal-dialog .personal-grid {grid-template-columns:1fr;}
+.meal-dialog .choice-stepper {border-bottom:1px solid #e1e8df;padding:12px 0;}
+.personal-app .choice-interval .small {font-size:12px;margin:6px 0;}
+@media(min-width:850px) {#generate-plan {position:absolute;width:1px;height:1px;min-height:0;overflow:hidden;clip-path:inset(50%);}}
+@media(max-width:849px) {
+  .choices-workspace {grid-template-columns:minmax(0,1fr);gap:20px;}
+  .choice-summary {position:static;}
+  #generate-plan {display:none;}
+  .personal-header>span {max-width:150px;font-size:12px;}
+  .personal-nav {gap:2px;}
+  .personal-nav button {font-size:12px;flex:1 1 28%;padding:8px;}
+}
+@media(max-width:430px) {
+  .personal-header {padding-top:22px;padding-bottom:20px;}
+  .personal-app .personal-header .brand {font-size:38px;}
+  .choices-intro {padding-bottom:18px;}
+  #personal-choices .location-card,#personal-choices .choices-primary {padding:14px;}
+  #personal-choices .extra-choices {padding:14px 10px;}
+  #personal-choices .extra-choices>fieldset {padding:12px;}
+  .postcode-entry label {flex-basis:130px;}
+  .postcode-entry button {font-size:13px;padding:12px;}
+  #location-store-settings {grid-template-columns:minmax(0,1fr);}
+  .choice-slider-heading {gap:8px;}
+  .choice-slider-heading>label {font-size:14px;}
+  .personal-app .stepper .slider-value-editor input {width:52px;}
+  .meal-settings-actions {gap:5px;}
+  .meal-settings-actions button {font-size:11px;}
+  .meal-dialog-header,.meal-dialog-footer {padding:14px;}
+  .meal-dialog-body {padding:0 14px 8px;}
+  .personal-app .meal-dialog-header h2 {font-size:22px;}
+}
+@media(prefers-reduced-motion:reduce) {.personal-app * {scroll-behavior:auto!important;transition:none!important;}}

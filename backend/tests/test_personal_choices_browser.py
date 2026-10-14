@@ -1,6 +1,7 @@
 """Offline browser coverage for choices, request semantics and draft migration."""
 
 import json
+import subprocess
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -78,7 +79,7 @@ def choices(request):
 
 def submit(page, captured):
     before = len(captured)
-    page.locator("#generate-plan").click()
+    page.locator("#choice-submit").click()
     expect(page.locator("#personal-status")).to_contain_text("Testet fångar")
     assert len(captured) == before + 1
     # Validate against the actual API contracts, not a copy of frontend rules.
@@ -106,7 +107,7 @@ def test_primary_sliders_optional_meals_and_default_request(choices):
     expect(page.locator("#dinner-servings")).to_have_value("4")
     expect(page.locator("#max-stores")).to_have_value("2")
     expect(page.locator("#breakfast-count")).not_to_be_visible()
-    expect(page.locator("#dinner-servings")).to_have_attribute("max", "6")
+    expect(page.locator("#dinner-servings")).to_have_attribute("max", "8")
     page.locator("#dinner-servings").focus()
     page.keyboard.press("ArrowRight")
     expect(page.locator("#dinner-servings")).to_have_value("5")
@@ -132,7 +133,9 @@ def test_primary_sliders_optional_meals_and_default_request(choices):
     expect(page.locator("#meal-dinner-level")).to_have_count(0)
     expect(page.locator("#recipe-price-contexts")).to_have_count(0)
     expect(page.locator('[data-meal-type="breakfast"]')).to_be_visible()
-    page.locator("#breakfast-min_protein_g").evaluate("node => node.value = 30")
+    page.locator("#breakfast-nutrition-open").click()
+    page.locator("#breakfast-min_protein_g-value").fill("30")
+    page.locator("#breakfast-nutrition-dialog").get_by_role("button", name="Klart", exact=True).click()
     selected = submit(page, captured)
     assert [m["count"] for m in selected["personal"]["meals"]] == [5, 3, 4]
     assert selected["personal"]["meals"][1]["limits"]["min_protein_g"] == 30
@@ -240,136 +243,149 @@ def test_old_recipe_styles_migrate_to_visible_ingredient_limits(choices, old_cho
     assert dinner["max_total_minutes"] == (None if old_choices else 45)
 
 
-def test_meal_dialogs_intervals_and_shared_distribution_budget(choices):
+def edit(page, control, value):
+    page.locator(f"#{control}-value").fill(str(value))
+
+
+def done(page, meal, kind):
+    page.locator(f"#{meal}-{kind}-dialog").get_by_role("button", name="Klart", exact=True).click()
+
+
+def test_distribution_conflict_preserves_explicit_values(choices):
     page, url, captured = choices
     page.goto(url)
     choose_location(page)
     page.locator("#dinner-distribution-open").click()
+    edit(page, "dinner-vegetarian", 3)
+    edit(page, "dinner-chicken", 2)
+    expect(page.locator("#dinner-distribution-dialog")).to_contain_text("5 av 5 måltider fördelade · 0 kvar")
+    done(page, "dinner", "distribution")
+    edit(page, "dinner-count", 4)
+    expect(page.locator("#dinner-conflict")).to_contain_text("5 fördelade men bara 4")
+    page.locator("#choice-submit").click()
+    assert not captured
+    page.locator("#dinner-distribution-open").click()
+    expect(page.locator("#dinner-vegetarian-value")).to_have_value("3")
+    expect(page.locator("#dinner-chicken-value")).to_have_value("2")
+    done(page, "dinner", "distribution")
     expect(page.locator("#dinner-distribution-dialog")).to_be_visible()
-    page.locator("#dinner-fish").focus()
-    page.keyboard.press("End")
-    expect(page.locator("#dinner-fish")).to_have_value("5")
-    for kind in ("vegetarian", "chicken", "meat"):
-        expect(page.locator(f"#dinner-{kind}")).to_have_attribute("max", "5")
-        page.locator(f"#dinner-{kind}").focus()
-        page.keyboard.press("End")
-        expect(page.locator(f"#dinner-{kind}")).to_have_value("0")
+    edit(page, "dinner-chicken", 1)
+    edit(page, "dinner-fish", 0)
+    done(page, "dinner", "distribution")
+    meal = submit(page, captured)["personal"]["meals"][0]
+    assert meal["distribution"] == {"vegetarian": 3, "chicken": 1, "fish": 0}
+    page.locator("#dinner-distribution-open").click()
+    page.locator("#dinner-diet").select_option("vegan")
+    done(page, "dinner", "distribution")
+    expect(page.locator("#dinner-distribution-dialog")).to_be_visible()
     page.keyboard.press("Escape")
-    expect(page.locator("#dinner-distribution-open")).to_be_focused()
-    page.locator("#dinner-count").focus()
-    page.keyboard.press("ArrowLeft")
-    expect(page.locator("#dinner-fish")).to_have_value("4")
-    page.locator("#dinner-weight-open").click()
-    page.locator("#dinner-min_weight_g").focus()
-    page.keyboard.press("ArrowRight")
-    page.locator("#dinner-max_weight_g").focus()
-    page.keyboard.press("Home")
-    expect(page.locator("#dinner-max_weight_g")).to_have_value("0")
-    page.locator("#dinner-min_weight_g").focus()
-    page.keyboard.press("End")
-    expect(page.locator("#dinner-min_weight_g")).to_have_value("0")
-    page.locator("#dinner-weight-dialog").get_by_role("button", name="Återställ standard").click()
-    track = page.locator("#dinner-weight-dialog .interval-track").bounding_box()
-    y = track["y"] + track["height"] / 2
-    for start, end in ((12, track["width"] * .2), (track["width"] - 12, track["width"] * .75)):
-        page.mouse.move(track["x"] + start, y)
-        page.mouse.down()
-        page.mouse.move(track["x"] + end, y, steps=8)
-        page.mouse.up()
-    assert 100 < float(page.locator("#dinner-min_weight_g").input_value()) < 1000
-    assert 1500 < float(page.locator("#dinner-max_weight_g").input_value()) < 2800
-    page.locator("#dinner-weight-dialog").get_by_role("button", name="Återställ standard").click()
-    page.locator("#dinner-weight-dialog").get_by_role("button", name="Klart").click()
-    page.locator("#dinner-nutrition-open").click()
-    page.locator("#dinner-min_protein_g").evaluate("n=>{n.value=30;n.dispatchEvent(new Event('input',{bubbles:true}));}")
-    page.locator("#dinner-max_protein_g").evaluate("n=>{n.value=60;n.dispatchEvent(new Event('input',{bubbles:true}));}")
-    for width in (1280, 390):
-        page.set_viewport_size({"width": width, "height": 800})
-        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-        assert page.locator("#dinner-nutrition-dialog").evaluate("n=>n.scrollWidth<=n.clientWidth")
-    page.keyboard.press("Escape")
-    payload = submit(page, captured)
-    meal = payload["personal"]["meals"][0]
-    assert meal["distribution"] == {"vegetarian": 0, "chicken": 0, "fish": 4, "meat": 0}
-    assert meal["limits"]["min_weight_g"] is None and meal["limits"]["max_weight_g"] is None
-    assert (meal["limits"]["min_protein_g"], meal["limits"]["max_protein_g"]) == (30, 60)
+    assert submit(page, captured)["personal"]["meals"][0]["diet"] == "mixed"
 
 
-def test_fixed_distribution_and_editable_values(choices):
+def test_all_nine_dialogs_are_independent_transactional_and_accessible(choices):
     page, url, captured = choices
     page.goto(url)
     choose_location(page)
-
-    def enter(control, value):
-        editor = page.locator(f"#{control}-value")
-        editor.fill(value)
-        editor.press("Enter")
-
-    # Every thumb has its own accessible keyboard editor, including optional meals.
-    assert page.locator('input[type="range"]').evaluate_all(
-        "nodes=>nodes.every(n=>document.getElementById(n.id+'-value')?.getAttribute('aria-label'))")
-    enter("dinner-servings", "9")
-    expect(page.locator("#dinner-servings")).to_have_value("6")
-    enter("max-stores", "1")
-    page.locator("#dinner-distribution-open").click()
-    enter("dinner-vegetarian", "2")
-    page.locator("#dinner-chicken").focus()
-    page.keyboard.press("End")
-    expect(page.locator("#dinner-chicken")).to_have_value("3")
-    expect(page.locator("#dinner-vegetarian")).to_have_value("2")
-    # Editing an earlier category must not displace the later one either.
-    enter("dinner-vegetarian", "5")
-    expect(page.locator("#dinner-vegetarian-value")).to_have_value("2")
-    expect(page.locator("#dinner-chicken")).to_have_value("3")
-    for kind in ("vegetarian", "chicken", "fish", "meat"):
-        expect(page.locator(f"#dinner-{kind}")).to_have_attribute("max", "5")
-    enter("dinner-fish", "4")
-    expect(page.locator("#dinner-fish")).to_have_value("0")
-    enter("dinner-fish", "")
-    expect(page.locator("#dinner-fish")).to_have_value("-1")
-    page.locator("#dinner-diet").select_option("vegetarian")
-    expect(page.locator("#dinner-chicken-value")).to_be_disabled()
-    expect(page.locator("#dinner-chicken")).to_have_attribute("max", "5")
-    page.keyboard.press("Escape")
-    page.locator("#dinner-nutrition-open").click()
-    enter("dinner-min_protein_g", "30,5")
-    enter("dinner-max_protein_g", "500")
-    expect(page.locator("#dinner-max_protein_g-value")).to_have_value("100")
-    enter("dinner-max_carbs_g", "500")
-    expect(page.locator("#dinner-max_carbs_g-value")).to_have_value("400")
-    enter("dinner-max_protein_g", "20")
-    expect(page.locator("#dinner-max_protein_g-value")).to_have_value("30.5")
-    enter("dinner-max_protein_g", "")
-    enter("dinner-max_kcal", "650")
-    for width in (390, 1280):
-        page.set_viewport_size({"width": width, "height": 800})
-        assert page.locator("#dinner-nutrition-dialog").evaluate("n=>n.scrollWidth<=n.clientWidth")
-    page.keyboard.press("Escape")
     page.locator("#extra-choices>summary").click()
-    expect(page.locator("#extra-choices")).not_to_contain_text("Medlemspriser")
-    # Blur also commits; invalid text and Escape leave the last valid value.
-    page.locator("#organic-percent-value").fill("25")
-    page.locator("#organic-percent-value").press("Tab")
-    enter("organic-percent", "abc")
-    page.locator("#organic-percent-value").fill("80")
-    page.locator("#organic-percent-value").press("Escape")
-    expect(page.locator("#organic-percent-value")).to_have_value("25")
-    assert not captured, "Enter in a value editor must not submit the plan"
-    payload = submit(page, captured)
-    assert payload["membership_price_policy"] == "all_advertised"
-    assert payload["max_stores"] == 1 and payload["personal"]["organic_percent"] == 25
-    meal = payload["personal"]["meals"][0]
-    assert meal["servings"] == 6
-    assert meal["distribution"] == {"vegetarian": 5, "chicken": 0, "fish": 0, "meat": 0}
-    assert meal["limits"]["min_protein_g"] == 30.5
-    assert meal["limits"]["max_protein_g"] is None
-    assert meal["limits"]["max_carbs_g"] == 400 and meal["limits"]["max_kcal"] == 650
+    page.locator("#enable-breakfast").check()
+    page.locator("#enable-snack").check()
+    for index, meal in enumerate(("dinner", "breakfast", "snack")):
+        for kind in ("distribution", "weight", "nutrition"):
+            page.locator(f"#{meal}-{kind}-open").click()
+            dialog = page.locator(f"#{meal}-{kind}-dialog")
+            expect(dialog).to_be_visible()
+            assert page.locator("dialog[open]").count() == 1
+            assert page.evaluate("getComputedStyle(document.documentElement).overflow") == "hidden"
+            if kind == "distribution":
+                edit(page, f"{meal}-vegetarian", index)
+            else:
+                key = "weight_g" if kind == "weight" else "protein_g"
+                edit(page, f"{meal}-min_{key}", 10 + index)
+                edit(page, f"{meal}-max_{key}", 30 + index)
+            done(page, meal, kind)
+            expect(page.locator(f"#{meal}-{kind}-open")).to_be_focused()
+    meals = submit(page, captured)["personal"]["meals"]
+    for index, meal in enumerate(meals):
+        assert meal["distribution"]["vegetarian"] == index
+        for key in ("weight_g", "protein_g"):
+            assert meal["limits"][f"min_{key}"] == 10 + index
+            assert meal["limits"][f"max_{key}"] == 30 + index
+    for cancel in ("Avbryt", "Stäng utan att spara", "Escape"):
+        page.locator("#breakfast-nutrition-open").click()
+        dialog = page.locator("#breakfast-nutrition-dialog")
+        dialog.locator(".choice-interval").first.get_by_role("button", name="Återställ standard").click()
+        if cancel == "Escape":
+            page.keyboard.press("Escape")
+        else:
+            dialog.get_by_role("button", name=cancel, exact=True).click()
+        assert submit(page, captured)["personal"]["meals"][1]["limits"]["min_protein_g"] == 11
 
 
-def test_saved_limits_above_new_scale_are_not_silently_lost(choices):
+def test_ranges_validation_positions_precision_zero_and_reset(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    page.locator("#dinner-nutrition-open").click()
+    edit(page, "dinner-min_protein_g", 10)
+    edit(page, "dinner-max_protein_g", 30)
+    track = page.locator("#dinner-nutrition-dialog .interval-track").first
+    assert track.evaluate("n=>n.style.getPropertyValue('--start')") == "10%"
+    assert track.evaluate("n=>n.style.getPropertyValue('--end')") == "30%"
+    for value in ("5", "301", "abc", "-1", "Infinity"):
+        edit(page, "dinner-max_protein_g", value)
+        done(page, "dinner", "nutrition")
+        expect(page.locator("#dinner-nutrition-dialog")).to_be_visible()
+        assert page.locator("#dinner-max_protein_g-value").evaluate("n=>!n.checkValidity()")
+    edit(page, "dinner-max_protein_g", "30,5")
+    edit(page, "dinner-min_carbs_g", "0")
+    edit(page, "dinner-max_kcal", "650")
+    done(page, "dinner", "nutrition")
+    limits = submit(page, captured)["personal"]["meals"][0]["limits"]
+    assert limits["max_protein_g"] == 30.5
+    assert limits["min_carbs_g"] == 0 and limits["max_carbs_g"] is None
+    assert limits["max_kcal"] == 650 and "min_kcal" not in limits
+    page.locator("#dinner-nutrition-open").click()
+    page.locator("#dinner-nutrition-dialog .choice-interval").first.get_by_role("button", name="Återställ standard").click()
+    done(page, "dinner", "nutrition")
+    limits = submit(page, captured)["personal"]["meals"][0]["limits"]
+    assert limits["min_protein_g"] is None and limits["max_protein_g"] is None
+    assert limits["min_carbs_g"] == 0
+
+
+def test_drag_keyboard_focus_and_modal_scroll(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    page.set_viewport_size({"width": 390, "height": 420})
+    page.locator("#dinner-weight-open").click()
+    dialog = page.locator("#dinner-weight-dialog")
+    track = dialog.locator(".interval-track")
+    track.scroll_into_view_if_needed()
+    rect = track.bounding_box()
+    y = rect["y"] + rect["height"] / 2
+    for start, end in ((12, rect["width"] * .2), (rect["width"] - 12, rect["width"] * .75)):
+        page.mouse.move(rect["x"] + start, y)
+        page.mouse.down()
+        page.mouse.move(rect["x"] + end, y, steps=8)
+        page.mouse.up()
+    assert 100 < float(page.locator("#dinner-min_weight_g-value").input_value()) < 1000
+    assert 1500 < float(page.locator("#dinner-max_weight_g-value").input_value()) < 2800
+    before = float(page.locator("#dinner-min_weight_g-value").input_value())
+    page.locator("#dinner-min_weight_g").press("ArrowRight")
+    assert float(page.locator("#dinner-min_weight_g-value").input_value()) == before + 1
+    dialog.get_by_role("button", name="Klart", exact=True).focus()
+    page.keyboard.press("Tab")
+    expect(dialog.get_by_role("button", name="Stäng utan att spara")).to_be_focused()
+    page.keyboard.press("Shift+Tab")
+    expect(dialog.get_by_role("button", name="Klart", exact=True)).to_be_focused()
+    page.keyboard.press("Escape")
+    assert submit(page, captured)["personal"]["meals"][0]["limits"]["min_weight_g"] is None
+
+
+def test_saved_limits_above_old_scale_and_servings_are_preserved(choices):
     page, url, captured = choices
     draft = {"postal_code": "22350", "personal": {"meals": [
-        {"meal_type": "dinner", "count": 5, "servings": 2,
+        {"meal_type": "dinner", "count": 5, "servings": 8,
          "limits": {"min_protein_g": 120, "max_protein_g": 150, "max_carbs_g": 450}}]}}
     page.add_init_script("sessionStorage.setItem('smako.personal.requestDraft', "
                          + json.dumps(json.dumps(draft)) + ");")
@@ -378,23 +394,116 @@ def test_saved_limits_above_new_scale_are_not_silently_lost(choices):
     page.locator("#dinner-nutrition-open").click()
     expect(page.locator("#dinner-min_protein_g-value")).to_have_value("120")
     expect(page.locator("#dinner-max_protein_g-value")).to_have_value("150")
-    expect(page.locator("#dinner-nutrition-dialog")).to_contain_text("Tidigare sparad gräns över 100 g behålls")
+    expect(page.locator("#dinner-max_protein_g")).to_have_attribute("max", "150")
     page.keyboard.press("Escape")
-    limits = submit(page, captured)["personal"]["meals"][0]["limits"]
-    assert (limits["min_protein_g"], limits["max_protein_g"], limits["max_carbs_g"]) == (120, 150, 450)
-    page.locator("#dinner-nutrition-open").click()
-    editor = page.locator("#dinner-max_protein_g-value")
-    editor.fill("50")
-    editor.press("Enter")
-    expect(editor).to_have_value("150")
-    editor.fill("")
-    editor.press("Enter")
-    page.locator("#dinner-max_protein_g").focus()
-    page.keyboard.press("ArrowLeft")
-    expect(editor).to_have_value("")
-    page.keyboard.press("Escape")
-    limits = submit(page, captured)["personal"]["meals"][0]["limits"]
-    assert limits["min_protein_g"] == 120 and limits["max_protein_g"] is None
+    meal = submit(page, captured)["personal"]["meals"][0]
+    assert meal["servings"] == 8
+    assert (meal["limits"]["min_protein_g"], meal["limits"]["max_carbs_g"]) == (120, 450)
+
+
+@pytest.mark.parametrize("seed", [None, {
+    "postal_code": "22350", "max_stores": 3, "memberships": ["COOP_MEMBER"],
+    "recipe_preferences": {"mode": "complete", "cuisines": ["italian", "swedish"],
+                           "cuisine_distribution": "free", "allow_fish": False},
+    "personal": {"organic_percent": 20, "organic_animals": True,
+                 "surplus_mode": "allow_larger", "profile": {"allergies": ["jordnötter"]},
+                 "extras": [], "meals": [
+                     {"meal_type": "dinner", "count": 5, "servings": 3,
+                      "distribution": {"vegetarian": 2, "chicken": 2, "fish": 0},
+                      "limits": {"min_protein_g": 30.5, "max_weight_g": 650},
+                      "recipe_choices": {"min_ingredients": 3, "max_ingredients": 8},
+                      "max_same_base_meals": 2},
+                     {"meal_type": "breakfast", "count": 2, "servings": 1,
+                      "limits": {"max_carbs_g": 65}, "recipe_choices": {"max_active_minutes": 15}},
+                     {"meal_type": "snack", "count": 1, "servings": 2,
+                      "limits": {"max_kcal": 400}, "organic_animals": True}]}}])
+def test_request_parity_against_pre_change_frontend(choices, seed):
+    """Run the actual old serializer and compare all request fields, not a copy."""
+    page, url, captured = choices
+    root = Path(__file__).resolve().parents[2]
+    old = {}
+    for name in ("personal.html", "personal.js"):
+        old[name] = subprocess.check_output(
+            ["git", "show", f"ad23943:backend/app/static/{name}"], cwd=root).decode("utf-8")
+    page.route("**/personal.html*", lambda route: route.fulfill(
+        body=old["personal.html"], content_type="text/html"))
+    page.route("**/static/personal.js*", lambda route: route.fulfill(
+        body=old["personal.js"], content_type="application/javascript"))
+    page.add_init_script("sessionStorage.clear();localStorage.clear();" + (
+        "sessionStorage.setItem('smako.personal.requestDraft', " + json.dumps(json.dumps(seed)) + ");"
+        if seed else ""))
+    page.goto(url)
+    choose_location(page)
+    page.locator("#generate-plan").click()
+    expect(page.locator("#personal-status")).to_contain_text("Testet fångar")
+    before = captured[-1]
+    page.unroute("**/personal.html*")
+    page.unroute("**/static/personal.js*")
+    page.reload()
+    choose_location(page)
+    after = submit(page, captured)
+    assert before == after
+
+
+@pytest.mark.parametrize("status", [401, 403, 500])
+def test_backend_error_keeps_choices_and_never_falls_back(choices, status):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    edit(page, "dinner-count", 3)
+    failed = []
+
+    def reject(route):
+        failed.append(route.request.post_data_json)
+        route.fulfill(status=status, content_type="application/json",
+                      headers={"X-Plan-Request-ID": route.request.headers["x-request-id"]},
+                      body=json.dumps({"detail": "Testservern avvisade begäran."}))
+
+    page.route("**/api/plans", reject)
+    page.locator("#choice-submit").click()
+    expect(page.locator("#personal-status")).not_to_be_empty()
+    expect(page.locator("#choice-submit")).to_be_enabled()
+    expect(page.locator("#dinner-count-value")).to_have_value("3")
+    assert len(failed) == 1
+    assert not captured
+    expect(page.locator("#plan-content")).to_be_empty()
+
+
+def test_profile_review_does_not_replace_confirmed_hard_requirements(choices):
+    page, url, _captured = choices
+    page.route("**/api/personal/interpret-profile", lambda route: route.fulfill(
+        content_type="application/json", body=json.dumps({
+            "profile": {"likes": ["kyckling"], "dislikes": [], "exclusions": [], "allergies": []},
+            "unresolved": []})))
+    page.goto(url)
+    choose_location(page)
+    page.locator("#extra-choices>summary").click()
+    page.locator("#profile-allergies").fill("jordnötter")
+    page.locator("#profile-exclusions").fill("fisk")
+    page.locator("#profile-text").fill("Gillar kyckling")
+    page.locator("#interpret-profile").click()
+    expect(page.locator("#review-allergies")).to_have_value("jordnötter")
+    expect(page.locator("#review-exclusions")).to_have_value("fisk")
+    expect(page.locator("#profile-likes")).to_have_value("")
+    page.locator("#personal-dialog").get_by_role("button", name="Tillämpa granskade val").click()
+    expect(page.locator("#profile-likes")).to_have_value("kyckling")
+    expect(page.locator("#profile-allergies")).to_have_value("jordnötter")
+
+
+def test_snack_without_breakfast_and_zero_dinners(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    edit(page, "dinner-count", 0)
+    page.locator("#choice-submit").click()
+    expect(page.locator("#personal-status")).to_contain_text("minst ett måltidstillfälle")
+    assert not captured
+    page.locator("#extra-choices>summary").click()
+    page.locator("#enable-snack").check()
+    expect(page.locator("#breakfast-meals")).not_to_be_visible()
+    expect(page.locator("#snack-meals")).to_be_visible()
+    request = submit(page, captured)
+    assert [m["count"] for m in request["personal"]["meals"]] == [0, 0, 5]
 
 
 def test_location_radius_municipality_manual_and_invalidation(choices):
