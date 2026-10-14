@@ -1,3 +1,5 @@
+> Uppdatering 2026-10-14: efter separat användarbeslut är UI:t nu aktiverat på betan. Se [aktiveringsrapport och liveverifiering](../../docs/releases/ui-option3-20261014/ACTIVATED.md). Ursprunglig lokal leverans nedan beskriver läget före aktiveringen.
+
 # Implementerat Smako-UI · alternativ 3
 
 2026-10-14. Implementation i befintliga `/personal` i `D:/Projects/Smako`.

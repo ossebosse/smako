@@ -1,3 +1,26 @@
+# 2026-10-14 19:51 UTC: Alternativ 3 aktivt på betan
+
+Aktiv app `ui-option3-ff241807809b`, image `28f2638f27ef…`, sju statiska
+frontendfiler ovanpå verkliga betan `ica-purchase-estimates-20261014-ui`.
+Den senare ICA-koden bevaras; scheduler är fortsatt image `a5a55f723eaf…`.
+676 övriga runtimefiler är identiska. Aktiverat på uttrycklig användarbegäran,
+under driftlås efter ordinarie prisuppdatering, med backup. Ingen Git-push.
+
+277/91 tidigare planrevisioner/privata tillstånd hashverifierat bevarade;
+efter eget slutprov 278/92. Chromium/WebKit, nio dialoger, mobil/dator,
+asset-hashar och cacheuppgradering v15→v16 passerar. Lunds verkliga plan med
+alla tre måltider tog 119 s, audit PASS och identisk sparad GET.
+
+Lund readiness 200. Malmö 503: fyra Willys-kontexter över 48 timmar.
+Reproducerat med föregående betaimage vid tidpunkt före UI-bytet (50–51 h);
+det är ett separat befintligt prisunderlagsproblem och är inte reparerat här.
+UI:t och prisgränserna är oförändrat kopplade till verklig backend.
+
+[Aktiveringsrapport, evidens, bilder och återgång](releases/ui-option3-20261014/ACTIVATED.md).
+Den tidigare lokala rapporten nedan är historisk; detta avsnitt anger aktiv app.
+
+---
+
 # 2026-10-14: Godkänt konfigurations-UI alternativ 3 — endast lokalt
 
 Branch `ui/approved-option-3`, bas `ad23943`. Befintliga `/personal` har nya
