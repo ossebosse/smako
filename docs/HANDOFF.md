@@ -1,3 +1,21 @@
+# 2026-10-14: Godkänt konfigurations-UI alternativ 3 — endast lokalt
+
+Branch `ui/approved-option-3`, bas `ad23943`. Befintliga `/personal` har nya
+måltidskort, oberoende extra måltider, gemensamma utkastdialoger, explicita
+fördelningskonflikter, granskning av smakförslag och mobil-/desktoplayout.
+Backend, prisinsamling, schema, optimering och sparade produktionsval är orörda.
+**Ingen push eller deployment.** Detta är inte aktuell produktionsrelease.
+
+59 riktade UI/static-fall och 84 backendtester passerar. Riktig FastAPI med
+kvarhållet verkligt Malmö-underlag, historisk testklocka och isolerad lagring
+skapade en plan med alla tre måltider; korgaudit och identisk GET passerade.
+Två äldre public-beta-texttester fallerar även på basversionen. Fysisk iOS
+Safari är inte verifierad. Backend stöder enbart max energi, vilket bevaras.
+
+[Implementation, API-kartläggning, testresultat och nya skärmbilder](../design/smako-ui-handoff/IMPLEMENTATION_REPORT.md).
+
+---
+
 # 2026-10-13 18:00 UTC: Förberedda priser och kommunvis menyförberäkning
 
 Aktiv app `ops-prepared-pricing-32127ccf7e14`, image `3cf0bbe2ae51…`.
