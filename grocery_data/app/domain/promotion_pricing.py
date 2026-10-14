@@ -157,9 +157,12 @@ class ComparablePriceBasis(StrEnum):
 
 
 class DepositContract(BaseModel):
-    """Exact deposit for one purchased package; never a material/volume default."""
+    """Deposit per purchased package, with explicit exact or estimated evidence."""
     model_config = ConfigDict(frozen=True, allow_inf_nan=False, extra="forbid")
-    gtin: str = Field(min_length=8, max_length=14)
+    gtin: str | None = Field(default=None, min_length=8, max_length=14)
+    confidence: Literal['exact', 'estimated'] = Field(default='exact', exclude_if=lambda v: v == 'exact')
+    minimum_per_container: Decimal | None = Field(default=None, gt=0, exclude_if=lambda v: v is None)
+    assumption: str | None = Field(default=None, min_length=1, exclude_if=lambda v: v is None)
     per_container: Decimal = Field(gt=0, max_digits=8, decimal_places=2)
     containers_per_package: int = Field(ge=1, le=1000)
     inclusion: Literal["included", "additional"]
@@ -168,7 +171,14 @@ class DepositContract(BaseModel):
     @model_validator(mode="after")
     def exact_identity(self):
         from grocery_data.app.domain.identifiers import normalize_gtin
-        normalize_gtin(self.gtin)
+        if self.confidence == 'exact' and not self.gtin:
+            raise ValueError('Exact deposit requires exact GTIN')
+        if self.gtin:
+            normalize_gtin(self.gtin)
+        if self.confidence == 'estimated' and (not self.assumption
+                or self.minimum_per_container is None
+                or self.minimum_per_container > self.per_container):
+            raise ValueError('Estimated deposit requires assumption and bounded amount')
         return self
 
     def additional_total(self, package_count: int) -> Decimal:

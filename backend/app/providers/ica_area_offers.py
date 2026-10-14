@@ -36,7 +36,7 @@ def qualification_evidence(database: Path, *, chain='ica') -> dict[str, dict]:
 
 class IcaAreaOfferProvider(GroceryPriceProvider):
     offer_chain = 'ica'
-    accepted_parsers = frozenset({'ica-parser-v6', 'ica-parser-v7', 'ica-parser-v8'})
+    accepted_parsers = frozenset({'ica-parser-v6', 'ica-parser-v7', 'ica-parser-v8', 'ica-parser-v9'})
     source_name = "ica-area-offers"
     attribution_text = "Befintliga baskällor med frivilliga butiksspecifika ICA-erbjudanden"
 
@@ -119,7 +119,7 @@ class IcaAreaOfferProvider(GroceryPriceProvider):
                         terms = product.purchase_terms
                         bound = bool(terms and terms.model_dump(mode='json') == fields.get('purchase_terms')
                                      and terms.usage != 'blocked')
-                        open_group = bound and terms.usage == 'variant_selection_required'
+                        open_group = bound and terms.identity_scope == 'campaign_group'
                         if (terms or fields.get('purchase_terms')) and not bound:
                             reasons['purchase_terms_source_mismatch'] += 1
                             continue
@@ -207,7 +207,7 @@ class IcaAreaOfferProvider(GroceryPriceProvider):
 
     def exact_variant(self, product, fields, account):
         return bool(product.gtin or (product.purchase_terms
-            and product.purchase_terms.usage == 'variant_selection_required'
+            and product.purchase_terms.identity_scope == 'campaign_group'
             and product.purchase_terms.model_dump(mode='json') == fields.get('purchase_terms')))
 
     def retailer_identity(self, fields):

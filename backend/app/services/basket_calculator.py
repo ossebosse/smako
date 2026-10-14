@@ -948,6 +948,14 @@ class BasketCalculator:
             regular_total = None if checkout_candidate.price is None else regular_total
 
         resolution_warning = ("Villkorat kampanjval: välj en kampanjmärkt variant. Innehåll, allergener och näring är inte verifierade. " + "; ".join(checkout_candidate.purchase_terms.exclusions)) if checkout_candidate.conditional_variant_choice else resolution.warning
+        if (checkout_candidate.purchase_terms and checkout_candidate.purchase_terms.minimum_package_g
+                and checkout_candidate.purchase_terms.maximum_package_g):
+            terms = checkout_candidate.purchase_terms
+            resolution_warning = (f'Uppskattningen utgår från {terms.minimum_package_g:g} g per hel förpackning. '
+                f'Källan anger cirka {terms.minimum_package_g:g}–{terms.maximum_package_g:g} g. '
+                'Välj förpackning efter behov; slutbeloppet beror på faktisk vikt.')
+        if applied_offer and applied_offer.deposit and applied_offer.deposit.confidence == 'estimated':
+            resolution_warning = '; '.join(filter(None, [resolution_warning, applied_offer.deposit.assumption]))
         if checkout_candidate.purchase_units:
             resolution_warning = "Köpförpackningar med okänd innehållsmängd. Ingen gram-/literjämförelse eller näringsberäkning. Verifiera innehållsmängden före bokföring i skafferiet."
         if has_counted_weight_contract(checkout_candidate, checkout_candidate.offers):

@@ -6,7 +6,7 @@
   const coverage = $("product-search-coverage");
   let controller, sequence = 0, next = null, detailKey = null;
   const money = (value) => value == null ? "Inte jämförd" : `${Number(value).toLocaleString("sv-SE", {minimumFractionDigits: 2, maximumFractionDigits: 2})} kr`;
-  const displayed = (price) => `${money(price.display_price ?? price.effective_price)}${price.display_price_unit ? `/${price.display_price_unit}` : price.price_basis==="sales_unit"?"/köpförpackning":""}`;
+  const displayed = (price) => `${price.deposit?.confidence === "estimated" && (price.display_price ?? price.effective_price) != null ? "ca " : ""}${money(price.display_price ?? price.effective_price)}${price.display_price_unit ? `/${price.display_price_unit}` : price.price_basis==="sales_unit"?"/köpförpackning":""}`;
   function node(tag, text, className) {
     const item = document.createElement(tag);
     if (text != null) item.textContent = text;
@@ -25,7 +25,15 @@
     block.append(node("p", `${price.context_label}${price.membership_required ? ` · Medlemspris · ${price.membership_label}` : ""}`));
     if (price.unit_price != null) block.append(node("p", `${money(price.unit_price)}/${price.unit}`));
     if (price.comparison_reason) block.append(node("p", price.comparison_label));
+    if (price.deposit) {
+      const d = price.deposit;
+      block.append(node("p", d.confidence === "estimated" ? d.assumption : `Pant: ${money(d.per_container)} per behållare.`));
+      if (price.quoted_price != null) block.append(node("p", `Varupris ${money(price.quoted_price)} + ${d.confidence === "estimated" ? "uppskattad " : ""}pant ${money(Number(d.per_container) * d.containers_per_package * (price.quoted_quantity || 1))}.`));
+    }
     if (price.purchase_terms) {
+      const terms = price.purchase_terms;
+      if (terms.approximate_package_g) block.append(node("p", `Cirka ${terms.approximate_package_g} g per hel förpackning. Slutpriset beror på vikten.`));
+      if (terms.minimum_package_g && terms.maximum_package_g) block.append(node("p", `Källans viktintervall: cirka ${terms.minimum_package_g}–${terms.maximum_package_g} g per hel förpackning. Inköpsförslaget utgår från den mindre förpackningen; välj efter behov och kontrollera vikten.`));
       block.append(node("p", `Belagt varupris: ${money(price.quoted_price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ` för ${price.quoted_quantity || 1} förpackning(ar)/styck`}.`));
       if (price.purchase_terms.variant_selection === "required") block.append(node("p", "Välj en kampanjmärkt variant i butiken. Inte närings- eller allergigodkänd som specifik produkt."));
       if (price.purchase_terms.deposit_status === "unknown") block.append(node("p", "Pant är inte fastställd. Ingen komplett köptotal visas."));

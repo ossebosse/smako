@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-14",
+  "scope": {
+    "shared": [
+      "Purchase and deposit contracts, estimated pricing and basket/UI support",
+      "Campaign rollover retry policy used by ICA, Coop, Willys, Hemkop, Lidl and City Gross"
+    ],
+    "ica_only": [
+      "Source inference for loose produce, approximate/ranged package weights",
+      "Estimated deposit extraction from explicit +pant offers",
+      "Ornamental plant exclusion"
+    ],
+    "rollout": "ICA Soder explicitly recollected; other ICA stores use parser v9 at their next collection. Other chain adapters are not newly wired to infer these estimates."
+  },
+  "production_verification": {
+    "build_id": "ica-purchase-estimates-20261014-ui",
+    "ica_soder_raw_rows": 63,
+    "ica_soder_accepted_rows": 61,
+    "excluded": [
+      "Hoststjarna",
+      "Rosor 9-pack"
+    ],
+    "missing_from_raw_source": [
+      "Gorbys Pirog chicken taco"
+    ],
+    "focused_regressions_passed": 21
+  },
+  "assumptions": {
+    "deposit": "Estimated 2 SEK for cans/small PET and 3 SEK for large PET; older labels may remain. Source-declared exact GTIN-bound deposit takes precedence.",
+    "weight": "Loose produce uses recipe mass; variable packages use source approximate/minimum weight and retain the source range."
+  },
+  "source": "https://www.pantamera.se/om-oss/faq/panthojning/vad-blir-den-nya-panten",
+  "application_files_sha256": {
+    "grocery_data/app/domain/purchase_terms.py": "7aeae7ef7e451be3252f387b84da6eedb3d640bfeee037169fcb3b69914e249d",
+    "grocery_data/app/services/source_purchase_terms.py": "d52faf47b3d001d464d4777b521e957ce870ed76ba550fc199a0e6c45e1dff8f",
+    "grocery_data/app/services/offer_rows.py": "4466a3b4b4c2a5413c20133adee76090536ee006a59c4e288a8da549b7940466",
+    "backend/app/providers/ica_area_offers.py": "bae44fe7c81954d6aa533dc2054e933e83e0397d41bb8daa832cfd5a23ab7ebe",
+    "grocery_data/app/domain/promotion_pricing.py": "6328436d328e84ef087e64d9c8cc361c722c02c5b1c5de1359c0a235f09d00d1",
+    "grocery_data/app/api/catalog.py": "cae3a65017598b9588a1efd4a432d7068cd882e53693e67a3d97643ae8ce19ec",
+    "backend/app/services/user_pricing.py": "180ac732b39921b491abeae3654689e1b880c9ffcec92be91c8bc42d105e7611",
+    "backend/app/models/basket.py": "3f314ef2694c4d9a4c68c85970e11a31483969abc0eb036c545987407178a2bf",
+    "backend/app/services/basket_calculator.py": "44e1fc89a1b238ce98e485ff2c269558c067c51c9ace1193f2f11a1ee28d7c2e",
+    "grocery_data/app/connectors/ica/parser.py": "0483d50e3525c322442637eafde8cde47e5ca0f53cf52105ec8f977bed924a56",
+    "backend/app/services/product_search.py": "56badce53791cf48f6bbfd403b53fe41e6166058b89e2f476df76f8c299faa59",
+    "backend/app/static/product-search.js": "97bebc379332f1a683080972f6d83ef9545e9e4ce007d75024cdc195cb2199e6",
+    "grocery_data/app/services/campaign_refresh_policy.py": "2315ce1b802120ba5ffe1dff0828ad638ac81179f66888b3abec371a8b42287d"
+  }
+}

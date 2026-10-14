@@ -482,7 +482,7 @@ def _promotion_item(
         # diagnostics. Consumers must not fetch /catalog for an OFFERS_ONLY
         # store merely to attach package/price semantics to this promotion.
         item["product"] = _product_item(product, source, None, store)
-    deposit = (promotion.source_payload or {}).get("reviewedDeposit")
+    deposit = (promotion.source_payload or {}).get("reviewedDeposit") or (promotion.source_payload or {}).get("estimatedDeposit")
     if (promotion.source_payload or {}).get("policy") in {"coop-physical-structured-v1", "coop-xtra-pdf-text-v1", "lidl-national-reviewed-document-text-v1", "lidl-national-qualified-document-text-v2", "willys-flyer-reviewed-text-v1", "willys-flyer-validated-text-v2"}:
         # Safe opaque contract identity; preserve caps across concrete variants.
         item["price_contract_id"] = promotion.source_payload.get("price_contract_id")

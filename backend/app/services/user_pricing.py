@@ -87,7 +87,7 @@ def _offer_contract(
 ) -> PriceContract:
     if offer.price_basis_unit != 'package' and not rate_contract:
         raise ValueError('Quoted weight rate requires measured purchase weight; not a package price')
-    if offer.deposit and offer.deposit.gtin != candidate.gtin:
+    if offer.deposit and offer.deposit.gtin is not None and offer.deposit.gtin != candidate.gtin:
         raise ValueError("deposit contract belongs to another product variant")
     eligibility = offer.eligibility or (
         PromotionEligibility.MEMBER
@@ -465,13 +465,18 @@ def price_candidate_for_context(
     """Return one request-local candidate; the input artifact row is untouched."""
 
     terms = candidate.purchase_terms
+    estimated_deposit = any(o.deposit and o.deposit.confidence == 'estimated' for o in candidate.offers)
+    if estimated_deposit and planning_mode != 'estimated':
+        raise EstimatedPurchaseRequired('Estimated deposit requires estimated planning mode')
+    if estimated_deposit:
+        candidate = candidate.model_copy(update={'quantity_confidence': 'estimated'})
     if terms and terms.usage == 'variant_selection_required' and allow_campaign_choice:
         if terms.purchase_form not in {'piece', 'fixed_package'} or any(o.price_basis_unit != 'package' for o in candidate.offers):
             raise ValueError('Conditional campaign needs a verified count purchase')
         candidate = candidate.model_copy(update={
             'conditional_variant_choice': True, 'sale_model': SaleModel.SOLD_BY_PIECE,
             'package_quantity': 1, 'package_unit': 'st', 'usable_quantity': 1, 'usable_unit': 'st',
-            'quantity_confidence': 'exact', 'estimated_piece_weight': None,
+            'quantity_confidence': 'estimated' if estimated_deposit else 'exact', 'estimated_piece_weight': None,
             'variable_weight': False, 'piece_price': candidate.effective_price,
             'semantic_confidence': 'high',
             'semantic_evidence': ['user-confirmed campaign sales unit; actual variant unresolved'],

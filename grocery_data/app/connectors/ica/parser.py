@@ -30,7 +30,7 @@ from grocery_data.app.domain.purchase_terms import PurchaseTerms
 
 _NUMBER = re.compile(r"\d+(?:[.,]\d+)?")
 _EXACT_AMOUNT = re.compile(
-    r"^\s*(?:ca\s*)?(?P<amount>\d+(?:[.,]\d+)?)\s*(?P<unit>kg|g|ml|cl|dl|l|st)\s*$",
+    r"^\s*(?:ca\s*)?(?P<amount>\d+(?:[.,]\d+)?)\s*(?P<unit>kg|g|ml|cl|dl|liter|l|st)\s*$",
     re.IGNORECASE,
 )
 _PACK = re.compile(r"^\s*(?P<count>\d+)\s*[- ]?pack\s*$", re.IGNORECASE)
@@ -127,6 +127,35 @@ def _location_key(value: object) -> str:
     return "".join(char for char in decomposed if not unicodedata.combining(char)).strip()
 
 
+def is_ornamental_plant(name, category, details):
+    return (category.get('articleGroupName', '').casefold() == 'hem & fritid'
+            and (re.search(r'^(?:rosor|höststjärna|julstjärna|tulpaner)\b', name, re.IGNORECASE)
+                 or 'kruka' in str(details.get('customerInformation', '')).casefold()))
+
+
+def estimate_swedish_deposit(details, text):
+    from grocery_data.app.domain.promotion_pricing import DepositContract
+    if not re.search(r'\+\s*pant', text, re.IGNORECASE):
+        return None
+    # Assumption only: common beverage containers, never infer pant on all liquids.
+    if not re.fullmatch(r'läsk|kolsyrat vatten|energidryck|mineralvatten', str(details.get('name', '')), re.IGNORECASE):
+        return None
+    match = re.fullmatch(r'(?:(\d+)\s*[x×]\s*)?(\d+(?:[,.]\d+)?)\s*(ml|cl|dl|liter|l)',
+                         str(details.get('packageInformation', '')).strip(), re.IGNORECASE)
+    if not match:
+        return None
+    volume, _ = _normalise_amount(_decimal(match[2]), match[3])
+    count = int(match[1] or 1)
+    large = volume > 1000
+    amount = Decimal(3 if large else 2)
+    return DepositContract(confidence='estimated', per_container=amount,
+        minimum_per_container=amount - 1, containers_per_package=count, inclusion='additional',
+        evidence='https://press.pantamera.nu/posts/pressreleases/nu-ar-pantsystemet-oppet-for-de-nya-pantbelop',
+        assumption=f'Uppskattad pant: {amount} kr per behållare, {count} per köpförpackning. '
+            + ('Antagen stor PET-flaska. ' if large else 'Antagen burk eller liten PET-flaska. ')
+            + f'Äldre pantmärkning kan ge {amount - 1} kr. Märkningen på förpackningen gäller.')
+
+
 def _promotion(row: dict[str, Any]) -> SourceOffer:
     details = _first_dict(row.get("details"))
     mechanics = _first_dict(row.get("parsedMechanics"))
@@ -182,11 +211,14 @@ def _promotion(row: dict[str, Any]) -> SourceOffer:
     if deposit is not None:
         from grocery_data.app.domain.promotion_pricing import DepositContract
         parsed_deposit = DepositContract.model_validate(deposit)
-        if _exact_gtin(row.get('eans')) != parsed_deposit.gtin:
+        if parsed_deposit.confidence != 'exact' or _exact_gtin(row.get('eans')) != parsed_deposit.gtin:
             raise IcaSchemaError('deposit_amount_unverified: exact deposit product variant mismatch')
+    estimated_deposit = None
     if re.search(r"pant", deposit_text, re.IGNORECASE) and deposit is None:
-        raise IcaSchemaError("deposit_amount_unverified: source advertises pant; "
-                             "no verified variant-specific checkout deposit")
+        estimated_deposit = estimate_swedish_deposit(details, deposit_text)
+        if estimated_deposit is None:
+            raise IcaSchemaError("deposit_amount_unverified: source advertises pant; "
+                                 "no usable package evidence for deposit estimate")
     if re.search(r"personlig|kupong|aktivera|måndag|tisdag|onsdag|torsdag|fredag|"
                  r"lördag|söndag|helg|\d{1,2}/\d{1,2}", safety_text, re.IGNORECASE):
         raise IcaSchemaError("ICA offer requires review of date, audience or deposit condition")
@@ -216,12 +248,13 @@ def _promotion(row: dict[str, Any]) -> SourceOffer:
         or None,
         source_payload={"benefit_type": kind, "unit_sign": mechanics.get("unitSign"),
                         "restriction": restriction, "condition": condition,
-                        **({'reviewedDeposit': parsed_deposit.model_dump(mode='json')} if deposit is not None else {})},
+                        **({'reviewedDeposit': parsed_deposit.model_dump(mode='json')} if deposit is not None else {}),
+                        **({'estimatedDeposit': estimated_deposit.model_dump(mode='json')} if estimated_deposit else {})},
     )
 
 
 class IcaParser:
-    parser_version = "ica-parser-v8"
+    parser_version = "ica-parser-v9"
 
     def weekly_offer_rows(self, data: dict[str, Any]) -> list[object]:
         """Return the connector-local offer collection or fail on schema drift."""
@@ -526,27 +559,42 @@ class IcaParser:
         sold_by_weight = price_suffix in {"/kg", "kr/kg"}
         gtin = _exact_gtin(row.get('eans'))
         variant_ids = [str(e.get('id') or '') for e in row.get('eans', []) if isinstance(e, dict)]
-        open_group = len(variant_ids) > 1 and len(set(variant_ids)) == len(variant_ids) and not sold_by_weight
+        multiple_variants = len(variant_ids) > 1 and len(set(variant_ids)) == len(variant_ids)
+        open_group = multiple_variants and not sold_by_weight
         approximate = bool(package_text and re.match(r'^ca\s*\d', package_text, re.IGNORECASE))
         terms = None
-        if open_group:
+        interval = re.fullmatch(r'ca\s*(\d+(?:[,.]\d+)?)\s*[-–]\s*(\d+(?:[,.]\d+)?)\s*(kg|g)', package_text or '', re.IGNORECASE)
+        if sold_by_weight and approximate and interval:
+            minimum, _ = _normalise_amount(_decimal(interval[1]), interval[3])
+            maximum, _ = _normalise_amount(_decimal(interval[2]), interval[3])
+            terms = PurchaseTerms(source_reference=reference, purchase_form='variable_package',
+                minimum_package_g=float(minimum), maximum_package_g=float(maximum), quantity_basis='source_interval')
+        elif open_group:
             terms = PurchaseTerms(source_reference=reference, purchase_form='fixed_package',
                 identity_scope='campaign_group', variant_selection='required',
                 eligible_variant_ids=tuple(variant_ids), complete_group_size=offer.quantity or 1)
             package_quantity, package_unit, gtin = None, None, None
-        elif gtin and sold_by_weight and approximate and package_quantity and package_unit == 'g':
+        elif (gtin or multiple_variants) and sold_by_weight and approximate and package_quantity and package_unit == 'g':
             terms = PurchaseTerms(source_reference=reference, purchase_form='variable_package',
                 approximate_package_g=float(package_quantity), quantity_basis='source_approximation')
         elif (gtin and sold_by_weight and not package_text and not offer.max_quantity
-              and re.search(r'\blösvikt\b', ' '.join(str(details.get(k) or '') for k in
-                  ['name', 'packageInformation', 'customerInformation', 'disclaimer']), re.IGNORECASE)):
+              and (category.get('articleGroupName', '').casefold() == 'frukt & grönt'
+                   or re.search(r'\blösvikt\b', ' '.join(str(details.get(k) or '') for k in
+                       ['name', 'packageInformation', 'customerInformation', 'disclaimer']), re.IGNORECASE))):
             terms = PurchaseTerms(source_reference=reference, purchase_form='loose_weight', quantity_basis='requirement')
         elif gtin and not sold_by_weight and package_quantity and not approximate:
             terms = PurchaseTerms(source_reference=reference,
                 purchase_form='piece' if package_unit=='st' and package_quantity==1 else 'fixed_package',
                 quantity_basis='source_exact', complete_group_size=offer.quantity or 1)
+        if terms and sold_by_weight and multiple_variants:
+            terms = terms.model_copy(update={'identity_scope': 'campaign_group', 'variant_selection': 'required',
+                'eligible_variant_ids': tuple(variant_ids), 'uniform_weight_rate': True})
+            gtin = None
         if terms and offer.max_quantity:
             terms = terms.model_copy(update={'limit_scope':'household_campaign'})
+        if terms and (offer.source_payload.get('estimatedDeposit') or offer.source_payload.get('reviewedDeposit')):
+            terms = terms.model_copy(update={'deposit_status': 'estimated_separately'
+                if offer.source_payload.get('estimatedDeposit') else 'verified_separately'})
         terms_data = terms.model_dump(mode='json') if terms else None
         if terms:
             offer = offer.model_copy(update={'source_payload':{**offer.source_payload,
@@ -585,11 +633,12 @@ class IcaParser:
             offers=(offer,),
             availability=None,
             basket_type="ST" if terms and terms.purchase_form=='variable_package' else "VIKT" if sold_by_weight else None,
-            average_weight_kg=package_quantity / 1000 if terms and terms.purchase_form=='variable_package' else None,
+            average_weight_kg=(terms.approximate_package_g or terms.minimum_package_g) / 1000 if terms and terms.purchase_form=='variable_package' else None,
             raw_reference=reference,
             fetched_at=fetched_at,
             source_fields={
                 "coverage": CoverageLevel.OFFERS_ONLY.value,
+                **({'purchase_blockers': ['non_food_ornamental_plant']} if is_ornamental_plant(name, category, details) else {}),
                 **({"purchase_blockers": ["weight_purchase_form_unproven"]} if sold_by_weight and not terms else {}),
                 **({'purchase_terms':terms_data} if terms else {}),
                 "variant_count": len(row.get("eans")) if isinstance(row.get("eans"), list) else 0,

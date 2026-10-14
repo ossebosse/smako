@@ -23,6 +23,7 @@ class PurchaseTerms(BaseModel):
     eligible_variant_ids: tuple[str, ...] = ()
     mixing_allowed: bool = Field(default=False, exclude_if=lambda v: not v)
     campaign_group_id: str | None = Field(default=None, min_length=1, exclude_if=lambda v: v is None)
+    uniform_weight_rate: bool = Field(default=False, exclude_if=lambda v: not v)
     exclusions: tuple[str, ...] = ()
     variant_package_minimum: float | None = Field(default=None, gt=0)
     variant_package_maximum: float | None = Field(default=None, gt=0)
@@ -33,12 +34,16 @@ class PurchaseTerms(BaseModel):
     quantity_basis: Literal[
         "source_approximation", "source_interval", "source_exact", "requirement", "unknown"
     ] = "unknown"
-    deposit_status: Literal["not_applicable", "verified_separately", "unknown"] = "not_applicable"
+    deposit_status: Literal["not_applicable", "verified_separately", "estimated_separately", "unknown"] = "not_applicable"
     critical_blockers: tuple[str, ...] = ()
     limit_scope: Literal["offer", "household_campaign"] = "offer"
 
     @model_validator(mode="after")
     def validate_evidence(self):
+        if self.uniform_weight_rate and (self.identity_scope != 'campaign_group'
+                or not self.eligible_variant_ids
+                or self.purchase_form not in {'loose_weight', 'variable_package'}):
+            raise ValueError('Uniform weight rate requires source-bound weight variants')
         if self.mixing_allowed and (not self.campaign_group_id or not self.eligible_variant_ids
                                     or self.complete_group_size < 2):
             raise ValueError("Mixed variants require a source group, explicit eligible IDs and complete count")
@@ -70,6 +75,8 @@ class PurchaseTerms(BaseModel):
     def usage(self) -> str:
         if self.critical_blockers or self.deposit_status == "unknown":
             return "blocked"
+        if self.uniform_weight_rate:
+            return 'estimated'
         if self.variant_selection == "required":
             return "variant_selection_required"
         if self.purchase_form in {"loose_weight", "variable_package"}:

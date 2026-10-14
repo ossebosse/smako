@@ -284,7 +284,9 @@ class BasketItem(BaseModel):
             return BasketVerificationStatus.UNVERIFIED
         if self.quantity_confidence == QuantityConfidence.UNKNOWN:
             return BasketVerificationStatus.UNVERIFIED
-        if self.quantity_confidence == QuantityConfidence.ESTIMATED:
+        if (self.quantity_confidence == QuantityConfidence.ESTIMATED
+                or (self.applied_offer and self.applied_offer.deposit
+                    and self.applied_offer.deposit.confidence == 'estimated')):
             return BasketVerificationStatus.VERIFIED_WITH_ESTIMATES
         return BasketVerificationStatus.VERIFIED
 

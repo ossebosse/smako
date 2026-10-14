@@ -383,7 +383,8 @@ class ProductSearchIndex:
         return {
             "purchase_terms": product.purchase_terms.model_dump(mode='json') if product.purchase_terms else None,
             "purchase_usage": 'sales_unit_only' if sales_unit_only else product.purchase_terms.usage if product.purchase_terms else 'legacy',
-            "quoted_price": effective,
+            "deposit": applied.deposit.model_dump(mode='json') if applied and applied.deposit else None,
+            "quoted_price": float(applied.price) if applied and applied.deposit else effective,
             "quoted_quantity": quantity,
             "purchase_eligible": eligible,
             "quoted_price_unit": unit if weight_rate else 'kg' if any(o.price_basis_unit == 'kg' for o in product.offers) else product.sale_unit if product.sale_model in {SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE} else 'package',

@@ -13,6 +13,7 @@ def campaign_schedule(windows: list[dict], *, now: datetime, failed_attempts: in
     if now.tzinfo is None:
         raise ValueError('aware clock required')
     boundaries = set()
+    expired_boundaries = set()
     for window in windows:
         for key, days in [('valid_from', 0), ('valid_to', 1)]:
             if window.get(key):
@@ -20,6 +21,8 @@ def campaign_schedule(windows: list[dict], *, now: datetime, failed_attempts: in
                                             time.min, STOCKHOLM).astimezone(UTC)
                 if boundary > now:
                     boundaries.add(boundary)
+                elif key == 'valid_to':
+                    expired_boundaries.add(boundary)
     transition = min(boundaries) if boundaries else None
     if failed_attempts:
         due = now + timedelta(minutes=min(360, 15 * 2 ** min(failed_attempts - 1, 5)))
@@ -33,6 +36,17 @@ def campaign_schedule(windows: list[dict], *, now: datetime, failed_attempts: in
         reason = 'campaign_boundary_or_72h_source_check'
     else:
         due, reason = now + timedelta(hours=12), 'expired_source_fallback'
+    # Retailers may still serve last week's rows just after local midnight.
+    # A surviving long-running offer must not hide that rollover behind the
+    # next future boundary (or the 72-hour cap). Recheck hourly during the
+    # first day; stale historical rows then use the existing 12-hour fallback.
+    # Failed requests retain their separate bounded backoff.
+    if expired_boundaries and not failed_attempts:
+        recent = now - max(expired_boundaries) < timedelta(hours=24)
+        retry = now + timedelta(hours=1 if recent else 12)
+        if retry < due:
+            due = retry
+            reason = 'campaign_rollover_retry' if recent else 'expired_source_fallback'
     return {'next_fetch_at': due.isoformat(), 'reason': reason,
             'next_transition_at': transition.isoformat() if transition else None}
 

@@ -18,7 +18,7 @@ def bound_purchase_terms(product):
     if terms.purchase_form in {'loose_weight', 'variable_package'}:
         if basis != 'kg' or product.sale_unit != 'kg':
             return None
-        if terms.purchase_form == 'variable_package' and not terms.approximate_package_g:
+        if terms.purchase_form == 'variable_package' and not (terms.approximate_package_g or terms.minimum_package_g):
             return None
     elif basis != 'package':
         return None
