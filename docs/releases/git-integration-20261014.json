@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-14",
+  "canonical_root": "D:/Projects/Smako",
+  "remote": "https://github.com/ossebosse/smako.git",
+  "target_branch": "master",
+  "remote_base": "8fc364e",
+  "existing_development_tip": "38e4fd5",
+  "ica_fix_commit": "d4a7a84",
+  "integration": "Fast-forward the existing canonical development history plus the ICA fix; do not merge the reconstructed C: source snapshot or its historical test copies.",
+  "validation": {
+    "unique_targeted_cases_verified": 97,
+    "runs": [
+      {
+        "cases": 97,
+        "passed": 94,
+        "failed": 3
+      },
+      {
+        "cases": 41,
+        "passed": 39,
+        "failed": 2
+      },
+      {
+        "cases": 2,
+        "passed": 2,
+        "failed": 0
+      }
+    ],
+    "resolution": "Updated legacy assertions for newly accepted loose produce, higher raw parse coverage crossing the existing 95% threshold, and explicitly estimated package weights in unresolved variant groups. Runtime code unchanged between these runs. All previously passing unchanged cases retain their result.",
+    "ruff": "passed",
+    "compileall": "passed",
+    "javascript_syntax": "passed",
+    "offline_access": [
+      {
+        "label": "ica-canonical-20261014",
+        "blocked_source_or_network_access": 0
+      },
+      {
+        "label": "ica-canonical-rechecked-20261014",
+        "blocked_source_or_network_access": 0
+      },
+      {
+        "label": "ica-row-acceptance-final-20261014",
+        "blocked_source_or_network_access": 0
+      }
+    ],
+    "full_suite": "Not rerun; this is targeted verification, not a claim that the complete suite is green."
+  },
+  "production": "No deployment, collection, scheduler or profile changes in this Git integration."
+}

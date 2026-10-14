@@ -1,3 +1,22 @@
+# 2026-10-14: ICA-rättningar integrerade i det ordinarie Git-repot
+
+Permanent projektrot är `D:\Projects\Smako`, remote
+`https://github.com/ossebosse/smako.git`, huvudgren `master`.
+Den separata återställda C:-kopian är historiskt underlag, inte utvecklingsbas.
+Integrationen behåller den sammanhängande UI-/drifthistoriken från `38e4fd5`
+och tillför ICA-rättningen `d4a7a84` samt uppdaterade regressionsförväntningar.
+
+ICA-parser v9 accepterar källbelagd lös vikt och ungefärliga/intervallbaserade
+förpackningsvikter, skiljer ut prydnadsväxter och märker antagen pant som
+uppskattad. Beräkningsstödet och kampanjuppdateringen är gemensamma; den nya
+automatiska källtolkningen gäller ICA. Ingen produktionsändring görs här.
+
+97 riktade testfall verifierade genom första körningen och avgränsade omkörningar.
+Ruff, compileall och JavaScript-syntax passerar. Ingen fullsvitsgaranti.
+[Testurval, omkörningar och integrationsbas](releases/git-integration-20261014.json).
+
+---
+
 # 2026-10-14 19:51 UTC: Alternativ 3 aktivt på betan
 
 Aktiv app `ui-option3-ff241807809b`, image `28f2638f27ef…`, sju statiska

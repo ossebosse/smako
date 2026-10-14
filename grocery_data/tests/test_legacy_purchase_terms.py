@@ -53,8 +53,13 @@ def test_ica_real_whole_approximate_and_loose_weight_are_different():
     assert terms.purchase_form=='variable_package' and terms.approximate_package_g==1200
     assert salmon.offers[0].price==139 and salmon.offers[0].source_payload['price_basis_unit']=='kg'
     assert str(salmon.average_weight_kg)=='1.2' and salmon.basket_type=='ST'
-    assert '5004121679' not in {p.external_product_id for p in parsed.products}
-    assert any('weight_purchase_form_unproven' in f.error_message for f in parsed.failures)
+    apples=next(p for p in parsed.products if p.external_product_id=='5004121679')
+    terms=PurchaseTerms.model_validate(apples.source_fields['purchase_terms'])
+    assert apples.name=='Äpplen Royal Gala'
+    assert terms.purchase_form=='loose_weight' and terms.quantity_basis=='requirement'
+    assert terms.usage=='estimated' and terms.approximate_package_g is None
+    assert apples.offers[0].price==20 and apples.offers[0].source_payload['price_basis_unit']=='kg'
+    assert apples.package_quantity is None  # No invented apple or bag weight.
 
 
 

@@ -7,6 +7,7 @@ from sqlalchemy import select
 
 from grocery_data.app.connectors.ica import IcaConnector
 from grocery_data.app.domain import GeographicArea, RawBatch, SourceStore
+from grocery_data.app.domain.purchase_terms import PurchaseTerms
 from grocery_data.app.services.collector import GroceryCollector
 from grocery_data.app.services.ica_area_offers import (
     RowApprovedOfferConnector,
@@ -33,7 +34,7 @@ def source(account='1004598'):
     return store, raw
 
 
-@pytest.mark.parametrize('account,full_count,total', [('1004598',56,59),('1004339',45,49)])
+@pytest.mark.parametrize('account,full_count,total', [('1004598',57,59),('1004339',48,49)])
 async def test_partial_rows_keep_full_failure_denominator_and_observations(tmp_path, account, full_count, total):
     store, raw = source(account)
     engine=create_database_engine('sqlite:///'+str(tmp_path/'test.sqlite'))
@@ -41,28 +42,39 @@ async def test_partial_rows_keep_full_failure_denominator_and_observations(tmp_p
     collector=GroceryCollector(factory,FilesystemRawSnapshotStore(tmp_path/'raw'))
     connector=IcaConnector()
     original=await collector.collect_area(_RetainedStoreConnector(connector,store,raw,raw),GeographicArea(city='Lund'),scope_key='lund:offers')
-    assert not original.promoted and original.metrics.products_parsed==full_count
+    # Source-backed estimates recover enough rows to pass the unchanged full
+    # snapshot threshold; incomplete rows must still retain their denominator.
+    assert original.promoted and original.metrics.products_parsed==full_count
+    assert original.metrics.parse_success_rate==pytest.approx(full_count/total)
     rows=RowApprovedOfferConnector(connector,store,raw,raw)
     rows.original_full_health=original.status.value
     result=await collector.collect_area(rows,GeographicArea(city='Lund'),scope_key='lund:ica:'+account+':offer-rows')
-    assert result.promoted and result.metrics.parse_success_rate < .95
+    assert result.promoted and result.metrics.parse_success_rate < 1
     assert result.metrics.products_parsed+result.metrics.products_quarantined==total
     assert rows.row_acceptance['full_parse']['parsed']==full_count
     assert rows.row_acceptance['full_parse']['denominator']==total
     with session_scope(factory) as session:
         original_db=session.get(CatalogSnapshotModel,original.snapshot_id)
-        assert original_db.state=='rejected' and not original_db.is_active
+        assert original_db.state=='promoted' and original_db.is_active
         published=session.get(CatalogSnapshotModel,result.snapshot_id)
         assert published.metrics['acceptance_status']=='partial_row_approved'
-        assert published.metrics['full_snapshot_health']=='degraded'
+        assert published.metrics['full_snapshot_health']=='healthy'
         products=list(session.scalars(select(SourceProductModel).where(SourceProductModel.catalog_snapshot_id==result.snapshot_id)))
         assert len(products)>0
         assert all(p.fetched_at==raw.documents[0].fetched_at and p.regular_price is None for p in products)
         assert all(p.source_fields['verified_store_scope'] for p in products)
         for p in products:
             if p.source_fields['variant_count'] != 1:
-                assert p.source_fields['purchase_terms']['variant_selection'] == 'required'
-                assert p.gtin is None and p.package_quantity is None
+                terms=p.source_fields['purchase_terms']
+                assert terms['variant_selection'] == 'required'
+                assert p.gtin is None
+                if terms.get('uniform_weight_rate'):
+                    assert PurchaseTerms.model_validate(terms).usage=='estimated'
+                    if p.package_quantity is not None:
+                        assert terms['approximate_package_g']==float(p.package_quantity)
+                        assert p.package_unit=='g'
+                else:
+                    assert p.package_quantity is None
     from grocery_data.app.services.snapshot_manager import SnapshotManager, SnapshotValidationError
     manager = SnapshotManager(factory)
     pending = await collector.collect_area(rows, GeographicArea(city='Lund'), auto_promote=False,
