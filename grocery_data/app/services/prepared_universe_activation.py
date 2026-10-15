@@ -330,8 +330,8 @@ class PreparedUniverseArtifactStore:
                     policy=freshness_policy,
                     now=timestamp,
                 )
-                if not freshness.usable:
-                    raise ValueError("prepared universe candidate is stale at activation")
+                if not freshness.retained_observation_usable:
+                    raise ValueError("prepared universe candidate has an invalid observation")
 
             digest = hashlib.sha256(candidate_bytes).hexdigest()
             artifact_relative = PurePosixPath("artifacts") / f"{digest}.json"

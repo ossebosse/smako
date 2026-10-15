@@ -68,7 +68,13 @@ def test_freshness_policy_has_warning_before_stale(
 
     assert result.state is expected
     assert result.usable is (age < 48)
+    assert result.retained_observation_usable is True
     assert result.warning is (age >= 36)
+
+
+@pytest.mark.parametrize("observation", [None, NOW + timedelta(hours=2)])
+def test_retention_rejects_unknown_or_future_observation(observation):
+    assert not assess_freshness(observation, now=NOW).retained_observation_usable
 
 
 @pytest.mark.asyncio

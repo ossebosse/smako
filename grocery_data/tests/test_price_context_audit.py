@@ -390,7 +390,7 @@ def test_stale_own_offer_does_not_hide_unresolved_external_basket_mapping() -> N
         engine.dispose()
 
 
-def test_stale_verified_primary_context_remains_explicitly_stale() -> None:
+def test_older_verified_primary_retains_base_with_truthful_age() -> None:
     engine, factory = _storage()
     try:
         with session_scope(factory) as session:
@@ -427,9 +427,11 @@ def test_stale_verified_primary_context_remains_explicitly_stale() -> None:
             session.flush()
 
             [item] = PriceContextAuditor(session).audit("Lund", now=NOW).chains["ica"].stores
-            assert item.state is PriceContextState.STALE_CONTEXT
+            assert item.state is PriceContextState.EXTERNAL_FULL_CONTEXT
             assert item.price_source == "primat"
-            assert item.basket_eligible is False
+            assert item.basket_eligible is True
+            assert item.fresh is False
+            assert item.age_hours == 49
     finally:
         engine.dispose()
 

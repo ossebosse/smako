@@ -259,7 +259,7 @@ class DailyRefreshOrchestrator:
                         stale_at=broken.stale_at,
                         retry_required="basket" in target.roles,
                         lkg_used=lkg.snapshot_id is not None,
-                        lkg_usable=lkg_freshness.usable,
+                        lkg_usable=lkg_freshness.retained_observation_usable,
                         error_type=type(exc).__name__,
                     )
                 )
@@ -328,7 +328,7 @@ class DailyRefreshOrchestrator:
             hours_until_stale=freshness.hours_until_stale,
             stale_at=freshness.stale_at,
             lkg_used=lkg_used,
-            lkg_usable=lkg_used and freshness.usable,
+            lkg_usable=lkg_used and freshness.retained_observation_usable,
             products=output.products,
             requests=output.requests,
             warnings=output.warnings,
@@ -460,7 +460,7 @@ def report_from_collection_results(
                     )
                 ),
                 lkg_used=lkg_used,
-                lkg_usable=lkg_used and natural.usable,
+                lkg_usable=lkg_used and natural.retained_observation_usable,
                 products=(int(row["products"]) if row.get("products") is not None else None),
                 requests=int(row.get("requests") or 0),
                 warnings=tuple(str(value) for value in row.get("warnings") or ()),

@@ -193,8 +193,8 @@ class CredentialFreeContextExport(BaseModel):
             age_hours = (
                 now.astimezone(UTC) - self.source_observed_at.astimezone(UTC)
             ).total_seconds() / 3600
-            fresh = -1 <= age_hours <= max_age_hours
-        healthy = self.connector_status == ConnectorStatus.HEALTHY
+            fresh = -1 <= age_hours
+        healthy = self.connector_status in {ConnectorStatus.HEALTHY, ConnectorStatus.STALE}
         offers_only = bool(
             self.active
             and healthy

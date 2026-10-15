@@ -243,7 +243,7 @@ def test_query_surface_is_exactly_the_shared_versioned_48() -> None:
     assert surface.sha256 == "11c054baeb08e5033fc00882a4d0e494362fc84a5b829217828abb677fa7f89f"
 
 
-def test_immutable_loader_excludes_offers_probable_and_stale_links(
+def test_immutable_loader_excludes_offers_and_probable_but_retains_old_links(
     tmp_path: Path,
 ) -> None:
     database = _mapping_database(tmp_path / "mapping.sqlite", extra_offers_only=True)
@@ -271,7 +271,9 @@ def test_immutable_loader_excludes_offers_probable_and_stale_links(
     finally:
         connection.close()
 
-    assert load_eligible_primat_contexts(database, now=NOW) == ()
+    retained = load_eligible_primat_contexts(database, now=NOW)
+    assert [row.provider_context_id for row in retained] == ["primat:ica:1088004"]
+    assert retained[0].data_age_hours == 49
 
 
 def test_bundle_revalidates_unselected_context_and_rejects_conflicts(

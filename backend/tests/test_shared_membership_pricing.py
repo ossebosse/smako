@@ -435,3 +435,33 @@ def test_shared_offer_metadata_rejects_user_specific_contract() -> None:
             eligibility=PromotionEligibility.USER_SPECIFIC,
             mechanism=PromotionMechanism.SALE_PRICE,
         )
+
+def test_expired_member_scalar_cannot_revive_on_second_projection():
+    from datetime import timedelta
+
+    observed = NOW.replace(hour=8)
+    p = _product(chain='willys', price=30, effective_price=20, member_price=20,
+        offers=[OfferMetadata(kind=OfferKind.MEMBER, description='Dagens medlemspris',
+            price=20, member_program='willys', valid_from=observed.date(), valid_to=observed.date())])
+    p = p.model_copy(update={'source_provenance': p.source_provenance.model_copy(
+        update={'source_observed_at': observed})})
+    context = UserPricingContext(memberships=(MembershipProgram.WILLYS_PLUS,))
+    tomorrow = observed.date() + timedelta(days=1)
+    first = price_candidate_for_context(ProductCandidate.from_product(p, 1), context, on_date=tomorrow)
+    second = price_candidate_for_context(first, context, on_date=tomorrow)
+    assert first.effective_price == second.effective_price == 30
+    assert first.member_price is second.member_price is None
+    assert first.offers == second.offers == []
+
+
+def test_undated_discount_cannot_survive_retained_base():
+    from datetime import timedelta
+
+    p = _product(price=30, effective_price=20, offers=[OfferMetadata(
+        kind=OfferKind.CAMPAIGN, description='Saknar slutdatum', price=20)])
+    candidate = ProductCandidate.from_product(p, 1)
+    future = NOW.date() + timedelta(days=3)
+    result = price_candidate_for_context(candidate, UserPricingContext(), on_date=future)
+    assert result.effective_price == 30
+    assert result.offers == []
+    assert candidate.offers[0].valid_to is None

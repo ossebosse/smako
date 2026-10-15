@@ -564,6 +564,13 @@ def price_candidate_for_context(
         "effective_price": effective,
         "sale_price": effective,
         "offers": eligible_offers,
+        "member_price": candidate.member_price if any(
+            contract.eligibility is PromotionEligibility.MEMBER
+            and contract.required_packages == 1 and contract.is_active(target_date)
+            and contract.price is not None and candidate.member_price is not None
+            and abs(contract.price - Decimal(str(candidate.member_price))) <= Decimal("0.005")
+            for contract in contracts
+        ) else None,
         "promotion_groups": tuple(
             g
             for g in candidate.promotion_groups

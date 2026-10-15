@@ -98,12 +98,12 @@ class PriceContextAuditItem(BaseModel):
         if self.state in full_states:
             if not (
                 self.basket_eligible
-                and self.fresh
+                and self.observed_at is not None
                 and self.price_source
                 and self.grocery_context_id
                 and self.snapshot_id
             ):
-                raise ValueError("full context state requires fresh basket-eligible provenance")
+                raise ValueError("full context state requires qualified basket-eligible provenance")
         elif self.basket_eligible:
             raise ValueError("only full context states may be basket eligible")
         if self.state in offer_states and not self.fresh:
@@ -344,14 +344,14 @@ class PriceContextAuditor:
         own_full = self._newest(
             context
             for context in contexts
-            if self._is_fresh_full(context) and context.source_provider == SourceProvider.OWN.value
+            if self._is_usable_full(context) and context.source_provider == SourceProvider.OWN.value
         )
         if own_full is not None:
             return self._from_context(
                 physical,
                 own_full,
                 state=PriceContextState.OWN_FULL_CONTEXT,
-                reason="fresh promoted OWN full catalog is eligible for basket pricing",
+                reason="qualified promoted OWN full catalog retains base prices until replaced",
                 mappings=mapping_evidence,
                 all_contexts=contexts,
                 now=now,
@@ -360,7 +360,7 @@ class PriceContextAuditor:
         external_full = self._newest(
             context
             for context in contexts
-            if self._is_fresh_full(context)
+            if self._is_usable_full(context)
             and context.source_provider != SourceProvider.OWN.value
             and self._external_mapping_verified(context, mappings)
         )
@@ -369,7 +369,7 @@ class PriceContextAuditor:
                 physical,
                 external_full,
                 state=PriceContextState.EXTERNAL_FULL_CONTEXT,
-                reason="fresh full external context has a persisted strong verified identity",
+                reason="qualified external catalog has a persisted strong verified identity",
                 mappings=mapping_evidence,
                 all_contexts=contexts,
                 now=now,
@@ -561,10 +561,9 @@ class PriceContextAuditor:
         )
 
     @staticmethod
-    def _is_fresh_full(context: ContextCoverageItem) -> bool:
+    def _is_usable_full(context: ContextCoverageItem) -> bool:
         return bool(
             context.active
-            and not context.stale
             and context.basket_eligible
             and context.snapshot_id
             and context.observed_at

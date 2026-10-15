@@ -102,7 +102,7 @@ def test_activation_is_content_addressed_and_resolves_verified_active_cache(
     assert status.products == 1
 
 
-def test_stale_candidate_is_rejected_and_previous_manifest_remains_byte_identical(
+def test_future_candidate_is_rejected_and_previous_manifest_remains_byte_identical(
     tmp_path: Path,
 ) -> None:
     store = ClosedProviderCacheArtifactStore(tmp_path / "managed")
@@ -111,7 +111,7 @@ def test_stale_candidate_is_rejected_and_previous_manifest_remains_byte_identica
     _write_cache(current, product_id="rice")
     _write_cache(
         stale,
-        captured_at=NOW - timedelta(hours=49),
+        captured_at=NOW + timedelta(hours=49),
         product_id="pasta",
     )
     active = store.activate(current, city="Lund", policy=POLICY, activated_at=NOW)
@@ -474,7 +474,7 @@ def test_staged_artifact_is_reverified_after_identity_validation(
     assert store.read_active("Lund") == old
 
 
-def test_staged_candidate_can_expire_before_identity_validation(
+def test_staged_candidate_rejects_future_observation_before_identity_validation(
     tmp_path: Path,
 ) -> None:
     store = ClosedProviderCacheArtifactStore(tmp_path / "managed")
@@ -502,7 +502,7 @@ def test_staged_candidate_can_expire_before_identity_validation(
             staged,
             policy=POLICY,
             validator=validator,
-            activated_at=NOW + timedelta(hours=49),
+            activated_at=NOW - timedelta(hours=2),
         )
 
     assert validator_called is False

@@ -1,7 +1,8 @@
 """Persistent due-time policy used by the existing refresh runner.
 
 No network, collection or activation here. Campaigns retain their original
-source dates; base sources refresh at 35 h, warning 36 h, hard stop 48 h.
+source dates; base sources refresh at 35 h and warn at 36/48 h.
+Qualified base prices remain usable until replaced.
 """
 from datetime import UTC, date, datetime, time, timedelta
 from zoneinfo import ZoneInfo

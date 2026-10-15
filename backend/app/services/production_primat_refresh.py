@@ -172,8 +172,8 @@ def _merge_context_lkg(
         provenance = store.source_provenance
         assert provenance is not None
         age = (now - provenance.source_observed_at.astimezone(UTC)).total_seconds() / 3600
-        if age < 0 or age > max_age_hours:
-            raise ValueError("Primat context LKG is stale")
+        if age < 0:
+            raise ValueError("Primat context LKG observation is in the future")
 
     selected_store_ids = {store.store_id for store in selected_stores}
     selected_products = tuple(

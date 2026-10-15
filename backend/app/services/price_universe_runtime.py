@@ -23,7 +23,7 @@ import json
 from collections import OrderedDict, defaultdict
 from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from threading import RLock
 from time import perf_counter
@@ -56,7 +56,11 @@ from app.services.price_universe import (
 )
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from grocery_data.app.domain.campaign_validity import STOCKHOLM, is_campaign_only
+from grocery_data.app.domain.campaign_validity import (
+    STOCKHOLM,
+    has_active_campaign,
+    is_campaign_only,
+)
 from grocery_data.app.services.durable_files import atomic_write_bytes
 
 SOURCE_STRATEGY_VERSION = (
@@ -130,6 +134,8 @@ class PriceUniverseDataStatus(BaseModel):
     usable_context_count: int = Field(default=0, ge=0)
     excluded_stale_context_count: int = Field(default=0, ge=0)
     excluded_stale_context_ids: tuple[str, ...] = ()
+    retained_older_base_context_ids: tuple[str, ...] = ()
+    base_price_policy: str = "retain-until-replaced"
     status: str
     cache_state: str | None = None
     live_chain_requests: int = 0
@@ -345,11 +351,11 @@ class PricingProjectionCache:
 
 @dataclass(frozen=True, slots=True)
 class RequestPriceUniverseView:
-    """Fresh request-local subset of one immutable shared PriceUniverse.
+    """Usable request-local subset of one immutable shared PriceUniverse.
 
     A provider LKG can age past the configured policy between daily builds.
     The shared artifact remains auditable and unchanged, while planning uses
-    only contexts whose complete retained product surface is still current.
+    retained base prices and campaigns within their verified validity dates.
     """
 
     stores: tuple[Store, ...]
@@ -481,14 +487,19 @@ class PreparedPriceUniverse:
             )
             for context_id, observed_at in self._context_oldest_observed_at
         }
+        valid_observations = {
+            context_id for context_id, observed_at in self._context_oldest_observed_at
+            if observed_at != datetime.min.replace(tzinfo=UTC)
+            and observed_at <= evaluated_at + timedelta(hours=1)
+        }
         campaign_contexts = {p.store_id for p in self._campaign_products
             if p.store_id not in self._base_context_ids
-            and any(o.is_active(now.astimezone(STOCKHOLM).date()) for o in p.offers)}
+            and has_active_campaign(p, now.astimezone(STOCKHOLM).date())}
         usable = tuple(
             context_id
             for context_id in sorted(ages)
-            if (context_id in self._base_context_ids and ages[context_id] < stale_age_hours)
-            or context_id in campaign_contexts
+            if context_id in valid_observations
+            and (context_id in self._base_context_ids or context_id in campaign_contexts)
         )
         stale = tuple(
             context_id
@@ -511,8 +522,8 @@ class PreparedPriceUniverse:
                     candidate
                     for candidate in candidates
                     if candidate.store_id in usable_context_ids
-                    and (not is_campaign_only(candidate) or any(o.is_active(
-                        (now or datetime.now(UTC)).astimezone(STOCKHOLM).date()) for o in candidate.offers))
+                    and (not is_campaign_only(candidate) or has_active_campaign(
+                        candidate, (now or datetime.now(UTC)).astimezone(STOCKHOLM).date()))
                 ]
             )
         }
@@ -545,8 +556,9 @@ class PreparedPriceUniverse:
             stale_age_hours=stale_age_hours,
         )
         identity = self._freshness_cache_identity(usable, stale)
-        return identity + (":" + (now or datetime.now(UTC)).astimezone(STOCKHOLM).date().isoformat()
-                           if self._campaign_products else "")
+        # Catalog products also carry promotions. A new retail day must never
+        # reuse yesterday's discounted menu merely because contexts are equal.
+        return identity + ":" + (now or datetime.now(UTC)).astimezone(STOCKHOLM).date().isoformat()
 
     def request_view(
         self,
@@ -555,7 +567,7 @@ class PreparedPriceUniverse:
         stale_age_hours: float = 48.0,
         allowed_context_ids: tuple[str, ...] = (),
     ) -> RequestPriceUniverseView:
-        """Exclude stale contexts before any economic ranking or cache lookup."""
+        """Retain qualified base prices; exclude unavailable campaign contexts."""
 
         evaluated_at = now or datetime.now(tz=UTC)
         usable, stale, _ages = self._context_partition(
@@ -674,7 +686,7 @@ class PreparedPriceUniverse:
         oldest_usable_age = max(usable_ages) if usable_ages else None
         if not usable_contexts:
             status = "stale"
-        elif stale_contexts:
+        elif stale_contexts or (oldest_usable_age is not None and oldest_usable_age >= stale_age_hours):
             status = "degraded"
         elif oldest_usable_age is not None and oldest_usable_age >= warning_age_hours:
             status = "aging"
@@ -692,10 +704,11 @@ class PreparedPriceUniverse:
                 if oldest_usable_age is not None
                 else None
             ),
-            hours_until_oldest_usable_stale=(
-                round(max(0.0, stale_age_hours - oldest_usable_age), 3)
-                if oldest_usable_age is not None
-                else None
+            hours_until_oldest_usable_stale=None,
+            retained_older_base_context_ids=tuple(
+                context_id for context_id in usable_contexts
+                if context_id in self._base_context_ids
+                and context_ages[context_id] >= stale_age_hours
             ),
             usable_context_count=len(usable_contexts),
             excluded_stale_context_count=len(stale_contexts),
@@ -1117,6 +1130,8 @@ class PreparedPriceUniverseManager:
             "usable_context_count": status.usable_context_count,
             "excluded_stale_context_count": status.excluded_stale_context_count,
             "excluded_stale_context_ids": status.excluded_stale_context_ids,
+            "retained_older_base_context_ids": status.retained_older_base_context_ids,
+            "base_price_policy": status.base_price_policy,
             "freshness": status.status,
             "semantic_cache": prepared.semantic_cache.stats.model_dump(),
             "package_cache": prepared.package_cache.stats.model_dump(),

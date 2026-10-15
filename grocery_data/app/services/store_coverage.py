@@ -383,7 +383,7 @@ class StoreCoverageAuditor:
                 (context.source_provider, context.grocery_context_id)
                 for entry in entries
                 for context in entry.contexts
-                if entry.physical_active and context.active and not context.stale
+                if entry.physical_active and context.active and (not context.stale or context.basket_eligible)
             }
             basket_keys = {
                 (context.source_provider, context.grocery_context_id)
@@ -392,7 +392,6 @@ class StoreCoverageAuditor:
                 if (
                     entry.physical_active
                     and context.active
-                    and not context.stale
                     and context.basket_eligible
                 )
             }
@@ -413,7 +412,7 @@ class StoreCoverageAuditor:
                 known_physical_stores=len(matched),
                 mapped_physical_stores=sum(
                     item.physical_active
-                    and any(context.active and not context.stale for context in item.contexts)
+                    and any(context.active and (not context.stale or context.basket_eligible) for context in item.contexts)
                     for item in entries
                 ),
                 mapped_contexts=len(active_context_keys),
@@ -554,7 +553,7 @@ class StoreCoverageAuditor:
         ):
             state = PhysicalStoreCoverageState.STALE
             reason = "physical store is retained as NOT_SEEN"
-        elif active_contexts and all(item.stale for item in active_contexts):
+        elif active_contexts and all(item.stale and not item.basket_eligible for item in active_contexts):
             state = PhysicalStoreCoverageState.STALE
             reason = "all linked price contexts are stale"
         elif any(item.basket_eligible for item in active_contexts):
@@ -618,17 +617,23 @@ class StoreCoverageAuditor:
                 offers_only = bool(active and coverage == CoverageLevel.OFFERS_ONLY.value)
 
         stale = False
+        valid_observation = False
         if observed_at is not None:
             if observed_at.tzinfo is None:
                 observed_at = observed_at.replace(tzinfo=UTC)
             age_hours = (now - observed_at.astimezone(UTC)).total_seconds() / 3600
             stale = age_hours < -1 or age_hours > self.max_price_age_hours
+            valid_observation = age_hours >= -1
         elif basket_eligible or offers_only:
             # A price-bearing eligibility claim without timestamp provenance
             # fails closed for both basket catalogs and offer feeds.
             stale = True
-        if stale:
+        if not valid_observation:
             basket_eligible = False
+            offers_only = False
+        elif stale:
+            # This coverage report has no contract dates. Only the runtime
+            # that evaluates individual offers can assert campaign usability.
             offers_only = False
         if not active:
             basket_eligible = False

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from collections.abc import Iterable
-from datetime import date
+from datetime import date, datetime
+
+from grocery_data.app.domain.campaign_validity import STOCKHOLM, undated_promotion_usable
 
 from ..models import OfferKind, Product, SaleModel, Store
 
@@ -74,6 +76,19 @@ class GroceryPriceProvider(ABC):
                 ):
                     eligible_prices.append(offer.price)
             if self.use_member_prices and product.member_price is not None:
+                matching_member_offers = [
+                    offer for offer in product.offers
+                    if offer.kind == OfferKind.MEMBER and offer.required_packages == 1
+                    and _same_price(offer.price, product.member_price)
+                ]
+                member_current = (
+                    any(offer in active_offers for offer in matching_member_offers)
+                    if matching_member_offers else undated_promotion_usable(
+                        product.source_provenance.source_observed_at
+                        if product.source_provenance else None,
+                        on_date or datetime.now(STOCKHOLM).date(),
+                    )
+                )
                 capped_member_price = non_fixed and any(
                     offer.max_quantity is not None
                     and offer.required_packages == 1
@@ -81,7 +96,7 @@ class GroceryPriceProvider(ABC):
                     and _same_price(offer.price, product.member_price)
                     for offer in active_offers
                 )
-                if not capped_member_price:
+                if member_current and not capped_member_price:
                     eligible_prices.append(product.member_price)
             if not eligible_prices:
                 continue

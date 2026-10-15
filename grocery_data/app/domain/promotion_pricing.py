@@ -17,7 +17,7 @@ from pydantic import (
     model_validator,
 )
 
-from grocery_data.app.domain.campaign_validity import CampaignEvidence
+from grocery_data.app.domain.campaign_validity import CampaignEvidence, undated_promotion_usable
 
 
 def _normalize_binary_decimal_noise(
@@ -321,6 +321,9 @@ class PriceContract(BaseModel):
         return self.reference
 
     def is_active(self, on_date: date) -> bool:
+        if (self.mechanism is not PromotionMechanism.REGULAR and self.valid_to is None
+                and not undated_promotion_usable(self.observed_at, on_date)):
+            return False
         if self.campaign_evidence is not None:
             return self.campaign_evidence.applies(on_date, self.valid_from, self.valid_to)
         return not (

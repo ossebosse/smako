@@ -56,8 +56,8 @@ def repair(args):
             raise ValueError('insufficient_storage_margin')
         related = [x for x in report['required_contexts'] if x['chain'] == incident.get('chain')]
         if args.action == 'publish':
-            if not report['required_contexts'] or report['unknown_required_contexts'] or any(not x.get('qualified') or x.get('freshness') == 'STALE' for x in report['required_contexts']):
-                raise ValueError('mandatory_sources_not_qualified_and_fresh')
+            if not report['required_contexts'] or report['unknown_required_contexts'] or any(not x.get('qualified') or not x.get('base_prices_usable') for x in report['required_contexts']):
+                raise ValueError('mandatory_sources_not_qualified_and_usable')
         elif any(x.get('snapshot_id') != incident.get('last_qualified_snapshot') for x in related
                  if x['store_id'] in incident['store_ids']):
             raise ValueError('qualified_source_changed_rediagnose')

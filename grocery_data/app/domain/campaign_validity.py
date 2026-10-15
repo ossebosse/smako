@@ -3,13 +3,26 @@
 An observation proves that the official current-offer surface displayed the
 contract then. It never supplies a missing historical campaign start date.
 """
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Literal
 from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 STOCKHOLM = ZoneInfo("Europe/Stockholm")
+
+
+def undated_promotion_usable(observed_at: datetime | None, on_date: date) -> bool:
+    """Do not extend undated discounts when retaining an older base price.
+
+    Keep the previous 48-hour upper bound, rounded conservatively to the
+    Swedish purchase day. This is an evidence limit, not an invented end date.
+    Legacy models without source evidence retain their existing local behavior.
+    """
+    return observed_at is None or (
+        observed_at.astimezone(STOCKHOLM).date() <= on_date
+        < (observed_at + timedelta(hours=48)).astimezone(STOCKHOLM).date()
+    )
 
 
 class CampaignEvidence(BaseModel):
@@ -38,13 +51,29 @@ class CampaignEvidence(BaseModel):
 
 
 def is_campaign_only(product) -> bool:
-    """Only the opt-in OWN ICA offers channel may use this exception."""
+    """A product without an ordinary price depends on its dated offers.
+
+    Source identity/qualification is validated before entering the shared
+    artifact. Runtime expiry must apply to every chain, not only ICA.
+    """
+    return product.price is None
+
+
+def has_active_campaign(product, on_date: date) -> bool:
     provenance = product.source_provenance
-    return bool(product.price is None and product.coverage == "offers_only"
-                and provenance is not None and provenance.source_provider == "own"
-                and provenance.source_channel == "offers" and product.chain == "ica"
-                and product.offers and all(o.campaign_evidence is not None
-                    and o.valid_to is not None
-                    and o.campaign_evidence.store_external_id == provenance.provider_store_id
-                    and o.campaign_evidence.observed_current_at == provenance.source_observed_at
-                    for o in product.offers))
+    if provenance is None:
+        return False
+    for offer in product.offers:
+        if offer.valid_to is None:
+            continue
+        evidence = offer.campaign_evidence
+        if evidence is not None and (
+            evidence.store_external_id != provenance.provider_store_id
+            or evidence.observed_current_at != provenance.source_observed_at
+        ):
+            continue
+        if offer.valid_from is None and evidence is None:
+            continue
+        if offer.is_active(on_date):
+            return True
+    return False

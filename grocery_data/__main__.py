@@ -2030,7 +2030,7 @@ def _active_universe_status(
         return {
             "city": city,
             "status": freshness.state.value,
-            "usable": freshness.usable,
+            "usable": freshness.retained_observation_usable,
             "active": True,
             "universe_id": manifest.universe_id,
             "built_at": manifest.built_at,
@@ -2230,7 +2230,7 @@ def _expected_snapshot_lineage(
         if (
             row.get("active_snapshot_id")
             and isinstance(age, (int, float))
-            and float(age) < max_age_hours
+            and -1 <= float(age) < float("inf")
         ):
             expected.add(str(row["active_snapshot_id"]))
     return tuple(sorted(expected))
@@ -2441,7 +2441,7 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
             usable_lkg = bool(
                 row.get("active_snapshot_id")
                 and isinstance(age, (int, float))
-                and float(age) < settings.max_price_age_hours
+                and -1 <= float(age) < float("inf")
             )
             row["lkg_used"] = bool(not row.get("promoted") and usable_lkg)
             rows.append(

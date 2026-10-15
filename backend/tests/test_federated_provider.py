@@ -238,8 +238,8 @@ async def test_primary_healthy_and_fresh_wins_without_primary_fallback_duplicate
 
 
 @pytest.mark.asyncio
-async def test_stale_primary_requires_explicit_fallback_and_reports_it() -> None:
-    stale = NOW - timedelta(hours=72)
+async def test_future_dated_primary_requires_explicit_fallback_and_reports_it() -> None:
+    stale = NOW + timedelta(hours=72)
     own = StubProvider(
         [_store(Chain.WILLYS, "own", provider="own", observed_at=stale)],
         [],
@@ -362,7 +362,7 @@ async def test_exact_context_override_uses_own_while_ica_default_remains_primat(
 @pytest.mark.asyncio
 async def test_context_override_fallback_is_never_silent() -> None:
     context_id = "context:ica:gunnesbo"
-    stale = NOW - timedelta(hours=72)
+    stale = NOW + timedelta(hours=72)
     own = StubProvider(
         [_store(Chain.ICA, context_id, provider="own", observed_at=stale)],
         [],
@@ -490,7 +490,7 @@ async def test_product_failure_is_visible_and_never_switches_context_mid_request
 
 
 @pytest.mark.asyncio
-async def test_stale_price_row_is_rejected_even_when_store_snapshot_is_fresh() -> None:
+async def test_future_dated_price_row_is_rejected_even_when_store_snapshot_is_fresh() -> None:
     store = _store(Chain.WILLYS, "own", provider="own")
     stale_product = _product(Chain.WILLYS, "own", "ris", 10, provider="own").model_copy(
         update={
@@ -498,7 +498,7 @@ async def test_stale_price_row_is_rejected_even_when_store_snapshot_is_fresh() -
                 "own",
                 Chain.WILLYS,
                 "own",
-                observed_at=NOW - timedelta(hours=72),
+                observed_at=NOW + timedelta(hours=72),
             )
         },
         deep=True,

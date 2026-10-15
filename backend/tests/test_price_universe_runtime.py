@@ -712,7 +712,7 @@ def test_package_and_basket_caches_hit_on_normalized_warm_keys() -> None:
     assert basket_cache.stats.misses == 1
 
 
-def test_prepared_status_marks_oldest_snapshot_stale() -> None:
+def test_prepared_status_warns_but_retains_old_base_price() -> None:
     product = _product("rice", "ris", price=20, quantity=1000)
     key = PriceUniverseKey.create(
         city="Lund",
@@ -739,13 +739,16 @@ def test_prepared_status_marks_oldest_snapshot_stale() -> None:
         cache_state="warm",
     )
 
-    assert status.status == "stale"
+    assert status.status == "degraded"
+    assert status.usable_context_count == 1
+    assert status.retained_older_base_context_ids == (STORE_ID,)
+    assert status.hours_until_oldest_usable_stale is None
     assert status.oldest_price_age_hours == 49
     assert status.cache_state == "warm"
     assert status.live_chain_requests == 0
 
 
-def test_prepared_request_view_excludes_only_stale_context_and_reports_degraded() -> None:
+def test_prepared_request_view_retains_older_base_context_and_reports_degraded() -> None:
     fresh_store_id = "own:willys:100"
     stale_store_id = "primat:coop:730400"
     evaluated_at = OBSERVED_AT + timedelta(hours=50)
@@ -807,20 +810,21 @@ def test_prepared_request_view_excludes_only_stale_context_and_reports_degraded(
     view = prepared.request_view(now=evaluated_at, stale_age_hours=48)
 
     assert status.status == "degraded"
-    assert status.usable_context_count == 1
-    assert status.excluded_stale_context_count == 1
-    assert status.excluded_stale_context_ids == (stale_store_id,)
+    assert status.usable_context_count == 2
+    assert status.excluded_stale_context_count == 0
+    assert status.excluded_stale_context_ids == ()
+    assert status.retained_older_base_context_ids == (stale_store_id,)
     assert status.oldest_price_age_hours == 50
-    assert status.oldest_usable_price_age_hours == 2
-    assert [store.store_id for store in view.stores] == [fresh_store_id]
-    assert view.usable_context_ids == (fresh_store_id,)
-    assert view.excluded_stale_context_ids == (stale_store_id,)
+    assert status.oldest_usable_price_age_hours == 50
+    assert [store.store_id for store in view.stores] == [fresh_store_id, stale_store_id]
+    assert view.usable_context_ids == (fresh_store_id, stale_store_id)
+    assert view.excluded_stale_context_ids == ()
     assert {
         candidate.store_id
         for candidates in view.economic_pool.matched_candidates_by_name.values()
         for candidate in candidates
-    } == {fresh_store_id}
-    assert "pasta" not in view.economic_pool.candidates_by_name
+    } == {fresh_store_id, stale_store_id}
+    assert "pasta" in view.economic_pool.candidates_by_name
 
 
 class _FixtureCandidateGenerator(RecipeCandidateGenerator):
@@ -1092,7 +1096,7 @@ async def test_menu_search_cache_is_shared_by_modes_but_isolates_real_policy_ove
 
 
 @pytest.mark.asyncio
-async def test_activation_requires_every_configured_fresh_context(tmp_path):
+async def test_activation_requires_every_context_and_retains_quality_gate(tmp_path):
     from grocery_data.app.services.prepared_universe_activation import (
         validate_backend_prepared_universe_artifact,
     )
@@ -1106,14 +1110,17 @@ async def test_activation_requires_every_configured_fresh_context(tmp_path):
             payload, "Lund", required_context_ids=("missing-store",), max_price_age_hours=1_000_000
         )
     context = prepared._context_oldest_observed_at[0][0]
-    with pytest.raises(ValueError, match="lacks required usable contexts"):
+    from app.errors import IncompleteBasketError
+    # Older base prices pass admission; this narrow fixture still fails the
+    # independent representative-basket quality check.
+    with pytest.raises(IncompleteBasketError):
         validate_backend_prepared_universe_artifact(
             payload, "Lund", required_context_ids=(context,)
         )
 
 
 @pytest.mark.asyncio
-async def test_runtime_readiness_warns_at_36_and_requires_all_contexts_at_48(monkeypatch):
+async def test_runtime_readiness_warns_at_36_and_retains_base_at_48(monkeypatch):
     from app.services import beta_observability as ops
 
     _manager, prepared, _provider, _selector = await _build_prepared()
@@ -1127,11 +1134,12 @@ async def test_runtime_readiness_warns_at_36_and_requires_all_contexts_at_48(mon
     stale = ops.active_price_status(settings, now=OBSERVED_AT + timedelta(hours=48))
     assert fresh["required_contexts_usable"] and not fresh["requires_attention"]
     assert aging["required_contexts_usable"] and aging["requires_attention"]
-    assert not stale["required_contexts_usable"] and stale["requires_attention"]
-    assert stale["missing_required_context_ids"] == [context]
+    assert stale["required_contexts_usable"] and stale["requires_attention"]
+    assert stale["missing_required_context_ids"] == []
 
 
-def test_campaign_survives_48h_but_expires_locally_without_rebuild():
+@pytest.mark.parametrize('chain', ['ica', 'willys', 'hemkop', 'coop', 'lidl', 'citygross'])
+def test_campaign_survives_48h_but_expires_locally_without_rebuild(chain):
     from datetime import date
 
     from grocery_data.app.domain.campaign_validity import CampaignEvidence
@@ -1139,9 +1147,9 @@ def test_campaign_survives_48h_but_expires_locally_without_rebuild():
     p = _product("campaign-rice", "ris", price=20, quantity=1000, observed_at=observed)
     proof = CampaignEvidence(store_external_id='official', offer_id='campaign-rice',
         source_reference='raw:retained', observed_current_at=observed, checked_at=observed)
-    p = p.model_copy(update={'chain':'ica','price':None,'coverage':'offers_only',
+    p = p.model_copy(update={'chain':chain,'price':None,'coverage':'offers_only',
         'offers':[OfferMetadata(kind=OfferKind.CAMPAIGN,description="fixture public campaign",price=20,valid_to=date(2026,9,20),campaign_evidence=proof)],
-        'source_provenance':p.source_provenance.model_copy(update={'chain':'ica',
+        'source_provenance':p.source_provenance.model_copy(update={'chain':chain,
             'source_channel':'offers','provider_store_id':'official','coverage':'offers_only'})})
     key = PriceUniverseKey.create(city='Lund',postal_codes=[POSTAL_CODE],snapshot_ids=[SNAPSHOT_ID],
         memberships=normalized_memberships({}), source_strategy_version='fixture',
@@ -1186,3 +1194,55 @@ def test_cache_status_stays_available_during_computation(cache_name):
             release.set()
         assert first.result(timeout=2) is second.result(timeout=2) is value
     assert cache.stats.hits == 1 and cache.stats.entries == 1
+
+@pytest.mark.parametrize('chain', ['ica', 'willys', 'hemkop', 'coop', 'lidl', 'citygross'])
+@pytest.mark.parametrize('age_days', [3, 14, 90])
+def test_all_chains_retain_base_and_expire_discount_without_rebuild(chain, age_days):
+    from datetime import date
+
+    from app.models.product import ProductCandidate
+    from app.services.user_pricing import price_candidate_for_context
+
+    from grocery_data.app.domain.promotion_pricing import UserPricingContext
+
+    before = datetime(2026, 10, 18, 21, 59, tzinfo=UTC)
+    after = datetime(2026, 10, 18, 22, 0, tzinfo=UTC)
+    observed = before - timedelta(days=age_days)
+    product = _product('dated-rice', 'ris', price=30, quantity=1000, observed_at=observed)
+    product = product.model_copy(update={
+        'chain': chain, 'effective_price': 20,
+        'offers': [OfferMetadata(kind=OfferKind.CAMPAIGN, description='Veckopris',
+            price=20, valid_from=date(2026, 10, 12), valid_to=date(2026, 10, 18))],
+        'source_provenance': product.source_provenance.model_copy(update={'chain': chain}),
+    })
+    key = PriceUniverseKey.create(city='Lund', postal_codes=[POSTAL_CODE],
+        snapshot_ids=[SNAPSHOT_ID], memberships=normalized_memberships({}),
+        source_strategy_version='fixture', normalizer_version='fixture', taxonomy_version='fixture')
+    universe = PriceUniverseBuilder().build(key, [product], built_at=before)
+    prepared = PreparedPriceUniverse(universe=universe, stores=(_store(observed_at=observed),),
+        economic_pool=_pool([product]), source_name='fixture', oldest_observed_at=observed)
+    original = prepared.to_json()
+    for clock in (before, after, after + timedelta(days=90)):
+        assert prepared.request_view(now=clock).usable_context_ids == (STORE_ID,)
+        assert prepared.status(now=clock).excluded_stale_context_count == 0
+    assert prepared.request_freshness_identity(now=before) != prepared.request_freshness_identity(now=after)
+    candidate = ProductCandidate.from_product(product, 1)
+    assert price_candidate_for_context(candidate, UserPricingContext(), on_date=date(2026, 10, 18)).effective_price == 20
+    result = price_candidate_for_context(candidate, UserPricingContext(), on_date=date(2026, 10, 19))
+    assert result.effective_price == 30
+    assert result.offers == []
+    assert result.source_provenance.source_observed_at == observed
+    assert prepared.to_json() == original
+
+
+def test_missing_or_future_observation_never_becomes_retained_base():
+    for observed in (datetime.min.replace(tzinfo=UTC), OBSERVED_AT + timedelta(days=5)):
+        product = _product('rice', 'ris', price=30, quantity=1000, observed_at=observed)
+        key = PriceUniverseKey.create(city='Lund', postal_codes=[POSTAL_CODE],
+            snapshot_ids=[SNAPSHOT_ID], memberships=normalized_memberships({}),
+            source_strategy_version='fixture', normalizer_version='fixture', taxonomy_version='fixture')
+        prepared = PreparedPriceUniverse(
+            universe=PriceUniverseBuilder().build(key, [product], built_at=OBSERVED_AT),
+            stores=(_store(observed_at=observed),), economic_pool=_pool([product]),
+            source_name='fixture', oldest_observed_at=observed)
+        assert not prepared.request_view(now=OBSERVED_AT).usable_context_ids

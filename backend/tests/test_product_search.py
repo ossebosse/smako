@@ -270,8 +270,9 @@ def test_stale_and_aging_cache_boundaries():
         search(p, now=NOW + timedelta(hours=36))["results"][0]["prices"][0]["freshness"] == "AGING"
     )
     result = search(p, now=NOW + timedelta(hours=48))
-    assert result["total"] == 0
-    assert result["excluded_stale_context_count"] == 1
+    assert result["total"] == 1
+    assert result["excluded_stale_context_count"] == 0
+    assert result["results"][0]["prices"][0]["freshness"] == "STALE"
 
 
 def test_ineligible_context_absent():
@@ -402,9 +403,10 @@ def test_stale_ica_then_genuine_new_snapshot_normal_activation(tmp_path):
     old_path = tmp_path / "old.json"
     manager.write_artifact(prepare(old, product(store="coop")), old_path)
     before = manager.load_file_and_activate(old_path)
-    assert coverage(search(before), "ica")["status"] == "STALE"
-    assert all(
-        price["chain"] != "ica" for row in search(before)["results"] for price in row["prices"]
+    assert coverage(search(before), "ica")["status"] == "VISIBLE"
+    assert any(
+        price["chain"] == "ica" and price["freshness"] == "STALE"
+        for row in search(before)["results"] for price in row["prices"]
     )
     # Frozen new-observation fixture, never an altered production observation.
     fresh = prepare(product(store="ica"), product(store="coop"), version="new-snapshot")
@@ -414,7 +416,7 @@ def test_stale_ica_then_genuine_new_snapshot_normal_activation(tmp_path):
     assert after.product_search_index is not before.product_search_index
     assert coverage(search(after), "ica")["status"] == "VISIBLE"
     assert search(after)["price_universe_id"] != search(before)["price_universe_id"]
-    assert coverage(search(before), "ica")["status"] == "STALE"
+    assert coverage(search(before), "ica")["status"] == "VISIBLE"
 
 
 def test_coverage_distinguishes_missing_context_query_and_filter():
@@ -448,7 +450,7 @@ def test_coverage_changes_at_freshness_boundary_and_membership_price_isolated():
     assert (
         coop["context_label"] == "Onlinepris" and "inte lagerbesked" in coop["availability_label"]
     )
-    assert coverage(search(p, now=NOW + timedelta(hours=48)), "willys")["status"] == "STALE"
+    assert coverage(search(p, now=NOW + timedelta(hours=48)), "willys")["status"] == "VISIBLE"
     assert coverage(search(p, now=NOW + timedelta(hours=47)), "willys")["status"] == "VISIBLE"
 
 

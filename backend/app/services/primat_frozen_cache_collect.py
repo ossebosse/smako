@@ -242,11 +242,10 @@ def load_eligible_primat_contexts(
 ) -> tuple[EligiblePrimatContext, ...]:
     """Read active, strong, full links through immutable SQLite.
 
-    Freshness remains mandatory by default.  A bounded refresh may opt in to
-    stale rows as identity seeds so it can recover an expired cache.  Such a
-    seed is never treated as current price data: callers must still revalidate
-    its exact provider identity against a new live store resolution before
-    collecting products.
+    Qualified catalog observations remain usable as they age. Before a live
+    collection, callers must still revalidate the exact provider identity.
+    The legacy allow_stale_identity_seed argument remains API-compatible;
+    source ages are retained for operational diagnostics.
     """
 
     if not chains:
@@ -316,10 +315,7 @@ def load_eligible_primat_contexts(
             age_hours = Decimal(
                 str((evaluated_at - observed_at).total_seconds() / 3600)
             )
-            if age_hours < 0 or (
-                not allow_stale_identity_seed
-                and age_hours > Decimal(str(max_age_hours))
-            ):
+            if age_hours < 0:
                 continue
             contexts.append(
                 EligiblePrimatContext(

@@ -247,7 +247,7 @@ def test_pipeline_recovery_cannot_close_other_municipality(context, monkeypatch)
              'ready': {'http_status': 200}, 'disk_manifest': 'lund-ready',
              'loaded_manifest': 'lund-ready', 'unknown_required_contexts': [],
              'required_contexts': [{'context_id': 'lund', 'incident_ids': [],
-                                    'loaded': True, 'freshness': 'FRESH'}]}
+                                    'loaded': True, 'freshness': 'FRESH', 'base_prices_usable': True}]}
     monkeypatch.setattr(ops, 'status', lambda _: value)
     path = context.root / 'pipeline-incidents.json'
     path.write_text(json.dumps({'incidents': {
@@ -377,9 +377,9 @@ def test_publish_refuses_incomplete_federation_and_duplicate_action(context, mon
     report={'storage':{'adequate':True},'required_contexts':[{'qualified':False,'chain':'hemkop'}],
             'unknown_required_contexts':[],'disk_manifest':'old'}
     monkeypatch.setattr(cli,'status',lambda: report)
-    with pytest.raises(ValueError,match='mandatory_sources_not_qualified_and_fresh'):
+    with pytest.raises(ValueError,match='mandatory_sources_not_qualified_and_usable'):
         cli.repair(args)
-    report['required_contexts'][0].update(qualified=True,freshness='FRESH')
+    report['required_contexts'][0].update(qualified=True,freshness='STALE',base_prices_usable=True)
     attempt=f'{key}:old:publish:reviewed-test'
     (context.root/'incident-repairs.json').write_text(json.dumps({'attempts':{attempt:{'status':'complete'}}}))
     with pytest.raises(ValueError,match='repair_already_attempted'):

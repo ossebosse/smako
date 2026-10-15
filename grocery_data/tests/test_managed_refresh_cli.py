@@ -588,14 +588,14 @@ async def test_non_promoted_fresh_active_snapshot_is_reported_as_lkg(
     assert await grocery_cli._daily_refresh(_args(tmp_path, ["Lund"])) == 2
 
     rows = emitted[0]["own_collection"]["results"]  # type: ignore[index]
-    assert [row["lkg_used"] for row in rows] == [False, True, False]
+    assert [row["lkg_used"] for row in rows] == [False, True, True]
     assert rows[1]["freshness"] == "fresh"
     assert rows[2]["freshness"] == "stale"
-    assert emitted[0]["summary"]["lkg_contexts"] == 1  # type: ignore[index]
+    assert emitted[0]["summary"]["lkg_contexts"] == 2  # type: ignore[index]
     assert store.activations == [
         (
             "Lund",
-            ("primat-lund", "snapshot-degraded-lkg", "snapshot-lund"),
+            ("primat-lund", "snapshot-degraded-lkg", "snapshot-lund", "snapshot-stale-lkg"),
         )
     ]
 

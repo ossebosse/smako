@@ -455,7 +455,12 @@ class Product(ProductSemantics):
         return self.name
 
     def active_offers(self, on_date: date | None = None) -> list[OfferMetadata]:
-        return [offer for offer in self.offers if offer.is_active(on_date)]
+        from grocery_data.app.domain.campaign_validity import undated_promotion_usable
+
+        target = on_date or datetime.now(tz=_STOCKHOLM).date()
+        observed = self.source_provenance.source_observed_at if self.source_provenance else None
+        return [offer for offer in self.offers if offer.is_active(target)
+                and (offer.valid_to is not None or undated_promotion_usable(observed, target))]
 
 
 class ProductCandidate(ProductSemantics):

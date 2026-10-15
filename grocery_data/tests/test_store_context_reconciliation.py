@@ -465,7 +465,7 @@ def test_external_context_without_healthy_fresh_full_evidence_is_not_basket_capa
     assert context.active is expected_active
 
 
-def test_external_stale_observation_is_not_basket_capable() -> None:
+def test_external_older_base_observation_remains_basket_capable() -> None:
     now = datetime(2026, 8, 23, 9, tzinfo=UTC)
     context = CredentialFreeContextImporter.import_rows(
         [
@@ -488,7 +488,7 @@ def test_external_stale_observation_is_not_basket_capable() -> None:
         now=now,
         max_age_hours=48,
     )[0]
-    assert context.basket_eligible is False
+    assert context.basket_eligible is True
 
 
 def test_external_address_match_is_exact_and_names_are_never_fuzzy(storage) -> None:  # type: ignore[no-untyped-def]

@@ -686,8 +686,8 @@ def _run_demand_locked(lock, *, started_at):
         if manifest and manifest.universe_id == pending['universe_id']:
             from grocery_data.app.services.freshness import FreshnessPolicy, assess_freshness
             if not assess_freshness(manifest.oldest_base_observed_at or manifest.oldest_observed_at,
-                                    policy=FreshnessPolicy(), now=started_at).usable:
-                raise ValueError('pending runtime source expired')
+                                    policy=FreshnessPolicy(), now=started_at).retained_observation_usable:
+                raise ValueError('pending runtime source observation invalid')
             _artifact_store().resolve_active_artifact(os.environ['REFRESH_CITY'], verify_hash=True)
             loaded = _confirm_loaded_runtime(manifest.universe_id)
             if not loaded:

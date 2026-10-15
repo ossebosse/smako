@@ -47,6 +47,19 @@ class FreshnessAssessment(BaseModel):
     warning: bool
     reason: str
 
+    @property
+    def retained_observation_usable(self) -> bool:
+        """Age warns about refresh; it does not expire a qualified base price.
+
+        This checks timestamps only. Callers must still require promoted,
+        qualified source data and evaluate each promotion's own validity.
+        """
+        return bool(
+            self.observed_at is not None
+            and self.observed_at != datetime.min.replace(tzinfo=UTC)
+            and self.observed_at <= self.evaluated_at + timedelta(hours=1)
+        )
+
 
 class SourceFreshnessProjection(BaseModel):
     """Freshness plus the next scheduled recovery boundary for one source."""

@@ -2204,11 +2204,11 @@
           : " Prisunderlaget är färskt enligt tjänstens freshness-policy.";
         dom.sourceDescription.append(document.createTextNode(freshnessText));
       } else if (freshness === "aging") {
-        dom.warningsList.append(createElement("li", null, "Vissa priser närmar sig stale-gränsen och kan vara äldre än 24 timmar."));
+        dom.warningsList.append(createElement("li", null, "Vissa baspriser har inte uppdaterats nyligen. De behålls tills nya priser hämtats. Kampanjpriser gäller bara under sin giltighetstid."));
       } else if (freshness === "degraded") {
         const excluded = numeric(first(priceData, ["excluded_stale_context_count"], null));
-        const coverage = excluded === null ? "En eller flera äldre priskällor" : `${excluded} äldre priskontext${excluded === 1 ? "" : "er"}`;
-        dom.warningsList.append(createElement("li", null, `${coverage} har uteslutits. Planen använder bara priskontexter som fortfarande klarar aktualitetskravet.`));
+        const unavailable = excluded > 0 ? ` ${excluded} inköpsställe${excluded === 1 ? "" : "n"} saknar användbara priser.` : "";
+        dom.warningsList.append(createElement("li", null, `Vissa prisuppdateringar är försenade. Senast kända baspriser används, och utgångna kampanjpriser används inte.${unavailable}`));
       } else if (freshness === "stale" || freshness === "broken") {
         dom.warningsList.append(createElement("li", null, "Prisunderlaget är inte färskt. Skapa inte ett inköpsunderlag innan datan har uppdaterats."));
       }

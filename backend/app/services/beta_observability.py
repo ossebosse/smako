@@ -102,6 +102,8 @@ def active_price_status(settings: Settings, *, now: datetime | None = None) -> d
         "usable_context_count": status.usable_context_count,
         "excluded_stale_context_count": status.excluded_stale_context_count,
         "excluded_stale_context_ids": status.excluded_stale_context_ids,
+        "retained_older_base_context_ids": status.retained_older_base_context_ids,
+        "base_price_policy": status.base_price_policy,
         "product_count": status.product_count,
     }
 

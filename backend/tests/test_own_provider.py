@@ -988,7 +988,7 @@ async def test_offers_only_conditional_price_never_falls_back_to_catalog() -> No
     assert products == []
 
 
-@pytest.mark.parametrize("status", ["broken", "degraded", "stale", "unknown", "unverified"])
+@pytest.mark.parametrize("status", ["broken", "degraded", "unknown", "unverified"])
 @pytest.mark.asyncio
 async def test_rejects_nonhealthy_connector_status(status: str) -> None:
     def handler(request: httpx.Request) -> httpx.Response:
@@ -1007,7 +1007,8 @@ async def test_rejects_nonhealthy_connector_status(status: str) -> None:
 
 
 @pytest.mark.asyncio
-async def test_rejects_stale_snapshot_even_when_reported_status_is_healthy() -> None:
+@pytest.mark.parametrize("status", ["healthy", "stale"])
+async def test_retains_old_promoted_snapshot(status) -> None:
     stale_time = datetime.now(tz=UTC) - timedelta(hours=72)
 
     def handler(request: httpx.Request) -> httpx.Response:
@@ -1017,14 +1018,15 @@ async def test_rejects_stale_snapshot_even_when_reported_status_is_healthy() -> 
                 [_fixed_product()],
                 observed_at=stale_time.isoformat(),
                 data_age_hours=72,
+                connector_status=status,
             ),
             request=request,
         )
 
     provider, client = _provider(handler, max_age_hours=48)
     try:
-        with pytest.raises(PriceProviderError, match="för gammal"):
-            await provider.search_products("pasta", ["willys:2276"])
+        products = await provider.search_products("pasta", ["willys:2276"])
+        assert products
     finally:
         await client.aclose()
 

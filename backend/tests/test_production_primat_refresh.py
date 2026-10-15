@@ -262,16 +262,16 @@ async def test_refresh_uses_stale_identity_seed_revalidates_and_replaces_atomica
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     database = _database(tmp_path / "registry.sqlite")
-    # Default consumers continue to exclude stale data.
-    assert (
+    # Older qualified observations remain available until a validated replacement.
+    retained = (
         load_eligible_primat_contexts(
             database,
             city="Lund",
             now=NOW,
             chains=frozenset({Chain.ICA}),
         )
-        == ()
     )
+    assert [row.provider_context_id for row in retained] == ["primat:ica:1088004"]
     # The explicit refresh seam may use it solely as an identity seed.
     seeded = load_eligible_primat_contexts(
         database,

@@ -80,7 +80,7 @@ def price_universe_status(
                 "canonical_index_count": manifest.canonical_index_count,
                 "oldest_price_age_hours": freshness.age_hours,
                 "freshness": freshness.state.value,
-                "basket_eligible": freshness.usable,
+                "basket_eligible": freshness.retained_observation_usable,
                 "cache_state": "persistent_active_manifest",
                 "rebuild_during_request": False,
                 "live_provider_requests": 0,
@@ -167,9 +167,9 @@ def daily_refresh_status(
                     "age_hours": freshness.age_hours,
                     "freshness": freshness.state.value,
                     "warning": freshness.warning,
-                    "basket_eligible": store.basket_eligible and freshness.usable,
+                    "basket_eligible": store.basket_eligible and freshness.retained_observation_usable,
                     "lkg_retained": own_broken and store.snapshot_id is not None,
-                    "lkg_usable": own_broken and freshness.usable,
+                    "lkg_usable": own_broken and freshness.retained_observation_usable,
                     "reason": store.reason,
                 }
             )

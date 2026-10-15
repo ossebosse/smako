@@ -354,6 +354,8 @@ def status(environment=None, *, now=None):
                 entry.update(snapshot_id=row['id'], observed_at=row['observed'], age_hours=round(age, 3),
                              freshness='STALE' if age >= 48 else 'AGING' if age >= 36 else 'FRESH',
                              remaining_hours=round(48-age, 3), qualified=True,
+                             base_prices_usable=age >= -1,
+                             base_price_policy='retain-until-replaced',
                              published=published, loaded=loaded, receipt='unknown_until_relay_read',
                              stage='loaded' if loaded else 'published' if published else 'qualified_pending_publication')
                 entry['source_artifact_sha256'] = row['artifact_sha256']
@@ -387,7 +389,7 @@ def status(environment=None, *, now=None):
                  'bytes': sum(p.stat().st_size for p in artifacts),
                  'meaning': 'retained inbox files; import status comes from snapshot artifact hashes'}
     incidents = read_json(root / 'source-incidents.json')
-    blockers = [x['context_id'] for x in contexts if x.get('freshness') == 'STALE' or not x.get('qualified')]
+    blockers = [x['context_id'] for x in contexts if not x.get('base_prices_usable') or not x.get('qualified')]
     for item in contexts:
         matches = [x for x in incidents.get('incidents', {}).values()
                    if x['chain'] == item['chain'] and item['store_id'] in x['store_ids'] and x['status'] == 'open']
@@ -456,7 +458,7 @@ def record_indicators(environment=None):
             and current['loaded_manifest'] == current['disk_manifest']
             and current['required_contexts']
             and not current['unknown_required_contexts']
-            and all(c.get('loaded') and c.get('freshness') != 'STALE' for c in current['required_contexts'])):
+            and all(c.get('loaded') and c.get('base_prices_usable') for c in current['required_contexts'])):
         pipeline_path = root/'pipeline-incidents.json'
         pipeline = read_json(pipeline_path)
         if pipeline:

@@ -254,7 +254,8 @@ class ProductSearchIndex:
     ) -> dict:
         prepared = self.prepared
         usable, stale, ages = prepared._context_partition(now=now, stale_age_hours=stale_hours)
-        states = tuple((key, "AGING" if ages[key] >= warning_hours else "FRESH") for key in usable)
+        states = tuple((key, "STALE" if ages[key] >= stale_hours else
+                        "AGING" if ages[key] >= warning_hours else "FRESH") for key in usable)
         target_date = now.astimezone(ZoneInfo("Europe/Stockholm")).date()
         user = UserPricingContext(memberships=(tuple(MembershipProgram)
             if request.membership_price_policy == "all_advertised" else request.memberships))

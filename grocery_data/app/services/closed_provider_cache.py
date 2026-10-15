@@ -160,7 +160,7 @@ def inspect_closed_provider_cache(
         captured_at=captured_at.astimezone(UTC),
         age_hours=freshness.age_hours or 0,
         freshness=freshness.state,
-        usable=freshness.usable,
+        usable=freshness.retained_observation_usable,
         postal_code=document.postal_code,
         stores=len(stores),
         products=len(products),

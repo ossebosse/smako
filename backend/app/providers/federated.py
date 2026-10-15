@@ -209,14 +209,14 @@ class SourceResolver:
                 rejected += 1
                 continue
             age_hours = (now - observed_at).total_seconds() / 3600
-            if age_hours < -1 or age_hours > self.max_price_age_hours:
+            if age_hours < -1:
                 rejected += 1
                 stale += 1
                 continue
             accepted.append(_EligibleStore(binding, store, coverage, observed_at, snapshot_id))
 
         if accepted:
-            reason = "healthy, fresh and basket-compatible"
+            reason = "qualified retained catalog with verifiable observation"
         elif stale:
             reason = "all basket-compatible contexts are stale"
         elif stores:
@@ -664,7 +664,7 @@ class FederatedGroceryPriceProvider(GroceryPriceProvider):
                 if observed_at is None or snapshot_id is None:
                     continue
                 age_hours = (now - observed_at).total_seconds() / 3600
-                if age_hours < -1 or age_hours > self.resolver.max_price_age_hours:
+                if age_hours < -1:
                     continue
                 coverage = binding.coverage_for(chain, native) or CoverageLevel.OFFERS_ONLY
                 eligible = _EligibleStore(
@@ -703,7 +703,7 @@ class FederatedGroceryPriceProvider(GroceryPriceProvider):
         if observed_at is None:
             return None
         age_hours = (datetime.now(tz=UTC) - observed_at).total_seconds() / 3600
-        if age_hours < -1 or age_hours > self.resolver.max_price_age_hours:
+        if age_hours < -1:
             return None
         offers = list(product.offers)
         member_price = product.member_price

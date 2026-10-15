@@ -180,7 +180,7 @@ def test_consumer_v1_surfaces_saved_plan_freshness_and_community_actions() -> No
     assert 'id="recalculate-plan-button"' in page
     assert "function renderPriceFreshness" in script
     assert 'status === "degraded"' in script
-    assert "har uteslutits. Planen använder bara priskontexter" in script
+    assert "Senast kända baspriser används, och utgångna kampanjpriser används inte." in script
     assert 'id="compared-sources"' in page
     assert 'id="unavailable-sources"' in page
     assert "Jämförda priskällor" in page

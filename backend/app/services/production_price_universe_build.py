@@ -320,8 +320,6 @@ def _fresh(value: datetime, *, now: datetime, max_age_hours: float, field: str) 
     age = (now - observed).total_seconds() / 3600
     if age < -1:
         raise ValueError(f"{field} is in the future")
-    if age > max_age_hours:
-        raise ValueError(f"{field} is stale")
 
 
 def _chain(value: str | None) -> Chain:

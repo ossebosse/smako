@@ -48,7 +48,7 @@ from grocery_data.app.domain.promotion_pricing import (
 
 from .base import GroceryPriceProvider
 
-_HEALTHY_STATUSES = {"healthy"}
+_HEALTHY_STATUSES = {"healthy", "stale"}
 _REJECTED_STATUSES = {
     "broken",
     "degraded",
@@ -361,25 +361,18 @@ class OwnGroceryPriceProvider(GroceryPriceProvider):
             snapshot_id = _text(row.get("snapshot_id") or row.get("active_snapshot_id"))
             if snapshot_id is None:
                 raise PriceProviderError("Egen prisdata saknar en aktiv promoterad snapshot")
-            if row.get("is_stale") is True:
-                raise PriceProviderError("Egen prisdata är markerad som inaktuell")
-
             reported_age = _optional_float(row.get("data_age_hours"))
             observed_at = _parse_datetime(
                 row.get("observed_at") or row.get("last_success_at") or row.get("promoted_at")
             )
             if reported_age is None and observed_at is None:
                 raise PriceProviderError("Egen prisdata saknar verifierbar observationstid")
-            if reported_age is not None and (reported_age < 0 or reported_age > self.max_age_hours):
-                raise PriceProviderError(f"Egen prisdata är för gammal ({reported_age:.1f} timmar)")
+            if reported_age is not None and reported_age < 0:
+                raise PriceProviderError("Egen prisdata har ogiltig observationsålder")
             if observed_at is not None:
                 age_hours = (now - observed_at).total_seconds() / 3600
                 if age_hours < -1:
                     raise PriceProviderError("Egen prisdata har en observationstid i framtiden")
-                if age_hours > self.max_age_hours:
-                    raise PriceProviderError(
-                        f"Egen prisdata är för gammal ({age_hours:.1f} timmar)"
-                    )
 
     @staticmethod
     def _records(payload: Mapping[str, Any], *keys: str) -> list[Mapping[str, Any]]:
