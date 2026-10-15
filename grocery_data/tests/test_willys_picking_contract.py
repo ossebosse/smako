@@ -164,3 +164,18 @@ def test_independent_artifact_qualifier_also_rejects_unreviewed_context(tmp_path
     )
     with pytest.raises(artifacts.SourceArtifactError, match="context"):
         artifacts._willys_completion(documents)
+
+
+@pytest.mark.parametrize("version", ["willys-parser-v3", "willys-parser-v4", "willys-parser-v5", VERSION, "unknown"])
+def test_queued_reviewed_parser_versions_are_requalified_not_stranded(tmp_path, version):
+    from grocery_data.app.services import source_artifact as artifacts
+    from grocery_data.tests.test_source_artifact import artifact, rewrite_manifest
+
+    original = artifact(tmp_path)
+    queued = tmp_path / "queued.smako-source"
+    rewrite_manifest(original, queued, lambda manifest: manifest.update(parser_version=version))
+    if version == "unknown":
+        with pytest.raises(artifacts.SourceArtifactError, match="validation failed"):
+            artifacts.verify_source_artifact(queued)
+    else:
+        assert artifacts.verify_source_artifact(queued).manifest.row_count == 200
