@@ -1,0 +1,167 @@
+{
+  "implementation_commit": "0f54e51b60a94117d6a22da2db4df5600b898c39",
+  "activated_at": "2026-10-15T07:22:47.436803164Z",
+  "runtimes": {
+    "app": {
+      "image": "sha256:7ccbbfd7fe2f2edec89bd2a8a50fbbf2ff5791ff2ab7891f6ff5f759cd9c376a",
+      "base_image": "sha256:28f2638f27ef31ef66402e5bfb9c178cff11d4648e6c1e6e27cb76a9bf98aacb",
+      "build_id": "base-price-retention-app-0f54e51"
+    },
+    "scheduler": {
+      "image": "sha256:13057faa6cdbdeb67e73345c1f6f2324c7ff084e25796d1f16febb91afa8935e",
+      "base_image": "sha256:a5a55f723eaf3b6b9a81470e8cab64174bf892cb02f6176454b9339baf79a587",
+      "build_id": "base-price-retention-scheduler-0f54e51"
+    }
+  },
+  "packages": {
+    "app": {
+      "sha256": "939e16b82616720a998797097c16bdded7eef1ee8da7d7d737688ccd372614b0",
+      "changed_runtime_files": 25,
+      "unchanged_runtime_files": 658
+    },
+    "scheduler": {
+      "sha256": "bb5f3f0393ce1a2e038b971460f612f1d3791566538f8caada789f90ccce3924",
+      "changed_runtime_files": 26,
+      "unchanged_runtime_files": 604
+    }
+  },
+  "readiness": {
+    "Lund": {
+      "http_status": 200,
+      "build_id": "base-price-retention-app-0f54e51",
+      "base_price_policy": "retain-until-replaced",
+      "usable_context_count": 29,
+      "retained_older_base_context_ids": [
+        "context:willys:383650ec6ff5a636",
+        "context:willys:4a671428fc484e43"
+      ],
+      "price_universe_id": "price-universe:769bcda822901ebc89bc257a70ba93aaa3158ac8cba5dbae71c4207958537b32"
+    },
+    "Malmo": {
+      "http_status": 200,
+      "build_id": "base-price-retention-app-0f54e51",
+      "base_price_policy": "retain-until-replaced",
+      "usable_context_count": 59,
+      "retained_older_base_context_ids": [
+        "context:willys:5adaf178f6561faa",
+        "context:willys:91fc2ae693ecdec6",
+        "context:willys:bbd37ea3cd468706",
+        "context:willys:fc5fbe8cd6399ad8"
+      ],
+      "price_universe_id": "price-universe:7eeb3930d367b65b185e13bf941cd81656d6bc0aa9e78beecda566d48aa90618"
+    }
+  },
+  "postcode_22225": "eligible",
+  "browsers": {
+    "chromium": {
+      "nine_dialogs": true,
+      "independent_optional_meals": true,
+      "widths_without_overflow": [
+        320,
+        390,
+        768,
+        1440
+      ],
+      "errors": []
+    },
+    "webkit": {
+      "nine_dialogs": true,
+      "independent_optional_meals": true,
+      "widths_without_overflow": [
+        320,
+        390,
+        768,
+        1440
+      ],
+      "errors": []
+    }
+  },
+  "static_hashes": {
+    "backend/app/static/app.js": "2470b94bd8ff67a6b7641d350616ed19459b64d68491e5dd8b0597acbcc77dca",
+    "backend/app/static/service-worker.js": "187dc173b1a4b0cf99e61a9d83280f110f35d1c6c3b9f092d760294c7f6609fb"
+  },
+  "personal_plan": {
+    "seconds": 161.5,
+    "meal_types": [
+      "dinner",
+      "breakfast",
+      "snack"
+    ],
+    "checkout_passed": true,
+    "ingredients_checked": 7,
+    "unknown_quantities": 0,
+    "total": 97.76,
+    "totals_reconciled": true,
+    "uses_retained_willys_context": true,
+    "identical_saved_get": true
+  },
+  "public_plan": {
+    "postal_code": "21120",
+    "status": 201,
+    "seconds": 11.625,
+    "acceptance": {
+      "postal_scope_preserved": true,
+      "selected_store_filter": true,
+      "five_dinners_two_servings": true,
+      "ten_total_portions": true,
+      "full_recipes": true,
+      "five_visible_recipe_cards": true,
+      "quantities_rendered": true,
+      "shopping_rows_rendered": true,
+      "max_three_stores": true,
+      "exact_request": true,
+      "memberships_preserved": true,
+      "selected_diversity_preserved": true,
+      "verified_basket": true,
+      "total_reconciled": true,
+      "basket_audit_passed": true,
+      "nutrition_quality_passed": true,
+      "quality_label_visible": true
+    },
+    "identical_reload": true,
+    "page_errors": []
+  },
+  "service_worker": {
+    "status": "pass",
+    "cache_keys": [
+      "billigaste-veckomenyn-shell-v17"
+    ]
+  },
+  "final_runtime": {
+    "at": "2026-10-15T07:36:25.060943+00:00",
+    "build_id": "base-price-retention-0f54e51",
+    "containers": {
+      "smako-app-1": {
+        "image": "sha256:7ccbbfd7fe2f2edec89bd2a8a50fbbf2ff5791ff2ab7891f6ff5f759cd9c376a",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      },
+      "smako-scheduler-1": {
+        "image": "sha256:13057faa6cdbdeb67e73345c1f6f2324c7ff084e25796d1f16febb91afa8935e",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      },
+      "smako-caddy-1": {
+        "image": "sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      }
+    },
+    "prior_state_preserved": {
+      "consumer_plan_revisions": 278,
+      "personal_private_state": 92
+    },
+    "current_rows": {
+      "consumer_plan_revisions": 280,
+      "personal_private_state": 93
+    },
+    "new_oom_events": 0
+  },
+  "price_manifests_preserved_at_activation": true,
+  "shared_operation_lock": true,
+  "backup": "/opt/smako/evidence/base-price-retention-0f54e51/backup-20261015T071523Z",
+  "known_open_issue": "Willys source-28f02640d493c57dc843b0e5 schema hasPickingBaseStore; parser repair not included"
+}

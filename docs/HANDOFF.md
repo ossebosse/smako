@@ -1,18 +1,27 @@
-# 2026-10-15: Basprisretention verifierad lokalt, ej aktiverad
+# 2026-10-15: Basprisretention aktiverad på betan
 
 Gren `fix/base-price-retention`, kodcommit `0f54e51`, bas `bdf0a3a`. Användarens nya policy:
 kvalificerade baspriser behålls tills de ersätts; kampanjer följer slutdatum
 för alla kedjor. 36/48-timmarsvarningar och originaltider bevaras.
 376 riktade testfall med omkörningar, Ruff, compileall och JS-syntax godkända.
-Lokalt återspel av verkliga Lund/Malmö-artefakter återger respektive häver
-åldersspärren för 2/4 Willys-kontexter utan databasändring.
+Lund och Malmö är nu redo: 2/4 äldre Willys-baskontexter är åter användbara,
+utan ändrade observationsdatum eller aktiva prismanifest.
 
-Betan är fortfarande `ui-option3-ff241807809b`; Lund readiness var 503
-06:45 UTC. Willys har dessutom ett öppet schemafel kring
-`hasPickingBaseStore`, som inte repareras genom prisretention.
-Selektiva app-/schedulerpaket är förberedda mot verkliga runtimefiler,
-men inga images är byggda eller aktiverade och inga scheman ändrade.
-[Rapport, belägg och aktiveringsgräns](reports/base-price-retention-20261015.md).
+Efter användarens "Aktivera och commita" driftsattes
+`base-price-retention-app-0f54e51` och `base-price-retention-scheduler-0f54e51`
+07:22:47 UTC. Selektiva patchar mot verkliga runtimebaser; fulla HEAD är inte
+driftsatt. Driftlås, verifierade databasbackuper och radhashkontroll bevarade
+278 befintliga planrevisioner och 92 privata tillstånd.
+22225 fungerar i butikssökningen. Ett verkligt tremåltidsprov använder åter
+Willys, kassakontrollen passerar och sparad GET/omladdning är identisk.
+Chromium och WebKit verifierade. Inga insamlingsscheman ändrades.
+
+Willys har fortfarande ett separat öppet schemafel kring
+`hasPickingBaseStore`; nya Willys-kampanjer kräver en separat parserreparation.
+För driftåtgärder används `scripts/smako_ops.py` mot scheduler; äldre manuella
+ops-profiler ingår inte i aktiveringen.
+[Aktivering, belägg och återgång](releases/base-price-retention-20261015/ACTIVATED.md)
+· [implementation](reports/base-price-retention-20261015.md).
 
 ---
 

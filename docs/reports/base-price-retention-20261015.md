@@ -1,6 +1,8 @@
 # Baspriser behålls, kampanjer följer slutdatum
 
-Status: **lokalt implementerad och verifierad; inte aktiverad på betan**.
+Status: **aktiverad på betan 2026-10-15 efter användarens uttryckliga beslut**.
+Se [aktiveringsrapporten](../releases/base-price-retention-20261015/ACTIVATED.md)
+för driftsatta versioner, efterkontroller och återgång.
 Gren: `fix/base-price-retention`, integrationsbas `bdf0a3a`.
 Implementationscommit: `0f54e51`.
 Användarens instruktion 2026-10-15 ersätter åldersspärren för baspriser,
@@ -52,7 +54,8 @@ omkörningar. Urvalet täcker runtime/readiness, datumgränser, medlemspriser,
 butikssökning, federering, cache, byggen/aktivering, LKG, dashboard,
 kampanjåterförsök och UI-texter. Ruff och compileall för ändrad Python-kod
 samt Node-syntaxkontroll av båda ändrade JavaScript-filerna passerar.
-Ingen fullsvitsgaranti, browser-E2E eller ny produktionsmeny ingår.
+Detta lokala testurval ger ingen fullsvitsgaranti. Efterföljande browserprov
+och produktionskontroller redovisas separat i aktiveringsrapporten.
 
 Läsande hämtade, hashverifierade aktiva artefakter återspelades lokalt med
 klockan 2026-10-15 06:32 UTC:
@@ -67,25 +70,25 @@ lokal verifiering på verklig data, inte ett påstående om aktiverad drift.
 Detaljer, urval, testloggar, incidentbevis och artefakter ligger i den
 ignorerade katalogen `.local/base-price-retention/`.
 
-## Förberedd aktivering
+## Granskade aktiveringspaket
 
 Separata patchpaket är jämförda med **verkliga** aktiva containerfiler:
 25 appfiler och 26 schedulerfiler, inga olösta patchkonflikter.
 Skillnader mellan app och scheduler bevaras, inklusive den senare appens UI
 och medlems-/butiksval. Befintliga CRLF-filer i scheduler normaliserades
 enbart vid patchning; ursprungliga bytehashar finns i manifestet.
-Python-filer i paketen kompilerar lokalt. Dockerbilder har inte byggts eller
-aktiverats, och paketen är inte uppladdade till servern.
+Python-filer i paketen kompilerar lokalt. Efter aktiveringsbeslutet byggdes
+separata Dockerbilder från dessa paket och de pinnade aktiva baserna.
+Hela runtimejämförelsen bekräftade exakt 25 respektive 26 ändrade filer;
+658 appfiler och 604 schedulerfiler förblev byteidentiska.
 
 - Appbas: `sha256:28f2638f27ef…` (full identitet i `app-patch-review.json`).
 - Schedulerbas: `sha256:a5a55f723eaf3b6b9a81470e8cab64174bf892cb02f6176454b9339baf79a587`.
 - `app-candidate.zip`: SHA-256 `939e16b82616720a998797097c16bdded7eef1ee8da7d7d737688ccd372614b0`.
 - `scheduler-candidate.zip`: SHA-256 `bb5f3f0393ce1a2e038b971460f612f1d3791566538f8caada789f90ccce3924`.
 
-Nästa steg kräver separat aktiveringsbeslut enligt AGENTS.md. Kontrollera
-basernas fulla image- och filhashar igen; bygg och verifiera båda bilderna,
-ta befintligt driftlås och backup, aktivera selektivt och kontrollera Lund/
-Malmö readiness, publicerat/laddat manifest, reläkvitto samt meny/audit/
-återläsning. Driftsätt inte hela lokala HEAD och återkör inte historiska
-aktiveringsskript. Willys schemafel ska hanteras som en separat granskad
+Användaren gav aktiveringsbeslutet "Aktivera och commita". Basernas fulla
+image- och filhashar kontrollerades igen. App och scheduler aktiverades
+selektivt under befintligt driftlås efter databasbackup. Hela lokala HEAD
+har inte driftsatts. Willys schemafel ska hanteras som en separat granskad
 parserreparation med negativa prov och versionsbunden replay/insamling.
