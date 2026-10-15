@@ -367,8 +367,8 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         return not (composition and re.search(r"\b(?:salt|socker|vitlök|lök|selleri|senap|soja|mjölk)\b", composition.split("kan innehålla")[0]))
     produce = {
         "potatis": r"(?:potatis|färskpotatis|delikatesspotatis|mandelpotatis|minipotatis)",
-        "tomat": r"(?:tomat|tomater|körsbärstomater|kvisttomater|plommontomater|cocktailtomater|pärltomater)",
-        "vitlök": r"vitlök", "gul lök": r"(?:gul lök|lök gul)", "rödlök": r"(?:rödlök|röd lök)",
+        "tomat": r"(?:tomat|tomater|körsbärstomater|kvisttomater|plommontomater|cocktailtomater|pärltomater)(?: runda(?: import)?| san marzano| babyplommon| cocktail| kumato| cockt)?",
+        "vitlök": r"vitlök", "gul lök": r"(?:gul lök|lök gul)", "rödlök": r"(?:rödlök|röd lök|lök röd)",
         "gurka": r"gurka", "morot": r"(?:morot|morötter)", "zucchini": r"(?:zucchini|squash)",
         "aubergine": r"aubergine", "paprika": r"paprika", "vitkål": r"vitkål", "broccoli": r"broccoli",
         "blomkål": r"blomkål", "champinjoner": r"champinjoner", "selleri": r"(?:selleri|stjälkselleri|blekselleri|bladselleri)",
@@ -411,7 +411,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
     staples = {
         "fetaost": r"fetaost(?: block| original| laktosfri| eko| ekologisk| \d+%)*",
         "ost": r"(?:ost|hårdost|hushållsost|prästost|herrgårdsost|grevé|parmesan|parmigiano reggiano)(?: lagrad| mild| mellanlagrad| riven| skivad| eko| ekologisk| \d+%)*",
-        "crème fraiche": r"(?:lätt )?crème fraiche(?: laktosfri| eko| ekologisk| \d+%)*",
+        "crème fraiche": r"(?:(?:lätt|laktosfri|naturell) )*cr[èée]me fra[iî]che(?: lätt| naturell| laktosfri| eko| ekologisk| \d+(?:[,.]\d+)?\s*%)*",
         "rapsolja": r"rapsolja(?: kallpressad| eko| ekologisk| d-vitaminberikad)*",
         "citronjuice": r"citronjuice(?: eko| ekologisk| från koncentrat)*",
         "limejuice": r"limejuice(?: eko| ekologisk| från koncentrat)*",
@@ -420,7 +420,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         "kokosmjölk": r"kokosmjölk(?: eko| ekologisk| original)*",
         "sesamfrön": r"sesamfrön(?: vita| skalade| oskalade| eko| ekologiska| burk)*",
         "senap": r"(?:dijon )?senap(?: dijon| stark| mild| grov| skånsk| sötstark| finmalen)*",
-        "kapris": r"kapris(?: små| fina| fin| i lag)*", "oliver": r"(?:gröna |svarta )?oliver(?: utan kärnor| urkärnade| kalamata| gröna| svarta| eko| ekologiska)*",
+        "kapris": r"kapris(?: små| fina| fin| i lag)*", "oliver": r"(?:(?:gröna|svarta|kalamata|halkidiki) )?oliver(?: utan kärnor| urkärnade| kalamata| halkidiki| gröna| svarta| eko| ekologiska)*",
         "salt": r"(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*",
         "mjölk": r"(?:standardmjölk|mellanmjölk|lättmjölk|mjölk)(?: laktosfri| ekologisk| eko| \d+(?:[,.]\d+)?\s*%)*",
     }
@@ -473,6 +473,14 @@ def plain_juice_composition(canonical, composition):
     source = composition.casefold()
     source = re.sub(rf"\({fruit}: (?:eu \()?[^()]+\)?\)", "", source)
     source = re.split(r"\*+krav-ekologisk ingrediens\.", source)[0]
+    # The fruit's own peel oil in a >=99% juice is a declared citrus component.
+    # Remove only this exact phrase; generic oils/flavours remain disallowed.
+    peel_oil = f"eterisk olja (från {fruit}skal)"
+    if peel_oil in source:
+        fraction = re.search(r"juice\s*\(?\s*(\d+(?:[,.]\d+)?)\s*%", source)
+        if fraction is None or float(fraction[1].replace(',', '.')) < 99:
+            return False
+        source = source.replace(peel_oil, "")
     words, declared = _culinary_words(source)
     allowed = {canonical, "ingredienser", "juice", "från", "koncentrat", "framställd", "framställt", "av", "vatten",
                "antioxidationsmedel", "konserveringsmedel", "kaliummetabisulfit", "kaliumdisulfit", "svaveldioxid",

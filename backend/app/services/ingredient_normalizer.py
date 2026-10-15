@@ -124,7 +124,7 @@ CANONICAL_ALIASES: dict[str, tuple[str, ...]] = {
     "couscous": ("couscous",),
     "nudlar": ("nudel", "nudlar", "äggnudlar", "aggnudlar"),
     "gul lök": ("gul lök", "gul lok", "matlök", "matlok", "lök", "lok"),
-    "rödlök": ("rödlök", "rodlok", "röd lök", "rod lok"),
+    "rödlök": ("rödlök", "rodlok", "röd lök", "rod lok", "lök röd", "lok rod"),
     "morot": ("morot", "morötter", "morotter"),
     "tomat": ("tomat", "tomater", "färska tomater", "farska tomater"),
     "paprika": ("paprika", "paprikor"),

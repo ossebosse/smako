@@ -108,9 +108,10 @@ def _supplement_named_catalog_facts(products, original):
     """
     from dataclasses import replace
 
+    from grocery_data.app.domain.identifiers import InvalidGtinError
     from grocery_data.app.services.product_declarations import declarations
 
-    rows = [r for r in declarations() if r.get("parser") == "gogreen-linked-product-declaration-v1"
+    rows = [r for r in declarations() if r.get("parser") in {"gogreen-linked-product-declaration-v1", "zeinas-explicit-juice-declaration-v1"}
             or (r.get("parser") == "garant-explicit-gs1-declaration-v1"
                 and r.get("binding_requirement") == "unique_exact_complete_brand_variant_fixed_pack")]
     image_bound_rows = [r for r in declarations()
@@ -119,7 +120,7 @@ def _supplement_named_catalog_facts(products, original):
     for p in products:
         prov = p.source_provenance
         if (not prov or not prov.source_snapshot_id or p.sale_model != "fixed_package"
-                or not p.package_quantity or p.package_unit != "g"
+                or not p.package_quantity or p.package_unit not in {"g", "ml"}
                 or (p.purchase_terms and p.purchase_terms.identity_scope != "product")):
             continue
         key = (p.store_id, p.product_id)
@@ -133,8 +134,11 @@ def _supplement_named_catalog_facts(products, original):
                      and source.get("product_id") == p.product_id and source.get("gtin")]
             if len(valid) == 1 and (not p.gtin or p.gtin.zfill(14) == valid[0]["gtin"].zfill(14)):
                 image_source = valid[0]
-                row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit,
-                                        gtin=image_source["gtin"], rows=image_bound_rows)
+                try:
+                    row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit,
+                                            gtin=image_source["gtin"], rows=image_bound_rows)
+                except InvalidGtinError:
+                    continue
         if row is None:
             continue
         prior = prior or ProductFacts(source="verified_supplier_catalog_supplement",
@@ -210,6 +214,58 @@ def _supplement_culinary_attributes(products, original):
     return result
 
 
+def _retained_supplier_identity(product, fact):
+    """A retained Axfood image key corroborates identity, never price or mass.
+
+    Keep the original label/brand/display quantity bound to the same snapshot.
+    Package compatibility is checked independently against the supplier below.
+    """
+    prov = product.source_provenance
+    if (not fact or not prov or product.chain not in {"willys", "hemkop"}
+            or prov.source_provider != 'own' or prov.source_channel != 'catalog'
+            or prov.store_id != product.store_id
+            or product.sale_model != "fixed_package"
+            or fact.source_product_id != product.product_id
+            or fact.source_snapshot_id != prov.source_snapshot_id):
+        return None
+    sources = fact.field_sources.get("retailer_image_gtin", ())
+    if len(sources) != 1:
+        return None
+    source = sources[0]
+    raw = source.get("raw_fields", {})
+    if (source.get("method") != "checksum_valid_exact_retained_product_image_key"
+            or source.get("source") != fact.source
+            or source.get("product_id") != product.product_id
+            or source.get("snapshot_id") != prov.source_snapshot_id
+            or raw.get("name") != product.name or raw.get("manufacturer") != product.brand):
+        return None
+    return source
+
+
+def _supplier_package_matches(product, row, image_source):
+    exact_package = (row['package_quantity'], row['package_unit']) == (product.package_quantity, product.package_unit)
+    if not image_source:
+        return exact_package
+    label = image_source.get('raw_fields', {}).get('displayVolume')
+    amount = re.fullmatch(r'(\d+(?:[.,]\d+)?)\s*(kg|g|ml|cl|dl|l)', label or '')
+    if amount:
+        factor, unit = {'kg': (1000, 'g'), 'g': (1, 'g'), 'ml': (1, 'ml'),
+                        'cl': (10, 'ml'), 'dl': (100, 'ml'), 'l': (1000, 'ml')}[amount[2]]
+        return (exact_package and unit == product.package_unit
+                and float(amount[1].replace(',', '.')) * factor == product.package_quantity)
+    # Existing Axfood rows project 380/230g to the stated 230g. Recover the
+    # supplier link only when BOTH printed quantities agree with that exact
+    # supplier's net and drained masses. Never interpret a slash alone as proof.
+    if row['comparison_basis'] != 'Per avrunnen vikt':
+        return False
+    match = re.fullmatch(r'(\d+(?:[.,]\d+)?)/(\d+(?:[.,]\d+)?)\s*g', label or '')
+    return bool(match and row['package_unit'] == row['net_unit'] == row['comparison_unit'] == product.package_unit == 'g'
+                and float(match[1].replace(',', '.')) == row['package_quantity'] == row['net_quantity']
+                and float(match[2].replace(',', '.')) == row['comparison_quantity']
+                and product.package_quantity in {row['package_quantity'], row['comparison_quantity']}
+                and 0 < row['comparison_quantity'] < row['net_quantity'])
+
+
 def supplement_catalog_facts(products, original):
     """Exact-GTIN supplier fields, retaining every conflicting declaration.
 
@@ -225,19 +281,25 @@ def supplement_catalog_facts(products, original):
     rows = [r for r in declarations() if r.get("parser") in {"dabas-consumer-quantity-v1", "dabas-base-quantity-v2"}]
     result = _supplement_culinary_attributes(products, _supplement_named_catalog_facts(products, original))
     for p in products:
-        if not p.gtin or not p.source_provenance or (p.purchase_terms and p.purchase_terms.identity_scope != "product"):
+        if not p.source_provenance or (p.purchase_terms and p.purchase_terms.identity_scope != "product"):
+            continue
+        key = (p.store_id, p.product_id)
+        image_source = _retained_supplier_identity(p, result.get(key))
+        identity = p.gtin or (image_source or {}).get('gtin')
+        if not identity:
             continue
         try:
-            gtin = normalize_gtin(p.gtin).normalized_gtin
+            gtin = normalize_gtin(identity).normalized_gtin
+            if image_source and normalize_gtin(image_source['gtin']).normalized_gtin != gtin:
+                continue
         except InvalidGtinError:
             continue
         matches = [r for r in rows if r['gtin'].zfill(14) == gtin.zfill(14)
                    and identity_text(r['brand']) == identity_text(p.brand or '')
-                   and (r['package_quantity'], r['package_unit']) == (p.package_quantity, p.package_unit)]
+                   and _supplier_package_matches(p, r, image_source)]
         if len(matches) != 1:
             continue
         row = matches[0]
-        key = (p.store_id, p.product_id)
         prior = result.get(key) or ProductFacts(source='verified_supplier_catalog_supplement',
             source_product_id=p.product_id, source_snapshot_id=p.source_provenance.source_snapshot_id)
         source = {**row['source'], 'source': row['source']['url'], 'gtin': gtin, 'document_version': row['document_version'],
@@ -247,6 +309,10 @@ def supplement_catalog_facts(products, original):
                   'bound_product_id': p.product_id, 'bound_store_id': p.store_id,
                   'bound_snapshot_id': p.source_provenance.source_snapshot_id,
                   'source_package_quantity': p.package_quantity, 'source_package_unit': p.package_unit}
+        if image_source:
+            source['retailer_image_identity'] = image_source
+            source['supplier_package_quantity'] = row['package_quantity']
+            source['supplier_package_unit'] = row['package_unit']
         fields = dict(prior.field_sources)
         fields['supplier_declaration'] = (*fields.get('supplier_declaration', ()), source)
         changes = {}

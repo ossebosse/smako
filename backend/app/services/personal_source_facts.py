@@ -22,7 +22,7 @@ from threading import RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v9-ready-baked-bread"
+FACTS_VERSION = "retained-catalog-facts-v10-supplier-package-link"
 _CACHE = {}
 _LOCK = RLock()
 
@@ -32,7 +32,8 @@ def _supplier_image_gtins():
     from grocery_data.app.services.product_declarations import declarations
 
     return frozenset(row["gtin"].zfill(14) for row in declarations()
-                     if row.get("parser") == "supplier-validoo-exact-gtin-v1"
+                     if row.get("parser") in {"supplier-validoo-exact-gtin-v1",
+                                              "dabas-consumer-quantity-v1", "dabas-base-quantity-v2"}
                      and row.get("gtin"))
 
 
@@ -354,6 +355,8 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
                     image_identity = {
                         **evidence, "gtin": gtin,
                         "image_url": url, "method": "checksum_valid_exact_retained_product_image_key",
+                        "raw_fields": {key: raw.get(key) for key in
+                                       ("name", "manufacturer", "displayVolume")},
                     }
             except InvalidGtinError:
                 pass

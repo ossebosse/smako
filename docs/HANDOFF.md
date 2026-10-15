@@ -1,3 +1,23 @@
+# 2026-10-15: Receptens varukopplingar – lokalt rättade, inte aktiverade
+
+Gren `fix/recipe-product-links`, bas `37cd882`. Användarens urval är alla
+butiker inom 3 km från 22225. Saknade länkar mellan sparade Axfoodprodukter
+och leverantörsdeklarationer rättas med exakt identitets- och mängdbindning.
+Fullständiga livsmedelsnamn kompletteras och Zeinas citronjuice får en
+källverifierad deklaration. Faktaversionen är
+`retained-catalog-facts-v10-supplier-package-link`.
+
+Alla sex felande ingredienser i skärmbilderna löses med Willys Lund inom
+radien. Ett helt visat recept med 14 ingredienser passerar lokal planering,
+kassakontroll och sparning/återläsning. 500 olika riktade testfall, Ruff och
+compileall passerar. Näring per ml för citronjuice har inte antagits från
+tillverkarens uppgifter per gram; sådana krav behöver fortfarande underlag.
+Ingen produktion, scheduler, prisinsamling eller användarprofil har ändrats.
+
+[Orsak, verifiering och avgränsningar](../reports/recipe-product-links-20261015.md).
+
+---
+
 # 2026-10-15: Stortorgets kampanjregister – följdrättning aktiverad
 
 Gren `fix/willys-flyer-retained-inventory`, kodcommit `ad285c415df4`.

@@ -424,6 +424,58 @@ def parse_fontana_corroboration(body, acquisition, identity_row):
             "parser": "fontana-labelled-corroboration-v1"}
 
 
+def parse_zeinas_juice(body, acquisition):
+    """Read one manufacturer's complete juice variant; retain the stated unit.
+
+    The page gives a volume pack and nutrients per gram. It supplies no density,
+    GTIN or per-volume nutrient table, so none is synthesized.
+    """
+    url = acquisition.get('url')
+    if (url != 'https://zeinas.se/produkter/citronjuice/'
+            or acquisition.get('status') != 200 or not acquisition.get('observed_at')
+            or hashlib.sha256(body).hexdigest() != acquisition.get('sha256')):
+        raise ValueError('unverified_zeinas_source')
+    soup = BeautifulSoup(body, 'html.parser')
+    titles = soup.select('h1.product_title')
+    descriptions = soup.select('.woocommerce-product-details__short-description')
+    panels = soup.select('#tab-description')
+    if len(titles) != 1 or len(descriptions) != 1 or len(panels) != 1:
+        raise ValueError('ambiguous_zeinas_product')
+    name = titles[0].get_text(' ', strip=True)
+    description = descriptions[0].get_text(' ', strip=True)
+    packs = re.findall(r'FÖRPACKNINGSSTORLEK:\s*(\d+)\s*ML\b', description)
+    if name != 'Citronjuice' or 'Zeinas Citronjuice' not in description or len(packs) != 1:
+        raise ValueError('unqualified_zeinas_identity')
+    headings = panels[0].select('h3')
+    ingredients = [h.find_next_sibling('p') for h in headings if h.get_text(strip=True) == 'INGREDIENSER:']
+    nutrients = [h.find_next_sibling('table') for h in headings if h.get_text(strip=True) == 'NÄRINGSVÄRDE PER 100G:']
+    if len(ingredients) != 1 or ingredients[0] is None or len(nutrients) != 1 or nutrients[0] is None:
+        raise ValueError('unqualified_zeinas_declaration')
+    values = {}
+    keys = {'Energi': ('kcal', r'\d+(?:[,.]\d+)? kJ / (\d+(?:[,.]\d+)?) kcal'),
+            'Fett': ('fat_g', r'(\d+(?:[,.]\d+)?) g'),
+            'Kolhydrat': ('carbs_g', r'(\d+(?:[,.]\d+)?) g'),
+            'Protein': ('protein_g', r'(\d+(?:[,.]\d+)?) g')}
+    for tr in nutrients[0].select('tr'):
+        cells = [c.get_text(' ', strip=True) for c in tr.select('td')]
+        if len(cells) != 2 or cells[0] not in keys:
+            continue
+        key, pattern = keys[cells[0]]
+        match = re.fullmatch(pattern, cells[1])
+        if not match or key in values:
+            raise ValueError('unqualified_zeinas_nutrient')
+        values[key] = float(match[1].replace(',', '.'))
+    if set(values) != {v[0] for v in keys.values()}:
+        raise ValueError('missing_zeinas_nutrient')
+    return {'name': name, 'brand': 'Zeinas', 'gtin': None,
+            'package_quantity': float(packs[0]), 'package_unit': 'ml',
+            'ingredients': ingredients[0].get_text(' ', strip=True),
+            'nutrition': values, 'basis_unit': 'g', 'basis_quantity': 100,
+            'source': dict(acquisition), 'identity_source': dict(acquisition),
+            'binding_requirement': 'unique_exact_complete_brand_variant_fixed_pack',
+            'parser': 'zeinas-explicit-juice-declaration-v1'}
+
+
 def declarations():
     return json.loads(PATH.read_bytes())["declarations"] if PATH.exists() else []
 

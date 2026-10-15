@@ -430,7 +430,7 @@ _RULES: dict[str, IngredientSemanticRule] = {
     "rödlök": _raw_produce_rule(
         canonical_food="red_onion",
         food_family="allium",
-        identity_terms=("rödlök", "rodlok", "röd lök", "rod lok", "red onion"),
+        identity_terms=("rödlök", "rodlok", "röd lök", "rod lok", "lök röd", "lok rod", "red onion"),
     ),
     "morot": _raw_produce_rule(
         canonical_food="carrot",
@@ -1304,6 +1304,8 @@ def _infer_primary_product_identity(
     # key (e.g. rodbeta_klass_1). The complete label AND fresh-produce category
     # establish the actual food; no juice, pickle, puree or flavoured composite.
     if any(t in category_text for t in ('frukt', 'gronsak', 'gront', 'rotsak', 'potatis', 'aubergine', 'zucchini')):
+        if re.fullmatch(r'(?:rodlok|rod lok|lok rod)(?: klass 1| eko| ekologisk| svensk| sverige| i pase)*', name_text):
+            return 'red_onion', 'allium', 'whole_vegetable', 'fresh'
         for pattern, food in (
             (r'rodbet(?:a|or)', 'beetroot'), (r'sotpotatis', 'sweet_potato'),
             (r'aubergine', 'aubergine'), (r'(?:zucchini|squash)', 'zucchini'),
@@ -1443,6 +1445,7 @@ def has_semantic_rule(canonical_name: str) -> bool:
 # from the historical dinner taxonomy. They cannot match a flavour inside a
 # cheese/chip/ready meal. Recipe input-form guards remain independently binding.
 _CULINARY_LABELS = {
+    "salt": (r"(?:salt|hushallssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*", "salt"),
     "svartpeppar": (r"svartpeppar", "single_spice"),
     "rökt paprikapulver": (r"(?:rokt paprikapulver|paprikapulver rokt)", "single_spice"),
     "malen koriander": (r"(?:malen koriander|koriander malen)", "single_spice"),
@@ -1469,6 +1472,8 @@ def _culinary_label_match(canonical, product):
     descriptors = r"(?:malen|mald|eko|ekologisk|ekologiska|burk|pase|tetra|hel|hela|torkad|krus|blad|knippe|kruka|i kruka|i ask|fryst|frysta|finhackad|farsk|vita|skalade|oskalade|klass 1)"
     if canonical == 'jordnötssmör':
         descriptors = r'(?:crunchy|smooth|creamy|crunch|super chunk|eko|ekologiskt|ekologisk)'
+    if canonical == 'salt':
+        descriptors = r'(?:fint|finkornigt)'
     compatible = bool(re.fullmatch(rf"(?:{descriptors} )*{identity}(?: {descriptors})*", label))
     return SemanticMatchResult(
         compatible=compatible,
