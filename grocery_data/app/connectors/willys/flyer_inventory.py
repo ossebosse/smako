@@ -1,4 +1,5 @@
 """Physical flyer selection alongside, without changing, online selection."""
+from copy import deepcopy
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -45,7 +46,22 @@ def approved_flyer_stores(inventory):
     if inventory.get('schema') != 'willys-flyer-municipal-v1':
         raise ValueError('unsupported Willys flyer inventory')
     rebuilt = build_inventory(GeographicArea.model_validate(inventory['area']), inventory['registry'], inventory['boundary'])
-    if rebuilt != inventory:
+    # Parser v6 preserves the verified explicit-false picking flag in derived
+    # metadata. Earlier inventories retained the same original register but
+    # omitted that metadata key. Revalidate the raw register with today's
+    # strict parser, then compare its legacy projection without changing the
+    # saved evidence or ignoring any identity/geographic/selection difference.
+    comparison = deepcopy(rebuilt)
+    if len(comparison['stores']) == len(inventory['stores']):
+        for previous, current in zip(inventory['stores'], comparison['stores'], strict=True):
+            old_fields = previous['store']['source_fields']
+            fields = current['store']['source_fields']
+            if 'hasPickingBaseStore' in old_fields:
+                if old_fields['hasPickingBaseStore'] is not False:
+                    raise ValueError('unreviewed retained picking metadata')
+            elif fields.get('hasPickingBaseStore') is False:
+                del fields['hasPickingBaseStore']
+    if comparison != inventory:
         raise ValueError('flyer inventory differs from official evidence')
     return {r['store']['external_id']: SourceStore.model_validate(r['store'])
             for r in rebuilt['stores'] if r['collection_selected']}
