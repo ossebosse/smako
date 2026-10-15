@@ -1,3 +1,21 @@
+# 2026-10-15: Basprisretention verifierad lokalt, ej aktiverad
+
+Gren `fix/base-price-retention`, kodcommit `0f54e51`, bas `bdf0a3a`. Användarens nya policy:
+kvalificerade baspriser behålls tills de ersätts; kampanjer följer slutdatum
+för alla kedjor. 36/48-timmarsvarningar och originaltider bevaras.
+376 riktade testfall med omkörningar, Ruff, compileall och JS-syntax godkända.
+Lokalt återspel av verkliga Lund/Malmö-artefakter återger respektive häver
+åldersspärren för 2/4 Willys-kontexter utan databasändring.
+
+Betan är fortfarande `ui-option3-ff241807809b`; Lund readiness var 503
+06:45 UTC. Willys har dessutom ett öppet schemafel kring
+`hasPickingBaseStore`, som inte repareras genom prisretention.
+Selektiva app-/schedulerpaket är förberedda mot verkliga runtimefiler,
+men inga images är byggda eller aktiverade och inga scheman ändrade.
+[Rapport, belägg och aktiveringsgräns](reports/base-price-retention-20261015.md).
+
+---
+
 # 2026-10-14: ICA-rättningar integrerade i det ordinarie Git-repot
 
 Permanent projektrot är `D:\Projects\Smako`, remote

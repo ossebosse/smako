@@ -1,5 +1,20 @@
 # Gemensam driftstatus och avgränsad reparation
 
+## Prispolicy från 2026-10-15
+
+Kvalificerade baspriser behålls tills en validerad ersättning finns, för alla
+kedjor och kommuner. Ålder 36/48 timmar är fortsatt en driftvarning och grund
+för återförsök, men spärrar inte i sig butikssökning, beräkning eller publicering.
+Kampanjer gäller enbart inom sina källbelagda datum, inklusive sista dagen i
+Europe/Stockholm. Vid utgång används produktens baspris om det finns; annars
+utesluts erbjudandet. Ordinarie kampanjhämtning och dess återförsök fortsätter.
+Rabatter utan slutdatum får inte ärva basprisernas obegränsade giltighet: deras
+tidigare 48-timmarsgräns behålls konservativt på inköpsdagsnivå.
+Alla källtider, identitetskontroller, kvalitetskrav och insamlingsfel bevaras.
+`base_prices_usable` skiljs från `freshness`; STALE betyder inte raderad data.
+Se [implementation och verifiering](reports/base-price-retention-20261015.md)
+för aktuell aktiveringsstatus.
+
 Kör i `D:\Projects\Smako`. Kräver befintlig SSH-administratörsåtkomst till
 `smako`; ingen publik diagnostikendpoint, ny notifieringstjänst eller timer.
 
@@ -124,7 +139,7 @@ vägrar om källan, incidenten eller runtime ändrats. Exakta argument finns i:
 
 Välj `--action replay` för färska sparade schemafel efter verifierat ändrad
 parser, `retry` för understött avgränsat Hemköp-kontextförsök eller `publish`
-när samtliga obligatoriska källor är kvalificerade och färska. Ingen generell
+när samtliga obligatoriska baskällor är kvalificerade och användbara. Ingen generell
 retry-adapter fabriceras för andra kedjor: deras befintliga driftjobb används.
 Resultatet journalförs; samma incident/snapshot/åtgärd/runtime startas högst en
 gång. Ett avbrott med kvarstående running-post ska granskas mot verkligt jobb,
@@ -146,7 +161,7 @@ Hemköp-/Coop-adaptrarna tills granskad reparation/återhämtning. Andra tillåt
 butiker i samma kedja bevaras. Fysiska erbjudandefel blockerar inte onlinebasen.
 Övriga adaptrar behåller sina befintliga återförsök och tydlig incidentrapport;
 inget nytt generellt hämtkontrakt antas. Ett hold är aldrig ett
-färskhetsgodkännande; 36/48 timmar gäller.
+färskhetsgodkännande; åldersvarningarna vid 36/48 timmar gäller fortfarande.
 
 Efter varje åtgärd: status → alla fem verkliga observationer → samma aktiva och
 laddade manifest → `/ready` → beständigt reläkvitto → publik/personlig meny,

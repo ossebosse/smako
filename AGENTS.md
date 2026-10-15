@@ -55,6 +55,11 @@
   lock. Never overlap a full refresh, source retry, backup or activation.
 - Do not weaken freshness or quality gates to make status green. The default
   source states are FRESH under 36 h, AGING from 36 h, and STALE at 48 h.
+  Per the user's 2026-10-15 price policy, these are observation-age warnings,
+  not expiry dates for qualified ordinary prices. Retain base prices until a
+  validated replacement; apply each campaign's actual validity dates for every
+  chain. Missing/invalid provenance, source qualification and identity gates
+  remain mandatory. Never renew timestamps when retaining prices.
 - Never log, document or commit secrets, retailer credentials, raw receipt
   contents, cookies or browser/session identity. Do not implement challenge
   bypasses or undocumented retailer login automation.
