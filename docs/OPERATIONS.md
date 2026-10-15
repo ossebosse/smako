@@ -88,6 +88,15 @@ accepterar endast belagd explicit false, bevarar saknat fält och stoppar true,
 null eller fel typ. Kampanjkonflikten är källevidens, inte ett trasigt
 medlemspris-ID. Två stabilt återgivna skilda erbjudanden tillåts redan.
 
+Willys har sedan 2026-10-15 en separat verifierad motsvarighet:
+`willys-parser-v6-picking-contract` granskar exakt butik och explicit false i
+både butikskatalog och aktiv butikskontext. Serverns parserrättning är aktiv;
+installerat Windows-paket och faktisk schemaversion redovisas separat i
+[aktiveringsrapporten](releases/willys-picking-20261015/ACTIVATED.md).
+Gamla godkända v3/v4/v5-paket kan omkvalificeras utan nya observationstider.
+Använd ordinarie reläåterleverans för ett komplett väntande paket så att även
+kommunal inventering och slutligt publiceringskvitto följer med.
+
 ## Aktuellt incidentindex och varningar
 
 Befintlig `run_daily_refresh.py` uppdaterar under operationslåset

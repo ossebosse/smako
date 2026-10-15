@@ -1,3 +1,26 @@
+# 2026-10-15: Willys parserrättning aktiverad på servern
+
+Gren `fix/willys-picking-contract`, kodcommits `98eadc2b114c` och
+`5b344ca3b50e`. `willys-parser-v6-picking-contract` accepterar det belagda
+`hasPickingBaseStore: false` med strikt butiksbindning i transport, parser och
+oberoende artefaktkontroll. Tidigare godkända v3/v4/v5-paket kan omkvalificeras.
+145 riktade testfall, Ruff, compileall och autentiskt paket med 19 294 prisrader
+har verifierats. Basprisretention och kampanjdatum bevaras.
+
+Scheduler `willys-picking-scheduler-5b344ca3b50e` är aktiv sedan 08:07:12 UTC.
+Lunds 19 294 prisrader återlevererades genom ordinarie relä; publicering,
+laddning och kvitto klara 08:36:37 UTC. Alla fem baskontexter är FRESH och
+laddade. 22225 fungerar, ny tremåltidsplan använder Willys, audit och sparad
+GET/omladdning passerar. Malmömeny och readiness i båda kommuner verifierade.
+280 tidigare planrevisioner och 93 privata tillstånd hashverifierat bevarade.
+Appen är oförändrad. Windows-paketet är installerat och verifierat, men
+schemauppgiften använder ännu `7b7fe72472dd`: administratörsdialogen avbröts.
+Ändra inte pågående Malmö-insamling eller schemat för att byta paket.
+
+[Aktiveringsstatus, återhämtning och återgång](releases/willys-picking-20261015/ACTIVATED.md).
+
+---
+
 # 2026-10-15: Basprisretention aktiverad på betan
 
 Gren `fix/base-price-retention`, kodcommit `0f54e51`, bas `bdf0a3a`. Användarens nya policy:
@@ -16,8 +39,8 @@ driftsatt. Driftlås, verifierade databasbackuper och radhashkontroll bevarade
 Willys, kassakontrollen passerar och sparad GET/omladdning är identisk.
 Chromium och WebKit verifierade. Inga insamlingsscheman ändrades.
 
-Willys har fortfarande ett separat öppet schemafel kring
-`hasPickingBaseStore`; nya Willys-kampanjer kräver en separat parserreparation.
+Vid denna aktivering återstod ett separat Willys-schemafel kring
+`hasPickingBaseStore`; den efterföljande parserrättningen redovisas ovan.
 För driftåtgärder används `scripts/smako_ops.py` mot scheduler; äldre manuella
 ops-profiler ingår inte i aktiveringen.
 [Aktivering, belägg och återgång](releases/base-price-retention-20261015/ACTIVATED.md)
