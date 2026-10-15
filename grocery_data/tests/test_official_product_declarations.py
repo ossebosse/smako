@@ -27,6 +27,27 @@ def test_saved_official_documents_reproduce_registered_declarations():
         assert result in declarations()
 
 
+@pytest.mark.parametrize('basis', ['g', 'ml'])
+def test_garant_explicit_nutrition_basis_is_preserved_without_density(basis):
+    # Minimal offline parser fixture, not an independently acquired source.
+    body = ('''<meta name="description" content="Kokosmjölk. 250 ml.">
+        <script type="application/ld+json">{"itemOffered": {
+          "gtin":{"value":{"@value":"7311043017881"}},
+          "productName":[{"@value":"KOKOSMJÖLK 17-18%","@language":"sv"}],
+          "brand":{"brandName":[{"@value":"GARANT","@language":"sv"}]}}}</script>
+        <div id="ingredients-content">Kokosextrakt 53%, vatten.</div>
+        <div id="nutrition-content">(per 100 BASIS) Energi 711 kJ/ 172 kcal
+          Fett 17 g Kolhydrat 2.5 g Protein 1.8 g</div>'''.replace('BASIS', basis)).encode()
+    acquisition = {'url':'https://www.garantskafferiet.se/vara-produkter/test/', 'status':200,
+                   'observed_at':'2026-10-15T15:00:00Z', 'sha256':hashlib.sha256(body).hexdigest()}
+    parsed = parse_garant(body, acquisition)
+    assert parsed['basis_unit'] == basis and parsed['package_unit'] == 'ml'
+    assert parsed['nutrition']['protein_g'] == 1.8
+    bad = body.replace(b'(per 100 ' + basis.encode() + b')', b'(per 100 g) (per 100 ml)')
+    with pytest.raises(ValueError, match='basis'):
+        parse_garant(bad, {**acquisition, 'sha256':hashlib.sha256(bad).hexdigest()})
+
+
 @pytest.mark.parametrize("index", [0, 1])
 def test_complete_identity_pack_and_gtin_are_independently_required(index):
     r = declarations()[index]

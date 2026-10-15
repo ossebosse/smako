@@ -16,7 +16,7 @@ from pathlib import Path
 
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 
-POLICY_VERSION = "slv-component-input-v4"
+POLICY_VERSION = "slv-component-input-v5-nordic-density"
 PATH = Path(__file__).parents[1] / "data/nutrition/slv-20260911.json"
 SUPPLEMENT_PATH = PATH.with_name('slv-20260924.json')
 APPLE_SUPPLEMENT_PATH = PATH.with_name('slv-20261005-apple.json')
@@ -150,6 +150,8 @@ def reference_data():
         macro_values(entry["nutrients"])
     mapping = json.dumps([MAPPINGS, COOKED, FRIED, MACROS], sort_keys=True).encode()
     data["assembly_review"] = json.loads(ASSEMBLY_PATH.read_bytes())
+    for filename in ('nordic-20261015.json', 'dtu-density-20261015.json'):
+        data[filename] = json.loads(PATH.with_name(filename).read_bytes())
     from app.services.reviewed_warm_meals import SOURCES, TEMPLATES, VERSION
 
     data["warm_review"] = {"version": VERSION, "templates": TEMPLATES, "sources": SOURCES}
@@ -359,7 +361,7 @@ def product_reference(product, name, facts):
             if fresh and re.fullmatch(r"(?:ekologisk |svensk )?(?:färskpotatis|delikatesspotatis|mandelpotatis|minipotatis|potatis)(?: (?:fast|mjölig|tvättad|eko|ekologisk|ekologiska|klass 1|sverige|svensk|i påse|[\d,.]+\s*(?:g|kg)))*", text):
                 return 4457
             return None
-        if fresh and re.fullmatch(r"(?:ekologisk |färsk )?vitlök(?: (?:hackad|krossad|finhackad|skalad|eko|ekologisk|i kapsel|[\d,.]+\s*g))*", text):
+        if fresh and re.fullmatch(r"(?:ekologisk |färsk )?vitlök(?: (?:hackad|krossad|finhackad|skalad|eko|ekologisk|klass 1|i kapsel|[\d,.]+\s*g))*", text):
             return 371
         return None
     if canonical == 'ägg' and re.match(r'^(?:ägg|skåneägg|bruna ägg)\b', text):
@@ -368,7 +370,7 @@ def product_reference(product, name, facts):
     if canonical == "rödlök":
         # A distinct plain fresh food, never yellow onion or a pickled/flavoured
         # product. The existing SLV record was retained but never mapped here.
-        return 4947 if re.fullmatch(r"(?:rödlök|röd lök)(?: eko| ekologisk| ekologiska)?", text.strip()) and not composition else None
+        return 4947 if re.fullmatch(r"(?:rödlök|röd lök|lök röd)(?: eko| ekologisk| ekologiska| klass 1| i påse)*", text.strip()) and not composition else None
     # Edition/retailer-independent identities of plain foods. These are generic
     # measured edible-input references, never product declarations or density
     # estimates. Unknown mint species, oil blends, seasoning and cooked forms
@@ -421,6 +423,11 @@ def product_reference(product, name, facts):
             else None
         )
     if canonical == "krossade tomater":
+        # Complete plain catalog labels identify canned tomatoes with liquid;
+        # this is only a generic reference, never ingredient/allergen proof.
+        if (re.fullmatch(r'(?:krossade tomater|tomater krossade)(?: eko| ekologiska| finkrossade)*', text.strip())
+                and not composition and re.search(r'skafferi|konserv', (product.category or '').casefold())):
+            return 422
         return (
             422
             if (

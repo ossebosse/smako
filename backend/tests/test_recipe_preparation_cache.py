@@ -19,9 +19,9 @@ from backend.tests.test_personal_qualified_facts import facts
 from backend.tests.test_recipe_preparation import fact, original
 
 
-def test_all_152_authored_recipes_reuse_validation_with_identical_input_evidence():
+def test_all_authored_recipes_reuse_validation_with_identical_input_evidence():
     recipes = candidates(RecipePreferences(mode="complete"), 2)
-    assert len(recipes) == 152
+    assert len(recipes) >= 152
     cache = RecipeComputationCache()
     cases = []
     for recipe in recipes:
@@ -35,22 +35,22 @@ def test_all_152_authored_recipes_reuse_validation_with_identical_input_evidence
     with patch.object(recipe_preparation, "validate", wraps=recipe_preparation.validate) as verify:
         for args, expected in cases:
             assert recipe_preparation.input_evidence(*args, recipe_cache=cache) == expected
-        assert verify.call_count == 152
+        assert verify.call_count == len(recipes)
 
 
-def test_all_152_candidates_fit_with_all_four_actual_pure_computations():
+def test_all_candidates_fit_with_all_four_actual_pure_computations():
     recipes = candidates(RecipePreferences(mode="complete"), 2)
     cache, optimizer = RecipeComputationCache(), MenuOptimizer()
     computations = (recipe_id, protein_category, optimizer._profile, recipe_preparation.validate)
     for recipe in recipes:
         for compute in computations:
             cache.get(recipe, compute)
-    assert len(cache.values) == 608 < cache.limit == 1024
+    assert len(cache.values) == len(recipes) * len(computations) < cache.limit == 1024
     # A full second pass over separately loaded values fits without eviction.
     for recipe in candidates(RecipePreferences(mode="complete"), 2):
         for compute in computations:
             cache.get(recipe, compute)
-    assert len(cache.values) == 608
+    assert len(cache.values) == len(recipes) * len(computations)
 
 
 @pytest.mark.parametrize("change", ["quantity", "instructions", "form", "form_order", "design", "version", "provenance"])

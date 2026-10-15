@@ -22,7 +22,7 @@ from threading import RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v10-supplier-package-link"
+FACTS_VERSION = "retained-catalog-facts-v11-nutrition-extras"
 _CACHE = {}
 _LOCK = RLock()
 
@@ -32,7 +32,8 @@ def _supplier_image_gtins():
     from grocery_data.app.services.product_declarations import declarations
 
     return frozenset(row["gtin"].zfill(14) for row in declarations()
-                     if row.get("parser") in {"supplier-validoo-exact-gtin-v1",
+        if row.get("parser") in {"supplier-validoo-exact-gtin-v1",
+                                              "garant-explicit-gs1-declaration-v1",
                                               "dabas-consumer-quantity-v1", "dabas-base-quantity-v2"}
                      and row.get("gtin"))
 

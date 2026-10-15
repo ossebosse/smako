@@ -326,6 +326,10 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
             return None
         qualified = bool(fact.nutrition and fact.nutrition_basis and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained"})
     evidence = fact if qualified else None
+    if evidence is None and unit == 'ml' and form == 'as_sold':
+        from app.services.recipe_volume_nutrition import volume_evidence
+
+        evidence = volume_evidence(product, name, fact)
     plain_salt_reference = (
         canonical(name) == 'salt' and form == 'as_sold' and unit == 'g'
         and product_reference(product, name, fact) == 1975
@@ -355,8 +359,13 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
         else:
             identity = product_reference(product, name, fact)
         if identity is None:
-            return None
-        evidence = reference_evidence(identity)
+            from app.services.nordic_nutrition import plain_food_evidence
+
+            evidence = plain_food_evidence(product, name, fact)
+            if evidence is None:
+                return None
+        else:
+            evidence = reference_evidence(identity)
         if plain_salt_reference and fact and fact.nutrition:
             # A partial declaration is retained as partial. This is an entire,
             # opt-in generic reference, never a zero-fill or branded assertion.

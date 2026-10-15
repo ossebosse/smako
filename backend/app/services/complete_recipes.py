@@ -365,6 +365,12 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
             # Plain powdered chili requires a complete single-ingredient label.
             return bool(fact and fact.ingredients_complete and re.fullmatch(r"(?:ingredienser[: ]*)?(?:chili|chilipeppar)(?:pulver)?[ .%\d,]*", composition))
         return not (composition and re.search(r"\b(?:salt|socker|vitlök|lök|selleri|senap|soja|mjölk)\b", composition.split("kan innehålla")[0]))
+    if canonical == 'äpple':
+        from app.services.recipe_ingredient_references import reviewed_reference
+
+        # Reuse the reviewed plain fresh apple identity. The existing package
+        # and edible-quantity checks still apply independently of this identity.
+        return form == 'raw_edible' and reviewed_reference(product, canonical, fact) == 588
     produce = {
         "potatis": r"(?:potatis|färskpotatis|delikatesspotatis|mandelpotatis|minipotatis)",
         "tomat": r"(?:tomat|tomater|körsbärstomater|kvisttomater|plommontomater|cocktailtomater|pärltomater)(?: runda(?: import)?| san marzano| babyplommon| cocktail| kumato| cockt)?",
@@ -377,6 +383,13 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         "rödbeta": r"(?:rödbeta|rödbetor)", "sötpotatis": r"sötpotatis",
     }
     if canonical in produce:
+        # A brand can itself describe a composite food (Crème Bonjour Vitlök).
+        # Removing that brand must never turn dairy/spreads into raw produce.
+        if re.search(r"mejeri|färskost|mjukost|bredbar|pålägg|ost &", category):
+            return False
+        if (brand and product.name.casefold().startswith(brand + ' ')
+                and not (fresh or frozen)):
+            return False
         if not simple(produce[canonical], "fast|mjölig|tvättad|kok|stor|smått&gott|små|delikatess|libanesisk|grön|röd|gul|orange|lila|buketter|blad|ofilmad|i kapsel|skivor"):
             return False
         if re.search(r"\b(?:salt|socker|olja|smör|grädde|ättika|lag)\b", composition.split("kan innehålla")[0]):
@@ -417,7 +430,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         "limejuice": r"limejuice(?: eko| ekologisk| från koncentrat)*",
         "krossade tomater": r"(?:krossade tomater|tomater krossade)(?: eko| ekologiska| finkrossade)*",
         "tomatpuré": r"tomatpuré(?: dubbelkoncentrerad| eko| ekologisk)*",
-        "kokosmjölk": r"kokosmjölk(?: eko| ekologisk| original)*",
+        "kokosmjölk": r"kokosmjölk(?: eko| ekologisk| original| \d+(?:[,.]\d+)?(?:-\d+(?:[,.]\d+)?)?%)*",
         "sesamfrön": r"sesamfrön(?: vita| skalade| oskalade| eko| ekologiska| burk)*",
         "senap": r"(?:dijon )?senap(?: dijon| stark| mild| grov| skånsk| sötstark| finmalen)*",
         "kapris": r"kapris(?: små| fina| fin| i lag)*", "oliver": r"(?:(?:gröna|svarta|kalamata|halkidiki) )?oliver(?: utan kärnor| urkärnade| kalamata| halkidiki| gröna| svarta| eko| ekologiska)*",

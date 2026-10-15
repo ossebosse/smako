@@ -594,6 +594,10 @@ class PersonalPlanner:
             reviewed_quark = canonical == "kvarg" and plain_quark(
                 product, self.source_facts(product)
             )
+            from app.services.recipe_ingredient_references import reviewed_reference
+
+            reviewed_apple = canonical == 'äpple' and reviewed_reference(
+                product, canonical, self.source_facts(product)) == 588
             if canonical == "kvarg" and not product_key and not reviewed_quark:
                 note(i, "recipe_match", "stopped", "plain quark identity/composition not established")
                 continue
@@ -607,16 +611,17 @@ class PersonalPlanner:
                 conflicts.append(exc)
                 note(i, "policy", "stopped", str(exc))
                 continue
-            if reviewed_quark and not product_key:
+            if (reviewed_quark or reviewed_apple) and not product_key:
                 candidate = ProductCandidate.from_product(product, 1).model_copy(
                     update={
                         "semantic_confidence": "high",
                         "semantic_evidence": [
                             "reviewed plain quark name/form and retained dairy ingredients"
+                            if reviewed_quark else "reviewed complete fresh apple label and produce category"
                         ],
-                        "canonical_food": "kvarg",
-                        "food_family": "dairy",
-                        "product_role": "quark",
+                        "canonical_food": "kvarg" if reviewed_quark else "apple",
+                        "food_family": "dairy" if reviewed_quark else "fruit",
+                        "product_role": "quark" if reviewed_quark else "whole_fruit",
                     }
                 )
             elif product_key:
@@ -1721,7 +1726,7 @@ class PersonalPlanner:
             return baseline
         organic_candidates = {}
         for name, values in candidates.items():
-            organic_candidates[name] = [
+            organic = tuple(
                 c
                 for c in values
                 if (
@@ -1734,7 +1739,16 @@ class PersonalPlanner:
                     )
                     and facts.organic is True
                 )
-            ]
+            )
+            # The same immutable qualified subset recurs in up to 256 baskets
+            # and many meal combinations. Reuse the optimizer's existing exact
+            # quote/vector cache, with no pruning or reduced search budget.
+            sequence_key = tuple(id(candidate) for candidate in organic)
+            if sequence_key not in self.candidate_sequences:
+                remember_bounded(self.candidate_sequences, sequence_key, organic, 4096)
+            else:
+                self.candidate_sequences.move_to_end(sequence_key)
+            organic_candidates[name] = self.candidate_sequences[sequence_key]
         eligible = [g["key"] for g in groups if g["food"] and organic_candidates[g["key"]]]
         if not eligible:
             raise PolicyConflict(
@@ -2074,6 +2088,19 @@ class PersonalPlanner:
                             )
                 if limits.min_weight_g is not None or limits.max_weight_g is not None:
                     weight = self.cooked_weights.get(self._recipe_id(slot.recipe))
+                    if weight is None and self.spec.allow_nutrition_estimates:
+                        from app.services.recipe_portion_weight import estimate_portion_weight
+
+                        selected_by_name = {}
+                        for need in (r for r in rows if r['source'] == slot.id):
+                            product = selected_products.get(need.get('purchase_key'))
+                            # A mixed pantry/purchase food cannot borrow the
+                            # purchase's yield identity for the entire input.
+                            if product and not any(a['demand_key'] == need['demand_key'] for a in allocations):
+                                product = self.prepared.universe.products[
+                                    self.by_identity[(product.store_id, product.product_id)]]
+                                selected_by_name[canonicalize_ingredient_name(need['name'])] = (product, self.source_facts(product))
+                        weight = estimate_portion_weight(slot.recipe, selected_by_name)
                     if (
                         not weight
                         or not weight.get("source")
@@ -2083,7 +2110,7 @@ class PersonalPlanner:
                         or weight["total_g"] <= 0
                     ):
                         raise PolicyConflict(
-                            f"{slot.recipe.name}: verifierat tillagningsutbyte/ätbar tillagad vikt saknas.",
+                            f"{slot.recipe.name}: underlag för tillagad portionsvikt och tillagningsutbyte saknas. Vattenupptag och avdunstning kan inte beräknas för detta recept; råvaruvikt används inte som färdig vikt.",
                             code="DATA_BLOCKED",
                             stage="preparation",
                         )
@@ -2212,7 +2239,7 @@ class PersonalPlanner:
                 code = getattr(first, "code", "RECIPE_QUALIFICATION_BLOCKED")
                 reason = str(first) if first else "Recepten stoppades av måltidskontrollen. Se den första orsaken per recept i underlaget."
                 if code == "DATA_BLOCKED":
-                    suggestion = "Underlaget räcker inte för ett kvalificerat köp eller den begärda näringen. Prova ett annat matkök eller fler tillåtna inköpsställen; saknade uppgifter kräver nytt verifierat källunderlag."
+                    suggestion = "Ett eller flera val kan inte kontrolleras med det tillgängliga underlaget. Se orsakerna per recept. Saknade närings-, allergen- eller viktuppgifter behöver kompletteras; ett lägre proteinmål löser inte sådana dataluckor."
                 elif code == "NUTRITION_TARGET_NOT_MET":
                     suggestion = "Pröva godkända receptvariationer eller ändra näringsmålet uttryckligen."
                 else:

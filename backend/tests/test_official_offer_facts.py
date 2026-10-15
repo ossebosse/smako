@@ -39,6 +39,16 @@ def test_declaration_is_usable_without_estimates_and_does_not_invent_gtin(produc
     assert PersonalPlanner._nutrition_evidence(planner,product,product.name,'g',{'kcal'},None) is None
 
 
+def test_explicit_ml_declaration_is_not_relabelled_as_grams_on_offer_path(product):
+    # Unit-path fixture only; this does not establish a coconut campaign price.
+    p = product.model_copy(update={'name':'Kokosmjölk 17-18%', 'brand':'Garant',
+        'package_quantity':250, 'usable_quantity':250, 'package_unit':'ml', 'usable_unit':'ml',
+        'gtin':'7311043017881', 'purchase_terms':None})
+    fact = declared_facts([p])[(p.store_id, p.product_id)]
+    assert fact.nutrition_unit == 'ml' and fact.nutrition['protein_g'] == 1.8
+    assert fact.field_sources['nutrition.protein_g'][0]['basis_unit'] == 'ml'
+
+
 @pytest.mark.parametrize('update', [{'brand':'Other'}, {'name':'Majskorvar med ost'},
     {'package_quantity':100}, {'gtin':'7310865004703'}, {'usable_quantity':80}])
 def test_wrong_variant_brand_pack_gtin_or_edible_basis_cannot_borrow_facts(product, update):

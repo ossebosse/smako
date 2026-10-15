@@ -436,7 +436,7 @@
     const counts=el("ul");for(const row of data.candidate_rejections||[])if(row.rejected)counts.append(el("li",`${row.label}: ${row.rejected} avslag.`));out.append(counts);
     const examples=el("ul");const seen=new Set();for(const row of data.candidate_details||[]){
       const reason=String(row.reason||"").startsWith("Befintlig strukturell måltidskontroll")?"Rättens grundkontroll saknar tillräckligt näringsunderlag. Detta är inte i sig ett avslag på ditt valda proteinmål.":String(row.reason||"").replace(/\bprotein_g\b/g,"protein").replace(/\bas_sold\b/g,"som såld").replace(/\braw_edible\b/g,"rå ätbar mängd").replace(/\bcooked_drained\b/g,"kokt och avrunnen");
-      const text=`${row.recipe}: ${reason}`;if(seen.has(text))continue;seen.add(text);if(examples.children.length<8)examples.append(el("li",text));
+      const text=reason.startsWith(`${row.recipe}:`)?reason:`${row.recipe}: ${reason}`;if(seen.has(text))continue;seen.add(text);if(examples.children.length<8)examples.append(el("li",text));
     }if(examples.children.length){out.append(el("h3","Exempel på vad som stoppade recepten"),examples);if(seen.size>8)out.append(el("p",`Visar 8 av ${seen.size} skilda exempel.`));}
     if((data.search||[]).some(row=>row.rejections?.variation))out.append(el("p","Veckans variationskrav stoppade kombinationer av de kvarvarande rätterna. Ett alternativ är att välja fler matkök eller längre tillagningstid för att ge fler rätter möjlighet att prövas."));
     else if((data.candidate_details||[]).some(row=>row.stage==="nutrition_bound"))out.append(el("p","Ett alternativ är att tillåta godkända receptvariationer eller välja fler matkök. Du kan också uttryckligen ändra proteinmålet. Inget av dina val ändras automatiskt."));

@@ -51,6 +51,7 @@ def declared_facts(products):
         )
         if not row:
             continue
+        basis_unit = row.get('basis_unit', 'g')
         source = {
             "kind": "product_declaration",
             "url": row["source"]["url"],
@@ -70,7 +71,7 @@ def declared_facts(products):
                 json.dumps(row, sort_keys=True).encode()
             ).hexdigest(),
             "basis_quantity": 100,
-            "basis_unit": "g",
+            "basis_unit": basis_unit,
             "preparation": "as_sold",
         }
         result[(p.store_id, p.product_id)] = ProductFacts(
@@ -82,8 +83,8 @@ def declared_facts(products):
             ingredient_evidence_kind="product_declaration",
             ingredients=(row["ingredients"],),
             nutrition=row["nutrition"],
-            nutrition_unit="g",
-            nutrition_basis="Officiell produktdeklaration per 100 g som såld",
+            nutrition_unit=basis_unit,
+            nutrition_basis=f"Officiell produktdeklaration per 100 {basis_unit} som såld",
             nutrition_preparation="as_sold",
             observed_at=row["source"]["observed_at"],
             field_sources={
@@ -143,6 +144,7 @@ def _supplement_named_catalog_facts(products, original):
             continue
         prior = prior or ProductFacts(source="verified_supplier_catalog_supplement",
             source_product_id=p.product_id, source_snapshot_id=prov.source_snapshot_id)
+        basis_unit = row.get('basis_unit', 'g')
         source = {**row["source"], "source": row["source"]["url"],
                   "identity_method": row["binding_requirement"], "supplier_gtin": row["gtin"],
                   "declared_name": row["name"], "declared_brand": row["brand"],
@@ -150,19 +152,19 @@ def _supplement_named_catalog_facts(products, original):
                   "bound_product_id": p.product_id, "bound_store_id": p.store_id,
                   "bound_snapshot_id": prov.source_snapshot_id,
                   "source_package_quantity": p.package_quantity, "source_package_unit": p.package_unit,
-                  "basis_unit": "g", "preparation": "as_sold", "original_nutrition": row["nutrition"]}
+                  "basis_unit": basis_unit, "preparation": "as_sold", "original_nutrition": row["nutrition"]}
         if image_source:
             source["retailer_image_identity"] = image_source
         fields = dict(prior.field_sources)
         fields["supplier_declaration"] = (*fields.get("supplier_declaration", ()), source)
         changes = {}
-        if prior.nutrition and (prior.nutrition_unit != "g" or any(
+        if prior.nutrition and (prior.nutrition_unit != basis_unit or any(
                 prior.nutrition[k] != row["nutrition"][k] for k in prior.nutrition.keys() & row["nutrition"].keys())):
             changes["conflicts"] = (*prior.conflicts, "supplier_nutrition_conflict")
             fields["supplier_nutrition_conflict"] = (source,)
         else:
-            changes.update(nutrition=dict(row["nutrition"]), nutrition_unit="g",
-                           nutrition_basis="Officiell produktdeklaration per 100 g som såld")
+            changes.update(nutrition=dict(row["nutrition"]), nutrition_unit=basis_unit,
+                           nutrition_basis=f"Officiell produktdeklaration per 100 {basis_unit} som såld")
             for key_name in row["nutrition"]:
                 fields["nutrition." + key_name] = (*fields.get("nutrition." + key_name, ()), source)
         if not prior.ingredients:
@@ -256,7 +258,7 @@ def _supplier_package_matches(product, row, image_source):
     # Existing Axfood rows project 380/230g to the stated 230g. Recover the
     # supplier link only when BOTH printed quantities agree with that exact
     # supplier's net and drained masses. Never interpret a slash alone as proof.
-    if row['comparison_basis'] != 'Per avrunnen vikt':
+    if row.get('comparison_basis') != 'Per avrunnen vikt':
         return False
     match = re.fullmatch(r'(\d+(?:[.,]\d+)?)/(\d+(?:[.,]\d+)?)\s*g', label or '')
     return bool(match and row['package_unit'] == row['net_unit'] == row['comparison_unit'] == product.package_unit == 'g'
@@ -278,7 +280,9 @@ def supplement_catalog_facts(products, original):
     from grocery_data.app.domain.identifiers import InvalidGtinError, normalize_gtin
     from grocery_data.app.services.product_declarations import declarations, identity_text
 
-    rows = [r for r in declarations() if r.get("parser") in {"dabas-consumer-quantity-v1", "dabas-base-quantity-v2"}]
+    rows = [r for r in declarations() if r.get("parser") in {
+        "dabas-consumer-quantity-v1", "dabas-base-quantity-v2",
+        "garant-explicit-gs1-declaration-v1"}]
     result = _supplement_culinary_attributes(products, _supplement_named_catalog_facts(products, original))
     for p in products:
         if not p.source_provenance or (p.purchase_terms and p.purchase_terms.identity_scope != "product"):
@@ -302,7 +306,7 @@ def supplement_catalog_facts(products, original):
         row = matches[0]
         prior = result.get(key) or ProductFacts(source='verified_supplier_catalog_supplement',
             source_product_id=p.product_id, source_snapshot_id=p.source_provenance.source_snapshot_id)
-        source = {**row['source'], 'source': row['source']['url'], 'gtin': gtin, 'document_version': row['document_version'],
+        source = {**row['source'], 'source': row['source']['url'], 'gtin': gtin, 'document_version': row.get('document_version'),
                   'identity_method': 'exact_checksum_gtin_brand_fixed_package',
                   'kind': 'supplier_declaration', 'basis_unit': row['basis_unit'],
                   'original_nutrition': row['nutrition'], 'preparation': row['preparation'],
@@ -320,7 +324,7 @@ def supplement_catalog_facts(products, original):
         unit = row['basis_unit']
         # Two explicit quantities for THIS consumer package support arithmetic;
         # neither a universal density nor the logistics gross weight is used.
-        if row['package_unit'] == 'ml' and row['net_unit'] == 'g':
+        if row['package_unit'] == 'ml' and row.get('net_unit') == 'g':
             ratio = row['package_quantity'] / row['net_quantity']
             if unit == 'ml':
                 nutrition = {k: v * ratio for k, v in nutrition.items()}
@@ -329,7 +333,7 @@ def supplement_catalog_facts(products, original):
                           'package_ml': row['package_quantity'], 'net_g': row['net_quantity']}
             fields['usable_quantity'] = ({**source, 'quantity': row['net_quantity'],
                                           'unit': 'g', 'basis': 'source_net_mass'},)
-        elif row['comparison_basis'] == 'Per avrunnen vikt':
+        elif row.get('comparison_basis') == 'Per avrunnen vikt':
             if row['comparison_unit'] != 'g' or not 0 < row['comparison_quantity'] <= row['net_quantity']:
                 continue
             fields['usable_quantity'] = ({**source, 'quantity': row['comparison_quantity'],
@@ -357,7 +361,8 @@ def supplement_catalog_facts(products, original):
             for k in nutrition:
                 fields['nutrition.' + k] = (*fields.get('nutrition.' + k, ()), source)
         if not prior.ingredients and row['ingredients']:
-            changes['ingredients'] = (row['ingredients'],)
+            changes.update(ingredients=(row['ingredients'],), ingredients_complete=True,
+                           ingredient_evidence_kind='product_declaration')
             fields['ingredients'] = (source,)
         result[key] = replace(prior, **changes, field_sources=fields)
     # A population estimate is separate from supplier declarations. Only a

@@ -19,8 +19,8 @@ def reviewed_reference(product, name, facts):
     if canonical == 'oliver':
         return _black_oiled_drained_olive_reference(product, facts, label, composition)
     # This prefix/suffix cleanup never removes variant or cooking information.
-    label = re.sub(r'^(?:ekologisk |färsk )', '', label)
-    label = re.sub(r'\s+(?:eko|ekologisk|klass 1|i ask)$', '', label)
+    label = re.sub(r'^(?:(?:ekologisk|färsk) )+', '', label)
+    label = re.sub(r'(?:\s+(?:eko|ekologisk|klass 1|i ask))+$', '', label)
     label = re.sub(r'\s+\d+(?:[,.]\d+)?\s*g$', '', label)
     fresh_category = any(x in category for x in ('frukt', 'grönsak', 'grönt', 'svamp', 'blomkål', 'broccoli', 'zucchini', 'aubergine', 'selleri', 'potatis', 'rotsaker', 'färska örter', 'kryddväxt')) or bool(re.search(r'\bkruka\b', label))
     frozen = bool(re.search(r'\b(?:fryst|frysta|djupfryst|djupfrysta)\b', label) or 'fryst' in category)
@@ -42,7 +42,8 @@ def reviewed_reference(product, name, facts):
         'selleri': (321, None, r'(?:stjälkselleri|blekselleri|bladselleri|selleri)'),
         'rödbeta': (294, None, r'(?:rödbeta|rödbetor)'),
         'sötpotatis': (3765, None, r'sötpotatis'),
-        'spenat': (4941, 361, r'(?:babyspenat|spenat)(?: blad| hackad)?'),
+        'spenat': (4941, 361, r'(?:(?:blad|hackad) )?(?:babyspenat|spenat)(?: blad| hackad)?'),
+        'ärtor': (None, 374, r'(?:(?:skånska|nordiska|gröna) )?ärtor'),
         'blomkål': (322, 323, r'blomkål(?: buketter)?'),
         'champinjoner': (333, 383, r'champinjoner(?: skivade)?'),
         'pepparrot': (291, None, r'pepparrot'),
@@ -64,9 +65,9 @@ def reviewed_reference(product, name, facts):
             return frozen_id
         return raw_id if fresh_category else None
     dry = {
-        'spiskummin': (7199, r'spiskummin(?: malen| hel| burk| påse)?'),
-        'gurkmeja': (7198, r'gurkmeja(?: malen| burk| påse)?'),
-        'kanel': (2306, r'kanel(?: cassia)?(?: malen| burk| påse)?'),
+        'spiskummin': (7199, r'spiskummin(?: malen| hel| burk| påse)*'),
+        'gurkmeja': (7198, r'gurkmeja(?: malen| burk| påse)*'),
+        'kanel': (2306, r'kanel(?: cassia)?(?: malen| burk| påse)*'),
         'havregryn': (702, r'havregryn(?: fullkorn)?'),
         'vetemjöl': (1941, r'(?:vetemjöl|kärnvetemjöl)'),
         'salt': (1975, r'(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)?'),
@@ -90,7 +91,7 @@ def _black_oiled_drained_olive_reference(product, facts, label, composition):
     if not facts or facts.conflicts or not composition:
         return None
     label = re.sub(r'\s+(?:eko|ekologisk|ekologiska)$', '', label)
-    if not re.fullmatch(r'(?:svarta oliver|oliver (?:svarta|kalamata|kalamon))'
+    if not re.fullmatch(r'(?:(?:svarta|kalamata|kalamon) oliver|oliver (?:svarta|kalamata|kalamon))'
                         r' (?:urkärnade|utan kärna|utan kärnor)', label):
         return None
     words = set(re.findall(r'[a-zåäö]+', composition))

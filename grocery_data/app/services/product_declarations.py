@@ -60,10 +60,14 @@ def parse_garant(body, acquisition):
     if not ingredients or not nutrition:
         raise ValueError("declaration_contents_missing")
     text = nutrition.get_text(" ", strip=True)
-    if len(re.findall(r"\(per 100 g\)", text)) != 1 or re.search(
+    bases = re.findall(r"\(per 100 (g|ml)\)", text)
+    if len(bases) != 1 or re.search(
         r"tillagad|beredd|portion", text, re.IGNORECASE
     ):
         raise ValueError("declaration_basis_or_preparation_unverified")
+    basis_unit = bases[0]
+    if basis_unit == 'ml' and unit != 'ml':
+        raise ValueError('declaration_volume_basis_requires_volume_package')
     macros = {}
     for key, pattern in {
         "kcal": r"\b([\d.,]+)\s+kcal\b",
@@ -92,7 +96,7 @@ def parse_garant(body, acquisition):
         "ingredients": ingredients.get_text(" ", strip=True),
         "nutrition": macros,
         "basis_quantity": 100,
-        "basis_unit": "g",
+        "basis_unit": basis_unit,
         "preparation": "as_sold",
         "description": description.strip(),
         "nutrition_text": text,
@@ -100,7 +104,7 @@ def parse_garant(body, acquisition):
         "parser": "garant-explicit-gs1-declaration-v1",
         **({"identity_names": identity_names,
             "binding_requirement": "unique_exact_complete_brand_variant_fixed_pack",
-            "identity_source": dict(acquisition)} if len(identity_names) > 1 else {}),
+            "identity_source": dict(acquisition)} if len(identity_names) > 1 or (basis_unit == 'ml' and unit == 'ml') else {}),
     }
 
 
