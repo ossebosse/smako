@@ -1,3 +1,37 @@
+# 2026-10-15: Näringskopplingar och extraval – lokalt verifierade, inte aktiverade
+
+Gren `fix/recipe-nutrition-extras`, kodcommit `7e402a7`, bas `fd783d1`.
+Fjorton källbundna leverantörsdeklarationer, kompletterade nordiska
+näringsreferenser och livsmedelsspecifik densitet rättar bland annat
+citronjuice, rapsolja, kryddor, yoghurt, nötfärs och kokosmjölk.
+Kokosmjölkens uttryckliga per-100-ml-deklaration bevaras som ml.
+Faktapolicy `retained-catalog-facts-v11-nutrition-extras`, referenspolicy
+`slv-component-input-v5-nordic-density`.
+
+Användaren valde uppskattad tillagad vikt där underlag finns. Granskad kall
+beredning och befintliga referensrätter med dokumenterat utbyte stöds;
+övriga varma recept får ingen påhittad slutvikt. Äpplets receptmatchning
+rättas. Veganfilter stoppar nu `yoghurt naturell` och `keso`; ett tidigare
+falskt positivt vegantest ersattes med tre faktiskt veganska recept.
+
+Slutligt lokalt prov med sparat underlag för samma 19 priskontexter inom
+3 km från 22225: fem middagar/fyra portioner/minst 40 g protein passerar,
+43,08–55,51 g per portion, 61 s. Samtidiga kolhydrat-, fett- och energigränser
+passerar. Vegetariskt, veganskt, proteinfördelning, 20 % ekoandel samt frukost/
+mellanmål med viktgräns passerar. Kassakontroller PASS och noll okända mängder.
+554 samlade offlineprov och 14 browserprov i Chromium/WebKit passerar;
+Ruff, compileall och JavaScript-syntax passerar.
+
+Kvar: mjölkallergi och alla animalier ekologiska stoppas fortfarande av
+saknat källunderlag. Ekoandelsprovet tog 459 s trots oförändrad sökning
+med bättre cacheåteranvändning. Det är ingen fullständig källtäckning för
+alla kombinationer. Ingen driftändring, prisinsamling eller privat
+produktionstillståndsmutation har gjorts för denna ändring.
+
+[Orsak, källor, prov och begränsningar](../reports/recipe-nutrition-extras-20261015.md).
+
+---
+
 # 2026-10-15: Receptens varukopplingar – aktiverade på betan
 
 Gren `fix/recipe-product-links`, kodcommit `07af5ac`, bas `37cd882`. Användarens urval är alla
