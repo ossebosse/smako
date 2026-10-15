@@ -1,6 +1,6 @@
-# 2026-10-15: Receptens varukopplingar – lokalt rättade, inte aktiverade
+# 2026-10-15: Receptens varukopplingar – aktiverade på betan
 
-Gren `fix/recipe-product-links`, bas `37cd882`. Användarens urval är alla
+Gren `fix/recipe-product-links`, kodcommit `07af5ac`, bas `37cd882`. Användarens urval är alla
 butiker inom 3 km från 22225. Saknade länkar mellan sparade Axfoodprodukter
 och leverantörsdeklarationer rättas med exakt identitets- och mängdbindning.
 Fullständiga livsmedelsnamn kompletteras och Zeinas citronjuice får en
@@ -12,7 +12,21 @@ radien. Ett helt visat recept med 14 ingredienser passerar lokal planering,
 kassakontroll och sparning/återläsning. 500 olika riktade testfall, Ruff och
 compileall passerar. Näring per ml för citronjuice har inte antagits från
 tillverkarens uppgifter per gram; sådana krav behöver fortfarande underlag.
-Ingen produktion, scheduler, prisinsamling eller användarprofil har ändrats.
+Efter användarens ”Aktivera det” verifierades appbytet 12:34:32 UTC.
+BUILD_ID `recipe-product-links-app-07af5ac`: sju ändrade filer ovanpå den
+verkliga appbilden, 676 övriga runtimefiler oförändrade. Driftlås och
+integritetskontrollerad online-backup användes. Scheduler, Windowsuppgift,
+prismanifest och tidigare användartillstånd är oförändrade.
+
+På betan passerar receptet från bilden (14 ingrediensbehov, 134,47 s) och
+fem grekiska middagar (27 ingrediensbehov, 45,34 s), båda inom 3 km från
+22225. Audit PASS, avstämda summor, noll okända mängder och identisk sparad
+GET vid två återläsningar. API-prov under två separata verifieringsidentiteter;
+inga nya browserprov. Lund/Malmö readiness 200. De 284 tidigare revisionerna
+och 95 privata tillstånden är hashverifierat bevarade även efter proven.
+Slutligt 286 revisioner och 97 tillstånd; noll nya OOM/omstarter.
+
+[Aktivering, evidens och återgång](releases/recipe-product-links-20261015/ACTIVATED.md).
 
 [Orsak, verifiering och avgränsningar](../reports/recipe-product-links-20261015.md).
 

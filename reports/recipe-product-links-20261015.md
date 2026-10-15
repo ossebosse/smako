@@ -2,9 +2,12 @@
 
 ## Status och avgränsning
 
-Lokal rättning på `fix/recipe-product-links`, bas `37cd882`.
-Ingen produktionsaktivering, prisinsamling, schedulerändring eller ändring av
-användarens profil har gjorts. Produktionsdiagnostiken var skrivskyddad.
+Rättning på `fix/recipe-product-links`, kodcommit `07af5ac`, bas `37cd882`.
+Den lokala fasen använde skrivskyddad produktionsdiagnostik. Efter separat
+instruktion ”Aktivera det” aktiverades appen och verifierades 12:34:32 UTC.
+Se [aktivering och levande API-prov](../docs/releases/recipe-product-links-20261015/ACTIVATED.md).
+Ingen prisinsamling, schedulerändring eller ändring av användarens profil
+har gjorts.
 
 Användaren tillät alla butiker inom 3 km från 22225. Den publika
 butiksupplösningen gav 19 priskontexter inom denna radie. Willys Lund
@@ -101,6 +104,7 @@ produkt-/råfältsposter i `backend/tests/fixtures/recipe_product_links.json`.
 Lokala diagnostik-, XML- och återspelningsfiler finns i den ignorerade
 `.local/recipe-product-links/`. Dessa innehåller inga användarprofiler.
 
-Vid en separat auktoriserad aktivering måste den nya faktaprojektionen laddas
-och samma butiksurval verifieras i den verkliga appen. Lokal verifiering är
-inte ett kvitto på produktionsaktivering.
+Den separat auktoriserade aktiveringen har nu också verifierat den nya
+faktaprojektionen och samma geografiska urval i betan: både receptet från
+bilden och fem grekiska middagar passerar API, audit och sparad återläsning.
+Detaljerna finns i aktiveringsrapporten ovan.
