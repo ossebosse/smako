@@ -97,6 +97,14 @@ Gamla godkända v3/v4/v5-paket kan omkvalificeras utan nya observationstider.
 Använd ordinarie reläåterleverans för ett komplett väntande paket så att även
 kommunal inventering och slutligt publiceringskvitto följer med.
 
+Ett 422-fel för en vald priskontext kan gälla en separat fysisk erbjudandekanal
+trots readiness 200 för de obligatoriska baskällorna. Kontrollera därför just
+den valda kontexten och dess adapter mot aktuellt manifest. Vid källbyte provas
+också ett tidigare sparat, godkänt butiksurval; byt inte automatiskt till en
+annan butik eller priskanal. Stortorgets följdfel berodde på äldre härledda
+registermetadata, inte utgångna kampanjer. Se
+[rättningen för sparade reklambladsregister](releases/willys-flyer-inventory-20261015/REPORT.md).
+
 ## Aktuellt incidentindex och varningar
 
 Befintlig `run_daily_refresh.py` uppdaterar under operationslåset

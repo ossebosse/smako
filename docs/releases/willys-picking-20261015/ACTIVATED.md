@@ -1,5 +1,12 @@
 # Willys picking-store contract, 2026-10-15
 
+**Later update:** the Windows task change below was completed at 09:26:11 UTC
+and its actual action was independently verified to use release `5b344ca3b50e`.
+No further Windows action is pending. A subsequent source-only fix restores
+Stortorget's retained physical flyer inventory; see the
+[follow-up release](../willys-flyer-inventory-20261015/REPORT.md).
+The activation evidence below records the earlier 08:40 verification state.
+
 ## Cause and reviewed change
 
 Willys added `hasPickingBaseStore` to its store list and active-store responses.
@@ -129,7 +136,7 @@ Do not restore an older live database or overwrite saved customer plans.
 The app and ordinary-price retention need no rollback. The Windows task still
 uses its prior release until the pending administrator action is completed.
 
-## Remaining Windows action
+## Windows action recorded at 08:40 UTC (completed at 09:26 UTC)
 
 The server repair and Lund recovery are complete. The scheduled Windows task
 still uses `7b7fe72472dd`, as confirmed again at the final verification. Do not

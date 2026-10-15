@@ -1,3 +1,30 @@
+# 2026-10-15: Stortorgets kampanjregister – följdrättning aktiverad
+
+Gren `fix/willys-flyer-retained-inventory`, kodcommit `ad285c415df4`.
+Den tidigare parserändringen lade till verifierat `hasPickingBaseStore: false`
+i härledda metadata. Äldre sparade reklambladsregister innehöll redan fältet i
+råkällan men saknade metadatafältet. Exakt rekonstruktion underkändes därför,
+och Willys Hemma Lund Stortorget föll bort ur den nya prisversionen.
+
+Rättningen medger endast den äldre utelämningen efter strikt råvalidering.
+Identitet, geografi, urval, originalhashar och kampanjdatum jämförs fortsatt.
+75 riktade tester passerar. Slutlig sourceimage återger Stortorgets verkliga
+16 kampanjrader utan nätanrop. Serverfixen är aktiv sedan 11:02:24 UTC;
+publicering/laddning och beständigt kampanjkvitto klara 11:19:36 UTC.
+22225 visar åter 29 priskontexter. Äldre specifikt urval med Stortorget kvar
+passerar i Chromium/WebKit; tremåltidsplan på 87,5 s, audit och identisk sparad
+GET/omladdning godkända. Separat publik meny på 10,031 s med 17/17 kontroller.
+282 tidigare planrevisioner och 94 privata tillstånd hashverifierat bevarade.
+Appcontainern är oförändrad. Den separata misslyckade Hemköpshämtningen i Malmö
+under det tidigare driftjobbet är inte åtgärdad eller maskerad här.
+
+Windowsuppgiften är nu verifierat aktiverad på `5b344ca3b50e` sedan
+09:26:11 UTC. Denna följdrättning behöver ingen ytterligare Windowsändring.
+
+[Orsak, verifiering och aktiveringsstatus](releases/willys-flyer-inventory-20261015/REPORT.md).
+
+---
+
 # 2026-10-15: Willys parserrättning aktiverad på servern
 
 Gren `fix/willys-picking-contract`, kodcommits `98eadc2b114c` och
@@ -13,9 +40,8 @@ laddning och kvitto klara 08:36:37 UTC. Alla fem baskontexter är FRESH och
 laddade. 22225 fungerar, ny tremåltidsplan använder Willys, audit och sparad
 GET/omladdning passerar. Malmömeny och readiness i båda kommuner verifierade.
 280 tidigare planrevisioner och 93 privata tillstånd hashverifierat bevarade.
-Appen är oförändrad. Windows-paketet är installerat och verifierat, men
-schemauppgiften använder ännu `7b7fe72472dd`: administratörsdialogen avbröts.
-Ändra inte pågående Malmö-insamling eller schemat för att byta paket.
+Appen är oförändrad. Vid slutprovet 08:40 UTC väntade Windowsbytet efter en
+avbruten administratörsdialog. Bytet slutfördes senare 09:26:11 UTC, se ovan.
 
 [Aktiveringsstatus, återhämtning och återgång](releases/willys-picking-20261015/ACTIVATED.md).
 
