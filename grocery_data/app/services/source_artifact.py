@@ -17,8 +17,11 @@ from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from grocery_data.app.connectors.willys.client import WillysClient
 from grocery_data.app.connectors.willys.connector import WillysConnector
+from grocery_data.app.connectors.willys.models import (
+    validated_catalog_page,
+    validated_store_context,
+)
 from grocery_data.app.connectors.willys.parser import WillysParser
 from grocery_data.app.domain import (
     CatalogCompletion,
@@ -167,7 +170,7 @@ def _willys_completion(documents: tuple[RawFetch, ...], *, area=None, boundary=N
             raise SourceArtifactError("unapproved store activation shape")
         if activation.json_payload() != {}:
             raise SourceArtifactError("activation payload must not carry session data")
-        if not WillysClient._contains_store_id(active.json_payload(), context):
+        if not validated_store_context(active.json_payload(), context):
             raise SourceArtifactError("active price context mismatch")
         leaves = parser.category_leaf_paths(tree.payload)
         if not leaves or len(set(leaves)) != len(leaves):
@@ -190,7 +193,7 @@ def _willys_completion(documents: tuple[RawFetch, ...], *, area=None, boundary=N
             partition = pages[path]
             if 0 not in partition:
                 raise SourceArtifactError("category first page missing")
-            _, expected = WillysClient._validated_catalog_page(
+            _, expected = validated_catalog_page(
                 partition[0].json_payload(), requested_page=0
             )
             if set(partition) != set(range(max(1, expected))):
@@ -198,7 +201,7 @@ def _willys_completion(documents: tuple[RawFetch, ...], *, area=None, boundary=N
             previous = tree.fetched_at
             for n in sorted(partition):
                 d = partition[n]
-                rows, count = WillysClient._validated_catalog_page(
+                rows, count = validated_catalog_page(
                     d.json_payload(), requested_page=n
                 )
                 if count != expected or d.fetched_at < previous:

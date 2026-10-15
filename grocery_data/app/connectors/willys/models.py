@@ -1,6 +1,28 @@
 from pydantic import BaseModel, ConfigDict, Field
 
 
+def validated_store_context(payload: object, expected: str) -> bool:
+    """Accept exact store bindings and the observed explicit-false picking flag.
+
+    The 2026-10-14 store list and active-store responses for 2176/2354
+    explicitly declare false. Missing retains the legacy contract; true,
+    null and other types cannot establish a picking-base relationship.
+    Only the known top-level/store/pickingStore shapes can bind a context.
+    """
+    if not isinstance(payload, dict):
+        return False
+    if "hasPickingBaseStore" in payload and payload["hasPickingBaseStore"] is not False:
+        return False
+    rows = ([payload] if "storeId" in payload else []) + [
+        payload[key] for key in ("store", "pickingStore") if key in payload
+    ]
+    return bool(rows) and all(
+        isinstance(row, dict) and str(row.get("storeId") or "") == expected
+        and ("hasPickingBaseStore" not in row or row["hasPickingBaseStore"] is False)
+        for row in rows
+    )
+
+
 def validated_catalog_page(
     payload: object,
     *,

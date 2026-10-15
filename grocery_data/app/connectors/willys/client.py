@@ -245,16 +245,6 @@ class WillysClient:
             transport=self._metrics_since(before),
         )
 
-    @staticmethod
-    def _contains_store_id(value: object, expected: str) -> bool:
-        if isinstance(value, dict):
-            if str(value.get("storeId") or "") == expected:
-                return True
-            return any(WillysClient._contains_store_id(child, expected) for child in value.values())
-        if isinstance(value, list):
-            return any(WillysClient._contains_store_id(child, expected) for child in value)
-        return False
-
     async def _activate_store(
         self,
         store_external_id: str,
@@ -334,7 +324,9 @@ class WillysClient:
             active_payload = active.json_payload()
         except (TypeError, ValueError) as exc:
             raise RuntimeError("Willys active-store response is not JSON") from exc
-        if not self._contains_store_id(active_payload, store_external_id):
+        from grocery_data.app.connectors.willys.models import validated_store_context
+
+        if not validated_store_context(active_payload, store_external_id):
             raise RuntimeError("Willys did not confirm the requested store context")
         return active
 

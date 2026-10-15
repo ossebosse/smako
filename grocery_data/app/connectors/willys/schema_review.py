@@ -8,7 +8,10 @@ image/thumbnail text fields from nullable text to text. These exact nullable
 text shapes are supported in either direction. Parser v5 additionally reviews
 the observed number/nullable-number catalog price transition. Missing prices
 remain missing and ordinary quality gates apply. The raw diff is retained;
-other schema changes still stop snapshot promotion.
+other schema changes still stop snapshot promotion. Parser v6 additionally
+reviews the explicit boolean picking-base metadata observed on 2026-10-14.
+Transport, parsing and independent artifact qualification enforce its value
+and exact store binding; the fingerprint exception alone cannot authorize it.
 """
 
 import re
@@ -25,6 +28,9 @@ _PRODUCT_IMAGE_TEXT = re.compile(
 )
 
 _CATALOG_PRICE = re.compile(r"[0-9]+:catalog_page:\$\[\]\.results\[\]\.priceValue\Z")
+_PICKING = re.compile(
+    r"(?:[0-9]+:store_context:\$\[\]|stores:\$\[\]\[\])\.hasPickingBaseStore\Z"
+)
 
 
 def reviewed_willys_type_change(change: SchemaTypeChange, *, nullable_price: bool = False) -> bool:
@@ -45,10 +51,26 @@ def reviewed_willys_type_change(change: SchemaTypeChange, *, nullable_price: boo
     ]
 
 
-def reviewed_willys_schema_diff(diff: SchemaDiff, *, nullable_price: bool = False) -> SchemaDiff:
+def reviewed_willys_schema_diff(
+    diff: SchemaDiff, *, nullable_price: bool = False, picking_contract: bool = False,
+    schemas=None,
+) -> SchemaDiff:
+    def reviewed_picking(path, *, removal=False):
+        if not picking_contract or not _PICKING.fullmatch(path):
+            return False
+        group, field = path.rsplit(":", 1)
+        schema = (schemas or {}).get(group)
+        paths = schema.get("paths", {}) if isinstance(schema, dict) else getattr(schema, "paths", {})
+        identity = field.removesuffix("hasPickingBaseStore") + "storeId"
+        if set(paths.get(identity, ())) != {"string"}:
+            return False
+        # Parser and transport independently require explicit false when
+        # present. Missing remains supported, never synthesized as false.
+        return field not in paths if removal else set(paths.get(field, ())) == {"boolean"}
+
     return SchemaDiff(
-        added=diff.added,
-        removed=diff.removed,
+        added=tuple(p for p in diff.added if not reviewed_picking(p)),
+        removed=tuple(p for p in diff.removed if not reviewed_picking(p, removal=True)),
         type_changed=tuple(
             change for change in diff.type_changed
             if not reviewed_willys_type_change(change, nullable_price=nullable_price)

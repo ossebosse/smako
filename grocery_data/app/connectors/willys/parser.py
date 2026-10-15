@@ -10,6 +10,7 @@ from pydantic import ValidationError
 from grocery_data.app.connectors.willys.models import (
     WillysCategoryNode,
     validated_catalog_page,
+    validated_store_context,
 )
 from grocery_data.app.domain import (
     Chain,
@@ -155,7 +156,7 @@ def _category_path(payload: dict[str, Any]) -> tuple[str, ...]:
 
 
 class WillysParser:
-    parser_version = "willys-parser-v5"
+    parser_version = "willys-parser-v6-picking-contract"
 
     def __init__(self, *, accept_sales_price_object: bool = True) -> None:
         self.accept_sales_price_object = accept_sales_price_object
@@ -198,6 +199,8 @@ class WillysParser:
                 external_id = str(row.get("storeId") or "").strip()
                 if not external_id or not name:
                     continue
+                if not validated_store_context(row, external_id):
+                    raise ValueError("Willys unreviewed picking base store binding")
                 latitude = _decimal(
                     address.get("latitude") or (row.get("geoPoint") or {}).get("latitude")
                 )
@@ -232,7 +235,10 @@ class WillysParser:
                     ),
                     physical_store_external_id=external_id,
                     raw_reference=f"{reference}#storeId={external_id}",
-                    source_fields={"coordinate_source": {"url": document.url,
+                    source_fields={
+                        **({"hasPickingBaseStore": row["hasPickingBaseStore"]}
+                           if "hasPickingBaseStore" in row else {}),
+                        "coordinate_source": {"url": document.url,
                         "sha256": document.payload_hash, "observed_at": document.fetched_at.isoformat()}},
                 )
         return sorted(stores.values(), key=lambda store: (store.name.casefold(), store.external_id))
@@ -454,6 +460,32 @@ class WillysParser:
             raise ValueError("raw references must align with documents")
         products: dict[str, SourceProduct] = {}
         failures: list[ParseFailure] = []
+        contexts = [
+            (document, reference)
+            for document, reference in zip(raw.documents, references, strict=True)
+            if document.kind == "store_context"
+        ]
+        # Legacy product-only inputs remain supported. Once a saved binding
+        # or the new store flag is present, replay must validate that binding
+        # just as live transport does, before consuming any catalogue prices.
+        if contexts or "hasPickingBaseStore" in store.source_fields:
+            confirmed = bool(contexts)
+            for document, _reference in contexts:
+                try:
+                    confirmed = confirmed and (
+                        document.http_status == 200
+                        and document.store_external_id == store.external_id
+                        and validated_store_context(document.json_payload(), store.external_id)
+                    )
+                except (TypeError, ValueError):
+                    confirmed = False
+            if not confirmed:
+                return ProductParseResult(products=[], failures=[ParseFailure(
+                    raw_record_reference=contexts[0][1] if contexts else store.raw_reference,
+                    error_code="price_context_unverified",
+                    error_message="Willys catalogue lacks a reviewed matching store context",
+                    parser_version=self.parser_version,
+                )])
         for document, reference in zip(raw.documents, references, strict=True):
             if document.kind not in {"catalog_page", "product_detail"}:
                 continue
