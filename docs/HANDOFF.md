@@ -1,3 +1,26 @@
+# 2026-10-15: Näringskopplingar och extraval – aktiverade på betan
+
+Användaren begärde ”Aktivera på betan”. Appversion
+`recipe-nutrition-extras-app-7e402a7` aktiverades 16:37 UTC (18:37 svensk tid).
+17 ändrade runtimefiler matchar testad kod; 671 övriga filer oförändrade.
+Gemensamt driftlås och integritetskontrollerade online-backuper användes.
+Scheduler, Windowsuppgift, prismanifest och befintliga privata rader bevaras.
+
+Fyra liveflöden passerar med 19 priskontexter inom 3 km från 22225:
+fem middagar/fyra portioner/minst 40 g protein (43,19–53,51 g uppskattat),
+samtidiga makro-/energigränser, frukost/mellanmål med uppskattad vikt
+300/140 g samt tre veganska middagar. Alla ger HTTP 201, audit PASS,
+noll okända mängder och identisk sparad GET vid två återläsningar.
+Slutkontroll 16:41 UTC: 286 gamla revisioner/97 tillstånd hashbevarade,
+291/102 totalt efter fem verifieringsplaner. Noll OOM/omstarter.
+Lund/Malmö ready 200; befintlig AGING-varning för Malmö kvarstår.
+
+Mjölkallergi, ekologiska animalier och varm tillagad vikt kan fortsatt
+sakna källunderlag. Ekoandelsvalets tidigare svarstid kvarstår som begränsning.
+[Aktivering, evidens och återgång](releases/recipe-nutrition-extras-20261015/ACTIVATED.md).
+
+---
+
 # 2026-10-15: Näringskopplingar och extraval – lokalt verifierade, inte aktiverade
 
 Gren `fix/recipe-nutrition-extras`, kodcommit `7e402a7`, bas `fd783d1`.

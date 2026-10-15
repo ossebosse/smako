@@ -1,8 +1,9 @@
 # Näringskopplingar och extraval, 2026-10-15
 
-Status: lokal utveckling på `fix/recipe-nutrition-extras`, kodcommit `7e402a7`, bas `fd783d1`.
-Ingen aktivering av denna ändring på beta.smako.nu. App, scheduler,
-Windowsuppgift, prisunderlag och användartillstånd har inte ändrats.
+Status: aktiverad på beta.smako.nu 2026-10-15 16:37 UTC efter användarens
+instruktion. Kodcommit `7e402a7`, gren `fix/recipe-nutrition-extras`, bas `fd783d1`.
+Se [aktivering och liveverifiering](../docs/releases/recipe-nutrition-extras-20261015/ACTIVATED.md).
+Nedan redovisas den föregående lokala utvecklingen och dess verifiering.
 
 ## Orsak och ändring
 
