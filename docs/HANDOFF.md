@@ -1,3 +1,39 @@
+# 2026-10-16: Flexibla receptfamiljer (steg 4) – lokalt verifierat
+
+Användaren beställde steg 4 och stöd för framtida recept. Gren
+`feature/flexible-recipe-families`, implementation `07f7fd7`, bas `094557a`.
+**Ingen aktivering på betan.**
+
+`meal_library_cli expand` omvandlar granskade familjer med råvarubyten och
+uttryckliga mängdkombinationer till vanliga receptpaket. Befintlig validering,
+import, historik, förberedelse, produkt-/näringskontroll och optimering används.
+Max 16 listade varianter per familj; ingen automatisk kombinationsprodukt.
+Varje variant har egna steg, komponenter, metadata och granskningsproveniens.
+Nya grundrecept kan läggas till med data utan Pythonregistrering.
+
+Första paketet tillför sju varianter från tre befintliga grundrätter.
+Sex varianter och alla tre grundrecept klarar köp och fyra makronäringsvärden
+i fryst återspelning. Kvargvarianten avvisas fortfarande för saknat köpunderlag.
+Inga källkrav sänktes. Ett undantag i `matches_meal` är rättat så att
+`adaptation=products` också avför frukost-/mellanmålsvarianter utan recipe_choices.
+
+269 offlineprov, Ruff och compileall passerar. Fyra frysta menyprofiler passerar
+med oförändrade inköpssummor. Frukostprofilen väljer automatiskt extra yoghurt
+och får uppskattad serverad vikt 400 i stället för 300 g per portion; båda
+ryms i användargränsen. Övriga tre har identisk full semantisk hash.
+
+**Tidsregression:** standard kall/varm 85,78/58,46 s mot 61,56/37,74 s;
+eko kall 316,28 s mot 216,52 s. Protein40 32,59/8,79 s, frukost/mellanmål
+29,06/4,31 s. Det befintliga skyddet som jämför mot tidigare bibliotek ger
+mer sökarbete när nya varianter kvalificerar. Återanvändning mellan generationer
+behöver förbättras före stor innehållsexpansion; ingen snabbhet påstås här.
+
+[Författarformat](flexible-recipes.md) ·
+[Resultat och begränsningar](../reports/flexible-recipes-20261016.md).
+Rådata och återspelningshjälpare finns i `.local/flexible-recipes/`.
+
+---
+
 # 2026-10-16: Snabbare ekosökning och återanvänd första måltid – lokalt verifierat
 
 Användaren bad att genomföra nästa steg. Gren `perf/ecological-week-search`,
