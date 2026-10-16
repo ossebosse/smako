@@ -103,6 +103,7 @@ class Settings:
     price_universe_city: str = "Lund"
     plan_store_path: Path = Path("data/consumer_plans.sqlite3")
     price_universe_prewarm_enabled: bool = False
+    source_facts_prewarm_enabled: bool = True
     price_universe_prewarm_postal_code: str = "22350"
     price_universe_prewarm_modes: tuple[str, ...] = (
         "cheapest",
@@ -393,6 +394,10 @@ class Settings:
             price_universe_prewarm_enabled=_as_bool(
                 os.getenv("PRICE_UNIVERSE_PREWARM_ENABLED"),
                 False,
+            ),
+            source_facts_prewarm_enabled=_as_bool(
+                os.getenv("SOURCE_FACTS_PREWARM_ENABLED"),
+                True,
             ),
             price_universe_prewarm_postal_code=os.getenv(
                 "PRICE_UNIVERSE_PREWARM_POSTAL_CODE",

@@ -1,3 +1,42 @@
+# 2026-10-16: Planerartid, faktauppvärmning och färdigrättsmatchning – ej aktiverat
+
+Gren `perf/planner-startup-and-semantics`, bas `46d834b`. **Ingen aktivering på betan.**
+Underlag: granskningspaketets frysta Lund-artefakt (universe `469136bc…`) och
+produktfakta, offline, receptbiblioteket (`mode=complete`), 1 CPU.
+
+1. **Audit endast för hela menyer.** Delmenyer i beamsökningen (`final=False`)
+   auditeras inte; varje hel meny, bevarad incumbent och slutmeny auditeras som
+   förut, och slutmenyn räknas alltid om med `final=True`. 0 av cirka 1 950
+   delmenyaudits underkändes i två mätningar. Enhetstabellen i
+   `purchase_quantity_resolver` byggs en gång och cachas. Fyra profiler
+   (5×4 med 2/3 butiker, protein ≥ 40 g, 3×2): identisk SHA-256 för recept,
+   korg, näring, audit och skafferifördelning; cirka 10 % kortare tid
+   (t.ex. 50,7 → 42,9 s varm standard). Mätbrus några procent.
+2. **Produktfakta laddas i bakgrunden vid uppstart** (`source_facts_prewarm.py`)
+   med samma `load_retained_facts` och cache, utan planerarens admission-plats.
+   `SOURCE_FACTS_PREWARM_ENABLED` (standard på, kräver kompletta recept).
+   Effekten är **inte uppmätt**: råsnapshots saknades i underlaget.
+   `deploy/.env.production.example` anger `PRICE_UNIVERSE_PREWARM_ENABLED=false`
+   enligt startup-wait-rapporten; serverns verkliga miljö måste ändras separat.
+3. **Tydligare fel när alla valda butiker bara har kampanjpriser**, med förslag
+   på butiker med fullt sortiment. Endast text; krav, scope och prisregler
+   oförändrade. Okänd coverage räknas inte som offers_only.
+4. **Fyllda degrätter är färdigrätter.** Namn med dumpling, gyoza, wonton,
+   dim sum, pirog, vårrulle/spring roll ger `ready_meal` (endast produktnamn,
+   inte navigationskategori; sås/deg/skin undantas). Alla 35 träffar i Lund är
+   verkliga färdigrätter; "Dumplings Kyckling" kan inte längre bli recepts kyckling.
+
+Minnet är oförändrat: 92 MB pris-JSON blir cirka 745 MB modeller, fakta cirka
+200 MB. Dedup av proveniens/strängar sänkte inte RSS och ingår inte.
+Variationsgränser ändrades inte: upprepningen sågs i PersonalPlanner utan
+`mode=complete`, en väg som inget gränssnitt använder.
+
+43 befintliga planerar-/semantiktestfiler före och efter: samma 56 kända
+fel/errors (främst saknade `reports/`-filer), inga nya. 11 nya tester, Ruff och
+compileall passerar.
+
+---
+
 # 2026-10-16: Main och portabel utvecklings-/betastart
 
 `main` samlar den tidigare huvudgrenen `master` (`bdf0a3a`) och de 25 senare

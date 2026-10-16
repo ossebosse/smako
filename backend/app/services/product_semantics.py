@@ -1360,6 +1360,22 @@ def _classify_produce_category_form(category_text: str) -> str | None:
     return None
 
 
+# Filled-dough dishes named by the product itself ("Dumplings Kyckling",
+# "Gyoza Pork & Masala", "Köttfärspirog"). Their visible meat is a filling, so
+# they are ready meals and never a recipe's raw meat line. Name only: broad
+# navigation such as "Pizza, paj & piroger" is not product-class proof, and
+# separate dough/sauce products ("Gyoza Skin Deg", "Gyoza Sauce") are excluded.
+_FILLED_DOUGH_DISH_MARKERS = (
+    "dumpling", "gyoza", "wonton", "dim sum", "dimsum", "pirog", "varrull", "spring roll",
+)
+_FILLED_DOUGH_COMPONENT_WORDS = ("sauce", "sas", "deg", "skin", "skins", "dough", "wrapper", "wrappers")
+
+
+def _is_filled_dough_dish(text: str) -> bool:
+    return (any(marker in text for marker in _FILLED_DOUGH_DISH_MARKERS)
+            and not _contains_any(text, _FILLED_DOUGH_COMPONENT_WORDS))
+
+
 def _classify_prepared_form(text: str) -> str | None:
     for product_form, markers in _PREPARED_FORM_MARKERS:
         if any(_search_text(marker) in text for marker in markers):
@@ -2083,6 +2099,8 @@ def evaluate_product_semantics(
     name_text = _search_text(name)
     category_text = _search_text(str(_value(product, "category", "") or ""))
     prepared_form = _classify_prepared_form(name_text)
+    if prepared_form is None and _is_filled_dough_dish(name_text):
+        prepared_form = "ready_meal"
     # A specific compound product-class label is stronger than a flavour in
     # a short name. Broad navigation such as "Ost & kex" is not such proof.
     if prepared_form is None and _contains_any(category_text, ("ostkex", "smörgåskex")):

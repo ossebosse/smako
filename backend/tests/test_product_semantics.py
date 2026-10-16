@@ -246,6 +246,30 @@ def test_gyros_and_chicken_sticks_cannot_beat_raw_chicken_cuts() -> None:
     assert [match.product_id for match in matches] == ["thigh", "fillet"]
 
 
+def test_filled_dough_dishes_cannot_be_a_recipe_meat_line() -> None:
+    # Real Lund catalogue names; the meat is only a filling.
+    traps = [
+        _product("dumplings", "Dumplings Kyckling Fryst", "kyckling", price=1),
+        _product("gyoza", "Gyoza Chicken Lemongrass", "kyckling", price=2),
+        _product("pirog", "Pirog Chicken taco", "kyckling", price=3),
+    ]
+    thigh = _product("thigh", "Kycklinglårfilé", "kyckling", price=69)
+
+    rejected = [evaluate_product_semantics("kyckling", product) for product in traps]
+    matches = ProductMatcher().match(_ingredient("kyckling"), [*traps, thigh])
+
+    assert all(d.confidence == SemanticConfidence.REJECTED for d in rejected)
+    assert all(d.product_role == "processed_ready_meal" for d in rejected)
+    assert [match.product_id for match in matches] == ["thigh"]
+
+
+@pytest.mark.parametrize("name", ["Gyoza Sauce", "Gyoza Skin Deg Fryst"])
+def test_filled_dough_components_are_not_classified_as_ready_meals(name) -> None:
+    decision = evaluate_product_semantics("kyckling", _product("component", name, "kyckling"))
+
+    assert decision.product_form != "ready_meal"
+
+
 @pytest.mark.parametrize(
     ("canonical", "product_name", "role"),
     [

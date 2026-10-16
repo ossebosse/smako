@@ -109,6 +109,11 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         settings,
         prepared,
     )
+    # Shared product facts for complete recipes, loaded in a background thread
+    # that never holds the planner admission slot (see source_facts_prewarm).
+    from app.services.source_facts_prewarm import schedule_source_facts_prewarm
+    application.state.source_facts_prewarm = schedule_source_facts_prewarm(
+        settings, GLOBAL_PREPARED_PRICE_UNIVERSES.active_universes())
     # This fills only process-local caches against the artifact activated
     # above.  It is disabled by default, makes no provider request and its
     # per-profile failure boundary never swaps or invalidates the universe.
