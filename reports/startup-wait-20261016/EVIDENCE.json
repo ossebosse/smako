@@ -1,0 +1,200 @@
+{
+  "runtime": {
+    "checked_at": "2026-10-16T13:52:10.852307+00:00",
+    "image": "sha256:93bbfd2ebe3764cddd559422ed1fce53197359b6f0aabde50619dfc6a81cd8f7",
+    "started_at": "2026-10-16T13:21:04.079945636Z",
+    "configuration": {
+      "BUILD_ID": "joint-week-refinement-app-e041451",
+      "PLANNER_MAX_CONCURRENT_REQUESTS": "1",
+      "PLANNER_MAX_QUEUED_REQUESTS": "4",
+      "PRICE_UNIVERSE_PREWARM_ENABLED": "true",
+      "PRICE_UNIVERSE_PREWARM_MODES": "balanced",
+      "PRICE_UNIVERSE_PREWARM_MAX_STORES": "3",
+      "PRICE_UNIVERSE_PREWARM_SERVINGS": "2",
+      "PRICE_UNIVERSE_PREWARM_RECIPES": "5",
+      "PRICE_UNIVERSE_PREWARM_CANDIDATE_COUNT": "80",
+      "PRICE_UNIVERSE_PREWARM_CANDIDATE_SEARCH_LIMIT": null,
+      "PRICE_UNIVERSE_PREWARM_BEAM_WIDTH": "30"
+    },
+    "runtime_hashes": {
+      "backend/app/services/plan_prewarm.py": "3a2b63a5dbdf8a4c9f3dcb8785eb4e01e7670cc9d12968be7e8ddcc99c414602",
+      "backend/app/services/planner_admission.py": "087a38b3eff23d3d9f5f9c18a75a28e669d5520a8a7f3720d0168e53642f4256",
+      "backend/app/main.py": "8e1e12487f70fa4f0088f243818de3595c2b1e33e3a65de87c96d22241b97e2e",
+      "backend/app/api/plan.py": "d42a4d14068b45c967d149539b4a8a207e545932452fe5c81e1b2c3bc692d6ce",
+      "backend/app/services/personal_planner.py": "2b4d269e943289c74ed0dba4efecd060de7b17f7020162e622b16335786ef3e3",
+      "backend/app/services/meal_plan_optimizer.py": "b6df5e3df0a003b9de76fcb9023311677f075fa37a8316a9e1842581815cd84b",
+      "backend/app/services/complete_recipes.py": "d546c674bb3a9ec2d7783d072b79bc8e774175e7977f1e8118a671004fa01a28",
+      "backend/app/models/plan.py": "cb0314acb123a3abea4d0e391d8d88c3a4505a9fb764c85e303bbce43862098b"
+    },
+    "events": [
+      {
+        "at": "2026-10-16T13:21:06.788711065Z",
+        "event": "startup_wait"
+      },
+      {
+        "at": "2026-10-16T13:22:07.754323033Z",
+        "event": "startup_complete"
+      },
+      {
+        "at": "2026-10-16T13:23:46.731797547Z",
+        "event": "background_prewarm",
+        "fields": {
+          "scope": "city:lund",
+          "universe": "price-universe:469136bc23df3fb3d9100ad5151dbb14ed0a482722e56a534c3fa108b9f78a0f",
+          "status": "complete",
+          "profiles": "1"
+        }
+      },
+      {
+        "at": "2026-10-16T13:32:04.377945751Z",
+        "event": "background_prewarm",
+        "fields": {
+          "scope": "city:malmö",
+          "universe": "price-universe:91d4702f0f6a6ecef542a77a896149cd606e56efe0580f7a78334fd83fd04f07",
+          "status": "complete",
+          "profiles": "1"
+        }
+      }
+    ],
+    "poll_groups": []
+  },
+  "runtime_hashes_match_local": true,
+  "request_metrics": {
+    "protein40": [
+      {
+        "metric_persisted_at": "2026-10-16T13:24:24.932359+00:00",
+        "endpoint": "/api/plans",
+        "method": "POST",
+        "duration_ms": 672.631,
+        "status_code": 202
+      }
+    ],
+    "all-macros": [
+      {
+        "metric_persisted_at": "2026-10-16T13:33:22.253173+00:00",
+        "endpoint": "/api/plans",
+        "method": "POST",
+        "duration_ms": 54.917,
+        "status_code": 202
+      }
+    ],
+    "breakfast-snack-weight": [
+      {
+        "metric_persisted_at": "2026-10-16T13:33:51.855238+00:00",
+        "endpoint": "/api/plans",
+        "method": "POST",
+        "duration_ms": 74.789,
+        "status_code": 202
+      }
+    ],
+    "vegan": [
+      {
+        "metric_persisted_at": "2026-10-16T13:34:10.245365+00:00",
+        "endpoint": "/api/plans",
+        "method": "POST",
+        "duration_ms": 62.449,
+        "status_code": 202
+      }
+    ]
+  },
+  "prior_api_cases": [
+    {
+      "case": "protein40",
+      "client_elapsed_seconds": 533.72,
+      "plan_saved_at": "2026-10-16T13:33:12.787623Z",
+      "planner_timings_seconds": {
+        "product_facts": 21.043275660835207,
+        "package_calculation": 1.438041368033737,
+        "nutrition": 0.1254440601915121,
+        "audit": 1.2002216666005552,
+        "candidate_generation_and_qualification": 36.35606800811365,
+        "week_search": 5.060958176385611,
+        "total": 43.785998478066176
+      }
+    },
+    {
+      "case": "all-macros",
+      "client_elapsed_seconds": 26.98,
+      "plan_saved_at": "2026-10-16T13:33:44.079741Z",
+      "planner_timings_seconds": {
+        "product_facts": 5.595594068057835,
+        "package_calculation": 1.5121882022358477,
+        "nutrition": 0.14916328340768814,
+        "audit": 1.2717997473664582,
+        "candidate_generation_and_qualification": 3.7674816423095763,
+        "week_search": 5.573594762943685,
+        "total": 14.717654535081238
+      }
+    },
+    {
+      "case": "breakfast-snack-weight",
+      "client_elapsed_seconds": 15.77,
+      "plan_saved_at": "2026-10-16T13:34:02.076255Z",
+      "planner_timings_seconds": {
+        "product_facts": 5.469964773859829,
+        "package_calculation": 0.17658624844625592,
+        "nutrition": 0.010026611853390932,
+        "audit": 0.015740422997623682,
+        "candidate_generation_and_qualification": 1.6461610007099807,
+        "week_search": 0.18889868911355734,
+        "total": 3.3149949708022177
+      }
+    },
+    {
+      "case": "vegan",
+      "client_elapsed_seconds": 16.28,
+      "plan_saved_at": "2026-10-16T13:34:21.026261Z",
+      "planner_timings_seconds": {
+        "product_facts": 5.595859786029905,
+        "package_calculation": 0.2038378375582397,
+        "nutrition": 0.013169784098863602,
+        "audit": 0.15102258091792464,
+        "candidate_generation_and_qualification": 1.1576797990128398,
+        "week_search": 0.6239878758788109,
+        "total": 3.7553108311258256
+      }
+    }
+  ],
+  "controlled_reproduction": {
+    "queue_cases": [
+      {
+        "background": true,
+        "order": [
+          "malmo_background_started",
+          "malmo_background_finished",
+          "lund_user_started"
+        ],
+        "user_wall_seconds": 0.24830129998736084,
+        "queue_wait_ms": 210.174,
+        "user_waited_until_background_finished": true
+      },
+      {
+        "background": false,
+        "order": [
+          "lund_user_started"
+        ],
+        "user_wall_seconds": 0.03292109991889447,
+        "queue_wait_ms": 0.008,
+        "user_waited_until_background_finished": false
+      }
+    ],
+    "actual_prewarm_request": {
+      "complete_recipes": false,
+      "personal": false,
+      "recipes": 5,
+      "servings": 2,
+      "max_stores": 3,
+      "mode": "balanced"
+    }
+  },
+  "validation": {
+    "existing_background_and_admission_tests_passed": 17,
+    "new_live_menu_runs": 0,
+    "production_changes": false
+  },
+  "limits": [
+    "Metric timestamps record asynchronous persistence, not exact request arrival.",
+    "Historical queue duration and prewarm start times were not persisted.",
+    "Controlled reproduction proves blocking order, not server latency."
+  ]
+}

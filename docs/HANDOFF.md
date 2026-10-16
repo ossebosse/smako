@@ -1,3 +1,17 @@
+# 2026-10-16: Uppstartsväntan undersökt
+
+Gren `investigate/startup-prewarm-wait`, bas `b6ef5b8`. Ingen produktionsändring.
+Malmös redan startade bakgrundsuppvärmning blockerar Lundanvändaren bakom
+samma enda admission-plats. Historiska tider motsvarar cirka 7 min 40 s väntan;
+exakt köspan saknas. Produktfakta 21,04 s ligger dessutom utanför create-tiden
+43,79 s. Uppvärmningen använder äldre receptväg, fem rätter/två portioner/tre
+butiker, medan användarprovet använder nytt receptläge och andra inställningar.
+Åtta runtimefiler matchar lokal kod. Kontrollerad lokal reproduktion bekräftar
+blockeringen och den äldre begäran; 17 befintliga kö-/uppvärmningstester passerar.
+Nästa rekommenderade steg: stäng av helmenyuppvärmningen via befintlig flagga,
+behåll separata pris-/ingrediensförberedelser och mät hela användarjobbet.
+Se [utredning och sanerad evidens](../reports/startup-wait-20261016.md).
+
 # 2026-10-16: Veckooptimeringen aktiverad på betan
 
 Kodcommit `e041451` är pushad på `feature/joint-week-refinement` och aktiv som
