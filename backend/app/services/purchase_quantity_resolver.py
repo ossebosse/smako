@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from decimal import ROUND_CEILING, ROUND_HALF_UP, Decimal
+from functools import lru_cache
 from typing import Literal
 
 from app.models.product import (
@@ -80,23 +81,32 @@ def _ceil(value: Decimal) -> int:
     return int(value.to_integral_value(rounding=ROUND_CEILING))
 
 
+_UNIT_DEFINITIONS: dict[str, tuple[_CanonicalDimension, Decimal]] = {
+    "g": ("g", Decimal(1)),
+    "gram": ("g", Decimal(1)),
+    "kg": ("g", Decimal(1000)),
+    "ml": ("ml", Decimal(1)),
+    "l": ("ml", Decimal(1000)),
+    "liter": ("ml", Decimal(1000)),
+    "litre": ("ml", Decimal(1000)),
+    "st": ("st", Decimal(1)),
+    "styck": ("st", Decimal(1)),
+    "piece": ("st", Decimal(1)),
+}
+
+
 def _unit_definition(unit: str) -> tuple[_CanonicalDimension, Decimal] | None:
+    # Hot path in every package quote. Pure text lookup of immutable values;
+    # the table is built once and the small set of unit spellings is cached.
+    return _cached_unit_definition(unit)
+
+
+@lru_cache(maxsize=256)
+def _cached_unit_definition(unit: str) -> tuple[_CanonicalDimension, Decimal] | None:
     normalized = unit.strip().lower().replace(" ", "")
     for prefix in ("sek/", "kr/"):
         normalized = normalized.removeprefix(prefix)
-    definitions: dict[str, tuple[_CanonicalDimension, Decimal]] = {
-        "g": ("g", Decimal(1)),
-        "gram": ("g", Decimal(1)),
-        "kg": ("g", Decimal(1000)),
-        "ml": ("ml", Decimal(1)),
-        "l": ("ml", Decimal(1000)),
-        "liter": ("ml", Decimal(1000)),
-        "litre": ("ml", Decimal(1000)),
-        "st": ("st", Decimal(1)),
-        "styck": ("st", Decimal(1)),
-        "piece": ("st", Decimal(1)),
-    }
-    return definitions.get(normalized)
+    return _UNIT_DEFINITIONS.get(normalized)
 
 
 def _to_base(quantity: Decimal, unit: str) -> tuple[Decimal, _CanonicalDimension] | None:

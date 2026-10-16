@@ -1184,17 +1184,25 @@ class PersonalPlanner:
                     final=final,
                     nutrition_bounds=nutrition_bounds,
                 )
-        audit_started = perf_counter()
-        with performance_span("personal_audit"):
-            audit = self.auditor.audit(
-                ingredients,
-                basket,
-                user_pricing_context=self.user,
-                strategic_extras_allowed=self.spec.surplus_mode == "allow_larger",
-            )
-        self.timings["audit"] += perf_counter() - audit_started
-        if not audit.passed:
-            raise PolicyConflict("Korgens mängder/prisvillkor kunde inte verifieras.")
+        # Every complete menu (final=True) and every retained incumbent is
+        # audited exactly as before. Partial beam prefixes (final=False) are
+        # intermediate search states: their result is never returned, saved or
+        # shown, and the chosen menu is recomputed with final=True before
+        # acceptance. Skipping their audit therefore keeps the gate on every
+        # deliverable basket while removing about two thirds of audit calls.
+        audit = None
+        if final or _retained is not None:
+            audit_started = perf_counter()
+            with performance_span("personal_audit"):
+                audit = self.auditor.audit(
+                    ingredients,
+                    basket,
+                    user_pricing_context=self.user,
+                    strategic_extras_allowed=self.spec.surplus_mode == "allow_larger",
+                )
+            self.timings["audit"] += perf_counter() - audit_started
+            if not audit.passed:
+                raise PolicyConflict("Korgens mängder/prisvillkor kunde inte verifieras.")
         for group in groups:
             item = next(
                 i for store in basket.stores for i in store.items if i.ingredient == group["key"]
@@ -2423,6 +2431,9 @@ class PersonalPlanner:
                     "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. "
                     + message
                 )
+            hint = self._campaign_only_scope_hint()
+            if hint:
+                message = f"{message} {hint}"
             if not self.complete and not self.spec.allow_nutrition_estimates and any(
                 m.count and requested_nutrients(m.limits) for m in self.spec.meals
             ):
@@ -2433,6 +2444,25 @@ class PersonalPlanner:
                 conflicts=getattr(exc, "conflicts", None),
                 diagnostics=self.diagnostics.snapshot(),
             ) from exc
+
+    def _campaign_only_scope_hint(self):
+        """Explain a failed plan whose every usable store is offers-only.
+
+        Text only: no requirement, store scope or price rule changes. Unknown
+        coverage is never treated as offers-only, and nothing is suggested when
+        the area has no store with a complete catalogue.
+        """
+        selected = [s for s in self.view.stores if s.store_id in self.store_ids]
+        if not selected or any(s.coverage != "offers_only" for s in selected):
+            return None
+        complete = sorted({s.name for s in self.view.stores
+                           if s.store_id not in self.store_ids
+                           and s.coverage in {"full_catalog", "full_online_catalog"}})
+        text = ("De valda butikerna har bara kampanjpriser i Smakos underlag, så varor "
+                "som inte är på kampanj kan inte prissättas där.")
+        if complete:
+            text += " Lägg till minst en butik med fullt sortiment, till exempel " + ", ".join(complete[:3]) + "."
+        return text
 
     def _week_purchase_key(self, basket):
         from app.services.week_refinement import surplus_key
