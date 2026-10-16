@@ -1748,7 +1748,7 @@ class PersonalPlanner:
                 f"Ingen av {sum(g['food'] for g in groups)} matinköpsrader har ett verifierat ekologiskt alternativ i sökningen. Vald kostnadsandel kan inte verifieras. Ändra kravet uttryckligen i Mina val, välj andra varor eller gå tillbaka.",
                 code="DATA_BLOCKED",
             )
-        winners = []
+        best = None
         searched = 0
         # Bounded search over ecological candidate restrictions, always repriced
         # by the original whole-basket optimizer. Exhaustion is explicitly reported.
@@ -1760,26 +1760,52 @@ class PersonalPlanner:
                     break
             if len(subsets) >= 256:
                 break
+        bounds = self.optimizer.restriction_cost_bounds(
+            ingredients, candidates, organic_candidates,
+            allowed_store_ids=(s.store_id for s in self.view.stores),
+        )
+        base_bound = sum((pair[0] for pair in bounds.values()), Decimal(0)) if bounds is not None else None
         for subset in subsets:
             from app.services.performance_trace import increment_performance_counter
             increment_performance_counter("ecological_subsets_evaluated")
+            # The first minimum wins ties in the original subset order. Once
+            # an earlier qualifying basket exists, an optimistic cost >= its
+            # exact cost proves this later subset cannot replace it. All line
+            # quotes include package rounding and eligible single-line offers.
+            if best is not None and bounds is not None:
+                lower = base_bound + sum((bounds[k][1] - bounds[k][0] for k in subset), Decimal(0))
+                if lower >= money(best.total):
+                    increment_performance_counter("ecological_subsets_pruned_cost")
+                    continue
             narrowed = {
                 k: organic_candidates[k] if k in subset else v for k, v in candidates.items()
             }
             try:
+                if best is not None and bounds is not None:
+                    # The week search already exposes checkout-identical
+                    # leading keys for nested store caps. Reuse that path to
+                    # avoid materializing losing BasketItems and savings, while
+                    # keeping every store, quote, verification rank and offer.
+                    keys = self.optimizer.same_depth_nested_store_limited_keys(
+                        ingredients, narrowed, self.view.stores,
+                        max_stores=self.request.max_stores)
+                    if not keys or keys[-1] is None or keys[-1][1] >= money(best.total):
+                        increment_performance_counter("ecological_subsets_pruned_exact_cost")
+                        continue
                 option = self.optimizer.optimize(
                     ingredients, narrowed, self.view.stores, max_stores=self.request.max_stores
                 )
                 searched += 1
-                if (self._eco_percent(option, groups) or 0) + 1e-8 >= self.spec.organic_percent:
-                    winners.append(option)
+                if ((self._eco_percent(option, groups) or 0) + 1e-8 >= self.spec.organic_percent
+                        and (best is None or option.total < best.total)):
+                    best = option
             except IncompleteBasketError:
                 continue
-        if not winners:
+        if best is None:
             raise PolicyConflict(
                 f"Ingen kombination hittades med minst {self.spec.organic_percent:g} % verifierat eko inom butikstaket ({searched} kontrollerade kombinationer). Kravet är oförändrat."
             )
-        return min(winners, key=lambda b: b.total)
+        return best
 
     def _check_final(self, slots, basket, groups, rows, allocations):
         # Recheck explicit whole-week constraints independently of search pruning
@@ -2132,7 +2158,7 @@ class PersonalPlanner:
         return nutrition
 
     @timed_stage("candidate_generation_and_qualification")
-    def _candidates(self, meal):
+    def _candidates(self, meal, *, qualified_results=None):
         from app.services.plan_jobs import report_stage
         report_stage("candidate_qualification")
         with performance_span("personal_candidate_generation"):
@@ -2203,7 +2229,7 @@ class PersonalPlanner:
                     # Qualify every meal type before menu branching. Previously
                     # only depth-one dinners were independently checked; failed
                     # breakfasts/snacks could remain hidden behind dinner search.
-                    self.basket(
+                    qualified = self.basket(
                         [
                             MealSlot(
                                 id=f"{meal.meal_type}-1",
@@ -2214,6 +2240,9 @@ class PersonalPlanner:
                         ],
                         final=False,
                     )
+                    if qualified_results is not None:
+                        key = ((f"{meal.meal_type}-1", self._recipe_id(recipe)),)
+                        remember_bounded(qualified_results, key, qualified, 256)
                     self.diagnostics.singleton_passed += 1
                 valid.append(recipe)
                 if recipe.design and recipe.design.content_source:
@@ -2493,10 +2522,20 @@ class PersonalPlanner:
                 include_content_pack=self.include_content_pack, library_generation=self.library_generation,
             ).create()
         pools, options = {}, []
+        # Transfer the exact first-slot qualifications to the existing bounded
+        # beam cache. Private inputs and slot order are identical within this
+        # invocation. Single-slot final checks and edited schedules are fresh.
+        qualified_results = OrderedDict()
         for slot in slots:
             if generating or slot.id == replace_slot:
                 if slot.meal_type not in pools:
-                    pools[slot.meal_type] = self._candidates(self.meals[slot.meal_type])
+                    if (generating and len(slots) > 1 and slot is slots[0]
+                            and hasattr(self._candidates, "__wrapped__")
+                            and getattr(self._candidates, "__func__", None) is PersonalPlanner._candidates):
+                        pools[slot.meal_type] = self._candidates(
+                            self.meals[slot.meal_type], qualified_results=qualified_results)
+                    else:
+                        pools[slot.meal_type] = self._candidates(self.meals[slot.meal_type])
                 choices = [
                     r
                     for r in pools[slot.meal_type]
@@ -2659,6 +2698,7 @@ class PersonalPlanner:
                 fallback_beam_width=64,
                 search_trace=self.diagnostics.search,
                 decision_observer=self.product_trace.search_decision,
+                initial_evaluations=qualified_results,
                 # Generated meals of one type share requirements. With no pantry
                 # allocation or product locks, permuting their day numbers cannot
                 # change the whole basket or per-recipe nutrient constraints.

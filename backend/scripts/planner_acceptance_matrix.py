@@ -167,7 +167,10 @@ def main():
         p.error("positive repeat and simple label required")
     args.output.mkdir(parents=True, exist_ok=True)
     # Separate bounded cache roots; don't clear any existing deployment cache.
-    os.environ["RECIPE_PREPARATION_CACHE_ROOT"] = str(args.output / (args.label + "-prepared"))
+    # Profiles sharing an output folder must still start with independent
+    # disk preparation; otherwise later cold-process samples inherit the
+    # previous profile's artifacts and cannot be compared to fresh baselines.
+    os.environ["RECIPE_PREPARATION_CACHE_ROOT"] = str(args.output / f"{args.label}-{args.matrix_case}-prepared")
     manifest = json.loads((args.inputs / "matrix-inputs.json").read_bytes())
     files = {}
     for name in ("combined-prices.json", "combined-facts.json", "combined-request.json"):

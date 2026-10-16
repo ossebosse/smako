@@ -46,6 +46,24 @@ def test_repeated_slot_keeps_identity_but_reuses_equal_food_calculation():
     assert [r["values"]["protein_g"] for r in rows] == [22, 22]
 
 
+def test_candidate_qualification_transfers_to_first_beam_slot_and_keeps_final_audit(monkeypatch):
+    from app.services.recipe_candidate_generator import DeterministicRecipeCandidateGenerator
+
+    p, slot = planner()
+    p.spec.slots = None
+    p.meals["snack"].count = 2
+    monkeypatch.setattr(DeterministicRecipeCandidateGenerator, "generate_for_meal_type",
+                        lambda *args, **kwargs: [slot.recipe])
+    with patch.object(p, "basket", wraps=p.basket) as basket:
+        result = p.create()
+    singleton = [call for call in basket.call_args_list if len(call.args[0]) == 1]
+    assert len(singleton) == 1  # qualification, no identical first-depth checkout
+    assert len([call for call in basket.call_args_list if call.kwargs.get("final") is True]) >= 2
+    assert result.personal.checks["checkout_audit"]["passed"]
+    assert all(r["values"]["protein_g"] == 22 for r in result.personal.checks["nutrition"])
+    assert result.personal.checks["planning_diagnostics"]["search"][0]["evaluation_cache_hits"] == 1
+
+
 def test_unrounded_quantity_limits_and_mutable_preparation_do_not_alias():
     p, slot = planner()
     p.basket([slot])

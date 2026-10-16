@@ -38,6 +38,36 @@ def retry_options():
     return [[MealSlot(id=f"d{i}", day=i, meal_type="dinner", recipe=r) for r in recipes] for i in (1,2)]
 
 
+def test_qualified_prefixes_reuse_existing_cache_but_final_and_changed_recipes_are_fresh():
+    from collections import OrderedDict
+
+    from app.services.recipe_candidate_validator import recipe_id
+
+    options = retry_options()
+    key = lambda slot: ((slot.id, recipe_id(slot.recipe)),)
+    seeds = OrderedDict((key(slot), index) for index, slot in enumerate(options[0]))
+    options[0][2].recipe.ingredients[0] = options[0][2].recipe.ingredients[0].model_copy(
+        update={"quantity": 2})  # stale qualification must miss
+    calls, trace = [], []
+
+    def evaluate(slots, *, final):
+        calls.append((len(slots), final))
+        return sum(ord(s.recipe.name) - ord("A") for s in slots)
+
+    kwargs = {"evaluate": evaluate, "accepts": lambda slots, final: True,
+              "score": lambda slots, result: result, "beam_width": 3}
+    actual = MenuOptimizer().optimize_slots(options, initial_evaluations=seeds, search_trace=trace, **kwargs)
+    assert not seeds
+    assert calls.count((1, False)) == 1
+    assert calls.count((2, True)) == 9
+    assert trace[0]["evaluation_cache_hits"] == 2
+    assert actual == MenuOptimizer().optimize_slots(options, **kwargs)
+    calls.clear()
+    seeds = OrderedDict((key(slot), -100) for slot in options[0])
+    MenuOptimizer().optimize_slots(options[:1], initial_evaluations=seeds, **kwargs)
+    assert calls == [(1, True)] * 3  # a prefix is never proof of final constraints
+
+
 def test_bounded_retry_only_after_distinct_prefix_was_lost():
     options = retry_options()
     trace = []

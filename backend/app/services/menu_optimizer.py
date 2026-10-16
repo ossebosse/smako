@@ -828,7 +828,8 @@ class MenuOptimizer:
         ), RecipeProfileBuilder._structure(recipe))
 
     def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
-                       search_trace=None, state_identity=None, fallback_beam_width=None, decision_observer=None):
+                       search_trace=None, state_identity=None, fallback_beam_width=None, decision_observer=None,
+                       initial_evaluations=None):
         """Try the ordinary beam, then one explicitly bounded safe retry.
 
         A retry requires actual exhaustion AND earlier removal of different
@@ -843,6 +844,19 @@ class MenuOptimizer:
         exhausted = {}
         evaluation_cache = OrderedDict()
         recipe_ids = RecipeComputationCache()
+        # Only non-final first-slot results may come from the caller's earlier
+        # qualification, under the same request and exact slot/recipe identity.
+        # Transfer ownership to this existing 256-entry cache; never share it
+        # between users or seed a result whose final constraints were unchecked.
+        if initial_evaluations is not None:
+            if len(candidates_by_slot) > 1:
+                for slot in candidates_by_slot[0]:
+                    key = ((slot.id, recipe_ids.get(slot.recipe, recipe_id) if slot.recipe else None),)
+                    if key in initial_evaluations:
+                        if len(evaluation_cache) >= 256:
+                            evaluation_cache.popitem(last=False)
+                        evaluation_cache[key] = initial_evaluations[key]
+            initial_evaluations.clear()
         try:
             return self._optimize_slots(
                 candidates_by_slot, evaluate=evaluate, accepts=accepts, score=score,

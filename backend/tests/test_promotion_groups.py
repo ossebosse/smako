@@ -354,8 +354,11 @@ def test_group_budget_fallback_uses_identical_compact_nested_keys(monkeypatch):
     monkeypatch.setattr(optimizer, "optimize", no_materialized_checkout)
     with optimizer.quote_cache() as stats:
         assert optimizer.same_depth_nested_store_limited_keys(needs, candidates, stores, max_stores=3) == expected
-        misses = stats.subset_vector_misses
+        # Only one store supplies base quotes. Empty-store pruning now takes
+        # the single-store path, which must still reuse immutable quote sets.
+        misses = stats.quote_set_misses
         assert misses > 0, "Verified base rows must retain immutable quote-cache eligibility"
         assert optimizer.same_depth_nested_store_limited_keys(needs, candidates, stores, max_stores=3) == expected
-        assert stats.subset_vector_misses == misses
-        assert stats.subset_vector_hits > 0
+        assert stats.quote_set_misses == misses
+        assert stats.quote_set_hits > 0
+        assert stats.subset_vector_misses == 0

@@ -451,6 +451,30 @@ def test_same_depth_store_limited_key_matches_authoritative_multistore_multibuy(
     assert leading[2] == authoritative.store_count
 
 
+def test_nested_keys_ignore_empty_stores_but_preserve_every_requested_cap() -> None:
+    ingredients = MenuOptimizer().normalizer.normalize_and_aggregate(
+        [_recipe("Veckokorg", [("x", 1), ("y", 1)])])
+    products = {
+        "x": (_product("x", 1, store_id="a"), _product("x", 8, store_id="b")),
+        "y": (_product("y", 9, store_id="a"), _product("y", 2, store_id="b")),
+    }
+    stores = tuple(_store(s) for s in ("a", "b", "empty-c", "empty-d"))
+    optimizer = BasketOptimizer(memoize_store_subsets=True)
+    with optimizer.quote_cache():
+        keys = optimizer.same_depth_nested_store_limited_keys(ingredients, products, stores, max_stores=4)
+        baskets = [optimizer.optimize(ingredients, products, stores, max_stores=n) for n in range(1, 5)]
+        assert len(keys) == 4
+        assert [k[1] for k in keys] == [Decimal(str(b.total)) for b in baskets]
+        assert keys[1:] == ((0, Decimal(3), 2),) * 3
+        single = {n: tuple(c for c in cs if c.store_id == "a") for n, cs in products.items()}
+        assert optimizer.same_depth_nested_store_limited_keys(
+            ingredients, single, stores, max_stores=4) == ((0, Decimal(10), 1),) * 4
+        assert optimizer.same_depth_nested_store_limited_keys(
+            ingredients, {"x": (), "y": ()}, stores, max_stores=4) == (None,) * 4
+        assert optimizer.same_depth_nested_store_limited_keys(
+            [], {}, stores, max_stores=4) == ((0, Decimal(0), 0),) * 4
+
+
 def test_compact_requirement_keys_match_normalized_same_depth_vectors() -> None:
     offer = OfferMetadata(
         kind=OfferKind.MULTIPACK,

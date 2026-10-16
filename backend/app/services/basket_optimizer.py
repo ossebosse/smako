@@ -1075,6 +1075,41 @@ class BasketOptimizer:
             total = Decimal(0)
         return verification_rank, money(total)
 
+    def restriction_cost_bounds(
+        self,
+        ingredients: Sequence[NormalizedIngredient],
+        candidates_by_name: Mapping[str, Sequence[ProductCandidate]],
+        restricted_candidates: Mapping[str, Sequence[ProductCandidate]],
+        *,
+        allowed_store_ids: Iterable[str],
+    ) -> dict[str, tuple[Decimal, Decimal]] | None:
+        """Independent line lower bounds before/after candidate restrictions.
+
+        Reuse the authoritative quote relaxation once per line, not once per
+        combination. Summing these bounds is safe only without coupled checkout;
+        a cross-line discount can invalidate even otherwise independent totals.
+        Missing coverage and coupled campaigns fall back to ordinary checkout.
+        These are cost bounds, never ranking keys or purchasable baskets.
+        """
+        if type(self.calculator) is not BasketCalculator:
+            return None  # injected/stateful calculators retain ordinary calls
+        names = tuple(i.canonical_name for i in ingredients)
+        if _has_coupled_checkout(candidates_by_name, names, session=self._quote_cache_context.get()):
+            return None
+        allowed = frozenset(allowed_store_ids)
+        result = {}
+        for ingredient in ingredients:
+            ordinary = self.optimistic_relaxed_key(
+                [ingredient], candidates_by_name, allowed_store_ids=allowed)
+            restricted = self.optimistic_relaxed_key(
+                [ingredient], restricted_candidates, allowed_store_ids=allowed)
+            if ordinary is None:
+                return None
+            # A line without a restricted candidate cannot be selected by the
+            # caller's eligible-subset search; retain its unrestricted bound.
+            result[ingredient.canonical_name] = (ordinary[1], restricted[1] if restricted else ordinary[1])
+        return result
+
     def same_depth_nested_store_limited_keys(
         self,
         ingredients: Sequence[NormalizedIngredient],
@@ -1227,6 +1262,17 @@ class BasketOptimizer:
         if limit < 1:
             return ()
 
+        requested_limit = limit
+        if quoted_requirements:
+            # Match optimize(): a store with no qualified quote cannot change
+            # any winning purchase. Keep the caller's nested-cap result shape,
+            # repeating the last key when a larger cap adds only empty stores.
+            supplying = {q.store_id for quotes, _key in quoted_requirements for q in quotes}
+            store_ids = tuple(s for s in store_ids if s in supplying)
+            if not store_ids:
+                return (None,) * requested_limit
+            limit = min(limit, len(store_ids))
+
         if limit == 1:
             verification_ranks = [
                 _VERIFICATION_RANK[BasketVerificationStatus.VERIFIED]
@@ -1269,7 +1315,7 @@ class BasketOptimizer:
                     "optimistic_store_subsets_infeasible", infeasible_subsets
                 )
                 increment_performance_counter("same_depth_store_limited_keys")
-            return (best,)
+            return (best,) * requested_limit
 
         store_subsets = self._eligible_store_subsets(store_ids, limit)
         subset_vectors = tuple(
@@ -1303,7 +1349,7 @@ class BasketOptimizer:
             increment_performance_counter("same_depth_store_limited_keys")
         else:
             session.stats.same_depth_keys += 1
-        return tuple(best_by_cap)
+        return tuple(best_by_cap) + (best_by_cap[-1],) * (requested_limit - limit)
 
     @staticmethod
     def _grouped_subset_keys(subset_vectors, store_subsets, limit, session=None, *, winning_mask=False,
