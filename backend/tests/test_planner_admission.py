@@ -15,6 +15,31 @@ from fastapi import HTTPException
 from fastapi import Request as FastAPIRequest
 
 
+def test_queue_wait_has_separate_performance_span():
+    from app.services.performance_trace import activate_performance_trace
+
+    async def scenario():
+        controller = PlannerAdmissionController(max_concurrent=1, max_queued=1)
+        started, release = asyncio.Event(), asyncio.Event()
+
+        async def first_work():
+            started.set()
+            await release.wait()
+
+        with activate_performance_trace() as trace:
+            first = asyncio.create_task(controller.run("first", first_work))
+            await started.wait()
+            second = asyncio.create_task(controller.run("second", lambda: asyncio.sleep(0)))
+            await asyncio.sleep(.02)
+            assert (await controller.stats()).queued == 1
+            release.set()
+            await asyncio.gather(first, second)
+        measured = trace.snapshot().span_statistics["planner_queue_wait"]
+        assert measured["calls"] == 2 and measured["wall_ms"] >= 10
+
+    asyncio.run(scenario())
+
+
 def test_distinct_cold_jobs_are_admitted_one_at_a_time() -> None:
     async def scenario() -> None:
         controller = PlannerAdmissionController(max_concurrent=1, max_queued=5)

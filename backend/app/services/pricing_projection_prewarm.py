@@ -89,6 +89,11 @@ def precompute_pricing_semantics(
             cache_entries=0,
         )
 
+    if settings.complete_recipes_enabled:
+        from app.services.meal_prepared_artifacts import prepare_ingredient_search
+        with performance_span("recipe_ingredient_startup_precompute"):
+            prepare_ingredient_search(prepared)
+
     active_selector = selector or _selector_for_startup(settings)
     selector_identity = active_selector.cache_identity
     freshness_view = prepared.request_view(

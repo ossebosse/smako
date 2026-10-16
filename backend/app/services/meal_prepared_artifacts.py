@@ -8,6 +8,7 @@ import os
 import zlib
 from functools import lru_cache
 from pathlib import Path
+from types import MappingProxyType
 
 from app.services.meal_library_content import atomic_write, digest, encoded
 
@@ -15,6 +16,78 @@ SCHEMA = "smako-recipe-preparation-v2"
 MAX_GENERATIONS = 8
 MAX_BYTES = 32 * 1024 * 1024
 STATS = {"hits":0,"misses":0,"writes":0,"invalid":0}
+
+
+def ingredient_search_positions(prepared_universe, name, *, complete):
+    """Share existing text/alias retrieval; all qualification remains live."""
+    from app.services.ingredient_normalizer import CANONICAL_ALIASES, canonicalize_ingredient_name
+    from app.services.product_search import ProductSearchRequest
+    canonical = canonicalize_ingredient_name(name)
+    aliases = tuple(dict.fromkeys((name, *CANONICAL_ALIASES.get(canonical, ())))) if complete else (name,)
+    if complete:
+        common = prepare_ingredient_search(prepared_universe)
+        if name in common:
+            return common[name]
+    key = "recipe-search:" + digest(payload_bytes([aliases, method_signature()]))
+
+    def compute():
+        index = prepared_universe.product_search_index
+        matches = set()
+        for alias in aliases:
+            found, _, _ = index.retrieve(ProductSearchRequest(query=alias))
+            matches.update(i for k in found for i in index.groups[k])
+        return frozenset(matches)
+
+    return prepared_universe.product_search_cache.get_or_compute(key, compute)
+
+
+def prepare_ingredient_search(prepared_universe):
+    """Prepare library ingredient retrieval on the existing artifact path.
+
+    The persisted payload contains public product positions only. Stores,
+    complete inventory, exact aliases and method code bind both hits and
+    absences. A replacement universe owns a fresh in-memory cache.
+    """
+    from app.services.ingredient_normalizer import CANONICAL_ALIASES, canonicalize_ingredient_name
+    from app.services.product_search import ProductSearchRequest
+    from app.services.recipe_library import _registered, library_version
+    key = "recipe-ingredient-index:" + digest(payload_bytes([
+        library_version(), CANONICAL_ALIASES, method_signature()]))
+
+    def load():
+        names = sorted({canonicalize_ingredient_name(i.name)
+                        for r in _registered() for i in r.ingredients})
+        queries = {name: tuple(dict.fromkeys((name, *CANONICAL_ALIASES.get(name, ()))))
+                   for name in names}
+        inventory = hashlib.sha256()
+        for product in prepared_universe.universe.products:
+            inventory.update(product.model_dump_json().encode())
+            inventory.update(b"\n")
+        identity = [prepared_universe.universe.universe_id, inventory.hexdigest(),
+                    [s.model_dump(mode="json") for s in prepared_universe.stores], queries]
+
+        def compute():
+            index = prepared_universe.product_search_index
+            rows = {}
+            for name, aliases in queries.items():
+                positions = set()
+                for alias in aliases:
+                    found, _, _ = index.retrieve(ProductSearchRequest(query=alias))
+                    positions.update(i for k in found for i in index.groups[k])
+                rows[name] = sorted(positions)
+            return rows
+
+        rows = prepared("ingredient-search", identity, compute)
+        valid = (isinstance(rows, dict) and set(rows) == set(names)
+                 and all(isinstance(values, list) and all(type(i) is int and
+                     0 <= i < len(prepared_universe.universe.products) for i in values)
+                         for values in rows.values()))
+        if not valid:
+            STATS["invalid"] += 1
+            rows = compute()
+        return MappingProxyType({name: frozenset(values) for name, values in rows.items()})
+
+    return prepared_universe.product_search_cache.get_or_compute(key, load)
 
 
 def payload_bytes(value):
@@ -52,6 +125,8 @@ def method_signature():
     # Conservative code invalidation also binds authoritative declaration
     # adapters and model changes. Content-only imports keep this signature.
     paths = [*base.joinpath("models").glob("*.py"),*base.joinpath("services").glob("*.py"),
+             *base.joinpath("data/nutrition").glob("*.json"),
+             repository / "grocery_data/app/data/product_declarations.json",
              repository / "grocery_data/app/services/product_declarations.py"]
     return digest(encoded({p.relative_to(repository).as_posix():digest(p.read_bytes())
                            for p in sorted(paths)}))

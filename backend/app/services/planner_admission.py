@@ -123,7 +123,9 @@ class PlannerAdmissionController:
         acquired = False
         cleanup_token = None
         try:
-            await self._capacity.acquire()
+            from app.services.performance_trace import performance_span
+            with performance_span("planner_queue_wait"):
+                await self._capacity.acquire()
             acquired = True
             async with self._state_lock:
                 self._queued -= 1

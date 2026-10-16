@@ -72,7 +72,10 @@ def main():
             report["prepared_portions"] = {str(n):len(_registered_historical_portions(n))
                                            for n in sorted(set(args.servings))}
         if args.universe:
-            from app.services.meal_prepared_artifacts import declaration_index
+            from app.services.meal_prepared_artifacts import (
+                declaration_index,
+                prepare_ingredient_search,
+            )
             from app.services.personal_source_facts import facts_version, load_retained_facts
             from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
             universe = PreparedPriceUniverseArtifact.model_validate_json(args.universe.read_bytes()).restore()
@@ -83,10 +86,12 @@ def main():
                                 and product.source_provenance and fact.source_snapshot_id ==
                                 product.source_provenance.source_snapshot_id) else None
             classes = declaration_index(universe.universe,facts,exact_facts)
+            ingredients = prepare_ingredient_search(universe)
             report["source_preparation"] = {"universe_id":universe.universe.universe_id,
                 "artifact_sha256":digest(args.universe.read_bytes()),
                 "facts_version":getattr(facts,"version",None) or facts_version(facts),
-                "classified_products":len(classes),"purchase_qualification":"not_performed"}
+                "classified_products":len(classes),"ingredient_queries":len(ingredients),
+                "purchase_qualification":"not_performed"}
         from app.services.meal_prepared_artifacts import STATS, root
         report["stats"] = dict(STATS)
         cache = root()

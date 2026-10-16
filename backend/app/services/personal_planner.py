@@ -51,7 +51,6 @@ from app.services.personal_policy import (
     protein_category,
 )
 from app.services.personal_store import available_items, consumed_demands, demand_key
-from app.services.product_search import ProductSearchRequest
 from app.services.recipe_candidate_generator import DeterministicRecipeCandidateGenerator
 from app.services.recipe_candidate_validator import recipe_id
 from app.services.recipe_computation_cache import (
@@ -530,16 +529,9 @@ class PersonalPlanner:
             if not positions or properties or self.facts or self.request.purchase_planning_mode == "estimated":
                 key = name
                 if key not in self.queries:
-                    from app.services.ingredient_normalizer import CANONICAL_ALIASES
-                    # Curated spelling aliases retrieve candidates only. Exact
-                    # whole-food/form, source, quantity and policy gates below
-                    # remain authoritative (e.g. chili flakes is not sauce).
-                    aliases = (name, *CANONICAL_ALIASES.get(canonical, ())) if self.complete else (name,)
-                    matches = set()
-                    for alias in dict.fromkeys(aliases):
-                        found, _, _ = self.index.retrieve(ProductSearchRequest(query=alias))
-                        matches.update(found)
-                    self.queries[key] = {i for k in matches for i in self.index.groups[k]}
+                    from app.services.meal_prepared_artifacts import ingredient_search_positions
+                    self.queries[key] = ingredient_search_positions(
+                        self.prepared, name, complete=self.complete)
                 positions |= self.queries[key]
         candidates = []
         conflicts = []
@@ -1715,6 +1707,7 @@ class PersonalPlanner:
             )
         return best
 
+    @timed_stage("ecological_search")
     def _ecological_basket(self, ingredients, candidates, groups, baseline):
         percent = self._eco_percent(baseline, groups)
         if percent is None and any(g["food"] for g in groups):
@@ -1768,6 +1761,8 @@ class PersonalPlanner:
             if len(subsets) >= 256:
                 break
         for subset in subsets:
+            from app.services.performance_trace import increment_performance_counter
+            increment_performance_counter("ecological_subsets_evaluated")
             narrowed = {
                 k: organic_candidates[k] if k in subset else v for k, v in candidates.items()
             }

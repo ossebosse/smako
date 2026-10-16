@@ -27,8 +27,14 @@ except ImportError:  # Diagnostic fixtures may also run on the Windows workspace
 
 
 def main():
+    # The acceptance matrix reuses this offline probe entry point and the same
+    # frozen artifact/facts format. Historical A-D probes remain unchanged.
+    import sys
+    if "--matrix" in sys.argv:
+        from backend.scripts.planner_acceptance_matrix import main as matrix_main
+        return matrix_main()
     process_start = time.perf_counter()
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(epilog="Use --matrix --help for the current personal-planner acceptance matrix.")
     parser.add_argument("--inputs", type=Path, default=Path("/inputs"))
     parser.add_argument("--output", type=Path, default=Path("/output"))
     parser.add_argument("--label", default="baseline")

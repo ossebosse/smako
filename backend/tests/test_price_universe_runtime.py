@@ -295,6 +295,28 @@ async def _build_prepared(
 
 
 @pytest.mark.asyncio
+async def test_complete_recipe_startup_reuses_ingredient_preparation_after_reload(tmp_path, monkeypatch):
+    from app.services import meal_prepared_artifacts as artifacts
+    from app.services.product_search import ProductSearchIndex
+
+    monkeypatch.setenv("RECIPE_PREPARATION_CACHE_ROOT", str(tmp_path))
+    manager, prepared, _, _ = await _build_prepared()
+    settings = Settings(complete_recipes_enabled=True)
+    precompute_pricing_semantics(settings, prepared, manager=manager)
+    expected = artifacts.ingredient_search_positions(prepared, "tofu", complete=True)
+    assert expected
+    replacement = prepared.to_artifact().restore()
+    manager.activate(replacement)
+
+    def unexpected_retrieval(*args, **kwargs):
+        raise AssertionError("prepared ingredient retrieval recomputed")
+
+    monkeypatch.setattr(ProductSearchIndex, "retrieve", unexpected_retrieval)
+    precompute_pricing_semantics(settings, replacement, manager=manager)
+    assert artifacts.ingredient_search_positions(replacement, "tofu", complete=True) == expected
+
+
+@pytest.mark.asyncio
 async def test_startup_pricing_semantics_is_reused_by_first_plan_request(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
