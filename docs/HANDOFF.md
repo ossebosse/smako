@@ -1,3 +1,37 @@
+# 2026-10-16: Återanvänd bibliotekssökning och förbättra startmeny – lokalt verifierat
+
+Användaren beställde punkt 1–2 för att minska beräkningstiden efter receptutökningen.
+Gren `perf/incremental-library-search`, kod/resultat `1e8213a`, bas `6614ac9`.
+**Ingen aktivering på betan.**
+
+Vanlig nyplanering kvalificerar hela aktuella urvalet en gång per måltidstyp och
+behåller samma privata planerare/cacher mellan bibliotekets generationer.
+Första giltiga menyn hittas med befintlig beam. Nya paket får sedan konkurrera
+genom enskilda byten, följt av omprövning av äldre alternativ och högst 128
+parvisa förslag ur åtta alternativ per måltid. Hela korgen och alla hårda krav
+kontrolleras; en dyrare meny ersätter inte föregående giltiga meny. Slutkontrollen
+körs separat. Aktuella versioner styr starturvalet, äldre generatorfrukostar
+ingår oförändrade och ändrade butikstak/köpval får separata planerare.
+
+Tio frysta profiler, 19 körningar: sju positiva profiler med samma eller lägre
+inköpssumma, tre fortsatt blockerade. Standard kall/varm **49,97/25,94 s** mot
+85,78/58,46 s; pris 674,16 kr, samma recept i ändrad dagsordning. Eko kall
+**144,09 s** mot 316,28 s; samma meny, 434,13 kr och ekoandel 23,4953 %.
+Protein40 varm 8,30 s, pris 1 216,11 → 1 184,12 kr. Frukost/vikt varm 2,06 s,
+oförändrat 85,55 kr. Måltidsfördelning varm 10,10 s, pris 1 119,68 → 1 107,34 kr.
+Högsta observerade processminne 825,27 MiB. Ingen samtidig serverlast är mätt.
+
+376 offlineprov passerar (375 i bred serie + kompatibilitetsprov för äldre
+frukost), liksom Ruff och compileall. Inga rapport-/gamla källäsningar eller
+externa anrop i isoleringsloggarna. Sökningen är begränsad: globalt lägsta pris
+och frånvaro av framtida prisregressioner är inte bevisade. Två tidiga prototyper
+stoppades av prisgrindarna; endast slutserien ovan är accepterad.
+
+[Metod, mätningar och begränsningar](../reports/incremental-library-search-20261016.md)
+· [Bibliotekstillväxt](flexible-recipes.md). Rådata: `.local/incremental-library/final/`.
+
+---
+
 # 2026-10-16: Flexibla receptfamiljer (steg 4) – lokalt verifierat
 
 Användaren beställde steg 4 och stöd för framtida recept. Gren
