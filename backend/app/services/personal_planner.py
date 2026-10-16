@@ -32,7 +32,11 @@ from app.models.personal import MealSlot, PersonalResult, TasteProfile
 from app.models.recipe import Recipe
 from app.services.basket_auditor import BasketAuditor
 from app.services.basket_calculator import money
-from app.services.basket_optimizer import BasketOptimizer, BasketVerificationPolicy
+from app.services.basket_optimizer import (
+    BasketOptimizer,
+    BasketVerificationPolicy,
+    QuoteSelectionRejected,
+)
 from app.services.diet_policy import recipe_respects_diet
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 from app.services.inter_plan_distance import compare_plans, required_changes
@@ -62,7 +66,7 @@ from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
-POLICY_VERSION = "personal-policy-v2-8-incremental-library"
+POLICY_VERSION = "personal-policy-v2-9-eco-variant-search"
 
 
 def timed_stage(name):
@@ -229,6 +233,8 @@ class PersonalPlanner:
         # account. Bound the cache even for unusually large edit inputs.
         self.nutrition_cache = OrderedDict()
         self.candidate_sequences = OrderedDict()
+        self.ecological_results = OrderedDict()
+        self.variant_search_evidence = OrderedDict()
         self.normalized_recipe_rows = OrderedDict()
         self.qualified_nutrition_candidates = OrderedDict()
         self.slot_nutrition_cache = OrderedDict()
@@ -1710,6 +1716,9 @@ class PersonalPlanner:
 
     @timed_stage("ecological_search")
     def _ecological_basket(self, ingredients, candidates, groups, baseline):
+        from app.services.basket_calculator import BasketCalculator
+        from app.services.performance_trace import increment_performance_counter
+
         percent = self._eco_percent(baseline, groups)
         if percent is None and any(g["food"] for g in groups):
             raise PolicyConflict(
@@ -1718,6 +1727,26 @@ class PersonalPlanner:
             )
         if percent is None or percent + 1e-8 >= self.spec.organic_percent:
             return baseline
+        # Cache only within this planner, after pantry allocation and product
+        # qualification. Snapshot mutable offers and organic declarations on
+        # every call; identity alone cannot approve a hit. Ordered rows retain
+        # the bounded search's original first-tie/subset behaviour.
+        cache_key = None
+        if type(self.optimizer) is BasketOptimizer and type(self.optimizer.calculator) is BasketCalculator:
+            cache_key = (
+                self.spec.organic_percent, self.request.max_stores, self.optimizer.verification_policy,
+                tuple((s.store_id, s.name) for s in self.view.stores),
+                tuple((i.canonical_name, i.required_quantity, i.unit) for i in ingredients),
+                tuple((g["key"], g["food"]) for g in groups),
+                tuple((name, tuple((c.model_dump_json(),
+                    bool((f := self.source_facts(self.prepared.universe.products[
+                        self.by_identity[(c.store_id, c.product_id)]])) and f.organic is True))
+                    for c in values)) for name, values in candidates.items()),
+            )
+            if cache_key in self.ecological_results:
+                self.ecological_results.move_to_end(cache_key)
+                increment_performance_counter("ecological_result_cache_hits")
+                return self.ecological_results[cache_key].model_copy(deep=True)
         organic_candidates = {}
         for name, values in candidates.items():
             organic = tuple(
@@ -1766,8 +1795,17 @@ class PersonalPlanner:
             allowed_store_ids=(s.store_id for s in self.view.stores),
         )
         base_bound = sum((pair[0] for pair in bounds.values()), Decimal(0)) if bounds is not None else None
+        food_keys = {g["key"] for g in groups if g["food"]}
+        organic_ids = {(c.store_id, c.product_id) for values in organic_candidates.values() for c in values}
+
+        def accepts_quotes(quotes):
+            food = [q for q in quotes if q.ingredient in food_keys]
+            total = sum((money(q.total_price) for q in food), Decimal(0))
+            organic = sum((money(q.total_price) for q in food
+                           if (q.store_id, q.product_id) in organic_ids), Decimal(0))
+            return bool(total) and float(organic * 100 / total) + 1e-8 >= self.spec.organic_percent
+
         for subset in subsets:
-            from app.services.performance_trace import increment_performance_counter
             increment_performance_counter("ecological_subsets_evaluated")
             # The first minimum wins ties in the original subset order. Once
             # an earlier qualifying basket exists, an optimistic cost >= its
@@ -1794,18 +1832,24 @@ class PersonalPlanner:
                         increment_performance_counter("ecological_subsets_pruned_exact_cost")
                         continue
                 option = self.optimizer.optimize(
-                    ingredients, narrowed, self.view.stores, max_stores=self.request.max_stores
+                    ingredients, narrowed, self.view.stores, max_stores=self.request.max_stores,
+                    **({"_accept_quote_selection": accepts_quotes} if bounds is not None else {}),
                 )
                 searched += 1
                 if ((self._eco_percent(option, groups) or 0) + 1e-8 >= self.spec.organic_percent
                         and (best is None or option.total < best.total)):
                     best = option
+            except QuoteSelectionRejected:
+                searched += 1
+                increment_performance_counter("ecological_subsets_pruned_share")
             except IncompleteBasketError:
                 continue
         if best is None:
             raise PolicyConflict(
                 f"Ingen kombination hittades med minst {self.spec.organic_percent:g} % verifierat eko inom butikstaket ({searched} kontrollerade kombinationer). Kravet är oförändrat."
             )
+        if cache_key is not None:
+            remember_bounded(self.ecological_results, cache_key, best.model_copy(deep=True), 32)
         return best
 
     def _check_final(self, slots, basket, groups, rows, allocations):
@@ -2244,6 +2288,17 @@ class PersonalPlanner:
                     if qualified_results is not None:
                         key = ((f"{meal.meal_type}-1", self._recipe_id(recipe)),)
                         remember_bounded(qualified_results, key, qualified, 256)
+                    if recipe.design:
+                        from app.services.stable_candidate_pool import VariantSearchEvidence
+                        items = [i for s in qualified["basket"].stores for i in s.items]
+                        nutrition = self._check_nutrition(
+                            [MealSlot(id=f"{meal.meal_type}-1", day=1, meal_type=meal.meal_type, recipe=recipe)],
+                            {i.ingredient: i for i in items}, qualified["trace_inputs"][1], qualified["allocations"])
+                        remember_bounded(self.variant_search_evidence,
+                            (meal.meal_type, self._recipe_id(recipe)),
+                            VariantSearchEvidence(qualified["basket"].total,
+                                tuple(sorted(nutrition[0]["values"].items())),
+                                frozenset((i.store_id, i.product_id) for i in items)), 2048)
                     self.diagnostics.singleton_passed += 1
                 valid.append(recipe)
                 if recipe.design and recipe.design.content_source:
@@ -2299,7 +2354,7 @@ class PersonalPlanner:
             # These are pure request-local memoized calculations. A finished
             # result owns its basket/checks; no search cache is an approval.
             for name in ("lookup_cache", "lookup_failures", "_resolution_trace",
-                         "nutrition_cache", "candidate_sequences", "normalized_recipe_rows",
+                         "nutrition_cache", "candidate_sequences", "ecological_results", "variant_search_evidence", "normalized_recipe_rows",
                          "qualified_nutrition_candidates", "slot_nutrition_cache", "clean_recipe_cache"):
                 getattr(self,name).clear()
             self.recipe_computations = RecipeComputationCache()
@@ -2711,6 +2766,19 @@ class PersonalPlanner:
             ]) for generation in range(first, self._generation + 1)]
             search = self.service.menu_optimizer.optimize_library_slots
             library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
+            def select_seed_options(groups):
+                from app.services.stable_candidate_pool import library_variant_shortlist
+                selected, by_meal = [], {}
+                for group in groups:
+                    meal_type = group[0].meal_type
+                    if meal_type not in by_meal:
+                        recipes = [s.recipe for s in group if s.recipe]
+                        evidence = {self._recipe_id(r): self.variant_search_evidence[(meal_type, self._recipe_id(r))]
+                                    for r in recipes if (meal_type, self._recipe_id(r)) in self.variant_search_evidence}
+                        by_meal[meal_type] = {self._recipe_id(r) for r in library_variant_shortlist(recipes, evidence)}
+                    selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
+                return selected
+            library_kwargs["seed_selector"] = select_seed_options
             self._library_search_handled = True
         with performance_span("personal_week_search"):
             chosen, result = search(

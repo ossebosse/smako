@@ -81,6 +81,21 @@ med grundbiblioteket; övriga lägen börjar med de två ursprungliga paketen.
 Saknas en måltidstyp eller hittas ingen giltig meny prövas nästa större urval.
 Återkallade eller ersatta versioner återinförs aldrig som startrecept.
 
+Inför startsökningen begränsas stora familjer normalt till fyra varianter per
+grundrecept. Alla grundrecept finns kvar. Första kvalificerade varianten, lägsta
+enskilda inköpssumma, starkast överlapp med andra familjers kvalificerade produkter
+och min/max för efterfrågade näringsmått skyddas. Skyddade alternativ kan höja
+gränsen: högst tre plus två gånger antalet efterfrågade mått. Befintlig kulinarisk
+stratifiering fyller återstående platser med stöd av exakta produktidentiteter.
+Saknas jämförelseunderlag för en variant behålls hela familjen.
+
+Detta är sökurval, inte ett billigare beräknat veckopris eller ett näringsgodkännande.
+Om det begränsade urvalet inte ger en meny prövas hela samma generations urval
+innan nästa generation. Alla kvalificerade varianter finns kvar i de senare
+bytesstegen. Nya familjer och varianter följer samma regler utan särskilda ID:n.
+Kvalificeringen av hela biblioteket och de enskilda bytesproven växer fortfarande
+med antalet recept; endast startens kombinationssökning begränsas här.
+
 När en giltig meny finns får senare pakets nya recept konkurrera genom byten
 av en måltid åt gången. Högst två genomgångar per utökat urval görs, och den
 andra behövs bara efter en förbättring. Hela korgen med alla måltider, tillägg
@@ -103,6 +118,13 @@ befintliga begränsade beamcachen. Måltidsordning, dag, typ, hela receptvärdet
 och slut-/delkontroll ingår i nyckeln. Inga resultat delas mellan användare,
 ändrade butikstak, köpval eller andra begäranden. Slutmenyn kontrolleras alltid
 på nytt. Redigeringar och egna injicerade sökare behåller sin tidigare väg.
+
+Ekosökningen återanvänder högst 32 exakta lyckade korgar inom samma planerare.
+Mängder, enheter, ordning, produkt-/erbjudandevärden, ekoegenskaper, matklassning,
+butiker, butikstak och ekokrav ingår i nyckeln. Korgar med otillräcklig ekoandel
+kan avvisas på den vanliga prismotorns exakta offertval innan fulla resultatmodeller
+byggs. Gemensamma kampanjer behåller full checkout. Delmängdsordning, högst 256
+ekoförsök, prisgränser och den oberoende slutkontrollen är oförändrade.
 
 Formatet tillåter högst 16 varianter per familj, 256 familjer och 4 096 utökade
 recept per paket, inom befintlig filgräns. Fel stoppar hela expansionen före

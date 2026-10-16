@@ -124,3 +124,126 @@ def test_shared_offer_only_cap_disables_independent_bounds():
     rows = {name: (candidate,) for name in ("ris [1]", "ris [2]")}
     needs = [NormalizedIngredient(canonical_name=name, required_quantity=1000, unit="g") for name in rows]
     assert BasketOptimizer().restriction_cost_bounds(needs, rows, rows, allowed_store_ids=["coop"]) is None
+
+
+def test_repeated_ecological_search_reuses_only_exact_private_checkout_and_returns_independent_models():
+    from app.config import Settings
+    from app.services.personal_planner import PersonalPlanner
+
+    from backend.tests.test_personal_planning_v2 import NOW, state
+
+    p, req, facts = fixture(1)
+    planner = PersonalPlanner(req, Settings(price_provider="mock"), p, state(), facts=facts, now=NOW)
+    with activate_performance_trace() as trace:
+        first = planner.basket([], final=False)
+        second = planner.basket([], final=False)
+    assert first["basket"] == second["basket"]
+    assert trace.snapshot().operation_counters["ecological_result_cache_hits"] == 1
+    second["basket"].stores.clear()
+    assert planner.basket([], final=False)["basket"] == first["basket"]
+    assert len(planner.ecological_results) == 1
+    other = PersonalPlanner(req, Settings(price_provider="mock"), p, state(), facts=facts, now=NOW)
+    assert not other.ecological_results
+
+
+def test_changed_quantity_target_cap_offer_and_organic_evidence_cannot_hit_old_eco_result():
+    from dataclasses import replace
+
+    from app.config import Settings
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.personal_policy import PolicyConflict
+
+    from backend.tests.test_personal_planning_v2 import NOW, state
+
+    p, req, facts = fixture(1)
+    planner = PersonalPlanner(req, Settings(price_provider="mock"), p, state(), facts=facts, now=NOW)
+    first = planner.basket([], final=False)
+    ingredients, candidates, groups = first["ingredients"], first["trace_inputs"][0], first["groups"]
+    baseline = planner.optimizer.optimize(ingredients, candidates, planner.view.stores, req.max_stores)
+    changes = [
+        lambda: setattr(planner.spec, "organic_percent", 90),
+        lambda: setattr(planner.request, "max_stores", 1),
+        lambda: ingredients.__setitem__(0, ingredients[0].model_copy(update={"required_quantity": 4000})),
+        lambda: candidates[next(iter(candidates))][0].offers.append(
+            OfferMetadata(kind="campaign", description="changed synthetic offer", price=1)),
+        lambda: planner.facts.update({key: replace(value, organic=False) for key, value in planner.facts.items()}),
+    ]
+    for change in changes:
+        change()
+        with activate_performance_trace() as trace:
+            try:
+                planner._ecological_basket(ingredients, candidates, groups, baseline)
+            except PolicyConflict:
+                pass
+        assert not trace.snapshot().operation_counters.get("ecological_result_cache_hits", 0)
+
+
+def test_eco_quote_guard_rejects_materialization_but_preserves_full_reference_result():
+    p, req, facts = fixture(2)
+    with exhaustive_checkout():
+        expected = run(p, req, facts=facts)
+    with activate_performance_trace() as trace:
+        actual = run(p, req, facts=facts)
+    assert actual.optimized_basket == expected.optimized_basket
+    assert trace.snapshot().operation_counters["ecological_subsets_pruned_share"] > 0
+
+
+def test_ecological_memo_is_bounded_even_with_many_distinct_demands():
+    from app.config import Settings
+    from app.models import NormalizedIngredient, ProductCandidate
+    from app.services.personal_planner import PersonalPlanner
+
+    from backend.tests.test_personal_planning_v2 import NOW, state
+
+    products = [product("ris", 1000, "g", price, identity=identity)
+                for price, identity in ((10, "plain"), (20, "organic"))]
+    facts = {("coop", identity): ProductFacts(source="label", source_product_id=identity,
+             source_snapshot_id="v2-frozen", organic=identity == "organic") for identity in ("plain", "organic")}
+    planner = PersonalPlanner(request(organic_percent=100), Settings(price_provider="mock"),
+                              prepared(*products), state(), facts=facts, now=NOW)
+    candidates = {"ris": tuple(ProductCandidate.from_product(p, match_score=1) for p in products)}
+    for quantity in range(1, 41):
+        ingredients = [NormalizedIngredient(canonical_name="ris", required_quantity=quantity, unit="g")]
+        baseline = planner.optimizer.optimize(ingredients, candidates, planner.view.stores, max_stores=1)
+        result = planner._ecological_basket(ingredients, candidates, [{"key": "ris", "food": True}], baseline)
+        assert result.total == 20
+    assert len(planner.ecological_results) == 32
+
+
+def test_nonfood_cost_is_excluded_from_quote_guard_and_full_eco_check():
+    products = [product("ris", 1000, "g", 10, identity="plain"),
+                product("ris", 1000, "g", 20, identity="organic"),
+                product("servetter", 100, "st", 200)]
+    facts = {("coop", identity): ProductFacts(source="label", source_product_id=identity,
+             source_snapshot_id="v2-frozen", organic=identity == "organic")
+             for identity in ("plain", "organic", "servetter")}
+    req = request(extras=[ExtraNeed(query="ris", quantity=500, unit="g", confirmed=True),
+                          ExtraNeed(query="servetter", quantity=100, unit="st", confirmed=True)], organic_percent=50)
+    p = prepared(*products)
+    with exhaustive_checkout():
+        expected = run(p, req, facts=facts)
+    actual = run(p, req, facts=facts)
+    assert actual.optimized_basket == expected.optimized_basket
+    assert actual.optimized_basket.total == 220
+    assert actual.personal.checks["organic_cost_percent"] == 100
+
+
+def test_custom_calculator_keeps_full_checkout_and_no_eco_memo():
+    from app.config import Settings
+    from app.services.basket_calculator import BasketCalculator
+    from app.services.personal_planner import PersonalPlanner
+
+    from backend.tests.test_personal_planning_v2 import NOW, state
+
+    class CustomCalculator(BasketCalculator):
+        pass
+
+    p, req, facts = fixture(2)
+    planner = PersonalPlanner(req, Settings(price_provider="mock"), p, state(), facts=facts, now=NOW)
+    planner.optimizer.calculator = CustomCalculator()
+    with activate_performance_trace() as trace:
+        first = planner.basket([], final=False)
+        second = planner.basket([], final=False)
+    assert first["basket"] == second["basket"]
+    assert not planner.ecological_results
+    assert not trace.snapshot().operation_counters.get("ecological_subsets_pruned_share", 0)

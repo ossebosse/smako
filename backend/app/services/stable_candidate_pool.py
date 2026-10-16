@@ -14,8 +14,8 @@ after constructing the union.
 
 from __future__ import annotations
 
-from collections import Counter
-from collections.abc import Sequence
+from collections import Counter, defaultdict
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Final
 
@@ -140,6 +140,7 @@ def stratified_candidate_shortlist(
     stable_recipe_ids: frozenset[str] = frozenset(),
     stratify_additions: bool = True,
     profile_builder: RecipeProfileBuilder | None = None,
+    extra_dimensions: Mapping[str, tuple[str, ...]] | None = None,
 ) -> CandidateShortlist:
     """Retain every stable candidate, then fill additions deterministically.
 
@@ -186,7 +187,8 @@ def stratified_candidate_shortlist(
     else:
         builder = profile_builder or RecipeProfileBuilder()
         dimensions_by_id = {
-            identities[id(recipe)]: _profile_dimensions(builder.build(recipe))
+            identities[id(recipe)]: (_profile_dimensions(builder.build(recipe))
+                                    + (extra_dimensions or {}).get(identities[id(recipe)], ()))
             for recipe in unique
         }
         dimensions = Counter(
@@ -228,6 +230,63 @@ def stratified_candidate_shortlist(
         retained_price_aware=len(selected_additions),
         pruned=len(economically_ranked) - len(selected),
     )
+
+
+@dataclass(frozen=True, slots=True)
+class VariantSearchEvidence:
+    """Private singleton signals for search ordering, never a weekly price."""
+
+    paid: float
+    nutrients: tuple[tuple[str, float], ...]
+    packages: frozenset[tuple[str, str]]
+
+
+def library_variant_shortlist(recipes, evidence, *, limit_per_base=4):
+    """Keep every base; bound its seed variants without losing key extremes.
+
+    Reuse culinary stratification with actual qualified package identities.
+    Keep original, cheapest, strongest cross-base package overlap and both
+    extremes of requested, verified nutrients. These protected choices may
+    exceed the nominal cap (at most 3 + twice the requested metric count).
+    Missing evidence keeps the whole family. The caller must retain the full
+    pool for fallback and whole-week refinement: this is a heuristic, no bound.
+    """
+    if limit_per_base < 1:
+        raise ValueError("limit_per_base must be positive")
+    families = defaultdict(list)
+    identities = {id(r): recipe_id(r) for r in recipes}
+    for recipe in recipes:
+        families[recipe.design.base_id if recipe.design else identities[id(recipe)]].append(recipe)
+    packages_by_family = {
+        base: set().union(*(evidence[identities[id(r)]].packages for r in rows
+                           if identities[id(r)] in evidence))
+        for base, rows in families.items()
+    }
+    frequency = Counter(p for packages in packages_by_family.values() for p in packages)
+    selected_ids = set()
+    for rows in families.values():
+        if len(rows) <= limit_per_base or any(identities[id(r)] not in evidence for r in rows):
+            selected_ids.update(identities[id(r)] for r in rows)
+            continue
+        ranked = sorted(rows, key=lambda r: evidence[identities[id(r)]].paid)
+        protected = {identities[id(rows[0])], identities[id(ranked[0])]}
+        shared = max(ranked, key=lambda r: sum(frequency[p] - 1
+                     for p in evidence[identities[id(r)]].packages))
+        protected.add(identities[id(shared)])
+        nutrients = {identities[id(r)]: dict(evidence[identities[id(r)]].nutrients) for r in rows}
+        # A partially known metric cannot silently rank unknown as zero.
+        metrics = set.intersection(*(set(values) for values in nutrients.values()))
+        for metric in sorted(metrics):
+            for choose in (min, max):
+                protected.add(identities[id(choose(ranked, key=lambda r: nutrients[identities[id(r)]][metric]))])
+        extra = {identities[id(r)]: tuple(f"package:{s}:{p}" for s, p in
+                 sorted(evidence[identities[id(r)]].packages)) for r in rows}
+        shortlist = stratified_candidate_shortlist(
+            ranked, limit=max(limit_per_base, len(protected)), stable_recipe_ids=frozenset(protected),
+            extra_dimensions=extra)
+        selected_ids.update(recipe_id(r) for r in shortlist.recipes)
+    # Membership is bounded; preserve original order and deterministic beam ties.
+    return tuple(r for r in recipes if identities[id(r)] in selected_ids)
 
 
 __all__ = [

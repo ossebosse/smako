@@ -1,3 +1,49 @@
+# 2026-10-16: Prestandapunkt 3–4 klara, veckoptimeringens punkt 5 granskad
+
+Gren `perf/eco-and-variant-selection`, bas `a294a71`. **Ingen aktivering på betan.**
+Beställningen gäller mindre arbete i ekosökningen och begränsat varianturval,
+därefter granskning av bättre optimering av hela veckans inköp.
+
+Ekosökningen kan avvisa den ordinarie prismotorns exakta offertval på ekoandel
+före bygge av korgmodeller. Gemensamma kampanjer/egna kalkylatorer behåller full
+checkout; befintliga prisgränser, delmängdsordning, sökbudget och slutkontroller
+är kvar. Högst 32 lyckade ekokorgar återanvänds inom samma planerare med exakta
+värdenycklar för behov, kandidater/erbjudanden, ekoegenskaper och butiksvillkor.
+
+Stora receptfamiljer får normalt fyra varianter per grundrecept i startsökningen.
+Alla grundrecept, första kvalificerade variant, billigaste enskilda köp, starkast
+produktöverlapp och efterfrågade näringsextremer skyddas; extrema värden kan höja
+gränsen. Befintlig kulinarisk stratifiering återanvänds. Saknat urvalsunderlag
+behåller hela familjen. Misslyckat begränsat startförsök följs av hela urvalet;
+alla kvalificerade varianter finns kvar i senare byten. Nya recept kräver inga
+särskilda ID-listor. Policy: `personal-policy-v2-9-eco-variant-search`.
+
+Tio frysta profiler, 19 körningar: identiska semantiska resultat och priser i
+alla sju positiva profiler, samma tre blockerade profiler. Eko kallt
+**144,09 → 121,86 s (−15,4 %)**, samma 434,13 kr och ekoandel 23,4953 %.
+45 476 korgval avvisas före modellbygge; den nya 32-posters ekocachen gav inga
+träffar i detta fall. Standard varm 25,94 s, protein40 varm 8,43 s,
+frukost/vikt varm 2,11 s: ingen tydlig förbättring i dessa profiler.
+Varianturvalets nytta gäller främst framtida större familjer; 300 syntetiska
+varianter och full fallback är testade. Processens högsta observerade minne
+825,13 MiB. Ingen samtidig serverlast eller global kostnadsoptimalitet är bevisad.
+
+**445 offlineprov**, Ruff och compileall passerar. Isoleringsloggar saknar
+rapportläsningar och blockerade externa/gamla workspaceförsök. Full rapport,
+mätmetod, begränsningar och granskning av punkt 5:
+[eco-variant-selection-20261016.md](../reports/eco-variant-selection-20261016.md).
+Råmätningar: `.local/eco-variant-selection/final/`.
+
+Punkt 5 är granskad, inte färdigimplementerad i denna etapp. Veckokorgen hanterar
+redan samlade behov, skafferi, förpackningar, butikstak och kampanjer samt enskilda
+och parvisa byten. Nästa konkreta luckor: (1) parurval från kvalificerade recept
+som **inte** måste vara giltiga var för sig när ett gemensamt byte klarar kraven,
+(2) verifierat överskott som sekundärt kriterium vid samma betalda inköpssumma.
+Behåll befintliga vinnare/förslag och separata sökbudgetar. Summera inte olika
+mängdenheter och räkna aldrig fiktivt framtida restvärde som inköpsrabatt.
+
+---
+
 # 2026-10-16: Återanvänd bibliotekssökning och förbättra startmeny – lokalt verifierat
 
 Användaren beställde punkt 1–2 för att minska beräkningstiden efter receptutökningen.

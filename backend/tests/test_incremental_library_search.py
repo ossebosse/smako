@@ -137,6 +137,25 @@ def test_single_meal_runs_final_checks_and_all_failed_pools_still_fail():
     assert calls and all(calls)
 
 
+def test_restricted_variant_seed_retries_full_pool_when_joint_constraints_need_omitted_variant():
+    trace = []
+    chosen, cost = run([(1, options("ABC"))],
+        seed_selector=lambda groups: [group[:1] for group in groups],
+        evaluate=lambda slots, final: len(slots),
+        accepts=lambda slots, final: not final or any(s.recipe.name == "C" for s in slots),
+        search_trace=trace)
+    assert cost == 2 and any(s.recipe.name == "C" for s in chosen)
+    assert any(row.get("seed_full_pool_retry") for row in trace)
+    assert any(row.get("seed_variants_retained") == 2 for row in trace)
+
+
+def test_omitted_seed_variants_still_improve_the_complete_week():
+    chosen, cost = run([(1, options("ABC"))],
+        seed_selector=lambda groups: [group[:1] for group in groups],
+        evaluate=lambda slots, final: sum({"A": 10, "B": 5, "C": 1}[s.recipe.name] for s in slots))
+    assert cost == 2 and all(s.recipe.name == "C" for s in chosen)
+
+
 def test_only_current_versions_enter_publication_cohorts():
     from app.services.meal_library_content import identity, manifest_entries
     from app.services.recipe_library import current_recipe_generations, current_recipes

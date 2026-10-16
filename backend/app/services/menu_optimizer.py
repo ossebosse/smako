@@ -828,7 +828,7 @@ class MenuOptimizer:
         ), RecipeProfileBuilder._structure(recipe))
 
     def optimize_library_slots(self, cohorts, *, evaluate, accepts, score, retention_score,
-                               search_trace=None, decision_observer=None, **search_options):
+                               search_trace=None, decision_observer=None, seed_selector=None, **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
 
         Cohorts are cumulative, current-only slot options in publication order.
@@ -924,20 +924,28 @@ class MenuOptimizer:
             if any(not group for group in options):
                 continue
             if incumbent is None:
-                start = len(trace)
-                before_hits = hits
-                try:
-                    incumbent = self.optimize_slots(
-                        options, evaluate=cached_evaluate, accepts=accepts, score=score,
-                        _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
-                        search_trace=trace, decision_observer=decision_observer, **search_options)
-                except (IncompleteBasketError, ValueError) as exc:
-                    last_error = exc
-                finally:
-                    for row in trace[start:]:
-                        row.update(library_generation=generation, library_phase="seed")
-                    if len(trace) > start:
-                        trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
+                seed = seed_selector(options) if seed_selector else options
+                attempts = [seed] if seed == options else [seed, options]
+                for index, seed_options in enumerate(attempts):
+                    start = len(trace)
+                    before_hits = hits
+                    try:
+                        incumbent = self.optimize_slots(
+                            seed_options, evaluate=cached_evaluate, accepts=accepts, score=score,
+                            _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
+                            search_trace=trace, decision_observer=decision_observer, **search_options)
+                    except (IncompleteBasketError, ValueError) as exc:
+                        last_error = exc
+                    finally:
+                        for row in trace[start:]:
+                            row.update(library_generation=generation, library_phase="seed",
+                                       seed_full_pool_retry=index > 0,
+                                       seed_variants_available=sum(map(len, options)),
+                                       seed_variants_retained=sum(map(len, seed_options)))
+                        if len(trace) > start:
+                            trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
+                    if incumbent is not None:
+                        break
                 continue
             prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
             additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]

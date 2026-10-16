@@ -63,6 +63,10 @@ _MAX_PROMOTION_STRUCTURE_ROWS = 256
 _MAX_PROMOTION_STRUCTURE_CANDIDATES = 32768
 
 
+class QuoteSelectionRejected(IncompleteBasketError):
+    """The exact winning checkout failed a caller's pre-materialization check."""
+
+
 def _promotion_structure(rows, session=None):
     """Index only frozen candidate fields within the existing quote scope.
 
@@ -1654,6 +1658,7 @@ class BasketOptimizer:
         max_stores: int | None,
         *,
         calculate_savings: bool = True,
+        _accept_quote_selection=None,
     ) -> OptimizedBasket:
         if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients), session=self._quote_cache_context.get()):
             return self._optimize_promotion_groups(
@@ -1821,6 +1826,13 @@ class BasketOptimizer:
                 "No complete basket can be built with the selected stores." + detail
             )
 
+        # A search caller can reject this exact winner before building public
+        # models. This never selects another product/store or alters pricing.
+        # Coupled promotions retain the full checkout path above.
+        if _accept_quote_selection is not None and not _accept_quote_selection(best_quotes):
+            increment_performance_counter("basket_quote_selections_rejected")
+            record_performance_seconds("basket_optimization", perf_counter() - started)
+            raise QuoteSelectionRejected("Exact checkout rejected before materialization")
         total = best_key[1]
         grouped: dict[str, list[BasketItem]] = {}
         for quote in best_quotes:
