@@ -72,8 +72,37 @@ produktkrav prövas på variantens faktiska ingredienser. Grundreceptets värden
 
 Biblioteksmanifest, exakt receptinnehåll och befintliga kod-/källsignaturer styr
 förberedelsecacherna. Nya ingredienser följer automatiskt med i sökförberedelsen;
-ändrade mängder och steg får separata beräkningsnycklar. Tidigare bibliotekets
-giltiga lösning jämförs fortfarande av den befintliga planeraren.
+ändrade mängder och steg får separata beräkningsnycklar.
+
+Vid vanlig nyplanering kvalificeras hela det aktuella urvalet en gång per
+måltidstyp. Bibliotekets publiceringsordning används för att hitta en första
+giltig meny med den befintliga begränsade veckosökningen. Billigast börjar
+med grundbiblioteket; övriga lägen börjar med de två ursprungliga paketen.
+Saknas en måltidstyp eller hittas ingen giltig meny prövas nästa större urval.
+Återkallade eller ersatta versioner återinförs aldrig som startrecept.
+
+När en giltig meny finns får senare pakets nya recept konkurrera genom byten
+av en måltid åt gången. Högst två genomgångar per utökat urval görs, och den
+andra behövs bara efter en förbättring. Hela korgen med alla måltider, tillägg
+och skafferifördelning räknas för varje förslag. En dyrare meny ersätter inte
+den tidigare lösningen. Vid samma pris används befintlig smak-/namnordning.
+Till sist prövas högst två bytesgenomgångar med hela det kvalificerade urvalet,
+så att också äldre recept kan dra nytta av de nya råvarukombinationerna.
+Metoden gäller också framtida grundrecept och vanliga receptpaket, utan nya
+ID-listor eller specialkod. Ett avslutande parsteg prövar högst 128 förslag från
+de åtta bäst rankade alternativen per måltid i den sista bytesgenomgången.
+Det fångar också en del byten som bara blir billigare tillsammans, till exempel
+vid förpackningsgränser eller krav på ekoandel. Varje par kontrolleras och
+prissätts som en hel meny; rankningen är ingen prisgräns eller kvalificering.
+Kombinationer utanför urvalet och byten av fler måltider kan missas. Sökningen
+bevisar inte globalt lägsta pris.
+
+Recept- och produktberäkningar delar samma privata planerare. Upp till 256
+exakta del-/helkorgar återanvänds mellan biblioteksförsöken, separat från den
+befintliga begränsade beamcachen. Måltidsordning, dag, typ, hela receptvärdet
+och slut-/delkontroll ingår i nyckeln. Inga resultat delas mellan användare,
+ändrade butikstak, köpval eller andra begäranden. Slutmenyn kontrolleras alltid
+på nytt. Redigeringar och egna injicerade sökare behåller sin tidigare väg.
 
 Formatet tillåter högst 16 varianter per familj, 256 familjer och 4 096 utökade
 recept per paket, inom befintlig filgräns. Fel stoppar hela expansionen före

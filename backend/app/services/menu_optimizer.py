@@ -827,9 +827,186 @@ class MenuOptimizer:
             )
         ), RecipeProfileBuilder._structure(recipe))
 
+    def optimize_library_slots(self, cohorts, *, evaluate, accepts, score, retention_score,
+                               search_trace=None, decision_observer=None, **search_options):
+        """Seed once, then try at most two sweeps of single-slot substitutions.
+
+        Cohorts are cumulative, current-only slot options in publication order.
+        Qualification and product caches belong to the caller's ONE planner.
+        This additional 256-entry cache shares exact ordered baskets between
+        failed seed attempts and substitutions, with final/prefix checks separate.
+        Nothing survives this call; the caller independently audits the winner.
+        This is a bounded neighbourhood search, not an optimality proof.
+        """
+        trace = search_trace if search_trace is not None else []
+        cache, keys = OrderedDict(), RecipeComputationCache()
+        hits = 0
+
+        def slot_key(slot):
+            return slot.id, slot.day, slot.meal_type, keys.key(slot.recipe)
+
+        def cached_evaluate(slots, *, final):
+            nonlocal hits
+            key = (final, tuple(slot_key(slot) for slot in slots))
+            if key in cache:
+                hits += 1
+                if trace and trace[-1].get("library_phase") not in {"substitution", "refinement", "paired_refinement"}:
+                    # The beam has counted this callback as executed; record
+                    # the actual shared-cache hit instead of double-counting.
+                    trace[-1]["evaluations_executed"] -= 1
+                    trace[-1]["evaluation_cache_hits"] += 1
+                cache.move_to_end(key)
+                return cache[key]
+            result = evaluate(slots, final=final)
+            if len(cache) >= 256:
+                cache.popitem(last=False)
+            cache[key] = result
+            return result
+
+        def improve(incumbent, additions, generation, phase, finalists=None):
+            for sweep in (1, 2):
+                if finalists is not None:
+                    finalists.clear()
+                row = {"depth": len(additions), "attempt": max((r.get("attempt", 1) for r in trace), default=0)+1,
+                       "beam_width": 1,
+                       "library_generation": generation, "library_phase": phase,
+                       "sweep": sweep, "proposals": 0, "constraints_rejected": 0,
+                       "evaluation_rejected": 0, "priced": 0, "retained": 0, "beam_pruned": 0,
+                       "evaluations_executed": 0, "evaluation_cache_hits": 0, "improvements": 0}
+                trace.append(row)
+                for index, group in enumerate(additions):
+                    for slot in group:
+                        if slot == incumbent[0][index]:
+                            continue
+                        chosen = list(incumbent[0])
+                        chosen[index] = slot
+                        row["proposals"] += 1
+                        if not accepts(chosen, final=True):
+                            row["constraints_rejected"] += 1
+                            if decision_observer:
+                                decision_observer(chosen, "constraints_rejected", depth=len(additions))
+                            continue
+                        before_hits = hits
+                        try:
+                            result = cached_evaluate(chosen, final=True)
+                        except (IncompleteBasketError, ValueError) as exc:
+                            row["evaluations_executed"] += 1
+                            row["evaluation_rejected"] += 1
+                            if decision_observer:
+                                decision_observer(chosen, "evaluation_rejected", reason=str(exc), depth=len(additions))
+                            continue
+                        row["evaluation_cache_hits"] += hits - before_hits
+                        row["evaluations_executed"] += hits == before_hits
+                        row["priced"] += 1
+                        if decision_observer:
+                            decision_observer(chosen, "priced", result=result, depth=len(additions))
+                        if finalists is not None:
+                            shortlist = finalists.setdefault(index, [])
+                            shortlist.append((retention_score(chosen, result), len(shortlist), slot))
+                            shortlist.sort(key=lambda entry: entry[:2])
+                            del shortlist[8:]
+                        if retention_score(chosen, result) < retention_score(*incumbent):
+                            incumbent = chosen, result
+                            row["improvements"] += 1
+                row["retained"] = min(1, row["improvements"])
+                row["beam_pruned"] = row["priced"] - row["retained"]
+                if decision_observer:
+                    decision_observer(incumbent[0], "retained", result=incumbent[1], depth=len(additions))
+                if not row["improvements"]:
+                    break
+            return incumbent
+
+        incumbent, previous, last_error = None, None, None
+        for generation, options in cohorts:
+            if previous == options:
+                continue
+            prior_options, previous = previous, options
+            if any(not group for group in options):
+                continue
+            if incumbent is None:
+                start = len(trace)
+                before_hits = hits
+                try:
+                    incumbent = self.optimize_slots(
+                        options, evaluate=cached_evaluate, accepts=accepts, score=score,
+                        _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
+                        search_trace=trace, decision_observer=decision_observer, **search_options)
+                except (IncompleteBasketError, ValueError) as exc:
+                    last_error = exc
+                finally:
+                    for row in trace[start:]:
+                        row.update(library_generation=generation, library_phase="seed")
+                    if len(trace) > start:
+                        trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
+                continue
+            prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
+            additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]
+                         for index, group in enumerate(options)]
+            incumbent = improve(incumbent, additions, generation, "substitution")
+        if incumbent is not None:
+            # New ingredients can make an older recipe economical too. Revisit
+            # every qualified recipe against the complete incumbent basket,
+            # rather than launching another combinatorial beam search.
+            finalists = {}
+            incumbent = improve(incumbent, previous, generation, "refinement", finalists)
+            # Package boundaries and organic-share thresholds can require two
+            # individually unprofitable changes. Rank only a bounded shortlist
+            # from the single-slot probes; recheck every paired WHOLE basket.
+            # These ranks are heuristics, never cost bounds or qualification.
+            pairs = []
+            for left, right in combinations(sorted(finalists), 2):
+                for a, (_, _, first) in enumerate(finalists[left]):
+                    for b, (_, _, second) in enumerate(finalists[right]):
+                        pairs.append(((a+b, max(a,b), left, right, a, b), left, right, first, second))
+            pairs.sort(key=lambda item: item[0])
+            if not pairs:
+                return incumbent
+            row = {"depth": len(previous), "attempt": max((r.get("attempt", 1) for r in trace), default=0)+1,
+                   "beam_width": 1, "library_generation": generation, "library_phase": "paired_refinement",
+                   "proposal_limit": 128, "shortlist_per_slot": 8, "pairs_available": len(pairs),
+                   "proposals": 0, "constraints_rejected": 0, "evaluation_rejected": 0,
+                   "priced": 0, "retained": 0, "beam_pruned": 0, "evaluations_executed": 0,
+                   "evaluation_cache_hits": 0, "improvements": 0}
+            trace.append(row)
+            anchor = incumbent[0]
+            for _, left, right, first, second in pairs[:128]:
+                chosen = list(anchor)
+                chosen[left], chosen[right] = first, second
+                row["proposals"] += 1
+                if not accepts(chosen, final=True):
+                    row["constraints_rejected"] += 1
+                    if decision_observer:
+                        decision_observer(chosen, "constraints_rejected", depth=len(previous))
+                    continue
+                before_hits = hits
+                try:
+                    result = cached_evaluate(chosen, final=True)
+                except (IncompleteBasketError, ValueError) as exc:
+                    row["evaluations_executed"] += 1
+                    row["evaluation_rejected"] += 1
+                    if decision_observer:
+                        decision_observer(chosen, "evaluation_rejected", reason=str(exc), depth=len(previous))
+                    continue
+                row["evaluation_cache_hits"] += hits - before_hits
+                row["evaluations_executed"] += hits == before_hits
+                row["priced"] += 1
+                if decision_observer:
+                    decision_observer(chosen, "priced", result=result, depth=len(previous))
+                if retention_score(chosen, result) < retention_score(*incumbent):
+                    incumbent = chosen, result
+                    row["improvements"] += 1
+            row["retained"] = min(1, row["improvements"])
+            row["beam_pruned"] = row["priced"] - row["retained"]
+            if decision_observer:
+                decision_observer(incumbent[0], "retained", result=incumbent[1], depth=len(previous))
+            return incumbent
+        if last_error is not None:
+            raise last_error
+        raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")
+
     def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
                        search_trace=None, state_identity=None, fallback_beam_width=None, decision_observer=None,
-                       initial_evaluations=None):
+                       initial_evaluations=None, _attempt_offset=0):
         """Try the ordinary beam, then one explicitly bounded safe retry.
 
         A retry requires actual exhaustion AND earlier removal of different
@@ -861,7 +1038,7 @@ class MenuOptimizer:
             return self._optimize_slots(
                 candidates_by_slot, evaluate=evaluate, accepts=accepts, score=score,
                 beam_width=beam_width, search_trace=trace, state_identity=state_identity,
-                _exhaustion=exhausted, _attempt_number=1, _evaluation_cache=evaluation_cache,
+                _exhaustion=exhausted, _attempt_number=_attempt_offset+1, _evaluation_cache=evaluation_cache,
                 _recipe_ids=recipe_ids, decision_observer=decision_observer,
             )
         except (IncompleteBasketError, ValueError):
@@ -875,7 +1052,7 @@ class MenuOptimizer:
             return self._optimize_slots(
                 candidates_by_slot, evaluate=evaluate, accepts=accepts, score=score,
                 beam_width=fallback_beam_width, search_trace=trace, state_identity=state_identity,
-                _exhaustion={}, _attempt_number=2, _evaluation_cache=evaluation_cache,
+                _exhaustion={}, _attempt_number=_attempt_offset+2, _evaluation_cache=evaluation_cache,
                 _recipe_ids=recipe_ids, decision_observer=decision_observer,
             )
 

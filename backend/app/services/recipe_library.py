@@ -137,6 +137,23 @@ def reset_library_caches():
     _revocations.cache_clear()
 
 
+def current_recipe_generations(generation=None):
+    """First publication of each still-current exact version, never old versions."""
+    from app.services.meal_library_content import identity, load_entries, manifest_entries
+
+    current = {identity(recipe) for recipe in current_recipes(generation)}
+    entries = manifest_entries()["current"]
+    if generation is not None:
+        entries = entries[:generation]
+    result = {}
+    for number, entry in enumerate(entries, start=1):
+        for recipe in load_entries([entry]):
+            key = identity(recipe)
+            if key in current:
+                result.setdefault(key, number)
+    return result
+
+
 @lru_cache(maxsize=1)
 def _revocations():
     from app.services.meal_library_content import manifest_entries

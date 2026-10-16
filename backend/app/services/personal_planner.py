@@ -62,7 +62,7 @@ from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
-POLICY_VERSION = "personal-policy-v2-7"
+POLICY_VERSION = "personal-policy-v2-8-incremental-library"
 
 
 def timed_stage(name):
@@ -123,6 +123,7 @@ class PersonalPlanner:
         self.library_generation = library_generation
         self._supplement_qualified = False
         self._expanded_cohort_qualified = False
+        self._library_search_handled = False
         from app.services.meal_library_content import identity, manifest_entries
         from app.services.recipe_library import current_recipes
         self._generation = library_generation or len(manifest_entries()["current"])
@@ -2310,7 +2311,8 @@ class PersonalPlanner:
             # private state and budget. Never load another owner's saved plan.
             # If no added recipe qualifies, the old ordered pool is identical
             # and repeating its full search would have no benefit.
-            if (not self.complete or not self.include_content_pack or not self._supplement_qualified
+            if (self._library_search_handled
+                    or not self.complete or not self.include_content_pack or not self._supplement_qualified
                     or not _compare_scopes
                     or self.spec.slots is not None or replace_slot is not None):
                 return
@@ -2688,9 +2690,32 @@ class PersonalPlanner:
         search_started = perf_counter()
         from app.services.plan_jobs import report_stage
         report_stage("week_search")
+        from app.services.menu_optimizer import MenuOptimizer
+        incremental_library = (
+            self.complete and generating and self.include_content_pack and replace_slot is None
+            and getattr(self._candidates, "__func__", None) is PersonalPlanner._candidates
+            and type(self.service.menu_optimizer) is MenuOptimizer
+            and getattr(self.service.menu_optimizer.optimize_slots, "__func__", None) is MenuOptimizer.optimize_slots
+        )
+        search = self.service.menu_optimizer.optimize_slots
+        search_input, library_kwargs = options, {}
+        if incremental_library:
+            from app.services.meal_library_content import identity
+            from app.services.recipe_library import current_recipe_generations
+            generations = current_recipe_generations(self.library_generation)
+            first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
+            search_input = [(generation, [
+                [s for s in group if not s.recipe or not s.recipe.design
+                 or generations.get(identity(s.recipe), self._generation) <= generation]
+                for group in options
+            ]) for generation in range(first, self._generation + 1)]
+            search = self.service.menu_optimizer.optimize_library_slots
+            library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
+            self._library_search_handled = True
         with performance_span("personal_week_search"):
-            chosen, result = self.service.menu_optimizer.optimize_slots(
-                options,
+            chosen, result = search(
+                search_input,
+                **library_kwargs,
                 evaluate=evaluate,
                 accepts=accepts,
                 score=score,
