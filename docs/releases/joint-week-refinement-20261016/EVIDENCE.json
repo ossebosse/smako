@@ -1,0 +1,377 @@
+{
+  "code_commit": "e041451416bab19c3603625401402a1835a18311",
+  "branch": "feature/joint-week-refinement",
+  "activation_at": "2026-10-16T13:22:09.891774+00:00",
+  "candidate": {
+    "image": "sha256:93bbfd2ebe3764cddd559422ed1fce53197359b6f0aabde50619dfc6a81cd8f7",
+    "base_image": "sha256:f6f0c0e3b54574e7d50793c18a562903af87a326c017e652e028b3d3e5983174",
+    "build_id": "joint-week-refinement-app-e041451",
+    "tag": "smako-joint-week-refinement:app-e041451",
+    "files": {
+      "backend/app/data/recipes/flexible-families-v1.json": {
+        "before": null,
+        "after": "4a92bf6ea332bc1c7ff464f0c23a48a2056cd424da156d5f6b5af5fa264bdc8c"
+      },
+      "backend/app/data/recipes/library-manifest.json": {
+        "before": "e88732109ce1c6e1a033b1319a6a4d6d7da3f34ca5df0a3eeb702260c8c70617",
+        "after": "461354a5898621ba6ad850610ebc0dae8d9840b728acdd945ba70d04cca92aa6"
+      },
+      "backend/app/data/recipes/meal-pack-8e2f19a431eb7588d190750a3c94901efa57495701bcb68c118f6477db0c3a18.json": {
+        "before": null,
+        "after": "8e2f19a431eb7588d190750a3c94901efa57495701bcb68c118f6477db0c3a18"
+      },
+      "backend/app/services/basket_optimizer.py": {
+        "before": "b5260e2f8d66970ca99e16e01a406ec6e757a54f29d2e116a89e20545c26c507",
+        "after": "484c85b5867f8f61ff4e5d44b774d0f0067c37de03e5de09f98815b4161564a4"
+      },
+      "backend/app/services/complete_recipes.py": {
+        "before": "d787383f8582bce80aa5f437789501b82e93a62c2d3cdaf22998dc17798a50fa",
+        "after": "d546c674bb3a9ec2d7783d072b79bc8e774175e7977f1e8118a671004fa01a28"
+      },
+      "backend/app/services/flexible_recipes.py": {
+        "before": null,
+        "after": "204fe076e1931f7714151b72a9ce793a430e023685d6b527b8ff592b228eccc3"
+      },
+      "backend/app/services/meal_library_cli.py": {
+        "before": "56ffecae5ec83ee8a28bbf07d36ec8030bbd5190bb14a746217cf7c48c26147a",
+        "after": "c9953bb161836658188ea71628dabccea45bd915b0ff78619ded91a140e86492"
+      },
+      "backend/app/services/meal_library_content.py": {
+        "before": "cd6cc166b004bd77e8a2914ffe6985de1f3c7096c8bf1cba7b5f00b57419e575",
+        "after": "a12f885934bd1411ac7293fa8a8704a91555e361481bba033fef0325a556d625"
+      },
+      "backend/app/services/meal_prepared_artifacts.py": {
+        "before": "da4c7032ea36ff7421836ffba7fc436738a6dd13a96e59a9eb1acc9fbd351cc8",
+        "after": "87371a4db1dd5e6290295219a41e4d176643f4551f9fee8a667ac4474c901432"
+      },
+      "backend/app/services/menu_optimizer.py": {
+        "before": "133114cbfd5d62dcc26141883ea442c0d0849859f4be334a73ec7c006394331e",
+        "after": "eb208e523fd6803614018c58acafb75e0754ba7bd642cb90995e5f412f799286"
+      },
+      "backend/app/services/personal_planner.py": {
+        "before": "31ec51faf07c5ff92e90ea1d8bcb0b5b75788878b8cbef9d1904b629916e558d",
+        "after": "2b4d269e943289c74ed0dba4efecd060de7b17f7020162e622b16335786ef3e3"
+      },
+      "backend/app/services/planner_admission.py": {
+        "before": "10a1e532277e9c06db7323000ecd436624f4f01aef1d32ebc08cf5c9797b5faf",
+        "after": "087a38b3eff23d3d9f5f9c18a75a28e669d5520a8a7f3720d0168e53642f4256"
+      },
+      "backend/app/services/pricing_projection_prewarm.py": {
+        "before": "cb2ebc6b9c3b98484263cc38457441dfdfb8171c3e2f71f5dab633dcc59eefb0",
+        "after": "07c87cbf24a26a7ce9c76efacc0861daa24008809208e342d2c00b005916475e"
+      },
+      "backend/app/services/recipe_library.py": {
+        "before": "e461373d7c242b4fc3bdb0ddde6817971676bc873fe7d280cf0d23704d7a57cc",
+        "after": "63c4ceb1b682960444cc4e0f86ce38f96d4b5c54ded13cfffac1b72f9d62edcf"
+      },
+      "backend/app/services/stable_candidate_pool.py": {
+        "before": "3a7d78a0d3b797e061bcdb7e4d87a6b53afbd88c670e457e1decd26b08992002",
+        "after": "34fc6d623515c6075906da83b6511ac77cb3924fe51ac67911b9e6e358a9122b"
+      },
+      "backend/app/services/week_refinement.py": {
+        "before": null,
+        "after": "edf10c8da8299a420a667fa434b3a1314ccc9eb6a3f9270b419e6b295f0bc53d"
+      }
+    },
+    "package_sha256": "d41a63bf5e5851ad6cc496fe47f7a6ad680a1068295c365a3d9dec0b70c5f0fb",
+    "only_reviewed_files_changed": true,
+    "unchanged_runtime_files": 676
+  },
+  "readiness": {
+    "Lund": {
+      "status": "ready",
+      "build_id": "joint-week-refinement-app-e041451",
+      "price_universe": {
+        "price_universe_id": "price-universe:469136bc23df3fb3d9100ad5151dbb14ed0a482722e56a534c3fa108b9f78a0f",
+        "status": "aging",
+        "required_contexts_usable": true,
+        "base_price_policy": "retain-until-replaced",
+        "requires_attention": true
+      }
+    },
+    "Malmo": {
+      "status": "ready",
+      "build_id": "joint-week-refinement-app-e041451",
+      "price_universe": {
+        "price_universe_id": "price-universe:91d4702f0f6a6ecef542a77a896149cd606e56efe0580f7a78334fd83fd04f07",
+        "status": "degraded",
+        "required_contexts_usable": true,
+        "base_price_policy": "retain-until-replaced",
+        "requires_attention": true
+      }
+    }
+  },
+  "operation_lock": true,
+  "only_app_replaced": true,
+  "mounts_preserved": true,
+  "only_environment_change": "BUILD_ID",
+  "price_manifests_preserved_during_activation": true,
+  "prior_state_preserved": {
+    "consumer_plan_revisions": 291,
+    "personal_private_state": 102
+  },
+  "final_checked_at": "2026-10-16T13:34:52.333681+00:00",
+  "containers": {
+    "smako-app-1": {
+      "image": "sha256:93bbfd2ebe3764cddd559422ed1fce53197359b6f0aabde50619dfc6a81cd8f7",
+      "status": "running",
+      "oom": false,
+      "restarts": 0
+    },
+    "smako-scheduler-1": {
+      "image": "sha256:8f25b16ea86cf5cd93d385f87db7d20b73a2543bdc70cb9c08b7beb52ec15a10",
+      "status": "running",
+      "oom": false,
+      "restarts": 0
+    },
+    "smako-caddy-1": {
+      "image": "sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d",
+      "status": "running",
+      "oom": false,
+      "restarts": 0
+    }
+  },
+  "new_oom_events": 0,
+  "offline_validation": {
+    "tests_passed": 460,
+    "ruff": "passed",
+    "compileall": "passed",
+    "frozen_benchmark_runs": 19
+  },
+  "http_cases": [
+    {
+      "case": "protein40",
+      "seconds": 533.72,
+      "http_status": 201,
+      "build_id": "joint-week-refinement-app-e041451",
+      "recipe_count": 5,
+      "checkout_audit_passed": true,
+      "totals_reconciled": true,
+      "unknown_quantities": 0,
+      "purchase_total": 1113.0,
+      "planner_timings_seconds": {
+        "product_facts": 21.043275660835207,
+        "package_calculation": 1.438041368033737,
+        "nutrition": 0.1254440601915121,
+        "audit": 1.2002216666005552,
+        "candidate_generation_and_qualification": 36.35606800811365,
+        "week_search": 5.060958176385611,
+        "total": 43.785998478066176
+      },
+      "identical_saved_get": true,
+      "purchase_surplus": {
+        "unknown_lines": 0,
+        "unused_purchase_value": 257.5,
+        "unused_package_equivalents": 13.322349528403773,
+        "unused_quantities": {
+          "g": 4275.8,
+          "ml": 950.0
+        },
+        "quantity_status": "ESTIMATED",
+        "method": "proportional_paid_merchandise_cost_of_unused_usable_quantity",
+        "deposit_included": false,
+        "deducted_from_checkout": false,
+        "tie_break_enabled": true,
+        "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat."
+      },
+      "joint_refinement": [
+        {
+          "proposal_limit": 256,
+          "evaluation_limit": 32,
+          "proposals": 256,
+          "evaluations_executed": 18,
+          "constraints_rejected": 236,
+          "evaluation_rejected": 4,
+          "duplicate_proposals": 1,
+          "improvements": 0
+        }
+      ]
+    },
+    {
+      "case": "all-macros",
+      "seconds": 26.98,
+      "http_status": 201,
+      "build_id": "joint-week-refinement-app-e041451",
+      "recipe_count": 5,
+      "checkout_audit_passed": true,
+      "totals_reconciled": true,
+      "unknown_quantities": 0,
+      "purchase_total": 1113.0,
+      "planner_timings_seconds": {
+        "product_facts": 5.595594068057835,
+        "package_calculation": 1.5121882022358477,
+        "nutrition": 0.14916328340768814,
+        "audit": 1.2717997473664582,
+        "candidate_generation_and_qualification": 3.7674816423095763,
+        "week_search": 5.573594762943685,
+        "total": 14.717654535081238
+      },
+      "identical_saved_get": true,
+      "purchase_surplus": {
+        "unknown_lines": 0,
+        "unused_purchase_value": 257.5,
+        "unused_package_equivalents": 13.322349528403773,
+        "unused_quantities": {
+          "g": 4275.8,
+          "ml": 950.0
+        },
+        "quantity_status": "ESTIMATED",
+        "method": "proportional_paid_merchandise_cost_of_unused_usable_quantity",
+        "deposit_included": false,
+        "deducted_from_checkout": false,
+        "tie_break_enabled": true,
+        "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat."
+      },
+      "joint_refinement": [
+        {
+          "proposal_limit": 256,
+          "evaluation_limit": 32,
+          "proposals": 256,
+          "evaluations_executed": 18,
+          "constraints_rejected": 236,
+          "evaluation_rejected": 4,
+          "duplicate_proposals": 1,
+          "improvements": 0
+        }
+      ]
+    },
+    {
+      "case": "breakfast-snack-weight",
+      "seconds": 15.77,
+      "http_status": 201,
+      "build_id": "joint-week-refinement-app-e041451",
+      "recipe_count": 2,
+      "checkout_audit_passed": true,
+      "totals_reconciled": true,
+      "unknown_quantities": 0,
+      "purchase_total": 64.06,
+      "planner_timings_seconds": {
+        "product_facts": 5.469964773859829,
+        "package_calculation": 0.17658624844625592,
+        "nutrition": 0.010026611853390932,
+        "audit": 0.015740422997623682,
+        "candidate_generation_and_qualification": 1.6461610007099807,
+        "week_search": 0.18889868911355734,
+        "total": 3.3149949708022177
+      },
+      "identical_saved_get": true,
+      "purchase_surplus": {
+        "unknown_lines": 0,
+        "unused_purchase_value": 39.79,
+        "unused_package_equivalents": 2.2393939393939393,
+        "unused_quantities": {
+          "g": 1780.0
+        },
+        "quantity_status": "VERIFIED",
+        "method": "proportional_paid_merchandise_cost_of_unused_usable_quantity",
+        "deposit_included": false,
+        "deducted_from_checkout": false,
+        "tie_break_enabled": true,
+        "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat."
+      },
+      "joint_refinement": [
+        {
+          "proposal_limit": 256,
+          "evaluation_limit": 32,
+          "proposals": 9,
+          "evaluations_executed": 0,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "duplicate_proposals": 9,
+          "improvements": 0
+        }
+      ]
+    },
+    {
+      "case": "vegan",
+      "seconds": 16.28,
+      "http_status": 201,
+      "build_id": "joint-week-refinement-app-e041451",
+      "recipe_count": 3,
+      "checkout_audit_passed": true,
+      "totals_reconciled": true,
+      "unknown_quantities": 0,
+      "purchase_total": 473.17,
+      "planner_timings_seconds": {
+        "product_facts": 5.595859786029905,
+        "package_calculation": 0.2038378375582397,
+        "nutrition": 0.013169784098863602,
+        "audit": 0.15102258091792464,
+        "candidate_generation_and_qualification": 1.1576797990128398,
+        "week_search": 0.6239878758788109,
+        "total": 3.7553108311258256
+      },
+      "identical_saved_get": true,
+      "purchase_surplus": {
+        "unknown_lines": 0,
+        "unused_purchase_value": 157.66,
+        "unused_package_equivalents": 9.659012698412699,
+        "unused_quantities": {
+          "g": 3813.6,
+          "ml": 976.0
+        },
+        "quantity_status": "ESTIMATED",
+        "method": "proportional_paid_merchandise_cost_of_unused_usable_quantity",
+        "deposit_included": false,
+        "deducted_from_checkout": false,
+        "tie_break_enabled": true,
+        "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat."
+      },
+      "joint_refinement": [
+        {
+          "proposal_limit": 256,
+          "evaluation_limit": 32,
+          "proposals": 75,
+          "evaluations_executed": 12,
+          "constraints_rejected": 60,
+          "evaluation_rejected": 0,
+          "duplicate_proposals": 3,
+          "improvements": 0
+        }
+      ]
+    }
+  ],
+  "post_activation_operations": {
+    "checked_at": "2026-10-16T13:34:55.858086+00:00",
+    "readiness_http": 200,
+    "disk_manifest": "price-universe:469136bc23df3fb3d9100ad5151dbb14ed0a482722e56a534c3fa108b9f78a0f",
+    "loaded_manifest": "price-universe:469136bc23df3fb3d9100ad5151dbb14ed0a482722e56a534c3fa108b9f78a0f",
+    "required_contexts": [
+      {
+        "context_id": "context:coop:23eaae11c9661e68",
+        "freshness": "FRESH",
+        "qualified": true,
+        "base_prices_usable": true,
+        "loaded": true
+      },
+      {
+        "context_id": "context:hemkop:3288e04edd97e349",
+        "freshness": "FRESH",
+        "qualified": true,
+        "base_prices_usable": true,
+        "loaded": true
+      },
+      {
+        "context_id": "context:hemkop:756955d0e6e05f23",
+        "freshness": "AGING",
+        "qualified": true,
+        "base_prices_usable": true,
+        "loaded": true
+      },
+      {
+        "context_id": "context:willys:383650ec6ff5a636",
+        "freshness": "FRESH",
+        "qualified": true,
+        "base_prices_usable": true,
+        "loaded": true
+      },
+      {
+        "context_id": "context:willys:4a671428fc484e43",
+        "freshness": "FRESH",
+        "qualified": true,
+        "base_prices_usable": true,
+        "loaded": true
+      }
+    ]
+  }
+}

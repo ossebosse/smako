@@ -1,3 +1,16 @@
+# 2026-10-16: Veckooptimeringen aktiverad på betan
+
+Kodcommit `e041451` är pushad på `feature/joint-week-refinement` och aktiv som
+`joint-week-refinement-app-e041451`. Endast appen byttes under befintligt
+driftlås efter kontrollerad backup. Lund och Malmö är ready med ny version.
+Fyra publika menyflöden passerar närings-/viktkrav, kassarevision och två
+sparade återläsningar; tidigare data och scheduler/proxy är bevarade.
+Första API-provet efter omstart tog 533,72 s trots 43,79 s intern planerartid;
+följande prov tog 15,77–26,98 s. Uppstarts-/kötiden behöver följas upp.
+Se [aktiveringsrapport](releases/joint-week-refinement-20261016/ACTIVATED.md)
+för tider, exakt paket och verifiering. Nedanstående genomföranderapporter
+beskriver historisk status före denna aktivering.
+
 # 2026-10-16: Gemensamt giltiga veckobyten och mindre inköpsöverskott
 
 Gren `feature/joint-week-refinement`, bas `4357323`. **Ingen aktivering på betan.**
