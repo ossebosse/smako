@@ -35,6 +35,39 @@ Variationsgränser ändrades inte: upprepningen sågs i PersonalPlanner utan
 fel/errors (främst saknade `reports/`-filer), inga nya. 11 nya tester, Ruff och
 compileall passerar.
 
+## Granskning (Codex)
+
+Granska i denna ordning och stoppa vid första avvikelse:
+
+1. **Audit endast för hela menyer** (`PersonalPlanner.basket`). Bekräfta att inget
+   resultat med `final=False` kan bli returnerat, sparat eller visat: följ
+   `qualified_results`/`remember_bounded`, beam-/bibliotekscachen i
+   `menu_optimizer`, `_retain_scope_incumbent` och slutberäkningen
+   `self.basket(chosen, final=True)`. Kontrollera även `meal_library_cli`
+   (anropar med standard `final=True`).
+2. **Samma resultat.** Kör acceptansmatrisen med ett verkligt underlag före och
+   efter (`combined_performance_probe.py --matrix`, samma klocka). Kravet är
+   identisk semantisk hash i alla positiva profiler och samma blockerade profiler.
+   Redovisa tider separat; påstå ingen förbättring utan egen mätning.
+3. **Faktauppvärmningen** (`source_facts_prewarm.py`, `main.py`). Bekräfta att
+   anropet är exakt samma `load_retained_facts(prepared)` som planeraren gör,
+   att tråden aldrig tar admission-platsen, att fel bara registreras, och att
+   SQLite-åtkomst från en annan tråd är säker här. Mät första användarjobbet
+   efter omstart med verkliga råsnapshots, med och utan
+   `SOURCE_FACTS_PREWARM_ENABLED`. Är effekten noll eller negativ: stäng av den.
+4. **Färdigrättsregeln** (`_is_filled_dough_dish`). Kör den mot aktiv Lund- och
+   Malmöartefakt och granska varje träff. Endast produktnamn ska användas;
+   komponentprodukter (sås, deg, skin) ska inte klassas som färdigrätt.
+5. **Kampanjbutikstexten** (`_campaign_only_scope_hint`). Endast meddelandet får
+   ändras; felkod, scope och krav ska vara desamma. Pröva ICA-only och en
+   blandning med Willys via HTTP.
+6. **Regression.** Kör samma 43 testfiler före och efter och jämför listan av
+   FAILED/ERROR (väntat: identiska 56 kända, främst saknade `reports/`-filer),
+   plus de 11 nya testerna, Ruff och compileall.
+
+Ingen aktivering ingår. `PRICE_UNIVERSE_PREWARM_ENABLED=false` på servern är en
+separat driftåtgärd under ordinarie driftlås.
+
 ---
 
 # 2026-10-16: Main och portabel utvecklings-/betastart
