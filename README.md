@@ -1,19 +1,40 @@
 # Smako
 
-Permanent utvecklingsrot: **`D:\Projects\Smako`**. Huvudgren: **`master`**.
-Detta repository samlar den verifierade lokala v5-implementationen och återfunnet
-äldre arbete. Det är ingen produktionsrelease.
+Svensk måltidsplanering med recept, näringsval, skafferi och gemensam
+inköpsoptimering utifrån verifierade matvarupriser.
 
-- [Aktuell handoff](docs/HANDOFF.md)
-- [Start, beroenden, tester och dataåterställning](docs/DEVELOPMENT.md)
-- [Konsolidering, ursprung och säkerhetskopia](docs/CONSOLIDATION.md)
-- [Verifieringsresultat och kända basfel](docs/consolidation/VERIFICATION.md)
+**`main` är huvudgren och utgångspunkt för utveckling och nya betareleaser.**
+En vanlig kloning från GitHub hämtar den. Push till `main` startar ingen
+automatisk deployment; betan aktiveras med det dokumenterade releaseflödet.
+
+## Kom igång
+
+Kräver Git och Python **3.12**. PowerShell på Windows:
+
+```powershell
+git clone https://github.com/ossebosse/smako.git
+Set-Location smako
+py -3.12 -m venv .venv
+.venv/Scripts/python.exe -m pip install -r requirements-dev.txt
+.venv/Scripts/python.exe scripts/dev.py --reload
+```
+
+Öppna **http://127.0.0.1:8000/personal**. Hjälparen migrerar en separat lokal
+databas under `.local/dev` och startar UI/API med mockpriser. Fullständig
+planering med riktiga butiker kräver ett separat prisunderlag; se utvecklingsguiden.
+På Linux/macOS används `python3.12` och `.venv/bin/python`.
+
+- **[Utveckling: start, tester, riktiga prisunderlag och bidrag](docs/DEVELOPMENT.md)**
+- **[Aktivera en granskad commit från main på betan](docs/BETA.md)**
+- [Aktiv betaversion och kommande arbete](docs/HANDOFF.md)
+- [Driftstatus och felsökning](docs/OPERATIONS.md)
 - [Projektregler](AGENTS.md)
 
-Backend ligger i `backend`, källinsamling och datamodeller i `grocery_data`,
-streckkodsläsarens byggkällor i `frontend/barcode-scanner`, driftverktyg i `deploy`
-och lokala hjälpskript i `scripts`. Bevara denna struktur.
+Backend och levererade webbassets ligger i `backend/app`, källinsamling och
+datamodeller i `grocery_data`, streckkodsläsarens byggkällor i
+`frontend/barcode-scanner`. `scripts` innehåller utvecklings-/releaseverktyg
+och `deploy` server-/reläkonfiguration.
 
-Hemligheter, driftdatabaser och användarprofiler ingår inte i nya commits.
-Historiskt testunderlag återställs från separat backup med hashkontroll.
-Gamla datum-mappar ska vara kvar tills separat städning uttryckligen godkänts.
+Hemligheter, driftdatabaser, användarprofiler och stora privata testunderlag
+ingår inte i Git. SSH-behörighet och skyddade data tillhandahålls separat.
+Historiska grenar och [konsolideringsunderlag](docs/CONSOLIDATION.md) är bevarade.

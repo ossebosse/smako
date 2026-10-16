@@ -1,157 +1,112 @@
-# Lokal utveckling i Smako
+# Utveckla Smako från main
 
-## Reproducera Lund-kandidaten från en bestämd commit
+Utgå från `https://github.com/ossebosse/smako.git`, standardgren `main`.
+På den befintliga utvecklingsdatorn är `D:\Projects\Smako` den permanenta
+arbetskopian. En ny dator använder sin egen klon; gamla Codex-kataloger behövs inte.
 
-[Releaseunderlag](releases/lund-20260929/RESULTS.md) och
-[aktiveringsordning](releases/lund-20260929/ACTIVATION.md) är aktuella för
-`release/lund-relay-20260929`; avsnitten längre ned beskriver den bevarade
-konsolideringens utvecklingsmiljö. Server/relä har separata ZIP-paket från
-**samma** runtime-commit `bdc9f7df417084641d0a712e3dad188dad1ad7d4`.
-Skapa en ren klon från denna commit, återställ de 887 stora autentiska
-testfilerna med `scripts/restore_local_data.py` och `--check`, och verifiera
-både databaser, snapshots och alla refererade råfiler innan planeringsprov.
-Stora testdata finns i skyddad lokal backup, inte i Git eller driftpaketen.
-Arbeta med tillräckligt ledigt TEMP-utrymme (under dessa prov krävdes D:);
-SQLite-fel vid nästan full C: är inte ett produktfel.
+## Installation och lokal start
 
-```powershell
-git clone --no-local D:\Projects\Smako D:\Smako-release-work\clean-clone
-Set-Location D:\Smako-release-work\clean-clone
-git switch --detach bdc9f7df417084641d0a712e3dad188dad1ad7d4
-py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
-.\.venv\Scripts\python.exe scripts/restore_local_data.py --backup D:\Smako-backups\consolidation-20260929
-.\.venv\Scripts\python.exe scripts/restore_local_data.py --backup D:\Smako-backups\consolidation-20260929 --check
-$env:PYTHONPATH='backend;.'
-$env:SMAKO_FORBIDDEN_ROOTS='D:\Projects\Smako'
-.\.venv\Scripts\python.exe scripts/verify_offline.py -q -m 'not live' backend/tests grocery_data/tests --basetemp D:\Smako-release-work\pytest-release
-.\.venv\Scripts\python.exe scripts/build_release.py --commit bdc9f7df4170 --output D:\Smako-release-work\packages-bdc9
-```
-
-`verify_offline.py` spärrar nät och läsning av den gamla arbetsroten;
-`PYTHONPATH` ovan pekar enbart på **den rena klonen** under test, aldrig på en
-gammal datumkatalog. Paketbyggaren läser Git-blobbar, inte arbetskopian.
-Jämför ZIP-hasharna med releaseunderlaget. Extrahera server-ZIP som
-Docker-byggkontext, bygg med root-`Dockerfile` och kör det externt monterade
-`scripts/release_verification/verify_server_image.py` **i** bilden med
-`/release.zip` och `/work` monterade samt `--network none`; det verifierar
-`RELEASE.json`, filhashar, pip och Chromium. Bygg inte från en
-Windows-`git archive` med lokalt omskrivna CRLF.
-Reläet installeras från relä-ZIP med
-`deploy/scripts/install_relay_release.ps1` till en versionsbunden katalog;
-lokal konfiguration, hemligheter, köer och tillstånd förblir separat. Den
-aktiva Windows-uppgiften ändras endast efter separat beslut. Dockerbild,
-frontendprov och browser-E2E har faktiskt körts för denna kandidat; äldre
-noteringar nedan om ej körd Docker gäller bara 2026-09-29-konsolideringen.
-
-Permanent rot: `D:\Projects\Smako`. Huvudgren: `master`. Konsolidering sker på
-`chore/consolidate-smako`. Ingen del av dessa instruktioner aktiverar produktion.
-
-## Kontrollera arbetskopian
-
-```powershell
-Set-Location D:\Projects\Smako
-Get-Location
-git rev-parse --show-toplevel
-git branch --show-current
-git status --short
-```
-
-En ändring har en ansvarig skrivare. Parallella agentuppgifter använder uttryckliga
-Git-worktrees i detta repository, aldrig nya fristående datumkopior.
-
-## Återskapa miljön
-
-Python 3.12 används. `.venv` och `node_modules` återskapas och versionshanteras inte.
-`requirements-dev.lock` anger den verifierade Windows-miljön; befintliga manifest
-är kvar och kompletterade med den faktiskt importerade PDF-parsern PyMuPDF.
+Kräver Git och Python 3.12. Kör från den klonade projektroten:
 
 ```powershell
 py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.venv/Scripts/python.exe -m pip install -r requirements-dev.txt
+.venv/Scripts/python.exe -m pip check
+.venv/Scripts/python.exe scripts/dev.py --check
+.venv/Scripts/python.exe scripts/dev.py --reload
+```
+
+På Linux/macOS: `python3.12 -m venv .venv` och `.venv/bin/python` i stället.
+`requirements-dev.txt` använder befintliga requirements och versionslås.
+Ingen Node-installation behövs för att köra de levererade webbassetsen.
+
+Öppna http://127.0.0.1:8000/personal. `scripts/dev.py` sätter lokal miljö,
+stänger av dotenv-inläsning, migrerar `.local/dev/grocery.sqlite` och använder
+`.local/dev/plans.sqlite3` för planer. Priser är uttryckligen mock och komplett
+receptplanering är avstängd tills verifierat underlag konfigurerats. Vissa
+produkt- och planeringsflöden visar därför saknat underlag i denna tomma miljö.
+Hjälparen startar ingen prisinsamling, reläuppgift eller deployment.
+
+`--check` migrerar och kontrollerar appimport utan att starta servern.
+`--port 8010` väljer annan lokal port. Stoppa servern med Ctrl+C.
+
+## Tester utan privata data
+
+Kör denna begränsade startkontroll från projektroten:
+
+```powershell
+.venv/Scripts/python.exe scripts/verify_offline.py backend/tests/test_background_plan_prewarm.py backend/tests/test_planner_admission.py backend/tests/test_beta_release_package.py -m 'not live'
+```
+
+`verify_offline.py` spärrar externt nät och dotenv och skriver kontrollunderlag
+i `.local/verification`. Utöka med tester för de ändrade delarna. Kör Ruff
+på ändrade Pythonfiler och compileall på relevanta paket. Hela sviten har
+även tester som kräver separat historiskt dataunderlag; startkontrollen är
+inte ett påstående om att hela sviten kan köras från en tom klon.
+
+För browserprov:
+
+```powershell
+.venv/Scripts/python.exe -m playwright install chromium webkit
+```
+
+För ändringar i streckkodsläsarens byggkällor krävs Node/pnpm:
+
+```powershell
 pnpm --dir frontend/barcode-scanner install --frozen-lockfile
-```
-
-Det lokala wheel-arkivet `D:\Smako-consolidation-work\wheelhouse` kan användas med
-`--no-index --find-links` som alternativ till pip-nätverk. Det är inte Git-innehåll.
-Browserprov kräver dessutom `python -m playwright install chromium webkit` i vald
-miljö. Browserhjälpare använder nu Playwrights installation; `--webkit` i
-`personal_v2_browser_check.py` tillåter ett uttryckligt alternativ.
-
-## Återställ sparade testdata
-
-De granskade små fixturerna finns i Git. Stora råsvar, PDF:er och lokala databaser
-ingår i den separata säkerhetskopian. `docs/consolidation/test-data.jsonl` anger
-exakt sökväg, storlek, SHA-256 och ursprung för testunderlaget, inklusive råfiler
-som används för produktfakta. En databas ensam är inte en fullständig återställning.
-
-```powershell
-.\.venv\Scripts\python.exe scripts/restore_local_data.py --backup D:\Smako-backups\consolidation-20260929
-```
-
-Verktyget vägrar skriva över en avvikande fil. `--check` verifierar utan skrivning.
-`--all-evidence` återställer även övrigt selekterat historiskt rapportunderlag i
-`evidence-*.jsonl`. Fullständiga ursprungliga arbetskopior, inklusive privata data,
-finns endast i den behörighetsskyddade säkerhetskopian. Kopiera inte privata data
-till delade testmiljöer. Att en fil ignoreras av Git innebär inte att den backas upp.
-Nytt lokalt tillstånd behöver en separat konsistent backup när inga skrivare kör.
-
-## Testa och bygg
-
-Kör från projektroten. Testverktyget spärrar externa nätverksanslutningar och
-läsningar under det gamla Codex-källområdet. Loopback till isolerade testservrar
-är tillåtet. `PYTHON_DOTENV_DISABLED` skyddar tester mot lokal driftkonfiguration.
-
-```powershell
-$env:PYTHONPATH='backend;.'
-$env:PYTHON_DOTENV_DISABLED='1'
-$env:PYTHONDONTWRITEBYTECODE='1'
-$files=Get-Content docs/consolidation/focused-tests.json | ConvertFrom-Json
-.\.venv\Scripts\python.exe scripts/verify_offline.py @files -m 'not live'
-.\.venv\Scripts\python.exe scripts/planner_replay.py .local/planner-replay.json
-.\.venv\Scripts\python.exe -m pip check
-.\.venv\Scripts\python.exe -m compileall -q backend grocery_data
 pnpm --dir frontend/barcode-scanner check
 pnpm --dir frontend/barcode-scanner build
 ```
 
-När Docker redan är tillgängligt kan rotens fristående Dockerfile byggas lokalt
-med `docker build -t smako:local .`. Detta kommando har inte verifierats här
-eftersom Docker-daemon saknades. De historiska kandidat-Dockerfilerna i `deploy`
-kräver dessutom uttryckligt `BROWSER_BASE`/`release-wheels`; deras gamla image-
-kedja ersätter inte miljöåterskapandet ovan. `.local` ingår inte i byggkontexten.
+## Utveckling med verkliga priser och näringskopplingar
 
-För hela befintliga sviten, utelämna `@files`. Kända basfel och prov som inte körts
-redovisas i `CONSOLIDATION.md`; ingen grön totalsvit påstås. Testdatabaser använder
-TEMP/TMP. Under konsolideringen användes en separat temporär katalog på C: för
-snabbare SQLite-skrivningar, med kontroll av ledigt utrymme.
+Begär ett behörigt, sammanhängande utvecklingsunderlag från projektets
+förvaltare: aktivt PriceUniverse med manifest, grocery-databas och dess
+refererade råsnapshots. Använd inte privata produktionsprofiler för tester.
+De små fixturerna i Git räcker för enhetstester men ersätter inte detta underlag.
+Gamla mätningar måste också köras med sina dokumenterade testklockor.
 
-## Starta en lokal mockmiljö
+Historiska testfiler kan återställas med befintlig hashkontroll:
 
 ```powershell
-New-Item -ItemType Directory -Force .local/runtime | Out-Null
-$env:PYTHONPATH='backend;.'
-$env:PYTHON_DOTENV_DISABLED='1'
-$env:APP_ENV='development'
-$env:PRICE_PROVIDER='mock'
-$env:OPENAI_API_KEY=''
-$env:FIELD_MODE_ENABLED='false'
-$env:PLAN_STORE_PATH='.local/runtime/plans.sqlite3'
-$env:GROCERY_DATABASE_URL='sqlite+pysqlite:///.local/runtime/grocery.sqlite'
-$env:GROCERY_RAW_SNAPSHOT_ROOT='.local/runtime/raw_snapshots'
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+.venv/Scripts/python.exe scripts/restore_local_data.py --backup <skyddad-backupkatalog>
+.venv/Scripts/python.exe scripts/restore_local_data.py --backup <skyddad-backupkatalog> --check
 ```
 
-Detta är en lokal utvecklingsstart med mockpriser. Historiska integrationstester
-använder sina ursprungliga observationstider och uttryckliga testklockor.
-`.env.example` innehåller inga hemligheter. Verkliga API-/driftuppgifter måste
-tillföras separat. Kör inte refresh-, relay-, tunnel- eller deployskript som en
-sidoeffekt av utvecklingsstart.
+För den egna datauppsättningen, använd separat lokal konfiguration med
+`GROCERY_DATABASE_URL`, `GROCERY_RAW_SNAPSHOT_ROOT`, `PRICE_UNIVERSE_CACHE_ROOT`,
+`PRICE_UNIVERSE_CITY`, `PRICE_UNIVERSE_REQUIRED=true`, `COMPLETE_RECIPES_ENABLED=true`
+och en egen `PLAN_STORE_PATH`. Prisdata och dess källreferenser måste stämma
+överens. Starta då Uvicorn direkt med denna miljö, inte `dev.py` som avsiktligt
+väljer den tomma mockmiljön:
 
-## Ren klon
+```powershell
+$env:PYTHONPATH='backend;.'
+.venv/Scripts/python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
 
-Klona lokalt med `git clone --no-hardlinks D:\Projects\Smako <tom-katalog>`.
-Återskapa `.venv` och testdata enligt ovan. Ange vid verifiering
-`$env:SMAKO_FORBIDDEN_ROOTS='D:\Projects\Smako'` i klonen för att även förbjuda
-läsning från den permanenta arbetskopian. Använd sedan samma testkommandon.
-Git-lagring och testunderlag måste vara självständiga; symlänka inte till äldre rötter.
+Se `.env.example`, aktuella fält i `backend/app/config.py` och
+`grocery_data/app/config.py`. Hemligheter tillförs separat och får aldrig committas.
+Använd Linux/macOS-separatorn `:` i `PYTHONPATH` på dessa system.
+
+## Arbetsflöde och leverans
+
+```powershell
+git switch main
+git pull --ff-only
+git switch -c fix/min-andring
+# Ändra och verifiera berörda delar.
+git add <granskade-filer>
+git commit -m "Beskriv ändringen"
+git push -u origin fix/min-andring
+```
+
+Integrera granskade ändringar på `main` via PR eller kontrollerad merge,
+och pusha huvudgrenen. Kloning och betarelease ska därefter kunna utgå från
+`main`; en äldre arbetsgren ska inte behövas för att hitta aktuell kod.
+En arbetskopia har en aktiv skrivare. Andra parallella uppgifter använder
+uttryckliga Git-worktrees. Ändra inte någon annans checkout.
+
+För betan: följ [BETA.md](BETA.md). Utvecklingsstart aktiverar ingen server.
+Historiska reproduktionsinstruktioner finns i
+[utvecklingshistoriken](development-history-20260929.md); de är inte standardstarten.

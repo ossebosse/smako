@@ -17,13 +17,17 @@
 ## Permanent repository and working discipline
 
 - The permanent local development root is `D:\Projects\Smako`. This repository,
-  with its own `.git` directory and intended main branch `master`, is authoritative
+  with its own `.git` directory and main branch `main`, is authoritative
   for new development. Historical dated copies are preserved evidence, not new
   development workspaces. Do not create more standalone dated project copies.
 - Before editing, inspect the working directory, `git rev-parse --show-toplevel`,
   the current branch and `git status --short`. Preserve existing user changes.
 - Work on bounded branches and make small, traceable commits. Never force-push,
   rewrite history, reset or clean another task's work as routine preparation.
+- Integrate completed, reviewed work into `main`; it is the remote default and
+  source for new clones and beta releases. Follow `docs/DEVELOPMENT.md` and
+  `docs/BETA.md`. Push alone never activates beta. Other machines use their own
+  clean clone; the permanent Windows path above applies to this workstation.
 - One controlled writer owns each working copy. If concurrent work is needed,
   use explicitly created Git-worktrees of this same repository and integrate
   their branches deliberately. Check for other writers before backups/merges.

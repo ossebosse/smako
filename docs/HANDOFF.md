@@ -1,3 +1,19 @@
+# 2026-10-16: Main och portabel utvecklings-/betastart
+
+`main` samlar den tidigare huvudgrenen `master` (`bdf0a3a`) och de 25 senare
+commits som slutar i `4eedaa5`, utan ombyggd historik. Historiska experiment-
+och verifieringsgrenar bevaras; de ska inte blindmergas över aktuell kod.
+README och DEVELOPMENT beskriver start från GitHub-klon. `scripts/dev.py`
+migrerar en isolerad mockmiljö. BETA beskriver det versionshanterade appflödet
+`beta_release.py prepare/build/activate`, återanvänt från verifierad appaktivering.
+Det kräver operatörens SSH-behörighet och stödjer bara granskade appfiler;
+scheduler, beroenden och databasschema behöver separat releasegranskning.
+
+Ingen ny betaaktivering ingår i denna ändring av Git och utvecklingsverktyg.
+Betan kör fortsatt `joint-week-refinement-app-e041451`. Uppstartsväntan nedan
+är utredd men inte åtgärdad. Klon- och verifieringsresultat dokumenteras i
+[main-onboarding-20261016](releases/main-onboarding-20261016.md).
+
 # 2026-10-16: Uppstartsväntan undersökt
 
 Gren `investigate/startup-prewarm-wait`, bas `b6ef5b8`. Ingen produktionsändring.
