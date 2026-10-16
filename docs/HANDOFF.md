@@ -1,3 +1,37 @@
+# 2026-10-16: Plannerförberedelser och testmatris – lokalt verifierade
+
+Användaren beställde prioritet 1–2 med återanvändning av befintlig arkitektur.
+Gren `perf/planner-preparation-matrix`, kodcommit `f2855df`, bas `b77e033`.
+**Ingen produktionsaktivering.** Betan ligger kvar på versionen nedan.
+
+Befintligt offlineprov har nu `--matrix` med tio profiler, frysta källhashar,
+kall/varm körning, CPU/minne och identitetskontroll av hela meny-/korgresultatet.
+PerformanceTrace räknar ekodelsökning och mäter admission-väntan när trace är aktiv.
+Offlinekötid är okänd; ingen samtidig HTTP-belastning har gjorts.
+
+84 ingredienssökningar förbereds via befintliga diskartefakter, universumets
+begränsade cache, uppstart/omladdning och `meal_library_cli prepare/build --universe`.
+Exakta alias, mängd-/källkrav och slutkontroller bevaras. Kodsignaturen binder
+nu även näringsreferensernas och deklarationernas JSON-innehåll. En provad extra
+gemensam näringscache togs bort eftersom jämförelserna inte visade tidsvinst;
+befintliga käll-/näringscacher återanvänds.
+
+411 offlineprov, Ruff och compileall passerar. Samma utfall för alla tio
+profiler och identiska recept/korgar/näringskällor för de sju levererade menyerna.
+Tre profiler ger fortsatt avslag; detta är inte generell täckningsgrad.
+Separat 40-gramsprov: 10,29 s uppstartsförberedelse, sedan 22,88 s första meny
+och 8,18 s varm. Ingen tydlig generell vinst för redan varma menyer.
+
+Ekoandelsprovet tog 482,48 s: 382 864 ekodelmängder, 426,20 s i ekosökningen.
+Nästa flaskhals är därmed belagd; inga sökbudgetar har sänkts. 30-/60-sekundersmålen
+är inte uppnådda för hela matrisen. Data, kötid, serverkapacitet och globalt
+lägsta kostnad får inte övertolkas från dessa lokala sekventiella prov.
+
+[Mätresultat och verifiering](../reports/planner-preparation-20261016.md) ·
+[Körbeskrivning och mål](planner-performance.md).
+
+---
+
 # 2026-10-15: Näringskopplingar och extraval – aktiverade på betan
 
 Användaren begärde ”Aktivera på betan”. Appversion

@@ -4,6 +4,8 @@ Detta är arbetskontraktet för prioritet 1–2. Tid, giltighet och inköpskostn
 bedöms tillsammans. En snabbare beräkning som ändrar hårda krav, tappar
 kandidater eller ger en dyrare korg är inte automatiskt en förbättring.
 
+[Verifierade mätvärden och begränsningar, 2026-10-16](../reports/planner-preparation-20261016.md).
+
 ## Befintliga delar som återanvänds
 
 | Behov | Befintlig komponent | Ändring i denna etapp |
