@@ -306,6 +306,10 @@ def test_complete_candidates_use_actual_product_nutrition_not_legacy_coverage(mo
     ("tortillas", "as_sold", "Tortillas Nacho Cheese Chips", "Snacks", False),
     ("bönor", "cooked_drained", "Vita Bönor Stora Eko", "Konserver", True),
     ("bönor", "cooked_drained", "Vita Bönor i Tomatsås", "Konserver", False),
+    ("vitkål", "raw_edible", "Vitkål Strimlad", "Frukt & grönt", True),
+    ("vitkål", "raw_edible", "Vitkål Strimlad Klass 1", "Frukt & grönt", True),
+    ("paprika", "raw_edible", "Paprikasallad Strimlad", "Frukt & grönt", False),
+    ("paprika", "raw_edible", "Paprika Strimlad & Grillad", "Fryst", False),
 ])
 def test_whole_food_identity_never_substring_matches(ingredient, form, label, category, expected):
     from app.services.complete_recipes import _whole_food_identity

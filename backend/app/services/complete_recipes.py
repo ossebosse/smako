@@ -397,7 +397,9 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         if (brand and product.name.casefold().startswith(brand + ' ')
                 and not (fresh or frozen)):
             return False
-        if not simple(produce[canonical], "fast|mjölig|tvättad|kok|stor|smått&gott|små|delikatess|libanesisk|grön|röd|gul|orange|lila|buketter|blad|ofilmad|i kapsel|skivor"):
+        # "Strimlad" is plain raw produce cut by the supplier (Vitkål Strimlad
+        # 400 g); the composition check below still rejects salt/oil/dressing.
+        if not simple(produce[canonical], "fast|mjölig|tvättad|kok|stor|smått&gott|små|delikatess|libanesisk|grön|röd|gul|orange|lila|buketter|blad|ofilmad|i kapsel|skivor|strimlad|strimlade"):
             return False
         if re.search(r"\b(?:salt|socker|olja|smör|grädde|ättika|lag)\b", composition.split("kan innehålla")[0]):
             return False

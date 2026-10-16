@@ -26,6 +26,15 @@ produktfakta, offline, receptbiblioteket (`mode=complete`), 1 CPU.
    inte navigationskategori; sås/deg/skin undantas). Alla 35 träffar i Lund är
    verkliga färdigrätter; "Dumplings Kyckling" kan inte längre bli recepts kyckling.
 
+5. **Strimlad råvara räknas som rå råvara** (`_whole_food_identity`, produce).
+   "Vitkål Strimlad" (400 g, fast förpackning) godkänns nu för `vitkål`
+   `raw_edible`; sammansättningskontrollen mot salt/olja/ättika är kvar.
+   Standardprofilen 5×4/2 butiker: avvisade middagar 64 → 41 av 158,
+   685,85 → 638,47 kr med mer varierad meny. Tid 44 → 66 s på grund av fler
+   kvalificerade kandidater (1 CPU, enskilt prov). Kvarvarande avslag: chiliflakes
+   (10, kräver mild/medium), fläskkött (8) och pepparrot (6) som viktvara, majs (6),
+   kapris, bröd, pasta, ägg i gram, tonfisk.
+
 Minnet är oförändrat: 92 MB pris-JSON blir cirka 745 MB modeller, fakta cirka
 200 MB. Dedup av proveniens/strängar sänkte inte RSS och ingår inte.
 Variationsgränser ändrades inte: upprepningen sågs i PersonalPlanner utan
@@ -58,10 +67,14 @@ Granska i denna ordning och stoppa vid första avvikelse:
 4. **Färdigrättsregeln** (`_is_filled_dough_dish`). Kör den mot aktiv Lund- och
    Malmöartefakt och granska varje träff. Endast produktnamn ska användas;
    komponentprodukter (sås, deg, skin) ska inte klassas som färdigrätt.
-5. **Kampanjbutikstexten** (`_campaign_only_scope_hint`). Endast meddelandet får
+5. **Strimlad råvara.** Granska alla produkter med "strimlad" i aktiva Lund- och
+   Malmöartefakter mot `produce`-reglerna; endast osmaksatt rå råvara får passera.
+   Kör acceptansmatrisen och bekräfta att fler recept kvalificerar utan nya
+   avvikelser i audit, näring eller skafferi.
+6. **Kampanjbutikstexten** (`_campaign_only_scope_hint`). Endast meddelandet får
    ändras; felkod, scope och krav ska vara desamma. Pröva ICA-only och en
    blandning med Willys via HTTP.
-6. **Regression.** Kör samma 43 testfiler före och efter och jämför listan av
+7. **Regression.** Kör samma 43 testfiler före och efter och jämför listan av
    FAILED/ERROR (väntat: identiska 56 kända, främst saknade `reports/`-filer),
    plus de 11 nya testerna, Ruff och compileall.
 
