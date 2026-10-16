@@ -179,10 +179,14 @@ def completed_search_outcome(diagnostics):
             "nutrition_searches_omitted": omitted,
             "nutrition_budget_exhausted_recorded": exhausted,
             "week_search_method": ("bounded_beam_then_library_substitutions"
-                if any(row.get("library_phase") in {"substitution", "refinement", "paired_refinement"}
+                if any(row.get("library_phase") in {"substitution", "refinement", "paired_refinement", "joint_refinement"}
                        for row in diagnostics.get("search", []))
                 else "bounded_beam"),
             "distinct_week_proposals_pruned": pruned,
+            "joint_refinement": [{key: row[key] for key in (
+                "proposal_limit", "evaluation_limit", "proposals", "evaluations_executed",
+                "constraints_rejected", "evaluation_rejected", "duplicate_proposals", "improvements")}
+                for row in diagnostics.get("search", []) if row.get("library_phase") == "joint_refinement"],
         },
         "budget_message": message + " Globalt lägsta pris är inte bevisat.",
     }

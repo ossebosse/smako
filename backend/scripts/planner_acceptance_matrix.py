@@ -130,7 +130,10 @@ def quality(plan, request):
             "search_outcome": plan.personal.checks.get("search_outcome"),
             "nutrition": [{k: v for k, v in n.items() if k in ("slot_id", "status", "values")}
                           for n in nutrients.values()],
-            "organic_cost_percent": eco, "semantic_sha256": signature}
+            "organic_cost_percent": eco, "semantic_sha256": signature,
+            "purchase_surplus": plan.personal.checks.get("purchase_surplus"),
+            "joint_refinement": [r for r in plan.personal.checks.get("planning_diagnostics", {}).get("search", [])
+                                 if r.get("library_phase") == "joint_refinement"]}
 
 
 def summarize(records):

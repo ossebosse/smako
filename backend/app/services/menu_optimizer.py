@@ -828,7 +828,8 @@ class MenuOptimizer:
         ), RecipeProfileBuilder._structure(recipe))
 
     def optimize_library_slots(self, cohorts, *, evaluate, accepts, score, retention_score,
-                               search_trace=None, decision_observer=None, seed_selector=None, **search_options):
+                               search_trace=None, decision_observer=None, seed_selector=None,
+                               refinement_score=None, joint_proposals=None, **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
 
         Cohorts are cumulative, current-only slot options in publication order.
@@ -841,6 +842,14 @@ class MenuOptimizer:
         trace = search_trace if search_trace is not None else []
         cache, keys = OrderedDict(), RecipeComputationCache()
         hits = 0
+        secondary_best = None
+
+        def remember_final(slots, result, final):
+            nonlocal secondary_best
+            if (final and refinement_score is not None and (secondary_best is None
+                    or refinement_score(slots, result) < refinement_score(*secondary_best))):
+                secondary_best = list(slots), result
+            return result
 
         def slot_key(slot):
             return slot.id, slot.day, slot.meal_type, keys.key(slot.recipe)
@@ -850,18 +859,18 @@ class MenuOptimizer:
             key = (final, tuple(slot_key(slot) for slot in slots))
             if key in cache:
                 hits += 1
-                if trace and trace[-1].get("library_phase") not in {"substitution", "refinement", "paired_refinement"}:
+                if trace and trace[-1].get("library_phase") not in {"substitution", "refinement", "paired_refinement", "joint_refinement"}:
                     # The beam has counted this callback as executed; record
                     # the actual shared-cache hit instead of double-counting.
                     trace[-1]["evaluations_executed"] -= 1
                     trace[-1]["evaluation_cache_hits"] += 1
                 cache.move_to_end(key)
-                return cache[key]
+                return remember_final(slots, cache[key], final)
             result = evaluate(slots, final=final)
             if len(cache) >= 256:
                 cache.popitem(last=False)
             cache[key] = result
-            return result
+            return remember_final(slots, result, final)
 
         def improve(incumbent, additions, generation, phase, finalists=None):
             for sweep in (1, 2):
@@ -967,46 +976,68 @@ class MenuOptimizer:
                     for b, (_, _, second) in enumerate(finalists[right]):
                         pairs.append(((a+b, max(a,b), left, right, a, b), left, right, first, second))
             pairs.sort(key=lambda item: item[0])
-            if not pairs:
-                return incumbent
-            row = {"depth": len(previous), "attempt": max((r.get("attempt", 1) for r in trace), default=0)+1,
-                   "beam_width": 1, "library_generation": generation, "library_phase": "paired_refinement",
-                   "proposal_limit": 128, "shortlist_per_slot": 8, "pairs_available": len(pairs),
-                   "proposals": 0, "constraints_rejected": 0, "evaluation_rejected": 0,
-                   "priced": 0, "retained": 0, "beam_pruned": 0, "evaluations_executed": 0,
-                   "evaluation_cache_hits": 0, "improvements": 0}
-            trace.append(row)
-            anchor = incumbent[0]
-            for _, left, right, first, second in pairs[:128]:
-                chosen = list(anchor)
-                chosen[left], chosen[right] = first, second
-                row["proposals"] += 1
-                if not accepts(chosen, final=True):
-                    row["constraints_rejected"] += 1
+            seen_pairs = set()
+
+            def probe_pairs(incumbent, proposals, phase, rank, proposal_limit, evaluation_limit):
+                if not proposals:
+                    return incumbent
+                row = {"depth": len(previous), "attempt": max((r.get("attempt", 1) for r in trace), default=0)+1,
+                       "beam_width": 1, "library_generation": generation, "library_phase": phase,
+                       "proposal_limit": proposal_limit, "evaluation_limit": evaluation_limit,
+                       "shortlist_per_slot": 8, "pairs_available": len(proposals),
+                       "proposals": 0, "constraints_rejected": 0, "evaluation_rejected": 0,
+                       "priced": 0, "retained": 0, "beam_pruned": 0, "evaluations_executed": 0,
+                       "evaluation_cache_hits": 0, "duplicate_proposals": 0, "improvements": 0}
+                trace.append(row)
+                anchor = incumbent[0]
+                for left, right, first, second in proposals[:proposal_limit]:
+                    if row["evaluations_executed"] >= evaluation_limit:
+                        break
+                    chosen = list(anchor)
+                    chosen[left], chosen[right] = first, second
+                    row["proposals"] += 1
+                    identity = tuple(slot_key(s) for s in chosen)
+                    if phase == "joint_refinement" and identity in seen_pairs:
+                        row["duplicate_proposals"] += 1
+                        continue
+                    seen_pairs.add(identity)
+                    if not accepts(chosen, final=True):
+                        row["constraints_rejected"] += 1
+                        if decision_observer:
+                            decision_observer(chosen, "constraints_rejected", depth=len(previous))
+                        continue
+                    before_hits = hits
+                    try:
+                        result = cached_evaluate(chosen, final=True)
+                    except (IncompleteBasketError, ValueError) as exc:
+                        row["evaluations_executed"] += 1
+                        row["evaluation_rejected"] += 1
+                        if decision_observer:
+                            decision_observer(chosen, "evaluation_rejected", reason=str(exc), depth=len(previous))
+                        continue
+                    row["evaluation_cache_hits"] += hits - before_hits
+                    row["evaluations_executed"] += hits == before_hits
+                    row["priced"] += 1
                     if decision_observer:
-                        decision_observer(chosen, "constraints_rejected", depth=len(previous))
-                    continue
-                before_hits = hits
-                try:
-                    result = cached_evaluate(chosen, final=True)
-                except (IncompleteBasketError, ValueError) as exc:
-                    row["evaluations_executed"] += 1
-                    row["evaluation_rejected"] += 1
-                    if decision_observer:
-                        decision_observer(chosen, "evaluation_rejected", reason=str(exc), depth=len(previous))
-                    continue
-                row["evaluation_cache_hits"] += hits - before_hits
-                row["evaluations_executed"] += hits == before_hits
-                row["priced"] += 1
+                        decision_observer(chosen, "priced", result=result, depth=len(previous))
+                    if rank(chosen, result) < rank(*incumbent):
+                        incumbent = chosen, result
+                        row["improvements"] += 1
+                row["retained"] = min(1, row["improvements"])
+                row["beam_pruned"] = row["priced"] - row["retained"]
                 if decision_observer:
-                    decision_observer(chosen, "priced", result=result, depth=len(previous))
-                if retention_score(chosen, result) < retention_score(*incumbent):
-                    incumbent = chosen, result
-                    row["improvements"] += 1
-            row["retained"] = min(1, row["improvements"])
-            row["beam_pruned"] = row["priced"] - row["retained"]
-            if decision_observer:
-                decision_observer(incumbent[0], "retained", result=incumbent[1], depth=len(previous))
+                    decision_observer(incumbent[0], "retained", result=incumbent[1], depth=len(previous))
+                return incumbent
+
+            incumbent = probe_pairs(incumbent, [p[1:] for p in pairs], "paired_refinement", retention_score, 128, 128)
+            # Preserve the original search trajectory and all of its winning
+            # proposals before considering a secondary objective or new pairs.
+            rank = refinement_score or retention_score
+            if secondary_best is not None and rank(*secondary_best) < rank(*incumbent):
+                incumbent = secondary_best
+            if joint_proposals is not None:
+                proposals = joint_proposals(previous, incumbent[0])
+                incumbent = probe_pairs(incumbent, proposals, "joint_refinement", rank, 256, 32)
             return incumbent
         if last_error is not None:
             raise last_error

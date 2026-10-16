@@ -100,7 +100,8 @@ När en giltig meny finns får senare pakets nya recept konkurrera genom byten
 av en måltid åt gången. Högst två genomgångar per utökat urval görs, och den
 andra behövs bara efter en förbättring. Hela korgen med alla måltider, tillägg
 och skafferifördelning räknas för varje förslag. En dyrare meny ersätter inte
-den tidigare lösningen. Vid samma pris används befintlig smak-/namnordning.
+den tidigare lösningen. Bytesgenomgångarna behåller sin smak-/namnordning vid
+samma pris; det slutliga valet kan sedan föredra mindre inköpsöverskott.
 Till sist prövas högst två bytesgenomgångar med hela det kvalificerade urvalet,
 så att också äldre recept kan dra nytta av de nya råvarukombinationerna.
 Metoden gäller också framtida grundrecept och vanliga receptpaket, utan nya
@@ -111,6 +112,28 @@ vid förpackningsgränser eller krav på ekoandel. Varje par kontrolleras och
 prissätts som en hel meny; rankningen är ingen prisgräns eller kvalificering.
 Kombinationer utanför urvalet och byten av fler måltider kan missas. Sökningen
 bevisar inte globalt lägsta pris.
+
+Därefter finns ett separat parsteg som även tar med recept vars enskilda byte
+inte klarar veckans fördelning eller andra slutkrav. Två samtidiga byten kan
+återställa kraven. Högst åtta kvalificerade alternativ per position väljs med
+befintlig kulinarisk stratifiering, enskild inköpssumma och överlapp i exakta
+produkter/ingredienser. Billiga par och par med gemensamma råvaror varvas.
+Högst 256 förslag och 32 nya helkorgsberäkningar prövas per biblioteksökning
+efter det ursprungliga parsteget. Separata jämförelser av snävare butiksval har
+egna sökbudgetar. Redan prövade exakta veckor hoppas över. Varje nytt förslag måste
+klara de ordinarie veckokraven, skafferifördelningen, butikstaket, erbjudandenas
+villkor och slutrevisionen. Budgeten registreras i sökdiagnostiken. Nya recept
+använder samma väg utan särskilda ID:n; urvalet är fortfarande begränsat.
+
+När användaren väljer att minimera överskott jämförs giltiga slutmenyer först
+på faktisk inköpssumma, därefter på den andel av betald varukostnad som hör
+till kvarvarande användbar mängd och sedan på kvarvarande förpackningsandelar.
+Pant räknas inte som matkostnad. Detta är en värdering av inköpsöverskott,
+inte uppmätt matsvinn eller en rabatt på kassan. Gram, milliliter och stycken
+redovisas separat; okända mängder räknas aldrig som noll och uppskattningar
+behåller sin märkning. Vid valet att tillåta större inköp används ingen sådan
+sekundär jämförelse. Den tidigare sökvägen körs färdigt innan detta slutval,
+så att överskottsmåttet inte tränger undan dess billigare förslag.
 
 Recept- och produktberäkningar delar samma privata planerare. Upp till 256
 exakta del-/helkorgar återanvänds mellan biblioteksförsöken, separat från den

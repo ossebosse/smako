@@ -66,7 +66,7 @@ from app.services.user_pricing import price_candidate_for_context
 
 from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
-POLICY_VERSION = "personal-policy-v2-9-eco-variant-search"
+POLICY_VERSION = "personal-policy-v2-10-joint-week-refinement"
 
 
 def timed_stage(name):
@@ -2393,7 +2393,7 @@ class PersonalPlanner:
                 result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
             retain_library_comparison()
             if incumbents:
-                winner = min([result, *incumbents], key=lambda p: p.optimized_basket.total)
+                winner = min([result, *incumbents], key=lambda p: self._week_purchase_key(p.optimized_basket))
                 if winner is not result:
                     result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)])
                 result.personal.checks.setdefault("scope_comparison", {}).update({
@@ -2406,7 +2406,7 @@ class PersonalPlanner:
             if not any(scope.get("library") == "before_content_pack" for scope in incumbent_scopes.values()):
                 retain_library_comparison()
             if incumbents:
-                winner = min(incumbents, key=lambda p: p.optimized_basket.total)
+                winner = min(incumbents, key=lambda p: self._week_purchase_key(p.optimized_basket))
                 result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)], error=exc)
                 result.personal.checks["scope_comparison"].update({
                     "retained_valid_incumbents": len(incumbents),
@@ -2433,6 +2433,10 @@ class PersonalPlanner:
                 conflicts=getattr(exc, "conflicts", None),
                 diagnostics=self.diagnostics.snapshot(),
             ) from exc
+
+    def _week_purchase_key(self, basket):
+        from app.services.week_refinement import surplus_key
+        return (money(basket.total), surplus_key(basket) if self.spec.surplus_mode == "minimize" else ())
 
     def _retain_scope_incumbent(self, candidate, selected_scope, *, error=None):
         """Requalify the exact earlier checkout under the actual wider request."""
@@ -2766,6 +2770,11 @@ class PersonalPlanner:
             ]) for generation in range(first, self._generation + 1)]
             search = self.service.menu_optimizer.optimize_library_slots
             library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
+            from app.services.week_refinement import qualified_joint_proposals
+            library_kwargs["refinement_score"] = lambda chosen, result: (
+                self._week_purchase_key(result["basket"]), score(chosen, result))
+            library_kwargs["joint_proposals"] = lambda groups, anchor: qualified_joint_proposals(
+                groups, anchor, self.variant_search_evidence)
             def select_seed_options(groups):
                 from app.services.stable_candidate_pool import library_variant_shortlist
                 selected, by_meal = [], {}
@@ -2811,6 +2820,12 @@ class PersonalPlanner:
         recipes = [s.recipe for s in chosen if s.recipe]
         result["checks"]["checkout_audit"] = result["audit"].model_dump(mode="json")
         result["checks"]["allowed_store_ids"] = sorted(self.store_ids)
+        from app.services.week_refinement import surplus_summary
+        result["checks"]["purchase_surplus"] = {
+            **surplus_summary(result["basket"]),
+            "tie_break_enabled": self.spec.surplus_mode == "minimize",
+            "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat.",
+        }
         if self.complete:
             from app.services.recipe_week_variation import week_summary
             result["checks"]["week_distribution"] = week_summary(

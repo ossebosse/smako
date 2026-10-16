@@ -1,3 +1,33 @@
+# 2026-10-16: Gemensamt giltiga veckobyten och mindre inköpsöverskott
+
+Gren `feature/joint-week-refinement`, bas `4357323`. **Ingen aktivering på betan.**
+Nästa steg från granskningen av punkt 5 är genomfört. Den tidigare sökvägen
+inklusive dess 128 parförslag körs färdigt. Därefter prövas högst 256 förslag
+och 32 nya helkorgsberäkningar per biblioteksökning från högst åtta kvalificerade
+alternativ per position. Dessa behöver inte klara ett enskilt byte; två byten
+kan återställa veckokraven tillsammans. Snävare butiksjämförelser har egna
+budgetar. Befintlig prismotor, skafferi, erbjudanden och slutrevision återanvänds.
+
+Vid `surplus_mode=minimize` väljs vid samma inköpssumma mindre kvarvarande
+betalt varuvärde, sedan mindre förpackningsandel. Pant ingår inte; g/ml/st
+hålls separata, okänt är inte noll och uppskattningar märks. `allow_larger`
+avaktiverar jämförelsen. En separat bästa slutkorg bevaras utan att ändra den
+tidigare sökvägen. Nya recept använder befintlig stratifiering och kvalificerade
+prissignaler, utan ID-listor. Policy: `personal-policy-v2-10-joint-week-refinement`.
+
+Tio profiler/19 frysta körningar: samma inköpspriser i alla sju positiva profiler
+och samma tre blockerade profiler. Protein40, alla makronäringskrav och angiven
+måltidsfördelning får vardera 160 g/15,09 kr mindre beräknat inköpsöverskott.
+Övriga fyra har samma överskott. Ingen lägre inköpssumma påvisas i denna matris;
+syntetiskt köpfall visar 60 → 10 kr genom gemensamt byte, skafferi och kampanj.
+Standard varm 26,80 s (tidigare 25,94), protein40 varm 8,73 s (8,43), eko kallt
+125,04 s (121,86). Högsta processminne 829,03 MiB. Inte ett lasttest eller bevis
+på globalt lägsta pris. Eko behöver fortsatt prestandaarbete.
+
+**460 tester passerar**, liksom Ruff och compileall. Offlineisoleringen är ren;
+18 tidigare kända Pydantic-varningar. Full metod, jämförelse av överskott,
+budgetar och rådatasökvägar: [rapport](../reports/joint-week-refinement-20261016.md).
+
 # 2026-10-16: Prestandapunkt 3–4 klara, veckoptimeringens punkt 5 granskad
 
 Gren `perf/eco-and-variant-selection`, bas `a294a71`. **Ingen aktivering på betan.**
