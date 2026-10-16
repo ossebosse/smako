@@ -328,13 +328,13 @@ def matches_meal(recipe, meal, preferences):
     d, choices = recipe.design, meal.recipe_choices
     if not d or meal.meal_type not in d.meal_types:
         return False
+    if preferences.adaptation == "products" and d.variant_id != "base":
+        return False
     if choices is None:
         if meal.meal_type == "dinner":
             from app.services.complete_recipes import matches_preferences
             return matches_preferences(recipe,preferences)
         return True
-    if preferences.adaptation == "products" and d.variant_id != "base":
-        return False
     if meal.meal_type == "dinner":
         if choices.dinner_level not in {None,"mixed",d.dinner_level}:
             return False

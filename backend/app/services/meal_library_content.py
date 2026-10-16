@@ -110,10 +110,17 @@ def _reject_unknown(raw, model, path):
 
 def validate_pack(path):
     """Return every rejection, never silently discard a malformed recipe."""
+    if path.stat().st_size > MAX_BYTES:
+        raise ValueError(f"{path}: filen överstiger {MAX_BYTES} byte")
+    return validate_pack_bytes(path.read_bytes(), label=str(path))
+
+
+def validate_pack_bytes(source, *, label="content pack"):
+    """Shared validation for authored packs and offline expanded variants."""
     from app.services.ingredient_normalizer import canonicalize_ingredient_name
     from app.services.recipe_library import _structural_check, content_hash
 
-    source = path.read_bytes()
+    path = label
     if len(source) > MAX_BYTES:
         raise ValueError(f"{path}: filen överstiger {MAX_BYTES} byte")
     raw = json.loads(source, object_pairs_hook=_unique_pairs)

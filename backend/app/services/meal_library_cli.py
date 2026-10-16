@@ -28,6 +28,9 @@ from app.services.meal_library_content import (
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
+    p = sub.add_parser("expand", help="Expand reviewed flexible families to an ordinary meal pack")
+    p.add_argument("input", type=Path)
+    p.add_argument("--output", type=Path, required=True)
     p = sub.add_parser("revoke")
     p.add_argument("--recipe-id", required=True)
     p.add_argument("--reason", required=True)
@@ -53,6 +56,17 @@ def main():
     p.add_argument("--allow-nutrition-estimates",action="store_true")
     args = parser.parse_args()
     started = time.perf_counter()
+    if args.command == "expand":
+        from app.services.flexible_recipes import expand_pack
+        from app.services.meal_library_content import atomic_write
+        if args.input.resolve() == args.output.resolve():
+            raise ValueError("Källan och det utökade paketet måste vara olika filer")
+        expanded = expand_pack(args.input)
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        atomic_write(args.output, encoded(expanded))
+        print(json.dumps({"pack_id": expanded["pack_id"], "recipes": len(expanded["recipes"]),
+                          "output": str(args.output), "wall_seconds": time.perf_counter() - started}))
+        return
     if args.command == "revoke":
         report = revoke_recipe(args.recipe_id, args.reason)
     elif args.command in {"validate","diff","import"}:
