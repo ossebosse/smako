@@ -1,3 +1,40 @@
+# 2026-10-16: Snabbare ekosökning och återanvänd första måltid – lokalt verifierat
+
+Användaren bad att genomföra nästa steg. Gren `perf/ecological-week-search`,
+kodcommit `6449cea`, bas `cac3a2e`. **Ingen produktionsaktivering i denna etapp.**
+
+Ekosökningen använder befintlig optimistisk prisgräns och exakta kostnadsnycklar
+för att avföra delmängder som inte kan slå en redan godkänd korg. Ordning vid
+lika pris, källa, medlemskap, kvantiteter och butikstak bevaras. Gruppkampanjer,
+delade erbjudandegränser och egna kalkylatorer behåller full checkout.
+Kostnadsnycklarna sorterar bort butiker utan kvalificerade varor på samma sätt
+som befintlig checkout, utan att tappa svar för högre butikstak.
+
+Receptkontrollens första måltid överförs till veckosökningens befintliga
+256-posterscache, inom samma begäran. Ensamma måltider, redigeringar och
+slutlig audit beräknas fortfarande. Ingen ny delad cache eller sänkt sökbudget.
+Matrisens cachekatalog innehåller nu även profilnamnet för separata kallprov.
+
+342 offlineprov i 18 moduler, Ruff och compileall passerar. Samma utfall i
+alla tio frysta profiler; full semantisk hash matchar för de sju levererade
+menyerna. Tre profiler ger fortsatt samma avslag. Inga rapportläsningar eller
+blockerade källanrop i `.local/verification/ecological-week-final-access.json`.
+
+Ekoandelsfallet: **482,48 → 216,52 s (55,1 % kortare tid)**, CPU
+458,31 → 194,14 s, samma meny/korg på 434,13 kr och ekoandel 23,4953 %.
+Fulla ekocheckouter minskar från 382 864 till 89 362. Detta är ett slutligt
+kallprov per version. Varm standard/protein40: 37,74 / 7,98 s; förbättringen
+för övriga varma profiler är liten. Högsta observerade processminne 805,21 MiB.
+Ekofallet uppfyller fortfarande inte målet 30–60 s. Kötid och samtidig
+serverkapacitet är inte mätta. Ingen global kostnadsoptimalitet påstås.
+
+[Slutrapport](../reports/ecological-week-search-20261016.md) ·
+[Arbetskontrakt och reproduktion](planner-performance.md).
+Råfiler finns lokalt i `.local/ecological-week-search/verified/` och
+`reports/ecological-week-search-20261016.json` (Git-ignorerade).
+
+---
+
 # 2026-10-16: Plannerförberedelser och testmatris – lokalt verifierade
 
 Användaren beställde prioritet 1–2 med återanvändning av befintlig arkitektur.

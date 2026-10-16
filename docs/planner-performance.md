@@ -6,6 +6,37 @@ kandidater eller ger en dyrare korg är inte automatiskt en förbättring.
 
 [Verifierade mätvärden och begränsningar, 2026-10-16](../reports/planner-preparation-20261016.md).
 
+## Nästa etapp: ekosökning och första steget i veckosökningen
+
+Uppföljningen återanvänder tre befintliga delar av pris-/menymotorn:
+
+- `optimistic_relaxed_key` ger en säker lägsta möjlig kostnad från de faktiska
+  förpackningspriserna. Ekosökningen räknar detta en gång per inköpsrad och
+  ekologisk kandidatbegränsning. En senare delmängd kan hoppas över när den
+  inte kan bli billigare än den redan godkända korgen. Lika pris behåller
+  det tidigare resultatet i samma ursprungliga sökordning.
+- `same_depth_nested_store_limited_keys` ger sedan exakta kostnader med samma
+  kvalificering och butikstak som full checkout. Dyrare delmängder behöver
+  inte få fullständiga korgobjekt. Butiker utan någon kvalificerad vara
+  sorteras bort på samma sätt som i `optimize`; resultat för alla efterfrågade
+  butikstak behålls. Gruppkampanjer, delade erbjudandegränser och injicerade
+  egna kalkylatorer använder den ordinarie ekoberäkningen.
+- `optimize_slots` tar över redan godkända resultat för den första måltiden
+  från receptkontrollen till sin befintliga cache med högst 256 poster.
+  Återanvändningen gäller samma begäran och exakt första slot/recept, endast
+  när detta är ett icke-slutligt steg i en genererad meny. Slutkontrollen
+  körs fortfarande, liksom ordinarie beräkning vid redigering eller ett
+  enda måltidstillfälle. Inget resultat delas mellan användare.
+
+Samma ekodelmängder är fortfarande tillåtna, upp till den befintliga gränsen
+256 per korg. Beam 8/fallback 64 och recepturvalet är oförändrade.
+`ecological_subsets_evaluated` omfattar även delmängder som avgjorts med
+kostnadsgränsen; `ecological_subsets_pruned_cost` och
+`ecological_subsets_pruned_exact_cost` särredovisar dessa. Fulla checkout-anrop
+för ekosökningen är antalet bedömda delmängder minus dessa två räknare.
+
+Se [uppföljningens mätningar](../reports/ecological-week-search-20261016.md).
+
 ## Befintliga delar som återanvänds
 
 | Behov | Befintlig komponent | Ändring i denna etapp |
@@ -37,6 +68,8 @@ samtidighet ska provas i en separat testmiljö.
   En ny PersonalPlanner skapas varje gång. Färdiga menyer återanvänds inte.
   Cachekatalogen ska vara ny för ett helt kallt diskprov; återanvänd katalog
   endast om provet uttryckligen avser persistenta förberedelser.
+  Katalogen namnges med både körningens etikett och profil, så olika profiler
+  inte oavsiktligt delar diskförberedelser när samma utdatakatalog används.
 - Enstaka prov och tio syntetiska användarprofiler kan inte belägga verklig
   p95 för användartrafik. Rapporten märker percentilen som en provpercentil.
 - Profilerade cProfile-tider räknas inte som acceptanstider. Befintliga
