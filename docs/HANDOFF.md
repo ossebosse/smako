@@ -1,3 +1,45 @@
+# 2026-10-17 (forts.): Paprika i grampack och 12 middagar i sex matkök – ej aktiverat
+
+Gren `perf/planner-startup-and-semantics`. **Ingen aktivering på betan.**
+Underlag i `reports/recipe-packs-20261017/` (`new_dinners.py`,
+`dinners-20261017.json`, `qualification-*.txt`).
+
+1. **Ingen styck→gram-omräkning behövdes för paprika.** Butikerna säljer
+   färsk paprika i fasta grampack ("Paprika Mix Klass 1" 400 g, "Paprika Spets
+   Mix" 200 g). Semantiken klassade "Mix" som grönsaksblandning. Färgmixade
+   paprikapack godkänns nu (namnregel, endast hela söta paprikor; Stark, Sivri,
+   Carli, wok-/frysblandningar och Snacks Mix är fortfarande uteslutna) och får
+   den generiska SLV-referensen för rå paprika.
+2. **Rökt paprikapulver**: hyllnamnen "Paprika Rökt", "Rökt Paprika", "Paprika
+   Smoked" lades till som sökalias och klassas som krydda, aldrig färsk paprika.
+3. **Rättelsepaketet**: 10 av 16 kvalificerar nu (tidigare 6). Kvar: 6 rätter med
+   basilika i kruka + limejuice/ingefära där kandidater finns i två butiker men
+   korgberäkningen ändå misslyckas – bör felsökas separat.
+4. **Paket `smako-cuisine-dinners-20261017`**: 12 middagar, två per matkök
+   (kycklingkorma, aloo gobi, jordnötsgryta, stekt ris med tofu, chili sin carne,
+   kycklingtacos, grekisk citronsoppa, grekisk linsgryta, kycklingcacciatore,
+   pasta e ceci, laxsoppa, köttfärslimpa). 11–15 räknade ingredienser, alla 12
+   kvalificerar ensamma. Ej provlagade.
+
+Standardprofil 5×4/2 butiker: middagar i biblioteket 164 → 176, avvisade
+49 → 31, kvalificerade 115 → 145, veckopris 600,15 → 535,06 kr
+(685,85 kr vid granskningens början). **Planeringstiden ökade 60 → 100 s**
+(1 CPU, enskilt prov) eftersom fler recept prövas; se tidigare punkter om
+korgberäkningarnas antal. Recept-/semantiktester (28 filer) och
+planerartester (43 filer): samma kända fel före och efter.
+
+## Granskning (Codex)
+
+1. Läs de 12 middagarna som kock (mängder, temperaturer, ordning, att stegen
+   matchar `form`). Jämför särskilt köttfärslimpan utan ägg och pasta e ceci
+   där pastan kokas i grytan.
+2. Granska alla produkter som nu godkänns som `paprika` och `rökt
+   paprikapulver` i aktiva Lund- och Malmöartefakter.
+3. Mät tiden med acceptansmatrisen före och efter receptpaketen. Om tiden är
+   oacceptabel: begränsa startsökningen per matkök innan fler recept läggs till.
+
+---
+
 # 2026-10-17: Recepträttelser och 13 nya recept – ej aktiverat
 
 Gren `perf/planner-startup-and-semantics`. **Ingen aktivering på betan.**
