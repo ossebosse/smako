@@ -1655,6 +1655,38 @@ class PersonalPlanner:
                 seen.add(indices)
                 heapq.heappush(queue, (0, indices))
         violates_bounds = nutrition_bounds.compile_choices(keys, choices) if nutrition_bounds else None
+        # Exact-safe cost pruning: a combination whose optimistic checkout
+        # (authoritative line quotes, no store cap) is not below the best exact
+        # basket cannot replace it (only a strictly lower total wins). The
+        # visited combinations, budget and nutrition checks are unchanged; only
+        # the pricing of hopeless combinations is skipped. Disabled with
+        # coupled multi-line offers, like the ecological bound.
+        allowed_ids = [s.store_id for s in self.view.stores]
+        line_bounds = self.optimizer.restriction_cost_bounds(
+            ingredients, candidates, candidates, allowed_store_ids=allowed_ids)
+        requirement_by_key = {i.canonical_name: i for i in ingredients}
+        class_bounds = {}
+
+        def class_bound(dimension, index):
+            if (dimension, index) not in class_bounds:
+                key = keys[dimension]
+                relaxed = self.optimizer.optimistic_relaxed_key(
+                    [requirement_by_key[key]], {key: choices[dimension][index]}, allowed_store_ids=allowed_ids)
+                class_bounds[(dimension, index)] = relaxed[1] if relaxed else None
+            return class_bounds[(dimension, index)]
+
+        def optimistic_total(indices):
+            if line_bounds is None or any(k not in line_bounds for k in keys):
+                return None
+            total = sum((pair[0] for k, pair in line_bounds.items() if k not in keys), Decimal(0))
+            for dimension, index in enumerate(indices):
+                bound = class_bound(dimension, index)
+                if bound is None:
+                    return None
+                total += bound
+            return total
+
+        cost_pruned = 0
         while queue and searched < self.nutrition_search_limit:
             _, indices = heapq.heappop(queue)
             for dimension, index in enumerate(indices):
@@ -1684,6 +1716,11 @@ class PersonalPlanner:
                 # prices or package surplus enter this qualification.
                 self._check_nutrition(slots, selected, rows, allocations)
                 passed_nutrition += 1
+                if best is not None:
+                    lower = optimistic_total(indices)
+                    if lower is not None and lower >= money(best.total):
+                        cost_pruned += 1
+                        continue
                 option = self.optimizer.optimize(
                     ingredients, narrowed, self.view.stores, max_stores=self.request.max_stores
                 )
@@ -1710,7 +1747,7 @@ class PersonalPlanner:
                 "remaining_frontier": len(queue), "budget_exhausted": bool(queue),
                 "class_counts": [len(c) for c in choices],
                 "numeric_passed": passed_nutrition, "nutrition_rejections": rejected_nutrition,
-                "linear_bound_rejections": bound_pruned,
+                "linear_bound_rejections": bound_pruned, "cost_bound_skips": cost_pruned,
                 "purchase_or_other_rejections": rejected_purchase,
                 "qualifying_basket_found": best is not None,
                 "best_total": best.total if best else None,
@@ -1816,17 +1853,30 @@ class PersonalPlanner:
                            if (q.store_id, q.product_id) in organic_ids), Decimal(0))
             return bool(total) and float(organic * 100 / total) + 1e-8 >= self.spec.organic_percent
 
-        for subset in subsets:
+        # The result is the cheapest qualifying basket; ties go to the subset
+        # that comes first in the original order. With cost bounds, subsets
+        # are visited cheapest-bound first so that the bound prunes early;
+        # comparing (total, original index) keeps exactly the same winner.
+        order = list(enumerate(subsets))
+        lower_of = {}
+        if bounds is not None:
+            for index, subset in order:
+                lower_of[index] = base_bound + sum((bounds[k][1] - bounds[k][0] for k in subset), Decimal(0))
+            order.sort(key=lambda row: (lower_of[row[0]], row[0]))
+        best_index = None
+
+        def cannot_win(cost, index):
+            best_total = money(best.total)
+            return cost > best_total or (cost == best_total and index > best_index)
+
+        for index, subset in order:
             increment_performance_counter("ecological_subsets_evaluated")
-            # The first minimum wins ties in the original subset order. Once
-            # an earlier qualifying basket exists, an optimistic cost >= its
-            # exact cost proves this later subset cannot replace it. All line
+            # An optimistic cost that cannot beat (or tie earlier than) the
+            # best exact basket proves this subset cannot replace it. All line
             # quotes include package rounding and eligible single-line offers.
-            if best is not None and bounds is not None:
-                lower = base_bound + sum((bounds[k][1] - bounds[k][0] for k in subset), Decimal(0))
-                if lower >= money(best.total):
-                    increment_performance_counter("ecological_subsets_pruned_cost")
-                    continue
+            if best is not None and bounds is not None and cannot_win(lower_of[index], index):
+                increment_performance_counter("ecological_subsets_pruned_cost")
+                continue
             narrowed = {
                 k: organic_candidates[k] if k in subset else v for k, v in candidates.items()
             }
@@ -1839,7 +1889,7 @@ class PersonalPlanner:
                     keys = self.optimizer.same_depth_nested_store_limited_keys(
                         ingredients, narrowed, self.view.stores,
                         max_stores=self.request.max_stores)
-                    if not keys or keys[-1] is None or keys[-1][1] >= money(best.total):
+                    if not keys or keys[-1] is None or cannot_win(keys[-1][1], index):
                         increment_performance_counter("ecological_subsets_pruned_exact_cost")
                         continue
                 option = self.optimizer.optimize(
@@ -1848,8 +1898,8 @@ class PersonalPlanner:
                 )
                 searched += 1
                 if ((self._eco_percent(option, groups) or 0) + 1e-8 >= self.spec.organic_percent
-                        and (best is None or option.total < best.total)):
-                    best = option
+                        and (best is None or (option.total, index) < (best.total, best_index))):
+                    best, best_index = option, index
             except QuoteSelectionRejected:
                 searched += 1
                 increment_performance_counter("ecological_subsets_pruned_share")

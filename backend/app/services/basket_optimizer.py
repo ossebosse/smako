@@ -313,6 +313,9 @@ class _QuoteCacheSession:
         int, tuple[tuple[ProductCandidate, ...], tuple[ProductCandidate, ...]]
     ] = field(default_factory=dict)
     quotes: dict[_QuoteCacheKey, BasketItemQuote] = field(default_factory=dict)
+    # Renamed copies per purchase-line name: rebuilding a dataclass on every
+    # hit is costly in nutrition/eco searches that requote the same lines.
+    named: dict[tuple, BasketItemQuote] = field(default_factory=dict)
     candidate_fingerprints: dict[int, tuple[ProductCandidate, _CandidateFingerprint]] = field(
         default_factory=dict
     )
@@ -356,6 +359,16 @@ def _sum_quotes(quotes: Iterable[BasketItemQuote]) -> Decimal:
 
 
 _QUOTE_LINE_SUFFIX = re.compile(r" \[\d+\]$")
+
+
+def _session_named_quote(session, key, quote, ingredient):
+    if quote.ingredient == ingredient.canonical_name:
+        return quote
+    named_key = (key, ingredient.canonical_name)
+    named = session.named.get(named_key)
+    if named is None:
+        named = session.named[named_key] = _named_quote(quote, ingredient)
+    return named
 
 
 def _named_quote(quote, ingredient):
@@ -687,7 +700,7 @@ class BasketOptimizer:
         cached = session.quotes.get(key)
         if cached is not None:
             session.stats.hits += 1
-            return _named_quote(cached, ingredient)
+            return _session_named_quote(session, key, cached, ingredient)
 
         session.stats.misses += 1
         if session.price_universe is not None and session.persistent_cache is not None:
@@ -703,7 +716,7 @@ class BasketOptimizer:
             quote = self._calculate_quote_uncached(ingredient, candidate)
         session.quotes[key] = quote
         # The persistent cache is keyed without the purchase-line name.
-        return _named_quote(quote, ingredient)
+        return _session_named_quote(session, key, quote, ingredient)
 
     def _calculate_quote_uncached(
         self,
