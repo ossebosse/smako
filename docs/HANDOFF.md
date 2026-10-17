@@ -1,3 +1,22 @@
+# 2026-10-17: Ägarbeslut – äggvikt och näringskonflikter godkända
+
+Ägaren (Ossian) har godkänt båda reglerna från posten "Ägg i gram,
+näringskonflikter, audit av vald meny, CI":
+
+1. **Ägg:** räknade äggpack med viktklass M/L/XL får en härledd minsta ätbar
+   vikt (antal × klassens minimivikt med skal enligt EU 589/2008 × 0,88).
+   Detta ersätter den tidigare regeln att antal aldrig blir gram. Uppföljning:
+   väg några förpackningar per klass och jämför med 0,88, eftersom källan anger
+   ett populationsvärde och själv rekommenderar vägning.
+2. **Näringskonflikter:** konflikter som bara gäller näring stoppar inte längre
+   receptets produktval; deras näringsvärden används aldrig. Identitets- och
+   innehållskonflikter stoppar som förut.
+
+Codex granskar koden som vanligt; besluten gäller från aktivering, inte från
+denna gren.
+
+---
+
 # 2026-10-17 (forts. 4): Ägg i gram, näringskonflikter, audit av vald meny, CI – ej aktiverat
 
 Gren `perf/planner-startup-and-semantics`. **Ingen aktivering på betan.**
@@ -32,8 +51,8 @@ sandlådan; bara direkt parade mätningar är jämförbara.
 
 ## Granskning (Codex)
 
-1. Ägarbeslut om äggregeln (antal → gram via klassminimum).
-2. Bekräfta att inga näringsberäkningar använder fakta med konflikt.
+1. Ägarbeslut om äggregeln: **godkänt 2026-10-17** (se posten ovan).
+2. Näringskonflikter: **godkänt 2026-10-17**. Bekräfta att inga näringsberäkningar använder fakta med konflikt.
 3. Kör `tests.yml` på GitHub; webbläsartesterna har inte körts i sandlådan.
 
 ---
