@@ -144,6 +144,14 @@ def validate_pack_bytes(source, *, label="content pack"):
                     raise ValueError(f"{ref}.ingredients[{n}].canonical_name: identiteten avviker")
             data = json.loads(json.dumps(row))
             data["design"]["content_sha256"] = "0" * 64
+            inherited = data["design"].get("content_source")
+            if inherited and "pack_id" not in inherited:
+                # A new version may carry reviewed safety/storage/method notes
+                # forward; it is still bound to this pack and source file.
+                data["design"]["content_source"] = {
+                    "priority": 1, "timing_basis": "authored_estimate_coarse_dependencies",
+                    "active_minutes": data["design"]["active_minutes"], **inherited,
+                    "pack_id": raw["pack_id"], "proposal_id": key, "sha256": source_sha256}
             if not data["design"].get("content_source"):
                 data["design"]["content_source"] = {
                     "pack_id":raw["pack_id"],"proposal_id":key,"sha256":source_sha256,

@@ -2,7 +2,8 @@
 
 Frusen Lund-artefakt från granskningspaketet (universe `469136bc…`), exakt inköpsläge,
 2 butiker, en rätt i taget (`qualify.py`). Källpaketen återskapas med skripten i
-denna mapp; de publicerade paketen finns i `backend/app/data/recipes/`.
+denna mapp (`SMAKO_RECIPE_WORK` = arbetsmapp för käll- och utdatafiler,
+`SMAKO_REVIEW_DATA` = mapp med `prepared-universe.json` och `product-facts.json`); de publicerade paketen finns i `backend/app/data/recipes/`.
 
 ## Rättelser (blocked-recipe-fixes-20261017)
 

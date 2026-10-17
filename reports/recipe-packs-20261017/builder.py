@@ -1,6 +1,7 @@
 """Compact authoring helper -> smako-meal-pack-v1 records (validated by the official CLI)."""
 import json
 from collections import Counter
+
 from app.services.recipe_library import current_recipes, ingredient_count
 
 _LIB = current_recipes(6)
@@ -19,8 +20,8 @@ def I(can, form, qty, comp, role, label, req=None, unit=None):
     if (can, form) not in KNOWN:
         raise ValueError(f"okänd identitet {can}|{form}")
     u0, r0 = _REQ[(can, form)]
-    return dict(can=can, form=form, qty=float(qty), unit=unit or u0, comp=comp, role=role,
-                label=label, req=list(r0 if req is None else req))
+    return {"can": can, "form": form, "qty": float(qty), "unit": unit or u0, "comp": comp, "role": role,
+            "label": label, "req": list(r0 if req is None else req)}
 
 def recipe(*, base_id, name, servings, meal_type, cuisine, family, primary, method, side, flavor,
            equipment, vegetarian, fish=False, components, steps, active, total, waiting=0,

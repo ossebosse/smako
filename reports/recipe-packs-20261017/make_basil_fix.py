@@ -1,6 +1,12 @@
+import os
+from pathlib import Path
+
+WORK = Path(os.environ.get("SMAKO_RECIPE_WORK", ".local/recipe-packs"))
 import json
-from app.services.recipe_library import current_recipes
+
 from app.services.meal_library_content import manifest_entries
+from app.services.recipe_library import current_recipes
+
 TARGET=("smako-thai-basil-tofu","smako-thai-sour-noodle-salad","smako-thai-chicken-coconut-curry")
 NOTE=("x.2.0: basilika utan krav på färsk vara (pack:basil); fryst finhackad basilika med exakt vikt får användas. "
       "Krukbasilika har bara uppskattad vikt och den färska skurna basilikan i Lund har en faktakonflikt, så ingen basilika kunde köpas i exakt läge.")
@@ -25,5 +31,5 @@ for r in current_recipes(len(manifest_entries()["current"])):
     d["design"]["provenance"]["reviewed_at"]="2026-10-17"
     d["design"]["provenance"]["notes"]=(d["design"]["provenance"]["notes"]+" "+NOTE)[:4000]
     out.append(d)
-json.dump({"schema_version":"smako-meal-pack-v1","pack_id":"basil-fixes-20261017","recipes":out},open("/home/claude/recipes/basil-fixes-20261017.json","w"),ensure_ascii=False,indent=1)
+json.dump({"schema_version":"smako-meal-pack-v1","pack_id":"basil-fixes-20261017","recipes":out},(WORK / "basil-fixes-20261017.json").open("w", encoding="utf-8"),ensure_ascii=False,indent=1)
 print(len(out),[ (x["name"],x["design"]["version"]) for x in out])

@@ -1,6 +1,12 @@
-import json, re
+import os
+from pathlib import Path
+
+WORK = Path(os.environ.get("SMAKO_RECIPE_WORK", ".local/recipe-packs"))
+import json
+
 from app.services.recipe_library import current_recipes
-blocked = json.load(open("/home/claude/recipes/blocked.json"))
+
+blocked = json.load((WORK / "blocked.json").open(encoding="utf-8"))
 # Kapris is deliberately left out: the library rule requires drained-weight
 # evidence and an explicit draining step for cured ingredients.
 names = {x["recipe"] for x in blocked if any(k in x["reason"] for k in ("majs", "chiliflakes"))}
@@ -13,7 +19,7 @@ NOTE = {
  "kapris": "Ny version: kapris anges som såld vara (vikt inklusive lag) eftersom avrunnen vikt saknas i produktfakta; kaprisen hälls av före användning.",
 }
 def bump(v):
-    a, b, c = map(int, v.split(".")); return f"{a}.{b+1}.0"
+    a, b, _c = map(int, v.split(".")); return f"{a}.{b+1}.0"
 out = []
 for r in current_recipes(6):
     if r.name not in names: continue
@@ -65,5 +71,5 @@ for r in current_recipes(6):
     prov["notes"] = (prov["notes"] + " " + " ".join(NOTE[k] for k in dict.fromkeys(changed)))[:4000]
     out.append(d)
 json.dump({"schema_version": "smako-meal-pack-v1", "pack_id": "blocked-recipe-fixes-20261017", "recipes": out},
-          open("/home/claude/recipes/fixes-20261017.json", "w"), ensure_ascii=False, indent=1)
+          (WORK / "fixes-20261017.json").open("w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print(len(out), "recept")

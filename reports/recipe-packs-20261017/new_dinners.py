@@ -1,5 +1,12 @@
+import os
+from pathlib import Path
+
+WORK = Path(os.environ.get("SMAKO_RECIPE_WORK", ".local/recipe-packs"))
 import json
-from builder import I, recipe, keys as K, pack
+
+from builder import I, pack, recipe
+from builder import keys as K
+
 R=[]
 def S(t,items,m,d): return (t,K(*items),m,d)
 salt=lambda c,q=2: I("salt","as_sold",q,c,"flavour","Salt")
@@ -210,8 +217,6 @@ R.append(recipe(base_id="smako-swedish-meatloaf-cream-sauce", name="Köttfärsli
          S("Häll av skyn från formen i en kastrull, vispa ner crème fraiche och 1 dl vatten och koka upp till en sås. Servera limpan skivad med sås, potatis och pressgurka.",[sa[0],s[0],pt],4,["s3","s4","s5"])],
   active=25, total=50))
 
-json.dump(pack("smako-cuisine-dinners-20261017", R), open("/home/claude/recipes/dinners-20261017.json","w"), ensure_ascii=False, indent=1)
-from app.services.recipe_library import ingredient_count
-from app.models import Recipe
+json.dump(pack("smako-cuisine-dinners-20261017", R), (WORK / "dinners-20261017.json").open("w", encoding="utf-8"), ensure_ascii=False, indent=1)
 for x in R:
     print(x["design"]["ingredient_count"], x["design"]["cuisines"][0], x["name"])

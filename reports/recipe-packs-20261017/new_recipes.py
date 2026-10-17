@@ -1,5 +1,10 @@
+import os
+from pathlib import Path
+
+WORK = Path(os.environ.get("SMAKO_RECIPE_WORK", ".local/recipe-packs"))
 import json
-from builder import I, recipe, keys, pack
+
+from builder import I, keys, pack, recipe
 
 R = []
 K = lambda *xs: keys(*xs)
@@ -210,5 +215,5 @@ R.append(recipe(base_id="smako-greek-snack-tzatziki-toast", name="Tzatziki med r
          ("Skär brödet i bitar och rosta dem i oljan i en panna tills de är krispiga. Servera med tzatzikin.",K(broZ,oljZ),4,[])],
   active=10, total=10, level="simple"))
 
-json.dump(pack("smako-new-recipes-20261017", R), open("/home/claude/recipes/new-20261017.json","w"), ensure_ascii=False, indent=1)
+json.dump(pack("smako-new-recipes-20261017", R), (WORK / "new-20261017.json").open("w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print(len(R), "recept;", [(r["name"], len(r["ingredients"])) for r in R])

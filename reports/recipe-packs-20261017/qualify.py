@@ -1,18 +1,24 @@
 """Singleton qualification of authored recipes against the frozen Lund universe (exact mode)."""
-import json, sys, time, socket, re
+import json
+import os
+import socket
+import sys
+import time
 from datetime import datetime
+from pathlib import Path
 from unittest.mock import patch
-from collections import Counter
-D="/home/claude/bundle/data/lund"
+
+D=os.environ.get("SMAKO_REVIEW_DATA", ".local/review-bundle/data/lund")
 from app.config import Settings
 from app.models import PlanRequest
+from app.services.meal_library_content import validate_pack_bytes
 from app.services.personal_planner import PersonalPlanner
-from app.services.personal_policy import ProductFacts, PolicyConflict
+from app.services.personal_policy import PolicyConflict, ProductFacts
 from app.services.personal_source_facts import FactsCollection
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
-from app.services.meal_library_content import validate_pack_bytes
-prepared = PreparedPriceUniverseArtifact.model_validate_json(open(f"{D}/prepared-universe.json","rb").read()).restore()
-raw=json.load(open(f"{D}/product-facts.json"))
+
+prepared = PreparedPriceUniverseArtifact.model_validate_json(Path(D, "prepared-universe.json").read_bytes()).restore()
+raw=json.loads(Path(D, "product-facts.json").read_bytes())
 facts=FactsCollection({(r["store_id"],r["product_id"]): ProductFacts(**r["facts"]) for r in raw["rows"]}); facts.version=raw["facts_version"]; del raw
 settings=Settings(complete_recipes_enabled=True, price_provider="own")
 now=datetime.fromisoformat("2026-10-16T18:12:49.613708+00:00")
@@ -33,7 +39,7 @@ def qualify(recipe, servings=None, max_stores=2, mode="exact"):
         return False, str(e)[:300], None
 
 if __name__=="__main__":
-    v=validate_pack_bytes(open(sys.argv[1],"rb").read(), label=sys.argv[1])
+    v=validate_pack_bytes(Path(sys.argv[1]).read_bytes(), label=sys.argv[1])
     if v["rejections"]:
         for r in v["rejections"]: print("AVVISAD", r)
     for r in v["recipes"]:
