@@ -138,7 +138,9 @@ def test_complete_cheapest_keeps_audited_narrow_incumbent_under_wider_request(mo
         chosen = [next(slot for slot in options[0] if slot.recipe.design.variant_id == "protein")]
         assert accepts(chosen, final=True)
         evaluated = evaluate(chosen, final=True)
-        assert evaluated["audit"].passed
+        # Complete menus compared inside the search are no longer audited; the
+        # chosen menu is audited by the final recompute (checked below).
+        assert evaluated["audit"] is None and wider._defer_search_audit
         assert evaluated["basket"].total > narrower.optimized_basket.total
         return chosen, evaluated
 

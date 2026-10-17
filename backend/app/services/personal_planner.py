@@ -105,6 +105,8 @@ def personal_policy_request(request, dinner_count):
 
 
 
+_AUDIT_FAILURE = "Korgens mängder/prisvillkor kunde inte verifieras."
+
 class PersonalPlanner:
     def __init__(
         self,
@@ -1192,7 +1194,7 @@ class PersonalPlanner:
         # acceptance. Skipping their audit therefore keeps the gate on every
         # deliverable basket while removing about two thirds of audit calls.
         audit = None
-        if final or _retained is not None:
+        if (final and not getattr(self, "_defer_search_audit", False)) or _retained is not None:
             audit_started = perf_counter()
             with performance_span("personal_audit"):
                 audit = self.auditor.audit(
@@ -1203,7 +1205,7 @@ class PersonalPlanner:
                 )
             self.timings["audit"] += perf_counter() - audit_started
             if not audit.passed:
-                raise PolicyConflict("Korgens mängder/prisvillkor kunde inte verifieras.")
+                raise PolicyConflict(_AUDIT_FAILURE)
         for group in groups:
             item = next(
                 i for store in basket.stores for i in store.items if i.ingredient == group["key"]
@@ -2828,9 +2830,7 @@ class PersonalPlanner:
                 return selected
             library_kwargs["seed_selector"] = select_seed_options
             self._library_search_handled = True
-        with performance_span("personal_week_search"):
-            chosen, result = search(
-                search_input,
+        search_kwargs = dict(
                 **library_kwargs,
                 evaluate=evaluate,
                 accepts=accepts,
@@ -2850,10 +2850,28 @@ class PersonalPlanner:
                     ))
                 ) if generating and not self.items and not self.spec.product_locks else None,
             )
+        # Complete menus compared during the search are not audited; only the
+        # chosen menu is, below. Should it fail the audit (not observed), the
+        # search is repeated with every complete menu audited, which is the
+        # previous behaviour, so an unaudited menu can never be returned.
+        self._defer_search_audit = True
+        try:
+            with performance_span("personal_week_search"):
+                chosen, result = search(search_input, **search_kwargs)
+        finally:
+            self._defer_search_audit = False
         self.timings["week_search"] += perf_counter() - search_started
         # Recheck every final constraint even if the cache supplied a beam result.
         report_stage("final_audit")
-        result = self.basket(chosen, final=True)
+        try:
+            result = self.basket(chosen, final=True)
+        except PolicyConflict as exc:
+            if not str(exc).startswith(_AUDIT_FAILURE):
+                raise
+            with performance_span("personal_week_search"):
+                chosen, result = search(search_input, **search_kwargs)
+            result = self.basket(chosen, final=True)
+            result["checks"]["audited_search_retry"] = True
         if not accepts(chosen, final=True):
             raise PolicyConflict("Slutlig fördelning eller variation kunde inte verifieras.")
         recipes = [s.recipe for s in chosen if s.recipe]

@@ -481,3 +481,43 @@ def test_only_identity_conflicts_stop_a_product_form_match():
     assert identity_conflicts(SimpleNamespace(conflicts=("supplier_nutrition_conflict",))) == []
     assert identity_conflicts(SimpleNamespace(conflicts=("organic", "nutrition_basis"))) == ["organic"]
     assert identity_conflicts(SimpleNamespace(conflicts=("ingredients",))) == ["ingredients"]
+
+
+def test_only_the_chosen_menu_is_audited_and_a_failed_audit_repeats_the_audited_search():
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.personal_policy import ProductFacts
+    from app.services.recipe_library import candidates
+
+    from backend.tests.test_personal_planning_v2 import NOW, prepared, product, state
+
+    prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products")
+    recipe = candidates(prefs, 2)[0]
+    products = [product(i.name, max(100, i.quantity), i.unit, 10).model_copy(update={
+        "category": "Kryddor" if i.form == "dry" else "Frukt & grönsaker" if i.form == "raw_edible" else "Mat",
+        "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name + " Malen" if i.name == "spiskummin" else i.name,
+    }) for i in recipe.ingredients]
+    request = PlanRequest(recipes=1, servings=2, max_stores=1, recipe_preferences=prefs,
+        personal=PersonalPlanning(meals=[MealSettings(count=1, servings=2)]))
+    facts = {(p.store_id, p.product_id): ProductFacts(source="synthetic_test_declaration", source_product_id=p.product_id,
+        source_snapshot_id="v2-frozen", ingredients=(p.name,), ingredients_complete=True) for p in products}
+    planner = PersonalPlanner(request, Settings(complete_recipes_enabled=True), prepared(*products), state(),
+                              facts=facts, now=NOW)
+    planner._candidates = lambda meal: [recipe]
+    original, calls = planner.auditor.audit, []
+
+    def audit(*args, **kwargs):
+        calls.append(planner._defer_search_audit)
+        # The first audited complete menu fails once (same error as a failed
+        # audit result); the retried search audits again.
+        if len(calls) == 1:
+            from app.services.personal_planner import _AUDIT_FAILURE
+            raise PolicyConflict(_AUDIT_FAILURE)
+        return original(*args, **kwargs)
+
+    planner.auditor.audit = audit
+    result = planner.create()
+
+    assert result.personal.checks["checkout_audit"]["passed"]
+    assert not any(calls)  # never audited while the search defers audits
+    assert len(calls) >= 2
+    assert result.personal.checks["audited_search_retry"] is True
