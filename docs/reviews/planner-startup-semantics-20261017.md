@@ -1,5 +1,9 @@
 # Granskning av planner-startup-semantics, 2026-10-17
 
+Uppföljd med [full server- och CI-granskning](planner-startup-server-review-20261017.md).
+Den nya rapporten ersätter verifieringsbegränsningarna nedan och redovisar
+den senare beställda pushen och driftändringen. Denna rapport bevaras som historik.
+
 ## Resultat och integration
 
 De 17 commitsen i `smako-planner-startup-semantics.patch` applicerades utan

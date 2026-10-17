@@ -1,3 +1,30 @@
+# 2026-10-17: Servergranskning, första CI och beställd prewarm-flagga
+
+Patchen till `35dc44f` är importerad på main; första reviewcommit `00dcb8d`
+pushades för den beställda GitHub-körningen. Hela uppföljningen finns i
+[full server- och CI-granskning för Claude](reviews/planner-startup-server-review-20261017.md),
+med mätmetod, tabeller, reproduktioner, handoffchecklista och rättningsordning.
+Den ersätter den första granskningens begränsningar om saknade server-/CI-prov.
+
+Alla 20 profiljämförelser matchar både mellan seedtak 0/40 och mot referensen
+med äldre offert-/auditberäkning. Kvalificering i exakt läge: Lund 41/41,
+Malmö 16/41; resterande stoppas på saknat underlag eller viktvaror.
+Första GitHub-körningen `39032098776` är röd på ett `XPASS(strict)`:
+browserprovet passerar men är felaktigt markerat som ett känt fel.
+Ruff ger fortfarande 23 fel i rapportskript. Patchen är inte releaseklar;
+konfliktfett, author-krav/tid, vattenmängder, receptmetadata och prestanda
+behöver hanteras. Ägarens dokumenterade policybeslut respekteras.
+
+Den särskilt beställda driftändringen genomfördes kl. 13:17 UTC under
+befintligt driftlås: `PRICE_UNIVERSE_PREWARM_ENABLED=false` i serverns
+miljöfil och effektiv runtime. En äldre override behövde överstyras.
+Appen återskapades med samma image; planinnehåll, prismanifest, scheduler och
+proxy verifierades bevarade. Patchens runtimekod har inte aktiverats.
+Live-imagens nio källkodsavvikelser och en saknad datafil måste redas ut
+före en senare kodrelease. Se rapporten för exakta avgränsningar.
+
+---
+
 # 2026-10-17: Patch importerad och granskad – kvarvarande releasehinder
 
 17 patchcommits från bas `46d834b` till importerad `35dc44f` förs in på lokal
