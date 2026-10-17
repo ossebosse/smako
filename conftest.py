@@ -66,7 +66,6 @@ _KNOWN_FAILURES = {
     "backend/tests/test_public_beta_ui.py::test_planner_fails_closed_with_swedish_readiness_copy",
     "backend/tests/test_public_menu_errors.py::test_offline_preflight_distinguishes_area_from_data_failure[missing_required-503-price_universe_unusable-/api/plan]",
     "backend/tests/test_public_menu_errors.py::test_offline_preflight_distinguishes_area_from_data_failure[missing_required-503-price_universe_unusable-/api/plans]",
-    "backend/tests/test_public_menu_errors.py::test_browser_error_classes_retain_choices_and_identify_actual_field",
 }
 
 
