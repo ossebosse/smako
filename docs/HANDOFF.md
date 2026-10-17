@@ -1,3 +1,41 @@
+# 2026-10-17: Åtgärder efter Codex granskning (planner-startup-server-review) – ej aktiverat
+
+Gren `perf/planner-startup-and-semantics`, ovanpå granskad patch (`35dc44f`).
+
+| Granskningsfynd | Åtgärd |
+| --- | --- |
+| P2 konfliktmärkt fett som produktklassbevis | `declared_fat_g` ignorerar fett vid näringskonflikt; båda konsumenterna (`_requirements_compatible` thick, `compatible` cottage_cheese/creme_fraiche) testade. |
+| P2 author tappar krav vid sammanslagning | Olika krav för samma `namn|form` stoppas med tydligt fel. |
+| P2 author underräknar aktiv tid | Aktiv = alla icke-passiva steg; total = max(kritisk väg, aktiv); väntan = resten. Exemplet: 31/15/46. |
+| P2 vatten skalas inte | 11 steg skrivna i ml med `scalable_amounts`; kontrollerat 1/2/4/8/12 portioner. `author` gör detta automatiskt och stoppar dl/l. |
+| P2 namn/etikett mot produktkrav | Köttfärssås "kort pasta"; fiskgratäng "Torskfilé". |
+| P2 rättelser tappade metadata | 16 nya versioner bär granskad innehållskälla vidare (säkerhetskällor, förvaring, metod/skalning) och aktiv tid därifrån; valideringen binder dem till nytt paket. |
+| CI XPASS(strict) | Felaktig markering borttagen; tio kända fel kvar. |
+| Ruff i rapportskript (23) + absoluta sökvägar | Ruff-rent; `SMAKO_RECIPE_WORK`, `SMAKO_REVIEW_DATA`. |
+| Gammalt äggtest | Följer ägarbeslutet och kontrollerar bevisets grund. Kunde inte köras lokalt (saknad evidens). |
+
+Paket `review-fixes-20261017`: 28 nya versioner, alla kvalificerar ensamma i Lund
+(exakt, 2 butiker). Tidigare versioner är kvar i historiken. Låsningstesterna
+(68) passerar.
+
+**Öppna punkter:**
+- Äggens presentationsklass: `DERIVED` visas som verifierad mängd medan grunden
+  är klassminimum × populationsandel. Förslag: egen mängdklass eller tydlig
+  radtext. Kräver beslut om visning.
+- P1 långa specialprofiler (makro ~261 s, ekoandel ~278 s) och P2 faktalåset:
+  inte åtgärdade i denna omgång.
+- `test_browser_error_classes_retain_choices_and_identify_actual_field` kräver
+  Playwright-webbläsare och fallerar lokalt utan dem; passerar i CI enligt granskningen.
+
+## Granskning (Codex)
+
+1. Kör den tidigare evidenspanelen igen med `--runxfail` och
+   `SMAKO_REQUIRE_LOCAL_EVIDENCE=1`, inklusive det ändrade äggtestet.
+2. Jämför de 28 versionerna mot föregående: endast tabellens fält får skilja.
+3. Kör `tests.yml` på en PR (Ruff-steget körs bara då).
+
+---
+
 # 2026-10-17: Servergranskning, första CI och beställd prewarm-flagga
 
 Patchen till `35dc44f` är importerad på main; första reviewcommit `00dcb8d`
