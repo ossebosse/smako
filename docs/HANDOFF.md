@@ -12,20 +12,32 @@ Underlag i `reports/recipe-packs-20261017/` (`new_dinners.py`,
    den generiska SLV-referensen för rå paprika.
 2. **Rökt paprikapulver**: hyllnamnen "Paprika Rökt", "Rökt Paprika", "Paprika
    Smoked" lades till som sökalias och klassas som krydda, aldrig färsk paprika.
-3. **Rättelsepaketet**: 10 av 16 kvalificerar nu (tidigare 6). Kvar: 6 rätter med
-   basilika i kruka + limejuice/ingefära där kandidater finns i två butiker men
-   korgberäkningen ändå misslyckas – bör felsökas separat.
+3. **Rättelsepaketet**: 10 av 16 kvalificerar (tidigare 6). De sex övriga
+   (thairätter) kunde inte handlas eftersom ingen basilika gick att köpa i exakt
+   läge: krukbasilika har bara uppskattad vikt, Coops skurna basilika 50 g har
+   faktakonflikten `nutrition_basis` (stoppar varan i `product_form_compatible`
+   även utan näringsmål) och fryst finhackad basilika uteslöts av `pack:basil`.
+   Paketet `basil-fixes-20261017` (2.2.0) tillåter fryst finhackad basilika; alla
+   sex kvalificerar. **Fråga till granskaren:** ska en näringskonflikt stoppa en
+   vara när ingen näring efterfrågas?
 4. **Paket `smako-cuisine-dinners-20261017`**: 12 middagar, två per matkök
    (kycklingkorma, aloo gobi, jordnötsgryta, stekt ris med tofu, chili sin carne,
    kycklingtacos, grekisk citronsoppa, grekisk linsgryta, kycklingcacciatore,
    pasta e ceci, laxsoppa, köttfärslimpa). 11–15 räknade ingredienser, alla 12
    kvalificerar ensamma. Ej provlagade.
 
-Standardprofil 5×4/2 butiker: middagar i biblioteket 164 → 176, avvisade
-49 → 31, kvalificerade 115 → 145, veckopris 600,15 → 535,06 kr
-(685,85 kr vid granskningens början). **Planeringstiden ökade 60 → 100 s**
-(1 CPU, enskilt prov) eftersom fler recept prövas; se tidigare punkter om
-korgberäkningarnas antal. Recept-/semantiktester (28 filer) och
+Planeringstid per biblioteksläge (samma kod, bara manifestet skiljer; 1 CPU,
+en körning per läge; `reports/recipe-packs-20261017/README.md`):
+
+| Läge | Kvalificerade | Korgberäkningar | Tid | Pris |
+|---|---|---|---|---|
+| Före receptarbetet | 117 | 3 667 | 78 s | 638,47 kr |
+| + rättelser | 127 | 3 730 | 81 s | 638,47 kr |
+| + 13 nya recept | 133 | 4 309 | 103 s | 600,15 kr |
+| + 12 middagar | 145 | 4 491 | 109 s | 535,06 kr |
+| + basilikarättelser | 151 | 4 570 | 99–101 s | 535,06 kr |
+
+Startsökningen står för 3 066 av 4 570 korgberäkningar i fullt bibliotek. Recept-/semantiktester (28 filer) och
 planerartester (43 filer): samma kända fel före och efter.
 
 ## Granskning (Codex)

@@ -1,0 +1,3091 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-thai-basil-tofu",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Långkornigt ris, torrt",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Ris"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskfärs|raw_edible",
+                "name": "Fläskfärs, naturell",
+                "note": "",
+                "quantity": 340.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål, rå",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot, rå",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära, rå",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Wok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås, naturell",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice, osötad",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes, mild/medel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vatten|process_water",
+                "name": "Dricksvatten",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c3",
+            "name": "Sås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika, färsk eller fryst finhackad",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c4",
+            "name": "Avslut"
+          }
+        ],
+        "content_sha256": "c17d31c3b3feb3ca39c871c8a2a702bd9deba89d3e2ff494c895f9aa229ed621",
+        "content_source": {
+          "active_minutes": 35,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "basil-fixes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-thai-basil-tofu",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "d31d1b54edf65c443d690ef57ab71059bd77e8565df9a3b5b62d049c1b1313a6",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Kastrull med lock",
+          "Stor stekpanna"
+        ],
+        "estimated_minutes": 35,
+        "family": "wok",
+        "fish": false,
+        "flavor_profile": [
+          "basilika",
+          "lime",
+          "soja"
+        ],
+        "ingredient_count": 13,
+        "method": "pan",
+        "primary_ingredient": "fläskfärs",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Levererat originalinnehåll. Anpassning granskad mot komponentmängder och fulla egna variantsteg. Inte provlagat; köp, allergener och näring kvalificeras separat. 1.x: chiliflakes utan krav på märkningen mild/medium; 0,3 g per recept ger ingen avgörande hetta och ingen sådan märkning fanns i Lunds sortiment. Aktiv och total tid sattes till den tidigare enda tidsuppskattningen (aktiv tid är därmed en övre gräns). x.2.0: basilika utan krav på färsk vara (pack:basil); fryst finhackad basilika med exakt vikt får användas. Krukbasilika har bara uppskattad vikt och den färska skurna basilikan i Lund har en faktakonflikt, så ingen basilika kunde köpas i exakt läge.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "ris|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt paketet med risets finhackade vitlök i kokvattnet. Strimla kål, riv morot och hacka lök, vitlök och ingefära."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "limejuice|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda soja, limejuice, socker, chili och vatten till såsen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Bryn färsen i oljan i en stor panna. Finfördela med stekspade. Tillsätt lök, kål och morot och stek cirka 8 minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 4,
+            "id": "s4",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "chiliflakes|dry",
+              "fläskfärs|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt vitlök, ingefära och såsen. Stek ihop cirka 3 minuter och kontrollera färsen enligt säkerhetsprofilen. Vänd ned basilikan efter att pannan tagits från värmen. Kontrollera med termometer att fläskfärsen når minst 71 °C. Fryst finhackad basilika kan användas direkt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "ris|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera färs- och kålpannan med vitlöksris, fördelat mellan två portioner."
+          }
+        ],
+        "total_minutes": 35,
+        "variant_id": "th03-base",
+        "vegetarian": false,
+        "version": "2.2.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ris",
+          "component": "c1",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice",
+            "pack:rice"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "product_requirements": [
+            "pack:garlic"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fläskfärs",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "fläskfärs",
+          "product_requirements": [
+            "pack:pork_mince"
+          ],
+          "quantity": 340.0,
+          "quantity_max": 340.0,
+          "quantity_min": 340.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "product_requirements": [
+            "pack:cabbage"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "morot",
+          "product_requirements": [
+            "pack:carrot"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "product_requirements": [
+            "pack:onion"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "product_requirements": [
+            "pack:ginger"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "product_requirements": [
+            "pack:oil"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "sojasås",
+          "product_requirements": [
+            "pack:soy_sauce"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice",
+            "pack:lime_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c3",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c3",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c4",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt paketet med risets finhackade vitlök i kokvattnet. Strimla kål, riv morot och hacka lök, vitlök och ingefära.",
+        "Blanda soja, limejuice, socker, chili och vatten till såsen.",
+        "Bryn färsen i oljan i en stor panna. Finfördela med stekspade. Tillsätt lök, kål och morot och stek cirka 8 minuter.",
+        "Tillsätt vitlök, ingefära och såsen. Stek ihop cirka 3 minuter och kontrollera färsen enligt säkerhetsprofilen. Vänd ned basilikan efter att pannan tagits från värmen. Kontrollera med termometer att fläskfärsen når minst 71 °C. Fryst finhackad basilika kan användas direkt.",
+        "Servera färs- och kålpannan med vitlöksris, fördelat mellan två portioner."
+      ],
+      "name": "Basilikastekt fläskfärs med vitkål och vitlöksris",
+      "preparation": {
+        "family": "wok",
+        "input_forms": {
+          "basilika": "raw_edible",
+          "chiliflakes": "dry",
+          "fläskfärs": "raw_edible",
+          "gul lök": "raw_edible",
+          "ingefära": "raw_edible",
+          "limejuice": "as_sold",
+          "morot": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "vitkål": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "c17d31c3b3feb3ca39c871c8a2a702bd9deba89d3e2ff494c895f9aa229ed621",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 40,
+        "base_id": "smako-thai-basil-tofu",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Långkornigt ris, torrt",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Ris"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "Fast naturell tofu",
+                "note": "",
+                "quantity": 420.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål, rå",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot, rå",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära, rå",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Wok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås, naturell",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice, osötad",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes, mild/medel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vatten|process_water",
+                "name": "Dricksvatten",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c3",
+            "name": "Sås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika, färsk eller fryst finhackad",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c4",
+            "name": "Avslut"
+          }
+        ],
+        "content_sha256": "4dde9e37c38d2d0f6b68d4c94876938bf7054195b12ab84938a218b582fdd098",
+        "content_source": {
+          "active_minutes": 40,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "basil-fixes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-thai-basil-tofu",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "d31d1b54edf65c443d690ef57ab71059bd77e8565df9a3b5b62d049c1b1313a6",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Kastrull med lock",
+          "Stor stekpanna"
+        ],
+        "estimated_minutes": 40,
+        "family": "wok",
+        "fish": false,
+        "flavor_profile": [
+          "basilika",
+          "lime",
+          "soja"
+        ],
+        "ingredient_count": 13,
+        "method": "pan",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Levererat originalinnehåll. Anpassning granskad mot komponentmängder och fulla egna variantsteg. Inte provlagat; köp, allergener och näring kvalificeras separat. 1.x: chiliflakes utan krav på märkningen mild/medium; 0,3 g per recept ger ingen avgörande hetta och ingen sådan märkning fanns i Lunds sortiment. Aktiv och total tid sattes till den tidigare enda tidsuppskattningen (aktiv tid är därmed en övre gräns). x.2.0: basilika utan krav på färsk vara (pack:basil); fryst finhackad basilika med exakt vikt får användas. Krukbasilika har bara uppskattad vikt och den färska skurna basilikan i Lund har en faktakonflikt, så ingen basilika kunde köpas i exakt läge.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "ris|dry",
+              "tofu|as_sold",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt paketet med risets finhackade vitlök i kokvattnet. Strimla kål, riv morot och hacka lök, vitlök och ingefära."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "limejuice|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda soja, limejuice, socker, chili och vatten till såsen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "tofu|as_sold",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Smula tofun grovt och bryn i oljan cirka 7 minuter så den tappar ytvätska och får färg. Tillsätt lök, kål och morot och stek ytterligare cirka 7 minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 4,
+            "id": "s4",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "tofu|as_sold",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt vitlök, ingefära och såsen. Stek ihop cirka 3 minuter tills grönsakerna är lagom mjuka. Vänd ned basilikan efter att pannan tagits från värmen. Fryst finhackad basilika kan användas direkt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "ris|dry",
+              "tofu|as_sold",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera tofu- och kålpannan med vitlöksris, fördelat mellan två portioner."
+          }
+        ],
+        "total_minutes": 40,
+        "variant_id": "th03-tofu",
+        "vegetarian": true,
+        "version": "2.2.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ris",
+          "component": "c1",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice",
+            "pack:rice"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "product_requirements": [
+            "pack:garlic"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tofu",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "plain",
+            "firm",
+            "pack:tofu"
+          ],
+          "quantity": 420.0,
+          "quantity_max": 420.0,
+          "quantity_min": 420.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "product_requirements": [
+            "pack:cabbage"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "morot",
+          "product_requirements": [
+            "pack:carrot"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "product_requirements": [
+            "pack:onion"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "product_requirements": [
+            "pack:ginger"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "product_requirements": [
+            "pack:oil"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "sojasås",
+          "product_requirements": [
+            "pack:soy_sauce"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice",
+            "pack:lime_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c3",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c3",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c4",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt paketet med risets finhackade vitlök i kokvattnet. Strimla kål, riv morot och hacka lök, vitlök och ingefära.",
+        "Blanda soja, limejuice, socker, chili och vatten till såsen.",
+        "Smula tofun grovt och bryn i oljan cirka 7 minuter så den tappar ytvätska och får färg. Tillsätt lök, kål och morot och stek ytterligare cirka 7 minuter.",
+        "Tillsätt vitlök, ingefära och såsen. Stek ihop cirka 3 minuter tills grönsakerna är lagom mjuka. Vänd ned basilikan efter att pannan tagits från värmen. Fryst finhackad basilika kan användas direkt.",
+        "Servera tofu- och kålpannan med vitlöksris, fördelat mellan två portioner."
+      ],
+      "name": "Basilikastekt smulig tofu med vitkål och vitlöksris",
+      "preparation": {
+        "family": "wok",
+        "input_forms": {
+          "basilika": "raw_edible",
+          "chiliflakes": "dry",
+          "gul lök": "raw_edible",
+          "ingefära": "raw_edible",
+          "limejuice": "as_sold",
+          "morot": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "tofu": "as_sold",
+          "vitkål": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "4dde9e37c38d2d0f6b68d4c94876938bf7054195b12ab84938a218b582fdd098",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-thai-sour-noodle-salad",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kycklingbröstfilé, benfri och utan skinn",
+                "note": "",
+                "quantity": 340.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära, rå",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Kyckling"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nudlar|dry",
+                "name": "Risnudlar, torra",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål, rå",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot, rå",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka, rå",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Sallad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice, osötad",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås, naturell",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes, mild/medel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vatten|process_water",
+                "name": "Dricksvatten",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c3",
+            "name": "Dressing"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "jordnötter|as_sold",
+                "name": "Rostade jordnötter, osaltade",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika, färsk eller fryst finhackad",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c4",
+            "name": "Topping"
+          }
+        ],
+        "content_sha256": "513bce6714da789feed779c9d1dc72a3071a51cde209ad9b39df7c361d64bbbb",
+        "content_source": {
+          "active_minutes": 35,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "basil-fixes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-thai-sour-noodle-salad",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "d31d1b54edf65c443d690ef57ab71059bd77e8565df9a3b5b62d049c1b1313a6",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Stekpanna",
+          "Stor skål",
+          "Kökstermometer"
+        ],
+        "estimated_minutes": 35,
+        "family": "nudelsallad",
+        "fish": false,
+        "flavor_profile": [
+          "lime",
+          "jordnöt",
+          "soja"
+        ],
+        "ingredient_count": 14,
+        "method": "pan",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Levererat originalinnehåll. Anpassning granskad mot komponentmängder och fulla egna variantsteg. Inte provlagat; köp, allergener och näring kvalificeras separat. 1.x: chiliflakes utan krav på märkningen mild/medium; 0,3 g per recept ger ingen avgörande hetta och ingen sådan märkning fanns i Lunds sortiment. Aktiv och total tid sattes till den tidigare enda tidsuppskattningen (aktiv tid är därmed en övre gräns). Metod ändrad från sallad till panna: kycklingen steks i ett eget steg med kärntemperaturkontroll; rätten serveras som sallad. x.2.0: basilika utan krav på färsk vara (pack:basil); fryst finhackad basilika med exakt vikt får användas. Krukbasilika har bara uppskattad vikt och den färska skurna basilikan i Lund har en faktakonflikt, så ingen basilika kunde köpas i exakt läge.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "nudlar",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "chiliflakes|dry",
+              "gurka|raw_edible",
+              "jordnötter|as_sold",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "nudlar|dry",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Strimla kål och morot tunt, skär gurkan och grovhacka jordnötter och basilika. Rör ihop dressingens ingredienser tills sockret löst sig. Fryst finhackad basilika kan användas direkt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 10,
+            "id": "s2",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gurka|raw_edible",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "nudlar|dry",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillaga nudlarna enligt förpackningen. Häll av och vänd med en del av dressingen så de inte klibbar ihop."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "ingefära|raw_edible",
+              "kyckling|raw_edible",
+              "rapsolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär kycklingen i tunna jämna strimlor. Stek i oljan cirka 8–10 minuter. Tillsätt finriven vitlök och ingefära under de sista två minuterna och kontrollera enligt kycklingprofilen. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C; tiden är vägledande."
+          },
+          {
+            "depends_on": [
+              "s2",
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "chiliflakes|dry",
+              "gurka|raw_edible",
+              "ingefära|raw_edible",
+              "jordnötter|as_sold",
+              "kyckling|raw_edible",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "nudlar|dry",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Blanda nudlar, grönsaker, kyckling och resten av dressingen. Toppa med jordnötter och basilika och fördela mellan två portioner."
+          }
+        ],
+        "total_minutes": 35,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "2.2.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "product_requirements": [
+            "pack:chicken_breast"
+          ],
+          "quantity": 340.0,
+          "quantity_max": 340.0,
+          "quantity_min": 340.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "product_requirements": [
+            "pack:oil"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "product_requirements": [
+            "pack:garlic"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "product_requirements": [
+            "pack:ginger"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "nudlar",
+          "component": "c2",
+          "form": "dry",
+          "name": "nudlar",
+          "product_requirements": [
+            "pack:rice_noodles"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "product_requirements": [
+            "pack:cabbage"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "morot",
+          "product_requirements": [
+            "pack:carrot"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gurka",
+          "product_requirements": [
+            "pack:cucumber"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice",
+            "pack:lime_juice"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "sojasås",
+          "product_requirements": [
+            "pack:soy_sauce"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c3",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c3",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jordnötter",
+          "component": "c4",
+          "form": "as_sold",
+          "name": "jordnötter",
+          "product_requirements": [
+            "pack:peanuts"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c4",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Strimla kål och morot tunt, skär gurkan och grovhacka jordnötter och basilika. Rör ihop dressingens ingredienser tills sockret löst sig. Fryst finhackad basilika kan användas direkt.",
+        "Tillaga nudlarna enligt förpackningen. Häll av och vänd med en del av dressingen så de inte klibbar ihop.",
+        "Skär kycklingen i tunna jämna strimlor. Stek i oljan cirka 8–10 minuter. Tillsätt finriven vitlök och ingefära under de sista två minuterna och kontrollera enligt kycklingprofilen. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C; tiden är vägledande.",
+        "Blanda nudlar, grönsaker, kyckling och resten av dressingen. Toppa med jordnötter och basilika och fördela mellan två portioner."
+      ],
+      "name": "Syrlig risnudelsallad med kyckling, kål och jordnötter",
+      "preparation": {
+        "family": "nudelsallad",
+        "input_forms": {
+          "basilika": "raw_edible",
+          "chiliflakes": "dry",
+          "gurka": "raw_edible",
+          "ingefära": "raw_edible",
+          "jordnötter": "as_sold",
+          "kyckling": "raw_edible",
+          "limejuice": "as_sold",
+          "morot": "raw_edible",
+          "nudlar": "dry",
+          "rapsolja": "as_sold",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "vitkål": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "513bce6714da789feed779c9d1dc72a3071a51cde209ad9b39df7c361d64bbbb",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-thai-sour-noodle-salad",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "Fast naturell tofu",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära, rå",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Tofu"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nudlar|dry",
+                "name": "Risnudlar, torra",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål, rå",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot, rå",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka, rå",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Sallad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice, osötad",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås, naturell",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes, mild/medel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vatten|process_water",
+                "name": "Dricksvatten",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c3",
+            "name": "Dressing"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "jordnötter|as_sold",
+                "name": "Rostade jordnötter, osaltade",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika, färsk eller fryst finhackad",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c4",
+            "name": "Topping"
+          }
+        ],
+        "content_sha256": "3a91b8d4bec6e510b8d0a7701e292548326b1883290976c4d36b4cea4f3640d9",
+        "content_source": {
+          "active_minutes": 35,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "basil-fixes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-thai-sour-noodle-salad",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "d31d1b54edf65c443d690ef57ab71059bd77e8565df9a3b5b62d049c1b1313a6",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Stekpanna",
+          "Stor skål",
+          "Kökstermometer"
+        ],
+        "estimated_minutes": 35,
+        "family": "nudelsallad",
+        "fish": false,
+        "flavor_profile": [
+          "lime",
+          "jordnöt",
+          "soja"
+        ],
+        "ingredient_count": 14,
+        "method": "salad",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Levererat originalinnehåll. Anpassning granskad mot komponentmängder och fulla egna variantsteg. Inte provlagat; köp, allergener och näring kvalificeras separat. 1.x: chiliflakes utan krav på märkningen mild/medium; 0,3 g per recept ger ingen avgörande hetta och ingen sådan märkning fanns i Lunds sortiment. Aktiv och total tid sattes till den tidigare enda tidsuppskattningen (aktiv tid är därmed en övre gräns). x.2.0: basilika utan krav på färsk vara (pack:basil); fryst finhackad basilika med exakt vikt får användas. Krukbasilika har bara uppskattad vikt och den färska skurna basilikan i Lund har en faktakonflikt, så ingen basilika kunde köpas i exakt läge.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "nudlar",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "chiliflakes|dry",
+              "gurka|raw_edible",
+              "jordnötter|as_sold",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "nudlar|dry",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Strimla kål och morot tunt, skär gurkan och grovhacka jordnötter och basilika. Rör ihop dressingens ingredienser tills sockret löst sig. Fryst finhackad basilika kan användas direkt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 10,
+            "id": "s2",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gurka|raw_edible",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "nudlar|dry",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillaga nudlarna enligt förpackningen. Häll av och vänd med en del av dressingen så de inte klibbar ihop."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "ingefära|raw_edible",
+              "rapsolja|as_sold",
+              "tofu|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär tofun i tunna stavar och stek i oljan cirka 10 minuter tills de fått färg. Tillsätt finriven vitlök och ingefära under de sista två minuterna."
+          },
+          {
+            "depends_on": [
+              "s2",
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "chiliflakes|dry",
+              "gurka|raw_edible",
+              "ingefära|raw_edible",
+              "jordnötter|as_sold",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "nudlar|dry",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "tofu|as_sold",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Blanda nudlar, grönsaker, tofu och resten av dressingen. Toppa med jordnötter och basilika och fördela mellan två portioner."
+          }
+        ],
+        "total_minutes": 35,
+        "variant_id": "th01-tofu",
+        "vegetarian": true,
+        "version": "2.2.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tofu",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "plain",
+            "firm",
+            "pack:tofu"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "product_requirements": [
+            "pack:oil"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "product_requirements": [
+            "pack:garlic"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "product_requirements": [
+            "pack:ginger"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "nudlar",
+          "component": "c2",
+          "form": "dry",
+          "name": "nudlar",
+          "product_requirements": [
+            "pack:rice_noodles"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "product_requirements": [
+            "pack:cabbage"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "morot",
+          "product_requirements": [
+            "pack:carrot"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gurka",
+          "product_requirements": [
+            "pack:cucumber"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice",
+            "pack:lime_juice"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "sojasås",
+          "product_requirements": [
+            "pack:soy_sauce"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c3",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c3",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jordnötter",
+          "component": "c4",
+          "form": "as_sold",
+          "name": "jordnötter",
+          "product_requirements": [
+            "pack:peanuts"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c4",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Strimla kål och morot tunt, skär gurkan och grovhacka jordnötter och basilika. Rör ihop dressingens ingredienser tills sockret löst sig. Fryst finhackad basilika kan användas direkt.",
+        "Tillaga nudlarna enligt förpackningen. Häll av och vänd med en del av dressingen så de inte klibbar ihop.",
+        "Skär tofun i tunna stavar och stek i oljan cirka 10 minuter tills de fått färg. Tillsätt finriven vitlök och ingefära under de sista två minuterna.",
+        "Blanda nudlar, grönsaker, tofu och resten av dressingen. Toppa med jordnötter och basilika och fördela mellan två portioner."
+      ],
+      "name": "Syrlig risnudelsallad med tofu, kål och jordnötter",
+      "preparation": {
+        "family": "nudelsallad",
+        "input_forms": {
+          "basilika": "raw_edible",
+          "chiliflakes": "dry",
+          "gurka": "raw_edible",
+          "ingefära": "raw_edible",
+          "jordnötter": "as_sold",
+          "limejuice": "as_sold",
+          "morot": "raw_edible",
+          "nudlar": "dry",
+          "rapsolja": "as_sold",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "tofu": "as_sold",
+          "vitkål": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "3a91b8d4bec6e510b8d0a7701e292548326b1883290976c4d36b4cea4f3640d9",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-thai-chicken-coconut-curry",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Långkornigt ris, torrt",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Ris"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Torskfilé, benfri",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "Kokosmjölk, osötad",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Fryst hackad spenat, naturell",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika, rå",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära, rå",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås, naturell",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vatten|process_water",
+                "name": "Dricksvatten",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes, mild/medel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Gryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice, osötad",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika, färsk eller fryst finhackad",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Avslut"
+          }
+        ],
+        "content_sha256": "5afeecd3a2e7a4e90d5aca10183f23a0ef813217b2a96e42341bd111fdfb2ef5",
+        "content_source": {
+          "active_minutes": 35,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "basil-fixes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-thai-chicken-coconut-curry",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "d31d1b54edf65c443d690ef57ab71059bd77e8565df9a3b5b62d049c1b1313a6",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Två kastruller, en med lock",
+          "Kökstermometer"
+        ],
+        "estimated_minutes": 35,
+        "family": "curry",
+        "fish": true,
+        "flavor_profile": [
+          "kokos",
+          "lime",
+          "basilika"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Levererat originalinnehåll. Anpassning granskad mot komponentmängder och fulla egna variantsteg. Inte provlagat; köp, allergener och näring kvalificeras separat. 1.x: chiliflakes utan krav på märkningen mild/medium; 0,3 g per recept ger ingen avgörande hetta och ingen sådan märkning fanns i Lunds sortiment. Aktiv och total tid sattes till den tidigare enda tidsuppskattningen (aktiv tid är därmed en övre gräns). x.2.0: basilika utan krav på färsk vara (pack:basil); fryst finhackad basilika med exakt vikt får användas. Krukbasilika har bara uppskattad vikt och den färska skurna basilikan i Lund har en faktakonflikt, så ingen basilika kunde köpas i exakt läge.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fisk|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "ris|dry",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Starta riset enligt paketets anvisning. Hacka lök, vitlök och ingefära, och skär paprika i strimlor."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fisk|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs lök och paprika i oljan cirka 5 minuter. Tillsätt vitlök, ingefära och chili och rör en minut."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fisk|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll i kokosmjölk, vatten och soja. Tillsätt spenaten och sjud cirka 5 minuter eller enligt spenatpaketets instruktioner."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fisk|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär fisken i stora jämna bitar och lägg ned dem. Sjud varsamt under lock tills fisken är klar enligt säkerhetsprofilen, uppskattningsvis 7–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "chiliflakes|dry",
+              "fisk|raw_edible",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "limejuice|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "ris|dry",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ta från värmen, rör försiktigt ned limejuice och basilika och servera med riset. Fördela fisken jämnt mellan portionerna. Fryst finhackad basilika kan användas direkt."
+          }
+        ],
+        "total_minutes": 35,
+        "variant_id": "th02-base",
+        "vegetarian": false,
+        "version": "2.2.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ris",
+          "component": "c1",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice",
+            "pack:rice"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisk",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "fisk",
+          "product_requirements": [
+            "pack:cod"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "product_requirements": [
+            "pack:coconut_milk"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "pack:spinach",
+            "plain",
+            "frozen"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "paprika",
+          "product_requirements": [
+            "pack:pepper"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "product_requirements": [
+            "pack:onion"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "product_requirements": [
+            "pack:ginger"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "product_requirements": [
+            "pack:garlic"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "product_requirements": [
+            "pack:oil"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "sojasås",
+          "product_requirements": [
+            "pack:soy_sauce"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c2",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice",
+            "pack:lime_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Starta riset enligt paketets anvisning. Hacka lök, vitlök och ingefära, och skär paprika i strimlor.",
+        "Fräs lök och paprika i oljan cirka 5 minuter. Tillsätt vitlök, ingefära och chili och rör en minut.",
+        "Häll i kokosmjölk, vatten och soja. Tillsätt spenaten och sjud cirka 5 minuter eller enligt spenatpaketets instruktioner.",
+        "Skär fisken i stora jämna bitar och lägg ned dem. Sjud varsamt under lock tills fisken är klar enligt säkerhetsprofilen, uppskattningsvis 7–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C.",
+        "Ta från värmen, rör försiktigt ned limejuice och basilika och servera med riset. Fördela fisken jämnt mellan portionerna. Fryst finhackad basilika kan användas direkt."
+      ],
+      "name": "Kokosbräserad torsk med spenat, lime och ris",
+      "preparation": {
+        "family": "curry",
+        "input_forms": {
+          "basilika": "raw_edible",
+          "chiliflakes": "dry",
+          "fisk": "raw_edible",
+          "gul lök": "raw_edible",
+          "ingefära": "raw_edible",
+          "kokosmjölk": "as_sold",
+          "limejuice": "as_sold",
+          "paprika": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "sojasås": "as_sold",
+          "spenat": "as_sold",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "5afeecd3a2e7a4e90d5aca10183f23a0ef813217b2a96e42341bd111fdfb2ef5",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 40,
+        "base_id": "smako-thai-chicken-coconut-curry",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Långkornigt ris, torrt",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Ris"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kycklingbröstfilé, benfri och utan skinn",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "Kokosmjölk, osötad",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Fryst hackad spenat, naturell",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika, rå",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära, rå",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås, naturell",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vatten|process_water",
+                "name": "Dricksvatten",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes, mild/medel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Gryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice, osötad",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika, färsk eller fryst finhackad",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Avslut"
+          }
+        ],
+        "content_sha256": "761702e85a80ec4d7240a04a6d74dfd480d40bcc00ea4364f7be57e4dcfd4f3a",
+        "content_source": {
+          "active_minutes": 40,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "basil-fixes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-thai-chicken-coconut-curry",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "d31d1b54edf65c443d690ef57ab71059bd77e8565df9a3b5b62d049c1b1313a6",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Två kastruller, en med lock",
+          "Kökstermometer"
+        ],
+        "estimated_minutes": 40,
+        "family": "curry",
+        "fish": false,
+        "flavor_profile": [
+          "kokos",
+          "lime",
+          "basilika"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Levererat originalinnehåll. Anpassning granskad mot komponentmängder och fulla egna variantsteg. Inte provlagat; köp, allergener och näring kvalificeras separat. 1.x: chiliflakes utan krav på märkningen mild/medium; 0,3 g per recept ger ingen avgörande hetta och ingen sådan märkning fanns i Lunds sortiment. Aktiv och total tid sattes till den tidigare enda tidsuppskattningen (aktiv tid är därmed en övre gräns). x.2.0: basilika utan krav på färsk vara (pack:basil); fryst finhackad basilika med exakt vikt får användas. Krukbasilika har bara uppskattad vikt och den färska skurna basilikan i Lund har en faktakonflikt, så ingen basilika kunde köpas i exakt läge.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "kyckling|raw_edible",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "ris|dry",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Starta riset enligt paketets anvisning. Hacka lök, vitlök och ingefära, och skär paprika i strimlor."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "kyckling|raw_edible",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs lök och paprika i oljan cirka 5 minuter. Tillsätt vitlök, ingefära och chili och rör en minut."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "kyckling|raw_edible",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll i kokosmjölk, vatten och soja. Tillsätt spenaten och sjud cirka 5 minuter eller enligt spenatpaketets instruktioner."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "kyckling|raw_edible",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär kycklingen i jämnstora bitar, cirka 2 cm, och lägg ned dem. Sjud under lock cirka 10–14 minuter och kontrollera enligt kycklingprofilen. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C; tiden är vägledande."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "kokosmjölk|as_sold",
+              "kyckling|raw_edible",
+              "limejuice|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "ris|dry",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ta från värmen, rör ned limejuice och basilika och servera med riset. Fördela kycklingen jämnt mellan portionerna. Fryst finhackad basilika kan användas direkt."
+          }
+        ],
+        "total_minutes": 40,
+        "variant_id": "th02-kyckling",
+        "vegetarian": false,
+        "version": "2.2.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ris",
+          "component": "c1",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice",
+            "pack:rice"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kyckling",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "product_requirements": [
+            "pack:chicken_breast"
+          ],
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "product_requirements": [
+            "pack:coconut_milk"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "pack:spinach",
+            "plain",
+            "frozen"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "paprika",
+          "product_requirements": [
+            "pack:pepper"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "product_requirements": [
+            "pack:onion"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "product_requirements": [
+            "pack:ginger"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "product_requirements": [
+            "pack:garlic"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "product_requirements": [
+            "pack:oil"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "sojasås",
+          "product_requirements": [
+            "pack:soy_sauce"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c2",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice",
+            "pack:lime_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 0.01,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Starta riset enligt paketets anvisning. Hacka lök, vitlök och ingefära, och skär paprika i strimlor.",
+        "Fräs lök och paprika i oljan cirka 5 minuter. Tillsätt vitlök, ingefära och chili och rör en minut.",
+        "Häll i kokosmjölk, vatten och soja. Tillsätt spenaten och sjud cirka 5 minuter eller enligt spenatpaketets instruktioner.",
+        "Skär kycklingen i jämnstora bitar, cirka 2 cm, och lägg ned dem. Sjud under lock cirka 10–14 minuter och kontrollera enligt kycklingprofilen. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C; tiden är vägledande.",
+        "Ta från värmen, rör ned limejuice och basilika och servera med riset. Fördela kycklingen jämnt mellan portionerna. Fryst finhackad basilika kan användas direkt."
+      ],
+      "name": "Kokosbräserad kyckling med spenat, lime och ris",
+      "preparation": {
+        "family": "curry",
+        "input_forms": {
+          "basilika": "raw_edible",
+          "chiliflakes": "dry",
+          "gul lök": "raw_edible",
+          "ingefära": "raw_edible",
+          "kokosmjölk": "as_sold",
+          "kyckling": "raw_edible",
+          "limejuice": "as_sold",
+          "paprika": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "sojasås": "as_sold",
+          "spenat": "as_sold",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "761702e85a80ec4d7240a04a6d74dfd480d40bcc00ea4364f7be57e4dcfd4f3a",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    }
+  ]
+}
