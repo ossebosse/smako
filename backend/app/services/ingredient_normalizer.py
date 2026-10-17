@@ -19,7 +19,8 @@ from grocery_data.app.domain.recipe import RECIPE_RELEVANT_INGREDIENTS
 # distinct canonical ingredients.
 CANONICAL_ALIASES: dict[str, tuple[str, ...]] = {
     "chiliflakes": ("chiliflakes", "chili flakes", "chiliflingor"),
-    "rökt paprikapulver": ("rökt paprikapulver", "paprikapulver rökt"),
+    "rökt paprikapulver": ("rökt paprikapulver", "paprikapulver rökt", "rökt paprika", "paprika rökt",
+                           "paprika smoked", "smoked paprika"),
     # Real Coop source: parent "Vetemjöl", exact child "Kärnvetemjöl".
     # Do not collapse the ambiguous generic "mjöl" or other flour identities.
     "vetemjöl": ("vetemjöl", "kärnvetemjöl"),

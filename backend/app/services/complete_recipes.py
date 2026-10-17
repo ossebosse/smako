@@ -383,7 +383,10 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         "tomat": r"(?:tomat|tomater|körsbärstomater|kvisttomater|plommontomater|cocktailtomater|pärltomater)(?: runda(?: import)?| san marzano| babyplommon| cocktail| kumato| cockt)?",
         "vitlök": r"vitlök", "gul lök": r"(?:gul lök|lök gul)", "rödlök": r"(?:rödlök|röd lök|lök röd)",
         "gurka": r"gurka", "morot": r"(?:morot|morötter)", "zucchini": r"(?:zucchini|squash)",
-        "aubergine": r"aubergine", "paprika": r"paprika", "vitkål": r"vitkål", "broccoli": r"broccoli",
+        # Sweet bell-pepper packs sold by gram ("Paprika Mix Klass 1" 400 g,
+        # "Paprika Spets Mix", "Paprika Ramiro", "Paprika Snacks Mix"). Hot
+        # varieties (Stark, Sivri, Carli) remain excluded.
+        "aubergine": r"aubergine", "paprika": r"paprika(?: (?:mix|spets|spets mix|ramiro|snacks|snacks mix))?", "vitkål": r"vitkål", "broccoli": r"broccoli",
         "blomkål": r"blomkål", "champinjoner": r"champinjoner", "selleri": r"(?:selleri|stjälkselleri|blekselleri|bladselleri)",
         "haricots verts": r"haricots verts", "pepparrot": r"pepparrot", "ingefära": r"ingefära",
         "spenat": r"(?:spenat|babyspenat)",

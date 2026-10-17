@@ -52,7 +52,8 @@ def reviewed_reference(product, name, facts):
         'basilika': (379, None, r'basilika(?: kruka| i kruka| blad)*'),
     }
     if canonical == 'paprika' and fresh_category:
-        match = re.fullmatch(r'paprika(?: (röd|grön|gul))?', label)
+        # Mixed sweet bell-pepper packs use the generic raw paprika reference.
+        match = re.fullmatch(r'paprika(?: (röd|grön|gul))?(?: (?:mix|spets|spets mix|ramiro|snacks|snacks mix))?', label)
         if match:
             return {'röd': 351, 'grön': 350, 'gul': 381, None: 392}[match.group(1)]
     if canonical in produce:

@@ -246,6 +246,19 @@ def test_gyros_and_chicken_sticks_cannot_beat_raw_chicken_cuts() -> None:
     assert [match.product_id for match in matches] == ["thigh", "fillet"]
 
 
+@pytest.mark.parametrize(("name", "expected"), [
+    ("Paprika Mix Klass 1", True),
+    ("Paprika Mix Eko Klass 1", True),
+    ("Paprika Spets Mix Klass 1", True),
+    ("Wokgrönsaker Paprika Mix Fryst", False),
+    ("Grönsaksmix Paprika & Broccoli", False),
+])
+def test_bell_pepper_colour_packs_are_whole_peppers_not_blends(name, expected) -> None:
+    decision = evaluate_product_semantics("paprika", _product("pepper", name, "paprika"))
+
+    assert decision.compatible is expected
+
+
 def test_filled_dough_dishes_cannot_be_a_recipe_meat_line() -> None:
     # Real Lund catalogue names; the meat is only a filling.
     traps = [

@@ -1371,6 +1371,13 @@ _FILLED_DOUGH_DISH_MARKERS = (
 _FILLED_DOUGH_COMPONENT_WORDS = ("sauce", "sas", "deg", "skin", "skins", "dough", "wrapper", "wrappers")
 
 
+def _is_pepper_colour_mix(text: str) -> bool:
+    """A pack of whole bell peppers in mixed colours, not a vegetable blend."""
+    return bool(re.fullmatch(
+        r"(?:spets)?paprika(?: (?:spets|snacks|ramiro|eko|ekologisk|klass [12]))* mix"
+        r"(?: (?:eko|ekologisk|klass [12]))*", text))
+
+
 def _is_filled_dough_dish(text: str) -> bool:
     return (any(marker in text for marker in _FILLED_DOUGH_DISH_MARKERS)
             and not _contains_any(text, _FILLED_DOUGH_COMPONENT_WORDS))
@@ -1695,7 +1702,9 @@ def _infer_special_identity(
             return "olive", "fruit", "marinated_olive", "marinated"
         return "olive", "fruit", "preserved_olive", "preserved"
 
-    if _classify_prepared_form(text) == "mixture" and any(
+    # "Paprika Mix Klass 1" is a pack of whole bell peppers in mixed colours,
+    # not a vegetable blend; it continues to the pepper branch below.
+    if not _is_pepper_colour_mix(text) and _classify_prepared_form(text) == "mixture" and any(
         marker in text
         for marker in (
             "broccoli",
@@ -1718,7 +1727,9 @@ def _infer_special_identity(
         return "chicken", "poultry", role, form
 
     if any(token.startswith(("paprika", "spetspaprika")) for token in text.split()):
-        if _contains_any(text, ("paprikapulver", "krydda")):
+        # "Paprika Rökt"/"Paprika Smoked" on the spice shelf is smoked paprika
+        # powder, never a fresh bell pepper.
+        if _contains_any(text, ("paprikapulver", "krydda", "rokt", "smoked")):
             return "pepper", "vegetable", "seasoning", "dried"
         if _contains_any(text, ("paprikachips", "snack")):
             return "pepper", "vegetable", "snack", "processed"
@@ -2101,6 +2112,8 @@ def evaluate_product_semantics(
     prepared_form = _classify_prepared_form(name_text)
     if prepared_form is None and _is_filled_dough_dish(name_text):
         prepared_form = "ready_meal"
+    if prepared_form == "mixture" and _is_pepper_colour_mix(name_text):
+        prepared_form = None
     # A specific compound product-class label is stronger than a flavour in
     # a short name. Broad navigation such as "Ost & kex" is not such proof.
     if prepared_form is None and _contains_any(category_text, ("ostkex", "smörgåskex")):
