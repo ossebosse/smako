@@ -10,9 +10,12 @@ eligible for planning:
   suggestions; nothing is guessed),
 * component amounts, merged purchase lines, quantity bounds and the counted
   ingredient number (``ingredient_count``),
-* times: total = critical path of the step graph, waiting = passive minutes on
-  that path, active = the rest (``estimated_minutes`` = total),
+* times: active = all non-passive step minutes (parallel branches included),
+  total = the longer of the critical path and the active work, waiting = the
+  rest (``estimated_minutes`` = total),
 * vegetarian/fish flags from the ingredients,
+* process water written as "N ml vatten" scales with portions
+  (``scalable_amounts``); water in dl/l is rejected,
 * readiness warnings: default selection range (10-15 counted ingredients for
   dinners), food-safety temperatures in the text, unused or unknown ingredients.
 
@@ -23,6 +26,7 @@ from __future__ import annotations
 
 import difflib
 import json
+import re
 from collections import Counter
 
 SCHEMA = "smako-recipe-authoring-v1"
@@ -48,16 +52,21 @@ def library_vocabulary(recipes):
     return vocabulary
 
 
-def _critical_path(steps):
-    ends, passive_on_path = {}, {}
+def _times(steps):
+    """(active, waiting, total) minutes for one cook.
+
+    active  = every non-passive step's minutes, including parallel branches
+              (a cook does them one after another),
+    total   = the longer of the step graph's critical path and the active work,
+    waiting = the rest of the total, i.e. passive time not covered by work.
+    """
+    ends = {}
     for step in steps:
         start = max((ends[d] for d in step["depends_on"]), default=0)
-        previous = max(step["depends_on"], key=lambda d: ends[d]) if step["depends_on"] else None
         ends[step["id"]] = start + step["duration_minutes"]
-        passive_on_path[step["id"]] = (passive_on_path[previous] if previous else 0) + (
-            step["duration_minutes"] if step.get("_passive") else 0)
-    last = max(ends, key=ends.get)
-    return ends[last], passive_on_path[last]
+    active = sum(s["duration_minutes"] for s in steps if not s.get("_passive"))
+    total = max(max(ends.values()), active)
+    return max(1, active), total - max(1, active), total
 
 
 def standardize(source, vocabulary, *, reviewed_at):
@@ -92,6 +101,12 @@ def standardize(source, vocabulary, *, reviewed_at):
                     "required": True, "role": item["role"], "product_requirements": requirements})
                 if line["unit"] != unit:
                     raise ValueError(f"{where}: {key} anges i både {line['unit']} och {unit}")
+                if sorted(line["product_requirements"]) != sorted(requirements):
+                    # One purchase line has one set of product requirements; a
+                    # merge would silently drop a stricter component's demand.
+                    raise ValueError(f"{where}: {key} har olika produktkrav i olika komponenter "
+                                     f"({sorted(line['product_requirements'])} och {sorted(requirements)}); "
+                                     "ange samma krav eller dela upp till olika former")
                 line["quantity"] += quantity
             components.append({"id": component["id"], "name": component["name"], "amounts": amounts})
         ingredients = []
@@ -110,17 +125,25 @@ def standardize(source, vocabulary, *, reviewed_at):
                 if key not in lines:
                     raise ValueError(f"{where}: steg {n} använder {used!r} som inte finns i receptet")
                 keys.append(key)
-            steps.append({"id": f"s{n}", "text": step["text"], "ingredient_keys": sorted(set(keys)),
-                          "depends_on": [f"s{d}" for d in step.get("after", [])],
-                          "duration_minutes": int(step["minutes"]), "parallel_group": None,
-                          "_passive": bool(step.get("passive"))})
+            if re.search(r"\d+(?:[,.]\d+)?\s*(?:dl|l|liter)\s+(?:dricks)?vatten", step["text"]):
+                raise ValueError(f"{where}: steg {n} anger vatten i dl/l; skriv ml så att mängden skalas med portionerna")
+            water = [(m.group(0)[:-len(m.group(2))].rstrip(), float(m.group(1)))
+                     for m in re.finditer(r"(\d+) ml (dricksvatten|vatten)", step["text"])]
+            row_step = {"id": f"s{n}", "text": step["text"], "ingredient_keys": sorted(set(keys)),
+                        "depends_on": [f"s{d}" for d in step.get("after", [])],
+                        "duration_minutes": int(step["minutes"]), "parallel_group": None,
+                        "_passive": bool(step.get("passive"))}
+            if water:
+                # Process water is not a purchase line, so the step text itself
+                # carries the amount and scales with the portion count.
+                row_step["scalable_amounts"] = water
+            steps.append(row_step)
         unused = set(lines) - {k for s in steps for k in s["ingredient_keys"]}
         if unused:
             raise ValueError(f"{where}: ingredienser används inte i något steg: {sorted(unused)}")
-        total, waiting = _critical_path(steps)
+        active, waiting, total = _times(steps)
         for step in steps:
             step.pop("_passive")
-        active = max(1, total - waiting)
         canon = {line["canonical_name"] for line in ingredients}
         fish = bool(canon & FISH)
         vegetarian = not (canon & (MEAT | FISH))

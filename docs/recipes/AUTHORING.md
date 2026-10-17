@@ -22,8 +22,13 @@ Per recept: `base_id`, `name`, `servings`, `meal_type` (dinner/breakfast/snack),
 - **Identitet och köpkrav:** enhet och produktkrav tas från det befintliga
   biblioteket för varje `namn|form`. Okända identiteter stoppas med förslag.
 - **Mängder:** komponentmängder, sammanslagna inköpsrader och mängdintervall.
-- **Tider:** total tid = kritiska vägen genom stegens beroenden, väntetid =
-  passiva minuter på den vägen, aktiv tid = resten. `estimated_minutes` = total.
+- **Tider (en kock):** aktiv tid = alla icke-passiva stegs minuter, även parallella
+  grenar. Total tid = den längsta av stegens kritiska väg och den aktiva tiden.
+  Väntetid = resten av totaltiden. `estimated_minutes` = total.
+- **Processvatten:** skriv "N ml vatten" i stegtexten; mängden skalas då med
+  portionerna. Vatten i dl eller l stoppas.
+- **En inköpsrad, ett kravset:** samma `namn|form` i flera komponenter måste ha
+  samma produktkrav, annars stoppas receptet.
 - **Kost:** vegetarisk/fisk härleds från ingredienserna.
 - **Varningar:** middagar utanför standardvalets 10–15 räknade ingredienser (salt,
   peppar och vatten räknas inte), saknad säkerhetstext (74 °C kyckling, 72 °C färs,

@@ -521,3 +521,22 @@ def test_only_the_chosen_menu_is_audited_and_a_failed_audit_repeats_the_audited_
     assert not any(calls)  # never audited while the search defers audits
     assert len(calls) >= 2
     assert result.personal.checks["audited_search_retry"] is True
+
+
+@pytest.mark.parametrize("conflicts, expected", [((), True), (("nutrition_basis",), False),
+                                                  (("nutrition.fat_g",), False)])
+def test_conflicting_fat_is_never_product_class_evidence(conflicts, expected):
+    from types import SimpleNamespace
+
+    from app.services.complete_recipes import _requirements_compatible
+    from app.services.content_pack_requirements import compatible
+
+    def fact(fat):
+        return SimpleNamespace(nutrition_unit="g", nutrition_preparation="as_sold", nutrition={"fat_g": fat},
+                               conflicts=conflicts, ingredients=(), classifications=())
+
+    yoghurt = SimpleNamespace(name="Grekisk Yoghurt Naturell", category="Mejeri", brand=None)
+    creme = SimpleNamespace(name="Crème Fraiche", category="Mejeri", brand=None)
+    # Thick yoghurt with no fat percentage in the name relies on declared fat.
+    assert _requirements_compatible("yoghurt naturell", ("plain", "thick"), yoghurt, fact(10)) is expected
+    assert compatible(["creme_fraiche"], creme, fact(32)) is expected

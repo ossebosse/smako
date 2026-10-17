@@ -264,8 +264,9 @@ def _requirements_compatible(canonical, requirements, product, fact):
     if "thick" in requirements:
         fat_label = re.search(r"(\d+(?:[,.]\d+)?)\s*%", text)
         fat = float(fat_label.group(1).replace(",", ".")) if fat_label else None
-        if fat is None and fact and fact.nutrition_unit == "g" and fact.nutrition_preparation == "as_sold":
-            fat = fact.nutrition.get("fat_g")
+        if fat is None:
+            from app.services.content_pack_requirements import declared_fat_g
+            fat = declared_fat_g(fact)
         if not re.search(r"grekisk|turkisk|avrunnen|strained", text) or fat is None or not 5 <= fat <= 10:
             return False
     if "pure_juice" in requirements and not plain_juice_composition(canonical, composition):

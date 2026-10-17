@@ -26,8 +26,9 @@ def test_example_is_standardized_into_a_valid_pack():
     checked = validate_pack_bytes(json.dumps(pack).encode())
     assert checked["rejections"] == []
     row = report[0]
-    # Critical path: 6 min prep -> 30 min passive roasting -> 10 min final step.
-    assert (row["total_minutes"], row["waiting_minutes"], row["active_minutes"]) == (46, 30, 16)
+    # Active work 6+6+5+4+10 = 31 min (parallel prep included); the critical path
+    # 6 -> 30 passive -> 10 = 46 min, so 15 minutes are pure waiting.
+    assert (row["total_minutes"], row["waiting_minutes"], row["active_minutes"]) == (46, 15, 31)
     assert row["counted_ingredients"] == 11 and row["warnings"] == []
     recipe = pack["recipes"][0]
     oil = next(i for i in recipe["ingredients"] if i["name"] == "rapsolja")
@@ -54,3 +55,33 @@ def test_missing_food_safety_text_and_small_dinners_are_reported():
     source["recipes"][0]["steps"][5]["text"] = "Stek kycklingen och servera."
     _, report = standardize(source, VOCABULARY, reviewed_at="2026-10-17")
     assert any("74 °C" in w for w in report[0]["warnings"])
+
+
+def test_parallel_active_work_longer_than_the_path_sets_the_total():
+    source = _source()
+    for step in source["recipes"][0]["steps"]:
+        step["passive"] = False
+    _, report = standardize(source, VOCABULARY, reviewed_at="2026-10-17")
+    assert report[0]["active_minutes"] == report[0]["total_minutes"] == 61
+    assert report[0]["waiting_minutes"] == 0
+
+
+def test_conflicting_product_requirements_for_one_purchase_line_are_rejected():
+    source = _source()
+    extra = {"name": "yoghurt naturell", "form": "as_sold", "quantity": 20, "role": "sauce",
+             "label": "Yoghurt", "requirements": ["plain"]}
+    source["recipes"][0]["components"][3]["ingredients"].append(extra)
+    source["recipes"][0]["steps"][4]["uses"].append("yoghurt naturell")
+    with pytest.raises(ValueError, match="olika produktkrav"):
+        standardize(source, VOCABULARY, reviewed_at="2026-10-17")
+
+
+def test_process_water_in_ml_scales_and_dl_is_rejected():
+    source = _source()
+    source["recipes"][0]["steps"][0]["text"] += " Häll 200 ml vatten i plåten."
+    pack, _ = standardize(source, VOCABULARY, reviewed_at="2026-10-17")
+    assert pack["recipes"][0]["design"]["steps"][0]["scalable_amounts"] == [["200 ml", 200.0]] or \
+        pack["recipes"][0]["design"]["steps"][0]["scalable_amounts"] == [("200 ml", 200.0)]
+    source["recipes"][0]["steps"][0]["text"] += " Tillsätt 2 dl vatten."
+    with pytest.raises(ValueError, match="dl/l"):
+        standardize(source, VOCABULARY, reviewed_at="2026-10-17")

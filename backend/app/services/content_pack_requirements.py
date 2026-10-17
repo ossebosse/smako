@@ -8,6 +8,21 @@ import re
 PACK_KEYS = frozenset(["chicken_thigh", "chicken_breast", "cod", "salmon", "pork_mince", "tofu", "white_beans", "black_beans", "chickpeas", "tuna", "red_lentils", "rice", "pasta", "small_pasta", "couscous", "rice_noodles", "egg_noodles", "pita", "tortilla", "gnocchi", "flour", "potato", "carrot", "cabbage", "onion", "red_onion", "garlic", "ginger", "cucumber", "tomato", "pepper", "mushroom", "spinach", "peas", "corn", "broccoli", "cauliflower", "apple", "crushed_tomato", "tomato_paste", "olives", "yogurt", "creme_fraiche", "feta", "cottage_cheese", "hard_cheese", "milk", "egg", "coconut_milk", "lemon_juice", "lime_juice", "oil", "soy_sauce", "mustard", "peanut_butter", "peanuts", "sugar", "oregano", "basil", "dill", "parsley", "cumin", "paprika_powder", "smoked_paprika", "turmeric", "coriander_seed", "chili", "salt", "black_pepper"])
 
 
+def declared_fat_g(fact):
+    """Declared fat per 100 g as sold, or None when it cannot be trusted.
+
+    Owner decision 2026-10-17: a nutrition-only conflict does not stop a
+    product's identity, but its nutrition values are never used, including as a
+    product-class fallback (thick yoghurt, cottage cheese, crème fraîche).
+    """
+    if not fact or fact.nutrition_unit != "g" or fact.nutrition_preparation != "as_sold":
+        return None
+    if any(c in {"nutrition_basis", "supplier_nutrition_conflict"} or c.startswith("nutrition.")
+           for c in fact.conflicts):
+        return None
+    return fact.nutrition.get("fat_g")
+
+
 def compatible(keys, product, fact):
     from app.services.complete_recipes import _supplier_classification
     if not set(keys) <= PACK_KEYS:
@@ -52,7 +67,7 @@ def compatible(keys, product, fact):
         if key in {"cottage_cheese", "creme_fraiche"}:
             match = re.search(r"(\d+(?:[,.]\d+)?)\s*%", text)
             fat = float(match[1].replace(",", ".")) if match else (
-                fact.nutrition.get("fat_g") if fact and fact.nutrition_unit == "g" and fact.nutrition_preparation == "as_sold" else None)
+                declared_fat_g(fact))
             low, high = (1, 4) if key == "cottage_cheese" else (12, 34)
             if fat is None or not low <= fat <= high:
                 return False
