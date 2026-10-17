@@ -22,7 +22,10 @@ ROOT = Path(__file__).parents[2]
 
 def test_deterministic_import_preserves_every_amount_and_own_instruction():
     importer = runpy.run_path(str(ROOT / "scripts/recipe_layer/import_content_pack.py"))
-    issued = [r for r in _registered() if r.design.content_source
+    # The importer reproduces the issued expansion pack; later reviewed
+    # versions of some of its dishes may be current, so read the history.
+    from app.services.recipe_library import _registered_history
+    issued = [r for r in _registered_history() if r.design.content_source
               and r.design.content_source.pack_id == "smako-recipe-expansion-content-20261004-v1"]
     priority = max(r.design.content_source.priority for r in issued)
     assert importer["build"](priority)["recipes"] == [r.model_dump(mode="json") for r in issued]
@@ -45,7 +48,17 @@ def test_deterministic_import_preserves_every_amount_and_own_instruction():
 
 def test_old_104_recipes_unchanged_and_registered():
     old = json.loads(LIBRARY_PATH.read_text(encoding="utf8"))["recipes"]
-    assert [r.model_dump(mode="json") for r in _registered() if r.design.content_source is None] == [Recipe.model_validate(r).model_dump(mode="json") for r in old]
+    # Every issued original stays registered unchanged, also when a reviewed
+    # newer version of the same dish is current.
+    from app.services.recipe_library import _registered_history
+    history = [r.model_dump(mode="json") for r in _registered_history()]
+    assert all(Recipe.model_validate(r).model_dump(mode="json") in history for r in old)
+    current = {(r.design.base_id, r.design.variant_id): r for r in _registered()}
+    for r in map(Recipe.model_validate, old):
+        newest = current[(r.design.base_id, r.design.variant_id)]
+        assert newest.model_dump(mode="json") == r.model_dump(mode="json") or (
+            tuple(map(int, newest.design.version.split("."))) > tuple(map(int, r.design.version.split(".")))
+            and newest.design.content_source is not None)
     assert len(old) == 104
 
 

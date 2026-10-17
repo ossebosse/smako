@@ -1,0 +1,5103 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 25,
+        "base_id": "smako-italian-weekday-meat-sauce",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötfärs|raw_edible",
+                "name": "Nötfärs, rå",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot, rå",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomatpuré|as_sold",
+                "name": "Tomatpuré",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Torkad oregano",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Malen svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Köttfärssås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Spaghetti eller annan lång pasta, torr",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Pasta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Riven lagrad ost",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Topping"
+          }
+        ],
+        "content_sha256": "be7fd13a65d39242a4d50e668918ae841ad9626d26ca0a60efc884ebb16013a7",
+        "content_source": {
+          "active_minutes": 25,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-italian-weekday-meat-sauce",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Stekpanna",
+          "Rivjärn"
+        ],
+        "estimated_minutes": 40,
+        "family": "köttfärssås",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "oregano",
+          "morot"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "nötfärs",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "pasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka löken och vitlöken fint och riv moroten grovt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötfärs|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hetta upp oljan i en stekpanna och bryn färsen i två omgångar så den får färg. Smula sönder den under tiden."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 4,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "oregano|dry",
+              "tomatpuré|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt lök, vitlök och morot och fräs 3 minuter. Rör ner tomatpuré och oregano."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Häll i krossade tomater och 1 dl vatten, smaka av med salt och peppar och låt sjuda under lock cirka 20 minuter. Kontrollera att färsen är genomstekt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s5",
+            "ingredient_keys": [
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan enligt förpackningen under tiden som såsen sjuder."
+          },
+          {
+            "depends_on": [
+              "s4",
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "nötfärs|raw_edible",
+              "ost|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera såsen över pastan och toppa med riven ost."
+          }
+        ],
+        "total_minutes": 40,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötfärs",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "nötfärs",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomatpuré",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "tomatpuré",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "c1",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pasta",
+          "component": "c2",
+          "form": "dry",
+          "name": "pasta",
+          "product_requirements": [
+            "pack:pasta"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Hacka löken och vitlöken fint och riv moroten grovt.",
+        "Hetta upp oljan i en stekpanna och bryn färsen i två omgångar så den får färg. Smula sönder den under tiden.",
+        "Tillsätt lök, vitlök och morot och fräs 3 minuter. Rör ner tomatpuré och oregano.",
+        "Häll i krossade tomater och 1 dl vatten, smaka av med salt och peppar och låt sjuda under lock cirka 20 minuter. Kontrollera att färsen är genomstekt.",
+        "Koka pastan enligt förpackningen under tiden som såsen sjuder.",
+        "Servera såsen över pastan och toppa med riven ost."
+      ],
+      "name": "Köttfärssås med morot, spaghetti och riven ost",
+      "preparation": {
+        "family": "köttfärssås",
+        "input_forms": {
+          "gul lök": "raw_edible",
+          "krossade tomater": "as_sold",
+          "morot": "raw_edible",
+          "nötfärs": "raw_edible",
+          "oregano": "dry",
+          "ost": "as_sold",
+          "pasta": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "svartpeppar": "dry",
+          "tomatpuré": "as_sold",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "be7fd13a65d39242a4d50e668918ae841ad9626d26ca0a60efc884ebb16013a7",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 30,
+        "base_id": "smako-swedish-cabbage-pudding-stew",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskfärs|raw_edible",
+                "name": "Fläskfärs, rå",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål, rå eller strimlad",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Japansk sojasås",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Malen svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Gryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis, rå",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Potatis"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "crème fraiche|as_sold",
+                "name": "Crème fraiche",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "Senap",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "Persilja, färsk eller fryst",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Senapskräm"
+          }
+        ],
+        "content_sha256": "2d7cdbf4fbb4f3a6d08a2459e9d940130da0c001b689cc2ea1e5dec475dcf97f",
+        "content_source": {
+          "active_minutes": 30,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-swedish-cabbage-pudding-stew",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "Stor stekpanna med lock",
+          "Kastrull",
+          "Skål"
+        ],
+        "estimated_minutes": 40,
+        "family": "kålpudding",
+        "fish": false,
+        "flavor_profile": [
+          "kål",
+          "soja",
+          "senap"
+        ],
+        "ingredient_count": 10,
+        "method": "pan",
+        "primary_ingredient": "fläskfärs",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 22,
+            "id": "s1",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala potatisen och koka den i lättsaltat vatten cirka 20 minuter tills den är mjuk."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Strimla kålen fint om den inte redan är strimlad och hacka löken."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bryn färsen i hälften av oljan tills den fått färg och är genomstekt. Lägg upp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "strösocker|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs kål och lök i resten av oljan med sockret cirka 8 minuter tills kålen fått lite färg och mjuknat."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "salt|as_sold",
+              "sojasås|as_sold",
+              "svartpeppar|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Blanda tillbaka färsen, tillsätt sojasås och 1 dl vatten och låt puttra under lock 5 minuter. Smaka av med salt och peppar."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "crème fraiche|as_sold",
+              "fläskfärs|raw_edible",
+              "persilja|raw_edible",
+              "potatis|raw_edible",
+              "senap|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ihop crème fraiche, senap och hackad persilja. Servera grytan med potatis och senapskräm."
+          }
+        ],
+        "total_minutes": 40,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskfärs",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fläskfärs",
+          "product_requirements": [
+            "pack:pork_mince"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "crème fraiche",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "crème fraiche",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala potatisen och koka den i lättsaltat vatten cirka 20 minuter tills den är mjuk.",
+        "Strimla kålen fint om den inte redan är strimlad och hacka löken.",
+        "Bryn färsen i hälften av oljan tills den fått färg och är genomstekt. Lägg upp.",
+        "Fräs kål och lök i resten av oljan med sockret cirka 8 minuter tills kålen fått lite färg och mjuknat.",
+        "Blanda tillbaka färsen, tillsätt sojasås och 1 dl vatten och låt puttra under lock 5 minuter. Smaka av med salt och peppar.",
+        "Rör ihop crème fraiche, senap och hackad persilja. Servera grytan med potatis och senapskräm."
+      ],
+      "name": "Kålpuddinggryta med fläskfärs, kokt potatis och senapskräm",
+      "preparation": {
+        "family": "kålpudding",
+        "input_forms": {
+          "crème fraiche": "as_sold",
+          "fläskfärs": "raw_edible",
+          "gul lök": "raw_edible",
+          "persilja": "raw_edible",
+          "potatis": "raw_edible",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "senap": "as_sold",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "svartpeppar": "dry",
+          "vitkål": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "2d7cdbf4fbb4f3a6d08a2459e9d940130da0c001b689cc2ea1e5dec475dcf97f",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 28,
+        "base_id": "smako-swedish-fish-gratin-mash",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Torsk- eller sejfilé, rå",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Fryst hackad spenat",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "crème fraiche|as_sold",
+                "name": "Crème fraiche",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "Senap",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "Dill, färsk eller fryst",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Riven lagrad ost",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Malen svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Gratäng"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis, rå",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Potatismos"
+          }
+        ],
+        "content_sha256": "2735b5b5229a7533af5bf3fbb6fbc5c8dab2e8a13918b3bd9937fa117773ab6f",
+        "content_source": {
+          "active_minutes": 28,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-swedish-fish-gratin-mash",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "Ugn",
+          "Ugnsform",
+          "Kastrull",
+          "Potatisstöt"
+        ],
+        "estimated_minutes": 40,
+        "family": "fiskgratäng",
+        "fish": true,
+        "flavor_profile": [
+          "dill",
+          "citron",
+          "senap"
+        ],
+        "ingredient_count": 12,
+        "method": "oven",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "potatismos",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 22,
+            "id": "s1",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 200 °C. Skala potatisen, dela den och koka i lättsaltat vatten cirka 20 minuter."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka lök och vitlök och fräs dem mjuka i oljan. Tina spenaten, krama ur vätskan och blanda med löken."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "crème fraiche|as_sold",
+              "dill|raw_edible",
+              "salt|as_sold",
+              "senap|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda crème fraiche, senap, citronjuice, hackad dill, salt och peppar."
+          },
+          {
+            "depends_on": [
+              "s2",
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "crème fraiche|as_sold",
+              "fisk|raw_edible",
+              "ost|as_sold",
+              "spenat|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg fisken i en smord ugnsform, fördela spenaten över och bred på såsen. Strö över osten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "ost|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Gratinera mitt i ugnen cirka 20 minuter tills fisken flagnar och når minst 63 °C i mitten."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll av potatisen, värm mjölken och stöt ett slätt mos. Smaka av med salt. Servera med gratängen."
+          }
+        ],
+        "total_minutes": 40,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fisk",
+          "product_requirements": [
+            "pack:cod"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "plain",
+            "frozen"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "crème fraiche",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "crème fraiche",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "dill",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "side",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 200 °C. Skala potatisen, dela den och koka i lättsaltat vatten cirka 20 minuter.",
+        "Hacka lök och vitlök och fräs dem mjuka i oljan. Tina spenaten, krama ur vätskan och blanda med löken.",
+        "Blanda crème fraiche, senap, citronjuice, hackad dill, salt och peppar.",
+        "Lägg fisken i en smord ugnsform, fördela spenaten över och bred på såsen. Strö över osten.",
+        "Gratinera mitt i ugnen cirka 20 minuter tills fisken flagnar och når minst 63 °C i mitten.",
+        "Häll av potatisen, värm mjölken och stöt ett slätt mos. Smaka av med salt. Servera med gratängen."
+      ],
+      "name": "Fiskgratäng med spenat, dill och potatismos",
+      "preparation": {
+        "family": "fiskgratäng",
+        "input_forms": {
+          "citronjuice": "as_sold",
+          "crème fraiche": "as_sold",
+          "dill": "raw_edible",
+          "fisk": "raw_edible",
+          "gul lök": "raw_edible",
+          "mjölk": "as_sold",
+          "ost": "as_sold",
+          "potatis": "raw_edible",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "senap": "as_sold",
+          "spenat": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "2735b5b5229a7533af5bf3fbb6fbc5c8dab2e8a13918b3bd9937fa117773ab6f",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 15,
+        "base_id": "smako-swedish-lentil-root-soup",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "linser|dry",
+                "name": "Röda linser, torra",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot, rå",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis, rå",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Malen spiskummin",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver, milt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Soppa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Grekisk yoghurt, naturell",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "Persilja, färsk eller fryst",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Örtyoghurt"
+          }
+        ],
+        "content_sha256": "6c13973cb24d2846b4a7f515b7e77cc9e26eff23e0b6b51b8103e9bc7fc37c4a",
+        "content_source": {
+          "active_minutes": 15,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-swedish-lentil-root-soup",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Stavmixer",
+          "Skål"
+        ],
+        "estimated_minutes": 36,
+        "family": "soppa",
+        "fish": false,
+        "flavor_profile": [
+          "spiskummin",
+          "tomat",
+          "citron"
+        ],
+        "ingredient_count": 12,
+        "method": "pot",
+        "primary_ingredient": "linser",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "linser|dry",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka lök och vitlök. Skala och tärna morot och potatis. Skölj linserna."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs lök, vitlök, spiskummin och paprikapulver i oljan 2 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 20,
+            "id": "s3",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "linser|dry",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt linser, morot, potatis, krossade tomater, salt och 7 dl vatten. Koka under lock cirka 20 minuter tills allt är mjukt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "citronjuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mixa soppan grovt och smaka av med citronjuice."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "persilja|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ihop yoghurt och hackad persilja och servera ovanpå soppan."
+          }
+        ],
+        "total_minutes": 36,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "linser",
+          "component": "c1",
+          "form": "dry",
+          "name": "linser",
+          "product_requirements": [
+            "red_split"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "c1",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "c1",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Hacka lök och vitlök. Skala och tärna morot och potatis. Skölj linserna.",
+        "Fräs lök, vitlök, spiskummin och paprikapulver i oljan 2 minuter.",
+        "Tillsätt linser, morot, potatis, krossade tomater, salt och 7 dl vatten. Koka under lock cirka 20 minuter tills allt är mjukt.",
+        "Mixa soppan grovt och smaka av med citronjuice.",
+        "Rör ihop yoghurt och hackad persilja och servera ovanpå soppan."
+      ],
+      "name": "Matig linssoppa med morot, potatis och örtyoghurt",
+      "preparation": {
+        "family": "soppa",
+        "input_forms": {
+          "citronjuice": "as_sold",
+          "gul lök": "raw_edible",
+          "krossade tomater": "as_sold",
+          "linser": "dry",
+          "morot": "raw_edible",
+          "paprikapulver": "dry",
+          "persilja": "raw_edible",
+          "potatis": "raw_edible",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "spiskummin": "dry",
+          "vitlök": "raw_edible",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "6c13973cb24d2846b4a7f515b7e77cc9e26eff23e0b6b51b8103e9bc7fc37c4a",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 25,
+        "base_id": "smako-swedish-chicken-mushroom-stew",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kycklinglårfilé, rå",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "champinjoner|raw_edible",
+                "name": "Champinjoner, färska",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Fryst hackad spenat",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "crème fraiche|as_sold",
+                "name": "Crème fraiche",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver, milt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Japansk sojasås",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Malen svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Gryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Långkornigt vitt ris, torrt",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris"
+          }
+        ],
+        "content_sha256": "973db2b93d8f291c232d0691b68dbb63738b7d83fc785dd6901a7fad2c305ffc",
+        "content_source": {
+          "active_minutes": 25,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-swedish-chicken-mushroom-stew",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "Stor stekpanna",
+          "Kastrull"
+        ],
+        "estimated_minutes": 32,
+        "family": "gryta",
+        "fish": false,
+        "flavor_profile": [
+          "champinjon",
+          "paprika",
+          "grädde"
+        ],
+        "ingredient_count": 10,
+        "method": "pan",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "champinjoner|raw_edible",
+              "gul lök|raw_edible",
+              "kyckling|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skiva champinjonerna, hacka lök och vitlök och skär kycklingen i bitar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Stek kycklingen i hälften av oljan tills den fått färg runt om. Lägg upp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "champinjoner|raw_edible",
+              "gul lök|raw_edible",
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Stek champinjoner, lök och vitlök i resten av oljan tills vätskan kokat in. Strö över paprikapulver."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 8,
+            "id": "s5",
+            "ingredient_keys": [
+              "crème fraiche|as_sold",
+              "kyckling|raw_edible",
+              "salt|as_sold",
+              "sojasås|as_sold",
+              "spenat|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt kycklingen, spenat, crème fraiche, sojasås och 1 dl vatten. Sjud 8 minuter tills kycklingen når minst 74 °C i tjockaste delen. Smaka av med salt och peppar."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera grytan med riset."
+          }
+        ],
+        "total_minutes": 32,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "product_requirements": [
+            "pack:chicken_thigh"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "champinjoner",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "champinjoner",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "plain",
+            "frozen"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "crème fraiche",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "crème fraiche",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "c1",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "pack:rice",
+            "white_rice"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen.",
+        "Skiva champinjonerna, hacka lök och vitlök och skär kycklingen i bitar.",
+        "Stek kycklingen i hälften av oljan tills den fått färg runt om. Lägg upp.",
+        "Stek champinjoner, lök och vitlök i resten av oljan tills vätskan kokat in. Strö över paprikapulver.",
+        "Tillsätt kycklingen, spenat, crème fraiche, sojasås och 1 dl vatten. Sjud 8 minuter tills kycklingen når minst 74 °C i tjockaste delen. Smaka av med salt och peppar.",
+        "Servera grytan med riset."
+      ],
+      "name": "Krämig kycklinggryta med champinjoner, spenat och ris",
+      "preparation": {
+        "family": "gryta",
+        "input_forms": {
+          "champinjoner": "raw_edible",
+          "crème fraiche": "as_sold",
+          "gul lök": "raw_edible",
+          "kyckling": "raw_edible",
+          "paprikapulver": "dry",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salt": "as_sold",
+          "sojasås": "as_sold",
+          "spenat": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "973db2b93d8f291c232d0691b68dbb63738b7d83fc785dd6901a7fad2c305ffc",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-swedish-salmon-spinach-pasta",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lax|raw_edible",
+                "name": "Laxfilé, rå",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Fryst hackad spenat",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "crème fraiche|as_sold",
+                "name": "Crème fraiche",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "Dill, färsk eller fryst",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Malen svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Laxsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta, torr",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Pasta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Riven lagrad ost",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Topping"
+          }
+        ],
+        "content_sha256": "0285104f5f6400837db352f41bf2e1e2fe37c82584ed05940e7df590404e9a66",
+        "content_source": {
+          "active_minutes": 20,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-swedish-salmon-spinach-pasta",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Stekpanna med lock",
+          "Rivjärn"
+        ],
+        "estimated_minutes": 22,
+        "family": "pasta",
+        "fish": true,
+        "flavor_profile": [
+          "dill",
+          "citron",
+          "spenat"
+        ],
+        "ingredient_count": 10,
+        "method": "pan",
+        "primary_ingredient": "lax",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "pasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s1",
+            "ingredient_keys": [
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "gul lök|raw_edible",
+              "lax|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka lök, vitlök och dill. Skär laxen i bitar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "crème fraiche|as_sold",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs lök och vitlök i oljan 2 minuter. Tillsätt spenat och crème fraiche och låt sjuda tills spenaten tinat."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "dill|raw_edible",
+              "lax|raw_edible",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg i laxbitarna och sjud under lock 5 minuter tills laxen precis är genomkokt, minst 63 °C. Smaka av med citronjuice, dill, salt och peppar."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "lax|raw_edible",
+              "ost|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner den avrunna pastan i såsen och toppa med riven ost."
+          }
+        ],
+        "total_minutes": 22,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lax",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "lax",
+          "product_requirements": [
+            "pack:salmon"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "plain",
+            "frozen"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "crème fraiche",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "crème fraiche",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "dill",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pasta",
+          "component": "c2",
+          "form": "dry",
+          "name": "pasta",
+          "product_requirements": [
+            "pack:pasta"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka pastan enligt förpackningen.",
+        "Hacka lök, vitlök och dill. Skär laxen i bitar.",
+        "Fräs lök och vitlök i oljan 2 minuter. Tillsätt spenat och crème fraiche och låt sjuda tills spenaten tinat.",
+        "Lägg i laxbitarna och sjud under lock 5 minuter tills laxen precis är genomkokt, minst 63 °C. Smaka av med citronjuice, dill, salt och peppar.",
+        "Vänd ner den avrunna pastan i såsen och toppa med riven ost."
+      ],
+      "name": "Laxpasta med spenat, citron och dill",
+      "preparation": {
+        "family": "pasta",
+        "input_forms": {
+          "citronjuice": "as_sold",
+          "crème fraiche": "as_sold",
+          "dill": "raw_edible",
+          "gul lök": "raw_edible",
+          "lax": "raw_edible",
+          "ost": "as_sold",
+          "pasta": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "spenat": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "0285104f5f6400837db352f41bf2e1e2fe37c82584ed05940e7df590404e9a66",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 2
+    },
+    {
+      "design": {
+        "active_minutes": 11,
+        "base_id": "smako-mexican-breakfast-bean-burrito",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tortillas|as_sold",
+                "name": "Vetetortilla",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "Svarta bönor, kokta och avrunna",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Malen spiskummin",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver, milt",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Riven lagrad ost",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Burrito"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök, rå",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Salsa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Grekisk yoghurt, naturell",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Topping"
+          }
+        ],
+        "content_sha256": "988c934eeb7d34bbd43a9006b464fc01806dc2beb4349c6f9a9e15995d202b62",
+        "content_source": {
+          "active_minutes": 11,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-mexican-breakfast-bean-burrito",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "dinner_level": "simple",
+        "equipment": [
+          "Stekpanna",
+          "Skål"
+        ],
+        "estimated_minutes": 11,
+        "family": "burrito",
+        "fish": false,
+        "flavor_profile": [
+          "spiskummin",
+          "tomat",
+          "citron"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "svarta bönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "tortilla",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "rödlök|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka tomat och rödlök fint och blanda med citronjuice."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "text": "Värm bönorna i oljan med spiskummin, paprikapulver och salt och mosa dem lätt."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "ost|as_sold",
+              "svarta bönor|cooked_drained",
+              "tomat|raw_edible",
+              "tortillas|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm tortillan i torr panna, fyll med bönor, ost och salsa, rulla ihop och servera med yoghurt."
+          }
+        ],
+        "total_minutes": 11,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tortillas",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "tortillas",
+          "product_requirements": [
+            "pack:tortilla"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svarta bönor",
+          "component": "c1",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "product_requirements": [
+            "pack:black_beans"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "c1",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "c1",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Hacka tomat och rödlök fint och blanda med citronjuice.",
+        "Värm bönorna i oljan med spiskummin, paprikapulver och salt och mosa dem lätt.",
+        "Värm tortillan i torr panna, fyll med bönor, ost och salsa, rulla ihop och servera med yoghurt."
+      ],
+      "name": "Frukostburrito med svarta bönor, ost och tomatsalsa",
+      "preparation": {
+        "family": "burrito",
+        "input_forms": {
+          "citronjuice": "as_sold",
+          "ost": "as_sold",
+          "paprikapulver": "dry",
+          "rapsolja": "as_sold",
+          "rödlök": "raw_edible",
+          "salt": "as_sold",
+          "spiskummin": "dry",
+          "svarta bönor": "cooked_drained",
+          "tomat": "raw_edible",
+          "tortillas": "as_sold",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "988c934eeb7d34bbd43a9006b464fc01806dc2beb4349c6f9a9e15995d202b62",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 11,
+        "base_id": "smako-greek-breakfast-chickpea-tomato-pan",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "Kikärtor, kokta och avrunna",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Malen spiskummin",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver, milt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Fryst hackad spenat",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Panna"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Grekisk yoghurt, naturell",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Matbröd",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Servering"
+          }
+        ],
+        "content_sha256": "d97c265bb260f9757bd524733ef0558fe37107989c9c1e869be7731e96f71b99",
+        "content_source": {
+          "active_minutes": 11,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-greek-breakfast-chickpea-tomato-pan",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "Liten stekpanna"
+        ],
+        "estimated_minutes": 11,
+        "family": "frukostpanna",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "spiskummin",
+          "paprika"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka löken och vitlöken. Fräs dem i oljan med spiskummin och paprikapulver 3 minuter."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "krossade tomater|as_sold",
+              "salt|as_sold",
+              "spenat|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt krossade tomater, kikärtor, spenat och salt. Sjud 6 minuter tills det tjocknat."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Toppa med yoghurt och servera med brödet."
+          }
+        ],
+        "total_minutes": 11,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "krossade tomater",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kikärtor",
+          "component": "c1",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "product_requirements": [
+            "pack:chickpeas"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "c1",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "c1",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "plain",
+            "frozen"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Hacka löken och vitlöken. Fräs dem i oljan med spiskummin och paprikapulver 3 minuter.",
+        "Tillsätt krossade tomater, kikärtor, spenat och salt. Sjud 6 minuter tills det tjocknat.",
+        "Toppa med yoghurt och servera med brödet."
+      ],
+      "name": "Varm frukostpanna med kikärtor, tomat, spenat och yoghurt",
+      "preparation": {
+        "family": "frukostpanna",
+        "input_forms": {
+          "bröd": "as_sold",
+          "gul lök": "raw_edible",
+          "kikärtor": "cooked_drained",
+          "krossade tomater": "as_sold",
+          "paprikapulver": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "spenat": "as_sold",
+          "spiskummin": "dry",
+          "vitlök": "raw_edible",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "d97c265bb260f9757bd524733ef0558fe37107989c9c1e869be7731e96f71b99",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 10,
+        "base_id": "smako-swedish-breakfast-tofu-scramble-greens",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "Tofu, naturell fast",
+                "note": "",
+                "quantity": 125.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Malen gurkmeja",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Fryst hackad spenat",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök, rå",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver, milt",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Malen svartpeppar",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Japansk sojasås",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Röra"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Matbröd",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "06c77c745dfc6b804ee4baf97f070c034a9b9632a95ee92a66b848f489e8e61a",
+        "content_source": {
+          "active_minutes": 10,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-swedish-breakfast-tofu-scramble-greens",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "dinner_level": "simple",
+        "equipment": [
+          "Stekpanna",
+          "Brödrost eller ugn"
+        ],
+        "estimated_minutes": 10,
+        "family": "tofuröra",
+        "fish": false,
+        "flavor_profile": [
+          "gurkmeja",
+          "soja",
+          "tomat"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "tofu|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka löken och vitlöken och tärna tomaten. Smula tofun med en gaffel."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "gurkmeja|dry",
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "spenat|as_sold",
+              "tofu|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs lök och vitlök i oljan 2 minuter. Tillsätt tofu, gurkmeja, paprikapulver och spenat och stek 4 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "sojasås|as_sold",
+              "svartpeppar|dry",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner tomaten, smaka av med sojasås, salt och peppar."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta brödet och servera med röran."
+          }
+        ],
+        "total_minutes": 10,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tofu",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "plain",
+            "firm"
+          ],
+          "quantity": 125.0,
+          "quantity_max": 125.0,
+          "quantity_min": 125.0,
+          "quantity_step": 125.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "c1",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "plain",
+            "frozen"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "c1",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Hacka löken och vitlöken och tärna tomaten. Smula tofun med en gaffel.",
+        "Fräs lök och vitlök i oljan 2 minuter. Tillsätt tofu, gurkmeja, paprikapulver och spenat och stek 4 minuter.",
+        "Vänd ner tomaten, smaka av med sojasås, salt och peppar.",
+        "Rosta brödet och servera med röran."
+      ],
+      "name": "Tofuröra med spenat, tomat och rostat bröd",
+      "preparation": {
+        "family": "tofuröra",
+        "input_forms": {
+          "bröd": "as_sold",
+          "gul lök": "raw_edible",
+          "gurkmeja": "dry",
+          "paprikapulver": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "sojasås": "as_sold",
+          "spenat": "as_sold",
+          "svartpeppar": "dry",
+          "tofu": "as_sold",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "06c77c745dfc6b804ee4baf97f070c034a9b9632a95ee92a66b848f489e8e61a",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 9,
+        "base_id": "smako-swedish-breakfast-baked-apple-oats",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "havregryn|dry",
+                "name": "Havregryn",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "Äpple, rått",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Malen kanel",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "jordnötssmör|as_sold",
+                "name": "Jordnötssmör, naturellt",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Havre"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "jordnötter|as_sold",
+                "name": "Rostade jordnötter",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kvarg|as_sold",
+                "name": "Kvarg, naturell",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Topping"
+          }
+        ],
+        "content_sha256": "e269bd5f8afcf66670dfd04b394c4845e0080b37ef2400fa1f50bae38fbfc9ea",
+        "content_source": {
+          "active_minutes": 9,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-swedish-breakfast-baked-apple-oats",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "Ugn",
+          "Liten ugnsform",
+          "Skål"
+        ],
+        "estimated_minutes": 29,
+        "family": "ugnsgröt",
+        "fish": false,
+        "flavor_profile": [
+          "kanel",
+          "äpple",
+          "jordnöt"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "oven",
+        "primary_ingredient": "havregryn",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "kvarg",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 200 °C och pensla formen med oljan. Tärna äpplet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "havregryn|dry",
+              "jordnötssmör|as_sold",
+              "kanel|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Blanda havregryn, mjölk, kanel, socker, salt och jordnötssmör. Vänd ner äpplet och häll i formen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 20,
+            "id": "s3",
+            "ingredient_keys": [
+              "havregryn|dry",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 20 minuter tills ytan fått färg."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "jordnötter|as_sold",
+              "kvarg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Toppa med kvarg och hackade jordnötter."
+          }
+        ],
+        "total_minutes": 29,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "havregryn",
+          "component": "c1",
+          "form": "dry",
+          "name": "havregryn",
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "side",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "c1",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jordnötssmör",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "jordnötssmör",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "jordnötter",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "jordnötter",
+          "product_requirements": [
+            "pack:peanuts"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kvarg",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "kvarg",
+          "product_requirements": [
+            "plain"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 200 °C och pensla formen med oljan. Tärna äpplet.",
+        "Blanda havregryn, mjölk, kanel, socker, salt och jordnötssmör. Vänd ner äpplet och häll i formen.",
+        "Baka cirka 20 minuter tills ytan fått färg.",
+        "Toppa med kvarg och hackade jordnötter."
+      ],
+      "name": "Ugnsbakad äppelhavre med kanel, jordnötter och kvarg",
+      "preparation": {
+        "family": "ugnsgröt",
+        "input_forms": {
+          "havregryn": "dry",
+          "jordnötssmör": "as_sold",
+          "jordnötter": "as_sold",
+          "kanel": "dry",
+          "kvarg": "as_sold",
+          "mjölk": "as_sold",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "strösocker": "dry",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "e269bd5f8afcf66670dfd04b394c4845e0080b37ef2400fa1f50bae38fbfc9ea",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 10,
+        "base_id": "smako-greek-snack-hummus-crudites",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "Kikärtor, kokta och avrunna",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Malen spiskummin",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver, milt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "Persilja, färsk eller fryst",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sesamfrön|as_sold",
+                "name": "Sesamfrön",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Hummus"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Grönsaksstavar"
+          }
+        ],
+        "content_sha256": "ad4334b2fd40a7cbe4a3dd423336a45ad562d99c86f4af3044d28aaff638e40f",
+        "content_source": {
+          "active_minutes": 10,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-greek-snack-hummus-crudites",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "dinner_level": "simple",
+        "equipment": [
+          "Stavmixer",
+          "Skål"
+        ],
+        "estimated_minutes": 10,
+        "family": "dipp",
+        "fish": false,
+        "flavor_profile": [
+          "citron",
+          "spiskummin",
+          "vitlök"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "kikärtor|cooked_drained",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "sesamfrön|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta sesamfröna i torr panna tills de doftar. Mixa kikärtor, hälften av sesamfröna, citronjuice, vitlök, spiskummin, olja, salt och 2 msk vatten till en slät hummus."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1,
+            "id": "s2",
+            "ingredient_keys": [
+              "paprikapulver|dry",
+              "persilja|raw_edible",
+              "sesamfrön|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Strö över paprikapulver, hackad persilja och resten av sesamfröna."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "morot|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär morot och gurka i stavar och servera med hummusen."
+          }
+        ],
+        "total_minutes": 10,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "c1",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "product_requirements": [
+            "pack:chickpeas"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "c1",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "c1",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sesamfrön",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sesamfrön",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Rosta sesamfröna i torr panna tills de doftar. Mixa kikärtor, hälften av sesamfröna, citronjuice, vitlök, spiskummin, olja, salt och 2 msk vatten till en slät hummus.",
+        "Strö över paprikapulver, hackad persilja och resten av sesamfröna.",
+        "Skär morot och gurka i stavar och servera med hummusen."
+      ],
+      "name": "Hemgjord hummus med morots- och gurkstavar",
+      "preparation": {
+        "family": "dipp",
+        "input_forms": {
+          "citronjuice": "as_sold",
+          "gurka": "raw_edible",
+          "kikärtor": "cooked_drained",
+          "morot": "raw_edible",
+          "paprikapulver": "dry",
+          "persilja": "raw_edible",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "sesamfrön": "as_sold",
+          "spiskummin": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "ad4334b2fd40a7cbe4a3dd423336a45ad562d99c86f4af3044d28aaff638e40f",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 5,
+        "base_id": "smako-indian-snack-roasted-spiced-chickpeas",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "Kikärtor, kokta och avrunna",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver, milt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Malen spiskummin",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Kikärtor"
+          }
+        ],
+        "content_sha256": "94bd70321726fca05d322919011d9ac5ca14fa2484a9a1c93a14512a1d234605",
+        "content_source": {
+          "active_minutes": 5,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-indian-snack-roasted-spiced-chickpeas",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "dinner_level": "simple",
+        "equipment": [
+          "Ugn",
+          "Plåt"
+        ],
+        "estimated_minutes": 28,
+        "family": "rostade baljväxter",
+        "fish": false,
+        "flavor_profile": [
+          "spiskummin",
+          "paprika"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "oven",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "ingen",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 220 °C. Torka kikärtorna torra med hushållspapper."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "spiskummin|dry"
+            ],
+            "parallel_group": null,
+            "text": "Vänd kikärtorna i olja, paprikapulver, spiskummin och salt och rosta på plåt 25 minuter tills de är krispiga. Skaka plåten efter halva tiden."
+          }
+        ],
+        "total_minutes": 28,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "c1",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "product_requirements": [
+            "pack:chickpeas"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "c1",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "c1",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 220 °C. Torka kikärtorna torra med hushållspapper.",
+        "Vänd kikärtorna i olja, paprikapulver, spiskummin och salt och rosta på plåt 25 minuter tills de är krispiga. Skaka plåten efter halva tiden."
+      ],
+      "name": "Ugnsrostade kryddiga kikärtor",
+      "preparation": {
+        "family": "rostade baljväxter",
+        "input_forms": {
+          "kikärtor": "cooked_drained",
+          "paprikapulver": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "spiskummin": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "94bd70321726fca05d322919011d9ac5ca14fa2484a9a1c93a14512a1d234605",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 10,
+        "base_id": "smako-greek-snack-tzatziki-toast",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Grekisk yoghurt, naturell",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka, rå",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök, rå",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "Dill, färsk eller fryst",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Tzatziki"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Matbröd",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Brödbitar"
+          }
+        ],
+        "content_sha256": "9135177a25c49b247286a73ecff3698cb90ad5c63782912c04ba8c434a9a60a8",
+        "content_source": {
+          "active_minutes": 10,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-new-recipes-20261017",
+          "priority": 1,
+          "proposal_id": "smako-greek-snack-tzatziki-toast",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "2a3492d31e6ff65a62743ac27243a03b59cbe7d60724ac31d5dc0e946352362d",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "dinner_level": "simple",
+        "equipment": [
+          "Rivjärn",
+          "Skål",
+          "Stekpanna"
+        ],
+        "estimated_minutes": 10,
+        "family": "dipp",
+        "fish": false,
+        "flavor_profile": [
+          "gurka",
+          "dill",
+          "vitlök"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "yoghurt",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat med modellstöd och granskat mot Smakos receptregler. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-10-17"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Riv gurkan grovt, salta lätt och krama ur vätskan efter 2 minuter."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 2,
+            "id": "s2",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "dill|raw_edible",
+              "gurka|raw_edible",
+              "vitlök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Blanda gurkan med yoghurt, riven vitlök, hackad dill och citronjuice."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s3",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet i bitar och rosta dem i oljan i en panna tills de är krispiga. Servera med tzatzikin."
+          }
+        ],
+        "total_minutes": 10,
+        "variant_id": "base",
+        "vegetarian": true,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "dill",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Riv gurkan grovt, salta lätt och krama ur vätskan efter 2 minuter.",
+        "Blanda gurkan med yoghurt, riven vitlök, hackad dill och citronjuice.",
+        "Skär brödet i bitar och rosta dem i oljan i en panna tills de är krispiga. Servera med tzatzikin."
+      ],
+      "name": "Tzatziki med rostade brödbitar",
+      "preparation": {
+        "family": "dipp",
+        "input_forms": {
+          "bröd": "as_sold",
+          "citronjuice": "as_sold",
+          "dill": "raw_edible",
+          "gurka": "raw_edible",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "vitlök": "raw_edible",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "9135177a25c49b247286a73ecff3698cb90ad5c63782912c04ba8c434a9a60a8",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    }
+  ]
+}

@@ -1,3 +1,53 @@
+# 2026-10-17: Recepträttelser och 13 nya recept – ej aktiverat
+
+Gren `perf/planner-startup-and-semantics`. **Ingen aktivering på betan.**
+Källor, författarskript och kvalificeringsresultat: `reports/recipe-packs-20261017/`.
+Mätt mot granskningspaketets frysta Lund-artefakt, exakt inköpsläge, 2 butiker.
+
+1. **Regler.** Kryddpåsar på skafferihyllan ("Paprika Påse", Santa Maria)
+   godkändes som 180 g färsk paprika; nu krävs färskvarubevis för råvara i
+   skafferikategori. Etiketterna "Paprika Rökt", "Rökt Paprika" och "Paprika
+   Smoked" godkänns för `rökt paprikapulver` (sammansättningskontrollen kvar).
+2. **Rättelsepaket `blocked-recipe-fixes-20261017`**: 16 nya versioner (x.1.0)
+   via `validate` → `import`. Chiliflakes utan krav på mild/medium (0,3 g; ingen
+   sådan märkning i sortimentet), majs som fryst naturell i stället för konserv,
+   äldre poster fick härledda komponentmängder och aktiv/total tid (aktiv tid =
+   tidigare enda uppskattning, övre gräns), nudelsalladens kycklingvariant metod
+   `pan` (kycklingen steks med kärntemperaturkontroll). 6 av 16 kvalificerar;
+   övriga stoppas av färsk paprika som viktvara eller basilika/limejuice i olika
+   butiker. Kapris lämnades orörd: bibliotekets regel kräver avrunnen vikt.
+3. **Nytt paket `smako-new-recipes-20261017`**: 6 middagar (köttfärssås,
+   kålpuddinggryta, fiskgratäng, linssoppa, kycklinggryta, laxpasta), 4 frukostar
+   och 3 mellanmål. Alla 13 kvalificerar ensamma. 11 har minst 10 ingredienser
+   enligt `ingredient_count` (salt m.m. undantagna). Ej provlagade.
+4. **Tester som låste originalbiblioteket** räknar nu även en granskad nyare
+   version av samma rätt (samma bas/variant, högre version) som giltig; att
+   varje utfärdat original finns kvar oförändrat i historiken kontrolleras.
+
+Standardprofil 5×4/2 butiker: avvisade middagar 41 → 49 av 158 → 164
+(16 paprikarätter kvalificerade tidigare bara via kryddpåsen), kvalificerade
+117 → 115, veckopris 638,47 → 600,15 kr (685,85 kr före strimlad-rättelsen).
+Frukost/mellanmål kvalificerar i veckoplan men väljs sällan på pris: fyra nya
+frukostar × 2 portioner kostade 515,67 kr eftersom hela förpackningar köps.
+Recept- och semantiktester (28 filer) och planerartester (43 filer): samma
+kända fel före och efter.
+
+## Granskning (Codex)
+
+1. Läs varje nytt recept i `new-20261017.json` som kock: mängder per portion,
+   ordning, temperaturer (kyckling 74 °C, fisk 63 °C), att alla ingredienser
+   används och att texten stämmer med `form`.
+2. Granska rättelserna med `diff` mot föregående version; endast de beskrivna
+   fälten får ha ändrats.
+3. Kör `qualify.py` (eller `meal_library_cli qualify`) mot aktiv Lund- och
+   Malmöartefakt och jämför med `qualification-*.txt`.
+4. Bekräfta att inget recept längre köper en kryddpåse som grönsak: sök i
+   planer efter `paprika` med kategori Skafferi/Kryddor.
+5. Bedöm om färsk paprika i styck (`Paprika 3-pack`) ska få en granskad
+   styck→gram-referens; det skulle återställa cirka 20 middagar.
+
+---
+
 # 2026-10-16: Planerartid, faktauppvärmning och färdigrättsmatchning – ej aktiverat
 
 Gren `perf/planner-startup-and-semantics`, bas `46d834b`. **Ingen aktivering på betan.**

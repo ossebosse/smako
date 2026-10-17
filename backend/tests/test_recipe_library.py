@@ -12,8 +12,16 @@ from pydantic import ValidationError
 
 
 def prior_candidates(*args, **kwargs):
-    """Assertions specific to issued 1.x cooking design, retained unchanged."""
-    return library.candidates(*args, **kwargs, include_supplement=False)
+    """Assertions specific to the issued 1.x dishes and their later versions.
+
+    A dish of the original library may be superseded by a reviewed newer
+    version from a content pack (same base and variant, higher version); the
+    issued original stays in the history and is checked separately.
+    """
+    originals = {(r["design"]["base_id"], r["design"]["variant_id"])
+                 for r in json.loads(library.LIBRARY_PATH.read_text(encoding="utf8"))["recipes"]}
+    return [r for r in library.candidates(*args, **kwargs)
+            if (r.design.base_id, r.design.variant_id) in originals]
 
 
 def complete(**kwargs):
