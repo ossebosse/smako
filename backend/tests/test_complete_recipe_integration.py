@@ -469,3 +469,15 @@ async def test_job_progress_and_successful_retry_reuse():
     assert second is not first and len(calls) == 2
     assert jobs.get(first.job_id, "other") is None
     await jobs.close()
+
+
+def test_only_identity_conflicts_stop_a_product_form_match():
+    from types import SimpleNamespace
+
+    from app.services.complete_recipes import identity_conflicts
+
+    assert identity_conflicts(SimpleNamespace(conflicts=("nutrition_basis",))) == []
+    assert identity_conflicts(SimpleNamespace(conflicts=("nutrition.energy", "nutrition.kcal"))) == []
+    assert identity_conflicts(SimpleNamespace(conflicts=("supplier_nutrition_conflict",))) == []
+    assert identity_conflicts(SimpleNamespace(conflicts=("organic", "nutrition_basis"))) == ["organic"]
+    assert identity_conflicts(SimpleNamespace(conflicts=("ingredients",))) == ["ingredients"]

@@ -121,7 +121,13 @@ def test_fact_proofs_remain_bound_and_nutrition_conflicts_are_not_erased():
     assert projected.usable_unit == 'g'
     assert project_usable_quantity(product.model_copy(update={'store_id': 'other'}), fact).usable_unit == 'ml'
     recipe = next(r for r in candidates(RecipePreferences(mode='complete'), 2) if r.name == row['recipe'])
-    assert not product_form_compatible(recipe, row['ingredient'], projected, fact)
+    # A nutrition disagreement keeps the product purchasable for its identity
+    # and quantity, but its nutrition is never used or replaced by an estimate.
+    from app.services.nutrition_reference import product_reference
+    assert product_form_compatible(recipe, row['ingredient'], projected, fact)
+    assert product_reference(projected, row['ingredient'], fact) is None
+    assert not product_form_compatible(recipe, row['ingredient'], projected,
+                                       replace(fact, conflicts=(*fact.conflicts, 'ingredients')))
 
 
 @pytest.mark.parametrize('name,accepted', [('Salt med Jod', True), ('Salt utan jod', True),

@@ -192,6 +192,21 @@ def completed_search_outcome(diagnostics):
     }
 
 
+NUTRITION_ONLY_CONFLICTS = frozenset({"nutrition_basis", "supplier_nutrition_conflict"})
+
+
+def identity_conflicts(fact):
+    """Fact conflicts that make the product's identity or composition unsafe.
+
+    Disagreeing nutrition declarations do not change what a product is or how
+    much it weighs; nutrition consumers still treat such facts as missing
+    nutrition (``nutrition_reference``, ``recipe_ingredient_references`` and the
+    planner's nutrition qualification all keep rejecting any conflict).
+    """
+    return [c for c in fact.conflicts
+            if c not in NUTRITION_ONLY_CONFLICTS and not c.startswith("nutrition.")]
+
+
 def product_form_compatible(recipe, name, product, fact):
     """Apply raw/dry/drained boundaries even without a nutrition target.
 
@@ -208,7 +223,7 @@ def product_form_compatible(recipe, name, product, fact):
         return False
     text = product.name.casefold()
     composition = " ".join(fact.ingredients).casefold() if fact else ""
-    if fact and fact.conflicts:
+    if fact and identity_conflicts(fact):
         return False
     ingredient = next((i for i in getattr(recipe, "ingredients", ()) if canonicalize_ingredient_name(i.name) == canonical), None)
     requirements = getattr(ingredient, "product_requirements", None) or ()
