@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Iterable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass, field
+from dataclasses import replace as dataclass_replace
 from decimal import Decimal, getcontext
 from itertools import combinations
 from threading import RLock
@@ -353,6 +355,16 @@ def _sum_quotes(quotes: Iterable[BasketItemQuote]) -> Decimal:
     return money(sum((quote.total_price for quote in quotes), Decimal(0)))
 
 
+_QUOTE_LINE_SUFFIX = re.compile(r" \[\d+\]$")
+
+
+def _named_quote(quote, ingredient):
+    """A reused quote carries the current purchase line's name; nothing else differs."""
+    if quote.ingredient == ingredient.canonical_name:
+        return quote
+    return dataclass_replace(quote, ingredient=ingredient.canonical_name)
+
+
 class BasketOptimizer:
     """Choose products by actual package cost, never theoretical unit cost."""
 
@@ -634,7 +646,9 @@ class BasketOptimizer:
             # reusing its id for a different candidate.
             session.candidate_fingerprints[candidate_id] = (candidate, fingerprint)
         return (
-            ingredient.canonical_name,
+            # Weekly purchase lines are named "<ingredient> [<line no>]"; the
+            # line number depends on menu composition but never on the quote.
+            _QUOTE_LINE_SUFFIX.sub("", ingredient.canonical_name),
             Decimal(str(required_quantity)).normalize(),
             required_unit,
             fingerprint,
@@ -673,7 +687,7 @@ class BasketOptimizer:
         cached = session.quotes.get(key)
         if cached is not None:
             session.stats.hits += 1
-            return cached
+            return _named_quote(cached, ingredient)
 
         session.stats.misses += 1
         if session.price_universe is not None and session.persistent_cache is not None:
@@ -688,7 +702,8 @@ class BasketOptimizer:
         else:
             quote = self._calculate_quote_uncached(ingredient, candidate)
         session.quotes[key] = quote
-        return quote
+        # The persistent cache is keyed without the purchase-line name.
+        return _named_quote(quote, ingredient)
 
     def _calculate_quote_uncached(
         self,
