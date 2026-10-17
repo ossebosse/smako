@@ -2858,7 +2858,7 @@ class PersonalPlanner:
                 self._week_purchase_key(result["basket"]), score(chosen, result))
             library_kwargs["joint_proposals"] = lambda groups, anchor: qualified_joint_proposals(
                 groups, anchor, self.variant_search_evidence)
-            def select_seed_options(groups):
+            def select_seed_options(groups, *, refinement=False):
                 from app.services.stable_candidate_pool import library_variant_shortlist
                 selected, by_meal = [], {}
                 for group in groups:
@@ -2867,11 +2867,12 @@ class PersonalPlanner:
                         recipes = [s.recipe for s in group if s.recipe]
                         evidence = {self._recipe_id(r): self.variant_search_evidence[(meal_type, self._recipe_id(r))]
                                     for r in recipes if (meal_type, self._recipe_id(r)) in self.variant_search_evidence}
-                        shortlisted = library_variant_shortlist(recipes, evidence)
+                        shortlisted = recipes if refinement else library_variant_shortlist(recipes, evidence)
                         # Seed beam options per meal type (0 disables). The whole
-                        # qualified pool is still used by the fallback retry and
-                        # by every refinement phase.
-                        seed_limit = getattr(self.settings, "library_seed_pool_limit", 40)
+                        # qualified pool is still used by the fallback retry and,
+                        # unless library_refinement_pool_limit is set, refinement.
+                        seed_limit = (getattr(self.settings, "library_refinement_pool_limit", 90) if refinement
+                                      else getattr(self.settings, "library_seed_pool_limit", 40))
                         if seed_limit:
                             from app.services.stable_candidate_pool import library_seed_cap
                             shortlisted = library_seed_cap(shortlisted, evidence, limit=seed_limit)
@@ -2879,6 +2880,8 @@ class PersonalPlanner:
                     selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
                 return selected
             library_kwargs["seed_selector"] = select_seed_options
+            if getattr(self.settings, "library_refinement_pool_limit", 90):
+                library_kwargs["refinement_selector"] = lambda groups: select_seed_options(groups, refinement=True)
             self._library_search_handled = True
         search_kwargs = dict(
                 **library_kwargs,

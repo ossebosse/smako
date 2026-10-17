@@ -828,6 +828,7 @@ class MenuOptimizer:
         ), RecipeProfileBuilder._structure(recipe))
 
     def optimize_library_slots(self, cohorts, *, evaluate, accepts, score, retention_score,
+                               refinement_selector=None,
                                search_trace=None, decision_observer=None, seed_selector=None,
                                refinement_score=None, joint_proposals=None, **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
@@ -965,7 +966,10 @@ class MenuOptimizer:
             # every qualified recipe against the complete incumbent basket,
             # rather than launching another combinatorial beam search.
             finalists = {}
-            incumbent = improve(incumbent, previous, generation, "refinement", finalists)
+            # An optional selector bounds the single-swap sweep (heuristic, like
+            # the seed cap); the paired/joint phases still use the shortlists.
+            refinement_options = refinement_selector(previous) if refinement_selector else previous
+            incumbent = improve(incumbent, refinement_options, generation, "refinement", finalists)
             # Package boundaries and organic-share thresholds can require two
             # individually unprofitable changes. Rank only a bounded shortlist
             # from the single-slot probes; recheck every paired WHOLE basket.

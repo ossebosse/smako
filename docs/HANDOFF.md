@@ -1,3 +1,50 @@
+# 2026-10-17: Kortare sökning i specialprofiler och förfiningstak – ej aktiverat
+
+Gren `perf/planner-startup-and-semantics`, efter granskningsuppföljningen.
+Svar på Codex P1 (långa specialprofiler). Inget av detta ändrar krav, prisregler
+eller vilken meny som vinner i de uppmätta profilerna.
+
+1. **Näringssökning:** efter godkänd näringskontroll prisräknas inte en
+   kombination vars optimistiska kassa (auktoritativa radofferter, utan
+   butikstak) inte är lägre än bästa exakta korg; bara strikt lägre total vinner.
+   Samma kombinationer och budget; avstängt vid kopplade flerradserbjudanden.
+2. **Ekosökning:** delmängder prövas i ordning efter lägsta kostnadsgräns och
+   jämförs med (total, ursprungligt index), vilket ger samma vinnare.
+3. **Omdöpta offerter** cachas per radnamn.
+4. **`LIBRARY_REFINEMENT_POOL_LIMIT=90`** (0 = av): enkelbytesförfiningen prövar
+   högst 90 recept per måltidstyp, valda som startsökningens tak. Parbyten,
+   gemensamma byten och reservförsök är oförändrade. Tak 60 gav 5,15 kr dyrare
+   fördelningsprofil och används inte.
+
+Lund, frusen granskningsartefakt, estimerat inköpsläge, en kall körning per
+profil i följd (1 CPU):
+
+| Profil | Tak 0 | Tak 90 | Hash |
+| --- | ---: | ---: | --- |
+| standard | 71,3 s (sökning 30,2) | 61,6 s (21,8) | identisk |
+| vegan | 46,2 s | 43,7 s | identisk |
+| protein40 | 75,5 s | 75,4 s | identisk |
+| all-macros | 127,3 s | 125,8 s | identisk |
+| organic-share | 184,6 s (eko 120,2) | 135,1 s (eko 77,1) | identisk |
+| distribution | 91,2 s | 91,7 s | identisk (tak 60: 771,26 kr i st. f. 766,11) |
+| breakfast-snack-weight | 34,0 s | 36,2 s | identisk |
+| impossible-protein / allergy-milk / organic-animals | samma felkod | samma felkod | – |
+
+Före punkt 1–3 (samma sätt): all-macros 177,8 s, organic-share ekosökning 160,8 s.
+Makroprofilen är fortfarande lång; resten av tiden är näringssökningens exakta
+prisräkning per meny. Förberedd kvalificering vid publicering bedöms ge lite:
+varm standardplan lägger 4,8 av 39,7 s på kvalificering.
+
+## Granskning (Codex)
+
+1. Kör acceptansmatrisen i Lund och Malmö med `LIBRARY_REFINEMENT_POOL_LIMIT=0`
+   och `=90`; identisk hash krävs i alla positiva profiler.
+2. Bekräfta att kostnadsgränsen i näringssökningen är en giltig undre gräns
+   (samma `optimistic_relaxed_key` som ekosökningens gräns).
+3. Mät makro- och ekoprofilerna på servern.
+
+---
+
 # 2026-10-17: Åtgärder efter Codex granskning (planner-startup-server-review) – ej aktiverat
 
 Gren `perf/planner-startup-and-semantics`, ovanpå granskad patch (`35dc44f`).
