@@ -104,6 +104,7 @@ def personal_policy_request(request, dinner_count):
     return result
 
 
+
 class PersonalPlanner:
     def __init__(
         self,
@@ -2814,7 +2815,15 @@ class PersonalPlanner:
                         recipes = [s.recipe for s in group if s.recipe]
                         evidence = {self._recipe_id(r): self.variant_search_evidence[(meal_type, self._recipe_id(r))]
                                     for r in recipes if (meal_type, self._recipe_id(r)) in self.variant_search_evidence}
-                        by_meal[meal_type] = {self._recipe_id(r) for r in library_variant_shortlist(recipes, evidence)}
+                        shortlisted = library_variant_shortlist(recipes, evidence)
+                        # Seed beam options per meal type (0 disables). The whole
+                        # qualified pool is still used by the fallback retry and
+                        # by every refinement phase.
+                        seed_limit = getattr(self.settings, "library_seed_pool_limit", 40)
+                        if seed_limit:
+                            from app.services.stable_candidate_pool import library_seed_cap
+                            shortlisted = library_seed_cap(shortlisted, evidence, limit=seed_limit)
+                        by_meal[meal_type] = {self._recipe_id(r) for r in shortlisted}
                     selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
                 return selected
             library_kwargs["seed_selector"] = select_seed_options

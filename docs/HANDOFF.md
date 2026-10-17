@@ -1,3 +1,30 @@
+# 2026-10-17 (forts. 2): Tak för bibliotekets startsökning – ej aktiverat
+
+Gren `perf/planner-startup-and-semantics`. **Ingen aktivering på betan.**
+
+Startsökningen (beam 8) prövade alla kvalificerade recept per måltid, 111 i
+standardprofilen, och stod för 3 066 av 4 570 korgberäkningar. Den får nu högst
+`LIBRARY_SEED_POOL_LIMIT` (standard 40, 0 = av) recept per måltidstyp:
+billigaste enskilda inköp, starkast delade förpackningar (limit/5) och de två
+billigaste per matkök; recept utan underlag behålls alltid
+(`stable_candidate_pool.library_seed_cap`, körs efter `library_variant_shortlist`).
+Reservförsöket med hela urvalet och all förfining använder fortfarande hela
+biblioteket. Fyra profiler gav identisk hash och 10–20 % kortare tid; tak 24 gav
+sämre pris. Siffror: `reports/recipe-packs-20261017/README.md`.
+Planerartester (43 filer) och recept-/semantiktester (28 filer): samma kända
+fel före och efter; 4 nya enhetstester.
+
+## Granskning (Codex)
+
+1. Kör acceptansmatrisen med `LIBRARY_SEED_POOL_LIMIT=0` och `=40` mot aktiv Lund-
+   och Malmöartefakt. Kravet är identisk hash i alla positiva profiler; vid någon
+   avvikelse, jämför pris och höj taket hellre än att ta bort det.
+2. Bekräfta att reservförsöket (`seed_full_pool_retry`) fortfarande körs med hela
+   urvalet när den begränsade starten inte hittar en meny.
+3. Mät tiden på servern; siffrorna här är 1 CPU och en körning per profil.
+
+---
+
 # 2026-10-17 (forts.): Paprika i grampack och 12 middagar i sex matkök – ej aktiverat
 
 Gren `perf/planner-startup-and-semantics`. **Ingen aktivering på betan.**

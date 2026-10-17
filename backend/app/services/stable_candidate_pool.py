@@ -297,3 +297,37 @@ __all__ = [
     "StableCandidatePoolBuilder",
     "stratified_candidate_shortlist",
 ]
+
+
+def library_seed_cap(recipes, evidence, *, limit=40):
+    """Bound the seed beam's per-slot options when the qualified pool is large.
+
+    The seed beam prices about beam_width x options baskets per depth, so its
+    cost grows with every qualified recipe. Keep the cheapest single-recipe
+    purchases, the strongest shared-package recipes (weekly baskets profit from
+    overlap) and the two cheapest of every cuisine. Recipes without evidence
+    are always kept. This is a heuristic for the seed only: the caller keeps
+    the full pool for the fallback retry and for whole-week refinement.
+    """
+    if limit < 1:
+        raise ValueError("limit must be positive")
+    if len(recipes) <= limit:
+        return list(recipes)
+    known = [r for r in recipes if recipe_id(r) in evidence]
+    keep = {recipe_id(r) for r in recipes if recipe_id(r) not in evidence}
+    by_cost = sorted(known, key=lambda r: (evidence[recipe_id(r)].paid, recipe_id(r)))
+    frequency = Counter(p for r in known for p in evidence[recipe_id(r)].packages)
+    by_overlap = sorted(known, key=lambda r: (-sum(frequency[p] - 1 for p in evidence[recipe_id(r)].packages),
+                                              evidence[recipe_id(r)].paid, recipe_id(r)))
+    cuisines = defaultdict(list)
+    for r in by_cost:
+        cuisines[(r.design.cuisines[0] if r.design and r.design.cuisines else "")].append(r)
+    for rows in cuisines.values():
+        keep.update(recipe_id(r) for r in rows[:2])
+    for r in by_overlap[:max(1, limit // 5)]:
+        keep.add(recipe_id(r))
+    for r in by_cost:
+        if len(keep) >= limit:
+            break
+        keep.add(recipe_id(r))
+    return [r for r in recipes if recipe_id(r) in keep]

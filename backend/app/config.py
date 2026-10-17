@@ -104,6 +104,7 @@ class Settings:
     plan_store_path: Path = Path("data/consumer_plans.sqlite3")
     price_universe_prewarm_enabled: bool = False
     source_facts_prewarm_enabled: bool = True
+    library_seed_pool_limit: int = 40
     price_universe_prewarm_postal_code: str = "22350"
     price_universe_prewarm_modes: tuple[str, ...] = (
         "cheapest",
@@ -399,6 +400,7 @@ class Settings:
                 os.getenv("SOURCE_FACTS_PREWARM_ENABLED"),
                 True,
             ),
+            library_seed_pool_limit=max(0, int(os.getenv("LIBRARY_SEED_POOL_LIMIT", "40"))),
             price_universe_prewarm_postal_code=os.getenv(
                 "PRICE_UNIVERSE_PREWARM_POSTAL_CODE",
                 "22350",

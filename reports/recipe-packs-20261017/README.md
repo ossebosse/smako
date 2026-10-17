@@ -90,3 +90,18 @@ Basilika gick inte att köpa i exakt läge: krukbasilika har bara uppskattad vik
 Coops skurna basilika 50 g har faktakonflikten `nutrition_basis` (stoppar varan i
 `product_form_compatible`) och fryst finhackad basilika uteslöts av `pack:basil`.
 Version 2.2.0 tillåter fryst finhackad basilika; alla sex kvalificerar.
+
+## Tak för startsökningen (`LIBRARY_SEED_POOL_LIMIT`)
+
+Samma underlag, en körning per profil, 1 CPU. Hash = recept, korg, näring,
+audit och skafferifördelning.
+
+| Profil | Utan tak (0) | Tak 40 | Resultat |
+|---|---|---|---|
+| 5×4, 2 butiker | 94,8 s | 75,6 s | identisk hash, 535,06 kr |
+| 5×4, 3 butiker | 118,9 s | 96,1 s | identisk hash, 527,16 kr |
+| 5×4, protein ≥ 40 g | 103,9 s | 94,0 s | identisk hash, 839,10 kr |
+| 3×2, 2 butiker | 85,4 s | 68,4 s | identisk hash, 295,75 kr |
+
+Tak 24 i standardprofilen: 70,5 s men 543,83 kr (sämre); därför 40.
+Startsökningens prissatta korgar i standardprofilen: 3 066 → cirka 950.
