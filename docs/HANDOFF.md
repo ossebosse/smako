@@ -1,3 +1,16 @@
+# 2026-10-17: Patch importerad och granskad – kvarvarande releasehinder
+
+17 patchcommits från bas `46d834b` till importerad `35dc44f` förs in på lokal
+`main` enligt beställningen. 593 riktade/regressionstester passerar och
+compileall är godkänd. Granskningen bekräftar dock problem med äggmängdens
+bevisklass, användning av konfliktmärkt näring, uppvärmningens faktalås,
+förlorade produktkrav, aktiv arbetstid och 23 Ruff-fel i rapportskripten.
+Patchens runtimekod är bevarad för rättning; den är inte releasegodkänd.
+Ingen push eller betaaktivering ingår. Se
+[full granskning och branchinventering](reviews/planner-startup-semantics-20261017.md).
+
+---
+
 # 2026-10-17: Ägarbeslut – äggvikt och näringskonflikter godkända
 
 Ägaren (Ossian) har godkänt båda reglerna från posten "Ägg i gram,
