@@ -1,0 +1,45 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-authoring-example-20261017",
+  "recipes": [
+    {
+      "base_id": "smako-greek-chicken-souvlaki-potatoes",
+      "name": "Kycklingsouvlaki med ugnspotatis, tzatziki och tomatsallad",
+      "servings": 2,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "souvlaki",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "potatis",
+      "flavor": ["citron", "oregano", "vitlök"],
+      "equipment": ["Ugn", "Plåt", "Stekpanna", "Skål"],
+      "components": [
+        {"id": "c1", "name": "Kyckling", "ingredients": [
+          {"name": "kyckling", "form": "raw_edible", "quantity": 300, "role": "primary", "label": "Kycklinglårfilé, rå", "requirements": ["pack:chicken_thigh"]},
+          {"name": "citronjuice", "form": "as_sold", "quantity": 15, "role": "flavour", "label": "Citronjuice"},
+          {"name": "oregano", "form": "dry", "quantity": 1, "role": "flavour", "label": "Torkad oregano"},
+          {"name": "vitlök", "form": "raw_edible", "quantity": 6, "role": "flavour", "label": "Vitlök, rå"},
+          {"name": "rapsolja", "form": "as_sold", "quantity": 15, "role": "cooking", "label": "Rapsolja"},
+          {"name": "salt", "form": "as_sold", "quantity": 2, "role": "flavour", "label": "Salt"}]},
+        {"id": "c2", "name": "Ugnspotatis", "ingredients": [
+          {"name": "potatis", "form": "raw_edible", "quantity": 450, "role": "side", "label": "Potatis, rå"}]},
+        {"id": "c3", "name": "Tzatziki", "ingredients": [
+          {"name": "yoghurt naturell", "form": "as_sold", "quantity": 150, "role": "sauce", "label": "Grekisk yoghurt, naturell"},
+          {"name": "gurka", "form": "raw_edible", "quantity": 80, "role": "vegetable", "label": "Gurka, rå"},
+          {"name": "dill", "form": "raw_edible", "quantity": 4, "role": "flavour", "label": "Dill, färsk eller fryst"}]},
+        {"id": "c4", "name": "Tomatsallad", "ingredients": [
+          {"name": "tomat", "form": "raw_edible", "quantity": 200, "role": "vegetable", "label": "Tomat, rå"},
+          {"name": "rödlök", "form": "raw_edible", "quantity": 30, "role": "vegetable", "label": "Rödlök, rå"}]}
+      ],
+      "steps": [
+        {"text": "Sätt ugnen på 225 °C. Skär potatisen i klyftor och vänd dem i hälften av oljan, hälften av saltet och lite oregano.", "uses": ["potatis", "rapsolja", "salt", "oregano"], "minutes": 6},
+        {"text": "Rosta potatisen på plåt cirka 30 minuter tills den är gyllene.", "uses": ["potatis"], "minutes": 30, "after": [1], "passive": true},
+        {"text": "Skär kycklingen i bitar och vänd med citronjuice, riven vitlök, resten av oljan, saltet och oreganon. Låt stå medan potatisen rostas.", "uses": ["kyckling", "citronjuice", "vitlök", "rapsolja", "salt", "oregano"], "minutes": 6},
+        {"text": "Riv gurkan, krama ur vätskan och blanda med yoghurt och hackad dill.", "uses": ["gurka", "yoghurt naturell", "dill"], "minutes": 5},
+        {"text": "Skär tomat och rödlök och blanda till en sallad.", "uses": ["tomat", "rödlök"], "minutes": 4},
+        {"text": "Stek kycklingen i het panna 8–10 minuter tills den når minst 74 °C i tjockaste delen. Servera med potatis, tzatziki och tomatsallad.", "uses": ["kyckling", "potatis", "yoghurt naturell", "tomat"], "minutes": 10, "after": [2, 3, 4, 5]}
+      ]
+    }
+  ]
+}

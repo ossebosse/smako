@@ -1,4 +1,8 @@
-"""Content-driven CLI: validate -> diff -> import -> prepare -> qualify -> build.
+"""Content-driven CLI: author -> validate -> diff -> import -> prepare -> qualify -> build.
+
+`author` standardizes a compact smako-recipe-authoring-v1 file (see
+docs/recipes/AUTHORING.md) into an ordinary pack and can import, prepare and
+qualify it in one run.
 
 Run with PYTHONPATH=backend;. (Windows), backend:. (Linux). Qualifications use the ordinary PersonalPlanner,
 PriceUniverse and audit; no product synthesis or model API is used.
@@ -31,6 +35,18 @@ def main():
     p = sub.add_parser("expand", help="Expand reviewed flexible families to an ordinary meal pack")
     p.add_argument("input", type=Path)
     p.add_argument("--output", type=Path, required=True)
+    p = sub.add_parser("author", help="Standardize compact recipes; optionally import, prepare and qualify")
+    p.add_argument("input", type=Path)
+    p.add_argument("--output", type=Path, required=True, help="Standardized smako-meal-pack-v1 file")
+    p.add_argument("--report", type=Path, help="Standardization/readiness/qualification report")
+    p.add_argument("--import", dest="do_import", action="store_true", help="Import the pack into the library")
+    p.add_argument("--prepare", type=int, action="append", choices=range(1,13), default=[],
+                   help="Prepare structure and these portion sizes after import (repeatable)")
+    p.add_argument("--universe", type=Path, help="Prepared PriceUniverse artifact for qualification")
+    p.add_argument("--facts", type=Path, help="Offline product-facts export (else retained facts are loaded)")
+    p.add_argument("--clock", help="ISO date/time with offset for qualification")
+    p.add_argument("--purchase-mode", choices=["exact","estimated"], default="exact")
+    p.add_argument("--max-stores", type=int, default=2)
     p = sub.add_parser("revoke")
     p.add_argument("--recipe-id", required=True)
     p.add_argument("--reason", required=True)
@@ -66,6 +82,9 @@ def main():
         atomic_write(args.output, encoded(expanded))
         print(json.dumps({"pack_id": expanded["pack_id"], "recipes": len(expanded["recipes"]),
                           "output": str(args.output), "wall_seconds": time.perf_counter() - started}))
+        return
+    if args.command == "author":
+        _author(args, started)
         return
     if args.command == "revoke":
         report = revoke_recipe(args.recipe_id, args.reason)
@@ -171,6 +190,109 @@ def main():
     print(json.dumps({k:v for k,v in report.items() if k not in {"recipes","dependencies"}},ensure_ascii=False))
     if report.get("rejections") or (args.command == "qualify" and any(
             row["status"] != "qualified" for row in report["recipes"])):
+        raise SystemExit(1)
+
+
+def _author(args, started):
+    from datetime import UTC
+
+    from app.services.recipe_authoring import library_vocabulary, readiness, standardize, write_json
+    from app.services.recipe_library import current_recipes
+
+    source = json.loads(args.input.read_text(encoding="utf-8"))
+    vocabulary = library_vocabulary(current_recipes(len(manifest_entries()["current"])))
+    pack, rows = standardize(source, vocabulary, reviewed_at=datetime.now(UTC).date().isoformat())
+    write_json(args.output, pack)
+    checked = validate_pack(args.output)
+    report = {"pack_id": pack["pack_id"], "output": str(args.output), "recipes": rows,
+              "rejections": checked["rejections"]}
+    if checked["rejections"]:
+        return _finish(args, report, started)
+    if args.do_import:
+        imported = import_pack(args.output)
+        report["import"] = {k: imported.get(k) for k in ("published_file", "diff", "rejections", "manifest_sha256")}
+        if imported.get("rejections"):
+            report["rejections"] = imported["rejections"]
+            return _finish(args, report, started)
+        from app.services.recipe_library import current_recipes as current
+        issued = [r for r in current(len(manifest_entries()["current"]))
+                  if r.design.content_source and r.design.content_source.pack_id == pack["pack_id"]]
+        ready = readiness(issued)
+        for row in rows:
+            row["default_selection"] = ready.get(row["id"])
+        if args.prepare:
+            # Precompute what the planner otherwise builds inside the first user
+            # request: content structure and the requested portion scalings.
+            from app.services.meal_prepared_artifacts import prepare_content
+            from app.services.recipe_library import _registered_historical_portions
+            m = manifest_entries()
+            prepare_content(load_entries([*m["current"], *m["history"]]))
+            report["prepared_portions"] = {str(n): len(_registered_historical_portions(n))
+                                           for n in sorted(set(args.prepare))}
+        if args.universe:
+            report["qualification"] = _qualify_issued(args, issued)
+    return _finish(args, report, started)
+
+
+def _qualify_issued(args, recipes):
+    """One-recipe weekly baskets through the ordinary planner, exact by default."""
+    from app.config import Settings
+    from app.models import PlanRequest
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.personal_policy import PolicyConflict
+    from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+
+    if not args.clock:
+        raise SystemExit("--clock krävs för kvalificering")
+    clock = datetime.fromisoformat(args.clock)
+    if clock.utcoffset() is None:
+        raise SystemExit("--clock måste ha tidszon")
+    prepared = PreparedPriceUniverseArtifact.model_validate_json(args.universe.read_bytes()).restore()
+    if args.facts:
+        from app.services.personal_policy import ProductFacts
+        from app.services.personal_source_facts import FactsCollection
+        raw = json.loads(args.facts.read_bytes())
+        facts = FactsCollection({(r["store_id"], r["product_id"]): ProductFacts(**r["facts"]) for r in raw["rows"]})
+        facts.version = raw.get("facts_version")
+    else:
+        from app.services.personal_source_facts import load_retained_facts
+        facts = load_retained_facts(prepared)
+    rows = []
+    for recipe in recipes:
+        meal_type = recipe.design.meal_types[0]
+        slot = {"id": f"{meal_type}-1", "day": 1, "meal_type": meal_type, "recipe": recipe.model_dump(mode="json")}
+        request = PlanRequest.model_validate({
+            "recipes": 1 if meal_type == "dinner" else 0, "max_stores": args.max_stores,
+            "purchase_planning_mode": args.purchase_mode, "recipe_preferences": {"mode": "complete"},
+            "personal": {"allow_nutrition_estimates": True, "pantry_revision": 0, "slots": [slot],
+                         "meals": [{"meal_type": meal_type, "count": 1, "servings": recipe.servings}]}})
+        row = {"id": f"{recipe.design.base_id}:{recipe.design.version}:{recipe.design.variant_id}",
+               "name": recipe.name}
+        try:
+            plan = PersonalPlanner(request, Settings(complete_recipes_enabled=True, price_provider="own"),
+                                   prepared, {"revision": 0, "items": [], "reservations": {}, "events": {}},
+                                   facts=facts, now=clock).create()
+            row.update(status="qualified", total=plan.optimized_basket.total)
+        except (PolicyConflict, ValueError) as error:
+            row.update(status="stopped", reason=str(error), code=getattr(error, "code", None))
+        rows.append(row)
+    return {"universe_id": prepared.universe.universe_id, "clock": args.clock,
+            "purchase_mode": args.purchase_mode, "max_stores": args.max_stores, "recipes": rows}
+
+
+def _finish(args, report, started):
+    from app.services.recipe_authoring import write_json
+
+    report["wall_seconds"] = round(time.perf_counter() - started, 2)
+    if args.report:
+        write_json(args.report, report)
+    print(json.dumps({"pack_id": report["pack_id"], "recipes": len(report["recipes"]),
+                      "warnings": sum(len(r["warnings"]) for r in report["recipes"]),
+                      "rejections": len(report["rejections"]),
+                      "qualified": sum(r["status"] == "qualified" for r in report.get("qualification", {}).get("recipes", [])),
+                      "wall_seconds": report["wall_seconds"]}, ensure_ascii=False))
+    stopped = any(r["status"] != "qualified" for r in report.get("qualification", {}).get("recipes", []))
+    if report["rejections"] or stopped:
         raise SystemExit(1)
 
 

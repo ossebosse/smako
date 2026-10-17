@@ -29,6 +29,9 @@ eller ett permanent köp-/allergengodkännande.
 
 ## Körbara kommandon
 
+Nya recept skrivs enklast i det kompakta formatet och läggs in med `author`;
+se `AUTHORING.md`.
+
 Kör från repositoryroten med Python 3.12 och `PYTHONPATH=backend;.` på Windows
 (`backend:.` på Linux). Gemensam CLI (även `python -m app.services.meal_library_cli` i appimagen):
 

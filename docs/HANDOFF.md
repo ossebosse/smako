@@ -1,3 +1,39 @@
+# 2026-10-17 (forts. 3): Billigare korgberäkning, uppvärmt receptbibliotek, `author` – ej aktiverat
+
+Gren `perf/planner-startup-and-semantics`. **Ingen aktivering på betan.**
+
+1. **Offertcachen träffade nästan aldrig.** Veckans inköpsrader heter
+   `"<ingrediens> [n]"` där n beror på menyns sammansättning; nyckeln innehöll
+   numret och ~95 % av uppslagen missade (121 891 av 128 037). Nyckeln ignorerar
+   nu radnumret och en återanvänd offert får aktuell radetikett (rättar även
+   inaktuella namn från den beständiga offertcachen). Standard- och
+   proteinprofilen: identisk hash. Varm 3×2-plan 28,9 → 23,6 s.
+2. **Kallstarten byggde hela receptbiblioteket i användarens jobb** (~24 s på
+   1 CPU för aktuell och historisk innehållsförberedelse). Bakgrundsuppvärmningen
+   (`source_facts_prewarm`) bygger nu dessa cachar först; första 3×2-planen efter
+   uppvärmning 24,3 s i stället för 55,8 s. Varm/kall skillnad i tidigare tabeller
+   beror främst på detta.
+3. **`meal_library_cli author`** (`recipe_authoring.py`, `docs/recipes/AUTHORING.md`):
+   kompakt format → standardiserat paket (vokabulär, enheter och köpkrav från
+   biblioteket, komponentmängder, tider från stegens kritiska väg, kost,
+   varningar), sedan valfritt import, förberedelse av portioner och kvalificering
+   i ordinarie planerare. Exempel provkört: 11 räknade ingredienser, 16/30/46 min,
+   väljs med standardval, kvalificerad 214,82 kr (exemplet är inte importerat).
+
+Planerartester (43 + korgtester), offertcachetester (153), recept-/semantiktester
+(28 + 4 nya): inga nya fel.
+
+## Granskning (Codex)
+
+1. Bekräfta att inget i `BasketItemQuote` utöver `ingredient` beror på
+   radnumret (sök efter användning av `ingredient.canonical_name` i
+   `basket_calculator.quote_item` och felmeddelanden).
+2. Kör acceptansmatrisen före/efter: identisk hash krävs; mät varm och kall tid
+   separat på servern.
+3. Prova `author` med ett nytt recept mot aktiv artefakt utan `--facts`.
+
+---
+
 # 2026-10-17 (forts. 2): Tak för bibliotekets startsökning – ej aktiverat
 
 Gren `perf/planner-startup-and-semantics`. **Ingen aktivering på betan.**
