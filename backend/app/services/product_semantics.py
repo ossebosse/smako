@@ -1463,7 +1463,7 @@ def has_semantic_rule(canonical_name: str) -> bool:
 _CULINARY_LABELS = {
     "salt": (r"(?:salt|hushallssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*", "salt"),
     "svartpeppar": (r"svartpeppar", "single_spice"),
-    "rökt paprikapulver": (r"(?:rokt paprikapulver|paprikapulver rokt)", "single_spice"),
+    "rökt paprikapulver": (r"(?:rokt paprikapulver|paprikapulver rokt|rokt paprika|paprika rokt|paprika smoked|smoked paprika)", "single_spice"),
     "malen koriander": (r"(?:malen koriander|koriander malen)", "single_spice"),
     "chiliflakes": (r"(?:chiliflakes|chili flakes|chiliflingor)", "single_spice"),
     "strösocker": (r"strosocker", "sugar"),

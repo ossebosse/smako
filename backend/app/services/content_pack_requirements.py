@@ -70,7 +70,10 @@ def additional_whole_identity(canonical, form, label, composition):
         # cooking are separately qualified by the existing quantity pathway.
         "ägg": ("raw_edible", r"(?:ägg|skåneägg|bruna ägg)(?: ekologiska| eko| frigående| inomhus| utomhus| stora| små| [sml]| [sml]-[sml]| \d+-pack| \d+ pack)*"),
         "svartpeppar": ("dry", r"(?:malen )?svartpeppar(?: malen| finmalen| burk)*"),
-        "rökt paprikapulver": ("dry", r"(?:rökt paprikapulver|paprikapulver rökt)(?: milt| mild| burk)*"),
+        # Swedish shelves label the same single spice "Rökt Paprika",
+        # "Paprika Rökt" or "Paprika Smoked"; the composition check below
+        # still rejects salt/sugar/onion blends.
+        "rökt paprikapulver": ("dry", r"(?:rökt paprikapulver|paprikapulver rökt|rökt paprika|paprika rökt|paprika smoked|smoked paprika)(?: pulver| milt| mild| söt| burk| eko| ekologisk)*"),
         "malen koriander": ("dry", r"(?:malen koriander|koriander malen)(?: burk)*"),
         "chiliflakes": ("dry", r"(?:chiliflakes|chili flakes|chiliflingor)(?: mild| medium| medel| burk| påse| eko)*"),
         "strösocker": ("dry", r"strösocker(?: ekologiskt| eko)*"),

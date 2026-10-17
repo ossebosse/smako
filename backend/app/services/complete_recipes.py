@@ -403,7 +403,10 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
             return False
         if re.search(r"\b(?:salt|socker|olja|smör|grädde|ättika|lag)\b", composition.split("kan innehålla")[0]):
             return False
-        return not re.search(r"konserv|tork|krydd", category) or fresh
+        # Pantry shelves hold spice bags such as "Paprika Påse" (Santa Maria,
+        # category "Skafferi"); without fresh produce evidence they are not
+        # raw vegetables.
+        return not re.search(r"konserv|tork|krydd|skafferi", category) or fresh
     proteins = {
         "kyckling": r"(?:kycklingfilé|kycklingbröstfilé|kycklingbröst|kyckling lårfilé|kycklinglårfilé|kyckling innerfilé|kycklinginnerfilé|kyckling bröstfilé|kyckling filé)",
         "nötfärs": r"nötfärs", "fläskfärs": r"fläskfärs", "blandfärs": r"blandfärs", "fläskkött": r"(?:fläskfilé|fläskytterfilé|fläskkarré benfri|benfri fläskkarré)",

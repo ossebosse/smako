@@ -310,6 +310,11 @@ def test_complete_candidates_use_actual_product_nutrition_not_legacy_coverage(mo
     ("vitkål", "raw_edible", "Vitkål Strimlad Klass 1", "Frukt & grönt", True),
     ("paprika", "raw_edible", "Paprikasallad Strimlad", "Frukt & grönt", False),
     ("paprika", "raw_edible", "Paprika Strimlad & Grillad", "Fryst", False),
+    ("paprika", "raw_edible", "Paprika Påse", "Skafferi", False),
+    ("paprika", "raw_edible", "Paprika Röd Klass 1", "Frukt & grönt", True),
+    ("rökt paprikapulver", "dry", "Paprika Rökt", "Kryddor", True),
+    ("rökt paprikapulver", "dry", "Rökt Paprika", "Kryddor", True),
+    ("rökt paprikapulver", "dry", "Paprika Rökt Grillad i Olja", "Konserver", False),
 ])
 def test_whole_food_identity_never_substring_matches(ingredient, form, label, category, expected):
     from app.services.complete_recipes import _whole_food_identity
