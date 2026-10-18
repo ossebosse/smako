@@ -1,3 +1,45 @@
+# 2026-10-18: Uppföljningspatch granskad och integrerad på main – ej aktiverad
+
+13 patchcommits `9aeda34..0765221` ovanpå `d09eaf4` är granskade.
+Runtimekoden har inte ändrats under granskningen. Full rapport för Claude:
+[uppföljning av planner, recept, server och CI](reviews/planner-followup-review-20261018.md).
+
+- Hela icke-live-sviterna: backend 2 827 PASS, 10 kända FAIL, 2 separat körda
+  taktester SKIP; grocery 1 909 PASS och 5 FAIL som reproduceras identiskt på
+  `d09eaf4`. Inga nya svitefel. Första PR-CI `39099491097` är grön inklusive
+  Ruff och webbläsare; den kör 2 776 PASS, 10 XFAIL och 53 evidensrelaterade SKIP.
+- Båda städernas sju takprofiler: 9/9 pytest PASS per stad. Alla 20
+  acceptanspar passerar; de 14 positiva har samma pris och hash, de sex
+  negativa samma felkod. Inga tak höjdes och inga testkrav sänktes.
+- Alla åtta närings-/ekoreferenser matchar exakt semantisk hash. Referensen
+  isolerar de två sökmetoderna och offertcachen från `7feffcf`, med aktuellt
+  innehåll/äggpolicy kvar. Alla 32 serverobservationer matchar mellan tak 90/0.
+- Global låsväntan vid verkligt Lund/Malmö-överlapp: största väntan cirka
+  0,00002 s, tidigare 14,9 s. Faktaläsning och CPU-arbete kostar fortfarande tid.
+- Alla 28 versioner och 55 vattenskalningar godkända. Exakt köpbarhet för
+  versionerna: Lund 28/28, Malmö 9/28; samtliga avslag redovisas. De två
+  author-proven valideras men är avsiktligt inte registrerade för planering.
+- Kvarstående P2: `--uncapped` behåller fyra seedvarianter per basrecept;
+  icke-cachebara faktaprojektioner kan ändå diskpersisteras (även baslinjen);
+  author skalar flera vattenmängder/decimaler fel. Körbara reproduktioner ingår.
+- P1 inför bred lansering kvarstår: standard 66,6/46,8 s kall/varm i Lund,
+  85,0/58,2 s i Malmö; eko med tak cirka 184/168 respektive 270/248 s.
+  Detta är direkta plannerprov, inte HTTP-latens eller produktions-p95.
+- Ingen aktivering. Samma live-image, HTTP 200/ready och
+  `PRICE_UNIVERSE_PREWARM_ENABLED=false` i miljöfil och runtime verifierat.
+  Backup misslyckas fortfarande med `InsufficientStorageError`: 6,33 GB ledigt
+  mot cirka 13,99 GB behov. Egna tillfälliga servercacher är borttagna;
+  mätunderlag och syntetiska planer bevarade. Inga granskningscontainrar kör.
+
+Evidens och publika indata finns i separata ZIP-filer under
+`.local/deliverables/`; rapporten anger metod, filnamn och reproduktion.
+Första Malmö-pytestförsökets tidszonsfel i granskningsharness är bevarat och
+redovisat; slutkörningen läser originalklockan i Python och passerar 9/9.
+Äldre sidogrenar/worktrees är bevarade; senaste fetch visar ingen annan
+nyare toppcommit än dåvarande main. Patchmotsvarigheter redovisas i rapporten.
+
+---
+
 # 2026-10-17: Dokumentation av prövade åtgärder och granskningsinstruktion
 
 - Vad som har prövats, vad som infördes och varför vissa åtgärder förkastades:
