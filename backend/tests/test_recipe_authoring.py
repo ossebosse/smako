@@ -85,3 +85,41 @@ def test_process_water_in_ml_scales_and_dl_is_rejected():
     source["recipes"][0]["steps"][0]["text"] += " Tillsätt 2 dl vatten."
     with pytest.raises(ValueError, match="dl/l"):
         standardize(source, VOCABULARY, reviewed_at="2026-10-17")
+
+
+def test_several_process_amounts_scale_once_and_decimals_are_one_amount():
+    """Review 2026-10-18 P2: '100 ml ... 200 ml' and '125,5 ml' scaled wrongly."""
+    from app.services.recipe_library import _scale_amount_tokens
+
+    amounts = (("100 ml", 100.0), ("200 ml", 200.0))
+    text = "Häll i 100 ml vatten, sedan 200 ml vatten."
+    assert _scale_amount_tokens(text, amounts, 2) == "Häll i 200 ml vatten, sedan 400 ml vatten."
+    assert _scale_amount_tokens(text, amounts, 0.5) == "Häll i 50 ml vatten, sedan 100 ml vatten."
+    assert _scale_amount_tokens("Tillsätt 125,5 ml vatten.", (("125,5 ml", 125.5),), 2) == "Tillsätt 251 ml vatten."
+    # A token never matches inside another number.
+    assert _scale_amount_tokens("1200 ml vatten och 200 ml vatten", (("200 ml", 200.0),), 2) == \
+        "1200 ml vatten och 400 ml vatten"
+
+
+def test_author_registers_each_amount_once_with_decimals():
+    source = _source()
+    source["recipes"][0]["steps"][0]["text"] += " Häll 100 ml vatten och 125,5 ml dricksvatten i plåten."
+    pack, _ = standardize(source, VOCABULARY, reviewed_at="2026-10-17")
+    assert [tuple(a) for a in pack["recipes"][0]["design"]["steps"][0]["scalable_amounts"]] == \
+        [("100 ml", 100.0), ("125,5 ml", 125.5)]
+
+
+def test_issued_water_steps_scale_as_before():
+    """The 11 issued single-amount water steps keep their exact scaled text."""
+    from app.services.meal_library_content import manifest_entries
+    from app.services.recipe_library import _scaled, current_recipes
+
+    steps = [(r, s) for r in current_recipes(len(manifest_entries()["current"]))
+             for s in r.design.steps if s.scalable_amounts and "vatten" in s.text]
+    assert len(steps) >= 11
+    for recipe, step in steps:
+        index = recipe.design.steps.index(step)
+        for servings in (1, 2, 4, 8, 12):
+            text = _scaled(recipe, servings).design.steps[index].text
+            for _token, quantity in step.scalable_amounts:
+                assert f"{quantity * servings / recipe.servings:g} ml" in text

@@ -127,8 +127,9 @@ def standardize(source, vocabulary, *, reviewed_at):
                 keys.append(key)
             if re.search(r"\d+(?:[,.]\d+)?\s*(?:dl|l|liter)\s+(?:dricks)?vatten", step["text"]):
                 raise ValueError(f"{where}: steg {n} anger vatten i dl/l; skriv ml så att mängden skalas med portionerna")
-            water = [(m.group(0)[:-len(m.group(2))].rstrip(), float(m.group(1)))
-                     for m in re.finditer(r"(\d+) ml (dricksvatten|vatten)", step["text"])]
+            water = list(dict.fromkeys(
+                (f"{m.group(1)} ml", float(m.group(1).replace(",", ".")))
+                for m in re.finditer(r"(?<![\d,.])(\d+(?:[,.]\d+)?) ml (?:dricksvatten|vatten)", step["text"])))
             row_step = {"id": f"s{n}", "text": step["text"], "ingredient_keys": sorted(set(keys)),
                         "depends_on": [f"s{d}" for d in step.get("after", [])],
                         "duration_minutes": int(step["minutes"]), "parallel_group": None,

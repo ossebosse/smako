@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from collections import Counter
 from functools import lru_cache
 from pathlib import Path
@@ -185,6 +186,27 @@ def _registered_history() -> tuple[Recipe, ...]:
     return tuple(result)
 
 
+def _format_ml(value):
+    text = f"{round(value, 2):g}"
+    return text.replace(".", ",") + " ml"
+
+
+def _scale_amount_tokens(text, amounts, factor):
+    """Scale every process amount once, over the original text.
+
+    Tokens are matched as whole numbers (no digit, comma or point directly
+    before, no digit after), so "100 ml ... 200 ml" scales both, "125,5 ml" is
+    one amount and a token never matches inside another number. Replacements
+    are never rescanned.
+    """
+    if not amounts:
+        return text
+    scaled = {token: _format_ml(quantity * factor) for token, quantity in amounts}
+    pattern = re.compile(r"(?<![\d,.])(?:" + "|".join(re.escape(t) for t in sorted(scaled, key=len, reverse=True))
+                         + r")(?!\d)")
+    return pattern.sub(lambda m: scaled[m.group(0)], text)
+
+
 def _scaled(recipe: Recipe, servings: int) -> Recipe:
     factor = servings / recipe.servings
     ingredients = [i.model_copy(update={
@@ -197,9 +219,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
             "quantity": round(a.quantity * factor, 8)}) for a in c.amounts)}) for c in result.design.components)
         steps = []
         for step in result.design.steps:
-            text = step.text
-            for token, quantity in (step.scalable_amounts or ()):
-                text = text.replace(token, f"{quantity * factor:g} ml")
+            text = _scale_amount_tokens(step.text, step.scalable_amounts, factor)
             if servings != 2:
                 for phrase in ("två portioner", "två djupa tallrikar", "två tallrikar"):
                     text = text.replace(phrase, f"{servings} portioner")
