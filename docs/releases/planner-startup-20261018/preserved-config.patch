@@ -1,0 +1,30 @@
+--- main/backend/app/config.py
++++ candidate/backend/app/config.py
+@@ -56,6 +56,7 @@
+     public_base_url: str | None = None
+     secret_key: str | None = field(default=None, repr=False)
+     beta_admin_token: str | None = field(default=None, repr=False)
++    beta_admin_password_hash: str | None = field(default=None, repr=False)
+     refresh_report_dir: Path = Path("reports/refresh")
+     refresh_runner_status_path: Path = Path("reports/operations/refresh-runner-status.json")
+     source_retry_status_path: Path = Path("reports/operations/source-retry-status.json")
+@@ -251,6 +252,11 @@
+         ):
+             if network_limit <= session_limit:
+                 raise ValueError(f"{name} must be greater than its session limit")
++        if self.beta_admin_password_hash is not None:
++            from app.services.admin_password import valid_password_hash
++
++            if not valid_password_hash(self.beta_admin_password_hash):
++                raise ValueError("BETA_ADMIN_PASSWORD_HASH has an invalid format")
+         if self.app_env == "production":
+             if self.public_base_url is None or not self.public_base_url.startswith("https://"):
+                 raise ValueError("PUBLIC_BASE_URL must use HTTPS in production")
+@@ -298,6 +304,7 @@
+             public_base_url=(os.getenv("PUBLIC_BASE_URL", "").strip() or None),
+             secret_key=(os.getenv("SECRET_KEY", "").strip() or None),
+             beta_admin_token=(os.getenv("BETA_ADMIN_TOKEN", "").strip() or None),
++            beta_admin_password_hash=(os.getenv("BETA_ADMIN_PASSWORD_HASH", "").strip() or None),
+             refresh_report_dir=Path(os.getenv("REFRESH_REPORT_DIR", "reports/refresh")),
+             refresh_runner_status_path=Path(
+                 os.getenv(
