@@ -18,13 +18,14 @@ from copy import deepcopy
 from dataclasses import fields, is_dataclass, replace
 from functools import lru_cache
 from pathlib import Path
-from threading import RLock
+from threading import Lock, RLock
 
 from app.services.personal_policy import ProductFacts
 
 FACTS_VERSION = "retained-catalog-facts-v11-nutrition-extras"
 _CACHE = {}
 _LOCK = RLock()
+_KEY_LOCKS = {}
 
 
 @lru_cache(maxsize=1)
@@ -690,148 +691,166 @@ def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
     raw_root = Path(raw_root or settings.raw_snapshot_root).resolve()
     if not Path(database).is_file():
         return {}
-    with _LOCK:
-        targets = {
-            p.product_id: p
-            for p in prepared.universe.products
-            if p.chain in {"coop", "hemkop", "willys"}
-            and p.source_provenance
-            and p.source_provenance.source_provider == "own"
-        }
-        snapshots = {p.source_provenance.source_snapshot_id for p in targets.values()}
-        result = {}
-        if not snapshots:
-            return result
-        with sqlite3.connect(f"file:{Path(database).as_posix()}?mode=ro", uri=True) as db:
-            db.row_factory = sqlite3.Row
-            if not db.execute("SELECT 1 FROM sqlite_master WHERE name='products'").fetchone():
-                return {}
-            db.execute("BEGIN")
-            source_rows = []
-            resolved_paths = {}
-            for snapshot in sorted(snapshots):
-                rows = db.execute(
-                    """SELECT p.id, p.chain, p.external_product_id,
-                    p.store_external_id, p.raw_reference, r.payload_hash, r.payload_location
-                    FROM products p JOIN raw_snapshots r ON r.id=p.raw_snapshot_id
-                    WHERE p.catalog_snapshot_id=? AND r.catalog_snapshot_id=? ORDER BY r.payload_location, p.id""",
-                    (snapshot, snapshot),
-                )
-                for row in rows:
-                    product = targets.get(row["id"])
-                    if product is None or product.source_provenance.source_snapshot_id != snapshot:
-                        continue
-                    if (
-                        product.chain != row["chain"]
-                        or product.source_provenance.provider_store_id != row["store_external_id"]
-                    ):
-                        continue
-                    location = row["payload_location"]
-                    if location not in resolved_paths:
-                        candidate = (raw_root / location).resolve()
-                        resolved_paths[location] = (
-                            candidate if candidate.is_relative_to(raw_root) else None
-                        )
-                    path = resolved_paths[location]
-                    if path is None:
-                        continue
-                    source_rows.append((snapshot, row, product, path))
+    targets = {
+        p.product_id: p
+        for p in prepared.universe.products
+        if p.chain in {"coop", "hemkop", "willys"}
+        and p.source_provenance
+        and p.source_provenance.source_provider == "own"
+    }
+    snapshots = {p.source_provenance.source_snapshot_id for p in targets.values()}
+    result = {}
+    if not snapshots:
+        return result
+    with sqlite3.connect(f"file:{Path(database).as_posix()}?mode=ro", uri=True) as db:
+        db.row_factory = sqlite3.Row
+        if not db.execute("SELECT 1 FROM sqlite_master WHERE name='products'").fetchone():
+            return {}
+        db.execute("BEGIN")
+        source_rows = []
+        resolved_paths = {}
+        for snapshot in sorted(snapshots):
+            rows = db.execute(
+                """SELECT p.id, p.chain, p.external_product_id,
+                p.store_external_id, p.raw_reference, r.payload_hash, r.payload_location
+                FROM products p JOIN raw_snapshots r ON r.id=p.raw_snapshot_id
+                WHERE p.catalog_snapshot_id=? AND r.catalog_snapshot_id=? ORDER BY r.payload_location, p.id""",
+                (snapshot, snapshot),
+            )
+            for row in rows:
+                product = targets.get(row["id"])
+                if product is None or product.source_provenance.source_snapshot_id != snapshot:
+                    continue
+                if (
+                    product.chain != row["chain"]
+                    or product.source_provenance.provider_store_id != row["store_external_id"]
+                ):
+                    continue
+                location = row["payload_location"]
+                if location not in resolved_paths:
+                    candidate = (raw_root / location).resolve()
+                    resolved_paths[location] = (
+                        candidate if candidate.is_relative_to(raw_root) else None
+                    )
+                path = resolved_paths[location]
+                if path is None:
+                    continue
+                source_rows.append((snapshot, row, product, path))
 
-        # A telemetry/profile write in this same SQLite database changes its
-        # mtime, but cannot change these public source facts. Key the actual
-        # relevant join rows, not the entire database's write activity.
-        revision = hashlib.sha256(
-            json.dumps(
-                {"source_rows": [(snapshot, tuple(row)) for snapshot, row, _, _ in source_rows],
-                 "fact_targets": [
-                     (p.store_id, p.product_id, p.name, p.brand, p.gtin, p.chain,
-                      p.package_quantity, p.package_unit, p.usable_quantity, p.usable_unit,
-                      str(p.sale_model), p.coverage, p.price_context_type,
-                      p.source_provenance.model_dump(mode="json"))
-                     for p in targets.values()]},
-                ensure_ascii=False,
-                separators=(",", ":"),
-            ).encode()
-        ).hexdigest()
-        key = (
-            str(Path(database).resolve()),
-            str(raw_root),
-            prepared.universe.universe_id,
-            FACTS_VERSION,
-            revision,
-        )
-        # Validate every distinct source payload even on a cache hit. Neither
-        # unchanged snapshot identity nor preserved file timestamps can bless
-        # a missing/corrupt/replaced source. Streaming keeps scratch memory small.
-        hashes = {}
-        for _, _, _, path in source_rows:
-            if path not in hashes:
-                try:
-                    with path.open("rb") as stream:
-                        hashes[path] = hashlib.file_digest(stream, "sha256").hexdigest()
-                except OSError:
-                    hashes[path] = None
-        cacheable = all(hashes[path] == row["payload_hash"] for _, row, _, path in source_rows)
+    # A telemetry/profile write in this same SQLite database changes its
+    # mtime, but cannot change these public source facts. Key the actual
+    # relevant join rows, not the entire database's write activity.
+    revision = hashlib.sha256(
+        json.dumps(
+            {"source_rows": [(snapshot, tuple(row)) for snapshot, row, _, _ in source_rows],
+             "fact_targets": [
+                 (p.store_id, p.product_id, p.name, p.brand, p.gtin, p.chain,
+                  p.package_quantity, p.package_unit, p.usable_quantity, p.usable_unit,
+                  str(p.sale_model), p.coverage, p.price_context_type,
+                  p.source_provenance.model_dump(mode="json"))
+                 for p in targets.values()]},
+            ensure_ascii=False,
+            separators=(",", ":"),
+        ).encode()
+    ).hexdigest()
+    key = (
+        str(Path(database).resolve()),
+        str(raw_root),
+        prepared.universe.universe_id,
+        FACTS_VERSION,
+        revision,
+    )
+    # Validate every distinct source payload even on a cache hit. Neither
+    # unchanged snapshot identity nor preserved file timestamps can bless
+    # a missing/corrupt/replaced source. Streaming keeps scratch memory small.
+    hashes = {}
+    for _, _, _, path in source_rows:
+        if path not in hashes:
+            try:
+                with path.open("rb") as stream:
+                    hashes[path] = hashlib.file_digest(stream, "sha256").hexdigest()
+            except OSError:
+                hashes[path] = None
+    cacheable = all(hashes[path] == row["payload_hash"] for _, row, _, path in source_rows)
+    # Hashing the evidence above runs without any lock. Only one projection
+    # per key runs at a time; a request for an already cached key, or for
+    # another key, never waits behind it.
+    with _LOCK:
         if cacheable and key in _CACHE:
             return _CACHE[key]
-        nonlocal_cacheable = [cacheable]
-        def project():
-            last_path, document = None, None
-            for snapshot, row, product, path in source_rows:
-                if hashes[path] != row["payload_hash"]:
-                    continue
-                try:
-                    if path != last_path:
-                        data = path.read_bytes()
-                        if hashlib.sha256(data).hexdigest() != row["payload_hash"]:
-                            nonlocal_cacheable[0] = False
-                            continue
-                        document = json.loads(data)
-                        last_path = path
-                    raw = raw_product(document, row["raw_reference"])
-                    identity = raw.get("id") if row["chain"] == "coop" else raw.get("code")
-                    if str(identity) != row["external_product_id"]:
-                        continue
-                    result[(product.store_id, product.product_id)] = project_raw_facts(
-                        raw,
-                        chain=row["chain"],
-                        product_id=product.product_id,
-                        snapshot_id=snapshot,
-                        source_reference=f"{row['chain']}:{row['raw_reference']}:{row['payload_hash']}",
-                        observed_at=product.source_provenance.source_observed_at.isoformat(),
-                    )
-                except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
-                    nonlocal_cacheable[0] = False
-                    continue  # Missing or conflicting evidence remains unknown.
-            return complete_identity_facts(prepared, result)
-        if cacheable:
-            from dataclasses import asdict
+        key_lock = _KEY_LOCKS.setdefault(key, Lock())
+    try:
+        with key_lock:
+            with _LOCK:
+                if cacheable and key in _CACHE:
+                    return _CACHE[key]
+            return _project_facts(key, cacheable, hashes, source_rows, prepared, result)
+    finally:
+        with _LOCK:
+            if _KEY_LOCKS.get(key) is key_lock and not key_lock.locked():
+                _KEY_LOCKS.pop(key, None)
 
-            from app.services.meal_prepared_artifacts import prepared as read_prepared
-            def compute_projection():
-                return [{"store_id":store,"product_id":product,"facts":asdict(fact)}
-                        for (store,product),fact in project().items()]
-            def restore_projection(rows):
-                projected = {}
-                for row in rows:
-                    values = row["facts"]
-                    for field in ("product_classification","ingredients","allergens_checked","allergens_present","allergens_trace","conflicts"):
-                        values[field] = tuple(values[field])
-                    values["field_sources"] = {field:tuple(sources) for field,sources in values["field_sources"].items()}
-                    projected[(row["store_id"],row["product_id"])] = ProductFacts(**values)
-                return FactsCollection(projected)
+
+def _project_facts(key, cacheable, hashes, source_rows, prepared, result):
+    nonlocal_cacheable = [cacheable]
+    def project():
+        last_path, document = None, None
+        for snapshot, row, product, path in source_rows:
+            if hashes[path] != row["payload_hash"]:
+                continue
             try:
-                projected = restore_projection(read_prepared("source_facts",list(key),compute_projection))
-            except (ValueError,KeyError,TypeError):
-                projected = project()
-        else:
+                if path != last_path:
+                    data = path.read_bytes()
+                    if hashlib.sha256(data).hexdigest() != row["payload_hash"]:
+                        nonlocal_cacheable[0] = False
+                        continue
+                    document = json.loads(data)
+                    last_path = path
+                raw = raw_product(document, row["raw_reference"])
+                identity = raw.get("id") if row["chain"] == "coop" else raw.get("code")
+                if str(identity) != row["external_product_id"]:
+                    continue
+                result[(product.store_id, product.product_id)] = project_raw_facts(
+                    raw,
+                    chain=row["chain"],
+                    product_id=product.product_id,
+                    snapshot_id=snapshot,
+                    source_reference=f"{row['chain']}:{row['raw_reference']}:{row['payload_hash']}",
+                    observed_at=product.source_provenance.source_observed_at.isoformat(),
+                )
+            except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
+                nonlocal_cacheable[0] = False
+                continue  # Missing or conflicting evidence remains unknown.
+        return complete_identity_facts(prepared, result)
+    if cacheable:
+        from dataclasses import asdict
+
+        from app.services.meal_prepared_artifacts import prepared as read_prepared
+        def compute_projection():
+            return [{"store_id":store,"product_id":product,"facts":asdict(fact)}
+                    for (store,product),fact in project().items()]
+        def restore_projection(rows):
+            projected = {}
+            for row in rows:
+                values = row["facts"]
+                for field in ("product_classification","ingredients","allergens_checked","allergens_present","allergens_trace","conflicts"):
+                    values[field] = tuple(values[field])
+                values["field_sources"] = {field:tuple(sources) for field,sources in values["field_sources"].items()}
+                projected[(row["store_id"],row["product_id"])] = ProductFacts(**values)
+            return FactsCollection(projected)
+        try:
+            projected = restore_projection(read_prepared("source_facts",list(key),compute_projection))
+        except (ValueError,KeyError,TypeError):
             projected = project()
-        cacheable = nonlocal_cacheable[0]
-        if cacheable:
+    else:
+        projected = project()
+    cacheable = nonlocal_cacheable[0]
+    if cacheable:
+        with _LOCK:
             if len(_CACHE) >= 4:
                 _CACHE.pop(next(iter(_CACHE)))
             _CACHE[key] = projected
-        return projected
+    return projected
 
 
 def load_retained_facts(prepared, *, database=None, raw_root=None):

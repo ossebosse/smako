@@ -159,8 +159,19 @@ def test_hash_snapshot_context_and_exact_product_join(tmp_path, monkeypatch, dri
             }
         )
     )
+    from app.services import personal_source_facts as source_facts
+    original_projection = source_facts._project_facts
+
+    def projection_without_global_lock(*args):
+        # Projection (the slow part) must not hold the process-wide lock, so a
+        # request for another, already cached universe never waits behind it.
+        assert not source_facts._LOCK._is_owned()
+        return original_projection(*args)
+
+    monkeypatch.setattr(source_facts, "_project_facts", projection_without_global_lock)
     facts = load_retained_facts(p, database=str(db_path), raw_root=raw)
     assert facts[("coop", "mjölk")].organic is True
+    assert not source_facts._KEY_LOCKS  # the per-key lock is released after caching
     with sqlite3.connect(db_path) as db:
         db.executescript("CREATE TABLE telemetry(value); INSERT INTO telemetry VALUES (1);")
     # Unrelated activity must not reparse/project unchanged public source data.
