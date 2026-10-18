@@ -2519,6 +2519,27 @@ class PersonalPlanner:
             text += " Lägg till minst en butik med fullt sortiment, till exempel " + ", ".join(complete[:3]) + "."
         return text
 
+    def _select_library_options(self, groups, *, limit, shortlist_variants):
+        """Per meal type: optional variant shortlist (four per base), then the cap.
+
+        ``limit`` 0 and ``shortlist_variants`` False keep the whole qualified
+        pool; the full-library reference (matrix ``--uncapped``) uses both.
+        """
+        from app.services.stable_candidate_pool import library_seed_cap, library_variant_shortlist
+        selected, by_meal = [], {}
+        for group in groups:
+            meal_type = group[0].meal_type
+            if meal_type not in by_meal:
+                recipes = [s.recipe for s in group if s.recipe]
+                evidence = {self._recipe_id(r): self.variant_search_evidence[(meal_type, self._recipe_id(r))]
+                            for r in recipes if (meal_type, self._recipe_id(r)) in self.variant_search_evidence}
+                kept = library_variant_shortlist(recipes, evidence) if shortlist_variants else recipes
+                if limit:
+                    kept = library_seed_cap(kept, evidence, limit=limit)
+                by_meal[meal_type] = {self._recipe_id(r) for r in kept}
+            selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
+        return selected
+
     def _week_purchase_key(self, basket):
         from app.services.week_refinement import surplus_key
         return (money(basket.total), surplus_key(basket) if self.spec.surplus_mode == "minimize" else ())
@@ -2861,26 +2882,13 @@ class PersonalPlanner:
             library_kwargs["joint_proposals"] = lambda groups, anchor: qualified_joint_proposals(
                 groups, anchor, self.variant_search_evidence)
             def select_seed_options(groups, *, refinement=False):
-                from app.services.stable_candidate_pool import library_variant_shortlist
-                selected, by_meal = [], {}
-                for group in groups:
-                    meal_type = group[0].meal_type
-                    if meal_type not in by_meal:
-                        recipes = [s.recipe for s in group if s.recipe]
-                        evidence = {self._recipe_id(r): self.variant_search_evidence[(meal_type, self._recipe_id(r))]
-                                    for r in recipes if (meal_type, self._recipe_id(r)) in self.variant_search_evidence}
-                        shortlisted = recipes if refinement else library_variant_shortlist(recipes, evidence)
-                        # Seed beam options per meal type (0 disables). The whole
-                        # qualified pool is still used by the fallback retry and,
-                        # unless library_refinement_pool_limit is set, refinement.
-                        seed_limit = (getattr(self.settings, "library_refinement_pool_limit", 90) if refinement
-                                      else getattr(self.settings, "library_seed_pool_limit", 40))
-                        if seed_limit:
-                            from app.services.stable_candidate_pool import library_seed_cap
-                            shortlisted = library_seed_cap(shortlisted, evidence, limit=seed_limit)
-                        by_meal[meal_type] = {self._recipe_id(r) for r in shortlisted}
-                    selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
-                return selected
+                if refinement:
+                    return self._select_library_options(
+                        groups, limit=getattr(self.settings, "library_refinement_pool_limit", 90),
+                        shortlist_variants=False)
+                return self._select_library_options(
+                    groups, limit=getattr(self.settings, "library_seed_pool_limit", 40),
+                    shortlist_variants=getattr(self.settings, "library_seed_variant_shortlist", True))
             library_kwargs["seed_selector"] = select_seed_options
             if getattr(self.settings, "library_refinement_pool_limit", 90):
                 library_kwargs["refinement_selector"] = lambda groups: select_seed_options(groups, refinement=True)

@@ -216,7 +216,8 @@ def main():
         assert baseline["inputs"] == inputs, "Baseline inputs differ"
     settings = Settings(complete_recipes_enabled=True, price_provider="own")
     if args.uncapped:
-        settings = replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0)
+        settings = replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0,
+                           library_seed_variant_shortlist=False)
     uncapped = json.loads(args.uncapped_reference.read_bytes()) if args.uncapped_reference else None
     if uncapped:
         assert uncapped["inputs"] == inputs and uncapped.get("uncapped"), "Uncapped reference differs"
@@ -229,7 +230,8 @@ def main():
               "historical_replay": True, "shared_preparation": not args.reference_preparation,
               "uncapped": args.uncapped,
               "search_limits": {"seed": settings.library_seed_pool_limit,
-                                "refinement": settings.library_refinement_pool_limit}}
+                                "refinement": settings.library_refinement_pool_limit,
+                                "seed_variant_shortlist": settings.library_seed_variant_shortlist}}
     from app.services.meal_prepared_artifacts import STATS, method_signature
 
     from backend.scripts.benchmark_beta_capacity import _process_snapshot
