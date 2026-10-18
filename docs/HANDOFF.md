@@ -1,3 +1,26 @@
+# 2026-10-17: Ägg med standardvikt, test mot fullt bibliotek, faktalås – ej aktiverat
+
+1. **Ägg (ägarbeslut):** M- och L-ägg räknas med standardvikt, 51 g respektive
+   60 g ätbart per ägg (klassens mittvikt 58/68 g med skal, cirka 12 % skal).
+   Blandat M/L räknas som M; Small, enbart XL och pack utan klass får ingen vikt.
+   Ingen förklarande text. Ersätter klassminimum-härledningen.
+2. **Taken får aldrig ge dyrare meny:** acceptansmatrisen har `--uncapped`
+   (start och förfining över hela biblioteket) och `--uncapped-reference`
+   som underkänner en körning med tak som betalar mer eller får annat utfall.
+   `backend/tests/test_search_caps_vs_uncapped.py` gör samma jämförelse mot ett
+   fryst underlag (`SMAKO_REVIEW_DATA`, profiler i `SMAKO_CAP_PROFILES`, hoppas
+   över utan data). Standard och fördelning passerar i Lund. Kör det före
+   ändrade tak och när många recept läggs till.
+3. **Faktalåset (Codex P2):** hashning av råkällor sker utan lås och bara en
+   projektion per nyckel körs åt gången; en förfrågan för redan cachad eller
+   annan nyckel väntar inte längre. Integritetskontrollerna är oförändrade.
+   Två trådar för samma nyckel kan i sällsynta fall projicera samtidigt
+   (dubbelt arbete, inte fel resultat).
+
+Kvar: makroprofilen (~125 s lokalt) – näringssökningens exakta prisräkning per meny.
+
+---
+
 # 2026-10-17: Kortare sökning i specialprofiler och förfiningstak – ej aktiverat
 
 Gren `perf/planner-startup-and-semantics`, efter granskningsuppföljningen.
