@@ -1,3 +1,20 @@
+# 2026-10-18: 20 author-recept och uppmätt bibliotekstillväxt – endast testbibliotek
+
+20 nya prototyprecept skapade/importerade med ordinarie author. 222 → 242
+recept, samtliga 20 köpbara i både Lund och Malmö och godkända av standardfiltret.
+36 isolerade serverplaneringar passerar kvalitetskontrollerna. Varm standardtid:
+Lund 37,94 → 37,11 s; Malmö 49,60 → 57,45 s (+15,8 %). Varm näringsprofil:
+Lund 146,76 → 140,40 s; Malmö 24,79 → 30,51 s (+23,1 %).
+Menyerna blir 2,6–9,8 % billigare; inga söktak ändrade. Standardprofilen
+upprepad i omvänd ordning. Frysta priser/fakta och samma runtimekod i båda armarna.
+
+[Full metod, kalla/varma värden, recept och underlag](reviews/recipe-growth-20261018.md).
+Recepten ligger som experimentunderlag i docs, inte i produktionsbiblioteket.
+Ingen aktivering. Testmiljön avslutad, 854 MB egna temporära filer rensade efter
+verifiering. Slutkontroll 16:05 UTC: ready/200, prewarm false, 19,16 GB ledigt.
+
+---
+
 # 2026-10-18: Rättelsepaketet granskat och integrerat på main – ej aktiverat
 
 Sex patchcommits `9ec318c..ad0411f` ovanpå `412ebd8` är granskade utan

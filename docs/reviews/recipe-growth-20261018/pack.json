@@ -1,0 +1,7399 @@
+{
+ "schema_version": "smako-meal-pack-v1",
+ "pack_id": "growth-experiment-20261018",
+ "recipes": [
+  {
+   "name": "Kyckling i paprikasås med spenat, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 360.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 360.0,
+     "quantity_max": 360.0,
+     "quantity_step": 360.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "spenat",
+     "canonical_name": "spenat",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Riv moroten grovt. Fräs den med lök, vitlök och paprikapulver i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud 10 minuter. Rör ner spenat och citronjuice och hetta upp. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chicken-paprika",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "swedish"
+    ],
+    "family": "growth-chicken-paprika",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "paprikapulver",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "kyckling",
+        "note": "",
+        "quantity": 360.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spenat|as_sold",
+        "name": "spenat",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Riv moroten grovt. Fräs den med lök, vitlök och paprikapulver i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud 10 minuter. Rör ner spenat och citronjuice och hetta upp. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spenat|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 35,
+    "waiting_minutes": 0,
+    "total_minutes": 35
+   }
+  },
+  {
+   "name": "Kyckling i spiskummintomat med paprika, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 360.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 360.0,
+     "quantity_max": 360.0,
+     "quantity_step": 360.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna paprika och morot smått. Fräs med lök, vitlök och spiskummin i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud tills moroten är mjuk, cirka 12 minuter. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chicken-cumin",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "growth-chicken-cumin",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "spiskummin",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "kyckling",
+        "note": "",
+        "quantity": 360.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "spiskummin",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna paprika och morot smått. Fräs med lök, vitlök och spiskummin i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud tills moroten är mjuk, cirka 12 minuter. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 35,
+    "waiting_minutes": 0,
+    "total_minutes": 35
+   }
+  },
+  {
+   "name": "Kyckling i kokossås med ingefära och ärtor, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 360.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 360.0,
+     "quantity_max": 360.0,
+     "quantity_step": 360.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "kokosmjölk",
+     "canonical_name": "kokosmjölk",
+     "quantity": 200.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "ärtor",
+     "canonical_name": "ärtor",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Riv ingefäran och strimla moroten fint. Fräs med lök och vitlök i oljan. Häll på kokosmjölk och 100 ml vatten. Sjud cirka 10 minuter. Tillsätt ärtorna och värm igenom. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chicken-ginger",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "thai"
+    ],
+    "family": "growth-chicken-ginger",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "ingefära",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "kyckling",
+        "note": "",
+        "quantity": 360.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kokosmjölk|as_sold",
+        "name": "kokosmjölk",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "ärtor|as_sold",
+        "name": "ärtor",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Riv ingefäran och strimla moroten fint. Fräs med lök och vitlök i oljan. Häll på kokosmjölk och 100 ml vatten. Sjud cirka 10 minuter. Tillsätt ärtorna och värm igenom. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "kokosmjölk|as_sold",
+       "morot|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "ärtor|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 35,
+    "waiting_minutes": 0,
+    "total_minutes": 35
+   }
+  },
+  {
+   "name": "Kyckling i oreganosås med zucchini, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 360.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 360.0,
+     "quantity_max": 360.0,
+     "quantity_step": 360.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "zucchini",
+     "canonical_name": "zucchini",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna zucchini och paprika. Fräs dem med lök, vitlök och oregano i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud cirka 12 minuter och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chicken-oregano",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "italian"
+    ],
+    "family": "growth-chicken-oregano",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "oregano",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "kyckling",
+        "note": "",
+        "quantity": 360.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "zucchini|raw_edible",
+        "name": "zucchini",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "oregano",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna zucchini och paprika. Fräs dem med lök, vitlök och oregano i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud cirka 12 minuter och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "oregano|dry",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "zucchini|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 35,
+    "waiting_minutes": 0,
+    "total_minutes": 35
+   }
+  },
+  {
+   "name": "Kyckling i mild chilisås med morot, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 360.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 360.0,
+     "quantity_max": 360.0,
+     "quantity_step": 360.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "chiliflakes",
+     "canonical_name": "chiliflakes",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna paprikan. Fräs den med lök, vitlök och chiliflakes i oljan. Tillsätt krossade tomater och 100 ml vatten och sjud 10 minuter. Rör ner tunt skivad morot och sjud cirka 12 minuter tills den är mjuk och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chicken-chili",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "growth-chicken-chili",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "chiliflakes",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "kyckling",
+        "note": "",
+        "quantity": 360.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "chiliflakes|dry",
+        "name": "chiliflakes",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna paprikan. Fräs den med lök, vitlök och chiliflakes i oljan. Tillsätt krossade tomater och 100 ml vatten och sjud 10 minuter. Rör ner tunt skivad morot och sjud cirka 12 minuter tills den är mjuk och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "chiliflakes|dry",
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skär kycklingen i jämna bitar. Bryn i oljan och sjud sedan i såsen tills tjockaste biten når minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 35,
+    "waiting_minutes": 0,
+    "total_minutes": 35
+   }
+  },
+  {
+   "name": "Nötfärs i paprikasås med spenat, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "spenat",
+     "canonical_name": "spenat",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Riv moroten grovt. Fräs den med lök, vitlök och paprikapulver i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud 10 minuter. Rör ner spenat och citronjuice och hetta upp. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-beef-paprika",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "swedish"
+    ],
+    "family": "growth-beef-paprika",
+    "primary_ingredient": "nötfärs",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "paprikapulver",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Nötfärs",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "nötfärs",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spenat|as_sold",
+        "name": "spenat",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Riv moroten grovt. Fräs den med lök, vitlök och paprikapulver i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud 10 minuter. Rör ner spenat och citronjuice och hetta upp. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spenat|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 32,
+    "waiting_minutes": 0,
+    "total_minutes": 32
+   }
+  },
+  {
+   "name": "Nötfärs i spiskummintomat med paprika, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna paprika och morot smått. Fräs med lök, vitlök och spiskummin i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud tills moroten är mjuk, cirka 12 minuter. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-beef-cumin",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "growth-beef-cumin",
+    "primary_ingredient": "nötfärs",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "spiskummin",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Nötfärs",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "nötfärs",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "spiskummin",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna paprika och morot smått. Fräs med lök, vitlök och spiskummin i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud tills moroten är mjuk, cirka 12 minuter. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 32,
+    "waiting_minutes": 0,
+    "total_minutes": 32
+   }
+  },
+  {
+   "name": "Nötfärs i kokossås med ingefära och ärtor, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "kokosmjölk",
+     "canonical_name": "kokosmjölk",
+     "quantity": 200.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "ärtor",
+     "canonical_name": "ärtor",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Riv ingefäran och strimla moroten fint. Fräs med lök och vitlök i oljan. Häll på kokosmjölk och 100 ml vatten. Sjud cirka 10 minuter. Tillsätt ärtorna och värm igenom. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-beef-ginger",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "thai"
+    ],
+    "family": "growth-beef-ginger",
+    "primary_ingredient": "nötfärs",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "ingefära",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Nötfärs",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "nötfärs",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kokosmjölk|as_sold",
+        "name": "kokosmjölk",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "ärtor|as_sold",
+        "name": "ärtor",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Riv ingefäran och strimla moroten fint. Fräs med lök och vitlök i oljan. Häll på kokosmjölk och 100 ml vatten. Sjud cirka 10 minuter. Tillsätt ärtorna och värm igenom. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "kokosmjölk|as_sold",
+       "morot|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "ärtor|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 32,
+    "waiting_minutes": 0,
+    "total_minutes": 32
+   }
+  },
+  {
+   "name": "Nötfärs i oreganosås med zucchini, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "zucchini",
+     "canonical_name": "zucchini",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna zucchini och paprika. Fräs dem med lök, vitlök och oregano i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud cirka 12 minuter och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-beef-oregano",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "italian"
+    ],
+    "family": "growth-beef-oregano",
+    "primary_ingredient": "nötfärs",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "oregano",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Nötfärs",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "nötfärs",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "zucchini|raw_edible",
+        "name": "zucchini",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "oregano",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna zucchini och paprika. Fräs dem med lök, vitlök och oregano i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud cirka 12 minuter och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "oregano|dry",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "zucchini|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 32,
+    "waiting_minutes": 0,
+    "total_minutes": 32
+   }
+  },
+  {
+   "name": "Nötfärs i mild chilisås med morot, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "chiliflakes",
+     "canonical_name": "chiliflakes",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna paprikan. Fräs den med lök, vitlök och chiliflakes i oljan. Tillsätt krossade tomater och 100 ml vatten och sjud 10 minuter. Rör ner tunt skivad morot och sjud cirka 12 minuter tills den är mjuk och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-beef-chili",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "growth-beef-chili",
+    "primary_ingredient": "nötfärs",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "chiliflakes",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Nötfärs",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "nötfärs",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "chiliflakes|dry",
+        "name": "chiliflakes",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna paprikan. Fräs den med lök, vitlök och chiliflakes i oljan. Tillsätt krossade tomater och 100 ml vatten och sjud 10 minuter. Rör ner tunt skivad morot och sjud cirka 12 minuter tills den är mjuk och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "chiliflakes|dry",
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Bryn nötfärsen smulig i oljan. Sjud i såsen tills färsen är genomstekt och når minst 72 °C.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 32,
+    "waiting_minutes": 0,
+    "total_minutes": 32
+   }
+  },
+  {
+   "name": "Röda linser i paprikasås med spenat, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "linser",
+     "canonical_name": "linser",
+     "quantity": 180.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "red_split"
+     ],
+     "quantity_min": 180.0,
+     "quantity_max": 180.0,
+     "quantity_step": 180.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "spenat",
+     "canonical_name": "spenat",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Riv moroten grovt. Fräs den med lök, vitlök och paprikapulver i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud 10 minuter. Rör ner spenat och citronjuice och hetta upp. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-lentils-paprika",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "swedish"
+    ],
+    "family": "growth-lentils-paprika",
+    "primary_ingredient": "linser",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "paprikapulver",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Röda linser",
+      "amounts": [
+       {
+        "ingredient_key": "linser|dry",
+        "name": "linser",
+        "note": "",
+        "quantity": 180.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spenat|as_sold",
+        "name": "spenat",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Riv moroten grovt. Fräs den med lök, vitlök och paprikapulver i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud 10 minuter. Rör ner spenat och citronjuice och hetta upp. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spenat|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+      "ingredient_keys": [
+       "linser|dry",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "450 ml",
+        450.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "linser|dry",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 40,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 40,
+    "waiting_minutes": 0,
+    "total_minutes": 40
+   }
+  },
+  {
+   "name": "Röda linser i spiskummintomat med paprika, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "linser",
+     "canonical_name": "linser",
+     "quantity": 180.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "red_split"
+     ],
+     "quantity_min": 180.0,
+     "quantity_max": 180.0,
+     "quantity_step": 180.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna paprika och morot smått. Fräs med lök, vitlök och spiskummin i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud tills moroten är mjuk, cirka 12 minuter. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-lentils-cumin",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "growth-lentils-cumin",
+    "primary_ingredient": "linser",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "spiskummin",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Röda linser",
+      "amounts": [
+       {
+        "ingredient_key": "linser|dry",
+        "name": "linser",
+        "note": "",
+        "quantity": 180.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "spiskummin",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna paprika och morot smått. Fräs med lök, vitlök och spiskummin i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud tills moroten är mjuk, cirka 12 minuter. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+      "ingredient_keys": [
+       "linser|dry",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "450 ml",
+        450.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "linser|dry",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 40,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 40,
+    "waiting_minutes": 0,
+    "total_minutes": 40
+   }
+  },
+  {
+   "name": "Röda linser i kokossås med ingefära och ärtor, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "linser",
+     "canonical_name": "linser",
+     "quantity": 180.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "red_split"
+     ],
+     "quantity_min": 180.0,
+     "quantity_max": 180.0,
+     "quantity_step": 180.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "kokosmjölk",
+     "canonical_name": "kokosmjölk",
+     "quantity": 200.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "ärtor",
+     "canonical_name": "ärtor",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Riv ingefäran och strimla moroten fint. Fräs med lök och vitlök i oljan. Häll på kokosmjölk och 100 ml vatten. Sjud cirka 10 minuter. Tillsätt ärtorna och värm igenom. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-lentils-ginger",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "thai"
+    ],
+    "family": "growth-lentils-ginger",
+    "primary_ingredient": "linser",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "ingefära",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Röda linser",
+      "amounts": [
+       {
+        "ingredient_key": "linser|dry",
+        "name": "linser",
+        "note": "",
+        "quantity": 180.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kokosmjölk|as_sold",
+        "name": "kokosmjölk",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "ärtor|as_sold",
+        "name": "ärtor",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Riv ingefäran och strimla moroten fint. Fräs med lök och vitlök i oljan. Häll på kokosmjölk och 100 ml vatten. Sjud cirka 10 minuter. Tillsätt ärtorna och värm igenom. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "kokosmjölk|as_sold",
+       "morot|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "ärtor|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+      "ingredient_keys": [
+       "linser|dry",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "450 ml",
+        450.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "linser|dry",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 40,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 40,
+    "waiting_minutes": 0,
+    "total_minutes": 40
+   }
+  },
+  {
+   "name": "Röda linser i oreganosås med zucchini, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "linser",
+     "canonical_name": "linser",
+     "quantity": 180.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "red_split"
+     ],
+     "quantity_min": 180.0,
+     "quantity_max": 180.0,
+     "quantity_step": 180.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "zucchini",
+     "canonical_name": "zucchini",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna zucchini och paprika. Fräs dem med lök, vitlök och oregano i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud cirka 12 minuter och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-lentils-oregano",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "italian"
+    ],
+    "family": "growth-lentils-oregano",
+    "primary_ingredient": "linser",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "oregano",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Röda linser",
+      "amounts": [
+       {
+        "ingredient_key": "linser|dry",
+        "name": "linser",
+        "note": "",
+        "quantity": 180.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "zucchini|raw_edible",
+        "name": "zucchini",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "oregano",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna zucchini och paprika. Fräs dem med lök, vitlök och oregano i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud cirka 12 minuter och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "oregano|dry",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "zucchini|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+      "ingredient_keys": [
+       "linser|dry",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "450 ml",
+        450.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "linser|dry",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 40,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 40,
+    "waiting_minutes": 0,
+    "total_minutes": 40
+   }
+  },
+  {
+   "name": "Röda linser i mild chilisås med morot, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "linser",
+     "canonical_name": "linser",
+     "quantity": 180.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "red_split"
+     ],
+     "quantity_min": 180.0,
+     "quantity_max": 180.0,
+     "quantity_step": 180.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "chiliflakes",
+     "canonical_name": "chiliflakes",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna paprikan. Fräs den med lök, vitlök och chiliflakes i oljan. Tillsätt krossade tomater och 100 ml vatten och sjud 10 minuter. Rör ner tunt skivad morot och sjud cirka 12 minuter tills den är mjuk och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-lentils-chili",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "growth-lentils-chili",
+    "primary_ingredient": "linser",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "chiliflakes",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Röda linser",
+      "amounts": [
+       {
+        "ingredient_key": "linser|dry",
+        "name": "linser",
+        "note": "",
+        "quantity": 180.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "chiliflakes|dry",
+        "name": "chiliflakes",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna paprikan. Fräs den med lök, vitlök och chiliflakes i oljan. Tillsätt krossade tomater och 100 ml vatten och sjud 10 minuter. Rör ner tunt skivad morot och sjud cirka 12 minuter tills den är mjuk och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "chiliflakes|dry",
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj linserna. Koka dem separat i 450 ml vatten i cirka 15 minuter tills mjuka. Rör sedan ner i såsen; späd vid behov.",
+      "ingredient_keys": [
+       "linser|dry",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "450 ml",
+        450.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "linser|dry",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 40,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 40,
+    "waiting_minutes": 0,
+    "total_minutes": 40
+   }
+  },
+  {
+   "name": "Kikärtor i paprikasås med spenat, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kikärtor",
+     "canonical_name": "kikärtor",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "spenat",
+     "canonical_name": "spenat",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Riv moroten grovt. Fräs den med lök, vitlök och paprikapulver i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud 10 minuter. Rör ner spenat och citronjuice och hetta upp. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chickpeas-paprika",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "swedish"
+    ],
+    "family": "growth-chickpeas-paprika",
+    "primary_ingredient": "kikärtor",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "paprikapulver",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kikärtor",
+      "amounts": [
+       {
+        "ingredient_key": "kikärtor|cooked_drained",
+        "name": "kikärtor",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spenat|as_sold",
+        "name": "spenat",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Riv moroten grovt. Fräs den med lök, vitlök och paprikapulver i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud 10 minuter. Rör ner spenat och citronjuice och hetta upp. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spenat|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 30,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 30,
+    "waiting_minutes": 0,
+    "total_minutes": 30
+   }
+  },
+  {
+   "name": "Kikärtor i spiskummintomat med paprika, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kikärtor",
+     "canonical_name": "kikärtor",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna paprika och morot smått. Fräs med lök, vitlök och spiskummin i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud tills moroten är mjuk, cirka 12 minuter. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chickpeas-cumin",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "growth-chickpeas-cumin",
+    "primary_ingredient": "kikärtor",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "spiskummin",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kikärtor",
+      "amounts": [
+       {
+        "ingredient_key": "kikärtor|cooked_drained",
+        "name": "kikärtor",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "spiskummin",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna paprika och morot smått. Fräs med lök, vitlök och spiskummin i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud tills moroten är mjuk, cirka 12 minuter. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 30,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 30,
+    "waiting_minutes": 0,
+    "total_minutes": 30
+   }
+  },
+  {
+   "name": "Kikärtor i kokossås med ingefära och ärtor, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kikärtor",
+     "canonical_name": "kikärtor",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "kokosmjölk",
+     "canonical_name": "kokosmjölk",
+     "quantity": 200.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "ärtor",
+     "canonical_name": "ärtor",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Riv ingefäran och strimla moroten fint. Fräs med lök och vitlök i oljan. Häll på kokosmjölk och 100 ml vatten. Sjud cirka 10 minuter. Tillsätt ärtorna och värm igenom. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chickpeas-ginger",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "thai"
+    ],
+    "family": "growth-chickpeas-ginger",
+    "primary_ingredient": "kikärtor",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "ingefära",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kikärtor",
+      "amounts": [
+       {
+        "ingredient_key": "kikärtor|cooked_drained",
+        "name": "kikärtor",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kokosmjölk|as_sold",
+        "name": "kokosmjölk",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "ärtor|as_sold",
+        "name": "ärtor",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Riv ingefäran och strimla moroten fint. Fräs med lök och vitlök i oljan. Häll på kokosmjölk och 100 ml vatten. Sjud cirka 10 minuter. Tillsätt ärtorna och värm igenom. Smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "kokosmjölk|as_sold",
+       "morot|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "ärtor|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 30,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 30,
+    "waiting_minutes": 0,
+    "total_minutes": 30
+   }
+  },
+  {
+   "name": "Kikärtor i oreganosås med zucchini, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kikärtor",
+     "canonical_name": "kikärtor",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "zucchini",
+     "canonical_name": "zucchini",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna zucchini och paprika. Fräs dem med lök, vitlök och oregano i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud cirka 12 minuter och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chickpeas-oregano",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "italian"
+    ],
+    "family": "growth-chickpeas-oregano",
+    "primary_ingredient": "kikärtor",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "oregano",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kikärtor",
+      "amounts": [
+       {
+        "ingredient_key": "kikärtor|cooked_drained",
+        "name": "kikärtor",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "zucchini|raw_edible",
+        "name": "zucchini",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "oregano",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna zucchini och paprika. Fräs dem med lök, vitlök och oregano i oljan. Tillsätt krossade tomater och 100 ml vatten. Sjud cirka 12 minuter och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "oregano|dry",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "zucchini|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 30,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 30,
+    "waiting_minutes": 0,
+    "total_minutes": 30
+   }
+  },
+  {
+   "name": "Kikärtor i mild chilisås med morot, med ris",
+   "servings": 2,
+   "ingredients": [
+    {
+     "name": "kikärtor",
+     "canonical_name": "kikärtor",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "protein",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "chiliflakes",
+     "canonical_name": "chiliflakes",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "sauce",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "sauce",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "rice",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+    "Hacka lök och vitlök. Tärna paprikan. Fräs den med lök, vitlök och chiliflakes i oljan. Tillsätt krossade tomater och 100 ml vatten och sjud 10 minuter. Rör ner tunt skivad morot och sjud cirka 12 minuter tills den är mjuk och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+    "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+    "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp."
+   ],
+   "design": {
+    "base_id": "smako-growth-20261018-chickpeas-chili",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "growth-chickpeas-chili",
+    "primary_ingredient": "kikärtor",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "chiliflakes",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "protein",
+      "name": "Kikärtor",
+      "amounts": [
+       {
+        "ingredient_key": "kikärtor|cooked_drained",
+        "name": "kikärtor",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "sauce",
+      "name": "Grönsakssås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "vitlök",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "salt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "morot",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "chiliflakes|dry",
+        "name": "chiliflakes",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "paprika",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "rice",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset i 300 ml vatten enligt förpackningens tid, cirka 15 minuter. Låt vila under lock.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Hacka lök och vitlök. Tärna paprikan. Fräs den med lök, vitlök och chiliflakes i oljan. Tillsätt krossade tomater och 100 ml vatten och sjud 10 minuter. Rör ner tunt skivad morot och sjud cirka 12 minuter tills den är mjuk och smaka av med citronjuice. Fördela oljan mellan grönsakerna och proteinet och tillsätt saltet i såsen.",
+      "ingredient_keys": [
+       "chiliflakes|dry",
+       "citronjuice|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "morot|raw_edible",
+       "paprika|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "100 ml",
+        100.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Skölj och låt kikärtorna rinna av. Värm dem i såsen i cirka 10 minuter tills genomvarma.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med riset. Kyl eventuella rester snabbt och ställ i kylskåp.",
+      "ingredient_keys": [
+       "kikärtor|cooked_drained",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 30,
+    "equipment": [
+     "Kastrull",
+     "Gryta",
+     "Skärbräda",
+     "Kniv"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-10-18",
+     "notes": "Experiment för bibliotekstillväxt 2026-10-18. Nytt receptutkast, inte provlagat eller produktionsgodkänt. Inga käll-, allergen- eller näringsintyg påstås."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 30,
+    "waiting_minutes": 0,
+    "total_minutes": 30
+   }
+  }
+ ]
+}
