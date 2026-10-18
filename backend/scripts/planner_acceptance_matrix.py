@@ -19,7 +19,7 @@ import time
 from collections import Counter
 from contextlib import ExitStack
 from copy import deepcopy
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
@@ -72,6 +72,22 @@ def matrix_request(base, case):
     body["recipes"] = sum(m["count"] for m in body["personal"]["meals"]
                           if m.get("meal_type", "dinner") == "dinner")
     return PlanRequest.model_validate(body)
+
+
+def cap_regression(capped, uncapped):
+    """'ok' unless the bounded search lost a cheaper (or any) menu.
+
+    The search caps are heuristics; this compares one profile's capped result
+    with the same inputs searched over the whole qualified library.
+    """
+    if capped["outcome"] != uncapped["outcome"]:
+        return f"outcome {capped['outcome']} != uncapped {uncapped['outcome']}"
+    if capped["outcome"] != "PASS":
+        same = (capped.get("code"), capped.get("stage")) == (uncapped.get("code"), uncapped.get("stage"))
+        return "ok" if same else "failure differs from uncapped"
+    if round(capped["paid"], 2) > round(uncapped["paid"], 2):
+        return f"capped pays {capped['paid']:.2f} kr, uncapped {uncapped['paid']:.2f} kr"
+    return "ok"
 
 
 def quality(plan, request):
@@ -161,6 +177,10 @@ def main():
     p.add_argument("--repeat", type=int, default=2)
     p.add_argument("--profile", action="store_true")
     p.add_argument("--baseline", type=Path)
+    p.add_argument("--uncapped", action="store_true",
+                   help="Reference run: seed and refinement search over the whole qualified library")
+    p.add_argument("--uncapped-reference", type=Path,
+                   help="Report from an --uncapped run; fail if the capped search pays more")
     p.add_argument("--reference-preparation", action="store_true",
                    help="Bypass only new shared preparation; retain ordinary planner and audits")
     p.add_argument("--prepared-startup", action="store_true",
@@ -195,13 +215,21 @@ def main():
     if baseline:
         assert baseline["inputs"] == inputs, "Baseline inputs differ"
     settings = Settings(complete_recipes_enabled=True, price_provider="own")
+    if args.uncapped:
+        settings = replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0)
+    uncapped = json.loads(args.uncapped_reference.read_bytes()) if args.uncapped_reference else None
+    if uncapped:
+        assert uncapped["inputs"] == inputs and uncapped.get("uncapped"), "Uncapped reference differs"
     records = []
     report = {"schema": "smako-planner-acceptance-v1", "case": args.matrix_case,
               "inputs": inputs, "label": args.label, "records": records,
               "environment": {"python": platform.python_version(), "platform": platform.platform(),
                               "logical_cpus": os.cpu_count()},
               "load_seconds": time.perf_counter() - started, "network": "blocked",
-              "historical_replay": True, "shared_preparation": not args.reference_preparation}
+              "historical_replay": True, "shared_preparation": not args.reference_preparation,
+              "uncapped": args.uncapped,
+              "search_limits": {"seed": settings.library_seed_pool_limit,
+                                "refinement": settings.library_refinement_pool_limit}}
     from app.services.meal_prepared_artifacts import STATS, method_signature
 
     from backend.scripts.benchmark_beta_capacity import _process_snapshot
@@ -277,6 +305,9 @@ def main():
             else:
                 assert (row["code"], row["stage"]) == (old["code"], old["stage"]), "Failure changed"
             row["baseline_equivalent"] = True
+        if uncapped:
+            row["uncapped_check"] = cap_regression(row, uncapped["records"][min(iteration, len(uncapped["records"])-1)])
+            assert row["uncapped_check"] == "ok", row["uncapped_check"]
         records.append(row)
         report["summary"] = summarize(records)
         path = args.output / f"{args.label}-{args.matrix_case}.json"
