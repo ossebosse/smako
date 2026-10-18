@@ -1,3 +1,14 @@
+# 2026-10-18: Rättelser efter uppföljningsgranskningen – ej aktiverat
+
+Gren `fix/review-20261018` ovanpå `d41339d`. De tre reproducerade P2-fynden i
+`docs/reviews/planner-followup-review-20261018.md` är rättade med
+regressionstester, och Brunchägg L/XL får standardvikt. Detaljer, tester och
+granskningssteg: `docs/reviews/review-instructions-20261018.md`.
+Prestandamålet och releaseimagen är fortsatt öppna punkter. Backupfelet har
+åtgärdats efter patchens basversion; se lagringsposten nedan.
+
+---
+
 # 2026-10-18: Serverlagring rensad och backup återställd
 
 22,41 GB netto frigjort under befintligt driftlås. Sex inaktiva arkivkataloger
