@@ -88,17 +88,14 @@ def test_shell_mass_projection_requires_separate_purchase_opt_in(retained):
     assert input_evidence(recipe,estimate,'ägg','g',True,f) is not None
     count=p.model_copy(update={'package_quantity':12,'package_unit':'st'})
     counted=supplement_catalog_facts([count],{(count.store_id,count.product_id):replace(f,field_sources={})})[(count.store_id,count.product_id)]
-    from app.services.official_product_facts import egg_size_class_minimum
-    minimum=egg_size_class_minimum(count.name)
-    if minimum is None:
-        # Owner decision 2026-10-17: only a named weight class turns a count into grams.
+    from app.services.official_product_facts import egg_standard_weight
+    weight=egg_standard_weight(count.name)
+    if weight is None:
+        # Owner decision 2026-10-17: only M and L packs are counted as grams.
         assert not counted.field_sources
     else:
-        # The proof states its real basis: the class's legal minimum shell mass
-        # times a documented *population* edible fraction, never a weighed mass.
         (proof,)=counted.field_sources['usable_quantity']
-        assert proof['basis']=='class_minimum_edible' and proof['quality']=='documented_population_estimate'
-        assert proof['quantity']==pytest.approx(12*minimum*.88,abs=.1) and proof['class_standard']=='EU 589/2008 art. 4'
+        assert proof['basis']=='standard_egg_weight' and proof['quantity']==12*weight
         derived=project_usable_quantity(count,counted)
         assert derived.usable_unit=='g' and derived.quantity_confidence=='derived'
 

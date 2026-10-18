@@ -2,25 +2,25 @@
 import pytest
 from app.models.product import QuantityConfidence
 from app.services.official_product_facts import (
-    egg_size_class_minimum,
+    egg_standard_weight,
     project_usable_quantity,
     shell_egg_quantity_proofs,
 )
 from app.services.personal_policy import ProductFacts
 
 
-@pytest.mark.parametrize(("name", "minimum"), [
-    ("Ägg 15-pack M Frigående inomhus", 53.0),
-    ("Ägg 10-pack M/L Frigående utomhus", 53.0),
-    ("Ägg 12p Frigående Inomhus Medium/large", 53.0),
-    ("Ägg 6p Frigående Inomhus Large/x-large", 63.0),
-    ("Brunchägg Frigående L/XL 6-pack", 63.0),
+@pytest.mark.parametrize(("name", "weight"), [
+    ("Ägg 15-pack M Frigående inomhus", 51.0),
+    ("Ägg 10-pack M/L Frigående utomhus", 51.0),
+    ("Ägg 12p Frigående Inomhus Medium/large", 51.0),
+    ("Ägg 6-pack L Eko", 60.0),
+    ("Ägg 6p Frigående Inomhus Large/x-large", 60.0),
+    ("Ägg 6p XL", None),
     ("Ägg 10p Frigående Inomhus Small/medium", None),
-    ("Ägg 6p Frigående Inomhus Small", None),
     ("Ägg", None),
 ])
-def test_weight_class_minimum_uses_the_smallest_named_class(name, minimum):
-    assert egg_size_class_minimum(name) == minimum
+def test_m_and_l_eggs_use_standard_weights(name, weight):
+    assert egg_standard_weight(name) == weight
 
 
 def _product(name, count=15):
@@ -33,13 +33,13 @@ def _product(name, count=15):
                               "source_observed_at": "2026-10-16T00:00:00+00:00"}})
 
 
-def test_counted_pack_gets_a_conservative_derived_mass():
+def test_counted_pack_gets_the_standard_weight():
     product = _product("Ägg 15-pack M Frigående inomhus")
     facts = {("s1", "p1"): ProductFacts(source="test", source_product_id="p1", source_snapshot_id="snap", ingredients=("Ägg.",))}
     shell_egg_quantity_proofs([product], facts)
     projected = project_usable_quantity(product, facts[("s1", "p1")], required_unit="g")
     assert projected.usable_unit == "g"
-    assert projected.usable_quantity == pytest.approx(15 * 53 * 0.88, abs=0.1)
+    assert projected.usable_quantity == 15 * 51.0
     assert projected.quantity_confidence == QuantityConfidence.DERIVED
 
 

@@ -368,30 +368,28 @@ def supplement_catalog_facts(products, original):
     return shell_egg_quantity_proofs(products, result)
 
 
-# EU marketing standard (Reg. (EC) 589/2008, art. 4): minimum shell-egg mass per
-# weight class. Small has no lower bound, so it never gets a derived mass.
-EGG_CLASS_MINIMUM_G = {'m': 53.0, 'l': 63.0, 'xl': 73.0}
+# Owner decision 2026-10-17: count M and L eggs with their standard edible
+# weights (class mid-weight with shell, 58 g and 68 g, minus about 12 % shell).
+EGG_STANDARD_EDIBLE_G = {'m': 51.0, 'l': 60.0}
 _EGG_CLASS_WORDS = {'small': 's', 's': 's', 'medium': 'm', 'm': 'm', 'large': 'l', 'l': 'l',
                     'x-large': 'xl', 'xl': 'xl'}
 
 
-def egg_size_class_minimum(name):
-    """Smallest legal shell mass for the weight classes named on a pack, or None."""
+def egg_standard_weight(name):
+    """Standard edible weight per egg for M/L packs (the smaller class wins), or None."""
     words = re.findall(r'x-large|[a-z]+', name.casefold().replace('/', ' '))
     classes = {_EGG_CLASS_WORDS[w] for w in words if w in _EGG_CLASS_WORDS}
-    if not classes or 's' in classes:
+    weights = [EGG_STANDARD_EDIBLE_G[c] for c in classes if c in EGG_STANDARD_EDIBLE_G]
+    if not weights or 's' in classes:
         return None
-    return min(EGG_CLASS_MINIMUM_G[c] for c in classes)
+    return min(weights)
 
 
 def shell_egg_quantity_proofs(products, result):
     """Usable-mass proofs for plain shell eggs.
 
     A source-stated package mass gives the population estimate (estimated mode
-    only). A counted pack with a named weight class gives a conservative
-    derived minimum: count x the class's legal minimum shell mass x the
-    documented edible fraction. Eggs in a class weigh at least the minimum, so
-    the derived mass does not overstate what the pack yields.
+    only). A counted M or L pack gets count x the standard edible egg weight.
     """
     from dataclasses import replace
     from pathlib import Path
@@ -404,17 +402,16 @@ def shell_egg_quantity_proofs(products, result):
                 or not re.match(r'^(?:ägg|skåneägg|bruna ägg|utehönsägg|västgötaägg|brunchägg)\b', p.name.casefold())
                 or re.search(r'kokt|pulver|ersättning|vita|choklad', p.name.casefold())):
             continue
-        minimum = egg_size_class_minimum(p.name)
+        weight = egg_standard_weight(p.name)
         words = set(re.findall(r'[a-zåäö]+', ' '.join(fact.ingredients).casefold()))
-        if minimum is None or (words and not words <= {'ingredienser', 'krav', 'ekologiska', 'ägg', 'hönsägg'}):
+        if weight is None or (words and not words <= {'ingredienser', 'krav', 'ekologiska', 'ägg', 'hönsägg'}):
             continue
-        proof = {**reference, 'basis': 'class_minimum_edible', 'unit': 'g',
-                 'quantity': round(p.package_quantity * minimum * reference['edible_fraction'], 1),
-                 'eggs': p.package_quantity, 'class_minimum_shell_g': minimum,
-                 'class_standard': 'EU 589/2008 art. 4',
+        proof = {'basis': 'standard_egg_weight', 'unit': 'g',
+                 'quantity': round(p.package_quantity * weight, 1),
+                 'eggs': p.package_quantity, 'edible_g_per_egg': weight,
                  'source_snapshot_id': p.source_provenance.source_snapshot_id,
                  'bound_product_id': p.product_id, 'bound_store_id': p.store_id,
-                 'identity_method': 'plain_shell_egg_count_class_minimum_edible'}
+                 'identity_method': 'plain_shell_egg_count_standard_weight'}
         result[key] = replace(fact, field_sources={**fact.field_sources, 'usable_quantity': (proof,)})
     for p in products:
         key = (p.store_id, p.product_id)
@@ -459,8 +456,8 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
             and isinstance(quantity, (int, float)) and 0 < quantity < product.package_quantity):
         return product.model_copy(update={'usable_quantity': quantity, 'usable_unit': 'g',
                                            'quantity_confidence': QuantityConfidence.ESTIMATED})
-    if (proof.get('identity_method') == 'plain_shell_egg_count_class_minimum_edible'
-            and proof.get('basis') == 'class_minimum_edible' and proof.get('unit') == 'g'
+    if (proof.get('identity_method') == 'plain_shell_egg_count_standard_weight'
+            and proof.get('basis') == 'standard_egg_weight' and proof.get('unit') == 'g'
             and proof.get('bound_product_id') == product.product_id
             and proof.get('bound_store_id') == product.store_id
             and proof.get('source_snapshot_id') == product.source_provenance.source_snapshot_id
