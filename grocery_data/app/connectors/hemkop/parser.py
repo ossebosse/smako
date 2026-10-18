@@ -48,7 +48,7 @@ class HemkopParser:
 
     # Version the reviewed catalog contract as well as product mapping so the
     # guarded repair command can distinguish it from the rejected v1.2 run.
-    parser_version = "hemkop-parser-v1.3-reviewed-catalog"
+    parser_version = "hemkop-parser-v1.4-delegated-context"
 
     def __init__(self, *, accept_sales_price_object: bool = True) -> None:
         self._axfood_products = WillysParser(
@@ -203,6 +203,14 @@ class HemkopParser:
             raise ValueError("raw references must align with documents")
         products: dict[str, SourceProduct] = {}
         failures: list[ParseFailure] = []
+        # The shared Axfood parser independently verifies retained bindings.
+        # Preserve the original documents and references when delegating a page;
+        # a boolean on the parsed product is not evidence of an active store.
+        contexts = [
+            (document, reference)
+            for document, reference in zip(raw.documents, references, strict=True)
+            if document.kind == "store_context"
+        ]
         activation_confirmed = False
         for document in raw.documents:
             if document.kind != "store_context" or document.http_status != 200:
@@ -270,8 +278,11 @@ class HemkopParser:
                     continue
 
             delegated = self._axfood_products.parse_catalog(
-                RawBatch(chain=Chain.HEMKOP, documents=(document,)),
-                [reference],
+                RawBatch(
+                    chain=Chain.HEMKOP,
+                    documents=(*(context for context, _ in contexts), document),
+                ),
+                [*(ref for _, ref in contexts), reference],
                 store,
             )
             failures.extend(

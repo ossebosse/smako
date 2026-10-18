@@ -130,6 +130,73 @@ def test_product_observation_records_only_actual_activation_readback() -> None:
     assert detail_without_context.source_fields["price_context_activation_confirmed"] is False
 
 
+def _discovered_picking_store():
+    """Use discovery's real metadata, which product-only fixtures omitted."""
+    row = {
+        "storeId": "4224", "name": "Hemköp Lund Brunnshög",
+        "address": {"town": "Lund"}, "onlineStore": True,
+        "hasPickingBaseStore": False,
+    }
+    document = _context().model_copy(update={
+        "kind": "stores", "payload": json.dumps([row]).encode(),
+    })
+    return HemkopParser().parse_stores(
+        RawBatch(chain=Chain.HEMKOP, documents=(document,)),
+        ["raw:stores"], GeographicArea(city="Lund"),
+    )[0]
+
+
+@pytest.mark.parametrize("kind,name", [
+    ("catalog_page", "fixed_package.json"),
+    ("product_detail", "product_detail.json"),
+])
+def test_discovered_picking_store_keeps_original_context_through_delegation(kind, name):
+    store = _discovered_picking_store()
+    assert store.source_fields["hasPickingBaseStore"] is False
+    context = _context().model_copy(update={"payload": json.dumps({
+        "storeId": "4224", "hasPickingBaseStore": False,
+    }).encode()})
+    product = _raw(name, kind=kind).documents[-1]
+    result = HemkopParser().parse_catalog(
+        RawBatch(chain=Chain.HEMKOP, documents=(context, product)),
+        ["raw:original-context", "raw:original-product"], store,
+    )
+    assert result.products and not result.failures
+    assert all(p.chain is Chain.HEMKOP for p in result.products)
+    assert all(p.source_fields["price_context_activation_confirmed"] for p in result.products)
+    assert all(p.raw_reference.startswith("raw:original-product") for p in result.products)
+
+
+@pytest.mark.parametrize("bad_context", [
+    None,
+    {"storeId": "other", "hasPickingBaseStore": False},
+    {"storeId": "4224", "hasPickingBaseStore": True},
+    {"storeId": "4224", "hasPickingBaseStore": None},
+    {"storeId": "4224", "hasPickingBaseStore": "false"},
+])
+def test_discovered_picking_store_rejects_unverified_context(bad_context):
+    product = _raw("fixed_package.json").documents[-1]
+    documents = [product] if bad_context is None else [
+        _context().model_copy(update={"payload": json.dumps(bad_context).encode()}), product,
+    ]
+    result = HemkopParser().parse_catalog(
+        RawBatch(chain=Chain.HEMKOP, documents=tuple(documents)),
+        [f"raw:{i}" for i in range(len(documents))], _discovered_picking_store(),
+    )
+    assert not result.products
+    assert result.failures[0].error_code == "price_context_unverified"
+
+
+def test_delegation_does_not_hide_a_second_conflicting_context():
+    product = _raw("fixed_package.json").documents[-1]
+    result = HemkopParser().parse_catalog(
+        RawBatch(chain=Chain.HEMKOP, documents=(_context(), _context("4114"), product)),
+        ["raw:valid", "raw:conflicting", "raw:product"], _discovered_picking_store(),
+    )
+    assert not result.products
+    assert result.failures[0].error_code == "price_context_unverified"
+
+
 @pytest.mark.parametrize(
     "context",
     [None, _context("4114")],
@@ -315,7 +382,7 @@ def test_parser_contract_version_and_lineage_are_hemkop_specific() -> None:
     source = _parse("fixed_package.json").products[0]
     canonical = ProductNormalizer().normalize(source, parser_version=HemkopParser.parser_version)
 
-    assert HemkopParser.parser_version == "hemkop-parser-v1.3-reviewed-catalog"
+    assert HemkopParser.parser_version == "hemkop-parser-v1.4-delegated-context"
     assert canonical.parser_version == HemkopParser.parser_version
     assert source.chain is Chain.HEMKOP
     assert source.raw_reference.startswith("raw:1:fixed_package.json#results[0]")
