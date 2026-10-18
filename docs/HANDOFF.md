@@ -1,3 +1,30 @@
+# 2026-10-18: Rättelsepaketet granskat och integrerat på main – ej aktiverat
+
+Sex patchcommits `9ec318c..ad0411f` ovanpå `412ebd8` är granskade utan
+ytterligare runtimeändringar. Full rapport för Claude:
+[verifiering av rättelsepaketet](reviews/review-fixes-verification-20261018.md).
+
+- De tidigare tre P2-felen är rättade: fullbiblioteksreferensen, partiellt
+  persisterade faktaprojektioner och authors vatten-/decimalskalning.
+- Alla sju profiler i båda städerna: 18/18 takpytest PASS. Alla 20 serverpar
+  passerar; de 14 positiva har samma pris/hash, de sex negativa samma felutfall.
+  Defaultresultaten matchar föregående granskning. Inga tak höjdes.
+- Fullsviter: 4 743 PASS, exakt samma 15 kända fel, två separat körda taktester
+  SKIP. Första PR-CI `39120341250` grön: 2 783 PASS, 10 XFAIL, 53 SKIP,
+  inklusive fungerande webbläsartester. PR [#2](https://github.com/ossebosse/smako/pull/2).
+- Alla 28 receptversioner och 55 vattenfall verifierade. 235 äggviktsbevis
+  korrekta; enda faktadeltat är Lunds Brunchägg L/XL 6-pack, 360 g.
+- Kvarvarande P2: `--uncapped-reference` accepterar äldre rapporter som
+  saknar uttrycklig avstängning av varianturval. Reproducerat via riktiga CLI:n.
+  Denna granskning använder nya, kontrollerade fullbiblioteksreferenser.
+- Prestandamålet och reproducerbar releaseimage kvarstår. Äldre kall/varm-
+  mätningar är historisk evidens; denna matris är ett funktionellt prov.
+- Slutkontroll 11:59 UTC: ready/200, samma produktionsimage, prewarm false,
+  backup complete och 20,02 GB ledigt mot 13,99 GB beräknat behov. Egna
+  testunderlag arkiverade med hashkontroll; temporära cachefiler borttagna.
+
+---
+
 # 2026-10-18: Rättelser efter uppföljningsgranskningen – ej aktiverat
 
 Gren `fix/review-20261018` ovanpå `d41339d`. De tre reproducerade P2-fynden i

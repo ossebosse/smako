@@ -36,5 +36,8 @@ Malmös artefakt).
 5. Fullsviten offline och CI som tidigare; inga nya fel utöver listan i
    `docs/TESTING.md`.
 
-Kvar sedan tidigare och inte del av denna patch: prestandamålet (P1), backup
-på servern och reproducerbar releaseimage.
+Kvar sedan tidigare och inte del av denna patch: prestandamålet (P1) och
+reproducerbar releaseimage. Backupfelet rättades efter patchens basversion:
+se [lagringsåtgärden](../storage-maintenance.md) och den kompletta backupen
+`20261018T084659Z`. Inkommande paketets oförändrade instruktion beskriver
+läget före den åtgärden.
