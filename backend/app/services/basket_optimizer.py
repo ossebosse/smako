@@ -1492,6 +1492,11 @@ class BasketOptimizer:
                              if structural is not None else tuple(positions))
                 if session:
                     session.subset_partitions[id(vector)] = (vector, groups, positions, integer_prices)
+                    # The compiled partition now owns the same information.
+                    # Keeping its structural input too costs hundreds of MB in
+                    # large eco searches. A changed Decimal context can safely
+                    # rebuild from the retained immutable vector instead.
+                    session.vector_groups.pop(id(vector), None)
             partitions.append((groups, positions))
         # Small partitions first reduces intermediate intersections without
         # changing the commutative arithmetic or quote selection.

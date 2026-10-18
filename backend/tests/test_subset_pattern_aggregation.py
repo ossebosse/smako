@@ -35,6 +35,7 @@ def test_structural_patterns_match_exhaustive_quotes_and_plain_aggregation():
                         optimizer._cheapest_quote(quotes, set(subset)) for subset in subsets
                     )
                     vectors.append(vector)
+                assert all(id(vector) in session.vector_groups for vector in vectors)
                 for precision in (28, 3, 40, 28):
                     with localcontext() as ctx:
                         ctx.prec = precision
@@ -52,5 +53,6 @@ def test_structural_patterns_match_exhaustive_quotes_and_plain_aggregation():
                         assert [None if key is None else key[1].as_tuple() for key in actual[0]] == [
                             None if key is None else key[1].as_tuple() for key in expected[0]
                         ]
-        assert session.vector_groups and session.subset_memberships
+                    assert not session.vector_groups
+        assert session.subset_memberships
     assert not session.vector_groups and not session.subset_memberships
