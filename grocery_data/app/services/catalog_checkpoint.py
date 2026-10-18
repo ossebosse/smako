@@ -21,6 +21,25 @@ class CollectionWindowEnded(ValueError):
     pass
 
 
+def _boundary_identity(boundary):
+    if boundary is None:
+        return None
+    from grocery_data.app.services.municipality_geometry import validate_boundary
+
+    validate_boundary(boundary)  # Verify the original raw hash before comparison.
+    payload = json.loads(boundary['payload'])
+    if 'timeStamp' in payload:
+        stamp = payload.pop('timeStamp')
+        if not isinstance(stamp, str) or datetime.fromisoformat(stamp).tzinfo is None:
+            raise ValueError('invalid WFS response timestamp')
+    # GeoServer generates timeStamp for every response. Keep all geometry,
+    # feature properties, CRS, counts and source metadata in the identity.
+    # The original payload/hash remain untouched as source evidence.
+    return {**{k: v for k, v in boundary.items()
+               if k not in {'observed_at', 'payload', 'source_sha256'}},
+            'payload': payload}
+
+
 class CatalogCheckpoints:
     def __init__(self, root, *, area, boundary, parser_version, deadline=None, now=None):
         self.root = Path(root)
@@ -45,10 +64,9 @@ class CatalogCheckpoints:
     def _identity(self, store):
         # Raw-reference IDs change on rediscovery; identity and geography do not.
         return {"store_id": store.external_id, "area": self.area.model_dump(mode="json"),
-                "boundary_sha256": sha256(json.dumps(
-                    {k: v for k, v in self.boundary.items() if k != 'observed_at'}
-                    if self.boundary else None, sort_keys=True).encode()).hexdigest(),
-                "parser_version": self.parser_version, "schema": 1}
+                "boundary_identity_sha256": sha256(json.dumps(
+                    _boundary_identity(self.boundary), sort_keys=True).encode()).hexdigest(),
+                "parser_version": self.parser_version, "schema": 2}
 
     def _path(self, store):
         return self.root / (sha256(store.external_id.encode()).hexdigest() + ".json.gz")

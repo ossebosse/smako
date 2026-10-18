@@ -3,6 +3,7 @@ import asyncio
 import gzip
 import json
 from datetime import UTC, datetime, timedelta
+from hashlib import sha256
 from types import SimpleNamespace
 
 import pytest
@@ -49,7 +50,7 @@ def test_resume_complete_store_after_peer_interrupt_preserves_observations(tmp_p
     assert resumed.transport.request_count == 0
 
 
-@pytest.mark.parametrize('damage', ['hash', 'truncated', 'parser', 'expired'])
+@pytest.mark.parametrize('damage', ['hash', 'truncated', 'parser', 'expired', 'legacy_identity'])
 def test_bad_or_expired_checkpoint_is_never_reused(tmp_path, damage):
     discovery, stores, batches, checkpoint = setup_checkpoint(tmp_path)
     calls = []
@@ -68,6 +69,10 @@ def test_bad_or_expired_checkpoint_is_never_reused(tmp_path, damage):
         path.write_bytes(path.read_bytes()[:10])
     elif damage == 'parser':
         second.parser_version = 'changed'
+    elif damage == 'legacy_identity':
+        saved = json.loads(gzip.decompress(path.read_bytes()))
+        saved['identity']['schema'] = 1
+        path.write_bytes(gzip.compress(json.dumps(saved).encode()))
     else:
         second.now = lambda: datetime.now(UTC) + timedelta(hours=25)
     if damage == 'expired':
@@ -114,11 +119,22 @@ def test_municipal_resume_revalidates_geometry_and_complete_artifact(tmp_path, m
         calls.append(store.external_id)
         return RawBatch(chain='willys', documents=tuple(d for d in verified.documents if d.store_external_id == store.external_id),
                         catalog_completion=verified.completion[store.external_id])
-    first = checkpoint(manifest.municipality_boundary)
+    def response_boundary(stamp):
+        boundary = dict(manifest.municipality_boundary)
+        payload = json.loads(boundary['payload'])
+        payload['timeStamp'] = stamp.isoformat()
+        boundary['payload'] = json.dumps(payload)
+        boundary['source_sha256'] = sha256(boundary['payload'].encode()).hexdigest()
+        boundary['observed_at'] = stamp.isoformat()
+        return boundary
+    first_boundary = response_boundary(now - timedelta(minutes=1))
+    second_boundary = response_boundary(now)
+    assert first_boundary['source_sha256'] != second_boundary['source_sha256']
+    first = checkpoint(first_boundary)
     for store in stores:
         asyncio.run(first.fetch(store, discovery, fetch))
     # A fresh boundary fetch with identical geometry must not invalidate the cache.
-    second = checkpoint({**manifest.municipality_boundary, 'observed_at': now.isoformat()})
+    second = checkpoint(second_boundary)
     docs = list(discovery.documents)
     for store in stores:
         docs.extend(asyncio.run(second.fetch(store, discovery, fetch)).documents)
