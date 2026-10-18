@@ -37,6 +37,51 @@ för ekosökningen är antalet bedömda delmängder minus dessa två räknare.
 
 Se [uppföljningens mätningar](../reports/ecological-week-search-20261016.md).
 
+## Prövade åtgärder 2026-10-16–17 (gren `perf/planner-startup-and-semantics`)
+
+Underlag: granskningspaketets frysta Lund-artefakt, `mode=complete`, 1 CPU i
+sandlåda. Mätbruset är stort (samma kod 35–49 s varm vid olika tillfällen);
+bara direkt parade körningar jämförs. Krav för att införa: identisk semantisk
+hash (recept, korg, näring, audit, skafferifördelning) i alla mätta profiler och
+aldrig dyrare än sökning över hela biblioteket.
+
+### Infört
+
+| Åtgärd | Effekt | Kontroll |
+| --- | --- | --- |
+| Audit bara av hela menyer; delmenyer i beam utan audit | cirka 10 % kortare | 4 profiler identisk hash |
+| Audit bara av vald meny; omsökning med full audit om den underkänns | varm 3×2 27,4 → 22,4 s | identisk hash, test för omsökning |
+| Enhetstabell byggs en gång | ingår ovan | identisk hash |
+| Offertcache ignorerar radnumret `[n]` (95 % missar) | varm 3×2 28,9 → 23,6 s | identisk hash |
+| Omdöpta offerter cachas per radnamn | 3,9 M dataklassbyggen bort i makroprofilen | identisk hash |
+| Bakgrundsuppvärmning av receptbibliotek och produktfakta | första plan efter start 55,8 → 24,3 s | – |
+| Tak startsökning 40 recept/måltidstyp (`LIBRARY_SEED_POOL_LIMIT`) | 10–20 % | 4 profiler identisk hash |
+| Tak enkelbytesförfining 90 (`LIBRARY_REFINEMENT_POOL_LIMIT`) | standard 71 → 62 s, eko 185 → 135 s | 10 profiler identisk hash/felkod |
+| Kostnadsgräns i näringssökningen (efter godkänd näring) | all-macros 178 → 157 s | identisk hash |
+| Ekosökning i ordning efter kostnadsgräns, vinnare (total, index) | ekodel 161 → 146 s | identisk hash |
+| Billigare grannar i näringssökningens kö | inom brus | identisk hash |
+| Faktahashning och projektion utanför globalt lås | ingen väntan på annans inläsning | test |
+
+### Prövat och inte infört
+
+| Åtgärd | Resultat | Varför inte |
+| --- | --- | --- |
+| Tak startsökning 24 | standard 70,5 s | 543,83 kr i st. f. 535,06 kr |
+| Tak förfining 60 | snabbare | proteinfördelning 771,26 kr i st. f. 766,11 kr |
+| Tak förfining 60 + de tre billigaste per proteinkategori | samma | fortfarande 771,26 kr |
+| Ingen näringssökning för delmenyer i beam | all-macros 122 → 92 s, protein40 72 → 61 s | all-macros 823,37 kr i st. f. 813,38; fördelning 768,86 i st. f. 766,11 |
+| Dela proveniens och interna strängar i prisartefakten | RSS oförändrad | Python lämnar inte tillbaka minnet; kräver annan representation |
+| Förberedd kvalificering vid publicering (bedömd, ej byggd) | varm standard lägger 4,8 av 39,7 s på kvalificering | liten vinst jämfört med sökningen |
+
+### Kvar
+
+Makroprofilen (cirka 120 s kall lokalt) består av cirka 1 500
+näringssökningar med i snitt 8 exakta korgberäkningar. Nästa väg är exakta
+gränser som avbryter en näringssökning när den inte kan påverka beamsökningens
+rangordning; det kräver ett nytt gränssnitt mellan menyoptimeraren och
+planeraren. Varje sådan ändring ska jämföras mot hela biblioteket med
+`test_search_caps_vs_uncapped.py` och acceptansmatrisens `--uncapped-reference`.
+
 ## Befintliga delar som återanvänds
 
 | Behov | Befintlig komponent | Ändring i denna etapp |

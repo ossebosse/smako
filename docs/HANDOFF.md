@@ -1,3 +1,12 @@
+# 2026-10-17: Dokumentation av prövade åtgärder och granskningsinstruktion
+
+- Vad som har prövats, vad som infördes och varför vissa åtgärder förkastades:
+  `docs/planner-performance.md`, avsnittet "Prövade åtgärder 2026-10-16–17".
+- Hur Codex ska granska uppföljningspatchen (12 commits):
+  `docs/reviews/review-followup-instructions-20261017.md`.
+
+---
+
 # 2026-10-17: Makroprofilen – vad som gick och inte gick att korta
 
 1. **Committat (identiska resultat):** näringssökningens grannar byggs med
