@@ -265,3 +265,60 @@ def test_conflicting_duplicate_values_are_marked_not_selected():
     f = fact(raw)
     assert "protein_g" not in f.nutrition and "nutrition.protein_g" in f.conflicts
     assert f.nutrition["kcal"] == 45
+
+
+def _single_label_store(root):
+    import hashlib
+    import sqlite3
+
+    from app.models.provenance import SourceProvenance
+
+    from backend.tests.test_personal_planning_v2 import NOW, prepared, product
+
+    raw = root / "raw"
+    raw.mkdir()
+    db_path = root / "grocery.sqlite"
+    content = json.dumps({"results": {"items": [label()]}}).encode()
+    (raw / "page.json").write_bytes(content)
+    with sqlite3.connect(db_path) as db:
+        db.executescript("CREATE TABLE products(id,chain,external_product_id,store_external_id,raw_reference,"
+                         "raw_snapshot_id,catalog_snapshot_id); CREATE TABLE raw_snapshots(id,payload_hash,"
+                         "payload_location,catalog_snapshot_id);")
+        db.execute("INSERT INTO products VALUES (?,?,?,?,?,?,?)", ("mjölk", "coop", "source-milk", "730400",
+                   "raw:raw-id#results.items[0]", "raw-id", "v2-frozen"))
+        db.execute("INSERT INTO raw_snapshots VALUES (?,?,?,?)",
+                   ("raw-id", hashlib.sha256(content).hexdigest(), "page.json", "v2-frozen"))
+    db.close()
+    universe = prepared(product("mjölk", 1000, "ml", 20).model_copy(update={"source_provenance": SourceProvenance(
+        source_provider="own", source_channel="catalog", source_snapshot_id="v2-frozen", source_observed_at=NOW,
+        provider_store_id="730400")}))
+    return universe, db_path, raw
+
+
+@pytest.mark.parametrize("fault", ["read_error", "changed_between_hashes"])
+def test_failed_projection_is_never_persisted_and_the_retry_recovers(tmp_path, monkeypatch, fault):
+    """Review 2026-10-18 P2: a projection that hit a read fault must not reach the disk cache."""
+    from pathlib import Path
+
+    from app.services import personal_source_facts as source_facts
+
+    universe, db_path, raw = _single_label_store(tmp_path)
+    monkeypatch.setenv("RECIPE_PREPARATION_CACHE_ROOT", str(tmp_path / "cache"))
+    source_facts._CACHE.clear()
+    read = Path.read_bytes
+
+    def faulty(path):
+        if path == raw / "page.json":
+            if fault == "read_error":
+                raise OSError("injected transient read failure")
+            return read(path) + b" "  # differs from the hashed evidence
+        return read(path)
+
+    monkeypatch.setattr(Path, "read_bytes", faulty)
+    first = source_facts._load_retained_catalog_facts(universe, database=db_path, raw_root=raw)
+    monkeypatch.setattr(Path, "read_bytes", read)
+    assert len(first) == 0 and not source_facts._CACHE
+    assert not list((tmp_path / "cache").rglob("*.json"))
+    retry = source_facts._load_retained_catalog_facts(universe, database=db_path, raw_root=raw)
+    assert len(retry) == 1
+    source_facts._CACHE.clear()

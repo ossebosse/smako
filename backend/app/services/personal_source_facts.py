@@ -839,7 +839,12 @@ def _project_facts(key, cacheable, hashes, source_rows, prepared, result):
                 projected[(row["store_id"],row["product_id"])] = ProductFacts(**values)
             return FactsCollection(projected)
         try:
-            projected = restore_projection(read_prepared("source_facts",list(key),compute_projection))
+            # Only a projection whose every read and second hash succeeded may
+            # be persisted. The identity marker retires disk artefacts written
+            # before this rule, which could hold partial projections.
+            projected = restore_projection(read_prepared(
+                "source_facts", [*key, "complete-projection-v2"], compute_projection,
+                storable=lambda: nonlocal_cacheable[0]))
         except (ValueError,KeyError,TypeError):
             projected = project()
     else:

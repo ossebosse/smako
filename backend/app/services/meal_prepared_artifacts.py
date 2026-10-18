@@ -132,8 +132,12 @@ def method_signature():
                            for p in sorted(paths)}))
 
 
-def prepared(kind, identity, compute):
-    """Reject partial/wrong version artefacts and safely recompute on any cache fault."""
+def prepared(kind, identity, compute, *, storable=None):
+    """Reject partial/wrong version artefacts and safely recompute on any cache fault.
+
+    ``storable`` is asked after ``compute``; when it returns False the result
+    is returned but never written (e.g. a projection that hit a read error).
+    """
     key = digest(encoded([SCHEMA,kind,identity,method_signature()]))
     directory = root() / kind
     path = directory / (key + ".json")
@@ -152,6 +156,9 @@ def prepared(kind, identity, compute):
         STATS["invalid"] += 1
     STATS["misses"] += 1
     payload = compute()
+    if storable is not None and not storable():
+        STATS["unstorable"] = STATS.get("unstorable", 0) + 1
+        return payload
     raw = payload_bytes(payload)
     compressed = len(raw) > 256 * 1024
     data = payload_bytes({"schema":SCHEMA,"key":key,"payload":
