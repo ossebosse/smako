@@ -1,0 +1,107 @@
+{
+  "started_free_bytes": 6200594432,
+  "finished_free_bytes": 28609142784,
+  "net_freed_bytes": 22408548352,
+  "archives": [
+    {
+      "source": "/opt/smako/evidence/status-activation-20261006/current-state-backup",
+      "archive": "/srv/smako/cold-test-archives/storage-maintenance-20261018/01-status-activation-20261006-current-state-backup.tar.gz",
+      "inventory": "/srv/smako/cold-test-archives/storage-maintenance-20261018/01-status-activation-20261006-current-state-backup.inventory.private.json",
+      "entries_verified": 4,
+      "original_allocated_bytes": 3773157376,
+      "archive_bytes": 980300799,
+      "archive_sha256": "ef93d5af7a07b46f353925daa8b7ae1fd41159accb4703a9c57ee2eb153f7f50",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/opt/smako/evidence/complete-recipes-20261003/backups-off",
+      "archive": "/srv/smako/cold-test-archives/storage-maintenance-20261018/02-complete-recipes-20261003-backups-off.tar.gz",
+      "inventory": "/srv/smako/cold-test-archives/storage-maintenance-20261018/02-complete-recipes-20261003-backups-off.inventory.private.json",
+      "entries_verified": 17,
+      "original_allocated_bytes": 3312889856,
+      "archive_bytes": 783752957,
+      "archive_sha256": "ca659bb9e4df171327f7d1ded78c90e3a74141066ffef29467d1e719d135f869",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/opt/smako/evidence/complete-recipes-20261003/backups-on",
+      "archive": "/srv/smako/cold-test-archives/storage-maintenance-20261018/03-complete-recipes-20261003-backups-on.tar.gz",
+      "inventory": "/srv/smako/cold-test-archives/storage-maintenance-20261018/03-complete-recipes-20261003-backups-on.inventory.private.json",
+      "entries_verified": 17,
+      "original_allocated_bytes": 3315785728,
+      "archive_bytes": 784038060,
+      "archive_sha256": "895b20627d560ac00fd12d697e4b447718b4dbbbd5850d297317711b2ae908a9",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/opt/smako/evidence/base-price-retention-0f54e51/backup-20261015T071523Z",
+      "archive": "/srv/smako/cold-test-archives/storage-maintenance-20261018/04-base-price-retention-0f54e51-backup-20261015T071523Z.tar.gz",
+      "inventory": "/srv/smako/cold-test-archives/storage-maintenance-20261018/04-base-price-retention-0f54e51-backup-20261015T071523Z.inventory.private.json",
+      "entries_verified": 4,
+      "original_allocated_bytes": 6392209408,
+      "archive_bytes": 1558712656,
+      "archive_sha256": "a79118e4b34141d86d6d0596cc0cc84722ebab4e3ca89b90a288792f59d69e9f",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/opt/smako/evidence/recipe-product-links-07af5ac/backup-20261015T122602Z",
+      "archive": "/srv/smako/cold-test-archives/storage-maintenance-20261018/05-recipe-product-links-07af5ac-backup-20261015T122602Z.tar.gz",
+      "inventory": "/srv/smako/cold-test-archives/storage-maintenance-20261018/05-recipe-product-links-07af5ac-backup-20261015T122602Z.inventory.private.json",
+      "entries_verified": 4,
+      "original_allocated_bytes": 6583627776,
+      "archive_bytes": 1604322742,
+      "archive_sha256": "f83a73a8f202b23cfc0d73b6df2516c83f7bbb30fd123a9e5e551fdd13b42a74",
+      "original_removed_after_verification": true
+    },
+    {
+      "source": "/opt/smako/evidence/ops-price-recovery-8d4327ea4227/restore-rehearsal/restored",
+      "archive": "/srv/smako/cold-test-archives/storage-maintenance-20261018/06-restore-rehearsal-restored.tar.gz",
+      "inventory": "/srv/smako/cold-test-archives/storage-maintenance-20261018/06-restore-rehearsal-restored.inventory.private.json",
+      "entries_verified": 139,
+      "original_allocated_bytes": 6117752832,
+      "archive_bytes": 1420385347,
+      "archive_sha256": "0a14c6c59837f9bd57d69e3bd4ab492fa48899050804fbdc41a94083252dc6cf",
+      "original_removed_after_verification": true
+    }
+  ],
+  "containers_images_and_active_manifests_unchanged": true,
+  "final_verification": {
+    "containers_images_and_active_manifests_unchanged": true,
+    "runtime_prewarm_enabled": "false",
+    "free_bytes": 20978429952,
+    "backup_bundle": "20261018T084659Z",
+    "backup_manifest_sha256": "616ee0e2ca8020c2be26d31ca978181661ac08b2d79d23ede547ed6341ab3f1a",
+    "backup_files": 68,
+    "backup_declared_bytes": 7630122236,
+    "backup_scopes": [
+      "active/city-lund.json",
+      "active/city-malmö.json"
+    ],
+    "backup_recovery_scope_version": 2
+  },
+  "final_operations": {
+    "checked_at": "2026-10-18T09:01:57.065212+00:00",
+    "backup": {
+      "bundle": "20261018T084659Z",
+      "completed_at": "2026-10-18T09:01:48.166654+00:00",
+      "observed_at": "2026-10-18T09:01:48.166749+00:00",
+      "status": "complete"
+    },
+    "storage": {
+      "free_bytes": 20978434048,
+      "required_estimate_bytes": 13988760196,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "ready_http_status": 200,
+    "ready_status": "ready",
+    "build_id": "joint-week-refinement-app-e041451",
+    "disk_manifest": "price-universe:d7100ae816e5631f8159e71bb362599df647e0dbf767724643142aad045987e0",
+    "loaded_manifest": "price-universe:d7100ae816e5631f8159e71bb362599df647e0dbf767724643142aad045987e0"
+  },
+  "backup_implementation_sha256": {
+    "deploy/scripts/backup_sqlite.py": "fd02e8c41843311b4a30282bb8ec7b6c9f424fe8063b8a4695fc0b15372dd33b",
+    "deploy/scripts/backup_schedule.py": "e2b0c6f542e8cb7b10c291b1fe3c5a85e93d10967361e8e11c4b0b24e6b57e61",
+    "grocery_data/app/services/manual_refresh_operations.py": "571185cf59da43331fb2d4fe2acc63911e58827b5fca9afb48b72268388daada"
+  }
+}

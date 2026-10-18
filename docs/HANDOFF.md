@@ -1,3 +1,21 @@
+# 2026-10-18: Serverlagring rensad och backup återställd
+
+22,41 GB netto frigjort under befintligt driftlås. Sex inaktiva arkivkataloger
+komprimerades från 29,50 till 7,13 GB; alla 185 poster verifierades före
+borttagning av originalen. Arkiv, privata inventarier och återställningspekare
+är bevarade. Oanvänd Docker-byggcache rensades, men inga images, containrar,
+levande databaser, prisartefakter eller ordinarie dagsbackuper raderades.
+
+Ny backup `20261018T084659Z` är `complete` (Lund och Malmö, 68 filer/7,63 GB).
+Efter backupen: 20,98 GB ledigt, tillräckligt enligt driftkontrollen;
+HTTP 200/ready. Containerkonfigurationer, images och aktiva prismanifest är
+oförändrade. Prewarm är fortsatt false. Inga scheman eller retention ändrades.
+Det tidigare rapporterade backupfelet `InsufficientStorageError` är därmed
+åtgärdat för den verifierade körningen. Se [lagringsrapporten](storage-maintenance.md)
+och [kvittot](releases/storage-maintenance-20261018/VERIFIED.json).
+
+---
+
 # 2026-10-18: Uppföljningspatch granskad och integrerad på main – ej aktiverad
 
 13 patchcommits `9aeda34..0765221` ovanpå `d09eaf4` är granskade.

@@ -1,5 +1,59 @@
 # Lagring och säker arkivering
 
+## Underhåll 2026-10-18
+
+Ny inventering fann bara 6,20 GB ledigt och återkommande
+`InsufficientStorageError` för dagsbackupen. Under befintligt driftlås
+frigjordes **22,41 GB netto** genom verifierad komprimering av sex inaktiva
+arkivkataloger och rensning av oanvänd Docker-byggcache. Ledigt utrymme
+efter arkiveringen, före ny backup, var **28,61 GB**.
+
+De sex katalogerna omfattade 29,50 GB allokerat och tar nu 7,13 GB som
+gzip/tar-arkiv. Alla 185 arkivposter kontrollerades, inklusive SHA-256 för
+varje vanlig fil, ägare, behörigheter och symlänkar. Ursprunget hashas igen
+och kontrolleras mot container-, process- och servicereferenser före
+borttagning. Alla containeridentiteter, konfigurationer, image-ID:n och
+aktiva prismanifest är oförändrade över underhållet. Levande databaser,
+prisartefakter, ordinarie dagsbackuper och backupretention rensades inte.
+
+Arkiven och privata inventarier finns i
+`/srv/smako/cold-test-archives/storage-maintenance-20261018/`.
+Körjournal, före/efter-kvitton och operatörsskript finns i
+`/opt/smako/evidence/storage-maintenance-20261018/`.
+Varje tidigare katalog har en intilliggande `*.ARCHIVED-20261018.txt`
+med arkivnamn, SHA-256 och exakt återställningskommando. Detta gäller:
+
+- `status-activation-20261006/current-state-backup`
+- `complete-recipes-20261003/backups-off`
+- `complete-recipes-20261003/backups-on`
+- `base-price-retention-0f54e51/backup-20261015T071523Z`
+- `recipe-product-links-07af5ac/backup-20261015T122602Z`
+- `ops-price-recovery-8d4327ea4227/restore-rehearsal/restored`
+
+Samtliga ursprungliga sökvägar ligger under `/opt/smako/evidence/`.
+Äldre aktiveringsrapporter som pekar på dessa kataloger ska nu följas via
+arkivanvisningen. Återställ endast under driftlåset, till en frånvarande
+ursprunglig sökväg, med kontrollerad arkivhash och tillräckligt utrymme.
+Inget arkiv återställs över aktuella produktionsdata.
+
+Docker rapporterade 1,196 GB logisk byggcache, men större delen delade lager
+med bevarade images. Använd nettomätningen ovan, inte summan av logiska
+Dockerstorlekar. Ingen image-, container- eller volym-prune kördes.
+
+Ny ordinarie backup **`20261018T084659Z`** slutfördes 09:01:48 UTC och
+verifierade 68 filer, 7,63 GB, med återställningsunderlag för både Lund och
+Malmö. Efter backupen fanns **20,98 GB ledigt**, över driftkontrollens
+uppskattade behov på 13,99 GB. Backupstatus är `complete`, readiness är
+HTTP 200/`ready` och `PRICE_UNIVERSE_PREWARM_ENABLED=false` är kvar.
+Backupen använde befintlig kod för SQLite-integritet, främmande nycklar,
+filhashar och komplett manifest; inget nytt fullständigt återställningsprov
+kördes. Befintliga käll-/åldersvarningar påverkas inte av lagringsunderhållet.
+
+Slutlig backup- och driftkontroll: se
+[maskinverifieringen](releases/storage-maintenance-20261018/VERIFIED.json).
+
+## Inventering 2026-10-11
+
 Inventeringen 2026-10-11 fann 403,1 GB använt och 12,3 GB ledigt på rotfilsystemet.
 Serverdisken är 400 GiB; rotfilsystemets användbara storlek är 415,4 GB i decimala
 enheter. Använd samma enhet när före/efter jämförs.
