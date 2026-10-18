@@ -1,0 +1,799 @@
+{
+  "reports": [
+    {
+      "label": "lund-candidate-final",
+      "case": "all-macros",
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.36",
+        "logical_cpus": 8
+      },
+      "method_signature": "254a5f16c5bcdef0a0fad564b72e180566b599cee39395c73e37b3dfd823b700",
+      "search_limits": {
+        "seed": 40,
+        "refinement": 90,
+        "seed_variant_shortlist": true
+      },
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "0176e134732b1fecb226c4a84cab43599879ab0c3ecc11070eebf80617f4f5c4",
+          "combined-facts.json": "67479090bdddf53f7b6409104c71009ac95dd34850b144e0b350b3d38479ea42",
+          "combined-request.json": "a2497be05d31cd4346cd46e284e9f7ab2cd641077c7806df76993f3a68457383"
+        },
+        "now": "2026-10-18T05:12:49.467392+00:00",
+        "request_sha256": "50c499f19ff2729236138e6cf234b22907df8d373d7a4493edfd9915de88ec06",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:587bbea7511abc833aaf41937bd1ebe9141d4b5f50527c6bf02a90094d84d0a9",
+        "universe_id": "price-universe:d7100ae816e5631f8159e71bb362599df647e0dbf767724643142aad045987e0"
+      },
+      "records": [
+        {
+          "iteration": 0,
+          "cache_mode": "process-cold",
+          "outcome": "PASS",
+          "paid": 792.1,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "9078253e9591f64c18398c939474375aef2e28eaa40aec827e0e212cfac61448",
+          "wall_seconds": 137.8292393819429,
+          "cpu_seconds": 136.009115768,
+          "rss_bytes": 1910202368,
+          "process_peak_rss_bytes": 1910202368,
+          "timings_ms": {
+            "basket_optimization": 42186.074,
+            "personal_audit": 3.456,
+            "personal_candidate_generation": 1185.872,
+            "personal_candidate_generation_and_qualification": 17463.377,
+            "personal_nutrition": 15088.212,
+            "personal_package_calculation": 8942.021,
+            "personal_product_facts": 0.031,
+            "personal_week_search": 116538.744
+          },
+          "operation_counters": {
+            "basket_calculations": 12044,
+            "cache_hits": 2477707,
+            "cache_misses": 42352,
+            "menu_search_result_cache_hits": 107,
+            "menu_search_result_cache_misses": 1,
+            "optimistic_basket_bounds": 74293,
+            "package_cache_hits": 2327123,
+            "package_cache_misses": 14966,
+            "package_calculations": 14966,
+            "per_store_selection_cache_hits": 7100,
+            "per_store_selection_cache_misses": 5710,
+            "product_match_calculations": 3237,
+            "quote_set_cache_hits": 90543,
+            "quote_set_cache_misses": 5710,
+            "quote_subset_pattern_cache_hits": 9736,
+            "quote_subset_pattern_cache_misses": 3074,
+            "quote_subset_vector_cache_hits": 31135,
+            "quote_subset_vector_cache_misses": 12810,
+            "semantic_candidates_returned": 3019,
+            "semantic_comparisons": 3237,
+            "store_combinations": 1836168,
+            "store_combinations_pruned_infeasible": 1798711,
+            "store_subset_cache_hits": 11963,
+            "store_subset_cache_misses": 81
+          }
+        }
+      ]
+    },
+    {
+      "label": "lund-candidate-final",
+      "case": "standard",
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.36",
+        "logical_cpus": 8
+      },
+      "method_signature": "254a5f16c5bcdef0a0fad564b72e180566b599cee39395c73e37b3dfd823b700",
+      "search_limits": {
+        "seed": 40,
+        "refinement": 90,
+        "seed_variant_shortlist": true
+      },
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "0176e134732b1fecb226c4a84cab43599879ab0c3ecc11070eebf80617f4f5c4",
+          "combined-facts.json": "67479090bdddf53f7b6409104c71009ac95dd34850b144e0b350b3d38479ea42",
+          "combined-request.json": "a2497be05d31cd4346cd46e284e9f7ab2cd641077c7806df76993f3a68457383"
+        },
+        "now": "2026-10-18T05:12:49.467392+00:00",
+        "request_sha256": "41fd36aaf50e546f341e0c509f15b52b44b0021cb7bdee35d406d2808002c886",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:587bbea7511abc833aaf41937bd1ebe9141d4b5f50527c6bf02a90094d84d0a9",
+        "universe_id": "price-universe:d7100ae816e5631f8159e71bb362599df647e0dbf767724643142aad045987e0"
+      },
+      "records": [
+        {
+          "iteration": 0,
+          "cache_mode": "process-cold",
+          "outcome": "PASS",
+          "paid": 516.54,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "bd5b68c6b173fa9167018593883e40420ba58df2f7b73a9b15255dfc7e5e4b8d",
+          "wall_seconds": 42.27599962009117,
+          "cpu_seconds": 41.343627346000005,
+          "rss_bytes": 1626935296,
+          "process_peak_rss_bytes": 1626935296,
+          "timings_ms": {
+            "basket_optimization": 14501.982,
+            "personal_audit": 5.082,
+            "personal_candidate_generation": 1150.228,
+            "personal_candidate_generation_and_qualification": 12001.721,
+            "personal_nutrition": 215.813,
+            "personal_package_calculation": 14697.247,
+            "personal_product_facts": 0.019,
+            "personal_week_search": 25001.218
+          },
+          "operation_counters": {
+            "basket_calculations": 1900,
+            "cache_hits": 194610,
+            "cache_misses": 71606,
+            "menu_search_result_cache_hits": 103,
+            "menu_search_result_cache_misses": 1,
+            "package_cache_hits": 102753,
+            "package_cache_misses": 37447,
+            "package_calculations": 37447,
+            "per_store_selection_cache_hits": 7751,
+            "per_store_selection_cache_misses": 7543,
+            "product_match_calculations": 3231,
+            "quote_selection_cache_misses": 120,
+            "quote_set_cache_hits": 39189,
+            "quote_set_cache_misses": 7543,
+            "quote_subset_pattern_cache_hits": 11521,
+            "quote_subset_pattern_cache_misses": 3653,
+            "quote_subset_vector_cache_hits": 31518,
+            "quote_subset_vector_cache_misses": 15174,
+            "semantic_candidates_returned": 3024,
+            "semantic_comparisons": 3231,
+            "store_combinations": 465389,
+            "store_combinations_pruned_infeasible": 400180,
+            "store_subset_cache_hits": 1775,
+            "store_subset_cache_misses": 125
+          }
+        }
+      ]
+    },
+    {
+      "label": "malmo-baseline-final",
+      "case": "organic-share",
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.36",
+        "logical_cpus": 8
+      },
+      "method_signature": "0ed037485f7f250f51f03b4a57c7175da46b62233c61aec688ac4b3354f49441",
+      "search_limits": {
+        "seed": 40,
+        "refinement": 90,
+        "seed_variant_shortlist": true
+      },
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "ba374e50f05c5849f86a01cdd9e17457a68b11f60c1d8b376a37958b3f1ea20d",
+          "combined-facts.json": "cccf41f2c2acac4af7ba1a8be1e714ec0faf3db1ee159dc8fa27d6420801dbcd",
+          "combined-request.json": "71a44fc68aee1483d6a2d1bce0014a9f5e3e8ea3d4ec1cd25e6256a03751f1b9"
+        },
+        "now": "2026-10-18T05:12:49.467392+00:00",
+        "request_sha256": "975dea621ab622437f3d1b2a064463d3aa52b2e8e9e3da2860714626343639cb",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:fab8a029a8a3a13056fae997f5464e6ad86f0f1f5c2c9a0cffb3b6d279c7c99a",
+        "universe_id": "price-universe:444cfb26a2a03a35bfca54c23f1426b12b10445e64151bf47171f0e09787d274"
+      },
+      "records": [
+        {
+          "iteration": 0,
+          "cache_mode": "process-cold",
+          "outcome": "PASS",
+          "paid": 317.21,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "61e2352fc9a32d74a089f18b96977f787c8abf78f5475e8a78b095cf0a826c4e",
+          "wall_seconds": 219.44844004884362,
+          "cpu_seconds": 218.314789163,
+          "rss_bytes": 2599473152,
+          "process_peak_rss_bytes": 2600095744,
+          "timings_ms": {
+            "basket_optimization": 63505.685,
+            "personal_audit": 4.444,
+            "personal_candidate_generation": 1221.646,
+            "personal_candidate_generation_and_qualification": 24963.867,
+            "personal_ecological_search": 164393.456,
+            "personal_nutrition": 125.661,
+            "personal_package_calculation": 26982.128,
+            "personal_product_facts": 0.018,
+            "personal_week_search": 188006.961
+          },
+          "operation_counters": {
+            "basket_calculations": 27723,
+            "basket_quote_selections_rejected": 25285,
+            "cache_hits": 5364688,
+            "cache_misses": 306493,
+            "ecological_result_cache_hits": 1,
+            "ecological_subsets_evaluated": 247702,
+            "ecological_subsets_pruned_cost": 137328,
+            "ecological_subsets_pruned_exact_cost": 83823,
+            "ecological_subsets_pruned_share": 25285,
+            "menu_search_result_cache_hits": 96,
+            "menu_search_result_cache_misses": 1,
+            "optimistic_basket_bounds": 33760,
+            "optimistic_store_subset_evaluations": 57531728,
+            "optimistic_store_subsets_infeasible": 45112272,
+            "package_cache_hits": 163865,
+            "package_cache_misses": 124326,
+            "package_calculations": 124326,
+            "per_store_selection_cache_hits": 90016,
+            "per_store_selection_cache_misses": 10385,
+            "product_match_calculations": 5608,
+            "quote_selection_cache_hits": 120,
+            "quote_selection_cache_misses": 240,
+            "quote_set_cache_hits": 2540596,
+            "quote_set_cache_misses": 12815,
+            "quote_subset_pattern_cache_hits": 41966,
+            "quote_subset_pattern_cache_misses": 58172,
+            "quote_subset_vector_cache_hits": 2412394,
+            "quote_subset_vector_cache_misses": 100138,
+            "same_depth_store_limited_keys": 88355,
+            "semantic_candidates_returned": 5263,
+            "semantic_comparisons": 5608,
+            "store_combinations": 17907537,
+            "store_combinations_pruned_infeasible": 13748159,
+            "store_subset_cache_hits": 115635,
+            "store_subset_cache_misses": 416
+          }
+        }
+      ]
+    },
+    {
+      "label": "malmo-baseline-final",
+      "case": "standard",
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.36",
+        "logical_cpus": 8
+      },
+      "method_signature": "0ed037485f7f250f51f03b4a57c7175da46b62233c61aec688ac4b3354f49441",
+      "search_limits": {
+        "seed": 40,
+        "refinement": 90,
+        "seed_variant_shortlist": true
+      },
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "ba374e50f05c5849f86a01cdd9e17457a68b11f60c1d8b376a37958b3f1ea20d",
+          "combined-facts.json": "cccf41f2c2acac4af7ba1a8be1e714ec0faf3db1ee159dc8fa27d6420801dbcd",
+          "combined-request.json": "71a44fc68aee1483d6a2d1bce0014a9f5e3e8ea3d4ec1cd25e6256a03751f1b9"
+        },
+        "now": "2026-10-18T05:12:49.467392+00:00",
+        "request_sha256": "7096ecde1020c892a84711ac7c3b63126f210403a39c1d2f1c74b0eca61ce719",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:fab8a029a8a3a13056fae997f5464e6ad86f0f1f5c2c9a0cffb3b6d279c7c99a",
+        "universe_id": "price-universe:444cfb26a2a03a35bfca54c23f1426b12b10445e64151bf47171f0e09787d274"
+      },
+      "records": [
+        {
+          "iteration": 0,
+          "cache_mode": "process-cold",
+          "outcome": "PASS",
+          "paid": 482.75,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "b40b2ffdac5782270870132d6f846d98c8f88e8c6a5c9baf82cb2dd6c27b0ac2",
+          "wall_seconds": 65.68184948619455,
+          "cpu_seconds": 63.60292504200001,
+          "rss_bytes": 2611314688,
+          "process_peak_rss_bytes": 2611314688,
+          "timings_ms": {
+            "basket_optimization": 29133.273,
+            "personal_audit": 3.407,
+            "personal_candidate_generation": 1201.412,
+            "personal_candidate_generation_and_qualification": 18447.883,
+            "personal_nutrition": 229.426,
+            "personal_package_calculation": 29489.521,
+            "personal_product_facts": 0.019,
+            "personal_week_search": 39768.819
+          },
+          "operation_counters": {
+            "basket_calculations": 1878,
+            "cache_hits": 265426,
+            "cache_misses": 106649,
+            "menu_search_result_cache_hits": 103,
+            "menu_search_result_cache_misses": 1,
+            "package_cache_hits": 176259,
+            "package_cache_misses": 74782,
+            "package_calculations": 74782,
+            "per_store_selection_cache_hits": 6638,
+            "per_store_selection_cache_misses": 7134,
+            "product_match_calculations": 6202,
+            "quote_set_cache_hits": 38653,
+            "quote_set_cache_misses": 7134,
+            "quote_subset_pattern_cache_hits": 10024,
+            "quote_subset_pattern_cache_misses": 3748,
+            "quote_subset_vector_cache_hits": 31949,
+            "quote_subset_vector_cache_misses": 13772,
+            "semantic_candidates_returned": 5817,
+            "semantic_comparisons": 6202,
+            "store_combinations": 1430302,
+            "store_combinations_pruned_infeasible": 1220707,
+            "store_subset_cache_hits": 1800,
+            "store_subset_cache_misses": 78
+          }
+        },
+        {
+          "iteration": 1,
+          "cache_mode": "process-warm",
+          "outcome": "PASS",
+          "paid": 482.75,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "b40b2ffdac5782270870132d6f846d98c8f88e8c6a5c9baf82cb2dd6c27b0ac2",
+          "wall_seconds": 55.31936810305342,
+          "cpu_seconds": 55.273903902,
+          "rss_bytes": 2616999936,
+          "process_peak_rss_bytes": 2616999936,
+          "timings_ms": {
+            "basket_optimization": 26682.441,
+            "personal_audit": 4.255,
+            "personal_candidate_generation": 76.694,
+            "personal_candidate_generation_and_qualification": 8986.96,
+            "personal_nutrition": 241.416,
+            "personal_package_calculation": 27032.605,
+            "personal_product_facts": 0.016,
+            "personal_week_search": 39453.629
+          },
+          "operation_counters": {
+            "basket_calculations": 1878,
+            "cache_hits": 265427,
+            "cache_misses": 106648,
+            "menu_search_result_cache_hits": 104,
+            "package_cache_hits": 176259,
+            "package_cache_misses": 74782,
+            "package_calculations": 74782,
+            "per_store_selection_cache_hits": 6638,
+            "per_store_selection_cache_misses": 7134,
+            "product_match_calculations": 6202,
+            "quote_set_cache_hits": 38653,
+            "quote_set_cache_misses": 7134,
+            "quote_subset_pattern_cache_hits": 10024,
+            "quote_subset_pattern_cache_misses": 3748,
+            "quote_subset_vector_cache_hits": 31949,
+            "quote_subset_vector_cache_misses": 13772,
+            "semantic_candidates_returned": 5817,
+            "semantic_comparisons": 6202,
+            "store_combinations": 1430302,
+            "store_combinations_pruned_infeasible": 1220707,
+            "store_subset_cache_hits": 1800,
+            "store_subset_cache_misses": 78
+          }
+        },
+        {
+          "iteration": 2,
+          "cache_mode": "process-warm",
+          "outcome": "PASS",
+          "paid": 482.75,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "b40b2ffdac5782270870132d6f846d98c8f88e8c6a5c9baf82cb2dd6c27b0ac2",
+          "wall_seconds": 56.434165542945266,
+          "cpu_seconds": 56.38911079800002,
+          "rss_bytes": 2617790464,
+          "process_peak_rss_bytes": 2617790464,
+          "timings_ms": {
+            "basket_optimization": 29239.368,
+            "personal_audit": 2.882,
+            "personal_candidate_generation": 78.214,
+            "personal_candidate_generation_and_qualification": 9066.353,
+            "personal_nutrition": 234.107,
+            "personal_package_calculation": 29602.311,
+            "personal_product_facts": 0.02,
+            "personal_week_search": 40463.973
+          },
+          "operation_counters": {
+            "basket_calculations": 1878,
+            "cache_hits": 265427,
+            "cache_misses": 106648,
+            "menu_search_result_cache_hits": 104,
+            "package_cache_hits": 176259,
+            "package_cache_misses": 74782,
+            "package_calculations": 74782,
+            "per_store_selection_cache_hits": 6638,
+            "per_store_selection_cache_misses": 7134,
+            "product_match_calculations": 6202,
+            "quote_set_cache_hits": 38653,
+            "quote_set_cache_misses": 7134,
+            "quote_subset_pattern_cache_hits": 10024,
+            "quote_subset_pattern_cache_misses": 3748,
+            "quote_subset_vector_cache_hits": 31949,
+            "quote_subset_vector_cache_misses": 13772,
+            "semantic_candidates_returned": 5817,
+            "semantic_comparisons": 6202,
+            "store_combinations": 1430302,
+            "store_combinations_pruned_infeasible": 1220707,
+            "store_subset_cache_hits": 1800,
+            "store_subset_cache_misses": 78
+          }
+        }
+      ]
+    },
+    {
+      "label": "malmo-candidate-final",
+      "case": "all-macros",
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.36",
+        "logical_cpus": 8
+      },
+      "method_signature": "254a5f16c5bcdef0a0fad564b72e180566b599cee39395c73e37b3dfd823b700",
+      "search_limits": {
+        "seed": 40,
+        "refinement": 90,
+        "seed_variant_shortlist": true
+      },
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "ba374e50f05c5849f86a01cdd9e17457a68b11f60c1d8b376a37958b3f1ea20d",
+          "combined-facts.json": "cccf41f2c2acac4af7ba1a8be1e714ec0faf3db1ee159dc8fa27d6420801dbcd",
+          "combined-request.json": "71a44fc68aee1483d6a2d1bce0014a9f5e3e8ea3d4ec1cd25e6256a03751f1b9"
+        },
+        "now": "2026-10-18T05:12:49.467392+00:00",
+        "request_sha256": "512bee29185a906f4b449e68cba6c229af8dc714d1b60c389d9d3e9414b7db01",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:fab8a029a8a3a13056fae997f5464e6ad86f0f1f5c2c9a0cffb3b6d279c7c99a",
+        "universe_id": "price-universe:444cfb26a2a03a35bfca54c23f1426b12b10445e64151bf47171f0e09787d274"
+      },
+      "records": [
+        {
+          "iteration": 0,
+          "cache_mode": "process-cold",
+          "outcome": "PASS",
+          "paid": 915.84,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "0e87b9eb393231fdd23e0df9f3e42438ed5b21237a865a6feccceb8bc7baefb6",
+          "wall_seconds": 35.68118549697101,
+          "cpu_seconds": 34.66968200499999,
+          "rss_bytes": 2602065920,
+          "process_peak_rss_bytes": 2602065920,
+          "timings_ms": {
+            "basket_optimization": 3374.415,
+            "personal_audit": 4.988,
+            "personal_candidate_generation": 1286.609,
+            "personal_candidate_generation_and_qualification": 19545.081,
+            "personal_nutrition": 171.673,
+            "personal_package_calculation": 5370.3,
+            "personal_product_facts": 0.019,
+            "personal_week_search": 9201.611
+          },
+          "operation_counters": {
+            "basket_calculations": 499,
+            "cache_hits": 55182,
+            "cache_misses": 17133,
+            "menu_search_result_cache_hits": 106,
+            "menu_search_result_cache_misses": 1,
+            "package_cache_hits": 29919,
+            "package_cache_misses": 9989,
+            "package_calculations": 9989,
+            "per_store_selection_cache_hits": 1932,
+            "per_store_selection_cache_misses": 1479,
+            "product_match_calculations": 5933,
+            "quote_set_cache_hits": 11048,
+            "quote_set_cache_misses": 1479,
+            "quote_subset_pattern_cache_hits": 2669,
+            "quote_subset_pattern_cache_misses": 742,
+            "quote_subset_vector_cache_hits": 9041,
+            "quote_subset_vector_cache_misses": 3411,
+            "semantic_candidates_returned": 5559,
+            "semantic_comparisons": 5933,
+            "store_combinations": 294318,
+            "store_combinations_pruned_infeasible": 275663,
+            "store_subset_cache_hits": 467,
+            "store_subset_cache_misses": 32
+          }
+        }
+      ]
+    },
+    {
+      "label": "malmo-candidate-final",
+      "case": "organic-share",
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.36",
+        "logical_cpus": 8
+      },
+      "method_signature": "254a5f16c5bcdef0a0fad564b72e180566b599cee39395c73e37b3dfd823b700",
+      "search_limits": {
+        "seed": 40,
+        "refinement": 90,
+        "seed_variant_shortlist": true
+      },
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "ba374e50f05c5849f86a01cdd9e17457a68b11f60c1d8b376a37958b3f1ea20d",
+          "combined-facts.json": "cccf41f2c2acac4af7ba1a8be1e714ec0faf3db1ee159dc8fa27d6420801dbcd",
+          "combined-request.json": "71a44fc68aee1483d6a2d1bce0014a9f5e3e8ea3d4ec1cd25e6256a03751f1b9"
+        },
+        "now": "2026-10-18T05:12:49.467392+00:00",
+        "request_sha256": "975dea621ab622437f3d1b2a064463d3aa52b2e8e9e3da2860714626343639cb",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:fab8a029a8a3a13056fae997f5464e6ad86f0f1f5c2c9a0cffb3b6d279c7c99a",
+        "universe_id": "price-universe:444cfb26a2a03a35bfca54c23f1426b12b10445e64151bf47171f0e09787d274"
+      },
+      "records": [
+        {
+          "iteration": 0,
+          "cache_mode": "process-cold",
+          "outcome": "PASS",
+          "paid": 317.21,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "61e2352fc9a32d74a089f18b96977f787c8abf78f5475e8a78b095cf0a826c4e",
+          "wall_seconds": 196.25569562241435,
+          "cpu_seconds": 194.990450356,
+          "rss_bytes": 2602237952,
+          "process_peak_rss_bytes": 2602237952,
+          "timings_ms": {
+            "basket_optimization": 56465.667,
+            "personal_audit": 4.242,
+            "personal_candidate_generation": 1206.872,
+            "personal_candidate_generation_and_qualification": 23369.885,
+            "personal_ecological_search": 147277.068,
+            "personal_nutrition": 130.785,
+            "personal_package_calculation": 21236.322,
+            "personal_product_facts": 0.023,
+            "personal_week_search": 166554.295
+          },
+          "operation_counters": {
+            "basket_calculations": 27723,
+            "basket_quote_selections_rejected": 25285,
+            "cache_hits": 5364688,
+            "cache_misses": 306493,
+            "ecological_result_cache_hits": 1,
+            "ecological_subsets_evaluated": 247702,
+            "ecological_subsets_pruned_cost": 137328,
+            "ecological_subsets_pruned_exact_cost": 83823,
+            "ecological_subsets_pruned_share": 25285,
+            "menu_search_result_cache_hits": 96,
+            "menu_search_result_cache_misses": 1,
+            "optimistic_basket_bounds": 33760,
+            "optimistic_store_subset_evaluations": 57531728,
+            "optimistic_store_subsets_infeasible": 45112272,
+            "package_cache_hits": 163865,
+            "package_cache_misses": 124326,
+            "package_calculations": 124326,
+            "per_store_selection_cache_hits": 90016,
+            "per_store_selection_cache_misses": 10385,
+            "product_match_calculations": 5608,
+            "quote_selection_cache_hits": 120,
+            "quote_selection_cache_misses": 240,
+            "quote_set_cache_hits": 2540596,
+            "quote_set_cache_misses": 12815,
+            "quote_subset_pattern_cache_hits": 41966,
+            "quote_subset_pattern_cache_misses": 58172,
+            "quote_subset_vector_cache_hits": 2412394,
+            "quote_subset_vector_cache_misses": 100138,
+            "same_depth_store_limited_keys": 88355,
+            "semantic_candidates_returned": 5263,
+            "semantic_comparisons": 5608,
+            "store_combinations": 17907537,
+            "store_combinations_pruned_infeasible": 13748159,
+            "store_subset_cache_hits": 115635,
+            "store_subset_cache_misses": 416
+          }
+        }
+      ]
+    },
+    {
+      "label": "malmo-candidate-final",
+      "case": "standard",
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.36",
+        "logical_cpus": 8
+      },
+      "method_signature": "254a5f16c5bcdef0a0fad564b72e180566b599cee39395c73e37b3dfd823b700",
+      "search_limits": {
+        "seed": 40,
+        "refinement": 90,
+        "seed_variant_shortlist": true
+      },
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "ba374e50f05c5849f86a01cdd9e17457a68b11f60c1d8b376a37958b3f1ea20d",
+          "combined-facts.json": "cccf41f2c2acac4af7ba1a8be1e714ec0faf3db1ee159dc8fa27d6420801dbcd",
+          "combined-request.json": "71a44fc68aee1483d6a2d1bce0014a9f5e3e8ea3d4ec1cd25e6256a03751f1b9"
+        },
+        "now": "2026-10-18T05:12:49.467392+00:00",
+        "request_sha256": "7096ecde1020c892a84711ac7c3b63126f210403a39c1d2f1c74b0eca61ce719",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:fab8a029a8a3a13056fae997f5464e6ad86f0f1f5c2c9a0cffb3b6d279c7c99a",
+        "universe_id": "price-universe:444cfb26a2a03a35bfca54c23f1426b12b10445e64151bf47171f0e09787d274"
+      },
+      "records": [
+        {
+          "iteration": 0,
+          "cache_mode": "process-cold",
+          "outcome": "PASS",
+          "paid": 482.75,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "b40b2ffdac5782270870132d6f846d98c8f88e8c6a5c9baf82cb2dd6c27b0ac2",
+          "wall_seconds": 62.225678582675755,
+          "cpu_seconds": 61.102301237000006,
+          "rss_bytes": 2611740672,
+          "process_peak_rss_bytes": 2611740672,
+          "timings_ms": {
+            "basket_optimization": 21930.571,
+            "personal_audit": 3.234,
+            "personal_candidate_generation": 1262.385,
+            "personal_candidate_generation_and_qualification": 17058.657,
+            "personal_nutrition": 239.146,
+            "personal_package_calculation": 22285.253,
+            "personal_product_facts": 0.021,
+            "personal_week_search": 37862.21
+          },
+          "operation_counters": {
+            "basket_calculations": 1878,
+            "cache_hits": 265426,
+            "cache_misses": 106649,
+            "menu_search_result_cache_hits": 103,
+            "menu_search_result_cache_misses": 1,
+            "package_cache_hits": 176259,
+            "package_cache_misses": 74782,
+            "package_calculations": 74782,
+            "per_store_selection_cache_hits": 6638,
+            "per_store_selection_cache_misses": 7134,
+            "product_match_calculations": 6202,
+            "quote_set_cache_hits": 38653,
+            "quote_set_cache_misses": 7134,
+            "quote_subset_pattern_cache_hits": 10024,
+            "quote_subset_pattern_cache_misses": 3748,
+            "quote_subset_vector_cache_hits": 31949,
+            "quote_subset_vector_cache_misses": 13772,
+            "semantic_candidates_returned": 5817,
+            "semantic_comparisons": 6202,
+            "store_combinations": 1430302,
+            "store_combinations_pruned_infeasible": 1220707,
+            "store_subset_cache_hits": 1800,
+            "store_subset_cache_misses": 78
+          }
+        },
+        {
+          "iteration": 1,
+          "cache_mode": "process-warm",
+          "outcome": "PASS",
+          "paid": 482.75,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "b40b2ffdac5782270870132d6f846d98c8f88e8c6a5c9baf82cb2dd6c27b0ac2",
+          "wall_seconds": 51.842576283961535,
+          "cpu_seconds": 51.797763278000005,
+          "rss_bytes": 2617630720,
+          "process_peak_rss_bytes": 2617630720,
+          "timings_ms": {
+            "basket_optimization": 23276.252,
+            "personal_audit": 3.265,
+            "personal_candidate_generation": 81.979,
+            "personal_candidate_generation_and_qualification": 8845.644,
+            "personal_nutrition": 236.24,
+            "personal_package_calculation": 23612.475,
+            "personal_product_facts": 0.019,
+            "personal_week_search": 36215.445
+          },
+          "operation_counters": {
+            "basket_calculations": 1878,
+            "cache_hits": 265427,
+            "cache_misses": 106648,
+            "menu_search_result_cache_hits": 104,
+            "package_cache_hits": 176259,
+            "package_cache_misses": 74782,
+            "package_calculations": 74782,
+            "per_store_selection_cache_hits": 6638,
+            "per_store_selection_cache_misses": 7134,
+            "product_match_calculations": 6202,
+            "quote_set_cache_hits": 38653,
+            "quote_set_cache_misses": 7134,
+            "quote_subset_pattern_cache_hits": 10024,
+            "quote_subset_pattern_cache_misses": 3748,
+            "quote_subset_vector_cache_hits": 31949,
+            "quote_subset_vector_cache_misses": 13772,
+            "semantic_candidates_returned": 5817,
+            "semantic_comparisons": 6202,
+            "store_combinations": 1430302,
+            "store_combinations_pruned_infeasible": 1220707,
+            "store_subset_cache_hits": 1800,
+            "store_subset_cache_misses": 78
+          }
+        },
+        {
+          "iteration": 2,
+          "cache_mode": "process-warm",
+          "outcome": "PASS",
+          "paid": 482.75,
+          "audit_passed": true,
+          "baseline_equivalent": true,
+          "semantic_sha256": "b40b2ffdac5782270870132d6f846d98c8f88e8c6a5c9baf82cb2dd6c27b0ac2",
+          "wall_seconds": 52.570135958027095,
+          "cpu_seconds": 52.519936074999976,
+          "rss_bytes": 2617978880,
+          "process_peak_rss_bytes": 2617978880,
+          "timings_ms": {
+            "basket_optimization": 25913.836,
+            "personal_audit": 2.674,
+            "personal_candidate_generation": 78.688,
+            "personal_candidate_generation_and_qualification": 8568.926,
+            "personal_nutrition": 238.376,
+            "personal_package_calculation": 26260.174,
+            "personal_product_facts": 0.018,
+            "personal_week_search": 37134.123
+          },
+          "operation_counters": {
+            "basket_calculations": 1878,
+            "cache_hits": 265427,
+            "cache_misses": 106648,
+            "menu_search_result_cache_hits": 104,
+            "package_cache_hits": 176259,
+            "package_cache_misses": 74782,
+            "package_calculations": 74782,
+            "per_store_selection_cache_hits": 6638,
+            "per_store_selection_cache_misses": 7134,
+            "product_match_calculations": 6202,
+            "quote_set_cache_hits": 38653,
+            "quote_set_cache_misses": 7134,
+            "quote_subset_pattern_cache_hits": 10024,
+            "quote_subset_pattern_cache_misses": 3748,
+            "quote_subset_vector_cache_hits": 31949,
+            "quote_subset_vector_cache_misses": 13772,
+            "semantic_candidates_returned": 5817,
+            "semantic_comparisons": 6202,
+            "store_combinations": 1430302,
+            "store_combinations_pruned_infeasible": 1220707,
+            "store_subset_cache_hits": 1800,
+            "store_subset_cache_misses": 78
+          }
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "city": "malmo",
+      "case": "organic-share",
+      "process-cold": {
+        "baseline": 219.44844004884362,
+        "candidate": 196.25569562241435,
+        "change_percent": -10.568653129303252
+      },
+      "equivalent": true,
+      "identical_operation_counters_by_cache_mode": {
+        "process-cold": true
+      },
+      "paid": [
+        317.21
+      ]
+    },
+    {
+      "city": "malmo",
+      "case": "standard",
+      "process-cold": {
+        "baseline": 65.68184948619455,
+        "candidate": 62.225678582675755,
+        "change_percent": -5.2619877950380145
+      },
+      "process-warm": {
+        "baseline": 55.87676682299934,
+        "candidate": 52.206356120994315,
+        "change_percent": -6.5687599886224195
+      },
+      "equivalent": true,
+      "identical_operation_counters_by_cache_mode": {
+        "process-cold": true,
+        "process-warm": true
+      },
+      "paid": [
+        482.75
+      ]
+    }
+  ],
+  "provenance": {
+    "baseline_commit": "cfc04570ccdcafbac095a397d68912a26ed04aba",
+    "candidate_commit": "90ddeeb2fea833047ae4b4f7153236cf91408240",
+    "image": "sha256:93bbfd2ebe3764cddd559422ed1fce53197359b6f0aabde50619dfc6a81cd8f7",
+    "data_archive_sha256": "ea895f92ec8bb6f4d6d953eb93243fcfebc37bf6df809ec118bbfc053aeee670",
+    "library_manifest_sha256": "2339a8a1451ac7242ee61e8c6bb50ff9cc2ea3701a287e97d24ed7660c02d110"
+  }
+}
