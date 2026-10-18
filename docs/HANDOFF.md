@@ -1,3 +1,24 @@
+# 2026-10-17: Makroprofilen – vad som gick och inte gick att korta
+
+1. **Committat (identiska resultat):** näringssökningens grannar byggs med
+   tupelskivning i stället för en generator (101 M steg i makroprofilen) och
+   kostnadsgränsens fasta del summeras en gång per sökning. all-macros
+   813,38 kr, protein40 796,40 kr och distribution 766,11 kr med samma hash;
+   all-macros 125,8 → 122,3 s kall (inom brus).
+2. **Prövat och förkastat:** att hoppa över näringssökningen för delmenyer i
+   beamsökningen. Snabbare (all-macros 122 → 92 s, protein40 72 → 61 s) men
+   **dyrare menyer**: all-macros 823,37 kr (+9,99) och distribution 768,86 kr
+   (+2,75). Bryter kravet att aldrig välja bort billigare recept; inte infört.
+
+Läge: all-macros cirka 120 s kall i sandlådan, varav cirka 35 s kvalificering
+som bakgrundsuppvärmningen tar bort i drift. Återstoden är cirka 1 500
+näringssökningar med i snitt 8 exakta korgberäkningar vardera. Nästa realistiska
+väg är exakta gränser som avbryter en hel näringssökning när dess bästa möjliga
+korg inte kan påverka beamsökningens rangordning, vilket kräver ett nytt
+gränssnitt mellan menyoptimeraren och planeraren.
+
+---
+
 # 2026-10-17: Ägg med standardvikt, test mot fullt bibliotek, faktalås – ej aktiverat
 
 1. **Ägg (ägarbeslut):** M- och L-ägg räknas med standardvikt, 51 g respektive
