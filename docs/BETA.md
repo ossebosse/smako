@@ -15,10 +15,12 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Senast dokumenterade appkod vid införandet av
-  denna guide är `e041451`, BUILD_ID `joint-week-refinement-app-e041451`.
-  [Aktiveringen](releases/joint-week-refinement-20261016/ACTIVATED.md) har fyra
-  godkända liveprov. Uppstartsväntan är undersökt men ännu inte rättad.
+  senaste aktiveringsrapport. Senast dokumenterade appkod är `bac0fc1`,
+  BUILD_ID `app-bac0fc15ca9a-512ef3ea`.
+  [Aktiveringen](releases/planner-startup-20261018/ACTIVATED.md) har fyra
+  godkända liveprov. Dess separat granskade paket bevarar en äldre
+  admin-inställning som saknas i main; se releasegranskningen innan en ny
+  ändring av config.py paketeras. Uppstarts- och planeringsrättningarna är aktiva.
 
 ## Vanlig appändring
 
@@ -37,8 +39,8 @@ git pull --ff-only
 git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
-# Ersätt e041451 med senast aktiverade appkod enligt aktuell releasejournal.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit e041451 --commit main --workdir .local/beta-release
+# Ersätt bac0fc1 med senast aktiverade appkod enligt aktuell releasejournal.
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit bac0fc1 --commit main --workdir .local/beta-release
 ```
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.

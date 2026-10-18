@@ -1,0 +1,485 @@
+{
+  "build": {
+    "app": {
+      "image": "sha256:574025c92df8ffc6dec47d0200c20750eb863fe6b69e214710bd56abdfffb79d",
+      "base_image": "sha256:93bbfd2ebe3764cddd559422ed1fce53197359b6f0aabde50619dfc6a81cd8f7",
+      "build_id": "app-bac0fc15ca9a-512ef3ea",
+      "tag": "smako-app:app-bac0fc15ca9a-512ef3ea",
+      "commit": "bac0fc15ca9a5dffe2cde80d8c977d238fa40028",
+      "files": {
+        "backend/app/config.py": {
+          "before": "e30f8de5eac8f1adca7d0bc68f47b7fe9603166e5ca94619e76dbb671512cf5d",
+          "after": "925db7e7a7ab6aa048f839b1663dcda0db072e249ccaba0028b31171ed58ccf0"
+        },
+        "backend/app/data/recipes/library-manifest.json": {
+          "before": "461354a5898621ba6ad850610ebc0dae8d9840b728acdd945ba70d04cca92aa6",
+          "after": "ee6947f4572406c254e7820d6cf7bec440aa9791a0d348836c45cc45e9f88b05"
+        },
+        "backend/app/data/recipes/meal-pack-5df5e643e8452c5deebb24746a7618fa2ff937281eeb91df12bb8bc03207e4a7.json": {
+          "before": null,
+          "after": "5df5e643e8452c5deebb24746a7618fa2ff937281eeb91df12bb8bc03207e4a7"
+        },
+        "backend/app/data/recipes/meal-pack-8e1640d6e18814c0cba55979ad45991fd0fdf3f0063dce68468d6a0929e63550.json": {
+          "before": null,
+          "after": "8e1640d6e18814c0cba55979ad45991fd0fdf3f0063dce68468d6a0929e63550"
+        },
+        "backend/app/data/recipes/meal-pack-8e386c847b9b020bee6aabc95d59511db17c86d7acae43ff4a1de9de8e00d1eb.json": {
+          "before": null,
+          "after": "8e386c847b9b020bee6aabc95d59511db17c86d7acae43ff4a1de9de8e00d1eb"
+        },
+        "backend/app/data/recipes/meal-pack-cc036310dfd1ef9c3a5323c8d1a0889c9aa73112e010af8d7bb21ce042a0607f.json": {
+          "before": null,
+          "after": "cc036310dfd1ef9c3a5323c8d1a0889c9aa73112e010af8d7bb21ce042a0607f"
+        },
+        "backend/app/data/recipes/meal-pack-d1bbb9e4a11173165f54b6dcd9558083214f8ca1827f9ca314910cd51f862f8f.json": {
+          "before": null,
+          "after": "d1bbb9e4a11173165f54b6dcd9558083214f8ca1827f9ca314910cd51f862f8f"
+        },
+        "backend/app/main.py": {
+          "before": "8e1e12487f70fa4f0088f243818de3595c2b1e33e3a65de87c96d22241b97e2e",
+          "after": "7aeffc0eccf6e207bac311cd5c3df41b79feb33b1e43e7af725f372505b837de"
+        },
+        "backend/app/services/basket_optimizer.py": {
+          "before": "484c85b5867f8f61ff4e5d44b774d0f0067c37de03e5de09f98815b4161564a4",
+          "after": "888c3f6cccbb08309a2107c5abdc4f0107d35e0e1ef9e8d239656f6f15d0f5ac"
+        },
+        "backend/app/services/complete_recipes.py": {
+          "before": "d546c674bb3a9ec2d7783d072b79bc8e774175e7977f1e8118a671004fa01a28",
+          "after": "3110e54ee3ea171ffcc2b9cd3ebe977d300a0b80093a8bdae0cbf20ceafd79dc"
+        },
+        "backend/app/services/content_pack_requirements.py": {
+          "before": "e80fc9dc7f3ec80b763cb0c85d6daeee8be15deafb87fb5fc43bb1ee55d2650d",
+          "after": "a0f0f32a0ec155d758e14ba5e4300569c5e140c5a7107989dcf69e6b8b37166f"
+        },
+        "backend/app/services/ingredient_normalizer.py": {
+          "before": "d5e6ecd11ed708ca2d0b155f78810b36ef2199720e68b85dcb76f1e56bdf592f",
+          "after": "c0a5deb1841cc6b8bf28cddd00c73e38526e0a94e032466ff22a90a66b2922c2"
+        },
+        "backend/app/services/meal_library_cli.py": {
+          "before": "c9953bb161836658188ea71628dabccea45bd915b0ff78619ded91a140e86492",
+          "after": "124367037da4d80d3b6d89ca212211962787481dd21febb41e5fa0aba351ad4d"
+        },
+        "backend/app/services/meal_library_content.py": {
+          "before": "a12f885934bd1411ac7293fa8a8704a91555e361481bba033fef0325a556d625",
+          "after": "f5e3b525e2eedc40f576cae4e4fc539074833a4167d4b8154522106f4567bc01"
+        },
+        "backend/app/services/meal_prepared_artifacts.py": {
+          "before": "87371a4db1dd5e6290295219a41e4d176643f4551f9fee8a667ac4474c901432",
+          "after": "22610721043abd14380c8aa868c1e88063400e8f3f9d049c1366074f3ed59125"
+        },
+        "backend/app/services/menu_optimizer.py": {
+          "before": "eb208e523fd6803614018c58acafb75e0754ba7bd642cb90995e5f412f799286",
+          "after": "5477f16f4f2912296651f2f0388367cad966ebcbed83e98bac952ae308316b08"
+        },
+        "backend/app/services/official_product_facts.py": {
+          "before": "97546a3e2a06517fa555eb826779fcbb3a8647b499ec91f1effcab6818e22e7d",
+          "after": "313a47399e8d15ffa9830c58f5e28285ffec1781a9d627a5e2c729fbfd361782"
+        },
+        "backend/app/services/personal_planner.py": {
+          "before": "2b4d269e943289c74ed0dba4efecd060de7b17f7020162e622b16335786ef3e3",
+          "after": "8c596fa5e3da0b4c10e3ae0c34e8f6b4f812e5cd4a58b120021fd811fe0d8674"
+        },
+        "backend/app/services/personal_source_facts.py": {
+          "before": "e5d2d6e02cee567a0aeab631f8feaccbf70e128f5037cbad1f5e6dc581a567d3",
+          "after": "b930868ca9e3b7fcf0243a0f6dec68cef547aea34ae6940b646975c3beee0714"
+        },
+        "backend/app/services/product_semantics.py": {
+          "before": "12c60b1ffe4aca6c9dda0cec2b297f7b740727d8ee0d048e12d0796c13b16824",
+          "after": "26a984088634fe9823e6315f3575e63535b1c016d80371fb9dfdd5948ddd9689"
+        },
+        "backend/app/services/purchase_quantity_resolver.py": {
+          "before": "433c123de57e6e534288682b4bb0ebd2ed08529b8559e6d6e316a664dcd22ec4",
+          "after": "b92415642630c5d4c85ce927b5fa5bf86315d4fe4100ddfc30f8ed92b0f2438f"
+        },
+        "backend/app/services/recipe_authoring.py": {
+          "before": null,
+          "after": "9eee0a033e9a1997a7f6cd6f13a33c885850ef3e7584ca33afc09b9bc590c48d"
+        },
+        "backend/app/services/recipe_ingredient_references.py": {
+          "before": "354f746880fc0318e7a4de29ed5b4f28a6ecbde32d3ab9044e7131693d828239",
+          "after": "e2fdb617cd96f98a6f45593d5f41da4ada459a8778a0a6f168cd3315822cb4b0"
+        },
+        "backend/app/services/recipe_library.py": {
+          "before": "63c4ceb1b682960444cc4e0f86ce38f96d4b5c54ded13cfffac1b72f9d62edcf",
+          "after": "c77b14d579c872e5efbfb4409405a6f9189d796427b109c708387eade842caed"
+        },
+        "backend/app/services/source_facts_prewarm.py": {
+          "before": null,
+          "after": "e84555e638d83e91e714b20b8fd3644d7b269322976d56c998d0e9a2c61f1c1a"
+        },
+        "backend/app/services/stable_candidate_pool.py": {
+          "before": "34fc6d623515c6075906da83b6511ac77cb3924fe51ac67911b9e6e358a9122b",
+          "after": "4787e1a9fe231a51cd8a0d832b68000c9c29f53d70787b46a897f68a740771fc"
+        }
+      },
+      "package_sha256": "512ef3eaabab5f5f50cfc649c13b5e17059d6cb84e774badaf730dbd5b5c3dfe",
+      "only_reviewed_files_changed": true,
+      "unchanged_runtime_files": 673
+    }
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-18T19:39:52.796162+00:00",
+    "runtimes": {
+      "app": {
+        "image": "sha256:574025c92df8ffc6dec47d0200c20750eb863fe6b69e214710bd56abdfffb79d",
+        "base_image": "sha256:93bbfd2ebe3764cddd559422ed1fce53197359b6f0aabde50619dfc6a81cd8f7",
+        "build_id": "app-bac0fc15ca9a-512ef3ea"
+      }
+    },
+    "readiness": {
+      "Lund": {
+        "status": "ready",
+        "database": "ok",
+        "plan_store": "ok",
+        "price_universe": {
+          "active": true,
+          "required_contexts_usable": true,
+          "missing_required_context_ids": [],
+          "usable_context_ids": [
+            "context:coop:23eaae11c9661e68",
+            "context:coop:698f7b6528879df2",
+            "context:coop:709f87b60ef8c210",
+            "context:coop:95aeb1242c92bd40",
+            "context:coop:a35d1de8aaaf5b41",
+            "context:coop:a5a6ee957014972a",
+            "context:coop:db7c87478187339f",
+            "context:coop:e6ab1bde1aaf6609",
+            "context:coop:e9ccea03a65e7252",
+            "context:coop:f0f14586a4a5abfa",
+            "context:hemkop:3288e04edd97e349",
+            "context:hemkop:756955d0e6e05f23",
+            "context:ica:0edf5d52980ffcd7",
+            "context:ica:1a19476898da3fb0",
+            "context:ica:24c415e3af6438b4",
+            "context:ica:2d734344abd8c685",
+            "context:ica:3d991cfe2014eb8c",
+            "context:ica:602d84df14d47e3d",
+            "context:ica:7b8c7bd0161c50dc",
+            "context:ica:7f1f6e52c3152f98",
+            "context:ica:b7a8ac31980d0bd7",
+            "context:ica:b7ad17cc0a7001fd",
+            "context:ica:cb840c0edbf56816",
+            "context:ica:e03aeae83df25aa4",
+            "context:lidl:05f1cb3d9fc89bc3",
+            "context:lidl:46dd1e85257757e0",
+            "context:willys:383650ec6ff5a636",
+            "context:willys:4a671428fc484e43",
+            "context:willys:f3f63d6851275fcc"
+          ],
+          "requires_attention": true,
+          "warning_age_hours": 36.0,
+          "stale_age_hours": 48.0,
+          "status": "degraded",
+          "price_universe_id": "price-universe:a1983e99a47aac43d73371bb1229cf520fbfa3a421a0a0cb6dca143536995077",
+          "built_at": "2026-10-18 17:44:22.896226+00:00",
+          "oldest_price_age_hours": 93.647,
+          "oldest_usable_price_age_hours": 93.647,
+          "hours_until_oldest_usable_stale": null,
+          "usable_context_count": 29,
+          "excluded_stale_context_count": 0,
+          "excluded_stale_context_ids": [],
+          "retained_older_base_context_ids": [
+            "context:hemkop:3288e04edd97e349",
+            "context:hemkop:756955d0e6e05f23",
+            "context:willys:383650ec6ff5a636",
+            "context:willys:4a671428fc484e43"
+          ],
+          "base_price_policy": "retain-until-replaced",
+          "product_count": 2279
+        },
+        "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+        "build_id": "app-bac0fc15ca9a-512ef3ea",
+        "features": {
+          "complete_recipes_enabled": true
+        }
+      },
+      "Malmo": {
+        "status": "ready",
+        "database": "ok",
+        "plan_store": "ok",
+        "price_universe": {
+          "active": true,
+          "required_contexts_usable": true,
+          "missing_required_context_ids": [],
+          "usable_context_ids": [
+            "context:citygross:33b01007b20e8988",
+            "context:coop:00d3c70860d97cae",
+            "context:coop:0af1a8138f910d90",
+            "context:coop:20e4633ad51e8d1f",
+            "context:coop:55469b5a21f9b46e",
+            "context:coop:6ccb60b8518dcfba",
+            "context:coop:7249b37ed1aa3b58",
+            "context:coop:788d290977d9807c",
+            "context:coop:80003f1b518a562e",
+            "context:coop:91472761912c55cf",
+            "context:coop:a06d1b2d64d5a880",
+            "context:coop:c964acbfeb697ff3",
+            "context:coop:df2cb6829ff429e8",
+            "context:coop:f4e6dfa3fada9ab1",
+            "context:hemkop:363b00fb95065cf0",
+            "context:hemkop:559cb3b5b4885cdf",
+            "context:hemkop:7c2684c2238e291f",
+            "context:hemkop:ac1b35fa13bf792f",
+            "context:ica:094e21ba74aa33a2",
+            "context:ica:0a956c41111c4892",
+            "context:ica:0b4e04c736b28d7f",
+            "context:ica:0f3dfa38926580b4",
+            "context:ica:225fe3aad581eb30",
+            "context:ica:2ebe48fc8b94954d",
+            "context:ica:39388ccbeef44cc9",
+            "context:ica:3dea560861dd40c3",
+            "context:ica:40cf35f5cc4291d2",
+            "context:ica:5e27ad28cca298dd",
+            "context:ica:687e279d959c4fd5",
+            "context:ica:6a256df3bd824770",
+            "context:ica:7510f4e03751e496",
+            "context:ica:89adf2bc4a5fc50b",
+            "context:ica:9298d28d85680b25",
+            "context:ica:93d67e8c62b80044",
+            "context:ica:b6344d523dff467d",
+            "context:ica:b7da1e7d4e75ddec",
+            "context:ica:c7d64306e198b5c0",
+            "context:ica:d39e9477fc04e9cd",
+            "context:ica:d4f389e027dfd2aa",
+            "context:ica:e97cb5c51269702d",
+            "context:ica:ec2fb2e2de118f35",
+            "context:ica:f0d2c31124015463",
+            "context:lidl:02003cfd003cb278",
+            "context:lidl:0ae4f1f209de4e0f",
+            "context:lidl:311b7dff422ef34e",
+            "context:lidl:32e1429a0ee8d968",
+            "context:lidl:94c92b23e9747b89",
+            "context:lidl:df8c739c183feea8",
+            "context:lidl:ef2d86773be8fad3",
+            "context:lidl:f9b1e1c4921e9aa1",
+            "context:willys:4c7406e2a0cbcdf4",
+            "context:willys:5adaf178f6561faa",
+            "context:willys:6e2de1b8bdc14801",
+            "context:willys:91fc2ae693ecdec6",
+            "context:willys:9e19db13968fa0c6",
+            "context:willys:aa4f80feaf2b85d5",
+            "context:willys:b69aa27a99e005be",
+            "context:willys:bbd37ea3cd468706",
+            "context:willys:f34dc63a3595b2c9",
+            "context:willys:fc5fbe8cd6399ad8"
+          ],
+          "requires_attention": true,
+          "warning_age_hours": 36.0,
+          "stale_age_hours": 48.0,
+          "status": "degraded",
+          "price_universe_id": "price-universe:afec66fc880523aca0c19f909f99f240dc398a075462ddddb3c34537ed0aad7d",
+          "built_at": "2026-10-18 19:18:09.064715+00:00",
+          "oldest_price_age_hours": 111.647,
+          "oldest_usable_price_age_hours": 111.647,
+          "hours_until_oldest_usable_stale": null,
+          "usable_context_count": 60,
+          "excluded_stale_context_count": 0,
+          "excluded_stale_context_ids": [],
+          "retained_older_base_context_ids": [
+            "context:hemkop:363b00fb95065cf0",
+            "context:hemkop:559cb3b5b4885cdf",
+            "context:hemkop:7c2684c2238e291f",
+            "context:hemkop:ac1b35fa13bf792f",
+            "context:willys:5adaf178f6561faa",
+            "context:willys:91fc2ae693ecdec6",
+            "context:willys:bbd37ea3cd468706",
+            "context:willys:fc5fbe8cd6399ad8"
+          ],
+          "base_price_policy": "retain-until-replaced",
+          "product_count": 2604
+        },
+        "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+        "build_id": "app-bac0fc15ca9a-512ef3ea",
+        "features": {
+          "complete_recipes_enabled": true
+        }
+      }
+    },
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 295,
+      "personal_private_state": 106
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_environment_change": "BUILD_ID",
+    "cpu_quiet_samples": [
+      0.02,
+      0.11
+    ],
+    "backup": "/opt/smako/evidence/app-bac0fc15ca9a-512ef3ea/backup-20261018T193114Z",
+    "operation_lock": true
+  },
+  "public_tests": {
+    "build_id": "app-bac0fc15ca9a-512ef3ea",
+    "cases": [
+      {
+        "case": "lund-0",
+        "http_status": 201,
+        "seconds": 52.11,
+        "passed": true,
+        "recipes": 5,
+        "stores": 2,
+        "audit_passed": true,
+        "identical_saved_get": true,
+        "paid": 545.25,
+        "postal_code": "22350",
+        "price_universe_id": "price-universe:a1983e99a47aac43d73371bb1229cf520fbfa3a421a0a0cb6dca143536995077",
+        "chosen_store_ids": [
+          "context:ica:2d734344abd8c685",
+          "context:willys:383650ec6ff5a636"
+        ]
+      },
+      {
+        "case": "lund-1",
+        "http_status": 201,
+        "seconds": 38.77,
+        "passed": true,
+        "recipes": 5,
+        "stores": 2,
+        "audit_passed": true,
+        "identical_saved_get": true,
+        "paid": 545.25,
+        "postal_code": "22350",
+        "price_universe_id": "price-universe:a1983e99a47aac43d73371bb1229cf520fbfa3a421a0a0cb6dca143536995077",
+        "chosen_store_ids": [
+          "context:ica:2d734344abd8c685",
+          "context:willys:383650ec6ff5a636"
+        ]
+      },
+      {
+        "case": "malmo-0",
+        "http_status": 201,
+        "seconds": 55.23,
+        "passed": true,
+        "recipes": 5,
+        "stores": 2,
+        "audit_passed": true,
+        "identical_saved_get": true,
+        "paid": 545.25,
+        "postal_code": "21120",
+        "price_universe_id": "price-universe:afec66fc880523aca0c19f909f99f240dc398a075462ddddb3c34537ed0aad7d",
+        "chosen_store_ids": [
+          "context:ica:c7d64306e198b5c0",
+          "context:willys:91fc2ae693ecdec6"
+        ]
+      },
+      {
+        "case": "malmo-1",
+        "http_status": 201,
+        "seconds": 52.23,
+        "passed": true,
+        "recipes": 5,
+        "stores": 2,
+        "audit_passed": true,
+        "identical_saved_get": true,
+        "paid": 545.25,
+        "postal_code": "21120",
+        "price_universe_id": "price-universe:afec66fc880523aca0c19f909f99f240dc398a075462ddddb3c34537ed0aad7d",
+        "chosen_store_ids": [
+          "context:ica:c7d64306e198b5c0",
+          "context:willys:91fc2ae693ecdec6"
+        ]
+      }
+    ]
+  },
+  "post_http_state": {
+    "at": "2026-10-18T19:45:06.837609+00:00",
+    "build_id": "app-bac0fc15ca9a-512ef3ea",
+    "containers": {
+      "smako-app-1": {
+        "image": "sha256:574025c92df8ffc6dec47d0200c20750eb863fe6b69e214710bd56abdfffb79d",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      },
+      "smako-scheduler-1": {
+        "image": "sha256:8f25b16ea86cf5cd93d385f87db7d20b73a2543bdc70cb9c08b7beb52ec15a10",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      },
+      "smako-caddy-1": {
+        "image": "sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d",
+        "status": "running",
+        "oom": false,
+        "restarts": 0
+      }
+    },
+    "prior_state_preserved": true,
+    "table_counts": {
+      "consumer_plan_revisions": {
+        "prior": 295,
+        "now": 299
+      },
+      "personal_private_state": {
+        "prior": 106,
+        "now": 110
+      }
+    },
+    "new_oom_events": 0,
+    "prewarm_enabled": false,
+    "free_bytes": 11556892672
+  },
+  "auth": {
+    "correct_password": true,
+    "operational_token": true,
+    "unauthorized_cases_rejected": 4
+  },
+  "candidate_tests": [
+    {
+      "city": "lund",
+      "passed": true,
+      "seconds": [
+        42.46208301791921,
+        35.91083804378286
+      ],
+      "prices": [
+        548.76,
+        548.76
+      ]
+    },
+    {
+      "city": "malmo",
+      "passed": true,
+      "seconds": [
+        54.95752895111218,
+        47.73641433799639
+      ],
+      "prices": [
+        534.92,
+        534.92
+      ]
+    }
+  ],
+  "backup_archive": {
+    "source": "/opt/smako/evidence/app-bac0fc15ca9a-512ef3ea/backup-20261018T193114Z",
+    "archive": "/opt/smako/evidence/app-bac0fc15ca9a-512ef3ea/backup-20261018T193114Z.tar.gz",
+    "sha256": "faf8794971ca2cf339dd4acb7c192765e213722648c9e85a667b72080fe50d3a",
+    "entries_verified": 4,
+    "original_bytes": 6788206863,
+    "archive_bytes": 1651167540,
+    "free_bytes": 16693608448,
+    "net_freed_bytes": 5137022976
+  },
+  "final_status": {
+    "checked_at": "2026-10-18T19:49:01.652619+00:00",
+    "storage": {
+      "free_bytes": 16693719040,
+      "required_estimate_bytes": 13992855996,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "disk_manifest": "price-universe:a1983e99a47aac43d73371bb1229cf520fbfa3a421a0a0cb6dca143536995077",
+    "loaded_manifest": "price-universe:a1983e99a47aac43d73371bb1229cf520fbfa3a421a0a0cb6dca143536995077",
+    "runner": {
+      "completed_at": "2026-10-18T19:45:17.795769+00:00",
+      "exit_code": 0,
+      "started_at": "2026-10-18T19:45:03.160976+00:00",
+      "status": "complete"
+    },
+    "ready": 200,
+    "build_id": "app-bac0fc15ca9a-512ef3ea"
+  }
+}

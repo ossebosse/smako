@@ -1,4 +1,29 @@
-# 2026-10-18: Exakta butiksjämförelser återanvänds – ej aktiverat
+# 2026-10-18: Betan aktiverad och skalningsuppgift till Claude committad
+
+Aktiverad 19:39 UTC: BUILD_ID `app-bac0fc15ca9a-512ef3ea`, kod `bac0fc1`.
+Uppstarts-/fakta-/recept-/sökrättningarna och exakt offertåteranvändning är
+aktiva med 222 recept. De 20 experimentrecepten ingår inte.
+
+Fyra publika menyprov PASS, inklusive kassakontroll och identisk sparad GET.
+Lund 52,11/38,77 s; Malmö 55,23/52,23 s (första/nästa HTTP-prov).
+295 tidigare planrevisioner och 106 privata tillstånd är hashbevarade.
+Prewarm false; inga nya OOM eller omstarter. Scheduler, proxy, miljö,
+volymer och prismanifest bevarades vid bytet. Befintliga källvarningar kvarstår.
+Releasebackupen är komprimerad och hashverifierad. Slutkontroll 19:49 UTC:
+ready/200, 16,69 GB ledigt mot beräknat behov 13,99 GB.
+
+[Aktiveringsrapport och evidens](releases/planner-startup-20261018/ACTIVATED.md).
+Releasepaketet bevarar uttryckligen betans tidigare admin-lösenordsinställning,
+som saknas i main; se granskningen. Övriga 25 ändrade filer matchar Git exakt.
+Full konsolidering av äldre serverändringar är fortfarande en separat uppgift.
+
+[Uppgift till Claude: tusentals recept och variationer](CLAUDE-RECIPE-SCALING.md)
+är committad i `540b123`: första milstolpe 1 000 recept, skalningsmatris,
+bevarat pris/kvalitet och tydliga verifieringskrav.
+
+---
+
+# 2026-10-18: Exakta butiksjämförelser återanvänds – ej aktiverat vid granskningen
 
 Slutversion `90ddeeb` minskar Malmös varma standardtid 55,88 → 52,21 s
 (6,6 %) och kalla ekotid 219,45 → 196,26 s (10,6 %). Samma 242-receptbibliotek,
