@@ -48,9 +48,12 @@ Enbart dokumentationsändringar kräver ingen apprelease; verktyget säger då
 att det saknas appändringar. Använd en ny utdatamapp för varje nytt paket.
 
 Om aktiv fil har andra ändringar än Git-basen, om en fil tas bort eller om
-beroenden, databasstruktur, grocery-kod eller deploy-filer har ändrats i
+beroenden, databasstruktur, grocery-kod eller körbara deploy-filer har ändrats i
 intervallet, avbryts detta begränsade appflöde. Gör en separat granskad release
 för den förändringen; kopiera inte hela main över den aktiva bilden på chans.
+`deploy/.env.production.example` är dokumentation och paketeras aldrig.
+Ändringar där ändrar inte serverns miljöfil. Appmoduler vars namn innehåller
+`requirements` är vanlig appkod och ingår i den exakta filgranskningen.
 
 ### 2. Bygg och verifiera kandidatbilden
 

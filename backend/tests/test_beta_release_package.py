@@ -84,15 +84,19 @@ def test_divergent_live_source_is_not_overwritten(release, monkeypatch):
     assert not (args.workdir / "candidate.zip").exists()
 
 
-@pytest.mark.parametrize("kind", ["deleted", "dependency", "schema"])
+@pytest.mark.parametrize("kind", ["deleted", "dependency", "app-dependency", "schema", "compose", "deploy-script"])
 def test_unsupported_changes_stop_before_ssh(release, monkeypatch, kind):
     module, args, source, git = release
     if kind == "deleted":
         source.unlink()
     else:
-        path = module.ROOT / (
-            "backend/requirements.txt" if kind == "dependency" else "grocery_data/alembic/new.py"
-        )
+        path = module.ROOT / {
+            "dependency": "backend/requirements.txt",
+            "app-dependency": "backend/app/requirements.txt",
+            "schema": "grocery_data/alembic/new.py",
+            "compose": "deploy/compose.yaml",
+            "deploy-script": "deploy/scripts/run.py",
+        }[kind]
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("change\n")
     git("add", "-A")
@@ -101,6 +105,27 @@ def test_unsupported_changes_stop_before_ssh(release, monkeypatch, kind):
     monkeypatch.setattr(module, "remote", lambda *_: pytest.fail("must stop before SSH"))
     with pytest.raises(ValueError):
         module.prepare(args)
+
+
+def test_app_requirements_module_is_packaged_but_env_example_is_not(release, monkeypatch):
+    module, args, _, git = release
+    app_path = "backend/app/services/content_pack_requirements.py"
+    for name in (app_path, "deploy/.env.production.example"):
+        path = module.ROOT / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("value = 3\n", encoding="utf8")
+    git("add", "-A")
+    git("commit", "-qm", "app module and documentation example")
+    args.commit = git("rev-parse", "HEAD")
+    monkeypatch.setattr(module, "remote", lambda *_: json.dumps({
+        "image": "sha256:" + "a" * 64,
+        "files": {"backend/app/example.py": base64.b64encode(b"value = 1\n").decode(),
+                  app_path: None},
+    }).encode())
+    module.prepare(args)
+    with zipfile.ZipFile(args.workdir / "candidate.zip") as archive:
+        assert archive.read(app_path) == b"value = 3\n"
+        assert "deploy/.env.production.example" not in archive.namelist()
 
 
 def test_modified_package_and_unverified_activation_stop_before_ssh(release, monkeypatch):

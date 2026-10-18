@@ -79,7 +79,7 @@ def prepare(args):
         raise ValueError("No app changes: no deployment is needed for this commit range")
     if not all(valid_path(p) for p in paths):
         raise ValueError("Unsafe or unsupported app path")
-    boundary = git(
+    boundary_candidates = git(
         "diff",
         "--name-only",
         before,
@@ -89,11 +89,18 @@ def prepare(args):
         "*requirements*",
         "grocery_data",
         "deploy",
-    )
+    ).splitlines()
+    # The broad requirements glob also matches application modules such as
+    # content_pack_requirements.py. They are reviewed app code, not dependency
+    # manifests. The documented environment example is never installed by this
+    # app-only flow; the active environment is preserved and checked at swap.
+    boundary = [p for p in boundary_candidates
+                if not (p.startswith("backend/app/") and p.endswith(".py"))
+                and p != "deploy/.env.production.example"]
     if boundary:
         raise ValueError(
             "Dependencies/schema/compose changed: use a separately reviewed full release: "
-            + boundary
+            + "\n".join(boundary)
         )
     for path in paths:
         mode = git("ls-tree", commit, "--", path).split(" ", 1)[0]
