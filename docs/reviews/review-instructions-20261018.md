@@ -11,6 +11,15 @@ Gren `fix/review-20261018`, ovanpå `main` `d41339d`. Patch:
 | P2 flera vattenmängder och decimaler i author | ersättning i ett pass över ursprunglig text med heltalsgränser; author registrerar varje mängd en gång och läser decimalkomma; skalade decimaler skrivs med komma | `test_recipe_authoring.py`: flera mängder, decimal, tal i annat tal, de 11 utfärdade stegen oförändrade vid 1/2/4/8/12 |
 | Brunchägg L/XL saknade standardvikt | ord för ursprung/hållning (från, frigående, höns, inomhus, utomhus, svenska) räknas som vanligt ägg; övriga ord markerar sammansatt produkt | `test_egg_standard_weight.py` |
 
+## Redan kört
+
+Lund, granskningens frysta underlag (klocka 2026-10-18T05:12:49.467392+00:00):
+`test_search_caps_vs_uncapped.py` med den nya fullbiblioteksreferensen
+(seed 0, refinement 0, inget varianturval) för standard, vegan, protein40,
+all-macros, organic-share, distribution och breakfast-snack-weight:
+9 PASS, 0 FAIL. Malmö är inte kört här (minnet i sandlådan räcker inte för
+Malmös artefakt).
+
 ## Att granska
 
 1. Kör `test_search_caps_vs_uncapped.py` för Lund och Malmö med samtliga sju
