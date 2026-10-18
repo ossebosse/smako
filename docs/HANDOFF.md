@@ -1,3 +1,18 @@
+# 2026-10-18: Exakta butiksjämförelser återanvänds – ej aktiverat
+
+Slutversion `90ddeeb` minskar Malmös varma standardtid 55,88 → 52,21 s
+(6,6 %) och kalla ekotid 219,45 → 196,26 s (10,6 %). Samma 242-receptbibliotek,
+menyer, priser och fullständiga resultathashar. Söktak och kvalitetskrav är
+oförändrade. Extra minne från första försöket är borttaget: ekoprovet använder
+åter cirka 2 482 MiB RSS. Lund har ingen säkert visad tidsvinst.
+
+[Full granskning, mätningar och begränsningar](reviews/planner-exact-speed-20261018.md).
+Full lokal backendsvit: 2 835 PASS, 10 kända XFAIL, 2 SKIP. Slutversionens
+GitHub-CI är grön, inklusive webbläsartester. Ingen produktionsaktivering;
+de 20 nya recepten är fortsatt endast experimentunderlag.
+
+---
+
 # 2026-10-18: 20 author-recept och uppmätt bibliotekstillväxt – endast testbibliotek
 
 20 nya prototyprecept skapade/importerade med ordinarie author. 222 → 242

@@ -290,6 +290,12 @@ class _CompactQuoteSelection:
 
 
 @dataclass(frozen=True, slots=True)
+class _SubsetWinnerPattern:
+    positions: tuple[str | None, ...]
+    groups: tuple[tuple[str, int], ...]
+
+
+@dataclass(frozen=True, slots=True)
 class StoreSubsetCacheStats:
     """Request-independent combinatorial subset memoization diagnostics."""
 
@@ -304,7 +310,9 @@ class _QuoteCacheSession:
     promotion_structure_candidates: int = 0
     # Only the authoritative ordering of stores determines a subset's winner.
     # Rebind that structural pattern to current quotes; never cache prices here.
-    subset_patterns: dict[tuple, tuple[str | None, ...]] = field(default_factory=dict)
+    subset_patterns: dict[tuple, _SubsetWinnerPattern] = field(default_factory=dict)
+    subset_memberships: dict[int, tuple[tuple, dict[str, int]]] = field(default_factory=dict)
+    vector_groups: dict[int, tuple[tuple, tuple]] = field(default_factory=dict)
     # Exact quotient of subset vectors, request-local like the source quotes.
     # A bit marks every store subset with that same rank/price/winning store.
     subset_partitions: dict[int, tuple[tuple, tuple, tuple, bool]] = field(default_factory=dict)
@@ -558,6 +566,8 @@ class BasketOptimizer:
             session.per_store_compact.clear()
             session.subset_vectors.clear()
             session.subset_patterns.clear()
+            session.subset_memberships.clear()
+            session.vector_groups.clear()
             session.store_orders.clear()
             session.subset_partitions.clear()
             session.subset_cap_masks.clear()
@@ -1022,9 +1032,35 @@ class BasketOptimizer:
             # Store ID is part of the authoritative quote key, so distinct
             # stores cannot tie. Changing quantity, price or policy recomputes
             # this order before reuse; current quote objects supply all values.
-            ranks = {store_id: rank for rank, store_id in enumerate(pattern_key[2])}
-            pattern = tuple(min((s for s in combo if s in ranks),
-                                key=ranks.__getitem__, default=None) for combo in store_subsets)
+            cached_memberships = session.subset_memberships.get(id(store_subsets)) if session else None
+            if cached_memberships is not None and cached_memberships[0] is store_subsets:
+                memberships = cached_memberships[1]
+            else:
+                memberships = {}
+                for index, combo in enumerate(store_subsets):
+                    bit = 1 << index
+                    for store_id in combo:
+                        memberships[store_id] = memberships.get(store_id, 0) | bit
+                if session:
+                    session.subset_memberships[id(store_subsets)] = (store_subsets, memberships)
+            # Visit stores in the complete authoritative quote order. The first
+            # store covering each subset is exactly its scalar minimum. Keep
+            # those masks for aggregation instead of rediscovering them for
+            # every quantity that has the same order.
+            remaining = (1 << len(store_subsets)) - 1
+            positions = [None] * len(store_subsets)
+            groups = []
+            for store_id in pattern_key[2]:
+                mask = memberships.get(store_id, 0) & remaining
+                if mask:
+                    groups.append((store_id, mask))
+                    remaining ^= mask
+                    pending = mask
+                    while pending:
+                        bit = pending & -pending
+                        pending ^= bit
+                        positions[bit.bit_length() - 1] = store_id
+            pattern = _SubsetWinnerPattern(tuple(positions), tuple(groups))
             if session:
                 session.stats.subset_pattern_misses += 1
                 if len(session.subset_patterns) >= 256:
@@ -1032,9 +1068,12 @@ class BasketOptimizer:
                 session.subset_patterns[pattern_key] = pattern
         elif session:
             session.stats.subset_pattern_hits += 1
-        result = tuple(compact.get(store_id, missing) for store_id in pattern)
+        result = tuple(compact.get(store_id, missing) for store_id in pattern.positions)
         if vector_key is not None and session is not None:
             session.subset_vectors[vector_key] = result
+            session.vector_groups[id(result)] = (
+                result, tuple((compact[store_id], mask) for store_id, mask in pattern.groups),
+            )
         return result
 
     def _compact_quotes_by_store(
@@ -1418,12 +1457,17 @@ class BasketOptimizer:
                 positions = []
                 operands = {}
                 compiled_selections = {}
-                for index, selection in enumerate(vector):
+                structural = session.vector_groups.get(id(vector)) if session else None
+                structural = structural[1] if structural is not None and structural[0] is vector else None
+                entries = structural if structural is not None else (
+                    (selection, 1 << index) for index, selection in enumerate(vector)
+                )
+                for selection, mask in entries:
                     key = None
                     if selection.store_id is not None:
                         if integer_prices and id(selection) in compiled_selections:
                             key = compiled_selections[id(selection)]
-                            grouped[key] = grouped.get(key, 0) | (1 << index)
+                            grouped[key] = grouped.get(key, 0) | mask
                             positions.append(key)
                             continue
                         price = selection.total_price
@@ -1439,12 +1483,20 @@ class BasketOptimizer:
                         key = operands.setdefault(key, key)
                         if integer_prices:
                             compiled_selections[id(selection)] = key
-                        grouped[key] = grouped.get(key, 0) | (1 << index)
+                        grouped[key] = grouped.get(key, 0) | mask
+                        if structural is not None:
+                            compiled_selections[id(selection)] = key
                     positions.append(key)
                 groups = tuple(grouped.items())
-                positions = tuple(positions)
+                positions = (tuple(compiled_selections.get(id(selection)) for selection in vector)
+                             if structural is not None else tuple(positions))
                 if session:
                     session.subset_partitions[id(vector)] = (vector, groups, positions, integer_prices)
+                    # The compiled partition now owns the same information.
+                    # Keeping its structural input too costs hundreds of MB in
+                    # large eco searches. A changed Decimal context can safely
+                    # rebuild from the retained immutable vector instead.
+                    session.vector_groups.pop(id(vector), None)
             partitions.append((groups, positions))
         # Small partitions first reduces intermediate intersections without
         # changing the commutative arithmetic or quote selection.
