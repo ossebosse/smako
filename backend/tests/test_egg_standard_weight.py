@@ -50,3 +50,13 @@ def test_small_unknown_or_composite_eggs_get_no_mass():
         facts = {("s1", "p1"): ProductFacts(source="test", source_product_id="p1", source_snapshot_id="snap", ingredients=ingredients)}
         shell_egg_quantity_proofs([product], facts)
         assert project_usable_quantity(product, facts[("s1", "p1")], required_unit="g").usable_unit == "st"
+
+
+def test_production_method_words_do_not_block_a_plain_egg_pack():
+    """Review 2026-10-18: Brunchägg L/XL with 'ÄGG från frigående höns inomhus'."""
+    product = _product("Brunchägg Frigående L/XL 6-pack", count=6)
+    facts = {("s1", "p1"): ProductFacts(source="test", source_product_id="p1", source_snapshot_id="snap",
+                                        ingredients=("ÄGG från frigående höns inomhus",))}
+    shell_egg_quantity_proofs([product], facts)
+    projected = project_usable_quantity(product, facts[("s1", "p1")], required_unit="g")
+    assert projected.usable_unit == "g" and projected.usable_quantity == 6 * 60.0

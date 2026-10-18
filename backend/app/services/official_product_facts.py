@@ -375,6 +375,10 @@ _EGG_CLASS_WORDS = {'small': 's', 's': 's', 'medium': 'm', 'm': 'm', 'large': 'l
                     'x-large': 'xl', 'xl': 'xl'}
 
 
+_PLAIN_EGG_WORDS = frozenset({'ingredienser', 'krav', 'ekologiska', 'ekologiskt', 'ägg', 'hönsägg', 'från',
+                              'frigående', 'höns', 'inomhus', 'utomhus', 'svenska', 'av'})
+
+
 def egg_standard_weight(name):
     """Standard edible weight per egg for M/L packs (the smaller class wins), or None."""
     words = re.findall(r'x-large|[a-z]+', name.casefold().replace('/', ' '))
@@ -404,7 +408,9 @@ def shell_egg_quantity_proofs(products, result):
             continue
         weight = egg_standard_weight(p.name)
         words = set(re.findall(r'[a-zåäö]+', ' '.join(fact.ingredients).casefold()))
-        if weight is None or (words and not words <= {'ingredienser', 'krav', 'ekologiska', 'ägg', 'hönsägg'}):
+        # Production-method words describe the egg itself ("ÄGG från frigående
+        # höns inomhus"); any other word means a composite product.
+        if weight is None or (words and not words <= _PLAIN_EGG_WORDS):
             continue
         proof = {'basis': 'standard_egg_weight', 'unit': 'g',
                  'quantity': round(p.package_quantity * weight, 1),
