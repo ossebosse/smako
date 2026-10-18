@@ -1675,10 +1675,14 @@ class PersonalPlanner:
                 class_bounds[(dimension, index)] = relaxed[1] if relaxed else None
             return class_bounds[(dimension, index)]
 
+        key_set = set(keys)
+        fixed_bound = (None if line_bounds is None or any(k not in line_bounds for k in keys) else
+                       sum((pair[0] for k, pair in line_bounds.items() if k not in key_set), Decimal(0)))
+
         def optimistic_total(indices):
-            if line_bounds is None or any(k not in line_bounds for k in keys):
+            if fixed_bound is None:
                 return None
-            total = sum((pair[0] for k, pair in line_bounds.items() if k not in keys), Decimal(0))
+            total = fixed_bound
             for dimension, index in enumerate(indices):
                 bound = class_bound(dimension, index)
                 if bound is None:
@@ -1691,9 +1695,7 @@ class PersonalPlanner:
             _, indices = heapq.heappop(queue)
             for dimension, index in enumerate(indices):
                 if index + 1 < len(choices[dimension]):
-                    neighbor = tuple(
-                        index + 1 if n == dimension else v for n, v in enumerate(indices)
-                    )
+                    neighbor = indices[:dimension] + (index + 1,) + indices[dimension + 1:]
                     if neighbor not in seen:
                         seen.add(neighbor)
                         heapq.heappush(queue, (sum(neighbor), neighbor))
