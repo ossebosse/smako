@@ -2,13 +2,17 @@
 
 - Gren `perf/recipe-scaling-20261019`. Rapport:
   [recipe-scaling-20261019.md](reviews/recipe-scaling-20261019.md).
-- 1 000 recept klarar inte 30 s: varm standard cirka 106 s i Lund och 151 s
-  i Malmö (222 recept: 44/56 s). Samma pris och resultathash före och efter.
+- 1 000 recept klarar inte 30 s: varm standard cirka 85 s i Lund och 126 s
+  i Malmö (före 125/165 s; 222 recept nu 36/41 s). Samma pris och resultathash.
+- `46a79ea`: behovsrader återanvänds inom anropet och produktupplösning delas
+  mellan anrop med samma scope (`SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av).
+  Delad enreceptskvalificering prövades och förkastades (ingen nettovinst).
+- En bevisad kostnadsgräns beskär 0 av 3 661 veckor (högst 51 % av beloppet).
 - Två exakta rättelser: parlikhet räknas vid behov (tog bort en kvadratisk
   kostnad, cirka 28 s per anrop vid 1 000 recept) och variantbevis evakueras
   inte längre över 2 048 varianter.
 - Huvudhinder: substitutionssvepet för nya generationer saknar tak och står
-  för 54 % av korgarna vid 1 000. Kräver bevisad gräns eller produktbeslut.
+  för 54 % av korgarna vid 1 000. Kräver ett produktbeslut.
 - Separat gren `fix/full-library-reference-contract`: `--uncapped-reference`
   kräver `seed=0`, `refinement=0`, `seed_variant_shortlist=false`.
 

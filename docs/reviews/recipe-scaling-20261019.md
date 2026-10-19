@@ -1,16 +1,19 @@
-# Receptskalning, första mätning och två exakta rättelser, 2026-10-19
+# Receptskalning: mätning och exakta förbättringar, 2026-10-19
 
-Uppgift: [CLAUDE-RECIPE-SCALING.md](../CLAUDE-RECIPE-SCALING.md). Detta är steg 1
-(reproducerbar referens och profilering) plus två ändringar som bevisat inte
-ändrar resultatet. Ingen beskärning, inga tak och inga kvalitetskrav är ändrade.
+Uppgift: [CLAUDE-RECIPE-SCALING.md](../CLAUDE-RECIPE-SCALING.md). Steg 1
+(reproducerbar referens och profilering), tre ändringar som inte ändrar
+resultatet, ett prövat och förkastat förslag och en mätning av om en bevisad
+kostnadsgräns kan beskära substitutionen. Ingen beskärning, inga tak och inga
+kvalitetskrav är ändrade.
 Inga syntetiska recept ligger i produktionsbiblioteket.
 
 ## 1. Beslut
 
-**1 000 recept klarar inte 30 sekunder idag.** Varm standardplanering tar
-cirka 106 s i Lund och 151 s i Malmö efter rättelserna (125 s och 165 s före).
-Med 222 recept är tiden 43–56 s i denna miljö. Kostnaden växer ungefär
-linjärt med antal nya recept, plus en kvadratisk del som nu är borttagen.
+**1 000 recept klarar inte 30 sekunder.** Varm standardplanering tar efter
+alla ändringar cirka 85 s i Lund och 126 s i Malmö (125 s och 165 s före).
+Med 222 recept är tiden nu 36 s respektive 41 s (43 och 58 s före). Kostnaden
+växer ungefär linjärt med antal nya recept; den kvadratiska delen är borttagen.
+Resultathash och pris är oförändrade i varje jämförelse.
 
 Det som hindrar nästa nivå, i storleksordning:
 
@@ -24,9 +27,11 @@ Det som hindrar nästa nivå, i storleksordning:
    `BasketOptimizer.optimize`. Resten är behovsrader, `resolve`
    (310 000 anrop), pydantic-objekt och spårning, upprepat för varje vecka
    trots att fyra av fem recept är desamma som i föregående förslag.
+   Delvis åtgärdat i `46a79ea`.
 3. **Kandidatkvalificering per anrop.** En enreceptskorg per kandidat och
    anrop: 12–20 s varmt vid 1 000 recept, 34–45 s kallt. Samma arbete görs om
-   i nästa anrop med samma priser, scope och profil.
+   i nästa anrop med samma priser, scope och profil. Produktupplösningen
+   delas nu (`46a79ea`); att dela hela korgen gav ingen nettovinst.
 4. **Minne.** Malmö når 2,7 GB peak RSS vid 1 000 recept. Med serverns
    3 GiB-gräns är 2 000 recept i Malmö sannolikt inte möjligt utan
    minnesåtgärd. Inte uppmätt här.
@@ -41,9 +46,56 @@ Det som hindrar nästa nivå, i storleksordning:
 Den kvadratiska delen var 404 550 jämförelser och cirka 28 s per anrop vid
 1 000 recept (profil). Vid 5 000 recept hade den varit cirka 12,5 miljoner.
 
+| `46a79ea` | Inom ett anrop: behovsrader per (plats, rensat recept, måltid) inklusive `demand_key` byggs en gång; sammanslagen profil och JSON för anropskonstanta modeller i cachenycklar räknas en gång per objekt. Mellan anrop: `resolve()` (kvalificerade, prissatta kandidater eller ett fel utan diagnostik) delas i en processlokal LRU, 4 scope × 32 768 poster | Samma värden som tidigare beräknades per rad. Delningens scope täcker allt `resolve` läser utöver sin nyckel: exakt prisuniversum, faktaversion (innehållshash), vy-identitet (kontexter, urval, Stockholmsdatum), användbara butiker, medlemskap/kuponger, prisdatum, inköpsläge, complete-läge och inställningar. Scope läses från planerarens aktuella attribut vid varje miss. Spårade produkthändelser spelas upp som vid en lokal träff. `SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av. Testerna börjar med tom cache |
+
 Kvarstående begränsningar: lås, prisursprung, produktidentitet, allergen-,
-närings- och verifieringskrav samt slutlig checkout-audit är orörda. Ingen
-cache delas mellan anrop.
+närings- och verifieringskrav samt slutlig checkout-audit är orörda. Endast
+produktupplösning delas mellan anrop; korgar, näring och audit beräknas alltid
+i det egna anropet. Den delade cachen ökade peak RSS med cirka 20 MB.
+
+### Effekt per ändring (varm standard, median av två, sekunder)
+
+| Stad, recept | Före | + parlikhet vid behov | + återanvändning i anropet | + delad upplösning |
+| --- | ---: | ---: | ---: | ---: |
+| Lund, 222 | 43,4 | 44,5 | – | 35,9 |
+| Lund, 1 000 | 124,9 | 105,8 | 95,3 | 85,1 |
+| Malmö, 222 | 58,5 | 56,0 | – | 40,5 |
+| Malmö, 1 000 | 165,4 | 151,1 | – | 126,0 |
+
+Kall tid (ny process, tom cache) vid 1 000: Lund 138,7 → 106,6 s, Malmö
+178,3 → 147,5 s. Den delade upplösningen hjälper bara anrop med samma scope
+(samma butiker, medlemskap, inköpsläge och dag); kalla och nya scope får
+endast de två första förbättringarna.
+
+### Prövat och förkastat: delad enreceptskvalificering
+
+Hela enreceptskorgen och variantbeviset delades mellan anrop med identiskt
+anrop (scope plus hash av hela begäran och privat tillstånd). Kvalificeringen
+sjönk från cirka 8 s till 2,7 s vid 1 000 recept, men veckosökningen blev lika
+mycket långsammare: kvalificeringskorgarna värmer optimerarens offert- och
+paketcacher som veckokorgarna sedan använder. Netto Lund 85,1 → 90,9 s,
+Malmö 126,0 → 124,8 s, inom spridningen, och +110 MB minne i Lund. Inte
+committad; patchen finns i
+[rejected-shared-qualification.patch](../../reports/recipe-scaling-20261019/rejected-shared-qualification.patch).
+
+### Substitutionen: en bevisad gräns räcker inte
+
+Vid 1 000 recept i Lund jämfördes varje hel veckokorg med en konservativ
+undre gräns från samma kvalificerade kandidater: billigaste enstaka förpackning
+per ingrediensgrupp, grupper med gemensam produkt sammanslagna, noll för
+produkter med kampanj, vikt- eller styckpris utan fast pris. Den gränsen kan
+aldrig överstiga det verkliga beloppet (0 överträdelser på 3 661 veckor), men
+den är bara 28–51 % (median 37 %) av det verkliga beloppet. Högsta gräns var
+371,73 kr; den vinnande menyn kostar 497,19 kr. **Noll veckor hade kunnat
+beskäras.** En gräns som tar hänsyn till mängder, butikstak och kampanjer är i
+praktiken samma beräkning som korgen själv. Se
+[bound-tightness-lund-1000.json](../../reports/recipe-scaling-20261019/bound-tightness-lund-1000.json)
+och `bound_tightness.py`.
+
+Att göra substitutionen billigare kräver därför ett produktbeslut, till exempel
+att nya generationer söks med samma seed-urval (tak 40) som det första
+biblioteket i stället för varje nytt recept i varje plats. Det är en heuristik
+och ska valideras mot fullbiblioteksreferensen innan den används.
 
 ## 3. Mätningar
 
@@ -107,17 +159,12 @@ Rådata per körning: [measurements.json](../../reports/recipe-scaling-20261019/
 
 ## 5. Rekommenderat nästa steg
 
-1. **Exakt återanvändning inom korgberäkningen** (punkt 2 ovan): behovsrader
-   och upplösta val per (plats, receptidentitet, måltidskrav) i stället för
-   per vecka. Kräver samma hash för alla profiler; ingen beskärning.
-2. **Kvalificering mellan anrop** (punkt 3): enreceptsresultat nyckade på
-   receptversion, mängder, prismanifest, faktaversion, butiksscope,
-   inköpsläge, medlemskap, klocka/kampanjdatum och profilkrav. Endast för
-   anrop utan skafferi och produktlås.
-3. **Substitutionen** (punkt 1) är huvudfrågan för 2 000+. Den kräver antingen
-   en bevisad undre kostnadsgräns som håller för kampanjgrupper och butikstak,
-   eller ett produktbeslut om hur nya generationer ska sökas. Att bara sätta
-   ett tak är inte tillåtet enligt uppgiften och görs inte utan beslut.
+1. **Produktbeslut om substitutionen** (punkt 1). Utan det växer tiden
+   linjärt med varje nytt recept; ingen exakt åtgärd återstår där.
+2. **`BasketOptimizer.optimize`** är nu största delen av varje korg. Exakt
+   återanvändning mellan veckor som delar fyra av fem recept kräver ändringar i
+   den gemensamma optimeraren och en egen granskning.
+3. Mät övriga profiler, 2 000 recept (minne i Malmö) och omvänd körordning.
 
 ## Reproduktion
 
