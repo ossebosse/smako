@@ -22,6 +22,10 @@ from grocery_data.app.services.manual_refresh_operations import (
 from grocery_data.app.services.source_artifact import verify_source_artifact
 from grocery_data.relay_config import RelayTransport, load_transport
 
+# A full municipal import plus managed publication can exceed thirty minutes.
+# Reserve the same bound before collection within the existing task window.
+ACTIVATION_TIMEOUT_SECONDS = 45 * 60
+
 
 def _receiver_command(command, *, check, **kwargs):
     try:
@@ -65,7 +69,7 @@ def remote_activate(digest: str, transport: RelayTransport | None = None):
         capture_output=True,
         text=True,
         check=True,
-        timeout=1800,
+        timeout=ACTIVATION_TIMEOUT_SECONDS,
     )
     value = json.loads(result.stdout.strip().splitlines()[-1])
     if value.get("activation") not in {"normal_managed_refresh", "already_active"}:
@@ -321,7 +325,7 @@ def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budg
             if not item["work_due"]:
                 outcomes.append({**item, "exit_code": 0, "status": "not_due"})
                 continue
-            if remaining < 2400:
+            if remaining < ACTIVATION_TIMEOUT_SECONDS + 600:
                 outcomes.append({**item, "exit_code": 2, "status": "deferred", "reason": "run_window"})
                 continue
             scope_root = workspace / ("municipality-" + code)
@@ -333,7 +337,7 @@ def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budg
             record_attempt(state, code, started=attempt, seconds=0, result=None)
             save_state(journal, state)  # A killed task must still yield the next fair turn.
             # Reserve transport/import time within the existing three-hour task.
-            result = run_scope(scope_root, collection_seconds=min(7200, remaining - 1800),
+            result = run_scope(scope_root, collection_seconds=min(7200, remaining - ACTIVATION_TIMEOUT_SECONDS),
                 push=lambda a: source_cli.push(SimpleNamespace(artifact=a.artifact, host=transport.ssh_host, transport=transport)),
                 activate=lambda digest: remote_activate(digest, transport),
                 capacity_check=lambda root=scope_root: receiver_capacity(transport, root))

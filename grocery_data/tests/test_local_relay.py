@@ -139,7 +139,7 @@ def test_remote_activation_command_and_safe_result(monkeypatch):
         assert "-oBatchMode=yes" in command and "10001:10001" in command
         assert "docker" in command and "smako-scheduler-1" in command
         assert "/opt/smako/compose" not in command
-        assert kwargs["capture_output"] and kwargs["timeout"] == 1800
+        assert kwargs["capture_output"] and kwargs["timeout"] == 2700
         return subprocess.CompletedProcess(
             command, 0, 'other output\n{"activation":"already_active","secret":"not returned"}'
         )
