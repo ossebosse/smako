@@ -1,3 +1,17 @@
+# 2026-10-19: Receptskalning steg 1 (Claude) – gren, ej aktiverat
+
+- Gren `perf/recipe-scaling-20261019`. Rapport:
+  [recipe-scaling-20261019.md](reviews/recipe-scaling-20261019.md).
+- 1 000 recept klarar inte 30 s: varm standard cirka 106 s i Lund och 151 s
+  i Malmö (222 recept: 44/56 s). Samma pris och resultathash före och efter.
+- Två exakta rättelser: parlikhet räknas vid behov (tog bort en kvadratisk
+  kostnad, cirka 28 s per anrop vid 1 000 recept) och variantbevis evakueras
+  inte längre över 2 048 varianter.
+- Huvudhinder: substitutionssvepet för nya generationer saknar tak och står
+  för 54 % av korgarna vid 1 000. Kräver bevisad gräns eller produktbeslut.
+- Separat gren `fix/full-library-reference-contract`: `--uncapped-reference`
+  kräver `seed=0`, `refinement=0`, `seed_variant_shortlist=false`.
+
 # 2026-10-18/19: Priser återställda; reläschemabyte väntar administratör
 
 Kod `c6607a0` (Hemköps butikskontext), `84b2de8` (Willys checkpoints) och
