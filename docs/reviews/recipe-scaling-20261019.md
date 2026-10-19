@@ -76,7 +76,7 @@ mycket långsammare: kvalificeringskorgarna värmer optimerarens offert- och
 paketcacher som veckokorgarna sedan använder. Netto Lund 85,1 → 90,9 s,
 Malmö 126,0 → 124,8 s, inom spridningen, och +110 MB minne i Lund. Inte
 committad; patchen finns i
-[rejected-shared-qualification.patch](../../reports/recipe-scaling-20261019/rejected-shared-qualification.patch).
+[rejected-shared-qualification.patch](recipe-scaling-20261019/rejected-shared-qualification.patch).
 
 ### Substitutionen: en bevisad gräns räcker inte
 
@@ -89,7 +89,7 @@ den är bara 28–51 % (median 37 %) av det verkliga beloppet. Högsta gräns va
 371,73 kr; den vinnande menyn kostar 497,19 kr. **Noll veckor hade kunnat
 beskäras.** En gräns som tar hänsyn till mängder, butikstak och kampanjer är i
 praktiken samma beräkning som korgen själv. Se
-[bound-tightness-lund-1000.json](../../reports/recipe-scaling-20261019/bound-tightness-lund-1000.json)
+[bound-tightness-lund-1000.json](recipe-scaling-20261019/bound-tightness-lund-1000.json)
 och `bound_tightness.py`.
 
 Att göra substitutionen billigare kräver därför ett produktbeslut, till exempel
@@ -113,7 +113,7 @@ Bibliotek: nuvarande 222 recept (189 middagar: 94 grundrätter, 95 variationer).
 Testbiblioteken lägger till syntetiska middagar via ordinarie `author --import
 --prepare 4` i isolerade worktrees: 500 recept (467 middagar: 224 grundrätter,
 243 variationer) och 1 000 (967: 457 / 510). Noll author-varningar och
-avvisningar. Detaljer och hashar: [library-manifest.json](../../reports/recipe-scaling-20261019/library-manifest.json).
+avvisningar. Detaljer och hashar: [library-manifest.json](recipe-scaling-20261019/library-manifest.json).
 
 Standardprofilen (fem middagar, fyra portioner, två butiker, estimated):
 
@@ -137,7 +137,7 @@ säger inget om verkliga recept. Malmö 1 000 är 2,20 kr dyrare än Malmö 500:
 ett exempel på att den begränsade sökningen inte bevisar optimum. Det ska
 utredas mot en fullbiblioteksreferens innan någon sökändring godkänns.
 
-Sökfaser i Lund (ett kallt anrop, [search-phases.json](../../reports/recipe-scaling-20261019/search-phases.json)):
+Sökfaser i Lund (ett kallt anrop, [search-phases.json](recipe-scaling-20261019/search-phases.json)):
 
 | Fas | 222: korgar | 500: korgar | 1 000: korgar |
 | --- | ---: | ---: | ---: |
@@ -147,7 +147,7 @@ Sökfaser i Lund (ett kallt anrop, [search-phases.json](../../reports/recipe-sca
 | Förfining (tak 90, två svep) | 601 | 454 | 242 |
 | Parvis och gemensam förfining | 132 | 142 | 117 |
 
-Rådata per körning: [measurements.json](../../reports/recipe-scaling-20261019/measurements.json).
+Rådata per körning: [measurements.json](recipe-scaling-20261019/measurements.json).
 
 ## 4. Inte gjort än
 

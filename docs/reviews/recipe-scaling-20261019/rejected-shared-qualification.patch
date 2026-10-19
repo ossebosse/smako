@@ -1,0 +1,253 @@
+--- a/backend/app/services/personal_planner.py
++++ b/backend/app/services/personal_planner.py
+@@ -2401,31 +2401,13 @@
+                     # Qualify every meal type before menu branching. Previously
+                     # only depth-one dinners were independently checked; failed
+                     # breakfasts/snacks could remain hidden behind dinner search.
+-                    qualified = self.basket(
+-                        [
+-                            MealSlot(
+-                                id=f"{meal.meal_type}-1",
+-                                day=1,
+-                                meal_type=meal.meal_type,
+-                                recipe=recipe,
+-                            )
+-                        ],
+-                        final=False,
+-                    )
++                    qualified, evidence = self._qualify_single(meal, recipe)
+                     if qualified_results is not None:
+                         key = ((f"{meal.meal_type}-1", self._recipe_id(recipe)),)
+                         remember_bounded(qualified_results, key, qualified, 256)
+-                    if recipe.design:
+-                        from app.services.stable_candidate_pool import VariantSearchEvidence
+-                        items = [i for s in qualified["basket"].stores for i in s.items]
+-                        nutrition = self._check_nutrition(
+-                            [MealSlot(id=f"{meal.meal_type}-1", day=1, meal_type=meal.meal_type, recipe=recipe)],
+-                            {i.ingredient: i for i in items}, qualified["trace_inputs"][1], qualified["allocations"])
++                    if evidence is not None:
+                         remember_bounded(self.variant_search_evidence,
+-                            (meal.meal_type, self._recipe_id(recipe)),
+-                            VariantSearchEvidence(qualified["basket"].total,
+-                                tuple(sorted(nutrition[0]["values"].items())),
+-                                frozenset((i.store_id, i.product_id) for i in items)), evidence_limit)
++                            (meal.meal_type, self._recipe_id(recipe)), evidence, evidence_limit)
+                     self.diagnostics.singleton_passed += 1
+                 valid.append(recipe)
+                 if recipe.design and recipe.design.content_source:
+@@ -2457,6 +2439,52 @@
+             raise PolicyConflict(f"Inga användbara recept för {meal.meal_type} med dina val.")
+         return valid
+ 
++    def _qualify_single(self, meal, recipe):
++        """One-recipe basket and variant evidence, reused from an identical request.
++
++        The shared scope digests the whole request and private state (see
++        planner_shared_cache), and the key is the exact cleaned recipe value.
++        Traced product events of the original calculation are replayed, so the
++        decision trace equals a fresh calculation. Failures are never shared.
++        """
++        from app.services.planner_shared_cache import SHARED_QUALIFICATION, qualification_scope
++        if not hasattr(self, "_qualification_scope"):
++            self._qualification_scope = qualification_scope(self)
++        scope = self._qualification_scope
++        key = (meal.meal_type, self.recipe_computations.key(recipe))
++        shared = SHARED_QUALIFICATION.get(scope, key) if scope is not None else None
++        if shared is not None:
++            qualified, evidence, events = shared
++            for args, kwargs in events:
++                self.product_trace.event(*args, **kwargs)
++            return qualified, evidence
++        events = []
++        trace_event = self.product_trace.event
++
++        def recorded(*args, **kwargs):
++            events.append((args, kwargs))
++            return trace_event(*args, **kwargs)
++
++        self.product_trace.event = recorded
++        try:
++            slot = MealSlot(id=f"{meal.meal_type}-1", day=1, meal_type=meal.meal_type, recipe=recipe)
++            qualified = self.basket([slot], final=False)
++            evidence = None
++            if recipe.design:
++                from app.services.stable_candidate_pool import VariantSearchEvidence
++                items = [i for s in qualified["basket"].stores for i in s.items]
++                nutrition = self._check_nutrition(
++                    [MealSlot(id=f"{meal.meal_type}-1", day=1, meal_type=meal.meal_type, recipe=recipe)],
++                    {i.ingredient: i for i in items}, qualified["trace_inputs"][1], qualified["allocations"])
++                evidence = VariantSearchEvidence(qualified["basket"].total,
++                    tuple(sorted(nutrition[0]["values"].items())),
++                    frozenset((i.store_id, i.product_id) for i in items))
++        finally:
++            del self.product_trace.event  # restore the class method
++        if scope is not None:
++            SHARED_QUALIFICATION.put(scope, key, (qualified, evidence, tuple(events)))
++        return qualified, evidence
++
+     def create(self, *, replace_slot=None, balanced_reference=None, _compare_scopes=True):
+         started = perf_counter()
+         incumbents = []
+--- a/backend/app/services/planner_shared_cache.py
++++ b/backend/app/services/planner_shared_cache.py
+@@ -15,9 +15,10 @@
+ The scope holds strong references to the universe and facts objects, so an
+ ``id()`` in the key can never be reused by a different object while cached.
+ 
+-Nothing here is a price, approval or plan: every basket, nutrition check and
+-checkout audit still runs per request. Disable with
+-``SMAKO_PLANNER_SHARED_RESOLUTION=0``.
++Nothing here is a final price, approval or plan: every week basket, nutrition
++check and checkout audit still runs per request. Disable with
++``SMAKO_PLANNER_SHARED_RESOLUTION=0`` (also disables qualification reuse) or
++only the qualification reuse below with ``SMAKO_PLANNER_SHARED_QUALIFICATION=0``.
+ """
+ from __future__ import annotations
+ 
+@@ -89,12 +90,10 @@
+ SHARED_RESOLUTION = SharedResolution()
+ 
+ 
+-def planner_scope(planner):
+-    """The scope of everything ``resolve`` reads besides its own cache key."""
+-    if not enabled():
+-        return None
++def scope_key(planner):
++    """Everything ``resolve`` reads besides its own cache key."""
+     view = planner.view
+-    key = (
++    return (
+         id(planner.prepared), planner.prepared.universe.universe_id,
+         planner.facts_version,  # content hash of every fact (facts_version)
+         view.cache_identity,  # usable/stale contexts, selection and Stockholm date
+@@ -103,4 +102,44 @@
+         planner.request.purchase_planning_mode, planner.complete,
+         repr(planner.settings),
+     )
+-    return SHARED_RESOLUTION.scope(key, planner.prepared)
++
++
++def planner_scope(planner):
++    if not enabled():
++        return None
++    return SHARED_RESOLUTION.scope(scope_key(planner), planner.prepared)
++
++
++# --- Single-recipe qualification -------------------------------------------
++# A qualification basket depends on the whole request, private state included
++# (pantry, consumed demands, locks, extras, limits, store cap, clock). Its scope
++# is the resolution scope plus a digest of ALL of those inputs, so only an
++# identical request reuses it: e.g. the same profile and stores asked again.
++SHARED_QUALIFICATION = SharedResolution(scope_limit=2, entry_limit=4096)
++
++
++def qualification_enabled() -> bool:
++    return enabled() and os.getenv("SMAKO_PLANNER_SHARED_QUALIFICATION", "1") != "0"
++
++
++def request_digest(planner):
++    import hashlib
++    import json
++
++    payload = {
++        "request": planner.request.model_dump(mode="json"),
++        "state": planner.state, "plan_id": planner.plan_id,
++        "cooked_weights": planner.cooked_weights,
++        "now": planner.now.isoformat(), "complete": planner.complete,
++        "nutrition_search_limit": planner.nutrition_search_limit,
++        "include_content_pack": planner.include_content_pack,
++        "library_generation": planner.library_generation, "generation": planner._generation,
++    }
++    encoded = json.dumps(payload, sort_keys=True, default=repr, ensure_ascii=False).encode()
++    return hashlib.sha256(encoded).hexdigest()
++
++
++def qualification_scope(planner):
++    if not qualification_enabled():
++        return None
++    return SHARED_QUALIFICATION.scope((*scope_key(planner), request_digest(planner)), planner.prepared)
+--- a/conftest.py
++++ b/conftest.py
+@@ -82,10 +82,12 @@
+ @_pytest.fixture(autouse=True)
+ def _empty_shared_planner_resolution():
+     try:
+-        from app.services.planner_shared_cache import SHARED_RESOLUTION
++        from app.services.planner_shared_cache import SHARED_QUALIFICATION, SHARED_RESOLUTION
+     except ImportError:  # grocery_data-only test runs
+         yield
+         return
+     SHARED_RESOLUTION.clear()
++    SHARED_QUALIFICATION.clear()
+     yield
+     SHARED_RESOLUTION.clear()
++    SHARED_QUALIFICATION.clear()
+--- a/backend/tests/test_planner_shared_cache.py
++++ b/backend/tests/test_planner_shared_cache.py
+@@ -4,7 +4,7 @@
+ 
+ import pytest
+ from app.errors import IncompleteBasketError
+-from app.services.planner_shared_cache import SHARED_RESOLUTION
++from app.services.planner_shared_cache import SHARED_QUALIFICATION, SHARED_RESOLUTION
+ 
+ from backend.tests.test_complete_scope_incumbents import fixture, planner
+ 
+@@ -29,8 +29,10 @@
+ @pytest.fixture
+ def isolated(monkeypatch):
+     SHARED_RESOLUTION.clear()
++    SHARED_QUALIFICATION.clear()
+     yield
+     SHARED_RESOLUTION.clear()
++    SHARED_QUALIFICATION.clear()
+ 
+ 
+ def test_identical_request_reuses_and_equals_a_fresh_calculation(isolated, monkeypatch):
+@@ -39,12 +41,26 @@
+     _, fresh = outcome(request, universe, facts, pantry)
+     monkeypatch.delenv("SMAKO_PLANNER_SHARED_RESOLUTION")
+     _, first = outcome(request, universe, facts, pantry)
+-    assert hits(SHARED_RESOLUTION) == 0
++    assert hits(SHARED_RESOLUTION) == 0 and hits(SHARED_QUALIFICATION) == 0
+     _, second = outcome(request, universe, facts, pantry)
+-    assert hits(SHARED_RESOLUTION) > 0
++    assert hits(SHARED_RESOLUTION) > 0 and hits(SHARED_QUALIFICATION) > 0
+     assert fresh == first == second
+ 
+ 
++def test_other_private_state_never_reuses_a_qualification(isolated):
++    request, universe, facts, pantry = fixture()
++    outcome(request, universe, facts, pantry)
++    other = deepcopy(pantry)
++    other["items"] = []  # no pantry potatoes: a different private input
++    other_request = request.model_copy(deep=True)
++    other_request.personal.use_pantry = True
++    before = hits(SHARED_QUALIFICATION)
++    p = planner(other_request, universe, facts, other)
++    p.create()
++    assert hits(SHARED_QUALIFICATION) == before
++    assert len(SHARED_QUALIFICATION.stats()) == 2  # its own scope
++
++
+ def test_other_purchase_mode_or_stores_get_their_own_resolution_scope(isolated):
+     request, universe, facts, pantry = fixture()
+     outcome(request, universe, facts, pantry)
+@@ -59,4 +75,4 @@
+     monkeypatch.setenv("SMAKO_PLANNER_SHARED_RESOLUTION", "0")
+     request, universe, facts, pantry = fixture()
+     outcome(request, universe, facts, pantry)
+-    assert SHARED_RESOLUTION.stats() == []
++    assert SHARED_RESOLUTION.stats() == [] and SHARED_QUALIFICATION.stats() == []
+--- a/backend/tests/test_variant_evidence_retention.py
++++ b/backend/tests/test_variant_evidence_retention.py
+@@ -19,8 +19,7 @@
+         diagnostics=SimpleNamespace(pools=[], singleton_passed=0, reject=lambda *a: None),
+         product_trace=SimpleNamespace(recipe=lambda *a: None),
+         clean_recipe=lambda recipe, meal: recipe,
+-        basket=lambda slots, final: qualified,
+-        _check_nutrition=lambda *args: [{"values": {}}],
++        _qualify_single=lambda meal, recipe: (qualified, object()),
+         variant_search_evidence=evidence, _recipe_id=lambda recipe: recipe.id, _prior_recipe_ids=None)
+     meal = SimpleNamespace(meal_type="dinner", profile=None, diet=None,
+                            limits=SimpleNamespace(active=False), recipe_choices=None)
