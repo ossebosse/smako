@@ -255,6 +255,12 @@ class PersonalPlanner:
                 row["indexes"]["declaration"] = [food_class]
         self.diagnostics.product_trace = self.product_trace
         self._resolution_trace = {}
+        # Request-constant serialisations/merges used in cache keys, computed
+        # once per object instead of per basket row (objects kept alive so an
+        # id() is never reused). Values are identical to recomputing them.
+        self._json_memo = {}
+        self._merged_profile_memo = {}
+        self._need_row_templates = OrderedDict()
 
         if self.spec.pantry_revision != state["revision"]:
             raise PolicyConflict(
@@ -272,6 +278,18 @@ class PersonalPlanner:
         ):
             return facts
         return None
+
+    def _model_json(self, model):
+        entry = self._json_memo.get(id(model))
+        if entry is None or entry[0] is not model:
+            entry = self._json_memo[id(model)] = (model, model.model_dump_json())
+        return entry[1]
+
+    def _merged_profile(self, meal):
+        entry = self._merged_profile_memo.get(id(meal))
+        if entry is None or entry[0] is not meal:
+            entry = self._merged_profile_memo[id(meal)] = (meal, merged_profile(self.spec.profile, meal.profile))
+        return entry[1]
 
     def nutrition_evidence(self, product, name, unit, requested, recipe):
         if recipe is not None and recipe.preparation is not None:
@@ -479,7 +497,7 @@ class PersonalPlanner:
             unit,
             product_key,
             tuple(properties),
-            profile.model_dump_json(),
+            self._model_json(profile),
             organic_animals,
             food,
             campaign_choice,
@@ -487,6 +505,23 @@ class PersonalPlanner:
             self.recipe_computations.forms_for(recipe, canonicalize_ingredient_name(name))
             if self.complete and recipe and recipe.preparation else None,
         )
+        scope = None
+        if cache_key not in self.lookup_cache and cache_key not in self.lookup_failures:
+            # Same scope and key: the identical result an earlier request computed.
+            # The scope is read from the planner's current attributes.
+            from app.services.planner_shared_cache import SHARED_RESOLUTION, planner_scope
+            scope = planner_scope(self)
+            shared = SHARED_RESOLUTION.get(scope, cache_key) if scope is not None else None
+            if shared is not None:
+                kind, value, observed = shared
+                if kind == "failure":
+                    if len(self.lookup_failures) >= 1024:
+                        expired, _ = self.lookup_failures.popitem(last=False)
+                        self._resolution_trace.pop(expired, None)
+                    self.lookup_failures[cache_key] = value
+                else:
+                    self.lookup_cache[cache_key] = value
+                self._resolution_trace[cache_key] = observed
         if cache_key in self.lookup_cache or cache_key in self.lookup_failures:
             for i, stage, outcome, reason in self._resolution_trace.get(cache_key, ()):
                 self.product_trace.event(self.prepared.universe.products[i], recipe, name, stage, outcome, reason)
@@ -714,19 +749,27 @@ class PersonalPlanner:
                     self._resolution_trace.pop(expired, None)
                 self.lookup_failures[cache_key] = (str(failure), failure.code,
                     tuple(failure.conflicts), failure.stage)
+                self._share_resolution(scope, cache_key, "failure", self.lookup_failures[cache_key], observed)
             raise failure
         self.lookup_cache[cache_key] = candidates
+        self._share_resolution(scope, cache_key, "candidates", candidates, observed)
         return candidates
+
+    @staticmethod
+    def _share_resolution(scope, cache_key, kind, value, observed):
+        if scope is not None:
+            from app.services.planner_shared_cache import SHARED_RESOLUTION
+            SHARED_RESOLUTION.put(scope, cache_key, (kind, value, tuple(observed)))
 
     def clean_recipe(self, recipe, meal):
         # Request-local only. Source facts, stock and store view do not change
         # during this planner. Full recipe content includes preparation version,
         # units and quantities; meal policy and pricing opt-ins remain distinct.
-        cache_key = (self.recipe_computations.key(recipe), meal.model_dump_json(),
-                     self.spec.profile.model_dump_json(), self.spec.organic_animals,
+        cache_key = (self.recipe_computations.key(recipe), self._model_json(meal),
+                     self._model_json(self.spec.profile), self.spec.organic_animals,
                      tuple(self.request.avoid_ingredients), self.request.purchase_planning_mode,
                      self.user.cache_identity,
-                     self.request.recipe_preferences.model_dump_json() if self.request.recipe_preferences else None)
+                     self._model_json(self.request.recipe_preferences) if self.request.recipe_preferences else None)
         if cache_key in self.clean_recipe_cache:
             self.clean_recipe_cache.move_to_end(cache_key)
             return self.clean_recipe_cache[cache_key]
@@ -744,7 +787,7 @@ class PersonalPlanner:
                 ],
             }
         )
-        profile = merged_profile(self.spec.profile, meal.profile)
+        profile = self._merged_profile(meal)
         if not recipe_respects_diet(
             recipe,
             preference=meal.diet,
@@ -780,20 +823,26 @@ class PersonalPlanner:
                 continue
             meal = self.meals[slot.meal_type]
             recipe = self.clean_recipe(slot.recipe, meal)
-            profile = merged_profile(self.spec.profile, meal.profile)
-            normalized_key = (self.service.normalizer, self.recipe_computations.key(recipe))
-            if normalized_key not in self.normalized_recipe_rows:
-                sources = {}
-                for source in recipe.ingredients:
-                    sources.setdefault(canonicalize_ingredient_name(source.name), source)
-                normalized = self.service.normalizer.normalize_and_aggregate([recipe])
-                remember_bounded(self.normalized_recipe_rows, normalized_key, tuple(
-                    (ingredient, sources.get(ingredient.canonical_name)) for ingredient in normalized), 512)
-            else:
-                self.normalized_recipe_rows.move_to_end(normalized_key)
-            for ingredient, source_ingredient in self.normalized_recipe_rows[normalized_key]:
-                rows.append(
-                    {
+            # The rows of one cleaned recipe in one slot are identical in every
+            # basket. Build them (and their demand keys) once; each basket gets
+            # fresh shallow copies, since it adds per-basket fields to its rows.
+            template_key = (slot.id, id(meal), self.recipe_computations.key(recipe))
+            template = self._need_row_templates.get(template_key)
+            if template is None or template[0] is not meal:
+                profile = self._merged_profile(meal)
+                normalized_key = (self.service.normalizer, self.recipe_computations.key(recipe))
+                if normalized_key not in self.normalized_recipe_rows:
+                    sources = {}
+                    for source in recipe.ingredients:
+                        sources.setdefault(canonicalize_ingredient_name(source.name), source)
+                    normalized = self.service.normalizer.normalize_and_aggregate([recipe])
+                    remember_bounded(self.normalized_recipe_rows, normalized_key, tuple(
+                        (ingredient, sources.get(ingredient.canonical_name)) for ingredient in normalized), 512)
+                else:
+                    self.normalized_recipe_rows.move_to_end(normalized_key)
+                built = []
+                for ingredient, source_ingredient in self.normalized_recipe_rows[normalized_key]:
+                    row = {
                         "name": ingredient.canonical_name,
                         "quantity": ingredient.required_quantity,
                         "unit": ingredient.unit,
@@ -808,7 +857,16 @@ class PersonalPlanner:
                             "product_requirements": list(getattr(source_ingredient, "product_requirements", None) or ())}
                            if self.complete and source_ingredient is not None else {}),
                     }
-                )
+                    row["demand_key"] = demand_key(row)
+                    built.append(row)
+                template = (meal, tuple(built))
+                remember_bounded(self._need_row_templates, template_key, template, 4096)
+            else:
+                self._need_row_templates.move_to_end(template_key)
+            rows.extend({**row, "properties": list(row["properties"]),
+                         **({"product_requirements": list(row["product_requirements"])}
+                            if "product_requirements" in row else {})}
+                        for row in template[1])
         for extra in self.spec.extras:
             # An either/or row's title is a display label. Its individual exact
             # identities may legitimately differ (e.g. fat percentage). Explicit
@@ -841,7 +899,8 @@ class PersonalPlanner:
         for booked in consumed_demands(self.state, self.plan_id):
             consumed[booked["demand_key"]] += booked["quantity"]
         for row in rows:
-            row["demand_key"] = demand_key(row)
+            if "demand_key" not in row:  # recipe rows carry it from their template
+                row["demand_key"] = demand_key(row)
             row["original_quantity"] = row["quantity"]
             row["quantity"] = max(0, row["quantity"] - consumed[row["demand_key"]])
         return rows
