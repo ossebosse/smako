@@ -1,5 +1,51 @@
 # Lagring och säker arkivering
 
+## Prisåterställning 2026-10-18, kväll
+
+Hemköps återspelning ökade databasens storlek så att publiceringens
+utrymmeskontroll åter stoppade arbetet. Under samma driftlås arkiverades den
+avslutade, tidigare verifierade releasebackupen
+`/opt/smako/evidence/willys-picking-5b344ca3b50e/backup-20261015T080331Z`.
+Aktuella container-, process- och servicereferenser kontrollerades före och
+efter arkiveringen. Alla tre arkivposter, inklusive de två databasernas
+filhashar, ägare och rättigheter, verifierades och originalet kontrollerades
+som oförändrat innan just denna backupkatalog togs bort.
+
+6 399 434 752 byte blev ett arkiv på 1 559 849 655 byte, med **4,84 GB netto
+frigjort** och **19,40 GB ledigt** efteråt. Arkivet finns intill den tidigare
+katalogen som `backup-20261015T080331Z.tar.gz` med SHA-256
+`a7cc54869dab1c26ae8702becf92b5301ca6aec147ed81938e825abc30b41d17`.
+Intill finns privat inventarium, kvitto och `backup-20261015T080331Z.ARCHIVED.txt`
+med återställningskommando. Återställ under driftlåset till den frånvarande
+originalsökvägen, aldrig över levande data.
+
+Ordinarie dagsbackuper, retention, aktiva databaser, prisartefakter och
+containerimages ändrades inte av arkiveringen. Den nya källreleasens egen
+backup är också verifierad och komprimerad; se
+[prisåterställningens rapport](releases/source-recovery-20261018/REPORT.md).
+
+## Ytterligare avslutade releasebackuper, 2026-10-19
+
+Under driftlåset verifierades och komprimerades ytterligare tre avslutade
+releasebackuper. 15,02 GB frigjordes netto; 32,69 GB var
+ledigt efteråt. Samtliga filhashar, ägare och behörigheter jämfördes mot
+originalen före borttagning av just de okomprimerade backupkatalogerna.
+Aktiva containrar och prismanifest var oförändrade över hela åtgärden.
+
+| Arkiv under `/opt/smako/evidence/` | Byte | SHA-256 |
+| --- | ---: | --- |
+| `joint-week-refinement-e041451/backup-20261016T131323Z.tar.gz` | 1629737973 | `fbbc31b866b99279532e7440f22c16580453286bac768f3e6efd0803609db052` |
+| `recipe-nutrition-extras-7e402a7/backup-20261015T162938Z.tar.gz` | 1604587092 | `89623d2791292e611adf4555a100b7ea6384caec52623fdca93bad5e62614e4f` |
+| `willys-flyer-retained-20261015/backup-20261015T105559Z.tar.gz` | 1603850980 | `b6bd6b0f956838633fd377c4495787befa26de63c2de5de78a415c28ec01181a` |
+
+Varje arkiv har ett intilliggande privat inventarium, kvitto och `.ARCHIVED.txt`
+med exakt återställningskommando. Återställ endast under driftlåset till den
+frånvarande originalsökvägen, aldrig över aktiva data. Kontrollera utrymme
+för expanderade filer och driftmarginal först. Ordinarie dagsbackuper och
+retention är oförändrade. Dessa är lokala återställningskopior, inte extern backup.
+
+Samlat kvitto: `/opt/smako/evidence/hemkop-context-c6607a095018/additional-archive-receipt.json`.
+
 ## Underhåll 2026-10-18
 
 Ny inventering fann bara 6,20 GB ledigt och återkommande

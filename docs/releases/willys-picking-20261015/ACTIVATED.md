@@ -48,7 +48,11 @@ operations lock, after verified SQLite backups:
 - Build: `willys-picking-scheduler-5b344ca3b50e`.
 - Image: `sha256:58d27cb6e10dfbbf79aca7334d1596bbb3df281f6ac38b11bf70f9f1e8754390`.
 - Prior image: `sha256:13057faa6cdbdeb67e73345c1f6f2324c7ff084e25796d1f16febb91afa8935e`.
-- Backup: `/opt/smako/evidence/willys-picking-5b344ca3b50e/backup-20261015T080331Z/`.
+- Original backup: `/opt/smako/evidence/willys-picking-5b344ca3b50e/backup-20261015T080331Z/`.
+  Losslessly archived on 2026-10-18 to the adjacent
+  `backup-20261015T080331Z.tar.gz`, after verifying all file hashes,
+  ownership and permissions. The private inventory, receipt and `.ARCHIVED.txt`
+  remain beside it. See [restoration and SHA-256](../../storage-maintenance.md).
 
 Only six reviewed scheduler runtime files changed; 624 others were identical.
 Only its image and BUILD_ID changed in Compose. The serving app container,

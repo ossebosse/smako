@@ -88,6 +88,14 @@ accepterar endast belagd explicit false, bevarar saknat fält och stoppar true,
 null eller fel typ. Kampanjkonflikten är källevidens, inte ett trasigt
 medlemspris-ID. Två stabilt återgivna skilda erbjudanden tillåts redan.
 
+Hemköps `hemkop-parser-v1.4-delegated-context` bevarar från 2026-10-18 de
+ursprungliga butikskontextdokumenten även när en katalogsida delegeras till
+den gemensamma Axfood-parsern. Komplett hämtning följd av noll parsade produkter
+och `price_context_unverified` kan annars vara adapterfelet från v1.3, trots
+att både katalog och butik har korrekt bindning. Kontrollera de faktiska
+parserfelen; det generella incidentnamnet `SOURCE_QUALIFICATION_FAILED` räcker
+inte för att fastställa orsaken. Se [rättning och driftbevis](releases/source-recovery-20261018/REPORT.md).
+
 Willys har sedan 2026-10-15 en separat verifierad motsvarighet:
 `willys-parser-v6-picking-contract` granskar exakt butik och explicit false i
 både butikskatalog och aktiv butikskontext. Serverns parserrättning är aktiv;
@@ -137,6 +145,20 @@ Vid utrymmesbrist: läs [lagringsrapport och säker arkivering](storage-maintena
 Den skiljer aktiv data från kalla testkopior och delad Dockerlagring, dokumenterar
 backupens rättade åtkomstfel och innehåller återställningsanvisningar. Följ samma
 driftlås; en historisk cleanup-plan får inte köras om utan ny referensgranskning.
+
+Willys checkpoints från `84b2de8` använder verifierad gränsgeometri och
+källmetadata som identitet. SCB:s WFS-`timeStamp` och yttre `observed_at`
+ändrar inte identiteten; originalets råhash kontrolleras ändå och bevaras.
+Identitetsschema 1 återanvänds inte av schema 2. Ett första försök efter
+uppgradering kan därför behöva hämta butiker igen. En checkpoint är enbart
+hämtstöd: ordinarie insamling, artefaktvalidering, import, publicering och
+beständig kvittens krävs fortfarande. Se [verifieringen](releases/source-recovery-20261018/REPORT.md).
+
+Från `2464596` reserverar reläet 45 minuter för import/publicering och använder
+samma gräns för SSH-svaret, inom oförändrat totalt körfönster. En förlorad
+transportrespons är fortfarande ett okänt utfall: kontrollera serverjobbet och
+driftlåset innan återleverans. Den befintliga importvägen kan kvittera en exakt
+redan publicerad och laddad artefakt utan att bygga om eller förnya källtider.
 
 | Klass | Åtgärd |
 | --- | --- |

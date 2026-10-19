@@ -69,3 +69,12 @@ Sökningen är begränsad och bevisar inte globalt lägsta pris. Tidigare frysta
 prov visade mindre överskott i tre profiler men ingen sänkt inköpssumma i
 matrisen. Ekokrav kan fortfarande vara långsamma och saknade produkt- eller
 näringsuppgifter kan stoppa vissa kombinationer. Detta är inget lasttest.
+
+## Backup arkiverad 2026-10-19
+
+Den avslutade releasebackupen finns nu förlustfritt komprimerad i
+`/opt/smako/evidence/joint-week-refinement-e041451/backup-20261016T131323Z.tar.gz`.
+Alla filhashar, ägare och behörigheter verifierades före borttagning av den
+okomprimerade kopian. Privat inventarium, kvitto och återställningsanvisning
+finns intill arkivet. Se [lagringsjournalen](../../storage-maintenance.md).
+Aktiva data och denna releases historiska verifieringsresultat är oförändrade.

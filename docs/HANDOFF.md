@@ -1,3 +1,50 @@
+# 2026-10-18/19: Priser återställda; reläschemabyte väntar administratör
+
+Kod `c6607a0` (Hemköps butikskontext), `84b2de8` (Willys checkpoints) och
+`2464596` (reläets tidsreserv) är integrerad och pushad till main.
+97, 126 respektive 81 riktade testkörningar, Ruff, compileall och samtliga
+tre kodcommitars GitHub-CI passerar.
+
+Hemköps rättning är aktiv i scheduler sedan 18 oktober 20:22:58 UTC,
+BUILD_ID `hemkop-context-scheduler-c6607a095018`. Sex kompletta kataloger
+återspelades med 570 verifierade råhashar, 43 146 godkända produktposter och
+ursprungliga observationstider. Alla sex är publicerade och laddade.
+Willys har nya godkända kataloger: Lund 19 423 produkter, Malmö 39 949,
+båda med noll fel och beständiga reläkvitton. Malmö kvitterades 19 oktober
+00:40:16 UTC efter kontroll av redan aktiv artefakt, utan en andra ombyggnad.
+
+Slutkontrollen visar alla 14 obligatoriska källkontexter FRESH, kvalificerade,
+publicerade och laddade, med HTTP 200/ready och överensstämmande manifest.
+Publika personliga menyprov passerar i båda kommunerna: fem recept, två
+butiker, godkänd kassakontroll och identisk sparad GET. Lund 40,38 s och
+Malmö 83,92 s. Appversionen är fortsatt `app-bac0fc15ca9a-512ef3ea`.
+Alla 299 tidigare planrevisioner och 110 privata tillstånd är hashbevarade.
+Inga omstarter eller OOM. Ledigt utrymme 30,97 GB mot högsta beräknade behov
+15,28 GB efter verifierad backupkomprimering; ordinarie retention är bevarad.
+
+Willys checkpointfix undantar SCB:s varierande transporttidsstämpel från
+identiteten men bevarar verifierad geometri, råhashar och observationer.
+Tidsrättningen reserverar 45 minuter för import/publicering inom oförändrat
+totalt körfönster. Slutkandidaten `2464596b6f07` är separat installerad,
+integritetskontrollerad och provkörd genom sin riktiga startpunkt: båda
+kommunerna `not_due`, kod 0, utan nya insamlingar.
+
+**Kvar:** Windowsuppgiften pekar fortfarande på `5b344ca3b50e`.
+Set-ScheduledTask nekades åtkomst och UAC-starten avbröts. Konto, schema,
+action och inställningar är oförändrade. Den befintliga uppgiften provkördes
+00:40:50 UTC med LastTaskResult 0 och oförändrade färska kvitton; detta
+aktiverar inte den nya koden. Förberett administratörssteg finns i
+`.local/source-recovery-20261018/activate_relay_elevated.ps1` och kräver
+slutkandidatens godkända bevis före bytet. Det nya schemabytet behöver
+administratörsgodkännande och efterföljande verifiering.
+
+[Rapport och evidens](releases/source-recovery-20261018/REPORT.md).
+Separata kampanjposter med ej stödda villkor förblir spärrade. Historisk
+`ops repair` kan märka en användbar publicering med exitkod 2 som `failed`;
+bedöm den mot faktiska manifest och laddningsbevis innan något körs om.
+
+---
+
 # 2026-10-18: Betan aktiverad och skalningsuppgift till Claude committad
 
 Aktiverad 19:39 UTC: BUILD_ID `app-bac0fc15ca9a-512ef3ea`, kod `bac0fc1`.

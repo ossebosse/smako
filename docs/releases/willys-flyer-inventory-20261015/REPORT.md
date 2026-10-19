@@ -111,3 +111,12 @@ Use the shared operation lease and restore this release's
 base above. Keep customer plans and the current live database. Rolling the
 source image back also restores the old inventory incompatibility, so review
 the optional physical campaign source before another publication.
+
+## Backup archived on 2026-10-19
+
+The closed release backup is now losslessly archived at
+`/opt/smako/evidence/willys-flyer-retained-20261015/backup-20261015T105559Z.tar.gz`.
+All file hashes, ownership and permissions were verified before removing the
+uncompressed copy. The private inventory, receipt and restoration instructions
+remain beside the archive. See the [storage journal](../../storage-maintenance.md).
+Live data and this release's historical verification results are unchanged.

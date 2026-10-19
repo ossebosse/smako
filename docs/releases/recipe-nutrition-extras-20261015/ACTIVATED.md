@@ -94,3 +94,12 @@ wrapper atomiskt och kör endast app med
 `up -d --no-deps --no-build --pull never app`. Behåll aktuella datavolymer
 och databaser. Kontrollera readiness, manifest och befintliga revisioner.
 Återgång återinför de tidigare näringsluckorna.
+
+## Backup arkiverad 2026-10-19
+
+Den avslutade releasebackupen finns nu förlustfritt komprimerad i
+`/opt/smako/evidence/recipe-nutrition-extras-7e402a7/backup-20261015T162938Z.tar.gz`.
+Alla filhashar, ägare och behörigheter verifierades före borttagning av den
+okomprimerade kopian. Privat inventarium, kvitto och återställningsanvisning
+finns intill arkivet. Se [lagringsjournalen](../../storage-maintenance.md).
+Aktiva data och denna releases historiska verifieringsresultat är oförändrade.
