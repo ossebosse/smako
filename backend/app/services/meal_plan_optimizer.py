@@ -71,6 +71,7 @@ from app.services.membership_reporting import (
 )
 from app.services.menu_optimizer import (
     DiversityConstraints,
+    LazyPairwiseSimilarities,
     MenuOptimizationResult,
     MenuOptimizer,
 )
@@ -579,16 +580,12 @@ class MealPlanService:
         policy: DiversityPolicy,
     ) -> DiversityConstraints:
         profiles = self._culinary_profiles(recipes)
-        pairwise: dict[tuple[str, str], float] = {}
-        profile_rows = list(profiles.items())
-        for left_index, (left_name, left_profile) in enumerate(profile_rows):
-            for right_name, right_profile in profile_rows[left_index + 1 :]:
-                pairwise[tuple(sorted((left_name, right_name)))] = (
-                    self.culinary_similarity.compare_profiles(
-                        left_profile,
-                        right_profile,
-                    ).score
-                )
+        # Pairs are scored when the search first checks them together; the
+        # values are those of the former eager all-pairs loop.
+        pairwise = LazyPairwiseSimilarities(
+            profiles,
+            lambda left, right: self.culinary_similarity.compare_profiles(left, right).score,
+        )
         by_display_name = {
             recipe.name: profiles[recipe.name.casefold().strip()] for recipe in recipes
         }

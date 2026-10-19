@@ -139,6 +139,59 @@ def _evaluation_verification_rank(evaluation: _BasketEvaluation) -> int:
     )
 
 
+class LazyPairwiseSimilarities(Mapping[tuple[str, str], float]):
+    """Exact pairwise culinary scores, computed on first lookup.
+
+    Same keys, values and iteration order as the eager dict of every pair
+    of distinct profile names (key: the sorted name pair). The search only
+    looks up pairs of recipes chosen together, so computing all n*(n-1)/2
+    pairs up front grew quadratically with the library. Each score is
+    calculated once, in the same argument order as the eager loop (the
+    earlier profile first), and range-checked when it is calculated.
+    """
+
+    __slots__ = ("_compare", "_order", "_profiles", "_scores")
+
+    def __init__(self, profiles: Mapping[str, object], compare: Callable[[object, object], float]):
+        self._profiles = profiles
+        self._order = {name: index for index, name in enumerate(profiles)}
+        self._compare = compare
+        self._scores: dict[tuple[str, str], float] = {}
+
+    def _valid(self, key: object) -> bool:
+        return (isinstance(key, tuple) and len(key) == 2 and key[0] in self._order
+                and key[1] in self._order and key[0] < key[1])
+
+    def __getitem__(self, key: tuple[str, str]) -> float:
+        score = self._scores.get(key)
+        if score is not None:
+            return score
+        if not self._valid(key):
+            raise KeyError(key)
+        left, right = sorted(key, key=self._order.__getitem__)
+        score = self._compare(self._profiles[left], self._profiles[right])
+        if not 0 <= score <= 1:
+            raise ValueError("pairwise recipe similarities must be between zero and one")
+        self._scores[key] = score
+        return score
+
+    def __contains__(self, key: object) -> bool:
+        return self._valid(key)
+
+    def __iter__(self):
+        names = list(self._profiles)
+        for index, left in enumerate(names):
+            for right in names[index + 1:]:
+                yield tuple(sorted((left, right)))
+
+    def __len__(self) -> int:
+        return comb(len(self._profiles), 2)
+
+    @property
+    def calculated(self) -> int:
+        return len(self._scores)
+
+
 @dataclass(frozen=True, slots=True)
 class DiversityConstraints:
     """Simple structural limits used while expanding the beam.
@@ -188,7 +241,9 @@ class DiversityConstraints:
             and not 0 <= self.max_pairwise_recipe_similarity <= 1
         ):
             raise ValueError("max_pairwise_recipe_similarity must be between zero and one or None")
-        if any(not 0 <= value <= 1 for value in self.pairwise_recipe_similarities.values()):
+        # A lazy mapping range-checks each score when it is calculated.
+        if not isinstance(self.pairwise_recipe_similarities, LazyPairwiseSimilarities) and any(
+                not 0 <= value <= 1 for value in self.pairwise_recipe_similarities.values()):
             raise ValueError("pairwise recipe similarities must be between zero and one")
 
 
