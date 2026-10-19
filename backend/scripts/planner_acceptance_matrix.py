@@ -64,6 +64,48 @@ def digest(value):
                                      separators=(",", ":")).encode()).hexdigest()
 
 
+# Search settings a full-library reference must state explicitly. A report
+# without every key (for example one written before seed_variant_shortlist
+# existed, which still kept four variants per base) is not a reference.
+FULL_LIBRARY_REFERENCE_CONTRACT = "smako-full-library-reference-v1"
+FULL_LIBRARY_SEARCH_LIMITS = {"seed": 0, "refinement": 0, "seed_variant_shortlist": False}
+
+
+def full_library_search_limits(settings):
+    """Settings for a full-library reference: whole qualified library, no shortlist."""
+    return replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0,
+                   library_seed_variant_shortlist=False)
+
+
+def validate_full_library_reference(reference, inputs):
+    """Reject anything but an explicit full-library reference over the same inputs.
+
+    Code versions may differ intentionally (method_signature is not compared),
+    but the reference's search settings must always be explicit and exact.
+    """
+    if reference.get("schema") != "smako-planner-acceptance-v1":
+        raise ValueError(f"unknown report schema {reference.get('schema')!r}")
+    if reference.get("inputs") != inputs:
+        raise ValueError("reference inputs differ")
+    if reference.get("uncapped") is not True:
+        raise ValueError("reference is not an --uncapped run")
+    contract = reference.get("reference_contract")
+    if contract is not None and contract != FULL_LIBRARY_REFERENCE_CONTRACT:
+        raise ValueError(f"unknown reference contract {contract!r}")
+    limits = reference.get("search_limits")
+    if not isinstance(limits, dict):
+        raise ValueError("reference has no search_limits")  # noqa: TRY004 - rejected report, not a caller bug
+    for key, expected in FULL_LIBRARY_SEARCH_LIMITS.items():
+        if key not in limits:
+            raise ValueError(f"reference search_limits lacks {key!r}; older reports are not accepted")
+        value = limits[key]
+        # bool is an int subclass: seed=False or shortlist=0 is not explicit.
+        if type(value) is not type(expected) or value != expected:
+            raise ValueError(f"reference search_limits[{key!r}] is {value!r}, expected {expected!r}")
+    if not reference.get("records"):
+        raise ValueError("reference has no records")
+
+
 def matrix_request(base, case):
     # Store scope, price mode and memberships come from the frozen base.
     body = deepcopy(base)
@@ -216,11 +258,13 @@ def main():
         assert baseline["inputs"] == inputs, "Baseline inputs differ"
     settings = Settings(complete_recipes_enabled=True, price_provider="own")
     if args.uncapped:
-        settings = replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0,
-                           library_seed_variant_shortlist=False)
+        settings = full_library_search_limits(settings)
     uncapped = json.loads(args.uncapped_reference.read_bytes()) if args.uncapped_reference else None
-    if uncapped:
-        assert uncapped["inputs"] == inputs and uncapped.get("uncapped"), "Uncapped reference differs"
+    if uncapped is not None:
+        try:
+            validate_full_library_reference(uncapped, inputs)
+        except ValueError as exc:
+            p.error(f"--uncapped-reference rejected: {exc}")
     records = []
     report = {"schema": "smako-planner-acceptance-v1", "case": args.matrix_case,
               "inputs": inputs, "label": args.label, "records": records,
@@ -232,6 +276,9 @@ def main():
               "search_limits": {"seed": settings.library_seed_pool_limit,
                                 "refinement": settings.library_refinement_pool_limit,
                                 "seed_variant_shortlist": settings.library_seed_variant_shortlist}}
+    if args.uncapped:
+        assert report["search_limits"] == FULL_LIBRARY_SEARCH_LIMITS, report["search_limits"]
+        report["reference_contract"] = FULL_LIBRARY_REFERENCE_CONTRACT
     from app.services.meal_prepared_artifacts import STATS, method_signature
 
     from backend.scripts.benchmark_beta_capacity import _process_snapshot

@@ -118,9 +118,12 @@ ytterligare runtimeändringar. Full rapport för Claude:
   inklusive fungerande webbläsartester. PR [#2](https://github.com/ossebosse/smako/pull/2).
 - Alla 28 receptversioner och 55 vattenfall verifierade. 235 äggviktsbevis
   korrekta; enda faktadeltat är Lunds Brunchägg L/XL 6-pack, 360 g.
-- Kvarvarande P2: `--uncapped-reference` accepterar äldre rapporter som
-  saknar uttrycklig avstängning av varianturval. Reproducerat via riktiga CLI:n.
-  Denna granskning använder nya, kontrollerade fullbiblioteksreferenser.
+- ~~Kvarvarande P2~~ rättad på grenen `fix/full-library-reference-contract`:
+  `--uncapped-reference` kräver nu uttryckligen `seed=0`, `refinement=0` och
+  `seed_variant_shortlist=false` (typkontrollerat, `0`/`None` räknas inte) och
+  avvisar äldre rapporter utan flaggan innan planeraren byggs. Nya referenser
+  märks `reference_contract: smako-full-library-reference-v1`; omärkta rapporter
+  med alla tre flaggor accepteras. Metodsignatur jämförs avsiktligt inte.
 - Prestandamålet och reproducerbar releaseimage kvarstår. Äldre kall/varm-
   mätningar är historisk evidens; denna matris är ett funktionellt prov.
 - Slutkontroll 11:59 UTC: ready/200, samma produktionsimage, prewarm false,
