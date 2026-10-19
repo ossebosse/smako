@@ -2298,6 +2298,11 @@ class PersonalPlanner:
             from app.services.complete_recipes import validate_content_capacity
             validate_content_capacity(self.request.recipe_preferences, meal,
                                       merged_profile(self.spec.profile, meal.profile), candidates)
+        # Every qualified variant keeps its evidence for this request. The seed
+        # cap and variant shortlist keep ALL recipes without evidence, so an
+        # evicted entry (formerly a fixed 2,048 bound) silently enlarged the
+        # seed beam once a library qualified more variants than that.
+        evidence_limit = max(2048, len(self.variant_search_evidence) + len(candidates))
         for recipe in candidates:
             self.product_trace.recipe(recipe)
             stage = "policy_taste"
@@ -2361,7 +2366,7 @@ class PersonalPlanner:
                             (meal.meal_type, self._recipe_id(recipe)),
                             VariantSearchEvidence(qualified["basket"].total,
                                 tuple(sorted(nutrition[0]["values"].items())),
-                                frozenset((i.store_id, i.product_id) for i in items)), 2048)
+                                frozenset((i.store_id, i.product_id) for i in items)), evidence_limit)
                     self.diagnostics.singleton_passed += 1
                 valid.append(recipe)
                 if recipe.design and recipe.design.content_source:
