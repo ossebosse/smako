@@ -3,8 +3,8 @@
 ``PersonalPlanner.resolve`` turns one ingredient need into its qualified,
 priced product candidates. Its request-local cache key covers the ingredient,
 unit, profile, organic/food flags and recipe forms. Everything else it reads is
-fixed per *scope*: the exact prepared price universe and fact collection
-objects, the request's usable stores, purchase mode, pricing date, membership
+fixed per *scope*: the exact prepared price universe object and fact content
+version, the request's usable stores, purchase mode, pricing date, membership
 and coupon identity, and settings. Two requests with the same scope and key
 compute the same candidates, the same failure and the same traced product
 events, so a later request may reuse them instead of recomputing.
@@ -12,8 +12,10 @@ events, so a later request may reuse them instead of recomputing.
 Only successes and diagnostics-free failures are shared, exactly what the
 planner already caches within one request. Entries are immutable by
 convention (the planner already shares candidate objects between baskets).
-The scope holds strong references to the universe and facts objects, so an
-``id()`` in the key can never be reused by a different object while cached.
+The scope holds a strong reference to the prepared universe, so its ``id()``
+can never be reused by a different object while cached. Production fact
+versions are computed from every fact by ``FactsCollection``; injected facts
+must honor the same immutable content-version contract.
 
 Nothing here is a price, approval or plan: every basket, nutrition check and
 checkout audit still runs per request. Disable with

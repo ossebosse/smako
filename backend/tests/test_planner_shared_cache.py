@@ -1,8 +1,10 @@
 """Cross-request reuse returns exactly what a fresh request computes."""
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import suppress
 from copy import deepcopy
 from dataclasses import replace
 from datetime import timedelta
+from threading import Barrier
 
 import pytest
 from app.errors import IncompleteBasketError
@@ -114,3 +116,23 @@ def test_shared_failure_is_recreated_without_other_requests_annotations(isolated
     assert reused.value is not original.value
     assert reused.value.stage != original.value.stage
     assert "private-first-request-note" not in reused.value.conflicts
+
+
+def test_concurrent_resolutions_keep_request_profiles_separate(isolated):
+    request, universe, facts, pantry = fixture()
+    planners = [planner(request, universe, facts, deepcopy(pantry)) for _ in range(6)]
+    barrier = Barrier(len(planners))
+
+    def resolve(index):
+        profile = TasteProfile(exclusions=["nötfärs"] if index % 2 else [])
+        barrier.wait(timeout=10)
+        try:
+            candidates = planners[index].resolve("nötfärs", 300, "g", profile=profile)
+        except PolicyConflict:
+            return "blocked"
+        return tuple((i, candidate.model_dump_json()) for i, candidate in candidates)
+
+    with ThreadPoolExecutor(max_workers=len(planners)) as executor:
+        results = list(executor.map(resolve, range(len(planners))))
+    assert results[0] == results[2] == results[4] != "blocked"
+    assert results[1] == results[3] == results[5] == "blocked"
