@@ -185,7 +185,6 @@ def test_busy_lease_blocks_standalone_maintenance(tmp_path, monkeypatch):
 
     from backend.tests.test_production_deployment import _configure_backup
     from grocery_data.app.services.manual_refresh_operations import (
-        RefreshAlreadyRunningError,
         RefreshRunLock,
         production_refresh_lock_path,
     )
@@ -194,7 +193,7 @@ def test_busy_lease_blocks_standalone_maintenance(tmp_path, monkeypatch):
     lock = RefreshRunLock(production_refresh_lock_path(paths["grocery"], paths["universe"]))
     lock.acquire()
     try:
-        with pytest.raises(RefreshAlreadyRunningError):
-            maintenance.main()
+        assert maintenance.main() == 1
+        assert not (paths["universe"].parent / "reports/operations/storage-maintenance.json").exists()
     finally:
         lock.release()

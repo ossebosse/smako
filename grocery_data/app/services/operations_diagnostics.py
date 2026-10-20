@@ -112,6 +112,7 @@ def evidence(db, snapshot_id):
         'observed': {'schema_diff': diff, 'completion': metrics.get('catalog_completion', {})},
         'raw_count': len(refs), 'raw_reference_digest': digest(refs), 'raw_references': selected,
         'raw_references_truncated': len(selected) != len(refs),
+        'payload_retired_at': metrics.get('storage_payload_retired_at'),
         'reproduce': {'command': 'python -m grocery_data.ops reproduce --snapshot-id ' + row['id'],
                       'network_requests': 0, 'source_content_is_untrusted_data': True},
     }
@@ -126,6 +127,12 @@ def reproduce(database, raw_root, snapshot_id):
     raw_root = Path(raw_root).resolve()
     with readonly(database) as db:
         out = evidence(db, snapshot_id)
+        if out.get('payload_retired_at'):
+            out['reproduction'] = {
+                'status': 'retired_by_retention', 'verified': False,
+                'retired_at': out['payload_retired_at'], 'network_requests': 0,
+            }
+            return out
         refs = list(db.execute('SELECT * FROM raw_snapshots WHERE catalog_snapshot_id=? '
                               'ORDER BY fetched_at,id', (snapshot_id,)))
     total = 0
@@ -401,6 +408,7 @@ def status(environment=None, *, now=None):
     return {'schema': 'smako-operations-status-v1', 'checked_at': now.isoformat(),
             'runtime': env.get('BUILD_ID', 'unknown'), 'ready': ready,
             'backup': read_json(universe.parent / 'reports/operations/backup-status.json'),
+            'storage_maintenance': read_json(universe.parent / 'reports/operations/storage-maintenance.json'),
             'disk_manifest': manifest.get('universe_id'),
             'loaded_manifest': serving.get('body', {}).get('universe_id'),
             'receiver_inbox': queue,

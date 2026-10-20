@@ -180,6 +180,8 @@ async def run_source_job(*, city=None, environment=None, now=None):
                 raise ValueError('Hemkop prior database outside owned root')
             with sqlite3.connect(old.as_uri() + '?mode=ro', uri=True) as src, sqlite3.connect(database) as dst:
                 src.backup(dst)
+            from grocery_data.app.services.snapshot_retention import compact_candidate_copy
+            compact_candidate_copy(database, attempt / 'raw', now=now)
         engine = create_database_engine('sqlite:///' + database.resolve().as_posix())
         create_schema(engine)
         collector = GroceryCollector(create_session_factory(engine), FilesystemRawSnapshotStore(attempt / 'raw'))

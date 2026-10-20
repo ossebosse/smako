@@ -95,6 +95,16 @@ def test_raw_corruption_and_path_escape_fail_closed(context):
         ops.reproduce(context.database, context.raw, 'one')
 
 
+def test_retired_payload_is_explicit_and_never_claimed_reproduced(context):
+    snapshot(context, 'retired', metrics={'storage_payload_retired_at': '2026-10-20T00:00:00+00:00'})
+    raw(context, 'retired', {'storeId': '4123'})
+    (context.raw / 'raw.json').unlink()
+    result = ops.reproduce(context.database, context.raw, 'retired')
+    assert result['reproduction']['status'] == 'retired_by_retention'
+    assert result['reproduction']['verified'] is False
+    assert result['reproduction']['network_requests'] == 0
+
+
 def test_full_catalog_verification_has_separate_page_and_total_limits(context, monkeypatch):
     snapshot(context, 'large', chain='coop')
     raw(context, 'large', {'page': 'a'}, name='a.json')

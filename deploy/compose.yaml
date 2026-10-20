@@ -26,6 +26,7 @@ x-app-environment: &app-environment
   PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS: ${PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS:-}
   PRICE_UNIVERSE_CITY: ${PRICE_UNIVERSE_CITY:-Lund}
   REFRESH_REPORT_DIR: ${REFRESH_REPORT_DIR:-/srv/app/var/reports/refresh}
+  STORAGE_SOURCE_RETENTION_DAYS: ${STORAGE_SOURCE_RETENTION_DAYS:-14}
   REFRESH_RUNNER_STATUS_PATH: ${REFRESH_RUNNER_STATUS_PATH:-/srv/app/var/reports/operations/refresh-runner-status.json}
   DAILY_REFRESH_SCHEDULE: ${DAILY_REFRESH_SCHEDULE:-03:17 Europe/Stockholm}
   # Explicit structured-only release. Disabled preserves the existing schedule.

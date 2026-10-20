@@ -78,7 +78,7 @@ def current_files():
                     payload = json.loads(state.read_bytes())
                     # Outcome reports have attempt-relative diagnostic paths.
                     # Only the accepted pointer graph owns build dependencies.
-                    database_refs({k: payload[k] for k in ('database', 'sha256', 'approved')
+                    database_refs({k: payload[k] for k in ('database', 'sha256', 'approved', 'partial_approved')
                                    if k in payload}, root)
     operations = roots['operations']
     for path in operations.glob('*.json'):
