@@ -234,6 +234,8 @@ def main():
     args = p.parse_args()
     if args.repeat < 1 or not args.label.replace("-", "").replace("_", "").isalnum():
         p.error("positive repeat and simple label required")
+    if args.substitution_limit is not None and (args.substitution_limit < 0 or args.uncapped):
+        p.error("--substitution-limit must be >= 0 and cannot be combined with --uncapped")
     args.output.mkdir(parents=True, exist_ok=True)
     # Separate bounded cache roots; don't clear any existing deployment cache.
     # Profiles sharing an output folder must still start with independent
@@ -262,8 +264,6 @@ def main():
         assert baseline["inputs"] == inputs, "Baseline inputs differ"
     settings = Settings(complete_recipes_enabled=True, price_provider="own")
     if args.substitution_limit is not None:
-        if args.substitution_limit < 0 or args.uncapped:
-            p.error("--substitution-limit must be >= 0 and cannot be combined with --uncapped")
         settings = replace(settings, library_substitution_pool_limit=args.substitution_limit)
     if args.uncapped:
         settings = full_library_search_limits(settings)

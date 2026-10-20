@@ -43,4 +43,5 @@ def test_every_qualified_variant_keeps_its_evidence_beyond_2048():
 
 def test_small_library_evidence_is_unchanged():
     valid, evidence = run_candidates(50)
+    assert len(valid) == 50
     assert list(evidence) == [("dinner", f"r{n}") for n in range(50)]

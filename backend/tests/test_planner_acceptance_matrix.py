@@ -144,3 +144,33 @@ def test_correct_reference_passes_the_cli_gate(tmp_path, monkeypatch):
     # Validation passes, so the run proceeds to planner construction (stubbed).
     with pytest.raises(AssertionError, match="planner constructed"):
         run_cli_with_reference(tmp_path, monkeypatch, lambda inputs: reference(inputs=inputs))
+
+
+def test_missing_substitution_setting_is_rejected_by_cli(tmp_path, monkeypatch, capsys):
+    def legacy(inputs):
+        report = reference(inputs=inputs)
+        del report["search_limits"]["substitution"]
+        del report["reference_contract"]
+        return report
+
+    with pytest.raises(SystemExit) as stopped:
+        run_cli_with_reference(tmp_path, monkeypatch, legacy)
+    assert stopped.value.code == 2
+    assert "lacks 'substitution'" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("flags", [
+    ["--substitution-limit", "-1"],
+    ["--substitution-limit", "0", "--uncapped"],
+    ["--substitution-limit", "160", "--uncapped"],
+])
+def test_invalid_substitution_flags_fail_before_loading_inputs(tmp_path, monkeypatch, capsys, flags):
+    monkeypatch.setattr(sys, "argv", [
+        "matrix", "--inputs", str(tmp_path / "missing"),
+        "--output", str(tmp_path / "out"), "--matrix-case", "standard", *flags,
+    ])
+    with pytest.raises(SystemExit) as stopped:
+        matrix.main()
+    assert stopped.value.code == 2
+    assert "--substitution-limit must be >= 0 and cannot be combined" in capsys.readouterr().err
+    assert not (tmp_path / "out").exists()

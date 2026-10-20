@@ -1,6 +1,5 @@
 """On-demand pairwise culinary scores equal the former eager all-pairs dict."""
 import pytest
-
 from app.services.culinary_similarity import CulinarySimilarity
 from app.services.menu_optimizer import DiversityConstraints, LazyPairwiseSimilarities
 from app.services.recipe_library import current_recipes
