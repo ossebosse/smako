@@ -69,6 +69,15 @@ filhashar före/efter patchen, compileall och att inga andra runtimefiler ändra
 Ingen container byts. Resultatet har exakt kandidat-image och BUILD_ID.
 Serverunderlaget finns under `/opt/smako/evidence/<release-id>/`.
 
+Bygge och aktivering kör först den gemensamma
+[lagringsretentionen](storage-maintenance.md) under driftlåset. Blockerad
+retention stoppar releasen med ett lokalt kvitto. Slutbilden återställer
+basbildens runtimekonfiguration från ett nytt filsystemlager; upprepade
+patchreleaser bygger därför inte en allt längre kedja av gamla lager.
+Konfiguration och filhashar jämförs med förväntat resultat. Efter lyckat bygge
+roteras egna avslutade images och oanvänd byggcache. Aktiva, rollback-,
+väntande och okända images skyddas.
+
 Verifiera dessutom kandidatens ändrade funktioner med relevanta offlineprov
 och vid behov isolerad HTTP-/browsermiljö med separata data. Exempel på
 importkontroll av exakt kandidatbild, med image-ID från `build.json`:
@@ -92,6 +101,11 @@ basbild fortfarande kör och att kandidatkvittot är oförändrat, tar befintlig
 driftlås, kräver lugn menytrafik, säkerhetskopierar båda SQLite-databaserna
 och kontrollerar kopiorna. Den ändrar endast appens image och BUILD_ID via
 ett nytt compose-override. Scheduler, proxy, volymer och övrig miljö bevaras.
+
+Releasebackupen använder samma kompletta, roterande backupkatalog som den
+dagliga backupen. Inga nya databasdubletter läggs i releaseunderlaget.
+Efter aktiveringen körs underhållet igen. Ett fel där rapporteras uttryckligen
+som **aktiverad app men blockerad retention**, inte som ett uteblivet appbyte.
 
 Om låset är upptaget görs inget appbyte. Låt det ordinarie jobbet bli klart
 och kör samma aktiveringskommando igen. Avbryt inte prisinsamlingen och
@@ -133,6 +147,20 @@ Den skapar källpaket och aktiverar inget. Utgå från aktuell drift och relevan
 delar av `deploy/compose.yaml`, `deploy/compose.release.yaml` och
 `deploy/scripts/install_relay_release.ps1`. Historiska driftsättningsguider
 beskriver sina dåvarande miljöer; kör inte deras daterade kommandon blint.
+
+En avgränsad schedulerpatch kan paketeras med `scripts/build_source_patch.py`.
+Den kräver nu även `--base-config <privat-inspect.json>`: exakt
+`docker image inspect` för den pinnade `--base-image`. Filen ska ligga
+utanför Git. Slutbilden plattas på samma sätt som appreleasen.
+Om den äldre runtimefilen har CRLF men Git har LF kan `--base-files` ange
+ett privat `{image, files}`-inventarium med base64-kodade originalfiler.
+Endast bevisat identiskt Pythoninnehåll efter radslutsnormalisering tillåts;
+byggkontrollen kräver fortfarande originalets exakta bytehash. Andra
+runtimeavvikelser avvisas.
+Jämför dess `Config` med paketets `IMAGE-CONFIG.json`, verifiera granskade
+filhashar och kör relevanta offlineprov före separat kontrollerad aktivering.
+En ny installation eller uppdaterad scheduler kör städningen vid start och
+via befintliga backup-/refreshjobb; ingen extra timer installeras.
 
 Den versionshanterade apphjälparens paketeringsspärrar och klonstart verifieras
 separat vid införandet. En ny liveaktivering körs först när det finns en

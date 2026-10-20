@@ -1,5 +1,84 @@
 # Lagring och säker arkivering
 
+## Automatisk retention, 2026-10-20
+
+Den nya underhållsvägen är `deploy/scripts/storage_maintenance.py`. Den använder
+befintligt driftlås och körs vid schedulerstart, före backupens utrymmeskontroll,
+efter backup för rotation, samt högst var sjätte timme via ordinarie
+refresh-arbetare. Ingen ytterligare timer behövs. Aktiveringsstatus dokumenteras
+separat; att filerna finns i Git ändrar inte en redan körande scheduler.
+
+| Innehåll | Policy |
+| --- | --- |
+| Dags- och nya releasebackuper | Högst tre/32 GiB och högst 14 dagar; minst två fullständiga, hashverifierade återställningskopior bevaras även om budgeten överskrids. |
+| Publicerade prisartefakter | Alla aktiva kommuners manifest och deras exakta filer bevaras. Orefererade hashfiler får två dygns läsarmarginal. |
+| Avbrutna prisbyggen/backupförsök | Endast exakta egna temporärnamn, efter ett dygn och under driftlåset. |
+| Ordinarie refreshrapporter | 14 dagar/högst 128; de två senaste bevaras. Operatörskataloger omfattas inte. |
+| Inaktiva källpayloads | 14 dagar; aktuella/LKG, två senaste per källscope, publicerad härkomst, incidenter och fältvalideringsreferenser undantas. Högst 32 snapshots behandlas per körning. |
+| Kommunala försök | 14 dagar; aktuell referensgraf, de två senaste försöken och äldre råfiler som fortfarande används av kopierade databaser bevaras. |
+
+Importidentiteter, ursprungliga observationstider och metadata behålls när stora
+inaktiva produktposter/råkroppar tas bort. Metadata får en uttrycklig
+retentionsmarkering. `reproduce` visar `retired_by_retention`, aldrig ett påstått
+lyckat återspel. Lediga SQLite-sidor återanvänds; ingen exklusiv fullständig
+VACUUM körs mot levande drift. Nya kommunala databaskopior rensas före användning;
+den tidigare immutabla källan ändras inte.
+
+Saknade eller felaktiga manifest, ändrade filer, länkar och okända namn ger
+bevarande eller blockerad kategori. Okända gamla test-/releasekataloger och
+privata användardata omfattas inte. Detta är en avgränsad datalivscykel, inte
+en generell `rm` eller Docker-volymrensning. Aktiv data och nödvändiga
+återställningskopior kan överstiga budgeten; då redovisas det i driftkvittot.
+Varje körning ersätter `reports/operations/storage-maintenance.json`.
+
+Samma granskade kod kan köras genom den installerade schedulern utan att först
+byta dess image:
+
+```powershell
+.venv/Scripts/python.exe scripts/target_storage.py
+.venv/Scripts/python.exe scripts/target_storage.py --apply
+```
+
+Första kommandot inventerar; det andra tillämpar policyn under samma driftlås.
+`beta_release.py build/activate` använder denna väg före allokering och efter
+aktivering. Nya appreleaser använder den ordinarie roterande backupkatalogen,
+inte ytterligare databasdubletter i `/opt/smako/evidence`.
+Efter bygge roteras tidigare aktiverade images som ägs av apphjälparen; aktiva
+och stoppade containrars images, närmast föregående bas, de två senaste
+kandidaterna samt okända eller ännu ej aktiverade images bevaras.
+Oanvänd BuildKit-cache får en budget på 2 GB. Befintliga historiska images utan
+det nya ägarskapsmärket raderas inte automatiskt.
+
+Apphjälparen och källpatchpaketeraren skapar en ny slutbild från det granskade
+filsystemet. Tidigare patchlager följer inte med som en växande föräldra-kedja.
+Appbygget kräver identisk runtimekonfiguration och exakt granskad fildiff.
+Källpaketets `IMAGE-CONFIG.json` ska jämföras med den byggda bildens `Config`
+före separat aktivering. Volumes, OnBuild och Healthcheck i basbilden kräver
+en separat fullrelease; verktyget avbryter hellre än att tappa metadata.
+Dockerprovet bygger två följduppdateringar helt utan nät och kontrollerar
+filer, konfiguration och antal lager.
+
+Retentionen sätter inte ett tak på användarskapade planer eller nödvändig
+prisdata. Små härkomstposter behålls för spårbarhet. Gamla operatörsarkiv och
+okända images behöver en separat engångsgranskning; de räknas inte som
+automatiskt städade av den nya policyn.
+
+### Verifierad avgränsad rensning 2026-10-20
+
+Den första versionen (`e9dbdbf`) kördes först skrivskyddat, därefter med samma
+urval under driftlåset. **83 357 422 659 byte** togs bort: åtta äldre
+dagsbackuper (47,79 GB) och 297 orefererade prisartefakter (35,57 GB).
+Tre verifierade dagsbackuper och alla aktiva prisartefakter bevarades.
+Inga källdatabaser, användardata, kommunala försök eller Dockerimages rensades
+av denna körning. Den utökade källretentionen ska inte räknas som aktiverad av
+detta kvitto.
+
+Efterkontrollen 2026-10-20 10:04 UTC visade **94 192 029 696 byte ledigt**,
+mot beräknat driftbehov 15 423 263 244 byte. Readiness var HTTP 200 och
+publicerat/laddat prismanifest stämde överens. Mätningen av ledigt utrymme
+inkluderar annat normalt driftarbete mellan observationerna; den är inte en
+separat exakt nettomätning av städningens effekt.
+
 ## Prisåterställning 2026-10-18, kväll
 
 Hemköps återspelning ökade databasens storlek så att publiceringens
