@@ -2,15 +2,17 @@
 
 - Gren `perf/recipe-scaling-20261019`. Rapport:
   [recipe-scaling-20261019.md](reviews/recipe-scaling-20261019.md).
+- Granskning: [review-instructions-20261020.md](reviews/review-instructions-20261020.md)
+  (sammanslagning med kontraktsgrenen, tre öppna frågor, reproduktion).
 - Varm standard: 1 000 recept 44 s i Lund och 52 s i Malmö, 2 000 recept 61/76 s
   (före arbetet 125/165 s vid 1 000). 222 recept 33–36 s. Exakta ändringar:
   samma hash. Substitutionstaket `LIBRARY_SUBSTITUTION_POOL_LIMIT=160`
   (ägarbeslut 2026-10-20, 0 = hela svepet) gav samma pris i alla 14 profil/stad-
   körningar vid 1 000 recept; 40 och 120 gav dyrare menyer och förkastades.
-- `46a79ea`: behovsrader återanvänds inom anropet och produktupplösning delas
+- `c638ee6`: behovsrader återanvänds inom anropet och produktupplösning delas
   mellan anrop med samma scope (`SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av).
   Delad enreceptskvalificering prövades och förkastades (ingen nettovinst).
-- `fd8d97d`: import publicerar aldrig ett paket över 16 MiB (det gjorde hela
+- `ed76088`: import publicerar aldrig ett paket över 16 MiB (det gjorde hela
   biblioteket oläsbart). Stora utkast måste delas upp.
 - Granska: Lund 2 000 recept ger dyrare meny än 1 000 även utan tak; Malmö
   2 000 når 2,96 GB RSS; fullbiblioteksreferens vid 1 000/2 000 ej körd.

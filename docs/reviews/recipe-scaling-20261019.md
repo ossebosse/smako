@@ -28,11 +28,11 @@ Det som hindrar nästa nivå, i storleksordning:
    `BasketOptimizer.optimize`. Resten är behovsrader, `resolve`
    (310 000 anrop), pydantic-objekt och spårning, upprepat för varje vecka
    trots att fyra av fem recept är desamma som i föregående förslag.
-   Delvis åtgärdat i `46a79ea`.
+   Delvis åtgärdat i `c638ee6`.
 3. **Kandidatkvalificering per anrop.** En enreceptskorg per kandidat och
    anrop: 12–20 s varmt vid 1 000 recept, 34–45 s kallt. Samma arbete görs om
    i nästa anrop med samma priser, scope och profil. Produktupplösningen
-   delas nu (`46a79ea`); att dela hela korgen gav ingen nettovinst.
+   delas nu (`c638ee6`); att dela hela korgen gav ingen nettovinst.
 4. **Minne.** Malmö når 2,7 GB peak RSS vid 1 000 recept. Med serverns
    3 GiB-gräns är 2 000 recept i Malmö sannolikt inte möjligt utan
    minnesåtgärd. Inte uppmätt här.
@@ -41,13 +41,13 @@ Det som hindrar nästa nivå, i storleksordning:
 
 | Commit | Ändring | Varför resultatet är oförändrat |
 | --- | --- | --- |
-| `e16ba57` | `LazyPairwiseSimilarities`: kulinarisk parlikhet räknas när sökningen frågar efter ett par, inte alla n·(n−1)/2 par före sökningen | Samma nycklar, värden, ordning och argumentordning som den tidigare dicten. Testat mot den tidigare loopen på 70 riktiga middagar (exakt flyttalslikhet) och med samma resultathash i båda städerna vid 222 och 1 000 recept |
-| `00fe91f` | Variantbevis (`variant_search_evidence`) behålls för varje kvalificerat recept i anropet; tidigare fast LRU på 2 048 | Seed-tak, variantlista och gemensamma förslag behåller alla recept *utan* bevis. Över 2 048 varianter förstorades därför seedsökningen tyst. Ingen skillnad under 2 048 (alla mätningar här) |
+| `9653e29` | `LazyPairwiseSimilarities`: kulinarisk parlikhet räknas när sökningen frågar efter ett par, inte alla n·(n−1)/2 par före sökningen | Samma nycklar, värden, ordning och argumentordning som den tidigare dicten. Testat mot den tidigare loopen på 70 riktiga middagar (exakt flyttalslikhet) och med samma resultathash i båda städerna vid 222 och 1 000 recept |
+| `5468645` | Variantbevis (`variant_search_evidence`) behålls för varje kvalificerat recept i anropet; tidigare fast LRU på 2 048 | Seed-tak, variantlista och gemensamma förslag behåller alla recept *utan* bevis. Över 2 048 varianter förstorades därför seedsökningen tyst. Ingen skillnad under 2 048 (alla mätningar här) |
 
 Den kvadratiska delen var 404 550 jämförelser och cirka 28 s per anrop vid
 1 000 recept (profil). Vid 5 000 recept hade den varit cirka 12,5 miljoner.
 
-| `46a79ea` | Inom ett anrop: behovsrader per (plats, rensat recept, måltid) inklusive `demand_key` byggs en gång; sammanslagen profil och JSON för anropskonstanta modeller i cachenycklar räknas en gång per objekt. Mellan anrop: `resolve()` (kvalificerade, prissatta kandidater eller ett fel utan diagnostik) delas i en processlokal LRU, 4 scope × 32 768 poster | Samma värden som tidigare beräknades per rad. Delningens scope täcker allt `resolve` läser utöver sin nyckel: exakt prisuniversum, faktaversion (innehållshash), vy-identitet (kontexter, urval, Stockholmsdatum), användbara butiker, medlemskap/kuponger, prisdatum, inköpsläge, complete-läge och inställningar. Scope läses från planerarens aktuella attribut vid varje miss. Spårade produkthändelser spelas upp som vid en lokal träff. `SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av. Testerna börjar med tom cache |
+| `c638ee6` | Inom ett anrop: behovsrader per (plats, rensat recept, måltid) inklusive `demand_key` byggs en gång; sammanslagen profil och JSON för anropskonstanta modeller i cachenycklar räknas en gång per objekt. Mellan anrop: `resolve()` (kvalificerade, prissatta kandidater eller ett fel utan diagnostik) delas i en processlokal LRU, 4 scope × 32 768 poster | Samma värden som tidigare beräknades per rad. Delningens scope täcker allt `resolve` läser utöver sin nyckel: exakt prisuniversum, faktaversion (innehållshash), vy-identitet (kontexter, urval, Stockholmsdatum), användbara butiker, medlemskap/kuponger, prisdatum, inköpsläge, complete-läge och inställningar. Scope läses från planerarens aktuella attribut vid varje miss. Spårade produkthändelser spelas upp som vid en lokal träff. `SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av. Testerna börjar med tom cache |
 
 Kvarstående begränsningar: lås, prisursprung, produktidentitet, allergen-,
 närings- och verifieringskrav samt slutlig checkout-audit är orörda. Endast
@@ -100,14 +100,14 @@ och ska valideras mot fullbiblioteksreferensen innan den används.
 
 ## 3. Mätningar
 
-Kod `00123b7` (före) och `e16ba57` (efter). Två CPU (Intel Xeon 2,8 GHz),
+Kod `00123b7` (före) och `9653e29` (efter). Två CPU (Intel Xeon 2,8 GHz),
 7 GiB minne, Python 3.12.3, nätverk blockerat av matrisen. Frysta indata från
 `smako-followup-public-data-20261018.zip` (SHA-256 `d3a93b88…`), klocka
 `2026-10-18T05:12:49.467392+00:00`, samma som granskningen 2026-10-18.
 En process per rad: en kall och två varma planeringar. Ingen upprepning i
 omvänd ordning ännu; spridningen mellan varma körningar är upp till 14 s vid
 1 000 recept. Denna miljö är cirka 15–20 % långsammare än serverns referens
-(Malmö 222 varm: 58,5 s här, 49,6 s där). `00fe91f` påverkar inte dessa
+(Malmö 222 varm: 58,5 s här, 49,6 s där). `5468645` påverkar inte dessa
 storlekar (under 2 048 varianter) och är inte separat tidsmätt.
 
 Bibliotek: nuvarande 222 recept (189 middagar: 94 grundrätter, 95 variationer).
@@ -153,7 +153,7 @@ Rådata per körning: [measurements.json](recipe-scaling-20261019/measurements.j
 ## 4. Substitutionstak (ägarbeslut 2026-10-20)
 
 `LIBRARY_SUBSTITUTION_POOL_LIMIT` (standard 160, 0 = hela svepet som förut,
-`5e2c712`, `07346d9`, `889888d`). Varje nyare generations recept rangordnas med
+`f88dfd6`, `99e2d62`, `1d2e620`). Varje nyare generations recept rangordnas med
 samma regel som seed-taket (billigaste kvalificerade enreceptsköp, delade
 förpackningar, två billigaste per kök) och högst 160 per måltidstyp prövas i
 varje plats. En generation inom taket prövas helt, som förut. Hela den
@@ -173,7 +173,7 @@ svepet** ([substitution-limit-sweep.json](recipe-scaling-20261019/substitution-l
 Vid 2 000 recept gav 160 samma pris och hash som hela svepet i Lund och Malmö
 standard och samma pris (annan likvärdig meny) i Lund fördelning. En första
 körning med taket gav `IndexError` för frukost/mellanmål när en generation inte
-tillförde någon rätt av måltidstypen; rättat i `889888d` och omkört (samma pris).
+tillförde någon rätt av måltidstypen; rättat i `1d2e620` och omkört (samma pris).
 
 **Tid, varm standard (median av två, sekunder):**
 
@@ -210,7 +210,7 @@ Observationer att granska:
   fullbiblioteksreferens (`seed=0`, `refinement=0`, ingen variantlista,
   substitution 0) vid 1 000/2 000, omvänd körordning, samtidighet, HTTP-kö och
   förberedelsetid efter pris-, fakta- eller receptändring.
-- GitHub-CI kräver push. Lokal full offline-svit på `5e2c712`: 2 760 PASS,
+- GitHub-CI kräver push. Lokal full offline-svit på `f88dfd6`: 2 760 PASS,
   10 XFAIL (kända), 53 SKIP (saknad lokal evidens); 41 webbläsartester kunde
   inte starta en webbläsare i denna miljö och ska verifieras i CI.
 
