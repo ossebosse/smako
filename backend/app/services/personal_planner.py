@@ -2266,7 +2266,7 @@ class PersonalPlanner:
         return nutrition
 
     @timed_stage("candidate_generation_and_qualification")
-    def _candidates(self, meal, *, qualified_results=None):
+    def _candidates(self, meal, *, qualified_results=None, fixed_slots=()):
         from app.services.plan_jobs import report_stage
         report_stage("candidate_qualification")
         with performance_span("personal_candidate_generation"):
@@ -2298,10 +2298,14 @@ class PersonalPlanner:
             from app.services.complete_recipes import validate_content_capacity
             validate_content_capacity(self.request.recipe_preferences, meal,
                                       merged_profile(self.spec.profile, meal.profile), candidates)
+        from app.services.personal_policy import remaining_category_capacity
+        capacity = remaining_category_capacity(meal, fixed_slots, classify=self._protein_category)
         for recipe in candidates:
             self.product_trace.recipe(recipe)
             stage = "policy_taste"
             try:
+                if meal.distribution and capacity[self._protein_category(recipe)] <= 0:
+                    raise PolicyConflict("Kategorin ryms inte i din valda måltidsfördelning.", stage="policy_taste")
                 profile = merged_profile(self.spec.profile, meal.profile)
                 if not recipe_respects_diet(
                     recipe,
@@ -2525,7 +2529,11 @@ class PersonalPlanner:
         ``limit`` 0 and ``shortlist_variants`` False keep the whole qualified
         pool; the full-library reference (matrix ``--uncapped``) uses both.
         """
-        from app.services.stable_candidate_pool import library_seed_cap, library_variant_shortlist
+        from app.services.stable_candidate_pool import (
+            category_seed_cap,
+            library_seed_cap,
+            library_variant_shortlist,
+        )
         selected, by_meal = [], {}
         for group in groups:
             meal_type = group[0].meal_type
@@ -2535,7 +2543,14 @@ class PersonalPlanner:
                             for r in recipes if (meal_type, self._recipe_id(r)) in self.variant_search_evidence}
                 kept = library_variant_shortlist(recipes, evidence) if shortlist_variants else recipes
                 if limit:
-                    kept = library_seed_cap(kept, evidence, limit=limit)
+                    meal = self.meals[meal_type]
+                    if meal.distribution:
+                        from app.services.personal_policy import remaining_category_capacity
+                        kept = category_seed_cap(
+                            kept, evidence, capacity=remaining_category_capacity(meal),
+                            classify=self._protein_category, limit=limit)
+                    else:
+                        kept = library_seed_cap(kept, evidence, limit=limit)
                 by_meal[meal_type] = {self._recipe_id(r) for r in kept}
             selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
         return selected
@@ -2701,6 +2716,11 @@ class PersonalPlanner:
                             and getattr(self._candidates, "__func__", None) is PersonalPlanner._candidates):
                         pools[slot.meal_type] = self._candidates(
                             self.meals[slot.meal_type], qualified_results=qualified_results)
+                    elif (replace_slot and getattr(self._candidates, "__func__", None)
+                          is PersonalPlanner._candidates):
+                        pools[slot.meal_type] = self._candidates(
+                            self.meals[slot.meal_type],
+                            fixed_slots=[s for s in slots if s.id != replace_slot])
                     else:
                         pools[slot.meal_type] = self._candidates(self.meals[slot.meal_type])
                 choices = [
