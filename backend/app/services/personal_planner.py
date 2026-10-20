@@ -2959,7 +2959,7 @@ class PersonalPlanner:
             library_kwargs["seed_selector"] = select_seed_options
             if getattr(self.settings, "library_refinement_pool_limit", 90):
                 library_kwargs["refinement_selector"] = lambda groups: select_seed_options(groups, refinement=True)
-            substitution_limit = getattr(self.settings, "library_substitution_pool_limit", 40)
+            substitution_limit = getattr(self.settings, "library_substitution_pool_limit", 160)
             if substitution_limit:
                 # Same ranking as the seed cap (cheapest single-recipe purchase,
                 # shared packages, two per cuisine), over one generation's
