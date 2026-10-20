@@ -47,6 +47,8 @@ def main():
     for name in ('base-commit', 'parent-commit', 'commit', 'base-image', 'base-tag'):
         p.add_argument('--'+name, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--base-config', type=Path, required=True,
+                   help='Private docker image inspect JSON for the pinned base image')
     args = p.parse_args()
     for name in ('base_commit', 'parent_commit', 'commit'):
         setattr(args, name, git('rev-parse', '--verify', getattr(args, name)+'^{commit}').decode().strip())
@@ -72,6 +74,17 @@ def main():
                 'parent_commit': args.parent_commit, 'base_commit': args.base_commit,
                 'base_image': args.base_image, 'base_tag': args.base_tag,
                 'files': hashes, 'base_files': base_hashes}
+    from beta_release_workers.image_config import final_image_config, flatten_instructions
+    inspected = json.loads(args.base_config.read_bytes())
+    if not isinstance(inspected, list) or len(inspected) != 1 or inspected[0]['Id'] != args.base_image:
+        raise ValueError('image configuration does not match the pinned base')
+    expected_config = final_image_config(
+        inspected[0]['Config'], release='source-ops-' + args.commit[:12], commit=args.commit,
+        base_image=args.base_image, managed_kind='source-release-v1')
+    flatten = flatten_instructions(expected_config)
+    manifest['flattened_image_config_sha256'] = hashlib.sha256(
+        json.dumps(expected_config, sort_keys=True).encode()).hexdigest()
+    files['IMAGE-CONFIG.json'] = json.dumps(expected_config, sort_keys=True).encode()
     files['SOURCE-PATCH.json'] = json.dumps(manifest, indent=2).encode()
     files['verify-base.py'] = b'''import hashlib,json
 from pathlib import Path
@@ -81,10 +94,10 @@ for p,h in m['base_files'].items():
  assert (hashlib.sha256(f.read_bytes()).hexdigest() if f.exists() else None)==h,p
 '''
     copies = '\n'.join('COPY --chown=app:app '+path+' /srv/app/'+path for path in files if path in selected)
-    files['Dockerfile'] = (f'FROM {args.base_tag}\nUSER root\n'
+    files['Dockerfile'] = (f'FROM {args.base_tag} AS patched\nUSER root\n'
         'COPY SOURCE-PATCH.json /tmp/SOURCE-PATCH.json\nCOPY verify-base.py /tmp/verify-base.py\n'
         'RUN python /tmp/verify-base.py\n'+copies+'\nCOPY SOURCE-PATCH.json /srv/app/SOURCE-PATCH.json\n'
-        f'ENV BUILD_ID=source-ops-{args.commit[:12]}\nLABEL org.opencontainers.image.revision={args.commit}\nUSER app\n').encode()
+        + flatten).encode()
     args.output.mkdir(parents=True, exist_ok=True)
     target = args.output/f'smako-source-ops-{args.commit[:12]}.zip'
     if target.exists():
