@@ -1,6 +1,6 @@
 # Kategorimedveten receptsökning och Willys-kvittens, 2026-10-20
 
-Status: kandidat verifieras; ingen appaktivering påstås ännu.
+Status: kandidat verifierad och byggd; aktivering väntar på driftlås.
 Utgår från main `254f142` och den aktiva appen
 `app-bac0fc15ca9a-512ef3ea`. Användaren har godkänt implementation,
 driftåtgärd, commit och aktivering på betan.
@@ -100,7 +100,14 @@ Samma pris och matkök som arbetsurvalet i båda 1+2+2-fallen, med identiska
 indata och fem olika grundrätter. Fullpoolen kör fortfarande en begränsad
 heuristisk sökning och bevisar inget globaloptimum.
 
-Aktivering kompletteras efter bygg- och driftkontroller.
+Kandidatbild `sha256:0ad2b6021e6a71b5a849edb42430d0a94c33ea152e58984353de8124182a0830`,
+BUILD_ID `app-73306acc382d-0d139487`. Tre granskade appfiler ändrade,
+696 övriga runtimefiler hashidentiska, runtimekonfiguration och platt bild
+verifierade. Isolerat prov utan nät på exakt image klarar appimport,
+admininställning, samtliga 222 registrerade recept, kategoriurval och
+kapacitetsberäkning vid byte. Förkontrollens retention är godkänd;
+32 äldre snapshots pensionerade och 1 821 491 766 byte filer borttagna.
+Aktivering väntar på det ordinarie Lundjobb som startade 22:00 UTC.
 
 ## Driftsfelet och genomförd återställning
 

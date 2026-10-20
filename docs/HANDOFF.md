@@ -8,14 +8,22 @@ Blandade kvoter tar ungefär halva tiden med samma pris och matkök i Lund
 och Malmö. Helt vegetariskt i Lund är något långsammare.
 [Verifiering och driftåtgärd](reviews/category-aware-recipe-search-implementation-20261020.md).
 
-**Ännu inte aktiverad:** paket `app-73306acc382d-0d139487` finns i
-`.local/category-search-20261020/release-final`. `prepare` är godkänd,
-endast tre appfiler ändras. Första `build` stoppades före byggandet av
-`operation_lock_held`; samma paket kan byggas när låset är ledigt.
-Ordinarie `run_daily_refresh.py` arbetar med Hemköp i Malmö sedan
-20:30 UTC. Ingen tjänst eller insamling har avbrutits. Fortsätt enligt
-`docs/BETA.md`: bygg, verifiera exakt image, aktivera med backup och
-kontrollera publikt menybygge/receptbyte. Begär inte nytt godkännande.
+**Byggd och verifierad, ännu inte aktiverad:** paket
+`app-73306acc382d-0d139487` finns i `.local/category-search-20261020/release-final`.
+Image `sha256:0ad2b6021e6a71b5a849edb42430d0a94c33ea152e58984353de8124182a0830`.
+Endast tre granskade appfiler ändras, 696 runtimefiler är oförändrade.
+Exakt bild klarar import, bibliotek, admininställning, kvoturval och byte.
+Förkontrollens retention är godkänd (32 snapshots pensionerade).
+
+Första aktiveringsförsöket stoppades före backup/appbyte av
+`operation_lock_held`: ett nytt ordinarie Lundjobb startade 22:00 UTC
+medan bilden färdigställdes. Ingen tjänst eller insamling har avbrutits.
+`wait-activate.py` väntar på just den processen och kör sedan ordinarie
+`beta_release.py activate --checks-passed`. Läs `wait-activate.log`,
+`activate.log`, `resume-status.json` och serverns releasekvitto innan
+ett nytt försök startas; undvik konkurrerande aktiveringar.
+Bygg inte om bilden. Fortsätt enligt `docs/BETA.md` med backup/appbyte
+och publikt menybygge/receptbyte. Begär inte nytt godkännande.
 Lokala hjälpare `probe-final.py` och `verify_http.py` finns i samma
 `.local/category-search-20261020/`; aktiveringskvitto saknas ännu.
 
