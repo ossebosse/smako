@@ -1,24 +1,46 @@
-# 2026-10-20: Godkänd självstädning – ersättningskandidat efter targetkontroll
+# 2026-10-20: Självstädning aktiverad och efterkontrollerad
 
-Användaren har godkänt scheduleraktivering. Godkännandet gäller fortsatt.
-Det ordinarie källjobbet fick avslutas och driftlåset togs, men den
-skrivskyddade inventeringen avslöjade upprepade tunga referensfrågor.
-Vår inventering avbröts före källradering, backup och schedulerbyte.
-**Aktivera inte den äldre kandidaten `8f9221e168d8`.**
+Godkänd scheduleraktivering är slutförd 15:37:12 UTC (17:37 svensk tid).
+Aktiv runtime: `source-ops-52c7d8291bb7`, image
+`sha256:9611e23f2ee6ef6360ccff05889262240024fd1791b94bcfdd20d0c27f4f525e`.
+Endast schedulerns image och BUILD_ID ändrades. Cronfil, mountar,
+app/proxy och aktiva prismanifest bevarades. Ordinarie Malmö-jobb fick
+avslutas före driftlåset; inga källjobb stoppades.
 
-Rättning `90bfde350569` på `ops/storage-activation-20261020` avgränsar frågorna,
-inför tre index och skyddar även korsreferenser med SET NULL.
-29 riktade Windowsprov passerar (ett känt skip); slutbildens egen
-Linuxruntime klarar 30 PASS utan nät/produktionsvolymer.
-Ny kandidat: `source-ops-90bfde350569`, image
-`sha256:6cb2dab0e9cc2b904bab85b4a960107f681dd58e6c5d2205c8279b3f8bfb3095`.
-Full CI körs i PR #5. Före aktivering: grön CI, ledigt driftlås,
-verifierad backupbas, indexförberedelse, nytt städurval och komplett backup.
-Den privata arbetaren är `.local/review-scaling-20261020/activate_storage_v3.py`.
+Den genomförda körningen raderade 2 402 915 323 byte filer: 32 snapshots
+pensionerade, 11 921 råfiler, fem prisartefakter och 79 kommunala poster.
+SQLite har dessutom 420 208 640 återanvändbara byte. Detta tillkommer
+utöver tidigare 83,36 GB rensade dagsbackuper/prisfiler. Periodiska hookar
+är nu aktiva vid start, backup och ordinarie refresh.
 
-[Targetfynd och ersättningskandidat](reviews/storage-lifecycle-20261020.md).
+Backup `20261020T144738Z` är verifierad. Alla tidigare 302 planrevisioner
+och 113 privata tillståndsrader är bevarade, liksom källidentiteter och
+observationstider. Tre dagsbackuper upptar totalt 24 716 243 845 byte.
+De två ersatta kandidatbilderna är borttagna; aktiv image och
+återställningsbasen finns kvar. Byggcachebudget 2 GB.
+Efterkontroll 15:39 UTC: 88,21 GB ledigt, alla tre tjänster igång,
+noll omstarter och ingen OOM-status.
+
+Lund och Malmö har ready 200 och alla 14 obligatoriska kontexter
+kvalificerade, publicerade och laddade. Två publika menyprov passerade:
+fem kompletta recept, två tillåtna butiker, godkänd korgkontroll och
+identisk återläsning av sparad plan. Svarstider 75,34/77,52 sekunder;
+detta är funktionell efterkontroll, inte nytt prestanda-/prisbevis.
+Coop STALE och Willys AGING är kvarvarande åldersvarningar.
+Windowsjobbet körde vid statusläsningen; ingen ny reläleverans styrks här.
+
+Slutkod `52c7d82` finns på main och har grön full CI:
+2 841 PASS, 10 kända XFAIL, 53 SKIP. Slutbildens isolerade Linuxprov:
+31 PASS, 0 SKIP. Retentionsfrågorna/indexen och SQLite-cachebudgeten är
+verifierade mot target. Den tillfälliga backupcontainerns filcachebudget
+höjdes till 4 GiB under kontrollen, med bevarad minnesreserv; detta ändrade
+ingen permanent tjänstekonfiguration.
+
+[Aktivering, kvitton, testresultat och begränsningar](reviews/storage-lifecycle-20261020.md).
 [Analys av kategorikvoter och varierat urval](reviews/category-aware-recipe-search-20261020.md).
-Appens receptsökning och RAM-cache är fortfarande det separata utkastet PR #4.
+Appens receptsökning och RAM-cache är fortfarande det separata utkastet
+[PR #4](https://github.com/ossebosse/smako/pull/4), inte aktiverade här.
+Inga nya kategori-/urvalsgränser är införda. Äldre text nedan är historik.
 
 ---
 
