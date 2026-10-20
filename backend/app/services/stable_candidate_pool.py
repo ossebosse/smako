@@ -316,6 +316,26 @@ def category_seed_cap(recipes, evidence, *, capacity, classify, limit=40):
         category = classify(recipe)
         if capacity.get(category, 0) > 0:
             groups[category].append(recipe)
+    if len(groups) == 1:
+        # With no competing category, retain the established economic search
+        # trajectory. Stratifying again just creates extra basket work. Still
+        # repair a shortage of distinct bases hidden behind cheap variants.
+        category, rows = next(iter(groups.items()))
+        kept = library_seed_cap(rows, evidence, limit=limit)
+        selected = {recipe_id(r) for r in kept}
+        bases = {r.design.base_id if r.design else recipe_id(r) for r in kept}
+        required = 2 * capacity[category]
+        if len(bases) < required:
+            ranked = sorted(rows, key=lambda r: (evidence[recipe_id(r)].paid
+                            if recipe_id(r) in evidence else float("inf"), recipe_id(r)))
+            for r in ranked:
+                base = r.design.base_id if r.design else recipe_id(r)
+                if base not in bases:
+                    bases.add(base)
+                    selected.add(recipe_id(r))
+                    if len(bases) >= required:
+                        break
+        return [r for r in recipes if recipe_id(r) in selected]
     total = sum(capacity[k] for k in groups)
     selected = set()
     for category, rows in groups.items():

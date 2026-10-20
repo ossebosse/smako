@@ -81,6 +81,19 @@ def test_final_distribution_validation_still_rejects_wrong_quota():
     assert not distribution_ok(slots, [meal], classify=lambda r: r.name)
 
 
+def test_single_category_retains_existing_economic_selection():
+    from app.services.recipe_candidate_validator import recipe_id
+    from app.services.recipe_library import current_recipes
+    from app.services.stable_candidate_pool import library_seed_cap
+
+    rows = [r for r in current_recipes() if protein_category(r) == "vegetarian"]
+    evidence = {recipe_id(r): VariantSearchEvidence(i+1, (), frozenset()) for i, r in enumerate(rows)}
+    legacy = library_seed_cap(rows, evidence, limit=40)
+    assert len({r.design.base_id for r in legacy}) >= 10
+    assert category_seed_cap(rows, evidence, capacity={"vegetarian": 5},
+                             classify=protein_category, limit=40) == legacy
+
+
 def test_full_pool_retry_can_find_a_required_dish_outside_category_shortlist():
     from app.services.menu_optimizer import MenuOptimizer
     from app.services.recipe_candidate_validator import recipe_id
