@@ -1,3 +1,38 @@
+# 2026-10-20: Självstädning verifierad – schedulerkandidat väntar aktivering
+
+Lagringsrättningarna är integrerade och pushade på main, avskilda från
+receptskalningen: `9d6efed`, `429109a`, `8d5a49a`, `3825322`, `0b7e9a6`, `3e8a01a`.
+De inför gemensam retention före backup, vid schedulerstart, under befintliga
+refreshjobb och i appuppdateringsflödet. Aktuella priser, LKG,
+importidentiteter, observationstider och minst två verifierade backuper
+bevaras. Full CI för motsvarande granskade kod: 2 862 PASS, 10 kända XFAIL,
+53 SKIP. Radslutstillägget klarar ytterligare 21 riktade tester.
+
+En avgränsad serverrensning är genomförd: 83,36 GB gamla dagsbackuper och
+orefererade prisartefakter borttagna. Efterkontroll ready 200 och identiska
+publicerade/laddade manifest. Inga käll-/användardatabaser eller images
+rensades av den körningen. Det är inte bevis för aktiverad periodisk städning.
+
+Schedulerkandidat `storage-maintenance-8f9221e168d8` är byggd och verifierad:
+image `sha256:c54f949d591c1d4cc2c48698ed5cff79babdde12faac9498e0e1f6805403394c`,
+image-BUILD_ID `source-ops-8f9221e168d8`. Tio ändrade runtimefiler och
+623 hashidentiska; exakt konfiguration, importprov utan nät och två lager
+i stället för basbildens 199. **Inte aktiverad.** Ordinarie driftlås var
+upptaget vid förnyad källinventering; inget jobb avbröts.
+
+Aktiv scheduler är fortfarande `hemkop-context-scheduler-c6607a095018`;
+app `app-bac0fc15ca9a-512ef3ea`. Ingen Windowsuppgift eller timer ändrad.
+Före schedulerbyte: nytt statusunderlag, ledigt lås, backup och oförändrad bas.
+[Policy](storage-maintenance.md), [verifiering och exakt kandidat](reviews/storage-lifecycle-20261020.md).
+
+Receptskalningen ligger fortsatt i utkast-PR #4. Färdiga generationsvinnare
+bevaras nu (`e6f7d32`, `ea847bb`) och delad cache släpper pensionerade
+prisuniversum (`cd9f148`). Syntetiska regressioner och full CI passerar;
+nya oberoende pris-/tid-/minnesprov vid 1 000/2 000 recept saknas.
+Skalningskod och appaktivering ska inte sammanblandas med lagringsleveransen.
+
+---
+
 # 2026-10-18/19: Priser återställda; reläschemabyte väntar administratör
 
 Kod `c6607a0` (Hemköps butikskontext), `84b2de8` (Willys checkpoints) och
@@ -3850,37 +3885,3 @@ Lidl-fixturelucka är fortsatt öppna. Hela ursprungliga nämnaren kvarstår:
 38 Willys variant-/intervallfall och 81 regionalt aktuella Lidl-livsmedel
 har kvarstående hinder, utöver övriga dokumenterade grupper. Detta är
 inte full täckning. Ingen produktion, Windows-/schemaändring eller modell-API.
-# 2026-10-20: Självstädning verifierad – schedulerkandidat väntar aktivering
-
-Lagringsrättningarna är avskilda från receptskalningen för integration på
-main: `9d6efed`, `429109a`, `8d5a49a`, `3825322`, `0b7e9a6`, `3e8a01a`.
-De inför gemensam retention före backup, vid schedulerstart, under befintliga
-refreshjobb och i appuppdateringsflödet. Aktuella priser, LKG,
-importidentiteter, observationstider och minst två verifierade backuper
-bevaras. Full CI för motsvarande granskade kod: 2 862 PASS, 10 kända XFAIL,
-53 SKIP. Radslutstillägget klarar ytterligare 21 riktade tester.
-
-En avgränsad serverrensning är genomförd: 83,36 GB gamla dagsbackuper och
-orefererade prisartefakter borttagna. Efterkontroll ready 200 och identiska
-publicerade/laddade manifest. Inga käll-/användardatabaser eller images
-rensades av den körningen. Det är inte bevis för aktiverad periodisk städning.
-
-Schedulerkandidat `storage-maintenance-8f9221e168d8` är byggd och verifierad:
-image `sha256:c54f949d591c1d4cc2c48698ed5cff79babdde12faac9498e0e1f6805403394c`,
-image-BUILD_ID `source-ops-8f9221e168d8`. Tio ändrade runtimefiler och
-623 hashidentiska; exakt konfiguration, importprov utan nät och två lager
-i stället för basbildens 199. **Inte aktiverad.** Ordinarie driftlås var
-upptaget vid förnyad källinventering; inget jobb avbröts.
-
-Aktiv scheduler är fortfarande `hemkop-context-scheduler-c6607a095018`;
-app `app-bac0fc15ca9a-512ef3ea`. Ingen Windowsuppgift eller timer ändrad.
-Före schedulerbyte: nytt statusunderlag, ledigt lås, backup och oförändrad bas.
-[Policy](storage-maintenance.md), [verifiering och exakt kandidat](reviews/storage-lifecycle-20261020.md).
-
-Receptskalningen ligger fortsatt i utkast-PR #4. Färdiga generationsvinnare
-bevaras nu (`e6f7d32`, `ea847bb`) och delad cache släpper pensionerade
-prisuniversum (`cd9f148`). Syntetiska regressioner och full CI passerar;
-nya oberoende pris-/tid-/minnesprov vid 1 000/2 000 recept saknas.
-Skalningskod och appaktivering ska inte sammanblandas med lagringsleveransen.
-
----
