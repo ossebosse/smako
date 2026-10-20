@@ -1,45 +1,37 @@
-# 2026-10-20: Skalningsgranskning – separat kontraktsfix på main, skalning kvar i utkast
+# 2026-10-20: Självstädning verifierad – schedulerkandidat väntar aktivering
 
-`9e6b7a9` är godkänd och integrerad/pushad till main. Skalningsgrenarna är
-sammanslagna för granskning på `review/recipe-scaling-20261020`,
-[PR #4](https://github.com/ossebosse/smako/pull/4).
-Referenskontrakt v2 inkluderar substitution; pytest-referensen lämnade
-tidigare tak 160 aktivt och är rättad. Analysverktygets kostnadsgolv är också
-rättat för historiska kampanjer, med regressionstester.
+Lagringsrättningarna är integrerade och pushade på main, avskilda från
+receptskalningen: `9d6efed`, `429109a`, `8d5a49a`, `3825322`, `0b7e9a6`, `3e8a01a`.
+De inför gemensam retention före backup, vid schedulerstart, under befintliga
+refreshjobb och i appuppdateringsflödet. Aktuella priser, LKG,
+importidentiteter, observationstider och minst två verifierade backuper
+bevaras. Full CI för motsvarande granskade kod: 2 862 PASS, 10 kända XFAIL,
+53 SKIP. Radslutstillägget klarar ytterligare 21 riktade tester.
 
-P1 kvar: tidigare generationers färdigförfinade vinnare bevaras inte.
-En liten reproduktion visar 2 → 6 trots att tidigare meny fortfarande kostar 2.
-Ingen omätt ändring av generationssökningen eller produktionsaktivering.
-Slutlig kod `a898412` har grön CI: 2 834 PASS, 10 kända XFAIL, 53 SKIP,
-inklusive webbläsare. 91 fokuserade lokala tester passerar. Main-rättningens
-separata full-CI är också grön. Lokala stora prov avbröts vid värddatorns
-minnes-/växlingsfilgräns; nya stora skalningsmätningar saknas.
-[Full rapport och reproduktion](reviews/recipe-scaling-review-20261020.md).
+En avgränsad serverrensning är genomförd: 83,36 GB gamla dagsbackuper och
+orefererade prisartefakter borttagna. Efterkontroll ready 200 och identiska
+publicerade/laddade manifest. Inga käll-/användardatabaser eller images
+rensades av den körningen. Det är inte bevis för aktiverad periodisk städning.
+
+Schedulerkandidat `storage-maintenance-8f9221e168d8` är byggd och verifierad:
+image `sha256:c54f949d591c1d4cc2c48698ed5cff79babdde12faac9498e0e1f6805403394c`,
+image-BUILD_ID `source-ops-8f9221e168d8`. Tio ändrade runtimefiler och
+623 hashidentiska; exakt konfiguration, importprov utan nät och två lager
+i stället för basbildens 199. **Inte aktiverad.** Ordinarie driftlås var
+upptaget vid förnyad källinventering; inget jobb avbröts.
+
+Aktiv scheduler är fortfarande `hemkop-context-scheduler-c6607a095018`;
+app `app-bac0fc15ca9a-512ef3ea`. Ingen Windowsuppgift eller timer ändrad.
+Före schedulerbyte: nytt statusunderlag, ledigt lås, backup och oförändrad bas.
+[Policy](storage-maintenance.md), [verifiering och exakt kandidat](reviews/storage-lifecycle-20261020.md).
+
+Receptskalningen ligger fortsatt i utkast-PR #4. Färdiga generationsvinnare
+bevaras nu (`e6f7d32`, `ea847bb`) och delad cache släpper pensionerade
+prisuniversum (`cd9f148`). Syntetiska regressioner och full CI passerar;
+nya oberoende pris-/tid-/minnesprov vid 1 000/2 000 recept saknas.
+Skalningskod och appaktivering ska inte sammanblandas med lagringsleveransen.
 
 ---
-
-# 2026-10-19/20: Receptskalning (Claude) – gren, ej aktiverat
-
-- Gren `perf/recipe-scaling-20261019`. Rapport:
-  [recipe-scaling-20261019.md](reviews/recipe-scaling-20261019.md).
-- Granskning: [review-instructions-20261020.md](reviews/review-instructions-20261020.md)
-  (sammanslagning med kontraktsgrenen, tre öppna frågor, reproduktion).
-- Varm standard: 1 000 recept 44 s i Lund och 52 s i Malmö, 2 000 recept 61/76 s
-  (före arbetet 125/165 s vid 1 000). 222 recept 33–36 s. Exakta ändringar:
-  samma hash. Substitutionstaket `LIBRARY_SUBSTITUTION_POOL_LIMIT=160`
-  (ägarbeslut 2026-10-20, 0 = hela svepet) gav samma pris i alla 14 profil/stad-
-  körningar vid 1 000 recept; 40 och 120 gav dyrare menyer och förkastades.
-- `c638ee6`: behovsrader återanvänds inom anropet och produktupplösning delas
-  mellan anrop med samma scope (`SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av).
-  Delad enreceptskvalificering prövades och förkastades (ingen nettovinst).
-- `ed76088`: import publicerar aldrig ett paket över 16 MiB (det gjorde hela
-  biblioteket oläsbart). Stora utkast måste delas upp.
-- Granska: Lund 2 000 recept ger dyrare meny än 1 000 även utan tak; Malmö
-  2 000 når 2,96 GB RSS; fullbiblioteksreferens vid 1 000/2 000 ej körd.
-- Separat gren `fix/full-library-reference-contract`: `--uncapped-reference`
-  kräver `seed=0`, `refinement=0`, `seed_variant_shortlist=false`. Vid
-  sammanslagning med skalningsgrenen ska kontraktet även kräva `substitution=0`
-  (matrisens `--uncapped` sätter och rapporterar det nu).
 
 # 2026-10-18/19: Priser återställda; reläschemabyte väntar administratör
 
