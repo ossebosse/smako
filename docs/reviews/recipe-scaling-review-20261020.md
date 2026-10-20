@@ -16,7 +16,7 @@ reproduktion `a898412`.
 
 ## Fynd och åtgärder
 
-### P1 kvar: tidigare generationers färdiga vinnare bevaras inte
+### P1 rättat i kod: tidigare generationers färdiga vinnare bevaras inte
 
 `MenuOptimizer.optimize_library_slots` kör substitution för generationerna,
 men förfining, parvisa byten och gemensamma byten först efter sista
@@ -35,7 +35,8 @@ $env:PYTHONPATH='backend;.'
 | Bibliotek | Vald meny | Pris i syntetiskt prov |
 | --- | --- | ---: |
 | Generation 1–2 | B, B | 2 |
-| Generation 1–3 | C, C | 6 |
+| Generation 1–3 före rättning | C, C | 6 |
+| Generation 1–3 efter rättning | B, B | 2 |
 | B, B omprissatt i det utökade scenariot | B, B | 2 |
 
 Provet använder ett avsiktligt ändrat förfiningsurval när poolen växer och
@@ -43,11 +44,24 @@ ingen substitutionsbegränsning. Det isolerar mekanismen; det är inte en ny
 Lundmätning. Den inkommande rapportens Lundobservation 497,19 → 518,55 kr
 har **inte** återkörts färdigt här.
 
-En rättning behöver bevara färdigförfinade generationsvinnare och kontrollera
-dem under aktuella priser/krav. Att bara ta bort planner-vakten ger återkommande
-fulla planeringar av äldre generationer och kan bli mycket dyrt. Det har inte
-införts som ett omätt standardbyte. Lösningen måste även jämföras med den
-nuvarande större sökningens vinnare och dess sekundära mål.
+`e6f7d32` slutför varje kumulativ publiceringsgeneration och behåller dess
+vinnare under samma aktuella priser och krav. `ea847bb` håller dessa
+prefixförfiningar åtskilda från den större sökningens ursprungliga
+sekundära startpunkter. Ett särskilt prov bevarar därför även en billigare
+slutvinnare som bara den större sökningen hittar. Korgcachen är fortsatt
+begränsad till 256 poster; äldre fulla planner-anrop återkörs inte rekursivt.
+Ett ändrat prisprov visar att tidigare vinnare omprissätts och kan förlora.
+Rättningen gäller kumulativa publiceringsprefix med oförändrade kandidater,
+inte godtyckligt utbyte/återkallande av recept eller ett globalt optimalitetsbevis.
+Extra förfiningsarbete per generation måste fortfarande mätas vid 1 000/2 000.
+
+### P2 rättat i kod: cache behöll pensionerade prisuniversum i RAM
+
+`cd9f148` ersätter cachens starka ägarreferens med en svag referens och tar
+bort tillhörande scope när universumets sista verkliga ägare släpper det.
+Objektidentitet kontrolleras vid återanvändning. GC-provet verifierar att
+universumet och dess cacheposter frigörs. Det är en verifierad livscykelfix;
+det är ännu ingen ny mätning av maximal RSS vid 2 000 recept.
 
 ### P2 rättat: pytest-referensen behöll substitutionstaket
 
@@ -123,11 +137,21 @@ testet kontrollerar nu även antal godkända kandidater.
 
 ## Verifiering och dess gränser
 
-Slutlig granskningskod `a898412` har
+Uppföljningen `35afef0` har
+[grön full CI](https://github.com/ossebosse/smako/actions/runs/39410311242):
+**2 862 PASS, 10 kända XFAIL, 53 SKIP**, inklusive webbläsare och Ruff.
+Kostnads- och cachelivscykelrättningarna ingår. Den efterföljande
+paketerarrättningen `8f9221e` klarar 21 riktade tester och ett verkligt
+schedulerkandidatbygge. Självstädningen och den genomförda avgränsade
+serverrensningen redovisas i [lagringsrapporten](storage-lifecycle-20261020.md).
+Ingen app- eller scheduleraktivering har gjorts av uppföljningen.
+
+Granskningskod före uppföljningsrättningarna, `a898412`, har
 [grön full CI](https://github.com/ossebosse/smako/actions/runs/39394944178):
 **2 834 PASS, 10 kända XFAIL, 53 SKIP**, inklusive webbläsartester och Ruff
 på alla ändrade Pythonfiler. Efter denna kodcommit ändras endast rapport och
-handoff; samma kodverifiering återanvänds.
+handoff. Detta bevis avser den äldre koden; uppföljningens verifiering
+redovisas separat och ersätter inte de saknade stora acceptansmätningarna.
 
 Den separat integrerade main-rättningen `9e6b7a9` har
 [grön full CI](https://github.com/ossebosse/smako/actions/runs/39395018419):
