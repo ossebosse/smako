@@ -235,3 +235,23 @@ def test_explicit_replacement_resolves_current_meal_type_before_week_recalculati
         recipe_id=complete_recipes.identity(recipe))
     with pytest.raises(ValueError,match='reached independent whole-week'):
         asyncio.run(api._change_plan('synthetic-plan',payload,None,None))
+
+
+def test_import_never_publishes_a_pack_the_library_cannot_load(tmp_path, monkeypatch):
+    """A published pack above MAX_BYTES made every later library load fail."""
+    path = pack(tmp_path); root = library_root(tmp_path)
+    manifest = (root / content.MANIFEST.name).read_bytes()
+    # The input passes the read limit; the published pack (all model fields,
+    # e.g. 21.6 MB from a 1,778-recipe draft) does not.
+    validate = content.validate_pack
+
+    def validated_then_limited(source):
+        checked = validate(source)
+        monkeypatch.setattr(content, "MAX_BYTES", 100)
+        return checked
+
+    monkeypatch.setattr(content, "validate_pack", validated_then_limited)
+    with pytest.raises(ValueError, match="dela upp"):
+        content.import_pack(path, root=root)
+    assert manifest == (root / content.MANIFEST.name).read_bytes()
+    assert not list(root.glob("meal-pack-*.json"))
