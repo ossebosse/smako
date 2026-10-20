@@ -256,3 +256,48 @@ def test_scoped_reference_checks_do_not_scan_unrelated_price_history(tmp_path):
         assert protected_snapshots(db, **options) == {"retire"}
         db.set_progress_handler(None, 0)
         assert len(steps) < 100
+
+
+def test_preview_reference_work_does_not_multiply_with_raw_page_count(history, monkeypatch):
+    import hashlib
+
+    import grocery_data.app.services.snapshot_retention as retention
+
+    database, raw, kwargs = history
+    body = (raw / "raw/willys/snapshot-1/1.json").read_bytes()
+    with sqlite3.connect(database) as db:
+        db.row_factory = sqlite3.Row
+        template = dict(db.execute(
+            "SELECT * FROM raw_snapshots WHERE catalog_snapshot_id='snapshot-1'").fetchone())
+        columns = list(template)
+        sql = ("INSERT INTO raw_snapshots (" + ",".join('"' + name + '"' for name in columns)
+               + ") VALUES (" + ",".join("?" for _ in columns) + ")")
+        for number in range(200):
+            relative = f"extra-pages/{number}.json"
+            path = raw / relative
+            path.parent.mkdir(exist_ok=True)
+            path.write_bytes(body)
+            values = {**template, "id": f"extra-{number}",
+                      "payload_location": relative,
+                      "request_fingerprint": hashlib.sha256(relative.encode()).hexdigest()}
+            db.execute(sql, [values[column] for column in columns])
+    original = retention.protected_snapshots
+    probes = []
+
+    def observed(connection, **options):
+        if "snapshot-1" in options["snapshot_ids"]:
+            probes.append(tuple(options["snapshot_ids"]))
+        return original(connection, **options)
+
+    monkeypatch.setattr(retention, "protected_snapshots", observed)
+    result = maintain(database, raw, **kwargs)
+    assert result["retired"] == ["snapshot-1"]
+    assert result["raw_files_removed"] == 201
+    assert result["reclaimable_bytes"] == len(body) * 201
+    # One candidate qualification and one fresh raw-phase check, independent
+    # of the number of pages. Preview never unlinks any of the 201 bodies.
+    assert len(probes) <= 2
+    assert len(list((raw / "extra-pages").glob("*.json"))) == 200
+    result = maintain(database, raw, apply=True, **kwargs)
+    assert result["raw_files_removed"] == 201
+    assert not (raw / "extra-pages").exists()

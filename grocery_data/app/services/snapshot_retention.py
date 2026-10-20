@@ -122,6 +122,9 @@ def maintain(database, raw_root, *, universe, operations, now, apply=False):
     with sqlite3.connect(database.as_uri() + ("?mode=rw" if apply else "?mode=ro"),
                          uri=True, timeout=5) as connection:
         connection.execute("PRAGMA foreign_keys=ON")
+        # Bound memory while retaining useful index pages across per-snapshot
+        # probes. The default ~2 MiB cache thrashes on production catalogs.
+        connection.execute("PRAGMA cache_size=-131072")
         tables = {row[0] for row in connection.execute(
             "SELECT name FROM sqlite_master WHERE type='table'")}
         if not OWNED <= tables or "collector_runs" not in tables:
@@ -193,10 +196,16 @@ def maintain(database, raw_root, *, universe, operations, now, apply=False):
         # Previously retired bodies also need current reference protection on a
         # retry. Keep the relational probes bounded to relevant snapshot IDs.
         def protected_pending():
+            preview_checked = set()
             while batch := list(islice(pending, limit)):
-                protected.update(protected_snapshots(
-                    connection, universe=universe, operations=operations,
-                    snapshot_ids=sorted({row[3] for row in batch} - protected)))
+                identities = {row[3] for row in batch} - protected
+                if not apply:
+                    identities -= preview_checked
+                if identities:
+                    protected.update(protected_snapshots(
+                        connection, universe=universe, operations=operations,
+                        snapshot_ids=sorted(identities)))
+                    preview_checked.update(identities)
                 yield from batch
 
         for location, digest, size, identity in protected_pending():
