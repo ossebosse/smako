@@ -10,6 +10,12 @@ import sys
 ROOT = pathlib.Path.cwd().resolve()
 OUT = ROOT / ".local/verification"
 OUT.mkdir(parents=True, exist_ok=True)
+# Keep test databases and subprocess scratch on the workspace volume. A small
+# Windows system disk must not fill while the repository has ample capacity.
+# Pytest rotates its numbered directories here using its normal retention.
+scratch = OUT / "tmp"
+scratch.mkdir(exist_ok=True)
+os.environ.update(TMP=str(scratch), TEMP=str(scratch), TMPDIR=str(scratch))
 label = os.getenv("SMAKO_VERIFY_LABEL", "tests")
 reads = set()
 blocked = []
