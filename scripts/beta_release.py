@@ -17,6 +17,7 @@ import zipfile
 from pathlib import Path, PurePosixPath
 
 from build_source_patch import transplant
+from target_storage import maintain_target
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKERS = ROOT / "scripts/beta_release_workers"
@@ -186,9 +187,21 @@ def execute(args):
         config["expected_candidates"] = json.loads(
             (args.workdir / "build.json").read_text(encoding="utf8")
         )
+    # Reclaim expired owned data before allocating a build or recovery copy.
+    # This uses the installed scheduler's environment and existing operation
+    # lease, including on targets predating the periodic retention hook.
+    storage = maintain_target(config["host"], apply=True)
+    (args.workdir / ("storage-before-" + args.command + ".json")).write_text(
+        json.dumps(storage, indent=2) + "\n", encoding="utf8")
+    if storage["status"] != "complete":
+        raise RuntimeError("Target retention blocked; inspect storage receipt before release")
     code = (
         "CONFIG="
         + repr(config)
+        + "\n"
+        + (WORKERS / "image_retention.py").read_text(encoding="utf8")
+        + "\n"
+        + (WORKERS / "image_config.py").read_text(encoding="utf8")
         + "\n"
         + (WORKERS / (args.command + ".py")).read_text(encoding="utf8")
     )
@@ -234,6 +247,12 @@ def execute(args):
     (args.workdir / (args.command + ".json")).write_text(
         json.dumps(last, indent=2) + "\n", encoding="utf8"
     )
+    if args.command == "activate":
+        storage = maintain_target(config["host"], apply=True)
+        (args.workdir / "storage-after-activate.json").write_text(
+            json.dumps(storage, indent=2) + "\n", encoding="utf8")
+        if storage["status"] != "complete":
+            raise RuntimeError("App activated, but retention blocked; inspect activation and storage receipts")
 
 
 def main():

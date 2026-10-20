@@ -180,20 +180,27 @@ try:
     env = dict(v.split("=", 1) for v in app["Config"]["Env"])
     source = Path(mounts["/srv/app/var/plans"]) / Path(env["PLAN_STORE_PATH"]).name
     grocery = Path(mounts["/srv/app/var/grocery"]) / "grocery_data.sqlite"
-    backup = E / ("backup-" + datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ"))
-    backup.mkdir(mode=0o700)
-    for srcpath, name in [(source, "plans.sqlite3"), (grocery, "grocery.sqlite")]:
-        dest = backup / name
-        with (
-            sqlite3.connect(srcpath.as_uri() + "?mode=ro", uri=True) as src,
-            sqlite3.connect(dest) as dst,
-        ):
-            src.backup(dst)
-            assert dst.execute("PRAGMA quick_check").fetchone()[0] == "ok"
-            assert dst.execute("PRAGMA journal_mode=DELETE").fetchone()[0] == "delete"
-        dest.chmod(0o600)
-    original = table_hashes(backup / "plans.sqlite3")
-    save(backup / "table-hashes.private.json", original)
+    # Releases use the same verified, rotating recovery store as daily backup.
+    # Never create another unbounded database copy under the evidence tree.
+    scheduler = inspect("smako-scheduler-1")
+    scheduler_mounts = {m["Destination"]: m["Source"] for m in scheduler["Mounts"]}
+    scheduler_env = dict(v.split("=", 1) for v in scheduler["Config"]["Env"])
+    for destination in ("/srv/app/var/grocery", "/srv/app/var/plans",
+                        "/srv/app/var/price_universes"):
+        assert scheduler_mounts[destination] == mounts[destination], "Recovery data mounts differ"
+    for name in ("GROCERY_DATABASE_URL", "PLAN_STORE_PATH", "PRICE_UNIVERSE_CACHE_ROOT"):
+        assert scheduler_env[name] == env[name], "Recovery database environment differs"
+    assert scheduler_env.get("BACKUP_ROOT", "/srv/app/var/backups") == "/srv/app/var/backups"
+    backup_code = (
+        "import json;from deploy.scripts.backup_sqlite import _create_backup_locked;"
+        "p=_create_backup_locked();print(json.dumps({'bundle':p.name}))"
+    )
+    # The activation worker already owns the same lease through helper.
+    backup_name = json.loads(run(
+        ["docker", "exec", "--user", "10001:10001", "smako-scheduler-1",
+         "python", "-c", backup_code]))["bundle"]
+    backup = Path(scheduler_mounts["/srv/app/var/backups"]) / backup_name
+    original = table_hashes(backup / "plans/consumer_plans.sqlite3")
     price_root = Path(mounts["/srv/app/var/price_universes"]) / "active"
 
     def price_hashes():
