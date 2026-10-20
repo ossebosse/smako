@@ -2592,6 +2592,9 @@ class PersonalPlanner:
         from app.services.stable_candidate_pool import library_seed_cap, library_variant_shortlist
         selected, by_meal = [], {}
         for group in groups:
+            if not group:  # e.g. a generation that adds no recipe of this meal type
+                selected.append([])
+                continue
             meal_type = group[0].meal_type
             if meal_type not in by_meal:
                 recipes = [s.recipe for s in group if s.recipe]
