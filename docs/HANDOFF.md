@@ -1,3 +1,23 @@
+# 2026-10-20: Skalningsgranskning – separat kontraktsfix på main, skalning kvar i utkast
+
+`9e6b7a9` är godkänd och integrerad/pushad till main. Skalningsgrenarna är
+sammanslagna för granskning på `review/recipe-scaling-20261020`,
+[PR #4](https://github.com/ossebosse/smako/pull/4).
+Referenskontrakt v2 inkluderar substitution; pytest-referensen lämnade
+tidigare tak 160 aktivt och är rättad. Analysverktygets kostnadsgolv är också
+rättat för historiska kampanjer, med regressionstester.
+
+P1 kvar: tidigare generationers färdigförfinade vinnare bevaras inte.
+En liten reproduktion visar 2 → 6 trots att tidigare meny fortfarande kostar 2.
+Ingen omätt ändring av generationssökningen eller produktionsaktivering.
+Slutlig kod `a898412` har grön CI: 2 834 PASS, 10 kända XFAIL, 53 SKIP,
+inklusive webbläsare. 91 fokuserade lokala tester passerar. Main-rättningens
+separata full-CI är också grön. Lokala stora prov avbröts vid värddatorns
+minnes-/växlingsfilgräns; nya stora skalningsmätningar saknas.
+[Full rapport och reproduktion](reviews/recipe-scaling-review-20261020.md).
+
+---
+
 # 2026-10-19/20: Receptskalning (Claude) – gren, ej aktiverat
 
 - Gren `perf/recipe-scaling-20261019`. Rapport:
