@@ -67,6 +67,19 @@ Antalen är räknade från pytest-progressen eftersom dubbla `-q` utelämnar
 totalsammanfattningen. Efter denna kodversion tillkommer bara den separat
 provade radslutshanteringen i paketeraren.
 
+Den separat integrerade lagringskoden `d9f8dbf` på main har också
+[grön full CI](https://github.com/ossebosse/smako/actions/runs/39411817580):
+**2 836 PASS, 10 kända XFAIL, 53 SKIP**, inklusive webbläsare och Dockerprovet.
+Alla drift-/releasefiler är hashidentiska med de granskade filerna på
+skalningsgrenen. Efter detta ändras endast dokumentation.
+
+Slutkandidatens egen Linuxruntime klarar dessutom **26 PASS, 0 SKIP** för
+backup/restore, käll-/kommunretention, avbruten städning, skyddade referenser
+och driftlåset. Provet använder temporära fixturer i en skrivskyddad
+container utan nät eller produktionsvolymer, med 768 MiB minnesgräns.
+Pytest tillfördes som tillfällig testkod i tmpfs; inget installerades i
+imagen eller på servern. Kandidatens egna servicemoduler användes.
+
 ## Aktivering och kvarvarande avgränsning
 
 Schedulerkandidaten paketeras med exakt granskade ändringar i tio filer på
@@ -95,6 +108,12 @@ ledigt driftlås, backup och kontroll att samma bas fortfarande kör. Bytet ska
 endast ändra scheduler-image/BUILD_ID; app, schema, volymer och övrig miljö
 bevaras. Efteråt verifieras underhållskvitto, aktuella priser, readiness och
 bevarade användardata. Återgång sker med föregående image, aldrig äldre DB.
+
+Sista separata läsning 11:09 UTC: HTTP 200/ready i både Lund och Malmö,
+oförändrad appversion och 82 913 460 224 byte ledigt. Den samlade
+`smako_ops status`-läsningen nådde däremot sin 90-sekundersgräns vid
+11:03-kontrollen och rapporterade serverdelen som **unknown**.
+Direkt readiness ersätter inte den saknade fullständiga driftobservationen.
 
 Ingen app- eller scheduleraktivering, ny timer eller ändring av
 Windowsuppgiften ingår i den genomförda rensningen.

@@ -7,6 +7,9 @@ refreshjobb och i appuppdateringsflödet. Aktuella priser, LKG,
 importidentiteter, observationstider och minst två verifierade backuper
 bevaras. Full CI för motsvarande granskade kod: 2 862 PASS, 10 kända XFAIL,
 53 SKIP. Radslutstillägget klarar ytterligare 21 riktade tester.
+Den separata main-integrationen `d9f8dbf` har grön full CI:
+**2 836 PASS, 10 kända XFAIL, 53 SKIP**. Kandidatens egen Linuxruntime klarar
+26 isolerade retentions-/backup-prov, med 768 MiB och utan produktionsvolymer.
 
 En avgränsad serverrensning är genomförd: 83,36 GB gamla dagsbackuper och
 orefererade prisartefakter borttagna. Efterkontroll ready 200 och identiska
@@ -19,6 +22,9 @@ image-BUILD_ID `source-ops-8f9221e168d8`. Tio ändrade runtimefiler och
 623 hashidentiska; exakt konfiguration, importprov utan nät och två lager
 i stället för basbildens 199. **Inte aktiverad.** Ordinarie driftlås var
 upptaget vid förnyad källinventering; inget jobb avbröts.
+11:09 UTC svarade Lund/Malmö ready 200 och servern hade 82,91 GB ledigt.
+Den föregående samlade statusläsningen nådde sin tidsgräns och gav
+serverstatus unknown; en ny komplett driftkontroll behövs före aktivering.
 
 Aktiv scheduler är fortfarande `hemkop-context-scheduler-c6607a095018`;
 app `app-bac0fc15ca9a-512ef3ea`. Ingen Windowsuppgift eller timer ändrad.
