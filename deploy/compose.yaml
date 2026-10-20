@@ -199,6 +199,8 @@ services:
       SOURCE_RETRY_STATUS_PATH: ${SOURCE_RETRY_STATUS_PATH:-/srv/app/var/reports/operations/source-retry-status.json}
       BACKUP_ROOT: ${BACKUP_ROOT:-/srv/app/var/backups}
       BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-14}
+      BACKUP_MAX_COUNT: ${BACKUP_MAX_COUNT:-3}
+      BACKUP_MAX_BYTES: ${BACKUP_MAX_BYTES:-34359738368}
       INTERNAL_APP_BASE_URL: ${INTERNAL_APP_BASE_URL:-http://app:8000}
     depends_on:
       # Do not depend on app: a missing active artifact can make it restart
@@ -257,6 +259,8 @@ services:
       SOURCE_RETRY_STATUS_PATH: ${SOURCE_RETRY_STATUS_PATH:-/srv/app/var/reports/operations/source-retry-status.json}
       BACKUP_ROOT: ${BACKUP_ROOT:-/srv/app/var/backups}
       BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-14}
+      BACKUP_MAX_COUNT: ${BACKUP_MAX_COUNT:-3}
+      BACKUP_MAX_BYTES: ${BACKUP_MAX_BYTES:-34359738368}
       INTERNAL_APP_BASE_URL: ${INTERNAL_APP_BASE_URL:-http://app:8000}
     profiles: ["ops"]
     command:

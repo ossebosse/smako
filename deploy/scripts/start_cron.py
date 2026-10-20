@@ -11,6 +11,7 @@ import json
 import os
 import re
 import shlex
+import subprocess
 from pathlib import Path
 
 from grocery_data.app.services.coop_refresh_configuration import (
@@ -148,6 +149,15 @@ def main() -> None:
         ), encoding="utf-8",
     )
     cron_file.chmod(0o644)
+    # Installation/update starts the scheduler through this same entry point.
+    # Use the ordinary operation lease and UID; a busy lease defers cleanup to
+    # the existing backup/refresh job, never a competing timer or root deletion.
+    maintenance = subprocess.run(
+        ["runuser", "-u", "app", "--", "python", "-m",
+         "deploy.scripts.storage_maintenance", "--apply"], check=False)
+    if maintenance.returncode:
+        print(json.dumps({"event": "storage_maintenance_deferred",
+                          "exit_code": maintenance.returncode}), flush=True)
     os.execv("/usr/sbin/cron", ["cron", "-f"])
 
 

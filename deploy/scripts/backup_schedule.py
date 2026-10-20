@@ -65,6 +65,8 @@ def run_due_locked(*, now=None):
     from deploy.scripts.backup_sqlite import _create_backup_locked
     try:
         if not due(now=now):
+            from deploy.scripts.storage_maintenance import run_due_locked as maintain
+            maintain(now=now)
             return None
         bundle = _create_backup_locked(now=now)
     except Exception as exc:  # noqa: BLE001 - do not block healthy source work

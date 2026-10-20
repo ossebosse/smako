@@ -9,7 +9,7 @@ import os
 import re
 import shutil
 import sqlite3
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 from uuid import uuid4
@@ -496,6 +496,10 @@ def _create_backup_locked(*, now: datetime | None = None) -> Path:
     if not city_slug:
         raise ValueError("PRICE_UNIVERSE_CITY cannot form a safe backup scope")
     relative_manifest = Path(f"active/city-{city_slug}.json")
+    # Rotation must not depend on being able to allocate another full copy.
+    # The maintenance routine preserves two checksum-verified recovery bundles.
+    from deploy.scripts.storage_maintenance import run_locked
+    run_locked(now=timestamp, apply=True)
     _preflight_backup_space(backup_root, relative_manifest)
     temporary.mkdir(mode=0o700, exist_ok=False)
     _chmod_private(temporary, directory=True)
@@ -625,18 +629,8 @@ def _create_backup_locked(*, now: datetime | None = None) -> Path:
         shutil.rmtree(temporary, ignore_errors=True)
         raise
 
-    cutoff = timestamp - timedelta(days=retention_days)
-    for candidate in backup_root.iterdir():
-        if not candidate.is_dir() or candidate.name.startswith("."):
-            continue
-        try:
-            observed = datetime.strptime(candidate.name, "%Y%m%dT%H%M%SZ").replace(
-                tzinfo=UTC
-            )
-        except ValueError:
-            continue
-        if observed < cutoff:
-            shutil.rmtree(candidate)
+    from deploy.scripts.storage_maintenance import maintain_backups
+    maintain_backups(backup_root, now=timestamp, apply=True)
     return final
 
 
