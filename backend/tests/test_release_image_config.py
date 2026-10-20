@@ -19,6 +19,9 @@ def test_unsupported_image_metadata_requires_review_instead_of_silent_loss():
         with pytest.raises(ValueError, match="full release review"):
             module.flatten_instructions({field: True})
 
+    assert 'CMD ["python", "app.py"]' in module.flatten_instructions(
+        {"ArgsEscaped": True, "Cmd": ["python", "app.py"]})
+
 
 @pytest.mark.skipif(sys.platform != "linux", reason="Offline Docker filesystem proof runs on Linux")
 def test_flattened_updates_preserve_configuration_and_files_without_accumulating_layers(tmp_path):
