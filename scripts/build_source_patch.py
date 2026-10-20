@@ -5,6 +5,7 @@ and reviewed candidate. Only candidate deltas are applied to the deployed base;
 unrelated newer consumer/meal code never enters the source image.
 """
 import argparse
+import base64
 import difflib
 import hashlib
 import json
@@ -42,6 +43,17 @@ def transplant(base, before, after):
     return result.encode()
 
 
+def exact_runtime_base(base, path, runtime):
+    """Allow only a proven newline representation of the reviewed Git base."""
+    encoded = runtime["files"][path]
+    actual = base64.b64decode(encoded, validate=True) if encoded is not None else None
+    if actual == base:
+        return actual
+    if base is None or actual is None or not path.endswith(".py") or actual.replace(b"\r\n", b"\n") != base:
+        raise ValueError("runtime source differs from reviewed Git base: " + path)
+    return actual
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('base-commit', 'parent-commit', 'commit', 'base-image', 'base-tag'):
@@ -49,6 +61,8 @@ def main():
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--base-config', type=Path, required=True,
                    help='Private docker image inspect JSON for the pinned base image')
+    p.add_argument('--base-files', type=Path,
+                   help='Private {image,files} JSON with base64 bytes from the pinned runtime')
     args = p.parse_args()
     for name in ('base_commit', 'parent_commit', 'commit'):
         setattr(args, name, git('rev-parse', '--verify', getattr(args, name)+'^{commit}').decode().strip())
@@ -61,15 +75,19 @@ def main():
                 or x in ('grocery_data/__main__.py', 'grocery_data/ops.py', 'backend/app/services/price_universe.py')]
     if not selected:
         raise ValueError('empty source patch')
+    runtime = json.loads(args.base_files.read_bytes()) if args.base_files else None
+    if runtime is not None and (runtime.get("image") != args.base_image or set(runtime["files"]) != set(selected)):
+        raise ValueError("runtime file inventory does not match the pinned image and selected files")
     files, base_hashes, hashes = {}, {}, {}
     for path in selected:
         base = blob(args.base_commit, path)
+        actual = exact_runtime_base(base, path, runtime) if runtime is not None else base
         result = transplant(base, blob(args.parent_commit, path), blob(args.commit, path))
         if result is None:
             raise ValueError('source file deletion requires separate packaging review')
         files[path] = result
         hashes[path] = hashlib.sha256(result).hexdigest()
-        base_hashes[path] = hashlib.sha256(base).hexdigest() if base is not None else None
+        base_hashes[path] = hashlib.sha256(actual).hexdigest() if actual is not None else None
     manifest = {'schema': 'smako-source-patch-v2', 'commit': args.commit,
                 'parent_commit': args.parent_commit, 'base_commit': args.base_commit,
                 'base_image': args.base_image, 'base_tag': args.base_tag,
