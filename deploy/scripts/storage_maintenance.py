@@ -277,6 +277,25 @@ def run_locked(*, now=None, apply=False):
         except (OSError, ValueError, KeyError, TypeError) as exc:
             rows.append({"kind": function.__name__, "status": "blocked",
                          "error_type": type(exc).__name__})
+    floor = next((r for r in rows if r.get("kind") == "backups"), {})
+    if len(floor.get("protected", [])) >= 2 and not any(r.get("status") == "blocked" for r in rows):
+        import sqlite3
+
+        from deploy.scripts.backup_sqlite import configured_database_paths
+        from grocery_data.app.services.snapshot_retention import maintain
+        try:
+            database = configured_database_paths()["grocery/grocery_data.sqlite"]
+            raw = Path(os.environ["GROCERY_RAW_SNAPSHOT_ROOT"])
+            rows.append(maintain(database, raw, universe=universe,
+                                operations=universe.parent / "reports/operations",
+                                now=now, apply=apply))
+            from deploy.scripts.municipal_retention import maintain as maintain_municipal
+            rows.append(maintain_municipal(now=now, apply=apply))
+        except (OSError, ValueError, KeyError, TypeError, sqlite3.Error) as exc:
+            rows.append({"kind": "source_history", "status": "blocked",
+                         "error_type": type(exc).__name__})
+    else:
+        rows.append({"kind": "source_history", "status": "deferred_recovery_floor"})
     result = {"schema": "smako-storage-maintenance-v1", "observed_at": now.isoformat(),
               "status": "blocked" if any(r.get("status") == "blocked" for r in rows) else "complete",
               "applied": apply, "categories": rows,
@@ -296,6 +315,7 @@ def main():
 
     from deploy.scripts.backup_sqlite import configured_database_paths
     from grocery_data.app.services.manual_refresh_operations import (
+        RefreshAlreadyRunningError,
         RefreshRunLock,
         production_refresh_lock_path,
     )
@@ -305,9 +325,16 @@ def main():
     databases = configured_database_paths()
     lock = RefreshRunLock(production_refresh_lock_path(
         databases["grocery/grocery_data.sqlite"], Path(os.environ["PRICE_UNIVERSE_CACHE_ROOT"])))
-    lock.acquire()
     try:
-        print(json.dumps(run_locked(apply=args.apply), sort_keys=True))
+        lock.acquire()
+    except RefreshAlreadyRunningError:
+        print(json.dumps({"schema": "smako-storage-maintenance-v1", "status": "deferred",
+                          "reason": "operation_lock_held", "applied": False}))
+        return 1
+    try:
+        result = run_locked(apply=args.apply)
+        print(json.dumps(result, sort_keys=True))
+        return 0 if result["status"] == "complete" else 1
     finally:
         lock.release()
 
@@ -326,4 +353,4 @@ def run_due_locked(*, now=None):
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

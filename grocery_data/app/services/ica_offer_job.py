@@ -76,6 +76,8 @@ async def run_structured_offer_job(*, city: str, root: Path, now=None, force=Fal
             raise ValueError('ICA source database escaped its owned root')
         with sqlite3.connect(f'file:{source}?mode=ro', uri=True) as src, sqlite3.connect(database) as dst:
             src.backup(dst)
+        from grocery_data.app.services.snapshot_retention import compact_candidate_copy
+        compact_candidate_copy(database, attempt.with_name(attempt.name + '-raw'), now=now)
     engine = create_database_engine('sqlite:///' + database.resolve().as_posix())
     create_schema(engine)
     try:

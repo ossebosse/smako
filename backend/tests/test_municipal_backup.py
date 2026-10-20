@@ -10,7 +10,8 @@ from deploy.scripts.municipal_backup import current_files, restored_target
 from grocery_data.app.services.municipal_rollout import add_municipality
 
 
-def test_new_municipalities_and_current_source_graph_restore_without_changing_age(monkeypatch, tmp_path):
+@pytest.mark.parametrize("references", ["approved", "partial_approved"])
+def test_new_municipalities_and_current_source_graph_restore_without_changing_age(monkeypatch, tmp_path, references):
     paths = _configure_backup(monkeypatch, tmp_path)
     root = paths['grocery'].parent
     monkeypatch.setenv('REFRESH_CITY', 'Lund')
@@ -36,7 +37,7 @@ def test_new_municipalities_and_current_source_graph_restore_without_changing_ag
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     state = source_root / '1480/source-state.json'
     state.write_text(json.dumps({'last_outcomes': {'database': 'diagnostic/path/only.sqlite'},
-        'approved': {'store': [{'database': '1480/attempts/current.sqlite',
+        references: {'store': [{'database': '1480/attempts/current.sqlite',
         'sha256': digest, 'observed_at': '2026-09-01T00:00:00+00:00'}]}}))
     now = datetime(2026, 9, 3, 2, 47, tzinfo=UTC)
     bundle = backup_sqlite.create_backup(now=now)
@@ -53,7 +54,7 @@ def test_new_municipalities_and_current_source_graph_restore_without_changing_ag
     assert result['status'] == 'verified'
     assert hashlib.sha256(source.read_bytes()).hexdigest() == digest
     assert registry.read_bytes() == original_registry
-    assert json.loads(state.read_bytes())['approved']['store'][0]['observed_at'] == '2026-09-01T00:00:00+00:00'
+    assert json.loads(state.read_bytes())[references]['store'][0]['observed_at'] == '2026-09-01T00:00:00+00:00'
     assert backup_schedule.due(now=now + timedelta(days=1))
     add_municipality('1283', '25441', persist=True)
     assert backup_schedule.due(now=now + timedelta(minutes=15))
