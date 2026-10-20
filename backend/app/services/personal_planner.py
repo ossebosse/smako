@@ -2716,7 +2716,8 @@ class PersonalPlanner:
                             and getattr(self._candidates, "__func__", None) is PersonalPlanner._candidates):
                         pools[slot.meal_type] = self._candidates(
                             self.meals[slot.meal_type], qualified_results=qualified_results)
-                    elif (replace_slot and getattr(self._candidates, "__func__", None)
+                    elif (replace_slot and hasattr(self._candidates, "__wrapped__")
+                          and getattr(self._candidates, "__func__", None)
                           is PersonalPlanner._candidates):
                         pools[slot.meal_type] = self._candidates(
                             self.meals[slot.meal_type],
