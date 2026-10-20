@@ -837,10 +837,6 @@ class MenuOptimizer:
         Qualification and product caches belong to the caller's ONE planner.
         This additional 256-entry cache shares exact ordered baskets between
         failed seed attempts and substitutions, with final/prefix checks separate.
-        Each distinct publication prefix completes its bounded refinement. Its
-        winner competes under the same current objective with later prefixes;
-        adding recipes cannot discard a previously completed valid candidate.
-        Only one completed winner is retained, not another planner per prefix.
         Nothing survives this call; the caller independently audits the winner.
         This is a bounded neighbourhood search, not an optimality proof.
         """
@@ -930,7 +926,42 @@ class MenuOptimizer:
                     break
             return incumbent
 
-        def finish_generation(incumbent, previous, generation):
+        incumbent, previous, last_error = None, None, None
+        for generation, options in cohorts:
+            if previous == options:
+                continue
+            prior_options, previous = previous, options
+            if any(not group for group in options):
+                continue
+            if incumbent is None:
+                seed = seed_selector(options) if seed_selector else options
+                attempts = [seed] if seed == options else [seed, options]
+                for index, seed_options in enumerate(attempts):
+                    start = len(trace)
+                    before_hits = hits
+                    try:
+                        incumbent = self.optimize_slots(
+                            seed_options, evaluate=cached_evaluate, accepts=accepts, score=score,
+                            _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
+                            search_trace=trace, decision_observer=decision_observer, **search_options)
+                    except (IncompleteBasketError, ValueError) as exc:
+                        last_error = exc
+                    finally:
+                        for row in trace[start:]:
+                            row.update(library_generation=generation, library_phase="seed",
+                                       seed_full_pool_retry=index > 0,
+                                       seed_variants_available=sum(map(len, options)),
+                                       seed_variants_retained=sum(map(len, seed_options)))
+                        if len(trace) > start:
+                            trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
+                    if incumbent is not None:
+                        break
+                continue
+            prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
+            additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]
+                         for index, group in enumerate(options)]
+            incumbent = improve(incumbent, additions, generation, "substitution")
+        if incumbent is not None:
             # New ingredients can make an older recipe economical too. Revisit
             # every qualified recipe against the complete incumbent basket,
             # rather than launching another combinatorial beam search.
@@ -1012,67 +1043,6 @@ class MenuOptimizer:
                 proposals = joint_proposals(previous, incumbent[0])
                 incumbent = probe_pairs(incumbent, proposals, "joint_refinement", rank, 256, 32)
             return incumbent
-
-        def complete_prefix(incumbent, options, generation):
-            nonlocal secondary_best
-            # Prefix-only probes must not redirect a later generation's
-            # secondary/joint anchor. Its original trajectory still competes
-            # with the independently retained completed prefix.
-            coarse_best = secondary_best
-            try:
-                return finish_generation(incumbent, options, generation)
-            finally:
-                secondary_best = coarse_best
-
-        incumbent, previous, last_error = None, None, None
-        completed_best = None
-        rank = refinement_score or retention_score
-        for generation, options in cohorts:
-            if previous == options:
-                continue
-            prior_options, previous = previous, options
-            if any(not group for group in options):
-                continue
-            if incumbent is None:
-                seed = seed_selector(options) if seed_selector else options
-                attempts = [seed] if seed == options else [seed, options]
-                for index, seed_options in enumerate(attempts):
-                    start = len(trace)
-                    before_hits = hits
-                    try:
-                        incumbent = self.optimize_slots(
-                            seed_options, evaluate=cached_evaluate, accepts=accepts, score=score,
-                            _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
-                            search_trace=trace, decision_observer=decision_observer, **search_options)
-                    except (IncompleteBasketError, ValueError) as exc:
-                        last_error = exc
-                    finally:
-                        for row in trace[start:]:
-                            row.update(library_generation=generation, library_phase="seed",
-                                       seed_full_pool_retry=index > 0,
-                                       seed_variants_available=sum(map(len, options)),
-                                       seed_variants_retained=sum(map(len, seed_options)))
-                        if len(trace) > start:
-                            trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
-                    if incumbent is not None:
-                        break
-                if incumbent is not None:
-                    completed = complete_prefix(incumbent, options, generation)
-                    if completed_best is None or rank(*completed) < rank(*completed_best):
-                        completed_best = completed
-                continue
-            prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
-            additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]
-                         for index, group in enumerate(options)]
-            incumbent = improve(incumbent, additions, generation, "substitution")
-            # Complete each published prefix before extending its pool. Keep
-            # the substitution trajectory separate so earlier finalization
-            # cannot remove proposals made by the original larger search.
-            completed = complete_prefix(incumbent, options, generation)
-            if completed_best is None or rank(*completed) < rank(*completed_best):
-                completed_best = completed
-        if completed_best is not None:
-            return completed_best
         if last_error is not None:
             raise last_error
         raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")
