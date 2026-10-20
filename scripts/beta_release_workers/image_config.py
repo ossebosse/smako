@@ -24,8 +24,13 @@ def final_image_config(base, *, release, commit, base_image, managed_kind="app-r
 def flatten_instructions(config):
     # These uncommon metadata types need a separately reviewed full release;
     # silently dropping them would make an apparently identical image unsafe.
-    if config.get("Volumes") or config.get("OnBuild") or config.get("Healthcheck") or config.get("ArgsEscaped"):
+    if config.get("Volumes") or config.get("OnBuild") or config.get("Healthcheck"):
         raise ValueError("Flattening requires a full release review for this image configuration")
+    # BuildKit's dispatchCmd sets ArgsEscaped=true even for JSON-form Linux
+    # commands. Re-emitting CMD preserves it; the exact Config check remains
+    # authoritative rather than guessing based on shell/exec form.
+    if config.get("ArgsEscaped") and config.get("Cmd") is None:
+        raise ValueError("Flattening requires a full release review for ArgsEscaped without CMD")
     lines = ["FROM scratch", "COPY --from=patched / /"]
     for entry in config.get("Env", []):
         key, value = entry.split("=", 1)
