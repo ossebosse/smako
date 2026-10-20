@@ -1,20 +1,23 @@
-# 2026-10-19: Receptskalning steg 1 (Claude) – gren, ej aktiverat
+# 2026-10-19/20: Receptskalning (Claude) – gren, ej aktiverat
 
 - Gren `perf/recipe-scaling-20261019`. Rapport:
   [recipe-scaling-20261019.md](reviews/recipe-scaling-20261019.md).
-- 1 000 recept klarar inte 30 s: varm standard cirka 85 s i Lund och 126 s
-  i Malmö (före 125/165 s; 222 recept nu 36/41 s). Samma pris och resultathash.
+- Varm standard: 1 000 recept 44 s i Lund och 52 s i Malmö, 2 000 recept 61/76 s
+  (före arbetet 125/165 s vid 1 000). 222 recept 33–36 s. Exakta ändringar:
+  samma hash. Substitutionstaket `LIBRARY_SUBSTITUTION_POOL_LIMIT=160`
+  (ägarbeslut 2026-10-20, 0 = hela svepet) gav samma pris i alla 14 profil/stad-
+  körningar vid 1 000 recept; 40 och 120 gav dyrare menyer och förkastades.
 - `46a79ea`: behovsrader återanvänds inom anropet och produktupplösning delas
   mellan anrop med samma scope (`SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av).
   Delad enreceptskvalificering prövades och förkastades (ingen nettovinst).
-- En bevisad kostnadsgräns beskär 0 av 3 661 veckor (högst 51 % av beloppet).
-- Två exakta rättelser: parlikhet räknas vid behov (tog bort en kvadratisk
-  kostnad, cirka 28 s per anrop vid 1 000 recept) och variantbevis evakueras
-  inte längre över 2 048 varianter.
-- Huvudhinder: substitutionssvepet för nya generationer saknar tak och står
-  för 54 % av korgarna vid 1 000. Kräver ett produktbeslut.
+- `fd8d97d`: import publicerar aldrig ett paket över 16 MiB (det gjorde hela
+  biblioteket oläsbart). Stora utkast måste delas upp.
+- Granska: Lund 2 000 recept ger dyrare meny än 1 000 även utan tak; Malmö
+  2 000 når 2,96 GB RSS; fullbiblioteksreferens vid 1 000/2 000 ej körd.
 - Separat gren `fix/full-library-reference-contract`: `--uncapped-reference`
-  kräver `seed=0`, `refinement=0`, `seed_variant_shortlist=false`.
+  kräver `seed=0`, `refinement=0`, `seed_variant_shortlist=false`. Vid
+  sammanslagning med skalningsgrenen ska kontraktet även kräva `substitution=0`
+  (matrisens `--uncapped` sätter och rapporterar det nu).
 
 # 2026-10-18/19: Priser återställda; reläschemabyte väntar administratör
 

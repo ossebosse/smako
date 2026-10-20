@@ -2,18 +2,19 @@
 
 Uppgift: [CLAUDE-RECIPE-SCALING.md](../CLAUDE-RECIPE-SCALING.md). Steg 1
 (reproducerbar referens och profilering), tre ändringar som inte ändrar
-resultatet, ett prövat och förkastat förslag och en mätning av om en bevisad
-kostnadsgräns kan beskära substitutionen. Ingen beskärning, inga tak och inga
-kvalitetskrav är ändrade.
+resultatet, ett prövat och förkastat förslag, en mätning av om en bevisad
+kostnadsgräns kan beskära substitutionen, samt ett nytt tak för substitutionen
+(ägarbeslut 2026-10-20, avsnitt 4). Inga kvalitetskrav är ändrade.
 Inga syntetiska recept ligger i produktionsbiblioteket.
 
 ## 1. Beslut
 
-**1 000 recept klarar inte 30 sekunder.** Varm standardplanering tar efter
-alla ändringar cirka 85 s i Lund och 126 s i Malmö (125 s och 165 s före).
-Med 222 recept är tiden nu 36 s respektive 41 s (43 och 58 s före). Kostnaden
-växer ungefär linjärt med antal nya recept; den kvadratiska delen är borttagen.
-Resultathash och pris är oförändrade i varje jämförelse.
+**1 000 recept: cirka 44 s i Lund och 52 s i Malmö, inte under 30 s.**
+Varm standardplanering före allt arbete: 125 s och 165 s. Med 2 000 recept:
+61 s och 76 s (utan substitutionstaket 136 s och 202 s). Med dagens 222 recept:
+33–36 s. De exakta ändringarna ger samma resultathash som före. Substitutionstaket
+(160) ger samma pris som hela svepet i alla 14 profil/stad-körningar vid
+1 000 recept och i de fyra körningarna vid 2 000; 13 av 14 har samma hash.
 
 Det som hindrar nästa nivå, i storleksordning:
 
@@ -149,18 +150,74 @@ Sökfaser i Lund (ett kallt anrop, [search-phases.json](recipe-scaling-20261019/
 
 Rådata per körning: [measurements.json](recipe-scaling-20261019/measurements.json).
 
-## 4. Inte gjort än
+## 4. Substitutionstak (ägarbeslut 2026-10-20)
 
-- 2 000 och 5 000 recept, övriga sex profiler och negativa fall,
-  fullbiblioteksreferens (`seed=0`, `refinement=0`, ingen variantlista),
-  omvänd körordning, samtidighet, HTTP-kö och förberedelsetid efter pris-,
-  fakta- eller receptändring.
-- Full regression körs på grenen; GitHub-CI kräver push.
+`LIBRARY_SUBSTITUTION_POOL_LIMIT` (standard 160, 0 = hela svepet som förut,
+`5e2c712`, `07346d9`, `889888d`). Varje nyare generations recept rangordnas med
+samma regel som seed-taket (billigaste kvalificerade enreceptsköp, delade
+förpackningar, två billigaste per kök) och högst 160 per måltidstyp prövas i
+varje plats. En generation inom taket prövas helt, som förut. Hela den
+aktuella poolen går fortfarande in i förfiningen (tak 90), parvisa och
+gemensamma byten. Detta är en heuristik precis som övriga tak.
 
-## 5. Rekommenderat nästa steg
+**Val av tak, 1 000 recept, alla sju matrisprofiler, pris jämfört med hela
+svepet** ([substitution-limit-sweep.json](recipe-scaling-20261019/substitution-limit-sweep.json)):
 
-1. **Produktbeslut om substitutionen** (punkt 1). Utan det växer tiden
-   linjärt med varje nytt recept; ingen exakt åtgärd återstår där.
+| Tak | Utfall |
+| ---: | --- |
+| 40 | Lund standard 5,08 kr dyrare (502,27 mot 497,19) |
+| 80 | Lund standard 11,32 kr *billigare* (485,87): sökningen är inte monoton |
+| 120 | Fördelningsprofilen dyrare: Lund +10,94 kr, Malmö +24,15 kr |
+| 160 | Samma pris i alla 14 körningar. Samma hash i 13; Lund fördelning valde en annan meny med samma pris (703,56 kr) |
+
+Vid 2 000 recept gav 160 samma pris och hash som hela svepet i Lund och Malmö
+standard och samma pris (annan likvärdig meny) i Lund fördelning. En första
+körning med taket gav `IndexError` för frukost/mellanmål när en generation inte
+tillförde någon rätt av måltidstypen; rättat i `889888d` och omkört (samma pris).
+
+**Tid, varm standard (median av två, sekunder):**
+
+| Stad | Recept | Hela svepet | Tak 160 | Korgar | Pris | Peak RSS |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Lund | 222 | 35,9 | 36,1 | 2 043 / 2 043 | 548,76 | 1,56 GB |
+| Lund | 1 000 | 85,1 | 44,4 | 5 419 / 2 944 | 497,19 | 1,76 GB |
+| Lund | 2 000 | 136,1 (n=1) | 61,0 | 10 035 / 4 045 | 518,55 | 2,06 GB |
+| Malmö | 222 | 40,5 | 33,1 | 1 472 / 1 472 | 534,92 | 2,47 GB |
+| Malmö | 1 000 | 126,0 | 51,9 | 5 720 / 2 917 | 495,85 | 2,66 GB |
+| Malmö | 2 000 | 201,7 (n=1) | 76,4 | 9 713 / 3 867 | 487,75 | 2,96 GB |
+
+Vid 222 recept binder taket inte (samma korgar och hash); skillnaden i Malmö
+där är mätvariation mellan körtillfällen, inte taket. Kall tid med tak 160:
+Lund 67/105 s, Malmö 75/122 s vid 1 000/2 000 recept, varav 31–61 s kvalificering.
+
+Observationer att granska:
+
+- Lund 2 000 recept ger 518,55 kr, dyrare än 1 000 recept (497,19), även med
+  hela svepet. 2 000-biblioteket importerades som två generationer (778 + 1 000)
+  och sökvägen blir en annan. Uppgiftens krav att behålla en tidigare giltig
+  kandidat vid bibliotekstillväxt är alltså inte uppfyllt av dagens sökning.
+  Det är inte orsakat av taket.
+- Malmö 2 000 recept når 2,96 GB peak RSS, nära serverns 3 GiB-gräns.
+- Vid 2 000 recept är kandidatkvalificeringen nu den största enskilda kostnaden
+  vid kall start (cirka 60 s), och växer linjärt.
+- Fullbiblioteksreferensen (`--uncapped`, nu även med substitution 0) är inte
+  körd vid 1 000/2 000; jämförelsen ovan är mot hela substitutionssvepet med
+  övriga tak oförändrade.
+
+## 5. Inte gjort än
+
+- 5 000 recept, övriga profiler vid 2 000, negativa fall,
+  fullbiblioteksreferens (`seed=0`, `refinement=0`, ingen variantlista,
+  substitution 0) vid 1 000/2 000, omvänd körordning, samtidighet, HTTP-kö och
+  förberedelsetid efter pris-, fakta- eller receptändring.
+- GitHub-CI kräver push. Lokal full offline-svit på `5e2c712`: 2 760 PASS,
+  10 XFAIL (kända), 53 SKIP (saknad lokal evidens); 41 webbläsartester kunde
+  inte starta en webbläsare i denna miljö och ska verifieras i CI.
+
+## 6. Rekommenderat nästa steg
+
+1. **Fullbiblioteksreferens vid 1 000 och 2 000** för att pröva taken mot hela
+   biblioteket, och åtgärd för att större bibliotek inte ska ge dyrare meny.
 2. **`BasketOptimizer.optimize`** är nu största delen av varje korg. Exakt
    återanvändning mellan veckor som delar fyra av fem recept kräver ändringar i
    den gemensamma optimeraren och en egen granskning.
