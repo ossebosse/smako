@@ -1,3 +1,30 @@
+# 2026-10-20: Kategorisökning integrerad, appaktivering väntar på driftlås
+
+Användaren har godkänt implementation, driftåtgärd, commit och betaaktivering.
+PR #6 är integrerad på main `61c1a8f`; runtimekod `73306ac`.
+Full CI är grön för både koden och main-integrationen. 26 riktade tester,
+24 jämförelsekörningar och två fullpoolskontroller är godkända.
+Blandade kvoter tar ungefär halva tiden med samma pris och matkök i Lund
+och Malmö. Helt vegetariskt i Lund är något långsammare.
+[Verifiering och driftåtgärd](reviews/category-aware-recipe-search-implementation-20261020.md).
+
+**Ännu inte aktiverad:** paket `app-73306acc382d-0d139487` finns i
+`.local/category-search-20261020/release-final`. `prepare` är godkänd,
+endast tre appfiler ändras. Första `build` stoppades före byggandet av
+`operation_lock_held`; samma paket kan byggas när låset är ledigt.
+Ordinarie `run_daily_refresh.py` arbetar med Hemköp i Malmö sedan
+20:30 UTC. Ingen tjänst eller insamling har avbrutits. Fortsätt enligt
+`docs/BETA.md`: bygg, verifiera exakt image, aktivera med backup och
+kontrollera publikt menybygge/receptbyte. Begär inte nytt godkännande.
+Lokala hjälpare `probe-final.py` och `verify_http.py` finns i samma
+`.local/category-search-20261020/`; aktiveringskvitto saknas ännu.
+
+Willys-felet är återställt: exakt redan aktiv Lundartefakt återlevererad
+via installerat relä, kvittens `already_active` 20:11:30 UTC. Ingen ny
+insamling, ingen förnyad observationstid, inget schema ändrat.
+
+---
+
 # 2026-10-20: Självstädning aktiverad och efterkontrollerad
 
 Godkänd scheduleraktivering är slutförd 15:37:12 UTC (17:37 svensk tid).
