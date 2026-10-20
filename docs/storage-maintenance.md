@@ -292,7 +292,11 @@ granskning. Återinför inte en root-ägd daterad katalog i den dagliga rotation
 
 Återställning startar ingen container och ändrar ingen produktionskonfiguration.
 
-## Begränsa fortsatt tillväxt
+## Historiska driftrekommendationer före retentionen 2026-10-20
+
+Backup- och releasebeteendet i denna äldre lista ersätts av policyn
+**Automatisk retention, 2026-10-20** ovan. Referensskydden för okända arkiv,
+volymer och väntande arbete gäller fortsatt.
 
 - Skapa inga nya fullständiga daterade projekt-/databaskopior på servern som
   standard. Använd det permanenta repot och avgränsade fixtures; arkivera granskade

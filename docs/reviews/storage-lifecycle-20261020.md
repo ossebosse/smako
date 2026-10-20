@@ -82,6 +82,54 @@ imagen eller på servern. Kandidatens egna servicemoduler användes.
 
 ## Aktivering och kvarvarande avgränsning
 
+### Fördjupad targetkontroll efter godkännande
+
+Användaren godkände scheduleraktiveringen. Driftkontrollen 13:14 UTC var
+komplett, med ready 200 och samma publicerade/laddade prismanifest. Det
+ordinarie källjobbet fick avslutas innan aktiveringsarbetaren tog driftlåset.
+En ny kontroll under låset visade 89 105 842 176 byte ledigt.
+
+Den skrivskyddade inventeringen i kandidat `8f9221e168d8` avslöjade ett
+prestandafel: referensfrågorna läste hela historiken och skulle återupprepas
+under varje snapshots skrivtransaktion. Efter drygt sju minuter hade
+processen läst cirka 101,6 GB logiskt och 30,7 GB från disk. Vår exakt
+identifierade inventeringscontainer stoppades; exit 137 kom från det
+avsiktliga stoppet, inte en belagd OOM. Driftlåset frigjordes. Ingen
+källretention, ny backup eller scheduleraktivering hann köras.
+
+Rättning `90bfde350569` avgränsar relationella frågor till kandidatgrupper
+och en snapshot vid skrivkontrollen. Tre ägda index stöder prisers
+source-product-referenser, kampanjers price-observation-referenser och
+råfilers sökvägar. Index skapas idempotent vid tillämpning; oförenliga
+indexdefinitioner avvisas. Vid första aktivering förbereds de under samma
+driftlås efter kontroll av minst två hashverifierade återställningskopior.
+Ingen källobservation, prisrad eller tid ändras av indexförberedelsen.
+
+Rättningen skyddar också relationer mellan snapshots som annars skulle
+ändras genom `SET NULL`. Återupptagen råfilsstädning kontrollerar aktuella
+referenser, och kandidat-/råfilsrader läses i små grupper.
+
+29 riktade Windowsprov passerade, med ett känt symlänks-skip. Den nya
+slutkandidatens egen Linuxruntime klarar **30 PASS, 0 SKIP**, med 768 MiB,
+utan nät eller produktionsvolymer. Prestandaregressionen använder 50 000
+ovidkommande historikposter per tabell och en begränsad budget av SQLite-
+instruktioner. Ruff och compileall passerar.
+
+Ersättningskandidat:
+
+- Image: `sha256:6cb2dab0e9cc2b904bab85b4a960107f681dd58e6c5d2205c8279b3f8bfb3095`.
+- BUILD_ID: `source-ops-90bfde350569`.
+- Paket-SHA: `f22d35765377796ff65e0749ab5361a1d856f2d81745673335774e8540518f9c`.
+- Tio ändrade runtimefiler och 623 hashidentiska; exakt verifierad
+  imagekonfiguration, två lager, 2 112 744 265 byte.
+- Privat underlag: `.local/review-scaling-20261020/storage-release-v3/`
+  och `/opt/smako/evidence/storage-maintenance-90bfde350569/`.
+
+Den äldre kandidaten nedan ska inte aktiveras. Aktivering och slutkontroller
+för ersättningskandidaten redovisas separat när de är genomförda.
+
+### Tidigare byggunderlag, före targetinventeringen
+
 Schedulerkandidaten paketeras med exakt granskade ändringar i tio filer på
 den aktiva basen `c6607a095018`. Övrig runtime ska vara hashidentisk.
 Privat slutunderlag finns i `.local/review-scaling-20261020/storage-release-v2/`.

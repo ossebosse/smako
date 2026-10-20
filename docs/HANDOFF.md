@@ -1,4 +1,28 @@
-# 2026-10-20: Självstädning verifierad – schedulerkandidat väntar aktivering
+# 2026-10-20: Godkänd självstädning – ersättningskandidat efter targetkontroll
+
+Användaren har godkänt scheduleraktivering. Godkännandet gäller fortsatt.
+Det ordinarie källjobbet fick avslutas och driftlåset togs, men den
+skrivskyddade inventeringen avslöjade upprepade tunga referensfrågor.
+Vår inventering avbröts före källradering, backup och schedulerbyte.
+**Aktivera inte den äldre kandidaten `8f9221e168d8`.**
+
+Rättning `90bfde350569` på `ops/storage-activation-20261020` avgränsar frågorna,
+inför tre index och skyddar även korsreferenser med SET NULL.
+29 riktade Windowsprov passerar (ett känt skip); slutbildens egen
+Linuxruntime klarar 30 PASS utan nät/produktionsvolymer.
+Ny kandidat: `source-ops-90bfde350569`, image
+`sha256:6cb2dab0e9cc2b904bab85b4a960107f681dd58e6c5d2205c8279b3f8bfb3095`.
+Full CI körs i PR #5. Före aktivering: grön CI, ledigt driftlås,
+verifierad backupbas, indexförberedelse, nytt städurval och komplett backup.
+Den privata arbetaren är `.local/review-scaling-20261020/activate_storage_v3.py`.
+
+[Targetfynd och ersättningskandidat](reviews/storage-lifecycle-20261020.md).
+[Analys av kategorikvoter och varierat urval](reviews/category-aware-recipe-search-20261020.md).
+Appens receptsökning och RAM-cache är fortfarande det separata utkastet PR #4.
+
+---
+
+# Tidigare leveransstatus 2026-10-20, före godkänd aktivering
 
 Lagringsrättningarna är integrerade och pushade på main, avskilda från
 receptskalningen: `9d6efed`, `429109a`, `8d5a49a`, `3825322`, `0b7e9a6`, `3e8a01a`.

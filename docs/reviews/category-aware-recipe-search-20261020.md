@@ -97,7 +97,9 @@ globaloptimum-orakel.
 
 Mät kvalificerade kandidater, verkliga korgutvärderingar, svarstid, topp-RAM,
 betalt totalpris, uppfyllda kvoter, antal olika grundrätter och kulinarisk
-spridning. Inkludera Standard, 1 kyckling/2 vegetariska/2 kött,
+spridning. Mät både kall och varm körning samt upprepade anrop och byte av
+prisuniversum; minnet får inte växa med gamla sökningar och pensionerade
+prisunderlag. Inkludera Standard, 1 kyckling/2 vegetariska/2 kött,
 alla vegetariska, noll fisk, ospecificerad rest, snäva näringskrav,
 saknade produkter, skafferi, låsta produkter och ett enskilt receptbyte.
 
@@ -106,3 +108,6 @@ när den bredare referensen hittar en giltig meny, att påfyllning sker utan
 att mjuka upp användarens krav, och att upprepade sökningar inte låser
 utbudet till samma lilla grupp. Prisavvikelse och variation ska redovisas
 separat; snabbare svar räcker inte för att godkänna ändrade gränser.
+Jämför samma läge: Billigast, Balanserad respektive Varierad. Ett medvetet
+variationsval får kosta inom användarens valda gräns och ska inte ersättas
+av ett dolt krav att alltid återkomma till billigaste veckan.
