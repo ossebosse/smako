@@ -137,6 +137,11 @@ testet kontrollerar nu även antal godkända kandidater.
 
 ## Verifiering och dess gränser
 
+Efter integration av lagringsarbetet från main har slutlig granskningskod
+`2219ac1` [grön full CI](https://github.com/ossebosse/smako/actions/runs/39411987183):
+**2 866 PASS, 10 kända XFAIL, 53 SKIP**, inklusive webbläsare och Ruff.
+Efter detta tillkommer endast dokumentation och identiska dokumentationsmerger.
+
 Uppföljningen `35afef0` har
 [grön full CI](https://github.com/ossebosse/smako/actions/runs/39410311242):
 **2 862 PASS, 10 kända XFAIL, 53 SKIP**, inklusive webbläsare och Ruff.
