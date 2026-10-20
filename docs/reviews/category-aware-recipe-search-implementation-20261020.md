@@ -20,11 +20,6 @@ driftåtgärd, commit och aktivering på betan.
 - Hela den kvalificerade poolen finns kvar för befintlig reservsökning när
   arbetsurvalet inte ger en giltig meny. Gemensam korg, förpackningar,
   butikstak, näring, allergier och slutlig kassakontroll är oförändrade.
-- En färdig giltig vinnare från varje publiceringssteg bevaras under samma
-  aktuella krav och prisunderlag. Den tidigare sökvägen fortsätter oberoende
-  så att tidigare förfining inte kan dölja en senare bättre kombination.
-  Detta är den avgränsade rättningen från `e6f7d32`/`ea847bb`, anpassad till
-  main utan PR #4:s övriga cache-/skalningsändringar.
 
 Inga nya recept eller lägre globala söktak införs. Utan kategorival används
 befintligt kategorioberoende urval. En mindre arbetslista är en heuristik,
@@ -37,7 +32,7 @@ påstås vara verifierad bara för att en meny innehåller olika grundrätter.
 Riktade offlineprov täcker exakta/noll/partiella kvoter, alla vegetariska,
 uttömmande möjliga fortsättningar för små menyer, gallring före
 produktmatchning, receptbyte med fasta grannrätter, saknat prisunderlag,
-distinkta grundrätter, reservsökning och bevarade färdiga vinnare.
+distinkta grundrätter och reservsökning.
 Testerna använder inga privata profiler och gör inga butiksanrop.
 
 Den verkliga jämförelsen använder `benchmark_category_search.py` och den
@@ -48,6 +43,16 @@ Linuxcontainer utan nät, 2 CPU och 3 GiB RAM; separata syntetiska tillstånd.
 Kassakontroll, näringskrav, exakta kvoter, butikstak och olika grundrätter
 verifieras mot resultaten. Fullbiblioteksreferensen är fortfarande en
 begränsad sökalgoritm, inte ett globaloptimum.
+
+Det första försöket inkluderade även PR #4:s separata rättning för färdiga
+vinnare från tidigare publiceringssteg (`e6f7d32`/`ea847bb`). För fem
+vegetariska rätter i Lund ökade då kall tid 33,54 → 64,20 s och
+korgberäkningar 1 347 → 3 498, vid samma pris 535,06 kr. Den ändringen
+återställdes före aktivering. Slutreleasen ändrar inte generationssökningen;
+dess befintliga giltiga kandidat behålls under jämförelserna. En generell
+garanti för färdigoptimerade äldre bibliotek ligger kvar i det separata
+skalningsarbetet. Inga överlägsna mätvärden från den kasserade kombinationen
+får tillskrivas slutkandidaten.
 
 Resultat och aktivering kompletteras efter avslutad verifiering.
 
