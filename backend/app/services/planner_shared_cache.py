@@ -12,8 +12,9 @@ events, so a later request may reuse them instead of recomputing.
 Only successes and diagnostics-free failures are shared, exactly what the
 planner already caches within one request. Entries are immutable by
 convention (the planner already shares candidate objects between baskets).
-The scope holds a strong reference to the prepared universe, so its ``id()``
-can never be reused by a different object while cached. Production fact
+The scope holds a weak reference to the prepared universe and verifies object
+identity on reuse. Retired universes are not kept alive by this cache; their
+entries are discarded when the last owner releases them. Production fact
 versions are computed from every fact by ``FactsCollection``; injected facts
 must honor the same immutable content-version contract.
 
@@ -25,6 +26,7 @@ from __future__ import annotations
 
 import os
 import threading
+import weakref
 from collections import OrderedDict
 
 SCOPE_LIMIT = 4
@@ -38,9 +40,9 @@ def enabled() -> bool:
 class _Scope:
     __slots__ = ("entries", "keep", "stats")
 
-    def __init__(self, keep):
+    def __init__(self, keep, expired):
         self.entries: OrderedDict = OrderedDict()
-        self.keep = keep  # strong references: ids in the scope key stay unique
+        self.keep = weakref.ref(keep, expired)
         self.stats = {"hits": 0, "misses": 0, "stores": 0, "evictions": 0}
 
 
@@ -51,12 +53,18 @@ class SharedResolution:
         self._lock = threading.Lock()
 
     def scope(self, key, keep):
+        def expired(reference):
+            with self._lock:
+                current = self._scopes.get(key)
+                if current is not None and current.keep is reference:
+                    del self._scopes[key]
+
         with self._lock:
             scope = self._scopes.get(key)
-            if scope is None:
+            if scope is None or scope.keep() is not keep:
                 if len(self._scopes) >= self.scope_limit:
                     self._scopes.popitem(last=False)
-                scope = self._scopes[key] = _Scope(keep)
+                scope = self._scopes[key] = _Scope(keep, expired)
             else:
                 self._scopes.move_to_end(key)
             return scope

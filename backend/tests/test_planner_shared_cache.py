@@ -136,3 +136,20 @@ def test_concurrent_resolutions_keep_request_profiles_separate(isolated):
         results = list(executor.map(resolve, range(len(planners))))
     assert results[0] == results[2] == results[4] != "blocked"
     assert results[1] == results[3] == results[5] == "blocked"
+
+
+def test_shared_cache_does_not_keep_a_retired_price_universe_alive():
+    import gc
+    import weakref
+
+    from app.services.planner_shared_cache import SharedResolution
+
+    _, universe, _, _ = fixture()
+    cache = SharedResolution()
+    reference = weakref.ref(universe)
+    scope = cache.scope(("universe", id(universe)), universe)
+    cache.put(scope, "need", ("candidates", (), ()))
+    del universe
+    gc.collect()
+    assert reference() is None
+    assert cache.stats() == []
