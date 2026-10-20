@@ -883,7 +883,7 @@ class MenuOptimizer:
         ), RecipeProfileBuilder._structure(recipe))
 
     def optimize_library_slots(self, cohorts, *, evaluate, accepts, score, retention_score,
-                               refinement_selector=None,
+                               refinement_selector=None, substitution_selector=None,
                                search_trace=None, decision_observer=None, seed_selector=None,
                                refinement_score=None, joint_proposals=None, **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
@@ -928,7 +928,7 @@ class MenuOptimizer:
             cache[key] = result
             return remember_final(slots, result, final)
 
-        def improve(incumbent, additions, generation, phase, finalists=None):
+        def improve(incumbent, additions, generation, phase, finalists=None, extra=None):
             for sweep in (1, 2):
                 if finalists is not None:
                     finalists.clear()
@@ -937,7 +937,8 @@ class MenuOptimizer:
                        "library_generation": generation, "library_phase": phase,
                        "sweep": sweep, "proposals": 0, "constraints_rejected": 0,
                        "evaluation_rejected": 0, "priced": 0, "retained": 0, "beam_pruned": 0,
-                       "evaluations_executed": 0, "evaluation_cache_hits": 0, "improvements": 0}
+                       "evaluations_executed": 0, "evaluation_cache_hits": 0, "improvements": 0,
+                       **(extra or {})}
                 trace.append(row)
                 for index, group in enumerate(additions):
                     for slot in group:
@@ -1015,7 +1016,17 @@ class MenuOptimizer:
             prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
             additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]
                          for index, group in enumerate(options)]
-            incumbent = improve(incumbent, additions, generation, "substitution")
+            extra = None
+            if substitution_selector is not None:
+                # Heuristic bound, like the seed cap: each newer generation's
+                # recipes are ranked by their qualified single-recipe evidence
+                # and only the selection is tried in every slot. The complete
+                # current pool still enters refinement, pairs and joint moves.
+                available = sum(map(len, additions))
+                additions = substitution_selector(additions)
+                extra = {"substitution_variants_available": available,
+                         "substitution_variants_retained": sum(map(len, additions))}
+            incumbent = improve(incumbent, additions, generation, "substitution", extra=extra)
         if incumbent is not None:
             # New ingredients can make an older recipe economical too. Revisit
             # every qualified recipe against the complete incumbent basket,

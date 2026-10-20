@@ -181,6 +181,8 @@ def main():
                    help="Reference run: seed and refinement search over the whole qualified library")
     p.add_argument("--uncapped-reference", type=Path,
                    help="Report from an --uncapped run; fail if the capped search pays more")
+    p.add_argument("--substitution-limit", type=int,
+                   help="Override LIBRARY_SUBSTITUTION_POOL_LIMIT for this run (0 = every new recipe)")
     p.add_argument("--reference-preparation", action="store_true",
                    help="Bypass only new shared preparation; retain ordinary planner and audits")
     p.add_argument("--prepared-startup", action="store_true",
@@ -215,9 +217,13 @@ def main():
     if baseline:
         assert baseline["inputs"] == inputs, "Baseline inputs differ"
     settings = Settings(complete_recipes_enabled=True, price_provider="own")
+    if args.substitution_limit is not None:
+        if args.substitution_limit < 0 or args.uncapped:
+            p.error("--substitution-limit must be >= 0 and cannot be combined with --uncapped")
+        settings = replace(settings, library_substitution_pool_limit=args.substitution_limit)
     if args.uncapped:
         settings = replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0,
-                           library_seed_variant_shortlist=False)
+                           library_seed_variant_shortlist=False, library_substitution_pool_limit=0)
     uncapped = json.loads(args.uncapped_reference.read_bytes()) if args.uncapped_reference else None
     if uncapped:
         assert uncapped["inputs"] == inputs and uncapped.get("uncapped"), "Uncapped reference differs"
@@ -231,7 +237,8 @@ def main():
               "uncapped": args.uncapped,
               "search_limits": {"seed": settings.library_seed_pool_limit,
                                 "refinement": settings.library_refinement_pool_limit,
-                                "seed_variant_shortlist": settings.library_seed_variant_shortlist}}
+                                "seed_variant_shortlist": settings.library_seed_variant_shortlist,
+                                "substitution": settings.library_substitution_pool_limit}}
     from app.services.meal_prepared_artifacts import STATS, method_signature
 
     from backend.scripts.benchmark_beta_capacity import _process_snapshot

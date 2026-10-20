@@ -36,7 +36,7 @@ settings = Settings(complete_recipes_enabled=True, price_provider="own")
 if args.uncapped:
     from dataclasses import replace
     settings = replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0,
-                       library_seed_variant_shortlist=False)
+                       library_seed_variant_shortlist=False, library_substitution_pool_limit=0)
 state = {"revision": 0, "items": [], "reservations": {}, "events": {}}
 started = time.perf_counter()
 planner = PersonalPlanner(request, settings, prepared, state, facts=facts,
@@ -50,7 +50,8 @@ for row in planner.diagnostics.search:
                   "evaluation_rejected"):
         phases[key][field] += row.get(field, 0)
     phases[key]["rows"] += 1
-    for field in ("seed_variants_available", "seed_variants_retained"):
+    for field in ("seed_variants_available", "seed_variants_retained",
+                  "substitution_variants_available", "substitution_variants_retained"):
         if field in row:
             phases[key][field] = row[field]
 pools = planner.diagnostics.pools

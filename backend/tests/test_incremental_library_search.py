@@ -246,3 +246,33 @@ def test_legacy_breakfast_can_accompany_complete_mode_without_library_identity()
     assert subject._library_search_handled
     assert result.recipes[0].name == breakfast.name and result.recipes[0].design is None
     assert result.personal.checks["checkout_audit"]["passed"]
+
+
+def test_substitution_selector_bounds_only_the_newer_generation_sweep():
+    """LIBRARY_SUBSTITUTION_POOL_LIMIT: tried additions are the selector's choice."""
+    trace, seen = [], []
+    prices = {"A": 10, "B": 9, "C": 3, "D": 1}
+
+    def evaluate(slots, *, final):
+        seen.append(tuple(s.recipe.name for s in slots))
+        return sum(prices[s.recipe.name] for s in slots)
+
+    def keep_c(groups):  # a selector that drops the cheapest addition, D
+        return [[s for s in group if s.recipe.name != "D"] for group in groups]
+
+    chosen, cost = run([(1, options("AB")), (2, options("ABCD"))], evaluate=evaluate,
+                       search_trace=trace, substitution_selector=keep_c)
+    substitution = [r for r in trace if r["library_phase"] == "substitution"]
+    assert substitution[0]["substitution_variants_available"] == 4  # C and D in two slots
+    assert substitution[0]["substitution_variants_retained"] == 2
+    assert substitution[0]["proposals"] == 2  # only C, once per slot
+    # D still reaches the week through the full-pool refinement after the sweep.
+    assert cost == 2 and [s.recipe.name for s in chosen] == ["D", "D"]
+
+
+def test_without_selector_every_addition_is_tried_as_before():
+    trace = []
+    run([(1, options("AB")), (2, options("ABCD"))],
+        evaluate=lambda slots, final: len(slots), search_trace=trace)
+    row = next(r for r in trace if r["library_phase"] == "substitution")
+    assert "substitution_variants_available" not in row and row["proposals"] == 4
