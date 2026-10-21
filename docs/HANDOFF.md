@@ -1,4 +1,17 @@
-# 2026-10-21: Smakomedlemskap implementerat, väntar betarelease
+# 2026-10-21: Smakomedlemskap aktivt och liveverifierat
+
+Aktiverat **11:07:40 UTC / 13:07:40 svensk tid**, kod `c253cbd9ef93`,
+BUILD_ID `app-c253cbd9ef93-9940259d`. Full CI och publika medlemsprov är
+godkända. Befintliga 310 planrevisioner och 119 privata tillståndsrader,
+prismanifest, scheduler och proxy bevarades. Backup `20261021T101710Z`.
+[Aktiveringsjournal](releases/membership-20261021/ACTIVATED.md).
+
+**Efterretention pågår vid journalföringen.** Appbytet är klart och ska inte
+upprepas. Releaseverktyget körde flera fulla lagringskontroller på cirka
+40 minuter vardera; de två avslutade fristående kontrollerna frigjorde 0 byte.
+Detta och backupen förklarar den långa väntan. Kontrollera det befintliga
+releaseförsökets `storage-after-activate.json` innan driftsarbetet markeras helt
+avslutat. Starta inte en ny aktivering eller parallell lagringskörning.
 
 Gästläge är kvar med högst **3 recept per meny och 2 portioner per recept**.
 Kostnadsfritt konto med e-post/lösenord låser upp planerarens befintliga större
@@ -18,10 +31,9 @@ två regressionsfall för receptbyten. Kontoacceptans kördes i Chromium på
 Ruff, compileall, JavaScript-syntax och diffkontroll är godkända. Underlag i
 `.local/membership/`. Detta är riktad verifiering, inte hela projektets CI-svit.
 
-**Inte aktiverat på betan.** Ändringen lägger till tre privata tabeller i den
-befintliga plandatabasen. Gör en separat granskad release med databasbackup
-enligt [BETA.md](BETA.md), inte en vanlig apppatch som förutsätter oförändrat
-schema. Ingen extern e-posttjänst eller betalning ingår. Återställningskoden
+Den separata granskade releasen lade till tre privata tabeller i den
+befintliga plandatabasen med verifierad backup och bevarat äldre schema.
+Ingen extern e-posttjänst eller betalning ingår. Återställningskoden
 måste sparas av användaren. [Funktion, lagring och begränsningar](MEMBERSHIP.md).
 
 ---

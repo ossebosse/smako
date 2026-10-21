@@ -15,10 +15,11 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Senast aktiverade appkod är `73306ac`,
-  BUILD_ID `app-73306acc382d-0d139487`.
-  [Aktiveringen](releases/category-search-20261020/ACTIVATED.md) inför
-  kategorimedvetet recepturval. Den bevarar basbildens äldre admin-inställning
+  senaste aktiveringsrapport. Senast aktiverade appkod är `c253cbd9ef93`,
+  BUILD_ID `app-c253cbd9ef93-9940259d`.
+  [Aktiveringen](releases/membership-20261021/ACTIVATED.md) inför
+  medlemskap och tre additiva kontotabeller; efterretention pågår vid
+  journalföringen. Den bevarar basbildens äldre admin-inställning
   som saknas i main; config.py ändrades inte. Se även
   [basbildens granskning](releases/planner-startup-20261018/ACTIVATED.md)
   innan en ny ändring av config.py paketeras.
@@ -40,8 +41,8 @@ git pull --ff-only
 git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
-# Ersätt 73306ac med senast aktiverade appkod enligt aktuell releasejournal.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 73306ac --commit main --workdir .local/beta-release
+# Ersätt c253cbd9ef93 med senast aktiverade appkod enligt aktuell releasejournal.
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit c253cbd9ef93 --commit main --workdir .local/beta-release
 ```
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.
