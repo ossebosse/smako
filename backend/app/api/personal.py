@@ -212,6 +212,7 @@ async def change_plan(
             saved = plans.get_owned(plan_id, owner_actor_hash=owner)
         except (PlanNotFoundError, PlanOwnerMismatchError, PlanReadOnlyError) as exc:
             raise HTTPException(404, "Planen finns inte i din session.") from exc
+        _check_membership_change(saved, payload, request, plans, owner)
         from app.services.plan_jobs import PlanJobsFull
         key = hashlib.sha256(json.dumps([plan_id, payload.model_dump(mode="json"),
             _planner_admission_key(saved.request, settings)], sort_keys=True).encode()).hexdigest()
@@ -224,6 +225,38 @@ async def change_plan(
     return await _change_plan(plan_id, payload, request, response)
 
 
+def _check_membership_change(saved, payload, request, plans, owner):
+    from app.services.membership import require_membership_limits
+
+    if payload.action in {"purchase", "consume", "release", "remove"}:
+        return
+    spec = saved.request.personal
+    if spec is None:
+        require_membership_limits(saved.request, request)
+        return
+    spec = spec.model_copy(deep=True)
+    spec.slots = [s.model_copy(deep=True) for s in saved.plan.personal.slots]
+    if payload.action == "restore_revision" and payload.restore_revision is not None:
+        try:
+            historic = plans.get_owned(saved.plan_id, owner_actor_hash=owner,
+                                       revision=payload.restore_revision)
+        except PlanNotFoundError:
+            return  # The normal revision validation reports this error.
+        require_membership_limits(historic.request, request)
+    if payload.recipe is not None:
+        # Also check supplied portion counts before work is admitted.
+        require_membership_limits(saved.request.model_copy(update={
+            "personal": None, "recipes": 1, "servings": payload.recipe.servings,
+        }), request)
+    if payload.action == "add_recipe":
+        # Counts are aggregate across breakfast, dinner and snacks.
+        require_membership_limits(saved.request.model_copy(update={
+            "personal": None, "recipes": sum(m.count for m in spec.meals) + 1,
+            "servings": payload.recipe.servings if payload.recipe else 1,
+        }), request)
+    require_membership_limits(saved.request.model_copy(update={"personal": spec}), request)
+
+
 async def _change_plan(plan_id, payload, request, response):
     settings, plans, owner = context(request, response)
     private = PersonalStore(plans)
@@ -233,6 +266,7 @@ async def _change_plan(plan_id, payload, request, response):
         raise HTTPException(404, "Planen finns inte i din session.") from exc
     if saved.plan.personal is None:
         raise HTTPException(422, "Öppna den äldre planen i dess befintliga redigeringsflöde.")
+    _check_membership_change(saved, payload, request, plans, owner)
     state = private.read(owner)
     mutation_key = hashlib.sha256(
         json.dumps([plan_id, payload.model_dump(mode="json")], sort_keys=True).encode()
@@ -348,6 +382,8 @@ async def _change_plan(plan_id, payload, request, response):
     if payload.purchase_planning_mode is not None:
         updates["purchase_planning_mode"] = payload.purchase_planning_mode
     plan_request = saved.request.model_copy(update=updates)
+    from app.services.membership import require_membership_limits
+    require_membership_limits(plan_request, request)
     plan = _with_release(
         await _run_personal_work(
             plan_request,

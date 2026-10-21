@@ -37,7 +37,7 @@ def test_owned_status_failure_retains_chain_without_secrets(monkeypatch, tmp_pat
 
     monkeypatch.setattr(api, "_run_admitted_plan", broken)
     with TestClient(app, raise_server_exceptions=False) as client:
-        start = client.post("/api/plans", json={"recipes": 5},
+        start = client.post("/api/plans", json={"recipes": 3, "servings": 2},
                             headers={"Prefer": "respond-async", "X-Request-ID": "accepted-test-123"})
         assert start.status_code == 202
         url = start.json()["status_url"]

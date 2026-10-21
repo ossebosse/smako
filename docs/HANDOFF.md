@@ -1,4 +1,132 @@
-# 2026-10-20: Självstädning verifierad – schedulerkandidat väntar aktivering
+# 2026-10-21: Smakomedlemskap aktivt och liveverifierat
+
+Aktiverat **11:07:40 UTC / 13:07:40 svensk tid**, kod `c253cbd9ef93`,
+BUILD_ID `app-c253cbd9ef93-9940259d`. Full CI och publika medlemsprov är
+godkända. Befintliga 310 planrevisioner och 119 privata tillståndsrader,
+prismanifest, scheduler och proxy bevarades. Backup `20261021T101710Z`.
+[Aktiveringsjournal](releases/membership-20261021/ACTIVATED.md).
+
+**Efterretention pågår vid journalföringen.** Appbytet är klart och ska inte
+upprepas. Releaseverktyget körde flera fulla lagringskontroller på cirka
+40 minuter vardera; de två avslutade fristående kontrollerna frigjorde 0 byte.
+Detta och backupen förklarar den långa väntan. Kontrollera det befintliga
+releaseförsökets `storage-after-activate.json` innan driftsarbetet markeras helt
+avslutat. Starta inte en ny aktivering eller parallell lagringskörning.
+
+Gästläge är kvar med högst **3 recept per meny och 2 portioner per recept**.
+Kostnadsfritt konto med e-post/lösenord låser upp planerarens befintliga större
+menyer och ett kontokopplat skafferi mellan enheter. Registrering, inloggning,
+utloggning och återställningskod finns under `/personal#account`. Befintlig
+OIDC-inloggning fungerar fortsatt när den är konfigurerad.
+
+API-spärrarna omfattar även personliga måltidstyper, egna recept, asynkrona
+jobb och ändringar i sparade planer. Gästskafferi, profil och planer kan flyttas
+atomärt till ett tomt konto; befintliga kontodata skrivs inte över. Manuell
+skafferiinmatning har också rättats där ett odefinierat fält tidigare stoppade den.
+
+Verifiering: **314 riktade tester godkända, 3 befintliga XFAIL**. Det omfattar
+270 konto-/API-/planerings-/integritetstester, samtliga 42 formulärtester och
+två regressionsfall för receptbyten. Kontoacceptans kördes i Chromium på
+1280 px och WebKit på 390 px, med riktiga isolerade konton och skafferidata.
+Ruff, compileall, JavaScript-syntax och diffkontroll är godkända. Underlag i
+`.local/membership/`. Detta är riktad verifiering, inte hela projektets CI-svit.
+
+Den separata granskade releasen lade till tre privata tabeller i den
+befintliga plandatabasen med verifierad backup och bevarat äldre schema.
+Ingen extern e-posttjänst eller betalning ingår. Återställningskoden
+måste sparas av användaren. [Funktion, lagring och begränsningar](MEMBERSHIP.md).
+
+---
+
+# 2026-10-21: Kategorisökning aktiv och liveverifierad
+
+Aktiverad **00:27:05 UTC / 02:27:05 svensk tid**. Runtimekod `73306ac`
+är integrerad på main via PR #6. BUILD_ID `app-73306acc382d-0d139487`,
+image `sha256:0ad2b6021e6a71b5a849edb42430d0a94c33ea152e58984353de8124182a0830`.
+Både Lund och Malmö är ready. Endast appen byttes; scheduler, proxy,
+volymer och aktiva prismanifest bevarades. Verifierad backup
+`20261020T233117Z`. Samtliga tidigare 304 planrevisioner och 115 privata
+tillståndsrader är bevarade inklusive radhashar.
+
+Full CI är grön för koden och main-integrationen: 2 854 PASS, 10 XFAIL,
+53 SKIP. 26 riktade tester, 24 frysta jämförelsekörningar och två
+fullpoolskontroller är godkända. Blandade kategorier tar ungefär halva
+tiden vid samma pris och matkök. Helt vegetariskt i Lund är något långsammare.
+[Aktiveringsjournal](releases/category-search-20261020/ACTIVATED.md).
+[Verifiering och driftåtgärd](reviews/category-aware-recipe-search-implementation-20261020.md).
+
+Fyra publika menyer och två receptbyten är godkända i Lund/Malmö:
+exakta kvoter, fem olika grundrätter, godkänd korg, högst två tillåtna
+butiker, identisk sparad återläsning och bevarad äldre revision vid byte.
+
+**Slutfört:** efterretentionen fick `complete` och releasekommandot exit 0
+01:06 UTC. Cirka 823 MB filer togs bort under referensskydd, 32 snapshots
+pensionerades. Nattens Malmöpaket återlevererades efter låskonflikt och
+fördröjd laddningsbekräftelse; kvittens `already_active` 01:46:20 UTC, exit 0.
+Slutkontroll 01:46 UTC: båda kommunerna ready med rätt BUILD_ID, alla 14
+obligatoriska kontexter kvalificerade/publicerade/laddade och inga väntande
+lokala reläleveranser. Coops basunderlag har kvar sin STALE-varning, cirka
+74 timmar, med oförändrad källtid. Scheman och installerat relä är oförändrade.
+
+Underlag: `.local/category-search-20261020/`, särskilt `final-status.json`,
+`final-municipalities.json`, `deliver-malmo-confirm.log`, `http-evidence.json`
+och `release-final/activate.json`. Appen är redan aktiverad; bygg eller
+aktivera inte samma release igen. Alla operatörsjobb i denna uppgift är klara.
+
+Willys-incidentens kvittens återställdes 2026-10-20 20:11:30 UTC via
+installerat relä, exakt redan aktiv Lundartefakt och `already_active`.
+Ingen ny insamling, förnyad observationstid eller schemaändring gjordes.
+Äldre text nedan är historik.
+
+---
+
+# 2026-10-20: Självstädning aktiverad och efterkontrollerad
+
+Godkänd scheduleraktivering är slutförd 15:37:12 UTC (17:37 svensk tid).
+Aktiv runtime: `source-ops-52c7d8291bb7`, image
+`sha256:9611e23f2ee6ef6360ccff05889262240024fd1791b94bcfdd20d0c27f4f525e`.
+Endast schedulerns image och BUILD_ID ändrades. Cronfil, mountar,
+app/proxy och aktiva prismanifest bevarades. Ordinarie Malmö-jobb fick
+avslutas före driftlåset; inga källjobb stoppades.
+
+Den genomförda körningen raderade 2 402 915 323 byte filer: 32 snapshots
+pensionerade, 11 921 råfiler, fem prisartefakter och 79 kommunala poster.
+SQLite har dessutom 420 208 640 återanvändbara byte. Detta tillkommer
+utöver tidigare 83,36 GB rensade dagsbackuper/prisfiler. Periodiska hookar
+är nu aktiva vid start, backup och ordinarie refresh.
+
+Backup `20261020T144738Z` är verifierad. Alla tidigare 302 planrevisioner
+och 113 privata tillståndsrader är bevarade, liksom källidentiteter och
+observationstider. Tre dagsbackuper upptar totalt 24 716 243 845 byte.
+De två ersatta kandidatbilderna är borttagna; aktiv image och
+återställningsbasen finns kvar. Byggcachebudget 2 GB.
+Efterkontroll 15:39 UTC: 88,21 GB ledigt, alla tre tjänster igång,
+noll omstarter och ingen OOM-status.
+
+Lund och Malmö har ready 200 och alla 14 obligatoriska kontexter
+kvalificerade, publicerade och laddade. Två publika menyprov passerade:
+fem kompletta recept, två tillåtna butiker, godkänd korgkontroll och
+identisk återläsning av sparad plan. Svarstider 75,34/77,52 sekunder;
+detta är funktionell efterkontroll, inte nytt prestanda-/prisbevis.
+Coop STALE och Willys AGING är kvarvarande åldersvarningar.
+Windowsjobbet körde vid statusläsningen; ingen ny reläleverans styrks här.
+
+Slutkod `52c7d82` finns på main och har grön full CI:
+2 841 PASS, 10 kända XFAIL, 53 SKIP. Slutbildens isolerade Linuxprov:
+31 PASS, 0 SKIP. Retentionsfrågorna/indexen och SQLite-cachebudgeten är
+verifierade mot target. Den tillfälliga backupcontainerns filcachebudget
+höjdes till 4 GiB under kontrollen, med bevarad minnesreserv; detta ändrade
+ingen permanent tjänstekonfiguration.
+
+[Aktivering, kvitton, testresultat och begränsningar](reviews/storage-lifecycle-20261020.md).
+[Analys av kategorikvoter och varierat urval](reviews/category-aware-recipe-search-20261020.md).
+Appens receptsökning och RAM-cache är fortfarande det separata utkastet
+[PR #4](https://github.com/ossebosse/smako/pull/4), inte aktiverade här.
+Inga nya kategori-/urvalsgränser är införda. Äldre text nedan är historik.
+
+---
+
+# Tidigare leveransstatus 2026-10-20, före godkänd aktivering
 
 Lagringsrättningarna är integrerade och pushade på main, avskilda från
 receptskalningen: `9d6efed`, `429109a`, `8d5a49a`, `3825322`, `0b7e9a6`, `3e8a01a`.

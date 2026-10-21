@@ -30,7 +30,7 @@ def test_retained_domain_failure_keeps_direct_http_contract(monkeypatch,tmp_path
         raise PersonalConflict("Senaste revision är bevarad")
     monkeypatch.setattr(api,"_run_admitted_plan",blocked)
     with TestClient(app,raise_server_exceptions=False) as client:
-        accepted=client.post("/api/plans",headers={"Prefer":"respond-async","X-Request-ID":"domain-"+kind},json={"recipes":5})
+        accepted=client.post("/api/plans",headers={"Prefer":"respond-async","X-Request-ID":"domain-"+kind},json={"recipes":3,"servings":2})
         assert accepted.status_code==202
         url=accepted.json()["status_url"]
         for _ in range(100):
@@ -68,7 +68,7 @@ def test_async_plan_returns_before_work_finishes_and_preserves_failure(monkeypat
     try:
         with TestClient(app) as client:
             response = client.post('/api/plans', headers={'Prefer': 'respond-async', 'X-Request-ID': 'lost-response-1'}, json={
-                'recipes': 5, 'servings': 2, 'max_stores': 3, 'purchase_planning_mode': 'exact',
+                'recipes': 3, 'servings': 2, 'max_stores': 3, 'purchase_planning_mode': 'exact',
             })
             assert response.status_code == 202
             assert started.wait(2)
@@ -81,7 +81,7 @@ def test_async_plan_returns_before_work_finishes_and_preserves_failure(monkeypat
                 'X-Anonymous-Session-ID': 'another-isolated-session-12345'}).status_code == 404
             assert client.get('/api/plan-job-requests/missing').status_code == 404
             duplicate = client.post('/api/plans', headers={'Prefer': 'respond-async'}, json={
-                'recipes': 5, 'servings': 2, 'max_stores': 3, 'purchase_planning_mode': 'exact',
+                'recipes': 3, 'servings': 2, 'max_stores': 3, 'purchase_planning_mode': 'exact',
             })
             assert duplicate.json()['status_url'] == status_url
             assert len(calls) == 1

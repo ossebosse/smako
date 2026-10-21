@@ -299,6 +299,72 @@ __all__ = [
 ]
 
 
+def category_seed_cap(recipes, evidence, *, capacity, classify, limit=40):
+    """Share the existing working budget across feasible protein categories.
+
+    Reserve distinct base dishes, then culinary and package diversity within
+    each category. Unknown evidence and the existing economic/cuisine anchors
+    remain protected. Soft quotas may exceed the budget; the caller retains
+    the complete qualified pool for fallback. No recipe leaves the library.
+    """
+    from math import ceil
+
+    if limit < 1:
+        raise ValueError("limit must be positive")
+    groups = defaultdict(list)
+    for recipe in recipes:
+        category = classify(recipe)
+        if capacity.get(category, 0) > 0:
+            groups[category].append(recipe)
+    if len(groups) == 1:
+        # With no competing category, retain the established economic search
+        # trajectory. Stratifying again just creates extra basket work. Still
+        # repair a shortage of distinct bases hidden behind cheap variants.
+        category, rows = next(iter(groups.items()))
+        kept = library_seed_cap(rows, evidence, limit=limit)
+        selected = {recipe_id(r) for r in kept}
+        bases = {r.design.base_id if r.design else recipe_id(r) for r in kept}
+        required = 2 * capacity[category]
+        if len(bases) < required:
+            ranked = sorted(rows, key=lambda r: (evidence[recipe_id(r)].paid
+                            if recipe_id(r) in evidence else float("inf"), recipe_id(r)))
+            for r in ranked:
+                base = r.design.base_id if r.design else recipe_id(r)
+                if base not in bases:
+                    bases.add(base)
+                    selected.add(recipe_id(r))
+                    if len(bases) >= required:
+                        break
+        return [r for r in recipes if recipe_id(r) in selected]
+    total = sum(capacity[k] for k in groups)
+    selected = set()
+    for category, rows in groups.items():
+        budget = max(2 * capacity[category], ceil(limit * capacity[category] / total))
+        if len(rows) <= budget:
+            selected.update(recipe_id(r) for r in rows)
+            continue
+        anchors = library_seed_cap(rows, evidence, limit=max(1, budget // 2))
+        protected = {recipe_id(r) for r in anchors}
+        ranked = sorted(rows, key=lambda r: (evidence[recipe_id(r)].paid
+                        if recipe_id(r) in evidence else float("inf"), recipe_id(r)))
+        # Variants of the same base cannot satisfy multiple dinner places.
+        bases = set()
+        for r in ranked:
+            base = r.design.base_id if r.design else recipe_id(r)
+            if base not in bases:
+                bases.add(base)
+                protected.add(recipe_id(r))
+                if len(bases) >= 2 * capacity[category]:
+                    break
+        shortlist = stratified_candidate_shortlist(
+            ranked, limit=max(budget, len(protected)), stable_recipe_ids=frozenset(protected),
+            extra_dimensions={recipe_id(r): tuple(
+                f"package:{s}:{p}" for s, p in sorted(evidence[recipe_id(r)].packages))
+                for r in rows if recipe_id(r) in evidence})
+        selected.update(recipe_id(r) for r in shortlist.recipes)
+    return [r for r in recipes if recipe_id(r) in selected]
+
+
 def library_seed_cap(recipes, evidence, *, limit=40):
     """Bound the seed beam's per-slot options when the qualified pool is large.
 

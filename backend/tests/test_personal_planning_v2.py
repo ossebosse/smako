@@ -515,7 +515,7 @@ def test_account_requires_configuration_and_never_accepts_email_as_owner(monkeyp
     for key in ENV_KEYS:
         monkeypatch.delenv(key, raising=False)
     assert not configured()
-    req = Request({"type": "http", "session": {"email": "same@example.test"}})
+    req = Request({"type": "http", "headers": [], "session": {"email": "same@example.test"}})
     assert verified_owner(req) is None
 
 

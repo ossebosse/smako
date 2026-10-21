@@ -23,7 +23,7 @@ def test_internal_value_error_is_not_a_form_error(monkeypatch, route):
         raise ValueError('private configuration detail')
 
     monkeypatch.setattr(api, '_run_admitted_plan', fail)
-    response = TestClient(app).post(route, json={'recipes': 5, 'servings': 2, 'max_stores': 3})
+    response = TestClient(app).post(route, json={'recipes': 3, 'servings': 2, 'max_stores': 3})
     assert response.status_code == 500
     assert response.headers['x-error-code'] == 'planner_internal_error'
     assert response.headers['x-request-id']
@@ -37,7 +37,7 @@ def test_policy_data_block_keeps_its_distinct_code(monkeypatch):
         raise PolicyConflict('Källunderlag saknas', code='DATA_BLOCKED')
 
     monkeypatch.setattr(api, '_run_admitted_plan', fail)
-    response = TestClient(app).post('/api/plans', json={'max_stores': 3})
+    response = TestClient(app).post('/api/plans', json={'recipes': 3, 'servings': 2, 'max_stores': 3})
     assert response.status_code == 422
     assert response.json()['code'] == 'DATA_BLOCKED'
 
@@ -81,7 +81,7 @@ def test_offline_preflight_distinguishes_area_from_data_failure(
     monkeypatch.setattr(api, '_run_admitted_plan', must_not_run)
     response = TestClient(app).post(route, json={
         'postal_code': '22222' if state == 'unsupported_postal' else '22350',
-        'recipes': 5, 'servings': 2, 'max_stores': 3,
+        'recipes': 3, 'servings': 2, 'max_stores': 3,
     })
     assert response.status_code == expected_status
     assert response.headers['x-error-code'] == code

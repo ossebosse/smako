@@ -157,7 +157,7 @@ def test_provider_api_error_does_not_echo_exception_or_url(
     monkeypatch.setenv("PRICE_UNIVERSE_REQUIRED", "false")
     response = TestClient(app).post(
         "/api/plan",
-        json={"recipes": 3, "servings": 4, "max_stores": 2},
+        json={"recipes": 3, "servings": 2, "max_stores": 2},
     )
     assert response.status_code == 502
     assert response.json() == {"detail": "price provider unavailable"}

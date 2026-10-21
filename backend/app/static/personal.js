@@ -63,7 +63,7 @@
 
     const controls=[...document.querySelectorAll("button")].filter(n=>!n.disabled&&!n.matches("[data-open]"));controls.forEach(n=>n.disabled=true);
 
-    try {await work();notify("");} catch(e){if(e.lifecycle)return;notify(e.message||"Åtgärden kunde inte slutföras.");if(e.diagnostics)renderDiagnostics(e.diagnostics);if(e.code==="DATA_BLOCKED"){const choices=el("div",null,"personal-actions");choices.id="data-blocked-actions";choices.append(button("Ändra mina val",async()=>show("choices")),button("Granska berörda behov",async()=>{const box=el("div");box.append(el("h2","Underlag för berörda ingrediensbehov"));const rows=e.diagnostics?.missing_needs||[];for(const row of rows)box.append(el("p",`${names[row.meal_type]} · ${row.recipe}: ${row.ingredient}, ${number(row.quantity)} ${row.unit}. ${row.reason}`));if(!rows.length)box.append(el("p","Se receptens beredningshinder i blockeringsfördelningen. Ingen produktändring har gjorts."));openDialog(box);}),button("Gå tillbaka",async()=>show(saved?"plan":"choices")));$("personal-status").after(choices);}$('personal-status').scrollIntoView({block:"nearest"});}
+    try {await work();notify("");} catch(e){if(e.lifecycle)return;notify(e.message||"Åtgärden kunde inte slutföras.");if(e.code==="membership_required"){document.querySelectorAll("dialog[open]").forEach(dialog=>dialog.close());show("account");void renderAccount().catch(error=>notify(error.message));}if(e.diagnostics)renderDiagnostics(e.diagnostics);if(e.code==="DATA_BLOCKED"){const choices=el("div",null,"personal-actions");choices.id="data-blocked-actions";choices.append(button("Ändra mina val",async()=>show("choices")),button("Granska berörda behov",async()=>{const box=el("div");box.append(el("h2","Underlag för berörda ingrediensbehov"));const rows=e.diagnostics?.missing_needs||[];for(const row of rows)box.append(el("p",`${names[row.meal_type]} · ${row.recipe}: ${row.ingredient}, ${number(row.quantity)} ${row.unit}. ${row.reason}`));if(!rows.length)box.append(el("p","Se receptens beredningshinder i blockeringsfördelningen. Ingen produktändring har gjorts."));openDialog(box);}),button("Gå tillbaka",async()=>show(saved?"plan":"choices")));$("personal-status").after(choices);}$('personal-status').scrollIntoView({block:"nearest"});}
 
     finally {busy=false;controls.forEach(n=>{if(n.isConnected)n.disabled=false;});updateChoiceSummary();$('generate-plan').textContent=window.SmakoRecipes.pendingJob('personal')?'Återuppta statuskontrollen':'Skapa plan och inköpslista';
       if(window.SmakoRecipes.pendingJob('personal')&&!document.hidden){const actions=el('div',null,'personal-actions');actions.id='plan-reconnect-actions';actions.append(button('Återuppta statuskontrollen',resumePersonalJob),button('Skapa en ny meny',async()=>{window.SmakoRecipes.forgetJob('personal');actions.remove();show('choices');}));$('personal-status').after(actions);}
@@ -100,7 +100,7 @@
   for(const [type,label] of Object.entries(names)){
     const box=el("fieldset",null,"choices-primary");box.append(el("legend",label));
     const grid=el("div",null,"personal-grid");
-    grid.append(slider(`${type}-count`,type==="dinner"?"Antal middagar":"Antal tillfällen",5,{min:type==="dinner"?0:1,max:7}),slider(`${type}-servings`,"Portioner per rätt",type==="dinner"?4:1,{min:1,max:8}));
+    grid.append(slider(`${type}-count`,type==="dinner"?"Antal middagar":"Antal tillfällen",3,{min:type==="dinner"?0:1,max:7}),slider(`${type}-servings`,"Portioner per rätt",type==="dinner"?2:1,{min:1,max:8}));
     box.id=`${type}-meals`;box.append(grid);mealCards[type]=box;$('meal-settings').append(box);
     const actions=el("div",null,"personal-actions meal-settings-actions");box.append(actions);
     const options=el("fieldset");mealExtras[type]=options;
@@ -332,7 +332,7 @@
 
   function editRecipe(slot){const box=el("div");box.append(el("h2",slot.recipe?"Redigera recept":"Fyll tillfället"));const name=input("text",slot.recipe?.name||"",{maxLength:150});const servings=input("number",slot.recipe?.servings||1,{min:"1",max:"8"});const rows=el("div");function ingredientRow(i={name:"",quantity:1,unit:"g"}){const row=el("div",null,"ingredient-edit");const n=input("text",i.name,{maxLength:120}),q=input("number",i.quantity,{min:"0.001",step:"any"}),u=select([["g","g"],["ml","ml"],["st","st"],["kg","kg"],["l","l"]],i.unit);n.setAttribute("aria-label","Ingrediens");q.setAttribute("aria-label","Mängd");u.setAttribute("aria-label","Enhet");row.append(n,q,u,button("×",async()=>row.remove()));rows.append(row);} (slot.recipe?.ingredients||[{}]).forEach(i=>ingredientRow(i));const instructions=el("textarea");instructions.value=slot.recipe?.instructions.join("\n")||"";box.append(field("Receptnamn",name),field("Portioner (mängderna nedan är för hela receptet)",servings),el("p","Alla ingredienser måste kunna lösas till verkliga köpbara behov. Okända ingredienser stoppar uppdateringen."),rows,button("Lägg till ingrediens",async()=>ingredientRow()),field("Tillagningssteg – ett per rad",instructions),button("Spara och räkna om hela korgen",async()=>{const recipe={name:name.value,servings:Number(servings.value),ingredients:[...rows.children].map(r=>({name:r.children[0].value,quantity:Number(r.children[1].value),unit:r.children[2].value})),instructions:instructions.value.split("\n").map(s=>s.trim()).filter(Boolean)};await change("edit",{slot_id:slot.id,recipe});$('personal-dialog').close();focusView();},true));openDialog(box);}
 
-  async function pantryDialog(item=null,product=null){const box=el("div");box.append(el("h2",item?"Ändra verkligt lager":"Lägg till verkligt lager"));const name=input("text",item?.name||product?.display_name?.slice(0,120)||product?.name?.slice(0,120)||generic?.query||"",{maxLength:120}),amount=input("number",item?.quantity??product?.package_quantity??1,{min:"0",step:"any",max:"100000"}),unit=select([["g","gram"],["ml","milliliter"],["st","stycken"]],item?.unit||product?.package_unit||generic?.unit||"g"),unusable=input("checkbox","");unusable.checked=item?.unusable||false;const formChoice=select([["","Okänd / ej angiven"],["raw_edible","Rå, ätbar mängd"],["dry","Torr råvara"],["as_sold","Som såld"],["cooked_drained","Kokt och avrunnen"],["preserved_drained","Avrunnen konserverad vara"]],item?.form||"");const reference=select([["","Ingen generisk näringsreferens bekräftad"]],"");if(!product&&!item?.product_key){const refs=await api("/api/personal/nutrition-references");for(const option of refs.options){const o=el("option",`${option.name} · ${option.preparation_label} · gram`);o.value=option.id;reference.append(o);}reference.value=item?.nutrition_reference||"";box.append(field("Bekräfta livsmedel och rå/torr/avrunnen form för näringsuppskattning",reference),el("p","Välj bara en referens som stämmer med varan hemma, inklusive fetthalt och beredning. Detta ändrar inte lagermängden. Spårbara näringsuppskattningar tillåts i nya planer."));}if(product||item?.product_key)name.readOnly=true;box.append(field("Vara",name),field("Faktisk mängd hemma",amount),field("Enhet",unit),field("Obrukbar – får inte användas",unusable),field("Råvaruform (för genomarbetade recept)",formChoice),el("p","Generiska skafferivaror behöver dokumenterad form som passar receptet. En produktidentitet ger mer underlag om exempelvis tjock yoghurt eller fast tofu.","small"),el("p",product||item?.product_key?"Exakt produktidentitet bevaras.":"Generisk vara. Ingen allergendeklaration eller vikt-/volymomräkning antas."),button("Spara skafferivara",async()=>{const clean=privateState.items.map(({available,reserved,...i})=>i);const newItem={...(formChoice.value?{form:formChoice.value}:{}),nutrition_reference:reference.value||null,id:item?.id||crypto.randomUUID(),name:name.value,quantity:Number(amount.value),unit:unit.value,unusable:unusable.checked,product_key:item?.product_key||product?.product_key||null,food:!/(servett|toalettpapper|hushållspapper|diskmedel)/i.test(name.value)};privateState=await api("/api/personal/pantry",{revision:privateState.revision,profile:profile(),items:[...clean.filter(i=>i.id!==newItem.id),newItem]},"PUT");renderPantry();$('personal-dialog').close();show("pantry");},true));openDialog(box);}
+  async function pantryDialog(item=null,product=null){const box=el("div");box.append(el("h2",item?"Ändra verkligt lager":"Lägg till verkligt lager"));const name=input("text",item?.name||product?.display_name?.slice(0,120)||product?.name?.slice(0,120)||"",{maxLength:120}),amount=input("number",item?.quantity??product?.package_quantity??1,{min:"0",step:"any",max:"100000"}),unit=select([["g","gram"],["ml","milliliter"],["st","stycken"]],item?.unit||product?.package_unit||"g"),unusable=input("checkbox","");unusable.checked=item?.unusable||false;const formChoice=select([["","Okänd / ej angiven"],["raw_edible","Rå, ätbar mängd"],["dry","Torr råvara"],["as_sold","Som såld"],["cooked_drained","Kokt och avrunnen"],["preserved_drained","Avrunnen konserverad vara"]],item?.form||"");const reference=select([["","Ingen generisk näringsreferens bekräftad"]],"");if(!product&&!item?.product_key){const refs=await api("/api/personal/nutrition-references");for(const option of refs.options){const o=el("option",`${option.name} · ${option.preparation_label} · gram`);o.value=option.id;reference.append(o);}reference.value=item?.nutrition_reference||"";box.append(field("Bekräfta livsmedel och rå/torr/avrunnen form för näringsuppskattning",reference),el("p","Välj bara en referens som stämmer med varan hemma, inklusive fetthalt och beredning. Detta ändrar inte lagermängden. Spårbara näringsuppskattningar tillåts i nya planer."));}if(product||item?.product_key)name.readOnly=true;box.append(field("Vara",name),field("Faktisk mängd hemma",amount),field("Enhet",unit),field("Obrukbar – får inte användas",unusable),field("Råvaruform (för genomarbetade recept)",formChoice),el("p","Generiska skafferivaror behöver dokumenterad form som passar receptet. En produktidentitet ger mer underlag om exempelvis tjock yoghurt eller fast tofu.","small"),el("p",product||item?.product_key?"Exakt produktidentitet bevaras.":"Generisk vara. Ingen allergendeklaration eller vikt-/volymomräkning antas."),button("Spara skafferivara",async()=>{const clean=privateState.items.map(({available,reserved,...i})=>i);const newItem={...(formChoice.value?{form:formChoice.value}:{}),nutrition_reference:reference.value||null,id:item?.id||crypto.randomUUID(),name:name.value,quantity:Number(amount.value),unit:unit.value,unusable:unusable.checked,product_key:item?.product_key||product?.product_key||null,food:!/(servett|toalettpapper|hushållspapper|diskmedel)/i.test(name.value)};privateState=await api("/api/personal/pantry",{revision:privateState.revision,profile:profile(),items:[...clean.filter(i=>i.id!==newItem.id),newItem]},"PUT");renderPantry();$('personal-dialog').close();show("pantry");},true));openDialog(box);}
 
   $('add-pantry').addEventListener("click",()=>void task(()=>pantryDialog()));
 
@@ -355,9 +355,9 @@
     if(draft){extras=structuredClone(draft.personal?.extras||[]);putChoices({...draft,membership_programs:draft.membership_programs||draft.memberships||[]});}
     // Restore durable data before reconnecting a process-memory job. The old
     // saved plan must not clear a different, still-running request marker.
-    const wantedShopping=location.hash==="#shopping"||new URLSearchParams(location.hash.slice(1)).get("view")==="shopping";const fromHash=new URLSearchParams(location.hash.slice(1)).get("plan");let last=fromHash;try{last ||= localStorage.getItem("smako.personal.lastPlan");}catch(_){}
+    const wantedAccount=location.hash==="#account";const wantedShopping=location.hash==="#shopping"||new URLSearchParams(location.hash.slice(1)).get("view")==="shopping";const fromHash=new URLSearchParams(location.hash.slice(1)).get("plan");let last=fromHash;try{last ||= localStorage.getItem("smako.personal.lastPlan");}catch(_){}
     if(last){try{const loaded=await api(`/api/plans/${encodeURIComponent(last)}`);if(loaded.plan.personal)await accept(loaded,{clearJob:false});else notify("Detta är en tidigare middagsplan. Öppna den i den tidigare planeringen.");}catch(error){if(![401,403,404].includes(error.status))throw error;notify("Den tidigare planen kan inte öppnas i denna session. Dina tillgängliga varuval visas.");}}
-    if(shoppingInitialized)extras=shoppingDraft;if(location.hash==="#pantry")show("pantry");if(location.hash==="#choices")show("choices");if(wantedShopping){show("shopping");void searchShopping();}renderExtras();
+    if(shoppingInitialized)extras=shoppingDraft;if(wantedAccount)show("account");if(location.hash==="#pantry")show("pantry");if(location.hash==="#choices")show("choices");if(wantedShopping){show("shopping");void searchShopping();}renderExtras();
     if(window.SmakoRecipes.pendingJob("personal"))setTimeout(()=>{if(!busy)void task(resumePersonalJob);},0);
   });
   const resume=()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(resumePersonalJob);};
@@ -384,30 +384,60 @@
 
   }
 
-  async function renderAccount(){
+  function reloadAccount(){history.replaceState({},"","/personal#account");location.reload();}
 
-    const state=await api("/api/account/status"),out=$('account-actions');out.replaceChildren();
-
-    if(state.status==="SIGN_IN_AVAILABLE"){const a=el("a","Logga in med verifierat Smakokonto","primary-button");a.href="/api/account/login";out.append(a);}
-
-    if(state.status==="SIGNED_IN"){
-
-      out.append(button("Logga ut",async()=>{await api("/api/account/logout",{});window.SmakoRecipes.clearPrivateDrafts();location.assign("/personal#account");}));
-
-      const preview=await api("/api/account/guest-migration-preview");
-
-      if(preview.can_move)out.append(button(`Flytta mitt gästskafferi (${preview.guest_items} varor) och mina gästplaner till kontot`,async()=>{
-
-        await api("/api/account/migrate-guest",{guest_revision:preview.guest_revision,account_revision:preview.account_revision,confirm_move_to_verified_account:true});await refreshState();out.replaceChildren(el("p","Gästdata har flyttats till det verifierade kontot."));
-
-      }));
-
-      else if(preview.guest_items)out.append(el("p","Kontot har redan data. Gästskafferiet är bevarat separat; automatisk sammanslagning stöds inte."));
-
-    }
-
+  function authForm(mode="login") {
+    const out=$('account-actions');out.replaceChildren();
+    const register=mode==="register",recover=mode==="recover";
+    const form=el("form",null,"personal-card member-form");
+    const email=input("email","",{required:true,maxLength:254,autocomplete:"username"});email.name="email";
+    const password=input("password","",{required:true,minLength:12,maxLength:128,autocomplete:register||recover?"new-password":"current-password"});password.name="password";
+    form.append(el("h2",register?"Skapa ditt konto":recover?"Återställ ditt konto":"Logga in"),field("E-postadress",email),field(recover?"Nytt lösenord (minst 12 tecken)":"Lösenord (minst 12 tecken)",password));
+    let recovery;
+    if(recover){recovery=input("text","",{required:true,maxLength:128,autocomplete:"off"});form.append(field("Återställningskod",recovery));}
+    if(register)form.append(el("p","Efter registreringen får du en återställningskod. Spara den säkert; den behövs om du glömmer lösenordet. E-postadressen används för inloggning. Ingen e-post skickas."));
+    const submit=el("button",register?"Skapa konto":recover?"Byt lösenord":"Logga in","primary-button");submit.type="submit";
+    const feedback=el("p");feedback.setAttribute("role","status");form.append(submit,feedback);
+    form.addEventListener("submit",async event=>{
+      event.preventDefault();submit.disabled=true;feedback.textContent="Arbetar…";
+      try{
+        const result=await api(`/api/account/${register?"register":recover?"recover":"login"}`,{email:email.value,password:password.value,...(recover?{recovery_code:recovery.value}:{})});
+        password.value="";window.SmakoRecipes.clearPrivateDrafts();
+        saved=null;privateState=null;extras=[];$("plan-content").replaceChildren();$("pantry-list").replaceChildren();renderExtras();
+        if(result.recovery_code){
+          out.replaceChildren(el("h2",recover?"Lösenordet har ändrats":"Välkommen som medlem!"),el("p","Spara återställningskoden i din lösenordshanterare. Den visas bara nu. En ny kod ersätter alltid den gamla."));
+          const code=input("text",result.recovery_code,{readOnly:true,autocomplete:"off"});code.setAttribute("aria-label","Din återställningskod");out.append(code,button("Jag har sparat koden – fortsätt",async()=>reloadAccount(),true));
+        }else reloadAccount();
+        await refreshState();extras=structuredClone(privateState.shopping_items||[]);putProfile(privateState.profile);renderExtras();
+      }catch(error){feedback.textContent=error.message;}finally{submit.disabled=false;}
+    });
+    out.append(form);
+    if(!register)out.append(button("Skapa ett konto",async()=>authForm("register"),true));
+    if(register||recover)out.append(button("Jag har ett konto – logga in",async()=>authForm("login")));
+    if(!recover)out.append(button("Glömt lösenordet?",async()=>authForm("recover")));
+    out.append(button("Fortsätt som gäst",async()=>show("choices")));
   }
 
-  void renderAccount().catch(()=>{});
+  async function renderAccount(){
+    const state=await api("/api/account/status"),out=$('account-actions');out.replaceChildren();
+    $('member-status').textContent=state.message||"";
+    $('member-heading').textContent=state.status==="SIGNED_IN"?"Ditt Smakokonto":"Mer plats för din matvecka";
+    $('member-intro').hidden=state.status==="SIGNED_IN";
+    $('account-nav').textContent=state.status==="SIGNED_IN"?"Mitt konto":"Bli medlem / Logga in";
+    document.querySelectorAll('.membership-note').forEach(n=>n.hidden=state.status==="SIGNED_IN");
+    if(state.status!=="SIGNED_IN"){
+      authForm();
+      if(state.oidc_available){const a=el("a","Logga in via extern kontoleverantör","secondary-button");a.href="/api/account/login";out.append(a);}
+      return;
+    }
+    out.append(el("p","När du ändrar ditt skafferi sparas det automatiskt på kontot."),button("Öppna mitt skafferi",async()=>show("pantry"),true),button("Logga ut",async()=>{await api("/api/account/logout",{});window.SmakoRecipes.clearPrivateDrafts();reloadAccount();}));
+    const preview=await api("/api/account/guest-migration-preview");
+    if(preview.can_move)out.append(button(`Spara mitt gästskafferi (${preview.guest_items} varor) och mina gästplaner på kontot`,async()=>{
+      await api("/api/account/migrate-guest",{guest_revision:preview.guest_revision,account_revision:preview.account_revision,confirm_move_to_verified_account:true});await refreshState();await renderAccount();
+    },true));
+    else if(preview.guest_items)out.append(el("p","Kontot har redan ett sparat skafferi. Ditt gästskafferi finns kvar när du loggar ut och ersätter inte kontots varor."));
+  }
+  document.querySelectorAll('[data-open="account"]').forEach(n=>n.addEventListener("click",()=>void renderAccount().catch(e=>notify(e.message))));
+  void renderAccount().catch(e=>{$('member-status').textContent=e.message;});
 
 })();

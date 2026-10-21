@@ -300,6 +300,25 @@ def protein_category(recipe):
     return "vegetarian"
 
 
+def remaining_category_capacity(meal, fixed_slots=(), *, classify=protein_category):
+    """Safe per-category capacity for a new choice, including fixed swap peers.
+
+    Unspecified categories share the unassigned places; explicit zero is a ban.
+    This is only a necessary condition, never proof that a menu is feasible.
+    """
+    categories = ("vegetarian", "chicken", "fish", "meat")
+    chosen = [s.recipe for s in fixed_slots if s.meal_type == meal.meal_type and s.recipe]
+    counts = Counter(classify(r) for r in chosen)
+    remaining = meal.count - len(chosen)
+    if remaining <= 0 or any(counts[k] > n for k, n in meal.distribution.items()):
+        return dict.fromkeys(categories, 0)
+    required = {k: n - counts[k] for k, n in meal.distribution.items()}
+    unassigned = remaining - sum(required.values())
+    if unassigned < 0:
+        return dict.fromkeys(categories, 0)
+    return {k: required.get(k, unassigned) for k in categories}
+
+
 def distribution_ok(slots, meals, *, partial=False, classify=protein_category):
     for meal in meals:
         chosen = [s.recipe for s in slots if s.meal_type == meal.meal_type and s.recipe]

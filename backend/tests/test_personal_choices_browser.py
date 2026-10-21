@@ -103,19 +103,19 @@ def test_primary_sliders_optional_meals_and_default_request(choices):
     choose_location(page)
     expect(page.locator("#generate-plan")).to_be_enabled()
     expect(page.locator("#extra-choices")).not_to_have_attribute("open", "")
-    expect(page.locator("#dinner-count")).to_have_value("5")
-    expect(page.locator("#dinner-servings")).to_have_value("4")
+    expect(page.locator("#dinner-count")).to_have_value("3")
+    expect(page.locator("#dinner-servings")).to_have_value("2")
     expect(page.locator("#max-stores")).to_have_value("2")
     expect(page.locator("#breakfast-count")).not_to_be_visible()
     expect(page.locator("#dinner-servings")).to_have_attribute("max", "8")
     page.locator("#dinner-servings").focus()
     page.keyboard.press("ArrowRight")
-    expect(page.locator("#dinner-servings")).to_have_value("5")
+    expect(page.locator("#dinner-servings")).to_have_value("3")
     initial = submit(page, captured)
     assert initial["purchase_planning_mode"] == "estimated"
     assert initial["varied_budget_percent"] == 25
     assert initial["personal"]["allow_nutrition_estimates"] is True
-    assert [m["count"] for m in initial["personal"]["meals"]] == [5, 0, 0]
+    assert [m["count"] for m in initial["personal"]["meals"]] == [3, 0, 0]
     assert all(v is None for v in initial["personal"]["meals"][0]["limits"].values())
     page.locator("#extra-choices>summary").click()
     page.locator("#enable-breakfast").check()
@@ -137,7 +137,7 @@ def test_primary_sliders_optional_meals_and_default_request(choices):
     page.locator("#breakfast-min_protein_g-value").fill("30")
     page.locator("#breakfast-nutrition-dialog").get_by_role("button", name="Klart", exact=True).click()
     selected = submit(page, captured)
-    assert [m["count"] for m in selected["personal"]["meals"]] == [5, 3, 4]
+    assert [m["count"] for m in selected["personal"]["meals"]] == [3, 3, 2]
     assert selected["personal"]["meals"][1]["limits"]["min_protein_g"] == 30
     page.locator("#enable-breakfast").uncheck()
     expect(page.locator('[data-meal-type="breakfast"]')).not_to_be_visible()
@@ -255,6 +255,7 @@ def test_distribution_conflict_preserves_explicit_values(choices):
     page, url, captured = choices
     page.goto(url)
     choose_location(page)
+    edit(page, "dinner-count", 5)
     page.locator("#dinner-distribution-open").click()
     edit(page, "dinner-vegetarian", 3)
     edit(page, "dinner-chicken", 2)
@@ -442,6 +443,11 @@ def test_request_parity_against_pre_change_frontend(choices, seed):
     page.reload()
     choose_location(page)
     after = submit(page, captured)
+    if seed is None:
+        # Membership intentionally changes only the initial guest menu size.
+        before["recipes"], before["servings"] = 3, 2
+        dinner = next(m for m in before["personal"]["meals"] if m["meal_type"] == "dinner")
+        dinner["count"], dinner["servings"] = 3, 2
     assert before == after
 
 
@@ -503,7 +509,7 @@ def test_snack_without_breakfast_and_zero_dinners(choices):
     expect(page.locator("#breakfast-meals")).not_to_be_visible()
     expect(page.locator("#snack-meals")).to_be_visible()
     request = submit(page, captured)
-    assert [m["count"] for m in request["personal"]["meals"]] == [0, 0, 5]
+    assert [m["count"] for m in request["personal"]["meals"]] == [0, 0, 3]
 
 
 def test_location_radius_municipality_manual_and_invalidation(choices):
@@ -604,6 +610,7 @@ def test_estimate_change_only_applies_to_explicit_recalculation():
 
 
 @pytest.mark.asyncio
+@pytest.mark.usefixtures("verified_smako_member")
 async def test_recalculation_passes_estimates_without_rewriting_saved_history(tmp_path, monkeypatch):
     from app.api import personal as api
     from app.config import Settings

@@ -21,8 +21,9 @@ def run_candidates(count, existing=0):
         clean_recipe=lambda recipe, meal: recipe,
         basket=lambda slots, final: qualified,
         _check_nutrition=lambda *args: [{"values": {}}],
+        _protein_category=lambda recipe: "vegetarian",
         variant_search_evidence=evidence, _recipe_id=lambda recipe: recipe.id, _prior_recipe_ids=None)
-    meal = SimpleNamespace(meal_type="dinner", profile=None, diet=None,
+    meal = SimpleNamespace(meal_type="dinner", profile=None, diet=None, count=5, distribution={},
                            limits=SimpleNamespace(active=False), recipe_choices=None)
     candidates = getattr(PersonalPlanner._candidates, "__wrapped__", PersonalPlanner._candidates)
     with (patch("app.services.recipe_library.meal_candidates", return_value=recipes),

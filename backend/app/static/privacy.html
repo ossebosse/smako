@@ -27,6 +27,10 @@
       <p>Postnummer, portionsval, antal middagar, kost, mål, max antal inköpsställen, medlemskap, anonymt sessions-ID och senaste plan-ID sparas lokalt i webbläsaren. Knappen för att rensa inställningar tar bort samtliga dessa lokala värden.</p>
       <p>En sparad planlänk lägger plan-ID efter <code>#</code> i adressen. Fragmentet skickas inte med den vanliga sidförfrågan till servern. Äldre länkar med <code>?plan=</code> läses för bakåtkompatibilitet och flyttas omedelbart till fragmentformatet.</p>
 
+      <h2>Smakokonto och medlemskap</h2>
+      <p>Om du skapar konto lagrar vi din e-postadress, en saltad lösenordshash och en hash av din återställningskod. Lösenord och återställningskod lagras inte i klartext. Kontot ger tillgång till större menyer och ett privat skafferi mellan enheter. E-postadressen är en inloggningsuppgift; den är inte verifierad och ingen e-post skickas.</p>
+      <p>Inloggningen använder en HttpOnly-cookie som gäller i högst 30 dagar. Utloggning återkallar den aktuella sessionen; lösenordsåterställning återkallar alla kontots sessioner. Gästskafferiet flyttas bara när du väljer att spara det på kontot. Ett befintligt kontoskafferi skrivs inte över.</p>
+      <p>Raderingsfunktionen nedan tar bort personliga planer och skafferi för ditt inloggade konto, eller din gästsession om du inte är inloggad. Själva inloggningskontot behålls. Kontakta Smako om du även vill ta bort kontot.</p>
       <h2>Lagringstid</h2>
       <p>Den separata, pseudonyma sessionscookien kan finnas kvar i högst 180 dagar. Sparade planer, strukturerad communityevidens och feedback behålls under den begränsade betaperioden för reproducerbarhet, moderering och felsökning. Någon automatisk slutfrist för dessa poster är ännu inte fastställd; detta är en uttrycklig policyfråga som ska beslutas före en bredare lansering. Rå kvittobild och rå kvittotext har som standard lagringstid 0 timmar efter bearbetning.</p>
 
@@ -51,7 +55,7 @@
 
       <form id="privacy-erasure-form" class="privacy-erasure-card">
         <h3>Radera mina betauppgifter</h3>
-        <p>Detta gäller bara den anonyma session som finns i den här webbläsaren.</p>
+        <p>Detta gäller skafferi och planer på ditt inloggade konto, eller din gästsession, samt betauppgifter från den här webbläsaren.</p>
         <label class="privacy-erasure-confirmation" for="privacy-erasure-confirm">
           <input id="privacy-erasure-confirm" type="checkbox" required />
           <span>Jag förstår att mina sparade planer och min feedback tas bort.</span>

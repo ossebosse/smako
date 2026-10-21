@@ -18,6 +18,7 @@ from app.services.performance_trace import (
 from fastapi.testclient import TestClient
 from scripts.profile_meal_plan import _human_summary, _parser, _validate_args
 
+pytestmark = pytest.mark.usefixtures("verified_smako_member")
 
 def test_trace_is_request_local_and_helpers_are_noops_when_inactive() -> None:
     assert current_performance_trace() is None

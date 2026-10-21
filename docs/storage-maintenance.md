@@ -2,6 +2,13 @@
 
 ## Automatisk retention, 2026-10-20
 
+Aktiverad på target 2026-10-20 15:37 UTC i schedulern
+`source-ops-52c7d8291bb7`. Se [verifierad aktivering och mätvärden](reviews/storage-lifecycle-20261020.md).
+Den första fullständiga körningen raderade 2,40 GB historiska filer och
+frigjorde 420 MB återanvändbara sidor inne i SQLite, utöver den tidigare
+rensningen på 83,36 GB. Appens menyalgoritm och RAM-cache ändrades inte av
+denna schedulerrelease.
+
 Den nya underhållsvägen är `deploy/scripts/storage_maintenance.py`. Den använder
 befintligt driftlås och körs vid schedulerstart, före backupens utrymmeskontroll,
 efter backup för rotation, samt högst var sjätte timme via ordinarie
@@ -14,6 +21,7 @@ separat; att filerna finns i Git ändrar inte en redan körande scheduler.
 | Publicerade prisartefakter | Alla aktiva kommuners manifest och deras exakta filer bevaras. Orefererade hashfiler får två dygns läsarmarginal. |
 | Avbrutna prisbyggen/backupförsök | Endast exakta egna temporärnamn, efter ett dygn och under driftlåset. |
 | Ordinarie refreshrapporter | 14 dagar/högst 128; de två senaste bevaras. Operatörskataloger omfattas inte. |
+| Containerloggar | Befintlig Compose-policy: högst fem loggfiler à 10 MB per container. Verifierad för app, scheduler och proxy på target 2026-10-20. |
 | Inaktiva källpayloads | 14 dagar; aktuella/LKG, två senaste per källscope, publicerad härkomst, incidenter och fältvalideringsreferenser undantas. Högst 32 snapshots behandlas per körning. |
 | Kommunala försök | 14 dagar; aktuell referensgraf, de två senaste försöken och äldre råfiler som fortfarande används av kopierade databaser bevaras. |
 
@@ -292,7 +300,11 @@ granskning. Återinför inte en root-ägd daterad katalog i den dagliga rotation
 
 Återställning startar ingen container och ändrar ingen produktionskonfiguration.
 
-## Begränsa fortsatt tillväxt
+## Historiska driftrekommendationer före retentionen 2026-10-20
+
+Backup- och releasebeteendet i denna äldre lista ersätts av policyn
+**Automatisk retention, 2026-10-20** ovan. Referensskydden för okända arkiv,
+volymer och väntande arbete gäller fortsatt.
 
 - Skapa inga nya fullständiga daterade projekt-/databaskopior på servern som
   standard. Använd det permanenta repot och avgränsade fixtures; arkivera granskade

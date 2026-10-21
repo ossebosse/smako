@@ -250,8 +250,8 @@ def test_production_plan_api_rejects_expensive_internal_search_options_before_se
     response = client.post(
         "/api/plan?debug=true",
         json={
-            "recipes": 5,
-            "servings": 4,
+            "recipes": 3,
+            "servings": 2,
             "max_stores": 2,
             "candidate_recipe_count": 300,
             "candidate_search_limit": 300,
@@ -421,8 +421,8 @@ def test_saved_plan_api_persists_without_repricing(
         "/api/plans",
         json={
             "postal_code": "22350",
-            "recipes": 5,
-            "servings": 4,
+            "recipes": 3,
+            "servings": 2,
             "max_stores": 2,
             "diet_preference": "vegetarian",
             "diversity_mode": "balanced",
@@ -476,8 +476,8 @@ def test_saved_plan_reads_and_mutations_require_creating_anonymous_session(
         "/api/plans",
         json={
             "postal_code": "22350",
-            "recipes": 5,
-            "servings": 4,
+            "recipes": 3,
+            "servings": 2,
             "max_stores": 2,
             "diet_preference": "vegetarian",
         },
@@ -773,7 +773,7 @@ def test_saved_plan_endpoint_rejects_nonlocal_price_source(
     monkeypatch.setenv("PLAN_STORE_PATH", str(tmp_path / "unsafe.sqlite3"))
     response = TestClient(app).post(
         "/api/plans",
-        json={"recipes": 5, "servings": 4, "max_stores": 2},
+        json={"recipes": 3, "servings": 2, "max_stores": 2},
     )
     assert response.status_code == 503
 
@@ -800,7 +800,7 @@ def test_offline_preflight_fails_before_service_or_provider_can_run(
     monkeypatch.setenv("PLAN_STORE_PATH", str(tmp_path / "never-created.sqlite3"))
     response = TestClient(app).post(
         "/api/plans",
-        json={"recipes": 5, "servings": 4, "max_stores": 2},
+        json={"recipes": 3, "servings": 2, "max_stores": 2},
     )
     assert response.status_code == 503
     assert called is False

@@ -1,5 +1,29 @@
 # Granskning av receptskalningen, 2026-10-20
 
+## Uppdatering 2026-10-21: integration i main
+
+Användaren har uttryckligen begärt att PR #4 ska integreras i `main`.
+Grenen har därför sammanförts med `main` vid `92c4abd`. Konflikten i
+`PersonalPlanner._candidates` löstes genom att behålla både skalningens
+variantunderlag och kategorisökningens kapacitetsfilter. Testfixturen för
+variantunderlag har kompletterats med kategorifälten från main. Nyare
+medlemskap, kategorisökning och receptbyteskontroller ingår i integrationen.
+
+Detta ändrar integrationsbeslutet nedan, men inte evidensens begränsningar:
+oberoende pris-/tids-/minnesmätningar vid 1 000/2 000 recept är fortfarande
+ofullständiga. Integration är inte acceptans av skalningsmilstolpen.
+Ordinarie receptbibliotek är oförändrat och ingen betaaktivering ingår.
+PR:ns nya CI-körning verifierar den sammanslagna koden före merge.
+
+Lokalt passerar riktade prov för inkrementell sökning, lat parlikhet,
+fullbiblioteksreferens, receptbibliotek, acceptansmatris, delad cache,
+kostnadsgolv, kategorisökning och medlemskap inklusive webbläsarprov.
+Variantunderlagets två prov passerar efter uppdatering av testfixturen;
+första körningen använde dess äldre form och föll på saknat kategorifält.
+Ruff på samtliga ändrade Pythonfiler, compileall och diffkontroll passerar.
+
+## Historiskt granskningsbeslut 2026-10-20
+
 **Beslut:** den fristående referensrättningen `9e6b7a9` är godkänd och
 integrerad/pushad på `main`. Skalningspaketet är ännu inte godkänt som färdig
 skalningsmilstolpe. Det ligger med granskningsrättelser i
