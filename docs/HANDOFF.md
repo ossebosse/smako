@@ -1,3 +1,31 @@
+# 2026-10-21: Smakomedlemskap implementerat, väntar betarelease
+
+Gästläge är kvar med högst **3 recept per meny och 2 portioner per recept**.
+Kostnadsfritt konto med e-post/lösenord låser upp planerarens befintliga större
+menyer och ett kontokopplat skafferi mellan enheter. Registrering, inloggning,
+utloggning och återställningskod finns under `/personal#account`. Befintlig
+OIDC-inloggning fungerar fortsatt när den är konfigurerad.
+
+API-spärrarna omfattar även personliga måltidstyper, egna recept, asynkrona
+jobb och ändringar i sparade planer. Gästskafferi, profil och planer kan flyttas
+atomärt till ett tomt konto; befintliga kontodata skrivs inte över. Manuell
+skafferiinmatning har också rättats där ett odefinierat fält tidigare stoppade den.
+
+Verifiering: **314 riktade tester godkända, 3 befintliga XFAIL**. Det omfattar
+270 konto-/API-/planerings-/integritetstester, samtliga 42 formulärtester och
+två regressionsfall för receptbyten. Kontoacceptans kördes i Chromium på
+1280 px och WebKit på 390 px, med riktiga isolerade konton och skafferidata.
+Ruff, compileall, JavaScript-syntax och diffkontroll är godkända. Underlag i
+`.local/membership/`. Detta är riktad verifiering, inte hela projektets CI-svit.
+
+**Inte aktiverat på betan.** Ändringen lägger till tre privata tabeller i den
+befintliga plandatabasen. Gör en separat granskad release med databasbackup
+enligt [BETA.md](BETA.md), inte en vanlig apppatch som förutsätter oförändrat
+schema. Ingen extern e-posttjänst eller betalning ingår. Återställningskoden
+måste sparas av användaren. [Funktion, lagring och begränsningar](MEMBERSHIP.md).
+
+---
+
 # 2026-10-21: Kategorisökning aktiv och liveverifierad
 
 Aktiverad **00:27:05 UTC / 02:27:05 svensk tid**. Runtimekod `73306ac`

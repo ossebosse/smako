@@ -13,7 +13,7 @@
   <script src="/static/complete-recipes.js?v=ingredients-20261012" defer></script>
   <script src="/static/shopping-location.js?v=location-20261011" defer></script>
   <script src="/static/choice-controls.js?v=option3-1" defer></script>
-  <script src="/static/personal.js?v=option3-1" defer></script>
+  <script src="/static/personal.js?v=membership-1" defer></script>
   <script src="/static/product-search.js?v=comparability-20261010" defer></script>
 </head>
 <body class="personal-app">
@@ -25,11 +25,13 @@
     <button type="button" data-open="pantry">Skafferi</button>
     <button type="button" data-open="product-search">Sök varor</button>
     <button type="button" data-open="choices">Mina val</button>
+    <button type="button" data-open="account" id="account-nav">Bli medlem / Logga in</button>
   </nav>
   <main id="personal-main">
     <p id="personal-status" role="status" aria-live="polite"></p>
     <section data-view="plan" id="personal-plan">
       <div class="personal-intro"><p class="eyebrow">Maten för din vecka</p><h1>Vad finns hemma?<br>Vad vill du äta?</h1><p>Planera middagar, frukostar och mellanmål. Allt räknas ihop med dina extravaror till en inköpslista.</p><button type="button" class="primary-button" data-open="choices">Välj måltider och skapa plan</button></div>
+      <p class="membership-note">Som gäst: 3 recept per meny och 2 portioner per recept. <button type="button" class="secondary-button" data-open="account">Lås upp mer med ett konto</button></p>
       <div id="plan-content"></div>
     </section>
     <section data-view="shopping" id="personal-shopping" hidden><h1>En gemensam inköpslista</h1><p>Även utan recept. Alla varor delar samma butikstak och medlemskap.</p>
@@ -51,11 +53,18 @@
       <button type="button" class="secondary-button" id="calculate-own-list">Beräkna bara mina varor – utan recept</button>
       <p>Om en plan redan är öppen läggs varorna till dess recept. Välj ”utan recept” för en fristående lista. Butikstak, postnummer och medlemskap väljs under Mina val.</p>
     </section>
-    <section data-view="pantry" id="personal-pantry" hidden><h1>Mitt skafferi</h1><p id="account-status">Privat gästskafferi för den här webbläsaren. Kontosynk är inte aktiverad.</p>
-      <div id="account-actions"></div><p>Faktiskt lager visas separat från reservationer och framtida överskott. Generering bokför aldrig inköp.</p>
+    <section data-view="pantry" id="personal-pantry" hidden><h1>Mitt skafferi</h1><p id="account-status">Ditt skafferi sparas i gästsessionen. Skapa konto för att nå det på fler enheter.</p>
+      <button type="button" class="secondary-button" data-open="account">Spara skafferiet på mitt konto</button><p>Faktiskt lager visas separat från reservationer och framtida överskott. Generering bokför aldrig inköp.</p>
       <button class="primary-button" type="button" id="add-pantry">Lägg till manuellt</button>
       <button class="secondary-button" type="button" data-open="product-search">Sök eller skanna</button>
       <div id="pantry-list"></div><div id="reservation-list"></div>
+    </section>
+    <section data-view="account" id="personal-account" hidden>
+      <p class="eyebrow">Smako medlemskap</p><h1 id="member-heading">Mer plats för din matvecka</h1>
+      <p id="member-intro">Skapa ett kostnadsfritt konto för fler än 3 recept per meny, fler än 2 portioner per recept och ett skafferi som följer med mellan enheter.</p>
+      <p id="member-status" role="status"></p><div id="account-actions"></div>
+      <button type="button" class="secondary-button" data-open="choices">Tillbaka till mina val</button>
+      <p><a href="/privacy">Så hanterar Smako dina uppgifter</a></p>
     </section>
     <section data-view="product-search" id="product-search" class="product-search" hidden aria-labelledby="product-search-title">
       <h1 id="product-search-title">Sök varor</h1><p>Välj en exakt produkt till inköpslistan eller skafferiet.</p>
@@ -87,7 +96,7 @@
         <input type="hidden" id="postal-code" value="" />
         <fieldset id="planning-choices" hidden disabled>
         <p class="sr-only" id="meal-announcement" aria-live="polite"></p>
-        <div id="meal-settings"></div>
+        <p>Gästläget omfattar totalt 3 recept och högst 2 portioner per rätt. <button type="button" class="secondary-button" data-open="account">Bli medlem</button></p><div id="meal-settings"></div>
         <fieldset class="choices-primary"><legend>Inköpsställen</legend><div id="store-count-control"></div></fieldset>
         <section class="choice-shortcuts"><h2>Gör planen mer din</h2><p>Genvägar till dina extraval.</p><div class="personal-actions"><button type="button" data-choice-jump="taste-choices">Smakval</button><button type="button" data-choice-jump="complete-recipe-controls">Receptval</button><button type="button" data-choice-jump="organic-choices">Ekologiskt</button><button type="button" data-choice-jump="surplus-choices">Överskott</button></div></section>
         <details id="extra-choices" class="extra-choices"><summary>Extraval <span>Fler måltider, smakval och egna gränser</span></summary>

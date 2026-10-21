@@ -16,16 +16,19 @@ from fastapi.testclient import TestClient
 
 
 @pytest.fixture
-def oidc(monkeypatch):
+def oidc(monkeypatch, tmp_path):
     issuer = "https://oidc.example.test"
     for key, value in zip(
         account.ENV_KEYS, [issuer, "offline-client", "offline-secret"], strict=True
     ):
         monkeypatch.setenv(key, value)
     settings = Settings(
+        plan_store_path=tmp_path / "oidc-plans.sqlite",
         public_base_url="https://beta.smako.nu", secret_key="offline-test-signing-key-" * 3
     )
     monkeypatch.setattr(account, "get_settings", lambda: settings)
+    from app.api import plan
+    monkeypatch.setattr(plan, "get_settings", lambda: settings)
     app = FastAPI()
     account.install_account(app)
     key = JsonWebKey.generate_key("RSA", 2048, is_private=True, options={"kid": "offline-key"})

@@ -13,6 +13,8 @@ from fastapi.testclient import TestClient
 _CENT = Decimal("0.01")
 
 
+pytestmark = pytest.mark.usefixtures("verified_smako_member")
+
 def _money(value: float | Decimal) -> Decimal:
     return Decimal(str(value)).quantize(_CENT, rounding=ROUND_HALF_UP)
 

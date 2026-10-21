@@ -26,6 +26,7 @@ På Linux/macOS används `python3.12` och `.venv/bin/python`.
 
 - **[Utveckling: start, tester, riktiga prisunderlag och bidrag](docs/DEVELOPMENT.md)**
 - **[Aktivera en granskad commit från main på betan](docs/BETA.md)**
+- [Medlemskap, gästgränser och kontoskafferi](docs/MEMBERSHIP.md)
 - [Aktiv betaversion och kommande arbete](docs/HANDOFF.md)
 - [Driftstatus och felsökning](docs/OPERATIONS.md)
 - [Projektregler](AGENTS.md)

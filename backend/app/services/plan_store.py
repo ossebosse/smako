@@ -15,6 +15,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from app.models import PlanRequest, PlanResponse, SavedPlan
+from app.services.member_accounts import SCHEMA as MEMBER_SCHEMA
 from app.services.personal_store import SCHEMA as PERSONAL_SCHEMA
 from app.services.personal_store import PersonalConflict, read_state, reserve_plan, write_state
 
@@ -80,6 +81,7 @@ class PlanStore:
         with self._connect() as connection:
             connection.executescript(_SCHEMA)
             connection.executescript(PERSONAL_SCHEMA)
+            connection.executescript(MEMBER_SCHEMA)
             existing = {
                 row["name"]
                 for row in connection.execute(

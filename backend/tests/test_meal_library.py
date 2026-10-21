@@ -206,6 +206,7 @@ def test_declaration_inventory_binds_changed_rows_and_new_products(tmp_path,monk
 
 
 @pytest.mark.parametrize('category',['breakfast','snack'])
+@pytest.mark.usefixtures("verified_smako_member")
 def test_explicit_replacement_resolves_current_meal_type_before_week_recalculation(category,monkeypatch):
     import asyncio
 

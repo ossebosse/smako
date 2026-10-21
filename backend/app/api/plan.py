@@ -636,6 +636,8 @@ async def create_saved_plan(request: PlanRequest, http_request: Request):
 
 
 def _prepare_complete_request(request, http_request, settings):
+    from app.services.membership import require_membership_limits
+    require_membership_limits(request, http_request)
     from app.services.complete_recipes import enabled, prepare_request
     if not enabled(request):
         return request
@@ -851,6 +853,8 @@ async def replace_saved_recipe(
                 "Använd planens personliga redigeringsflöde för en gemensam omberäkning."
             )
         plan_request = saved.request.model_copy(update={"membership_price_policy": "all_advertised"})
+        from app.services.membership import require_membership_limits
+        require_membership_limits(plan_request, http_request)
         plan = await replace_recipe(
             saved.plan,
             plan_request,

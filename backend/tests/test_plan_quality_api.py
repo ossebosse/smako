@@ -8,6 +8,7 @@ from app.models import NormalizedIngredient
 from app.services.basket_auditor import BasketAuditor
 from fastapi.testclient import TestClient
 
+pytestmark = pytest.mark.usefixtures("verified_smako_member")
 
 def _money(value: float | Decimal) -> float:
     return float(Decimal(str(value)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))

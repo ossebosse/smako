@@ -128,18 +128,18 @@
 
             <div class="form-grid">
               <div class="field">
-                <label for="recipes">Middagar</label>
+                <p>Som gäst: högst 3 recept och 2 portioner per rätt. <a href="/personal#account">Bli medlem / Logga in</a> för att planera mer och spara skafferiet.</p><label for="recipes">Middagar</label>
                 <select id="recipes" name="recipes" data-min="3" data-max="7" required>
-                  <option value="3">3 middagar</option>
+                  <option value="3" selected>3 middagar</option>
                   <option value="4">4 middagar</option>
-                  <option value="5" selected>5 middagar</option>
+                  <option value="5">5 middagar</option>
                   <option value="6">6 middagar</option>
                   <option value="7">7 middagar</option>
                 </select>
               </div>
               <div class="field">
                 <label for="servings">Portioner</label>
-                <input id="servings" name="servings" type="number" value="4" min="1" max="8" step="1" required />
+                <input id="servings" name="servings" type="number" value="2" min="1" max="8" step="1" required />
               </div>
               <div class="field field-wide">
                 <label for="max-stores">Max antal inköpsställen</label>

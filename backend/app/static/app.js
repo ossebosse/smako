@@ -659,8 +659,8 @@
       // The form can still be reset when storage is unavailable.
     }
     dom.postalCode.value = "22350";
-    dom.recipesInput.value = "5";
-    dom.servingsInput.value = "4";
+    dom.recipesInput.value = "3";
+    dom.servingsInput.value = "2";
     dom.maxStoresInput.value = "2";
     dom.purchasePlanningMode.value = "exact";
     dom.dietPreference.value = "mixed";
@@ -922,6 +922,7 @@
     }
     if (status === 503) return "Planeringstjänsten är tillfälligt otillgänglig. Försök igen om en stund. Dina val är kvar.";
     if (status >= 500) return "Ett serverfel hindrade planeringen. Försök igen om en stund. Dina val är kvar.";
+    if (normalizedCode === "membership_required") return "Som gäst kan du skapa 3 recept och 2 portioner per rätt. Välj Bli medlem / Logga in för att låsa upp fler. Dina val är kvar.";
     if (status === 401 || status === 403) return "Din session saknar åtkomst. Ladda om sidan och försök igen. Dina val är kvar.";
     const detail = payload && payload.detail;
     if (typeof detail === "string" && detail.trim()) return detail;

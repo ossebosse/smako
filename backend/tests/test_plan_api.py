@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import pytest
 from app.api import plan as plan_api
 from app.config import Settings
 from app.main import app
 from app.models import PlanRequest
 from fastapi.testclient import TestClient
 
+pytestmark = pytest.mark.usefixtures("verified_smako_member")
 
 def test_request_mode_sets_planner_quantity_policy_without_mutating_shared_settings(monkeypatch) -> None:
     shared = Settings(price_provider="mock", allow_estimated_quantities=True)
