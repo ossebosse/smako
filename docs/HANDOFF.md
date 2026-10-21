@@ -1,35 +1,40 @@
-# 2026-10-20: Kategorisökning integrerad, appaktivering väntar på driftlås
+# 2026-10-21: Kategorisökning aktiv och liveverifierad
 
-Användaren har godkänt implementation, driftåtgärd, commit och betaaktivering.
-PR #6 är integrerad på main `61c1a8f`; runtimekod `73306ac`.
-Full CI är grön för både koden och main-integrationen. 26 riktade tester,
-24 jämförelsekörningar och två fullpoolskontroller är godkända.
-Blandade kvoter tar ungefär halva tiden med samma pris och matkök i Lund
-och Malmö. Helt vegetariskt i Lund är något långsammare.
+Aktiverad **00:27:05 UTC / 02:27:05 svensk tid**. Runtimekod `73306ac`
+är integrerad på main via PR #6. BUILD_ID `app-73306acc382d-0d139487`,
+image `sha256:0ad2b6021e6a71b5a849edb42430d0a94c33ea152e58984353de8124182a0830`.
+Både Lund och Malmö är ready. Endast appen byttes; scheduler, proxy,
+volymer och aktiva prismanifest bevarades. Verifierad backup
+`20261020T233117Z`. Samtliga tidigare 304 planrevisioner och 115 privata
+tillståndsrader är bevarade inklusive radhashar.
+
+Full CI är grön för koden och main-integrationen: 2 854 PASS, 10 XFAIL,
+53 SKIP. 26 riktade tester, 24 frysta jämförelsekörningar och två
+fullpoolskontroller är godkända. Blandade kategorier tar ungefär halva
+tiden vid samma pris och matkök. Helt vegetariskt i Lund är något långsammare.
+[Aktiveringsjournal](releases/category-search-20261020/ACTIVATED.md).
 [Verifiering och driftåtgärd](reviews/category-aware-recipe-search-implementation-20261020.md).
 
-**Byggd och verifierad, ännu inte aktiverad:** paket
-`app-73306acc382d-0d139487` finns i `.local/category-search-20261020/release-final`.
-Image `sha256:0ad2b6021e6a71b5a849edb42430d0a94c33ea152e58984353de8124182a0830`.
-Endast tre granskade appfiler ändras, 696 runtimefiler är oförändrade.
-Exakt bild klarar import, bibliotek, admininställning, kvoturval och byte.
-Förkontrollens retention är godkänd (32 snapshots pensionerade).
+Fyra publika menyer och två receptbyten är godkända i Lund/Malmö:
+exakta kvoter, fem olika grundrätter, godkänd korg, högst två tillåtna
+butiker, identisk sparad återläsning och bevarad äldre revision vid byte.
 
-Första aktiveringsförsöket stoppades före backup/appbyte av
-`operation_lock_held`: ett nytt ordinarie Lundjobb startade 22:00 UTC
-medan bilden färdigställdes. Ingen tjänst eller insamling har avbrutits.
-`wait-activate.py` väntar på just den processen och kör sedan ordinarie
-`beta_release.py activate --checks-passed`. Läs `wait-activate.log`,
-`activate.log`, `resume-status.json` och serverns releasekvitto innan
-ett nytt försök startas; undvik konkurrerande aktiveringar.
-Bygg inte om bilden. Fortsätt enligt `docs/BETA.md` med backup/appbyte
-och publikt menybygge/receptbyte. Begär inte nytt godkännande.
-Lokala hjälpare `probe-final.py` och `verify_http.py` finns i samma
-`.local/category-search-20261020/`; aktiveringskvitto saknas ännu.
+**Kvar i pågående körning:** efterretention, återleverans av nattens
+Malmöpaket och sista driftstatus. Malmöpaketet fick 00:24 UTC
+`RefreshAlreadyRunningError` under backupen. Paketet är kvalificerat;
+`deliver-malmo.py` väntar på efterretentionens godkända kvitto innan normal
+återleverans. Ny insamling är spärrad. Läs `deliver-malmo.log` och
+`resume-status.json` innan någon ny leverans startas.
+Läs `.local/category-search-20261020/http.log`, `http-evidence.json`,
+`activate.log`, `resume-status.json` och `release-final/activate.json`.
+Appen är redan aktiverad: bygg eller aktivera inte samma release igen.
+Verifiera att pågående processer avslutats innan eventuell efteråtgärd.
+Användarens godkännande omfattar hela arbetet; fråga inte på nytt.
 
-Willys-felet är återställt: exakt redan aktiv Lundartefakt återlevererad
-via installerat relä, kvittens `already_active` 20:11:30 UTC. Ingen ny
-insamling, ingen förnyad observationstid, inget schema ändrat.
+Willys-incidentens kvittens återställdes 2026-10-20 20:11:30 UTC via
+installerat relä, exakt redan aktiv Lundartefakt och `already_active`.
+Ingen ny insamling, förnyad observationstid eller schemaändring gjordes.
+Äldre text nedan är historik.
 
 ---
 

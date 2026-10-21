@@ -1,6 +1,7 @@
 # Kategorimedveten receptsökning och Willys-kvittens, 2026-10-20
 
-Status: kandidat verifierad och byggd; aktivering väntar på driftlås.
+Status: aktiverad 2026-10-21 00:27:05 UTC; fyra live-menyer och två byten
+godkända. Releaseflödets efterretention pågår.
 Utgår från main `254f142` och den aktiva appen
 `app-bac0fc15ca9a-512ef3ea`. Användaren har godkänt implementation,
 driftåtgärd, commit och aktivering på betan.
@@ -107,7 +108,10 @@ verifierade. Isolerat prov utan nät på exakt image klarar appimport,
 admininställning, samtliga 222 registrerade recept, kategoriurval och
 kapacitetsberäkning vid byte. Förkontrollens retention är godkänd;
 32 äldre snapshots pensionerade och 1 821 491 766 byte filer borttagna.
-Aktivering väntar på det ordinarie Lundjobb som startade 22:00 UTC.
+Aktiverad 2026-10-21 00:27:05 UTC efter avslutade driftjobb och verifierad
+backup. Alla tidigare 304 planrevisioner och 115 privata tillståndsrader
+bevarades, liksom prismanifest, mountar, scheduler och proxy.
+[Aktiveringsjournal](../releases/category-search-20261020/ACTIVATED.md).
 
 ## Driftsfelet och genomförd återställning
 

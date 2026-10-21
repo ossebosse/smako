@@ -1,7 +1,9 @@
 # Kategoriindelat recepturval, 2026-10-20
 
 Analys av main `fcea66a`, efter frågan om en kycklingrätt, två vegetariska
-och resterande kötträtter. Förslagen nedan är inte aktiverade sökändringar.
+och resterande kötträtter. Texten nedan beskriver läget före implementationen.
+Se [genomförande och verifiering](category-aware-recipe-search-implementation-20261020.md)
+för det kategorimedvetna urval som aktiverades 2026-10-21.
 Scheduleraktiveringen för självstädning är en separat leverans.
 
 ## Vad nuvarande UI och planerare gör
