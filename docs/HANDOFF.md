@@ -1,3 +1,14 @@
+# 2026-10-21: 40 recept, äggnamn i Malmö och faktalucka – ej aktiverat
+
+Gren `content/recipes-20261021` ovanpå `d3ecf2c`: äggrättelse för Malmö,
+Codex 20 tillväxtrecept och 20 nya recept. Lund standard: 548,76 → 486,85 kr
+men varm planering 63,6 → 91,9 s. Willys/Hemköp saknar ingredienser och näring
+i båda städerna; Malmö har ingen Coop-katalog. Instruktioner för nästa
+granskning (mätning/regression, beslut om recepten, produktdetaljer från
+Axfood): `docs/reviews/recipes-20261021.md`.
+
+---
+
 # 2026-10-21: Smakomedlemskap aktivt och liveverifierat
 
 Aktiverat **11:07:40 UTC / 13:07:40 svensk tid**, kod `c253cbd9ef93`,
