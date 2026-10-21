@@ -255,6 +255,11 @@ def import_pack(path, *, root=ROOT, accepted_ids=None):
     if not recipes:
         raise ValueError("Ingen giltig godkänd delmängd")
     content = encoded({"library_version":SCHEMA, "recipes":[r.model_dump(mode="json") for r in recipes]})
+    if len(content) > MAX_BYTES:
+        # load_entries rejects a larger pack, so publishing it would make the
+        # whole library unloadable. Nothing has been written yet.
+        raise ValueError(f"Det publicerade paketet blir {len(content)} byte, mer än {MAX_BYTES}; "
+                         "dela upp utkastet i flera paket")
     sha = digest(content)
     target = root / ("meal-pack-" + sha + ".json")
     if target.exists() and target.read_bytes() != content:

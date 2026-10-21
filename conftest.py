@@ -73,3 +73,19 @@ def pytest_collection_modifyitems(config, items):
     for item in items:
         if item.nodeid in _KNOWN_FAILURES:
             item.add_marker(_pytest.mark.xfail(strict=True, reason="Känt fel på main före 2026-10-16; se docs/TESTING.md"))
+
+
+# --- Process-local planner reuse ---------------------------------------------
+# Tests patch matchers, facts and price helpers on shared fixtures. Start every
+# test with an empty cross-request resolution cache so one test's patched result
+# can never be reused by another (production keys cover the real inputs).
+@_pytest.fixture(autouse=True)
+def _empty_shared_planner_resolution():
+    try:
+        from app.services.planner_shared_cache import SHARED_RESOLUTION
+    except ImportError:  # grocery_data-only test runs
+        yield
+        return
+    SHARED_RESOLUTION.clear()
+    yield
+    SHARED_RESOLUTION.clear()

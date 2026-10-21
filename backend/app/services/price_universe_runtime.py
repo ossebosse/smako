@@ -392,7 +392,7 @@ def menu_search_cache_key(
     return hashlib.sha256(encoded).hexdigest()
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, slots=True, weakref_slot=True)
 class PreparedPriceUniverse:
     """One validated universe plus the meal-ready semantic/economic projection."""
 

@@ -44,7 +44,8 @@ INPUTS = {"sha256": {"combined-prices.json": "a"}, "now": "2026-10-18T12:00:00+0
 def reference(**changes):
     report = {"schema": "smako-planner-acceptance-v1", "inputs": dict(INPUTS), "uncapped": True,
               "reference_contract": matrix.FULL_LIBRARY_REFERENCE_CONTRACT,
-              "search_limits": {"seed": 0, "refinement": 0, "seed_variant_shortlist": False},
+              "search_limits": {"seed": 0, "refinement": 0, "seed_variant_shortlist": False,
+                                "substitution": 0},
               "records": [{"outcome": "PASS", "paid": 100.0}]}
     report.update(changes)
     return report
@@ -53,12 +54,13 @@ def reference(**changes):
 def test_full_library_settings_match_the_contract():
     settings = matrix.full_library_search_limits(Settings())
     assert (settings.library_seed_pool_limit, settings.library_refinement_pool_limit,
-            settings.library_seed_variant_shortlist) == (0, 0, False)
+            settings.library_seed_variant_shortlist,
+            settings.library_substitution_pool_limit) == (0, 0, False, 0)
 
 
 def test_current_full_library_reference_is_accepted():
     matrix.validate_full_library_reference(reference(), dict(INPUTS))
-    # A report written by the shortlist fix but before the contract tag existed.
+    # Untagged reports must still explicitly state all four settings.
     untagged = reference()
     del untagged["reference_contract"]
     matrix.validate_full_library_reference(untagged, dict(INPUTS))
@@ -75,6 +77,13 @@ def test_current_full_library_reference_is_accepted():
     ({"search_limits": {"seed": False, "refinement": 0, "seed_variant_shortlist": False}}, "'seed'"),
     ({"search_limits": {"seed": 0, "refinement": 90, "seed_variant_shortlist": False}}, "'refinement'"),
     ({"search_limits": {"seed_variant_shortlist": False}}, "lacks 'seed'"),
+    ({"search_limits": {"seed": 0, "refinement": 0, "seed_variant_shortlist": False}},
+     "lacks 'substitution'"),
+    ({"search_limits": {**matrix.FULL_LIBRARY_SEARCH_LIMITS, "substitution": 160}},
+     "'substitution'"),
+    ({"search_limits": {**matrix.FULL_LIBRARY_SEARCH_LIMITS, "substitution": False}},
+     "'substitution'"),
+    ({"reference_contract": "smako-full-library-reference-v1"}, "unknown reference contract"),
     ({"search_limits": None}, "no search_limits"),
     ({"uncapped": False}, "not an --uncapped run"),
     ({"uncapped": "true"}, "not an --uncapped run"),
@@ -135,3 +144,33 @@ def test_correct_reference_passes_the_cli_gate(tmp_path, monkeypatch):
     # Validation passes, so the run proceeds to planner construction (stubbed).
     with pytest.raises(AssertionError, match="planner constructed"):
         run_cli_with_reference(tmp_path, monkeypatch, lambda inputs: reference(inputs=inputs))
+
+
+def test_missing_substitution_setting_is_rejected_by_cli(tmp_path, monkeypatch, capsys):
+    def legacy(inputs):
+        report = reference(inputs=inputs)
+        del report["search_limits"]["substitution"]
+        del report["reference_contract"]
+        return report
+
+    with pytest.raises(SystemExit) as stopped:
+        run_cli_with_reference(tmp_path, monkeypatch, legacy)
+    assert stopped.value.code == 2
+    assert "lacks 'substitution'" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("flags", [
+    ["--substitution-limit", "-1"],
+    ["--substitution-limit", "0", "--uncapped"],
+    ["--substitution-limit", "160", "--uncapped"],
+])
+def test_invalid_substitution_flags_fail_before_loading_inputs(tmp_path, monkeypatch, capsys, flags):
+    monkeypatch.setattr(sys, "argv", [
+        "matrix", "--inputs", str(tmp_path / "missing"),
+        "--output", str(tmp_path / "out"), "--matrix-case", "standard", *flags,
+    ])
+    with pytest.raises(SystemExit) as stopped:
+        matrix.main()
+    assert stopped.value.code == 2
+    assert "--substitution-limit must be >= 0 and cannot be combined" in capsys.readouterr().err
+    assert not (tmp_path / "out").exists()

@@ -12,14 +12,13 @@ adding many recipes, and on the server with the acceptance matrix's
 import json
 import os
 import socket
-from dataclasses import replace
 from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
 
 import pytest
 
-from backend.scripts.planner_acceptance_matrix import cap_regression
+from backend.scripts.planner_acceptance_matrix import cap_regression, full_library_search_limits
 
 PROFILES = os.environ.get("SMAKO_CAP_PROFILES", "standard,distribution").split(",")
 
@@ -56,8 +55,7 @@ def test_capped_search_never_pays_more_than_the_whole_library(case):
     now = datetime.fromisoformat(os.environ.get("SMAKO_REVIEW_CLOCK", "2026-10-16T18:12:49.613708+00:00"))
     capped = Settings(complete_recipes_enabled=True, price_provider="own")
     rows = []
-    for settings in (capped, replace(capped, library_seed_pool_limit=0, library_refinement_pool_limit=0,
-                                     library_seed_variant_shortlist=False)):
+    for settings in (capped, full_library_search_limits(capped)):
         with patch.object(socket.socket, "connect", side_effect=AssertionError("Network forbidden")):
             try:
                 plan = PersonalPlanner(request, settings, prepared, {"revision": 0, "items": [], "reservations": {},

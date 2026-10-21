@@ -23,3 +23,12 @@ def test_full_library_reference_keeps_every_variant_of_a_family():
 
     assert kept(limit=0, shortlist_variants=True) == 4  # default seed: shortlist active
     assert kept(limit=0, shortlist_variants=False) == len(family)  # full-library reference
+
+
+def test_library_option_selection_keeps_empty_slot_groups():
+    """A newer generation may add no recipe for a meal type (e.g. breakfast)."""
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.recipe_candidate_validator import recipe_id
+
+    planner = SimpleNamespace(variant_search_evidence={}, _recipe_id=recipe_id)
+    assert PersonalPlanner._select_library_options(planner, [[], []], limit=40, shortlist_variants=False) == [[], []]

@@ -139,6 +139,59 @@ def _evaluation_verification_rank(evaluation: _BasketEvaluation) -> int:
     )
 
 
+class LazyPairwiseSimilarities(Mapping[tuple[str, str], float]):
+    """Exact pairwise culinary scores, computed on first lookup.
+
+    Same keys, values and iteration order as the eager dict of every pair
+    of distinct profile names (key: the sorted name pair). The search only
+    looks up pairs of recipes chosen together, so computing all n*(n-1)/2
+    pairs up front grew quadratically with the library. Each score is
+    calculated once, in the same argument order as the eager loop (the
+    earlier profile first), and range-checked when it is calculated.
+    """
+
+    __slots__ = ("_compare", "_order", "_profiles", "_scores")
+
+    def __init__(self, profiles: Mapping[str, object], compare: Callable[[object, object], float]):
+        self._profiles = profiles
+        self._order = {name: index for index, name in enumerate(profiles)}
+        self._compare = compare
+        self._scores: dict[tuple[str, str], float] = {}
+
+    def _valid(self, key: object) -> bool:
+        return (isinstance(key, tuple) and len(key) == 2 and key[0] in self._order
+                and key[1] in self._order and key[0] < key[1])
+
+    def __getitem__(self, key: tuple[str, str]) -> float:
+        score = self._scores.get(key)
+        if score is not None:
+            return score
+        if not self._valid(key):
+            raise KeyError(key)
+        left, right = sorted(key, key=self._order.__getitem__)
+        score = self._compare(self._profiles[left], self._profiles[right])
+        if not 0 <= score <= 1:
+            raise ValueError("pairwise recipe similarities must be between zero and one")
+        self._scores[key] = score
+        return score
+
+    def __contains__(self, key: object) -> bool:
+        return self._valid(key)
+
+    def __iter__(self):
+        names = list(self._profiles)
+        for index, left in enumerate(names):
+            for right in names[index + 1:]:
+                yield tuple(sorted((left, right)))
+
+    def __len__(self) -> int:
+        return comb(len(self._profiles), 2)
+
+    @property
+    def calculated(self) -> int:
+        return len(self._scores)
+
+
 @dataclass(frozen=True, slots=True)
 class DiversityConstraints:
     """Simple structural limits used while expanding the beam.
@@ -188,7 +241,9 @@ class DiversityConstraints:
             and not 0 <= self.max_pairwise_recipe_similarity <= 1
         ):
             raise ValueError("max_pairwise_recipe_similarity must be between zero and one or None")
-        if any(not 0 <= value <= 1 for value in self.pairwise_recipe_similarities.values()):
+        # A lazy mapping range-checks each score when it is calculated.
+        if not isinstance(self.pairwise_recipe_similarities, LazyPairwiseSimilarities) and any(
+                not 0 <= value <= 1 for value in self.pairwise_recipe_similarities.values()):
             raise ValueError("pairwise recipe similarities must be between zero and one")
 
 
@@ -828,7 +883,7 @@ class MenuOptimizer:
         ), RecipeProfileBuilder._structure(recipe))
 
     def optimize_library_slots(self, cohorts, *, evaluate, accepts, score, retention_score,
-                               refinement_selector=None,
+                               refinement_selector=None, substitution_selector=None,
                                search_trace=None, decision_observer=None, seed_selector=None,
                                refinement_score=None, joint_proposals=None, **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
@@ -837,6 +892,10 @@ class MenuOptimizer:
         Qualification and product caches belong to the caller's ONE planner.
         This additional 256-entry cache shares exact ordered baskets between
         failed seed attempts and substitutions, with final/prefix checks separate.
+        Each distinct publication prefix completes its bounded refinement. Its
+        winner competes under the same current objective with later prefixes;
+        adding recipes cannot discard a previously completed valid candidate.
+        Only one completed winner is retained, not another planner per prefix.
         Nothing survives this call; the caller independently audits the winner.
         This is a bounded neighbourhood search, not an optimality proof.
         """
@@ -873,7 +932,7 @@ class MenuOptimizer:
             cache[key] = result
             return remember_final(slots, result, final)
 
-        def improve(incumbent, additions, generation, phase, finalists=None):
+        def improve(incumbent, additions, generation, phase, finalists=None, extra=None):
             for sweep in (1, 2):
                 if finalists is not None:
                     finalists.clear()
@@ -882,7 +941,8 @@ class MenuOptimizer:
                        "library_generation": generation, "library_phase": phase,
                        "sweep": sweep, "proposals": 0, "constraints_rejected": 0,
                        "evaluation_rejected": 0, "priced": 0, "retained": 0, "beam_pruned": 0,
-                       "evaluations_executed": 0, "evaluation_cache_hits": 0, "improvements": 0}
+                       "evaluations_executed": 0, "evaluation_cache_hits": 0, "improvements": 0,
+                       **(extra or {})}
                 trace.append(row)
                 for index, group in enumerate(additions):
                     for slot in group:
@@ -926,42 +986,7 @@ class MenuOptimizer:
                     break
             return incumbent
 
-        incumbent, previous, last_error = None, None, None
-        for generation, options in cohorts:
-            if previous == options:
-                continue
-            prior_options, previous = previous, options
-            if any(not group for group in options):
-                continue
-            if incumbent is None:
-                seed = seed_selector(options) if seed_selector else options
-                attempts = [seed] if seed == options else [seed, options]
-                for index, seed_options in enumerate(attempts):
-                    start = len(trace)
-                    before_hits = hits
-                    try:
-                        incumbent = self.optimize_slots(
-                            seed_options, evaluate=cached_evaluate, accepts=accepts, score=score,
-                            _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
-                            search_trace=trace, decision_observer=decision_observer, **search_options)
-                    except (IncompleteBasketError, ValueError) as exc:
-                        last_error = exc
-                    finally:
-                        for row in trace[start:]:
-                            row.update(library_generation=generation, library_phase="seed",
-                                       seed_full_pool_retry=index > 0,
-                                       seed_variants_available=sum(map(len, options)),
-                                       seed_variants_retained=sum(map(len, seed_options)))
-                        if len(trace) > start:
-                            trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
-                    if incumbent is not None:
-                        break
-                continue
-            prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
-            additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]
-                         for index, group in enumerate(options)]
-            incumbent = improve(incumbent, additions, generation, "substitution")
-        if incumbent is not None:
+        def finish_generation(incumbent, previous, generation):
             # New ingredients can make an older recipe economical too. Revisit
             # every qualified recipe against the complete incumbent basket,
             # rather than launching another combinatorial beam search.
@@ -1043,6 +1068,77 @@ class MenuOptimizer:
                 proposals = joint_proposals(previous, incumbent[0])
                 incumbent = probe_pairs(incumbent, proposals, "joint_refinement", rank, 256, 32)
             return incumbent
+
+        def complete_prefix(incumbent, options, generation):
+            nonlocal secondary_best
+            # Prefix-only probes must not redirect a later generation's
+            # secondary/joint anchor. Its original trajectory still competes
+            # with the independently retained completed prefix.
+            coarse_best = secondary_best
+            try:
+                return finish_generation(incumbent, options, generation)
+            finally:
+                secondary_best = coarse_best
+
+        incumbent, previous, last_error = None, None, None
+        completed_best = None
+        rank = refinement_score or retention_score
+        for generation, options in cohorts:
+            if previous == options:
+                continue
+            prior_options, previous = previous, options
+            if any(not group for group in options):
+                continue
+            if incumbent is None:
+                seed = seed_selector(options) if seed_selector else options
+                attempts = [seed] if seed == options else [seed, options]
+                for index, seed_options in enumerate(attempts):
+                    start = len(trace)
+                    before_hits = hits
+                    try:
+                        incumbent = self.optimize_slots(
+                            seed_options, evaluate=cached_evaluate, accepts=accepts, score=score,
+                            _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
+                            search_trace=trace, decision_observer=decision_observer, **search_options)
+                    except (IncompleteBasketError, ValueError) as exc:
+                        last_error = exc
+                    finally:
+                        for row in trace[start:]:
+                            row.update(library_generation=generation, library_phase="seed",
+                                       seed_full_pool_retry=index > 0,
+                                       seed_variants_available=sum(map(len, options)),
+                                       seed_variants_retained=sum(map(len, seed_options)))
+                        if len(trace) > start:
+                            trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
+                    if incumbent is not None:
+                        break
+                if incumbent is not None:
+                    completed = complete_prefix(incumbent, options, generation)
+                    if completed_best is None or rank(*completed) < rank(*completed_best):
+                        completed_best = completed
+                continue
+            prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
+            additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]
+                         for index, group in enumerate(options)]
+            extra = None
+            if substitution_selector is not None:
+                # Heuristic bound, like the seed cap: each newer generation's
+                # recipes are ranked by their qualified single-recipe evidence
+                # and only the selection is tried in every slot. The complete
+                # current pool still enters refinement, pairs and joint moves.
+                available = sum(map(len, additions))
+                additions = substitution_selector(additions)
+                extra = {"substitution_variants_available": available,
+                         "substitution_variants_retained": sum(map(len, additions))}
+            incumbent = improve(incumbent, additions, generation, "substitution", extra=extra)
+            # Complete each published prefix before extending its pool. Keep
+            # the substitution trajectory separate so earlier finalization
+            # cannot remove proposals made by the original larger search.
+            completed = complete_prefix(incumbent, options, generation)
+            if completed_best is None or rank(*completed) < rank(*completed_best):
+                completed_best = completed
+        if completed_best is not None:
+            return completed_best
         if last_error is not None:
             raise last_error
         raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")

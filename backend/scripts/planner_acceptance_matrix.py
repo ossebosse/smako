@@ -67,14 +67,16 @@ def digest(value):
 # Search settings a full-library reference must state explicitly. A report
 # without every key (for example one written before seed_variant_shortlist
 # existed, which still kept four variants per base) is not a reference.
-FULL_LIBRARY_REFERENCE_CONTRACT = "smako-full-library-reference-v1"
-FULL_LIBRARY_SEARCH_LIMITS = {"seed": 0, "refinement": 0, "seed_variant_shortlist": False}
+FULL_LIBRARY_REFERENCE_CONTRACT = "smako-full-library-reference-v2"
+FULL_LIBRARY_SEARCH_LIMITS = {
+    "seed": 0, "refinement": 0, "seed_variant_shortlist": False, "substitution": 0,
+}
 
 
 def full_library_search_limits(settings):
     """Settings for a full-library reference: whole qualified library, no shortlist."""
     return replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0,
-                   library_seed_variant_shortlist=False)
+                   library_seed_variant_shortlist=False, library_substitution_pool_limit=0)
 
 
 def validate_full_library_reference(reference, inputs):
@@ -223,6 +225,8 @@ def main():
                    help="Reference run: seed and refinement search over the whole qualified library")
     p.add_argument("--uncapped-reference", type=Path,
                    help="Report from an --uncapped run; fail if the capped search pays more")
+    p.add_argument("--substitution-limit", type=int,
+                   help="Override LIBRARY_SUBSTITUTION_POOL_LIMIT for this run (0 = every new recipe)")
     p.add_argument("--reference-preparation", action="store_true",
                    help="Bypass only new shared preparation; retain ordinary planner and audits")
     p.add_argument("--prepared-startup", action="store_true",
@@ -230,6 +234,8 @@ def main():
     args = p.parse_args()
     if args.repeat < 1 or not args.label.replace("-", "").replace("_", "").isalnum():
         p.error("positive repeat and simple label required")
+    if args.substitution_limit is not None and (args.substitution_limit < 0 or args.uncapped):
+        p.error("--substitution-limit must be >= 0 and cannot be combined with --uncapped")
     args.output.mkdir(parents=True, exist_ok=True)
     # Separate bounded cache roots; don't clear any existing deployment cache.
     # Profiles sharing an output folder must still start with independent
@@ -257,6 +263,8 @@ def main():
     if baseline:
         assert baseline["inputs"] == inputs, "Baseline inputs differ"
     settings = Settings(complete_recipes_enabled=True, price_provider="own")
+    if args.substitution_limit is not None:
+        settings = replace(settings, library_substitution_pool_limit=args.substitution_limit)
     if args.uncapped:
         settings = full_library_search_limits(settings)
     uncapped = json.loads(args.uncapped_reference.read_bytes()) if args.uncapped_reference else None
@@ -275,7 +283,8 @@ def main():
               "uncapped": args.uncapped,
               "search_limits": {"seed": settings.library_seed_pool_limit,
                                 "refinement": settings.library_refinement_pool_limit,
-                                "seed_variant_shortlist": settings.library_seed_variant_shortlist}}
+                                "seed_variant_shortlist": settings.library_seed_variant_shortlist,
+                                "substitution": settings.library_substitution_pool_limit}}
     if args.uncapped:
         assert report["search_limits"] == FULL_LIBRARY_SEARCH_LIMITS, report["search_limits"]
         report["reference_contract"] = FULL_LIBRARY_REFERENCE_CONTRACT
