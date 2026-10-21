@@ -254,6 +254,11 @@ def _qualify_issued(args, recipes):
         raw = json.loads(args.facts.read_bytes())
         facts = FactsCollection({(r["store_id"], r["product_id"]): ProductFacts(**r["facts"]) for r in raw["rows"]})
         facts.version = raw.get("facts_version")
+        # An offline export holds the retained facts before load-time
+        # derivations; add the egg standard-weight proofs that
+        # load_retained_facts adds (owner decision 2026-10-17/21).
+        from app.services.official_product_facts import shell_egg_quantity_proofs
+        shell_egg_quantity_proofs(prepared.universe.products, facts)
     else:
         from app.services.personal_source_facts import load_retained_facts
         facts = load_retained_facts(prepared)

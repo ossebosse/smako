@@ -83,7 +83,9 @@ def additional_whole_identity(canonical, form, label, composition):
     patterns = {
         # Only a whole shell-egg identity. Edible mass, declared nutrients and
         # cooking are separately qualified by the existing quantity pathway.
-        "ägg": ("raw_edible", r"(?:ägg|skåneägg|bruna ägg)(?: ekologiska| eko| frigående| inomhus| utomhus| stora| små| [sml]| [sml]-[sml]| \d+-pack| \d+ pack)*"),
+        # Shelf names in Malmö: "Ägg 12p Frigående Inomhus Medium/large",
+        # "Ägg 18p Frigående Inomhus Medium / Large", "Brunchägg Frigående L/XL 6-pack".
+        "ägg": ("raw_edible", r"(?:ägg|skåneägg|bruna ägg|brunchägg)(?: ekologiska| eko| frigående| inomhus| utomhus| stora| små| [sml]| xl| [sml]-[sml]| [sml]/(?:[sml]|xl)| \d+-pack| \d+ pack| \d+p| \d+-p| small| medium| large| x-large| small/medium| medium/large| large/x-large| /)*"),
         "svartpeppar": ("dry", r"(?:malen )?svartpeppar(?: malen| finmalen| burk)*"),
         # Swedish shelves label the same single spice "Rökt Paprika",
         # "Paprika Rökt" or "Paprika Smoked"; the composition check below
@@ -102,5 +104,9 @@ def additional_whole_identity(canonical, form, label, composition):
         return False
     if canonical == "ägg":
         words = set(re.findall(r"[^\W\d_]+", composition))
-        return bool(words and words <= {"ingredienser", "krav", "ekologiska", "ägg"})
+        # The label already matched only plain-egg words. Many Malmö packs have
+        # no ingredient list; that is accepted like the egg weight rule does,
+        # while any declared non-egg word still marks a composite product.
+        from app.services.official_product_facts import _PLAIN_EGG_WORDS
+        return words <= _PLAIN_EGG_WORDS
     return not (canonical in {"svartpeppar", "rökt paprikapulver", "malen koriander", "chiliflakes"} and re.search(r"\b(?:salt|socker|lök|vitlök|senap|selleri|olja)\b", composition.split("kan innehålla")[0]))

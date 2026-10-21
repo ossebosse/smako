@@ -60,3 +60,20 @@ def test_production_method_words_do_not_block_a_plain_egg_pack():
     shell_egg_quantity_proofs([product], facts)
     projected = project_usable_quantity(product, facts[("s1", "p1")], required_unit="g")
     assert projected.usable_unit == "g" and projected.usable_quantity == 6 * 60.0
+
+
+@pytest.mark.parametrize(("label", "ingredients", "expected"), [
+    ("ägg 12p frigående inomhus medium/large", "ägg.", True),
+    ("ägg 10-pack m/l frigående utomhus", "ägg.", True),
+    ("brunchägg frigående l/xl 6-pack", "ägg från frigående höns inomhus", True),
+    ("ägg 15-pack m frigående inomhus", "ägg.", True),
+    ("ägg 18p frigående utomhus medium/large", "", True),
+    ("ägg 18p frigående inomhus medium / large", "", True),
+    ("äggsallad 12p", "ägg.", False),
+    ("ägg 12p medium/large", "ägg, majonnäs", False),
+])
+def test_shelf_names_of_plain_egg_packs_are_recipe_eggs(label, ingredients, expected):
+    """Malmö names such as '12p ... Medium/large' were not recognised as eggs."""
+    from app.services.content_pack_requirements import additional_whole_identity
+
+    assert bool(additional_whole_identity("ägg", "raw_edible", label, ingredients)) is expected
