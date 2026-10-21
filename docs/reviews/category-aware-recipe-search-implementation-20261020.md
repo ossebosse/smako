@@ -1,7 +1,8 @@
 # Kategorimedveten receptsökning och Willys-kvittens, 2026-10-20
 
 Status: aktiverad 2026-10-21 00:27:05 UTC; fyra live-menyer och två byten
-godkända. Releaseflödets efterretention pågår.
+godkända. Efterretention och slutlig driftkontroll är klara; Lunds och
+Malmös reläleveranser har beständig kvittens.
 Utgår från main `254f142` och den aktiva appen
 `app-bac0fc15ca9a-512ef3ea`. Användaren har godkänt implementation,
 driftåtgärd, commit och aktivering på betan.
@@ -135,6 +136,12 @@ Inget schema eller installerad reläkod ändrades. Det gamla schemalagda
 försökets LastTaskResult skrivs inte om för att dölja dess fel; den nya
 beständiga kvittensen bevisar återställningen. Vanlig konkurrens om
 driftlåset kan fortfarande göra ett enskilt försök uppskjutet/misslyckat.
+
+Nattens nya Malmöpaket fick också en låskonflikt och därefter en fördröjd
+laddningsbekräftelse. Återleverans slutfördes 2026-10-21 01:46:20 UTC med
+`already_active`, bevarad observationstid och exit 0. Slutkontrollen visar
+ready 200, 14 kvalificerade/publicerade/laddade kontexter och inga väntande
+lokala reläleveranser. Se aktiveringsjournalen för hela kedjan.
 
 Privat underlag finns i `.local/category-search-20261020/` och
 `/opt/smako/evidence/category-search-20261020/`; inga råprofiler,

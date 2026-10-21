@@ -19,17 +19,19 @@ Fyra publika menyer och två receptbyten är godkända i Lund/Malmö:
 exakta kvoter, fem olika grundrätter, godkänd korg, högst två tillåtna
 butiker, identisk sparad återläsning och bevarad äldre revision vid byte.
 
-**Kvar i pågående körning:** efterretention, återleverans av nattens
-Malmöpaket och sista driftstatus. Malmöpaketet fick 00:24 UTC
-`RefreshAlreadyRunningError` under backupen. Paketet är kvalificerat;
-`deliver-malmo.py` väntar på efterretentionens godkända kvitto innan normal
-återleverans. Ny insamling är spärrad. Läs `deliver-malmo.log` och
-`resume-status.json` innan någon ny leverans startas.
-Läs `.local/category-search-20261020/http.log`, `http-evidence.json`,
-`activate.log`, `resume-status.json` och `release-final/activate.json`.
-Appen är redan aktiverad: bygg eller aktivera inte samma release igen.
-Verifiera att pågående processer avslutats innan eventuell efteråtgärd.
-Användarens godkännande omfattar hela arbetet; fråga inte på nytt.
+**Slutfört:** efterretentionen fick `complete` och releasekommandot exit 0
+01:06 UTC. Cirka 823 MB filer togs bort under referensskydd, 32 snapshots
+pensionerades. Nattens Malmöpaket återlevererades efter låskonflikt och
+fördröjd laddningsbekräftelse; kvittens `already_active` 01:46:20 UTC, exit 0.
+Slutkontroll 01:46 UTC: båda kommunerna ready med rätt BUILD_ID, alla 14
+obligatoriska kontexter kvalificerade/publicerade/laddade och inga väntande
+lokala reläleveranser. Coops basunderlag har kvar sin STALE-varning, cirka
+74 timmar, med oförändrad källtid. Scheman och installerat relä är oförändrade.
+
+Underlag: `.local/category-search-20261020/`, särskilt `final-status.json`,
+`final-municipalities.json`, `deliver-malmo-confirm.log`, `http-evidence.json`
+och `release-final/activate.json`. Appen är redan aktiverad; bygg eller
+aktivera inte samma release igen. Alla operatörsjobb i denna uppgift är klara.
 
 Willys-incidentens kvittens återställdes 2026-10-20 20:11:30 UTC via
 installerat relä, exakt redan aktiv Lundartefakt och `already_active`.

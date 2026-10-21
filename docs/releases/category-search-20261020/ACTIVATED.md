@@ -1,6 +1,7 @@
 # Kategorimedveten receptsökning aktiverad 2026-10-21
 
-Status: appen är aktiverad och liveproven är godkända; efterretention pågår.
+Status: slutförd. Appen är aktiverad; liveprov, efterretention och
+slutlig driftkontroll är godkända. Båda reläleveranserna är kvitterade.
 
 Aktiverad **00:27:05 UTC / 02:27:05 svensk tid**, efter användarens
 uttryckliga godkännande. Kod `73306acc382d153936a2329d9bc819014a575dcc`
@@ -76,9 +77,38 @@ och pollning, inte en ny kontrollerad jämförelse mot den gamla versionen.
 Driftkontroll 00:36–00:39 UTC: båda kommunerna ready 200, alla 14
 obligatoriska kontexter kvalificerade, publicerade och laddade.
 Nattens ordinarie Malmöpaket fick `RefreshAlreadyRunningError`
-00:24 UTC under backupen. Det kvalificerade paketet väntar på normal
-återleverans efter pågående efterretention. Lund har ingen väntande leverans.
+00:24 UTC under backupen. Det kvalificerade paketet återlevererades först
+efter godkänd efterretention, med ny lokal basinsamling spärrad.
 
-Releaseflödets efterretention och Malmöleveransen kompletteras när de avslutats.
+Efterretentionen avslutades 01:06:23 UTC med `complete`; releasekommandot
+avslutades med exit 0. Den tog cirka 39 minuter och tog bort 822 981 253 byte:
+32 pensionerade snapshots, 10 976 råfiler och två äldre prisartefakter.
+SQLite har dessutom 2 420 813 824 återanvändbara byte. Den upprepade
+referenskontrollen är en separat driftkostnad; ingen säkerhetskontroll
+har kortats i denna release.
+
+Malmös prisbygge avslutades med kod 0, men första återleveransen fick
+`source published but runtime activation not confirmed` efter en fördröjd
+laddningsbekräftelse. Avläsning 01:40 UTC bevisade att exakt den publicerade
+versionen var laddad och ready 200. Återleverans av samma paket gav därefter
+`already_active` **01:46:20 UTC** och reläets exit 0.
+
+- Artefakt: `feb88adddb6299ad8fc744518cbbd9587447f130e43ee8d75752714956937352`.
+- Snapshot: `f72bf5acfa3e40e88a458fcacdb28310`.
+- Ursprunglig observation: `2026-10-20T16:17:06.288733+00:00`, oförändrad.
+- Laddad/publicerad version: `price-universe:06c433309ebb798f534948f02366c36d88a0dd1d026e5e90556e50bc324df59f`.
+
+Slutkontroll **01:46 UTC**: Lund och Malmö ready 200 med rätt BUILD_ID,
+samma publicerade/laddade version per kommun, alla 14 obligatoriska kontexter
+kvalificerade/publicerade/laddade och ingen väntande lokal reläleverans.
+Servern har cirka 81,45 GB ledigt, över beräknat behov 22,67 GB. Senaste
+avläsningen av HTTP 5xx-metriker är tom. Tjänstekontroll 01:31 UTC visade
+alla tre tjänster igång, noll omstarter och ingen OOM; schedulerns image och
+BUILD_ID är oförändrade.
+
+Coops basunderlag är fortsatt STALE (cirka 74 timmar) men kvalificerat och
+användbart enligt gällande prispolicy. Dess källtid har inte förnyats.
+Låskonkurrens och sena laddningskvitton kan fortfarande ge fel i enskilda
+schemakörningar; denna återställning ändrar inte schema eller reläkod.
 Underlag sparas lokalt i `.local/category-search-20261020/`.
 Inga privata profiler, cookies, databaser eller hemligheter ingår i Git.
