@@ -80,8 +80,27 @@ def ingredient_profile(recipe: Recipe) -> tuple[str, ...]:
     )
 
 
+_RECIPE_IDS: dict[int, tuple[Recipe, tuple, str]] = {}
+
+
 def recipe_id(recipe: Recipe) -> str:
     """Return a stable content ID suitable for beam-state cache keys."""
+    # Pure in the recipe's exact value. A hit needs the same object AND an
+    # equal fresh snapshot of its (technically mutable) lists.
+    from app.services.recipe_computation_cache import recipe_value
+
+    snapshot = recipe_value(recipe)
+    cached = _RECIPE_IDS.get(id(recipe))
+    if cached is not None and cached[0] is recipe and cached[1] == snapshot:
+        return cached[2]
+    value = _recipe_id(recipe)
+    if len(_RECIPE_IDS) >= 65536:
+        _RECIPE_IDS.clear()
+    _RECIPE_IDS[id(recipe)] = (recipe, snapshot, value)
+    return value
+
+
+def _recipe_id(recipe: Recipe) -> str:
 
     ingredients: list[tuple[str, float, str]] = []
     for ingredient in recipe.ingredients:

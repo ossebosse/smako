@@ -1306,11 +1306,27 @@ class MenuOptimizer:
         direct = mapping.get(recipe.name)
         if direct:
             return direct.casefold().strip()
-        target = recipe.name.casefold()
+        return self._casefold_index(mapping).get(recipe.name.casefold())
+
+    def _casefold_index(self, mapping: Mapping[str, str]) -> dict[str, str]:
+        """First non-empty value per case-folded name, as the former linear scan.
+
+        The scan visited every library recipe for every proposal (quadratic in
+        the pool). The index is rebuilt whenever the mapping object or its size
+        changes; its values are exactly what the scan returned.
+        """
+        cache = self.__dict__.setdefault("_casefold_indexes", {})
+        cached = cache.get(id(mapping))
+        if cached is not None and cached[0] is mapping and cached[1] == len(mapping):
+            return cached[2]
+        index = {}
         for name, value in mapping.items():
-            if name.casefold() == target and value.strip():
-                return value.casefold().strip()
-        return None
+            if value.strip():
+                index.setdefault(name.casefold(), value.casefold().strip())
+        if len(cache) >= 64:
+            cache.clear()
+        cache[id(mapping)] = (mapping, len(mapping), index)
+        return index
 
     def _infer_primary(self, recipe: Recipe) -> str | None:
         for ingredient in self.normalizer.normalize_and_aggregate([recipe]):

@@ -270,6 +270,8 @@ def test_recipe_text_cache_is_bounded_and_recipe_mutations_change_identity():
         original = valid_chicken_dinner()
         initial_id = recipe_id(original)
         assert recipe_id(original) == initial_id
+        # Another object with the same value recomputes through the text cache.
+        assert recipe_id(original.model_copy(deep=True)) == initial_id
         assert cache.cache_info().hits > 0
         original.instructions.append("Blanda i moroten först.")
         assert recipe_id(original) != initial_id
