@@ -2587,6 +2587,25 @@ class PersonalPlanner:
             text += " Lägg till minst en butik med fullt sortiment, till exempel " + ", ".join(complete[:3]) + "."
         return text
 
+    def _screen_substitution(self, chosen, incumbent, index, margin):
+        """Keep a one-slot substitution unless its predicted week is far dearer.
+
+        Prediction: incumbent total - qualified single-recipe purchase of the
+        replaced recipe + that of the new one. Shared packages make the real
+        week cheaper or dearer; ``margin`` is the measured tolerance. Unknown
+        evidence keeps the proposal. Heuristic, like the pool caps.
+        """
+        old, new = incumbent[0][index], chosen[index]
+        if not old.recipe or not new.recipe:
+            return True
+        old_evidence = self.variant_search_evidence.get((old.meal_type, self._recipe_id(old.recipe)))
+        new_evidence = self.variant_search_evidence.get((new.meal_type, self._recipe_id(new.recipe)))
+        if old_evidence is None or new_evidence is None:
+            return True
+        total = Decimal(str(incumbent[1]["basket"].total))
+        predicted = total - Decimal(str(old_evidence.paid)) + Decimal(str(new_evidence.paid))
+        return predicted <= total * (1 + Decimal(str(margin)))
+
     def _select_library_options(self, groups, *, limit, shortlist_variants):
         """Per meal type: optional variant shortlist (four per base), then the cap.
 
@@ -2958,7 +2977,7 @@ class PersonalPlanner:
             generations = current_recipe_generations(self.library_generation)
             first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
             cohorts = range(first, self._generation + 1)
-            if getattr(self.settings, "library_merge_generations", True) and len(cohorts) > 2:
+            if getattr(self.settings, "library_merge_generations", False) and len(cohorts) > 2:
                 # Seed library, then every newer pack as one capped sweep.
                 cohorts = (first, self._generation)
             search_input = [(generation, [
@@ -2992,6 +3011,10 @@ class PersonalPlanner:
                 # limit is tried in full, exactly as before.
                 library_kwargs["substitution_selector"] = lambda groups: self._select_library_options(
                     groups, limit=substitution_limit, shortlist_variants=False)
+            screen_margin = getattr(self.settings, "library_substitution_screen_margin", -1.0)
+            if screen_margin >= 0:
+                library_kwargs["substitution_screen"] = lambda chosen, incumbent, index: self._screen_substitution(
+                    chosen, incumbent, index, screen_margin)
             self._library_search_handled = True
         search_kwargs = dict(
                 **library_kwargs,

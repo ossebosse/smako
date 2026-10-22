@@ -883,7 +883,7 @@ class MenuOptimizer:
         ), RecipeProfileBuilder._structure(recipe))
 
     def optimize_library_slots(self, cohorts, *, evaluate, accepts, score, retention_score,
-                               refinement_selector=None, substitution_selector=None,
+                               refinement_selector=None, substitution_selector=None, substitution_screen=None,
                                search_trace=None, decision_observer=None, seed_selector=None,
                                refinement_score=None, joint_proposals=None, **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
@@ -928,7 +928,9 @@ class MenuOptimizer:
             cache[key] = result
             return remember_final(slots, result, final)
 
-        def improve(incumbent, additions, generation, phase, finalists=None, extra=None):
+        def improve(incumbent, additions, generation, phase, finalists=None, extra=None, screen=None):
+            # ``screen`` (substitution only) skips a proposal its caller
+            # predicts far above the incumbent. A heuristic, like the caps.
             for sweep in (1, 2):
                 if finalists is not None:
                     finalists.clear()
@@ -938,7 +940,7 @@ class MenuOptimizer:
                        "sweep": sweep, "proposals": 0, "constraints_rejected": 0,
                        "evaluation_rejected": 0, "priced": 0, "retained": 0, "beam_pruned": 0,
                        "evaluations_executed": 0, "evaluation_cache_hits": 0, "improvements": 0,
-                       **(extra or {})}
+                       **({"screened": 0} if screen is not None else {}), **(extra or {})}
                 trace.append(row)
                 for index, group in enumerate(additions):
                     for slot in group:
@@ -947,6 +949,9 @@ class MenuOptimizer:
                         chosen = list(incumbent[0])
                         chosen[index] = slot
                         row["proposals"] += 1
+                        if screen is not None and not screen(chosen, incumbent, index):
+                            row["screened"] += 1
+                            continue
                         if not accepts(chosen, final=True):
                             row["constraints_rejected"] += 1
                             if decision_observer:
@@ -1026,7 +1031,8 @@ class MenuOptimizer:
                 additions = substitution_selector(additions)
                 extra = {"substitution_variants_available": available,
                          "substitution_variants_retained": sum(map(len, additions))}
-            incumbent = improve(incumbent, additions, generation, "substitution", extra=extra)
+            incumbent = improve(incumbent, additions, generation, "substitution", extra=extra,
+                                screen=substitution_screen)
         if incumbent is not None:
             # New ingredients can make an older recipe economical too. Revisit
             # every qualified recipe against the complete incumbent basket,
