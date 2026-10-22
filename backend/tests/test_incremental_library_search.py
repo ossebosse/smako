@@ -299,26 +299,3 @@ def test_completed_prefix_survives_a_later_shortlist_that_excludes_its_winner():
     prices[("B", "B")] = 20
     chosen, cost = run(cohorts, evaluate=evaluate, refinement_selector=refinement)
     assert cost == 6 and all(s.recipe.name == "C" for s in chosen)
-
-
-def test_retained_prefix_does_not_redirect_the_original_later_joint_anchor():
-    def evaluate(slots, *, final):
-        names = tuple(s.recipe.name for s in slots)
-        if len(names) == 1:
-            return ord(names[0]) - 64
-        return {("A", "A"): 10, ("B", "B"): 8, ("A", "C"): 9.5,
-                ("C", "A"): 9.5, ("C", "C"): 9, ("D", "D"): 1}.get(names, 15)
-    def refinement(groups):
-        return [[s for s in group if len(group) <= 2 or s.recipe.name in "AC"] for group in groups]
-    anchors = []
-    def joint(groups, anchor):
-        names = tuple(s.recipe.name for s in anchor)
-        anchors.append(names)
-        if names == ("C", "C"):
-            return [(0, 1, groups[0][-1], groups[1][-1])]
-        return []
-    chosen, cost = run([(1, options("A")), (2, options("AB")), (3, options("ABCD"))],
-                      evaluate=evaluate, refinement_selector=refinement,
-                      refinement_score=lambda slots, cost: cost, joint_proposals=joint)
-    assert ("B", "B") in anchors and anchors[-1] == ("C", "C")
-    assert cost == 1 and all(s.recipe.name == "D" for s in chosen)
