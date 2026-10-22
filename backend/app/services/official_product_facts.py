@@ -368,50 +368,84 @@ def supplement_catalog_facts(products, original):
     return shell_egg_quantity_proofs(products, result)
 
 
-# Owner decision 2026-10-17: count M and L eggs with their standard edible
-# weights (class mid-weight with shell, 58 g and 68 g, minus about 12 % shell).
-EGG_STANDARD_EDIBLE_G = {'m': 51.0, 'l': 60.0}
+# Owner decisions 2026-10-17 and 2026-10-22: every pack of whole shell eggs
+# counts. M and L use the class mid-weight with shell (58 g and 68 g) minus
+# about 12 % shell. S (under 53 g) uses 48 g with shell. XL uses the L weight
+# and a pack without a size class the S weight: lower bounds, so a recipe is
+# never left short of egg.
+EGG_STANDARD_EDIBLE_G = {'s': 42.0, 'm': 51.0, 'l': 60.0, 'xl': 60.0}
 _EGG_CLASS_WORDS = {'small': 's', 's': 's', 'medium': 'm', 'm': 'm', 'large': 'l', 'l': 'l',
                     'x-large': 'xl', 'xl': 'xl'}
 
 
-_PLAIN_EGG_WORDS = frozenset({'ingredienser', 'krav', 'ekologiska', 'ekologiskt', 'ägg', 'hönsägg', 'från',
-                              'frigående', 'höns', 'inomhus', 'utomhus', 'svenska', 'av'})
+_PLAIN_EGG_WORDS = frozenset({'ingredienser', 'ingrediens', 'krav', 'ekologisk', 'ekologiska', 'ekologiskt',
+                              'ägg', 'hönsägg', 'från', 'frigående', 'höns', 'inomhus', 'utomhus', 'svenska',
+                              'svenskt', 'sverige', 'av'})
+# Whole-egg words in shelf names. Compounds ending in "ägg" are listed
+# explicitly: underlägg, fläsklägg and chokladägg also end in "ägg".
+_SHELL_EGG_NAMES = frozenset({'ägg', 'hönsägg', 'skåneägg', 'brunchägg', 'utehönsägg', 'västgötaägg'})
+_SHELL_EGG_DESCRIPTORS = frozenset({
+    'p', 'st', 'pack', 'pac', 'x', 'small', 'medium', 'large', 'x-large', 's', 'm', 'l', 'xl',
+    'frigående', 'inomhus', 'utomhus', 'inne', 'ute', 'eko', 'ekologisk', 'ekologiska', 'ekologiskt',
+    'produktion', 'krav', 'klimat', 'svenska', 'svenskt', 'sverige', 'skåne', 'skånska',
+    'bruna', 'stora', 'små', 'familj', 'familjens', 'färska', 'från', 'höns'})
+
+
+def is_plain_shell_egg(name, brand=None, ingredients=()):
+    """True for a pack of whole raw shell eggs, never a product made from egg.
+
+    Every word in the shelf name must be an egg word, a pack count, a size
+    class, a production method or a word of the published brand. A declared
+    ingredient list may only name plain egg.
+    """
+    text = name.casefold().replace('/', ' ').replace(',', ' ')
+    text = re.sub(r'\d+(?:[,.]\d+)?', ' ', text)
+    words = re.findall(r'x-large|[^\W\d_]+', text)
+    brand_words = set(re.findall(r'[^\W\d_]+', (brand or '').casefold()))
+    if not words or not set(words) & _SHELL_EGG_NAMES:
+        return False
+    if any(w not in _SHELL_EGG_NAMES | _SHELL_EGG_DESCRIPTORS | brand_words for w in words):
+        return False
+    declared = re.split(r'kan innehålla', ' '.join(ingredients).casefold())[0]
+    return set(re.findall(r'[a-zåäö]+', declared)) <= _PLAIN_EGG_WORDS
 
 
 def egg_standard_weight(name):
-    """Standard edible weight per egg for M/L packs (the smaller class wins), or None."""
+    """Standard edible weight per egg (the smallest stated class wins)."""
     words = re.findall(r'x-large|[a-z]+', name.casefold().replace('/', ' '))
     classes = {_EGG_CLASS_WORDS[w] for w in words if w in _EGG_CLASS_WORDS}
-    weights = [EGG_STANDARD_EDIBLE_G[c] for c in classes if c in EGG_STANDARD_EDIBLE_G]
-    if not weights or 's' in classes:
-        return None
-    return min(weights)
+    return min(EGG_STANDARD_EDIBLE_G[c] for c in classes or {'s'})
+
+
+def _mass_blocking(conflicts):
+    """Conflicts that make a usable-mass proof unsafe; nutrient ones do not."""
+    return {c for c in conflicts if c != 'supplier_nutrition_conflict' and not c.startswith('nutrition')}
 
 
 def shell_egg_quantity_proofs(products, result):
     """Usable-mass proofs for plain shell eggs.
 
     A source-stated package mass gives the population estimate (estimated mode
-    only). A counted M or L pack gets count x the standard edible egg weight.
+    only). A counted pack gets count x the standard edible egg weight of its
+    size class, or of the smallest class when the name states none.
     """
     from dataclasses import replace
     from pathlib import Path
     reference = json.loads((Path(__file__).parents[1] / 'data/nutrition/edible-yield-references.json').read_bytes())['shell_egg']
     for p in products:
         key = (p.store_id, p.product_id)
-        fact = result.get(key)
-        if (not fact or not p.source_provenance or fact.conflicts or p.package_unit != 'st'
+        # A shelf without any declaration still sells whole eggs; the mass
+        # proof then stands alone and claims nothing about ingredients.
+        fact = result.get(key) or (ProductFacts(
+            source=f'{p.chain}:shelf_name', source_product_id=p.product_id,
+            source_snapshot_id=p.source_provenance.source_snapshot_id) if p.source_provenance else None)
+        if (not fact or not p.source_provenance or _mass_blocking(fact.conflicts) or p.package_unit != 'st'
                 or not p.package_quantity or p.sale_model != 'fixed_package'
-                or not re.match(r'^(?:ägg|skåneägg|bruna ägg|utehönsägg|västgötaägg|brunchägg)\b', p.name.casefold())
-                or re.search(r'kokt|pulver|ersättning|vita|choklad', p.name.casefold())):
+                # Production-method words describe the egg itself ("ÄGG från
+                # frigående höns inomhus"); any other word means a composite.
+                or not is_plain_shell_egg(p.name, getattr(p, 'brand', None), fact.ingredients)):
             continue
         weight = egg_standard_weight(p.name)
-        words = set(re.findall(r'[a-zåäö]+', ' '.join(fact.ingredients).casefold()))
-        # Production-method words describe the egg itself ("ÄGG från frigående
-        # höns inomhus"); any other word means a composite product.
-        if weight is None or (words and not words <= _PLAIN_EGG_WORDS):
-            continue
         proof = {'basis': 'standard_egg_weight', 'unit': 'g',
                  'quantity': round(p.package_quantity * weight, 1),
                  'eggs': p.package_quantity, 'edible_g_per_egg': weight,
@@ -422,13 +456,9 @@ def shell_egg_quantity_proofs(products, result):
     for p in products:
         key = (p.store_id, p.product_id)
         fact = result.get(key)
-        if (not fact or not p.source_provenance or fact.conflicts or p.package_unit != 'g' or not p.package_quantity
-                or p.sale_model != 'fixed_package'
-                or not re.match(r'^(?:ägg|skåneägg|bruna ägg)\b', p.name.casefold())
-                or re.search(r'kokt|pulver|ersättning|vita|choklad', p.name.casefold())):
-            continue
-        words = set(re.findall(r'[a-zåäö]+', ' '.join(fact.ingredients).casefold()))
-        if not words or not words <= {'ingredienser', 'krav', 'ekologiska', 'ägg'}:
+        if (not fact or not p.source_provenance or _mass_blocking(fact.conflicts) or p.package_unit != 'g' or not p.package_quantity
+                or p.sale_model != 'fixed_package' or not fact.ingredients
+                or not is_plain_shell_egg(p.name, getattr(p, 'brand', None), fact.ingredients)):
             continue
         proof = {**reference, 'basis': 'estimated_edible', 'unit': 'g',
                  'quantity': p.package_quantity * reference['edible_fraction'],
@@ -447,7 +477,7 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
         return product
     # A nutrient disagreement cannot invalidate independently sourced drained
     # mass. Other/unknown conflicts remain blocking; nutrition keeps its guard.
-    if set(fact.conflicts) - {'supplier_nutrition_conflict'}:
+    if _mass_blocking(fact.conflicts):
         return product
     proofs = fact.field_sources.get('usable_quantity', ())
     if len(proofs) != 1:

@@ -354,6 +354,12 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
     shared matcher, exact quantity checks, allergy checks and pricing gates still
     run afterwards. Unknown variants are not promoted by this filter.
     """
+    if canonical == "ägg":
+        # Every pack of whole shell eggs, judged on the full shelf name and the
+        # published brand (owner decision 2026-10-22).
+        from app.services.official_product_facts import is_plain_shell_egg
+        return form == "raw_edible" and is_plain_shell_egg(
+            product.name, getattr(product, "brand", None), fact.ingredients if fact else ())
     label = " ".join(product.name.casefold().split())
     category = (getattr(product, "category", None) or "").casefold()
     # Strip only a published brand and package amount, never flavour or method.
