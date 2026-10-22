@@ -106,3 +106,22 @@ def test_tampered_document_is_ignored(tmp_path):
     facts = {("s1", "p1"): catalogue_fact()}
     assert merge_axfood_details([_Product("willys")], facts, tmp_path)["no_document"] == 1
     assert facts[("s1", "p1")].nutrition == {}
+
+
+def test_the_per_hundred_header_is_used_beside_a_serving_header():
+    raw = detail()
+    serving = {**raw["nutrientHeaders"][0], "nutrientBasisQuantity": "250"}
+    raw["nutrientHeaders"] = [serving, raw["nutrientHeaders"][0]]
+    fact = project(raw)
+    assert fact.nutrition["protein_g"] == 12.0 and "nutrition_basis" not in fact.conflicts
+
+
+def test_two_per_hundred_headers_are_ambiguous():
+    raw = detail()
+    raw["nutrientHeaders"] = raw["nutrientHeaders"] * 2
+    assert "nutrition_basis" in project(raw).conflicts
+
+
+def test_energy_rounding_within_the_coop_integrity_screen_is_accepted():
+    # 1488 kJ against 351 kcal (1468.6 kJ): within max(8 kJ, 8 %).
+    assert "nutrition.kcal" not in project(detail(kj="1488", kcal="351")).conflicts

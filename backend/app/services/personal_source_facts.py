@@ -173,9 +173,16 @@ def _axfood_nutrition(raw):
     """Per-100 g/ml values from one unprepared Axfood nutrient header."""
     headers = raw.get("nutrientHeaders")
     conflicts, limits, nutrition = [], [], {}
-    if not isinstance(headers, list) or len(headers) != 1 or not isinstance(headers[0], dict):
+    headers = [h for h in headers if isinstance(h, dict)] if isinstance(headers, list) else []
+    # Packages often add a per-serving declaration beside the per-100 g/ml
+    # one. Use the single by-measure header on a 100 basis, else the single
+    # by-measure header; anything else is ambiguous.
+    measured = [h for h in headers if h.get("nutrientBasisQuantityTypeCode") == "BY_MEASURE"]
+    per_hundred = [h for h in measured if str(h.get("nutrientBasisQuantity")).strip() in {"100", "100.0"}]
+    chosen = per_hundred if len(per_hundred) == 1 else measured if len(measured) == 1 and not per_hundred else []
+    if len(chosen) != 1:
         return None, None, None, ["nutrition_basis"], limits, nutrition
-    header = headers[0]
+    header = chosen[0]
     unit = {"gram": "g", "milliliter": "ml", "millilitre": "ml"}.get(
         str(header.get("nutrientBasisQuantityMeasurementUnitCode") or "").casefold())
     try:
@@ -214,9 +221,13 @@ def _axfood_nutrition(raw):
             energy_kj.append(value * 100 / amount)
     nutrition = {k: rows[0] for k, rows in values.items() if len(rows) == 1 and f"nutrition.{k}" not in conflicts}
     conflicts.extend(f"nutrition.{k}" for k, rows in values.items() if len(rows) != 1)
-    # Both energy units are declared; they must agree (1 kcal = 4.184 kJ).
-    if "kcal" in nutrition and len(energy_kj) == 1 and abs(energy_kj[0] / 4.184 - nutrition["kcal"]) > max(
-            2.0, 0.05 * nutrition["kcal"]):
+    # Both energy units are declared; they must agree within the same
+    # integrity screen as Coop: max(8 kJ, 8 % of the larger energy) on the
+    # declared basis (1 kcal = 4.184 kJ).
+    declared_kj = energy_kj[0] * amount / 100 if len(energy_kj) == 1 else None
+    declared_kcal_kj = nutrition["kcal"] * amount / 100 * 4.184 if "kcal" in nutrition else None
+    if declared_kj is not None and declared_kcal_kj is not None and abs(declared_kj - declared_kcal_kj) > max(
+            8.0, 0.08 * max(declared_kj, declared_kcal_kj)):
         nutrition.pop("kcal")
         conflicts.extend(("nutrition.kcal", "nutrition.energy"))
     basis = f"Produktdeklaration per {amount:g} {unit}; omräknad till 100 {unit}"
