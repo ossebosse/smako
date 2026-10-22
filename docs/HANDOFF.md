@@ -1,3 +1,23 @@
+# 2026-10-22: Regression i veckosökningen på main, receptgranskning – ej aktiverat
+
+**`e6f7d32` (från PR #4, på main sedan `d3ecf2c`) gör planeringen 2–5 gånger
+långsammare vid samma meny**: Lund all-macros 116 s (P `92c4abd`) → 405 s
+varm, korgberäkningar 12 441 → 42 001. Den slutförfinar varje
+biblioteksgeneration; samma ändring backades ut ur kategorisökningens release
+men kom tillbaka via PR #4-sammanslagningen. Aktiv produktion `c253cbd` saknar
+den. Beslut krävs före nästa release från main.
+
+Gren `content/recipes-20261021` (`6496586`): kockgranskning av 20
+variety-recept med fyra rättelser. Mätt på frysta data 2026-10-18 i Lund och
+Malmö: Codex 20 sänker menyer 2,6–9,8 %, variety 20 bara Lund standard
+(−5,7 %). Sökgränserna gav aldrig dyrare meny. Äggrättelsen godkänner 79/144
+rena äggpack (tidigare 6/0) och inga sammansatta äggprodukter. Axfoods
+produktdetalj ger ingredienser och näring, men alla värden har precisionen
+`CA` (cirka). Underlag och beslutspunkter:
+[`docs/reviews/recipes-20261022.md`](reviews/recipes-20261022.md).
+
+---
+
 # 2026-10-21: 40 recept, äggnamn i Malmö och faktalucka – ej aktiverat
 
 Gren `content/recipes-20261021` ovanpå `d3ecf2c`: äggrättelse för Malmö,
