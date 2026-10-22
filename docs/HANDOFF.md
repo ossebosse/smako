@@ -1,3 +1,59 @@
+# 2026-10-22: Primat har ICA-baspriser i Lund och Malmö – verifierat live
+
+Primat saknar inte generellt ICA-baspriser i området. Läsande kontroll med
+Smakos befintliga API-åtkomst gav HTTP 200 från `/api/v3/stores?all=1`
+2026-10-22 **13:26:13 UTC / 15:26:13 svensk tid**. Följande butiker har
+källans `tier=full`, `available=true`, och verifierade produktpriser utan
+aktiv kampanj:
+
+| Ort | Butik | Primat store_id | Exempelpris, kr |
+| --- | --- | --- | ---: |
+| Lund | Maxi ICA Stormarknad Gunnesbo | `1088004` | 16,94 |
+| Malmö | Maxi ICA Stormarknad Västra Hamnen | `1003569` | 17,85 |
+| Malmö | ICA Kvantum Malmborgs Mobilia | `1004037` | 17,93 |
+| Malmö | ICA Kvantum Malmborgs Caroli | `1004490` | 17,88 |
+| Malmö | Maxi ICA Stormarknad Malmö, Cypressvägen | `1004492` | 17,50 |
+
+Prisexemplet är samma Valio Mjölkdryck Laktosfri 3 %, 1 liter,
+produkt-ID `1363406`, GTIN `6408432086564`. Samtliga exempel hade
+`prices.regular` enligt tabellen, `offer=null`, inga medlems-/flerköpspriser
+och `confirmed_at` den 22 oktober. Exempel:
+[Gunnesbo](https://primat.nu/vara/ica/1088004/1363406),
+[Mobilia](https://primat.nu/vara/ica/1004037/1363406).
+
+Ett gemensamt `/api/v3/products?q=mjölk&stores=...&limit=100`-anrop med
+de fem exakta butiks-ID:na gav HTTP 200 och 100 produkt-/butiksrader,
+varav 98 hade positivt `regular` och `offer=null`. Alla fem butikerna
+bidrog med sådana rader. Detta är ett begränsat stickprov;
+`full` är Primats deklarerade täckning, inte en egen genomräkning av
+hela sortimentet. Enligt [API-kontraktet](https://primat.nu/api/v3/openapi.json)
+kan `regular` också innehålla offentliga kampanjpriser, varför fältet ensamt
+inte bevisar ett ordinarie baspris. `confirmed_at` avser senaste kontroll,
+medan `changed_at` anger senaste prisändring.
+
+**Clemenstorget `1004409` är fortfarande `offers_only`**, liksom bland andra
+Tuna, Brunnshög och Linero. Augustis äldre fullklassning får inte användas
+som aktuell täckning. Den tidigare obligatoriska kombinationen av Gunnesbo
+och Clemenstorget blockerades av Clemenstorgets ändrade källkontrakt;
+det innebar inte att Gunnesbos baspriser saknades. Se
+[tidigare kontraktsutredning](../reports/lund-base-strategy-20260928/PRIMAT-CONTRACT.md).
+
+Aktuell scheduler hade vid kontrollen **`OWN_SOURCES_ONLY=true`** och
+befintlig Primat-nyckel. I `grocery_data/__main__.py` hoppar detta läge över
+Primat-uppdateringen med `explicit_own_sources_only` och noll leverantörsanrop.
+Smakos nuvarande bortval av Primat ska därför skiljas från faktisk
+datatillgång hos leverantören.
+
+Möjlig fortsättning är att kvalificera de fem katalogerna i befintligt
+prisflöde. Exakt butiksidentitet, priskanal, produktidentitet och
+kampanjsemantik måste verifieras före integration. De kontrollerade
+produktlänkarna pekar på ICA:s e-handel; fysiska hyllpriser är inte belagda.
+Inga kataloger har importerats, ingen runtime/policy har ändrats och ingen
+deployment har gjorts i denna kontroll. API-svar granskades i sessionen;
+ingen separat råsvarsfil sparades och inga hemligheter dokumenteras.
+
+---
+
 # 2026-10-21: Smakomedlemskap aktivt och liveverifierat
 
 Aktiverat **11:07:40 UTC / 13:07:40 svensk tid**, kod `c253cbd9ef93`,
