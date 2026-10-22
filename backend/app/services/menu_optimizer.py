@@ -1069,17 +1069,6 @@ class MenuOptimizer:
                 incumbent = probe_pairs(incumbent, proposals, "joint_refinement", rank, 256, 32)
             return incumbent
 
-        def complete_prefix(incumbent, options, generation):
-            nonlocal secondary_best
-            # Prefix-only probes must not redirect a later generation's
-            # secondary/joint anchor. Its original trajectory still competes
-            # with the independently retained completed prefix.
-            coarse_best = secondary_best
-            try:
-                return finish_generation(incumbent, options, generation)
-            finally:
-                secondary_best = coarse_best
-
         incumbent, previous, last_error = None, None, None
         completed_best = None
         rank = refinement_score or retention_score
@@ -1113,7 +1102,7 @@ class MenuOptimizer:
                     if incumbent is not None:
                         break
                 if incumbent is not None:
-                    completed = complete_prefix(incumbent, options, generation)
+                    completed = finish_generation(incumbent, options, generation)
                     if completed_best is None or rank(*completed) < rank(*completed_best):
                         completed_best = completed
                 continue
@@ -1134,7 +1123,7 @@ class MenuOptimizer:
             # Complete each published prefix before extending its pool. Keep
             # the substitution trajectory separate so earlier finalization
             # cannot remove proposals made by the original larger search.
-            completed = complete_prefix(incumbent, options, generation)
+            completed = finish_generation(incumbent, options, generation)
             if completed_best is None or rank(*completed) < rank(*completed_best):
                 completed_best = completed
         if completed_best is not None:
