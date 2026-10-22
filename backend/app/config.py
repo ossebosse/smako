@@ -108,6 +108,10 @@ class Settings:
     library_refinement_pool_limit: int = 90
     library_substitution_pool_limit: int = 160
     library_seed_variant_shortlist: bool = True
+    # Search every recipe newer than the seed library as ONE substitution
+    # cohort instead of one cohort per published pack, so the work stays
+    # bounded as packs accumulate. The full-library reference keeps per-pack.
+    library_merge_generations: bool = True
     price_universe_prewarm_postal_code: str = "22350"
     price_universe_prewarm_modes: tuple[str, ...] = (
         "cheapest",
@@ -407,6 +411,7 @@ class Settings:
             library_refinement_pool_limit=max(0, int(os.getenv("LIBRARY_REFINEMENT_POOL_LIMIT", "90"))),
             library_substitution_pool_limit=max(0, int(os.getenv("LIBRARY_SUBSTITUTION_POOL_LIMIT", "160"))),
             library_seed_variant_shortlist=_as_bool(os.getenv("LIBRARY_SEED_VARIANT_SHORTLIST"), True),
+            library_merge_generations=_as_bool(os.getenv("LIBRARY_MERGE_GENERATIONS"), True),
             price_universe_prewarm_postal_code=os.getenv(
                 "PRICE_UNIVERSE_PREWARM_POSTAL_CODE",
                 "22350",

@@ -2957,11 +2957,15 @@ class PersonalPlanner:
             from app.services.recipe_library import current_recipe_generations
             generations = current_recipe_generations(self.library_generation)
             first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
+            cohorts = range(first, self._generation + 1)
+            if getattr(self.settings, "library_merge_generations", True) and len(cohorts) > 2:
+                # Seed library, then every newer pack as one capped sweep.
+                cohorts = (first, self._generation)
             search_input = [(generation, [
                 [s for s in group if not s.recipe or not s.recipe.design
                  or generations.get(identity(s.recipe), self._generation) <= generation]
                 for group in options
-            ]) for generation in range(first, self._generation + 1)]
+            ]) for generation in cohorts]
             search = self.service.menu_optimizer.optimize_library_slots
             library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
             from app.services.week_refinement import qualified_joint_proposals

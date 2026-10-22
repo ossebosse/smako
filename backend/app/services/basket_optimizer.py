@@ -328,6 +328,10 @@ class _QuoteCacheSession:
         default_factory=dict
     )
     quote_sets: dict[_QuoteSetKey, _QuoteSetCacheEntry] = field(default_factory=dict)
+    # The same requirement on another purchase line ("<name> [n]"): exact
+    # quotes per candidate, renamed to the asking line on reuse.
+    line_free_quote_sets: dict[tuple, tuple[Sequence[ProductCandidate], tuple[tuple[_QuoteCacheKey, BasketItemQuote], ...]]] = field(
+        default_factory=dict)
     selections: dict[_QuoteSelectionKey, BasketItemQuote | None] = field(
         default_factory=dict
     )
@@ -876,7 +880,15 @@ class BasketOptimizer:
 
         if cacheable and session is not None:
             session.stats.quote_set_misses += 1
+            line_free_key = (_QUOTE_LINE_SUFFIX.sub("", key[0]), *key[1:])
+            reusable = session.line_free_quote_sets.get(line_free_key)
+            if reusable is not None and reusable[0] is candidates:
+                result = tuple(_session_named_quote(session, quote_key, quote, ingredient)
+                               for quote_key, quote in reusable[1])
+                session.quote_sets[key] = _QuoteSetCacheEntry(candidates=candidates, quotes=result)
+                return result, key
         calculated: list[BasketItemQuote] = []
+        keyed: list[tuple[_QuoteCacheKey, BasketItemQuote]] = []
         for candidate in candidates:
             try:
                 quote = self._calculate_quote(ingredient, candidate)
@@ -886,12 +898,15 @@ class BasketOptimizer:
                 continue
             if self.verification_policy.allows_quote(quote):
                 calculated.append(quote)
+                if key is not None:
+                    keyed.append((self._quote_cache_key(session, ingredient, candidate), quote))
         result = tuple(calculated)
         if key is not None and session is not None:
             session.quote_sets[key] = _QuoteSetCacheEntry(
                 candidates=candidates,
                 quotes=result,
             )
+            session.line_free_quote_sets[line_free_key] = (candidates, tuple(keyed))
         return result, key
 
     def _cheapest_quote_for_set(

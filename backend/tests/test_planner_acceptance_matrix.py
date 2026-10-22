@@ -45,7 +45,7 @@ def reference(**changes):
     report = {"schema": "smako-planner-acceptance-v1", "inputs": dict(INPUTS), "uncapped": True,
               "reference_contract": matrix.FULL_LIBRARY_REFERENCE_CONTRACT,
               "search_limits": {"seed": 0, "refinement": 0, "seed_variant_shortlist": False,
-                                "substitution": 0},
+                                "substitution": 0, "merge_generations": False},
               "records": [{"outcome": "PASS", "paid": 100.0}]}
     report.update(changes)
     return report
@@ -55,12 +55,13 @@ def test_full_library_settings_match_the_contract():
     settings = matrix.full_library_search_limits(Settings())
     assert (settings.library_seed_pool_limit, settings.library_refinement_pool_limit,
             settings.library_seed_variant_shortlist,
-            settings.library_substitution_pool_limit) == (0, 0, False, 0)
+            settings.library_substitution_pool_limit,
+            settings.library_merge_generations) == (0, 0, False, 0, False)
 
 
 def test_current_full_library_reference_is_accepted():
     matrix.validate_full_library_reference(reference(), dict(INPUTS))
-    # Untagged reports must still explicitly state all four settings.
+    # Untagged reports must still explicitly state all five settings.
     untagged = reference()
     del untagged["reference_contract"]
     matrix.validate_full_library_reference(untagged, dict(INPUTS))
@@ -84,6 +85,12 @@ def test_current_full_library_reference_is_accepted():
     ({"search_limits": {**matrix.FULL_LIBRARY_SEARCH_LIMITS, "substitution": False}},
      "'substitution'"),
     ({"reference_contract": "smako-full-library-reference-v1"}, "unknown reference contract"),
+    ({"reference_contract": "smako-full-library-reference-v2"}, "unknown reference contract"),
+    # A v2 reference searched pack by pack but did not state it.
+    ({"search_limits": {"seed": 0, "refinement": 0, "seed_variant_shortlist": False, "substitution": 0}},
+     "lacks 'merge_generations'"),
+    ({"search_limits": {**matrix.FULL_LIBRARY_SEARCH_LIMITS, "merge_generations": True}},
+     "'merge_generations'"),
     ({"search_limits": None}, "no search_limits"),
     ({"uncapped": False}, "not an --uncapped run"),
     ({"uncapped": "true"}, "not an --uncapped run"),
