@@ -1,4 +1,7 @@
 import json
+import sys
+
+
 def I(name, form, q, role="vegetable", label=None): return {"name": name, "form": form, "quantity": q, "role": role, "label": label or name}
 def R(base, name, mt, cuisine, family, primary, method, side, flavor, equipment, comps, steps, servings=None, level=None):
     r = {"base_id": f"smako-{base}", "name": name, "servings": servings or (2 if mt == "dinner" else 1), "meal_type": mt,
@@ -13,7 +16,7 @@ olja = lambda q=15: I("rapsolja", "as_sold", q, "cooking"); salt = lambda q=2: I
 L = []
 # ---- Fisk (6) ----
 L.append(R("thai-salmon-coconut-curry", "Laxcurry med kokos, ingefära och broccoli, med ris", "dinner", "thai", "curry", "lax", "pot", "ris",
-  ["kokos", "ingefära", "lime"], ["Kastrull", "Gryta"],
+  ["kokos", "ingefära", "citron"], ["Kastrull", "Gryta"],
   [("c1", "Curry", [I("lax", "raw_edible", 250, "primary", "Laxfilé, rå"), I("kokosmjölk", "as_sold", 250, "sauce"), I("broccoli", "raw_edible", 200),
     I("ingefära", "raw_edible", 10, "flavour"), I("vitlök", "raw_edible", 6, "flavour"), I("gul lök", "raw_edible", 80), I("gurkmeja", "dry", 1, "flavour"),
     I("sojasås", "as_sold", 15, "flavour"), I("citronjuice", "as_sold", 10, "flavour"), I("tomatpuré", "as_sold", 15, "sauce"), olja(10), salt(1)]),
@@ -43,7 +46,7 @@ L.append(R("greek-cod-tomato-couscous", "Torsk i tomat- och paprikasås med oreg
    S("Lägg fisken i såsen och sjud under lock 8 minuter tills den når minst 63 °C. Smaka av med citronjuice och persilja.", ["fisk", "citronjuice", "persilja"], 9, [2]),
    S("Häll 200 ml kokande vatten över couscousen, låt svälla 5 minuter och toppa med smulad fetaost.", ["couscous", "fetaost"], 6)]))
 L.append(R("indian-fish-spinach-chickpea-curry", "Fiskcurry med spenat och kikärtor, med ris", "dinner", "indian", "curry", "fisk", "pot", "ris",
-  ["garam", "ingefära", "tomat"], ["Gryta", "Kastrull"],
+  ["spiskummin", "ingefära", "tomat"], ["Gryta", "Kastrull"],
   [("c1", "Curry", [I("fisk", "raw_edible", 250, "primary", "Torskfilé, rå"), I("kikärtor", "cooked_drained", 200, "primary"), I("spenat", "as_sold", 150),
     I("krossade tomater", "as_sold", 300, "sauce"), I("gul lök", "raw_edible", 80), I("vitlök", "raw_edible", 6, "flavour"), I("ingefära", "raw_edible", 10, "flavour"),
     I("spiskummin", "dry", 1, "flavour"), I("gurkmeja", "dry", 1, "flavour"), I("malen koriander", "dry", 1, "flavour"), olja(15), salt(2)]),
@@ -126,7 +129,7 @@ L.append(R("greek-snack-tomato-feta-toast", "Rostat bröd med tomat, fetaost och
   [S("Rosta brödet. Skiva tomaten.", ["bröd", "tomat"], 3),
    S("Lägg tomat och smulad fetaost på brödet, ringla över olja och strö över oregano och peppar.", ["tomat", "fetaost", "rapsolja", "oregano", "svartpeppar", "bröd"], 2, [1])], level="simple"))
 # ---- Vegetariska middagar i fler kök (6) ----
-L.append(R("italian-zucchini-mushroom-pasta", "Pasta med zucchini, champinjoner, citron och ost", "dinner", "italian", "pasta", "pasta", "pan", "pasta",
+L.append(R("italian-zucchini-mushroom-pasta", "Pasta med zucchini, champinjoner, bönor, citron och ost", "dinner", "italian", "pasta", "pasta", "pan", "pasta",
   ["citron", "vitlök", "ost"], ["Kastrull", "Stekpanna"],
   [("c1", "Pasta", [I("pasta", "dry", 180, "side"), I("zucchini", "raw_edible", 200), I("champinjoner", "raw_edible", 200), I("gul lök", "raw_edible", 60),
     I("vitlök", "raw_edible", 6, "flavour"), I("citronjuice", "as_sold", 15, "flavour"), I("crème fraiche", "as_sold", 100, "sauce"), I("ost", "as_sold", 40, "flavour"),
@@ -171,10 +174,10 @@ L.append(R("thai-tofu-coconut-peanut-noodles", "Tofu i kokos- och jordnötssås 
    ("c2", "Nudlar och grönt", [I("nudlar", "dry", 150, "side"), I("broccoli", "raw_edible", 200), I("morot", "raw_edible", 100), I("jordnötter", "as_sold", 40, "flavour")])],
   [S("Tärna tofun och stek den gyllene i oljan.", ["tofu", "rapsolja"], 10),
    S("Koka nudlarna enligt förpackningen, de sista 3 minuterna med broccoli och strimlad morot.", ["nudlar", "broccoli", "morot"], 8, None, True),
-   S("Mixa hälften av jordnötterna med kokosmjölk, sojasås, citronjuice, ingefära och vitlök till en sås och värm den.", ["jordnötter", "kokosmjölk", "sojasås", "citronjuice", "ingefära", "vitlök"], 5),
+   S("Finhacka hälften av jordnötterna och riv ingefära och vitlök. Rör ihop med kokosmjölk, sojasås och citronjuice till en sås och värm den.", ["jordnötter", "kokosmjölk", "sojasås", "citronjuice", "ingefära", "vitlök"], 5),
    S("Vänd nudlar, grönsaker och tofu med såsen och toppa med resten av jordnötterna, hackade.", ["nudlar", "broccoli", "tofu", "jordnötter"], 3, [1, 2, 3])]))
 L.append(R("indian-egg-curry-spinach", "Äggcurry med spenat och tomat, med ris", "dinner", "indian", "curry", "ägg", "pot", "ris",
-  ["garam", "ingefära", "kokos"], ["Gryta", "Kastrull"],
+  ["koriander", "ingefära", "kokos"], ["Gryta", "Kastrull"],
   [("c1", "Curry", [I("ägg", "raw_edible", 300, "primary", "Ägg"), I("spenat", "as_sold", 150), I("krossade tomater", "as_sold", 300, "sauce"), I("kokosmjölk", "as_sold", 150, "sauce"),
     I("gul lök", "raw_edible", 80), I("vitlök", "raw_edible", 6, "flavour"), I("ingefära", "raw_edible", 10, "flavour"), I("spiskummin", "dry", 1, "flavour"),
     I("gurkmeja", "dry", 1, "flavour"), I("malen koriander", "dry", 1, "flavour"), olja(15), salt(2)]),
@@ -183,6 +186,7 @@ L.append(R("indian-egg-curry-spinach", "Äggcurry med spenat och tomat, med ris"
    S("Koka äggen 9 minuter tills både vita och gula stelnat, kyl och skala dem.", ["ägg"], 12, None, True),
    S("Hacka lök, vitlök och ingefära och fräs med spiskummin, gurkmeja och koriander i oljan. Tillsätt tomater, kokosmjölk, spenat och salt och sjud 10 minuter.", ["gul lök", "vitlök", "ingefära", "spiskummin", "gurkmeja", "malen koriander", "rapsolja", "krossade tomater", "kokosmjölk", "spenat", "salt"], 16),
    S("Dela äggen, lägg dem i såsen och värm 2 minuter. Servera med riset.", ["ägg", "ris"], 3, [1, 2, 3])]))
-json.dump({"schema_version": "smako-recipe-authoring-v1", "pack_id": "smako-variety-recipes-20261021", "recipes": L},
-          open("/home/claude/m3/.local/recipes-20261021/variety-drafts.json", "w"), ensure_ascii=False, indent=1)
+with open(sys.argv[1], "w", encoding="utf-8") as out:
+    json.dump({"schema_version": "smako-recipe-authoring-v1", "pack_id": "smako-variety-recipes-20261021", "recipes": L},
+              out, ensure_ascii=False, indent=1)
 print(len(L))
