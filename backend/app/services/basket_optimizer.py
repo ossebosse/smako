@@ -324,6 +324,8 @@ class _QuoteCacheSession:
     # Renamed copies per purchase-line name: rebuilding a dataclass on every
     # hit is costly in nutrition/eco searches that requote the same lines.
     named: dict[tuple, BasketItemQuote] = field(default_factory=dict)
+    # Frozen BasketItem per frozen quote (kept with it, so its id is unique).
+    items: dict[int, tuple[BasketItemQuote, BasketItem]] = field(default_factory=dict)
     candidate_fingerprints: dict[int, tuple[ProductCandidate, _CandidateFingerprint]] = field(
         default_factory=dict
     )
@@ -380,6 +382,32 @@ def _session_named_quote(session, key, quote, ingredient):
     named = session.named.get(named_key)
     if named is None:
         named = session.named[named_key] = _named_quote(quote, ingredient)
+    return named
+
+
+def _basket_item(session, quote):
+    if session is None:
+        return quote.to_basket_item()
+    cached = session.items.get(id(quote))
+    if cached is not None and cached[0] is quote:
+        return cached[1]
+    item = quote.to_basket_item()
+    session.items[id(quote)] = (quote, item)
+    return item
+
+
+def _line_named(session, quote, ingredient):
+    """A subset winner shared between purchase lines, named for this line."""
+    if quote is None or quote.ingredient == ingredient.canonical_name:
+        return quote
+    named_key = ("line", id(quote), ingredient.canonical_name)
+    cached = session.named.get(named_key) if session is not None else None
+    if cached is not None and cached[0] is quote:
+        return cached[1]
+    named = _named_quote(quote, ingredient)
+    if session is not None:
+        # The source quote is kept with its copy so its id cannot be reused.
+        session.named[named_key] = (quote, named)
     return named
 
 
@@ -1018,7 +1046,10 @@ class BasketOptimizer:
         session = self._quote_cache_context.get()
         vector_key: _QuoteSubsetVectorKey | None = None
         if session is not None and quote_set_key is not None:
-            vector_key = (quote_set_key, ordered_store_ids, limit)
+            # Winners depend on price, rank and store only; the purchase-line
+            # name is restored on the chosen quotes by the caller.
+            vector_key = ((_QUOTE_LINE_SUFFIX.sub("", quote_set_key[0]), *quote_set_key[1:]),
+                          ordered_store_ids, limit)
             cached = session.subset_vectors.get(vector_key)
             if cached is not None:
                 session.stats.subset_vector_hits += 1
@@ -1846,6 +1877,7 @@ class BasketOptimizer:
         # only ties on its proven best leading key. The scalar path visits all
         # subsets here. Both preserve ascending order and every tie breaker;
         # neither reduces the menu search budget or prunes by comparison price.
+        session = self._quote_cache_context.get()
         while winning_positions:
             bit = winning_positions & -winning_positions
             position = bit.bit_length() - 1
@@ -1864,7 +1896,9 @@ class BasketOptimizer:
                 verification_rank = self._quotes_verification_rank(chosen)
             else:
                 selections = tuple(vector[position] for vector in vectors)
-                chosen = tuple(selection.quote for selection in selections)
+                chosen = tuple(_line_named(session, selection.quote, ingredient)
+                               for selection, (ingredient, _quotes, _key) in zip(
+                                   selections, quoted_ingredients, strict=True))
                 total = money(sum((selection.total_price for selection in selections), Decimal(0)))
                 verification_rank = max((selection.verification_rank for selection in selections),
                                         default=_VERIFICATION_RANK[BasketVerificationStatus.VERIFIED])
@@ -1931,7 +1965,7 @@ class BasketOptimizer:
         total = best_key[1]
         grouped: dict[str, list[BasketItem]] = {}
         for quote in best_quotes:
-            item = quote.to_basket_item()
+            item = _basket_item(session, quote)
             grouped.setdefault(item.store_id, []).append(item)
 
         groups: list[OptimizedStoreGroup] = []
