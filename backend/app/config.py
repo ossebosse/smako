@@ -117,6 +117,9 @@ class Settings:
     # incumbent week by more than this share (negative: off). Measured on
     # frozen data before choosing; the full-library reference turns it off.
     library_substitution_screen_margin: float = 0.10
+    # Price at most this many one-slot substitutions per slot and sweep, in
+    # predicted order (0: off, the previous unordered sweep).
+    library_substitution_slot_limit: int = 0
     price_universe_prewarm_postal_code: str = "22350"
     price_universe_prewarm_modes: tuple[str, ...] = (
         "cheapest",
@@ -418,6 +421,7 @@ class Settings:
             library_seed_variant_shortlist=_as_bool(os.getenv("LIBRARY_SEED_VARIANT_SHORTLIST"), True),
             library_merge_generations=_as_bool(os.getenv("LIBRARY_MERGE_GENERATIONS"), False),
             library_substitution_screen_margin=float(os.getenv("LIBRARY_SUBSTITUTION_SCREEN_MARGIN", "0.10")),
+            library_substitution_slot_limit=max(0, int(os.getenv("LIBRARY_SUBSTITUTION_SLOT_LIMIT", "0"))),
             price_universe_prewarm_postal_code=os.getenv(
                 "PRICE_UNIVERSE_PREWARM_POSTAL_CODE",
                 "22350",

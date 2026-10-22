@@ -884,6 +884,7 @@ class MenuOptimizer:
 
     def optimize_library_slots(self, cohorts, *, evaluate, accepts, score, retention_score,
                                refinement_selector=None, substitution_selector=None, substitution_screen=None,
+                               substitution_order=None, substitution_slot_limit=0,
                                search_trace=None, decision_observer=None, seed_selector=None,
                                refinement_score=None, joint_proposals=None, **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
@@ -928,9 +929,12 @@ class MenuOptimizer:
             cache[key] = result
             return remember_final(slots, result, final)
 
-        def improve(incumbent, additions, generation, phase, finalists=None, extra=None, screen=None):
+        def improve(incumbent, additions, generation, phase, finalists=None, extra=None, screen=None,
+                    order=None, slot_limit=0):
             # ``screen`` (substitution only) skips a proposal its caller
-            # predicts far above the incumbent. A heuristic, like the caps.
+            # predicts far above the incumbent; ``order`` and ``slot_limit``
+            # try each slot's proposals best-predicted first and price at most
+            # ``slot_limit`` of them per sweep. Heuristics, like the caps.
             for sweep in (1, 2):
                 if finalists is not None:
                     finalists.clear()
@@ -943,8 +947,19 @@ class MenuOptimizer:
                        **({"screened": 0} if screen is not None else {}), **(extra or {})}
                 trace.append(row)
                 for index, group in enumerate(additions):
+                    if order is not None and slot_limit:
+                        ranked = []
+                        for position, slot in enumerate(group):
+                            chosen = list(incumbent[0])
+                            chosen[index] = slot
+                            ranked.append((order(chosen, incumbent, index), position, slot))
+                        group = [slot for _key, _position, slot in sorted(ranked, key=lambda r: r[:2])]
+                    priced_here = 0
                     for slot in group:
                         if slot == incumbent[0][index]:
+                            continue
+                        if slot_limit and priced_here >= slot_limit:
+                            row["slot_limited"] = row.get("slot_limited", 0) + 1
                             continue
                         chosen = list(incumbent[0])
                         chosen[index] = slot
@@ -958,6 +973,7 @@ class MenuOptimizer:
                                 decision_observer(chosen, "constraints_rejected", depth=len(additions))
                             continue
                         before_hits = hits
+                        priced_here += 1
                         try:
                             result = cached_evaluate(chosen, final=True)
                         except (IncompleteBasketError, ValueError) as exc:
@@ -1032,7 +1048,8 @@ class MenuOptimizer:
                 extra = {"substitution_variants_available": available,
                          "substitution_variants_retained": sum(map(len, additions))}
             incumbent = improve(incumbent, additions, generation, "substitution", extra=extra,
-                                screen=substitution_screen)
+                                screen=substitution_screen, order=substitution_order,
+                                slot_limit=substitution_slot_limit)
         if incumbent is not None:
             # New ingredients can make an older recipe economical too. Revisit
             # every qualified recipe against the complete incumbent basket,

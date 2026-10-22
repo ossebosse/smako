@@ -2587,6 +2587,22 @@ class PersonalPlanner:
             text += " Lägg till minst en butik med fullt sortiment, till exempel " + ", ".join(complete[:3]) + "."
         return text
 
+    def _predicted_substitution(self, chosen, incumbent, index):
+        """Sort key: predicted week total of a one-slot substitution (unknown last)."""
+        predicted = self._substitution_prediction(chosen, incumbent, index)
+        return (predicted is None, predicted if predicted is not None else Decimal(0))
+
+    def _substitution_prediction(self, chosen, incumbent, index):
+        old, new = incumbent[0][index], chosen[index]
+        if not old.recipe or not new.recipe:
+            return None
+        old_evidence = self.variant_search_evidence.get((old.meal_type, self._recipe_id(old.recipe)))
+        new_evidence = self.variant_search_evidence.get((new.meal_type, self._recipe_id(new.recipe)))
+        if old_evidence is None or new_evidence is None:
+            return None
+        total = Decimal(str(incumbent[1]["basket"].total))
+        return total - Decimal(str(old_evidence.paid)) + Decimal(str(new_evidence.paid))
+
     def _screen_substitution(self, chosen, incumbent, index, margin):
         """Keep a one-slot substitution unless its predicted week is far dearer.
 
@@ -2595,15 +2611,10 @@ class PersonalPlanner:
         week cheaper or dearer; ``margin`` is the measured tolerance. Unknown
         evidence keeps the proposal. Heuristic, like the pool caps.
         """
-        old, new = incumbent[0][index], chosen[index]
-        if not old.recipe or not new.recipe:
-            return True
-        old_evidence = self.variant_search_evidence.get((old.meal_type, self._recipe_id(old.recipe)))
-        new_evidence = self.variant_search_evidence.get((new.meal_type, self._recipe_id(new.recipe)))
-        if old_evidence is None or new_evidence is None:
+        predicted = self._substitution_prediction(chosen, incumbent, index)
+        if predicted is None:
             return True
         total = Decimal(str(incumbent[1]["basket"].total))
-        predicted = total - Decimal(str(old_evidence.paid)) + Decimal(str(new_evidence.paid))
         return predicted <= total * (1 + Decimal(str(margin)))
 
     def _select_library_options(self, groups, *, limit, shortlist_variants):
@@ -3015,6 +3026,10 @@ class PersonalPlanner:
             if screen_margin >= 0:
                 library_kwargs["substitution_screen"] = lambda chosen, incumbent, index: self._screen_substitution(
                     chosen, incumbent, index, screen_margin)
+            slot_limit = getattr(self.settings, "library_substitution_slot_limit", 0)
+            if slot_limit:
+                library_kwargs["substitution_order"] = self._predicted_substitution
+                library_kwargs["substitution_slot_limit"] = slot_limit
             self._library_search_handled = True
         search_kwargs = dict(
                 **library_kwargs,

@@ -67,10 +67,10 @@ def digest(value):
 # Search settings a full-library reference must state explicitly. A report
 # without every key (for example one written before seed_variant_shortlist
 # existed, which still kept four variants per base) is not a reference.
-FULL_LIBRARY_REFERENCE_CONTRACT = "smako-full-library-reference-v4"
+FULL_LIBRARY_REFERENCE_CONTRACT = "smako-full-library-reference-v5"
 FULL_LIBRARY_SEARCH_LIMITS = {
     "seed": 0, "refinement": 0, "seed_variant_shortlist": False, "substitution": 0,
-    "merge_generations": False, "substitution_screen_margin": -1.0,
+    "merge_generations": False, "substitution_screen_margin": -1.0, "substitution_slot_limit": 0,
 }
 
 
@@ -78,7 +78,8 @@ def full_library_search_limits(settings):
     """Settings for a full-library reference: whole qualified library, no shortlist."""
     return replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0,
                    library_seed_variant_shortlist=False, library_substitution_pool_limit=0,
-                   library_merge_generations=False, library_substitution_screen_margin=-1.0)
+                   library_merge_generations=False, library_substitution_screen_margin=-1.0,
+                   library_substitution_slot_limit=0)
 
 
 def validate_full_library_reference(reference, inputs):
@@ -231,6 +232,9 @@ def main():
                    help="Override LIBRARY_SUBSTITUTION_POOL_LIMIT for this run (0 = every new recipe)")
     p.add_argument("--screen-margin", type=float,
                    help="library_substitution_screen_margin (negative turns the screen off)")
+    p.add_argument("--slot-limit", type=int, help="library_substitution_slot_limit (0: off)")
+    p.add_argument("--substitution-pool", type=int,
+                   help="library_substitution_pool_limit for experiments (0: whole generation)")
     p.add_argument("--merge-generations", action="store_true",
                    help="Search every newer pack as one cohort (library_merge_generations=True)")
     p.add_argument("--per-pack-generations", action="store_true",
@@ -275,6 +279,10 @@ def main():
         settings = replace(settings, library_substitution_pool_limit=args.substitution_limit)
     if args.screen_margin is not None:
         settings = replace(settings, library_substitution_screen_margin=args.screen_margin)
+    if args.slot_limit is not None:
+        settings = replace(settings, library_substitution_slot_limit=args.slot_limit)
+    if args.substitution_pool is not None:
+        settings = replace(settings, library_substitution_pool_limit=args.substitution_pool)
     if args.merge_generations:
         settings = replace(settings, library_merge_generations=True)
     if args.per_pack_generations:
@@ -300,7 +308,8 @@ def main():
                                 "seed_variant_shortlist": settings.library_seed_variant_shortlist,
                                 "substitution": settings.library_substitution_pool_limit,
                                 "merge_generations": settings.library_merge_generations,
-                                "substitution_screen_margin": settings.library_substitution_screen_margin}}
+                                "substitution_screen_margin": settings.library_substitution_screen_margin,
+                                "substitution_slot_limit": settings.library_substitution_slot_limit}}
     if args.uncapped:
         assert report["search_limits"] == FULL_LIBRARY_SEARCH_LIMITS, report["search_limits"]
         report["reference_contract"] = FULL_LIBRARY_REFERENCE_CONTRACT
