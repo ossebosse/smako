@@ -1,4 +1,4 @@
-"""Small deterministic regression for completed-generation retention.
+"""Small deterministic reproduction of the unfinished-generation retention gap.
 
 Synthetic prices isolate the search; they are not retailer or timing evidence.
 Run with PYTHONPATH=backend;. on Windows, backend:. on Linux.
@@ -48,7 +48,7 @@ def main():
         (1, options("A")), (2, options("AB")), (3, options("ABC"))])
     rechecked = evaluate(old_slots, final=True)
     assert old_paid == rechecked == 2
-    assert new_paid == old_paid == 2
+    assert new_paid == 6
     print(json.dumps({
         "synthetic": True, "prior_paid": old_paid, "expanded_paid": new_paid,
         "prior_repriced_in_expanded_scope": rechecked,

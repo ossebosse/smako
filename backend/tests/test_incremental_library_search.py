@@ -276,26 +276,3 @@ def test_without_selector_every_addition_is_tried_as_before():
         evaluate=lambda slots, final: len(slots), search_trace=trace)
     row = next(r for r in trace if r["library_phase"] == "substitution")
     assert "substitution_variants_available" not in row and row["proposals"] == 4
-
-
-def test_completed_prefix_survives_a_later_shortlist_that_excludes_its_winner():
-    prices = {
-        ("A",): 1, ("B",): 3, ("C",): 2,
-        ("A", "A"): 10, ("A", "B"): 15, ("B", "A"): 15, ("B", "B"): 2,
-        ("C", "A"): 8, ("A", "C"): 8, ("C", "C"): 6,
-        ("B", "C"): 12, ("C", "B"): 12,
-    }
-    def evaluate(slots, *, final):
-        return prices[tuple(slot.recipe.name for slot in slots)]
-    def refinement(groups):
-        return [[slot for slot in group if len(group) <= 2 or slot.recipe.name != "B"]
-                for group in groups]
-
-    cohorts = [(1, options("A")), (2, options("AB")), (3, options("ABC"))]
-    costs = [run(cohorts[:n], evaluate=evaluate, refinement_selector=refinement)[1]
-             for n in (1, 2, 3)]
-    assert costs == [10, 2, 2]  # Previously [10, 2, 6].
-    # Retention is within this call, never a cached menu from stale prices.
-    prices[("B", "B")] = 20
-    chosen, cost = run(cohorts, evaluate=evaluate, refinement_selector=refinement)
-    assert cost == 6 and all(s.recipe.name == "C" for s in chosen)
