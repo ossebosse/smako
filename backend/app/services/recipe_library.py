@@ -296,16 +296,19 @@ def _registered_portions(servings: int) -> tuple[Recipe, ...]:
 def _registered_historical_portions(servings: int) -> tuple[Recipe, ...]:
     if not 1 <= servings <= 12:
         raise ValueError("Antal portioner måste vara mellan 1 och 12.")
-    from app.services.meal_prepared_artifacts import prepared
-    source = _registered_history()
-    def compute():
-        result = [_scaled(r, servings) for r in source]
-        for recipe in result:
-            _structural_check(recipe)
-        return [r.model_dump(mode="json") for r in result]
-    rows = prepared(f"scaled-{servings}",
-                    [servings, [r.model_dump(mode="json") for r in source]], compute)
-    return tuple(Recipe.model_validate(r) for r in rows)
+    # Current and historical registries share the hash-validated source objects.
+    # Reuse only that exact identity, never just a version label or claimed hash.
+    # Serializing the entire scaled library into a disk payload retained a second
+    # model tree and large temporary dictionaries while building the issued index.
+    current = {id(source): (source, scaled) for source, scaled in
+               zip(_registered(), _registered_portions(servings), strict=True)}
+    result = []
+    for source in _registered_history():
+        existing = current.get(id(source))
+        recipe = existing[1] if existing is not None and existing[0] is source else _scaled(source, servings)
+        _structural_check(recipe)
+        result.append(recipe)
+    return tuple(result)
 
 
 def validate_recipe_design(recipe: Recipe) -> bool:
