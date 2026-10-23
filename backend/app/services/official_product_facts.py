@@ -419,7 +419,13 @@ def egg_standard_weight(name):
 
 def _mass_blocking(conflicts):
     """Conflicts that make a usable-mass proof unsafe; nutrient ones do not."""
-    return {c for c in conflicts if c != 'supplier_nutrition_conflict' and not c.startswith('nutrition')}
+    # Only known nutrient disagreements are independent of the mass proof.
+    # Unknown conflicts must not become harmless merely by sharing a prefix.
+    nutrient_only = {
+        'supplier_nutrition_conflict', 'nutrition_basis', 'nutrition.energy',
+        'nutrition.kcal', 'nutrition.protein_g', 'nutrition.carbs_g', 'nutrition.fat_g',
+    }
+    return set(conflicts) - nutrient_only
 
 
 def shell_egg_quantity_proofs(products, result):
