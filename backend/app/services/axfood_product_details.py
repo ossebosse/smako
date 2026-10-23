@@ -81,11 +81,14 @@ def _nutrition_basis_identity(fact):
 
 
 def _limit_conflicts(points, limits, unit):
-    """Check stated strict bounds without turning them into point amounts."""
+    """Check source bounds without turning them into point amounts."""
     conflicts = []
+    operators = {"LT": "lt", "<": "lt", "GT": "gt", ">": "gt",
+                 "LE": "le", "<=": "le", "GE": "ge", ">=": "ge"}
     for evidence in limits:
         field = evidence.get("field")
-        if field not in points or evidence.get("accuracy") not in {"LT", "GT"}:
+        operator = operators.get(evidence.get("accuracy"))
+        if field not in points or operator is None:
             continue
         try:
             quantities = evidence["amount"]
@@ -98,7 +101,8 @@ def _limit_conflicts(points, limits, unit):
             if not all(x.is_finite() for x in (amount, basis, point)) or amount < 0 or basis <= 0:
                 raise ValueError("Unusable bound amount")
             bound = amount * 100 / basis
-            if (point >= bound if evidence["accuracy"] == "LT" else point <= bound):
+            if {"lt": point >= bound, "gt": point <= bound,
+                "le": point > bound, "ge": point < bound}[operator]:
                 conflicts.append(f"nutrition.{field}")
         except (ValueError, KeyError, TypeError, InvalidOperation):
             conflicts.append(f"nutrition.{field}")

@@ -42,13 +42,14 @@ def test_threshold_values_are_limits_not_amounts():
 
 
 @pytest.mark.parametrize("protein,conflict", [(11, False), (12, True), (13, True)])
-def test_detail_bound_vetoes_contradictory_old_point_and_preserves_evidence(tmp_path, protein, conflict):
+@pytest.mark.parametrize("accuracy", ["LT", "<"])
+def test_detail_bound_vetoes_contradictory_old_point_and_preserves_evidence(tmp_path, protein, conflict, accuracy):
     from dataclasses import replace
 
     raw = detail()
     raw["nutrientHeaders"][0]["nutrientDetails"] = [
         {"nutrientTypeCode": "protein", "quantityContained": "12", "measurementUnitCode": "gram",
-         "measurementPrecisionCode": "LT"}]
+         "measurementPrecisionCode": accuracy}]
     store(tmp_path, "willys", raw)
     original = replace(catalogue_fact(), nutrition={"protein_g": protein}, nutrition_unit="g",
                        nutrition_basis="Officiell produktdeklaration per 100 g som såld")
@@ -57,7 +58,7 @@ def test_detail_bound_vetoes_contradictory_old_point_and_preserves_evidence(tmp_
     result = facts[("s1", "p1")]
     assert ("nutrition.protein_g" in result.conflicts) is conflict
     assert result.nutrition == original.nutrition
-    assert result.field_sources["nutrition_limits"][0]["accuracy"] == "LT"
+    assert result.field_sources["nutrition_limits"][0]["accuracy"] == accuracy
     assert result.field_sources["nutrition_limits"][0]["payload_sha256"]
 
 
@@ -70,6 +71,16 @@ def test_new_point_cannot_override_existing_strict_bound(tmp_path):
     result = facts[("s1", "p1")]
     assert "nutrition.protein_g" in result.conflicts
     assert result.field_sources["nutrition_limits"] == original.field_sources["nutrition_limits"]
+
+
+@pytest.mark.parametrize("precision", [[], {}])
+def test_malformed_precision_is_a_visible_conflict_not_a_projection_crash(tmp_path, precision):
+    raw = detail()
+    raw["nutrientHeaders"][0]["nutrientDetails"][4]["measurementPrecisionCode"] = precision
+    store(tmp_path, 'willys', raw)
+    facts = {('s1', 'p1'): catalogue_fact()}
+    merge_axfood_details([_Product('willys', raw['ean'])], facts, tmp_path)
+    assert 'nutrition.protein_g' in facts[('s1', 'p1')].conflicts
 
 
 @pytest.mark.parametrize("change, conflict", [

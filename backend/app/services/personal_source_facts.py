@@ -208,6 +208,9 @@ def _axfood_nutrition(raw):
             conflicts.append(f"nutrition.{key or 'energy'}")
             continue
         precision = row.get("measurementPrecisionCode")
+        if precision is not None and not isinstance(precision, str):
+            conflicts.append(f"nutrition.{key or 'energy'}")
+            continue
         if precision not in _AXFOOD_DECLARED_PRECISION:
             if key:
                 limits.append({"field": key, "amount": [row.get("quantityContained")], "accuracy": precision,
