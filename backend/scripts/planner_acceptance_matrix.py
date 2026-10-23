@@ -82,7 +82,7 @@ def full_library_search_limits(settings):
                    library_substitution_slot_limit=0)
 
 
-def validate_full_library_reference(reference, inputs):
+def validate_full_library_reference(reference, inputs, *, library_version):
     """Reject anything but an explicit full-library reference over the same inputs.
 
     Code versions may differ intentionally (method_signature is not compared),
@@ -109,6 +109,8 @@ def validate_full_library_reference(reference, inputs):
             raise ValueError(f"reference search_limits[{key!r}] is {value!r}, expected {expected!r}")
     if not reference.get("records"):
         raise ValueError("reference has no records")
+    if not isinstance(library_version, str) or not library_version or reference.get("library_version") != library_version:
+        raise ValueError("reference recipe library differs or is unspecified")
 
 
 def matrix_request(base, case):
@@ -272,6 +274,9 @@ def main():
     facts = FactsCollection({tuple(k): ProductFacts(**v) for k, v in raw["facts"]})
     assert facts.version == raw["facts_version"]
     request = matrix_request(json.loads(files["combined-request.json"]), args.matrix_case)
+    # The validated models own their data. Raw export bytes and the parsed
+    # facts envelope are measurement inputs, not part of a serving planner.
+    del files, raw
     inputs = {"sha256": manifest["sha256"], "now": now.isoformat(),
               "request_sha256": digest(request.model_dump(mode="json")),
               "facts_version": facts.version, "universe_id": prepared.universe.universe_id}
@@ -294,9 +299,12 @@ def main():
     if args.uncapped:
         settings = full_library_search_limits(settings)
     uncapped = json.loads(args.uncapped_reference.read_bytes()) if args.uncapped_reference else None
+    from app.services.recipe_library import library_version
+
+    current_library_version = library_version()
     if uncapped is not None:
         try:
-            validate_full_library_reference(uncapped, inputs)
+            validate_full_library_reference(uncapped, inputs, library_version=current_library_version)
         except ValueError as exc:
             p.error(f"--uncapped-reference rejected: {exc}")
     records = []
@@ -324,11 +332,10 @@ def main():
 
         report["merged_search_contract"] = dict(MERGED_SEARCH_CONTRACT)
     from app.services.meal_prepared_artifacts import STATS, method_signature
-    from app.services.recipe_library import library_version
 
     from backend.scripts.benchmark_beta_capacity import _process_snapshot
     report["method_signature"] = method_signature()
-    report["library_version"] = library_version()
+    report["library_version"] = current_library_version
     report["startup_preparation_seconds"] = 0.0
     if args.prepared_startup and not args.reference_preparation:
         from app.services.meal_prepared_artifacts import prepare_ingredient_search

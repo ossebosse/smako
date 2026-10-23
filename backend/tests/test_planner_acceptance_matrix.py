@@ -39,10 +39,12 @@ def test_profiled_times_do_not_count_as_acceptance_and_queue_is_unknown():
 # --- Full-library reference contract (review 2026-10-18, remaining P2) ---
 INPUTS = {"sha256": {"combined-prices.json": "a"}, "now": "2026-10-18T12:00:00+02:00",
           "request_sha256": "r", "facts_version": "f", "universe_id": "u"}
+LIBRARY_VERSION = "test-library-content-hash"
 
 
 def reference(**changes):
     report = {"schema": "smako-planner-acceptance-v1", "inputs": dict(INPUTS), "uncapped": True,
+              "library_version": LIBRARY_VERSION,
               "reference_contract": matrix.FULL_LIBRARY_REFERENCE_CONTRACT,
               "search_limits": {"seed": 0, "refinement": 0, "seed_variant_shortlist": False,
                                 "substitution": 0, "merge_generations": False,
@@ -63,11 +65,11 @@ def test_full_library_settings_match_the_contract():
 
 
 def test_current_full_library_reference_is_accepted():
-    matrix.validate_full_library_reference(reference(), dict(INPUTS))
+    matrix.validate_full_library_reference(reference(), dict(INPUTS), library_version=LIBRARY_VERSION)
     # Untagged reports must still explicitly state all six settings.
     untagged = reference()
     del untagged["reference_contract"]
-    matrix.validate_full_library_reference(untagged, dict(INPUTS))
+    matrix.validate_full_library_reference(untagged, dict(INPUTS), library_version=LIBRARY_VERSION)
 
 
 @pytest.mark.parametrize("change, message", [
@@ -109,10 +111,12 @@ def test_current_full_library_reference_is_accepted():
     ({"reference_contract": "smako-full-library-reference-v0"}, "unknown reference contract"),
     ({"schema": "smako-planner-acceptance-v0"}, "unknown report schema"),
     ({"records": []}, "no records"),
+    ({"library_version": "different-content-hash"}, "recipe library differs"),
+    ({"library_version": None}, "recipe library differs"),
 ])
 def test_incomplete_or_capped_reference_is_rejected(change, message):
     with pytest.raises(ValueError, match=message.replace("(", r"\(")):
-        matrix.validate_full_library_reference(reference(**change), dict(INPUTS))
+        matrix.validate_full_library_reference(reference(**change), dict(INPUTS), library_version=LIBRARY_VERSION)
 
 
 def run_cli_with_reference(tmp_path, monkeypatch, build_reference):
@@ -142,6 +146,7 @@ def run_cli_with_reference(tmp_path, monkeypatch, build_reference):
                        return_value=SimpleNamespace(restore=lambda: prepared)),
           patch.object(matrix, "FactsCollection", return_value=SimpleNamespace(version="fv")),
           patch.object(matrix, "matrix_request", return_value=request),
+          patch("app.services.recipe_library.library_version", return_value=LIBRARY_VERSION),
           patch.object(matrix, "PersonalPlanner", side_effect=AssertionError("planner constructed"))):
         matrix.main()
 
@@ -162,6 +167,13 @@ def test_correct_reference_passes_the_cli_gate(tmp_path, monkeypatch):
     # Validation passes, so the run proceeds to planner construction (stubbed).
     with pytest.raises(AssertionError, match="planner constructed"):
         run_cli_with_reference(tmp_path, monkeypatch, lambda inputs: reference(inputs=inputs))
+
+
+def test_other_library_reference_is_rejected_before_planning(tmp_path, monkeypatch, capsys):
+    with pytest.raises(SystemExit) as stopped:
+        run_cli_with_reference(tmp_path, monkeypatch, lambda inputs: reference(inputs=inputs, library_version="other"))
+    assert stopped.value.code == 2
+    assert "recipe library differs" in capsys.readouterr().err
 
 
 def test_missing_substitution_setting_is_rejected_by_cli(tmp_path, monkeypatch, capsys):
