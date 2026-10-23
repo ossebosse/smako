@@ -85,7 +85,7 @@ def validate_pair(payload, metadata, chain, code, *, now=None):
         if not isinstance(raw, dict) or raw.get("code") != code:
             return DetailEvidence("payload_identity_mismatch")
         return DetailEvidence("verified", raw, meta, digest)
-    except (ValueError, TypeError, UnicodeError, OverflowError):
+    except (ValueError, TypeError, UnicodeError, OverflowError, RecursionError):
         return DetailEvidence("corrupt")
 
 
@@ -175,7 +175,7 @@ def selection_state(root, chain, code, *, now=None):
             return "waiting_after_error"
     except FileNotFoundError:
         pass
-    except (KeyError, TypeError, ValueError, OSError):
+    except (KeyError, TypeError, ValueError, OSError, RecursionError):
         return "corrupt_attempt"
     return state
 
@@ -322,8 +322,11 @@ def verify_release(directory, *, expected_digest=None):
     path = directory / "manifest.json"
     if path.stat().st_size > 16 * 1024 * 1024:
         raise ValueError("Release manifest exceeds budget")
-    manifest = json.loads(path.read_bytes())
-    if (manifest.get("schema") != "smako-axfood-release-v1"
+    try:
+        manifest = json.loads(path.read_bytes())
+    except RecursionError as exc:
+        raise ValueError("Manifest nesting exceeds the JSON parser budget") from exc
+    if (not isinstance(manifest, dict) or manifest.get("schema") != "smako-axfood-release-v1"
             or manifest.get("validation_version") != VERSION
             or hashlib.sha256(encoded(manifest)).hexdigest() != (expected_digest or directory.name)):
         raise ValueError("Release manifest identity mismatch")

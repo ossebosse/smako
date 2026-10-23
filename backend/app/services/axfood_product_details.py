@@ -17,6 +17,8 @@ import hashlib
 import math
 import os
 import re
+import sys
+from collections import OrderedDict
 from dataclasses import replace
 from functools import lru_cache
 from pathlib import Path
@@ -32,6 +34,26 @@ from grocery_data.app.services.axfood_detail_archive import (
 
 AXFOOD_CHAINS = ("willys", "hemkop")
 _DETAIL_FIELDS = ("ingredients", "nutrition_basis", "nutrition_unit", "nutrition_limits")
+DETAIL_READ_MAX_ENTRIES = 32768
+DETAIL_READ_MAX_BYTES = 32 * 1024 * 1024
+
+
+def _detail_bytes(key, evidence):
+    # JSON trees plus the evidence envelope; shared objects are counted once
+    # per entry, conservatively again across entries. Reserve mapping overhead.
+    total, seen, pending = sys.getsizeof(evidence) + 256, set(), [key, vars(evidence)]
+    while pending:
+        value = pending.pop()
+        if id(value) in seen:
+            continue
+        seen.add(id(value))
+        total += sys.getsizeof(value)
+        if isinstance(value, dict):
+            pending.extend(value.keys())
+            pending.extend(value.values())
+        elif isinstance(value, (tuple, list)):
+            pending.extend(value)
+    return total
 
 
 def _nutrition_basis_identity(fact):
@@ -96,6 +118,31 @@ def merge_axfood_details(products, facts, root=None):
     elif "staging" in root.parts:
         stats["rejections"]["unpublished_staging"] = 1
         return stats
+    # A publication is immutable. Validate each article once in this projection,
+    # including misses, while every product still gets its own GTIN binding and
+    # provenance. No cross-call raw-document cache can hide later corruption.
+    documents, retained_bytes = OrderedDict(), sys.getsizeof(OrderedDict())
+
+    def read(chain, code):
+        nonlocal retained_bytes
+        if not isinstance(code, str):
+            return read_document(root, chain, code, manifest=manifest)
+        key = (chain, code)
+        if key in documents:
+            documents.move_to_end(key)
+            return documents[key][0]
+        evidence = read_document(root, chain, code, manifest=manifest)
+        size = _detail_bytes(key, evidence)
+        if size <= DETAIL_READ_MAX_BYTES and DETAIL_READ_MAX_ENTRIES > 0:
+            while documents and (len(documents) >= DETAIL_READ_MAX_ENTRIES
+                                 or retained_bytes + size > DETAIL_READ_MAX_BYTES):
+                _, (_, removed) = documents.popitem(last=False)
+                retained_bytes -= removed
+            if retained_bytes + size <= DETAIL_READ_MAX_BYTES:
+                documents[key] = evidence, size
+                retained_bytes += size
+        return evidence
+
     for product in products:
         if product.chain not in AXFOOD_CHAINS or not product.source_provenance:
             continue
@@ -105,7 +152,7 @@ def merge_axfood_details(products, facts, root=None):
         if not code:
             continue
         stats["products"] += 1
-        found = read_document(root, product.chain, code, manifest=manifest)
+        found = read(product.chain, code)
         binding = "exact_retailer_article_code"
         if found.status == "revoked":
             facts[key] = replace(fact, conflicts=tuple(dict.fromkeys(
@@ -114,7 +161,7 @@ def merge_axfood_details(products, facts, root=None):
             stats["rejected_own_document"] += 1
             stats["rejections"][found.status] = stats["rejections"].get(found.status, 0) + 1
         if found.status != "verified" and found.status != "revoked" and product.chain == "hemkop":
-            found = read_document(root, "willys", code, manifest=manifest)
+            found = read("willys", code)
             binding = "axfood_shared_article_code"
             if found.status not in {"missing", "verified"}:
                 stats["rejected_shared_document"] += 1

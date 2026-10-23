@@ -15,11 +15,44 @@ from grocery_data.app.services.axfood_detail_archive import (
     recheck_state,
     retain_response,
     selection_state,
+    validate_pair,
     verify_release,
 )
 
 NOW = datetime(2026, 10, 23, 12, tzinfo=UTC)
 CODE = "101548687_ST"
+
+
+@pytest.mark.parametrize("target", ["payload", "metadata"])
+def test_excessive_json_nesting_is_rejected_instead_of_crashing(target):
+    nested = b"[" * 20000 + b"0" + b"]" * 20000
+    payload = (b'{"code":"' + CODE.encode() + b'","nested":' + nested + b'}'
+               if target == "payload" else json.dumps(detail()).encode())
+    metadata = json.dumps({"code": CODE, "chain": "willys", "http_status": 200,
+        "url": f"https://www.willys.se/axfood/rest/p/{CODE}",
+        "fetched_at": "2026-10-22T12:00:00+00:00",
+        "payload_sha256": hashlib.sha256(payload).hexdigest()}).encode()
+    if target == "metadata":
+        metadata = metadata[:-1] + b',"nested":' + nested + b'}'
+    assert validate_pair(payload, metadata, "willys", CODE, now=NOW).status == "corrupt"
+
+
+def test_excessive_manifest_nesting_is_an_invalid_release(tmp_path):
+    manifest = b"[" * 20000 + b"0" + b"]" * 20000
+    release = tmp_path / hashlib.sha256(manifest).hexdigest()
+    release.mkdir()
+    (release / "manifest.json").write_bytes(manifest)
+    with pytest.raises(ValueError, match="nesting"):
+        verify_release(release)
+
+
+def test_manifest_must_be_an_object(tmp_path):
+    manifest = b"[]"
+    release = tmp_path / hashlib.sha256(manifest).hexdigest()
+    release.mkdir()
+    (release / "manifest.json").write_bytes(manifest)
+    with pytest.raises(ValueError):
+        verify_release(release)
 
 
 @pytest.mark.parametrize("mutation", [

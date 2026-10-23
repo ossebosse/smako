@@ -119,6 +119,33 @@ def test_basis_wording_normalization_keeps_real_conflicts(tmp_path, change, conf
     assert conflict in facts[("s1", "p1")].conflicts
 
 
+@pytest.mark.parametrize("cache_bytes, expected_reads", [(32 * 1024 * 1024, 1), (1, 2)])
+def test_projection_document_reuse_is_bounded_and_never_crosses_calls(
+        tmp_path, monkeypatch, cache_bytes, expected_reads):
+    from app.services import axfood_product_details as reader
+
+    raw = detail()
+    store(tmp_path, "willys", raw)
+    products = [_Product("willys"), _Product("willys")]
+    products[1].store_id = "s2"
+    calls, original = [], reader.read_document
+
+    def read(*args, **kwargs):
+        calls.append(True)
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(reader, "read_document", read)
+    monkeypatch.setattr(reader, "DETAIL_READ_MAX_BYTES", cache_bytes)
+    facts = {(p.store_id, p.product_id): catalogue_fact() for p in products}
+    assert reader.merge_axfood_details(products, facts, tmp_path)["own_document"] == 2
+    assert len(calls) == expected_reads
+    (tmp_path / "willys" / (raw["code"] + ".json")).write_text("{}")
+    fresh = {(p.store_id, p.product_id): catalogue_fact() for p in products}
+    stats = reader.merge_axfood_details(products, fresh, tmp_path)
+    assert stats["own_document"] == 0 and stats["rejected_own_document"] == 2
+    assert len(calls) == 2 * expected_reads
+
+
 def test_merge_binds_by_exact_code_and_keeps_catalogue_evidence(tmp_path):
     store(tmp_path, "willys", detail())
     facts = {("s1", "p1"): catalogue_fact()}
