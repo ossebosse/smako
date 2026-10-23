@@ -2989,8 +2989,20 @@ class PersonalPlanner:
             first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
             cohorts = range(first, self._generation + 1)
             if getattr(self.settings, "library_merge_generations", False) and len(cohorts) > 2:
-                # Seed library, then every newer pack as one capped sweep.
-                cohorts = (first, self._generation)
+                # Geometric cohorts: the seed library, then the first pack
+                # that at least doubles the qualified options, and so on, and
+                # always the whole library last. The incumbent of a smaller
+                # cohort carries over and a later sweep can only improve it,
+                # so growth cannot lose a menu the smaller library would find,
+                # while the number of sweeps grows with log(size), not packs.
+                counts = Counter(min(generations.get(identity(s.recipe), self._generation), self._generation)
+                                 for group in options for s in group if s.recipe and s.recipe.design)
+                chosen, total = [first], sum(n for g, n in counts.items() if g <= first)
+                for generation in range(first + 1, self._generation):
+                    total += counts.get(generation, 0)
+                    if total >= 2 * sum(n for g, n in counts.items() if g <= chosen[-1]):
+                        chosen.append(generation)
+                cohorts = (*chosen, self._generation)
             search_input = [(generation, [
                 [s for s in group if not s.recipe or not s.recipe.design
                  or generations.get(identity(s.recipe), self._generation) <= generation]

@@ -1,3 +1,29 @@
+# 2026-10-23: Ägg, Axfood-fakta, utbackning och receptskalning – ej aktiverat
+
+**Main:** `e6f7d32`/`ea847bb` är utbackade (`e190f3e`, pushad); inget annat
+är integrerat. **Gren `content/recipes-20261021`:** de 40 recepten, alla pack
+av hela skalägg i äggrecept (Lund 102, Malmö 192, alla med gram), Axfood-
+produktdetaljer som fakta och exakta prestandaförbättringar (samma hash):
+varm planering vid 5 000 recept 144 → 100 s i Lund och 176 → 109 s i Malmö.
+
+Försök som inte är standard: geometriska kohorter med prediktorordning
+(`library_merge_generations`, `library_substitution_slot_limit`) håller
+veckosökningen på 17–29 s från 262 till 5 000 recept och gav lika eller
+billigare menyer med fler recept (Malmö 5 000: 470,62 mot 507,00 kr), men
+Lund 1 000 blev 0,8 % dyrare än dagens sökning; alla profiler måste mätas.
+
+Axfood: Willys klar (10 766 dokument), Hemköp 503 koder kvar (hämtningen
+stoppad på begäran, återupptagbar). I frysta Malmö-data: protein40 och
+all-macros 915,84 → cirka 740 kr; vegan 21 kr dyrare (sökmiss). **Inte i
+drift:** kräver `AXFOOD_PRODUCT_DETAIL_ROOT` i en granskad release.
+
+Kvar: sökningen som standard, kvalificeringen (linjär, cirka 6 ms/recept
+varmt; kallstart ska mätas om), minne vid 5 000 recept i Malmö (~3,6 GB),
+Axfood i drift, integration av grenen i main efter full CI.
+Underlag: [`docs/reviews/recipe-scaling-20261023.md`](reviews/recipe-scaling-20261023.md).
+
+---
+
 # 2026-10-22: Regression i veckosökningen på main, receptgranskning – ej aktiverat
 
 **`e6f7d32` (från PR #4, på main sedan `d3ecf2c`) gör planeringen 2–5 gånger
