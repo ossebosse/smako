@@ -64,7 +64,7 @@ class OwnedPlannerArtifacts:
                     raise ValueError("Artifact signature mismatch")
                 self.stats["hits"] += 1
                 return value["data"]
-        except (ValueError, KeyError, TypeError, sqlite3.Error):
+        except (ValueError, KeyError, TypeError, RecursionError, sqlite3.Error):
             self.stats["invalid"] += 1
         self.stats["misses"] += 1
         return None

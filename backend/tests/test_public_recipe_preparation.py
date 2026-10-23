@@ -53,3 +53,11 @@ def test_corrupt_ingredient_artifact_recomputes_safely(tmp_path, monkeypatch):
     before = artifacts.STATS["invalid"]
     assert artifacts.ingredient_search_positions(restored, "ris", complete=True) == expected
     assert artifacts.STATS["invalid"] > before
+
+
+def test_deeply_nested_artifact_is_a_miss_not_a_planner_failure(tmp_path, monkeypatch):
+    monkeypatch.setenv("RECIPE_PREPARATION_CACHE_ROOT", str(tmp_path))
+    assert artifacts.prepared('test', 'identity', lambda: {'valid': True}) == {'valid': True}
+    path = next((tmp_path/'test').glob('*.json'))
+    path.write_bytes(b'[' * 10000 + b'0' + b']' * 10000)
+    assert artifacts.prepared('test', 'identity', lambda: {'recovered': True}) == {'recovered': True}

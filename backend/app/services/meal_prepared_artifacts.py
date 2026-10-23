@@ -161,7 +161,7 @@ def prepared(kind, identity, compute, *, storable=None):
         return payload
     except FileNotFoundError:
         pass
-    except (OSError,ValueError,KeyError,TypeError,zlib.error):
+    except (OSError,ValueError,KeyError,TypeError,RecursionError,zlib.error):
         STATS["invalid"] += 1
     STATS["misses"] += 1
     payload = compute()

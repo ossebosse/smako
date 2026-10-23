@@ -64,6 +64,9 @@ def test_corrupt_and_uncommitted_rows_are_misses(tmp_path):
     with store._connect() as connection:
         connection.execute("UPDATE planner_owned_artifacts SET payload=?", (b"broken",))
     assert cache.load("view", "x") is None
+    with store._connect() as connection:
+        connection.execute("UPDATE planner_owned_artifacts SET payload=?", (b"[" * 10000 + b"0" + b"]" * 10000,))
+    assert cache.load("view", "x") is None
     with pytest.raises(RuntimeError), store._connect() as connection:
         connection.execute("BEGIN IMMEDIATE")
         connection.execute("DELETE FROM planner_owned_artifacts")

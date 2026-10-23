@@ -108,6 +108,17 @@ def test_cheaper_valid_previous_winner_survives_invalid_proposal_eviction():
     assert chosen == ("winner",) and price == 320
 
 
+def test_old_menus_from_other_profiles_cannot_evict_a_valid_improvement():
+    chosen, price, report = verified_search(
+        lambda track, emit: emit((track,), 30 if track == 'reference' else 20),
+        audit=lambda slots: 30 if slots == ('reference',) else 20,
+        accepts=lambda slots: slots[0] in {'reference', 'improvement'},
+        rank=lambda slots, value: value, budget=SearchBudget(2, 2),
+        previous=[((f'other-profile-{i}',), 0) for i in range(10)])
+    assert chosen == ('improvement',) and price == 20
+    assert report['constraint_rejected'] == 10
+
+
 def test_pinned_reference_keeps_publication_order_and_exact_values():
     from app.services.meal_library_content import identity
     from app.services.planner_context import content_digest
