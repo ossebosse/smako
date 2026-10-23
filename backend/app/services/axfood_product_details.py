@@ -20,6 +20,7 @@ import re
 import sys
 from collections import OrderedDict
 from dataclasses import replace
+from decimal import Decimal, InvalidOperation
 from functools import lru_cache
 from pathlib import Path
 
@@ -77,6 +78,31 @@ def _nutrition_basis_identity(fact):
     if official or (projected and math.isfinite(float(projected[1])) and float(projected[1]) > 0):
         return "normalized_per_100", unit, fact.nutrition_preparation
     return basis
+
+
+def _limit_conflicts(points, limits, unit):
+    """Check stated strict bounds without turning them into point amounts."""
+    conflicts = []
+    for evidence in limits:
+        field = evidence.get("field")
+        if field not in points or evidence.get("accuracy") not in {"LT", "GT"}:
+            continue
+        try:
+            quantities = evidence["amount"]
+            if (not isinstance(quantities, list) or len(quantities) != 1
+                    or evidence["basis_unit"] != unit):
+                raise ValueError("Unusable bound basis")
+            amount = Decimal(str(quantities[0]).replace(",", "."))
+            basis = Decimal(str(evidence["basis_quantity"]))
+            point = Decimal(str(points[field]))
+            if not all(x.is_finite() for x in (amount, basis, point)) or amount < 0 or basis <= 0:
+                raise ValueError("Unusable bound amount")
+            bound = amount * 100 / basis
+            if (point >= bound if evidence["accuracy"] == "LT" else point <= bound):
+                conflicts.append(f"nutrition.{field}")
+        except (ValueError, KeyError, TypeError, InvalidOperation):
+            conflicts.append(f"nutrition.{field}")
+    return conflicts
 
 
 def configured_root():
@@ -208,7 +234,9 @@ def merge_axfood_details(products, facts, root=None):
             conflicts.append("ingredients")
         if fact.animal is not None and detail.animal is not None and fact.animal != detail.animal:
             conflicts.append("animal")
-        if fact.nutrition and detail.nutrition:
+        fact_limits = fact.field_sources.get("nutrition_limits", ())
+        detail_limits = detail.field_sources.get("nutrition_limits", ())
+        if (fact.nutrition or fact_limits) and (detail.nutrition or detail_limits):
             compatible = (fact.nutrition_unit == detail.nutrition_unit
                           and _nutrition_basis_identity(fact) == _nutrition_basis_identity(detail)
                           and fact.nutrition_preparation == detail.nutrition_preparation)
@@ -217,6 +245,8 @@ def merge_axfood_details(products, facts, root=None):
             else:
                 conflicts.extend(f"nutrition.{k}" for k in fact.nutrition.keys() & detail.nutrition.keys()
                                  if fact.nutrition[k] != detail.nutrition[k])
+                conflicts.extend(_limit_conflicts(fact.nutrition, detail_limits, detail.nutrition_unit))
+                conflicts.extend(_limit_conflicts(detail.nutrition, fact_limits, fact.nutrition_unit))
                 missing = detail.nutrition.keys() - fact.nutrition.keys()
                 if missing:
                     changes["nutrition"] = {**fact.nutrition, **{k: detail.nutrition[k] for k in missing}}
@@ -224,12 +254,14 @@ def merge_axfood_details(products, facts, root=None):
                 if (k == "ingredients" and "ingredients" in changes)
                 or (k.startswith("nutrition") and "nutrition" in changes)
                 or (k == "animal" and "animal" in changes)}
+        if "nutrition_limits" in sources:
+            kept["nutrition_limits"] = (*fact_limits, *sources["nutrition_limits"])
         # Retain contradictory source evidence beside the existing declaration;
         # conflicts veto qualification even when there was no field to fill.
         for field in conflicts:
             if field in sources:
                 kept[field] = (*fact.field_sources.get(field, ()), *sources[field])
-        if not changes and not conflicts:
+        if not changes and not conflicts and not kept:
             continue
         stats["conflicts"] += bool(conflicts)
         if fact.nutrition and "nutrition" in changes:
