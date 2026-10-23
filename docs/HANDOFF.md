@@ -37,6 +37,20 @@ full modellvalidering och innehållskontroll. Riktade prov passerar; ny full
 minneskontroll återstår. Första standardmenyns godkända minne ovan innebär
 alltså inte att hela skalningsläget är godkänt.
 
+**Senaste kandidat:** `b139cd4`, full CI **3 012 PASS, 10 XFAIL, 53 SKIP**.
+`c9390dd` klarade alla fyra sökarmarna för Malmö 5 000 standard, protein40
+och all-macros inom 3 GiB (högsta uppmätta RSS cirka 3,10 GB). Vegan/main
+stoppades efter 887,81 s utan resultat. Diagnosen fann 852 kvalificerade
+rätter med samma rättform, tak två och begärda tre middagar. Den nya
+nödvändiga kapacitetskontrollen ger samma `SEARCH_BLOCKED` före sökning;
+veckosteget 0,624 ms, hela kalla processen 216,83 s. Ingen regel sänktes.
+Malmö-matrisen körs om med denna kontroll. Lyckade Lund-mätningar behåller
+sin kodversion `c9390dd`; övrig befintlig kod är AST-verifierad oförändrad.
+
+**Ingen defaultväxling är tillåten av hittillsvarande prisdata:** Lund 262
+fördelning main/uncapped 761,45 kr, samtliga K 783,42 kr. Vegan förbättras
+347,90 → 335,35 kr men tar längre tid. Slutför och redovisa hela matrisen.
+
 **Pågår:** slutmatris på strikt nästlade bibliotek 262/1 000/2 000/5 000,
 Lund en lokal process åt gången, Malmö seriellt i 2 CPU/3 GiB-containrar
 när den nya minneskontrollen har passerat.

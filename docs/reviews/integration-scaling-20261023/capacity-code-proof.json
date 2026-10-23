@@ -1,0 +1,15 @@
+{
+  "schema": "capacity-only-change-proof-v1",
+  "from_commit": "c9390dd",
+  "to_commit": "b139cd4",
+  "changed_app_files": [
+    "backend/app/services/menu_optimizer.py",
+    "backend/app/services/personal_planner.py"
+  ],
+  "all_preexisting_menu_optimizer_code_ast_unchanged": true,
+  "menu_optimizer_ast_sha256": "d3dd344c0d5d23ea3cd86a5a9e354b7ed54c1de12c0494ca1d5566ff27b7954a",
+  "all_preexisting_personal_planner_code_ast_unchanged": true,
+  "personal_planner_ast_sha256": "8bff157affe084ec828b7b6a9551e2be7cc5688cf1939a98d212c2923063710b",
+  "new_behavior": "Necessary capacity bound only. A previously accepted complete menu proves the rejection condition false.",
+  "reuse_scope": "Successful fixed-input matrix searches on c9390dd; blocked cases measured on b139cd4. Timing versions remain explicit."
+}

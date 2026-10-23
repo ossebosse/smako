@@ -18,6 +18,9 @@ Kandidaten `f778e68` har **2 996 PASS, 10 XFAIL, 53 SKIP** i samma CI.
 Kandidaten `652e7ac` har **3 005 PASS, 10 XFAIL, 53 SKIP** i samma CI,
 inklusive minnes- och referenskontrollerna.
 [Körning 39921655367](https://github.com/ossebosse/smako/actions/runs/39921655367).
+Kandidaten `b139cd4` har **3 012 PASS, 10 XFAIL, 53 SKIP** i samma CI,
+inklusive den nödvändiga kapacitetskontrollen nedan.
+[Körning 39932160676](https://github.com/ossebosse/smako/actions/runs/39932160676).
 
 ### Aktuella serverfakta
 
@@ -213,6 +216,48 @@ verifierar **1 310 kvalificerade receptvärden och ID:n identiska**, utan
 passerade, följt av sju ytterligare upprepade gränsprov efter att även
 hjälparens muterbara behållare gjorts privata. Ny full serverkontroll och
 CI krävs; tidigare prisresultat blandas inte med den nya metodsignaturen.
+
+### Negativ skalning: Malmö vegan
+
+Körningen med `c9390dd` slutförde standard/protein40/all-macros med alla
+fyra sökarmar vid 5 000 recept inom 3 GiB, men vegan/main gav inget resultat
+efter **887,81 s** och stoppades kontrollerat för diagnos. Det var inget OOM.
+Kvalificeringen hade lämnat **852** recept, alla klassificerade som
+`plated_meal`. Det befintliga hårda kravet tillåter högst två middagar av
+samma rättform, medan profilen kräver tre. Kapaciteten i den kvalificerade
+poolen är därför högst två, oberoende av hur många kombinationer som prissätts.
+
+`b139cd4` kontrollerar denna nödvändiga gräns före veckosökningen. Den
+använder samma formmappning och skiftlägeshantering som befintlig acceptans.
+Okända former, avstängt tak, anpassad optimizer eller resolver ger inget
+sådant bevis. Tillräcklig kapacitet garanterar aldrig en giltig meny.
+Variationskravet och klassificeringen ändras inte.
+
+På exakt samma frysta underlag gav den nya kalla processen samma
+`BLOCKED`/`SEARCH_BLOCKED`, med beviset **2 < 3**. Veckosteget tog
+**0,624 ms**. Hela processen inklusive Docker/import/inläsning tog
+**216,83 s**, varav **172,24 s** i planering inklusive kall förberedelse
+och kvalificering; peak RSS var **2 635 038 720 byte**. Det tidigare
+avbrottet är ingen fullständig tidsreferens och används inte som en
+uppmätt total hastighetskvot.
+
+Fem riktade prov omfattar uttömmande små formtilldelningar och menyer:
+en möjlig meny får aldrig beskäras. 110 fokuserade integrations-/sökprov
+passerade. [Kodbeviset](integration-scaling-20261023/capacity-code-proof.json)
+verifierar att all befintlig kod i de två ändrade modulerna är AST-identisk
+när den nya metoden och dess anrop tas bort. En tidigare godkänd komplett
+meny visar att det nya avvisningsvillkoret är falskt. Lyckade Lund-mätningar
+från `c9390dd` återanvänds med uttrycklig kodversion; Malmös matris körs om
+med `b139cd4`. Nya blockerade fall mäts med den nya kontrollen.
+
+### Prisvillkoret är ännu inte uppfyllt
+
+Lund 262/fördelning ger **761,45 kr** med main och den obegränsade
+v5-referensen, men **783,42 kr** med samtliga K16/K32/K48. Det är en
+prisregression, inte en ogiltig billigare meny. Samtidigt ger småpoolsökningen
+Lund 262/vegan **335,35 kr** mot mains/referensens **347,90 kr**, med högre
+söktid. Alla profiler måste vägas in; de bättre resultaten gör inte den
+dyrare fördelningsprofilen godkänd. Sammanslagna kohorter förblir av som standard.
 
 Ett separat lokalt kallstartsexperiment vid Lund 5 000 använder två nya
 processer med samma kodsignatur `894ef9911b79afd26f9a2962045cade65027e1801b84a0624ef6e16ac642fd2b`,
