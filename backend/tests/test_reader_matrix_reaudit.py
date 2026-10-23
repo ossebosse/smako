@@ -29,7 +29,11 @@ def test_reader_validation_reaudits_old_menu_with_new_facts_and_rejects_invalid_
     menu = harness.slots_record(original.personal.slots)
     changed = {k: replace(v, nutrition={n: amount * 2 for n, amount in v.nutrition.items()})
                for k, v in facts.items()}
-    audited = harness.replay_old_menu(planner(request, universe, changed, pantry), menu)
+    subject = planner(request, universe, changed, pantry)
+    slots, library = subject.service.menu_optimizer.optimize_slots, subject.service.menu_optimizer.optimize_library_slots
+    audited = harness.replay_old_menu(subject, menu)
+    assert subject.service.menu_optimizer.optimize_slots == slots
+    assert subject.service.menu_optimizer.optimize_library_slots == library
     assert audited.personal.checks['checkout_audit']['passed']
     assert audited.personal.checks['nutrition'] != original.personal.checks['nutrition']
     assert harness.slots_record(audited.personal.slots) == menu

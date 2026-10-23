@@ -81,9 +81,14 @@ def replay_old_menu(subject, record):
         subject._defer_search_audit = False
         return chosen, kwargs['evaluate'](chosen, final=True)
 
-    subject.service.menu_optimizer.optimize_slots = replay
-    subject.service.menu_optimizer.optimize_library_slots = replay
-    return subject._create()
+    optimizer = subject.service.menu_optimizer
+    original_slots, original_library = optimizer.optimize_slots, optimizer.optimize_library_slots
+    optimizer.optimize_slots = replay
+    optimizer.optimize_library_slots = replay
+    try:
+        return subject._create()
+    finally:
+        optimizer.optimize_slots, optimizer.optimize_library_slots = original_slots, original_library
 
 
 def main():
