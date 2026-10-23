@@ -12,6 +12,11 @@ from time import monotonic
 from app.errors import IncompleteBasketError
 
 POLICY = "smako-verified-reference-v1"
+# Pilot 1024 exhausted the old seed before reaching any added generation.
+# Full-pool-first work has fixed limits, independent of recipe count.
+IMPROVEMENT_EVALUATIONS = 4096
+IMPROVEMENT_PROPOSALS = 32768
+IMPROVEMENT_SAFETY_SECONDS = 900
 
 
 class SearchBudgetReached(RuntimeError):
@@ -69,7 +74,7 @@ def verified_search(search, *, audit, accepts, rank, budget, previous=(), archiv
         raise ValueError("Archive needs reference, previous and improvement slots")
     candidates = []
     report = {"policy": POLICY, "global_optimum_proven": False,
-              "audit_rejected": 0, "constraint_rejected": 0, "tracks": []}
+              "audit_rejected": 0, "constraint_rejected": 0, "tracks": [], "rejections": []}
 
     def emit(slots, result, *, protected=False, source="improvement"):
         candidate = (tuple(slots), result, protected, source)
@@ -110,18 +115,23 @@ def verified_search(search, *, audit, accepts, rank, budget, previous=(), archiv
     for slots, _old_result, _protected, source in candidates:
         if not accepts(slots):
             report["constraint_rejected"] += 1
+            report["rejections"].append({"source": source, "stage": "weekly_distribution_or_variation"})
             continue
         try:
             result = audit(slots)
-        except (ValueError, IncompleteBasketError):
+        except (ValueError, IncompleteBasketError) as exc:
             report["audit_rejected"] += 1
+            report["rejections"].append({"source": source, "code": getattr(exc, "code", None),
+                                         "stage": getattr(exc, "stage", "checkout_audit"), "reason": str(exc)})
             continue
         verified.append((slots, result, source))
     report["evaluations"] = budget.evaluations_used
     report["proposals"] = budget.proposals_used
     report["budget_stop"] = budget.reason
     if not verified:
-        raise VerifiedSearchIncomplete("Sökning ofullständig: ingen slutkontrollerad meny finns.")
+        error = VerifiedSearchIncomplete("Sökning ofullständig: ingen slutkontrollerad meny finns.")
+        error.search_report = report
+        raise error
     winner = min(verified, key=lambda row: rank(*row[:2]))
     report["selected_track"] = winner[2]
     report["verified_candidates"] = len(verified)

@@ -237,6 +237,8 @@ async def _run_admitted_plan(
         from app.services.planner_artifacts import OwnedPlannerArtifacts
 
         owner = _plan_actor_hash(http_request, settings)
+        artifacts = (OwnedPlannerArtifacts(_store(http_request), owner)
+                     if settings.library_search_policy == "smako-verified-reference-v1" else None)
         state = PersonalStore(_store(http_request)).read(owner)
         prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(request.postal_code, {})
         if prepared is None:
@@ -251,7 +253,7 @@ async def _run_admitted_plan(
             state["revision"],
             lambda: _run_personal_thread(
                 lambda: PersonalPlanner(request, settings, prepared, state,
-                    artifacts=OwnedPlannerArtifacts(_store(http_request), owner)).create()
+                    artifacts=artifacts).create()
             ),
         )
     controller = _planner_admission(http_request, settings)

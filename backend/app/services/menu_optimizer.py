@@ -191,6 +191,14 @@ class LazyPairwiseSimilarities(Mapping[tuple[str, str], float]):
     def calculated(self) -> int:
         return len(self._scores)
 
+    def profile_rows(self, names):
+        """Small immutable projection in the FULL pool's original name order."""
+        from dataclasses import asdict
+
+        if not set(names) <= self._profiles.keys():
+            return None
+        return [(name, asdict(self._profiles[name])) for name in sorted(names, key=self._order.__getitem__)]
+
 
 @dataclass(frozen=True, slots=True)
 class DiversityConstraints:

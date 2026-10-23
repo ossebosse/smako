@@ -13,6 +13,7 @@ import re
 from collections import Counter
 from functools import lru_cache
 from pathlib import Path
+from types import MappingProxyType
 
 from app.models.recipe import Recipe, RecipePreparation
 from app.models.recipe_preferences import RecipePreferences
@@ -136,6 +137,7 @@ def reset_library_caches():
                      _registered_historical_portions, _issued_index):
         function.cache_clear()
     _revocations.cache_clear()
+    _prepared_recipe_lookup.cache_clear()
 
 
 def current_recipe_generations(generation=None):
@@ -368,6 +370,33 @@ def _issued_index(servings):
             raise ValueError("Motstridigt innehåll för en utfärdad receptversion")
         result[key] = value
     return result
+
+
+@lru_cache(maxsize=4)
+def _prepared_recipe_lookup(signature, servings):
+    """Pure issued-recipe references, at most 2 MiB per view / 8 MiB total.
+
+    Build during cold qualification, never duplicate product or recipe graphs.
+    Oversized/ambiguous registries simply use ordinary planning. Selected values
+    are freshly hashed and checked against the issued registry before checkout.
+    """
+    import sys
+
+    from app.services.planner_context import content_digest
+
+    if signature != library_version():
+        return None
+    recipes = _registered_portions(servings)
+    if len(recipes) > 16384:
+        return None
+    result = {content_digest(recipe): recipe for recipe in recipes}
+    if sys.getsizeof(result) + sum(sys.getsizeof(k) + 8 for k in result) > 2 * 1024 * 1024:
+        return None
+    return MappingProxyType(result)
+
+
+def prepared_recipe_lookup(servings):
+    return _prepared_recipe_lookup(library_version(), servings)
 
 
 def candidates(preferences: RecipePreferences, servings: int = 2, *, include_supplement: bool = True) -> list[Recipe]:

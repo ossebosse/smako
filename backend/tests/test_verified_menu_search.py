@@ -6,7 +6,7 @@ from app.errors import IncompleteBasketError
 from app.services.verified_menu_search import SearchBudget, verified_search
 
 
-@pytest.mark.parametrize("reference, improvement", [("761.45", "783.42"), ("480.97", "487.85")])
+@pytest.mark.parametrize("reference, improvement", [("761.45", "783.42"), ("480.97", "487.85"), ("340.64", "361.81")])
 def test_more_expensive_independent_track_cannot_replace_reference(reference, improvement):
     calls = []
 
@@ -126,3 +126,45 @@ def test_exhaustive_prefix_does_not_label_later_bounded_search_exhaustive():
         {"library_phase": "exhaustive", "library_prefix_recipes": 262},
         {"library_phase": "substitution", "library_prefix_recipes": 1000}]})
     assert result["search_budget"]["week_search_method"] == "bounded_search_with_exhaustive_prefixes"
+
+
+def test_synthetic_enrichment_search_miss_keeps_old_valid_menu_without_copying_its_price():
+    from backend.tests.test_incremental_library_search import options, run
+
+    def evaluate(slots, *, final):
+        names = tuple(s.recipe.name for s in slots)
+        if len(names) < 3:
+            return sum(1 if name == "A" else 2 for name in names)
+        return {("A",) * 3: Decimal("340.64"), ("B",) * 3: Decimal("361.81")}.get(names, Decimal(500))
+
+    old = run([(1, options("AB", days=3))], evaluate=evaluate)
+    widened = [(1, options("ABC", days=3))]
+    missed = run(widened, evaluate=evaluate,
+        seed_selector=lambda groups: [[s for s in group if s.recipe.name == "B"] for group in groups],
+        refinement_selector=lambda groups: [[s for s in group if s.recipe.name != "A"] for group in groups])
+    assert old[1] == Decimal("340.64") and missed[1] == Decimal("361.81")
+    chosen, cost, _ = verified_search(lambda track, emit: emit(*(old if track == "reference" else missed)),
+        audit=lambda slots: evaluate(slots, final=True), accepts=lambda slots: True,
+        rank=lambda slots, value: value, budget=SearchBudget(10, 10))
+    assert cost == Decimal("340.64") and all(s.recipe.name == "A" for s in chosen)
+
+
+def test_previous_menu_is_reaudited_even_when_ordinary_search_misses(monkeypatch):
+    from app.errors import IncompleteBasketError
+    from app.services.library_publications import slots_record
+
+    from backend.tests.test_complete_scope_incumbents import fixture, planner
+
+    request, universe, facts, pantry = fixture()
+    old = planner(request, universe, facts, pantry).create()
+    subject = planner(request, universe, facts, pantry)
+    subject.previous_menus = (slots_record(old.personal.slots),)
+
+    def miss(*args, **kwargs):
+        raise IncompleteBasketError("Synthetic heuristic miss after adding qualified recipes")
+
+    monkeypatch.setattr(subject.service.menu_optimizer, "optimize_library_slots", miss)
+    result = subject.create()
+    assert result.optimized_basket == old.optimized_basket
+    assert result.personal.checks["reaudited_previous_menu"]["selected_track"] == "previous"
+    assert result.personal.checks["checkout_audit"]["passed"]

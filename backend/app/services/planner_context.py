@@ -1,6 +1,6 @@
 """Stable content identities; serialized private inputs never leave the owner.
 
-The whole request/state is deliberately bound. Qualification reads taste, slot
+The full request and effective state are deliberately bound. Qualification reads taste, slot
 locks, reservations, pantry allocation, servings, purchased-product evidence,
 membership, clock and settings through clean_recipe/basket/_check_nutrition.
 Library content is separate so adding a recipe can reuse unchanged records.
@@ -55,6 +55,7 @@ def settings_contract(settings):
 
 
 def fact_source_contract():
+    from grocery_data.app.services import axfood_detail_archive
     from grocery_data.app.services.axfood_detail_archive import VERSION as AXFOOD_VERSION
 
     root = os.getenv("AXFOOD_PRODUCT_DETAIL_ROOT")
@@ -66,7 +67,8 @@ def fact_source_contract():
                         if path.stat().st_size <= 16 * 1024 * 1024 else "oversized")
         except OSError:
             manifest = "unavailable"
-    return {"axfood_parser": AXFOOD_VERSION, "axfood_manifest": manifest}
+    return {"axfood_parser": AXFOOD_VERSION, "axfood_manifest": manifest,
+            "axfood_parser_sha256": hashlib.sha256(Path(axfood_detail_archive.__file__).read_bytes()).hexdigest()}
 
 
 def planner_context(planner):
@@ -74,20 +76,32 @@ def planner_context(planner):
     from app.services.meal_prepared_artifacts import method_signature
     from app.services.recipe_week_variation import CLASSIFICATION_VERSION
 
+    request = planner.request.model_dump(mode="json")
+    # Revision is an optimistic-concurrency gate checked by the constructor and
+    # PlanStore, not a pricing input. Read dependencies in _need_rows/_allocate
+    # are exact available items and this plan's consumption/purchase ledger.
+    # Unrelated plan writes must not invalidate an unchanged empty pantry view.
+    if request.get("personal") is not None:
+        request["personal"]["pantry_revision"] = 0
+    state = {"available_items": planner.items,
+             "plan_ledger": [entry for entry in planner.state.get("ledger", [])
+                             if entry["plan_id"] == planner.plan_id],
+             "legacy_purchase_lots": planner.state.get("legacy_purchase_lots", {}).get(planner.plan_id, [])}
     return content_digest({
         "version": VERSION, "method": method_signature(),
         "classification": CLASSIFICATION_VERSION,
         "revocations": manifest_entries().get("revocations", {}),
-        "request": planner.request, "settings": settings_contract(planner.settings),
+        "request": request, "settings": settings_contract(planner.settings),
         "prices": planner.prepared.universe.universe_id,
         "facts": planner.facts_version, "reference": planner.reference_version,
         "fact_sources": fact_source_contract(),
+        "frozen_fact_manifests": getattr(planner.facts, "source_manifests", ()),
         "view": planner.view.cache_identity, "stores": planner.store_ids,
         # Qualification/search read time through request_view and Stockholm's
         # price date. Final response ages use the current clock and are NOT
         # cached. Binding microseconds would prevent equivalent request reuse.
         "pricing_date": planner.pricing_date,
-        "memberships": planner.user.cache_identity, "state": planner.state,
+        "memberships": planner.user.cache_identity, "state": state,
         "plan_id": planner.plan_id, "cooked_weights": planner.cooked_weights,
         "nutrition_search_limit": planner.nutrition_search_limit,
         "complete": planner.complete,

@@ -578,8 +578,9 @@ class MealPlanService:
         self,
         recipes: Sequence[Recipe],
         policy: DiversityPolicy,
+        *, profiles=None,
     ) -> DiversityConstraints:
-        profiles = self._culinary_profiles(recipes)
+        profiles = self._culinary_profiles(recipes) if profiles is None else profiles
         # Pairs are scored when the search first checks them together; the
         # values are those of the former eager all-pairs loop.
         pairwise = LazyPairwiseSimilarities(

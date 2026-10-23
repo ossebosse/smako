@@ -123,6 +123,7 @@ class PersonalPlanner:
         include_content_pack=True,
         library_generation=None,
         artifacts=None,
+        previous_menus=(),
     ):
         if not 1 <= nutrition_search_limit <= 65536:
             raise ValueError("Invalid diagnostic nutrition search limit")
@@ -130,6 +131,8 @@ class PersonalPlanner:
         self.include_content_pack = include_content_pack
         self.library_generation = library_generation
         self.artifacts = artifacts
+        self.previous_menus = tuple(previous_menus)[:8]
+        self._qualification_views = {}
         self._supplement_qualified = False
         self._expanded_cohort_qualified = False
         self._library_search_handled = False
@@ -2373,7 +2376,7 @@ class PersonalPlanner:
         from app.services.personal_policy import remaining_category_capacity
         capacity = remaining_category_capacity(meal, fixed_slots, classify=self._protein_category)
         from app.services.planner_context import content_digest, planner_context
-        reuse = (self.complete and self.artifacts is not None
+        reuse = (self.complete and getattr(self, "artifacts", None) is not None
                  and getattr(self.settings, "library_search_policy", "legacy") == "smako-verified-reference-v1")
         view_key = (content_digest([planner_context(self), meal, fixed_slots]) if reuse else None)
         stored = self.artifacts.load("qualification", view_key) if reuse else None
@@ -2501,9 +2504,13 @@ class PersonalPlanner:
         if reuse:
             # Only the completed meal view is atomically published. Retain
             # unchanged earlier rows so append-only recipes qualify once.
-            self.artifacts.save("qualification", view_key,
-                {"rows": {**stored_rows, **qualified_rows}, "qualified": len(valid)})
+            if self.artifacts.save("qualification", view_key,
+                    {"rows": {**stored_rows, **qualified_rows}, "qualified": len(valid)}):
+                self._qualification_views[meal.meal_type] = view_key
             self.diagnostics.pools[-1]["qualification_cache_hits"] = qualification_hits
+            self.diagnostics.pools[-1]["qualified"] = len(valid)
+            from app.services.recipe_library import prepared_recipe_lookup
+            prepared_recipe_lookup(meal.servings)
         if not valid:
             if self.complete:
                 if not candidates:
@@ -2539,7 +2546,7 @@ class PersonalPlanner:
                         plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
                         nutrition_search_limit=self.nutrition_search_limit,
                         include_content_pack=self.include_content_pack, library_generation=self.library_generation,
-                        artifacts=self.artifacts).create(_compare_scopes=False)
+                        artifacts=self.artifacts, previous_menus=self.previous_menus).create(_compare_scopes=False)
                 except (ValueError, IncompleteBasketError):
                     continue
                 incumbents.append(candidate)
@@ -2576,7 +2583,8 @@ class PersonalPlanner:
                     plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
                     nutrition_search_limit=self.nutrition_search_limit,
                     include_content_pack=generation > 2,
-                    library_generation=generation-1 if generation > 2 else None, artifacts=self.artifacts).create()
+                    library_generation=generation-1 if generation > 2 else None, artifacts=self.artifacts,
+                    previous_menus=self.previous_menus).create()
             except (ValueError, IncompleteBasketError):
                 return
             incumbents.append(candidate)
@@ -2611,7 +2619,12 @@ class PersonalPlanner:
             message = str(exc)
             code = getattr(exc, "code", "SEARCH_BLOCKED")
             if isinstance(exc, IncompleteBasketError):
-                message = "Sökningen hittade ingen komplett meny med dina krav. Se blockeringsfördelningen. Inga krav har sänkts."
+                if code == "SEARCH_INCOMPLETE":
+                    message = "Sökningen är ofullständig. Ingen slutkontrollerad meny kunde färdigställas. Dina krav har inte ändrats."
+                    self.diagnostics.search.append({"depth": 0, "attempt": 1, "library_phase": "incomplete",
+                        "beam_pruned": 0, "status": code, "search_report": getattr(exc, "search_report", None)})
+                else:
+                    message = "Sökningen hittade ingen komplett meny med dina krav. Se blockeringsfördelningen. Inga krav har sänkts."
             elif self.diagnostics.pools and not (self.complete and code == "RECIPE_CHOICES_CONFLICT"):
                 message = (
                     "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. "
@@ -2719,19 +2732,34 @@ class PersonalPlanner:
         from app.services.week_refinement import surplus_key
         return (money(basket.total), surplus_key(basket) if self.spec.surplus_mode == "minimize" else ())
 
-    def _search_verified_reference(self, options, search_kwargs):
+    def _culinary_snapshot(self, *menus):
+        from app.services.menu_optimizer import LazyPairwiseSimilarities
+
+        profiles = getattr(self, "_qualified_culinary_view", None)
+        names = {s.recipe.name.casefold().strip() for menu in menus for s in menu
+                 if s.recipe and s.meal_type == "dinner"}
+        return profiles.profile_rows(names) if isinstance(profiles, LazyPairwiseSimilarities) else None
+
+    def _search_verified_reference(self, options, search_kwargs, *, _ignore_cache=False):
         from app.services.library_publications import (
             index_slots,
             load_certificate,
             publications,
+            restore_slots,
             save_certificate,
         )
         from app.services.library_search_cohorts import merged_library_cohorts
         from app.services.meal_library_content import identity
-        from app.services.planner_context import planner_context
+        from app.services.planner_context import content_digest, planner_context
         from app.services.recipe_library import current_recipe_generations, current_recipes
         from app.services.reference_library import reference_cohorts, reference_manifest
-        from app.services.verified_menu_search import SearchBudget, verified_search
+        from app.services.verified_menu_search import (
+            IMPROVEMENT_EVALUATIONS,
+            IMPROVEMENT_PROPOSALS,
+            IMPROVEMENT_SAFETY_SECONDS,
+            SearchBudget,
+            verified_search,
+        )
 
         first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
         current = current_recipes(self.library_generation)
@@ -2745,6 +2773,8 @@ class PersonalPlanner:
         # predecessor certificate. Still retain any valid pinned reference.
         nodes = chain or ({"generation": self._generation, "count": len(current)},)
         reports, loaded, replayed, chain_complete = [], 0, 0, True
+        prior_records = [*self.previous_menus,
+            *(self.artifacts.recent_menu_records() if self.artifacts is not None and not _ignore_cache else ())][:8]
 
         def audit(chosen):
             self._defer_search_audit = False
@@ -2754,7 +2784,15 @@ class PersonalPlanner:
                 self._defer_search_audit = True
 
         for node in nodes:
-            cached = load_certificate(self.artifacts, context, node, options, predecessor, slot_index) if chain else None
+            cached = (load_certificate(self.artifacts, context, node, options, predecessor, slot_index)
+                      if chain and not _ignore_cache else None)
+            if cached is not None and node is nodes[-1] and self.previous_menus:
+                view = self.artifacts.load("menu_view", content_digest([context, node["sha256"]]))
+                if not isinstance(view, dict) or view.get("candidate_inputs") != content_digest(self.previous_menus):
+                    # A newly supplied, re-auditable menu must compete even
+                    # when this publication already has a prepared winner.
+                    incumbent, reference_winner = (cached[0], None), (cached[1], None)
+                    cached = None
             if cached is not None:
                 winner_slots, reference_slots, certificate = cached
                 loaded += 1
@@ -2765,9 +2803,17 @@ class PersonalPlanner:
                 reference_winner = reference_slots, None
                 continue
             if incumbent is not None and incumbent[1] is None:
-                incumbent = incumbent[0], evaluate(incumbent[0], final=False)
+                try:
+                    incumbent = incumbent[0], evaluate(incumbent[0], final=False)
+                except (ValueError, IncompleteBasketError):
+                    incumbent = None
+                    chain_complete = False
             if reference_winner is not None and reference_winner[1] is None:
-                reference_winner = reference_winner[0], evaluate(reference_winner[0], final=False)
+                try:
+                    reference_winner = reference_winner[0], evaluate(reference_winner[0], final=False)
+                except (ValueError, IncompleteBasketError):
+                    reference_winner = None
+                    chain_complete = False
             prefix = current_recipes(node["generation"])
             allowed = {identity(r) for r in prefix}
             prefix_options = [[s for s in group if not s.recipe or not s.recipe.design
@@ -2776,10 +2822,19 @@ class PersonalPlanner:
                 prefix_options, prefix, current_recipe_generations(node["generation"]), first_generation=first)
             # A cold context prepares ordered publications in this admitted
             # plan job. Each node has fixed limits; a prepared hit replays none.
-            budget = SearchBudget(1024, 8192, seconds=120)
+            budget = SearchBudget(IMPROVEMENT_EVALUATIONS, IMPROVEMENT_PROPOSALS,
+                                  seconds=IMPROVEMENT_SAFETY_SECONDS)
+            previous = [] if incumbent is None else [incumbent]
+            for record in prior_records:
+                slots = restore_slots(record, prefix_options, slot_index)
+                if slots is not None:
+                    try:
+                        previous.append((slots, evaluate(slots, final=False)))
+                    except (ValueError, IncompleteBasketError):
+                        pass  # Changed facts/locks are requalified, never hidden.
 
             def search(track, emit, *, budget=budget, completed=completed, prefixes=prefixes,
-                       probes=probes, improvements=improvements, node=node):
+                       probes=probes, improvements=improvements, node=node, prefix_options=prefix_options):
                 nonlocal reference_winner
                 from time import monotonic
 
@@ -2795,8 +2850,6 @@ class PersonalPlanner:
                     kwargs.pop(key, None)
                 if track == "improvement":
                     budget.started = monotonic()
-                    kwargs.update(completed_prefix_indexes=completed, cohort_prefix_sizes=prefixes,
-                                  checkpoint_probe_indexes=probes)
 
                     def bounded_accepts(chosen, *, final):
                         budget.proposal()
@@ -2810,30 +2863,43 @@ class PersonalPlanner:
                         return result
 
                     kwargs.update(accepts=bounded_accepts, evaluate=bounded_evaluate)
-                start = len(self.diagnostics.search)
-                try:
-                    chosen, result = self.service.menu_optimizer.optimize_library_slots(
-                        reference if track == "reference" else improvements, **kwargs)
-                    if track == "reference":
-                        reference_winner = chosen, result
-                    emit(chosen, result)
-                finally:
-                    for row in self.diagnostics.search[start:]:
-                        row["search_track"] = track
-                        row["publication_size"] = node["count"]
+                attempts = [("per_pack_reference", reference, {})]
+                if track == "improvement":
+                    small = {"unordered_small_pool_limit": 4096} if not self.items and not self.spec.product_locks else {}
+                    attempts = [("full_pool", [(node["generation"], prefix_options)], small),
+                        ("geometric", improvements, {"completed_prefix_indexes": completed,
+                            "cohort_prefix_sizes": prefixes, "checkpoint_probe_indexes": probes})]
+                for phase, cohorts, extra in attempts:
+                    phase_kwargs = {**kwargs, **extra,
+                        "initial_evaluations": OrderedDict(search_kwargs.get("initial_evaluations") or {})}
+                    start = len(self.diagnostics.search)
+                    try:
+                        chosen, result = self.service.menu_optimizer.optimize_library_slots(cohorts, **phase_kwargs)
+                        if track == "reference":
+                            reference_winner = chosen, result
+                        emit(chosen, result)
+                    finally:
+                        for row in self.diagnostics.search[start:]:
+                            row["search_track"] = track
+                            row["improvement_path"] = phase
+                            row["publication_size"] = node["count"]
 
             chosen, result, report = verified_search(search, audit=audit,
                 accepts=lambda chosen: accepts(chosen, final=True),
                 rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
                                              search_kwargs["score"](chosen, result)), budget=budget,
-                previous=() if incumbent is None else (incumbent,))
+                previous=previous)
             incumbent = chosen, result
-            reports.append({**report, "publication_size": node["count"]})
+            reports.append({**report, "publication_size": node["count"],
+                            "paid": str(money(result["basket"].total))})
             chain_complete = chain_complete and report["budget_stop"] != "wall_time_safety_stop"
             replayed += 1
             if chain and reference_winner is not None:
                 certificate = save_certificate(self.artifacts, context, node, predecessor,
-                    chosen, reference_winner[0], result, replay_complete=chain_complete)
+                    chosen, reference_winner[0], result, replay_complete=chain_complete,
+                    qualification=self.diagnostics.pools, candidate_inputs=content_digest(self.previous_menus),
+                    qualification_library=chain[-1]["sha256"],
+                    culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0]))
                 predecessor = certificate["sha256"]
         chosen, result = incumbent
         if result is None:
@@ -2843,13 +2909,26 @@ class PersonalPlanner:
                 if track == "reference":
                     emit(reference_winner[0], evaluate(reference_winner[0], final=False))
 
-            chosen, result, report = verified_search(cached_tracks, audit=audit,
-                accepts=lambda chosen: accepts(chosen, final=True),
-                rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
-                                             search_kwargs["score"](chosen, result)),
-                budget=SearchBudget(1024, 8192), previous=((chosen, evaluate(chosen, final=False)),))
+            prior = []
+            try:
+                prior.append((chosen, evaluate(chosen, final=False)))
+            except (ValueError, IncompleteBasketError):
+                pass
+            try:
+                chosen, result, report = verified_search(cached_tracks, audit=audit,
+                    accepts=lambda chosen: accepts(chosen, final=True),
+                    rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
+                                                 search_kwargs["score"](chosen, result)),
+                    budget=SearchBudget(IMPROVEMENT_EVALUATIONS, IMPROVEMENT_PROPOSALS), previous=prior)
+            except (ValueError, IncompleteBasketError):
+                return self._search_verified_reference(options, search_kwargs, _ignore_cache=True)
+            if report["audit_rejected"] or report["constraint_rejected"] or not prior:
+                return self._search_verified_reference(options, search_kwargs, _ignore_cache=True)
             certificate = save_certificate(self.artifacts, context, nodes[-1], cached[2]["predecessor"],
-                chosen, reference_winner[0], result) if chain else None
+                chosen, reference_winner[0], result, qualification=self.diagnostics.pools,
+                candidate_inputs=content_digest(self.previous_menus),
+                qualification_library=chain[-1]["sha256"],
+                culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0])) if chain else None
             predecessor = certificate["sha256"] if certificate else None
             reports.append(report)
             self.diagnostics.search.append({"depth": len(chosen), "attempt": 1,
@@ -2863,8 +2942,227 @@ class PersonalPlanner:
             "publication_chain": ("append_only_replayed_or_verified" if chain and chain_complete
                                   else "incomplete_wall_time" if chain else "experiment_content_changed"),
             "certificate": predecessor, "loaded_publications": loaded, "replayed_publications": replayed,
-            "improvement_limits": {"evaluations": 1024, "proposals": 8192,
-                                   "wall_time_safety_seconds": 120, "status": "pilot"},
+            "improvement_limits": {"evaluations": IMPROVEMENT_EVALUATIONS, "proposals": IMPROVEMENT_PROPOSALS,
+                                   "wall_time_safety_seconds": IMPROVEMENT_SAFETY_SECONDS,
+                                   "version": "full-pool-first-4096-v1"},
+        }
+        return chosen, result
+
+    def _search_with_previous_menus(self, search, search_input, options, search_kwargs):
+        """Release comparisons may re-audit an old menu against new facts."""
+        from app.services.library_publications import index_slots, restore_slots
+        from app.services.verified_menu_search import SearchBudget, verified_search
+
+        evaluate, accepts = search_kwargs["evaluate"], search_kwargs["accepts"]
+        lookup, previous, rejections = index_slots(options), [], []
+        for record in self.previous_menus:
+            slots = restore_slots(record, options, lookup)
+            if slots is not None:
+                try:
+                    previous.append((slots, evaluate(slots, final=False)))
+                except (ValueError, IncompleteBasketError) as exc:
+                    rejections.append({"code": getattr(exc, "code", None),
+                        "stage": getattr(exc, "stage", None), "reason": str(exc)})
+            else:
+                names = {r.get("recipe_name") for r in record if isinstance(r, dict)}
+                details = [row for row in self.diagnostics.details if row["recipe"] in names]
+                rejections.append({"reason": "recipe_value_changed_removed_or_not_qualified", "details": details})
+
+        def tracks(track, emit):
+            if track == "reference":
+                emit(*search(search_input, **search_kwargs))
+
+        def audit(slots):
+            self._defer_search_audit = False
+            try:
+                return evaluate(slots, final=True)
+            finally:
+                self._defer_search_audit = True
+
+        chosen, result, report = verified_search(tracks, audit=audit,
+            accepts=lambda slots: accepts(slots, final=True),
+            rank=lambda slots, result: (self._week_purchase_key(result["basket"]),
+                                       search_kwargs["score"](slots, result)),
+            previous=previous, budget=SearchBudget(1, 1))
+        result["checks"]["reaudited_previous_menu"] = {**report, "qualification_rejections": rejections}
+        return chosen, result
+
+    def _prepared_menu_options(self, slots):
+        """Reuse a complete certificate chain; never shorten a cold search pool."""
+        from app.services.library_publications import load_certificate_record, publications
+        from app.services.meal_library_content import identity
+        from app.services.menu_optimizer import MenuOptimizer
+        from app.services.planner_context import content_digest, planner_context
+        from app.services.recipe_library import prepared_recipe_lookup
+
+        if (not self.complete or self.artifacts is None or not self.include_content_pack
+                or self.library_generation is not None or self.request.diversity_mode == "varied"
+                or getattr(self.settings, "library_search_policy", "legacy") != "smako-verified-reference-v1"
+                or getattr(self._candidates, "__func__", None) is not PersonalPlanner._candidates
+                or type(self.service.menu_optimizer) is not MenuOptimizer
+                or getattr(self.service.menu_optimizer.optimize_slots, "__func__", None) is not MenuOptimizer.optimize_slots):
+            return None
+        chain, context, predecessor = publications(), planner_context(self), None
+        if not chain:
+            return None
+        for node in chain:
+            data = load_certificate_record(self.artifacts, context, node, predecessor)
+            if data is None:
+                return None  # Rebuild EVERY missing published predecessor normally.
+            predecessor = data["sha256"]
+        view = self.artifacts.load("menu_view", content_digest([context, chain[-1]["sha256"]]))
+        if (not isinstance(view, dict) or view.get("certificate") != data["sha256"]
+                or view.get("candidate_inputs") != content_digest(self.previous_menus)
+                or not isinstance(view.get("qualification"), list)
+                or not all(isinstance(p, dict) and type(p.get("qualified")) is int
+                           and type(p.get("raw")) is int and isinstance(p.get("meal_type"), str)
+                           and 0 <= p["qualified"] <= p["raw"] for p in view["qualification"])
+                or {p["meal_type"] for p in view["qualification"]} != {slot.meal_type for slot in slots}):
+            return None
+        allowed = {row[0] for row in chain[-1]["recipes"]}
+        candidates = []
+        for kind in ("reference", "winner"):
+            records = data.get(kind)
+            if not isinstance(records, list) or len(records) != len(slots):
+                return None
+            selected = []
+            for row, slot in zip(records, slots, strict=True):
+                if not isinstance(row, dict) or row.get("slot") != slot.id or not isinstance(row.get("recipe"), str):
+                    return None
+                lookup = prepared_recipe_lookup(self.meals[slot.meal_type].servings)
+                recipe = lookup.get(row["recipe"]) if lookup is not None else None
+                if (recipe is None or identity(recipe) not in allowed
+                        or content_digest(recipe) != row["recipe"]):
+                    return None
+                # Lists/form maps remain request-owned even on this fast path.
+                recipe = recipe.model_copy(update={"ingredients": list(recipe.ingredients),
+                    "instructions": list(recipe.instructions), "preparation": recipe.preparation.model_copy(
+                        update={"input_forms": dict(recipe.preparation.input_forms)})})
+                selected.append(slot.model_copy(update={"recipe": recipe}))
+            candidates.append(selected)
+        from app.services.recipe_profile import RecipeProfile
+        try:
+            profiles = {}
+            for name, row in view["culinary_profiles"]:
+                values = dict(row)
+                for field in ("vegetables", "major_ingredients", "flavor_profile"):
+                    values[field] = tuple(values[field])
+                values["ingredient_weights"] = tuple((k, v) for k, v in values["ingredient_weights"])
+                if any(not isinstance(k, str) or not math.isfinite(v) or v < 0
+                       for k, v in values["ingredient_weights"]):
+                    return None
+                profiles[name] = RecipeProfile(**values)
+            names = {s.recipe.name.casefold().strip() for menu in candidates for s in menu if s.meal_type == "dinner"}
+            if set(profiles) != names:
+                return None
+        except (KeyError, TypeError, ValueError):
+            return None
+        for summary in view["qualification"]:
+            self.diagnostics.pools.append({**summary, "qualification_cache_hits": summary["qualified"],
+                                            "reused_library_certificate": True})
+            self.diagnostics.singleton_passed += summary["qualified"]
+        options = [[group[index] for group in candidates] for index in range(len(slots))]
+        return {"certificate": data, "context": context, "chain_length": len(chain),
+                "candidates": candidates, "options": options, "culinary_profiles": profiles}
+
+    def _capacity_artifact_key(self):
+        from app.services.library_publications import publications
+        from app.services.menu_optimizer import MenuOptimizer
+        from app.services.planner_context import content_digest, planner_context
+
+        if (not self.complete or self.artifacts is None or self.library_generation is not None
+                or not self.include_content_pack or self.spec.slots is not None
+                or getattr(self.settings, "library_search_policy", "legacy") != "smako-verified-reference-v1"
+                or getattr(self._candidates, "__func__", None) is not PersonalPlanner._candidates
+                or type(self.service.menu_optimizer) is not MenuOptimizer
+                or getattr(self.service.menu_optimizer.optimize_slots, "__func__", None) is not MenuOptimizer.optimize_slots):
+            return None
+        chain = publications()
+        return content_digest([planner_context(self), chain[-1]["sha256"]]) if chain else None
+
+    def _reuse_capacity_proof(self):
+        from app.services.planner_context import content_digest
+
+        key = self._capacity_artifact_key()
+        data = self.artifacts.load("capacity_proof", key) if key else None
+        if not isinstance(data, dict) or not isinstance(data.get("views"), dict):
+            return False
+        if set(data["views"]) != {m.meal_type for m in self.spec.meals if m.count}:
+            return False
+        try:
+            for entry in data["views"].values():
+                view = self.artifacts.load("qualification", entry["key"])
+                if view is None or content_digest(view) != entry["sha256"]:
+                    return False
+            proof = data["proof"]
+            if (proof["scope"] != "qualified_dinner_pool" or proof["status"] != "PROVEN_INFEASIBLE"
+                    or proof["dimension"] != "dish_form" or type(proof["maximum_slots"]) is not int
+                    or type(proof["required_slots"]) is not int
+                    or proof["required_slots"] != sum(m.count for m in self.spec.meals if m.meal_type == "dinner")
+                    or not 0 <= proof["maximum_slots"] < proof["required_slots"]):
+                return False
+            if (not isinstance(data.get("pools"), list) or not all(
+                    isinstance(p, dict) and isinstance(p.get("meal_type"), str)
+                    and type(p.get("qualified")) is int and type(p.get("raw")) is int
+                    and 0 <= p["qualified"] <= p["raw"] for p in data["pools"])):
+                return False
+            for pool in data["pools"]:
+                self.diagnostics.pools.append({**pool, "qualification_cache_hits": pool["qualified"]})
+                self.diagnostics.singleton_passed += pool["qualified"]
+            self.diagnostics.search.append({**proof, "cached_capacity_proof": True})
+            return True
+        except (ValueError, KeyError, TypeError):
+            return False
+
+    def _retain_capacity_proof(self, proof):
+        from app.services.planner_context import content_digest
+
+        key = self._capacity_artifact_key()
+        if key is None or set(self._qualification_views) != {m.meal_type for m in self.spec.meals if m.count}:
+            return
+        views = {}
+        for meal, view_key in self._qualification_views.items():
+            view = self.artifacts.load("qualification", view_key)
+            if view is None:
+                return
+            views[meal] = {"key": view_key, "sha256": content_digest(view)}
+        self.artifacts.save("capacity_proof", key, {"proof": proof, "views": views,
+            "pools": [{k: p[k] for k in ("meal_type", "raw", "qualified")}
+                      for p in self.diagnostics.pools]})
+
+    def _search_prepared_menu(self, prepared, evaluate, accepts, score):
+        from app.services.verified_menu_search import SearchBudget, verified_search
+
+        reference, winner = prepared["candidates"]
+
+        def tracks(track, emit):
+            if track == "reference":
+                emit(reference, evaluate(reference, final=False))
+
+        def audit(chosen):
+            self._defer_search_audit = False
+            try:
+                return evaluate(chosen, final=True)
+            finally:
+                self._defer_search_audit = True
+
+        chosen, result, report = verified_search(tracks, audit=audit,
+            accepts=lambda chosen: accepts(chosen, final=True),
+            rank=lambda chosen, value: (self._week_purchase_key(value["basket"]), score(chosen, value)),
+            previous=((winner, evaluate(winner, final=False)),), budget=SearchBudget(1, 1))
+        if (report["audit_rejected"] or report["constraint_rejected"]
+                or money(result["basket"].total) != money(prepared["certificate"]["total"])):
+            raise IncompleteBasketError("Prepared certificate needs ordinary requalification")
+        self._library_search_handled = True
+        self.diagnostics.search.append({"depth": len(chosen), "attempt": 1,
+            "library_phase": "certificate_reaudit", "search_track": "reference_and_previous",
+            "evaluations_executed": 0, "beam_pruned": 0})
+        result["checks"]["verified_reference"] = {
+            **report, "context": prepared["context"], "prepared_menu_hit": True,
+            "publication_chain": "append_only_verified_metadata",
+            "certificate": prepared["certificate"]["sha256"],
+            "loaded_publications": prepared["chain_length"], "replayed_publications": 0,
+            "qualification_scope": "cached_complete_library; selected recipes and joint basket rechecked",
         }
         return chosen, result
 
@@ -2916,6 +3214,9 @@ class PersonalPlanner:
         return result
 
     def _cache_identity(self, recipes):
+        if getattr(self.settings, "library_search_policy", "legacy") == "smako-verified-reference-v1":
+            from app.services.planner_context import content_digest, planner_context
+            return content_digest([planner_context(self), recipes, self.library_generation])
         from app.services.recipe_week_variation import CLASSIFICATION_VERSION
 
         payload = {
@@ -2986,7 +3287,7 @@ class PersonalPlanner:
                     )
                     break
 
-    def _create(self, *, replace_slot=None, balanced_reference=None):
+    def _create(self, *, replace_slot=None, balanced_reference=None, _skip_prepared_menu=False):
         slots = self.spec.slots
         if slots is None:
             slots = [
@@ -2995,6 +3296,8 @@ class PersonalPlanner:
                 for day in range(1, meal.count + 1)
             ]
         generating = self.spec.slots is None
+        if generating and replace_slot is None and self._reuse_capacity_proof():
+            raise IncompleteBasketError("Den kvalificerade receptpoolen räcker inte för variationskravet.")
         # Keep Varierad conditioned on a real Balanserad menu, as in the existing
         # planner. Its ceiling covers breakfasts, snacks and extras as well.
         if generating and self.request.diversity_mode == "varied" and balanced_reference is None:
@@ -3012,13 +3315,16 @@ class PersonalPlanner:
                 now=self.now,
                 include_content_pack=self.include_content_pack, library_generation=self.library_generation,
                 artifacts=self.artifacts,
+                previous_menus=self.previous_menus,
             ).create()
-        pools, options = {}, []
+        prepared_menu = (self._prepared_menu_options(slots)
+                         if generating and replace_slot is None and not _skip_prepared_menu else None)
+        pools, options = {}, prepared_menu["options"] if prepared_menu else []
         # Transfer the exact first-slot qualifications to the existing bounded
         # beam cache. Private inputs and slot order are identical within this
         # invocation. Single-slot final checks and edited schedules are fresh.
         qualified_results = OrderedDict()
-        for slot in slots:
+        for slot in ([] if prepared_menu else slots):
             if generating or slot.id == replace_slot:
                 if slot.meal_type not in pools:
                     if (generating and len(slots) > 1 and slot is slots[0]
@@ -3069,7 +3375,9 @@ class PersonalPlanner:
             policy = diversity_policy(self.request, policy)
         if dinner_count < 2:
             policy = policy.model_copy(update={"min_cooking_methods": 0})
-        constraints = self.service._culinary_constraints(dinner_pool, policy)
+        constraints = (self.service._culinary_constraints(dinner_pool, policy, profiles=prepared_menu["culinary_profiles"])
+                       if prepared_menu else self.service._culinary_constraints(dinner_pool, policy))
+        self._qualified_culinary_view = constraints.pairwise_recipe_similarities
         ceiling = None
         if balanced_reference is not None and dinner_count:
             references = [
@@ -3188,7 +3496,7 @@ class PersonalPlanner:
         report_stage("week_search")
         from app.services.menu_optimizer import MenuOptimizer
         incremental_library = (
-            self.complete and generating and self.include_content_pack and replace_slot is None
+            prepared_menu is None and self.complete and generating and self.include_content_pack and replace_slot is None
             and getattr(self._candidates, "__func__", None) is PersonalPlanner._candidates
             and type(self.service.menu_optimizer) is MenuOptimizer
             and getattr(self.service.menu_optimizer.optimize_slots, "__func__", None) is MenuOptimizer.optimize_slots
@@ -3284,7 +3592,7 @@ class PersonalPlanner:
             with performance_span("personal_week_search"):
                 capacity = (self.service.menu_optimizer.dish_form_capacity_conflict(
                     dinner_pool, constraints, dinner_count)
-                    if type(self.service.menu_optimizer) is MenuOptimizer else None)
+                    if type(self.service.menu_optimizer) is MenuOptimizer and prepared_menu is None else None)
                 if capacity is not None:
                     self.diagnostics.branch(dinner_count, "variation")
                     self.diagnostics.search.append({
@@ -3295,10 +3603,24 @@ class PersonalPlanner:
                         "evaluations_executed": 0, "evaluation_cache_hits": 0,
                         "constraints_rejected": 1, "evaluation_rejected": 0, **capacity,
                     })
+                    if incremental_library:
+                        self._retain_capacity_proof(dict(self.diagnostics.search[-1]))
                     raise IncompleteBasketError("Den kvalificerade receptpoolen räcker inte för variationskravet.")
-                if (incremental_library
+                if prepared_menu is not None:
+                    try:
+                        chosen, result = self._search_prepared_menu(prepared_menu, evaluate, accepts, score)
+                    except (ValueError, IncompleteBasketError):
+                        self.diagnostics.singleton_passed -= sum(p["qualified"] for p in
+                            self.diagnostics.pools if p.get("reused_library_certificate"))
+                        self.diagnostics.pools[:] = [p for p in self.diagnostics.pools
+                                                     if not p.get("reused_library_certificate")]
+                        return self._create(replace_slot=replace_slot, balanced_reference=balanced_reference,
+                                            _skip_prepared_menu=True)
+                elif (incremental_library
                         and getattr(self.settings, "library_search_policy", "legacy") == "smako-verified-reference-v1"):
                     chosen, result = self._search_verified_reference(options, search_kwargs)
+                elif self.previous_menus:
+                    chosen, result = self._search_with_previous_menus(search, search_input, options, search_kwargs)
                 else:
                     chosen, result = search(search_input, **search_kwargs)
         finally:
@@ -3308,9 +3630,12 @@ class PersonalPlanner:
         report_stage("final_audit")
         try:
             verified_reference = result.get("checks", {}).get("verified_reference")
+            previous_menu_audit = result.get("checks", {}).get("reaudited_previous_menu")
             result = self.basket(chosen, final=True)
             if verified_reference is not None:
                 result["checks"]["verified_reference"] = verified_reference
+            if previous_menu_audit is not None:
+                result["checks"]["reaudited_previous_menu"] = previous_menu_audit
         except PolicyConflict as exc:
             if not str(exc).startswith(_AUDIT_FAILURE):
                 raise
