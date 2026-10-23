@@ -1,6 +1,6 @@
 {
   "schema": "default-result-regression-v1",
-  "complete": false,
+  "complete": true,
   "rows": [
     {
       "city": "lund",
@@ -208,37 +208,205 @@
     {
       "city": "malmo",
       "case": "standard",
-      "complete": false
+      "complete": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "f7dbfa89ea0f84251d51d71a41315594bf73cdf6f0aca3bfca49a436a2d64cd9",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9",
+      "old_source_commit": "2efb62f",
+      "new_source_commit": "b139cd4",
+      "old_report_sha256": "5671ca3dc6ef7aff6fbac712d614de3b0f8fb5e661e89cebd088d470c566c754",
+      "new_report_sha256": "9bd5a37aa49078b615914492952ad434da52a0e5d5fc40ccc6af94e0edf7ba17",
+      "result": {
+        "outcome": "PASS",
+        "paid": 511.46,
+        "semantic_sha256": "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+        "code": null,
+        "stage": null
+      }
     },
     {
       "city": "malmo",
       "case": "protein40",
-      "complete": false
+      "complete": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "ad34b1fb7a8cc1cca23b3b9802f50c0a6f7d3a68510427477d84aa5f9450c268",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9",
+      "old_source_commit": "2efb62f",
+      "new_source_commit": "b139cd4",
+      "old_report_sha256": "b0735754774c0cd3a99a752040cbd1c7654a3b412ae6fc0601b37a711cc3bdb7",
+      "new_report_sha256": "e47c5947e2980297261b6d7fec87c45cf29fa4bc3c16ed65ee337479e07dc834",
+      "result": {
+        "outcome": "PASS",
+        "paid": 1000.86,
+        "semantic_sha256": "9fe4cb8803fba0ad67d7c11059249965080c35a5d43d38dad27a2bce32828f64",
+        "code": null,
+        "stage": null
+      }
     },
     {
       "city": "malmo",
       "case": "all-macros",
-      "complete": false
+      "complete": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "d79e42bc3682d10f1cd63011b865cb69d03c0ee860f3bbad0b6b4ccbd97597ed",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9",
+      "old_source_commit": "2efb62f",
+      "new_source_commit": "b139cd4",
+      "old_report_sha256": "f564ecf32e4270b90a2c528e55e4044c39a1ae7c3e78f5ffac94b29e85eafee9",
+      "new_report_sha256": "6bc778dad373b43cfd33ad51e4e1b5fb5edde2b29230b85cba743fbcbee9c3c8",
+      "result": {
+        "outcome": "PASS",
+        "paid": 1000.86,
+        "semantic_sha256": "fd33e01d01870c74de5a5d1719709b817a3c8f5987507d25c2e245af1373cfb0",
+        "code": null,
+        "stage": null
+      }
     },
     {
       "city": "malmo",
       "case": "vegan",
-      "complete": false
+      "complete": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "1c02d489950035dc22909e7ca5e04588d64f594ace364f3105246bd5d00118b9",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9",
+      "old_source_commit": "2efb62f",
+      "new_source_commit": "b139cd4",
+      "old_report_sha256": "87451f07f5b2161853e5e126fcd4e3b29e28df1c1a42eb46176807f1750d91e9",
+      "new_report_sha256": "3211cbf75ce13a27ed56bf35d887d8945c3c40eb265daede4947d8dfa7b428ff",
+      "result": {
+        "outcome": "BLOCKED",
+        "paid": null,
+        "semantic_sha256": null,
+        "code": "SEARCH_BLOCKED",
+        "stage": null
+      }
     },
     {
       "city": "malmo",
       "case": "distribution",
-      "complete": false
+      "complete": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9",
+      "old_source_commit": "2efb62f",
+      "new_source_commit": "b139cd4",
+      "old_report_sha256": "7b9160714ae06e93dfa174e19fa8fe6cc251d591bfbca38e6952c1d85ca7bd77",
+      "new_report_sha256": "ab54a2f1360cb6ef3ae0c1894ba9d1c2be9d7e3898f88248dab9c843d23a3bbc",
+      "result": {
+        "outcome": "PASS",
+        "paid": 996.22,
+        "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+        "code": null,
+        "stage": null
+      }
     },
     {
       "city": "malmo",
       "case": "organic-share",
-      "complete": false
+      "complete": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "5d0eb558fa0cb6500a605733dd4997cac824cce3d7abc95606989942578af744",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9",
+      "old_source_commit": "2efb62f",
+      "new_source_commit": "b139cd4",
+      "old_report_sha256": "a331f0b9b14090f22939eb751dea9f039a7467671e83bbf45d43ae7676dc5dc6",
+      "new_report_sha256": "625ce5a30303dca0485d85f90a6c0e74440b5027336b0b353cebf6d386fa8da8",
+      "result": {
+        "outcome": "PASS",
+        "paid": 321.16,
+        "semantic_sha256": "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+        "code": null,
+        "stage": null
+      }
     },
     {
       "city": "malmo",
       "case": "breakfast-snack-weight",
-      "complete": false
+      "complete": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "46365a22d53fbdfd445a9e1b227d4c75f90a266f5f6c7e7d5f3fbc16576ba835",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9",
+      "old_source_commit": "2efb62f",
+      "new_source_commit": "b139cd4",
+      "old_report_sha256": "93511b137f82602d46b030799f39f639d18b50aa494a7e1f0029d7e1583093b6",
+      "new_report_sha256": "66b124b70cd6b100e928d58358e122929b593f784a553c5538ec9273e25b61a5",
+      "result": {
+        "outcome": "PASS",
+        "paid": 53.16,
+        "semantic_sha256": "317251350ddbf31b6ee2ea88d160451e700e34c4d9e00e1f40e48a822b22a225",
+        "code": null,
+        "stage": null
+      }
     }
   ]
 }

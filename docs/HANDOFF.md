@@ -1,9 +1,9 @@
-# 2026-10-23: Integrationsgranskning och skalningsmatris pågår – PR #7, ej aktiverat
+# 2026-10-23: Malmömatris klar, Lund 5 000 återupptagen – PR #7, ej aktiverat
 
 Arbete i `D:\Projects\Smako`, gren `perf/integration-scaling-20261023`,
 [PR #7](https://github.com/ossebosse/smako/pull/7) som utkast.
 Hämtad main `2efb62f`: full CI **2 950 PASS, 10 XFAIL, 53 SKIP**.
-Kandidatens appkod `652e7ac`: **3 005 PASS, 10 XFAIL, 53 SKIP**,
+Kandidatens appkod `b139cd4`: **3 012 PASS, 10 XFAIL, 53 SKIP**,
 inklusive webbläsartester.
 
 Verifierat: 40/40 recept kvalificeras och slutkontrolleras med verkliga
@@ -20,43 +20,51 @@ veckokombinationer, med befintliga krav och oberoende slutkontroll. Kontrakt
 ger 469,84 kr mot main 474,43 kr. Sammanslagna kohorter är fortsatt av
 som standard tills hela prisvillkoret är uppmätt.
 
-Minne: offertbudgetens sidomappar räknas, aktuella skalade recept
-återanvänds i historikvalideringen, frysta underträd delas och globala rena
-recept-ID:n håller inte avslutade anrops modeller vid liv. 1 310 skalningar
-är byteidentiska med tidigare värden. Malmö 5 000 standard har nu
-slutförts inom 3 GiB: 511,46 kr, godkänd slutkontroll, 2,99 GB peak RSS.
-Två nya processer med samma kodsignatur och varm diskcache gav samma
-meny/hash; detta är ännu inte full väggtid inklusive processstart.
+**Slutfört på servern:** samtliga 119 Malmöceller vid 262/1 000/2 000/5 000
+recept, alla sju profiler, main/K16/K32/K48 och v5-referens vid 262.
+Alla slutfördes under oförändrat 3 GiB-tak: högsta RSS 3 149 504 512 byte,
+högsta cgroup-minne 3 167 059 968 byte (cirka 2,95 GiB). Marginalen är liten;
+detta är ingen garanti för samtidiga användare eller alla portionsstorlekar.
+Malmö vegan är fortsatt `SEARCH_BLOCKED`, övriga profiler ger godkända menyer.
 
-**Senaste minnesutfall:** den första slutmatrisen med `652e7ac` klarade
-Malmö 5 000 main och K16 (511,46/495,80 kr), men K32 dödades av 3 GiB-taket.
-Den matrisen är stoppad och bevarad som `final-grid-v5-oom`. Lund-körningen
-stoppades kontrollerat för att undvika blandade metodversioner. En ytterligare
-ändring delar endast registrets exakta frysta ingrediens-/designdelar efter
-full modellvalidering och innehållskontroll. Riktade prov passerar; ny full
-minneskontroll återstår. Första standardmenyns godkända minne ovan innebär
-alltså inte att hela skalningsläget är godkänt.
+Två nya processer på samma slutkod, bibliotek, indata, sökinställningar och
+varma diskcache ger samma Malmö 5 000/K48-meny och hash: hela processerna
+187,02/188,11 s, varav planering 145,44/146,52 s och modellinläsning
+33,10/33,31 s. Båda har 8 217 träffar, 2 142 missar, noll skrivningar och
+noll ogiltiga poster. Hela processen omfattar även Docker/import/fil-I/O.
 
-**Senaste kandidat:** `b139cd4`, full CI **3 012 PASS, 10 XFAIL, 53 SKIP**.
-`c9390dd` klarade alla fyra sökarmarna för Malmö 5 000 standard, protein40
-och all-macros inom 3 GiB (högsta uppmätta RSS cirka 3,10 GB). Vegan/main
-stoppades efter 887,81 s utan resultat. Diagnosen fann 852 kvalificerade
-rätter med samma rättform, tak två och begärda tre middagar. Den nya
-nödvändiga kapacitetskontrollen ger samma `SEARCH_BLOCKED` före sökning;
-veckosteget 0,624 ms, hela kalla processen 216,83 s. Ingen regel sänktes.
-Malmö-matrisen körs om med denna kontroll. Lyckade Lund-mätningar behåller
-sin kodversion `c9390dd`; övrig befintlig kod är AST-verifierad oförändrad.
+Minnesändringarna delar endast frysta registrerade receptdelar efter full
+validering och exakt innehållskontroll; muterbara behållare är privata.
+Offertbudgetens sidomappar räknas, historikens exakta aktuella modeller delas
+och globala rena recept-ID:n håller inte avslutade anrops modeller vid liv.
+1 310 skalningar samt 1 310 kvalificerade värden/ID:n är identiska med
+tidigare kod. Äldre OOM-körningar är bevarade, inte slutresultat.
+
+Den nödvändiga rättformskontrollen undviker en bevisat omöjlig veckosökning:
+852 kvalificerade veganrätter i Malmö 5 000 har en form, tak två, begärda
+tre middagar. Samma `SEARCH_BLOCKED`, veckosteget 0,624 ms; hela kalla
+processen inklusive förberedelse/kvalificering 216,83 s. Ingen regel sänktes.
+Lyckade Lund-mätningar behåller kodversion `c9390dd`; befintlig kod är
+AST-verifierad oförändrad efter att den nya negativa kontrollen tagits bort.
 
 **Ingen defaultväxling är tillåten av hittillsvarande prisdata:** Lund 262
 fördelning main/uncapped 761,45 kr, samtliga K 783,42 kr. Vegan förbättras
 347,90 → 335,35 kr men tar längre tid. Slutför och redovisa hela matrisen.
 
-**Pågår:** slutmatris på strikt nästlade bibliotek 262/1 000/2 000/5 000,
-Lund en lokal process åt gången, Malmö seriellt i 2 CPU/3 GiB-containrar
-när den nya minneskontrollen har passerat.
-Tidigare parallella lokala felkörningar och serverns äldre OOM räknas inte
-som slutresultat. Ingen defaultväxling eller main-integration är gjord för
-denna kandidat ännu. Se [rapport och mätunderlag](reviews/integration-scaling-20261023.md).
+**Återstår efter ny avstämning mot instruktionerna:** 28 Lundceller vid
+5 000 recept, proxy mot full pool, sex positiva återkontroller/sökspår på
+slutkoden, slutrapport och granskad main-integration. 210/238 matrisresultat
+är färdiga. Windowskontrollprocessen för 5 000 hade avslutats före första
+planresultatet, utan belagd OOM; startup/logg är bevarade. Samma kod/indata
+återupptas i en fristående lokal process. Proxy/sökspår körs seriellt på den
+nu lediga servern. Ingen tung parallell mätning sker på samma värddator.
+
+Alla 14 slutkodens main/262-profiler har nu samma utfall, pris och semantiska
+hash som samtliga ursprungliga main-iterationer; se
+[kontrollen](reviews/integration-scaling-20261023/default-regression.json).
+Skalningsmålet är fortfarande inte uppnått: kända prisregressioner och
+växande beräkningstid kvarstår. Ingen defaultväxling eller main-integration
+är gjord ännu. Se [rapporten](reviews/integration-scaling-20261023.md).
 
 Underlag och processloggar bevaras i `.local/integration-scaling-20261023`
 och serverns motsvarande evidence-katalog; körkvittenser, indatahashar och
