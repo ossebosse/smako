@@ -1,91 +1,73 @@
-# 2026-10-23: Malmömatris klar, Lund 5 000 återupptagen – PR #7, ej aktiverat
+# 2026-10-23: 238 skalningsprov slutförda – standardbyte underkänt, ej aktiverat
 
-Arbete i `D:\Projects\Smako`, gren `perf/integration-scaling-20261023`,
-[PR #7](https://github.com/ossebosse/smako/pull/7) som utkast.
+Granskad appkod `b139cd4`, samlad i
+[PR #7](https://github.com/ossebosse/smako/pull/7). Rapport, kod-/datapinnar,
+kommandon och maskinunderlag finns i
+[integrationsgranskningen](reviews/integration-scaling-20261023.md).
 Hämtad main `2efb62f`: full CI **2 950 PASS, 10 XFAIL, 53 SKIP**.
-Kandidatens appkod `b139cd4`: **3 012 PASS, 10 XFAIL, 53 SKIP**,
-inklusive webbläsartester.
+Kandidatens appkod: **3 012 PASS, 10 XFAIL, 53 SKIP**, inklusive webbläsartester.
 
-Verifierat: 40/40 recept kvalificeras och slutkontrolleras med verkliga
-serverfakta i både Lund och Malmö. Alla godkända äggnamn är hela skalägg,
-97 i Lund och 186 i Malmö, alla med användbara gram. Mängdspärren undantar
-nu endast sju kända näringskonflikter; okända prefix förblir blockerande.
-Alla 14 par av tidigare/nuvarande standardsökning, tre iterationer, ger
-samma utfall, pris och hash. Malmö vegan är blockerat i båda armarna.
+**Verifierat med faktiska serverfakta:** 40/40 recept kvalificeras och
+kassakontrolleras i båda städerna. Alla 97 godkända äggprodukter i Lund och
+186 i Malmö är hela skalägg med användbara gram. Mängdspärren undantar bara
+sju kända näringskonflikter; okända prefix blockerar. Alla 14 par av tidigare
+och nuvarande standardsökning, tre iterationer per arm, behåller utfall/pris;
+samtliga lyckade menyer har samma hash. Malmö vegan är blockerat i båda.
+Slutkodens main/262 återkontrollerar också alla 14 mot ursprunglig main.
 
-Valbar sökning: små utbytbara pooler genomsöks uttömmande upp till 4 096
-veckokombinationer, med befintliga krav och oberoende slutkontroll. Kontrakt
-`smako-merged-library-search-v3` arkiverar färdiga prefixvinnare utan att
-ändra den geometriska huvudsökningens väg. Historiska Lund 1 000/K48
-ger 469,84 kr mot main 474,43 kr. Sammanslagna kohorter är fortsatt av
-som standard tills hela prisvillkoret är uppmätt.
+**Matrisen är komplett:** 238/238 celler, 221 godkända menyer och 17 väntade
+Malmö-veganblockeringar. Strikt nästlade 262/1 000/2 000/5 000-bibliotek,
+main/K16/K32/K48 samt v5-referens vid 262. Ingen giltig meny blev dyrare
+mellan de uppmätta storlekarna för något K. Men alla tre K bryter main/262-
+priskravet för Lund/fördelning vid samtliga fyra storlekar. Vid 262:
+main/referens 761,45 kr, geo 783,42 kr. Vid 5 000: main 704,30 kr,
+K32/K48 769,29 kr. **Sammanslagna kohorter förblir av som standard.**
 
-**Slutfört på servern:** samtliga 119 Malmöceller vid 262/1 000/2 000/5 000
-recept, alla sju profiler, main/K16/K32/K48 och v5-referens vid 262.
-Alla slutfördes under oförändrat 3 GiB-tak: högsta RSS 3 149 504 512 byte,
-högsta cgroup-minne 3 167 059 968 byte (cirka 2,95 GiB). Marginalen är liten;
-detta är ingen garanti för samtidiga användare eller alla portionsstorlekar.
-Malmö vegan är fortsatt `SEARCH_BLOCKED`, övriga profiler ger godkända menyer.
+Sökspåren förklarar missen: main går via generation 8/11/12 till den
+billigare menyn; geo hoppar 2 → 13. Prefixarkiv v3 bevarar geo-vinnare
+utan återkoppling till dess primära väg, men ersätter inte main-vägen.
+Historiska Lund 1 000/K48 behåller 469,84 kr mot main 474,43 kr.
+Små genererade utbytbara pooler söks uttömmande upp till 4 096 kombinationer,
+med befintliga krav och slutkontroll; ingen global optimalitet påstås.
 
-Två nya processer på samma slutkod, bibliotek, indata, sökinställningar och
-varma diskcache ger samma Malmö 5 000/K48-meny och hash: hela processerna
-187,02/188,11 s, varav planering 145,44/146,52 s och modellinläsning
-33,10/33,31 s. Båda har 8 217 träffar, 2 142 missar, noll skrivningar och
-noll ogiltiga poster. Hela processen omfattar även Docker/import/fil-I/O.
+**Malmös minnesprov passerar:** alla 119 celler under oförändrat 3 GiB-tak.
+Högsta RSS 3 149 504 512 byte, högsta cgroup-minne 3 167 059 968 byte
+(cirka 2,95 GiB). Marginalen är liten; detta är ingen fleranvändarkapacitet.
+Frysta registrerade receptdelar delas efter exakt innehållskontroll,
+muterbara behållare förblir privata och offertbudgetens sidomappar räknas.
+1 310 skalningar samt 1 310 kvalificerade värden/ID:n är identiska.
 
-Minnesändringarna delar endast frysta registrerade receptdelar efter full
-validering och exakt innehållskontroll; muterbara behållare är privata.
-Offertbudgetens sidomappar räknas, historikens exakta aktuella modeller delas
-och globala rena recept-ID:n håller inte avslutade anrops modeller vid liv.
-1 310 skalningar samt 1 310 kvalificerade värden/ID:n är identiska med
-tidigare kod. Äldre OOM-körningar är bevarade, inte slutresultat.
+Två nya processer med samma slutkod, bibliotek, indata, inställningar och
+varma diskcache ger samma Malmö 5 000/K48-meny/hash: hela processerna
+187,02/188,11 s, planering 145,44/146,52 s. Båda har 8 217 träffar,
+2 142 missar, noll skrivningar och noll ogiltiga poster. En exakt formgräns
+undviker Malmös omöjliga veganveckosökning: en form, tak två, begärda tre.
+Ingen regel eller klassificering sänks; samma `SEARCH_BLOCKED`.
 
-Den nödvändiga rättformskontrollen undviker en bevisat omöjlig veckosökning:
-852 kvalificerade veganrätter i Malmö 5 000 har en form, tak två, begärda
-tre middagar. Samma `SEARCH_BLOCKED`, veckosteget 0,624 ms; hela kalla
-processen inklusive förberedelse/kvalificering 216,83 s. Ingen regel sänktes.
-Lyckade Lund-mätningar behåller kodversion `c9390dd`; befintlig kod är
-AST-verifierad oförändrad efter att den nya negativa kontrollen tagits bort.
+**Proxyprovet underkänns för generell gallring:** 272/946 kandidater vid
+1 000 behåller 487,85 kr, andra anropet 33,95 mot full pools 37,74 s.
+Vid 5 000 behålls 528/4 946, men K32 blir dyrare: 487,85 mot 480,97 kr,
+trots 50,07 mot 73,92 s. K48 behåller 487,85 kr, 51,03 mot 73,90 s.
+Wrappern bevarar faktisk cacheåterlämning av 256 kvalificeringsresultat;
+orakelprovet räknar om varje memoträff. Tidigare felinstrumentering bevaras
+separat. Ingen produktionssamplare har införts.
 
-**Ingen defaultväxling är tillåten av hittillsvarande prisdata:** Lund 262
-fördelning main/uncapped 761,45 kr, samtliga K 783,42 kr. Vegan förbättras
-347,90 → 335,35 kr men tar längre tid. Slutför och redovisa hela matrisen.
+**Skalningsmålet är alltså inte uppnått:** prisregressionerna och växande
+beräkningstid kvarstår. Aktivera inte försökslägena med hänvisning till
+de genomförda mätningarna. Sex positiva återkontroller på `b139cd4` matchar
+Lunds `c9390dd`; AST-beviset binder den enda negativa kapacitetsskillnaden.
+Kod-/tidsversioner och mätprotokoll är uttryckliga i varje underlag.
 
-**Proxy och sökspår slutförda:** sex positiva Lund/262-återkontroller på
-`b139cd4` ger exakt samma pris/hash som `c9390dd`. Fördelningsspåret visar
-main via generation 8/11/12 till 761,45 kr, medan geo hoppar 2 → 13 och
-stannar vid 783,42 kr. Båda menyerna är giltiga.
+**Axfood återstår som separat ägardel:** detaljarkivet återfanns inte i kända
+lokala worktrees. Varken berikade aktuella exporter eller det äldre
+Malmö-fallet 361,81/340,64 kr är därför återverifierade. Tidigare 503
+återstående Hemköp-koder, lagring, uppdateringsrytm och aktivering kräver
+ägarbeslut; ett konkret lagrings-/verifieringsförslag finns i rapporten.
 
-Proxy med samma cacheväg behåller 272/946 kandidater vid 1 000, samma
-487,85 kr, andra anropet 33,95 s mot full pools 37,74 s. Alla proxyanrop
-återlämnar 256 kvalificeringsresultat; oraklet kontrollerar varje memoträff.
-Vid 5 000 behålls 528/4 946, men K32 blir **dyrare: 487,85 mot 480,97 kr**,
-trots kortare tid 50,07 mot 73,92 s. K48 behåller 487,85 kr, 51,03 mot
-73,90 s. Generell gallring är därför inte godkänd. Det första proxyprovet
-tappade metodmetadata och är bevarat som preliminärt; slutprovet rättar
-detta med `functools.wraps` och verifierar faktisk återlämning till cachen.
-Se [maskinunderlag och kommandon](reviews/integration-scaling-20261023/followups.json).
-
-**Återstår:** resten av Lunds 5 000-matris, slutrapport och granskad
-main-integration. Övriga bibliotek och hela Malmömatrisen är klara.
-Windowskontrollprocessen för 5 000 hade avslutats före första planresultatet,
-utan belagd OOM; startup/logg är bevarade. Samma kod/indata körs nu i en
-fristående lokal process. Ingen tung parallell mätning sker på samma värddator.
-
-Alla 14 slutkodens main/262-profiler har nu samma utfall, pris och semantiska
-hash som samtliga ursprungliga main-iterationer; se
-[kontrollen](reviews/integration-scaling-20261023/default-regression.json).
-Skalningsmålet är fortfarande inte uppnått: kända prisregressioner och
-växande beräkningstid kvarstår. Ingen defaultväxling eller main-integration
-är gjord ännu. Se [rapporten](reviews/integration-scaling-20261023.md).
-
-Underlag och processloggar bevaras i `.local/integration-scaling-20261023`
-och serverns motsvarande evidence-katalog; körkvittenser, indatahashar och
-reproducerbara kommandon finns länkade från rapporten. Bevara isolerade
-testbibliotek i worktrees; rensa eller återställ inte deras lokala filer.
-Axfoods tidigare redovisade 503 återstående koder, lagring, uppdateringsrytm och
-aktivering kräver separat ägarbeslut. Ingen produktion, scheduler,
-butiksinsamling eller aktivt prismanifest har ändrats.
+Alla benchmarkprocesser har avslutats. Bevara underlagen i
+`.local/integration-scaling-20261023`, serverns motsvarande evidence-katalog
+och de isolerade testbibliotekens worktrees. Ingen produktion, scheduler,
+butiksinsamling eller aktivt prismanifest har ändrats av granskningen.
 
 ---
 
