@@ -2988,26 +2988,19 @@ class PersonalPlanner:
             generations = current_recipe_generations(self.library_generation)
             first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
             cohorts = range(first, self._generation + 1)
-            if getattr(self.settings, "library_merge_generations", False) and len(cohorts) > 2:
-                # Geometric cohorts: the seed library, then the first pack
-                # that at least doubles the qualified options, and so on, and
-                # always the whole library last. The incumbent of a smaller
-                # cohort carries over and a later sweep can only improve it,
-                # so growth cannot lose a menu the smaller library would find,
-                # while the number of sweeps grows with log(size), not packs.
-                counts = Counter(min(generations.get(identity(s.recipe), self._generation), self._generation)
-                                 for group in options for s in group if s.recipe and s.recipe.design)
-                chosen, total = [first], sum(n for g, n in counts.items() if g <= first)
-                for generation in range(first + 1, self._generation):
-                    total += counts.get(generation, 0)
-                    if total >= 2 * sum(n for g, n in counts.items() if g <= chosen[-1]):
-                        chosen.append(generation)
-                cohorts = (*chosen, self._generation)
-            search_input = [(generation, [
-                [s for s in group if not s.recipe or not s.recipe.design
-                 or generations.get(identity(s.recipe), self._generation) <= generation]
-                for group in options
-            ]) for generation in cohorts]
+            if getattr(self.settings, "library_merge_generations", False):
+                from app.services.library_search_cohorts import merged_library_cohorts
+                from app.services.recipe_library import current_recipes
+
+                search_input, completed, prefixes = merged_library_cohorts(
+                    options, current_recipes(self.library_generation), generations, first_generation=first)
+                library_kwargs.update(completed_prefix_indexes=completed, cohort_prefix_sizes=prefixes)
+            else:
+                search_input = [(generation, [
+                    [s for s in group if not s.recipe or not s.recipe.design
+                     or generations.get(identity(s.recipe), self._generation) <= generation]
+                    for group in options
+                ]) for generation in cohorts]
             search = self.service.menu_optimizer.optimize_library_slots
             library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
             from app.services.week_refinement import qualified_joint_proposals
@@ -3044,7 +3037,9 @@ class PersonalPlanner:
                 library_kwargs["substitution_slot_limit"] = slot_limit
             if (getattr(self.settings, "library_merge_generations", False)
                     and generating and not self.items and not self.spec.product_locks):
-                library_kwargs["unordered_small_pool_limit"] = 4096
+                from app.services.library_search_cohorts import SMALL_POOL_LIMIT
+
+                library_kwargs["unordered_small_pool_limit"] = SMALL_POOL_LIMIT
             self._library_search_handled = True
         search_kwargs = dict(
                 **library_kwargs,

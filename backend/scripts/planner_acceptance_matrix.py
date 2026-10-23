@@ -319,6 +319,10 @@ def main():
     if args.uncapped:
         assert report["search_limits"] == FULL_LIBRARY_SEARCH_LIMITS, report["search_limits"]
         report["reference_contract"] = FULL_LIBRARY_REFERENCE_CONTRACT
+    if settings.library_merge_generations:
+        from app.services.library_search_cohorts import MERGED_SEARCH_CONTRACT
+
+        report["merged_search_contract"] = dict(MERGED_SEARCH_CONTRACT)
     from app.services.meal_prepared_artifacts import STATS, method_signature
     from app.services.recipe_library import library_version
 
