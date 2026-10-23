@@ -1,4 +1,5 @@
 """Small generated menus must not lose a cheaper non-local combination."""
+from dataclasses import replace
 from itertools import product
 
 import pytest
@@ -65,3 +66,45 @@ def test_week_enumeration_does_not_claim_global_product_or_nutrition_optimality(
     result = completed_search_outcome({'search': [{'library_phase': 'exhaustive', 'beam_pruned': 0}]})
     assert result['search_budget']['week_search_method'] == 'exhaustive_week_combinations'
     assert not result['global_optimum_proven']
+
+
+@pytest.mark.parametrize('has_pantry', [False, True])
+def test_real_planner_uses_unordered_enumeration_only_without_private_allocations(has_pantry):
+    from backend.tests.test_complete_scope_incumbents import fixture, planner
+
+    request, universe, facts, pantry = fixture()
+    if not has_pantry:
+        pantry = {'revision': 0, 'items': [], 'reservations': {}, 'events': {}}
+    subject = planner(request, universe, facts, pantry)
+    subject.settings = replace(subject.settings, library_merge_generations=True)
+    result = subject.create()
+    methods = {r.get('library_phase') for r in subject.diagnostics.search}
+    assert ('exhaustive' in methods) is (not has_pantry)
+    assert result.personal.checks['checkout_audit']['passed']
+
+
+def test_exhaustive_winner_still_needs_the_independent_final_checkout_audit(monkeypatch):
+    from app.services.personal_policy import PolicyConflict
+
+    from backend.tests.test_complete_scope_incumbents import fixture, planner
+
+    request, universe, facts, _ = fixture()
+    subject = planner(request, universe, facts, {'revision': 0, 'items': [], 'reservations': {}, 'events': {}})
+    subject.settings = replace(subject.settings, library_merge_generations=True)
+    original_search = subject.service.menu_optimizer.optimize_library_slots
+    original_basket = subject.basket
+    search_done = False
+    def search(*args, **kwargs):
+        nonlocal search_done
+        result = original_search(*args, **kwargs)
+        search_done = True
+        return result
+    def basket(*args, **kwargs):
+        if search_done:
+            raise PolicyConflict('Independent audit rejected the proposed winner')
+        return original_basket(*args, **kwargs)
+    monkeypatch.setattr(subject.service.menu_optimizer, 'optimize_library_slots', search)
+    monkeypatch.setattr(subject, 'basket', basket)
+    with pytest.raises(PolicyConflict, match='Independent audit rejected'):
+        subject.create()
+    assert search_done
