@@ -51,13 +51,26 @@ AST-verifierad oförändrad efter att den nya negativa kontrollen tagits bort.
 fördelning main/uncapped 761,45 kr, samtliga K 783,42 kr. Vegan förbättras
 347,90 → 335,35 kr men tar längre tid. Slutför och redovisa hela matrisen.
 
-**Återstår efter ny avstämning mot instruktionerna:** 28 Lundceller vid
-5 000 recept, proxy mot full pool, sex positiva återkontroller/sökspår på
-slutkoden, slutrapport och granskad main-integration. 210/238 matrisresultat
-är färdiga. Windowskontrollprocessen för 5 000 hade avslutats före första
-planresultatet, utan belagd OOM; startup/logg är bevarade. Samma kod/indata
-återupptas i en fristående lokal process. Proxy/sökspår körs seriellt på den
-nu lediga servern. Ingen tung parallell mätning sker på samma värddator.
+**Proxy och sökspår slutförda:** sex positiva Lund/262-återkontroller på
+`b139cd4` ger exakt samma pris/hash som `c9390dd`. Fördelningsspåret visar
+main via generation 8/11/12 till 761,45 kr, medan geo hoppar 2 → 13 och
+stannar vid 783,42 kr. Båda menyerna är giltiga.
+
+Proxy med samma cacheväg behåller 272/946 kandidater vid 1 000, samma
+487,85 kr, andra anropet 33,95 s mot full pools 37,74 s. Alla proxyanrop
+återlämnar 256 kvalificeringsresultat; oraklet kontrollerar varje memoträff.
+Vid 5 000 behålls 528/4 946, men K32 blir **dyrare: 487,85 mot 480,97 kr**,
+trots kortare tid 50,07 mot 73,92 s. K48 behåller 487,85 kr, 51,03 mot
+73,90 s. Generell gallring är därför inte godkänd. Det första proxyprovet
+tappade metodmetadata och är bevarat som preliminärt; slutprovet rättar
+detta med `functools.wraps` och verifierar faktisk återlämning till cachen.
+Se [maskinunderlag och kommandon](reviews/integration-scaling-20261023/followups.json).
+
+**Återstår:** resten av Lunds 5 000-matris, slutrapport och granskad
+main-integration. Övriga bibliotek och hela Malmömatrisen är klara.
+Windowskontrollprocessen för 5 000 hade avslutats före första planresultatet,
+utan belagd OOM; startup/logg är bevarade. Samma kod/indata körs nu i en
+fristående lokal process. Ingen tung parallell mätning sker på samma värddator.
 
 Alla 14 slutkodens main/262-profiler har nu samma utfall, pris och semantiska
 hash som samtliga ursprungliga main-iterationer; se
@@ -70,7 +83,7 @@ Underlag och processloggar bevaras i `.local/integration-scaling-20261023`
 och serverns motsvarande evidence-katalog; körkvittenser, indatahashar och
 reproducerbara kommandon finns länkade från rapporten. Bevara isolerade
 testbibliotek i worktrees; rensa eller återställ inte deras lokala filer.
-Axfoods 503 återstående hämtningar, lagring, uppdateringsrytm och
+Axfoods tidigare redovisade 503 återstående koder, lagring, uppdateringsrytm och
 aktivering kräver separat ägarbeslut. Ingen produktion, scheduler,
 butiksinsamling eller aktivt prismanifest har ändrats.
 

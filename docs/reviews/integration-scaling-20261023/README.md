@@ -64,7 +64,8 @@ tider. Detta är ingen allmän garanti för alla privata indata.
 `run_matrix.py` startas i en ny process per stad och bibliotek. Den laddar
 priser/fakta en gång och skapar ny tom syntetisk privat status för varje
 plan. Offentlig förberedelse återanvänds som i en varm appprocess. Skilj
-detta från en ny process med varm diskcache.
+detta från en ny process med varm diskcache. Färdig plan/planner släpps och
+`gc.collect()` körs mellan anropen; detta är inte ett fleranvändarlastprov.
 
 Exempel på Windows, i rätt worktree med valt receptbibliotek och
 kanoniska källbyte:
@@ -138,3 +139,63 @@ serverns kö-/lastkapacitet.
 ursprungliga main-iterationer per stad/profil. Indata och samtliga sju
 sökinställningar måste matcha innan utfall, pris och semantisk hash jämförs.
 Ofullständiga jämförelser markeras uttryckligen och räknas inte som godkända.
+
+Valideringsunderlagen kan återskapas separat:
+
+```text
+python docs/reviews/integration-scaling-20261023/compare_default_results.py
+  --evidence .local/integration-scaling-20261023
+  --output docs/reviews/integration-scaling-20261023/default-regression.json
+python docs/reviews/integration-scaling-20261023/summarize_followups.py
+  --evidence .local/integration-scaling-20261023
+  --output docs/reviews/integration-scaling-20261023/followups.json
+```
+
+`complete` avser avslutade mätningar. Prisspärrar redovisas separat och kan
+vara underkända även när alla efterfrågade prov har slutförts.
+
+## Proxy och sökspår
+
+`proxy_review.py` är ett separat offlineexperiment ovanpå det ordinarie
+acceptansverktyget, inte en produktionsinställning. Hela den kvalificerbara
+basen till och med generation 13 behålls; hjälparen kräver att den basen har
+262 recept. Tillägg rangordnas med summan av radernas billigaste offert,
+åtta per generation/måltidstyp/proteinkategori. De behållna recepten genomgår
+sedan ordinarie full kvalificering, veckosökning och oberoende kassakontroll.
+
+Kör först full pool med samma kod, bibliotek, indata och cachekatalog, sedan
+proxy utan memo, memo med `--verify-rows` och memo utan orakel. Exempel:
+
+```text
+python docs/reviews/integration-scaling-20261023/proxy_review.py
+  --inputs <frysta-Lund-indata> --output <separat-resultatmapp>
+  --matrix-case standard --label proxy-memo --repeat 2
+  --preparation-cache-root <gemensam-samma-kod-cache>
+  --merge-generations --substitution-pool 0 --slot-limit 48
+  --proxy-limit 8 --proxy-memo
+```
+
+Fullpoolskontrollen använder `python -m backend.scripts.planner_acceptance_matrix`
+med samma argument, utan `--proxy-limit`/`--proxy-memo`. Radmemon gäller bara
+samma faktiska frysta kandidatobjekt, namn, mängd och enhet. Orakelflaggan
+räknar om varje memoträff med den ursprungliga offertfunktionen. Kontrollera
+samma behållna identitetshash mellan proxyvarianterna, pris mot full pool,
+kassakontroll och alla indata-/metod-/bibliotekspinnar. En enda godkänd profil
+är inte en allmän garanti för urvalets kvalitet.
+
+Wrappern bevarar ordinarie metodmetadata med `functools.wraps` och redovisar
+att första platsens kvalificerade korgresultat faktiskt återlämnas till
+sökcachen. Slutjämförelsen ligger i `proxy-v8`; det tidigare v7-proxyprovet
+tappade denna metadata och används inte som matchad tidsjämförelse.
+
+`trace_matrix.py` tar samma CLI-argument och lägger till förbättrande/behållna
+menyer och det ordinarie sökspåret. Det används för orsaksgranskning, inte
+för prestandatider i slutmatrisen. Exakta mätfilers SHA-256, Docker-kommandon
+och rapporter bevaras med körkvittenserna i `followups-v7` för sökspår och
+`proxy-v8` för den matchade proxyjämförelsen; proxyrapporten
+binder även sin egen scriptfil. Den spårhjälpare som levereras här har endast
+fått oanvända importer borttagna jämfört med den bevarade mätfilen.
+
+`verify_capacity_change.py` återskapar AST-beviset från Git-objekten för
+`c9390dd` och `b139cd4`. Kör från projektroten med båda commits tillgängliga;
+inga verkliga pris-/faktaunderlag behövs för denna kodkontroll.

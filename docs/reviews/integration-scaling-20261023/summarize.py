@@ -17,6 +17,12 @@ SOURCE_COMMITS = {
     "f211cf4a197f0a7cf78b05a1026ea9309e2395e7a71dd14c7894f10044183b37": "c9390ddb9fbc362548a4b93261168b4764e44c16",
     "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9": "b139cd4630c03bc4e01f4c5c0ba0e7ead7e50314",
 }
+LIBRARY_PINS = {
+    262: "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+    1000: "smako-complete-dinners-v1:889d0590f9201aaf8130d96b21a3c55000442bb2beccac85031344d6981bcd2f",
+    2000: "smako-complete-dinners-v1:b31887c8459d38177aa03a008b438e047facd71a35c65a7f61f62e355cfe1282",
+    5000: "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+}
 
 
 def read(path):
@@ -49,6 +55,7 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     summary = {"schema": "smako-integration-scaling-review-v2", "default_merge_generations": False,
+               "pinned_libraries": LIBRARY_PINS,
                "server_pairs": [], "grid_records": [], "grid_gates": {}, "missing": [],
                "reference262_comparisons": [], "resource_observations": {}}
     for city in CITIES:
@@ -80,6 +87,12 @@ def main():
                     if not report or not report.get("records"):
                         summary["missing"].append(key)
                         continue
+                    if report.get("library_version") != LIBRARY_PINS[size]:
+                        raise ValueError(f"Wrong nested library pin: {path}")
+                    if report.get("method_signature") not in SOURCE_COMMITS:
+                        raise ValueError(f"Unknown measurement source: {path}")
+                    if report.get("case") != case or report.get("label") != f"L{size}-{arm}":
+                        raise ValueError(f"Report label/case differs from its evidence path: {path}")
                     record = report["records"][-1]
                     cells[(city, size, case, arm)] = (record, report)
                     summary["grid_records"].append({"city": city, "size": size, "case": case, "arm": arm,
