@@ -200,6 +200,20 @@ fortfarande mätas. [Maskinunderlag](integration-scaling-20261023/memory-and-cac
 Detta använder det tidigare 5 000-biblioteket. Slutmatrisen kontrollerar
 samtliga profiler med de strikt nästlade biblioteken och samma minnestak.
 
+**Efterföljande utfall:** första slutmatrisen med samma kod och strikt
+nästlat 5 000-bibliotek klarade main (511,46 kr) och K16 (495,80 kr),
+men stoppades av en verifierad Docker-OOM under K32, efter totalt
+472,03 s. K16 nådde 3 148 443 648 byte peak RSS. Hela läget klarar alltså
+ännu inte minnestaket. Resultaten bevaras separat som `final-grid-v5-oom`;
+lokala fortsatta körningar stoppades för att undvika blandade metodversioner.
+Nästa ändring återanvänder registrets exakta frysta ingrediens-/designdelar
+även efter full modellvalidering i kvalificeringen. Kandidat `c9390dd`
+verifierar **1 310 kvalificerade receptvärden och ID:n identiska**, utan
+ändrade källrecept. 150 riktade biblioteks-/kvalificerings-/integrationsprov
+passerade, följt av sju ytterligare upprepade gränsprov efter att även
+hjälparens muterbara behållare gjorts privata. Ny full serverkontroll och
+CI krävs; tidigare prisresultat blandas inte med den nya metodsignaturen.
+
 Ett separat lokalt kallstartsexperiment vid Lund 5 000 använder två nya
 processer med samma kodsignatur `894ef9911b79afd26f9a2962045cade65027e1801b84a0624ef6e16ac642fd2b`,
 bibliotek och indata. Första processen: 500,75 s, 4 119 cacheträffar,
@@ -228,7 +242,8 @@ med ett delpaket vid respektive slutstorlek. Därmed fick samma recept olika
 paketproveniens mellan 1 000 och större bibliotek. Slutmatrisens publiceringar
 bevarar i stället varje tidigare fullständigt receptvärde, inklusive
 proveniens och innehållshash. Alla fyra bibliotek har byteidentisk metodkod
-med signatur `2b996b1133054cbebe202258c864b4776b61e2923a672cc4ee61447a51951f9b`.
+med aktuell kandidats signatur
+`f211cf4a197f0a7cf78b05a1026ea9309e2395e7a71dd14c7894f10044183b37`.
 Lund körs med en lokal process åt gången; Malmö seriellt på servern med
 två CPU och 3 GiB. Plattformar och mätprotokoll hålls uttryckliga i resultaten.
 

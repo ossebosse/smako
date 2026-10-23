@@ -10,9 +10,9 @@ det tidigare 5 000-biblioteket, inte en cell i slutmatrisen.
 | Underlag | Pinne/SHA-256 |
 | --- | --- |
 | Hämtad main och serverns ursprungliga screeningjämförelse | `2efb62f219b31fa6a81c16ba71363b4207cb2dfe` |
-| Slutmatrisens applikationskod | `652e7ace1359374ec8368e9373f2471c0b44cea6` |
-| Kanoniskt Git-arkiv, `candidate-memory-v5.zip` (`backend`, `grocery_data`) | `30808025a469cd5bcf783db9b3b5a0a7d062700376b7bb24fab612d459cfc74d` |
-| Metodsignatur, samma byte i Windows och Linux | `2b996b1133054cbebe202258c864b4776b61e2923a672cc4ee61447a51951f9b` |
+| Ny kandidat efter K32:s minnesfel | `c9390ddb9fbc362548a4b93261168b4764e44c16` |
+| Kanoniskt Git-arkiv, `candidate-memory-v6.zip` (`backend`, `grocery_data`) | `4049f3cf56002e3b49041afd01d0846b5561d03a3659fb05b33ea4041e1f4053` |
+| Ny metodsignatur, samma byte i Windows och Linux | `f211cf4a197f0a7cf78b05a1026ea9309e2395e7a71dd14c7894f10044183b37` |
 | Verkliga frysta serverexporter, `public-data.zip` | `a30a3e082ab90db43eef998dfd5b3f7c8a458262142478b73f6c6200a246c136` |
 | Nästlade testbibliotek, `nested-libraries.zip` | `e099132fca1c72a3b99d754d55723310ffdea0da68e0885a4bab108fda0764ac` |
 | Befintlig image, använd endast som isolerad beroendebas | `sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072` |
@@ -39,7 +39,8 @@ vid varje storlek. För slutmatrisen bevarades hela det importerade
 1 738–4 738 importerades i sex 500-paket till 5 000. Alla intervall är
 nollbaserade förslagspositioner med exkluderande slutposition.
 
-`libraries/nested-proof.json` och `nested-*-recipe-hashes.json` i det
+`libraries/nested-proof.json`, kodverifieringen `nested-proof-v6.json`
+och `nested-*-recipe-hashes.json` i det
 lokala underlaget verifierar antalet, metodsignaturen och SHA-256 för
 varje fullständigt receptvärde. Varje tidigare identitet måste finnas med
 exakt samma värde. `nested-archive.json` binder detta till det bevarade

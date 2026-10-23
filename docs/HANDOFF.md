@@ -28,8 +28,18 @@ slutförts inom 3 GiB: 511,46 kr, godkänd slutkontroll, 2,99 GB peak RSS.
 Två nya processer med samma kodsignatur och varm diskcache gav samma
 meny/hash; detta är ännu inte full väggtid inklusive processstart.
 
+**Senaste minnesutfall:** den första slutmatrisen med `652e7ac` klarade
+Malmö 5 000 main och K16 (511,46/495,80 kr), men K32 dödades av 3 GiB-taket.
+Den matrisen är stoppad och bevarad som `final-grid-v5-oom`. Lund-körningen
+stoppades kontrollerat för att undvika blandade metodversioner. En ytterligare
+ändring delar endast registrets exakta frysta ingrediens-/designdelar efter
+full modellvalidering och innehållskontroll. Riktade prov passerar; ny full
+minneskontroll återstår. Första standardmenyns godkända minne ovan innebär
+alltså inte att hela skalningsläget är godkänt.
+
 **Pågår:** slutmatris på strikt nästlade bibliotek 262/1 000/2 000/5 000,
-Lund en lokal process åt gången, Malmö seriellt i 2 CPU/3 GiB-containrar.
+Lund en lokal process åt gången, Malmö seriellt i 2 CPU/3 GiB-containrar
+när den nya minneskontrollen har passerat.
 Tidigare parallella lokala felkörningar och serverns äldre OOM räknas inte
 som slutresultat. Ingen defaultväxling eller main-integration är gjord för
 denna kandidat ännu. Se [rapport och mätunderlag](reviews/integration-scaling-20261023.md).
