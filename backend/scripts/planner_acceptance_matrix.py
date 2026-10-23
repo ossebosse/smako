@@ -320,9 +320,11 @@ def main():
         assert report["search_limits"] == FULL_LIBRARY_SEARCH_LIMITS, report["search_limits"]
         report["reference_contract"] = FULL_LIBRARY_REFERENCE_CONTRACT
     from app.services.meal_prepared_artifacts import STATS, method_signature
+    from app.services.recipe_library import library_version
 
     from backend.scripts.benchmark_beta_capacity import _process_snapshot
     report["method_signature"] = method_signature()
+    report["library_version"] = library_version()
     report["startup_preparation_seconds"] = 0.0
     if args.prepared_startup and not args.reference_preparation:
         from app.services.meal_prepared_artifacts import prepare_ingredient_search
