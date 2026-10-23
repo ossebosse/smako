@@ -39,6 +39,7 @@ from backend.scripts.planner_acceptance_matrix import (
     digest,
     full_library_search_limits,
     matrix_request,
+    previous_menu_records,
     quality,
 )
 
@@ -59,6 +60,8 @@ def main():
     parser.add_argument("--cases", nargs="+", choices=CASES, default=CASES)
     parser.add_argument("--arms", nargs="+", choices=("main", "geo16", "geo32", "geo48", "uncapped", "verified"))
     parser.add_argument("--owned-artifact-store", type=Path)
+    parser.add_argument("--previous-menus-root", type=Path)
+    parser.add_argument("--previous-menus-arm", choices=("main", "verified"))
     parser.add_argument("--preparation-cache-root", required=True, type=Path)
     parser.add_argument("--execution-environment", required=True)
     args = parser.parse_args()
@@ -75,7 +78,8 @@ def main():
         files[name] = raw
     prepared = PreparedPriceUniverseArtifact.model_validate_json(files.pop("combined-prices.json")).restore()
     raw = json.loads(files.pop("combined-facts.json"))
-    facts = FactsCollection({tuple(key): ProductFacts(**value) for key, value in raw["facts"]})
+    facts = FactsCollection({tuple(key): ProductFacts(**value) for key, value in raw["facts"]},
+                            source_manifests=raw.get("source_manifests", ()))
     assert facts.version == raw["facts_version"]
     base = json.loads(files["combined-request.json"])
     del files, raw
@@ -116,7 +120,7 @@ def main():
                 from app.services.plan_store import PlanStore
                 from app.services.planner_artifacts import OwnedPlannerArtifacts
 
-                artifacts = OwnedPlannerArtifacts(PlanStore(args.owned_artifact_store), digest(["matrix", inputs]))
+                artifacts = OwnedPlannerArtifacts(PlanStore(args.owned_artifact_store), digest(["matrix_owner", request.model_dump(mode="json")]))
             target = args.output / f"{label}-{case}.json"
             report = {"schema": "smako-planner-acceptance-v1", "case": case, "label": label,
                       "inputs": inputs, "method_signature": signature, "library_version": library,
@@ -125,13 +129,22 @@ def main():
                       "network": "blocked", "historical_replay": True,
                       "measurement_protocol": "one process per city/library; shared public preparation; new empty user per call",
                       "execution_environment": args.execution_environment, "platform": platform.platform()}
+            previous = ()
+            if args.previous_menus_root is not None:
+                old_name = (f"L{args.size}-{args.previous_menus_arm}-{case}.json"
+                            if args.previous_menus_arm else target.name)
+                old = args.previous_menus_root / old_name
+                previous = previous_menu_records(old, inputs, method=signature, library=library)
+                report["previous_menus_sha256"] = hashlib.sha256(old.read_bytes()).hexdigest()
             if arm == "uncapped":
                 report["reference_contract"] = FULL_LIBRARY_REFERENCE_CONTRACT
             if arm.startswith("geo"):
                 report["merged_search_contract"] = dict(MERGED_SEARCH_CONTRACT)
             if target.exists():
                 prior = json.loads(target.read_bytes())
-                if (all(prior.get(key) == report[key] for key in ("inputs", "method_signature", "library_version", "search_limits"))
+                if (all(prior.get(key) == report.get(key) for key in (
+                        "inputs", "method_signature", "library_version", "search_limits", "search_policy",
+                        "previous_menus_sha256"))
                         and len(prior.get("records", [])) == args.repeat):
                     print(json.dumps({"reuse": label, "case": case}), flush=True)
                     continue
@@ -142,7 +155,8 @@ def main():
                 print(json.dumps({"start": label, "case": case, "iteration": iteration}), flush=True)
                 started, cpu = time.perf_counter(), time.process_time()
                 with patch.object(socket.socket, "connect", side_effect=AssertionError("network forbidden")), activate_performance_trace() as trace:
-                    planner = PersonalPlanner(request, selected, prepared, state, facts=facts, now=clock, artifacts=artifacts)
+                    planner = PersonalPlanner(request, selected, prepared, state, facts=facts, now=clock,
+                                              artifacts=artifacts, previous_menus=previous)
                     try:
                         plan = planner.create()
                         elapsed = time.perf_counter() - started

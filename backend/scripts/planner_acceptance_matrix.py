@@ -64,6 +64,27 @@ def digest(value):
                                      separators=(",", ":")).encode()).hexdigest()
 
 
+def previous_menu_records(path, inputs, *, method, library):
+    report = json.loads(Path(path).read_bytes())
+    old = report["inputs"]
+    if (any(old.get(key) != inputs.get(key) for key in ("now", "request_sha256", "universe_id"))
+            or any(old["sha256"][key] != inputs["sha256"][key]
+                   for key in ("combined-prices.json", "combined-request.json"))
+            or report.get("method_signature") != method or report.get("library_version") != library):
+        raise ValueError("Previous-menu comparison must hold code, recipes, prices, request and clock identical")
+    records, seen = [], set()
+    for row in report["records"]:
+        if row["outcome"] != "PASS":
+            continue
+        if not row.get("audit_passed") or not isinstance(row.get("menu_slots"), list):
+            raise ValueError("Previous verified menu lacks exact recipe/slot evidence")
+        key = digest(row["menu_slots"])
+        if key not in seen:
+            records.append(row["menu_slots"])
+            seen.add(key)
+    return records[:8]
+
+
 # Search settings a full-library reference must state explicitly. A report
 # without every key (for example one written before seed_variant_shortlist
 # existed, which still kept four variants per base) is not a reference.
@@ -188,7 +209,11 @@ def quality(plan, request):
         "audit": audit,
         "allocations": [x.model_dump(mode="json") for x in plan.personal.allocations],
     })
+    from app.services.library_publications import slots_record
+
     return {"paid": plan.optimized_basket.total, "audit_passed": True,
+            "menu_slots": slots_record(plan.personal.slots),
+            "reaudited_previous_menu": plan.personal.checks.get("reaudited_previous_menu"),
             "unknown_quantities": 0, "recipes": [r.name for r in plan.recipes],
             "distinct_recipes": len({r.name for r in plan.recipes}),
             "week_distribution": plan.personal.checks.get("week_distribution"),
@@ -229,6 +254,7 @@ def main():
     p.add_argument("--search-policy", choices=("legacy", "smako-verified-reference-v1"), default="legacy")
     p.add_argument("--owned-artifact-store", type=Path,
                    help="Synthetic owner's existing PlanStore database for durable qualification/certificates")
+    p.add_argument("--previous-menus", type=Path, help="Re-audit old menus against new facts; all other inputs must match")
     p.add_argument("--matrix-case", choices=CASES, required=True)
     p.add_argument("--repeat", type=int, default=2)
     p.add_argument("--profile", action="store_true")
@@ -276,7 +302,8 @@ def main():
     started = time.perf_counter()
     prepared = PreparedPriceUniverseArtifact.model_validate_json(files["combined-prices.json"]).restore()
     raw = json.loads(files["combined-facts.json"])
-    facts = FactsCollection({tuple(k): ProductFacts(**v) for k, v in raw["facts"]})
+    facts = FactsCollection({tuple(k): ProductFacts(**v) for k, v in raw["facts"]},
+                            source_manifests=raw.get("source_manifests", ()))
     assert facts.version == raw["facts_version"]
     request = matrix_request(json.loads(files["combined-request.json"]), args.matrix_case)
     # The validated models own their data. Raw export bytes and the parsed
@@ -294,7 +321,7 @@ def main():
         from app.services.plan_store import PlanStore
         from app.services.planner_artifacts import OwnedPlannerArtifacts
 
-        artifacts = OwnedPlannerArtifacts(PlanStore(args.owned_artifact_store), digest(["matrix", inputs]))
+        artifacts = OwnedPlannerArtifacts(PlanStore(args.owned_artifact_store), digest(["matrix_owner", request.model_dump(mode="json")]))
     if args.substitution_limit is not None:
         settings = replace(settings, library_substitution_pool_limit=args.substitution_limit)
     if args.screen_margin is not None:
@@ -349,6 +376,10 @@ def main():
     from backend.scripts.benchmark_beta_capacity import _process_snapshot
     report["method_signature"] = method_signature()
     report["library_version"] = current_library_version
+    previous = (previous_menu_records(args.previous_menus, inputs, method=report["method_signature"],
+                                     library=current_library_version) if args.previous_menus else ())
+    if args.previous_menus:
+        report["previous_menus_sha256"] = hashlib.sha256(args.previous_menus.read_bytes()).hexdigest()
     report["startup_preparation_seconds"] = 0.0
     if args.prepared_startup and not args.reference_preparation:
         from app.services.meal_prepared_artifacts import prepare_ingredient_search
@@ -387,7 +418,8 @@ def main():
             if profiler:
                 profiler.enable()
             try:
-                planner = PersonalPlanner(request, settings, prepared, state, facts=facts, now=now, artifacts=artifacts)
+                planner = PersonalPlanner(request, settings, prepared, state, facts=facts, now=now,
+                                          artifacts=artifacts, previous_menus=previous)
                 plan = planner.create()
                 elapsed = time.perf_counter() - start
                 cpu_elapsed = time.process_time() - cpu
