@@ -23,6 +23,10 @@ def maintain_target(host, *, apply=False):
         "grocery_data.app.services.snapshot_retention": (ROOT / "grocery_data/app/services/snapshot_retention.py").read_text(encoding="utf8"),
         "deploy.scripts.municipal_backup": (ROOT / "deploy/scripts/municipal_backup.py").read_text(encoding="utf8"),
         "deploy.scripts.municipal_retention": (ROOT / "deploy/scripts/municipal_retention.py").read_text(encoding="utf8"),
+        # Older installed schedulers have no Axfood reader module. Bundle its
+        # validator too, so opting this existing retention path into the new
+        # archive does not require installing unrelated scheduler changes.
+        "grocery_data.app.services.axfood_detail_archive": (ROOT / "grocery_data/app/services/axfood_detail_archive.py").read_text(encoding="utf8"),
     }
     digest = hashlib.sha256(json.dumps(sources, sort_keys=True).encode()).hexdigest()
     code = (
