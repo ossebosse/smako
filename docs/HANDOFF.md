@@ -1,3 +1,18 @@
+# 2026-10-23: Arkitektur beslutad, implementation lämnas till Sol
+
+Ägaren har godkänt Axfood-berikningen. Implementeringsuppdraget finns i
+[CODEX-SOL-ARCHITECTURE-20261023.md](CODEX-SOL-ARCHITECTURE-20261023.md).
+Det beslutar verifierad referensmeny med separat förbättringssökning,
+versionsbunden kvalificering och Axfoods lagring/uppdateringspolicy.
+Principgodkännandet för berikningen ska inte efterfrågas igen; ett konkret
+driftpaket följer fortfarande det dokumenterade releaseförfarandet.
+
+Detta är en dokumentationsleverans. Ingen ny appimplementation, insamling,
+schemaändring eller aktivering är utförd. Tidigare mätresultat nedan är
+oförändrade; deras öppna arkitektur-/ägarfrågor ersätts av det nya beslutet.
+
+---
+
 # 2026-10-23: 238 skalningsprov slutförda – standardbyte underkänt, ej aktiverat
 
 Granskad appkod `b139cd4`, samlad i

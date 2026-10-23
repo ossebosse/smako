@@ -1,5 +1,12 @@
 # Uppgift till Codex: granska integrationen och fortsätt skalningen (2026-10-23)
 
+**Uppföljning:** granskningens resultat finns i
+[slutrapporten](reviews/integration-scaling-20261023.md). Ägaren har därefter
+godkänt Axfood-berikningen och beställt arkitektur med implementation hos Sol.
+Fortsätt enligt [det nya arkitekturbeslutet](CODEX-SOL-ARCHITECTURE-20261023.md),
+som ersätter öppna arkitektur-/ägarfrågor nedan. Denna ursprungliga
+uppgiftsbeskrivning behålls som historik.
+
 Utgå från aktuell `main`, läs `AGENTS.md`, `docs/HANDOFF.md`,
 `docs/DEVELOPMENT.md` och underlaget
 [`docs/reviews/recipe-scaling-20261023.md`](reviews/recipe-scaling-20261023.md)
