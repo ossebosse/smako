@@ -122,12 +122,14 @@ class PersonalPlanner:
         nutrition_search_limit=256,
         include_content_pack=True,
         library_generation=None,
+        artifacts=None,
     ):
         if not 1 <= nutrition_search_limit <= 65536:
             raise ValueError("Invalid diagnostic nutrition search limit")
         self.nutrition_search_limit = nutrition_search_limit
         self.include_content_pack = include_content_pack
         self.library_generation = library_generation
+        self.artifacts = artifacts
         self._supplement_qualified = False
         self._expanded_cohort_qualified = False
         self._library_search_handled = False
@@ -179,7 +181,9 @@ class PersonalPlanner:
         self.timings["product_facts"] += perf_counter() - facts_started
         from app.services.personal_source_facts import facts_version
 
-        self.facts_version = getattr(self.facts, "version", None) or facts_version(self.facts)
+        self.facts_version = (facts_version(self.facts)
+            if getattr(settings, "library_search_policy", "legacy") == "smako-verified-reference-v1"
+            else getattr(self.facts, "version", None) or facts_version(self.facts))
         self.reference_version = None
         if self.spec.allow_nutrition_estimates:
             from app.services.nutrition_reference import reference_data
@@ -2368,10 +2372,33 @@ class PersonalPlanner:
         evidence_limit = max(2048, len(self.variant_search_evidence) + len(candidates))
         from app.services.personal_policy import remaining_category_capacity
         capacity = remaining_category_capacity(meal, fixed_slots, classify=self._protein_category)
+        from app.services.planner_context import content_digest, planner_context
+        reuse = (self.complete and self.artifacts is not None
+                 and getattr(self.settings, "library_search_policy", "legacy") == "smako-verified-reference-v1")
+        view_key = (content_digest([planner_context(self), meal, fixed_slots]) if reuse else None)
+        stored = self.artifacts.load("qualification", view_key) if reuse else None
+        stored_rows = stored.get("rows", {}) if isinstance(stored, dict) else {}
+        if not isinstance(stored_rows, dict):
+            stored_rows = {}
+        qualified_rows = {}
+        qualification_hits = 0
         for recipe in candidates:
+            issued_key = content_digest(recipe) if reuse else None
+            cached = stored_rows.get(issued_key)
+            # The recipe registry supplies exact canonical, scaled values. A
+            # noncanonical input cannot bypass clean_recipe using a cache hit.
+            if (not isinstance(cached, dict) or cached.get("status") not in {"passed", "rejected"}
+                    or any(i.canonical_name != canonicalize_ingredient_name(i.name) for i in recipe.ingredients)):
+                cached = None
             self.product_trace.recipe(recipe)
             stage = "policy_taste"
             try:
+                if cached is not None and cached["status"] == "rejected":
+                    if (isinstance(cached.get("reason"), str) and isinstance(cached.get("code"), str)
+                            and isinstance(cached.get("stage"), str)):
+                        qualification_hits += 1
+                        raise PolicyConflict(cached["reason"], code=cached["code"], stage=cached["stage"])
+                    cached = None
                 if meal.distribution and capacity[self._protein_category(recipe)] <= 0:
                     raise PolicyConflict("Kategorin ryms inte i din valda måltidsfördelning.", stage="policy_taste")
                 profile = merged_profile(self.spec.profile, meal.profile)
@@ -2385,7 +2412,8 @@ class PersonalPlanner:
                 if self.spec.allow_nutrition_estimates and requested_nutrients(meal.limits):
                     calculation_basis(recipe, allow_estimates=True)
                 stage = "product_qualification"
-                recipe = self.clean_recipe(recipe, meal)
+                if cached is None:
+                    recipe = self.clean_recipe(recipe, meal)
                 # Sealed authored designs have their own ingredient, portion,
                 # method and timeline validation in clean_recipe. Their actual
                 # product nutrition is qualified by basket below. The legacy
@@ -2405,7 +2433,22 @@ class PersonalPlanner:
                         f"Befintlig strukturell måltidskontroll (inte ditt valda proteinmål): {asdict(quality.results[0])}",
                     )
                     continue
-                if meal.limits.active or self.complete:
+                if cached is not None:
+                    from app.services.stable_candidate_pool import VariantSearchEvidence
+                    try:
+                        evidence = cached.get("evidence")
+                        if recipe.design:
+                            evidence = VariantSearchEvidence(evidence["paid"],
+                                tuple((k, v) for k, v in evidence["nutrients"]),
+                                frozenset(tuple(k) for k in evidence["packages"]))
+                            remember_bounded(self.variant_search_evidence,
+                                (meal.meal_type, self._recipe_id(recipe)), evidence, evidence_limit)
+                        self.diagnostics.singleton_passed += 1
+                        qualification_hits += 1
+                    except (KeyError, TypeError, ValueError):
+                        cached = None
+                        recipe = self.clean_recipe(recipe, meal)
+                if cached is None and (meal.limits.active or self.complete):
                     # Qualify every meal type before menu branching. Previously
                     # only depth-one dinners were independently checked; failed
                     # breakfasts/snacks could remain hidden behind dinner search.
@@ -2436,16 +2479,31 @@ class PersonalPlanner:
                                 frozenset((i.store_id, i.product_id) for i in items)), evidence_limit)
                     self.diagnostics.singleton_passed += 1
                 valid.append(recipe)
+                if reuse:
+                    from dataclasses import asdict
+                    evidence = self.variant_search_evidence.get((meal.meal_type, self._recipe_id(recipe)))
+                    qualified_rows[issued_key] = {"status": "passed",
+                        "evidence": asdict(evidence) if evidence is not None else None}
                 if recipe.design and recipe.design.content_source:
                     self._supplement_qualified = True
                     from app.services.meal_library_content import identity
                     if self._prior_recipe_ids is not None and identity(recipe) not in self._prior_recipe_ids:
                         self._expanded_cohort_qualified = True
             except (PolicyConflict, ValueError) as exc:
+                if reuse:
+                    qualified_rows[issued_key] = {"status": "rejected", "reason": str(exc),
+                        "stage": getattr(exc, "stage", None) or stage,
+                        "code": getattr(exc, "code", "CONFLICT")}
                 self.product_trace.recipe(recipe, getattr(exc, "stage", None) or stage, str(exc))
                 self.diagnostics.reject(getattr(exc, "stage", None) or stage, recipe, str(exc))
                 if len(local_conflicts) < 10:
                     local_conflicts.append(exc)
+        if reuse:
+            # Only the completed meal view is atomically published. Retain
+            # unchanged earlier rows so append-only recipes qualify once.
+            self.artifacts.save("qualification", view_key,
+                {"rows": {**stored_rows, **qualified_rows}, "qualified": len(valid)})
+            self.diagnostics.pools[-1]["qualification_cache_hits"] = qualification_hits
         if not valid:
             if self.complete:
                 if not candidates:
@@ -2480,7 +2538,8 @@ class PersonalPlanner:
                     candidate = PersonalPlanner(comparison_request, self.settings, self.prepared, self.state,
                         plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
                         nutrition_search_limit=self.nutrition_search_limit,
-                        include_content_pack=self.include_content_pack, library_generation=self.library_generation).create(_compare_scopes=False)
+                        include_content_pack=self.include_content_pack, library_generation=self.library_generation,
+                        artifacts=self.artifacts).create(_compare_scopes=False)
                 except (ValueError, IncompleteBasketError):
                     continue
                 incumbents.append(candidate)
@@ -2517,7 +2576,7 @@ class PersonalPlanner:
                     plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
                     nutrition_search_limit=self.nutrition_search_limit,
                     include_content_pack=generation > 2,
-                    library_generation=generation-1 if generation > 2 else None).create()
+                    library_generation=generation-1 if generation > 2 else None, artifacts=self.artifacts).create()
             except (ValueError, IncompleteBasketError):
                 return
             incumbents.append(candidate)
@@ -2659,6 +2718,155 @@ class PersonalPlanner:
     def _week_purchase_key(self, basket):
         from app.services.week_refinement import surplus_key
         return (money(basket.total), surplus_key(basket) if self.spec.surplus_mode == "minimize" else ())
+
+    def _search_verified_reference(self, options, search_kwargs):
+        from app.services.library_publications import (
+            index_slots,
+            load_certificate,
+            publications,
+            save_certificate,
+        )
+        from app.services.library_search_cohorts import merged_library_cohorts
+        from app.services.meal_library_content import identity
+        from app.services.planner_context import planner_context
+        from app.services.recipe_library import current_recipe_generations, current_recipes
+        from app.services.reference_library import reference_cohorts, reference_manifest
+        from app.services.verified_menu_search import SearchBudget, verified_search
+
+        first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
+        current = current_recipes(self.library_generation)
+        reference = reference_cohorts(options, current, first_generation=first)
+        context = planner_context(self)
+        evaluate, accepts = search_kwargs["evaluate"], search_kwargs["accepts"]
+        reference_winner, predecessor, incumbent = None, None, None
+        slot_index = index_slots(options)
+        chain = publications(self.library_generation)
+        # Non-append-only content is explicitly experimental, with no invented
+        # predecessor certificate. Still retain any valid pinned reference.
+        nodes = chain or ({"generation": self._generation, "count": len(current)},)
+        reports, loaded, replayed, chain_complete = [], 0, 0, True
+
+        def audit(chosen):
+            self._defer_search_audit = False
+            try:
+                return evaluate(chosen, final=True)
+            finally:
+                self._defer_search_audit = True
+
+        for node in nodes:
+            cached = load_certificate(self.artifacts, context, node, options, predecessor, slot_index) if chain else None
+            if cached is not None:
+                winner_slots, reference_slots, certificate = cached
+                loaded += 1
+                predecessor = certificate["sha256"]
+                # Later misses must use this predecessor, not skip straight to
+                # the largest library's trajectory. Materialize only as needed.
+                incumbent = winner_slots, None
+                reference_winner = reference_slots, None
+                continue
+            if incumbent is not None and incumbent[1] is None:
+                incumbent = incumbent[0], evaluate(incumbent[0], final=False)
+            if reference_winner is not None and reference_winner[1] is None:
+                reference_winner = reference_winner[0], evaluate(reference_winner[0], final=False)
+            prefix = current_recipes(node["generation"])
+            allowed = {identity(r) for r in prefix}
+            prefix_options = [[s for s in group if not s.recipe or not s.recipe.design
+                               or identity(s.recipe) in allowed] for group in options]
+            improvements, completed, prefixes, probes = merged_library_cohorts(
+                prefix_options, prefix, current_recipe_generations(node["generation"]), first_generation=first)
+            # A cold context prepares ordered publications in this admitted
+            # plan job. Each node has fixed limits; a prepared hit replays none.
+            budget = SearchBudget(1024, 8192, seconds=120)
+
+            def search(track, emit, *, budget=budget, completed=completed, prefixes=prefixes,
+                       probes=probes, improvements=improvements, node=node):
+                nonlocal reference_winner
+                from time import monotonic
+
+                if track == "reference" and reference_winner is not None:
+                    emit(*reference_winner)
+                    return
+                kwargs = dict(search_kwargs)
+                # optimize_slots consumes initial_evaluations. Each independent
+                # track gets its OWN container, retaining exactly the same seed.
+                kwargs["initial_evaluations"] = OrderedDict(search_kwargs.get("initial_evaluations") or {})
+                for key in ("completed_prefix_indexes", "cohort_prefix_sizes", "checkpoint_probe_indexes",
+                            "unordered_small_pool_limit"):
+                    kwargs.pop(key, None)
+                if track == "improvement":
+                    budget.started = monotonic()
+                    kwargs.update(completed_prefix_indexes=completed, cohort_prefix_sizes=prefixes,
+                                  checkpoint_probe_indexes=probes)
+
+                    def bounded_accepts(chosen, *, final):
+                        budget.proposal()
+                        return accepts(chosen, final=final)
+
+                    def bounded_evaluate(chosen, *, final):
+                        budget.evaluation()
+                        result = evaluate(chosen, final=final)
+                        if final:
+                            emit(chosen, result)
+                        return result
+
+                    kwargs.update(accepts=bounded_accepts, evaluate=bounded_evaluate)
+                start = len(self.diagnostics.search)
+                try:
+                    chosen, result = self.service.menu_optimizer.optimize_library_slots(
+                        reference if track == "reference" else improvements, **kwargs)
+                    if track == "reference":
+                        reference_winner = chosen, result
+                    emit(chosen, result)
+                finally:
+                    for row in self.diagnostics.search[start:]:
+                        row["search_track"] = track
+                        row["publication_size"] = node["count"]
+
+            chosen, result, report = verified_search(search, audit=audit,
+                accepts=lambda chosen: accepts(chosen, final=True),
+                rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
+                                             search_kwargs["score"](chosen, result)), budget=budget,
+                previous=() if incumbent is None else (incumbent,))
+            incumbent = chosen, result
+            reports.append({**report, "publication_size": node["count"]})
+            chain_complete = chain_complete and report["budget_stop"] != "wall_time_safety_stop"
+            replayed += 1
+            if chain and reference_winner is not None:
+                certificate = save_certificate(self.artifacts, context, node, predecessor,
+                    chosen, reference_winner[0], result, replay_complete=chain_complete)
+                predecessor = certificate["sha256"]
+        chosen, result = incumbent
+        if result is None:
+            # The durable certificate is result evidence, never current basket
+            # approval. Reject an invalid cached winner and fall back to ref.
+            def cached_tracks(track, emit):
+                if track == "reference":
+                    emit(reference_winner[0], evaluate(reference_winner[0], final=False))
+
+            chosen, result, report = verified_search(cached_tracks, audit=audit,
+                accepts=lambda chosen: accepts(chosen, final=True),
+                rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
+                                             search_kwargs["score"](chosen, result)),
+                budget=SearchBudget(1024, 8192), previous=((chosen, evaluate(chosen, final=False)),))
+            certificate = save_certificate(self.artifacts, context, nodes[-1], cached[2]["predecessor"],
+                chosen, reference_winner[0], result) if chain else None
+            predecessor = certificate["sha256"] if certificate else None
+            reports.append(report)
+            self.diagnostics.search.append({"depth": len(chosen), "attempt": 1,
+                "library_phase": "certificate_reaudit", "search_track": "reference_and_previous",
+                "evaluations_executed": 0, "beam_pruned": 0})
+        result["checks"]["verified_reference"] = {
+            "policy": "smako-verified-reference-v1", "context": context,
+            "global_optimum_proven": False, "publications": reports,
+            "verified_candidates": reports[-1]["verified_candidates"],
+            "reference_manifest": reference_manifest()["sha256"],
+            "publication_chain": ("append_only_replayed_or_verified" if chain and chain_complete
+                                  else "incomplete_wall_time" if chain else "experiment_content_changed"),
+            "certificate": predecessor, "loaded_publications": loaded, "replayed_publications": replayed,
+            "improvement_limits": {"evaluations": 1024, "proposals": 8192,
+                                   "wall_time_safety_seconds": 120, "status": "pilot"},
+        }
+        return chosen, result
 
     def _retain_scope_incumbent(self, candidate, selected_scope, *, error=None):
         """Requalify the exact earlier checkout under the actual wider request."""
@@ -2803,6 +3011,7 @@ class PersonalPlanner:
                 cooked_weights=self.cooked_weights,
                 now=self.now,
                 include_content_pack=self.include_content_pack, library_generation=self.library_generation,
+                artifacts=self.artifacts,
             ).create()
         pools, options = {}, []
         # Transfer the exact first-slot qualifications to the existing bounded
@@ -3087,14 +3296,21 @@ class PersonalPlanner:
                         "constraints_rejected": 1, "evaluation_rejected": 0, **capacity,
                     })
                     raise IncompleteBasketError("Den kvalificerade receptpoolen räcker inte för variationskravet.")
-                chosen, result = search(search_input, **search_kwargs)
+                if (incremental_library
+                        and getattr(self.settings, "library_search_policy", "legacy") == "smako-verified-reference-v1"):
+                    chosen, result = self._search_verified_reference(options, search_kwargs)
+                else:
+                    chosen, result = search(search_input, **search_kwargs)
         finally:
             self._defer_search_audit = False
         self.timings["week_search"] += perf_counter() - search_started
         # Recheck every final constraint even if the cache supplied a beam result.
         report_stage("final_audit")
         try:
+            verified_reference = result.get("checks", {}).get("verified_reference")
             result = self.basket(chosen, final=True)
+            if verified_reference is not None:
+                result["checks"]["verified_reference"] = verified_reference
         except PolicyConflict as exc:
             if not str(exc).startswith(_AUDIT_FAILURE):
                 raise

@@ -211,6 +211,9 @@ def _planner_admission_key(request: PlanRequest, settings: Settings) -> str:
             "allow_unknown_sale_model": settings.allow_unknown_sale_model,
         },
     }
+    from app.services.planner_context import fact_source_contract, settings_contract
+    payload["planner_contract"] = settings_contract(settings)
+    payload["fact_sources"] = fact_source_contract()
     if request.recipe_preferences is not None:
         from app.services.recipe_library import library_version
         payload["recipe_library"] = library_version()
@@ -231,6 +234,7 @@ async def _run_admitted_plan(
     if request.personal is not None:
         from app.services.personal_planner import PersonalPlanner
         from app.services.personal_store import PersonalStore
+        from app.services.planner_artifacts import OwnedPlannerArtifacts
 
         owner = _plan_actor_hash(http_request, settings)
         state = PersonalStore(_store(http_request)).read(owner)
@@ -246,7 +250,8 @@ async def _run_admitted_plan(
             settings,
             state["revision"],
             lambda: _run_personal_thread(
-                lambda: PersonalPlanner(request, settings, prepared, state).create()
+                lambda: PersonalPlanner(request, settings, prepared, state,
+                    artifacts=OwnedPlannerArtifacts(_store(http_request), owner)).create()
             ),
         )
     controller = _planner_admission(http_request, settings)

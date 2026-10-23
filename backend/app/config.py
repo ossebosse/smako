@@ -113,6 +113,8 @@ class Settings:
     # work, but with the 160 cap it chose dearer menus (frozen Lund, 1,000
     # recipes: 541.02 against 474.43 kr), so per-pack search stays default.
     library_merge_generations: bool = False
+    # Experimental architecture has its own version contract and release gates.
+    library_search_policy: str = "legacy"
     # Skip a one-slot substitution whose single-recipe prediction exceeds the
     # incumbent week by more than this share (negative: off). Measured on
     # frozen data before choosing; the full-library reference turns it off.
@@ -150,6 +152,8 @@ class Settings:
     allow_unknown_sale_model: bool = False
 
     def __post_init__(self) -> None:
+        if self.library_search_policy not in {"legacy", "smako-verified-reference-v1"}:
+            raise ValueError("Unknown LIBRARY_SEARCH_POLICY")
         if self.app_env not in {"development", "test", "production"}:
             raise ValueError("APP_ENV must be development, test or production")
         for name, value in (
@@ -420,6 +424,7 @@ class Settings:
             library_substitution_pool_limit=max(0, int(os.getenv("LIBRARY_SUBSTITUTION_POOL_LIMIT", "160"))),
             library_seed_variant_shortlist=_as_bool(os.getenv("LIBRARY_SEED_VARIANT_SHORTLIST"), True),
             library_merge_generations=_as_bool(os.getenv("LIBRARY_MERGE_GENERATIONS"), False),
+            library_search_policy=os.getenv("LIBRARY_SEARCH_POLICY", "legacy"),
             library_substitution_screen_margin=float(os.getenv("LIBRARY_SUBSTITUTION_SCREEN_MARGIN", "0.10")),
             library_substitution_slot_limit=max(0, int(os.getenv("LIBRARY_SUBSTITUTION_SLOT_LIMIT", "0"))),
             price_universe_prewarm_postal_code=os.getenv(

@@ -18,6 +18,7 @@ from app.models import PlanRequest, PlanResponse, SavedPlan
 from app.services.member_accounts import SCHEMA as MEMBER_SCHEMA
 from app.services.personal_store import SCHEMA as PERSONAL_SCHEMA
 from app.services.personal_store import PersonalConflict, read_state, reserve_plan, write_state
+from app.services.planner_artifacts import SCHEMA as PLANNER_ARTIFACT_SCHEMA
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS consumer_plan_revisions (
@@ -82,6 +83,7 @@ class PlanStore:
             connection.executescript(_SCHEMA)
             connection.executescript(PERSONAL_SCHEMA)
             connection.executescript(MEMBER_SCHEMA)
+            connection.executescript(PLANNER_ARTIFACT_SCHEMA)
             existing = {
                 row["name"]
                 for row in connection.execute(
@@ -418,6 +420,9 @@ class PlanStore:
             )
             connection.execute(
                 "DELETE FROM personal_private_state WHERE owner_actor_hash = ?", (owner_actor_hash,)
+            )
+            connection.execute(
+                "DELETE FROM planner_owned_artifacts WHERE owner_actor_hash = ?", (owner_actor_hash,)
             )
         return result
 

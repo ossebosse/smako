@@ -178,13 +178,22 @@ def completed_search_outcome(diagnostics):
             "nutrition_searches_recorded": len(nutrition),
             "nutrition_searches_omitted": omitted,
             "nutrition_budget_exhausted_recorded": exhausted,
-            "week_search_method": ("exhaustive_week_combinations"
+            "week_search_method": ("verified_reference_and_bounded_improvement"
+                if any(row.get("search_track") for row in diagnostics.get("search", []))
+                else "bounded_search_with_exhaustive_prefixes"
+                if any(row.get("library_phase") == "exhaustive" for row in diagnostics.get("search", []))
+                and any(row.get("library_phase") != "exhaustive" for row in diagnostics.get("search", []))
+                else "exhaustive_week_combinations"
                 if any(row.get("library_phase") == "exhaustive" for row in diagnostics.get("search", []))
                 else "bounded_beam_then_library_substitutions"
                 if any(row.get("library_phase") in {"substitution", "refinement", "paired_refinement", "joint_refinement"}
                        for row in diagnostics.get("search", []))
                 else "bounded_beam"),
             "distinct_week_proposals_pruned": pruned,
+            "week_search_phases": [{k: row[k] for k in (
+                "search_track", "library_phase", "library_generation", "library_prefix_recipes",
+                "state_space", "evaluations_executed") if k in row}
+                for row in diagnostics.get("search", [])],
             "joint_refinement": [{key: row[key] for key in (
                 "proposal_limit", "evaluation_limit", "proposals", "evaluations_executed",
                 "constraints_rejected", "evaluation_rejected", "duplicate_proposals", "improvements")}

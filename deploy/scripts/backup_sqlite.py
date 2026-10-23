@@ -56,7 +56,7 @@ _GROCERY_STATE_TABLE_GROUPS: dict[str, tuple[str, ...]] = {
 }
 _PLAN_STATE_TABLE_GROUPS: dict[str, tuple[str, ...]] = {
     "saved_plan_revisions": ("consumer_plan_revisions",),
-    "private_personal_state": ("personal_private_state",),
+    "private_personal_state": ("personal_private_state", "planner_owned_artifacts"),
 }
 
 
