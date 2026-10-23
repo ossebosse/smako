@@ -14,7 +14,9 @@ own document may use the Willys document for the identical article code
 from __future__ import annotations
 
 import hashlib
+import math
 import os
+import re
 from dataclasses import replace
 from functools import lru_cache
 from pathlib import Path
@@ -30,6 +32,29 @@ from grocery_data.app.services.axfood_detail_archive import (
 
 AXFOOD_CHAINS = ("willys", "hemkop")
 _DETAIL_FIELDS = ("ingredients", "nutrition_basis", "nutrition_unit", "nutrition_limits")
+
+
+def _nutrition_basis_identity(fact):
+    """Recognize the two existing projectors' per-100-unit representations.
+
+    ProductFacts values are normalized per 100 g/ml. The human-readable source
+    label is provenance, not a different nutrient denominator. Unknown formats
+    remain literal; units, preparation and every overlapping value still agree
+    exactly before declarations can supplement each other.
+    """
+    basis = fact.nutrition_basis
+    if not isinstance(basis, str) or fact.nutrition_unit not in {"g", "ml"}:
+        return basis
+    unit = fact.nutrition_unit
+    label = " ".join(basis.casefold().split())
+    official = (fact.nutrition_preparation == "as_sold"
+                and label == f"officiell produktdeklaration per 100 {unit} som såld")
+    projected = re.fullmatch(
+        rf"produktdeklaration per ([0-9]+(?:\.[0-9]+)?(?:e[+-]?[0-9]+)?) {unit}; omräknad till 100 {unit}",
+        label)
+    if official or (projected and math.isfinite(float(projected[1])) and float(projected[1]) > 0):
+        return "normalized_per_100", unit, fact.nutrition_preparation
+    return basis
 
 
 def configured_root():
@@ -138,7 +163,7 @@ def merge_axfood_details(products, facts, root=None):
             conflicts.append("animal")
         if fact.nutrition and detail.nutrition:
             compatible = (fact.nutrition_unit == detail.nutrition_unit
-                          and fact.nutrition_basis == detail.nutrition_basis
+                          and _nutrition_basis_identity(fact) == _nutrition_basis_identity(detail)
                           and fact.nutrition_preparation == detail.nutrition_preparation)
             if not compatible:
                 conflicts.append("nutrition_basis")

@@ -81,6 +81,44 @@ def catalogue_fact():
                         retailer_product_id="101548687_ST", organic=False)
 
 
+def test_equal_lentil_declarations_do_not_conflict_on_projector_wording(tmp_path):
+    # The frozen 2026-10-23 comparison found these equal values blocked solely
+    # by the official/Axfood projector labels. This is an identity/unit fixture,
+    # not a reproduction of the unrelated historical 361.81/340.64 menu case.
+    raw = detail(code="100046442_ST", ean="7312787710182", kcal="349", kj="1460",
+                 ingredients="Röda linser.")
+    for row, value in zip(raw["nutrientHeaders"][0]["nutrientDetails"][2:], ("1.8", "51", "26"), strict=True):
+        row["quantityContained"] = value
+    store(tmp_path, "willys", raw)
+    original = ProductFacts(source="official", source_product_id="p1", source_snapshot_id="snap",
+        retailer_product_id=raw["code"], nutrition_unit="g",
+        nutrition_basis="Officiell produktdeklaration per 100 g som såld",
+        nutrition={"kcal": 349.0, "fat_g": 1.8, "carbs_g": 51.0, "protein_g": 26.0})
+    facts = {("s1", "p1"): original}
+    merge_axfood_details([_Product("willys", raw["ean"])], facts, tmp_path)
+    assert facts[("s1", "p1")].conflicts == ()
+    assert facts[("s1", "p1")].nutrition == original.nutrition
+    assert facts[("s1", "p1")].nutrition_basis == original.nutrition_basis
+
+
+@pytest.mark.parametrize("change, conflict", [
+    ({"nutrition_basis": "Per portion med 100 g produkt"}, "nutrition_basis"),
+    ({"nutrition_unit": "ml"}, "nutrition_basis"),
+    ({"nutrition_preparation": "cooked_drained"}, "nutrition_basis"),
+    ({"nutrition": {"protein_g": 13.0}}, "nutrition.protein_g"),
+])
+def test_basis_wording_normalization_keeps_real_conflicts(tmp_path, change, conflict):
+    from dataclasses import replace
+
+    raw = detail()
+    store(tmp_path, "willys", raw)
+    original = replace(catalogue_fact(), nutrition=project(raw).nutrition, nutrition_unit="g",
+                       nutrition_basis="Officiell produktdeklaration per 100 g som såld")
+    facts = {("s1", "p1"): replace(original, **change)}
+    merge_axfood_details([_Product("willys")], facts, tmp_path)
+    assert conflict in facts[("s1", "p1")].conflicts
+
+
 def test_merge_binds_by_exact_code_and_keeps_catalogue_evidence(tmp_path):
     store(tmp_path, "willys", detail())
     facts = {("s1", "p1"): catalogue_fact()}
