@@ -3042,6 +3042,9 @@ class PersonalPlanner:
             if slot_limit:
                 library_kwargs["substitution_order"] = self._predicted_substitution
                 library_kwargs["substitution_slot_limit"] = slot_limit
+            if (getattr(self.settings, "library_merge_generations", False)
+                    and generating and not self.items and not self.spec.product_locks):
+                library_kwargs["unordered_small_pool_limit"] = 4096
             self._library_search_handled = True
         search_kwargs = dict(
                 **library_kwargs,

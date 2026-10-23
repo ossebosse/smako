@@ -178,7 +178,9 @@ def completed_search_outcome(diagnostics):
             "nutrition_searches_recorded": len(nutrition),
             "nutrition_searches_omitted": omitted,
             "nutrition_budget_exhausted_recorded": exhausted,
-            "week_search_method": ("bounded_beam_then_library_substitutions"
+            "week_search_method": ("exhaustive_week_combinations"
+                if any(row.get("library_phase") == "exhaustive" for row in diagnostics.get("search", []))
+                else "bounded_beam_then_library_substitutions"
                 if any(row.get("library_phase") in {"substitution", "refinement", "paired_refinement", "joint_refinement"}
                        for row in diagnostics.get("search", []))
                 else "bounded_beam"),

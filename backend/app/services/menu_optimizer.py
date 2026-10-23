@@ -12,7 +12,7 @@ from collections import Counter, OrderedDict
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
 from decimal import Decimal
-from itertools import combinations
+from itertools import combinations, combinations_with_replacement, product
 from math import comb
 from time import perf_counter
 
@@ -886,7 +886,8 @@ class MenuOptimizer:
                                refinement_selector=None, substitution_selector=None, substitution_screen=None,
                                substitution_order=None, substitution_slot_limit=0,
                                search_trace=None, decision_observer=None, seed_selector=None,
-                               refinement_score=None, joint_proposals=None, **search_options):
+                               refinement_score=None, joint_proposals=None, unordered_small_pool_limit=0,
+                               **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
 
         Cohorts are cumulative, current-only slot options in publication order.
@@ -928,6 +929,60 @@ class MenuOptimizer:
                 cache.popitem(last=False)
             cache[key] = result
             return remember_final(slots, result, final)
+
+        # The caller opts in only for generated, interchangeable slots without
+        # pantry allocations or locks. Enumerate complete menus in a small
+        # pool: a beam or one/two-slot moves can miss a cheaper three-way move.
+        # The bound is checked before pricing anything; larger pools continue
+        # through the existing bounded neighbourhood search.
+        if unordered_small_pool_limit and cohorts:
+            generation, full_options = cohorts[-1]
+            groups = {}
+            for index, group in enumerate(full_options):
+                signature = (tuple((s.meal_type, keys.key(s.recipe) if s.recipe else None)
+                                   for s in group))
+                groups.setdefault(signature, []).append(index)
+            state_count = 1
+            for indexes in groups.values():
+                n, k = len(full_options[indexes[0]]), len(indexes)
+                state_count *= comb(n + k - 1, k) if n else 0
+            if 0 < state_count <= unordered_small_pool_limit:
+                row = {"depth": len(full_options), "attempt": 1, "beam_width": 0,
+                       "library_generation": generation, "library_phase": "exhaustive",
+                       "state_space": state_count, "proposals": 0, "constraints_rejected": 0,
+                       "evaluation_rejected": 0, "priced": 0, "retained": 0, "beam_pruned": 0,
+                       "evaluations_executed": 0, "evaluation_cache_hits": 0}
+                trace.append(row)
+                assignments = [list(combinations_with_replacement(
+                    range(len(full_options[indexes[0]])), len(indexes))) for indexes in groups.values()]
+                best = None
+                rank = refinement_score or retention_score
+                for selections in product(*assignments):
+                    chosen = [None] * len(full_options)
+                    for indexes, selection in zip(groups.values(), selections, strict=True):
+                        for index, position in zip(indexes, selection, strict=True):
+                            chosen[index] = full_options[index][position]
+                    row["proposals"] += 1
+                    if not accepts(chosen, final=True):
+                        row["constraints_rejected"] += 1
+                        continue
+                    row["evaluations_executed"] += 1
+                    try:
+                        result = cached_evaluate(chosen, final=True)
+                    except (IncompleteBasketError, ValueError):
+                        row["evaluation_rejected"] += 1
+                        continue
+                    row["priced"] += 1
+                    if decision_observer:
+                        decision_observer(chosen, "priced", result=result, depth=len(full_options))
+                    if best is None or rank(chosen, result) < rank(*best):
+                        best = chosen, result
+                if best is None:
+                    raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")
+                row["retained"] = 1
+                if decision_observer:
+                    decision_observer(best[0], "retained", result=best[1], depth=len(full_options))
+                return best
 
         def improve(incumbent, additions, generation, phase, finalists=None, extra=None, screen=None,
                     order=None, slot_limit=0):
