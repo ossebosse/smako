@@ -133,6 +133,32 @@ def _profile_dimensions(profile: RecipeProfile) -> tuple[str, ...]:
     )
 
 
+_DEFAULT_PROFILE_BUILDER: list = []
+_DEFAULT_PROFILES: dict = {}
+
+
+def _default_profile(recipe):
+    """The default builder's profile, memoized per recipe object.
+
+    Every shortlist used to build a new default builder and re-profile the
+    whole pool (thousands of recipes per call). A hit needs the same object
+    and an equal fresh snapshot of its lists, as recipe_id.
+    """
+    from app.services.recipe_computation_cache import recipe_value
+
+    snapshot = recipe_value(recipe)
+    cached = _DEFAULT_PROFILES.get(id(recipe))
+    if cached is not None and cached[0] is recipe and cached[1] == snapshot:
+        return cached[2]
+    if not _DEFAULT_PROFILE_BUILDER:
+        _DEFAULT_PROFILE_BUILDER.append(RecipeProfileBuilder())
+    profile = _DEFAULT_PROFILE_BUILDER[0].build(recipe)
+    if len(_DEFAULT_PROFILES) >= 65536:
+        _DEFAULT_PROFILES.clear()
+    _DEFAULT_PROFILES[id(recipe)] = (recipe, snapshot, profile)
+    return profile
+
+
 def stratified_candidate_shortlist(
     economically_ranked: Sequence[Recipe],
     *,
@@ -185,9 +211,9 @@ def stratified_candidate_shortlist(
     if not stratify_additions:
         selected_additions = additions[:slots]
     else:
-        builder = profile_builder or RecipeProfileBuilder()
+        build = profile_builder.build if profile_builder is not None else _default_profile
         dimensions_by_id = {
-            identities[id(recipe)]: (_profile_dimensions(builder.build(recipe))
+            identities[id(recipe)]: (_profile_dimensions(build(recipe))
                                     + (extra_dimensions or {}).get(identities[id(recipe)], ()))
             for recipe in unique
         }

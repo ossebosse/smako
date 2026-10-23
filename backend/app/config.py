@@ -108,6 +108,18 @@ class Settings:
     library_refinement_pool_limit: int = 90
     library_substitution_pool_limit: int = 160
     library_seed_variant_shortlist: bool = True
+    # Opt-in: search every recipe newer than the seed library as ONE capped
+    # substitution cohort instead of one cohort per published pack. Bounded
+    # work, but with the 160 cap it chose dearer menus (frozen Lund, 1,000
+    # recipes: 541.02 against 474.43 kr), so per-pack search stays default.
+    library_merge_generations: bool = False
+    # Skip a one-slot substitution whose single-recipe prediction exceeds the
+    # incumbent week by more than this share (negative: off). Measured on
+    # frozen data before choosing; the full-library reference turns it off.
+    library_substitution_screen_margin: float = 0.10
+    # Price at most this many one-slot substitutions per slot and sweep, in
+    # predicted order (0: off, the previous unordered sweep).
+    library_substitution_slot_limit: int = 0
     price_universe_prewarm_postal_code: str = "22350"
     price_universe_prewarm_modes: tuple[str, ...] = (
         "cheapest",
@@ -407,6 +419,9 @@ class Settings:
             library_refinement_pool_limit=max(0, int(os.getenv("LIBRARY_REFINEMENT_POOL_LIMIT", "90"))),
             library_substitution_pool_limit=max(0, int(os.getenv("LIBRARY_SUBSTITUTION_POOL_LIMIT", "160"))),
             library_seed_variant_shortlist=_as_bool(os.getenv("LIBRARY_SEED_VARIANT_SHORTLIST"), True),
+            library_merge_generations=_as_bool(os.getenv("LIBRARY_MERGE_GENERATIONS"), False),
+            library_substitution_screen_margin=float(os.getenv("LIBRARY_SUBSTITUTION_SCREEN_MARGIN", "0.10")),
+            library_substitution_slot_limit=max(0, int(os.getenv("LIBRARY_SUBSTITUTION_SLOT_LIMIT", "0"))),
             price_universe_prewarm_postal_code=os.getenv(
                 "PRICE_UNIVERSE_PREWARM_POSTAL_CODE",
                 "22350",

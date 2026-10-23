@@ -157,9 +157,93 @@ def _coop_energy_evidence(raw, *, basis_quantity, basis_unit):
     }
 
 
+_AXFOOD_NUTRIENTS = {
+    ("energi", "kilokalori"): "kcal",
+    ("protein", "gram"): "protein_g",
+    ("kolhydrat", "gram"): "carbs_g",
+    ("fett", "gram"): "fat_g",
+}
+# GS1 precision on Axfood declarations. "CA" (approximately) is the ordinary
+# declared average value, as on the package (owner decision 2026-10-22); a
+# threshold such as "less than" is never an exact amount.
+_AXFOOD_DECLARED_PRECISION = {None, "", "CA", "APPROXIMATELY", "EXACT"}
+
+
+def _axfood_nutrition(raw):
+    """Per-100 g/ml values from one unprepared Axfood nutrient header."""
+    headers = raw.get("nutrientHeaders")
+    conflicts, limits, nutrition = [], [], {}
+    headers = [h for h in headers if isinstance(h, dict)] if isinstance(headers, list) else []
+    # Packages often add a per-serving declaration beside the per-100 g/ml
+    # one. Use the single by-measure header on a 100 basis, else the single
+    # by-measure header; anything else is ambiguous.
+    measured = [h for h in headers if h.get("nutrientBasisQuantityTypeCode") == "BY_MEASURE"]
+    per_hundred = [h for h in measured if str(h.get("nutrientBasisQuantity")).strip() in {"100", "100.0"}]
+    chosen = per_hundred if len(per_hundred) == 1 else measured if len(measured) == 1 and not per_hundred else []
+    if len(chosen) != 1:
+        return None, None, None, ["nutrition_basis"], limits, nutrition
+    header = chosen[0]
+    unit = {"gram": "g", "milliliter": "ml", "millilitre": "ml"}.get(
+        str(header.get("nutrientBasisQuantityMeasurementUnitCode") or "").casefold())
+    try:
+        amount = float(str(header.get("nutrientBasisQuantity")).replace(",", "."))
+    except (TypeError, ValueError):
+        amount = math.nan
+    if (unit is None or header.get("nutrientBasisQuantityTypeCode") != "BY_MEASURE"
+            or header.get("preparationStateCode") not in (None, "", "UNPREPARED")
+            or not math.isfinite(amount) or amount <= 0):
+        return None, None, None, ["nutrition_basis"], limits, nutrition
+    values, energy_kj = defaultdict(list), []
+    for row in header.get("nutrientDetails") or ():
+        if not isinstance(row, dict):
+            continue
+        kind = (str(row.get("nutrientTypeCode") or "").casefold(),
+                str(row.get("measurementUnitCode") or "").casefold())
+        key = _AXFOOD_NUTRIENTS.get(kind)
+        if key is None and kind != ("energi", "kilojoule"):
+            continue
+        try:
+            value = float(str(row.get("quantityContained")).replace(",", "."))
+        except (TypeError, ValueError):
+            conflicts.append(f"nutrition.{key or 'energy'}")
+            continue
+        precision = row.get("measurementPrecisionCode")
+        if precision not in _AXFOOD_DECLARED_PRECISION:
+            if key:
+                limits.append({"field": key, "amount": [row.get("quantityContained")], "accuracy": precision,
+                               "basis_quantity": amount, "basis_unit": unit})
+            continue
+        if not math.isfinite(value) or value < 0:
+            conflicts.append(f"nutrition.{key or 'energy'}")
+        elif key:
+            values[key].append(value * 100 / amount)
+        else:
+            energy_kj.append(value * 100 / amount)
+    nutrition = {k: rows[0] for k, rows in values.items() if len(rows) == 1 and f"nutrition.{k}" not in conflicts}
+    conflicts.extend(f"nutrition.{k}" for k, rows in values.items() if len(rows) != 1)
+    # Both energy units are declared; they must agree within the same
+    # integrity screen as Coop: max(8 kJ, 8 % of the larger energy) on the
+    # declared basis (1 kcal = 4.184 kJ).
+    declared_kj = energy_kj[0] * amount / 100 if len(energy_kj) == 1 else None
+    declared_kcal_kj = nutrition["kcal"] * amount / 100 * 4.184 if "kcal" in nutrition else None
+    if declared_kj is not None and declared_kcal_kj is not None and abs(declared_kj - declared_kcal_kj) > max(
+            8.0, 0.08 * max(declared_kj, declared_kcal_kj)):
+        nutrition.pop("kcal")
+        conflicts.extend(("nutrition.kcal", "nutrition.energy"))
+    basis = f"Produktdeklaration per {amount:g} {unit}; omräknad till 100 {unit}"
+    return unit, basis, amount, conflicts, limits, nutrition
+
+
 def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, observed_at=None):
     """Known explicit retailer fields only; no name/brand/image inference."""
-    ingredients = raw.get("listOfIngredients") if chain == "coop" else None
+    if chain == "coop":
+        ingredients = raw.get("listOfIngredients")
+    elif chain in {"hemkop", "willys"}:
+        # Product-detail documents (/axfood/rest/p/{code}); catalogue rows
+        # carry no ingredient field.
+        ingredients = raw.get("ingredients")
+    else:
+        ingredients = None
     organic = None
     if chain == "coop":
         tags = {t.get("code") for t in raw.get("accreditedTags", []) if isinstance(t, dict)}
@@ -238,6 +322,10 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
                 basis = f"Produktdeklaration per {amount:g} {unit}; omräknad till 100 {unit}"
         elif declarations:
             conflicts.append("nutrition_basis")
+    elif chain in {"hemkop", "willys"} and raw.get("nutrientHeaders"):
+        unit, basis, energy_quantity, axfood_conflicts, axfood_limits, nutrition = _axfood_nutrition(raw)
+        conflicts.extend(axfood_conflicts)
+        limits.extend(axfood_limits)
     if chain == "coop" and raw.get("nutrientInformation") and basis is None:
         conflicts.append("nutrition_basis")
     if chain == "coop":
@@ -886,6 +974,12 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
         return fact
 
     catalog = _load_retained_catalog_facts(prepared, database=database, raw_root=raw_root)
+    from app.services.axfood_product_details import configured_root, merge_axfood_details
+    if configured_root() is not None:
+        # Copy: the retained catalogue facts are a shared, hash-verified cache.
+        catalog = FactsCollection(dict(catalog))
+        merge_axfood_details(prepared.universe.products, catalog)
+        catalog.version = facts_version(catalog)
     if any(eligible(p) for p in prepared.universe.products):
         from sqlalchemy.engine import make_url
 

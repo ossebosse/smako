@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+from functools import lru_cache
 from pathlib import Path
 
 from app.models.recipe import Recipe, RecipeIngredient, RecipePreparation
@@ -76,22 +77,30 @@ def manifest_entries(root=ROOT):
     return manifest
 
 
+@lru_cache(maxsize=1024)
+def _entry_recipes(root, file, sha256):
+    """Validated recipes of one content-addressed pack (immutable for its hash)."""
+    path = checked_path(Path(root), file)
+    raw = path.read_bytes()
+    if len(raw) > MAX_BYTES or digest(raw) != sha256:
+        raise ValueError(f"{file}: kontrollsumman avviker")
+    pack = json.loads(raw, object_pairs_hook=_unique_pairs)
+    if len(pack["recipes"]) > MAX_RECIPES:
+        raise ValueError("Paketet har för många recept")
+    return tuple(Recipe.model_validate(row) for row in pack["recipes"])
+
+
 def load_entries(entries, root=ROOT):
+    # Every planning request reads the whole library (generations and current
+    # versions). A pack is verified and parsed once per exact file and hash;
+    # the frozen recipes are shared, as the registered library already is.
     recipes = {}
     for entry in entries:
         if set(entry) != {"file", "sha256"}:
             raise ValueError("Felaktig manifestpost")
-        path = checked_path(root, entry["file"])
-        raw = path.read_bytes()
-        if len(raw) > MAX_BYTES or digest(raw) != entry["sha256"]:
-            raise ValueError(f"{entry['file']}: kontrollsumman avviker")
-        pack = json.loads(raw, object_pairs_hook=_unique_pairs)
-        if len(pack["recipes"]) > MAX_RECIPES:
-            raise ValueError("Paketet har för många recept")
-        for row in pack["recipes"]:
-            recipe = Recipe.model_validate(row)
+        for recipe in _entry_recipes(str(Path(root).resolve()), entry["file"], entry["sha256"]):
             key = identity(recipe)
-            if key in recipes and recipes[key].model_dump() != recipe.model_dump():
+            if key in recipes and recipes[key] is not recipe and recipes[key].model_dump() != recipe.model_dump():
                 raise ValueError(f"{entry['file']}: motstridigt innehåll för {key}")
             recipes[key] = recipe
     return tuple(recipes.values())

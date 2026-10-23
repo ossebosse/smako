@@ -81,9 +81,6 @@ def additional_whole_identity(canonical, form, label, composition):
     culinary label alone never supplies a missing declaration or mass basis.
     """
     patterns = {
-        # Only a whole shell-egg identity. Edible mass, declared nutrients and
-        # cooking are separately qualified by the existing quantity pathway.
-        "ägg": ("raw_edible", r"(?:ägg|skåneägg|bruna ägg)(?: ekologiska| eko| frigående| inomhus| utomhus| stora| små| [sml]| [sml]-[sml]| \d+-pack| \d+ pack)*"),
         "svartpeppar": ("dry", r"(?:malen )?svartpeppar(?: malen| finmalen| burk)*"),
         # Swedish shelves label the same single spice "Rökt Paprika",
         # "Paprika Rökt" or "Paprika Smoked"; the composition check below
@@ -100,7 +97,4 @@ def additional_whole_identity(canonical, form, label, composition):
     entry = patterns.get(canonical)
     if entry is None or form != entry[0] or not re.fullmatch(entry[1], label):
         return False
-    if canonical == "ägg":
-        words = set(re.findall(r"[^\W\d_]+", composition))
-        return bool(words and words <= {"ingredienser", "krav", "ekologiska", "ägg"})
     return not (canonical in {"svartpeppar", "rökt paprikapulver", "malen koriander", "chiliflakes"} and re.search(r"\b(?:salt|socker|lök|vitlök|senap|selleri|olja)\b", composition.split("kan innehålla")[0]))

@@ -56,7 +56,9 @@ class ProductPlanningTrace:
     def identity(self, recipe):
         key = id(recipe)
         if key not in self._recipe_ids:
-            if len(self._recipe_ids) >= 512:
+            # Bounded, but above a large library: clearing at 512 re-hashed
+            # thousands of recipes over and over.
+            if len(self._recipe_ids) >= 65536:
                 self._recipe_ids.clear()
             self._recipe_ids[key] = (recipe, recipe_identity(recipe))
         return self._recipe_ids[key][1]

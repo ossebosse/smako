@@ -51,7 +51,9 @@ class ExactRecipeKey:
 class RecipeComputationCache:
     """Owned by one planner; never cache prices, nutrition or user decisions."""
 
-    def __init__(self, *, limit=1024):
+    # Large libraries keep thousands of qualified recipes in one request; a
+    # bound below the pool size evicted and recomputed every profile.
+    def __init__(self, *, limit=16384):
         if limit < 1:
             raise ValueError("Recipe computation cache limit must be positive")
         self.limit = limit

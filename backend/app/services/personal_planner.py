@@ -2587,6 +2587,36 @@ class PersonalPlanner:
             text += " Lägg till minst en butik med fullt sortiment, till exempel " + ", ".join(complete[:3]) + "."
         return text
 
+    def _predicted_substitution(self, chosen, incumbent, index):
+        """Sort key: predicted week total of a one-slot substitution (unknown last)."""
+        predicted = self._substitution_prediction(chosen, incumbent, index)
+        return (predicted is None, predicted if predicted is not None else Decimal(0))
+
+    def _substitution_prediction(self, chosen, incumbent, index):
+        old, new = incumbent[0][index], chosen[index]
+        if not old.recipe or not new.recipe:
+            return None
+        old_evidence = self.variant_search_evidence.get((old.meal_type, self._recipe_id(old.recipe)))
+        new_evidence = self.variant_search_evidence.get((new.meal_type, self._recipe_id(new.recipe)))
+        if old_evidence is None or new_evidence is None:
+            return None
+        total = Decimal(str(incumbent[1]["basket"].total))
+        return total - Decimal(str(old_evidence.paid)) + Decimal(str(new_evidence.paid))
+
+    def _screen_substitution(self, chosen, incumbent, index, margin):
+        """Keep a one-slot substitution unless its predicted week is far dearer.
+
+        Prediction: incumbent total - qualified single-recipe purchase of the
+        replaced recipe + that of the new one. Shared packages make the real
+        week cheaper or dearer; ``margin`` is the measured tolerance. Unknown
+        evidence keeps the proposal. Heuristic, like the pool caps.
+        """
+        predicted = self._substitution_prediction(chosen, incumbent, index)
+        if predicted is None:
+            return True
+        total = Decimal(str(incumbent[1]["basket"].total))
+        return predicted <= total * (1 + Decimal(str(margin)))
+
     def _select_library_options(self, groups, *, limit, shortlist_variants):
         """Per meal type: optional variant shortlist (four per base), then the cap.
 
@@ -2957,11 +2987,27 @@ class PersonalPlanner:
             from app.services.recipe_library import current_recipe_generations
             generations = current_recipe_generations(self.library_generation)
             first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
+            cohorts = range(first, self._generation + 1)
+            if getattr(self.settings, "library_merge_generations", False) and len(cohorts) > 2:
+                # Geometric cohorts: the seed library, then the first pack
+                # that at least doubles the qualified options, and so on, and
+                # always the whole library last. The incumbent of a smaller
+                # cohort carries over and a later sweep can only improve it,
+                # so growth cannot lose a menu the smaller library would find,
+                # while the number of sweeps grows with log(size), not packs.
+                counts = Counter(min(generations.get(identity(s.recipe), self._generation), self._generation)
+                                 for group in options for s in group if s.recipe and s.recipe.design)
+                chosen, total = [first], sum(n for g, n in counts.items() if g <= first)
+                for generation in range(first + 1, self._generation):
+                    total += counts.get(generation, 0)
+                    if total >= 2 * sum(n for g, n in counts.items() if g <= chosen[-1]):
+                        chosen.append(generation)
+                cohorts = (*chosen, self._generation)
             search_input = [(generation, [
                 [s for s in group if not s.recipe or not s.recipe.design
                  or generations.get(identity(s.recipe), self._generation) <= generation]
                 for group in options
-            ]) for generation in range(first, self._generation + 1)]
+            ]) for generation in cohorts]
             search = self.service.menu_optimizer.optimize_library_slots
             library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
             from app.services.week_refinement import qualified_joint_proposals
@@ -2988,6 +3034,14 @@ class PersonalPlanner:
                 # limit is tried in full, exactly as before.
                 library_kwargs["substitution_selector"] = lambda groups: self._select_library_options(
                     groups, limit=substitution_limit, shortlist_variants=False)
+            screen_margin = getattr(self.settings, "library_substitution_screen_margin", -1.0)
+            if screen_margin >= 0:
+                library_kwargs["substitution_screen"] = lambda chosen, incumbent, index: self._screen_substitution(
+                    chosen, incumbent, index, screen_margin)
+            slot_limit = getattr(self.settings, "library_substitution_slot_limit", 0)
+            if slot_limit:
+                library_kwargs["substitution_order"] = self._predicted_substitution
+                library_kwargs["substitution_slot_limit"] = slot_limit
             self._library_search_handled = True
         search_kwargs = dict(
                 **library_kwargs,

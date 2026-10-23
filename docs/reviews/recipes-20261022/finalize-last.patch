@@ -1,0 +1,36 @@
+diff --git a/backend/app/services/menu_optimizer.py b/backend/app/services/menu_optimizer.py
+index 2e78f3b..89987db 100644
+--- a/backend/app/services/menu_optimizer.py
++++ b/backend/app/services/menu_optimizer.py
+@@ -1083,6 +1083,8 @@ class MenuOptimizer:
+         incumbent, previous, last_error = None, None, None
+         completed_best = None
+         rank = refinement_score or retention_score
++        cohorts = list(cohorts)
++        last_generation = cohorts[-1][0] if cohorts else None
+         for generation, options in cohorts:
+             if previous == options:
+                 continue
+@@ -1112,7 +1114,7 @@ class MenuOptimizer:
+                             trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
+                     if incumbent is not None:
+                         break
+-                if incumbent is not None:
++                if incumbent is not None and generation == last_generation:  # EXPERIMENT
+                     completed = complete_prefix(incumbent, options, generation)
+                     if completed_best is None or rank(*completed) < rank(*completed_best):
+                         completed_best = completed
+@@ -1134,9 +1136,13 @@ class MenuOptimizer:
+             # Complete each published prefix before extending its pool. Keep
+             # the substitution trajectory separate so earlier finalization
+             # cannot remove proposals made by the original larger search.
++            if generation != last_generation:  # EXPERIMENT: finalize only the full pool, as before e6f7d32
++                continue
+             completed = complete_prefix(incumbent, options, generation)
+             if completed_best is None or rank(*completed) < rank(*completed_best):
+                 completed_best = completed
++        if completed_best is None and incumbent is not None:  # EXPERIMENT
++            completed_best = complete_prefix(incumbent, previous, generation)
+         if completed_best is not None:
+             return completed_best
+         if last_error is not None:
