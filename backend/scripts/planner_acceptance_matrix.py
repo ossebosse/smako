@@ -219,6 +219,8 @@ def main():
     p.add_argument("--matrix", action="store_true")
     p.add_argument("--inputs", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--preparation-cache-root", type=Path,
+                   help="Explicit reusable disk preparation cache; default isolates each profile/label")
     p.add_argument("--label", default="baseline")
     p.add_argument("--matrix-case", choices=CASES, required=True)
     p.add_argument("--repeat", type=int, default=2)
@@ -253,7 +255,9 @@ def main():
     # Profiles sharing an output folder must still start with independent
     # disk preparation; otherwise later cold-process samples inherit the
     # previous profile's artifacts and cannot be compared to fresh baselines.
-    os.environ["RECIPE_PREPARATION_CACHE_ROOT"] = str(args.output / f"{args.label}-{args.matrix_case}-prepared")
+    preparation_root = args.preparation_cache_root or args.output / f"{args.label}-{args.matrix_case}-prepared"
+    os.environ["RECIPE_PREPARATION_CACHE_ROOT"] = str(preparation_root)
+    preparation_disk_present = preparation_root.exists()
     manifest = json.loads((args.inputs / "matrix-inputs.json").read_bytes())
     files = {}
     for name in ("combined-prices.json", "combined-facts.json", "combined-request.json"):
@@ -302,6 +306,8 @@ def main():
                               "logical_cpus": os.cpu_count()},
               "load_seconds": time.perf_counter() - started, "network": "blocked",
               "historical_replay": True, "shared_preparation": not args.reference_preparation,
+              "preparation_cache_explicit": args.preparation_cache_root is not None,
+              "preparation_disk_present_at_start": preparation_disk_present,
               "uncapped": args.uncapped,
               "search_limits": {"seed": settings.library_seed_pool_limit,
                                 "refinement": settings.library_refinement_pool_limit,
