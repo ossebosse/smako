@@ -95,6 +95,9 @@ def merge_axfood_details(products, facts, root=None):
                 stats["rejected_shared_document"] += 1
                 stats["rejections"][found.status] = stats["rejections"].get(found.status, 0) + 1
         if found.status != "verified":
+            if found.status == "revoked":
+                facts[key] = replace(fact, conflicts=tuple(dict.fromkeys(
+                    (*fact.conflicts, "axfood_identity_revoked"))))
             stats["no_document"] += 1
             continue
         raw, meta, digest = found.raw, found.meta, found.digest

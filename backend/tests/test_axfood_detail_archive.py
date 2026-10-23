@@ -77,6 +77,18 @@ def test_revocation_does_not_disappear_behind_shared_document(tmp_path):
     assert stats["shared_document"] == 0 and "axfood_identity_revoked" in facts[("s1", "p1")].conflicts
 
 
+def test_revocation_only_release_blocks_shared_article_and_survives_publication(tmp_path):
+    staging = tmp_path / "staging/run"
+    store(staging, "willys", detail())
+    meta = staging / "willys" / f"{CODE}.meta.json"
+    meta.write_text(json.dumps({**json.loads(meta.read_bytes()), "revoked": True}))
+    release = publish_release(tmp_path, "run")
+    facts = {("s1", "p1"): catalogue_fact()}
+    merge_axfood_details([_Product("hemkop")], facts, release)
+    assert "axfood_identity_revoked" in facts[("s1", "p1")].conflicts
+    assert not facts[("s1", "p1")].nutrition
+
+
 def raw(status=200, *, chain="willys", document=None):
     body = json.dumps(detail() if document is None else document).encode()
     return SimpleNamespace(chain=Chain(chain), payload=body, payload_hash=hashlib.sha256(body).hexdigest(),
@@ -104,6 +116,20 @@ def test_missing_and_access_stops_do_not_get_skipped_as_success(tmp_path):
     assert recheck_state(staging, "willys", CODE, now=NOW + timedelta(days=7)) == "due_missing"
     retain_response(staging, "willys", CODE, raw(429), now=NOW, retry_after=7200)
     assert selection_state(staging, "willys", CODE, now=NOW + timedelta(days=8)) == "access_stopped"
+
+
+def test_negative_evidence_survives_release_and_next_staging_copy(tmp_path):
+    import shutil
+
+    staging = tmp_path / "staging/run"
+    retain_response(staging, "willys", CODE, raw(404), now=NOW)
+    store(staging, "hemkop", detail())
+    release = publish_release(tmp_path, "run")
+    assert read_document(release, "willys", CODE, now=NOW, manifest=verify_release(release)).status == "http_error"
+    newer = tmp_path / "staging/new"
+    shutil.copytree(release, newer)
+    assert selection_state(newer, "willys", CODE, now=NOW + timedelta(days=6)) == "waiting_after_error"
+    assert selection_state(newer, "willys", CODE, now=NOW + timedelta(days=7)) == "due_missing"
 
 
 def test_release_is_atomic_and_staging_failure_cannot_mutate_it(tmp_path, monkeypatch):

@@ -528,8 +528,9 @@ def identity_variant_conflicts(products):
 class FactsCollection(dict):
     """Public, immutable-by-convention projection with a content version."""
 
-    def __init__(self, values):
+    def __init__(self, values, *, source_manifests=()):
         super().__init__(values)
+        self.source_manifests = tuple(source_manifests)
         self.version = facts_version(self)
 
 

@@ -19,7 +19,7 @@ from uuid import uuid4
 
 from grocery_data.app.domain.identifiers import normalize_gtin
 
-VERSION = "axfood-detail-evidence-v2"
+VERSION = "axfood-detail-evidence-v3"
 CODE = re.compile(r"[0-9A-Za-z_-]{1,40}\Z")
 MAX_DOCUMENT_BYTES = 4 * 1024 * 1024
 HOSTS = {
@@ -107,10 +107,11 @@ def read_document(root, chain, code, *, now=None, manifest=None):
         # identity and observation metadata still need validation.
         payload = path.read_bytes() if path.is_file() else b""
         metadata = meta_path.read_bytes()
-        if manifest is not None and any(manifest["files"].get(f"{chain}/{name}")
-                != hashlib.sha256(data).hexdigest() for name, data in (
-                    (path.name, payload), (meta_path.name, metadata))):
-            return DetailEvidence("release_file_mismatch")
+        if manifest is not None:
+            if manifest["files"].get(f"{chain}/{meta_path.name}") != hashlib.sha256(metadata).hexdigest():
+                return DetailEvidence("release_file_mismatch")
+            if path.is_file() and manifest["files"].get(f"{chain}/{path.name}") != hashlib.sha256(payload).hexdigest():
+                return DetailEvidence("release_file_mismatch")
         return validate_pair(payload, metadata, chain, code, now=now)
     except OSError:
         return DetailEvidence("unreadable")
@@ -239,7 +240,7 @@ def publish_release(root, run_id):
         raise ValueError("Unsafe staging path")
     files, coverage = {}, {}
     for chain in HOSTS:
-        counts = {"verified": 0, "missing": 0, "rejected": 0}
+        counts = {"verified": 0, "missing": 0, "rejected": 0, "revoked": 0}
         for meta in sorted((staging / chain).glob("*.meta.json")):
             code = meta.name.removesuffix(".meta.json")
             evidence = read_document(staging, chain, code)
@@ -251,14 +252,31 @@ def publish_release(root, run_id):
             elif evidence.status == "http_error":
                 counts["missing"] += evidence.meta["http_status"] in (404, 410)
                 counts["rejected"] += evidence.meta["http_status"] not in (404, 410)
+                # Negative evidence must survive the next staging copy so a
+                # new run cannot accidentally reset the seven-day/backoff gate.
+                files[f"{chain}/{meta.name}"] = hashlib.sha256(meta.read_bytes()).hexdigest()
+            elif evidence.status == "revoked":
+                counts["revoked"] += 1
+                files[f"{chain}/{meta.name}"] = hashlib.sha256(meta.read_bytes()).hexdigest()
+                payload = meta.with_name(f"{code}.json")
+                if payload.exists():
+                    body = payload.read_bytes()
+                    if len(body) > MAX_DOCUMENT_BYTES or hashlib.sha256(body).hexdigest() != evidence.meta.get("payload_sha256"):
+                        raise ValueError("Revoked document hash mismatch")
+                    files[f"{chain}/{payload.name}"] = hashlib.sha256(body).hexdigest()
             else:
                 raise ValueError(f"Rejected staging pair: {chain}/{code} ({evidence.status})")
+            attempt = meta.with_name(f"{code}.attempt.json")
+            if attempt.is_file():
+                if not attempt.resolve().is_relative_to(staging) or attempt.stat().st_size > 65536:
+                    raise ValueError("Unsafe attempt journal")
+                files[f"{chain}/{attempt.name}"] = hashlib.sha256(attempt.read_bytes()).hexdigest()
         for payload in (staging / chain).glob("*.json"):
             if not payload.name.endswith((".meta.json", ".attempt.json")) and not payload.with_name(
                     payload.stem + ".meta.json").is_file():
                 raise ValueError("Half-written staging pair")
         coverage[chain] = counts
-    if not files:
+    if not any(row["verified"] or row["revoked"] for row in coverage.values()):
         raise ValueError("No verified documents to publish")
     code_lists = {}
     for path in sorted(staging.glob("codes-*.txt")):

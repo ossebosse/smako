@@ -32,7 +32,12 @@ from grocery_data.app.services.axfood_detail_archive import verify_release
 def _augment(products, facts, details):
     stats = merge_axfood_details(products, facts, details) if details else {}
     shell_egg_quantity_proofs(products, facts)
-    return FactsCollection(facts), stats
+    manifests = ()
+    if details:
+        from grocery_data.app.services import axfood_detail_archive
+        manifests = (Path(details).resolve().name, axfood_detail_archive.VERSION,
+                     hashlib.sha256(Path(axfood_detail_archive.__file__).read_bytes()).hexdigest())
+    return FactsCollection(facts, source_manifests=manifests), stats
 
 
 def augment(inputs, output, details=None):
@@ -66,6 +71,7 @@ def augment(inputs, output, details=None):
     facts, report["combined"] = _augment(products, {tuple(k): ProductFacts(**v) for k, v in combined["facts"]},
                                          details)
     body = json.dumps({"facts_version": facts.version,
+                       "source_manifests": facts.source_manifests,
                        "facts": [[list(k), asdict(v)] for k, v in sorted(facts.items())]},
                       ensure_ascii=False).encode()
     verified["combined-facts.json"] = body
@@ -73,7 +79,8 @@ def augment(inputs, output, details=None):
         rows = json.loads(verified["product-facts.json"])
         exported, report["product_facts"] = _augment(
             products, {(r["store_id"], r["product_id"]): ProductFacts(**r["facts"]) for r in rows["rows"]}, details)
-        verified["product-facts.json"] = json.dumps({"facts_version": exported.version, "rows": [
+        verified["product-facts.json"] = json.dumps({"facts_version": exported.version,
+            "source_manifests": exported.source_manifests, "rows": [
             {"store_id": k[0], "product_id": k[1], "facts": asdict(v)} for k, v in sorted(exported.items())]},
             ensure_ascii=False).encode()
     manifest["sha256"] = {name: hashlib.sha256(data).hexdigest() for name, data in verified.items()}
