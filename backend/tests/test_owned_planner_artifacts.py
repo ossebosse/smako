@@ -37,6 +37,26 @@ def test_owner_migration_transfers_artifacts_and_invalidates_old_worker(tmp_path
     assert OwnedPlannerArtifacts(store, "b" * 64).load("view", "context") == {"rows": [1]}
 
 
+def test_saved_delivery_identities_survive_total_artifact_loss_and_respect_privacy_epoch(tmp_path):
+    from app.services.library_publications import slots_record
+
+    request, universe, facts, pantry = fixture()
+    pantry["items"] = []
+    response = planner(request, universe, facts, pantry).create()
+    store = PlanStore(tmp_path / "plans.sqlite")
+    cache = OwnedPlannerArtifacts(store, "a" * 64)
+    store.create(request, response, owner_actor_hash=cache.owner)
+    with store._connect() as connection:
+        connection.execute("DELETE FROM planner_owned_artifacts")
+    assert cache.recent_menu_records() == [slots_record(response.personal.slots)]
+    assert OwnedPlannerArtifacts(store, "b" * 64).recent_menu_records() == []
+    store.erase_owned(owner_actor_hash=cache.owner)
+    replacement = OwnedPlannerArtifacts(store, cache.owner)
+    store.create(request, response, owner_actor_hash=replacement.owner)
+    assert replacement.recent_menu_records() == [slots_record(response.personal.slots)]
+    assert cache.recent_menu_records() == []
+
+
 def test_corrupt_and_uncommitted_rows_are_misses(tmp_path):
     store = PlanStore(tmp_path / "plans.sqlite")
     cache = OwnedPlannerArtifacts(store, "a" * 64)

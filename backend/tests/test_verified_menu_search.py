@@ -91,6 +91,23 @@ def test_reaudited_price_can_increase_under_changed_facts():
     assert chosen != ("previous",) and value == 20
 
 
+def test_cheaper_valid_previous_winner_survives_invalid_proposal_eviction():
+    costs = {"older": 321, "winner": 320, "reference": 330, "bad": 200}
+
+    def audit(slots):
+        if slots == ("bad",):
+            raise IncompleteBasketError("Invalid low search estimate")
+        return costs[slots[0]]
+
+    chosen, price, _ = verified_search(
+        lambda track, emit: emit(("reference" if track == "reference" else "bad",),
+                                 costs["reference" if track == "reference" else "bad"]),
+        audit=audit, accepts=lambda slots: True, rank=lambda slots, value: value,
+        budget=SearchBudget(2, 2), archive_limit=3,
+        previous=[(("older",), 1), (("winner",), 1000)])
+    assert chosen == ("winner",) and price == 320
+
+
 def test_pinned_reference_keeps_publication_order_and_exact_values():
     from app.services.meal_library_content import identity
     from app.services.planner_context import content_digest

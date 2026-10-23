@@ -101,18 +101,58 @@ class OwnedPlannerArtifacts:
         except sqlite3.Error:
             return False
 
-    def recent_menu_records(self):
-        """Only owned recipe identities cross contexts; never old prices/facts."""
+    def recent_menu_records(self, context=None):
+        """Recover owned identities even after all derived artifacts are lost.
+
+        Saved consumer revisions are authoritative delivery history, not cache.
+        Read bounded rows under the captured privacy epoch; exact-context menus
+        precede other recent identities. No old prices or approvals are reused.
+        """
         try:
             with self.store._connect() as connection:
+                connection.execute("BEGIN")
+                if connection.execute(
+                    "SELECT 1 FROM personal_private_state WHERE owner_actor_hash=? AND id=?",
+                    (self.owner, self.private_id)).fetchone() is None:
+                    return []
+                history = connection.execute(
+                    "SELECT response_json FROM consumer_plan_revisions WHERE owner_actor_hash=? "
+                    "AND length(response_json)<=? AND json_valid(response_json) "
+                    "ORDER BY CASE WHEN json_extract(response_json, "
+                    "'$.personal.checks.verified_reference.context')=? THEN 0 ELSE 1 END, "
+                    "created_at DESC, revision DESC LIMIT 8",
+                    (self.owner, MAX_ROW_BYTES, context)).fetchall()
                 keys = connection.execute(
                     "SELECT key FROM planner_owned_artifacts WHERE owner_actor_hash=? "
                     "AND kind='menu_certificate' ORDER BY rowid DESC LIMIT 8", (self.owner,)).fetchall()
             records = []
+            for row in history:
+                try:
+                    personal = json.loads(row[0]).get("personal")
+                    if not isinstance(personal, dict):
+                        continue
+                    slots = personal.get("slots")
+                    if not isinstance(slots, list) or not 1 <= len(slots) <= 21:
+                        continue
+                    record = [{"slot": slot["id"], "recipe": content_digest(slot["recipe"]),
+                               "recipe_name": slot["recipe"]["name"] if slot["recipe"] else None}
+                              for slot in slots]
+                    records.append((personal.get("checks", {}).get("verified_reference", {}).get("context"), record))
+                except (ValueError, KeyError, TypeError, AttributeError, RecursionError):
+                    continue
             for row in keys:
                 value = self.load("menu_certificate", row[0])
                 if isinstance(value, dict) and isinstance(value.get("winner"), list):
-                    records.append(value["winner"])
-            return records
+                    records.append((value.get("context"), value["winner"]))
+            records.sort(key=lambda row: row[0] != context)
+            result, seen = [], set()
+            for _, record in records:
+                digest = content_digest(record)
+                if digest not in seen:
+                    result.append(record)
+                    seen.add(digest)
+                if len(result) == 8:
+                    break
+            return result
         except sqlite3.Error:
             return []

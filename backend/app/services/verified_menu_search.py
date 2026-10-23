@@ -92,10 +92,28 @@ def verified_search(search, *, audit, accepts, rank, budget, previous=(), archiv
             index = max(evictable, key=lambda i: rank(*candidates[i][:2]))
             candidates.pop(index)
 
-    # Only the first earlier winner is pinned; additional predecessor results
-    # may be evicted. Keep earlier insertion on exact rank ties.
-    for index, (slots, result) in enumerate(previous):
-        emit(slots, result, protected=index == 0, source="previous")
+    def checked(slots, source):
+        if not accepts(slots):
+            report["constraint_rejected"] += 1
+            report["rejections"].append({"source": source, "stage": "weekly_distribution_or_variation"})
+            return None
+        try:
+            return audit(slots)
+        except (ValueError, IncompleteBasketError) as exc:
+            report["audit_rejected"] += 1
+            report["rejections"].append({"source": source, "code": getattr(exc, "code", None),
+                                         "stage": getattr(exc, "stage", "checkout_audit"), "reason": str(exc)})
+            return None
+
+    # Choose the protected incumbent by CURRENT valid checkout, before cheap
+    # unaudited proposals can evict it. Caller order need not be price order.
+    incumbent = None
+    for slots, _old_result in previous:
+        result = checked(slots, "previous")
+        if result is not None and (incumbent is None or rank(slots, result) < rank(*incumbent)):
+            incumbent = tuple(slots), result
+    if incumbent is not None:
+        emit(*incumbent, protected=True, source="previous")
     for track in ("reference", "improvement"):
         row = {"track": track, "status": "completed"}
         report["tracks"].append(row)
@@ -113,18 +131,9 @@ def verified_search(search, *, audit, accepts, rank, budget, previous=(), archiv
     # prevent a newly cheaper (or more expensive) checkout from competing.
     verified = []
     for slots, _old_result, _protected, source in candidates:
-        if not accepts(slots):
-            report["constraint_rejected"] += 1
-            report["rejections"].append({"source": source, "stage": "weekly_distribution_or_variation"})
-            continue
-        try:
-            result = audit(slots)
-        except (ValueError, IncompleteBasketError) as exc:
-            report["audit_rejected"] += 1
-            report["rejections"].append({"source": source, "code": getattr(exc, "code", None),
-                                         "stage": getattr(exc, "stage", "checkout_audit"), "reason": str(exc)})
-            continue
-        verified.append((slots, result, source))
+        result = checked(slots, source)
+        if result is not None:
+            verified.append((slots, result, source))
     report["evaluations"] = budget.evaluations_used
     report["proposals"] = budget.proposals_used
     report["budget_stop"] = budget.reason

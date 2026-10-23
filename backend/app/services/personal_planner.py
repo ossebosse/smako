@@ -2774,7 +2774,7 @@ class PersonalPlanner:
         nodes = chain or ({"generation": self._generation, "count": len(current)},)
         reports, loaded, replayed, chain_complete = [], 0, 0, True
         prior_records = [*self.previous_menus,
-            *(self.artifacts.recent_menu_records() if self.artifacts is not None and not _ignore_cache else ())][:8]
+            *(self.artifacts.recent_menu_records(context) if self.artifacts is not None else ())][:8]
 
         def audit(chosen):
             self._defer_search_audit = False
