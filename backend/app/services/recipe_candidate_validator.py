@@ -11,6 +11,7 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any
+from weakref import ReferenceType, ref
 
 from app.models.recipe import Recipe
 from app.services.basket_auditor import BasketAuditor
@@ -80,7 +81,7 @@ def ingredient_profile(recipe: Recipe) -> tuple[str, ...]:
     )
 
 
-_RECIPE_IDS: dict[int, tuple[Recipe, tuple, str]] = {}
+_RECIPE_IDS: dict[int, tuple[ReferenceType[Recipe], tuple, str]] = {}
 
 
 def recipe_id(recipe: Recipe) -> str:
@@ -91,12 +92,19 @@ def recipe_id(recipe: Recipe) -> str:
 
     snapshot = recipe_value(recipe)
     cached = _RECIPE_IDS.get(id(recipe))
-    if cached is not None and cached[0] is recipe and cached[1] == snapshot:
+    if cached is not None and cached[0]() is recipe and cached[1] == snapshot:
         return cached[2]
     value = _recipe_id(recipe)
     if len(_RECIPE_IDS) >= 65536:
         _RECIPE_IDS.clear()
-    _RECIPE_IDS[id(recipe)] = (recipe, snapshot, value)
+    key = id(recipe)
+    def forget(reference):
+        cached = _RECIPE_IDS.get(key)
+        if cached is not None and cached[0] is reference:
+            del _RECIPE_IDS[key]
+    # A pure content ID must not keep every model from completed requests alive.
+    # The exact current snapshot still guards mutations and reused Python IDs.
+    _RECIPE_IDS[key] = (ref(recipe, forget), snapshot, value)
     return value
 
 

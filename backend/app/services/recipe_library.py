@@ -213,7 +213,11 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
         key: round(getattr(i, key) * factor, 8)
         for key in ("quantity", "quantity_min", "quantity_max", "quantity_step")
     }) for i in recipe.ingredients]
-    result = recipe.model_copy(deep=True, update={"servings": servings, "ingredients": ingredients})
+    # Authored ingredient/design trees are recursively frozen. Only the recipe
+    # lists and preparation form map are mutable; copy lists here and replace
+    # preparation below. Updated quantities/steps always use new frozen models.
+    result = recipe.model_copy(update={"servings": servings, "ingredients": ingredients,
+                                      "instructions": list(recipe.instructions)})
     if result.design.content_source is not None:
         components = tuple(c.model_copy(update={"amounts": tuple(a.model_copy(update={
             "quantity": round(a.quantity * factor, 8)}) for a in c.amounts)}) for c in result.design.components)
@@ -352,7 +356,10 @@ def candidates(preferences: RecipePreferences, servings: int = 2, *, include_sup
     """Return complete allowed candidates; nutrition targets are qualified downstream."""
     if preferences.mode != "complete":
         return []
-    return [r.model_copy(deep=True) for r in _registered_portions(servings)
+    return [r.model_copy(update={
+                "ingredients": list(r.ingredients), "instructions": list(r.instructions),
+                "preparation": r.preparation.model_copy(update={"input_forms": dict(r.preparation.input_forms)}),
+            }) for r in _registered_portions(servings)
             if "dinner" in r.design.meal_types
             if (include_supplement or r.design.content_source is None)
             and (not preferences.cuisines or set(r.design.cuisines) & set(preferences.cuisines))
