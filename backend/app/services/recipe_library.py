@@ -330,6 +330,24 @@ def validate_recipe_design(recipe: Recipe) -> bool:
     return True
 
 
+def share_issued_recipe_parts(recipe: Recipe) -> Recipe:
+    """Share frozen authority values only after exact issued-content validation.
+
+    Caller parsing/normalization still runs first. Never intern a caller's model
+    by a claimed hash or version. Mutable lists and preparation forms stay owned
+    by the caller; only registered frozen ingredient/design models are reused.
+    """
+    if not validate_recipe_design(recipe):
+        return recipe
+    d = recipe.design
+    registered = _issued_index(recipe.servings)[(d.base_id, d.version, d.variant_id)]
+    return recipe.model_copy(update={
+        "ingredients": list(registered[2]), "design": registered[5],
+        "instructions": list(recipe.instructions),
+        "preparation": recipe.preparation.model_copy(update={"input_forms": dict(recipe.preparation.input_forms)}),
+    })
+
+
 def _exact_value(recipe):
     from app.services.recipe_computation_cache import recipe_value
     value = recipe_value(recipe)

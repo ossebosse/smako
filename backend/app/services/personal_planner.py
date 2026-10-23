@@ -787,6 +787,10 @@ class PersonalPlanner:
                 ],
             }
         )
+        if self.complete:
+            from app.services.recipe_library import share_issued_recipe_parts
+
+            recipe = share_issued_recipe_parts(recipe)
         profile = self._merged_profile(meal)
         if not recipe_respects_diet(
             recipe,

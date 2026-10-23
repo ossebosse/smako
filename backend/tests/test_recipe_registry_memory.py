@@ -52,6 +52,35 @@ def test_candidate_mutable_containers_remain_private():
     assert library.validate_recipe_design(second)
 
 
+def test_qualified_parts_share_only_exact_registered_values_and_keep_private_containers():
+    source = library.candidates(RecipePreferences(mode="complete"), 4)[0]
+    # This follows clean_recipe's full model revalidation boundary.
+    parsed = type(source).model_validate(source.model_dump())
+    result = library.share_issued_recipe_parts(parsed)
+    registered = library._issued_index(4)[(source.design.base_id, source.design.version, source.design.variant_id)]
+    assert result.model_dump_json() == parsed.model_dump_json()
+    assert result.design is registered[5]
+    assert all(a is b for a, b in zip(result.ingredients, registered[2], strict=True))
+    result.ingredients.clear()
+    result.instructions.append("Private edit")
+    result.preparation.input_forms.clear()
+    assert parsed.model_dump_json() == source.model_dump_json()
+    assert library.validate_recipe_design(source)
+    assert library.validate_recipe_design(library.candidates(RecipePreferences(mode="complete"), 4)[0])
+
+
+def test_qualified_parts_reject_self_signed_unissued_content():
+    source = library.candidates(RecipePreferences(mode="complete"), 4)[0]
+    changed = source.model_copy(update={"name": source.name + " Unissued edit"})
+    digest = library.content_hash(changed)
+    changed = changed.model_copy(update={
+        "design": changed.design.model_copy(update={"content_sha256": digest}),
+        "preparation": changed.preparation.model_copy(update={"parent_sha256": digest}),
+    })
+    with pytest.raises(ValueError, match="saknar godkänd innehållsgranskning"):
+        library.share_issued_recipe_parts(changed)
+
+
 def test_history_reuses_current_portions_but_retains_distinct_issued_content(monkeypatch):
     source = library._registered()[0]
     current = library._scaled(source, 4)
