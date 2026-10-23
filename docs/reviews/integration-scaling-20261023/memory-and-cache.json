@@ -1,0 +1,82 @@
+{
+  "schema": "smako-memory-warm-disk-review-v1",
+  "source_commit": "652e7ace1359374ec8368e9373f2471c0b44cea6",
+  "container_memory_limit_bytes": 3221225472,
+  "cpus": 2,
+  "network": "none",
+  "private_state": "synthetic empty user",
+  "library": "earlier5000library, before provenance nesting correction; not a final-grid price cell",
+  "inputs": {
+    "sha256": {
+      "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+      "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+      "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+    },
+    "now": "2026-10-23T06:00:02.869273+00:00",
+    "request_sha256": "f7dbfa89ea0f84251d51d71a41315594bf73cdf6f0aca3bfca49a436a2d64cd9",
+    "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+    "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+  },
+  "method_signature": "2b996b1133054cbebe202258c864b4776b61e2923a672cc4ee61447a51951f9b",
+  "library_version": "smako-complete-dinners-v1:5f1ea141ffe9222c2c2c8719b4fd59635bc3f37ae2596501175436c60522fe4b",
+  "search_limits": {
+    "seed": 40,
+    "refinement": 90,
+    "seed_variant_shortlist": true,
+    "substitution": 160,
+    "merge_generations": false,
+    "substitution_screen_margin": 0.1,
+    "substitution_slot_limit": 0
+  },
+  "same_semantic_sha256": true,
+  "processes": [
+    {
+      "report": "L5000-main-standard.json",
+      "report_sha256": "e36e1508b2b86ab39d40c0a6ed8484b43612fcedb3043f5d2d7631349bbcf196",
+      "load_seconds": null,
+      "preparation_disk_present_at_start": null,
+      "outcome": "PASS",
+      "paid": 511.46,
+      "audit_passed": true,
+      "semantic_sha256": "137a79235a2198d4f4574d91e22286e758982c1aa53144fe10717b8b1adcd5cc",
+      "wall_seconds": 123.7418575831689,
+      "cpu_seconds": 123.61033635,
+      "rss_bytes": 2976743424,
+      "process_peak_rss_bytes": 2988081152,
+      "cgroup_peak_bytes": 2986541056,
+      "preparation_stats": {
+        "hits": 8217,
+        "misses": 2142,
+        "writes": 0,
+        "invalid": 0
+      }
+    },
+    {
+      "report": "v5-warm-disk-standard.json",
+      "report_sha256": "377f5b15edb4f6cc3824751e8bd00e358ae506046d44e645b02a147599813030",
+      "load_seconds": 32.877720115706325,
+      "preparation_disk_present_at_start": true,
+      "outcome": "PASS",
+      "paid": 511.46,
+      "audit_passed": true,
+      "semantic_sha256": "137a79235a2198d4f4574d91e22286e758982c1aa53144fe10717b8b1adcd5cc",
+      "wall_seconds": 124.43640798190609,
+      "cpu_seconds": 123.24477545600001,
+      "rss_bytes": 2978754560,
+      "process_peak_rss_bytes": 2987331584,
+      "cgroup_peak_bytes": null,
+      "preparation_stats": {
+        "hits": 8217,
+        "misses": 2142,
+        "writes": 0,
+        "invalid": 0
+      }
+    }
+  ],
+  "limitations": [
+    "Both processes start with warm disk preparation from the same method signature.",
+    "Planner times exclude import/file-read/container startup; complete process wall time not recorded here.",
+    "First report uses shared-matrix helper for one call, second report the acceptance CLI; data/settings/result identical.",
+    "Initial old5e cold3GiBgrid was OOM after327.64s; this is memory evidence, not a matched speedup comparison."
+  ]
+}

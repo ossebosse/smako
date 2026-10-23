@@ -1,3 +1,49 @@
+# 2026-10-23: Integrationsgranskning och skalningsmatris pågår – PR #7, ej aktiverat
+
+Arbete i `D:\Projects\Smako`, gren `perf/integration-scaling-20261023`,
+[PR #7](https://github.com/ossebosse/smako/pull/7) som utkast.
+Hämtad main `2efb62f`: full CI **2 950 PASS, 10 XFAIL, 53 SKIP**.
+Kandidatens appkod `652e7ac`: **3 005 PASS, 10 XFAIL, 53 SKIP**,
+inklusive webbläsartester.
+
+Verifierat: 40/40 recept kvalificeras och slutkontrolleras med verkliga
+serverfakta i både Lund och Malmö. Alla godkända äggnamn är hela skalägg,
+97 i Lund och 186 i Malmö, alla med användbara gram. Mängdspärren undantar
+nu endast sju kända näringskonflikter; okända prefix förblir blockerande.
+Alla 14 par av tidigare/nuvarande standardsökning, tre iterationer, ger
+samma utfall, pris och hash. Malmö vegan är blockerat i båda armarna.
+
+Valbar sökning: små utbytbara pooler genomsöks uttömmande upp till 4 096
+veckokombinationer, med befintliga krav och oberoende slutkontroll. Kontrakt
+`smako-merged-library-search-v3` arkiverar färdiga prefixvinnare utan att
+ändra den geometriska huvudsökningens väg. Historiska Lund 1 000/K48
+ger 469,84 kr mot main 474,43 kr. Sammanslagna kohorter är fortsatt av
+som standard tills hela prisvillkoret är uppmätt.
+
+Minne: offertbudgetens sidomappar räknas, aktuella skalade recept
+återanvänds i historikvalideringen, frysta underträd delas och globala rena
+recept-ID:n håller inte avslutade anrops modeller vid liv. 1 310 skalningar
+är byteidentiska med tidigare värden. Malmö 5 000 standard har nu
+slutförts inom 3 GiB: 511,46 kr, godkänd slutkontroll, 2,99 GB peak RSS.
+Två nya processer med samma kodsignatur och varm diskcache gav samma
+meny/hash; detta är ännu inte full väggtid inklusive processstart.
+
+**Pågår:** slutmatris på strikt nästlade bibliotek 262/1 000/2 000/5 000,
+Lund en lokal process åt gången, Malmö seriellt i 2 CPU/3 GiB-containrar.
+Tidigare parallella lokala felkörningar och serverns äldre OOM räknas inte
+som slutresultat. Ingen defaultväxling eller main-integration är gjord för
+denna kandidat ännu. Se [rapport och mätunderlag](reviews/integration-scaling-20261023.md).
+
+Underlag och processloggar bevaras i `.local/integration-scaling-20261023`
+och serverns motsvarande evidence-katalog; körkvittenser, indatahashar och
+reproducerbara kommandon finns länkade från rapporten. Bevara isolerade
+testbibliotek i worktrees; rensa eller återställ inte deras lokala filer.
+Axfoods 503 återstående hämtningar, lagring, uppdateringsrytm och
+aktivering kräver separat ägarbeslut. Ingen produktion, scheduler,
+butiksinsamling eller aktivt prismanifest har ändrats.
+
+---
+
 # 2026-10-23: Receptgrenen integrerad på main – ej aktiverad
 
 `content/recipes-20261021` är sammanslagen med main: de 40 recepten, alla pack

@@ -90,7 +90,7 @@ def main():
     sample = 0
     for case in args.cases:
         request = matrix_request(base, case)
-        settings = Settings(complete_recipes_enabled=True, price_provider="own")
+        settings = Settings(complete_recipes_enabled=True, price_provider="own", library_merge_generations=False)
         inputs = {"sha256": manifest["sha256"], "now": clock.isoformat(),
                   "request_sha256": digest(request.model_dump(mode="json")),
                   "facts_version": facts.version, "universe_id": prepared.universe.universe_id}

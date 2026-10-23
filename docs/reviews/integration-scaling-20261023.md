@@ -15,7 +15,9 @@ Kandidaten `5e5bc89` har **2 985 PASS, 10 XFAIL, 53 SKIP** i samma CI.
 [Körning 39911776590](https://github.com/ossebosse/smako/actions/runs/39911776590).
 Kandidaten `f778e68` har **2 996 PASS, 10 XFAIL, 53 SKIP** i samma CI.
 [Körning 39918497269](https://github.com/ossebosse/smako/actions/runs/39918497269).
-Senare minnes- och mätverktygsändringar får en separat slutlig CI.
+Kandidaten `652e7ac` har **3 005 PASS, 10 XFAIL, 53 SKIP** i samma CI,
+inklusive minnes- och referenskontrollerna.
+[Körning 39921655367](https://github.com/ossebosse/smako/actions/runs/39921655367).
 
 ### Aktuella serverfakta
 
@@ -119,6 +121,13 @@ historiskt underlag, 1 000/K48: **469,84 kr**, 125,96 s första anrop och
   registrerade källobjekts skalade version; äldre eller andra källobjekt
   skalas separat. Alla strukturkontroller och indexets kontroll av
   motstridiga versioner består. Bibliotekssviten passerar lokalt.
+- **Oföränderliga receptdelar:** skalning och kandidatkopior delar de
+  frysta modellträden; receptlistor och beredningens formulärdata kopieras.
+  1 310 skalningar av alla 262 recept till 1/2/4/6/12 portioner ger exakt
+  samma serialiserade värden som tidigare, utan ändrade källrecept.
+  Ett schemaomfattande prov kräver att varje delad underdel förblir
+  rekursivt oföränderlig. Den globala cachen för rena recept-ID:n använder
+  svaga referenser och håller därför inte avslutade anrops recept vid liv.
 
 ## Mätprotokoll och återstående resultat
 
@@ -178,6 +187,19 @@ Dockers separata `oom`-händelse verifierar orsaken. Offertcacheändringen
 ensam löste alltså inte minnesproblemet. En fasdiagnos stoppas kontrollerat
 vid 2,78 GiB; den ledde till historikändringen ovan. Inga minnesgränser höjs.
 
+**Full minneskontroll med `652e7ac`:** Malmö 5 000 standard slutfördes i
+en ny process inom samma 3 GiB-gräns: godkänd slutkontroll, **511,46 kr**,
+**2 988 081 152 byte peak RSS** (2,78 GiB) och 2 986 541 056 byte högsta
+cgroup-minne. Ny separat CLI-process med samma kodsignatur, bibliotek,
+indata, sökinställningar och varma diskcache gav samma meny/hash och pris:
+123,74 respektive 124,44 s planering. Båda hade 8 217 cacheträffar,
+2 142 missar, inga skrivningar eller ogiltiga poster. CLI-processens
+separat redovisade modellinläsning tog 32,88 s; import, fil-I/O och
+containerstart ingår inte i planeringstiderna. Full processväggtid ska
+fortfarande mätas. [Maskinunderlag](integration-scaling-20261023/memory-and-cache.json).
+Detta använder det tidigare 5 000-biblioteket. Slutmatrisen kontrollerar
+samtliga profiler med de strikt nästlade biblioteken och samma minnestak.
+
 Ett separat lokalt kallstartsexperiment vid Lund 5 000 använder två nya
 processer med samma kodsignatur `894ef9911b79afd26f9a2962045cade65027e1801b84a0624ef6e16ac642fd2b`,
 bibliotek och indata. Första processen: 500,75 s, 4 119 cacheträffar,
@@ -200,6 +222,15 @@ Slutmatrisens reproducerbara
 `PersonalPlanner`, syntetiskt tom privat status och oberoende slutkontroll.
 Fullbiblioteksreferensen är fortsatt v5; CLI avvisar nu dessutom en
 referens från ett annat eller ospecificerat receptbibliotek.
+
+Den ursprungliga biblioteksbyggaren delade i 500-receptspaket och avslutade
+med ett delpaket vid respektive slutstorlek. Därmed fick samma recept olika
+paketproveniens mellan 1 000 och större bibliotek. Slutmatrisens publiceringar
+bevarar i stället varje tidigare fullständigt receptvärde, inklusive
+proveniens och innehållshash. Alla fyra bibliotek har byteidentisk metodkod
+med signatur `2b996b1133054cbebe202258c864b4776b61e2923a672cc4ee61447a51951f9b`.
+Lund körs med en lokal process åt gången; Malmö seriellt på servern med
+två CPU och 3 GiB. Plattformar och mätprotokoll hålls uttryckliga i resultaten.
 
 **Pågående:** kompletta matristabeller, prisspärrar mellan biblioteksstorlekar,
 utfall mot full pool för proxyurval, kallstart med samma slutkod samt
