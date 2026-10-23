@@ -1,7 +1,25 @@
+# 2026-10-23: Receptgrenen integrerad på main – ej aktiverad
+
+`content/recipes-20261021` är sammanslagen med main: de 40 recepten, alla pack
+av hela skalägg, Axfood-produktdetaljer (av i drift), exakta
+prestandaförbättringar och screening av substitutioner (på, samma hash i alla
+uppmätta fall). Geometriska kohorter är kvar som opt-in. Ingen release,
+aktivering eller schemaändring är gjord.
+
+Lokal offline-svit (Windows, CI:s kommando): 2 890 PASS, 10 kända XFAIL,
+55 SKIP. 14 backup/återställnings-/driftsättningsfel fallerar identiskt på
+main före integrationen (miljö); 43 webbläsartester saknar lokala
+Playwright-webbläsare. Startkontroll och Ruff på ändrade filer godkända.
+GitHub-CI ska bekräfta.
+
+**Instruktioner till Codex:** [`docs/CODEX-NEXT-20261023.md`](CODEX-NEXT-20261023.md).
+
+---
+
 # 2026-10-23: Ägg, Axfood-fakta, utbackning och receptskalning – ej aktiverat
 
-**Main:** `e6f7d32`/`ea847bb` är utbackade (`e190f3e`, pushad); inget annat
-är integrerat. **Gren `content/recipes-20261021`:** de 40 recepten, alla pack
+**Main:** `e6f7d32`/`ea847bb` är utbackade (`e190f3e`); resten integrerades
+samma dag (se ovan). **Gren `content/recipes-20261021`:** de 40 recepten, alla pack
 av hela skalägg i äggrecept (Lund 102, Malmö 192, alla med gram), Axfood-
 produktdetaljer som fakta och exakta prestandaförbättringar (samma hash):
 varm planering vid 5 000 recept 144 → 100 s i Lund och 176 → 109 s i Malmö.

@@ -45,7 +45,7 @@ def test_all_candidates_fit_with_all_four_actual_pure_computations():
     for recipe in recipes:
         for compute in computations:
             cache.get(recipe, compute)
-    assert len(cache.values) == len(recipes) * len(computations) < cache.limit == 1024
+    assert len(cache.values) == len(recipes) * len(computations) < cache.limit == 16384
     # A full second pass over separately loaded values fits without eviction.
     for recipe in candidates(RecipePreferences(mode="complete"), 2):
         for compute in computations:
