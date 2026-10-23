@@ -170,6 +170,8 @@ def prepared(kind, identity, compute, *, storable=None):
         # continue safely in memory rather than growing disk indefinitely.
         existing = list(directory.glob("*.json"))
         limit = 4096 if kind == "content" else MAX_GENERATIONS
+        if len(existing) >= limit and not path.exists():
+            return payload  # A full cache cannot accept this new key; no size scan is needed.
         total_bytes = sum(p.stat().st_size for p in existing)
         if (len(raw) <= 128 * 1024 * 1024 and len(data) <= MAX_BYTES and total_bytes + len(data) <= MAX_BYTES
                 and (path.exists() or len(existing) < limit)):
