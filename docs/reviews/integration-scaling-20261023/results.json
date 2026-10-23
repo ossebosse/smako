@@ -1,0 +1,2764 @@
+{
+  "schema": "smako-integration-scaling-review-v2",
+  "default_merge_generations": false,
+  "server_pairs": [
+    {
+      "city": "lund",
+      "case": "standard",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "5fb2eccd5e8cbac6f0b64ad8d25471769f65c994634c43c4b04c5cf616191bfa",
+          "combined-facts.json": "ac28a9a27a604aeabd52d9c4c3e8d3e281b2cdbcc80607c48aecd9a6b4e5948f",
+          "combined-request.json": "5cf20444ab813ae7a73916d6e2d535d65cbfba78c7f34b9c41a18765b35dcac9"
+        },
+        "now": "2026-10-23T05:58:59.183522+00:00",
+        "request_sha256": "e7d099cd4e4c4cfdc3e9081d5bfc1a8c3cbc329a64d29d9ab9aa4ef3a5728639",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:142a6ca9059a395ab8bf1be9ea4d2ba75589138bffd8f2c919aafc5d55654049",
+        "universe_id": "price-universe:b185de829e6bd7c4b879e97d867f949181cf1bd2b89a00ba902cf74ebe48f484"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "c8e6f7af6ca7dbe08452e5525f7e3c1049386973c460b900f23814f7c3de2ea8",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 26.25805014767684,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 487.85,
+              "semantic_sha256": "397537bee15db52346c530eb31e412d41a6541969aa837be2071045997969565",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 35.6048136097379,
+              "cpu_seconds": 34.549073417,
+              "rss_bytes": 1676685312,
+              "process_peak_rss_bytes": 1676685312,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 487.85,
+              "semantic_sha256": "397537bee15db52346c530eb31e412d41a6541969aa837be2071045997969565",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 26.06629799725488,
+              "cpu_seconds": 26.038073844000003,
+              "rss_bytes": 1688784896,
+              "process_peak_rss_bytes": 1688784896,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 487.85,
+              "semantic_sha256": "397537bee15db52346c530eb31e412d41a6541969aa837be2071045997969565",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 26.449802298098803,
+              "cpu_seconds": 26.417865723000006,
+              "rss_bytes": 1695997952,
+              "process_peak_rss_bytes": 1695997952,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "0cf877cc722a351506a53c935139ad573bc496dd06bb98375a57faff46ef8305",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 24.83050891547464,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 487.85,
+              "semantic_sha256": "397537bee15db52346c530eb31e412d41a6541969aa837be2071045997969565",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 33.638552424963564,
+              "cpu_seconds": 32.669359003000004,
+              "rss_bytes": 1667776512,
+              "process_peak_rss_bytes": 1667776512,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 487.85,
+              "semantic_sha256": "397537bee15db52346c530eb31e412d41a6541969aa837be2071045997969565",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 24.63823860976845,
+              "cpu_seconds": 24.611772887,
+              "rss_bytes": 1679736832,
+              "process_peak_rss_bytes": 1679736832,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 487.85,
+              "semantic_sha256": "397537bee15db52346c530eb31e412d41a6541969aa837be2071045997969565",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 25.022779221180826,
+              "cpu_seconds": 25.000739412,
+              "rss_bytes": 1686634496,
+              "process_peak_rss_bytes": 1686634496,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "lund",
+      "case": "protein40",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "5fb2eccd5e8cbac6f0b64ad8d25471769f65c994634c43c4b04c5cf616191bfa",
+          "combined-facts.json": "ac28a9a27a604aeabd52d9c4c3e8d3e281b2cdbcc80607c48aecd9a6b4e5948f",
+          "combined-request.json": "5cf20444ab813ae7a73916d6e2d535d65cbfba78c7f34b9c41a18765b35dcac9"
+        },
+        "now": "2026-10-23T05:58:59.183522+00:00",
+        "request_sha256": "6db105d6dba8b4ae167cbcad2b02cff5affb2fe2cf0348b8a49cdb92f355abee",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:142a6ca9059a395ab8bf1be9ea4d2ba75589138bffd8f2c919aafc5d55654049",
+        "universe_id": "price-universe:b185de829e6bd7c4b879e97d867f949181cf1bd2b89a00ba902cf74ebe48f484"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "a8e16242e4e73487d50a0b30b6883e7d6c350cf35bff97e916be6169518553ad",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 52.744089444866404,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 775.32,
+              "semantic_sha256": "c5a03f83ecdc45cac39a4b13c06359271042fab8838b0b8b78715ba054b724f9",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 62.80146386800334,
+              "cpu_seconds": 61.811929196,
+              "rss_bytes": 1810731008,
+              "process_peak_rss_bytes": 1810731008,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 775.32,
+              "semantic_sha256": "c5a03f83ecdc45cac39a4b13c06359271042fab8838b0b8b78715ba054b724f9",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 51.88252232596278,
+              "cpu_seconds": 51.839178497999995,
+              "rss_bytes": 1857581056,
+              "process_peak_rss_bytes": 1857581056,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 775.32,
+              "semantic_sha256": "c5a03f83ecdc45cac39a4b13c06359271042fab8838b0b8b78715ba054b724f9",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 53.605656563770026,
+              "cpu_seconds": 53.552957682,
+              "rss_bytes": 1857585152,
+              "process_peak_rss_bytes": 1857585152,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "157ad97a239591c4c73ef6343704c627c98c53dacf3108ad0b329f0235eda432",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 51.11025039060041,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 775.32,
+              "semantic_sha256": "c5a03f83ecdc45cac39a4b13c06359271042fab8838b0b8b78715ba054b724f9",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 57.720485863275826,
+              "cpu_seconds": 56.790255332,
+              "rss_bytes": 1803206656,
+              "process_peak_rss_bytes": 1807011840,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 775.32,
+              "semantic_sha256": "c5a03f83ecdc45cac39a4b13c06359271042fab8838b0b8b78715ba054b724f9",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 50.6846337611787,
+              "cpu_seconds": 50.638916909,
+              "rss_bytes": 1824690176,
+              "process_peak_rss_bytes": 1824690176,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 775.32,
+              "semantic_sha256": "c5a03f83ecdc45cac39a4b13c06359271042fab8838b0b8b78715ba054b724f9",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 51.535867020022124,
+              "cpu_seconds": 51.485043477000005,
+              "rss_bytes": 1846935552,
+              "process_peak_rss_bytes": 1846935552,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "lund",
+      "case": "all-macros",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "5fb2eccd5e8cbac6f0b64ad8d25471769f65c994634c43c4b04c5cf616191bfa",
+          "combined-facts.json": "ac28a9a27a604aeabd52d9c4c3e8d3e281b2cdbcc80607c48aecd9a6b4e5948f",
+          "combined-request.json": "5cf20444ab813ae7a73916d6e2d535d65cbfba78c7f34b9c41a18765b35dcac9"
+        },
+        "now": "2026-10-23T05:58:59.183522+00:00",
+        "request_sha256": "dd287ca4ebe031cbe952c55f977d1835c29de4622e2bccd4cd1e1b04cdb23188",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:142a6ca9059a395ab8bf1be9ea4d2ba75589138bffd8f2c919aafc5d55654049",
+        "universe_id": "price-universe:b185de829e6bd7c4b879e97d867f949181cf1bd2b89a00ba902cf74ebe48f484"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "84e16a42e7794a9a1797549a0407f6a84d9dede97ff51ec1a017b351cab83834",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 118.91548331012018,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 802.68,
+              "semantic_sha256": "9107fb0e65a4382f79438c0db12c01cc7a634d042aecc4746f896f0e7826c559",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 125.96646129898727,
+              "cpu_seconds": 124.96592925300001,
+              "rss_bytes": 1997107200,
+              "process_peak_rss_bytes": 1997107200,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 802.68,
+              "semantic_sha256": "9107fb0e65a4382f79438c0db12c01cc7a634d042aecc4746f896f0e7826c559",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 117.88781705219299,
+              "cpu_seconds": 117.78917085299997,
+              "rss_bytes": 2052837376,
+              "process_peak_rss_bytes": 2052837376,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 802.68,
+              "semantic_sha256": "9107fb0e65a4382f79438c0db12c01cc7a634d042aecc4746f896f0e7826c559",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 119.94314956804737,
+              "cpu_seconds": 119.83839599600003,
+              "rss_bytes": 2052861952,
+              "process_peak_rss_bytes": 2052861952,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "54effdd5212c656ec9e711ed08ce4a27aeedb92b3c2145c8bdaf143eec06a07d",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 118.34822973841801,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 802.68,
+              "semantic_sha256": "9107fb0e65a4382f79438c0db12c01cc7a634d042aecc4746f896f0e7826c559",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 125.14864231133834,
+              "cpu_seconds": 124.058553323,
+              "rss_bytes": 1977970688,
+              "process_peak_rss_bytes": 1977970688,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 802.68,
+              "semantic_sha256": "9107fb0e65a4382f79438c0db12c01cc7a634d042aecc4746f896f0e7826c559",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 118.77498251618817,
+              "cpu_seconds": 118.66423395399997,
+              "rss_bytes": 2020356096,
+              "process_peak_rss_bytes": 2020356096,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 802.68,
+              "semantic_sha256": "9107fb0e65a4382f79438c0db12c01cc7a634d042aecc4746f896f0e7826c559",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 117.92147696064785,
+              "cpu_seconds": 117.81787601000002,
+              "rss_bytes": 2020360192,
+              "process_peak_rss_bytes": 2020360192,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "lund",
+      "case": "vegan",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "5fb2eccd5e8cbac6f0b64ad8d25471769f65c994634c43c4b04c5cf616191bfa",
+          "combined-facts.json": "ac28a9a27a604aeabd52d9c4c3e8d3e281b2cdbcc80607c48aecd9a6b4e5948f",
+          "combined-request.json": "5cf20444ab813ae7a73916d6e2d535d65cbfba78c7f34b9c41a18765b35dcac9"
+        },
+        "now": "2026-10-23T05:58:59.183522+00:00",
+        "request_sha256": "7cce03eb54f858dd72118be520c95de7c09619740d33d9bc3aa388576b77f8c8",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:142a6ca9059a395ab8bf1be9ea4d2ba75589138bffd8f2c919aafc5d55654049",
+        "universe_id": "price-universe:b185de829e6bd7c4b879e97d867f949181cf1bd2b89a00ba902cf74ebe48f484"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "1bdaf12b74d64436e879c245ff78b97f9545b8032e3b144901aedd1215d1d9b0",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 12.83838964230381,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 347.9,
+              "semantic_sha256": "a99e7ec47cc6596a93f36444cc1e53c5599d464eaec64b27ef25bab9d3e001f1",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 21.410572024062276,
+              "cpu_seconds": 20.466604875999998,
+              "rss_bytes": 1609322496,
+              "process_peak_rss_bytes": 1609322496,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 347.9,
+              "semantic_sha256": "a99e7ec47cc6596a93f36444cc1e53c5599d464eaec64b27ef25bab9d3e001f1",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 13.50480272155255,
+              "cpu_seconds": 13.493716718000002,
+              "rss_bytes": 1691475968,
+              "process_peak_rss_bytes": 1697345536,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 347.9,
+              "semantic_sha256": "a99e7ec47cc6596a93f36444cc1e53c5599d464eaec64b27ef25bab9d3e001f1",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 12.171976563055068,
+              "cpu_seconds": 12.15915297299999,
+              "rss_bytes": 1691656192,
+              "process_peak_rss_bytes": 1697345536,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "d44070331fe1bc474feaf7311345d98774cfd4a3f21a685e864ab44ba6738bb8",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 12.850742969894782,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 347.9,
+              "semantic_sha256": "a99e7ec47cc6596a93f36444cc1e53c5599d464eaec64b27ef25bab9d3e001f1",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 21.378188799135387,
+              "cpu_seconds": 20.303850537,
+              "rss_bytes": 1610465280,
+              "process_peak_rss_bytes": 1610465280,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 347.9,
+              "semantic_sha256": "a99e7ec47cc6596a93f36444cc1e53c5599d464eaec64b27ef25bab9d3e001f1",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 13.798037558794022,
+              "cpu_seconds": 13.781608431999999,
+              "rss_bytes": 1693884416,
+              "process_peak_rss_bytes": 1699811328,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 347.9,
+              "semantic_sha256": "a99e7ec47cc6596a93f36444cc1e53c5599d464eaec64b27ef25bab9d3e001f1",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 11.903448380995542,
+              "cpu_seconds": 11.892432284000002,
+              "rss_bytes": 1692880896,
+              "process_peak_rss_bytes": 1699811328,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "lund",
+      "case": "distribution",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "5fb2eccd5e8cbac6f0b64ad8d25471769f65c994634c43c4b04c5cf616191bfa",
+          "combined-facts.json": "ac28a9a27a604aeabd52d9c4c3e8d3e281b2cdbcc80607c48aecd9a6b4e5948f",
+          "combined-request.json": "5cf20444ab813ae7a73916d6e2d535d65cbfba78c7f34b9c41a18765b35dcac9"
+        },
+        "now": "2026-10-23T05:58:59.183522+00:00",
+        "request_sha256": "70b1e8e2e1059d2f5337237e9524e13d0ed44e223e026378b9845debd7024ca7",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:142a6ca9059a395ab8bf1be9ea4d2ba75589138bffd8f2c919aafc5d55654049",
+        "universe_id": "price-universe:b185de829e6bd7c4b879e97d867f949181cf1bd2b89a00ba902cf74ebe48f484"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "64838a1a187f9c8661a6975fad721f270c5aa0ac926254337f436fb297ddbc6a",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 29.260134887881577,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 761.45,
+              "semantic_sha256": "4b538e8915aaa0bed90beb58a12015085229d1fac23cb115196440e335f65b66",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 37.663652448914945,
+              "cpu_seconds": 36.715817552999994,
+              "rss_bytes": 1748377600,
+              "process_peak_rss_bytes": 1749942272,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 761.45,
+              "semantic_sha256": "4b538e8915aaa0bed90beb58a12015085229d1fac23cb115196440e335f65b66",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 28.737753653898835,
+              "cpu_seconds": 28.704523556000005,
+              "rss_bytes": 1760235520,
+              "process_peak_rss_bytes": 1764052992,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 761.45,
+              "semantic_sha256": "4b538e8915aaa0bed90beb58a12015085229d1fac23cb115196440e335f65b66",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 29.78251612186432,
+              "cpu_seconds": 29.758308881999994,
+              "rss_bytes": 1771335680,
+              "process_peak_rss_bytes": 1771335680,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "220cee2e15576cb9aeb45a8f9b8716e6cedaf13fa8e7416104584acdf5133d7c",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 29.673160889418796,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 761.45,
+              "semantic_sha256": "4b538e8915aaa0bed90beb58a12015085229d1fac23cb115196440e335f65b66",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 37.26262393919751,
+              "cpu_seconds": 36.303051361,
+              "rss_bytes": 1738547200,
+              "process_peak_rss_bytes": 1742323712,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 761.45,
+              "semantic_sha256": "4b538e8915aaa0bed90beb58a12015085229d1fac23cb115196440e335f65b66",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 29.87216761475429,
+              "cpu_seconds": 29.84382412899999,
+              "rss_bytes": 1751748608,
+              "process_peak_rss_bytes": 1754587136,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 761.45,
+              "semantic_sha256": "4b538e8915aaa0bed90beb58a12015085229d1fac23cb115196440e335f65b66",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 29.474154164083302,
+              "cpu_seconds": 29.446668317000004,
+              "rss_bytes": 1772474368,
+              "process_peak_rss_bytes": 1772474368,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "lund",
+      "case": "organic-share",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "5fb2eccd5e8cbac6f0b64ad8d25471769f65c994634c43c4b04c5cf616191bfa",
+          "combined-facts.json": "ac28a9a27a604aeabd52d9c4c3e8d3e281b2cdbcc80607c48aecd9a6b4e5948f",
+          "combined-request.json": "5cf20444ab813ae7a73916d6e2d535d65cbfba78c7f34b9c41a18765b35dcac9"
+        },
+        "now": "2026-10-23T05:58:59.183522+00:00",
+        "request_sha256": "c731fa2839fa3d0bc44cd7414fe540d26caba9434d7ad9516d7df3c4e9170d4e",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:142a6ca9059a395ab8bf1be9ea4d2ba75589138bffd8f2c919aafc5d55654049",
+        "universe_id": "price-universe:b185de829e6bd7c4b879e97d867f949181cf1bd2b89a00ba902cf74ebe48f484"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "9fa208fed1c14f2f4fcf90a8dea8be9424f0efd51dd55210fd79054609bbab08",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 96.61465489608236,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 314.24,
+              "semantic_sha256": "ebc8746d756f80bd758341375485f822e1f87c22418f0447c6bb2b66ef433603",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 104.79754808871076,
+              "cpu_seconds": 103.657656623,
+              "rss_bytes": 1658286080,
+              "process_peak_rss_bytes": 1658286080,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 314.24,
+              "semantic_sha256": "ebc8746d756f80bd758341375485f822e1f87c22418f0447c6bb2b66ef433603",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 96.11280795512721,
+              "cpu_seconds": 96.003097163,
+              "rss_bytes": 1670090752,
+              "process_peak_rss_bytes": 1670090752,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 314.24,
+              "semantic_sha256": "ebc8746d756f80bd758341375485f822e1f87c22418f0447c6bb2b66ef433603",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 97.1165018370375,
+              "cpu_seconds": 97.00871983300001,
+              "rss_bytes": 1677103104,
+              "process_peak_rss_bytes": 1677103104,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "98e3c6f1fa5eb2a52a05597084346fd1cae568a2006424bcde7371d9c0427aa1",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 79.31104392954148,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 314.24,
+              "semantic_sha256": "ebc8746d756f80bd758341375485f822e1f87c22418f0447c6bb2b66ef433603",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 86.45278131589293,
+              "cpu_seconds": 85.44245547099999,
+              "rss_bytes": 1645879296,
+              "process_peak_rss_bytes": 1645879296,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 314.24,
+              "semantic_sha256": "ebc8746d756f80bd758341375485f822e1f87c22418f0447c6bb2b66ef433603",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 78.0950005450286,
+              "cpu_seconds": 78.023606058,
+              "rss_bytes": 1657282560,
+              "process_peak_rss_bytes": 1657540608,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 314.24,
+              "semantic_sha256": "ebc8746d756f80bd758341375485f822e1f87c22418f0447c6bb2b66ef433603",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 80.52708731405437,
+              "cpu_seconds": 80.45507762300002,
+              "rss_bytes": 1664446464,
+              "process_peak_rss_bytes": 1664446464,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "lund",
+      "case": "breakfast-snack-weight",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "5fb2eccd5e8cbac6f0b64ad8d25471769f65c994634c43c4b04c5cf616191bfa",
+          "combined-facts.json": "ac28a9a27a604aeabd52d9c4c3e8d3e281b2cdbcc80607c48aecd9a6b4e5948f",
+          "combined-request.json": "5cf20444ab813ae7a73916d6e2d535d65cbfba78c7f34b9c41a18765b35dcac9"
+        },
+        "now": "2026-10-23T05:58:59.183522+00:00",
+        "request_sha256": "8746f9eeb198ef306f60b8f26a189d853b912731459f3885bcb339105043b03f",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:142a6ca9059a395ab8bf1be9ea4d2ba75589138bffd8f2c919aafc5d55654049",
+        "universe_id": "price-universe:b185de829e6bd7c4b879e97d867f949181cf1bd2b89a00ba902cf74ebe48f484"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "26581ece4877a51780eb21a6a4414dc541522a0ee7528d04025cc6df93ce8df6",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 2.6957881590351462,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 64.06,
+              "semantic_sha256": "981a8428cbcaa3eac1e84a9938138b92cfc1cf973934fad6582c95fdbc80645c",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 10.501341302413493,
+              "cpu_seconds": 9.531258813,
+              "rss_bytes": 1496653824,
+              "process_peak_rss_bytes": 1561137152,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 64.06,
+              "semantic_sha256": "981a8428cbcaa3eac1e84a9938138b92cfc1cf973934fad6582c95fdbc80645c",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 2.6482520080171525,
+              "cpu_seconds": 2.647964812999998,
+              "rss_bytes": 1503842304,
+              "process_peak_rss_bytes": 1561137152,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 64.06,
+              "semantic_sha256": "981a8428cbcaa3eac1e84a9938138b92cfc1cf973934fad6582c95fdbc80645c",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 2.74332431005314,
+              "cpu_seconds": 2.742783627999998,
+              "rss_bytes": 1511124992,
+              "process_peak_rss_bytes": 1561137152,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "ede124d9932f09a05a392e9c39f484ba3bfdd9e4bfc1b6e226a2b31772ca6913",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 2.755513115087524,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 64.06,
+              "semantic_sha256": "981a8428cbcaa3eac1e84a9938138b92cfc1cf973934fad6582c95fdbc80645c",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 10.44724086811766,
+              "cpu_seconds": 9.437692213000002,
+              "rss_bytes": 1496182784,
+              "process_peak_rss_bytes": 1560735744,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 64.06,
+              "semantic_sha256": "981a8428cbcaa3eac1e84a9938138b92cfc1cf973934fad6582c95fdbc80645c",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 2.822538958862424,
+              "cpu_seconds": 2.8218403200000033,
+              "rss_bytes": 1503375360,
+              "process_peak_rss_bytes": 1560735744,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 64.06,
+              "semantic_sha256": "981a8428cbcaa3eac1e84a9938138b92cfc1cf973934fad6582c95fdbc80645c",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 2.688487271312624,
+              "cpu_seconds": 2.6870789920000036,
+              "rss_bytes": 1510653952,
+              "process_peak_rss_bytes": 1560735744,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "malmo",
+      "case": "standard",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "f7dbfa89ea0f84251d51d71a41315594bf73cdf6f0aca3bfca49a436a2d64cd9",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "148eeee006c4f31da5981ed35ee03774adb305698fb98703aecc6800ffb81f9e",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 30.818324105115607,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 511.46,
+              "semantic_sha256": "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 45.399745024740696,
+              "cpu_seconds": 44.45545179500001,
+              "rss_bytes": 2640048128,
+              "process_peak_rss_bytes": 2640048128,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 511.46,
+              "semantic_sha256": "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 30.455634787213057,
+              "cpu_seconds": 30.425975120000004,
+              "rss_bytes": 2650517504,
+              "process_peak_rss_bytes": 2650517504,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 511.46,
+              "semantic_sha256": "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 31.181013423018157,
+              "cpu_seconds": 31.152669919000004,
+              "rss_bytes": 2655236096,
+              "process_peak_rss_bytes": 2655236096,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "5671ca3dc6ef7aff6fbac712d614de3b0f8fb5e661e89cebd088d470c566c754",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 28.98101335251704,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 511.46,
+              "semantic_sha256": "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 45.177455419208854,
+              "cpu_seconds": 44.07452710999999,
+              "rss_bytes": 2633555968,
+              "process_peak_rss_bytes": 2633555968,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 511.46,
+              "semantic_sha256": "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 29.222383783198893,
+              "cpu_seconds": 29.198776553000002,
+              "rss_bytes": 2644013056,
+              "process_peak_rss_bytes": 2644013056,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 511.46,
+              "semantic_sha256": "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 28.739642921835184,
+              "cpu_seconds": 28.710759330000002,
+              "rss_bytes": 2648838144,
+              "process_peak_rss_bytes": 2648838144,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "malmo",
+      "case": "protein40",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "ad34b1fb7a8cc1cca23b3b9802f50c0a6f7d3a68510427477d84aa5f9450c268",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "630c4b5e1438a9f5820dd4d2603e0c4941be0046299f94bb6475b3a4530be963",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 16.468813500134274,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "9fe4cb8803fba0ad67d7c11059249965080c35a5d43d38dad27a2bce32828f64",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 31.733508143108338,
+              "cpu_seconds": 30.685835693999998,
+              "rss_bytes": 2585559040,
+              "process_peak_rss_bytes": 2585559040,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "9fe4cb8803fba0ad67d7c11059249965080c35a5d43d38dad27a2bce32828f64",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 16.318109589163214,
+              "cpu_seconds": 16.304456549000008,
+              "rss_bytes": 2592428032,
+              "process_peak_rss_bytes": 2592428032,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "9fe4cb8803fba0ad67d7c11059249965080c35a5d43d38dad27a2bce32828f64",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 16.619517411105335,
+              "cpu_seconds": 16.601743607000003,
+              "rss_bytes": 2593169408,
+              "process_peak_rss_bytes": 2593169408,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "b0735754774c0cd3a99a752040cbd1c7654a3b412ae6fc0601b37a711cc3bdb7",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 16.545083779376,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "9fe4cb8803fba0ad67d7c11059249965080c35a5d43d38dad27a2bce32828f64",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 31.57822842290625,
+              "cpu_seconds": 30.603306798999995,
+              "rss_bytes": 2584809472,
+              "process_peak_rss_bytes": 2584809472,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "9fe4cb8803fba0ad67d7c11059249965080c35a5d43d38dad27a2bce32828f64",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 16.340643690899014,
+              "cpu_seconds": 16.32606081899999,
+              "rss_bytes": 2591678464,
+              "process_peak_rss_bytes": 2591678464,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "9fe4cb8803fba0ad67d7c11059249965080c35a5d43d38dad27a2bce32828f64",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 16.749523867852986,
+              "cpu_seconds": 16.733487036,
+              "rss_bytes": 2592407552,
+              "process_peak_rss_bytes": 2592407552,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "malmo",
+      "case": "all-macros",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "d79e42bc3682d10f1cd63011b865cb69d03c0ee860f3bbad0b6b4ccbd97597ed",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "9afdc5067c970c34aac453125bbe5fa77dd6166f6f18365699566ce5fc271bf6",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 17.151198136853054,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "fd33e01d01870c74de5a5d1719709b817a3c8f5987507d25c2e245af1373cfb0",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 33.33364929072559,
+              "cpu_seconds": 32.294446074,
+              "rss_bytes": 2587582464,
+              "process_peak_rss_bytes": 2587582464,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "fd33e01d01870c74de5a5d1719709b817a3c8f5987507d25c2e245af1373cfb0",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 16.948432101868093,
+              "cpu_seconds": 16.932907807999996,
+              "rss_bytes": 2594594816,
+              "process_peak_rss_bytes": 2594594816,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "fd33e01d01870c74de5a5d1719709b817a3c8f5987507d25c2e245af1373cfb0",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 17.353964171838015,
+              "cpu_seconds": 17.338789281999993,
+              "rss_bytes": 2594623488,
+              "process_peak_rss_bytes": 2594623488,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "f564ecf32e4270b90a2c528e55e4044c39a1ae7c3e78f5ffac94b29e85eafee9",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 16.731645099353045,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "fd33e01d01870c74de5a5d1719709b817a3c8f5987507d25c2e245af1373cfb0",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 31.543332451954484,
+              "cpu_seconds": 30.538517962,
+              "rss_bytes": 2587402240,
+              "process_peak_rss_bytes": 2587402240,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "fd33e01d01870c74de5a5d1719709b817a3c8f5987507d25c2e245af1373cfb0",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 16.522276415023953,
+              "cpu_seconds": 16.508859780999998,
+              "rss_bytes": 2594463744,
+              "process_peak_rss_bytes": 2594463744,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 1000.86,
+              "semantic_sha256": "fd33e01d01870c74de5a5d1719709b817a3c8f5987507d25c2e245af1373cfb0",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 16.941013783682138,
+              "cpu_seconds": 16.922639782999994,
+              "rss_bytes": 2594480128,
+              "process_peak_rss_bytes": 2594480128,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "malmo",
+      "case": "vegan",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "1c02d489950035dc22909e7ca5e04588d64f594ace364f3105246bd5d00118b9",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "3efe871a3ddf2d116fcf34df00549d19dbaf8c9813c6a7bc759182267a526926",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 4.015018809586763,
+          "records": [
+            {
+              "outcome": "BLOCKED",
+              "paid": null,
+              "semantic_sha256": null,
+              "code": "SEARCH_BLOCKED",
+              "stage": null,
+              "audit_passed": null,
+              "wall_seconds": 16.010080818086863,
+              "cpu_seconds": 15.036758168000006,
+              "rss_bytes": 2440765440,
+              "process_peak_rss_bytes": 2440765440,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 284,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "BLOCKED",
+              "paid": null,
+              "semantic_sha256": null,
+              "code": "SEARCH_BLOCKED",
+              "stage": null,
+              "audit_passed": null,
+              "wall_seconds": 4.0229432987980545,
+              "cpu_seconds": 4.019701933,
+              "rss_bytes": 2483884032,
+              "process_peak_rss_bytes": 2483884032,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 1,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "BLOCKED",
+              "paid": null,
+              "semantic_sha256": null,
+              "code": "SEARCH_BLOCKED",
+              "stage": null,
+              "audit_passed": null,
+              "wall_seconds": 4.007094320375472,
+              "cpu_seconds": 4.003705923000005,
+              "rss_bytes": 2527006720,
+              "process_peak_rss_bytes": 2527006720,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 1,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "87451f07f5b2161853e5e126fcd4e3b29e28df1c1a42eb46176807f1750d91e9",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 3.7658609848003834,
+          "records": [
+            {
+              "outcome": "BLOCKED",
+              "paid": null,
+              "semantic_sha256": null,
+              "code": "SEARCH_BLOCKED",
+              "stage": null,
+              "audit_passed": null,
+              "wall_seconds": 15.657567620743066,
+              "cpu_seconds": 14.681465458999995,
+              "rss_bytes": 2439921664,
+              "process_peak_rss_bytes": 2439921664,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 284,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "BLOCKED",
+              "paid": null,
+              "semantic_sha256": null,
+              "code": "SEARCH_BLOCKED",
+              "stage": null,
+              "audit_passed": null,
+              "wall_seconds": 3.7146798693574965,
+              "cpu_seconds": 3.7117270689999984,
+              "rss_bytes": 2483040256,
+              "process_peak_rss_bytes": 2483040256,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 1,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "BLOCKED",
+              "paid": null,
+              "semantic_sha256": null,
+              "code": "SEARCH_BLOCKED",
+              "stage": null,
+              "audit_passed": null,
+              "wall_seconds": 3.8170421002432704,
+              "cpu_seconds": 3.813362894000001,
+              "rss_bytes": 2526175232,
+              "process_peak_rss_bytes": 2526175232,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 1,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "malmo",
+      "case": "distribution",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "0e975169ebf2e7bd30d702db14da094bdf1a521c77de7d64934ff542ea90e435",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 18.29540132591501,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 996.22,
+              "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 32.846135050058365,
+              "cpu_seconds": 31.723993187000005,
+              "rss_bytes": 2592014336,
+              "process_peak_rss_bytes": 2592014336,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 996.22,
+              "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 18.656246138736606,
+              "cpu_seconds": 18.640136084999995,
+              "rss_bytes": 2598883328,
+              "process_peak_rss_bytes": 2598883328,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 996.22,
+              "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 17.934556513093412,
+              "cpu_seconds": 17.913298642,
+              "rss_bytes": 2599944192,
+              "process_peak_rss_bytes": 2599944192,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "7b9160714ae06e93dfa174e19fa8fe6cc251d591bfbca38e6952c1d85ca7bd77",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 17.17301574954763,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 996.22,
+              "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 32.96548772929236,
+              "cpu_seconds": 31.917932137,
+              "rss_bytes": 2591997952,
+              "process_peak_rss_bytes": 2591997952,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 996.22,
+              "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 16.86749710282311,
+              "cpu_seconds": 16.852800019,
+              "rss_bytes": 2598875136,
+              "process_peak_rss_bytes": 2598875136,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 996.22,
+              "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 17.478534396272153,
+              "cpu_seconds": 17.453852099000002,
+              "rss_bytes": 2599927808,
+              "process_peak_rss_bytes": 2599927808,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "malmo",
+      "case": "organic-share",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "5d0eb558fa0cb6500a605733dd4997cac824cce3d7abc95606989942578af744",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "8e31c9cb50923cb43ac288727136ad3627a4f636ba2c3d712c07364c6a05f832",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 145.84098560921848,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 321.16,
+              "semantic_sha256": "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 159.18140751309693,
+              "cpu_seconds": 158.08890901299998,
+              "rss_bytes": 2643623936,
+              "process_peak_rss_bytes": 2648444928,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 321.16,
+              "semantic_sha256": "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 144.18099656468257,
+              "cpu_seconds": 144.045098707,
+              "rss_bytes": 2657763328,
+              "process_peak_rss_bytes": 2658529280,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 321.16,
+              "semantic_sha256": "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 147.50097465375438,
+              "cpu_seconds": 147.372875915,
+              "rss_bytes": 2663460864,
+              "process_peak_rss_bytes": 2663460864,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "a331f0b9b14090f22939eb751dea9f039a7467671e83bbf45d43ae7676dc5dc6",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 132.5808826801367,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 321.16,
+              "semantic_sha256": "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 146.78633246617392,
+              "cpu_seconds": 145.56494118199998,
+              "rss_bytes": 2637889536,
+              "process_peak_rss_bytes": 2640371712,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 321.16,
+              "semantic_sha256": "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 130.70686876121908,
+              "cpu_seconds": 130.60462603099998,
+              "rss_bytes": 2649980928,
+              "process_peak_rss_bytes": 2650312704,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 321.16,
+              "semantic_sha256": "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 134.45489659905434,
+              "cpu_seconds": 134.35897647800005,
+              "rss_bytes": 2654470144,
+              "process_peak_rss_bytes": 2654818304,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city": "malmo",
+      "case": "breakfast-snack-weight",
+      "complete": true,
+      "same_inputs": true,
+      "same_results": true,
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "46365a22d53fbdfd445a9e1b227d4c75f90a266f5f6c7e7d5f3fbc16576ba835",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "method_signature": "3f30a9f0e6e5e427790274f04becac650b8e9a01384fecf15366df3f7bcc3b25",
+      "source_commit": "2efb62f219b31fa6a81c16ba71363b4207cb2dfe",
+      "arms": {
+        "previous": {
+          "report_sha256": "4cc2254833422004dc858026b50371a10f6c2b4b01f9cc0b056541200a201338",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": -1.0,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 6.05274154106155,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 53.16,
+              "semantic_sha256": "317251350ddbf31b6ee2ea88d160451e700e34c4d9e00e1f40e48a822b22a225",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 13.999168724752963,
+              "cpu_seconds": 12.989986438000003,
+              "rss_bytes": 2414075904,
+              "process_peak_rss_bytes": 2420146176,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 53.16,
+              "semantic_sha256": "317251350ddbf31b6ee2ea88d160451e700e34c4d9e00e1f40e48a822b22a225",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 6.687040172982961,
+              "cpu_seconds": 6.683104726000003,
+              "rss_bytes": 2423341056,
+              "process_peak_rss_bytes": 2430365696,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 53.16,
+              "semantic_sha256": "317251350ddbf31b6ee2ea88d160451e700e34c4d9e00e1f40e48a822b22a225",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 5.41844290914014,
+              "cpu_seconds": 5.413139192000003,
+              "rss_bytes": 2423406592,
+              "process_peak_rss_bytes": 2430365696,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        },
+        "main": {
+          "report_sha256": "93511b137f82602d46b030799f39f639d18b50aa494a7e1f0029d7e1583093b6",
+          "search_limits": {
+            "seed": 40,
+            "refinement": 90,
+            "seed_variant_shortlist": true,
+            "substitution": 160,
+            "merge_generations": false,
+            "substitution_screen_margin": 0.1,
+            "substitution_slot_limit": 0
+          },
+          "warm_median_seconds": 6.081961321644485,
+          "records": [
+            {
+              "outcome": "PASS",
+              "paid": 53.16,
+              "semantic_sha256": "317251350ddbf31b6ee2ea88d160451e700e34c4d9e00e1f40e48a822b22a225",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 14.461352603975683,
+              "cpu_seconds": 13.356989625000004,
+              "rss_bytes": 2412527616,
+              "process_peak_rss_bytes": 2419732480,
+              "cache_mode": "process-cold",
+              "preparation_stats": {
+                "hits": 285,
+                "misses": 599,
+                "writes": 599,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 53.16,
+              "semantic_sha256": "317251350ddbf31b6ee2ea88d160451e700e34c4d9e00e1f40e48a822b22a225",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 6.92656537797302,
+              "cpu_seconds": 6.925557899000005,
+              "rss_bytes": 2423803904,
+              "process_peak_rss_bytes": 2429992960,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            },
+            {
+              "outcome": "PASS",
+              "paid": 53.16,
+              "semantic_sha256": "317251350ddbf31b6ee2ea88d160451e700e34c4d9e00e1f40e48a822b22a225",
+              "code": null,
+              "stage": null,
+              "audit_passed": true,
+              "wall_seconds": 5.23735726531595,
+              "cpu_seconds": 5.235830293999996,
+              "rss_bytes": 2423836672,
+              "process_peak_rss_bytes": 2429992960,
+              "cache_mode": "process-warm",
+              "preparation_stats": {
+                "hits": 2,
+                "misses": 0,
+                "writes": 0,
+                "invalid": 0
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "grid_records": [],
+  "grid_gates": {
+    "geo16": {
+      "complete": false,
+      "missing": [
+        "lund/262/standard",
+        "lund/1000/standard",
+        "lund/2000/standard",
+        "lund/5000/standard",
+        "lund/262/protein40",
+        "lund/1000/protein40",
+        "lund/2000/protein40",
+        "lund/5000/protein40",
+        "lund/262/all-macros",
+        "lund/1000/all-macros",
+        "lund/2000/all-macros",
+        "lund/5000/all-macros",
+        "lund/262/vegan",
+        "lund/1000/vegan",
+        "lund/2000/vegan",
+        "lund/5000/vegan",
+        "lund/262/distribution",
+        "lund/1000/distribution",
+        "lund/2000/distribution",
+        "lund/5000/distribution",
+        "lund/262/organic-share",
+        "lund/1000/organic-share",
+        "lund/2000/organic-share",
+        "lund/5000/organic-share",
+        "lund/262/breakfast-snack-weight",
+        "lund/1000/breakfast-snack-weight",
+        "lund/2000/breakfast-snack-weight",
+        "lund/5000/breakfast-snack-weight",
+        "malmo/262/standard",
+        "malmo/1000/standard",
+        "malmo/2000/standard",
+        "malmo/5000/standard",
+        "malmo/262/protein40",
+        "malmo/1000/protein40",
+        "malmo/2000/protein40",
+        "malmo/5000/protein40",
+        "malmo/262/all-macros",
+        "malmo/1000/all-macros",
+        "malmo/2000/all-macros",
+        "malmo/5000/all-macros",
+        "malmo/262/vegan",
+        "malmo/1000/vegan",
+        "malmo/2000/vegan",
+        "malmo/5000/vegan",
+        "malmo/262/distribution",
+        "malmo/1000/distribution",
+        "malmo/2000/distribution",
+        "malmo/5000/distribution",
+        "malmo/262/organic-share",
+        "malmo/1000/organic-share",
+        "malmo/2000/organic-share",
+        "malmo/5000/organic-share",
+        "malmo/262/breakfast-snack-weight",
+        "malmo/1000/breakfast-snack-weight",
+        "malmo/2000/breakfast-snack-weight",
+        "malmo/5000/breakfast-snack-weight"
+      ],
+      "regressions": [],
+      "eligible_as_default": false
+    },
+    "geo32": {
+      "complete": false,
+      "missing": [
+        "lund/262/standard",
+        "lund/1000/standard",
+        "lund/2000/standard",
+        "lund/5000/standard",
+        "lund/262/protein40",
+        "lund/1000/protein40",
+        "lund/2000/protein40",
+        "lund/5000/protein40",
+        "lund/262/all-macros",
+        "lund/1000/all-macros",
+        "lund/2000/all-macros",
+        "lund/5000/all-macros",
+        "lund/262/vegan",
+        "lund/1000/vegan",
+        "lund/2000/vegan",
+        "lund/5000/vegan",
+        "lund/262/distribution",
+        "lund/1000/distribution",
+        "lund/2000/distribution",
+        "lund/5000/distribution",
+        "lund/262/organic-share",
+        "lund/1000/organic-share",
+        "lund/2000/organic-share",
+        "lund/5000/organic-share",
+        "lund/262/breakfast-snack-weight",
+        "lund/1000/breakfast-snack-weight",
+        "lund/2000/breakfast-snack-weight",
+        "lund/5000/breakfast-snack-weight",
+        "malmo/262/standard",
+        "malmo/1000/standard",
+        "malmo/2000/standard",
+        "malmo/5000/standard",
+        "malmo/262/protein40",
+        "malmo/1000/protein40",
+        "malmo/2000/protein40",
+        "malmo/5000/protein40",
+        "malmo/262/all-macros",
+        "malmo/1000/all-macros",
+        "malmo/2000/all-macros",
+        "malmo/5000/all-macros",
+        "malmo/262/vegan",
+        "malmo/1000/vegan",
+        "malmo/2000/vegan",
+        "malmo/5000/vegan",
+        "malmo/262/distribution",
+        "malmo/1000/distribution",
+        "malmo/2000/distribution",
+        "malmo/5000/distribution",
+        "malmo/262/organic-share",
+        "malmo/1000/organic-share",
+        "malmo/2000/organic-share",
+        "malmo/5000/organic-share",
+        "malmo/262/breakfast-snack-weight",
+        "malmo/1000/breakfast-snack-weight",
+        "malmo/2000/breakfast-snack-weight",
+        "malmo/5000/breakfast-snack-weight"
+      ],
+      "regressions": [],
+      "eligible_as_default": false
+    },
+    "geo48": {
+      "complete": false,
+      "missing": [
+        "lund/262/standard",
+        "lund/1000/standard",
+        "lund/2000/standard",
+        "lund/5000/standard",
+        "lund/262/protein40",
+        "lund/1000/protein40",
+        "lund/2000/protein40",
+        "lund/5000/protein40",
+        "lund/262/all-macros",
+        "lund/1000/all-macros",
+        "lund/2000/all-macros",
+        "lund/5000/all-macros",
+        "lund/262/vegan",
+        "lund/1000/vegan",
+        "lund/2000/vegan",
+        "lund/5000/vegan",
+        "lund/262/distribution",
+        "lund/1000/distribution",
+        "lund/2000/distribution",
+        "lund/5000/distribution",
+        "lund/262/organic-share",
+        "lund/1000/organic-share",
+        "lund/2000/organic-share",
+        "lund/5000/organic-share",
+        "lund/262/breakfast-snack-weight",
+        "lund/1000/breakfast-snack-weight",
+        "lund/2000/breakfast-snack-weight",
+        "lund/5000/breakfast-snack-weight",
+        "malmo/262/standard",
+        "malmo/1000/standard",
+        "malmo/2000/standard",
+        "malmo/5000/standard",
+        "malmo/262/protein40",
+        "malmo/1000/protein40",
+        "malmo/2000/protein40",
+        "malmo/5000/protein40",
+        "malmo/262/all-macros",
+        "malmo/1000/all-macros",
+        "malmo/2000/all-macros",
+        "malmo/5000/all-macros",
+        "malmo/262/vegan",
+        "malmo/1000/vegan",
+        "malmo/2000/vegan",
+        "malmo/5000/vegan",
+        "malmo/262/distribution",
+        "malmo/1000/distribution",
+        "malmo/2000/distribution",
+        "malmo/5000/distribution",
+        "malmo/262/organic-share",
+        "malmo/1000/organic-share",
+        "malmo/2000/organic-share",
+        "malmo/5000/organic-share",
+        "malmo/262/breakfast-snack-weight",
+        "malmo/1000/breakfast-snack-weight",
+        "malmo/2000/breakfast-snack-weight",
+        "malmo/5000/breakfast-snack-weight"
+      ],
+      "regressions": [],
+      "eligible_as_default": false
+    }
+  },
+  "missing": [
+    "lund/262/standard/main",
+    "lund/262/standard/geo16",
+    "lund/262/standard/geo32",
+    "lund/262/standard/geo48",
+    "lund/262/standard/uncapped",
+    "lund/262/protein40/main",
+    "lund/262/protein40/geo16",
+    "lund/262/protein40/geo32",
+    "lund/262/protein40/geo48",
+    "lund/262/protein40/uncapped",
+    "lund/262/all-macros/main",
+    "lund/262/all-macros/geo16",
+    "lund/262/all-macros/geo32",
+    "lund/262/all-macros/geo48",
+    "lund/262/all-macros/uncapped",
+    "lund/262/vegan/main",
+    "lund/262/vegan/geo16",
+    "lund/262/vegan/geo32",
+    "lund/262/vegan/geo48",
+    "lund/262/vegan/uncapped",
+    "lund/262/distribution/main",
+    "lund/262/distribution/geo16",
+    "lund/262/distribution/geo32",
+    "lund/262/distribution/geo48",
+    "lund/262/distribution/uncapped",
+    "lund/262/organic-share/main",
+    "lund/262/organic-share/geo16",
+    "lund/262/organic-share/geo32",
+    "lund/262/organic-share/geo48",
+    "lund/262/organic-share/uncapped",
+    "lund/262/breakfast-snack-weight/main",
+    "lund/262/breakfast-snack-weight/geo16",
+    "lund/262/breakfast-snack-weight/geo32",
+    "lund/262/breakfast-snack-weight/geo48",
+    "lund/262/breakfast-snack-weight/uncapped",
+    "lund/1000/standard/main",
+    "lund/1000/standard/geo16",
+    "lund/1000/standard/geo32",
+    "lund/1000/standard/geo48",
+    "lund/1000/protein40/main",
+    "lund/1000/protein40/geo16",
+    "lund/1000/protein40/geo32",
+    "lund/1000/protein40/geo48",
+    "lund/1000/all-macros/main",
+    "lund/1000/all-macros/geo16",
+    "lund/1000/all-macros/geo32",
+    "lund/1000/all-macros/geo48",
+    "lund/1000/vegan/main",
+    "lund/1000/vegan/geo16",
+    "lund/1000/vegan/geo32",
+    "lund/1000/vegan/geo48",
+    "lund/1000/distribution/main",
+    "lund/1000/distribution/geo16",
+    "lund/1000/distribution/geo32",
+    "lund/1000/distribution/geo48",
+    "lund/1000/organic-share/main",
+    "lund/1000/organic-share/geo16",
+    "lund/1000/organic-share/geo32",
+    "lund/1000/organic-share/geo48",
+    "lund/1000/breakfast-snack-weight/main",
+    "lund/1000/breakfast-snack-weight/geo16",
+    "lund/1000/breakfast-snack-weight/geo32",
+    "lund/1000/breakfast-snack-weight/geo48",
+    "lund/2000/standard/main",
+    "lund/2000/standard/geo16",
+    "lund/2000/standard/geo32",
+    "lund/2000/standard/geo48",
+    "lund/2000/protein40/main",
+    "lund/2000/protein40/geo16",
+    "lund/2000/protein40/geo32",
+    "lund/2000/protein40/geo48",
+    "lund/2000/all-macros/main",
+    "lund/2000/all-macros/geo16",
+    "lund/2000/all-macros/geo32",
+    "lund/2000/all-macros/geo48",
+    "lund/2000/vegan/main",
+    "lund/2000/vegan/geo16",
+    "lund/2000/vegan/geo32",
+    "lund/2000/vegan/geo48",
+    "lund/2000/distribution/main",
+    "lund/2000/distribution/geo16",
+    "lund/2000/distribution/geo32",
+    "lund/2000/distribution/geo48",
+    "lund/2000/organic-share/main",
+    "lund/2000/organic-share/geo16",
+    "lund/2000/organic-share/geo32",
+    "lund/2000/organic-share/geo48",
+    "lund/2000/breakfast-snack-weight/main",
+    "lund/2000/breakfast-snack-weight/geo16",
+    "lund/2000/breakfast-snack-weight/geo32",
+    "lund/2000/breakfast-snack-weight/geo48",
+    "lund/5000/standard/main",
+    "lund/5000/standard/geo16",
+    "lund/5000/standard/geo32",
+    "lund/5000/standard/geo48",
+    "lund/5000/protein40/main",
+    "lund/5000/protein40/geo16",
+    "lund/5000/protein40/geo32",
+    "lund/5000/protein40/geo48",
+    "lund/5000/all-macros/main",
+    "lund/5000/all-macros/geo16",
+    "lund/5000/all-macros/geo32",
+    "lund/5000/all-macros/geo48",
+    "lund/5000/vegan/main",
+    "lund/5000/vegan/geo16",
+    "lund/5000/vegan/geo32",
+    "lund/5000/vegan/geo48",
+    "lund/5000/distribution/main",
+    "lund/5000/distribution/geo16",
+    "lund/5000/distribution/geo32",
+    "lund/5000/distribution/geo48",
+    "lund/5000/organic-share/main",
+    "lund/5000/organic-share/geo16",
+    "lund/5000/organic-share/geo32",
+    "lund/5000/organic-share/geo48",
+    "lund/5000/breakfast-snack-weight/main",
+    "lund/5000/breakfast-snack-weight/geo16",
+    "lund/5000/breakfast-snack-weight/geo32",
+    "lund/5000/breakfast-snack-weight/geo48",
+    "malmo/262/standard/main",
+    "malmo/262/standard/geo16",
+    "malmo/262/standard/geo32",
+    "malmo/262/standard/geo48",
+    "malmo/262/standard/uncapped",
+    "malmo/262/protein40/main",
+    "malmo/262/protein40/geo16",
+    "malmo/262/protein40/geo32",
+    "malmo/262/protein40/geo48",
+    "malmo/262/protein40/uncapped",
+    "malmo/262/all-macros/main",
+    "malmo/262/all-macros/geo16",
+    "malmo/262/all-macros/geo32",
+    "malmo/262/all-macros/geo48",
+    "malmo/262/all-macros/uncapped",
+    "malmo/262/vegan/main",
+    "malmo/262/vegan/geo16",
+    "malmo/262/vegan/geo32",
+    "malmo/262/vegan/geo48",
+    "malmo/262/vegan/uncapped",
+    "malmo/262/distribution/main",
+    "malmo/262/distribution/geo16",
+    "malmo/262/distribution/geo32",
+    "malmo/262/distribution/geo48",
+    "malmo/262/distribution/uncapped",
+    "malmo/262/organic-share/main",
+    "malmo/262/organic-share/geo16",
+    "malmo/262/organic-share/geo32",
+    "malmo/262/organic-share/geo48",
+    "malmo/262/organic-share/uncapped",
+    "malmo/262/breakfast-snack-weight/main",
+    "malmo/262/breakfast-snack-weight/geo16",
+    "malmo/262/breakfast-snack-weight/geo32",
+    "malmo/262/breakfast-snack-weight/geo48",
+    "malmo/262/breakfast-snack-weight/uncapped",
+    "malmo/1000/standard/main",
+    "malmo/1000/standard/geo16",
+    "malmo/1000/standard/geo32",
+    "malmo/1000/standard/geo48",
+    "malmo/1000/protein40/main",
+    "malmo/1000/protein40/geo16",
+    "malmo/1000/protein40/geo32",
+    "malmo/1000/protein40/geo48",
+    "malmo/1000/all-macros/main",
+    "malmo/1000/all-macros/geo16",
+    "malmo/1000/all-macros/geo32",
+    "malmo/1000/all-macros/geo48",
+    "malmo/1000/vegan/main",
+    "malmo/1000/vegan/geo16",
+    "malmo/1000/vegan/geo32",
+    "malmo/1000/vegan/geo48",
+    "malmo/1000/distribution/main",
+    "malmo/1000/distribution/geo16",
+    "malmo/1000/distribution/geo32",
+    "malmo/1000/distribution/geo48",
+    "malmo/1000/organic-share/main",
+    "malmo/1000/organic-share/geo16",
+    "malmo/1000/organic-share/geo32",
+    "malmo/1000/organic-share/geo48",
+    "malmo/1000/breakfast-snack-weight/main",
+    "malmo/1000/breakfast-snack-weight/geo16",
+    "malmo/1000/breakfast-snack-weight/geo32",
+    "malmo/1000/breakfast-snack-weight/geo48",
+    "malmo/2000/standard/main",
+    "malmo/2000/standard/geo16",
+    "malmo/2000/standard/geo32",
+    "malmo/2000/standard/geo48",
+    "malmo/2000/protein40/main",
+    "malmo/2000/protein40/geo16",
+    "malmo/2000/protein40/geo32",
+    "malmo/2000/protein40/geo48",
+    "malmo/2000/all-macros/main",
+    "malmo/2000/all-macros/geo16",
+    "malmo/2000/all-macros/geo32",
+    "malmo/2000/all-macros/geo48",
+    "malmo/2000/vegan/main",
+    "malmo/2000/vegan/geo16",
+    "malmo/2000/vegan/geo32",
+    "malmo/2000/vegan/geo48",
+    "malmo/2000/distribution/main",
+    "malmo/2000/distribution/geo16",
+    "malmo/2000/distribution/geo32",
+    "malmo/2000/distribution/geo48",
+    "malmo/2000/organic-share/main",
+    "malmo/2000/organic-share/geo16",
+    "malmo/2000/organic-share/geo32",
+    "malmo/2000/organic-share/geo48",
+    "malmo/2000/breakfast-snack-weight/main",
+    "malmo/2000/breakfast-snack-weight/geo16",
+    "malmo/2000/breakfast-snack-weight/geo32",
+    "malmo/2000/breakfast-snack-weight/geo48",
+    "malmo/5000/standard/main",
+    "malmo/5000/standard/geo16",
+    "malmo/5000/standard/geo32",
+    "malmo/5000/standard/geo48",
+    "malmo/5000/protein40/main",
+    "malmo/5000/protein40/geo16",
+    "malmo/5000/protein40/geo32",
+    "malmo/5000/protein40/geo48",
+    "malmo/5000/all-macros/main",
+    "malmo/5000/all-macros/geo16",
+    "malmo/5000/all-macros/geo32",
+    "malmo/5000/all-macros/geo48",
+    "malmo/5000/vegan/main",
+    "malmo/5000/vegan/geo16",
+    "malmo/5000/vegan/geo32",
+    "malmo/5000/vegan/geo48",
+    "malmo/5000/distribution/main",
+    "malmo/5000/distribution/geo16",
+    "malmo/5000/distribution/geo32",
+    "malmo/5000/distribution/geo48",
+    "malmo/5000/organic-share/main",
+    "malmo/5000/organic-share/geo16",
+    "malmo/5000/organic-share/geo32",
+    "malmo/5000/organic-share/geo48",
+    "malmo/5000/breakfast-snack-weight/main",
+    "malmo/5000/breakfast-snack-weight/geo16",
+    "malmo/5000/breakfast-snack-weight/geo32",
+    "malmo/5000/breakfast-snack-weight/geo48"
+  ],
+  "server_matrix_complete": true,
+  "grid_complete": false
+}
