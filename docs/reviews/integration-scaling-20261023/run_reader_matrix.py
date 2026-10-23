@@ -19,6 +19,7 @@ from unittest.mock import patch
 
 from app.config import Settings
 from app.errors import IncompleteBasketError
+from app.services.meal_prepared_artifacts import method_signature
 from app.services.personal_planner import PersonalPlanner
 from app.services.personal_policy import ProductFacts
 from app.services.personal_source_facts import FactsCollection
@@ -105,7 +106,8 @@ def main():
     base = json.loads((control / 'combined-request.json').read_bytes())
     clock = datetime.fromisoformat(manifests['control']['now'])
     settings = Settings(complete_recipes_enabled=True, price_provider='own')
-    report = {'image': args.image_id, 'library_version': library_version(),
+    report = {'schema': 'smako-native-axfood-reader-v1',
+              'image': args.image_id, 'method_signature': method_signature(), 'library_version': library_version(),
               'native_recipe_count': len(current_recipes()), 'city': args.city,
               'inputs': manifests, 'repeat': args.repeat, 'records': [],
               'old_menu_replay_changes_native_result': False}
@@ -127,6 +129,7 @@ def main():
                     try:
                         plan = subject.create()
                         row.update(outcome='PASS', **helpers.quality(plan, request))
+                        row['checkout_audit'] = plan.personal.checks['checkout_audit']
                         if arm == 'control' and case not in old_menus:
                             old_menus[case] = slots_record(plan.personal.slots)
                     except (ValueError, IncompleteBasketError) as exc:
@@ -140,6 +143,7 @@ def main():
                         try:
                             audited = replay_old_menu(audit_subject, old_menus[case])
                             row['old_menu_reaudit'] = {'status': 'PASS', **helpers.quality(audited, request)}
+                            row['old_menu_reaudit']['checkout_audit'] = audited.personal.checks['checkout_audit']
                         except (ValueError, IncompleteBasketError) as exc:
                             row['old_menu_reaudit'] = {'status': 'REJECTED', 'reason': str(exc),
                                 'code': getattr(exc, 'code', None), 'stage': getattr(exc, 'stage', None),
