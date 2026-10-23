@@ -16,6 +16,7 @@ import argparse
 import hashlib
 import json
 import shutil
+import tempfile
 from dataclasses import asdict
 from pathlib import Path
 
@@ -25,6 +26,8 @@ from app.services.personal_policy import ProductFacts
 from app.services.personal_source_facts import FactsCollection
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
 
+from grocery_data.app.services.axfood_detail_archive import verify_release
+
 
 def _augment(products, facts, details):
     stats = merge_axfood_details(products, facts, details) if details else {}
@@ -32,39 +35,71 @@ def _augment(products, facts, details):
     return FactsCollection(facts), stats
 
 
+def augment(inputs, output, details=None):
+    """Verify every input before reading models; publish one complete new folder."""
+    inputs, output = Path(inputs).resolve(), Path(output).resolve()
+    if output.exists():
+        raise ValueError("Output exists; choose a new folder")
+    if details is not None:
+        verify_release(details)
+    manifest = json.loads((inputs / "matrix-inputs.json").read_bytes())
+    required = {"combined-prices.json", "combined-facts.json", "combined-request.json"}
+    if (inputs / "product-facts.json").exists():
+        required.add("product-facts.json")
+    if not required <= manifest["sha256"].keys():
+        raise ValueError("Consumed inputs must all have manifest hashes")
+    verified = {}
+    for name, digest in manifest["sha256"].items():
+        if not isinstance(name, str) or Path(name).name != name or name == "matrix-inputs.json":
+            raise ValueError("Unsafe manifest filename")
+        path = inputs / name
+        if not path.resolve().is_relative_to(inputs):
+            raise ValueError("Input leaves evidence folder")
+        body = path.read_bytes()
+        if hashlib.sha256(body).hexdigest() != digest:
+            raise ValueError(f"Input hash mismatch: {name}")
+        verified[name] = body
+    prices = verified["combined-prices.json"]
+    products = PreparedPriceUniverseArtifact.model_validate_json(prices).restore().universe.products
+    report = {}
+    combined = json.loads(verified["combined-facts.json"])
+    facts, report["combined"] = _augment(products, {tuple(k): ProductFacts(**v) for k, v in combined["facts"]},
+                                         details)
+    body = json.dumps({"facts_version": facts.version,
+                       "facts": [[list(k), asdict(v)] for k, v in sorted(facts.items())]},
+                      ensure_ascii=False).encode()
+    verified["combined-facts.json"] = body
+    if "product-facts.json" in verified:
+        rows = json.loads(verified["product-facts.json"])
+        exported, report["product_facts"] = _augment(
+            products, {(r["store_id"], r["product_id"]): ProductFacts(**r["facts"]) for r in rows["rows"]}, details)
+        verified["product-facts.json"] = json.dumps({"facts_version": exported.version, "rows": [
+            {"store_id": k[0], "product_id": k[1], "facts": asdict(v)} for k, v in sorted(exported.items())]},
+            ensure_ascii=False).encode()
+    manifest["sha256"] = {name: hashlib.sha256(data).hexdigest() for name, data in verified.items()}
+    manifest["derived_from"] = {"inputs": str(inputs), "details": str(details) if details else None,
+                                "stats": report}
+    output.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=".augment-", dir=output.parent))
+    try:
+        for name, data in verified.items():
+            (staging / name).write_bytes(data)
+        (staging / "matrix-inputs.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        staging.rename(output)
+    finally:
+        # Only this invocation's exact disposable staging directory.
+        if staging.exists():
+            shutil.rmtree(staging)
+    return report
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--inputs", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
-    p.add_argument("--details", type=Path, help="Root with <chain>/<code>.json Axfood documents")
+    p.add_argument("--details", type=Path, help="Immutable release with <chain>/<code>.json")
     args = p.parse_args()
-    if args.output.exists():
-        p.error(f"{args.output} exists; choose a new folder")
-    manifest = json.loads((args.inputs / "matrix-inputs.json").read_bytes())
-    prices = (args.inputs / "combined-prices.json").read_bytes()
-    assert hashlib.sha256(prices).hexdigest() == manifest["sha256"]["combined-prices.json"]
-    products = PreparedPriceUniverseArtifact.model_validate_json(prices).restore().universe.products
-    args.output.mkdir(parents=True)
-    report = {}
-    combined = json.loads((args.inputs / "combined-facts.json").read_bytes())
-    facts, report["combined"] = _augment(products, {tuple(k): ProductFacts(**v) for k, v in combined["facts"]},
-                                         args.details)
-    body = json.dumps({"facts_version": facts.version,
-                       "facts": [[list(k), asdict(v)] for k, v in sorted(facts.items())]},
-                      ensure_ascii=False).encode()
-    (args.output / "combined-facts.json").write_bytes(body)
-    rows = json.loads((args.inputs / "product-facts.json").read_bytes())
-    exported, report["product_facts"] = _augment(
-        products, {(r["store_id"], r["product_id"]): ProductFacts(**r["facts"]) for r in rows["rows"]}, args.details)
-    (args.output / "product-facts.json").write_text(json.dumps({"facts_version": exported.version, "rows": [
-        {"store_id": k[0], "product_id": k[1], "facts": asdict(v)} for k, v in sorted(exported.items())]},
-        ensure_ascii=False), encoding="utf-8")
-    for name in ("combined-prices.json", "combined-request.json"):
-        shutil.copyfile(args.inputs / name, args.output / name)
-    manifest["sha256"]["combined-facts.json"] = hashlib.sha256(body).hexdigest()
-    manifest["derived_from"] = {"inputs": str(args.inputs), "details": str(args.details) if args.details else None,
-                                "stats": report}
-    (args.output / "matrix-inputs.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    report = augment(args.inputs, args.output, args.details)
     print(json.dumps(report))
     return 0
 

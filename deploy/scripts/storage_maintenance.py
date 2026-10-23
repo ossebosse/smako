@@ -259,6 +259,66 @@ def maintain_reports(root, *, now, apply=False):
     return result
 
 
+def maintain_axfood_archives(root, *, now, apply=False):
+    """Use the existing retention lease/guards; unknown references stay protected.
+
+    retention.json explicitly pins active, rollback and evidence release hashes.
+    Without that registry every release remains protected. Staging is retained
+    evidence, never swept merely because a collector exited or got challenged.
+    """
+    from grocery_data.app.services.axfood_detail_archive import verify_release
+
+    root = safe_root(root)
+    count = setting("AXFOOD_ARCHIVE_MAX_RELEASES", 8, 2, 64)
+    budget = setting("AXFOOD_ARCHIVE_MAX_BYTES", 32 * 1024**3, 1, 1024**4)
+    result = {"kind": "axfood_details", "removed": [], "protected": [], "unknown": [],
+              "reclaimable_bytes": 0, "max_count": count, "max_bytes": budget, "applied": apply}
+    if not root.exists():
+        return {**result, "retained_bytes": 0, "retained_count": 0, "status": "complete"}
+    registry = root / "retention.json"
+    references = None
+    if registry.exists():
+        data = read_json(registry)
+        if set(data) != {"active", "rollback", "evidence"}:
+            raise ValueError("Unknown Axfood retention registry")
+        references = {x for x in (data["active"], data["rollback"], *data["evidence"]) if x is not None}
+        if any(not isinstance(x, str) or not re.fullmatch(r"[0-9a-f]{64}", x) for x in references):
+            raise ValueError("Invalid Axfood retention reference")
+    releases, valid = safe_root(root / "releases"), []
+    if releases.exists():
+        for path in releases.iterdir():
+            try:
+                if not re.fullmatch(r"[0-9a-f]{64}", path.name):
+                    raise ValueError("Unknown release name")
+                verify_release(path)
+                tree, size, newest = inventory(path)
+                valid.append((path, tree, size, newest))
+            except (ValueError, OSError, KeyError, TypeError):
+                result["unknown"].append(path.name)
+    valid.sort(key=lambda row: (-row[3], row[0].name))
+    protected = {row[0].name for row in valid[:2]}
+    protected.update((row[0].name for row in valid) if references is None else references)
+    if references is not None and not references <= {row[0].name for row in valid}:
+        raise ValueError("Referenced Axfood release unavailable")
+    result["protected"] = sorted(protected)
+    occupied = inventory(root)[1]
+    retained = len(valid)
+    for path, tree, size, newest in reversed(valid):
+        if (path.name in protected or newest >= (now - timedelta(days=7)).timestamp()
+                or (retained <= count and occupied <= budget)):
+            continue
+        # Re-read the registry before every deletion, just like price pointers.
+        if references is None or read_json(registry) != data:
+            raise ValueError("Axfood retention references changed")
+        remove_owned(releases, path, tree, apply=apply)
+        result["removed"].append(path.name)
+        result["reclaimable_bytes"] += size
+        occupied -= size
+        retained -= 1
+    return {**result, "retained_bytes": occupied, "retained_count": retained,
+            "status": "blocked" if occupied > budget or retained > count else "complete"}
+
+
 def run_locked(*, now=None, apply=False):
     """Called under RefreshRunLock by backup, refresh and installation paths."""
     now = now or datetime.now(UTC)
@@ -270,6 +330,8 @@ def run_locked(*, now=None, apply=False):
         (maintain_build_staging, universe),
         (maintain_reports, Path(os.getenv("REFRESH_REPORT_DIR", str(universe.parent / "reports/refresh")))),
     ]
+    if os.getenv("AXFOOD_ARCHIVE_ROOT"):
+        work.append((maintain_axfood_archives, Path(os.environ["AXFOOD_ARCHIVE_ROOT"])))
     rows = []
     for function, root in work:
         try:

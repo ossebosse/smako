@@ -70,7 +70,9 @@ def store(root, chain, raw):
     (root / chain).mkdir(parents=True, exist_ok=True)
     (root / chain / f"{raw['code']}.json").write_bytes(payload)
     (root / chain / f"{raw['code']}.meta.json").write_text(json.dumps({
-        "chain": chain, "url": "u", "fetched_at": "2026-10-22T19:00:00+00:00", "http_status": 200,
+        "code": raw["code"], "chain": chain,
+        "url": f"https://www.{chain}.se/axfood/rest/p/{raw['code']}",
+        "fetched_at": "2026-10-22T19:00:00+00:00", "http_status": 200,
         "payload_sha256": hashlib.sha256(payload).hexdigest()}))
 
 
