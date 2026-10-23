@@ -57,7 +57,8 @@ def main():
     parser.add_argument("--size", required=True, type=int)
     parser.add_argument("--repeat", default=1, type=int)
     parser.add_argument("--cases", nargs="+", choices=CASES, default=CASES)
-    parser.add_argument("--arms", nargs="+", choices=("main", "geo16", "geo32", "geo48", "uncapped"))
+    parser.add_argument("--arms", nargs="+", choices=("main", "geo16", "geo32", "geo48", "uncapped", "verified"))
+    parser.add_argument("--owned-artifact-store", type=Path)
     parser.add_argument("--preparation-cache-root", required=True, type=Path)
     parser.add_argument("--execution-environment", required=True)
     args = parser.parse_args()
@@ -101,6 +102,8 @@ def main():
                                    library_substitution_pool_limit=0, library_substitution_slot_limit=int(arm[3:]))
             elif arm == "uncapped":
                 selected = full_library_search_limits(settings)
+            elif arm == "verified":
+                selected = replace(settings, library_search_policy="smako-verified-reference-v1")
             limits = {name: getattr(selected, attribute) for name, attribute in {
                 "seed": "library_seed_pool_limit", "refinement": "library_refinement_pool_limit",
                 "seed_variant_shortlist": "library_seed_variant_shortlist", "substitution": "library_substitution_pool_limit",
@@ -108,10 +111,17 @@ def main():
                 "substitution_slot_limit": "library_substitution_slot_limit",
             }.items()}
             label = f"L{args.size}-{arm}"
+            artifacts = None
+            if arm == "verified" and args.owned_artifact_store is not None:
+                from app.services.plan_store import PlanStore
+                from app.services.planner_artifacts import OwnedPlannerArtifacts
+
+                artifacts = OwnedPlannerArtifacts(PlanStore(args.owned_artifact_store), digest(["matrix", inputs]))
             target = args.output / f"{label}-{case}.json"
             report = {"schema": "smako-planner-acceptance-v1", "case": case, "label": label,
                       "inputs": inputs, "method_signature": signature, "library_version": library,
                       "search_limits": limits, "uncapped": arm == "uncapped", "records": [],
+                      "search_policy": selected.library_search_policy,
                       "network": "blocked", "historical_replay": True,
                       "measurement_protocol": "one process per city/library; shared public preparation; new empty user per call",
                       "execution_environment": args.execution_environment, "platform": platform.platform()}
@@ -132,7 +142,7 @@ def main():
                 print(json.dumps({"start": label, "case": case, "iteration": iteration}), flush=True)
                 started, cpu = time.perf_counter(), time.process_time()
                 with patch.object(socket.socket, "connect", side_effect=AssertionError("network forbidden")), activate_performance_trace() as trace:
-                    planner = PersonalPlanner(request, selected, prepared, state, facts=facts, now=clock)
+                    planner = PersonalPlanner(request, selected, prepared, state, facts=facts, now=clock, artifacts=artifacts)
                     try:
                         plan = planner.create()
                         elapsed = time.perf_counter() - started

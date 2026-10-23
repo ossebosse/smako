@@ -76,7 +76,7 @@ FULL_LIBRARY_SEARCH_LIMITS = {
 
 def full_library_search_limits(settings):
     """Settings for a full-library reference: whole qualified library, no shortlist."""
-    return replace(settings, library_seed_pool_limit=0, library_refinement_pool_limit=0,
+    return replace(settings, library_search_policy="legacy", library_seed_pool_limit=0, library_refinement_pool_limit=0,
                    library_seed_variant_shortlist=False, library_substitution_pool_limit=0,
                    library_merge_generations=False, library_substitution_screen_margin=-1.0,
                    library_substitution_slot_limit=0)
@@ -196,6 +196,8 @@ def quality(plan, request):
             "nutrition": [{k: v for k, v in n.items() if k in ("slot_id", "status", "values")}
                           for n in nutrients.values()],
             "organic_cost_percent": eco, "semantic_sha256": signature,
+            "verified_reference": plan.personal.checks.get("verified_reference"),
+            "timings_seconds": plan.personal.checks.get("timings_seconds"),
             "purchase_surplus": plan.personal.checks.get("purchase_surplus"),
             "joint_refinement": [r for r in plan.personal.checks.get("planning_diagnostics", {}).get("search", [])
                                  if r.get("library_phase") == "joint_refinement"]}
@@ -224,6 +226,9 @@ def main():
     p.add_argument("--preparation-cache-root", type=Path,
                    help="Explicit reusable disk preparation cache; default isolates each profile/label")
     p.add_argument("--label", default="baseline")
+    p.add_argument("--search-policy", choices=("legacy", "smako-verified-reference-v1"), default="legacy")
+    p.add_argument("--owned-artifact-store", type=Path,
+                   help="Synthetic owner's existing PlanStore database for durable qualification/certificates")
     p.add_argument("--matrix-case", choices=CASES, required=True)
     p.add_argument("--repeat", type=int, default=2)
     p.add_argument("--profile", action="store_true")
@@ -283,7 +288,13 @@ def main():
     baseline = json.loads(args.baseline.read_bytes()) if args.baseline else None
     if baseline:
         assert baseline["inputs"] == inputs, "Baseline inputs differ"
-    settings = Settings(complete_recipes_enabled=True, price_provider="own")
+    settings = Settings(complete_recipes_enabled=True, price_provider="own", library_search_policy=args.search_policy)
+    artifacts = None
+    if args.owned_artifact_store is not None:
+        from app.services.plan_store import PlanStore
+        from app.services.planner_artifacts import OwnedPlannerArtifacts
+
+        artifacts = OwnedPlannerArtifacts(PlanStore(args.owned_artifact_store), digest(["matrix", inputs]))
     if args.substitution_limit is not None:
         settings = replace(settings, library_substitution_pool_limit=args.substitution_limit)
     if args.screen_margin is not None:
@@ -317,6 +328,8 @@ def main():
               "preparation_cache_explicit": args.preparation_cache_root is not None,
               "preparation_disk_present_at_start": preparation_disk_present,
               "uncapped": args.uncapped,
+              "search_policy": settings.library_search_policy,
+              "owned_artifact_store_requested": artifacts is not None,
               "search_limits": {"seed": settings.library_seed_pool_limit,
                                 "refinement": settings.library_refinement_pool_limit,
                                 "seed_variant_shortlist": settings.library_seed_variant_shortlist,
@@ -374,7 +387,7 @@ def main():
             if profiler:
                 profiler.enable()
             try:
-                planner = PersonalPlanner(request, settings, prepared, state, facts=facts, now=now)
+                planner = PersonalPlanner(request, settings, prepared, state, facts=facts, now=now, artifacts=artifacts)
                 plan = planner.create()
                 elapsed = time.perf_counter() - start
                 cpu_elapsed = time.process_time() - cpu

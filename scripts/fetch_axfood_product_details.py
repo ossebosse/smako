@@ -52,8 +52,10 @@ async def main() -> int:
     p.add_argument("--catalog-proof", type=Path, required=True)
     p.add_argument("--archive-root", type=Path, default=Path("D:/smako-data/axfood-product-details"))
     p.add_argument("--run-id", required=True)
-    p.add_argument("--database", type=Path, required=True, help="Existing data-plane DB for the shared operation lock")
-    p.add_argument("--price-universe-root", type=Path, required=True)
+    locks = p.add_mutually_exclusive_group(required=True)
+    locks.add_argument("--database", type=Path, help="Existing data-plane DB for the shared operation lock")
+    locks.add_argument("--operation-lock", type=Path, help="Exact existing local relay operation lease")
+    p.add_argument("--price-universe-root", type=Path)
     p.add_argument("--limit", type=int, default=0, help="Bound this run; 0 processes the remaining exact list")
     p.add_argument("--base-release", type=Path, help="Copy a verified previous release to NEW staging")
     p.add_argument("--publish", action="store_true", help="Publish verified staging after successful collection")
@@ -76,7 +78,11 @@ async def main() -> int:
         p.error("staging leaves archive root")
     # Existing kernel lease, shared with refresh/backup/activation. A second
     # archive lease prevents two data planes from writing this staging root.
-    with (RefreshRunLock(production_refresh_lock_path(args.database, args.price_universe_root)),
+    if args.database is not None and args.price_universe_root is None:
+        p.error("--database requires --price-universe-root")
+    operation_lock = (args.operation_lock if args.operation_lock is not None
+                      else production_refresh_lock_path(args.database, args.price_universe_root))
+    with (RefreshRunLock(operation_lock),
           RefreshRunLock(root / ".writer.lock")):
         from deploy.scripts.storage_maintenance import inventory, maintain_axfood_archives
 
