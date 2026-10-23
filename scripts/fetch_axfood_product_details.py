@@ -48,8 +48,9 @@ def _write(out: Path, code: str, raw) -> None:
 async def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--chain", choices=("willys", "hemkop"), required=True)
-    p.add_argument("--codes", type=Path, required=True)
-    p.add_argument("--catalog-proof", type=Path, required=True)
+    p.add_argument("--codes", type=Path)
+    p.add_argument("--catalog-proof", type=Path)
+    p.add_argument("--approved-snapshot", help="Use exact current approved DB catalogue rows as the queue")
     p.add_argument("--archive-root", type=Path, default=Path("D:/smako-data/axfood-product-details"))
     p.add_argument("--run-id", required=True)
     locks = p.add_mutually_exclusive_group(required=True)
@@ -63,7 +64,14 @@ async def main() -> int:
     p.add_argument("--store-id", required=True, help="Exact public store id recorded with each document")
     p.add_argument("--requests-per-second", type=float)
     args = p.parse_args()
-    codes = list(dict.fromkeys(c.strip() for c in args.codes.read_text(encoding="utf-8").splitlines() if c.strip()))
+    if args.approved_snapshot:
+        if args.codes or args.catalog_proof or not args.database:
+            p.error("--approved-snapshot requires --database and replaces --codes/--catalog-proof")
+        codes = []  # Read the current catalogue under the existing data-plane lease.
+    else:
+        if args.codes is None or args.catalog_proof is None:
+            p.error("provide --approved-snapshot or both --codes and --catalog-proof")
+        codes = list(dict.fromkeys(c.strip() for c in args.codes.read_text(encoding="utf-8").splitlines() if c.strip()))
     if bad := [c for c in codes if not CODE.fullmatch(c)]:
         p.error(f"invalid product codes: {bad[:5]}")
     if not CODE.fullmatch(args.run_id) or args.limit < 0:
@@ -84,6 +92,21 @@ async def main() -> int:
                       else production_refresh_lock_path(args.database, args.price_universe_root))
     with (RefreshRunLock(operation_lock),
           RefreshRunLock(root / ".writer.lock")):
+        if args.approved_snapshot:
+            from grocery_data.app.services.axfood_catalogue_queue import approved_catalogue_codes
+            from grocery_data.app.storage import create_database_engine, create_session_factory
+
+            if not args.database.is_file():
+                raise ValueError("Approved catalogue database does not exist")
+            engine = create_database_engine("sqlite:///" + args.database.resolve().as_posix())
+            try:
+                with create_session_factory(engine)() as session:
+                    codes, proof = approved_catalogue_codes(session, args.approved_snapshot,
+                                                           chain=args.chain, store_id=args.store_id)
+                args.catalog_proof = staging / f"approved-catalogue-{args.chain}.json"
+                atomic_bytes(args.catalog_proof, encoded(proof))
+            finally:
+                engine.dispose()
         from deploy.scripts.storage_maintenance import inventory, maintain_axfood_archives
 
         retention = maintain_axfood_archives(root, now=datetime.now(UTC), apply=True)
