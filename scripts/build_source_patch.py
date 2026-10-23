@@ -54,6 +54,22 @@ def exact_runtime_base(base, path, runtime):
     return actual
 
 
+AXFOOD_READER_FILES = frozenset({
+    'backend/app/services/axfood_product_details.py',
+    'backend/app/services/personal_source_facts.py',
+    'grocery_data/app/services/axfood_detail_archive.py',
+})
+
+
+def selected_paths(changed, *, axfood_reader_only=False):
+    if axfood_reader_only:
+        if not AXFOOD_READER_FILES <= set(changed):
+            raise ValueError('Axfood reader release requires every reviewed reader dependency')
+        return sorted(AXFOOD_READER_FILES)
+    return [x for x in changed if x.startswith(('grocery_data/app/', 'deploy/scripts/'))
+            or x in ('grocery_data/__main__.py', 'grocery_data/ops.py', 'backend/app/services/price_universe.py')]
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('base-commit', 'parent-commit', 'commit', 'base-image', 'base-tag'):
@@ -63,6 +79,8 @@ def main():
                    help='Private docker image inspect JSON for the pinned base image')
     p.add_argument('--base-files', type=Path,
                    help='Private {image,files} JSON with base64 bytes from the pinned runtime')
+    p.add_argument('--axfood-reader-only', action='store_true',
+                   help='Separate reviewed three-file Axfood reader package; exclude planner/scheduler deltas')
     args = p.parse_args()
     for name in ('base_commit', 'parent_commit', 'commit'):
         setattr(args, name, git('rev-parse', '--verify', getattr(args, name)+'^{commit}').decode().strip())
@@ -71,8 +89,7 @@ def main():
     if not re.fullmatch('sha256:[a-f0-9]{64}', args.base_image) or not re.fullmatch('[a-z0-9:._-]+', args.base_tag):
         raise ValueError('invalid pinned image identity')
     changed = git('diff', '--name-only', args.parent_commit, args.commit).decode().splitlines()
-    selected = [x for x in changed if x.startswith(('grocery_data/app/', 'deploy/scripts/'))
-                or x in ('grocery_data/__main__.py', 'grocery_data/ops.py', 'backend/app/services/price_universe.py')]
+    selected = selected_paths(changed, axfood_reader_only=args.axfood_reader_only)
     if not selected:
         raise ValueError('empty source patch')
     runtime = json.loads(args.base_files.read_bytes()) if args.base_files else None
@@ -92,6 +109,8 @@ def main():
                 'parent_commit': args.parent_commit, 'base_commit': args.base_commit,
                 'base_image': args.base_image, 'base_tag': args.base_tag,
                 'files': hashes, 'base_files': base_hashes}
+    if args.axfood_reader_only:
+        manifest['scope'] = 'axfood-reader-only; no planner, scheduler or price changes'
     from beta_release_workers.image_config import final_image_config, flatten_instructions
     inspected = json.loads(args.base_config.read_bytes())
     if not isinstance(inspected, list) or len(inspected) != 1 or inspected[0]['Id'] != args.base_image:
