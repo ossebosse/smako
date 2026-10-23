@@ -7,6 +7,7 @@ import json
 import os
 import zlib
 from functools import lru_cache
+from itertools import islice
 from pathlib import Path
 from types import MappingProxyType
 
@@ -132,6 +133,14 @@ def method_signature():
                            for p in sorted(paths)}))
 
 
+@lru_cache(maxsize=64)
+def _directory_at_capacity(directory, modified_ns, limit):
+    # Directory modification time invalidates the snapshot when entries change.
+    # A cached full result can only suppress a write, never approve one: the
+    # ordinary count/byte checks below still govern every actual write.
+    return sum(1 for _ in islice(directory.glob("*.json"), limit)) >= limit
+
+
 def prepared(kind, identity, compute, *, storable=None):
     """Reject partial/wrong version artefacts and safely recompute on any cache fault.
 
@@ -168,8 +177,10 @@ def prepared(kind, identity, compute, *, storable=None):
         directory.mkdir(parents=True,exist_ok=True)
         # Existing generation evidence is retained. At the bounded capacity,
         # continue safely in memory rather than growing disk indefinitely.
-        existing = list(directory.glob("*.json"))
         limit = 4096 if kind == "content" else MAX_GENERATIONS
+        if _directory_at_capacity(directory, directory.stat().st_mtime_ns, limit) and not path.exists():
+            return payload
+        existing = list(directory.glob("*.json"))
         if len(existing) >= limit and not path.exists():
             return payload  # A full cache cannot accept this new key; no size scan is needed.
         total_bytes = sum(p.stat().st_size for p in existing)
