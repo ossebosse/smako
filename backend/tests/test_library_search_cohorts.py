@@ -1,6 +1,7 @@
 """Stable checkpoint paths and retention of a completed cheaper prefix."""
 from types import SimpleNamespace
 
+import pytest
 from app.services.library_search_cohorts import merged_library_cohorts
 from app.services.meal_library_content import identity
 
@@ -21,9 +22,10 @@ def test_nested_libraries_follow_identical_completed_checkpoint_paths():
     previous = None
     for size in (262, 1000, 2000, 5000):
         recipes, generations, slots = library(size)
-        cohorts, completed, prefixes = merged_library_cohorts(slots, recipes, generations, first_generation=2)
+        cohorts, completed, prefixes, probes = merged_library_cohorts(slots, recipes, generations, first_generation=2)
         assert prefixes[-1] == size
         assert {prefixes[index] for index in completed} == {n for n in (262, 1000, 2000, 5000) if n <= size}
+        assert probes <= completed
         if previous:
             smaller, smaller_prefixes = previous
             assert tuple(n for n in prefixes if n <= smaller) == smaller_prefixes
@@ -71,4 +73,26 @@ def test_checkpoint_with_no_new_qualified_recipe_still_completes_the_pending_pre
     _, cost = run([(1, options('A')), (2, options('AB')), (3, options('AB')), (4, options('ABC'))],
         evaluate=lambda slots, final: prices[tuple(s.recipe.name for s in slots)],
         completed_prefix_indexes={2, 3}, refinement_selector=refinement)
+    assert cost == 2
+
+
+@pytest.mark.parametrize('probe_only', [set(), {1}])
+def test_checkpoint_archive_keeps_the_original_path_out_of_a_different_local_minimum(probe_only):
+    def evaluate(slots, *, final):
+        names = [s.recipe.name for s in slots]
+        if len(names) < 3:
+            return sum({'A': 1, 'B': 2, 'C': 3}[n] for n in names)
+        if names.count('C') == 3:
+            return 4
+        if names.count('B') == 0:
+            return {0: 10, 1: 8, 2: 6}[names.count('C')]
+        return 7 if names.count('B') == 2 and names.count('C') == 0 else 20
+    _, cost = run([(1, options('A', days=3)), (2, options('AB', days=3)), (3, options('ABC', days=3))],
+        evaluate=evaluate, completed_prefix_indexes={1, 2}, checkpoint_probe_indexes=probe_only)
+    assert cost == 4
+
+
+def test_ordinary_search_still_accepts_a_finite_cohort_iterator():
+    _, cost = run(iter([(1, options('A')), (2, options('AB'))]),
+                  evaluate=lambda slots, final: sum(1 if s.recipe.name == 'B' else 5 for s in slots))
     assert cost == 2

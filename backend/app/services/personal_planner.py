@@ -2992,9 +2992,10 @@ class PersonalPlanner:
                 from app.services.library_search_cohorts import merged_library_cohorts
                 from app.services.recipe_library import current_recipes
 
-                search_input, completed, prefixes = merged_library_cohorts(
+                search_input, completed, prefixes, probes = merged_library_cohorts(
                     options, current_recipes(self.library_generation), generations, first_generation=first)
-                library_kwargs.update(completed_prefix_indexes=completed, cohort_prefix_sizes=prefixes)
+                library_kwargs.update(completed_prefix_indexes=completed, cohort_prefix_sizes=prefixes,
+                                      checkpoint_probe_indexes=probes)
             else:
                 search_input = [(generation, [
                     [s for s in group if not s.recipe or not s.recipe.design

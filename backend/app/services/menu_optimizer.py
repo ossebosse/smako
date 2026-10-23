@@ -888,6 +888,7 @@ class MenuOptimizer:
                                search_trace=None, decision_observer=None, seed_selector=None,
                                refinement_score=None, joint_proposals=None, unordered_small_pool_limit=0,
                                completed_prefix_indexes=(), cohort_prefix_sizes=(),
+                               checkpoint_probe_indexes=(),
                                **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
 
@@ -898,6 +899,7 @@ class MenuOptimizer:
         Nothing survives this call; the caller independently audits the winner.
         This is a bounded neighbourhood search, not an optimality proof.
         """
+        cohorts = tuple(cohorts)
         trace = search_trace if search_trace is not None else []
         cache, keys = OrderedDict(), RecipeComputationCache()
         hits = 0
@@ -1159,67 +1161,77 @@ class MenuOptimizer:
             return incumbent
 
         incumbent, previous, last_error = None, None, None
-        last_completed_options = None
+        completed_best = None
+        archive_rank = refinement_score or retention_score
         for cohort_index, (generation, options) in enumerate(cohorts):
-            if previous == options:
-                if (incumbent is not None and cohort_index in completed_prefix_indexes
-                        and last_completed_options is not previous):
-                    incumbent = finalize(incumbent, previous, generation)
-                    last_completed_options = previous
-                continue
-            prior_options, previous = previous, options
-            if any(not group for group in options):
-                continue
-            if incumbent is None:
-                seed = seed_selector(options) if seed_selector else options
-                attempts = [seed] if seed == options else [seed, options]
-                for index, seed_options in enumerate(attempts):
-                    start = len(trace)
-                    before_hits = hits
-                    try:
-                        incumbent = self.optimize_slots(
-                            seed_options, evaluate=cached_evaluate, accepts=accepts, score=score,
-                            _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
-                            search_trace=trace, decision_observer=decision_observer, **search_options)
-                    except (IncompleteBasketError, ValueError) as exc:
-                        last_error = exc
-                    finally:
-                        for row in trace[start:]:
-                            row.update(library_generation=generation, library_phase="seed",
-                                       seed_full_pool_retry=index > 0,
-                                       seed_variants_available=sum(map(len, options)),
-                                       seed_variants_retained=sum(map(len, seed_options)))
-                        if len(trace) > start:
-                            trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
-                    if incumbent is not None:
-                        break
+            saved = incumbent, previous, secondary_best
+            trace_start = len(trace)
+            try:
+                if previous != options:
+                    prior_options, previous = previous, options
+                    if any(not group for group in options):
+                        continue
+                    if incumbent is None:
+                        seed = seed_selector(options) if seed_selector else options
+                        attempts = [seed] if seed == options else [seed, options]
+                        for index, seed_options in enumerate(attempts):
+                            start = len(trace)
+                            before_hits = hits
+                            try:
+                                incumbent = self.optimize_slots(
+                                    seed_options, evaluate=cached_evaluate, accepts=accepts, score=score,
+                                    _attempt_offset=max((r.get("attempt", 1) for r in trace), default=0),
+                                    search_trace=trace, decision_observer=decision_observer, **search_options)
+                            except (IncompleteBasketError, ValueError) as exc:
+                                last_error = exc
+                            finally:
+                                for row in trace[start:]:
+                                    row.update(library_generation=generation, library_phase="seed",
+                                               seed_full_pool_retry=index > 0,
+                                               seed_variants_available=sum(map(len, options)),
+                                               seed_variants_retained=sum(map(len, seed_options)))
+                                if len(trace) > start:
+                                    trace[-1]["library_shared_basket_cache_hits"] = hits - before_hits
+                            if incumbent is not None:
+                                break
+                    else:
+                        prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
+                        additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]
+                                     for index, group in enumerate(options)]
+                        extra = None
+                        if substitution_selector is not None:
+                            # Heuristic bound, like the seed cap: each newer generation's
+                            # recipes are ranked by their qualified single-recipe evidence
+                            # and only the selection is tried in every slot. The complete
+                            # current pool still enters refinement, pairs and joint moves.
+                            available = sum(map(len, additions))
+                            additions = substitution_selector(additions)
+                            extra = {"substitution_variants_available": available,
+                                     "substitution_variants_retained": sum(map(len, additions))}
+                        incumbent = improve(incumbent, additions, generation, "substitution", extra=extra,
+                                            screen=substitution_screen, order=substitution_order,
+                                            slot_limit=substitution_slot_limit)
                 if incumbent is not None and cohort_index in completed_prefix_indexes:
-                    incumbent = finalize(incumbent, previous, generation)
-                    last_completed_options = previous
-                continue
-            prior_keys = [{slot_key(slot) for slot in group} for group in prior_options]
-            additions = [[slot for slot in group if slot_key(slot) not in prior_keys[index]]
-                         for index, group in enumerate(options)]
-            extra = None
-            if substitution_selector is not None:
-                # Heuristic bound, like the seed cap: each newer generation's
-                # recipes are ranked by their qualified single-recipe evidence
-                # and only the selection is tried in every slot. The complete
-                # current pool still enters refinement, pairs and joint moves.
-                available = sum(map(len, additions))
-                additions = substitution_selector(additions)
-                extra = {"substitution_variants_available": available,
-                         "substitution_variants_retained": sum(map(len, additions))}
-            incumbent = improve(incumbent, additions, generation, "substitution", extra=extra,
-                                screen=substitution_screen, order=substitution_order,
-                                slot_limit=substitution_slot_limit)
-            if cohort_index in completed_prefix_indexes:
-                incumbent = finalize(incumbent, previous, generation)
-                last_completed_options = previous
-        if incumbent is not None:
-            if last_completed_options is not previous:
-                incumbent = finalize(incumbent, previous, generation)
-            return incumbent
+                    # Archive a completed solution, but keep the ordinary
+                    # substitution trajectory and its secondary objective.
+                    # Feeding refinement back into that path can hide a
+                    # cheaper later menu behind a different local minimum.
+                    before_completion = secondary_best
+                    finished = finalize(incumbent, previous, generation)
+                    secondary_best = before_completion
+                    if completed_best is None or archive_rank(*finished) < archive_rank(*completed_best):
+                        completed_best = finished
+            finally:
+                if cohort_index in checkpoint_probe_indexes:
+                    incumbent, previous, secondary_best = saved
+                    for row in trace[trace_start:]:
+                        row["library_checkpoint_probe"] = True
+        if incumbent is not None and (len(cohorts) - 1) not in completed_prefix_indexes:
+            finished = finalize(incumbent, previous, generation)
+            if completed_best is None or archive_rank(*finished) < archive_rank(*completed_best):
+                completed_best = finished
+        if completed_best is not None:
+            return completed_best
         if last_error is not None:
             raise last_error
         raise IncompleteBasketError("Inga kandidater uppfyller måltidsfördelningen och variationskraven.")
