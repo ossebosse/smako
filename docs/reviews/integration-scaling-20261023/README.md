@@ -10,9 +10,12 @@ det tidigare 5 000-biblioteket, inte en cell i slutmatrisen.
 | Underlag | Pinne/SHA-256 |
 | --- | --- |
 | Hämtad main och serverns ursprungliga screeningjämförelse | `2efb62f219b31fa6a81c16ba71363b4207cb2dfe` |
-| Ny kandidat efter K32:s minnesfel | `c9390ddb9fbc362548a4b93261168b4764e44c16` |
+| Lunds lyckade slutmätningar efter K32:s minnesfel | `c9390ddb9fbc362548a4b93261168b4764e44c16` |
 | Kanoniskt Git-arkiv, `candidate-memory-v6.zip` (`backend`, `grocery_data`) | `4049f3cf56002e3b49041afd01d0846b5561d03a3659fb05b33ea4041e1f4053` |
-| Ny metodsignatur, samma byte i Windows och Linux | `f211cf4a197f0a7cf78b05a1026ea9309e2395e7a71dd14c7894f10044183b37` |
+| Lunds metodsignatur, kanoniska Git-byte | `f211cf4a197f0a7cf78b05a1026ea9309e2395e7a71dd14c7894f10044183b37` |
+| Malmö och uppföljningar, med nödvändig kapacitetskontroll | `b139cd4630c03bc4e01f4c5c0ba0e7ead7e50314` |
+| Kanoniskt Git-arkiv, `candidate-capacity-v7.zip` | `e10ad2621aae70d74ab0e26067ccfa70234a6ad811ac1186ed537d6c02430abc` |
+| Malmös metodsignatur | `b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9` |
 | Verkliga frysta serverexporter, `public-data.zip` | `a30a3e082ab90db43eef998dfd5b3f7c8a458262142478b73f6c6200a246c136` |
 | Nästlade testbibliotek, `nested-libraries.zip` | `e099132fca1c72a3b99d754d55723310ffdea0da68e0885a4bab108fda0764ac` |
 | Befintlig image, använd endast som isolerad beroendebas | `sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072` |
@@ -47,6 +50,15 @@ exakt samma värde. `nested-archive.json` binder detta till det bevarade
 arkivet. Ny standardisering en annan dag ändrar granskningsdatum;
 använd det hashverifierade arkivet för exakt återspelning.
 
+`capacity-code-proof.json` binder de två kodversionerna: all befintlig kod i
+de två ändrade modulerna är AST-identisk efter att den nya kapacitetsmetoden
+och dess anrop tagits bort. Variabeln skuggar ingen tidigare lokal bindning.
+En redan accepterad komplett meny visar att det nödvändiga avvisningsvillkoret
+är falskt. Lyckade Lund-mätningar återanvänds därför med sin ursprungliga
+kod-/tidsversion. Blockerade fall mäts med den nya kontrollen. Sammanställaren
+jämför samma metodsignatur inom varje stad; den blandar inte plattformarnas
+tider. Detta är ingen allmän garanti för alla privata indata.
+
 ## Slutmatris
 
 `run_matrix.py` startas i en ny process per stad och bibliotek. Den laddar
@@ -74,8 +86,10 @@ Malmö körs seriellt i en isolerad Docker-container per bibliotek med
 Kod och frysta indata monteras skrivskyddat; det valda biblioteket monteras
 vid `/srv/app/backend/app/data/recipes`. `PYTHONPATH` är
 `/srv/app/backend:/srv/app`. Kommandot är samma hjälpare med Linux-sökvägar.
-Kompletta Docker-kommandon bevaras i `final-grid-runner.log` och
-`final-grid-progress.json`. Ingen kod monteras in i driftens containrar.
+Kompletta Docker-kommandon bevaras i `final-grid-v7-runner.log` och
+`final-grid-v7-progress.json`, serverresultaten i `final-grid-v7/malmo`.
+Lunds kvittenser heter `final-local-runner.log` och `final-local-progress.json`.
+Ingen kod monteras in i driftens containrar.
 
 Standardarmarna är main/K16/K32/K48 för alla sju profiler. Vid 262 körs
 också den obegränsade v5-referensen, med alla sju sökinställningar angivna.
@@ -119,3 +133,8 @@ dyrare meny och ändrad blockeringsorsak kräver bedömning. Blockerat till
 giltigt räknas som förbättring. Saknade resultat blir aldrig godkända genom
 frånvaro. Ett godkänt prisvillkor är inte bevis för globalt optimum eller
 serverns kö-/lastkapacitet.
+
+`default-regression.json` jämför dessutom slutmatrisens main/262 med alla tre
+ursprungliga main-iterationer per stad/profil. Indata och samtliga sju
+sökinställningar måste matcha innan utfall, pris och semantisk hash jämförs.
+Ofullständiga jämförelser markeras uttryckligen och räknas inte som godkända.

@@ -13,6 +13,10 @@ CASES = ("standard", "protein40", "all-macros", "vegan", "distribution",
 CITIES = ("lund", "malmo")
 SIZES = (262, 1000, 2000, 5000)
 ARMS = ("main", "geo16", "geo32", "geo48")
+SOURCE_COMMITS = {
+    "f211cf4a197f0a7cf78b05a1026ea9309e2395e7a71dd14c7894f10044183b37": "c9390ddb9fbc362548a4b93261168b4764e44c16",
+    "b84ccfab6c612e42a91ab5a79e2ccde4bebcfe310f9834c42fbf2d244a340bf9": "b139cd4630c03bc4e01f4c5c0ba0e7ead7e50314",
+}
 
 
 def read(path):
@@ -45,7 +49,8 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     summary = {"schema": "smako-integration-scaling-review-v2", "default_merge_generations": False,
-               "server_pairs": [], "grid_records": [], "grid_gates": {}, "missing": []}
+               "server_pairs": [], "grid_records": [], "grid_gates": {}, "missing": [],
+               "reference262_comparisons": [], "resource_observations": {}}
     for city in CITIES:
         for case in CASES:
             reports = [read(args.evidence / "server-matrix" / f"{city}-{arm}-{case}.json") for arm in ("previous", "main")]
@@ -78,10 +83,36 @@ def main():
                     record = report["records"][-1]
                     cells[(city, size, case, arm)] = (record, report)
                     summary["grid_records"].append({"city": city, "size": size, "case": case, "arm": arm,
+                        "source_commit": SOURCE_COMMITS.get(report.get("method_signature")),
                         **{key: report.get(key) for key in ("report_sha256", "method_signature", "library_version", "inputs", "search_limits", "reference_contract", "merged_search_contract", "execution_environment", "measurement_protocol")},
                         "result": {key: record.get(key) for key in ("outcome", "paid", "semantic_sha256", "code", "stage", "audit_passed", "wall_seconds", "cpu_seconds", "rss_bytes", "process_peak_rss_bytes", "cgroup_peak_bytes", "cache_mode", "preparation_stats")},
                         "timings_ms": record.get("trace", {}).get("timings_ms", {}),
                         "counters": record.get("trace", {}).get("operation_counters", {})})
+    for city in CITIES:
+        observations = [r for r in summary["grid_records"] if r["city"] == city]
+        summary["resource_observations"][city] = {
+            "completed_cells": len(observations),
+            "process_peak_rss_bytes": max((r["result"].get("process_peak_rss_bytes") or 0 for r in observations), default=None),
+            "cgroup_peak_bytes": max((r["result"].get("cgroup_peak_bytes") or 0 for r in observations), default=None) if city == "malmo" else None,
+            "memory_limit_bytes": 3 * 1024 ** 3 if city == "malmo" else None,
+            "cpu_limit": 2 if city == "malmo" else None,
+            "protocol": "one observation per arm/case; process peaks include previous cases; no load-capacity claim",
+        }
+        for case in CASES:
+            reference = cells.get((city, 262, case, "uncapped"))
+            for arm in ARMS:
+                current = cells.get((city, 262, case, arm))
+                row = {"city": city, "case": case, "arm": arm, "complete": bool(current and reference)}
+                if row["complete"]:
+                    record, report = current
+                    prior, prior_report = reference
+                    assert report["inputs"] == prior_report["inputs"]
+                    assert report["method_signature"] == prior_report["method_signature"]
+                    assert report["library_version"] == prior_report["library_version"]
+                    row.update(reason=regression(record, prior), paid=record.get("paid"), reference_paid=prior.get("paid"),
+                               reference_contract=prior_report["reference_contract"],
+                               reference_report_sha256=prior_report["report_sha256"])
+                summary["reference262_comparisons"].append(row)
     for arm in ARMS[1:]:
         errors, missing = [], []
         for city in CITIES:
