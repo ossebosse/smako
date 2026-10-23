@@ -1402,6 +1402,32 @@ class MenuOptimizer:
                 primary_ingredient=primary, carbohydrate=carb, cooking_method=method, dish_form=form))
         return self._satisfies_diversity(classified, constraints)
 
+    def dish_form_capacity_conflict(self, recipes, constraints, required):
+        """Prove a shortage using the same explicit form mapping as acceptance.
+
+        Every selected dinner consumes one form's capacity. Unknown forms,
+        custom resolvers/optimizers and disabled caps cannot establish this
+        bound. Sufficient capacity never promises a feasible menu.
+        """
+        limit = constraints.max_same_dish_form
+        if (limit is None or required <= limit or not recipes
+                or type(self) is not MenuOptimizer or type(constraints.dish_forms) is not dict
+                or constraints.dish_form_resolver is not None):
+            return None
+        forms = set()
+        for recipe in recipes:
+            value = self._mapping_value(constraints.dish_forms, recipe)
+            if not value:
+                return None
+            forms.add(value)
+            if limit * len(forms) >= required:
+                return None
+        capacity = limit * len(forms)
+        if capacity >= required:
+            return None
+        return {"dimension": "dish_form", "available_values": sorted(forms),
+                "limit_per_value": limit, "maximum_slots": capacity, "required_slots": required}
+
     def _mapping_value(self, mapping: Mapping[str, str], recipe: Recipe) -> str | None:
         direct = mapping.get(recipe.name)
         if direct:

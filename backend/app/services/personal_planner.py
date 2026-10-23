@@ -3073,6 +3073,20 @@ class PersonalPlanner:
         self._defer_search_audit = True
         try:
             with performance_span("personal_week_search"):
+                capacity = (self.service.menu_optimizer.dish_form_capacity_conflict(
+                    dinner_pool, constraints, dinner_count)
+                    if type(self.service.menu_optimizer) is MenuOptimizer else None)
+                if capacity is not None:
+                    self.diagnostics.branch(dinner_count, "variation")
+                    self.diagnostics.search.append({
+                        "depth": dinner_count, "attempt": 1, "beam_width": 0,
+                        "library_phase": "capacity_check", "status": "PROVEN_INFEASIBLE",
+                        "scope": "qualified_dinner_pool",
+                        "proposals": 0, "priced": 0, "retained": 0, "beam_pruned": 0,
+                        "evaluations_executed": 0, "evaluation_cache_hits": 0,
+                        "constraints_rejected": 1, "evaluation_rejected": 0, **capacity,
+                    })
+                    raise IncompleteBasketError("Den kvalificerade receptpoolen räcker inte för variationskravet.")
                 chosen, result = search(search_input, **search_kwargs)
         finally:
             self._defer_search_audit = False
