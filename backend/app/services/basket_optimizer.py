@@ -514,12 +514,13 @@ class BasketOptimizer:
                 and existing.calculator_version == calculator_version):
             # Reuse only within the enclosing request. Bound retained search
             # intermediates between baskets; eviction never alters an answer.
-            maps = (existing.quotes, existing.candidate_fingerprints,
+            maps = (existing.quotes, existing.named, existing.items, existing.line_free_quote_sets,
+                    existing.candidate_fingerprints,
                     existing.quote_sets, existing.selections,
                     existing.per_store_selections, existing.per_store_compact,
                     existing.subset_vectors, existing.store_orders,
                     existing.subset_partitions, existing.subset_cap_masks, existing.base_candidate_rows,
-                    existing.subset_patterns)
+                    existing.subset_patterns, existing.subset_memberships, existing.vector_groups)
             if sum(map(len, maps)) > 32768:
                 for mapping in maps:
                     mapping.clear()
@@ -591,6 +592,9 @@ class BasketOptimizer:
                     increment_performance_counter(name, amount)
             self._quote_cache_context.reset(token)
             session.quotes.clear()
+            session.named.clear()
+            session.items.clear()
+            session.line_free_quote_sets.clear()
             session.quote_sets.clear()
             session.candidate_fingerprints.clear()
             session.selections.clear()
