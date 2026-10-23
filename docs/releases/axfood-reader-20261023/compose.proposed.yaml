@@ -1,0 +1,12 @@
+# Inaktivt förslag. Kräver separat driftbeslut enligt docs/BETA.md.
+services:
+  app:
+    image: sha256:92be15f2efa053f7c85bc398782d10618e9e1d06dbef24625528862753e6ffbf
+    environment:
+      BUILD_ID: source-ops-c981d757b081
+      AXFOOD_PRODUCT_DETAIL_ROOT: /srv/app/var/axfood-product-details/releases/16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a
+    volumes:
+      - type: bind
+        source: /srv/smako/data/axfood-product-details/releases/16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a
+        target: /srv/app/var/axfood-product-details/releases/16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a
+        read_only: true

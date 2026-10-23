@@ -1,0 +1,3552 @@
+{
+  "schema": "smako-sol-architecture-validation-status-v1",
+  "planner_source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10",
+  "runtime_default": "legacy",
+  "library_merge_generations": false,
+  "production_activated": false,
+  "full_matrix_passed": false,
+  "server_latency_gate_passed": false,
+  "cache_modes": {
+    "first_request": "shared public process; private context miss",
+    "repeated_request": "same process and owned disk store",
+    "independent_cold_disk": "NOT_RUN",
+    "independent_process_warm_disk": "NOT_RUN",
+    "RAM_eviction_recovery": "NOT_RUN"
+  },
+  "factual_pairs": [
+    {
+      "city": "lund",
+      "profile": "standard",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          487.85,
+          487.85,
+          487.85
+        ],
+        "enriched": [
+          487.85,
+          487.85,
+          487.85
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-lund-control/L262-main-standard.json",
+        "enriched": "candidate-final-lund-enriched/L262-main-standard.json"
+      }
+    },
+    {
+      "city": "lund",
+      "profile": "protein40",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          775.32,
+          775.32,
+          775.32
+        ],
+        "enriched": [
+          775.32,
+          775.32,
+          775.32
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-lund-control/L262-main-protein40.json",
+        "enriched": "candidate-final-lund-enriched/L262-main-protein40.json"
+      }
+    },
+    {
+      "city": "lund",
+      "profile": "all-macros",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          802.68,
+          802.68,
+          802.68
+        ],
+        "enriched": [
+          802.68,
+          802.68,
+          802.68
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-lund-control/L262-main-all-macros.json",
+        "enriched": "candidate-final-lund-enriched/L262-main-all-macros.json"
+      }
+    },
+    {
+      "city": "lund",
+      "profile": "vegan",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          347.9,
+          347.9,
+          347.9
+        ],
+        "enriched": [
+          347.9,
+          347.9,
+          347.9
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-lund-control/L262-main-vegan.json",
+        "enriched": "candidate-final-lund-enriched/L262-main-vegan.json"
+      }
+    },
+    {
+      "city": "lund",
+      "profile": "distribution",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          761.45,
+          761.45,
+          761.45
+        ],
+        "enriched": [
+          761.45,
+          761.45,
+          761.45
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-lund-control/L262-main-distribution.json",
+        "enriched": "candidate-final-lund-enriched/L262-main-distribution.json"
+      }
+    },
+    {
+      "city": "lund",
+      "profile": "organic-share",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          314.24,
+          314.24,
+          314.24
+        ],
+        "enriched": [
+          314.24,
+          314.24,
+          314.24
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-lund-control/L262-main-organic-share.json",
+        "enriched": "candidate-final-lund-enriched/L262-main-organic-share.json"
+      }
+    },
+    {
+      "city": "lund",
+      "profile": "breakfast-snack-weight",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          64.06,
+          64.06,
+          64.06
+        ],
+        "enriched": [
+          64.06,
+          64.06,
+          64.06
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-lund-control/L262-main-breakfast-snack-weight.json",
+        "enriched": "candidate-final-lund-enriched/L262-main-breakfast-snack-weight.json"
+      }
+    },
+    {
+      "city": "malmo",
+      "profile": "standard",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          511.46,
+          511.46,
+          511.46
+        ],
+        "enriched": [
+          511.46,
+          511.46,
+          511.46
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-malmo-control/L262-main-standard.json",
+        "enriched": "candidate-final-malmo-enriched/L262-main-standard.json"
+      }
+    },
+    {
+      "city": "malmo",
+      "profile": "protein40",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          1000.86,
+          1000.86,
+          1000.86
+        ],
+        "enriched": [
+          1000.86,
+          1000.86,
+          1000.86
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-malmo-control/L262-main-protein40.json",
+        "enriched": "candidate-final-malmo-enriched/L262-main-protein40.json"
+      }
+    },
+    {
+      "city": "malmo",
+      "profile": "all-macros",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          1000.86,
+          1000.86,
+          1000.86
+        ],
+        "enriched": [
+          1000.86,
+          1000.86,
+          1000.86
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-malmo-control/L262-main-all-macros.json",
+        "enriched": "candidate-final-malmo-enriched/L262-main-all-macros.json"
+      }
+    },
+    {
+      "city": "malmo",
+      "profile": "vegan",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "BLOCKED",
+          "BLOCKED",
+          "BLOCKED"
+        ],
+        "enriched": [
+          "BLOCKED",
+          "BLOCKED",
+          "BLOCKED"
+        ]
+      },
+      "paid": {
+        "control": [
+          null,
+          null,
+          null
+        ],
+        "enriched": [
+          null,
+          null,
+          null
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-malmo-control/L262-main-vegan.json",
+        "enriched": "candidate-final-malmo-enriched/L262-main-vegan.json"
+      }
+    },
+    {
+      "city": "malmo",
+      "profile": "distribution",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          996.22,
+          996.22,
+          996.22
+        ],
+        "enriched": [
+          996.22,
+          996.22,
+          996.22
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-malmo-control/L262-main-distribution.json",
+        "enriched": "candidate-final-malmo-enriched/L262-main-distribution.json"
+      }
+    },
+    {
+      "city": "malmo",
+      "profile": "organic-share",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          321.16,
+          321.16,
+          321.16
+        ],
+        "enriched": [
+          321.16,
+          321.16,
+          321.16
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-malmo-control/L262-main-organic-share.json",
+        "enriched": "candidate-final-malmo-enriched/L262-main-organic-share.json"
+      }
+    },
+    {
+      "city": "malmo",
+      "profile": "breakfast-snack-weight",
+      "status": "OBSERVED",
+      "samples": {
+        "control": 3,
+        "enriched": 3
+      },
+      "outcomes": {
+        "control": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ],
+        "enriched": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "paid": {
+        "control": [
+          53.16,
+          53.16,
+          53.16
+        ],
+        "enriched": [
+          53.16,
+          53.16,
+          53.16
+        ]
+      },
+      "reports": {
+        "control": "candidate-final-malmo-control/L262-main-breakfast-snack-weight.json",
+        "enriched": "candidate-final-malmo-enriched/L262-main-breakfast-snack-weight.json"
+      }
+    }
+  ],
+  "cells": [
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 1000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 2000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 5000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        988.32,
+        988.32,
+        988.32
+      ],
+      "seconds": [
+        249.4814,
+        101.7659,
+        101.605
+      ],
+      "method_signature": "8e6055bad42f9b2fd59501a704d3653232f475d2844035c96a05dc094760e5a3",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "report": "server-current-counterexample/L5000-main-distribution.json",
+      "sha256": "ad97b65068cfa131e8c146f05a733f36fb1109d7fe82624bfed91b8d71bae7e4",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "c981d757b081f79f3926d9bcb6349c9918fcfb4d"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        992.22,
+        992.22,
+        992.22
+      ],
+      "seconds": [
+        533.6061,
+        8.4225,
+        8.3413
+      ],
+      "method_signature": "8e6055bad42f9b2fd59501a704d3653232f475d2844035c96a05dc094760e5a3",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "report": "server-current-counterexample/L5000-verified-distribution.json",
+      "sha256": "90c26a63ab681854eefb6af4ba5beed3fc0318952b59baa240ea69ed01b593d6",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "c981d757b081f79f3926d9bcb6349c9918fcfb4d"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        487.85,
+        487.85,
+        487.85
+      ],
+      "seconds": [
+        53.3524,
+        22.3287,
+        22.2398
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-main-standard.json",
+      "sha256": "872738271cea68f60b2cbc4c28b8f6bd4c2562c7316e140ceb9cd8720bc2fc9f",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        487.85,
+        487.85,
+        487.85
+      ],
+      "seconds": [
+        56.4864,
+        5.2521,
+        5.3153
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-verified-standard.json",
+      "sha256": "6ffd803fdf2c0accc932f04af5a1f6c6378274ef82ce9178512f6da3250652b9",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        775.32,
+        775.32,
+        775.32
+      ],
+      "seconds": [
+        38.8957,
+        38.5799,
+        38.6066
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-main-protein40.json",
+      "sha256": "d41d6646c02a1650ea9d50ee1b85ae04bf2c42c1479873dd178d957cb3c77236",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        775.32,
+        775.32,
+        775.32
+      ],
+      "seconds": [
+        96.8586,
+        5.7757,
+        5.3912
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-verified-protein40.json",
+      "sha256": "1aa885599c8bcc1cdb35cfe7d65cb4347778797b11efac5c8d1928935f85768f",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        802.68,
+        802.68,
+        802.68
+      ],
+      "seconds": [
+        85.473,
+        84.7936,
+        84.9885
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-main-all-macros.json",
+      "sha256": "2604b7e264eb03f243231f7b5979291e20af19d50aa05301daf92478ec7f64fa",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        796.28,
+        796.28,
+        796.28
+      ],
+      "seconds": [
+        198.2335,
+        5.5824,
+        5.6174
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-verified-all-macros.json",
+      "sha256": "542f0c1f437823703288390fe67929cf5224f899901ea91e7b7082437705935d",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        347.9,
+        347.9,
+        347.9
+      ],
+      "seconds": [
+        10.7809,
+        10.7206,
+        10.5926
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-main-vegan.json",
+      "sha256": "473f5da8326b936a349b1f6ecd201161b9cbb28f7622cc9d2059f075f70f4b7b",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        335.35,
+        335.35,
+        335.35
+      ],
+      "seconds": [
+        77.2864,
+        5.3616,
+        5.5367
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-verified-vegan.json",
+      "sha256": "7417efb2c23c3f78adbb18d18100f998ca9f04947e1bfc90ff95d336ea576bb2",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        761.45,
+        761.45,
+        761.45
+      ],
+      "seconds": [
+        23.4294,
+        22.7352,
+        22.7303
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-main-distribution.json",
+      "sha256": "c2ec1f9c5217df0a968d2bbf5443019568c459ed6d6d0052eaec79c32175c76b",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        761.45,
+        761.45,
+        761.45
+      ],
+      "seconds": [
+        50.3265,
+        5.4017,
+        5.392
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-verified-distribution.json",
+      "sha256": "a67c65590c2be38459fb60af31ac8948fcf29174cebfd2b835335bd1f27cd192",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        314.24,
+        314.24,
+        314.24
+      ],
+      "seconds": [
+        63.2671,
+        63.2844,
+        63.6871
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-main-organic-share.json",
+      "sha256": "2fa48ea5539048627d88f84e85635f7739d9b94c05dee5f167794ed2bc099dd4",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        314.24,
+        314.24,
+        314.24
+      ],
+      "seconds": [
+        158.2924,
+        5.1307,
+        5.1395
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-verified-organic-share.json",
+      "sha256": "e59a1b9643e2bc2fef420699fc75d980b3ae1c3e646fa7d0f171c520d4d3e5e8",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        64.06,
+        64.06,
+        64.06
+      ],
+      "seconds": [
+        3.2215,
+        2.7955,
+        2.802
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-main-breakfast-snack-weight.json",
+      "sha256": "d08cd1dd4115250846bff4bcd3756b92d458ed3707eff63fb78e74ccc2ea8505",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        64.06,
+        64.06,
+        64.06
+      ],
+      "seconds": [
+        6.3244,
+        5.0267,
+        5.1989
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-lund-enriched/L262-verified-breakfast-snack-weight.json",
+      "sha256": "4da78186c9c43f4bd3d574b4ebc47009f3babbb574e1b2705bdc66cd30bc93a3",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 1000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 2000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 5000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        511.46,
+        511.46,
+        511.46
+      ],
+      "seconds": [
+        67.4098,
+        33.2437,
+        34.2907
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-main-standard.json",
+      "sha256": "9cce7388cc3b5d17d3bf6e191f037c73761916445b823ae6358d98861193f1b0",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        492.15,
+        492.15,
+        492.15
+      ],
+      "seconds": [
+        99.9302,
+        7.577,
+        7.6336
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-verified-standard.json",
+      "sha256": "c4b06b1eff47dbc10987a222f535385f41e2fd04fa20547952c890e1c1119df9",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        1000.86,
+        1000.86,
+        1000.86
+      ],
+      "seconds": [
+        14.1772,
+        14.3959,
+        14.0613
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-main-protein40.json",
+      "sha256": "8fcc319fb669937e4e75eb1e1a2d340fe19a5d002d6063c9119c691bd1c716a8",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        1000.86,
+        1000.86,
+        1000.86
+      ],
+      "seconds": [
+        26.1825,
+        8.1092,
+        8.1035
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-verified-protein40.json",
+      "sha256": "2e6ce14245a7f9a017d897b0f96b2368895b566e3d3cc1a5267a75de62a80b5d",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        1000.86,
+        1000.86,
+        1000.86
+      ],
+      "seconds": [
+        14.1529,
+        14.1509,
+        14.2384
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-main-all-macros.json",
+      "sha256": "191948fa031a59b3f0bb9fbd40ff8691d8aa9c26305b894ce41e530a6374ceb8",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        1000.86,
+        1000.86,
+        1000.86
+      ],
+      "seconds": [
+        26.5285,
+        8.1327,
+        8.1428
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-verified-all-macros.json",
+      "sha256": "82382a4947f243cb2a44309a134a590a1bd92e6f56aa39c012f75db2e459d5a4",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "BLOCKED",
+        "BLOCKED",
+        "BLOCKED"
+      ],
+      "paid": [
+        null,
+        null,
+        null
+      ],
+      "seconds": [
+        3.4624,
+        3.4236,
+        3.4803
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-main-vegan.json",
+      "sha256": "f1fd6130184a625348f1db31fb719fd575a99861186f4f3a3b09840ed842347b",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "BLOCKED",
+        "BLOCKED",
+        "BLOCKED"
+      ],
+      "paid": [
+        null,
+        null,
+        null
+      ],
+      "seconds": [
+        5.0733,
+        3.6537,
+        3.5918
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-verified-vegan.json",
+      "sha256": "9011e6f083caf16886859fce768adca9d031754a45bc58971a4e7d26b35cb98a",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        996.22,
+        996.22,
+        996.22
+      ],
+      "seconds": [
+        14.5505,
+        14.663,
+        14.5695
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-main-distribution.json",
+      "sha256": "3e026988fa151e5cda49aae90d19c58f1e84ce762c09b8b193135e4dec6b1b04",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        996.22,
+        996.22,
+        996.22
+      ],
+      "seconds": [
+        27.5335,
+        8.2321,
+        7.9879
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-verified-distribution.json",
+      "sha256": "bb19f3e925d8886b52718736ddfd05097088fb5963b1f51d1eefe6c236fbcace",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        321.16,
+        321.16,
+        321.16
+      ],
+      "seconds": [
+        114.8277,
+        115.1324,
+        114.6876
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-main-organic-share.json",
+      "sha256": "dd2a64c28175e66f23370eaaac55248b03665b59628f68cd5f86044e079557ef",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        321.16,
+        321.16,
+        321.16
+      ],
+      "seconds": [
+        291.4196,
+        7.5368,
+        7.5032
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-verified-organic-share.json",
+      "sha256": "6303f5b4f2dadc043171abd92db657a4903986149e5610960a22e77b62070101",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        53.16,
+        53.16,
+        53.16
+      ],
+      "seconds": [
+        5.823,
+        5.418,
+        5.3924
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-main-breakfast-snack-weight.json",
+      "sha256": "fef2f46ed13d36203825872b106a049b191870e6290487a77ce2da3694314381",
+      "prepared_hits": [
+        false,
+        false,
+        false
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "OBSERVED",
+      "samples": 3,
+      "outcomes": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "paid": [
+        53.16,
+        53.16,
+        53.16
+      ],
+      "seconds": [
+        8.9323,
+        7.4577,
+        7.5039
+      ],
+      "method_signature": "dc01edcf7446d958c33f6f114db41843a7f8f3cbd5a63b81311740852540a87b",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "report": "candidate-final-malmo-enriched/L262-verified-breakfast-snack-weight.json",
+      "sha256": "c6fd7b3ed14eb2047b7e0cdd2dde17c4941c4344cf84d0fb3e1bbe23973f3197",
+      "prepared_hits": [
+        false,
+        true,
+        true
+      ],
+      "source_commit": "4b3f91a8f8dd4b0c937f1834bc56967b6aad3d10"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 1000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 2000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "standard",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "standard",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "protein40",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "protein40",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "all-macros",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "all-macros",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "vegan",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "vegan",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "distribution",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "distribution",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "organic-share",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "organic-share",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "breakfast-snack-weight",
+      "policy": "legacy",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 5000,
+      "profile": "breakfast-snack-weight",
+      "policy": "verified",
+      "status": "NOT_RUN",
+      "not_run_reason": "Default qualification stopped after final empirical price gate failure"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "standard",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "lund",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "standard",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "original",
+      "city": "malmo",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "standard",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "lund",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "standard",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "protein40",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "all-macros",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "vegan",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "distribution",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "organic-share",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    },
+    {
+      "facts": "axfood",
+      "city": "malmo",
+      "size": 262,
+      "profile": "breakfast-snack-weight",
+      "policy": "v5",
+      "status": "NOT_RUN"
+    }
+  ],
+  "evidence_root": ".local/sol-architecture-20261023",
+  "server_evidence_root": "/opt/smako/evidence/sol-architecture-20261023",
+  "final_runtime_commit": "c981d757b081f79f3926d9bcb6349c9918fcfb4d",
+  "decision": "KEEP_OPT_IN_AFTER_PRICE_GATE_FAILURE",
+  "failed_gate": {
+    "city": "malmo",
+    "profile": "distribution",
+    "size": 5000,
+    "facts": "original",
+    "legacy_paid": [
+      988.32,
+      988.32,
+      988.32
+    ],
+    "verified_paid": [
+      992.22,
+      992.22,
+      992.22
+    ],
+    "excess_money": "3.90",
+    "source_commit": "c981d757b081f79f3926d9bcb6349c9918fcfb4d",
+    "archive_sha256": "fcc83416e966bba0b1c9087d1cfa871bac8a9b02986a6305831c9ac847e75017",
+    "receipt_sha256": "9dcc4e90becff76dd674890c79d20e397026ce0395ed00246623930f60503ed3"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "status": "PROPOSED_NOT_ACTIVATED",
+  "source_commit": "c981d757b081f79f3926d9bcb6349c9918fcfb4d",
+  "image": "sha256:92be15f2efa053f7c85bc398782d10618e9e1d06dbef24625528862753e6ffbf",
+  "build_id": "source-ops-c981d757b081",
+  "base_image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+  "previous_build_id": "app-c253cbd9ef93-9940259d",
+  "previous_compose_files": [
+    "/opt/smako/current/deploy/compose.yaml",
+    "/opt/smako/compose.vps.yaml",
+    "/opt/smako/current/deploy/compose.release.yaml",
+    "/opt/smako/current/keep-existing-proxy.yaml",
+    "/opt/smako/current/public-menu-app.yaml",
+    "/opt/smako/overrides/complete-recipes-17a9c1330dcc.yaml",
+    "/opt/smako/overrides/status-reconnect-dd12cc80e98c.yaml",
+    "/opt/smako/overrides/hemkop-source-285ef3bf66dc.yaml",
+    "/opt/smako/overrides/source-ops-08f7613a50c9.yaml",
+    "/opt/smako/overrides/source-ops-f715414daf3f.yaml",
+    "/opt/smako/overrides/source-ops-f7e65dbba0bc.yaml",
+    "/opt/smako/overrides/source-ops-9562a224f487.yaml",
+    "/opt/smako/overrides/source-ops-ce326c1d7fcf.yaml",
+    "/opt/smako/overrides/app-incident-293fc6c49400.yaml",
+    "/opt/smako/overrides/meal-library-42fab888ffd7.yaml",
+    "/opt/smako/overrides/shopping-list-6b10628f22d8.yaml",
+    "/opt/smako/overrides/source-ops-04e47c691e0c.yaml",
+    "/opt/smako/overrides/return-session-205cd8ca0f31.yaml",
+    "/opt/smako/overrides/comparability-5786d5fa6a0f.yaml",
+    "/opt/smako/overrides/municipal-f5b6aedc851d.yaml",
+    "/opt/smako/overrides/municipal-2b83475f5e68.yaml",
+    "/opt/smako/overrides/municipal-geolocation-1fc4b6c.json",
+    "/opt/smako/overrides/municipal-schedule-f6a38b849035.json",
+    "/opt/smako/overrides/municipal-repair-17a75cf60d5a.json",
+    "/opt/smako/overrides/municipal-repair-0e2bacd95c03.json",
+    "/opt/smako/overrides/municipal-scaling-7b7fe72472dd.json",
+    "/opt/smako/overrides/personal-choices-b48ca5925820.json",
+    "/opt/smako/overrides/postcode-meals-93c4f9ac4505.json",
+    "/opt/smako/overrides/editable-sliders-7987bd5bc5d1.json",
+    "/opt/smako/overrides/ops-price-recovery-1a7f5098942c.json",
+    "/opt/smako/overrides/ops-price-recovery-0fa290342376.json",
+    "/opt/smako/overrides/ops-price-recovery-2f44f4e1b13b.json",
+    "/opt/smako/overrides/ops-price-recovery-8d4327ea4227.json",
+    "/opt/smako/overrides/ops-recovery-oneoff-8d4327ea4227.json",
+    "/opt/smako/overrides/ops-runtime-0cd5096e1949.json",
+    "/opt/smako/overrides/ops-price-recovery-567c731afdc7.json",
+    "/opt/smako/overrides/ops-recovery-oneoff-567c731afdc7.json",
+    "/opt/smako/overrides/ops-runtime-d7bcd3571125.json",
+    "/opt/smako/overrides/ops-price-recovery-f384ddbc1636.json",
+    "/opt/smako/overrides/ops-recovery-oneoff-f384ddbc1636.json",
+    "/opt/smako/overrides/ops-price-recovery-fbc7a179b72a.json",
+    "/opt/smako/overrides/ops-price-recovery-7e28ff96f72d.json",
+    "/opt/smako/overrides/ops-recovery-oneoff-7e28ff96f72d.json",
+    "/opt/smako/overrides/ops-menu-7eab60a36fae.json",
+    "/opt/smako/overrides/ops-menu-reuse-334aeb2fa2a8.json",
+    "/opt/smako/overrides/ops-prepared-pricing-32127ccf7e14.json",
+    "/opt/smako/overrides/store-dashboard-20261013.json",
+    "/opt/smako/overrides/admin-browser-login-20261013.json",
+    "/opt/smako/overrides/store-status-20261013.json",
+    "/opt/smako/overrides/coop-offer-cards-20261013.json",
+    "/opt/smako/overrides/ica-campaign-rollover-20261014.json",
+    "/opt/smako/overrides/ica-purchase-estimates-20261014.json",
+    "/opt/smako/overrides/ica-purchase-estimates-20261014-ui.json",
+    "/opt/smako/overrides/ui-option3-ff241807809b.json",
+    "/opt/smako/overrides/base-price-retention-0f54e51.json",
+    "/opt/smako/overrides/willys-picking-5b344ca3b50e.json",
+    "/opt/smako/overrides/willys-flyer-retained-20261015.json",
+    "/opt/smako/overrides/recipe-product-links-07af5ac.json",
+    "/opt/smako/overrides/recipe-nutrition-extras-7e402a7.json",
+    "/opt/smako/overrides/joint-week-refinement-e041451.json",
+    "/opt/smako/overrides/planner-prewarm-disabled-20261017.json",
+    "/opt/smako/overrides/app-bac0fc15ca9a-512ef3ea.json",
+    "/opt/smako/overrides/hemkop-context-c6607a095018.json",
+    "/opt/smako/overrides/storage-maintenance-52c7d8291bb7.json",
+    "/opt/smako/overrides/app-73306acc382d-0d139487.json",
+    "/opt/smako/overrides/app-c253cbd9ef93-9940259d.json"
+  ],
+  "package": "smako-source-ops-c981d757b081.zip",
+  "package_sha256": "d31850a6df5862a45ca8b5566d821406875408465ea13ac2b5574370381cdd6a",
+  "runtime_files": {
+    "backend/app/services/axfood_product_details.py": "136e94c98fd1753575410be8e3dc94c9c051851aaf07f6c645b2cbf179cea94d",
+    "backend/app/services/personal_source_facts.py": "c903fe0ebe7d237d6e7287aaccd8de353af3a02f9334bd30aac1c959dcd214ec",
+    "grocery_data/app/services/axfood_detail_archive.py": "f29b957628b4d63a9d6911246ccc1f8c4052c5f233bf9fc2950833c402a1f060"
+  },
+  "configuration_verified": true,
+  "source_patch_metadata_sha256": "0d7a59468b8e8e2a0499fb34be43a92bfc151e08e30805f7d2b6daf48d746d91",
+  "data_release": "16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a",
+  "host_read_only_mount": "/srv/smako/data/axfood-product-details/releases/16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a",
+  "runtime_detail_root": "/srv/app/var/axfood-product-details/releases/16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a",
+  "raw_archive_sha256": "4233658523507abe87cb2f5dbef6d15c9d5f45e3d53eb56a81b4d873933d1dac",
+  "documents": {
+    "willys": 91,
+    "hemkop": 12,
+    "negative_404_410": 18,
+    "coverage": "PARTIAL"
+  },
+  "native_profile_evidence": {
+    "native_profile_image": "sha256:8d7239646d0fa6015366ef60272513db76cd6bbedc95a18fe6accf8afea5f457",
+    "runtime_diff": [
+      "backend/app/services/axfood_product_details.py",
+      "backend/app/services/personal_source_facts.py"
+    ],
+    "native_planner_recipe_models_and_library_byteidentical": true,
+    "projection_probe_sha256": "8e7975165069208da5e28830487acedfad2a6425b21842067aa8ebcdf88949d9",
+    "clone_probe_sha256": "705f8c7248c7aaa110a2a14e66a82190de4ffd12a0986f33e00d840253fbea24",
+    "driver_sha256": "ba286526d2dd4fa8d3a0120eeeba81b19655f1332e4232e7b32985bcdd18f5d1",
+    "reuse_requires_exact_fresh_candidate_fact_projection": true
+  },
+  "native_comparison": "../../reviews/verified-reference-axfood-20261023/native-reader.json",
+  "fresh_projections": [
+    {
+      "city": "lund",
+      "projection_equal_to_native_profile_facts": true,
+      "facts_version": "retained-catalog-facts-v11-nutrition-extras:594d0e9ae9e35ff91330a347a48dd9c3a2c869a32f8479211cdd736e299c1fbe",
+      "threshold_contradiction_blocked": true,
+      "stats": {
+        "products": 30476,
+        "own_document": 175,
+        "shared_document": 106,
+        "gtin_mismatch": 0,
+        "no_document": 30195,
+        "rejected_own_document": 27,
+        "rejected_shared_document": 12,
+        "rejections": {
+          "http_error": 38,
+          "invalid_identity": 1
+        },
+        "conflicts": 4,
+        "validation_version": "axfood-detail-evidence-v3",
+        "release_manifest": "16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a"
+      },
+      "cgroup_peak_bytes": 1722187776
+    },
+    {
+      "city": "malmo",
+      "projection_equal_to_native_profile_facts": true,
+      "facts_version": "retained-catalog-facts-v11-nutrition-extras:171bebac7367caf0a3cebb1cdeed6c9a7c34ebfa21fc58996c56260a84420416",
+      "threshold_contradiction_blocked": true,
+      "stats": {
+        "products": 71086,
+        "own_document": 366,
+        "shared_document": 255,
+        "gtin_mismatch": 0,
+        "no_document": 70465,
+        "rejected_own_document": 67,
+        "rejected_shared_document": 35,
+        "rejections": {
+          "http_error": 94,
+          "invalid_identity": 8
+        },
+        "conflicts": 7,
+        "validation_version": "axfood-detail-evidence-v3",
+        "release_manifest": "16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a"
+      },
+      "cgroup_peak_bytes": 2568404992
+    }
+  ],
+  "readiness_rollback": [
+    {
+      "phase": "base",
+      "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+      "app_env": "production",
+      "build_id": "app-c253cbd9ef93-9940259d",
+      "cgroup_peak_bytes": 3035136000,
+      "ready": {
+        "22350": {
+          "http_status": 200,
+          "status": "ready",
+          "prices_status": "degraded",
+          "required_contexts_usable": true
+        },
+        "21120": {
+          "http_status": 200,
+          "status": "ready",
+          "prices_status": "aging",
+          "required_contexts_usable": true
+        }
+      }
+    },
+    {
+      "phase": "candidate",
+      "image": "sha256:92be15f2efa053f7c85bc398782d10618e9e1d06dbef24625528862753e6ffbf",
+      "app_env": "production",
+      "build_id": "source-ops-c981d757b081",
+      "cgroup_peak_bytes": 2789945344,
+      "ready": {
+        "22350": {
+          "http_status": 200,
+          "status": "ready",
+          "prices_status": "degraded",
+          "required_contexts_usable": true
+        },
+        "21120": {
+          "http_status": 200,
+          "status": "ready",
+          "prices_status": "aging",
+          "required_contexts_usable": true
+        }
+      }
+    },
+    {
+      "phase": "rollback",
+      "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+      "app_env": "production",
+      "build_id": "app-c253cbd9ef93-9940259d",
+      "cgroup_peak_bytes": 2775584768,
+      "ready": {
+        "22350": {
+          "http_status": 200,
+          "status": "ready",
+          "prices_status": "degraded",
+          "required_contexts_usable": true
+        },
+        "21120": {
+          "http_status": 200,
+          "status": "ready",
+          "prices_status": "aging",
+          "required_contexts_usable": true
+        }
+      }
+    }
+  ],
+  "price_pointers_before": {
+    "city-lund.json": "d580742335dc64fb8b8c860896a5fc7ad883bff61a2ad8ca289b3341caba30f8",
+    "city-malmö.json": "ff62d7a0493b514c8c61aab52a17e7350941479024961c825fdb58fd41f4a494"
+  },
+  "price_pointers_after": {
+    "city-lund.json": "d580742335dc64fb8b8c860896a5fc7ad883bff61a2ad8ca289b3341caba30f8",
+    "city-malmö.json": "ff62d7a0493b514c8c61aab52a17e7350941479024961c825fdb58fd41f4a494"
+  },
+  "production_user_databases_used": false,
+  "clone_synthetic_credentials": true,
+  "source_fact_prewarm_disabled_in_readiness_clone": true,
+  "source_fact_runtime_prewarm_configuration_changed": false,
+  "proofs_sha256": "f45badb1ddea3eb9860ee9fd3f93d9bdfdcbbfb82eeaec66579cd72ed8316ade",
+  "server_evidence": "/opt/smako/evidence/sol-architecture-20261023/axfood-reader-c981d75",
+  "new_collection_schedule_installed": false,
+  "planner_policy_changed": false
+}

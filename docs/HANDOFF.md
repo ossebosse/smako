@@ -1,3 +1,50 @@
+# 2026-10-23: Arkitektur implementerad opt-in; prisgrind stoppar standardbyte
+
+Runtime är integrerad och pushad till main `c981d75`. Standarderna är fortsatt
+`legacy` och `library_merge_generations=False`. V1 väljs uttryckligt med
+`library_search_policy=smako-verified-reference-v1`. Referens, separat budgeterat
+förbättringsspår, beständiga föregångarcertifikat och små ägarbundna
+kvalificeringsvyer använder befintliga planjobb/admission/PlanStore.
+
+**Slutkodens prisgrind faller:** Malmö/fördelning, 5 000 recept, samma frysta
+originalfakta/priser/request/klocka, två CPU/3 GiB: legacy 988,32 kr mot v1
+992,22 kr i alla tre körningar, samtliga audit PASS. Cgroup nådde 3 GiB,
+OOMKilled=false; önskad marginal 2,5 GiB saknas. Ingen standard- eller
+samtidighetsökning. Fullmatrisen är inte godkänd: 30 av 252 celler mätta,
+övriga explicit ej körda efter prisfelet. Kall disk/ny process med varm disk/
+eviction återstår. Se [slutrapport och cellstatus](reviews/verified-reference-axfood-20261023.md).
+
+Alla 14 frysta faktapar vid 262 behöll utfall/pris; separat algoritmprov på samma
+berikade fakta gav ingen regression vid 262. Totalt 126 anrop: 117 PASS och nio
+fortsatt BLOCKED för Malmö/vegan. Det är inte ett globalt omöjlighetsbevis.
+Full [app-CI 40019613139](https://github.com/ossebosse/smako/actions/runs/40019613139)
+på `c981d75`: 3 094 PASS, 10 XFAIL, 53 SKIP inklusive Chromium/WebKit.
+Riktade prov, Ruff och compileall passerar.
+
+Axfood har 103 verifierade dokument (91 Willys/12 Hemköp), 18 negativa svar,
+och immutable v3-release `16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a`
+under både `D:/smako-data/axfood-product-details/releases/` och serverns
+`/srv/smako/data/axfood-product-details/releases/`. Partiell täckning redovisas.
+Katalograder utgör kön för nya koder; 30 dygn/negativjournal/retry/stopp är
+implementerade. Historiska 361,81/340,64 är inte reproducerat: originalarkivet saknas.
+
+[Separat reader-release](releases/axfood-reader-20261023/PROPOSED.md) är förberedd,
+inte aktiverad: `source-ops-c981d757b081`, image
+`sha256:92be15f2efa053f7c85bc398782d10618e9e1d06dbef24625528862753e6ffbf`.
+Exakt tre runtimefiler på aktiv bas `c253cbd9ef93`, native 222-receptsbibliotek
+bevarat, 14 native profilpar/tre upprepningar utan utfalls-/prisändring,
+färsk faktaprojektion identisk och isolerad readiness/rollback 200 i båda städerna.
+Readiness-klonen använde temporära databaser/syntetiska nycklar och hade
+källfakta-prewarm avstängd; färsk projektion verifierades separat. Fullt
+produktions-prewarm är inte mätt. Ingen produktionsdatabas monterades i
+kandidatproven; prispekarna var oförändrade under klonprovet.
+
+Produktion kör fortfarande `app-c253cbd9ef93-9940259d`. Inget schema eller
+Axfood-runtimevärde har ändrats. Principgodkännandet är redan givet; ett konkret
+appbyte/nytt automatiskt insamlingsschema kräver separat driftbeslut enligt BETA.md.
+
+---
+
 # 2026-10-23: Arkitektur beslutad, implementation lämnas till Sol
 
 Ägaren har godkänt Axfood-berikningen. Implementeringsuppdraget finns i
