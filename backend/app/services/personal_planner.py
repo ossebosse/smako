@@ -2543,6 +2543,7 @@ class PersonalPlanner:
 
     def create(self, *, replace_slot=None, balanced_reference=None, _compare_scopes=True):
         started = perf_counter()
+        self._release_idle_memory()
         incumbents = []
         incumbent_scopes = {}
         if (self.complete and _compare_scopes and self.request.diversity_mode == "cheapest"
@@ -2742,6 +2743,12 @@ class PersonalPlanner:
     def _week_purchase_key(self, basket):
         from app.services.week_refinement import surplus_key
         return (money(basket.total), surplus_key(basket) if self.spec.surplus_mode == "minimize" else ())
+
+    @timed_stage("memory_reclamation")
+    def _release_idle_memory(self):
+        from app.services.planner_memory import release_idle_memory
+
+        return release_idle_memory()
 
     def _culinary_snapshot(self, *menus):
         from app.services.menu_optimizer import LazyPairwiseSimilarities
@@ -2943,6 +2950,7 @@ class PersonalPlanner:
                     qualification_library=chain[-1]["sha256"],
                     culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0]))
                 predecessor = certificate["sha256"]
+            self._release_idle_memory()
         chosen, result = incumbent
         if result is None:
             # The durable certificate is result evidence, never current basket
@@ -3437,6 +3445,8 @@ class PersonalPlanner:
         constraints = (self.service._culinary_constraints(dinner_pool, policy, profiles=prepared_menu["culinary_profiles"])
                        if prepared_menu else self.service._culinary_constraints(dinner_pool, policy))
         self._qualified_culinary_view = constraints.pairwise_recipe_similarities
+        if self.complete and prepared_menu is None:
+            self._release_idle_memory()
         ceiling = None
         if balanced_reference is not None and dinner_count:
             references = [
