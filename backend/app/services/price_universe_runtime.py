@@ -44,6 +44,7 @@ from app.services.performance_trace import (
     increment_performance_counter,
     performance_span,
 )
+from app.services.planner_memory import release_idle_memory
 from app.services.price_universe import (
     BasketResultCache,
     CacheStats,
@@ -54,7 +55,7 @@ from app.services.price_universe import (
     PriceUniverseKey,
     SemanticCandidateCache,
 )
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, model_validator
 
 from grocery_data.app.domain.campaign_validity import (
     STOCKHOLM,
@@ -856,28 +857,47 @@ class PreparedPriceUniverseManager:
         with performance_span("load_serialized_price_universe"):
             with performance_span("price_universe_parse_and_validate"):
                 artifact = PreparedPriceUniverseArtifact.model_validate_json(payload)
-            with performance_span("price_universe_restore_indexes"):
-                prepared = artifact.restore()
-            with performance_span("price_universe_atomic_activation"):
-                self.activate(prepared)
+            prepared = self._restore_and_activate(artifact)
+        return prepared
+
+    def _restore_and_activate(self, artifact: PreparedPriceUniverseArtifact) -> PreparedPriceUniverse:
+        # Validation and index construction have different temporary graphs.
+        # Keep every live old reader and the validated candidate, reclaiming
+        # only unreachable objects before allocating the next phase.
+        release_idle_memory()
+        with performance_span("price_universe_restore_indexes"):
+            prepared = artifact.restore()
+        del artifact
+        release_idle_memory()
+        with performance_span("price_universe_atomic_activation"):
+            self.activate(prepared)
         increment_performance_counter("price_universe_serialized_loads")
         return prepared
 
     def load_file_and_activate(self, path: Path) -> PreparedPriceUniverse:
         resolved = path.resolve(strict=True)
-        with performance_span("price_universe_file_read"):
-            payload = resolved.read_bytes()
-        return self.load_and_activate(payload)
+
+        def read_artifact():
+            with performance_span("price_universe_file_read"):
+                payload = resolved.read_bytes()
+            with performance_span("price_universe_parse_and_validate"):
+                return PreparedPriceUniverseArtifact.model_validate_json(payload)
+
+        # The parser frame and its complete JSON bytes end before indexes
+        # are restored; only validated domain values cross that boundary.
+        with performance_span("load_serialized_price_universe"):
+            return self._restore_and_activate(read_artifact())
 
     @staticmethod
     def write_artifact(prepared: PreparedPriceUniverse, path: Path) -> None:
         """Atomically persist a credential-free local restart cache."""
 
         destination = path.resolve()
-        encoded = prepared.to_json().encode("utf-8")
         atomic_write_bytes(
             destination,
-            encoded,
+            # Produce native JSON bytes without a second full Unicode copy.
+            # No caller local retains them during scratch-file validation.
+            TypeAdapter(PreparedPriceUniverseArtifact).dump_json(prepared.to_artifact()),
             reserve_bytes=64 * 1024 * 1024,
             validator=lambda candidate: PreparedPriceUniverseArtifact.model_validate_json(
                 candidate.read_bytes()
