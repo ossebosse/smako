@@ -38,6 +38,10 @@ Alla håller båda katalogernas 89 458 produkter och 71 138 faktarader vid
 liv. Produktdigest, observationstider och hela den 191 730 753 byte stora
 skrivna filens hash är exakt oförändrade. Ingen OOM eller swap. Dessa
 diagnostikprov levererar ingen meny och ersätter inte plan-/auditgrinden.
+Mätverktyget använder explicit GC/trim vid fasgränser, likadant i före- och
+efterproven. Före pilotstart följer därför ytterligare tre prov som endast
+använder runtimekodens egna städgränser, utan sådan hjälp från verktyget.
+De är ännu inte körda.
 Filcache ingår fullt i måttet och ingen OS-cache har rensats. Båda tidigare
 misslyckandena bevaras i [minnesunderlaget](preparation-memory-20261024/temporary-memory-current.json).
 
@@ -48,8 +52,18 @@ metadata och serialisering samt avvisar trasig JSON, Unicode, digest,
 produktpris, index och proveniens. En giltig gammal läsare behålls fram till
 atomiskt byte och en ogiltig kandidat ersätter inte den aktiva versionen.
 
-Slutkodens första vanliga fyranropsprov har startat. Därefter kör samma
-förgrundssekvens två ytterligare kalla prov och alla cachelägen, pilot,
+Slutkodens första vanliga fyranropsprov är klart: **662,83 s** första anropet,
+sedan **11,66 / 11,86 / 12,19 s**. Alla ger 988,32 kr, förväntad hash och
+audit PASS. Slutlig cgroup-peak är **2 021 113 856 byte (1,882 GiB)** efter
+alla anrop, rapportskrivning och städning, utan swap. Processens hela
+körkommando tog 756,71 s; legacy-förberedelsen 61,63 s/3 041 utvärderingar.
+Det andra och tredje kalla provet gav **649,49 / 664,50 s**; samtliga tre
+ger 988,32 kr/hash/audit PASS. Medianen är **662,83 s**, spannet
+**649,49–664,50 s** och högsta slutliga processpeak **1,882 GiB**.
+Alla har slutkvitto efter rapportserialisering och städning, utan OOM/swap.
+[Aktuellt cacheunderlag](preparation-memory-20261024/cache-modes-current.json).
+Samma
+förgrundssekvens fortsätter med två ytterligare kalla prov och alla cachelägen, pilot,
 HTTP/historik, tre matchade basprov, ny fasprofil och full matris. Varje
 steg stannar vid missad grind. Metodsignaturen är
 `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
@@ -76,7 +90,7 @@ Alla tretton cachelägesprocesser är avslutade med exit 0, utan OOM och inom
 primärprovets fyra planer redovisas separat. Högsta peak över sekvensen är
 **2 273 837 056 byte (2,118 GiB)**. Äldre anrop saknar avslutande processkvitto;
 de senare har även peak efter rapportserialisering. Skillnaden redovisas per
-process i [aktuellt cacheunderlag](preparation-memory-20261024/cache-modes-current.json).
+process i [b5-seriens cacheunderlag](preparation-memory-20261024/cache-modes-b5c242d.json).
 
 | Läge på `b5c242d` | Plananrop | Cgroup-peak |
 | --- | --- | --- |
@@ -366,7 +380,8 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 5 000/v1 är uppmätt pilot, ännu inte standardkvalificerad. Äldre kods
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
-Kvar: minst tre kalla jämförbara prov per arm, färdig evidens för alla
+Kvar: tre kalla jämförbara prov på basarmen, matchad instrumenterad profil,
+färdig evidens för alla slutkodens
 cachelägen, aktuell legacy-jämförelse och 262-kvot, övriga pilotprofiler/
 städer, versionsbyte/serialisering under minnestak och hela slutmatrisen.
 Ingen generell total bytebudget för alla RAM-cacher har bevisats; marginalen

@@ -1,0 +1,2343 @@
+{
+  "schema": "smako-current-cache-modes-v1",
+  "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+  "status": "CACHE_MODES_PASSED_NOT_FULL_RELEASE",
+  "modes": [
+    {
+      "mode": "cold-2",
+      "raw_report_sha256": "72444e389d290cdb04bf025b0634e044e8b59faa367c9a7e194d8a7ccddb9a7d",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 641.2754196347669,
+          "cpu_seconds": 634.394414879,
+          "rss_bytes": 1913880576,
+          "process_peak_rss_bytes": 1936498688,
+          "cgroup_peak_bytes": 2271469568,
+          "preparation_stats": {
+            "hits": 4119,
+            "misses": 6240,
+            "writes": 4098,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 0,
+            "replayed_publications": 11,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": null,
+      "maximum_recorded_cgroup_peak_bytes": 2271469568,
+      "receipt": {
+        "mode": "cold-2",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:05:40.165955446Z",
+          "FinishedAt": "2026-10-24T12:17:17.03764416Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 697.1271204119548,
+        "provision_seconds_excluded_from_process": 0.00020920997485518456,
+        "before": null,
+        "app_cache_at_start": "empty",
+        "owner_store_at_start": "new",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-cold-2",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/cold-2:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; cold-2; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "cold-3",
+      "raw_report_sha256": "6d31aa590705b38918d19d2a37b5f228c05a9503c6603757747916a46492badf",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 665.077126908116,
+          "cpu_seconds": 657.809946328,
+          "rss_bytes": 1913118720,
+          "process_peak_rss_bytes": 1936404480,
+          "cgroup_peak_bytes": 1952169984,
+          "preparation_stats": {
+            "hits": 4119,
+            "misses": 6240,
+            "writes": 4098,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 0,
+            "replayed_publications": 11,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": null,
+      "maximum_recorded_cgroup_peak_bytes": 1952169984,
+      "receipt": {
+        "mode": "cold-3",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:17:17.220684994Z",
+          "FinishedAt": "2026-10-24T12:29:17.25960713Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 720.2299109958112,
+        "provision_seconds_excluded_from_process": 0.0002445271238684654,
+        "before": null,
+        "app_cache_at_start": "empty",
+        "owner_store_at_start": "new",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-cold-3",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/cold-3:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; cold-3; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "legacy",
+      "raw_report_sha256": "8b3605626d2108d345d6b6a65ccec60ab587777e7cf345b2faa4fbc3b702706f",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 137.34669076418504,
+          "cpu_seconds": 137.23136762000001,
+          "rss_bytes": 1743654912,
+          "process_peak_rss_bytes": 1743654912,
+          "cgroup_peak_bytes": 1730629632,
+          "preparation_stats": {
+            "hits": 8217,
+            "misses": 2142,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": null,
+            "replayed_publications": null,
+            "prepared_menu_hit": null
+          }
+        },
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 107.02125253016129,
+          "cpu_seconds": 106.93303167000002,
+          "rss_bytes": 1756487680,
+          "process_peak_rss_bytes": 1763172352,
+          "cgroup_peak_bytes": 1750999040,
+          "preparation_stats": {
+            "hits": 2,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": null,
+            "replayed_publications": null,
+            "prepared_menu_hit": null
+          }
+        },
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 106.96733267325908,
+          "cpu_seconds": 106.88127808499996,
+          "rss_bytes": 1767325696,
+          "process_peak_rss_bytes": 1774903296,
+          "cgroup_peak_bytes": 1762660352,
+          "preparation_stats": {
+            "hits": 2,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": null,
+            "replayed_publications": null,
+            "prepared_menu_hit": null
+          }
+        },
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 104.19559313124046,
+          "cpu_seconds": 104.11803896700002,
+          "rss_bytes": 1778393088,
+          "process_peak_rss_bytes": 1784053760,
+          "cgroup_peak_bytes": 1771601920,
+          "preparation_stats": {
+            "hits": 2,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": null,
+            "replayed_publications": null,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": null,
+      "maximum_recorded_cgroup_peak_bytes": 1771601920,
+      "receipt": {
+        "mode": "legacy",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:29:18.302880679Z",
+          "FinishedAt": "2026-10-24T12:37:56.405808515Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 518.3408399960026,
+        "provision_seconds_excluded_from_process": 0.7942327531054616,
+        "before": null,
+        "app_cache_at_start": "copy of prepared primary cache",
+        "owner_store_at_start": "new",
+        "after": null
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-legacy",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/legacy:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "4",
+        "--cases",
+        "distribution",
+        "--arms",
+        "main",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; legacy; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "prefix262",
+      "raw_report_sha256": "a53d07d53afc0e2fbf158b8137a11290f770c259451bcf8142adedef2773ac07",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 996.22,
+          "audit_passed": true,
+          "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+          "wall_seconds": 21.28323271777481,
+          "cpu_seconds": 21.240623634000002,
+          "rss_bytes": 1080430592,
+          "process_peak_rss_bytes": 1619046400,
+          "cgroup_peak_bytes": 1609166848,
+          "preparation_stats": {
+            "hits": 549,
+            "misses": 334,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 1,
+            "replayed_publications": 0,
+            "prepared_menu_hit": null
+          }
+        },
+        {
+          "outcome": "PASS",
+          "paid": 996.22,
+          "audit_passed": true,
+          "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+          "wall_seconds": 11.11771534010768,
+          "cpu_seconds": 11.122277968000006,
+          "rss_bytes": 1081212928,
+          "process_peak_rss_bytes": 1619046400,
+          "cgroup_peak_bytes": 1609166848,
+          "preparation_stats": {
+            "hits": 2,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 1,
+            "replayed_publications": 0,
+            "prepared_menu_hit": true
+          }
+        },
+        {
+          "outcome": "PASS",
+          "paid": 996.22,
+          "audit_passed": true,
+          "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+          "wall_seconds": 11.552356509957463,
+          "cpu_seconds": 11.553817766999998,
+          "rss_bytes": 1081245696,
+          "process_peak_rss_bytes": 1619046400,
+          "cgroup_peak_bytes": 1609166848,
+          "preparation_stats": {
+            "hits": 2,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 1,
+            "replayed_publications": 0,
+            "prepared_menu_hit": true
+          }
+        },
+        {
+          "outcome": "PASS",
+          "paid": 996.22,
+          "audit_passed": true,
+          "semantic_sha256": "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+          "wall_seconds": 12.97784672724083,
+          "cpu_seconds": 12.981895933999994,
+          "rss_bytes": 1081262080,
+          "process_peak_rss_bytes": 1619046400,
+          "cgroup_peak_bytes": 1609166848,
+          "preparation_stats": {
+            "hits": 2,
+            "misses": 0,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 1,
+            "replayed_publications": 0,
+            "prepared_menu_hit": true
+          }
+        }
+      ],
+      "final_resource": null,
+      "maximum_recorded_cgroup_peak_bytes": 1609166848,
+      "receipt": {
+        "mode": "prefix262",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:37:57.075652911Z",
+          "FinishedAt": "2026-10-24T12:39:49.558635853Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 112.7245683777146,
+        "provision_seconds_excluded_from_process": 0.4231520448811352,
+        "before": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        },
+        "app_cache_at_start": "copy of prepared primary cache",
+        "owner_store_at_start": "backup of synthetic primary store",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              2
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-prefix262",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/262:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/prefix262:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "262",
+        "--repeat",
+        "4",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; prefix262; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "restart-1",
+      "raw_report_sha256": "227991a69b0652d7399e6d85cbc1271408de3f79ccf6c6f62e7efe04143f5cbe",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 51.27577174175531,
+          "cpu_seconds": 51.237876394,
+          "rss_bytes": 1309855744,
+          "process_peak_rss_bytes": 1712037888,
+          "cgroup_peak_bytes": 1698332672,
+          "preparation_stats": {
+            "hits": 8217,
+            "misses": 2142,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 11,
+            "replayed_publications": 0,
+            "prepared_menu_hit": true
+          }
+        }
+      ],
+      "final_resource": null,
+      "maximum_recorded_cgroup_peak_bytes": 1698332672,
+      "receipt": {
+        "mode": "restart-1",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:39:50.187627508Z",
+          "FinishedAt": "2026-10-24T12:41:35.307780457Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 105.35688584204763,
+        "provision_seconds_excluded_from_process": 0.38656903989613056,
+        "before": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        },
+        "app_cache_at_start": "copy of prepared primary cache",
+        "owner_store_at_start": "backup of synthetic primary store",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-restart-1",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/restart-1:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; restart-1; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "restart-2",
+      "raw_report_sha256": "7188b7b054d9cfcae03e0f394534daac68c0fda24d8648346e812b0114a9e38f",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 51.21095742378384,
+          "cpu_seconds": 51.180901307,
+          "rss_bytes": 1310220288,
+          "process_peak_rss_bytes": 1712824320,
+          "cgroup_peak_bytes": 1698705408,
+          "preparation_stats": {
+            "hits": 8217,
+            "misses": 2142,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 11,
+            "replayed_publications": 0,
+            "prepared_menu_hit": true
+          }
+        }
+      ],
+      "final_resource": null,
+      "maximum_recorded_cgroup_peak_bytes": 1698705408,
+      "receipt": {
+        "mode": "restart-2",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:41:35.900741912Z",
+          "FinishedAt": "2026-10-24T12:43:20.55906647Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 104.88644720800221,
+        "provision_seconds_excluded_from_process": 0.3725171498954296,
+        "before": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        },
+        "app_cache_at_start": "copy of prepared primary cache",
+        "owner_store_at_start": "backup of synthetic primary store",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-restart-2",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/restart-2:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; restart-2; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "restart-3",
+      "raw_report_sha256": "1e135c84fbda295ada8b5fc8696f213b1375dcda372e61a4ca2958bb2558bee4",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 50.90942825889215,
+          "cpu_seconds": 50.861215347,
+          "rss_bytes": 1311690752,
+          "process_peak_rss_bytes": 1711542272,
+          "cgroup_peak_bytes": 1697665024,
+          "preparation_stats": {
+            "hits": 8217,
+            "misses": 2142,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 11,
+            "replayed_publications": 0,
+            "prepared_menu_hit": true
+          }
+        }
+      ],
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "2953011252ff747015c618552255069e42707732f408be5291f73f0f9570d25e",
+        "memory": {
+          "current": 1267417088,
+          "peak": 1697665024,
+          "swap_current": 0
+        },
+        "memory_target_passed": true
+      },
+      "maximum_recorded_cgroup_peak_bytes": 1697665024,
+      "receipt": {
+        "mode": "restart-3",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:43:21.171856027Z",
+          "FinishedAt": "2026-10-24T12:45:05.175025762Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 104.22338342992589,
+        "provision_seconds_excluded_from_process": 0.3854313767515123,
+        "before": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        },
+        "app_cache_at_start": "copy of prepared primary cache",
+        "owner_store_at_start": "backup of synthetic primary store",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-restart-3",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/restart-3:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; restart-3; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "cache-loss-1",
+      "raw_report_sha256": "d2d1d35830953b580c6b68f2a1e8a9d15a9fc93667687380c0d5d7949f2d19de",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 130.68134904606268,
+          "cpu_seconds": 124.403773876,
+          "rss_bytes": 1677795328,
+          "process_peak_rss_bytes": 1713078272,
+          "cgroup_peak_bytes": 1698893824,
+          "preparation_stats": {
+            "hits": 4119,
+            "misses": 6240,
+            "writes": 4098,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 11,
+            "replayed_publications": 0,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "c62b64a78f5a6181dff4c1853a38f8b9b174867ee347c4dcf476874d0eae0e61",
+        "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+        "memory": {
+          "current": 1648476160,
+          "peak": 1698893824,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "maximum_recorded_cgroup_peak_bytes": 1698893824,
+      "receipt": {
+        "mode": "cache-loss-1",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:45:05.395586999Z",
+          "FinishedAt": "2026-10-24T12:48:08.938876225Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 183.72806094493717,
+        "provision_seconds_excluded_from_process": 0.0319546521641314,
+        "before": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        },
+        "app_cache_at_start": "empty",
+        "owner_store_at_start": "backup of synthetic primary store",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-cache-loss-1",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/cache-loss-1:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; cache-loss-1; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "cache-loss-2",
+      "raw_report_sha256": "f645612c26581dea8a6fc93c742d6de8ba9758201d28066aeb0ea05be9c1d776",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 131.05288405017927,
+          "cpu_seconds": 124.559028768,
+          "rss_bytes": 1678237696,
+          "process_peak_rss_bytes": 1713029120,
+          "cgroup_peak_bytes": 1699262464,
+          "preparation_stats": {
+            "hits": 4119,
+            "misses": 6240,
+            "writes": 4098,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 11,
+            "replayed_publications": 0,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "c62b64a78f5a6181dff4c1853a38f8b9b174867ee347c4dcf476874d0eae0e61",
+        "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+        "memory": {
+          "current": 1650479104,
+          "peak": 1699262464,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "maximum_recorded_cgroup_peak_bytes": 1699262464,
+      "receipt": {
+        "mode": "cache-loss-2",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:48:09.153436541Z",
+          "FinishedAt": "2026-10-24T12:51:13.764106263Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 184.7882814463228,
+        "provision_seconds_excluded_from_process": 0.03451357036828995,
+        "before": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        },
+        "app_cache_at_start": "empty",
+        "owner_store_at_start": "backup of synthetic primary store",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-cache-loss-2",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/cache-loss-2:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; cache-loss-2; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "cache-loss-3",
+      "raw_report_sha256": "946c42bd2d888ba1a7e14dc6a061c4cee7a44559ebaa7bfd6860b9ffa3b2047f",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 134.50897167203948,
+          "cpu_seconds": 127.93602026599999,
+          "rss_bytes": 1678409728,
+          "process_peak_rss_bytes": 1712611328,
+          "cgroup_peak_bytes": 1698861056,
+          "preparation_stats": {
+            "hits": 4119,
+            "misses": 6240,
+            "writes": 4098,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 11,
+            "replayed_publications": 0,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "c62b64a78f5a6181dff4c1853a38f8b9b174867ee347c4dcf476874d0eae0e61",
+        "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+        "memory": {
+          "current": 1648291840,
+          "peak": 1698861056,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "maximum_recorded_cgroup_peak_bytes": 1698861056,
+      "receipt": {
+        "mode": "cache-loss-3",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:51:13.961707117Z",
+          "FinishedAt": "2026-10-24T12:54:21.996473549Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 188.20219271304086,
+        "provision_seconds_excluded_from_process": 0.032097624614834785,
+        "before": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        },
+        "app_cache_at_start": "empty",
+        "owner_store_at_start": "backup of synthetic primary store",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-cache-loss-3",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/cache-loss-3:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; cache-loss-3; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "new-owner-1",
+      "raw_report_sha256": "e5b72c4f932c33d32f624f3657fd0b1d4f8c17ff9c0704406042097d00be02dd",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 635.0164405764081,
+          "cpu_seconds": 634.0963461709999,
+          "rss_bytes": 1913663488,
+          "process_peak_rss_bytes": 1937489920,
+          "cgroup_peak_bytes": 1926717440,
+          "preparation_stats": {
+            "hits": 8217,
+            "misses": 2142,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 0,
+            "replayed_publications": 11,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "c62b64a78f5a6181dff4c1853a38f8b9b174867ee347c4dcf476874d0eae0e61",
+        "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+        "memory": {
+          "current": 1869045760,
+          "peak": 1926717440,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "maximum_recorded_cgroup_peak_bytes": 1926717440,
+      "receipt": {
+        "mode": "new-owner-1",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T12:54:22.628515447Z",
+          "FinishedAt": "2026-10-24T13:05:52.578487422Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 690.1993829710409,
+        "provision_seconds_excluded_from_process": 0.3884570258669555,
+        "before": null,
+        "app_cache_at_start": "copy of prepared primary cache",
+        "owner_store_at_start": "new",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-new-owner-1",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/new-owner-1:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; new-owner-1; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "new-owner-2",
+      "raw_report_sha256": "9c6c3bbcd096868a5532087a245c3ebb37d62e74edb7143403b965fa96e18872",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 643.6517139151692,
+          "cpu_seconds": 642.8956879379999,
+          "rss_bytes": 1914003456,
+          "process_peak_rss_bytes": 1937309696,
+          "cgroup_peak_bytes": 1923629056,
+          "preparation_stats": {
+            "hits": 8217,
+            "misses": 2142,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 0,
+            "replayed_publications": 11,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "c62b64a78f5a6181dff4c1853a38f8b9b174867ee347c4dcf476874d0eae0e61",
+        "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+        "memory": {
+          "current": 1869266944,
+          "peak": 1923629056,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "maximum_recorded_cgroup_peak_bytes": 1923629056,
+      "receipt": {
+        "mode": "new-owner-2",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T13:05:53.599999796Z",
+          "FinishedAt": "2026-10-24T13:17:32.091856156Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 698.7946188049391,
+        "provision_seconds_excluded_from_process": 0.7206266648136079,
+        "before": null,
+        "app_cache_at_start": "copy of prepared primary cache",
+        "owner_store_at_start": "new",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-new-owner-2",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/new-owner-2:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; new-owner-2; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    },
+    {
+      "mode": "new-owner-3",
+      "raw_report_sha256": "0a6871dab7141ce27d2246f57592cd7defb1f51a646354b3b5793fc4ba2e9f26",
+      "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+      "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "records": [
+        {
+          "outcome": "PASS",
+          "paid": 988.32,
+          "audit_passed": true,
+          "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+          "wall_seconds": 639.4612230840139,
+          "cpu_seconds": 638.7690002510001,
+          "rss_bytes": 1913901056,
+          "process_peak_rss_bytes": 1937166336,
+          "cgroup_peak_bytes": 2273837056,
+          "preparation_stats": {
+            "hits": 8217,
+            "misses": 2142,
+            "writes": 0,
+            "invalid": 0
+          },
+          "certificate_reuse": {
+            "loaded_publications": 0,
+            "replayed_publications": 11,
+            "prepared_menu_hit": null
+          }
+        }
+      ],
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "c62b64a78f5a6181dff4c1853a38f8b9b174867ee347c4dcf476874d0eae0e61",
+        "method_signature": "8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb",
+        "memory": {
+          "current": 2218020864,
+          "peak": 2273837056,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "maximum_recorded_cgroup_peak_bytes": 2273837056,
+      "receipt": {
+        "mode": "new-owner-3",
+        "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T13:17:33.34489657Z",
+          "FinishedAt": "2026-10-24T13:29:08.189885241Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 695.1432972610928,
+        "provision_seconds_excluded_from_process": 0.9534402373246849,
+        "before": null,
+        "app_cache_at_start": "copy of prepared primary cache",
+        "owner_store_at_start": "new",
+        "after": {
+          "artifacts": [
+            [
+              "menu_certificate",
+              11
+            ],
+            [
+              "menu_view",
+              1
+            ],
+            [
+              "qualification",
+              1
+            ]
+          ],
+          "saved_deliveries": 0,
+          "owners": 1
+        }
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-b5c242d-new-owner-3",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-b5c242d:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/cache-modes-b5c242d/new-owner-3:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/preparation_probe.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--size",
+        "5000",
+        "--repeat",
+        "1",
+        "--cases",
+        "distribution",
+        "--arms",
+        "verified",
+        "--preparation-cache-root",
+        "/output/prepared",
+        "--owned-artifact-store",
+        "/output/owned.sqlite",
+        "--execution-environment",
+        "Uninstrumented b5c242d215b4655a5d8176fbe6f61c4822c64475; serial 2 CPU/3 GiB incl swap; new-owner-3; own synthetic store/public cache; OS disk cache uncontrolled"
+      ],
+      "quality_passed": true,
+      "memory_target_passed": true
+    }
+  ],
+  "pending_modes": [],
+  "bundle_sha256": "e7410593b7b1107f98a1028ac2985baee362d8c4f2ee271f8a171641f30bba14",
+  "saved_history_scope": "Synthetic stores contain zero normal deliveries; permanent owner/P1 tests are separate",
+  "memory_scope": "Per-plan recorded peaks; final process receipts included where available after report serialization",
+  "os_cache": "uncontrolled; not measured cold; never cleared",
+  "full_release_qualified": false,
+  "cold_empty_app_new_owner": {
+    "samples": 3,
+    "seconds": [
+      674.7097175591625,
+      641.2754196347669,
+      665.077126908116
+    ],
+    "minimum_seconds": 641.2754196347669,
+    "median_seconds": 665.077126908116,
+    "maximum_seconds": 674.7097175591625,
+    "maximum_recorded_cgroup_peak_bytes": 2271469568,
+    "all_quality_passed": true
+  },
+  "warm_ratio_distribution_malmo": {
+    "samples_per_size": 3,
+    "large_seconds": [
+      12.358165225945413,
+      11.687565428670496,
+      12.316747478675097
+    ],
+    "small_seconds": [
+      11.11771534010768,
+      11.552356509957463,
+      12.97784672724083
+    ],
+    "max_5000_over_min_262": 1.1115741722008974,
+    "median_ratio": 1.0661675362995224,
+    "passed": true,
+    "scope": "one profile/city/original facts; same-process prepared calls"
+  }
+}

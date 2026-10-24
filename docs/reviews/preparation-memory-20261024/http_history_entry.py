@@ -98,6 +98,8 @@ def http_probe(settings, prepared, facts, clock, request, output):
               'scope':'In-process ASGI routes/auth/middleware/admission/jobs/save/read; no browser/network/metric persistence',
               'startup_prewarm':'disabled in isolated lifespan; catalogue/facts loaded before HTTP',
               'progress_samples':[], 'job_traces':[],
+              'poll_interval_seconds':1,
+              'wait_scope':'Request start / accepted response until first observed saved-result response; includes polling delay',
               'instrumentation':'Existing request-local performance trace; elapsed HTTP includes its overhead'}
     original_create = api._create_saved_plan
     trace_sequence = 0
@@ -178,7 +180,9 @@ def http_probe(settings, prepared, facts, clock, request, output):
             time.sleep(1)
         assert response.status_code == 201, ('HTTP final',response.status_code)
         saved = SavedPlan.model_validate(response.json())
-        report['accepted_until_saved_seconds'] = time.perf_counter()-started
+        report['start_request_until_saved_response_seconds'] = time.perf_counter()-started
+        report['accepted_until_saved_response_seconds'] = (
+            report['start_request_until_saved_response_seconds']-report['post_accept_seconds'])
         report['quality'] = validate(saved.plan,saved.request)
         reread = client.get('/api/plans/'+saved.plan_id)
         assert reread.status_code == 200

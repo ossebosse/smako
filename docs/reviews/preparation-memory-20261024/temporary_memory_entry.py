@@ -38,6 +38,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--inputs', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--runtime-cleanup-only', action='store_true',
+                        help='Do not add caller-side GC/trim between the ordinary runtime operations')
     args = parser.parse_args()
     started = time.perf_counter()
     manifest = json.loads((args.inputs / 'matrix-inputs.json').read_bytes())
@@ -57,10 +59,12 @@ def main():
     next_path = args.output / 'synthetic-next-prices.json'
     next_path.write_text(json.dumps(candidate, ensure_ascii=False, separators=(',', ':')), encoding='utf8')
     del candidate
-    release_idle_memory()
+    if not args.runtime_cleanup_only:
+        release_idle_memory()
     report = {'schema': 'smako-temporary-catalogue-memory-v1',
         'status': 'DIAGNOSTIC_ONLY_NO_MENU_OR_AUDIT', 'inputs': manifest,
         'method_signature': method_signature(),
+        'caller_phase_cleanup': not args.runtime_cleanup_only,
         'old_universe': original_key.universe_id, 'new_universe': next_key.universe_id,
         'source_strategy_change_is_synthetic': True, 'stages': []}
     def mark(stage):
@@ -78,7 +82,8 @@ def main():
                            source_manifests=data.get('source_manifests', ()))
     assert facts.version == data['facts_version']
     del data, raw
-    release_idle_memory()
+    if not args.runtime_cleanup_only:
+        release_idle_memory()
     mark('old_active_with_facts')
     mark('before_ordinary_write_artifact')
     serialized = args.output / 'serialized-current.json'
@@ -87,7 +92,8 @@ def main():
         report['serialized_sha256'] = hashlib.file_digest(handle, 'sha256').hexdigest()
     report['serialized_bytes'] = serialized.stat().st_size
     mark('ordinary_write_artifact_complete')
-    release_idle_memory()
+    if not args.runtime_cleanup_only:
+        release_idle_memory()
     mark('before_overlapping_version_load')
     new = manager.load_file_and_activate(next_path)
     assert manager.get_active(next_key.scope_id) is new

@@ -1,4 +1,4 @@
-# 2026-10-24 14:03 UTC: Versionsbyte klarar tre omprov; slutkodens planprov startade
+# 2026-10-24 14:40 UTC: Tre kalla slutkodsprov passerar; cachelägen fortsätter
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 Katalogfilen läses och valideras radvis med samma native produkt-/kandidat-
@@ -14,8 +14,14 @@ CI inklusive Chromium/WebKit passerar på runtimekoden. Ingen meny/audit
 påstås från dessa minnesdiagnostikprov.
 
 Ny metodsignatur `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`.
-Slutkodens första planprov med tom appcache/ny ägarstore pågår, följt av
-två ytterligare kalla prov, cachelägen, pilot, HTTP/historik, matchade
+Slutkodens första planprov med tom appcache/ny ägarstore är klart:
+662,83 s, sedan 11,66/11,86/12,19 s varmt, alla 988,32 kr/hash/audit PASS.
+Slutlig cgroup-peak inklusive rapport/städning 1,882 GiB, ingen swap.
+Hela fyranropsprocessen tog 756,71 s. Ytterligare två kalla processer är
+klara: 649,49 / 664,50 s, pris/hash/audit PASS. Median över tre är 662,83 s,
+högsta slutliga peak 1,882 GiB. Nu följer återstående cachelägen och tre
+extra versionsbytesprov utan mätverktygets fasstädning, därefter pilot,
+HTTP/historik, matchade
 basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
 vid varje missad grind. B5-resultaten nedan är historik, inte automatiskt
 slutkodens kvalificering. Standard förblir legacy och generationsmerge=False;

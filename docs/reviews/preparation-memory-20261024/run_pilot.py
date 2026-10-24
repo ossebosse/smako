@@ -133,6 +133,7 @@ def validate(folder, size):
 
 def main():
     gates()
+    subprocess.run(['python3','/tmp/run_runtime_only_memory.py'],check=True)
     base = json.loads((ROOT/f'candidate-{REVISION}-plain-command.json').read_bytes())
     enriched = prepare_facts(base)
     destination = ROOT/f'pilot-{REVISION}'
