@@ -43,6 +43,7 @@ from app.services.ingredient_taxonomy import INGREDIENT_TAXONOMY
 from app.services.performance_trace import (
     increment_performance_counter,
     performance_span,
+    record_performance_seconds,
 )
 from app.services.planner_memory import release_idle_memory
 from app.services.price_universe import (
@@ -254,6 +255,46 @@ class PreparedPriceUniverseArtifact(BaseModel):
             source_name=self.source_name,
             oldest_observed_at=self.oldest_observed_at.astimezone(UTC),
         )
+
+    @classmethod
+    def from_file(cls, path: Path) -> PreparedPriceUniverseArtifact:
+        """Validate the same closed schema without a complete JSON parse tree.
+
+        Product/candidate/index rows use their native JSON validators. The
+        ordinary enclosing models then check every cross-row digest, index,
+        context, snapshot and lineage relation. No row or field is omitted.
+        """
+        from app.services.json_document_reader import JsonDocumentReader
+        from app.services.price_universe import IndexEntry, StoreAvailabilityEntry
+
+        with path.open('r',encoding='utf8') as source:
+            reader = JsonDocumentReader(source)
+
+            def candidates():
+                value = reader.object({'candidates':lambda:reader.array(
+                    lambda:reader.value(ProductCandidate.model_validate_json))})
+                return CanonicalCandidateArtifact.model_validate(value)
+
+            def indexes():
+                entries = {name:lambda:reader.array(lambda:reader.value(IndexEntry.model_validate_json))
+                    for name in ('canonical','gtin','chain','context','category','role','purchase_model','name_token')}
+                entries['store_availability'] = lambda:reader.array(
+                    lambda:reader.value(StoreAvailabilityEntry.model_validate_json))
+                return reader.object(entries)
+
+            def universe():
+                return reader.object({'products':lambda:reader.array(lambda:reader.value(Product.model_validate_json)),
+                                      'indexes':indexes})
+
+            fields = {name:lambda:reader.array(candidates) for name in (
+                'canonical_candidates','semantic_canonical_candidates','matched_canonical_candidates')}
+            fields['universe'] = universe
+            try:
+                value = reader.object(fields)
+                reader.finish()
+            finally:
+                record_performance_seconds('price_universe_file_read',reader.read_seconds)
+        return cls.model_validate(value)
 
 
 class MenuSearchResultCache:
@@ -878,10 +919,8 @@ class PreparedPriceUniverseManager:
         resolved = path.resolve(strict=True)
 
         def read_artifact():
-            with performance_span("price_universe_file_read"):
-                payload = resolved.read_bytes()
             with performance_span("price_universe_parse_and_validate"):
-                return PreparedPriceUniverseArtifact.model_validate_json(payload)
+                return PreparedPriceUniverseArtifact.from_file(resolved)
 
         # The parser frame and its complete JSON bytes end before indexes
         # are restored; only validated domain values cross that boundary.
@@ -899,9 +938,7 @@ class PreparedPriceUniverseManager:
             # No caller local retains them during scratch-file validation.
             TypeAdapter(PreparedPriceUniverseArtifact).dump_json(prepared.to_artifact()),
             reserve_bytes=64 * 1024 * 1024,
-            validator=lambda candidate: PreparedPriceUniverseArtifact.model_validate_json(
-                candidate.read_bytes()
-            ),
+            validator=PreparedPriceUniverseArtifact.from_file,
         )
 
     @staticmethod
