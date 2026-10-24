@@ -1,0 +1,132 @@
+{
+  "source_commit": "b5c242d215b4655a5d8176fbe6f61c4822c64475",
+  "status": "FAILED_MEMORY_GATE",
+  "full_release_qualified": false,
+  "pilot_started": false,
+  "report": {
+    "schema": "smako-temporary-catalogue-memory-v1",
+    "status": "DIAGNOSTIC_ONLY_NO_MENU_OR_AUDIT",
+    "inputs": {
+      "now": "2026-10-23T06:00:02.869273+00:00",
+      "sha256": {
+        "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+        "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+      }
+    },
+    "old_universe": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af",
+    "new_universe": "price-universe:45449cf8ec33155a294c479f5852e7e4a0cf3b7fa8a54f2d9a7ca69833fddea2",
+    "source_strategy_change_is_synthetic": true,
+    "stages": [
+      {
+        "stage": "fixture_created_before_load",
+        "elapsed_seconds": 4.6815980901010334,
+        "memory": {
+          "VmHWM": 1145962496,
+          "VmRSS": 93388800,
+          "cgroup_current": 273584128,
+          "cgroup_peak": 1328046080,
+          "swap_current": "0",
+          "swap_max": "0"
+        }
+      },
+      {
+        "stage": "old_active_with_facts",
+        "elapsed_seconds": 53.258978456258774,
+        "memory": {
+          "VmHWM": 1693491200,
+          "VmRSS": 1006247936,
+          "cgroup_current": 1084231680,
+          "cgroup_peak": 1981906944,
+          "swap_current": "0",
+          "swap_max": "0"
+        }
+      },
+      {
+        "stage": "before_ordinary_write_artifact",
+        "elapsed_seconds": 53.25989035703242,
+        "memory": {
+          "VmHWM": 1693491200,
+          "VmRSS": 1006252032,
+          "cgroup_current": 1083875328,
+          "cgroup_peak": 1981906944,
+          "swap_current": "0",
+          "swap_max": "0"
+        }
+      },
+      {
+        "stage": "ordinary_write_artifact_complete",
+        "elapsed_seconds": 80.68206646898761,
+        "memory": {
+          "VmHWM": 2551234560,
+          "VmRSS": 2151235584,
+          "cgroup_current": 2335059968,
+          "cgroup_peak": 2736246784,
+          "swap_current": "0",
+          "swap_max": "0"
+        }
+      },
+      {
+        "stage": "before_overlapping_version_load",
+        "elapsed_seconds": 81.61212174315006,
+        "memory": {
+          "VmHWM": 2551234560,
+          "VmRSS": 1085394944,
+          "cgroup_current": 1267355648,
+          "cgroup_peak": 2736246784,
+          "swap_current": "0",
+          "swap_max": "0"
+        }
+      },
+      {
+        "stage": "atomic_swap_completed_with_old_reader_alive",
+        "elapsed_seconds": 124.23337108734995,
+        "memory": {
+          "VmHWM": 2551234560,
+          "VmRSS": 2529284096,
+          "cgroup_current": 2905780224,
+          "cgroup_peak": 2905780224,
+          "swap_current": "0",
+          "swap_max": "0"
+        }
+      },
+      {
+        "stage": "complete",
+        "elapsed_seconds": 124.23455442721024,
+        "memory": {
+          "VmHWM": 2551234560,
+          "VmRSS": 2529284096,
+          "cgroup_current": 2905776128,
+          "cgroup_peak": 2905780224,
+          "swap_current": "0",
+          "swap_max": "0"
+        }
+      }
+    ],
+    "serialized_sha256": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+    "serialized_bytes": 191730753,
+    "held_old_products": 89458,
+    "held_new_products": 89458,
+    "held_fact_rows": 71138,
+    "memory_target_passed": false
+  },
+  "receipt": {
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T13:29:10.710476722Z",
+      "FinishedAt": "2026-10-24T13:31:20.675958577Z"
+    },
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "coordinator_exit": 0,
+    "process_wall_seconds": 130.46295008575544,
+    "method_sha256": "e663eae0669c2f53ee57b92fb1edbfeb791cef7d756ffa2a94cde39ede414882"
+  }
+}

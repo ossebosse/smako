@@ -1,3 +1,26 @@
+# 2026-10-24 13:31 UTC: Cacheprov passerar; versionsbyte stoppar piloten
+
+Runtime `b5c242d`, [PR #10](https://github.com/ossebosse/smako/pull/10), har nu
+**tre kalla prov** med tom appcache/ny ägarstore: 674,71 / 641,28 / 665,08 s,
+median 665,08 s, högst 2,115 GiB cgroup-peak. Alla 988,32 kr/hash/audit PASS.
+Alla tretton cachelägesprocesser passerar, högst 2,118 GiB. Omstart och
+borttagen härledd cache laddar elva certifikat utan omsökta publiceringar.
+Varm 5 000/262-kvot 1,1116 i Malmö/fördelning. Store har noll vanliga
+sparade leveranser; riktig historik/HTTP är förberett men ännu inte mätt.
+
+**Versionsbyte/serialisering FAIL:** ordinarie skrivning nådde 2,548 GiB,
+överlappande katalogversioner med gammal läsare och fakta kvar **2,706 GiB**.
+Katalogernas produktdigest/tidsstämplar och skriven filhash är oförändrade.
+Exit 0 utan OOM/swap ändrar inte grinden. **Piloten och fullmatrisen har
+inte startat.** Minneskostnaden ska rättas före fortsatt standardkvalificering.
+Full CI på `b5c242d` inklusive Chromium/WebKit passerar. Matchade tre basprov
+och ny instrumenterad profil återstår. Standard är fortsatt `legacy` och
+`library_merge_generations=False`; ingen drift eller samtidighet ändrad.
+
+[Rapport, råhashar och motexempel](reviews/preparation-memory-20261024.md).
+
+---
+
 # 2026-10-24: Tredje ägarprovet missar minnesmål; nästa kandidat verifieras
 
 PR #9 är integrerad på main `b46f608`. Dess runtime `193629f` klarar pris,

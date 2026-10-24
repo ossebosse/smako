@@ -2,12 +2,58 @@
 
 Arbete enligt [nästa uppdrag](../CODEX-SOL-NEXT-20261024.md), på
 `perf/preparation-memory-20261024`, [PR #9](https://github.com/ossebosse/smako/pull/9).
-Senast fullt resursmätt runtime: `193629fbd0a0360955726f7a28bc30700ed8fc87`.
-Nästa kandidat: `ea4bb08f1ace5a854901a81d08ce7facfa11b383`,
+Senast mätt runtime: `b5c242d215b4655a5d8176fbe6f61c4822c64475`,
 [PR #10](https://github.com/ossebosse/smako/pull/10), ännu under verifiering.
 **Etappen är ännu inte standardkvalificerad.** `legacy` och
 `library_merge_generations=False` är oförändrade standarder. Ingen aktivering,
 insamling, faktarelease, Windowsuppgift eller ökad samtidighet ingår.
+
+## Senaste utfall: tre kalla prov och cachelägen godkända, versionsbyte underkänt
+
+På `b5c242d` passerar tre nya processer med tom appcache och ny ägarstore:
+**674,71 / 641,28 / 665,08 s**, median **665,08 s**, högsta registrerade
+cgroup-peak **2,115 GiB**. Alla ger 988,32 kr, förväntad hash och audit PASS.
+OS-diskcachen är okontrollerad och har aldrig rensats. De tre observationerna
+är vanliga plananrop; instrumenteringsmålet under 700 s och tre matchade
+basprov är fortfarande inte verifierade.
+
+Alla tretton cachelägesprocesser är avslutade med exit 0, utan OOM och inom
+2,5 GiB vid de registrerade mätpunkterna. Tillsammans omfattar de 19 planer;
+primärprovets fyra planer redovisas separat. Högsta peak över sekvensen är
+**2 273 837 056 byte (2,118 GiB)**. Äldre anrop saknar avslutande processkvitto;
+de senare har även peak efter rapportserialisering. Skillnaden redovisas per
+process i [aktuellt cacheunderlag](preparation-memory-20261024/cache-modes-current.json).
+
+| Läge på `b5c242d` | Plananrop | Cgroup-peak |
+| --- | --- | --- |
+| Legacy, varm offentlig disk, ny process | 137,35 s; sedan 104,20–107,02 s | 1,650 GiB |
+| 262-prefixvy | 21,28 s; sedan 11,12–12,98 s | 1,499 GiB |
+| Omstart med disk/certifikat, tre processer | 50,91–51,28 s | högst 1,582 GiB |
+| Borttagen härledd/offentlig cache, tre processer | 130,68–134,51 s | högst 1,583 GiB |
+| Varm offentlig disk, tre nya ägarstore | 635,02 / 643,65 / 639,46 s | högst 2,118 GiB |
+
+Samtliga sex omstarts-/cacheförlustprov laddade elva certifikat och sökte
+om noll publiceringar. Dessa store har **noll vanliga sparade leveranser**;
+de bevisar inte återhämtning med icke-tom menyhistorik. Varm kvot
+max(5 000)/min(262) är **1,1116** (mediankvot 1,0662), med tre varma anrop
+per storlek. Samtliga är snabbare än jämförbara varma legacy-anrop. Detta
+gäller endast Malmö/fördelning/originalfakta.
+
+Nästa minnesgrind är däremot **FAIL**. Ordinarie `write_artifact` gav
+**2 736 246 784 byte (2,548 GiB)**. När nästa katalog laddats och bytts
+atomiskt med gammal läsare samt fakta kvar nåddes **2 905 780 224 byte
+(2,706 GiB)**. Båda katalogerna innehöll 89 458 produkter, med identisk
+produktdigest och observationstid; 71 138 faktarader behölls. Den skrivna
+filen var byteidentisk med fryst indata (191 730 753 byte). Exit 0, ingen
+OOM eller swap gör inte minnesgrinden godkänd. Piloten och följande matris
+har därför **inte startat**. [Motexempel och kvitto](preparation-memory-20261024/temporary-memory-current.json).
+
+Ett separat fryst ASGI-prov är förberett för ordinarie registrering,
+kö/progress/avbrott och sparning, följt av tre processer med faktisk sparad
+historik. Det är ännu inte kört och räknas inte som evidens. Kvarvarande
+arbete är att rätta den tillfälliga minneskostnaden, köra om berörd
+slutkod och sedan passera pilot, matchad jämförelse och full matris.
+Äldre tabeller nedan bevarar tidigare revisioners observationer.
 
 ## Ändringar
 
