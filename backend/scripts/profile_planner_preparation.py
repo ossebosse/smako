@@ -14,6 +14,7 @@ import os
 import runpy
 import time
 from collections import Counter
+from contextlib import contextmanager
 from functools import wraps
 from pathlib import Path
 
@@ -89,6 +90,23 @@ from app.services.menu_optimizer import MenuOptimizer
 from app.services.personal_planner import PersonalPlanner
 from app.services.planner_artifacts import OwnedPlannerArtifacts
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+
+try:
+    from app.models import immutable_interning
+except ImportError:
+    pass  # The baseline revision predates artifact evidence interning.
+else:
+    original_pool = immutable_interning.immutable_model_pool
+
+    @contextmanager
+    def observed_pool():
+        with original_pool() as pool:
+            yield pool
+            COUNTS["artifact_frozen_model_hits"] += pool.hits
+            COUNTS["artifact_frozen_model_entries"] += pool.count
+            COUNTS["artifact_pool_key_bytes"] += pool.retained_bytes
+
+    immutable_interning.immutable_model_pool = observed_pool
 
 for owner, name, label in (
     (PreparedPriceUniverseArtifact, "restore", "load_restore_indexes"),
