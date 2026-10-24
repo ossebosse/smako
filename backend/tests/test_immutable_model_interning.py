@@ -1,5 +1,7 @@
 """Exact immutable evidence sharing must preserve values and mutable ownership."""
 from contextlib import contextmanager
+from datetime import datetime
+from decimal import Decimal
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -58,6 +60,26 @@ def test_pool_capacity_falls_back_to_unshared_equal_values(monkeypatch):
         again = interning.share_frozen_models(Frozen(value="other"))
         assert other == again and other is not again
         assert pool.count == 1
+
+
+def test_equal_python_values_with_different_serialization_remain_distinct():
+    class Evidence(BaseModel):
+        model_config = ConfigDict(frozen=True)
+        observed: datetime
+        amount: Decimal
+        number: float
+
+    values = [Evidence(observed=datetime.fromisoformat(clock), amount=Decimal(amount), number=number)
+              for clock, amount, number in [
+                  ("2026-10-24T08:00:00+02:00", "1.00", 0.0),
+                  ("2026-10-24T06:00:00+00:00", "1.00", 0.0),
+                  ("2026-10-24T08:00:00+02:00", "1.0", 0.0),
+                  ("2026-10-24T08:00:00+02:00", "1.00", -0.0)]]
+    assert all(value == values[0] for value in values)
+    with interning.immutable_model_pool():
+        shared = [interning.share_frozen_models(value) for value in values]
+    assert len({id(value) for value in shared}) == len(values)
+    assert [value.model_dump_json() for value in shared] == [value.model_dump_json() for value in values]
 
 
 @pytest.mark.asyncio

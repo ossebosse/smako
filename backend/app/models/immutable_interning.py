@@ -24,7 +24,20 @@ class _Pool:
         self.count = self.hits = 0
 
     def visit(self, value):
-        if isinstance(value, (str, bytes, int, float, bool, Decimal, date, datetime, Enum)) or value is None:
+        # Python equality collapses some distinct serialized values (UTC vs
+        # another offset, Decimal scale, and signed zero). Bind those exact
+        # representations as well as model equality before sharing evidence.
+        if isinstance(value, datetime):
+            return value, True, (datetime, value.isoformat(), value.fold)
+        if isinstance(value, date):
+            return value, True, (date, value.isoformat())
+        if isinstance(value, Decimal):
+            return value, True, (Decimal, value.as_tuple())
+        if isinstance(value, float):
+            return value, True, (float, value.hex())
+        if isinstance(value, Enum):
+            return value, True, (type(value), value.value)
+        if isinstance(value, (str, bytes, int, bool)) or value is None:
             return value, True, None
         if isinstance(value, (tuple, list)):
             rows = [self.visit(child) for child in value]
