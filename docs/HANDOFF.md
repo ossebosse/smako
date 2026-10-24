@@ -1,3 +1,15 @@
+# 2026-10-24: Oberoende granskning – två nya fel att rätta
+
+Se [granskningen](reviews/sol-architecture-review-20261024.md) för reproduktion
+och rättningsanvisningar till Sol. En förberedd meny kan ignorera en billigare
+giltig sparad meny från samma ägare/kontext; Axfoods kombination
+`--approved-snapshot` + `--base-release` avbryts av sin egen stagingkontroll.
+89 befintliga riktade prov passerar; två nya offlineprober reproducerar felen.
+Appkoden är oförändrad. Tidigare pris-, minnes- och fullmatrisgrindar nedan
+kvarstår; v1 ska fortsatt vara opt-in.
+
+---
+
 # 2026-10-23: Arkitektur implementerad opt-in; prisgrind stoppar standardbyte
 
 Runtime är integrerad och pushad till main `c981d75`. Standarderna är fortsatt
