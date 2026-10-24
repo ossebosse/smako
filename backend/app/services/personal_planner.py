@@ -2740,6 +2740,16 @@ class PersonalPlanner:
                  if s.recipe and s.meal_type == "dinner"}
         return profiles.profile_rows(names) if isinstance(profiles, LazyPairwiseSimilarities) else None
 
+    def _menu_candidate_inputs(self, context):
+        from app.services.planner_context import content_digest
+
+        saved = (self.artifacts.recent_menu_records(context, include_certificates=False)
+                 if self.artifacts is not None else ())
+        records = [*self.previous_menus, *saved]
+        # Re-saving the same identities does not require another preparation.
+        # The owner/erasure epoch is enforced by the existing artifact reader.
+        return records, content_digest({"menu_inputs_v1": sorted({content_digest(r) for r in records})})
+
     def _search_verified_reference(self, options, search_kwargs, *, _ignore_cache=False):
         from app.services.library_publications import (
             index_slots,
@@ -2748,7 +2758,7 @@ class PersonalPlanner:
             restore_slots,
             save_certificate,
         )
-        from app.services.library_search_cohorts import merged_library_cohorts
+        from app.services.library_search_cohorts import merged_library_cohorts, per_package_cohorts
         from app.services.meal_library_content import identity
         from app.services.planner_context import content_digest, planner_context
         from app.services.recipe_library import current_recipe_generations, current_recipes
@@ -2773,8 +2783,10 @@ class PersonalPlanner:
         # predecessor certificate. Still retain any valid pinned reference.
         nodes = chain or ({"generation": self._generation, "count": len(current)},)
         reports, loaded, replayed, chain_complete = [], 0, 0, True
-        prior_records = [*self.previous_menus,
-            *(self.artifacts.recent_menu_records(context) if self.artifacts is not None else ())][:8]
+        generations = current_recipe_generations(self.library_generation)
+        records, candidate_inputs = self._menu_candidate_inputs(context)
+        records.extend(self.artifacts.recent_menu_records(context) if self.artifacts is not None else ())
+        prior_records = list({content_digest(record): record for record in records}.values())
 
         def audit(chosen):
             self._defer_search_audit = False
@@ -2783,16 +2795,17 @@ class PersonalPlanner:
             finally:
                 self._defer_search_audit = True
 
+        def independent_kwargs():
+            kwargs = dict(search_kwargs)
+            kwargs["initial_evaluations"] = OrderedDict(search_kwargs.get("initial_evaluations") or {})
+            for key in ("completed_prefix_indexes", "cohort_prefix_sizes", "checkpoint_probe_indexes",
+                        "unordered_small_pool_limit"):
+                kwargs.pop(key, None)
+            return kwargs
+
         for node in nodes:
             cached = (load_certificate(self.artifacts, context, node, options, predecessor, slot_index)
                       if chain and not _ignore_cache else None)
-            if cached is not None and node is nodes[-1] and self.previous_menus:
-                view = self.artifacts.load("menu_view", content_digest([context, node["sha256"]]))
-                if not isinstance(view, dict) or view.get("candidate_inputs") != content_digest(self.previous_menus):
-                    # A newly supplied, re-auditable menu must compete even
-                    # when this publication already has a prepared winner.
-                    incumbent, reference_winner = (cached[0], None), (cached[1], None)
-                    cached = None
             if cached is not None:
                 winner_slots, reference_slots, certificate = cached
                 loaded += 1
@@ -2833,6 +2846,27 @@ class PersonalPlanner:
                     except (ValueError, IncompleteBasketError):
                         pass  # Changed facts/locks are requalified, never hidden.
 
+            # The pinned base alone cannot dominate legacy on the full library.
+            # Prepare that independent trajectory once per publication/context;
+            # only its completed candidate enters the normal current checkout.
+            legacy_started, trace_start = perf_counter(), len(self.diagnostics.search)
+            legacy_report = {"status": "search_miss"}
+            try:
+                legacy = self.service.menu_optimizer.optimize_library_slots(
+                    per_package_cohorts(prefix_options, generations,
+                        first_generation=first, last_generation=node["generation"]),
+                    **independent_kwargs())
+                previous.append(legacy)
+                legacy_report = {"status": "proposal_completed", "proposed_paid": str(money(legacy[1]["basket"].total))}
+            except (ValueError, IncompleteBasketError) as exc:
+                legacy_report.update(code=getattr(exc, "code", None), stage=getattr(exc, "stage", None))
+            finally:
+                legacy_report["seconds"] = perf_counter() - legacy_started
+                for row in self.diagnostics.search[trace_start:]:
+                    row.update(search_track="legacy_full_library", publication_size=node["count"])
+                legacy_report["evaluations"] = sum(row.get("evaluations_executed", 0)
+                    for row in self.diagnostics.search[trace_start:])
+
             def search(track, emit, *, budget=budget, completed=completed, prefixes=prefixes,
                        probes=probes, improvements=improvements, node=node, prefix_options=prefix_options):
                 nonlocal reference_winner
@@ -2841,13 +2875,9 @@ class PersonalPlanner:
                 if track == "reference" and reference_winner is not None:
                     emit(*reference_winner)
                     return
-                kwargs = dict(search_kwargs)
-                # optimize_slots consumes initial_evaluations. Each independent
-                # track gets its OWN container, retaining exactly the same seed.
-                kwargs["initial_evaluations"] = OrderedDict(search_kwargs.get("initial_evaluations") or {})
-                for key in ("completed_prefix_indexes", "cohort_prefix_sizes", "checkpoint_probe_indexes",
-                            "unordered_small_pool_limit"):
-                    kwargs.pop(key, None)
+                # Each independent track owns its seed container; the ordinary
+                # optimizer consumes initial_evaluations during its first beam.
+                kwargs = independent_kwargs()
                 if track == "improvement":
                     budget.started = monotonic()
 
@@ -2891,13 +2921,14 @@ class PersonalPlanner:
                 previous=previous)
             incumbent = chosen, result
             reports.append({**report, "publication_size": node["count"],
-                            "paid": str(money(result["basket"].total))})
+                            "paid": str(money(result["basket"].total)),
+                            "legacy_full_library_preparation": legacy_report})
             chain_complete = chain_complete and report["budget_stop"] != "wall_time_safety_stop"
             replayed += 1
             if chain and reference_winner is not None:
                 certificate = save_certificate(self.artifacts, context, node, predecessor,
                     chosen, reference_winner[0], result, replay_complete=chain_complete,
-                    qualification=self.diagnostics.pools, candidate_inputs=content_digest(self.previous_menus),
+                    qualification=self.diagnostics.pools, candidate_inputs=candidate_inputs,
                     qualification_library=chain[-1]["sha256"],
                     culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0]))
                 predecessor = certificate["sha256"]
@@ -2909,24 +2940,40 @@ class PersonalPlanner:
                 if track == "reference":
                     emit(reference_winner[0], evaluate(reference_winner[0], final=False))
 
-            prior = []
+            prior, cached_winner_audited = [], False
+            cached_winner = tuple(chosen)
+
+            def cached_audit(slots):
+                nonlocal cached_winner_audited
+                value = audit(slots)
+                if tuple(slots) == cached_winner:
+                    cached_winner_audited = True
+                return value
+
             try:
                 prior.append((chosen, evaluate(chosen, final=False)))
             except (ValueError, IncompleteBasketError):
                 pass
+            for record in prior_records:
+                restored = restore_slots(record, options, slot_index)
+                if restored is not None and not any(tuple(restored) == tuple(row[0]) for row in prior):
+                    try:
+                        prior.append((restored, evaluate(restored, final=False)))
+                    except (ValueError, IncompleteBasketError):
+                        pass
             try:
-                chosen, result, report = verified_search(cached_tracks, audit=audit,
+                chosen, result, report = verified_search(cached_tracks, audit=cached_audit,
                     accepts=lambda chosen: accepts(chosen, final=True),
                     rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
                                                  search_kwargs["score"](chosen, result)),
                     budget=SearchBudget(IMPROVEMENT_EVALUATIONS, IMPROVEMENT_PROPOSALS), previous=prior)
             except (ValueError, IncompleteBasketError):
                 return self._search_verified_reference(options, search_kwargs, _ignore_cache=True)
-            if report["audit_rejected"] or report["constraint_rejected"] or not prior:
+            if not cached_winner_audited:
                 return self._search_verified_reference(options, search_kwargs, _ignore_cache=True)
             certificate = save_certificate(self.artifacts, context, nodes[-1], cached[2]["predecessor"],
                 chosen, reference_winner[0], result, qualification=self.diagnostics.pools,
-                candidate_inputs=content_digest(self.previous_menus),
+                candidate_inputs=candidate_inputs,
                 qualification_library=chain[-1]["sha256"],
                 culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0])) if chain else None
             predecessor = certificate["sha256"] if certificate else None
@@ -3011,8 +3058,9 @@ class PersonalPlanner:
                 return None  # Rebuild EVERY missing published predecessor normally.
             predecessor = data["sha256"]
         view = self.artifacts.load("menu_view", content_digest([context, chain[-1]["sha256"]]))
+        _, candidate_inputs = self._menu_candidate_inputs(context)
         if (not isinstance(view, dict) or view.get("certificate") != data["sha256"]
-                or view.get("candidate_inputs") != content_digest(self.previous_menus)
+                or view.get("candidate_inputs") != candidate_inputs
                 or not isinstance(view.get("qualification"), list)
                 or not all(isinstance(p, dict) and type(p.get("qualified")) is int
                            and type(p.get("raw")) is int and isinstance(p.get("meal_type"), str)
@@ -3504,11 +3552,10 @@ class PersonalPlanner:
         search = self.service.menu_optimizer.optimize_slots
         search_input, library_kwargs = options, {}
         if incremental_library:
-            from app.services.meal_library_content import identity
+            from app.services.library_search_cohorts import per_package_cohorts
             from app.services.recipe_library import current_recipe_generations
             generations = current_recipe_generations(self.library_generation)
             first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
-            cohorts = range(first, self._generation + 1)
             if getattr(self.settings, "library_merge_generations", False):
                 from app.services.library_search_cohorts import merged_library_cohorts
                 from app.services.recipe_library import current_recipes
@@ -3518,11 +3565,8 @@ class PersonalPlanner:
                 library_kwargs.update(completed_prefix_indexes=completed, cohort_prefix_sizes=prefixes,
                                       checkpoint_probe_indexes=probes)
             else:
-                search_input = [(generation, [
-                    [s for s in group if not s.recipe or not s.recipe.design
-                     or generations.get(identity(s.recipe), self._generation) <= generation]
-                    for group in options
-                ]) for generation in cohorts]
+                search_input = per_package_cohorts(options, generations,
+                    first_generation=first, last_generation=self._generation)
             search = self.service.menu_optimizer.optimize_library_slots
             library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
             from app.services.week_refinement import qualified_joint_proposals

@@ -153,6 +153,143 @@ def test_failed_prepared_checkout_returns_to_ordinary_search(tmp_path):
     assert result.personal.checks["checkout_audit"]["passed"] and len(calls) >= 2
 
 
+def _expensive_prepared_delivery(tmp_path):
+    from app.services.personal_planner import PersonalPlanner
+
+    request, universe, facts, pantry = fixture()
+    pantry["items"] = []
+    settings = replace(planner(request, universe, facts, pantry).settings,
+                       library_search_policy="smako-verified-reference-v1")
+    cache = OwnedPlannerArtifacts(PlanStore(tmp_path / "plans.sqlite"), "a" * 64)
+
+    def subject(*, artifacts=cache):
+        return PersonalPlanner(request, settings, universe, deepcopy(pantry), facts=facts,
+                               now=NOW, artifacts=artifacts)
+
+    initial = subject()
+
+    def expensive(cohorts, *, evaluate, accepts, **kwargs):
+        valid = []
+        for slot in list(cohorts)[-1][1][0]:
+            if accepts((slot,), final=True):
+                try:
+                    valid.append(((slot,), evaluate((slot,), final=False)))
+                except ValueError:
+                    pass
+        return max(valid, key=lambda row: row[1]["basket"].total)
+
+    initial.service.menu_optimizer.optimize_library_slots = expensive
+    expensive_plan = initial.create(_compare_scopes=False)
+    cheap = subject(artifacts=None).create(_compare_scopes=False)
+    assert cheap.optimized_basket.total < expensive_plan.optimized_basket.total
+    assert (cheap.personal.checks["verified_reference"]["context"]
+            == expensive_plan.personal.checks["verified_reference"]["context"])
+    warm = subject().create(_compare_scopes=False)
+    assert warm.personal.checks["verified_reference"]["prepared_menu_hit"]
+    return subject, cache, request, cheap, expensive_plan
+
+
+@pytest.mark.parametrize("cache_path", ["prepared", "certificate"])
+@pytest.mark.parametrize("valid", [True, False])
+def test_new_owned_delivery_competes_on_both_cache_paths(tmp_path, cache_path, valid):
+    from app.services.personal_policy import PolicyConflict
+
+    subject, cache, request, cheap, expensive = _expensive_prepared_delivery(tmp_path)
+    if cache_path == "certificate":
+        with cache.store._connect() as connection:
+            connection.execute("DELETE FROM planner_owned_artifacts WHERE kind='menu_view'")
+    cache.store.create(request, cheap, owner_actor_hash=cache.owner)
+    current = subject()
+
+    def no_search(*args, **kwargs):
+        pytest.fail("New saved identities must not repeat the prepared publication searches")
+
+    current.service.menu_optimizer.optimize_library_slots = no_search
+    audit = current.auditor.audit
+    rejected = []
+
+    def checkout(ingredients, basket, **kwargs):
+        if not valid and basket.total == cheap.optimized_basket.total:
+            rejected.append(basket.total)
+            raise PolicyConflict("Synthetic new delivery fails current checkout")
+        return audit(ingredients, basket, **kwargs)
+
+    current.auditor.audit = checkout
+    result = current.create(_compare_scopes=False)
+    expected = cheap if valid else expensive
+    assert result.optimized_basket == expected.optimized_basket
+    assert result.personal.slots == expected.personal.slots
+    report = result.personal.checks["verified_reference"]
+    assert not report.get("prepared_menu_hit")
+    assert report["loaded_publications"] == 1 and report["replayed_publications"] == 0
+    assert result.personal.checks["checkout_audit"]["passed"]
+    if valid:
+        assert subject().create(_compare_scopes=False).personal.checks["verified_reference"]["prepared_menu_hit"]
+        from app.services.personal_store import PersonalStore
+
+        duplicate = cheap.model_copy(deep=True)
+        duplicate.personal.pantry_revision = PersonalStore(cache.store).read(cache.owner)["revision"]
+        cache.store.create(request, duplicate, owner_actor_hash=cache.owner)
+        assert subject().create(_compare_scopes=False).personal.checks["verified_reference"]["prepared_menu_hit"]
+    else:
+        assert rejected and report["publications"][-1]["audit_rejected"] > 0
+
+
+def test_other_owners_delivery_cannot_invalidate_or_enter_prepared_candidates(tmp_path):
+    subject, cache, request, cheap, expensive = _expensive_prepared_delivery(tmp_path)
+    OwnedPlannerArtifacts(cache.store, "b" * 64)
+    cache.store.create(request, cheap, owner_actor_hash="b" * 64)
+    assert cache.recent_menu_records(include_certificates=False) == []
+    result = subject().create(_compare_scopes=False)
+    assert result.personal.checks["verified_reference"]["prepared_menu_hit"]
+    assert result.optimized_basket == expensive.optimized_basket
+
+
+@pytest.mark.parametrize("legacy_outcome", ["cheaper", "invalid", "search_miss"])
+def test_full_library_legacy_candidate_competes_independently_once(tmp_path, legacy_outcome):
+    from app.errors import IncompleteBasketError
+    from app.services.personal_policy import PolicyConflict
+
+    subject, _, _, cheap, expensive = _expensive_prepared_delivery(tmp_path)
+    current = subject(artifacts=None)
+    optimize = current.service.menu_optimizer.optimize_library_slots
+    calls, seeds, reject = [], [], False
+
+    def tracks(cohorts, *, evaluate, accepts, **kwargs):
+        nonlocal reject
+        calls.append(True)
+        seeds.append(kwargs["initial_evaluations"])
+        if len(calls) == 1:
+            if legacy_outcome == "search_miss":
+                raise IncompleteBasketError("Synthetic legacy search miss")
+            completed = optimize(cohorts, evaluate=evaluate, accepts=accepts, **kwargs)
+            assert completed[1]["basket"].total == cheap.optimized_basket.total
+            reject = legacy_outcome == "invalid"
+            return completed
+        slots = [next(s for s in list(cohorts)[-1][1][0]
+                      if s.recipe.design.variant_id == "protein")]
+        assert accepts(slots, final=True)
+        return slots, evaluate(slots, final=False)
+
+    audit = current.auditor.audit
+
+    def checkout(ingredients, basket, **kwargs):
+        if reject and basket.total == cheap.optimized_basket.total:
+            raise PolicyConflict("Synthetic legacy proposal fails current checkout")
+        return audit(ingredients, basket, **kwargs)
+
+    current.auditor.audit = checkout
+    current.service.menu_optimizer.optimize_library_slots = tracks
+    result = current.create(_compare_scopes=False)
+    expected = cheap if legacy_outcome == "cheaper" else expensive
+    assert result.optimized_basket == expected.optimized_basket
+    assert result.personal.checks["checkout_audit"]["passed"]
+    assert len(calls) >= 3 and len({id(seed) for seed in seeds}) == len(seeds)
+    preparation = result.personal.checks["verified_reference"]["publications"][0]["legacy_full_library_preparation"]
+    assert preparation["seconds"] >= 0
+    assert preparation["status"] == ("search_miss" if legacy_outcome == "search_miss" else "proposal_completed")
+
+
 @pytest.mark.parametrize("change", ["pantry", "facts", "date", "settings", "locks", "view"])
 def test_context_invalidation(change):
     from datetime import timedelta

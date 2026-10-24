@@ -92,6 +92,11 @@ async def main() -> int:
                       else production_refresh_lock_path(args.database, args.price_universe_root))
     with (RefreshRunLock(operation_lock),
           RefreshRunLock(root / ".writer.lock")):
+        if args.base_release is not None:
+            base = args.base_release.resolve()
+            if base.parent != root / "releases" or staging.exists():
+                p.error("base must be this archive's release and staging must be new")
+        approved_proof = None
         if args.approved_snapshot:
             from grocery_data.app.services.axfood_catalogue_queue import approved_catalogue_codes
             from grocery_data.app.storage import create_database_engine, create_session_factory
@@ -104,7 +109,7 @@ async def main() -> int:
                     codes, proof = approved_catalogue_codes(session, args.approved_snapshot,
                                                            chain=args.chain, store_id=args.store_id)
                 args.catalog_proof = staging / f"approved-catalogue-{args.chain}.json"
-                atomic_bytes(args.catalog_proof, encoded(proof))
+                approved_proof = encoded(proof)
             finally:
                 engine.dispose()
         from deploy.scripts.storage_maintenance import inventory, maintain_axfood_archives
@@ -117,9 +122,6 @@ async def main() -> int:
 
             from grocery_data.app.services.axfood_detail_archive import verify_release
 
-            base = args.base_release.resolve()
-            if base.parent != root / "releases" or staging.exists():
-                p.error("base must be this archive's release and staging must be new")
             manifest = verify_release(base)
             if retention["retained_bytes"] + inventory(base)[1] > retention["max_bytes"]:
                 raise ValueError("Staging copy exceeds archive budget")
@@ -128,6 +130,8 @@ async def main() -> int:
                     target = staging / name
                     target.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copyfile(base / name, target)
+        if approved_proof is not None:
+            atomic_bytes(args.catalog_proof, approved_proof)
         result = await collect(args, codes, staging, rate)
         if result == 0 and (args.publish or args.publish_only):
             from grocery_data.app.services.axfood_detail_archive import publish_release
