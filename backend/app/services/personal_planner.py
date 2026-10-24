@@ -784,20 +784,31 @@ class PersonalPlanner:
             from app.services.recipe_library import matches_meal
             if not matches_meal(recipe, meal, self.request.recipe_preferences):
                 raise PolicyConflict("Receptet uppfyller inte val av matkök, ingrediensantal, tid eller anpassning. Välj ett kvalificerat alternativ.", code="RECIPE_CHOICES_CONFLICT")
-        # Never trust a caller/LLM supplied canonical identity over the visible ingredient.
-        recipe = Recipe.model_validate(
-            {
-                **recipe.model_dump(),
-                "ingredients": [
-                    {**i.model_dump(), "canonical_name": canonicalize_ingredient_name(i.name)}
-                    for i in recipe.ingredients
-                ],
-            }
-        )
-        if self.complete:
+        if (self.complete and recipe.design is not None
+                and all(i.canonical_name == canonicalize_ingredient_name(i.name) for i in recipe.ingredients)):
             from app.services.recipe_library import share_issued_recipe_parts
 
+            # Compare every value with the validated issued registry before
+            # sharing its frozen ingredients/design. Dumping and parsing this
+            # exact tree again cannot add evidence. Mutable recipe lists and
+            # preparation forms are still copied by the registry helper.
             recipe = share_issued_recipe_parts(recipe)
+        else:
+            # Unregistered inputs still derive their canonical identities from
+            # visible ingredients and pass through ordinary model validation.
+            recipe = Recipe.model_validate(
+                {
+                    **recipe.model_dump(),
+                    "ingredients": [
+                        {**i.model_dump(), "canonical_name": canonicalize_ingredient_name(i.name)}
+                        for i in recipe.ingredients
+                    ],
+                }
+            )
+            if self.complete:
+                from app.services.recipe_library import share_issued_recipe_parts
+
+                recipe = share_issued_recipe_parts(recipe)
         profile = self._merged_profile(meal)
         if not recipe_respects_diet(
             recipe,
@@ -2532,6 +2543,7 @@ class PersonalPlanner:
 
     def create(self, *, replace_slot=None, balanced_reference=None, _compare_scopes=True):
         started = perf_counter()
+        self._release_idle_memory()
         incumbents = []
         incumbent_scopes = {}
         if (self.complete and _compare_scopes and self.request.diversity_mode == "cheapest"
@@ -2732,6 +2744,12 @@ class PersonalPlanner:
         from app.services.week_refinement import surplus_key
         return (money(basket.total), surplus_key(basket) if self.spec.surplus_mode == "minimize" else ())
 
+    @timed_stage("memory_reclamation")
+    def _release_idle_memory(self, *, recent=False):
+        from app.services.planner_memory import release_idle_memory
+
+        return release_idle_memory(generation=1 if recent else 2)
+
     def _culinary_snapshot(self, *menus):
         from app.services.menu_optimizer import LazyPairwiseSimilarities
 
@@ -2866,6 +2884,7 @@ class PersonalPlanner:
                     row.update(search_track="legacy_full_library", publication_size=node["count"])
                 legacy_report["evaluations"] = sum(row.get("evaluations_executed", 0)
                     for row in self.diagnostics.search[trace_start:])
+                self._release_idle_memory(recent=True)
 
             def search(track, emit, *, budget=budget, completed=completed, prefixes=prefixes,
                        probes=probes, improvements=improvements, node=node, prefix_options=prefix_options):
@@ -2913,6 +2932,7 @@ class PersonalPlanner:
                             row["search_track"] = track
                             row["improvement_path"] = phase
                             row["publication_size"] = node["count"]
+                        self._release_idle_memory(recent=True)
 
             chosen, result, report = verified_search(search, audit=audit,
                 accepts=lambda chosen: accepts(chosen, final=True),
@@ -2932,6 +2952,7 @@ class PersonalPlanner:
                     qualification_library=chain[-1]["sha256"],
                     culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0]))
                 predecessor = certificate["sha256"]
+            self._release_idle_memory()
         chosen, result = incumbent
         if result is None:
             # The durable certificate is result evidence, never current basket
@@ -3426,6 +3447,8 @@ class PersonalPlanner:
         constraints = (self.service._culinary_constraints(dinner_pool, policy, profiles=prepared_menu["culinary_profiles"])
                        if prepared_menu else self.service._culinary_constraints(dinner_pool, policy))
         self._qualified_culinary_view = constraints.pairwise_recipe_similarities
+        if self.complete and prepared_menu is None:
+            self._release_idle_memory()
         ceiling = None
         if balanced_reference is not None and dinner_count:
             references = [

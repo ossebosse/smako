@@ -6,6 +6,8 @@ import hashlib
 import json
 import os
 import zlib
+from contextlib import contextmanager
+from dataclasses import dataclass
 from functools import lru_cache
 from itertools import islice
 from pathlib import Path
@@ -16,7 +18,74 @@ from app.services.meal_library_content import atomic_write, digest, encoded
 SCHEMA = "smako-recipe-preparation-v2"
 MAX_GENERATIONS = 8
 MAX_BYTES = 32 * 1024 * 1024
+CONTENT_LIMIT = 4096
 STATS = {"hits":0,"misses":0,"writes":0,"invalid":0}
+
+
+@dataclass
+class _ContentWriteBudget:
+    directory: Path
+    count: int
+    size: int
+    writable: bool = True
+
+    def write(self, path, data, raw_size):
+        if not self.writable or path.parent != self.directory:
+            return
+        try:
+            old_size = path.stat().st_size
+        except FileNotFoundError:
+            old_size = None
+        if (raw_size > 128 * 1024 * 1024 or len(data) > MAX_BYTES
+                or (old_size is None and self.count >= CONTENT_LIMIT)
+                or self.size - (old_size or 0) + len(data) > MAX_BYTES):
+            return
+        atomic_write(path, data)
+        self.count += old_size is None
+        self.size += len(data) - (old_size or 0)
+        STATS["writes"] += 1
+
+
+@contextmanager
+def _content_write_batch():
+    """Count disk usage once while holding the content writer's OS lock.
+
+    Contention/read-only storage uses ordinary checked computation without
+    writing. The lock covers the entire batch, including byte/count updates;
+    another cooperating process must rescan after acquiring its own lease.
+    No process-global usage snapshot can hide another writer or a removed file.
+    """
+    directory = root() / "content"
+    budget = _ContentWriteBudget(directory, 0, 0, writable=False)
+    handle = None
+    try:
+        directory.mkdir(parents=True, exist_ok=True)
+        handle = (directory / ".preparation-write.lock").open("a+b")
+        if os.name == "nt":
+            import msvcrt
+
+            if handle.seek(0, 2) == 0:
+                handle.write(b"0")
+                handle.flush()
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        with os.scandir(directory) as entries:
+            for entry in entries:
+                if entry.name.endswith(".json"):
+                    budget.count += 1
+                    budget.size += entry.stat().st_size
+        budget.writable = True
+    except OSError:
+        pass
+    try:
+        yield budget
+    finally:
+        if handle is not None:
+            handle.close()  # Both platforms release the OS lock on close.
 
 
 def ingredient_search_positions(prepared_universe, name, *, complete):
@@ -141,7 +210,7 @@ def _directory_at_capacity(directory, modified_ns, limit):
     return sum(1 for _ in islice(directory.glob("*.json"), limit)) >= limit
 
 
-def prepared(kind, identity, compute, *, storable=None):
+def prepared(kind, identity, compute, *, storable=None, _write_budget=None):
     """Reject partial/wrong version artefacts and safely recompute on any cache fault.
 
     ``storable`` is asked after ``compute``; when it returns False the result
@@ -174,10 +243,13 @@ def prepared(kind, identity, compute, *, storable=None):
         base64.b64encode(zlib.compress(raw,1)).decode() if compressed else payload,
         "encoding":"zlib-json-v1" if compressed else "json-v1", "sha256":digest(raw)})
     try:
+        if _write_budget is not None:
+            _write_budget.write(path, data, len(raw))
+            return payload
         directory.mkdir(parents=True,exist_ok=True)
         # Existing generation evidence is retained. At the bounded capacity,
         # continue safely in memory rather than growing disk indefinitely.
-        limit = 4096 if kind == "content" else MAX_GENERATIONS
+        limit = CONTENT_LIMIT if kind == "content" else MAX_GENERATIONS
         if _directory_at_capacity(directory, directory.stat().st_mtime_ns, limit) and not path.exists():
             return payload
         existing = list(directory.glob("*.json"))
@@ -194,6 +266,11 @@ def prepared(kind, identity, compute, *, storable=None):
 
 
 def prepare_content(recipes):
+    with _content_write_batch() as budget:
+        return _prepare_content(recipes, budget)
+
+
+def _prepare_content(recipes, budget):
     from app.services.meal_library_content import identity
     from app.services.recipe_library import _structural_check, ingredient_key
     index = {}
@@ -205,7 +282,7 @@ def prepare_content(recipes):
                     "ingredients":[ingredient_key(i) for i in recipe.ingredients],
                     "meal_types":list(recipe.design.meal_types),
                     "ingredient_count":recipe.design.ingredient_count}
-        row = prepared("content",recipe.model_dump(mode="json"),compute)
+        row = prepared("content",recipe.model_dump(mode="json"),compute, _write_budget=budget)
         # Cache provenance never substitutes for the issued content registry.
         if row["identity"] != key or row["content_sha256"] != recipe.design.content_sha256:
             raise ValueError("Prepared content identity mismatch")

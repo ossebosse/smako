@@ -10,7 +10,9 @@ import hashlib
 import re
 from bisect import bisect_left
 from collections import defaultdict
-from datetime import datetime
+from collections.abc import Mapping
+from dataclasses import dataclass
+from datetime import date, datetime
 from decimal import Decimal
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Literal
@@ -26,6 +28,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 from grocery_data.app.domain.identifiers import InvalidGtinError, normalize_gtin
 from grocery_data.app.domain.promotion_pricing import (
     MembershipProgram,
+    PriceContract,
     PromotionEligibility,
     PromotionMechanism,
     UserPricingContext,
@@ -121,6 +124,88 @@ class ProductSearchRequest(BaseModel):
         return str(value).replace(" ", "")
 
 
+_CONTRACT_FIELDS = tuple(PriceContract.model_fields)
+
+
+def _immutable_contract_value(value):
+    if value is None or isinstance(value, (str, bytes, int, float, Decimal, date)):
+        return True
+    if isinstance(value, (tuple, frozenset)):
+        return all(_immutable_contract_value(child) for child in value)
+    if isinstance(value, BaseModel):
+        return (
+            value.model_config.get("frozen") is True
+            and not value.__pydantic_private__
+            and not value.__pydantic_extra__
+            and all(
+                _immutable_contract_value(getattr(value, name)) for name in type(value).model_fields
+            )
+        )
+    return False
+
+
+@dataclass(frozen=True, slots=True)
+class _ContractRecord:
+    values: tuple
+    supplied: frozenset[str]
+
+    def restore(self):
+        # Only the ordinary normalizer's validated, recursively immutable
+        # values enter a record. No user/raw input is accepted on this path.
+        # Preserve supplied fields as well as all field values/defaults.
+        return PriceContract.model_construct(
+            _fields_set=set(self.supplied), **dict(zip(_CONTRACT_FIELDS, self.values, strict=True))
+        )
+
+
+def _compact_contracts(contracts, supplied_sets):
+    result = []
+    for contract in contracts:
+        if (
+            type(contract) is PriceContract
+            and not contract.__pydantic_private__
+            and not contract.__pydantic_extra__
+            and PriceContract.__pydantic_post_init__ is None
+        ):
+            values = tuple(getattr(contract, name) for name in _CONTRACT_FIELDS)
+            if all(_immutable_contract_value(value) for value in values):
+                supplied = frozenset(contract.model_fields_set)
+                supplied = supplied_sets.setdefault(supplied, supplied)
+                result.append(_ContractRecord(values, supplied))
+                continue
+        # An unsupported future shape/custom model keeps its original object;
+        # compaction may never weaken its existing validation or behavior.
+        result.append(contract)
+    return tuple(result)
+
+
+class _ContractRows(Mapping):
+    """Same read-only row order/values without a catalogue of model wrappers.
+
+    All contracts are normalized and validated before index publication.
+    Reconstituted models are temporary for one product read; the existing
+    product-search result cache remains the cache for repeated searches.
+    """
+
+    def __init__(self, rows):
+        self._rows = MappingProxyType(rows)
+
+    def __len__(self):
+        return len(self._rows)
+
+    def __iter__(self):
+        return iter(self._rows)
+
+    def __contains__(self, key):
+        return key in self._rows
+
+    def __getitem__(self, key):
+        return tuple(
+            value.restore() if isinstance(value, _ContractRecord) else value
+            for value in self._rows[key]
+        )
+
+
 class ProductSearchIndex:
     """Immutable postings and prevalidated contracts prepared before activation."""
 
@@ -128,7 +213,7 @@ class ProductSearchIndex:
         self.prepared = prepared
         self.stores = MappingProxyType({s.store_id: s for s in prepared.stores})
         postings, names, groups, gtins = (defaultdict(set) for _ in range(4))
-        row_keys, contracts = {}, {}
+        row_keys, contracts, supplied_sets = {}, {}, {}
         coffee_related = set()
         non_human_food = set()
         for i, product in enumerate(prepared.universe.products):
@@ -182,7 +267,7 @@ class ProductSearchIndex:
                 postings[token].add(key)
             candidate = ProductCandidate.from_product(product, 1)
             try:
-                contracts[i] = tuple(
+                row_contracts = tuple(
                     c
                     for c in price_contracts_for_candidate(candidate)
                     if c.eligibility in {PromotionEligibility.PUBLIC, PromotionEligibility.MEMBER}
@@ -192,12 +277,13 @@ class ProductSearchIndex:
                 candidate = candidate.model_copy(
                     update={"offers": [], "member_price": None, "effective_price": product.price}
                 )
-                contracts[i] = price_contracts_for_candidate(candidate)
+                row_contracts = price_contracts_for_candidate(candidate)
+            contracts[i] = _compact_contracts(row_contracts, supplied_sets)
         self.postings = MappingProxyType({k: frozenset(v) for k, v in postings.items()})
         self.names = MappingProxyType({k: frozenset(v) for k, v in names.items()})
         self.groups = MappingProxyType({k: tuple(sorted(v)) for k, v in groups.items()})
         self.gtins = MappingProxyType({k: frozenset(v) for k, v in gtins.items()})
-        self.contracts = MappingProxyType(contracts)
+        self.contracts = _ContractRows(contracts)
         self.vocabulary = tuple(sorted(postings))
         self.row_count = len(row_keys)
         self.coffee_related = frozenset(coffee_related)

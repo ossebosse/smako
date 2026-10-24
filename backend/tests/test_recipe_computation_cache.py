@@ -178,6 +178,32 @@ def test_clean_cache_reuses_only_validated_content_and_current_preferences(monke
             planner.clean_recipe(recipe, meal)
 
 
+@pytest.mark.parametrize("change", ["quantity", "instructions", "preparation"])
+def test_issued_cleaning_rejects_modified_values_after_cache_eviction(monkeypatch, change):
+    prefs = RecipePreferences(mode="complete", cuisines=["greek"])
+    subject = PersonalPlanner(PlanRequest(recipes=1, recipe_preferences=prefs),
+        Settings(complete_recipes_enabled=True), prepared(), state(), facts={}, now=NOW)
+    monkeypatch.setattr(subject, "resolve", lambda *args, **kwargs: [])
+    recipe = candidates(prefs, 2)[0]
+    meal = subject.spec.meals[0]
+    cleaned = subject.clean_recipe(recipe, meal)
+    assert cleaned == recipe
+    assert cleaned.ingredients is not recipe.ingredients
+    assert cleaned.instructions is not recipe.instructions
+    assert cleaned.preparation.input_forms is not recipe.preparation.input_forms
+    subject.clean_recipe_cache.clear()
+    if change == "quantity":
+        recipe.ingredients[0] = recipe.ingredients[0].model_copy(update={
+            "quantity": recipe.ingredients[0].quantity + 1})
+    elif change == "instructions":
+        recipe.instructions[0] += " Unreviewed change."
+    else:
+        recipe.preparation.input_forms[recipe.ingredients[0].canonical_name] = "unknown"
+    with pytest.raises(ValueError):
+        subject.clean_recipe(recipe, meal)
+    assert subject.clean_recipe(cleaned, meal) == cleaned
+
+
 @pytest.mark.parametrize("servings,minimum", [(1, 30), (2, 32)])
 def test_real_planner_search_and_audit_equal_uncached_for_private_nutrition_choices(servings, minimum):
     universe, facts = products()
