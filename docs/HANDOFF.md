@@ -1,4 +1,4 @@
-# 2026-10-24 19:18 UTC: Arton pilotceller klara; Lund/5 000 körs
+# 2026-10-24 21:18 UTC: Originalfakta-piloten klar; Axfood-armen körs
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -51,14 +51,21 @@ mot 262 är 1,1391/1,1315/1,1925 och passerar 1,25, även mot legacytid/pris.
 slutlig peak och exit 0 utan OOM/swap. Legacy och v1 ger samma priser:
 standard 487,85, fördelning 761,45 och organic-share 314,24 kr. V1 kallt/varmt:
 103,38/7,16–7,38 s, 91,67/7,58–7,79 s och 293,48/7,14–7,69 s.
-Totalt 18/48 pilotceller och 72 auditgodkända anrop; 30 pilotceller återstår.
-Lunds 5 000/262-kvoter återstår. Ingen full standardkvalificering eller ändrad default.
+Lund/5 000 är också klar: sex celler/24 anrop med audit PASS, 1,744 GiB
+slutlig peak och exit 0 utan OOM/swap. V1 ger 477,84 / 699,10 / 286,32 kr
+mot legacy 504,34 / 704,30 / 309,34 kr och är även billigare än vid 262.
+V1 första/varmt: 808,89/8,10–8,56 s, 938,02/8,53–9,40 s och
+2 890,91/7,72–7,85 s. Varmkvoter 1,1970/1,2405/1,0999 passerar 1,25 och
+varma anrop är snabbare än legacy. Organic-shares kalla 48,18 minuter kvarstår.
+Originalfakta-armen är därmed klar för pilotens tre profiler vid båda storlekarna
+i båda städerna: totalt 24/48 pilotceller och 96 auditgodkända anrop.
+Axfood-armens 24 celler återstår. Ingen full standardkvalificering eller ändrad default.
 
 SSH-kanalen stängdes efter den avslutade Malmögruppen och sekvensen stannade
 innan nästa arbetare. Kvitton och den tomma Lund/262-katalogen verifierades.
 Återupptagningen hoppar bara över verifierade färdiga grupper, bevarar
 ofullständig evidens och skriver fortsättningsloggen till disk även om
-transporten stängs. Lund/5 000 körs nu inom samma gränser och frysta appkod.
+transporten stängs. Axfood/Malmö/262 körs nu inom samma gränser och frysta appkod.
 Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
 det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
 Tolv lokala evidenskontrakt, Ruff och compileall samt full CI på

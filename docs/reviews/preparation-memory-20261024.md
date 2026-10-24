@@ -122,6 +122,11 @@ Detta är faktaprojektion, inte levererad meny-/auditkvalificering.
 
 ### Pilot: Malmö/originalfakta klar vid båda storlekarna
 
+Varje grupp delar offentlig förberedelse i en process och börjar med en
+tom syntetisk ägarstore. Första v1-anropet följer efter profilens legacy-anrop;
+dess certifikat återanvänds av de tre följande v1-anropen. OS-diskcache är
+okontrollerad. Tom appcache mäts separat i cachelägesproven ovan.
+
 Malmö/originalfakta/262 är avslutad med sex celler och 24 anrop:
 
 | Profil | Legacy, betalt | V1, betalt | Första v1-anrop | Tre varma v1-anrop |
@@ -152,7 +157,7 @@ Diagnostikens ekologiska sökning redovisar 3 365,56 s; fasvärdena överlappar
 och får inte summeras. Alla elva publiceringar förbereds även här. Detta
 är ingen konstant kallstartsgaranti för nya personliga krav.
 
-### Pilot: även Lund/originalfakta/262 klar
+### Pilot: Lund/originalfakta klar vid båda storlekarna
 
 Lund/262 är avslutad med ytterligare sex celler och 24 auditgodkända anrop.
 Slutlig processpeak är **1 168 171 008 byte (1,088 GiB)**, exit 0 utan OOM/swap;
@@ -164,9 +169,24 @@ hela sexcellsprocessen tog 1 227,47 s.
 | Fördelning | 761,45 kr | 91,67 s | 7,58–7,79 s |
 | Organic-share | 314,24 kr | 293,48 s | 7,14–7,69 s |
 
-Totalt är **18 av 48 pilotceller och 72 auditgodkända anrop** uppmätta;
-30 pilotceller återstår. Lund/5 000 körs nu. Det är inte full
-standardkvalificering; Lunds kvoter mot 5 000 återstår.
+Lund/5 000 är också avslutad med ytterligare sex celler och 24 auditgodkända
+anrop. Slutlig peak är **1 872 150 528 byte (1,744 GiB)**, exit 0 utan OOM/swap.
+Hela denna sexcellsprocess tog 7 128,58 s.
+
+| Profil | Legacy, betalt | V1, betalt | Första v1-anrop | Tre varma v1-anrop | Varm max(5 000)/min(262) |
+| --- | --- | --- | --- | --- | --- |
+| Standard | 504,34 kr | 477,84 kr | 808,89 s | 8,10–8,56 s | 1,1970 |
+| Fördelning | 704,30 kr | 699,10 kr | 938,02 s | 8,53–9,40 s | 1,2405 |
+| Organic-share | 309,34 kr | 286,32 kr | 2 890,91 s | 7,72–7,85 s | 1,0999 |
+
+Alla tre kvoter klarar 1,25 och v1 är billigare än både legacy och sitt
+262-resultat. V1:s varma anrop är snabbare än motsvarande legacy-anrop.
+Organic-shares första v1-förberedelse tar fortfarande **48,18 minuter**.
+
+Originalfakta-armen är därmed klar för pilotens tre profiler, båda städerna
+och båda storlekarna: **24 av 48 pilotceller och 96 auditgodkända anrop**.
+Axfood-armens 24 pilotceller återstår; Malmö/262 körs nu. Hela piloten och
+standardkvalificeringen är fortfarande öppna grindar.
 [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
 
 SSH-kanalen stängdes efter den färdiga Malmögruppen; därefter var sekvensens
