@@ -57,8 +57,11 @@ class _Pool:
             return value, False, None
         if value.__pydantic_private__ or value.__pydantic_extra__:
             return value, False, None
-        updates, children, immutable = {}, [], True
-        for name in type(value).model_fields:
+        updates, children, immutable, supplied_mask = {}, [], True, 0
+        supplied = value.model_fields_set
+        for position, name in enumerate(type(value).model_fields):
+            if name in supplied:
+                supplied_mask |= 1 << position
             child = getattr(value, name)
             shared, safe, identity = self.visit(child)
             immutable = immutable and safe
@@ -67,14 +70,14 @@ class _Pool:
             if identity is not None:
                 children.append((name, identity))
         if updates:
-            supplied = value.model_fields_set
             value = value.model_copy(update=updates)
             # model_copy adds update keys to the supplied-field set. Sharing
             # defaults must preserve exclude_unset serialization as well.
             object.__setattr__(value, "__pydantic_fields_set__", set(supplied))
         if not immutable:
             return value, False, None
-        key = type(value), hash(value), tuple(sorted(value.model_fields_set)), tuple(children)
+        unknown_fields = tuple(sorted(supplied - type(value).model_fields.keys()))
+        key = type(value), hash(value), supplied_mask, unknown_fields, tuple(children)
         bucket = self.values.get(key, ())
         for existing in bucket:
             if existing == value:
