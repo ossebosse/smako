@@ -1,3 +1,31 @@
+# 2026-10-24: Granskningsfynd rättade; 5 000-prisfelet undanröjt – fortsatt opt-in
+
+Runtimekod `9162f0f`, [PR #8](https://github.com/ossebosse/smako/pull/8).
+Nya sparade menyidentiteter konkurrerar nu via båda cachevägarna utan att
+publiceringarnas sökningar körs om. Ägar-/raderingsgränser och aktuell
+checkout bevaras. Axfoods godkända katalog kan kombineras med basrelease;
+LKG, negativa svar och avbrott/återupptagning är verifierade offline.
+
+Gamla fullbibliotekssökningens oberoende vinnare förbereds och kassakontrolleras
+per publicering/kontext. Förberedelsekostnaden redovisas. Fryst Malmö/fördelning,
+5 000, två CPU/3 GiB: **988,32 kr i alla tre körningar för både legacy och v1**,
+samma meny/hash, samtliga audit PASS. V1: 740,87 s första anropet inklusive
+215,41 s extra legacy-förberedelse, därefter 8,44/8,37 s. Ny process med varm
+disk/beständiga certifikat: 32,01/8,13/8,17 s; hela processen 98,60 s.
+Upprepade anrop vid 262 tog 8,38/8,00 s; observerad försiktig 5 000/262-kvot
+1,0214 i denna profil. Tolv godkända planer totalt.
+
+**Fortfarande inte standardkvalificerat:** samlad cgroup-peak 2,906 GiB,
+omstart 2,639 GiB; ingen OOM men målet 2,5 GiB missas. Hela matrisen,
+övriga profiler/städer och isolerad kall v1-kontext/kall OS-disk återstår.
+`legacy` och `library_merge_generations=False` är fortsatt standard.
+126 riktade tester passerar; full PR-CI på runtimekoden: **3 106 PASS,
+10 XFAIL, 53 SKIP**, inklusive Chromium/WebKit. Ruff/compileall godkända.
+[Rapport, pinnar och maskinunderlag](reviews/sol-architecture-fixes-20261024.md).
+Ingen produktionsaktivering, liveinsamling eller schemaändring utförd.
+
+---
+
 # 2026-10-24: Oberoende granskning – två nya fel att rätta
 
 Se [granskningen](reviews/sol-architecture-review-20261024.md) för reproduktion

@@ -1,5 +1,11 @@
 # Oberoende granskning av Sols implementation, 2026-10-24
 
+**Uppföljning:** båda nya fynden är rättade och har permanenta regressioner i
+[PR #8 och omprovsrapporten](sol-architecture-fixes-20261024.md). Det frysta
+5 000-motexemplet är också omkört utan prisregression. Minnesmålet och den
+fulla leveransmatrisen är fortfarande inte godkända; v1 förblir opt-in.
+Texten och bugproberna nedan beskriver den ursprungligen granskade revisionen.
+
 Granskat intervall: arkitekturbeslut `e527a3c` till main `ac0bbfe`.
 Runtime är `c981d75`; efterföljande commit är dokumentation.
 
