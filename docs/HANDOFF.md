@@ -1,3 +1,15 @@
+# 2026-10-24: Nästa uppdrag till Sol – minne, förberedelse och slutmatris
+
+Fortsätt enligt [CODEX-SOL-NEXT-20261024.md](CODEX-SOL-NEXT-20261024.md).
+Rättningarna i PR #8 är granskade och 126 riktade tester omkörda med PASS.
+Nästa steg är att minska första förberedelsens kostnad och hålla minnet
+inom målet 2,5 GiB, därefter slutföra verifieringen. Bevara referens-/legacy-
+kandidater och rättningarna av båda cachevägarna samt Axfoods stagingflöde.
+Det nya dokumentet är ett implementeringsuppdrag; inget nytt standardläge
+eller någon produktionsaktivering har utförts.
+
+---
+
 # 2026-10-24: Granskningsfynd rättade; 5 000-prisfelet undanröjt – fortsatt opt-in
 
 Runtimekod `9162f0f`, [PR #8](https://github.com/ossebosse/smako/pull/8).

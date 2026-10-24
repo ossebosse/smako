@@ -1,5 +1,9 @@
 # Beslut och implementeringsuppdrag till Sol: skalning och Axfood
 
+**Aktuellt nästa steg efter PR #8:** följ
+[CODEX-SOL-NEXT-20261024.md](CODEX-SOL-NEXT-20261024.md) för förberedelsekostnad,
+minne och slutverifiering. Arkitekturkontrakten nedan gäller fortsatt.
+
 Status: beslutad arkitekturriktning 2026-10-23; implementation återstår.
 Bas: main `59e6f76f4f615a0e09ec980efc908665a64c1f37`.
 Läs först `AGENTS.md`, `HANDOFF.md`, `DEVELOPMENT.md` och
