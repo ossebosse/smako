@@ -1,3 +1,44 @@
+# 2026-10-24: Tredje ägarprovet missar minnesmål; nästa kandidat verifieras
+
+PR #9 är integrerad på main `b46f608`. Dess runtime `193629f` klarar pris,
+menyhash och audit i fyra primärplaner och 17 planer över elva cachelägen. Det tredje provet
+med varm offentlig disk och ny syntetisk ägarstore nådde dock **2,624 GiB**
+cgroup-peak. Målet 2,5 GiB är alltså **inte stabilt uppnått**; exit 0 utan
+OOM ändrar inte det. Versionsbyte/serialisering startade inte eftersom
+minnesgrinden stoppade sekvensen. Alla cachelägen och felet finns nu i
+maskinunderlaget, inte bara de första åtta.
+
+Nästa runtime `b5c242d`, [PR #10](https://github.com/ossebosse/smako/pull/10),
+återanvänder exakt oförändrat legacy-prefix före terminal förfining och
+komprimerar endast frysta modellers fältnamnsmetadata med kompatibelt
+publikt set-/copy-/serializer-/pickle-beteende. 33 prefixprov, 23
+metadata-kompatibilitetsprov passerar; full CI på `ea4bb08` inklusive
+Chromium/WebKit passerar.
+Ett inläsningsprov behöll priser/fakta och sänkte RSS efter GC/trim från
+1 376 272 384 till 1 013 547 008 byte, cirka 346 MiB. Det är diagnostik,
+inte en full plan-/minnesgrind. En fryst oracle på `ea4bb08` jämförde samtliga
+elva legacy-kandidater med oberoende sökningar: exakt samma menyer och hela
+korgar, 3 041 utvärderingar mot 9 517. Det vanliga första anropet tog
+709,68 s (tidigare 778,95), cgroup cirka 1,80 GiB, audit PASS. Tre varma
+anrop tog 12,31/11,88/11,80 s. Delmålet under 700 s missas; detta är ett prov.
+Senaste runtime tillför kooperativa avbrott mellan arbetsenheter med fortsatt
+admission och faktisk progress. Ett reproducerat traceback-läckage i avbrutna
+jobb är rättat. 33 jobb-/admissionprov och full CI inklusive Chromium/WebKit
+passerar på `b5c242d`. Dess första vanliga prov gav **674,71 s**, tre varma
+12,36/11,69/12,32 s och cgroup **1,848 GiB**, alla 988,32 kr/hash/audit PASS.
+Inläsning 49,52 s; körkommandot inklusive fyra anrop 772,42 s. Detta är
+ett kallt processprov, inte tre. Matchad instrumentering är ännu inte
+återkörd. Två ytterligare kalla processer och resten av cachelägesproven
+pågår seriellt. Inte integrerad ännu.
+
+**Ingen standardkvalificering:** fler kalla jämförbara prov, slutkodens
+cachelägen, versionsbyte/serialisering, övrig pilot och slutmatris återstår.
+`legacy` och `library_merge_generations=False` förblir standard. Ingen
+produktion, aktiv fakta-/prisversion, insamling, schema eller samtidighet
+har ändrats. [Rapport och underlag](reviews/preparation-memory-20261024.md).
+
+---
+
 # 2026-10-24: Förberedelseoptimering mätt; kvarstående kvalificering
 
 Kandidat `193629f`, [PR #9](https://github.com/ossebosse/smako/pull/9).

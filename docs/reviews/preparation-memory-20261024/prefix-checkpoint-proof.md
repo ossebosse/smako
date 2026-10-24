@@ -1,8 +1,8 @@
 # Checkpoint för legacy-prefix: villkor och likvärdighet
 
-Prototyp på `perf/legacy-prefix-checkpoints-20261024`, efter den integrerade
-förberedelseoptimeringen i PR #9. Fryst fullbiblioteksjämförelse och
-resurskvalificering återstår. Ingen standardväxling.
+Kandidat på `perf/legacy-prefix-checkpoints-20261024`, efter den integrerade
+förberedelseoptimeringen i PR #9. Fryst fullbiblioteksjämförelse passerar;
+resurskvalificering pågår. Ingen standardväxling.
 
 `LibraryPrefixCheckpoint` ägs av ett enda `_search_verified_reference`-anrop.
 Den kopplas bara till legacy-spåret. Referens, förbättring, certifikat och
@@ -45,3 +45,13 @@ substitutionsbanan CCC för 1, medan ABB som seed blir kvar på 4. Checkpointen
 behåller AAA före förfining och måste ge samma CCC som det oberoende anropet.
 Detta är algoritmevidens; först en fryst oraclejämförelse per publicering samt
 nya latens-/minnesprov kan kvalificera den verkliga körningen.
+
+Den frysta oraclen på `ea4bb08f1ace5a854901a81d08ce7facfa11b383` jämförde
+alla elva publiceringar i Malmö/fördelning/5 000 mot nystartade legacy-
+söktillstånd, med exakt samma initialresultat och callbacks. Samtliga
+ordnade slot-/receptvärden och hela serialiserade korgar var identiska.
+Slutplanen gav 988,32 kr, förväntad semantisk hash och audit PASS.
+Den återupptagna vägen utförde **3 041** utvärderingar jämfört med
+**9 517** oberoende, och återupptog sammanlagt 165 tidigare kohorter.
+Det dubbla oraclearbetets tid/minne kvalificerar ingen resurscell.
+Se [alla jämförelser](prefix-oracle.json) och wrappern `prefix_oracle_entry.py`.

@@ -1,0 +1,4980 @@
+{
+  "schema": "smako-preparation-diagnostics-v1",
+  "source_archive_sha256": "3096254b01f0495877bdde128d590fd46fe56d7df7732547e0687c0ca8d5dc28",
+  "diagnostics": [
+    {
+      "name": "qualified_live_object_census",
+      "source_commit": "193629fbd0a0360955726f7a28bc30700ed8fc87",
+      "status": "DIAGNOSTIC_ONLY_NO_PLAN_OR_AUDIT",
+      "raw_sha256": "3114436043d7af795b479ddf3018011fce850969c89f456699df551b9d8cd0eb",
+      "data": {
+        "status": "DIAGNOSTIC_ONLY_NO_MENU_OR_AUDIT",
+        "source_commit": "193629fbd0a0360955726f7a28bc30700ed8fc87",
+        "qualified_recipes_held_alive": 1849,
+        "servings": 4,
+        "products_held_alive": 89458,
+        "facts_held_alive": 71138,
+        "before_collection": {
+          "VmHWM": 2236870656,
+          "VmRSS": 2236870656,
+          "cgroup_current": 2583273472,
+          "cgroup_peak": 2583273472
+        },
+        "after_collection": {
+          "VmHWM": 2236293120,
+          "VmRSS": 2222075904,
+          "cgroup_current": 2568491008,
+          "cgroup_peak": 2586419200
+        },
+        "collection": {
+          "collected": 8833,
+          "generation": 2,
+          "allocator_supported": true,
+          "allocator_released": true
+        },
+        "types": [
+          {
+            "type": "builtins.set",
+            "count": 681483,
+            "instance_bytes": 659674440,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.product.Product",
+            "count": 89458,
+            "instance_bytes": 6440976,
+            "field_dict_bytes": 74429056,
+            "field_set_bytes": 202532912
+          },
+          {
+            "type": "builtins.dict",
+            "count": 525758,
+            "instance_bytes": 260712640,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.provenance.SourceProvenance",
+            "count": 112974,
+            "instance_bytes": 8134128,
+            "field_dict_bytes": 93994368,
+            "field_set_bytes": 107314128
+          },
+          {
+            "type": "app.models.recipe.RecipeIngredient",
+            "count": 121180,
+            "instance_bytes": 8724960,
+            "field_dict_bytes": 56227520,
+            "field_set_bytes": 88219040
+          },
+          {
+            "type": "app.models.recipe.RecipeComponentAmount",
+            "count": 109540,
+            "instance_bytes": 7886880,
+            "field_dict_bytes": 20155360,
+            "field_set_bytes": 65724000
+          },
+          {
+            "type": "app.models.product.ProductCandidate",
+            "count": 23535,
+            "instance_bytes": 1694520,
+            "field_dict_bytes": 37279440,
+            "field_set_bytes": 53283240
+          },
+          {
+            "type": "builtins.frozenset",
+            "count": 133046,
+            "instance_bytes": 66731664,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.list",
+            "count": 1009528,
+            "instance_bytes": 66668176,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.tuple",
+            "count": 609405,
+            "instance_bytes": 60708384,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.product.OfferMetadata",
+            "count": 19593,
+            "instance_bytes": 1410696,
+            "field_dict_bytes": 16301376,
+            "field_set_bytes": 25602968
+          },
+          {
+            "type": "app.models.recipe.RecipeStep",
+            "count": 42322,
+            "instance_bytes": 3047184,
+            "field_dict_bytes": 11511584,
+            "field_set_bytes": 25660976
+          },
+          {
+            "type": "app.models.recipe.RecipeDesign",
+            "count": 10860,
+            "instance_bytes": 781920,
+            "field_dict_bytes": 9035520,
+            "field_set_bytes": 18328352
+          },
+          {
+            "type": "grocery_data.app.domain.purchase_terms.PurchaseTerms",
+            "count": 14656,
+            "instance_bytes": 1055232,
+            "field_dict_bytes": 6800384,
+            "field_set_bytes": 10942976
+          },
+          {
+            "type": "app.models.recipe.Recipe",
+            "count": 20752,
+            "instance_bytes": 1494144,
+            "field_dict_bytes": 5644544,
+            "field_set_bytes": 11203968
+          },
+          {
+            "type": "app.models.recipe.RecipePreparation",
+            "count": 20752,
+            "instance_bytes": 1494144,
+            "field_dict_bytes": 3818368,
+            "field_set_bytes": 12575104
+          },
+          {
+            "type": "app.models.recipe.RecipeComponent",
+            "count": 31026,
+            "instance_bytes": 2233872,
+            "field_dict_bytes": 5708784,
+            "field_set_bytes": 6701616
+          },
+          {
+            "type": "app.services.price_universe.IndexEntry",
+            "count": 26292,
+            "instance_bytes": 1893024,
+            "field_dict_bytes": 4837728,
+            "field_set_bytes": 5679072
+          },
+          {
+            "type": "collections.OrderedDict",
+            "count": 31,
+            "instance_bytes": 8994904,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.campaign_validity.CampaignEvidence",
+            "count": 7328,
+            "instance_bytes": 527616,
+            "field_dict_bytes": 1993216,
+            "field_set_bytes": 5334784
+          },
+          {
+            "type": "app.models.ingredient.NormalizedIngredient",
+            "count": 8461,
+            "instance_bytes": 609192,
+            "field_dict_bytes": 1556824,
+            "field_set_bytes": 4711160
+          },
+          {
+            "type": "app.models.recipe.RecipeProvenance",
+            "count": 5504,
+            "instance_bytes": 396288,
+            "field_dict_bytes": 1497088,
+            "field_set_bytes": 4006912
+          },
+          {
+            "type": "app.models.recipe.RecipeContentSource",
+            "count": 5000,
+            "instance_bytes": 360000,
+            "field_dict_bytes": 1360000,
+            "field_set_bytes": 3640000
+          },
+          {
+            "type": "app.services.product_search._ContractRecord",
+            "count": 99438,
+            "instance_bytes": 4773024,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.type",
+            "count": 2957,
+            "instance_bytes": 4031112,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.function",
+            "count": 22733,
+            "instance_bytes": 3637280,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.personal_policy.ProductFacts",
+            "count": 71138,
+            "instance_bytes": 3414624,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.personal_source_facts.FactsCollection",
+            "count": 1,
+            "instance_bytes": 2621544,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_calculator.BasketItemQuote",
+            "count": 4359,
+            "instance_bytes": 2092320,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.basket.BasketItem",
+            "count": 358,
+            "instance_bytes": 25776,
+            "field_dict_bytes": 567072,
+            "field_set_bytes": 810512
+          },
+          {
+            "type": "app.services.nutrition_reference.NutritionEvidence",
+            "count": 21623,
+            "instance_bytes": 1037904,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_optimizer._CompactQuoteSelection",
+            "count": 12055,
+            "instance_bytes": 867960,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.fields.FieldInfo",
+            "count": 2889,
+            "instance_bytes": 762696,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.PriceContract",
+            "count": 448,
+            "instance_bytes": 32256,
+            "field_dict_bytes": 372736,
+            "field_set_bytes": 326144
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.ComparableCheckoutPrice",
+            "count": 494,
+            "instance_bytes": 35568,
+            "field_dict_bytes": 229216,
+            "field_set_bytes": 359632
+          },
+          {
+            "type": "re.Pattern",
+            "count": 529,
+            "instance_bytes": 610588,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "weakref.ReferenceType",
+            "count": 7156,
+            "instance_bytes": 572480,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.EffectivePriceResolution",
+            "count": 494,
+            "instance_bytes": 35568,
+            "field_dict_bytes": 134368,
+            "field_set_bytes": 359632
+          },
+          {
+            "type": "pydantic._internal._model_construction.ModelMetaclass",
+            "count": 187,
+            "instance_bytes": 318648,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "enum.EnumType",
+            "count": 156,
+            "instance_bytes": 265824,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "collections.deque",
+            "count": 338,
+            "instance_bytes": 256880,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.basket.OptimizedStoreGroup",
+            "count": 512,
+            "instance_bytes": 36864,
+            "field_dict_bytes": 94208,
+            "field_set_bytes": 110592
+          },
+          {
+            "type": "abc.ABCMeta",
+            "count": 170,
+            "instance_bytes": 241296,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.recipe_computation_cache.ExactRecipeKey",
+            "count": 4946,
+            "instance_bytes": 237408,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.cell",
+            "count": 5535,
+            "instance_bytes": 221400,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.economic_ingredient_selector.EconomicProductExample",
+            "count": 161,
+            "instance_bytes": 11592,
+            "field_dict_bytes": 74704,
+            "field_set_bytes": 117208
+          },
+          {
+            "type": "sqlalchemy.event.base.DDLEventsDispatch",
+            "count": 1437,
+            "instance_bytes": 195432,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.getset_descriptor",
+            "count": 2867,
+            "instance_bytes": 183488,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.properties.ColumnProperty",
+            "count": 629,
+            "instance_bytes": 155992,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._TypedDictMeta",
+            "count": 89,
+            "instance_bytes": 151656,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.store.Store",
+            "count": 55,
+            "instance_bytes": 3960,
+            "field_dict_bytes": 25520,
+            "field_set_bytes": 119912
+          },
+          {
+            "type": "builtins.member_descriptor",
+            "count": 2243,
+            "instance_bytes": 143552,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.basket.OptimizedBasket",
+            "count": 256,
+            "instance_bytes": 18432,
+            "field_dict_bytes": 69632,
+            "field_set_bytes": 55296
+          },
+          {
+            "type": "typing.ForwardRef",
+            "count": 1098,
+            "instance_bytes": 114192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions._ProtocolMeta",
+            "count": 69,
+            "instance_bytes": 113736,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.wrapper_descriptor",
+            "count": 1516,
+            "instance_bytes": 109152,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "dataclasses.Field",
+            "count": 886,
+            "instance_bytes": 106320,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.stable_candidate_pool.VariantSearchEvidence",
+            "count": 1849,
+            "instance_bytes": 103544,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.method_descriptor",
+            "count": 1369,
+            "instance_bytes": 98568,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.attributes.InstrumentedAttribute",
+            "count": 629,
+            "instance_bytes": 95608,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.builtin_function_or_method",
+            "count": 1302,
+            "instance_bytes": 93744,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept",
+            "count": 44,
+            "instance_bytes": 74976,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.property",
+            "count": 935,
+            "instance_bytes": 74800,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base._ColumnMetrics",
+            "count": 1733,
+            "instance_bytes": 69320,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._ProtocolMeta",
+            "count": 43,
+            "instance_bytes": 64824,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "collections.defaultdict",
+            "count": 381,
+            "instance_bytes": 60048,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.cyextension.collections.OrderedSet",
+            "count": 84,
+            "instance_bytes": 56352,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.module",
+            "count": 710,
+            "instance_bytes": 51120,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.properties.ColumnProperty.Comparator",
+            "count": 629,
+            "instance_bytes": 50320,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions._TypedDictMeta",
+            "count": 29,
+            "instance_bytes": 49416,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_ctypes.PyCSimpleType",
+            "count": 26,
+            "instance_bytes": 44304,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.economic_ingredient_selector.EconomicIngredientSignal",
+            "count": 41,
+            "instance_bytes": 2952,
+            "field_dict_bytes": 11152,
+            "field_set_bytes": 29848
+          },
+          {
+            "type": "sqlalchemy.sql.schema.Column",
+            "count": 797,
+            "instance_bytes": 38256,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.method",
+            "count": 553,
+            "instance_bytes": 35392,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.classmethod",
+            "count": 735,
+            "instance_bytes": 35280,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_frozen_importlib.ModuleSpec",
+            "count": 703,
+            "instance_bytes": 33744,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.DepositContract",
+            "count": 31,
+            "instance_bytes": 2232,
+            "field_dict_bytes": 8432,
+            "field_set_bytes": 22568
+          },
+          {
+            "type": "_abc._abc_data",
+            "count": 470,
+            "instance_bytes": 30080,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_frozen_importlib_external.SourceFileLoader",
+            "count": 618,
+            "instance_bytes": 29664,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "types.UnionType",
+            "count": 618,
+            "instance_bytes": 29664,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.elements.quoted_name",
+            "count": 288,
+            "instance_bytes": 28463,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "types.GenericAlias",
+            "count": 351,
+            "instance_bytes": 28080,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.mapper._ColumnMapping",
+            "count": 42,
+            "instance_bytes": 27552,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe.StoreAvailabilityEntry",
+            "count": 58,
+            "instance_bytes": 4176,
+            "field_dict_bytes": 10672,
+            "field_set_bytes": 12528
+          },
+          {
+            "type": "typing.TypeVar",
+            "count": 273,
+            "instance_bytes": 26208,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic_core._pydantic_core.SchemaSerializer",
+            "count": 188,
+            "instance_bytes": 25568,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic_core._pydantic_core.SchemaValidator",
+            "count": 186,
+            "instance_bytes": 25296,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._GenericAlias",
+            "count": 514,
+            "instance_bytes": 24672,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.attr._ListenerCollection",
+            "count": 173,
+            "instance_bytes": 22144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.staticmethod",
+            "count": 451,
+            "instance_bytes": 21648,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base.DedupeColumnCollection",
+            "count": 270,
+            "instance_bytes": 21600,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.instrumentation.ClassManager",
+            "count": 42,
+            "instance_bytes": 20624,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.StgDict",
+            "count": 37,
+            "instance_bytes": 20574,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "functools.partial",
+            "count": 236,
+            "instance_bytes": 18880,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "dataclasses._DataclassParams",
+            "count": 158,
+            "instance_bytes": 17696,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "enum.property",
+            "count": 365,
+            "instance_bytes": 17520,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_cython_3_2_5.cython_function_or_method",
+            "count": 83,
+            "instance_bytes": 16600,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._decorators.DecoratorInfos",
+            "count": 187,
+            "instance_bytes": 16456,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.String",
+            "count": 331,
+            "instance_bytes": 15888,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "functools._lru_cache_wrapper",
+            "count": 83,
+            "instance_bytes": 13944,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "operator.attrgetter",
+            "count": 249,
+            "instance_bytes": 13944,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "annotated_types.Ge",
+            "count": 339,
+            "instance_bytes": 13560,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_calculator._PreparedCheckoutOffers",
+            "count": 281,
+            "instance_bytes": 13488,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_optimizer._SubsetWinnerPattern",
+            "count": 256,
+            "instance_bytes": 12288,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base._MetaOptions",
+            "count": 8,
+            "instance_bytes": 12096,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "collections._tuplegetter",
+            "count": 250,
+            "instance_bytes": 12000,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_ctypes.PyCFuncPtrType",
+            "count": 7,
+            "instance_bytes": 11928,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._UnionGenericAlias",
+            "count": 235,
+            "instance_bytes": 11280,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.attr._ClsLevelDispatch",
+            "count": 104,
+            "instance_bytes": 10816,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.clsregistry._MultipleClassMarker",
+            "count": 168,
+            "instance_bytes": 10752,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.attr._EmptyListener",
+            "count": 161,
+            "instance_bytes": 10304,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "annotated_types.MinLen",
+            "count": 254,
+            "instance_bytes": 10160,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "operator.itemgetter",
+            "count": 157,
+            "instance_bytes": 10048,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.cyextension.immutabledict.immutabledict",
+            "count": 54,
+            "instance_bytes": 9768,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._decorators.Decorator",
+            "count": 134,
+            "instance_bytes": 9648,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._utils.LazyClassAttribute",
+            "count": 186,
+            "instance_bytes": 8928,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_optimizer._QuoteSetCacheEntry",
+            "count": 166,
+            "instance_bytes": 7968,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers._memoized_property",
+            "count": 164,
+            "instance_bytes": 7872,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "annotated_types.MaxLen",
+            "count": 193,
+            "instance_bytes": 7720,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pathlib.PosixPath",
+            "count": 74,
+            "instance_bytes": 7696,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.MapperEventsDispatch",
+            "count": 43,
+            "instance_bytes": 7224,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers._IntFlagMeta",
+            "count": 4,
+            "instance_bytes": 6816,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "bs4.dammit.EntitySubstitutionMeta",
+            "count": 4,
+            "instance_bytes": 6816,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.InstanceEventsDispatch",
+            "count": 43,
+            "instance_bytes": 6536,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.connectors.registry.ConnectorDescriptor",
+            "count": 6,
+            "instance_bytes": 432,
+            "field_dict_bytes": 1632,
+            "field_set_bytes": 3856
+          },
+          {
+            "type": "weakref.WeakKeyDictionary",
+            "count": 120,
+            "instance_bytes": 5760,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._LiteralGenericAlias",
+            "count": 108,
+            "instance_bytes": 5184,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.providers.mock._ItemSpec",
+            "count": 38,
+            "instance_bytes": 5168,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions._TypeVarLikeMeta",
+            "count": 3,
+            "instance_bytes": 5112,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "annotated_types.Gt",
+            "count": 125,
+            "instance_bytes": 5000,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast._ABC",
+            "count": 5,
+            "instance_bytes": 4680,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.CallableColumnDefault",
+            "count": 97,
+            "instance_bytes": 4656,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.classmethod_descriptor",
+            "count": 64,
+            "instance_bytes": 4608,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.DateTime",
+            "count": 96,
+            "instance_bytes": 4608,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "re._constants._NamedIntConstant",
+            "count": 76,
+            "instance_bytes": 4564,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "annotated_types.Le",
+            "count": 114,
+            "instance_bytes": 4560,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.product_semantics.IngredientSemanticRule",
+            "count": 55,
+            "instance_bytes": 4400,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.ingredient_taxonomy.IngredientTaxonomyEntry",
+            "count": 42,
+            "instance_bytes": 4368,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers.portable_instancemethod",
+            "count": 60,
+            "instance_bytes": 4320,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_io.BufferedReader",
+            "count": 1,
+            "instance_bytes": 4264,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.storage.models.UTCDateTime",
+            "count": 88,
+            "instance_bytes": 4224,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base.ReadOnlyColumnCollection",
+            "count": 55,
+            "instance_bytes": 3960,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_struct.Struct",
+            "count": 23,
+            "instance_bytes": 3896,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "weakref.KeyedRef",
+            "count": 44,
+            "instance_bytes": 3872,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "http.HTTPStatus",
+            "count": 62,
+            "instance_bytes": 3720,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "httpx.codes",
+            "count": 62,
+            "instance_bytes": 3720,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.mock.MagicProxy",
+            "count": 77,
+            "instance_bytes": 3696,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers.HasMemoized.memoized_attribute",
+            "count": 75,
+            "instance_bytes": 3600,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers._non_memoized_property",
+            "count": 74,
+            "instance_bytes": 3552,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_frozen_importlib_external.FileFinder",
+            "count": 73,
+            "instance_bytes": 3504,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._DeprecatedType",
+            "count": 2,
+            "instance_bytes": 3408,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click.core._FakeSubclassCheck",
+            "count": 2,
+            "instance_bytes": 3408,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_ctypes.PyCPointerType",
+            "count": 2,
+            "instance_bytes": 3408,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.source_strategy.ChainSourceStrategy",
+            "count": 6,
+            "instance_bytes": 432,
+            "field_dict_bytes": 1632,
+            "field_set_bytes": 1296
+          },
+          {
+            "type": "ipaddress.IPv6Address",
+            "count": 52,
+            "instance_bytes": 3328,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.personal.TasteProfile",
+            "count": 7,
+            "instance_bytes": 504,
+            "field_dict_bytes": 1288,
+            "field_set_bytes": 1512
+          },
+          {
+            "type": "sqlalchemy.sql.schema.Index",
+            "count": 64,
+            "instance_bytes": 3072,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._fields._general_metadata_cls.<locals>._PydanticGeneralMetadata",
+            "count": 63,
+            "instance_bytes": 3024,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.plan.PlanRequest",
+            "count": 2,
+            "instance_bytes": 144,
+            "field_dict_bytes": 1664,
+            "field_set_bytes": 1200
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers.symbol",
+            "count": 47,
+            "instance_bytes": 2948,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._decorators.FieldValidatorDecoratorInfo",
+            "count": 46,
+            "instance_bytes": 2944,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Boolean",
+            "count": 61,
+            "instance_bytes": 2928,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.ForeignKeyConstraint",
+            "count": 61,
+            "instance_bytes": 2928,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.ForeignKey",
+            "count": 61,
+            "instance_bytes": 2928,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe.MembershipSetting",
+            "count": 6,
+            "instance_bytes": 432,
+            "field_dict_bytes": 1104,
+            "field_set_bytes": 1296
+          },
+          {
+            "type": "importlib.metadata._collections.FreezableDefaultDict",
+            "count": 14,
+            "instance_bytes": 2752,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._decorators.ModelValidatorDecoratorInfo",
+            "count": 68,
+            "instance_bytes": 2720,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base.ColumnCollection",
+            "count": 42,
+            "instance_bytes": 2688,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.nutrition_validator._NutritionReference",
+            "count": 42,
+            "instance_bytes": 2688,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "<attribute '__module__' of '_cython_3_2_5._common_types_metatype' objects>._common_types_metatype",
+            "count": 2,
+            "instance_bytes": 2640,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Numeric",
+            "count": 55,
+            "instance_bytes": 2640,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.Table",
+            "count": 55,
+            "instance_bytes": 2640,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.PrimaryKeyConstraint",
+            "count": 55,
+            "instance_bytes": 2640,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._AnnotatedAlias",
+            "count": 54,
+            "instance_bytes": 2592,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.fields.ComputedFieldInfo",
+            "count": 20,
+            "instance_bytes": 2560,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "random.Random",
+            "count": 1,
+            "instance_bytes": 2552,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "random.SystemRandom",
+            "count": 1,
+            "instance_bytes": 2552,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Integer",
+            "count": 53,
+            "instance_bytes": 2544,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._CallableGenericAlias",
+            "count": 51,
+            "instance_bytes": 2448,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.types.OID",
+            "count": 51,
+            "instance_bytes": 2448,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.personal.MealSlot",
+            "count": 5,
+            "instance_bytes": 360,
+            "field_dict_bytes": 920,
+            "field_set_bytes": 1080
+          },
+          {
+            "type": "grocery_data.app.domain.recipe.RecipeRelevantIngredient",
+            "count": 48,
+            "instance_bytes": 2304,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.personal.PersonalPlanning",
+            "count": 3,
+            "instance_bytes": 216,
+            "field_dict_bytes": 1392,
+            "field_set_bytes": 648
+          },
+          {
+            "type": "ssl._TLSAlertType",
+            "count": 34,
+            "instance_bytes": 2040,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_frozen_importlib_external.ExtensionFileLoader",
+            "count": 42,
+            "instance_bytes": 2016,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.mapper.Mapper",
+            "count": 42,
+            "instance_bytes": 2016,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util._collections.WeakSequence",
+            "count": 42,
+            "instance_bytes": 2016,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Text",
+            "count": 42,
+            "instance_bytes": 2016,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "signal.Signals",
+            "count": 33,
+            "instance_bytes": 1980,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.ScalarElementColumnDefault",
+            "count": 41,
+            "instance_bytes": 1968,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "socket.AddressFamily",
+            "count": 32,
+            "instance_bytes": 1920,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.source_strategy.SourceRef",
+            "count": 4,
+            "instance_bytes": 288,
+            "field_dict_bytes": 736,
+            "field_set_bytes": 864
+          },
+          {
+            "type": "app.services.economic_ingredient_selector.EconomicIngredientPool",
+            "count": 2,
+            "instance_bytes": 144,
+            "field_dict_bytes": 544,
+            "field_set_bytes": 1200
+          },
+          {
+            "type": "typing_extensions.SingletonMeta",
+            "count": 2,
+            "instance_bytes": 1872,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.visitors.InternalTraversal",
+            "count": 39,
+            "instance_bytes": 1872,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.product_semantics.PrimaryProductIdentityRule",
+            "count": 23,
+            "instance_bytes": 1840,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "collections.Counter",
+            "count": 6,
+            "instance_bytes": 1832,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "inspect.Parameter",
+            "count": 28,
+            "instance_bytes": 1792,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._SpecialGenericAlias",
+            "count": 37,
+            "instance_bytes": 1776,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ipaddress.IPv4Address",
+            "count": 31,
+            "instance_bytes": 1736,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._AnyMeta",
+            "count": 1,
+            "instance_bytes": 1704,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing.NamedTupleMeta",
+            "count": 1,
+            "instance_bytes": 1704,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions._NamedTupleMeta",
+            "count": 1,
+            "instance_bytes": 1704,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.decl_api.DCTransformDeclarative",
+            "count": 1,
+            "instance_bytes": 1704,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ipaddress.IPv6Network",
+            "count": 35,
+            "instance_bytes": 1680,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.personal.MealSettings",
+            "count": 3,
+            "instance_bytes": 216,
+            "field_dict_bytes": 816,
+            "field_set_bytes": 648
+          },
+          {
+            "type": "app.models.personal.PortionLimits",
+            "count": 3,
+            "instance_bytes": 216,
+            "field_dict_bytes": 816,
+            "field_set_bytes": 648
+          },
+          {
+            "type": "ssl.AlertDescription",
+            "count": 27,
+            "instance_bytes": 1620,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_thread.RLock",
+            "count": 25,
+            "instance_bytes": 1600,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.operators.custom_op",
+            "count": 17,
+            "instance_bytes": 1496,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.UniqueConstraint",
+            "count": 29,
+            "instance_bytes": 1392,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.config.Settings",
+            "count": 2,
+            "instance_bytes": 1344,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util._collections.FacadeDict",
+            "count": 2,
+            "instance_bytes": 1328,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl._TLSMessageType",
+            "count": 22,
+            "instance_bytes": 1320,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "re.RegexFlag",
+            "count": 20,
+            "instance_bytes": 1200,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.builtin_method",
+            "count": 15,
+            "instance_bytes": 1200,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.mappingproxy",
+            "count": 30,
+            "instance_bytes": 1200,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "importlib.metadata._text.FoldedCase",
+            "count": 10,
+            "instance_bytes": 1095,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.services.exact_identity_reconciliation.IdentityDecisionReason",
+            "count": 9,
+            "instance_bytes": 1084,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast._Precedence",
+            "count": 18,
+            "instance_bytes": 1080,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe.PriceUniverse",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 272,
+            "field_set_bytes": 728
+          },
+          {
+            "type": "app.services.price_universe.PriceUniverseKey",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 272,
+            "field_set_bytes": 728
+          },
+          {
+            "type": "app.services.price_universe.PriceUniverseIndexes",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 272,
+            "field_set_bytes": 728
+          },
+          {
+            "type": "app.services.price_universe.PriceUniverseBuildStats",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 272,
+            "field_set_bytes": 728
+          },
+          {
+            "type": "logging.Logger",
+            "count": 22,
+            "instance_bytes": 1056,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.community_evidence.CommunityEvidenceType",
+            "count": 9,
+            "instance_bytes": 1044,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "inspect.BufferFlags",
+            "count": 17,
+            "instance_bytes": 1020,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PhysicalProductIdentityStatus",
+            "count": 9,
+            "instance_bytes": 1013,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ipaddress.IPv4Network",
+            "count": 21,
+            "instance_bytes": 1008,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._SpecialForm",
+            "count": 14,
+            "instance_bytes": 1008,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.ParserErrorCode",
+            "count": 9,
+            "instance_bytes": 1006,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.clsregistry._ModuleMarker",
+            "count": 11,
+            "instance_bytes": 968,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.JSON",
+            "count": 20,
+            "instance_bytes": 960,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "collections.abc._DeprecateByteStringMeta",
+            "count": 1,
+            "instance_bytes": 936,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ctypes._endian._swapped_struct_meta",
+            "count": 1,
+            "instance_bytes": 936,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ctypes._endian._swapped_union_meta",
+            "count": 1,
+            "instance_bytes": 936,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pstats.SortKey",
+            "count": 9,
+            "instance_bytes": 924,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "http.HTTPMethod",
+            "count": 9,
+            "instance_bytes": 917,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl.Options",
+            "count": 15,
+            "instance_bytes": 908,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_thread.lock",
+            "count": 16,
+            "instance_bytes": 896,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.CHAR",
+            "count": 18,
+            "instance_bytes": 864,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "socket.MsgFlag",
+            "count": 14,
+            "instance_bytes": 844,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.Confidence",
+            "count": 8,
+            "instance_bytes": 825,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.monitoring.anomaly_detection.PriceSanityIssueCode",
+            "count": 7,
+            "instance_bytes": 810,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.PriceContextState",
+            "count": 7,
+            "instance_bytes": 798,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.elements.TextClause",
+            "count": 16,
+            "instance_bytes": 768,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "soupsieve.css_parser.CSSPattern",
+            "count": 16,
+            "instance_bytes": 768,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "soupsieve.css_parser.SelectorPattern",
+            "count": 16,
+            "instance_bytes": 768,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "types.SimpleNamespace",
+            "count": 19,
+            "instance_bytes": 760,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.StoreIdentityMatchConfidence",
+            "count": 7,
+            "instance_bytes": 752,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.recipe_preferences.RecipePreferences",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 464,
+            "field_set_bytes": 216
+          },
+          {
+            "type": "grocery_data.app.domain.enums.PhysicalStoreCoverageState",
+            "count": 7,
+            "instance_bytes": 748,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.ingredient_taxonomy.IngredientCategory",
+            "count": 7,
+            "instance_bytes": 743,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.StoreDiscoveryErrorCode",
+            "count": 6,
+            "instance_bytes": 739,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "calendar.Month",
+            "count": 12,
+            "instance_bytes": 720,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.ica_registry.IcaDiscoverySource",
+            "count": 6,
+            "instance_bytes": 675,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.SessionItemIdentifierStatus",
+            "count": 6,
+            "instance_bytes": 675,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.MembershipProgram",
+            "count": 6,
+            "instance_bytes": 652,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_io.TextIOWrapper",
+            "count": 3,
+            "instance_bytes": 648,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.community_evidence.EvidenceVerificationStatus",
+            "count": 6,
+            "instance_bytes": 636,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.SnapshotState",
+            "count": 6,
+            "instance_bytes": 634,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.community_evidence.CommunityEvidenceSource",
+            "count": 6,
+            "instance_bytes": 628,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.generator",
+            "count": 2,
+            "instance_bytes": 624,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PhysicalPriceSemantics",
+            "count": 6,
+            "instance_bytes": 620,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PhysicalObservationTimePrecision",
+            "count": 6,
+            "instance_bytes": 619,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.monitoring.schema_fingerprint.JsonType",
+            "count": 6,
+            "instance_bytes": 616,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.Chain",
+            "count": 6,
+            "instance_bytes": 614,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util._collections.PopulateDict",
+            "count": 3,
+            "instance_bytes": 600,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.community_evidence.AssortmentConfidence",
+            "count": 5,
+            "instance_bytes": 587,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing.TypeAliasType",
+            "count": 8,
+            "instance_bytes": 576,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "logging.PlaceHolder",
+            "count": 12,
+            "instance_bytes": 576,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.dispatcher",
+            "count": 12,
+            "instance_bytes": 576,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.functions._FunctionGenerator",
+            "count": 12,
+            "instance_bytes": 576,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ctypes.PYFUNCTYPE.<locals>.CFunctionType",
+            "count": 3,
+            "instance_bytes": 576,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.SourceTechnicalCapability",
+            "count": 5,
+            "instance_bytes": 569,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PhysicalIdentificationEvidence",
+            "count": 5,
+            "instance_bytes": 569,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.community_evidence.ProductIdentityConfidence",
+            "count": 5,
+            "instance_bytes": 564,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.StoreContextRelationType",
+            "count": 5,
+            "instance_bytes": 564,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PhysicalPriceComparisonStatus",
+            "count": 5,
+            "instance_bytes": 557,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.SaleModel",
+            "count": 5,
+            "instance_bytes": 555,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.product.SaleModel",
+            "count": 5,
+            "instance_bytes": 555,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.CoverageLevel",
+            "count": 5,
+            "instance_bytes": 553,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.community_evidence.PriceEvidenceConfidence",
+            "count": 5,
+            "instance_bytes": 544,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl.SSLErrorNumber",
+            "count": 9,
+            "instance_bytes": 540,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.PromotionType",
+            "count": 5,
+            "instance_bytes": 536,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.ica_registry.ProductActiveState",
+            "count": 5,
+            "instance_bytes": 532,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.PromotionMechanism",
+            "count": 5,
+            "instance_bytes": 531,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.util._TraceAdaptRole",
+            "count": 11,
+            "instance_bytes": 528,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.SmallInteger",
+            "count": 11,
+            "instance_bytes": 528,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "argparse._StoreAction",
+            "count": 11,
+            "instance_bytes": 528,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.source_strategy.SourceRole",
+            "count": 5,
+            "instance_bytes": 522,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.ConnectorStatus",
+            "count": 5,
+            "instance_bytes": 518,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.product.SemanticConfidence",
+            "count": 5,
+            "instance_bytes": 511,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "__future__._Feature",
+            "count": 10,
+            "instance_bytes": 480,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_inspection.introspection.AnnotationSource",
+            "count": 8,
+            "instance_bytes": 480,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.pg_catalog.NAME",
+            "count": 10,
+            "instance_bytes": 480,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe.PriceUniverseBuildConfig",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 184,
+            "field_set_bytes": 216
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.UserPricingContext",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 184,
+            "field_set_bytes": 216
+          },
+          {
+            "type": "grocery_data.app.connectors.coop.online_catalog_models.CoopOnlineDuplicateKind",
+            "count": 4,
+            "instance_bytes": 468,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.monitoring.anomaly_detection.AnomalyCode",
+            "count": 4,
+            "instance_bytes": 465,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "abc.SignalDict",
+            "count": 8,
+            "instance_bytes": 448,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.PriceContextType",
+            "count": 4,
+            "instance_bytes": 440,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.clsregistry._ModNS",
+            "count": 11,
+            "instance_bytes": 440,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.ica_registry.MetadataLevel",
+            "count": 4,
+            "instance_bytes": 439,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.basket.BasketVerificationStatus",
+            "count": 4,
+            "instance_bytes": 436,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers.hybridmethod",
+            "count": 9,
+            "instance_bytes": 432,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.array.ARRAY",
+            "count": 9,
+            "instance_bytes": 432,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.services.exact_identity_reconciliation.SharedOfferScope",
+            "count": 4,
+            "instance_bytes": 428,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.services.exact_identity_reconciliation.IdentityDecisionStatus",
+            "count": 4,
+            "instance_bytes": 426,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.PaymentCardBrand",
+            "count": 4,
+            "instance_bytes": 423,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "socket.SocketKind",
+            "count": 7,
+            "instance_bytes": 420,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "socket.AddressInfo",
+            "count": 7,
+            "instance_bytes": 420,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "calendar.Day",
+            "count": 7,
+            "instance_bytes": 420,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.PromotionEligibility",
+            "count": 4,
+            "instance_bytes": 420,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.plan.DietPreference",
+            "count": 4,
+            "instance_bytes": 420,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl.VerifyFlags",
+            "count": 7,
+            "instance_bytes": 420,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl.TLSVersion",
+            "count": 7,
+            "instance_bytes": 420,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.product.QuantityConfidence",
+            "count": 4,
+            "instance_bytes": 416,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.WeightPriceType",
+            "count": 4,
+            "instance_bytes": 412,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "enum.FlagBoundary",
+            "count": 4,
+            "instance_bytes": 410,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "annotated_types.Predicate",
+            "count": 10,
+            "instance_bytes": 400,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "itertools.count",
+            "count": 7,
+            "instance_bytes": 392,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "functools.cached_property",
+            "count": 8,
+            "instance_bytes": 384,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.types.REGCLASS",
+            "count": 8,
+            "instance_bytes": 384,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ctypes.CFUNCTYPE.<locals>.CFunctionType",
+            "count": 2,
+            "instance_bytes": 384,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "enum.EnumCheck",
+            "count": 3,
+            "instance_bytes": 382,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl._SSLMethod",
+            "count": 6,
+            "instance_bytes": 360,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl._TLSContentType",
+            "count": 6,
+            "instance_bytes": 360,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.monitoring.events.CollectorEventType",
+            "count": 3,
+            "instance_bytes": 342,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "importlib.metadata.FastPath",
+            "count": 7,
+            "instance_bytes": 336,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "importlib.metadata.Lookup",
+            "count": 7,
+            "instance_bytes": 336,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base._SentinelDefaultCharacterization",
+            "count": 7,
+            "instance_bytes": 336,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.purchase_quantity_resolver.PurchaseQuantityResolver",
+            "count": 7,
+            "instance_bytes": 336,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PhysicalSampleConfidence",
+            "count": 3,
+            "instance_bytes": 334,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.services.exact_identity_reconciliation.IdentityEvidenceType",
+            "count": 3,
+            "instance_bytes": 331,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.ProductIdentifierEvidenceSource",
+            "count": 3,
+            "instance_bytes": 329,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.promotion_pricing.ComparablePriceBasis",
+            "count": 3,
+            "instance_bytes": 327,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.ProviderStoreMappingStatus",
+            "count": 3,
+            "instance_bytes": 322,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.recipe_candidate_generator.CandidateBatch",
+            "count": 5,
+            "instance_bytes": 320,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PromotionComparisonStatus",
+            "count": 3,
+            "instance_bytes": 319,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PhysicalValidationSessionStatus",
+            "count": 3,
+            "instance_bytes": 315,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.product.OfferKind",
+            "count": 3,
+            "instance_bytes": 314,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.monitoring.anomaly_detection.PriceSanityClassification",
+            "count": 3,
+            "instance_bytes": 314,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.diversity.DiversityMode",
+            "count": 3,
+            "instance_bytes": 313,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.source_strategy.SourceChannel",
+            "count": 3,
+            "instance_bytes": 312,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.monitoring.alerts.AlertSeverity",
+            "count": 3,
+            "instance_bytes": 310,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.source_strategy.SourceProvider",
+            "count": 3,
+            "instance_bytes": 308,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.SourcePolicy",
+            "count": 3,
+            "instance_bytes": 307,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.nutrition_validator.EstimateConfidence",
+            "count": 3,
+            "instance_bytes": 304,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "inspect._ParameterKind",
+            "count": 5,
+            "instance_bytes": 300,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click.core.ParameterSource",
+            "count": 5,
+            "instance_bytes": 300,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "inspect.Signature",
+            "count": 6,
+            "instance_bytes": 288,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.BigInteger",
+            "count": 6,
+            "instance_bytes": 288,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Date",
+            "count": 6,
+            "instance_bytes": 288,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.selectable._CompoundSelectKeyword",
+            "count": 6,
+            "instance_bytes": 288,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.session.SessionTransactionState",
+            "count": 6,
+            "instance_bytes": 288,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.CheckConstraint",
+            "count": 6,
+            "instance_bytes": 288,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.UuidVersion",
+            "count": 7,
+            "instance_bytes": 280,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.Tag",
+            "count": 7,
+            "instance_bytes": 280,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.SessionEventsDispatch",
+            "count": 1,
+            "instance_bytes": 272,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "codecs.CodecInfo",
+            "count": 3,
+            "instance_bytes": 264,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "uuid.UUID",
+            "count": 4,
+            "instance_bytes": 256,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.mock._CallList",
+            "count": 3,
+            "instance_bytes": 248,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "weakref.WeakValueDictionary",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions.Format",
+            "count": 4,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.Strict",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "email._encoded_words._QByteMap",
+            "count": 1,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "asyncio.sslproto.SSLProtocolState",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "asyncio.timeouts._State",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.cache_key.CacheTraverseTarget",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.compiler.Linting",
+            "count": 4,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.interfaces.CacheStats",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.reflection.ObjectKind",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.base.LoaderCallableStatus",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "bs4.formatter.HTMLFormatter",
+            "count": 5,
+            "instance_bytes": 240,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "zoneinfo.ZoneInfo",
+            "count": 1,
+            "instance_bytes": 224,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing.ParamSpec",
+            "count": 3,
+            "instance_bytes": 216,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.ConnectionEventsDispatch",
+            "count": 1,
+            "instance_bytes": 216,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.PhysicalObservationAmendmentKind",
+            "count": 2,
+            "instance_bytes": 216,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_optimizer._QuoteCacheSession",
+            "count": 1,
+            "instance_bytes": 216,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.monitoring.anomaly_detection.AnomalySeverity",
+            "count": 2,
+            "instance_bytes": 209,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.enums.PhysicalStoreLifecycleState",
+            "count": 2,
+            "instance_bytes": 208,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.interfaces._AttributeOptions",
+            "count": 2,
+            "instance_bytes": 208,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.domain.physical_price.ProductIdentifierType",
+            "count": 2,
+            "instance_bytes": 208,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.plan.AvailabilityMode",
+            "count": 2,
+            "instance_bytes": 206,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.basket.BasketAuditStatus",
+            "count": 2,
+            "instance_bytes": 202,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.models.quality.QualityStatus",
+            "count": 2,
+            "instance_bytes": 202,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "annotated_types.Lt",
+            "count": 5,
+            "instance_bytes": 200,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_io.FileIO",
+            "count": 3,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.method-wrapper",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions._SpecialGenericAlias",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.PathType",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_csv.Dialect",
+            "count": 3,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "asyncio.sslproto.AppProtocolState",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "asyncio.locks._BarrierState",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.selectable.SelectLabelStyle",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Float",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.base.EventConstants",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.session.SessionTransactionOrigin",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.InstrumentationEventsDispatch",
+            "count": 2,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base._DialectArgDict",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ctypes.CDLL.__init__.<locals>._FuncPtr",
+            "count": 1,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "bs4.element.Tag._TreeTraversalEvent",
+            "count": 4,
+            "instance_bytes": 192,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe_runtime.PreparedPriceUniverse",
+            "count": 1,
+            "instance_bytes": 184,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "signal.Sigmasks",
+            "count": 3,
+            "instance_bytes": 180,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl.VerifyMode",
+            "count": 3,
+            "instance_bytes": 180,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.compiler.CompilerState",
+            "count": 3,
+            "instance_bytes": 180,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl.Purpose",
+            "count": 2,
+            "instance_bytes": 176,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_optimizer.QuoteCacheStats",
+            "count": 1,
+            "instance_bytes": 176,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.HoldMapperEventsDispatch",
+            "count": 1,
+            "instance_bytes": 168,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "collections.abc._CallableGenericAlias",
+            "count": 2,
+            "instance_bytes": 160,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_optimizer.BasketVerificationPolicy",
+            "count": 2,
+            "instance_bytes": 160,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.PoolEventsDispatch",
+            "count": 1,
+            "instance_bytes": 152,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.HoldInstanceEventsDispatch",
+            "count": 1,
+            "instance_bytes": 152,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_sitebuiltins._Printer",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "dataclasses._FIELD_BASE",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_weakrefset.WeakSet",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions._ExtensionsSpecialForm",
+            "count": 2,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "uuid.SafeUUID",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing.NewType",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "annotated_types.Not",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ssl._ASN1Object",
+            "count": 2,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "asyncio.constants._SendfileMode",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "asyncio.runners._State",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.pool.base.ResetStyle",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers.hybridproperty",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Time",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.SchemaConst",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.interfaces.ExecuteStyle",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.interfaces.BindTyping",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.reflection.ObjectScope",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.base.RelationshipDirection",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.state_changes._StateChangeStates",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.session._SessionCloseState",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.AttributeEventsDispatch",
+            "count": 1,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "httpx._client.ClientState",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.pg_catalog.PG_NODE_TREE",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.mock._SentinelObject",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe._ThreadSafeLru",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe_runtime.MenuSearchResultCache",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.list_iterator",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_auditor.BasketAuditor",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_calculator.BasketCalculator",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "bs4.formatter.XMLFormatter",
+            "count": 3,
+            "instance_bytes": 144,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._mock_val_ser.MockValSer",
+            "count": 2,
+            "instance_bytes": 128,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_contextvars.Token",
+            "count": 2,
+            "instance_bytes": 128,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "signal.Handlers",
+            "count": 2,
+            "instance_bytes": 120,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.operators._OpLimit",
+            "count": 2,
+            "instance_bytes": 120,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.DialectEventsDispatch",
+            "count": 1,
+            "instance_bytes": 120,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "soupsieve.__meta__.Version",
+            "count": 1,
+            "instance_bytes": 112,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "grocery_data.app.services.exact_identity_reconciliation.IdentityLinkConfidence",
+            "count": 1,
+            "instance_bytes": 102,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "encodings.utf_8.IncrementalEncoder",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "os._Environ",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_sitebuiltins.Quitter",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions.sentinel",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "platform.uname_result",
+            "count": 1,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._utils.deprecated_instance_property",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "calendar._localized_day",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "calendar._localized_month",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "email.charset.Charset",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "importlib.metadata.DistributionFinder.Context",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "asyncio.events._RunningLoop",
+            "count": 1,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.elements._OverRange",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Enum",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers.PluginLoader",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.QueryEventsDispatch",
+            "count": 1,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click._utils.Sentinel",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.schema.MetaData",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.pg_catalog.OIDVECTOR",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.pg_catalog.INT2VECTOR",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.fields.ModelPrivateAttr",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ctypes.LibraryLoader",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "argparse._ArgumentGroup",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pathlib._WildcardSelector",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pathlib._TerminatingSelector",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "contextlib._GeneratorContextManager",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.basket_optimizer.BasketOptimizer",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.ingredient_normalizer.IngredientNormalizer",
+            "count": 2,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.recipe_similarity.RecipeSimilarityConstraints",
+            "count": 1,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.hamt_bitmap_node",
+            "count": 1,
+            "instance_bytes": 96,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_json.Scanner",
+            "count": 1,
+            "instance_bytes": 88,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.performance_trace.PerformanceTrace",
+            "count": 1,
+            "instance_bytes": 88,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.AssertionError",
+            "count": 1,
+            "instance_bytes": 88,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.culinary_similarity.CulinarySimilarityWeights",
+            "count": 1,
+            "instance_bytes": 88,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.EncodedBytes",
+            "count": 2,
+            "instance_bytes": 80,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.EncodedStr",
+            "count": 2,
+            "instance_bytes": 80,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util._collections.LRUCache",
+            "count": 1,
+            "instance_bytes": 80,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.relationships._ColInAnnotations",
+            "count": 2,
+            "instance_bytes": 80,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_thread._local",
+            "count": 1,
+            "instance_bytes": 80,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.mock._Call",
+            "count": 1,
+            "instance_bytes": 80,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._LiteralSpecialForm",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions._TypedDictSpecialForm",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions._TypeFormForm",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.EventsDispatch",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.LiteralValueImpl",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe_runtime.RequestPriceUniverseView",
+            "count": 1,
+            "instance_bytes": 72,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._mock_val_ser.MockCoreSchema",
+            "count": 1,
+            "instance_bytes": 64,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.Discriminator",
+            "count": 1,
+            "instance_bytes": 64,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_contextvars.Context",
+            "count": 1,
+            "instance_bytes": 64,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.attributes.History",
+            "count": 1,
+            "instance_bytes": 64,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Load",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Store",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Del",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.And",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Or",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Add",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Sub",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Mult",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.MatMult",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Div",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Mod",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Pow",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.LShift",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.RShift",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.BitOr",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.BitXor",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.BitAnd",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.FloorDiv",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Invert",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Not",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.UAdd",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.USub",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Eq",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.NotEq",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Lt",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.LtE",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Gt",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.GtE",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.Is",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.IsNot",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.In",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ast.NotIn",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.slice",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unicodedata.UCD",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "greenlet.greenlet",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.BinaryElementImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.ByOfImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.ColumnArgumentOrKeyImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.ColumnArgumentImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.ColumnsClauseImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.CompoundElementImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.ConstExprImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.DDLConstraintColumnImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.DDLExpressionImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.DDLReferredColumnImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.DMLColumnImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.DMLSelectImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.DMLTableImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.ExecutableOptionImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.ExpressionElementImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.FromClauseImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.GroupByImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.HasCTEImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.HasCacheKeyImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.InElementImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.IsCTEImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.JoinTargetImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.LabeledColumnExprImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.LimitOffsetImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.OnClauseImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.OrderByImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.ReturnsRowsImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.SelectStatementImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.StatementOptionImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.StatementImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.StrAsPlainColumnImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.StrictFromClauseImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.TruncatedLabelImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.WhereHavingImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.coercions.AnonymizedFromClauseImpl",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.planner_shared_cache._Scope",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "builtins.hamt",
+            "count": 1,
+            "instance_bytes": 56,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_frozen_importlib._WeakValueDictionary",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "encodings.utf_8.IncrementalDecoder",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "genericpath.ALLOW_MISSING",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "_sitebuiltins._Helper",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "reprlib.Repr",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "enum._not_given",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "enum._auto_null",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "json.encoder.JSONEncoder",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "json.decoder.JSONDecoder",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "dis._Unknown",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "dataclasses._HAS_DEFAULT_FACTORY_CLASS",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "dataclasses._MISSING_TYPE",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "dataclasses._KW_ONLY_TYPE",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "threading._MainThread",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "threading.Event",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "threading.Condition",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._CallableType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._DeprecatedGenericAlias",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing._TupleType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_inspection.introspection._UnknownTypeEnum",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic._internal._signature._HAS_DEFAULT_FACTORY_CLASS",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "pydantic.types.AllowInfNan",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions.TypeAliasType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "calendar.TextCalendar",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "email._policybase.Compat32",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.preloaded._ModuleRegistry",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "contextlib.nullcontext",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.typing._TypingInstances",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "traceback._Sentinel",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "string.Formatter",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "logging.Formatter",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "logging.PercentStyle",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "logging._StderrHandler",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "logging.RootLogger",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "logging.Manager",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers._Missing",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.pool.base._ConnDialect",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.pool.base._AsyncConnDialect",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.cache_key.CacheConst",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.cache_key._CacheKeyTraversal",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.traversals._CopyInternalsTraversal",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.traversals._GetChildrenTraversal",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base._NoArg",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.base._NoneName",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.type_api._NoValueInList",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.elements.Null",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.elements.False_",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.elements.True_",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.elements._memoized_property_but_not_nulltype",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.NullType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.MatchType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.TableValueType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Unicode",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Uuid",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.Interval",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.sqltypes.LargeBinary",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.sql.selectable._CTEOpts",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.log.echo_property",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.result._NoRow",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.characteristics.IsolationLevelCharacteristic",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.characteristics.LoggingTokenCharacteristic",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.base.NotExtension",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.util.langhelpers.rw_hybridproperty",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.instrumentation.InstrumentationFactory",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.evaluator._NoObject",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.evaluator._ExpiredObject",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.context.QueryContext.default_load_options",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.event.base.slots_dispatcher",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "httpx._config.UnsetType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "httpx.Timeout",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "httpx.Limits",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "httpx._client.UseClientDefault",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click.types.UnprocessedParamType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click.types.StringParamType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click.types.IntParamType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click.types.FloatParamType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click.types.BoolParamType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "click.types.UUIDParameterType",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.base.PGReadOnlyConnectionCharacteristic",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.dialects.postgresql.base.PGDeferrableConnectionCharacteristic",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.decl_api.registry",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe_runtime.PreparedPriceUniverseManager",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe.PriceUniverseBuilder",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ctypes.PyDLL",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "runpy._TempModule",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "runpy._ModifiedArgv0",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.loader.TestLoader",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.mock._Sentinel",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.mock._ANY",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "argparse.ArgumentParser",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "argparse._HelpAction",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "argparse.Namespace",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe.SemanticCandidateCache",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe.PackageCostCache",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe.BasketResultCache",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.price_universe_runtime.PricingProjectionCache",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.product_search.ProductSearchIndex",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.product_search._ContractRows",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.planner_artifacts.OwnedPlannerArtifacts",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.mock.MagicMock",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.plan_store.PlanStore",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "unittest.mock._patch",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "contextlib.ExitStack",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.personal_planner.PersonalPlanner",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.meal_plan_optimizer.MealPlanService",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.cheap_products.CheapProductsService",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.product_matcher.ProductMatcher",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.economic_ingredient_selector.EconomicIngredientSelector",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.recipe_candidate_validator.RecipeCandidateValidator",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.culinary_similarity.CulinarySimilarity",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.menu_optimizer.MenuOptimizer",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.recipe_profile.RecipeProfileBuilder",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.recipe_similarity.RecipeSimilarityAnalyzer",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.recipe_computation_cache.RecipeComputationCache",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.planning_diagnostics.PlanningDiagnostics",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.product_planning_trace.ProductPlanningTrace",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "ctypes.CDLL",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "app.services.planner_shared_cache.SharedResolution",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "soupsieve.css_types.SelectorNull",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "soupsieve.css_parser.PseudoSelectorMap",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "soupsieve.css_parser.SpecialPseudoPattern",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "bs4.builder.TreeBuilderRegistry",
+            "count": 1,
+            "instance_bytes": 48,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions.NoDefaultType",
+            "count": 1,
+            "instance_bytes": 32,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "typing_extensions.NoExtraItemsType",
+            "count": 1,
+            "instance_bytes": 32,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.cursor.NoCursorDQLFetchStrategy",
+            "count": 1,
+            "instance_bytes": 32,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.cursor.NoCursorDMLFetchStrategy",
+            "count": 1,
+            "instance_bytes": 32,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.cursor.CursorFetchStrategy",
+            "count": 1,
+            "instance_bytes": 32,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.engine.cursor._NoResultMetaData",
+            "count": 1,
+            "instance_bytes": 32,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          },
+          {
+            "type": "sqlalchemy.orm.path_registry.RootRegistry",
+            "count": 1,
+            "instance_bytes": 32,
+            "field_dict_bytes": 0,
+            "field_set_bytes": 0
+          }
+        ],
+        "limits": [
+          "GC-tracked objects only; untracked strings/numeric containers are not exhaustive",
+          "Model field dictionaries/sets overlap generic container counts; do not add type rows as exclusive sizes"
+        ]
+      },
+      "instrumentation_sha256": "a806d636ba8a87bc67398e9e5063d07890900f7ee48fad3824d4a53056930b0a"
+    },
+    {
+      "name": "compact_metadata_startup",
+      "source_commit": "ea4bb08f1ace5a854901a81d08ce7facfa11b383",
+      "status": "DIAGNOSTIC_ONLY_NO_PLAN_OR_AUDIT",
+      "raw_sha256": "e4e8f9a2dfaa54e3df5a95dd3e2749c8b87af9f2156d1859db0a5213807b0026",
+      "data": {
+        "before": {
+          "VmHWM": 1619451904,
+          "VmRSS": 1619238912,
+          "cgroup_current": 1604714496,
+          "cgroup_peak": 1605509120
+        },
+        "after": {
+          "VmHWM": 1619451904,
+          "VmRSS": 1013547008,
+          "cgroup_current": 999022592,
+          "cgroup_peak": 1605509120
+        },
+        "collected": 0,
+        "malloc_trim_result": 1
+      },
+      "instrumentation_sha256": "196c707065d37e5af1a5c96c510a932b219f829debbe24ee3feea3f9aaef9b15"
+    }
+  ],
+  "limitations": [
+    "Generic set/dict rows overlap model metadata columns; do not sum as exclusive bytes",
+    "Shared metadata must be deduplicated by identity in future object censuses",
+    "Startup RSS is not complete plan cgroup peak qualification"
+  ]
+}

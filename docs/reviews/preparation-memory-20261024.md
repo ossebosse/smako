@@ -2,7 +2,9 @@
 
 Arbete enligt [nästa uppdrag](../CODEX-SOL-NEXT-20261024.md), på
 `perf/preparation-memory-20261024`, [PR #9](https://github.com/ossebosse/smako/pull/9).
-Senast mätt runtime: `193629fbd0a0360955726f7a28bc30700ed8fc87`.
+Senast fullt resursmätt runtime: `193629fbd0a0360955726f7a28bc30700ed8fc87`.
+Nästa kandidat: `ea4bb08f1ace5a854901a81d08ce7facfa11b383`,
+[PR #10](https://github.com/ossebosse/smako/pull/10), ännu under verifiering.
 **Etappen är ännu inte standardkvalificerad.** `legacy` och
 `library_merge_generations=False` är oförändrade standarder. Ingen aktivering,
 insamling, faktarelease, Windowsuppgift eller ökad samtidighet ingår.
@@ -85,9 +87,9 @@ HTTP-väntetid och admission-kötid är inte mätta av denna direkta plannerprob
 
 ## Minnesundersökning och senaste fulla planprov
 
-Försök att internera frysta modellvärden och supplied-field-metadata klarade
-värde-/serializerprov men gav inte tillräcklig resident minnesmarginal.
-De har tagits bort från slutdiffen. Provet på `fd15480` avbröts manuellt:
+Tidigare försök att internera frysta modellvärden och supplied-field-metadata
+klarade värde-/serializerprov men gav inte tillräcklig resident minnesmarginal.
+De togs bort före `193629f`. Provet på `fd15480` avbröts manuellt:
 exit 137, `OOMKilled=false`. Det är ingen slutförd pris-/auditcell och ingen OOM.
 
 Ett inläsningsprov på `81d5e6a`, med pris-/faktaobjekten kvar, gav efter
@@ -101,17 +103,26 @@ Det motiverade återlämning vid fasgränser; det ersätter inte minskad beräkn
 | `0f626bd`, vanlig, full GC/sökspår | 839,06 s | se rårapport | 2,416 GiB | PASS, en process |
 | `9fc82a6`, vanlig, GC generation 1/sökspår | 781,58 s | 10,31/9,97/10,05 s | 2,807 GiB | FAIL |
 | `193629f`, vanlig, dessutom kompakta avtal | 778,95 s | 10,18/10,11/10,29 s | 2,327 GiB | PASS, en process |
+| `ea4bb08`, vanlig, prefix + kompatibel metadata | 709,68 s | 12,31/11,88/11,80 s | 1,800 GiB | PASS, en process |
+| `b5c242d`, vanlig, dessutom avbrott/progress | 674,71 s | 12,36/11,69/12,32 s | 1,848 GiB | PASS, en process |
 
 Alla levererade menyer i tabellen ger 988,32 kr, samma hash och audit PASS.
 Instrumenterade och vanliga tider är olika metoder och utgör inte en
 matchad latensjämförelse med varandra. Varje rad startar med tom appcache
 och ny ägarstore. Varma upprepningar är inte nya kalla processprov.
-Delmålet under 700 s har ännu inte uppnåtts.
+Senaste vanliga anropet är under 700 s i ett prov; delmålet för matchad
+instrumentering har inte återkörts på senaste kod och är inte kvalificerat.
+Inläsningen på `b5c242d` tog 49,52 s. Hela processen med första och tre varma
+plananrop tog 772,42 s inklusive startkommandots overhead (containerns
+livslängd 771,98 s). Dessa tider hålls skilda från varje plananrop och
+från ännu omätt HTTP-/admissionväntan.
 
 Full GC efter varje sökspår kostade 129,24 s i `0f626bd`; i `193629f`
 kostade den valda kombinationen 33,23 s. Legacy-förberedelserna kostade
-196,65 s i slutprovet och finns kvar över samtliga elva publiceringar.
-Även den kvarstående beräkningskostnaden ingår i 778,95 s.
+196,65 s i det provet och finns kvar över samtliga elva publiceringar.
+Även den kvarstående beräkningskostnaden ingår i 778,95 s. `b5c242d` använder
+61,35 s och 3 041 verkliga legacy-utvärderingar med samma elva publiceringar;
+de övriga sökspåren och aktuell audit kvarstår.
 
 Cgroup mäts inklusive filcache och kernelminne. En värdobservation på
 `9fc82a6` visade cirka 332 MiB filcache i gruppen, mot mindre i andra prov.
@@ -128,8 +139,9 @@ kompakta avtal gav efter GC/trim RSS 1 376 272 384 byte, mot 1 624 489 984
 för tidigare representation. Därför åtgärdades katalogens långlivade
 avtalsmodeller. Diagnostikproven räknas inte som godkända matrisrader.
 
-Cachelägessekvensen på `193629f` pågår seriellt. Den vägrar starta om
-föregående process inte klarar pris, hash, audit och 2,5 GiB. Varje omstart
+Cachelägessekvensen på `193629f` är avslutad efter elva lägen och **underkänd
+minnesgrind**. Den vägrar fortsätta om föregående process inte klarar pris,
+hash, audit och 2,5 GiB. Varje omstart
 får en egen kopia av offentlig cache och SQLite-backup av syntetisk
 ägarstore där läget kräver den. Cacheförlust tar bara bort klonens härledda
 kvalificerings-/menyvyer och offentlig cache; certifikaten bevaras.
@@ -145,6 +157,7 @@ Färdiga cachelägen på samma runtime och frysta fördelningsprofil:
 | Förberedd 262-prefixvy | 16,56 s; sedan 9,07–9,15 s | 1,852 GiB | 996,22 kr, audit PASS |
 | Ny process, varm disk + certifikat, tre processer | 35,61–36,14 s | 2,034–2,307 GiB | 988,32 kr, audit PASS |
 | Ny process, borttagen offentlig/härledd cache, tre processer | 110,91–112,49 s | 2,126 GiB | 988,32 kr, audit PASS |
+| Ny process, varm offentlig disk, tre nya ägarstore | 785,69/829,74/782,71 s | 2,315/2,329/**2,624 GiB** | Pris/audit PASS, sista minnesprovet **FAIL** |
 
 De sex omstarts-/cacheförlustproven laddade elva certifikat och sökte om
 noll publiceringar. De nya slutkontrollerna är fortfarande obligatoriska.
@@ -156,10 +169,77 @@ jämförs inte som ett matchat kallt appcacheprov med 778,95 s.
 Hela processens väggtid, inklusive inläsning, finns separat i
 [cachelägesunderlaget](preparation-memory-20261024/cache-modes.json).
 
-Tre nya ägarstore med varm offentlig disk återstår i den pågående
-sekvensen. Därefter ligger ett separat resursprov för ordinarie
-serialisering och överlappande syntetiskt PriceUniverse-versionsbyte.
-Det mäter ingen meny/audit och ersätter inga matrisfall.
+Samtliga 17 planer i sekvensen och primärprovets fyra planer klarade pris
+och audit; alla elva cachelägesprocesser avslutades med exit 0 utan OOM.
+Sista processens cgroup-peak var
+**2 817 421 312 byte**, över målet 2 684 354 560. Processernas topp-RSS var
+likartad (cirka 2,48–2,49 GB), men filcache vid just denna cgroup-topp
+samplades inte. Orsaken får inte anges som bevisad filcachevariation.
+Det separata provet för serialisering/överlappande syntetiskt versionsbyte
+startade därför inte: `NOT_RUN_DUE_TO_MEMORY_GATE`. Ingen OOM eller
+godkänd versionsbytesmarginal påstås. Råbuntens SHA-256 är
+`2c62f8d3f94aff708ecd6c07b70ef1b5a18ba8111c9593d78c90b824ffcaeb32`.
+
+## Nästa kandidat: prefix och modellmetadata
+
+En objektcensus efter kvalificering på `193629f` fann 681 483 GC-spårade
+set, tillsammans 659 674 440 byte i grundstorlek. Modellernas supplied-field-
+metadata stod bland annat för 202 532 912 byte i 89 458 Product,
+107 314 128 byte i 112 974 SourceProvenance och 88 219 040 byte i
+121 180 RecipeIngredient. Dessa kolumner överlappar set-totalen och får
+inte summeras till exklusiva allokeringar. Aktiva produkter/fakta/recept
+behölls; provet levererade ingen meny och räknas inte som audit.
+
+Kandidaten delar endast immutabla fältnamnsmönster i frysta modeller,
+med högst 256 mönster/1 MiB. Publik `model_fields_set` materialiserar ett eget
+muterbart native-set vid första läsningen. Kopiering, explicit konstruktions-
+alias, pickle-state och `exclude_unset` behåller native-beteende. Anpassade
+serializer-/copy-/computed-hooks behåller tidigare metadata. Validering av
+domänvärden ändras inte; 19 modellers JSON-scheman är identiska med basen.
+23 kompatibilitetsprov passerar. Inläsning med aktiva priser/fakta gav
+RSS efter GC/trim **1 013 547 008 byte**, jämfört med 1 376 272 384 för
+`193629f`, cirka 346 MiB mindre. Detta är diagnostik, inte full minnesgrind.
+
+Legacy-spårets lokala checkpoint sparar tillståndet **före** terminal
+förfining och återanvänder endast ett exakt oförändrat prefix inom samma
+förberedelse. Varje publicering förfinas och slutkontrolleras fortfarande.
+Ändrad kontext, recept, ordning, initialutvärdering eller okänd anpassning
+ger en oberoende ombyggnad. En tidigare slutvinnare används aldrig som
+ersättningsseed. 33 riktade prov innefattar ett motexempel där ett sådant
+seed hade missat nästa vinnare. Se [bevis och avgränsningar](preparation-memory-20261024/prefix-checkpoint-proof.md).
+Den frysta diagnostiska oraclen jämförde alla elva faktiska kandidater med
+nya oberoende sökningar, inklusive hela korgen: **alla exakt lika**,
+3 041 verkliga utvärderingar mot 9 517 oberoende. Slutplanen gav 988,32 kr,
+förväntad hash och audit PASS. Dess dubbla arbete får inte användas för
+latens- eller resurskvalificering.
+
+Full [CI på `ea4bb08`](https://github.com/ossebosse/smako/actions/runs/40088977188)
+passerar inklusive Chromium/WebKit. Vanliga resursprov pågår; de måste
+slutföras innan kandidaten kan ersätta tidigare mätkod.
+
+### Avgränsade jobb och avbrott
+
+Runtime `b5c242d215b4655a5d8176fbe6f61c4822c64475` tillför kooperativt
+avbrott inom befintlig admission. En permanent regression reproducerade
+att en avbruten tråd fortsatte efter nästa fasgräns. Tråden får nu en egen
+Event via kopierad ContextVar och kontrollerar den mellan recept, korgar,
+kohorter och faser. Admission släpps först när tråden verkligen har slutat,
+även vid upprepade avbrott. Pågående atomiska lagringsoperationer avbryts
+inte mitt i en skrivning. Ingen ny worker eller kö införs.
+
+Ägaren kan begära avbrott med `DELETE /api/plan-jobs/{id}`. Svaret är
+`cancelling` tills arbetet har upphört; avslutade resultat tas inte bort.
+Andra ägare får 404. Sidnavigation stoppar fortsatt bara statusläsaren och
+avbryter inte automatiskt ett accepterat serverjobb. Jobbstatus ger faktisk
+recept-/publiceringsprogress, inte en uppskattad total procent eller ETA.
+
+Ett nytt weakref-prov fann också att det avbrutna jobbets traceback behöll
+plannerobjekten under retention. Samma städning av avslutade traceback-
+ramar som för misslyckade jobb används nu även för avbrott. 33 jobb-/admission-
+och personliga prestandaprov samt 119 prefix-/certifikat-/metadatarelaterade
+prov passerar. Ruff och compileall passerar. Full
+[CI på `b5c242d`](https://github.com/ossebosse/smako/actions/runs/40091178789)
+passerar inklusive Chromium/WebKit.
 
 ## Verifiering och återstående grindar
 
