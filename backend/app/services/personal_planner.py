@@ -784,20 +784,31 @@ class PersonalPlanner:
             from app.services.recipe_library import matches_meal
             if not matches_meal(recipe, meal, self.request.recipe_preferences):
                 raise PolicyConflict("Receptet uppfyller inte val av matkök, ingrediensantal, tid eller anpassning. Välj ett kvalificerat alternativ.", code="RECIPE_CHOICES_CONFLICT")
-        # Never trust a caller/LLM supplied canonical identity over the visible ingredient.
-        recipe = Recipe.model_validate(
-            {
-                **recipe.model_dump(),
-                "ingredients": [
-                    {**i.model_dump(), "canonical_name": canonicalize_ingredient_name(i.name)}
-                    for i in recipe.ingredients
-                ],
-            }
-        )
-        if self.complete:
+        if (self.complete and recipe.design is not None
+                and all(i.canonical_name == canonicalize_ingredient_name(i.name) for i in recipe.ingredients)):
             from app.services.recipe_library import share_issued_recipe_parts
 
+            # Compare every value with the validated issued registry before
+            # sharing its frozen ingredients/design. Dumping and parsing this
+            # exact tree again cannot add evidence. Mutable recipe lists and
+            # preparation forms are still copied by the registry helper.
             recipe = share_issued_recipe_parts(recipe)
+        else:
+            # Unregistered inputs still derive their canonical identities from
+            # visible ingredients and pass through ordinary model validation.
+            recipe = Recipe.model_validate(
+                {
+                    **recipe.model_dump(),
+                    "ingredients": [
+                        {**i.model_dump(), "canonical_name": canonicalize_ingredient_name(i.name)}
+                        for i in recipe.ingredients
+                    ],
+                }
+            )
+            if self.complete:
+                from app.services.recipe_library import share_issued_recipe_parts
+
+                recipe = share_issued_recipe_parts(recipe)
         profile = self._merged_profile(meal)
         if not recipe_respects_diet(
             recipe,
