@@ -50,3 +50,46 @@ def test_full_directory_snapshot_skips_repeated_scans_and_detects_removed_entry(
     assert artifacts.prepared('test', 'new entry', lambda: {'value': 43}) == {'value': 43}
     assert len(list(original(directory, '*.json'))) == 2
     assert artifacts.prepared('test', 'new entry', lambda: pytest.fail('must read validated cache')) == {'value': 43}
+
+
+def test_content_batch_enforces_limits_and_rescans_after_restart_or_removal(tmp_path, monkeypatch):
+    monkeypatch.setenv('RECIPE_PREPARATION_CACHE_ROOT', str(tmp_path))
+    monkeypatch.setattr(artifacts, 'CONTENT_LIMIT', 2)
+    with artifacts._content_write_batch() as budget:
+        for index in range(5):
+            assert artifacts.prepared('content', index, lambda index=index: {'value': index},
+                                      _write_budget=budget) == {'value': index}
+    paths = sorted((tmp_path / 'content').glob('*.json'))
+    assert len(paths) == 2
+    retained = paths[1].read_bytes()
+    paths[0].unlink()
+    with artifacts._content_write_batch() as budget:
+        assert artifacts.prepared('content', 'after removal', lambda: {'value': 42},
+                                  _write_budget=budget) == {'value': 42}
+    assert len(list((tmp_path / 'content').glob('*.json'))) == 2
+    assert paths[1].read_bytes() == retained
+
+
+def test_content_batch_competing_writer_computes_without_writing(tmp_path, monkeypatch):
+    monkeypatch.setenv('RECIPE_PREPARATION_CACHE_ROOT', str(tmp_path))
+    with artifacts._content_write_batch() as writer:
+        assert writer.writable
+        with artifacts._content_write_batch() as contender:
+            assert not contender.writable
+            assert artifacts.prepared('content', 'contender', lambda: {'value': 42},
+                                      _write_budget=contender) == {'value': 42}
+            assert not list((tmp_path / 'content').glob('*.json'))
+        artifacts.prepared('content', 'writer', lambda: {'value': 43}, _write_budget=writer)
+    assert len(list((tmp_path / 'content').glob('*.json'))) == 1
+
+
+def test_content_batch_enforces_total_bytes_across_entries(tmp_path, monkeypatch):
+    monkeypatch.setenv('RECIPE_PREPARATION_CACHE_ROOT', str(tmp_path))
+    monkeypatch.setattr(artifacts, 'MAX_BYTES', 600)
+    values = [{'value': 'x' * 120, 'index': index} for index in range(4)]
+    with artifacts._content_write_batch() as budget:
+        for index, value in enumerate(values):
+            assert artifacts.prepared('content', index, lambda value=value: value, _write_budget=budget) == value
+    paths = list((tmp_path / 'content').glob('*.json'))
+    assert paths and len(paths) < len(values)
+    assert sum(p.stat().st_size for p in paths) <= 600
