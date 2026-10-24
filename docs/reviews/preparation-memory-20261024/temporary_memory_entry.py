@@ -12,6 +12,7 @@ import json
 import time
 from pathlib import Path
 
+from app.services.meal_prepared_artifacts import method_signature
 from app.services.personal_policy import ProductFacts
 from app.services.personal_source_facts import FactsCollection
 from app.services.planner_memory import release_idle_memory
@@ -59,6 +60,7 @@ def main():
     release_idle_memory()
     report = {'schema': 'smako-temporary-catalogue-memory-v1',
         'status': 'DIAGNOSTIC_ONLY_NO_MENU_OR_AUDIT', 'inputs': manifest,
+        'method_signature': method_signature(),
         'old_universe': original_key.universe_id, 'new_universe': next_key.universe_id,
         'source_strategy_change_is_synthetic': True, 'stages': []}
     def mark(stage):
@@ -98,6 +100,13 @@ def main():
     mark('atomic_swap_completed_with_old_reader_alive')
     report['memory_target_passed'] = memory()['cgroup_peak'] <= 2684354560
     mark('complete')
+    final = memory()
+    (args.output/'final-resource.json').write_text(json.dumps({
+        'memory':final,'memory_target_passed':final['cgroup_peak'] <= 2684354560,
+        'entry_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'scope':'after all stages and report serialization; before this tiny receipt'},indent=2)+'\n',encoding='utf8')
+    if final['cgroup_peak'] > 2684354560:
+        raise RuntimeError('Temporary catalogue memory exceeded the 2.5 GiB target')
 
 
 if __name__ == '__main__':

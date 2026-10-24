@@ -15,7 +15,7 @@ from decimal import Decimal
 from pathlib import Path
 
 ROOT = Path('/opt/smako/evidence/preparation-memory-20261024')
-SOURCE = 'b5c242d215b4655a5d8176fbe6f61c4822c64475'
+SOURCE = 'eeda184926f02e73ab76e71e50c740e9dcb01b02'
 REVISION = SOURCE[:7]
 RELEASE = '16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a'
 IMAGE = 'sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072'
@@ -42,8 +42,15 @@ def gates():
         report = json.loads(next((ROOT/f'cache-modes-{REVISION}'/receipt['mode']).glob('L*-distribution.json')).read_bytes())
         assert all(r['outcome'] == 'PASS' and r['audit_passed'] and r['cgroup_peak_bytes'] <= LIMIT
                    for r in report['records'])
-    temporary = json.loads((ROOT/f'temporary-memory-{REVISION}/temporary-memory.json').read_bytes())
-    assert temporary['memory_target_passed'] and temporary['stages'][-1]['stage'] == 'complete'
+        final = json.loads((ROOT/f'cache-modes-{REVISION}'/receipt['mode']/'final-resource.json').read_bytes())
+        assert final['memory_target_passed'] and final['target_enforced_for_current_runtime']
+    temporary = json.loads((ROOT/f'temporary-memory-{REVISION}-summary.json').read_bytes())
+    assert len(temporary) == 3
+    for trial in temporary:
+        assert trial['receipt']['source_commit'] == SOURCE
+        assert trial['receipt']['state']['ExitCode'] == 0 and not trial['receipt']['state']['OOMKilled']
+        assert trial['report']['memory_target_passed'] and trial['report']['stages'][-1]['stage'] == 'complete'
+        assert trial['final_resource']['memory_target_passed']
     assert not subprocess.check_output(['docker','ps','--filter','name=smako-preparation-','--format','{{.Names}}']).strip()
 
 
@@ -112,9 +119,11 @@ def report(folder, size, arm, profile):
 
 
 def validate(folder, size):
+    method = json.loads((ROOT/f'candidate-{REVISION}-plain/L5000-verified-distribution.json').read_bytes())['method_signature']
     for profile in PROFILES:
         old, new = (report(folder,size,arm,profile) for arm in ('main','verified'))
         for data in (old,new):
+            assert data['method_signature'] == method
             assert len(data['records']) == 4
             assert all(r['outcome'] == 'PASS' and r['audit_passed'] and r['cgroup_peak_bytes'] <= LIMIT
                        for r in data['records']), (folder,profile)

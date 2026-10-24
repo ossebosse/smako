@@ -2,13 +2,67 @@
 
 Arbete enligt [nästa uppdrag](../CODEX-SOL-NEXT-20261024.md), på
 `perf/preparation-memory-20261024`, [PR #9](https://github.com/ossebosse/smako/pull/9).
-Senast mätt runtime: `b5c242d215b4655a5d8176fbe6f61c4822c64475`,
+Aktuell runtime: `eeda184926f02e73ab76e71e50c740e9dcb01b02`,
 [PR #10](https://github.com/ossebosse/smako/pull/10), ännu under verifiering.
 **Etappen är ännu inte standardkvalificerad.** `legacy` och
 `library_merge_generations=False` är oförändrade standarder. Ingen aktivering,
 insamling, faktarelease, Windowsuppgift eller ökad samtidighet ingår.
 
-## Senaste utfall: tre kalla prov och cachelägen godkända, versionsbyte underkänt
+## Senaste utfall: versionsbytesfelet rättat och tre omprov godkända
+
+`b5c242d` klarade nedanstående plan-/cacheprov men missade den efterföljande
+grinden för katalogserialisering och versionsbyte. Ett första rättningsförsök,
+`19ef0b2`, skrev native JSON-bytes och släppte buffertar före validering/index.
+Processens topp-RSS sjönk, men cgroup nådde ändå **2 930 454 528 byte
+(2,729 GiB)** när mer filcache belastade gruppen. Inte heller detta prov
+godkändes; inget av försöken öppnade pilotgrinden.
+
+`eeda184` läser nu filens produkt-, kandidat- och indexrader stegvis. Varje
+rad går genom sin native JSON-validator; de vanliga omslutande modellerna
+kontrollerar därefter hela produktdigesten, index, kontext, snapshot och
+lineage. Ingen rad, publicering eller kontroll utelämnas. JSON-syntax,
+Unicode och avslut granskas också; en avklippt fil kan inte bli en komplett
+kandidat. Den befintliga atomiska filskrivaren behåller storleks-/hashkontroll,
+fsync, diskutrymmesreserv och validering av scratch-filen före ersättning.
+Stora buffertar släpps före nästa graf och endast oåtkomliga objekt städas.
+
+Tre seriella omprov på exakt samma underlag och två CPU/3 GiB passerar:
+
+| Prov | Peak efter ordinarie skrivning | Hela versionsbytesprovets peak | Processens väggtid |
+| --- | --- | --- | --- |
+| 1 | 2 012 753 920 byte | 2 372 689 920 byte (2,210 GiB) | 141,59 s |
+| 2 | 2 091 364 352 byte | 2 339 295 232 byte (2,179 GiB) | 144,78 s |
+| 3 | 2 188 840 960 byte | 2 436 276 224 byte (2,269 GiB) | 146,00 s |
+
+Alla håller båda katalogernas 89 458 produkter och 71 138 faktarader vid
+liv. Produktdigest, observationstider och hela den 191 730 753 byte stora
+skrivna filens hash är exakt oförändrade. Ingen OOM eller swap. Dessa
+diagnostikprov levererar ingen meny och ersätter inte plan-/auditgrinden.
+Filcache ingår fullt i måttet och ingen OS-cache har rensats. Båda tidigare
+misslyckandena bevaras i [minnesunderlaget](preparation-memory-20261024/temporary-memory-current.json).
+
+85 riktade parser-/katalog-/hållbarhetsprov och 16 uppstarts-/minnesprov
+passerar (101 olika prov). Full [CI på `eeda184`](https://github.com/ossebosse/smako/actions/runs/40100110649)
+passerar inklusive Chromium/WebKit. De nya testen jämför native-värden,
+metadata och serialisering samt avvisar trasig JSON, Unicode, digest,
+produktpris, index och proveniens. En giltig gammal läsare behålls fram till
+atomiskt byte och en ogiltig kandidat ersätter inte den aktiva versionen.
+
+Slutkodens första vanliga fyranropsprov har startat. Därefter kör samma
+förgrundssekvens två ytterligare kalla prov och alla cachelägen, pilot,
+HTTP/historik, tre matchade basprov, ny fasprofil och full matris. Varje
+steg stannar vid missad grind. Metodsignaturen är
+`17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
+kodändringen invaliderar äldre förberedelseartefakter. Äldre planresultat
+räknas därför inte automatiskt som `eeda184`-celler. Inget standardbyte.
+
+Matrisverktygets stoppgrind har också skärpts: en blockerad v1-cell mot
+en levererad legacy-/bas-/föregångarmeny stoppar körningen direkt, liksom
+ett oförklarat byte av blockeringskod/steg. Tre kontraktsprov passerar och
+visar att motexemplet sparas före stopp. Likadana blockerade observationer
+förblir separat evidens och blir aldrig ett bevis för global omöjlighet.
+
+## Föregående runtime: tre kalla prov och cachelägen godkända
 
 På `b5c242d` passerar tre nya processer med tom appcache och ny ägarstore:
 **674,71 / 641,28 / 665,08 s**, median **665,08 s**, högsta registrerade
@@ -39,20 +93,20 @@ max(5 000)/min(262) är **1,1116** (mediankvot 1,0662), med tre varma anrop
 per storlek. Samtliga är snabbare än jämförbara varma legacy-anrop. Detta
 gäller endast Malmö/fördelning/originalfakta.
 
-Nästa minnesgrind är däremot **FAIL**. Ordinarie `write_artifact` gav
+Den efterföljande minnesgrinden på `b5c242d` var däremot **FAIL**. Ordinarie `write_artifact` gav
 **2 736 246 784 byte (2,548 GiB)**. När nästa katalog laddats och bytts
 atomiskt med gammal läsare samt fakta kvar nåddes **2 905 780 224 byte
 (2,706 GiB)**. Båda katalogerna innehöll 89 458 produkter, med identisk
 produktdigest och observationstid; 71 138 faktarader behölls. Den skrivna
 filen var byteidentisk med fryst indata (191 730 753 byte). Exit 0, ingen
 OOM eller swap gör inte minnesgrinden godkänd. Piloten och följande matris
-har därför **inte startat**. [Motexempel och kvitto](preparation-memory-20261024/temporary-memory-current.json).
+startade därför **inte på denna runtime**. [Motexempel och kvitto](preparation-memory-20261024/temporary-memory-current.json).
 
 Ett separat fryst ASGI-prov är förberett för ordinarie registrering,
 kö/progress/avbrott och sparning, följt av tre processer med faktisk sparad
 historik. Det är ännu inte kört och räknas inte som evidens. Kvarvarande
-arbete är att rätta den tillfälliga minneskostnaden, köra om berörd
-slutkod och sedan passera pilot, matchad jämförelse och full matris.
+arbete var att rätta den tillfälliga minneskostnaden och därefter köra om berörd
+slutkod samt passera pilot, matchad jämförelse och full matris.
 Äldre tabeller nedan bevarar tidigare revisioners observationer.
 
 ## Ändringar

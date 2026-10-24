@@ -33,6 +33,10 @@ REFERENCE_LIMITS = {'seed':0,'refinement':0,'seed_variant_shortlist':False,'subs
                     'merge_generations':False,'substitution_screen_margin':-1.0,'substitution_slot_limit':0}
 
 
+def blocked_signature(cell):
+    return {(row['code'],row['stage']) for row in cell['blocked_evidence']}
+
+
 def collect(destination):
     current_method = json.loads((ROOT/f'candidate-{REVISION}-plain/L5000-verified-distribution.json').read_bytes())['method_signature']
     cells = {key:{'facts_arm':key[0],'city':key[1],'profile':key[2],'library_size':key[3],
@@ -93,11 +97,22 @@ def collect(destination):
                     cgroup_peak_bytes=max(r['cgroup_peak_bytes'] for r in rows))
     failures = []
     for key,cell in cells.items():
+        facts,city,profile,size,policy = key
+        if policy == 'smako-verified-reference-v1' and cell['status'] == 'OBSERVED_BLOCKED_NOT_GLOBAL_IMPOSSIBILITY':
+            required = [(facts,city,profile,size,'legacy'),(facts,city,profile,262,'legacy')]
+            if size != 262:
+                required.append((facts,city,profile,{1000:262,2000:1000,5000:2000}[size],policy))
+            for target in dict.fromkeys(required):
+                prior = cells[target]
+                if prior['status'] == 'AUDITED_PENDING_CROSS_CELL_GATES':
+                    failures.append({'cell':key,'gate':'OUTCOME_REGRESSION','against':target})
+                elif (prior['status'] == 'OBSERVED_BLOCKED_NOT_GLOBAL_IMPOSSIBILITY'
+                      and blocked_signature(cell) != blocked_signature(prior)):
+                    failures.append({'cell':key,'gate':'UNEXPLAINED_BLOCKED_OUTCOME_CHANGE','against':target})
         if cell['status'] != 'AUDITED_PENDING_CROSS_CELL_GATES':
             if cell['status'].startswith('FAILED_'):
                 failures.append({'cell':key,'gate':cell['status']})
             continue
-        facts,city,profile,size,policy = key
         if len(set(cell['paid'])) != 1:
             failures.append({'cell':key,'gate':'INCONSISTENT_REPEATED_PRICE'})
         if policy != 'smako-verified-reference-v1':

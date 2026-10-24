@@ -61,6 +61,7 @@ def http_probe(settings, prepared, facts, clock, request, output):
     from app.api import plan as api
     from app.models import SavedPlan
     from app.services import price_universe_runtime
+    from app.services.performance_trace import activate_performance_trace
     from app.services.personal_planner import PersonalPlanner
     from app.services.plan_jobs import PlanJobs
     from app.services.plan_store import PlanStore
@@ -96,8 +97,27 @@ def http_probe(settings, prepared, facts, clock, request, output):
     report = {'status':'HTTP_DIAGNOSTIC_IN_PROGRESS','samples':1,
               'scope':'In-process ASGI routes/auth/middleware/admission/jobs/save/read; no browser/network/metric persistence',
               'startup_prewarm':'disabled in isolated lifespan; catalogue/facts loaded before HTTP',
-              'progress_samples':[]}
+              'progress_samples':[], 'job_traces':[],
+              'instrumentation':'Existing request-local performance trace; elapsed HTTP includes its overhead'}
+    original_create = api._create_saved_plan
+    trace_sequence = 0
+
+    async def traced_create(*args, **kwargs):
+        nonlocal trace_sequence
+        trace_sequence += 1
+        sequence, outcome = trace_sequence, 'returned'
+        with activate_performance_trace() as trace:
+            try:
+                return await original_create(*args,**kwargs)
+            except BaseException as error:
+                outcome = type(error).__name__
+                raise
+            finally:
+                report['job_traces'].append({'sequence':sequence,'outcome':outcome,
+                                             'trace':asdict(trace.snapshot())})
+
     with (patch.object(PersonalPlanner,'__init__',frozen_init),
+          patch.object(api,'_create_saved_plan',traced_create),
           patch.object(api,'datetime',FrozenDateTime),
           patch.object(price_universe_runtime,'datetime',FrozenDateTime),
           patch.object(api,'current_pricing_date',lambda:clock.date()),
@@ -133,9 +153,11 @@ def http_probe(settings, prepared, facts, clock, request, output):
         from backend.scripts.planner_acceptance_matrix import matrix_request
         other = matrix_request(json.loads((output/'base-request.json').read_bytes()),'standard')
         queued,report['queued_post_accept_seconds'] = post(other)
+        queue_accepted_at = time.perf_counter()
         report['queued_snapshot'] = wait_for(lambda:(s if (s:=stats())['queued']==1 else None),10)
         assert report['queued_snapshot']['active'] == 1
         cancel_started = time.perf_counter()
+        report['queued_accepted_until_cancel_requested_seconds'] = cancel_started-queue_accepted_at
         assert client.delete(queued).status_code == 202
         wait_for(lambda:stats()['queued']==0,10)
         assert client.get(queued).status_code == 404
@@ -162,6 +184,15 @@ def http_probe(settings, prepared, facts, clock, request, output):
         assert reread.status_code == 200
         assert SavedPlan.model_validate(reread.json()).plan == saved.plan
         assert client.delete(url).status_code == 409
+        cookies = dict(client.cookies)
+        client.cookies.clear()
+        try:
+            report['foreign_job_read_status'] = client.get(url).status_code
+            assert report['foreign_job_read_status'] == 404
+        finally:
+            client.cookies.clear()
+            client.cookies.update(cookies)
+            del cookies
         before = history(settings.plan_store_path)
         assert before['saved_revisions'] == 1
         # Start actual work for the next private revision, then stop it at a
@@ -183,6 +214,10 @@ def http_probe(settings, prepared, facts, clock, request, output):
         report['history_after_success_and_active_cancel'] = after
         report['admission'] = stats()
         assert report['admission']['peak_active'] == 1 and report['admission']['peak_queued'] >= 1
+        # Existing admission timing covers the actual semaphore wait, including
+        # a cancelled queued job; it is separate from POST and saved-result time.
+        assert len(report['job_traces']) == 3
+        assert all('planner_queue_wait' in row['trace']['span_statistics'] for row in report['job_traces'])
         report['status'] = 'HTTP_DIAGNOSTIC_PASSED_NOT_LATENCY_QUALIFICATION'
     write(output/'http-history.json',report)
 
@@ -239,9 +274,9 @@ def run(args):
     from app.services.meal_prepared_artifacts import method_signature
     from app.services.recipe_library import library_version
     method = method_signature()
-    assert method == '8a42f9b78e3addba9f9dc634b27895fd4c71ee36381f540624a4546bcb850dbb'
+    assert method == '17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6'
     write(args.output/'protocol.json',{'mode':args.mode,'inputs':manifest,'method_signature':method,
-        'library_version':library_version(),'source_commit':'b5c242d215b4655a5d8176fbe6f61c4822c64475'})
+        'library_version':library_version(),'source_commit':'eeda184926f02e73ab76e71e50c740e9dcb01b02'})
     base = json.loads((args.inputs/'combined-request.json').read_bytes())
     # Frozen public request, containing no credentials/private capabilities.
     write(args.output/'base-request.json',base)

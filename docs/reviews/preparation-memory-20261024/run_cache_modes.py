@@ -95,7 +95,8 @@ def main():
         provision_seconds = time.perf_counter() - started
         args = [arg.replace(str(prior) + ':/output:rw', str(output) + ':/output:rw') for arg in base]
         # Foreground subprocess owns one bounded worker; retain it for OOM/exit evidence.
-        args.remove('-d')
+        if '-d' in args:
+            args.remove('-d')
         name = f'smako-preparation-{revision}-{mode}'
         args[args.index('--name') + 1] = name
         args[args.index('--size') + 1] = str(size)

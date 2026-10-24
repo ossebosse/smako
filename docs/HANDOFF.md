@@ -1,3 +1,30 @@
+# 2026-10-24 14:03 UTC: Versionsbyte klarar tre omprov; slutkodens planprov startade
+
+Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
+Katalogfilen läses och valideras radvis med samma native produkt-/kandidat-
+och indexvalidatorer samt full digest-/lineagekontroll. Stora JSON-buffertar
+släpps före nästa graf. Befintlig atomisk filskrivning, validering och LKG kvar.
+Tidigare misslyckanden på b5c242d (2,706 GiB) och 19ef0b2 (2,729 GiB) bevaras.
+
+Tre versionsbytes-/serialiseringsprov **PASS**: cgroup **2,210 / 2,179 /
+2,269 GiB**, med båda katalogernas 89 458 produkter och 71 138 faktarader
+kvar. Hela skrivna filen är byteidentisk med fryst original i alla prov.
+Ingen OOM/swap. 101 riktade parser-/katalog-/uppstarts-/minnesprov och full
+CI inklusive Chromium/WebKit passerar på runtimekoden. Ingen meny/audit
+påstås från dessa minnesdiagnostikprov.
+
+Ny metodsignatur `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`.
+Slutkodens första planprov med tom appcache/ny ägarstore pågår, följt av
+två ytterligare kalla prov, cachelägen, pilot, HTTP/historik, matchade
+basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
+vid varje missad grind. B5-resultaten nedan är historik, inte automatiskt
+slutkodens kvalificering. Standard förblir legacy och generationsmerge=False;
+ingen drift, insamling, aktiv fakta/prisversion eller samtidighet ändrad.
+
+[Rapport och maskinunderlag](reviews/preparation-memory-20261024.md).
+
+---
+
 # 2026-10-24 13:31 UTC: Cacheprov passerar; versionsbyte stoppar piloten
 
 Runtime `b5c242d`, [PR #10](https://github.com/ossebosse/smako/pull/10), har nu

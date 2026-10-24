@@ -15,7 +15,7 @@ import time
 from pathlib import Path
 
 ROOT = Path('/opt/smako/evidence/preparation-memory-20261024')
-CURRENT = 'b5c242d215b4655a5d8176fbe6f61c4822c64475'
+CURRENT = 'eeda184926f02e73ab76e71e50c740e9dcb01b02'
 BASELINE = '9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94'
 OLD_CODE = Path('/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code')
 EXPECTED = '1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7'
@@ -45,7 +45,7 @@ def execute(args, folder, name, source, method, instrumented):
     assert h['Memory'] == h['MemorySwap'] == 3221225472 and h['NanoCpus'] == 2000000000
     path = folder/'L5000-verified-distribution.json'
     report = json.loads(path.read_bytes())
-    current = json.loads((ROOT/'candidate-b5c242d-plain/L5000-verified-distribution.json').read_bytes())
+    current = json.loads((ROOT/'candidate-eeda184-plain/L5000-verified-distribution.json').read_bytes())
     assert report['inputs'] == current['inputs'] and report['library_version'] == current['library_version']
     assert report['method_signature'] == method
     assert len(report['records']) == 1
@@ -63,17 +63,17 @@ def execute(args, folder, name, source, method, instrumented):
 
 def main():
     assert not subprocess.check_output(['docker','ps','--filter','name=smako-preparation-','--format','{{.Names}}']).strip()
-    template = json.loads((ROOT/'candidate-b5c242d-plain-command.json').read_bytes())
+    template = json.loads((ROOT/'candidate-eeda184-plain-command.json').read_bytes())
     baseline_method = json.loads((ROOT/'baseline-profile-r2/L5000-verified-distribution.json').read_bytes())['method_signature']
-    current_method = json.loads((ROOT/'candidate-b5c242d-plain/L5000-verified-distribution.json').read_bytes())['method_signature']
-    destination = ROOT/'matched-b5c242d'
+    current_method = json.loads((ROOT/'candidate-eeda184-plain/L5000-verified-distribution.json').read_bytes())['method_signature']
+    destination = ROOT/'matched-eeda184'
     destination.mkdir()
     summary = []
     for index in range(1,4):
         folder = destination/f'baseline-plain-{index}'
         folder.mkdir();os.chown(folder,10001,10001)
-        args = [s.replace(str(ROOT/'code-b5c242d'),str(OLD_CODE))
-                 .replace(str(ROOT/'candidate-b5c242d-plain')+':/output:rw',str(folder)+':/output:rw') for s in template]
+        args = [s.replace(str(ROOT/'code-eeda184'),str(OLD_CODE))
+                 .replace(str(ROOT/'candidate-eeda184-plain')+':/output:rw',str(folder)+':/output:rw') for s in template]
         args[args.index('--repeat')+1] = '1'
         args[args.index('--execution-environment')+1] = (
             f'UNINSTRUMENTED baseline {BASELINE}; serial2CPU/3GiB incl swap; '
@@ -84,7 +84,7 @@ def main():
         write(destination/'summary.json',summary)
     folder = destination/'current-instrumented'
     folder.mkdir();os.chown(folder,10001,10001)
-    args = [s.replace(str(ROOT/'candidate-b5c242d-plain')+':/output:rw',str(folder)+':/output:rw')
+    args = [s.replace(str(ROOT/'candidate-eeda184-plain')+':/output:rw',str(folder)+':/output:rw')
              .replace('/tmp/plain_preparation_entry.py:/preparation_probe.py:ro',
                       '/tmp/smako-profile-preparation-20261024.py:/preparation_probe.py:ro') for s in template]
     i = args.index('--entrypoint');args[i:i] = ['-e','SMAKO_PROFILE_REPORT=/output/phase-profile.json']
@@ -92,12 +92,12 @@ def main():
     args[args.index('--execution-environment')+1] = (
         f'INSTRUMENTED {CURRENT}; serial2CPU/3GiB incl swap; empty app/preparation cache and new owner; '
         'one diagnostic phase profile; not interchangeable with plain timing samples')
-    summary.append(execute(args,folder,'smako-preparation-b5c242d-profile',CURRENT,current_method,True))
+    summary.append(execute(args,folder,'smako-preparation-eeda184-profile',CURRENT,current_method,True))
     write(destination/'summary.json',summary)
     assert summary[-1]['memory_target_passed']
     write(destination/'complete.json',{'status':'MATCHED_PLAIN_SAMPLES_COLLECTED_SEPARATE_PHASE_PROFILE',
-        'baseline_plain_samples':3,'current_plain_folders':['candidate-b5c242d-plain',
-            'cache-modes-b5c242d/cold-2','cache-modes-b5c242d/cold-3'],
+        'baseline_plain_samples':3,'current_plain_folders':['candidate-eeda184-plain',
+            'cache-modes-eeda184/cold-2','cache-modes-eeda184/cold-3'],
         'current_phase_profile_samples':1,'os_cache':'uncontrolled; never cleared'})
 
 
