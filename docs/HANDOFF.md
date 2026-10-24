@@ -1,4 +1,4 @@
-# 2026-10-24 14:40 UTC: Tre kalla slutkodsprov passerar; cachelägen fortsätter
+# 2026-10-24 15:46 UTC: Cache- och ordinarie minnesgrind passerar; pilot startad
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 Katalogfilen läses och valideras radvis med samma native produkt-/kandidat-
@@ -22,8 +22,10 @@ klara: 649,49 / 664,50 s, pris/hash/audit PASS. Median över tre är 662,83 s,
 högsta slutliga peak 1,882 GiB. Alla tretton cachelägesprocesser har nu
 passerat; varm kvot 5 000/262 är 1,0873 i Malmö/fördelning/originalfakta.
 Omstart och cacheförlust laddar elva certifikat utan omsökta publiceringar.
-Tre nya ägarstore tog 641,40/637,84/641,36 s. Nu körs tre
-extra versionsbytesprov utan mätverktygets fasstädning, därefter pilot,
+Tre nya ägarstore tog 641,40/637,84/641,36 s. Tre extra versionsbytesprov
+utan mätverktygets fasstädning passerar också: **2,023/2,039/2,030 GiB**,
+båda katalogerna och fakta kvar, exakt samma filhash, ingen OOM/swap.
+Faktaprojektionen inför piloten har startat, följd av
 HTTP/historik, matchade
 basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
 vid varje missad grind. B5-resultaten nedan är historik, inte automatiskt

@@ -39,9 +39,12 @@ liv. Produktdigest, observationstider och hela den 191 730 753 byte stora
 skrivna filens hash är exakt oförändrade. Ingen OOM eller swap. Dessa
 diagnostikprov levererar ingen meny och ersätter inte plan-/auditgrinden.
 Mätverktyget använder explicit GC/trim vid fasgränser, likadant i före- och
-efterproven. Före pilotstart följer därför ytterligare tre prov som endast
-använder runtimekodens egna städgränser, utan sådan hjälp från verktyget.
-De är ännu inte körda.
+efterproven. Därefter har ytterligare tre prov körts utan sådan hjälp:
+endast runtimekodens egna städgränser används i den vanliga följden
+skrivning → överlappande inläsning/atomiskt byte. Alla tre passerar med
+**2,023 / 2,039 / 2,030 GiB**, utan OOM/swap och med båda katalogerna samt
+fakta kvar. Alla filer är byteidentiska med originalet. Processerna tog
+143,94 / 145,60 / 143,47 s. [Ordinarie minnesprov och exakta kommandon](preparation-memory-20261024/runtime-only-memory.json).
 Filcache ingår fullt i måttet och ingen OS-cache har rensats. Båda tidigare
 misslyckandena bevaras i [minnesunderlaget](preparation-memory-20261024/temporary-memory-current.json).
 
@@ -95,8 +98,9 @@ alla tre jämförbara varma legacy-anrop. Detta är en profil/stad/faktaarm,
 inte hela standardgrinden. De sex omstarts-/cacheförlustproven gör aktuell
 slutkontroll och audit; de återanvänder inte en gammal kassasumma.
 Syntetiska lagren har noll vanliga sparade leveranser. HTTP-/historikproven
-och resterande pilot/matris är ännu inte körda. Versionsbytesprovet som
-bara använder runtimekodens städning har startat efter cachelägessekvensen.
+och resterande pilot/matris är ännu inte körda. De tre vanliga
+versionsbytesproven har också passerat; faktaprojektionen inför piloten
+har därför startat.
 
 ## Föregående runtime: tre kalla prov och cachelägen godkända
 
