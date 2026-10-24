@@ -574,6 +574,112 @@ async def test_prepared_artifact_enospc_preserves_previous_restart_cache(
 
 
 @pytest.mark.asyncio
+async def test_artifact_write_releases_exact_json_bytes_before_full_validation(monkeypatch,tmp_path):
+    from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+    from pydantic import TypeAdapter
+
+    _, prepared, _, _ = await _build_prepared()
+    released, validated = [], []
+    original_dump = TypeAdapter.dump_json
+    original_validate = PreparedPriceUniverseArtifact.from_file
+
+    class TrackedBytes(bytes):
+        def __del__(self):
+            released.append(True)
+
+    def dump(adapter, value, *args, **kwargs):
+        return TrackedBytes(original_dump(adapter,value,*args,**kwargs))
+
+    def validate(cls, value, *args, **kwargs):
+        assert released == [True]
+        result = original_validate(value,*args,**kwargs)
+        validated.append(True)
+        return result
+
+    monkeypatch.setattr(TypeAdapter,'dump_json',dump)
+    monkeypatch.setattr(PreparedPriceUniverseArtifact,'from_file',classmethod(validate))
+    destination = tmp_path/'validated.json'
+    PreparedPriceUniverseManager.write_artifact(prepared,destination)
+    assert validated == [True]
+    assert destination.read_bytes() == prepared.to_json().encode('utf8')
+
+
+@pytest.mark.asyncio
+async def test_file_load_closes_parser_before_restore_and_preserves_old_reader(monkeypatch,tmp_path):
+    from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+
+    manager, old, _, _ = await _build_prepared()
+    destination = tmp_path/'restart.json'
+    PreparedPriceUniverseManager.write_artifact(old,destination)
+    original_read = Path.read_bytes
+    original_open = Path.open
+    original_restore = PreparedPriceUniverseArtifact.restore
+    readers = []
+
+    def read(path):
+        assert path != destination, 'A file load must not hold complete JSON bytes'
+        return original_read(path)
+
+    def opened(path, *args, **kwargs):
+        handle = original_open(path,*args,**kwargs)
+        if path == destination and args == ('r',):
+            readers.append(handle)
+        return handle
+
+    def restore(artifact):
+        assert readers and all(handle.closed for handle in readers)
+        assert manager.get_active('city:lund') is old
+        return original_restore(artifact)
+
+    monkeypatch.setattr(Path,'read_bytes',read)
+    monkeypatch.setattr(Path,'open',opened)
+    monkeypatch.setattr(PreparedPriceUniverseArtifact,'restore',restore)
+    new = manager.load_file_and_activate(destination)
+    assert manager.get_active('city:lund') is new and new is not old
+    assert new.universe == old.universe
+    assert new.economic_pool == old.economic_pool
+    # A later invalid file must not replace the current valid object either.
+    payload = json.loads(original_read(destination))
+    payload['canonical_candidates'][0]['candidates'][0]['source_provenance']['source_snapshot_id'] = 'invalid'
+    destination.write_text(json.dumps(payload),encoding='utf8')
+    with pytest.raises(ValueError,match='snapshot provenance'):
+        manager.load_file_and_activate(destination)
+    assert manager.get_active('city:lund') is new
+    assert old.universe.products == new.universe.products
+
+
+@pytest.mark.asyncio
+async def test_incremental_artifact_has_native_values_metadata_and_validation(tmp_path):
+    from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+
+    _, prepared, _, _ = await _build_prepared()
+    destination = tmp_path/'native.json'
+    raw = prepared.to_json()
+    destination.write_text(raw,encoding='utf8')
+    native = PreparedPriceUniverseArtifact.model_validate_json(raw)
+    incremental = PreparedPriceUniverseArtifact.from_file(destination)
+    assert incremental == native
+    assert incremental.model_dump_json() == native.model_dump_json()
+    assert incremental.model_fields_set == native.model_fields_set
+    assert incremental.universe.model_fields_set == native.universe.model_fields_set
+    assert [p.model_fields_set for p in incremental.universe.products] == [p.model_fields_set for p in native.universe.products]
+    for mutate in (
+        lambda d:d['universe'].__setitem__('products_digest','0'*64),
+        lambda d:d['universe']['products'][0].__setitem__('price',-1),
+        lambda d:d['canonical_candidates'][0]['candidates'][0]['source_provenance'].__setitem__('source_snapshot_id','invalid'),
+        lambda d:d['universe']['indexes']['canonical'][0].__setitem__('product_indexes',[999999]),
+    ):
+        value = json.loads(raw)
+        mutate(value)
+        encoded = json.dumps(value)
+        destination.write_text(encoded,encoding='utf8')
+        with pytest.raises(ValueError):
+            PreparedPriceUniverseArtifact.model_validate_json(encoded)
+        with pytest.raises(ValueError):
+            PreparedPriceUniverseArtifact.from_file(destination)
+
+
+@pytest.mark.asyncio
 async def test_failed_rebuild_leaves_the_previous_universe_active() -> None:
     manager, active, _, _ = await _build_prepared()
     changed_store = _store(snapshot_id="snapshot-broken")

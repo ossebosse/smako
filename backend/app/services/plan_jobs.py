@@ -10,8 +10,10 @@ import asyncio
 import logging
 import traceback
 from collections.abc import Awaitable, Callable
+from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass
+from threading import Event
 from time import monotonic
 from uuid import uuid4
 
@@ -19,13 +21,38 @@ from app.models import SavedPlan
 
 _stage_reporter: ContextVar = ContextVar("plan_stage_reporter", default=None)
 job_reference: ContextVar = ContextVar("plan_job_reference", default=None)
+_work_cancellation: ContextVar = ContextVar("plan_work_cancellation", default=None)
 logger = logging.getLogger(__name__)
 
 
-def report_stage(stage: str):
+@contextmanager
+def cancellable_work():
+    """Share one thread-safe stop request with this worker's copied context."""
+    stop = Event()
+    token = _work_cancellation.set(stop)
+    try:
+        yield stop
+    finally:
+        _work_cancellation.reset(token)
+
+
+def check_cancelled():
+    stop = _work_cancellation.get()
+    if stop is not None and stop.is_set():
+        raise asyncio.CancelledError()
+
+
+def report_stage(stage: str, *, completed=None, total=None, unit=None):
+    check_cancelled()
+    progress = None
+    if completed is not None or total is not None or unit is not None:
+        if (type(completed) is not int or type(total) is not int
+                or not 0 <= completed <= total or unit not in {"recipes", "publications"}):
+            raise ValueError("Progress requires actual completed/total work units")
+        progress = {"completed": completed, "total": total, "unit": unit}
     reporter = _stage_reporter.get()
     if reporter:
-        reporter(stage)
+        reporter(stage, progress)
 
 
 class PlanJobsFull(RuntimeError):
@@ -61,7 +88,11 @@ class PlanJob:
     request_id: str
     task: asyncio.Task[SavedPlan]
     completed_at: float | None = None
-    stage: str = "queued"
+    status: tuple[str, dict | None] = ("queued", None)
+
+    @property
+    def stage(self):
+        return self.status[0]
 
 
 class PlanJobs:
@@ -100,7 +131,7 @@ class PlanJobs:
             oldest = min(completed, key=lambda job: job.completed_at or 0)
             del self.jobs[oldest.job_id]
         async def run():
-            token = _stage_reporter.set(lambda stage: setattr(job, "stage", stage))
+            token = _stage_reporter.set(lambda stage, progress: setattr(job, "status", (stage, progress)))
             reference_token = job_reference.set({"job_id": job.job_id, "request_id": job.request_id})
             try:
                 return await work()
@@ -115,6 +146,15 @@ class PlanJobs:
 
         def finished(task):
             job.completed_at = monotonic()
+            if task.cancelled():
+                job.status = ("cancelled", None)
+                # Cooperative cancellation crosses the thread with a traceback
+                # too. A retained cancelled Task otherwise keeps that entire
+                # planner alive even though no browser will read its result.
+                try:
+                    task.exception()
+                except asyncio.CancelledError as error:
+                    _release_exception_frames(error)
             # Retrieve exceptions even when a browser never polls again. The
             # existing API exception handlers render them on an owned poll.
             if not task.cancelled():

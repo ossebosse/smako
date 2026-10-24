@@ -1,3 +1,105 @@
+# 2026-10-24 15:46 UTC: Cache- och ordinarie minnesgrind passerar; pilot startad
+
+Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
+Katalogfilen läses och valideras radvis med samma native produkt-/kandidat-
+och indexvalidatorer samt full digest-/lineagekontroll. Stora JSON-buffertar
+släpps före nästa graf. Befintlig atomisk filskrivning, validering och LKG kvar.
+Tidigare misslyckanden på b5c242d (2,706 GiB) och 19ef0b2 (2,729 GiB) bevaras.
+
+Tre versionsbytes-/serialiseringsprov **PASS**: cgroup **2,210 / 2,179 /
+2,269 GiB**, med båda katalogernas 89 458 produkter och 71 138 faktarader
+kvar. Hela skrivna filen är byteidentisk med fryst original i alla prov.
+Ingen OOM/swap. 101 riktade parser-/katalog-/uppstarts-/minnesprov och full
+CI inklusive Chromium/WebKit passerar på runtimekoden. Ingen meny/audit
+påstås från dessa minnesdiagnostikprov.
+
+Ny metodsignatur `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`.
+Slutkodens första planprov med tom appcache/ny ägarstore är klart:
+662,83 s, sedan 11,66/11,86/12,19 s varmt, alla 988,32 kr/hash/audit PASS.
+Slutlig cgroup-peak inklusive rapport/städning 1,882 GiB, ingen swap.
+Hela fyranropsprocessen tog 756,71 s. Ytterligare två kalla processer är
+klara: 649,49 / 664,50 s, pris/hash/audit PASS. Median över tre är 662,83 s,
+högsta slutliga peak 1,882 GiB. Alla tretton cachelägesprocesser har nu
+passerat; varm kvot 5 000/262 är 1,0873 i Malmö/fördelning/originalfakta.
+Omstart och cacheförlust laddar elva certifikat utan omsökta publiceringar.
+Tre nya ägarstore tog 641,40/637,84/641,36 s. Tre extra versionsbytesprov
+utan mätverktygets fasstädning passerar också: **2,023/2,039/2,030 GiB**,
+båda katalogerna och fakta kvar, exakt samma filhash, ingen OOM/swap.
+Faktaprojektionen inför piloten har startat, följd av
+HTTP/historik, matchade
+basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
+vid varje missad grind. B5-resultaten nedan är historik, inte automatiskt
+slutkodens kvalificering. Standard förblir legacy och generationsmerge=False;
+ingen drift, insamling, aktiv fakta/prisversion eller samtidighet ändrad.
+
+[Rapport och maskinunderlag](reviews/preparation-memory-20261024.md).
+
+---
+
+# 2026-10-24 13:31 UTC: Cacheprov passerar; versionsbyte stoppar piloten
+
+Runtime `b5c242d`, [PR #10](https://github.com/ossebosse/smako/pull/10), har nu
+**tre kalla prov** med tom appcache/ny ägarstore: 674,71 / 641,28 / 665,08 s,
+median 665,08 s, högst 2,115 GiB cgroup-peak. Alla 988,32 kr/hash/audit PASS.
+Alla tretton cachelägesprocesser passerar, högst 2,118 GiB. Omstart och
+borttagen härledd cache laddar elva certifikat utan omsökta publiceringar.
+Varm 5 000/262-kvot 1,1116 i Malmö/fördelning. Store har noll vanliga
+sparade leveranser; riktig historik/HTTP är förberett men ännu inte mätt.
+
+**Versionsbyte/serialisering FAIL:** ordinarie skrivning nådde 2,548 GiB,
+överlappande katalogversioner med gammal läsare och fakta kvar **2,706 GiB**.
+Katalogernas produktdigest/tidsstämplar och skriven filhash är oförändrade.
+Exit 0 utan OOM/swap ändrar inte grinden. **Piloten och fullmatrisen har
+inte startat.** Minneskostnaden ska rättas före fortsatt standardkvalificering.
+Full CI på `b5c242d` inklusive Chromium/WebKit passerar. Matchade tre basprov
+och ny instrumenterad profil återstår. Standard är fortsatt `legacy` och
+`library_merge_generations=False`; ingen drift eller samtidighet ändrad.
+
+[Rapport, råhashar och motexempel](reviews/preparation-memory-20261024.md).
+
+---
+
+# 2026-10-24: Tredje ägarprovet missar minnesmål; nästa kandidat verifieras
+
+PR #9 är integrerad på main `b46f608`. Dess runtime `193629f` klarar pris,
+menyhash och audit i fyra primärplaner och 17 planer över elva cachelägen. Det tredje provet
+med varm offentlig disk och ny syntetisk ägarstore nådde dock **2,624 GiB**
+cgroup-peak. Målet 2,5 GiB är alltså **inte stabilt uppnått**; exit 0 utan
+OOM ändrar inte det. Versionsbyte/serialisering startade inte eftersom
+minnesgrinden stoppade sekvensen. Alla cachelägen och felet finns nu i
+maskinunderlaget, inte bara de första åtta.
+
+Nästa runtime `b5c242d`, [PR #10](https://github.com/ossebosse/smako/pull/10),
+återanvänder exakt oförändrat legacy-prefix före terminal förfining och
+komprimerar endast frysta modellers fältnamnsmetadata med kompatibelt
+publikt set-/copy-/serializer-/pickle-beteende. 33 prefixprov, 23
+metadata-kompatibilitetsprov passerar; full CI på `ea4bb08` inklusive
+Chromium/WebKit passerar.
+Ett inläsningsprov behöll priser/fakta och sänkte RSS efter GC/trim från
+1 376 272 384 till 1 013 547 008 byte, cirka 346 MiB. Det är diagnostik,
+inte en full plan-/minnesgrind. En fryst oracle på `ea4bb08` jämförde samtliga
+elva legacy-kandidater med oberoende sökningar: exakt samma menyer och hela
+korgar, 3 041 utvärderingar mot 9 517. Det vanliga första anropet tog
+709,68 s (tidigare 778,95), cgroup cirka 1,80 GiB, audit PASS. Tre varma
+anrop tog 12,31/11,88/11,80 s. Delmålet under 700 s missas; detta är ett prov.
+Senaste runtime tillför kooperativa avbrott mellan arbetsenheter med fortsatt
+admission och faktisk progress. Ett reproducerat traceback-läckage i avbrutna
+jobb är rättat. 33 jobb-/admissionprov och full CI inklusive Chromium/WebKit
+passerar på `b5c242d`. Dess första vanliga prov gav **674,71 s**, tre varma
+12,36/11,69/12,32 s och cgroup **1,848 GiB**, alla 988,32 kr/hash/audit PASS.
+Inläsning 49,52 s; körkommandot inklusive fyra anrop 772,42 s. Detta är
+ett kallt processprov, inte tre. Matchad instrumentering är ännu inte
+återkörd. Två ytterligare kalla processer och resten av cachelägesproven
+pågår seriellt. Inte integrerad ännu.
+
+**Ingen standardkvalificering:** fler kalla jämförbara prov, slutkodens
+cachelägen, versionsbyte/serialisering, övrig pilot och slutmatris återstår.
+`legacy` och `library_merge_generations=False` förblir standard. Ingen
+produktion, aktiv fakta-/prisversion, insamling, schema eller samtidighet
+har ändrats. [Rapport och underlag](reviews/preparation-memory-20261024.md).
+
+---
+
 # 2026-10-24: Förberedelseoptimering mätt; kvarstående kvalificering
 
 Kandidat `193629f`, [PR #9](https://github.com/ossebosse/smako/pull/9).

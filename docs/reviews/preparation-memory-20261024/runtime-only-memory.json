@@ -1,0 +1,812 @@
+{
+  "schema": "smako-runtime-cleanup-only-memory-v1",
+  "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+  "status": "THREE_ORDINARY_OPERATION_TRIALS_PASSED_NOT_FULL_RELEASE",
+  "trials": [
+    {
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "report": {
+        "schema": "smako-temporary-catalogue-memory-v1",
+        "status": "DIAGNOSTIC_ONLY_NO_MENU_OR_AUDIT",
+        "inputs": {
+          "now": "2026-10-23T06:00:02.869273+00:00",
+          "sha256": {
+            "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+            "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+            "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+          }
+        },
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "caller_phase_cleanup": false,
+        "old_universe": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af",
+        "new_universe": "price-universe:45449cf8ec33155a294c479f5852e7e4a0cf3b7fa8a54f2d9a7ca69833fddea2",
+        "source_strategy_change_is_synthetic": true,
+        "stages": [
+          {
+            "stage": "fixture_created_before_load",
+            "elapsed_seconds": 4.487036827020347,
+            "memory": {
+              "VmHWM": 1145511936,
+              "VmRSS": 187437056,
+              "cgroup_current": 368168960,
+              "cgroup_peak": 1328136192,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "old_active_with_facts",
+            "elapsed_seconds": 57.1000983947888,
+            "memory": {
+              "VmHWM": 1145511936,
+              "VmRSS": 1015177216,
+              "cgroup_current": 1197518848,
+              "cgroup_peak": 1328136192,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "before_ordinary_write_artifact",
+            "elapsed_seconds": 57.10094587365165,
+            "memory": {
+              "VmHWM": 1145511936,
+              "VmRSS": 1015181312,
+              "cgroup_current": 1197514752,
+              "cgroup_peak": 1328136192,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "ordinary_write_artifact_complete",
+            "elapsed_seconds": 88.47909883502871,
+            "memory": {
+              "VmHWM": 1545576448,
+              "VmRSS": 1342660608,
+              "cgroup_current": 1720373248,
+              "cgroup_peak": 1923973120,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "before_overlapping_version_load",
+            "elapsed_seconds": 88.47987246187404,
+            "memory": {
+              "VmHWM": 1545576448,
+              "VmRSS": 1342660608,
+              "cgroup_current": 1720369152,
+              "cgroup_peak": 1923973120,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "atomic_swap_completed_with_old_reader_alive",
+            "elapsed_seconds": 137.81197325093672,
+            "memory": {
+              "VmHWM": 1793093632,
+              "VmRSS": 1749221376,
+              "cgroup_current": 2127622144,
+              "cgroup_peak": 2172104704,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "complete",
+            "elapsed_seconds": 137.81335355667397,
+            "memory": {
+              "VmHWM": 1793093632,
+              "VmRSS": 1749221376,
+              "cgroup_current": 2127618048,
+              "cgroup_peak": 2172104704,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          }
+        ],
+        "serialized_sha256": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "serialized_bytes": 191730753,
+        "held_old_products": 89458,
+        "held_new_products": 89458,
+        "held_fact_rows": 71138,
+        "memory_target_passed": true
+      },
+      "receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:38:59.914862605Z",
+          "FinishedAt": "2026-10-24T15:41:23.635928741Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 143.93864725297317,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/runtime-only-memory-eeda184/1",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/tmp/temporary_memory_runtime_only.py",
+            "Destination": "/temporary_memory_entry.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      },
+      "final_resource": {
+        "memory": {
+          "VmHWM": 1793093632,
+          "VmRSS": 1749221376,
+          "cgroup_current": 2127613952,
+          "cgroup_peak": 2172104704,
+          "swap_current": "0",
+          "swap_max": "0"
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "c46c56125e3d151a74d789a958a33f2876bbdb08d4400edd69c63980572d4c95",
+        "scope": "after all stages and report serialization; before this tiny receipt"
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-eeda184-runtime-memory-1",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/runtime-only-memory-eeda184/1:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "-e",
+        "SMAKO_MEMORY_TARGET_METHOD=17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "-v",
+        "/tmp/temporary_memory_runtime_only.py:/temporary_memory_entry.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/temporary_memory_entry.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--runtime-cleanup-only"
+      ],
+      "raw_file_sha256": {
+        "command.json": "1efeff1a7caeb86796a47ccdb0a29d99492b440f602437d70e8deb7ca15d6636",
+        "receipt.json": "ee9b15f76a2020c18d27eaa6423b0d63c0a73911189b9679cbd850b1a4f74b33",
+        "temporary-memory.json": "6d2847018cda81eec9be8562c797b8e2cf64d08dda863826383ca7bdd7e34806",
+        "final-resource.json": "4596e3ca5bf6b226414137ac89938c7c5599f764d174cc1bc53dfd077ac28e06"
+      }
+    },
+    {
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "report": {
+        "schema": "smako-temporary-catalogue-memory-v1",
+        "status": "DIAGNOSTIC_ONLY_NO_MENU_OR_AUDIT",
+        "inputs": {
+          "now": "2026-10-23T06:00:02.869273+00:00",
+          "sha256": {
+            "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+            "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+            "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+          }
+        },
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "caller_phase_cleanup": false,
+        "old_universe": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af",
+        "new_universe": "price-universe:45449cf8ec33155a294c479f5852e7e4a0cf3b7fa8a54f2d9a7ca69833fddea2",
+        "source_strategy_change_is_synthetic": true,
+        "stages": [
+          {
+            "stage": "fixture_created_before_load",
+            "elapsed_seconds": 4.579003376886249,
+            "memory": {
+              "VmHWM": 1145597952,
+              "VmRSS": 188108800,
+              "cgroup_current": 378933248,
+              "cgroup_peak": 1337692160,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "old_active_with_facts",
+            "elapsed_seconds": 58.69017737777904,
+            "memory": {
+              "VmHWM": 1145597952,
+              "VmRSS": 1017122816,
+              "cgroup_current": 1215455232,
+              "cgroup_peak": 1337692160,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "before_ordinary_write_artifact",
+            "elapsed_seconds": 58.69101800303906,
+            "memory": {
+              "VmHWM": 1145597952,
+              "VmRSS": 1017126912,
+              "cgroup_current": 1215451136,
+              "cgroup_peak": 1337692160,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "ordinary_write_artifact_complete",
+            "elapsed_seconds": 89.88750024605542,
+            "memory": {
+              "VmHWM": 1545388032,
+              "VmRSS": 1355980800,
+              "cgroup_current": 1750765568,
+              "cgroup_peak": 1940951040,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "before_overlapping_version_load",
+            "elapsed_seconds": 89.88833259604871,
+            "memory": {
+              "VmHWM": 1545388032,
+              "VmRSS": 1355980800,
+              "cgroup_current": 1750724608,
+              "cgroup_peak": 1940951040,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "atomic_swap_completed_with_old_reader_alive",
+            "elapsed_seconds": 139.56179563794285,
+            "memory": {
+              "VmHWM": 1793044480,
+              "VmRSS": 1748983808,
+              "cgroup_current": 2144542720,
+              "cgroup_peak": 2189094912,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "complete",
+            "elapsed_seconds": 139.56297261593863,
+            "memory": {
+              "VmHWM": 1793044480,
+              "VmRSS": 1748987904,
+              "cgroup_current": 2144538624,
+              "cgroup_peak": 2189094912,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          }
+        ],
+        "serialized_sha256": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "serialized_bytes": 191730753,
+        "held_old_products": 89458,
+        "held_new_products": 89458,
+        "held_fact_rows": 71138,
+        "memory_target_passed": true
+      },
+      "receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:41:23.864616278Z",
+          "FinishedAt": "2026-10-24T15:43:49.23054024Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 145.596289773006,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/runtime-only-memory-eeda184/2",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/tmp/temporary_memory_runtime_only.py",
+            "Destination": "/temporary_memory_entry.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      },
+      "final_resource": {
+        "memory": {
+          "VmHWM": 1793044480,
+          "VmRSS": 1748987904,
+          "cgroup_current": 2144534528,
+          "cgroup_peak": 2189094912,
+          "swap_current": "0",
+          "swap_max": "0"
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "c46c56125e3d151a74d789a958a33f2876bbdb08d4400edd69c63980572d4c95",
+        "scope": "after all stages and report serialization; before this tiny receipt"
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-eeda184-runtime-memory-2",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/runtime-only-memory-eeda184/2:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "-e",
+        "SMAKO_MEMORY_TARGET_METHOD=17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "-v",
+        "/tmp/temporary_memory_runtime_only.py:/temporary_memory_entry.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/temporary_memory_entry.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--runtime-cleanup-only"
+      ],
+      "raw_file_sha256": {
+        "command.json": "c98dc24ed71d5197361f55ac1aeb4f58e4a9258a3cf7683c0939216f47d60ae8",
+        "receipt.json": "c7a0bfe717a988e5a5da7934b804848963b98cb405a57a114d8c0c540c16b121",
+        "temporary-memory.json": "e58c05291bf8d419347d4a7344c2a5ac45b5b160d6dc48f12ffa603eda23ec61",
+        "final-resource.json": "ec0bc77657e920649f4d1653b9b9460fb8d8d99afa4613a9f83596a55c2211be"
+      }
+    },
+    {
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "report": {
+        "schema": "smako-temporary-catalogue-memory-v1",
+        "status": "DIAGNOSTIC_ONLY_NO_MENU_OR_AUDIT",
+        "inputs": {
+          "now": "2026-10-23T06:00:02.869273+00:00",
+          "sha256": {
+            "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+            "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+            "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+          }
+        },
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "caller_phase_cleanup": false,
+        "old_universe": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af",
+        "new_universe": "price-universe:45449cf8ec33155a294c479f5852e7e4a0cf3b7fa8a54f2d9a7ca69833fddea2",
+        "source_strategy_change_is_synthetic": true,
+        "stages": [
+          {
+            "stage": "fixture_created_before_load",
+            "elapsed_seconds": 4.659784986637533,
+            "memory": {
+              "VmHWM": 1145307136,
+              "VmRSS": 188661760,
+              "cgroup_current": 370733056,
+              "cgroup_peak": 1328189440,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "old_active_with_facts",
+            "elapsed_seconds": 57.27347195893526,
+            "memory": {
+              "VmHWM": 1145307136,
+              "VmRSS": 1015320576,
+              "cgroup_current": 1205202944,
+              "cgroup_peak": 1328189440,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "before_ordinary_write_artifact",
+            "elapsed_seconds": 57.27436591591686,
+            "memory": {
+              "VmHWM": 1145307136,
+              "VmRSS": 1015324672,
+              "cgroup_current": 1205198848,
+              "cgroup_peak": 1328189440,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "ordinary_write_artifact_complete",
+            "elapsed_seconds": 88.27906299382448,
+            "memory": {
+              "VmHWM": 1545596928,
+              "VmRSS": 1341456384,
+              "cgroup_current": 1727410176,
+              "cgroup_peak": 1932124160,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "before_overlapping_version_load",
+            "elapsed_seconds": 88.28003712464124,
+            "memory": {
+              "VmHWM": 1545596928,
+              "VmRSS": 1341456384,
+              "cgroup_current": 1727406080,
+              "cgroup_peak": 1932124160,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "atomic_swap_completed_with_old_reader_alive",
+            "elapsed_seconds": 137.60911436984316,
+            "memory": {
+              "VmHWM": 1793236992,
+              "VmRSS": 1748979712,
+              "cgroup_current": 2135650304,
+              "cgroup_peak": 2180141056,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          },
+          {
+            "stage": "complete",
+            "elapsed_seconds": 137.61038003768772,
+            "memory": {
+              "VmHWM": 1793236992,
+              "VmRSS": 1748983808,
+              "cgroup_current": 2135646208,
+              "cgroup_peak": 2180141056,
+              "swap_current": "0",
+              "swap_max": "0"
+            }
+          }
+        ],
+        "serialized_sha256": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "serialized_bytes": 191730753,
+        "held_old_products": 89458,
+        "held_new_products": 89458,
+        "held_fact_rows": 71138,
+        "memory_target_passed": true
+      },
+      "receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:43:49.43719463Z",
+          "FinishedAt": "2026-10-24T15:46:12.697884893Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 143.46867833891883,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/runtime-only-memory-eeda184/3",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/tmp/temporary_memory_runtime_only.py",
+            "Destination": "/temporary_memory_entry.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      },
+      "final_resource": {
+        "memory": {
+          "VmHWM": 1793236992,
+          "VmRSS": 1748987904,
+          "cgroup_current": 2135642112,
+          "cgroup_peak": 2180141056,
+          "swap_current": "0",
+          "swap_max": "0"
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "c46c56125e3d151a74d789a958a33f2876bbdb08d4400edd69c63980572d4c95",
+        "scope": "after all stages and report serialization; before this tiny receipt"
+      },
+      "command": [
+        "docker",
+        "run",
+        "--name",
+        "smako-preparation-eeda184-runtime-memory-3",
+        "--network",
+        "none",
+        "--read-only",
+        "--cpus",
+        "2",
+        "--memory",
+        "3g",
+        "--memory-swap",
+        "3g",
+        "--pids-limit",
+        "128",
+        "--user",
+        "10001:10001",
+        "--tmpfs",
+        "/tmp:rw,nosuid,size=128m",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend:/srv/app/backend:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data:/srv/app/grocery_data:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+        "-v",
+        "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/code-eeda184:/review:ro",
+        "-v",
+        "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+        "-v",
+        "/opt/smako/evidence/preparation-memory-20261024/runtime-only-memory-eeda184/3:/output:rw",
+        "-e",
+        "PYTHONPATH=/srv/app/backend:/srv/app",
+        "-e",
+        "PYTHON_DOTENV_DISABLED=1",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+        "-v",
+        "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+        "-e",
+        "SMAKO_MEMORY_TARGET_METHOD=17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "-v",
+        "/tmp/temporary_memory_runtime_only.py:/temporary_memory_entry.py:ro",
+        "--entrypoint",
+        "python",
+        "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "-u",
+        "/temporary_memory_entry.py",
+        "--inputs",
+        "/inputs/malmo",
+        "--output",
+        "/output",
+        "--runtime-cleanup-only"
+      ],
+      "raw_file_sha256": {
+        "command.json": "d686bfc54ce4835a811515b6baf37fcf60d9adbd973dc5e68fbfed162f6285ec",
+        "receipt.json": "00c980618cde8b2fe6a46718fd965d2f87d7993bf2d99b0c188b1dde6d20d87d",
+        "temporary-memory.json": "9062f050d8e21e2a7ecca0ebaa07aa48af20afe0b77707d7f5eb349606cd3b0a",
+        "final-resource.json": "f8df497ccced0ffb9c0e821fe7147e51e9ad1f946d5a7dd21b82d3b856e86c76"
+      }
+    }
+  ],
+  "maximum_cgroup_peak_bytes": 2189094912,
+  "caller_phase_cleanup": false,
+  "full_release_qualified": false,
+  "entry_provenance": {
+    "path": "docs/reviews/preparation-memory-20261024/temporary_memory_entry.py",
+    "git_commit": "37cf90b45ea5a70a98ef84607c90d90978c299dd",
+    "git_lf_sha256": "73ec4aed00bc7028e0784460d69ab5c9e9709954f30ee36f94660af2bf78109a",
+    "deployed_line_endings": "CRLF",
+    "deployed_sha256": "c46c56125e3d151a74d789a958a33f2876bbdb08d4400edd69c63980572d4c95",
+    "arguments": [
+      "--runtime-cleanup-only"
+    ]
+  }
+}

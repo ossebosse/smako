@@ -998,6 +998,8 @@ class PersonalPlanner:
         return remaining, allocations
 
     def basket(self, slots, *, final=True, _retained=None):
+        from app.services.plan_jobs import check_cancelled
+        check_cancelled()
         # A narrower search incumbent is a concrete purchase, not merely a
         # recipe seed. Requalify its exact products and private allocation while
         # retaining its package/offer checkout; never send it through a new
@@ -2348,7 +2350,7 @@ class PersonalPlanner:
 
     @timed_stage("candidate_generation_and_qualification")
     def _candidates(self, meal, *, qualified_results=None, fixed_slots=()):
-        from app.services.plan_jobs import report_stage
+        from app.services.plan_jobs import check_cancelled, report_stage
         report_stage("candidate_qualification")
         with performance_span("personal_candidate_generation"):
             if self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
@@ -2396,7 +2398,10 @@ class PersonalPlanner:
             stored_rows = {}
         qualified_rows = {}
         qualification_hits = 0
-        for recipe in candidates:
+        for completed, recipe in enumerate(candidates):
+            check_cancelled()
+            if completed % 25 == 0:
+                report_stage("candidate_qualification", completed=completed, total=len(candidates), unit="recipes")
             issued_key = content_digest(recipe) if reuse else None
             cached = stored_rows.get(issued_key)
             # The recipe registry supplies exact canonical, scaled values. A
@@ -2522,6 +2527,7 @@ class PersonalPlanner:
             self.diagnostics.pools[-1]["qualified"] = len(valid)
             from app.services.recipe_library import prepared_recipe_lookup
             prepared_recipe_lookup(meal.servings)
+        report_stage("candidate_qualification", completed=len(candidates), total=len(candidates), unit="recipes")
         if not valid:
             if self.complete:
                 if not candidates:
@@ -2769,6 +2775,7 @@ class PersonalPlanner:
         return records, content_digest({"menu_inputs_v1": sorted({content_digest(r) for r in records})})
 
     def _search_verified_reference(self, options, search_kwargs, *, _ignore_cache=False):
+        from app.services.basket_calculator import BasketCalculator
         from app.services.library_publications import (
             index_slots,
             load_certificate,
@@ -2778,6 +2785,8 @@ class PersonalPlanner:
         )
         from app.services.library_search_cohorts import merged_library_cohorts, per_package_cohorts
         from app.services.meal_library_content import identity
+        from app.services.menu_optimizer import LibraryPrefixCheckpoint
+        from app.services.plan_jobs import report_stage
         from app.services.planner_context import content_digest, planner_context
         from app.services.recipe_library import current_recipe_generations, current_recipes
         from app.services.reference_library import reference_cohorts, reference_manifest
@@ -2805,6 +2814,12 @@ class PersonalPlanner:
         records, candidate_inputs = self._menu_candidate_inputs(context)
         records.extend(self.artifacts.recent_menu_records(context) if self.artifacts is not None else ())
         prior_records = list({content_digest(record): record for record in records}.values())
+        # Stateful/injected calculation paths keep independent call behavior.
+        legacy_prefix = (LibraryPrefixCheckpoint()
+            if type(self) is PersonalPlanner and type(self.service) is MealPlanService
+            and type(getattr(self, "optimizer", None)) is BasketOptimizer
+            and type(self.optimizer.calculator) is BasketCalculator
+            and getattr(self.basket, "__func__", None) is PersonalPlanner.basket else None)
 
         def audit(chosen):
             self._defer_search_audit = False
@@ -2821,7 +2836,8 @@ class PersonalPlanner:
                 kwargs.pop(key, None)
             return kwargs
 
-        for node in nodes:
+        for completed, node in enumerate(nodes):
+            report_stage("library_preparation", completed=completed, total=len(nodes), unit="publications")
             cached = (load_certificate(self.artifacts, context, node, options, predecessor, slot_index)
                       if chain and not _ignore_cache else None)
             if cached is not None:
@@ -2873,6 +2889,7 @@ class PersonalPlanner:
                 legacy = self.service.menu_optimizer.optimize_library_slots(
                     per_package_cohorts(prefix_options, generations,
                         first_generation=first, last_generation=node["generation"]),
+                    _prefix_checkpoint=legacy_prefix, _prefix_context=(context, self._defer_search_audit),
                     **independent_kwargs())
                 previous.append(legacy)
                 legacy_report = {"status": "proposal_completed", "proposed_paid": str(money(legacy[1]["basket"].total))}
@@ -2953,6 +2970,7 @@ class PersonalPlanner:
                     culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0]))
                 predecessor = certificate["sha256"]
             self._release_idle_memory()
+        report_stage("library_preparation", completed=len(nodes), total=len(nodes), unit="publications")
         chosen, result = incumbent
         if result is None:
             # The durable certificate is result evidence, never current basket

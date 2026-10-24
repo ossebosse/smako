@@ -209,3 +209,33 @@ def test_cancelled_real_thread_keeps_admission_and_duplicate_key_until_it_exits(
         assert (await controller.stats()).in_flight_keys == 0
 
     asyncio.run(scenario())
+
+
+def test_cancelled_personal_thread_stops_at_the_next_stage_boundary():
+    from app.api.plan import _run_personal_thread
+    from app.services.plan_jobs import report_stage
+
+    async def scenario():
+        started, release = threading.Event(), threading.Event()
+        calls = []
+
+        def work():
+            calls.append("first unit")
+            started.set()
+            assert release.wait(timeout=5)
+            report_stage("final_audit")
+            calls.append("must not execute")
+
+        task = asyncio.create_task(_run_personal_thread(work))
+        try:
+            while not started.is_set():
+                await asyncio.sleep(0.001)
+            task.cancel()
+            await asyncio.sleep(0)
+        finally:
+            release.set()
+        with pytest.raises(asyncio.CancelledError):
+            await task
+        assert calls == ["first unit"]
+
+    asyncio.run(scenario())

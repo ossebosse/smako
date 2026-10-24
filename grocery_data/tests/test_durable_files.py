@@ -74,3 +74,20 @@ def test_storage_preflight_fails_before_scratch_creation_with_structured_counts(
     assert not destination.exists()
     assert not list(tmp_path.glob(".*.tmp"))
 
+
+def test_atomic_write_releases_input_before_validator_builds_another_graph(tmp_path):
+    released = []
+
+    class TrackedBytes(bytes):
+        def __del__(self):
+            released.append(True)
+
+    destination = tmp_path / 'bounded.json'
+
+    def validate(candidate):
+        assert released == [True]
+        assert candidate.read_bytes() == b'complete-payload'
+
+    atomic_write_bytes(destination, TrackedBytes(b'complete-payload'), validator=validate)
+    assert destination.read_bytes() == b'complete-payload'
+

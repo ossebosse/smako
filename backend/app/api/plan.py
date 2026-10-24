@@ -275,27 +275,32 @@ async def _run_admitted_plan(
 
 
 async def _run_personal_thread(work):
-    """Retain admission until a non-cancellable Python worker actually exits.
+    """Request cooperative stop, retaining admission until the worker exits.
 
     Cancelling asyncio.to_thread only abandons its await, not the running
     calculation. Shield and join it before propagating cancellation so a
     disconnect/shutdown cannot admit uncontrolled overlapping workers.
     """
-    worker = asyncio.create_task(asyncio.to_thread(work))
-    cancelled = None
-    while not worker.done():
-        try:
-            await asyncio.shield(worker)
-        except asyncio.CancelledError as exc:
-            cancelled = exc
-        except Exception:
-            if cancelled is not None:
-                raise cancelled
-            raise
-    if cancelled is not None:
-        worker.exception()  # Consume any error before discarding the result.
-        raise cancelled
-    return worker.result()
+    from app.services.plan_jobs import cancellable_work
+
+    with cancellable_work() as stop:
+        worker = asyncio.create_task(asyncio.to_thread(work))
+        cancelled = None
+        while not worker.done():
+            try:
+                await asyncio.shield(worker)
+            except asyncio.CancelledError as exc:
+                stop.set()
+                cancelled = exc
+            except Exception:
+                if cancelled is not None:
+                    raise cancelled
+                raise
+        if cancelled is not None:
+            if not worker.cancelled():
+                worker.exception()  # Consume any error before discarding the result.
+            raise cancelled
+        return worker.result()
 
 
 async def _run_personal_work(
@@ -677,12 +682,32 @@ def _plan_jobs(http_request: Request, settings: Settings) -> PlanJobs:
 
 
 def _pending_plan_job(job):
+    stage, progress = job.status  # One atomic snapshot from the worker thread.
     return JSONResponse(status_code=202, content={
         "status": "pending", "status_url": f"/api/plan-jobs/{job.job_id}",
         "request_id": job.request_id,
-        "stage": job.stage,
+        "stage": stage,
+        "progress": progress,
     }, headers={"Cache-Control": "private, no-store", "Retry-After": "2",
                 "Preference-Applied": "respond-async"})
+
+
+@router.delete("/plan-jobs/{job_id}", status_code=202)
+async def cancel_plan_job(job_id: str, http_request: Request):
+    settings = get_settings()
+    job = _plan_jobs(http_request, settings).get(job_id, _plan_actor_hash(http_request, settings))
+    headers = {"Cache-Control": "private, no-store"}
+    if job is None:
+        raise HTTPException(404, "Planeringsförsöket finns inte i din session.", headers=headers)
+    if job.task.done() and not job.task.cancelled():
+        raise HTTPException(409, "Planeringsförsöket är redan avslutat.", headers=headers)
+    if not job.task.done():
+        job.status = ("cancelling", None)
+        job.task.cancel()
+    return JSONResponse(status_code=202, content={
+        "status": "cancelled" if job.task.cancelled() else "cancelling",
+        "status_url": f"/api/plan-jobs/{job.job_id}",
+    }, headers=headers)
 
 
 @router.get("/plan-jobs/{job_id}", response_model=SavedPlan, status_code=201)

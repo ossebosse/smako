@@ -133,6 +133,9 @@ def atomic_write_bytes(
             raise OSError(errno.EIO, "critical-file size verification failed")
         if _sha256(temporary) != hashlib.sha256(payload).hexdigest():
             raise OSError(errno.EIO, "critical-file hash verification failed")
+        # The scratch file has the verified payload. Release the potentially
+        # large input before a validator materializes its own parsed graph.
+        del payload
         if validator is not None:
             validator(temporary)
         os.replace(temporary, destination)
