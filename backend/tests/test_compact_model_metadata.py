@@ -142,6 +142,14 @@ def test_construct_preserves_external_metadata_alias_and_normal_validation_stays
         CompactChild(amount="invalid decimal")
 
 
+def test_pickle_state_exposes_the_models_owned_native_set():
+    value = CompactChild(amount="2.00")
+    fields = value.__getstate__()["__pydantic_fields_set__"]
+    assert type(fields) is set and fields is value.model_fields_set
+    fields.clear()
+    assert value.model_dump(exclude_unset=True) == {}
+
+
 def test_unknown_copy_fields_and_custom_serializers_keep_native_metadata():
     copied = CompactChild().model_copy(update={"unknown_field": 4})
     assert type(copied.__pydantic_fields_set__) is set

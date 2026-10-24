@@ -184,6 +184,12 @@ class CompactFrozenModel(BaseModel):
         super().__setstate__(state)
         object.__setattr__(self, "_smako_fields_observed", True)
 
+    def __getstate__(self):
+        # The pickle-state protocol exposes the metadata set too. Preserve its
+        # native type and alias to this model, just like a public property read.
+        _ = self.model_fields_set
+        return super().__getstate__()
+
     @model_serializer(mode="wrap")
     def _serialize_compact_fields(
         self, handler: SerializerFunctionWrapHandler, info: SerializationInfo
