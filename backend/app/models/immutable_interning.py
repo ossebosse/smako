@@ -11,17 +11,25 @@ from contextvars import ContextVar
 from datetime import date, datetime
 from decimal import Decimal
 from enum import Enum
+from sys import getsizeof
 
 from pydantic import BaseModel
 
 _ACTIVE = ContextVar("artifact_immutable_models", default=None)
 MAX_MODELS = 65536
+MAX_POOL_BYTES = 32 * 1024 * 1024
+
+
+def _metadata_bytes(value):
+    if isinstance(value, type):
+        return 0  # Existing model/primitive classes are not owned by the pool.
+    return getsizeof(value) + (sum(_metadata_bytes(v) for v in value) if isinstance(value, tuple) else 0)
 
 
 class _Pool:
     def __init__(self):
         self.values = {}
-        self.count = self.hits = 0
+        self.count = self.hits = self.retained_bytes = 0
 
     def visit(self, value):
         # Python equality collapses some distinct serialized values (UTC vs
@@ -43,7 +51,8 @@ class _Pool:
             rows = [self.visit(child) for child in value]
             changed = any(row[0] is not child for row, child in zip(rows, value, strict=True))
             result = type(value)(row[0] for row in rows) if changed else value
-            return result, isinstance(value, tuple) and all(row[1] for row in rows), tuple(row[2] for row in rows)
+            metadata = tuple((index, row[2]) for index, row in enumerate(rows) if row[2] is not None)
+            return result, isinstance(value, tuple) and all(row[1] for row in rows), metadata or None
         if not isinstance(value, BaseModel) or not value.model_config.get("frozen"):
             return value, False, None
         if value.__pydantic_private__ or value.__pydantic_extra__:
@@ -65,15 +74,20 @@ class _Pool:
             object.__setattr__(value, "__pydantic_fields_set__", set(supplied))
         if not immutable:
             return value, False, None
-        key = type(value), hash(value), frozenset(value.model_fields_set), tuple(children)
+        key = type(value), hash(value), tuple(sorted(value.model_fields_set)), tuple(children)
         bucket = self.values.get(key, ())
         for existing in bucket:
             if existing == value:
                 self.hits += 1
                 return existing, True, id(existing)
-        if self.count < MAX_MODELS:
+        # Values are already owned by the parsed artifact. Budget the pool's
+        # additional keys/metadata plus conservative dict/list entry overhead;
+        # no second evidence graph is retained outside this validation scope.
+        size = _metadata_bytes(key) + 256
+        if self.count < MAX_MODELS and self.retained_bytes + size <= MAX_POOL_BYTES:
             self.values.setdefault(key, []).append(value)
             self.count += 1
+            self.retained_bytes += size
         return value, True, id(value)
 
 

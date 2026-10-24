@@ -62,6 +62,15 @@ def test_pool_capacity_falls_back_to_unshared_equal_values(monkeypatch):
         assert pool.count == 1
 
 
+def test_pool_byte_budget_falls_back_without_retaining_keys(monkeypatch):
+    monkeypatch.setattr(interning, "MAX_POOL_BYTES", 0)
+    with interning.immutable_model_pool() as pool:
+        first = interning.share_frozen_models(Frozen(value="same"))
+        second = interning.share_frozen_models(Frozen(value="same"))
+        assert first == second and first is not second
+        assert pool.count == pool.retained_bytes == 0
+
+
 def test_equal_python_values_with_different_serialization_remain_distinct():
     class Evidence(BaseModel):
         model_config = ConfigDict(frozen=True)
