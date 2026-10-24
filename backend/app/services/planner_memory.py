@@ -27,13 +27,14 @@ def _allocator_trim():
     return function
 
 
-def release_idle_memory():
-    collected = gc.collect()
+def release_idle_memory(*, generation=2):
+    collected = gc.collect(generation)
     function = _allocator_trim()
     released = bool(function(0)) if function is not None else None
     increment_performance_counter("planner_memory_reclamation_calls")
+    increment_performance_counter(f"planner_memory_reclamation_generation_{generation}")
     increment_performance_counter("planner_unreachable_objects_collected", collected)
     increment_performance_counter("planner_allocator_trim_available", function is not None)
     increment_performance_counter("planner_allocator_trim_released", released is True)
-    return {"collected": collected, "allocator_supported": function is not None,
+    return {"collected": collected, "generation": generation, "allocator_supported": function is not None,
             "allocator_released": released}

@@ -2745,10 +2745,10 @@ class PersonalPlanner:
         return (money(basket.total), surplus_key(basket) if self.spec.surplus_mode == "minimize" else ())
 
     @timed_stage("memory_reclamation")
-    def _release_idle_memory(self):
+    def _release_idle_memory(self, *, recent=False):
         from app.services.planner_memory import release_idle_memory
 
-        return release_idle_memory()
+        return release_idle_memory(generation=1 if recent else 2)
 
     def _culinary_snapshot(self, *menus):
         from app.services.menu_optimizer import LazyPairwiseSimilarities
@@ -2884,7 +2884,7 @@ class PersonalPlanner:
                     row.update(search_track="legacy_full_library", publication_size=node["count"])
                 legacy_report["evaluations"] = sum(row.get("evaluations_executed", 0)
                     for row in self.diagnostics.search[trace_start:])
-                self._release_idle_memory()
+                self._release_idle_memory(recent=True)
 
             def search(track, emit, *, budget=budget, completed=completed, prefixes=prefixes,
                        probes=probes, improvements=improvements, node=node, prefix_options=prefix_options):
@@ -2932,7 +2932,7 @@ class PersonalPlanner:
                             row["search_track"] = track
                             row["improvement_path"] = phase
                             row["publication_size"] = node["count"]
-                        self._release_idle_memory()
+                        self._release_idle_memory(recent=True)
 
             chosen, result, report = verified_search(search, audit=audit,
                 accepts=lambda chosen: accepts(chosen, final=True),
