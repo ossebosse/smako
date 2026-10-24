@@ -245,6 +245,51 @@ def test_other_owners_delivery_cannot_invalidate_or_enter_prepared_candidates(tm
     assert result.optimized_basket == expensive.optimized_basket
 
 
+@pytest.mark.parametrize("legacy_outcome", ["cheaper", "invalid", "search_miss"])
+def test_full_library_legacy_candidate_competes_independently_once(tmp_path, legacy_outcome):
+    from app.errors import IncompleteBasketError
+    from app.services.personal_policy import PolicyConflict
+
+    subject, _, _, cheap, expensive = _expensive_prepared_delivery(tmp_path)
+    current = subject(artifacts=None)
+    optimize = current.service.menu_optimizer.optimize_library_slots
+    calls, seeds, reject = [], [], False
+
+    def tracks(cohorts, *, evaluate, accepts, **kwargs):
+        nonlocal reject
+        calls.append(True)
+        seeds.append(kwargs["initial_evaluations"])
+        if len(calls) == 1:
+            if legacy_outcome == "search_miss":
+                raise IncompleteBasketError("Synthetic legacy search miss")
+            completed = optimize(cohorts, evaluate=evaluate, accepts=accepts, **kwargs)
+            assert completed[1]["basket"].total == cheap.optimized_basket.total
+            reject = legacy_outcome == "invalid"
+            return completed
+        slots = [next(s for s in list(cohorts)[-1][1][0]
+                      if s.recipe.design.variant_id == "protein")]
+        assert accepts(slots, final=True)
+        return slots, evaluate(slots, final=False)
+
+    audit = current.auditor.audit
+
+    def checkout(ingredients, basket, **kwargs):
+        if reject and basket.total == cheap.optimized_basket.total:
+            raise PolicyConflict("Synthetic legacy proposal fails current checkout")
+        return audit(ingredients, basket, **kwargs)
+
+    current.auditor.audit = checkout
+    current.service.menu_optimizer.optimize_library_slots = tracks
+    result = current.create(_compare_scopes=False)
+    expected = cheap if legacy_outcome == "cheaper" else expensive
+    assert result.optimized_basket == expected.optimized_basket
+    assert result.personal.checks["checkout_audit"]["passed"]
+    assert len(calls) >= 3 and len({id(seed) for seed in seeds}) == len(seeds)
+    preparation = result.personal.checks["verified_reference"]["publications"][0]["legacy_full_library_preparation"]
+    assert preparation["seconds"] >= 0
+    assert preparation["status"] == ("search_miss" if legacy_outcome == "search_miss" else "proposal_completed")
+
+
 @pytest.mark.parametrize("change", ["pantry", "facts", "date", "settings", "locks", "view"])
 def test_context_invalidation(change):
     from datetime import timedelta

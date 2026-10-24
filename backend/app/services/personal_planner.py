@@ -2758,7 +2758,7 @@ class PersonalPlanner:
             restore_slots,
             save_certificate,
         )
-        from app.services.library_search_cohorts import merged_library_cohorts
+        from app.services.library_search_cohorts import merged_library_cohorts, per_package_cohorts
         from app.services.meal_library_content import identity
         from app.services.planner_context import content_digest, planner_context
         from app.services.recipe_library import current_recipe_generations, current_recipes
@@ -2783,6 +2783,7 @@ class PersonalPlanner:
         # predecessor certificate. Still retain any valid pinned reference.
         nodes = chain or ({"generation": self._generation, "count": len(current)},)
         reports, loaded, replayed, chain_complete = [], 0, 0, True
+        generations = current_recipe_generations(self.library_generation)
         records, candidate_inputs = self._menu_candidate_inputs(context)
         records.extend(self.artifacts.recent_menu_records(context) if self.artifacts is not None else ())
         prior_records = list({content_digest(record): record for record in records}.values())
@@ -2793,6 +2794,14 @@ class PersonalPlanner:
                 return evaluate(chosen, final=True)
             finally:
                 self._defer_search_audit = True
+
+        def independent_kwargs():
+            kwargs = dict(search_kwargs)
+            kwargs["initial_evaluations"] = OrderedDict(search_kwargs.get("initial_evaluations") or {})
+            for key in ("completed_prefix_indexes", "cohort_prefix_sizes", "checkpoint_probe_indexes",
+                        "unordered_small_pool_limit"):
+                kwargs.pop(key, None)
+            return kwargs
 
         for node in nodes:
             cached = (load_certificate(self.artifacts, context, node, options, predecessor, slot_index)
@@ -2837,6 +2846,27 @@ class PersonalPlanner:
                     except (ValueError, IncompleteBasketError):
                         pass  # Changed facts/locks are requalified, never hidden.
 
+            # The pinned base alone cannot dominate legacy on the full library.
+            # Prepare that independent trajectory once per publication/context;
+            # only its completed candidate enters the normal current checkout.
+            legacy_started, trace_start = perf_counter(), len(self.diagnostics.search)
+            legacy_report = {"status": "search_miss"}
+            try:
+                legacy = self.service.menu_optimizer.optimize_library_slots(
+                    per_package_cohorts(prefix_options, generations,
+                        first_generation=first, last_generation=node["generation"]),
+                    **independent_kwargs())
+                previous.append(legacy)
+                legacy_report = {"status": "proposal_completed", "proposed_paid": str(money(legacy[1]["basket"].total))}
+            except (ValueError, IncompleteBasketError) as exc:
+                legacy_report.update(code=getattr(exc, "code", None), stage=getattr(exc, "stage", None))
+            finally:
+                legacy_report["seconds"] = perf_counter() - legacy_started
+                for row in self.diagnostics.search[trace_start:]:
+                    row.update(search_track="legacy_full_library", publication_size=node["count"])
+                legacy_report["evaluations"] = sum(row.get("evaluations_executed", 0)
+                    for row in self.diagnostics.search[trace_start:])
+
             def search(track, emit, *, budget=budget, completed=completed, prefixes=prefixes,
                        probes=probes, improvements=improvements, node=node, prefix_options=prefix_options):
                 nonlocal reference_winner
@@ -2845,13 +2875,9 @@ class PersonalPlanner:
                 if track == "reference" and reference_winner is not None:
                     emit(*reference_winner)
                     return
-                kwargs = dict(search_kwargs)
-                # optimize_slots consumes initial_evaluations. Each independent
-                # track gets its OWN container, retaining exactly the same seed.
-                kwargs["initial_evaluations"] = OrderedDict(search_kwargs.get("initial_evaluations") or {})
-                for key in ("completed_prefix_indexes", "cohort_prefix_sizes", "checkpoint_probe_indexes",
-                            "unordered_small_pool_limit"):
-                    kwargs.pop(key, None)
+                # Each independent track owns its seed container; the ordinary
+                # optimizer consumes initial_evaluations during its first beam.
+                kwargs = independent_kwargs()
                 if track == "improvement":
                     budget.started = monotonic()
 
@@ -2895,7 +2921,8 @@ class PersonalPlanner:
                 previous=previous)
             incumbent = chosen, result
             reports.append({**report, "publication_size": node["count"],
-                            "paid": str(money(result["basket"].total))})
+                            "paid": str(money(result["basket"].total)),
+                            "legacy_full_library_preparation": legacy_report})
             chain_complete = chain_complete and report["budget_stop"] != "wall_time_safety_stop"
             replayed += 1
             if chain and reference_winner is not None:
@@ -3525,11 +3552,10 @@ class PersonalPlanner:
         search = self.service.menu_optimizer.optimize_slots
         search_input, library_kwargs = options, {}
         if incremental_library:
-            from app.services.meal_library_content import identity
+            from app.services.library_search_cohorts import per_package_cohorts
             from app.services.recipe_library import current_recipe_generations
             generations = current_recipe_generations(self.library_generation)
             first = 1 if self.request.diversity_mode == "cheapest" else min(2, self._generation)
-            cohorts = range(first, self._generation + 1)
             if getattr(self.settings, "library_merge_generations", False):
                 from app.services.library_search_cohorts import merged_library_cohorts
                 from app.services.recipe_library import current_recipes
@@ -3539,11 +3565,8 @@ class PersonalPlanner:
                 library_kwargs.update(completed_prefix_indexes=completed, cohort_prefix_sizes=prefixes,
                                       checkpoint_probe_indexes=probes)
             else:
-                search_input = [(generation, [
-                    [s for s in group if not s.recipe or not s.recipe.design
-                     or generations.get(identity(s.recipe), self._generation) <= generation]
-                    for group in options
-                ]) for generation in cohorts]
+                search_input = per_package_cohorts(options, generations,
+                    first_generation=first, last_generation=self._generation)
             search = self.service.menu_optimizer.optimize_library_slots
             library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
             from app.services.week_refinement import qualified_joint_proposals

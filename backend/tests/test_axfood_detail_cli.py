@@ -4,6 +4,7 @@ import importlib
 import json
 import sys
 from contextlib import nullcontext
+from datetime import timedelta
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -13,6 +14,7 @@ from backend.tests.test_axfood_detail_archive import CODE, NOW, raw
 from grocery_data.app.services.axfood_detail_archive import (
     publish_release,
     retain_response,
+    selection_state,
     verify_release,
 )
 
@@ -22,6 +24,8 @@ def cli(tmp_path, monkeypatch):
     monkeypatch.syspath_prepend(str(Path(__file__).parents[2] / "scripts"))
     fetch = importlib.import_module("fetch_axfood_product_details")
     monkeypatch.setattr(fetch, "RefreshRunLock", lambda *args: nullcontext())
+    monkeypatch.setattr(fetch, "selection_state",
+                        lambda *args: selection_state(*args, now=NOW + timedelta(days=1)))
     engine = SimpleNamespace(dispose=lambda: None)
     monkeypatch.setattr("grocery_data.app.storage.create_database_engine", lambda *args: engine)
     monkeypatch.setattr("grocery_data.app.storage.create_session_factory", lambda *args: lambda: nullcontext(None))

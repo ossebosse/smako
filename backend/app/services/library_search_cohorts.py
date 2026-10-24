@@ -19,6 +19,14 @@ MERGED_SEARCH_CONTRACT = {
 }
 
 
+def per_package_cohorts(options, generations, *, first_generation, last_generation):
+    """The legacy trajectory, shared by ordinary search and preparation."""
+    return [(generation, [
+        [s for s in group if not s.recipe or not s.recipe.design
+         or generations.get(identity(s.recipe), last_generation) <= generation]
+        for group in options]) for generation in range(first_generation, last_generation + 1)]
+
+
 def merged_library_cohorts(options, recipes, generations, *, first_generation, base_limit=BASE_PREFIX_LIMIT):
     ordered = sorted(enumerate(recipes), key=lambda row: (generations[identity(row[1])], row[0]))
     positions = {identity(recipe): index for index, (_, recipe) in enumerate(ordered, 1)}
