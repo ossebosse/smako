@@ -63,6 +63,27 @@ class IngredientProfile:
 type StateKey = tuple[int | None, tuple[object, ...]]
 
 
+@dataclass
+class LibraryPrefixCheckpoint:
+    """One cold batch's unfinalized trajectory, never an earlier winner seed.
+
+    Only the ordinary optimizer with fixed callbacks/context may use this.
+    Capture happens before terminal refinement: that work must not feed into
+    the next publication's independent substitution path. The existing LRU
+    and secondary objective accompany the trajectory; each requested prefix
+    still runs its own terminal refinement and the caller's current checkout.
+    No checkpoint survives the caller's request or enters a durable artifact.
+    """
+
+    context: tuple | None = None
+    prefixes: tuple = ()
+    initial: tuple = ()
+    state: tuple | None = None
+
+    def clear(self):
+        self.context, self.prefixes, self.initial, self.state = None, (), (), None
+
+
 _VERIFICATION_RANK: dict[BasketVerificationStatus, int] = {
     BasketVerificationStatus.VERIFIED: 0,
     BasketVerificationStatus.VERIFIED_WITH_ESTIMATES: 1,
@@ -897,6 +918,7 @@ class MenuOptimizer:
                                refinement_score=None, joint_proposals=None, unordered_small_pool_limit=0,
                                completed_prefix_indexes=(), cohort_prefix_sizes=(),
                                checkpoint_probe_indexes=(),
+                               _prefix_checkpoint=None, _prefix_context=None,
                                **search_options):
         """Seed once, then try at most two sweeps of single-slot substitutions.
 
@@ -904,7 +926,9 @@ class MenuOptimizer:
         Qualification and product caches belong to the caller's ONE planner.
         This additional 256-entry cache shares exact ordered baskets between
         failed seed attempts and substitutions, with final/prefix checks separate.
-        Nothing survives this call; the caller independently audits the winner.
+        Ordinarily nothing survives this call. The verified caller may retain
+        a pre-refinement checkpoint within ONE fixed cold batch, under the
+        exact same ordered prefix/context. The winner is independently audited.
         This is a bounded neighbourhood search, not an optimality proof.
         """
         cohorts = tuple(cohorts)
@@ -922,6 +946,27 @@ class MenuOptimizer:
 
         def slot_key(slot):
             return slot.id, slot.day, slot.meal_type, keys.key(slot.recipe)
+
+        checkpoint, prefix_keys, checkpoint_key, initial = None, (), None, ()
+        if (type(_prefix_checkpoint) is LibraryPrefixCheckpoint and _prefix_context is not None
+                and type(self) is MenuOptimizer and type(self.normalizer) is IngredientNormalizer
+                and not (completed_prefix_indexes or checkpoint_probe_indexes or unordered_small_pool_limit)):
+            # The opt-in caller owns fixed pure callbacks for this batch. Reject
+            # unrecognized mutable option shapes rather than guessing a key.
+            parameters = tuple((name, value) for name, value in sorted(search_options.items())
+                               if name != "initial_evaluations")
+            if all(value is None or type(value) in (str, int, float, bool, Decimal) or callable(value)
+                   for _, value in parameters):
+                checkpoint = _prefix_checkpoint
+                checkpoint_key = (_prefix_context, evaluate, accepts, score, retention_score,
+                    refinement_selector, substitution_selector, substitution_screen, substitution_order,
+                    substitution_slot_limit, seed_selector, refinement_score, joint_proposals,
+                    decision_observer, tuple(cohort_prefix_sizes), parameters)
+                initial = tuple((search_options.get("initial_evaluations") or {}).items())
+                prefix_keys = tuple((generation, tuple(tuple(slot_key(slot) for slot in group)
+                                    for group in groups)) for generation, groups in cohorts)
+        if isinstance(_prefix_checkpoint, LibraryPrefixCheckpoint) and checkpoint is None:
+            _prefix_checkpoint.clear()
 
         def cached_evaluate(slots, *, final):
             nonlocal hits
@@ -1171,7 +1216,29 @@ class MenuOptimizer:
         incumbent, previous, last_error = None, None, None
         completed_best = None
         archive_rank = refinement_score or retention_score
+        offset = 0
+        if checkpoint is not None:
+            same_initial = (len(checkpoint.initial) == len(initial)
+                and all(old_key == key and old_value is value
+                        for (old_key, old_value), (key, value) in zip(checkpoint.initial, initial, strict=True)))
+            if (checkpoint.state is not None and checkpoint.context == checkpoint_key and same_initial
+                    and prefix_keys[:len(checkpoint.prefixes)] == checkpoint.prefixes):
+                offset = len(checkpoint.prefixes)
+                incumbent, previous, secondary_best, saved_cache = checkpoint.state
+                cache = OrderedDict(saved_cache)
+                if search_options.get("initial_evaluations") is not None:
+                    search_options["initial_evaluations"].clear()
+                trace.append({"library_phase": "resumed_prefix", "library_generation": cohorts[offset-1][0],
+                    "resumed_cohorts": offset, "depth": len(previous), "beam_width": 0,
+                    "proposals": 0, "constraints_rejected": 0, "evaluation_rejected": 0,
+                    "priced": 0, "retained": 0, "beam_pruned": 0,
+                    "evaluations_executed": 0, "evaluation_cache_hits": 0})
+                increment_performance_counter("library_prefix_cohorts_resumed", offset)
+            else:
+                checkpoint.clear()
         for cohort_index, (generation, options) in enumerate(cohorts):
+            if cohort_index < offset:
+                continue
             saved = incumbent, previous, secondary_best
             trace_start = len(trace)
             try:
@@ -1234,11 +1301,17 @@ class MenuOptimizer:
                     incumbent, previous, secondary_best = saved
                     for row in trace[trace_start:]:
                         row["library_checkpoint_probe"] = True
+        pending_checkpoint = ((incumbent, previous, secondary_best, OrderedDict(cache))
+                              if checkpoint is not None and incumbent is not None else None)
         if incumbent is not None and (len(cohorts) - 1) not in completed_prefix_indexes:
+            generation = cohorts[-1][0]
             finished = finalize(incumbent, previous, generation)
             if completed_best is None or archive_rank(*finished) < archive_rank(*completed_best):
                 completed_best = finished
         if completed_best is not None:
+            if pending_checkpoint is not None:
+                checkpoint.context, checkpoint.prefixes = checkpoint_key, prefix_keys
+                checkpoint.initial, checkpoint.state = initial, pending_checkpoint
             return completed_best
         if last_error is not None:
             raise last_error
