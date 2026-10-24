@@ -131,19 +131,105 @@ def validate(folder, size):
         assert max(Decimal(str(r['paid'])) for r in new['records']) <= min(Decimal(str(r['paid'])) for r in old['records'])
 
 
-def main():
+def validate_warm_ratios(folder):
+    ratios = []
+    for profile in PROFILES:
+        large = report(folder,5000,'verified',profile)['records']
+        small = report(folder.parent/'262',262,'verified',profile)['records']
+        legacy = report(folder,5000,'main',profile)['records']
+        ratio = max(r['wall_seconds'] for r in large[1:])/min(r['wall_seconds'] for r in small[1:])
+        assert ratio <= 1.25, (folder,profile,ratio)
+        assert max(r['wall_seconds'] for r in large[1:]) <= min(r['wall_seconds'] for r in legacy[1:])
+        assert max(r['paid'] for r in large) <= min(r['paid'] for r in small)
+        ratios.append({'profile':profile,'max_5000_over_min_262':ratio,'passed':True})
+    return ratios
+
+
+def make_empty_group(folder):
+    if folder.exists():
+        assert not any(folder.iterdir()), f'Preserve incomplete evidence before resuming: {folder}'
+    else:
+        folder.mkdir(parents=True)
+
+
+def validate_closed_resources(folder, method):
+    receipt = json.loads((folder/'receipt.json').read_bytes())
+    assert receipt['source_commit'] == SOURCE and receipt['image'] == IMAGE
+    assert receipt['state']['ExitCode'] == 0 and not receipt['state']['OOMKilled']
+    assert receipt['resources']['Memory'] == receipt['resources']['MemorySwap'] == 3221225472
+    assert receipt['resources']['NanoCpus'] == 2000000000
+    assert receipt['resources']['NetworkMode'] == 'none' and receipt['resources']['ReadonlyRootfs'] is True
+    assert receipt['user'] == '10001:10001'
+    final = json.loads((folder/'final-resource.json').read_bytes())
+    assert final['method_signature'] == method and final['target_enforced_for_current_runtime']
+    assert final['memory_target_passed'] and final['memory']['peak'] <= LIMIT
+    assert final['memory']['swap_current'] == 0
+
+
+def resume_inputs():
+    completed = json.loads((ROOT/f'runtime-only-memory-{REVISION}/complete.json').read_bytes())
+    assert completed['source_commit'] == SOURCE and completed['samples'] == 3
+    assert completed['status'] == 'RUNTIME_CLEANUP_ONLY_MEMORY_PASSED'
+    enriched = ROOT/f'axfood-facts-{REVISION}'
+    proof = json.loads((enriched/'projection-proof.json').read_bytes())
+    assert proof['source_commit'] == SOURCE and proof['partial_release'] is True
+    assert [r['city'] for r in proof['proofs']] == ['malmo','lund']
+    for row in proof['proofs']:
+        city = row['city']
+        assert row['release_id'] == RELEASE
+        assert row['release_manifest_sha256'] == sha(Path('/srv/smako/data/axfood-product-details/releases')/RELEASE/'manifest.json')
+        assert row['manifest_sha256'] == sha(enriched/city/'matrix-inputs.json')
+        assert row['original_manifest_sha256'] == sha(ORIGINAL/city/'matrix-inputs.json')
+        for inputs in (ORIGINAL,enriched):
+            manifest = json.loads((inputs/city/'matrix-inputs.json').read_bytes())
+            assert all(sha(inputs/city/name) == digest for name,digest in manifest['sha256'].items())
+        old = json.loads((ORIGINAL/city/'matrix-inputs.json').read_bytes())
+        assert row['manifest']['now'] == old['now']
+        assert all(row['manifest']['sha256'][name] == old['sha256'][name]
+                   for name in ('combined-prices.json','combined-request.json'))
+    return enriched
+
+
+def resume_summary(destination):
+    summary = json.loads((destination/'summary.json').read_bytes())
+    expected = [(facts,city,size) for facts in ('original','axfood_103')
+                for city in ('malmo','lund') for size in (262,5000)]
+    observed = [(r['facts_arm'],r['city'],r['size']) for r in summary]
+    assert observed == expected[:len(observed)], 'Completed groups must be an exact ordered prefix'
+    method = json.loads((ROOT/f'candidate-{REVISION}-plain/L5000-verified-distribution.json').read_bytes())['method_signature']
+    for row in summary:
+        assert row['source_commit'] == SOURCE
+        inputs = ORIGINAL if row['facts_arm'] == 'original' else ROOT/f'axfood-facts-{REVISION}'
+        assert row['input_manifest_sha256'] == sha(inputs/row['city']/'matrix-inputs.json')
+        assert row['library_manifest_sha256'] == sha(LIBRARIES/str(row['size'])/'library-manifest.json')
+        folder = destination/row['facts_arm']/row['city']/str(row['size'])
+        validate_closed_resources(folder,method)
+        validate(folder,row['size'])
+        if row['size'] == 5000:
+            assert json.loads((folder.parent/'warm-ratios.json').read_bytes()) == validate_warm_ratios(folder)
+    return summary
+
+
+def main(*, resume=False):
     gates()
-    subprocess.run(['python3','/tmp/run_runtime_only_memory.py'],check=True)
     base = json.loads((ROOT/f'candidate-{REVISION}-plain-command.json').read_bytes())
-    enriched = prepare_facts(base)
+    if resume:
+        enriched = resume_inputs()
+    else:
+        subprocess.run(['python3','/tmp/run_runtime_only_memory.py'],check=True)
+        enriched = prepare_facts(base)
     destination = ROOT/f'pilot-{REVISION}'
-    destination.mkdir()
-    summary = []
+    if not resume:
+        destination.mkdir()
+    summary = resume_summary(destination) if resume else []
+    finished = {(r['facts_arm'],r['city'],r['size']) for r in summary}
     for facts, inputs in (('original',ORIGINAL),('axfood_103',enriched)):
         for city in ('malmo','lund'):
             for size in (262,5000):
+                if (facts,city,size) in finished:
+                    continue
                 folder = destination/facts/city/str(size)
-                folder.mkdir(parents=True); os.chown(folder,10001,10001)
+                make_empty_group(folder); os.chown(folder,10001,10001)
                 args = [s.replace(str(ROOT/f'candidate-{REVISION}-plain')+':/output:rw',str(folder)+':/output:rw')
                         .replace(str(ORIGINAL)+':/inputs:ro',str(inputs)+':/inputs:ro')
                         .replace(str(LIBRARIES/'5000')+':',str(LIBRARIES/str(size))+':') for s in base]
@@ -166,17 +252,7 @@ def main():
                     'library_manifest_sha256':sha(LIBRARIES/str(size)/'library-manifest.json')})
                 write(destination/'summary.json',summary)
                 if size == 5000:
-                    ratios = []
-                    for profile in PROFILES:
-                        large = report(folder,5000,'verified',profile)['records']
-                        small = report(folder.parent/'262',262,'verified',profile)['records']
-                        legacy = report(folder,5000,'main',profile)['records']
-                        ratio = max(r['wall_seconds'] for r in large[1:])/min(r['wall_seconds'] for r in small[1:])
-                        assert ratio <= 1.25, (facts,city,profile,ratio)
-                        assert max(r['wall_seconds'] for r in large[1:]) <= min(r['wall_seconds'] for r in legacy[1:])
-                        assert max(r['paid'] for r in large) <= min(r['paid'] for r in small)
-                        ratios.append({'profile':profile,'max_5000_over_min_262':ratio,'passed':True})
-                    write(folder.parent/'warm-ratios.json',ratios)
+                    write(folder.parent/'warm-ratios.json',validate_warm_ratios(folder))
     write(destination/'complete.json',{'source_commit':SOURCE,'status':'PILOT_PASSED_NOT_FULL_MATRIX',
         'groups':len(summary),'profile_policy_cells':48,'full_matrix_qualified':False})
 

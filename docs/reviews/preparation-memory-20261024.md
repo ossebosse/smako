@@ -120,7 +120,7 @@ svar. Produktmatchningar kan vara fler än dokumenten; de räknas inte som
 ytterligare dokumenttäckning. [Exakta manifest, resurser och kommandon](preparation-memory-20261024/axfood-projection.json).
 Detta är faktaprojektion, inte levererad meny-/auditkvalificering.
 
-### Pilot, första gruppen klar
+### Pilot: Malmö/originalfakta klar vid båda storlekarna
 
 Malmö/originalfakta/262 är avslutad med sex celler och 24 anrop:
 
@@ -132,9 +132,38 @@ Malmö/originalfakta/262 är avslutad med sex celler och 24 anrop:
 
 Alla 24 anrop klarar aktuell audit och gruppens slutliga cgroup-peak är
 **1 626 034 176 byte (1,514 GiB)**, ingen OOM/swap. Prisgrinden mot legacy
-passerar i dessa sex celler. Detta kvalificerar inte hela piloten: 42 celler
-återstår och 5 000/262-tiderna måste jämföras för varje profil/stad/faktaarm.
-Motsvarande Malmö/5 000-grupp körs nu. [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
+passerar i dessa sex celler.
+
+Även Malmö/originalfakta/5 000 är nu avslutad med ytterligare sex celler och
+24 anrop, alla audit PASS. Slutlig cgroup-peak är **2 592 120 832 byte
+(2,414 GiB)** efter samtliga anrop och rapportskrivning, exit 0 utan OOM/swap.
+Hela denna sexcellsprocess tog **8 794,39 s**; det är inte ett enskilt plananrop.
+
+| Profil | Legacy, betalt | V1, betalt | Första v1-anrop | Tre varma v1-anrop | Varm max(5 000)/min(262) |
+| --- | --- | --- | --- | --- | --- |
+| Standard | 511,46 kr | 492,15 kr | 743,97 s | 11,66–12,45 s | 1,1391 |
+| Fördelning | 988,32 kr | 988,32 kr | 672,51 s | 12,93–12,97 s | 1,1315 |
+| Organic-share | 316,26 kr | 316,26 kr | 3 992,65 s | 12,44–12,78 s | 1,1925 |
+
+Samtliga tre kvoter klarar 1,25 och de varma v1-anropen är snabbare än
+motsvarande legacy-anrop. V1:s pris är högst legacy och högst 262-priset.
+Kall förberedelse är däremot fortfarande dyr i organic-share: **66,54 minuter**.
+Diagnostikens ekologiska sökning redovisar 3 365,56 s; fasvärdena överlappar
+och får inte summeras. Alla elva publiceringar förbereds även här. Detta
+är ingen konstant kallstartsgaranti för nya personliga krav.
+
+Totalt är **tolv av 48 pilotceller och 48 auditgodkända anrop** uppmätta;
+36 pilotceller återstår. Lund/262 körs nu. Det är inte full
+standardkvalificering. [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
+
+SSH-kanalen stängdes efter den färdiga Malmögruppen; därefter var sekvensens
+processer avslutade och nästa gruppkatalog tom. Avslutade mätningar har
+behållits. Återupptagningen verifierar källa, underlag, exit/resurser, slutlig
+minnespeak, audit/pris och kvoter innan den hoppar över en färdig grupp.
+Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
+även om transportens läsare stängs. Sex nya avgränsade prov och tidigare sex
+evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
+frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
 
 ## Föregående runtime: tre kalla prov och cachelägen godkända
 

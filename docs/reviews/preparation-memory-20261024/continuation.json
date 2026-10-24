@@ -1,0 +1,46 @@
+{
+  "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+  "entry_sha256": "65df6fb76f584c437d643129aab37a1d6516b7cb940f1c7909e3102ee0f413f8",
+  "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+  "archive_sha256": "b54bf786e1344df6d0fb36e77ba7db97de1ce224bad93d7daed7ecfed494c8a1",
+  "pid": 2939033,
+  "log": "/opt/smako/evidence/preparation-memory-20261024/resumed-pipeline-eeda184-20261024T185412Z.log",
+  "scope": "Current foreground task; resume verified pilot groups, then HTTP/history, matched samples and full matrix",
+  "schema": "smako-frozen-pipeline-continuation-v1",
+  "command": [
+    "ssh",
+    "-o",
+    "ServerAliveInterval=30",
+    "-o",
+    "ServerAliveCountMax=6",
+    "smako",
+    "sudo",
+    "-n",
+    "python3",
+    "-u",
+    "/tmp/resume_current_pipeline.py"
+  ],
+  "raw_metadata_sha256": "3a3cf9dd90d2b8bef5afe5db156b80fae0c4f9138ac91b81e8ef814910466817",
+  "observed_transport_event": "Original SSH client exited 1 with Connection reset; pipeline and pilot processes were absent after two closed groups; next group directory was empty",
+  "completed_groups_at_resume": [
+    {
+      "facts_arm": "original",
+      "city": "malmo",
+      "size": 262
+    },
+    {
+      "facts_arm": "original",
+      "city": "malmo",
+      "size": 5000
+    }
+  ],
+  "next_group": {
+    "facts_arm": "original",
+    "city": "lund",
+    "size": 262
+  },
+  "planning_limits_changed": false,
+  "application_source_changed": false,
+  "scheduler_or_service_installed": false,
+  "full_matrix_qualified": false
+}
