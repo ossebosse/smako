@@ -67,9 +67,9 @@ ger 988,32 kr/hash/audit PASS. Medianen är **662,83 s**, spannet
 **649,49–664,50 s** och högsta slutliga processpeak **1,882 GiB**.
 Alla har slutkvitto efter rapportserialisering och städning, utan OOM/swap.
 [Aktuellt cacheunderlag](preparation-memory-20261024/cache-modes-current.json).
-Samma
-förgrundssekvens fortsätter med två ytterligare kalla prov och alla cachelägen, pilot,
-HTTP/historik, tre matchade basprov, ny fasprofil och full matris. Varje
+Förgrundssekvensens tre kalla prov och tretton cachelägesprocesser är nu
+klara. Den fortsätter med pilot, HTTP/historik, tre matchade basprov, ny
+fasprofil och full matris. Varje
 steg stannar vid missad grind. Metodsignaturen är
 `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
 kodändringen invaliderar äldre förberedelseartefakter. Äldre planresultat
@@ -100,9 +100,8 @@ alla tre jämförbara varma legacy-anrop. Detta är en profil/stad/faktaarm,
 inte hela standardgrinden. De sex omstarts-/cacheförlustproven gör aktuell
 slutkontroll och audit; de återanvänder inte en gammal kassasumma.
 Syntetiska lagren har noll vanliga sparade leveranser. HTTP-/historikproven
-och resterande pilot/matris är ännu inte körda. De tre vanliga
-versionsbytesproven har också passerat; faktaprojektionen inför piloten
-har därför startat.
+och resterande pilot/matris är ännu inte klara. De tre vanliga
+versionsbytesproven och faktaprojektionen inför piloten har också passerat.
 
 Faktaprojektionen är klar för båda städerna, med peak **1,867 GiB i Malmö**
 och **1,348 GiB i Lund**. Priser, request och klocka är byteidentiska med
@@ -408,7 +407,7 @@ prov passerar. Ruff och compileall passerar. Full
 [CI på `b5c242d`](https://github.com/ossebosse/smako/actions/runs/40091178789)
 passerar inklusive Chromium/WebKit.
 
-## Verifiering och återstående grindar
+## Historiska regressioner och evidensens avgränsning
 
 Tidigare 170 riktade offlineprov passerade. Efter senaste indexändringen
 passerar 100 fokuserade prov för produktsökning, PriceUniverse och minne.
@@ -433,12 +432,13 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 5 000/v1 är uppmätt pilot, ännu inte standardkvalificerad. Äldre kods
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
-Kvar: tre kalla jämförbara prov på basarmen, matchad instrumenterad profil,
-färdig evidens för alla slutkodens
-cachelägen, aktuell legacy-jämförelse och 262-kvot, övriga pilotprofiler/
-städer, versionsbyte/serialisering under minnestak och hela slutmatrisen.
-Ingen generell total bytebudget för alla RAM-cacher har bevisats; marginalen
-ovan gäller det enskilda frysta provet. Axfood-releasen omfattar fortsatt
+Kvar på slutkoden: tre kalla jämförbara prov på basarmen, matchad
+instrumenterad profil, resten av piloten inklusive 262-kvoter för varje
+profil/stad/faktaarm, HTTP-/historikproven och hela slutmatrisen. Slutkodens
+tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
+faktaprojektionerna är klara enligt rapportens inledning.
+Ingen generell total bytebudget för alla RAM-cacher har bevisats; de
+uppmätta marginalerna gäller de redovisade frysta proven. Axfood-releasen omfattar fortsatt
 103 verifierade dokument. Ingen full täckning, ny faktaaktivering eller
 återfunnet historiskt Malmöarkiv påstås. Policyn förblir opt-in medan
 någon grind återstår.
