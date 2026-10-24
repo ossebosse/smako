@@ -36,6 +36,14 @@ ingen drift, insamling, aktiv fakta/prisversion eller samtidighet ändrad.
 
 [Rapport och maskinunderlag](reviews/preparation-memory-20261024.md).
 
+Pilotuppdatering 16:21 UTC: originalfakta/Malmö/262 klart, sex celler och
+24 anrop med audit PASS, högst 1,514 GiB och exit 0 utan OOM/swap.
+V1 standard 492,15 kr mot legacy 511,46; fördelning 996,22 och organic-share
+321,16 kr i båda policyerna. V1 första/varmt: standard 176,92/10,93–11,33 s,
+fördelning 46,55/11,46–11,71 s, organic-share 560,60/10,72–10,95 s.
+Fem-tusen-gruppen körs nu. Det är sex av 48 pilotceller, inte full
+standardkvalificering; `legacy` förblir standard.
+
 ---
 
 # 2026-10-24 13:31 UTC: Cacheprov passerar; versionsbyte stoppar piloten

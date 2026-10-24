@@ -113,6 +113,22 @@ svar. Produktmatchningar kan vara fler än dokumenten; de räknas inte som
 ytterligare dokumenttäckning. [Exakta manifest, resurser och kommandon](preparation-memory-20261024/axfood-projection.json).
 Detta är faktaprojektion, inte levererad meny-/auditkvalificering.
 
+### Pilot, första gruppen klar
+
+Malmö/originalfakta/262 är avslutad med sex celler och 24 anrop:
+
+| Profil | Legacy, betalt | V1, betalt | Första v1-anrop | Tre varma v1-anrop |
+| --- | --- | --- | --- | --- |
+| Standard | 511,46 kr | 492,15 kr | 176,92 s | 10,93–11,33 s |
+| Fördelning | 996,22 kr | 996,22 kr | 46,55 s | 11,46–11,71 s |
+| Organic-share | 321,16 kr | 321,16 kr | 560,60 s | 10,72–10,95 s |
+
+Alla 24 anrop klarar aktuell audit och gruppens slutliga cgroup-peak är
+**1 626 034 176 byte (1,514 GiB)**, ingen OOM/swap. Prisgrinden mot legacy
+passerar i dessa sex celler. Detta kvalificerar inte hela piloten: 42 celler
+återstår och 5 000/262-tiderna måste jämföras för varje profil/stad/faktaarm.
+Motsvarande Malmö/5 000-grupp körs nu. [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
+
 ## Föregående runtime: tre kalla prov och cachelägen godkända
 
 På `b5c242d` passerar tre nya processer med tom appcache och ny ägarstore:
