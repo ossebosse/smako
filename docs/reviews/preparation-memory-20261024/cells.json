@@ -1130,8 +1130,22 @@
           ]
         }
       ],
-      "status": "NOT_RUN_ON_FINAL_CODE",
-      "evidence": []
+      "status": "MEASURED_PILOT_ONLY_NOT_QUALIFIED",
+      "evidence": [
+        {
+          "raw_report_sha256": "f2893e268f6f265f27e3506dedd3d8ec398cbf86548f8a432385607038e09ab3",
+          "records": 4,
+          "mode": "prefix262",
+          "memory_target_passed": true
+        }
+      ],
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "input_files_sha256": {
+        "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+        "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+      },
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9"
     },
     {
       "facts_arm": "original",
@@ -1205,8 +1219,22 @@
           ]
         }
       ],
-      "status": "NOT_RUN_ON_FINAL_CODE",
-      "evidence": []
+      "status": "MEASURED_PILOT_ONLY_NOT_QUALIFIED",
+      "evidence": [
+        {
+          "raw_report_sha256": "1f1c1aa372d577a9c6f0ed711f40397730851973c1f31ba28e8be3c56924e979",
+          "records": 4,
+          "mode": "legacy",
+          "memory_target_passed": true
+        }
+      ],
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "input_files_sha256": {
+        "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+        "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+      },
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c"
     },
     {
       "facts_arm": "original",
@@ -2843,6 +2871,6 @@
   ],
   "all_dimensions_enumerated": true,
   "completed_cells": 0,
-  "measured_pilot_only_cells": 1,
+  "measured_pilot_only_cells": 3,
   "note": "Enumeration is not completion; pilot observations stay separate until all current-code cell gates are verified"
 }

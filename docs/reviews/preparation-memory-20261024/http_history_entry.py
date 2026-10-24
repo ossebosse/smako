@@ -57,6 +57,10 @@ def http_probe(settings, prepared, facts, clock, request, output):
     # Bind the synthetic configuration before importing the app, auth or middleware.
     from app import config
     config.get_settings = lambda:settings
+    # The probe uses local member accounts and no external identity/database.
+    for key in ('SMAKO_OIDC_ISSUER_URL','SMAKO_OIDC_CLIENT_ID','SMAKO_OIDC_CLIENT_SECRET'):
+        os.environ.pop(key,None)
+    os.environ['GROCERY_DATABASE_URL'] = 'sqlite+pysqlite:///:memory:'
     from app import main
     from app.api import plan as api
     from app.models import SavedPlan
@@ -254,6 +258,7 @@ def direct_probe(settings, prepared, facts, clock, output, mode):
 
 
 def run(args):
+    startup_started = time.perf_counter()
     os.environ['RECIPE_PREPARATION_CACHE_ROOT'] = str(args.output/'prepared')
     args.output.mkdir(parents=True,exist_ok=True)
     from app.services import reference_library
@@ -280,7 +285,9 @@ def run(args):
     method = method_signature()
     assert method == '17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6'
     write(args.output/'protocol.json',{'mode':args.mode,'inputs':manifest,'method_signature':method,
-        'library_version':library_version(),'source_commit':'eeda184926f02e73ab76e71e50c740e9dcb01b02'})
+        'library_version':library_version(),'source_commit':'eeda184926f02e73ab76e71e50c740e9dcb01b02',
+        'startup_seconds':time.perf_counter()-startup_started,
+        'startup_scope':'Input hashes, catalogue validation/index build, frozen facts and method/library identity; before HTTP or direct plan timing'})
     base = json.loads((args.inputs/'combined-request.json').read_bytes())
     # Frozen public request, containing no credentials/private capabilities.
     write(args.output/'base-request.json',base)

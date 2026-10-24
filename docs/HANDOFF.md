@@ -19,7 +19,10 @@ Slutkodens första planprov med tom appcache/ny ägarstore är klart:
 Slutlig cgroup-peak inklusive rapport/städning 1,882 GiB, ingen swap.
 Hela fyranropsprocessen tog 756,71 s. Ytterligare två kalla processer är
 klara: 649,49 / 664,50 s, pris/hash/audit PASS. Median över tre är 662,83 s,
-högsta slutliga peak 1,882 GiB. Nu följer återstående cachelägen och tre
+högsta slutliga peak 1,882 GiB. Alla tretton cachelägesprocesser har nu
+passerat; varm kvot 5 000/262 är 1,0873 i Malmö/fördelning/originalfakta.
+Omstart och cacheförlust laddar elva certifikat utan omsökta publiceringar.
+Tre nya ägarstore tog 641,40/637,84/641,36 s. Nu körs tre
 extra versionsbytesprov utan mätverktygets fasstädning, därefter pilot,
 HTTP/historik, matchade
 basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar

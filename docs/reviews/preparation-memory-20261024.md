@@ -76,6 +76,28 @@ ett oförklarat byte av blockeringskod/steg. Tre kontraktsprov passerar och
 visar att motexemplet sparas före stopp. Likadana blockerade observationer
 förblir separat evidens och blir aldrig ett bevis för global omöjlighet.
 
+### Cachelägen på slutkoden, tretton processer klara
+
+| Läge på eeda184 | Plananrop | Utfall |
+| --- | --- | --- |
+| Tom appcache/ny ägarstore, tre processer | 662,83 / 649,49 / 664,50 s | 988,32 kr/hash/audit PASS |
+| Legacy med varm offentlig disk | 139,82 s; sedan 104,25–106,99 s | 988,32 kr/hash/audit PASS |
+| 262-prefix | 11,21–11,77 s för tre varma anrop | 996,22 kr, audit PASS |
+| Omstart med disk/certifikat, tre processer | 50,92–52,55 s | Elva certifikat laddade, noll publiceringar omsökta |
+| Borttagen offentlig/härledd cache, tre processer | 132,47–134,38 s | Elva certifikat laddade, noll publiceringar omsökta |
+| Varm offentlig disk/ny ägarstore, tre processer | 641,40 / 637,84 / 641,36 s | 988,32 kr/hash/audit PASS |
+
+Samtliga tretton processer och deras 19 planer passerar; primärprovets
+fyra planer redovisas separat. Högsta slutliga processpeak är 1,882 GiB, inklusive filcache,
+rapportskrivning och städning, utan OOM/swap. Varm max(5 000)/min(262) är
+**1,0873**, mediankvot 1,0521. V1:s tre varma 5 000-anrop är snabbare än
+alla tre jämförbara varma legacy-anrop. Detta är en profil/stad/faktaarm,
+inte hela standardgrinden. De sex omstarts-/cacheförlustproven gör aktuell
+slutkontroll och audit; de återanvänder inte en gammal kassasumma.
+Syntetiska lagren har noll vanliga sparade leveranser. HTTP-/historikproven
+och resterande pilot/matris är ännu inte körda. Versionsbytesprovet som
+bara använder runtimekodens städning har startat efter cachelägessekvensen.
+
 ## Föregående runtime: tre kalla prov och cachelägen godkända
 
 På `b5c242d` passerar tre nya processer med tom appcache och ny ägarstore:
