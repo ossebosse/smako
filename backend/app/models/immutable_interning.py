@@ -60,10 +60,11 @@ def _metadata_bytes(value):
 
 
 class _Pool:
-    def __init__(self, *, freeze_fields=False):
+    def __init__(self, *, freeze_fields=False, intern_models=True):
         self.values = {}
         self.field_sets = {}
         self.freeze_fields = freeze_fields
+        self.intern_models = intern_models
         self.field_set_hits = 0
         self.count = self.hits = self.retained_bytes = 0
 
@@ -134,8 +135,8 @@ class _Pool:
             # defaults must preserve exclude_unset serialization as well.
             object.__setattr__(value, "__pydantic_fields_set__",
                                supplied if isinstance(supplied, _ReadOnlyFieldsSet) else set(supplied))
-        if not immutable:
-            return value, False, None
+        if not immutable or not self.intern_models:
+            return value, immutable, id(value) if immutable else None
         unknown_fields = tuple(sorted(supplied - type(value).model_fields.keys()))
         key = type(value), hash(value), supplied_mask, unknown_fields, tuple(children)
         bucket = self.values.get(key, ())
@@ -155,8 +156,8 @@ class _Pool:
 
 
 @contextmanager
-def immutable_model_pool(*, freeze_fields=False):
-    pool = _Pool(freeze_fields=freeze_fields)
+def immutable_model_pool(*, freeze_fields=False, intern_models=True):
+    pool = _Pool(freeze_fields=freeze_fields, intern_models=intern_models)
     token = _ACTIVE.set(pool)
     try:
         yield pool

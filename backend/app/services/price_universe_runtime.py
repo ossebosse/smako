@@ -236,7 +236,7 @@ class PreparedPriceUniverseArtifact(BaseModel):
     def share_immutable_evidence(cls, value, handler, info):
         from app.models.immutable_interning import immutable_model_pool
 
-        with immutable_model_pool(freeze_fields=info.mode == "json") as pool:
+        with immutable_model_pool(freeze_fields=info.mode == "json", intern_models=False) as pool:
             result = handler(value)
             increment_performance_counter("artifact_frozen_models_shared", pool.hits)
             return result

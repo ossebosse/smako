@@ -114,7 +114,8 @@ async def test_real_artifact_preserves_wire_content_and_owns_mutable_offer_lists
              if a.source_provenance == b.source_provenance and a.source_provenance is not None]
     assert pairs
     for first, second in pairs:
-        assert first.source_provenance is second.source_provenance
+        assert first.source_provenance is not second.source_provenance
+        assert first.source_provenance.model_fields_set is second.source_provenance.model_fields_set
         assert first.offers is not second.offers
     original = shared.universe.products[0]
     expected = original.model_dump_json(exclude_unset=True)
