@@ -101,12 +101,14 @@ class OwnedPlannerArtifacts:
         except sqlite3.Error:
             return False
 
-    def recent_menu_records(self, context=None):
+    def recent_menu_records(self, context=None, *, include_certificates=True):
         """Recover owned identities even after all derived artifacts are lost.
 
         Saved consumer revisions are authoritative delivery history, not cache.
         Read bounded rows under the captured privacy epoch; exact-context menus
         precede other recent identities. No old prices or approvals are reused.
+        Saved-only reads bind menu views to delivery history without making a
+        certificate invalidate itself when its own winner is written.
         """
         try:
             with self.store._connect() as connection:
@@ -124,7 +126,7 @@ class OwnedPlannerArtifacts:
                     (self.owner, MAX_ROW_BYTES, context)).fetchall()
                 keys = connection.execute(
                     "SELECT key FROM planner_owned_artifacts WHERE owner_actor_hash=? "
-                    "AND kind='menu_certificate' ORDER BY rowid DESC LIMIT 8", (self.owner,)).fetchall()
+                    "AND kind='menu_certificate' ORDER BY rowid DESC LIMIT 8", (self.owner,)).fetchall() if include_certificates else ()
             records = []
             for row in history:
                 try:

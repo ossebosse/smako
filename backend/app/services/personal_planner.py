@@ -2740,6 +2740,16 @@ class PersonalPlanner:
                  if s.recipe and s.meal_type == "dinner"}
         return profiles.profile_rows(names) if isinstance(profiles, LazyPairwiseSimilarities) else None
 
+    def _menu_candidate_inputs(self, context):
+        from app.services.planner_context import content_digest
+
+        saved = (self.artifacts.recent_menu_records(context, include_certificates=False)
+                 if self.artifacts is not None else ())
+        records = [*self.previous_menus, *saved]
+        # Re-saving the same identities does not require another preparation.
+        # The owner/erasure epoch is enforced by the existing artifact reader.
+        return records, content_digest({"menu_inputs_v1": sorted({content_digest(r) for r in records})})
+
     def _search_verified_reference(self, options, search_kwargs, *, _ignore_cache=False):
         from app.services.library_publications import (
             index_slots,
@@ -2773,8 +2783,9 @@ class PersonalPlanner:
         # predecessor certificate. Still retain any valid pinned reference.
         nodes = chain or ({"generation": self._generation, "count": len(current)},)
         reports, loaded, replayed, chain_complete = [], 0, 0, True
-        prior_records = [*self.previous_menus,
-            *(self.artifacts.recent_menu_records(context) if self.artifacts is not None else ())][:8]
+        records, candidate_inputs = self._menu_candidate_inputs(context)
+        records.extend(self.artifacts.recent_menu_records(context) if self.artifacts is not None else ())
+        prior_records = list({content_digest(record): record for record in records}.values())
 
         def audit(chosen):
             self._defer_search_audit = False
@@ -2786,13 +2797,6 @@ class PersonalPlanner:
         for node in nodes:
             cached = (load_certificate(self.artifacts, context, node, options, predecessor, slot_index)
                       if chain and not _ignore_cache else None)
-            if cached is not None and node is nodes[-1] and self.previous_menus:
-                view = self.artifacts.load("menu_view", content_digest([context, node["sha256"]]))
-                if not isinstance(view, dict) or view.get("candidate_inputs") != content_digest(self.previous_menus):
-                    # A newly supplied, re-auditable menu must compete even
-                    # when this publication already has a prepared winner.
-                    incumbent, reference_winner = (cached[0], None), (cached[1], None)
-                    cached = None
             if cached is not None:
                 winner_slots, reference_slots, certificate = cached
                 loaded += 1
@@ -2897,7 +2901,7 @@ class PersonalPlanner:
             if chain and reference_winner is not None:
                 certificate = save_certificate(self.artifacts, context, node, predecessor,
                     chosen, reference_winner[0], result, replay_complete=chain_complete,
-                    qualification=self.diagnostics.pools, candidate_inputs=content_digest(self.previous_menus),
+                    qualification=self.diagnostics.pools, candidate_inputs=candidate_inputs,
                     qualification_library=chain[-1]["sha256"],
                     culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0]))
                 predecessor = certificate["sha256"]
@@ -2909,24 +2913,40 @@ class PersonalPlanner:
                 if track == "reference":
                     emit(reference_winner[0], evaluate(reference_winner[0], final=False))
 
-            prior = []
+            prior, cached_winner_audited = [], False
+            cached_winner = tuple(chosen)
+
+            def cached_audit(slots):
+                nonlocal cached_winner_audited
+                value = audit(slots)
+                if tuple(slots) == cached_winner:
+                    cached_winner_audited = True
+                return value
+
             try:
                 prior.append((chosen, evaluate(chosen, final=False)))
             except (ValueError, IncompleteBasketError):
                 pass
+            for record in prior_records:
+                restored = restore_slots(record, options, slot_index)
+                if restored is not None and not any(tuple(restored) == tuple(row[0]) for row in prior):
+                    try:
+                        prior.append((restored, evaluate(restored, final=False)))
+                    except (ValueError, IncompleteBasketError):
+                        pass
             try:
-                chosen, result, report = verified_search(cached_tracks, audit=audit,
+                chosen, result, report = verified_search(cached_tracks, audit=cached_audit,
                     accepts=lambda chosen: accepts(chosen, final=True),
                     rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
                                                  search_kwargs["score"](chosen, result)),
                     budget=SearchBudget(IMPROVEMENT_EVALUATIONS, IMPROVEMENT_PROPOSALS), previous=prior)
             except (ValueError, IncompleteBasketError):
                 return self._search_verified_reference(options, search_kwargs, _ignore_cache=True)
-            if report["audit_rejected"] or report["constraint_rejected"] or not prior:
+            if not cached_winner_audited:
                 return self._search_verified_reference(options, search_kwargs, _ignore_cache=True)
             certificate = save_certificate(self.artifacts, context, nodes[-1], cached[2]["predecessor"],
                 chosen, reference_winner[0], result, qualification=self.diagnostics.pools,
-                candidate_inputs=content_digest(self.previous_menus),
+                candidate_inputs=candidate_inputs,
                 qualification_library=chain[-1]["sha256"],
                 culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0])) if chain else None
             predecessor = certificate["sha256"] if certificate else None
@@ -3011,8 +3031,9 @@ class PersonalPlanner:
                 return None  # Rebuild EVERY missing published predecessor normally.
             predecessor = data["sha256"]
         view = self.artifacts.load("menu_view", content_digest([context, chain[-1]["sha256"]]))
+        _, candidate_inputs = self._menu_candidate_inputs(context)
         if (not isinstance(view, dict) or view.get("certificate") != data["sha256"]
-                or view.get("candidate_inputs") != content_digest(self.previous_menus)
+                or view.get("candidate_inputs") != candidate_inputs
                 or not isinstance(view.get("qualification"), list)
                 or not all(isinstance(p, dict) and type(p.get("qualified")) is int
                            and type(p.get("raw")) is int and isinstance(p.get("meal_type"), str)
