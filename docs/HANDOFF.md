@@ -1,3 +1,32 @@
+# 2026-10-24: Förberedelseoptimering mätt; kvarstående kvalificering
+
+Kandidat `193629f`, [PR #9](https://github.com/ossebosse/smako/pull/9).
+Innehållscachens upprepade kataloginventering och onödig omparsning av
+utfärdade recept har tagits bort. Prisavtal i produktindexet lagras kompakt
+efter vanlig validering. GC och valfri glibc-trim återlämnar oanvända sidor
+vid fasgränser. Oberoende legacy-sökningar och alla elva publiceringar kvarstår.
+
+Fryst Malmö/fördelning/5 000, två CPU/3 GiB: första vanliga anropet
+**778,95 s**, tre varma **10,18/10,11/10,29 s**. Alla ger **988,32 kr**, samma
+menyhash och audit PASS. Cgroup-peak **2,327 GiB** i denna process; ingen OOM
+eller extra swap. Det är ett kallt processprov, inte tre. Delmålet under
+700 s är inte nått. Matchad inledande instrumentering på bas/mellanversion
+gav 858,60 → 759,31 s och kvalificering 207,00 → 86,83 s, ett prov per arm.
+
+Full CI på runtime `193629f` passerar inklusive Chromium/WebKit. Senast
+100 fokuserade tester, Ruff och compileall passerar. Cachelägesmätningar
+pågår seriellt med egna syntetiska ägarstore; ingen produktionsaktivering.
+**Ingen standardkvalificering:** fler kalla prov, alla cachelägen,
+versionsbyte/serialisering, övriga pilotfall och slutmatrisen återstår.
+`legacy` och `library_merge_generations=False` är fortsatt standard.
+
+Se [rapport och maskinunderlag](reviews/preparation-memory-20261024.md).
+Cellinventeringen räknar 252 identiteter och skiljer uppmätt pilot från
+ej körda/slutligt kvalificerade celler. Axfood är fortsatt partiell med
+103 verifierade dokument; ingen ny fakta-/prisversion eller drift ändrad.
+
+---
+
 # 2026-10-24: Nästa uppdrag till Sol – minne, förberedelse och slutmatris
 
 Fortsätt enligt [CODEX-SOL-NEXT-20261024.md](CODEX-SOL-NEXT-20261024.md).

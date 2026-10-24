@@ -1,0 +1,2716 @@
+{
+  "baseline-profile-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-baseline-profile",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/baseline-profile:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/smako-profile-preparation-20261024.py:/profile.py:ro",
+    "-e",
+    "SMAKO_PROFILE_REPORT=/output/phase-profile.json",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/profile.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "1",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Instrumented baseline 9162f0f; isolated Linux; 2 CPU; 3 GiB including swap; empty app/preparation cache and owner store; OS cache uncontrolled"
+  ],
+  "baseline-profile-r2-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-baseline-profile-r2",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/baseline-profile-r2:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/smako-profile-preparation-20261024.py:/preparation_probe.py:ro",
+    "-e",
+    "SMAKO_PROFILE_REPORT=/output/phase-profile.json",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "1",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Instrumented baseline 9162f0f; isolated Linux; 2 CPU; 3 GiB including swap; empty app/preparation cache and owner store; OS cache uncontrolled"
+  ],
+  "baseline-profile-r2-receipt.json": {
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T05:50:30.446336297Z",
+      "FinishedAt": "2026-10-24T06:05:33.184921146Z"
+    },
+    "host_config": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072"
+  },
+  "candidate-0f626bd-plain-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-0f626bd-plain",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-0f626bd/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-0f626bd/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-0f626bd:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-0f626bd-plain:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "4",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Uninstrumented 0f626bd; isolated Linux; 2 CPU; 3 GiB including swap; empty app/preparation cache and owner store on first call; three same-process repetitions; OS disk cache uncontrolled"
+  ],
+  "candidate-193629f-plain-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-193629f-plain",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-193629f:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-193629f-plain:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "4",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Uninstrumented 193629f; isolated Linux; 2 CPU; 3 GiB including swap; empty app/preparation cache and owner store on first call; three same-process repetitions; OS disk cache uncontrolled"
+  ],
+  "candidate-193629f-receipt.json": {
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:21:36.738284347Z",
+      "FinishedAt": "2026-10-24T08:35:55.520828923Z"
+    },
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072"
+  },
+  "candidate-193629f-startup-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-193629f-startup",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-193629f:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-193629f-startup:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+    "-v",
+    "/tmp/trim_probe_entry.py:/trim_probe_entry.py:ro",
+    "-e",
+    "SMAKO_TRIM_STARTUP_ONLY=1",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/trim_probe_entry.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "4",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Diagnostic startup only, no plan/audit; compact contracts 193629f; 2 CPU/3 GiB; GC+trim at active prepared catalogue boundary"
+  ],
+  "candidate-81d5e6a-profile-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-81d5e6a-profile",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-81d5e6a-profile:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/smako-profile-preparation-20261024.py:/preparation_probe.py:ro",
+    "-e",
+    "SMAKO_PROFILE_REPORT=/output/phase-profile.json",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "1",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Instrumented 81d5e6a; isolated Linux; 2 CPU; 3 GiB including swap; empty app/preparation cache and owner store; OS cache uncontrolled"
+  ],
+  "candidate-81d5e6a-receipt.json": {
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:10:48.440733998Z",
+      "FinishedAt": "2026-10-24T06:24:11.401031781Z"
+    },
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072"
+  },
+  "candidate-81d5e6a-trim-startup-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-81d5e6a-trim-startup",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-81d5e6a-trim-startup:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/smako-profile-preparation-20261024.py:/preparation_probe.py:ro",
+    "-e",
+    "SMAKO_PROFILE_REPORT=/output/phase-profile.json",
+    "-v",
+    "/tmp/trim_probe_entry.py:/trim_probe_entry.py:ro",
+    "-e",
+    "SMAKO_TRIM_STARTUP_ONLY=1",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/trim_probe_entry.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "1",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Bounded startup-only allocator observation on 81d5e6a; gc and malloc_trim only; 2 CPU; 3 GiB incl swap; no plan searched"
+  ],
+  "candidate-9fc82a6-plain-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-9fc82a6-plain",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-9fc82a6-plain:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/plain_preparation_entry.py:/preparation_probe.py:ro",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "4",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Uninstrumented 9fc82a6; isolated Linux; 2 CPU; 3 GiB including swap; empty app/preparation cache and owner store on first call; three same-process repetitions; OS disk cache uncontrolled"
+  ],
+  "candidate-9fc82a6-receipt.json": {
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T07:31:07.086089736Z",
+      "FinishedAt": "2026-10-24T07:45:26.81781612Z"
+    },
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072"
+  },
+  "candidate-ac84f79-startup-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-ac84f79-startup",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-ac84f79/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-ac84f79/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-ac84f79:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-ac84f79-startup:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-ac84f79/backend/scripts/profile_planner_preparation.py:/preparation_probe.py:ro",
+    "-e",
+    "SMAKO_PROFILE_REPORT=/output/phase-profile.json",
+    "-e",
+    "SMAKO_PROFILE_STARTUP_ONLY=1",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "1",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Bounded startup-only JSON/index probe; ac84f79; 2 CPU; 3 GiB incl swap; no plan searched; OS disk cache uncontrolled"
+  ],
+  "candidate-d44a64b-profile-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-d44a64b-profile",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-d44a64b/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-d44a64b/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-d44a64b:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-d44a64b-profile:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-d44a64b/backend/scripts/profile_planner_preparation.py:/preparation_probe.py:ro",
+    "-e",
+    "SMAKO_PROFILE_REPORT=/output/phase-profile.json",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "4",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Instrumented d44a64b; isolated Linux; 2 CPU; 3 GiB including swap; empty app/preparation cache and owner store on first plan; then three same-process hits; OS cache uncontrolled"
+  ],
+  "candidate-d44a64b-receipt.json": {
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:49:48.003601359Z",
+      "FinishedAt": "2026-10-24T07:04:02.090129254Z"
+    },
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072"
+  },
+  "candidate-eda0e8a-startup-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-eda0e8a-startup",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-eda0e8a/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-eda0e8a/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-eda0e8a:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-eda0e8a-startup:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-eda0e8a/backend/scripts/profile_planner_preparation.py:/preparation_probe.py:ro",
+    "-e",
+    "SMAKO_PROFILE_REPORT=/output/phase-profile.json",
+    "-e",
+    "SMAKO_PROFILE_STARTUP_ONLY=1",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "1",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Bounded startup-only JSON/index probe; eda0e8a; 2 CPU; 3 GiB incl swap; no plan searched; OS disk cache uncontrolled"
+  ],
+  "candidate-fd15480-profile-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-fd15480-profile",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-fd15480/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-fd15480/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-fd15480:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/candidate-fd15480-profile:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-fd15480/backend/scripts/profile_planner_preparation.py:/preparation_probe.py:ro",
+    "-e",
+    "SMAKO_PROFILE_REPORT=/output/phase-profile.json",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "4",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Instrumented fd15480; isolated Linux; 2 CPU; 3 GiB including swap; empty app/preparation cache and owner store on first plan; then three same-process hits; OS cache uncontrolled"
+  ],
+  "candidate-fd15480-receipt.json": {
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:24:36.682981604Z",
+      "FinishedAt": "2026-10-24T06:33:17.297875384Z"
+    },
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "outcome": "MANUALLY_STOPPED_RESOURCE_GATE_FAILED",
+    "reason": "Observed cgroup peak exceeded 2.5 GiB; partial profile preserved; not a completed price/audit cell"
+  },
+  "census-9fc82a6-command.json": [
+    "docker",
+    "run",
+    "-d",
+    "--name",
+    "smako-preparation-census-9fc82a6",
+    "--network",
+    "none",
+    "--read-only",
+    "--cpus",
+    "2",
+    "--memory",
+    "3g",
+    "--memory-swap",
+    "3g",
+    "--pids-limit",
+    "128",
+    "--user",
+    "10001:10001",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=128m",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6/backend:/srv/app/backend:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6/grocery_data:/srv/app/grocery_data:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000:/srv/app/backend/app/data/recipes:ro",
+    "-v",
+    "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f:/review-state:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6:/review:ro",
+    "-v",
+    "/opt/smako/evidence/integration-scaling-20261023/output/data:/inputs:ro",
+    "-v",
+    "/opt/smako/evidence/preparation-memory-20261024/census-9fc82a6:/output:rw",
+    "-e",
+    "PYTHONPATH=/srv/app/backend:/srv/app",
+    "-e",
+    "PYTHON_DOTENV_DISABLED=1",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "-e",
+    "PLAN_STORE_PATH=/tmp/synthetic.sqlite",
+    "-v",
+    "/tmp/census_entry.py:/preparation_probe.py:ro",
+    "--entrypoint",
+    "python",
+    "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "-u",
+    "/preparation_probe.py",
+    "--inputs",
+    "/inputs/malmo",
+    "--output",
+    "/output",
+    "--size",
+    "5000",
+    "--repeat",
+    "1",
+    "--cases",
+    "distribution",
+    "--arms",
+    "verified",
+    "--preparation-cache-root",
+    "/output/prepared",
+    "--owned-artifact-store",
+    "/output/owned.sqlite",
+    "--execution-environment",
+    "Diagnostic only; memoization eviction census; no menu/audit cell; 9fc82a6; isolated serial 2 CPU/3 GiB incl swap; empty app cache and new synthetic owner"
+  ],
+  "smako-preparation-0f626bd-plain-resource-receipt.json": {
+    "name": "smako-preparation-0f626bd-plain",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T07:08:34.603625513Z",
+      "FinishedAt": "2026-10-24T07:23:52.76775985Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-0f626bd-plain",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-0f626bd",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-0f626bd/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-0f626bd/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-cache-loss-1-resource-receipt.json": {
+    "name": "smako-preparation-193629f-cache-loss-1",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:50:06.977666443Z",
+      "FinishedAt": "2026-10-24T08:52:41.310900133Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/cache-loss-1",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-cache-loss-2-resource-receipt.json": {
+    "name": "smako-preparation-193629f-cache-loss-2",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:52:41.541774182Z",
+      "FinishedAt": "2026-10-24T08:55:16.855986336Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/cache-loss-2",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-cache-loss-3-resource-receipt.json": {
+    "name": "smako-preparation-193629f-cache-loss-3",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:55:17.076370621Z",
+      "FinishedAt": "2026-10-24T08:57:53.951069338Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/cache-loss-3",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-legacy-resource-receipt.json": {
+    "name": "smako-preparation-193629f-legacy",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:36:03.513130099Z",
+      "FinishedAt": "2026-10-24T08:44:33.939829236Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/legacy",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-new-owner-1-resource-receipt.json": {
+    "name": "smako-preparation-193629f-new-owner-1",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 2730795,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:57:54.542686223Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/new-owner-1",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-plain-resource-receipt.json": {
+    "name": "smako-preparation-193629f-plain",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:21:36.738284347Z",
+      "FinishedAt": "2026-10-24T08:35:55.520828923Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-193629f-plain",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-prefix262-resource-receipt.json": {
+    "name": "smako-preparation-193629f-prefix262",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:44:35.172570899Z",
+      "FinishedAt": "2026-10-24T08:46:04.764359814Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/prefix262",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/262",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-restart-1-resource-receipt.json": {
+    "name": "smako-preparation-193629f-restart-1",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:46:07.243463887Z",
+      "FinishedAt": "2026-10-24T08:47:26.244396727Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/restart-1",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-restart-2-resource-receipt.json": {
+    "name": "smako-preparation-193629f-restart-2",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:47:27.36415065Z",
+      "FinishedAt": "2026-10-24T08:48:47.131728839Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/restart-2",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-restart-3-resource-receipt.json": {
+    "name": "smako-preparation-193629f-restart-3",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:48:47.793098828Z",
+      "FinishedAt": "2026-10-24T08:50:06.752981324Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/cache-modes-193629f/restart-3",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-193629f-startup-resource-receipt.json": {
+    "name": "smako-preparation-193629f-startup",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T08:20:36.592300947Z",
+      "FinishedAt": "2026-10-24T08:21:16.501569705Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-193629f-startup",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/trim_probe_entry.py",
+        "Destination": "/trim_probe_entry.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-193629f/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-81d5e6a-profile-resource-receipt.json": {
+    "name": "smako-preparation-81d5e6a-profile",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:10:48.440733998Z",
+      "FinishedAt": "2026-10-24T06:24:11.401031781Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-81d5e6a-profile",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/smako-profile-preparation-20261024.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-81d5e6a-trim-startup-resource-receipt.json": {
+    "name": "smako-preparation-81d5e6a-trim-startup",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:43:10.923053791Z",
+      "FinishedAt": "2026-10-24T06:43:51.257529526Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-81d5e6a-trim-startup",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/smako-profile-preparation-20261024.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/trim_probe_entry.py",
+        "Destination": "/trim_probe_entry.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-81d5e6a/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-9fc82a6-plain-resource-receipt.json": {
+    "name": "smako-preparation-9fc82a6-plain",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T07:31:07.086089736Z",
+      "FinishedAt": "2026-10-24T07:45:26.81781612Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-9fc82a6-plain",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/plain_preparation_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-ac84f79-startup-resource-receipt.json": {
+    "name": "smako-preparation-ac84f79-startup",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:39:45.627399271Z",
+      "FinishedAt": "2026-10-24T06:40:29.004066311Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-ac84f79-startup",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-ac84f79/backend/scripts/profile_planner_preparation.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-ac84f79",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-ac84f79/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-ac84f79/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-baseline-profile-r2-resource-receipt.json": {
+    "name": "smako-preparation-baseline-profile-r2",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T05:50:30.446336297Z",
+      "FinishedAt": "2026-10-24T06:05:33.184921146Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/baseline-profile-r2",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/smako-profile-preparation-20261024.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-baseline-profile-resource-receipt.json": {
+    "name": "smako-preparation-baseline-profile",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 1,
+      "Error": "",
+      "StartedAt": "2026-10-24T05:50:02.573041514Z",
+      "FinishedAt": "2026-10-24T05:50:05.219520697Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/baseline-profile",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/smako-profile-preparation-20261024.py",
+        "Destination": "/profile.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-census-9fc82a6-resource-receipt.json": {
+    "name": "smako-preparation-census-9fc82a6",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T07:48:22.094115959Z",
+      "FinishedAt": "2026-10-24T07:50:55.153954455Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/census-9fc82a6",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/census_entry.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-9fc82a6/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-d44a64b-profile-resource-receipt.json": {
+    "name": "smako-preparation-d44a64b-profile",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:49:48.003601359Z",
+      "FinishedAt": "2026-10-24T07:04:02.090129254Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-d44a64b-profile",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-d44a64b/backend/scripts/profile_planner_preparation.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-d44a64b",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-d44a64b/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-d44a64b/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-eda0e8a-startup-resource-receipt.json": {
+    "name": "smako-preparation-eda0e8a-startup",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:35:47.306947225Z",
+      "FinishedAt": "2026-10-24T06:36:34.833672401Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-eda0e8a-startup",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eda0e8a/backend/scripts/profile_planner_preparation.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eda0e8a",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eda0e8a/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eda0e8a/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  },
+  "smako-preparation-fd15480-profile-resource-receipt.json": {
+    "name": "smako-preparation-fd15480-profile",
+    "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-24T06:24:36.682981604Z",
+      "FinishedAt": "2026-10-24T06:33:17.297875384Z"
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "PidsLimit": 128,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "user": "10001:10001",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+        "Destination": "/inputs",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/candidate-fd15480-profile",
+        "Destination": "/output",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-fd15480/backend/scripts/profile_planner_preparation.py",
+        "Destination": "/preparation_probe.py",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-fd15480",
+        "Destination": "/review",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+        "Destination": "/review-state",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-fd15480/backend",
+        "Destination": "/srv/app/backend",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/preparation-memory-20261024/code-fd15480/grocery_data",
+        "Destination": "/srv/app/grocery_data",
+        "RW": false
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/5000",
+        "Destination": "/srv/app/backend/app/data/recipes",
+        "RW": false
+      }
+    ]
+  }
+}
