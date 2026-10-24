@@ -20,6 +20,39 @@ MAX_MODELS = 65536
 MAX_POOL_BYTES = 32 * 1024 * 1024
 
 
+class _ReadOnlyFieldsSet(set):
+    """Set-compatible serializer metadata; copies belong to the new model.
+
+    Pydantic's pinned serializer requires a set (not a frozenset). Its copy
+    paths expect a fresh mutable set, including before model_copy updates.
+    """
+    __slots__ = ()
+
+    def __new__(cls, values=()):
+        result = super().__new__(cls)
+        set.update(result, values)
+        return result
+
+    def __init__(self, values=()):
+        pass
+
+    def copy(self):
+        return set(self)
+
+    def __copy__(self):
+        return set(self)
+
+    def __deepcopy__(self, memo):
+        return set(self)
+
+    def _readonly(self, *args, **kwargs):
+        raise TypeError("Parsed artifact supplied-field metadata is read-only; copy the model before editing")
+
+    add = clear = difference_update = discard = intersection_update = _readonly
+    pop = remove = symmetric_difference_update = update = _readonly
+    __ior__ = __iand__ = __isub__ = __ixor__ = _readonly
+
+
 def _metadata_bytes(value):
     if isinstance(value, type):
         return 0  # Existing model/primitive classes are not owned by the pool.
@@ -27,9 +60,34 @@ def _metadata_bytes(value):
 
 
 class _Pool:
-    def __init__(self):
+    def __init__(self, *, freeze_fields=False):
         self.values = {}
+        self.field_sets = {}
+        self.freeze_fields = freeze_fields
+        self.field_set_hits = 0
         self.count = self.hits = self.retained_bytes = 0
+
+    def share_fields(self, value):
+        if not self.freeze_fields or not value.model_config.get("frozen"):
+            return value
+        supplied = value.model_fields_set
+        if isinstance(supplied, _ReadOnlyFieldsSet):
+            return value
+        key = tuple(sorted(supplied))
+        shared = self.field_sets.get(key)
+        if shared is None:
+            shared = _ReadOnlyFieldsSet(supplied)
+            size = _metadata_bytes(key) + getsizeof(shared) + 256
+            if self.retained_bytes + size > MAX_POOL_BYTES:
+                return value
+            self.field_sets[key] = shared
+            self.retained_bytes += size
+        else:
+            self.field_set_hits += 1
+        # Enabled only while parsing JSON: this newly created model has no
+        # outside owner. Python-mode validation never mutates caller models.
+        object.__setattr__(value, "__pydantic_fields_set__", shared)
+        return value
 
     def visit(self, value):
         # Python equality collapses some distinct serialized values (UTC vs
@@ -57,6 +115,7 @@ class _Pool:
             return value, False, None
         if value.__pydantic_private__ or value.__pydantic_extra__:
             return value, False, None
+        value = self.share_fields(value)
         updates, children, immutable, supplied_mask = {}, [], True, 0
         supplied = value.model_fields_set
         for position, name in enumerate(type(value).model_fields):
@@ -73,7 +132,8 @@ class _Pool:
             value = value.model_copy(update=updates)
             # model_copy adds update keys to the supplied-field set. Sharing
             # defaults must preserve exclude_unset serialization as well.
-            object.__setattr__(value, "__pydantic_fields_set__", set(supplied))
+            object.__setattr__(value, "__pydantic_fields_set__",
+                               supplied if isinstance(supplied, _ReadOnlyFieldsSet) else set(supplied))
         if not immutable:
             return value, False, None
         unknown_fields = tuple(sorted(supplied - type(value).model_fields.keys()))
@@ -95,8 +155,8 @@ class _Pool:
 
 
 @contextmanager
-def immutable_model_pool():
-    pool = _Pool()
+def immutable_model_pool(*, freeze_fields=False):
+    pool = _Pool(freeze_fields=freeze_fields)
     token = _ACTIVE.set(pool)
     try:
         yield pool
@@ -107,3 +167,8 @@ def immutable_model_pool():
 def share_frozen_models(value):
     pool = _ACTIVE.get()
     return pool.visit(value)[0] if pool is not None else value
+
+
+def share_supplied_fields(value):
+    pool = _ACTIVE.get()
+    return pool.share_fields(value) if pool is not None else value

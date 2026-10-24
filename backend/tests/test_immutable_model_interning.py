@@ -1,5 +1,6 @@
 """Exact immutable evidence sharing must preserve values and mutable ownership."""
 from contextlib import contextmanager
+from copy import copy, deepcopy
 from datetime import datetime
 from decimal import Decimal
 from types import SimpleNamespace
@@ -98,12 +99,14 @@ async def test_real_artifact_preserves_wire_content_and_owns_mutable_offer_lists
     shared = PreparedPriceUniverseArtifact.model_validate_json(raw)
 
     @contextmanager
-    def no_pool():
+    def no_pool(**kwargs):
         yield SimpleNamespace(hits=0)
 
     with patch.object(interning, "immutable_model_pool", no_pool):
         unshared = PreparedPriceUniverseArtifact.model_validate_json(raw)
     assert shared.model_dump_json() == unshared.model_dump_json()
+    assert shared.model_dump_json(exclude_unset=True) == unshared.model_dump_json(exclude_unset=True)
+    assert type(prepared.universe.products[0].model_fields_set) is set
     candidates = [candidate for rows in (shared.canonical_candidates,
         shared.semantic_canonical_candidates, shared.matched_canonical_candidates)
         for row in rows for candidate in row.candidates]
@@ -113,3 +116,15 @@ async def test_real_artifact_preserves_wire_content_and_owns_mutable_offer_lists
     for first, second in pairs:
         assert first.source_provenance is second.source_provenance
         assert first.offers is not second.offers
+    original = shared.universe.products[0]
+    expected = original.model_dump_json(exclude_unset=True)
+    with pytest.raises(TypeError, match="read-only"):
+        original.model_fields_set.add("unreviewed")
+    for cloned in (copy(original), deepcopy(original), original.model_copy(), original.model_copy(deep=True)):
+        assert cloned.model_dump_json(exclude_unset=True) == expected
+        assert type(cloned.model_fields_set) is set
+        cloned.model_fields_set.add("unreviewed")
+        assert "unreviewed" not in original.model_fields_set
+    updated = original.model_copy(update={"store_name": "New isolated test name"})
+    assert "store_name" in updated.model_fields_set
+    assert original.model_dump_json(exclude_unset=True) == expected

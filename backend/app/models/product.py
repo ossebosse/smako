@@ -264,6 +264,12 @@ class ProductSemantics(BaseModel):
 
         return share_frozen_models(value)
 
+    @model_validator(mode="after")
+    def share_parsed_supplied_fields(self):
+        from app.models.immutable_interning import share_supplied_fields
+
+        return share_supplied_fields(self)
+
     @model_validator(mode="before")
     @classmethod
     def map_legacy_purchase_fields(cls, value: Any) -> Any:

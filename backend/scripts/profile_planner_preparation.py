@@ -45,6 +45,7 @@ def memory():
 def save():
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     value = {"schema": "smako-preparation-profile-v1",
+             "probe_mode": "startup_only" if os.getenv("SMAKO_PROFILE_STARTUP_ONLY") == "1" else "full_plan",
              "process_seconds": time.perf_counter() - START,
              "memory": memory(), "phases": ROWS, "counts": dict(COUNTS),
              "unique_baskets": {key: len(values) for key, values in UNIQUE.items()},
@@ -62,6 +63,8 @@ def instrument(owner, name, label=None):
     @wraps(original)
     def measured(*args, **kwargs):
         phase = label or name
+        if phase == "planner_init" and os.getenv("SMAKO_PROFILE_STARTUP_ONLY") == "1":
+            raise SystemExit(0)  # Bounded load/index probe; no plan was searched.
         start, cpu, before = time.perf_counter(), time.process_time(), memory()
         frame = {"name": phase, "child_seconds": 0.0}
         STACK.append(frame)
@@ -99,12 +102,13 @@ else:
     original_pool = immutable_interning.immutable_model_pool
 
     @contextmanager
-    def observed_pool():
-        with original_pool() as pool:
+    def observed_pool(**kwargs):
+        with original_pool(**kwargs) as pool:
             yield pool
             COUNTS["artifact_frozen_model_hits"] += pool.hits
             COUNTS["artifact_frozen_model_entries"] += pool.count
             COUNTS["artifact_pool_key_bytes"] += pool.retained_bytes
+            COUNTS["artifact_field_set_hits"] += getattr(pool, "field_set_hits", 0)
 
     immutable_interning.immutable_model_pool = observed_pool
 
