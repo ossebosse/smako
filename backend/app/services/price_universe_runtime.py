@@ -231,6 +231,16 @@ class PreparedPriceUniverseArtifact(BaseModel):
                     )
         return self
 
+    @model_validator(mode="wrap")
+    @classmethod
+    def share_immutable_evidence(cls, value, handler):
+        from app.models.immutable_interning import immutable_model_pool
+
+        with immutable_model_pool() as pool:
+            result = handler(value)
+            increment_performance_counter("artifact_frozen_models_shared", pool.hits)
+            return result
+
     def restore(self) -> PreparedPriceUniverse:
         pool = EconomicIngredientPool(
             ingredients=list(self.ingredients),

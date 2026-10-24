@@ -7,7 +7,7 @@ from math import isfinite
 from typing import Any, Literal
 from zoneinfo import ZoneInfo
 
-from pydantic import BaseModel, ConfigDict, Field, computed_field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator, model_validator
 
 from grocery_data.app.domain.campaign_validity import CampaignEvidence
 from grocery_data.app.domain.counted_offer_checkout import uses_counted_offer_checkout
@@ -255,6 +255,14 @@ class ProductSemantics(BaseModel):
     purchase_terms: PurchaseTerms | None = Field(default=None, exclude_if=lambda v: v is None)
     conditional_variant_choice: bool = Field(default=False, exclude_if=lambda v: not v)
     purchase_units: bool = Field(default=False, exclude_if=lambda v: not v)
+
+    @field_validator("purchase_terms", "source_provenance", "offers", "promotion_groups",
+                     mode="after", check_fields=False)
+    @classmethod
+    def share_artifact_evidence(cls, value):
+        from app.models.immutable_interning import share_frozen_models
+
+        return share_frozen_models(value)
 
     @model_validator(mode="before")
     @classmethod
