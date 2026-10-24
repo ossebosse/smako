@@ -45,6 +45,7 @@ def test_retained_domain_failure_keeps_direct_http_contract(monkeypatch,tmp_path
         for _ in range(3):
             again=client.get(url)
             assert again.status_code==status and again.json()==result.json()
+        assert client.delete(url).status_code == 409
         assert client.get(url,headers={"X-Anonymous-Session-ID":"separate-domain-reader-12345"}).status_code==404
 
 
@@ -175,4 +176,109 @@ async def test_retained_failure_releases_planner_locals_without_losing_error():
     assert error.__traceback__ is not None  # Location evidence remains available.
     assert jobs.get(job.job_id, 'stranger') is None
     assert jobs.get(job.job_id, 'owner') is job
+    await jobs.close()
+
+
+def test_owned_cancellation_stops_worker_before_the_next_unit_and_reports_real_progress(monkeypatch, tmp_path):
+    import time
+
+    from app import main
+    from app.services.plan_jobs import check_cancelled, report_stage
+
+    settings = Settings(price_provider="mock", plan_store_path=tmp_path / "cancel.sqlite")
+    monkeypatch.setattr(api, "get_settings", lambda: settings)
+    monkeypatch.setattr(main, "get_settings", lambda: settings)
+    started, release, stopped = Event(), Event(), Event()
+    calls = []
+
+    def work():
+        try:
+            report_stage("library_preparation", completed=7, total=11, unit="publications")
+            calls.append("bounded unit")
+            started.set()
+            assert release.wait(5)
+            check_cancelled()
+            calls.append("must not execute or save")
+        finally:
+            stopped.set()
+
+    async def admitted(*args):
+        return await api._run_personal_thread(work)
+
+    monkeypatch.setattr(api, "_run_admitted_plan", admitted)
+    try:
+        with TestClient(app) as client:
+            accepted = client.post("/api/plans", headers={"Prefer": "respond-async"},
+                                   json={"recipes": 3, "servings": 2})
+            url = accepted.json()["status_url"]
+            assert started.wait(2)
+            progress = client.get(url).json()
+            assert progress["stage"] == "library_preparation"
+            assert progress["progress"] == {"completed": 7, "total": 11, "unit": "publications"}
+            assert client.delete(url, headers={"X-Anonymous-Session-ID": "other-cancellation-owner-12345"}).status_code == 404
+            assert not stopped.is_set()
+            cancelling = client.delete(url)
+            assert cancelling.status_code == 202 and cancelling.json()["status"] == "cancelling"
+            assert cancelling.headers["cache-control"] == "private, no-store"
+            assert not stopped.is_set()  # No false assertion that the running unit was interrupted.
+            release.set()
+            assert stopped.wait(2)
+            for _ in range(100):
+                if client.get(url).status_code == 404:
+                    break
+                time.sleep(.01)
+            else:
+                pytest.fail("The worker did not finish cancellation")
+            assert client.delete(url).json()["status"] == "cancelled"
+            assert calls == ["bounded unit"]
+    finally:
+        release.set()
+
+
+@pytest.mark.parametrize("completed,total,unit", [(2,1,"recipes"),(-1,3,"publications"),
+                                                  (True,1,"recipes"),(1,None,"recipes"),(1,3,"percent")])
+def test_progress_cannot_claim_unmeasured_or_invalid_work(completed,total,unit):
+    from app.services.plan_jobs import report_stage
+
+    with pytest.raises(ValueError):
+        report_stage("candidate_qualification", completed=completed, total=total, unit=unit)
+
+
+@pytest.mark.asyncio
+async def test_retained_cancelled_job_releases_the_cooperative_worker_state():
+    import gc
+    import weakref
+
+    from app.services.plan_jobs import PlanJobs, check_cancelled
+
+    class PlannerState:
+        pass
+
+    references = []
+    started, release = Event(), Event()
+
+    def work():
+        state = PlannerState()
+        references.append(weakref.ref(state))
+        started.set()
+        assert release.wait(5)
+        check_cancelled()
+
+    jobs = PlanJobs(max_pending=1)
+    job = jobs.start("owner", "key", "request", lambda: api._run_personal_thread(work))
+    try:
+        while not started.is_set():
+            await asyncio.sleep(.001)
+        job.task.cancel()
+        await asyncio.sleep(0)
+    finally:
+        release.set()
+    while not job.task.done():
+        await asyncio.sleep(.001)
+    await asyncio.sleep(0)  # Completion callback runs before retention is inspected.
+    gc.collect()
+    assert job.task.cancelled() and job.stage == "cancelled"
+    assert all(reference() is None for reference in references)
+    with pytest.raises(asyncio.CancelledError):
+        await job.task
     await jobs.close()

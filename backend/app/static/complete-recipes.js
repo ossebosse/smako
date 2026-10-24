@@ -446,6 +446,16 @@
 
   const validJobUrl=url=>/^\/api\/plan-jobs\/[a-f0-9]{32}$/.test(url||"");
   const stages={queued:"Din menyberäkning väntar på en ledig plats.",product_facts:"Kontrollerar produktfakta och aktuella prisvillkor.",candidate_qualification:"Prövar rätternas produkter, mängder och näringskrav.",week_search:"Söker efter en samordnad veckomeny och inköpskorg.",final_audit:"Slutkontrollerar hela inköpslistan och dina krav.",saving:"Sparar den färdiga planrevisionen."};
+  stages.library_preparation="Förbereder receptbiblioteket för dina val.";
+  stages.cancelling="Avbryter beräkningen efter pågående arbetssteg.";
+  function jobProgress(data){
+    let text=stages[data.stage]||"Servern arbetar med din meny. Du kan återansluta till samma beräkning.";
+    const p=data.progress;
+    if(p&&Number.isSafeInteger(p.completed)&&Number.isSafeInteger(p.total)&&p.total>0&&p.completed>=0&&p.completed<=p.total&&["recipes","publications"].includes(p.unit)){
+      text+=` ${p.completed} av ${p.total} ${p.unit==="recipes"?"recept prövade":"steg klara"}.`;
+    }
+    return text;
+  }
   const jobKey=scope=>`smako.planJob.${scope}`;
   function clearPrivateDrafts(){for(const key of ["smako.planJob.public","smako.planJob.personal","smako.recipeChoices.public","smako.recipeChoices.personal","smako.personal.requestDraft"])storage.remove(key);}
   function pendingJob(scope) {
@@ -557,7 +567,7 @@
         }
         flow.url=data.status_url;flow.failures=0;flow.disconnectedAt=null;
         storage.set(jobKey(scope),{url:flow.url,requestId:flow.requestId,context:context||saved?.context,started_at:flow.startedAt});
-        onProgress(stages[data.stage]||"Servern arbetar med din meny. Du kan återansluta till samma beräkning.");
+        onProgress(jobProgress(data));
         await delay(2000,flow);target=flow.url;options={};
       }
     }finally{signal?.removeEventListener("abort",abort);if(reader===flow)reader=null;}

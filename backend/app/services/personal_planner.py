@@ -998,6 +998,8 @@ class PersonalPlanner:
         return remaining, allocations
 
     def basket(self, slots, *, final=True, _retained=None):
+        from app.services.plan_jobs import check_cancelled
+        check_cancelled()
         # A narrower search incumbent is a concrete purchase, not merely a
         # recipe seed. Requalify its exact products and private allocation while
         # retaining its package/offer checkout; never send it through a new
@@ -2348,7 +2350,7 @@ class PersonalPlanner:
 
     @timed_stage("candidate_generation_and_qualification")
     def _candidates(self, meal, *, qualified_results=None, fixed_slots=()):
-        from app.services.plan_jobs import report_stage
+        from app.services.plan_jobs import check_cancelled, report_stage
         report_stage("candidate_qualification")
         with performance_span("personal_candidate_generation"):
             if self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
@@ -2396,7 +2398,10 @@ class PersonalPlanner:
             stored_rows = {}
         qualified_rows = {}
         qualification_hits = 0
-        for recipe in candidates:
+        for completed, recipe in enumerate(candidates):
+            check_cancelled()
+            if completed % 25 == 0:
+                report_stage("candidate_qualification", completed=completed, total=len(candidates), unit="recipes")
             issued_key = content_digest(recipe) if reuse else None
             cached = stored_rows.get(issued_key)
             # The recipe registry supplies exact canonical, scaled values. A
@@ -2522,6 +2527,7 @@ class PersonalPlanner:
             self.diagnostics.pools[-1]["qualified"] = len(valid)
             from app.services.recipe_library import prepared_recipe_lookup
             prepared_recipe_lookup(meal.servings)
+        report_stage("candidate_qualification", completed=len(candidates), total=len(candidates), unit="recipes")
         if not valid:
             if self.complete:
                 if not candidates:
@@ -2780,6 +2786,7 @@ class PersonalPlanner:
         from app.services.library_search_cohorts import merged_library_cohorts, per_package_cohorts
         from app.services.meal_library_content import identity
         from app.services.menu_optimizer import LibraryPrefixCheckpoint
+        from app.services.plan_jobs import report_stage
         from app.services.planner_context import content_digest, planner_context
         from app.services.recipe_library import current_recipe_generations, current_recipes
         from app.services.reference_library import reference_cohorts, reference_manifest
@@ -2829,7 +2836,8 @@ class PersonalPlanner:
                 kwargs.pop(key, None)
             return kwargs
 
-        for node in nodes:
+        for completed, node in enumerate(nodes):
+            report_stage("library_preparation", completed=completed, total=len(nodes), unit="publications")
             cached = (load_certificate(self.artifacts, context, node, options, predecessor, slot_index)
                       if chain and not _ignore_cache else None)
             if cached is not None:
@@ -2962,6 +2970,7 @@ class PersonalPlanner:
                     culinary_profiles=self._culinary_snapshot(chosen, reference_winner[0]))
                 predecessor = certificate["sha256"]
             self._release_idle_memory()
+        report_stage("library_preparation", completed=len(nodes), total=len(nodes), unit="publications")
         chosen, result = incumbent
         if result is None:
             # The durable certificate is result evidence, never current basket

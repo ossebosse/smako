@@ -931,6 +931,9 @@ class MenuOptimizer:
         exact same ordered prefix/context. The winner is independently audited.
         This is a bounded neighbourhood search, not an optimality proof.
         """
+        from app.services.plan_jobs import check_cancelled
+
+        check_cancelled()
         cohorts = tuple(cohorts)
         trace = search_trace if search_trace is not None else []
         cache, keys = OrderedDict(), RecipeComputationCache()
@@ -970,6 +973,7 @@ class MenuOptimizer:
 
         def cached_evaluate(slots, *, final):
             nonlocal hits
+            check_cancelled()
             key = (final, tuple(slot_key(slot) for slot in slots))
             if key in cache:
                 hits += 1
@@ -1237,6 +1241,7 @@ class MenuOptimizer:
             else:
                 checkpoint.clear()
         for cohort_index, (generation, options) in enumerate(cohorts):
+            check_cancelled()
             if cohort_index < offset:
                 continue
             saved = incumbent, previous, secondary_best
