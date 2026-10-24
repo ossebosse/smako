@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from app.models.compact import CompactFrozenModel as BaseModel
+from pydantic import ConfigDict, Field, model_validator
 
 RecipeUnit = Literal["g", "kg", "ml", "l", "dl", "cl", "st"]
 

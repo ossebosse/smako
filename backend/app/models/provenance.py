@@ -1,7 +1,8 @@
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from app.models.compact import CompactFrozenModel as BaseModel
+from pydantic import ConfigDict, Field
 
 from grocery_data.app.domain.price_context_evidence import PriceContextEvidence
 

@@ -7,7 +7,8 @@ from math import isfinite
 from typing import Any, Literal
 from zoneinfo import ZoneInfo
 
-from pydantic import BaseModel, ConfigDict, Field, computed_field, model_validator
+from app.models.compact import CompactFrozenModel as BaseModel
+from pydantic import ConfigDict, Field, computed_field, model_validator
 
 from grocery_data.app.domain.campaign_validity import CampaignEvidence
 from grocery_data.app.domain.counted_offer_checkout import uses_counted_offer_checkout
