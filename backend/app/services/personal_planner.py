@@ -2884,6 +2884,7 @@ class PersonalPlanner:
                     row.update(search_track="legacy_full_library", publication_size=node["count"])
                 legacy_report["evaluations"] = sum(row.get("evaluations_executed", 0)
                     for row in self.diagnostics.search[trace_start:])
+                self._release_idle_memory()
 
             def search(track, emit, *, budget=budget, completed=completed, prefixes=prefixes,
                        probes=probes, improvements=improvements, node=node, prefix_options=prefix_options):
@@ -2931,6 +2932,7 @@ class PersonalPlanner:
                             row["search_track"] = track
                             row["improvement_path"] = phase
                             row["publication_size"] = node["count"]
+                        self._release_idle_memory()
 
             chosen, result, report = verified_search(search, audit=audit,
                 accepts=lambda chosen: accepts(chosen, final=True),
