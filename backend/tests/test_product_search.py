@@ -1,3 +1,4 @@
+import weakref
 from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from unittest.mock import patch
@@ -236,6 +237,66 @@ def test_flat_member_price_reuses_contract_projection():
     assert search(p, memberships=["HEMKOP_MEMBER"])["results"][0]["best_price"] == 30
 
 
+def test_compact_index_preserves_validated_contracts_without_retaining_model_wrappers(monkeypatch):
+    from app.services import product_search
+
+    original = product_search.price_contracts_for_candidate
+    expected, references = [], []
+
+    def observe(candidate):
+        contracts = original(candidate)
+        expected.append(
+            [(c.model_dump_json(), c.model_dump_json(exclude_unset=True)) for c in contracts]
+        )
+        references.extend(weakref.ref(c) for c in contracts)
+        return contracts
+
+    monkeypatch.setattr(product_search, "price_contracts_for_candidate", observe)
+    prepared = prepare(
+        product(),
+        product("member", member_price=30),
+        product("campaign", offers=[offer()]),
+        product("multibuy", offers=[offer(kind="multipack", required_packages=2, price=60)]),
+        product("weight", sale_model="sold_by_weight", sale_unit="kg"),
+    )
+    rows = prepared.product_search_index.contracts
+    assert list(rows) == list(range(5))
+    assert all(reference() is None for reference in references)
+    assert [
+        [(c.model_dump_json(), c.model_dump_json(exclude_unset=True)) for c in rows[i]]
+        for i in rows
+    ] == expected
+    # Mutating serialization metadata on a returned model cannot affect the
+    # next read, including the distinction between defaults and supplied fields.
+    first = rows[0][0]
+    first.model_fields_set.clear()
+    assert rows[0][0].model_dump_json(exclude_unset=True) == expected[0][0][1]
+    with pytest.raises(TypeError):
+        rows[0] = ()
+
+
+def test_compact_index_keeps_unsupported_custom_contract_objects():
+    from app.services.product_search import _compact_contracts, _ContractRows
+    from pydantic import Field
+
+    from grocery_data.app.domain.promotion_pricing import PriceContract
+
+    class CustomContract(PriceContract):
+        notes: list[str] = Field(default_factory=list)
+
+    custom = CustomContract(
+        reference="custom",
+        eligibility="public",
+        mechanism="regular",
+        description="Already validated custom contract",
+        price="1.25",
+    )
+    rows = _ContractRows({7: _compact_contracts((custom,), {})})
+    assert rows[7][0] is custom
+    custom.notes.append("retained behavior")
+    assert rows[7][0].notes == ["retained behavior"]
+
+
 def test_multibuy_not_unconditional_package_price():
     p = prepare(product(offers=[offer(kind="multipack", required_packages=2, price=60)]))
     row = search(p)["results"][0]
@@ -406,7 +467,8 @@ def test_stale_ica_then_genuine_new_snapshot_normal_activation(tmp_path):
     assert coverage(search(before), "ica")["status"] == "VISIBLE"
     assert any(
         price["chain"] == "ica" and price["freshness"] == "STALE"
-        for row in search(before)["results"] for price in row["prices"]
+        for row in search(before)["results"]
+        for price in row["prices"]
     )
     # Frozen new-observation fixture, never an altered production observation.
     fresh = prepare(product(store="ica"), product(store="coop"), version="new-snapshot")

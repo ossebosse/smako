@@ -2,6 +2,7 @@
 import gc
 import weakref
 
+import pytest
 from app.services import planner_memory
 
 
@@ -9,7 +10,8 @@ class State:
     pass
 
 
-def test_unreachable_cycles_are_collected_and_live_state_is_retained(monkeypatch):
+@pytest.mark.parametrize("generation", [1, 2])
+def test_unreachable_cycles_are_collected_and_live_state_is_retained(monkeypatch, generation):
     monkeypatch.setattr(planner_memory, "_allocator_trim", lambda: None)
     live = State()
     live.certificate = {"owner": "synthetic", "winner": ["same-exact-recipe"]}
@@ -21,7 +23,7 @@ def test_unreachable_cycles_are_collected_and_live_state_is_retained(monkeypatch
     try:
         del unused
         assert reference() is not None
-        report = planner_memory.release_idle_memory()
+        report = planner_memory.release_idle_memory(generation=generation)
     finally:
         if previous:
             gc.enable()
@@ -29,3 +31,4 @@ def test_unreachable_cycles_are_collected_and_live_state_is_retained(monkeypatch
     assert live.certificate == {"owner": "synthetic", "winner": ["same-exact-recipe"]}
     assert report["allocator_supported"] is False
     assert report["allocator_released"] is None
+    assert report["generation"] == generation
