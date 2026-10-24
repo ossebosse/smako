@@ -1,9 +1,11 @@
 # Förberedelsekostnad och minne, 2026-10-24
 
-Arbete enligt [nästa uppdrag](../CODEX-SOL-NEXT-20261024.md), på
-`perf/preparation-memory-20261024`, [PR #9](https://github.com/ossebosse/smako/pull/9).
+Arbete enligt [nästa uppdrag](../CODEX-SOL-NEXT-20261024.md).
+Kodändringarna i [PR #9](https://github.com/ossebosse/smako/pull/9) och
+[PR #10](https://github.com/ossebosse/smako/pull/10) är integrerade på main,
+senast som `ea7c7ae005f1ea10dd716b53d327427785e84e61`.
 Aktuell runtime: `eeda184926f02e73ab76e71e50c740e9dcb01b02`,
-[PR #10](https://github.com/ossebosse/smako/pull/10), ännu under verifiering.
+med identiska appfiler i denna main-version. Slutverifieringen fortsätter.
 **Etappen är ännu inte standardkvalificerad.** `legacy` och
 `library_merge_generations=False` är oförändrade standarder. Ingen aktivering,
 insamling, faktarelease, Windowsuppgift eller ökad samtidighet ingår.
@@ -101,6 +103,15 @@ Syntetiska lagren har noll vanliga sparade leveranser. HTTP-/historikproven
 och resterande pilot/matris är ännu inte körda. De tre vanliga
 versionsbytesproven har också passerat; faktaprojektionen inför piloten
 har därför startat.
+
+Faktaprojektionen är klar för båda städerna, med peak **1,867 GiB i Malmö**
+och **1,348 GiB i Lund**. Priser, request och klocka är byteidentiska med
+originalen. Armen använder den oförändrade, partiella releasen
+`16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a`:
+91 verifierade Willys-dokument och 12 Hemköp-dokument samt 18 negativa
+svar. Produktmatchningar kan vara fler än dokumenten; de räknas inte som
+ytterligare dokumenttäckning. [Exakta manifest, resurser och kommandon](preparation-memory-20261024/axfood-projection.json).
+Detta är faktaprojektion, inte levererad meny-/auditkvalificering.
 
 ## Föregående runtime: tre kalla prov och cachelägen godkända
 

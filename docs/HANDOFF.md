@@ -1,6 +1,8 @@
 # 2026-10-24 15:46 UTC: Cache- och ordinarie minnesgrind passerar; pilot startad
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
+PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
+appfilerna är byteidentiska med den frysta runtime som fortsatt mäts.
 Katalogfilen läses och valideras radvis med samma native produkt-/kandidat-
 och indexvalidatorer samt full digest-/lineagekontroll. Stora JSON-buffertar
 släpps före nästa graf. Befintlig atomisk filskrivning, validering och LKG kvar.
