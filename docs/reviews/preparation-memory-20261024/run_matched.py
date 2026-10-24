@@ -19,6 +19,7 @@ CURRENT = 'eeda184926f02e73ab76e71e50c740e9dcb01b02'
 BASELINE = '9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94'
 OLD_CODE = Path('/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f/code')
 EXPECTED = '1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7'
+PROFILE_SHA = 'd0f8a45823d7e9d3cef8f50bf7f03d246f954cedec673a279a66efa67c93eaaf'
 
 
 def write(path, data):
@@ -53,6 +54,14 @@ def execute(args, folder, name, source, method, instrumented):
     assert row['outcome'] == 'PASS' and row['audit_passed'] and row['paid'] == 988.32
     assert row['semantic_sha256'] == EXPECTED
     final_path = folder/'final-resource.json'
+    if instrumented:
+        assert final_path.exists(), 'Current phase profile requires its post-serialization memory receipt'
+        footer = json.loads(final_path.read_bytes())
+        assert footer['measurement_complete'] and footer['phase_report_serialized']
+        assert footer['method_signature'] == method and footer['target_enforced_for_current_runtime']
+        assert footer['instrumentation_entry_sha256'] == PROFILE_SHA
+        assert footer['memory']['swap_current'] == 0
+        assert footer['phase_report_sha256'] == hashlib.sha256((folder/'phase-profile.json').read_bytes()).hexdigest()
     final_peak = (json.loads(final_path.read_bytes())['memory']['peak']
                   if final_path.exists() else row['cgroup_peak_bytes'])
     return {'source_commit':source,'instrumented':instrumented,'wall_seconds':row['wall_seconds'],
@@ -84,10 +93,12 @@ def main():
         write(destination/'summary.json',summary)
     folder = destination/'current-instrumented'
     folder.mkdir();os.chown(folder,10001,10001)
+    assert hashlib.sha256(Path('/tmp/smako-profile-preparation-20261024.py').read_bytes()).hexdigest() == PROFILE_SHA
     args = [s.replace(str(ROOT/'candidate-eeda184-plain')+':/output:rw',str(folder)+':/output:rw')
              .replace('/tmp/plain_preparation_entry.py:/preparation_probe.py:ro',
-                      '/tmp/smako-profile-preparation-20261024.py:/preparation_probe.py:ro') for s in template]
-    i = args.index('--entrypoint');args[i:i] = ['-e','SMAKO_PROFILE_REPORT=/output/phase-profile.json']
+                      '/tmp/profile_memory_entry.py:/preparation_probe.py:ro') for s in template]
+    i = args.index('--entrypoint');args[i:i] = ['-e','SMAKO_PROFILE_REPORT=/output/phase-profile.json',
+        '-v','/tmp/smako-profile-preparation-20261024.py:/profile_instrumentation.py:ro']
     args[args.index('--repeat')+1] = '1'
     args[args.index('--execution-environment')+1] = (
         f'INSTRUMENTED {CURRENT}; serial2CPU/3GiB incl swap; empty app/preparation cache and new owner; '

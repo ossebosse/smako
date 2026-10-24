@@ -75,6 +75,14 @@ steg stannar vid missad grind. Metodsignaturen är
 kodändringen invaliderar äldre förberedelseartefakter. Äldre planresultat
 räknas därför inte automatiskt som `eeda184`-celler. Inget standardbyte.
 
+Det kommande instrumenterade omprovet får ett obligatoriskt minneskvitto
+efter fasrapportens `atexit`-skrivning. Det ursprungliga profileringsverktyget
+är byteidentiskt med basprovet (SHA-256 `d0f8a45823d7e9d3cef8f50bf7f03d246f954cedec673a279a66efa67c93eaaf`);
+plananropets mätgränser ändras inte. Tre subprocessprov verifierar en sen
+minnesökning över grinden samt att en trasig fasrapport inte får slutkvitto.
+En planrads minnesprov får inte ersätta det saknade processkvittot.
+Tillsammans med matrisens tre utfallsprov passerar sex evidenskontrakt.
+
 Matrisverktygets stoppgrind har också skärpts: en blockerad v1-cell mot
 en levererad legacy-/bas-/föregångarmeny stoppar körningen direkt, liksom
 ett oförklarat byte av blockeringskod/steg. Tre kontraktsprov passerar och
