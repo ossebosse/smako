@@ -185,9 +185,31 @@ Organic-shares första v1-förberedelse tar fortfarande **48,18 minuter**.
 
 Originalfakta-armen är därmed klar för pilotens tre profiler, båda städerna
 och båda storlekarna: **24 av 48 pilotceller och 96 auditgodkända anrop**.
-Axfood-armens 24 pilotceller återstår; Malmö/262 körs nu. Hela piloten och
-standardkvalificeringen är fortfarande öppna grindar.
+Hela piloten och standardkvalificeringen är fortfarande öppna grindar.
 [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
+
+### Pilot: första Axfood-gruppen klar
+
+Malmö/Axfood/262 är avslutad med sex celler och 24 auditgodkända anrop.
+Slutlig peak är **1 834 098 688 byte (1,708 GiB)**, exit 0 utan OOM/swap;
+hela sexcellsprocessen tog 1 874,85 s. Priserna är oförändrade mot originalarmen.
+
+| Profil | Legacy, betalt | V1, betalt | Första v1-anrop | Tre varma v1-anrop |
+| --- | --- | --- | --- | --- |
+| Standard | 511,46 kr | 492,15 kr | 174,51 s | 10,54–10,83 s |
+| Fördelning | 996,22 kr | 996,22 kr | 45,57 s | 10,98–11,32 s |
+| Organic-share | 321,16 kr | 321,16 kr | 549,74 s | 10,56–10,81 s |
+
+Legacyarmens explicita omprövningsfält redovisar en verifierad tidigare
+meny i vart och ett av tolv anrop, utan audit-, krav- eller kvalificeringsavvisning.
+V1 använder sitt separata referensarkiv och alla tolv levererade menyer
+klarar aktuell checkout-audit. Originalmenyernas källhashar finns i rårapporterna;
+tidigare kassasumma eller audit återanvänds inte som nytt godkännande.
+
+Totalt är **30 av 48 pilotceller och 120 auditgodkända anrop** uppmätta.
+Axfood/Malmö/5 000 körs nu; 18 pilotceller och Axfood-armens samtliga
+5 000/262-kvoter återstår. Den partiella releasen omfattar fortsatt 103
+verifierade dokument och ingen aktiv fakta-/prisversion har ändrats.
 
 SSH-kanalen stängdes efter den färdiga Malmögruppen; därefter var sekvensens
 processer avslutade och nästa gruppkatalog tom. Avslutade mätningar har

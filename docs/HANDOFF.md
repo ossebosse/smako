@@ -1,4 +1,4 @@
-# 2026-10-24 21:18 UTC: Originalfakta-piloten klar; Axfood-armen körs
+# 2026-10-24 21:50 UTC: Trettio pilotceller klara; Axfood/Malmö/5 000 körs
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -59,13 +59,19 @@ V1 första/varmt: 808,89/8,10–8,56 s, 938,02/8,53–9,40 s och
 varma anrop är snabbare än legacy. Organic-shares kalla 48,18 minuter kvarstår.
 Originalfakta-armen är därmed klar för pilotens tre profiler vid båda storlekarna
 i båda städerna: totalt 24/48 pilotceller och 96 auditgodkända anrop.
-Axfood-armens 24 celler återstår. Ingen full standardkvalificering eller ändrad default.
+Även Axfood/Malmö/262 är klar: sex celler/24 anrop med audit PASS, 1,708 GiB,
+exit 0 utan OOM/swap. Samma priser som originalarmen. V1 första/varmt:
+standard 174,51/10,54–10,83 s, fördelning 45,57/10,98–11,32 s och
+organic-share 549,74/10,56–10,81 s. Explicita legacy-omprövningar verifierar
+tidigare meny i alla tolv anrop, utan avvisningar; v1-menyer klarar aktuell audit.
+Totalt 30/48 pilotceller och 120 auditgodkända anrop. Axfood-armens övriga
+18 celler och 5 000/262-kvoter återstår. Ingen standardkvalificering eller ändrad default.
 
 SSH-kanalen stängdes efter den avslutade Malmögruppen och sekvensen stannade
 innan nästa arbetare. Kvitton och den tomma Lund/262-katalogen verifierades.
 Återupptagningen hoppar bara över verifierade färdiga grupper, bevarar
 ofullständig evidens och skriver fortsättningsloggen till disk även om
-transporten stängs. Axfood/Malmö/262 körs nu inom samma gränser och frysta appkod.
+transporten stängs. Axfood/Malmö/5 000 körs nu inom samma gränser och frysta appkod.
 Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
 det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
 Tolv lokala evidenskontrakt, Ruff och compileall samt full CI på
