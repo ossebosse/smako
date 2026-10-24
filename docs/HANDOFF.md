@@ -1,4 +1,4 @@
-# 2026-10-24 19:00 UTC: Tolv pilotceller klara; Lund körs efter verifierad återupptagning
+# 2026-10-24 19:18 UTC: Arton pilotceller klara; Lund/5 000 körs
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -47,16 +47,22 @@ Fem-tusen ger kallt/varmt: standard 743,97/11,66–12,45 s, fördelning
 Organic-shares kalla 66,54 minuter kvarstår som tydlig kostnad; ekologisk
 sökning redovisar 3 365,56 s i överlappande fasdiagnostik. Varmkvoterna
 mot 262 är 1,1391/1,1315/1,1925 och passerar 1,25, även mot legacytid/pris.
-36 pilotceller återstår; ingen full standardkvalificering eller ändrad default.
+Även Lund/262 är nu klar: sex celler/24 anrop med audit PASS, 1,088 GiB
+slutlig peak och exit 0 utan OOM/swap. Legacy och v1 ger samma priser:
+standard 487,85, fördelning 761,45 och organic-share 314,24 kr. V1 kallt/varmt:
+103,38/7,16–7,38 s, 91,67/7,58–7,79 s och 293,48/7,14–7,69 s.
+Totalt 18/48 pilotceller och 72 auditgodkända anrop; 30 pilotceller återstår.
+Lunds 5 000/262-kvoter återstår. Ingen full standardkvalificering eller ändrad default.
 
 SSH-kanalen stängdes efter den avslutade Malmögruppen och sekvensen stannade
 innan nästa arbetare. Kvitton och den tomma Lund/262-katalogen verifierades.
 Återupptagningen hoppar bara över verifierade färdiga grupper, bevarar
 ofullständig evidens och skriver fortsättningsloggen till disk även om
-transporten stängs. Lund/262 körs nu inom samma gränser och frysta appkod.
+transporten stängs. Lund/5 000 körs nu inom samma gränser och frysta appkod.
 Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
 det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
-Tolv lokala evidenskontrakt, Ruff och compileall passerar. Appfiler och
+Tolv lokala evidenskontrakt, Ruff och compileall samt full CI på
+verifieringsverktygens `431e0b7` passerar. Appfiler och
 metodsignatur är oförändrade; HTTP, matchade basprov och fullmatris återstår.
 
 ---

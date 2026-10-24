@@ -152,9 +152,22 @@ Diagnostikens ekologiska sökning redovisar 3 365,56 s; fasvärdena överlappar
 och får inte summeras. Alla elva publiceringar förbereds även här. Detta
 är ingen konstant kallstartsgaranti för nya personliga krav.
 
-Totalt är **tolv av 48 pilotceller och 48 auditgodkända anrop** uppmätta;
-36 pilotceller återstår. Lund/262 körs nu. Det är inte full
-standardkvalificering. [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
+### Pilot: även Lund/originalfakta/262 klar
+
+Lund/262 är avslutad med ytterligare sex celler och 24 auditgodkända anrop.
+Slutlig processpeak är **1 168 171 008 byte (1,088 GiB)**, exit 0 utan OOM/swap;
+hela sexcellsprocessen tog 1 227,47 s.
+
+| Profil | Legacy och v1, betalt | Första v1-anrop | Tre varma v1-anrop |
+| --- | --- | --- | --- |
+| Standard | 487,85 kr | 103,38 s | 7,16–7,38 s |
+| Fördelning | 761,45 kr | 91,67 s | 7,58–7,79 s |
+| Organic-share | 314,24 kr | 293,48 s | 7,14–7,69 s |
+
+Totalt är **18 av 48 pilotceller och 72 auditgodkända anrop** uppmätta;
+30 pilotceller återstår. Lund/5 000 körs nu. Det är inte full
+standardkvalificering; Lunds kvoter mot 5 000 återstår.
+[Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
 
 SSH-kanalen stängdes efter den färdiga Malmögruppen; därefter var sekvensens
 processer avslutade och nästa gruppkatalog tom. Avslutade mätningar har
@@ -164,6 +177,10 @@ Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
 även om transportens läsare stängs. Sex nya avgränsade prov och tidigare sex
 evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
 frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
+
+Full [CI på verifieringsverktygen i `431e0b7`](https://github.com/ossebosse/smako/actions/runs/40123553894)
+passerar. Appkoden är fortsatt byteidentisk med `eeda184`. Återstående
+pilot- och matrisgrindar är fortfarande öppna.
 
 ## Föregående runtime: tre kalla prov och cachelägen godkända
 
