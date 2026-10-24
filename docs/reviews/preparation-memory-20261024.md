@@ -1,9 +1,11 @@
 # Förberedelsekostnad och minne, 2026-10-24
 
-Arbete enligt [nästa uppdrag](../CODEX-SOL-NEXT-20261024.md), på
-`perf/preparation-memory-20261024`, [PR #9](https://github.com/ossebosse/smako/pull/9).
+Arbete enligt [nästa uppdrag](../CODEX-SOL-NEXT-20261024.md).
+Kodändringarna i [PR #9](https://github.com/ossebosse/smako/pull/9) och
+[PR #10](https://github.com/ossebosse/smako/pull/10) är integrerade på main,
+senast som `ea7c7ae005f1ea10dd716b53d327427785e84e61`.
 Aktuell runtime: `eeda184926f02e73ab76e71e50c740e9dcb01b02`,
-[PR #10](https://github.com/ossebosse/smako/pull/10), ännu under verifiering.
+med identiska appfiler i denna main-version. Slutverifieringen fortsätter.
 **Etappen är ännu inte standardkvalificerad.** `legacy` och
 `library_merge_generations=False` är oförändrade standarder. Ingen aktivering,
 insamling, faktarelease, Windowsuppgift eller ökad samtidighet ingår.
@@ -65,13 +67,21 @@ ger 988,32 kr/hash/audit PASS. Medianen är **662,83 s**, spannet
 **649,49–664,50 s** och högsta slutliga processpeak **1,882 GiB**.
 Alla har slutkvitto efter rapportserialisering och städning, utan OOM/swap.
 [Aktuellt cacheunderlag](preparation-memory-20261024/cache-modes-current.json).
-Samma
-förgrundssekvens fortsätter med två ytterligare kalla prov och alla cachelägen, pilot,
-HTTP/historik, tre matchade basprov, ny fasprofil och full matris. Varje
+Förgrundssekvensens tre kalla prov och tretton cachelägesprocesser är nu
+klara. Den fortsätter med pilot, HTTP/historik, tre matchade basprov, ny
+fasprofil och full matris. Varje
 steg stannar vid missad grind. Metodsignaturen är
 `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
 kodändringen invaliderar äldre förberedelseartefakter. Äldre planresultat
 räknas därför inte automatiskt som `eeda184`-celler. Inget standardbyte.
+
+Det kommande instrumenterade omprovet får ett obligatoriskt minneskvitto
+efter fasrapportens `atexit`-skrivning. Det ursprungliga profileringsverktyget
+är byteidentiskt med basprovet (SHA-256 `d0f8a45823d7e9d3cef8f50bf7f03d246f954cedec673a279a66efa67c93eaaf`);
+plananropets mätgränser ändras inte. Tre subprocessprov verifierar en sen
+minnesökning över grinden samt att en trasig fasrapport inte får slutkvitto.
+En planrads minnesprov får inte ersätta det saknade processkvittot.
+Tillsammans med matrisens tre utfallsprov passerar sex evidenskontrakt.
 
 Matrisverktygets stoppgrind har också skärpts: en blockerad v1-cell mot
 en levererad legacy-/bas-/föregångarmeny stoppar körningen direkt, liksom
@@ -98,9 +108,33 @@ alla tre jämförbara varma legacy-anrop. Detta är en profil/stad/faktaarm,
 inte hela standardgrinden. De sex omstarts-/cacheförlustproven gör aktuell
 slutkontroll och audit; de återanvänder inte en gammal kassasumma.
 Syntetiska lagren har noll vanliga sparade leveranser. HTTP-/historikproven
-och resterande pilot/matris är ännu inte körda. De tre vanliga
-versionsbytesproven har också passerat; faktaprojektionen inför piloten
-har därför startat.
+och resterande pilot/matris är ännu inte klara. De tre vanliga
+versionsbytesproven och faktaprojektionen inför piloten har också passerat.
+
+Faktaprojektionen är klar för båda städerna, med peak **1,867 GiB i Malmö**
+och **1,348 GiB i Lund**. Priser, request och klocka är byteidentiska med
+originalen. Armen använder den oförändrade, partiella releasen
+`16410fb3d4e21746a75cb6c34072bb4bcc159c20ceefec2ba1187bb883ac233a`:
+91 verifierade Willys-dokument och 12 Hemköp-dokument samt 18 negativa
+svar. Produktmatchningar kan vara fler än dokumenten; de räknas inte som
+ytterligare dokumenttäckning. [Exakta manifest, resurser och kommandon](preparation-memory-20261024/axfood-projection.json).
+Detta är faktaprojektion, inte levererad meny-/auditkvalificering.
+
+### Pilot, första gruppen klar
+
+Malmö/originalfakta/262 är avslutad med sex celler och 24 anrop:
+
+| Profil | Legacy, betalt | V1, betalt | Första v1-anrop | Tre varma v1-anrop |
+| --- | --- | --- | --- | --- |
+| Standard | 511,46 kr | 492,15 kr | 176,92 s | 10,93–11,33 s |
+| Fördelning | 996,22 kr | 996,22 kr | 46,55 s | 11,46–11,71 s |
+| Organic-share | 321,16 kr | 321,16 kr | 560,60 s | 10,72–10,95 s |
+
+Alla 24 anrop klarar aktuell audit och gruppens slutliga cgroup-peak är
+**1 626 034 176 byte (1,514 GiB)**, ingen OOM/swap. Prisgrinden mot legacy
+passerar i dessa sex celler. Detta kvalificerar inte hela piloten: 42 celler
+återstår och 5 000/262-tiderna måste jämföras för varje profil/stad/faktaarm.
+Motsvarande Malmö/5 000-grupp körs nu. [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
 
 ## Föregående runtime: tre kalla prov och cachelägen godkända
 
@@ -381,7 +415,7 @@ prov passerar. Ruff och compileall passerar. Full
 [CI på `b5c242d`](https://github.com/ossebosse/smako/actions/runs/40091178789)
 passerar inklusive Chromium/WebKit.
 
-## Verifiering och återstående grindar
+## Historiska regressioner och evidensens avgränsning
 
 Tidigare 170 riktade offlineprov passerade. Efter senaste indexändringen
 passerar 100 fokuserade prov för produktsökning, PriceUniverse och minne.
@@ -406,12 +440,13 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 5 000/v1 är uppmätt pilot, ännu inte standardkvalificerad. Äldre kods
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
-Kvar: tre kalla jämförbara prov på basarmen, matchad instrumenterad profil,
-färdig evidens för alla slutkodens
-cachelägen, aktuell legacy-jämförelse och 262-kvot, övriga pilotprofiler/
-städer, versionsbyte/serialisering under minnestak och hela slutmatrisen.
-Ingen generell total bytebudget för alla RAM-cacher har bevisats; marginalen
-ovan gäller det enskilda frysta provet. Axfood-releasen omfattar fortsatt
+Kvar på slutkoden: tre kalla jämförbara prov på basarmen, matchad
+instrumenterad profil, resten av piloten inklusive 262-kvoter för varje
+profil/stad/faktaarm, HTTP-/historikproven och hela slutmatrisen. Slutkodens
+tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
+faktaprojektionerna är klara enligt rapportens inledning.
+Ingen generell total bytebudget för alla RAM-cacher har bevisats; de
+uppmätta marginalerna gäller de redovisade frysta proven. Axfood-releasen omfattar fortsatt
 103 verifierade dokument. Ingen full täckning, ny faktaaktivering eller
 återfunnet historiskt Malmöarkiv påstås. Policyn förblir opt-in medan
 någon grind återstår.

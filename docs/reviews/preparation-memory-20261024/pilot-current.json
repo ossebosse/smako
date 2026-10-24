@@ -1,0 +1,1059 @@
+{
+  "schema": "smako-current-pilot-progress-v1",
+  "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+  "status": "IN_PROGRESS",
+  "required_pilot_cells": 48,
+  "measured_cells": 6,
+  "completed_groups": 1,
+  "cells": [
+    {
+      "facts_arm": "original",
+      "city": "malmo",
+      "size": 262,
+      "status": "MEASURED_PILOT_ONLY_NOT_QUALIFIED",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "input_manifest_sha256": "d44aaf56ee5f0d7949959c8e56307d42d3df561a22dff564e4955fa468fc111f",
+      "library_manifest_sha256": "7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "profile": "standard",
+      "search_policy": "legacy",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "raw_report_sha256": "70cf3ea1404232d810243610bfd9e98cafe39aa43b6a9ef859f3b5e64fb660d9",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "f7dbfa89ea0f84251d51d71a41315594bf73cdf6f0aca3bfca49a436a2d64cd9",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "paid": [
+        511.46,
+        511.46,
+        511.46,
+        511.46
+      ],
+      "wall_seconds": [
+        62.66605901811272,
+        46.994430746883154,
+        47.11585472803563,
+        47.1313677248545
+      ],
+      "semantic_sha256": [
+        "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+        "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+        "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e",
+        "4b0ad2193c4f4cd3ad94ee909274ec1da968737548c740ac531ddd160c22721e"
+      ],
+      "shared_process_final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1276751872,
+          "peak": 1626034176,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "shared_process_receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:48:07.52051416Z",
+          "FinishedAt": "2026-10-24T16:19:47.982537555Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 1900.6993641369045,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/pilot-eeda184/original/malmo/262",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/262",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      }
+    },
+    {
+      "facts_arm": "original",
+      "city": "malmo",
+      "size": 262,
+      "status": "MEASURED_PILOT_ONLY_NOT_QUALIFIED",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "input_manifest_sha256": "d44aaf56ee5f0d7949959c8e56307d42d3df561a22dff564e4955fa468fc111f",
+      "library_manifest_sha256": "7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "profile": "standard",
+      "search_policy": "smako-verified-reference-v1",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "raw_report_sha256": "31960263be4c6906b01ee33f2f8fe6d8de8fa240a46bf0646149b55d689f85a9",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "f7dbfa89ea0f84251d51d71a41315594bf73cdf6f0aca3bfca49a436a2d64cd9",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "paid": [
+        492.15,
+        492.15,
+        492.15,
+        492.15
+      ],
+      "wall_seconds": [
+        176.9180124476552,
+        10.928364934399724,
+        11.053218641784042,
+        11.326270540244877
+      ],
+      "semantic_sha256": [
+        "214832bf05f289d534454aa923dc02f50339c85cbed6b517aefc64cfda822ced",
+        "214832bf05f289d534454aa923dc02f50339c85cbed6b517aefc64cfda822ced",
+        "214832bf05f289d534454aa923dc02f50339c85cbed6b517aefc64cfda822ced",
+        "214832bf05f289d534454aa923dc02f50339c85cbed6b517aefc64cfda822ced"
+      ],
+      "shared_process_final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1276751872,
+          "peak": 1626034176,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "shared_process_receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:48:07.52051416Z",
+          "FinishedAt": "2026-10-24T16:19:47.982537555Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 1900.6993641369045,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/pilot-eeda184/original/malmo/262",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/262",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      }
+    },
+    {
+      "facts_arm": "original",
+      "city": "malmo",
+      "size": 262,
+      "status": "MEASURED_PILOT_ONLY_NOT_QUALIFIED",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "input_manifest_sha256": "d44aaf56ee5f0d7949959c8e56307d42d3df561a22dff564e4955fa468fc111f",
+      "library_manifest_sha256": "7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "profile": "distribution",
+      "search_policy": "legacy",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "raw_report_sha256": "b483ddc88b49b40c099e49705b0437fdb7cd9fb0d440d1e3901c35f6ffe63300",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "paid": [
+        996.22,
+        996.22,
+        996.22,
+        996.22
+      ],
+      "wall_seconds": [
+        20.719908725004643,
+        21.069419876672328,
+        21.019983713980764,
+        20.70106068206951
+      ],
+      "semantic_sha256": [
+        "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+        "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+        "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+        "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e"
+      ],
+      "shared_process_final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1276751872,
+          "peak": 1626034176,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "shared_process_receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:48:07.52051416Z",
+          "FinishedAt": "2026-10-24T16:19:47.982537555Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 1900.6993641369045,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/pilot-eeda184/original/malmo/262",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/262",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      }
+    },
+    {
+      "facts_arm": "original",
+      "city": "malmo",
+      "size": 262,
+      "status": "MEASURED_PILOT_ONLY_NOT_QUALIFIED",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "input_manifest_sha256": "d44aaf56ee5f0d7949959c8e56307d42d3df561a22dff564e4955fa468fc111f",
+      "library_manifest_sha256": "7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "profile": "distribution",
+      "search_policy": "smako-verified-reference-v1",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "raw_report_sha256": "d1e4c66d4f9fbcb6417263b6835c3bcf4908a16f2207cefa094f2d4e022e7f12",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "paid": [
+        996.22,
+        996.22,
+        996.22,
+        996.22
+      ],
+      "wall_seconds": [
+        46.54838156700134,
+        11.554820143152028,
+        11.712329235859215,
+        11.462085605133325
+      ],
+      "semantic_sha256": [
+        "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+        "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+        "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e",
+        "741a14e4c4e9ac8e41c9bab720db774dfd77c08d49b50abbac88aaf9d670450e"
+      ],
+      "shared_process_final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1276751872,
+          "peak": 1626034176,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "shared_process_receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:48:07.52051416Z",
+          "FinishedAt": "2026-10-24T16:19:47.982537555Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 1900.6993641369045,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/pilot-eeda184/original/malmo/262",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/262",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      }
+    },
+    {
+      "facts_arm": "original",
+      "city": "malmo",
+      "size": 262,
+      "status": "MEASURED_PILOT_ONLY_NOT_QUALIFIED",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "input_manifest_sha256": "d44aaf56ee5f0d7949959c8e56307d42d3df561a22dff564e4955fa468fc111f",
+      "library_manifest_sha256": "7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "profile": "organic-share",
+      "search_policy": "legacy",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "raw_report_sha256": "ceaa54145695f31a2056981883bd9445fa5e72a3556bce909696aeedee143a9a",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "5d0eb558fa0cb6500a605733dd4997cac824cce3d7abc95606989942578af744",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "paid": [
+        321.16,
+        321.16,
+        321.16,
+        321.16
+      ],
+      "wall_seconds": [
+        160.01228396501392,
+        159.94517626380548,
+        165.29668979672715,
+        165.08537814440206
+      ],
+      "semantic_sha256": [
+        "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+        "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+        "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+        "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60"
+      ],
+      "shared_process_final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1276751872,
+          "peak": 1626034176,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "shared_process_receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:48:07.52051416Z",
+          "FinishedAt": "2026-10-24T16:19:47.982537555Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 1900.6993641369045,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/pilot-eeda184/original/malmo/262",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/262",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      }
+    },
+    {
+      "facts_arm": "original",
+      "city": "malmo",
+      "size": 262,
+      "status": "MEASURED_PILOT_ONLY_NOT_QUALIFIED",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "input_manifest_sha256": "d44aaf56ee5f0d7949959c8e56307d42d3df561a22dff564e4955fa468fc111f",
+      "library_manifest_sha256": "7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "profile": "organic-share",
+      "search_policy": "smako-verified-reference-v1",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "raw_report_sha256": "a33abf58a70ccf60a359fde03c5149181b6a352c44a830d3b897297466205336",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "5d0eb558fa0cb6500a605733dd4997cac824cce3d7abc95606989942578af744",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "paid": [
+        321.16,
+        321.16,
+        321.16,
+        321.16
+      ],
+      "wall_seconds": [
+        560.5982920699753,
+        10.952452121768147,
+        10.937584427185357,
+        10.717379393056035
+      ],
+      "semantic_sha256": [
+        "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+        "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+        "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60",
+        "8f5652be385c68ba21eb6d20b2a6347585ce69174f05f893b61c9989750b8e60"
+      ],
+      "shared_process_final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1276751872,
+          "peak": 1626034176,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "shared_process_receipt": {
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-24T15:48:07.52051416Z",
+          "FinishedAt": "2026-10-24T16:19:47.982537555Z"
+        },
+        "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+        "process_wall_seconds": 1900.6993641369045,
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "user": "10001:10001",
+        "mounts": [
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/output/data",
+            "Destination": "/inputs",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/pilot-eeda184/original/malmo/262",
+            "Destination": "/output",
+            "RW": true
+          },
+          {
+            "Source": "/tmp/plain_preparation_entry.py",
+            "Destination": "/preparation_probe.py",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184",
+            "Destination": "/review",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/sol-architecture-fixes-20261024-9162f0f",
+            "Destination": "/review-state",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/backend",
+            "Destination": "/srv/app/backend",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/preparation-memory-20261024/code-eeda184/grocery_data",
+            "Destination": "/srv/app/grocery_data",
+            "RW": false
+          },
+          {
+            "Source": "/opt/smako/evidence/integration-scaling-20261023/final-grid-libraries/262",
+            "Destination": "/srv/app/backend/app/data/recipes",
+            "RW": false
+          }
+        ]
+      }
+    }
+  ],
+  "pending_cells": [
+    [
+      "original",
+      "malmo",
+      5000,
+      "standard",
+      "legacy"
+    ],
+    [
+      "original",
+      "malmo",
+      5000,
+      "standard",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "original",
+      "malmo",
+      5000,
+      "distribution",
+      "legacy"
+    ],
+    [
+      "original",
+      "malmo",
+      5000,
+      "distribution",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "original",
+      "malmo",
+      5000,
+      "organic-share",
+      "legacy"
+    ],
+    [
+      "original",
+      "malmo",
+      5000,
+      "organic-share",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "original",
+      "lund",
+      262,
+      "standard",
+      "legacy"
+    ],
+    [
+      "original",
+      "lund",
+      262,
+      "standard",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "original",
+      "lund",
+      262,
+      "distribution",
+      "legacy"
+    ],
+    [
+      "original",
+      "lund",
+      262,
+      "distribution",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "original",
+      "lund",
+      262,
+      "organic-share",
+      "legacy"
+    ],
+    [
+      "original",
+      "lund",
+      262,
+      "organic-share",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "original",
+      "lund",
+      5000,
+      "standard",
+      "legacy"
+    ],
+    [
+      "original",
+      "lund",
+      5000,
+      "standard",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "original",
+      "lund",
+      5000,
+      "distribution",
+      "legacy"
+    ],
+    [
+      "original",
+      "lund",
+      5000,
+      "distribution",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "original",
+      "lund",
+      5000,
+      "organic-share",
+      "legacy"
+    ],
+    [
+      "original",
+      "lund",
+      5000,
+      "organic-share",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      262,
+      "standard",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      262,
+      "standard",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      262,
+      "distribution",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      262,
+      "distribution",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      262,
+      "organic-share",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      262,
+      "organic-share",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      5000,
+      "standard",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      5000,
+      "standard",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      5000,
+      "distribution",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      5000,
+      "distribution",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      5000,
+      "organic-share",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "malmo",
+      5000,
+      "organic-share",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      262,
+      "standard",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      262,
+      "standard",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      262,
+      "distribution",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      262,
+      "distribution",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      262,
+      "organic-share",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      262,
+      "organic-share",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      5000,
+      "standard",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      5000,
+      "standard",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      5000,
+      "distribution",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      5000,
+      "distribution",
+      "smako-verified-reference-v1"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      5000,
+      "organic-share",
+      "legacy"
+    ],
+    [
+      "axfood_103",
+      "lund",
+      5000,
+      "organic-share",
+      "smako-verified-reference-v1"
+    ]
+  ],
+  "bundle_sha256": "682cef238d65e65d3326596052d91052f196eafa2e9af6fdae6dd5be0845d338",
+  "full_release_qualified": false,
+  "scope": "Only closed worker groups with final memory/exit receipts; missing groups remain pending"
+}

@@ -1,6 +1,8 @@
 # 2026-10-24 15:46 UTC: Cache- och ordinarie minnesgrind passerar; pilot startad
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
+PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
+appfilerna är byteidentiska med den frysta runtime som fortsatt mäts.
 Katalogfilen läses och valideras radvis med samma native produkt-/kandidat-
 och indexvalidatorer samt full digest-/lineagekontroll. Stora JSON-buffertar
 släpps före nästa graf. Befintlig atomisk filskrivning, validering och LKG kvar.
@@ -25,7 +27,8 @@ Omstart och cacheförlust laddar elva certifikat utan omsökta publiceringar.
 Tre nya ägarstore tog 641,40/637,84/641,36 s. Tre extra versionsbytesprov
 utan mätverktygets fasstädning passerar också: **2,023/2,039/2,030 GiB**,
 båda katalogerna och fakta kvar, exakt samma filhash, ingen OOM/swap.
-Faktaprojektionen inför piloten har startat, följd av
+Faktaprojektionen är klar för båda städerna, med oförändrade priser/request/
+klocka och den partiella 103-dokumentsreleasen. Kvar följer
 HTTP/historik, matchade
 basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
 vid varje missad grind. B5-resultaten nedan är historik, inte automatiskt
@@ -33,6 +36,25 @@ slutkodens kvalificering. Standard förblir legacy och generationsmerge=False;
 ingen drift, insamling, aktiv fakta/prisversion eller samtidighet ändrad.
 
 [Rapport och maskinunderlag](reviews/preparation-memory-20261024.md).
+
+Pilotuppdatering 16:21 UTC: originalfakta/Malmö/262 klart, sex celler och
+24 anrop med audit PASS, högst 1,514 GiB och exit 0 utan OOM/swap.
+V1 standard 492,15 kr mot legacy 511,46; fördelning 996,22 och organic-share
+321,16 kr i båda policyerna. V1 första/varmt: standard 176,92/10,93–11,33 s,
+fördelning 46,55/11,46–11,71 s, organic-share 560,60/10,72–10,95 s.
+Fem-tusen-gruppen körs nu. Det är sex av 48 pilotceller, inte full
+standardkvalificering; `legacy` förblir standard.
+
+Uppdatering 18:09 UTC: Malmö/5 000 har avslutat standard och fördelning med
+audit PASS. V1 ger 492,15 respektive 988,32 kr, kallt 743,97/672,51 s och
+varmt 11,66–12,45/12,93–12,97 s. Båda varma kvoterna mot 262 passerar.
+Organic-shares fyra legacy-anrop ger 316,26 kr med audit PASS, cirka
+552–561 s per anrop; första v1-anropet pågår. Gruppen saknar ännu slutligt
+resurskvitto och räknas inte som ytterligare godkända pilotceller.
+Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
+det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
+Sex lokala evidenskontrakt, Ruff och compileall passerar. Appfiler och
+metodsignatur är oförändrade; HTTP, matchade basprov och fullmatris återstår.
 
 ---
 
